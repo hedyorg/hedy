@@ -2060,6 +2060,10 @@ adventures:
 
                     In het volgende level leer je het `if` commando waarmee je kunt zorgen voor 2 verschillende reacties in je code.
                     Zo kun je bijvoorbeeld je computer beveiligen met een wachtwoord. Neem maar een kijkje!
+
+                    ```
+                    wachtwoord is ask 'Wat is het goede wachtwoord?'
+                    ```
                 start_code: "print 'Op naar het volgende level!'"
             5:
                 story_text: |
@@ -2070,6 +2074,18 @@ adventures:
 
                     Vanaf het volgende level kan dit wel, want in level 6 kun je rekenen met Hedy. Je kunt daar ook proberen om een tafelsommen spel te programmeren (voor je broertje of zusje?).
                     Neem snel een kijkje!
+
+                    ```
+                    print 'Welkom bij McHedy'
+                    bestelling is ask 'Wat wilt u bestellen?'
+                    print 'U wilt graag ' bestelling
+                    if bestelling is hamburger prijs is 5
+                    if bestelling is friet prijs is 2
+                    drinken is ask 'Wat wilt u drinken?'
+                    print 'U wilt graag ' drinken
+                    print 'Dat wordt dan ' prijs ' euro voor ' bestelling ' alstublieft'
+                    print 'Het drinken is gratis in dit level want Hedy kan de prijs nog niet berekenen...'
+                    ```
                 start_code: "print 'Op naar het volgende level!'"
             6:
                 story_text: |
@@ -2114,9 +2130,10 @@ adventures:
                     ```
                     antwoord = ask 'Heb je zin om naar het volgende level te gaan?'
                     if antwoord is ja
-                        repeat 3 times
-                            print 'Hoera!'
-                            print 'Op naar het volgende level!'
+                        print 'Straks kan ik hier het repeat commando gebruiken!'
+                        print 'Hoera!'
+                        print 'Hoera!'
+                        print 'Hoera!'
                     if antwoord is nee
                         print 'blijf dan maar lekker hier'
                     ```
@@ -2152,14 +2169,20 @@ adventures:
                     Misschien heb je in je restaurant opdracht wel eens geprobeerd om prijzen te maken met kommagetallen. Helaas was dit niet toegestaan.
                     Vanaf het volgende level kun je wel kommagetallen gebruiken!
 
-                    Daarnaast mag je meerdere woorden opslaan in een variabele door aanhalingstekens te gebruiken. Zoals dit:
+                    Kijk maar in dit level kun je bij deze code wel SpongeBob SquarePants invullen...
                     ```
                     naam = ask 'Hoe heet je favoriete tekenfilmfiguur?'
-                    if naam is 'Spongebob Squarepants'
-                        print 'Gaaf ik houd ook van Spongebob!'
-                    if naam is 'Ash Ketchum'
-                        print 'Ik vind Spongebob Squarepants leuker'
+                    print 'Ik kijk ook graag naar ' naam
                     ```
+                    Maar je kunt nog geen `if`commando's gebruiken, zoals hier. Dit programma werkt nog niet...
+                    ```
+                    naam = ask 'Hoe heet je favoriete tekenfilmfiguur?'
+                    if naam is 'SpongeBob SquarePants'
+                        print 'Gaaf ik houd ook van SpongeBob!'
+                    if naam is 'Ash Ketchum'
+                        print 'Ik vind SpongeBob SquarePants leuker'
+                    ```
+                    Ga naar het volgende level om dit programma wel te laten werken!
                 start_code: "print 'Op naar het volgende level!'"
             12:
                 story_text: |
@@ -2167,6 +2190,8 @@ adventures:
                     In de afgelopen levels kon je meerdere if-commando's in elkaar stoppen. Hierdoor kon je bijvoorbeeld dit beveiligingssysteem programmeren.
 
                     ```
+                    gebruikersnaam is ask 'Wat is je gebruikersnaam?'
+                    wachtwoord is ask 'Wat is je wachtwoord?'
                     if gebruikersnaam is 'Hedy'
                         if wachtwoord is 'geheim'
                             print 'Welkom Hedy!'
@@ -2181,27 +2206,56 @@ adventures:
             13:
                 story_text: |
                     ## Vooruitblik
-                    In de vorige levels heb je geleerd hoe je het if-commando gebruikt, maar wat nog niet kon is kijken of een getal groter of kleiner dan een ander getal is.
-                    In het volgende level kan dat wel, kijk maar eens naar dit voorbeeld!
+                    Met het onderstaande programma kun je berekenen of je voldoende of onvoldoende staat voor een schoolvak.
+                    Je ziet dat regel 5 ontzettend onhandig is, omdat alle mogelijke opties van 1 tot 5 apart benoemd moeten worden.
                     ```
-                    cijfer = ask 'Wat is je cijfer voor de toets?'
-                    if cijfer < 5.5
-                        print 'Hoera! Een voldoende!'
+                    eerste_cijfer = ask 'Wat had je voor je eerste toets?'
+                    tweede_cijfer = ask 'Wat had je voor je tweede toets?'
+                    samen is eerste_cijfer + tweede_cijfer
+                    gemiddelde_cijfer is samen / 2
+                    if gemiddelde_cijfer = 1 or gemiddelde_cijfer = 2 or gemiddelde_cijfer = 3 or gemiddelde_cijfer = 4 or gemiddelde_cijfer = 5
+                        print 'Helaas... Onvoldoende!'
                     else
-                        print 'Helaas.... onvoldoende'
+                        print 'Hoera! Voldoende!'
                     ```
                 start_code: "print 'Op naar het volgende level!'"
             14:
                 story_text: |
                     ## Vooruitblik
-                    In het volgende level leer je een commando waarmee je kunt zorgen dat een speler echt 'af' kan in je spelletje. Hij/zij mag doorspelen, zolang hij/zij nog levens heeft of genoeg punten heeft gehaald.
-                    Zo niet, dan is het GAME OVER.
-                    Benieuwd met welk commando je dit kunt klaarspelen? Kijk maar in het volegnde level.
+                    In het spelletje hieronder is een code gemaakt om ervoor te zorgen dat de speler het spelletje kan blijven spelen totdat hij/zij dat niet meer wil.
+                    Maar de code is erg omslachtig en wat nou als de speler 101 keer wil doorspelen? Je kunt niet oneindig spelen...
+                    In het volgende level leer je een commando waarmee dit allemaal veel makkelijker gaat!
+                    ```
+                    spel is 'aan'
+                    for i in range 1 to 100
+                        if spel is 'aan'
+                            antwoord = ask 'Wil je door spelen?'
+                            if antwoord is 'nee'
+                                spel is 'uit'
+                            if antwoord is 'ja'
+                                print 'Ok we gaan door'
+                    ```
                 start_code: "print 'Op naar het volgende level!'"
             15:
                 story_text: |
                     ## Vooruitblik
-                    In het volgende level gaan we weer een stapje verder richting Python code. Ga je mee naar het volgende level?
+                    In het volgende level gaan we weer een stapje verder richting Python code. Daar leer je hoe je hoe je twee lijstjes aan elkaar kunt linken.
+                    Hierdoor kun je een programma schrijven waarbij je elk dier aan het juiste geluid kunt koppelen.
+                    Want die twee programma's hieronder... Daar klopt natuurlijk niks van!
+                    ```
+                    dieren = 'kip', 'paard', 'koe'
+                    geluiden = 'tok', 'hinnik', 'boe'
+                    for dier in dieren
+                        print 'Een ' dier ' zegt ' geluiden at random
+                    ```
+                    Je zou ook dit kunnen proberen... Maar het klopt nog steeds niet...
+                    ```
+                    dieren = 'kip', 'paard', 'koe'
+                    geluiden = 'tok', 'hinnik', 'boe'
+                    for dier in dieren
+                        for geluid in geluiden
+                            print 'Een ' dier ' zegt ' geluid
+                    ```
                 start_code: "print 'Op naar het volgende level!'"
             16:
                 story_text: |
@@ -2209,12 +2263,11 @@ adventures:
                     In level lijkt je code al wat meer op Pyhton, zometeen zul je in het volgende level nog een toevoeging van Pyhton leren!
                     Daarnaast ben je er in dit level misschien al eens tegenaan gelopen dat je eigenlijk meerdere opties wil hebben dan alleen `if` en `else`.
                     Bijvoorbeeld in deze code:
-
                     ```
                     print 'Wat gaan we eten vanavond?'
-                    opties is pizza, spuitjes, boerenkool
-                    gekozen is opties at random
-                    if gekozen is pasta
+                    opties = ['pasta', 'spuitjes', 'boerenkool']
+                    gekozen = opties at random
+                    if gekozen = pasta
                         print 'Hmmm lekker! Pasta!'
                     else
                         print 'Helaas pindakaas'
@@ -2226,9 +2279,14 @@ adventures:
             17:
                 story_text: |
                     ## Vooruitblik
-                    Wow! Wat ben je al ver gekomen! In het volgende level maken we onze code weer een beetje 'echter' door print m=nog meer op Python te laten lijken.
+                    Wow! Wat ben je al ver gekomen! In het volgende level maken we onze code weer een beetje 'echter' door `print` nog meer op Python te laten lijken.
                     Benieuwd...? Klik dan maar verder!
                 start_code: "print 'Op naar het volgende level!'"
+            18:
+                story_text: |
+                    ## Vooruitblik
+                    Gefeliciteerd! Je hebt het laatste level van Hedy behaald! Maar niet getreurd, we zijn druk bezig om nog meer levels en avonturen te bouwen. Dus kom vooral later nog eens een kijkje nemen of er al nieuwe levels zijn!
+                start_code: "print ('Goed gedaan!')"
 
 
     end:
