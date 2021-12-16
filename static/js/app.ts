@@ -238,7 +238,7 @@ export function runit(level: string, lang: string, cb: () => void) {
         return;
       }
       if (response.achievements) {
-        showAchievements(response.achievements);
+        showAchievements(response.achievements, false);
       }
         runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
         console.log(err)
@@ -270,21 +270,23 @@ function showBulb(level: string){
 
 }
 
-function showAchievements(achievements: any[]) {
-  console.log(achievements);
+function showAchievements(achievements: any[], reload: boolean) {
   fnAsync(achievements, 0);
+  if (reload) {
+    setTimeout(function(){
+      location.reload();
+     }, achievements.length * 6000);
+  }
 }
 
 async function fnAsync(achievements: any[], index: number) {
-  let response = await showAchievement(achievements[index]);
-  console.log(response)
+  await showAchievement(achievements[index]);
   if (index < achievements.length - 1) {
     await fnAsync(achievements, index + 1)
   }
 }
 
 function showAchievement(achievement: any[]){
-  console.log(achievement);
   return new Promise<void>((resolve)=>{
         $('#achievement_reached_title').text('"' + achievement[0] + '"');
         $('#achievement_reached_text').text(achievement[1]);
@@ -440,7 +442,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
 
       modal.alert (auth.texts['save_success_detail'], 4000);
       if (response.achievements) {
-        showAchievements(response.Achievements);
+        showAchievements(response.achievements, false);
       }
       // If we succeed, we need to update the default program name & program for the currently selected tab.
       // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
@@ -578,7 +580,7 @@ export function submit_program (id: string, shared: boolean) {
     dataType: 'json'
   }).done(function(response) {
     if (response.achievements) {
-      showAchievements(response.Achievements);
+      showAchievements(response.achievements, true);
     }
   });
 }

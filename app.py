@@ -1252,6 +1252,7 @@ def save_program(user):
         DATABASE.increase_user_save_count(user['username'])
 
     if ACHIEVEMENTS.verify_new_achievements(user['username']):
+        print(ACHIEVEMENTS.get_earned_achievements(g.lang))
         return jsonify({'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements(g.lang)})
     return jsonify({'name': body['name'], 'id': program_id})
 
