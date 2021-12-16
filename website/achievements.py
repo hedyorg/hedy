@@ -9,14 +9,16 @@ class Achievements:
         self.TRANSLATIONS = AchievementTranslations()
         self.achieved = []
         self.new_achieved = []
+        self.consecutive_errors = 0
 
     def verify_new_achievements(self, username, code=None, response=None):
         achievements_data = self.DATABASE.progress_by_username(username)
+        self.achieved = []
         self.check_all_achievements(achievements_data)
         if code:
             self.check_code_achievements(code)
-        if response and response['has_turtle']:
-            self.achieved.append("ninja_turtle")
+        if response:
+            self.check_response_achievements(response)
 
         self.new_achieved = [i for i in self.achieved + achievements_data['achieved'] if i not in achievements_data['achieved']]
         if len(self.new_achieved) > 0:
@@ -33,7 +35,6 @@ class Achievements:
         return translated_achievements
 
     def check_all_achievements(self, user_data):
-        self.achieved = []
         self.check_programs_run(user_data['run_programs'])
         self.check_programs_saved(user_data['saved_programs'])
         self.check_programs_submitted(user_data['submitted_programs'])
@@ -74,5 +75,20 @@ class Achievements:
     def check_code_achievements(self, code):
         if "ask" in code:
             self.achieved.append("did_you_say_please")
+
+    def check_response_achievements(self, response):
+        if response['has_turtle']:
+            self.achieved.append("ninja_turtle")
+        if response['Warning']:
+            pass #We currently have not warning achievement
+        if response['Error']:
+            self.consecutive_errors += 1
+        else:
+            if self.consecutive_errors >= 1:
+                self.achieved.append("programming_protagonist")
+                self.consecutive_errors = 0
+                if self.consecutive_errors >= 3:
+                    self.achieved.append("programming_panic")
+
 
 
