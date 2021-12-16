@@ -1,3 +1,4 @@
+import exceptions
 import hedy
 import textwrap
 from parameterized import parameterized
@@ -284,4 +285,48 @@ class TestsLevel17(HedyTester):
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
+
+  def test_not_equal_string_literal(self):
+    code = textwrap.dedent(f"""\
+      if 'quoted' != 'string':
+        sleep 0""")
+    expected = textwrap.dedent(f"""\
+      if 'quoted'.zfill(100)!='string'.zfill(100):
+        time.sleep(0)""")
+
+  @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])
+  def test_not_equal(self, arg):
+    code = textwrap.dedent(f"""\
+      a = {arg}
+      b = {arg}
+      if a != b:
+        b = 1""")
+
+    expected = textwrap.dedent(f"""\
+      a = {arg}
+      b = {arg}
+      if str(a).zfill(100)!=str(b).zfill(100):
+        b = 1""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected
+    )
+
+  @parameterized.expand([
+    ("'text'", '1'),        # text and number
+    ('[1, 2]', '1'),        # list and number
+    ('[1, 2]', "'text'")])  # list and text
+  def test_not_equal_with_diff_types_gives_error(self, left, right):
+    code = textwrap.dedent(f"""\
+        a = {left}
+        b = {right}
+        if a != b:
+            b = 1""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=exceptions.InvalidTypeCombinationException
     )

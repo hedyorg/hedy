@@ -170,9 +170,9 @@ export const auth = {
       const payload: User = {
         email: values['email'],
         birth_year: values.birth_year ? parseInt(values['birth_year']) : undefined,
+        country: values['country'] ? values.country : undefined,
+        gender: values['gender'] ? values.gender : undefined,
         language: values.language,
-        country: values['country'],
-        gender: values['gender'],
         prog_experience: $ ('input[name=has_experience]:checked').val() as 'yes' | 'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
@@ -285,6 +285,10 @@ $ ('.auth input').get ().map (function (el) {
 });
 
 // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
+$.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
+   if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
+   auth.profile = response;
+});
 
 if (window.location.pathname === '/reset') {
   const query = window.location.search.slice (1).split ('&');

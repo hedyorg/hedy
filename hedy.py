@@ -149,7 +149,7 @@ commands_and_types_per_level = {
     Command.smaller_equal: {14: [HedyType.integer, HedyType.float]},
     Command.bigger: {14: [HedyType.integer, HedyType.float]},
     Command.bigger_equal: {14: [HedyType.integer, HedyType.float]},
-    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string]}
+    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.list]}
 }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -201,32 +201,32 @@ def get_suggestions_for_language(lang, level):
     return en_lang_commands
 
 
-def hash_needed(name):
-    # this function is now applied on something str sometimes Assignment
-    # no pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
-
-    if not isinstance(name, str):
-        name = name.name
+def hash_needed(var):
+    # this function now sometimes gets a str and sometimes - a LookupEntry
+    # not pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
 
     # some elements are not names but processed names, i.e. random.choice(dieren)
     # they should not be hashed
     # these are either of type assignment and operation or already processed and then contain ( or [
-    if (type(name) is LookupEntry and name.skip_hashing) or (isinstance(name, str) and '[' in name or '(' in name):
+    if (type(var) is LookupEntry and var.skip_hashing) or (isinstance(var, str) and ('[' in var or '(' in var)):
         return False
 
-    return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
+    var_name = var.name if type(var) is LookupEntry else var
 
-def hash_var(name):
-    name = name.name if type(name) is LookupEntry else name
-    if hash_needed(name):
+    return var_name in reserved_words or character_skulpt_cannot_parse.search(var_name) is not None
+
+
+def hash_var(var):
+    var_name = var.name if type(var) is LookupEntry else var
+    if hash_needed(var):
         # hash "illegal" var names
-        # being reservered keywords
+        # being reserved keywords
         # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
         # prepend with v for when hash starts with a number
-        hash_object = hashlib.md5(name.encode())
+        hash_object = hashlib.md5(var_name.encode())
         return "v" + hash_object.hexdigest()
     else:
-        return name
+        return var_name
 
 def closest_command(invalid_command, known_commands, threshold=2):
     # closest_command() searches for a similar command (distance smaller than threshold)
@@ -556,7 +556,7 @@ class TypeValidator(Transformer):
         return self.to_comparison_tree(Command.bigger_equal, tree)
 
     def not_equal(self, tree):
-        self.validate_args_type_allowed(tree.children, Command.not_equal)
+        self.validate_binary_command_args_type(Command.not_equal, tree, [int_to_float])
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def to_comparison_tree(self, command, tree):
@@ -919,6 +919,8 @@ def process_variable_for_fstring_padded(name, lookup):
         return f"str({hash_var(name)}).zfill(100)"
     elif is_float(name):
         return f"str({name}).zfill(100)"
+    elif is_quoted(name):
+        return f"{name}.zfill(100)"
     else:
         return f"'{name}'.zfill(100)"
 
@@ -1081,25 +1083,8 @@ class ConvertToPython_4(ConvertToPython_3):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
-    def check_print_arguments(self, args):
-        # this function checks whether arguments of a print are valid
-        # we can print if all arguments are either quoted OR they are all variables
-
-        unquoted_args = [a for a in args if not is_quoted(a)]
-        unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
-
-        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            # all good? return for further processing
-            return args
-        else:
-            # return first name with issue
-            # note this is where issue #832 can be addressed by checking whether
-            # first_unquoted_var ius similar to something in the lookup list
-            first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var)
-
     def print_ask_args(self, args):
-        args = self.check_print_arguments(args)
+        args = self.check_var_usage(args)
         result = ''
         for argument in args:
             argument = argument.replace("'", '')  # no quotes needed in fstring
@@ -1595,9 +1580,38 @@ def merge_grammars(grammar_text_1, grammar_text_2):
             name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
             if name_1 == name_2:
                 override_found = True
-                new_rule = line_2
-                # this rule is now in the grammar, remove form this list
-                remaining_rules_grammar_2.remove(new_rule)
+                # Check if the rule is adding or substracting new rules                
+                has_add_op  = definition_2.startswith('+=') 
+                has_sub_op = has_add_op and '-='  in definition_2
+                has_last_op = has_add_op and '>'  in definition_2
+                if has_sub_op:
+                    # Get the rules we need to substract
+                    part_list = definition_2.split('-=')
+                    add_list, sub_list =  (part_list[0], part_list[1]) if has_sub_op else (part_list[0], '')
+                    add_list = add_list[3:]  
+                    # Get the rules that need to be last
+                    sub_list = sub_list.split('>')  
+                    sub_list, last_list = (sub_list[0], sub_list[1]) if has_last_op  else (sub_list[0], '')
+                    sub_list = sub_list + '|' + last_list
+                    result_cmd_list = get_remaining_rules(definition_1, sub_list)
+                elif has_add_op:
+                     # Get the rules that need to be last
+                    part_list = definition_2.split('>')
+                    add_list, sub_list =  (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
+                    add_list = add_list[3:]
+                    last_list = sub_list
+                    result_cmd_list = get_remaining_rules(definition_1, sub_list)
+                else:
+                    result_cmd_list = definition_1
+
+                if has_last_op:
+                    new_rule = f"{name_1}: {result_cmd_list} | {add_list} | {last_list}"
+                elif has_add_op:
+                    new_rule = f"{name_1}: {result_cmd_list} | {add_list}"
+                else:
+                    new_rule = line_2
+                #Already procesed so remove it
+                remaining_rules_grammar_2.remove(line_2)
                 break
 
         # new rule found? print that. nothing found? print org rule
@@ -1614,6 +1628,12 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     merged_grammar = sorted(merged_grammar)
     return '\n'.join(merged_grammar)
 
+def get_remaining_rules(orig_def, sub_def):
+    orig_cmd_list     = [command.strip() for command in orig_def.split('|')]                    
+    unwanted_cmd_list = [command.strip() for command in sub_def.split('|')]                    
+    result_cmd_list   = [cmd for cmd in orig_cmd_list if cmd not in unwanted_cmd_list]                    
+    result_cmd_list   = ' | '.join(result_cmd_list) # turn the result list into a string
+    return result_cmd_list
 
 def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1

@@ -1,3 +1,4 @@
+import exceptions
 import hedy
 import textwrap
 from parameterized import parameterized
@@ -96,24 +97,8 @@ class TestsLevel14(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
-  def test_not_equal_with_string(self):
-    code = textwrap.dedent(f"""\
-      a is 'text'
-      if a != 12
-          b is 1""")
 
-    expected = textwrap.dedent(f"""\
-      a = 'text'
-      if str(a).zfill(100)!=str(12).zfill(100):
-        b = 1""")
-
-    self.multi_level_tester(
-      code=code,
-      max_level=16,
-      expected=expected
-    )
-
-  @parameterized.expand(HedyTester.comparison_commands)
+  @parameterized.expand(HedyTester.number_comparisons_commands)
   def test_comparison_with_list_gives_type_error(self, comparison):
     code = textwrap.dedent(f"""\
       a is 1, 2, 3
@@ -124,4 +109,64 @@ class TestsLevel14(HedyTester):
       code=code,
       max_level=15,
       exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
+  def test_not_equal_promotes_int_to_float(self):
+    code = textwrap.dedent(f"""\
+      a is 1
+      b is 1.2
+      if a != b
+          b is 1""")
+
+    expected = textwrap.dedent(f"""\
+      a = 1
+      b = 1.2
+      if str(a).zfill(100)!=str(b).zfill(100):
+        b = 1""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected
+    )
+
+  @parameterized.expand([
+    ("'text'", "'text'"),
+    ('1', '1'),
+    ('1.3', '1.3'),
+    ('1, 2', '[1, 2]')])
+  def test_not_equal(self, arg, exp):
+    code = textwrap.dedent(f"""\
+      a is {arg}
+      b is {arg}
+      if a != b
+        b is 1""")
+
+    expected = textwrap.dedent(f"""\
+      a = {exp}
+      b = {exp}
+      if str(a).zfill(100)!=str(b).zfill(100):
+        b = 1""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=15,
+      expected=expected
+    )
+
+  @parameterized.expand([
+    ("'text'", '1'),      # text and number
+    ('1, 2', '1'),        # list and number
+    ('1, 2', "'text'")])  # list and text
+  def test_not_equal_with_diff_types_gives_error(self, left, right):
+    code = textwrap.dedent(f"""\
+      a is {left}
+      b is {right}
+      if a != b
+          b is 1""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=15,
+      exception=exceptions.InvalidTypeCombinationException
     )
