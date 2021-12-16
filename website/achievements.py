@@ -10,10 +10,15 @@ class Achievements:
         self.achieved = []
         self.new_achieved = []
 
-    def verify_new_achievements(self, username):
+    def verify_new_achievements(self, username, code=None, turtle=None):
         achievements_data = self.DATABASE.progress_by_username(username)
-        reached_achievements = self.check_all_achievements(achievements_data)
-        self.new_achieved = [i for i in reached_achievements + achievements_data['achieved'] if i not in achievements_data['achieved']]
+        self.check_all_achievements(achievements_data)
+        if code:
+            self.check_code_achievements(code)
+        if turtle:
+            self.achieved.append("ninja_turtle")
+
+        self.new_achieved = [i for i in self.achieved + achievements_data['achieved'] if i not in achievements_data['achieved']]
         if len(self.new_achieved) > 0:
             for achievement in self.new_achieved:
                 self.DATABASE.add_achievement_to_username(username, achievement)
@@ -65,4 +70,9 @@ class Achievements:
             self.achieved.append("deadline_daredevil_II")
         if amount >= 10:
             self.achieved.append("deadline_daredevil_III")
+
+    def check_code_achievements(self, code):
+        if "ask" in code:
+            self.achieved.append("did_you_say_please")
+
 
