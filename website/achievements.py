@@ -28,9 +28,9 @@ class Achievements:
         def push_new_achievement(user):
             body = request.json
             if "achievement" in body:
-                return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
-            else:
-                return jsonify({})
+                if body['achievement'] in self.TRANSLATIONS.get_translations(self.lang):
+                    return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
+            return jsonify({})
 
     def verify_new_achievements(self, username, code=None, response=None):
         achievements_data = self.DATABASE.progress_by_username(username)
