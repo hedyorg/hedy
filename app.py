@@ -77,6 +77,7 @@ for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
 
 TRANSLATIONS = hedyweb.Translations()
+ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
 
@@ -311,8 +312,8 @@ def enricht_context_with_translations():
     texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
     ui = TRANSLATIONS.get_translations(g.lang, 'ui')
     auth = TRANSLATIONS.get_translations(g.lang, 'Auth')
-    return dict(texts=texts, ui=ui, auth=auth)
-
+    achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
+    return dict(texts=texts, ui=ui, auth=auth, achievements=achievements)
 
 @app.after_request
 def set_security_headers(response):
@@ -476,8 +477,7 @@ def parse():
 
         # If we have earned new achievements -> add to db and return names to front-end
         if username and ACHIEVEMENTS.verify_new_achievements(username):
-            response['Achievements'] = ACHIEVEMENTS.get_earned_achievements()
-
+            response['achievements'] = ACHIEVEMENTS.get_earned_achievements(g.lang)
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
@@ -612,7 +612,7 @@ def achievements_page():
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
 
     return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
-                           achievements=achievement_translations, current_page='my-profile')
+                           template_achievements=achievement_translations, current_page='my-profile')
 
 def programs_page(request):
     user = current_user()

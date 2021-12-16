@@ -1,10 +1,12 @@
 from website import database
+from hedyweb import AchievementTranslations
 
 
 class Achievements:
 
     def __init__(self):
         self.DATABASE = database.Database()
+        self.TRANSLATIONS = AchievementTranslations()
         self.achieved = []
         self.new_achieved = []
 
@@ -18,10 +20,12 @@ class Achievements:
             return True
         return False
 
-    def get_earned_achievements(self):
-        temp = self.new_achieved.copy()
-        self.new_achieved = []
-        return temp
+    def get_earned_achievements(self, language):
+        translations = self.TRANSLATIONS.get_translations(language)
+        translated_achievements = []
+        for achievement in self.new_achieved:
+            translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], translations[achievement]['image']])
+        return translated_achievements
 
     def check_all_achievements(self, user_data):
         self.achieved = []
@@ -32,33 +36,33 @@ class Achievements:
 
     def check_programs_run(self, amount):
         if amount >= 1:
-            self.achieved.append("Getting Started I")
+            self.achieved.append("getting_started_I")
         if amount >= 10:
-            self.achieved.append("Getting Started II")
+            self.achieved.append("getting_started_II")
         if amount >= 50:
-            self.achieved.append("Getting Started III")
+            self.achieved.append("getting_started_III")
         if amount >= 200:
-            self.achieved.append("Getting Started IV")
+            self.achieved.append("getting_started_IV")
         if amount >= 500:
-            self.achieved.append("Getting Started V")
+            self.achieved.append("getting_started_V")
 
     def check_programs_saved(self, amount):
         if amount >= 1:
-            self.achieved.append("One to Remember I")
+            self.achieved.append("one_to_remember_I")
         if amount >= 5:
-            self.achieved.append("One to Remember II")
+            self.achieved.append("one_to_remember_II")
         if amount >= 10:
-            self.achieved.append("One to Remember III")
+            self.achieved.append("one_to_remember_III")
         if amount >= 25:
-            self.achieved.append("One to Remember IV")
+            self.achieved.append("one_to_remember_IV")
         if amount >= 50:
-            self.achieved.append("One to Remember V")
+            self.achieved.append("one_to_remember_V")
 
     def check_programs_submitted(self, amount):
         if amount >= 1:
-            self.achieved.append("Deadline Daredevil I")
+            self.achieved.append("deadline_daredevil_I")
         if amount >= 3:
-            self.achieved.append("Deadline Daredevil II")
+            self.achieved.append("deadline_daredevil_II")
         if amount >= 10:
-            self.achieved.append("Deadline Daredevil III")
+            self.achieved.append("deadline_daredevil_III")
 

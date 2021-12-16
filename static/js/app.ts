@@ -237,8 +237,8 @@ export function runit(level: string, lang: string, cb: () => void) {
         }
         return;
       }
-      if (response.Achievements) {
-        showAchievements(response.Achievements);
+      if (response.achievements) {
+        showAchievements(response.achievements);
       }
         runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
         console.log(err)
@@ -271,6 +271,7 @@ function showBulb(level: string){
 }
 
 function showAchievements(achievements: any[]) {
+  console.log(achievements);
   fnAsync(achievements, 0);
 }
 
@@ -282,9 +283,11 @@ async function fnAsync(achievements: any[], index: number) {
   }
 }
 
-function showAchievement(value: string){
+function showAchievement(achievement: any[]){
+  console.log(achievement);
   return new Promise<void>((resolve)=>{
-        $('#achievement_reached_title').text('"' + value + '"');
+        $('#achievement_reached_title').text('"' + achievement[0] + '"');
+        $('#achievement_reached_text').text(achievement[1]);
         $('#achievement_pop-up').fadeIn(1000, function () {
           setTimeout(function(){
             $('#achievement_pop-up').fadeOut(1000);
