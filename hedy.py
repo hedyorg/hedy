@@ -959,6 +959,7 @@ class ConvertToPython_2(ConvertToPython_1):
         return ''.join([str(c) for c in args])
     def var(self, args):
         name = args[0]
+        self.check_var_usage(args)
         return hash_var(name)
     def var_access(self, args):
         name = args[0]
