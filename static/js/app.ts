@@ -238,8 +238,7 @@ export function runit(level: string, lang: string, cb: () => void) {
         return;
       }
       if (response.Achievements) {
-        console.log(response.Achievements);
-        response.Achievements.forEach(showAchievement);
+        showAchievements(response.Achievements);
       }
         runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
         console.log(err)
@@ -271,14 +270,31 @@ function showBulb(level: string){
 
 }
 
-function showAchievement(value: string){
-  $('#achievement_reached_title').text('"' + value + '"');
-  $('#achievement_pop-up').fadeIn(1000, function () {
-    setTimeout(function(){
-      $('#achievement_pop-up').fadeOut(1000);
-     }, 4000);
-  });
+function showAchievements(achievements: any[]) {
+  fnAsync(achievements, 0);
+}
 
+async function fnAsync(achievements: any[], index: number) {
+  let response = await showAchievement(achievements[index]);
+  console.log(response)
+  if (index < achievements.length - 1) {
+    await fnAsync(achievements, index + 1)
+  }
+}
+
+function showAchievement(value: string){
+  return new Promise<void>((resolve)=>{
+        $('#achievement_reached_title').text('"' + value + '"');
+        $('#achievement_pop-up').fadeIn(1000, function () {
+          setTimeout(function(){
+            $('#achievement_pop-up').fadeOut(1000);
+           }, 4000);
+        });
+        setTimeout(()=>{
+            resolve();
+        ;} , 6000
+        );
+    });
 }
 
 function removeBulb(){
@@ -421,7 +437,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
 
       modal.alert (auth.texts['save_success_detail'], 4000);
       if (response.achievements) {
-        response.achievements.forEach(showAchievement);
+        showAchievements(response.Achievements);
       }
       // If we succeed, we need to update the default program name & program for the currently selected tab.
       // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
@@ -557,9 +573,9 @@ export function submit_program (id: string, shared: boolean) {
     }),
     contentType: 'application/json',
     dataType: 'json'
-  }).done(function(_response) {
-    if (_response.achievements) {
-      _response.achievements.forEach(showAchievement);
+  }).done(function(response) {
+    if (response.achievements) {
+      showAchievements(response.Achievements);
     }
   });
 }
