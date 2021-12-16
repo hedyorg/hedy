@@ -1,5 +1,7 @@
 from website import database
 from hedyweb import AchievementTranslations
+from website.auth import requires_login
+from flask import request, jsonify
 
 
 class Achievements:
@@ -9,9 +11,26 @@ class Achievements:
         self.TRANSLATIONS = AchievementTranslations()
         self.achieved = []
         self.new_achieved = []
+        self.lang = "en"
         self.previous_code = None
         self.identical_consecutive_errors = 0
         self.consecutive_errors = 0
+
+    def update_language(self, lang):
+        self.lang = lang
+
+    def routes(self, app, database):
+        global DATABASE
+        DATABASE = database
+
+        @app.route('/achievements', methods=['POST'])
+        @requires_login
+        def push_new_achievement(user):
+            body = request.json
+            if "achievement" in body:
+                return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
+            else:
+                return jsonify({})
 
     def verify_new_achievements(self, username, code=None, response=None):
         achievements_data = self.DATABASE.progress_by_username(username)
@@ -28,11 +47,23 @@ class Achievements:
             return True
         return False
 
-    def get_earned_achievements(self, language):
-        translations = self.TRANSLATIONS.get_translations(language)
+    def verify_pushed_achievement(self, username, achievement):
+        achievements_data = self.DATABASE.progress_by_username(username)
+        if 'achieved' in achievements_data and achievement not in achievements_data['achieved']:
+            self.new_achieved = [achievement]
+            self.DATABASE.add_achievement_to_username(username, achievement)
+            return self.get_earned_achievements()
+        return None
+
+    def get_earned_achievements(self):
+        print("hier komen we!")
+        translations = self.TRANSLATIONS.get_translations(self.lang)
         translated_achievements = []
         for achievement in self.new_achieved:
+            print("Dus deze is nog niet geweest?")
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], translations[achievement]['image']])
+        print("Return:")
+        print(translated_achievements)
         return translated_achievements
 
     def check_all_achievements(self, user_data):

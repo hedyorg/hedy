@@ -274,7 +274,7 @@ def setup_language():
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
         return "Language " + g.lang + " not supported", 404
-
+    ACHIEVEMENTS.update_language(g.lang)
     # Also get the 'ui' translations into a global object for this language, these
     # are used a lot so we can clean up a fair bit by initializing here.
     g.ui_texts = TRANSLATIONS.get_translations(g.lang, 'ui')
@@ -477,7 +477,7 @@ def parse():
 
         # If we have earned new achievements -> add to db and return names to front-end
         if username and ACHIEVEMENTS.verify_new_achievements(username, code, response):
-            response['achievements'] = ACHIEVEMENTS.get_earned_achievements(g.lang)
+            response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
@@ -1252,8 +1252,7 @@ def save_program(user):
         DATABASE.increase_user_save_count(user['username'])
 
     if ACHIEVEMENTS.verify_new_achievements(user['username']):
-        print(ACHIEVEMENTS.get_earned_achievements(g.lang))
-        return jsonify({'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements(g.lang)})
+        return jsonify({'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
     return jsonify({'name': body['name'], 'id': program_id})
 
 
@@ -1293,7 +1292,7 @@ def submit_program(user):
     DATABASE.increase_user_submit_count(user['username'])
 
     if ACHIEVEMENTS.verify_new_achievements(user['username']):
-        return jsonify({"achievements": ACHIEVEMENTS.get_earned_achievements(g.lang)})
+        return jsonify({"achievements": ACHIEVEMENTS.get_earned_achievements()})
     return jsonify({})
 
 
@@ -1387,6 +1386,10 @@ auth.routes(app, DATABASE)
 from website import teacher
 
 teacher.routes(app, DATABASE)
+
+# *** ACHIEVEMENTS BACKEND
+
+ACHIEVEMENTS.routes(app, DATABASE)
 
 
 # *** START SERVER ***

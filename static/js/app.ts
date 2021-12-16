@@ -681,12 +681,27 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
-    timeoutMsg: function () {return ErrorMessages ['Program_too_long']},
+    timeoutMsg: function () {
+      $.ajax({
+        type: 'POST',
+        url: '/achievements',
+        data: JSON.stringify({
+          achievement: "hedy_hacking"
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+        }).done(function(response: any) {
+          if (response.achievements) {
+            console.log(response.achievements);
+            showAchievements(response.achievements, false);
+          }
+        });
+      return ErrorMessages ['Program_too_long']},
     // Give up after three seconds of execution, there might be an infinite loop.
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
       // const level = window.State.level;
-      return ((hasTurtle) ? 20000 : 3000);
+      return ((hasTurtle) ? 1000 : 3000);
     }) ()
   });
 
