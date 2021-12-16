@@ -1252,7 +1252,7 @@ def save_program(user):
         DATABASE.increase_user_save_count(user['username'])
 
     if ACHIEVEMENTS.verify_new_achievements(user['username']):
-        return jsonify({'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
+        return jsonify({'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements(g.lang)})
     return jsonify({'name': body['name'], 'id': program_id})
 
 
@@ -1292,7 +1292,7 @@ def submit_program(user):
     DATABASE.increase_user_submit_count(user['username'])
 
     if ACHIEVEMENTS.verify_new_achievements(user['username']):
-        return jsonify({"achievements": ACHIEVEMENTS.get_earned_achievements()})
+        return jsonify({"achievements": ACHIEVEMENTS.get_earned_achievements(g.lang)})
     return jsonify({})
 
 
