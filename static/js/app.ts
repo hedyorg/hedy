@@ -270,15 +270,18 @@ function showBulb(level: string){
 
 }
 
-export function showAchievement(value: string, reload: boolean){
+function showAchievement(value: string, reload: boolean){
   $('#achievement_reached_title').text('"' + value + '"');
-   $('#achievement_pop-up').fadeIn(1000);
-   setTimeout(function(){
-    $('#achievement_pop-up').fadeOut(1000);
-    if (reload) {
-      location.reload();
-    }
-   }, 4000);
+  $('#achievement_pop-up').fadeIn(1000, function () {
+    setTimeout(function(){
+      $('#achievement_pop-up').fadeOut(1000, function () {
+        if (reload) {
+        location.reload();
+      }
+      });
+     }, 4000);
+  });
+
 }
 
 function removeBulb(){
@@ -421,7 +424,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
 
       modal.alert (auth.texts['save_success_detail'], 4000);
       if (response.achievements) {
-        response.achievements.forEach(showAchievement, true);
+        showAchievement(response.achievements, true);
       }
       // If we succeed, we need to update the default program name & program for the currently selected tab.
       // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
@@ -559,7 +562,7 @@ export function submit_program (id: string, shared: boolean) {
     dataType: 'json'
   }).done(function(_response) {
     if (_response.achievements) {
-      _response.achievements.forEach(showAchievement, true);
+      showAchievement(_response.achievements, true);
     }
   });
 }
