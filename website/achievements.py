@@ -56,14 +56,10 @@ class Achievements:
         return None
 
     def get_earned_achievements(self):
-        print("hier komen we!")
         translations = self.TRANSLATIONS.get_translations(self.lang)
         translated_achievements = []
         for achievement in self.new_achieved:
-            print("Dus deze is nog niet geweest?")
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], translations[achievement]['image']])
-        print("Return:")
-        print(translated_achievements)
         return translated_achievements
 
     def check_all_achievements(self, user_data):
