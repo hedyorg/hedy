@@ -400,37 +400,53 @@
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
     intro_text: |
-        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the . for decimal numbers.
-
-        For this level on you will also have to use quotation marks when storing a text with `is`:
+        ## Decimal numbers
+        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
+        ```
+        print 'Two and a half plus two and a half is...'
+        print 2.5 + 2.5
+        ```
+        ## All texts need to be in quotation marks
+        For this level on you will also have to use quotation marks when storing a text with `=`:
 
         ```
-        name = 'Hedy'
+        name = 'Hedy the Robot'
         print 'Hello ' name
         ```
+        ## All items in lists need quotation marks too
+        Lists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.
+        This allows you to save two words as 1 item on the list, for example 'Iron Man'.
 
-        For numbers, you do not use quotation marks in the `is`:
+        ```
+        superheroes is 'Spiderman', 'Batman', 'Iron Man'
+        print superheroes at random
+        ```
+        ## Numbers don't need quotation marks
+        For numbers, you do not use quotation marks in the `=`:
         ```
         score = 25
         print 'You got ' score
         ```
-# Marleen, deze tekst hierboven en commands hieronder moet voor Engels nog uitgebreid worden (zoals bij Nederlands)
     commands:
     -   name: "float directly"
-        explanation: "Calculation with decimals"
+        explanation: "Decimal numbers"
         example: "print 2.5 + 2.5"
         demo_code: |
             print 'Calculate away!'
             print 'Two and a half plus two and a half is...'
             print 2.5 + 2.5
-    -   name: "float in var"
-        explanation: "Storing a calculation with decimals"
-        example: "antwoord = 2.5 + 2.5"
+    -   name: "assign text"
+        explanation: "Text with quotation marks after ="
+        example: "naam = 'Hedy'"
         demo_code: |
-            answer = 2.5 + 2.5
-            print 'Calculate away!'
-            print 'Two and a half plus two and a half is...'
-            print answer
+            name = 'Hedy the Robot'
+            print 'Hello ' name
+    -   name: "quotes in list"
+        explanation: "A list with quotation marks"
+        example: "name = 'Hedy', 'Felienne'"
+        demo_code: |
+            superheroes = 'Iron Man', 'Batman', 'Superman'
+            print superheroes at random
 
 13:
     start_code: |-
@@ -514,10 +530,20 @@
     start_code: |-
         fruit = ['apple', 'banana', 'cherry']
         print fruit 
-    intro_text: "We are going to put square brackets around lists! Also we now need to put single quotation marks (') around items in lists. "
+    intro_text: |
+        We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
+        You can use the square brackets as well to point out a place in the lists.
+
+        ```
+        friends = ['Ahmed', 'Ben', 'Cayden']
+        lucky_numbers = [15, 18, 6]
+        for i in range 1 to 3
+            print 'the lucky number of ' friends[i]
+            print 'is ' lucky_numbers[i]
+        ```
     commands:
     -   name: "square brackets"
-        explanation: "We are going to put square brackets around lists! We also need to put ' around items in lists."
+        explanation: "Lists with square brackets"
         example: "For example: fruit = ['apple', 'banana', 'cherry']"
         demo_code: |-
             fruit = ['apple', 'banana', 'cherry']
@@ -622,8 +648,35 @@
         for i in range 1 to 10:
             print i
         print 'Ready or not, here I come!'
-    intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation."
+    intro_text: |
+        Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.
+
+        In this level you can also use a new command: `elif`. `elif` is short for else if and you need it when you you want to make 3 (or more!) options.
+        Check it out!
+        ```
+        prices = ['1 million dollars', 'an apple pie', 'nothing']
+        your_price = prices[random]
+        print 'You win ' your_price
+        if your_price = '1 million dollars' :
+            print 'Yeah! You are rich!'
+        elif your_price = 'an apple pie' :
+            print 'Lovely, an apple pie!'
+        else:
+            print 'Better luck next time..'
+        ```
+
     commands:
+    -   name: "elif"
+        explanation: "`elif`."
+        example: "elif a is 5:"
+        demo_code: |-
+            a = 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'a is 2'
+            else:
+                print 'a is not 1 or 2'
     -   name: "print"
         explanation: "When we use a `for`, we need to put a `:` behind the `for` statement!"
         example: "for i in range 1 to 10:"
@@ -640,14 +693,4 @@
                 print 'Your favorite colour is green'
             else:
                 print 'Your favorite colour is not green'
-    -   name: "elif"
-        explanation: "We will show you a new command that you are allowed to use: `elif`. `elif` means \"else if\". We start with checking if the `if` is correct, if that one is not true, we check the `elif` and if that one is also not true, we go to the `else`."
-        example: "elif a is 5:"
-        demo_code: |-
-            a = 2
-            if a is 1:
-                print 'a is 1'
-            elif a is 2:
-                print 'a is 2'
-            else:
-                print 'a is not 1 or 2'
+
