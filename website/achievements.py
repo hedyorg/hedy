@@ -10,12 +10,12 @@ class Achievements:
         self.achieved = []
         self.new_achieved = []
 
-    def verify_new_achievements(self, username, code=None, turtle=None):
+    def verify_new_achievements(self, username, code=None, response=None):
         achievements_data = self.DATABASE.progress_by_username(username)
         self.check_all_achievements(achievements_data)
         if code:
             self.check_code_achievements(code)
-        if turtle:
+        if response and response['has_turtle']:
             self.achieved.append("ninja_turtle")
 
         self.new_achieved = [i for i in self.achieved + achievements_data['achieved'] if i not in achievements_data['achieved']]
