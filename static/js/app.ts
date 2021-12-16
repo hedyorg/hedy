@@ -227,6 +227,9 @@ export function runit(level: string, lang: string, cb: () => void) {
         showBulb(level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
+      if (response.achievements) {
+        showAchievements(response.achievements, false);
+      }
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
@@ -236,9 +239,6 @@ export function runit(level: string, lang: string, cb: () => void) {
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
         return;
-      }
-      if (response.achievements) {
-        showAchievements(response.achievements, false);
       }
         runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
         console.log(err)
