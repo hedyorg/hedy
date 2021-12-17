@@ -94,7 +94,7 @@ class TestsLevel16(HedyTester):
             extra_check_function=self.is_not_turtle()
         )
 
-    def test_access_in_condition(self):
+    def test_access_in_equality_check(self):
         code = textwrap.dedent("""\
             luiaard = 'luiaard'
             dieren is ['aap', 'goat', 'fish']
@@ -105,6 +105,26 @@ class TestsLevel16(HedyTester):
             luiaard = 'luiaard'
             dieren = ['aap', 'goat', 'fish']
             if str(luiaard) == str(dieren[1-1]):
+              print(f'ja')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_not_turtle()
+        )
+
+    @parameterized.expand(HedyTester.comparison_commands)
+    def test_access_smaller_check(self,comparison):
+        code = textwrap.dedent(f"""\
+            balletje = 0
+            bingo_getallen is [11, 17, 21]
+            if balletje {comparison} bingo_getallen[1]
+                print 'ja'""")
+
+        expected = textwrap.dedent(f"""\
+            balletje = 0
+            bingo_getallen = [11, 17, 21]
+            if str(balletje).zfill(100){comparison}str(bingo_getallen[1-1]).zfill(100):
               print(f'ja')""")
 
         self.single_level_tester(
