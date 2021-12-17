@@ -9,8 +9,8 @@ class TestsLevel12(HedyTester):
 
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
-    naam is 'Hedy'
-    if naam is Hedy
+    naam = 'Hedy'
+    if naam == Hedy
         print 'koekoek'""")
 
     expected = textwrap.dedent("""\
