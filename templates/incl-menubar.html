@@ -16,16 +16,16 @@
         <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="/my-profile">
           <span class="fas fa-fw fa-user"></span> {{username}}
         </a>
-        <ul class="dropdown-menu absolute hidden text-white rounded-lg border-black bg-blue-400 list-none ml-0 right-0 mt-12" style="border-width: 1px; width: max-content;">
+        <ul class="dropdown-menu absolute hidden text-white rounded-lg border-black bg-blue-400 list-none ml-0 right-0 mt-12 mr-4" style="border-width: 1px; width: max-content;">
           <a class="no-underline" href="/my-profile">
-              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog mr-4"></span> {{auth.profile}}</li>
+              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog mr-4"></span> {{auth.account}}</li>
           </a>
           {% if is_teacher %}
               <a class="no-underline" href="/for-teachers">
                   <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-chalkboard-teacher mr-4"></span>{{auth.for_teachers}}</li>
               </a>
           {% endif %}
-          <a class="no-underline" onclick="hedyApp.auth.logout ()">
+          <a class="no-underline" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();">
               <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-fw fa-sign-out-alt mr-4"></span> {{auth.logout}}</li>
           </a>
         </ul>
@@ -33,7 +33,8 @@
     {% else %}
       <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{auth.login}}</a>
     {% endif %}
-      <div class="dropdown inline-block relative {% if not username %} ml-auto {% endif %} py-2 z-40">
+    {% if not username or not 'language' in user_data %}
+      <div class="dropdown inline-block relative {% if not username %}ml-auto{% endif %} py-2 z-40">
           <button class="bg-blue-400 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
             <span class="mr-1">{{ current_language().sym }}</span>
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
@@ -45,6 +46,7 @@
             {% endfor %}
           </ul>
       </div>
+    {% endif %}
     {% endblock %}
 </nav>
 <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>

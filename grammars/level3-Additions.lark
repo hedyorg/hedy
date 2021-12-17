@@ -1,5 +1,4 @@
-command: print | ask | turtle | assign | assign_list | add | remove | sleep | invalid_space | ask_dep_2 | echo_dep_2 | comment | invalid
-
+command:+= assign_list | add | remove > invalid   
 _print_argument: (_SPACE | list_access | textwithoutspaces | punctuation)*
 
 assign_list: var _SPACE _IS _SPACE text_list ((_COMMA _SPACE|_COMMA) text_list)+

@@ -162,16 +162,16 @@
         demo_code: "print '5 fois 5 font ' 5 * 5"
     -   name: "ask et if avec des calculs"
         explanation: "Pose une question sur un calcul avec `ask` et compare le résultat..."
-        example: "Exemple: reponse is ask 'Combien font 10 plus 10?'"
+        example: "Exemple: reponse = ask 'Combien font 10 plus 10?'"
         demo_code: |-
-            reponse is ask 'Combien font 10 plus 10?'
+            reponse = ask 'Combien font 10 plus 10?'
             if reponse is 20 print 'Oui!' else print 'Oups'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
 7:
     start_code: "repeat 3 times print 'Hedy est amusant!'"
@@ -190,15 +190,15 @@
         demo_code: "print 'Bonjour et bienvenue à Hedy.'"
     -   name: "ask"
         explanation: "Demande quelque chose avec `ask`."
-        example: "Exemple: couleur is ask 'Quelle est ta couleur préférée?'"
+        example: "Exemple: couleur = ask 'Quelle est ta couleur préférée?'"
         demo_code: |-
-            couleur is ask 'Quelle est ta couleur préférée?'
+            couleur = ask 'Quelle est ta couleur préférée?'
             print couleur ' est ta couleur préférée!'
     -   name: "if"
         explanation: "Fait un choix avec `if`."
         example: "Exemple: if couleur is vert print 'joli!' else print 'bof'"
         demo_code: |-
-            couleur is ask 'Quelle est ta couleur préférée?'
+            couleur = ask 'Quelle est ta couleur préférée?'
             if couleur is vert print 'joli!' else print 'bof'
     -   name: "repeat - turtle"
         explanation: "Repeat a line of code with `repeat`."
@@ -230,9 +230,9 @@
         demo_code: "print '5 fois 5 font ' 5 * 5"
     -   name: "`if` sur plusieurs lignes"
         explanation: "Demande la réponse d’une addition et vérifie si elle est correcte. Tu peux désormais imprimer sur 2 lignes."
-        example: "Exemple: reponse is ask 'Combien font 5 plus 5?'"
+        example: "Exemple: reponse = ask 'Combien font 5 plus 5?'"
         demo_code: |-
-            reponse is ask 'Combien font 5 plus 5?'
+            reponse = ask 'Combien font 5 plus 5?'
             if reponse is 10
                 print 'Bien joué!'
                 print 'En effet, la réponse est ' reponse
@@ -242,7 +242,7 @@
 9:
     start_code: |-
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -255,7 +255,7 @@
         ## Example Hedy code
         ```
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -265,9 +265,9 @@
     commands:
     -   name: "`if` with multiple lines"
         explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
-        example: "Example: answer is ask 'What is 20 plus 20?'"
+        example: "Example: answer = ask 'What is 20 plus 20?'"
         demo_code: |-
-            answer is ask 'What is 20 plus 20?'
+            answer = ask 'What is 20 plus 20?'
             if answer is 20
                 print 'Well done!!'
                 print 'The answer is indeed' answer
@@ -340,7 +340,7 @@
         explanation: "Nous faisons de la même manière avec tous nos commandes `if`."
         example: "if couleur is vert:"
         demo_code: |-
-            couleur is ask 'Quelle couleur préfères-tu ?'
+            couleur = ask 'Quelle couleur préfères-tu ?'
             if couleur is vert:
                 print 'Tu as choisi le vert.'
             else:
@@ -349,7 +349,7 @@
         explanation: "Pour compléter il-y-a encore un nouveau commande quelle tu peux utiliser: `elif`. `Elif` signifie `else if`. Tu regardes alors auparavant à `if` et quand ça n'est pas vrai, tu avances à `elif`. Quand ça n'est pas vrai aussi, tu avances à `else`."
         example: "elif a is 5"
         demo_code: |-
-            a is 2
+            a = 2
             if a is 1:
                 print 'a est égal à 1'
             elif a is 2:

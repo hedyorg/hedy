@@ -1,3 +1,63 @@
+import {LANG_en} from './syntaxLang-en';
+import {LANG_es} from './syntaxLang-es';
+import {LANG_nl} from './syntaxLang-nl';
+
+// A bunch of code expects a global "State" object. Set it here if not
+// set yet.
+if (!window.State) {
+window.State = {};
+}
+
+// Set this to true to use keywords from languages other than english
+var localKeywordsEnable = true;
+
+// Contains the current keywords based on the current language
+var currentLang: { 
+  _PRINT: string; 
+  _IS: string; 
+  _ASK: string; 
+  _ECHO: string; 
+  _FORWARD: string; 
+  _TURN: string; 
+  _SLEEP: string; 
+  _ADD_LIST: string; 
+  _TO_LIST: string; 
+  _REMOVE: string; 
+  _FROM: string; 
+  _AT: string; 
+  _RANDOM: string; 
+  _IN: string; 
+  _IF: string; 
+  _ELSE: string; 
+  _AND: string; 
+  _REPEAT: string; 
+  _TIMES: string; 
+  _FOR: string; 
+  _RANGE: string; 
+  _TO: string; 
+  _STEP: string; 
+  _ELIF: string; 
+  _INPUT: string; 
+  _OR: string; 
+  _WHILE: string; 
+  _LENGTH: string; 
+};
+if(localKeywordsEnable){
+  switch(window.State.lang){
+    case 'nl':
+      currentLang = LANG_nl;
+      break;
+    case 'es':
+      currentLang = LANG_es;
+      break;
+    default:
+      currentLang = LANG_en;
+      break;
+  }
+} else {
+  currentLang = LANG_en;
+}
+
 interface Rule {
   readonly regex: string;
   readonly token: string | string[];
@@ -31,7 +91,7 @@ function baseRules(): Rules {
         token: 'constant.character',
       },
       {
-        regex: 'at random',
+        regex: currentLang._AT + ' ' + currentLang._RANDOM,
         token: 'keyword'
       },
       {
@@ -49,12 +109,12 @@ const LEVELS = [
       rule_printSpace('gobble'),
       rule_turtle(),
       recognize('start', {
-        regex: keywordWithSpace('echo'),
+        regex: keywordWithSpace(currentLang._ECHO),
         token: 'keyword',
         next: 'gobble',
       }),
       recognize('start', {
-        regex: keywordWithSpace('ask'),
+        regex: keywordWithSpace(currentLang._ASK),
         token: 'keyword',
         next: 'gobble',
       }),
@@ -149,14 +209,14 @@ const LEVELS = [
     // Replaces 'repeat' with 'for'
     name: 'level9and10',
     rules: pipe(baseRules(),
-      rule_printSpace(),
-      rule_isAsk(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRange(),
-      rule_for()
+    rule_printSpace(),
+    rule_isAsk(),
+    rule_is(),
+    rule_ifElse(),
+    rule_expressions(),
+    rule_arithmetic(),
+    rule_forRange(),
+    rule_for()
     ),
   },
   {
@@ -322,7 +382,6 @@ const LEVELS = [
   },
 ];
 
-
 /**
  * From a list of rules, duplicate all rules
  *
@@ -406,7 +465,7 @@ function pipe(val: any, ...fns: Array<(x: any) => any>) {
  */
 function rule_printSpace(next?: string) {
   return recognize('start', {
-    regex: keywordWithSpace('print'),
+    regex: keywordWithSpace(currentLang._PRINT),
     token: 'keyword',
     next: next ?? 'start',
   });
@@ -417,7 +476,7 @@ function rule_printSpace(next?: string) {
  */
 function rule_isAsk(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( is ask )',
+    regex: '(\\w+)( ' + currentLang._IS + ' ' + currentLang._ASK + ')',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -428,7 +487,7 @@ function rule_isAsk(next?: string) {
  */
 function rule_is(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( is )',
+    regex: '(\\w+)( ' + currentLang._IS + ' )',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -439,7 +498,7 @@ function rule_is(next?: string) {
  */
 function rule_printParen() {
   return recognize('start', {
-    regex: '(print)(\\()',
+    regex: '(' + currentLang._PRINT + ')(\\()',
     token: ['keyword', 'paren.lparen'],
     next: 'start'
   });
@@ -448,12 +507,13 @@ function rule_printParen() {
 function rule_turtle() {
     return comp(
       recognize('start', {
-        regex: 'turn (left|right)?',
+        // Note: left and right are not yet keywords
+        regex: currentLang._TURN + ' (left|right)?',
         token: 'keyword',
         next: 'start',
       }),
       recognize('start', {
-        regex: 'forward',
+        regex: currentLang._FORWARD,
         token: 'keyword',
         next: 'start',
       })
@@ -461,24 +521,20 @@ function rule_turtle() {
 }
 
 function rule_sleep() {
-    return recognize('start', {
-        regex: 'sleep',
-        token: 'keyword',
-        next: 'start',
-      }
-    )
+  return recognize('start', {
+      regex: currentLang._SLEEP,
+      token: 'keyword',
+      next: 'start',
+    }
+  )
 }
-
-
-
-
 
 /**
  * Add an 'is input' rule with brackets
  */
 function rule_isInputParen() {
   return recognize('start', {
-    regex: '(\\w+)( is input)(\\()',
+    regex: '(\\w+)( ' + currentLang._IS + ' ' + currentLang._INPUT + ')(\\()',
     token: ['text', 'keyword', 'paren.lparen'],
     next: 'start'
   });
@@ -494,7 +550,7 @@ function rule_expressions() {
       token: 'constant.character',
     }),
     recognize('start', {
-      regex: 'at random',
+      regex: currentLang._AT + currentLang._RANDOM,
       token: 'keyword'
     }),
     recognize('start', {
@@ -511,16 +567,16 @@ function rule_expressions() {
 function rule_ifElseOneLine() {
   return comp(
     recognize('start', {
-      regex: keywordWithSpace('if'),
+      regex: keywordWithSpace(currentLang._IF),
       token: 'keyword',
       next: 'condition',
     }),
     recognize('start', {
-      regex: keywordWithSpace('else'),
+      regex: keywordWithSpace(currentLang._ELSE),
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('((is)|(in))'),
+      regex: keywordWithSpace('((' + currentLang._IS + ')|(' + currentLang._IN + '))'),
       token: 'keyword',
       next: 'start',
     }),
@@ -530,16 +586,16 @@ function rule_ifElseOneLine() {
 function rule_ifElse() {
   return comp(
     recognize('start', {
-      regex: keywordWithSpace('if'),
+      regex: keywordWithSpace(currentLang._IF),
       token: 'keyword',
       next: 'condition',
     }),
     recognize('start', {
-      regex: '\\b' + 'else' + '\\b',
+      regex: '\\b' + currentLang._ELSE + '\\b',
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('((is)|(in))'),
+      regex: keywordWithSpace('((' + currentLang._IS + ')|(' + currentLang._IN + '))'),
       token: 'keyword',
       next: 'start',
     }),
@@ -571,32 +627,44 @@ function rule_arithmetic() {
  */
 function rule_repeat() {
   return recognize('start', {
-    regex: '(repeat)( \\w+ )(times)',
+    regex: '(' + currentLang._REPEAT + ')( \\w+ )(' + currentLang._TIMES + ')',
     token: ['keyword', 'text', 'keyword'],
   });
 }
 
 function rule_for(){
   return recognize('start', {
-    regex: '(for )(\\w+)( in )(\\w+)',
+    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' )(\\w+)',
     token: ['keyword', 'text', 'keyword', 'text'],
   });
 }
 
 function rule_forRange() {
   return recognize('start', {
-    regex: '(for )(\\w+)( in range )(\\w+)( to )(\\w+)',
+    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' ' + currentLang._RANGE + ' )(\\w+)( to )(\\w+)',
     token: ['keyword', 'text', 'keyword', 'text', 'keyword', 'text'],
   });
 }
 
 function rule_forRangeParen() {
   return recognize('start', {
-    regex: '(for )(\\w+)( in range)(\\()([\\s\\w]+)(,)([\\s\\w]+)(\\))',
+    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' ' + currentLang._RANGE + ')(\\()([\\s\\w]+)(,)([\\s\\w]+)(\\))',
     token: ['keyword', 'text', 'keyword', 'paren.lparen', 'text', 'punctuation.operator', 'text', 'paren.rparen'],
   });
 }
 
+/**
+ * Wrap a keyword in word-boundary markers for use in the tokenizer regexes
+ *
+ * Use this to only recognize a word if it's a complete word by itself (and
+ * not accidentally a part of a larger word).
+ *
+ * The keyword must be followed by space.
+ */
+function keywordWithSpace(keyword: string) {
+  return '\\b' + keyword + ' ';
+}
+  
 /**
  * Modify the given ruleset, replacing literal spaces with "one or more spaces"
  */
@@ -611,8 +679,6 @@ function loosenRules(rules: Rules) {
   }
   return rules;
 }
-
-
 
 // Only do this work if the 'define' function is actually available at runtime.
 // If not, this script got included on a page that didn't include the Ace
@@ -642,16 +708,4 @@ if ((window as any).define) {
       exports.Mode = Mode;
     });
   }
-}
-
-/**
- * Wrap a keyword in word-boundary markers for use in the tokenizer regexes
- *
- * Use this to only recognize a word if it's a complete word by itself (and
- * not accidentally a part of a larger word).
- *
- * The keyword must be followed by space.
- */
-function keywordWithSpace(keyword: string) {
-  return '\\b' + keyword + ' ';
 }

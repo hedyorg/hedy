@@ -165,16 +165,16 @@
         demo_code: "print '5 mal 5 ist ' 5 * 5"
     -   name: "`ask` und `if` mit Berechnungen"
         explanation: "Frage nach einer Rechenaufgabe."
-        example: "Beispiel: antwort is ask 'Was ist 10 plus 10?'"
+        example: "Beispiel: antwort = ask 'Was ist 10 plus 10?'"
         demo_code: |-
-            antwort is ask 'Was ist 10 plus 10?'
+            antwort = ask 'Was ist 10 plus 10?'
             if antwort is 20 print 'Ja!' else print 'Ups'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
 7:
     start_code: "repeat 3 times print 'Hedy macht Spaß!'"
@@ -197,15 +197,15 @@
         demo_code: "print 'Hallo. Willkommen bei Hedy.'"
     -   name: "ask"
         explanation: "Frage etwas mit `ask`."
-        example: "Beispiel: farbe is ask 'Was ist deine Lieblingsfarbe?'"
+        example: "Beispiel: farbe = ask 'Was ist deine Lieblingsfarbe?'"
         demo_code: |-
-            farbe is ask 'Was ist deine Lieblingsfarbe?'
+            farbe = ask 'Was ist deine Lieblingsfarbe?'
             print 'Du magst am liebsten ' farbe
     -   name: "if"
         explanation: "Treffe eine Auswahl mit `if` und `else`"
         example: "Beispiel: if farbe is grün print 'Hübsch!' else print 'Bäh'"
         demo_code: |-
-            farbe is ask 'Was ist deine Lieblingsfarbe?'
+            farbe = ask 'Was ist deine Lieblingsfarbe?'
             if farbe is grün print 'Hübsch!' else print 'Bäh'
     -   name: "repeat - turtle"
         explanation: "Repeat a line of code with `repeat`."
@@ -236,9 +236,9 @@
         demo_code: "print '5 mal 5 ist ' 5 * 5"
     -   name: "`if` mit mehreren Zeilen"
         explanation: "Frage nach einer Summe und prüfe, ob die Antwort richtig ist. Wir können jetzt zwei Zeilen ausgeben."
-        example: "Beispiel: antwort is ask 'Was ist 5 plus 5?'"
+        example: "Beispiel: antwort = ask 'Was ist 5 plus 5?'"
         demo_code: |-
-            antwort is ask 'Was ist 5 plus 5?'
+            antwort = ask 'Was ist 5 plus 5?'
             if antwort is 10
                 print 'Gut gemacht!'
                 print 'Die Antwort ist wirklich ' antwort
@@ -248,7 +248,7 @@
 9:
     start_code: |-
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -261,7 +261,7 @@
         ## Example Hedy code
         ```
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -271,9 +271,9 @@
     commands:
     -   name: "`if` with multiple lines"
         explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
-        example: "Example: answer is ask 'What is 20 plus 20?'"
+        example: "Example: answer = ask 'What is 20 plus 20?'"
         demo_code: |-
-            answer is ask 'What is 20 plus 20?'
+            answer = ask 'What is 20 plus 20?'
             if answer is 20
                 print 'Well done!!'
                 print 'The answer is indeed' answer
@@ -342,13 +342,13 @@
         For this level on you will also have to use quotation marks when storing a text with `is`:
 
         ```
-        name is 'Hedy'
+        name = 'Hedy'
         print 'Hello ' name
         ```
 
         For numbers, you do not use quotation marks in the `is`:
         ```
-        score is 25
+        score = 25
         print 'You got ' score
         ```
     commands:
@@ -361,17 +361,17 @@
             print 2.5 + 2.5
     -   name: "float in var"
         explanation: "Storing a calculation with decimals"
-        example: "antwoord is 2.5 + 2.5"
+        example: "antwoord = 2.5 + 2.5"
         demo_code: |
-            answer is 2.5 + 2.5
+            answer = 2.5 + 2.5
             print 'Calculate away!'
             print 'Two and a half plus two and a half is...'
             print answer
 
 13:
     start_code: |-
-        name is ask 'what is your name?'
-        leeftijd is ask 'what is your age?'
+        name = ask 'what is your name?'
+        leeftijd = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: |-
@@ -384,8 +384,8 @@
         explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
         example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
-            antwort1 is ask 'Was ergibt 3+2?'
-            antwort2 is ask 'Was ergibt 2+2?'
+            antwort1 = ask 'Was ergibt 3+2?'
+            antwort2 = ask 'Was ergibt 2+2?'
             if antwort1 is 5 and antwort2 is 4
                 print 'Beide Antworten sind richtig!'
             else
@@ -396,8 +396,8 @@
             Wenn beide richtig sind, ist es auch in Ordnung.
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
-            antwort1 is ask 'Was ergibt 3+2?'
-            antwort2 is ask 'Was ergibt 2+2?'
+            antwort1 = ask 'Was ergibt 3+2?'
+            antwort2 = ask 'Was ergibt 2+2?'
             if antwort1 is 5 or antwort2 is 4
                 print 'Mindestens eine Antwort ist richtig!'
             else
@@ -430,7 +430,7 @@
 #            print('Hallo!')
 14:
     start_code: |-
-        alter is ask 'Wie alt bist du?'
+        alter = ask 'Wie alt bist du?'
         if alter < 13
             print 'Du bist jünger als ich!'
         else
@@ -447,7 +447,7 @@
             Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
         example: "alter < 13"
         demo_code: |-
-            alter is ask 'Wie alt bist du?'
+            alter = ask 'Wie alt bist du?'
             if alter < 13
                 print 'Du bist jünger als ich!'
     -   name: "Größer"
@@ -456,14 +456,14 @@
             Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
         example: "alter > 13"
         demo_code: |-
-            alter is ask 'Wie alt bist du?'
+            alter = ask 'Wie alt bist du?'
             if alter > 13
                 print 'Du bist älter als ich!'
 15:
     start_code: |-
-        antwort is 0
+        antwort = 0
         while antwort != 25
-            antwort is ask 'Wieviel ist 5 mal 5?'
+            antwort = ask 'Wieviel ist 5 mal 5?'
             print 'Das ist die richtge Antwort!'
     intro_text: |-
         Wir werden eine neue Schleife lernen, die `while`-Schleife!
@@ -475,25 +475,25 @@
         explanation: "Wir können die `while`-Schleife verwenden."
         example: "while richtige_antwort is False"
         demo_code: |-
-            antwort is 0
+            antwort = 0
             while antwort != 25
-                antwort is ask 'Wieviel ist 5 mal 5?'
+                antwort = ask 'Wieviel ist 5 mal 5?'
                 print 'Das ist die richtge Antwort!'
     -   name: "while mit Ungleichungen"
         explanation: |-
             Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
             Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
-            Wir machen das hier mit `zaehler is zaehler + 1`.
+            Wir machen das hier mit `zaehler = zaehler + 1`.
         example: "while zaehler < 3"
         demo_code: |-
-            zaehler is 1
+            zaehler = 1
             while zaehler < 3
                 print 'Wir machen dies noch ' 3 - zaehler ' mal.'
-                zaehler is zaehler + 1
+                zaehler = zaehler + 1
             print 'Wir sind fertig!'
 16:
     start_code: |-
-        fruechte is ['Apfel', 'Banane', 'Kirsche']
+        fruechte = ['Apfel', 'Banane', 'Kirsche']
         print fruechte
     intro_text: |-
         Wir werden eckige Klammern um Listen setzen!
@@ -502,27 +502,27 @@
     -   explanation: |-
             Wir werden eckige Klammern um Listen setzen!
             Wir müssen auch `'` um Elemente in Listen setzen.
-        example: "fruechte is ['Apfel', 'Banane', 'Kirsche']"
+        example: "fruechte = ['Apfel', 'Banane', 'Kirsche']"
         demo_code: |-
-            fruechte is ['Apfel', 'Banane', 'Kirsche']
+            fruechte = ['Apfel', 'Banane', 'Kirsche']
             print fruechte
     -   name: "Nimm ein Element aus einer Liste"
         explanation: |-
             Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
             Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
-        example: "erste_frucht is fruechte[1]"
+        example: "erste_frucht = fruechte[1]"
         demo_code: |-
-            fruechte is ['Apfel', 'Banane', 'Kirsche']
-            erste_frucht is fruechte[1]
+            fruechte = ['Apfel', 'Banane', 'Kirsche']
+            erste_frucht = fruechte[1]
             print erste_frucht
     -   name: "Nimm ein zufälliges Element aus einer Liste"
         explanation: |-
             Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`.
             Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
-        example: "zufaellige_frucht is fruechte[random]"
+        example: "zufaellige_frucht = fruechte[random]"
         demo_code: |-
-            fruechte is ['Apfel', 'Banane', 'Kirsche']
-            zufaellige_frucht is fruechte[random]
+            fruechte = ['Apfel', 'Banane', 'Kirsche']
+            zufaellige_frucht = fruechte[random]
             print zufaellige_frucht
 
 17:
@@ -543,7 +543,7 @@
     -   explanation: "Wir müssen dasselbe mit allen unseren `if`-Anweisungen tun."
         example: "if farbe is grün:'"
         demo_code: |-
-            farbe is ask 'Was ist deine Lieblingsfarbe?'
+            farbe = ask 'Was ist deine Lieblingsfarbe?'
             if farbe is grün:
                 print 'Die Farbe ist grün.'
             else:
@@ -554,7 +554,7 @@
             Wir überprüfen zuerst, ob das `if` korrekt ist, wenn das nicht wahr ist, überprüfen wir das `elif` und wenn das auch nicht wahr ist, gehen wir zum `else`."
         example: "elif a is 5:"
         demo_code: |-
-            a is 2
+            a = 2
             if a is 1:
                 print 'a ist 1'
             elif a is 2:
