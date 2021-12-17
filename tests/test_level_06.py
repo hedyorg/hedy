@@ -107,6 +107,25 @@ class TestsLevel6(HedyTester):
       expected=expected
     )
 
+  def test_print_if_else_with_equals_sign(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam = Hedy print 'leuk' else print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')
+    if str(naam) == str('Hedy'):
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
   # calculation tests
   # todo should all be tested for higher levels too!
   def test_print_calc(self):
