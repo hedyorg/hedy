@@ -6,7 +6,6 @@ class TestsLevel8(HedyTester):
   level = 8
 
   def test_if_with_indent(self):
-    # todo should be tested for all levels!
     code = textwrap.dedent("""\
     naam is Hedy
     if naam is Hedy
@@ -17,7 +16,26 @@ class TestsLevel8(HedyTester):
     if str(naam) == str('Hedy'):
       print(f'koekoek')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
+
+  def test_if_with_equals_sign(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    if naam = Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
 
   def test_equality_promotes_int_to_string(self):
     code = textwrap.dedent("""\

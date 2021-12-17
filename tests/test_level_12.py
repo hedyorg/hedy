@@ -7,6 +7,38 @@ from test_level_01 import HedyTester
 class TestsLevel12(HedyTester):
   level = 12
 
+  def test_if_with_indent(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    if naam is Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=16)
+
+  def test_if_with_equals_sign(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    if naam = Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=16)
+
   # print tests
   def test_print_float(self):
     code = textwrap.dedent("""\
