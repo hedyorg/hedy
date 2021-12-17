@@ -5,16 +5,6 @@ from test_level_01 import HedyTester
 class TestsLevel11(HedyTester):
   level = 11
 
-  def test_if_with_indent(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    if naam is Hedy
-        print 'koekoek'""")
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    if str(naam) == str('Hedy'):
-      print(f'koekoek')""")
-    self.single_level_tester(code=code, expected=expected)
 
   def test_if_else(self):
     code = textwrap.dedent("""\

@@ -55,6 +55,19 @@ class TestsLevel18(HedyTester):
           extra_check_function=self.is_not_turtle()
         )
 
+    def test_if_with_equals_sign(self):
+      code = textwrap.dedent("""\
+      naam is 'Hedy'
+      if naam = Hedy:
+          print('koekoek')""")
+
+      expected = textwrap.dedent("""\
+      naam = 'Hedy'
+      if str(naam) == str('Hedy'):
+        print(f'koekoek')""")
+
+      self.single_level_tester(code=code, expected=expected)
+
     # issue also in level 17, leaving for now.
     # def test_bigger(self):
     #     code = textwrap.dedent("""\
