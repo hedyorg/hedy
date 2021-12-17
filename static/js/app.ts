@@ -270,7 +270,7 @@ function showBulb(level: string){
 
 }
 
-function pushAchievement(achievement: string) {
+export function pushAchievement(achievement: string) {
   $.ajax({
     type: 'POST',
     url: '/achievements',
@@ -510,6 +510,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
       if (response['duplicate']) {
         modal.confirm (auth.texts['overwrite_warning'], function () {
           storeProgram(level, lang, name, code, cb);
+          pushAchievement("double_check");
         });
       } else {
          storeProgram(level, lang, name, code, cb);
@@ -822,6 +823,7 @@ function speak(text: string) {
     utterance.rate = 0.9;
     speechSynthesis.speak(utterance);
   }
+  pushAchievement("make_some_noise");
 }
 
 (() => {
@@ -1064,6 +1066,7 @@ export function toggle_developers_mode(example_programs: boolean) {
   if ($('#developers_toggle').is(":checked")) {
       $('#commands-window-total').hide();
       $('#adventures').hide();
+      pushAchievement("lets_focus");
   } else {
       // If the example programs are hidden by class customization: keep hidden!
       if (example_programs) {
