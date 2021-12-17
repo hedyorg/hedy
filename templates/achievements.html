@@ -3,10 +3,10 @@
 {% block main %}
     <h2 class="px-8 mb-4">{{template_achievements.title}}</h2>
     {% for category in template_achievements.categories %}
-        <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#{{category.key}}').toggle()">{{category.title}}</h1>
+        <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#{{category.key}}').toggle()">{{achievements[category.key]}}</h1>
         <div class="hidden pl-4 mt-4 mb-4" id="{{ category.key }}">
         {% for subcategory in category['subcategory'] %}
-            <h3 class="px-16">{{ subcategory.title }}</h3>
+            <h3 class="px-16">{% if subcategory.sub_key in achievements %}{{ achievements[subcategory.sub_key] }}{% endif %}</h3>
             <div class="flex flex-wrap w-full px-16">
             {% for achievement in subcategory.achievements %}
                 {% if achievement in user_achievements %}
