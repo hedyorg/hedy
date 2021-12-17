@@ -17,8 +17,21 @@ class TestsLevel17(HedyTester):
     if str(naam) == str('Hedy'):
       print(f'koekoek')""")
 
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_if_with_equals_sign(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    if naam = Hedy:
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
 
     self.single_level_tester(code=code, expected=expected)
+
 
   def test_if_else(self):
     code = textwrap.dedent("""\
