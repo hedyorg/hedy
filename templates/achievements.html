@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
 {% block main %}
-    <h2 class="px-8 mb-4">{{template_achievements.title}}</h2>
+    <h2 class="px-8 mb-4">{{achievements[template_achievements.title_key]}}</h2>
     {% for category in template_achievements.categories %}
         <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#{{category.key}}').toggle()">{{achievements[category.key]}}</h1>
         <div class="hidden pl-4 mt-4 mb-4" id="{{ category.key }}">
