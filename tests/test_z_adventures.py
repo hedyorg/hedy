@@ -22,7 +22,6 @@ def collect_snippets(path):
       yaml = YamlFile.for_file(f)
 
       for name, adventure in yaml['adventures'].items():
-        if name != 'next':
           for level_number in adventure['levels']:
               if level_number > hedy.HEDY_MAX_LEVEL:
                   print('content above max level!')
