@@ -223,10 +223,11 @@ export function runit(level: string, lang: string, cb: () => void) {
     }).done(function(response: any) {
       console.log('Response', response);
       if (response.Warning) {
+        pushAchievement("watch_out");
         fix_code(level, lang);
         showBulb(level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
-        pushAchievement("watch_out!");
+
       }
       if (response.achievements) {
         showAchievements(response.achievements, false);
