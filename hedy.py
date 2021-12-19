@@ -881,6 +881,7 @@ class ConvertToPython_1(Transformer):
             return "t.right(90)"  # no arguments defaults to a right turn
 
         arg = args[0]
+
         if is_variable(arg, self.lookup) or arg.isnumeric():
             return f"t.right({arg})"
         elif arg == 'left':
@@ -1004,7 +1005,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.right(90)"
 
-        arg = args[0]
+        arg = hash_var(args[0])
         if is_variable(arg, self.lookup) or arg.isnumeric():
             return f"t.right({arg})"
 
