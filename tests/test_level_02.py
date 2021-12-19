@@ -198,6 +198,20 @@ class TestsLevel2(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
+  def test_turn_with_non_ascii_var(self):
+    code = textwrap.dedent("""\
+      ángulo is 90
+      turn ángulo""")
+    expected = textwrap.dedent("""\
+      vefd88f42b64136f16e8f305dd375a921 = '90'
+      t.right(vefd88f42b64136f16e8f305dd375a921)""")
+    self.multi_level_tester(
+      max_level=self.max_turtle_level,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle()
+    )
+
   @parameterized.expand(['left', 'right'])
   def test_one_turn_with_literal_string_gives_type_error(self, arg):
     code = f"turn {arg}"
