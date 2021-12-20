@@ -149,7 +149,7 @@ def routes (app, database):
             return utils.page_404 (ui_message='invalid_class_link')
 
         DATABASE.add_student_to_class(Class['id'], user['username'])
-        return redirect(request.url.replace('/class/join/', '/my-profile'), code=302)
+        return {}, 200
 
     @app.route('/class/<class_id>/student/<student_id>', methods=['DELETE'])
     @requires_login

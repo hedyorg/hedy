@@ -92,7 +92,8 @@ export function join_class(id: string, name: string) {
       }),
       dataType: 'json'
     }).done(function(_response) {
-      console.log("We zitten in een klas...")
+      window.location.pathname = '/programs';
+      return;
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
