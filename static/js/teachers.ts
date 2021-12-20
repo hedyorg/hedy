@@ -18,9 +18,9 @@ export function create_class() {
       dataType: 'json'
     }).done(function(response) {
       if (response.achievement) {
-        showAchievements(response.achievement, false, '/customize-class/' + response.id);
+        showAchievements(response.achievement, false, '/for-teachers/customize-class/' + response.id);
       } else {
-        window.location.pathname = '/customize-class/' + response.id ;
+        window.location.pathname = '/for-teachers/customize-class/' + response.id ;
       }
     }).fail(function(err) {
       if (err.responseText == "duplicate") {
