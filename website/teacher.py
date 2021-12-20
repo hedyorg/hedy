@@ -83,8 +83,7 @@ def routes (app, database, achievements):
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "ready_set_education")
         if achievement:
             return {'id': Class['id'], 'achievement': achievement}, 200
-        else:
-            return {'id': Class['id']}, 200
+        return {'id': Class['id']}, 200
 
     @app.route('/class/<class_id>', methods=['PUT'])
     @requires_login
@@ -110,7 +109,9 @@ def routes (app, database, achievements):
                 return "duplicate", 200
 
         Class = DATABASE.update_class (class_id, body ['name'])
-
+        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "on_second_thoughts")
+        if achievement:
+            return {'achievement': achievement}, 200
         return {}, 200
 
     @app.route('/class/<class_id>', methods=['DELETE'])
@@ -121,7 +122,9 @@ def routes (app, database, achievements):
             return 'No such class', 404
 
         DATABASE.delete_class (Class)
-
+        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "end_of_semester")
+        if achievement:
+            return {'achievement': achievement}, 200
         return {}, 200
 
     @app.route('/class/<class_id>/prejoin/<link>', methods=['GET'])
@@ -228,9 +231,10 @@ def routes (app, database, achievements):
         customizations['hide_prev_level'] = body.get('hide_prev_level')
         customizations['hide_next_level'] = body.get('hide_next_level')
 
-
-        Class = DATABASE.update_customizations_class(customizations)
-
+        DATABASE.update_customizations_class(customizations)
+        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "my_class_my_rules")
+        if achievement:
+            return {'achievement': achievement}, 200
         return {}, 200
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])

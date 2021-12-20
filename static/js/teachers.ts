@@ -47,8 +47,12 @@ export function rename_class(id: string) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(_response) {
-      location.reload ();
+    }).done(function(response) {
+      if (response.achievement) {
+        showAchievements(response.achievement, true, "");
+      } else {
+        location.reload();
+      }
     }).fail(function(err) {
       if (err.responseText == "duplicate") {
         modal.alert(auth.texts['class_name_duplicate']);
@@ -68,8 +72,12 @@ export function delete_class(id: string) {
       url: '/class/' + id,
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(_response) {
-      window.location.pathname = '/for-teachers';
+    }).done(function(response) {
+      if (response.achievement) {
+        showAchievements(response.achievement, false, '/for-teachers');
+      } else {
+        window.location.pathname = '/for-teachers';
+      }
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
