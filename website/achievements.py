@@ -32,15 +32,52 @@ class Achievements:
                     return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
             return jsonify({})
 
-    def verify_new_achievements(self, username, code=None, response=None):
+    def strip_new_achievements(self, achievements_data):
+        if 'achieved' in achievements_data:
+            self.new_achieved = [i for i in self.achieved if i not in achievements_data['achieved']]
+        else:
+            self.new_achieved = self.achieved
+
+    def add_single_achievement(self, username, achievement):
+        if achievement in self.TRANSLATIONS.get_translations(self.lang):
+            return self.verify_pushed_achievement(username, achievement)
+        else:
+            return None
+
+    def verify_run_achievements(self, username, code=None, response=None):
         achievements_data = self.DATABASE.progress_by_username(username)
         self.achieved = []
-        self.check_all_achievements(achievements_data)
+        self.self.check_programs_run(achievements_data['run_programs'])
         if code:
             self.check_code_achievements(code)
         if response:
             self.check_response_achievements(code, response)
-        self.new_achieved = [i for i in self.achieved if i not in achievements_data['achieved']]
+
+        self.strip_new_achievements(achievements_data)
+        if len(self.new_achieved) > 0:
+            for achievement in self.new_achieved:
+                self.DATABASE.add_achievement_to_username(username, achievement)
+            return True
+        return False
+
+    def verify_share_achievements(self, username):
+        achievements_data = self.DATABASE.progress_by_username(username)
+        self.achieved = []
+        self.self.check_programs_saved(achievements_data['saved_programs'])
+
+        self.strip_new_achievements(achievements_data)
+        if len(self.new_achieved) > 0:
+            for achievement in self.new_achieved:
+                self.DATABASE.add_achievement_to_username(username, achievement)
+            return True
+        return False
+
+    def verify_submit_achievements(self, username):
+        achievements_data = self.DATABASE.progress_by_username(username)
+        self.achieved = []
+        self.self.check_programs_submitted(achievements_data['submitted_programs'])
+
+        self.strip_new_achievements(achievements_data)
         if len(self.new_achieved) > 0:
             for achievement in self.new_achieved:
                 self.DATABASE.add_achievement_to_username(username, achievement)
@@ -49,7 +86,7 @@ class Achievements:
 
     def verify_pushed_achievement(self, username, achievement):
         achievements_data = self.DATABASE.progress_by_username(username)
-        if 'achieved' in achievements_data and achievement not in achievements_data['achieved']:
+        if ('achieved' not in achievements_data) or (achievement not in achievements_data['achieved']):
             self.new_achieved = [achievement]
             self.DATABASE.add_achievement_to_username(username, achievement)
             return self.get_earned_achievements()
@@ -61,12 +98,6 @@ class Achievements:
         for achievement in self.new_achieved:
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], translations[achievement]['image']])
         return translated_achievements
-
-    def check_all_achievements(self, user_data):
-        self.check_programs_run(user_data['run_programs'])
-        self.check_programs_saved(user_data['saved_programs'])
-        self.check_programs_submitted(user_data['submitted_programs'])
-        return self.achieved
 
     def check_programs_run(self, amount):
         if amount >= 1:

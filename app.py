@@ -476,8 +476,7 @@ def parse():
         except:
             pass
 
-        # If we have earned new achievements -> add to db and return names to front-end
-        if username and ACHIEVEMENTS.verify_new_achievements(username, code, response):
+        if username and ACHIEVEMENTS.verify_run_achievements(username, code, response):
             response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
 
     except hedy.exceptions.HedyException as ex:
