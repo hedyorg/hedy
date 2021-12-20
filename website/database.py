@@ -313,13 +313,15 @@ class Database:
 
     def achievements_by_username(self, username):
         progress_data = ACHIEVEMENTS.get({'username': username})
-        if 'achieved' in progress_data:
+        if progress_data and 'achieved' in progress_data:
             return progress_data['achieved']
         else:
             return None
 
     def add_achievement_to_username(self, username, achievement):
         user_achievements = ACHIEVEMENTS.get({'username': username})
+        if 'achieved' not in user_achievements:
+            user_achievements['achieved'] = []
         if achievement not in user_achievements['achieved']:
             user_achievements['achieved'].append(achievement)
             return ACHIEVEMENTS.put(user_achievements)
