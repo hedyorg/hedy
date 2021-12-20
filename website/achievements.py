@@ -61,8 +61,6 @@ class Achievements:
         return False
 
     def verify_save_achievements(self, username, adventure=None):
-        print("Hier komen we!")
-        print(adventure)
         achievements_data = self.DATABASE.progress_by_username(username)
         self.achieved = []
         self.check_programs_saved(achievements_data['saved_programs'])
