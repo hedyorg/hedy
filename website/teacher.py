@@ -80,8 +80,11 @@ def routes (app, database, achievements):
         }
 
         DATABASE.store_class (Class)
-
-        return {'id': Class['id']}, 200
+        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "ready_set_education")
+        if achievement:
+            return {'id': Class['id'], 'achievement': achievement}, 200
+        else:
+            return {'id': Class['id']}, 200
 
     @app.route('/class/<class_id>', methods=['PUT'])
     @requires_login

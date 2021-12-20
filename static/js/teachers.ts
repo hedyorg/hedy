@@ -16,8 +16,12 @@ export function create_class() {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(_response) {
-      window.location.pathname = '/customize-class/' + _response.id ;
+    }).done(function(response) {
+      if (response.achievement) {
+        showAchievements(response.achievement, false, '/customize-class/' + response.id);
+      } else {
+        window.location.pathname = '/customize-class/' + response.id ;
+      }
     }).fail(function(err) {
       if (err.responseText == "duplicate") {
         modal.alert(auth.texts['class_name_duplicate']);
@@ -95,6 +99,8 @@ export function join_class(id: string, name: string) {
     }).done(function(response) {
       if (response.achievement) {
           showAchievements(response.achievement, false, '/programs');
+      } else {
+          window.location.pathname = '/programs';
       }
     }).fail(function(err) {
       console.error(err);
