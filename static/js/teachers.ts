@@ -72,26 +72,31 @@ export function delete_class(id: string) {
   });
 }
 
-export function join_class(link: string, name: string, noRedirect=false) {
+export function join_class(id: string, name: string) {
   // If there's no session but we want to join the class, we store the program data in localStorage and redirect to /login.
   if (! auth.profile) {
     return modal.confirm (auth.texts['join_prompt'], function () {
-      localStorage.setItem ('hedy-join', JSON.stringify ({link: link, name: name}));
+      localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
       window.location.pathname = '/login';
       return;
     });
   }
 
   $.ajax({
-    type: 'GET',
-    url: link,
-  }).done(function(_response) {
-    modal.alert (auth.texts['class_join_confirmation'] + ' ' + name);
-    if (! noRedirect) window.location.pathname = '/programs';
-  }).fail(function(err) {
-    console.error(err);
-    error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
-  });
+      type: 'POST',
+      url: '/class/join',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        id: id,
+        name: name
+      }),
+      dataType: 'json'
+    }).done(function(_response) {
+      console.log("We zitten in een klas...")
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    });
 }
 
 export function remove_student(class_id: string, student_id: string, self_removal: boolean) {

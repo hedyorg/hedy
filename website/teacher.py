@@ -135,20 +135,21 @@ def routes (app, database):
         return render_template ('class-prejoin.html', page_title=hedyweb.get_page_title('join class'),
             current_page='my-profile',
             class_info={
-                'link': '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + g.lang,
+                'id': Class ['id'],
                 'name': Class ['name'],
             })
 
-    @app.route('/class/<class_id>/join/<link>', methods=['GET'])
+    @app.route('/class/join', methods=['POST'])
     @requires_login
-    def join_class (user, class_id, link):
-        Class = DATABASE.get_class (class_id)
-        if not Class or Class ['link'] != link:
+    def join_class(user):
+        body = request.json
+        if 'id' in body:
+            Class = DATABASE.get_class(body['id'])
+        if not Class or Class ['id'] != body['id']:
             return utils.page_404 (ui_message='invalid_class_link')
 
-        DATABASE.add_student_to_class (Class ['id'], user ['username'])
-
-        return redirect(request.url.replace('/class/' + class_id + '/join/' + link, '/my-profile'), code=302)
+        DATABASE.add_student_to_class(Class['id'], user['username'])
+        return redirect(request.url.replace('/class/join/', '/my-profile'), code=302)
 
     @app.route('/class/<class_id>/student/<student_id>', methods=['DELETE'])
     @requires_login
