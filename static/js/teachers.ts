@@ -183,8 +183,12 @@ export function save_level_settings(id: string, level: number) {
        }),
        contentType: 'application/json',
        dataType: 'json'
-     }).done(function(_response) {
-       location.reload ();
+     }).done(function(response) {
+       if (response.achievement) {
+         showAchievements(response.achievement, true, "");
+       } else {
+         location.reload ();
+       }
      }).fail(function(err) {
        console.error(err);
        error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
