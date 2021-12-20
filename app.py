@@ -1250,7 +1250,7 @@ def save_program(user):
     DATABASE.store_program(stored_program)
     if not overwrite:
         DATABASE.increase_user_program_count(user['username'])
-        DATABASE.increase_user_save_count(user['username'])
+    DATABASE.increase_user_save_count(user['username'])
 
     if ACHIEVEMENTS.verify_save_achievements(user['username'], adventure=True):
         return jsonify({'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
