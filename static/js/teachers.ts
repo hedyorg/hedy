@@ -1,5 +1,6 @@
 import { modal, error } from './modal';
 import { auth } from './auth';
+import {showAchievements} from "./app";
 
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
@@ -91,9 +92,10 @@ export function join_class(id: string, name: string) {
         name: name
       }),
       dataType: 'json'
-    }).done(function(_response) {
-      window.location.pathname = '/programs';
-      return;
+    }).done(function(response) {
+      if (response.achievement) {
+          showAchievements(response.achievement, false, '/programs');
+      }
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));

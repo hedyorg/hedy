@@ -228,7 +228,7 @@ export function runit(level: string, lang: string, cb: () => void) {
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
       if (response.achievements) {
-        showAchievements(response.achievements, false);
+        showAchievements(response.achievements, false, "");
       }
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
@@ -282,16 +282,21 @@ export function pushAchievement(achievement: string) {
     }).done(function(response: any) {
       if (response.achievements) {
         console.log(response.achievements);
-        showAchievements(response.achievements, false);
+        showAchievements(response.achievements, false, "");
       }
   });
 }
 
-function showAchievements(achievements: any[], reload: boolean) {
+export function showAchievements(achievements: any[], reload: boolean, redirect: string) {
   fnAsync(achievements, 0);
   if (reload) {
     setTimeout(function(){
       location.reload();
+     }, achievements.length * 6000);
+  }
+  if (redirect) {
+    setTimeout(function(){
+      window.location.pathname = redirect;
      }, achievements.length * 6000);
   }
 }
@@ -459,7 +464,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
 
       modal.alert (auth.texts['save_success_detail'], 4000);
       if (response.achievements) {
-        showAchievements(response.achievements, false);
+        showAchievements(response.achievements, false, "");
       }
       // If we succeed, we need to update the default program name & program for the currently selected tab.
       // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
@@ -598,7 +603,7 @@ export function submit_program (id: string, shared: boolean) {
     dataType: 'json'
   }).done(function(response) {
     if (response.achievements) {
-      showAchievements(response.achievements, true);
+      showAchievements(response.achievements, true, "");
     }
   });
 }

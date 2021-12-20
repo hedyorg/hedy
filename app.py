@@ -1386,7 +1386,7 @@ auth.routes(app, DATABASE)
 
 from website import teacher
 
-teacher.routes(app, DATABASE)
+teacher.routes(app, DATABASE, ACHIEVEMENTS)
 
 # *** ACHIEVEMENTS BACKEND
 

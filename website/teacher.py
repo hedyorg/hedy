@@ -10,9 +10,12 @@ TRANSLATIONS = hedyweb.Translations ()
 from config import config
 cookie_name     = config ['session'] ['cookie_name']
 
-def routes (app, database):
+
+def routes (app, database, achievements):
     global DATABASE
+    global ACHIEVEMENTS
     DATABASE = database
+    ACHIEVEMENTS = achievements
 
     @app.route('/classes', methods=['GET'])
     @requires_login
@@ -149,7 +152,11 @@ def routes (app, database):
             return utils.page_404 (ui_message='invalid_class_link')
 
         DATABASE.add_student_to_class(Class['id'], user['username'])
-        return {}, 200
+        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "epic_education")
+        if achievement:
+            return {'achievement': achievement}, 200
+        else:
+            return {}, 200
 
     @app.route('/class/<class_id>/student/<student_id>', methods=['DELETE'])
     @requires_login
