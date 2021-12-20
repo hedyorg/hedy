@@ -462,6 +462,7 @@ def parse():
             except hedy.exceptions.InvalidCommandException as ex:
                 response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
+                response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
             except hedy.exceptions.FtfyException as ex:
                 response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
@@ -1251,7 +1252,7 @@ def save_program(user):
         DATABASE.increase_user_program_count(user['username'])
         DATABASE.increase_user_save_count(user['username'])
 
-    if ACHIEVEMENTS.verify_save_achievements(user['username']):
+    if ACHIEVEMENTS.verify_save_achievements(user['username'], adventure=True):
         return jsonify({'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
     return jsonify({'name': body['name'], 'id': program_id})
 

@@ -60,10 +60,12 @@ class Achievements:
             return True
         return False
 
-    def verify_save_achievements(self, username):
+    def verify_save_achievements(self, username, adventure=None):
         achievements_data = self.DATABASE.progress_by_username(username)
         self.achieved = []
-        self.self.check_programs_saved(achievements_data['saved_programs'])
+        self.check_programs_saved(achievements_data['saved_programs'])
+        if adventure:
+            self.achieved.append("adventure_is_worthwhile")
 
         self.strip_new_achievements(achievements_data)
         if len(self.new_achieved) > 0:
@@ -75,7 +77,7 @@ class Achievements:
     def verify_submit_achievements(self, username):
         achievements_data = self.DATABASE.progress_by_username(username)
         self.achieved = []
-        self.self.check_programs_submitted(achievements_data['submitted_programs'])
+        self.check_programs_submitted(achievements_data['submitted_programs'])
 
         self.strip_new_achievements(achievements_data)
         if len(self.new_achieved) > 0:
