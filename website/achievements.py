@@ -47,7 +47,7 @@ class Achievements:
     def verify_run_achievements(self, username, code=None, response=None):
         achievements_data = self.DATABASE.progress_by_username(username)
         self.achieved = []
-        self.self.check_programs_run(achievements_data['run_programs'])
+        self.check_programs_run(achievements_data['run_programs'])
         if code:
             self.check_code_achievements(code)
         if response:
@@ -60,7 +60,7 @@ class Achievements:
             return True
         return False
 
-    def verify_share_achievements(self, username):
+    def verify_save_achievements(self, username):
         achievements_data = self.DATABASE.progress_by_username(username)
         self.achieved = []
         self.self.check_programs_saved(achievements_data['saved_programs'])
