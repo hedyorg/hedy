@@ -140,6 +140,12 @@ class Achievements:
                 self.achieved.append("talk-talk-talk")
         if "Hedy" in code:
             self.achieved.append("hedy_honor")
+        lines = code.splitlines()
+        for line in lines:
+            if "print" in line:
+                if lines.count(line) >= 10:
+                    self.achieved.append("hedy-ious")
+                    return
 
     def check_response_achievements(self, code, response):
         if 'has_turtle' in response and response['has_turtle']:
