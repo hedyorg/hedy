@@ -95,8 +95,9 @@ class HedyTester(unittest.TestCase):
     if expected is not None:
       result = hedy.transpile(code, level, lang)
       self.assertEqual(expected, result.code)
-      self.assertEqual(expected_commands, hedy.all_commands(code, level, lang))
       self.assertTrue(self.validate_Python_code(result))
+      if expected_commands is not None:
+        self.assertEqual(expected_commands, hedy.all_commands(code, level, lang))
       if output is not None:
         self.assertEqual(output, HedyTester.run_code(result))
         self.assertTrue(extra_check_function(result))

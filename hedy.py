@@ -92,17 +92,12 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
                       10: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
                       11: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
                       12: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      13: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      14: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      15: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while'],
-                      16: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while'],
-                      17: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif'],
-                      18: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
-                      19: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
-                      20: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
-                      21: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
-                      22: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
-                      23: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input']
+                      13: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
+                      14: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
+                      15: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
+                      16: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
+                      17: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif'],
+                      18: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif', 'input']
                       }
 
 # TODO: these need to be taken from the translated grammar keywords based on the language
@@ -737,7 +732,7 @@ class AllCommands(Transformer):
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
 
-        if keyword == 'assign':
+        if keyword == 'assign' or keyword == 'assign_list':
             return 'is'
         if keyword == 'ifelse':
             return 'else'
@@ -745,7 +740,12 @@ class AllCommands(Transformer):
             return 'if'
         if keyword == 'for_loop':
             return 'for'
-
+        if keyword == 'repeat_list':
+            return 'for'
+        if keyword == 'orcondition':
+            return 'or'
+        if keyword == 'andcondition':
+            return 'and'
         return keyword
 
     def __default__(self, args, children, meta):

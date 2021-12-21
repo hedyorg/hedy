@@ -15,7 +15,8 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle()
+        extra_check_function=self.is_not_turtle(),
+        expected_commands=['print']
       )
 
     def test_print_var_brackets(self):
