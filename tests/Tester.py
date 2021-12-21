@@ -62,6 +62,9 @@ class HedyTester(unittest.TestCase):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
 
+    if max_level < self.level:
+      raise Exception('Level too low!')
+
     # ensure we never test levels above the max (useful for debugging)
     max_level = min(max_level, hedy.HEDY_MAX_LEVEL)
 

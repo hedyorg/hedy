@@ -732,18 +732,52 @@ class AllCommands(Transformer):
     def __init__(self, level):
         self.level = level
 
+    def translate_keyword(self, keyword):
+        # some keywords have names that are not a valid name for a command
+        # that's why we call them differently in the grammar
+        # we have to translate them to the regular names here for further communciation
+
+        if keyword == 'assign':
+            return 'is'
+        if keyword == 'ifelse':
+            return 'else'
+        if keyword == 'ifs':
+            return 'if'
+        if keyword == 'for_loop':
+            return 'for'
+
+        return keyword
+
     def __default__(self, args, children, meta):
         # if we are matching a rule that is a command
-        production_rule_name = args
-        if args == 'assign': production_rule_name = 'is' #is is not a valid name for a command that's why we call it assin in the grammar but the name in communication to kids is is
-        if production_rule_name in commands_per_level[self.level]:
-            return production_rule_name
+        production_rule_name = self.translate_keyword(args)
+        leaves = flatten_list_of_lists_to_list(children)
+        operators = ['addition', 'subtraction', 'multiplication', 'division'] # for the achievements we want to be able to also detct which operators were used by a kid
+
+        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators:
+            return [production_rule_name] + leaves
+        else:
+            return leaves # 'pop up' the children
+
 
     def command(self, args):
         return args
 
     def program(self, args):
         return flatten_list_of_lists_to_list(args)
+
+    # somehow tokens are not picked up by the default rule so they need their own rule
+    def INT(self, args):
+        return []
+
+    def NAME(self, args):
+        return []
+
+    def NUMBER(self, args):
+        return []
+
+    def text(self, args):
+        return []
 
 def all_commands(input_string, level, lang='en'):
     input_string = process_input_string(input_string, level)
