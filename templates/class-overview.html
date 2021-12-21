@@ -5,7 +5,6 @@
     {% if achievement %}
     <script>
     $(function() {
-        console.log({{ achievement|safe }});
         hedyApp.showAchievements({{ achievement|safe }}, false, "");
     });
     </script>

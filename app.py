@@ -703,11 +703,6 @@ def get_quiz(level_source, question_nr, attempt):
     question_status = 'start' if attempt == 1 else 'false'
 
     if question_nr > quiz.highest_question(questions):
-        # We're done!
-        # TODO: At this point we want to check for two achievements, which we want to append to the re-direct:
-        # - Next Question Please (Finish a Hedy Quiz)
-        # - Quiz Master (Get the maximum score on a Quiz)
-
         return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
 
     question = quiz.get_question(questions, question_nr)
@@ -748,9 +743,21 @@ def quiz_finished(level):
     # set globals
     g.prefix = '/hedy'
 
+    achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "next_question")
+    if round(session.get('total_score', 0) / quiz.max_score(questions) * 100) == 100:
+        if achievement:
+            achievement.append(ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")[0])
+        else:
+            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")
+    if achievement:
+        achievement = json.dumps(achievement)
+
+    print(achievement)
+
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
                            total_score=round(session.get('total_score', 0) / quiz.max_score(questions) * 100),
                            level_source=level,
+                           achievement=achievement,
                            level=int(level) + 1,
                            questions=questions,
                            next_assignment=1)

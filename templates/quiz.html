@@ -2,6 +2,15 @@
     <link rel="stylesheet" href="{{static('/css/generated.css')}}">
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
     <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
+    <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    {% if achievement %}
+    <script>
+    $(function() {
+        hedyApp.showAchievements({{ achievement|safe }}, false, "");
+    });
+    </script>
+    {% endif %}
     <div class="px-6 bg-blue-200" >
         <div class="flex justify-around bg-blue-200">
             {% if questionStatus == 'false' %}
