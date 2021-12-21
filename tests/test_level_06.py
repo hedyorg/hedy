@@ -369,7 +369,7 @@ class TestsLevel6(HedyTester):
       code=code,
       max_level=11,
       expected=expected,
-      expected_commands=['is', 'is', 'addition', 'print', 'addition']
+      expected_commands=['is', 'is', 'addition', 'print', 'addition'],
       extra_check_function=lambda x: self.run_code(x) == "11"
     )
 

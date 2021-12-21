@@ -76,7 +76,11 @@ class TestsLevel7(HedyTester):
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!""")
-    self.single_level_tester(code=code, expected=expected, output=output)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['repeat','print'],
+      output=output)
 
   def test_repeat_with_collision(self):
       code = textwrap.dedent("""\
@@ -99,4 +103,8 @@ class TestsLevel7(HedyTester):
       me wants a cookie!
       hallo!""")
 
-      self.single_level_tester(code=code, expected=expected, output=output)
+      self.single_level_tester(
+        code=code,
+        expected=expected,
+        expected_commands=['is', 'repeat', 'print', 'print'],
+        output=output)
