@@ -37,7 +37,7 @@
         <div id="program_button_container" class="flex flex-row">
         {% if program.submitted %}
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{ texts.open }}</button>
-            <button class="red-btn mx-2" onclick="hedyApp.modal.confirm('{{ texts.delete_confirm }}', function () {hedyApp.delete_program('{{ program.id }}')})">{{ texts.delete }}</button>
+            <button class="red-btn mx-2" onclick="hedyApp.delete_program('{{ program.id }}')">{{ texts.delete }}</button>
             <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'))">{{ texts.copy_link_to_share }}</button>
         {% else %}
             <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="green-btn">{{ texts.open }}</button></a>

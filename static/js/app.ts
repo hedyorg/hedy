@@ -591,7 +591,26 @@ export function share_program (level: number, lang: string, id: string | true, P
 }
 
 export function delete_program(id: string) {
-  console.log(id);
+  modal.confirm (auth.texts['delete_confirm'], function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/delete_program',
+      data: JSON.stringify({
+        id: id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (response.achievement) {
+          showAchievements(response.achievement, true, "");
+      } else {
+          location.reload();
+      }
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    });
+  });
 }
 
 export function submit_program (id: string, shared: boolean) {
