@@ -546,6 +546,8 @@ export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
+
+
 export function share_program (level: number, lang: string, id: string | true, Public: boolean, reload?: boolean) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
 
@@ -586,6 +588,10 @@ export function share_program (level: number, lang: string, id: string | true, P
       share(resp.id);
     });
 
+}
+
+export function delete_program(id: string) {
+  console.log(id);
 }
 
 export function submit_program (id: string, shared: boolean) {
