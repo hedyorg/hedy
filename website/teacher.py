@@ -1,3 +1,5 @@
+import json
+
 from website.auth import requires_login, is_teacher, current_user
 import utils
 import uuid
@@ -48,13 +50,16 @@ def routes (app, database, achievements):
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
-        if len(students) > 0:
-            achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "ready_set_education")
-        else:
-            achievement = None
+
+        achievement = None
+        if len(students) > 20:
+            achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "full_house")
+        if achievement:
+            achievement = json.dumps(achievement)
 
         return render_template ('class-overview.html', current_page='for-teachers',
-                                page_title=hedyweb.get_page_title('class overview'), achievement=achievement,
+                                page_title=hedyweb.get_page_title('class overview'),
+                                achievement=achievement,
                                 class_info={'students': students, 'link': '/hedy/l/' + Class ['link'],
                                             'name': Class ['name'], 'id': Class ['id']})
 
