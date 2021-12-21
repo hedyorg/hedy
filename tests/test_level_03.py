@@ -519,7 +519,7 @@ class TestsLevel3(HedyTester):
     print keuzes at random
     ask is de papier goed?""")
     self.multi_level_tester(
+      max_level=3,
       code=code,
-      max_level=2,
       exception=hedy.exceptions.WrongLevelException
     )

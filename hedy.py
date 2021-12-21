@@ -746,6 +746,8 @@ class AllCommands(Transformer):
             return 'or'
         if keyword == 'andcondition':
             return 'and'
+        if keyword == 'while_loop':
+            return 'while'
         return keyword
 
     def __default__(self, args, children, meta):
@@ -1497,8 +1499,6 @@ class ConvertToPython_17(ConvertToPython_16):
 
 @hedy_transpiler(level=18)
 class ConvertToPython_18(ConvertToPython_17):
-    # FH, nov 2021
-    # todo: this is an exact duplicate of ask form level 12, if we rename the rules to have the same name, this code could be deleted
 
     def input(self, args):
         return self.ask(args)

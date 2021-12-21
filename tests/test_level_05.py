@@ -59,7 +59,7 @@ class TestsLevel5(HedyTester):
     self.single_level_tester(
       code=code,
       expected=expected,
-      expected_commands=['is', 'if', 'print', 'print']
+      expected_commands=['is', 'else', 'print', 'print']
     )
   def test_ifelse_should_go_before_assign(self):
     code = textwrap.dedent("""\
@@ -75,7 +75,7 @@ class TestsLevel5(HedyTester):
       print(f'{antwoord}')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       expected=expected
     )
@@ -154,7 +154,7 @@ class TestsLevel5(HedyTester):
       print(f'minder leuk')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       expected=expected
     )
@@ -176,7 +176,7 @@ class TestsLevel5(HedyTester):
       print(f'minder leuk')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       expected=expected
     )
@@ -199,7 +199,7 @@ class TestsLevel5(HedyTester):
       print(f'luckily no dishes because{dishwasher}is already washing up')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       expected=expected
     )
@@ -223,7 +223,7 @@ class TestsLevel5(HedyTester):
       print(f'minder leuk')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       expected=expected
     )
@@ -249,7 +249,7 @@ class TestsLevel5(HedyTester):
       max_level=5,
       code=code,
       expected=expected,
-      expected_commands=['random', 'is', 'if', 'print']
+      expected_commands=['is', 'random', 'is', 'if', 'print']
     )
   def test_print_if_assign(self):
     code = textwrap.dedent("""\
@@ -362,7 +362,7 @@ class TestsLevel5(HedyTester):
     if name is Hedy print `ωραία` else print `μπου!`""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       exception=hedy.exceptions.UnquotedTextException
     )
