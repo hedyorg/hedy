@@ -144,6 +144,8 @@ class Achievements:
     def check_response_achievements(self, code, response):
         if 'has_turtle' in response and response['has_turtle']:
             self.achieved.append("ninja_turtle")
+        if 'Warning' in response and response['Warning']:
+            self.achieved.append("watch_out")
         if 'Error' in response and response['Error']:
             self.consecutive_errors += 1
             if self.previous_code == code:
