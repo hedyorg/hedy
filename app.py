@@ -1176,16 +1176,24 @@ def list_programs(user):
     return {'programs': DATABASE.programs_for_user(user['username'])}
 
 
-# Not very restful to use a GET to delete something, but indeed convenient; we can do it with a single link and avoiding AJAX.
-@app.route('/programs/delete/<program_id>', methods=['GET'])
+@app.route('/programs/delete/', methods=['DELETE'])
 @requires_login
-def delete_program(user, program_id):
-    result = DATABASE.program_by_id(program_id)
+def delete_program(user):
+    body = request.json
+    if not isinstance(body.get('id'), str):
+        return 'program id must be a string', 400
+
+    result = DATABASE.program_by_id(body['id'])
+
     if not result or result['username'] != user['username']:
         return "", 404
-    DATABASE.delete_program_by_id(program_id)
+    DATABASE.delete_program_by_id(body['id'])
     DATABASE.increase_user_program_count(user['username'], -1)
-    return redirect('/programs')
+
+    achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "do_you_have_copy")
+    if achievement:
+        return {'achievement': achievement}, 200
+    return {}, 200
 
 
 @app.route('/programs/duplicate-check', methods=['POST'])

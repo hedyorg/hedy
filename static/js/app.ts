@@ -594,7 +594,7 @@ export function delete_program(id: string) {
   modal.confirm (auth.texts['delete_confirm'], function () {
     $.ajax({
       type: 'DELETE',
-      url: '/delete_program',
+      url: '/programs/delete',
       data: JSON.stringify({
         id: id
       }),
