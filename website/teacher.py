@@ -161,19 +161,20 @@ def routes (app, database, achievements):
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "epic_education")
         if achievement:
             return {'achievement': achievement}, 200
-        else:
-            return {}, 200
+        return {}, 200
 
     @app.route('/class/<class_id>/student/<student_id>', methods=['DELETE'])
     @requires_login
     def leave_class (user, class_id, student_id):
-
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['teacher'] != user ['username'] or student_id != user ['username']:
             return 'No such class', 404
 
         DATABASE.remove_student_from_class (Class ['id'], student_id)
-
+        if Class['teacher'] == user['username']:
+            achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "detention")
+        if achievement:
+            return {'achievement': achievement}, 200
         return {}, 200
 
     @app.route('/for-teachers/customize-class/<class_id>', methods=['GET'])
