@@ -728,6 +728,31 @@ class UsesTurtle(Transformer):
         return False
 
 
+class AllCommands(Transformer):
+    def __init__(self, level):
+        self.level = level
+
+    def __default__(self, args, children, meta):
+        # if we are matching a rule that is a command
+        production_rule_name = args
+        if args == 'assign': production_rule_name = 'is' #is is not a valid name for a command that's why we call it assin in the grammar but the name in communication to kids is is
+        if production_rule_name in commands_per_level[self.level]:
+            return production_rule_name
+
+    def command(self, args):
+        return args
+
+    def program(self, args):
+        return flatten_list_of_lists_to_list(args)
+
+def all_commands(input_string, level, lang='en'):
+    input_string = process_input_string(input_string, level)
+    program_root = parse_input(input_string, level, lang)
+
+    return AllCommands(level).transform(program_root)
+
+
+
 
 @v_args(meta=True)
 class IsValid(Filter):

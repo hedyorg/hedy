@@ -58,7 +58,7 @@ class HedyTester(unittest.TestCase):
   def result_in(self, list):
     return (lambda result: HedyTester.run_code(result) in list)
 
-  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None):
+  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
 
@@ -74,10 +74,10 @@ class HedyTester(unittest.TestCase):
     # Or use expect to check for an expected Python program
     # In the second case, you can also pass an extra function to check
     for level in range(self.level, max_level + 1):
-      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function)
+      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands)
       print(f'Passed for level {level}')
 
-  def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, lang='en'):
+  def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en'):
     if level is None: # no level set (from the multi-tester)? grap current level from class
       level = self.level
     if exception is not None:
@@ -92,6 +92,7 @@ class HedyTester(unittest.TestCase):
     if expected is not None:
       result = hedy.transpile(code, level, lang)
       self.assertEqual(expected, result.code)
+      self.assertEqual(expected_commands, hedy.all_commands(code, level, lang))
       self.assertTrue(self.validate_Python_code(result))
       if output is not None:
         self.assertEqual(output, HedyTester.run_code(result))

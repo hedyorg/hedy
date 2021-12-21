@@ -209,7 +209,8 @@ class TestsLevel2(HedyTester):
       max_level=self.max_turtle_level,
       code=code,
       expected=expected,
-      extra_check_function=self.is_turtle()
+      extra_check_function=self.is_turtle(),
+      expected_commands=['is', 'turn']
     )
 
   @parameterized.expand(['left', 'right'])
