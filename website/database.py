@@ -320,6 +320,8 @@ class Database:
 
     def add_achievement_to_username(self, username, achievement):
         user_achievements = ACHIEVEMENTS.get({'username': username})
+        if not user_achievements:
+            user_achievements = {'username': username}
         if 'achieved' not in user_achievements:
             user_achievements['achieved'] = []
         if achievement not in user_achievements['achieved']:
@@ -328,6 +330,8 @@ class Database:
 
     def add_achievements_to_username(self, username, achievements):
         user_achievements = ACHIEVEMENTS.get({'username': username})
+        if not user_achievements:
+            user_achievements = {'username': username}
         if 'achieved' not in user_achievements:
             user_achievements['achieved'] = []
         for achievement in achievements:
@@ -337,6 +341,8 @@ class Database:
 
     def add_commands_to_username(self, username, commands):
         user_achievements = ACHIEVEMENTS.get({'username': username})
+        if not user_achievements:
+            user_achievements = {'username': username}
         if 'commands' not in user_achievements:
             user_achievements['commands'] = []
         for command in commands:
