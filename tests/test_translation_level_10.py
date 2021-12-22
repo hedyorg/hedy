@@ -25,7 +25,7 @@ class TestsTranslationLevel10(HedyTester):
         voor dier in dieren
             print 'hallo' dier""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_for_dutch_english(self):
         code = textwrap.dedent("""\
@@ -41,7 +41,7 @@ class TestsTranslationLevel10(HedyTester):
             for animal in dieren
                 print 'hallo' dier""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_repeat_translate_back(self):
         code = textwrap.dedent("""\

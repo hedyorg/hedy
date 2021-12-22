@@ -1309,11 +1309,10 @@ def translate_fromto(source, target):
 def update_yaml():
     filename = path.join('coursedata', request.form['file'])
     # The file MUST point to something inside our 'coursedata' directory
-    # (no exploiting bullshit here)
     filepath = path.abspath(filename)
     expected_path = path.abspath('coursedata')
     if not filepath.startswith(expected_path):
-        raise RuntimeError('Are you trying to trick me?')
+        raise RuntimeError('Invalid path given')
 
     data = load_yaml_rt(filepath)
     for key, value in request.form.items():
