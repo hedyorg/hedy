@@ -230,7 +230,12 @@ class TestsLevel3(HedyTester):
     print(f'Turtle race')
     t.right(90)""")
 
-    self.single_level_tester(code=code, expected=expected,extra_check_function=self.is_turtle())
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      expected_commands=['print', 'turn']
+    )
   def test_turn_number_var(self):
     code = textwrap.dedent("""\
     print Turtle race
@@ -514,7 +519,7 @@ class TestsLevel3(HedyTester):
     print keuzes at random
     ask is de papier goed?""")
     self.multi_level_tester(
+      max_level=3,
       code=code,
-      max_level=2,
       exception=hedy.exceptions.WrongLevelException
     )

@@ -92,17 +92,12 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
                       10: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
                       11: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
                       12: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      13: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      14: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      15: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while'],
-                      16: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while'],
-                      17: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif'],
-                      18: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
-                      19: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
-                      20: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
-                      21: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
-                      22: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
-                      23: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input']
+                      13: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
+                      14: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
+                      15: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
+                      16: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
+                      17: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif'],
+                      18: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif', 'input']
                       }
 
 # TODO: these need to be taken from the translated grammar keywords based on the language
@@ -149,7 +144,7 @@ commands_and_types_per_level = {
     Command.smaller_equal: {14: [HedyType.integer, HedyType.float]},
     Command.bigger: {14: [HedyType.integer, HedyType.float]},
     Command.bigger_equal: {14: [HedyType.integer, HedyType.float]},
-    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string]}
+    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.list]}
 }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -201,32 +196,32 @@ def get_suggestions_for_language(lang, level):
     return en_lang_commands
 
 
-def hash_needed(name):
-    # this function is now applied on something str sometimes Assignment
-    # no pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
-
-    if not isinstance(name, str):
-        name = name.name
+def hash_needed(var):
+    # this function now sometimes gets a str and sometimes - a LookupEntry
+    # not pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
 
     # some elements are not names but processed names, i.e. random.choice(dieren)
     # they should not be hashed
     # these are either of type assignment and operation or already processed and then contain ( or [
-    if (type(name) is LookupEntry and name.skip_hashing) or (isinstance(name, str) and '[' in name or '(' in name):
+    if (type(var) is LookupEntry and var.skip_hashing) or (isinstance(var, str) and ('[' in var or '(' in var)):
         return False
 
-    return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
+    var_name = var.name if type(var) is LookupEntry else var
 
-def hash_var(name):
-    name = name.name if type(name) is LookupEntry else name
-    if hash_needed(name):
+    return var_name in reserved_words or character_skulpt_cannot_parse.search(var_name) is not None
+
+
+def hash_var(var):
+    var_name = var.name if type(var) is LookupEntry else var
+    if hash_needed(var):
         # hash "illegal" var names
-        # being reservered keywords
+        # being reserved keywords
         # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
         # prepend with v for when hash starts with a number
-        hash_object = hashlib.md5(name.encode())
+        hash_object = hashlib.md5(var_name.encode())
         return "v" + hash_object.hexdigest()
     else:
-        return name
+        return var_name
 
 def closest_command(invalid_command, known_commands, threshold=2):
     # closest_command() searches for a similar command (distance smaller than threshold)
@@ -327,7 +322,7 @@ class ExtractAST(Transformer):
             return Tree('list_access', [args[0], args[1]])
 
     #level 5
-    def unsupported_number(self, args):
+    def error_unsupported_number(self, args):
         return Tree('unsupported_number', [''.join([str(c) for c in args])])
 
     #level 11
@@ -556,7 +551,7 @@ class TypeValidator(Transformer):
         return self.to_comparison_tree(Command.bigger_equal, tree)
 
     def not_equal(self, tree):
-        self.validate_args_type_allowed(tree.children, Command.not_equal)
+        self.validate_binary_command_args_type(Command.not_equal, tree, [int_to_float])
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def to_comparison_tree(self, command, tree):
@@ -728,6 +723,72 @@ class UsesTurtle(Transformer):
         return False
 
 
+class AllCommands(Transformer):
+    def __init__(self, level):
+        self.level = level
+
+    def translate_keyword(self, keyword):
+        # some keywords have names that are not a valid name for a command
+        # that's why we call them differently in the grammar
+        # we have to translate them to the regular names here for further communciation
+
+        if keyword == 'assign' or keyword == 'assign_list':
+            return 'is'
+        if keyword == 'ifelse':
+            return 'else'
+        if keyword == 'ifs':
+            return 'if'
+        if keyword == 'for_loop':
+            return 'for'
+        if keyword == 'repeat_list':
+            return 'for'
+        if keyword == 'orcondition':
+            return 'or'
+        if keyword == 'andcondition':
+            return 'and'
+        if keyword == 'while_loop':
+            return 'while'
+        return keyword
+
+    def __default__(self, args, children, meta):
+        # if we are matching a rule that is a command
+        production_rule_name = self.translate_keyword(args)
+        leaves = flatten_list_of_lists_to_list(children)
+        operators = ['addition', 'subtraction', 'multiplication', 'division'] # for the achievements we want to be able to also detct which operators were used by a kid
+
+        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators:
+            return [production_rule_name] + leaves
+        else:
+            return leaves # 'pop up' the children
+
+
+    def command(self, args):
+        return args
+
+    def program(self, args):
+        return flatten_list_of_lists_to_list(args)
+
+    # somehow tokens are not picked up by the default rule so they need their own rule
+    def INT(self, args):
+        return []
+
+    def NAME(self, args):
+        return []
+
+    def NUMBER(self, args):
+        return []
+
+    def text(self, args):
+        return []
+
+def all_commands(input_string, level, lang='en'):
+    input_string = process_input_string(input_string, level)
+    program_root = parse_input(input_string, level, lang)
+
+    return AllCommands(level).transform(program_root)
+
+
+
 
 @v_args(meta=True)
 class IsValid(Filter):
@@ -739,15 +800,15 @@ class IsValid(Filter):
             return False, InvalidInfo("empty program")
         return super().program(args)
 
-    def invalid_space(self, args, meta):
+    def error_invalid_space(self, args, meta):
         # return space to indicate that line starts in a space
         return False, InvalidInfo(" ", line=meta.line, column=meta.column)
 
-    def print_nq(self, args, meta):
+    def error_print_nq(self, args, meta):
         # return error source to indicate what went wrong
         return False, InvalidInfo("print without quotes", line=meta.line, column=meta.column)
 
-    def invalid(self, args, meta):
+    def error_invalid(self, args, meta):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         # TODO: add more information to the InvalidInfo
 
@@ -755,7 +816,7 @@ class IsValid(Filter):
         error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
         return False, error
 
-    def unsupported_number(self, args, meta):
+    def error_unsupported_number(self, args, meta):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error
 
@@ -791,7 +852,7 @@ class IsComplete(Filter):
         return args != [], ('input', meta.line)
     def length(self, args, meta):
         return args != [], ('len', meta.line)
-    def print_nq(self, args, meta):
+    def error_print_nq(self, args, meta):
         return args != [], ('print level 2', meta.line)
     def echo(self, args, meta):
         #echo may miss an argument
@@ -919,17 +980,19 @@ def process_variable_for_fstring_padded(name, lookup):
         return f"str({hash_var(name)}).zfill(100)"
     elif is_float(name):
         return f"str({name}).zfill(100)"
+    elif is_quoted(name):
+        return f"{name}.zfill(100)"
     else:
         return f"'{name}'.zfill(100)"
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
 
-    def ask_dep_2(self, args):
+    def error_ask_dep_2(self, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var")
-    def echo_dep_2(self, args):
+    def error_echo_dep_2(self, args):
         # echo is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
@@ -1002,7 +1065,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.right(90)"
 
-        arg = args[0]
+        arg = hash_var(args[0])
         if is_variable(arg, self.lookup) or arg.isnumeric():
             return f"t.right({arg})"
 
@@ -1081,25 +1144,8 @@ class ConvertToPython_4(ConvertToPython_3):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
-    def check_print_arguments(self, args):
-        # this function checks whether arguments of a print are valid
-        # we can print if all arguments are either quoted OR they are all variables
-
-        unquoted_args = [a for a in args if not is_quoted(a)]
-        unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
-
-        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            # all good? return for further processing
-            return args
-        else:
-            # return first name with issue
-            # note this is where issue #832 can be addressed by checking whether
-            # first_unquoted_var ius similar to something in the lookup list
-            first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var)
-
     def print_ask_args(self, args):
-        args = self.check_print_arguments(args)
+        args = self.check_var_usage(args)
         result = ''
         for argument in args:
             argument = argument.replace("'", '')  # no quotes needed in fstring
@@ -1115,7 +1161,7 @@ class ConvertToPython_4(ConvertToPython_3):
         argument_string = self.print_ask_args(args[1:])
         return f"{var} = input(f'{argument_string}')"
 
-    def print_nq(self, args):
+    def error_print_nq(self, args):
         return ConvertToPython_2.print(self, args)
 
 def indent(s):
@@ -1453,8 +1499,6 @@ class ConvertToPython_17(ConvertToPython_16):
 
 @hedy_transpiler(level=18)
 class ConvertToPython_18(ConvertToPython_17):
-    # FH, nov 2021
-    # todo: this is an exact duplicate of ask form level 12, if we rename the rules to have the same name, this code could be deleted
 
     def input(self, args):
         return self.ask(args)

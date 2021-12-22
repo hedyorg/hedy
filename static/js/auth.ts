@@ -130,6 +130,7 @@ export const auth = {
 
         afterLogin();
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         const error = response.responseText || '';
         if (error.match ('email'))         auth.error (auth.texts['exists_email']);
         else if (error.match ('username')) auth.error (auth.texts['exists_username']);
@@ -149,6 +150,7 @@ export const auth = {
 
         afterLogin();
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) {
            auth.error (auth.texts['invalid_username_password'] + ' ' + auth.texts['no_account'] + ' &nbsp;<button class="green-btn" onclick="auth.redirect (\'signup\')">' + auth.texts['create_account'] + '</button>');
            $ ('#create-account').hide ();
@@ -170,9 +172,9 @@ export const auth = {
       const payload: User = {
         email: values['email'],
         birth_year: values.birth_year ? parseInt(values['birth_year']) : undefined,
+        country: values['country'] ? values.country : undefined,
+        gender: values['gender'] ? values.gender : undefined,
         language: values.language,
-        country: values['country'],
-        gender: values['gender'],
         prog_experience: $ ('input[name=has_experience]:checked').val() as 'yes' | 'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
@@ -186,6 +188,7 @@ export const auth = {
         auth.success (auth.texts['profile_updated']);
         setTimeout (function () {location.reload ()}, 500);
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         auth.error (auth.texts['ajax_error'] + ' ' + response.responseText);
       });
     }
@@ -204,6 +207,7 @@ export const auth = {
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) auth.error (auth.texts['invalid_password'], null, '#error-password');
         else                         auth.error (auth.texts['ajax_error'], null, '#error-password');
       });
@@ -219,6 +223,7 @@ export const auth = {
         auth.success (auth.texts['sent_password_recovery']);
         $ ('#username').val ('');
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) auth.error (auth.texts['invalid_username']);
         else                         auth.error (auth.texts['ajax_error']);
       });
@@ -239,6 +244,7 @@ export const auth = {
         delete auth.reset;
         auth.redirect ('login');
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) auth.error (auth.texts['invalid_reset_link']);
         else                         auth.error (auth.texts['ajax_error']);
       });
@@ -286,8 +292,8 @@ $ ('.auth input').get ().map (function (el) {
 
 // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
 $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-  if (['/signup', '/login'].indexOf(window.location.pathname) !== -1) auth.redirect('my-profile');
-  auth.profile = response;
+   if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
+   auth.profile = response;
 });
 
 if (window.location.pathname === '/reset') {

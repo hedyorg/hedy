@@ -5,16 +5,6 @@ from test_level_01 import HedyTester
 class TestsLevel11(HedyTester):
   level = 11
 
-  def test_if_with_indent(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    if naam is Hedy
-        print 'koekoek'""")
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    if str(naam) == str('Hedy'):
-      print(f'koekoek')""")
-    self.single_level_tester(code=code, expected=expected)
 
   def test_if_else(self):
     code = textwrap.dedent("""\
@@ -87,9 +77,10 @@ class TestsLevel11(HedyTester):
       time.sleep(0.1)
     print(f'wie niet weg is is gezien')""")
 
-
-
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['for', 'print', 'print'])
 
   def test_for_loop_with_assignment(self):
     code = textwrap.dedent("""\
@@ -101,9 +92,10 @@ class TestsLevel11(HedyTester):
         a = int(i) + int(1)
         time.sleep(0.1)""")
 
-
-
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['for', 'is', 'addition'])
 
   def test_reverse_range(self):
     code = textwrap.dedent("""\
@@ -117,9 +109,10 @@ class TestsLevel11(HedyTester):
       time.sleep(0.1)
     print(f'wie niet weg is is gezien')""")
 
-
-
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['for', 'print', 'print'])
 
 
   def test_if_under_else_in_for(self):
