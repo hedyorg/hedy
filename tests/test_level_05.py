@@ -56,7 +56,11 @@ class TestsLevel5(HedyTester):
     else:
       print(f'nee')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['is', 'else', 'print', 'print']
+    )
   def test_ifelse_should_go_before_assign(self):
     code = textwrap.dedent("""\
     kleur is geel
@@ -71,7 +75,7 @@ class TestsLevel5(HedyTester):
       print(f'{antwoord}')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       expected=expected
     )
@@ -150,7 +154,7 @@ class TestsLevel5(HedyTester):
       print(f'minder leuk')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       expected=expected
     )
@@ -172,7 +176,7 @@ class TestsLevel5(HedyTester):
       print(f'minder leuk')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       expected=expected
     )
@@ -195,7 +199,7 @@ class TestsLevel5(HedyTester):
       print(f'luckily no dishes because{dishwasher}is already washing up')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       expected=expected
     )
@@ -219,7 +223,7 @@ class TestsLevel5(HedyTester):
       print(f'minder leuk')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       expected=expected
     )
@@ -242,9 +246,10 @@ class TestsLevel5(HedyTester):
       print(f'too bad I have to do the dishes!')""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
-      expected=expected
+      expected=expected,
+      expected_commands=['is', 'random', 'is', 'if', 'print']
     )
   def test_print_if_assign(self):
     code = textwrap.dedent("""\
@@ -357,7 +362,7 @@ class TestsLevel5(HedyTester):
     if name is Hedy print `ωραία` else print `μπου!`""")
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=5,
       code=code,
       exception=hedy.exceptions.UnquotedTextException
     )
