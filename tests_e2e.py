@@ -903,7 +903,7 @@ class TestClasses(AuthHelper):
 
         # WHEN attempting to join a class without being logged in
         # THEN receive a forbidden status code from the server
-        self.post_data('class/join', {'id': Class['id']}, expect_http_code=403)
+        self.post_data('class/join', {'id': Class['id']}, no_cookie=True, expect_http_code=403)
 
         # GIVEN a student (user without teacher permissions)
         self.given_fresh_user_is_logged_in()
