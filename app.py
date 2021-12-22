@@ -625,6 +625,14 @@ def programs_page(request):
                            current_page='programs', from_user=from_user, adventures=adventures)
 
 
+def explore_page(request):
+    #Get all programs from the db
+    #Insert into template
+    #Render template
+
+    return render_template('explore.html', page_title=hedyweb.get_page_title('explore'), current_page='explore')
+
+
 def get_user_formatted_age(now, date):
     texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
     program_age = now - date
@@ -992,6 +1000,9 @@ def main_page(page):
 
     if page == 'programs':
         return programs_page(request)
+
+    if page == 'explore':
+        return explore_page(request)
 
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
