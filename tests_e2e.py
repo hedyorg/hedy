@@ -919,7 +919,7 @@ class TestClasses(AuthHelper):
 
         # WHEN joining a class
         # THEN we receive a 200 code
-        body = self.post_data('class/join/', {'id': Class['id']}, expect_http_code=200)
+        body = self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
 
         # WHEN getting own profile after joining a class
         profile = self.get_data('profile')
@@ -942,7 +942,7 @@ class TestClasses(AuthHelper):
         # GIVEN a student (user without teacher permissions) that has joined the class
         self.given_fresh_user_is_logged_in()
         student = self.user
-        self.post_data('class/join/', {'id': Class['id']}, expect_http_code=200)
+        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
 
         # GIVEN the aforementioned teacher
         self.switch_user(teacher)
@@ -973,7 +973,7 @@ class TestClasses(AuthHelper):
         # GIVEN a student (user without teacher permissions) that has joined the class and has a public program
         self.given_fresh_user_is_logged_in()
         student = self.user
-        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
+        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
         # GIVEN a student with two programs, one public and one private
         public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
         public_program_id = self.post_data('programs', public_program)['id']
