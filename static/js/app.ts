@@ -561,7 +561,10 @@ export function share_program (level: number, lang: string, id: string | true, P
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(_response) {
+    }).done(function(response) {
+      if (response.achievement) {
+        showAchievements(response.achievement, false, "");
+      }
       // If we're sharing the program, copy the link to the clipboard.
       if (Public) copy_to_clipboard (viewProgramLink(id), true);
       modal.alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 4000);

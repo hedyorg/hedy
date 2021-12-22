@@ -1292,6 +1292,9 @@ def share_unshare_program(user):
         return 'No such program!', 404
 
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
+    achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
+    if achievement:
+        return jsonify({'achievement': achievement, 'id': body['id']})
     return jsonify({'id': body['id']})
 
 
