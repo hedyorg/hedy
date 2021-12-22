@@ -1273,7 +1273,7 @@ def save_program(user):
     DATABASE.increase_user_save_count(user['username'])
     ACHIEVEMENTS.increase_count("saved")
 
-    if ACHIEVEMENTS.verify_save_achievements(user['username'], adventure='adventure_name' in body):
+    if ACHIEVEMENTS.verify_save_achievements(user['username'], 'adventure_name' in body and len(body['adventure_name']) > 2):
         return jsonify({'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
     return jsonify({'name': body['name'], 'id': program_id})
 

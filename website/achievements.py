@@ -72,6 +72,8 @@ class Achievements:
             self.submitted_programs = 0
 
     def add_single_achievement(self, username, achievement):
+        if not self.achieved:
+            self.get_db_data(username)
         if achievement not in self.achieved and achievement in self.TRANSLATIONS.get_translations(self.lang):
             return self.verify_pushed_achievement(username, achievement)
         else:
