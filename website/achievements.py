@@ -92,9 +92,9 @@ class Achievements:
             self.DATABASE.add_commands_to_username(username, self.commands)
 
         if len(self.new_achieved) > 0:
+            self.DATABASE.add_achievements_to_username(username, self.new_achieved)
             for achievement in self.new_achieved:
                 self.achieved.append(achievement)
-                self.DATABASE.add_achievement_to_username(username, achievement)
             return True
         return False
 
@@ -106,9 +106,9 @@ class Achievements:
             self.new_achieved.append("adventure_is_worthwhile")
 
         if len(self.new_achieved) > 0:
+            self.DATABASE.add_achievements_to_username(username, self.new_achieved)
             for achievement in self.new_achieved:
                 self.achieved.append(achievement)
-                self.DATABASE.add_achievement_to_username(username, achievement)
             return True
         return False
 
@@ -118,9 +118,9 @@ class Achievements:
         self.check_programs_submitted(self.submitted_programs)
 
         if len(self.new_achieved) > 0:
+            self.DATABASE.add_achievements_to_username(username, self.new_achieved)
             for achievement in self.new_achieved:
                 self.achieved.append(achievement)
-                self.DATABASE.add_achievement_to_username(username, achievement)
             return True
         return False
 
