@@ -25,7 +25,7 @@
           </a>
           {% if is_teacher %}
               <a class="no-underline" href="/for-teachers">
-                  <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-chalkboard-teacher mr-4"></span>{{auth.for_teachers}}</li>
+                  <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-chalkboard-teacher mr-4"></span> {{auth.for_teachers}}</li>
               </a>
           {% endif %}
           <a class="no-underline" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();">
