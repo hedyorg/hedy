@@ -2,6 +2,7 @@ from website import database
 from hedyweb import AchievementTranslations
 from website.auth import requires_login
 from flask import request, jsonify
+import hedy
 
 
 class Achievements:
@@ -70,13 +71,13 @@ class Achievements:
         else:
             return None
 
-    def verify_run_achievements(self, username, code=None, response=None):
+    def verify_run_achievements(self, username, code=None, level=None, response=None):
         if not self.achieved:
             self.get_db_data(username)
         self.check_programs_run(self.run_programs)
-        if code:
-            self.check_code_achievements(code)
-        if response:
+        if code and level:
+            self.check_code_achievements(code, level)
+        if code and response:
             self.check_response_achievements(code, response)
 
         if len(self.new_achieved) > 0:
@@ -158,17 +159,18 @@ class Achievements:
         if 'deadline_daredevil_III' not in self.achieved and amount >= 10:
             self.new_achieved.append("deadline_daredevil_III")
 
-    def check_code_achievements(self, code):
-        if 'did_you_say_please' not in self.achieved and "ask" in code:
+    def check_code_achievements(self, code, level):
+        print(hedy.all_commands(code, level, self.lang))
+        if 'did_you_say_please' not in self.achieved and "ask" in hedy.all_commands(code, level, self.lang):
             self.new_achieved.append("did_you_say_please")
-        if 'talk-talk-talk' not in self.achieved and code.count("ask") >= 5:
+        if 'talk-talk-talk' not in self.achieved and hedy.all_commands(code, level, self.lang).count("ask") >= 5:
             self.new_achieved.append("talk-talk-talk")
         if 'hedy_honor' not in self.achieved and "Hedy" in code:
             self.new_achieved.append("hedy_honor")
         if 'hedy-ious' not in self.achieved:
             lines = code.splitlines()
             for line in lines:
-                if "print" in line:
+                if "print" in hedy.all_commands(line, level, self.lang):
                     if lines.count(line) >= 10:
                         self.new_achieved.append("hedy-ious")
                         return
