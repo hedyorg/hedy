@@ -73,7 +73,6 @@ class Achievements:
     def verify_run_achievements(self, username, code=None, response=None):
         if not self.achieved:
             self.get_db_data(username)
-        self.new_achieved = []
         self.check_programs_run(self.run_programs)
         if code:
             self.check_code_achievements(code)
@@ -82,6 +81,7 @@ class Achievements:
 
         if len(self.new_achieved) > 0:
             for achievement in self.new_achieved:
+                self.achieved.append(achievement)
                 self.DATABASE.add_achievement_to_username(username, achievement)
             return True
         return False
@@ -89,13 +89,13 @@ class Achievements:
     def verify_save_achievements(self, username, adventure=None):
         if not self.achieved:
             self.get_db_data(username)
-        self.new_achieved = []
         self.check_programs_saved(self.saved_programs)
         if adventure and 'adventure_is_worthwhile' not in self.achieved:
             self.new_achieved.append("adventure_is_worthwhile")
 
         if len(self.new_achieved) > 0:
             for achievement in self.new_achieved:
+                self.achieved.append(achievement)
                 self.DATABASE.add_achievement_to_username(username, achievement)
             return True
         return False
@@ -103,11 +103,11 @@ class Achievements:
     def verify_submit_achievements(self, username):
         if not self.achieved:
             self.get_db_data(username)
-        self.new_achieved = []
         self.check_programs_submitted(self.submitted_programs)
 
         if len(self.new_achieved) > 0:
             for achievement in self.new_achieved:
+                self.achieved.append(achievement)
                 self.DATABASE.add_achievement_to_username(username, achievement)
             return True
         return False
@@ -115,6 +115,7 @@ class Achievements:
     def verify_pushed_achievement(self, username, achievement):
         self.new_achieved = [achievement]
         self.DATABASE.add_achievement_to_username(username, achievement)
+        self.achieved.append(achievement)
         return self.get_earned_achievements()
 
     def get_earned_achievements(self):
@@ -122,6 +123,7 @@ class Achievements:
         translated_achievements = []
         for achievement in self.new_achieved:
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], translations[achievement]['image']])
+        self.new_achieved = [] #Once we get earned achievements -> empty the array with "waiting" ones
         return translated_achievements
 
     def check_programs_run(self, amount):
