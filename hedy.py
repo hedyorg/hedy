@@ -322,7 +322,7 @@ class ExtractAST(Transformer):
             return Tree('list_access', [args[0], args[1]])
 
     #level 5
-    def unsupported_number(self, args):
+    def error_unsupported_number(self, args):
         return Tree('unsupported_number', [''.join([str(c) for c in args])])
 
     #level 11
@@ -800,15 +800,15 @@ class IsValid(Filter):
             return False, InvalidInfo("empty program")
         return super().program(args)
 
-    def invalid_space(self, args, meta):
+    def error_invalid_space(self, args, meta):
         # return space to indicate that line starts in a space
         return False, InvalidInfo(" ", line=meta.line, column=meta.column)
 
-    def print_nq(self, args, meta):
+    def error_print_nq(self, args, meta):
         # return error source to indicate what went wrong
         return False, InvalidInfo("print without quotes", line=meta.line, column=meta.column)
 
-    def invalid(self, args, meta):
+    def error_invalid(self, args, meta):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         # TODO: add more information to the InvalidInfo
 
@@ -816,7 +816,7 @@ class IsValid(Filter):
         error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
         return False, error
 
-    def unsupported_number(self, args, meta):
+    def error_unsupported_number(self, args, meta):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error
 
@@ -852,7 +852,7 @@ class IsComplete(Filter):
         return args != [], ('input', meta.line)
     def length(self, args, meta):
         return args != [], ('len', meta.line)
-    def print_nq(self, args, meta):
+    def error_print_nq(self, args, meta):
         return args != [], ('print level 2', meta.line)
     def echo(self, args, meta):
         #echo may miss an argument
@@ -988,11 +988,11 @@ def process_variable_for_fstring_padded(name, lookup):
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
 
-    def ask_dep_2(self, args):
+    def error_ask_dep_2(self, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var")
-    def echo_dep_2(self, args):
+    def error_echo_dep_2(self, args):
         # echo is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
@@ -1161,7 +1161,7 @@ class ConvertToPython_4(ConvertToPython_3):
         argument_string = self.print_ask_args(args[1:])
         return f"{var} = input(f'{argument_string}')"
 
-    def print_nq(self, args):
+    def error_print_nq(self, args):
         return ConvertToPython_2.print(self, args)
 
 def indent(s):
