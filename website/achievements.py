@@ -12,6 +12,8 @@ class Achievements:
         self.TRANSLATIONS = AchievementTranslations()
         self.achieved = None
         self.new_achieved = []
+        self.commands = None
+        self.new_commands = []
         self.lang = "en"
         self.previous_code = None
         self.run_programs = 0
@@ -52,6 +54,10 @@ class Achievements:
             self.achieved = achievements_data['achieved']
         else:
             self.achieved = []
+        if 'commands' in achievements_data:
+            self.commands = achievements_data['commands']
+        else:
+            self.commands = []
         if 'run_programs' in achievements_data:
             self.run_programs = achievements_data['run_programs']
         else:
@@ -79,6 +85,11 @@ class Achievements:
             self.check_code_achievements(code, level)
         if code and response:
             self.check_response_achievements(code, response)
+
+        if len(self.new_commands) > 0:
+            for command in self.new_commands:
+                self.commands.append(command)
+            self.DATABASE.add_commands_to_username(username, self.commands)
 
         if len(self.new_achieved) > 0:
             for achievement in self.new_achieved:
@@ -125,6 +136,7 @@ class Achievements:
         for achievement in self.new_achieved:
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], translations[achievement]['image']])
         self.new_achieved = [] #Once we get earned achievements -> empty the array with "waiting" ones
+        self.new_commands = []
         return translated_achievements
 
     def check_programs_run(self, amount):
@@ -160,7 +172,12 @@ class Achievements:
             self.new_achieved.append("deadline_daredevil_III")
 
     def check_code_achievements(self, code, level):
-        print(hedy.all_commands(code, level, self.lang))
+        if 'trying_is_key' not in self.achieved:
+            for command in set(hedy.all_commands(code, level, self.lang)):
+                if command not in self.commands:
+                    self.new_commands.append(command)
+        if set(self.commands) == set(hedy.commands_per_level(hedy.HEDY_MAX_LEVEL)):
+            self.new_achieved.append("trying_is_key")
         if 'did_you_say_please' not in self.achieved and "ask" in hedy.all_commands(code, level, self.lang):
             self.new_achieved.append("did_you_say_please")
         if 'talk-talk-talk' not in self.achieved and hedy.all_commands(code, level, self.lang).count("ask") >= 5:
