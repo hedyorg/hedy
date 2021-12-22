@@ -113,9 +113,6 @@ class ConvertToLang2(ConvertToLang1):
         i = 0
 
         for argument in args:
-            # escape quotes if kids accidentally use them at level 2
-            argument = hedy.process_characters_needing_escape(argument)
-
             # final argument and punctuation arguments do not have to be separated with a space, other do
             if i == len(args) - 1 or args[i + 1] in self.punctuation_symbols:
                 space = ''
@@ -211,7 +208,7 @@ class ConvertToLang6(ConvertToLang5):
     def addition(self, args):
         return args[0] + " + " + args[1]
 
-    def substraction(self, args):
+    def subtraction(self, args):
         return args[0] + " - " + args[1]
 
     def multiplication(self, args):
@@ -346,3 +343,20 @@ class ConvertToLang17(ConvertToLang16):
 
     def elifs(self, args):
         return self.keywords["elif"] + " " + args[0] + ":" + indent(args[1:])
+
+@hedy_translator(level=18)
+class ConvertToLang18(ConvertToLang17):
+
+    def input(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return var + " " + self.keywords["is"] + " " + self.keywords["input"] + "(" + ''.join(remaining_args) + ")"
+
+    def for_loop(self, args):
+        return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + \
+               f'{self.keywords["range"]}({args[1]},{args[2]})' + ":" + indent(args[3:])
+
+
+    def print(self, args):
+        argument_string = ''.join(args)
+        return f'{self.keywords["print"]}({argument_string})'

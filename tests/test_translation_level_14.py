@@ -11,7 +11,7 @@ import textwrap
 # * Error handling
 
 
-class TestsTranslationLevel11(HedyTester):
+class TestsTranslationLevel14(HedyTester):
     level = 14
 
     def test_bigger(self):

@@ -11,7 +11,7 @@ import textwrap
 # * Error handling
 
 
-class TestsTranslationLevel11(HedyTester):
+class TestsTranslationLevel12(HedyTester):
     level = 12
 
     def test_decimal_english_dutch(self):

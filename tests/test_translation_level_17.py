@@ -11,7 +11,7 @@ import textwrap
 # * Error handling
 
 
-class TestsTranslationLevel11(HedyTester):
+class TestsTranslationLevel17(HedyTester):
     level = 17
 
     def test_indent_for_loop_english_dutch(self):

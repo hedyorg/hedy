@@ -11,7 +11,7 @@ import textwrap
 # * Error handling
 
 
-class TestsTranslationLevel11(HedyTester):
+class TestsTranslationLevel13(HedyTester):
     level = 13
 
     def test_and_condition_english_dutch(self):

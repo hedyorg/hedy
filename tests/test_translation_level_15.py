@@ -11,7 +11,7 @@ import textwrap
 # * Error handling
 
 
-class TestsTranslationLevel11(HedyTester):
+class TestsTranslationLevel15(HedyTester):
     level = 15
 
     def test_while_loop_english_dutch(self):
