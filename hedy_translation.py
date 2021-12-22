@@ -158,7 +158,7 @@ class ConvertToLang3(ConvertToLang2):
         return ''.join([str(c) for c in args])
 
     def assign_list(self, args):
-        return args[0] + " = " + ', '.join([str(c) for c in args[1:]])
+        return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
 
     def list_access(self, args):
         return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
