@@ -202,6 +202,8 @@ class Achievements:
         if 'Error' in response and response['Error']:
             self.consecutive_errors += 1
             if self.previous_code == code:
+                if self.identical_consecutive_errors == 0:
+                    self.identical_consecutive_errors += 2 #We have to count the first one too!
                 self.identical_consecutive_errors += 1
             if self.identical_consecutive_errors >= 3:
                 if 'programming_panic' not in self.achieved:
