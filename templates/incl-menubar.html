@@ -10,6 +10,7 @@
           {{ item.caption }}
         </a>
     {% endfor %}
+      <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'explore' %}border-white{% else %}border-transparent{% endif %}" href="/explore">{{auth.explore}}</a>
     {% if username %}
       <a class="menubar-btn ml-auto hover:bg-blue-600 {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{auth.program_header}}</a>
       <div class="dropdown relative z-40" style="display: flex;">
