@@ -176,7 +176,7 @@ class Achievements:
             for command in set(hedy.all_commands(code, level, self.lang)):
                 if command not in self.commands:
                     self.new_commands.append(command)
-        if set(self.commands) == set(hedy.commands_per_level(hedy.HEDY_MAX_LEVEL)):
+        if set(self.commands) == set(hedy.commands_per_level.get(hedy.HEDY_MAX_LEVEL)):
             self.new_achieved.append("trying_is_key")
         if 'did_you_say_please' not in self.achieved and "ask" in hedy.all_commands(code, level, self.lang):
             self.new_achieved.append("did_you_say_please")
