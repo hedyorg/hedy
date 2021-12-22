@@ -747,8 +747,8 @@ class TestProgram(AuthHelper):
         program_id = '123456'
 
         # WHEN deleting a program that does not exist
-        # THEN receive a not ound response code from the server
-        self.get_data('programs/delete/' + program_id, expect_http_code=404)
+        # THEN receive a not found response code from the server
+        self.get_data('programs/delete/', {'id': program_id}, expect_http_code=404)
 
     def test_valid_delete_program(self):
         # GIVEN a logged in user with at least one program
@@ -758,7 +758,7 @@ class TestProgram(AuthHelper):
 
         # WHEN deleting a program
         # THEN receive an OK response code from the server
-        headers = self.get_data('programs/delete/' + program_id, expect_http_code=302, return_headers=True)
+        headers = self.post_data('programs/delete/', {'id': program_id}, return_headers=True)
         # THEN verify that the header has a `location` header pointing to `/programs`
         self.assertEqual(headers['location'], HOST + 'programs')
 
@@ -909,7 +909,7 @@ class TestClasses(AuthHelper):
 
         # WHEN attempting to join a class without being logged in
         # THEN receive a forbidden status code from the server
-        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], no_cookie=True, expect_http_code=403)
+        self.post_data('class/join', {'id': Class['id']}, expect_http_code=403)
 
         # WHEN retrieving the short link of a class
         # THEN receive a redirect to `class/ID/join/LINK`
@@ -918,16 +918,8 @@ class TestClasses(AuthHelper):
             raise Exception('Invalid or missing redirect link')
 
         # WHEN joining a class
-        # THEN receive a redirect to `class/ID/join/LINK`
-        body = self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
-        if not re.search(HOST + 'my-profile', body):
-            raise Exception('Invalid redirect')
-
-        # WHEN joining a class again (idempotent call)
-        # THEN receive a redirect to `class/ID/join/LINK`
-        body = self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
-        if not re.search(HOST + 'my-profile', body):
-            raise Exception('Invalid redirect')
+        # THEN we receive a 200 code
+        body = self.post_data('class/join/', {'id': Class['id']}, expect_http_code=200)
 
         # WHEN getting own profile after joining a class
         profile = self.get_data('profile')
@@ -950,7 +942,7 @@ class TestClasses(AuthHelper):
         # GIVEN a student (user without teacher permissions) that has joined the class
         self.given_fresh_user_is_logged_in()
         student = self.user
-        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
+        self.post_data('class/join/', {'id': Class['id']}, expect_http_code=200)
 
         # GIVEN the aforementioned teacher
         self.switch_user(teacher)
