@@ -135,7 +135,8 @@ class TestsLevel17(HedyTester):
     self.multi_level_tester(
       max_level=17,
       code=code,
-      expected=expected
+      expected=expected,
+      expected_commands=['is', 'if', 'print', 'print']
     )
 
   def test_allow_space_before_colon(self):
