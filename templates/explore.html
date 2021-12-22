@@ -5,9 +5,9 @@
     <h2 class="px-8 mb-4">{{auth.explore_programs}}</h2>
     <div class="flex flex-wrap justify-center">
     {% for program in programs %}
-        <div class="border-solid border-2 border-orange-400 rounded p-2 mr-4 mb-4" style="width: 18em;">
-            <h3 class="mt-0 mb-1">{{ program.name }}</h3>
-            <div class="flex flex-row items-center justify-between">
+        <div class="border-solid border-2 border-orange-400 rounded p-2 mr-4 mb-4 h-32" style="width: 18em;">
+            <h2 class="mt-0 text-blue-600 text-xl px-2 border-b border-gray-400">{{ program.name }}</h2>
+            <div class="flex flex-row items-center justify-between mt-4">
                 <div id="program_info">
                     <div>
                         <label class="font-bold w-24 inline-block">{{ texts.level }}</label>
