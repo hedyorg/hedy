@@ -178,8 +178,6 @@ class Database:
         programs = PROGRAMS.scan()
         public_programs = []
         for program in programs:
-            print("Hier komen we!")
-            print(program)
             if 'public' in program:
                 public_programs.append(program)
         return public_programs

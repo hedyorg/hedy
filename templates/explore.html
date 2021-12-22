@@ -2,8 +2,27 @@
 
 {% block body %}
 <div class="px-8 py-12">
+    <h2 class="px-8 mb-4">{{auth.explore_programs}}</h2>
+    <div class="flex flex-wrap w-full">
     {% for program in programs %}
-
+        <div class="program w-1/2 border-solid border-2 border-orange-400 rounded p-4 mr-4">
+            <div>
+                <label class="w-24 inline-block font-bold">{{ texts.title }}</label>
+                <label>{{ program.name }}</label>
+            </div>
+            <div>
+                <label class="w-24 inline-block font-bold">{{ texts.level }}</label>
+                <label>{{ program.level }}</label>
+            </div>
+            <div class="mb-4">
+                <label class="w-24 inline-block font-bold">{{ texts.creator }}</label>
+                <label>{{ program.username }}</label>
+            </div>
+            <div class="text-center">
+                <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="green-btn">{{ texts.open }}</button></a>
+            </div>
+        </div>
     {% endfor %}
+    </div>
 </div>
 {% endblock %}
