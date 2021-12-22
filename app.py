@@ -455,6 +455,7 @@ def parse():
                 transpile_result = hedy.transpile(code, level, lang)
                 if username:
                     DATABASE.increase_user_run_count(username)
+                    ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.InvalidSpaceException as ex:
                 response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
@@ -1270,6 +1271,7 @@ def save_program(user):
     if not overwrite:
         DATABASE.increase_user_program_count(user['username'])
     DATABASE.increase_user_save_count(user['username'])
+    ACHIEVEMENTS.increase_count("saved")
 
     if ACHIEVEMENTS.verify_save_achievements(user['username'], adventure='adventure_name' in body):
         return jsonify({'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
@@ -1313,6 +1315,7 @@ def submit_program(user):
 
     DATABASE.submit_program_by_id(body['id'])
     DATABASE.increase_user_submit_count(user['username'])
+    ACHIEVEMENTS.increase_count("submitted")
 
     if ACHIEVEMENTS.verify_submit_achievements(user['username']):
         return jsonify({"achievements": ACHIEVEMENTS.get_earned_achievements()})

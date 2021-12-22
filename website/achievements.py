@@ -31,9 +31,19 @@ class Achievements:
         def push_new_achievement(user):
             body = request.json
             if "achievement" in body:
-                if body['achievement'] in self.TRANSLATIONS.get_translations(self.lang):
+                if not self.achieved:
+                    self.get_db_data(user['username'])
+                if body['achievement'] not in self.achieved and body['achievement'] in self.TRANSLATIONS.get_translations(self.lang):
                     return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
             return jsonify({})
+
+    def increase_count(self, category):
+        if category == "run":
+            self.run_programs += 1
+        elif category == "saved":
+            self.saved_programs += 1
+        elif category == "submitted":
+            self.submitted_programs += 1
 
     def get_db_data(self, username):
         achievements_data = self.DATABASE.progress_by_username(username)
@@ -55,7 +65,7 @@ class Achievements:
             self.submitted_programs = 0
 
     def add_single_achievement(self, username, achievement):
-        if achievement in self.TRANSLATIONS.get_translations(self.lang):
+        if achievement not in self.achieved and achievement in self.TRANSLATIONS.get_translations(self.lang):
             return self.verify_pushed_achievement(username, achievement)
         else:
             return None
@@ -63,6 +73,7 @@ class Achievements:
     def verify_run_achievements(self, username, code=None, response=None):
         if not self.achieved:
             self.get_db_data(username)
+        self.new_achieved = []
         self.check_programs_run(self.run_programs)
         if code:
             self.check_code_achievements(code)
@@ -76,11 +87,12 @@ class Achievements:
         return False
 
     def verify_save_achievements(self, username, adventure=None):
-        achievements_data = self.DATABASE.progress_by_username(username)
-        self.achieved = []
-        self.check_programs_saved(achievements_data['saved_programs'])
-        if adventure:
-            self.achieved.append("adventure_is_worthwhile")
+        if not self.achieved:
+            self.get_db_data(username)
+        self.new_achieved = []
+        self.check_programs_saved(self.saved_programs)
+        if adventure and 'adventure_is_worthwhile' not in self.achieved:
+            self.new_achieved.append("adventure_is_worthwhile")
 
         if len(self.new_achieved) > 0:
             for achievement in self.new_achieved:
@@ -89,9 +101,10 @@ class Achievements:
         return False
 
     def verify_submit_achievements(self, username):
-        achievements_data = self.DATABASE.progress_by_username(username)
-        self.achieved = []
-        self.check_programs_submitted(achievements_data['submitted_programs'])
+        if not self.achieved:
+            self.get_db_data(username)
+        self.new_achieved = []
+        self.check_programs_submitted(self.submitted_programs)
 
         if len(self.new_achieved) > 0:
             for achievement in self.new_achieved:
@@ -100,12 +113,9 @@ class Achievements:
         return False
 
     def verify_pushed_achievement(self, username, achievement):
-        achievements_data = self.DATABASE.progress_by_username(username)
-        if ('achieved' not in achievements_data) or (achievement not in achievements_data['achieved']):
-            self.new_achieved = [achievement]
-            self.DATABASE.add_achievement_to_username(username, achievement)
-            return self.get_earned_achievements()
-        return None
+        self.new_achieved = [achievement]
+        self.DATABASE.add_achievement_to_username(username, achievement)
+        return self.get_earned_achievements()
 
     def get_earned_achievements(self):
         translations = self.TRANSLATIONS.get_translations(self.lang)
