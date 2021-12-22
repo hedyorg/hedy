@@ -73,7 +73,7 @@ class ConvertToLang1(Transformer):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
-    def invalid_space(self, args):
+    def error_invalid_space(self, args):
         return " " + ''.join([str(c) for c in args])
 
     def print(self, args):
@@ -97,7 +97,7 @@ class ConvertToLang1(Transformer):
     def random(self, args):
         return self.keywords["random"] + "".join([str(c) for c in args])
 
-    def invalid(self, args):
+    def error_invalid(self, args):
         return ' '.join([str(c) for c in args])
 
     def __default__(self, data, children, meta):
@@ -146,10 +146,10 @@ class ConvertToLang2(ConvertToLang1):
         return all_parameters[0] + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(
             all_parameters[1:])
 
-    def ask_dep_2(self, args):
+    def error_ask_dep_2(self, args):
         return self.keywords["ask"] + " " + ''.join([str(c) for c in args])
 
-    def echo_dep_2(self, args):
+    def error_echo_dep_2(self, args):
         return self.keywords["echo"] + " " + ''.join([str(c) for c in args])
 
 

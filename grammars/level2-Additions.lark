@@ -1,14 +1,14 @@
 //add the rules after += remove those after -= and the ones after > should be at the end
-command:+= assign | ask_dep_2 | echo_dep_2 | sleep -= echo > invalid
+command:+= assign | error_ask_dep_2 | error_echo_dep_2 | sleep -= echo > error_invalid
 print: _PRINT (_SPACE _print_argument)?
 _print_argument: (_SPACE | textwithoutspaces | punctuation)*
 ask: var _SPACE _IS _SPACE _ASK (_SPACE + (_SPACE | text_ask | punctuation)*)?
 
 //level 1 deprecated commands, for now manually added for better errors
-ask_dep_2: _ASK (_SPACE text_dep_2)?
-echo_dep_2: _ECHO (_SPACE text_dep_2)?
+error_ask_dep_2: _ASK (_SPACE error_text_dep_2)?
+error_echo_dep_2: _ECHO (_SPACE error_text_dep_2)?
 //text is also changed and these commands of course need the old text
-text_dep_2: /([^\n]+)/ -> text //anything can be parsed except for a newline
+error_text_dep_2: /([^\n]+)/ -> text //anything can be parsed except for a newline
 
 //sleep
 sleep: _SLEEP (_SPACE INT)?

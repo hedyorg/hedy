@@ -15,7 +15,8 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle()
+        extra_check_function=self.is_not_turtle(),
+        expected_commands=['print']
       )
 
     def test_print_var_brackets(self):
@@ -54,6 +55,19 @@ class TestsLevel18(HedyTester):
           expected=expected,
           extra_check_function=self.is_not_turtle()
         )
+
+    def test_if_with_equals_sign(self):
+      code = textwrap.dedent("""\
+      naam is 'Hedy'
+      if naam = Hedy:
+          print('koekoek')""")
+
+      expected = textwrap.dedent("""\
+      naam = 'Hedy'
+      if str(naam) == str('Hedy'):
+        print(f'koekoek')""")
+
+      self.single_level_tester(code=code, expected=expected)
 
     # issue also in level 17, leaving for now.
     # def test_bigger(self):
@@ -123,6 +137,7 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code=code,
         expected=expected,
+        expected_commands=['input', 'if', 'print', 'print', 'print', 'print'],
         extra_check_function=self.is_not_turtle()
       )
 

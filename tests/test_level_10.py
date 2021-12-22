@@ -18,7 +18,11 @@ class TestsLevel10(HedyTester):
       print(f'{dier}')
       time.sleep(0.1)""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['is', 'for', 'print'])
+
   def test_for_list_multiple_lines(self):
     code = textwrap.dedent("""\
     familie is baby, mommy, daddy, grandpa, grandma
