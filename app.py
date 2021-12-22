@@ -1188,7 +1188,7 @@ def list_programs(user):
     return {'programs': DATABASE.programs_for_user(user['username'])}
 
 
-@app.route('/programs/delete/', methods=['DELETE'])
+@app.route('/programs/delete/', methods=['POST'])
 @requires_login
 def delete_program(user):
     body = request.json

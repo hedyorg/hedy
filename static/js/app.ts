@@ -596,7 +596,7 @@ export function share_program (level: number, lang: string, id: string | true, P
 export function delete_program(id: string) {
   modal.confirm (auth.texts['delete_confirm'], function () {
     $.ajax({
-      type: 'DELETE',
+      type: 'POST',
       url: '/programs/delete',
       data: JSON.stringify({
         id: id
