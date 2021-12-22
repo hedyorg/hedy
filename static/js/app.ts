@@ -632,6 +632,8 @@ export function submit_program (id: string, shared: boolean) {
   }).done(function(response) {
     if (response.achievements) {
       showAchievements(response.achievements, true, "");
+    } else {
+      location.reload();
     }
   });
 }
