@@ -626,11 +626,10 @@ def programs_page(request):
 
 
 def explore_page(request):
-    #Get all programs from the db
-    #Insert into template
-    #Render template
+    programs = DATABASE.get_all_public_programs()
 
-    return render_template('explore.html', page_title=hedyweb.get_page_title('explore'), current_page='explore')
+    return render_template('explore.html', programs=programs,
+                           page_title=hedyweb.get_page_title('explore'), current_page='explore')
 
 
 def get_user_formatted_age(now, date):

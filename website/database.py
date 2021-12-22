@@ -174,6 +174,16 @@ class Database:
         """Return all users."""
         return USERS.scan()
 
+    def get_all_public_programs(self):
+        programs = PROGRAMS.scan()
+        public_programs = []
+        for program in programs:
+            print("Hier komen we!")
+            print(program)
+            if 'public' in program:
+                public_programs.append(program)
+        return public_programs
+
     def all_programs_count(self):
         """Return the total number of all programs."""
         return PROGRAMS.item_count()
