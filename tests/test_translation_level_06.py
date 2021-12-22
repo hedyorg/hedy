@@ -18,7 +18,7 @@ class TestsTranslationLevel6(HedyTester):
         code = "vermenigvuldiging is 3 * 8"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = "vermenigvuldiging is 3 * 8"
+        expected = "vermenigvuldiging = 3 * 8"
 
         self.assertEqual(expected, result)
 
@@ -34,7 +34,7 @@ class TestsTranslationLevel6(HedyTester):
         code = "angle is 360 / angles"
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        expected = "angle is 360 / angles"
+        expected = "angle = 360 / angles"
 
         self.assertEqual(expected, result)
 
@@ -47,7 +47,7 @@ class TestsTranslationLevel6(HedyTester):
         self.assertEqual(expected, result)
 
     def test_translate_back(self):
-        code ="breuk is 13 / 4"
+        code ="breuk = 13 / 4"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)

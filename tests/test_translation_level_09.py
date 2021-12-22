@@ -71,7 +71,7 @@ class TestsTranslationLevel9(HedyTester):
 
     def test_indent_translate_back(self):
         code = textwrap.dedent("""\
-        naam is hedy
+        naam = hedy
         if naam is hedy
             repeat 4 times
                 print 'Hallo Hedy'

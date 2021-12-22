@@ -16,13 +16,13 @@ class TestsTranslationLevel14(HedyTester):
 
     def test_bigger(self):
         code = textwrap.dedent("""\
-        hedy is 5
+        hedy = 5
         if hedy > 6
             print 'hedy'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        hedy is 5
+        hedy = 5
         als hedy > 6
             print 'hedy'""")
 
@@ -30,13 +30,13 @@ class TestsTranslationLevel14(HedyTester):
 
     def test_smaller(self):
         code = textwrap.dedent("""\
-        hedy is 5
+        hedy = 5
         if hedy < 6
             print 'hedy'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        hedy is 5
+        hedy = 5
         als hedy < 6
             print 'hedy'""")
 
@@ -44,13 +44,13 @@ class TestsTranslationLevel14(HedyTester):
 
     def test_bigger_equal(self):
         code = textwrap.dedent("""\
-        hedy is 5
+        hedy = 5
         if hedy >= 6
             print 'hedy'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        hedy is 5
+        hedy = 5
         als hedy >= 6
             print 'hedy'""")
 
@@ -58,13 +58,13 @@ class TestsTranslationLevel14(HedyTester):
 
     def test_smaller_equal(self):
         code = textwrap.dedent("""\
-        hedy is 5
+        hedy = 5
         if hedy <= 6
             print 'hedy'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        hedy is 5
+        hedy = 5
         als hedy <= 6
             print 'hedy'""")
 
@@ -72,13 +72,13 @@ class TestsTranslationLevel14(HedyTester):
 
     def test_not_equal(self):
         code = textwrap.dedent("""\
-        hedy is 5
+        hedy = 5
         if hedy != 6
             print 'hedy'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        hedy is 5
+        hedy = 5
         als hedy != 6
             print 'hedy'""")
 

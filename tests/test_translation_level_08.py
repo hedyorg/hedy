@@ -75,7 +75,7 @@ class TestsTranslationLevel8(HedyTester):
 
     def test_indent_translate_back(self):
         code = textwrap.dedent("""\
-        naam is hedy
+        naam = hedy
         if naam is hedy
             print 'Hallo Hedy'
             print 'Hoe gaat het?'

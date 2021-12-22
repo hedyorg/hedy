@@ -16,15 +16,15 @@ class TestsTranslationLevel13(HedyTester):
 
     def test_and_condition_english_dutch(self):
         code = textwrap.dedent("""\
-        naam is 'hedy'
-        leeftijd is 2
+        naam = 'hedy'
+        leeftijd = 2
         if naam is 'hedy' and leeftijd is 2
             print 'hallo'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        naam is 'hedy'
-        leeftijd is 2
+        naam = 'hedy'
+        leeftijd = 2
         als naam is 'hedy' en leeftijd is 2
             print 'hallo'""")
 
@@ -32,15 +32,15 @@ class TestsTranslationLevel13(HedyTester):
 
     def test_or_condition_english_dutch(self):
         code = textwrap.dedent("""\
-        naam is 'hedy'
-        leeftijd is 2
+        naam = 'hedy'
+        leeftijd = 2
         if naam is 'niet hedy' or leeftijd is 2
             print 'hallo'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        naam is 'hedy'
-        leeftijd is 2
+        naam = 'hedy'
+        leeftijd = 2
         als naam is 'niet hedy' of leeftijd is 2
             print 'hallo'""")
 

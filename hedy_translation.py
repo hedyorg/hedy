@@ -158,7 +158,7 @@ class ConvertToLang3(ConvertToLang2):
         return ''.join([str(c) for c in args])
 
     def assign_list(self, args):
-        return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
+        return args[0] + " = " + ', '.join([str(c) for c in args[1:]])
 
     def list_access(self, args):
         return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
@@ -219,6 +219,14 @@ class ConvertToLang6(ConvertToLang5):
 
     def assign(self, args):
         return args[0] + " = " + ''.join([str(c) for c in args[1:]])
+
+    def ask(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return var + " = " + self.keywords["ask"] + " " + ''.join(remaining_args)
+
+    def assign_list(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
 
 @hedy_translator(level=7)
 class ConvertToLang7(ConvertToLang6):
@@ -318,7 +326,7 @@ class ConvertToLang15(ConvertToLang14):
 class ConvertToLang16(ConvertToLang15):
 
     def assign_list(self, args):
-        return args[0] + " " + self.keywords["is"] + " [" + ', '.join([str(c) for c in args[1:]]) + "]"
+        return args[0] + " = [" + ', '.join([str(c) for c in args[1:]]) + "]"
 
     def list_access(self, args):
         return args[0] + "[" + ''.join([str(c) for c in args[1:]]) + "]"
