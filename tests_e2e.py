@@ -658,9 +658,7 @@ class TestProgram(AuthHelper):
         self.assertEqual(len(saved_programs), 1)
         saved_program = saved_programs[0]
         for key in program:
-            # WHEN creating a first program, an achievement is achieved and stored in the response
-            if key != "achievements":
-                self.assertEqual(program[key], saved_program[key])
+            self.assertEqual(program[key], saved_program[key])
 
     def test_invalid_make_program_public(self):
         # GIVEN a logged in user
