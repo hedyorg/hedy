@@ -6,7 +6,7 @@ import hedy
 import yaml
 from os import path
 
-TRANSPILER_LOOKUP = {}
+TRANSLATOR_LOOKUP = {}
 
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
@@ -23,26 +23,23 @@ def keywords_to_dict(to_lang="nl"):
 
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
-    parser = hedy.get_parser(level, from_lang)
-
     punctuation_symbols = ['!', '?', '.']
-
-    keyword_dict = keywords_to_dict(to_lang)
 
     input_string = hedy.process_input_string(input_string, level)
 
+    parser = hedy.get_parser(level, from_lang)
+    keyword_dict = keywords_to_dict(to_lang)
+
     program_root = parser.parse(input_string + '\n').children[0]
 
-    hedy.ExtractAST().transform(program_root)
-    translator = TRANSPILER_LOOKUP[level]
-    abstract_syntaxtree = translator(keyword_dict, punctuation_symbols).transform(program_root)
+    translated_program = TRANSLATOR_LOOKUP[level](keyword_dict, punctuation_symbols).transform(program_root)
 
-    return abstract_syntaxtree
+    return translated_program
 
 
 def hedy_translator(level):
     def decorating(c):
-        TRANSPILER_LOOKUP[level] = c
+        TRANSLATOR_LOOKUP[level] = c
         c.level = level
         return c
 
@@ -50,11 +47,11 @@ def hedy_translator(level):
 
 
 def indent(s):
-    newIndent = ""
+    new_indent = ""
     for line in s:
         lines = line.split('\n')
-        newIndent += ''.join(['\n    ' + l for l in lines])
-    return newIndent
+        new_indent += ''.join(['\n    ' + l for l in lines])
+    return new_indent
 
 @hedy_translator(level=1)
 class ConvertToLang1(Transformer):
