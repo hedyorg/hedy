@@ -748,7 +748,7 @@ class TestProgram(AuthHelper):
 
         # WHEN deleting a program that does not exist
         # THEN receive a not found response code from the server
-        self.get_data('programs/delete/', {'id': program_id}, expect_http_code=404)
+        self.post_data('programs/delete/', {'id': program_id}, expect_http_code=404)
 
     def test_valid_delete_program(self):
         # GIVEN a logged in user with at least one program
