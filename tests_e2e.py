@@ -759,8 +759,6 @@ class TestProgram(AuthHelper):
         # WHEN deleting a program
         # THEN receive an OK response code from the server
         headers = self.post_data('programs/delete/', {'id': program_id}, return_headers=True)
-        # THEN verify that the header has a `location` header pointing to `/programs`
-        self.assertEqual(headers['location'], HOST + 'programs')
 
         saved_programs = self.get_data('programs_list')['programs']
         for program in saved_programs:
@@ -903,13 +901,13 @@ class TestClasses(AuthHelper):
         self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes') [0]
 
-        # GIVEN a student (user without teacher permissions)
-        self.given_fresh_user_is_logged_in()
-        student = self.user
-
         # WHEN attempting to join a class without being logged in
         # THEN receive a forbidden status code from the server
         self.post_data('class/join', {'id': Class['id']}, expect_http_code=403)
+
+        # GIVEN a student (user without teacher permissions)
+        self.given_fresh_user_is_logged_in()
+        student = self.user
 
         # WHEN retrieving the short link of a class
         # THEN receive a redirect to `class/ID/join/LINK`
