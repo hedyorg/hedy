@@ -26,7 +26,7 @@ class TestsTranslationLevel11(HedyTester):
         voor counter in bereik 1 tot 5
             print counter""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_for_in_dutch_english(self):
         code = textwrap.dedent("""\
@@ -42,4 +42,4 @@ class TestsTranslationLevel11(HedyTester):
             for count in range nummer to 0
                 print 'hoi' counter""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)

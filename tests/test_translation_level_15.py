@@ -28,7 +28,7 @@ class TestsTranslationLevel15(HedyTester):
             answer is vraag 'What is 5 * 5'
         print 'Good job!'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_while_loop_dutch_english(self):
         code = textwrap.dedent("""\
@@ -44,7 +44,7 @@ class TestsTranslationLevel15(HedyTester):
             answer is ask 'What is 5 * 5'
         print 'Good job!'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_multiple_while_loop_english_dutch(self):
         code = textwrap.dedent("""\
@@ -62,4 +62,4 @@ class TestsTranslationLevel15(HedyTester):
                 answer is vraag 'What is 5 * 5'
         print 'Good job!'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)

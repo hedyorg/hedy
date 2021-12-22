@@ -28,7 +28,7 @@ class TestsTranslationLevel13(HedyTester):
         als naam is 'hedy' en leeftijd is 2
             print 'hallo'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_or_condition_english_dutch(self):
         code = textwrap.dedent("""\
@@ -44,7 +44,7 @@ class TestsTranslationLevel13(HedyTester):
         als naam is 'niet hedy' of leeftijd is 2
             print 'hallo'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_and_condition_acces_list_english_dutch(self):
         code = textwrap.dedent("""\
@@ -58,7 +58,7 @@ class TestsTranslationLevel13(HedyTester):
         als 'hedy' in naam en 'niet hedy' in naam
             print 'hallo'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_or_condition_acces_list_english_dutch(self):
         code = textwrap.dedent("""\
@@ -72,4 +72,4 @@ class TestsTranslationLevel13(HedyTester):
         als 'hedy' in naam of 'niet hedy' in naam
             print 'hallo'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)

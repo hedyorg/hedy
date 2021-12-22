@@ -217,6 +217,8 @@ class ConvertToLang6(ConvertToLang5):
     def division(self, args):
         return args[0] + " / " + args[1]
 
+    def assign(self, args):
+        return args[0] + " = " + ''.join([str(c) for c in args[1:]])
 
 @hedy_translator(level=7)
 class ConvertToLang7(ConvertToLang6):

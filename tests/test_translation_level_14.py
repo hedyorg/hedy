@@ -26,7 +26,7 @@ class TestsTranslationLevel14(HedyTester):
         als hedy > 6
             print 'hedy'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_smaller(self):
         code = textwrap.dedent("""\
@@ -40,7 +40,7 @@ class TestsTranslationLevel14(HedyTester):
         als hedy < 6
             print 'hedy'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_bigger_equal(self):
         code = textwrap.dedent("""\
@@ -54,7 +54,7 @@ class TestsTranslationLevel14(HedyTester):
         als hedy >= 6
             print 'hedy'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_smaller_equal(self):
         code = textwrap.dedent("""\
@@ -68,7 +68,7 @@ class TestsTranslationLevel14(HedyTester):
         als hedy <= 6
             print 'hedy'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_not_equal(self):
         code = textwrap.dedent("""\
@@ -82,4 +82,4 @@ class TestsTranslationLevel14(HedyTester):
         als hedy != 6
             print 'hedy'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)

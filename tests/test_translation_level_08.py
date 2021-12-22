@@ -25,7 +25,7 @@ class TestsTranslationLevel8(HedyTester):
         herhaal 3 keer
             print 'Hedy is fun!'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_repeat_multiple_indent_english_dutch(self):
         code = textwrap.dedent("""\
@@ -41,7 +41,7 @@ class TestsTranslationLevel8(HedyTester):
             print 'print 3 keer'
         print 'print 1 keer'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_repeat_indent_dutch_english(self):
         code = textwrap.dedent("""\
@@ -53,7 +53,7 @@ class TestsTranslationLevel8(HedyTester):
         repeat 3 times
             print 'Hedy is fun!'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_ifelse_indent_dutch_english(self):
         code = textwrap.dedent("""\
@@ -71,7 +71,7 @@ class TestsTranslationLevel8(HedyTester):
         anders
             print 'Hallo' hedy""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_indent_translate_back(self):
         code = textwrap.dedent("""\

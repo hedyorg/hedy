@@ -24,7 +24,7 @@ class TestsTranslationLevel17(HedyTester):
         voor i in bereik 1 tot 12:
             print 'Hedy' i""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_indent_while_loop_english_dutch(self):
         code = textwrap.dedent("""\
@@ -38,7 +38,7 @@ class TestsTranslationLevel17(HedyTester):
         zolang i < 2:
             print 'Hedy' i""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_indent_repeat_list_english_dutch(self):
         code = textwrap.dedent("""\
@@ -52,7 +52,7 @@ class TestsTranslationLevel17(HedyTester):
         voor naam in hedy:
             print naam""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_indent_ifs_english_dutch(self):
         code = textwrap.dedent("""\
@@ -66,7 +66,7 @@ class TestsTranslationLevel17(HedyTester):
         als hedy is 4:
             print 'hedy'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_indent_elses_english_dutch(self):
         code = textwrap.dedent("""\
@@ -84,7 +84,7 @@ class TestsTranslationLevel17(HedyTester):
         anders:
             print 'nee'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_elif_english_dutch(self):
         code = textwrap.dedent("""\n
@@ -106,4 +106,4 @@ class TestsTranslationLevel17(HedyTester):
         anders:
             print 'nee'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
