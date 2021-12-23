@@ -1196,6 +1196,7 @@ else:
     def in_list_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
+        self.check_var_usage([arg1])
         return f"{arg0} in {arg1}"
 
 @hedy_transpiler(level=6)
@@ -1407,6 +1408,8 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def assign(self, args):
         right_hand_side = args[1]
+        left_hand_side = args[0]
+        self.check_var_usage([left_hand_side])
 
         # we now need to check if the right hand side of te assign is
         # either a var or quoted, if it is not (and undefined var is raised)
@@ -1427,6 +1430,11 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             # we no longer escape quotes here because they are now needed
             return parameter + " = " + value + ""
+
+    def var(self, args):
+        name = args[0]
+        return hash_var(name)
+
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
