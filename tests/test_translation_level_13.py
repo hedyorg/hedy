@@ -11,40 +11,40 @@ import textwrap
 # * Error handling
 
 
-class TestsTranslationLevel11(HedyTester):
+class TestsTranslationLevel13(HedyTester):
     level = 13
 
     def test_and_condition_english_dutch(self):
         code = textwrap.dedent("""\
-        naam is 'hedy'
-        leeftijd is 2
+        naam = 'hedy'
+        leeftijd = 2
         if naam is 'hedy' and leeftijd is 2
             print 'hallo'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        naam is 'hedy'
-        leeftijd is 2
+        naam = 'hedy'
+        leeftijd = 2
         als naam is 'hedy' en leeftijd is 2
             print 'hallo'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_or_condition_english_dutch(self):
         code = textwrap.dedent("""\
-        naam is 'hedy'
-        leeftijd is 2
+        naam = 'hedy'
+        leeftijd = 2
         if naam is 'niet hedy' or leeftijd is 2
             print 'hallo'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        naam is 'hedy'
-        leeftijd is 2
+        naam = 'hedy'
+        leeftijd = 2
         als naam is 'niet hedy' of leeftijd is 2
             print 'hallo'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_and_condition_acces_list_english_dutch(self):
         code = textwrap.dedent("""\
@@ -58,7 +58,7 @@ class TestsTranslationLevel11(HedyTester):
         als 'hedy' in naam en 'niet hedy' in naam
             print 'hallo'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_or_condition_acces_list_english_dutch(self):
         code = textwrap.dedent("""\
@@ -72,4 +72,4 @@ class TestsTranslationLevel11(HedyTester):
         als 'hedy' in naam of 'niet hedy' in naam
             print 'hallo'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)

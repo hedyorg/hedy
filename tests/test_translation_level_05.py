@@ -20,7 +20,7 @@ class TestsTranslationLevel5(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = "print 'Hallo welkom bij Hedy!'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_print2_english_dutch(self):
         code = "print Hallo 'welkom bij Hedy!'"
@@ -28,7 +28,7 @@ class TestsTranslationLevel5(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = "print Hallo 'welkom bij Hedy!'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_ask_assign_english_dutch(self):
         code = "answer is ask 'What is 10 plus 10?'"
@@ -36,7 +36,7 @@ class TestsTranslationLevel5(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = "answer is vraag 'What is 10 plus 10?'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
 
     def test_if_else_english_dutch(self):
@@ -45,7 +45,7 @@ class TestsTranslationLevel5(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = "als answer is far vooruit 100 anders vooruit 5"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_in_list_english_dutch(self):
         code = "if color in pretty_colors print 'pretty!'"
@@ -53,7 +53,7 @@ class TestsTranslationLevel5(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = "als color in pretty_colors print 'pretty!'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
 
     def test_print_dutch_english(self):
@@ -62,7 +62,7 @@ class TestsTranslationLevel5(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = "print 'Hallo welkom bij Hedy!'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_print2_dutch_english(self):
         code = "print Hallo 'welkom bij Hedy!'"
@@ -70,7 +70,7 @@ class TestsTranslationLevel5(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = "print Hallo 'welkom bij Hedy!'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_ask_assign_dutch_english(self):
         code = "answer is vraag 'What is 10 plus 10?'"
@@ -78,7 +78,7 @@ class TestsTranslationLevel5(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = "answer is ask 'What is 10 plus 10?'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_if_else_dutch_english(self):
         code = "als answer is far vooruit 100 anders vooruit 5"
@@ -86,7 +86,7 @@ class TestsTranslationLevel5(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = "if answer is far forward 100 else forward 5"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_in_list_dutch_english(self):
         code = "als hond in dieren print 'Cute!'"
@@ -94,4 +94,4 @@ class TestsTranslationLevel5(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = "if hond in dieren print 'Cute!'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
