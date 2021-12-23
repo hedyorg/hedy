@@ -551,7 +551,7 @@ adventures:
                     hoek = 360 / hoeken
                     repeat hoeken times
                         turn _
-                        forward_
+                        forward _
                     ```
                 start_code: |
                     hoeken = ask 'Hoeveel hoeken krijgt dit figuur?'
@@ -2242,7 +2242,7 @@ adventures:
 
                     ```
                     print 'Wat gaan we eten vanavond?'
-                    opties is pizza, spuitjes, boerenkool
+                    opties is pizza, spruitjes, boerenkool
                     gekozen is opties at random
                     if gekozen is pasta
                         print 'Hmmm lekker! Pasta!'

@@ -130,6 +130,7 @@ export const auth = {
 
         afterLogin();
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         const error = response.responseText || '';
         if (error.match ('email'))         auth.error (auth.texts['exists_email']);
         else if (error.match ('username')) auth.error (auth.texts['exists_username']);
@@ -149,6 +150,7 @@ export const auth = {
 
         afterLogin();
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) {
            auth.error (auth.texts['invalid_username_password'] + ' ' + auth.texts['no_account'] + ' &nbsp;<button class="green-btn" onclick="auth.redirect (\'signup\')">' + auth.texts['create_account'] + '</button>');
            $ ('#create-account').hide ();
@@ -186,6 +188,7 @@ export const auth = {
         auth.success (auth.texts['profile_updated']);
         setTimeout (function () {location.reload ()}, 500);
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         auth.error (auth.texts['ajax_error'] + ' ' + response.responseText);
       });
     }
@@ -204,6 +207,7 @@ export const auth = {
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) auth.error (auth.texts['invalid_password'], null, '#error-password');
         else                         auth.error (auth.texts['ajax_error'], null, '#error-password');
       });
@@ -219,6 +223,7 @@ export const auth = {
         auth.success (auth.texts['sent_password_recovery']);
         $ ('#username').val ('');
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) auth.error (auth.texts['invalid_username']);
         else                         auth.error (auth.texts['ajax_error']);
       });
@@ -239,6 +244,7 @@ export const auth = {
         delete auth.reset;
         auth.redirect ('login');
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) auth.error (auth.texts['invalid_reset_link']);
         else                         auth.error (auth.texts['ajax_error']);
       });

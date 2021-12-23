@@ -37,6 +37,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
+      expected_commands=['is', 'if', 'print'],
       max_level=16)
 
   # print tests
@@ -78,7 +79,8 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=14,
-      expected=expected
+      expected=expected,
+      expected_commands=['is', 'print', 'random']
     )
 
   # ask tests

@@ -30,7 +30,7 @@ class TestsLevel15(HedyTester):
       code=code,
       max_level=16,
       expected=expected,
-
+      expected_commands=['is', 'while', 'ask', 'print']
     )
 
   def test_while_smaller(self):
