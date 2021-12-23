@@ -35,7 +35,7 @@ $(function() {
     const tab = $('*[data-tab="' + tabName + '"]');
     const allTabs = tab.siblings('*[data-tab]');
 
-    // Fidn the target associated with this selection, and its siblings
+    // Find the target associated with this selection, and its siblings
     const target = $('*[data-tabtarget="' + tabName + '"]');
     const allTargets = target.siblings('*[data-tabtarget]');
 
@@ -51,10 +51,13 @@ $(function() {
       adventures [adventure.short_name] = adventure;
     });
 
+    // @ts-ignore
+    document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
 
     if (tabName === 'end') {
-      $ ('#adventures-tab').css('max-height', '100%')
+      $ ('#adventures-tab').css('height', '');
+      $ ('#adventures-tab').css('max-height', '100%');
       $ ('#level-header input').hide ();
       $ ('#editor-area').hide ();
       return;

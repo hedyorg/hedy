@@ -8,12 +8,9 @@ server work.
 AWS credentials and setup:
 
 ```
-AWS_DYNAMODB_ACCESS_KEY
-AWS_DYNAMODB_SECRET_KEY
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
 AWS_DYNAMODB_TABLE_PREFIX
-
-AWS_SES_ACCESS_KEY
-AWS_SES_SECRET_KEY
 ```
 
 JSONbin credentials and setup:
@@ -45,7 +42,7 @@ PROXY_TO_TEST_PROPORTION
 IS_TEST_ENV
 ```
 
-App secret (for cookies):
+App secret (needs to be the same to share cookies between instances):
 
 ```
 SECRET_KEY

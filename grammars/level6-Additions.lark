@@ -1,4 +1,18 @@
-command: print | repeat | ifelse | ifs | turtle | ask | assign_list | list_access_var | assign
+_print_argument: (_SPACE | quoted_text | list_access | var_access | sum)*
 
-//new in level 6
-repeat: _REPEAT _SPACE (INT | var) _SPACE _TIMES _SPACE command
+
+_IS_OR_EQUALS: (_IS|_EQUALS)
+
+ask: var _SPACE (_IS|_EQUALS) _SPACE _ASK (_SPACE _print_argument)?
+equality_check: textwithoutspaces _SPACE _IS_OR_EQUALS _SPACE textwithoutspaces //TODO FH nov 2021: not super pretty that this is textwithoutquotes for both a var and also a textual constant, level 11 handles this nicer now, could be done here too
+
+list_access_var: var _SPACE (_IS|_EQUALS) _SPACE var _SPACE _AT _SPACE (INT | random)
+assign_list: var _SPACE (_IS|_EQUALS) _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
+
+assign: var _SPACE (_IS|_EQUALS) _SPACE sum | var _SPACE (_IS|_EQUALS) _SPACE textwithoutspaces
+?sum: product | sum _SPACE* _ADD _SPACE* product -> addition | sum _SPACE* _SUBTRACT _SPACE* product -> subtraction
+?product: atom | product _SPACE* _MULTIPLY _SPACE* atom -> multiplication | product _SPACE* _DIVIDE _SPACE* atom -> division
+?atom: INT | var_access | error_unsupported_number //TODO: means we cannot assign strings with spaces? would we want that?
+error_unsupported_number: /([-+]?(\d+[\.,]\d+))/ -> error_unsupported_number
+
+textwithoutspaces: /(?:[^\n, *+\-\/ei]|e(?!lse)|i(?!f))+/ -> text //new cause in level 5 calculation elements need to be escaped too                

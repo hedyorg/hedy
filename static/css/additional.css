@@ -28,10 +28,26 @@
   background: red !important;
 }
 
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #48bb78;
+}
+
 #confetti{
   width: 100%;
   position: absolute;
   height: auto;
   top: 20%;
   left: 30%;
+}
+
+#repair_button:hover{
+  content: url('../images/Hedylightbulb_2.svg');
+}
+
+/*Media Queries*/
+@media only screen and (max-width: 1280px) {
+  #repair_button{
+    margin-left: 12rem !important;
+  }
 }

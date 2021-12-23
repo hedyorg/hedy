@@ -34,6 +34,10 @@
       <li>Send the files to us via <a href="mailto:hedy@felienne.com">email</a> or send us a pull request on <a href=https://github.com/Felienne/hedy/">GitHub</a></li>
     </ol>
 
+    <div class="m-4">
+      <button id="show-hide-missing-translations" class="yellow-btn">Show only missing translations </button>
+    </div>
+
       {% for file in files %}
         <form method="POST" action="/update_yaml" data-file="{{file.file}}">
           <input type="hidden" name="file" value="{{file.file}}">
@@ -53,8 +57,8 @@
           {% else %}
             <tr class="border-b">
               <th style="max-width: 6em; overflow: hidden;">{{string.key}}</th>
-              <td><pre style="max-width: 40em;">{{ string.original }}</pre></td>
-              <td><textarea data-name="c:{{string.encoded_path}}" rows="2" class="border border-green-600 p-2" style="width: 40em;">{{ string.translated }}</textarea></td>
+              <td><pre style="max-width: 40em;" class="original-text">{{ string.original }}</pre></td>
+              <td><textarea data-name="c:{{string.encoded_path}}" rows="2" class="border border-green-600 p-2 translated-input" style="width: 40em;">{{ string.translated }}</textarea></td>
             </tr>
           {% endif %}
         {% endfor %}

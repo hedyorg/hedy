@@ -1,16 +1,23 @@
 {% extends "layout.html" %}
 {% block body %}
 <div style="height: 30px;"></div>
-<div tabindex="0" class="flex-grow p-8">
+<div tabindex="0" class="flex-grow px-8">
+  {% if loaded_program.submitted %}
+      <div class="text-center">
+        <h2>{{texts.submitted_header}}</h2>
+        <h3 class="inline-block mt-0">{{texts.last_edited}}: {{program_timestamp}}</h3> - {{program_age}}
+      </div>
+  {% endif %}
   <h1>{{loaded_program.name}}</h1>
-  <div>{{by}} <strong>{{loaded_program.username}}</strong></div>
+  <h2 class="mt-0">{{ui.level_title}} {{level}}</h2>
+  <div>{{ui.by}} <strong>{{loaded_program.username}}</strong></div>
   {% include "incl-editor-and-output.html" %}
 </div>
 
 {% endblock %}
 
 {% block scripts %}
-  <script src="/client_messages.js?lang={{ lang }}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
@@ -19,9 +26,9 @@
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script>
     window.State = {};
-    window.State.lang = "{{ lang }}";
+    window.State.lang = "{{ g.lang }}";
     window.State.level = "{{ level }}";
-    window.State.level_title = "{{ level_title }}";
+    window.State.level_title = "{{ ui.level_title }}";
   </script>
   <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 {% endblock %}

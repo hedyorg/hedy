@@ -53,7 +53,7 @@ class InvalidSpaceException(FtfyException):
             fixed_result=fixed_result)
 
 class ParseException(HedyException):
-    def __init__(self, level, location, found):
+    def __init__(self, level, location, found, fixed_code=None):
         super().__init__('Parse',
             level=level,
             location=location,
@@ -61,23 +61,40 @@ class ParseException(HedyException):
             # 'character_found' for backwards compatibility
             character_found=found)
 
+        #TODO (FH, 8 dec 21) many exceptions now support fixed code maybe we should move it to hedyexception?
+        self.fixed_code = fixed_code
+
 class UndefinedVarException(HedyException):
     def __init__(self, name):
         super().__init__('Var Undefined',
             name=name)
 
-class RequiredArgumentTypeException(HedyException):
-    def __init__(self, command, variable, required_type):
-        super().__init__('Required Argument Type',
-            command=command,
-            variable=variable,
-            required_type=required_type)
+class CyclicVariableDefinitionException(HedyException):
+    def __init__(self, variable):
+        super().__init__('Cyclic Var Definition',
+                         variable=variable)
 
 class InvalidArgumentTypeException(HedyException):
     def __init__(self, command, invalid_type, allowed_types, invalid_argument):
         super().__init__('Invalid Argument Type',
             command=command,
             invalid_type=invalid_type,
+            allowed_types=allowed_types,
+            invalid_argument=invalid_argument)
+
+class InvalidTypeCombinationException(HedyException):
+    def __init__(self, operation, arg1, arg2, type1, type2):
+        super().__init__('Invalid Type Combination',
+            operation=operation,
+            invalid_argument=arg1,
+            invalid_argument_2=arg2,
+            invalid_type=type1,
+            invalid_type_2=type2)
+
+class InvalidArgumentException(HedyException):
+    def __init__(self, command, allowed_types, invalid_argument):
+        super().__init__('Invalid Argument',
+            command=command,
             allowed_types=allowed_types,
             invalid_argument=invalid_argument)
 
@@ -94,12 +111,21 @@ class InputTooBigException(HedyException):
             lines_of_code=lines_of_code,
             max_lines=max_lines)
 
-class InvalidCommandException(HedyException):
-    def __init__(self, level, invalid_command, guessed_command, line_number):
+class InvalidCommandException(FtfyException):
+    def __init__(self, level, invalid_command, guessed_command, line_number, fixed_code, fixed_result):
         super().__init__('Invalid',
             invalid_command=invalid_command,
             level=level,
             guessed_command=guessed_command,
+            line_number=line_number,
+            fixed_code=fixed_code,
+            fixed_result=fixed_result)
+        self.location = [line_number]
+
+class MissingCommandException(HedyException):
+    def __init__(self, level, line_number):
+        super().__init__('Missing Command',
+            level=level,
             line_number=line_number)
 
 
@@ -135,18 +161,20 @@ class CodePlaceholdersPresentException(HedyException):
         super().__init__('Has Blanks')
 
 class NoIndentationException(HedyException):
-    def __init__(self, line_number, leading_spaces, indent_size):
+    def __init__(self, line_number, leading_spaces, indent_size, fixed_code=None):
         super().__init__('No Indentation',
             line_number=line_number,
             leading_spaces=leading_spaces,
             indent_size=indent_size)
+        self.fixed_code = fixed_code
 
 class IndentationException(HedyException):
-    def __init__(self, line_number, leading_spaces, indent_size):
+    def __init__(self, line_number, leading_spaces, indent_size, fixed_code=None):
         super().__init__('Unexpected Indentation',
             line_number=line_number,
             leading_spaces=leading_spaces,
             indent_size=indent_size)
+        self.fixed_code = fixed_code
 
 class UnsupportedFloatException(HedyException):
     def __init__(self, value):

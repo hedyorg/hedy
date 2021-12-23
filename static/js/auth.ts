@@ -13,6 +13,7 @@ interface User {
   email?: string;
   password?: string;
   birth_year?: number;
+  language?: string,
   country?: string;
   gender?: string;
   subscribe?: string;
@@ -26,6 +27,7 @@ interface UserForm {
   email?: string;
   password?: string;
   birth_year?: string;
+  language?: string,
   country?: string;
   gender?: string;
   subscribe?: string;
@@ -92,6 +94,8 @@ export const auth = {
       if (! values.email?.match (auth.emailRegex)) return auth.error (auth.texts['valid_email'], 'email');
       if (values.email !== values.mail_repeat) return auth.error (auth.texts['repeat_match_email'],    'mail_repeat');
 
+      if (! values.language) return auth.error (auth.texts['please_language'], 'language');
+
       if (! values.password) return auth.error (auth.texts['please_password'], 'password');
       if (values.password.length < 6) return auth.error (auth.texts['password_six'], 'password');
       if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match_password'], 'password_repeat');
@@ -106,6 +110,7 @@ export const auth = {
         username: values.username,
         email: values.email,
         password: values.password,
+        language: values.language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
@@ -125,6 +130,7 @@ export const auth = {
 
         afterLogin();
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         const error = response.responseText || '';
         if (error.match ('email'))         auth.error (auth.texts['exists_email']);
         else if (error.match ('username')) auth.error (auth.texts['exists_username']);
@@ -144,6 +150,7 @@ export const auth = {
 
         afterLogin();
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) {
            auth.error (auth.texts['invalid_username_password'] + ' ' + auth.texts['no_account'] + ' &nbsp;<button class="green-btn" onclick="auth.redirect (\'signup\')">' + auth.texts['create_account'] + '</button>');
            $ ('#create-account').hide ();
@@ -165,8 +172,9 @@ export const auth = {
       const payload: User = {
         email: values['email'],
         birth_year: values.birth_year ? parseInt(values['birth_year']) : undefined,
-        country: values['country'],
-        gender: values['gender'],
+        country: values['country'] ? values.country : undefined,
+        gender: values['gender'] ? values.gender : undefined,
+        language: values.language,
         prog_experience: $ ('input[name=has_experience]:checked').val() as 'yes' | 'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
@@ -178,7 +186,9 @@ export const auth = {
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts['profile_updated']);
+        setTimeout (function () {location.reload ()}, 500);
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         auth.error (auth.texts['ajax_error'] + ' ' + response.responseText);
       });
     }
@@ -197,6 +207,7 @@ export const auth = {
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) auth.error (auth.texts['invalid_password'], null, '#error-password');
         else                         auth.error (auth.texts['ajax_error'], null, '#error-password');
       });
@@ -212,6 +223,7 @@ export const auth = {
         auth.success (auth.texts['sent_password_recovery']);
         $ ('#username').val ('');
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) auth.error (auth.texts['invalid_username']);
         else                         auth.error (auth.texts['ajax_error']);
       });
@@ -232,6 +244,7 @@ export const auth = {
         delete auth.reset;
         auth.redirect ('login');
       }).fail (function (response) {
+        if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status === 403) auth.error (auth.texts['invalid_reset_link']);
         else                         auth.error (auth.texts['ajax_error']);
       });
@@ -279,32 +292,8 @@ $ ('.auth input').get ().map (function (el) {
 
 // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
 $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-  if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
-
-  auth.profile = response;
-  if ($ ('#profile').html ()) {
-    $ ('#username').html (response.username);
-    $ ('#email').val (response.email);
-    $ ('#birth_year').val (response.birth_year);
-    $ ('#gender').val (response.gender);
-    $ ('#country').val (response.country);
-    if (response.prog_experience) {
-      $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
-      if (response.prog_experience === 'yes') $ ('#languages').show ();
-    }
-    (response.experience_languages || []).map (function (lang: string) {
-       $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
-    });
-    if (! jQuery.isEmptyObject(response.student_classes)) {
-      $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class: Class) {
-        return '<li>' + auth.entityify (Class.name) + '</li>';
-      }).join (''));
-    } else {
-      $ ('#student_classes').hide();
-    }
-  }
-}).fail (function (_response) {
-  if (window.location.pathname.indexOf ('/my-profile') !== -1) auth.redirect ('login');
+   if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
+   auth.profile = response;
 });
 
 if (window.location.pathname === '/reset') {
@@ -326,16 +315,16 @@ if (window.location.pathname === '/signup') {
     if (login_username.match ('@')) $ ('#email').val (login_username);
     else                            $ ('#username').val (login_username);
   }
+  const redirect = localStorage.getItem('hedy-save-redirect');
+  if (redirect && redirect.includes('invite')) {
+    $ ('#is_teacher_div').hide();
+  }
 }
 
 $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
    return false;
 });
-
-interface Class {
-  name: string;
-}
 
 /**
  * After login:
