@@ -296,6 +296,7 @@ class TypedTree(Tree):
         super().__init__(data, children, meta)
         self.type_ = type_
 
+@v_args(tree=True)
 class RemoveAmbiguity(Transformer):
     # def _ambig(self, args):
     #     # ambig node? Simply pick the first option for now
@@ -310,25 +311,18 @@ class RemoveAmbiguity(Transformer):
             # create a node from each of them
             option_list = []
             for option in ambig_options:
-                option_list.append(Tree(data, option))
+                option_list.append(Tree(data, [option]))
 
-            return Tree('_ambig', option_list)
+            t = Tree(data='_ambig', children=option_list, meta=meta)
+            return t
 
         else:
-            return Tree(data, children)
+            t = Tree(data=data, children=children, meta=meta)
+            return t
 
-    # somehow tokens are not picked up by the default rule so they need their own rule
-    def INT(self, args):
-        return False
-
-    def NAME(self, args):
-        return False
-
-    def NUMBER(self, args):
-        return False
 
     def text(self, args):
-        return Tree('text',''.join(args))
+        return args
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
@@ -2094,6 +2088,11 @@ def transpile_inner(input_string, level, lang="en"):
     program_root = parse_input(input_string, level, lang)
 
     program_root = RemoveAmbiguity().transform(program_root)
+
+    if program_root.data == "_ambig": # het is een ambig dus children is een lijst programma's
+        programs = program_root.children
+        program_root = programs[0]
+
 
 
 
