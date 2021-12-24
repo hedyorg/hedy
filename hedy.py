@@ -297,9 +297,38 @@ class TypedTree(Tree):
         self.type_ = type_
 
 class RemoveAmbiguity(Transformer):
-    def _ambig(self, args):
-        # ambig node? Simply pick the first option for now
-        return args[0]
+    # def _ambig(self, args):
+    #     # ambig node? Simply pick the first option for now
+    #     return args[0]
+
+    def __default__(self, data, children, meta):
+        ambig_kids = [x for x in children if x.data == '_ambig']
+
+        if ambig_kids:
+            # get the kids of the ambig node (just one for now!)
+            ambig_options = ambig_kids[0].children
+            # create a node from each of them
+            option_list = []
+            for option in ambig_options:
+                option_list.append(Tree(data, option))
+
+            return Tree('_ambig', option_list)
+
+        else:
+            return Tree(data, children)
+
+    # somehow tokens are not picked up by the default rule so they need their own rule
+    def INT(self, args):
+        return False
+
+    def NAME(self, args):
+        return False
+
+    def NUMBER(self, args):
+        return False
+
+    def text(self, args):
+        return Tree('text',''.join(args))
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
@@ -1767,7 +1796,7 @@ def get_parser(level, lang="en"):
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True, propagate_positions=True) #ambiguity='explicit'
+    ret = Lark(grammar, regex=True, propagate_positions=True, ambiguity='explicit')
     PARSER_CACHE[key] = ret
     return ret
 
@@ -2063,11 +2092,6 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
-
-    if program_root.data == "_ambig": # het is een ambig dus children is een lijst programma's
-        programs = program_root.children
-        program_root = programs[0]
-
 
     program_root = RemoveAmbiguity().transform(program_root)
 
