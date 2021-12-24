@@ -2,10 +2,7 @@
 
 command:+= input -= ask
 
-
 print: _PRINT (_SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | var_access | sum) (_SPACE* _COMMA _SPACE* (quoted_text | list_access | var_access | sum))* _SPACE* _RIGHT_BRACKET _SPACE*)?
-
-
 
 input: var _SPACE _IS _SPACE _INPUT _LEFT_BRACKET  (quoted_text | list_access | var_access | sum) (_SPACE (quoted_text | list_access | var_access | sum))*  _RIGHT_BRACKET
 
