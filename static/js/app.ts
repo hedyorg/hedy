@@ -505,10 +505,14 @@ export function share_program (level: number, lang: string, id: string | true, P
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(_response) {
-      // If we're sharing the program, copy the link to the clipboard.
-      if (Public) copy_to_clipboard (viewProgramLink(id), true);
-      modal.alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 4000);
-      if (reload) setTimeout (function () {location.reload ()}, 1000);
+
+      let copy_button_markup = ['<br>', '<button ', 'onclick="hedyApp.copy_to_clipboard(\'', viewProgramLink(id), '\')"', 'class="blue-btn mt-4">', auth.texts['copy_link_to_share'], '</button>'].join ('');
+
+      modal.alert (Public ? auth.texts['share_success_detail'] + copy_button_markup : auth.texts['unshare_success_detail'], 5000);
+
+      // If we're in the Programs page we wait some extra time before reloading the page
+      // so that the user can click on the "copy link to share" button
+      if (reload) setTimeout (function () {location.reload ()}, Public ? 5000 : 1000);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
