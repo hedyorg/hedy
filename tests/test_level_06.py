@@ -6,7 +6,7 @@ from test_level_01 import HedyTester
 class TestsLevel6(HedyTester):
   level = 6
 
-  # test/command order: 6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward', calculations]
+  # test/command order: 6: ['print', 'ask', 'is', 'if', 'turn', 'forward', calculations]
 
   # print tests
   def test_print_quoted_var(self):
@@ -61,9 +61,10 @@ class TestsLevel6(HedyTester):
       print(f'minder leuk')""")
 
     self.multi_level_tester(
-      max_level=6,
+      max_level=7,
       code=code,
-      expected=expected
+      expected=expected,
+      expected_commands=['is', 'print', 'else', 'print', 'print']
     )
   def test_print_if_else_with_line_break_and_space(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
@@ -368,6 +369,7 @@ class TestsLevel6(HedyTester):
       code=code,
       max_level=11,
       expected=expected,
+      expected_commands=['is', 'is', 'addition', 'print', 'addition'],
       extra_check_function=lambda x: self.run_code(x) == "11"
     )
 

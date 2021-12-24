@@ -11,7 +11,7 @@ import textwrap
 # * Error handling
 
 
-class TestsTranslationLevel11(HedyTester):
+class TestsTranslationLevel12(HedyTester):
     level = 12
 
     def test_decimal_english_dutch(self):
@@ -20,26 +20,26 @@ class TestsTranslationLevel11(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = "print 2.5 + 2.5"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_text_in_quotes_english_dutch(self):
-        code = "naam is 'hedy'"
+        code = "naam = 'hedy'"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = "naam is 'hedy'"
+        expected = "naam = 'hedy'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_text_in_quotes_ifs_english_dutch(self):
         code = textwrap.dedent("""\
-        naam is 'hedy'
+        naam = 'hedy'
         if naam is 'hedy'
             print 'hallo ' naam""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        naam is 'hedy'
+        naam = 'hedy'
         als naam is 'hedy'
             print 'hallo ' naam""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)

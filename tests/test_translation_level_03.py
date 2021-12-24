@@ -18,7 +18,7 @@ class TestsTranslationLevel3(HedyTester):
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "animals is dog, cat, kangaroo"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_at_random(self):
         code = "print animals at random"
@@ -26,7 +26,7 @@ class TestsTranslationLevel3(HedyTester):
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "print animals op willekeurig"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_assign_list_nl_en(self):
         code = "actie is drukaf, echo, vraag"
@@ -34,7 +34,7 @@ class TestsTranslationLevel3(HedyTester):
         result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
         expected = "actie is drukaf, echo, vraag"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_at_random_nl_en(self):
         code = "print echo op willekeurig"
@@ -42,4 +42,4 @@ class TestsTranslationLevel3(HedyTester):
         result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
         expected = "print echo at random"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)

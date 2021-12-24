@@ -49,7 +49,8 @@ class TestsLevel13(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=16,
-      expected=expected
+      expected=expected,
+      expected_commands=['if', 'or', 'print']
     )
 
 
