@@ -1,7 +1,6 @@
 import hedy
 import textwrap
 from test_level_01 import HedyTester
-from test_translating import check_local_lang_bool
 
 class TestsLevel10(HedyTester):
   level = 10
