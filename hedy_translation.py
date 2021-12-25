@@ -217,16 +217,37 @@ class ConvertToLang6(ConvertToLang5):
     def division(self, args):
         return args[0] + " / " + args[1]
 
-    def assign(self, args):
+    def assign_equals(self, args):
         return args[0] + " = " + ''.join([str(c) for c in args[1:]])
 
-    def ask(self, args):
+    def assign_is(self, args):
+        return args[0] + " "+ self.keywords["is"] + " " + ''.join([str(c) for c in args[1:]])
+
+    def ask_equals(self, args):
         var = args[0]
         remaining_args = args[1:]
         return var + " = " + self.keywords["ask"] + " " + ''.join(remaining_args)
 
-    def assign_list(self, args):
+    def ask_is(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(remaining_args)
+
+    def assign_list_is(self, args):
         return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
+    
+    def assign_list_equals(self, args):
+        return args[0] + " " + " = " + " " + ', '.join([str(c) for c in args[1:]])
+
+    def list_access_var_equals(self, args):
+        var = args[0]
+        var_list = args[1]
+        return var + " = " + var_list + " " + self.keywords["at"] + " " + args[2]
+    
+    def list_access_var_is(self, args):
+        var = args[0]
+        var_list = args[1]
+        return var + " " + self.keywords["is"] + " " + var_list + " " + self.keywords["at"]  + " " + args[2]
 
 @hedy_translator(level=7)
 class ConvertToLang7(ConvertToLang6):
@@ -324,8 +345,11 @@ class ConvertToLang15(ConvertToLang14):
 
 @hedy_translator(level=16)
 class ConvertToLang16(ConvertToLang15):
-
-    def assign_list(self, args):
+    
+    def assign_list_is(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + "[" + ', '.join([str(c) for c in args[1:]]) + "]"
+    
+    def assign_list_equals(self, args):
         return args[0] + " = [" + ', '.join([str(c) for c in args[1:]]) + "]"
 
     def list_access(self, args):
