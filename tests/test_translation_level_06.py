@@ -35,7 +35,6 @@ class TestsTranslationLevel6(HedyTester):
         code = "angle is 360 / angles"
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        print(result)
         expected = "angle is 360 / angles"
 
         self.assertEqual(expected, result)
