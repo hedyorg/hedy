@@ -350,9 +350,7 @@ class Database:
         for command in commands:
             if command not in user_achievements['commands']:
                 user_achievements['commands'].append(command)
-        print("EN HIER DAN?!")
-        ACHIEVEMENTS.put(user_achievements)
-        print(ACHIEVEMENTS.get({'username': username}))
+        return ACHIEVEMENTS.put(user_achievements)
 
     def increase_user_run_count(self, username):
         return ACHIEVEMENTS.update({'username': username}, {'run_programs': dynamo.DynamoIncrement(1)})
