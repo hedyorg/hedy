@@ -506,9 +506,11 @@ export function share_program (level: number, lang: string, id: string | true, P
       dataType: 'json'
     }).done(function(_response) {
 
-      let copy_button_markup = ['<br>', '<button ', 'onclick="hedyApp.copy_to_clipboard(\'', viewProgramLink(id), '\')"', 'class="blue-btn mt-4">', auth.texts['copy_link_to_share'], '</button>'].join ('');
-
-      modal.alert (Public ? auth.texts['share_success_detail'] + copy_button_markup : auth.texts['unshare_success_detail'], 5000);
+      modal.alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
+      if (Public) {
+        let buttonDiv = document.getElementById('modal-alert-buttons')!;
+        buttonDiv.insertAdjacentHTML('afterbegin', ['<button ', 'onclick="hedyApp.copy_to_clipboard(\'', viewProgramLink(id), '\'); this.remove();"', 'class="green-btn block m-4 w-40 pb-4 pt-4">', auth.texts['copy_link_to_share'], '</button>'].join (''));
+      }
 
       // If we're in the Programs page we wait some extra time before reloading the page
       // so that the user can click on the "copy link to share" button
