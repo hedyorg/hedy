@@ -29,6 +29,13 @@ $ source .env/bin/activate
 (.env)$ pip install -r requirements.txt
 ```
 
+Or if you're on windows in a powershell window with py launcher installed:
+```bash
+> py -m venv .env
+> ./.env/Scripts/activate.ps1
+(.env)> pip install -r requirements.txt
+```
+
 If you want to run the website version locally, run:
 ```bash
 (.env)$ python app.py
