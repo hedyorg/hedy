@@ -1037,7 +1037,7 @@ def process_variable_for_fstring_padded(name, lookup):
     elif is_quoted(name):
         return f"{name}.zfill(100)"
     else:
-        return f"'{name}'.zfill(100)"
+        raise hedy.exceptions.UndefinedVarException(name)
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
