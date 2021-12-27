@@ -46,14 +46,22 @@ class TestsTranslationLevel6(HedyTester):
         expected = "angle = 360 / angles"
         self.assertEqual(expected, result)
     
-    def test_translate_back(self):
+    def test_translate_back_is(self):
         code ="breuk is 13 / 4"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
 
         self.assertEqual(code, result)
-    
+
+    def test_translate_back_equals(self):
+        code = "breuk = 13 / 4"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
+
+        self.assertEqual(code, result)
+
     def test_ask_with_equals_spanish_english(self):
         code = "nombre = preguntar '¿Cual es tu nombre?'"
 
