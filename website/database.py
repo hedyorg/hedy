@@ -328,14 +328,14 @@ class Database:
             user_achievements['achieved'].append(achievement)
             return ACHIEVEMENTS.put(user_achievements)
 
-    def add_achievements_to_username(self, username, achievements):
+    def add_achievements_to_username(self, username, already_stored_achievements, new_achievements):
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
             user_achievements = {'username': username}
         if 'achieved' not in user_achievements:
             user_achievements['achieved'] = []
-        for achievement in achievements:
-            if achievement not in user_achievements['achieved']:
+        for achievement in new_achievements:
+            if achievement not in user_achievements['achieved'] and achievement not in already_stored_achievements:
                 user_achievements['achieved'].append(achievement)
         return ACHIEVEMENTS.put(user_achievements)
 
