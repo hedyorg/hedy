@@ -241,7 +241,7 @@ class TestsLevel8(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=11,
+      max_level=16,
       expected=expected
     )
 
