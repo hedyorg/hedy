@@ -326,17 +326,19 @@ class Database:
             user_achievements['achieved'] = []
         if achievement not in user_achievements['achieved']:
             user_achievements['achieved'].append(achievement)
+            user_achievements['achieved'] = list(set(user_achievements['achieved']))
             return ACHIEVEMENTS.put(user_achievements)
 
-    def add_achievements_to_username(self, username, already_stored_achievements, new_achievements):
+    def add_achievements_to_username(self, username, achievements):
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
             user_achievements = {'username': username}
         if 'achieved' not in user_achievements:
             user_achievements['achieved'] = []
-        for achievement in new_achievements:
-            if achievement not in user_achievements['achieved'] and achievement not in already_stored_achievements:
+        for achievement in achievements:
+            if achievement not in user_achievements['achieved']:
                 user_achievements['achieved'].append(achievement)
+        user_achievements['achieved'] = list(set(user_achievements['achieved']))
         return ACHIEVEMENTS.put(user_achievements)
 
     def add_commands_to_username(self, username, commands):
@@ -348,7 +350,9 @@ class Database:
         for command in commands:
             if command not in user_achievements['commands']:
                 user_achievements['commands'].append(command)
-        return ACHIEVEMENTS.put(user_achievements)
+        print("EN HIER DAN?!")
+        ACHIEVEMENTS.put(user_achievements)
+        print(ACHIEVEMENTS.get({'username': username}))
 
     def increase_user_run_count(self, username):
         return ACHIEVEMENTS.update({'username': username}, {'run_programs': dynamo.DynamoIncrement(1)})
