@@ -5,6 +5,7 @@ from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, Visi
 from lark import Tree, Transformer, visitors, v_args
 from os import path, environ
 
+import warnings
 import hedy
 import utils
 from collections import namedtuple
@@ -1615,7 +1616,7 @@ class ConvertToPython_18(ConvertToPython_17):
 
 
 
-def merge_grammars(grammar_text_1, grammar_text_2):
+def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
     # rule that are new in the second file are added (remaining_rules_grammar_2)
@@ -1639,6 +1640,9 @@ def merge_grammars(grammar_text_1, grammar_text_2):
             name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
             if name_1 == name_2:
                 override_found = True
+                if definition_1.strip() == definition_2.strip():
+                    warn_message = f"The rule {name_1} is duplicated on level {level}. Please check!"
+                    warnings.warn(warn_message)
                 # Check if the rule is adding or substracting new rules                
                 has_add_op  = definition_2.startswith('+=') 
                 has_sub_op = has_add_op and '-='  in definition_2
@@ -1698,11 +1702,11 @@ def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
     keys = get_keywords_for_language(lang)
-    result = merge_grammars(result, keys)
+    result = merge_grammars(result, keys, 1)
     # then keep merging new grammars in
     for i in range(2, level+1):
         grammar_text_i = get_additional_rules_for_level(i)
-        result = merge_grammars(result, grammar_text_i)
+        result = merge_grammars(result, grammar_text_i, i)
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
