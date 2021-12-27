@@ -1247,10 +1247,10 @@ else:
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         return f"{arg0} == {arg1}" #no and statements
+
     def in_list_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
-        self.check_var_usage([arg1])
         return f"{arg0} in {arg1}"
 
 @hedy_transpiler(level=6)
@@ -1499,7 +1499,6 @@ class ConvertToPython_12(ConvertToPython_11):
     def assign(self, args):
         right_hand_side = args[1]
         left_hand_side = args[0]
-        self.check_var_usage([left_hand_side])
 
         # we now need to check if the right hand side of te assign is
         # either a var or quoted, if it is not (and undefined var is raised)
@@ -1512,14 +1511,11 @@ class ConvertToPython_12(ConvertToPython_11):
             if not (is_int(right_hand_side) or is_float(right_hand_side) or is_random(right_hand_side)):
                 raise exceptions.UnquotedAssignTextException(text = args[1])
 
-        parameter = args[0]
-        value = args[1]
-
-        if isinstance(value, Tree):
-            return parameter + " = " + value.children[0]
+        if isinstance(right_hand_side, Tree):
+            return left_hand_side + " = " + right_hand_side.children[0]
         else:
             # we no longer escape quotes here because they are now needed
-            return parameter + " = " + value + ""
+            return left_hand_side + " = " + right_hand_side + ""
 
     def var(self, args):
         name = args[0]
