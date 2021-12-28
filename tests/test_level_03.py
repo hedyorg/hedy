@@ -97,11 +97,11 @@ class TestsLevel3(HedyTester):
 
   def test_print_list_access(self):
     code = textwrap.dedent("""\
-    animals is cat, dog, platypus
+    animals is cat, dog
     print animals at random""")
 
     expected = textwrap.dedent("""\
-    animals = ['cat', 'dog', 'platypus']
+    animals = ['cat', 'dog']
     print(f'{random.choice(animals)}')""")
 
     self.multi_level_tester(

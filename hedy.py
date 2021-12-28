@@ -316,7 +316,7 @@ class RemoveAmbiguity(Transformer):
         numbered_children = [(i, children[i]) for i in range(len(children))]
         ambig_kids = [(i, x) for (i, x) in numbered_children if self.is_ambig(x)]
 
-        if data == "_ambig" and len(ambig_kids)==len(children): #if all kids are ambig kids
+        if data == "_ambig" and len(ambig_kids) == len(children): #if all kids are ambig kids
             # get kids of kids and hang them on this node
             grand_children = []
             for c in children:
@@ -334,6 +334,13 @@ class RemoveAmbiguity(Transformer):
 
             # get the kids of the first ambig node
             ambig_options = first_ambig_kid.children
+            if len(ambig_options) != len(set(ambig_options)): # there are duplicates found!
+                no_duplicates_ambig_options = []
+                for a in ambig_options:
+                    if not a in no_duplicates_ambig_options:
+                        no_duplicates_ambig_options.append(a)
+                ambig_options = no_duplicates_ambig_options # remove duplicate options sometimes occuring in combined trees
+
 
             if other_kids == []:
                 # create a node from each of the options
