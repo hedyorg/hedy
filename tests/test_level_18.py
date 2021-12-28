@@ -59,7 +59,7 @@ class TestsLevel18(HedyTester):
     def test_if_with_equals_sign(self):
       code = textwrap.dedent("""\
       naam is 'Hedy'
-      if naam = Hedy:
+      if naam == Hedy:
           print('koekoek')""")
 
       expected = textwrap.dedent("""\

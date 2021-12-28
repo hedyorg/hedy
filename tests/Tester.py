@@ -24,6 +24,7 @@ class HedyTester(unittest.TestCase):
   max_turtle_level = 10
   number_comparisons_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparisons_commands + ['!=']
+  comparison_commands_with_double_equals = comparison_commands + ['==']
 
   @staticmethod
   @contextmanager
@@ -98,7 +99,7 @@ class HedyTester(unittest.TestCase):
       all_commands = hedy.all_commands(code, level, lang)
       if expected_commands is not None:
         self.assertEqual(expected_commands, all_commands)
-      if (not 'ask' in all_commands) and (not 'input' in all_commands): #<- use this to run tests locally with unittest
+      if True: #(not 'ask' in all_commands) and (not 'input' in all_commands): #<- use this to run tests locally with unittest
         self.assertTrue(self.validate_Python_code(result))
       if output is not None:
         self.assertEqual(output, HedyTester.run_code(result))
