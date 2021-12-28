@@ -217,7 +217,8 @@ def routes(app, database):
             return 'email_invalid', 400
         if body['email'] != body['mail_repeat']:
             return 'repeat_match_email', 400
-        if not instance
+        if not isinstance(body.get('language'), str):
+            return 'language_invalid', 400
 
         # Validations, optional fields
         if 'country' in body:
@@ -226,9 +227,6 @@ def routes(app, database):
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return 'year_invalid', 400
-        if 'language' in body:
-            if not isinstance(body.get('language'), str):
-                return 'language_invalid', 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return 'gender_invalid', 400
