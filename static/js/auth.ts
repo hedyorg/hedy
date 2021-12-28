@@ -86,26 +86,6 @@ export const auth = {
     });
 
     if (op === 'signup') {
-      if (! values.username) return auth.error (auth.texts['please_username'], 'username');
-      values.username = values.username.trim ();
-      if (values.username.length < 3) return auth.error (auth.texts['username_three'], 'username');
-      if (values.username.match (/:|@/)) return auth.error (auth.texts['username_special'], 'username');
-
-      if (! values.email?.match (auth.emailRegex)) return auth.error (auth.texts['valid_email'], 'email');
-      if (values.email !== values.mail_repeat) return auth.error (auth.texts['repeat_match_email'],    'mail_repeat');
-
-      if (! values.language) return auth.error (auth.texts['please_language'], 'language');
-
-      if (! values.password) return auth.error (auth.texts['please_password'], 'password');
-      if (values.password.length < 6) return auth.error (auth.texts['password_six'], 'password');
-      if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match_password'], 'password_repeat');
-
-      if (values.birth_year) {
-        if (!validBirthYearString(values.birth_year)) {
-           return auth.error (auth.texts['valid_year'] + new Date ().getFullYear (), 'birth_year');
-        }
-      }
-
       const payload: User = {
         username: values.username,
         email: values.email,

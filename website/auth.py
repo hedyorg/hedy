@@ -193,9 +193,7 @@ def routes(app, database):
 
     @app.route('/auth/signup', methods=['POST'])
     def signup():
-        print("Er wordt een account aangemaakt!")
         body = request.json
-        print(body)
         # Validations, mandatory fields
         if not isinstance(body, dict):
             return 'body must be an object', 400
