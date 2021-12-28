@@ -232,9 +232,9 @@ adventures:
                     print 'You are standing in your garden and you have lost your keys.'
                     print 'Where do you want to look for them?'
                     print 'You can choose: tree, flowerbed, rock, postbox'
-                    while keys is 'lost'
+                    while keys == 'lost'
                         location = ask 'Where do you want to look?'
-                        if location is 'flowerbed'
+                        if location == 'flowerbed'
                             print 'Here they are!'
                             keys = 'found'
                         else
@@ -971,16 +971,16 @@ adventures:
                     ```
                     won = 'no'
                     options = 'rock', 'paper', 'scissors'
-                    while won is 'no'
+                    while won == 'no'
                         your_choice = ask 'What do you choose?'
                         computer_choice = options at random
                         print 'you chose ' your_choice
                         print 'the computer chose ' computer_choice
-                        if computer_choice is your_choice
+                        if computer_choice == your_choice
                             print 'Tie!'
-                        if computer_choice is 'rock' and your_choice is 'scissors'
+                        if computer_choice == 'rock' and your_choice == 'scissors'
                             print 'You lose!'
-                        if computer_choice is 'rock' and your_choice is 'paper'
+                        if computer_choice == 'rock' and your_choice == 'paper'
                             print 'You win!'
                             won = 'yes'
                 start_code: ""
@@ -1022,13 +1022,13 @@ adventures:
                     number = numbers at random
                     game = 'on'
                     for i in range 1 to 10
-                        if game is 'on'
+                        if game == 'on'
                             guess = ask 'Which number do you think it is?'
                             if guess > number
                                 print 'Lower!'
                             if guess < number
                                 print 'Higher!'
-                            if guess is number
+                            if guess == number
                                 print 'You win!'
                                 game = 'over'
                 start_code: ""
@@ -1447,7 +1447,7 @@ adventures:
                     ```
                     print 'Welcome at McHedy'
                     more = 'yes'
-                    while more is 'yes'
+                    while more == 'yes'
                         order = ask 'What would you like to order?'
                         print order
                         more = ask 'Would you like to order anything else?'
@@ -1751,11 +1751,11 @@ adventures:
                             good_door = doors at random
                             monster = monsters at random
                             chosen_door = ask 'Which door do you choose?'
-                            if good_door is chosen_door
+                            if good_door == chosen_door
                                 print 'You have chosen the correct door'
                             else
                                 print 'You see...' monster
-                                if monster is 'a sleeping 3 headed dog'
+                                if monster == 'a sleeping 3 headed dog'
                                     print 'Pffieuw.... Its asleep'
                                 else
                                     print 'You lose one life'
@@ -1893,16 +1893,16 @@ adventures:
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
                     good_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
-                    print 'Youre standing in front of an old mension'
+                    print 'You are standing in front of an old mension'
                     print 'Something is not right here'
                     print 'You hear ' hint[i]
-                    print 'Youre going to explore it'
+                    print 'You are going to explore it'
                     print 'You enter the kitchen en see a lighter, a raw ham and a garlic.'
                     your_weapon = ask 'What do you bring with you?'
                     print 'With your ' your_weapon ' you enter the living room'
                     print 'There you find a ' monsters[i]
                     needed_weapon = weapons[i]
-                    if your_weapon is needed_weapon
+                    if your_weapon == needed_weapon
                         print 'You use your ' your_weapon
                         print good_fate[i]
                         print 'YOU WIN!'
@@ -1972,12 +1972,12 @@ adventures:
                     points_a = 0
                     points_b = 0
                     print 'Question'
-                    print 'Answeroption A'
-                    print 'Answeroption B'
+                    print 'Answer option A'
+                    print 'Answer option B'
                     answer = ask 'Which answer?'
-                    if answer is 'A'
+                    if answer == 'A'
                         points_a = points_a + 1
-                    if answer is 'B'
+                    if answer == 'B'
                         points_b = points_b + 1
                     print 'End of the quiz!'
                     print 'Lets see the results!'
@@ -2007,7 +2007,7 @@ adventures:
                     for i in range 1 to 3
                         answer = ask 'What does ' french_words[i] ' mean?'
                         correct = translation[i]
-                        if answer is correct
+                        if answer == correct
                             print 'Correct!'
                             score = score + 1
                         else

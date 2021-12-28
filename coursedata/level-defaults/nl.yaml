@@ -461,20 +461,20 @@
         ```
         leeftijd = ask 'Hoe oud ben jij?'
         if leeftijd < 12
-                print 'Dan ben je jonger dan ik!
+                print 'Dan ben je jonger dan ik!'
         ```
 
         Als je iets precies wilt vergelijken, mag je dat nu doen met twee isjes. Zo doen de meeste programmeertalen dat:
         ```
         name = ask 'Hoe heet jij?'
-        if name == 'Hedy':
+        if name == 'Hedy'
             print 'Jij bent cool!'
         ```
 
         Je kan ook vergelijken of iets *niet* hetzelfde is met `!=`. Zo:
         ```
         name = ask 'Hoe heet jij?'
-        if name != 'Hedy':
+        if name != 'Hedy'
             print 'Jij bent Hedy niet'
         ```
 
@@ -609,9 +609,9 @@
         example: "elif a is 5:"
         demo_code: |-
             a = 2
-            if a is 1:
+            if a == 1:
                 print 'a is 1'
-            elif a is 2:
+            elif a == 2:
                 print 'a is 2'
             else:
                 print 'a is niet 1 of 2'
@@ -627,7 +627,7 @@
         example: "if kleur is groen:"
         demo_code: |-
             kleur = ask 'Wat vind jij de mooiste kleur?'
-            if kleur is groen:
+            if kleur == groen:
                 print 'Jouw kleur is groen'
             else:
                 print 'Jouw kleur is zeker niet groen'
