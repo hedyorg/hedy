@@ -7,6 +7,7 @@ class Modal {
     $('#modal-confirm-button').on('click', () => this.hide());
     $('#modal-no-button').on('click', () => this.hide());
     $('#modal-cancel-button').on('click', () => this.hide());
+    $('#modal-alert-button').on('click', () => this.hide());
   }
 
   public show() {
