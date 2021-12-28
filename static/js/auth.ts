@@ -117,7 +117,7 @@ export const auth = {
         if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status == 400 || response.status == 403) {
           if (response.responseText == "year_invalid") {
-            auth.error(auth.texts[response.responseText] + " " + new Date().getFullYear());
+            auth.error(auth.texts[response.responseText] + new Date().getFullYear());
           } else {
             auth.error(auth.texts[response.responseText]);
           }
