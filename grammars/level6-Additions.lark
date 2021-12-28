@@ -1,15 +1,24 @@
 _print_argument: (_SPACE | quoted_text | list_access | var_access | sum)*
 
+//splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
+command:+= ask_is | ask_equals | list_access_var_equals | list_access_var_is | assign_is | assign_equals | assign_list_is | assign_list_equals -= ask | list_access | assign | assign_list
 
 _IS_OR_EQUALS: (_IS|_EQUALS)
 
-ask: var _SPACE (_IS|_EQUALS) _SPACE _ASK (_SPACE _print_argument)?
+ask_is: var _SPACE _IS _SPACE _ASK (_SPACE _print_argument)?
+ask_equals: var _SPACE _EQUALS _SPACE _ASK (_SPACE _print_argument)?
+
 equality_check: textwithoutspaces _SPACE _IS_OR_EQUALS _SPACE textwithoutspaces //TODO FH nov 2021: not super pretty that this is textwithoutquotes for both a var and also a textual constant, level 11 handles this nicer now, could be done here too
 
-list_access_var: var _SPACE (_IS|_EQUALS) _SPACE var _SPACE _AT _SPACE (INT | random)
-assign_list: var _SPACE (_IS|_EQUALS) _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
+list_access_var_is: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
+list_access_var_equals: var _SPACE _EQUALS _SPACE var _SPACE _AT _SPACE (INT | random)
 
-assign: var _SPACE (_IS|_EQUALS) _SPACE sum | var _SPACE (_IS|_EQUALS) _SPACE textwithoutspaces
+assign_list_is: var _SPACE _IS _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
+assign_list_equals: var _SPACE _EQUALS _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
+
+assign_is: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
+assign_equals: var _SPACE _EQUALS _SPACE sum | var _SPACE _EQUALS _SPACE textwithoutspaces
+
 ?sum: product | sum _SPACE* _ADD _SPACE* product -> addition | sum _SPACE* _SUBTRACT _SPACE* product -> subtraction
 ?product: atom | product _SPACE* _MULTIPLY _SPACE* atom -> multiplication | product _SPACE* _DIVIDE _SPACE* atom -> division
 ?atom: INT | var_access | error_unsupported_number //TODO: means we cannot assign strings with spaces? would we want that?
