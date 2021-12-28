@@ -15,26 +15,29 @@ class Modal {
     window.scrollTo(0, 0);
   }
 
+  public show_alert() {
+    $('#modal_alert').fadeIn(1000);
+  }
+
   public hide() {
     $('#modal-mask').hide();
     $('#modal-content').hide();
-    $('#modal-alert').hide();
     $('#modal-prompt').hide();
     $('#modal-confirm').hide();
+    $('#modal_alert').hide();
   }
 
   public alert(message: string, timeoutMs?: number,  title: string = '',) {
     if(title != '') {
-      $('#modal-alert-title').html(title);
-      $('#modal-alert-title').removeClass('hidden');
+      $('#modal_alert_title').html(title);
+      $('#modal_alert_title').removeClass('hidden');
     }
     else{
       $('#modal-alert-title').html('');
       $('#modal-alert-title').addClass('hidden');
     }
-    $('#modal-alert-text').html(message);
-    this.show();
-    $('#modal-alert').show();
+    $('#modal_alert_message').html(message);
+    this.show_alert();
     if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
   }
 

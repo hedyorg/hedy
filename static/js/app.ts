@@ -507,8 +507,8 @@ export function share_program (level: number, lang: string, id: string | true, P
     }).done(function(_response) {
       // If we're sharing the program, copy the link to the clipboard.
       if (Public) copy_to_clipboard (viewProgramLink(id), true);
-      modal.alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 4000);
-      if (reload) setTimeout (function () {location.reload ()}, 1000);
+      modal.alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 2000);
+      if (reload) setTimeout (function () {location.reload ()}, 2000);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
