@@ -2,7 +2,7 @@
 
 condition: equality_check | in_list_check | smaller | bigger | not_equal | smaller_equal | bigger_equal
 
-_IS_OR_EQUALS_OR_DEQUALS: _DOUBLE_EQUALS | _IS_OR_EQUALS
+_IS_OR_EQUALS_OR_DEQUALS: _DOUBLE_EQUALS
 
 equality_check: comparison_arg _SPACE? _IS_OR_EQUALS_OR_DEQUALS _SPACE? comparison_arg
 smaller: comparison_arg _SPACE? _SMALLER _SPACE? comparison_arg
