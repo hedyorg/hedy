@@ -2,6 +2,13 @@
 
 {% block main %}
 <div class="px-8">
+    {% if achievement %}
+    <script>
+    $(function() {
+        hedyApp.showAchievements({{ achievement|safe }}, false, "");
+    });
+    </script>
+    {% endif %}
   <h2>{{auth.class_overview}}: {{class_info.name}}</h2>
   <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
       <table class="table-auto mb-4 w-full">
