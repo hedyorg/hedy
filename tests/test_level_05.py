@@ -277,7 +277,16 @@ class TestsLevel5(HedyTester):
     if selected in items:
       print(f'found!')""")
 
+    #todo: whould be tested for higher levels too (FH, dec 21)
     self.single_level_tester(code=code, expected=expected, output='found!')
+
+  def test_undefined_list_if_in_list(self):
+    code = textwrap.dedent("""\
+    selected is red
+    if selected in items print 'found!'""")
+
+    self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
+
 
   # todo would be good to make combinations with if and turtle
 

@@ -32,6 +32,21 @@ class Translations:
     d.update(**self.data.get(language, {}).get(section, {}))
     return d
 
+class AchievementTranslations:
+  def __init__(self):
+    self.data = {}
+
+    translations = glob.glob('coursedata/achievements/*.yaml')
+    for trans_file in translations:
+      lang = path.splitext(path.basename(trans_file))[0]
+      self.data[lang] = YamlFile.for_file(trans_file)
+
+  def get_translations(self, language):
+    d = collections.defaultdict(lambda: 'Unknown Exception')
+    d.update(**self.data.get('en', {}))
+    d.update(**self.data.get(language, {}))
+    return d
+
 class PageTranslations:
   def __init__(self, page):
     self.data = {}
