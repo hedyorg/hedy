@@ -1484,7 +1484,7 @@ adventures:
                     print 'Welkom bij restaurant Hedy'
                     mensen = ask 'Met hoeveel mensen bent u vanavond?'
                     prijs = 0
-                    repeat people times
+                    repeat mensen times
                         eten = ask 'Wat wilt u eten?'
                         print eten
                         if eten is friet
@@ -1757,7 +1757,7 @@ adventures:
                     deuren = 1, 2, 3
                     monsters = 'de boze heks', 'een zombie', 'een slapende 3 koppige hond'
                     for i in range 1 to 10
-                        if lives > 0
+                        if levens > 0
                             goede_deur = deuren at random
                             monster = monsters at random
                             gekozen_deur = ask 'Welke deur kies jij?'
@@ -1769,7 +1769,7 @@ adventures:
                                     print 'Pffieuw.... Hij slaapt'
                                 else
                                     print 'Je hebt een leven kwijt!'
-                                    levens = levens -1
+                                    levens = levens - 1
                         else
                             print 'GAME OVER'
                     ```
