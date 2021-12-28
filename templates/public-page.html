@@ -1,5 +1,34 @@
 {% extends "auth.html" %}
 
 {% block main %}
-    <h1>Test bericht</h1>
+    <h1>Profile page</h1>
+    <div id="general_info" class="flex flex-row mt-4">
+        <div class="w-64 mr-8">
+            <img src="{{static('/images/Hedy-logo.png')}}">
+        </div>
+        <div>
+            <h2>{{ user_info.username }}</h2>
+            <i>Dit is mijn persoonlijke tekst</i>
+            {% if achievements %}
+                <h4>{{ achievements.run_programs }} programma's gemaakt</h4>
+                <h4>{{ achievements.saved_programs }} programma's opgeslagen</h4>
+                <h4>{{ achievements.submitted_programs }} programma's ingeleverd</h4>
+                <h4></h4>
+            {% endif %}
+        </div>
+    </div>
+    <h2>Shared programs</h2>
+    {% if programs %}
+        {% for program in programs %}
+            <p>{{ program.name }}</p>
+        {% endfor %}
+    {% endif %}
+    <h2>Achievements</h2>
+    {% if achievements.achieved %}
+        {% for achievement in achievements.achieved %}
+            <p>{{ achievement }}</p>
+        {% endfor %}
+    {% else %}
+        <p>Geen behaalde achievements...</p>
+    {% endif %}
 {% endblock %}

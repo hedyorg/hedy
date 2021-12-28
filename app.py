@@ -1385,9 +1385,16 @@ def update_yaml():
 
 @app.route('/user/<username>')
 def public_user_page(username):
-    print(username)
-
-    return render_template('public-page.html')
+    user = DATABASE.user_by_username(username);
+    if not user:
+        return "User does not exist or has a private account", 404
+    else:
+        user_programs = DATABASE.programs_for_user(username)
+        user_programs = [i if i.get('public') == 1 else None for i in user_programs]
+        user_achievements = DATABASE.progress_by_username(username)
+        return render_template('public-page.html', user_info=user,
+                               programs=user_programs,
+                               achievements=user_achievements)
 
 
 @app.route('/invite/<code>', methods=['GET'])
