@@ -1383,6 +1383,13 @@ def update_yaml():
                     headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
 
 
+@app.route('/user/<username>')
+def public_user_page(username):
+    print(username)
+
+    return render_template('public-page.html')
+
+
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):
     user = current_user()
