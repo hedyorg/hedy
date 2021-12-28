@@ -108,6 +108,17 @@ class TestsLevel8(HedyTester):
     me wants a cookie!""")
 
     self.single_level_tester(code=code, expected=expected, output=output)
+
+  def test_repeat_with_undefined_variable(self):
+    code = textwrap.dedent("""\
+    repeat n times
+        print 'me wants a cookie!'""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.UndefinedVarException,
+      max_level=10)
+
   def test_repeat_with_non_latin_variable_print(self):
     code = textwrap.dedent("""\
     állatok is 5

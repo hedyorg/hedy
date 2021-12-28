@@ -5,6 +5,7 @@ from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, Visi
 from lark import Tree, Transformer, visitors, v_args
 from os import path, environ
 
+import warnings
 import hedy
 import utils
 from collections import namedtuple
@@ -344,6 +345,12 @@ class LookupEntryCollector(visitors.Visitor):
         # in level 1 there is no variable name on the left side of the ask command
         if self.level > 1:
             self.add_to_lookup(tree.children[0].children[0], tree)
+    
+    def ask_is(self, tree):
+        self.ask(tree)
+    
+    def ask_equals(self, tree):
+        self.ask(tree)
 
     def input(self, tree):
         var_name = tree.children[0].children[0]
@@ -352,10 +359,22 @@ class LookupEntryCollector(visitors.Visitor):
     def assign(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree.children[1])
+    
+    def assign_is(self, tree):
+        return self.assign(tree)
+    
+    def assign_equals(self, tree):
+        return self.assign(tree)
 
     def assign_list(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree)
+    
+    def assign_list_is(self, tree):
+        return self.assign_list(tree)
+
+    def assign_list_equals(self, tree):
+        return self.assign_list(tree)
 
     # list access is added to the lookup table not because it must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
@@ -370,6 +389,12 @@ class LookupEntryCollector(visitors.Visitor):
 
     def list_access_var(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree)
+
+    def list_access_var_is(self, tree):
+        return self.list_access_var(tree)
+
+    def list_access_var_equals(self, tree):
+        return self.list_access_var(tree)
 
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, True)
@@ -413,6 +438,12 @@ class TypeValidator(Transformer):
             self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
         self.validate_args_type_allowed(tree.children[1:], Command.ask)
         return self.to_typed_tree(tree, HedyType.any)
+    
+    def ask_is(self, tree):
+        self.ask(tree)
+    
+    def ask_equals(self, tree):
+        self.ask(tree)
 
     def input(self, tree):
         self.validate_args_type_allowed(tree.children[1:], Command.ask)
@@ -435,10 +466,22 @@ class TypeValidator(Transformer):
         self.save_type_to_lookup(tree.children[0].children[0], type_)
         return self.to_typed_tree(tree, HedyType.none)
 
+    def assign_is(self, tree):
+        return self.assign(tree)
+    
+    def assign_equals(self, tree):
+        return self.assign(tree)
+    
     def assign_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.list)
         return self.to_typed_tree(tree, HedyType.list)
 
+    def assign_list_is(self, tree):
+        return self.assign_list(tree)
+
+    def assign_list_equals(self, tree):
+        return self.assign_list(tree)
+        
     # TODO: list_access, list_access_var and repeat_list types can be inferred but for now use 'any'
     def list_access(self, tree):
         self.validate_args_type_allowed(tree.children[0], Command.list_access)
@@ -456,6 +499,12 @@ class TypeValidator(Transformer):
     def list_access_var(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
         return self.to_typed_tree(tree)
+
+    def list_access_var_is(self, tree):
+        return self.list_access_var(tree)
+
+    def list_access_var_equals(self, tree):
+        return self.list_access_var(tree)
 
     def add(self, tree):
         self.validate_args_type_allowed(tree.children[1], Command.add_to_list)
@@ -731,8 +780,7 @@ class AllCommands(Transformer):
         # some keywords have names that are not a valid name for a command
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
-
-        if keyword == 'assign' or keyword == 'assign_list':
+        if keyword in  ['assign', 'assign_is', 'assign_list', 'assign_list_is']:
             return 'is'
         if keyword == 'ifelse':
             return 'else'
@@ -748,6 +796,8 @@ class AllCommands(Transformer):
             return 'and'
         if keyword == 'while_loop':
             return 'while'
+        if keyword == 'ask_is' or keyword == 'ask_equals':
+            return 'ask'
         return keyword
 
     def __default__(self, args, children, meta):
@@ -846,6 +896,10 @@ class IsComplete(Filter):
         # in level 2 and up, ask without arguments is a list of 1, namely the var name
         incomplete = (args == [] and self.level == 1) or (len(args) == 1 and self.level >= 2)
         return not incomplete, ('ask', meta.line)
+    def ask_is(self, args, meta):
+        return self.ask(args, meta)
+    def ask_equals(self, args, meta):
+        return self.ask(args, meta)
     def print(self, args, meta):
         return args != [], ('print', meta.line)
     def input(self, args, meta):
@@ -983,7 +1037,7 @@ def process_variable_for_fstring_padded(name, lookup):
     elif is_quoted(name):
         return f"{name}.zfill(100)"
     else:
-        return f"'{name}'.zfill(100)"
+        raise hedy.exceptions.UndefinedVarException(name)
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
@@ -1020,6 +1074,7 @@ class ConvertToPython_2(ConvertToPython_1):
         return ''.join([str(c) for c in args])
     def var(self, args):
         name = args[0]
+        self.check_var_usage(args)
         return hash_var(name)
     def var_access(self, args):
         name = args[0]
@@ -1192,6 +1247,7 @@ else:
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         return f"{arg0} == {arg1}" #no and statements
+
     def in_list_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -1234,6 +1290,30 @@ class ConvertToPython_6(ConvertToPython_5):
             value = process_characters_needing_escape(value)
             return parameter + " = '" + value + "'"
 
+    def assign_is(self, args):
+        return self.assign(args)
+    
+    def assign_equals(self, args):
+        return self.assign(args)
+
+    def list_access_var_is(self, args):
+        return super().list_access_var(args)
+    
+    def list_access_var_equals(self, args):
+        return super().list_access_var(args)
+    
+    def ask_is(self, args):
+        return super().ask(args)
+    
+    def ask_equals(self, args):
+        return super().ask(args)
+    
+    def assign_list_is(self, args):
+        return super().assign_list(args)
+    
+    def assign_list_equals(self, args):
+        return super().assign_list(args)
+    
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
             return f'{str(argument.children[0])}'
@@ -1385,6 +1465,12 @@ class ConvertToPython_12(ConvertToPython_11):
           except ValueError:
             pass""")  # no number? leave as string
 
+    def ask_is(self, args):
+        return self.ask(args)
+    
+    def ask_equals(self, args):
+        return self.ask(args)
+
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
         # tree resulting from earlier processing
@@ -1404,8 +1490,15 @@ class ConvertToPython_12(ConvertToPython_11):
         values = args[1:]
         return parameter + " = [" + ", ".join(values) + "]"
 
+    def assign_list_is(self, args):
+        return self.assign_list(args)
+
+    def assign_list_equals(self, args):
+        return self.assign_list(args)
+
     def assign(self, args):
         right_hand_side = args[1]
+        left_hand_side = args[0]
 
         # we now need to check if the right hand side of te assign is
         # either a var or quoted, if it is not (and undefined var is raised)
@@ -1418,14 +1511,26 @@ class ConvertToPython_12(ConvertToPython_11):
             if not (is_int(right_hand_side) or is_float(right_hand_side) or is_random(right_hand_side)):
                 raise exceptions.UnquotedAssignTextException(text = args[1])
 
-        parameter = args[0]
-        value = args[1]
-
-        if isinstance(value, Tree):
-            return parameter + " = " + value.children[0]
+        if isinstance(right_hand_side, Tree):
+            return left_hand_side + " = " + right_hand_side.children[0]
         else:
             # we no longer escape quotes here because they are now needed
-            return parameter + " = " + value + ""
+            return left_hand_side + " = " + right_hand_side + ""
+
+    def var(self, args):
+        name = args[0]
+        # TODO (FH, dec 2021) if we check for var usage here (which in principle we should do)
+        # we can no longer use if name = green, we will have to do if name = 'green'
+        # which is a thing kids need to learn at one point but it also involves changing all
+        # examples so I will leave it for now.
+        # self.check_var_usage(args)
+        return hash_var(name)
+
+    def assign_is(self, args):
+        return self.assign(args)
+    
+    def assign_equals(self, args):
+        return self.assign(args)
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
@@ -1615,7 +1720,7 @@ class ConvertToPython_18(ConvertToPython_17):
 
 
 
-def merge_grammars(grammar_text_1, grammar_text_2):
+def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
     # rule that are new in the second file are added (remaining_rules_grammar_2)
@@ -1639,6 +1744,9 @@ def merge_grammars(grammar_text_1, grammar_text_2):
             name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
             if name_1 == name_2:
                 override_found = True
+                if definition_1.strip() == definition_2.strip():
+                    warn_message = f"The rule {name_1} is duplicated on level {level}. Please check!"
+                    warnings.warn(warn_message)
                 # Check if the rule is adding or substracting new rules                
                 has_add_op  = definition_2.startswith('+=') 
                 has_sub_op = has_add_op and '-='  in definition_2
@@ -1698,11 +1806,11 @@ def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
     keys = get_keywords_for_language(lang)
-    result = merge_grammars(result, keys)
+    result = merge_grammars(result, keys, 1)
     # then keep merging new grammars in
     for i in range(2, level+1):
         grammar_text_i = get_additional_rules_for_level(i)
-        result = merge_grammars(result, grammar_text_i)
+        result = merge_grammars(result, grammar_text_i, i)
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons

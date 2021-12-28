@@ -7,6 +7,7 @@ from test_level_01 import HedyTester
 class TestsLevel14(HedyTester):
   level = 14
 
+
   @parameterized.expand(HedyTester.comparison_commands)
   def test_comparisons(self, comparison):
     code = textwrap.dedent(f"""\
@@ -29,7 +30,6 @@ class TestsLevel14(HedyTester):
       code=code,
       max_level=16,
       expected=expected,
-
     )
 
   @parameterized.expand(HedyTester.comparison_commands)
@@ -153,6 +153,22 @@ class TestsLevel14(HedyTester):
       max_level=15,
       expected=expected
     )
+
+  def test_if_with_double_equals(self):
+    code = textwrap.dedent("""\
+    naam = 'Hedy'
+    if naam == Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=16)
 
   @parameterized.expand([
     ("'text'", '1'),      # text and number
