@@ -16,6 +16,7 @@ import exceptions
 import program_repair
 import yaml
 import sys
+import copy
 
 # Some useful constants
 HEDY_MAX_LEVEL = 18
@@ -298,24 +299,63 @@ class TypedTree(Tree):
         self.type_ = type_
 
 @v_args(tree=True)
+
+
+
+@v_args(tree=True)
 class RemoveAmbiguity(Transformer):
-    # def _ambig(self, args):
-    #     # ambig node? Simply pick the first option for now
-    #     return args[0]
+    def is_ambig(self,x):
+        try:
+            data = x.data
+        except:
+            data = None
+        return data == '_ambig'
+
 
     def __default__(self, data, children, meta):
-        ambig_kids = [x for x in children if x.data == '_ambig']
+        numbered_children = [(i, children[i]) for i in range(len(children))]
+        ambig_kids = [(i, x) for (i, x) in numbered_children if self.is_ambig(x)]
+
+        if data == "_ambig" and len(ambig_kids)==len(children): #if all kids are ambig kids
+            # get kids of kids and hang them on this node
+            grand_children = []
+            for c in children:
+                grand_children += c.children
+            t = Tree(data='_ambig', children=grand_children, meta=meta)
+            return t
+
 
         if ambig_kids:
-            # get the kids of the ambig node (just one for now!)
-            ambig_options = ambig_kids[0].children
-            # create a node from each of them
-            option_list = []
-            for option in ambig_options:
-                option_list.append(Tree(data, [option]))
+            # we expand the ambig kids one by one
+            first_ambig_kid_number = ambig_kids[0][0]
+            first_ambig_kid = ambig_kids[0][1]
+            other_kids = [(i, x) for (i, x) in numbered_children if not i == first_ambig_kid_number]
+            only_valid_other_kids = [(i, x) for (i, x) in other_kids if x.data != 'error_invalid']
 
-            t = Tree(data='_ambig', children=option_list, meta=meta)
-            return t
+            # get the kids of the first ambig node
+            ambig_options = first_ambig_kid.children
+
+            if other_kids == []:
+                # create a node from each of the options
+                option_list = []
+                for option in ambig_options:
+                    option_list.append(Tree(data, [option]))
+                t = Tree(data='_ambig', children=option_list, meta=meta)
+                return t
+            else:
+                # we need to add the non-ambig kids in:
+                option_list = []
+                for option in ambig_options:
+                    # add the ambig option back in
+                    other_kids_new = copy.deepcopy(only_valid_other_kids)
+                    other_kids_new.append((first_ambig_kid_number, option))
+
+                    # sort by original ordering
+                    all_kids = [(x) for (i,x) in sorted(other_kids_new, key=lambda x: x[0])]
+                    option_list.append(Tree(data, all_kids))
+
+                t = Tree(data='_ambig', children=option_list, meta=meta)
+                return t
 
         else:
             t = Tree(data=data, children=children, meta=meta)
@@ -2193,13 +2233,22 @@ def transpile_inner(input_string, level, lang="en"):
 
     input_string = process_input_string(input_string, level)
 
-    program_root = parse_input(input_string, level, lang)
+    program_root_org = parse_input(input_string, level, lang)
 
-    program_root = RemoveAmbiguity().transform(program_root)
+    program_root_previous = None
+    program_root_new = program_root_org
 
-    if program_root.data == "_ambig": # het is een ambig dus children is een lijst programma's
-        programs = program_root.children
+    while program_root_new != program_root_previous:
+        program_root_previous = program_root_new
+
+        program_root_new = RemoveAmbiguity().transform(program_root_previous)
+
+
+    if program_root_new.data == "_ambig": # het is een ambig dus children is een lijst programma's
+        programs = program_root_new.children
         program_root = programs[0]
+    else:
+        program_root = program_root_new
 
 
 
