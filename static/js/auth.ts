@@ -11,7 +11,9 @@ export interface Profile {
 interface User {
   username?: string;
   email?: string;
+  mail_repeat?: string;
   password?: string;
+  password_repeat?: string;
   birth_year?: number;
   language?: string,
   country?: string;
@@ -89,7 +91,9 @@ export const auth = {
       const payload: User = {
         username: values.username,
         email: values.email,
+        mail_repeat: values.mail_repeat,
         password: values.password,
+        password_repeat: values.password_repeat,
         language: values.language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
@@ -111,10 +115,9 @@ export const auth = {
         afterLogin();
       }).fail (function (response) {
         if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        const error = response.responseText || '';
-        if (error.match ('email'))         auth.error (auth.texts['exists_email']);
-        else if (error.match ('username')) auth.error (auth.texts['exists_username']);
-        else                               auth.error (auth.texts['ajax_error']);
+        if (response.status == 400 || response.status == 403) {
+          auth.error (auth.texts[response.responseText]);
+        }
       });
     }
 

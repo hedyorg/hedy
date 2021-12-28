@@ -196,51 +196,51 @@ def routes(app, database):
         body = request.json
         # Validations, mandatory fields
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return 'not_object', 400
         if not isinstance(body.get('username'), str):
-            return 'username must be a string', 400
+            return 'username_invalid', 400
         if '@' in body['username']:
-            return 'username cannot contain an @-sign', 400
+            return 'username_special', 400
         if ':' in body['username']:
-            return 'username cannot contain a colon', 400
+            return 'username_special', 400
         if len(body['username'].strip()) < 3:
-            return 'username must be at least three characters long', 400
+            return 'username_three', 400
         if not isinstance(body.get('password'), str):
-            return 'password must be a string', 400
+            return 'password_invalid', 400
         if len(body['password']) < 6:
-            return 'password must be at least six characters long', 400
+            return 'password_six', 400
         if not isinstance(body.get('email'), str):
-            return 'email must be a string', 400
+            return 'email_invalid', 400
         if not valid_email(body['email']):
-            return 'email must be a valid email', 400
+            return 'email_invalid', 400
         # Validations, optional fields
         if 'country' in body:
             if not body['country'] in countries:
-                return 'country must be a valid country', 400
+                return 'country_invalid', 400
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                return 'birth_year must be a year between 1900 and ' + datetime.datetime.now().year, 400
+                return 'year_invalid', 400
         if 'language' in body:
             if not isinstance(body.get('language'), str):
-                return 'language must be a valid language', 400
+                return 'language_invalid', 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
-                return 'gender must be m/f/o', 400
-        if 'prog_experience' in body and body['prog_experience'] not in['yes', 'no']:
-            return 'If present, prog_experience must be "yes" or "no"', 400
+                return 'gender_invalid', 400
+        if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
+            return 'experience_invalid', 400
         if 'experience_languages' in body:
             if not isinstance(body['experience_languages'], list):
-                return 'If present, experience_languages must be an array', 400
+                return 'experience_invalid', 400
             for language in body['experience_languages']:
                 if language not in['scratch', 'other_block', 'python', 'other_text']:
-                    return 'Invalid language: ' + str(language), 400
+                    return 'programming_invalid', 400
 
         user = DATABASE.user_by_username(body['username'].strip().lower())
         if user:
-            return 'username exists', 403
+            return 'exists_username', 403
         email = DATABASE.user_by_email(body['email'].strip().lower())
         if email:
-            return 'email exists', 403
+            return 'exists_email', 403
 
         hashed = hash(body['password'], make_salt())
 
