@@ -509,7 +509,15 @@ export function share_program (level: number, lang: string, id: string | true, P
       modal.alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
       if (Public) {
         let buttonDiv = document.getElementById('modal-alert-buttons')!;
-        buttonDiv.insertAdjacentHTML('afterbegin', ['<button ', 'onclick="hedyApp.copy_to_clipboard(\'', viewProgramLink(id), '\'); this.remove();"', 'class="green-btn block m-4 w-40 pb-4 pt-4">', auth.texts['copy_link_to_share'], '</button>'].join (''));
+
+        buttonDiv.insertAdjacentHTML('afterbegin', ['<button ', 'id="modal-copy-share-link"', ' onclick="hedyApp.copy_to_clipboard(\'', viewProgramLink(id), '\'); this.remove(); $(\'#modal-confirm-button\').show();"', ' class="green-btn block m-4 w-40 pb-4 pt-4">', auth.texts['copy_link_to_share'], '</button>'].join (''));
+        $('#modal-confirm-button')!.hide();
+
+        setTimeout(function () {
+          // We remove the copy button in case the user does not click on it.
+          if ($('#modal-copy-share-link')) $('#modal-copy-share-link')!.remove();
+          $('#modal-confirm-button')!.show();
+        }, 5000);
       }
 
       // If we're in the Programs page we wait some extra time before reloading the page
