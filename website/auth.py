@@ -209,6 +209,8 @@ def routes(app, database):
             return 'password_invalid', 400
         if len(body['password']) < 6:
             return 'password_six', 400
+        if not isinstance(body.get('password_repeat'), str):
+            return 'repeat_match_password', 400
         if body['password'] != body['password_repeat']:
             return 'repeat_match_password', 400
         if not isinstance(body.get('email'), str):
