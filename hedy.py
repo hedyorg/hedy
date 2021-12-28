@@ -1519,6 +1519,11 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, args):
         name = args[0]
+        # TODO (FH, dec 2021) if we check for var usage here (which in principle we should do)
+        # we can no longer use if name = green, we will have to do if name = 'green'
+        # which is a thing kids need to learn at one point but it also involves changing all
+        # examples so I will leave it for now.
+        # self.check_var_usage(args)
         return hash_var(name)
 
     def assign_is(self, args):
