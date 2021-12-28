@@ -24,6 +24,7 @@ class HedyTester(unittest.TestCase):
   max_turtle_level = 10
   number_comparisons_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparisons_commands + ['!=']
+  comparison_commands_with_double_equals = comparison_commands + ['==']
 
   @staticmethod
   @contextmanager
