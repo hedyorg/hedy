@@ -115,12 +115,14 @@ export const auth = {
         afterLogin();
       }).fail (function (response) {
         if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        if (response.status == 400 || response.status == 403) {
+        else if (response.status == 400 || response.status == 403) {
           if (response.responseText == "year_invalid") {
             auth.error(auth.texts[response.responseText] + new Date().getFullYear());
           } else {
             auth.error(auth.texts[response.responseText]);
           }
+        } else {
+          auth.error(auth.texts['ajax_error']);
         }
       });
     }
