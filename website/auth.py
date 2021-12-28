@@ -217,6 +217,7 @@ def routes(app, database):
             return 'email_invalid', 400
         if body['email'] != body['mail_repeat']:
             return 'repeat_match_email', 400
+        if not instance
 
         # Validations, optional fields
         if 'country' in body:
