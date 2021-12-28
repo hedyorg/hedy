@@ -116,7 +116,11 @@ export const auth = {
       }).fail (function (response) {
         if (response.status >= 500) return auth.error (auth.texts['server_error']);
         if (response.status == 400 || response.status == 403) {
-          auth.error (auth.texts[response.responseText]);
+          if (response.responseText == "year_invalid") {
+            auth.error(auth.texts[response.responseText] + " " + new Date().getFullYear());
+          } else {
+            auth.error(auth.texts[response.responseText]);
+          }
         }
       });
     }

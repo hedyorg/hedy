@@ -209,10 +209,15 @@ def routes(app, database):
             return 'password_invalid', 400
         if len(body['password']) < 6:
             return 'password_six', 400
+        if body['password'] != body['password_repeat']:
+            return 'repeat_match_password', 400
         if not isinstance(body.get('email'), str):
             return 'email_invalid', 400
         if not valid_email(body['email']):
             return 'email_invalid', 400
+        if body['email'] != body['mail_repeat']:
+            return 'repeat_match_email', 400
+
         # Validations, optional fields
         if 'country' in body:
             if not body['country'] in countries:
