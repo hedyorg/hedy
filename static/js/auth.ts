@@ -201,7 +201,7 @@ export const auth = {
     }
 
     if (op === 'recover') {
-      if (! values.username) return auth.error (auth.texts['please_username'], 'username');
+      if (! values.username) return auth.error (auth.texts['please_username_email'], 'username');
 
       const payload = {username: values.username};
 
