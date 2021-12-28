@@ -457,7 +457,7 @@
     intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
     commands:
     -   name: "And"
-        explanation: "Both statements (left and right of the `and`) need to be correct."
+        explanation: "Two parts both need to be correct"
         example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
             answer1 = ask 'What is 3+2?'
@@ -467,7 +467,7 @@
             else
                 print 'At least one answer is wrong!'
     -   name: "Or"
-        explanation: "`Or` At least 1 of the two statements left and right of the `or`, needs to be correct, if both are correct, it is also fine."
+        explanation: "At least 1 of the two parts need to be correct. If both are correct, it is also fine."
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
             answer1 = ask 'What is 3+2?'
@@ -483,22 +483,60 @@
             print 'You are younger than me!'
         else
             print 'You are older than me!'
-    intro_text: "We are going to learn more new items! You might know them already from mathematics, the `<` and `>`. The `<` checks if the first number is smaller than the second, like `4 < 5`. The `>` checks if the first number is bigger than the second, like `6 > 5`."
+    intro_text: |
+        We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
+        The `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` is smaller than 12.
+        The `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.
+        You use these comparisons in an `if`, like this:
+        ```
+        age = ask 'How old are you?'
+        if age > 12
+            print 'You are older than I am!'
+        ```
+
+        From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:
+        ```
+        name = ask 'What is your name?'
+        if name == 'Hedy'
+            print 'You are coo!'
+        ```
+
+        You can also compare if something is *not* equal to something else using `!=` like this:
+        ```
+        name = ask 'What is your name?'
+        if name != 'Hedy'
+            print 'You are not Hedy'
+        ```
+
     commands:
     -   name: "Smaller"
-        explanation: "We use the `<` to check if the first number is smaller than the second number. For example if we want to see if a variable is smaller than 15, we use `variable < 15`"
+        explanation: "We use the `<` to check if the first number is smaller than the second number."
         example: "For example: age < 12"
         demo_code: |-
             age = ask 'How old are you?'
             if age < 13
                 print 'You are younger than me!'
     -   name: "Bigger"
-        explanation: "We use the `>` to check if the first number is bigger than the second number. For example if we want to see if a variable is bigger than 15, we use `variable > 15`."
+        explanation: "We use the `>` to check if the first number is bigger than the second number."
         example: "For example: age > 12"
         demo_code: |-
             age = ask 'How old are you?'
             if age > 13
                 print 'You are older than me!'
+    -   name: "Equal"
+        explanation: "We use the `==` to check if two things are the same."
+        example: "For example: answer == 25"
+        demo_code: |-
+            answer = ask 'What is 5 * 5?'
+            if answer == 25
+                print 'That is correct!'
+    -   name: "Not equal"
+        explanation: "We use the `!=` to check if two things are not the same. "
+        example: "For example: answer != 25"
+        demo_code: |-
+            answer = ask 'What is 5 * 5?'
+            if answer != 25
+                print 'That is not correct!'
 
 15:
     start_code: |-
@@ -506,18 +544,23 @@
         while answer != 25
             answer = ask 'What is 5 times 5?'
         print 'A correct answer has been given'
-    intro_text: "We are going to learn a new loop, the `while` loop! We continue the loop as long as the statement is true/valid! So at the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop never ends!"
+    intro_text: |
+        We are going to learn a new loop, the `while` loop! We continue the loop as long as the statement is true.
+        So don't forget to change the value in the loop.
+
+        In the example code, we continue until a correct answer has been given.
+        If the correct answer is never given, the loop never ends!
     commands:
     -   name: "while"
-        explanation: "We can use the `while` loop with `True` and `False`"
-        example: "Example: while correct_answer is False"
+        explanation: "We can use the `while` loop with not equal"
+        example: "Example: while correct_answer != 25"
         demo_code: |-
             answer = 0
             while answer != 25
                 answer = ask 'What is 5 times 5?'
             print 'A correct answer has been given'
     -   name: "Smaller while"
-        explanation: "We can also use the `while` loop with `<` and `>`. Be careful, you need to change the number so the loop ends. We do that with count = count + 1 now."
+        explanation: "We can also use the `while` loop with `<` and `>`. "
         example: "For example: while count < 3"
         demo_code: |-
             count = 1
@@ -657,9 +700,9 @@
         prices = ['1 million dollars', 'an apple pie', 'nothing']
         your_price = prices[random]
         print 'You win ' your_price
-        if your_price = '1 million dollars' :
+        if your_price == '1 million dollars' :
             print 'Yeah! You are rich!'
-        elif your_price = 'an apple pie' :
+        elif your_price == 'an apple pie' :
             print 'Lovely, an apple pie!'
         else:
             print 'Better luck next time..'
@@ -671,9 +714,9 @@
         example: "elif a is 5:"
         demo_code: |-
             a = 2
-            if a is 1:
+            if a == 1:
                 print 'a is 1'
-            elif a is 2:
+            elif a == 2:
                 print 'a is 2'
             else:
                 print 'a is not 1 or 2'
@@ -689,7 +732,7 @@
         example: "if colour is green:'"
         demo_code: |-
             colour = ask 'What is your favorite color?'
-            if colour is green:
+            if colour == green:
                 print 'Your favorite colour is green'
             else:
                 print 'Your favorite colour is not green'
