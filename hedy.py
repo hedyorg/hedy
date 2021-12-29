@@ -299,6 +299,30 @@ class TypedTree(Tree):
         self.type_ = type_
 
 @v_args(tree=True)
+class RemoveInvalidBranches(Transformer):
+    # all rules are kept except for the error_ production rule
+    def __default__(self, data, children, meta):
+        if data == "echo":
+            return Tree("echo", children, meta)
+        elif data[:6] == "error_":
+            return None
+        elif data == "_ambig" and len(children) == 1:
+            # no more ambig!
+            return children[0]
+        else:
+            # do I have None kids? remove!
+            good_kids = [x for x in children if not x is None]
+            if len(good_kids) == 1 and data == "_ambig":
+                return children[0]
+            elif good_kids != []:
+                return Tree(data, good_kids, meta)
+            else:
+                # no kids anymore? cancel myself!
+                return None
+
+
+
+
 
 
 
@@ -310,6 +334,7 @@ class RemoveAmbiguity(Transformer):
         except:
             data = None
         return data == '_ambig'
+
 
 
     def __default__(self, data, children, meta):
@@ -330,7 +355,9 @@ class RemoveAmbiguity(Transformer):
             first_ambig_kid_number = ambig_kids[0][0]
             first_ambig_kid = ambig_kids[0][1]
             other_kids = [(i, x) for (i, x) in numbered_children if not i == first_ambig_kid_number]
-            only_valid_other_kids = [(i, x) for (i, x) in other_kids if x.data != 'error_invalid']
+            only_valid_other_kids = [(i, x) for (i, x) in other_kids if x.data[:6] != 'error_']
+
+
 
             # get the kids of the first ambig node
             ambig_options = first_ambig_kid.children
@@ -2242,12 +2269,20 @@ def transpile_inner(input_string, level, lang="en"):
 
     program_root_org = parse_input(input_string, level, lang)
 
+
     program_root_previous = None
-    program_root_new = program_root_org
+    program_root_new = RemoveInvalidBranches().transform(program_root_org)
 
-    while program_root_new != program_root_previous:
-        program_root_previous = program_root_new
-
+    prune_size = 16
+    max_tries = 16
+    tries = 0
+    while program_root_new != program_root_previous and tries < max_tries:
+        tries += 1
+        if len(program_root_new.children) > prune_size:
+            program_root_new.children = program_root_new.children[:prune_size]
+            program_root_previous = program_root_new
+        else:
+            program_root_previous = program_root_new
         program_root_new = RemoveAmbiguity().transform(program_root_previous)
 
 
