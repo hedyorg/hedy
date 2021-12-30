@@ -9,6 +9,8 @@ class Modal {
     $('#modal-cancel-button').on('click', () => this.hide());
   }
 
+  private _timeout?: ReturnType<typeof setTimeout>
+
   public show() {
     $('#modal-mask').show();
     $('#modal-content').show();
@@ -35,7 +37,12 @@ class Modal {
     $('#modal-alert-text').html(message);
     this.show();
     $('#modal-alert').show();
-    if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
+    // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
+    if(this._timeout) {
+      clearTimeout(this._timeout);
+      this._timeout = undefined;
+    }
+    if (timeoutMs) this._timeout = setTimeout(() => this.hide(), timeoutMs);
   }
 
   public confirm(message: string, confirmCb: () => void) {
