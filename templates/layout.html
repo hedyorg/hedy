@@ -51,7 +51,14 @@
 
       <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
     </div>
-
+    <div id="achievement_pop-up" class="inset-0 absolute z-10 fixed hidden" style="width: 500px; top: 60%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
+            <h3 class="text-white">{{auth.achievement_earned}}</h3>
+            <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">
+            <h4 class="text-white italic" id="achievement_reached_title"></h4>
+            <p id="achievement_reached_text"></p>
+        </div>
+    </div>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}
