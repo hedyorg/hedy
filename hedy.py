@@ -360,13 +360,9 @@ class RemoveAmbiguity(Transformer):
             return t
 
         # stumble upon a program with invalid commands? no need to keep that in!
-        if data == "program":
-            invalid_kids = [x for x in children if self.is_invalid(x)]
-            l = len(invalid_kids)
-            print(l)
-            if l > 0:
-                print('ja')
-                pass
+        if data == "program" and [x for x in children if self.is_invalid(x)] != []:
+            t = Tree(data='error_', children=children, meta=meta)
+            return t
         else:
 
             if ambig_kids:
