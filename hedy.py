@@ -298,12 +298,13 @@ class TypedTree(Tree):
         super().__init__(data, children, meta)
         self.type_ = type_
 
+
 @v_args(tree=True)
 class RemoveInvalidBranches(Transformer):
-    # all rules are kept except for the error_ production rule
+    # all rules are kept except for the error_ production rules
     def __default__(self, data, children, meta):
-        if data == "echo":
-            return Tree("echo", children, meta)
+        if data == "echo" or data == "turn" or data == "random": #these are nodes that also have no children, should be kept
+            return Tree(data, children, meta)
         elif data[:6] == "error_":
             return None
         elif data == "_ambig" and len(children) == 1:
@@ -328,6 +329,14 @@ class RemoveInvalidBranches(Transformer):
 
 @v_args(tree=True)
 class RemoveAmbiguity(Transformer):
+    def is_invalid(self, x):
+        if not x is None:
+            is_error_node = x.data[:6] == 'error_'
+            is_error_command = x.data == 'command' and x.children[0].data[:6] == 'error_'
+            return is_error_node or is_error_command
+        else:
+            return False
+
     def is_ambig(self,x):
         try:
             data = x.data
@@ -341,7 +350,8 @@ class RemoveAmbiguity(Transformer):
         numbered_children = [(i, children[i]) for i in range(len(children))]
         ambig_kids = [(i, x) for (i, x) in numbered_children if self.is_ambig(x)]
 
-        if data == "_ambig" and len(ambig_kids) == len(children): #if all kids are ambig kids
+        if data == "_ambig" and len(ambig_kids) == len(children): # if all kids are ambig kids
+            # two nested ambigs are the same as 1, so
             # get kids of kids and hang them on this node
             grand_children = []
             for c in children:
@@ -349,51 +359,58 @@ class RemoveAmbiguity(Transformer):
             t = Tree(data='_ambig', children=grand_children, meta=meta)
             return t
 
-
-        if ambig_kids:
-            # we expand the ambig kids one by one
-            first_ambig_kid_number = ambig_kids[0][0]
-            first_ambig_kid = ambig_kids[0][1]
-            other_kids = [(i, x) for (i, x) in numbered_children if not i == first_ambig_kid_number]
-            only_valid_other_kids = [(i, x) for (i, x) in other_kids if x.data[:6] != 'error_']
-
-
-
-            # get the kids of the first ambig node
-            ambig_options = first_ambig_kid.children
-            if len(ambig_options) != len(set(ambig_options)): # there are duplicates found!
-                no_duplicates_ambig_options = []
-                for a in ambig_options:
-                    if not a in no_duplicates_ambig_options:
-                        no_duplicates_ambig_options.append(a)
-                ambig_options = no_duplicates_ambig_options # remove duplicate options sometimes occuring in combined trees
-
-
-            if other_kids == []:
-                # create a node from each of the options
-                option_list = []
-                for option in ambig_options:
-                    option_list.append(Tree(data, [option]))
-                t = Tree(data='_ambig', children=option_list, meta=meta)
-                return t
-            else:
-                # we need to add the non-ambig kids in:
-                option_list = []
-                for option in ambig_options:
-                    # add the ambig option back in
-                    other_kids_new = copy.deepcopy(only_valid_other_kids)
-                    other_kids_new.append((first_ambig_kid_number, option))
-
-                    # sort by original ordering
-                    all_kids = [(x) for (i,x) in sorted(other_kids_new, key=lambda x: x[0])]
-                    option_list.append(Tree(data, all_kids))
-
-                t = Tree(data='_ambig', children=option_list, meta=meta)
-                return t
-
+        # stumble upon a program with invalid commands? no need to keep that in!
+        if data == "program":
+            invalid_kids = [x for x in children if self.is_invalid(x)]
+            l = len(invalid_kids)
+            print(l)
+            if l > 0:
+                print('ja')
+                pass
         else:
-            t = Tree(data=data, children=children, meta=meta)
-            return t
+
+            if ambig_kids:
+                # we expand the ambig kids one by one
+                first_ambig_kid_number = ambig_kids[0][0]
+                first_ambig_kid = ambig_kids[0][1]
+                other_kids = [(i, x) for (i, x) in numbered_children if not i == first_ambig_kid_number]
+                only_valid_other_kids = [(i, x) for (i, x) in other_kids if not self.is_invalid(x)]
+
+                # get the kids of the first ambig node
+                ambig_options = first_ambig_kid.children
+                if len(ambig_options) != len(set(ambig_options)): # there are duplicates found!
+                    no_duplicates_ambig_options = []
+                    for a in ambig_options:
+                        if not a in no_duplicates_ambig_options:
+                            no_duplicates_ambig_options.append(a)
+                    ambig_options = no_duplicates_ambig_options # remove duplicate options sometimes occuring in combined trees
+
+
+                if other_kids == []:
+                    # create a node from each of the options
+                    option_list = []
+                    for option in ambig_options:
+                        option_list.append(Tree(data, [option]))
+                    t = Tree(data='_ambig', children=option_list, meta=meta)
+                    return t
+                else:
+                    # we need to add the non-ambig kids in:
+                    option_list = []
+                    for option in ambig_options:
+                        # add the ambig option back in
+                        other_kids_new = copy.deepcopy(only_valid_other_kids)
+                        other_kids_new.append((first_ambig_kid_number, option))
+
+                        # sort by original ordering
+                        all_kids = [(x) for (i,x) in sorted(other_kids_new, key=lambda x: x[0])]
+                        option_list.append(Tree(data, all_kids))
+
+                    t = Tree(data='_ambig', children=option_list, meta=meta)
+                    return t
+
+            else:
+                t = Tree(data=data, children=children, meta=meta)
+                return t
 
 
     def text(self, args):
@@ -415,7 +432,8 @@ class ExtractAST(Transformer):
         return Tree('punctuation', [''.join([str(c) for c in args])])
 
     def list_access(self, args):
-        if type(args[1]) == Tree:
+        arg = args[1]
+        if type(arg) == Tree:
             if "random" in args[1].data:
                 return Tree('list_access', [args[0], 'random'])
             else:
@@ -2271,10 +2289,11 @@ def transpile_inner(input_string, level, lang="en"):
 
 
     program_root_previous = None
-    program_root_new = RemoveInvalidBranches().transform(program_root_org)
+    program_root_new = program_root_org
+    # program_root_new = RemoveInvalidBranches().transform(program_root_org)
 
-    prune_size = 16
-    max_tries = 16
+    prune_size = 100
+    max_tries = 8
     tries = 0
     while program_root_new != program_root_previous and tries < max_tries:
         tries += 1
