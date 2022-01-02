@@ -58,17 +58,17 @@ ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 QUIZ_ANSWERS = dynamo.Table(storage, 'quizAnswers', partition_key='user', sort_key='levelAttempt')
 
 # Holds information about program runs: success/failure and produced exceptions. Entries are created per user per level
-# per day and updated in place. Uses a composite partition key 'username#level' and 'date' as a sort key. Structure:
+# per week and updated in place. Uses a composite partition key 'id#level' and 'week' as a sort key. Structure:
 # {
-#   "username#level": "hedy#1",
-#   "date": '2025-12-31',
+#   "id#level": "hedy#1",
+#   "week": '2025-52',
 #   "successful_runs": 10,
 #   "InvalidCommandException": 3,
 #   "InvalidSpaceException": 2
 # }
 #
-PROGRAM_STATS = dynamo.Table(storage, 'program-stats', partition_key='username#level', sort_key='date',
-                             indexed_fields=[dynamo.Key('username', 'date')])
+PROGRAM_STATS = dynamo.Table(storage, 'program-stats', partition_key='id#level', sort_key='week',
+                             indexed_fields=[dynamo.Key('id', 'week')])
 
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
@@ -323,35 +323,6 @@ class Database:
 
         return display_adventures, restrictions
 
-    def add_program_stats(self, username, level, exception):
-        key = {"username#level": f'{username}#{level}', 'date': date.today().isoformat()}
-
-        add_attributes = {exception: dynamo.DynamoIncrement(), 'username': username} if exception else \
-            {'successful_runs': dynamo.DynamoIncrement(), 'username': username}
-
-        return PROGRAM_STATS.update(key, add_attributes)
-
-    def get_program_stats(self, users, start_date=None, end_date=None):
-        start = start_date or '2021-01-01'
-        end = end_date or date.today().isoformat()
-
-        data = [PROGRAM_STATS.get_many({'username': u, 'date': dynamo.Between(start, end)}, sort_key='date') for u in users]
-        flat_data = functools.reduce(operator.iconcat, data, [])
-        return [self._split_combined_key(d) for d in flat_data]
-
-    # Expensive and only available for admins
-    # Check once again if there is a way to query based on date only
-    def get_all_program_stats(self, start_date=None, end_date=None):
-        start = start_date or '2021-01-01'
-        end = end_date or date.today().isoformat()
-        entries = PROGRAM_STATS.scan()
-        return [self._split_combined_key(e) for e in entries if e['date'] and start <= e['date'] <= end]
-
-    def _split_combined_key(self, e):
-        [_, level] = e[PROGRAM_STATS.partition_key].split('#')
-        e['level'] = level
-        return e
-
     def progress_by_username(self, username):
         return ACHIEVEMENTS.get({'username': username})
 
@@ -404,3 +375,34 @@ class Database:
 
     def increase_user_submit_count(self, username):
         ACHIEVEMENTS.update({'username': username}, {'submitted_programs': dynamo.DynamoIncrement(1)})
+
+    def add_program_stats(self, id, level, exception):
+        key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
+
+        add_attributes = {'id': id, 'level': level}
+        if exception:
+            add_attributes[exception] = dynamo.DynamoIncrement()
+        else:
+            add_attributes['successful_runs'] = dynamo.DynamoIncrement()
+
+        return PROGRAM_STATS.update(key, add_attributes)
+
+    def get_class_program_stats(self, users, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+
+        data = [PROGRAM_STATS.get_many({'id': u, 'week': dynamo.Between(start_week, end_week)}, sort_key='week') for u in users]
+        return functools.reduce(operator.iconcat, data, [])
+
+    def get_all_program_stats(self, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+
+        return PROGRAM_STATS.get_many({'id': '@all', 'week': dynamo.Between(start_week, end_week)}, sort_key='week')
+
+    def parse_date(self, d, default):
+        return date(*map(int, d.split('-'))) if d else default
+
+    def to_year_week(self, d):
+        cal = d.isocalendar()
+        return f'{cal[0]}-{cal[1]}'

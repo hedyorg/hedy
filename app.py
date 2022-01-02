@@ -376,6 +376,7 @@ def fix_code():
 
     response = {}
     username = current_user()['username'] or None
+    exception = None
 
     querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
 
@@ -392,15 +393,19 @@ def fix_code():
                 response['FixedCode'] = ex.fixed_code
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
+                exception = ex
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
+        exception = ex
 
     except Exception as E:
         traceback.print_exc()
         print(f"error transpiling {code}")
         response["Error"] = str(E)
+        exception = ex
+
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
         'session': session_id(),
@@ -409,6 +414,7 @@ def fix_code():
         'lang': lang,
         'code': code,
         'server_error': response.get('Error'),
+        'exception': get_class_name(exception),
         'version': version(),
         'username': username,
         'read_aloud': read_aloud,
@@ -444,6 +450,7 @@ def parse():
 
     response = {}
     username = current_user()['username'] or None
+    exception = None
 
     querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
 
@@ -453,7 +460,6 @@ def parse():
 
             try:
                 transpile_result = transpile_add_stats(code, level, lang)
-                # TODO:
                 if username:
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
@@ -461,14 +467,17 @@ def parse():
                 response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
+                exception = ex
             except hedy.exceptions.InvalidCommandException as ex:
                 response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
+                exception = ex
             except hedy.exceptions.FtfyException as ex:
                 response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
+                exception = ex
         try:
             if transpile_result.has_turtle:
                 response['Code'] = TURTLE_PREFIX_CODE + transpile_result.code
@@ -484,11 +493,14 @@ def parse():
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
+        exception = ex
 
     except Exception as E:
         traceback.print_exc()
         print(f"error transpiling {code}")
         response["Error"] = str(E)
+        exception = E
+
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
         'session': session_id(),
@@ -497,6 +509,7 @@ def parse():
         'lang': lang,
         'code': code,
         'server_error': response.get('Error'),
+        'exception': get_class_name(exception),
         'version': version(),
         'username': username,
         'read_aloud': read_aloud,
@@ -514,17 +527,24 @@ def transpile_add_stats(code, level, lang_):
         add_program_stats(username, level)
         return result
     except Exception as ex:
-        add_program_stats(username, level, str(ex.__class__.__name__))
+        add_program_stats(username, level, get_class_name(ex))
         raise
 
 
+def get_class_name(i):
+    if i is not None:
+        return str(i.__class__.__name__)
+    return i
+
+
 def add_program_stats(username, level, ex=None):
-    if username:  # for now keep stats for logged users only
-        try:
+    try:
+        DATABASE.add_program_stats('@all', level, ex)
+        if username:
             DATABASE.add_program_stats(username, level, ex)
-        except Exception as ex:
-            # Adding stats should not cause failure. Log and continue.
-            querylog.log_value(server_error=ex)
+    except Exception as ex:
+        # Adding stats should not cause failure. Log and continue.
+        querylog.log_value(server_error=ex)
 
 
 def hedy_error_to_response(ex, translations):
@@ -670,8 +690,8 @@ def programs_page(request):
 
 @app.route('/program-stats')
 def get_program_stats():
-    start_date = request.args.get('start_date', default=None, type=str)
-    end_date = request.args.get('end_date', default=None, type=str)
+    start_date = request.args.get('start', default=None, type=str)
+    end_date = request.args.get('end', default=None, type=str)
 
     user = current_user()
     if not is_admin(user):
@@ -681,6 +701,8 @@ def get_program_stats():
     processed_data = _program_runs_stats(data)
     response = [{'level': k, 'data': v} for k, v in processed_data.items()]
     response.sort(key=lambda el: el['level'])
+    for r in response:
+        r['level'] = str(r['level'])
     return jsonify(response)
 
 def _program_runs_stats(data):

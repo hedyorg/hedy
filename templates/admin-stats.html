@@ -3,8 +3,10 @@
 {% block main %}
 <div class="px-8">
   <h2>Total programs: {{ program_count }}</h2>
-    <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats('week', this)">Past week</a> |
-    <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats('month', this)">Past month</a>
+    <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats(1, this)">This week</a> |
+    <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats(2, this)">Past 2 weeks</a> |
+    <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats(4, this)">Past 4 weeks</a> |
+    <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats(52, this)">Past year</a>
     <div id="stats-spinner" class="flex justify-center items-center h-64">
       <div
         class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"

@@ -278,7 +278,7 @@ export const auth = {
     });
   },
 
-  getProgramStats: function (period: string, element: any) {
+  getProgramStats: function (weeksBack: number, element: any) {
     if (element.classList.contains('active')) {
       return false
     }
@@ -292,17 +292,11 @@ export const auth = {
     element.classList.add('active');
 
     let date = new Date();
-    let end = date.toISOString().split('T')[0];
-    if (period === 'week') {
-      date.setDate(date.getDate() - 7);
-    } else {
-      date.setMonth(date.getMonth() - 1);
-    }
+    date.setDate(date.getDate() - (weeksBack - 1) * 7);
     let start = date.toISOString().split('T')[0];
 
     const data = {
-      start_date: start,
-      end_date: end
+      start: start
     };
 
     $.get('/program-stats', data).done (function (response) {
