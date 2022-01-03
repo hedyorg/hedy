@@ -139,6 +139,16 @@ class TestsLevel17(HedyTester):
       expected_commands=['is', 'if', 'print', 'print']
     )
 
+  def test_while_undefined_var(self):
+    code = textwrap.dedent("""\
+      while antwoord != 25:
+          print 'hoera'""")
+
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.UndefinedVarException
+    )
+
   def test_allow_space_before_colon(self):
 
     code = textwrap.dedent("""\
