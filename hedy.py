@@ -1245,8 +1245,11 @@ else:
         return ' and '.join(args)
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
+        remaining_text = ' '.join(args[1:])
+        arg1 = process_variable(remaining_text, self.lookup)
         return f"{arg0} == {arg1}" #no and statements
+
+        #zelfde change moet ik ook nog ff maken voor equal. check in hogere levels
 
     def in_list_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
