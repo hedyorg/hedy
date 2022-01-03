@@ -14,13 +14,34 @@ from botocore.exceptions import ClientError as email_error, NoCredentialsError
 import json
 import requests
 from website import querylog, database
+import hashlib
 
-cookie_name     = config['session']['cookie_name']
-session_length  = config['session']['session_length'] * 60
+TOKEN_COOKIE_NAME = config['session']['cookie_name']
+session_length    = config['session']['session_length'] * 60
 
 env = os.getenv('HEROKU_APP_NAME')
 
 DATABASE: database.Database = None
+
+MAILCHIMP_API_URL = None
+if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
+    # The domain in the path is the server name, which is contained in the Mailchimp API key
+    MAILCHIMP_API_URL = 'https://' + os.getenv('MAILCHIMP_API_KEY').split('-')[1] + '.api.mailchimp.com/3.0/lists/' + os.getenv('MAILCHIMP_AUDIENCE_ID')
+    MAILCHIMP_API_HEADERS = {'Content-Type': 'application/json', 'Authorization': 'apikey ' + os.getenv('MAILCHIMP_API_KEY')}
+
+def mailchimp_subscribe_user(email):
+    request_body = {'email_address': email, 'status': 'subscribed'}
+    r = requests.post(MAILCHIMP_API_URL + '/members', headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
+
+    subscription_error = None
+    if r.status_code != 200 and r.status_code != 400:
+       subscription_error = True
+    # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
+    if r.status_code == 400 and not re.match('.*already a list member', r.text):
+       subscription_error = True
+    # If there's an error in subscription through the API, we report it to the main email address
+    if subscription_error:
+        send_email(config['email']['sender'], 'ERROR - Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p><pre>Status:' + str(r.status_code) + '    Body:' + r.text + '</pre>')
 
 @querylog.timed
 def check_password(password, hash):
@@ -67,6 +88,10 @@ def current_user():
 
     return user
 
+def is_user_logged_in():
+    """Return whether or not a user is currently logged in."""
+    return bool(current_user()['username'])
+
 # Remove the current user from the Flask session.
 def forget_current_user():
     session.pop('user', None) # We are not interested in the value of the use key.
@@ -89,28 +114,32 @@ def update_is_teacher(user, is_teacher_value=1):
         send_email_template('welcome_teacher', user['email'], '')
 
 
-# The translations are imported here because current_user above is used by hedyweb.py and we need to avoid circular dependencies
-import hedyweb
-TRANSLATIONS = hedyweb.Translations()
 EMAILS = YamlFile.for_file('website/emails.yaml')
 
 # Thanks to https://stackoverflow.com/a/34499643
 def requires_login(f):
     @wraps(f)
     def inner(*args, **kws):
-        user = None
-        if request.cookies.get(cookie_name):
-            token = DATABASE.get_token(request.cookies.get(cookie_name))
-            if not token:
-                return 'unauthorized', 403
-            user = DATABASE.user_by_username(token['username'])
-            if not user:
-                return 'unauthorized', 403
-        else:
+        if not is_user_logged_in():
             return 'unauthorized', 403
-
-        return f(user, *args, **kws)
+        return f(current_user(), *args, **kws)
     return inner
+
+def login_user_from_token_cookie():
+    """Use the long-term token cookie in the user's request to try and look them up, if not already logged in."""
+    if is_user_logged_in():
+        return
+
+    if not request.cookies.get(TOKEN_COOKIE_NAME):
+        return
+
+    token = DATABASE.get_token(request.cookies.get(TOKEN_COOKIE_NAME))
+    if not token:
+        return
+
+    user = DATABASE.user_by_username(token['username'])
+    if user:
+        remember_current_user(user)
 
 # Note: translations are used only for texts that will be seen by a GUI user.
 def routes(app, database):
@@ -154,7 +183,7 @@ def routes(app, database):
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
-        resp.set_cookie(cookie_name, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+        resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
 
         # Remember the current user on the session. This is "new style" logins, which should ultimately
         # replace "old style" logins (with the cookie above), as it requires fewer database calls.
@@ -164,7 +193,9 @@ def routes(app, database):
 
     @app.route('/auth/signup', methods=['POST'])
     def signup():
+        print("Er wordt een account aangemaakt!")
         body = request.json
+        print(body)
         # Validations, mandatory fields
         if not isinstance(body, dict):
             return 'body must be an object', 400
@@ -191,6 +222,9 @@ def routes(app, database):
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return 'birth_year must be a year between 1900 and ' + datetime.datetime.now().year, 400
+        if 'language' in body:
+            if not isinstance(body.get('language'), str):
+                return 'language must be a valid language', 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return 'gender must be m/f/o', 400
@@ -219,23 +253,9 @@ def routes(app, database):
 
         if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
-            if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
-                # The first domain in the path is the server name, which is contained in the Mailchimp API key
-                request_path = 'https://' + os.getenv('MAILCHIMP_API_KEY').split('-')[1] + '.api.mailchimp.com/3.0/lists/' + os.getenv('MAILCHIMP_AUDIENCE_ID') + '/members'
-                request_headers = {'Content-Type': 'application/json', 'Authorization': 'apikey ' + os.getenv('MAILCHIMP_API_KEY')}
-                request_body = {'email_address': email, 'status': 'subscribed'}
-                r = requests.post(request_path, headers=request_headers, data=json.dumps(request_body))
-
-                subscription_error = None
-                if r.status_code != 200 and r.status_code != 400:
-                   subscription_error = True
-                # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
-                if r.status_code == 400 and not re.match('.*already a list member', r.text):
-                   subscription_error = True
-                # If there's an error in subscription through the API, we report it to the main email address
-                if subscription_error:
-                    send_email(config['email']['sender'], 'ERROR - Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p><pre>Status:' + str(r.status_code) + '    Body:' + r.text + '</pre>')
-            # Otherwise, we send an email to notify about this to the main email address
+            if MAILCHIMP_API_URL:
+                mailchimp_subscribe_user(email)
+            # Otherwise, we send an email to notify about the subscription to the main email address
             else:
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
 
@@ -251,7 +271,7 @@ def routes(app, database):
             'last_login': timems()
         }
 
-        for field in['country', 'birth_year', 'gender', 'prog_experience', 'experience_languages']:
+        for field in['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
            if field in body:
                if field == 'experience_languages' and len(body[field]) == 0:
                    continue
@@ -273,7 +293,7 @@ def routes(app, database):
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
-        resp.set_cookie(cookie_name, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+        resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
         remember_current_user(user)
 
         return resp
@@ -305,15 +325,15 @@ def routes(app, database):
     @app.route('/auth/logout', methods=['POST'])
     def logout():
         forget_current_user()
-        if request.cookies.get(cookie_name):
-            DATABASE.forget_token(request.cookies.get(cookie_name))
+        if request.cookies.get(TOKEN_COOKIE_NAME):
+            DATABASE.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         return '', 200
 
     @app.route('/auth/destroy', methods=['POST'])
     @requires_login
     def destroy(user):
         forget_current_user()
-        DATABASE.forget_token(request.cookies.get(cookie_name))
+        DATABASE.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         DATABASE.forget_user(user['username'])
         return '', 200
 
@@ -331,6 +351,9 @@ def routes(app, database):
 
         if len(body['new_password']) < 6:
             return 'password must be at least six characters long', 400
+
+        # The user object we got from 'requires_login' doesn't have the password, so look that up in the database
+        user = DATABASE.user_by_username(user['username'])
 
         if not check_password(body['old_password'], user['password']):
             return 'invalid username/password', 403
@@ -362,6 +385,9 @@ def routes(app, database):
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return 'birth_year must be a year between 1900 and ' + str(datetime.datetime.now().year), 400
+        if 'language' in body:
+            if not isinstance(body.get('language'), str):
+                return 'language must be a valid language', 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return 'body.gender must be m/f/o', 400
@@ -390,10 +416,20 @@ def routes(app, database):
                 else:
                     send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
 
+                # We check whether the user is in the Mailchimp list.
+                if not is_testing_request(request) and MAILCHIMP_API_URL:
+                    # We hash the email with md5 to avoid emails with unescaped characters triggering errors
+                    request_path = MAILCHIMP_API_URL + '/members/' + hashlib.md5(user['email'].encode('utf-8')).hexdigest()
+                    r = requests.get(request_path, headers=MAILCHIMP_API_HEADERS)
+                    # If user is subscribed, we remove the old email from the list and add the new one
+                    if r.status_code == 200:
+                        r = requests.delete(request_path, headers=MAILCHIMP_API_HEADERS)
+                        mailchimp_subscribe_user(email)
+
         username = user['username']
 
         updates = {}
-        for field in['country', 'birth_year', 'gender', 'prog_experience', 'experience_languages']:
+        for field in['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
            if field in body:
                if field == 'experience_languages' and len(body[field]) == 0:
                    updates[field] = None
@@ -408,6 +444,9 @@ def routes(app, database):
     @app.route('/profile', methods=['GET'])
     @requires_login
     def get_profile(user):
+        # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
+        user = DATABASE.user_by_username(user['username'])
+
         output = {'username': user['username'], 'email': user['email']}
         for field in['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
             if field in user:
@@ -602,11 +641,11 @@ def send_email_template(template, email, link):
 
     send_email(email, subject, body_plain, body_html)
 
-def auth_templates(page, lang, request):
+def auth_templates(page, page_title, lang, request):
     if page == 'my-profile':
-        return render_template('profile.html', auth=TRANSLATIONS.get_translations(lang, 'Auth'), current_page='my-profile')
+        return render_template('profile.html', page_title=page_title, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
-        return render_template(page + '.html',  auth=TRANSLATIONS.get_translations(lang, 'Auth'), is_teacher=False, current_page='login')
+        return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
     if page == 'admin':
         if not is_testing_request(request) and not is_admin(current_user()):
             return 'unauthorized', 403
@@ -631,7 +670,8 @@ def auth_templates(page, lang, request):
             user['index'] = counter
             counter = counter + 1
 
-        return render_template('admin.html', users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count(), auth=TRANSLATIONS.get_translations(lang, 'Auth'))
+        return render_template('admin.html', users=userdata, page_title=page_title,
+                               program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 
 def email_base_url():

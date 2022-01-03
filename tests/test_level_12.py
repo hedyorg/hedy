@@ -7,6 +7,39 @@ from test_level_01 import HedyTester
 class TestsLevel12(HedyTester):
   level = 12
 
+  def test_if_with_indent(self):
+    code = textwrap.dedent("""\
+    naam = 'Hedy'
+    if naam = Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=16)
+
+  def test_if_with_equals_sign(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    if naam = Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['is', 'if', 'print'],
+      max_level=16)
+
   # print tests
   def test_print_float(self):
     code = textwrap.dedent("""\
@@ -46,7 +79,8 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=14,
-      expected=expected
+      expected=expected,
+      expected_commands=['is', 'print', 'random']
     )
 
   # ask tests
@@ -397,6 +431,13 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
+  def test_calc_assign_equals(self):
+    code = "nummer = 4 + 5"
+    expected = "nummer = 4 + 5"
+    self.multi_level_tester(
+      code=code,
+      expected=expected)
+
   # def test_access_variable_before_definition(self):
   #   code = textwrap.dedent("""\
   #           a is b
@@ -433,13 +474,14 @@ class TestsLevel12(HedyTester):
       for i in range(int(1), int(2) + step, step):
         print(f'if youre happy and you know it')
         print(f'{action}')
+        time.sleep(0.1)
       print(f'if youre happy and you know it and you really want to show it')
       print(f'if youre happy and you know it')
-      print(f'{action}')""")
-    result = hedy.transpile(code, self.level)
+      print(f'{action}')
+      time.sleep(0.1)""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_list_creation_with_numbers(self):
     code = textwrap.dedent("""\
@@ -448,10 +490,9 @@ class TestsLevel12(HedyTester):
     expected = textwrap.dedent("""\
     getallen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     getal=random.choice(getallen)""")
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_quotes_in_condition(self):
     code = textwrap.dedent("""\
@@ -462,10 +503,9 @@ class TestsLevel12(HedyTester):
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
       print(f'koekoek')""")
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_quotes_and_spaces_in_condition(self):
     code = textwrap.dedent("""\
@@ -476,10 +516,9 @@ class TestsLevel12(HedyTester):
     naam = 'Hedy is top'
     if str(naam) == str('Hedy is top'):
       print(f'koekoek')""")
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_else_quotes_in_condition(self):
     code = textwrap.dedent("""\
@@ -494,10 +533,9 @@ class TestsLevel12(HedyTester):
       print(f'koekoek')
     else:
       print(f'soepkip')""")
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_else_no_quotes_for_num_in_condition(self):
     code = textwrap.dedent("""\
@@ -525,10 +563,9 @@ class TestsLevel12(HedyTester):
       print(f'Foutje')
       print(f'Het antwoord moest zijn {antwoord}')""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
 
   #add/remove tests
@@ -604,10 +641,9 @@ class TestsLevel12(HedyTester):
     animals is 'duck', 'dog', 'penguin'""")
     expected = textwrap.dedent("""\
     animals = ['duck', 'dog', 'penguin']""")
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_calc_chained_vars(self):
     code = textwrap.dedent("""\

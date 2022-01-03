@@ -93,14 +93,14 @@
         explanation: "একটি গণনা ask করুন এবং ত্রটি সঠিক কিনা তা পরীক্ষা করুন."
         example: "উদাহরণ: উত্তর হল ask করুন 10 প্লাস 10 কি?"
         demo_code: |
-            উত্তর is ask 'করুন 10 প্লাস 10 কি?'
+            উত্তর = ask 'করুন 10 প্লাস 10 কি?'
             if উত্তর is 20 print 'সঠিক!' else print 'ভুল'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
 7:
     start_code: |
@@ -113,21 +113,21 @@
         demo_code: "print 'হ্যালো হেডিতে আপনার স্বাগত'"
     -   name: "ask"
         explanation: "কিছু ask করার থাকলে  `ask` ব্যবহার করুন`."
-        example: "উদাহরণ:  রং is ask 'আপনার প্রিয় রং কি?'"
+        example: "উদাহরণ:  রং = ask 'আপনার প্রিয় রং কি?'"
         demo_code: |
-            রং is ask 'আপনার প্রিয় রং কি?'
+            রং = ask 'আপনার প্রিয় রং কি?'
             print রং 'is আপনার প্রিয়!'
     -   name: "if"
         explanation: "`if`ব্যবহার করে পছন্দ করুন "
         example:"উদাহরণ: "if রং সবুজ হয়  print 'সুন্দর!' নাহলে print 'মন্দ'"
         demo_code: |
-            রং is ask 'আপনার প্রিয় রং কি?'
+            রং = ask 'আপনার প্রিয় রং কি?'
             if রং is হয print 'সুন্দর!' else print 'মন্দ'
     -   name: "repeat"
         explanation: "`repeat` এবং `if` সম্মিলিত"
         example: "উদাহরণ: if রং সবুজ হয় print 'সুন্দর 3 বার repeat নাহলে print 'মন্দ' 5 বার repeat"
         demo_code: |
-            রং is ask 'আপনার প্রিয় রং কি?'
+            রং = ask 'আপনার প্রিয় রং কি?'
             if রং is হয় repeat 3 times print 'সুন্দর' else repeat 5 times print 'মন্দ'
 8:
     start_code: |
@@ -144,7 +144,7 @@
         explanation: "একটি অঙ্কের উত্তর ask করুণ এবং এটি সঠিক কিনা তা পরীক্ষা করুন আমরা এখন 2  লাইন print করতে পারি."
         example: "উদাহরণ: উত্তর হল ask করা হয় 5 প্লাস 5 কি?"
         demo_code: |-
-            উত্তর is ask 'করা হয় 5 প্লাস 5 কি?'
+            উত্তর = ask 'করা হয় 5 প্লাস 5 কি?'
             if উত্তর is 10
                 print 'সাবাশ !'
                 print 'আসলেই উত্তরটি'

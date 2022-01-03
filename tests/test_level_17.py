@@ -1,3 +1,4 @@
+import exceptions
 import hedy
 import textwrap
 from parameterized import parameterized
@@ -15,10 +16,22 @@ class TestsLevel17(HedyTester):
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
       print(f'koekoek')""")
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_if_with_equals_sign(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    if naam == Hedy:
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
 
   def test_if_else(self):
     code = textwrap.dedent("""\
@@ -46,10 +59,9 @@ class TestsLevel17(HedyTester):
       print(f'Foutje')
       print(f'Het antwoord moest zijn {antwoord}')""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_for_loop(self):
     code = textwrap.dedent("""\
@@ -64,12 +76,12 @@ class TestsLevel17(HedyTester):
     step = 1 if int(2) < int(4) else -1
     for a in range(int(2), int(4) + step, step):
       a = a + 2
-      b = b + 2""")
+      b = b + 2
+      time.sleep(0.1)""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if__else(self):
     code = textwrap.dedent("""\
@@ -85,10 +97,9 @@ class TestsLevel17(HedyTester):
     else:
       x = 222""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_forloop(self):
     code = textwrap.dedent("""\
@@ -99,12 +110,12 @@ class TestsLevel17(HedyTester):
     step = 1 if int(1) < int(10) else -1
     for i in range(int(1), int(10) + step, step):
       print(f'{i}')
+      time.sleep(0.1)
     print(f'wie niet weg is is gezien')""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_allow_space_after_else_line(self):
     code = textwrap.dedent("""\
@@ -124,7 +135,18 @@ class TestsLevel17(HedyTester):
     self.multi_level_tester(
       max_level=17,
       code=code,
-      expected=expected
+      expected=expected,
+      expected_commands=['is', 'if', 'print', 'print']
+    )
+
+  def test_while_undefined_var(self):
+    code = textwrap.dedent("""\
+      while antwoord != 25:
+          print 'hoera'""")
+
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.UndefinedVarException
     )
 
   def test_allow_space_before_colon(self):
@@ -177,12 +199,12 @@ class TestsLevel17(HedyTester):
       else:
         print(f'Dat is goed!')
       if str(antwoord) == str('25'):
-        i = 10""")
+        i = 10
+      time.sleep(0.1)""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_elif(self):
     code = textwrap.dedent("""\
@@ -198,10 +220,9 @@ class TestsLevel17(HedyTester):
       elif str(a) == str('2'):
         x = 222""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_with_multiple_elifs(self):
     code = textwrap.dedent("""\
@@ -221,10 +242,9 @@ class TestsLevel17(HedyTester):
       elif str(a) == str('2'):
         x = 222""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
@@ -275,10 +295,9 @@ class TestsLevel17(HedyTester):
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   @parameterized.expand(HedyTester.number_comparisons_commands)
   def test_smaller_with_string_gives_type_error(self, comparison):
@@ -290,4 +309,48 @@ class TestsLevel17(HedyTester):
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
+
+  def test_not_equal_string_literal(self):
+    code = textwrap.dedent(f"""\
+      if 'quoted' != 'string':
+        sleep 0""")
+    expected = textwrap.dedent(f"""\
+      if 'quoted'.zfill(100)!='string'.zfill(100):
+        time.sleep(0)""")
+
+  @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])
+  def test_not_equal(self, arg):
+    code = textwrap.dedent(f"""\
+      a = {arg}
+      b = {arg}
+      if a != b:
+        b = 1""")
+
+    expected = textwrap.dedent(f"""\
+      a = {arg}
+      b = {arg}
+      if str(a).zfill(100)!=str(b).zfill(100):
+        b = 1""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected
+    )
+
+  @parameterized.expand([
+    ("'text'", '1'),        # text and number
+    ('[1, 2]', '1'),        # list and number
+    ('[1, 2]', "'text'")])  # list and text
+  def test_not_equal_with_diff_types_gives_error(self, left, right):
+    code = textwrap.dedent(f"""\
+        a = {left}
+        b = {right}
+        if a != b:
+            b = 1""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=exceptions.InvalidTypeCombinationException
     )
