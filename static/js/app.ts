@@ -567,12 +567,12 @@ export function share_program (level: number, lang: string, id: string | true, P
         showAchievements(response.achievement, false, "");
       }
 
-      modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
       if (Public) {
         $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
       } else {
         $('#modal-copy-button').hide();
       }
+      modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
 
       if (reload) setTimeout (function () {location.reload ()}, Public ? 5000 : 1000);
     }).fail(function(err) {
@@ -663,7 +663,10 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  if (! noAlert) modal.alert (auth.texts['copy_clipboard'], 4000);
+  if (! noAlert) {
+    $('#modal-copy').hide();
+    modal.alert (auth.texts['copy_clipboard'], 4000);
+  }
 }
 
 /**
