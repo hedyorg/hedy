@@ -937,6 +937,9 @@ def hedy_transpiler(level):
     return decorator
 
 class ConvertToPython(Transformer):
+    def __init__(self, punctuation_symbols, lookup):
+        self.lookup = lookup
+
     def is_variable(self, name):
         all_names = [a.name for a in self.lookup]
         return hash_var(name) in all_names
@@ -1006,26 +1009,31 @@ class ConvertToPython(Transformer):
             raise exceptions.UndefinedVarException(name=first_unquoted_var)
 
     # static methods
+    @staticmethod
     def is_quoted(s):
         return s[0] == "'" and s[-1] == "'"
 
+    @staticmethod
     def is_int(n):
         try:
             int(n)
             return True
         except ValueError:
             return False
-    
+
+    @staticmethod
     def is_float(n):
         try:
             float(n)
             return True
         except ValueError:
             return False
-    
+
+    @staticmethod
     def is_random(s):
         return 'random.choice' in s
 
+    @staticmethod
     def indent(s):
         lines = s.split('\n')
         return '\n'.join(['  ' + l for l in lines])
