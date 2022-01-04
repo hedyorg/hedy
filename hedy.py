@@ -197,33 +197,6 @@ def get_suggestions_for_language(lang, level):
     return en_lang_commands
 
 
-def hash_needed(var):
-    # this function now sometimes gets a str and sometimes - a LookupEntry
-    # not pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
-
-    # some elements are not names but processed names, i.e. random.choice(dieren)
-    # they should not be hashed
-    # these are either of type assignment and operation or already processed and then contain ( or [
-    if (type(var) is LookupEntry and var.skip_hashing) or (isinstance(var, str) and ('[' in var or '(' in var)):
-        return False
-
-    var_name = var.name if type(var) is LookupEntry else var
-
-    return var_name in reserved_words or character_skulpt_cannot_parse.search(var_name) is not None
-
-
-def hash_var(var):
-    var_name = var.name if type(var) is LookupEntry else var
-    if hash_needed(var):
-        # hash "illegal" var names
-        # being reserved keywords
-        # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
-        # prepend with v for when hash starts with a number
-        hash_object = hashlib.md5(var_name.encode())
-        return "v" + hash_object.hexdigest()
-    else:
-        return var_name
-
 def closest_command(invalid_command, known_commands, threshold=2):
     # closest_command() searches for a similar command (distance smaller than threshold)
     # TODO: make the result value be tuple instead of a ugly None & string mix
@@ -859,9 +832,7 @@ class IsValid(Filter):
         return False, InvalidInfo("print without quotes", line=meta.line, column=meta.column)
 
     def error_invalid(self, args, meta):
-        # TODO: this will not work for misspelling 'at', needs to be improved!
         # TODO: add more information to the InvalidInfo
-
 
         error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
         return False, error
@@ -937,17 +908,143 @@ def hedy_transpiler(level):
     return decorator
 
 @hedy_transpiler(level=1)
-class ConvertToPython_1(Transformer):
+class ConvertToPython(Transformer):
+
+    def hash_needed(var):
+        # this function now sometimes gets a str and sometimes - a LookupEntry
+        # not pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
+
+        # some elements are not names but processed names, i.e. random.choice(dieren)
+        # they should not be hashed
+        # these are either of type assignment and operation or already processed and then contain ( or [
+        if (type(var) is LookupEntry and var.skip_hashing) or (isinstance(var, str) and ('[' in var or '(' in var)):
+            return False
+
+        var_name = var.name if type(var) is LookupEntry else var
+
+        return var_name in reserved_words or character_skulpt_cannot_parse.search(var_name) is not None
+
+    def hash_var(var):
+        var_name = var.name if type(var) is LookupEntry else var
+        if hash_needed(var):
+            # hash "illegal" var names
+            # being reserved keywords
+            # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
+            # prepend with v for when hash starts with a number
+            hash_object = hashlib.md5(var_name.encode())
+            return "v" + hash_object.hexdigest()
+        else:
+            return var_name
+
+    def is_variable(name, lookup):
+        all_names = [a.name for a in lookup]
+        return hash_var(name) in all_names
+
+    def process_variable(arg, lookup):
+        # processes a variable by hashing and escaping when needed
+        if ConvertToPython_1.is_variable(arg, lookup):
+            return hash_var(arg)
+        elif is_quoted(arg):  # sometimes kids accidentally quote strings, then we do not want them quoted again
+            return f"{arg}"
+        else:
+            return f"'{arg}'"
+
+    def process_variable_for_fstring(name, lookup):
+        if ConvertToPython_1.is_variable(name, lookup):
+            return "{" + hash_var(name) + "}"
+        else:
+            return name
+
+    def process_variable_for_fstring_padded(name, lookup):
+        # used to transform variables in comparisons
+        if ConvertToPython_1.is_variable(name, lookup):
+            return f"str({hash_var(name)}).zfill(100)"
+        elif is_float(name):
+            return f"str({name}).zfill(100)"
+        elif is_quoted(name):
+            return f"{name}.zfill(100)"
+        else:
+            raise hedy.exceptions.UndefinedVarException(name)
+
+    def get_fresh_var(self, name):
+        while ConvertToPython_1.is_variable(name, self.lookup):
+            name = '_' + name
+        return name
+
+    def check_var_usage(self, args):
+        # this function checks whether arguments are valid
+        # we can proceed if all arguments are either quoted OR all variables
+
+        args_to_process = [a for a in args if not isinstance(a, Tree)]#we do not check trees (calcs) they are always ok
+
+        unquoted_args = [a for a in args_to_process if not is_quoted(a)]
+        unquoted_in_lookup = [ConvertToPython_1.is_variable(a, self.lookup) for a in unquoted_args]
+
+        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
+            # all good? return for further processing
+            return args
+        else:
+            # return first name with issue
+            # note this is where issue #832 can be addressed by checking whether
+            # first_unquoted_var ius similar to something in the lookup list
+            first_unquoted_var = unquoted_args[0]
+            raise exceptions.UndefinedVarException(name=first_unquoted_var)
+
+    def print_ask_args(self, args):
+        args = self.check_var_usage(args)
+        result = ''
+        for argument in args:
+            argument = argument.replace("'", '')  # no quotes needed in fstring
+            result += ConvertToPython_1.process_variable_for_fstring(argument, self.lookup)
+        return result
+
+    def is_quoted(s):
+        return s[0] == "'" and s[-1] == "'"
+
+    def make_f_string(args, lookup):
+        argument_string = ''
+        for argument in args:
+            if ConvertToPython_1.is_variable(argument, lookup):
+                # variables are placed in {} in the f string
+                argument_string += "{" + hash_var(argument) + "}"
+            else:
+                # strings are written regularly
+                # however we no longer need the enclosing quotes in the f-string
+                # the quotes are only left on the argument to check if they are there.
+                argument_string += argument.replace("'", '')
+
+        return f"print(f'{argument_string}')"
+
+def is_int(n):
+    try:
+        int(n)
+        return True
+    except ValueError:
+        return False
+
+def is_float(n):
+    try:
+        float(n)
+        return True
+    except ValueError:
+        return False
+
+def is_random(s):
+    return 'random.choice' in s
+
+def process_token_or_tree(self, argument):
+    if isinstance(argument, Tree):
+        return f'{str(argument.children[0])}'
+    else:
+        return f'{argument}'
+
+@hedy_transpiler(level=1)
+class ConvertToPython_1(ConvertToPython):
 
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
         self.lookup = lookup
         __class__.level = 1
-
-    def get_fresh_var(self, name):
-        while is_variable(name, self.lookup):
-            name = '_' + name
-        return name
 
     def program(self, args):
         return '\n'.join([str(c) for c in args])
@@ -996,7 +1093,7 @@ class ConvertToPython_1(Transformer):
             return "t.right(90)"  # no arguments defaults to a right turn
 
         arg = args[0]
-        if is_variable(arg, self.lookup) or arg.isnumeric():
+        if ConvertToPython_1.is_variable(arg, self.lookup) or arg.isnumeric():
             return f"t.right({arg})"
         elif arg == 'left':
             return "t.left(90)"
@@ -1007,37 +1104,6 @@ class ConvertToPython_1(Transformer):
             raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
                                                           allowed_types=get_allowed_types(Command.turn, self.level))
 
-
-# todo: could be moved into the transpiler class
-def is_variable(name, lookup):
-    all_names = [a.name for a in lookup]
-    return hash_var(name) in all_names
-
-def process_variable(arg, lookup):
-    #processes a variable by hashing and escaping when needed
-    if is_variable(arg, lookup):
-        return hash_var(arg)
-    elif is_quoted(arg): #sometimes kids accidentally quote strings, then we do not want them quoted again
-        return f"{arg}"
-    else:
-        return f"'{arg}'"
-
-def process_variable_for_fstring(name, lookup):
-    if is_variable(name, lookup):
-        return "{" + hash_var(name) + "}"
-    else:
-        return name
-
-def process_variable_for_fstring_padded(name, lookup):
-    # used to transform variables in comparisons
-    if is_variable(name, lookup):
-        return f"str({hash_var(name)}).zfill(100)"
-    elif is_float(name):
-        return f"str({name}).zfill(100)"
-    elif is_quoted(name):
-        return f"{name}.zfill(100)"
-    else:
-        raise hedy.exceptions.UndefinedVarException(name)
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
@@ -1051,24 +1117,6 @@ class ConvertToPython_2(ConvertToPython_1):
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
 
-    def check_var_usage(self, args):
-        # this function checks whether arguments are valid
-        # we can proceed if all arguments are either quoted OR all variables
-
-        args_to_process = [a for a in args if not isinstance(a, Tree)]#we do not check trees (calcs) they are always ok
-
-        unquoted_args = [a for a in args_to_process if not is_quoted(a)]
-        unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
-
-        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            # all good? return for further processing
-            return args
-        else:
-            # return first name with issue
-            # note this is where issue #832 can be addressed by checking whether
-            # first_unquoted_var ius similar to something in the lookup list
-            first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var)
 
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
@@ -1093,7 +1141,7 @@ class ConvertToPython_2(ConvertToPython_1):
             else:
                 space = " "
 
-            argument_string += process_variable_for_fstring(argument, self.lookup) + space
+            argument_string += ConvertToPython_1.process_variable_for_fstring(argument, self.lookup) + space
 
             i = i + 1
 
@@ -1121,7 +1169,7 @@ class ConvertToPython_2(ConvertToPython_1):
             return "t.right(90)"
 
         arg = hash_var(args[0])
-        if is_variable(arg, self.lookup) or arg.isnumeric():
+        if ConvertToPython_1.is_variable(arg, self.lookup) or arg.isnumeric():
             return f"t.right({arg})"
 
         # the TypeValidator should protect against reaching this line:
@@ -1143,22 +1191,7 @@ class ConvertToPython_2(ConvertToPython_1):
             return f"time.sleep({args[0]})"
 
 
-def is_quoted(s):
-    return s[0] == "'" and s[-1] == "'"
 
-def make_f_string(args, lookup):
-    argument_string = ''
-    for argument in args:
-        if is_variable(argument, lookup):
-            # variables are placed in {} in the f string
-            argument_string += "{" + hash_var(argument) + "}"
-        else:
-            # strings are written regularly
-            # however we no longer need the enclosing quotes in the f-string
-            # the quotes are only left on the argument to check if they are there.
-            argument_string += argument.replace("'", '')
-
-    return f"print(f'{argument_string}')"
 
 @hedy_transpiler(level=3)
 class ConvertToPython_3(ConvertToPython_2):
@@ -1199,14 +1232,6 @@ class ConvertToPython_4(ConvertToPython_3):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
-    def print_ask_args(self, args):
-        args = self.check_var_usage(args)
-        result = ''
-        for argument in args:
-            argument = argument.replace("'", '')  # no quotes needed in fstring
-            result += process_variable_for_fstring(argument, self.lookup)
-        return result
-
     def print(self, args):
         argument_string = self.print_ask_args(args)
         return f"print(f'{argument_string}')"
@@ -1244,13 +1269,13 @@ else:
     def condition(self, args):
         return ' and '.join(args)
     def equality_check(self, args):
-        arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
+        arg0 = ConvertToPython_1.process_variable(args[0], self.lookup)
+        arg1 = ConvertToPython_1.process_variable(args[1], self.lookup)
         return f"{arg0} == {arg1}" #no and statements
 
     def in_list_check(self, args):
-        arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
+        arg0 = ConvertToPython_1.process_variable(args[0], self.lookup)
+        arg1 = ConvertToPython_1.process_variable(args[1], self.lookup)
         return f"{arg0} in {arg1}"
 
 @hedy_transpiler(level=6)
@@ -1267,13 +1292,13 @@ class ConvertToPython_6(ConvertToPython_5):
                 args_new.append("{" + a.children[0] + "}")
             else:
                 a = a.replace("'", "")  # no quotes needed in fstring
-                args_new.append(process_variable_for_fstring(a, self.lookup))
+                args_new.append(ConvertToPython_1.process_variable_for_fstring(a, self.lookup))
 
         return ''.join(args_new)
 
     def equality_check(self, args):
-        arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
+        arg0 = ConvertToPython_1.process_variable(args[0], self.lookup)
+        arg1 = ConvertToPython_1.process_variable(args[1], self.lookup)
         #TODO if we start using fstrings here, this str can go
         if len(args) == 2:
             return f"str({arg0}) == str({arg1})" #no and statements
@@ -1352,7 +1377,7 @@ def sleep_after(commands, indent=True):
 class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, args):
         var_name = self.get_fresh_var('i')
-        times = process_variable(args[0], self.lookup)
+        times = ConvertToPython_1.process_variable(args[0], self.lookup)
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
         command = sleep_after(command, False)
@@ -1420,36 +1445,11 @@ for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar
 {body}"""
 
 
-def is_int(n):
-    try:
-        int(n)
-        return True
-    except ValueError:
-        return False
-
-
-def is_float(n):
-    try:
-        float(n)
-        return True
-    except ValueError:
-        return False
-
-
-def is_random(s):
-    return 'random.choice' in s
-
-
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
         return ''.join(args)
 
-    def process_token_or_tree(self, argument):
-        if isinstance(argument, Tree):
-            return f'{str(argument.children[0])}'
-        else:
-            return f'{argument}'
 
     def ask(self, args):
         var = args[0]
@@ -1544,8 +1544,8 @@ class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, args, operator):
 
         # we are generating an fstring now
-        arg0 = process_variable_for_fstring_padded(args[0], self.lookup)
-        arg1 = process_variable_for_fstring_padded(args[1], self.lookup)
+        arg0 = ConvertToPython_1.process_variable_for_fstring_padded(args[0], self.lookup)
+        arg1 = ConvertToPython_1.process_variable_for_fstring_padded(args[1], self.lookup)
 
         # zfill(100) in process_variable_for_fstring_padded leftpads variables to length 100 with zeroes (hence the z fill)
         # that is to make sure that string comparison works well "ish" for numbers
