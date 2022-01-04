@@ -986,6 +986,25 @@ class ConvertToPython(Transformer):
             name = '_' + name
         return name
 
+    def check_var_usage(self, args):
+        # this function checks whether arguments are valid
+        # we can proceed if all arguments are either quoted OR all variables
+
+        args_to_process = [a for a in args if not isinstance(a, Tree)]#we do not check trees (calcs) they are always ok
+
+        unquoted_args = [a for a in args_to_process if not ConvertToPython.is_quoted(a)]
+        unquoted_in_lookup = [self.is_variable(a) for a in unquoted_args]
+
+        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
+            # all good? return for further processing
+            return args
+        else:
+            # return first name with issue
+            # note this is where issue #832 can be addressed by checking whether
+            # first_unquoted_var ius similar to something in the lookup list
+            first_unquoted_var = unquoted_args[0]
+            raise exceptions.UndefinedVarException(name=first_unquoted_var)
+
     # static methods
     def is_quoted(s):
         return s[0] == "'" and s[-1] == "'"
@@ -1006,6 +1025,11 @@ class ConvertToPython(Transformer):
     
     def is_random(s):
         return 'random.choice' in s
+
+    def indent(s):
+        lines = s.split('\n')
+        return '\n'.join(['  ' + l for l in lines])
+
 
 
 @hedy_transpiler(level=1)
@@ -1089,24 +1113,6 @@ class ConvertToPython_2(ConvertToPython_1):
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
 
-    def check_var_usage(self, args):
-        # this function checks whether arguments are valid
-        # we can proceed if all arguments are either quoted OR all variables
-
-        args_to_process = [a for a in args if not isinstance(a, Tree)]#we do not check trees (calcs) they are always ok
-
-        unquoted_args = [a for a in args_to_process if not ConvertToPython.is_quoted(a)]
-        unquoted_in_lookup = [self.is_variable(a) for a in unquoted_args]
-
-        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            # all good? return for further processing
-            return args
-        else:
-            # return first name with issue
-            # note this is where issue #832 can be addressed by checking whether
-            # first_unquoted_var ius similar to something in the lookup list
-            first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var)
 
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
@@ -1240,9 +1246,6 @@ class ConvertToPython_4(ConvertToPython_3):
     def error_print_nq(self, args):
         return ConvertToPython_2.print(self, args)
 
-def indent(s):
-    lines = s.split('\n')
-    return '\n'.join(['  ' + l for l in lines])
 
 @hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
@@ -1255,13 +1258,13 @@ class ConvertToPython_5(ConvertToPython_4):
 
     def ifs(self, args):
         return f"""if {args[0]}:
-{indent(args[1])}"""
+{ConvertToPython.indent(args[1])}"""
 
     def ifelse(self, args):
         return f"""if {args[0]}:
-{indent(args[1])}
+{ConvertToPython.indent(args[1])}
 else:
-{indent(args[2])}"""
+{ConvertToPython.indent(args[2])}"""
     def condition(self, args):
         return ' and '.join(args)
     def equality_check(self, args):
@@ -1378,7 +1381,7 @@ class ConvertToPython_7(ConvertToPython_6):
         # in level 7, repeats can only have 1 line as their arguments
         command = sleep_after(command, False)
         return f"""for {var_name} in range(int({str(times)})):
-{indent(command)}"""
+{ConvertToPython.indent(command)}"""
 
 @hedy_transpiler(level=8)
 @hedy_transpiler(level=9)
@@ -1391,7 +1394,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         return "".join(args)
 
     def repeat(self, args):
-        all_lines = [indent(x) for x in args[1:]]
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
@@ -1400,14 +1403,14 @@ class ConvertToPython_8_9(ConvertToPython_7):
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
 
-        all_lines = [indent(x) for x in args[1:]]
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
 
         return "if " + args[0] + ":\n" + "\n".join(all_lines)
 
     def elses(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
 
-        all_lines = [indent(x) for x in args]
+        all_lines = [ConvertToPython.indent(x) for x in args]
 
         return "\nelse:\n" + "\n".join(all_lines)
 
@@ -1423,7 +1426,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
     def repeat_list(self, args):
       args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
-      body = "\n".join([indent(x) for x in args[2:]])
+      body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
       body = sleep_after(body, True)
 
@@ -1433,7 +1436,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
 class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        body = "\n".join([indent(x) for x in args[3:]])
+        body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
         return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
@@ -1583,7 +1586,7 @@ class ConvertToPython_14(ConvertToPython_13):
 class ConvertToPython_15(ConvertToPython_14):
     def while_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        all_lines = [indent(x) for x in args[1:]]
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = sleep_after(body)
         return "while " + args[0] + ":\n" + body
@@ -1602,7 +1605,7 @@ class ConvertToPython_16(ConvertToPython_15):
 class ConvertToPython_17(ConvertToPython_16):
     def elifs(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        all_lines = [indent(x) for x in args[1:]]
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
 @hedy_transpiler(level=18)
