@@ -41,7 +41,7 @@ class TestsLevel1(HedyTester):
     result = hedy.transpile_inner(code, self.level)
     expected = False
     self.assertEqual(expected, result.has_turtle)
-    self.assertEqual('koekoek', hedy.all_print_arguments(code, self.level))
+    self.assertEqual(['koekoek'], hedy.all_print_arguments(code, self.level))
 
 
   def test_print_with_comma(self):

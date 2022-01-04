@@ -69,7 +69,7 @@ class TestsLevel13(HedyTester):
       code=code,
       max_level=16,
       expected=expected,
-      expected_commands=['if', 'or', 'print']
+      expected_commands=['ask', 'ask', 'if', 'and', 'print']
     )
 
 
