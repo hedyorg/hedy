@@ -38,6 +38,41 @@ class TestsLevel13(HedyTester):
       expected=expected
     )
 
+  def test_equals(self):
+    code = textwrap.dedent("""\
+    name = ask 'what is your name?'
+    leeftijd = ask 'what is your age?'
+    if name is 'Hedy' and age is 2
+        print 'You are the real Hedy!'""")
+
+    expected = textwrap.dedent("""\
+      name = input(f'what is your name?')
+      try:
+        name = int(name)
+      except ValueError:
+        try:
+          name = float(name)
+        except ValueError:
+          pass
+      leeftijd = input(f'what is your age?')
+      try:
+        leeftijd = int(leeftijd)
+      except ValueError:
+        try:
+          leeftijd = float(leeftijd)
+        except ValueError:
+          pass
+      if str(name) == str('Hedy') and str('age') == str('2'):
+        print(f'You are the real Hedy!')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+      expected_commands=['if', 'or', 'print']
+    )
+
+
   def test_or(self):
     code = textwrap.dedent("""\
       if 5 is 5 or 4 is 4

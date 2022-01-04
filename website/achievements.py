@@ -174,8 +174,9 @@ class Achievements:
             self.new_achieved.append("deadline_daredevil_III")
 
     def check_code_achievements(self, code, level):
+        commands_in_code = hedy.all_commands(code, level, self.lang)
         if 'trying_is_key' not in self.achieved:
-            for command in set(hedy.all_commands(code, level, self.lang)):
+            for command in set(commands_in_code):
                 if command not in self.commands:
                     self.new_commands.append(command)
         if set(self.commands) == set(hedy.commands_per_level.get(hedy.HEDY_MAX_LEVEL)):
@@ -187,12 +188,12 @@ class Achievements:
         if 'hedy_honor' not in self.achieved and "Hedy" in code:
             self.new_achieved.append("hedy_honor")
         if 'hedy-ious' not in self.achieved:
-            lines = code.splitlines()
-            for line in lines:
-                if "print" in hedy.all_commands(line, level, self.lang):
-                    if lines.count(line) >= 10:
-                        self.new_achieved.append("hedy-ious")
-                        return
+            all_print_arguments = hedy.all_print_arguments(code, level, self.lang)
+            for argument in all_print_arguments:
+                if all_print_arguments.count(argument) > 10:
+                    self.new_achieved.append("hedy-ious")
+                    break
+
 
     def check_response_achievements(self, code, response):
         if 'ninja_turtle' not in self.achieved and 'has_turtle' in response and response['has_turtle']:
