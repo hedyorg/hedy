@@ -666,7 +666,7 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
   }
   if (! noAlert) {
     modal.hide();
-    modal.alert (auth.texts['copy_clipboard'], 4000);
+    modal.alert (auth.texts['copy_clipboard'], 2000);
   }
 }
 
