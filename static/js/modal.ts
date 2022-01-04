@@ -41,12 +41,9 @@ class Modal {
       $('#modal-alert-title').html('');
       $('#modal-alert-title').addClass('hidden');
     }
-    $('#modal_alert_message').html(message);
+    $('#modal_alert_text').html(message);
     this.show_alert();
     if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
-    $('#modal-alert-text').html(message);
-    this.show();
-    $('#modal-alert').show();
     // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
     if(this._timeout) {
       clearTimeout(this._timeout);

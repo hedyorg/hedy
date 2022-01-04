@@ -569,10 +569,11 @@ export function share_program (level: number, lang: string, id: string | true, P
 
       if (Public) {
         $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
+        modal.copy_alert (auth.texts['share_success_detail'], 5000);
       } else {
-        $('#modal-copy-button').hide();
+        modal.alert (auth.texts['unshare_success_detail'], 1000);
       }
-      modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
+
 
       if (reload) setTimeout (function () {location.reload ()}, Public ? 5000 : 1000);
     }).fail(function(err) {
