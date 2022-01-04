@@ -569,15 +569,11 @@ export function share_program (level: number, lang: string, id: string | true, P
 
       modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
       if (Public) {
-        setTimeout(function () {
-          $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
-        }, 5000);
+        $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
       } else {
         $('#modal-copy-button').hide();
       }
 
-      // If we're in the Programs page we wait some extra time before reloading the page
-      // so that the user can click on the "copy link to share" button
       if (reload) setTimeout (function () {location.reload ()}, Public ? 5000 : 1000);
     }).fail(function(err) {
       console.error(err);
