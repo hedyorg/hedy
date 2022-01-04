@@ -1131,7 +1131,7 @@ class ConvertToPython_2(ConvertToPython_1):
     def assign(self, args):
         parameter = args[0]
         value = args[1]
-        #if the assigned value contains single quotes, escape them
+        # if the assigned value contains single quotes, escape them
         value = process_characters_needing_escape(value)
         return parameter + " = '" + value + "'"
 
