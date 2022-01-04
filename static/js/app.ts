@@ -571,7 +571,7 @@ export function share_program (level: number, lang: string, id: string | true, P
         $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
         modal.copy_alert (auth.texts['share_success_detail'], 5000);
       } else {
-        modal.alert (auth.texts['unshare_success_detail'], 1000);
+        modal.alert (auth.texts['unshare_success_detail'], 2000);
       }
 
 
@@ -665,7 +665,7 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
      document.getSelection()?.addRange (originalSelection);
   }
   if (! noAlert) {
-    $('#modal-copy').hide();
+    modal.hide();
     modal.alert (auth.texts['copy_clipboard'], 4000);
   }
 }
