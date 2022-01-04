@@ -190,7 +190,7 @@ class Achievements:
         if 'hedy-ious' not in self.achieved:
             all_print_arguments = hedy.all_print_arguments(code, level, self.lang)
             for argument in all_print_arguments:
-                if all_print_arguments.count(argument) > 10:
+                if all_print_arguments.count(argument) >= 10:
                     self.new_achieved.append("hedy-ious")
                     break
 
