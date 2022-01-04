@@ -837,7 +837,40 @@ def all_commands(input_string, level, lang='en'):
 
     return AllCommands(level).transform(program_root)
 
+class AllPrintArguments(Transformer):
+    def __init__(self, level):
+        self.level = level
 
+    def __default__(self, args, children, meta):
+        leaves = flatten_list_of_lists_to_list(children)
+
+        if args == 'print':
+            return children
+        else:
+            return leaves # 'pop up' the children
+
+    def program(self, args):
+        return flatten_list_of_lists_to_list(args)
+
+    # somehow tokens are not picked up by the default rule so they need their own rule
+    def INT(self, args):
+        return []
+
+    def NAME(self, args):
+        return []
+
+    def NUMBER(self, args):
+        return []
+
+    def text(self, args):
+        return ''.join(args)
+
+
+def all_print_arguments(input_string, level, lang='en'):
+    input_string = process_input_string(input_string, level)
+    program_root = parse_input(input_string, level, lang)
+
+    return AllPrintArguments(level).transform(program_root)
 
 
 @v_args(meta=True)
@@ -1037,7 +1070,7 @@ def process_variable_for_fstring_padded(name, lookup):
     elif is_quoted(name):
         return f"{name}.zfill(100)"
     else:
-        return f"'{name}'.zfill(100)"
+        raise hedy.exceptions.UndefinedVarException(name)
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
@@ -1074,6 +1107,7 @@ class ConvertToPython_2(ConvertToPython_1):
         return ''.join([str(c) for c in args])
     def var(self, args):
         name = args[0]
+        self.check_var_usage(args)
         return hash_var(name)
     def var_access(self, args):
         name = args[0]
@@ -1246,6 +1280,7 @@ else:
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         return f"{arg0} == {arg1}" #no and statements
+
     def in_list_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -1496,6 +1531,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def assign(self, args):
         right_hand_side = args[1]
+        left_hand_side = args[0]
 
         # we now need to check if the right hand side of te assign is
         # either a var or quoted, if it is not (and undefined var is raised)
@@ -1508,20 +1544,27 @@ class ConvertToPython_12(ConvertToPython_11):
             if not (is_int(right_hand_side) or is_float(right_hand_side) or is_random(right_hand_side)):
                 raise exceptions.UnquotedAssignTextException(text = args[1])
 
-        parameter = args[0]
-        value = args[1]
-
-        if isinstance(value, Tree):
-            return parameter + " = " + value.children[0]
+        if isinstance(right_hand_side, Tree):
+            return left_hand_side + " = " + right_hand_side.children[0]
         else:
             # we no longer escape quotes here because they are now needed
-            return parameter + " = " + value + ""
-    
+            return left_hand_side + " = " + right_hand_side + ""
+
+    def var(self, args):
+        name = args[0]
+        # TODO (FH, dec 2021) if we check for var usage here (which in principle we should do)
+        # we can no longer use if name = green, we will have to do if name = 'green'
+        # which is a thing kids need to learn at one point but it also involves changing all
+        # examples so I will leave it for now.
+        # self.check_var_usage(args)
+        return hash_var(name)
+
     def assign_is(self, args):
         return self.assign(args)
     
     def assign_equals(self, args):
         return self.assign(args)
+
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
     def andcondition(self, args):

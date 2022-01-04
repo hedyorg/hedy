@@ -16,15 +16,21 @@ import threading
 class TableStorage(metaclass=ABCMeta):
     def get_item(self, table_name, key): ...
 
-    # The 'sort_key' argument here is only necessary for the memory storage --
-    # because it itself can't know what the sort keys is. Hacky hacky :).
+    # The 'sort_key' argument for query and query_index is used to indicate that one of the keys is a sort_key
+    # This is now needed because we can query by index sort key too. Still hacky hacky :).
     def query(self, table_name, key, sort_key=None, reverse=False): ...
-    def query_index(self, table_name, index_name, key, reverse=False): ...
+    def query_index(self, table_name, index_name, keys, sort_key=None, reverse=False): ...
     def put(self, table_name, key, data): ...
     def update(self, table_name, key, updates): ...
     def delete(self, table_name, key): ...
     def item_count(self, table_name): ...
     def scan(self, table_name): ...
+
+
+@dataclass
+class Key:
+    partition_key: str
+    sort_key: str = None
 
 
 class Table:
@@ -47,7 +53,7 @@ class Table:
         self.indexed_fields = indexed_fields or []
 
     @querylog.timed_as('db_get')
-    def get(self, key):
+    def get(self, key, sort_key=None):
         """Gets an item by key from the database.
 
         The key must be a dict with a single entry which references the
@@ -58,15 +64,19 @@ class Table:
         if isinstance(lookup, TableLookup):
             return self.storage.get_item(lookup.table_name, lookup.key)
         if isinstance(lookup, IndexLookup):
-            return first_or_none(self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key))
+            return first_or_none(
+                self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key, sort_key=sort_key)
+            )
         assert False
 
     @querylog.timed_as('db_get_many')
-    def get_many(self, key, reverse=False):
+    def get_many(self, key, sort_key=None, reverse=False):
         """Gets a list of items by key from the database.
 
         The key must be a dict with a single entry which references the
         partition key or an index key.
+
+        sort_key is a string - the name of the sort_key
 
         get_many is a paged operation, and will return to a maximum size of data.
         """
@@ -76,7 +86,8 @@ class Table:
         if isinstance(lookup, TableLookup):
             items = self.storage.query(lookup.table_name, lookup.key, sort_key=self.sort_key, reverse=reverse)
         elif isinstance(lookup, IndexLookup):
-            items = self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key, reverse=reverse)
+            items = self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key, sort_key=sort_key,
+                                             reverse=reverse)
         else:
             assert False
         querylog.log_counter('db_get_many_items', len(items))
@@ -156,20 +167,21 @@ class Table:
             raise ValueError(f'Key data cannot have empty values: {key_data}')
 
         keys = set(key_data.keys())
-        expected_keys = self._key_names()
-
-        # We do a regular table lookup if both partition key and sort key occur
-        # in the given key.
-        if keys == expected_keys:
-            return TableLookup(self.table_name, key_data)
-
-        if len(keys) != 1:
-            raise RuntimeError(f'Getting key data: {key_data}, but expecting: {expected_keys}')
+        table_keys = self._key_names()
         one_key = list(keys)[0]
 
-        # We do an index lookup if we have one key that matches an index
-        if one_key in self.indexed_fields:
-            return IndexLookup(self.table_name, f'{one_key}-index', key_data)
+        # We do a regular table lookup if both the table partition and sort keys occur in the given key.
+        if keys == table_keys:
+            return TableLookup(self.table_name, key_data)
+
+        # We do an index table lookup if the partition (and possibly the sort key) of an index occur in the given key.
+        for index in self.indexed_fields:
+            index_key_names = [x for x in [index.partition_key, index.sort_key] if x is not None]
+            if keys == set(index_key_names) or one_key == index.partition_key:
+                return IndexLookup(self.table_name, f'{"-".join(index_key_names)}-index', key_data)
+
+        if len(keys) != 1:
+            raise RuntimeError(f'Getting key data: {key_data}, but expecting: {table_keys}')
 
         # If the one key matches the partition key, it must be because we also have a
         # sort key, but that's allowed because we are looking for 'many' records.
@@ -225,7 +237,29 @@ class AwsDynamoStorage(TableStorage):
         return self._decode(result.get('Item', None))
 
     def query(self, table_name, key, sort_key=None, reverse=False):
-        eq_conditions, special_conditions = DynamoCondition.partition(key, sort_key)
+        key_expression, attr_values, attr_names = self._prep_query_data(key, sort_key)
+        result = self.db.query(
+            TableName=self.db_prefix + '-' + table_name,
+            KeyConditionExpression=key_expression,
+            ExpressionAttributeValues=attr_values,
+            ScanIndexForward=not reverse,
+            ExpressionAttributeNames=attr_names)
+        return list(map(self._decode, result.get('Items', [])))
+
+    def query_index(self, table_name, index_name, keys, sort_key=None, reverse=False):
+        key_expression, attr_values, attr_names = self._prep_query_data(keys, sort_key)
+
+        result = self.db.query(
+            TableName=self.db_prefix + '-' + table_name,
+            IndexName=index_name,
+            KeyConditionExpression=key_expression,
+            ExpressionAttributeValues=attr_values,
+            ScanIndexForward=not reverse,
+            ExpressionAttributeNames=attr_names)
+        return list(map(self._decode, result.get('Items', [])))
+
+    def _prep_query_data(self, key, sort_key=None):
+        eq_conditions, special_conditions = DynamoCondition.partition(key)
         validate_only_sort_key(special_conditions, sort_key)
 
         # We must escape field names with a '#' because Dynamo is unhappy
@@ -236,31 +270,13 @@ class AwsDynamoStorage(TableStorage):
             [f'#{field} = :{field}' for field in eq_conditions.keys()] +
             [cond.to_dynamo_expression(field) for field, cond in special_conditions.items()])
 
-        key_values = { f':{field}': DDB_SERIALIZER.serialize(key[field]) for field in eq_conditions.keys() }
+        attr_values = {f':{field}': DDB_SERIALIZER.serialize(key[field]) for field in eq_conditions.keys()}
         for field, cond in special_conditions.items():
-            key_values.update(cond.to_dynamo_values(field))
+            attr_values.update(cond.to_dynamo_values(field))
 
-        result = self.db.query(
-            TableName=self.db_prefix + '-' + table_name,
-            KeyConditionExpression=key_expression,
-            ExpressionAttributeValues=key_values,
-            ScanIndexForward=not reverse,
-            ExpressionAttributeNames={'#' + field: field for field in key.keys()})
-        return list(map(self._decode, result.get('Items', [])))
+        attr_names = {'#' + field: field for field in key.keys()}
 
-    def query_index(self, table_name, index_name, key, reverse=False):
-        assert len(key) == 1
-        key_field, key_value = list(key.items())[0]
-
-        result = self.db.query(
-            TableName = self.db_prefix + '-' + table_name,
-            IndexName = index_name,
-            KeyConditionExpression = f'#{key_field} = :value',
-            ExpressionAttributeValues = {':value': {'S': key_value}},
-            ScanIndexForward = not reverse,
-            ExpressionAttributeNames={'#' + field: field for field in key.keys()})
-
-        return list(map(self._decode, result.get('Items', [])))
+        return key_expression, attr_values, attr_names
 
     def put(self, table_name, _key, data):
         return self.db.put_item(
@@ -349,7 +365,7 @@ class MemoryStorage(TableStorage):
 
     @lock.synchronized
     def query(self, table_name, key, sort_key=None, reverse=False):
-        eq_conditions, special_conditions = DynamoCondition.partition(key, sort_key)
+        eq_conditions, special_conditions = DynamoCondition.partition(key)
         validate_only_sort_key(special_conditions, sort_key)
 
         records = self.tables.get(table_name, [])
@@ -364,8 +380,8 @@ class MemoryStorage(TableStorage):
         return copy.copy(filtered)
 
     # NOTE: on purpose not @synchronized here
-    def query_index(self, table_name, index_name, key, reverse=False):
-        return self.query(table_name, key, reverse=reverse)
+    def query_index(self, table_name, index_name, keys, sort_key=None, reverse=False):
+        return self.query(table_name, keys, sort_key=sort_key, reverse=reverse)
 
     @lock.synchronized
     def put(self, table_name, key, data):
@@ -561,7 +577,7 @@ class DynamoCondition:
         raise NotImplementedError()
 
     @staticmethod
-    def partition(key, sort_key):
+    def partition(key):
         """Partition a dictionary into 2 dictionaries.
 
         The first one will contain all elements for which the values are
@@ -638,5 +654,5 @@ class CustomEncoder(json.JSONEncoder):
 
 def validate_only_sort_key(conds, sort_key):
     """Check that only the sort key is used in the given key conditions."""
-    if set(conds.keys()) - set([sort_key]):
+    if sort_key and set(conds.keys()) - {sort_key}:
         raise RuntimeError(f'Conditions only allowed on sort key {sort_key}, got: {list(conds)}')
