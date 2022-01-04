@@ -3,14 +3,13 @@
 {% block main %}
    <h2 class="px-8 mb-4">{{auth.account_overview}}</h2>
    <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#public_profile').toggle()">{{auth.public_profile}}</h1>
-   <div id="public_profile" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
+   <div id="public_profile" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-full hidden">
      <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.public_profile}}</h2>
-     <p>We can choice some info from our public profile</p>
-     <ul>
-        <li>Profile picture</li>
-        <li>Intro text</li>
-        <li>Highlighted program</li>
-     </ul>
+     <div id="public_picture">
+         {% for picture in profile_pictures %}
+         <!-- Create div with image, if selected -> highlight -->
+         {% endfor %}
+     </div>
    </div>
    <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
    <div id="statistics" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
