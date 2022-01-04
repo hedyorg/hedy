@@ -202,25 +202,6 @@ class TestsLevel3(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-  #sleep tests
-  def test_sleep_with_number(self):
-    code = "sleep 2"
-    expected = "time.sleep(2)"
-
-    self.multi_level_tester(
-      code=code,
-      expected=expected
-    )
-  def test_sleep_without_number(self):
-    code = "sleep"
-    expected = "time.sleep(1)"
-
-    self.multi_level_tester(
-      code=code,
-      expected=expected
-    )
-
-  #turn tests
   def test_turn_number(self):
     code = textwrap.dedent("""\
     print Turtle race

@@ -545,7 +545,7 @@ class TypeValidator(Transformer):
     def text(self, tree):
         # under level 12 integers appear as text, so we parse them
         if self.level < 12:
-            type_ = HedyType.integer if is_int(tree.children[0]) else HedyType.string
+            type_ = HedyType.integer if ConvertToPython.is_int(tree.children[0]) else HedyType.string
         else:
             type_ = HedyType.string
         return self.to_typed_tree(tree, type_)
@@ -564,9 +564,9 @@ class TypeValidator(Transformer):
 
     def number(self, tree):
         number = tree.children[0]
-        if is_int(number):
+        if ConvertToPython.is_int(number):
             return self.to_typed_tree(tree, HedyType.integer)
-        if is_float(number):
+        if ConvertToPython.is_float(number):
             return self.to_typed_tree(tree, HedyType.float)
         # We managed to parse a number that cannot be parsed by python
         raise exceptions.ParseException(level=self.level, location='', found=number)
@@ -960,7 +960,7 @@ class ConvertToPython(Transformer):
         # used to transform variables in comparisons
         if self.is_variable(name):
             return f"str({hash_var(name)}).zfill(100)"
-        elif is_float(name):
+        elif ConvertToPython.is_float(name):
             return f"str({name}).zfill(100)"
         elif ConvertToPython.is_quoted(name):
             return f"{name}.zfill(100)"
@@ -989,6 +989,24 @@ class ConvertToPython(Transformer):
     # static methods
     def is_quoted(s):
         return s[0] == "'" and s[-1] == "'"
+
+    def is_int(n):
+        try:
+            int(n)
+            return True
+        except ValueError:
+            return False
+    
+    def is_float(n):
+        try:
+            float(n)
+            return True
+        except ValueError:
+            return False
+    
+    def is_random(s):
+        return 'random.choice' in s
+
 
 @hedy_transpiler(level=1)
 class ConvertToPython_1(ConvertToPython):
@@ -1128,7 +1146,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return self.make_forward(50)
 
-        if is_int(args[0]):
+        if ConvertToPython.is_int(args[0]):
             parameter = int(args[0])
         else:
             # if not an int, then it is a variable
@@ -1423,24 +1441,6 @@ for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar
 {body}"""
 
 
-def is_int(n):
-    try:
-        int(n)
-        return True
-    except ValueError:
-        return False
-
-
-def is_float(n):
-    try:
-        float(n)
-        return True
-    except ValueError:
-        return False
-
-
-def is_random(s):
-    return 'random.choice' in s
 
 
 @hedy_transpiler(level=12)
@@ -1511,7 +1511,7 @@ class ConvertToPython_12(ConvertToPython_11):
         except exceptions.UndefinedVarException as E:
             # is the text a number? then no quotes are fine. if not, raise maar!
 
-            if not (is_int(right_hand_side) or is_float(right_hand_side) or is_random(right_hand_side)):
+            if not (ConvertToPython.is_int(right_hand_side) or ConvertToPython.is_float(right_hand_side) or ConvertToPython.is_random(right_hand_side)):
                 raise exceptions.UnquotedAssignTextException(text = args[1])
 
         if isinstance(right_hand_side, Tree):
