@@ -38,6 +38,13 @@
             </div>
           </div>
        </div>
+       <div id="modal-copy" class="hidden">
+          <div id="modal-copy-title" class="text-white mb-8 text-xl hidden"></div>
+          <div id="modal-copy-text" class="text-white mb-8 text-xl"></div>
+          <div id="modal-copy-buttons" class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+            <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.copy_link_to_share}}</button>
+          </div>
+       </div>
     </div>
     <div class="lg:container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
       {% if menu != False %}
