@@ -17,7 +17,7 @@ class TestsTranslationLevel4(HedyTester):
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "print 'Hello welcome to Hedy.'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_assign(self):
         code = "name is Hedy"
@@ -25,7 +25,7 @@ class TestsTranslationLevel4(HedyTester):
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "name is Hedy"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_print_assign(self):
         code = "print 'my name is ' name"
@@ -33,7 +33,7 @@ class TestsTranslationLevel4(HedyTester):
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "print 'my name is ' name"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_ask(self):
         code = "color is ask 'What is your favorite color?'"
@@ -41,7 +41,7 @@ class TestsTranslationLevel4(HedyTester):
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "color is vraag 'What is your favorite color?'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_print_nl_en(self):
         code = "print 'Hello welcome to Hedy.'"
@@ -49,7 +49,7 @@ class TestsTranslationLevel4(HedyTester):
         result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
         expected = "print 'Hello welcome to Hedy.'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_assign_nl_en(self):
         code = "name is Hedy"
@@ -57,7 +57,7 @@ class TestsTranslationLevel4(HedyTester):
         result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
         expected = "name is Hedy"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_print_assign_nl_en(self):
         code = "print 'my name is ' name"
@@ -65,7 +65,7 @@ class TestsTranslationLevel4(HedyTester):
         result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
         expected = "print 'my name is ' name"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_ask_nl_en(self):
         code = "color is vraag 'What is your favorite color?'"
@@ -73,4 +73,4 @@ class TestsTranslationLevel4(HedyTester):
         result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
         expected = "color is ask 'What is your favorite color?'"
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)

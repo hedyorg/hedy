@@ -15,7 +15,8 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle()
+        extra_check_function=self.is_not_turtle(),
+        expected_commands=['print']
       )
 
     def test_print_var_brackets(self):
@@ -58,7 +59,7 @@ class TestsLevel18(HedyTester):
     def test_if_with_equals_sign(self):
       code = textwrap.dedent("""\
       naam is 'Hedy'
-      if naam = Hedy:
+      if naam == Hedy:
           print('koekoek')""")
 
       expected = textwrap.dedent("""\
@@ -136,6 +137,7 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code=code,
         expected=expected,
+        expected_commands=['input', 'if', 'print', 'print', 'print', 'print'],
         extra_check_function=self.is_not_turtle()
       )
 
@@ -204,6 +206,17 @@ class TestsLevel18(HedyTester):
       )
 
     # negative tests
+
+    def test_while_undefined_var(self):
+      code = textwrap.dedent("""\
+        while antwoord != 25:
+            print('hoera')""")
+
+      self.single_level_tester(
+        code=code,
+        exception=hedy.exceptions.UndefinedVarException
+      )
+
     def test_var_undefined_error_message(self):
       code = textwrap.dedent("""\
         naam is 'Hedy'

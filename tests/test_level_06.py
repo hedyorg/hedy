@@ -6,7 +6,7 @@ from test_level_01 import HedyTester
 class TestsLevel6(HedyTester):
   level = 6
 
-  # test/command order: 6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward', calculations]
+  # test/command order: 6: ['print', 'ask', 'is', 'if', 'turn', 'forward', calculations]
 
   # print tests
   def test_print_quoted_var(self):
@@ -61,9 +61,10 @@ class TestsLevel6(HedyTester):
       print(f'minder leuk')""")
 
     self.multi_level_tester(
-      max_level=6,
+      max_level=7,
       code=code,
-      expected=expected
+      expected=expected,
+      expected_commands=['is', 'print', 'else', 'print', 'print']
     )
   def test_print_if_else_with_line_break_and_space(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
@@ -269,7 +270,7 @@ class TestsLevel6(HedyTester):
       expected = textwrap.dedent("""\
       keuzes = ['1', '2', '3', '4', '5', 'regenworm']
       punten = '0'
-      worp=random.choice(keuzes)
+      worp = random.choice(keuzes)
       if str(worp) == str('regenworm'):
         punten = int(punten) + int(5)
       else:
@@ -353,6 +354,54 @@ class TestsLevel6(HedyTester):
       expected=expected
     )
 
+
+  def test_one_space_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
+  def test_one_space_in_rhs_if_else(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
+  def test_multiple_spaces_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is Bond James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('Bond James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
   def test_calc_chained_vars(self):
     code = textwrap.dedent("""\
       a is 5
@@ -368,6 +417,7 @@ class TestsLevel6(HedyTester):
       code=code,
       max_level=11,
       expected=expected,
+      expected_commands=['is', 'is', 'addition', 'print', 'addition'],
       extra_check_function=lambda x: self.run_code(x) == "11"
     )
 

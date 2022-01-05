@@ -17,7 +17,7 @@
        <div id="modal-alert" class="hidden">
           <div id="modal-alert-title" class="text-white mb-8 text-xl hidden"></div>
           <div id="modal-alert-text" class="text-white mb-8 text-xl"></div>
-          <div class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+          <div id="modal-alert-buttons" class="ml-auto mr-auto mt-4 flex flex-row justify-center">
             <button id="modal-confirm-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.ok}}</button>
           </div>
        </div>
@@ -38,6 +38,13 @@
             </div>
           </div>
        </div>
+       <div id="modal-copy" class="hidden">
+          <div id="modal-copy-title" class="text-white mb-8 text-xl hidden"></div>
+          <div id="modal-copy-text" class="text-white mb-8 text-xl"></div>
+          <div id="modal-copy-buttons" class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+            <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.copy_link_to_share}}</button>
+          </div>
+       </div>
     </div>
     <div class="lg:container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
       {% if menu != False %}
@@ -51,7 +58,14 @@
 
       <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
     </div>
-
+    <div id="achievement_pop-up" class="inset-0 absolute z-10 fixed hidden" style="width: 500px; top: 60%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
+            <h3 class="text-white">{{auth.achievement_earned}}</h3>
+            <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">
+            <h4 class="text-white italic" id="achievement_reached_title"></h4>
+            <p id="achievement_reached_text"></p>
+        </div>
+    </div>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}

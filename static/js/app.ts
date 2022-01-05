@@ -227,6 +227,9 @@ export function runit(level: string, lang: string, cb: () => void) {
         showBulb(level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
+      if (response.achievements) {
+        showAchievements(response.achievements, false, "");
+      }
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
@@ -265,6 +268,60 @@ function showBulb(level: string){
     repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(parsedlevel)};
   }
 
+}
+
+export function pushAchievement(achievement: string) {
+  $.ajax({
+    type: 'POST',
+    url: '/achievements',
+    data: JSON.stringify({
+      achievement: achievement
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+    }).done(function(response: any) {
+      if (response.achievements) {
+        console.log(response.achievements);
+        showAchievements(response.achievements, false, "");
+      }
+  });
+}
+
+export function showAchievements(achievements: any[], reload: boolean, redirect: string) {
+  fnAsync(achievements, 0);
+  if (reload) {
+    setTimeout(function(){
+      location.reload();
+     }, achievements.length * 6000);
+  }
+  if (redirect) {
+    setTimeout(function(){
+      window.location.pathname = redirect;
+     }, achievements.length * 6000);
+  }
+}
+
+async function fnAsync(achievements: any[], index: number) {
+  await showAchievement(achievements[index]);
+  if (index < achievements.length - 1) {
+    await fnAsync(achievements, index + 1)
+  }
+}
+
+function showAchievement(achievement: any[]){
+  return new Promise<void>((resolve)=>{
+        $('#achievement_reached_title').text('"' + achievement[0] + '"');
+        $('#achievement_reached_text').text(achievement[1]);
+        $('#achievement_pop-up').fadeIn(1000, function () {
+          setTimeout(function(){
+            $('#achievement_pop-up').fadeOut(1000);
+           }, 4000);
+        });
+        setTimeout(()=>{
+            resolve();
+        ;} , 6000
+        );
+    });
 }
 
 function removeBulb(){
@@ -404,14 +461,11 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     }).done(function(response) {
       // The auth functions use this callback function.
       if (cb) return response.Error ? cb (response) : cb (null, response);
-      if (response.Warning) {
-        error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
-      }
-      if (response.Error) {
-        error.show(ErrorMessages['Transpile_error'], response.Error);
-        return;
-      }
+
       modal.alert (auth.texts['save_success_detail'], 4000);
+      if (response.achievements) {
+        showAchievements(response.achievements, false, "");
+      }
       // If we succeed, we need to update the default program name & program for the currently selected tab.
       // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
       // The name of the program might have been changed by the server, so we use the name stated by the server.
@@ -461,6 +515,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
       if (response['duplicate']) {
         modal.confirm (auth.texts['overwrite_warning'], function () {
           storeProgram(level, lang, name, code, cb);
+          pushAchievement("double_check");
         });
       } else {
          storeProgram(level, lang, name, code, cb);
@@ -491,6 +546,8 @@ export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
+
+
 export function share_program (level: number, lang: string, id: string | true, Public: boolean, reload?: boolean) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
 
@@ -504,11 +561,20 @@ export function share_program (level: number, lang: string, id: string | true, P
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(_response) {
-      // If we're sharing the program, copy the link to the clipboard.
-      if (Public) copy_to_clipboard (viewProgramLink(id), true);
-      modal.alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 4000);
-      if (reload) setTimeout (function () {location.reload ()}, 1000);
+    }).done(function(response) {
+
+      if (response.achievement) {
+        showAchievements(response.achievement, false, "");
+      }
+
+      if (Public) {
+        $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
+      } else {
+        $('#modal-copy-button').hide();
+      }
+      modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
+
+      if (reload) setTimeout (function () {location.reload ()}, Public ? 5000 : 1000);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
@@ -533,6 +599,29 @@ export function share_program (level: number, lang: string, id: string | true, P
 
 }
 
+export function delete_program(id: string) {
+  modal.confirm (auth.texts['delete_confirm'], function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/delete',
+      data: JSON.stringify({
+        id: id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (response.achievement) {
+          showAchievements(response.achievement, true, "");
+      } else {
+          location.reload();
+      }
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    });
+  });
+}
+
 export function submit_program (id: string, shared: boolean) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
   console.log(shared);
@@ -546,8 +635,12 @@ export function submit_program (id: string, shared: boolean) {
     }),
     contentType: 'application/json',
     dataType: 'json'
-  }).done(function(_response) {
-    location.reload ();
+  }).done(function(response) {
+    if (response.achievements) {
+      showAchievements(response.achievements, true, "");
+    } else {
+      location.reload();
+    }
   });
 }
 
@@ -570,7 +663,10 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  if (! noAlert) modal.alert (auth.texts['copy_clipboard'], 4000);
+  if (! noAlert) {
+    $('#modal-copy').hide();
+    modal.alert (auth.texts['copy_clipboard'], 4000);
+  }
 }
 
 /**
@@ -611,7 +707,6 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean, cb: () => void) {
-
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
   if (! window.State.programsInExecution) window.State.programsInExecution = 0;
@@ -648,7 +743,9 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
-    timeoutMsg: function () {return ErrorMessages ['Program_too_long']},
+    timeoutMsg: function () {
+      pushAchievement("hedy_hacking");
+      return ErrorMessages ['Program_too_long']},
     // Give up after three seconds of execution, there might be an infinite loop.
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
@@ -664,6 +761,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      pushAchievement("error_or_empty");
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
     }
     window.State.programsInExecution--;
@@ -769,6 +867,7 @@ function speak(text: string) {
     utterance.rate = 0.9;
     speechSynthesis.speak(utterance);
   }
+  pushAchievement("make_some_noise");
 }
 
 (() => {
@@ -1011,6 +1110,7 @@ export function toggle_developers_mode(example_programs: boolean) {
   if ($('#developers_toggle').is(":checked")) {
       $('#commands-window-total').hide();
       $('#adventures').hide();
+      pushAchievement("lets_focus");
   } else {
       // If the example programs are hidden by class customization: keep hidden!
       if (example_programs) {
