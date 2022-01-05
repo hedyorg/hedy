@@ -190,7 +190,7 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function runit(level: string, lang: string, cb: () => void) {
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question']);
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
 
   if (reloadOnExpiredSession ()) return;
 
@@ -331,7 +331,7 @@ function removeBulb(){
 
 export function fix_code(level: string, lang: string){
 
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question']);
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
 
   if (reloadOnExpiredSession ()) return;
 
@@ -425,7 +425,7 @@ export function tryPaletteCode(exampleCode: string) {
     } else {
       $("#commands-window").hide();
       $("#toggle-button").hide();
-      modal.alert(auth.texts['examples_used']);
+      modal.alert(auth.texts['examples_used'], 3000);
       return;
     }
   }
@@ -462,7 +462,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       // The auth functions use this callback function.
       if (cb) return response.Error ? cb (response) : cb (null, response);
 
-      modal.alert (auth.texts['save_success_detail'], 4000);
+      modal.alert (auth.texts['save_success_detail'], 3000);
       if (response.achievements) {
         showAchievements(response.achievements, false, "");
       }
@@ -557,7 +557,6 @@ function change_shared (shared: boolean, index: number) {
   }
 }
 
-
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
 
@@ -641,7 +640,7 @@ function change_to_submitted (index: number) {
 export function submit_program (id: string, shared: boolean, index: number) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
   console.log(shared);
-  if (! shared) return modal.alert (auth.texts['must_be_shared']);
+  if (! shared) return modal.alert (auth.texts['must_be_shared'], 3000);
 
   $.ajax({
     type: 'POST',
@@ -679,8 +678,8 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
      document.getSelection()?.addRange (originalSelection);
   }
   if (! noAlert) {
-    $('#modal-copy').hide();
-    modal.alert (auth.texts['copy_clipboard'], 4000);
+    modal.hide();
+    modal.alert (auth.texts['copy_clipboard'], 3000);
   }
 }
 
