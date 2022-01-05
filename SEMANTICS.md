@@ -5,14 +5,41 @@ in case of an error, the resulting HedyException.
 
 ## Level 1
 
-### Commands
+### Commands and types
 
 Level 1 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `echo`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>'right' + integer | 'left' + integer</td>
+  </tr>
+  <tr>
+    <td>echo</td>
+    <td>any?</td>
+  </tr>
+</tbody>
+</table>
+
 
 #### Correct Programs
 
@@ -107,15 +134,44 @@ Level 1 supports:
 
 ## Level 2
 
-### Commands
+### Commands and types
 
 Level 2 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>any?</td>
+  </tr>
+    <tr>
+    <td>sleep</td>
+    <td> empty | integer?</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
