@@ -270,7 +270,7 @@ class TestsLevel6(HedyTester):
       expected = textwrap.dedent("""\
       keuzes = ['1', '2', '3', '4', '5', 'regenworm']
       punten = '0'
-      worp=random.choice(keuzes)
+      worp = random.choice(keuzes)
       if str(worp) == str('regenworm'):
         punten = int(punten) + int(5)
       else:
