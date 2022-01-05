@@ -370,6 +370,23 @@ class TestsLevel6(HedyTester):
       expected=expected,
       max_level=7)
 
+  def test_one_space_in_rhs_if_else(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
   def test_multiple_spaces_in_rhs_if(self):
     code = textwrap.dedent("""\
     naam is James
