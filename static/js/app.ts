@@ -571,18 +571,18 @@ export function share_program (level: number, lang: string, id: string | true, i
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-
       if (response.achievement) {
         showAchievements(response.achievement, false, "");
       }
       if (Public) {
         $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
+        modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
         change_shared(true, index);
       } else {
         $('#modal-copy-ok-button').show();
+        modal.alert (auth.texts['unshare_success_detail'], 3000);
         change_shared(false, index);
       }
-      modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
@@ -623,6 +623,7 @@ export function delete_program(id: string, index: number) {
       } else {
           $('#program_' + index).remove();
       }
+      modal.alert (auth.texts['delete_success'], 3000);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
