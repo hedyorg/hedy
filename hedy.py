@@ -1164,9 +1164,12 @@ class ConvertToPython_2(ConvertToPython_1):
     def assign(self, args):
         parameter = args[0]
         value = args[1]
-        #if the assigned value contains single quotes, escape them
-        value = process_characters_needing_escape(value)
-        return parameter + " = '" + value + "'"
+        if is_random(value):
+            return parameter + " = " + value
+        else:
+            # if the assigned value contains single quotes, escape them
+            value = process_characters_needing_escape(value)
+            return parameter + " = '" + value + "'"
 
 
     def sleep(self, args):
@@ -1261,9 +1264,9 @@ class ConvertToPython_5(ConvertToPython_4):
     def list_access_var(self, args):
         var = hash_var(args[0])
         if args[2].data == 'random':
-            return var + '=random.choice(' + args[1] + ')'
+            return var + ' = random.choice(' + args[1] + ')'
         else:
-            return var + '=' + args[1] + '[' + args[2].children[0] + '-1]'
+            return var + ' = ' + args[1] + '[' + args[2].children[0] + '-1]'
 
     def ifs(self, args):
         return f"""if {args[0]}:
