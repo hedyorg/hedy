@@ -144,7 +144,14 @@ class TestsLevel3(HedyTester):
     dier = random.choice(dieren)
     print(f'{dier}')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    list = ['Hond', 'Kat', 'Kangoeroe']
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.result_in(list),
+      max_level=11)
+
   def test_assign_list_exclamation_mark(self):
     code = textwrap.dedent("""\
     antwoorden is ja, NEE!, misschien
