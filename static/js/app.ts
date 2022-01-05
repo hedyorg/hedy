@@ -580,6 +580,7 @@ export function share_program (level: number, lang: string, id: string | true, i
         $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
         change_shared(true, index);
       } else {
+        $('#modal-copy-ok-button').show();
         change_shared(false, index);
       }
       modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);

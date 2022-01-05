@@ -98,12 +98,7 @@ class Database:
 
         Returns: [{ code, name, program, level, adventure_name, date }]
         """
-        page1 = PROGRAMS.get_many({'username': username}, limit=1, reverse=True)
-        print(page1)
-        page2 = PROGRAMS.get_many({'username': username}, limit=1, pagination_token=page1.next_page_token, reverse=True)
-        print(page2)
-
-        return PROGRAMS.get_many({'username': username}, limit=1, reverse=True)
+        return PROGRAMS.get_many({'username': username}, reverse=True)
 
     def program_by_id(self, id):
         """Get program by ID.
