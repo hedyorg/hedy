@@ -1,7 +1,7 @@
 Levels
 ------
 
-In its current form, Hedy consists of 14 different levels. The levels loosely
+In its current form, Hedy consists of 18 different levels. The levels loosely
 follow the lesson series [**Python in de klas**](http://pythonindeklas.nl/)
 ("Python in the classroom") in such a way that these existing lessons can be
 executed with Hedy instead of with Python.
@@ -42,7 +42,7 @@ Else statements are also included, and are also placed on one line,
 using the keyword [`else`]:\
 [`if name is print else print `].
 
-### Level 6: Calculations **(new: was level 6)**
+### Level 6: Calculations
 
 In Level 5, students learn to calculate with variables, so addition,
 multiplication, subtraction and division are introduced. While this
@@ -51,7 +51,7 @@ might seem like a simple step, our experience taught us that the use of
 period rather than a comma as decimal separator for non-US students is a
 steep learning curve and should be treated as a separate learning goal.
 
-### Level 7: Repetition with repeat x times **(new: was level 5)**
+### Level 7: Repetition with repeat x times
 
 In working with non-English native Python novices. Research has found
 the keyword [`for`] to be a confusing word for repetition, especially
@@ -98,9 +98,7 @@ This allows for access to the loop variable [`i`] and this allows for
 more interesting programs, such as counting to 10. As per Design Goal 3,
 the change is made small, and to do so (following Design Goal 4),
 brackets and colons are deferred to a later level, but indentation which
-was learned in Level 7 remains.
-
-See for a discussion of fruther levels: https://github.com/Felienne/hedy/discussions/903
+was introduced in Level 8 remains.
 
 ### Level 12: Datatypes
 
@@ -121,58 +119,23 @@ In level 15, learners are introduced to the while loop. With the previous knowle
 
 ### Level 16: Adding rectangular brackets
 
-In this level, learners encounter different types of brackets for the first time, because it adds rectangular brackets for list access, which up to now was done with the keyword [`at`], following Design Goal 2. THis level also explain accessing lists with a numeric index, starting at 1. The code to access a specific
+In this level, learners encounter different types of brackets for the first time, because it adds rectangular brackets for list access, which up to now was done with the keyword `at`, following Design Goal 2. THis level also explain accessing lists with a numeric index, starting at 1. The code to access a specific
 value has already been available technically since level 2, but there was no explanation yet how to access a specific value and it is not used in examples (and should maybe be removed?)
+
+### Level 17: Learning elif and the colon
+
+To make the step to full Python, learners will need to use the colon to denote the beginning of a block, in both loops and conditionals. 
+Because blocks are already known and practiced over several levels, we can teach learners to use a colon before every indentation.
+
+This level also introduces `elif` to allow for more exciting programs, since just adding a colon does not really create engagement.
+
+### Level 18: Adding round brackets
+
+Level 18 adds round brackets in `print` and `range` and changes `ask` to `input`. As per Design Goal 4, these are added as late as possible.
+
 
 Additional features
 ------
 ### Comments
 
-All levels allow for the use of comments, and it is up the the teachers
-to explain their different uses.
-
-
-Old Levels
-------
-Leaving this here for now while refactoring the level structure further.
-
-
-### Level 10: Learning the colon
-
-To make the step to full Python, learners will need to use the colon to
-denote the beginning of a block, in both loops and conditionals. Because
-blocks are already known, we can teach learners to use a colon before
-every indentation, and have them practice that extensively.
-
-### Level 11: Adding round brackets
-
-Level 11 adds round brackets in [`print`], [`range`] and
-[`input`]. As per Design Goal 4, these are added as late as possible.
-
-
-### Level 13: Booleans
-
-In level 13, booleans are added. Learners encounter True and False and how to use them in if statements
-
-
-### Level 19: Loop through all values in lists
-
-In level 19, learners are shown how to loop through a list. The length() function is also introduced,
-as it makes looping through a list easier. The code to loop through a list has already been available since
-the for loop was introduced but there was no explanation yet how to loop through the list.
-
-
-### Level 20: Change is to = and ==
-
-In level 20, we introduce the = and ==. All variable assignments change is to =. All equality checks
-turn into ==.
-
-### Level 21: Introducing !=
-
-In level 21, we introduce the != in the equality checks. This is introduced after the change to = and
-== as to make it easier to understand when you already know the syntax for =.
-
-### Level 22: Introducing <= and >=
-
-In level 22, we introduce <= and >=. This is introduced after the change to = and
-== as to make it easier to understand when you already know the syntax for =.
+All levels allow for the use of comments, and it is up the the teachers to explain their different uses.
