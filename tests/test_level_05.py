@@ -275,6 +275,44 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
 
+  def test_one_space_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_multiple_spaces_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is Bond James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'Bond James Bond':
+      print(f'shaken')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_one_space_in_rhs_if_else(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
 
   # todo would be good to make combinations with if and turtle
 

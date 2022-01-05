@@ -1281,8 +1281,10 @@ else:
         return ' and '.join(args)
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
-        return f"{arg0} == {arg1}" #no and statements
+        remaining_text = ' '.join(args[1:])
+        arg1 = process_variable(remaining_text, self.lookup)
+        return f"{arg0} == {arg1}"
+        #TODO, FH 2021: zelfde change moet ik ook nog ff maken voor equal. check in hogere levels
 
     def in_list_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
@@ -1309,12 +1311,13 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
+        remaining_text = ' '.join(args[1:])
+        arg1 = process_variable(remaining_text, self.lookup)
+
+        return f"str({arg0}) == str({arg1})"
+
         #TODO if we start using fstrings here, this str can go
-        if len(args) == 2:
-            return f"str({arg0}) == str({arg1})" #no and statements
-        else:
-            return f"str({arg0}) == str({arg1}) and {args[2]}"
+
 
     def assign(self, args):
         parameter = args[0]
