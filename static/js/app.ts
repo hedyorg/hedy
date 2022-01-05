@@ -547,6 +547,10 @@ export function viewProgramLink(programId: string) {
 }
 
 function change_shared (shared: boolean, index: number) {
+  // When index is -1 we share the program from the code page -> no visual change needed
+  if (index == -1) {
+    return;
+  }
   if (shared) {
     $('#non_public_button_container_' + index).hide();
     $('#public_button_container_' + index).show();
