@@ -643,11 +643,8 @@ function change_to_submitted (index: number) {
     $('#program_' + index).addClass("border-gray-400 bg-gray-400");
 }
 
-export function submit_program (id: string, shared: boolean, index: number) {
+export function submit_program (id: string, index: number) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
-  console.log(shared);
-  if (! shared) return modal.alert (auth.texts['must_be_shared'], 3000);
-
   $.ajax({
     type: 'POST',
     url: '/programs/submit',
