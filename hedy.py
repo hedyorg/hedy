@@ -1216,7 +1216,7 @@ class ConvertToPython_2(ConvertToPython_1):
     def assign(self, args):
         parameter = args[0]
         value = args[1]
-        if is_random(value):
+        if self.is_random(value):
             return parameter + " = " + value
         else:
             # if the assigned value contains single quotes, escape them
