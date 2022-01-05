@@ -10,19 +10,7 @@ class TestsLevel5(HedyTester):
   # print & ask -> no changes, covered by tests of earlier levels
 
   # is
-  def test_assign_list_access(self):
-    code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe
-    dier is dieren at random
-    print dier""")
 
-    expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']
-    dier=random.choice(dieren)
-    print(f'{dier}')""")
-
-    list = ['Hond', 'Kat', 'Kangoeroe']
-    self.single_level_tester(code=code, expected=expected, extra_check_function=self.result_in(list))
 
   def test_assign_list_multiple_spaces(self):
     code = textwrap.dedent("""\
@@ -32,7 +20,7 @@ class TestsLevel5(HedyTester):
 
     expected = textwrap.dedent("""\
     dieren = ['Hond', 'Kat', 'Kangoeroe']
-    dier=random.choice(dieren)
+    dier = random.choice(dieren)
     print(f'{dier}')""")
 
     self.single_level_tester(code=code, expected=expected)
@@ -192,7 +180,7 @@ class TestsLevel5(HedyTester):
 
     expected = textwrap.dedent("""\
     people = ['mom', 'dad', 'Emma', 'Sophie']
-    dishwasher=random.choice(people)
+    dishwasher = random.choice(people)
     if dishwasher == 'Sophie':
       print(f'too bad I have to do the dishes')
     else:
@@ -240,7 +228,7 @@ class TestsLevel5(HedyTester):
 
     expected = textwrap.dedent("""\
     people = ['1', '2', '3', '3']
-    dishwasher=random.choice(people)
+    dishwasher = random.choice(people)
     test = '1'
     if dishwasher == test:
       print(f'too bad I have to do the dishes!')""")
@@ -286,6 +274,44 @@ class TestsLevel5(HedyTester):
     if selected in items print 'found!'""")
 
     self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
+
+  def test_one_space_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_multiple_spaces_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is Bond James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'Bond James Bond':
+      print(f'shaken')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_one_space_in_rhs_if_else(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.single_level_tester(code=code, expected=expected)
 
 
   # todo would be good to make combinations with if and turtle

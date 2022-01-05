@@ -1164,9 +1164,12 @@ class ConvertToPython_2(ConvertToPython_1):
     def assign(self, args):
         parameter = args[0]
         value = args[1]
-        #if the assigned value contains single quotes, escape them
-        value = process_characters_needing_escape(value)
-        return parameter + " = '" + value + "'"
+        if is_random(value):
+            return parameter + " = " + value
+        else:
+            # if the assigned value contains single quotes, escape them
+            value = process_characters_needing_escape(value)
+            return parameter + " = '" + value + "'"
 
 
     def sleep(self, args):
@@ -1261,9 +1264,9 @@ class ConvertToPython_5(ConvertToPython_4):
     def list_access_var(self, args):
         var = hash_var(args[0])
         if args[2].data == 'random':
-            return var + '=random.choice(' + args[1] + ')'
+            return var + ' = random.choice(' + args[1] + ')'
         else:
-            return var + '=' + args[1] + '[' + args[2].children[0] + '-1]'
+            return var + ' = ' + args[1] + '[' + args[2].children[0] + '-1]'
 
     def ifs(self, args):
         return f"""if {args[0]}:
@@ -1278,8 +1281,10 @@ else:
         return ' and '.join(args)
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
-        return f"{arg0} == {arg1}" #no and statements
+        remaining_text = ' '.join(args[1:])
+        arg1 = process_variable(remaining_text, self.lookup)
+        return f"{arg0} == {arg1}"
+        #TODO, FH 2021: zelfde change moet ik ook nog ff maken voor equal. check in hogere levels
 
     def in_list_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
@@ -1306,12 +1311,13 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
+        remaining_text = ' '.join(args[1:])
+        arg1 = process_variable(remaining_text, self.lookup)
+
+        return f"str({arg0}) == str({arg1})"
+
         #TODO if we start using fstrings here, this str can go
-        if len(args) == 2:
-            return f"str({arg0}) == str({arg1})" #no and statements
-        else:
-            return f"str({arg0}) == str({arg1}) and {args[2]}"
+
 
     def assign(self, args):
         parameter = args[0]
