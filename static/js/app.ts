@@ -548,7 +548,7 @@ export function viewProgramLink(programId: string) {
 
 
 
-export function share_program (level: number, lang: string, id: string | true, Public: boolean, reload?: boolean) {
+export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
 
   var share = function (id: string) {
@@ -566,15 +566,16 @@ export function share_program (level: number, lang: string, id: string | true, P
       if (response.achievement) {
         showAchievements(response.achievement, false, "");
       }
-
       if (Public) {
         $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
+        $('#non_public_button_container_' + index).hide();
+        $('#public_button_container_' + index).show();
       } else {
         $('#modal-copy-button').hide();
+        $('#public_button_container_' + index).hide();
+        $('#non_public_button_container_' + index).show();
       }
       modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
-
-      if (reload) setTimeout (function () {location.reload ()}, Public ? 5000 : 1000);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
