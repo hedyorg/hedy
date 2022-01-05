@@ -599,7 +599,7 @@ export function share_program (level: number, lang: string, id: string | true, P
 
 }
 
-export function delete_program(id: string) {
+export function delete_program(id: string, index: number) {
   modal.confirm (auth.texts['delete_confirm'], function () {
     $.ajax({
       type: 'POST',
@@ -613,7 +613,7 @@ export function delete_program(id: string) {
       if (response.achievement) {
           showAchievements(response.achievement, true, "");
       } else {
-          location.reload();
+          $('#program_' + index).remove();
       }
     }).fail(function(err) {
       console.error(err);
