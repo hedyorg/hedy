@@ -37,6 +37,58 @@ class TestsLevel8(HedyTester):
       expected=expected,
       max_level=11)
 
+  def test_one_space_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond
+        print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
+
+  def test_one_space_in_rhs_if_else(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond
+        print 'shaken'
+    else
+        print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
+
+  def test_multiple_spaces_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is Bond James Bond
+        print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('Bond James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
+
   def test_equality_promotes_int_to_string(self):
     code = textwrap.dedent("""\
     a is test
@@ -71,7 +123,7 @@ class TestsLevel8(HedyTester):
     if red is color
         print 'success!'""")
     self.multi_level_tester(
-      max_level=11,
+      max_level=12,
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
@@ -180,7 +232,7 @@ class TestsLevel8(HedyTester):
     self.single_level_tester(code=code, expected=expected, output=output)
 
   def test_allow_space_after_else_line(self):
-    #todo should work up to 11??
+    #todo should work up to 12??
     code = textwrap.dedent("""\
     a is 1
     if a is 1
