@@ -133,6 +133,25 @@ class TestsLevel3(HedyTester):
     dieren = ['Hond', 'Kat', 'Kangoeroe']""")
 
     self.single_level_tester(code=code, expected=expected)
+  def test_assign_random_value(self):
+    code = textwrap.dedent("""\
+    dieren is hond, kat, kangoeroe
+    dier is dieren at random
+    print dier""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['hond', 'kat', 'kangoeroe']
+    dier = random.choice(dieren)
+    print(f'{dier}')""")
+
+    list = ['Hond', 'Kat', 'Kangoeroe']
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.result_in(list),
+      max_level=11)
+
   def test_assign_list_exclamation_mark(self):
     code = textwrap.dedent("""\
     antwoorden is ja, NEE!, misschien
