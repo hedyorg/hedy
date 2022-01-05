@@ -638,6 +638,7 @@ export function delete_program(id: string, index: number) {
 function change_to_submitted (index: number) {
     $('#non_submitted_button_container_' + index).remove();
     $('#submitted_button_container_' + index).show();
+    $('#submitted_header_' + index).show();
     $('#program_' + index).removeClass("border-orange-400");
     $('#program_' + index).addClass("border-gray-400 bg-gray-400");
 }
