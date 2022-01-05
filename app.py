@@ -487,8 +487,11 @@ def parse():
         except:
             pass
 
-        if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
-            response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
+        try:
+            if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
+                response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
+        except Exception as E:
+            print(f"error determining achievements for {code} with {E}")
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()

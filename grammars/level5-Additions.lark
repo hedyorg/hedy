@@ -3,6 +3,7 @@ program: _EOL* (command | error_invalid) (_SPACE)* (_EOL+ (command | error_inval
 command:+= ifelse | ifs  |  list_access_var -= error_invalid | error_ask_no_quotes > assign
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
 
+//todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
 list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
 assign_list: var _SPACE _IS _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
 assign: var _SPACE _IS _SPACE textwithspaces
