@@ -546,6 +546,16 @@ export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
+function change_shared (shared: boolean, index: number) {
+  if (shared) {
+    $('#non_public_button_container_' + index).hide();
+    $('#public_button_container_' + index).show();
+  } else {
+    $('#modal-copy-button').hide();
+    $('#public_button_container_' + index).hide();
+    $('#non_public_button_container_' + index).show();
+  }
+}
 
 
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
@@ -568,12 +578,9 @@ export function share_program (level: number, lang: string, id: string | true, i
       }
       if (Public) {
         $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
-        $('#non_public_button_container_' + index).hide();
-        $('#public_button_container_' + index).show();
+        change_shared(true, index);
       } else {
-        $('#modal-copy-button').hide();
-        $('#public_button_container_' + index).hide();
-        $('#non_public_button_container_' + index).show();
+        change_shared(false, index);
       }
       modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
     }).fail(function(err) {
@@ -623,7 +630,14 @@ export function delete_program(id: string, index: number) {
   });
 }
 
-export function submit_program (id: string, shared: boolean) {
+function change_to_submitted (index: number) {
+    $('#non_submitted_button_container_' + index).hide();
+    $('#submitted_button_container_' + index).show();
+    $('#program_' + index).removeClass("border-orange-400");
+    $('#program_' + index).addClass("border-gray-400 bg-gray-400");
+}
+
+export function submit_program (id: string, shared: boolean, index: number) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
   console.log(shared);
   if (! shared) return modal.alert (auth.texts['must_be_shared']);
@@ -638,10 +652,9 @@ export function submit_program (id: string, shared: boolean) {
     dataType: 'json'
   }).done(function(response) {
     if (response.achievements) {
-      showAchievements(response.achievements, true, "");
-    } else {
-      location.reload();
+      showAchievements(response.achievements, false, "");
     }
+    change_to_submitted(index);
   });
 }
 
