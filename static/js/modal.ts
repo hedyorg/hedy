@@ -7,6 +7,8 @@ class Modal {
     $('#modal-confirm-button').on('click', () => this.hide());
     $('#modal-no-button').on('click', () => this.hide());
     $('#modal-cancel-button').on('click', () => this.hide());
+    $('#modal-alert-button').on('click', () => this.hide());
+    
   }
 
   private _timeout?: ReturnType<typeof setTimeout>
@@ -17,26 +19,51 @@ class Modal {
     window.scrollTo(0, 0);
   }
 
+  public show_alert() {
+    $('#modal_alert').fadeIn(1000);
+  }
+
   public hide() {
     $('#modal-mask').hide();
     $('#modal-content').hide();
-    $('#modal-alert').hide();
     $('#modal-prompt').hide();
     $('#modal-confirm').hide();
+    $('#modal_alert').hide();
+    $('#modal-copy').hide();
   }
 
   public alert(message: string, timeoutMs?: number,  title: string = '',) {
     if(title != '') {
-      $('#modal-alert-title').html(title);
-      $('#modal-alert-title').removeClass('hidden');
+      $('#modal_alert_title').html(title);
+      $('#modal_alert_title').removeClass('hidden');
     }
     else{
       $('#modal-alert-title').html('');
       $('#modal-alert-title').addClass('hidden');
     }
-    $('#modal-alert-text').html(message);
+    $('#modal_alert_text').html(message);
+    this.show_alert();
+    if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
+    // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
+    if(this._timeout) {
+      clearTimeout(this._timeout);
+      this._timeout = undefined;
+    }
+    if (timeoutMs) this._timeout = setTimeout(() => this.hide(), timeoutMs);
+  }
+
+  public copy_alert(message: string, timeoutMs?: number, title: string = '',) {
+    if(title != '') {
+      $('#modal-copy-title').html(title);
+      $('#modal-copy-title').removeClass('hidden');
+    }
+    else{
+      $('#modal-copy-title').html('');
+      $('#modal-copy-title').addClass('hidden');
+    }
+    $('#modal-copy-text').html(message);
     this.show();
-    $('#modal-alert').show();
+    $('#modal-copy').show();
     // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
     if(this._timeout) {
       clearTimeout(this._timeout);

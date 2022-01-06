@@ -190,7 +190,7 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function runit(level: string, lang: string, cb: () => void) {
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question']);
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
 
   if (reloadOnExpiredSession ()) return;
 
@@ -331,7 +331,7 @@ function removeBulb(){
 
 export function fix_code(level: string, lang: string){
 
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question']);
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
 
   if (reloadOnExpiredSession ()) return;
 
@@ -425,7 +425,7 @@ export function tryPaletteCode(exampleCode: string) {
     } else {
       $("#commands-window").hide();
       $("#toggle-button").hide();
-      modal.alert(auth.texts['examples_used']);
+      modal.alert(auth.texts['examples_used'], 3000);
       return;
     }
   }
@@ -462,7 +462,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       // The auth functions use this callback function.
       if (cb) return response.Error ? cb (response) : cb (null, response);
 
-      modal.alert (auth.texts['save_success_detail'], 4000);
+      modal.alert (auth.texts['save_success_detail'], 3000);
       if (response.achievements) {
         showAchievements(response.achievements, false, "");
       }
@@ -549,7 +549,7 @@ export function viewProgramLink(programId: string) {
 
 
 export function share_program (level: number, lang: string, id: string | true, Public: boolean, reload?: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000);
 
   var share = function (id: string) {
     $.ajax({
@@ -567,22 +567,14 @@ export function share_program (level: number, lang: string, id: string | true, P
         showAchievements(response.achievement, false, "");
       }
 
-      modal.alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
       if (Public) {
-        let buttonDiv = document.getElementById('modal-alert-buttons')!;
-
-        buttonDiv.insertAdjacentHTML('afterbegin', ['<button ', 'id="modal-copy-share-link"', ' onclick="hedyApp.copy_to_clipboard(\'', viewProgramLink(id), '\'); this.remove(); $(\'#modal-confirm-button\').show();"', ' class="green-btn block m-4 w-40 pb-4 pt-4">', auth.texts['copy_link_to_share'], '</button>'].join (''));
-        $('#modal-confirm-button')!.hide();
-
-        setTimeout(function () {
-          // We remove the copy button in case the user does not click on it.
-          if ($('#modal-copy-share-link')) $('#modal-copy-share-link')!.remove();
-          $('#modal-confirm-button')!.show();
-        }, 5000);
+        $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
+        modal.copy_alert (auth.texts['share_success_detail'], 5000);
+      } else {
+        modal.alert (auth.texts['unshare_success_detail'], 3000);
       }
 
-      // If we're in the Programs page we wait some extra time before reloading the page
-      // so that the user can click on the "copy link to share" button
+
       if (reload) setTimeout (function () {location.reload ()}, Public ? 5000 : 1000);
     }).fail(function(err) {
       console.error(err);
@@ -632,9 +624,9 @@ export function delete_program(id: string) {
 }
 
 export function submit_program (id: string, shared: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000);
   console.log(shared);
-  if (! shared) return modal.alert (auth.texts['must_be_shared']);
+  if (! shared) return modal.alert (auth.texts['must_be_shared'], 3000);
 
   $.ajax({
     type: 'POST',
@@ -672,7 +664,10 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  if (! noAlert) modal.alert (auth.texts['copy_clipboard'], 4000);
+  if (! noAlert) {
+    modal.hide();
+    modal.alert (auth.texts['copy_clipboard'], 3000);
+  }
 }
 
 /**

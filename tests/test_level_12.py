@@ -176,6 +176,7 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
+  #list tests
   def test_ask_with_list_gives_type_error(self):
     code = textwrap.dedent("""\
       colors is 'orange', 'blue', 'green'
@@ -186,6 +187,25 @@ class TestsLevel12(HedyTester):
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
+
+  def test_assign_random_value(self):
+    code = textwrap.dedent("""\
+    dieren is 'hond', 'kat', 'kangoeroe'
+    dier is dieren at random
+    print dier""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['hond', 'kat', 'kangoeroe']
+    dier = random.choice(dieren)
+    print(f'{dier}')""")
+
+    list = ['Hond', 'Kat', 'Kangoeroe']
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.result_in(list),
+      max_level=15)
 
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
@@ -489,7 +509,7 @@ class TestsLevel12(HedyTester):
     getal is getallen at random""")
     expected = textwrap.dedent("""\
     getallen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    getal=random.choice(getallen)""")
+    getal = random.choice(getallen)""")
 
 
     self.single_level_tester(code=code, expected=expected)
