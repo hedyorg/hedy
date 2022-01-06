@@ -470,9 +470,9 @@ def routes(app, database):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return 'not_object', 400
         if not isinstance(body.get('username'), str):
-            return 'body.username must be a string', 400
+            return 'username_invalid', 400
 
         # If username has an @-sign, then it's an email
         if '@' in body['username']:
@@ -481,7 +481,7 @@ def routes(app, database):
             user = DATABASE.user_by_username(body['username'].strip().lower())
 
         if not user:
-            return 'invalid username', 403
+            return 'username_invalid', 403
 
         token = make_salt()
         hashed = hash(token, make_salt())

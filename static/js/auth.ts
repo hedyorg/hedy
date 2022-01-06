@@ -189,18 +189,25 @@ export const auth = {
     }
 
     if (op === 'recover') {
-      if (! values.username) return auth.error (auth.texts['please_username_email'], 'username');
-
       const payload = {username: values.username};
 
       auth.clear_error ();
-      $.ajax ({type: 'POST', url: '/auth/recover', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
+      $.ajax ({
+        type: 'POST', url: '/auth/recover',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         auth.success (auth.texts['sent_password_recovery']);
         $ ('#username').val ('');
       }).fail (function (response) {
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        if (response.status === 403) auth.error (auth.texts['invalid_username']);
-        else                         auth.error (auth.texts['ajax_error']);
+        if (response.status >= 500) {
+          return auth.error (auth.texts['server_error']);
+        }
+        if (response.status === 403) {
+          auth.error (auth.texts[response.responseText]);
+        } else {
+          auth.error (auth.texts['ajax_error']);
+        }
       });
     }
 
