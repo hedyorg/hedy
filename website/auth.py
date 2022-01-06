@@ -199,9 +199,7 @@ def routes(app, database):
             return 'not_object', 400
         if not isinstance(body.get('username'), str):
             return 'username_invalid', 400
-        if '@' in body['username']:
-            return 'username_special', 400
-        if ':' in body['username']:
+        if '@' in body['username'] or ':' in body['username']:
             return 'username_special', 400
         if len(body['username'].strip()) < 3:
             return 'username_three', 400

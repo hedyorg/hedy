@@ -150,33 +150,28 @@ export const auth = {
     }
 
     if (op === 'profile') {
-      if (! (values.email ?? '').match (auth.emailRegex)) return auth.error (auth.texts['valid_email'], 'email');
-
-      if (values.birth_year) {
-        if (!validBirthYearString(values.birth_year)) {
-          return auth.error (auth.texts['valid_year'] + new Date ().getFullYear (), 'birth_year');
-        }
-      }
-
       const payload: User = {
-        email: values['email'],
-        birth_year: values.birth_year ? parseInt(values['birth_year']) : undefined,
-        country: values['country'] ? values.country : undefined,
-        gender: values['gender'] ? values.gender : undefined,
+        email: values.email,
         language: values.language,
-        prog_experience: $ ('input[name=has_experience]:checked').val() as 'yes' | 'no',
+        birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
+        country: values.country ? values.country : undefined,
+        gender: values.gender ? values.gender : undefined,
+        prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
           : undefined,
       };
 
-      console.log(payload);
-
       auth.clear_error ();
-      $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
+      $.ajax ({
+        type: 'POST', url: '/profile',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         auth.success (auth.texts['profile_updated']);
-        setTimeout (function () {location.reload ()}, 500);
+        setTimeout (function () {location.reload ()}, 1000);
       }).fail (function (response) {
+        // We have to make some updated here to conform new styling
         if (response.status >= 500) return auth.error (auth.texts['server_error']);
         auth.error (auth.texts['ajax_error'] + ' ' + response.responseText);
       });
@@ -357,10 +352,4 @@ function getSavedRedirectPath() {
     localStorage.removeItem('hedy-save-redirect');
   }
   return redirect;
-}
-
-function validBirthYearString(year: string) {
-  const birth_year = parseInt (year);
-  if (! birth_year || birth_year < 1900 || birth_year > new Date ().getFullYear ()) return false;
-  return true;
 }
