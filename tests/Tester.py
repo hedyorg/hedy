@@ -1,6 +1,7 @@
 import unittest
 import app
 import hedy
+import re
 import sys
 import io
 from contextlib import contextmanager
@@ -43,6 +44,9 @@ class HedyTester(unittest.TestCase):
       code = app.TURTLE_PREFIX_CODE + parse_result.code
     else:
       code = app.NORMAL_PREFIX_CODE + parse_result.code
+
+    code = re.sub(r'time\.sleep\([^)]*\)', '', code)
+
     with HedyTester.captured_output() as (out, err):
       exec(code)
     return out.getvalue().strip()
