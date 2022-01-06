@@ -342,8 +342,9 @@ def routes(app, database):
     @app.route('/auth/change_password', methods=['POST'])
     @requires_login
     def change_password(user):
-
         body = request.json
+        print(body)
+
         if not isinstance(body, dict):
             return 'body must be an object', 400
         if not isinstance(body.get('old_password'), str):

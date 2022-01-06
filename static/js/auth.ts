@@ -169,11 +169,7 @@ export const auth = {
     }
 
     if (op === 'change_password') {
-      if (! values.password) return auth.error (auth.texts['please_password'], 'password', '#error-password');
-      if (values.password.length < 6) return auth.error (auth.texts['password_six'], 'password', '#error-password');
-      if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match'], 'password_repeat', '#error-password');
-
-      const payload = {old_password: values.old_password, new_password: values.password};
+      const payload = {old_password: values.old_password, password: values.password, password_repeat: values.password_repeat};
 
       auth.clear_error ('#error-password');
       $.ajax ({type: 'POST', url: '/auth/change_password', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
@@ -182,9 +178,15 @@ export const auth = {
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        if (response.status === 403) auth.error (auth.texts['invalid_password'], null, '#error-password');
-        else                         auth.error (auth.texts['ajax_error'], null, '#error-password');
+        if (response.status >= 500) {
+          return auth.error (auth.texts['server_error']);
+        } else if (response.status == 400) {
+          auth.error (auth.texts[response.responseText]);
+        } else if (response.status === 403) {
+          auth.error (auth.texts['invalid_password'], null, '#error-password');
+        } else {
+          auth.error (auth.texts['ajax_error'], null, '#error-password');
+        }
       });
     }
 
