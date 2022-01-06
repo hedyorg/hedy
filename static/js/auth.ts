@@ -183,7 +183,7 @@ export const auth = {
         } else if (response.status == 400) {
           auth.error (auth.texts[response.responseText]);
         } else if (response.status === 403) {
-          auth.error (auth.texts['invalid_password'], null, '#error-password');
+          auth.error (auth.texts['password_invalid'], null, '#error-password');
         } else {
           auth.error (auth.texts['ajax_error'], null, '#error-password');
         }
