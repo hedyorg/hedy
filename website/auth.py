@@ -151,11 +151,11 @@ def routes(app, database):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return 'not_object', 400
         if not isinstance(body.get('username'), str):
-            return 'username must be a string', 400
+            return 'username_invalid', 400
         if not isinstance(body.get('password'), str):
-            return 'password must be a string', 400
+            return 'password_invalid', 400
 
         # If username has an @-sign, then it's an email
         if '@' in body['username']:

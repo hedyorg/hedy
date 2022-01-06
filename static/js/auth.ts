@@ -119,9 +119,6 @@ export const auth = {
     }
 
     if (op === 'login') {
-      if (! values.username) return auth.error (auth.texts['please_username_email'], 'username');
-      if (! values.password) return auth.error (auth.texts['please_password'], 'password');
-
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/login', data: JSON.stringify ({username: values.username, password: values.password}), contentType: 'application/json; charset=utf-8'}).done (function () {
 
@@ -131,7 +128,11 @@ export const auth = {
         afterLogin();
       }).fail (function (response) {
         $ ('#create-account-button').hide ();
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
+        if (response.status >= 500) {
+           return auth.error (auth.texts['server_error']);
+        } else if (response.status == 400) {
+          auth.error (response.responseText);
+        }
         if (response.status === 403) {
            auth.error (auth.texts['invalid_username_password'] + ' ' + auth.texts['no_account']);
            $ ('#create-account-button').show ();
