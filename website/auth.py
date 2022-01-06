@@ -373,6 +373,8 @@ def routes(app, database):
     @requires_login
     def update_profile(user):
         body = request.json
+        print(user)
+        print(body)
         if not isinstance(body, dict):
             return 'not_object', 400
         if not isinstance(body.get('email'), str):
@@ -439,6 +441,7 @@ def routes(app, database):
 
         if updates:
             DATABASE.update_user(username, updates)
+        user = DATABASE.user_by_username(user['username'])
 
         return jsonify(resp)
 
