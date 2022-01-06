@@ -3,7 +3,7 @@
 {% block main %}
 </style>
 <div class="w-1/2 bg-white shadow-md rounded p-4 mb-4 ml-auto mr-auto">
-  <form id="signup" class="js-validated-form mx-auto w-3/4" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')">
+  <form id="signup" class="js-validated-form mx-auto w-3/4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')">
         <h2 class="text-center">{{auth.create_account}}</h2>
         <h4 class="text-blue-500 mb-4 text-center">{{auth.create_account_explanation}}</h4>
         <div class="mb-4 w-full">
@@ -29,7 +29,7 @@
                 <option value="" selected disabled hidden>{{auth.select}}</option>
                 <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
                 {% for language in other_languages() %}
-                    <option value="{{language.lang}}">{{language.sym}}</option>
+                    <option value="{{language.lang}}">{{language.sym}}</option>0
                 {% endfor %}
             </select>
         </div>
