@@ -21,7 +21,7 @@ class TableStorage(metaclass=ABCMeta):
     # The 'sort_key' argument for query and query_index is used to indicate that one of the keys is a sort_key
     # This is now needed because we can query by index sort key too. Still hacky hacky :).
     def query(self, table_name, key, sort_key, reverse, limit, pagination_token): ...
-    def query_index(self, table_name, index_name, keys, sort_key, reverse, limit, pagination_token): ...
+    def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None): ...
     def put(self, table_name, key, data): ...
     def update(self, table_name, key, updates): ...
     def delete(self, table_name, key): ...
@@ -100,7 +100,7 @@ class Table:
             return self.storage.get_item(lookup.table_name, lookup.key)
         if isinstance(lookup, IndexLookup):
             return first_or_none(
-                self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key, sort_key=sort_key)
+                self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key, sort_key=sort_key, limit=1)[0]
             )
         assert False
 
@@ -294,7 +294,7 @@ class AwsDynamoStorage(TableStorage):
         next_page_token = self._decode(result.get('LastEvaluatedKey', None)) if result.get('LastEvaluatedKey', None) else None
         return items, next_page_token
 
-    def query_index(self, table_name, index_name, keys, sort_key, reverse, limit, pagination_token):
+    def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None):
         key_expression, attr_values, attr_names = self._prep_query_data(keys, sort_key)
 
         result = self.db.query(**notnone(
@@ -469,7 +469,7 @@ class MemoryStorage(TableStorage):
         return copy.copy([record for _, record in with_keys]), next_page_key
 
     # NOTE: on purpose not @synchronized here
-    def query_index(self, table_name, index_name, keys, sort_key, reverse, limit, pagination_token):
+    def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None):
         return self.query(table_name, keys, sort_key=sort_key, reverse=reverse, limit=limit, pagination_token=pagination_token)
 
     @lock.synchronized
