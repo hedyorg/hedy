@@ -388,22 +388,14 @@ def routes(app, database):
         if 'country' in body:
             if not body['country'] in countries:
                 return 'country_invalid', 400
-        else:
-            body['country'] = None
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return 'year_invalid', 400
-        else:
-            body['birth_year'] = None
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return 'gender_invalid', 400
-        else:
-            body['gender'] = None
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
             return 'experience_invalid', 400
-        else:
-            body['prog_experience'] = None
         if 'experience_languages' in body:
             if not isinstance(body['experience_languages'], list):
                 return 'experience_invalid', 400
@@ -446,6 +438,8 @@ def routes(app, database):
                    updates[field] = None
                else:
                    updates[field] = body[field]
+           else:
+               updates[field] = None
 
         if updates:
             DATABASE.update_user(username, updates)
