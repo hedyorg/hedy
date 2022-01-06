@@ -372,35 +372,34 @@ def routes(app, database):
     @app.route('/profile', methods=['POST'])
     @requires_login
     def update_profile(user):
-
         body = request.json
         if not isinstance(body, dict):
-            return 'body must be an object', 400
-        if 'email' in body:
-            if not isinstance(body.get('email'), str):
-                return 'body.email must be a string', 400
-            if not valid_email(body['email']):
-                return 'body.email must be a valid email', 400
+            return 'not_object', 400
+        if not isinstance(body.get('email'), str):
+            return 'email_invalid', 400
+        if not valid_email(body['email']):
+            return 'email_invalid', 400
+        if not isinstance(body.get('language'), str):
+            return 'language_invalid', 400
+
+        # Validations, optional fields
         if 'country' in body:
             if not body['country'] in countries:
-                return 'body.country must be a valid country', 400
+                return 'country_invalid', 400
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                return 'birth_year must be a year between 1900 and ' + str(datetime.datetime.now().year), 400
-        if 'language' in body:
-            if not isinstance(body.get('language'), str):
-                return 'language must be a valid language', 400
+                return 'year_invalid', 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
-                return 'body.gender must be m/f/o', 400
-        if 'prog_experience' in body and body['prog_experience'] not in['yes', 'no']:
-            return 'If present, prog_experience must be "yes" or "no"', 400
+                return 'gender_invalid', 400
+        if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
+            return 'experience_invalid', 400
         if 'experience_languages' in body:
             if not isinstance(body['experience_languages'], list):
-                return 'If present, experience_languages must be an array', 400
+                return 'experience_invalid', 400
             for language in body['experience_languages']:
                 if language not in['scratch', 'other_block', 'python', 'other_text']:
-                    return 'Invalid language: ' + str(language), 400
+                    return 'programming_invalid', 400
 
         resp = {}
         if 'email' in body:
@@ -408,7 +407,7 @@ def routes(app, database):
             if email != user['email']:
                 exists = DATABASE.user_by_email(email)
                 if exists:
-                    return 'email exists', 403
+                    return 'exists_email', 403
                 token = make_salt()
                 hashed_token = hash(token, make_salt())
                 DATABASE.update_user(user['username'], {'email': email, 'verification_pending': hashed_token})

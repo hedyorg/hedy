@@ -114,16 +114,7 @@ export const auth = {
 
         afterLogin();
       }).fail (function (response) {
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        else if (response.status == 400 || response.status == 403) {
-          if (response.responseText == "year_invalid") {
-            auth.error(auth.texts[response.responseText] + new Date().getFullYear());
-          } else {
-            auth.error(auth.texts[response.responseText]);
-          }
-        } else {
-          auth.error(auth.texts['ajax_error']);
-        }
+        show_form_error(response);
       });
     }
 
@@ -162,7 +153,6 @@ export const auth = {
           : undefined,
       };
 
-      auth.clear_error ();
       $.ajax ({
         type: 'POST', url: '/profile',
         data: JSON.stringify (payload),
@@ -171,9 +161,7 @@ export const auth = {
         auth.success (auth.texts['profile_updated']);
         setTimeout (function () {location.reload ()}, 1000);
       }).fail (function (response) {
-        // We have to make some updated here to conform new styling
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        auth.error (auth.texts['ajax_error'] + ' ' + response.responseText);
+        show_form_error(response);
       });
     }
 
@@ -352,4 +340,19 @@ function getSavedRedirectPath() {
     localStorage.removeItem('hedy-save-redirect');
   }
   return redirect;
+}
+
+function show_form_error(response: any) {
+  auth.clear_error ();
+  if (response.status >= 500) return auth.error (auth.texts['server_error']);
+  else if (response.status == 400 || response.status == 403) {
+    if (response.responseText == "year_invalid") {
+      auth.error(auth.texts[response.responseText] + new Date().getFullYear());
+    } else {
+      auth.error(auth.texts[response.responseText]);
+    }
+  } else {
+    auth.error(auth.texts['ajax_error']);
+  }
+
 }
