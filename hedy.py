@@ -482,7 +482,6 @@ class TypeValidator(Transformer):
     def assign_list_equals(self, tree):
         return self.assign_list(tree)
         
-    # TODO: list_access, list_access_var and repeat_list types can be inferred but for now use 'any'
     def list_access(self, tree):
         self.validate_args_type_allowed(tree.children[0], Command.list_access)
 
@@ -669,7 +668,6 @@ class TypeValidator(Transformer):
     def try_get_type_from_lookup(self, name):
         matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
         if matches:
-            # TODO: we should not just take the first match, take into account var reassignments
             match = matches[0]
             if not match.type_:
                 if match.currently_inferring:  # there is a cyclic var reference, e.g. b = b + 1
