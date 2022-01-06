@@ -35,7 +35,7 @@ Level 1 supports:
   </tr>
   <tr>
     <td>echo</td>
-    <td>any?</td>
+    <td>integer | string</td>
   </tr>
 </tbody>
 </table>
@@ -164,11 +164,11 @@ Level 2 supports:
   </tr>
   <tr>
     <td>is</td>
-    <td>any?</td>
+    <td>string (left from `is`) + any (right from `is`)</td>
   </tr>
     <tr>
     <td>sleep</td>
-    <td> empty | integer?</td>
+    <td> empty | integer</td>
   </tr>
 </tbody>
 </table>
