@@ -547,7 +547,9 @@ export function viewProgramLink(programId: string) {
 }
 
 function change_shared (shared: boolean, index: number) {
-  // When index is -1 we share the program from the code page -> no visual change needed
+  // Index is a front-end unique given to each program container and children
+  // This value enables us to remove, hide or show specific element without connecting to the server (again)
+  // When index is -1 we share the program from code page (there is no program container) -> no visual change needed
   if (index == -1) {
     return;
   }
@@ -636,6 +638,8 @@ export function delete_program(id: string, index: number) {
 }
 
 function change_to_submitted (index: number) {
+    // Index is a front-end unique given to each program container and children
+    // This value enables us to remove, hide or show specific element without connecting to the server (again)
     $('#non_submitted_button_container_' + index).remove();
     $('#submitted_button_container_' + index).show();
     $('#submitted_header_' + index).show();
