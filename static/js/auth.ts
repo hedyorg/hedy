@@ -212,10 +212,6 @@ export const auth = {
     }
 
     if (op === 'reset') {
-      if (! values.password) return auth.error (auth.texts['please_password'], 'password');
-      if (values.password.length < 6) return auth.error(auth.texts['password_six'], 'password');
-      if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match'], 'password_repeat');
-
       const payload = {username: auth.reset?.['username'], token: auth.reset?.['token'], password: values.password};
 
       auth.clear_error ();
@@ -226,9 +222,15 @@ export const auth = {
         delete auth.reset;
         auth.redirect ('login');
       }).fail (function (response) {
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        if (response.status === 403) auth.error (auth.texts['invalid_reset_link']);
-        else                         auth.error (auth.texts['ajax_error']);
+        if (response.status >= 500) {
+          return auth.error (auth.texts['server_error']);
+        } else if (response.status === 400){
+          auth.error (auth.texts[response.responseText]);
+        } else if (response.status === 403) {
+          auth.error (auth.texts['invalid_reset_link']);
+        } else {
+          auth.error (auth.texts['ajax_error']);
+        }
       });
     }
   },

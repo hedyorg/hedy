@@ -500,16 +500,19 @@ def routes(app, database):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return 'not_object', 400
         if not isinstance(body.get('username'), str):
-            return 'body.username must be a string', 400
+            return 'username_invalid', 400
         if not isinstance(body.get('token'), str):
-            return 'body.token must be a string', 400
+            return 'token_invalid', 400
         if not isinstance(body.get('password'), str):
-            return 'body.password be a string', 400
-
+            return 'password_invalid', 400
         if len(body['password']) < 6:
-            return 'password must be at least six characters long', 400
+            return 'password_six', 400
+        if not isinstance(body.get('password_repeat'), str):
+            return 'repeat_match_password', 400
+        if body['password'] != body['password_repeat']:
+            return 'repeat_match_password', 400
 
         # There's no need to trim or lowercase username, because it should come within a link prepared by the app itself and not inputted manually by the user.
         token = DATABASE.get_token(body['username'])
