@@ -460,9 +460,9 @@ def parse():
 
             try:
                 transpile_result = transpile_add_stats(code, level, lang)
-                if username:
-                    DATABASE.increase_user_run_count(username)
-                    ACHIEVEMENTS.increase_count("run")
+                #if username:
+                #    DATABASE.increase_user_run_count(username)
+                #    ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.InvalidSpaceException as ex:
                 response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
@@ -487,11 +487,11 @@ def parse():
         except:
             pass
 
-        try:
-            if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
-                response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
-        except Exception as E:
-            print(f"error determining achievements for {code} with {E}")
+        #try:
+        #    if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
+        #        response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
+        #except Exception as E:
+        #    print(f"error determining achievements for {code} with {E}")
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
@@ -1117,8 +1117,8 @@ def main_page(page):
     if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
         return auth_templates(page, hedyweb.get_page_title(page), g.lang, request)
 
-    if page == "my-achievements":
-        return achievements_page()
+    #if page == "my-achievements":
+    #    return achievements_page()
 
     if page == 'programs':
         return programs_page(request)

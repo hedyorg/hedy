@@ -139,7 +139,8 @@ class Achievements:
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], translations[achievement]['image']])
         self.new_achieved = [] #Once we get earned achievements -> empty the array with "waiting" ones
         self.new_commands = []
-        return translated_achievements
+        #return translated_achievements
+        return []
 
     def check_programs_run(self, amount):
         if 'getting_started_I' not in self.achieved and amount >= 1:
