@@ -334,6 +334,7 @@ class Database:
             return None
 
     def add_achievement_to_username(self, username, achievement):
+        return None
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
             user_achievements = {'username': username}
@@ -345,6 +346,7 @@ class Database:
             ACHIEVEMENTS.put(user_achievements)
 
     def add_achievements_to_username(self, username, achievements):
+        return None
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
             user_achievements = {'username': username}
@@ -357,6 +359,7 @@ class Database:
         ACHIEVEMENTS.put(user_achievements)
 
     def add_commands_to_username(self, username, commands):
+        return None
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
             user_achievements = {'username': username}
