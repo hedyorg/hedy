@@ -178,7 +178,7 @@ export const auth = {
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
-        auth.success (auth.texts['password_updated']);
+        auth.success (auth.texts['password_updated'], '#success_password');
         $ ('#old_password').val ('');
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
