@@ -173,7 +173,7 @@ export const auth = {
 
       auth.clear_error ('#error-password');
       $.ajax ({type: 'POST', url: '/auth/change_password', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        auth.success (auth.texts['password_updated'], '#success-password');
+        auth.success (auth.texts['password_updated']);
         $ ('#old_password').val ('');
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
@@ -183,9 +183,9 @@ export const auth = {
         } else if (response.status == 400) {
           auth.error (auth.texts[response.responseText]);
         } else if (response.status === 403) {
-          auth.error (auth.texts['password_invalid'], null, '#error-password');
+          auth.error (auth.texts['password_invalid']);
         } else {
-          auth.error (auth.texts['ajax_error'], null, '#error-password');
+          auth.error (auth.texts['ajax_error']);
         }
       });
     }
@@ -204,8 +204,7 @@ export const auth = {
       }).fail (function (response) {
         if (response.status >= 500) {
           return auth.error (auth.texts['server_error']);
-        }
-        if (response.status === 403) {
+        }else if (response.status === 403) {
           auth.error (auth.texts[response.responseText]);
         } else {
           auth.error (auth.texts['ajax_error']);

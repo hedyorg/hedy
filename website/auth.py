@@ -343,17 +343,19 @@ def routes(app, database):
     @requires_login
     def change_password(user):
         body = request.json
-        print(body)
 
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return 'not_object', 400
         if not isinstance(body.get('old_password'), str):
-            return 'body.old_password must be a string', 400
-        if not isinstance(body.get( 'new_password'), str):
-            return 'body.new_password must be a string', 400
-
-        if len(body['new_password']) < 6:
-            return 'password must be at least six characters long', 400
+            return 'password_invalid', 400
+        if not isinstance(body.get( 'password'), str):
+            return 'password_invalid', 400
+        if not isinstance(body.get( 'password_repeat'), str):
+            return 'password_invalid', 400
+        if len(body['password']) < 6:
+            return 'password_six', 400
+        if body['password'] != body['password_repeat']:
+            return 'repeat_match_password', 400
 
         # The user object we got from 'requires_login' doesn't have the password, so look that up in the database
         user = DATABASE.user_by_username(user['username'])
