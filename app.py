@@ -1022,7 +1022,7 @@ def main_page(page):
         abort(404)
 
     if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
-        return auth_templates(page, hedyweb.get_page_title(page), g.lang, request)
+        return auth_templates(page, hedyweb.get_page_title(page), request)
 
     if page == "my-achievements":
         return achievements_page()

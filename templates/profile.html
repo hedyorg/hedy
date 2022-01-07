@@ -5,11 +5,23 @@
    <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#public_profile').toggle()">{{auth.public_profile}}</h1>
    <div id="public_profile" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-full hidden">
      <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.public_profile}}</h2>
-     <div id="public_picture">
-         {% for picture in profile_pictures %}
-         <!-- Create div with image, if selected -> highlight -->
-         {% endfor %}
+     <form>
+         <div id="public_picture">
+
      </div>
+     <div class="mb-4">
+         <label for="personal_text" class="block mb-4 text-xl">Persoonlijke text</label>
+         <textarea class="block w-1/2 h-32 px-2 text-gray-700 border border-solid border-gray-300 rounded" id="personal_text"></textarea>
+     </div>
+     <div class="mb-4">
+         <label for="favourite_program" class="block mb-4 text-xl">Favoriete programma</label>
+         <select id="favourite_program">
+            {% for program in programs %}
+                <option value="{{program.id}}">{{program.name}}</option>
+            {% endfor %}
+        </select>
+     </div>
+     </form>
    </div>
    <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
    <div id="statistics" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
