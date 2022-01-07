@@ -344,6 +344,7 @@ def routes(app, database):
     def change_password(user):
         body = request.json
 
+        print(body)
         if not isinstance(body, dict):
             return 'not_object', 400
         if not isinstance(body.get('old_password'), str):
@@ -357,13 +358,15 @@ def routes(app, database):
         if body['password'] != body['password_repeat']:
             return 'repeat_match_password', 400
 
+        print("KOMEN WE HIER?!")
+
         # The user object we got from 'requires_login' doesn't have the password, so look that up in the database
         user = DATABASE.user_by_username(user['username'])
 
         if not check_password(body['old_password'], user['password']):
             return 'invalid username/password', 403
 
-        hashed = hash(body['new_password'], make_salt())
+        hashed = hash(body['password'], make_salt())
 
         DATABASE.update_user(user['username'], {'password': hashed})
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.

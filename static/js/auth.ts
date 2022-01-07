@@ -172,20 +172,26 @@ export const auth = {
       const payload = {old_password: values.old_password, password: values.password, password_repeat: values.password_repeat};
 
       auth.clear_error ('#error-password');
-      $.ajax ({type: 'POST', url: '/auth/change_password', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
+      $.ajax ({
+        type: 'POST',
+        url: '/auth/change_password',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         auth.success (auth.texts['password_updated']);
         $ ('#old_password').val ('');
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
+        // We have to specify the error element id because the change password page has two forms
         if (response.status >= 500) {
-          return auth.error (auth.texts['server_error']);
+          return auth.error (auth.texts['server_error'], null, '#error_password');
         } else if (response.status == 400) {
-          auth.error (auth.texts[response.responseText]);
+          auth.error (auth.texts[response.responseText], null, '#error_password');
         } else if (response.status === 403) {
-          auth.error (auth.texts['password_invalid']);
+          auth.error (auth.texts['password_invalid'], null, '#error_password');
         } else {
-          auth.error (auth.texts['ajax_error']);
+          auth.error (auth.texts['ajax_error'], null, '#error_password');
         }
       });
     }
