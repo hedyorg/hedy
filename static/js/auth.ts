@@ -300,6 +300,7 @@ export const auth = {
     };
 
     $.get('/program-stats', data).done (function (response) {
+      load_charts();
       const runsChart = Chart.getChart('runsChart')!;
       runsChart.data.datasets[0].data = response;
       runsChart.data.datasets[1].data = response;
@@ -401,7 +402,7 @@ $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
 /**
  Charts setup
  */
-$(function() {
+function load_charts () {
   const runsCtx = document.getElementById('runsChart') as HTMLCanvasElement;
   new Chart(runsCtx, {
     type: 'bar',
@@ -467,7 +468,7 @@ $(function() {
 
   // Show the first stats by default when the page loads
   $('.stats-period-toggle').first().click()
-});
+}
 
 /**
  * After login:
