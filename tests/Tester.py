@@ -44,7 +44,7 @@ class HedyTester(unittest.TestCase):
       code = app.TURTLE_PREFIX_CODE + parse_result.code
     else:
       code = app.NORMAL_PREFIX_CODE + parse_result.code
-
+# remove sleep comments to make program execution less slow
     code = re.sub(r'time\.sleep\([^)]*\)', '', code)
 
     with HedyTester.captured_output() as (out, err):
