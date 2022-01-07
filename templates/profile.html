@@ -5,7 +5,7 @@
    <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#public_profile').toggle()">{{auth.public_profile}}</h1>
    <div id="public_profile" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-full hidden">
      <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.public_profile}}</h2>
-     <form>
+     <form class="js-validated-form auth" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
      <div class="mb-4">
          <label for="profile_picture" class="block mb-4 text-xl">Profielfoto</label>
          <!-- To-do -->
@@ -24,6 +24,9 @@
             </select>
          </div>
      {% endif %}
+     <div class="mb-4 clear-both">
+        <button type="submit" class="green-btn mt-4">{{auth.update_profile}}</button>
+     </div>
      </form>
    </div>
    <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
