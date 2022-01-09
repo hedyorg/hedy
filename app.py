@@ -206,10 +206,12 @@ def initialize_session():
     session_id()
     login_user_from_token_cookie()
 
-@app.after_request
+
+@app.before_request
 def initialize_achievements():
     if current_user()['username'] and 'achieved' not in session:
         ACHIEVEMENTS.initialize_user_data(current_user()['username'])
+
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
@@ -491,9 +493,7 @@ def parse():
 
         try:
             if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
-                print("Hier komen we nog")
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
-                print("Hier niet meer?")
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
 

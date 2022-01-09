@@ -22,7 +22,7 @@ class Achievements:
             if "achievement" in body:
                 if not session['achieved']:
                     self.initialize_user_data(user['username'])
-                if body['achievement'] not in session['achieved'] and body['achievement'] in self.TRANSLATIONS.get_translations(self.lang):
+                if body['achievement'] not in session['achieved'] and body['achievement'] in self.TRANSLATIONS.get_translations(session['lang']):
                     return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
             return jsonify({})
 
