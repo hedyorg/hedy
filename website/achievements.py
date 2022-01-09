@@ -69,149 +69,149 @@ class Achievements:
             session['submitted_programs'] = 0
 
     def add_single_achievement(self, username, achievement):
-        if not self.achieved:
+        if not session['achieved']:
             self.get_db_data(username)
-        if achievement not in self.achieved and achievement in self.TRANSLATIONS.get_translations(self.lang):
+        if achievement not in session['achieved'] and achievement in self.TRANSLATIONS.get_translations(self.lang):
             return self.verify_pushed_achievement(username, achievement)
         else:
             return None
 
     def verify_run_achievements(self, username, code=None, level=None, response=None):
-        if not self.achieved:
+        if not session['achieved']:
             self.get_db_data(username)
-        self.check_programs_run(self.run_programs)
+        self.check_programs_run()
         if code and level:
             self.check_code_achievements(code, level)
         if code and response:
             self.check_response_achievements(code, response)
 
-        if len(self.new_commands) > 0:
-            for command in self.new_commands:
-                self.commands.append(command)
-            self.DATABASE.add_commands_to_username(username, self.commands)
+        if len(session['commands']) > 0:
+            for command in session['new_commands']:
+                session['commands'].append(command)
+            self.DATABASE.add_commands_to_username(username, session['commands'])
 
-        if len(self.new_achieved) > 0:
-            self.DATABASE.add_achievements_to_username(username, self.new_achieved)
-            for achievement in self.new_achieved:
-                self.achieved.append(achievement)
+        if len(session['new_achieved']) > 0:
+            self.DATABASE.add_achievements_to_username(username, session['new_achieved'])
+            for achievement in session['new_achieved']:
+                session['achieved'].append(achievement)
             return True
         return False
 
     def verify_save_achievements(self, username, adventure=None):
-        if not self.achieved:
+        if not session['achieved']:
             self.get_db_data(username)
-        self.check_programs_saved(self.saved_programs)
-        if adventure and 'adventure_is_worthwhile' not in self.achieved:
-            self.new_achieved.append("adventure_is_worthwhile")
+        self.check_programs_saved(session['saved_programs'])
+        if adventure and 'adventure_is_worthwhile' not in session['achieved']:
+            session['new_achieved'].append("adventure_is_worthwhile")
 
-        if len(self.new_achieved) > 0:
-            self.DATABASE.add_achievements_to_username(username, self.new_achieved)
-            for achievement in self.new_achieved:
-                self.achieved.append(achievement)
+        if len(session['new_achieved']) > 0:
+            self.DATABASE.add_achievements_to_username(username, session['new_achieved'])
+            for achievement in session['new_achieved']:
+                session['achieved'].append(achievement)
             return True
         return False
 
     def verify_submit_achievements(self, username):
-        if not self.achieved:
+        if not session['achieved']:
             self.get_db_data(username)
-        self.check_programs_submitted(self.submitted_programs)
+        self.check_programs_submitted(session['submitted_programs'])
 
-        if len(self.new_achieved) > 0:
-            self.DATABASE.add_achievements_to_username(username, self.new_achieved)
-            for achievement in self.new_achieved:
-                self.achieved.append(achievement)
+        if len(session['new_achieved']) > 0:
+            self.DATABASE.add_achievements_to_username(username, session['new_achieved'])
+            for achievement in session['new_achieved']:
+                session['achieved'].append(achievement)
             return True
         return False
 
     def verify_pushed_achievement(self, username, achievement):
-        self.new_achieved = [achievement]
+        session['new_achieved'] = [achievement]
         self.DATABASE.add_achievement_to_username(username, achievement)
-        self.achieved.append(achievement)
+        session['achieved'].append(achievement)
         return self.get_earned_achievements()
 
     def get_earned_achievements(self):
-        translations = self.TRANSLATIONS.get_translations(self.lang)
+        translations = self.TRANSLATIONS.get_translations(session['lang'])
         translated_achievements = []
-        for achievement in self.new_achieved:
+        for achievement in session['new_achieved']:
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], translations[achievement]['image']])
-        self.new_achieved = [] #Once we get earned achievements -> empty the array with "waiting" ones
-        self.new_commands = []
+        session['new_achieved'] = [] #Once we get earned achievements -> empty the array with "waiting" ones
+        session['new_commands'] = []
         return translated_achievements
 
-    def check_programs_run(self, amount):
-        if 'getting_started_I' not in self.achieved and amount >= 1:
-            self.new_achieved.append("getting_started_I")
-        if 'getting_started_II' not in self.achieved and amount >= 10:
-            self.new_achieved.append("getting_started_II")
-        if 'getting_started_III' not in self.achieved and amount >= 50:
-            self.new_achieved.append("getting_started_III")
-        if 'getting_started_IV' not in self.achieved and amount >= 200:
-            self.new_achieved.append("getting_started_IV")
-        if 'getting_started_V' not in self.achieved and amount >= 500:
-            self.new_achieved.append("getting_started_V")
+    def check_programs_run(self):
+        if 'getting_started_I' not in session['achieved'] and session['run_programs'] >= 1:
+            session['new_achieved'].append("getting_started_I")
+        if 'getting_started_II' not in session['achieved'] and session['run_programs'] >= 10:
+            session['new_achieved'].append("getting_started_II")
+        if 'getting_started_III' not in session['achieved'] and session['run_programs'] >= 50:
+            session['new_achieved'].append("getting_started_III")
+        if 'getting_started_IV' not in session['achieved'] and session['run_programs'] >= 200:
+            session['new_achieved'].append("getting_started_IV")
+        if 'getting_started_V' not in session['achieved'] and session['run_programs'] >= 500:
+            session['new_achieved'].append("getting_started_V")
 
-    def check_programs_saved(self, amount):
-        if 'one_to_remember_I' not in self.achieved and amount >= 1:
-            self.new_achieved.append("one_to_remember_I")
-        if 'one_to_remember_II' not in self.achieved and amount >= 5:
-            self.new_achieved.append("one_to_remember_II")
-        if 'one_to_remember_III' not in self.achieved and amount >= 10:
-            self.new_achieved.append("one_to_remember_III")
-        if 'one_to_remember_IV' not in self.achieved and amount >= 25:
-            self.new_achieved.append("one_to_remember_IV")
-        if 'one_to_remember_V' not in self.achieved and amount >= 50:
-            self.new_achieved.append("one_to_remember_V")
+    def check_programs_saved(self):
+        if 'one_to_remember_I' not in session['achieved'] and session['saved_programs'] >= 1:
+            session['new_achieved'].append("one_to_remember_I")
+        if 'one_to_remember_II' not in session['achieved'] and session['saved_programs'] >= 5:
+            session['new_achieved'].append("one_to_remember_II")
+        if 'one_to_remember_III' not in session['achieved'] and session['saved_programs'] >= 10:
+            session['new_achieved'].append("one_to_remember_III")
+        if 'one_to_remember_IV' not in session['achieved'] and session['saved_programs'] >= 25:
+            session['new_achieved'].append("one_to_remember_IV")
+        if 'one_to_remember_V' not in session['achieved'] and session['saved_programs'] >= 50:
+            session['new_achieved'].append("one_to_remember_V")
 
-    def check_programs_submitted(self, amount):
-        if 'deadline_daredevil_I' not in self.achieved and amount >= 1:
-            self.new_achieved.append("deadline_daredevil_I")
-        if 'deadline_daredevil_II' not in self.achieved and amount >= 3:
-            self.new_achieved.append("deadline_daredevil_II")
-        if 'deadline_daredevil_III' not in self.achieved and amount >= 10:
-            self.new_achieved.append("deadline_daredevil_III")
+    def check_programs_submitted(self):
+        if 'deadline_daredevil_I' not in session['achieved'] and session['submitted_programs'] >= 1:
+            session['new_achieved'].append("deadline_daredevil_I")
+        if 'deadline_daredevil_II' not in session['achieved'] and session['submitted_programs'] >= 3:
+            session['new_achieved'].append("deadline_daredevil_II")
+        if 'deadline_daredevil_III' not in session['achieved'] and session['submitted_programs'] >= 10:
+            session['new_achieved'].append("deadline_daredevil_III")
 
     def check_code_achievements(self, code, level):
-        commands_in_code = hedy.all_commands(code, level, self.lang)
-        if 'trying_is_key' not in self.achieved:
+        commands_in_code = hedy.all_commands(code, level, session['lang'])
+        if 'trying_is_key' not in session['achieved']:
             for command in set(commands_in_code):
-                if command not in self.commands:
-                    self.new_commands.append(command)
-        if set(self.commands) == set(hedy.commands_per_level.get(hedy.HEDY_MAX_LEVEL)):
-            self.new_achieved.append("trying_is_key")
-        if 'did_you_say_please' not in self.achieved and "ask" in hedy.all_commands(code, level, self.lang):
-            self.new_achieved.append("did_you_say_please")
-        if 'talk-talk-talk' not in self.achieved and hedy.all_commands(code, level, self.lang).count("ask") >= 5:
-            self.new_achieved.append("talk-talk-talk")
-        if 'hedy_honor' not in self.achieved and "Hedy" in code:
-            self.new_achieved.append("hedy_honor")
-        if 'hedy-ious' not in self.achieved:
-            all_print_arguments = hedy.all_print_arguments(code, level, self.lang)
+                if command not in session['commands']:
+                    session['new_commands'].append(command)
+        if set(session['commands']) == set(hedy.commands_per_level.get(hedy.HEDY_MAX_LEVEL)):
+            session['new_achieved'].append("trying_is_key")
+        if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
+            session['new_achieved'].append("did_you_say_please")
+        if 'talk-talk-talk' not in session['achieved'] and hedy.all_commands(code, level, session['lang']).count("ask") >= 5:
+            session['new_achieved'].append("talk-talk-talk")
+        if 'hedy_honor' not in session['achieved'] and "Hedy" in code:
+            session['new_achieved'].append("hedy_honor")
+        if 'hedy-ious' not in session['achieved']:
+            all_print_arguments = hedy.all_print_arguments(code, level, session['lang'])
             for argument in all_print_arguments:
                 if all_print_arguments.count(argument) >= 10:
-                    self.new_achieved.append("hedy-ious")
+                    session['new_achieved'].append("hedy-ious")
                     break
 
 
     def check_response_achievements(self, code, response):
-        if 'ninja_turtle' not in self.achieved and 'has_turtle' in response and response['has_turtle']:
-            self.new_achieved.append("ninja_turtle")
-        if 'watch_out' not in self.achieved and 'Warning' in response and response['Warning']:
-            self.new_achieved.append("watch_out")
+        if 'ninja_turtle' not in session['achieved'] and 'has_turtle' in response and response['has_turtle']:
+            session['new_achieved'].append("ninja_turtle")
+        if 'watch_out' not in session['achieved'] and 'Warning' in response and response['Warning']:
+            session['new_achieved'].append("watch_out")
         if 'Error' in response and response['Error']:
-            self.consecutive_errors += 1
-            if self.previous_code == code:
-                if self.identical_consecutive_errors == 0:
-                    self.identical_consecutive_errors += 2 #We have to count the first one too!
-                self.identical_consecutive_errors += 1
-            if self.identical_consecutive_errors >= 3:
-                if 'programming_panic' not in self.achieved:
-                    self.new_achieved.append("programming_panic")
-            self.previous_code = code
+            session['consecutive_errors'] += 1
+            if session['previous_code'] == code:
+                if session['identical_consecutive_errors'] == 0:
+                    session['identical_consecutive_errors'] += 2 #We have to count the first one too!
+                session['identical_consecutive_errors'] += 1
+            if session['identical_consecutive_errors'] >= 3:
+                if 'programming_panic' not in session['achieved']:
+                    session['new_achieved'].append("programming_panic")
+            session['previous_code'] = code
         else:
-            if 'programming_protagonist' not in self.achieved and self.consecutive_errors >= 1:
-                self.new_achieved.append("programming_protagonist")
-            self.consecutive_errors = 0
-            self.identical_consecutive_errors = 0
+            if 'programming_protagonist' not in session['achieved'] and session['consecutive_errors'] >= 1:
+                session['new_achieved'].append("programming_protagonist")
+            session['consecutive_errors'] = 0
+            session['identical_consecutive_errors'] = 0
 
 
 
