@@ -11,17 +11,6 @@ class Achievements:
         self.DATABASE = database.Database()
         self.TRANSLATIONS = AchievementTranslations()
 
-        session['achieved'] = None
-        session['new_achieved'] = []
-        session['commands'] = None
-        session['new_commands'] = []
-        session['previous_code'] = None
-        session['run_programs'] = 0
-        session['saved_programs'] = 0
-        session['submitted_programs'] = 0
-        session['identical_consecutive_errors'] = 0
-        session['consecutive_errors'] = 0
-
     def routes(self, app, database):
         global DATABASE
         DATABASE = database
@@ -32,7 +21,7 @@ class Achievements:
             body = request.json
             if "achievement" in body:
                 if not session['achieved']:
-                    self.get_db_data(user['username'])
+                    self.initialize_user_data(user['username'])
                 if body['achievement'] not in session['achieved'] and body['achievement'] in self.TRANSLATIONS.get_translations(self.lang):
                     return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
             return jsonify({})
@@ -45,8 +34,14 @@ class Achievements:
         elif category == "submitted":
             session['submitted_programs'] += 1
 
-    def get_db_data(self, username):
+    def initialize_user_data(self, username):
         achievements_data = self.DATABASE.progress_by_username(username)
+        session['new_achieved'] = []
+        session['new_commands'] = []
+        session['previous_code'] = None
+        session['identical_consecutive_errors'] = 0
+        session['consecutive_errors'] = 0
+
         if 'achieved' in achievements_data:
             session['achieved'] = achievements_data['achieved']
         else:
@@ -70,15 +65,15 @@ class Achievements:
 
     def add_single_achievement(self, username, achievement):
         if not session['achieved']:
-            self.get_db_data(username)
-        if achievement not in session['achieved'] and achievement in self.TRANSLATIONS.get_translations(self.lang):
+            self.initialize_user_data(username)
+        if achievement not in session['achieved'] and achievement in self.TRANSLATIONS.get_translations(session['lang']):
             return self.verify_pushed_achievement(username, achievement)
         else:
             return None
 
     def verify_run_achievements(self, username, code=None, level=None, response=None):
         if not session['achieved']:
-            self.get_db_data(username)
+            self.initialize_user_data(username)
         self.check_programs_run()
         if code and level:
             self.check_code_achievements(code, level)
@@ -99,11 +94,10 @@ class Achievements:
 
     def verify_save_achievements(self, username, adventure=None):
         if not session['achieved']:
-            self.get_db_data(username)
-        self.check_programs_saved(session['saved_programs'])
+            self.initialize_user_data(username)
+        self.check_programs_saved()
         if adventure and 'adventure_is_worthwhile' not in session['achieved']:
             session['new_achieved'].append("adventure_is_worthwhile")
-
         if len(session['new_achieved']) > 0:
             self.DATABASE.add_achievements_to_username(username, session['new_achieved'])
             for achievement in session['new_achieved']:
@@ -113,7 +107,7 @@ class Achievements:
 
     def verify_submit_achievements(self, username):
         if not session['achieved']:
-            self.get_db_data(username)
+            self.initialize_user_data(username)
         self.check_programs_submitted(session['submitted_programs'])
 
         if len(session['new_achieved']) > 0:

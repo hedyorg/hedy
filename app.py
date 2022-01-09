@@ -205,6 +205,8 @@ def initialize_session():
     # Invoke session_id() for its side effect
     session_id()
     login_user_from_token_cookie()
+    if current_user()['username']:
+        ACHIEVEMENTS.initialize_user_data(current_user()['username'])
 
 
 if os.getenv('IS_PRODUCTION'):
@@ -274,7 +276,6 @@ def setup_language():
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
         return "Language " + g.lang + " not supported", 404
-    ACHIEVEMENTS.update_language(g.lang)
     # Also get the 'ui' translations into a global object for this language, these
     # are used a lot so we can clean up a fair bit by initializing here.
     g.ui_texts = TRANSLATIONS.get_translations(g.lang, 'ui')
@@ -489,7 +490,9 @@ def parse():
 
         try:
             if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
+                print("Hier komen we nog")
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
+                print("Hier niet meer?")
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
 
