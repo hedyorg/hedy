@@ -1,7 +1,7 @@
 from website import database
 from hedyweb import AchievementTranslations
 from website.auth import requires_login
-from flask import request, jsonify
+from flask import request, jsonify, session
 import hedy
 
 
@@ -10,20 +10,17 @@ class Achievements:
     def __init__(self):
         self.DATABASE = database.Database()
         self.TRANSLATIONS = AchievementTranslations()
-        self.achieved = None
-        self.new_achieved = []
-        self.commands = None
-        self.new_commands = []
-        self.lang = "en"
-        self.previous_code = None
-        self.run_programs = 0
-        self.saved_programs = 0
-        self.submitted_programs = 0
-        self.identical_consecutive_errors = 0
-        self.consecutive_errors = 0
 
-    def update_language(self, lang):
-        self.lang = lang
+        session['achieved'] = None
+        session['new_achieved'] = []
+        session['commands'] = None
+        session['new_commands'] = []
+        session['previous_code'] = None
+        session['run_programs'] = 0
+        session['saved_programs'] = 0
+        session['submitted_programs'] = 0
+        session['identical_consecutive_errors'] = 0
+        session['consecutive_errors'] = 0
 
     def routes(self, app, database):
         global DATABASE
@@ -34,42 +31,42 @@ class Achievements:
         def push_new_achievement(user):
             body = request.json
             if "achievement" in body:
-                if not self.achieved:
+                if not session['achieved']:
                     self.get_db_data(user['username'])
-                if body['achievement'] not in self.achieved and body['achievement'] in self.TRANSLATIONS.get_translations(self.lang):
+                if body['achievement'] not in session['achieved'] and body['achievement'] in self.TRANSLATIONS.get_translations(self.lang):
                     return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
             return jsonify({})
 
     def increase_count(self, category):
         if category == "run":
-            self.run_programs += 1
+            session['run_programs'] += 1
         elif category == "saved":
-            self.saved_programs += 1
+            session['saved_programs'] += 1
         elif category == "submitted":
-            self.submitted_programs += 1
+            session['submitted_programs'] += 1
 
     def get_db_data(self, username):
         achievements_data = self.DATABASE.progress_by_username(username)
         if 'achieved' in achievements_data:
-            self.achieved = achievements_data['achieved']
+            session['achieved'] = achievements_data['achieved']
         else:
-            self.achieved = []
+            session['achieved'] = []
         if 'commands' in achievements_data:
-            self.commands = achievements_data['commands']
+            session['commands'] = achievements_data['commands']
         else:
-            self.commands = []
+            session['commands'] = []
         if 'run_programs' in achievements_data:
-            self.run_programs = achievements_data['run_programs']
+            session['run_programs'] = achievements_data['run_programs']
         else:
-            self.run_programs = 0
+            session['run_programs'] = 0
         if 'saved_programs' in achievements_data:
-            self.saved_programs = achievements_data['saved_programs']
+            session['saved_programs'] = achievements_data['saved_programs']
         else:
-            self.saved_programs = 0
+            session['saved_programs'] = 0
         if 'submitted_programs' in achievements_data:
-            self.submitted_programs = achievements_data['submitted_programs']
+            session['submitted_programs'] = achievements_data['submitted_programs']
         else:
-            self.submitted_programs = 0
+            session['submitted_programs'] = 0
 
     def add_single_achievement(self, username, achievement):
         if not self.achieved:
