@@ -41,7 +41,8 @@ class Achievements:
         session['previous_code'] = None
         session['identical_consecutive_errors'] = 0
         session['consecutive_errors'] = 0
-
+        if not achievements_data:
+            achievements_data = {}
         if 'achieved' in achievements_data:
             session['achieved'] = achievements_data['achieved']
         else:
