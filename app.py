@@ -205,9 +205,11 @@ def initialize_session():
     # Invoke session_id() for its side effect
     session_id()
     login_user_from_token_cookie()
-    if current_user()['username']:
-        ACHIEVEMENTS.initialize_user_data(current_user()['username'])
 
+@app.after_request
+def initialize_achievements():
+    if current_user()['username'] and 'achieved' not in session:
+        ACHIEVEMENTS.initialize_user_data(current_user()['username'])
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
@@ -326,7 +328,6 @@ def set_security_headers(response):
     # and that's okay.
     response.headers.update(security_headers)
     return response
-
 
 @app.teardown_request
 def teardown_request_finish_logging(exc):
