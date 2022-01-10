@@ -8,7 +8,7 @@
      <form class="js-validated-form auth" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
      <div class="mb-4 w-full">
          <h3>{{auth.profile_picture}}</h3>
-         <input name="profile_picture" id="profile_picture" style="display: none;">
+         <input name="profile_picture" id="profile_picture" type=number style="display: none;">
          <div class="flex flex-wrap w-full">
             <div class="w-40 rounded-lg mr-4 mt-4 relative profile_image" id="profile_image_1" onclick="hedyApp.select_profile_image(1);">
                 <div class="relative h-40">

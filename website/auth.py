@@ -523,6 +523,21 @@ def routes(app, database):
 
         return '', 200
 
+    @app.route('/auth/public_profile', methods=['POST'])
+    def update_public_profile():
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return 'body must be an object', 400
+        if not isinstance(body.get('image'), str):
+            return 'body.image must be a string', 400
+        if not isinstance(body.get('personal_text'), str):
+            return 'body.personal_text must be a string', 400
+        if not isinstance(body.get('favourite_program'), str):
+            return 'body.favourite_program be a string', 400
+
+        return '', 200
+
     # *** ADMIN ROUTES ***
 
     @app.route('/admin/markAsTeacher', methods=['POST'])

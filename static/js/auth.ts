@@ -266,7 +266,7 @@ export const auth = {
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
         auth.success (auth.texts['profile_updated']);
-        setTimeout (function () {location.reload ()}, 500);
+        setTimeout (function () {location.reload ()}, 1000);
       }).fail (function (response) {
         console.log(response);
         //Error handling is a to-do until we have merged #1598
