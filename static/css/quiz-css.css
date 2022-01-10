@@ -46,22 +46,49 @@ input:disabled{
     border-color: #c21919!important;
 }
 
-#A, #D, #answer-disabled-A, #answer-disabled-D{
-    padding: 0.5rem;
-    background-color: #bee3f8;
+#A, #B,#C, #D, #A-checked, B#-checked, C#-checked, D#checked{
     flex-direction: row;
     flex-grow: 1;
+    padding: 0.5rem;
     margin: 0.5rem;
 }
 
-#B, #C, #answer-disabled-B, #answer-disabled-C {
-    padding: 0.5rem;
+input[type=radio]:not checked + label  #A, input[type="radio"]:not checked + label  #D{
+    background-color: #bee3f8;
+    display: block;
+}
+
+input[type="radio"]:checked + label  #A-checked, input[type="radio"]:checked + label  #D-checked{
+    background-color: rgba(49, 130, 206, 0.65);
+    display: block;
+}
+
+input[type="radio"]:checked + label  #A,input[type="radio"]:checked + label  #B, input[type="radio"]:not checked + label #A-checked, #input[type="radio"]:not checked + label  D-checked{
+    display: none;
+}
+
+input[type="radio"]:checked + label  #A-checked, input[type="radio"]:not checked + label  #D-checked{
+    display: block;
+}
+
+input[type="radio"]:not checked + label  #B, input[type="radio"]:not checked + label  #B{
     background-color: #c6f6d5;
     border-color: #2d9068;
-    flex-direction: row;
-    flex-grow: 1;
-    margin: 0.5rem;
+    display: block;
+
 }
+
+
+input[type="radio"]:checked + label #B-checked, input[type="radio"]:checked + label  #C-checked{
+    display:none;
+}
+
+input[type="radio"]:checked + label #B-checked, input[type="radio"]:checked + label #C-checked{
+    background-color: rgba(45, 144, 104, 0.59);
+    border-color: #2d9068;
+    display: block;
+}
+
 
 .flex-col{
     display: flex;
@@ -83,3 +110,12 @@ input:disabled{
     color: #1a202c;
     border: 2.5px solid #3182ce;
 }
+
+."radio"-block:checked + label  * .form-"radio" {
+    display: none;
+}
+
+/*input[type="radio"]{*/
+/*   opacity: 0;*/
+
+/*}*/
