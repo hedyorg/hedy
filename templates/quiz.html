@@ -2,6 +2,8 @@
     <link rel="stylesheet" href="{{static('/css/generated.css')}}">
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
     <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
+    <link rel="stylesheet" href="{{ static('/css/progress-bar.css') }}">
+    <link rel="stylesheet" href="{{ static('/css/progress-bar.css') }}">
     <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
@@ -12,15 +14,20 @@
     });
     </script>
     {% endif %}
-    <div class="px-6 bg-blue-200" >
-        <div class="flex justify-around bg-blue-200">
-            {% if questionStatus == 'false' %}
-                 <div class="font-slab text-white text-2xl font-bold rounded-full flex items-center justify-self-end bg-red-600 p-2 m-2">{{ ui.incorrect }}</div>
-            {% elif questionStatus== 'start'%}
-                 <div class="font-slab text-white text-2xl font-bold rounded-full flex items-center justify-self-end bg-blue-600 p-2 m-2"> {{ ui.question }} {{ question_nr }}</div>
-            {% else %}
-                <div class="font-slab text-white text-2xl font-bold rounded-full flex items-center justify-self-end bg-green-600 p-2 m-2">{{ ui.correct }}</div>
-            {% endif %}
+    <div class="container px-6 bg-blue-200" >
+         <!-- Responsive Arrow Progress Bar -->
+          <div class="arrow-steps clearfix">
+              {% for i in range(questions|length)%}
+                   {% if i + 1 == question_nr %}
+                    <div class="step current"><span><a class="step-text" href="#">Vraag {{ i + 1 }}<br>Poging {{ attempt }}</a></span></div>
+                   {% elif not quiz_answers[i + 1] %}
+                       <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
+                   {% elif quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
+                       <div class="step incorrect"><span><i class="fas fa-times"></i>{{ i + 1 }}</span></div>
+                   {% elif quiz_answers[i + 1][-1] == questions[i + 1].correct_answer %}
+                       <div class="step check"><span><i class="fas fa-check"></i>{{ i + 1 }}</span></div>
+                  {% endif %}
+              {% endfor %}
         </div>
     </div>
     <div id="achievement_pop-up" class="inset-0 absolute z-10 fixed w-1/2 hidden" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
