@@ -521,6 +521,12 @@ class TypeValidator(Transformer):
         rules = [int_to_float, int_to_string, float_to_string] if self.level < 12 else [int_to_float]
         self.validate_binary_command_args_type(Command.equality, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
+    
+    def equality_check_is(self, tree):
+        return self.equality_check(tree)
+    
+    def equality_check_equals(self, tree):
+        return self.equality_check(tree)
 
     def repeat_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
@@ -1346,8 +1352,11 @@ class ConvertToPython_6(ConvertToPython_5):
 
         return f"str({arg0}) == str({arg1})"
 
-        #TODO if we start using fstrings here, this str can go
+    def equality_check_is(self, args):
+        return self.equality_check(args)
 
+    def equality_check_equals(self, args):
+        return self.equality_check(args)
 
     def assign(self, args):
         parameter = args[0]
@@ -1611,6 +1620,8 @@ class ConvertToPython_14(ConvertToPython_13):
         else:
             return f"{simple_comparison} and {args[2]}"
 
+    def equality_check_dequals(self, args):
+        return super().equality_check(args)
 
     def smaller(self, args):
         return self.process_comparison(args, "<")
