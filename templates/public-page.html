@@ -9,23 +9,30 @@
                 <img src="{{static('/images/Hedy-logo.png')}}">
             {% endif %}
         </div>
-        <div class="w-full">
+        <div class="w-full h-full">
             <h2 class="bg-blue-600 text-white pl-4 text-4xl rounded-lg">{{ user_info.username }}</h2>
-            <div class="bg-blue-200 pl-4 pr-16 pt-4 pb-8 rounded-lg">
+            <div class="bg-blue-200 px-4 pt-4 pb-8 rounded-lg">
                 {% if user_info.personal_text %}
-                    <p class="mb-4 italic">{{ user_info.personal_text }}</p>
+                    <p class="mb-4 italic text-center">{{ user_info.personal_text }}</p>
                 {% endif %}
                 {% if achievements %}
-                    <h4>{{ user_achievements.run_programs }} programma's gemaakt</h4>
-                    <h4>{{ user_achievements.saved_programs }} programma's opgeslagen</h4>
-                    <h4>{{ user_achievements.submitted_programs }} programma's ingeleverd</h4>
-                    <h4></h4>
+                    <div class="font-semibold h-full">
+                        {% if user_achievements.run_programs %}
+                            <p>{{ user_achievements.run_programs }} {{ texts.amount_created }}</p>
+                        {% endif %}
+                        {% if user_achievements.saved_programs %}
+                            <p>{{ user_achievements.saved_programs }} {{ texts.amount_saved }}</p>
+                        {% endif %}
+                        {% if user_achievements.submitted_programs %}
+                            <p>{{ user_achievements.submitted_programs }} {{ texts.amount_submitted }}</p>
+                        {% endif %}
+                    </div>
                 {% endif %}
             </div>
         </div>
         {% if user_achievements['achieved'] %}
             {% for achievement in user_achievements['achieved'][0:1] %}
-            <div class="text-center rounded-lg bg-yellow-400 w-1/3 ml-4">
+            <div class="text-center rounded-lg bg-yellow-400 w-1/3 ml-4 mr-4">
                 <h3>{{ auth.last_achievement }}</h3>
                 <img class="w-full px-8 mt-2" src="{{static('/images/achievement.png')}}">
                 <h4>{{ achievements[achievement].title }}</h4>
