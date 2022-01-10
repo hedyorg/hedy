@@ -524,18 +524,24 @@ def routes(app, database):
         return '', 200
 
     @app.route('/auth/public_profile', methods=['POST'])
-    def update_public_profile():
+    @requires_login
+    def update_public_profile(user):
         body = request.json
+
         # Validations
         if not isinstance(body, dict):
             return 'body must be an object', 400
-        if not isinstance(body.get('image'), str):
+        if 'image' in body and not isinstance(body.get('image'), str):
             return 'body.image must be a string', 400
-        if not isinstance(body.get('personal_text'), str):
+        if 'personal_text' in body and not isinstance(body.get('personal_text'), str):
             return 'body.personal_text must be a string', 400
-        if not isinstance(body.get('favourite_program'), str):
+        if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
             return 'body.favourite_program be a string', 400
+        # Todo: This should als be updated dependent on merging #1598
 
+        DATABASE.update_public_profile(user['username'], body);
+
+        print(DATABASE.get_public_profile_settings(user['username']));
         return '', 200
 
     # *** ADMIN ROUTES ***

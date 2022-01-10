@@ -252,9 +252,9 @@ export const auth = {
 
     if (op === 'public_profile') {
       const data = {
-        image: $('#profile_picture').val(),
-        personal_text: $('#personal_text').val(),
-        favourite_program: $('#favourite_program').val()
+        image: $('#profile_picture').val() ? $('#profile_picture').val():  undefined,
+        personal_text: $('#personal_text').val() ? $('#personal_text').val():  undefined,
+        favourite_program: $('#favourite_program').val() ? $('#favourite_program').val():  undefined
       }
 
       console.log(data);
@@ -266,10 +266,9 @@ export const auth = {
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
         auth.success (auth.texts['profile_updated']);
-        setTimeout (function () {location.reload ()}, 1000);
       }).fail (function (response) {
         console.log(response);
-        //Error handling is a to-do until we have merged #1598
+        //Todo: Error handling is a to-do until we have merged #1598
       });
     }
   },

@@ -35,6 +35,7 @@
          <div class="mb-4">
              <h3 class="mb-2">{{auth.favourite_program}}</h3>
              <select id="favourite_program" class="block">
+                <option value="" selected disabled hidden>{{auth.select}}</option>
                 {% for program in programs %}
                     <option value="{{program.id}}">{{program.name}}</option>
                 {% endfor %}
