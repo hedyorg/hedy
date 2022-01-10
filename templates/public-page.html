@@ -21,12 +21,20 @@
                     <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-around rounded-b-lg">
                         {% if user_achievements.run_programs %}
                             <div>{{ user_achievements.run_programs }} {{ texts.amount_created }}</div>
+                        {% else %}
+                            <div>0 {{ texts.amount_created }}</div>
                         {% endif %}
+                        <div>|</div>
                         {% if user_achievements.saved_programs %}
                             <div>{{ user_achievements.saved_programs }} {{ texts.amount_saved }}</div>
+                        {% else %}
+                            <div>0 {{ texts.amount_saved }}</div>
                         {% endif %}
+                        <div>|</div>
                         {% if user_achievements.submitted_programs %}
                             <div>{{ user_achievements.submitted_programs }} {{ texts.amount_submitted }}</div>
+                        {% else %}
+                            <div>0 {{ texts.amount_submitted }}</div>
                         {% endif %}
                     </div>
                 </div>
