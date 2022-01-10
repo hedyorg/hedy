@@ -3,7 +3,7 @@
 {% block main %}
    <h2 class="px-8 mb-4">{{auth.account_overview}}</h2>
    <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#public_profile').toggle()">{{auth.public_profile}}</h1>
-   <div id="public_profile" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4">
+   <div id="public_profile" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 hidden">
      <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.public_profile}}</h2>
      <form class="js-validated-form auth" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
      <div class="mb-4 w-full">
@@ -64,9 +64,9 @@
            {% endfor %}
        </div>
    {% endif %}
-   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{auth.profile}}</h1>
+   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{auth.settings}}</h1>
    <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
-    <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.profile}}</h2>
+    <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.settings}}</h2>
     <div class="mb-4">
         <label for="username">{{auth.username}}</label>
         <strong id="username"></strong>
