@@ -9,26 +9,28 @@
                 <img src="{{static('/images/Hedy-logo.png')}}">
             {% endif %}
         </div>
-        <div class="w-full h-full bg-blue-200 pb-8 rounded-lg">
-            <h2 class="bg-blue-600 text-white pl-4 text-4xl rounded-t-lg">{{ user_info.username }}</h2>
-            <div class="px-4 pt-4 pb-8">
-                {% if user_info.personal_text %}
-                    <p class="mb-4 italic text-center">{{ user_info.personal_text }}</p>
-                {% endif %}
-                {% if achievements %}
-                    <div class="font-semibold h-full">
+        <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg">
+            <h2 class="bg-blue-600 text-white pl-4 pb-1 pt-1 text-4xl rounded-t-lg">{{ user_info.username }}</h2>
+            {% if user_info.personal_text %}
+                <div class="my-auto px-16 text-xl italic">
+                    {{ user_info.personal_text }}
+                </div>
+            {% endif %}
+            {% if achievements %}
+                <div class="mt-auto">
+                    <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-around rounded-b-lg">
                         {% if user_achievements.run_programs %}
-                            <p>{{ user_achievements.run_programs }} {{ texts.amount_created }}</p>
+                            <div>{{ user_achievements.run_programs }} {{ texts.amount_created }}</div>
                         {% endif %}
                         {% if user_achievements.saved_programs %}
-                            <p>{{ user_achievements.saved_programs }} {{ texts.amount_saved }}</p>
+                            <div>{{ user_achievements.saved_programs }} {{ texts.amount_saved }}</div>
                         {% endif %}
                         {% if user_achievements.submitted_programs %}
-                            <p>{{ user_achievements.submitted_programs }} {{ texts.amount_submitted }}</p>
+                            <div>{{ user_achievements.submitted_programs }} {{ texts.amount_submitted }}</div>
                         {% endif %}
                     </div>
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
         </div>
         {% if user_achievements['achieved'] %}
             {% for achievement in user_achievements['achieved'][0:1] %}
