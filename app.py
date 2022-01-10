@@ -1393,9 +1393,13 @@ def public_user_page(username):
         if user_public_info:
             user_programs = DATABASE.public_programs_for_user(username)
             user_achievements = DATABASE.achievements_by_username(username)
+            #We want to show 5 programs:
+            #The last 5 edited ones OR
+            #The favourite one and the last 4 edited ones
+            if user_programs and len(user_programs) > 5:
+                user_programs = user_programs[:4]
             if user_achievements and len(user_achievements) > 5:
                 user_achievements = user_achievements[-5:]
-
             return render_template('public-page.html', user_info=user_public_info,
                                    programs=user_programs,
                                    user_achievements=user_achievements)
