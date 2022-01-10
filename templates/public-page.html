@@ -23,7 +23,7 @@
             {% endif %}
         </div>
     </div>
-    {% if achievements %}
+    {% if not achievements %}
     <h2>{{ auth.achievements }}</h2>
         <div class="flex flex-wrap w-full">
             {% if 'achieved' in user_achievements %}
@@ -60,14 +60,16 @@
     {% endif %}
     {% if programs %}
         {% for program in programs %}
-            <div class="w-full rounded-lg mr-4 mt-4 relative bg-blue-200" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
-             <div class="flex items-center justify-center mt-2">
-                <p>{{ program.name }}</p>
-            </div>
-            <div class="relative px-4 mb-4">
-                <pre class="no-copy-button" id="{{ program.level }}">{{ program.code | truncate(50) }}</pre>
-            </div>
-        </div>
+            {% if program.id != favourite_program.id %}
+                <div class="w-full rounded-lg mr-4 mt-4 relative bg-blue-200" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+                    <div class="flex items-center justify-center mt-2 mb-2">
+                        <p>{{ program.name }}</p>
+                    </div>
+                    <div class="relative px-4 mb-4">
+                        <pre class="no-copy-button" id="{{ program.level }}">{{ program.code | truncate(50) }}</pre>
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
     {% endif %}
     </div>

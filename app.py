@@ -1394,10 +1394,12 @@ def public_user_page(username):
             user_programs = DATABASE.public_programs_for_user(username)
             user_achievements = DATABASE.progress_by_username(username)
 
+            favourite_program = None
             if 'favourite_program' in user_public_info:
                 favourite_program = DATABASE.program_by_id(user_public_info['favourite_program'])
             if len(user_programs) >= 5:
                 user_programs = user_programs[:5]
+
             if 'achieved' in user_achievements and len(user_achievements['achieved']) > 5:
                 user_achievements['achieved'] = user_achievements['achieved'][-5:]
 
