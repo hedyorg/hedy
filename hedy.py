@@ -482,7 +482,6 @@ class TypeValidator(Transformer):
     def assign_list_equals(self, tree):
         return self.assign_list(tree)
         
-    # TODO: list_access, list_access_var and repeat_list types can be inferred but for now use 'any'
     def list_access(self, tree):
         self.validate_args_type_allowed(tree.children[0], Command.list_access)
 
@@ -522,6 +521,12 @@ class TypeValidator(Transformer):
         rules = [int_to_float, int_to_string, float_to_string] if self.level < 12 else [int_to_float]
         self.validate_binary_command_args_type(Command.equality, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
+    
+    def equality_check_is(self, tree):
+        return self.equality_check(tree)
+    
+    def equality_check_equals(self, tree):
+        return self.equality_check(tree)
 
     def repeat_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
@@ -669,7 +674,6 @@ class TypeValidator(Transformer):
     def try_get_type_from_lookup(self, name):
         matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
         if matches:
-            # TODO: we should not just take the first match, take into account var reassignments
             match = matches[0]
             if not match.type_:
                 if match.currently_inferring:  # there is a cyclic var reference, e.g. b = b + 1
@@ -1348,8 +1352,11 @@ class ConvertToPython_6(ConvertToPython_5):
 
         return f"str({arg0}) == str({arg1})"
 
-        #TODO if we start using fstrings here, this str can go
+    def equality_check_is(self, args):
+        return self.equality_check(args)
 
+    def equality_check_equals(self, args):
+        return self.equality_check(args)
 
     def assign(self, args):
         parameter = args[0]
@@ -1613,6 +1620,8 @@ class ConvertToPython_14(ConvertToPython_13):
         else:
             return f"{simple_comparison} and {args[2]}"
 
+    def equality_check_dequals(self, args):
+        return super().equality_check(args)
 
     def smaller(self, args):
         return self.process_comparison(args, "<")
