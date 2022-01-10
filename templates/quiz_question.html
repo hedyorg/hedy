@@ -13,8 +13,11 @@
                 }
             }
             function selectAnswer(value) {
-                $("#" + value).prop("checked", true);
-                $("input[name='submit-button']").prop("disabled", false);
+                // We only want to select an answer if it isn't disabled
+                if (!$("#" + value).prop("disabled")) {
+                    $("#" + value).prop("checked", true);
+                    $("input[name='submit-button']").prop("disabled", false);
+                }
             }
         </script>
     </head>
