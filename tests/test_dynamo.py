@@ -101,7 +101,17 @@ class TestQueryInMemory(unittest.TestCase):
 
   def setUp(self):
     self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', partition_key='id', sort_key='sort',
-                              indexed_fields=[dynamo.Key('x', 'y'), dynamo.Key('m')])
+                              indexed_fields=[dynamo.IndexKey('x', 'y'), dynamo.IndexKey('m')])
+
+  def insert(self, *rows):
+    for row in rows:
+      self.table.create(row)
+
+  def insert_sample_data(self):
+    self.insert(
+        dict(id='key', sort=1, x=1, y=1),
+        dict(id='key', sort=2, x=1, y=3),
+        dict(id='key', sort=3, x=1, y=2))
 
   def test_query(self):
     self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
@@ -179,41 +189,66 @@ class TestQueryInMemory(unittest.TestCase):
     ])
 
   def test_paginated_query(self):
-    self.table.create({'id': 'key', 'sort': 1, 'y': 1})
-    self.table.create({'id': 'key', 'sort': 2, 'y': 3})
-    self.table.create({'id': 'key', 'sort': 3, 'y': 6})
+    self.insert_sample_data()
 
     ret = self.table.get_many({ 'id': 'key' }, limit=1)
-    self.assertEqual(ret[0], {'id': 'key', 'sort': 1, 'y': 1})
+    self.assertEqual(ret[0], dict(id='key', sort=1, x=1, y=1))
 
     ret = self.table.get_many({ 'id': 'key' }, limit=1, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], {'id': 'key', 'sort': 2, 'y': 3})
+    self.assertEqual(ret[0], dict(id='key', sort=2, x=1, y=3))
 
     ret = self.table.get_many({ 'id': 'key' }, limit=1, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], {'id': 'key', 'sort': 3, 'y': 6})
+    self.assertEqual(ret[0], dict(id='key', sort=3, x=1, y=2))
+
+    self.assertIsNone(ret.next_page_token)
+
+  def test_paginated_query_on_index(self):
+    self.insert_sample_data()
+
+    ret = self.table.get_many({ 'x': 1 }, limit=1)
+    self.assertEqual(ret[0], dict(id='key', sort=1, x=1, y=1))
+
+    ret = self.table.get_many({ 'x': 1 }, limit=1, pagination_token=ret.next_page_token)
+    self.assertEqual(ret[0], dict(id='key', sort=3, x=1, y=2))
+
+    ret = self.table.get_many({ 'x': 1 }, limit=1, pagination_token=ret.next_page_token)
+    self.assertEqual(ret[0], dict(id='key', sort=2, x=1, y=3))
 
     self.assertIsNone(ret.next_page_token)
 
   def test_paginated_query_reverse(self):
-    self.table.create({'id': 'key', 'sort': 1, 'y': 1})
-    self.table.create({'id': 'key', 'sort': 2, 'y': 3})
-    self.table.create({'id': 'key', 'sort': 3, 'y': 6})
+    self.insert_sample_data()
 
     ret = self.table.get_many({ 'id': 'key' }, limit=1, reverse=True)
-    self.assertEqual(ret[0], {'id': 'key', 'sort': 3, 'y': 6})
+    self.assertEqual(ret[0], dict(id='key', sort=3, x=1, y=2))
 
     ret = self.table.get_many({ 'id': 'key' }, limit=1, reverse=True, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], {'id': 'key', 'sort': 2, 'y': 3})
+    self.assertEqual(ret[0], dict(id='key', sort=2, x=1, y=3))
 
     ret = self.table.get_many({ 'id': 'key' }, limit=1, reverse=True, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], {'id': 'key', 'sort': 1, 'y': 1})
+    self.assertEqual(ret[0], dict(id='key', sort=1, x=1, y=1))
+
+    self.assertIsNone(ret.next_page_token)
+
+  def test_paginated_query_on_index_reverse(self):
+    self.insert_sample_data()
+
+    ret = self.table.get_many({ 'x': 1 }, limit=1, reverse=True)
+    self.assertEqual(ret[0], dict(id='key', sort=2, x=1, y=3))
+
+    ret = self.table.get_many({ 'x': 1 }, limit=1, reverse=True, pagination_token=ret.next_page_token)
+    self.assertEqual(ret[0], dict(id='key', sort=3, x=1, y=2))
+
+    ret = self.table.get_many({ 'x': 1 }, limit=1, reverse=True, pagination_token=ret.next_page_token)
+    self.assertEqual(ret[0], dict(id='key', sort=1, x=1, y=1))
 
     self.assertIsNone(ret.next_page_token)
 
   def test_paginated_scan(self):
-    self.table.create({'id': 'key', 'sort': 1, 'y': 1})
-    self.table.create({'id': 'key', 'sort': 2, 'y': 3})
-    self.table.create({'id': 'key', 'sort': 3, 'y': 6})
+    self.insert(
+        dict(id='key', sort=1, y=1),
+        dict(id='key', sort=2, y=3),
+        dict(id='key', sort=3, y=6))
 
     ret = self.table.scan(limit=1)
     self.assertEqual(ret[0], {'id': 'key', 'sort': 1, 'y': 1})

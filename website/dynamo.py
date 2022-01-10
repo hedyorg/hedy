@@ -30,7 +30,7 @@ class TableStorage(metaclass=ABCMeta):
 
 
 @dataclass
-class Key:
+class IndexKey:
     partition_key: str
     sort_key: str = None
 
@@ -77,7 +77,8 @@ class Table:
         - partition_key: the partition key for the table.
         - indexed_fields: a list of fields that have a (global) index on them.
           Each individual index must be named '{field}-index', and each must
-          project the full set of attributes.
+          project the full set of attributes. Indexes can have a partition and their
+          own sort keys.
         - sort_key: a field that is the sort key for the table.
     """
     def __init__(self, storage: TableStorage, table_name, partition_key, sort_key=None, indexed_fields=None):
@@ -100,7 +101,7 @@ class Table:
             return self.storage.get_item(lookup.table_name, lookup.key)
         if isinstance(lookup, IndexLookup):
             return first_or_none(
-                self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key, sort_key=sort_key, limit=1)[0]
+                self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key, sort_key=lookup.sort_key, limit=1)[0]
             )
         assert False
 
@@ -127,7 +128,7 @@ class Table:
                 pagination_token=decode_page_token(pagination_token))
         elif isinstance(lookup, IndexLookup):
             items, next_page_token = self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key,
-                sort_key=sort_key,
+                sort_key=lookup.sort_key,
                 reverse=reverse,
                 limit=limit,
                 pagination_token=decode_page_token(pagination_token))
@@ -221,7 +222,11 @@ class Table:
         for index in self.indexed_fields:
             index_key_names = [x for x in [index.partition_key, index.sort_key] if x is not None]
             if keys == set(index_key_names) or one_key == index.partition_key:
-                return IndexLookup(self.table_name, f'{"-".join(index_key_names)}-index', key_data)
+                return IndexLookup(
+                    self.table_name,
+                    f'{"-".join(index_key_names)}-index',
+                    key_data,
+                    index.sort_key)
 
         if len(keys) != 1:
             raise RuntimeError(f'Getting key data: {key_data}, but expecting: {table_keys}')
@@ -592,6 +597,7 @@ class IndexLookup:
     table_name: str
     index_name: str
     key: dict
+    sort_key: Optional[str]
 
 
 class DynamoUpdate:
