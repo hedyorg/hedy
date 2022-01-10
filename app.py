@@ -1392,15 +1392,18 @@ def public_user_page(username):
         user_public_info = DATABASE.get_public_profile_settings(username)
         if user_public_info:
             user_programs = DATABASE.public_programs_for_user(username)
-            user_achievements = DATABASE.achievements_by_username(username)
-            #We want to show 5 programs:
-            #The last 5 edited ones OR
-            #The favourite one and the last 4 edited ones
-            if user_programs and len(user_programs) > 5:
-                user_programs = user_programs[:4]
-            if user_achievements and len(user_achievements) > 5:
-                user_achievements = user_achievements[-5:]
+            user_achievements = DATABASE.progress_by_username(username)
+
+            if 'favourite_program' in user_public_info:
+                favourite_program = DATABASE.program_by_id(user_public_info['favourite_program'])
+            if len(user_programs) >= 5:
+                user_programs = user_programs[:5]
+            if 'achieved' in user_achievements and len(user_achievements['achieved']) > 5:
+                user_achievements['achieved'] = user_achievements['achieved'][-5:]
+
+            print(user_programs)
             return render_template('public-page.html', user_info=user_public_info,
+                                   favourite_program=favourite_program,
                                    programs=user_programs,
                                    user_achievements=user_achievements)
         else:
