@@ -6,7 +6,7 @@
 
         Auf der linken Seite deines Bildschirms befinden sich alle Befehle des Level 1.
 
-        Drücke den blauen Knopf und der Code wird für dich ausgegeben!
+        Drücke den blauen Knopf und der Befehl wird in dein Programm übernommen!
 
         Probiere den Code selbst mit der grünen Schaltfläche 'Code ausführen' unter dem linken Programmierfeld aus.
 
@@ -179,8 +179,8 @@
 7:
     start_code: "repeat 3 times print 'Hedy macht Spaß!'"
     intro_text: |
-        `ask`, `print` und `if` funktionieren genau wie in Stufe 5 und 6.
-        Aber in Stufe 7 kommt der `repeat` Befehl dazu.
+        `ask`, `print` und `if` funktionieren genau wie in Level 5 und 6.
+        Aber in Level 7 kommt der `repeat` Befehl dazu.
         `repeat` bedeutet wiederhole.
         Mit `repeat` kannst du eine Befehlszeile mehrmals auszuführen. 
         Dabei kannst du angeben, wie oft etwas wiederholt werden soll.
@@ -483,18 +483,18 @@
         explanation: |-
             Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
             Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
-            Wir machen das hier mit `zaehler = zaehler + 1`.
-        example: "while zaehler < 3"
+            Wir machen das hier mit `zähler = zähler + 1`.
+        example: "while zähler < 3"
         demo_code: |-
-            zaehler = 1
-            while zaehler < 3
-                print 'Wir machen dies noch ' 3 - zaehler ' mal.'
-                zaehler = zaehler + 1
+            zähler = 1
+            while zähler < 3
+                print 'Wir machen dies noch ' 3 - zähler ' mal.'
+                zähler = zähler + 1
             print 'Wir sind fertig!'
 16:
     start_code: |-
-        fruechte = ['Apfel', 'Banane', 'Kirsche']
-        print fruechte
+        früchte = ['Apfel', 'Banane', 'Kirsche']
+        print früchte
     intro_text: |-
         Wir werden eckige Klammern um Listen setzen!
         Außerdem müssen wir jetzt einfache Anführungszeichen `'` um Elemente in Listen setzen.
@@ -502,28 +502,28 @@
     -   explanation: |-
             Wir werden eckige Klammern um Listen setzen!
             Wir müssen auch `'` um Elemente in Listen setzen.
-        example: "fruechte = ['Apfel', 'Banane', 'Kirsche']"
+        example: "früchte = ['Apfel', 'Banane', 'Kirsche']"
         demo_code: |-
-            fruechte = ['Apfel', 'Banane', 'Kirsche']
-            print fruechte
+            früchte = ['Apfel', 'Banane', 'Kirsche']
+            print früchte
     -   name: "Nimm ein Element aus einer Liste"
         explanation: |-
             Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
-            Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
-        example: "erste_frucht = fruechte[1]"
+            Mit `früchte[1]` erhalten wir also die erste Frucht aus der Liste.
+        example: "erste_frucht = früchte[1]"
         demo_code: |-
-            fruechte = ['Apfel', 'Banane', 'Kirsche']
-            erste_frucht = fruechte[1]
+            früchte = ['Apfel', 'Banane', 'Kirsche']
+            erste_frucht = früchte[1]
             print erste_frucht
     -   name: "Nimm ein zufälliges Element aus einer Liste"
         explanation: |-
             Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`.
-            Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
-        example: "zufaellige_frucht = fruechte[random]"
+            Mit früchte[random] erhalten wir also eine zufällige Frucht aus der Liste.
+        example: "zufällige_frucht = früchte[random]"
         demo_code: |-
-            fruechte = ['Apfel', 'Banane', 'Kirsche']
-            zufaellige_frucht = fruechte[random]
-            print zufaellige_frucht
+            früchte = ['Apfel', 'Banane', 'Kirsche']
+            zufällige_frucht = früchte[random]
+            print zufällige_frucht
 
 17:
     start_code: |-

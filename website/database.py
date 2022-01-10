@@ -1,13 +1,16 @@
 from utils import timems, times
+from datetime import date
 from . import dynamo
+import functools
+import operator
 
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
-USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
+USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.Key('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
-CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.Key('username')])
+CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.Key(v) for v in ['teacher', 'link']])
 
 # Customizations contains the class customizations made by a teacher on a specific class/level combination.
 # Each entry stores a unique class_id / level combination and the selected adventures, example programs and/or hiding of level
@@ -55,6 +58,18 @@ PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='userna
 #
 QUIZ_ANSWERS = dynamo.Table(storage, 'quizAnswers', partition_key='user', sort_key='levelAttempt')
 
+# Holds information about program runs: success/failure and produced exceptions. Entries are created per user per level
+# per week and updated in place. Uses a composite partition key 'id#level' and 'week' as a sort key. Structure:
+# {
+#   "id#level": "hedy#1",
+#   "week": '2025-52',
+#   "successful_runs": 10,
+#   "InvalidCommandException": 3,
+#   "InvalidSpaceException": 2
+# }
+#
+PROGRAM_STATS = dynamo.Table(storage, 'program-stats', partition_key='id#level', sort_key='week',
+                             indexed_fields=[dynamo.Key('id', 'week')])
 
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
@@ -372,3 +387,34 @@ class Database:
 
     def get_public_profile_settings(self, username):
         return PUBLIC_PROFILES.get({'username': username})
+
+    def add_program_stats(self, id, level, exception):
+        key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
+
+        add_attributes = {'id': id, 'level': level}
+        if exception:
+            add_attributes[exception] = dynamo.DynamoIncrement()
+        else:
+            add_attributes['successful_runs'] = dynamo.DynamoIncrement()
+
+        return PROGRAM_STATS.update(key, add_attributes)
+
+    def get_class_program_stats(self, users, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+
+        data = [PROGRAM_STATS.get_many({'id': u, 'week': dynamo.Between(start_week, end_week)}, sort_key='week') for u in users]
+        return functools.reduce(operator.iconcat, data, [])
+
+    def get_all_program_stats(self, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+
+        return PROGRAM_STATS.get_many({'id': '@all', 'week': dynamo.Between(start_week, end_week)}, sort_key='week')
+
+    def parse_date(self, d, default):
+        return date(*map(int, d.split('-'))) if d else default
+
+    def to_year_week(self, d):
+        cal = d.isocalendar()
+        return f'{cal[0]}-{cal[1]}'

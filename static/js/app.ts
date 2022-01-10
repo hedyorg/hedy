@@ -190,7 +190,7 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function runit(level: string, lang: string, cb: () => void) {
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question']);
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
 
   if (reloadOnExpiredSession ()) return;
 
@@ -331,7 +331,7 @@ function removeBulb(){
 
 export function fix_code(level: string, lang: string){
 
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question']);
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
 
   if (reloadOnExpiredSession ()) return;
 
@@ -425,7 +425,7 @@ export function tryPaletteCode(exampleCode: string) {
     } else {
       $("#commands-window").hide();
       $("#toggle-button").hide();
-      modal.alert(auth.texts['examples_used']);
+      modal.alert(auth.texts['examples_used'], 3000);
       return;
     }
   }
@@ -462,7 +462,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       // The auth functions use this callback function.
       if (cb) return response.Error ? cb (response) : cb (null, response);
 
-      modal.alert (auth.texts['save_success_detail'], 4000);
+      modal.alert (auth.texts['save_success_detail'], 3000);
       if (response.achievements) {
         showAchievements(response.achievements, false, "");
       }
@@ -546,9 +546,24 @@ export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
+function change_shared (shared: boolean, index: number) {
+  // Index is a front-end unique given to each program container and children
+  // This value enables us to remove, hide or show specific element without connecting to the server (again)
+  // When index is -1 we share the program from code page (there is no program container) -> no visual change needed
+  if (index == -1) {
+    return;
+  }
+  if (shared) {
+    $('#non_public_button_container_' + index).hide();
+    $('#public_button_container_' + index).show();
+  } else {
+    $('#modal-copy-button').hide();
+    $('#public_button_container_' + index).hide();
+    $('#non_public_button_container_' + index).show();
+  }
+}
 
-
-export function share_program (level: number, lang: string, id: string | true, Public: boolean, reload?: boolean) {
+export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
 
   var share = function (id: string) {
@@ -565,10 +580,15 @@ export function share_program (level: number, lang: string, id: string | true, P
       if (response.achievement) {
         showAchievements(response.achievement, false, "");
       }
-      // If we're sharing the program, copy the link to the clipboard.
-      if (Public) copy_to_clipboard (viewProgramLink(id), true);
-      modal.alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 4000);
-      if (reload) setTimeout (function () {location.reload ()}, 1000);
+      if (Public) {
+        $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
+        modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
+        change_shared(true, index);
+      } else {
+        $('#modal-copy-ok-button').show();
+        modal.alert (auth.texts['unshare_success_detail'], 3000);
+        change_shared(false, index);
+      }
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
@@ -593,7 +613,7 @@ export function share_program (level: number, lang: string, id: string | true, P
 
 }
 
-export function delete_program(id: string) {
+export function delete_program(id: string, index: number) {
   modal.confirm (auth.texts['delete_confirm'], function () {
     $.ajax({
       type: 'POST',
@@ -607,8 +627,9 @@ export function delete_program(id: string) {
       if (response.achievement) {
           showAchievements(response.achievement, true, "");
       } else {
-          location.reload();
+          $('#program_' + index).remove();
       }
+      modal.alert (auth.texts['delete_success'], 3000);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
@@ -616,11 +637,18 @@ export function delete_program(id: string) {
   });
 }
 
-export function submit_program (id: string, shared: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
-  console.log(shared);
-  if (! shared) return modal.alert (auth.texts['must_be_shared']);
+function change_to_submitted (index: number) {
+    // Index is a front-end unique given to each program container and children
+    // This value enables us to remove, hide or show specific element without connecting to the server (again)
+    $('#non_submitted_button_container_' + index).remove();
+    $('#submitted_button_container_' + index).show();
+    $('#submitted_header_' + index).show();
+    $('#program_' + index).removeClass("border-orange-400");
+    $('#program_' + index).addClass("border-gray-400 bg-gray-400");
+}
 
+export function submit_program (id: string, index: number) {
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
   $.ajax({
     type: 'POST',
     url: '/programs/submit',
@@ -631,10 +659,9 @@ export function submit_program (id: string, shared: boolean) {
     dataType: 'json'
   }).done(function(response) {
     if (response.achievements) {
-      showAchievements(response.achievements, true, "");
-    } else {
-      location.reload();
+      showAchievements(response.achievements, false, "");
     }
+    change_to_submitted(index);
   });
 }
 
@@ -657,7 +684,10 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  if (! noAlert) modal.alert (auth.texts['copy_clipboard'], 4000);
+  if (! noAlert) {
+    modal.hide();
+    modal.alert (auth.texts['copy_clipboard'], 3000);
+  }
 }
 
 /**
