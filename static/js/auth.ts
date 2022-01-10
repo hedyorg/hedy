@@ -265,7 +265,7 @@ export const auth = {
         data: JSON.stringify(data),
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
-        auth.success (auth.texts['profile_updated']);
+        auth.success (auth.texts['public_profile_updated']);
       }).fail (function (response) {
         console.log(response);
         //Todo: Error handling is a to-do until we have merged #1598

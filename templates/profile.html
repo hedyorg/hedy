@@ -7,20 +7,21 @@
      <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.public_profile}}</h2>
      <form class="js-validated-form auth" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
      <div class="mb-4 w-full">
+         <p>{{ public_settings }}</p>
          <h3>{{auth.profile_picture}}</h3>
-         <input name="profile_picture" id="profile_picture" type=number style="display: none;">
+         <input name="profile_picture" id="profile_picture" type=number style="display: none;" {% if public_settings.image %} value="{{ public_settings.image }}" {% endif %}>
          <div class="flex flex-wrap w-full">
-            <div class="w-40 rounded-lg mr-4 mt-4 relative profile_image" id="profile_image_1" onclick="hedyApp.select_profile_image(1);">
+            <div class="w-40 rounded-lg mr-4 mt-4 relative profile_image {% if public_settings.image and public_settings.image == '1'%}border-2 border-blue-600{% endif %}" id="profile_image_1" onclick="hedyApp.select_profile_image(1);">
                 <div class="relative h-40">
                     <img src="{{static('/images/profile_images/1.png')}}" class="absolute p-1">
                 </div>
             </div>
-            <div class="w-40 rounded-lg mr-4 mt-4 relative profile_image" id="profile_image_2" onclick="hedyApp.select_profile_image(2);">
+            <div class="w-40 rounded-lg mr-4 mt-4 relative profile_image {% if public_settings.image and public_settings.image == '2'%}border-2 border-blue-600{% endif %}" id="profile_image_2" onclick="hedyApp.select_profile_image(2);">
                 <div class="relative h-40">
                     <img src="{{static('/images/profile_images/2.png')}}" class="absolute p-1">
                 </div>
             </div>
-            <div class="w-40 rounded-lg mr-4 mt-4 relative profile_image" id="profile_image_3" onclick="hedyApp.select_profile_image(3);">
+            <div class="w-40 rounded-lg mr-4 mt-4 relative profile_image {% if public_settings.image and public_settings.image == '3'%}border-2 border-blue-600{% endif %}" id="profile_image_3" onclick="hedyApp.select_profile_image(3);">
                 <div class="relative h-40">
                     <img src="{{static('/images/profile_images/3.png')}}" class="absolute p-1">
                 </div>
@@ -29,7 +30,7 @@
      </div>
      <div class="mb-4">
          <h3 class="mb-2">{{auth.personal_text}}</h3>
-         <textarea class="block w-1/2 h-32 px-2 py-1 text-gray-700 border border-solid border-gray-300 rounded" id="personal_text" maxlength="200" minlength="5" placeholder="{{auth.your_personal_text}}"></textarea>
+         <textarea class="block w-1/2 h-32 px-2 py-1 text-gray-700 border border-solid border-gray-300 rounded" id="personal_text" maxlength="200" minlength="5" placeholder="{{auth.your_personal_text}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
      </div>
      {% if programs %}
          <div class="mb-4">
@@ -37,7 +38,7 @@
              <select id="favourite_program" class="block">
                 <option value="" selected disabled hidden>{{auth.select}}</option>
                 {% for program in programs %}
-                    <option value="{{program.id}}">{{program.name}}</option>
+                    <option value="{{program.id}}" {% if public_settings.favourite_program and public_settings.favourite_program == program.id %} selected {% endif %}>{{program.name}}</option>
                 {% endfor %}
             </select>
          </div>

@@ -540,8 +540,6 @@ def routes(app, database):
         # Todo: This should als be updated dependent on merging #1598
 
         DATABASE.update_public_profile(user['username'], body);
-
-        print(DATABASE.get_public_profile_settings(user['username']));
         return '', 200
 
     # *** ADMIN ROUTES ***
@@ -666,7 +664,9 @@ def send_email_template(template, email, link):
 def auth_templates(page, page_title, request):
     if page == 'my-profile':
         programs = DATABASE.public_programs_for_user(current_user()['username'])
-        return render_template('profile.html', page_title=page_title, programs=programs, current_page='my-profile')
+        public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
+        return render_template('profile.html', page_title=page_title, programs=programs,
+                               public_settings=public_profile_settings, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
         return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
     if page == 'admin':
