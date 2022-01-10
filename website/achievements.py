@@ -109,7 +109,7 @@ class Achievements:
     def verify_submit_achievements(self, username):
         if not session['achieved']:
             self.initialize_user_data(username)
-        self.check_programs_submitted(session['submitted_programs'])
+        self.check_programs_submitted()
 
         if len(session['new_achieved']) > 0:
             self.DATABASE.add_achievements_to_username(username, session['new_achieved'])
