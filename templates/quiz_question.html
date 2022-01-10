@@ -8,10 +8,17 @@
                 const btn = document.getElementById("hint-button");
                 if (btn.innerText === "{{ ui.hint }}") {
                     btn.innerText = document.getElementById('hidden-hint').textContent;
+                    btn.innerHTML = "<i>" + document.getElementById('hidden-hint').textContent + "</i>";
+                    $('#hint-button').css('background-color', 'rgba(198,246,213,0.51)');
+                    $('#hint-button').css('border', '2.5px solid #2d9068');
                 } else {
                     btn.innerText = "{{ ui.hint }}";
+                    $('#hint-button').css('background-color', '#bee3f8');
+                    $('#hint-button').css('border', '2.5px solid #3182ce');
+                    $('#hint-button').css('outline', '#3182ce');
                 }
             }
+
             function selectAnswer(value) {
                 // We only want to select an answer if it isn't disabled
                 if (!$("#" + value).prop("disabled")) {
@@ -19,6 +26,7 @@
                     $("input[name='submit-button']").prop("disabled", false);
                 }
             }
+
         </script>
     </head>
     <body>
@@ -38,6 +46,12 @@
                 {{wrong_answer_hint}}
             </div>
         {% endif %}
+        <div class="flex flex-row justify-center">
+              <button type="button" onclick="changeHint()"
+                                class="ml-1 bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600"
+                                name="hint-button" id="hint-button">Hint?
+              </button>
+          </div>
         <form action="{{ url_for('submit_answer', level_source=level_source, question_nr=question_nr, attempt=attempt, lang=lang) }}" method="POST">
             <div>
                 {% set counter = namespace(value=0) %}
@@ -48,7 +62,7 @@
                             {% if question_options[counter.value].char_index == chosen_option %}
                                 <div class="p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row" id="answer-disabled-{{ question_options[counter.value].char_index }}">
                                     <label class="inline-flex items-center">
-                                        <div class="flex-1 flex-col justify-center items-center">
+                                          <div class="flex-1 flex-col justify-center items-center">
                                             <p class="text-3xl font-bold ml-3 mr-3 font-slab">{{ question_options[counter.value].char_index }}</p>
                                             <input type="radio" name="radio_option" id="{{ question_nr }}-{{ question_options[counter.value].char_index }}" value="{{ question_nr }}-{{ question_options[counter.value].char_index }}" class="class form-radio size-input" disabled="disabled">
                                         </div>
@@ -62,10 +76,10 @@
                             {% else %}
                                 <div class="p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row" id={{ question_options[counter.value].char_index }}>
                                     <label class="inline-flex items-center">
-                                         <div class="flex-1 flex-col justify-center items-center">
+                                           <div class="flex-1 flex-col justify-center items-center">
                                              <p class="text-3xl font-bold ml-3 mr-3 font-slab">{{ question_options[counter.value].char_index }}</p>
                                              <input type="radio" name="radio_option" id="{{ question_nr }}-{{ question_options[counter.value].char_index }}" value="{{ question_nr }}-{{ question_options[counter.value].char_index }}" class="class form-radio size-input">
-                                         </div>
+                                            </div>
                                         {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
                                             <code class="ml-3 text-l">{{ question_options[counter.value].code | nl2br }}</code>
                                         {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'  %}
@@ -82,12 +96,6 @@
                 </div>
                 <div class="p-10 button-bar">
                     <div class="invisible" id="hidden-hint"> {{ question.hint }}</div>
-                    <div>
-                        <button type="button" onclick="changeHint()"
-                                class="ml-1 bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600"
-                                name="hint-button" id="hint-button">Hint?
-                        </button>
-                    </div>
                     {% if is_last_attempt %}
                         <input class="green-btn ml-1" type="submit" name="submit-button"
                                value="{{ ui.go_to_answer }}" disabled="disabled">

@@ -14,7 +14,7 @@
     });
     </script>
     {% endif %}
-    <div class="container px-6 bg-blue-200" >
+    <div class="container" >
          <!-- Responsive Arrow Progress Bar -->
           <div class="arrow-steps clearfix">
               {% for i in range(questions|length)%}
@@ -23,9 +23,9 @@
                    {% elif not quiz_answers[i + 1] %}
                        <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
                    {% elif quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
-                       <div class="step incorrect"><span><i class="fas fa-times"></i>{{ i + 1 }}</span></div>
+                         <div class="step incorrect"><span><svg class="cross-icon" viewBox="0 0 50 50"><polygon class="cross" points="5.17 38.3 18.43 26.08 8.03 14.12 16.74 6.05 27.14 18.02 39.88 6.32 46.91 14.37 34.16 26.08 44.56 37.91 35.85 46.1 25.45 34.27 12.32 46.36 5.17 38.3"></polygon></svg><p class="font-bold">{{ i + 1 }}</p></span></div>
                    {% elif quiz_answers[i + 1][-1] == questions[i + 1].correct_answer %}
-                       <div class="step check"><span><i class="fas fa-check"></i>{{ i + 1 }}</span></div>
+                       <div class="step check"><span><svg class="check-icon" viewBox="0 0 50 50"><polygon class="check" points="34.6 4.51 21.43 29.93 16.17 20.98 5.48 30.77 22.04 45.16 46.33 11.62 34.6 4.51"></polygon></svg><p class="font-bold">{{ i + 1 }}</p></span></div>
                   {% endif %}
               {% endfor %}
         </div>

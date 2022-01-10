@@ -812,8 +812,25 @@ def get_quiz(level_source, question_nr, attempt):
     chosen_option = session.get('chosenOption', None)
     wrong_answer_hint = session.get('wrong_answer_hint', None)
 
+    # Store the answer in the database. If we don't have a username,
+    # use the session ID as a username.
+    username = current_user()['username'] or f'anonymous:{session_id()}'
+
+    if attempt == 1:
+        is_correct = quiz.is_correct_answer(question, chosen_option)
+        # the answer is not yet answered so is_correct is None
+        DATABASE.record_quiz_answer(session['quiz-attempt-id'],
+                                    username=username,
+                                    level=level_source,
+                                    is_correct=is_correct,
+                                    question_number=question_nr,
+                                    answer=None)
+
+    quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+
     return render_template('quiz_question.html',
                            level_source=level_source,
+                           quiz_answers = quiz_answers,
                            questionStatus=question_status,
                            questions=questions,
                            question_options=question_obj,
@@ -914,11 +931,13 @@ def submit_answer(level_source, question_nr, attempt):
         session['total_score'] = session.get('total_score', 0) + score
         session['correct_answer'] = session.get('correct_answer', 0) + 1
 
-        return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr, lang=g.lang))
+        quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+        return redirect(url_for('quiz_feedback', quiz_answers= quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang))
 
     # Not a correct answer. You can try again if you haven't hit your max attempts yet.
     if attempt >= quiz.MAX_ATTEMPTS:
-        return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr, lang=g.lang))
+        quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+        return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang))
 
     # Redirect to the display page to try again
     return redirect(url_for('get_quiz', chosen_option=chosen_option, level_source=level_source, question_nr=question_nr,
@@ -953,7 +972,14 @@ def quiz_feedback(level_source, question_nr):
 
     question_options = quiz.question_options_for(question)
 
-    return render_template('feedback.html', question=question,
+    # use the session ID as a username.
+    username = current_user()['username'] or f'anonymous:{session_id()}'
+
+    quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+
+    return render_template('feedback.html',
+                           quiz_answers=quiz_answers,
+                           question=question,
                            questions=questions,
                            question_options=question_options,
                            level_source=level_source,
