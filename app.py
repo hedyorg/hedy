@@ -1389,8 +1389,7 @@ def public_user_page(username):
     if not user:
         return "User does not exist or has a private account", 404
     else:
-        user_programs = DATABASE.programs_for_user(username)
-        user_programs = [i if i.get('public') == 1 else None for i in user_programs]
+        user_programs = DATABASE.public_programs_for_user(username)
         user_achievements = DATABASE.progress_by_username(username)
         return render_template('public-page.html', user_info=user,
                                programs=user_programs,
