@@ -50,31 +50,33 @@
             {% endfor %}
         {% endif %}
     </div>
-    <h2 class="ml-4">{{ auth.program_header }}</h2>
-    <div class="flex flex-wrap w-full turn-pre-into-ace">
-    {% if favourite_program %}
-         <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-yellow-400" onclick="window.open (hedyApp.viewProgramLink('{{favourite_program.id}}'))">
-             <div class="text-white text-gray-700 text-2xl flex items-center justify-center mt-2 mb-2">
-                <p>{{ favourite_program.name }}</p>
+    {% if favourite_program or programs %}
+        <h2 class="ml-4">{{ auth.program_header }}</h2>
+        <div class="flex flex-wrap w-full turn-pre-into-ace">
+        {% if favourite_program %}
+             <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-yellow-400" onclick="window.open (hedyApp.viewProgramLink('{{favourite_program.id}}'))">
+                 <div class="text-white text-gray-700 text-2xl flex items-center justify-center mt-2 mb-2">
+                    <p>{{ favourite_program.name }}</p>
+                </div>
+                <div class="relative px-4 mb-4">
+                    <pre class="no-copy-button max-h-full" id="{{ favourite_program.level }}">{{ favourite_program.code | truncate(150) }}</pre>
+                </div>
             </div>
-            <div class="relative px-4 mb-4">
-                <pre class="no-copy-button max-h-full" id="{{ favourite_program.level }}">{{ favourite_program.code | truncate(150) }}</pre>
-            </div>
+        {% endif %}
+        {% if programs %}
+            {% for program in programs %}
+                {% if program.id != favourite_program.id %}
+                    <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-blue-200" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+                        <div class="flex items-center justify-center mt-2 mb-2">
+                            <p>{{ program.name }}</p>
+                        </div>
+                        <div class="relative px-4 mb-4">
+                            <pre class="no-copy-button" id="{{ program.level }}">{{ program.code | truncate(50) }}</pre>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
         </div>
     {% endif %}
-    {% if programs %}
-        {% for program in programs %}
-            {% if program.id != favourite_program.id %}
-                <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-blue-200" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
-                    <div class="flex items-center justify-center mt-2 mb-2">
-                        <p>{{ program.name }}</p>
-                    </div>
-                    <div class="relative px-4 mb-4">
-                        <pre class="no-copy-button" id="{{ program.level }}">{{ program.code | truncate(50) }}</pre>
-                    </div>
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-    </div>
 {% endblock %}
