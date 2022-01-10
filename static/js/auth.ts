@@ -249,6 +249,29 @@ export const auth = {
         else                         auth.error (auth.texts['ajax_error']);
       });
     }
+
+    if (op === 'public_profile') {
+      const data = {
+        image: $('#profile_picture').val(),
+        personal_text: $('#personal_text').val(),
+        favourite_program: $('#favourite_program').val()
+      }
+
+      console.log(data);
+
+      $.ajax ({
+        type: 'POST',
+        url: '/auth/public_profile',
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
+        auth.success (auth.texts['profile_updated']);
+        setTimeout (function () {location.reload ()}, 500);
+      }).fail (function (response) {
+        console.log(response);
+        //Error handling is a to-do until we have merged #1598
+      });
+    }
   },
   markAsTeacher: function (username: string, is_teacher: boolean) {
     $.ajax ({type: 'POST', url: '/admin/markAsTeacher', data: JSON.stringify ({username: username, is_teacher: is_teacher}), contentType: 'application/json; charset=utf-8'}).done (function () {

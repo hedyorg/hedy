@@ -1153,5 +1153,5 @@ export function change_language(lang: string) {
 export function select_profile_image(image: number) {
   $('.profile_image').removeClass("border-2 border-blue-600");
   $('#profile_image_' + image).addClass("border-2 border-blue-600");
-  $('#profile_picture select').val(image);
+  $('#profile_picture').val(image);
 }

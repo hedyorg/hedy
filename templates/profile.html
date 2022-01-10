@@ -8,7 +8,7 @@
      <form class="js-validated-form auth" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
      <div class="mb-4 w-full">
          <h3>{{auth.profile_picture}}</h3>
-         <select name="profile_picture" class="hidden"></select>
+         <input name="profile_picture" id="profile_picture" style="display: none;">
          <div class="flex flex-wrap w-full">
             <div class="w-40 rounded-lg mr-4 mt-4 relative profile_image" id="profile_image_1" onclick="hedyApp.select_profile_image(1);">
                 <div class="relative h-40">
@@ -43,6 +43,10 @@
      {% endif %}
      <div class="mb-4 clear-both">
         <button type="submit" class="green-btn mt-4">{{auth.update_profile}}</button>
+     </div>
+     <div class="mb-4">
+        <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+        <div id="success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
      </div>
      </form>
    </div>
