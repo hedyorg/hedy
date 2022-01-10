@@ -2,8 +2,8 @@
 
 {% block main %}
     <h1>Profile page</h1>
-    <div id="general_info" class="flex flex-row mt-4">
-        <div class="w-64 mr-8">
+    <div id="general_info" class="flex flex-row h-64 items-center mt-2">
+        <div class="w-56 mr-8">
             {% if user_info.image %}
                 <img src="{{static('/images/profile_images/' + user_info.image + '.png')}}">
             {% else %}
@@ -11,41 +11,38 @@
             {% endif %}
         </div>
         <div>
-            <h2>{{ user_info.username }}</h2>
-            {% if user_info.personal_text %}
-                <i>{{ user_info.personal_text }}</i>
-            {% endif %}
-            {% if achievements %}
-                <h4>{{ user_achievements.run_programs }} programma's gemaakt</h4>
-                <h4>{{ user_achievements.saved_programs }} programma's opgeslagen</h4>
-                <h4>{{ user_achievements.submitted_programs }} programma's ingeleverd</h4>
-                <h4></h4>
-            {% endif %}
+            <h2 class="bg-blue-600 text-white pl-4 text-4xl">{{ user_info.username }}</h2>
+            <div class="bg-blue-200 pl-4 pr-16 pt-4 pb-8">
+                {% if user_info.personal_text %}
+                    <p class="mb-4">{{ user_info.personal_text }}</p>
+                {% endif %}
+                {% if achievements %}
+                    <h4>{{ user_achievements.run_programs }} programma's gemaakt</h4>
+                    <h4>{{ user_achievements.saved_programs }} programma's opgeslagen</h4>
+                    <h4>{{ user_achievements.submitted_programs }} programma's ingeleverd</h4>
+                    <h4></h4>
+                {% endif %}
+            </div>
+        </div>
+        {% if user_achievements['achieved'] %}
+            {% for achievement in user_achievements['achieved'][0:1] %}
+            <div class="text-center ml-auto mr-8">
+                <div class="w-40 rounded-lg mr-4 mt-4 relative bg-blue-200">
+                <div class="relative h-40">
+                    <img src="{{static('/images/achievement.png')}}" class="absolute">
+                    <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-5 block" style="left: 50%; transform: translate(-50%, 0%);">
+                </div>
+                <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
+                    <p class="font-semibold">{{ achievements[achievement].text }}</p>
+                </div>
+                <div class="text-center flex items-center justify-center h-16">
+                    <p>{{ achievements[achievement].title }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
         </div>
     </div>
-    {% if not achievements %}
-    <h2>{{ auth.achievements }}</h2>
-        <div class="flex flex-wrap w-full">
-            {% if 'achieved' in user_achievements %}
-            {% for achievement in user_achievements['achieved'] %}
-                {% if achievement in achievements %}
-                    <div class="w-40 rounded-lg mr-4 mt-4 relative bg-blue-200">
-                        <div class="relative h-40">
-                            <img src="{{static('/images/achievement.png')}}" class="absolute">
-                            <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-5 block" style="left: 50%; transform: translate(-50%, 0%);">
-                        </div>
-                        <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                            <p class="font-semibold">{{ achievements[achievement].text }}</p>
-                        </div>
-                        <div class="text-center flex items-center justify-center h-16">
-                            <p>{{ achievements[achievement].title }}</p>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-            {% endif %}
-        </div>
-    {% endif %}
     <h2>{{ auth.programs }}</h2>
     <div class="flex flex-wrap w-full turn-pre-into-ace">
     {% if favourite_program %}
