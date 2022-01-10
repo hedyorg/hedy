@@ -4,11 +4,17 @@
     <h1>Profile page</h1>
     <div id="general_info" class="flex flex-row mt-4">
         <div class="w-64 mr-8">
-            <img src="{{static('/images/Hedy-logo.png')}}">
+            {% if user_info.image %}
+                <img src="{{static('/images/profile_images/' + user_info.image + '.png')}}">
+            {% else %}
+                <img src="{{static('/images/Hedy-logo.png')}}">
+            {% endif %}
         </div>
         <div>
             <h2>{{ user_info.username }}</h2>
-            <i>Dit is mijn persoonlijke tekst</i>
+            {% if user_info.personal_text %}
+                <i>{{ user_info.personal_text }}</i>
+            {% endif %}
             {% if achievements %}
                 <h4>{{ achievements.run_programs }} programma's gemaakt</h4>
                 <h4>{{ achievements.saved_programs }} programma's opgeslagen</h4>
@@ -17,16 +23,30 @@
             {% endif %}
         </div>
     </div>
-    <h2>Shared programs</h2>
+    <h2>{{ auth.programs }} </h2>
     {% if programs %}
         {% for program in programs %}
             <p>{{ program.name }}</p>
         {% endfor %}
     {% endif %}
-    <h2>Achievements</h2>
-    {% if achievements.achieved %}
-        {% for achievement in achievements.achieved %}
-            <p>{{ achievement }}</p>
+    <h2>{{ auth.achievements }}</h2>
+    {% if achievements %}
+        <div class="flex flex-wrap w-full">
+        {% for achievement in user_achievements %}
+            {% if achievement in achievements %}
+                <div class="w-40 rounded-lg mr-4 mt-4 relative bg-blue-200">
+                    <div class="relative h-40">
+                        <img src="{{static('/images/achievement.png')}}" class="absolute">
+                        <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-5 block" style="left: 50%; transform: translate(-50%, 0%);">
+                    </div>
+                    <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
+                        <p class="font-semibold">{{ achievements[achievement].text }}</p>
+                    </div>
+                    <div class="text-center flex items-center justify-center h-16">
+                        <p>{{ achievements[achievement].title }}</p>
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
     {% else %}
         <p>Geen behaalde achievements...</p>

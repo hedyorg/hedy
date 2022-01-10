@@ -1385,15 +1385,23 @@ def update_yaml():
 
 @app.route('/user/<username>')
 def public_user_page(username):
-    user = DATABASE.user_by_username(username);
+    user = DATABASE.user_by_username(username)
     if not user:
         return "User does not exist or has a private account", 404
     else:
-        user_programs = DATABASE.public_programs_for_user(username)
-        user_achievements = DATABASE.progress_by_username(username)
-        return render_template('public-page.html', user_info=user,
-                               programs=user_programs,
-                               achievements=user_achievements)
+        user_public_info = DATABASE.get_public_profile_settings(username)
+        if user_public_info:
+            user_programs = DATABASE.public_programs_for_user(username)
+            user_achievements = DATABASE.achievements_by_username(username)
+            if user_achievements and len(user_achievements) > 5:
+                user_achievements = user_achievements[-5:]
+
+            return render_template('public-page.html', user_info=user_public_info,
+                                   programs=user_programs,
+                                   user_achievements=user_achievements)
+        else:
+            #User does not have a public profile (yet)
+            return "User does not exist or has a private account", 404
 
 
 @app.route('/invite/<code>', methods=['GET'])
