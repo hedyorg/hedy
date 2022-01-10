@@ -644,7 +644,7 @@ def send_email_template(template, email, link):
 
 def auth_templates(page, page_title, request):
     if page == 'my-profile':
-        programs = DATABASE.programs_for_user(current_user()['username'])
+        programs = DATABASE.public_programs_for_user(current_user()['username'])
         return render_template('profile.html', page_title=page_title, programs=programs, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
         return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
