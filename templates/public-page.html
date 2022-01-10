@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
 {% block main %}
-    <div id="general_info" class="flex flex-row items-center h-64 mt-2 mx-2">
+    <div id="general_info" class="flex flex-row items-center h-64 mt-8 mx-2">
         <div class="w-1/3 mr-4">
             {% if user_info.image %}
                 <img src="{{static('/images/profile_images/' + user_info.image + '.png')}}">
