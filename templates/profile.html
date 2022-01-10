@@ -7,7 +7,6 @@
      <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.public_profile}}</h2>
      <form class="js-validated-form auth" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
      <div class="mb-4 w-full">
-         <p>{{ public_settings }}</p>
          <h3>{{auth.profile_picture}}</h3>
          <input name="profile_picture" id="profile_picture" type=number style="display: none;" {% if public_settings.image %} value="{{ public_settings.image }}" {% endif %}>
          <div class="flex flex-wrap w-full">
