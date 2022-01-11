@@ -683,6 +683,7 @@ def programs_page(request):
     adventures = load_adventure_for_language(g.lang)
 
     result = DATABASE.programs_for_user(from_user or username)
+    public_profile = DATABASE.get_public_profile_settings(username)
     programs = []
     now = timems()
     for item in result:
@@ -693,7 +694,8 @@ def programs_page(request):
              'public': item.get('public')})
 
     return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
-                           current_page='programs', from_user=from_user, adventures=adventures)
+                           current_page='programs', from_user=from_user, adventures=adventures,
+                           public_profile=public_profile)
 
 @app.route('/program-stats')
 def get_program_stats():

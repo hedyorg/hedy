@@ -385,6 +385,17 @@ class Database:
         data['username'] = username
         PUBLIC_PROFILES.put(data)
 
+    def set_favourite_program(self, username, program_id):
+        data = PUBLIC_PROFILES.get({'username': username})
+        if data and 'favourite_program' in data:
+            data['favourite_program'] = program_id
+            self.update_public_profile(username, data)
+            return True
+        # We can't set a favourite program without a public page!
+        # Todo: In the feature we might enable users to set any program as favourite -> requires some work
+        return False
+
+
     def get_public_profile_settings(self, username):
         return PUBLIC_PROFILES.get({'username': username})
 
