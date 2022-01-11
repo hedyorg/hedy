@@ -1490,25 +1490,24 @@ def public_user_page(username):
     user = DATABASE.user_by_username(username)
     if not user:
         return utils.page_404(ui_message='page_not_found')
-    else:
-        user_public_info = DATABASE.get_public_profile_settings(username)
-        if user_public_info:
-            user_programs = DATABASE.public_programs_for_user(username)
-            user_achievements = DATABASE.progress_by_username(username)
+    user_public_info = DATABASE.get_public_profile_settings(username)
+    if user_public_info:
+        user_programs = DATABASE.public_programs_for_user(username)
+        user_achievements = DATABASE.progress_by_username(username)
 
-            favourite_program = None
-            if 'favourite_program' in user_public_info:
-                favourite_program = DATABASE.program_by_id(user_public_info['favourite_program'])
-            if len(user_programs) >= 5:
-                user_programs = user_programs[:5]
+        favourite_program = None
+        if 'favourite_program' in user_public_info:
+            favourite_program = DATABASE.program_by_id(user_public_info['favourite_program'])
+        if len(user_programs) >= 5:
+            user_programs = user_programs[:5]
 
-            if 'achieved' in user_achievements and len(user_achievements['achieved']) > 5:
-                user_achievements['achieved'] = user_achievements['achieved'][-5:]
+        if 'achieved' in user_achievements and len(user_achievements['achieved']) > 5:
+            user_achievements['achieved'] = user_achievements['achieved'][-5:]
 
-            return render_template('public-page.html', user_info=user_public_info,
-                                   favourite_program=favourite_program,
-                                   programs=user_programs,
-                                   user_achievements=user_achievements)
+        return render_template('public-page.html', user_info=user_public_info,
+                               favourite_program=favourite_program,
+                               programs=user_programs,
+                               user_achievements=user_achievements)
     return utils.page_404(ui_message='page_not_found')
 
 
