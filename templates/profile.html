@@ -35,8 +35,8 @@
          </div>
      {% endif %}
      <div class="mb-4 mt-6 flex flex-row items-center text-center border-red-500 border p-4 rounded-lg w-3/4">
-        <input type="checkbox" name="agree_terms" required class="mr-4" {% if public_settings %}checked{% endif %}>
-        <label for="agree_terms" style="width: 100%;">{{ texts.public_profile_info }}</label>
+        <input type="checkbox" name="agree_terms" id="agree_terms" required class="mr-4" {% if public_settings %}checked{% endif %}>
+        <label for="agree_terms" class="cursor-pointer" style="width: 100%;">{{ texts.public_profile_info }}</label>
      </div>
      <div class="mb-4 mt-6 flex flex-row">
         <button type="submit" class="green-btn">{{auth.update_public}}</button>
