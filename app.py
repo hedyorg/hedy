@@ -1501,12 +1501,14 @@ def public_user_page(username):
         if len(user_programs) >= 5:
             user_programs = user_programs[:5]
 
-        if 'achieved' in user_achievements and len(user_achievements['achieved']) > 5:
-            user_achievements['achieved'] = user_achievements['achieved'][-5:]
+        last_achieved = None
+        if 'achieved' in user_achievements:
+            last_achieved = user_achievements['achieved'][-1]
 
         return render_template('public-page.html', user_info=user_public_info,
                                favourite_program=favourite_program,
                                programs=user_programs,
+                               last_achieved=last_achieved,
                                user_achievements=user_achievements)
     return utils.page_404(ui_message='page_not_found')
 
