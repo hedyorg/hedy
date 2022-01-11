@@ -1173,8 +1173,8 @@ def main_page(page):
 
 @app.route('/explore', methods=['GET'])
 def explore():
-    level = request.args.get('level', default=None, type=str)
-    adventure = request.args.get('adventure', default=None, type=str)
+    level = request.args.get('level', default=None, type=str).replace("null", None)
+    adventure = request.args.get('adventure', default=None, type=str).replace("null", None)
 
     if level or adventure:
         programs = DATABASE.get_filtered_explore_programs(level, adventure)

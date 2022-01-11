@@ -206,6 +206,9 @@ class Database:
             if 'public' in program:
                 result.append(program)
         level_programs = []
+
+        print(level)
+        print(adventure)
         if level:
             for program in result:
                 if program['level'] == int(level):
