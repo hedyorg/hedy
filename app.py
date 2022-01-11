@@ -747,10 +747,7 @@ def _add_error_rate(data):
 
 
 def explore_page():
-    programs = DATABASE.get_all_public_programs()
-    #We want to add two things to the template to enable filtering:
-    # - Max Hedy Level
-    # - All (translated!) adventure names
+    programs = DATABASE.get_all_explore_programs()
 
     adventures = None
     if hedy_content.Adventures(session['lang']).has_adventures():

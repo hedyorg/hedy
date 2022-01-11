@@ -1179,3 +1179,8 @@ export function change_language(lang: string) {
       console.error(xhr);
     });
 }
+
+export function filter_programs() {
+  console.log("Filtering...");
+}
+

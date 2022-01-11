@@ -191,7 +191,7 @@ class Database:
         """Return all users."""
         return USERS.scan()
 
-    def get_all_public_programs(self):
+    def get_all_explore_programs(self):
         programs = PROGRAMS.scan()
         public_programs = []
         for program in programs:
