@@ -1175,6 +1175,7 @@ def main_page(page):
 def explore():
     level = request.args.get('level', default=None, type=str)
     adventure = request.args.get('adventure', default=None, type=str)
+
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
 
