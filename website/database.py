@@ -212,13 +212,13 @@ class Database:
         level_programs = []
         if level:
             for program in result:
-                if program['level'] == level:
+                if program['level'] == int(level):
                     level_programs.append(program)
             result = level_programs
         adventure_programs = []
         if adventure:
             for program in result:
-                if program['adventure'] == adventure:
+                if 'adventure_name' in program and program['adventure_name'] == adventure:
                     adventure_programs.append(program)
             result = adventure_programs
         return result
