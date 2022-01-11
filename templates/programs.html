@@ -31,7 +31,7 @@
             </tbody>
             </table>
             <div class="ml-auto {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
-                <i class="fa fa-star p-4 border-blue-400 bg-blue-300 border-black rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program({{ program.id }});" aria-hidden="true"></i>
+                <i class="fa fa-star p-4 border-blue-400 bg-blue-300 border-black rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }});" aria-hidden="true"></i>
             </div>
         </div>
         <div class="w-3/4 border-solid border-2 rounded w-1/2 p-2 mb-4">

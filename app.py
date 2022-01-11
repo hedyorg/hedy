@@ -1393,14 +1393,17 @@ def share_unshare_program(user):
     if not isinstance(body.get('public'), bool):
         return 'public must be a boolean', 400
 
+    print(body)
+
     result = DATABASE.program_by_id(body['id'])
     if not result or result['username'] != user['username']:
         return 'No such program!', 404
 
     #This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
-    public_profile = DATABASE.get_public_profile_settings()
+    public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
     if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
         DATABASE.set_favourite_program(user['username'], None)
+    public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
 
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
     achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
@@ -1430,6 +1433,21 @@ def submit_program(user):
         return jsonify({"achievements": ACHIEVEMENTS.get_earned_achievements()})
     return jsonify({})
 
+@app.route('/programs/set_favourite', methods=['POST'])
+@requires_login
+def set_favourite_program(user):
+    body = request.json
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('id'), str):
+        return 'id must be a string', 400
+
+    result = DATABASE.program_by_id(body['id'])
+    if not result or result['username'] != user['username']:
+        return 'No such program!', 404
+
+    DATABASE.set_favourite_program(user['username'], body['id'])
+    return jsonify({})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):

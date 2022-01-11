@@ -643,6 +643,31 @@ export function delete_program(id: string, index: number) {
   });
 }
 
+function set_favourite(index: number) {
+    $('#favourite_program_container_' + index).removeClass('text-white');
+    $('#favourite_program_container_' + index).addClass('text-yellow-400');
+}
+
+export function set_favourite_program(id: string, index: number) {
+  modal.confirm (auth.texts['favourite_confirm'], function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/set_favourite',
+      data: JSON.stringify({
+        id: id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function() {
+      set_favourite(index)
+      modal.alert (auth.texts['favourite_success'], 3000);
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    });
+  });
+}
+
 function change_to_submitted (index: number) {
     // Index is a front-end unique given to each program container and children
     // This value enables us to remove, hide or show specific element without connecting to the server (again)
