@@ -751,7 +751,9 @@ def explore_page():
 
     adventures = None
     if hedy_content.Adventures(session['lang']).has_adventures():
-        adventures = hedy_content.Adventures(session['lang']).get_adventure_names()
+        adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
+
+    print(adventures)
 
     return render_template('explore.html', programs=programs,
                            max_level=hedy.HEDY_MAX_LEVEL,

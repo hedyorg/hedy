@@ -55,14 +55,6 @@ class Adventures:
       adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
     return adventures_dict
 
-  def get_adventure_names(self):
-    adventures = self.adventures_file['adventures']
-    adventure_names = []
-    for adventure in adventures.items():
-        if adventure[0] != "end":
-          adventure_names.append(adventure[1]['name'])
-    return adventure_names
-
   def has_adventures(self):
     return self.adventures_file.exists() and self.adventures_file.get('adventures')
 

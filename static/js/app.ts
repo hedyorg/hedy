@@ -1181,6 +1181,10 @@ export function change_language(lang: string) {
 }
 
 export function filter_programs() {
-  console.log("Filtering...");
+  const level = $('#explore_page_level').val();
+  const adventure = $('#explore_page_adventure').val();
+
+  console.log(level);
+  console.log(adventure);
 }
 
