@@ -644,6 +644,9 @@ export function delete_program(id: string, index: number) {
 }
 
 function set_favourite(index: number) {
+    $('.favourite_program_container').removeClass('text-yellow-400');
+    $('.favourite_program_container').addClass('text-white');
+
     $('#favourite_program_container_' + index).removeClass('text-white');
     $('#favourite_program_container_' + index).addClass('text-yellow-400');
 }
