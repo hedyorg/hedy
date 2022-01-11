@@ -745,11 +745,22 @@ def _add_error_rate(data):
         successes = v['successful_runs']
         v['error_rate'] = fails / (successes + fails)
 
-def explore_page(request):
+
+def explore_page():
     programs = DATABASE.get_all_public_programs()
+    #We want to add two things to the template to enable filtering:
+    # - Max Hedy Level
+    # - All (translated!) adventure names
+
+    adventures = None
+    if hedy_content.Adventures(session['lang']).has_adventures():
+        adventures = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     return render_template('explore.html', programs=programs,
-                           page_title=hedyweb.get_page_title('explore'), current_page='explore')
+                           max_level=hedy.HEDY_MAX_LEVEL,
+                           adventures=adventures,
+                           page_title=hedyweb.get_page_title('explore'),
+                           current_page='explore')
 
 
 def get_user_formatted_age(now, date):
@@ -1135,7 +1146,7 @@ def main_page(page):
         return programs_page(request)
 
     if page == 'explore':
-        return explore_page(request)
+        return explore_page()
 
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)

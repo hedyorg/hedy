@@ -1,27 +1,26 @@
-{% extends "layout.html" %}
+{% extends "auth.html" %}
 
 {% block body %}
 <div class="px-8 py-12">
     <h2 class="px-8 mb-4">{{auth.explore_programs}}</h2>
+    <div class="w-full" id="program_filter">
+        <form>
+            <select>
+                {% for i in range(1, (max_level + 1)) %}
+                    <option>{{ i }}</option>
+                {% endfor %}
+            </select>
+            <select>
+                {% for adventure in adventures %}
+                    <option>{{ adventure }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
     <div class="flex flex-wrap w-full">
     {% for program in programs %}
-        <div class="border-solid border-2 border-orange-400 rounded p-2 mr-4 mb-4 h-32" style="width: 18em;">
-            <h2 class="mt-0 text-blue-600 text-xl px-2 border-b border-gray-400">{{ program.name }}</h2>
-            <div class="flex flex-row items-center justify-between mt-4">
-                <div id="program_info">
-                    <div>
-                        <label class="font-bold w-24 inline-block">{{ texts.level }}</label>
-                        <label>{{ program.level }}</label>
-                    </div>
-                    <div>
-                        <label class="font-bold w-24 inline-block">{{ texts.creator }}</label>
-                        <label>{{ program.username }}</label>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="green-btn">{{ texts.open }}</button></a>
-                </div>
-            </div>
+        <div class="bg-green-100" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+            {{ program }}
         </div>
     {% endfor %}
     </div>
