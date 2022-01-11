@@ -1397,6 +1397,11 @@ def share_unshare_program(user):
     if not result or result['username'] != user['username']:
         return 'No such program!', 404
 
+    #This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
+    public_profile = DATABASE.get_public_profile_settings()
+    if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
+        DATABASE.set_favourite_program(user['username'], None)
+
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
     achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
     if achievement:

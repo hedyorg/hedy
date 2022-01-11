@@ -562,6 +562,10 @@ function change_shared (shared: boolean, index: number) {
     $('#public_button_container_' + index).hide();
     $('#non_public_button_container_' + index).show();
     $('#favourite_program_container_' + index).hide();
+
+    // In the theoretical situation that a user unshares their favourite program -> Change UI
+    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
+    $('#favourite_program_container_' + index).addClass('text-white');
   }
 }
 
