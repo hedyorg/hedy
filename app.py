@@ -1184,6 +1184,9 @@ def explore():
     else:
         programs = DATABASE.get_all_explore_programs()
 
+    for program in programs:
+        program['code'] = "\n".join(program['code'].split("\n")[:4])
+
     adventures = None
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()

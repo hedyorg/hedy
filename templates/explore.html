@@ -41,7 +41,8 @@
                   {{ texts.creator }}: <b>{{ program.username | truncate(25) }}</b>
               </div>
              <div class="relative px-4 mb-2">
-                 <pre class="no-copy-button max-h-full" id="{{ program.level }}">{{ program.code | truncate(50) }}</pre>
+                 <!-- Todo: Solve overflow issue of ace editor -->
+                 <pre class="no-copy-button max-h-full" id="{{ program.level }}">{{ program.code }}</pre>
              </div>
          </div>
     {% endfor %}
