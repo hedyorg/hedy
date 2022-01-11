@@ -203,6 +203,26 @@ class Database:
             return public_programs[:50]
         return public_programs
 
+    def get_filtered_explore_programs(self, level=None, adventure=None):
+        programs = PROGRAMS.scan()
+        result = []
+        for program in programs:
+            if 'public' in program:
+                result.append(program)
+        level_programs = []
+        if level:
+            for program in result:
+                if program['level'] == level:
+                    level_programs.append(program)
+            result = level_programs
+        adventure_programs = []
+        if adventure:
+            for program in result:
+                if program['adventure'] == adventure:
+                    adventure_programs.append(program)
+            result = adventure_programs
+        return result
+
     def all_programs_count(self):
         """Return the total number of all programs."""
         return PROGRAMS.item_count()

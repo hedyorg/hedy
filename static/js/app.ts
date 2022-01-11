@@ -1184,7 +1184,21 @@ export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
 
-  console.log(level);
-  console.log(adventure);
+  $.ajax({
+    type: 'POST',
+    url: '/filter-programs',
+    data: JSON.stringify({
+      level: level,
+      adventure: adventure
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response: any) {
+      console.log("Succes!");
+      console.log(response);
+
+  }).fail(function(xhr) {
+    console.error(xhr);
+  });
 }
 

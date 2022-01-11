@@ -761,6 +761,21 @@ def explore_page():
                            page_title=hedyweb.get_page_title('explore'),
                            current_page='explore')
 
+@app.route('/filter-programs', methods=['POST'])
+def filter_programs():
+    body = request.json
+    if not body:
+        return "body must be an object", 400
+    if 'level' not in body:
+        return "body.level must be a string", 400
+    if 'adventure' not in body:
+        return "body.adventure must be a string", 400
+
+    result = DATABASE.get_filtered_explore_programs(body['level'], body['adventure'])
+    print(result)
+    if result:
+        return jsonify(result), 200
+    return '', 200
 
 def get_user_formatted_age(now, date):
     texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
