@@ -1184,6 +1184,8 @@ export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
 
+  set_program_box();
+
   $.ajax({
     type: 'POST',
     url: '/filter-programs',
@@ -1195,14 +1197,20 @@ export function filter_programs() {
     dataType: 'json'
   }).done(function(response: any) {
       console.log(response);
-      get_program_box();
-
   }).fail(function(xhr) {
     console.error(xhr);
   });
 }
 
-function get_program_box() {
-  console.log("Leeg...");
+function set_program_box() {
+  var container = $("<div/>");
+  var title_container = $("<div/>");
+
+  container.addClass('explore-program-box');
+  title_container.addClass('explore-program-title');
+  title_container.text("Test title!");
+
+  $(title_container).appendTo(container);
+  $(container).appendTo('#explore_page_programs');
 }
 
