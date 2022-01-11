@@ -556,10 +556,12 @@ function change_shared (shared: boolean, index: number) {
   if (shared) {
     $('#non_public_button_container_' + index).hide();
     $('#public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).show();
   } else {
     $('#modal-copy-button').hide();
     $('#public_button_container_' + index).hide();
     $('#non_public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).hide();
   }
 }
 
