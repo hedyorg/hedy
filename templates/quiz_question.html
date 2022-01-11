@@ -24,7 +24,7 @@
 
                 if (!$("#" + value).prop("disabled")) {
                     $("#" + value).prop("checked", true);
-                    $("input[name='submit-button']").prop("disabled", false);
+                    $("button[name='submit-button']").prop("disabled", false);
                 }
 
 
@@ -32,12 +32,26 @@
 
            $(document).ready(function() {
                 $('.radio-btn').click(function() {
-                    console.log('click')
+
                     // remove active class except for the selected button
                     $('.radio-btn').not(this).removeClass('active');
                     $(this).toggleClass('active');
                 });
             });
+
+            $(document).ready(function() {
+                $('.radio-btn').click(function () {
+                    var radiobtns = document.getElementsByName('radio_option');
+                    for (var i = 0; i < radiobtns.length; i++) {
+                        if (radiobtns[i].classList.contains('active')) {
+                            document.getElementById('submit-button').value = radiobtns[i].valueOf().value
+                            console.log( radiobtns[i].valueOf().value)
+                        }
+                    }
+                })
+            })
+
+    </script>
 
 
         </script>
@@ -78,6 +92,7 @@
                                 <button type="button" name="radio_option"
                                         id="answer-disabled-{{ question_options[counter.value].char_index }}"
                                         class="form-radio radio-btn p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row "
+                                        value="{{ question_options[counter.value].char_index }}"
                                         disabled="disabled">
                                     <label class="inline-flex items-center">
                                         <div class="flex-1 flex-col justify-center items-center">
@@ -93,6 +108,7 @@
                             {% else %}
                                 <button type="button" name="radio_option"
                                         id="{{ question_options[counter.value].char_index }}"
+                                        value="{{ question_options[counter.value].char_index }}"
                                         class="form-radio radio-btn p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row">
                                     <label class="inline-flex items-center">
                                         <div class="flex-1 flex-col justify-center items-center">
@@ -114,13 +130,18 @@
                 </div>
                 <div class="p-10 button-bar">
                     <div class="invisible" id="hidden-hint"> {{ question.hint }}</div>
-                    {% if is_last_attempt %}
-                        <input class="green-btn ml-1" type="submit" name="submit-button"
-                               value="{{ ui.go_to_answer }}" disabled="disabled">
+
+                       {% if is_last_attempt %}
+                        <button class="green-btn ml-1" type="submit" name="submit-button" id="submit-button"
+                                value="" disabled="disabled">"
+                            {{ ui.go_to_answer }}"
+                        </button>
                     {% else %}
-                        <input class="green-btn ml-1" type="submit" name="submit-button"
-                               value="{{ ui.submit_answer }} {{ question_nr }}" disabled="disabled">
-                    {% endif %}
+                        <button class="green-btn ml-1" type="submit" name="submit-button"  id="submit-button" value=""
+                                disabled="disabled">
+                            {{ ui.submit_answer }} {{ question_nr }}
+                        </button>
+                       {% endif %}
                 </div>
         </form>
 

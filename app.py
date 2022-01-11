@@ -892,8 +892,10 @@ def submit_answer(level_source, question_nr, attempt):
     #
     # The number should always be the same as 'question_nr', or otherwise
     # be 'question_nr - 1', so is unnecessary. But we'll leave it here for now.
-    chosen_option = request.form["radio_option"]
-    chosen_option = chosen_option.split('-')[1]
+    if request.method == "POST":
+        chosen_option = request.form.get("submit-button")
+        print('chosen option')
+        print(chosen_option)
 
     # Reading the yaml file
     questions = quiz.quiz_data_file_for(g.lang, level_source)
