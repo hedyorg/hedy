@@ -1306,6 +1306,11 @@ def delete_program(user):
     DATABASE.delete_program_by_id(body['id'])
     DATABASE.increase_user_program_count(user['username'], -1)
 
+    # This only happens in the situation were a user deletes their favourite program -> Delete from public profile
+    public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
+    if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
+        DATABASE.set_favourite_program(user['username'], None)
+
     achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "do_you_have_copy")
     if achievement:
         return {'achievement': achievement}, 200
@@ -1403,7 +1408,6 @@ def share_unshare_program(user):
     public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
     if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
         DATABASE.set_favourite_program(user['username'], None)
-    public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
 
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
     achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
