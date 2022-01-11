@@ -24,12 +24,20 @@
 
                 if (!$("#" + value).prop("disabled")) {
                     $("#" + value).prop("checked", true);
-                    $("#" + value + "-checked").prop("checked", true);
                     $("input[name='submit-button']").prop("disabled", false);
                 }
 
+
             }
 
+           $(document).ready(function() {
+                $('.radio-btn').click(function() {
+                    console.log('click')
+                    // remove active class except for the selected button
+                    $('.radio-btn').not(this).removeClass('active');
+                    $(this).toggleClass('active');
+                });
+            });
 
 
         </script>
@@ -63,49 +71,40 @@
                 {% for row in question.mp_choice_options|batch(2) %}
                     <div class="flex flex-row">
                     {% for column in row %}
-                        <div class="flex flex-col" onclick="selectAnswer('{{question_options[counter.value].char_index }}')">
+                        <div class="flex flex-col" onclick="selectAnswer('{{question_options[counter.value].char_index}}')">
                             {% if question_options[counter.value].char_index == chosen_option %}
-                                <div class="p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row" id="answer-disabled-{{ question_options[counter.value].char_index }}">
-                                    <label class="inline-flex items-center">
-                                          <div class="flex-1 flex-col justify-center items-center">
-                                            <p class="text-3xl font-bold ml-3 mr-3 font-slab">{{ question_options[counter.value].char_index }}</p>
-                                            <input type="radio" name="radio_option" id="{{ question_options[counter.value].char_index }}" value="radio-{{ question_options[counter.value].char_index }}" class="class form-radio size-input" disabled="disabled">
-                                        </div>
-                                        {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                                            <code class="ml-3 text-l">{{ question_options[counter.value].code | nl2br  }}</code>
-                                        {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'   %}
-                                            <p class="ml-3 text-l font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
-                                        {% endif %}
-                                    </label>
-                                </div>
-                            {% else %}
-                                <div class="p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row" id={{ question_options[counter.value].char_index }}>
-                                    <label class="inline-flex items-center">
-                                           <div class="flex-1 flex-col justify-center items-center">
-                                             <p class="text-3xl font-bold ml-3 mr-3 font-slab">{{ question_options[counter.value].char_index }}</p>
-                                             <input type="radio" name="radio_option" id="radio-{{ question_options[counter.value].char_index }}" value="{{ question_options[counter.value].char_index }}" class="form-radio size-input">
-                                            </div>
-                                        {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                                            <code class="ml-3 text-l">{{ question_options[counter.value].code | nl2br }}</code>
-                                        {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'  %}
-                                            <p class="ml-3 text-l font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
-                                        {% endif %}
-                                    </label>
-                                </div>
 
-                                <div class="p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row" id='{{ question_options[counter.value].char_index }}-checked'>
+
+                                <button type="button" name="radio_option"
+                                        id="answer-disabled-{{ question_options[counter.value].char_index }}"
+                                        class="form-radio radio-btn p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row "
+                                        disabled="disabled">
                                     <label class="inline-flex items-center">
-                                           <div class="flex-1 flex-col justify-center items-center">
-                                             <p class="text-3xl font-bold ml-3 mr-3 font-slab">{{ question_options[counter.value].char_index }}</p>
-                                             <input type="radio" name="radio_option" id="radio-"{{ question_options[counter.value].char_index }} value="{{ question_options[counter.value].char_index }}" class="form-radio size-input">
-                                            </div>
-                                        {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                                            <code class="ml-3 text-l">{{ question_options[counter.value].code | nl2br }}</code>
-                                        {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'  %}
-                                            <p class="ml-3 text-l font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
-                                        {% endif %}
+                                        <div class="flex-1 flex-col justify-center items-center">
+                                            <p class="text-3xl font-bold ml-3 mr-3 font-slab">{{ question_options[counter.value].char_index }}</p>
+                                            {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
+                                                <code class="ml-3 text-l">{{ question_options[counter.value].code | nl2br }}</code>
+                                            {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None' %}
+                                                <p class="ml-3 text-l font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
+                                            {% endif %}
+                                        </div>
                                     </label>
-                                </div>
+                                </button>
+                            {% else %}
+                                <button type="button" name="radio_option"
+                                        id="{{ question_options[counter.value].char_index }}"
+                                        class="form-radio radio-btn p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row">
+                                    <label class="inline-flex items-center">
+                                        <div class="flex-1 flex-col justify-center items-center">
+                                            <p class="text-3xl font-bold ml-3 mr-3 font-slab">{{ question_options[counter.value].char_index }}</p>
+                                            {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
+                                                <code class="ml-3 text-l">{{ question_options[counter.value].code | nl2br }}</code>
+                                            {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None' %}
+                                                <p class="ml-3 text-l font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
+                                            {% endif %}
+                                        </div>
+                                    </label>
+                                </button>
                             {% endif %}
                         </div>
                         {% set counter.value = counter.value + 1 %}

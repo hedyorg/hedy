@@ -37,7 +37,7 @@
    max-width: 25%;
 }
 
-input:disabled{
+button:disabled{
     background-color: darkgray !important;
 }
 
@@ -46,49 +46,30 @@ input:disabled{
     border-color: #c21919!important;
 }
 
-#A, #B,#C, #D, #A-checked, B#-checked, C#-checked, D#checked{
+#A, #B,#C, #D{
     flex-direction: row;
     flex-grow: 1;
     padding: 0.5rem;
     margin: 0.5rem;
 }
 
-input[type=radio]:not checked + label  #A, input[type="radio"]:not checked + label  #D{
+
+#A, #D, #answer-disabled-A, #answer-disabled-D{
     background-color: #bee3f8;
-    display: block;
 }
 
-input[type="radio"]:checked + label  #A-checked, input[type="radio"]:checked + label  #D-checked{
-    background-color: rgba(49, 130, 206, 0.65);
-    display: block;
-}
-
-input[type="radio"]:checked + label  #A,input[type="radio"]:checked + label  #B, input[type="radio"]:not checked + label #A-checked, #input[type="radio"]:not checked + label  D-checked{
-    display: none;
-}
-
-input[type="radio"]:checked + label  #A-checked, input[type="radio"]:not checked + label  #D-checked{
-    display: block;
-}
-
-input[type="radio"]:not checked + label  #B, input[type="radio"]:not checked + label  #B{
+#B, #C, #answer-disabled-B, #answer-disabled-C {
     background-color: #c6f6d5;
     border-color: #2d9068;
-    display: block;
-
 }
 
-
-input[type="radio"]:checked + label #B-checked, input[type="radio"]:checked + label  #C-checked{
-    display:none;
+#A.active, #D.active, #answer-disabled-A.active, #answer-disabled-D.active{
+    background-color: rgba(49, 130, 206, 0.65);
 }
 
-input[type="radio"]:checked + label #B-checked, input[type="radio"]:checked + label #C-checked{
+#B.active, #C.active, #answer-disabled-B.active, #answer-disabled-C.active {
     background-color: rgba(45, 144, 104, 0.59);
-    border-color: #2d9068;
-    display: block;
 }
-
 
 .flex-col{
     display: flex;
@@ -99,21 +80,15 @@ input[type="radio"]:checked + label #B-checked, input[type="radio"]:checked + la
     border-width: 3px;
 }
 
-.size-input{
-    width: 2rem;
-    height: 2rem;
-    margin-left: 0.75rem;
-}
-
 #hint-button {
     background-color: #bee3f8;
     color: #1a202c;
     border: 2.5px solid #3182ce;
 }
 
-."radio"-block:checked + label  * .form-"radio" {
-    display: none;
-}
+/*.radio-block:active + label  * .form-radio{*/
+/*    display: none;*/
+/*}*/
 
 /*input[type="radio"]{*/
 /*   opacity: 0;*/
