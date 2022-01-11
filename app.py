@@ -207,12 +207,6 @@ def initialize_session():
     login_user_from_token_cookie()
 
 
-@app.before_request
-def initialize_achievements():
-    if current_user()['username'] and 'achieved' not in session:
-        ACHIEVEMENTS.initialize_user_data(current_user()['username'])
-
-
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
     def reject_e2e_requests():
