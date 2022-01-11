@@ -28,11 +28,11 @@
             </div>
         </form>
     </div>
-    <div class="flex flex-wrap justify-center w-full turn-pre-into-ace" id="explore_page_programs">
+    <div class="flex flex-wrap mx-auto justify-center turn-pre-into-ace" id="explore_page_programs">
     {% for program in programs %}
-        <div class="w-64 h-56 rounded-lg border border-gray-700 m-4 relative bg-blue-200 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
-              <div class="text-gray-700 block text-lg text-center mt-2 pl-16 border-b border-gray-700" style="transform: rotate(5deg);">
-                  <p>{{ program.name | truncate(20) }}</p>
+        <div class="explore-program-box" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+              <div class="explore-program-box-title" style="transform: rotate(5deg);">
+                  {{ program.name | truncate(20) }}
               </div>
               <div class="px-4">
                   {{ texts.level }}: <b>{{ program.level }}</b>

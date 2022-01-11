@@ -1194,11 +1194,15 @@ export function filter_programs() {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function(response: any) {
-      console.log("Succes!");
       console.log(response);
+      get_program_box();
 
   }).fail(function(xhr) {
     console.error(xhr);
   });
+}
+
+function get_program_box() {
+  console.log("Leeg...");
 }
 
