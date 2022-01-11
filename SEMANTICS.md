@@ -164,7 +164,7 @@ Level 2 supports:
   </tr>
   <tr>
     <td>is</td>
-    <td>string (left from `is`) + any (right from `is`)</td>
+    <td>string (before `is`) + any (after `is`)</td>
   </tr>
     <tr>
     <td>sleep</td>
@@ -304,7 +304,7 @@ Level 3 supports:
   </tr>
   <tr>
     <td>is</td>
-    <td>string (left from `is`) + any (right from `is`)</td>
+    <td>string (before `is`) + any (after `is`)</td>
   </tr>
     <tr>
     <td>sleep</td>
@@ -491,7 +491,7 @@ Level 4 supports:
   </tr>
   <tr>
     <td>is</td>
-    <td>string (left from `is`) + any (right from `is`)</td>
+    <td>string (before `is`) + any (after `is`)</td>
   </tr>
     <tr>
     <td>sleep</td>
