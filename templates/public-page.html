@@ -52,7 +52,7 @@
     {% if favourite_program or programs %}
         <div class="flex flex-wrap w-full turn-pre-into-ace">
         {% if favourite_program %}
-             <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-yellow-400" onclick="window.open (hedyApp.viewProgramLink('{{favourite_program.id}}'))">
+             <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-yellow-400 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{favourite_program.id}}'))">
                  <div class="text-white text-gray-700 text-2xl flex items-center justify-center mt-2 mb-2">
                     <p>{{ favourite_program.name }}</p>
                 </div>
@@ -64,7 +64,7 @@
         {% if programs %}
             {% for program in programs %}
                 {% if program.id != favourite_program.id %}
-                    <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-blue-200" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+                    <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-blue-200 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
                         <div class="flex items-center justify-center mt-2 mb-2">
                             <p>{{ program.name }}</p>
                         </div>
