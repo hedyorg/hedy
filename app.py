@@ -746,44 +746,6 @@ def _add_error_rate(data):
         v['error_rate'] = fails / (successes + fails)
 
 
-def explore_page():
-    programs = DATABASE.get_all_explore_programs()
-
-    adventures = None
-    if hedy_content.Adventures(session['lang']).has_adventures():
-        adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
-
-    return render_template('explore.html', programs=programs,
-                           max_level=hedy.HEDY_MAX_LEVEL,
-                           adventures=adventures,
-                           page_title=hedyweb.get_page_title('explore'),
-                           current_page='explore')
-
-@app.route('/filter-programs/<string:level>/<string:adventure>', methods=['GET'])
-def filter_programs(level, adventure):
-    print("Dit gaat harstikke goed!")
-    if level == "null":
-        level = None
-    if adventure == "null":
-        adventure = None
-
-    print(level)
-    print(adventure)
-
-    programs = DATABASE.get_filtered_explore_programs(level, adventure)
-    adventures = None
-    if hedy_content.Adventures(session['lang']).has_adventures():
-        adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
-
-    print(programs)
-    print(adventures)
-
-    return render_template('explore.html', programs=programs,
-                           max_level=hedy.HEDY_MAX_LEVEL,
-                           adventures=adventures,
-                           page_title=hedyweb.get_page_title('explore'),
-                           current_page='explore')
-
 def get_user_formatted_age(now, date):
     texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
     program_age = now - date
@@ -1166,9 +1128,6 @@ def main_page(page):
     if page == 'programs':
         return programs_page(request)
 
-    if page == 'explore':
-        return explore_page()
-
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
@@ -1210,6 +1169,27 @@ def main_page(page):
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
                            content=main_page_translations)
+
+
+@app.route('/explore', methods=['GET'])
+def explore():
+    level = request.args.get('level', default=None, type=str)
+    adventure = request.args.get('adventure', default=None, type=str)
+
+    if level or adventure:
+        programs = DATABASE.get_filtered_explore_programs(level, adventure)
+    else:
+        programs = DATABASE.get_all_explore_programs()
+
+    adventures = None
+    if hedy_content.Adventures(session['lang']).has_adventures():
+        adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
+
+    return render_template('explore.html', programs=programs,
+                           max_level=hedy.HEDY_MAX_LEVEL,
+                           adventures=adventures,
+                           page_title=hedyweb.get_page_title('explore'),
+                           current_page='explore')
 
 
 @app.route('/change_language', methods=['POST'])

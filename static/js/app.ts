@@ -1183,18 +1183,6 @@ export function change_language(lang: string) {
 export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
-
-  $.ajax({
-    type: 'GET',
-    url: '/filter-programs/',
-    data: {
-      level: level,
-      adventure: adventure
-    }
-  }).done(function(response: any) {
-      console.log(response);
-  }).fail(function(xhr) {
-      console.error(xhr);
-  });
+  window.open('?level=' + level + "&adventure=" + adventure, "_self");
 }
 
