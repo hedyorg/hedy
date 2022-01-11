@@ -1184,7 +1184,7 @@ export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
 
-  set_program_box();
+  set_program_box("test");
 
   $.ajax({
     type: 'POST',
@@ -1202,13 +1202,14 @@ export function filter_programs() {
   });
 }
 
-function set_program_box() {
+function set_program_box(title: string) {
   var container = $("<div/>");
   var title_container = $("<div/>");
 
   container.addClass('explore-program-box');
-  title_container.addClass('explore-program-title');
-  title_container.text("Test title!");
+  title_container.addClass('explore-program-box-title');
+  title_container.text(title);
+  title_container.css("rotate","5deg");
 
   $(title_container).appendTo(container);
   $(container).appendTo('#explore_page_programs');
