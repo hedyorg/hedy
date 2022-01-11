@@ -1184,34 +1184,17 @@ export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
 
-  set_program_box("test");
-
   $.ajax({
-    type: 'POST',
-    url: '/filter-programs',
-    data: JSON.stringify({
+    type: 'GET',
+    url: '/filter-programs/',
+    data: {
       level: level,
       adventure: adventure
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
+    }
   }).done(function(response: any) {
       console.log(response);
   }).fail(function(xhr) {
-    console.error(xhr);
+      console.error(xhr);
   });
-}
-
-function set_program_box(title: string) {
-  var container = $("<div/>");
-  var title_container = $("<div/>");
-
-  container.addClass('explore-program-box');
-  title_container.addClass('explore-program-box-title');
-  title_container.text(title);
-  title_container.css("rotate","5deg");
-
-  $(title_container).appendTo(container);
-  $(container).appendTo('#explore_page_programs');
 }
 
