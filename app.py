@@ -895,7 +895,6 @@ def submit_answer(level_source, question_nr, attempt):
     if request.method == "POST":
         chosen_option = request.form.get("submit-button")
         print('chosen option')
-        print(chosen_option)
 
     # Reading the yaml file
     questions = quiz.quiz_data_file_for(g.lang, level_source)

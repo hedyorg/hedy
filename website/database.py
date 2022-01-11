@@ -101,7 +101,6 @@ class Database:
         array_quiz_answers = []
         for question_number in range(len(quizAnswers)):
             answers = quizAnswers.get("q" + str(question_number))
-            print(answers)
             array_quiz_answers.append(answers)
         return array_quiz_answers
 
