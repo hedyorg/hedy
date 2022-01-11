@@ -3,18 +3,23 @@
 {% block body %}
 <div class="px-8 py-12">
     <h2 class="px-8 mb-4">{{auth.explore_programs}}</h2>
-    <div class="w-full" id="program_filter">
+    <div class="w-full mb-8" id="program_filter">
         <form>
-            <select>
-                {% for i in range(1, (max_level + 1)) %}
-                    <option>{{ i }}</option>
-                {% endfor %}
-            </select>
-            <select>
-                {% for adventure in adventures %}
-                    <option>{{ adventure }}</option>
-                {% endfor %}
-            </select>
+            <div class="flex flex-row px-8 w-full items-center border border-gray-400 py-2 rounded">
+                <select class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
+                    <option disabled selected value="">{{ texts.level }}</option>
+                    {% for i in range(1, (max_level + 1)) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded">
+                    <option disabled selected value="">{{ ui.adventure }}</option>
+                    {% for adventure in adventures %}
+                        <option value="{{ adventure }}">{{ adventure }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="block ml-auto mr-8 green-btn">{{ texts.search }}</button>
+            </div>
         </form>
     </div>
     <div class="flex flex-wrap w-full">
