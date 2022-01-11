@@ -97,20 +97,88 @@ class TestSortKeysInMemory(unittest.TestCase):
     ret = self.table.get(dict(id='key', sort='s'))
     self.assertEqual(ret, dict(id='key', sort='s', x='x', y='y'))
 
+
+class TestQueryInMemory(unittest.TestCase):
+  """Test that the query work on an in-memory table."""
+
+  def setUp(self):
+    self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', partition_key='id', sort_key='sort',
+                              indexed_fields=[dynamo.Key('x', 'y'), dynamo.Key('m')])
+
+  def test_query(self):
+    self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
+    self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})
+
+    ret = self.table.get_many({'id': 'key'})
+
+    self.assertEqual(ret, [
+      {'id': 'key', 'sort': 1, 'm': 'val'},
+      {'id': 'key', 'sort': 2, 'm': 'another'}
+    ])
+
   def test_between_query(self):
-    self.table.create({ 'id': 'key', 'sort': 1, 'x': 'x' })
-    self.table.create({ 'id': 'key', 'sort': 2, 'x': 'y' })
-    self.table.create({ 'id': 'key', 'sort': 3, 'x': 'z' })
+    self.table.create({'id': 'key', 'sort': 1, 'x': 'x'})
+    self.table.create({'id': 'key', 'sort': 2, 'x': 'y'})
+    self.table.create({'id': 'key', 'sort': 3, 'x': 'z'})
 
     ret = self.table.get_many({
       'id': 'key',
       'sort': dynamo.Between(2, 5),
     })
     self.assertEqual(ret, [
-      { 'id': 'key', 'sort': 2, 'x': 'y' },
-      { 'id': 'key', 'sort': 3, 'x': 'z' },
+      {'id': 'key', 'sort': 2, 'x': 'y'},
+      {'id': 'key', 'sort': 3, 'x': 'z'},
     ])
 
+  def test_query_index(self):
+    self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
+    self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})
+
+    ret = self.table.get_many({'m': 'val'})
+
+    self.assertEqual(ret, [
+      {'id': 'key', 'sort': 1, 'm': 'val'}
+    ])
+
+  def test_query_index_with_partition_key(self):
+    self.table.create({'id': 'key', 'sort': 1, 'x': 'val', 'y': 0})
+    self.table.create({'id': 'key', 'sort': 2, 'x': 'val', 'y': 1})
+    self.table.create({'id': 'key', 'sort': 3, 'x': 'val', 'y': 1})
+    self.table.create({'id': 'key', 'sort': 4, 'x': 'another_val', 'y': 2})
+
+    ret = self.table.get_many({'x': 'val'})
+
+    self.assertEqual(ret, [
+      {'id': 'key', 'sort': 1, 'x': 'val', 'y': 0},
+      {'id': 'key', 'sort': 2, 'x': 'val', 'y': 1},
+      {'id': 'key', 'sort': 3, 'x': 'val', 'y': 1}
+    ])
+
+  def test_query_index_with_partition_sort_key(self):
+    self.table.create({'id': 'key', 'sort': 1, 'x': 'val', 'y': 0})
+    self.table.create({'id': 'key', 'sort': 2, 'x': 'val', 'y': 1})
+    self.table.create({'id': 'key', 'sort': 3, 'x': 'val', 'y': 1})
+    self.table.create({'id': 'key', 'sort': 4, 'x': 'another_val', 'y': 2})
+
+    ret = self.table.get_many({'x': 'val', 'y': 1})
+
+    self.assertEqual(ret, [
+      {'id': 'key', 'sort': 2, 'x': 'val', 'y': 1},
+      {'id': 'key', 'sort': 3, 'x': 'val', 'y': 1}
+    ])
+
+  def test_query_index_sort_key_between(self):
+    self.table.create({'id': 'key', 'sort': 1, 'x': 'val', 'y': 1})
+    self.table.create({'id': 'key', 'sort': 2, 'x': 'val', 'y': 3})
+    self.table.create({'id': 'key', 'sort': 3, 'x': 'val', 'y': 6})
+
+    ret = self.table.get_many({
+      'x': 'val',
+      'y': dynamo.Between(2, 5),
+    })
+    self.assertEqual(ret, [
+      {'id': 'key', 'sort': 2, 'x': 'val', 'y': 3}
+    ])
 
 class TestSortKeysAgainstAws(unittest.TestCase):
   """Test that the operations send out appropriate Dynamo requests."""

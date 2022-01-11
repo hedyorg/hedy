@@ -1,13 +1,16 @@
 from utils import timems, times
+from datetime import date
 from . import dynamo
+import functools
+import operator
 
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
-USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
+USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.Key('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
-CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.Key('username')])
+CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.Key(v) for v in ['teacher', 'link']])
 
 # Customizations contains the class customizations made by a teacher on a specific class/level combination.
 # Each entry stores a unique class_id / level combination and the selected adventures, example programs and/or hiding of level
@@ -31,6 +34,7 @@ CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'lin
 #       "hide_next_level": false
 #     }
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
+ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -52,6 +56,19 @@ CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id
 # by a user. 'level' is padded to 4 characters, then attemptId is added.
 #
 QUIZ_ANSWERS = dynamo.Table(storage, 'quizAnswers', partition_key='user', sort_key='levelAttempt')
+
+# Holds information about program runs: success/failure and produced exceptions. Entries are created per user per level
+# per week and updated in place. Uses a composite partition key 'id#level' and 'week' as a sort key. Structure:
+# {
+#   "id#level": "hedy#1",
+#   "week": '2025-52',
+#   "successful_runs": 10,
+#   "InvalidCommandException": 3,
+#   "InvalidSpaceException": 2
+# }
+#
+PROGRAM_STATS = dynamo.Table(storage, 'program-stats', partition_key='id#level', sort_key='week',
+                             indexed_fields=[dynamo.Key('id', 'week')])
 
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
@@ -315,5 +332,88 @@ class Database:
             restrictions['hide_level'] = False
             restrictions['hide_prev_level'] = False
             restrictions['hide_next_level'] = False
-
         return display_adventures, restrictions
+
+    def progress_by_username(self, username):
+        return ACHIEVEMENTS.get({'username': username})
+
+    def achievements_by_username(self, username):
+        progress_data = ACHIEVEMENTS.get({'username': username})
+        if progress_data and 'achieved' in progress_data:
+            return progress_data['achieved']
+        else:
+            return None
+
+    def add_achievement_to_username(self, username, achievement):
+        user_achievements = ACHIEVEMENTS.get({'username': username})
+        if not user_achievements:
+            user_achievements = {'username': username}
+        if 'achieved' not in user_achievements:
+            user_achievements['achieved'] = []
+        if achievement not in user_achievements['achieved']:
+            user_achievements['achieved'].append(achievement)
+            user_achievements['achieved'] = list(dict.fromkeys(user_achievements['achieved']))
+            ACHIEVEMENTS.put(user_achievements)
+
+    def add_achievements_to_username(self, username, achievements):
+        user_achievements = ACHIEVEMENTS.get({'username': username})
+        if not user_achievements:
+            user_achievements = {'username': username}
+        if 'achieved' not in user_achievements:
+            user_achievements['achieved'] = []
+        for achievement in achievements:
+            if achievement not in user_achievements['achieved']:
+                user_achievements['achieved'].append(achievement)
+        user_achievements['achieved'] = list(dict.fromkeys(user_achievements['achieved']))
+        ACHIEVEMENTS.put(user_achievements)
+
+    def add_commands_to_username(self, username, commands):
+        user_achievements = ACHIEVEMENTS.get({'username': username})
+        if not user_achievements:
+            user_achievements = {'username': username}
+        if 'commands' not in user_achievements:
+            user_achievements['commands'] = []
+        for command in commands:
+            if command not in user_achievements['commands']:
+                user_achievements['commands'].append(command)
+        ACHIEVEMENTS.put(user_achievements)
+
+    def increase_user_run_count(self, username):
+        ACHIEVEMENTS.update({'username': username}, {'run_programs': dynamo.DynamoIncrement(1)})
+
+    def increase_user_save_count(self, username):
+        ACHIEVEMENTS.update({'username': username}, {'saved_programs': dynamo.DynamoIncrement(1)})
+
+    def increase_user_submit_count(self, username):
+        ACHIEVEMENTS.update({'username': username}, {'submitted_programs': dynamo.DynamoIncrement(1)})
+
+    def add_program_stats(self, id, level, exception):
+        key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
+
+        add_attributes = {'id': id, 'level': level}
+        if exception:
+            add_attributes[exception] = dynamo.DynamoIncrement()
+        else:
+            add_attributes['successful_runs'] = dynamo.DynamoIncrement()
+
+        return PROGRAM_STATS.update(key, add_attributes)
+
+    def get_class_program_stats(self, users, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+
+        data = [PROGRAM_STATS.get_many({'id': u, 'week': dynamo.Between(start_week, end_week)}, sort_key='week') for u in users]
+        return functools.reduce(operator.iconcat, data, [])
+
+    def get_all_program_stats(self, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+
+        return PROGRAM_STATS.get_many({'id': '@all', 'week': dynamo.Between(start_week, end_week)}, sort_key='week')
+
+    def parse_date(self, d, default):
+        return date(*map(int, d.split('-'))) if d else default
+
+    def to_year_week(self, d):
+        cal = d.isocalendar()
+        return f'{cal[0]}-{cal[1]}'
