@@ -10,19 +10,19 @@
                 <select id="explore_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
                     <option disabled selected value="">{{ texts.level }}</option>
                     {% for i in range(1, (max_level + 1)) %}
-                        <option value="{{ i }}">{{ i }}</option>
+                        <option value="{{ i }}" {% if filtered_level and i|string == filtered_level %}selected{% endif %}>{{ i }}</option>
                     {% endfor %}
                 </select>
                 <select id="explore_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
                     <option disabled selected value="">{{ ui.adventure }}</option>
                     {% for adventure_key, adventure in adventures.items() %}
                         {% for name, levels in adventure.items() %}
-                            <option value="{{ adventure_key }}">{{ name }}</option>
+                            <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
                         {% endfor %}
                     {% endfor %}
                 </select>
                 <div class="flex flex-row ml-auto">
-                    <button type="reset" class="red-btn" onclick="window.open('/explore');">Reset</button>
+                    <button type="reset" class="red-btn" onclick="window.open('/explore', '_self');">Reset</button>
                     <button type="submit" class="green-btn ml-4 px-4">{{ texts.search }}</button>
                 </div>
             </div>

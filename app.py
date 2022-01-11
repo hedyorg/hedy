@@ -1188,6 +1188,8 @@ def explore():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
 
     return render_template('explore.html', programs=programs,
+                           filtered_level=level,
+                           filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures=adventures,
                            page_title=hedyweb.get_page_title('explore'),
