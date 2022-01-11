@@ -197,10 +197,6 @@ class Database:
         for program in programs:
             if 'public' in program:
                 public_programs.append(program)
-
-        # Hard-code a maximum of 50 programs until the limit structure is implemented
-        if len(public_programs) > 50:
-            return public_programs[:50]
         return public_programs
 
     def get_filtered_explore_programs(self, level=None, adventure=None):
