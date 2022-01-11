@@ -3,7 +3,7 @@
 {% block body %}
 <div class="px-8 py-12">
     <h2 class="px-8 mb-4">{{auth.explore_programs}}</h2>
-    <div class="flex flex-wrap justify-center">
+    <div class="flex flex-wrap w-full">
     {% for program in programs %}
         <div class="border-solid border-2 border-orange-400 rounded p-2 mr-4 mb-4 h-32" style="width: 18em;">
             <h2 class="mt-0 text-blue-600 text-xl px-2 border-b border-gray-400">{{ program.name }}</h2>
