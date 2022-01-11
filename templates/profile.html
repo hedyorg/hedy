@@ -35,14 +35,16 @@
          </div>
      {% endif %}
      <div class="mb-4 mt-6 flex flex-row items-center text-center border-red-500 border p-4 rounded-lg w-3/4">
-        <input type="checkbox" name="agree_terms" required class="mr-4">
+        <input type="checkbox" name="agree_terms" required class="mr-4" {% if public_settings %}checked{% endif %}>
         <label for="agree_terms" style="width: 100%;">{{ texts.public_profile_info }}</label>
      </div>
      <div class="mb-4 mt-6 flex flex-row">
         <button type="submit" class="green-btn">{{auth.update_public}}</button>
-         <button type="reset" class="ml-auto red-btn">{{auth.delete_public}}</button>
+        {% if public_settings %}
+            <button type="reset" class="ml-auto red-btn" onclick="event.preventDefault(); hedyApp.auth.destroy_public ();">{{auth.delete_public}}</button>
+        {% endif %}
      </div>
-     <div class="mb-4">
+     <div>
         <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
         <div id="success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
      </div>

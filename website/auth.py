@@ -337,6 +337,12 @@ def routes(app, database):
         DATABASE.forget_user(user['username'])
         return '', 200
 
+    @app.route('/auth/destroy_public', methods=['POST'])
+    @requires_login
+    def destroy_public(user):
+        DATABASE.forget_public_profile(user['username'])
+        return '', 200
+
     @app.route('/auth/change_password', methods=['POST'])
     @requires_login
     def change_password(user):

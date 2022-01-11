@@ -388,6 +388,9 @@ class Database:
     def get_public_profile_settings(self, username):
         return PUBLIC_PROFILES.get({'username': username})
 
+    def forget_public_profile(self, username):
+        PUBLIC_PROFILES.delete({'username': username})
+
     def add_program_stats(self, id, level, exception):
         key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
 
