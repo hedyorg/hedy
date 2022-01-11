@@ -201,7 +201,8 @@ class Achievements:
             if session['previous_code'] == code:
                 if session['identical_consecutive_errors'] == 0:
                     session['identical_consecutive_errors'] += 2 #We have to count the first one too!
-                session['identical_consecutive_errors'] += 1
+                else:
+                    session['identical_consecutive_errors'] += 1
             if session['identical_consecutive_errors'] >= 3:
                 if 'programming_panic' not in session['achieved']:
                     session['new_achieved'].append("programming_panic")
