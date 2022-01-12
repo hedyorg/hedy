@@ -340,8 +340,8 @@ class Database:
         if 'achieved' not in user_achievements:
             user_achievements['achieved'] = []
         if achievement not in user_achievements['achieved']:
+            print(user_achievements['achieved'])
             user_achievements['achieved'].append(achievement)
-            user_achievements['achieved'] = list(dict.fromkeys(user_achievements['achieved']))
             ACHIEVEMENTS.put(user_achievements)
 
     def add_achievements_to_username(self, username, achievements):
