@@ -5,9 +5,11 @@
       <div class="w-1/4 mt-8 mb-4">
           <img class="w-full" src="/images/{{ error }}.jpeg">
       </div>
-      <div class="mb-4">
-          <p class="text-lg font-bold">{{page_error or ui.default_403}}</p>
+      <div class="mb-4 text-lg font-bold">
+          {{page_error or ui.default_403}}
       </div>
-      <button class="green-btn" onclick="window.location.href = '/'">{{ui.go_back_to_main}}</button>
+      <button class="green-btn" onclick="window.location.href = '/'">
+          {{ui.go_back_to_main}}
+      </button>
   </div>
 {% endblock %}
