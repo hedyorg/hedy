@@ -32,7 +32,7 @@
             </table>
             {% if public_profile %}
                 <div class="ml-auto favourite_program_container {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
-                    <i class="fa fa-star p-4 border-blue-400 bg-blue-300 border-black rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }});" aria-hidden="true"></i>
+                    <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }});" aria-hidden="true"></i>
                 </div>
             {% endif %}
         </div>
