@@ -790,6 +790,8 @@ class AllCommands(Transformer):
             return 'else'
         if keyword == 'ifs':
             return 'if'
+        if keyword == 'elifs':
+            return 'elif'
         if keyword == 'for_loop':
             return 'for'
         if keyword == 'repeat_list':
