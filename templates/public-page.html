@@ -10,8 +10,12 @@
             {% endif %}
         </div>
         <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
-            <h2 class="bg-blue-600 text-white pl-4 pb-1 pt-1 text-4xl rounded-t-lg">{{ user_info.username }}</h2>
-            <!-- Todo: Implement amount of achievements by user -->
+            <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
+                <div class="text-white tracking-wide text-4xl">{{ user_info.username }}</div>
+                {% if user_achievements['achieved'] %}
+                    <div class="text-white text-xl ml-auto">{{ user_achievements['achieved']|length }} {{ auth.achievements }}</div>
+                {% endif %}
+            </div>
             {% if user_info.personal_text %}
                 <div class="my-auto px-16 text-xl italic">
                     {{ user_info.personal_text }}
