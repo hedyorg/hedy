@@ -46,7 +46,7 @@ class Achievements:
         self.get_all_commands()
         achievements_data = self.DATABASE.progress_by_username(username)
         session['new_achieved'] = []
-        session['new_commands'] = []
+        session['new_commands'] = set()
         session['previous_code'] = None
         session['identical_consecutive_errors'] = 0
         session['consecutive_errors'] = 0
@@ -180,7 +180,7 @@ class Achievements:
             for command in set(commands_in_code):
                 if command not in session['commands']:
                     session['new_commands'].append(command)
-        print(self.all_commands)
+        print(session['new_commands'])
         if set(session['commands']).union(session['new_commands']) == self.all_commands:
             session['new_achieved'].append("trying_is_key")
         if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
