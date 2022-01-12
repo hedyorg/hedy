@@ -15,10 +15,8 @@ class Achievements:
     def get_all_commands(self):
         commands = []
         for i in range(1, hedy.HEDY_MAX_LEVEL+1):
-            print()
             for command in hedy.commands_per_level.get(i):
                 commands.append(command)
-        print(commands)
         return set(commands)
 
     def routes(self, app, database):
