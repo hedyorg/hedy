@@ -1518,7 +1518,7 @@ def update_yaml():
 def public_user_page(username):
     user = DATABASE.user_by_username(username)
     if not user:
-        return utils.page_404(ui_message='page_not_found')
+        return utils.page_404(ui_message='user_not_private')
     user_public_info = DATABASE.get_public_profile_settings(username)
     if user_public_info:
         user_programs = DATABASE.public_programs_for_user(username)
@@ -1539,7 +1539,7 @@ def public_user_page(username):
                                programs=user_programs,
                                last_achieved=last_achieved,
                                user_achievements=user_achievements)
-    return utils.page_404(ui_message='page_not_found')
+    return utils.page_404(ui_message='user_not_private')
 
 
 @app.route('/invite/<code>', methods=['GET'])
