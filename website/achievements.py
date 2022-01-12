@@ -10,6 +10,16 @@ class Achievements:
     def __init__(self):
         self.DATABASE = database.Database()
         self.TRANSLATIONS = AchievementTranslations()
+        self.all_commands = self.get_all_commands()
+
+    def get_all_commands(self):
+        commands = []
+        for i in range(1, hedy.HEDY_MAX_LEVEL+1):
+            print()
+            for command in hedy.commands_per_level.get(i):
+                commands.append(command)
+        print(commands)
+        return set(commands)
 
     def routes(self, app, database):
         global DATABASE
@@ -35,6 +45,7 @@ class Achievements:
             session['submitted_programs'] += 1
 
     def initialize_user_data(self, username):
+        self.get_all_commands()
         achievements_data = self.DATABASE.progress_by_username(username)
         session['new_achieved'] = []
         session['new_commands'] = []
@@ -171,7 +182,8 @@ class Achievements:
             for command in set(commands_in_code):
                 if command not in session['commands']:
                     session['new_commands'].append(command)
-        if set(session['commands']) == set(hedy.commands_per_level.get(hedy.HEDY_MAX_LEVEL)):
+        print(self.all_commands)
+        if set(session['commands']).union(session['new_commands']) == self.all_commands:
             session['new_achieved'].append("trying_is_key")
         if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
             session['new_achieved'].append("did_you_say_please")
