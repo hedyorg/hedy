@@ -675,10 +675,10 @@ def programs_page(request):
     from_user = request.args.get('user') or None
     if from_user and not is_admin(user):
         if not is_teacher(user):
-            return utils.page_403(ui_message='not_teacher')
+            return utils.error_page(error=403, ui_message='not_teacher')
         students = DATABASE.get_teacher_students(username)
         if from_user not in students:
-            return utils.page_403(ui_message='not_enrolled')
+            return utils.error_page(error=403, ui_message='not_enrolled')
 
     adventures = load_adventure_for_language(g.lang)
 
@@ -702,7 +702,7 @@ def get_program_stats():
 
     user = current_user()
     if not is_admin(user):
-        return utils.page_403(ui_message='unauthorized')
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     data = DATABASE.get_all_program_stats(start_date, end_date)
     processed_data = _program_runs_stats(data)
@@ -1097,14 +1097,14 @@ def client_messages():
 
 @app.errorhandler(404)
 def not_found(exception):
-    return utils.page_404(ui_message='page_not_found')
+    return utils.error_page(error=404, ui_message='page_not_found')
 
 
 @app.errorhandler(500)
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return utils.page_500()
+    return utils.error_page(error=500)
 
 
 @app.route('/index.html')
@@ -1139,7 +1139,7 @@ def main_page(page):
             return render_template('landing-page.html', page_title=hedyweb.get_page_title(page),
                                    text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
-            return utils.page_403(ui_message='not_user')
+            return utils.error_page(error=403, ui_message='not_user')
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -1154,11 +1154,11 @@ def main_page(page):
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
                                    welcome_teacher=welcome_teacher)
         else:
-            return utils.page_403(ui_message='not_teacher')
+            return utils.error_page(error=403, ui_message='not_teacher')
 
     if page == 'stats':
         if not is_admin(current_user()):
-            return utils.page_403(ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message='unauthorized')
         return render_template('admin-stats.html')
 
     requested_page = hedyweb.PageTranslations(page)

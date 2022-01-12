@@ -200,11 +200,10 @@ def markdown_to_html_tags(markdown):
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all()
 
-def page_403(page_error=None, ui_message=None, menu=True):
-    return render_template("403.html", menu=menu, page_error=page_error or g.ui_texts.get(ui_message) or ''), 403
 
-def page_404(page_error=None, ui_message=None, menu=True):
-    return render_template("404.html", menu=menu, page_error=page_error or g.ui_texts.get(ui_message) or ''), 404
-
-def page_500(page_error=None, ui_message=None, menu=True):
-    return render_template("500.html", menu=menu, page_error=page_error or g.ui_texts.get(ui_message) or ''), 500
+def error_page(error=404, page_error=None, ui_message=None, menu=True):
+    if error not in [403, 404, 500]:
+        error = 404
+    return render_template("error-page.html", menu=menu, error=error,
+                           page_error=page_error or g.ui_texts.get(ui_message) or '',
+                           default=g.ui_texts.get("default_" + str(error))), error

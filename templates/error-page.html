@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <div class="flex flex-col items-center">
+      <div class="w-1/4 mt-8 mb-4">
+          <img class="w-full" src="/images/{{ error }}.jpeg">
+      </div>
+      <div class="mb-4">
+          <p class="text-lg font-bold">{{page_error or ui.default_403}}</p>
+      </div>
+      <button class="green-btn" onclick="window.location.href = '/'">{{ui.go_back_to_main}}</button>
+  </div>
+{% endblock %}
