@@ -38,7 +38,10 @@ interface UserForm {
   old_password?: string;
 }
 
+const chart_fail_color = "#fd7f6f";
+const chart_success_color = "#b2e061";
 const chart_colors = ["#fd7f6f", "#b2e061", "#7eb0d5", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"]
+const chart_level_colors = ['#fbcb8d', '#f9ac48', '#f18c07', '#ac6405', '#673c03', '#fce28c', '#fad146', '#f3bd05', '#ae8704', '#685102', '#b3d5b5', '#85bc89', '#58a15d', '#3f7342', '#254528', '#fab28e', '#f78449', '#ef5709', '#ab3e07', '#662504', '#dbadb8', '#c57b8d', '#ad4c63', '#7c3647', '#4a202a']
 
 if (!(window as any).AuthMessages) {
   throw new Error('On a page where you load this JavaScript, you must also load the "client_messages.js" script');
@@ -284,8 +287,8 @@ export const auth = {
     }
 
     // Loader
-    $('#stats-data').hide();
-    $('#stats-spinner').show();
+    $('.stats-data').hide();
+    $('.stats-spinner').show();
 
     // Set active
     $('.stats-period-toggle').removeClass('active');
@@ -300,52 +303,155 @@ export const auth = {
     };
 
     $.get('/program-stats', data).done (function (response) {
-      load_charts();
-      const runsChart = Chart.getChart('runsChart')!;
-      runsChart.data.datasets[0].data = response;
-      runsChart.data.datasets[1].data = response;
-      runsChart.update();
 
-      var exceptions = new Set<string>()
-      for (var i=0; i<response.length; i++) {
-        const t = Object.keys(response[i].data)
-        for (var j=0; j<t.length; j++) {
-          if (t[j].toLowerCase().endsWith('exception')) {
-            exceptions.add(t[j])
-          }
-        }
-      }
+      // update program runs per level charts
+      const failedRunsPerLevelDatasets = generatePerLevelDataset('Failed runs', response['per_level'], 'data.failed_runs', chart_fail_color);
+      const successfulRunsPerLevelDatasets = generatePerLevelDataset('Successful runs', response['per_level'], 'data.successful_runs', chart_success_color);
 
-      const datasets = new Array();
-      var color_index = 0;
-      for (let ex of Array.from(exceptions)) {
-        datasets.push({
-          label: ex.substr(0, ex.length - 9),
-          data: response,
-          parsing: {
-            xAxisKey: 'level',
-            yAxisKey: 'data.' + ex,
-          },
-          backgroundColor: chart_colors[color_index % chart_colors.length],
-          borderWidth: 0,
-          pointRadius: 5,
-          })
-        color_index += 1;
-      }
+      updateChart('failedRunsPerLevelChart', failedRunsPerLevelDatasets);
+      updateChart('successfulRunsPerLevelChart', successfulRunsPerLevelDatasets);
 
-      const exceptionsChart = Chart.getChart('exceptionsChart')!;
-      exceptionsChart.data.datasets = datasets;
-      exceptionsChart.update();
+
+      // update program runs per week per level charts
+      const levels = flattenWeekProps(response['per_week'], (el: string) => el.toLowerCase().startsWith('level'));
+      const labelMapper = (e: string) => 'L' + e.substr(5);
+
+      const successfulRunsPerWeekDatasets = generateDatasets(levels, response['per_week'], 'week', 'data.successful_runs.', chart_level_colors, labelMapper);
+      const failedRunsPerWeekDatasets = generateDatasets(levels, response['per_week'], 'week', 'data.failed_runs.', chart_level_colors, labelMapper);
+
+      updateChart('successfulRunsPerWeekChart', successfulRunsPerWeekDatasets);
+      updateChart('failedRunsPerWeekChart', failedRunsPerWeekDatasets);
+
+
+      // update exceptions per level and per week charts
+      const exceptions = flattenExProps(response['per_level'], (el: string) => el.toLowerCase().endsWith('exception'));
+      const exLabelMapper = (e: string) => e.substr(0, e.length - 9);
+
+      const exceptionsPerLevelDatasets = generateDatasets(exceptions, response['per_level'], 'level', 'data.', chart_colors, exLabelMapper);
+      const exceptionsPerWeekDatasets = generateDatasets(exceptions, response['per_week'], 'week', 'data.', chart_colors, exLabelMapper);
+
+      updateChart('exceptionsPerLevelChart', exceptionsPerLevelDatasets);
+      updateChart('exceptionsPerWeekChart', exceptionsPerWeekDatasets);
 
     }).fail (function (error) {
       console.log(error);
     }).always(function() {
-      $('#stats-spinner').hide();
-      $('#stats-data').show();
+      $('.stats-spinner').hide();
+      $('.stats-data').show();
     });
 
     return false;
   },
+
+  logsExecutionQueryId: '',
+  logsNextToken: '',
+  fetchProgramLogsResults: function() {
+    $('#logs-spinner').show();
+    $('#search-logs-empty-msg').hide();
+    $('#logs-load-more').hide();
+
+    const data = {
+      query_execution_id: this.logsExecutionQueryId,
+      next_token: this.logsNextToken ? this.logsNextToken : undefined
+    };
+
+    const self = this;
+    $.get('/logs/results', data).done (function (response) {
+      const $logsTable = $('#search-logs-table tbody');
+
+      response.data.forEach ((e: any) => {
+        $logsTable.append(`<tr> \
+          <td class="border px-4 py-2">${e.date}</td> \
+          <td class="border px-4 py-2">${e.level}</td> \
+          <td class="border px-4 py-2">${e.username}</td> \
+          <td class="border px-4 py-2">${e.exception || ''}</td> \
+          <td class="border px-4 py-2"> \
+            <button class="green-btn float-right top-2 right-2" onclick=hedyApp.auth.copyCode(this)>⇥</button> \
+            <pre>${e.code}</pre> \
+          </td></tr>`)
+      });
+
+      if (response.data.length == 0) {
+        $('#search-logs-empty-msg').show();
+      }
+
+      self.logsNextToken = response.next_token;
+
+    }).fail (function (error) {
+      console.log(error);
+    }).always(function() {
+      $('#logs-spinner').hide();
+      if (self.logsNextToken) {
+        $('#logs-load-more').show();
+      }
+    });
+
+    return false;
+  },
+
+  copyCode: function(el: any) {
+    const copyButton = $(el);
+    if (navigator.clipboard === undefined) {
+      updateCopyButtonText(copyButton, 'Failed!');
+    } else {
+      navigator.clipboard.writeText(copyButton.next().text()).then(function() {
+        updateCopyButtonText(copyButton, 'Copied!');
+      }, function() {
+        updateCopyButtonText(copyButton, 'Failed!');
+      });
+    }
+    return false;
+  },
+
+  searchProgramLogs: function () {
+    var raw_data = $('#logs-search-form').serializeArray();
+    var payload: any = {}
+    $.map(raw_data, function(n){
+        payload[n['name']] = n['value'];
+    });
+
+    $('#search-logs-failed-msg').hide();
+    $('#logs-spinner').show();
+    $('#logs-load-more').hide();
+    $('#search-logs-button').prop('disabled', true);
+    $('#search-logs-table tbody').html('');
+
+    const self = this;
+    $.ajax ({type: 'POST', url: '/logs/query', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function (response) {
+        if (response['query_status'] === 'SUCCEEDED') {
+          self.logsExecutionQueryId = response['query_execution_id'];
+          self.logsNextToken = '';
+          self.fetchProgramLogsResults();
+        } else {
+          $('#search-logs-failed-msg').show();
+        }
+      }).fail (function (error) {
+        $('#search-logs-failed-msg').show();
+        console.log(error);
+      }).always(function() {
+        $('#logs-spinner').hide();
+        $('#search-logs-button').prop('disabled', false);
+      });
+
+    return false;
+  },
+
+  initStats: function() {
+    initChart('successfulRunsPerLevelChart', 'bar', 'Successful runs per level', 'Level #', 'top');
+    initChart('failedRunsPerLevelChart', 'bar', 'Failed runs per level', 'Level #', 'top');
+    initChart('successfulRunsPerWeekChart', 'bar', 'Successful runs per week', 'Week #', 'right');
+    initChart('failedRunsPerWeekChart', 'bar', 'Failed runs per week', 'Week #', 'right');
+
+    initChart('exceptionsPerLevelChart', 'line', 'Exceptions per level', 'Level #', 'right');
+    initChart('exceptionsPerWeekChart', 'line', 'Exceptions per week', 'Week #', 'right');
+
+    // Show the first stats by default when the page loads
+    $('.stats-period-toggle').first().click()
+
+    $('#logs-spinner').hide();
+    $('#search-logs-failed-msg').hide();
+    $('#search-logs-empty-msg').hide();
+  }
 }
 
 // *** LOADERS ***
@@ -402,72 +508,116 @@ $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
 /**
  Charts setup
  */
-function load_charts () {
-  const runsCtx = document.getElementById('runsChart') as HTMLCanvasElement;
-  new Chart(runsCtx, {
-    type: 'bar',
-    data: {
-      datasets: [
-      {
-        label: 'Failed runs',
-        data: {},
-        parsing: {
-          xAxisKey: 'level',
-          yAxisKey: 'data.failed_runs',
-        },
-        backgroundColor: [chart_colors[0]],
-        borderWidth: 0
-      }, {
-        label: 'Successful runs',
-        data: {},
-        parsing: {
-          xAxisKey: 'level',
-          yAxisKey: 'data.successful_runs',
-        },
-        backgroundColor: [chart_colors[1]],
-        borderWidth: 0
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          stacked: true
-        },
-        x: {
-          stacked: true,
-          title: {
-            display: true,
-            text: 'Level #'
-          }
-        }
-      }
-    }
-  });
-
-  const exCtx = document.getElementById('exceptionsChart') as HTMLCanvasElement;
-  new Chart(exCtx, {
-    type: 'line',
+function initChart(elementId: string, chartType: any, title: string, xTitle: string, legendPosition: any) {
+  const chart = document.getElementById(elementId) as HTMLCanvasElement;
+  new Chart(chart, {
+    type: chartType,
     data: {
       datasets: []
     },
     options: {
+      plugins: {
+        title: {
+          display: true,
+          text: title
+        },
+        legend: {
+          position: legendPosition
+        }
+      },
       scales: {
         y: {
-          beginAtZero: true,
+          beginAtZero: true
         },
         x: {
           title: {
             display: true,
-            text: 'Level #'
+            text: xTitle
           }
         }
       }
     }
   });
+}
 
-  // Show the first stats by default when the page loads
-  $('.stats-period-toggle').first().click()
+
+
+/*
+Chart functions
+*/
+function flattenWeekProps(input: any[], filter: any) {
+  var result = new Set<string>();
+  for (var i=0; i<input.length; i++) {
+    var sr = getPropertyNames(input[i]['data']['successful_runs'], filter);
+    var fr = getPropertyNames(input[i]['data']['failed_runs'], filter);
+    sr.forEach(result.add, result);
+    fr.forEach(result.add, result);
+  }
+  return Array.from(result);
+}
+
+function flattenExProps(input: any[], filter: any) {
+var result = new Set<string>();
+  for (var i=0; i<input.length; i++) {
+    getPropertyNames(input[i]['data'], filter).forEach(result.add, result);
+  }
+  return Array.from(result);
+}
+
+function getPropertyNames(data: any[], filter: any) {
+  var result = new Set<string>();
+  var keys = Object.keys(data)
+  for (var i=0; i<keys.length; i++) {
+    if (filter(keys[i])) {
+      result.add(keys[i]);
+    }
+  }
+  return result;
+}
+
+function generatePerLevelDataset(label: string, data: any[], yAxisKey: string, color: string) {
+  return [{
+    label: label,
+    data: data,
+    parsing: {
+      xAxisKey: 'level',
+      yAxisKey: yAxisKey,
+    },
+    backgroundColor: [color],
+    borderWidth: 0
+  }]
+}
+
+function generateDatasets(data: any[], source: any[], xAxisKey: string, yAxisKey: string, colors: string[], label: any = (x: string) => x) {
+  const result = new Array();
+  var color_index = 0;
+  var sorted_data = Array.from(data).sort((e1, e2) => parseInt(e1.substr(5)) - parseInt(e2.substr(5)));
+  for (let dataset of sorted_data) {
+    result.push({
+      label: label(dataset),
+      data: source,
+      parsing: {
+        xAxisKey: xAxisKey,
+        yAxisKey: yAxisKey + dataset,
+      },
+      backgroundColor: colors[color_index % colors.length],
+      borderWidth: 0,
+      pointRadius: 5,
+      })
+    color_index += 1;
+  }
+  return result;
+}
+
+function updateChart(elementId: string, datasets: any[] ) {
+  const ch = Chart.getChart(elementId)!;
+  ch.data.datasets = datasets;
+  ch.update();
+}
+
+function updateCopyButtonText(copyBtn: any, text: string) {
+  copyBtn.text(text);
+  setTimeout(function() {copyBtn.html("⇥")}, 2000);
 }
 
 /**
