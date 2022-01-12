@@ -23,7 +23,7 @@ def routes (app, database, achievements):
     @requires_login
     def get_classes (user):
         if not is_teacher(user):
-            return utils.page_403 (ui_message='retrieve_class')
+            return utils.error_page_403(error=403, ui_message='retrieve_class')
         return jsonify (DATABASE.get_teacher_classes (user ['username'], True))
 
     @app.route('/for-teachers/class/<class_id>', methods=['GET'])
@@ -31,7 +31,7 @@ def routes (app, database, achievements):
     def get_class (user, class_id):
         app.logger.info('This is info output')
         if not is_teacher(user):
-            return utils.page_403 (ui_message='retrieve_class')
+            return utils.error_page_403(error=403, ui_message='retrieve_class')
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['teacher'] != user ['username']:
             return utils.error_page(error=404,  ui_message='no_such_class')
@@ -192,7 +192,7 @@ def routes (app, database, achievements):
     @requires_login
     def get_class_info(user, class_id):
         if not is_teacher(user):
-            return utils.page_403 (ui_message='retrieve_class')
+            return utils.error_page_403(error=403, ui_message='retrieve_class')
         Class = DATABASE.get_class(class_id)
         if not Class or Class['teacher'] != user['username']:
             return utils.error_page(error=404,  ui_message='no_such_class')
