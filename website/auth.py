@@ -1,4 +1,6 @@
 import os
+
+import utils
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -121,7 +123,7 @@ def requires_login(f):
     @wraps(f)
     def inner(*args, **kws):
         if not is_user_logged_in():
-            return 'unauthorized', 403
+            return utils.error_page(error=403)
         return f(current_user(), *args, **kws)
     return inner
 
