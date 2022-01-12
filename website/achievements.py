@@ -180,8 +180,6 @@ class Achievements:
             for command in set(commands_in_code):
                 if command not in session['commands'] and command not in session['new_commands']:
                     session['new_commands'].append(command)
-            print(session['new_commands'])
-            print(session['commands'])
         if set(session['commands']).union(session['new_commands']) == self.all_commands:
             session['new_achieved'].append("trying_is_key")
         if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
