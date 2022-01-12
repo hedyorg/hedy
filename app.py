@@ -1016,11 +1016,11 @@ def is_quiz_enabled():
 
 
 def quiz_disabled_error():
-    return utils.page_404('Hedy quiz disabled!', menu=False)
+    return utils.page_404('Hedy quiz disabled!', menu=False, iframe=True)
 
 
 def no_quiz_data_error():
-    return utils.page_404('No quiz data found for this level', menu=False)
+    return utils.page_404('No quiz data found for this level', menu=False, iframe=True)
 
 
 # routing to index.html
