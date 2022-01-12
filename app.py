@@ -971,11 +971,11 @@ def is_quiz_enabled():
 
 
 def quiz_disabled_error():
-    return utils.page_404('Hedy quiz disabled!', menu=False)
+    return utils.error_page(error=404, page_error='Hedy quiz disabled!', menu=False)
 
 
 def no_quiz_data_error():
-    return utils.page_404('No quiz data found for this level', menu=False)
+    return utils.error_page(error=404, page_error='No quiz data found for this level', menu=False)
 
 
 # routing to index.html
@@ -991,9 +991,9 @@ def index(level, step):
         try:
             g.level = level = int(level)
         except:
-            return utils.page_404(ui_message='no_such_level')
+            return utils.error_page(error=404, ui_message='no_such_level')
     else:
-        return utils.page_404(ui_message='no_such_level')
+        return utils.error_page(error=404, ui_message='no_such_level')
 
     g.prefix = '/hedy'
 
@@ -1004,13 +1004,13 @@ def index(level, step):
     if step and isinstance(step, str) and len(step) > 2:
         result = DATABASE.program_by_id(step)
         if not result:
-            return utils.page_404(ui_message='no_such_program')
+            return utils.error_page(error=404, ui_message='no_such_program')
 
         user = current_user()
         public_program = 'public' in result and result['public']
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(
                 user):
-            return utils.page_404(ui_message='no_such_program')
+            return utils.error_page(error=404, ui_message='no_such_program')
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
         if 'adventure_name' in result:
@@ -1021,7 +1021,7 @@ def index(level, step):
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
     if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
-        return utils.page_404(ui_message='no_such_level')
+        return utils.error_page(error=404, ui_message='no_such_level')
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
@@ -1044,7 +1044,7 @@ def view_program(id):
 
     result = DATABASE.program_by_id(id)
     if not result:
-        return utils.page_404(ui_message='no_such_program')
+        return utils.error_page(error=404, ui_message='no_such_program')
 
     # If we asked for a specific language, use that, otherwise use the language
     # of the program's author.
@@ -1491,7 +1491,7 @@ def teacher_invitation(code):
     lang = g.lang
 
     if os.getenv('TEACHER_INVITE_CODE') != code:
-        return utils.page_404(ui_message='invalid_teacher_invitation_code')
+        return utils.error_page(error=404, ui_message='invalid_teacher_invitation_code')
     if not user['username']:
         return render_template('teacher-invitation.html')
 
