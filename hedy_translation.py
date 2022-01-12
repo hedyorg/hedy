@@ -248,6 +248,12 @@ class ConvertToLang6(ConvertToLang5):
         var = args[0]
         var_list = args[1]
         return var + " " + self.keywords["is"] + " " + var_list + " " + self.keywords["at"]  + " " + args[2]
+    
+    def equality_check_is(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + " ".join([str(c) for c in args[1:]]) + " "
+
+    def equality_check_equals(self, args):
+        return args[0] + " = ".join([str(c) for c in args[1:]]) + " "
 
 @hedy_translator(level=7)
 class ConvertToLang7(ConvertToLang6):
@@ -269,8 +275,11 @@ class ConvertToLang8(ConvertToLang7):
     def elses(self, args):
         return self.keywords["else"] + indent(args[0:])
 
-    def equality_check(self, args):
+    def equality_check_is(self, args):
         return args[0] + " " + self.keywords["is"] + " " + " ".join([str(c) for c in args[1:]])
+
+    def equality_check_equals(self, args):
+        return args[0] + " = " + " ".join([str(c) for c in args[1:]])
 
     def end_block(self, args):
         return args
@@ -319,6 +328,9 @@ class ConvertToLang13(ConvertToLang12):
 
 @hedy_translator(level=14)
 class ConvertToLang14(ConvertToLang13):
+
+    def equality_check_dequals(self, args):
+       return args[0] + " == " + " ".join([str(c) for c in args[1:]])     
 
     def bigger(self, args):
         return args[0] + " > " + args[1]

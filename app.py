@@ -207,6 +207,12 @@ def initialize_session():
     login_user_from_token_cookie()
 
 
+@app.before_request
+def initialize_achievements():
+    if current_user()['username'] and 'achieved' not in session:
+        ACHIEVEMENTS.initialize_user_data(current_user()['username'])
+
+
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
     def reject_e2e_requests():
@@ -274,7 +280,6 @@ def setup_language():
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
         return "Language " + g.lang + " not supported", 404
-    ACHIEVEMENTS.update_language(g.lang)
     # Also get the 'ui' translations into a global object for this language, these
     # are used a lot so we can clean up a fair bit by initializing here.
     g.ui_texts = TRANSLATIONS.get_translations(g.lang, 'ui')
@@ -325,7 +330,6 @@ def set_security_headers(response):
     # and that's okay.
     response.headers.update(security_headers)
     return response
-
 
 @app.teardown_request
 def teardown_request_finish_logging(exc):
