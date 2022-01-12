@@ -460,7 +460,7 @@ class MemoryStorage(TableStorage):
         def before_or_equal(key0, key1):
             k0 = orderable(key0)
             k1 = orderable(key1)
-            return k0 <= k1 if not reverse else k1 <= k0
+            return k0 <= k1 if not reverse or not sort_key else k1 <= k0
 
         with_keys = [(extract_key(i, r), r) for i, r in enumerate(filtered)]
         while pagination_token and with_keys and before_or_equal(with_keys[0][0], pagination_token):

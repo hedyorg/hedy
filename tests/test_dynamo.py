@@ -4,6 +4,30 @@ from unittest import mock
 import os
 import contextlib
 
+
+class Helpers:
+  def insert(self, *rows):
+    for row in rows:
+      self.table.create(row)
+
+  def insert_sample_data(self):
+    self.insert(
+        dict(id='key', sort=1, x=1, y=1, m=9),
+        dict(id='key', sort=2, x=1, y=3, m=9),
+        dict(id='key', sort=3, x=1, y=2, m=8))
+
+  def get_pages(self, key, **kwargs):
+    ret = []
+
+    p = self.table.get_many(key, **kwargs)
+    while True:
+      if p.records:
+        ret.append(p.records)
+
+      if not p.next_page_token: break
+      p = self.table.get_many(key, **kwargs, pagination_token=p.next_page_token)
+    return ret
+
 class TestDynamoAbstraction(unittest.TestCase):
   def setUp(self):
     self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', 'id')
@@ -96,22 +120,12 @@ class TestSortKeysInMemory(unittest.TestCase):
     self.assertEqual(ret, dict(id='key', sort='s', x='x', y='y'))
 
 
-class TestQueryInMemory(unittest.TestCase):
+class TestQueryInMemory(unittest.TestCase, Helpers):
   """Test that the query work on an in-memory table."""
 
   def setUp(self):
     self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', partition_key='id', sort_key='sort',
                               indexed_fields=[dynamo.IndexKey('x', 'y'), dynamo.IndexKey('m')])
-
-  def insert(self, *rows):
-    for row in rows:
-      self.table.create(row)
-
-  def insert_sample_data(self):
-    self.insert(
-        dict(id='key', sort=1, x=1, y=1),
-        dict(id='key', sort=2, x=1, y=3),
-        dict(id='key', sort=3, x=1, y=2))
 
   def test_query(self):
     self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
@@ -190,59 +204,61 @@ class TestQueryInMemory(unittest.TestCase):
 
   def test_paginated_query(self):
     self.insert_sample_data()
+    pages = self.get_pages({ 'id': 'key' }, limit=1)
 
-    ret = self.table.get_many({ 'id': 'key' }, limit=1)
-    self.assertEqual(ret[0], dict(id='key', sort=1, x=1, y=1))
-
-    ret = self.table.get_many({ 'id': 'key' }, limit=1, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], dict(id='key', sort=2, x=1, y=3))
-
-    ret = self.table.get_many({ 'id': 'key' }, limit=1, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], dict(id='key', sort=3, x=1, y=2))
-
-    self.assertIsNone(ret.next_page_token)
-
-  def test_paginated_query_on_index(self):
-    self.insert_sample_data()
-
-    ret = self.table.get_many({ 'x': 1 }, limit=1)
-    self.assertEqual(ret[0], dict(id='key', sort=1, x=1, y=1))
-
-    ret = self.table.get_many({ 'x': 1 }, limit=1, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], dict(id='key', sort=3, x=1, y=2))
-
-    ret = self.table.get_many({ 'x': 1 }, limit=1, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], dict(id='key', sort=2, x=1, y=3))
-
-    self.assertIsNone(ret.next_page_token)
+    self.assertEqual(pages, [
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+      [dict(id='key', sort=3, x=1, y=2, m=8)],
+    ])
 
   def test_paginated_query_reverse(self):
     self.insert_sample_data()
+    pages = self.get_pages({ 'id': 'key' }, limit=1, reverse=True)
 
-    ret = self.table.get_many({ 'id': 'key' }, limit=1, reverse=True)
-    self.assertEqual(ret[0], dict(id='key', sort=3, x=1, y=2))
+    self.assertEqual(pages, [
+      [dict(id='key', sort=3, x=1, y=2, m=8)],
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+    ])
 
-    ret = self.table.get_many({ 'id': 'key' }, limit=1, reverse=True, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], dict(id='key', sort=2, x=1, y=3))
-
-    ret = self.table.get_many({ 'id': 'key' }, limit=1, reverse=True, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], dict(id='key', sort=1, x=1, y=1))
-
-    self.assertIsNone(ret.next_page_token)
-
-  def test_paginated_query_on_index_reverse(self):
+  def test_paginated_query_on_sortkey_index(self):
     self.insert_sample_data()
+    pages = self.get_pages({ 'x': 1 }, limit=1)
 
-    ret = self.table.get_many({ 'x': 1 }, limit=1, reverse=True)
-    self.assertEqual(ret[0], dict(id='key', sort=2, x=1, y=3))
+    self.assertEqual(pages, [
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+      [dict(id='key', sort=3, x=1, y=2, m=8)],
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+    ])
 
-    ret = self.table.get_many({ 'x': 1 }, limit=1, reverse=True, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], dict(id='key', sort=3, x=1, y=2))
+  def test_paginated_query_on_sortkey_index_reverse(self):
+    self.insert_sample_data()
+    pages = self.get_pages({ 'x': 1 }, limit=1, reverse=True)
 
-    ret = self.table.get_many({ 'x': 1 }, limit=1, reverse=True, pagination_token=ret.next_page_token)
-    self.assertEqual(ret[0], dict(id='key', sort=1, x=1, y=1))
+    self.assertEqual(pages, [
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+      [dict(id='key', sort=3, x=1, y=2, m=8)],
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+    ])
 
-    self.assertIsNone(ret.next_page_token)
+  def test_paginated_query_on_partitionkey_index(self):
+    self.insert_sample_data()
+    pages = self.get_pages({ 'm': 9 }, limit=1)
+
+    self.assertEqual(pages, [
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+    ])
+
+  def test_paginated_query_on_partitionkey_index_reverse(self):
+    self.insert_sample_data()
+    pages = self.get_pages({ 'm': 9 }, limit=1, reverse=True)
+
+    self.assertEqual(pages, [
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+    ])
 
   def test_paginated_scan(self):
     self.insert(
