@@ -203,6 +203,8 @@ def routes(app, database):
             return g.auth_texts.get('username_three'), 400
         if not isinstance(body.get('email'), str) or not valid_email(body['email']):
             return g.auth_texts.get('email_invalid'), 400
+        if not isinstance(body.get('mail_repeat'), str) or not valid_email(body['mail_repeat']):
+            return g.auth_texts.get('repeat_match_email'), 400
         if body['email'] != body['mail_repeat']:
             return g.auth_texts.get('repeat_match_email'), 400
         if not isinstance(body.get('password'), str):
