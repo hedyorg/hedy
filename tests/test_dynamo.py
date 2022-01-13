@@ -6,6 +6,10 @@ import contextlib
 
 
 class Helpers:
+  def __init__(self):
+    # Necessary to make pylint happy
+    self.table = None
+    
   def insert(self, *rows):
     for row in rows:
       self.table.create(row)
