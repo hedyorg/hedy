@@ -340,7 +340,6 @@ def routes(app, database):
     def change_password(user):
         body = request.json
 
-        print(body)
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('old_password'), str) or not isinstance(body.get('password'), str):
