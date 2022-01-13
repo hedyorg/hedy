@@ -8,8 +8,9 @@ text_list: /([^\r\n,]+)/ -> text // list elements may contain punctionation but 
 list_access: var _SPACE _AT _SPACE (INT | random) -> list_access //todo: could be merged with list_access_var?
 turtle: _FORWARD (_SPACE (INT | list_access | textwithoutspaces))? -> forward | _TURN (_SPACE (list_access | textwithoutspaces))? -> turn
 
-NONODE: /([^\r\n!?. ]+)/
-some_spaces : NONODE (_SPACE NONODE)* -> text
+// FH, jan 22: not exactly sure why this works, while textwithoutspaces parses the whole line in add/remove
+// leaving this for now
+some_spaces : /([^\r\n!?. ]+)/ (_SPACE /([^\r\n!?. ]+)/)* -> text_with_spaces
 
 add: _ADD_LIST _SPACE some_spaces _SPACE _TO_LIST _SPACE var
 remove: _REMOVE _SPACE some_spaces _SPACE _FROM _SPACE var

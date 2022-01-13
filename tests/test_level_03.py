@@ -458,10 +458,9 @@ class TestsLevel3(HedyTester):
     print opties at random""")
 
     expected = textwrap.dedent("""\
-    color = input('what is your favorite color'+'?')
-    colors = ['green', 'red', 'blue']
-    colors.append(color)
-    print(f'{random.choice(colors)}')""")
+    opties = ['zeker weten', 'misschien wel']
+    opties.append('absoluut niet')
+    print(f'{random.choice(opties)}')""")
 
     self.single_level_tester(
       # max_level=3,

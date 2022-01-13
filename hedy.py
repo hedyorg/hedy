@@ -303,6 +303,9 @@ class ExtractAST(Transformer):
     def text(self, args):
         return Tree('text', [''.join([str(c) for c in args])])
 
+    def text_with_spaces(self, args):
+        return Tree('text', [' '.join([str(c) for c in args])])
+
     def INT(self, args):
         return Tree('integer', [str(args)])
 
@@ -547,6 +550,14 @@ class TypeValidator(Transformer):
     def integer(self, tree):
         return self.to_typed_tree(tree, HedyType.integer)
 
+    def text_with_spaces(self, tree):
+        # under level 12 integers appear as text, so we parse them
+        if self.level < 12:
+            type_ = HedyType.integer if ConvertToPython.is_int(tree.children[0]) else HedyType.string
+        else:
+            type_ = HedyType.string
+        return self.to_typed_tree(tree, type_)
+
     def text(self, tree):
         # under level 12 integers appear as text, so we parse them
         if self.level < 12:
@@ -746,6 +757,9 @@ class Filter(Transformer):
         return True, ''.join([c for c in args])
     def text(self, args):
         return all(args), ''.join([c for c in args])
+    def text_with_spaces(self, args):
+        return all(args), ''.join([c for c in args])
+
 
 class UsesTurtle(Transformer):
     # returns true if Forward or Turn are in the tree, false otherwise
@@ -835,6 +849,9 @@ class AllCommands(Transformer):
     def text(self, args):
         return []
 
+    def text_with_spaces(self, args):
+        return []
+
 def all_commands(input_string, level, lang='en'):
     input_string = process_input_string(input_string, level)
     program_root = parse_input(input_string, level, lang)
@@ -867,6 +884,9 @@ class AllPrintArguments(Transformer):
         return []
 
     def text(self, args):
+        return ''.join(args)
+
+    def text_with_spaces(self, args):
         return ''.join(args)
 
 
@@ -1092,6 +1112,10 @@ class ConvertToPython_1(ConvertToPython):
 
     def text(self, args):
         return ''.join([str(c) for c in args])
+
+    def text_with_spaces(self, args):
+        return ' '.join([str(c) for c in args])
+
     def integer(self, args):
         return str(args[0])
 
@@ -1270,9 +1294,6 @@ class ConvertToPython_4(ConvertToPython_3):
     def var_access(self, args):
         name = args[0]
         return hash_var(name)
-
-    def text(self, args):
-        return ''.join([str(c) for c in args])
 
     def print_ask_args(self, args):
         args = self.check_var_usage(args)
