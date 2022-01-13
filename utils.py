@@ -203,8 +203,8 @@ def markdown_to_html_tags(markdown):
 def page_403(page_error=None, ui_message=None, menu=True):
     return render_template("403.html", menu=menu, page_error=page_error or g.ui_texts.get(ui_message) or ''), 403
 
-def page_404(page_error=None, ui_message=None, menu=True):
-    return render_template("404.html", menu=menu, page_error=page_error or g.ui_texts.get(ui_message) or ''), 404
+def page_404(page_error=None, ui_message=None, menu=True, iframe=None):
+    return render_template("404.html", menu=menu, iframe=iframe, page_error=page_error or g.ui_texts.get(ui_message) or ''), 404
 
 def page_500(page_error=None, ui_message=None, menu=True):
     return render_template("500.html", menu=menu, page_error=page_error or g.ui_texts.get(ui_message) or ''), 500

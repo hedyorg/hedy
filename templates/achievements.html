@@ -4,7 +4,7 @@
     <h2 class="px-8 mb-4">{{achievements[template_achievements.title_key]}}</h2>
     {% for category in template_achievements.categories %}
         {% if category.key != "teacher" or is_teacher %}
-            <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#{{category.key}}').toggle()">{{achievements[category.key]}}</h1>
+            <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl w-full" onclick="$ ('#{{category.key}}').toggle()">{{achievements[category.key]}}</h1>
             <div class="hidden pl-4 mt-4 mb-4" id="{{ category.key }}">
             {% for subcategory in category['subcategory'] %}
                 <h3 class="px-16">{% if subcategory.sub_key in achievements %}{{ achievements[subcategory.sub_key] }}{% endif %}</h3>
@@ -13,8 +13,10 @@
                     {% if achievement in user_achievements %}
                         <div class="w-40 rounded-lg mr-4 mt-4 relative bg-blue-200">
                             <div class="relative h-40">
-                                <img src="{{static('/images/' + achievements[achievement].image)}}" class="absolute">
-                                <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-5 block" style="left: 50%; transform: translate(-50%, 0%);">
+                                <div class="flex items-center justify-center h-40">
+                                    <img src="{{static('/images/' + achievements[achievement].image)}}" class="px-2">
+                                    <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-2 block">
+                                </div>
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
                                 <p class="font-semibold">{{ achievements[achievement].text }}</p>
@@ -25,7 +27,9 @@
                         </div>
                     {% else %}
                         <div class="w-40 rounded-lg mr-4 mt-4 relative bg-gray-500">
-                            <img src="{{static('/images/' + achievements[achievement].image)}}">
+                            <div class="flex items-center justify-center h-40">
+                                <img src="{{static('/images/' + achievements[achievement].image)}}" class="px-2">
+                            </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
                                 <p class="font-semibold">{% if category.key == "hidden" %}???{% else %}{{ achievements[achievement].text }}{% endif %}</p>
                             </div>
@@ -37,7 +41,7 @@
                 {% endfor %}
                 </div>
             {% endfor %}
+            </div>
         {% endif %}
-        </div>
     {% endfor %}
 {% endblock %}

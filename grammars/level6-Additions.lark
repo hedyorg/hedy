@@ -3,12 +3,13 @@ _print_argument: (_SPACE | quoted_text | list_access | var_access | sum)*
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 command:+= ask_is | ask_equals | list_access_var_equals | list_access_var_is | assign_is | assign_equals | assign_list_is | assign_list_equals -= ask | list_access | assign | assign_list
 
-_IS_OR_EQUALS: (_IS|_EQUALS)
-
 ask_is: var _SPACE _IS _SPACE _ASK (_SPACE _print_argument)?
 ask_equals: var _SPACE _EQUALS _SPACE _ASK (_SPACE _print_argument)?
 
-equality_check: textwithoutspaces _SPACE _IS_OR_EQUALS _SPACE textwithoutspaces (_SPACE textwithoutspaces)*
+condition:+= equality_check_is | equality_check_equals -= equality_check
+
+equality_check_is: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces (_SPACE textwithoutspaces)*
+equality_check_equals: textwithoutspaces _SPACE _EQUALS _SPACE textwithoutspaces (_SPACE textwithoutspaces)*
 
 list_access_var_is: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
 list_access_var_equals: var _SPACE _EQUALS _SPACE var _SPACE _AT _SPACE (INT | random)
