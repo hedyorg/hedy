@@ -343,7 +343,7 @@ def routes(app, database):
         print(body)
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
-        if not isinstance(body.get('old_password'), str) or not isinstance(body.get( 'password'), str):
+        if not isinstance(body.get('old_password'), str) or not isinstance(body.get('password'), str):
             return g.auth_texts.get('password_invalid'), 400
         if not isinstance(body.get( 'password_repeat'), str):
             return g.auth_texts.get('repeat_match_password'), 400

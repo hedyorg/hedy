@@ -405,8 +405,10 @@ class TestAuth(AuthHelper):
             {},
             {'old_password': 123456},
             {'old_password': 'pass1'},
-            {'old_password': 'pass1', 'new_password': 123456},
-            {'old_password': 'pass1', 'new_password': 'short'},
+            {'old_password': 'pass1', 'password': 123456},
+            {'old_password': 'pass1', 'password': 'short'},
+            {'old_password': 'pass1', 'password': 123456, 'password_repeat': 'panda'},
+            {'old_password': 'pass1', 'password_repeat': 'panda'},
         ]
 
         for invalid_body in invalid_bodies:
@@ -427,7 +429,8 @@ class TestAuth(AuthHelper):
         # WHEN attempting to change the user's password
         new_password = 'pas1234'
         # THEN receive an OK response code from the server
-        self.post_data('auth/change_password', {'old_password': self.user['password'], 'new_password': 'pas1234'})
+        self.post_data('auth/change_password', {'old_password': self.user['password'],
+                                                'password': 'pas1234', 'password_repeat': 'pas1234'})
 
         # WHEN attempting to login with old password
         # THEN receive a forbidden response code from the server
