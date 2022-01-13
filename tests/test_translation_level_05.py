@@ -1,6 +1,7 @@
 import hedy
 from test_level_01 import HedyTester
 import hedy_translation
+from parameterized import parameterized
 
     # tests should be ordered as follows:
     # * Translation from English to Dutch
@@ -13,7 +14,8 @@ class TestsTranslationLevel5(HedyTester):
     level = 5
     keywords_from = hedy_translation.keywords_to_dict('en')
     keywords_to = hedy_translation.keywords_to_dict('nl')
-
+    all_kwords = hedy_translation.all_keywords_to_dict()
+    
     def test_print_english_dutch(self):
         code = "print 'Hallo welkom bij Hedy!'"
 
@@ -93,5 +95,14 @@ class TestsTranslationLevel5(HedyTester):
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = "if hond in dieren print 'Cute!'"
+
+        self.assertEqual(expected, result)
+
+    @parameterized.expand(HedyTester.as_list_of_tuples(all_kwords["if"], all_kwords["print"], all_kwords["is"], all_kwords["else"],hedy_translation.KEYWORD_LANGUAGES))
+    def test_print_if_is_else_all_lang(self, if_kword, print_kword, is_kwrd, else_kwrd, lang):
+        code = f"{if_kword} name {is_kwrd} Hedy {print_kword} 'Great!' {else_kwrd} {print_kword} 'Oh no'"
+
+        result = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)
+        expected = "if name is Hedy print 'Great!' else print 'Oh no'"
 
         self.assertEqual(expected, result)
