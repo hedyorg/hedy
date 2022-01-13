@@ -198,7 +198,6 @@ class Achievements:
                     session['new_achieved'].append("hedy-ious")
                     break
 
-
     def check_response_achievements(self, code, response):
         self.initialize_user_data_if_necessary()
         if 'ninja_turtle' not in session['achieved'] and 'has_turtle' in response and response['has_turtle']:
