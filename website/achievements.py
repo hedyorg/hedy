@@ -93,6 +93,7 @@ class Achievements:
         if len(session['new_commands']) > 0:
             for command in session['new_commands']:
                 session['commands'].append(command)
+            session['new_commands'] = []
             self.DATABASE.add_commands_to_username(username, session['commands'])
 
         if len(session['new_achieved']) > 0:
