@@ -759,7 +759,7 @@ def _add_exception_data(entry, data, include_failed_runs=False):
 def query_logs():
     user = current_user()
     if not is_admin(user):
-        return utils.page_403(ui_message='unauthorized')
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     body = request.json
     if body is not None and not isinstance(body, dict):
@@ -777,7 +777,7 @@ def get_log_results():
 
     user = current_user()
     if not is_admin(user):
-        return utils.page_403(ui_message='unauthorized')
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
