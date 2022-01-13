@@ -94,7 +94,8 @@ def is_user_logged_in():
 
 # Remove the current info from the Flask session.
 def forget_current_user():
-    session.clear() #Clear the complete session -> Everything is only current-user-relevant
+    for value in session.keys():
+        session.pop(value, None)
 
 def is_admin(user):
     admin_user = os.getenv('ADMIN_USER')
