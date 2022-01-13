@@ -416,7 +416,7 @@ class TestAuth(AuthHelper):
         self.post_data('auth/change_password', {
             'old_password': 'password',
             'password': self.user['password'] + 'foo',
-            'password_repeat': self.user['password'] + 'foo',
+            'password_repeat': self.user['password'] + 'foo'
         }, expect_http_code=403)
 
     def test_change_password(self):
