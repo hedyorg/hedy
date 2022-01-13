@@ -164,7 +164,7 @@ export const auth = {
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
         auth.success (auth.texts['profile_updated']);
-        setTimeout (function () {location.reload ()}, 1000);
+        setTimeout (function () {location.reload ()}, 1500);
       }).fail (function (response) {
         if (response.responseText) {
            auth.error(response.responseText);
@@ -209,12 +209,10 @@ export const auth = {
         auth.success (auth.texts['sent_password_recovery']);
         $ ('#username').val ('');
       }).fail (function (response) {
-        if (response.status >= 500) {
-          return auth.error (auth.texts['server_error']);
-        }else if (response.status === 403) {
-          auth.error (auth.texts[response.responseText]);
+        if (response.responseText) {
+          return auth.error(response.responseText);
         } else {
-          auth.error (auth.texts['ajax_error']);
+          auth.error(auth.texts['ajax_error']);
         }
       });
     }
