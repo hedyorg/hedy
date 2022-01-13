@@ -593,7 +593,8 @@ class TestAuth(AuthHelper):
         new_password = 'pas1234'
         recover_token = self.post_data('auth/recover', {'username': self.username})['token']
         # THEN receive an OK response code from the server
-        self.post_data('auth/reset', {'username': self.username, 'password': new_password, 'token': recover_token})
+        self.post_data('auth/reset', {'username': self.username, 'password': new_password,
+                                      'password_repeat': new_password, 'token': recover_token})
 
         # WHEN attempting a login with the new password
         # THEN receive an OK response code from the server
