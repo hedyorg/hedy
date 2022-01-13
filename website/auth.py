@@ -371,8 +371,6 @@ def routes(app, database):
     @requires_login
     def update_profile(user):
         body = request.json
-        print(user)
-        print(body)
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('email'), str) or not valid_email(body['email']):
