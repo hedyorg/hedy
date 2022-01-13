@@ -93,7 +93,14 @@
         print dieren at random
         ```
 
-        Je vindt alle commando's van level 3 weer in de linkerbalk. Ook zijn er weer tabjes met opdrachten.
+        Je kunt in dit level ook dingen aan een lijstje toevoegen met het commando `add`.
+        Daarnaast kun je dingen van het lijstje verwijderen. Dat doe je met `remove`.
+                ```
+                taarten is aardbei, chocolade
+                add appel to taarten
+                remove chocolade from taarten
+                print taarten at random
+                ```
     start_code: "print hallo wereld!"
     commands:
     -   name: "kies_random"
@@ -102,6 +109,18 @@
         demo_code: |-
             dieren is hond, kat, kangoeroe
             print dieren at random
+    -   name: "Toevoegen"
+        explanation: "Voeg iets toe aan een lijst"
+        example: "Voorbeeld: add hond to dieren"
+        demo_code: |-
+            dieren is kat, koe
+            add hond to dieren
+    -   name: "Verwijderen"
+        explanation: "Verwijder iets van een lijst"
+        example: "Voorbeeld: remove hond from dieren"
+        demo_code: |-
+            dieren is hond, cat, koe
+            remove hond from dieren
 4:
     start_code: "print 'hallo wereld'"
     intro_text: |

@@ -97,7 +97,14 @@
         print animals at random
         ```
 
-        You find all the codes of level 3 in the left bar. There are also tabs with assignments.
+        You can also add items to the list with `add` and remove items with `remove`.
+        ```
+        animals is dog, cat, kangaroo
+        add penguin to animals
+        remove cat from animals
+        print animals at random
+        ```
+
     start_code: "print hello world!"
     commands:
     -   name: choose_random
@@ -106,6 +113,18 @@
         demo_code: |-
             animals is dog, cat, kangaroo
             print animals at random
+    -   name: "Add"
+        explanation: "Add an item to a list"
+        example: "Example: add dog to animals"
+        demo_code: |-
+            animals is cow, cat
+            add dog to animals
+    -   name: "Remove"
+        explanation: "Remove an item from a list"
+        example: "Example: remove dog from animals"
+        demo_code: |-
+            animals is cat, dog, cow
+            remove dog from animals
 4:
     start_code: "print 'Hello world'"
     intro_text: |
