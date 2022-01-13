@@ -200,10 +200,9 @@ def markdown_to_html_tags(markdown):
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all()
 
-
-def error_page(error=404, page_error=None, ui_message=None, menu=True):
+def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None):
     if error not in [403, 404, 500]:
         error = 404
-    return render_template("error-page.html", menu=menu, error=error,
+    return render_template("error-page.html", menu=menu, error=error, iframe=iframe
                            page_error=page_error or g.ui_texts.get(ui_message) or '',
                            default=g.ui_texts.get("default_" + str(error))), error
