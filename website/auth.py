@@ -235,10 +235,10 @@ def routes(app, database):
 
         user = DATABASE.user_by_username(body['username'].strip().lower())
         if user:
-            return 'exists_username', 403
+            return g.auth_texts.get('exists_username'), 403
         email = DATABASE.user_by_email(body['email'].strip().lower())
         if email:
-            return 'exists_email', 403
+            return g.auth_texts.get('exists_email'), 403
 
         hashed = hash(body['password'], make_salt())
 
@@ -403,7 +403,7 @@ def routes(app, database):
             if email != user['email']:
                 exists = DATABASE.user_by_email(email)
                 if exists:
-                    return 'exists_email', 403
+                    return g.auth_texts.get('exists_email'), 403
                 token = make_salt()
                 hashed_token = hash(token, make_salt())
                 DATABASE.update_user(user['username'], {'email': email, 'verification_pending': hashed_token})
@@ -535,16 +535,16 @@ def routes(app, database):
 
         # Validations
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return 'body.username must be a string', 400
+            return g.auth_texts.get('username_invalid'), 400
         if not isinstance(body.get('is_teacher'), bool):
-            return 'body.is_teacher must be boolean', 400
+            return g.auth_texts.get('teacher_invalid'), 400
 
         user = DATABASE.user_by_username(body['username'].strip().lower())
 
         if not user:
-            return 'invalid username', 400
+            return g.auth_texts.get('username_invalid'), 400
 
         is_teacher_value = 1 if body['is_teacher'] else 0
         update_is_teacher(user, is_teacher_value)
@@ -561,18 +561,16 @@ def routes(app, database):
 
         # Validations
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return 'body.username must be a string', 400
-        if not isinstance(body.get('email'), str):
-            return 'body.email must be a string', 400
-        if not valid_email(body['email']):
-            return 'email must be a valid email', 400
+            return g.auth_texts.get('username_invalid'), 400
+        if not isinstance(body.get('email'), str) or not valid_email(body['email']):
+            return g.auth_texts.get('email_invalid'), 400
 
         user = DATABASE.user_by_username(body['username'].strip().lower())
 
         if not user:
-            return 'invalid username', 400
+            return g.auth_texts.get('email_invalid'), 400
 
         token = make_salt()
         hashed_token = hash(token, make_salt())
