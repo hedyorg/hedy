@@ -267,7 +267,8 @@ class TestAuth(AuthHelper):
     def test_signup(self):
         # GIVEN a valid username and signup body
         username = self.make_username()
-        user = {'username': username, 'email': username + '@hedy.com', 'password': 'foobar'}
+        user = {'username': username, 'email': username + '@hedy.com', 'email_repeat': username + '@hedy.com',
+                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl'}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server
@@ -491,10 +492,6 @@ class TestAuth(AuthHelper):
         # (we create a new user to ensure that the user has a clean profile)
         self.given_fresh_user_is_logged_in()
 
-        #We can't just push one change -> have to sent e-mail and language as well
-        print(self.user)
-
-
         # WHEN submitting valid profile changes
         profile_changes = {
            'birth_year': 1989,
@@ -505,7 +502,7 @@ class TestAuth(AuthHelper):
         }
 
         for key in profile_changes:
-            body = {}
+            body = {'email': self.user['email'], 'language': self.user['language']}
             body[key] = profile_changes[key]
             # THEN receive an OK response code from the server
             self.post_data('profile', body)
