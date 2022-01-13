@@ -184,6 +184,45 @@ class TestsLevel4(HedyTester):
     self.single_level_tester(code=code, expected=expected)
 
   #add/remove tests
+  #add/remove tests
+  def test_add_text_to_list(self):
+    code = textwrap.dedent("""\
+    dieren is koe, kiep
+    add muis to dieren
+    print dieren at random""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['koe', 'kiep']
+    dieren.append('muis')
+    print(f'{random.choice(dieren)}')""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected,
+      extra_check_function = self.result_in(['koe', 'kiep', 'muis']),
+    )
+  def test_remove_text_from_list(self):
+    code = textwrap.dedent("""\
+    dieren is koe, kiep
+    remove kiep from dieren
+    print dieren at random""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['koe', 'kiep']
+    try:
+        dieren.remove('kiep')
+    except:
+       pass
+    print(f'{random.choice(dieren)}')""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected,
+      extra_check_function=self.result_in(['koe']),
+    )
+
   def test_add_to_list(self):
     code = textwrap.dedent("""\
     color is ask 'what is your favorite color? '

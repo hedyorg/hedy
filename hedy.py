@@ -1250,11 +1250,11 @@ class ConvertToPython_3(ConvertToPython_2):
         else:
             return args[0] + '[' + args[1] + '-1]'
     def add(self, args):
-        var = args[0]
+        var = self.process_variable(args[0])
         list = args[1]
         return f"{list}.append({var})"
     def remove(self, args):
-        var = args[0]
+        var = self.process_variable(args[0])
         list = args[1]
         return textwrap.dedent(f"""\
         try:
