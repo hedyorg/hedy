@@ -93,7 +93,8 @@ class AuthHelper(unittest.TestCase):
 
         if username in USERS:
             return USERS[username]
-        body = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com', 'language': 'nl', 'password': 'foobar'}
+        body = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
+                'language': 'nl', 'password': 'foobar', 'password_repeat': 'foobar'}
         response = request('post', 'auth/signup', {}, body, cookies=self.user_cookies[username])
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
