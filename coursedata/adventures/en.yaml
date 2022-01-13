@@ -220,6 +220,24 @@ adventures:
                     animals is owl, hedgehog, armadillo
                     print He now hears the sound of an animals at random
                     ```
+
+                    The command `add` can also come in handy in your story. For example:
+                    ```
+                    print He hears a sound
+                    animals is owl, hedgehog, armadillo
+                    animal is ask 'What do you think it is?'
+                    add animal to animals
+                    print it was a animals at random
+                    ```
+
+                    This is an example of the `remove` command in your story
+                    ```
+                    print His bag got way too heavy.
+                    print Inside were a bottle of water, a flashlight and a brick.
+                    bag is water, flashlight, brick
+                    dump is ask 'Which item should he dump?'
+                    remove dump from bag
+                    ```
                 start_code: "print Your story"
             15:
                 story_text: |
@@ -309,6 +327,21 @@ adventures:
                     print name
                     ```
                 start_code: "print Im Hedy the parrot!"
+            3:
+                story_text: |
+                    ## Parrot
+                    Teach your parrot a new word with `add`.
+
+                    ## Example Hedy code
+                    ```
+                    words is squawk, Hedy
+                    print Train your parrot!
+                    new_word is ask Which word do you want to teach them?
+                    add new_word to words
+                    print You: Say new_word , Hedy!
+                    print Hedy the Parrot: words at random
+                    ```
+                start_code: ""
     songs:
         name: "Sing a song!"
         description: "Print a song"

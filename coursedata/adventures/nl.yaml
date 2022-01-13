@@ -278,6 +278,22 @@ adventures:
                     dieren is uil, egel, gordeldier
                     print Hij hoort nu het geluid van een dieren at random
                     ```
+                    Het `add`commando kun je misschien ook in je verhaal gebruiken. Bijvoorbeeld zo:
+                    ```
+                    print Hij hoort een geluid...
+                    dieren is uil, egel
+                    dier is ask 'Wat denk jij dat het is?'
+                    add dier to dieren
+                    print het was een dieren at random
+                    ```
+                    Hier zie je een voorbeeld van het `remove` commando in een verhaal:
+                    ```
+                    print Zijn tas is veel te zwaar...
+                    print In de tas zitten een fles water, een zaklamp en een baksteen.
+                    tas is water, zaklamp, baksteen
+                    weggooien is ask 'Welk ding zal onze held weggooien?'
+                    remove weggooien from tas
+                    ```
 
                 start_code: "print 'Hier komt straks jouw verhaal!'"
     parrot:
@@ -298,7 +314,7 @@ adventures:
                     echo
                     echo
                     ```
-                start_code: "print Im Hedy the parrot"
+                start_code: "print Ik ben Hedy de papegaai!"
             2:
                 story_text: |
                     ## Papegaai
@@ -314,7 +330,22 @@ adventures:
                     sleep
                     print naam
                     ```
-                start_code: "print Im Hedy the parrot!"
+                start_code: "print Ik ben Hedy de papegaai!"
+            3:
+                story_text: |
+                    ## Papegaai
+                    Leer je papegaai nieuwe woordjes met het `add` commando!
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    woorden is lorre, Hedy
+                    print Train je papegaai!
+                    nieuw_woord is ask Welk woord moet je papegaai leren?
+                    add nieuw_woord to woorden
+                    print Jij: Zeg nieuw_woord , Hedy!
+                    print Hedy de papegaai: woorden at random
+                    ```
+                start_code: ""
     songs:
         name: "Zing een liedje!"
         description: "Print een liedje "
