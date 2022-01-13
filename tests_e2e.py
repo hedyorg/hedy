@@ -418,9 +418,9 @@ class TestAuth(AuthHelper):
         # WHEN attempting to change password without sending the correct old password
         # THEN receive an invalid response code from the server
         self.post_data('auth/change_password', {
-            'password': 'password',
+            'old_password': 'password',
             'password': self.user['password'] + 'foo',
-            'password_repeat': self.user['password'] + 'foo'
+            'password_repeat': self.user['password'] + 'foo',
         }, expect_http_code=403)
 
     def test_change_password(self):
@@ -572,7 +572,9 @@ class TestAuth(AuthHelper):
             {'username': 'foobar', 'token': 1},
             {'username': 'foobar', 'token': 'some'},
             {'username': 'foobar', 'token': 'some', 'password': 1},
-            {'username': 'foobar', 'token': 'some', 'password': 'short'}
+            {'username': 'foobar', 'token': 'some', 'password': 'short'},
+            {'username': 'foobar', 'token': 'some', 'password': 'short', 'password_repeat': 123},
+            {'username': 'foobar', 'token': 'some', 'password_repeat': 'panda123'}
         ]
 
         for invalid_body in invalid_bodies:
@@ -581,7 +583,8 @@ class TestAuth(AuthHelper):
 
         # WHEN attempting a password reset with an invalid token
         # THEN receive a forbidden response code from the server
-        self.post_data('auth/reset', {'username': self.username, 'password': '123456', 'token': 'foobar'}, expect_http_code=403)
+        self.post_data('auth/reset', {'username': self.username, 'password': '123456',
+                                      'password_repeat': '123456', 'token': 'foobar'}, expect_http_code=403)
 
     def test_reset_password(self):
         # GIVEN an existing user
