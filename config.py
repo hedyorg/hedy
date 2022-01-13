@@ -34,6 +34,14 @@ config = {
         'postfix': ('-' + dyno if dyno else '') + '-' + str(os.getpid()),
         'region': 'eu-west-1'
     },
+    'athena': {
+        'region': 'eu-west-1',
+        'database': 'hedy-logs',
+        'table': 'hedy-alpha',
+        'prepare_statement': 'query',
+        's3_output': 's3://hedy-query-outputs/',
+        'max_results': 50
+    },
     #enables the quiz environment by setting the config variable on True
     'quiz-enabled': True,
 }
