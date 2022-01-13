@@ -37,7 +37,7 @@ if ! $up; then
 fi
 
 # Finally!
-if ! env ENDPOINT=http://localhost:$PORT pytest -q tests_e2e.py; then
+if ! env ENDPOINT=http://localhost:$PORT pytest -q tests_e2e.py "$@"; then
     # Sleep a bit to give the server the chance to flush the log
     echo "Some e2e test failed. Here's the tail of the server log:" >&2
     tail -n 50 e2e-server.log >&2
