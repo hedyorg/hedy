@@ -21,6 +21,9 @@
       </form>
       <button class="green-btn hidden" id="create-account-button" onclick="event.preventDefault (); hedyApp.auth.redirect ('signup')">{{auth.create_account}}</button>
   </div>
+  <form id="create-account" class="py-2" onsubmit="event.preventDefault (); window.location.href = '/signup'">
+    {{auth.no_account}}&nbsp;&nbsp;<button type="submit" class="green-btn">{{auth.create_account}}</button>
+  </form>
   <form class="py-2" onsubmit="event.preventDefault (); window.location.href = '/recover'"><button type="submit" class="btn">{{auth.forgot_password}}</button></form>
 </div>
 {% endblock %}
