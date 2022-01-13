@@ -94,8 +94,9 @@ def is_user_logged_in():
 
 # Remove the current info from the Flask session.
 def forget_current_user():
-    for value in session.keys():
-        session.pop(value, None)
+    session.pop('user', None) # We are not interested in the value of the use key.
+    session.pop('achieved', None) # Delete session achievements if existing
+
 
 def is_admin(user):
     admin_user = os.getenv('ADMIN_USER')
