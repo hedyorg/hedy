@@ -409,12 +409,12 @@ class TestAuth(AuthHelper):
 
         for invalid_body in invalid_bodies:
             # THEN receive an invalid response code from the server
-            self.post_data('auth/change_password', invalid_body, expect_http_code=400)
+            print(self.post_data('auth/change_password', invalid_body, expect_http_code=400))
 
         # WHEN attempting to change password without sending the correct old password
         # THEN receive an invalid response code from the server
         body = {'old_password': 'password', 'password': self.user['password'] + 'foo', 'password_repeat': self.user['password'] + 'foo'}
-        self.post_data('auth/change_password', body, expect_http_code=403)
+        print(self.post_data('auth/change_password', body, expect_http_code=403))
 
     def test_change_password(self):
         # GIVEN a logged in user
