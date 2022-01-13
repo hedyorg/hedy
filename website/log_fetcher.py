@@ -19,16 +19,14 @@ class AwsAthenaClient:
         if os.getenv('AWS_ACCESS_KEY_ID'):
             db = boto3.client('athena', region_name=config['athena']['region'])
             database = config['athena']['database']
-            table = config['athena']['table']
             s3_output = config['athena']['s3_output']
-            return AwsAthenaClient(db, database, table, s3_output)
+            return AwsAthenaClient(db, database, s3_output)
         logging.warning('Unable to initialize Athena client (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)')
         return None
 
-    def __init__(self, client, database, table, s3_output):
+    def __init__(self, client, database, s3_output):
         self.client = client
         self.database = database
-        self.table = table
         self.s3_output = s3_output
 
     @retry(stop_max_attempt_number=5, wait_exponential_multiplier=1000, wait_exponential_max=10 * 1000)
