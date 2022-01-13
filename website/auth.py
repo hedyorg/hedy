@@ -3,7 +3,7 @@ from website.yaml_file import YamlFile
 import bcrypt
 import re
 import urllib
-from flask import request, session, make_response, jsonify, redirect
+from flask import request, session, make_response, jsonify, redirect, g
 from flask_helpers import render_template
 from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring
 import datetime
@@ -194,15 +194,19 @@ def routes(app, database):
     @app.route('/auth/signup', methods=['POST'])
     def signup():
         body = request.json
+
+        print(g.auth_texts)
+        print(g.auth_texts.get('username_three'))
+        print(g.auth_texts.get('username_thresde'))
         # Validations, mandatory fields
         if not isinstance(body, dict):
             return 'not_object', 400
         if not isinstance(body.get('username'), str):
-            return 'username_invalid', 400
+            return g.auth_texts['username_invalid'] or "General error", 400
         if '@' in body['username'] or ':' in body['username']:
             return 'username_special', 400
         if len(body['username'].strip()) < 3:
-            return 'username_three', 400
+            return g.auth_texts.get('username_thresde') or g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('password'), str):
             return 'password_invalid', 400
         if len(body['password']) < 6:

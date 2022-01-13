@@ -114,7 +114,9 @@ export const auth = {
 
         afterLogin();
       }).fail (function (response) {
-        show_form_error(response);
+        console.log(response);
+        auth.clear_error ();
+        auth.error(response.responseText);
       });
     }
 
@@ -164,7 +166,8 @@ export const auth = {
         auth.success (auth.texts['profile_updated']);
         setTimeout (function () {location.reload ()}, 1000);
       }).fail (function (response) {
-        show_form_error(response);
+        auth.clear_error ();
+        auth.error(auth.texts[response.responseText]);
       });
     }
 
@@ -359,19 +362,4 @@ function getSavedRedirectPath() {
     localStorage.removeItem('hedy-save-redirect');
   }
   return redirect;
-}
-
-function show_form_error(response: any) {
-  auth.clear_error ();
-  if (response.status >= 500) return auth.error (auth.texts['server_error']);
-  else if (response.status == 400 || response.status == 403) {
-    if (response.responseText == "year_invalid") {
-      auth.error(auth.texts[response.responseText] + new Date().getFullYear());
-    } else {
-      auth.error(auth.texts[response.responseText]);
-    }
-  } else {
-    auth.error(auth.texts['ajax_error']);
-  }
-
 }
