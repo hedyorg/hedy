@@ -228,14 +228,10 @@ export const auth = {
         delete auth.reset;
         auth.redirect ('login');
       }).fail (function (response) {
-        if (response.status >= 500) {
-          return auth.error (auth.texts['server_error']);
-        } else if (response.status === 400){
-          auth.error (auth.texts[response.responseText]);
-        } else if (response.status === 403) {
-          auth.error (auth.texts['invalid_reset_link']);
+        if (response.responseText) {
+          return auth.error(response.responseText);
         } else {
-          auth.error (auth.texts['ajax_error']);
+          auth.error(auth.texts['ajax_error']);
         }
       });
     }
