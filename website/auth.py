@@ -201,29 +201,29 @@ def routes(app, database):
             return g.auth_texts.get('username_special'), 400
         if len(body['username'].strip()) < 3:
             return g.auth_texts.get('username_three'), 400
+        if not isinstance(body.get('email'), str) or not valid_email(body['email']):
+            return g.auth_texts.get('email_invalid'), 400
+        if body['email'] != body['mail_repeat']:
+            return g.auth_texts.get('repeat_match_email'), 400
         if not isinstance(body.get('password'), str):
             return g.auth_texts.get('password_invalid'), 400
         if len(body['password']) < 6:
             return g.auth_texts.get('password_six'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return g.auth_texts.get('repeat_match_password'), 400
-        if not isinstance(body.get('email'), str) or not valid_email(body['email']):
-            return g.auth_texts.get('email_invalid'), 400
-        if body['email'] != body['mail_repeat']:
-            return g.auth_texts.get('repeat_match_email'), 400
         if not isinstance(body.get('language'), str):
             return g.auth_texts.get('language_invalid'), 400
 
         # Validations, optional fields
-        if 'country' in body:
-            if not body['country'] in countries:
-                return g.auth_texts.get('country_invalid'), 400
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return (g.auth_texts.get('year_invalid') + str(datetime.datetime.now().year)), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return g.auth_texts.get('gender_invalid'), 400
+        if 'country' in body:
+            if not body['country'] in countries:
+                return g.auth_texts.get('country_invalid'), 400
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
             return g.auth_texts.get('experience_invalid'), 400
         if 'experience_languages' in body:
@@ -379,15 +379,15 @@ def routes(app, database):
             return g.auth_texts.get('language_invalid'), 400
 
         # Validations, optional fields
-        if 'country' in body:
-            if not body['country'] in countries:
-                return g.auth_texts.get('country_invalid'), 400
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return g.auth_texts.get('year_invalid') + str(datetime.datetime.now().year), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return g.auth_texts.get('gender_invalid'), 400
+        if 'country' in body:
+            if not body['country'] in countries:
+                return g.auth_texts.get('country_invalid'), 400
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
             return g.auth_texts.get('experience_invalid'), 400
         if 'experience_languages' in body:
