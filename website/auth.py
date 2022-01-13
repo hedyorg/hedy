@@ -92,9 +92,9 @@ def is_user_logged_in():
     """Return whether or not a user is currently logged in."""
     return bool(current_user()['username'])
 
-# Remove the current user from the Flask session.
+# Remove the current info from the Flask session.
 def forget_current_user():
-    session.pop('user', None) # We are not interested in the value of the use key.
+    session.clear() #Clear the complete session -> Everything is only current-user-relevant
 
 def is_admin(user):
     admin_user = os.getenv('ADMIN_USER')
