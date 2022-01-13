@@ -116,7 +116,11 @@ export const auth = {
       }).fail (function (response) {
         console.log(response);
         auth.clear_error ();
-        auth.error(response.responseText);
+        if (response.responseText) {
+          auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
+        }
       });
     }
 
