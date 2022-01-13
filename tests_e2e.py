@@ -98,11 +98,16 @@ class AuthHelper(unittest.TestCase):
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
         # In this case, we get a 403. We invoke the function recursively.
+        print(body)
+        print(response)
+
         if response['code'] == 403:
             return self.assert_user_exists(username)
 
         # Store the user & also the verify token for use in upcoming tests
         USERS[username] = body
+        print(body)
+        print(USERS)
 
         USERS[username]['verify_token'] = response['body']['token']
         return USERS[username]
