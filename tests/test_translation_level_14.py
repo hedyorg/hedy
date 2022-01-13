@@ -100,13 +100,6 @@ class TestsTranslationLevel14(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand(list(map(lambda x, y:(x,y), all_keywords_dict["print"], hedy_translation.KEYWORD_LANGUAGES)))
-    def test_foo(self, print_keyword, lang):        
-        code = f"{print_keyword} 'Hello'"
-        expected = "print 'Hello'"
-        result = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)
-        self.assertEqual(expected, result)
-
     @parameterized.expand(HedyTester.as_list_of_tuples(all_keywords_dict["if"], all_keywords_dict["print"], hedy_translation.KEYWORD_LANGUAGES))   
     def test_double_equals_all_lang(self, if_keyword, print_keyword, lang):
         code = textwrap.dedent(f"""\
