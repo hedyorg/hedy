@@ -7,6 +7,7 @@ from test_level_01 import HedyTester
 class TestsLevel14(HedyTester):
   level = 14
 
+
   @parameterized.expand(HedyTester.comparison_commands)
   def test_comparisons(self, comparison):
     code = textwrap.dedent(f"""\
@@ -29,7 +30,6 @@ class TestsLevel14(HedyTester):
       code=code,
       max_level=16,
       expected=expected,
-
     )
 
   @parameterized.expand(HedyTester.comparison_commands)
@@ -154,6 +154,52 @@ class TestsLevel14(HedyTester):
       expected=expected
     )
 
+  def test_if_with_double_equals(self):
+    code = textwrap.dedent("""\
+    naam = 'Hedy'
+    if naam == Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=16)
+
+
+  @parameterized.expand(HedyTester.comparison_commands)
+  def test_comparisons_with_boolean(self, comparison):
+    code = textwrap.dedent(f"""\
+      leeftijd is ask 'Hoe oud ben jij?'
+      if leeftijd {comparison} 12 or leeftijd {comparison} 15
+          print 'Dan ben je jonger dan ik!'
+      if leeftijd {comparison} 12 and leeftijd {comparison} 15
+          print 'Some other string!'""")
+      
+    expected = textwrap.dedent(f"""\
+      leeftijd = input(f'Hoe oud ben jij?')
+      try:
+        leeftijd = int(leeftijd)
+      except ValueError:
+        try:
+          leeftijd = float(leeftijd)
+        except ValueError:
+          pass
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100) or str(leeftijd).zfill(100){comparison}str(15).zfill(100):
+        print(f'Dan ben je jonger dan ik!')
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100) and str(leeftijd).zfill(100){comparison}str(15).zfill(100):
+        print(f'Some other string!')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+    )
+
   @parameterized.expand([
     ("'text'", '1'),      # text and number
     ('1, 2', '1'),        # list and number
@@ -170,3 +216,5 @@ class TestsLevel14(HedyTester):
       max_level=15,
       exception=exceptions.InvalidTypeCombinationException
     )
+
+

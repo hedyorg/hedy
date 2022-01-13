@@ -90,7 +90,10 @@ class TestsLevel9(HedyTester):
         print(f'mooi')
         time.sleep(0.1)""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['is', 'if', 'repeat', 'print'])
 
   def test_issue_396(self):
     code = textwrap.dedent("""\

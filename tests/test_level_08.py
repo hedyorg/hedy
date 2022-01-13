@@ -6,7 +6,6 @@ class TestsLevel8(HedyTester):
   level = 8
 
   def test_if_with_indent(self):
-    # todo should be tested for all levels!
     code = textwrap.dedent("""\
     naam is Hedy
     if naam is Hedy
@@ -17,7 +16,78 @@ class TestsLevel8(HedyTester):
     if str(naam) == str('Hedy'):
       print(f'koekoek')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
+
+  def test_if_with_equals_sign(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    if naam = Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
+
+  def test_one_space_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond
+        print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
+
+  def test_one_space_in_rhs_if_else(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond
+        print 'shaken'
+    else
+        print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
+
+  def test_multiple_spaces_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is Bond James Bond
+        print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('Bond James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
 
   def test_equality_promotes_int_to_string(self):
     code = textwrap.dedent("""\
@@ -53,7 +123,7 @@ class TestsLevel8(HedyTester):
     if red is color
         print 'success!'""")
     self.multi_level_tester(
-      max_level=11,
+      max_level=12,
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
@@ -90,6 +160,17 @@ class TestsLevel8(HedyTester):
     me wants a cookie!""")
 
     self.single_level_tester(code=code, expected=expected, output=output)
+
+  def test_repeat_with_undefined_variable(self):
+    code = textwrap.dedent("""\
+    repeat n times
+        print 'me wants a cookie!'""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.UndefinedVarException,
+      max_level=10)
+
   def test_repeat_with_non_latin_variable_print(self):
     code = textwrap.dedent("""\
     állatok is 5
@@ -151,7 +232,7 @@ class TestsLevel8(HedyTester):
     self.single_level_tester(code=code, expected=expected, output=output)
 
   def test_allow_space_after_else_line(self):
-    #todo should work up to 11??
+    #todo should work up to 12??
     code = textwrap.dedent("""\
     a is 1
     if a is 1

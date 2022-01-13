@@ -17,8 +17,21 @@ class TestsLevel17(HedyTester):
     if str(naam) == str('Hedy'):
       print(f'koekoek')""")
 
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_if_with_equals_sign(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    if naam == Hedy:
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
 
     self.single_level_tester(code=code, expected=expected)
+
 
   def test_if_else(self):
     code = textwrap.dedent("""\
@@ -122,7 +135,18 @@ class TestsLevel17(HedyTester):
     self.multi_level_tester(
       max_level=17,
       code=code,
-      expected=expected
+      expected=expected,
+      expected_commands=['is', 'if', 'print', 'print']
+    )
+
+  def test_while_undefined_var(self):
+    code = textwrap.dedent("""\
+      while antwoord != 25:
+          print 'hoera'""")
+
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.UndefinedVarException
     )
 
   def test_allow_space_before_colon(self):

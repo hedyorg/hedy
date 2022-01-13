@@ -485,7 +485,7 @@
 15:
     start_code: |-
         odpoved = 0
-        while spravna_odpoved != 25
+        while odpoved != 25
             odpoved = ask 'Kolik je 5 * 5?'
         print 'Dostala jsem správnou odpověď!'
 
@@ -496,7 +496,7 @@
         example: 'Příklad: while spravna_odpoved is False'
         demo_code: |-
             odpoved = 0
-            while spravna_odpoved != 25
+            while odpoved != 25
                 odpoved = ask 'Kolik je 5 * 5?'
             print 'Dostala jsem správnou odpověď!'
     -   name: While s operátory menší/větší než

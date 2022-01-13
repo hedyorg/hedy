@@ -27,7 +27,7 @@ class TestsTranslationLevel9(HedyTester):
             herhaal 5 keer
                 print 'hi'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_repeat_ifelse_english_dutch(self):
         code = textwrap.dedent("""\
@@ -48,7 +48,7 @@ class TestsTranslationLevel9(HedyTester):
                 herhaal 2 keer
                     print 'oh'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_multiple_ifelse_dutch_english(self):
         code = textwrap.dedent("""\
@@ -67,11 +67,11 @@ class TestsTranslationLevel9(HedyTester):
             else
                 print 'gelukkig'""")
 
-        self.assertEqual(result, expected)
+        self.assertEqual(expected, result)
 
     def test_indent_translate_back(self):
         code = textwrap.dedent("""\
-        naam is hedy
+        naam = hedy
         if naam is hedy
             repeat 4 times
                 print 'Hallo Hedy'

@@ -1,6 +1,7 @@
-command:+= assign_list | add | remove > invalid   
+command:+= assign_list | add | remove > error_invalid   
 _print_argument: (_SPACE | list_access | textwithoutspaces | punctuation)*
 
+assign: var _SPACE _IS _SPACE (list_access | text) -> assign
 assign_list: var _SPACE _IS _SPACE text_list ((_COMMA _SPACE|_COMMA) text_list)+
 text_list: /([^\r\n,]+)/ -> text // list elements may contain punctionationm but not commas or course, these are separators
 

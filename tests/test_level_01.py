@@ -25,30 +25,42 @@ class TestsLevel1(HedyTester):
   def test_print(self):
     code = "print Hallo welkom bij Hedy!"
     expected = "print('Hallo welkom bij Hedy!')"
+    expected_commands = ['print']
 
     self.single_level_tester(
       code=code,
       expected=expected,
-      output='Hallo welkom bij Hedy!'
+      output='Hallo welkom bij Hedy!',
+      expected_commands=expected_commands
     )
 
+    self.assertEqual(['Hallo welkom bij Hedy!'], hedy.all_print_arguments(code, self.level))
+
   def test_print_has_no_turtle(self):
-    result = hedy.transpile_inner("print koekoek", self.level)
+    code = "print koekoek"
+    result = hedy.transpile_inner(code, self.level)
     expected = False
     self.assertEqual(expected, result.has_turtle)
+    self.assertEqual(['koekoek'], hedy.all_print_arguments(code, self.level))
 
 
   def test_print_with_comma(self):
     code = "print iedereen zegt tegen hem: NERD, omdat hij de slimste van de klas is."
     expected = "print('iedereen zegt tegen hem: NERD, omdat hij de slimste van de klas is.')"
+    expected_commands = ['print']
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=expected_commands
+    )
 
   def test_print_multiple_lines(self):
     code = "print Hallo welkom bij Hedy\nprint Mooi hoor"
     expected = "print('Hallo welkom bij Hedy')\nprint('Mooi hoor')"
 
     self.single_level_tester(code=code, expected=expected)
+    self.assertEqual(['Hallo welkom bij Hedy', 'Mooi hoor'], hedy.all_print_arguments(code, self.level))
 
 
   def test_print_with_quotes(self):
@@ -149,6 +161,7 @@ class TestsLevel1(HedyTester):
 
     self.single_level_tester(code=code,
                              expected=expected,
+                             expected_commands=['ask', 'echo', 'ask', 'print'],
                              lang='nl')
 
   # echo tests
@@ -276,7 +289,10 @@ class TestsLevel1(HedyTester):
       answer = input('Wat is je lievelingskleur')
       print('je lievelingskleur is '+answer)""")
 
-      self.single_level_tester(code=code, expected=expected)
+      self.single_level_tester(
+        code=code,
+        expected=expected,
+        expected_commands=['print', 'ask', 'echo'])
   def test_forward_turn_combined(self):
     code = "forward 50\nturn\nforward 100"
     expected = textwrap.dedent("""\
@@ -289,7 +305,8 @@ class TestsLevel1(HedyTester):
       max_level=7,
       code=code,
       expected=expected,
-      extra_check_function=self.is_turtle()
+      extra_check_function=self.is_turtle(),
+      expected_commands=['forward', 'turn', 'forward']
     )
 
   # markup tests
