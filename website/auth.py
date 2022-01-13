@@ -163,10 +163,8 @@ def routes(app, database):
         else:
             user = DATABASE.user_by_username(body['username'])
 
-        if not user:
-            return g.auth_texts.get('invalid_username_password'), 403
-        if not check_password(body['password'], user['password']):
-            return g.auth_texts.get('invalid_username_password'), 403
+        if not user or not check_password(body['password'], user['password']):
+            return g.auth_texts.get('invalid_username_password') + " " + g.auth_texts.get('no_account'), 403
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
