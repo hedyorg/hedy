@@ -106,16 +106,17 @@ export const auth = {
           : undefined,
       };
 
-      $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        auth.success (auth.texts['signup_success']);
-
+      $.ajax ({
+        type: 'POST',
+        url: '/auth/signup',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-
         afterLogin();
       }).fail (function (response) {
-        console.log(response);
-        auth.clear_error ();
+        auth.clear_error();
         if (response.responseText) {
           auth.error(response.responseText);
         } else {
@@ -125,24 +126,21 @@ export const auth = {
     }
 
     if (op === 'login') {
-      auth.clear_error ();
-      $.ajax ({type: 'POST', url: '/auth/login', data: JSON.stringify ({username: values.username, password: values.password}), contentType: 'application/json; charset=utf-8'}).done (function () {
-
+      $.ajax ({
+        type: 'POST',
+        url: '/auth/login',
+        data: JSON.stringify ({username: values.username, password: values.password}),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-
         afterLogin();
       }).fail (function (response) {
-        if (response.status >= 500) {
-           return auth.error (auth.texts['server_error']);
-        } else if (response.status == 400) {
-          auth.error (response.responseText);
-        }
-        if (response.status === 403) {
-           auth.error (auth.texts['invalid_username_password'] + ' ' + auth.texts['no_account']);
-           localStorage.setItem ('hedy-login-username', values.username ?? '');
+        auth.clear_error();
+        if (response.responseText) {
+           auth.error(response.responseText);
         } else {
-          auth.error (auth.texts['ajax_error']);
+          auth.error(auth.texts['ajax_error']);
         }
       });
     }
@@ -168,8 +166,11 @@ export const auth = {
         auth.success (auth.texts['profile_updated']);
         setTimeout (function () {location.reload ()}, 1000);
       }).fail (function (response) {
-        auth.clear_error ();
-        auth.error(auth.texts[response.responseText]);
+        if (response.responseText) {
+           auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
+        }
       });
     }
 
@@ -188,15 +189,10 @@ export const auth = {
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
-        // We have to specify the error element id because the change password page has two forms
-        if (response.status >= 500) {
-          return auth.error (auth.texts['server_error'], null, '#error_password');
-        } else if (response.status == 400) {
-          auth.error (auth.texts[response.responseText], null, '#error_password');
-        } else if (response.status === 403) {
-          auth.error (auth.texts['password_invalid'], null, '#error_password');
+        if (response.responseText) {
+           auth.error(response.responseText);
         } else {
-          auth.error (auth.texts['ajax_error'], null, '#error_password');
+          auth.error(auth.texts['ajax_error']);
         }
       });
     }

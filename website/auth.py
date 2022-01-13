@@ -151,11 +151,11 @@ def routes(app, database):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return 'not_object', 400
+            return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return 'username_invalid', 400
+            return g.auth_texts.get('username_invalid'), 400
         if not isinstance(body.get('password'), str):
-            return 'password_invalid', 400
+            return g.auth_texts.get('password_invalid'), 400
 
         # If username has an @-sign, then it's an email
         if '@' in body['username']:
@@ -164,9 +164,9 @@ def routes(app, database):
             user = DATABASE.user_by_username(body['username'])
 
         if not user:
-            return 'invalid username/password', 403
+            return g.auth_texts.get('invalid_username_password'), 403
         if not check_password(body['password'], user['password']):
-            return 'invalid username/password', 403
+            return g.auth_texts.get('invalid_username_password'), 403
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
