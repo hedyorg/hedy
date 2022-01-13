@@ -1326,7 +1326,7 @@ def render_main_menu(current_page):
 @app.route('/programs_list', methods=['GET'])
 @requires_login
 def list_programs(user):
-    return {'programs': DATABASE.programs_for_user(user['username'])}
+    return {'programs': DATABASE.programs_for_user(user['username']).records}
 
 
 @app.route('/programs/delete/', methods=['POST'])
@@ -1384,7 +1384,7 @@ def save_program(user):
     # We check if a program with a name `xyz` exists in the database for the username.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
-    programs = DATABASE.programs_for_user(user['username'])
+    programs = DATABASE.programs_for_user(user['username']).records
     program_id = uuid.uuid4().hex
     overwrite = False
     for program in programs:
