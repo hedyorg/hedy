@@ -267,7 +267,7 @@ class TestAuth(AuthHelper):
     def test_signup(self):
         # GIVEN a valid username and signup body
         username = self.make_username()
-        user = {'username': username, 'email': username + '@hedy.com', 'email_repeat': username + '@hedy.com',
+        user = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
                 'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl'}
 
         # WHEN signing up a new user
@@ -516,7 +516,7 @@ class TestAuth(AuthHelper):
         # (we check email change separately since it involves a flow with a token)
         # THEN receive an OK response code from the server
         new_email = self.username + '@newhedy.com'
-        body = self.post_data('profile', {'email': new_email})
+        body = self.post_data('profile', {'email': new_email, 'language': self.user['language']})
 
         # THEN confirm that the server replies with an email verification token
         self.assertIsInstance(body['token'], str)
