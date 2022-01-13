@@ -491,6 +491,10 @@ class TestAuth(AuthHelper):
         # (we create a new user to ensure that the user has a clean profile)
         self.given_fresh_user_is_logged_in()
 
+        #We can't just push one change -> have to sent e-mail and language as well
+        print(self.user)
+
+
         # WHEN submitting valid profile changes
         profile_changes = {
            'birth_year': 1989,
