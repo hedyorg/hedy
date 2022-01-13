@@ -46,7 +46,8 @@ adventures:
                     name is ask What is the name of the main character?
                     print name is now going to run in the woods
                     print name is a bit scared
-                    print He hears crazy noises everywhere
+                    print Suddenly he hears a crazy noise...
+                    sleep
                     print name is afraid this is a haunted forest
                     ```
                 start_code: "print Your story"
@@ -273,6 +274,41 @@ adventures:
                                 sword = 'found'
                     ```
                 start_code: ""
+    parrot:
+        name: "Parrot"
+        description: "Create your own online pet parrot that will copy you!"
+        image: "story.png"
+        default_save_name: "Parrot"
+        levels:
+            1:
+                story_text: |
+                    ## Parrot
+                    Create your own online pet parrot that will copy you!
+
+                    ## Example Hedy code
+                    ```
+                    print Im Hedy the parrot
+                    ask whats your name?
+                    echo
+                    echo
+                    ```
+                start_code: "print Im Hedy the parrot"
+            2:
+                story_text: |
+                    ## Parrot
+                    Create your own online pet parrot that will copy you!
+
+                    ## Example Hedy code
+                    ```
+                    print Im Hedy the parrot
+                    name is ask whats your name?
+                    print name
+                    sleep
+                    print squawk
+                    sleep
+                    print name
+                    ```
+                start_code: "print Im Hedy the parrot!"
     songs:
         name: "Sing a song!"
         description: "Print a song"
@@ -709,6 +745,7 @@ adventures:
                     ```
                     people is mom, dad, Emma, Sophie
                     print _ the dishes are done by _
+                    sleep
                     print people at _
                     ```
                 start_code: "print 'Who does the dishes?'"
@@ -743,6 +780,7 @@ adventures:
                     choices = 1, 2, 3, 4, 5, 6
                     for player in players
                         print player ' throws ' choices at random
+                        sleep
                     ```
                 start_code: ""
             7:
@@ -1518,6 +1556,7 @@ adventures:
                     fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
                     print 'I will take a look in my crystall ball for your future.'
                     print 'I see... I see...'
+                    sleep
                     print fortunes at random
                     ```
                 start_code: ""
@@ -1536,6 +1575,7 @@ adventures:
                         print name ' lives in a ' houses at random
                         print name ' will marry ' loves at random
                         print name ' will get a ' pets at random ' as their pet.'
+                        sleep
                     ```
 
                     ## Example Hedy Code - Harry Potter
@@ -1565,6 +1605,7 @@ adventures:
                     repeat 3 times
                        question = ask 'What do you want to know?'
                        print question
+                       sleep
                        print 'My crystal ball says...' answers at random
                     ```
                 start_code: ""
@@ -1609,6 +1650,7 @@ adventures:
                     kids = length / age
                     kids = kids - siblings
                     print 'You will get ...'
+                    sleep
                     print kids ' kids!'
                     ```
 
@@ -1679,7 +1721,9 @@ adventures:
                     question is ask 'What do you want to know?'
                     print 'This is your question: ' question
                     answers is yes, no, maybe
-                    print 'My crystal ball says...' answers at random
+                    print 'My crystal ball says...'
+                    sleep 2
+                    print answers at random
                     ```
                 start_code: ""
             3:
@@ -1695,7 +1739,9 @@ adventures:
                     question is ask What do you want to know?
                     print This is what you want to know: question
                     answers is yes, no, maybe
-                    print My crystal ball says... answers at random
+                    print My crystal ball says...
+                    sleep 2
+                    print answers at random
                     ```
 
                     ## Challenges
@@ -1838,6 +1884,7 @@ adventures:
                     monsters is werewolf, mummy, vampire, zombie
                     chosen_door is ask 'Which door do you choose?'
                     print 'You chose door...' chosen_door
+                    sleep
                     correct_door is doors at random
                     if chosen_door is correct_door print 'Great! Youve escaped!'
                     else print 'Oh no! You are being eaten by a...' monsters at random
@@ -1866,6 +1913,7 @@ adventures:
                     print You picked door ... choice
                     monsters is a zombie, a vampire, NOTHING YOUVE ESCAPED
                     print You see...
+                    sleep
                     print monsters at random
                     ```
 

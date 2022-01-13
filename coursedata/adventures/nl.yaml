@@ -45,7 +45,8 @@ adventures:
                     naam is ask Hoe heet de hoofdpersoon?
                     print naam gaat nu in het bos lopen
                     print naam is wel een beetje bang
-                    print Overal hoort hij gekke geluiden
+                    print ineens hoort hij een vreemd geluid
+                    slaap 2
                     print naam is bang dat dit een spookbos is
                     ```
                 start_code: "print Hier komt straks jouw verhaal!"
@@ -279,6 +280,41 @@ adventures:
                     ```
 
                 start_code: "print 'Hier komt straks jouw verhaal!'"
+    parrot:
+        name: "Papegaai"
+        description: "Maak je eigen online papegaai die je napraat!"
+        image: "story.png"
+        default_save_name: "Papegaai"
+        levels:
+            1:
+                story_text: |
+                    ## Papegaai
+                    Maak je eigen online papegaai die je napraat!
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    print Ik ben papegaai Hedy
+                    ask Wie ben jij?
+                    echo
+                    echo
+                    ```
+                start_code: "print Im Hedy the parrot"
+            2:
+                story_text: |
+                    ## Papegaai
+                    Maak je eigen online papegaai die je napraat!
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    print Ik ben papegaai Hedy
+                    naam is ask Wie ben jij?
+                    print naam
+                    sleep
+                    print koppie krauw
+                    sleep
+                    print naam
+                    ```
+                start_code: "print Im Hedy the parrot!"
     songs:
         name: "Zing een liedje!"
         description: "Print een liedje "
@@ -762,6 +798,7 @@ adventures:
                     keuzes = 1, 2, 3, 4, 5, 6
                     for speler in spelers
                         print speler ' gooit ' keuzes at random
+                        sleep
                     ```
                 start_code: ""
             7:
@@ -1186,6 +1223,7 @@ adventures:
                     voorspellingen = 'je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil'
                     print 'Ik pak mijn glazen bol erbij...'
                     print 'Ik zie... Ik zie...'
+                    sleep 2
                     print voorspellingen at random
                     ```
                 start_code: ""
@@ -1204,6 +1242,7 @@ adventures:
                         print naam ' woont in een ' huizen at random
                         print naam ' trouwt met ' liefdes at random
                         print naam ' krijgt een ' huisdieren at random ' als huisdier'
+                        sleep 2
                     ```
 
                     ## Voorbeeld Hedy code - Harry Potter
@@ -1234,6 +1273,7 @@ adventures:
                     repeat 3 times
                         vraag = ask 'Wat wil je weten?'
                         print vraag
+                        sleep
                         print antwoorden at random
                     ```
                 start_code: ""
@@ -1278,6 +1318,7 @@ adventures:
                     kinderen = lengte / leeftijd
                     kinderen = kinderen - brusjes
                     print 'Jij krijgt later... '
+                    sleep 2
                     print kinderen ' kinderen!'
                     ```
 
@@ -1343,6 +1384,7 @@ adventures:
                     print 'Dit is je vraag: ' vraag
                     antwoorden is ja, nee, misschien
                     print 'Mijn glazen bol zegt...'
+                    sleep 2
                     print antwoorden at random
                     ```
                 start_code: ""
@@ -1360,6 +1402,7 @@ adventures:
                     print vraag
                     antwoorden is ja, nee, misschien
                     print Mijn glazen bol zegt...
+                    sleep 2
                     print antwoorden at random
                     ```
 
@@ -1794,6 +1837,7 @@ adventures:
                             print 'Voor je staan drie deuren...'
                             gekozendeur = ask 'Welke deur kies je?'
                             print 'Jij kiest deur...' gekozendeur
+                            sleep
                             if gekozendeur is goededeur
                                 print 'Gelukkig! Geen monster!'
                             else
@@ -1824,6 +1868,7 @@ adventures:
                             print 'Voor je staan drie deuren...'
                             gekozendeur = ask 'Welke deur kies je?'
                             print 'Jij kiest deur...' gekozendeur
+                            sleep
                             if gekozendeur is goededeur
                                 print 'Gelukkig! Geen monster!'
                             else
@@ -1853,6 +1898,7 @@ adventures:
                     monsters is weerwolf, mummy, vampier, zombie
                     gekozendeur is ask 'Welke deur kies je?'
                     print 'Jij kiest deur...' gekozendeur
+                    sleep
                     goededeur is deuren at random
                     if gekozendeur is goededeur print 'Hoera! Je ontsnapt!'
                     else print 'Oh nee! Je wordt opgepeuzeld door een...' monsters at random
@@ -1879,6 +1925,7 @@ adventures:
                     print Je koos deur keuze
                     monsters is een zombie, een vampier, NIKS JE ONTSNAPT
                     print Jij ziet...
+                    sleep
                     print monsters at random
                     ```
                     ## Uitdaging
