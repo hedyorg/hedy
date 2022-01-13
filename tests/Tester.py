@@ -63,6 +63,7 @@ class HedyTester(unittest.TestCase):
   def result_in(self, list):
     return (lambda result: HedyTester.run_code(result) in list)
 
+  @staticmethod
   def as_list_of_tuples(*args):
     # used to conver a variable number of paralel list
     # into a list of tuples to be used by the parametrized tester
