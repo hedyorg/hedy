@@ -352,16 +352,11 @@ def routes(app, database):
             return g.auth_texts.get('repeat_match_password'), 400
 
         # The user object we got from 'requires_login' doesn't have the password, so look that up in the database
-        print("Hier komen we nog?")
         user = DATABASE.user_by_username(user['username'])
-        print("En hier dan?")
-        print(user)
 
         if not check_password(body['old_password'], user['password']):
             print("Hier zou de error gegooid moeten worden")
             return g.auth.texts.get('password_invalid'), 403
-
-        print("Voorbij de check -> dit zou niet moeten...")
 
         hashed = hash(body['password'], make_salt())
 
