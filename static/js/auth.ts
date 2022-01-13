@@ -129,7 +129,6 @@ export const auth = {
 
         afterLogin();
       }).fail (function (response) {
-        $ ('#create-account-button').hide ();
         if (response.status >= 500) {
            return auth.error (auth.texts['server_error']);
         } else if (response.status == 400) {
@@ -137,7 +136,6 @@ export const auth = {
         }
         if (response.status === 403) {
            auth.error (auth.texts['invalid_username_password'] + ' ' + auth.texts['no_account']);
-           $ ('#create-account-button').show ();
            localStorage.setItem ('hedy-login-username', values.username ?? '');
         } else {
           auth.error (auth.texts['ajax_error']);
