@@ -8,6 +8,8 @@ from os import path
 
 TRANSLATOR_LOOKUP = {}
 
+KEYWORD_LANGUAGES = ['en', 'nl', 'es']
+
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
@@ -20,6 +22,14 @@ def keywords_to_dict(to_lang="nl"):
 
     return command_combinations
 
+def all_keywords_to_dict():
+    """Return a dictionary where each key is a list of the translations of that keyword. Used for testing"""    
+    keyword_list = []
+    for lang in KEYWORD_LANGUAGES:
+        commands = keywords_to_dict(lang)
+        keyword_list.append(commands)
+    all_translations = {k: [d[k] for d in keyword_list] for k in keyword_list[0]}
+    return all_translations
 
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
