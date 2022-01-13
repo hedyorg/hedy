@@ -1509,3 +1509,207 @@ levels:
             correct_answer: "B"
             hint: "Pas op het inspringen"
             question_score: 10
+
+    10:
+        1:
+            question_text: "Wat moet er op ___ komen te staan?"
+            code: |-
+                complimentjes = super, goedzo, top
+                ___
+                    print compliment
+            mp_choice_options:
+                - "code": "for each compliment"
+                  "feedback": "Helaas"
+                - "code": "for compliment in complimentjes"
+                  "feedback": "Jij verdient al deze complimentjes"
+                - "code": "if compliment in complimentjes"
+                  "feedback": "Helaas'
+                    - "code": "for complimentjes in compliment"
+                  "feedback": "Helaas!"
+            correct_answer: "B"
+            hint: "voor elk compliment in de lijst complimentjes"
+            question_score: 10
+        2:
+            question_text: "Welke uitvoer is correct?"
+            code: |-
+                maaltijd = pizza, pasta, pannenkoek
+                for maaltijd in maaltijden
+                    print 'Ik hou van ' maaltijd
+            mp_choice_options:
+                - "code": "Ik hou van pizza"
+                  "feedback": "Regel 2 zegt for maaltijd in maaltijden. Dus elke maaltijd in de lijst wordt geprint."
+                - "code": "Ik hou van pasta"
+                  "feedback": "Regel 2 zegt for maaltijd in maaltijden. Dus elke maaltijd in de lijst wordt geprint."
+                - "code": "I hou van pannenkoek"
+                  "feedback": "Regel 2 zegt for maaltijd in maaltijden. Dus elke maaltijd in de lijst wordt geprint.."
+                - "code": |-
+                      Ik hou van pizza
+                      Ik hou van pasta
+                      Ik hou van pannenkoek
+                  "feedback": "Super!"
+            correct_answer: "D"
+            hint: "Regel 2 zegt for maaltijd in maaltijden. Dus elke maaltijd in de lijst wordt geprint."
+            question_score: 10
+        3:
+            question_text: "Welke output klopt?"
+            code: |-
+                dieren = honden, katten, hamsters, kippen
+                for dier in dieren
+                    print dier ' zijn superleuke huisdieren'
+            mp_choice_options:
+                - "code": "honden zijn superleuke huisdieren"
+                  "feedback": "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
+                - "code": "honden, katten, hamsters, kippen zijn superleuke huisdieren"
+                  "feedback": "Elk dier krijgt zijn eigen regeltje."
+                - "code": |-
+                      honden zijn superleuke huisdieren
+                      katten zijn superleuke huisdieren
+                      hamsters zijn superleuke huisdieren
+                      kippen zijn superleuke huisdieren
+                  "feedback": "Goedzo!"
+                - "option_text": "Dat weet je nog niet. Hedy kiest een dier at random."
+                  "feedback": "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
+            correct_answer: "C"
+            hint: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
+            question_score: 10
+        4:
+            question_text: "Wat is er mis met deze code?"
+            code: |-
+                boodschappen = appels, brood, melk
+                for boodschap in boodschappen
+                    print 'We moeten ' boodschappen ' kopen'
+            mp_choice_options:
+                - "option_text": "Regel 2 moet beginnen met 4 spaties om in te springen"
+                  "feedback": "Nee hoor. Alleen regel 3 moet inspringen dus dat klopt."
+                - "option_text": "Regel 3 moet niet beginnen met 4 spaties om in te springen"
+                  "feedback": "Regel 3 moet wel inspringen, want na het for commando in regel 2 moet je inspringen ."
+                - "option_text": "in regel 3 moet 'boodschap' staan in plaats van 'boodschappen'"
+                  "feedback": "Toppie!"
+                - "option_text": "In regel 1 moet boodschap staan in plaats van boodschappen."
+                  "feedback": "Nee, dat hoeft niet."
+            correct_answer: "C"
+            hint: "Kijk goed naar regel 2"
+            question_score: 10
+        5:
+            question_text: "Welk woord moet op je invullen op ___ bij deze digitale dobbelsteen?"
+            code: |-
+                print 'Welkom bij de digitale dobbelsteen!'
+                spelers = Anne, Jonneke, Jessie, Ilona
+                keuzes = 1, 2, 3, 4, 5, 6
+                for speler in spelers
+                    print speler ' gooit ' ___ at random
+            mp_choice_options:
+                - "code": "speler"
+                  "feedback": "Dan komt er te staan 'Anne gooit Ilona'. Dat is niet de bedoeling!"
+                - "code": "keuzes"
+                  "feedback": "Yes! Dat klopt!"
+                - "code": "keuze"
+                  "feedback": "je bent er bijna.. Maar Hedy kiest uit het lijstje 'keuzes' niet 'keuze'"
+                - "code": "dobbelsteen"
+                  "feedback": "Kijk goed naar de namen van de variabelen."
+            correct_answer: "A"
+            hint: "Hedy moet een random nummer kiezen"
+            question_score: 10
+        6:
+            question_text: "Welk antwoord is een mogelijke uitvoer als je de code afspeelt?"
+            code: |-
+                keuzes = steen, papier, schaar
+                spelers = Kelly, Meredith
+                for speler in spelers
+                    print speler ' kiest ' keuzes at random
+            mp_choice_options:
+                - "code": |-
+                      Kelly kiest steen
+                  "feedback": "Meredith wil ook meedoen!"
+                - "code": |-
+                      Meredith kiest schaar
+                      Kelly kiest steen
+                  "feedback": " Je bent er bijna! Maar Kelly staat eerst in je lijstje dus zij wordt ook eerst geprint."
+                - "code": |-
+                      Meredith kiest papier
+                  "feedback": "Kelly wil ook meedoen!"
+                - "code": |-
+                      Kelly kiest papier
+                      Meredith kiest schaar
+                  "feedback": "Geweldig!"
+            correct_answer: "D"
+            hint: "Elke speler kiest een optie. De speler die als eerste op het lijstje staat, wordt als eerst geprint."
+            question_score: 10
+        7:
+            question_text: "Wat moet er op de ___ staan in deze code die bepaalt wat je vanavond eet?"
+            code: |-
+                namen = Ron, Leslie, April, Andy
+                eten = pasta, friet, salade
+                ___
+                    print naam ' eet vanavond ' food at random
+            mp_choice_options:
+                - "code": "for naam in namen"
+                  "feedback": "Lekker bezig!"
+                - "code": "for namen in naam"
+                  "feedback": "Het moet andersom. Dus for naam in namen."
+                - "code": "for eten in eten"
+                  "feedback": "Elke naam moet weten wat hij/zij vanavond eet."
+                - "code": "for naam in eten"
+                  "feedback": "Elke naam moet weten wat hij/zij vanavond eet."
+            correct_answer: "A"
+            hint: "Elke naam moet weten wat hij/zij vanavond eet."
+            question_score: 10
+        8:
+            question_text: "Wat moet er op ___ staan bij deze code die bepaalt wat voor kleur short je draagt?"
+            code: |-
+                namen = Donna, Tommy, Ben
+                kleuren = blauw, rood, geel
+                for naam in namen
+                    print ___
+            mp_choice_options:
+                - "code": "'naam krijgt een kleur shirt'"
+                  "feedback": "Dat is hem niet!"
+                - "code": "naam 'krijgt een ' kleuren at random ' shirt'"
+                  "feedback": "Goed gedaan! Dit was een lastige"
+                - "code": " namen 'krijgt een ' kleuren at random ' shirt'"
+                  "feedback": "Je wil dat elke naam geprint wordt, dus het eerste woord is niet 'namen' maar..."
+                - "code": " 'mensen krijgt een kleuren shirt' "
+                  "feedback": "Er is geen variabele die 'mensen' heet"
+            correct_answer: "B"
+            hint: "Let op de aanhalingstekens!"
+            question_score: 10
+        9:
+            question_text: "Wat is de eerste vraag die Hedy zal vragen als je dit programma uitvoert?"
+            code: |-
+                gangen = voorgerecht, hoofdgerecht, nagerecht
+                namen = Timon, Onno
+                for naam in namen
+                    for gang in gangen
+                        eten = ask naam ', wat wil je graag als ' gang '?'
+                        print naam ' bestelt ' eten ' als ' gang
+            mp_choice_options:
+                - "option_text": "Timon, wat wil je graag als voorgerecht?"
+                  "feedback": "Perfect!"
+                - "option_text": "Onno, wat wil je graag als voorgerecht?"
+                  "feedback": "Timon staat eerst op het lijstje!"
+                - "option_text": "Timon, wat wil je graag als nagerecht?"
+                  "feedback": "Voorgerechten staan eerst op het lijstje"
+                - "option_text": "Dat weet je nog niet. Hedy kiest iets at random"
+                  "feedback": "Er is geen 'at random' commando in deze code."
+            correct_answer: "A"
+            hint: "Van beide lijstjes wordt de eerste optie eerst gevraagd."
+            question_score: 10
+        10:
+            question_text: "Wat is waar over deze code?"
+            code: |-
+                prijzen = 1 miljoen dollar, auto, boterham
+                namen = Bob, Patrick, Sandy, Larry
+                for prijs in prijzen
+                    print 'De ' prijs 'is gewonnen door ' namen at random
+            mp_choice_options:
+                - "option_text": "Iedereen wint minstens één prijs." ""
+                  "feedback": "Dat is niet waar. Je kunt ook zonder prijs eindigen."
+                - "option_text": "Alle prijzen gaan altijd naar één persoon."
+                  "feedback": "Dat is niet waar. Er wordt random gekozen wie er wint"
+                - "option_text": "Larry wint nooit een prijs"
+                  "feedback": "Dat is niet waar. Larry heeft evenveel kans als de anderen"
+                - "option_text": "Misschien wint iemand 2 prijzen."
+                  "feedback": "Jij snapt 'em! "
+            correct_answer: "D"
+            hint: "Probeer mogelijke uitvoer te bedenken van de code."
+            question_score: 10
