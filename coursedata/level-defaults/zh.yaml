@@ -380,7 +380,7 @@
 15:
     start_code: |-
         answer = 0
-        while correct_answer != 25
+        while answer != 25
             answer = ask '5乘以5等于几?'
         print '已经给出了一个很好的答案'
     intro_text: "我们将要学习一个新的循环, 就是`while` 循环! 只要语句为真/有效，我们就不停的执行循环语句! 因此在范例代码中, 我们一直不停的执行循环语句直到一个正确的答案被给出. 如果正确答案一直没有被给出, 这个循环语句就不会结束!"
@@ -390,7 +390,7 @@
         example: "例如: while correct_answer is False"
         demo_code: |-
             answer = 0
-            while correct_answer != 25
+            while answer != 25
                 answer = ask '5乘以5等于几?'
             print '已经给出了一个很好的答案'
     -   name: "Smaller while (直到小于)"

@@ -37,6 +37,12 @@ class TestsLevel7(HedyTester):
 
     self.single_level_tester(code=code, expected=expected, output=output)
 
+  def test_repeat_with_undefined_variable(self):
+    code = textwrap.dedent("""\
+    repeat n times print 'me wants a cookie!'""")
+
+    self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
+
   def test_repeat_basic_print(self):
     code = textwrap.dedent("""\
     repeat 5 times print 'me wants a cookie!'""")
