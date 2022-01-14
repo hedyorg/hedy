@@ -673,10 +673,10 @@ def programs_page(request):
     from_user = request.args.get('user') or None
     if from_user and not is_admin(user):
         if not is_teacher(user):
-            return utils.page_403(ui_message='not_teacher')
+            return utils.error_page(error=403, ui_message='not_teacher')
         students = DATABASE.get_teacher_students(username)
         if from_user not in students:
-            return utils.page_403(ui_message='not_enrolled')
+            return utils.error_page(error=403, ui_message='not_enrolled')
 
     adventures = load_adventure_for_language(g.lang)
 
@@ -700,7 +700,7 @@ def get_program_stats():
 
     user = current_user()
     if not is_admin(user):
-        return utils.page_403(ui_message='unauthorized')
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     data = DATABASE.get_all_program_stats(start_date, end_date)
     per_level_data = _to_dict_on_key(data, lambda e: e["level"])
@@ -762,7 +762,7 @@ def _add_exception_data(entry, data, include_failed_runs=False):
 def query_logs():
     user = current_user()
     if not is_admin(user):
-        return utils.page_403(ui_message='unauthorized')
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     body = request.json
     if body is not None and not isinstance(body, dict):
@@ -780,7 +780,7 @@ def get_log_results():
 
     user = current_user()
     if not is_admin(user):
-        return utils.page_403(ui_message='unauthorized')
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
@@ -1013,11 +1013,11 @@ def is_quiz_enabled():
 
 
 def quiz_disabled_error():
-    return utils.page_404('Hedy quiz disabled!', menu=False, iframe=True)
+    return utils.error_page(error=404, page_error='Hedy quiz disabled!', menu=False, iframe=True)
 
 
 def no_quiz_data_error():
-    return utils.page_404('No quiz data found for this level', menu=False, iframe=True)
+    return utils.error_page(error=404, page_error='No quiz data found for this level', menu=False, iframe=True)
 
 
 # routing to index.html
@@ -1033,9 +1033,9 @@ def index(level, step):
         try:
             g.level = level = int(level)
         except:
-            return utils.page_404(ui_message='no_such_level')
+            return utils.error_page(error=404, ui_message='no_such_level')
     else:
-        return utils.page_404(ui_message='no_such_level')
+        return utils.error_page(error=404, ui_message='no_such_level')
 
     g.prefix = '/hedy'
 
@@ -1046,13 +1046,13 @@ def index(level, step):
     if step and isinstance(step, str) and len(step) > 2:
         result = DATABASE.program_by_id(step)
         if not result:
-            return utils.page_404(ui_message='no_such_program')
+            return utils.error_page(error=404, ui_message='no_such_program')
 
         user = current_user()
         public_program = 'public' in result and result['public']
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(
                 user):
-            return utils.page_404(ui_message='no_such_program')
+            return utils.error_page(error=404, ui_message='no_such_program')
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
         if 'adventure_name' in result:
@@ -1063,7 +1063,7 @@ def index(level, step):
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
     if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
-        return utils.page_404(ui_message='no_such_level')
+        return utils.error_page(error=404, ui_message='no_such_level')
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
@@ -1086,7 +1086,7 @@ def view_program(id):
 
     result = DATABASE.program_by_id(id)
     if not result:
-        return utils.page_404(ui_message='no_such_program')
+        return utils.error_page(error=404, ui_message='no_such_program')
 
     # If we asked for a specific language, use that, otherwise use the language
     # of the program's author.
@@ -1139,14 +1139,14 @@ def client_messages():
 
 @app.errorhandler(404)
 def not_found(exception):
-    return utils.page_404(ui_message='page_not_found')
+    return utils.error_page(error=404, ui_message='page_not_found')
 
 
 @app.errorhandler(500)
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return utils.page_500()
+    return utils.error_page(error=500)
 
 
 @app.route('/index.html')
@@ -1181,7 +1181,7 @@ def main_page(page):
             return render_template('landing-page.html', page_title=hedyweb.get_page_title(page),
                                    text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
-            return utils.page_403(ui_message='not_user')
+            return utils.error_page(error=403, ui_message='not_user')
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -1196,11 +1196,11 @@ def main_page(page):
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
                                    welcome_teacher=welcome_teacher)
         else:
-            return utils.page_403(ui_message='not_teacher')
+            return utils.error_page(error=403, ui_message='not_teacher')
 
     if page == 'stats':
         if not is_admin(current_user()):
-            return utils.page_403(ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message='unauthorized')
         return render_template('admin-stats.html')
 
     requested_page = hedyweb.PageTranslations(page)
@@ -1533,7 +1533,7 @@ def teacher_invitation(code):
     lang = g.lang
 
     if os.getenv('TEACHER_INVITE_CODE') != code:
-        return utils.page_404(ui_message='invalid_teacher_invitation_code')
+        return utils.error_page(error=404, ui_message='invalid_teacher_invitation_code')
     if not user['username']:
         return render_template('teacher-invitation.html')
 
