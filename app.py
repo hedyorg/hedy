@@ -2,8 +2,8 @@
 import sys
 from website.yaml_file import YamlFile
 
-if (sys.version_info.major < 3 or sys.version_info.minor < 6):
-    print('Hedy requires Python 3.6 or newer to run. However, your version of Python is',
+if (sys.version_info.major < 3 or sys.version_info.minor < 7):
+    print('Hedy requires Python 3.7 or newer to run. However, your version of Python is',
           '.'.join([str(sys.version_info.major), str(sys.version_info.minor), str(sys.version_info.micro)]))
     quit()
 

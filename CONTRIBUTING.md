@@ -21,7 +21,7 @@ The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas t
 Run Hedy code on your machine
 ------------
 
-If you are going to contribute to the code of Hedy, you will probably want to run the code on your own computer. For this you need to install Python 3.6 or higher. Then, here's how to get started once you have downloaded or cloned the code:
+If you are going to contribute to the code of Hedy, you will probably want to run the code on your own computer. For this you need to install Python 3.7 or higher. Then, here's how to get started once you have downloaded or cloned the code:
 
 ```bash
 $ python3 -m venv .env
