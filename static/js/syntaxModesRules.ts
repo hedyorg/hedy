@@ -135,10 +135,10 @@ const LEVELS = [
     name: 'level3',
     rules: pipe(baseRules(),
       rule_printSpace('expression_eol'),
-      rule_isAsk(),
-      rule_is(),
+      rule_isAsk('gobble'),
+      rule_is('gobble'),
       rule_turtle(),
-      rule_sleep()
+      rule_sleep(),
     ),
   },
   {
