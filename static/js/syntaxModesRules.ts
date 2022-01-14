@@ -177,12 +177,11 @@ const LEVELS = [
       rule_sleep(),
       rule_ifElseOneLine(),
       rule_expressions(),
-      rule_repeat(),
-      rule_arithmetic(),
+      rule_arithmetic()
     ),
   },
   {
-    // Adds indented blocks -- no changes to highlighter necessary
+    // Adds repeat
     name: 'level7',
     rules: pipe(baseRules(),
       rule_printSpace(),
@@ -190,14 +189,14 @@ const LEVELS = [
       rule_is(),
       rule_turtle(),
       rule_sleep(),
-      rule_ifElse(),
+      rule_ifElseOneLine(),
       rule_expressions(),
-      rule_repeat(),
       rule_arithmetic(),
+      rule_repeat()
     ),
   },
   {
-    // Replaces 'repeat' with 'for'
+    // Adds indented blocks -- if/else become multi-line
     name: 'level8',
     rules: pipe(baseRules(),
       rule_printSpace(),
@@ -208,12 +207,27 @@ const LEVELS = [
       rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
-      rule_for()
+      rule_repeat()
+    ),
+  },
+  {
+    // Todo Timon: I think nothing changes?
+    name: 'level9',
+    rules: pipe(baseRules(),
+      rule_printSpace(),
+      rule_isAsk(),
+      rule_is(),
+      rule_turtle(),
+      rule_sleep(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_repeat()
     ),
   },
   {
     // Replaces 'repeat' with 'for'
-    name: 'level9and10',
+    name: 'level10',
     rules: pipe(baseRules(),
     rule_printSpace(),
     rule_isAsk(),
