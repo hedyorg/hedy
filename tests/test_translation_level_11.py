@@ -15,7 +15,7 @@ class TestsTranslationLevel11(HedyTester):
     level = 11
     keywords_from = hedy_translation.keywords_to_dict('en')
     keywords_to = hedy_translation.keywords_to_dict('nl')
-    all_kwords = hedy_translation.all_keywords_to_dict()
+    all_keywords = hedy_translation.all_keywords_to_dict()
     
     def test_for_in_english_dutch(self):
         code = textwrap.dedent("""\
@@ -29,13 +29,13 @@ class TestsTranslationLevel11(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand(HedyTester.as_list_of_tuples(all_kwords["ask"], all_kwords["for"], all_kwords["in"], all_kwords["range"], all_kwords["to"], all_kwords["print"],hedy_translation.KEYWORD_LANGUAGES))
-    def test_for_in_all_lang(self, ask_kword, for_kword, in_kword, range_kword, to_kword, print_kword, lang):
+    @parameterized.expand(HedyTester.as_list_of_tuples(all_keywords["ask"], all_keywords["for"], all_keywords["in"], all_keywords["range"], all_keywords["to"], all_keywords["print"],hedy_translation.KEYWORD_LANGUAGES))
+    def test_for_in_all_lang(self, ask_keyword, for_keyword, in_keyword, range_keyword, to_keyword, print_keyword, lang):
         code = textwrap.dedent(f"""\
-        nummer = {ask_kword} 'hoe oud ben je'
-        {for_kword} counter {in_kword} {range_kword} 1 {to_kword} 5
-            {for_kword} count {in_kword} {range_kword} nummer {to_kword} 0
-                {print_kword} 'hoi' counter""")
+        nummer = {ask_keyword} 'hoe oud ben je'
+        {for_keyword} counter {in_keyword} {range_keyword} 1 {to_keyword} 5
+            {for_keyword} count {in_keyword} {range_keyword} nummer {to_keyword} 0
+                {print_keyword} 'hoi' counter""")
 
         result = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)
         expected = textwrap.dedent("""\

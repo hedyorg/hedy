@@ -13,7 +13,7 @@ import hedy_translation
 
 class TestsTranslationLevel2(HedyTester):
     level = 2
-    all_kwords = hedy_translation.all_keywords_to_dict()
+    all_keywords = hedy_translation.all_keywords_to_dict()
 
     def test_print(self):
         code = "print Hallo welkom bij Hedy!"
@@ -114,12 +114,12 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand(HedyTester.as_list_of_tuples(all_kwords["ask"], all_kwords["is"] ,all_kwords["print"], hedy_translation.KEYWORD_LANGUAGES))
-    def test_ask_print_all_lang(self,ask_kword, is_kword, print_kword, lang):
+    @parameterized.expand(HedyTester.as_list_of_tuples(all_keywords["ask"], all_keywords["is"] ,all_keywords["print"], hedy_translation.KEYWORD_LANGUAGES))
+    def test_ask_print_all_lang(self,ask_keyword, is_keyword, print_keyword, lang):
         code = textwrap.dedent(f"""\
-        {print_kword} Hello, tell us your name please
-        name {is_kword} {ask_kword} Whats your name?
-        {print_kword} name is your name!""")
+        {print_keyword} Hello, tell us your name please
+        name {is_keyword} {ask_keyword} Whats your name?
+        {print_keyword} name is your name!""")
     
         result = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)
         
