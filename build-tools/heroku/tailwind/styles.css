@@ -322,3 +322,45 @@ p.close-dialog {
 .explore-program-box-title {
   @apply text-gray-700 block text-lg text-center mt-2 pl-16 border-b border-gray-700;
 }
+=======
+/* Tab content - closed */
+.accordion .tab-content {
+  max-height: 0;
+  -webkit-transition: max-height .35s;
+  -o-transition: max-height .35s;
+  transition: max-height .35s;
+}
+
+/* Icon */
+.accordion .accordion-tab label::before {
+  float: right;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5;
+  font-size: 1.25rem;
+  font-weight: bolder;
+  text-align: center;
+  -webkit-transition: all .35s;
+  -o-transition: all .35s;
+  transition: all .35s;
+}
+
+/* :checked - resize to full height */
+.accordion .accordion-tab input:checked ~ .tab-content {
+  max-height: 3000vh;
+}
+
+/* Icon formatting - closed */
+.accordion .accordion-tab input[type=checkbox] + label::before {
+  content: ">";
+  transform: rotate(90deg);
+  margin-right: 5px;
+}
+
+/* Icon formatting - open */
+.accordion .accordion-tab input[type=checkbox]:checked + label::before {
+  transform: rotate(270deg);
+}
