@@ -11,7 +11,7 @@
         <tbody>
           {% for class in teacher_classes %}
             <tr>
-              <td class="text-center p-2"><a href="{{localize_link ('for-teachers/class/' + class.id)}}">{{class.name|e}}</a></td>
+              <td class="text-center p-2"><a href="for-teachers/class/{{class.id}}">{{class.name|e}}</a></td>
               <td class="text-center p-2">{{class.students|length}}</td></tr>
             </tr>
           {% endfor %}

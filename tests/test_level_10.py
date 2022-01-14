@@ -1,7 +1,6 @@
 import hedy
 import textwrap
 from test_level_01 import HedyTester
-from test_translating import check_local_lang_bool
 
 class TestsLevel10(HedyTester):
   level = 10
@@ -15,9 +14,14 @@ class TestsLevel10(HedyTester):
     expected = textwrap.dedent("""\
     dieren = ['hond', 'kat', 'papegaai']
     for dier in dieren:
-      print(f'{dier}')""")
+      print(f'{dier}')
+      time.sleep(0.1)""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['is', 'for', 'print'])
+
   def test_for_list_multiple_lines(self):
     code = textwrap.dedent("""\
     familie is baby, mommy, daddy, grandpa, grandma
@@ -33,20 +37,8 @@ class TestsLevel10(HedyTester):
       print(f'{shark} shark tudutudutudu')
       print(f'{shark} shark tudutudutudu')
       print(f'{shark} shark tudutudutudu')
-      print(f'{shark} shark')""")
+      print(f'{shark} shark')
+      time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
-    
-  @check_local_lang_bool
-  def test_for_list_dutch(self):
-    code = textwrap.dedent("""\
-    dieren is hond, kat, papegaai
-    voor dier in dieren
-      print dier""")
 
-    expected = textwrap.dedent("""\
-    dieren = ['hond', 'kat', 'papegaai']
-    for dier in dieren:
-      print(f'{dier}')""")
-
-    self.single_level_tester(code=code, expected=expected)

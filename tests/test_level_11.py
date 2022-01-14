@@ -5,16 +5,6 @@ from test_level_01 import HedyTester
 class TestsLevel11(HedyTester):
   level = 11
 
-  def test_if_with_indent(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    if naam is Hedy
-        print 'koekoek'""")
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    if str(naam) == str('Hedy'):
-      print(f'koekoek')""")
-    self.single_level_tester(code=code, expected=expected)
 
   def test_if_else(self):
     code = textwrap.dedent("""\
@@ -52,7 +42,8 @@ class TestsLevel11(HedyTester):
     step = 1 if int(2) < int(4) else -1
     for a in range(int(2), int(4) + step, step):
       a = int(a) + int(2)
-      b = int(b) + int(2)""")
+      b = int(b) + int(2)
+      time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -83,11 +74,13 @@ class TestsLevel11(HedyTester):
     step = 1 if int(1) < int(10) else -1
     for i in range(int(1), int(10) + step, step):
       print(f'{i}')
+      time.sleep(0.1)
     print(f'wie niet weg is is gezien')""")
 
-
-
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['for', 'print', 'print'])
 
   def test_for_loop_with_assignment(self):
     code = textwrap.dedent("""\
@@ -96,11 +89,13 @@ class TestsLevel11(HedyTester):
     expected = textwrap.dedent("""\
       step = 1 if int(1) < int(10) else -1
       for i in range(int(1), int(10) + step, step):
-        a = int(i) + int(1)""")
+        a = int(i) + int(1)
+        time.sleep(0.1)""")
 
-
-
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['for', 'is', 'addition'])
 
   def test_reverse_range(self):
     code = textwrap.dedent("""\
@@ -111,11 +106,13 @@ class TestsLevel11(HedyTester):
     step = 1 if int(10) < int(1) else -1
     for i in range(int(10), int(1) + step, step):
       print(f'{i}')
+      time.sleep(0.1)
     print(f'wie niet weg is is gezien')""")
 
-
-
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['for', 'print', 'print'])
 
 
   def test_if_under_else_in_for(self):
@@ -138,7 +135,8 @@ class TestsLevel11(HedyTester):
       else:
         print(f'Dat is goed!')
       if str(antwoord) == str('25'):
-        i = '10'""")
+        i = '10'
+      time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -158,6 +156,7 @@ class TestsLevel11(HedyTester):
         antwoord = input(f'Wat is 5*5')
         if str(antwoord) == str('24'):
           print(f'fout')
+        time.sleep(0.1)
       print(f'klaar met for loop')""")
 
 
@@ -174,7 +173,8 @@ class TestsLevel11(HedyTester):
       step = 1 if int(0) < int(10) else -1
       for i in range(int(0), int(10) + step, step):
         if str(i) == str('2'):
-          print(f'2')""")
+          print(f'2')
+        time.sleep(0.1)""")
 
 
 

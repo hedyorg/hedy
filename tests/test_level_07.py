@@ -25,7 +25,8 @@ class TestsLevel7(HedyTester):
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):
-      print(f'me wants a cookie!')""")
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
 
     output = textwrap.dedent("""\
     me wants a cookie!
@@ -36,13 +37,20 @@ class TestsLevel7(HedyTester):
 
     self.single_level_tester(code=code, expected=expected, output=output)
 
+  def test_repeat_with_undefined_variable(self):
+    code = textwrap.dedent("""\
+    repeat n times print 'me wants a cookie!'""")
+
+    self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
+
   def test_repeat_basic_print(self):
     code = textwrap.dedent("""\
     repeat 5 times print 'me wants a cookie!'""")
 
     expected = textwrap.dedent("""\
     for i in range(int('5')):
-      print(f'me wants a cookie!')""")
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
 
     output = textwrap.dedent("""\
     me wants a cookie!
@@ -60,7 +68,8 @@ class TestsLevel7(HedyTester):
 
     expected = textwrap.dedent("""\
     for i in range(int('10')):
-      print(f'me wants a cookie!')""")
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
 
     output = textwrap.dedent("""\
     me wants a cookie!
@@ -73,7 +82,11 @@ class TestsLevel7(HedyTester):
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!""")
-    self.single_level_tester(code=code, expected=expected, output=output)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['repeat','print'],
+      output=output)
 
   def test_repeat_with_collision(self):
       code = textwrap.dedent("""\
@@ -85,6 +98,7 @@ class TestsLevel7(HedyTester):
       i = 'hallo!'
       for _i in range(int('5')):
         print(f'me wants a cookie!')
+        time.sleep(0.1)
       print(f'{i}')""")
 
       output = textwrap.dedent("""\
@@ -95,4 +109,8 @@ class TestsLevel7(HedyTester):
       me wants a cookie!
       hallo!""")
 
-      self.single_level_tester(code=code, expected=expected, output=output)
+      self.single_level_tester(
+        code=code,
+        expected=expected,
+        expected_commands=['is', 'repeat', 'print', 'print'],
+        output=output)

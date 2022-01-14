@@ -253,7 +253,9 @@ class TestAuth(AuthHelper):
             {'username': username, 'password': 'foo'},
             {'username': username, 'password': 'foobar'},
             {'username': username, 'password': 'foobar', 'email': 'me@something'},
-            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience':[2]},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': 123},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': True},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': [2]},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': 'foo'},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'experience_languages': 'python'}
         ]
@@ -466,6 +468,8 @@ class TestAuth(AuthHelper):
             {'country': 'Netherlands'},
             {'gender': 0},
             {'gender': 'a'},
+            {'language': True},
+            {'language': 123},
             {'prog_experience': 1},
             {'prog_experience': 'foo'},
             {'prog_experience': True},
@@ -649,12 +653,15 @@ class TestProgram(AuthHelper):
 
         # WHEN retrieving programs after saving a program
         saved_programs = self.get_data('programs_list')['programs']
+        print(saved_programs)
 
         # THEN verify that the program we just saved is in the list
         self.assertEqual(len(saved_programs), 1)
         saved_program = saved_programs[0]
         for key in program:
-            self.assertEqual(program[key], saved_program[key])
+            # WHEN we create a program an achievement is achieved, being in the response but not the saved_program
+            if key != "achievements":
+                self.assertEqual(program[key], saved_program[key])
 
     def test_invalid_make_program_public(self):
         # GIVEN a logged in user
@@ -741,8 +748,8 @@ class TestProgram(AuthHelper):
         program_id = '123456'
 
         # WHEN deleting a program that does not exist
-        # THEN receive a not ound response code from the server
-        self.get_data('programs/delete/' + program_id, expect_http_code=404)
+        # THEN receive a not found response code from the server
+        self.post_data('programs/delete/', {'id': program_id}, expect_http_code=404)
 
     def test_valid_delete_program(self):
         # GIVEN a logged in user with at least one program
@@ -752,9 +759,7 @@ class TestProgram(AuthHelper):
 
         # WHEN deleting a program
         # THEN receive an OK response code from the server
-        headers = self.get_data('programs/delete/' + program_id, expect_http_code=302, return_headers=True)
-        # THEN verify that the header has a `location` header pointing to `/programs`
-        self.assertEqual(headers['location'], HOST + 'programs')
+        headers = self.post_data('programs/delete/', {'id': program_id}, return_headers=True)
 
         saved_programs = self.get_data('programs_list')['programs']
         for program in saved_programs:
@@ -897,13 +902,13 @@ class TestClasses(AuthHelper):
         self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes') [0]
 
+        # WHEN attempting to join a class without being logged in
+        # THEN receive a forbidden status code from the server
+        self.post_data('class/join', {'id': Class['id']}, no_cookie=True, expect_http_code=403)
+
         # GIVEN a student (user without teacher permissions)
         self.given_fresh_user_is_logged_in()
         student = self.user
-
-        # WHEN attempting to join a class without being logged in
-        # THEN receive a forbidden status code from the server
-        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], no_cookie=True, expect_http_code=403)
 
         # WHEN retrieving the short link of a class
         # THEN receive a redirect to `class/ID/join/LINK`
@@ -912,16 +917,8 @@ class TestClasses(AuthHelper):
             raise Exception('Invalid or missing redirect link')
 
         # WHEN joining a class
-        # THEN receive a redirect to `class/ID/join/LINK`
-        body = self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
-        if not re.search(HOST + 'my-profile', body):
-            raise Exception('Invalid redirect')
-
-        # WHEN joining a class again (idempotent call)
-        # THEN receive a redirect to `class/ID/join/LINK`
-        body = self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
-        if not re.search(HOST + 'my-profile', body):
-            raise Exception('Invalid redirect')
+        # THEN we receive a 200 code
+        body = self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
 
         # WHEN getting own profile after joining a class
         profile = self.get_data('profile')
@@ -944,7 +941,7 @@ class TestClasses(AuthHelper):
         # GIVEN a student (user without teacher permissions) that has joined the class
         self.given_fresh_user_is_logged_in()
         student = self.user
-        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
+        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
 
         # GIVEN the aforementioned teacher
         self.switch_user(teacher)
@@ -975,7 +972,7 @@ class TestClasses(AuthHelper):
         # GIVEN a student (user without teacher permissions) that has joined the class and has a public program
         self.given_fresh_user_is_logged_in()
         student = self.user
-        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
+        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
         # GIVEN a student with two programs, one public and one private
         public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
         public_program_id = self.post_data('programs', public_program)['id']

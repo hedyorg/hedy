@@ -15,7 +15,8 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle()
+        extra_check_function=self.is_not_turtle(),
+        expected_commands=['print']
       )
 
     def test_print_var_brackets(self):
@@ -54,6 +55,19 @@ class TestsLevel18(HedyTester):
           expected=expected,
           extra_check_function=self.is_not_turtle()
         )
+
+    def test_if_with_equals_sign(self):
+      code = textwrap.dedent("""\
+      naam is 'Hedy'
+      if naam == Hedy:
+          print('koekoek')""")
+
+      expected = textwrap.dedent("""\
+      naam = 'Hedy'
+      if str(naam) == str('Hedy'):
+        print(f'koekoek')""")
+
+      self.single_level_tester(code=code, expected=expected)
 
     # issue also in level 17, leaving for now.
     # def test_bigger(self):
@@ -123,6 +137,7 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code=code,
         expected=expected,
+        expected_commands=['input', 'if', 'print', 'print', 'print', 'print'],
         extra_check_function=self.is_not_turtle()
       )
 
@@ -139,7 +154,8 @@ class TestsLevel18(HedyTester):
       step = 1 if int(2) < int(4) else -1
       for a in range(int(2), int(4) + step, step):
         a = a + 2
-        b = b + 2""")
+        b = b + 2
+        time.sleep(0.1)""")
 
       self.multi_level_tester(
         code=code,
@@ -157,7 +173,8 @@ class TestsLevel18(HedyTester):
       for i in range(int(1), int(3) + step, step):
         step = 1 if int(1) < int(4) else -1
         for j in range(int(1), int(4) + step, step):
-          print(f'rondje: {i} tel: {j}')""")
+          print(f'rondje: {i} tel: {j}')
+          time.sleep(0.1)""")
 
       self.multi_level_tester(
 
@@ -189,6 +206,17 @@ class TestsLevel18(HedyTester):
       )
 
     # negative tests
+
+    def test_while_undefined_var(self):
+      code = textwrap.dedent("""\
+        while antwoord != 25:
+            print('hoera')""")
+
+      self.single_level_tester(
+        code=code,
+        exception=hedy.exceptions.UndefinedVarException
+      )
+
     def test_var_undefined_error_message(self):
       code = textwrap.dedent("""\
         naam is 'Hedy'

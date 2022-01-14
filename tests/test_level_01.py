@@ -1,7 +1,7 @@
 import hedy
 import textwrap
 from Tester import HedyTester
-from test_translating import check_local_lang_bool
+
 
 
 class TestsLevel1(HedyTester):
@@ -25,30 +25,42 @@ class TestsLevel1(HedyTester):
   def test_print(self):
     code = "print Hallo welkom bij Hedy!"
     expected = "print('Hallo welkom bij Hedy!')"
+    expected_commands = ['print']
 
     self.single_level_tester(
       code=code,
       expected=expected,
-      output='Hallo welkom bij Hedy!'
+      output='Hallo welkom bij Hedy!',
+      expected_commands=expected_commands
     )
 
+    self.assertEqual(['Hallo welkom bij Hedy!'], hedy.all_print_arguments(code, self.level))
+
   def test_print_has_no_turtle(self):
-    result = hedy.transpile_inner("print koekoek", self.level)
+    code = "print koekoek"
+    result = hedy.transpile_inner(code, self.level)
     expected = False
     self.assertEqual(expected, result.has_turtle)
+    self.assertEqual(['koekoek'], hedy.all_print_arguments(code, self.level))
 
 
   def test_print_with_comma(self):
     code = "print iedereen zegt tegen hem: NERD, omdat hij de slimste van de klas is."
     expected = "print('iedereen zegt tegen hem: NERD, omdat hij de slimste van de klas is.')"
+    expected_commands = ['print']
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=expected_commands
+    )
 
   def test_print_multiple_lines(self):
     code = "print Hallo welkom bij Hedy\nprint Mooi hoor"
     expected = "print('Hallo welkom bij Hedy')\nprint('Mooi hoor')"
 
     self.single_level_tester(code=code, expected=expected)
+    self.assertEqual(['Hallo welkom bij Hedy', 'Mooi hoor'], hedy.all_print_arguments(code, self.level))
 
 
   def test_print_with_quotes(self):
@@ -89,24 +101,16 @@ class TestsLevel1(HedyTester):
     print('hallo!')""")
 
     self.single_level_tester(code=code, expected=expected)
-    
-  @check_local_lang_bool
-  def test_print_dutch(self):
+
+  def test_print_nl(self):
     code = "print Hallo welkom bij Hedy!"
     expected = "print('Hallo welkom bij Hedy!')"
     output = 'Hallo welkom bij Hedy!'
-    self.single_level_tester(code=code, expected=expected, output=output)
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             output=output,
+                             lang='nl')
 
-  
-  @check_local_lang_bool
-  def test_ask_dutch_error(self):
-    code = textwrap.dedent("""ask Heb je er zin?""")
-
-    with self.assertRaises(hedy.exceptions.ParseException) as context:
-      result = hedy.transpile(code, self.level, lang="nl")
-    self.assertEqual('Parse', context.exception.error_code)
-    self.assertEqual(1, context.exception.error_location[0])
-    self.assertEqual('?', context.exception.error_location[1])
 
   # ask tests
   def test_ask(self):
@@ -125,6 +129,40 @@ class TestsLevel1(HedyTester):
     answer = input('\\'Welcome to OceanView?\\'')""")
 
     self.single_level_tester(code=code, expected=expected)
+    
+  def test_ask_nl_code_transpiled_in_nl(self):
+    code = "vraag Heb je er zin in?"
+    expected = "answer = input('Heb je er zin in?')"
+
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             lang='nl')
+
+  def test_ask_en_code_transpiled_in_nl(self):
+    code = "ask Heb je er zin in?"
+    expected = "answer = input('Heb je er zin in?')"
+
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             lang='nl')
+
+  def test_mixes_languages_nl_en(self):
+    code = textwrap.dedent("""\
+    vraag Heb je er zin in?
+    echo
+    ask are you sure?
+    print mooizo!""")
+
+    expected = textwrap.dedent("""\
+    answer = input('Heb je er zin in?')
+    print(answer)
+    answer = input('are you sure?')
+    print('mooizo!')""")
+
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             expected_commands=['ask', 'echo', 'ask', 'print'],
+                             lang='nl')
 
   # echo tests
   def test_echo_without_argument(self):
@@ -173,8 +211,7 @@ class TestsLevel1(HedyTester):
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      extra_check_function=self.is_turtle()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_multiple_forward_without_arguments(self):
@@ -252,7 +289,10 @@ class TestsLevel1(HedyTester):
       answer = input('Wat is je lievelingskleur')
       print('je lievelingskleur is '+answer)""")
 
-      self.single_level_tester(code=code, expected=expected)
+      self.single_level_tester(
+        code=code,
+        expected=expected,
+        expected_commands=['print', 'ask', 'echo'])
   def test_forward_turn_combined(self):
     code = "forward 50\nturn\nforward 100"
     expected = textwrap.dedent("""\
@@ -265,7 +305,8 @@ class TestsLevel1(HedyTester):
       max_level=7,
       code=code,
       expected=expected,
-      extra_check_function=self.is_turtle()
+      extra_check_function=self.is_turtle(),
+      expected_commands=['forward', 'turn', 'forward']
     )
 
   # markup tests
@@ -286,14 +327,14 @@ class TestsLevel1(HedyTester):
 
   def test_word_plus_period_gives_invalid(self):
     code = "word."
-    self.single_level_tester(code, exception=hedy.exceptions.InvalidCommandException)
+    self.single_level_tester(code, exception=hedy.exceptions.MissingCommandException)
 
   def test_empty_gives_exception(self):
     self.single_level_tester("", exception=hedy.exceptions.EmptyProgramException)
 
   def test_non_keyword_gives_Invalid(self):
     code = "groen"
-    self.single_level_tester(code, exception=hedy.exceptions.InvalidCommandException)
+    self.single_level_tester(code, exception=hedy.exceptions.MissingCommandException)
 
   def test_lonely_echo_gives_LonelyEcho(self):
     code = "echo wat dan?"

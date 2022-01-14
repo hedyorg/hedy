@@ -1,3 +1,5 @@
+import json
+
 from website.auth import requires_login, is_teacher, current_user
 import utils
 import uuid
@@ -10,9 +12,12 @@ TRANSLATIONS = hedyweb.Translations ()
 from config import config
 cookie_name     = config ['session'] ['cookie_name']
 
-def routes (app, database):
+
+def routes (app, database, achievements):
     global DATABASE
+    global ACHIEVEMENTS
     DATABASE = database
+    ACHIEVEMENTS = achievements
 
     @app.route('/classes', methods=['GET'])
     @requires_login
@@ -45,9 +50,18 @@ def routes (app, database):
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+
+        achievement = None
+        if len(students) > 20:
+            achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "full_house")
+        if achievement:
+            achievement = json.dumps(achievement)
+
         return render_template ('class-overview.html', current_page='for-teachers',
                                 page_title=hedyweb.get_page_title('class overview'),
-                                class_info={'students': students, 'link': '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+                                achievement=achievement,
+                                class_info={'students': students, 'link': '/hedy/l/' + Class ['link'],
+                                            'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
@@ -77,7 +91,9 @@ def routes (app, database):
         }
 
         DATABASE.store_class (Class)
-
+        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "ready_set_education")
+        if achievement:
+            return {'id': Class['id'], 'achievement': achievement}, 200
         return {'id': Class['id']}, 200
 
     @app.route('/class/<class_id>', methods=['PUT'])
@@ -104,7 +120,9 @@ def routes (app, database):
                 return "duplicate", 200
 
         Class = DATABASE.update_class (class_id, body ['name'])
-
+        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "on_second_thoughts")
+        if achievement:
+            return {'achievement': achievement}, 200
         return {}, 200
 
     @app.route('/class/<class_id>', methods=['DELETE'])
@@ -115,7 +133,9 @@ def routes (app, database):
             return 'No such class', 404
 
         DATABASE.delete_class (Class)
-
+        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "end_of_semester")
+        if achievement:
+            return {'achievement': achievement}, 200
         return {}, 200
 
     @app.route('/class/<class_id>/prejoin/<link>', methods=['GET'])
@@ -135,31 +155,37 @@ def routes (app, database):
         return render_template ('class-prejoin.html', page_title=hedyweb.get_page_title('join class'),
             current_page='my-profile',
             class_info={
-                'link': '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + g.lang,
+                'id': Class ['id'],
                 'name': Class ['name'],
             })
 
-    @app.route('/class/<class_id>/join/<link>', methods=['GET'])
+    @app.route('/class/join', methods=['POST'])
     @requires_login
-    def join_class (user, class_id, link):
-        Class = DATABASE.get_class (class_id)
-        if not Class or Class ['link'] != link:
+    def join_class(user):
+        body = request.json
+        if 'id' in body:
+            Class = DATABASE.get_class(body['id'])
+        if not Class or Class ['id'] != body['id']:
             return utils.page_404 (ui_message='invalid_class_link')
 
-        DATABASE.add_student_to_class (Class ['id'], user ['username'])
-
-        return redirect(request.url.replace('/class/' + class_id + '/join/' + link, '/my-profile'), code=302)
+        DATABASE.add_student_to_class(Class['id'], user['username'])
+        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "epic_education")
+        if achievement:
+            return {'achievement': achievement}, 200
+        return {}, 200
 
     @app.route('/class/<class_id>/student/<student_id>', methods=['DELETE'])
     @requires_login
     def leave_class (user, class_id, student_id):
-
         Class = DATABASE.get_class (class_id)
-        if not Class or Class ['teacher'] != user ['username']:
+        if not Class or Class ['teacher'] != user ['username'] or student_id != user ['username']:
             return 'No such class', 404
 
         DATABASE.remove_student_from_class (Class ['id'], student_id)
-
+        if Class['teacher'] == user['username']:
+            achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "detention")
+        if achievement:
+            return {'achievement': achievement}, 200
         return {}, 200
 
     @app.route('/for-teachers/customize-class/<class_id>', methods=['GET'])
@@ -217,9 +243,10 @@ def routes (app, database):
         customizations['hide_prev_level'] = body.get('hide_prev_level')
         customizations['hide_next_level'] = body.get('hide_next_level')
 
-
-        Class = DATABASE.update_customizations_class(customizations)
-
+        DATABASE.update_customizations_class(customizations)
+        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "my_class_my_rules")
+        if achievement:
+            return {'achievement': achievement}, 200
         return {}, 200
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])

@@ -14,13 +14,6 @@
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
     <div id="modal-mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
     <div id="modal-content" class="hidden fixed z-50 p-12 pl-16 pr-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
-       <div id="modal-alert" class="hidden">
-          <div id="modal-alert-title" class="text-white mb-8 text-xl hidden"></div>
-          <div id="modal-alert-text" class="text-white mb-8 text-xl"></div>
-          <div class="ml-auto mr-auto mt-4 flex flex-row justify-center">
-            <button id="modal-confirm-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.ok}}</button>
-          </div>
-       </div>
        <div id="modal-confirm" class="hidden">
           <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
           <div class="ml-auto mr-auto mt-4 flex flex-row justify-center">
@@ -38,16 +31,42 @@
             </div>
           </div>
        </div>
+       <div id="modal-copy" class="hidden">
+          <div id="modal-copy-title" class="text-white mb-8 text-xl hidden"></div>
+          <div id="modal-copy-text" class="text-white mb-8 text-xl"></div>
+          <div id="modal-copy-buttons" class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+            <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.copy_link_to_share}}</button>
+            <button id="modal-copy-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4 hidden">{{auth.ok}}</button>
+          </div>
+       </div>
+    </div>
+    <div id="modal_alert" class="z-50 fixed hidden" role="alert" style="top: 10%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="mx-auto text-center bg-green-100 border border-green-400 text-green-700 rounded px-4 py-3 ">
+            <span id="modal_alert_title" class="block sm:inline"></span>
+            <span id="modal_alert_text" class="block sm:inline"></span>
+            <svg class="fill-current h-6 w-6 text-green-500 block sm:inline" id="modal-alert-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+        </div>
     </div>
     <div class="lg:container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
       {% if menu != False %}
       {% filter indent(width=6) %}{% include "incl-menubar.html" %}{% endfilter %}
       {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
+      {% if username and not 'language' in user_data %}
+          <h3 class="text-black text-center bg-yellow-300 mt-1 mb-1 border-red-500 py-4">{{auth.set_preferred_lang}}</h3>
+      {% endif %}
       {% block body %}{% endblock %}
+
       <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
     </div>
-
+    <div id="achievement_pop-up" class="inset-0 absolute z-10 fixed hidden" style="width: 500px; top: 60%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
+            <h3 class="text-white">{{auth.achievement_earned}}</h3>
+            <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">
+            <h4 class="text-white italic" id="achievement_reached_title"></h4>
+            <p id="achievement_reached_text"></p>
+        </div>
+    </div>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}

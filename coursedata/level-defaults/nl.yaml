@@ -84,7 +84,7 @@
         print dieren at random
         ```
 
-        Je vindt alle codes van level 2 weer in de linkerbalk. Ook zijn er weer tabjes met opdrachten.
+        Je vindt alle commando's van level 3 weer in de linkerbalk. Ook zijn er weer tabjes met opdrachten.
     start_code: "print hallo wereld!"
     commands:
     -   name: "kies_random"
@@ -96,7 +96,7 @@
 4:
     start_code: "print 'hallo wereld'"
     intro_text: |
-        In level 3 zijn `ask` en `print` nu anders.
+        In level 4 zijn `ask` en `print` anders.
 
         Je moet tekst die je letterlijk wilt printen tussen aanhalingstekens zetten.
 
@@ -130,9 +130,9 @@
         naam is ask 'hoe heet jij?'
         if naam is Hedy print 'leuk' else print 'minder leuk!'
     intro_text: |
-        `ask` en `print` werken nog zoals in level 3.
+        `ask` en `print` werken nog zoals in level 4.
 
-        In level 4 is er iets nieuws, de `if`! If is Engels voor als. Met de `if` kun je een keuze maken tussen twee verschillende opties.
+        In level 5 is er iets nieuws, de `if`! If is Engels voor als. Met de `if` kun je een keuze maken tussen twee verschillende opties.
 
         ## Voorbeeld Hedy Code
         ```
@@ -163,7 +163,7 @@
 
         ## Opdrachten worden steeds moeilijker
 
-        Ook in level 4 worden de opdrachten in de tabjes steeds iets moeilijker. Doe ze dus van links naar rechts.
+        Ook in level 5 worden de opdrachten in de tabjes steeds iets moeilijker. Doe ze dus van links naar rechts.
     commands:
     -   name: "if"
         explanation: "Een keuze maken met `if`"
@@ -180,8 +180,8 @@
 6:
     start_code: "print '5 keer 5 is ' 5 * 5"
     intro_text: |
-        `ask`, `print` en `if` werken nog zoals in level 4.
-        Maar in Level 5 is er iets nieuws, je kunt nu ook rekenen.
+        `ask`, `print` en `if` werken nog zoals in level 5.
+        Maar in Level 6 is er iets nieuws, je kunt nu ook rekenen.
 
         De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
 
@@ -193,6 +193,13 @@
         print '5 min 5 is ' 5 - 5
         print '5 keer 5 is ' 5 * 5
         ```
+
+        Vanaf dit level mag je ook opslaan met een `=` in plaats van met het woord `is`. Bij woorden en bij sommen. Dus zo:
+
+        ```
+        naam = Hedy
+        antwoord = 5 + 12
+        ```
     commands:
     -   name: "print"
         explanation: "Iets letterlijk printen met `print`."
@@ -200,22 +207,22 @@
         demo_code: "print '5 keer 5 is ' 5 * 5"
     -   name: "`ask` en `if` samen met rekenen"
         explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is."
-        example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
+        example: "Bijvoorbeeld: antwoord = ask 'Hoeveel is 10 plus 10?'"
         demo_code: |-
-            antwoord is ask 'Hoeveel is 10 plus 10?'
+            antwoord = ask 'Hoeveel is 10 plus 10?'
             if antwoord is 20 print 'Goedzo!' else print 'Foutje'
     -   name: "`ask` en `if` turtle"
         explanation: "De gebruiker vragen hoeveel hoeken hij wil"
-        example: "Bijvoorbeeld: hoeken is ask 'hoeveel hoeken krijgt dit figuur?'"
+        example: "Bijvoorbeeld: hoeken = ask 'hoeveel hoeken krijgt dit figuur?'"
         demo_code: |-
-            hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
-            hoek is 360 / hoeken
+            hoeken = ask 'Hoeveel hoeken krijgt dit figuur?'
+            hoek = 360 / hoeken
             forward 50
 7:
     start_code: "repeat 3 times print 'Hedy is leuk!'"
     intro_text: |
-        `ask`, `print` en `if` werken nog zoals in level 4 en 5.
-        Maar in Level 6 is er iets nieuws: de `repeat`.
+        `ask`, `print` en `if` werken nog zoals in level 5 en 6.
+        Maar in Level 7 is er iets nieuws: de `repeat`.
         Met `repeat` kun je codes een aantal keer herhalen.
 
         ## Voorbeeld Hedy code
@@ -240,7 +247,7 @@
             print 'Dit wordt allemaal 5 keer herhaald'
     intro_text: |
         `ask` en `print` werken nog zoals eerst, maar `if` en `repeat` zijn nu veranderd!
-        Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel inspringen,
+        Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel *inspringen*,
         dat betekent dat ze moeten beginnen met vier spaties.
         Ook als je maar één regel wilt herhalen moet je inspringen!
         ## Voorbeeld Hedy code
@@ -253,9 +260,9 @@
     commands:
     -   name: "`if` met meerdere regels"
         explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is. Nu printen we twee regels uit."
-        example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
+        example: "Bijvoorbeeld: antwoord = ask 'Hoeveel is 10 plus 10?'"
         demo_code: |-
-            antwoord is ask 'Hoeveel is 10 plus 10?'
+            antwoord = ask 'Hoeveel is 10 plus 10?'
             if antwoord is 20
                 print 'Goedzo!'
                 print 'Het antwoord was inderdaad ' antwoord
@@ -272,7 +279,7 @@
 9:
     start_code: |-
         repeat 3 times
-            eten is ask 'Wat wil je bestellen?'
+            eten = ask 'Wat wil je bestellen?'
             if eten is pizza
                 print 'lekker'
             else
@@ -285,7 +292,7 @@
         ## Voorbeeld Hedy code
         ```
         repeat 3 times
-            eten is ask 'Wat wil je bestellen?'
+            eten = ask 'Wat wil je bestellen?'
             if eten is pizza
                 print 'lekker'
             else
@@ -295,9 +302,9 @@
     commands:
     -   name: "`if` met meerdere regels"
         explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is. Nu printen we twee regels uit."
-        example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
+        example: "Bijvoorbeeld: antwoord = ask 'Hoeveel is 10 plus 10?'"
         demo_code: |-
-            antwoord is ask 'Hoeveel is 10 plus 10?'
+            antwoord = ask 'Hoeveel is 10 plus 10?'
             if antwoord is 20
                 print 'Goedzo!'
                 print 'Het antwoord was inderdaad ' antwoord
@@ -354,60 +361,75 @@
         print 'kommagetallen gaan met een punt!'
         print 2.5 + 2.5
     intro_text: |
+        ## Kommagetallen
         Tot nu toe mocht je nog geen kommagetallen gebruiken zoals bijv anderhalf, maar nu wel!
         Let wel heel goed op... kommagetallen gaan op de computer met een punt en niet met een komma.
-
-        ## Voorbeeld Hedy code
         ```
         print 'Kommagetallen gaan met een punt!'
         print 2.5 + 2.5
         ```
 
         ## Tekst moet altijd met aanhalingstekens
-        Nu we verder zijn met programmeren moet je ook weten dat tekst altijd tussen aanhalingstekens hoort. Ook in de `is`.
-
+        Nu we verder zijn met programmeren moet je ook weten dat tekst altijd tussen aanhalingstekens hoort. Ook in de `=`.
+        Hierdoor kun je meerdere woorden opslaan in je variabele.
+        De variabele zelf hoeft uiteraard geen aanhalingstekens. We bedoelen immers niet het woordje 'naam'.
         ```
-        naam is 'Hedy'
+        naam = 'Hedy de Robot'
         print 'Hallo ' naam
         ```
+        ## Tekst moet ook in lijstjes met aanhalingstekens
+        Ook bij lijstjes gebruik je nu aanhalingtekens. Let op: elk item op je lijstje moet los tussen aanhalingstekens staan!
+        Hierdoor kun je nu ook twee woorden opslaan als 1 item op je lijstje, bijvoorbeeld 'Iron Man'.
 
-        Maar, zoals je ziet gaan variabelen, zoals naam, wel zonder aanhalingstekens. We bedoelen immers niet het woordje 'naam'.
-
-        Alleen bij getallen gebruik je geen aanhalingstekens in de `is`:
         ```
-        score is 25
+        superhelden = 'Spiderman', 'Batman', 'Iron Man'
+        print superhelden at random
+        ```
+        ## Tekst moet ook aanhalingstekens na een `if` commando
+        ```
+        naam = ask 'Wie ben jij?'
+        if naam = 'Hedy de Robot'
+            print 'Hoi!'
+        ```
+        ## Getallen hoeven geen aanhalingstekens
+        Alleen bij tekst gebruik je aanhalingstekens, bij getallen dus niet:
+        ```
+        score = 25
         print 'Jij hebt ' score ' gehaald!'
         ```
 
-
-
     commands:
     -   name: "assign text"
-        explanation: "Opslaan van tekst met is"
-        example: "naam is 'Hedy'"
+        explanation: "Tekst met aanhalingstekens na ="
+        example: "naam = 'Hedy'"
         demo_code: |
-            naam is 'Hedy'
+            naam = 'Hedy de Robot'
             print 'Hallo ' naam
+    -   name: "quotes in list"
+        explanation: "Een lijstje maken met aanhalingstekens"
+        example: "name = 'Hedy', 'Felienne'"
+        demo_code: |
+            superhelden = 'Iron Man', 'Batman', 'Superman'
+            print superhelden at random
+    -   name: "quotes after if comparison"
+        explanation: "Tekst met aanhalingstekens na if"
+        example: "naam = 'Hedy'"
+        demo_code: |
+            naam = ask 'Wie ben jij?'
+            if naam = 'Hedy'
+                print 'Hoi!'
     -   name: "float directly"
-        explanation: "Een som met kommagetallen"
+        explanation: "Kommagetallen"
         example: "print 2.5 + 2.5"
         demo_code: |
             print 'Rekenen maar!'
-            print 'Tweeenhalf plus tweeenhalf is...'
+            print 'Tweeënhalf plus tweeënhalf is...'
             print 2.5 + 2.5
-    -   name: "float in var"
-        explanation: "Een som met kommagetallen opslaan"
-        example: "antwoord is 2.5 + 2.5"
-        demo_code: |
-            antwoord is 2.5 + 2.5
-            print 'Rekenen maar!'
-            print 'Tweeenhalf plus tweeenhalf is...'
-            print antwoord
 
 13:
     start_code: |-
-        naam is ask 'hoe heet jij?'
-        leeftijd is ask 'hoe oud ben jij?'
+        naam = ask 'hoe heet jij?'
+        leeftijd = ask 'hoe oud ben jij?'
         if naam is 'Hedy' and leeftijd is 2
             print 'Jij bent de echte Hedy!'
     intro_text: "We gaan nu `and` en `or` gebruiken! Als je twee dingen wilt checken hoef je niet meer twee ifjes in elkaar te doen maar kan je nu `and` gebruiken. Beide dingen in de `if` moeten waar zijn als je een `and` gebruikt. We kunnen ook `or` gebruiken. Daarbij moet er één van de twee waar zijn."
@@ -416,8 +438,8 @@
         explanation: "`And` is dus en. Beide dingen links en rechts van de `and` moeten waar zijn."
         example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
-            antwoord1 is ask 'hoeveel is 3+2?'
-            antwoord2 is ask 'hoeveel is 2+2?'
+            antwoord1 = ask 'hoeveel is 3+2?'
+            antwoord2 = ask 'hoeveel is 2+2?'
             if antwoord1 is 5 and antwoord2 is 4
                 print 'beide antwoorden zijn goed!'
             else
@@ -426,8 +448,8 @@
         explanation: "`Or` is dus of. Minimaal 1 van de 2 tussen de `or` moet goed zijn. Allebei goed mag ook."
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
-            antwoord1 is ask 'hoeveel is 3+2?'
-            antwoord2 is ask 'hoeveel is 2+2?'
+            antwoord1 = ask 'hoeveel is 3+2?'
+            antwoord2 = ask 'hoeveel is 2+2?'
             if antwoord1 is 5 or antwoord2 is 4
                 print 'Je hebt minimaal 1 antwoord goed!'
             else
@@ -437,95 +459,140 @@
 
 14:
     start_code: |-
-        leeftijd is ask 'Hoe oud ben jij?'
+        leeftijd = ask 'Hoe oud ben jij?'
         if leeftijd < 13
             print 'Dan ben je jonger dan ik!'
         else
             print 'Dan ben je ouder dan ik!'
-    intro_text: "We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`. De `<` kijkt of het eerste getal kleiner is dan de tweede zoals `4 < 5`. De `>` kijkt of iets groter is dan het tweede getal zoals `6 > 5`."
+    intro_text: |
+        We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`.
+        De `<` kijkt of het eerste getal kleiner is dan de tweede. Bijvoorbeeld met `leeftijd < 12` kun je kijken of `leeftijd` kleiner is dan 12.
+        De `>` kijkt of iets groter is dan het tweede geta. Bijvoorbeeld met `punten > 10` kun je kijken of `punten` groter is dan 10.
+
+        Je gebruikt de vergelijkingen in de `if`, zo:
+
+        ```
+        leeftijd = ask 'Hoe oud ben jij?'
+        if leeftijd < 12
+                print 'Dan ben je jonger dan ik!'
+        ```
+
+        Als je iets precies wilt vergelijken, mag je dat nu doen met twee isjes. Zo doen de meeste programmeertalen dat:
+        ```
+        name = ask 'Hoe heet jij?'
+        if name == 'Hedy'
+            print 'Jij bent cool!'
+        ```
+
+        Je kan ook vergelijken of iets *niet* hetzelfde is met `!=`. Zo:
+        ```
+        name = ask 'Hoe heet jij?'
+        if name != 'Hedy'
+            print 'Jij bent Hedy niet'
+        ```
+
     commands:
     -   name: "Kleiner"
-        explanation: "De `<` kijkt dus of het eerste getal kleiner is dan het tweede getal. Als je wilt kijken of een variabele kleiner is dan 15 gebruik je `variabele < 15`"
+        explanation: "De `<` kijkt of het eerste getal kleiner is dan het tweede getal."
         example: "Bijvoorbeeld: leeftijd < 13"
         demo_code: |-
-            leeftijd is ask 'Hoe oud ben jij?'
+            leeftijd = ask 'Hoe oud ben jij?'
             if leeftijd < 13
                 print 'Dan ben je jonger dan ik!'
     -   name: "Groter"
-        explanation: "De `>` kijkt dus of het eerste getal groter is dan het tweede getal. Als je wilt kijken of een variabele groter is dan 15 gebruik je `variabele > 15`"
+        explanation: "De `>` kijkt of het eerste getal groter is dan het tweede getal"
         example: "Bijvoorbeeld: leeftijd > 13"
         demo_code: |-
-            leeftijd is ask 'Hoe oud ben jij?'
+            leeftijd = ask 'Hoe oud ben jij?'
             if leeftijd > 13
                 print 'Dan ben je ouder dan ik!'
 
+    -   name: Gelijk
+        explanation: "We gebruiken `==` om te kijken of twee dingen hetzelfde zijn"
+        example: "Bijv. antwoord == 25"
+        demo_code: |-
+            answer = ask 'Wat is 5 * 5?'
+            if answer == 25
+                print 'Klopt!'
+    -   name: Ongelijk
+        explanation: "We gebruiken `!=` om te kijken of twee dingen niet hetzelfde zijn"
+        example: "Bijv. antwoord != 25"
+        demo_code: |-
+            answer = ask 'Wat is 5 * 5?'
+            if answer != 25
+                print 'Foutje!'
+
 15:
     start_code: |-
-        antwoord is 0
+        antwoord = 0
         while antwoord != 25
-            antwoord is ask 'Wat is 5 keer 5?'
+            antwoord = ask 'Wat is 5 keer 5?'
         print 'Goed gedaan!'
-    intro_text: "Nu gaan we een nieuwe loop leren: De `while` loop! We gaan door zo lang het statement dat we hebben waar is! Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven. Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!"
+    intro_text: |
+        Nu gaan we een nieuwe loop leren: De `while` loop!
+        We gaan door zo lang het statement dat we hebben waar is.
+        Vergeet dus niet in de loop de waarde te veranderen.
+
+        Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven.
+        Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!
     commands:
     -   name: "While"
         explanation: "We kunnen dus een `while` loop gebruiken"
         example: "Bijvoorbeeld: while antwoord is != 25"
         demo_code: |-
-            antwoord is 0
+            antwoord = 0
             while antwoord != 25
-                antwoord is ask 'Wat is 5 keer 5?'
+                antwoord = ask 'Wat is 5 keer 5?'
             print 'Goed gedaan!'
     -   name: "Smaller while"
-        explanation: "We kunnen een `while` loop ook gebruiken met `<` en `>`. Let wel op dat je het getal ooit groter maakt. Anders ga je de loop nooit uit"
+        explanation: "We kunnen een `while` loop ook gebruiken met `<` en `>`."
         example: "Bijvoorbeeld: while tel < 3"
         demo_code: |-
-            tel is 1
+            tel = 1
             while tel < 3
                 print 'Dit is de ' tel 'e keer'
-                tel is tel + 1
+                tel = tel + 1
             print 'We zijn klaar'
 
 16:
     start_code: |-
-        fruit is ['appel', 'banaan', 'kers']
+        fruit = ['appel', 'banaan', 'kers']
         print fruit 
     intro_text: |-
         We zijn aangekomen bij de laatste paar Hedy levels. We komen dus steeds dichter bij echte Pythoncodes.
-        In dit level gaan we leren hoe je lijsten maakt op de Pythonmanier. dat werkt met vierkante haakjes zetten om lijstjes, dat zijn deze: [ en ].
+        In dit level gaan we leren hoe je lijsten maakt op de Pythonmanier. Dat werkt met vierkante haakjes zetten om lijstjes, dat zijn deze: [ en ].
         Als we woorden in de lijst willen zetten, moeten we om de woorden ook enkele aanhalingstekens zetten. Bij getallen hoeft dat niet.
         We kunnen in dit level ook met een getal plekken in lijstjes aanwijzen.
 
-        #Voorbeeld Hedy code
+        ## Voorbeeld Hedy code
         ```
-        vrienden is ['Ahmed', 'Ben', 'Cayden']
-        geluksgetallen is [15, 18, 6]
+        vrienden = ['Ahmed', 'Ben', 'Cayden']
+        geluksgetallen = [15, 18, 6]
         for i in range 1 to 3
            print 'het geluksgetal van ' vrienden[i]
            print 'is ' geluksgetallen[i]
         ```
-
     commands:
     -   name: "Haakjes om lijstjes"
-        explanation: "We gaan nu haakjes om lijstjes heen zetten! Let ook op de enkele aanhalingstekens om items in het lijstje!"
-        example: "Bijvoorbeeld: fruit is ['appel', 'banaan', 'kers']"
+        explanation: "Lijstjes met vierkante haken!"
+        example: "Bijvoorbeeld: fruit = ['appel', 'banaan', 'kers']"
         demo_code: |-
-            fruit is ['appel', 'banaan', 'kers']
+            fruit = ['appel', 'banaan', 'kers']
             print fruit 
     -   name: "Pak iets uit een lijst"
         explanation: "Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst !"
-        example: "Bijvoorbeeld: eerstefruit is fruit[1]"
+        example: "Bijvoorbeeld: eerstefruit = fruit[1]"
         demo_code: |-
-            fruit is ['banaan', 'appel', 'kers']
-            eerstefruit is fruit[1]
+            fruit = ['banaan', 'appel', 'kers']
+            eerstefruit = fruit[1]
             print eerstefruit 
     -   name: "Pak een random item uit een lijst"
         explanation: "Om een random item uit een lijst te pakken, gebruiken we [random]. Dus fruit[random] is pak een random fruit uit de lijst!"
-        example: "Bijvoorbeeld: randomfruit is fruit[random]"
+        example: "Bijvoorbeeld: randomfruit = fruit[random]"
         demo_code: |-
-            fruit is ['banaan', 'appel', 'kers']
-            randomfruit is fruit[random]
+            fruit = ['banaan', 'appel', 'kers']
+            randomfruit = fruit[random]
             print randomfruit 
-
 
 
 17:
@@ -533,8 +600,34 @@
         for i in range 1 to 10:
             print i
         print 'Wie niet weg is is gezien'
-    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
+    intro_text: |-
+        Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een `:` bij de regel ervoor zetten.
+
+        Daarnaast kun je in dit level een nieuw commando gebruiken `elif`. `elif` is de afkorting van else if en zorgt ervoor dat je 3 (of meer!) opties kunt maken.
+        Kijk maar...
+        ```
+        prijzen = ['1 miljoen euro', 'een appeltaart', 'niets']
+        jouw_prijs = prijzen[random]
+        print 'Jij wint ' jouw_prijs
+        if jouw_prijs == '1 miljoen euro' :
+            print 'Joepie! Je bent rijk!'
+        elif jouw_prijs == 'een appeltaart' :
+            print 'Lekker! Een appeltaart!'
+        else:
+            print 'Volgende keer beter..'
+        ```
     commands:
+    -   name: "elif"
+        explanation: "`elif`."
+        example: "elif a is 5:"
+        demo_code: |-
+            a = 2
+            if a == 1:
+                print 'a is 1'
+            elif a == 2:
+                print 'a is 2'
+            else:
+                print 'a is niet 1 of 2'
     -   name: "for met :"
         explanation: "Bij `for` moet je dus een `:` er achter zetten!"
         example: "for i in range 1 to 10:"
@@ -546,25 +639,14 @@
         explanation: "We moeten hetzelfde doen met al onze `if` statements"
         example: "if kleur is groen:"
         demo_code: |-
-            kleur is ask 'Wat vind jij de mooiste kleur?'
-            if kleur is groen:
+            kleur = ask 'Wat vind jij de mooiste kleur?'
+            if kleur == groen:
                 print 'Jouw kleur is groen'
             else:
                 print 'Jouw kleur is zeker niet groen'
-    -   name: "elif"
-        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
-        example: "elif a is 5:"
-        demo_code: |-
-            a is 2
-            if a is 1:
-                print 'a is 1'
-            elif a is 2:
-                print 'a is 2'
-            else:
-                print 'a is niet 1 of 2'
 18:
     start_code: |-
-        naam is 'Hedy'
+        naam = 'Hedy'
         print('ik heet', naam)
     intro_text: |-
         We zijn aangekomen bij echte Pythoncode! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij print en bij range.
@@ -577,8 +659,8 @@
         Wil je meerdere dingen printen? Dan moeten daar steeds komma's tussen.
 
         ```
-        naam is 'Hedy'
-        print('ik heet', naam)
+        naam = 'Hedy'
+        print('ik heet ', naam)
         ```
 
 
@@ -592,7 +674,7 @@
         explanation: "Bij `print` moet je haakjes gebruiken en komma's als je meerdere dingen print"
         example: "print"
         demo_code: |-
-            naam is 'Hedy'
+            naam = 'Hedy'
             print('ik heet', naam)
 
 #21:

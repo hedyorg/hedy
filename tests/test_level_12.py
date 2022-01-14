@@ -7,6 +7,39 @@ from test_level_01 import HedyTester
 class TestsLevel12(HedyTester):
   level = 12
 
+  def test_if_with_indent(self):
+    code = textwrap.dedent("""\
+    naam = 'Hedy'
+    if naam = Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=16)
+
+  def test_if_with_equals_sign(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    if naam = Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['is', 'if', 'print'],
+      max_level=16)
+
   # print tests
   def test_print_float(self):
     code = textwrap.dedent("""\
@@ -46,7 +79,8 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=14,
-      expected=expected
+      expected=expected,
+      expected_commands=['is', 'print', 'random']
     )
 
   # ask tests
@@ -142,6 +176,7 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
+  #list tests
   def test_ask_with_list_gives_type_error(self):
     code = textwrap.dedent("""\
       colors is 'orange', 'blue', 'green'
@@ -152,6 +187,25 @@ class TestsLevel12(HedyTester):
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
+
+  def test_assign_random_value(self):
+    code = textwrap.dedent("""\
+    dieren is 'hond', 'kat', 'kangoeroe'
+    dier is dieren at random
+    print dier""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['hond', 'kat', 'kangoeroe']
+    dier = random.choice(dieren)
+    print(f'{dier}')""")
+
+    list = ['Hond', 'Kat', 'Kangoeroe']
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.result_in(list),
+      max_level=15)
 
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
@@ -397,6 +451,13 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
+  def test_calc_assign_equals(self):
+    code = "nummer = 4 + 5"
+    expected = "nummer = 4 + 5"
+    self.multi_level_tester(
+      code=code,
+      expected=expected)
+
   # def test_access_variable_before_definition(self):
   #   code = textwrap.dedent("""\
   #           a is b
@@ -433,9 +494,11 @@ class TestsLevel12(HedyTester):
       for i in range(int(1), int(2) + step, step):
         print(f'if youre happy and you know it')
         print(f'{action}')
+        time.sleep(0.1)
       print(f'if youre happy and you know it and you really want to show it')
       print(f'if youre happy and you know it')
-      print(f'{action}')""")
+      print(f'{action}')
+      time.sleep(0.1)""")
 
 
     self.single_level_tester(code=code, expected=expected)
@@ -446,7 +509,7 @@ class TestsLevel12(HedyTester):
     getal is getallen at random""")
     expected = textwrap.dedent("""\
     getallen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    getal=random.choice(getallen)""")
+    getal = random.choice(getallen)""")
 
 
     self.single_level_tester(code=code, expected=expected)
