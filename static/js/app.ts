@@ -1179,3 +1179,10 @@ export function change_language(lang: string) {
       console.error(xhr);
     });
 }
+
+export function filter_programs() {
+  const level = $('#explore_page_level').val();
+  const adventure = $('#explore_page_adventure').val();
+  window.open('?level=' + level + "&adventure=" + adventure, "_self");
+}
+
