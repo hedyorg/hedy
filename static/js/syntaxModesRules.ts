@@ -260,6 +260,7 @@ const LEVELS = [
       rule_forRangeParen(),
     ),
   },
+    // Todo: Fix something?
   {
     name: 'level13',
     rules: pipe(baseRules(),
@@ -465,7 +466,7 @@ function rule_turtle() {
         next: 'start',
       }),
       recognize('start', {
-        regex: currentLang._FORWARD,
+        regex: keywordWithSpace(currentLang._FORWARD),
         token: 'keyword',
         next: 'start',
       })
