@@ -425,6 +425,5 @@ class TestsLevel4(HedyTester):
     line = invalid_info.line
     column = invalid_info.column
 
-    #@ Boryana, this should be 2, 7 if all works correctly!
     self.assertEqual(2, line)
-    self.assertEqual(1, column)
+    self.assertEqual(7, column)

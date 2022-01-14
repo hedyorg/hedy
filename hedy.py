@@ -726,7 +726,7 @@ class Filter(Transformer):
     def __default__(self, args, children, meta):
         return are_all_arguments_true(children)
 
-    def program(self, args, meta):
+    def program(self, args, meta=None):
         bool_arguments = [x[0] for x in args]
         if all(bool_arguments):
             return [True] #all complete
@@ -885,12 +885,13 @@ def all_print_arguments(input_string, level, lang='en'):
 
     return AllPrintArguments(level).transform(program_root)
 
+@v_args(meta=True)
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    def program(self, args, meta):
+    def program(self, args, meta=None):
         if len(args) == 0:
             return False, InvalidInfo("empty program")
         return super().program(args)
@@ -901,6 +902,8 @@ class IsValid(Filter):
 
     def error_print_nq(self, args, meta):
         # return error source to indicate what went wrong
+
+        #TODO, fh jan 2022 maybe we want to take end_column?
         return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column)
 
     def error_invalid(self, args, meta):
@@ -927,6 +930,7 @@ def valid_echo(ast):
     #otherwise, both have to be in the list and echo shold come after
     return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
 
+@v_args(meta=True)
 class IsComplete(Filter):
     def __init__(self, level):
         self.level = level
@@ -935,11 +939,14 @@ class IsComplete(Filter):
     # tree is transformed to a node of [True] or [False, args, line_number]
 
 
-    def ask(self, args, meta):
+    def ask(self, args, meta=None):
         # in level 1 ask without arguments means args == []
         # in level 2 and up, ask without arguments is a list of 1, namely the var name
         incomplete = (args == [] and self.level == 1) or (len(args) == 1 and self.level >= 2)
-        return not incomplete, ('ask', meta.line)
+        if meta is not None:
+            return not incomplete, ('ask', meta.line)
+        else:
+            return not incomplete, ('ask', 1)
     def ask_is(self, args, meta):
         return self.ask(args, meta)
     def ask_equals(self, args, meta):
