@@ -229,20 +229,19 @@ const LEVELS = [
     // Replaces 'repeat' with 'for'
     name: 'level10',
     rules: pipe(baseRules(),
-    rule_printSpace(),
-    rule_isAsk(),
-    rule_is(),
-    rule_turtle(),
-    rule_sleep(),
-    rule_ifElse(),
-    rule_expressions(),
-    rule_arithmetic(),
-    rule_forRange(),
-    rule_for()
+      rule_printSpace(),
+      rule_isAsk(),
+      rule_is(),
+      rule_turtle(),
+      rule_sleep(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_for()
     ),
   },
   {
-    // Nesting of 'for' loops (no changes necessary)
+    // Introduce 'for range'
     name: 'level11',
     rules: pipe(baseRules(),
       rule_printSpace(),
