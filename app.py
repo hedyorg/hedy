@@ -485,13 +485,16 @@ def parse():
                 response['Code'] = NORMAL_PREFIX_CODE + transpile_result.code
         except:
             pass
-
+        try:
+            if 'sleep' in hedy.all_commands(code, level, lang):
+                response['has_sleep'] = True
+        except:
+            pass
         try:
             if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
-
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
@@ -502,6 +505,8 @@ def parse():
         print(f"error transpiling {code}")
         response["Error"] = str(E)
         exception = E
+
+    print(response)
 
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
