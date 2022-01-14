@@ -506,8 +506,6 @@ def parse():
         response["Error"] = str(E)
         exception = E
 
-    print(response)
-
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
         'session': session_id(),
