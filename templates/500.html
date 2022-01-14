@@ -1,7 +1,0 @@
-{% extends "layout.html" %}
-
-{% block body %}
-  <div class="w-full text-center"><img class="inline-block" src="/images/500.jpeg" style="width: 40%;"></div>
-  <div class="w-full text-center"><p class="text-lg font-bold">{{page_error or ui.default_500}}</p></div>
-  <div class="w-full text-center mt-8"><button class="green-btn" style="width: 40%;" onclick="window.location.href = '/'">{{ui.go_back_to_main}}</button></div>
-{% endblock %}
