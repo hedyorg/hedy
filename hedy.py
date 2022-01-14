@@ -721,12 +721,12 @@ def are_all_arguments_true(args):
 # because both filter out some types of 'wrong' nodes
 # TODO: this could also use a default lark rule like AllAssignmentCommands does now
 
-# TODO: maybe this could use meta (with v_args) instead of both inheritors?
+@v_args(meta=True)
 class Filter(Transformer):
     def __default__(self, args, children, meta):
         return are_all_arguments_true(children)
 
-    def program(self, args):
+    def program(self, args, meta):
         bool_arguments = [x[0] for x in args]
         if all(bool_arguments):
             return [True] #all complete
@@ -885,12 +885,12 @@ def all_print_arguments(input_string, level, lang='en'):
 
     return AllPrintArguments(level).transform(program_root)
 
-
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
-    def program(self, args):
+
+    def program(self, args, meta):
         if len(args) == 0:
             return False, InvalidInfo("empty program")
         return super().program(args)
@@ -927,7 +927,6 @@ def valid_echo(ast):
     #otherwise, both have to be in the list and echo shold come after
     return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
 
-@v_args(meta=True)
 class IsComplete(Filter):
     def __init__(self, level):
         self.level = level
