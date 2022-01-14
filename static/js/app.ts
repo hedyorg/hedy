@@ -240,7 +240,7 @@ export function runit(level: string, lang: string, cb: () => void) {
         }
         return;
       }
-        runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
+        runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
         console.log(err)
         error.show(ErrorMessages['Execute_error'], err.message);
         reportClientError(level, code, err.message);
@@ -727,7 +727,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean, cb: () => void) {
+function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
   if (! window.State.programsInExecution) window.State.programsInExecution = 0;
@@ -771,7 +771,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
       // const level = window.State.level;
-      return ((hasTurtle) ? 20000 : 3000);
+      return ((hasTurtle || hasSleep) ? 20000 : 3000);
     }) ()
   });
 
