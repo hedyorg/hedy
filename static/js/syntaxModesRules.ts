@@ -475,7 +475,7 @@ function rule_turtle() {
 
 function rule_sleep() {
   return recognize('start', {
-      regex: currentLang._SLEEP,
+      regex: keywordWithSpace(currentLang._SLEEP),
       token: 'keyword',
       next: 'start',
     }
