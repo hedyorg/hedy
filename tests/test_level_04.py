@@ -200,7 +200,8 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      expected=expected
+      expected=expected,
+      expected_commands=['ask', 'is', 'add', 'print', 'random']
     )
   def test_remove_from_list(self):
     code = textwrap.dedent("""\
