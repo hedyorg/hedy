@@ -382,8 +382,14 @@
         Hierdoor kun je nu ook twee woorden opslaan als 1 item op je lijstje, bijvoorbeeld 'Iron Man'.
 
         ```
-        superhelden is 'Spiderman', 'Batman', 'Iron Man'
+        superhelden = 'Spiderman', 'Batman', 'Iron Man'
         print superhelden at random
+        ```
+        ## Tekst moet ook aanhalingstekens na een `if` commando
+        ```
+        naam = ask 'Wie ben jij?'
+        if naam = 'Hedy de Robot'
+            print 'Hoi!'
         ```
         ## Getallen hoeven geen aanhalingstekens
         Alleen bij tekst gebruik je aanhalingstekens, bij getallen dus niet:
@@ -405,6 +411,13 @@
         demo_code: |
             superhelden = 'Iron Man', 'Batman', 'Superman'
             print superhelden at random
+    -   name: "quotes after if comparison"
+        explanation: "Tekst met aanhalingstekens na if"
+        example: "naam = 'Hedy'"
+        demo_code: |
+            naam = ask 'Wie ben jij?'
+            if naam = 'Hedy'
+                print 'Hoi!'
     -   name: "float directly"
         explanation: "Kommagetallen"
         example: "print 2.5 + 2.5"
@@ -451,22 +464,63 @@
             print 'Dan ben je jonger dan ik!'
         else
             print 'Dan ben je ouder dan ik!'
-    intro_text: "We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`. De `<` kijkt of het eerste getal kleiner is dan de tweede zoals `4 < 5`. De `>` kijkt of iets groter is dan het tweede getal zoals `6 > 5`."
+    intro_text: |
+        We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`.
+        De `<` kijkt of het eerste getal kleiner is dan de tweede. Bijvoorbeeld met `leeftijd < 12` kun je kijken of `leeftijd` kleiner is dan 12.
+        De `>` kijkt of iets groter is dan het tweede geta. Bijvoorbeeld met `punten > 10` kun je kijken of `punten` groter is dan 10.
+
+        Je gebruikt de vergelijkingen in de `if`, zo:
+
+        ```
+        leeftijd = ask 'Hoe oud ben jij?'
+        if leeftijd < 12
+                print 'Dan ben je jonger dan ik!'
+        ```
+
+        Als je iets precies wilt vergelijken, mag je dat nu doen met twee isjes. Zo doen de meeste programmeertalen dat:
+        ```
+        name = ask 'Hoe heet jij?'
+        if name == 'Hedy'
+            print 'Jij bent cool!'
+        ```
+
+        Je kan ook vergelijken of iets *niet* hetzelfde is met `!=`. Zo:
+        ```
+        name = ask 'Hoe heet jij?'
+        if name != 'Hedy'
+            print 'Jij bent Hedy niet'
+        ```
+
     commands:
     -   name: "Kleiner"
-        explanation: "De `<` kijkt dus of het eerste getal kleiner is dan het tweede getal. Als je wilt kijken of een variabele kleiner is dan 13 gebruik je `variabele < 13`"
+        explanation: "De `<` kijkt of het eerste getal kleiner is dan het tweede getal."
         example: "Bijvoorbeeld: leeftijd < 13"
         demo_code: |-
             leeftijd = ask 'Hoe oud ben jij?'
             if leeftijd < 13
                 print 'Dan ben je jonger dan ik!'
     -   name: "Groter"
-        explanation: "De `>` kijkt dus of het eerste getal groter is dan het tweede getal. Als je wilt kijken of een variabele groter is dan 13 gebruik je `variabele > 13`"
+        explanation: "De `>` kijkt of het eerste getal groter is dan het tweede getal"
         example: "Bijvoorbeeld: leeftijd > 13"
         demo_code: |-
             leeftijd = ask 'Hoe oud ben jij?'
             if leeftijd > 13
                 print 'Dan ben je ouder dan ik!'
+
+    -   name: Gelijk
+        explanation: "We gebruiken `==` om te kijken of twee dingen hetzelfde zijn"
+        example: "Bijv. antwoord == 25"
+        demo_code: |-
+            answer = ask 'Wat is 5 * 5?'
+            if answer == 25
+                print 'Klopt!'
+    -   name: Ongelijk
+        explanation: "We gebruiken `!=` om te kijken of twee dingen niet hetzelfde zijn"
+        example: "Bijv. antwoord != 25"
+        demo_code: |-
+            answer = ask 'Wat is 5 * 5?'
+            if answer != 25
+                print 'Foutje!'
 
 15:
     start_code: |-
@@ -474,7 +528,13 @@
         while antwoord != 25
             antwoord = ask 'Wat is 5 keer 5?'
         print 'Goed gedaan!'
-    intro_text: "Nu gaan we een nieuwe loop leren: De `while` loop! We gaan door zo lang het statement dat we hebben waar is! Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven. Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!"
+    intro_text: |
+        Nu gaan we een nieuwe loop leren: De `while` loop!
+        We gaan door zo lang het statement dat we hebben waar is.
+        Vergeet dus niet in de loop de waarde te veranderen.
+
+        Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven.
+        Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!
     commands:
     -   name: "While"
         explanation: "We kunnen dus een `while` loop gebruiken"
@@ -485,7 +545,7 @@
                 antwoord = ask 'Wat is 5 keer 5?'
             print 'Goed gedaan!'
     -   name: "Smaller while"
-        explanation: "We kunnen een `while` loop ook gebruiken met `<` en `>`. Let wel op dat je het getal ooit groter maakt. Anders ga je de loop nooit uit"
+        explanation: "We kunnen een `while` loop ook gebruiken met `<` en `>`."
         example: "Bijvoorbeeld: while tel < 3"
         demo_code: |-
             tel = 1
@@ -549,9 +609,9 @@
         prijzen = ['1 miljoen euro', 'een appeltaart', 'niets']
         jouw_prijs = prijzen[random]
         print 'Jij wint ' jouw_prijs
-        if jouw_prijs = '1 miljoen euro' :
+        if jouw_prijs == '1 miljoen euro' :
             print 'Joepie! Je bent rijk!'
-        elif jouw_prijs = 'een appeltaart' :
+        elif jouw_prijs == 'een appeltaart' :
             print 'Lekker! Een appeltaart!'
         else:
             print 'Volgende keer beter..'
@@ -562,9 +622,9 @@
         example: "elif a is 5:"
         demo_code: |-
             a = 2
-            if a is 1:
+            if a == 1:
                 print 'a is 1'
-            elif a is 2:
+            elif a == 2:
                 print 'a is 2'
             else:
                 print 'a is niet 1 of 2'
@@ -580,7 +640,7 @@
         example: "if kleur is groen:"
         demo_code: |-
             kleur = ask 'Wat vind jij de mooiste kleur?'
-            if kleur is groen:
+            if kleur == groen:
                 print 'Jouw kleur is groen'
             else:
                 print 'Jouw kleur is zeker niet groen'

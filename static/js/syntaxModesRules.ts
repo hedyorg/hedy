@@ -9,7 +9,7 @@ window.State = {};
 }
 
 // Set this to true to use keywords from languages other than english
-var localKeywordsEnable = true;
+var localKeywordsEnable = false;
 
 // Contains the current keywords based on the current language
 var currentLang: { 

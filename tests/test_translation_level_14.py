@@ -83,3 +83,17 @@ class TestsTranslationLevel14(HedyTester):
             print 'hedy'""")
 
         self.assertEqual(expected, result)
+    
+    def test_double_equals(self):
+        code = textwrap.dedent("""\
+        hedy = 5
+        if hedy == 6
+            print 'hedy'""")
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = textwrap.dedent("""\
+        hedy = 5
+        als hedy == 6
+            print 'hedy'""")
+
+        self.assertEqual(expected, result)

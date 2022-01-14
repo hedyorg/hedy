@@ -33,6 +33,17 @@ class TestsLevel15(HedyTester):
       expected_commands=['is', 'while', 'ask', 'print']
     )
 
+  def test_while_undefined_var(self):
+    code = textwrap.dedent("""\
+      while antwoord != 25
+          print 'hoera'""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.UndefinedVarException,
+      max_level=16,
+    )
+
   def test_while_smaller(self):
     code = textwrap.dedent("""\
       getal is 0

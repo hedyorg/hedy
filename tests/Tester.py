@@ -1,6 +1,7 @@
 import unittest
 import app
 import hedy
+import re
 import sys
 import io
 from contextlib import contextmanager
@@ -24,6 +25,7 @@ class HedyTester(unittest.TestCase):
   max_turtle_level = 10
   number_comparisons_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparisons_commands + ['!=']
+  comparison_commands_with_double_equals = comparison_commands + ['==']
 
   @staticmethod
   @contextmanager
@@ -42,6 +44,9 @@ class HedyTester(unittest.TestCase):
       code = app.TURTLE_PREFIX_CODE + parse_result.code
     else:
       code = app.NORMAL_PREFIX_CODE + parse_result.code
+# remove sleep comments to make program execution less slow
+    code = re.sub(r'time\.sleep\([^)]*\)', '', code)
+
     with HedyTester.captured_output() as (out, err):
       exec(code)
     return out.getvalue().strip()
@@ -111,7 +116,9 @@ class HedyTester(unittest.TestCase):
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
         result = hedy.transpile(snippet.code, int(snippet.level))
-        if not result.has_turtle: #ouput from turtle cannot be captured
+        all_commands = hedy.all_commands(snippet.code, snippet.level)
+
+        if not result.has_turtle and (not 'ask' in all_commands) and (not 'input' in all_commands): #output from turtle cannot be captured
           output = HedyTester.run_code(result)
     except hedy.exceptions.CodePlaceholdersPresentException as E: # Code with blanks is allowed
       pass

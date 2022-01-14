@@ -270,7 +270,7 @@ class TestsLevel6(HedyTester):
       expected = textwrap.dedent("""\
       keuzes = ['1', '2', '3', '4', '5', 'regenworm']
       punten = '0'
-      worp=random.choice(keuzes)
+      worp = random.choice(keuzes)
       if str(worp) == str('regenworm'):
         punten = int(punten) + int(5)
       else:
@@ -353,6 +353,54 @@ class TestsLevel6(HedyTester):
       code=code,
       expected=expected
     )
+
+
+  def test_one_space_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
+  def test_one_space_in_rhs_if_else(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
+  def test_multiple_spaces_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is Bond James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('Bond James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
 
   def test_calc_chained_vars(self):
     code = textwrap.dedent("""\

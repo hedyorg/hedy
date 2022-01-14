@@ -35,7 +35,8 @@ from flask_compress import Compress
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database
+from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
+from website.log_fetcher import log_fetcher
 import quiz
 
 # Set the current directory to the root Hedy folder
@@ -77,7 +78,8 @@ for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
 
 TRANSLATIONS = hedyweb.Translations()
-
+ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
+ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
 
 # Define code that will be used if some turtle command is present
@@ -273,7 +275,6 @@ def setup_language():
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
         return "Language " + g.lang + " not supported", 404
-
     # Also get the 'ui' translations into a global object for this language, these
     # are used a lot so we can clean up a fair bit by initializing here.
     g.ui_texts = TRANSLATIONS.get_translations(g.lang, 'ui')
@@ -297,6 +298,9 @@ def enrich_context_with_user_info():
         data['user_data'] = user_data
         if 'classes' in user_data:
             data['user_classes'] = DATABASE.get_student_classes(user.get('username'))
+        user_achievements = DATABASE.achievements_by_username(user.get('username'))
+        if user_achievements:
+            data['user_achievements'] = user_achievements
     return data
 
 @app.context_processor
@@ -308,8 +312,8 @@ def enricht_context_with_translations():
     texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
     ui = TRANSLATIONS.get_translations(g.lang, 'ui')
     auth = TRANSLATIONS.get_translations(g.lang, 'Auth')
-    return dict(texts=texts, ui=ui, auth=auth)
-
+    achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
+    return dict(texts=texts, ui=ui, auth=auth, achievements=achievements)
 
 @app.after_request
 def set_security_headers(response):
@@ -321,7 +325,6 @@ def set_security_headers(response):
     # and that's okay.
     response.headers.update(security_headers)
     return response
-
 
 @app.teardown_request
 def teardown_request_finish_logging(exc):
@@ -372,6 +375,7 @@ def fix_code():
 
     response = {}
     username = current_user()['username'] or None
+    exception = None
 
     querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
 
@@ -388,15 +392,19 @@ def fix_code():
                 response['FixedCode'] = ex.fixed_code
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
+                exception = ex
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
+        exception = ex
 
     except Exception as E:
         traceback.print_exc()
         print(f"error transpiling {code}")
         response["Error"] = str(E)
+        exception = ex
+
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
         'session': session_id(),
@@ -405,6 +413,7 @@ def fix_code():
         'lang': lang,
         'code': code,
         'server_error': response.get('Error'),
+        'exception': get_class_name(exception),
         'version': version(),
         'username': username,
         'read_aloud': read_aloud,
@@ -440,6 +449,7 @@ def parse():
 
     response = {}
     username = current_user()['username'] or None
+    exception = None
 
     querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
 
@@ -448,19 +458,25 @@ def parse():
         with querylog.log_time('transpile'):
 
             try:
-                transpile_result = hedy.transpile(code, level, lang)
+                transpile_result = transpile_add_stats(code, level, lang)
+                if username:
+                    DATABASE.increase_user_run_count(username)
+                    ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.InvalidSpaceException as ex:
                 response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
+                exception = ex
             except hedy.exceptions.InvalidCommandException as ex:
                 response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
+                exception = ex
             except hedy.exceptions.FtfyException as ex:
                 response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
+                exception = ex
         try:
             if transpile_result.has_turtle:
                 response['Code'] = TURTLE_PREFIX_CODE + transpile_result.code
@@ -470,14 +486,23 @@ def parse():
         except:
             pass
 
+        try:
+            if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
+                response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
+        except Exception as E:
+            print(f"error determining achievements for {code} with {E}")
+
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
+        exception = ex
 
     except Exception as E:
         traceback.print_exc()
         print(f"error transpiling {code}")
         response["Error"] = str(E)
+        exception = E
+
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
         'session': session_id(),
@@ -486,6 +511,7 @@ def parse():
         'lang': lang,
         'code': code,
         'server_error': response.get('Error'),
+        'exception': get_class_name(exception),
         'version': version(),
         'username': username,
         'read_aloud': read_aloud,
@@ -494,6 +520,33 @@ def parse():
     })
 
     return jsonify(response)
+
+
+def transpile_add_stats(code, level, lang_):
+    username = current_user()['username'] or None
+    try:
+        result = hedy.transpile(code, level, lang_)
+        add_program_stats(username, level)
+        return result
+    except Exception as ex:
+        add_program_stats(username, level, get_class_name(ex))
+        raise
+
+
+def get_class_name(i):
+    if i is not None:
+        return str(i.__class__.__name__)
+    return i
+
+
+def add_program_stats(username, level, ex=None):
+    try:
+        DATABASE.add_program_stats('@all', level, ex)
+        if username:
+            DATABASE.add_program_stats(username, level, ex)
+    except Exception as ex:
+        # Adding stats should not cause failure. Log and continue.
+        querylog.log_value(server_error=ex)
 
 
 def hedy_error_to_response(ex, translations):
@@ -593,6 +646,19 @@ def version_page():
                            commit=commit)
 
 
+def achievements_page():
+    user = current_user()
+    username = user['username']
+    if not username:
+        # redirect users to /login if they are not logged in
+        url = request.url.replace('/my-achievements', '/login')
+        return redirect(url, code=302)
+
+    achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
+
+    return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
+                           template_achievements=achievement_translations, current_page='my-profile')
+
 def programs_page(request):
     user = current_user()
     username = user['username']
@@ -623,6 +689,99 @@ def programs_page(request):
 
     return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
                            current_page='programs', from_user=from_user, adventures=adventures)
+
+@app.route('/program-stats')
+def get_program_stats():
+    start_date = request.args.get('start', default=None, type=str)
+    end_date = request.args.get('end', default=None, type=str)
+
+    user = current_user()
+    if not is_admin(user):
+        return utils.page_403(ui_message='unauthorized')
+
+    data = DATABASE.get_all_program_stats(start_date, end_date)
+    per_level_data = _to_dict_on_key(data, lambda e: e["level"])
+    per_week_data = _to_dict_on_key(data, lambda e: f'{e["week"]}#{e["level"]}')
+
+    response = {'per_level': _per_level_to_response(per_level_data),
+                'per_week': _per_week_to_response(per_week_data)}
+    return jsonify(response)
+
+
+def _per_level_to_response(data):
+    res = [{'level': level, 'data': data} for level, data in data.items()]
+    res.sort(key=lambda el: el['level'])
+    return [{'level': f"L{entry['level']}", 'data': entry['data']} for entry in res]
+
+
+def _per_week_to_response(data):
+    res = {}
+    for e in [{'week': k.split('#')[0], 'level': int(k.split('#')[1]), 'data': v} for k, v in data.items()]:
+        week = e['week']
+        level_name = 'level' + str(e['level'])
+        if week not in res.keys():
+            res[week] = {'successful_runs': {}, 'failed_runs': {}}
+        res[week]['successful_runs'][level_name] = e['data']['successful_runs']
+        res[week]['failed_runs'][level_name] = e['data']['failed_runs']
+        _add_exception_data(res[week], e['data'])
+    result = [{'week': k, 'data': v} for k, v in res.items()]
+    result.sort(key=lambda el: el['week'])
+    return result
+
+
+def _to_dict_on_key(data, key_selector):
+    result = {}
+    for record in data:
+        key = key_selector(record)
+        result[key] = _add_program_run_data(result.get(key), record)
+    return result
+
+
+def _add_program_run_data(data, rec):
+    if not data:
+        data = {'failed_runs': 0, 'successful_runs': 0}
+    data['successful_runs'] += rec.get('successful_runs') or 0
+    _add_exception_data(data, rec, True)
+    return data
+
+
+def _add_exception_data(entry, data, include_failed_runs=False):
+    exceptions = {k: v for k, v in data.items() if k.lower().endswith('exception')}
+    for k, v in exceptions.items():
+        if not entry.get(k):
+            entry[k] = 0
+        entry[k] += v
+        if include_failed_runs:
+            entry['failed_runs'] += v
+
+
+@app.route('/logs/query', methods=['POST'])
+def query_logs():
+    user = current_user()
+    if not is_admin(user):
+        return utils.page_403(ui_message='unauthorized')
+
+    body = request.json
+    if body is not None and not isinstance(body, dict):
+        return 'body must be an object', 400
+
+    (exec_id, status) = log_fetcher.query(body)
+    response = {'query_status': status, 'query_execution_id': exec_id}
+    return jsonify(response)
+
+
+@app.route('/logs/results', methods=['GET'])
+def get_log_results():
+    query_execution_id = request.args.get('query_execution_id', default=None, type=str)
+    next_token = request.args.get('next_token', default=None, type=str)
+
+    user = current_user()
+    if not is_admin(user):
+        return utils.page_403(ui_message='unauthorized')
+
+    data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
+    response = {'data': data, 'next_token': next_token}
+    return jsonify(response)
 
 
 def get_user_formatted_age(now, date):
@@ -681,7 +840,6 @@ def get_quiz(level_source, question_nr, attempt):
     question_status = 'start' if attempt == 1 else 'false'
 
     if question_nr > quiz.highest_question(questions):
-        # We're done!
         return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
 
     question = quiz.get_question(questions, question_nr)
@@ -722,9 +880,21 @@ def quiz_finished(level):
     # set globals
     g.prefix = '/hedy'
 
+    achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "next_question")
+    if round(session.get('total_score', 0) / quiz.max_score(questions) * 100) == 100:
+        if achievement:
+            achievement.append(ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")[0])
+        else:
+            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")
+    if achievement:
+        achievement = json.dumps(achievement)
+
+    print(achievement)
+
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
                            total_score=round(session.get('total_score', 0) / quiz.max_score(questions) * 100),
                            level_source=level,
+                           achievement=achievement,
                            level=int(level) + 1,
                            questions=questions,
                            next_assignment=1)
@@ -840,11 +1010,11 @@ def is_quiz_enabled():
 
 
 def quiz_disabled_error():
-    return utils.page_404('Hedy quiz disabled!', menu=False)
+    return utils.page_404('Hedy quiz disabled!', menu=False, iframe=True)
 
 
 def no_quiz_data_error():
-    return utils.page_404('No quiz data found for this level', menu=False)
+    return utils.page_404('No quiz data found for this level', menu=False, iframe=True)
 
 
 # routing to index.html
@@ -990,6 +1160,9 @@ def main_page(page):
     if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
         return auth_templates(page, hedyweb.get_page_title(page), g.lang, request)
 
+    if page == "my-achievements":
+        return achievements_page()
+
     if page == 'programs':
         return programs_page(request)
 
@@ -1021,6 +1194,11 @@ def main_page(page):
                                    welcome_teacher=welcome_teacher)
         else:
             return utils.page_403(ui_message='not_teacher')
+
+    if page == 'stats':
+        if not is_admin(current_user()):
+            return utils.page_403(ui_message='unauthorized')
+        return render_template('admin-stats.html')
 
     requested_page = hedyweb.PageTranslations(page)
     if not requested_page.exists():
@@ -1148,19 +1326,27 @@ def render_main_menu(current_page):
 @app.route('/programs_list', methods=['GET'])
 @requires_login
 def list_programs(user):
-    return {'programs': DATABASE.programs_for_user(user['username'])}
+    return {'programs': DATABASE.programs_for_user(user['username']).records}
 
 
-# Not very restful to use a GET to delete something, but indeed convenient; we can do it with a single link and avoiding AJAX.
-@app.route('/programs/delete/<program_id>', methods=['GET'])
+@app.route('/programs/delete/', methods=['POST'])
 @requires_login
-def delete_program(user, program_id):
-    result = DATABASE.program_by_id(program_id)
+def delete_program(user):
+    body = request.json
+    if not isinstance(body.get('id'), str):
+        return 'program id must be a string', 400
+
+    result = DATABASE.program_by_id(body['id'])
+
     if not result or result['username'] != user['username']:
         return "", 404
-    DATABASE.delete_program_by_id(program_id)
+    DATABASE.delete_program_by_id(body['id'])
     DATABASE.increase_user_program_count(user['username'], -1)
-    return redirect('/programs')
+
+    achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "do_you_have_copy")
+    if achievement:
+        return {'achievement': achievement}, 200
+    return {}, 200
 
 
 @app.route('/programs/duplicate-check', methods=['POST'])
@@ -1198,7 +1384,7 @@ def save_program(user):
     # We check if a program with a name `xyz` exists in the database for the username.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
-    programs = DATABASE.programs_for_user(user['username'])
+    programs = DATABASE.programs_for_user(user['username']).records
     program_id = uuid.uuid4().hex
     overwrite = False
     for program in programs:
@@ -1225,7 +1411,11 @@ def save_program(user):
     DATABASE.store_program(stored_program)
     if not overwrite:
         DATABASE.increase_user_program_count(user['username'])
+    DATABASE.increase_user_save_count(user['username'])
+    ACHIEVEMENTS.increase_count("saved")
 
+    if ACHIEVEMENTS.verify_save_achievements(user['username'], 'adventure_name' in body and len(body['adventure_name']) > 2):
+        return jsonify({'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
     return jsonify({'name': body['name'], 'id': program_id})
 
 
@@ -1245,6 +1435,9 @@ def share_unshare_program(user):
         return 'No such program!', 404
 
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
+    achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
+    if achievement:
+        return jsonify({'achievement': achievement, 'id': body['id']})
     return jsonify({'id': body['id']})
 
 
@@ -1262,6 +1455,11 @@ def submit_program(user):
         return 'No such program!', 404
 
     DATABASE.submit_program_by_id(body['id'])
+    DATABASE.increase_user_submit_count(user['username'])
+    ACHIEVEMENTS.increase_count("submitted")
+
+    if ACHIEVEMENTS.verify_submit_achievements(user['username']):
+        return jsonify({"achievements": ACHIEVEMENTS.get_earned_achievements()})
     return jsonify({})
 
 
@@ -1353,7 +1551,11 @@ auth.routes(app, DATABASE)
 
 from website import teacher
 
-teacher.routes(app, DATABASE)
+teacher.routes(app, DATABASE, ACHIEVEMENTS)
+
+# *** ACHIEVEMENTS BACKEND
+
+ACHIEVEMENTS.routes(app, DATABASE)
 
 
 # *** START SERVER ***

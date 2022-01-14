@@ -59,7 +59,7 @@ class TestsLevel18(HedyTester):
     def test_if_with_equals_sign(self):
       code = textwrap.dedent("""\
       naam is 'Hedy'
-      if naam = Hedy:
+      if naam == Hedy:
           print('koekoek')""")
 
       expected = textwrap.dedent("""\
@@ -206,6 +206,17 @@ class TestsLevel18(HedyTester):
       )
 
     # negative tests
+
+    def test_while_undefined_var(self):
+      code = textwrap.dedent("""\
+        while antwoord != 25:
+            print('hoera')""")
+
+      self.single_level_tester(
+        code=code,
+        exception=hedy.exceptions.UndefinedVarException
+      )
+
     def test_var_undefined_error_message(self):
       code = textwrap.dedent("""\
         naam is 'Hedy'

@@ -5,14 +5,41 @@ in case of an error, the resulting HedyException.
 
 ## Level 1
 
-### Commands
+### Commands and types
 
 Level 1 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `echo`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>'right' + integer | 'left' + integer</td>
+  </tr>
+  <tr>
+    <td>echo</td>
+    <td>integer | string</td>
+  </tr>
+</tbody>
+</table>
+
 
 #### Correct Programs
 
@@ -107,15 +134,44 @@ Level 1 supports:
 
 ## Level 2
 
-### Commands
+### Commands and types
 
 Level 2 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+    <tr>
+    <td>sleep</td>
+    <td> empty | integer</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
@@ -218,18 +274,56 @@ Level 2 supports:
 
 ## Level 3
 
-### Commands
+### Commands and types
 
 Level 3 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+    <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
@@ -364,18 +458,57 @@ Level 3 supports:
 
 ## Level 4
 
-### Commands
+### Commands and types
 
 Level 4 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+</tbody>
+</table>
+
 
 #### Correct Programs
 
@@ -510,20 +643,64 @@ Level 4 supports:
 
 ## Level 5
 
-### Commands
+### Commands and types
 
 Level 5 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
@@ -679,20 +856,64 @@ Level 5 supports:
 
 ## Level 6
 
-### Commands
+### Commands and types
 
 Level 6 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
