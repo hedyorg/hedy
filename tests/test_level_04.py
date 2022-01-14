@@ -200,7 +200,8 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      expected=expected
+      expected=expected,
+      expected_commands=['ask', 'is', 'add', 'print', 'random']
     )
   def test_remove_from_list(self):
     code = textwrap.dedent("""\
@@ -407,3 +408,46 @@ class TestsLevel4(HedyTester):
       code=code,
       expected=expected
     )
+
+
+  def test_meta_column_missing_closing_quote(self):
+    code = textwrap.dedent("""\
+    print 'Hello'
+    print 'World""")
+
+    instance = hedy.IsValid()
+    instance.level = self.level
+    program_root = hedy.parse_input(code, self.level, 'en')
+    is_valid = instance.transform(program_root)
+    _, invalid_info = is_valid
+
+    invalid_info = invalid_info[0]
+
+    line = invalid_info.line
+    column = invalid_info.column
+
+    # Boryana Jan 22
+    # Proabably we want to change the column so that it points to
+    # the place where the quote is actually missing?
+    self.assertEqual(2, line)
+    self.assertEqual(7, column)
+
+
+  def test_meta_column_missing_opening_quote(self):
+    code = textwrap.dedent("""\
+    print 'Hello'
+    print World'""")
+
+    instance = hedy.IsValid()
+    instance.level = self.level
+    program_root = hedy.parse_input(code, self.level, 'en')
+    is_valid = instance.transform(program_root)
+    _, invalid_info = is_valid
+
+    invalid_info = invalid_info[0]
+
+    line = invalid_info.line
+    column = invalid_info.column
+
+    self.assertEqual(2, line)
+    self.assertEqual(7, column)
