@@ -30,9 +30,9 @@
     </div>
     <div class="flex flex-wrap mx-auto justify-center turn-pre-into-ace" id="explore_page_programs">
     {% for program in programs %}
-        <div class="explore-program-box" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
-              <div class="explore-program-box-title" style="transform: rotate(5deg);">
-                  {{ program.name | truncate(20) }}
+        <div class="explore-program-box overflow-hidden" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+              <div class="explore-program-box-title bg-blue-600 text-white text-lg text-center -ml-2 -mt-8 pt-10 pl-12" style="transform: rotate(5deg); width: 18rem;">
+                      {{ program.name | truncate(20) }}
               </div>
               <div class="px-4">
                   {{ texts.level }}: <b>{{ program.level }}</b>
