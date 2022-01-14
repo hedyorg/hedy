@@ -4,6 +4,34 @@ from unittest import mock
 import os
 import contextlib
 
+
+class Helpers:
+  def __init__(self):
+    # Necessary to make pylint happy
+    self.table = None
+    
+  def insert(self, *rows):
+    for row in rows:
+      self.table.create(row)
+
+  def insert_sample_data(self):
+    self.insert(
+        dict(id='key', sort=1, x=1, y=1, m=9),
+        dict(id='key', sort=2, x=1, y=3, m=9),
+        dict(id='key', sort=3, x=1, y=2, m=8))
+
+  def get_pages(self, key, **kwargs):
+    ret = []
+
+    p = self.table.get_many(key, **kwargs)
+    while True:
+      if p.records:
+        ret.append(p.records)
+
+      if not p.next_page_token: break
+      p = self.table.get_many(key, **kwargs, pagination_token=p.next_page_token)
+    return ret
+
 class TestDynamoAbstraction(unittest.TestCase):
   def setUp(self):
     self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', 'id')
@@ -81,7 +109,7 @@ class TestSortKeysInMemory(unittest.TestCase):
     self.table.create(dict(id='key', sort='a', value='A'))
 
     # Get them back in the right order
-    ret = self.table.get_many(dict(id='key'))
+    ret = list(self.table.get_many(dict(id='key')))
     self.assertEqual(ret, [
       dict(id='key', sort='a', value='A'),
       dict(id='key', sort='b', value='B'),
@@ -92,24 +120,22 @@ class TestSortKeysInMemory(unittest.TestCase):
     self.table.update(dict(id='key', sort='s'), dict(x='x'))
     self.table.update(dict(id='key', sort='s'), dict(y='y'))
 
-    print(self.table.storage.tables)
-
     ret = self.table.get(dict(id='key', sort='s'))
     self.assertEqual(ret, dict(id='key', sort='s', x='x', y='y'))
 
 
-class TestQueryInMemory(unittest.TestCase):
+class TestQueryInMemory(unittest.TestCase, Helpers):
   """Test that the query work on an in-memory table."""
 
   def setUp(self):
     self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', partition_key='id', sort_key='sort',
-                              indexed_fields=[dynamo.Key('x', 'y'), dynamo.Key('m')])
+                              indexed_fields=[dynamo.IndexKey('x', 'y'), dynamo.IndexKey('m')])
 
   def test_query(self):
     self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
     self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})
 
-    ret = self.table.get_many({'id': 'key'})
+    ret = list(self.table.get_many({'id': 'key'}))
 
     self.assertEqual(ret, [
       {'id': 'key', 'sort': 1, 'm': 'val'},
@@ -121,10 +147,10 @@ class TestQueryInMemory(unittest.TestCase):
     self.table.create({'id': 'key', 'sort': 2, 'x': 'y'})
     self.table.create({'id': 'key', 'sort': 3, 'x': 'z'})
 
-    ret = self.table.get_many({
+    ret = list(self.table.get_many({
       'id': 'key',
       'sort': dynamo.Between(2, 5),
-    })
+    }))
     self.assertEqual(ret, [
       {'id': 'key', 'sort': 2, 'x': 'y'},
       {'id': 'key', 'sort': 3, 'x': 'z'},
@@ -134,7 +160,7 @@ class TestQueryInMemory(unittest.TestCase):
     self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
     self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})
 
-    ret = self.table.get_many({'m': 'val'})
+    ret = list(self.table.get_many({'m': 'val'}))
 
     self.assertEqual(ret, [
       {'id': 'key', 'sort': 1, 'm': 'val'}
@@ -146,7 +172,7 @@ class TestQueryInMemory(unittest.TestCase):
     self.table.create({'id': 'key', 'sort': 3, 'x': 'val', 'y': 1})
     self.table.create({'id': 'key', 'sort': 4, 'x': 'another_val', 'y': 2})
 
-    ret = self.table.get_many({'x': 'val'})
+    ret = list(self.table.get_many({'x': 'val'}))
 
     self.assertEqual(ret, [
       {'id': 'key', 'sort': 1, 'x': 'val', 'y': 0},
@@ -160,7 +186,7 @@ class TestQueryInMemory(unittest.TestCase):
     self.table.create({'id': 'key', 'sort': 3, 'x': 'val', 'y': 1})
     self.table.create({'id': 'key', 'sort': 4, 'x': 'another_val', 'y': 2})
 
-    ret = self.table.get_many({'x': 'val', 'y': 1})
+    ret = list(self.table.get_many({'x': 'val', 'y': 1}))
 
     self.assertEqual(ret, [
       {'id': 'key', 'sort': 2, 'x': 'val', 'y': 1},
@@ -172,13 +198,88 @@ class TestQueryInMemory(unittest.TestCase):
     self.table.create({'id': 'key', 'sort': 2, 'x': 'val', 'y': 3})
     self.table.create({'id': 'key', 'sort': 3, 'x': 'val', 'y': 6})
 
-    ret = self.table.get_many({
+    ret = list(self.table.get_many({
       'x': 'val',
       'y': dynamo.Between(2, 5),
-    })
+    }))
     self.assertEqual(ret, [
       {'id': 'key', 'sort': 2, 'x': 'val', 'y': 3}
     ])
+
+  def test_paginated_query(self):
+    self.insert_sample_data()
+    pages = self.get_pages({ 'id': 'key' }, limit=1)
+
+    self.assertEqual(pages, [
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+      [dict(id='key', sort=3, x=1, y=2, m=8)],
+    ])
+
+  def test_paginated_query_reverse(self):
+    self.insert_sample_data()
+    pages = self.get_pages({ 'id': 'key' }, limit=1, reverse=True)
+
+    self.assertEqual(pages, [
+      [dict(id='key', sort=3, x=1, y=2, m=8)],
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+    ])
+
+  def test_paginated_query_on_sortkey_index(self):
+    self.insert_sample_data()
+    pages = self.get_pages({ 'x': 1 }, limit=1)
+
+    self.assertEqual(pages, [
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+      [dict(id='key', sort=3, x=1, y=2, m=8)],
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+    ])
+
+  def test_paginated_query_on_sortkey_index_reverse(self):
+    self.insert_sample_data()
+    pages = self.get_pages({ 'x': 1 }, limit=1, reverse=True)
+
+    self.assertEqual(pages, [
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+      [dict(id='key', sort=3, x=1, y=2, m=8)],
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+    ])
+
+  def test_paginated_query_on_partitionkey_index(self):
+    self.insert_sample_data()
+    pages = self.get_pages({ 'm': 9 }, limit=1)
+
+    self.assertEqual(pages, [
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+    ])
+
+  def test_paginated_query_on_partitionkey_index_reverse(self):
+    self.insert_sample_data()
+    pages = self.get_pages({ 'm': 9 }, limit=1, reverse=True)
+
+    self.assertEqual(pages, [
+      [dict(id='key', sort=2, x=1, y=3, m=9)],
+      [dict(id='key', sort=1, x=1, y=1, m=9)],
+    ])
+
+  def test_paginated_scan(self):
+    self.insert(
+        dict(id='key', sort=1, y=1),
+        dict(id='key', sort=2, y=3),
+        dict(id='key', sort=3, y=6))
+
+    ret = self.table.scan(limit=1)
+    self.assertEqual(ret[0], {'id': 'key', 'sort': 1, 'y': 1})
+
+    ret = self.table.scan(limit=1, pagination_token=ret.next_page_token)
+    self.assertEqual(ret[0], {'id': 'key', 'sort': 2, 'y': 3})
+
+    ret = self.table.scan(limit=1, pagination_token=ret.next_page_token)
+    self.assertEqual(ret[0], {'id': 'key', 'sort': 3, 'y': 6})
+
+    self.assertIsNone(ret.next_page_token)
 
 class TestSortKeysAgainstAws(unittest.TestCase):
   """Test that the operations send out appropriate Dynamo requests."""

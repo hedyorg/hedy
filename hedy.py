@@ -81,24 +81,24 @@ def promote_types(types, rules):
 
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
+commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'],
                       2: ['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
-                      3: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'remove'],
-                      4: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove'],
-                      5: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else'],
-                      6: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else'],
-                      7: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
-                      8: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
-                      9: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
-                      10: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      11: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      12: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      13: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
-                      14: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
-                      15: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
-                      16: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
-                      17: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif'],
-                      18: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif', 'input']
+                      3: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add', 'random', 'remove'],
+                      4: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove'],
+                      5: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else'],
+                      6: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else'],
+                      7: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
+                      8: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
+                      9: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
+                      10: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      11: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      12: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      13: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
+                      14: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
+                      15: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
+                      16: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
+                      17: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif'],
+                      18: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif', 'input']
                       }
 
 # TODO: these need to be taken from the translated grammar keywords based on the language
@@ -732,12 +732,13 @@ def are_all_arguments_true(args):
 # because both filter out some types of 'wrong' nodes
 # TODO: this could also use a default lark rule like AllAssignmentCommands does now
 
-# TODO: maybe this could use meta (with v_args) instead of both inheritors?
+@v_args(meta=True)
 class Filter(Transformer):
-    def __default__(self, args, children, meta):
-        return are_all_arguments_true(children)
+    def __default__(self, data, children, meta):
+        result, args = are_all_arguments_true(children)
+        return result, args, meta
 
-    def program(self, args):
+    def program(self, args, meta=None):
         bool_arguments = [x[0] for x in args]
         if all(bool_arguments):
             return [True] #all complete
@@ -747,19 +748,23 @@ class Filter(Transformer):
                     return False, a[1]
 
     #leafs are treated differently, they are True + their arguments flattened
-    def var(self, args):
-        return True, ''.join([str(c) for c in args])
-    def random(self, args):
-        return True, 'random'
-    def punctuation(self, args):
-        return True, ''.join([c for c in args])
-    def number(self, args):
-        return True, ''.join([c for c in args])
-    def text(self, args):
-        return all(args), ''.join([c for c in args])
-    def text_with_spaces(self, args):
-        return all(args), ''.join([c for c in args])
+    def var(self, args, meta):
+        return True, ''.join([str(c) for c in args]), meta
 
+    def random(self, args, meta):
+        return True, 'random', meta
+
+    def punctuation(self, args, meta):
+        return True, ''.join([c for c in args]), meta
+
+    def number(self, args, meta):
+        return True, ''.join([c for c in args]), meta
+
+    def text(self, args, meta):
+        return all(args), ''.join([c for c in args]), meta
+      
+    def text_with_spaces(self, args, meta):
+        return all(args), ' '.join([c for c in args])
 
 class UsesTurtle(Transformer):
     # returns true if Forward or Turn are in the tree, false otherwise
@@ -798,12 +803,14 @@ class AllCommands(Transformer):
         # some keywords have names that are not a valid name for a command
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
-        if keyword in  ['assign', 'assign_is', 'assign_list', 'assign_list_is']:
+        if keyword in ['assign', 'assign_is', 'assign_list', 'assign_list_is']:
             return 'is'
         if keyword == 'ifelse':
             return 'else'
         if keyword == 'ifs':
             return 'if'
+        if keyword == 'elifs':
+            return 'elif'
         if keyword == 'for_loop':
             return 'for'
         if keyword == 'repeat_list':
@@ -816,6 +823,8 @@ class AllCommands(Transformer):
             return 'while'
         if keyword == 'ask_is' or keyword == 'ask_equals':
             return 'ask'
+        if keyword == 'in_list_check':
+            return 'in'
         return keyword
 
     def __default__(self, args, children, meta):
@@ -896,36 +905,47 @@ def all_print_arguments(input_string, level, lang='en'):
 
     return AllPrintArguments(level).transform(program_root)
 
-
-@v_args(meta=True)
+@v_args(meta=True)  # Note that setting meta=True here is required regardless of the annotation of the Filter class
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
-    def program(self, args, meta):
+
+    def program(self, args, meta=None):
         if len(args) == 0:
             return False, InvalidInfo("empty program")
-        return super().program(args)
+        return super().program(args, meta)
 
     def error_invalid_space(self, args, meta):
         # return space to indicate that line starts in a space
-        return False, InvalidInfo(" ", line=meta.line, column=meta.column)
+        return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_print_nq(self, args, meta):
         # return error source to indicate what went wrong
-        return False, InvalidInfo("print without quotes", line=meta.line, column=meta.column)
+
+        # Boryana Jan 22
+        # The meta variable passed as a parameter here contains the metadata of the current node.
+        # The args parameter is an array of the triples, of which the last part holds the metadata of the
+        # IMMEDIATE children. Two important points:
+        # - If an error rule has more than 2 levels of nested children, we lose the metadata of the
+        # deeper ones and get only the data of the immediate children. This does work for now, because the parse trees
+        # of all error grammar rules are only 1 level deep. For now.
+        # - At level 5, the error_print_nq can have multiple arguments and we cannot assume that it is the first one
+        # that has a missing quote. Further analysis is required to pinpoint where the quote should be added.
+
+        #TODO, fh jan 2022 maybe we want to take end_column?
+        return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_invalid(self, args, meta):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         # TODO: add more information to the InvalidInfo
 
-
         error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
-        return False, error
+        return False, error, meta
 
     def error_unsupported_number(self, args, meta):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error
+        return False, error, meta
 
     #other rules are inherited from Filter
 
@@ -948,11 +968,14 @@ class IsComplete(Filter):
     # tree is transformed to a node of [True] or [False, args, line_number]
 
 
-    def ask(self, args, meta):
+    def ask(self, args, meta=None):
         # in level 1 ask without arguments means args == []
         # in level 2 and up, ask without arguments is a list of 1, namely the var name
         incomplete = (args == [] and self.level == 1) or (len(args) == 1 and self.level >= 2)
-        return not incomplete, ('ask', meta.line)
+        if meta is not None:
+            return not incomplete, ('ask', meta.line)
+        else:
+            return not incomplete, ('ask', 1)
     def ask_is(self, args, meta):
         return self.ask(args, meta)
     def ask_equals(self, args, meta):
