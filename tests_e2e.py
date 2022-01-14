@@ -653,6 +653,7 @@ class TestProgram(AuthHelper):
 
         # WHEN retrieving programs after saving a program
         saved_programs = self.get_data('programs_list')['programs']
+        print(saved_programs)
 
         # THEN verify that the program we just saved is in the list
         self.assertEqual(len(saved_programs), 1)
