@@ -163,8 +163,16 @@ code {
   @apply text-white no-underline font-slab font-semibold border-b-4 tracking-wide text-xl py-3 mr-4;
 }
 
-@screen lg { .menubar-btn { @apply px-2; }};
-@screen xl { .menubar-btn { @apply px-4; }};
+@screen lg {
+  .menubar-btn {
+    @apply px-2;
+  }
+}
+@screen xl {
+  .menubar-btn {
+    @apply px-4;
+  }
+}
 
 .codebar-btn {
   @apply text-black no-underline border-white tracking-wide font-normal px-4 py-3 mr-4;
@@ -251,8 +259,16 @@ table.users td {
     /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1);
 }
 
-@screen lg { .tab { @apply px-2; }};
-@screen xl { .tab { @apply px-4; }};
+@screen lg {
+  .tab {
+    @apply px-2;
+  }
+}
+@screen xl {
+  .tab {
+    @apply px-4;
+  }
+}
 
 .tab + .tab {
   box-shadow:
