@@ -127,7 +127,7 @@ const LEVELS = [
       rule_isAsk('gobble'),
       rule_is('gobble'),
       rule_turtle(),
-      rule_sleep(),
+      rule_sleep()
     ),
   },
   {
@@ -138,11 +138,11 @@ const LEVELS = [
       rule_isAsk('gobble'),
       rule_is('gobble'),
       rule_turtle(),
-      rule_sleep(),
+      rule_sleep()
     ),
   },
   {
-    // Adds if/else
+    // Adds quotations
     name: 'level4',
     rules: pipe(baseRules(),
       rule_printSpace(),
@@ -150,8 +150,7 @@ const LEVELS = [
       rule_is(),
       rule_turtle(),
       rule_sleep(),
-      rule_ifElseOneLine(),
-      rule_expressions(),
+      rule_expressions()
     ),
   },
   {
@@ -163,9 +162,8 @@ const LEVELS = [
       rule_is(),
       rule_turtle(),
       rule_sleep(),
-      rule_ifElseOneLine(),
       rule_expressions(),
-      rule_repeat(),
+      rule_ifElseOneLine()
     ),
   },
   {
