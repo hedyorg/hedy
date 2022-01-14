@@ -893,52 +893,53 @@ def submit_answer(level_source, question_nr, attempt):
     # The number should always be the same as 'question_nr', or otherwise
     # be 'question_nr - 1', so is unnecessary. But we'll leave it here for now.
     if request.method == "POST":
+        # The value is a character and not a text
         chosen_option = request.form.get("submit-button")
-        print('chosen option')
+        print('-----------------chosen option', chosen_option)
 
-    # Reading the yaml file
-    questions = quiz.quiz_data_file_for(g.lang, level_source)
-    if not questions:
-        return no_quiz_data_error()
+        # Reading the yaml file
+        questions = quiz.quiz_data_file_for(g.lang, level_source)
+        if not questions:
+            return no_quiz_data_error()
 
-    # Convert question_nr to an integer
-    q_nr = int(question_nr)
+        # Convert question_nr to an integer
+        q_nr = int(question_nr)
 
-    # Convert the corresponding chosen option to the index of an option
-    question = quiz.get_question(questions, q_nr)
+        # Convert the corresponding chosen option to the index of an option
+        question = quiz.get_question(questions, q_nr)
 
-    is_correct = quiz.is_correct_answer(question, chosen_option)
+        is_correct = quiz.is_correct_answer(question, chosen_option)
 
-    session['chosenOption'] = chosen_option
-    if not is_correct:
-        session['wrong_answer_hint'] = quiz.get_hint(question, chosen_option)
-    else:
-        # Correct answer -- make sure there is no hint on the next display page
-        session.pop('wrong_answer_hint', None)
+        session['chosenOption'] = chosen_option
+        if not is_correct:
+            session['wrong_answer_hint'] = quiz.get_hint(question, chosen_option)
+        else:
+            # Correct answer -- make sure there is no hint on the next display page
+            session.pop('wrong_answer_hint', None)
 
-    # Store the answer in the database. If we don't have a username,
-    # use the session ID as a username.
-    username = current_user()['username'] or f'anonymous:{session_id()}'
+        # Store the answer in the database. If we don't have a username,
+        # use the session ID as a username.
+        username = current_user()['username'] or f'anonymous:{session_id()}'
 
-    DATABASE.record_quiz_answer(session['quiz-attempt-id'],
-                                username=username,
-                                level=level_source,
-                                is_correct=is_correct,
-                                question_number=question_nr,
-                                answer=chosen_option)
+        DATABASE.record_quiz_answer(session['quiz-attempt-id'],
+                                    username=username,
+                                    level=level_source,
+                                    is_correct=is_correct,
+                                    question_number=question_nr,
+                                    answer=chosen_option)
 
-    if is_correct:
-        score = quiz.correct_answer_score(question)
-        session['total_score'] = session.get('total_score', 0) + score
-        session['correct_answer'] = session.get('correct_answer', 0) + 1
+        if is_correct:
+            score = quiz.correct_answer_score(question)
+            session['total_score'] = session.get('total_score', 0) + score
+            session['correct_answer'] = session.get('correct_answer', 0) + 1
 
-        quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-        return redirect(url_for('quiz_feedback', quiz_answers= quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang))
+            quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+            return redirect(url_for('quiz_feedback', quiz_answers= quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang))
 
-    # Not a correct answer. You can try again if you haven't hit your max attempts yet.
-    if attempt >= quiz.MAX_ATTEMPTS:
-        quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-        return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang))
+        # Not a correct answer. You can try again if you haven't hit your max attempts yet.
+        if attempt >= quiz.MAX_ATTEMPTS:
+            quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+            return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang))
 
     # Redirect to the display page to try again
     return redirect(url_for('get_quiz', chosen_option=chosen_option, level_source=level_source, question_nr=question_nr,

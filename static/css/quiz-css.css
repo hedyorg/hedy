@@ -40,13 +40,51 @@
 button:disabled{
     background-color: darkgray !important;
 }
+.option-row {
+    gap: 20px 20px;
+}
+
+.option-col {
+    gap: 20px 20px;
+}
+
+.option-block {
+    width: 100%;
+    position: relative;
+}
+
+
+.option-row:nth-child(even) .option-block:nth-child(even) {
+   background-color: yellow;
+}
+
+.option-row:nth-child(even) .option-block:nth-child(odd) {
+   background-color: pink;
+}
+.option-row:nth-child(odd) .option-block:nth-child(even) {
+   background-color: pink;
+}
+
+.option-row:nth-child(odd) .option-block:nth-child(odd) {
+   background-color: yellow;
+}
+
+.option-block.active {
+    background-color: green !important;
+}
+
+.incorrect-option {
+    background-color: rgba(194, 25, 25, 0.42)!important;
+    border-color: #c21919!important;
+}
+
 
 #answer-disabled-A, #answer-disabled-B, #answer-disabled-C,#answer-disabled-D{
     background-color: rgba(194, 25, 25, 0.42)!important;
     border-color: #c21919!important;
 }
 
-#A, #B,#C, #D, #answer-disabled-A, #answer-disabled-B, #answer-disabled-C,#answer-disabled-D{
+#A, #B,#C, #D, #answer-disabled-A, #answer-disabled-B, #answer-disabled-C,#answer-disabled-D, #answer-A, #answer-B, #answer-C,#answer-D {
     flex-direction: row;
     flex-grow: 1;
     padding: 0.5rem;
@@ -87,9 +125,12 @@ button:disabled{
     border: 2.5px solid #3182ce;
     margin-bottom: 1.5rem;
 }
+button.radio-btn{
+    position: relative;
+}
 
-.radio-button{
-    position: absolute;
+.btn-container{
+    position:relative
 }
 
 button:focus{
@@ -105,6 +146,49 @@ svg.option-icon, svg.option-icon {
 
 }
 
+#submit-button{
+    width: 3.5rem;
+    height: 3.5rem;
+    bottom: 40px;
+    right: 10px;
+    position: relative;
+    margin-left:auto;
+}
+
+polygon.shape.button-shape{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+svg.button-icon{
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-items: center;
+    margin: auto;
+    padding: 0 0 0 0!important;
+}
+
+.submit-button {
+    display: none;
+    min-width: 80px;
+    min-height: 40px;
+    color: white;
+    background-color: red;
+    position: absolute;
+    right: 10px;
+    bottom: -20px;
+    padding: 4px 10px;
+    border-radius: 7px;
+}
+.active .submit-button {
+    display: block;
+}
+/*
+.submit-button:disabled{
+    cursor: not-allowed;
+}
+ */
 .shape-zero, .shape-three{
    fill: rgb(241, 165, 33) !important;
 }
