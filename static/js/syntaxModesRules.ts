@@ -121,10 +121,9 @@ const LEVELS = [
     ),
   },
   {
-    // Adds lists and 'at random'
     name: 'level2',
     rules: pipe(baseRules(),
-      rule_printSpace('expression_eol'),
+      rule_printSpace('gobble'),
       rule_isAsk('gobble'),
       rule_is('gobble'),
       rule_turtle(),
@@ -132,7 +131,7 @@ const LEVELS = [
     ),
   },
   {
-    // Adds quoted text
+    // Adds 'at random'
     name: 'level3',
     rules: pipe(baseRules(),
       rule_printSpace('expression_eol'),
