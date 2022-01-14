@@ -80,7 +80,7 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   user = current_user()
 
   if not level_defaults:
-    return utils.page_404 (ui_message='no_such_level')
+    return utils.error_page(error=404,  ui_message='no_such_level')
 
 
   arguments_dict = {}
