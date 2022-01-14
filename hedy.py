@@ -908,10 +908,9 @@ class IsValid(Filter):
         # of all error grammar rules are only 1 level deep. For now.
         # - At level 5, the error_print_nq can have multiple arguments and we cannot assume that it is the first one
         # that has a missing quote. Further analysis is required to pinpoint where the quote should be added.
-        return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
 
         #TODO, fh jan 2022 maybe we want to take end_column?
-        return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column)
+        return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_invalid(self, args, meta):
         # TODO: this will not work for misspelling 'at', needs to be improved!
