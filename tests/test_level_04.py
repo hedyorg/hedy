@@ -425,6 +425,9 @@ class TestsLevel4(HedyTester):
     line = invalid_info.line
     column = invalid_info.column
 
+    # Boryana Jan 22
+    # Proabably we want to change the column so that it points to
+    # the place where the quote is actually missing?
     self.assertEqual(2, line)
     self.assertEqual(7, column)
 
