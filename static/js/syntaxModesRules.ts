@@ -260,21 +260,6 @@ const LEVELS = [
       rule_forRangeParen(),
     ),
   },
-// ----------------------------------------------------------------
-//  Everything below this line hasn't been done yet
-// ----------------------------------------------------------------
-  {
-    name: 'level11',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
   {
     name: 'level13',
     rules: pipe(baseRules(),
