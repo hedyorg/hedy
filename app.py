@@ -787,6 +787,7 @@ def get_log_results():
     return jsonify(response)
 
 
+
 def get_user_formatted_age(now, date):
     texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
     program_age = now - date
@@ -1210,6 +1211,35 @@ def main_page(page):
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
                            content=main_page_translations)
+
+
+@app.route('/explore', methods=['GET'])
+def explore():
+    level = request.args.get('level', default=None, type=str)
+    adventure = request.args.get('adventure', default=None, type=str)
+
+    level = None if level == "null" else level
+    adventure = None if adventure == "null" else adventure
+
+    if level or adventure:
+        programs = DATABASE.get_filtered_explore_programs(level, adventure)
+    else:
+        programs = DATABASE.get_all_explore_programs()
+
+    for program in programs:
+        program['code'] = "\n".join(program['code'].split("\n")[:4])
+
+    adventures = None
+    if hedy_content.Adventures(session['lang']).has_adventures():
+        adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
+
+    return render_template('explore.html', programs=programs,
+                           filtered_level=level,
+                           filtered_adventure=adventure,
+                           max_level=hedy.HEDY_MAX_LEVEL,
+                           adventures=adventures,
+                           page_title=hedyweb.get_page_title('explore'),
+                           current_page='explore')
 
 
 @app.route('/change_language', methods=['POST'])
