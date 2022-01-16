@@ -1,4 +1,6 @@
 import os
+
+import utils
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -92,9 +94,11 @@ def is_user_logged_in():
     """Return whether or not a user is currently logged in."""
     return bool(current_user()['username'])
 
-# Remove the current user from the Flask session.
+# Remove the current info from the Flask session.
 def forget_current_user():
     session.pop('user', None) # We are not interested in the value of the use key.
+    session.pop('achieved', None) # Delete session achievements if existing
+
 
 def is_admin(user):
     admin_user = os.getenv('ADMIN_USER')
@@ -121,7 +125,7 @@ def requires_login(f):
     @wraps(f)
     def inner(*args, **kws):
         if not is_user_logged_in():
-            return 'unauthorized', 403
+            return utils.error_page(error=403)
         return f(current_user(), *args, **kws)
     return inner
 

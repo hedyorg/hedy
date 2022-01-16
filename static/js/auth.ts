@@ -291,11 +291,12 @@ export const auth = {
     $.get('/program-stats', data).done (function (response) {
 
       // update program runs per level charts
-      const failedRunsPerLevelDatasets = generatePerLevelDataset('Failed runs', response['per_level'], 'data.failed_runs', chart_fail_color);
-      const successfulRunsPerLevelDatasets = generatePerLevelDataset('Successful runs', response['per_level'], 'data.successful_runs', chart_success_color);
+      const failedRunsPerLevelDataset = generatePerLevelDataset('Failed runs', response['per_level'], 'data.failed_runs', chart_fail_color, false);
+      const successfulRunsPerLevelDataset = generatePerLevelDataset('Successful runs', response['per_level'], 'data.successful_runs', chart_success_color, false);
+      const errorRatePerLevelDataset = generatePerLevelDataset('Error rate', response['per_level'], 'data.error_rate', chart_fail_color, true);
 
-      updateChart('failedRunsPerLevelChart', failedRunsPerLevelDatasets);
-      updateChart('successfulRunsPerLevelChart', successfulRunsPerLevelDatasets);
+      updateChart('programRunsPerLevelChart', [successfulRunsPerLevelDataset, failedRunsPerLevelDataset]);
+      updateChart('errorRatePerLevelChart', [errorRatePerLevelDataset]);
 
 
       // update program runs per week per level charts
@@ -423,13 +424,14 @@ export const auth = {
   },
 
   initStats: function() {
-    initChart('successfulRunsPerLevelChart', 'bar', 'Successful runs per level', 'Level #', 'top');
-    initChart('failedRunsPerLevelChart', 'bar', 'Failed runs per level', 'Level #', 'top');
-    initChart('successfulRunsPerWeekChart', 'bar', 'Successful runs per week', 'Week #', 'right');
-    initChart('failedRunsPerWeekChart', 'bar', 'Failed runs per week', 'Week #', 'right');
+    initChart('programRunsPerLevelChart', 'bar', 'Program runs per level', 'Level #', 'top', false, true);
+    initChart('errorRatePerLevelChart', 'line', 'Error rate per level', 'Level #', 'top', true, false);
 
-    initChart('exceptionsPerLevelChart', 'line', 'Exceptions per level', 'Level #', 'right');
-    initChart('exceptionsPerWeekChart', 'line', 'Exceptions per week', 'Week #', 'right');
+    initChart('successfulRunsPerWeekChart', 'bar', 'Successful runs per week', 'Week #', 'right', false, false);
+    initChart('failedRunsPerWeekChart', 'bar', 'Failed runs per week', 'Week #', 'right', false, false);
+
+    initChart('exceptionsPerLevelChart', 'line', 'Exceptions per level', 'Level #', 'right', false, false);
+    initChart('exceptionsPerWeekChart', 'line', 'Exceptions per week', 'Week #', 'right', false, false);
 
     // Show the first stats by default when the page loads
     $('.stats-period-toggle').first().click()
@@ -494,7 +496,7 @@ $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
 /**
  Charts setup
  */
-function initChart(elementId: string, chartType: any, title: string, xTitle: string, legendPosition: any) {
+function initChart(elementId: string, chartType: any, title: string, xTitle: string, legendPosition: any, is_percent: boolean, stacked: boolean) {
   const chart = document.getElementById(elementId) as HTMLCanvasElement;
   new Chart(chart, {
     type: chartType,
@@ -513,13 +515,26 @@ function initChart(elementId: string, chartType: any, title: string, xTitle: str
       },
       scales: {
         y: {
-          beginAtZero: true
+          beginAtZero: true,
+          stacked: stacked,
+          scaleLabel: {
+            display: is_percent,
+            labelString: is_percent ? "Percentage" : ""
+          },
+          ticks: is_percent ? {
+            min: 0,
+            max: 100,
+            callback: function(value: any) {
+              return value + "%"
+            }
+          } : {}
         },
         x: {
           title: {
             display: true,
             text: xTitle
-          }
+          },
+          stacked: stacked
         }
       }
     }
@@ -561,8 +576,8 @@ function getPropertyNames(data: any[], filter: any) {
   return result;
 }
 
-function generatePerLevelDataset(label: string, data: any[], yAxisKey: string, color: string) {
-  return [{
+function generatePerLevelDataset(label: string, data: any[], yAxisKey: string, color: string, border: boolean) {
+  return {
     label: label,
     data: data,
     parsing: {
@@ -570,8 +585,9 @@ function generatePerLevelDataset(label: string, data: any[], yAxisKey: string, c
       yAxisKey: yAxisKey,
     },
     backgroundColor: [color],
-    borderWidth: 0
-  }]
+    borderColor: [color],
+    borderWidth: border ? 5 : 0,
+  }
 }
 
 function generateDatasets(data: any[], source: any[], xAxisKey: string, yAxisKey: string, colors: string[], label: any = (x: string) => x) {

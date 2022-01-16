@@ -242,9 +242,7 @@ class TestsLevel17(HedyTester):
       elif str(a) == str('2'):
         x = 222""")
 
-
-
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, expected_commands=['is', 'if', 'is', 'elif', 'is', 'elif', 'is'])
 
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
