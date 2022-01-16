@@ -356,7 +356,7 @@ def routes(app, database):
 
         if not check_password(body['old_password'], user['password']):
             print("Hier zou de error gegooid moeten worden")
-            return g.auth.texts.get('password_invalid'), 403
+            return g.auth_texts.get('password_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
 
