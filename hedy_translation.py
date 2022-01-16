@@ -393,10 +393,15 @@ class ConvertToLang17(ConvertToLang16):
 @hedy_translator(level=18)
 class ConvertToLang18(ConvertToLang17):
 
-    def input(self, args):
+    def input_is(self, args):
         var = args[0]
         remaining_args = args[1:]
         return var + " " + self.keywords["is"] + " " + self.keywords["input"] + "(" + ''.join(remaining_args) + ")"
+
+    def input_equals(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return var + " = " + self.keywords["input"] + "(" + ''.join(remaining_args) + ")"
 
     def for_loop(self, args):
         return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + \

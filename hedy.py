@@ -359,25 +359,31 @@ class LookupEntryCollector(visitors.Visitor):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree)
 
+    def input_is(self, tree):
+        self.input(tree)
+    
+    def input_equals(self, tree):
+        self.input(tree)
+
     def assign(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree.children[1])
     
     def assign_is(self, tree):
-        return self.assign(tree)
+        self.assign(tree)
     
     def assign_equals(self, tree):
-        return self.assign(tree)
+        self.assign(tree)
 
     def assign_list(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree)
     
     def assign_list_is(self, tree):
-        return self.assign_list(tree)
+        self.assign_list(tree)
 
     def assign_list_equals(self, tree):
-        return self.assign_list(tree)
+        self.assign_list(tree)
 
     # list access is added to the lookup table not because it must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
@@ -825,6 +831,8 @@ class AllCommands(Transformer):
             return 'ask'
         if keyword == 'in_list_check':
             return 'in'
+        if keyword in ['input_is', 'input_equals']:
+            return 'input'
         return keyword
 
     def __default__(self, args, children, meta):
@@ -983,7 +991,12 @@ class IsComplete(Filter):
     def print(self, args, meta):
         return args != [], ('print', meta.line)
     def input(self, args, meta):
-        return args != [], ('input', meta.line)
+        print(args)
+        return len(args) > 1, ('input', meta.line)
+    def input_is(self, args, meta):
+        return self.input(args, meta)
+    def input_equals(self, args, meta):
+        return self.input(args, meta)
     def length(self, args, meta):
         return args != [], ('len', meta.line)
     def error_print_nq(self, args, meta):
@@ -1710,10 +1723,14 @@ class ConvertToPython_17(ConvertToPython_16):
 
 @hedy_transpiler(level=18)
 class ConvertToPython_18(ConvertToPython_17):
-
     def input(self, args):
         return self.ask(args)
 
+    def input_is(self, args):
+        return self.input(args)
+
+    def input_equals(self, args):
+        return self.input(args)
 def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
