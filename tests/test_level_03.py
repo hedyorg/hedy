@@ -415,7 +415,60 @@ class TestsLevel3(HedyTester):
     )
 
   #add/remove tests
-  def test_add_to_list(self):
+  def test_add_text_to_list(self):
+    code = textwrap.dedent("""\
+    dieren is koe, kiep
+    add muis to dieren
+    print dieren at random""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['koe', 'kiep']
+    dieren.append('muis')
+    print(f'{random.choice(dieren)}')""")
+
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function = self.result_in(['koe', 'kiep', 'muis']),
+    )
+  def test_remove_text_from_list(self):
+    code = textwrap.dedent("""\
+    dieren is koe, kiep
+    remove kiep from dieren
+    print dieren at random""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['koe', 'kiep']
+    try:
+        dieren.remove('kiep')
+    except:
+       pass
+    print(f'{random.choice(dieren)}')""")
+
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.result_in(['koe']),
+    )
+
+  def test_add_text_with_spaces_to_list(self):
+    code = textwrap.dedent("""\
+    opties is zeker weten, misschien wel
+    add absoluut niet to opties
+    print opties at random""")
+
+    expected = textwrap.dedent("""\
+    opties = ['zeker weten', 'misschien wel']
+    opties.append('absoluut niet')
+    print(f'{random.choice(opties)}')""")
+
+    self.single_level_tester(
+      # max_level=3,
+      code=code,
+      expected=expected
+    )
+
+  def test_add_ask_to_list(self):
     code = textwrap.dedent("""\
     color is ask what is your favorite color? 
     colors is green, red, blue
@@ -433,7 +486,8 @@ class TestsLevel3(HedyTester):
       code=code,
       expected=expected
     )
-  def test_remove_from_list(self):
+
+  def test_remove_ask_from_list(self):
     code = textwrap.dedent("""\
     colors is green, red, blue
     color is ask what color to remove?

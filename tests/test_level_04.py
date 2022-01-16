@@ -184,6 +184,45 @@ class TestsLevel4(HedyTester):
     self.single_level_tester(code=code, expected=expected)
 
   #add/remove tests
+  #add/remove tests
+  def test_add_text_to_list(self):
+    code = textwrap.dedent("""\
+    dieren is koe, kiep
+    add muis to dieren
+    print dieren at random""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['koe', 'kiep']
+    dieren.append('muis')
+    print(f'{random.choice(dieren)}')""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected,
+      extra_check_function = self.result_in(['koe', 'kiep', 'muis']),
+    )
+  def test_remove_text_from_list(self):
+    code = textwrap.dedent("""\
+    dieren is koe, kiep
+    remove kiep from dieren
+    print dieren at random""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['koe', 'kiep']
+    try:
+        dieren.remove('kiep')
+    except:
+       pass
+    print(f'{random.choice(dieren)}')""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected,
+      extra_check_function=self.result_in(['koe']),
+    )
+
   def test_add_to_list(self):
     code = textwrap.dedent("""\
     color is ask 'what is your favorite color? '
@@ -200,7 +239,8 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      expected=expected
+      expected=expected,
+      expected_commands=['ask', 'is', 'add', 'print', 'random']
     )
   def test_remove_from_list(self):
     code = textwrap.dedent("""\
@@ -407,3 +447,46 @@ class TestsLevel4(HedyTester):
       code=code,
       expected=expected
     )
+
+
+  def test_meta_column_missing_closing_quote(self):
+    code = textwrap.dedent("""\
+    print 'Hello'
+    print 'World""")
+
+    instance = hedy.IsValid()
+    instance.level = self.level
+    program_root = hedy.parse_input(code, self.level, 'en')
+    is_valid = instance.transform(program_root)
+    _, invalid_info = is_valid
+
+    invalid_info = invalid_info[0]
+
+    line = invalid_info.line
+    column = invalid_info.column
+
+    # Boryana Jan 22
+    # Proabably we want to change the column so that it points to
+    # the place where the quote is actually missing?
+    self.assertEqual(2, line)
+    self.assertEqual(7, column)
+
+
+  def test_meta_column_missing_opening_quote(self):
+    code = textwrap.dedent("""\
+    print 'Hello'
+    print World'""")
+
+    instance = hedy.IsValid()
+    instance.level = self.level
+    program_root = hedy.parse_input(code, self.level, 'en')
+    is_valid = instance.transform(program_root)
+    _, invalid_info = is_valid
+
+    invalid_info = invalid_info[0]
+
+    line = invalid_info.line
+    column = invalid_info.column
+
+    self.assertEqual(2, line)
+    self.assertEqual(7, column)
