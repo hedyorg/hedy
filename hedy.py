@@ -303,6 +303,9 @@ class ExtractAST(Transformer):
     def text(self, args):
         return Tree('text', [''.join([str(c) for c in args])])
 
+    def text_with_spaces(self, args):
+        return Tree('text', [' '.join([str(c) for c in args])])
+
     def INT(self, args):
         return Tree('integer', [str(args)])
 
@@ -547,6 +550,14 @@ class TypeValidator(Transformer):
     def integer(self, tree):
         return self.to_typed_tree(tree, HedyType.integer)
 
+    def text_with_spaces(self, tree):
+        # under level 12 integers appear as text, so we parse them
+        if self.level < 12:
+            type_ = HedyType.integer if ConvertToPython.is_int(tree.children[0]) else HedyType.string
+        else:
+            type_ = HedyType.string
+        return self.to_typed_tree(tree, type_)
+
     def text(self, tree):
         # under level 12 integers appear as text, so we parse them
         if self.level < 12:
@@ -660,7 +671,7 @@ class TypeValidator(Transformer):
 
     def save_type_to_lookup(self, name, inferred_type):
         for entry in self.lookup:
-            if entry.name == hash_var(name) and not entry.type_:
+            if entry.name == hash_var(name):
                 entry.type_ = inferred_type
 
     # Usually, variable definitions are sequential and by the time we need the type of a lookup entry, it would already
@@ -751,6 +762,9 @@ class Filter(Transformer):
 
     def text(self, args, meta):
         return all(args), ''.join([c for c in args]), meta
+      
+    def text_with_spaces(self, args, meta):
+        return all(args), ' '.join([c for c in args])
 
 class UsesTurtle(Transformer):
     # returns true if Forward or Turn are in the tree, false otherwise
@@ -844,6 +858,9 @@ class AllCommands(Transformer):
     def text(self, args):
         return []
 
+    def text_with_spaces(self, args):
+        return []
+
 def all_commands(input_string, level, lang='en'):
     input_string = process_input_string(input_string, level)
     program_root = parse_input(input_string, level, lang)
@@ -876,6 +893,9 @@ class AllPrintArguments(Transformer):
         return []
 
     def text(self, args):
+        return ''.join(args)
+
+    def text_with_spaces(self, args):
         return ''.join(args)
 
 
@@ -1115,6 +1135,10 @@ class ConvertToPython_1(ConvertToPython):
 
     def text(self, args):
         return ''.join([str(c) for c in args])
+
+    def text_with_spaces(self, args):
+        return ' '.join([str(c) for c in args])
+
     def integer(self, args):
         return str(args[0])
 
@@ -1273,11 +1297,11 @@ class ConvertToPython_3(ConvertToPython_2):
         else:
             return args[0] + '[' + args[1] + '-1]'
     def add(self, args):
-        var = args[0]
+        var = self.process_variable(args[0])
         list = args[1]
         return f"{list}.append({var})"
     def remove(self, args):
-        var = args[0]
+        var = self.process_variable(args[0])
         list = args[1]
         return textwrap.dedent(f"""\
         try:
@@ -1293,9 +1317,6 @@ class ConvertToPython_4(ConvertToPython_3):
     def var_access(self, args):
         name = args[0]
         return hash_var(name)
-
-    def text(self, args):
-        return ''.join([str(c) for c in args])
 
     def print_ask_args(self, args):
         args = self.check_var_usage(args)

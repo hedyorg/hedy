@@ -2,8 +2,8 @@
 import sys
 from website.yaml_file import YamlFile
 
-if (sys.version_info.major < 3 or sys.version_info.minor < 6):
-    print('Hedy requires Python 3.6 or newer to run. However, your version of Python is',
+if (sys.version_info.major < 3 or sys.version_info.minor < 7):
+    print('Hedy requires Python 3.7 or newer to run. However, your version of Python is',
           '.'.join([str(sys.version_info.major), str(sys.version_info.minor), str(sys.version_info.micro)]))
     quit()
 
@@ -278,6 +278,7 @@ def setup_language():
     # Also get the 'ui' translations into a global object for this language, these
     # are used a lot so we can clean up a fair bit by initializing here.
     g.ui_texts = TRANSLATIONS.get_translations(g.lang, 'ui')
+    g.auth_texts = TRANSLATIONS.get_translations(g.lang, 'Auth')
 
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
@@ -712,10 +713,13 @@ def get_program_stats():
 
 
 def _per_level_to_response(data):
-    res = [{'level': level, 'data': data} for level, data in data.items()]
+    res = [{'level': level, 'data': _add_error_rate(data)} for level, data in data.items()]
     res.sort(key=lambda el: el['level'])
     return [{'level': f"L{entry['level']}", 'data': entry['data']} for entry in res]
 
+def _add_error_rate(data):
+    data['error_rate'] = (data['failed_runs'] * 100) / (data['failed_runs'] + data['successful_runs'])
+    return data
 
 def _per_week_to_response(data):
     res = {}
@@ -785,6 +789,7 @@ def get_log_results():
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
     return jsonify(response)
+
 
 
 def get_user_formatted_age(now, date):
@@ -1210,6 +1215,35 @@ def main_page(page):
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
                            content=main_page_translations)
+
+
+@app.route('/explore', methods=['GET'])
+def explore():
+    level = request.args.get('level', default=None, type=str)
+    adventure = request.args.get('adventure', default=None, type=str)
+
+    level = None if level == "null" else level
+    adventure = None if adventure == "null" else adventure
+
+    if level or adventure:
+        programs = DATABASE.get_filtered_explore_programs(level, adventure)
+    else:
+        programs = DATABASE.get_all_explore_programs()
+
+    for program in programs:
+        program['code'] = "\n".join(program['code'].split("\n")[:4])
+
+    adventures = None
+    if hedy_content.Adventures(session['lang']).has_adventures():
+        adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
+
+    return render_template('explore.html', programs=programs,
+                           filtered_level=level,
+                           filtered_adventure=adventure,
+                           max_level=hedy.HEDY_MAX_LEVEL,
+                           adventures=adventures,
+                           page_title=hedyweb.get_page_title('explore'),
+                           current_page='explore')
 
 
 @app.route('/change_language', methods=['POST'])
