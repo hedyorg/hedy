@@ -5,23 +5,24 @@
 {% block message %}{% endblock %}
 
 <div class="w-full max-w-md text-center ml-auto mr-auto">
-  <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('login')">
-    <h2 class="py-2">{{auth.login_long}}</h2>
-    <div class="mb-4">
-        <label for="username">{{auth.username}} / {{auth.email}}</label>
-        <input id="username" name="username">
-    </div>
-    <div class="mb-6">
-        <label for=password">{{auth.password}}</label>
-        <input id="password" name="password" type=password>
-    </div>
-    <button type="submit" class="green-btn my-2">{{auth.login}}</button>
-    <div id="error" class="flex-0 mt-8 mb-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-    <div id="success" class="flex-0 mt-8 mb-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-  </form>
-  <form id="create-account" class="py-2" onsubmit="event.preventDefault (); window.location.href = '/signup{% if g.lang and g.lang != "en" %}?lang={{g.lang}}{% endif %}'">
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4">
+      <form class="js-validated-form auth" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('login')">
+        <h2 class="py-2">{{auth.login_long}}</h2>
+        <div class="mb-4">
+            <label for="username">{{auth.username}} / {{auth.email}}</label>
+            <input id="username" name="username" required>
+        </div>
+        <div class="mb-4">
+            <label for=password">{{auth.password}}</label>
+            <input id="password" name="password" type=password required>
+        </div>
+        <button type="submit" class="green-btn mt-2">{{auth.login}}</button>
+        <div id="error" class="flex-0 mt-4 mb-4 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+      </form>
+  </div>
+  <form id="create-account" class="py-2" onsubmit="event.preventDefault (); hedyApp.auth.redirect ('signup')">
     {{auth.no_account}}&nbsp;&nbsp;<button type="submit" class="green-btn">{{auth.create_account}}</button>
   </form>
-  <form class="py-2" onsubmit="event.preventDefault (); window.location.href = '/recover{% if g.lang and g.lang != "en" %}?lang={{g.lang}}{% endif %}'"><button type="submit" class="btn">{{auth.forgot_password}}</button></form>
+  <form class="py-2" onsubmit="event.preventDefault (); window.location.href = '/recover'"><button type="submit" class="btn">{{auth.forgot_password}}</button></form>
 </div>
 {% endblock %}

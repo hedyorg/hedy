@@ -56,7 +56,9 @@
     </div>
     <div class="mb-4">
         <label for="country">{{auth.country}}</label>
-        <select id="country"></select>
+        <select id="country">
+            <option value="">{{auth.select}}</option>
+        </select>
     </div>
     <div class="mb-4">
       <label for="has_experience" class="inline-block float-left">{{auth.programming_experience}}</label>
@@ -89,19 +91,19 @@
     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.change_password}}</h2>
     <div class="mb-4">
         <label for="old_password">{{auth.current_password}}</label>
-        <input id="old_password" type=password>
+        <input id="old_password" type=password required>
     </div>
     <div class="mb-4">
         <label for="password">{{auth.new_password}}</label>
-        <input id="password" type=password>
+        <input id="password" type=password required>
     </div>
     <div class="mb-4">
         <label for="password_repeat">{{auth.repeat_new_password}}</label>
-        <input id="password_repeat" type=password>
+        <input id="password_repeat" type=password required>
     </div>
     <div class="mb-4">
-        <div id="error-password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-        <div id="success-password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+        <div id="error_password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
+        <div id="success_password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
     </div>
     <button type="submit" class="green-btn mt-4">{{auth.change_password}}</button>
   </form>

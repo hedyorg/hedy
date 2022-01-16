@@ -6,10 +6,10 @@
     <h2 class="py-2">{{auth.recover_password}}</h2>
     <div class="mb-4">
         <label for="username">{{auth.username}} / {{auth.email}}</label>
-        <input id="username" name="username">
+        <input id="username" name="username" required>
     </div>
-    <div id="error" class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-    <div id="success" class="flex-0 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    <div id="error" class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
+    <div id="success" class="flex-0 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
     <button type="submit" class="green-btn my-2">{{auth.send_password_recovery}}</button>
   </form>
 </div>
