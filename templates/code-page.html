@@ -13,11 +13,11 @@
           <div>
             {% for command in commands %}
             <div class="justify-between my-2 shadow-md p-3 pl-4">
-              <div class="font-thin text-lg flex-grow mb-1" tabindex=0>
+              <div class="font-extralight text-lg flex-grow mb-1" tabindex=0>
                 {{ command.explanation|commonmark }}
               </div>
               <div class="flex">
-                <div class="font-thin text-sm flex-grow" tabindex=0>
+                <div class="font-extralight text-sm flex-grow" tabindex=0>
                   {# placeholder to make button go right, was originally in use for the example code 3#}
                 </div>
                 <button class="btn block flex-none self-end ml-1" style="min-width:6em"
@@ -35,7 +35,7 @@
 
     {% include "incl-editor-and-output.html" %}
 
-    <div class="text-sm mt-10 mr-5 font-thin">
+    <div class="text-sm mt-10 mr-5 font-extralight">
     Latest update: {{latest}}
     </div>
 </div>
