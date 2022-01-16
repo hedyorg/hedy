@@ -7,10 +7,10 @@ import operator
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
-USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.Key('email')])
+USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.Key('username')])
-CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.Key(v) for v in ['teacher', 'link']])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey('username')])
+CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 
 # Customizations contains the class customizations made by a teacher on a specific class/level combination.
 # Each entry stores a unique class_id / level combination and the selected adventures, example programs and/or hiding of level
@@ -68,7 +68,7 @@ QUIZ_ANSWERS = dynamo.Table(storage, 'quizAnswers', partition_key='user', sort_k
 # }
 #
 PROGRAM_STATS = dynamo.Table(storage, 'program-stats', partition_key='id#level', sort_key='week',
-                             indexed_fields=[dynamo.Key('id', 'week')])
+                             indexed_fields=[dynamo.IndexKey('id', 'week')])
 
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
@@ -190,6 +190,34 @@ class Database:
     def all_users(self):
         """Return all users."""
         return USERS.scan()
+
+    def get_all_explore_programs(self):
+        programs = PROGRAMS.scan()
+        public_programs = []
+        for program in programs:
+            if 'public' in program:
+                public_programs.append(program)
+        return public_programs
+
+    def get_filtered_explore_programs(self, level=None, adventure=None):
+        programs = PROGRAMS.scan()
+        result = []
+        for program in programs:
+            if 'public' in program:
+                result.append(program)
+        level_programs = []
+        if level:
+            for program in result:
+                if program['level'] == int(level):
+                    level_programs.append(program)
+            result = level_programs
+        adventure_programs = []
+        if adventure:
+            for program in result:
+                if 'adventure_name' in program and program['adventure_name'] == adventure:
+                    adventure_programs.append(program)
+            result = adventure_programs
+        return result
 
     def all_programs_count(self):
         """Return the total number of all programs."""
@@ -320,7 +348,6 @@ class Database:
             restrictions['hide_level'] = False
             restrictions['hide_prev_level'] = False
             restrictions['hide_next_level'] = False
-
         return display_adventures, restrictions
 
     def progress_by_username(self, username):
@@ -341,7 +368,6 @@ class Database:
             user_achievements['achieved'] = []
         if achievement not in user_achievements['achieved']:
             user_achievements['achieved'].append(achievement)
-            user_achievements['achieved'] = list(dict.fromkeys(user_achievements['achieved']))
             ACHIEVEMENTS.put(user_achievements)
 
     def add_achievements_to_username(self, username, achievements):

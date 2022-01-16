@@ -266,7 +266,7 @@ class TestsLevel5(HedyTester):
       print(f'found!')""")
 
     #todo: whould be tested for higher levels too (FH, dec 21)
-    self.single_level_tester(code=code, expected=expected, output='found!')
+    self.single_level_tester(code=code, expected=expected, output='found!', expected_commands=['is', 'is', 'if', 'in', 'print'])
 
   def test_undefined_list_if_in_list(self):
     code = textwrap.dedent("""\
