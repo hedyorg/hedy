@@ -712,10 +712,13 @@ def get_program_stats():
 
 
 def _per_level_to_response(data):
-    res = [{'level': level, 'data': data} for level, data in data.items()]
+    res = [{'level': level, 'data': _add_error_rate(data)} for level, data in data.items()]
     res.sort(key=lambda el: el['level'])
     return [{'level': f"L{entry['level']}", 'data': entry['data']} for entry in res]
 
+def _add_error_rate(data):
+    data['error_rate'] = (data['failed_runs'] * 100) / (data['failed_runs'] + data['successful_runs'])
+    return data
 
 def _per_week_to_response(data):
     res = {}
