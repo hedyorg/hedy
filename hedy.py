@@ -991,7 +991,6 @@ class IsComplete(Filter):
     def print(self, args, meta):
         return args != [], ('print', meta.line)
     def input(self, args, meta):
-        print(args)
         return len(args) > 1, ('input', meta.line)
     def input_is(self, args, meta):
         return self.input(args, meta)
