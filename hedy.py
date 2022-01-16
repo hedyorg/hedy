@@ -671,7 +671,7 @@ class TypeValidator(Transformer):
 
     def save_type_to_lookup(self, name, inferred_type):
         for entry in self.lookup:
-            if entry.name == hash_var(name) and not entry.type_:
+            if entry.name == hash_var(name):
                 entry.type_ = inferred_type
 
     # Usually, variable definitions are sequential and by the time we need the type of a lookup entry, it would already
