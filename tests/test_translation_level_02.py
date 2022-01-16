@@ -1,3 +1,5 @@
+import textwrap
+from parameterized import parameterized
 from test_level_01 import HedyTester
 import hedy_translation
 
@@ -11,6 +13,7 @@ import hedy_translation
 
 class TestsTranslationLevel2(HedyTester):
     level = 2
+    all_keywords = hedy_translation.all_keywords_to_dict()
 
     def test_print(self):
         code = "print Hallo welkom bij Hedy!"
@@ -111,6 +114,22 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(expected, result)
 
+    @parameterized.expand(HedyTester.as_list_of_tuples(all_keywords["ask"], all_keywords["is"] ,all_keywords["print"], hedy_translation.KEYWORD_LANGUAGES))
+    def test_ask_print_all_lang(self,ask_keyword, is_keyword, print_keyword, lang):
+        code = textwrap.dedent(f"""\
+        {print_keyword} Hello, tell us your name please
+        name {is_keyword} {ask_keyword} Whats your name?
+        {print_keyword} name is your name!""")
+    
+        result = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)
+        
+        expected = textwrap.dedent(f"""\
+        print Hello, tell us your name please
+        name is ask Whats your name?
+        print name is your name!""")
+
+        self.assertEqual(expected, result)
+    
     def no_argument_ask_english(self):
         code = "ask"
 

@@ -1,3 +1,4 @@
+from parameterized import parameterized
 import hedy
 from test_level_01 import HedyTester
 import hedy_translation
@@ -12,7 +13,8 @@ import textwrap
 
 
 class TestsTranslationLevel14(HedyTester):
-    level = 14
+    level = 14    
+    all_keywords_dict = hedy_translation.all_keywords_to_dict()
 
     def test_bigger(self):
         code = textwrap.dedent("""\
@@ -97,3 +99,18 @@ class TestsTranslationLevel14(HedyTester):
             print 'hedy'""")
 
         self.assertEqual(expected, result)
+
+    @parameterized.expand(HedyTester.as_list_of_tuples(all_keywords_dict["if"], all_keywords_dict["print"], hedy_translation.KEYWORD_LANGUAGES))   
+    def test_double_equals_all_lang(self, if_keyword, print_keyword, lang):
+        code = textwrap.dedent(f"""\
+        hedy = 5
+        {if_keyword} hedy == 6
+            {print_keyword} 'hedy'""")
+
+        result = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
+        expected = textwrap.dedent("""\
+        hedy = 5
+        als hedy == 6
+            print 'hedy'""")
+
+        self.assertEqual(expected, result)   
