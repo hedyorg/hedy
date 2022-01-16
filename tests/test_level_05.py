@@ -411,3 +411,22 @@ class TestsLevel5(HedyTester):
   #     if নাম is হেডি print 'ভালো!' else print 'মন্দ'\"""")
   #
   #
+
+  def test_meta_column_missing_quote(self):
+    code = textwrap.dedent("""\
+        name is ask 'what is your name?'
+        if name is Hedy print nice' else print 'boo!'""")
+
+    instance = hedy.IsValid()
+    instance.level = self.level
+    program_root = hedy.parse_input(code, self.level, 'en')
+    is_valid = instance.transform(program_root)
+    _, invalid_info = is_valid
+
+    invalid_info = invalid_info[0]
+
+    line = invalid_info.line
+    column = invalid_info.column
+
+    self.assertEqual(2, line)
+    self.assertEqual(23, column)
