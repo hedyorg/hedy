@@ -87,10 +87,6 @@ function baseRules(): Rules {
     // and one where it is recognized at the end of the line (going back to start)
     expression_eol: finishLine([
       {
-        regex: "'[^']*'",
-        token: 'constant.character',
-      },
-      {
         regex: currentLang._AT + ' ' + currentLang._RANDOM,
         token: 'keyword'
       },
@@ -121,6 +117,7 @@ const LEVELS = [
     ),
   },
   {
+    // Adds 'is'
     name: 'level2',
     rules: pipe(baseRules(),
       rule_printSpace('gobble'),
@@ -134,7 +131,7 @@ const LEVELS = [
     // Adds 'at random'
     name: 'level3',
     rules: pipe(baseRules(),
-      rule_printSpace('expression_eol'),
+      rule_printSpace('gobble'),
       rule_isAsk('gobble'),
       rule_is('gobble'),
       rule_turtle(),
