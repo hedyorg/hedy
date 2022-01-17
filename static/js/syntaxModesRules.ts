@@ -77,7 +77,7 @@ function baseRules(): Rules {
     // gobble is a state in which we can read anything (.*), used after print
     gobble: [
       {
-        regex: '$', // $ matches with end of line
+        regex: '.*',
         token: 'text',
         next: 'start',
       }
@@ -208,6 +208,7 @@ const LEVELS = [
     ),
   },
   {
+    // Todo Timon: I think nothing changes?
     name: 'level9',
     rules: pipe(baseRules(),
       rule_printSpace(),
