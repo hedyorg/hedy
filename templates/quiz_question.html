@@ -49,7 +49,7 @@
                                 <div class="p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row" id="answer-disabled-{{ question_options[counter.value].char_index }}">
                                     <label class="inline-flex items-center">
                                         <div class="flex-1 flex-col justify-center items-center">
-                                            <p class="text-3xl font-bold ltr:ml-3 rtl:mr-3 mr-3 font-slab">{{ question_options[counter.value].char_index }}</p>
+                                            <p class="text-3xl font-bold mx-3 font-slab">{{ question_options[counter.value].char_index }}</p>
                                             <input type="radio" name="radio_option" id="{{ question_nr }}-{{ question_options[counter.value].char_index }}" value="{{ question_nr }}-{{ question_options[counter.value].char_index }}" class="class form-radio size-input" disabled="disabled">
                                         </div>
                                         {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}

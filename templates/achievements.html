@@ -11,7 +11,7 @@
                 <div class="flex flex-wrap w-full px-16">
                 {% for achievement in subcategory.achievements %}
                     {% if achievement in user_achievements %}
-                        <div class="w-40 rounded-lg mr-4 mt-4 relative bg-blue-200">
+                        <div class="w-40 rounded-lg ltr:mr-4 rtl:ml-4 mt-4 relative bg-blue-200">
                             <div class="relative h-40">
                                 <div class="flex items-center justify-center h-40">
                                     <img src="{{static('/images/' + achievements[achievement].image)}}" class="px-2">
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     {% else %}
-                        <div class="w-40 rounded-lg mr-4 mt-4 relative bg-gray-500">
+                        <div class="w-40 rounded-lg ltr:mr-4 rtl:ml-4 mt-4 relative bg-gray-500">
                             <div class="flex items-center justify-center h-40">
                                 <img src="{{static('/images/' + achievements[achievement].image)}}" class="px-2">
                             </div>
