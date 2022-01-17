@@ -87,6 +87,10 @@ function baseRules(): Rules {
     // and one where it is recognized at the end of the line (going back to start)
     expression_eol: finishLine([
       {
+        regex: "'[^']*'",
+        token: 'constant.character',
+      },
+      {
         regex: currentLang._AT + ' ' + currentLang._RANDOM,
         token: 'keyword'
       },
@@ -208,7 +212,6 @@ const LEVELS = [
     ),
   },
   {
-    // Todo Timon: I think nothing changes?
     name: 'level9',
     rules: pipe(baseRules(),
       rule_printSpace(),
