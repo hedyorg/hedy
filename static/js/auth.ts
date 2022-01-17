@@ -257,8 +257,6 @@ export const auth = {
         favourite_program: $('#favourite_program').val() ? $('#favourite_program').val():  undefined
       }
 
-      console.log(data);
-
       $.ajax ({
         type: 'POST',
         url: '/auth/public_profile',
@@ -267,8 +265,11 @@ export const auth = {
       }).done (function () {
         auth.success (auth.texts['public_profile_updated']);
       }).fail (function (response) {
-        console.log(response);
-        //Todo: Error handling is a to-do until we have merged #1598
+        if (response.responseText) {
+          return auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
+        }
       });
     }
   },

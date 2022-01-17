@@ -539,14 +539,13 @@ def routes(app, database):
 
         # Validations
         if not isinstance(body, dict):
-            return 'body must be an object', 400
-        if 'image' in body and not isinstance(body.get('image'), str):
-            return 'body.image must be a string', 400
-        if 'personal_text' in body and not isinstance(body.get('personal_text'), str):
-            return 'body.personal_text must be a string', 400
-        if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
-            return 'body.favourite_program be a string', 400
-        # Todo: This should als be updated dependent on merging #1598
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('image'), str):
+            return g.auth_texts.get('image_invalid'), 400
+        if not isinstance(body.get('personal_text'), str):
+            return g.auth_texts.get('personal_text_invalid'), 400
+        if not isinstance(body.get('favourite_program'), str):
+            return g.auth_texts.get('favourite_program_invalid'), 400
 
         DATABASE.update_public_profile(user['username'], body);
         return '', 200
