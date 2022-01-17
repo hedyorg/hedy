@@ -28,6 +28,10 @@ export let theModalEditor: AceAjax.Editor;
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     exampleEditor.setOptions({ minLines: 2 });
+    // @ts-ignore
+    if ("lang" in window.State && window.State.lang in ['ar', 'he']) {
+           exampleEditor.setOptions({ rtl: true });
+      }
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
@@ -75,6 +79,11 @@ export let theModalEditor: AceAjax.Editor;
       editor.on('blur', function(_e: Event) {
         storage.setItem(levelKey, editor.getValue());
       });
+
+      // @ts-ignore
+      if ("lang" in window.State && window.State.lang in ['ar', 'he']) {
+           editor.setOptions({ rtl: true });
+      }
 
       // If prompt is shown and user enters text in the editor, hide the prompt.
       editor.on('change', function () {
