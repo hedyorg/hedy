@@ -197,7 +197,10 @@ class Database:
         for program in programs:
             if 'public' in program:
                 public_programs.append(program)
-        return public_programs
+        return public_programs[-50:]
+        #Todo:
+        # This [-50:] is a bucket-fix, we would like to add a partition key to the programs table
+        # Enabling us to directly only retrieve the last x programs by using the filter() function
 
     def get_filtered_explore_programs(self, level=None, adventure=None):
         programs = PROGRAMS.scan()
