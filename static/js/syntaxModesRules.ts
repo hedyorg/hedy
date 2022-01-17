@@ -79,6 +79,10 @@ function baseRules(): Rules {
       {
         regex: '.*',
         token: 'text',
+      },
+      {
+        regex: '\n',
+        token: 'text',
         next: 'start',
       }
     ],
@@ -86,10 +90,6 @@ function baseRules(): Rules {
     // this function creates two rules, one to recognize strings and at random within a line (staying in the same state)
     // and one where it is recognized at the end of the line (going back to start)
     expression_eol: finishLine([
-      {
-        regex: "'[^']*'",
-        token: 'constant.character',
-      },
       {
         regex: currentLang._AT + ' ' + currentLang._RANDOM,
         token: 'keyword'
