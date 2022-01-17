@@ -3,11 +3,11 @@
 {% block main %}
 </style>
 <div class="w-1/2 bg-white shadow-md rounded p-4 mb-4 ml-auto mr-auto">
-  <form id="signup" class="js-validated-form mx-auto w-3/4" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')">
+  <form id="signup" class="js-validated-form mx-auto w-3/4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')">
         <h2 class="text-center">{{auth.create_account}}</h2>
         <h4 class="text-blue-500 mb-4 text-center">{{auth.create_account_explanation}}</h4>
         <div class="mb-4 w-full">
-            <label class="inline-block w-1/2" for="username">{{auth.username}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="username" name="username" required>
+            <label class="inline-block w-1/2" for="username">{{auth.username}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" minlength="3" id="username" name="username" required>
         </div>
         <div class="mb-4">
             <label class="inline-block w-1/2" for="email">{{auth.email}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="email" name="email" type="email" required>
@@ -25,8 +25,9 @@
             <label class="inline-block w-1/2" for="birth_year">{{auth.birth_year}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="birth_year" name="birth_year" placeholder="1995" type="number">
         </div>
         <div class="mb-4">
-            <label class="inline-block w-1/2" for="language">{{auth.preferred_language}}</label><select class="inline-block w-1/2" id="language" name="language">
-                <option value="{{ current_language().lang}}" selected>{{current_language().sym}}</option>
+            <label class="inline-block w-1/2" for="language">{{auth.preferred_language}}</label><select class="inline-block w-1/2" id="language" name="language" required>
+                <option value="" selected disabled hidden>{{auth.select}}</option>
+                <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
                 {% for language in other_languages() %}
                     <option value="{{language.lang}}">{{language.sym}}</option>
                 {% endfor %}
@@ -85,10 +86,12 @@
           <label class="inline-block w-1/2" for="subscribe">{{auth.subscribe_newsletter}}</label><input class="inline-block ml-0" type="checkbox" id="subscribe" name="subscribe">
         </div>
         <div class="text-center">
-            <button type="submit" class="green-btn mb-4">{{auth.create_account}}</button>
+            <button type="submit" class="green-btn">{{auth.create_account}}</button>
         </div>
-        <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-        <div id="success" class="flex-0 mt-8 bg-red-100 border-t-4 border-green-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+        <div class="my-2">
+            <div id="error" class="flex-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md text-center" role="alert" style="display: none;"></div>
+            <div id="success" class="flex-0 bg-red-100 border-t-4 border-green-500 rounded-b text-red-900 px-4 py-3 shadow-md text-center" role="alert" style="display: none;"></div>
+        </div>
   </form>
   <form class="text-center" onsubmit="event.preventDefault (); window.location.href='/login'">
     {{auth.already_account}}&nbsp;&nbsp;<button type="submit" class="btn">{{auth.login}}</button>

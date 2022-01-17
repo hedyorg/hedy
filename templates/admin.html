@@ -36,7 +36,7 @@
         <td>{{user.gender}}</td>
         <td>{{user.prog_experience}}</td>
         <td>{{user.experience_languages}}</td>
-        <td><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.auth.markAsTeacher ('{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"</td>
+        <td><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.auth.markAsTeacher ('{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
         <td>{{user.email_verified}}</td>
       </tr>
       {% endfor %}

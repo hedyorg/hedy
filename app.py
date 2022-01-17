@@ -278,6 +278,7 @@ def setup_language():
     # Also get the 'ui' translations into a global object for this language, these
     # are used a lot so we can clean up a fair bit by initializing here.
     g.ui_texts = TRANSLATIONS.get_translations(g.lang, 'ui')
+    g.auth_texts = TRANSLATIONS.get_translations(g.lang, 'Auth')
 
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
@@ -712,10 +713,13 @@ def get_program_stats():
 
 
 def _per_level_to_response(data):
-    res = [{'level': level, 'data': data} for level, data in data.items()]
+    res = [{'level': level, 'data': _add_error_rate(data)} for level, data in data.items()]
     res.sort(key=lambda el: el['level'])
     return [{'level': f"L{entry['level']}", 'data': entry['data']} for entry in res]
 
+def _add_error_rate(data):
+    data['error_rate'] = (data['failed_runs'] * 100) / (data['failed_runs'] + data['successful_runs'])
+    return data
 
 def _per_week_to_response(data):
     res = {}

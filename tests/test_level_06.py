@@ -428,3 +428,36 @@ class TestsLevel6(HedyTester):
       code=code,
       exception=hedy.exceptions.CyclicVariableDefinitionException
     )
+
+  def test_type_reassignment_to_proper_type_valid(self):
+    code = textwrap.dedent("""\
+      a is Hello
+      a is 5
+      b is a + 1
+      print a + b""")
+
+    expected = textwrap.dedent("""\
+        a = 'Hello'
+        a = '5'
+        b = int(a) + int(1)
+        print(f'{int(a) + int(b)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected,
+      expected_commands=['is', 'is', 'is', 'addition', 'print', 'addition'],
+      extra_check_function=lambda x: self.run_code(x) == "11"
+    )
+  
+  def test_type_reassigment_to_wrong_type_raises_error(self):
+    code = textwrap.dedent("""\
+      a is 5
+      a is test
+      print a + 2""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
