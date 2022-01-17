@@ -1311,3 +1311,224 @@ levels:
             correct_answer: "B"
             hint: "Mind the indention"
             question_score: 10
+
+    10:
+        1:
+            question_text: "What do we need to fill in on the _ ?"
+            code: |-
+                compliments = perfect, great job, amazing
+                _
+                    print compliment
+            mp_choice_options:
+                - "code": "for each compliment"
+                  "feedback": "That's not it"
+                - "code": "for compliment in compliments"
+                  "feedback": "You deserve all those compliments!"
+                - "code": "if compliment in compliments"
+                  "feedback": "That's not it"
+                - "code": "for compliments in compliment"
+                  "feedback": "Almost there!"
+            correct_answer: "B"
+            hint: "for each compliment in the lists of compliments..."
+            question_score: 10
+        2:
+            question_text: "Which output is correct?"
+            code: |-
+                meals = pizza, pasta, pancakes
+                for meal in meals
+                    print 'I love ' meal
+            mp_choice_options:
+                - "code": "I love pizza"
+                  "feedback": "Line 2 says for each meal in the list of meals. So each meal is printed."
+                - "code": "I love pasta"
+                  "feedback": "Line 2 says for each meal in the list of meals. So each meal is printed."
+                - "code": "I love pancakes"
+                  "feedback": "Line 2 says for each meal in the list of meals. So each meal is printed."
+                - "code": |-
+                      I love pizza
+                      I love pasta
+                      I love pancakes
+                  "feedback": "Great!"
+            correct_answer: "D"
+            hint: "Line 2 says for each meal in the list of meals. So each meal is printed."
+            question_score: 10
+        3:
+            question_text: "Which output is correct?"
+            code: |-
+                animals = dogs, cats, hamsters, chickens
+                for animal in animals
+                    print animal ' are lovely pets'
+            mp_choice_options:
+                - "code": "dogs are lovely pets"
+                  "feedback": "Line 2 says for each animal in the list of animals. So each animal is printed."
+                - "code": "dogs, cats, hamsters, chickens are lovely pets"
+                  "feedback": "Each animal gets their own line in the output."
+                - "code": |-
+                      dogs are lovely pets
+                      cats are lovely pets
+                      hamsters are lovely pets
+                      chickens are lovely pets
+                  "feedback": "Great!"
+                - "option_text": "You don't know yet. Because it chooses one of the animals at random."
+                  "feedback": "Line 2 says for each animal in the list of animals. So each animal is printed."
+            correct_answer: "C"
+            hint: "Line 2 says for each animal in the list of animals. So each animal is printed"
+            question_score: 10
+        4:
+            question_text: "What's wrong with this code?"
+            code: |-
+                groceries = apples, bread, milk
+                for item in groceries
+                    print 'We need ' groceries
+            mp_choice_options:
+                - "option_text": "Line 2 needs to start with 4 spaces as indentation"
+                  "feedback": "No it doesn't. Only line 3 needs indentation, which it has."
+                - "option_text": "Line 3 does not need to start with 4 spaces as indentation"
+                  "feedback": "Line 2 is a `for`command so line 3 does need to start with an indent."
+                - "option_text": "Line 3 should say item instead of groceries"
+                  "feedback": "Good job!"
+                - "option_text": "Line 2 should say groceries instead of item"
+                  "feedback": "No it does not."
+            correct_answer: "C"
+            hint: "Line 2 says For each `item` in the list of groceries"
+            question_score: 10
+        5:
+            question_text: "What word should be on the _ with these digital dice?"
+            code: |-
+                print 'Welcome to the digital dice!'
+                players = Ann, John, Jesse
+                choices = 1, 2, 3, 4, 5, 6
+                for player in players
+                    print player ' throws ' _ at random
+            mp_choice_options:
+                - "code": "players"
+                  "feedback": "It would say 'Ann throws Jesse', instead of 'Ann throws 6'."
+                - "code": "choices"
+                  "feedback": "That's right!"
+                - "code": "choice"
+                  "feedback": "You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'..."
+                - "code": "dice"
+                  "feedback": "Look at the names of the variables."
+            correct_answer: "A"
+            hint: "Hedy needs to pick a number at random"
+            question_score: 10
+        6:
+            question_text: "Which of the answers below is a possible outcome when you run the code?"
+            code: |-
+                choices = rock, paper, scissors
+                players = Kelly, Meredith
+                for player in players
+                    print player ' chooses ' choices at random
+            mp_choice_options:
+                - "code": |-
+                      Kelly chooses rock
+                  "feedback": "Meredith wants to play too!"
+                - "code": |-
+                      Meredith chooses scissors
+                      Kelly chooses rock
+                  "feedback": "So close! But Kelly is first in the list, so she goes first"
+                - "code": |-
+                      Meredith chooses paper
+                  "feedback": "Kelly wants to play too!"
+                - "code": |-
+                      Kelly chooses paper
+                      Meredith chooses scissors
+                  "feedback": "Amazing!"
+            correct_answer: "D"
+            hint: "Each player will pick an option. The player that's first on the list will go first."
+            question_score: 10
+        7:
+            question_text: "What line should be on the _ in this code that decide what these people will have for dinner?"
+            code: |-
+                names = Ron, Leslie, April, Andy
+                food = pasta, fries, salad
+                _
+                    print name ' has to eat ' food at random ' for dinner'
+            mp_choice_options:
+                - "code": "for name in names"
+                  "feedback": "You are on fire!"
+                - "code": "for names in name"
+                  "feedback": "No it should be for each name in the list nameS, so the other way around"
+                - "code": "for food in food"
+                  "feedback": "Each name should be told what they will have for dinner."
+                - "code": "for name in food"
+                  "feedback": "Each name should be told what they will have for dinner."
+            correct_answer: "A"
+            hint: "Each name should be told what they will have for dinner."
+            question_score: 10
+        8:
+            question_text: "What should be on the _ in this code that decides which color shirt you get?"
+            code: |-
+                names = Donna, Tommy, Ben
+                colors = blue, red, purple
+                for name in names
+                    print _
+            mp_choice_options:
+                - "code": "'name gets a color shirt'"
+                  "feedback": "That's not it!"
+                - "code": "name 'gets a ' colors at random ' shirt'"
+                  "feedback": "Great job! This was a hard one!"
+                - "code": " names 'gets a ' color at random ' shirt'"
+                  "feedback": "You want each name printed. So the first word should not be names but..."
+                - "code": " 'people gets a colors shirt' "
+                  "feedback": "There is no variable named people.."
+            correct_answer: "B"
+            hint: "Mind the quotation marks and the names of the variables"
+            question_score: 10
+        9:
+            question_text: "What is the first question Hedy will ask you when you run the program?"
+            code: |-
+                courses = appetizer, main course, dessert
+                names = Timon, Onno
+                for name in names
+                    for course in courses
+                        food = ask name ', what would you like to eat as your ' course '?'
+                        print name ' orders ' food ' as their ' course
+            mp_choice_options:
+                - "option_text": "Timon, what would you like to eat as your appetizer?"
+                  "feedback": "Perfect!"
+                - "option_text": "Onno, what would you like to eat as your appetizer?"
+                  "feedback": "Timon is first on the list!"
+                - "option_text": "Timon, what would you like to eat as your dessert?"
+                  "feedback": "Appetizers are first in the list"
+                - "option_text": "You don't know that. Hedy will choose at random."
+                  "feedback": "There is no `at random` in this code..."
+            correct_answer: "A"
+            hint: "The first options from both lists are chosen."
+            question_score: 10
+        10:
+            question_text: "What is true about this code?"
+            code: |-
+                prices = 1 million dollars, car, sandwich
+                names = Bob, Patrick, Sandy, Larry
+                for price in prices
+                    print 'The ' price 'is won by ' names at random
+            mp_choice_options:
+                - "option_text": "Everybody will always win a price." 
+                  "feedback": "That is not true, you could end up without a price."
+                - "option_text": "All the prices always go to one single person."
+                  "feedback": "That is not true. All the prices are given away, but to random people"
+                - "option_text": "Larry will never win a price"
+                  "feedback": "That is not true. Larry has the same odds as the others"
+                - "option_text": "Someone might win with two prices"
+                  "feedback": "You get it!"
+            correct_answer: "D"
+            hint: "Try to imagine the output of this code."
+            question_score: 10
+
+# Empty format for a question to use later
+#        10:
+#            question_text:
+#           code: |-
+#            mp_choice_options:
+#                - "option_text":
+#                  "feedback":
+#                - "option_text":
+#                  "feedback":
+#                - "option_text":
+#                  "feedback":
+#                - "option_text":
+#                  "feedback":
+#            correct_answer:
+#            hint:
+#            question_score: 10

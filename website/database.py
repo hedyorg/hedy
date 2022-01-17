@@ -196,6 +196,37 @@ class Database:
         """Return all users."""
         return USERS.scan()
 
+    def get_all_explore_programs(self):
+        programs = PROGRAMS.scan()
+        public_programs = []
+        for program in programs:
+            if 'public' in program:
+                public_programs.append(program)
+        return public_programs[-50:]
+        #Todo:
+        # This [-50:] is a bucket-fix, we would like to add a partition key to the programs table
+        # Enabling us to directly only retrieve the last x programs by using the filter() function
+
+    def get_filtered_explore_programs(self, level=None, adventure=None):
+        programs = PROGRAMS.scan()
+        result = []
+        for program in programs:
+            if 'public' in program:
+                result.append(program)
+        level_programs = []
+        if level:
+            for program in result:
+                if program['level'] == int(level):
+                    level_programs.append(program)
+            result = level_programs
+        adventure_programs = []
+        if adventure:
+            for program in result:
+                if 'adventure_name' in program and program['adventure_name'] == adventure:
+                    adventure_programs.append(program)
+            result = adventure_programs
+        return result[-50:]
+
     def all_programs_count(self):
         """Return the total number of all programs."""
         return PROGRAMS.item_count()
@@ -325,7 +356,6 @@ class Database:
             restrictions['hide_level'] = False
             restrictions['hide_prev_level'] = False
             restrictions['hide_next_level'] = False
-
         return display_adventures, restrictions
 
     def progress_by_username(self, username):
