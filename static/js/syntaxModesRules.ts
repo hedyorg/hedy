@@ -131,7 +131,7 @@ const LEVELS = [
     // Adds 'at random'
     name: 'level3',
     rules: pipe(baseRules(),
-      rule_printSpace('gobble'),
+      rule_printSpace('expression_eol'),
       rule_isAsk('gobble'),
       rule_is('gobble'),
       rule_turtle(),
