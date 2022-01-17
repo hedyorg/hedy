@@ -264,6 +264,7 @@ export const auth = {
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
         auth.success (auth.texts['public_profile_updated']);
+        $('#public_profile_redirect').show();
       }).fail (function (response) {
         if (response.responseText) {
           return auth.error(response.responseText);
