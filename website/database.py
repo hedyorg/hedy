@@ -220,7 +220,7 @@ class Database:
                 if 'adventure_name' in program and program['adventure_name'] == adventure:
                     adventure_programs.append(program)
             result = adventure_programs
-        return result
+        return result[-50:]
 
     def all_programs_count(self):
         """Return the total number of all programs."""
