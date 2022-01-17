@@ -17,6 +17,10 @@ export let theModalEditor: AceAjax.Editor;
     window.State = {};
   }
 
+  // SET const value to determine the current page direction
+  const dir = $("#main_container").attr("dir");
+
+
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
@@ -28,10 +32,9 @@ export let theModalEditor: AceAjax.Editor;
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     exampleEditor.setOptions({ minLines: 2 });
-    // @ts-ignore
-      if ("lang" in window.State && ['ar', 'he', 'ur'].includes(window.State.lang)) {
-           exampleEditor.setOptions({ rtl: true });
-      }
+    if (dir === "rtl") {
+         exampleEditor.setOptions({ rtl: true });
+    }
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
@@ -80,9 +83,8 @@ export let theModalEditor: AceAjax.Editor;
         storage.setItem(levelKey, editor.getValue());
       });
 
-      // @ts-ignore
-      if ("lang" in window.State && ['ar', 'he', 'ur'].includes(window.State.lang)) {
-           editor.setOptions({ rtl: true });
+      if (dir === "rtl") {
+         editor.setOptions({ rtl: true });
       }
 
       // If prompt is shown and user enters text in the editor, hide the prompt.
