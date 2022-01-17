@@ -32,7 +32,6 @@ class TestsLevel17(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-
   def test_if_else(self):
     code = textwrap.dedent("""\
     antwoord is ask 'Hoeveel is 10 plus 10?'
@@ -60,6 +59,53 @@ class TestsLevel17(HedyTester):
       print(f'Het antwoord moest zijn {antwoord}')""")
 
 
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_if_else_boolean(self):
+    code = textwrap.dedent("""\
+    computerc = 'PC'
+    userc = 'Hedy'
+    print 'Pilihan komputer: ' computerc
+    if userc is computerc and ucerc is 'Hedy':
+        print 'SERI'
+    else:
+        print 'Komputer'
+    """)
+
+    expected = textwrap.dedent("""\
+    computerc = 'PC'
+    userc = 'Hedy'
+    print(f'Pilihan komputer: {computerc}')
+    if str(userc) == str(computerc) and str('ucerc') == str('Hedy'):
+      print(f'SERI')
+    else:
+      print(f'Komputer')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_if_elif_boolean(self):
+    code = textwrap.dedent("""\
+    computerc = 'PC'
+    userc = 'Hedy'
+    print 'Pilihan komputer: ' computerc
+    if userc is computerc and ucerc is 'Hedy':
+        print 'SERI'
+    elif userc is 'PC' and ucerc is 'Hedy':
+        print 'HARI'
+    else:
+        print 'Komputer'""")
+
+    expected = textwrap.dedent("""\
+    computerc = 'PC'
+    userc = 'Hedy'
+    print(f'Pilihan komputer: {computerc}')
+    if str(userc) == str(computerc) and str('ucerc') == str('Hedy'):
+      print(f'SERI')
+    elif str(userc) == str('PC') and str('ucerc') == str('Hedy'):
+      print(f'HARI')
+    else:
+      print(f'Komputer')""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -242,9 +288,7 @@ class TestsLevel17(HedyTester):
       elif str(a) == str('2'):
         x = 222""")
 
-
-
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, expected_commands=['is', 'if', 'is', 'elif', 'is', 'elif', 'is'])
 
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
@@ -354,3 +398,6 @@ class TestsLevel17(HedyTester):
       code=code,
       exception=exceptions.InvalidTypeCombinationException
     )
+
+
+
