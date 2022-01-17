@@ -208,7 +208,6 @@ const LEVELS = [
     ),
   },
   {
-    // Todo Timon: I think nothing changes?
     name: 'level9',
     rules: pipe(baseRules(),
       rule_printSpace(),
@@ -526,7 +525,7 @@ function rule_expressions() {
       token: 'constant.character',
     }),
     recognize('start', {
-      regex: currentLang._AT + currentLang._RANDOM,
+      regex: currentLang._AT + ' ' + currentLang._RANDOM,
       token: 'keyword'
     }),
     recognize('start', {
