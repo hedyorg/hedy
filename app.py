@@ -1594,7 +1594,7 @@ def update_yaml():
 def public_user_page(username):
     user = DATABASE.user_by_username(username)
     if not user:
-        return utils.page_404(ui_message='user_not_private')
+        return utils.error_page(error=404, ui_message='user_not_private')
     user_public_info = DATABASE.get_public_profile_settings(username)
     if user_public_info:
         user_programs = DATABASE.public_programs_for_user(username)
