@@ -107,7 +107,7 @@ const LEVELS = [
     name: 'level1',
     rules: pipe(baseRules(),
       rule_printSpace('gobble'),
-      rule_turtle(),
+      rule_turtle_simple(),
       recognize('start', {
         regex: keywordWithSpace(currentLang._ECHO),
         token: 'keyword',
@@ -467,11 +467,27 @@ function rule_printParen() {
   });
 }
 
-function rule_turtle() {
+function rule_turtle_simple() {
     return comp(
       recognize('start', {
         // Note: left and right are not yet keywords
         regex: currentLang._TURN + ' (left|right)?',
+        token: 'keyword',
+        next: 'start',
+      }),
+      recognize('start', {
+        regex: keywordWithSpace(currentLang._FORWARD),
+        token: 'keyword',
+        next: 'start',
+      })
+    )
+}
+
+function rule_turtle() {
+    return comp(
+      recognize('start', {
+        // Note: left and right are not yet keywords
+        regex: keywordWithSpace(currentLang._TURN),
         token: 'keyword',
         next: 'start',
       }),
