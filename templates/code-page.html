@@ -1,6 +1,6 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
-<div id="commands-window-total" class="ltr:right-hand-shadow rtl:left-hand-shadow flex-none {% if not example_programs %} hidden {% endif %}">
+<div id="commands-window-total" class="right-hand-shadow flex-none {% if not example_programs %} hidden {% endif %}">
     <div>
       <button class="green-btn absolute mt-1 ltr:ml-1 rtl:mr-1" id="toggle-button" onclick="toggleCommands();">{% if g.dir == "ltr" %}&#8592;{% else %}&#8594;{% endif %} {{ ui.hide_commands }}</button>
     </div>
