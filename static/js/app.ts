@@ -29,7 +29,7 @@ export let theModalEditor: AceAjax.Editor;
     exampleEditor.setOptions({ maxLines: Infinity });
     exampleEditor.setOptions({ minLines: 2 });
     // @ts-ignore
-    if ("lang" in window.State && window.State.lang in ['ar', 'he']) {
+      if ("lang" in window.State && ['ar', 'he', 'ur'].includes(window.State.lang)) {
            exampleEditor.setOptions({ rtl: true });
       }
     // Strip trailing newline, it renders better
@@ -81,7 +81,7 @@ export let theModalEditor: AceAjax.Editor;
       });
 
       // @ts-ignore
-      if ("lang" in window.State && window.State.lang in ['ar', 'he']) {
+      if ("lang" in window.State && ['ar', 'he', 'ur'].includes(window.State.lang)) {
            editor.setOptions({ rtl: true });
       }
 
