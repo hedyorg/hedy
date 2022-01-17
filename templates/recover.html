@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="w-full max-w-xl text-center ltr:ml-auto rtl:mr-auto mr-auto">
+<div class="w-full max-w-xl text-center mx-auto">
   <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('recover')">
     <h2 class="py-2">{{auth.recover_password}}</h2>
     <div class="mb-4">
