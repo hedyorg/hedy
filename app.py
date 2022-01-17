@@ -1615,7 +1615,7 @@ def public_user_page(username):
                                programs=user_programs,
                                last_achieved=last_achieved,
                                user_achievements=user_achievements)
-    return utils.page_404(ui_message='user_not_private')
+    return utils.error_page(error=404, ui_message='user_not_private')
 
 
 @app.route('/invite/<code>', methods=['GET'])
