@@ -17,7 +17,7 @@ export let theModalEditor: AceAjax.Editor;
     window.State = {};
   }
 
-  // SET const value to determine the current page direction
+  // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
 
 
