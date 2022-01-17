@@ -77,11 +77,7 @@ function baseRules(): Rules {
     // gobble is a state in which we can read anything (.*), used after print
     gobble: [
       {
-        regex: '.*',
-        token: 'text',
-      },
-      {
-        regex: '\n',
+        regex: '$', // $ matches with end of line
         token: 'text',
         next: 'start',
       }
