@@ -12,7 +12,7 @@
           </div>
           <div>
             {% for command in commands %}
-            <div class="justify-between my-2 shadow-md p-3 pl-4">
+            <div class="justify-between my-2 shadow-md p-3 ltr:pl-4 rtl:pr-4">
               <div class="font-extralight text-lg flex-grow mb-1" tabindex=0>
                 {{ command.explanation|commonmark }}
               </div>
