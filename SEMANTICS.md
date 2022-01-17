@@ -27,15 +27,15 @@ Level 1 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>'right' + integer | 'left' + integer</td>
+    <td>'right' + integer | 'left' + integer | empty</td>
   </tr>
   <tr>
     <td>echo</td>
-    <td>integer | string</td>
+    <td>integer | string | empty</td>
   </tr>
 </tbody>
 </table>
@@ -110,10 +110,6 @@ Level 1 supports:
     <td>Incomplete Exception</td>
   </tr>
   <tr>
-    <td>echo</td>
-    <td>Incomplete Exception</td>
-  </tr>
-  <tr>
     <td>(forward | turn) text</td>
     <td>Invalid Argument Type Exception</td>
   </tr>
@@ -156,11 +152,11 @@ Level 2 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>
@@ -296,11 +292,11 @@ Level 3 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>
@@ -480,11 +476,11 @@ Level 4 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>
@@ -665,11 +661,11 @@ Level 5 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>
@@ -878,11 +874,11 @@ Level 6 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1122,11 +1118,11 @@ Level 7 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1380,11 +1376,11 @@ Level 8 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1642,11 +1638,11 @@ Level 9 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>

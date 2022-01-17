@@ -13,7 +13,9 @@ export interface Profile {
 interface User {
   username?: string;
   email?: string;
+  mail_repeat?: string;
   password?: string;
+  password_repeat?: string;
   birth_year?: number;
   language?: string,
   country?: string;
@@ -93,30 +95,12 @@ export const auth = {
     });
 
     if (op === 'signup') {
-      if (! values.username) return auth.error (auth.texts['please_username'], 'username');
-      values.username = values.username.trim ();
-      if (values.username.length < 3) return auth.error (auth.texts['username_three'], 'username');
-      if (values.username.match (/:|@/)) return auth.error (auth.texts['username_special'], 'username');
-
-      if (! values.email?.match (auth.emailRegex)) return auth.error (auth.texts['valid_email'], 'email');
-      if (values.email !== values.mail_repeat) return auth.error (auth.texts['repeat_match_email'],    'mail_repeat');
-
-      if (! values.language) return auth.error (auth.texts['please_language'], 'language');
-
-      if (! values.password) return auth.error (auth.texts['please_password'], 'password');
-      if (values.password.length < 6) return auth.error (auth.texts['password_six'], 'password');
-      if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match_password'], 'password_repeat');
-
-      if (values.birth_year) {
-        if (!validBirthYearString(values.birth_year)) {
-           return auth.error (auth.texts['valid_year'] + new Date ().getFullYear (), 'birth_year');
-        }
-      }
-
       const payload: User = {
         username: values.username,
         email: values.email,
+        mail_repeat: values.mail_repeat,
         password: values.password,
+        password_repeat: values.password_repeat,
         language: values.language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
@@ -129,118 +113,118 @@ export const auth = {
           : undefined,
       };
 
-      $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        auth.success (auth.texts['signup_success']);
-
+      $.ajax ({
+        type: 'POST',
+        url: '/auth/signup',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-
         afterLogin();
       }).fail (function (response) {
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        const error = response.responseText || '';
-        if (error.match ('email'))         auth.error (auth.texts['exists_email']);
-        else if (error.match ('username')) auth.error (auth.texts['exists_username']);
-        else                               auth.error (auth.texts['ajax_error']);
+        auth.clear_error();
+        if (response.responseText) {
+          auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
+        }
       });
     }
 
     if (op === 'login') {
-      if (! values.username) return auth.error (auth.texts['please_username_email'], 'username');
-      if (! values.password) return auth.error (auth.texts['please_password'], 'password');
-
-      auth.clear_error ();
-      $.ajax ({type: 'POST', url: '/auth/login', data: JSON.stringify ({username: values.username, password: values.password}), contentType: 'application/json; charset=utf-8'}).done (function () {
-
+      $.ajax ({
+        type: 'POST',
+        url: '/auth/login',
+        data: JSON.stringify ({username: values.username, password: values.password}),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-
         afterLogin();
       }).fail (function (response) {
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        if (response.status === 403) {
-           auth.error (auth.texts['invalid_username_password'] + ' ' + auth.texts['no_account'] + ' &nbsp;<button class="green-btn" onclick="auth.redirect (\'signup\')">' + auth.texts['create_account'] + '</button>');
-           $ ('#create-account').hide ();
-           localStorage.setItem ('hedy-login-username', values.username ?? '');
+        auth.clear_error();
+        if (response.responseText) {
+           auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
         }
-        else auth.error (auth.texts['ajax_error']);
       });
     }
 
     if (op === 'profile') {
-      if (! (values.email ?? '').match (auth.emailRegex)) return auth.error (auth.texts['valid_email'], 'email');
-
-      if (values.birth_year) {
-        if (!validBirthYearString(values.birth_year)) {
-          return auth.error (auth.texts['valid_year'] + new Date ().getFullYear (), 'birth_year');
-        }
-      }
-
       const payload: User = {
-        email: values['email'],
-        birth_year: values.birth_year ? parseInt(values['birth_year']) : undefined,
-        country: values['country'] ? values.country : undefined,
-        gender: values['gender'] ? values.gender : undefined,
+        email: values.email,
         language: values.language,
-        prog_experience: $ ('input[name=has_experience]:checked').val() as 'yes' | 'no',
+        birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
+        country: values.country ? values.country : undefined,
+        gender: values.gender ? values.gender : undefined,
+        prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
           : undefined,
       };
 
-      console.log(payload);
-
-      auth.clear_error ();
-      $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
+      $.ajax ({
+        type: 'POST', url: '/profile',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         auth.success (auth.texts['profile_updated']);
-        setTimeout (function () {location.reload ()}, 500);
+        setTimeout (function () {location.reload ()}, 1500);
       }).fail (function (response) {
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        auth.error (auth.texts['ajax_error'] + ' ' + response.responseText);
+        if (response.responseText) {
+           auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
+        }
       });
     }
 
     if (op === 'change_password') {
-      if (! values.password) return auth.error (auth.texts['please_password'], 'password', '#error-password');
-      if (values.password.length < 6) return auth.error (auth.texts['password_six'], 'password', '#error-password');
-      if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match'], 'password_repeat', '#error-password');
-
-      const payload = {old_password: values.old_password, new_password: values.password};
+      const payload = {old_password: values.old_password, password: values.password, password_repeat: values.password_repeat};
 
       auth.clear_error ('#error-password');
-      $.ajax ({type: 'POST', url: '/auth/change_password', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        auth.success (auth.texts['password_updated'], '#success-password');
+      $.ajax ({
+        type: 'POST',
+        url: '/auth/change_password',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
+        auth.success (auth.texts['password_updated'], '#success_password');
         $ ('#old_password').val ('');
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        if (response.status === 403) auth.error (auth.texts['invalid_password'], null, '#error-password');
-        else                         auth.error (auth.texts['ajax_error'], null, '#error-password');
+        if (response.responseText) {
+           auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
+        }
       });
     }
 
     if (op === 'recover') {
-      if (! values.username) return auth.error (auth.texts['please_username'], 'username');
-
       const payload = {username: values.username};
 
       auth.clear_error ();
-      $.ajax ({type: 'POST', url: '/auth/recover', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
+      $.ajax ({
+        type: 'POST', url: '/auth/recover',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         auth.success (auth.texts['sent_password_recovery']);
         $ ('#username').val ('');
       }).fail (function (response) {
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        if (response.status === 403) auth.error (auth.texts['invalid_username']);
-        else                         auth.error (auth.texts['ajax_error']);
+        if (response.responseText) {
+          return auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
+        }
       });
     }
 
     if (op === 'reset') {
-      if (! values.password) return auth.error (auth.texts['please_password'], 'password');
-      if (values.password.length < 6) return auth.error(auth.texts['password_six'], 'password');
-      if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match'], 'password_repeat');
-
       const payload = {username: auth.reset?.['username'], token: auth.reset?.['token'], password: values.password};
 
       auth.clear_error ();
@@ -251,9 +235,11 @@ export const auth = {
         delete auth.reset;
         auth.redirect ('login');
       }).fail (function (response) {
-        if (response.status >= 500) return auth.error (auth.texts['server_error']);
-        if (response.status === 403) auth.error (auth.texts['invalid_reset_link']);
-        else                         auth.error (auth.texts['ajax_error']);
+        if (response.responseText) {
+          return auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
+        }
       });
     }
   },
@@ -678,10 +664,4 @@ function getSavedRedirectPath() {
     localStorage.removeItem('hedy-save-redirect');
   }
   return redirect;
-}
-
-function validBirthYearString(year: string) {
-  const birth_year = parseInt (year);
-  if (! birth_year || birth_year < 1900 || birth_year > new Date ().getFullYear ()) return false;
-  return true;
 }
