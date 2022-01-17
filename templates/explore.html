@@ -23,7 +23,7 @@
                 </select>
                 <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
                     <button type="reset" class="red-btn" onclick="window.open('/explore', '_self');">Reset</button>
-                    <button type="submit" class="green-btn ml-4 px-4">{{ texts.search }}</button>
+                    <button type="submit" class="green-btn ltr:ml-4 rtl:mr-4 px-4">{{ texts.search }}</button>
                 </div>
             </div>
         </form>
@@ -31,7 +31,7 @@
     <div class="flex flex-wrap mx-auto justify-center turn-pre-into-ace" id="explore_page_programs">
     {% for program in programs %}
         <div class="explore-program-box overflow-hidden" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
-              <div class="explore-program-box-title bg-blue-600 text-white text-lg text-center -ml-2 -mt-8 pt-10 pl-12" style="transform: rotate(5deg); width: 18rem;">
+              <div class="explore-program-box-title bg-blue-600 text-white text-lg text-center ltr:-ml-2 rtl:-mr-2 -mt-8 pt-10 ltr:pl-12 rtl:pr-12" style="transform: rotate(5deg); width: 18rem;">
                       {{ program.name | truncate(20) }}
               </div>
               <div class="px-4">

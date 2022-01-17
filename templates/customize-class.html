@@ -16,7 +16,7 @@
              <h4>{{auth.available_adventures}}</h4>
              <form>
                  <div class="flex flex-row items-center">
-                 <ul class="inline-block w-1/2 list-none ml-0 pl-4" id="adventures_overview">
+                 <ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 pl-4" id="adventures_overview">
                      {% for key_name, name_levels in adventures.items() %}
                          {% for name, levels in name_levels.items() %}
                              {% for level in levels %}
