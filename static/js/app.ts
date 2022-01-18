@@ -6,7 +6,6 @@ import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
 import { auth } from './auth';
-import {update_rules} from "./syntaxModesRules";
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
