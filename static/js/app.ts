@@ -10,6 +10,12 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
+//Todo:
+/*
+A solution might be to make alle ace editors global objects
+Enabling us to call them from anywhere and change the content.
+ */
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -1180,7 +1186,27 @@ export function change_language(lang: string) {
     });
 }
 
+function get_translation(code: string, starting_language: string | number | string[] | undefined, expected_language: string) {
+    console.log(code);
+    console.log(starting_language);
+    console.log(expected_language);
+    return "test";
+}
+
+function change_global_editor(old_lang: string | number | string[] | undefined, lang: string) {
+  const translated_code = get_translation(theGlobalEditor.getValue(), old_lang, lang);
+  theGlobalEditor.setValue(translated_code);
+}
+
+function change_keywords(old_lang: string | number | string[] | undefined, lang: string){
+   change_global_editor(old_lang, lang);
+   for (const code of $('code').get()) {
+      console.log(code);
+   };
+}
+
 export function change_keyword_language(lang: string){
+  const old_lang = $('#current_keyword_lang').val();
   $.ajax({
     type: 'POST',
     url: '/change_keyword_language',
@@ -1191,7 +1217,7 @@ export function change_keyword_language(lang: string){
     dataType: 'json'
   }).done(function(response: any) {
       if (response.success){
-        location.reload();
+        change_keywords(old_lang, lang);
         // Todo:
         /*
           We don't have to reload the page as we can fix this with dynamic reloading of all relevant elements
