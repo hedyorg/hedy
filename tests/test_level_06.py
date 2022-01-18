@@ -359,7 +359,7 @@ class TestsLevel6(HedyTester):
     )
 
   def test_if_calc_vars(self):
-    code =  textwrap.dedent("""\
+    code = textwrap.dedent("""\
     cmp is 1
     test is 2
     acu is 0
