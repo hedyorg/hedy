@@ -1298,9 +1298,12 @@ def current_keyword_language():
     return make_keyword_lang_obj(g.keyword_lang)
 
 @app.template_global()
-def other_keyword_languages():
-    cl = g.keyword_lang
-    return [make_keyword_lang_obj(l) for l in ALL_KEYWORD_LANGUAGES.keys() if l != cl]
+def other_keyword_language():
+    if session['lang'] in ALL_KEYWORD_LANGUAGES.keys() and session['keyword_lang'] != session['lang']:
+        return make_keyword_lang_obj(g.lang)
+    if session['keyword_lang'] != "en": #Always return English as an option!
+        return make_keyword_lang_obj("en")
+    return None
 
 @app.template_global()
 def main_menu_entries():

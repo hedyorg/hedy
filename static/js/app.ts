@@ -1231,6 +1231,11 @@ function change_keywords(old_lang: string, lang: string){
 
 function update_view() {
   console.log("Updating view...");
+  // Todo:
+  /*
+     Change the language selector structure to show the current language on top, others as dropdown
+     Update the SyntaxModelRules to fix correct highlighting
+   */
 
 }
 
