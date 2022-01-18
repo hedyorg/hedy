@@ -22,8 +22,11 @@ export let theModalEditor: AceAjax.Editor;
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
+  let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
+    counter += 1;
     $(preview).addClass('text-lg rounded');
+    $(preview).attr('id', "code_block_" + counter);
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
@@ -45,17 +48,14 @@ export let theModalEditor: AceAjax.Editor;
       }
     }
     if (window.State.other_keyword_language) {
-      const selector_id = 0;
-      const code_block_id = 0;
-
-      const selectorContainer = $('<div>').css({ position: 'absolute', top: 5, right: 75, width: 'auto' }).appendTo(preview).attr('id', '12345');
+      const selectorContainer = $('<div>').css({ position: 'absolute', top: 5, right: 75, width: 'auto' }).appendTo(preview).attr('id', 'selector_container_' + counter);
 
       const dropdownContainer1 = $('<div>').addClass("dropdown inline-block right-0 absolute z-10 mx-2 mt-2 mb-0 text-white").attr('id', 'keyword_selector');
       const button1 = $('<button>').addClass("inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg").text(<string>window.State.keyword_language);
       const menu1 = $('<div>').addClass("dropdown-menu absolute hidden right-0");
       const list1 = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 mr-1 bg-blue-600 rounded-lg mt-2");
       const link1 = $('<a>').addClass("no-underline text-white").text(<string>window.State.other_keyword_language);
-      link1.attr('onclick', "hedyApp.change_keyword_language ('" + selector_id + "','" + code_block_id + "','" + window.State.keyword_language + "','" + window.State.other_keyword_language + "');event.preventDefault();");
+      link1.attr('onclick', "hedyApp.change_keyword_language ('selector_container_" + counter + "','code_block_" + counter + "','" + window.State.keyword_language + "','" + window.State.other_keyword_language + "');event.preventDefault();");
 
       list1.append(link1);
       menu1.append(list1);
@@ -67,7 +67,7 @@ export let theModalEditor: AceAjax.Editor;
       const menu2 = $('<div>').addClass("dropdown-menu absolute hidden right-0");
       const list2 = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 mr-1 bg-blue-600 rounded-lg mt-2");
       const link2 = $('<a>').addClass("no-underline text-white").text(<string>window.State.keyword_language);
-      link2.attr('onclick', "change_keyword_language ('" + selector_id + "','" + code_block_id + "','" + window.State.other_keyword_language + "','" + window.State.keyword_language + "');event.preventDefault();");
+      link2.attr('onclick', "hedyApp.change_keyword_language ('selector_container_" + counter + "','code_block_" + counter + "','" + window.State.other_keyword_language + "','" + window.State.keyword_language + "');event.preventDefault();");
 
 
       list2.append(link2);
