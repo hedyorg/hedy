@@ -107,6 +107,45 @@ class TestsLevel6(HedyTester):
       code=code,
       expected=expected
     )
+  def test_issue_1720(self):
+    code = textwrap.dedent("""\
+    eten is hamburger
+    prijs = 0
+    if eten is hamburger prijs = 12
+    print prijs""")
+
+    expected = textwrap.dedent("""\
+    eten = 'hamburger'
+    prijs = '0'
+    if str(eten) == str('hamburger'):
+      prijs = '12'
+    print(f'{prijs}')""")
+
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected
+    )
+
+  def test_issue_1721(self):
+    #this code has a space at the end of line 2
+    code = textwrap.dedent("""\
+    eten is ask 'wat wilt u bestellen'
+    if eten is 'taart' print 'ok'
+    print 'taart'""")
+
+    expected = textwrap.dedent("""\
+    eten = input(f'wat wilt u bestellen')
+    if str(eten) == str('taart'):
+      print(f'ok')
+    print(f'taart')""")
+
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected
+    )
+
 
   def test_print_if_else_with_equals_sign(self):
     code = textwrap.dedent("""\
