@@ -1180,6 +1180,24 @@ export function change_language(lang: string) {
     });
 }
 
+export function change_keyword_language(lang: string){
+  $.ajax({
+    type: 'POST',
+    url: '/change_keyword_language',
+    data: JSON.stringify({
+      lang: lang
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response: any) {
+      if (response.succes){
+        location.reload();
+      }
+    }).fail(function(xhr) {
+      console.error(xhr);
+    });
+}
+
 export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();

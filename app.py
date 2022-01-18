@@ -279,7 +279,9 @@ def setup_language():
     g.lang = session['lang']
 
     # Always set the keyword languages to English when starting
-    g.keyword_lang = "en"
+    if 'keyword_lang' not in session:
+        session['keyword_lang'] = "en"
+    g.keyword_lang = session['keyword_lang']
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
@@ -1259,6 +1261,17 @@ def explore():
 def change_language():
     body = request.json
     session['lang'] = body.get('lang')
+    return jsonify({'succes': 200})
+
+@app.route('/change_keyword_language', methods=['POST'])
+def change_keyword_language():
+    print("Hier komen we!")
+    body = request.json
+    session['keyword_lang'] = body.get('lang')
+
+    print(body)
+    print(session['keyword_lang'])
+
     return jsonify({'succes': 200})
 
 
