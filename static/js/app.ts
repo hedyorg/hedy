@@ -40,9 +40,10 @@ export let theModalEditor: AceAjax.Editor;
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
       });
     } else {
-      if($(preview).attr('level')){
-        let level = String($(preview).attr('level'));
-        const mode = getHighlighter(parseInt(level), "en");
+      if($(preview).attr('id')){
+        // @ts-ignore
+        let level = String($(preview).attr('id'));
+        const mode = getHighlighter(parseInt(level));
         exampleEditor.session.setMode(mode);
       }
     }
@@ -188,7 +189,7 @@ export let theModalEditor: AceAjax.Editor;
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
       if (window.State.level) {
-        const mode = getHighlighter(parseInt(window.State.level), "en");
+        const mode = getHighlighter(parseInt(window.State.level));
         editor.session.setMode(mode);
       }
     }
@@ -197,14 +198,14 @@ export let theModalEditor: AceAjax.Editor;
   }
 })();
 
-function getHighlighter(level: number, language: string) {
+function getHighlighter(level: number) {
   const modeExceptions: Record<string, string> = {
         '9': 'ace/mode/level9and10',
         '10': 'ace/mode/level9and10',
         '18': 'ace/mode/level18and19',
         '19': 'ace/mode/level18and19',
       };
-  return modeExceptions[level] || `ace/mode/level` + level + language;
+  return modeExceptions[level] || `ace/mode/level` + level;
 }
 
 function reloadOnExpiredSession () {
@@ -1075,7 +1076,7 @@ function createModal(level:number ){
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
       if (window.State.level) {
-        const mode = getHighlighter(parseInt(window.State.level), "en");
+        const mode = getHighlighter(parseInt(window.State.level));
         editor.session.setMode(mode);
       }
     }
@@ -1243,18 +1244,16 @@ function update_view(selector_container: string) {
   });
 }
 
-function update_syntax(target_id: string) {
-  if (!ace.edit(target_id)) {
-    return
-  }
-  const mode = getHighlighter(<number><unknown>$('#' + target_id).attr('level'), "en");
-  ace.edit(target_id).session.setMode(mode);
+function switch_states() {
+  const temp = window.State.keyword_language
+  window.State.keyword_language = window.State.other_keyword_language
+  window.State.other_keyword_language = temp
 }
 
 export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string){
   update_view(selector_container);
   update_keywords_commands(target_id, old_lang, new_lang);
-  update_syntax(target_id);
+  switch_states();
 }
 
 export function filter_programs() {

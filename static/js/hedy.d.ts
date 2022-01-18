@@ -22,8 +22,8 @@ interface State {
   /**
    * Current keyword language
    */
-  readonly keyword_language?: string;
-  readonly other_keyword_language?: string;
+  keyword_language?: string;
+  other_keyword_language?: string;
   /**
    * Title of current level
    */
