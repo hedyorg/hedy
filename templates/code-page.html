@@ -52,6 +52,10 @@
     window.State.lang = "{{ g.lang }}";
     window.State.level = "{{ level }}";
     window.State.level_title = "{{ ui.level_title }}";
+    {% if other_keyword_language() %}
+        window.State.keyword_language = "en"
+        window.State.other_keyword_language = "{{ other_keyword_language().lang }}"
+    {% endif %}
     {% if username %}
         window.State.examples_left = 20;
     {% endif %}

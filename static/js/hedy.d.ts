@@ -19,7 +19,11 @@ interface State {
    * Current level
    */
   readonly level?: string;
-
+  /**
+   * Current keyword language
+   */
+  readonly keyword_language?: string;
+  readonly other_keyword_language?: string;
   /**
    * Title of current level
    */

@@ -17,6 +17,10 @@ export let theModalEditor: AceAjax.Editor;
     window.State = {};
   }
 
+  if (window.State.keyword_language) {
+      console.log(window.State.keyword_language);
+  }
+
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
