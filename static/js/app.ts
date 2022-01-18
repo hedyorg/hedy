@@ -1181,40 +1181,37 @@ export function change_language(lang: string) {
 }
 
 function update_keywords_commands(target_id: any, start_lang: string, goal_lang: string) {
-    //We have to fix a way to get ace editor by their id
-  if (target_id) {
-    console.log("Todo...");
+  if (!ace.edit(target_id)) {
+    return
   }
-    $.ajax({
-      type: 'POST',
-      url: '/translate_keywords',
-      data: JSON.stringify({
-        code: theGlobalEditor.getValue(),
-        start_lang: start_lang,
-        goal_lang: goal_lang
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function (response: any) {
-      console.log(response);
-      if (response.success) {
-        theGlobalEditor.setValue(response.code);
-      }
-    }).fail(function (xhr) {
-      console.error(xhr);
-    });
+  $.ajax({
+    type: 'POST',
+    url: '/translate_keywords',
+    data: JSON.stringify({
+      code: ace.edit(target_id).getValue(),
+      start_lang: start_lang,
+      goal_lang: goal_lang
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function (response: any) {
+    console.log(response);
+    if (response.success) {
+      ace.edit(target_id).setValue(response.code);
+    }
+  }).fail(function (xhr) {
+    console.error(xhr);
+  });
 }
 
-function update_view(container_name: string) {
-  $('#' + container_name + ' > div').map(function() {
+function update_view(selector_container: string) {
+  $('#' + selector_container + ' > div').map(function() {
     $(this).toggle();
   });
 }
 
-export function change_keyword_language(container_name: string, target_id: string, old_lang: string, new_lang: string){
-  update_view(container_name);
-  console.log(old_lang);
-  console.log(new_lang);
+export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string){
+  update_view(selector_container);
   update_keywords_commands(target_id, old_lang, new_lang);
 }
 
