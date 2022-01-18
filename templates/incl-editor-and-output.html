@@ -11,7 +11,7 @@
                   </button>
                   <div class="dropdown-menu absolute hidden right-0">
                       <ul class="dropdown-menu list-none text-xl z-10 text-center px-4 bg-gray-200 rounded-lg border-black mt-2">
-                            <a class="no-underline text-black hover:bg-gray-400" href="#" id="dropdown_keyword_option_{{ other_keyword_language().lang }}" onclick="hedyApp.change_keyword_language ('{{ current_keyword_language().lang }}', '{{ other_keyword_language().lang }}');event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
+                            <a class="no-underline text-black hover:bg-gray-400" href="#" id="dropdown_keyword_option_{{ other_keyword_language().lang }}" onclick="hedyApp.change_keyword_language ('main_editor_keyword_selector','{{ current_keyword_language().lang }}', '{{ other_keyword_language().lang }}');event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
                       </ul>
                   </div>
               </div>

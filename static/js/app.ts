@@ -1180,68 +1180,38 @@ export function change_language(lang: string) {
     });
 }
 
-function update_global_editor(editor: AceAjax.Editor, starting_language: string, expected_language: string) {
-   $.ajax({
+function update_keywords_commands(target_id: any, start_lang: string, goal_lang: string) {
+    //We have to fix a way to get ace editor by their id
+    console.log(target_id);
+    $.ajax({
       type: 'POST',
       url: '/translate_keywords',
       data: JSON.stringify({
-        code: editor.getValue(),
-        start_lang: starting_language,
-        goal_lang: expected_language
+        code: theGlobalEditor.getValue(),
+        start_lang: start_lang,
+        goal_lang: goal_lang
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(response: any) {
-        console.log(response);
-        if (response.success){
-          editor.setValue(response.code);
-        }
-      }).fail(function(xhr) {
-        console.error(xhr);
+    }).done(function (response: any) {
+      console.log(response);
+      if (response.success) {
+        theGlobalEditor.setValue(response.code);
+      }
+    }).fail(function (xhr) {
+      console.error(xhr);
     });
 }
-
-function update_keywords_commands(code: any, starting_language: string, expected_language: string) {
-  $.ajax({
-      type: 'POST',
-      url: '/translate_keywords',
-      data: JSON.stringify({
-        code: code.val(),
-        start_lang: starting_language,
-        goal_lang: expected_language
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response: any) {
-        console.log(response);
-        if (response.success){
-          code.val(response.code);
-        }
-      }).fail(function(xhr) {
-        console.error(xhr);
-    });
-}
-/*
-function change_keywords(old_lang: string, lang: string){
-   update_global_editor(theGlobalEditor, old_lang, lang);
-   for (const code of $('code').get()) {
-      update_keywords_commands($(code), old_lang, lang);
-   };
-}*/
 
 function update_view(container_name: string) {
   $('#' + container_name + ' > div').map(function() {
-    console.log(this.id);
+    $(this).toggle();
   });
-  $('#keyword_selector').toggle();
-  $('#keyword_selector2').toggle();
 }
 
-export function change_keyword_language(container_name: string, old_lang: string, new_lang: string){
-  console.log(container_name);
-  console.log(old_lang);
-  console.log(new_lang);
+export function change_keyword_language(container_name: string, target_id: string, old_lang: string, new_lang: string){
   update_view(container_name);
+  update_keywords_commands(target_id, old_lang, new_lang);
 }
 
 export function filter_programs() {
