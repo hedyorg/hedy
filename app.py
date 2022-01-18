@@ -1,5 +1,7 @@
 # coding=utf-8
 import sys
+
+import hedy_translation
 from website.yaml_file import YamlFile
 
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -1271,6 +1273,13 @@ def change_keyword_language():
         return jsonify({'success': 200})
     return jsonify({'error': 400})
 
+@app.route('/translate_keywords', methods=['POST'])
+def translate_keywords():
+    body = request.json
+    if body.get('start_lang') != session['keyword_lang'] or body.get('goal_lang') not in ALL_KEYWORD_LANGUAGES.keys():
+        return jsonify({'error': 400})
+    translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'));
+    return jsonify({'success': 200, 'code': translated_code})
 
 def session_id():
     """Returns or sets the current session ID."""

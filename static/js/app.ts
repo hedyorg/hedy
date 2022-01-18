@@ -1194,7 +1194,7 @@ function get_translation(code: string, starting_language: string, expected_langu
       dataType: 'json'
     }).done(function(response: any) {
         if (response.success){
-          result = response.responseText;
+          result = response.code;
         }
       }).fail(function(xhr) {
         console.error(xhr);
@@ -1209,9 +1209,9 @@ function change_global_editor(old_lang: string, lang: string) {
 
 function change_keywords(old_lang: string, lang: string){
    change_global_editor(old_lang, lang);
-   for (const code of $('code').get()) {
-      $(code).val(get_translation(<string>$(code).val(), old_lang, lang));
-   };
+   //for (const code of $('code').get()) {
+   //   $(code).val(get_translation(<string>$(code).val(), old_lang, lang));
+   //};
 }
 
 export function change_keyword_language(lang: string){
