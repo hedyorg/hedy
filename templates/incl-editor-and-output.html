@@ -83,7 +83,7 @@
       <br>
       <div class="flex justify-between">
         <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{ui.run_code_button}} </button>
-          <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="cursor-pointer" id="repair_button" style="height: 7rem; visibility: hidden; position: absolute; margin-left: 24rem; margin-top: -2rem;">
+          <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="cursor-pointer h-28 hidden absolute ltr:ml-96 rtl:mr-96 -mt-2" id="repair_button">
           {% if show_edit_button %}
         <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{ui.edit_code_button}}</a>
         {% endif %}
