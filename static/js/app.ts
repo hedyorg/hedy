@@ -1190,7 +1190,8 @@ export function change_keyword_language(lang: string){
     contentType: 'application/json',
     dataType: 'json'
   }).done(function(response: any) {
-      if (response.succes){
+      if (response.success){
+        location.reload();
         // Todo:
         /*
           We don't have to reload the page as we can fix this with dynamic reloading of all relevant elements
