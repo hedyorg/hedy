@@ -1278,12 +1278,12 @@ def current_language():
 
 @app.template_global()
 def current_keyword_language():
-    return make_lang_obj(g.keyword_lang)
+    return make_keyword_lang_obj(g.keyword_lang)
 
 @app.template_global()
 def other_keyword_languages():
     cl = g.keyword_lang
-    return [make_lang_obj(l) for l in ALL_KEYWORD_LANGUAGES.keys() if l != cl]
+    return [make_keyword_lang_obj(l) for l in ALL_KEYWORD_LANGUAGES.keys() if l != cl]
 
 @app.template_global()
 def main_menu_entries():
@@ -1332,6 +1332,13 @@ def make_lang_obj(lang):
     """Make a language object for a given language."""
     return {
         'sym': ALL_LANGUAGES[lang],
+        'lang': lang
+    }
+
+def make_keyword_lang_obj(lang):
+    """Make a language object for a given language."""
+    return {
+        'sym': ALL_KEYWORD_LANGUAGES[lang],
         'lang': lang
     }
 

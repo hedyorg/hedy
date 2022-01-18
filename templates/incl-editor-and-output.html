@@ -5,12 +5,13 @@
       <!-- language selector overlay -->
       <div class="dropdown inline-block right-0 absolute z-10 mx-2 px-2 mt-2 mb-0 bg-gray-200 rounded-lg border-black">
           <button class="inline-flex items-center text-3xl" type="button">
-              🇬🇧 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
+              {{ current_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
           </button>
           <div class="dropdown-menu absolute hidden right-0">
               <ul class="dropdown-menu text-white list-none text-3xl z-10 text-center px-2 bg-gray-200 rounded-lg border-black mt-2">
-                  <a class="no-underline hover:bg-gray-400" href="#" onclick="hedyApp.change_keyword_language ('nl');event.preventDefault();"><li class="border-b border-black">🇳🇱</li></a>
-                  <a class="no-underline hover:bg-gray-400" href="#" onclick="hedyApp.change_keyword_language ('es');event.preventDefault();"><li>🇪🇸</li></a>
+                  {% for language in other_keyword_languages() %}
+                    <a class="no-underline hover:bg-gray-400" href="#" onclick="hedyApp.change_keyword_language ('{{ language.lang }}');event.preventDefault();"><li class="{% if loop.index < loop.length %} border-b border-black{% endif %}">{{ language.sym }}</li></a>
+                  {% endfor %}
               </ul>
           </div>
       </div>
