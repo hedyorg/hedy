@@ -17,10 +17,6 @@ export let theModalEditor: AceAjax.Editor;
     window.State = {};
   }
 
-  if (window.State.keyword_language) {
-      console.log(window.State.keyword_language);
-  }
-
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
@@ -36,7 +32,7 @@ export let theModalEditor: AceAjax.Editor;
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
     if (! $(preview).hasClass('no-copy-button')) {
-      const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
+      const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 60 }).appendTo(preview);
       $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
       });
@@ -47,6 +43,19 @@ export let theModalEditor: AceAjax.Editor;
         const mode = getHighlighter(parseInt(level));
         exampleEditor.session.setMode(mode);
       }
+    }
+    if (window.State.other_keyword_language) {
+      const selectorContainer = $('<div>').css({ position: 'absolute', top: 5, right: 75, width: 'auto' }).appendTo(preview);
+      const dropdownContainer1 = $('<div>').addClass("dropdown inline-block right-0 absolute z-10 mx-2 mt-2 mb-0 text-white").attr('id', '12345');
+      const button1 = $('<button>').addClass("inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg").val(<string>window.State.keyword_language);
+      const menu1 = $('<div>').addClass("dropdown-menu absolute hidden right-0");
+      const list1 = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 mr-1 bg-blue-600 rounded-lg mt-2");
+      const link1 = $('<a>').addClass("no-underline text-white").val(<string>window.State.other_keyword_language);
+      list1.append(link1);
+      menu1.append(list1);
+      dropdownContainer1.append(button1);
+      dropdownContainer1.append(menu1);
+      selectorContainer.append(dropdownContainer1);
     }
   }
 
