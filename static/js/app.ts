@@ -1191,7 +1191,14 @@ export function change_keyword_language(lang: string){
     dataType: 'json'
   }).done(function(response: any) {
       if (response.succes){
-        location.reload();
+        // Todo:
+        /*
+          We don't have to reload the page as we can fix this with dynamic reloading of all relevant elements
+          Write a function that iterates through all <pre> and <code> elements and /POST innerHTML to server
+          Retrieve the translated version back and change the innerHTML to that one
+          A complex issue is the one of the "try it" buttons, where is this code stored?
+          We have to find a way to translate this as well -> implement an overlay on TryPalleteCode?
+         */
       }
     }).fail(function(xhr) {
       console.error(xhr);
