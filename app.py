@@ -69,6 +69,12 @@ FALL_BACK_ADVENTURE = {
     'pt_br': 'pt_pt'
 }
 
+ALL_KEYWORD_LANGUAGES = {
+    'en': '🇬🇧',
+    'nl': '🇳🇱',
+    'es': '🇪🇸'
+}
+
 LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
 for lang in ALL_LANGUAGES.keys():
     LEVEL_DEFAULTS[lang] = hedy_content.LevelDefaults(lang)
@@ -271,6 +277,9 @@ def setup_language():
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
     g.lang = session['lang']
+
+    # Always set the keyword languages to English when starting
+    g.keyword_lang = "en"
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
@@ -1267,6 +1276,14 @@ def session_id():
 def current_language():
     return make_lang_obj(g.lang)
 
+@app.template_global()
+def current_keyword_language():
+    return make_lang_obj(g.keyword_lang)
+
+@app.template_global()
+def other_keyword_languages():
+    cl = g.keyword_lang
+    return [make_lang_obj(l) for l in ALL_KEYWORD_LANGUAGES.keys() if l != cl]
 
 @app.template_global()
 def main_menu_entries():
