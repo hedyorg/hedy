@@ -10,12 +10,6 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
-//Todo:
-/*
-A solution might be to make alle ace editors global objects
-Enabling us to call them from anywhere and change the content.
- */
-
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -1186,22 +1180,22 @@ export function change_language(lang: string) {
     });
 }
 
-function get_translation(code: string, starting_language: string | number | string[] | undefined, expected_language: string) {
+function get_translation(code: string, starting_language: string, expected_language: string) {
     console.log(code);
     console.log(starting_language);
     console.log(expected_language);
     return "test";
 }
 
-function change_global_editor(old_lang: string | number | string[] | undefined, lang: string) {
+function change_global_editor(old_lang: string, lang: string) {
   const translated_code = get_translation(theGlobalEditor.getValue(), old_lang, lang);
   theGlobalEditor.setValue(translated_code);
 }
 
-function change_keywords(old_lang: string | number | string[] | undefined, lang: string){
+function change_keywords(old_lang: string, lang: string){
    change_global_editor(old_lang, lang);
    for (const code of $('code').get()) {
-      console.log(code);
+      $(code).val(get_translation(<string>$(code).val(), old_lang, lang));
    };
 }
 
@@ -1217,15 +1211,7 @@ export function change_keyword_language(lang: string){
     dataType: 'json'
   }).done(function(response: any) {
       if (response.success){
-        change_keywords(old_lang, lang);
-        // Todo:
-        /*
-          We don't have to reload the page as we can fix this with dynamic reloading of all relevant elements
-          Write a function that iterates through all <pre> and <code> elements and /POST innerHTML to server
-          Retrieve the translated version back and change the innerHTML to that one
-          A complex issue is the one of the "try it" buttons, where is this code stored?
-          We have to find a way to translate this as well -> implement an overlay on TryPalleteCode?
-         */
+        change_keywords(<string>old_lang, lang);
       }
     }).fail(function(xhr) {
       console.error(xhr);
