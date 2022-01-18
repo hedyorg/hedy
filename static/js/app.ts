@@ -274,9 +274,9 @@ export function runit(level: string, lang: string, cb: () => void) {
 function showBulb(level: string){
   let parsedlevel = parseInt(level);
   if(parsedlevel <= 2){
-    const repair_button = document.getElementById("repair_button")!;
-    repair_button.style.visibility = "visible";
-    repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(parsedlevel)};
+    const repair_button = $('#repair_button');
+    repair_button.show();
+    repair_button.attr('onclick', 'hedyApp.modalStepOne(parsedlevel)e.preventDefault();');
   }
 
 }
@@ -336,8 +336,8 @@ function showAchievement(achievement: any[]){
 }
 
 function removeBulb(){
-    const repair_button = document.getElementById("repair_button")!;
-    repair_button.style.visibility = "hidden";
+    const repair_button = $('#repair_button');
+    repair_button.hide();
 }
 
 export function fix_code(level: string, lang: string){

@@ -279,7 +279,7 @@ def setup_language():
     if g.lang in ['ar', 'he', 'ur']:
         g.dir = "rtl"
 
-    g.dir = "rtl"
+    #g.dir = "rtl"
 
 
     # Check that requested language is supported, otherwise return 404
