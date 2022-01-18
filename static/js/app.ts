@@ -61,6 +61,7 @@ export let theModalEditor: AceAjax.Editor;
       menu1.append(list1);
       dropdownContainer1.append(button1);
       dropdownContainer1.append(menu1);
+
       const dropdownContainer2 = $('<div>').addClass("dropdown inline-block right-0 absolute z-10 mx-2 mt-2 mb-0 text-white hidden").attr('id', 'keyword_selector2');
       const button2 = $('<button>').addClass("inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg").text(<string>window.State.other_keyword_language);
       const menu2 = $('<div>').addClass("dropdown-menu absolute hidden right-0");
@@ -69,10 +70,10 @@ export let theModalEditor: AceAjax.Editor;
       link2.attr('onclick', "change_keyword_language ('" + selector_id + "','" + code_block_id + "','" + window.State.other_keyword_language + "','" + window.State.keyword_language + "');event.preventDefault();");
 
 
-      list1.append(link2);
-      menu1.append(list2);
-      dropdownContainer1.append(button2);
-      dropdownContainer1.append(menu2);
+      list2.append(link2);
+      menu2.append(list2);
+      dropdownContainer2.append(button2);
+      dropdownContainer2.append(menu2);
 
       selectorContainer.append(dropdownContainer1);
       selectorContainer.append(dropdownContainer2);
