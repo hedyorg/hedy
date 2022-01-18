@@ -1181,10 +1181,25 @@ export function change_language(lang: string) {
 }
 
 function get_translation(code: string, starting_language: string, expected_language: string) {
-    console.log(code);
-    console.log(starting_language);
-    console.log(expected_language);
-    return "test";
+   let result = "";
+   $.ajax({
+      type: 'POST',
+      url: '/translate_keywords',
+      data: JSON.stringify({
+        code: code,
+        start_lang: starting_language,
+        goal_lang: expected_language
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response: any) {
+        if (response.success){
+          result = response.responseText;
+        }
+      }).fail(function(xhr) {
+        console.error(xhr);
+    });
+   return result;
 }
 
 function change_global_editor(old_lang: string, lang: string) {
