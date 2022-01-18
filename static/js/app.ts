@@ -55,7 +55,7 @@ export let theModalEditor: AceAjax.Editor;
       const menu1 = $('<div>').addClass("dropdown-menu absolute hidden right-0");
       const list1 = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 mr-1 bg-blue-600 rounded-lg mt-2");
       const link1 = $('<a>').addClass("no-underline text-white").text(<string>window.State.other_keyword_language);
-      link1.attr('onclick', "change_keyword_language ('" + selector_id + "','" + code_block_id + "','" + window.State.keyword_language + "','" + window.State.other_keyword_language + "');event.preventDefault();");
+      link1.attr('onclick', "hedyApp.change_keyword_language ('" + selector_id + "','" + code_block_id + "','" + window.State.keyword_language + "','" + window.State.other_keyword_language + "');event.preventDefault();");
 
       list1.append(link1);
       menu1.append(list1);
