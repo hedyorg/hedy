@@ -111,7 +111,7 @@ class TestsLevel6(HedyTester):
     code = textwrap.dedent("""\
     eten is hamburger
     prijs = 0
-    if eten is hamburger prijs = 12
+    if eten is hamburger prijs = 12 else print ''
     print prijs""")
 
     expected = textwrap.dedent("""\
@@ -119,6 +119,8 @@ class TestsLevel6(HedyTester):
     prijs = '0'
     if str(eten) == str('hamburger'):
       prijs = '12'
+    else:
+      print(f'')
     print(f'{prijs}')""")
 
     self.multi_level_tester(
