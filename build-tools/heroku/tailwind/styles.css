@@ -143,7 +143,7 @@ code {
 }
 
 .markdown blockquote {
-  @apply border-l-4 border-gray-300 pl-4 italic;
+  @apply border-l-4 border-gray-300 ltr:pl-4 rtl:pr-4 italic;
 }
 
 @tailwind components;
@@ -160,7 +160,7 @@ code {
 }
 
 .menubar-btn {
-  @apply text-white no-underline font-slab font-semibold border-b-4 tracking-wide text-xl py-3 mr-4;
+  @apply text-white no-underline font-slab font-semibold border-b-4 tracking-wide text-xl py-3 ltr:mr-4 rtl:ml-4;
 }
 
 @screen lg {
@@ -175,7 +175,7 @@ code {
 }
 
 .codebar-btn {
-  @apply text-black no-underline border-white tracking-wide font-normal px-4 py-3 mr-4;
+  @apply text-black no-underline border-white tracking-wide font-normal px-4 py-3 ltr:mr-4 rtl:ml-4;
 }
 
 #output {
@@ -206,12 +206,12 @@ code {
 
 ul {
     list-style: disc outside none;
-    margin-left: 2em;
+    @apply ltr:ml-8 rtl:mr-8;
 }
 
 ol {
     list-style: decimal outside none;
-    margin-left: 2em;
+    @apply ltr:ml-8 rtl:mr-8;
 }
 
 /* AUTH */
@@ -288,10 +288,10 @@ div#errorbox, div#warningbox {
 }
 
 p.close-dialog {
+   @apply ltr:right-[5px] rtl:left-[5px];
    font-weight: bold;
    position: absolute;
    top: 5px;
-   right: 5px;
    cursor: pointer;
 }
 
@@ -345,8 +345,7 @@ p.close-dialog {
 
 /* Icon */
 .accordion .accordion-tab label::before {
-  float: right;
-  right: 0;
+  @apply ltr:float-right rtl:float-left ltr:right-0 rtl:left-0;
   top: 0;
   display: block;
   width: 1.5em;
@@ -367,9 +366,9 @@ p.close-dialog {
 
 /* Icon formatting - closed */
 .accordion .accordion-tab input[type=checkbox] + label::before {
+  @apply ltr:right-[5px] rtl:left-[5px];
   content: ">";
   transform: rotate(90deg);
-  margin-right: 5px;
 }
 
 /* Icon formatting - open */
