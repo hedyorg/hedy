@@ -1244,6 +1244,15 @@ function update_view(selector_container: string) {
   });
 }
 
+function update_highlighter(target_id: string) {
+  if (!ace.edit(target_id)) {
+    return
+  }
+  let level = String($('#' + target_id).attr('id'));
+  const mode = getHighlighter(parseInt(level));
+  ace.edit(target_id).session.setMode(mode);
+}
+
 function switch_states() {
   const temp = window.State.keyword_language
   window.State.keyword_language = window.State.other_keyword_language
@@ -1253,6 +1262,7 @@ function switch_states() {
 export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string){
   update_view(selector_container);
   update_keywords_commands(target_id, old_lang, new_lang);
+  update_highlighter(target_id);
   switch_states();
 }
 
