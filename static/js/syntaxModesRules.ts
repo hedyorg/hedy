@@ -43,6 +43,8 @@ var currentLang: {
   _LENGTH: string; 
 };
 if(localKeywordsEnable){
+  console.log("Hier komen we!");
+  console.log("Hoe vaak wordt dit aangeroepen?");
   switch(window.State.keyword_language){
     case 'nl':
       currentLang = LANG_nl;
@@ -687,7 +689,31 @@ if ((window as any).define) {
   // Define the modes based on the level definitions above
   for (const level of LEVELS) {
     // This is a local definition of the file 'ace/mode/level1.js', etc.
-    // UPDATE: We change the format to have different languages ready everywhere
+    define('ace/mode/' + level.name, [], function (require, exports, _module) {
+      var oop = require('ace/lib/oop');
+      var TextMode = require('ace/mode/text').Mode;
+      var TextHighlightRules = require('ace/mode/text_highlight_rules').TextHighlightRules;
+
+      function ThisLevelHighlightRules(this: any) {
+        this.$rules = loosenRules(level.rules);
+        this.normalizeRules();
+      };
+      oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
+
+      function Mode(this: any) {
+        this.HighlightRules = ThisLevelHighlightRules;
+      };
+      oop.inherits(Mode, TextMode);
+
+      exports.Mode = Mode;
+    });
+  }
+}
+
+export function update_rules() {
+  console.log("We worden aangeroepen!");
+  for (const level of LEVELS) {
+    // This is a local definition of the file 'ace/mode/level1.js', etc.
     define('ace/mode/' + level.name, [], function (require, exports, _module) {
       var oop = require('ace/lib/oop');
       var TextMode = require('ace/mode/text').Mode;
