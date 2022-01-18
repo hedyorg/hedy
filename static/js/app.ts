@@ -1221,37 +1221,27 @@ function update_keywords_commands(code: any, starting_language: string, expected
         console.error(xhr);
     });
 }
-
+/*
 function change_keywords(old_lang: string, lang: string){
    update_global_editor(theGlobalEditor, old_lang, lang);
    for (const code of $('code').get()) {
       update_keywords_commands($(code), old_lang, lang);
    };
-}
+}*/
 
-function update_view() {
+function update_view(container_name: string) {
+  $('#' + container_name + ' > div').map(function() {
+    console.log(this.id);
+  });
   $('#keyword_selector').toggle();
   $('#keyword_selector2').toggle();
 }
 
-export function change_keyword_language(old_lang: string, new_lang: string){
+export function change_keyword_language(container_name: string, old_lang: string, new_lang: string){
+  console.log(container_name);
   console.log(old_lang);
-  $.ajax({
-    type: 'POST',
-    url: '/change_keyword_language',
-    data: JSON.stringify({
-      lang: new_lang
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response: any) {
-      if (response.success){
-        change_keywords(old_lang, new_lang);
-        update_view();
-      }
-    }).fail(function(xhr) {
-      console.error(xhr);
-    });
+  console.log(new_lang);
+  update_view(container_name);
 }
 
 export function filter_programs() {

@@ -72,9 +72,9 @@ FALL_BACK_ADVENTURE = {
 }
 
 ALL_KEYWORD_LANGUAGES = {
-    'en': '🇬🇧',
-    'nl': '🇳🇱',
-    'es': '🇪🇸'
+    'en': 'EN',
+    'nl': 'NL',
+    'es': 'ES'
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
@@ -281,9 +281,7 @@ def setup_language():
     g.lang = session['lang']
 
     # Always set the keyword languages to English when starting
-    if 'keyword_lang' not in session:
-        session['keyword_lang'] = "en"
-    g.keyword_lang = session['keyword_lang']
+    g.keyword_lang = "en"
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
@@ -1265,14 +1263,6 @@ def change_language():
     session['lang'] = body.get('lang')
     return jsonify({'succes': 200})
 
-@app.route('/change_keyword_language', methods=['POST'])
-def change_keyword_language():
-    body = request.json
-    if body.get('lang') in ALL_KEYWORD_LANGUAGES.keys() and body.get('lang') != session['keyword_lang']:
-        session['keyword_lang'] = body.get('lang')
-        return jsonify({'success': 200})
-    return jsonify({'error': 400})
-
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
@@ -1299,9 +1289,9 @@ def current_keyword_language():
 
 @app.template_global()
 def other_keyword_language():
-    if session['lang'] in ALL_KEYWORD_LANGUAGES.keys() and session['keyword_lang'] != session['lang']:
+    if session['lang'] in ALL_KEYWORD_LANGUAGES.keys() and g.keyword_lang != session['lang']:
         return make_keyword_lang_obj(g.lang)
-    if session['keyword_lang'] != "en": #Always return English as an option!
+    if g.keyword_lang != "en": #Always return English as an option!
         return make_keyword_lang_obj("en")
     return None
 
