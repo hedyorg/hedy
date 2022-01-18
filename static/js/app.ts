@@ -1254,7 +1254,6 @@ function switch_states() {
 export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string){
   update_view(selector_container);
   update_keywords_commands(target_id, old_lang, new_lang);
-  update_rules();
   switch_states();
 }
 
