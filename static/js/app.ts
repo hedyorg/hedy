@@ -1180,38 +1180,58 @@ export function change_language(lang: string) {
     });
 }
 
-function get_translation(code: string, starting_language: string, expected_language: string) {
-   let result = "";
+function update_global_editor(editor: AceAjax.Editor, starting_language: string, expected_language: string) {
    $.ajax({
       type: 'POST',
       url: '/translate_keywords',
       data: JSON.stringify({
-        code: code,
+        code: editor.getValue(),
         start_lang: starting_language,
         goal_lang: expected_language
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response: any) {
+        console.log(response);
         if (response.success){
-          result = response.code;
+          editor.setValue(response.code);
         }
       }).fail(function(xhr) {
         console.error(xhr);
     });
-   return result;
 }
 
-function change_global_editor(old_lang: string, lang: string) {
-  const translated_code = get_translation(theGlobalEditor.getValue(), old_lang, lang);
-  theGlobalEditor.setValue(translated_code);
+function update_keywords_commands(code: any, starting_language: string, expected_language: string) {
+  $.ajax({
+      type: 'POST',
+      url: '/translate_keywords',
+      data: JSON.stringify({
+        code: code.val(),
+        start_lang: starting_language,
+        goal_lang: expected_language
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response: any) {
+        console.log(response);
+        if (response.success){
+          code.val(response.code);
+        }
+      }).fail(function(xhr) {
+        console.error(xhr);
+    });
 }
 
 function change_keywords(old_lang: string, lang: string){
-   change_global_editor(old_lang, lang);
-   //for (const code of $('code').get()) {
-   //   $(code).val(get_translation(<string>$(code).val(), old_lang, lang));
-   //};
+   update_global_editor(theGlobalEditor, old_lang, lang);
+   for (const code of $('code').get()) {
+      update_keywords_commands($(code), old_lang, lang);
+   };
+}
+
+function update_view() {
+  console.log("Updating view...");
+
 }
 
 export function change_keyword_language(lang: string){
@@ -1227,6 +1247,7 @@ export function change_keyword_language(lang: string){
   }).done(function(response: any) {
       if (response.success){
         change_keywords(<string>old_lang, lang);
+        update_view();
       }
     }).fail(function(xhr) {
       console.error(xhr);
