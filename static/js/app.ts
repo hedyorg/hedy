@@ -1230,28 +1230,23 @@ function change_keywords(old_lang: string, lang: string){
 }
 
 function update_view() {
-  console.log("Updating view...");
-  // Todo:
-  /*
-     Change the language selector structure to show the current language on top, others as dropdown
-     Update the SyntaxModelRules to fix correct highlighting
-   */
-
+  $('#keyword_selector').toggle();
+  $('#keyword_selector2').toggle();
 }
 
-export function change_keyword_language(lang: string){
-  const old_lang = $('#current_keyword_lang').val();
+export function change_keyword_language(old_lang: string, new_lang: string){
+  console.log(old_lang);
   $.ajax({
     type: 'POST',
     url: '/change_keyword_language',
     data: JSON.stringify({
-      lang: lang
+      lang: new_lang
     }),
     contentType: 'application/json',
     dataType: 'json'
   }).done(function(response: any) {
       if (response.success){
-        change_keywords(<string>old_lang, lang);
+        change_keywords(old_lang, new_lang);
         update_view();
       }
     }).fail(function(xhr) {

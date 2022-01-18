@@ -4,13 +4,23 @@
     <div class="flex flex-col order-1 relative" id="code_editor" style="height: 22rem;">
       <!-- language selector overlay -->
       {% if other_keyword_language() %}
-          <div class="dropdown inline-block right-0 absolute z-10 mx-2 px-2 mt-2 mb-0 bg-gray-200 rounded-lg border-black">
-              <button class="inline-flex items-center text-3xl" type="button" id="current_keyword_lang" value="{{ current_keyword_language().lang }}">
+          <div class="dropdown inline-block right-0 absolute z-10 mx-2 px-2 mt-2 mb-0 bg-gray-200 rounded-lg border-black"  id="keyword_selector">
+              <button class="inline-flex items-center text-3xl" type="button">
                   {{ current_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
               </button>
               <div class="dropdown-menu absolute hidden right-0">
                   <ul class="dropdown-menu text-white list-none text-3xl z-10 text-center px-2 bg-gray-200 rounded-lg border-black mt-2">
-                        <a class="no-underline hover:bg-gray-400" href="#" onclick="hedyApp.change_keyword_language ('{{ other_keyword_language().lang }}');event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
+                        <a class="no-underline hover:bg-gray-400" href="#" id="dropdown_keyword_option_{{ other_keyword_language().lang }}" onclick="hedyApp.change_keyword_language ('{{ current_keyword_language().lang }}', '{{ other_keyword_language().lang }}');event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
+                  </ul>
+              </div>
+          </div>
+          <div class="dropdown inline-block right-0 absolute z-10 mx-2 px-2 mt-2 mb-0 bg-gray-200 rounded-lg border-black hidden" id="keyword_selector2">
+              <button class="inline-flex items-center text-3xl" type="button">
+                  {{ other_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
+              </button>
+              <div class="dropdown-menu absolute hidden right-0">
+                  <ul class="dropdown-menu text-white list-none text-3xl z-10 text-center px-2 bg-gray-200 rounded-lg border-black mt-2">
+                        <a class="no-underline hover:bg-gray-400" href="#" id="dropdown_keyword_option_{{ current_keyword_language().lang }}" onclick="hedyApp.change_keyword_language ('{{ other_keyword_language().lang }}', '{{ current_keyword_language().lang }}');event.preventDefault();"><li>{{ current_keyword_language().sym }}</li></a>
                   </ul>
               </div>
           </div>
