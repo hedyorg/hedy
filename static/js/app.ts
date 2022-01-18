@@ -1182,7 +1182,9 @@ export function change_language(lang: string) {
 
 function update_keywords_commands(target_id: any, start_lang: string, goal_lang: string) {
     //We have to fix a way to get ace editor by their id
-    console.log(target_id);
+  if (target_id) {
+    console.log("Todo...");
+  }
     $.ajax({
       type: 'POST',
       url: '/translate_keywords',
@@ -1211,6 +1213,8 @@ function update_view(container_name: string) {
 
 export function change_keyword_language(container_name: string, target_id: string, old_lang: string, new_lang: string){
   update_view(container_name);
+  console.log(old_lang);
+  console.log(new_lang);
   update_keywords_commands(target_id, old_lang, new_lang);
 }
 
