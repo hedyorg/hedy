@@ -47,10 +47,10 @@ export let theModalEditor: AceAjax.Editor;
     if (window.State.other_keyword_language) {
       const selectorContainer = $('<div>').css({ position: 'absolute', top: 5, right: 75, width: 'auto' }).appendTo(preview);
       const dropdownContainer1 = $('<div>').addClass("dropdown inline-block right-0 absolute z-10 mx-2 mt-2 mb-0 text-white").attr('id', '12345');
-      const button1 = $('<button>').addClass("inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg").val(<string>window.State.keyword_language);
+      const button1 = $('<button>').addClass("inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg").text(<string>window.State.keyword_language);
       const menu1 = $('<div>').addClass("dropdown-menu absolute hidden right-0");
       const list1 = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 mr-1 bg-blue-600 rounded-lg mt-2");
-      const link1 = $('<a>').addClass("no-underline text-white").val(<string>window.State.other_keyword_language);
+      const link1 = $('<a>').addClass("no-underline text-white").text(<string>window.State.other_keyword_language);
       list1.append(link1);
       menu1.append(list1);
       dropdownContainer1.append(button1);
