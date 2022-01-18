@@ -272,11 +272,11 @@ export function runit(level: string, lang: string, cb: () => void) {
   }
 }
 function showBulb(level: string){
-  let parsedlevel = parseInt(level);
+  const parsedlevel = parseInt(level)
   if(parsedlevel <= 2){
     const repair_button = $('#repair_button');
     repair_button.show();
-    repair_button.attr('onclick', 'hedyApp.modalStepOne(parsedlevel)e.preventDefault();');
+    repair_button.attr('onclick', 'hedyApp.modalStepOne(' + parsedlevel + ');event.preventDefault();');
   }
 
 }
