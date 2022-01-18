@@ -1266,8 +1266,10 @@ def change_language():
 @app.route('/change_keyword_language', methods=['POST'])
 def change_keyword_language():
     body = request.json
-    session['keyword_lang'] = body.get('lang')
-    return jsonify({'succes': 200})
+    if body.get('lang') in ALL_KEYWORD_LANGUAGES.keys() and body.get('lang') != session['keyword_lang']:
+        session['keyword_lang'] = body.get('lang')
+        return jsonify({'success': 200})
+    return jsonify({'error': 400})
 
 
 def session_id():
