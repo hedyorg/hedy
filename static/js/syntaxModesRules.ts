@@ -678,9 +678,10 @@ const LANGUAGES = ["en", "nl", "es"]
 // editor. No point in continuing if that is the case.
 if ((window as any).define) {
   // Define the modes based on the level definitions above
-  for (const language in LANGUAGES) {
-    const LEVELS = create_levels(language);
+  for (const language of LANGUAGES) {
+    let LEVELS = create_levels(language);
     for (const level of LEVELS) {
+      console.log('ace/mode/' + level.name + language);
       // This is a local definition of the file 'ace/mode/level1.js', etc.
       define('ace/mode/' + level.name + language, [], function (require, exports, _module) {
         var oop = require('ace/lib/oop');
