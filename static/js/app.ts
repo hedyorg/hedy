@@ -1143,7 +1143,6 @@ export function toggle_developers_mode(example_programs: boolean) {
   if ($('#developers_toggle').is(":checked")) {
       $('#commands-window-total').hide();
       $('#adventures').hide();
-      theGlobalEditor.resize();
       pushAchievement("lets_focus");
   } else {
       // If the example programs are hidden by class customization: keep hidden!
@@ -1157,6 +1156,7 @@ export function toggle_developers_mode(example_programs: boolean) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
+    theGlobalEditor.resize();
   } else {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
