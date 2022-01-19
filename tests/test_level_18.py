@@ -206,6 +206,30 @@ class TestsLevel18(HedyTester):
           expected=expected,
           extra_check_function=self.is_not_turtle()
       )
+    
+    def test_input_without_text_inside(self):
+      code = "x = input()"
+      expected = textwrap.dedent("""\
+      x = input(f'')
+      try:
+        x = int(x)
+      except ValueError:
+        try:
+          x = float(x)
+        except ValueError:
+          pass""")
+      self.multi_level_tester(
+        code=code,
+        expected=expected,
+        extra_check_function=self.is_not_turtle()
+      )
+    
+    def test_print_without_text_inside(self):
+      self.multi_level_tester(
+        code="print()",
+        expected="print(f'')",
+        extra_check_function=self.is_not_turtle()
+      )
 
     # negative tests
 
@@ -236,11 +260,5 @@ class TestsLevel18(HedyTester):
     def test_input_without_argument(self):
       self.multi_level_tester(
         code="name is input",
-        exception=hedy.exceptions.IncompleteCommandException
-      )
-
-    def test_input_without_text_inside(self):
-      self.multi_level_tester(
-        code="name is input()",
         exception=hedy.exceptions.IncompleteCommandException
       )   

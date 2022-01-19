@@ -831,8 +831,10 @@ class AllCommands(Transformer):
             return 'ask'
         if keyword == 'in_list_check':
             return 'in'
-        if keyword in ['input_is', 'input_equals']:
+        if keyword in ['input_is', 'input_equals', 'input_is_empty_brackets', 'input_equals_empty_brackets']:
             return 'input'
+        if keyword == 'print_empty_brackets':
+            return 'print'
         return keyword
 
     def __default__(self, args, children, meta):
@@ -1730,6 +1732,16 @@ class ConvertToPython_18(ConvertToPython_17):
 
     def input_equals(self, args):
         return self.input(args)
+    
+    def input_is_empty_brackets(self, args):
+        return self.input(args)
+    
+    def input_equals_empty_brackets(self, args):
+        return self.input(args)
+    
+    def print_empty_brackets(self, args):
+        return self.print(args)
+
 def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
