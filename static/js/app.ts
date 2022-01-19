@@ -32,6 +32,7 @@ export let theModalEditor: AceAjax.Editor;
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     exampleEditor.setOptions({ minLines: 2 });
+
     if (dir === "rtl") {
          exampleEditor.setOptions({ rtl: true });
     }
@@ -1142,6 +1143,7 @@ export function toggle_developers_mode(example_programs: boolean) {
   if ($('#developers_toggle').is(":checked")) {
       $('#commands-window-total').hide();
       $('#adventures').hide();
+      theGlobalEditor.resize();
       pushAchievement("lets_focus");
   } else {
       // If the example programs are hidden by class customization: keep hidden!
