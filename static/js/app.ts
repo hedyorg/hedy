@@ -30,7 +30,7 @@ export let theModalEditor: AceAjax.Editor;
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
-    exampleEditor.setOptions({ minLines: 4 });
+    exampleEditor.setOptions({ minLines: 2 });
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
@@ -46,7 +46,9 @@ export let theModalEditor: AceAjax.Editor;
       }
     }
     if (window.State.keyword_language && window.State.other_keyword_language) {
-      const selectorContainer = $('<div>').css({ position: 'absolute', top: 5, right: 75, width: 'auto' }).appendTo(preview).attr('id', 'selector_container_' + counter);
+      // Increase minLines otherwise the dropdown menu doesn't fit
+      exampleEditor.setOptions({ minLines: 4 });
+      const selectorContainer = $('<div>').css({ position: 'absolute', top: 5, right: 70, width: 'auto' }).appendTo(preview).attr('id', 'selector_container_' + counter);
       const dropdownContainer1 = create_language_selector(counter, window.State.keyword_language, window.State.other_keyword_language, false);
       const dropdownContainer2 = create_language_selector(counter, window.State.other_keyword_language, window.State.keyword_language, true);
       selectorContainer.append(dropdownContainer1);
@@ -180,7 +182,7 @@ function create_language_selector(index: number, current_lang: string, other_lan
   const button = $('<button>').addClass("inline-flex items-center text-xl px-2 py-1 bg-blue-600 rounded-lg").text(current_lang.toUpperCase());
   button.append("<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\"  d=\"M19 9l-7 7-7-7\"></path></svg>");
   const menu = $('<div>').addClass("dropdown-menu absolute hidden right-0");
-  const list = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 mr-1 bg-blue-600 rounded-lg mt-2");
+  const list = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 py-1 mr-1 bg-blue-600 rounded-lg mt-2 cursor-pointer");
   const link = $('<a>').addClass("no-underline text-white").text(other_lang.toUpperCase());
   link.attr('onclick', "hedyApp.change_keyword_language ('selector_container_" + index + "','code_block_" + index + "','" + current_lang + "','" + other_lang + "');event.preventDefault();");
 
