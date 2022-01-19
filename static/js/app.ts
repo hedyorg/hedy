@@ -30,7 +30,7 @@ export let theModalEditor: AceAjax.Editor;
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
-    exampleEditor.setOptions({ minLines: 2 });
+    exampleEditor.setOptions({ minLines: 4 });
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
