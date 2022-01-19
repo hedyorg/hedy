@@ -412,12 +412,22 @@ class ConvertToLang18(ConvertToLang17):
         var = args[0]
         remaining_args = args[1:]
         return var + " = " + self.keywords["input"] + "(" + ''.join(remaining_args) + ")"
+    
+    def input_is_empty_brackets(self, args):
+        var = args[0]        
+        return var + " " + self.keywords["is"] + " " + self.keywords["input"] + "()"
+
+    def input_equals_empty_brackets(self, args):
+        var = args[0]
+        return var + " = " + self.keywords["input"] + "()"
 
     def for_loop(self, args):
         return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + \
                f'{self.keywords["range"]}({args[1]},{args[2]})' + ":" + indent(args[3:])
 
-
     def print(self, args):
         argument_string = ''.join(args)
         return f'{self.keywords["print"]}({argument_string})'
+
+    def print_empty_brackets(self, args):
+        return f'{self.keywords["print"]}()'
