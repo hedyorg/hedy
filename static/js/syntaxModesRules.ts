@@ -679,6 +679,7 @@ function loosenRules(rules: Rules) {
 // editor. No point in continuing if that is the case.
 if ((window as any).define) {
   // Define the modes based on the level definitions above
+  // We want to create the files for all languages, just to be sure
   for (const language of LANGUAGES) {
     let LEVELS = create_levels(language);
     for (const level of LEVELS) {

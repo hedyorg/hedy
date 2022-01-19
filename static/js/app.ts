@@ -42,8 +42,7 @@ export let theModalEditor: AceAjax.Editor;
     } else {
       if($(preview).attr('level')){
         let level = String($(preview).attr('level'));
-        const mode = getHighlighter(level + "en");
-        exampleEditor.session.setMode(mode);
+        exampleEditor.session.setMode(getHighlighter(level));
       }
     }
     if (window.State.keyword_language && window.State.other_keyword_language) {
@@ -164,7 +163,7 @@ export let theModalEditor: AceAjax.Editor;
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
       if (window.State.level) {
-        const mode = getHighlighter(window.State.level + "en");
+        const mode = getHighlighter(window.State.level);
         editor.session.setMode(mode);
       }
     }
@@ -192,6 +191,11 @@ function create_language_selector(index: number, current_lang: string, other_lan
 }
 
 function getHighlighter(level: string) {
+  if (window.State.keyword_language && window.State.other_keyword_language) {
+    level = level + window.State.other_keyword_language
+  } else {
+    level = level + "en"
+  }
   const modeExceptions: Record<string, string> = {
         '9': 'ace/mode/level9and10',
         '10': 'ace/mode/level9and10',
@@ -1069,7 +1073,7 @@ function createModal(level:number ){
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
       if (window.State.level) {
-        const mode = getHighlighter(window.State.level + "en");
+        const mode = getHighlighter(window.State.level);
         editor.session.setMode(mode);
       }
     }
@@ -1235,24 +1239,11 @@ function update_view(selector_container: string, target_id: string, new_lang: st
   $('#' + selector_container + ' > div').map(function() {
     $(this).toggle();
   });
-  if (window.State.level) {
-    console.log(ace.edit(target_id).session.getMode());
-    const mode = getHighlighter(window.State.level + new_lang);
-    ace.edit(target_id).session.setMode(mode);
-    console.log(ace.edit(target_id).session.getMode());
-  }
-}
-
-function switch_states() {
-  const temp = window.State.keyword_language
-  window.State.keyword_language = window.State.other_keyword_language
-  window.State.other_keyword_language = temp
 }
 
 export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string){
   update_view(selector_container, target_id, new_lang);
   update_keywords_commands(target_id, old_lang, new_lang);
-  switch_states();
 }
 
 export function filter_programs() {
