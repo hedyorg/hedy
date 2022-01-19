@@ -8,6 +8,9 @@ if (!window.State) {
 window.State = {};
 }
 
+// Add a language to this file to support creation of ace files
+const LANGUAGES = ["en", "nl", "es"]
+
 // Contains the current keywords based on the current language
 var currentLang: { 
   _PRINT: string; 
@@ -671,8 +674,6 @@ function loosenRules(rules: Rules) {
   return rules;
 }
 
-const LANGUAGES = ["en", "nl", "es"]
-
 // Only do this work if the 'define' function is actually available at runtime.
 // If not, this script got included on a page that didn't include the Ace
 // editor. No point in continuing if that is the case.
@@ -681,7 +682,6 @@ if ((window as any).define) {
   for (const language of LANGUAGES) {
     let LEVELS = create_levels(language);
     for (const level of LEVELS) {
-      console.log('ace/mode/' + level.name + language);
       // This is a local definition of the file 'ace/mode/level1.js', etc.
       define('ace/mode/' + level.name + language, [], function (require, exports, _module) {
         var oop = require('ace/lib/oop');
