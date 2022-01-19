@@ -350,7 +350,7 @@ function getRequestData(weeksBack: number) {
   return { start: start };
 }
 
-function updateSharedLegend(id, datasets, chartsClass) {
+function updateSharedLegend(id: string, datasets: any[], chartsClass: string) {
   var legend = $(id);
   // Clear legend contents
   legend.html('');
