@@ -173,15 +173,15 @@ export let theModalEditor: AceAjax.Editor;
 })();
 
 function create_language_selector(index: number, current_lang: string, other_lang: string, hidden: boolean) {
-  const dropdownContainer = $('<div>').addClass("dropdown inline-block right-0 absolute z-10 mx-2 mt-2 mb-0 text-white").attr('id', 'keyword_selector');
+  const dropdownContainer = $('<div>').addClass("dropdown font-sans inline-block right-0 absolute z-10 mx-2 mt-2 mb-0 text-white").attr('id', 'keyword_selector');
   if (hidden) {
     dropdownContainer.addClass('hidden');
   }
-  const button = $('<button>').addClass("inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg").text(current_lang);
+  const button = $('<button>').addClass("inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg").text(current_lang.toUpperCase());
   button.append("<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\"  d=\"M19 9l-7 7-7-7\"></path></svg>");
   const menu = $('<div>').addClass("dropdown-menu absolute hidden right-0");
   const list = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 mr-1 bg-blue-600 rounded-lg mt-2");
-  const link = $('<a>').addClass("no-underline text-white").text(other_lang);
+  const link = $('<a>').addClass("no-underline text-white").text(other_lang.toUpperCase());
   link.attr('onclick', "hedyApp.change_keyword_language ('selector_container_" + index + "','code_block_" + index + "','" + current_lang + "','" + other_lang + "');event.preventDefault();");
 
   list.append(link);
