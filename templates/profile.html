@@ -61,15 +61,15 @@
         </select>
     </div>
     <div class="mb-4">
-      <label for="has_experience" class="inline-block float-left">{{auth.programming_experience}}</label>
+      <label for="has_experience" class="inline-block ltr:float-left rtl:float-right">{{auth.programming_experience}}</label>
       <input class="ltr:pl-4 rtl:pr-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()" {% if user_data['prog_experience'] == "yes" %} checked {% endif %}><span class="ltr:pl-2 rtl:pr-2">{{auth.yes}}</span><br>
       <input class="ltr:pl-4 rtl:pr-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()" {% if user_data['prog_experience'] == "no" %} checked {% endif %}><span class="ltr:pl-2 rtl:pr-2">{{auth.no}}</span>
     </div>
     <div class="clear-both {% if user_data['prog_experience'] == "no" %} hidden {% endif %} mb-4" id="languages">
       <div class="mb-4">
-        <label class="inline-block float-left">{{auth.languages}}</label>
+        <label class="inline-block ltr:float-left rtl:float-right">{{auth.languages}}</label>
       </div>
-      <div class="float-left mb-4">
+      <div class="ltr:float-left rtl:float-right mb-4">
         <input type="checkbox" name="languages" value="scratch" {% if "scratch" in user_data['experience_languages']  %}checked{% endif %}><span class="ltr:pl-2 rtl:pr-2">Scratch</span><br>
         <input type="checkbox" name="languages" value="other_block" {% if "other_block" in user_data['experience_languages']  %}checked{% endif %}><span class="ltr:pl-2 rtl:pr-2">{{auth.other_block}}</span><br>
         <input type="checkbox" name="languages" value="python" {% if "python" in user_data['experience_languages']  %}checked{% endif %}><span class="ltr:pl-2 rtl:pr-2">Python</span><br>
