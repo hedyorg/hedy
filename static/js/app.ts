@@ -40,9 +40,9 @@ export let theModalEditor: AceAjax.Editor;
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
       });
     } else {
-      if($(preview).attr('id')){
+      if($(preview).attr('level')){
         // @ts-ignore
-        let level = String($(preview).attr('id'));
+        let level = String($(preview).attr('level'));
         const mode = getHighlighter(parseInt(level));
         exampleEditor.session.setMode(mode);
       }
@@ -1232,10 +1232,12 @@ function update_keywords_commands(target_id: any, start_lang: string, goal_lang:
   });
 }
 
-function update_view(selector_container: string) {
+function update_view(selector_container: string, target_id: string) {
   $('#' + selector_container + ' > div').map(function() {
     $(this).toggle();
   });
+  const mode = getHighlighter(3);
+  ace.edit(target_id).session.setMode(mode);
 }
 
 function switch_states() {
@@ -1245,7 +1247,7 @@ function switch_states() {
 }
 
 export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string){
-  update_view(selector_container);
+  update_view(selector_container, target_id);
   update_keywords_commands(target_id, old_lang, new_lang);
   switch_states();
 }
