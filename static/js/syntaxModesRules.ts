@@ -8,9 +8,6 @@ if (!window.State) {
 window.State = {};
 }
 
-// Set this to true to use keywords from languages other than english
-var localKeywordsEnable = true;
-
 // Contains the current keywords based on the current language
 var currentLang: { 
   _PRINT: string; 
@@ -42,23 +39,9 @@ var currentLang: {
   _WHILE: string; 
   _LENGTH: string; 
 };
-if(localKeywordsEnable){
-  console.log("Hier komen we!");
-  console.log("Hoe vaak wordt dit aangeroepen?");
-  switch(window.State.keyword_language){
-    case 'nl':
-      currentLang = LANG_nl;
-      break;
-    case 'es':
-      currentLang = LANG_es;
-      break;
-    default:
-      currentLang = LANG_en;
-      break;
-  }
-} else {
-  currentLang = LANG_en;
-}
+
+const LANGUAGES = ["en", "nl", "es"];
+currentLang = LANG_en
 
 interface Rule {
   readonly regex: string;
@@ -688,24 +671,30 @@ function loosenRules(rules: Rules) {
 if ((window as any).define) {
   // Define the modes based on the level definitions above
   for (const level of LEVELS) {
-    // This is a local definition of the file 'ace/mode/level1.js', etc.
-    define('ace/mode/' + level.name, [], function (require, exports, _module) {
-      var oop = require('ace/lib/oop');
-      var TextMode = require('ace/mode/text').Mode;
-      var TextHighlightRules = require('ace/mode/text_highlight_rules').TextHighlightRules;
+    for (const language of LANGUAGES) {
+      if (language == "nl"){currentLang = LANG_nl;}
+      else if (language == "es"){currentLang = LANG_es;}
+      else {currentLang = LANG_en;}
 
-      function ThisLevelHighlightRules(this: any) {
-        this.$rules = loosenRules(level.rules);
-        this.normalizeRules();
-      };
-      oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
+      // This is a local definition of the file 'ace/mode/level1.js', etc.
+      define('ace/mode/' + level.name + language, [], function (require, exports, _module) {
+        var oop = require('ace/lib/oop');
+        var TextMode = require('ace/mode/text').Mode;
+        var TextHighlightRules = require('ace/mode/text_highlight_rules').TextHighlightRules;
 
-      function Mode(this: any) {
-        this.HighlightRules = ThisLevelHighlightRules;
-      };
-      oop.inherits(Mode, TextMode);
+        function ThisLevelHighlightRules(this: any) {
+          this.$rules = loosenRules(level.rules);
+          this.normalizeRules();
+        };
+        oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
 
-      exports.Mode = Mode;
-    });
+        function Mode(this: any) {
+          this.HighlightRules = ThisLevelHighlightRules;
+        };
+        oop.inherits(Mode, TextMode);
+
+        exports.Mode = Mode;
+      });
+    }
   }
 }
