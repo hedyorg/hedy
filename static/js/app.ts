@@ -1232,25 +1232,14 @@ function update_keywords_commands(target_id: any, start_lang: string, goal_lang:
 }
 
 function update_view(selector_container: string, target_id: string, new_lang: string) {
-  console.log("We updaten de view...");
   $('#' + selector_container + ' > div').map(function() {
     $(this).toggle();
-    console.log("Selectors zijn geswitched...");
   });
-  if ($('#' + target_id).attr('level')){
-    console.log("Dit code block heeft een level attribute!");
-    const level = $('#' + target_id).attr('level');
-    console.log("Dit is... " + level);
-    const mode = getHighlighter(level + new_lang);
-    console.log(ace.edit(target_id).session.getMode());
-    ace.edit(target_id).session.setMode(mode);
-    console.log(ace.edit(target_id).session.getMode());
-    return;
-  }
-  console.log("Hier zouden we niet moeten komen....");
   if (window.State.level) {
+    console.log(ace.edit(target_id).session.getMode());
     const mode = getHighlighter(window.State.level + new_lang);
     ace.edit(target_id).session.setMode(mode);
+    console.log(ace.edit(target_id).session.getMode());
   }
 }
 

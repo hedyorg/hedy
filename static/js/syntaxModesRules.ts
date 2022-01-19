@@ -40,9 +40,6 @@ var currentLang: {
   _LENGTH: string; 
 };
 
-const LANGUAGES = ["en", "nl", "es"];
-currentLang = LANG_en
-
 interface Rule {
   readonly regex: string;
   readonly token: string | string[];
@@ -87,7 +84,14 @@ function baseRules(): Rules {
   };
 }
 
-const LEVELS = [
+function create_levels(language: string) {
+  if (language == "nl") {
+    currentLang = LANG_nl
+  } else if (language == "es") {
+    currentLang = LANG_es
+  } else { currentLang = LANG_en}
+
+  const LEVELS = [
   {
     name: 'level1',
     rules: pipe(baseRules(),
@@ -366,6 +370,8 @@ const LEVELS = [
     ),
   },
 ];
+  return LEVELS;
+}
 
 /**
  * From a list of rules, duplicate all rules
@@ -665,17 +671,16 @@ function loosenRules(rules: Rules) {
   return rules;
 }
 
+const LANGUAGES = ["en", "nl", "es"]
+
 // Only do this work if the 'define' function is actually available at runtime.
 // If not, this script got included on a page that didn't include the Ace
 // editor. No point in continuing if that is the case.
 if ((window as any).define) {
   // Define the modes based on the level definitions above
-  for (const level of LEVELS) {
-    for (const language of LANGUAGES) {
-      if (language == "nl"){currentLang = LANG_nl;}
-      else if (language == "es"){currentLang = LANG_es;}
-      else {currentLang = LANG_en;}
-
+  for (const language in LANGUAGES) {
+    const LEVELS = create_levels(language);
+    for (const level of LEVELS) {
       // This is a local definition of the file 'ace/mode/level1.js', etc.
       define('ace/mode/' + level.name + language, [], function (require, exports, _module) {
         var oop = require('ace/lib/oop');
