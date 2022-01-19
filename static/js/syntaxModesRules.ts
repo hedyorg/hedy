@@ -8,40 +8,55 @@ if (!window.State) {
 window.State = {};
 }
 
-// Add a language to this file to support creation of ace files
-const LANGUAGES = ["en", "nl", "es"]
+// Set this to true to use keywords from languages other than english
+var localKeywordsEnable = true;
 
 // Contains the current keywords based on the current language
-var currentLang: { 
-  _PRINT: string; 
-  _IS: string; 
-  _ASK: string; 
-  _ECHO: string; 
-  _FORWARD: string; 
-  _TURN: string; 
-  _SLEEP: string; 
-  _ADD_LIST: string; 
-  _TO_LIST: string; 
-  _REMOVE: string; 
-  _FROM: string; 
-  _AT: string; 
-  _RANDOM: string; 
-  _IN: string; 
-  _IF: string; 
-  _ELSE: string; 
-  _AND: string; 
-  _REPEAT: string; 
-  _TIMES: string; 
-  _FOR: string; 
-  _RANGE: string; 
-  _TO: string; 
-  _STEP: string; 
-  _ELIF: string; 
-  _INPUT: string; 
-  _OR: string; 
-  _WHILE: string; 
-  _LENGTH: string; 
+var currentLang: {
+  _PRINT: string;
+  _IS: string;
+  _ASK: string;
+  _ECHO: string;
+  _FORWARD: string;
+  _TURN: string;
+  _SLEEP: string;
+  _ADD_LIST: string;
+  _TO_LIST: string;
+  _REMOVE: string;
+  _FROM: string;
+  _AT: string;
+  _RANDOM: string;
+  _IN: string;
+  _IF: string;
+  _ELSE: string;
+  _AND: string;
+  _REPEAT: string;
+  _TIMES: string;
+  _FOR: string;
+  _RANGE: string;
+  _TO: string;
+  _STEP: string;
+  _ELIF: string;
+  _INPUT: string;
+  _OR: string;
+  _WHILE: string;
+  _LENGTH: string;
 };
+if(localKeywordsEnable){
+  switch(window.State.other_keyword_language){
+    case 'nl':
+      currentLang = LANG_nl;
+      break;
+    case 'es':
+      currentLang = LANG_es;
+      break;
+    default:
+      currentLang = LANG_en;
+      break;
+  }
+} else {
+  currentLang = LANG_en;
+}
 
 interface Rule {
   readonly regex: string;
@@ -87,14 +102,7 @@ function baseRules(): Rules {
   };
 }
 
-function create_levels(language: string) {
-  if (language == "nl") {
-    currentLang = LANG_nl
-  } else if (language == "es") {
-    currentLang = LANG_es
-  } else { currentLang = LANG_en}
-
-  const LEVELS = [
+const LEVELS = [
   {
     name: 'level1',
     rules: pipe(baseRules(),
@@ -373,8 +381,6 @@ function create_levels(language: string) {
     ),
   },
 ];
-  return LEVELS;
-}
 
 /**
  * From a list of rules, duplicate all rules
@@ -658,7 +664,7 @@ function rule_forRangeParen() {
 function keywordWithSpace(keyword: string) {
   return '\\b' + keyword + ' ';
 }
-  
+
 /**
  * Modify the given ruleset, replacing literal spaces with "one or more spaces"
  */
@@ -678,30 +684,28 @@ function loosenRules(rules: Rules) {
 // If not, this script got included on a page that didn't include the Ace
 // editor. No point in continuing if that is the case.
 if ((window as any).define) {
+
   // Define the modes based on the level definitions above
-  // We want to create the files for all languages, just to be sure
-  for (const language of LANGUAGES) {
-    let LEVELS = create_levels(language);
-    for (const level of LEVELS) {
-      // This is a local definition of the file 'ace/mode/level1.js', etc.
-      define('ace/mode/' + level.name + language, [], function (require, exports, _module) {
-        var oop = require('ace/lib/oop');
-        var TextMode = require('ace/mode/text').Mode;
-        var TextHighlightRules = require('ace/mode/text_highlight_rules').TextHighlightRules;
+  for (const level of LEVELS) {
 
-        function ThisLevelHighlightRules(this: any) {
-          this.$rules = loosenRules(level.rules);
-          this.normalizeRules();
-        };
-        oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
+    // This is a local definition of the file 'ace/mode/level1.js', etc.
+    define('ace/mode/' + level.name, [], function(require, exports, _module) {
+      var oop = require('ace/lib/oop');
+      var TextMode = require('ace/mode/text').Mode;
+      var TextHighlightRules = require('ace/mode/text_highlight_rules').TextHighlightRules;
 
-        function Mode(this: any) {
-          this.HighlightRules = ThisLevelHighlightRules;
-        };
-        oop.inherits(Mode, TextMode);
+      function ThisLevelHighlightRules(this: any) {
+        this.$rules = loosenRules(level.rules);
+        this.normalizeRules();
+      };
+      oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
 
-        exports.Mode = Mode;
-      });
-    }
+      function Mode(this: any) {
+        this.HighlightRules = ThisLevelHighlightRules;
+      };
+      oop.inherits(Mode, TextMode);
+
+      exports.Mode = Mode;
+    });
   }
 }

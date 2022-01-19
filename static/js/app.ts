@@ -191,11 +191,6 @@ function create_language_selector(index: number, current_lang: string, other_lan
 }
 
 function getHighlighter(level: string) {
-  if (window.State.other_keyword_language) {
-    level = level + window.State.other_keyword_language
-  } else {
-    level = level + "en"
-  }
   const modeExceptions: Record<string, string> = {
         '9': 'ace/mode/level9and10',
         '10': 'ace/mode/level9and10',
