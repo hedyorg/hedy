@@ -49,8 +49,8 @@ export let theModalEditor: AceAjax.Editor;
     }
     if (window.State.keyword_language && window.State.other_keyword_language) {
       const selectorContainer = $('<div>').css({ position: 'absolute', top: 5, right: 75, width: 'auto' }).appendTo(preview).attr('id', 'selector_container_' + counter);
-      const dropdownContainer1 = create_language_selector(counter, window.State.keyword_language, window.State.other_keyword_language);
-      const dropdownContainer2 = create_language_selector(counter, window.State.other_keyword_language, window.State.keyword_language);
+      const dropdownContainer1 = create_language_selector(counter, window.State.keyword_language, window.State.other_keyword_language, false);
+      const dropdownContainer2 = create_language_selector(counter, window.State.other_keyword_language, window.State.keyword_language, true);
       selectorContainer.append(dropdownContainer1);
       selectorContainer.append(dropdownContainer2);
     }
@@ -174,8 +174,11 @@ export let theModalEditor: AceAjax.Editor;
   }
 })();
 
-function create_language_selector(index: number, current_lang: string, other_lang: string) {
+function create_language_selector(index: number, current_lang: string, other_lang: string, hidden: boolean) {
   const dropdownContainer = $('<div>').addClass("dropdown inline-block right-0 absolute z-10 mx-2 mt-2 mb-0 text-white").attr('id', 'keyword_selector');
+  if (hidden) {
+    dropdownContainer.addClass('hidden');
+  }
   const button = $('<button>').addClass("inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg").text(current_lang);
   const menu = $('<div>').addClass("dropdown-menu absolute hidden right-0");
   const list = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 mr-1 bg-blue-600 rounded-lg mt-2");
