@@ -191,7 +191,7 @@ function create_language_selector(index: number, current_lang: string, other_lan
 }
 
 function getHighlighter(level: string) {
-  if (window.State.keyword_language && window.State.other_keyword_language) {
+  if (window.State.other_keyword_language) {
     level = level + window.State.other_keyword_language
   } else {
     level = level + "en"
@@ -1235,14 +1235,14 @@ function update_keywords_commands(target_id: any, start_lang: string, goal_lang:
   });
 }
 
-function update_view(selector_container: string, target_id: string, new_lang: string) {
+function update_view(selector_container: string) {
   $('#' + selector_container + ' > div').map(function() {
     $(this).toggle();
   });
 }
 
 export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string){
-  update_view(selector_container, target_id, new_lang);
+  update_view(selector_container);
   update_keywords_commands(target_id, old_lang, new_lang);
 }
 
