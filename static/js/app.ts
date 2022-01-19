@@ -735,6 +735,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, h
 
   const outputDiv = $('#output');
   outputDiv.empty();
+  $('#turtlecanvas').empty();
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
