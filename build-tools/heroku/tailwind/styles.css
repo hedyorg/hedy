@@ -249,8 +249,14 @@ table.users td {
   border: solid 1px gray;
 }
 
-.right-hand-shadow {
+/* Keep the class name the same to prevent complex restructuring -> the RTL version is actually left-hand-shadow */
+/* https://stackoverflow.com/questions/17572619/how-to-create-a-inset-box-shadow-only-on-one-side */
+body[dir='ltr'] .right-hand-shadow {
   box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.4);
+}
+
+body[dir='rtl'] .right-hand-shadow {
+  box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.4);
 }
 
 .tab {
@@ -334,7 +340,7 @@ p.close-dialog {
 .explore-program-box {
   @apply w-64 h-56 rounded-lg border border-gray-700 m-4 relative bg-blue-200 cursor-pointer;
 }
-=======
+
 /* Tab content - closed */
 .accordion .tab-content {
   max-height: 0;
