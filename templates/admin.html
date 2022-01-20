@@ -3,7 +3,15 @@
 {% block main %}
 <h1>Admin page</h1>
 <div class="w-full mt-4 mb-8" id="program_filter">
-        <!-- It would be really nice to use some dynamic loading using AJAX to present the data -->
+        <!--
+            Todo:
+                Essentially this would works as settings a large package of "preferences" to the back-end
+                It would be nice to use a GET, similar to the explore page filtering, but we've a lot of attributes
+                We have three options   -> Use a POST and do some dynamic loading through AJAX and Jquery
+                                        -> Get a (very) long URL due to the large amount of attributes
+                                        -> Write the attributes in a binary structure f.e. 0011110001
+
+        -->
         <form onsubmit="event.preventDefault (); hedyApp.filter_admin();">
             <div class="px-4 w-full flex flex-row border border-gray-400 py-2 rounded-lg">
                 <div class="w-80 p-2 mx-4">
