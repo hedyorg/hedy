@@ -468,6 +468,11 @@ export function tryPaletteCode(exampleCode: string) {
 
   var MOVE_CURSOR_TO_END = 1;
   editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  //As the commands try-it buttons only contain english code -> make sure the selected language is english
+  if (!($('#editor').attr('lang') == 'en')) {
+      $('#editor').attr('lang', 'en');
+      update_view("main_editor_keyword_selector");
+  }
   window.State.unsaved_changes = false;
 }
 
