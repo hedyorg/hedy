@@ -781,6 +781,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   });
 
   StopExecution = false;
+  // @ts-ignore
   return Sk.misceval.asyncToPromise( () =>
     Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
