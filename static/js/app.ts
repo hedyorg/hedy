@@ -761,11 +761,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#turtlecanvas').show();
   }
 
-  // By setting the execLimit to 0 we kill all current running async programs
-  Sk.configure({
-    execLimit: 0
-  });
-
   Sk.configure({
     output: outf,
     read: builtinRead,
