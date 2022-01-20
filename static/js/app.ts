@@ -733,7 +733,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   window.State.programsInExecution++;
 
   //Always throw an error to cancel possible programs
-  if (window.State.programsInExecution >= 1) {
+  if (window.State.programsInExecution > 1) {
       throw "Execution interrupted";
       window.State.programsInExecution = 0;
   }
@@ -782,7 +782,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     execLimit: (function () {
       // const level = window.State.level;
       return ((hasTurtle || hasSleep) ? 20000 : 3000);
-      window.State.programsInExecution--;
     }) ()
   });
 
