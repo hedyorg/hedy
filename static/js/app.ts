@@ -783,7 +783,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
 
   StopExecution = false;
   return Sk.misceval.asyncToPromise(function () {
-    Sk.importMainWithBody("<stdin>", false, code, true), {
+    return Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
         console.log("Hier komen we!");
         if (StopExecution) {
@@ -792,7 +792,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         }
       }
     }
-    return;
   }).then(function(_mod) {
     console.log('Program executed');
 
