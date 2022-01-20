@@ -1,44 +1,103 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="px-8">
-  <h2>Total programs: {{ program_count }}</h2>
-  <h2>Users ({{ user_count }})</h2>
-  <table class="users">
+<h1>Admin page</h1>
+<div class="w-full mt-4 mb-8" id="program_filter">
+        <!-- It would be really nice to use some dynamic loading using AJAX to present the data -->
+        <form onsubmit="event.preventDefault (); hedyApp.filter_admin();">
+            <div class="px-4 w-full flex flex-row border border-gray-400 py-2 rounded-lg">
+                <div class="w-80 p-2 mx-4">
+                    <h2 class="px-8">Visible attributes</h2>
+                    <div class="flex flex-row items-center">
+                        <div class="flex flex-col">
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="username" name="username"><label class="inline-block w-1/2" for="subscribe">Username</label>
+                            </div>
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="count" name="count"><label class="inline-block w-1/2" for="subscribe">Count</label>
+                            </div>
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="email" name="email"><label class="inline-block w-1/2" for="subscribe">Email</label>
+                            </div>
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="created" name="created"><label class="inline-block w-1/2" for="subscribe">Created</label>
+                            </div>
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="last_login" name="last_login"><label class="inline-block w-1/2" for="subscribe">Last login</label>
+                            </div>
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="birth_year" name="birth_year"><label class="inline-block w-1/2" for="subscribe">Birth year</label>
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="country" name="country"><label class="inline-block w-1/2" for="subscribe">Country</label>
+                            </div>
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="gender" name="gender"><label class="inline-block w-1/2" for="subscribe">Gender</label>
+                            </div>
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="experience" name="experience"><label class="inline-block w-1/2" for="subscribe">Experience</label>
+                            </div>
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="teacher" name="teacher"><label class="inline-block w-1/2" for="subscribe">Teacher</label>
+                            </div>
+                            <div class="flex flex-row items-center">
+                                <input class="inline-block ml-0 mr-3" type="checkbox" id="verified" name="verified"><label class="inline-block w-1/2" for="subscribe">Verified</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-3/4 p-2 mx-4">
+                    <h2 class="px-8">Filtering options</h2>
+                    <select id="explore_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
+                        <option>Created</option>
+                        <option>Last login</option>
+                    </select>
+                    <div class="flex flex-row items-center">
+                        <input type="date" class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
+                        <input type="date" class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 mx-2">
+                        <div class="flex flex-row ml-auto">
+                            <button type="reset" class="red-btn" onclick="window.open('/admin', '_self');">Reset</button>
+                            <button type="submit" class="green-btn ml-4 px-4">Filter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+<div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
+  <table class="table-auto mb-4 w-full text-sm">
     <thead>
-      <td>#</td>
-      <td>Username</td>
-      <td>Programs</td>
-      <td>Program count</td>
-      <td>Email</td>
-      <td>Created</td>
-      <td>Last login</td>
-      <td>Birth year</td>
-      <td>Country</td>
-      <td>Gender</td>
-      <td>Programming experience</td>
-      <td>Experience with languages</td>
-      <td>Is teacher</td>
-      <td>Email verified</td>
+      <tr class="font-bold text-left">
+          <td>Username</td>
+          <td>Count</td>
+          <td>Email</td>
+          <td>Created</td>
+          <td>Last login</td>
+          <td>Birth year</td>
+          <td>Country</td>
+          <td>Gender</td>
+          <td>Experience</td>
+          <td>Teacher</td>
+          <td>Verified</td>
+      </tr>
     </thead>
     <tbody>
       {% for user in users %}
-      <tr>
-        <td>{{user.index}}</td>
-        <td>{{user.username}}</td>
-        <td><a href="programs?user={{user.username}}">Programs</a></td>
-        <td>{{user.program_count or 0}}</td>
-        <td>{{user.email}}&nbsp;<a style="cursor: pointer" onclick="hedyApp.auth.changeUserEmail ('{{user.username}}', '{{user.email}}')">change</a></td>
-        <td>{{user.created}}</td>
-        <td>{{user.last_login}}</td>
-        <td>{{user.birth_year}}</td>
-        <td>{{user.country}}</td>
-        <td>{{user.gender}}</td>
-        <td>{{user.prog_experience}}</td>
-        <td>{{user.experience_languages}}</td>
-        <td><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.auth.markAsTeacher ('{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
-        <td>{{user.email_verified}}</td>
-      </tr>
+          <tr>
+            <td><a href="programs?user={{user.username}}" target="_blank">{{user.username}}</a></td>
+            <td>{{user.program_count or 0}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.created}}</td>
+            <td>{{user.last_login}}</td>
+            <td>{{user.birth_year}}</td>
+            <td>{{user.country}}</td>
+            <td>{{user.gender}}</td>
+            <td>{{user.prog_experience}}</td>
+            <td><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.auth.markAsTeacher ('{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
+            <td>{{user.email_verified}}</td>
+          </tr>
       {% endfor %}
     </tbody>
   </table>
