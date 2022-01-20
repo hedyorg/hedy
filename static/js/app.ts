@@ -782,17 +782,17 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   });
 
   StopExecution = false;
-  return Sk.misceval.asyncToPromise(function () {
-    return Sk.importMainWithBody("<stdin>", false, code, true), {
+  return Sk.misceval.asyncToPromise( () =>
+    Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
-        console.log("Hier komen we!");
         if (StopExecution) {
-          console.log("Gooien een error!");
+          StopExecution = false;
+          window.State.programsInExecution = 0;
           throw "Execution interrupted"
         }
       }
-    }
-  }).then(function(_mod) {
+    },
+   ).then(function(_mod) {
     console.log('Program executed');
 
     // Check if the program was correct but the output window is empty: Return a warning
@@ -801,10 +801,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
     }
     window.State.programsInExecution--;
-    if(!hasWarnings) {
+    if (!hasWarnings) {
       showSuccesMessage();
     }
-    if (cb) cb ();
+    if (cb) cb();
   }).catch(function(err) {
     // Extract error message from error
     console.log(err);
