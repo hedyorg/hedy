@@ -194,9 +194,6 @@ function clearErrors(editor: AceAjax.Editor) {
 export function runit(level: string, lang: string, cb: () => void) {
   if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
   if (reloadOnExpiredSession ()) return;
-
-  console.log("We gaan draaien!");
-  console.log("De stopwaarde is nu... " + StopExecution);
   StopExecution = true;
 
   const outputDiv = $('#output');
@@ -246,9 +243,9 @@ export function runit(level: string, lang: string, cb: () => void) {
         return;
       }
         runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
-        console.log(err);
         // If it is an error we throw due to program execution while another is running -> don't show and log it
         if (!(err.message == "\"program_interrupt\"")) {
+          console.log(err);
           error.show(ErrorMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
         }
@@ -803,10 +800,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
     }
     window.State.programsInExecution--;
-    if (!hasWarnings) {
+    if(!hasWarnings) {
       showSuccesMessage();
     }
-    if (cb) cb();
+    if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
     console.log(err);
