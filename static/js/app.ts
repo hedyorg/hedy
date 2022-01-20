@@ -195,6 +195,9 @@ export function runit(level: string, lang: string, cb: () => void) {
   if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
   if (reloadOnExpiredSession ()) return;
 
+  console.log("We gaan draaien!");
+  console.log("De stopwaarde is nu... " + StopExecution);
+
   StopExecution = true;
 
   const outputDiv = $('#output');
@@ -778,12 +781,14 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }) ()
   });
 
-  StopExecution = false;
-
   return Sk.misceval.asyncToPromise(function () {
     return Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
-        if (StopExecution) throw "Execution interrupted"
+        if (StopExecution) {
+           console.log("Er wordt een execute gegooid!");
+           StopExecution = false;
+           throw "Execution interrupted";
+        }
       }
     }
   }).then(function(_mod) {
@@ -846,6 +851,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
     return new Promise(function(ok) {
+      setTimeout(function() {
+        ok(window.prompt(prompt))
+      }, 250)
 
       window.State.disable_run = true;
       $ ('#runit').css('background-color', 'gray');
