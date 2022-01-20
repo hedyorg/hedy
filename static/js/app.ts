@@ -778,7 +778,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     execLimit: (function () {
       // const level = window.State.level;
       return ((hasTurtle || hasSleep) ? 20000 : 3000);
-    })()
+    }) ()
   });
 
   StopExecution = false;
