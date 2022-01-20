@@ -27,6 +27,7 @@ export let theModalEditor: AceAjax.Editor;
     counter += 1;
     $(preview).addClass('text-lg rounded');
     $(preview).attr('id', "code_block_" + counter);
+    $(preview).attr('lang', "en");
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
@@ -38,6 +39,10 @@ export let theModalEditor: AceAjax.Editor;
       const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 60 }).appendTo(preview);
       $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
+        if (!($('#editor').attr('lang') === $(preview).attr('lang'))) {
+          $('#editor').attr('lang', <string>$(preview).attr('lang'));
+          update_view("main_editor_keyword_selector");
+        }
       });
     } else {
       if($(preview).attr('level')){
@@ -176,6 +181,7 @@ export let theModalEditor: AceAjax.Editor;
 
 function create_language_selector(index: number, current_lang: string, other_lang: string, hidden: boolean) {
   const dropdownContainer = $('<div>').addClass("dropdown font-sans inline-block right-0 absolute z-10 mx-2 mb-0 text-white").attr('id', 'keyword_selector');
+  dropdownContainer.attr('lang', current_lang);
   if (hidden) {
     dropdownContainer.addClass('hidden');
   }
@@ -1224,10 +1230,12 @@ function update_keywords_commands(target_id: any, start_lang: string, goal_lang:
     contentType: 'application/json',
     dataType: 'json'
   }).done(function (response: any) {
-    console.log(response);
     if (response.success) {
       ace.edit(target_id).setValue(response.code);
+      $('#' + target_id).attr('lang', goal_lang);
     }
+    console.log("De taal is nu....");
+    console.log($('#' + target_id).attr('lang'));
   }).fail(function (xhr) {
     console.error(xhr);
   });
@@ -1240,6 +1248,8 @@ function update_view(selector_container: string) {
 }
 
 export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string){
+  console.log("De taal was....");
+  console.log($('#' + target_id).attr('lang'));
   update_view(selector_container);
   update_keywords_commands(target_id, old_lang, new_lang);
 }
