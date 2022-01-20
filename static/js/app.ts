@@ -247,8 +247,11 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
         runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
         console.log(err)
-        error.show(ErrorMessages['Execute_error'], err.message);
-        reportClientError(level, code, err.message);
+        // If it is an error we throw due to program execution while another is running -> don't show and log it
+        if (err != "program_interrupt") {
+          error.show(ErrorMessages['Execute_error'], err.message);
+          reportClientError(level, code, err.message);
+        }
       });
     }).fail(function(xhr) {
       console.error(xhr);
@@ -788,7 +791,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         if (StopExecution) {
           StopExecution = false;
           window.State.programsInExecution = 0;
-          throw "Execution interrupted"
+          throw "program_interrupt"
         }
       }
     },
