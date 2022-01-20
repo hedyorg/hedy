@@ -191,6 +191,12 @@ function clearErrors(editor: AceAjax.Editor) {
 
 export function runit(level: string, lang: string, cb: () => void) {
   if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
+  console.log("Hier checken we hoeveel programma's er draaien...");
+  console.log(window.State.programsInExecution);
+
+  if (window.State.programsInExecution >= 1) {
+    modal.alert("Wacht tot het huidige programma klaar is!", 3000);
+  }
 
   if (reloadOnExpiredSession ()) return;
 
@@ -733,11 +739,6 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, h
   if (! window.State.programsInExecution) window.State.programsInExecution = 0;
   window.State.programsInExecution++;
 
-  if (window.State.programsInExecution >= 1) {
-    modal.alert("Wacht door het huidige programma klaar is", 3000);
-    return
-  }
-
   const outputDiv = $('#output');
   outputDiv.empty();
 
@@ -777,6 +778,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, h
     execLimit: (function () {
       // const level = window.State.level;
       return ((hasTurtle || hasSleep) ? 20000 : 3000);
+      window.State.programsInExecution--;
     }) ()
   });
 
