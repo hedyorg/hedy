@@ -10,8 +10,6 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
-var stopExecution = false;
-
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -194,8 +192,6 @@ function clearErrors(editor: AceAjax.Editor) {
 export function runit(level: string, lang: string, cb: () => void) {
   if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
   if (reloadOnExpiredSession ()) return;
-
-  stopExecution = true;
 
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -730,31 +726,17 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function setTimeoutOverride(fn: () => void, delay: number) {
-    // create an interval to check for hardInterrupt while things are sleeping
-    const interval = setInterval(() => {
-        if (stopExecution) { // hardInterrupt
-            console.log("We gooien een hard interrupt!");
-            clearInterval(interval);
-            clearTimeout(timeout);
-            console.log(window.State.programsInExecution);
-            window.State.programsInExecution = 0;
-            console.log(window.State.programsInExecution);
-            stopExecution = false;
-            fn();
-        }
-    }, Math.min(delay / 4, 90));
-    const timeout = setTimeout(() => {
-        clearInterval(interval);
-        fn();
-    }, delay);
-}
-
 function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
   if (! window.State.programsInExecution) window.State.programsInExecution = 0;
   window.State.programsInExecution++;
+
+  //Always throw an error to cancel possible programs
+  if (window.State.programsInExecution >= 1) {
+      throw "Execution interrupted";
+      window.State.programsInExecution = 0;
+  }
 
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -792,7 +774,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
-    setTimeout: setTimeoutOverride,
     timeoutMsg: function () {
       pushAchievement("hedy_hacking");
       return ErrorMessages ['Program_too_long']},
