@@ -329,18 +329,34 @@ p.close-dialog {
   font-weight: normal;
 }
 
+.stats-legend {
+  list-style-type: none;
+}
+
+.stats-legend-item {
+  display: inline;
+  padding-right: 15px;
+  cursor: default;
+}
+
+.stats-legend-color-box {
+  width: 45px;
+  height: 12px;
+  display:inline-block;
+  margin-right: 5px;
+}
+
 /* Programs */
 
 .explore-program-box {
   @apply w-64 h-56 rounded-lg border border-gray-700 m-4 relative bg-blue-200 cursor-pointer;
 }
 =======
-/* Tab content - closed */
-.accordion .tab-content {
-  max-height: 0;
-  -webkit-transition: max-height .35s;
-  -o-transition: max-height .35s;
-  transition: max-height .35s;
+
+/* After updating Tailwind, this empty selector is actually needed for the accordion to function correctly.
+  Officially, the weirdest css (or minifying?) issue I have seen. TODO: BG ask for help. */
+.accordion .accordion-tab input ~ .tab-content {
+
 }
 
 /* Icon */
@@ -359,11 +375,18 @@ p.close-dialog {
   -o-transition: all .35s;
   transition: all .35s;
 }
+.accordion .accordion-tab input ~ .tab-content {
+  max-height: 0;
+  -webkit-transition: max-height .35s;
+  -o-transition: max-height .35s;
+  transition: max-height .35s;
+}
 
 /* :checked - resize to full height */
 .accordion .accordion-tab input:checked ~ .tab-content {
   max-height: 3000vh;
 }
+
 
 /* Icon formatting - closed */
 .accordion .accordion-tab input[type=checkbox] + label::before {
