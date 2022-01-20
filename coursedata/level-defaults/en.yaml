@@ -453,8 +453,14 @@
         This allows you to save two words as 1 item on the list, for example 'Iron Man'.
 
         ```
-        superheroes is 'Spiderman', 'Batman', 'Iron Man'
+        superheroes = 'Spiderman', 'Batman', 'Iron Man'
         print superheroes at random
+        ```
+        ## All text after `if` comparisons need quotation marks too
+        ```
+        name = ask 'What is your name?'
+        if name = 'Hedy the Robot'
+            print 'Hi there!'
         ```
         ## Numbers don't need quotation marks
         For numbers, you do not use quotation marks in the `=`:
@@ -476,6 +482,13 @@
         demo_code: |
             name = 'Hedy the Robot'
             print 'Hello ' name
+    -   name: "quotes after if comparison"
+        explanation: "Text with quotation marks after if"
+        example: "naam = 'Hedy'"
+        demo_code: |
+            name = ask 'Who are you?'
+            if naam = 'Hedy'
+                print 'Hi there!'
     -   name: "quotes in list"
         explanation: "A list with quotation marks"
         example: "name = 'Hedy', 'Felienne'"

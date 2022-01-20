@@ -2,30 +2,31 @@
 
 {% block main %}
 <div class="px-8">
-  <h2 class="inline-block">Select period: </h2>
-  <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats(1, this)">This week</a> |
-  <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats(2, this)">Past 2 weeks</a> |
-  <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats(4, this)">Past 4 weeks</a> |
-  <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats(52, this)">Past year</a>
+  <h2 class="inline-block">Load data for: </h2>
+  <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(1, this)">This week</a> |
+  <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(2, this)">Past 2 weeks</a> |
+  <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(4, this)">Past 4 weeks</a> |
+  <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(52, this)">Past year</a>
   <div class="shadow-md stats accordion">
     <div class="accordion-tab w-full overflow-hidden border-t">
       <input class="absolute opacity-0 " id="tab-multi-one" type="checkbox" name="tabs" checked="checked">
-      <label class="block p-3 leading-normal cursor-pointer border-b" for="tab-multi-one">Program runs per level</label>
+      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-one">
+        Program runs per level</label>
       <div class="tab-content overflow-hidden leading-normal">
         <div class="stats-spinner flex justify-center items-center h-64">
           <div
               class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
           ></div>
         </div>
-        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
           <div class="flex flex-col order-1">
             <div class="w-full flex-1 flex flex-col">
-              <canvas id="successfulRunsPerLevelChart" width="400" height="400"></canvas>
+              <canvas id="programRunsPerLevelChart" width="400" height="400"></canvas>
             </div>
           </div>
           <div class="flex flex-col order-2">
             <div class="w-full flex-1 flex flex-col">
-              <canvas id="failedRunsPerLevelChart" width="400" height="400"></canvas>
+              <canvas id="errorRatePerLevelChart" width="400" height="400"></canvas>
             </div>
           </div>
         </div>
@@ -33,14 +34,15 @@
     </div>
     <div class="accordion-tab w-full overflow-hidden border-t">
       <input class="absolute opacity-0" id="tab-multi-two" type="checkbox" name="tabs" checked="checked">
-      <label class="block p-3 leading-normal cursor-pointer border-b" for="tab-multi-two">Program runs per level per week</label>
+      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-two">
+        Program runs per level per week</label>
       <div class="tab-content overflow-hidden leading-normal">
         <div class="stats-spinner flex justify-center items-center h-64">
           <div
               class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
           ></div>
         </div>
-        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
           <div class="flex flex-col order-1">
             <div class="w-full flex-1 flex flex-col">
               <canvas id="successfulRunsPerWeekChart" width="400" height="400"></canvas>
@@ -56,14 +58,15 @@
     </div>
     <div class="accordion-tab w-full overflow-hidden border-t">
       <input class="absolute opacity-0" id="tab-multi-three" type="checkbox" name="tabs" checked="checked">
-      <label class="block p-3 leading-normal cursor-pointer border-b" for="tab-multi-three">Exceptions per level and per week</label>
+      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-three">
+        Exceptions per level and per week</label>
       <div class="tab-content overflow-hidden leading-normal">
         <div class="stats-spinner flex justify-center items-center h-64">
           <div
               class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
           ></div>
         </div>
-        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
           <div class="flex flex-col order-1">
             <div class="w-full flex-1 flex flex-col">
               <canvas id="exceptionsPerLevelChart" width="400" height="400"></canvas>
@@ -79,7 +82,8 @@
     </div>
     <div class="accordion-tab w-full overflow-hidden border-t">
       <input class="absolute opacity-0" id="tab-multi-four" type="checkbox" name="tabs" checked="checked">
-      <label class="block p-3 leading-normal cursor-pointer border-b" for="tab-multi-four">Search program logs</label>
+      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-four">
+        Search program logs</label>
       <div class="tab-content overflow-hidden leading-normal">
         <div class="stats-spinner flex justify-center items-center h-64">
           <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400">
@@ -136,7 +140,7 @@
           <div class="flex flex-col">
             <div class="w-full flex-1 flex flex-col">
              <button id="search-logs-button"
-                 class="shadow green-btn focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 lg:mt-6 rounded" type="button" onclick="hedyApp.auth.searchProgramLogs()">
+                 class="shadow green-btn focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 lg:mt-6 rounded" type="button" onclick="hedyApp.stats.searchProgramLogs()">
                 Search
              </button>
            </div>
@@ -156,7 +160,7 @@
           </tbody>
         </table>
         <div class="text-center">
-          <button type="button" id="logs-load-more" onclick="hedyApp.auth.fetchProgramLogsResults()"
+          <button type="button" id="logs-load-more" onclick="hedyApp.stats.fetchProgramLogsResults()"
                  class="green-btn mb-4 hidden"
           >Load more</button>
         </div>
@@ -178,7 +182,7 @@
 
 <script>
   $(function() {
-    hedyApp.auth.initStats();
+    hedyApp.stats.initializeAdminStats();
   });
 </script>
 {% endblock %}

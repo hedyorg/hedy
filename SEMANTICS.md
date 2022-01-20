@@ -27,15 +27,15 @@ Level 1 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>'right' + integer | 'left' + integer</td>
+    <td>'right' + integer | 'left' + integer | empty</td>
   </tr>
   <tr>
     <td>echo</td>
-    <td>integer | string</td>
+    <td>integer | string | empty</td>
   </tr>
 </tbody>
 </table>
@@ -110,10 +110,6 @@ Level 1 supports:
     <td>Incomplete Exception</td>
   </tr>
   <tr>
-    <td>echo</td>
-    <td>Incomplete Exception</td>
-  </tr>
-  <tr>
     <td>(forward | turn) text</td>
     <td>Invalid Argument Type Exception</td>
   </tr>
@@ -156,11 +152,11 @@ Level 2 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>
@@ -296,11 +292,11 @@ Level 3 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>
@@ -310,18 +306,15 @@ Level 3 supports:
     <td>sleep</td>
     <td>empty | integer</td>
   </tr>
-    </tr>
-    <tr>
+  <tr>
     <td>at random</td>
     <td>list</td>
   </tr>
-    </tr>
-    <tr>
+  <tr>
     <td>add to</td>
     <td>list</td>
   </tr>
-    </tr>
-    <tr>
+  <tr>
     <td>remove from</td>
     <td>list</td>
   </tr>
@@ -483,32 +476,29 @@ Level 4 supports:
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer</td>
+    <td>integer | empty</td>
   </tr>
   <tr>
     <td>is</td>
     <td>string (before `is`) + any (after `is`)</td>
   </tr>
-    <tr>
+  <tr>
     <td>sleep</td>
     <td>empty | integer</td>
   </tr>
-    </tr>
-    <tr>
+  <tr>
     <td>at random</td>
     <td>list</td>
   </tr>
-    </tr>
-    <tr>
+  <tr>
     <td>add to</td>
     <td>list</td>
   </tr>
-    </tr>
-    <tr>
+  <tr>
     <td>remove from</td>
     <td>list</td>
   </tr>
@@ -649,20 +639,64 @@ Level 4 supports:
 
 ## Level 5
 
-### Commands
+### Commands and types
 
 Level 5 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
@@ -818,20 +852,64 @@ Level 5 supports:
 
 ## Level 6
 
-### Commands
+### Commands and types
 
 Level 6 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
@@ -1018,21 +1096,69 @@ Level 6 supports:
 
 ## Level 7
 
-### Commands
+### Commands and types
 
 Level 7 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
-* `repeat`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>repeat</td>
+    <td>integer + 'times'</td>
+  </tr>
+</tbody>
+</table>
+
 
 #### Correct Programs
 
@@ -1231,18 +1357,66 @@ Level 7 supports:
 ### Commands
 
 Level 8 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
-* `repeat`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>repeat</td>
+    <td>integer + 'times'</td>
+  </tr>
+</tbody>
+</table>
+
 
 #### Correct Programs
 
@@ -1442,21 +1616,69 @@ Level 8 supports:
 
 ## Level 9
 
-### Commands
+### Commands and types
 
 Level 9 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
-* `repeat`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>repeat</td>
+    <td>integer + 'times'</td>
+  </tr>
+</tbody>
+</table>
+
 
 #### Correct Programs
 
@@ -1655,22 +1877,72 @@ Level 9 supports:
 
 ## Level 10
 
-### Commands
+### Commands and types
 
 Level 10 supports:
-* `print`
-* `ask`
-* `forward`
-* `turn`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
-* `repeat`
-* `for`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>turn</td>
+    <td>integer | empty</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>repeat</td>
+    <td>integer + 'times'</td>
+  </tr>
+  <tr>
+    <td>for</td>
+    <td>string + 'in' + list</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
@@ -1874,20 +2146,64 @@ Level 10 supports:
 
 ## Level 11
 
-### Commands
+### Commands and types
 
 Level 11 supports:
-* `print`
-* `ask`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
-* `repeat`
-* `for`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string</td>
+  </tr>
+  <tr>
+    <td>is</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>repeat</td>
+    <td>integer + 'times'</td>
+  </tr>
+  <tr>
+    <td>for</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
@@ -2050,20 +2366,64 @@ Level 11 supports:
 
 ## Level 12
 
-### Commands
+### Commands and types
 
 Level 12 supports:
-* `print`
-* `ask`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
-* `repeat`
-* `for`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string | float</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string | float</td>
+  </tr>
+  <tr>
+    <td>is | =</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>repeat</td>
+    <td>integer + 'times'</td>
+  </tr>
+  <tr>
+    <td>for</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
@@ -2235,20 +2595,72 @@ Level 12 supports:
 
 ## Level 13
 
-### Commands
+### Commands and types
 
 Level 13 supports:
-* `print`
-* `ask`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
-* `repeat`
-* `for`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string | float</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string | float</td>
+  </tr>
+  <tr>
+    <td>is | =</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>repeat</td>
+    <td>integer + 'times'</td>
+  </tr>
+  <tr>
+    <td>for</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+  </tr>
+  <tr>
+    <td>and</td>
+    <td>boolean (before `and`) + boolean (after `and`)</td>
+  </tr>
+  <tr>
+    <td>or</td>
+    <td>boolean (before `or`) + boolean (after `or`)</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 

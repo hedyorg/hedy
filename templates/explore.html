@@ -1,0 +1,51 @@
+{% extends "auth.html" %}
+
+{% block body %}
+<div class="px-8 py-12">
+    <h2 class="px-8 mb-4">{{auth.explore_programs}}</h2>
+    <div class="w-full mb-8" id="program_filter">
+        <!-- It would be really nice to use some dynamic loading using AJAX to present the data -->
+        <form onsubmit="event.preventDefault (); hedyApp.filter_programs();">
+            <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg">
+                <select id="explore_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
+                    <option disabled selected value="">{{ texts.level }}</option>
+                    {% for i in range(1, (max_level + 1)) %}
+                        <option value="{{ i }}" {% if filtered_level and i|string == filtered_level %}selected{% endif %}>{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select id="explore_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
+                    <option disabled selected value="">{{ ui.adventure }}</option>
+                    {% for adventure_key, adventure in adventures.items() %}
+                        {% for name, levels in adventure.items() %}
+                            <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+                <div class="flex flex-row ml-auto">
+                    <button type="reset" class="red-btn" onclick="window.open('/explore', '_self');">Reset</button>
+                    <button type="submit" class="green-btn ml-4 px-4">{{ texts.search }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="flex flex-wrap mx-auto justify-center turn-pre-into-ace" id="explore_page_programs">
+    {% for program in programs %}
+        <div class="explore-program-box overflow-hidden" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+              <div class="explore-program-box-title bg-blue-600 text-white text-lg text-center -ml-2 -mt-8 pt-10 pl-12" style="transform: rotate(5deg); width: 18rem;">
+                      {{ program.name | truncate(20) }}
+              </div>
+              <div class="px-4">
+                  {{ texts.level }}: <b>{{ program.level }}</b>
+              </div>
+              <div class="px-4 mb-2">
+                  {{ texts.creator }}: <b class="{% if program.username|length > 20 %}text-xs{% elif program.username|length > 15 %}text-sm{% endif %}">{{ program.username | truncate(25) }}</b>
+              </div>
+             <div class="relative px-4 mb-2">
+                 <!-- Todo: Solve overflow issue of ace editor -->
+                 <pre class="no-copy-button max-h-full" id="{{ program.level }}">{{ program.code }}</pre>
+             </div>
+         </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

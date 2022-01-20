@@ -2,7 +2,7 @@
 
 {% block main %}
    <h2 class="px-8 mb-4">{{auth.account_overview}}</h2>
-   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
+   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
    <div id="statistics" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
      <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.statistics}}</h2>
      <ul>
@@ -10,7 +10,7 @@
      </ul>
    </div>
    {% if user_classes %}
-       <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#classes').toggle()">{{auth.student_classes}}</h1>
+       <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#classes').toggle()">{{auth.student_classes}}</h1>
        <div id="classes" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
            <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.student_classes}}</h2>
            {% for user_class in user_classes %}
@@ -20,7 +20,7 @@
            {% endfor %}
        </div>
    {% endif %}
-   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{auth.profile}}</h1>
+   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{auth.profile}}</h1>
    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="profile">
     <form class="js-validated-form auth" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.profile}}</h2>
@@ -56,7 +56,9 @@
     </div>
     <div class="mb-4">
         <label for="country">{{auth.country}}</label>
-        <select id="country"></select>
+        <select id="country">
+            <option value="">{{auth.select}}</option>
+        </select>
     </div>
     <div class="mb-4">
       <label for="has_experience" class="inline-block float-left">{{auth.programming_experience}}</label>
@@ -84,24 +86,24 @@
   </form>
     <button class="red-btn" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
    </div>
-  <h1 id="password_toggle" class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#change_password').toggle()">{{auth.change_password}}</h1>
+  <h1 id="password_toggle" class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#change_password').toggle()">{{auth.change_password}}</h1>
    <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.change_password}}</h2>
     <div class="mb-4">
         <label for="old_password">{{auth.current_password}}</label>
-        <input id="old_password" type=password>
+        <input id="old_password" type=password required>
     </div>
     <div class="mb-4">
         <label for="password">{{auth.new_password}}</label>
-        <input id="password" type=password>
+        <input id="password" type=password required>
     </div>
     <div class="mb-4">
         <label for="password_repeat">{{auth.repeat_new_password}}</label>
-        <input id="password_repeat" type=password>
+        <input id="password_repeat" type=password required>
     </div>
     <div class="mb-4">
-        <div id="error-password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-        <div id="success-password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+        <div id="error_password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
+        <div id="success_password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
     </div>
     <button type="submit" class="green-btn mt-4">{{auth.change_password}}</button>
   </form>
