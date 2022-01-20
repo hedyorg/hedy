@@ -735,8 +735,7 @@ window.onerror = function reportClientException(message, source, line_number, co
 function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
-  if (! window.State.programsInExecution) window.State.programsInExecution = 0;
-  window.State.programsInExecution++;
+  window.State.programsInExecution = 1;
 
   const outputDiv = $('#output');
   outputDiv.empty();
