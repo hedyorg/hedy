@@ -781,16 +781,16 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   });
 
   StopExecution = false;
-  // @ts-ignore
-  return Sk.misceval.asyncToPromise( () =>
-    Sk.importMainWithBody("<stdin>", false, code, true), {
-      "*": () => {
-        if (StopExecution) {
-          window.State.programsInExecution = 0;
-          throw "program_interrupt"
+  return Sk.misceval.asyncToPromise( function() {
+      Sk.importMainWithBody("<stdin>", false, code, true), {
+        "*": () => {
+          if (StopExecution) {
+            window.State.programsInExecution = 0;
+            throw "program_interrupt"
+          }
         }
       }
-    },
+    }
    ).then(function(_mod) {
     console.log('Program executed');
 
