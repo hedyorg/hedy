@@ -57,9 +57,13 @@ def routes (app, database, achievements):
         if achievement:
             achievement = json.dumps(achievement)
 
+        teachers = os.getenv('BETA_TEACHERS', '').split(',')
+        is_beta_teacher = user['username'] in teachers
+
         return render_template ('class-overview.html', current_page='for-teachers',
                                 page_title=hedyweb.get_page_title('class overview'),
                                 achievement=achievement,
+                                is_beta_teacher=is_beta_teacher,
                                 class_info={'students': students, 'link': '/hedy/l/' + Class ['link'],
                                             'name': Class ['name'], 'id': Class ['id']})
 
