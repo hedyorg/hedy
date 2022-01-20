@@ -733,9 +733,13 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, h
   if (! window.State.programsInExecution) window.State.programsInExecution = 0;
   window.State.programsInExecution++;
 
+  if (window.State.programsInExecution >= 1) {
+    modal.alert("Wacht door het huidige programma klaar is", 3000);
+    return
+  }
+
   const outputDiv = $('#output');
   outputDiv.empty();
-  $('#turtlecanvas').empty();
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
