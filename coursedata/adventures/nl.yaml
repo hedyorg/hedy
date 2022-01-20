@@ -1570,58 +1570,15 @@ adventures:
             6:
                 story_text: |
                     ## Restaurant
-                    In dit level kun je in je restaurant prijzen toevoegen en berekenen!
+                    In dit level kun je in je restaurant de prijs bepalen!
 
                     ## Voorbeeld Hedy Code
-                      Je kunt een simpel restaurant maken:
-                      ```
-                      print 'Welkom bij McHedy'
-                      print 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
-                      print 'U krijgt frietjes en drinken bij uw bestelling. '
-                      eten = ask 'Wat wilt u bestellen?'
-                      prijs = 0
-                      if eten is hamburger prijs = 8
-                      if eten is kroket prijs = 6
-                      if eten is kaassoufle prijs = 5
-                      print 'U heeft een ' eten ' besteld'
-                      print 'Dat is dan ' prijs ' euro, alstublieft!'
-                      print 'Bedankt en eet smakelijk!'
-                      ```
-                      In de hierboven kan je maar één gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
-                      Je kunt de code nog een stuk uitgebreider maken, kijk maar naar dit voorbeeld waarin je 3 gangen kunt bestellen.
-
-                      ## Voorbeeld Hedy Code
-                      Met deze code kan een klant drie gerechten bestellen.
-
-                      ```
-                      print 'Welkom in restaurant Hedy'
-                      print 'Dit is ons menu:'
-                      print 'Onze voorgerechten zijn salade, soep of carpaccio'
-                      print 'Onze hoofdgerechten zijn pizza, lasagne, of spaghetti'
-                      print 'Onze toetjes zijn brownie, ijsje, of milkshake'
-                      voorgerecht = ask 'Welk voorgerecht wilt u?'
-                      hoofdgerecht = ask 'Welk hoofdgerecht wilt u?'
-                      nagerecht = ask 'Welk nagerecht wilt u?'
-                      prijs = 0
-                      if voorgerecht is soep prijs = prijs + 6 else prijs = prijs + 7
-                      if hoofdgerecht is pizza prijs = prijs + 10
-                      if hoofdgerecht is lasagne prijs = prijs + 12
-                      if hoofdgerecht is spaghetti prijs = prijs + 8
-                      if nagerecht is brownie prijs = prijs + 7
-                      if nagerecht is ijsje prijs = prijs + 5
-                      if nagerecht is milkshake prijs = prijs + 4
-                      print 'Dit heb je besteld: ' voorgerecht ' , ' hoofdgerecht ' en ' nagerecht
-                      print 'Dat wordt dan ' prijs ' euro, alstublieft.'
-                      print 'Bedankt en eet smakelijk!'
-                      ```
-                      ## Uitdaging
-
-                      Kun jij nog meer toevoegingen bedenken voor je restaurant? Bijvoorbeeld:
-                      - mensen korting geven met een geheime code?
-                      - vragen hoeveel mensen er komen en de prijs daarop aanpassen?
-                      - nog een gang toevoegen?
-                      - een kindermenu toevoegen?
-                      - nog iets anders?
+                    ```
+                    print 'Welkom in het restaurant!'
+                    aantal is ask 'Voor hoeveel mensen wilt u vanavond bestellen?'
+                    prijs = aantal * 10
+                    print 'Dat wordt dan ' prijs ' euro, alstublieft'
+                    ```
 
                 start_code: "print 'Welkom'"
             5:

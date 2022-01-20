@@ -1310,56 +1310,15 @@ adventures:
             6:
                 story_text: |
                     ## Restaurant
-                    In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
+                    In this level you can use maths to calculate the total price.
 
-                    ## Example Hedy Code (Simple)
-                    You can make a simple restaurant code, like this:
+                    ## Example Hedy code
                     ```
-                    print 'Welcome to Hedys restaurant'
-                    print 'Here is our menu:'
-                    print 'Our main courses are pizza, lasagne, or spaghetti'
-                    main = ask 'Which main course would you like?'
-                    price = 0
-                    if main is pizza price = 10
-                    if main is lasagne price = 12
-                    if main is spaghetti price = 8
-                    print 'You have ordered ' main
-                    print 'That will be ' price ' dollars, please'
-                    print 'Thank you, enjoy your meal!'
+                    print 'Welcome to our restaurant!'
+                    amount is ask 'How many people will be dining with us tonight?'
+                    price is 10 * amount
+                    print 'That will be ' price ' dollars please.'
                     ```
-                    But you can also add many more things to your virtual restaurant, for example more courses.
-
-                    ## Example Hedy Code (Elaborate)
-                    In this example there are three courses, which requires more code and more additions in calculating the price.
-                    ```
-                    print 'Welcome to Hedys restaurant'
-                    print 'Here is our menu:'
-                    print 'Our starters are salad, soup, or carpaccio'
-                    print 'Our main courses are pizza, lasagne, or spaghetti'
-                    print 'Our desserts are brownie, icecream, or milkshake'
-                    starter = ask 'Which starter would you like to have?'
-                    main = ask 'Which main course would you like?'
-                    dessert = ask 'Which dessert do you pick?'
-                    price = 0
-                    if starter is soup price = price + 6 else price = price + 7
-                    if main is pizza price = price + 10
-                    if main is lasagne price = price + 12
-                    if main is spaghetti price = price + 8
-                    if dessert is brownie price = price + 7
-                    if dessert is icecream price = price + 5
-                    if dessert is milkshake price = price + 4
-                    print 'You have ordered ' starter ' , ' main ' and ' dessert
-                    print 'That will be ' price ' dollars, please'
-                    print 'Thank you, enjoy your meal!'
-                    ```
-                    ## Challenge
-                    You can add many more things to your virtual restaurant. For example, can you...
-                    - ask how many people are coming and multiply the price by that amount?
-                    - add another course?
-                    - give people a discount when they enter a (secret) couponcode?
-                    - add a children's menu?
-                    - think of other fun things to add?
-
                 start_code: ""
             5:
                 story_text: |
