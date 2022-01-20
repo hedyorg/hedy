@@ -191,13 +191,6 @@ function clearErrors(editor: AceAjax.Editor) {
 
 export function runit(level: string, lang: string, cb: () => void) {
   if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
-  console.log("Hier checken we hoeveel programma's er draaien...");
-  console.log(window.State.programsInExecution);
-
-  if (window.State.programsInExecution >= 1) {
-    modal.alert("Wacht tot het huidige programma klaar is!", 3000);
-  }
-
   if (reloadOnExpiredSession ()) return;
 
   const outputDiv = $('#output');
@@ -733,7 +726,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
   if (! window.State.programsInExecution) window.State.programsInExecution = 0;
@@ -763,6 +756,11 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, h
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
   }
+
+  // By setting the execLimit to 0 we kill all current running async programs
+  Sk.configure({
+    execLimit: 0
+  });
 
   Sk.configure({
     output: outf,
