@@ -197,7 +197,6 @@ export function runit(level: string, lang: string, cb: () => void) {
 
   console.log("We gaan draaien!");
   console.log("De stopwaarde is nu... " + StopExecution);
-
   StopExecution = true;
 
   const outputDiv = $('#output');
@@ -772,25 +771,28 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     __future__: Sk.python3,
     timeoutMsg: function () {
       pushAchievement("hedy_hacking");
-      return ErrorMessages ['Program_too_long']},
+      return ErrorMessages ['Program_too_long']
+    },
     // Give up after three seconds of execution, there might be an infinite loop.
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
       // const level = window.State.level;
       return ((hasTurtle || hasSleep) ? 20000 : 3000);
-    }) ()
+    })()
   });
 
+  StopExecution = false;
   return Sk.misceval.asyncToPromise(function () {
-    return Sk.importMainWithBody("<stdin>", false, code, true), {
+    Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
+        console.log("Hier komen we!");
         if (StopExecution) {
-           console.log("Er wordt een execute gegooid!");
-           StopExecution = false;
-           throw "Execution interrupted";
+          console.log("Gooien een error!");
+          throw "Execution interrupted"
         }
       }
     }
+    return;
   }).then(function(_mod) {
     console.log('Program executed');
 
@@ -851,10 +853,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
     return new Promise(function(ok) {
-      setTimeout(function() {
-        ok(window.prompt(prompt))
-      }, 250)
-
       window.State.disable_run = true;
       $ ('#runit').css('background-color', 'gray');
 
