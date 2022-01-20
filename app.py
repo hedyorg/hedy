@@ -694,73 +694,6 @@ def programs_page(request):
     return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
                            current_page='programs', from_user=from_user, adventures=adventures)
 
-@app.route('/program-stats')
-def get_program_stats():
-    start_date = request.args.get('start', default=None, type=str)
-    end_date = request.args.get('end', default=None, type=str)
-
-    user = current_user()
-    if not is_admin(user):
-        return utils.error_page(error=403, ui_message='unauthorized')
-
-    data = DATABASE.get_all_program_stats(start_date, end_date)
-    per_level_data = _to_dict_on_key(data, lambda e: e["level"])
-    per_week_data = _to_dict_on_key(data, lambda e: f'{e["week"]}#{e["level"]}')
-
-    response = {'per_level': _per_level_to_response(per_level_data),
-                'per_week': _per_week_to_response(per_week_data)}
-    return jsonify(response)
-
-
-def _per_level_to_response(data):
-    res = [{'level': level, 'data': _add_error_rate(data)} for level, data in data.items()]
-    res.sort(key=lambda el: el['level'])
-    return [{'level': f"L{entry['level']}", 'data': entry['data']} for entry in res]
-
-def _add_error_rate(data):
-    data['error_rate'] = (data['failed_runs'] * 100) / (data['failed_runs'] + data['successful_runs'])
-    return data
-
-def _per_week_to_response(data):
-    res = {}
-    for e in [{'week': k.split('#')[0], 'level': int(k.split('#')[1]), 'data': v} for k, v in data.items()]:
-        week = e['week']
-        level_name = 'level' + str(e['level'])
-        if week not in res.keys():
-            res[week] = {'successful_runs': {}, 'failed_runs': {}}
-        res[week]['successful_runs'][level_name] = e['data']['successful_runs']
-        res[week]['failed_runs'][level_name] = e['data']['failed_runs']
-        _add_exception_data(res[week], e['data'])
-    result = [{'week': k, 'data': v} for k, v in res.items()]
-    result.sort(key=lambda el: el['week'])
-    return result
-
-
-def _to_dict_on_key(data, key_selector):
-    result = {}
-    for record in data:
-        key = key_selector(record)
-        result[key] = _add_program_run_data(result.get(key), record)
-    return result
-
-
-def _add_program_run_data(data, rec):
-    if not data:
-        data = {'failed_runs': 0, 'successful_runs': 0}
-    data['successful_runs'] += rec.get('successful_runs') or 0
-    _add_exception_data(data, rec, True)
-    return data
-
-
-def _add_exception_data(entry, data, include_failed_runs=False):
-    exceptions = {k: v for k, v in data.items() if k.lower().endswith('exception')}
-    for k, v in exceptions.items():
-        if not entry.get(k):
-            entry[k] = 0
-        entry[k] += v
-        if include_failed_runs:
-            entry['failed_runs'] += v
-
 
 @app.route('/logs/query', methods=['POST'])
 def query_logs():
@@ -1594,6 +1527,11 @@ teacher.routes(app, DATABASE, ACHIEVEMENTS)
 
 ACHIEVEMENTS.routes(app, DATABASE)
 
+# *** STATISTICS ***
+
+from website import statistics
+
+statistics.routes(app, DATABASE)
 
 # *** START SERVER ***
 

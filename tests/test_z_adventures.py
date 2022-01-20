@@ -22,32 +22,32 @@ def collect_snippets(path):
       yaml = YamlFile.for_file(f)
 
       for name, adventure in yaml['adventures'].items():
-        if name != 'next':
-          for level_number in adventure['levels']:
-              if level_number > hedy.HEDY_MAX_LEVEL:
-                  print('content above max level!')
-              else:
-                  level = adventure['levels'][level_number]
-                  adventure_name = adventure['name']
+          if not name == 'next': # code in next sometimes uses examples from higher levels so is potentially wrong
+            for level_number in adventure['levels']:
+                if level_number > hedy.HEDY_MAX_LEVEL:
+                    print('content above max level!')
+                else:
+                    level = adventure['levels'][level_number]
+                    adventure_name = adventure['name']
 
-                  code_snippet_counter = 0
-                  # code snippets inside story_text
-                  for tag in utils.markdown_to_html_tags(level['story_text']):
-                      if tag.name != 'pre' or not tag.contents[0]:
-                          continue
-                      code_snippet_counter += 1
-                      code = tag.contents[0].contents[0]
+                    code_snippet_counter = 0
+                    # code snippets inside story_text
+                    for tag in utils.markdown_to_html_tags(level['story_text']):
+                        if tag.name != 'pre' or not tag.contents[0]:
+                            continue
+                        code_snippet_counter += 1
+                        code = tag.contents[0].contents[0]
 
-                      Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
+                        Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
 
-                  # start_code
-                  try:
-                      start_code = level['start_code']
-                      Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
+                    # start_code
+                    try:
+                        start_code = level['start_code']
+                        Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
 
-                  except KeyError:
-                      #TODO: create startcode not found error
-                      pass
+                    except KeyError:
+                        #TODO: create startcode not found error
+                        pass
 
   return Hedy_snippets
 
