@@ -247,8 +247,9 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
         runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
         console.log(err)
+        console.log(err.message)
         // If it is an error we throw due to program execution while another is running -> don't show and log it
-        if (err.message != "program_interrupt") {
+        if (!(err.message === "program_interrupt")) {
           error.show(ErrorMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
         }
