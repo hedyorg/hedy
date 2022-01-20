@@ -10,6 +10,8 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
+var StopExecution = false;
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -192,6 +194,8 @@ function clearErrors(editor: AceAjax.Editor) {
 export function runit(level: string, lang: string, cb: () => void) {
   if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
   if (reloadOnExpiredSession ()) return;
+
+  StopExecution = true;
 
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -779,11 +783,14 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }) ()
   });
 
+  StopExecution = false;
+
   return Sk.misceval.asyncToPromise(function () {
-    if (window.State.programsInExecution > 1) {
-      window.State.programsInExecution = 0;
-    } throw "Too many programs...";
-    return Sk.importMainWithBody("<stdin>", false, code, true);
+    return Sk.importMainWithBody("<stdin>", false, code, true), {
+      "*": () => {
+        if (StopExecution) throw "Execution interrupted"
+      }
+    }
   }).then(function(_mod) {
     console.log('Program executed');
 
