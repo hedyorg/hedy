@@ -782,14 +782,14 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
 
   StopExecution = false;
   return Sk.misceval.asyncToPromise( () =>
-      (Sk.importMainWithBody("<stdin>", false, code, true), {
-        "*": () => {
-          if (StopExecution) {
-            window.State.programsInExecution = 0;
-            throw "program_interrupt"
-          }
+    Sk.importMainWithBody("<stdin>", false, code, true), {
+      "*": () => {
+        if (StopExecution) {
+          window.State.programsInExecution = 0;
+          throw "program_interrupt"
         }
-      })
+      }
+    }
    ).then(function(_mod) {
     console.log('Program executed');
 
