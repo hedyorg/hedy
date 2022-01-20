@@ -643,7 +643,7 @@ def send_email_template(template, email, link):
 
     send_email(email, subject, body_plain, body_html)
 
-def auth_templates(page, page_title, request):
+def auth_templates(page, page_title, lang, request):
     if page == 'my-profile':
         return render_template('profile.html', page_title=page_title, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
