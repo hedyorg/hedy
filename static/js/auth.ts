@@ -381,7 +381,7 @@ export const auth = {
         $logsTable.append(`<tr> \
           <td class="border px-4 py-2">${e.date}</td> \
           <td class="border px-4 py-2">${e.level}</td> \
-          <td class="border px-4 py-2">${e.username}</td> \
+          <td class="border px-4 py-2">${e.username || ''}</td> \
           <td class="border px-4 py-2">${e.exception || ''}</td> \
           <td class="border px-4 py-2"> \
             <button class="green-btn float-right top-2 right-2" onclick=hedyApp.auth.copyCode(this)>⇥</button> \
@@ -428,8 +428,9 @@ export const auth = {
         payload[n['name']] = n['value'];
     });
 
-    $('#search-logs-failed-msg').hide();
     $('#logs-spinner').show();
+    $('#search-logs-empty-msg').hide();
+    $('#search-logs-failed-msg').hide();
     $('#logs-load-more').hide();
     $('#search-logs-button').prop('disabled', true);
     $('#search-logs-table tbody').html('');
@@ -470,6 +471,10 @@ export const auth = {
     $('#logs-spinner').hide();
     $('#search-logs-failed-msg').hide();
     $('#search-logs-empty-msg').hide();
+
+    const today = new Date().toISOString().split('T')[0];
+    $('#logs-start-date').val(today + ' 00:00:00');
+    $('#logs-end-date').val(today + ' 23:59:59');
   }
 }
 
