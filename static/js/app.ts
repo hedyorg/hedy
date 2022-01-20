@@ -780,7 +780,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   });
 
   return Sk.misceval.asyncToPromise(function () {
-    if (window.State.programsInExecution > 1) throw "Too many programs...";
+    if (window.State.programsInExecution > 1) {
+      window.State.programsInExecution = 0;
+    } throw "Too many programs...";
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(_mod) {
     console.log('Program executed');
