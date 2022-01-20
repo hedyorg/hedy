@@ -749,6 +749,23 @@ adventures:
                     Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
                     Do you make the code for the whole week?
 
+                    ## Make it fair
+                    If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!
+                    To create a fairer system you can use the `remove` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.
+
+                    Monday and tuesday are ready for you! Can you add the rest of the week?
+                    And... can you come up with a solution for when your list is empty?
+                    ```
+                    people = mom, dad, Emma, Sophie
+                    dishwasher = people at random
+                    print 'Monday the dishes are done by: ' dishwasher
+                    remove dishwasher from people
+                    dishwasher = people at random
+                    print 'Tuesday the dishes are done by: ' dishwasher
+                    remove dishwasher from people
+                    dishwasher = people at random
+                    ```
+
                 start_code: "print 'Who does the dishes?'"
             5:
                 story_text: |
@@ -794,7 +811,15 @@ adventures:
                     people is mom, dad, Emma, Sophie
                     print people at random
                     ```
+                    ## Hack the dishwashing program!
+                    Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
 
+                    ```
+                    people is mom, dad, Emma, Sophie
+                    your_name is ask Who are you?
+                    remove your_name from people
+                    print people at random does the dishes
+                    ```
                 start_code: "print Who does the dishes?"
     dice:
         name: "Dice"

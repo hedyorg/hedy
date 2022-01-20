@@ -761,9 +761,22 @@ adventures:
                     Nu kun je regels 3 t/m 5 een paar keer (bijv 7 keer voor een hele week) kopiëren om weer voor een hele week vooruit te rekenen.
                     Maak jij de code voor de hele week?
 
-                    ## Vooruitblik
-                    Nu moet je wel een hoop knippen en plakken he? Dat gaan we in level 6 beter doen.
-                    Dat level is het einde van het afwas-avontuur! Maar er zijn nog veel avonturen te maken in andere levels, zoals een rekenmachine, een interactief verhaal en een ingewikkelder spel.
+                    ## Eerlijk afwasprogramma
+                    Als je heel veel pech hebt moet je bij het vorige afwasprogramma misschien wel de hele week afwassen! Dat is niet eerlijk!
+                    Daarom kun je ook het `remove` commando gebruiken om de gekozen afwasser uit het lijstje te halen. Zo hoeft de afwasser pas weer af te wassen als iedereen geweest is.
+                    De code voor maandag en dinsdag staat klaar, maak jij de rest van de week af?
+                    En kan jij een oplossing bedenken voor als het lijstje leeg is...?
+                    ```
+                    mensen = mama, papa, Emma, Sophie
+                    afwasser = mensen at random
+                    print 'Maandag is de afwasser: ' afwasser
+                    remove afwasser from mensen
+                    afwasser = mensen at random
+                    print 'Dinsdag is de afwasser: ' afwasser
+                    remove afwasser from mensen
+                    afwasser = mensen at random
+                    ```
+
                 start_code: "print 'Wie doet de afwas?'"
             5:
                 story_text: |
@@ -778,7 +791,7 @@ adventures:
                     mensen is mama, papa, Emma, Sophie
                     afwasser is mensen at random
                     if afwasser is Sophie print _ chips ik moet de afwas doen _
-                    else print ' gelukkig geen afwas want ' _ 'wast al af'
+                    else print ' gelukkig geen afwas want ' _ ' wast al af'
                     ```
                 start_code: "print 'Wie doet de afwas?'"
             4:
@@ -801,15 +814,22 @@ adventures:
                 story_text: |
                     ## Afwasprogramma
                     Heb jij altijd onenigheid thuis over wie vandaag de afwas moet doen of de kattenbak moet verschonen?
-
                     Dan kun je de computer heel eerlijk laten kiezen. Dat kun jij nu programmeren in dit level!
-
                     Je maakt eerst een lijst met de leden van jouw gezin. Dan kies je met `at random` uit de lijst.
 
                     ## Voorbeeld Hedy code
                     ```
                     mensen is mama, papa, Emma, Sophie
                     print mensen at random
+                    ```
+                    ## Hack het afwasprogramma met remove
+                    Heb jij geen zin om de afwas te doen? Hack dan het programma door jouw naam van het lijstje te halen!
+
+                    ```
+                    mensen is mama, papa, Emma, Sophie
+                    jouw_naam is ask Wie ben jij?
+                    remove jouw_naam from mensen
+                    print mensen at random doet de afwas vanavond!
                     ```
                 start_code: "print Wie doet de afwas?"
     dice:
