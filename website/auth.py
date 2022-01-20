@@ -662,9 +662,9 @@ def auth_templates(page, page_title, lang, request):
             data = pick(user, *fields)
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher']     = bool(data['is_teacher'])
-            data['created'] = mstoisostring(data['created']) if data['created'] else '?'
+            data['created'] = utils.datetotimeordate (mstoisostring(data['created'])) if data['created'] else '?'
             if data['last_login']:
-                data['last_login'] = mstoisostring(data['last_login']) if data['last_login'] else '?'
+                data['last_login'] = utils.datetotimeordate (mstoisostring(data['last_login'])) if data['last_login'] else '?'
             userdata.append(data)
 
         userdata.sort(key=lambda user: user['created'], reverse=True)
