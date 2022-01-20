@@ -342,6 +342,24 @@ adventures:
                     print Hedy the Parrot: words at random
                     ```
                 start_code: ""
+            5:
+                story_text: |
+                    ## Parrot
+                    Reward your parrot if it says the correct word!
+
+                    ## Example Hedy Code
+                    ```
+                    words is squawk, Hedy
+                    print 'Train your parrot!'
+                    new_word is ask 'Which word do you want to teach them?'
+                    add new_word to words
+                    said_word is words at random
+                    print 'You: Say ' new_word ', Hedy!'
+                    print 'Hedy the Parrot: ' said_word
+                    if said_word is new_word print 'You: Great job, Hedy!'
+                    else print 'You: No, Hedy! Say ' new_word
+                    ```
+                start_code: ""
     songs:
         name: "Sing a song!"
         description: "Print a song"

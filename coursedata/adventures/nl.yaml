@@ -346,6 +346,25 @@ adventures:
                     print Hedy de papegaai: woorden at random
                     ```
                 start_code: ""
+            5:
+                story_text: |
+                    ## Papegaai
+                    Beloon je papegaai als hij het nieuwe woordje zegt!
+
+                    ## Voorbeeld Hedy Code
+                    ```
+                    woorden is lorre, Hedy
+                    print 'Train je papegaai!'
+                    nieuw_woord is ask 'Welk woord moet je papegaai leren?'
+                    add nieuw_woord to woorden
+                    print 'Jij: Zeg ' nieuw_woord ', Hedy!'
+                    gezegd_woord is woorden at random
+                    print 'Hedy de papegaai: ' gezegd_woord
+                    if gezegd_woord is nieuw_woord print 'Jij: Goedzo!'
+                    else print 'Jij: Nee! Zeg ' nieuw_woord
+                    ```
+
+                start_code: ""
     songs:
         name: "Zing een liedje!"
         description: "Print een liedje "
