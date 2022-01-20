@@ -102,6 +102,7 @@ def forget_current_user():
 
 def is_admin(user):
     admin_user = os.getenv('ADMIN_USER')
+    print(admin_user)
     return user['username'] == admin_user or user['email'] == admin_user
 
 def is_teacher(user):
@@ -642,7 +643,7 @@ def send_email_template(template, email, link):
 
     send_email(email, subject, body_plain, body_html)
 
-def auth_templates(page, page_title, lang, request):
+def auth_templates(page, page_title, request):
     if page == 'my-profile':
         return render_template('profile.html', page_title=page_title, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
@@ -650,6 +651,7 @@ def auth_templates(page, page_title, lang, request):
     if page == 'admin':
         if not is_testing_request(request) and not is_admin(current_user()):
             return 'unauthorized', 403
+
 
         # After hitting 1k users, it'd be wise to add pagination.
         users = DATABASE.all_users()

@@ -189,7 +189,7 @@ class Database:
 
     def all_users(self):
         """Return all users."""
-        return USERS.scan()
+        return USERS.scan(limit=100)
 
     def get_all_explore_programs(self):
         programs = PROGRAMS.scan()
