@@ -18,7 +18,7 @@
           {% if assignment.short_name != 'level' %}
             <div data-tabtarget="{{assignment.short_name}}" class="hidden">
               {% if assignment.image %}
-                <img class="float-right w-48" src="{{static('/images/' + assignment.image)}}">
+                <img class="ltr:float-right rtl:float-left w-48" src="{{static('/images/' + assignment.image)}}">
               {% endif %}
               <div>
               {{ assignment.text|commonmark }}
@@ -26,7 +26,7 @@
                 <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}}, '{{g.lang}}')">
               {% endif %}
               </div>
-              <div class="clear-right"></div>
+              <div class="ltr:clear-right rtl:clear-left"></div>
             </div>
           {% endif %}
         {% endfor %}

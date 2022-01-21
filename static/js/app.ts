@@ -19,6 +19,10 @@ var StopExecution = false;
     window.State = {};
   }
 
+  // Set const value to determine the current page direction -> useful for ace editor settings
+  const dir = $("#main_container").attr("dir");
+
+
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
@@ -30,6 +34,10 @@ var StopExecution = false;
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     exampleEditor.setOptions({ minLines: 2 });
+
+    if (dir === "rtl") {
+         exampleEditor.setOptions({ rtl: true });
+    }
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
@@ -77,6 +85,10 @@ var StopExecution = false;
       editor.on('blur', function(_e: Event) {
         storage.setItem(levelKey, editor.getValue());
       });
+
+      if (dir === "rtl") {
+         editor.setOptions({ rtl: true });
+      }
 
       // If prompt is shown and user enters text in the editor, hide the prompt.
       editor.on('change', function () {
@@ -266,11 +278,11 @@ export function runit(level: string, lang: string, cb: () => void) {
   }
 }
 function showBulb(level: string){
-  let parsedlevel = parseInt(level);
+  const parsedlevel = parseInt(level)
   if(parsedlevel <= 2){
-    const repair_button = document.getElementById("repair_button")!;
-    repair_button.style.visibility = "visible";
-    repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(parsedlevel)};
+    const repair_button = $('#repair_button');
+    repair_button.show();
+    repair_button.attr('onclick', 'hedyApp.modalStepOne(' + parsedlevel + ');event.preventDefault();');
   }
 
 }
@@ -330,8 +342,8 @@ function showAchievement(achievement: any[]){
 }
 
 function removeBulb(){
-    const repair_button = document.getElementById("repair_button")!;
-    repair_button.style.visibility = "hidden";
+    const repair_button = $('#repair_button');
+    repair_button.hide();
 }
 
 export function fix_code(level: string, lang: string){
@@ -1156,6 +1168,7 @@ export function toggle_developers_mode(example_programs: boolean) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
+    theGlobalEditor.resize();
   } else {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
