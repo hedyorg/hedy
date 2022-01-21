@@ -1201,18 +1201,21 @@ def get_admin_page():
     userdata =[]
     fields =['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
 
+    print("DIT IS HET FILTER:")
+    print(filter)
     for user in users:
         data = pick(user, *fields)
         data['email_verified'] = not bool(data['verification_pending'])
         data['is_teacher'] = bool(data['is_teacher'])
         data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
         if filtering and filter == "created":
-            if (start_date and utils.datetotimeordate(start_date) > data['created']) or (end_date and utils.datetotimeordate(start_date) < data['created']):
+            print("Hier zouden we niet moeten komen!")
+            if (start_date and utils.datetotimeordate(start_date) >= data['created']) or (end_date and utils.datetotimeordate(end_date) <= data['created']):
                 continue
         if data['last_login']:
             data['last_login'] = utils.datetotimeordate(utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
             if filtering and filter == "last_login":
-                if (start_date and utils.datetotimeordate(start_date) > data['last_login']) or (end_date and utils.datetotimeordate(start_date) < data['last_login']):
+                if (start_date and utils.datetotimeordate(start_date) >= data['last_login']) or (end_date and utils.datetotimeordate(end_date) <= data['last_login']):
                     continue
         userdata.append(data)
 
