@@ -1192,8 +1192,6 @@ def get_admin_page():
     start_date = None if start_date == "null" else start_date
     end_date = None if end_date == "null" else end_date
 
-    print(filter)
-
     # After hitting 1k users, it'd be wise to add pagination.
     users = DATABASE.all_users()
     userdata =[]
@@ -1204,10 +1202,14 @@ def get_admin_page():
         data['email_verified'] = not bool(data['verification_pending'])
         data['is_teacher'] = bool(data['is_teacher'])
         data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
+        if (start_date or end_date) and filter == "created":
+            if (start_date and utils.datetotimeordate(start_date) > data['created']) or (end_date and utils.datetotimeordate(start_date) < data['created']):
+                continue
         if data['last_login']:
+            if (start_date or end_date) and filter == "last_login":
+                if (start_date and utils.datetotimeordate(start_date) > data['created']) or (end_date and utils.datetotimeordate(start_date) < data['created']):
+                    continue
             data['last_login'] = utils.datetotimeordate (utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
-            if start_date or end_date:  # The admin creates some filtering
-                print("Let's filter!");
         userdata.append(data)
 
     userdata.sort(key=lambda user: user['created'], reverse=True)
