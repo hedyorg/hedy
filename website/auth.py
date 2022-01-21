@@ -544,7 +544,7 @@ def routes(app, database):
             return g.auth_texts.get('image_invalid'), 400
         if not isinstance(body.get('personal_text'), str):
             return g.auth_texts.get('personal_text_invalid'), 400
-        if not isinstance(body.get('favourite_program'), str):
+        if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
             return g.auth_texts.get('favourite_program_invalid'), 400
 
         DATABASE.update_public_profile(user['username'], body);
