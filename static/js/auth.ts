@@ -237,12 +237,22 @@ export const auth = {
     }
   },
   markAsTeacher: function (username: string, is_teacher: boolean) {
-    $.ajax ({type: 'POST', url: '/admin/markAsTeacher', data: JSON.stringify ({username: username, is_teacher: is_teacher}), contentType: 'application/json; charset=utf-8'}).done (function () {
-      modal.alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '), 4000);
-      location.reload ();
-    }).fail (function (error) {
-      console.log (error);
-      modal.alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
+    let text = "Are you sure you want to remove " + username + " as a teacher?";
+    if (is_teacher) {
+      text = "Are you sure you want to make " + username + " a teacher?";
+    }
+    modal.confirm (text, function () {
+      $.ajax({
+        type: 'POST',
+        url: '/admin/markAsTeacher',
+        data: JSON.stringify({username: username, is_teacher: is_teacher}),
+        contentType: 'application/json; charset=utf-8'
+      }).done(function () {
+        modal.alert(['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join(' '), 2000);
+      }).fail(function (error) {
+        console.log(error);
+        modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '));
+      });
     });
   },
 
