@@ -102,7 +102,6 @@ def forget_current_user():
 
 def is_admin(user):
     admin_user = os.getenv('ADMIN_USER')
-    print(admin_user)
     return user['username'] == admin_user or user['email'] == admin_user
 
 def is_teacher(user):

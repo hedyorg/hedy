@@ -1189,6 +1189,7 @@ export function filter_programs() {
 export function filter_admin() {
   const filter = $('#admin_filter_category').val();
   const start_date = $('#admin_start_date').val();
+  console.log(start_date)
   const end_date = $('#admin_end_date').val();
   window.open('?filter=' + filter + "&start=" + start_date + "&end=" + end_date, "_self");
 }

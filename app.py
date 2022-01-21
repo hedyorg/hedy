@@ -1185,16 +1185,12 @@ def get_admin_page():
         return 'unauthorized', 403
 
     category = request.args.get('filter', default=None, type=str)
-    #start_date = request.args.get('start', default=None, type=datetime)
-    #end_date = request.args.get('end', default=None, type=datetime)
-
-    print("En hier?")
+    start_date = request.args.get('start', default=None, type=str)
+    end_date = request.args.get('end', default=None, type=str)
 
     filter = None if category == "null" else category
-    #start_date = None if start_date == "null" else start_date
-    #end_date = None if end_date == "null" else end_date
-
-    print("En dan hier nog!");
+    start_date = None if start_date == "null" else start_date
+    end_date = None if end_date == "null" else end_date
 
     print(filter)
     print(start_date)
