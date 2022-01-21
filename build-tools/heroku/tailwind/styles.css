@@ -143,7 +143,7 @@ code {
 }
 
 .markdown blockquote {
-  @apply border-l-4 border-gray-300 pl-4 italic;
+  @apply border-l-4 border-gray-300 ltr:pl-4 rtl:pr-4 italic;
 }
 
 @tailwind components;
@@ -160,7 +160,7 @@ code {
 }
 
 .menubar-btn {
-  @apply text-white no-underline font-slab font-semibold border-b-4 tracking-wide text-xl py-3 mr-4;
+  @apply text-white no-underline font-slab font-semibold border-b-4 tracking-wide text-xl py-3 ltr:mr-4 rtl:ml-4;
 }
 
 @screen lg {
@@ -175,7 +175,7 @@ code {
 }
 
 .codebar-btn {
-  @apply text-black no-underline border-white tracking-wide font-normal px-4 py-3 mr-4;
+  @apply text-black no-underline border-white tracking-wide font-normal px-4 py-3 ltr:mr-4 rtl:ml-4;
 }
 
 #output {
@@ -206,12 +206,12 @@ code {
 
 ul {
     list-style: disc outside none;
-    margin-left: 2em;
+    @apply ltr:ml-8 rtl:mr-8;
 }
 
 ol {
     list-style: decimal outside none;
-    margin-left: 2em;
+    @apply ltr:ml-8 rtl:mr-8;
 }
 
 /* AUTH */
@@ -249,8 +249,14 @@ table.users td {
   border: solid 1px gray;
 }
 
-.right-hand-shadow {
+/* Keep the class name the same to prevent complex restructuring -> the RTL version is actually left-hand-shadow */
+/* https://stackoverflow.com/questions/17572619/how-to-create-a-inset-box-shadow-only-on-one-side */
+body[dir='ltr'] .right-hand-shadow {
   box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.4);
+}
+
+body[dir='rtl'] .right-hand-shadow {
+  box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.4);
 }
 
 .tab {
@@ -288,10 +294,10 @@ div#errorbox, div#warningbox {
 }
 
 p.close-dialog {
+   @apply ltr:right-[5px] rtl:left-[5px];
    font-weight: bold;
    position: absolute;
    top: 5px;
-   right: 5px;
    cursor: pointer;
 }
 
@@ -351,7 +357,13 @@ p.close-dialog {
 .explore-program-box {
   @apply w-64 h-56 rounded-lg border border-gray-700 m-4 relative bg-blue-200 cursor-pointer;
 }
-=======
+
+/* Tab content - closed */
+.accordion .tab-content {
+  max-height: 0;
+  -webkit-transition: max-height .35s;
+  -o-transition: max-height .35s;
+  transition: max-height .35s;
 
 /* After updating Tailwind, this empty selector is actually needed for the accordion to function correctly.
   Officially, the weirdest css (or minifying?) issue I have seen. TODO: BG ask for help. */
@@ -361,8 +373,7 @@ p.close-dialog {
 
 /* Icon */
 .accordion .accordion-tab label::before {
-  float: right;
-  right: 0;
+  @apply ltr:float-right rtl:float-left ltr:right-0 rtl:left-0;
   top: 0;
   display: block;
   width: 1.5em;
@@ -390,12 +401,33 @@ p.close-dialog {
 
 /* Icon formatting - closed */
 .accordion .accordion-tab input[type=checkbox] + label::before {
+  @apply ltr:right-[5px] rtl:left-[5px];
   content: ">";
   transform: rotate(90deg);
-  margin-right: 5px;
 }
 
 /* Icon formatting - open */
 .accordion .accordion-tab input[type=checkbox]:checked + label::before {
   transform: rotate(270deg);
+}
+
+/* Developers mode toggle */
+.toggle-circle {
+  @apply ltr:left-1 rtl:right-1;
+  top: 0.2rem;
+  transition: all 0.5s ease-in-out;
+}
+
+body[dir='rtl'] input:checked ~ .toggle-circle {
+  transform: translateX(-100%);
+  @apply bg-green-400;
+}
+
+body[dir='ltr'] input:checked ~ .toggle-circle {
+  transform: translateX(100%);
+  @apply bg-green-400;
+}
+
+input:checked ~ .toggle-path {
+  @apply bg-gray-600;
 }

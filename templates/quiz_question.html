@@ -31,7 +31,7 @@
             {{ question.question_text }}
         </p>
         {% if question.code and question.code!= "..." %}
-            <pre><code class="ml-6 text-l">{{ question.code }}</code></pre>
+            <pre><code class="ltr:ml-6 rtl:mr-6 text-l">{{ question.code }}</code></pre>
         {% endif %}
         {% if wrong_answer_hint %}
             <div class="text-red-900 text-2xl text-center flex flex-row justify-center font-slab font-semibold">
@@ -49,13 +49,13 @@
                                 <div class="p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row" id="answer-disabled-{{ question_options[counter.value].char_index }}">
                                     <label class="inline-flex items-center">
                                         <div class="flex-1 flex-col justify-center items-center">
-                                            <p class="text-3xl font-bold ml-3 mr-3 font-slab">{{ question_options[counter.value].char_index }}</p>
+                                            <p class="text-3xl font-bold mx-3 font-slab">{{ question_options[counter.value].char_index }}</p>
                                             <input type="radio" name="radio_option" id="{{ question_nr }}-{{ question_options[counter.value].char_index }}" value="{{ question_nr }}-{{ question_options[counter.value].char_index }}" class="class form-radio size-input" disabled="disabled">
                                         </div>
                                         {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                                            <code class="ml-3 text-l">{{ question_options[counter.value].code | nl2br  }}</code>
+                                            <code class="ltr:ml-3 rtl:mr-3 text-l">{{ question_options[counter.value].code | nl2br  }}</code>
                                         {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'   %}
-                                            <p class="ml-3 text-l font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
+                                            <p class="ltr:ml-3 rtl:mr-3 text-l font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
                                         {% endif %}
                                     </label>
                                 </div>
@@ -63,13 +63,13 @@
                                 <div class="p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row" id={{ question_options[counter.value].char_index }}>
                                     <label class="inline-flex items-center">
                                          <div class="flex-1 flex-col justify-center items-center">
-                                             <p class="text-3xl font-bold ml-3 mr-3 font-slab">{{ question_options[counter.value].char_index }}</p>
+                                             <p class="text-3xl font-bold mx-3 font-slab">{{ question_options[counter.value].char_index }}</p>
                                              <input type="radio" name="radio_option" id="{{ question_nr }}-{{ question_options[counter.value].char_index }}" value="{{ question_nr }}-{{ question_options[counter.value].char_index }}" class="class form-radio size-input">
                                          </div>
                                         {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                                            <code class="ml-3 text-l">{{ question_options[counter.value].code | nl2br }}</code>
+                                            <code class="ltr:ml-3 rtl:mr-3 text-l">{{ question_options[counter.value].code | nl2br }}</code>
                                         {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'  %}
-                                            <p class="ml-3 text-l font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
+                                            <p class="ltr:ml-3 rtl:mr-3 text-l font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
                                         {% endif %}
                                     </label>
                                 </div>
@@ -84,15 +84,15 @@
                     <div class="invisible" id="hidden-hint"> {{ question.hint }}</div>
                     <div>
                         <button type="button" onclick="changeHint()"
-                                class="ml-1 bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600"
+                                class="ltr:ml-1 rtl:mr-1 bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600"
                                 name="hint-button" id="hint-button">Hint?
                         </button>
                     </div>
                     {% if is_last_attempt %}
-                        <input class="green-btn ml-1" type="submit" name="submit-button"
+                        <input class="green-btn ltr:ml-1 rtl:mr-1" type="submit" name="submit-button"
                                value="{{ ui.go_to_answer }}" disabled="disabled">
                     {% else %}
-                        <input class="green-btn ml-1" type="submit" name="submit-button"
+                        <input class="green-btn ltr:ml-1 rtl:mr-1" type="submit" name="submit-button"
                                value="{{ ui.submit_answer }} {{ question_nr }}" disabled="disabled">
                     {% endif %}
                 </div>

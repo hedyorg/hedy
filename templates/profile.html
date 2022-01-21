@@ -2,7 +2,7 @@
 
 {% block main %}
    <h2 class="px-8 mb-4">{{auth.account_overview}}</h2>
-   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
+   <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
    <div id="statistics" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
      <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.statistics}}</h2>
      <ul>
@@ -10,17 +10,17 @@
      </ul>
    </div>
    {% if user_classes %}
-       <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#classes').toggle()">{{auth.student_classes}}</h1>
+       <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#classes').toggle()">{{auth.student_classes}}</h1>
        <div id="classes" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
            <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.student_classes}}</h2>
            {% for user_class in user_classes %}
              <div id="student_class" class="border-2 rounded-lg border-gray-400 px-4 py-4 flex flex-row mb-4">
-                <p class="text-3xl text-blue-600 inline-block w-1/2">{{ user_class['name']}}</p><button class="red-btn ml-auto" onclick="hedyApp.remove_student('{{user_class['id']}}', '{{user_data['username']}}', true)">{{auth.leave_class}}</button>
+                <p class="text-3xl text-blue-600 inline-block w-1/2">{{ user_class['name']}}</p><button class="red-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.remove_student('{{user_class['id']}}', '{{user_data['username']}}', true)">{{auth.leave_class}}</button>
              </div>
            {% endfor %}
        </div>
    {% endif %}
-   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{auth.profile}}</h1>
+   <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{auth.profile}}</h1>
    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="profile">
     <form class="js-validated-form auth" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.profile}}</h2>
@@ -61,19 +61,19 @@
         </select>
     </div>
     <div class="mb-4">
-      <label for="has_experience" class="inline-block float-left">{{auth.programming_experience}}</label>
-      <input class="pl-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()" {% if user_data['prog_experience'] == "yes" %} checked {% endif %}><span class="pl-2">{{auth.yes}}</span><br>
-      <input class="pl-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()" {% if user_data['prog_experience'] == "no" %} checked {% endif %}><span class="pl-2">{{auth.no}}</span>
+      <label for="has_experience" class="inline-block ltr:float-left rtl:float-right">{{auth.programming_experience}}</label>
+      <input class="ltr:pl-4 rtl:pr-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()" {% if user_data['prog_experience'] == "yes" %} checked {% endif %}><span class="ltr:pl-2 rtl:pr-2">{{auth.yes}}</span><br>
+      <input class="ltr:pl-4 rtl:pr-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()" {% if user_data['prog_experience'] == "no" %} checked {% endif %}><span class="ltr:pl-2 rtl:pr-2">{{auth.no}}</span>
     </div>
     <div class="clear-both {% if user_data['prog_experience'] == "no" %} hidden {% endif %} mb-4" id="languages">
       <div class="mb-4">
-        <label class="inline-block float-left">{{auth.languages}}</label>
+        <label class="inline-block ltr:float-left rtl:float-right">{{auth.languages}}</label>
       </div>
-      <div class="float-left mb-4">
-        <input type="checkbox" name="languages" value="scratch" {% if "scratch" in user_data['experience_languages']  %}checked{% endif %}><span class="pl-2">Scratch</span><br>
-        <input type="checkbox" name="languages" value="other_block" {% if "other_block" in user_data['experience_languages']  %}checked{% endif %}><span class="pl-2">{{auth.other_block}}</span><br>
-        <input type="checkbox" name="languages" value="python" {% if "python" in user_data['experience_languages']  %}checked{% endif %}><span class="pl-2">Python</span><br>
-        <input type="checkbox" name="languages" value="other_text" {% if "other_text" in user_data['experience_languages']  %}checked{% endif %}><span class="pl-2">{{auth.other_text}}</span><br>
+      <div class="ltr:float-left rtl:float-right mb-4">
+        <input type="checkbox" name="languages" value="scratch" {% if "scratch" in user_data['experience_languages']  %}checked{% endif %}><span class="ltr:pl-2 rtl:pr-2">Scratch</span><br>
+        <input type="checkbox" name="languages" value="other_block" {% if "other_block" in user_data['experience_languages']  %}checked{% endif %}><span class="ltr:pl-2 rtl:pr-2">{{auth.other_block}}</span><br>
+        <input type="checkbox" name="languages" value="python" {% if "python" in user_data['experience_languages']  %}checked{% endif %}><span class="ltr:pl-2 rtl:pr-2">Python</span><br>
+        <input type="checkbox" name="languages" value="other_text" {% if "other_text" in user_data['experience_languages']  %}checked{% endif %}><span class="ltr:pl-2 rtl:pr-2">{{auth.other_text}}</span><br>
       </div>
     </div>
     <div class="mb-4 clear-both">
@@ -86,7 +86,7 @@
   </form>
     <button class="red-btn" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
    </div>
-  <h1 id="password_toggle" class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#change_password').toggle()">{{auth.change_password}}</h1>
+  <h1 id="password_toggle" class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#change_password').toggle()">{{auth.change_password}}</h1>
    <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.change_password}}</h2>
     <div class="mb-4">
