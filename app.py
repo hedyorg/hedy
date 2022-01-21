@@ -35,7 +35,8 @@ from flask_compress import Compress
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
+from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements, quiz_svg_icons
+
 import quiz
 
 # Set the current directory to the root Hedy folder
@@ -829,19 +830,26 @@ def get_quiz(level_source, question_nr, attempt):
     quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
 
     return render_template('quiz_question.html',
-                           level_source=level_source,
-                           quiz_answers = quiz_answers,
-                           questionStatus=question_status,
-                           questions=questions,
-                           question_options=question_obj,
-                           chosen_option=chosen_option,
-                           wrong_answer_hint=wrong_answer_hint,
-                           question=question,
-                           question_nr=question_nr,
-                           correct=session.get('correct_answer'),
-                           attempt=attempt,
-                           is_last_attempt=attempt == quiz.MAX_ATTEMPTS,
-                           lang=g.lang)
+                            level_source=level_source,
+                            quiz_answers = quiz_answers,
+                            questionStatus=question_status,
+                            questions=questions,
+                            question_options=question_obj,
+                            chosen_option=chosen_option,
+                            wrong_answer_hint=wrong_answer_hint,
+                            question=question,
+                            question_nr=question_nr,
+                            correct=session.get('correct_answer'),attempt=attempt,
+                            is_last_attempt=attempt == quiz.MAX_ATTEMPTS,
+                            lang=g.lang,
+                            cross=quiz_svg_icons.icons['cross'],
+                            check=quiz_svg_icons.icons['check'],
+                            triangle = quiz_svg_icons.icons['triangle'],
+                            diamond = quiz_svg_icons.icons['diamond'],
+                            square = quiz_svg_icons.icons['square'],
+                            circle = quiz_svg_icons.icons['circle'],
+                            pentagram = quiz_svg_icons.icons['pentagram'],
+                            triangle_6 = quiz_svg_icons.icons['triangle_6'])
 
 
 @app.route('/quiz/finished/<int:level>', methods=['GET'])

@@ -37,15 +37,12 @@
    max-width: 25%;
 }
 
-button:disabled{
-    background-color: darkgray !important;
-}
 .option-row {
-    gap: 20px 20px;
+    gap: 30px 30px;
 }
 
 .option-col {
-    gap: 20px 20px;
+    gap: 30px 30px;
 }
 
 .option-block {
@@ -54,61 +51,47 @@ button:disabled{
 }
 
 
-.option-row:nth-child(even) .option-block:nth-child(even) {
-   background-color: yellow;
+.option-row:nth-child(1) .option-block:nth-child(1) {
+   //background-color: #FF6663;
+    background-color:  #c6f6d5;
+     border-color: #2d9068;
 }
 
-.option-row:nth-child(even) .option-block:nth-child(odd) {
-   background-color: pink;
+.option-row:nth-child(1) .option-block:nth-child(2) {
+   background-color: #ffe794;
+    border-color: #e8b60e;
 }
-.option-row:nth-child(odd) .option-block:nth-child(even) {
-   background-color: pink;
+.option-row:nth-child(2) .option-block:nth-child(1) {
+   background-color: #bee3f8;
+    border-color: #3182ce;
+
 }
 
-.option-row:nth-child(odd) .option-block:nth-child(odd) {
-   background-color: yellow;
+.option-row:nth-child(2) .option-block:nth-child(2) {
+   background-color:  #CC99C9;
+    border-color: #af53a9;
 }
+
+.option-row:nth-child(3) .option-block:nth-child(1) {
+   background-color: #FFBAD2;
+    border-color: #d76691;
+
+}
+
+.option-row:nth-child(3) .option-block:nth-child(2) {
+   background-color: #f6d29e;
+    border-color: #f6ae46;
+}
+
 
 .option-block.active {
-    background-color: green !important;
+    border: 7px double;
 }
 
 .incorrect-option {
     background-color: rgba(194, 25, 25, 0.42)!important;
     border-color: #c21919!important;
-}
-
-
-#answer-disabled-A, #answer-disabled-B, #answer-disabled-C,#answer-disabled-D{
-    background-color: rgba(194, 25, 25, 0.42)!important;
-    border-color: #c21919!important;
-}
-
-#A, #B,#C, #D, #answer-disabled-A, #answer-disabled-B, #answer-disabled-C,#answer-disabled-D, #answer-A, #answer-B, #answer-C,#answer-D {
-    flex-direction: row;
-    flex-grow: 1;
-    padding: 0.5rem;
-    margin: 1.2rem 0.6rem 1.2rem 0.6rem;
-}
-
-
-#A, #D, #answer-disabled-A, #answer-disabled-D{
-    background-color: #bee3f8;
-}
-
-#B, #C, #answer-disabled-B, #answer-disabled-C {
-    background-color: #c6f6d5;
-    border-color: #2d9068;
-}
-
-#A.active, #D.active, #answer-disabled-A.active, #answer-disabled-D.active{
-    background-color: rgba(49, 130, 206, 0.65);
-    border: 7px double;
-}
-
-#B.active, #C.active, #answer-disabled-B.active, #answer-disabled-C.active {
-    background-color: rgba(45, 144, 104, 0.59);
-    border: 7px double;
+    border: 7px dashed;
 }
 
 .flex-col{
@@ -123,8 +106,9 @@ button:disabled{
     background-color: #bee3f8;
     color: #1a202c;
     border: 2.5px solid #3182ce;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
 }
+
 button.radio-btn{
     position: relative;
 }
@@ -140,19 +124,10 @@ button:focus{
 svg.option-icon, svg.option-icon {
     width: 3.5rem;
     height: 3.5rem;
-    top: -40px;
-    left: -10px;
+    top: -30px;
+    left: -8px;
     position: relative;
 
-}
-
-#submit-button{
-    width: 3.5rem;
-    height: 3.5rem;
-    bottom: 40px;
-    right: 10px;
-    position: relative;
-    margin-left:auto;
 }
 
 polygon.shape.button-shape{
@@ -173,38 +148,48 @@ svg.button-icon{
     display: none;
     min-width: 80px;
     min-height: 40px;
-    color: white;
-    background-color: red;
+    color: rgb(236, 236, 236);
+    background-color: #7ab5e7;
+    border-color: #4299e1;
     position: absolute;
     right: 10px;
     bottom: -20px;
     padding: 4px 10px;
-    border-radius: 7px;
+    border-radius: 0.25rem;
+    border-bottom-width: 4px;
 }
 .active .submit-button {
     display: block;
 }
-/*
-.submit-button:disabled{
-    cursor: not-allowed;
-}
- */
-.shape-zero, .shape-three{
-   fill: rgb(241, 165, 33) !important;
+
+path.number{
+    fill: ghostwhite;
 }
 
 
-
-.shape-one, .shape-two {
-   fill: rgb(90, 90, 231) !important;
+.option-row:nth-child(1) .option-block:nth-child(1) .shape {
+    fill: #2d9068 !important;
 }
 
-path.number-zero, path.number-three{
-    fill:rgb(250, 242, 230);
+.option-row:nth-child(1) .option-block:nth-child(2) .shape{
+     fill:#e8b60e!important;
 }
 
-path.number-one, path.number-two {
-        fill: rgb(200, 200, 247)
+.option-row:nth-child(2) .option-block:nth-child(1) .shape {
+     fill:  #3182ce !important;
+}
+
+.option-row:nth-child(2) .option-block:nth-child(2) .shape {
+    fill: #af53a9 !important;
+}
+
+.option-row:nth-child(3) .option-block:nth-child(1) .shape{
+    fill: #d76691;!important;
+
+}
+
+.option-row:nth-child(3) .option-block:nth-child(2) .shape{
+    fill: #f6ae46;
 }
 
 .text-code-middle{

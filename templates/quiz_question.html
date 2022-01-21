@@ -71,12 +71,19 @@
                                         <div class="option-block p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row ">
                             {% endif %}
 
-                                           <svg class="option-icon" viewBox="0 0 50 50">
-                                                <polygon class="shape shape-zero"
-                                                         points="25.04 1.95 0.79 43.95 49.28 43.95 25.04 1.95"></polygon>
-                                                <path class="number number-zero"
-                                                      d="M22.4,32.66,23.51,22.12H19.62l.43-4.1h8.6l-.43,4.1L27.11,32.66h3.52l-.43,4.1H18.08l.43-4.1Z"></path>
-                                            </svg>
+                                            {% if counter.value == 0 %}
+                                            {{ triangle|safe }}
+                                            {% elif counter.value == 1 %}
+                                            {{ diamond|safe }}
+                                            {% elif counter.value == 2 %}
+                                            {{ square|safe}}
+                                            {% elif counter.value == 3 %}
+                                            {{ circle|safe}}
+                                            {% elif counter.value == 4 %}
+                                            {{ pentagram |safe}}
+                                            {% elif counter.value == 5 %}
+                                            {{ triangle_6|safe}}
+                                            {% endif %}
                                             <div class="text-code-middle">
                                                 {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
                                                     <code class="text-l">{{ question_options[counter.value].code | nl2br }}</code>
