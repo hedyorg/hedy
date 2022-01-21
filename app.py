@@ -22,7 +22,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, \
-    is_teacher, update_is_teacher
+    is_teacher, update_is_teacher, pick
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -1184,6 +1184,14 @@ def get_admin_page():
     if not utils.is_testing_request(request) and not is_admin(current_user()):
         return 'unauthorized', 403
 
+    filter = request.args.get('filter', default=None, type=str)
+    start_date = request.args.get('level', default=None, type=datetime)
+    end_date = request.args.get('adventure', default=None, type=datetime)
+
+    filter = None if filter == "null" else filter
+    start_date = None if start_date == "null" else start_date
+    end_date = None if end_date == "null" else end_date
+
     # After hitting 1k users, it'd be wise to add pagination.
     users = DATABASE.all_users()
     userdata =[]
@@ -1193,9 +1201,9 @@ def get_admin_page():
         data = pick(user, *fields)
         data['email_verified'] = not bool(data['verification_pending'])
         data['is_teacher'] = bool(data['is_teacher'])
-        data['created'] = utils.datetotimeordate (mstoisostring(data['created'])) if data['created'] else '?'
+        data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
         if data['last_login']:
-            data['last_login'] = utils.datetotimeordate (mstoisostring(data['last_login'])) if data['last_login'] else '?'
+            data['last_login'] = utils.datetotimeordate (utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
         userdata.append(data)
 
     userdata.sort(key=lambda user: user['created'], reverse=True)
@@ -1204,7 +1212,7 @@ def get_admin_page():
         user['index'] = counter
         counter = counter + 1
 
-    return render_template('admin.html', users=userdata, page_title=page_title,
+    return render_template('admin.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
                            program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 
