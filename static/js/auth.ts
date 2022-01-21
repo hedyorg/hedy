@@ -1,8 +1,6 @@
 import { modal } from './modal';
 import { join_class } from './teachers';
 import { saveitP } from './app';
-import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
 
 const countries: Record<string, string> = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Algeria','AS':'American Samoa','AD':'Andorra','AO':'Angola','AI':'Anguilla','AQ':'Antarctica','AG':'Antigua and Barbuda','AR':'Argentina','AM':'Armenia','AW':'Aruba','AU':'Australia','AT':'Austria','AZ':'Azerbaijan','BS':'Bahamas','BH':'Bahrain','BD':'Bangladesh','BB':'Barbados','BY':'Belarus','BE':'Belgium','BZ':'Belize','BJ':'Benin','BM':'Bermuda','BT':'Bhutan','BO':'Bolivia, Plurinational State of','BQ':'Bonaire, Sint Eustatius and Saba','BA':'Bosnia and Herzegovina','BW':'Botswana','BV':'Bouvet Island','BR':'Brazil','IO':'British Indian Ocean Territory','BN':'Brunei Darussalam','BG':'Bulgaria','BF':'Burkina Faso','BI':'Burundi','KH':'Cambodia','CM':'Cameroon','CA':'Canada','CV':'Cape Verde','KY':'Cayman Islands','CF':'Central African Republic','TD':'Chad','CL':'Chile','CN':'China','CX':'Christmas Island','CC':'Cocos (Keeling) Islands','CO':'Colombia','KM':'Comoros','CG':'Congo','CD':'Congo, the Democratic Republic of the','CK':'Cook Islands','CR':'Costa Rica','CI':'Côte d\'Ivoire','HR':'Croatia','CU':'Cuba','CW':'Curaçao','CY':'Cyprus','CZ':'Czech Republic','DK':'Denmark','DJ':'Djibouti','DM':'Dominica','DO':'Dominican Republic','EC':'Ecuador','EG':'Egypt','SV':'El Salvador','GQ':'Equatorial Guinea','ER':'Eritrea','EE':'Estonia','ET':'Ethiopia','FK':'Falkland Islands (Malvinas)','FO':'Faroe Islands','FJ':'Fiji','FI':'Finland','FR':'France','GF':'French Guiana','PF':'French Polynesia','TF':'French Southern Territories','GA':'Gabon','GM':'Gambia','GE':'Georgia','DE':'Germany','GH':'Ghana','GI':'Gibraltar','GR':'Greece','GL':'Greenland','GD':'Grenada','GP':'Guadeloupe','GU':'Guam','GT':'Guatemala','GG':'Guernsey','GN':'Guinea','GW':'Guinea-Bissau','GY':'Guyana','HT':'Haiti','HM':'Heard Island and McDonald Islands','VA':'Holy See (Vatican City State)','HN':'Honduras','HK':'Hong Kong','HU':'Hungary','IS':'Iceland','IN':'India','ID':'Indonesia','IR':'Iran, Islamic Republic of','IQ':'Iraq','IE':'Ireland','IM':'Isle of Man','IL':'Israel','IT':'Italy','JM':'Jamaica','JP':'Japan','JE':'Jersey','JO':'Jordan','KZ':'Kazakhstan','KE':'Kenya','KI':'Kiribati','KP':'Korea, Democratic People\'s Republic of','KR':'Korea, Republic of','KW':'Kuwait','KG':'Kyrgyzstan','LA':'Lao People\'s Democratic Republic','LV':'Latvia','LB':'Lebanon','LS':'Lesotho','LR':'Liberia','LY':'Libya','LI':'Liechtenstein','LT':'Lithuania','LU':'Luxembourg','MO':'Macao','MK':'Macedonia, the Former Yugoslav Republic of','MG':'Madagascar','MW':'Malawi','MY':'Malaysia','MV':'Maldives','ML':'Mali','MT':'Malta','MH':'Marshall Islands','MQ':'Martinique','MR':'Mauritania','MU':'Mauritius','YT':'Mayotte','MX':'Mexico','FM':'Micronesia, Federated States of','MD':'Moldova, Republic of','MC':'Monaco','MN':'Mongolia','ME':'Montenegro','MS':'Montserrat','MA':'Morocco','MZ':'Mozambique','MM':'Myanmar','NA':'Namibia','NR':'Nauru','NP':'Nepal','NL':'Netherlands','NC':'New Caledonia','NZ':'New Zealand','NI':'Nicaragua','NE':'Niger','NG':'Nigeria','NU':'Niue','NF':'Norfolk Island','MP':'Northern Mariana Islands','NO':'Norway','OM':'Oman','PK':'Pakistan','PW':'Palau','PS':'Palestine, State of','PA':'Panama','PG':'Papua New Guinea','PY':'Paraguay','PE':'Peru','PH':'Philippines','PN':'Pitcairn','PL':'Poland','PT':'Portugal','PR':'Puerto Rico','QA':'Qatar','RE':'Réunion','RO':'Romania','RU':'Russian Federation','RW':'Rwanda','BL':'Saint Barthélemy','SH':'Saint Helena, Ascension and Tristan da Cunha','KN':'Saint Kitts and Nevis','LC':'Saint Lucia','MF':'Saint Martin (French part)','PM':'Saint Pierre and Miquelon','VC':'Saint Vincent and the Grenadines','WS':'Samoa','SM':'San Marino','ST':'Sao Tome and Principe','SA':'Saudi Arabia','SN':'Senegal','RS':'Serbia','SC':'Seychelles','SL':'Sierra Leone','SG':'Singapore','SX':'Sint Maarten (Dutch part)','SK':'Slovakia','SI':'Slovenia','SB':'Solomon Islands','SO':'Somalia','ZA':'South Africa','GS':'South Georgia and the South Sandwich Islands','SS':'South Sudan','ES':'Spain','LK':'Sri Lanka','SD':'Sudan','SR':'Suriname','SJ':'Svalbard and Jan Mayen','SZ':'Swaziland','SE':'Sweden','CH':'Switzerland','SY':'Syrian Arab Republic','TW':'Taiwan, Province of China','TJ':'Tajikistan','TZ':'Tanzania, United Republic of','TH':'Thailand','TL':'Timor-Leste','TG':'Togo','TK':'Tokelau','TO':'Tonga','TT':'Trinidad and Tobago','TN':'Tunisia','TR':'Turkey','TM':'Turkmenistan','TC':'Turks and Caicos Islands','TV':'Tuvalu','UG':'Uganda','UA':'Ukraine','AE':'United Arab Emirates','GB':'United Kingdom','US':'United States','UM':'United States Minor Outlying Islands','UY':'Uruguay','UZ':'Uzbekistan','VU':'Vanuatu','VE':'Venezuela, Bolivarian Republic of','VN':'Viet Nam','VG':'Virgin Islands, British','VI':'Virgin Islands, U.S.','WF':'Wallis and Futuna','EH':'Western Sahara','YE':'Yemen','ZM':'Zambia','ZW':'Zimbabwe'};
 
@@ -39,11 +37,6 @@ interface UserForm {
   password_repeat?: string;
   old_password?: string;
 }
-
-const chart_fail_color = "#fd7f6f";
-const chart_success_color = "#b2e061";
-const chart_colors = ["#fd7f6f", "#b2e061", "#7eb0d5", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"]
-const chart_level_colors = ['#fbcb8d', '#f9ac48', '#f18c07', '#ac6405', '#673c03', '#fce28c', '#fad146', '#f3bd05', '#ae8704', '#685102', '#b3d5b5', '#85bc89', '#58a15d', '#3f7342', '#254528', '#fab28e', '#f78449', '#ef5709', '#ab3e07', '#662504', '#dbadb8', '#c57b8d', '#ad4c63', '#7c3647', '#4a202a']
 
 if (!(window as any).AuthMessages) {
   throw new Error('On a page where you load this JavaScript, you must also load the "client_messages.js" script');
@@ -275,12 +268,22 @@ export const auth = {
     }
   },
   markAsTeacher: function (username: string, is_teacher: boolean) {
-    $.ajax ({type: 'POST', url: '/admin/markAsTeacher', data: JSON.stringify ({username: username, is_teacher: is_teacher}), contentType: 'application/json; charset=utf-8'}).done (function () {
-      modal.alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '), 4000);
-      location.reload ();
-    }).fail (function (error) {
-      console.log (error);
-      modal.alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
+    let text = "Are you sure you want to remove " + username + " as a teacher?";
+    if (is_teacher) {
+      text = "Are you sure you want to make " + username + " a teacher?";
+    }
+    modal.confirm (text, function () {
+      $.ajax({
+        type: 'POST',
+        url: '/admin/markAsTeacher',
+        data: JSON.stringify({username: username, is_teacher: is_teacher}),
+        contentType: 'application/json; charset=utf-8'
+      }).done(function () {
+        modal.alert(['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join(' '), 2000);
+      }).fail(function (error) {
+        console.log(error);
+        modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '));
+      });
     });
   },
 
@@ -297,185 +300,6 @@ export const auth = {
       });
     });
   },
-
-  getProgramStats: function (weeksBack: number, element: any) {
-    if (element.classList.contains('active')) {
-      return false
-    }
-
-    // Loader
-    $('.stats-data').hide();
-    $('.stats-spinner').show();
-
-    // Set active
-    $('.stats-period-toggle').removeClass('active');
-    element.classList.add('active');
-
-    let date = new Date();
-    date.setDate(date.getDate() - (weeksBack - 1) * 7);
-    let start = date.toISOString().split('T')[0];
-
-    const data = {
-      start: start
-    };
-
-    $.get('/program-stats', data).done (function (response) {
-
-      // update program runs per level charts
-      const failedRunsPerLevelDataset = generatePerLevelDataset('Failed runs', response['per_level'], 'data.failed_runs', chart_fail_color, false);
-      const successfulRunsPerLevelDataset = generatePerLevelDataset('Successful runs', response['per_level'], 'data.successful_runs', chart_success_color, false);
-      const errorRatePerLevelDataset = generatePerLevelDataset('Error rate', response['per_level'], 'data.error_rate', chart_fail_color, true);
-
-      updateChart('programRunsPerLevelChart', [successfulRunsPerLevelDataset, failedRunsPerLevelDataset]);
-      updateChart('errorRatePerLevelChart', [errorRatePerLevelDataset]);
-
-
-      // update program runs per week per level charts
-      const levels = flattenWeekProps(response['per_week'], (el: string) => el.toLowerCase().startsWith('level'));
-      const labelMapper = (e: string) => 'L' + e.substr(5);
-
-      const successfulRunsPerWeekDatasets = generateDatasets(levels, response['per_week'], 'week', 'data.successful_runs.', chart_level_colors, labelMapper);
-      const failedRunsPerWeekDatasets = generateDatasets(levels, response['per_week'], 'week', 'data.failed_runs.', chart_level_colors, labelMapper);
-
-      updateChart('successfulRunsPerWeekChart', successfulRunsPerWeekDatasets);
-      updateChart('failedRunsPerWeekChart', failedRunsPerWeekDatasets);
-
-
-      // update exceptions per level and per week charts
-      const exceptions = flattenExProps(response['per_level'], (el: string) => el.toLowerCase().endsWith('exception'));
-      const exLabelMapper = (e: string) => e.substr(0, e.length - 9);
-
-      const exceptionsPerLevelDatasets = generateDatasets(exceptions, response['per_level'], 'level', 'data.', chart_colors, exLabelMapper);
-      const exceptionsPerWeekDatasets = generateDatasets(exceptions, response['per_week'], 'week', 'data.', chart_colors, exLabelMapper);
-
-      updateChart('exceptionsPerLevelChart', exceptionsPerLevelDatasets);
-      updateChart('exceptionsPerWeekChart', exceptionsPerWeekDatasets);
-
-    }).fail (function (error) {
-      console.log(error);
-    }).always(function() {
-      $('.stats-spinner').hide();
-      $('.stats-data').show();
-    });
-
-    return false;
-  },
-
-  logsExecutionQueryId: '',
-  logsNextToken: '',
-  fetchProgramLogsResults: function() {
-    $('#logs-spinner').show();
-    $('#search-logs-empty-msg').hide();
-    $('#logs-load-more').hide();
-
-    const data = {
-      query_execution_id: this.logsExecutionQueryId,
-      next_token: this.logsNextToken ? this.logsNextToken : undefined
-    };
-
-    const self = this;
-    $.get('/logs/results', data).done (function (response) {
-      const $logsTable = $('#search-logs-table tbody');
-
-      response.data.forEach ((e: any) => {
-        $logsTable.append(`<tr> \
-          <td class="border px-4 py-2">${e.date}</td> \
-          <td class="border px-4 py-2">${e.level}</td> \
-          <td class="border px-4 py-2">${e.username || ''}</td> \
-          <td class="border px-4 py-2">${e.exception || ''}</td> \
-          <td class="border px-4 py-2"> \
-            <button class="green-btn float-right top-2 right-2" onclick=hedyApp.auth.copyCode(this)>⇥</button> \
-            <pre>${e.code}</pre> \
-          </td></tr>`)
-      });
-
-      if (response.data.length == 0) {
-        $('#search-logs-empty-msg').show();
-      }
-
-      self.logsNextToken = response.next_token;
-
-    }).fail (function (error) {
-      console.log(error);
-    }).always(function() {
-      $('#logs-spinner').hide();
-      if (self.logsNextToken) {
-        $('#logs-load-more').show();
-      }
-    });
-
-    return false;
-  },
-
-  copyCode: function(el: any) {
-    const copyButton = $(el);
-    if (navigator.clipboard === undefined) {
-      updateCopyButtonText(copyButton, 'Failed!');
-    } else {
-      navigator.clipboard.writeText(copyButton.next().text()).then(function() {
-        updateCopyButtonText(copyButton, 'Copied!');
-      }, function() {
-        updateCopyButtonText(copyButton, 'Failed!');
-      });
-    }
-    return false;
-  },
-
-  searchProgramLogs: function () {
-    var raw_data = $('#logs-search-form').serializeArray();
-    var payload: any = {}
-    $.map(raw_data, function(n){
-        payload[n['name']] = n['value'];
-    });
-
-    $('#logs-spinner').show();
-    $('#search-logs-empty-msg').hide();
-    $('#search-logs-failed-msg').hide();
-    $('#logs-load-more').hide();
-    $('#search-logs-button').prop('disabled', true);
-    $('#search-logs-table tbody').html('');
-
-    const self = this;
-    $.ajax ({type: 'POST', url: '/logs/query', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function (response) {
-        if (response['query_status'] === 'SUCCEEDED') {
-          self.logsExecutionQueryId = response['query_execution_id'];
-          self.logsNextToken = '';
-          self.fetchProgramLogsResults();
-        } else {
-          $('#search-logs-failed-msg').show();
-        }
-      }).fail (function (error) {
-        $('#search-logs-failed-msg').show();
-        console.log(error);
-      }).always(function() {
-        $('#logs-spinner').hide();
-        $('#search-logs-button').prop('disabled', false);
-      });
-
-    return false;
-  },
-
-  initStats: function() {
-    initChart('programRunsPerLevelChart', 'bar', 'Program runs per level', 'Level #', 'top', false, true);
-    initChart('errorRatePerLevelChart', 'line', 'Error rate per level', 'Level #', 'top', true, false);
-
-    initChart('successfulRunsPerWeekChart', 'bar', 'Successful runs per week', 'Week #', 'right', false, false);
-    initChart('failedRunsPerWeekChart', 'bar', 'Failed runs per week', 'Week #', 'right', false, false);
-
-    initChart('exceptionsPerLevelChart', 'line', 'Exceptions per level', 'Level #', 'right', false, false);
-    initChart('exceptionsPerWeekChart', 'line', 'Exceptions per week', 'Week #', 'right', false, false);
-
-    // Show the first stats by default when the page loads
-    $('.stats-period-toggle').first().click()
-
-    $('#logs-spinner').hide();
-    $('#search-logs-failed-msg').hide();
-    $('#search-logs-empty-msg').hide();
-
-    const today = new Date().toISOString().split('T')[0];
-    $('#logs-start-date').val(today + ' 00:00:00');
-    $('#logs-end-date').val(today + ' 23:59:59');
-  }
 }
 
 // *** LOADERS ***
@@ -528,135 +352,6 @@ $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
    return false;
 });
-
-/**
- Charts setup
- */
-function initChart(elementId: string, chartType: any, title: string, xTitle: string, legendPosition: any, is_percent: boolean, stacked: boolean) {
-  const chart = document.getElementById(elementId) as HTMLCanvasElement;
-  new Chart(chart, {
-    type: chartType,
-    data: {
-      datasets: []
-    },
-    options: {
-      plugins: {
-        title: {
-          display: true,
-          text: title
-        },
-        legend: {
-          position: legendPosition
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          stacked: stacked,
-          scaleLabel: {
-            display: is_percent,
-            labelString: is_percent ? "Percentage" : ""
-          },
-          ticks: is_percent ? {
-            min: 0,
-            max: 100,
-            callback: function(value: any) {
-              return value + "%"
-            }
-          } : {}
-        },
-        x: {
-          title: {
-            display: true,
-            text: xTitle
-          },
-          stacked: stacked
-        }
-      }
-    }
-  });
-}
-
-
-
-/*
-Chart functions
-*/
-function flattenWeekProps(input: any[], filter: any) {
-  var result = new Set<string>();
-  for (var i=0; i<input.length; i++) {
-    var sr = getPropertyNames(input[i]['data']['successful_runs'], filter);
-    var fr = getPropertyNames(input[i]['data']['failed_runs'], filter);
-    sr.forEach(result.add, result);
-    fr.forEach(result.add, result);
-  }
-  return Array.from(result);
-}
-
-function flattenExProps(input: any[], filter: any) {
-var result = new Set<string>();
-  for (var i=0; i<input.length; i++) {
-    getPropertyNames(input[i]['data'], filter).forEach(result.add, result);
-  }
-  return Array.from(result);
-}
-
-function getPropertyNames(data: any[], filter: any) {
-  var result = new Set<string>();
-  var keys = Object.keys(data)
-  for (var i=0; i<keys.length; i++) {
-    if (filter(keys[i])) {
-      result.add(keys[i]);
-    }
-  }
-  return result;
-}
-
-function generatePerLevelDataset(label: string, data: any[], yAxisKey: string, color: string, border: boolean) {
-  return {
-    label: label,
-    data: data,
-    parsing: {
-      xAxisKey: 'level',
-      yAxisKey: yAxisKey,
-    },
-    backgroundColor: [color],
-    borderColor: [color],
-    borderWidth: border ? 5 : 0,
-  }
-}
-
-function generateDatasets(data: any[], source: any[], xAxisKey: string, yAxisKey: string, colors: string[], label: any = (x: string) => x) {
-  const result = new Array();
-  var color_index = 0;
-  var sorted_data = Array.from(data).sort((e1, e2) => parseInt(e1.substr(5)) - parseInt(e2.substr(5)));
-  for (let dataset of sorted_data) {
-    result.push({
-      label: label(dataset),
-      data: source,
-      parsing: {
-        xAxisKey: xAxisKey,
-        yAxisKey: yAxisKey + dataset,
-      },
-      backgroundColor: colors[color_index % colors.length],
-      borderWidth: 0,
-      pointRadius: 5,
-      })
-    color_index += 1;
-  }
-  return result;
-}
-
-function updateChart(elementId: string, datasets: any[] ) {
-  const ch = Chart.getChart(elementId)!;
-  ch.data.datasets = datasets;
-  ch.update();
-}
-
-function updateCopyButtonText(copyBtn: any, text: string) {
-  copyBtn.text(text);
-  setTimeout(function() {copyBtn.html("⇥")}, 2000);
-}
 
 /**
  * After login:

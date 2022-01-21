@@ -10,6 +10,8 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
+var StopExecution = false;
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -191,8 +193,8 @@ function clearErrors(editor: AceAjax.Editor) {
 
 export function runit(level: string, lang: string, cb: () => void) {
   if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
-
   if (reloadOnExpiredSession ()) return;
+  StopExecution = true;
 
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -241,9 +243,12 @@ export function runit(level: string, lang: string, cb: () => void) {
         return;
       }
         runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
-        console.log(err)
-        error.show(ErrorMessages['Execute_error'], err.message);
-        reportClientError(level, code, err.message);
+        // If it is an error we throw due to program execution while another is running -> don't show and log it
+        if (!(err.message == "\"program_interrupt\"")) {
+          console.log(err);
+          error.show(ErrorMessages['Execute_error'], err.message);
+          reportClientError(level, code, err.message);
+        }
       });
     }).fail(function(xhr) {
       console.error(xhr);
@@ -761,11 +766,10 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
-  if (! window.State.programsInExecution) window.State.programsInExecution = 0;
-  window.State.programsInExecution++;
+  window.State.programsInExecution = 1;
 
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -800,7 +804,8 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, h
     __future__: Sk.python3,
     timeoutMsg: function () {
       pushAchievement("hedy_hacking");
-      return ErrorMessages ['Program_too_long']},
+      return ErrorMessages ['Program_too_long']
+    },
     // Give up after three seconds of execution, there might be an infinite loop.
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
@@ -809,9 +814,17 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, h
     }) ()
   });
 
-  return Sk.misceval.asyncToPromise(function () {
-    return Sk.importMainWithBody("<stdin>", false, code, true);
-  }).then(function(_mod) {
+  StopExecution = false;
+  return Sk.misceval.asyncToPromise( () =>
+    Sk.importMainWithBody("<stdin>", false, code, true), {
+      "*": () => {
+        if (StopExecution) {
+          window.State.programsInExecution = 0;
+          throw "program_interrupt";
+        }
+      }
+    }
+   ).then(function(_mod) {
     console.log('Program executed');
 
     // Check if the program was correct but the output window is empty: Return a warning
@@ -871,7 +884,6 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasSleep: boolean, h
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
     return new Promise(function(ok) {
-
       window.State.disable_run = true;
       $ ('#runit').css('background-color', 'gray');
 
@@ -1224,4 +1236,12 @@ export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
   window.open('?level=' + level + "&adventure=" + adventure, "_self");
+}
+
+export function filter_admin() {
+  const filter = $('#admin_filter_category').val();
+  const start_date = $('#admin_start_date').val();
+  console.log(start_date)
+  const end_date = $('#admin_end_date').val();
+  window.open('?filter=' + filter + "&start=" + start_date + "&end=" + end_date, "_self");
 }
