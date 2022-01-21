@@ -1184,13 +1184,21 @@ def get_admin_page():
     if not utils.is_testing_request(request) and not is_admin(current_user()):
         return 'unauthorized', 403
 
-    filter = request.args.get('filter', default=None, type=str)
-    start_date = request.args.get('level', default=None, type=datetime)
-    end_date = request.args.get('adventure', default=None, type=datetime)
+    category = request.args.get('filter', default=None, type=str)
+    #start_date = request.args.get('start', default=None, type=datetime)
+    #end_date = request.args.get('end', default=None, type=datetime)
 
-    filter = None if filter == "null" else filter
-    start_date = None if start_date == "null" else start_date
-    end_date = None if end_date == "null" else end_date
+    print("En hier?")
+
+    filter = None if category == "null" else category
+    #start_date = None if start_date == "null" else start_date
+    #end_date = None if end_date == "null" else end_date
+
+    print("En dan hier nog!");
+
+    print(filter)
+    print(start_date)
+    print(end_date)
 
     # After hitting 1k users, it'd be wise to add pagination.
     users = DATABASE.all_users()

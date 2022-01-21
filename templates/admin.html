@@ -49,13 +49,13 @@
                 </div>
                 <div class="w-3/4 p-2 mx-4">
                     <h2 class="px-8">Filtering options</h2>
-                    <select id="explore_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
-                        <option>Created</option>
-                        <option>Last login</option>
+                    <select id="admin_filter_category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
+                        <option name="created">Created</option>
+                        <option name="last_login">Last login</option>
                     </select>
                     <div class="flex flex-row items-center">
-                        <input type="date" class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
-                        <input type="date" class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 mx-2">
+                        <input type="date" id="admin_start_date" class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
+                        <input type="date" id="admin_end_date" class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 mx-2">
                         <div class="flex flex-row ml-auto">
                             <button type="reset" class="red-btn" onclick="window.open('/admin', '_self');">Reset</button>
                             <button type="submit" class="green-btn ml-4 px-4">Filter</button>
