@@ -649,36 +649,6 @@ def version_page():
                            heroku_release_time=the_date,
                            commit=commit)
 
-@app.route('/admin', methods=['GET'])
-def get_admin_page():
-    if not utils.is_testing_request(request) and not is_admin(current_user()):
-        return 'unauthorized', 403
-
-
-        # After hitting 1k users, it'd be wise to add pagination.
-        users = DATABASE.all_users()
-        userdata =[]
-        fields =['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
-
-        for user in users:
-            data = pick(user, *fields)
-            data['email_verified'] = not bool(data['verification_pending'])
-            data['is_teacher'] = bool(data['is_teacher'])
-            data['created'] = utils.datetotimeordate (mstoisostring(data['created'])) if data['created'] else '?'
-            if data['last_login']:
-                data['last_login'] = utils.datetotimeordate (mstoisostring(data['last_login'])) if data['last_login'] else '?'
-            userdata.append(data)
-
-        userdata.sort(key=lambda user: user['created'], reverse=True)
-        counter = 1
-        for user in userdata:
-            user['index'] = counter
-            counter = counter + 1
-
-        return render_template('admin.html', users=userdata, page_title=page_title,
-                               program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
-
-
 def achievements_page():
     user = current_user()
     username = user['username']
@@ -1127,7 +1097,8 @@ def main_page(page):
     if page == 'favicon.ico':
         abort(404)
 
-    if page in ['signup', 'login', 'my-profile', 'recover', 'reset']:
+    if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
+        print('Hier komen we!')
         return auth_templates(page, hedyweb.get_page_title(page))
 
     if page == "my-achievements":
@@ -1206,6 +1177,35 @@ def explore():
                            adventures=adventures,
                            page_title=hedyweb.get_page_title('explore'),
                            current_page='explore')
+
+
+@app.route('/admin', methods=['GET'])
+def get_admin_page():
+    if not utils.is_testing_request(request) and not is_admin(current_user()):
+        return 'unauthorized', 403
+
+    # After hitting 1k users, it'd be wise to add pagination.
+    users = DATABASE.all_users()
+    userdata =[]
+    fields =['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
+
+    for user in users:
+        data = pick(user, *fields)
+        data['email_verified'] = not bool(data['verification_pending'])
+        data['is_teacher'] = bool(data['is_teacher'])
+        data['created'] = utils.datetotimeordate (mstoisostring(data['created'])) if data['created'] else '?'
+        if data['last_login']:
+            data['last_login'] = utils.datetotimeordate (mstoisostring(data['last_login'])) if data['last_login'] else '?'
+        userdata.append(data)
+
+    userdata.sort(key=lambda user: user['created'], reverse=True)
+    counter = 1
+    for user in userdata:
+        user['index'] = counter
+        counter = counter + 1
+
+    return render_template('admin.html', users=userdata, page_title=page_title,
+                           program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 
 @app.route('/change_language', methods=['POST'])
