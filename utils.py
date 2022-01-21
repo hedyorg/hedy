@@ -178,16 +178,10 @@ def atomic_write_file(filename, mode='wb'):
 def mstoisostring(date):
     unix_ts = date / 1000
     dt = datetime.datetime.fromtimestamp(unix_ts)
-
-    print('dt', dt)
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
 
 def datetotimeordate(date):
-    datestamp = date.split("T")[0]
-    if (datestamp == datetime.date.fromtimestamp(time.time()).isoformat()):
-        return date.split("T")[1]
-    else:
-        return date.replace("T", " ")
+    return date.replace("T", " ")
 
 # https://stackoverflow.com/a/2257449
 def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):

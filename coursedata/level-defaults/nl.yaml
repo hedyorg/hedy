@@ -62,6 +62,15 @@
         demo_code: |-
             voornaam is Hedy
             print ik heet voornaam
+    -   name: "sleep"
+        explanation: "Laat Hedy een of meer seconde(n) pauzeren."
+        example: "Example: sleep 2 "
+        demo_code: |-
+            print Ik moet even een seconde nadenken...
+            sleep
+            print Hmm.. Geef me nog 3 seconden...
+            sleep 3
+            print Eureka! Ik weet het!
     -   name: "is - turtle"
         explanation: "Een getal een naam geven met `is`. Je mag de naam zelf kiezen."
         example: "Bijvoorbeeld: hoek is 90."
@@ -84,7 +93,14 @@
         print dieren at random
         ```
 
-        Je vindt alle commando's van level 3 weer in de linkerbalk. Ook zijn er weer tabjes met opdrachten.
+        Je kunt in dit level ook dingen aan een lijstje toevoegen met het commando `add`.
+        Daarnaast kun je dingen van het lijstje verwijderen. Dat doe je met `remove`.
+         ```
+        taarten is aardbei, chocolade
+        add appel to taarten
+        remove chocolade from taarten
+        print taarten at random
+        ```
     start_code: "print hallo wereld!"
     commands:
     -   name: "kies_random"
@@ -93,6 +109,18 @@
         demo_code: |-
             dieren is hond, kat, kangoeroe
             print dieren at random
+    -   name: "Toevoegen"
+        explanation: "Voeg iets toe aan een lijst"
+        example: "Voorbeeld: add hond to dieren"
+        demo_code: |-
+            dieren is kat, koe
+            add hond to dieren
+    -   name: "Verwijderen"
+        explanation: "Verwijder iets van een lijst"
+        example: "Voorbeeld: remove hond from dieren"
+        demo_code: |-
+            dieren is hond, cat, koe
+            remove hond from dieren
 4:
     start_code: "print 'hallo wereld'"
     intro_text: |
@@ -467,7 +495,7 @@
     intro_text: |
         We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`.
         De `<` kijkt of het eerste getal kleiner is dan de tweede. Bijvoorbeeld met `leeftijd < 12` kun je kijken of `leeftijd` kleiner is dan 12.
-        De `>` kijkt of iets groter is dan het tweede geta. Bijvoorbeeld met `punten > 10` kun je kijken of `punten` groter is dan 10.
+        De `>` kijkt of iets groter is dan het tweede getal. Bijvoorbeeld met `punten > 10` kun je kijken of `punten` groter is dan 10.
 
         Je gebruikt de vergelijkingen in de `if`, zo:
 

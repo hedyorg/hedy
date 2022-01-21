@@ -227,7 +227,110 @@ levels:
             correct_answer: "D"
             hint: "'name' is being replaced with 'Hedy' in both places"
             question_score: 10
-
+        5:
+            question_text: "What happens when you use the `sleep` command"
+            code: ""
+            mp_choice_options:
+                -   "option_text": "It slows down your computer"
+                    "feedback": "Fortunately not!"
+                -   "option_text": "It closes down Hedy"
+                    "feedback": "Fortunately not!"
+                -   "option_text": "Your program pauses for a second and then continues"
+                    "feedback": "That's right!"
+                -   "option_text": "You put it at the end so Hedy knows your program is finished"
+                    "feedback": "No it would be useless at the end of your code"
+            correct_answer: "C"
+            hint: "The computer waits for a second at the sleep command"
+            question_score: 10
+        6:
+            question_text: "What should be on the lines?"
+            code: |-
+                print And the award for best programming language goes to...
+                ___
+                print Hedy!
+            mp_choice_options:
+                -   "option_text": "sleep"
+                    "feedback": "Perfect!"
+                -   "option_text": "echo"
+                    "feedback": "There is nothing to repeat back here"
+                -   "option_text": "print"
+                    "feedback": "There is no text there to print there"
+                -   "option_text": "ask"
+                    "feedback": "There is no question there to be asked"
+            correct_answer: "A"
+            hint: "Pause for dramatic effect..."
+            question_score: 10
+        7:
+            question_text: ""
+            code: |-
+                print I will explode in 3 seconds!
+                ___
+                print BOOM!
+            mp_choice_options:
+                -   "code": "print 3"
+                    "feedback": "You don't need to print"
+                -   "code": "sleep 3"
+                    "feedback": "Perfect!"
+                -   "code": "sleep"
+                    "feedback": "This way the bomb will explode in 1 second"
+                -   "code": "sleep sleep sleep"
+                    "feedback": "Make it easier on yourself by using the number 3"
+            correct_answer: "B"
+            hint: "You want the computer to wait for 3 seconds"
+            question_score: 10
+        8:
+            question_text: "How would you correct the first line of code?"
+            code: |-
+                ask is 'How old are you?'
+                print age
+            mp_choice_options:
+                -   "option_text": "age ask is How old are you?"
+                    "feedback": "That is the wrong order"
+                -   "option_text": "ask is age How old are you?"
+                    "feedback": "That is the wrong order"
+                -   "option_text": "age is ask How old are you?"
+                    "feedback": "You get it!"
+                -   "option_text": "age is How old are you?"
+                    "feedback": "Where is the ask command"
+            correct_answer: "C"
+            hint: "The variable name should come first"
+            question_score: 10
+        9:
+            question_text: "What is going wrong in this code?"
+            code: |-
+                dogs is animal
+                print I love animal
+            mp_choice_options:
+                -   "option_text": "Line 1 should say: dogs is animals"
+                    "feedback": "The variable name is animal"
+                -   "option_text": "Line 1 should say: animal is dogs"
+                    "feedback": "Great!"
+                -   "option_text": "Line 2 should say: print I love animals"
+                    "feedback": "The variable name is animal"
+                -   "option_text": "Line 2 should say: sleep I love animals"
+                    "feedback": "Sleep is not used to print text"
+            correct_answer: "B"
+            hint: "You want to print 'I love dogs'"
+            question_score: 10
+        10:
+            question_text: "What command should be used on the line?"
+            code: |-
+                flavor is ___
+                print Your favorite icecream is...
+                sleep
+                print flavor
+            mp_choice_options:
+                -   "option_text": "sleep 3"
+                    "feedback": "You want to know the favorite flavor!"
+                -   "option_text": "print strawberries"
+                    "feedback": "You do not want a print command at the middle of the line..."
+                -   "option_text": "strawberries, chocolate, vanilla"
+                    "feedback": "This way you are making a list. You don't want that now. "
+                -   "option_text": "ask What flavor icecream do you like?"
+                    "feedback": "That's right!"
+            correct_answer: "D"
+            hint: "You want to ask a question"
+            question_score: 10
     3:
         1:
             question_text: "What command do you use to let Hedy pick something arbitrarily?"
