@@ -272,6 +272,13 @@ def setup_language():
         session['lang'] = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
     g.lang = session['lang']
 
+    # Set the page direction -> automatically set it to "left-to-right"
+    # Switch to "right-to-left" if one of the language in the list is selected
+    # This is the only place to expand / shrink the list of RTL languages -> front-end is fixed based on this value
+    g.dir = "ltr"
+    if g.lang in ['ar', 'he', 'ur']:
+        g.dir = "rtl"
+
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
         return "Language " + g.lang + " not supported", 404

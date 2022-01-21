@@ -10,20 +10,20 @@
     <link rel="stylesheet" href="{{static('/vendor/gh-fork-ribbon.min.css')}}"/>
     <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
   </head>
-  <body class="bg-gray-400">
+  <body id="main_container" class="bg-gray-400" dir="{{ g.dir }}">
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
     <div id="modal-mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
-    <div id="modal-content" class="hidden fixed z-50 p-12 pl-16 pr-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+    <div id="modal-content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
        <div id="modal-confirm" class="hidden">
           <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
-          <div class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+          <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
             <button id="modal-yes-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.yes}}</button>
             <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{auth.no}}</button>
           </div>
        </div>
        <div id="modal-prompt" class="hidden">
           <div id="modal-prompt-text" class="text-white mb-8 text-xl"></div>
-          <div class="ml-auto mr-auto">
+          <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto">
             <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <div class="mt-4 flex flex-row justify-center">
                 <button id="modal-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.ok}}</button>
@@ -34,7 +34,7 @@
        <div id="modal-copy" class="hidden">
           <div id="modal-copy-title" class="text-white mb-8 text-xl hidden"></div>
           <div id="modal-copy-text" class="text-white mb-8 text-xl"></div>
-          <div id="modal-copy-buttons" class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+          <div id="modal-copy-buttons" class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
             <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.copy_link_to_share}}</button>
             <button id="modal-copy-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4 hidden">{{auth.ok}}</button>
           </div>
