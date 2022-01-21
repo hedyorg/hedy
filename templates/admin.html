@@ -3,15 +3,6 @@
 {% block main %}
 <h1>Admin page</h1>
 <div class="w-full mt-4 mb-8" id="program_filter">
-        <!--
-            Todo:
-                Essentially this would works as settings a large package of "preferences" to the back-end
-                It would be nice to use a GET, similar to the explore page filtering, but we've a lot of attributes
-                We have three options   -> Use a POST and do some dynamic loading through AJAX and Jquery
-                                        -> Get a (very) long URL due to the large amount of attributes
-                                        -> Write the attributes in a binary structure f.e. 0011110001
-
-        -->
         <form onsubmit="event.preventDefault (); hedyApp.filter_admin();">
             <div class="px-4 w-full flex flex-row border border-gray-400 py-2 rounded-lg">
                 <div class="w-80 p-2 mx-4">
@@ -19,39 +10,39 @@
                     <div class="flex flex-row items-center">
                         <div class="flex flex-col">
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="username" name="username"><label class="inline-block w-1/2" for="subscribe">Username</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="username" name="username"><label class="inline-block w-1/2" for="subscribe">Username</label>
                             </div>
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="count" name="count"><label class="inline-block w-1/2" for="subscribe">Count</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="count" name="count"><label class="inline-block w-1/2" for="subscribe">Count</label>
                             </div>
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="email" name="email"><label class="inline-block w-1/2" for="subscribe">Email</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="email" name="email"><label class="inline-block w-1/2" for="subscribe">Email</label>
                             </div>
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="created" name="created"><label class="inline-block w-1/2" for="subscribe">Created</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="created" name="created"><label class="inline-block w-1/2" for="subscribe">Created</label>
                             </div>
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="last_login" name="last_login"><label class="inline-block w-1/2" for="subscribe">Last login</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="last_login" name="last_login"><label class="inline-block w-1/2" for="subscribe">Last login</label>
                             </div>
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="birth_year" name="birth_year"><label class="inline-block w-1/2" for="subscribe">Birth year</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="birth_year" name="birth_year"><label class="inline-block w-1/2" for="subscribe">Birth year</label>
                             </div>
                         </div>
                         <div class="flex flex-col">
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="country" name="country"><label class="inline-block w-1/2" for="subscribe">Country</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="country" name="country"><label class="inline-block w-1/2" for="subscribe">Country</label>
                             </div>
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="gender" name="gender"><label class="inline-block w-1/2" for="subscribe">Gender</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="gender" name="gender"><label class="inline-block w-1/2" for="subscribe">Gender</label>
                             </div>
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="experience" name="experience"><label class="inline-block w-1/2" for="subscribe">Experience</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="experience" name="experience"><label class="inline-block w-1/2" for="subscribe">Experience</label>
                             </div>
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="teacher" name="teacher"><label class="inline-block w-1/2" for="subscribe">Teacher</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="teacher" name="teacher"><label class="inline-block w-1/2" for="subscribe">Teacher</label>
                             </div>
                             <div class="flex flex-row items-center">
-                                <input class="inline-block ml-0 mr-3" type="checkbox" id="verified" name="verified"><label class="inline-block w-1/2" for="subscribe">Verified</label>
+                                <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="verified" name="verified"><label class="inline-block w-1/2" for="subscribe">Verified</label>
                             </div>
                         </div>
                     </div>
@@ -78,36 +69,50 @@
   <table class="table-auto mb-4 w-full text-sm">
     <thead>
       <tr class="font-bold text-left">
-          <td>Username</td>
-          <td>Count</td>
-          <td>Email</td>
-          <td>Created</td>
-          <td>Last login</td>
-          <td>Birth year</td>
-          <td>Country</td>
-          <td>Gender</td>
-          <td>Experience</td>
-          <td>Teacher</td>
-          <td>Verified</td>
+          <td id="username_header">Username</td>
+          <td id="count_header">Count</td>
+          <td id="email_header">Email</td>
+          <td id="created_header">Created</td>
+          <td id="last_login_header">Last login</td>
+          <td id="birth_year_header">Birth year</td>
+          <td id="country_header">Country</td>
+          <td id="gender_header">Gender</td>
+          <td id="experience_header">Experience</td>
+          <td id="teacher_header">Teacher</td>
+          <td id="verified_header">Verified</td>
       </tr>
     </thead>
     <tbody>
       {% for user in users %}
           <tr>
-            <td><a href="programs?user={{user.username}}" target="_blank">{{user.username}}</a></td>
-            <td>{{user.program_count or 0}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.created}}</td>
-            <td>{{user.last_login}}</td>
-            <td>{{user.birth_year}}</td>
-            <td>{{user.country}}</td>
-            <td>{{user.gender}}</td>
-            <td>{{user.prog_experience}}</td>
-            <td><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.auth.markAsTeacher ('{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
-            <td>{{user.email_verified}}</td>
+            <td class="username_cell"><a href="programs?user={{user.username}}" target="_blank">{{user.username}}</a></td>
+            <td class="count_cell">{{user.program_count or 0}}</td>
+            <td class="email_cell">{{user.email}}</td>
+            <td class="created_cell">{{user.created}}</td>
+            <td class="last_login_cell">{{user.last_login}}</td>
+            <td class="birth_year_cell">{{user.birth_year}}</td>
+            <td class="country_cell">{{user.country}}</td>
+            <td class="gender_cell">{{user.gender}}</td>
+            <td class="experience_cell">{{user.prog_experience}}</td>
+            <td class="teacher_cell"><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.auth.markAsTeacher ('{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
+            <td class="verified_cell">{{user.email_verified}}</td>
           </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
+<script>
+    $(document).ready(function() {
+        $('.attribute').change(function() {
+            const attribute = $(this).attr('id');
+            if(!this.checked) {
+                $('#' + attribute + '_header').hide();
+                $('.' + attribute + '_cell').hide();
+            } else {
+                $('#' + attribute + '_header').show();
+                $('.' + attribute + '_cell').show();
+            }
+        });
+    });
+</script>
 {% endblock %}
