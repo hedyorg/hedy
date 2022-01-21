@@ -1201,15 +1201,12 @@ def get_admin_page():
     userdata =[]
     fields =['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
 
-    print("DIT IS HET FILTER:")
-    print(filter)
     for user in users:
         data = pick(user, *fields)
         data['email_verified'] = not bool(data['verification_pending'])
         data['is_teacher'] = bool(data['is_teacher'])
         data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
         if filtering and filter == "created":
-            print("Hier zouden we niet moeten komen!")
             if (start_date and utils.datetotimeordate(start_date) >= data['created']) or (end_date and utils.datetotimeordate(end_date) <= data['created']):
                 continue
         if data['last_login']:
@@ -1226,6 +1223,7 @@ def get_admin_page():
         counter = counter + 1
 
     return render_template('admin.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
+                           filter=filter, start_date=start_date, end_date=end_date,
                            program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 

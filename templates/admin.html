@@ -50,12 +50,12 @@
                 <div class="w-3/4 p-2 mx-4">
                     <h2 class="px-8">Filtering options</h2>
                     <select id="admin_filter_category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
-                        <option value="created">Created</option>
-                        <option value="last_login">Last login</option>
+                        <option value="created" {% if filter and filter == "created" %} selected {% endif %}>Created</option>
+                        <option value="last_login" {% if filter and filter == "last_login" %} selected {% endif %}>Last login</option>
                     </select>
                     <div class="flex flex-row items-center">
-                        <input type="date" id="admin_start_date" class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
-                        <input type="date" id="admin_end_date" class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 mx-2">
+                        <input type="date" id="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
+                        <input type="date" id="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 mx-2">
                         <div class="flex flex-row ml-auto">
                             <button type="reset" class="red-btn" onclick="window.open('/admin', '_self');">Reset</button>
                             <button type="submit" class="green-btn ml-4 px-4">Filter</button>
