@@ -1,0 +1,171 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+  <h2 class="inline-block">Load data for: </h2>
+
+  <!-- TODO: why use anchors that lead to nowhere here? Just use buttons, nice beautiful buttons -->
+
+  <a href="javascript:void(0);" class="stats-period-toggle"
+     onclick="hedyApp.stats.getClassStats(('{{class_info.id}}'), 1, this)">This week</a> |
+  <a href="javascript:void(0);" class="stats-period-toggle"
+     onclick="hedyApp.stats.getClassStats(('{{class_info.id}}'), 2, this)">Past 2 weeks</a> |
+  <a href="javascript:void(0);" class="stats-period-toggle"
+     onclick="hedyApp.stats.getClassStats(('{{class_info.id}}'), 4, this)">Past 4 weeks</a> |
+  <a href="javascript:void(0);" class="stats-period-toggle"
+     onclick="hedyApp.stats.getClassStats(('{{class_info.id}}'), 52, this)">Past year</a>
+
+  <div class="shadow-md stats accordion">
+    <div class="accordion-tab w-full overflow-hidden border-t">
+      <input class="absolute opacity-0 " id="tab-multi-one" type="checkbox" name="tabs" checked="checked">
+      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-one">
+        Class program runs per level
+      </label>
+      <div class="tab-content overflow-hidden leading-normal">
+        <div class="stats-spinner flex justify-center items-center h-64">
+          <div
+              class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
+          ></div>
+        </div>
+        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
+
+          <div class="flex flex-col order-1">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="classProgramRunsPerLevelChart" width="400" height="400"></canvas>
+            </div>
+          </div>
+          <div class="flex flex-col order-2">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="classErrorRatePerLevelChart" width="400" height="400"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-tab w-full overflow-hidden border-t">
+      <input class="absolute opacity-0 " id="tab-multi-two" type="checkbox" name="tabs" checked="checked">
+      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-two">
+        Class program runs per week
+      </label>
+      <div class="tab-content overflow-hidden leading-normal">
+
+        <div class="stats-spinner flex justify-center items-center h-64">
+          <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"></div>
+        </div>
+
+        <div>
+          <ul id="class-program-runs-legend" class="stats-legend"></ul>
+        </div>
+
+        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
+          <div class="flex flex-col order-1">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="classSuccessfulRunsPerWeekChart" class="class-runs-chart" width="400" height="400"></canvas>
+            </div>
+          </div>
+          <div class="flex flex-col order-2">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="classFailedRunsPerWeekChart" class="class-runs-chart" width="400" height="400"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion-tab w-full overflow-hidden border-t">
+      <input class="absolute opacity-0 " id="tab-multi-three" type="checkbox" name="tabs" checked="checked">
+      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-three">
+        Class exceptions per level and week
+      </label>
+      <div class="tab-content overflow-hidden leading-normal">
+
+        <div class="stats-spinner flex justify-center items-center h-64">
+          <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"></div>
+        </div>
+
+        <div>
+          <ul id="class-exceptions-legend" class="stats-legend"></ul>
+        </div>
+
+        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
+          <div class="flex flex-col order-1">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="classExceptionsPerLevelChart" class="class-exceptions-chart" width="400"
+                      height="400"></canvas>
+            </div>
+          </div>
+          <div class="flex flex-col order-2">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="classExceptionsPerWeekChart" class="class-exceptions-chart" width="400" height="400"></canvas>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="accordion-tab w-full overflow-hidden border-t">
+      <input class="absolute opacity-0" id="tab-multi-four" type="checkbox" name="tabs" checked="checked">
+      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-four">
+        Students' Overview</label>
+      <div class="tab-content overflow-hidden leading-normal">
+        <div class="stats-spinner flex justify-center items-center h-64">
+          <div
+              class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
+          ></div>
+        </div>
+
+        <div>
+          <ul id="student-legend" class="stats-legend"></ul>
+        </div>
+
+        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
+          <div class="flex flex-col order-1">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="studentSuccessfulRunsPerLevelChart" width="400" height="400" class="student-chart"></canvas>
+            </div>
+          </div>
+          <div class="flex flex-col order-2">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="studentFailedRunsPerLevelChart" width="400" height="400" class="student-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
+          <div class="flex flex-col order-3">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="studentErrorRatePerLevelChart" width="400" height="400" class="student-chart"></canvas>
+            </div>
+          </div>
+          <div class="flex flex-col order-4">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="studentErrorRatePerWeekChart" width="400" height="400" class="student-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
+          <div class="flex flex-col order-5">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="studentSuccessfulRunsPerWeekChart" width="400" height="400" class="student-chart"></canvas>
+            </div>
+          </div>
+          <div class="flex flex-col order-6">
+            <div class="w-full flex-1 flex flex-col">
+              <canvas id="studentFailedRunsPerWeekChart" width="400" height="400" class="student-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    hedyApp.stats.initializeClassStats();
+  });
+</script>
+{% endblock %}

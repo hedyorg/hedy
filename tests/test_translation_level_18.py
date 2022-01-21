@@ -1,3 +1,4 @@
+from cmath import exp
 import hedy
 from test_level_01 import HedyTester
 import hedy_translation
@@ -35,3 +36,26 @@ class TestsTranslationLevel18(HedyTester):
             print('hallo!')""")
 
         self.assertEqual(expected, result)
+
+    def test_input_empty_brackets(self):
+        code = textwrap.dedent("""\
+        nombre es entrada()
+        imprimir(nombre)""")
+
+        result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="en", level=self.level)
+
+        expected = textwrap.dedent("""\
+        nombre is input()
+        print(nombre)""")
+
+        self.assertEqual(expected, result)
+
+    def test_print_empty_brackets(self):
+        code = textwrap.dedent("imprimir()")
+
+        result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="en", level=self.level)
+
+        expected = textwrap.dedent("print()")
+
+        self.assertEqual(expected, result)
+

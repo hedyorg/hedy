@@ -67,7 +67,7 @@ levels:
             question_text: "Welk commando mist in regel 2?"
             code: |-
                 ask Wat is jouw lievelingsdier?
-                ? Dus jouw lievelingsdier is..."
+                ? Dus jouw lievelingsdier is...
             mp_choice_options:
                 -   code: "print"
                     feedback: "Je wilt dat in regel 2 het antwoord herhaald wordt..."
@@ -227,6 +227,110 @@ levels:
                     "feedback": "Juist! Dit probleem wordt opgelost in level 3!"
             correct_answer: "D"
             hint: "'naam' wordt beide keren vervangen door 'Hedy'"
+            question_score: 10
+        5:
+            question_text: "Wat doet het commando `sleep`? "
+            code: ""
+            mp_choice_options:
+                -   "option_text": "Het is het einde van het programma"
+                    "feedback": "Nee hoor, je kunt na een sleep nog verder"
+                -   "option_text": "Het bevriest je scherm, zodat je niet verder kunt"
+                    "feedback": "Gelukkig niet!"
+                -   "option_text": "Het zorgt ervoor dat je code even pauzeert en dan weer verder gaat"
+                    "feedback": "Super"
+                -   "option_text": "Het maakt je programma langzamer"
+                    "feedback": "Gelukkig niet!"
+            correct_answer: "C"
+            hint: "Als je sleep gebruikt, wacht de computer een (paar) seconden"
+            question_score: 10
+        6:
+            question_text: "Welk commando moet op de streepjes?"
+            code: |-
+                print En de prijs voor leukste programmeertaal gaat naar...
+                ___
+                print Hedy!
+            mp_choice_options:
+                -   "option_text": "sleep"
+                    "feedback": "Topper!"
+                -   "option_text": "echo"
+                    "feedback": "Er valt niets te herhalen hier..."
+                -   "option_text": "print"
+                    "feedback": "Er staat niets om te printen"
+                -   "option_text": "ask"
+                    "feedback": "Er staat geen vraag om te stellen"
+            correct_answer: "A"
+            hint: "Er valt even een stilte voor een dramatisch effect"
+            question_score: 10
+        7:
+            question_text: "Welke code moet er op het streepje staan?"
+            code: |-
+                print Ik ontplof over 3 seconden!
+                ___
+                print BOEM!
+            mp_choice_options:
+                -   "code": "print 3"
+                    "feedback": "Je hoeft niets te printen."
+                -   "code": "sleep 3"
+                    "feedback": "Perfect!"
+                -   "code": "sleep"
+                    "feedback": "Dan ontplof je al over 1 seconde."
+                -   "code": "sleep sleep sleep"
+                    "feedback": "Je kunt het makkelijker maken door er gewoon een 3 achter te zetten!"
+            correct_answer: "B"
+            hint: "Je wilt dat de code 3 seconden wacht!"
+            question_score: 10
+        8:
+            question_text: "Hoe verbeter je de eerste regel van deze code?"
+            code: |-
+                ask is Hoe oud ben je?
+                print leeftijd
+            mp_choice_options:
+                -   "option_text": "ask is leeftijd Hoe oud ben je?"
+                    "feedback": "Verkeerde volgorde"
+                -   "option_text": "leeftijd is Hoe oud ben je?"
+                    "feedback": "Waar is de ask gebleven?"
+                -   "option_text": "leeftijd is ask Hoe oud ben je?"
+                    "feedback": "Top!"
+                -   "option_text": "leeftijd is aks Hoe oud ben je?"
+                    "feedback": "Let op de spelling van ask"
+            correct_answer: "C"
+            hint: "Leeftijd is...?"
+            question_score: 10
+        9:
+            question_text: "Wat gaat er mis in deze code?"
+            code: |-
+                honden is lievelingsdier
+                print Ik hou van lievelingsdier
+            mp_choice_options:
+                -   "option_text": "regel 1 moet zijn: honden is lievelingsdieren"
+                    "feedback": "Nee, de variabele heet lievelingsdier"
+                -   "option_text": "regel 1 moet zijn: lievelingsdier is honden"
+                    "feedback": "Correct"
+                -   "option_text": "regel 2 moet zijn: Ik hou van sleep honden "
+                    "feedback": "Nee, sleep staat niet zo midden in een zin."
+                -   "option_text": "regel 2 moet zijn: Ik hou van lievelingsdieren"
+                    "feedback": "Nee, de variabele heet lievelingsdier"
+            correct_answer: "B"
+            hint: "Je wil printen 'Ik hou van honden'"
+            question_score: 10
+        10:
+            question_text: "Welk commando moet er op de lijntjes?"
+            code: |-
+                smaak is ___
+                print Jouw favoriete ijs is...
+                sleep 2
+                print smaak
+            mp_choice_options:
+                -   "option_text": "aardbeien, chocolade, vanille"
+                    "feedback": "Zo maak je een lijstje. Dat is niet de bedoeling hier"
+                -   "option_text": "print aardbeien"
+                    "feedback": "print hoort niet midden in de zin!"
+                -   "option_text": "sleep 5"
+                    "feedback": "Helaas, probeer het nog eens."
+                -   "option_text": "ask Wat is jouw favoriete smaak ijs?"
+                    "feedback": "Super!"
+            correct_answer: "D"
+            hint: "Je wil een vraag stellen."
             question_score: 10
 
     3:
