@@ -178,8 +178,6 @@ def atomic_write_file(filename, mode='wb'):
 def mstoisostring(date):
     unix_ts = date / 1000
     dt = datetime.datetime.fromtimestamp(unix_ts)
-
-    print('dt', dt)
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
 
 def datetotimeordate(date):

@@ -1193,8 +1193,8 @@ def get_admin_page():
     end_date = None if end_date == "null" else end_date
 
     print(filter)
-    print(start_date)
-    print(end_date)
+    #print(start_date)
+    #print(end_date)
 
     # After hitting 1k users, it'd be wise to add pagination.
     users = DATABASE.all_users()
