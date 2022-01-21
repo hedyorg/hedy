@@ -642,37 +642,11 @@ def send_email_template(template, email, link):
 
     send_email(email, subject, body_plain, body_html)
 
-def auth_templates(page, page_title, lang, request):
+def auth_templates(page, page_title):
     if page == 'my-profile':
         return render_template('profile.html', page_title=page_title, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
         return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
-    if page == 'admin':
-        if not is_testing_request(request) and not is_admin(current_user()):
-            return 'unauthorized', 403
-
-        # After hitting 1k users, it'd be wise to add pagination.
-        users = DATABASE.all_users()
-        userdata =[]
-        fields =['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
-
-        for user in users:
-            data = pick(user, *fields)
-            data['email_verified'] = not bool(data['verification_pending'])
-            data['is_teacher']     = bool(data['is_teacher'])
-            data['created'] = mstoisostring(data['created']) if data['created'] else '?'
-            if data['last_login']:
-                data['last_login'] = mstoisostring(data['last_login']) if data['last_login'] else '?'
-            userdata.append(data)
-
-        userdata.sort(key=lambda user: user['created'], reverse=True)
-        counter = 1
-        for user in userdata:
-            user['index'] = counter
-            counter = counter + 1
-
-        return render_template('admin.html', users=userdata, page_title=page_title,
-                               program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 
 def email_base_url():

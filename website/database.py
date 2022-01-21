@@ -187,9 +187,12 @@ class Database:
         for Class in self.get_teacher_classes (username, False):
             self.delete_class (Class)
 
-    def all_users(self):
+    def all_users(self, filtering=False):
         """Return all users."""
-        return USERS.scan()
+        #If we have some filtering -> return all possible users, otherwise return last 500
+        if filtering:
+            return USERS.scan()
+        return USERS.scan(limit=500)
 
     def get_all_explore_programs(self):
         programs = PROGRAMS.scan()

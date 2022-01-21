@@ -22,7 +22,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, \
-    is_teacher, update_is_teacher
+    is_teacher, update_is_teacher, pick
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -649,7 +649,6 @@ def version_page():
                            heroku_release_time=the_date,
                            commit=commit)
 
-
 def achievements_page():
     user = current_user()
     username = user['username']
@@ -1099,7 +1098,8 @@ def main_page(page):
         abort(404)
 
     if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
-        return auth_templates(page, hedyweb.get_page_title(page), g.lang, request)
+        print('Hier komen we!')
+        return auth_templates(page, hedyweb.get_page_title(page))
 
     if page == "my-achievements":
         return achievements_page()
@@ -1177,6 +1177,54 @@ def explore():
                            adventures=adventures,
                            page_title=hedyweb.get_page_title('explore'),
                            current_page='explore')
+
+
+@app.route('/admin', methods=['GET'])
+def get_admin_page():
+    if not utils.is_testing_request(request) and not is_admin(current_user()):
+        return 'unauthorized', 403
+
+    category = request.args.get('filter', default=None, type=str)
+    start_date = request.args.get('start', default=None, type=str)
+    end_date = request.args.get('end', default=None, type=str)
+
+    filter = None if category == "null" else category
+    start_date = None if start_date == "null" else start_date
+    end_date = None if end_date == "null" else end_date
+
+    filtering = False
+    if start_date or end_date:
+        filtering = True
+
+    # After hitting 1k users, it'd be wise to add pagination.
+    users = DATABASE.all_users(filtering)
+    userdata =[]
+    fields =['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
+
+    for user in users:
+        data = pick(user, *fields)
+        data['email_verified'] = not bool(data['verification_pending'])
+        data['is_teacher'] = bool(data['is_teacher'])
+        data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
+        if filtering and filter == "created":
+            if (start_date and utils.datetotimeordate(start_date) >= data['created']) or (end_date and utils.datetotimeordate(end_date) <= data['created']):
+                continue
+        if data['last_login']:
+            data['last_login'] = utils.datetotimeordate(utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
+            if filtering and filter == "last_login":
+                if (start_date and utils.datetotimeordate(start_date) >= data['last_login']) or (end_date and utils.datetotimeordate(end_date) <= data['last_login']):
+                    continue
+        userdata.append(data)
+
+    userdata.sort(key=lambda user: user['created'], reverse=True)
+    counter = 1
+    for user in userdata:
+        user['index'] = counter
+        counter = counter + 1
+
+    return render_template('admin.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
+                           filter=filter, start_date=start_date, end_date=end_date,
+                           program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 
 @app.route('/change_language', methods=['POST'])

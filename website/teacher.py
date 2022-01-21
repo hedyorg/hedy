@@ -64,7 +64,7 @@ def routes (app, database, achievements):
                                 page_title=hedyweb.get_page_title('class overview'),
                                 achievement=achievement,
                                 is_beta_teacher=is_beta_teacher,
-                                class_info={'students': students, 'link': '/hedy/l/' + Class ['link'],
+                                class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class ['link'],
                                             'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
