@@ -1210,10 +1210,10 @@ def get_admin_page():
             if (start_date and utils.datetotimeordate(start_date) > data['created']) or (end_date and utils.datetotimeordate(start_date) < data['created']):
                 continue
         if data['last_login']:
+            data['last_login'] = utils.datetotimeordate(utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
             if filtering and filter == "last_login":
                 if (start_date and utils.datetotimeordate(start_date) > data['last_login']) or (end_date and utils.datetotimeordate(start_date) < data['last_login']):
                     continue
-            data['last_login'] = utils.datetotimeordate (utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
         userdata.append(data)
 
     userdata.sort(key=lambda user: user['created'], reverse=True)
