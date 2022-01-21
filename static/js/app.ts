@@ -786,7 +786,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       "*": () => {
         if (StopExecution) {
           window.State.programsInExecution = 0;
-          throw "program_interrupt"
+          throw "program_interrupt";
         }
       }
     }
