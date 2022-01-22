@@ -7,21 +7,21 @@
  </div>
  <div class="mt-4 text-center" id="customize_level_button_container">
      {% for level in levels %}
-         <button class="{% if level == 1 %} blue-btn {% else %} green-btn {% endif %} mr-4 mt-2 w-32" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
+         <button class="{% if level == 1 %} blue-btn {% else %} green-btn {% endif %} ltr:mr-4 rtl:ml-4 mt-2 w-32" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
      {% endfor %}
  </div>
  <div class="mt-4 border-gray-400 border-2 pb-4 px-4" id="level_settings">
      <div class="mt-4 flex flex-row">
-         <div class="mr-4 w-1/2" id="adventure_selector">
+         <div class="ltr:mr-4 rtl:ml-4 w-1/2" id="adventure_selector">
              <h4>{{auth.available_adventures}}</h4>
              <form>
                  <div class="flex flex-row items-center">
-                 <ul class="inline-block w-1/2 list-none ml-0 pl-4" id="adventures_overview">
+                 <ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 ltr:pl-4 rtl:pr-4" id="adventures_overview">
                      {% for key_name, name_levels in adventures.items() %}
                          {% for name, levels in name_levels.items() %}
                              {% for level in levels %}
                                  <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{key_name}}">
-                                     <input type="checkbox" name="adventures" class="mr-4" value="" {% if preferences[level] and key_name not in preferences[level]['adventures'] %} unchecked {% else %} checked {% endif %}>
+                                     <input type="checkbox" name="adventures" class="ltr:mr-4 rtl:ml-4" value="" {% if preferences[level] and key_name not in preferences[level]['adventures'] %} unchecked {% else %} checked {% endif %}>
                                      <label style>{{ name }}</label>
                                  </li>
                              {% endfor %}
