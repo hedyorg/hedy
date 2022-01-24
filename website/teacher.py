@@ -60,9 +60,11 @@ def routes (app, database, achievements):
         teachers = os.getenv('BETA_TEACHERS', '').split(',')
         is_beta_teacher = user['username'] in teachers
 
+        invites = DATABASE.get_class_invites(Class['id'])
+
         return render_template ('class-overview.html', current_page='for-teachers',
                                 page_title=hedyweb.get_page_title('class overview'),
-                                achievement=achievement,
+                                achievement=achievement, invites=invites,
                                 is_beta_teacher=is_beta_teacher,
                                 class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class ['link'],
                                             'name': Class ['name'], 'id': Class ['id']})

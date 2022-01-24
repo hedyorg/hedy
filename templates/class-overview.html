@@ -10,7 +10,6 @@
     </script>
     {% endif %}
   <h2>{{auth.class_overview}}: {{class_info.name}}</h2>
-  <!-- Todo: Add another table or column to show the "pending" users -> waiting to accept invite to class -->
   <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
       <table class="table-auto mb-4 w-full">
       <thead>
@@ -41,13 +40,9 @@
   </div>
   <p>{{auth.class_link}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
   <div class="mt-4 flex flex-row">
-
     <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{ auth.customize_class }}</button>
     <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
     <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.invite_student ('{{class_info.id}}')">Add student</button>
-
-    <!-- Todo: TB -> I think this button is redundant as the link is already there, remove? -->
-    <!-- <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link }}</button> -->
     {% if is_beta_teacher %}
     <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{auth
       .class_stats}}</button>
@@ -56,6 +51,31 @@
   <div class="mt-4 flex flex-row">
     <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{auth.back_to_class_list}}</button>
     <button class="red-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
+  </div>
+  <div class="mt-4">
+  {% if invites %}
+      <h2>Pending invites</h2>
+      <div class=" w-1/2 border-solid border-2 border-orange-400 rounded my-5 p-4">
+        <table class="table-auto w-full">
+        <thead>
+            <tr class="font-bold text-left">
+                <th class="text-blue-600">Username</th>
+                <th class="text-blue-600">Invite date</th>
+                <th class="text-blue-600">Remove invite</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invite in invites %}
+            <tr>
+                <td>{{invite}}</td>
+                <td>hallo</td>
+                <td><a href="#" onclick="hedyApp.remove_student_invite();">Remove</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+      </div>
+  {% endif %}
   </div>
 </div>
 {% endblock %}

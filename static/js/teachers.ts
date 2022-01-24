@@ -138,6 +138,10 @@ export function invite_student(class_id: string) {
   });
 }
 
+export function remove_student_invite() {
+    console.log("test...");
+}
+
 
 export function remove_student(class_id: string, student_id: string, self_removal: boolean) {
   let confirm_text;
