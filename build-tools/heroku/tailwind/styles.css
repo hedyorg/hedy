@@ -352,26 +352,15 @@ p.close-dialog {
   margin-right: 5px;
 }
 
-/* Programs */
-
-.explore-program-box {
-  @apply w-64 h-56 rounded-lg border border-gray-700 m-4 relative bg-blue-200 cursor-pointer;
-}
-
 /* Tab content - closed */
-.accordion .tab-content {
+.accordion .accordion-tab input ~ .tab-content {
   max-height: 0;
   -webkit-transition: max-height .35s;
   -o-transition: max-height .35s;
   transition: max-height .35s;
-
-/* After updating Tailwind, this empty selector is actually needed for the accordion to function correctly.
-  Officially, the weirdest css (or minifying?) issue I have seen. TODO: BG ask for help. */
-.accordion .accordion-tab input ~ .tab-content {
-
 }
 
-/* Icon */
+/* Accordion icon */
 .accordion .accordion-tab label::before {
   @apply ltr:float-right rtl:float-left ltr:right-0 rtl:left-0;
   top: 0;
@@ -386,29 +375,27 @@ p.close-dialog {
   -o-transition: all .35s;
   transition: all .35s;
 }
-.accordion .accordion-tab input ~ .tab-content {
-  max-height: 0;
-  -webkit-transition: max-height .35s;
-  -o-transition: max-height .35s;
-  transition: max-height .35s;
-}
 
-/* :checked - resize to full height */
+/* Tab content - open */
 .accordion .accordion-tab input:checked ~ .tab-content {
   max-height: 3000vh;
 }
 
-
-/* Icon formatting - closed */
+/* Accordion icon formatting - closed */
 .accordion .accordion-tab input[type=checkbox] + label::before {
   @apply ltr:right-[5px] rtl:left-[5px];
   content: ">";
   transform: rotate(90deg);
 }
 
-/* Icon formatting - open */
+/* Accordion icon formatting - open */
 .accordion .accordion-tab input[type=checkbox]:checked + label::before {
   transform: rotate(270deg);
+}
+
+/* Programs */
+.explore-program-box {
+  @apply w-64 h-56 rounded-lg border border-gray-700 m-4 relative bg-blue-200 cursor-pointer;
 }
 
 /* Developers mode toggle */
