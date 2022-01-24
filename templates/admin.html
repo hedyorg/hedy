@@ -55,10 +55,10 @@
                     <option value="email" {% if filter and filter == "email" %} selected {% endif %}>E-mail</option>
                 </select>
                 <div class="flex flex-row items-center">
-                    <input id="email_filter_input" type="text" {% if email_filter %} value="{{ email_filter }}" {% endif %} class="inline-block {% if not filter or filter != "email" %}hidden{% endif %} appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2">
+                    <input placeholder="Enter a substring..." id="email_filter_input" type="text" {% if email_filter %} value="{{ email_filter }}" {% endif %} class="inline-block {% if not filter or filter != "email" %}hidden{% endif %} appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2">
                     <div id="date_filter_input" class="flex flex-row w-full {% if filter and filter == "email" %}hidden{% endif %}">
-                        <input type="date" id="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none max-w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-1 rtl:ml-1">
-                        <input type="date" id="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none max-w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
+                        <input type="date" id="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-1 rtl:ml-1">
+                        <input type="date" id="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
                     </div>
                     <div class="flex flex-row ml-auto">
                         <button type="reset" class="red-btn mx-2" onclick="window.open('/admin', '_self');">Reset</button>
