@@ -42,7 +42,7 @@
   <div class="mt-4 flex flex-row">
     <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{ auth.customize_class }}</button>
     <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.invite_student ('{{class_info.id}}')">Add student</button>
+    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.invite_student ('{{class_info.id}}')">{{ auth.invite_student }}</button>
     {% if is_beta_teacher %}
     <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{auth
       .class_stats}}</button>
@@ -54,22 +54,22 @@
   </div>
   <div class="mt-4">
   {% if invites %}
-      <h2>Pending invites</h2>
+      <h2>{{ auth.pending_invites }}</h2>
       <div class=" w-1/2 border-solid border-2 border-orange-400 rounded my-5 p-4">
         <table class="table-auto w-full">
         <thead>
             <tr class="font-bold text-left">
-                <th class="text-blue-600">Username</th>
-                <th class="text-blue-600">Invite date</th>
-                <th class="text-blue-600">Remove invite</th>
+                <th class="text-blue-600">{{auth.username}}</th>
+                <th class="text-blue-600">{{auth.invite_date}}</th>
+                <th class="text-blue-600">{{auth.remove_invite}}</th>
             </tr>
         </thead>
         <tbody>
         {% for invite in invites %}
             <tr>
-                <td>{{invite}}</td>
-                <td>hallo</td>
-                <td><a href="#" onclick="hedyApp.remove_student_invite();">Remove</a></td>
+                <td>{{invite.username}}</td>
+                <td>{{invite.timestamp}}</td>
+                <td><a href="#" onclick="hedyApp.remove_student_invite('{{invite.username}}');">Remove</a></td>
             </tr>
         {% endfor %}
         </tbody>

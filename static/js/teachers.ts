@@ -130,16 +130,28 @@ export function invite_student(class_id: string) {
           }),
           contentType: 'application/json',
           dataType: 'json'
-      }).done(function(response) {
-          return modal.alert(response.responseText);
+      }).done(function() {
+          location.reload();
       }).fail(function(err) {
           return modal.alert(err.responseText);
       });
   });
 }
 
-export function remove_student_invite() {
-    console.log("test...");
+export function remove_student_invite(username: string) {
+  $.ajax({
+    type: 'POST',
+    url: '/remove_invite_student',
+    data: JSON.stringify({
+      username: username
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function() {
+      location.reload();
+  }).fail(function(err) {
+      return modal.alert(err.responseText);
+  });
 }
 
 

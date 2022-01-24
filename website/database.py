@@ -314,7 +314,7 @@ class Database:
         return INVITATIONS.get({'username': username})
 
     def add_class_invite(self, username, class_id):
-        INVITATIONS.create({'username': username, 'class_id': class_id})
+        INVITATIONS.create({'username': username, 'class_id': class_id, 'timestamp': timems ()})
 
     def remove_class_invite(self, username):
         INVITATIONS.delete({'username': username})
@@ -324,7 +324,7 @@ class Database:
         result = []
         for invite in invites:
             if invite.get('class_id') == class_id:
-                result.append(invite.get('username'))
+                result.append(invite)
         return result if len(result) > 0 else None
 
     def remove_customizations_class(self, class_id, level):
