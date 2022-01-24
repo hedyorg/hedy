@@ -57,12 +57,28 @@ input:checked ~ .dot {
 https://github.com/ajaxorg/ace/issues/1104
 Force the gutter to be smaller, looks better from 1-999 lines (probably all of our programs)
 */
-.ace_gutter-layer {
+.ace_gutter {
+  width: 32px !important;
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+.ace_scroller {
+  left: 30px !important;
+}
+
+.ace_layer .ace_gutter-layer {
   /* original width is 48px */
   width: 32px !important;
+  margin-right: 0px;
+  padding-right: 0px;
 }
 
 .ace_gutter-layer > * {
   /* 48 - 32 = 16 */
-  margin-left: -16px;
+  margin-left: 4px;
+  margin-right: 0px;
+  padding-left: 4px;
+  padding-right: 0px;
+  text-align: left;
 }
