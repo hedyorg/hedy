@@ -103,7 +103,7 @@ class Database:
 
     def public_programs_for_user(self, username):
         programs = PROGRAMS.get_many({'username': username}, reverse=True)
-        return [x for x in [i if i.get('public') == 1 else None for i in programs] if x is not None]
+        return [p for p in programs if p.get('public') == 1]
 
     def program_by_id(self, id):
         """Get program by ID.
