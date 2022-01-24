@@ -1192,15 +1192,18 @@ def get_admin_page():
         return 'unauthorized', 403
 
     category = request.args.get('filter', default=None, type=str)
-    start_date = request.args.get('start', default=None, type=str)
-    end_date = request.args.get('end', default=None, type=str)
-
     filter = None if category == "null" else category
-    start_date = None if start_date == "null" else start_date
-    end_date = None if end_date == "null" else end_date
+    if filter == "email":
+        substring = request.args.get('substring', default=None, type=str)
+        substring = None if substring == "null" else substring
+    else:
+        start_date = request.args.get('start', default=None, type=str)
+        end_date = request.args.get('end', default=None, type=str)
+        start_date = None if start_date == "null" else start_date
+        end_date = None if end_date == "null" else end_date
 
     filtering = False
-    if start_date or end_date:
+    if substring or start_date or end_date:
         filtering = True
 
     # After hitting 1k users, it'd be wise to add pagination.
@@ -1213,6 +1216,9 @@ def get_admin_page():
         data['email_verified'] = not bool(data['verification_pending'])
         data['is_teacher'] = bool(data['is_teacher'])
         data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
+        if filtering and filter == "email":
+            if substring not in data['email']:
+                continue
         if filtering and filter == "created":
             if (start_date and utils.datetotimeordate(start_date) >= data['created']) or (end_date and utils.datetotimeordate(end_date) <= data['created']):
                 continue
