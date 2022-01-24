@@ -32,16 +32,8 @@ class Modal {
     $('#modal-copy').hide();
   }
 
-  public alert(message: string, timeoutMs?: number,  title: string = '', error?: boolean) {
-    if(title != '') {
-      $('#modal_alert_title').html(title);
-      $('#modal_alert_title').removeClass('hidden');
-    } else{
-      $('#modal-alert-title').html('');
-      $('#modal-alert-title').addClass('hidden');
-    }
-    $('#modal_alert_text').html(message);
-    if (!error) {
+  public alert(message: string, timeoutMs?: number, error?: boolean) {
+    if (error) {
       $('#modal_alert_container').removeClass('bg-green-100 border-green-400 text-green-700');
       $('#modal-alert-button').removeClass('text-green-500');
       $('#modal_alert_container').addClass('bg-red-100 border-red-400 text-red-700');
@@ -52,6 +44,7 @@ class Modal {
       $('#modal_alert_container').addClass('bg-green-100 border-green-400 text-green-700');
       $('#modal-alert-button').addClass('text-green-500');
     }
+    $('#modal_alert_text').html(message);
     this.show_alert();
     if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
     // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
