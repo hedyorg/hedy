@@ -1,6 +1,7 @@
 import {LANG_en} from './syntaxLang-en';
 import {LANG_es} from './syntaxLang-es';
 import {LANG_nl} from './syntaxLang-nl';
+import {LANG_ar} from './syntaxLang-ar';
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
@@ -46,6 +47,9 @@ if(localKeywordsEnable){
   switch(window.State.lang){
     case 'nl':
       currentLang = LANG_nl;
+      break;
+    case 'ar':
+      currentLang = LANG_ar;
       break;
     case 'es':
       currentLang = LANG_es;
