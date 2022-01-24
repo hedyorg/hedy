@@ -282,7 +282,7 @@ def routes (app, database, achievements):
         user = DATABASE.user_by_username(username)
         if not user:
             return g.auth_texts.get('student_not_existing'), 400
-        if user['username'] in Class['students']:
+        if 'students' in Class and user['username'] in Class['students']:
             return g.auth_texts.get('student_already_in_class'), 400
         if DATABASE.get_username_invite(user['username']):
             return g.auth_texts.get('student_already_invite'), 400
