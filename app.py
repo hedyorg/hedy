@@ -312,8 +312,13 @@ def enrich_context_with_user_info():
             data['user_achievements'] = user_achievements
         user_invites = DATABASE.get_username_invite(user.get('username'))
         if user_invites:
-            data['user_invites'] = user_invites
-            data['user_messages'] += 1
+            Class = DATABASE.get_class(user_invites['class_id'])
+            if Class:
+                user_invites['class_name'] = Class.get('name')
+                user_invites['teacher'] = Class.get('teacher')
+                user_invites['join_link'] = Class.get('link')
+                data['user_invites'] = user_invites
+                data['user_messages'] += 1
     return data
 
 @app.context_processor

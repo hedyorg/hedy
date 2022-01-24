@@ -69,7 +69,7 @@
             <tr>
                 <td>{{invite.username}}</td>
                 <td>{{invite.timestamp}}</td>
-                <td><a href="#" onclick="hedyApp.remove_student_invite('{{invite.username}}', '{{ class_info.id }}');">Remove</a></td>
+                <td><a href="#" onclick="hedyApp.remove_student_invite('{{invite.username}}', '{{ class_info.id }}');">{{auth.remove}}</a></td>
             </tr>
         {% endfor %}
         </tbody>
