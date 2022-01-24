@@ -573,10 +573,16 @@ function change_shared (shared: boolean, index: number) {
   if (shared) {
     $('#non_public_button_container_' + index).hide();
     $('#public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).show();
   } else {
     $('#modal-copy-button').hide();
     $('#public_button_container_' + index).hide();
     $('#non_public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).hide();
+
+    // In the theoretical situation that a user unshares their favourite program -> Change UI
+    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
+    $('#favourite_program_container_' + index).addClass('text-white');
   }
 }
 
@@ -647,6 +653,34 @@ export function delete_program(id: string, index: number) {
           $('#program_' + index).remove();
       }
       modal.alert (auth.texts['delete_success'], 3000);
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    });
+  });
+}
+
+function set_favourite(index: number) {
+    $('.favourite_program_container').removeClass('text-yellow-400');
+    $('.favourite_program_container').addClass('text-white');
+
+    $('#favourite_program_container_' + index).removeClass('text-white');
+    $('#favourite_program_container_' + index).addClass('text-yellow-400');
+}
+
+export function set_favourite_program(id: string, index: number) {
+  modal.confirm (auth.texts['favourite_confirm'], function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/set_favourite',
+      data: JSON.stringify({
+        id: id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function() {
+      set_favourite(index)
+      modal.alert (auth.texts['favourite_success'], 3000);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
@@ -1205,6 +1239,12 @@ export function change_language(lang: string) {
     });
 }
 
+export function select_profile_image(image: number) {
+  $('.profile_image').removeClass("border-2 border-blue-600");
+  $('#profile_image_' + image).addClass("border-2 border-blue-600");
+  $('#profile_picture').val(image);
+}
+
 export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
@@ -1222,4 +1262,3 @@ export function filter_admin() {
     window.open('?filter=' + filter + "&start=" + start_date + "&end=" + end_date, "_self");
   }
 }
-

@@ -66,6 +66,13 @@ export const auth = {
       });
     });
   },
+  destroy_public: function () {
+    modal.confirm (auth.texts['are_you_sure'], function () {
+      $.ajax ({type: 'POST', url: '/auth/destroy_public'}).done (function () {
+        auth.redirect ('programs');
+      });
+    });
+  },
   error: function (message: string, element?: string | null, id?: string) {
     $ (id || '#error').html (message);
     $ (id || '#error').css ('display', 'block');
@@ -227,6 +234,30 @@ export const auth = {
         $ ('#password_repeat').val ('');
         delete auth.reset;
         auth.redirect ('login');
+      }).fail (function (response) {
+        if (response.responseText) {
+          return auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
+        }
+      });
+    }
+
+    if (op === 'public_profile') {
+      const data = {
+        image: $('#profile_picture').val() ? $('#profile_picture').val():  undefined,
+        personal_text: $('#personal_text').val() ? $('#personal_text').val():  undefined,
+        favourite_program: $('#favourite_program').val() ? $('#favourite_program').val():  undefined
+      }
+
+      $.ajax ({
+        type: 'POST',
+        url: '/auth/public_profile',
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
+        auth.success (auth.texts['public_profile_updated']);
+        $('#public_profile_redirect').show();
       }).fail (function (response) {
         if (response.responseText) {
           return auth.error(response.responseText);
