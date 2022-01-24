@@ -1461,8 +1461,6 @@ def share_unshare_program(user):
     if not isinstance(body.get('public'), bool):
         return 'public must be a boolean', 400
 
-    print(body)
-
     result = DATABASE.program_by_id(body['id'])
     if not result or result['username'] != user['username']:
         return 'No such program!', 404
