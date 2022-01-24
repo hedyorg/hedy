@@ -52,10 +52,14 @@
                 <select id="admin_filter_category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
                     <option value="created" {% if filter and filter == "created" %} selected {% endif %}>Created</option>
                     <option value="last_login" {% if filter and filter == "last_login" %} selected {% endif %}>Last login</option>
+                    <option value="email" {% if filter and filter == "email" %} selected {% endif %}>E-mail</option>
                 </select>
                 <div class="flex flex-row items-center">
-                    <input type="date" id="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
-                    <input type="date" id="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 mx-2">
+                    <div id="date_filter_input" class="flex flex-row w-full">
+                        <input type="date" id="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
+                        <input type="date" id="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 mx-2">
+                    </div>
+                    <input id="email_filter_input" type="text" {% if email_filter %} value="{{ email_filter }}" {% endif %} class="inline-block hidden appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2">
                     <div class="flex flex-row ml-auto">
                         <button type="reset" class="red-btn" onclick="window.open('/admin', '_self');">Reset</button>
                         <button type="submit" class="green-btn ml-4 px-4">Filter</button>
@@ -113,6 +117,15 @@
                 $('#' + attribute + '_header').show();
                 $('.' + attribute + '_cell').show();
             }
+        });
+        $('#admin_filter_category').change(function() {
+           if ($('#admin_filter_category').val() == "email") {
+               $('#date_filter_input').hide();
+               $('#email_filter_input').show();
+           } else {
+               $('#date_filter_input').show();
+               $('#email_filter_input').hide();
+           }
         });
     });
 </script>
