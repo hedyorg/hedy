@@ -20,7 +20,7 @@ class Modal {
   }
 
   public show_alert() {
-    $('#modal_alert').fadeIn(1000);
+    $('#modal-alert').fadeIn(1000);
   }
 
   public hide() {
@@ -28,8 +28,9 @@ class Modal {
     $('#modal-content').hide();
     $('#modal-prompt').hide();
     $('#modal-confirm').hide();
-    $('#modal_alert').hide();
+    $('#modal-alert').hide();
     $('#modal-copy').hide();
+    $('#modal-repair').hide();
   }
 
   public alert(message: string, timeoutMs?: number, error?: boolean) {
@@ -67,6 +68,26 @@ class Modal {
     $('#modal-copy-text').html(message);
     this.show();
     $('#modal-copy').show();
+    // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
+    if(this._timeout) {
+      clearTimeout(this._timeout);
+      this._timeout = undefined;
+    }
+    if (timeoutMs) this._timeout = setTimeout(() => this.hide(), timeoutMs);
+  }
+
+  public repair(message: string, timeoutMs?: number,  title: string = '') {
+    if(title != '') {
+      $('#repair_modal_title').html(title);
+      $('#repair_modal_text').removeClass('hidden');
+    }
+    else{
+      $('#repair_modal_title').html('');
+      $('#repair_modal_text').addClass('hidden');
+    }
+    $('#repair_modal_text').html(message);
+    this.show_alert();
+    if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
     // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
     if(this._timeout) {
       clearTimeout(this._timeout);

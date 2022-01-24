@@ -1041,11 +1041,9 @@ function showSuccesMessage(){
   success.show(allsuccessmessages[randomnum]);
 }
 function createModal(level:number ){
-  console.log(level);
-  //let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
-  //let title = ErrorMessages['Program_repair'];
-  //Todo: TB -> We should use another modal for the repair pop-up!
-  //modal.alert(editor, 0, title);
+  let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
+  let title = ErrorMessages['Program_repair'];
+  modal.repair(editor, 0, title);
 }
  function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     const editor = ace.edit(element);
