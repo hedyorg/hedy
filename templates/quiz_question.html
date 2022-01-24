@@ -60,7 +60,7 @@
                 <div class="flex flex-col option-col">
 
                     {% for row in question.mp_choice_options|batch(2) %}
-                        <div class="flex flex-row option-row"
+                        <div class="flex flex-row option-row">
                         {% for column in row %}
                             {% if question_options[counter.value].char_index == chosen_option %}
                                 <div class="option-block incorrect-option p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row ">
@@ -81,13 +81,13 @@
                         {% elif counter.value == 5 %}
                             {{ triangle_6|safe }}
                         {% endif %}
-                        <div class="text-code-middle">
                             {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                                <code class="text-l">{{ question_options[counter.value].code | nl2br }}</code>
+                                <pre>
+                                    <code class="block text-l">{{ question_options[counter.value].code | nl2br }}</code>
+                                </pre>
                             {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None' %}
-                                <p class="text-l font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
+                                <p class="option-text text-l font-bold align-top"> {{ question_options[counter.value].option_text | nl2br }}</p>
                             {% endif %}
-                        </div>
                         <button class="submit-button" type="submit" name="submit-button"
                                 value="{{ question_options[counter.value].char_index }}">
                             {% if is_last_attempt %}
@@ -97,11 +97,14 @@
                             {% endif %}
                         </button>
                         </div>
+
+
+
                             {% set counter.value = counter.value + 1 %}
                         {% endfor %}
                     </div>
                     {% endfor %}
-                </div>
+                    </div>
         </form>
 
     </div>

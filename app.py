@@ -947,7 +947,7 @@ def submit_answer(level_source, question_nr, attempt):
         # Not a correct answer. You can try again if you haven't hit your max attempts yet.
         if attempt >= quiz.MAX_ATTEMPTS:
             quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-            return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang))
+            return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang, ))
 
     # Redirect to the display page to try again
     return redirect(url_for('get_quiz', chosen_option=chosen_option, level_source=level_source, question_nr=question_nr,
@@ -999,6 +999,8 @@ def quiz_feedback(level_source, question_nr):
                            wrong_answer_hint=wrong_answer_hint,
                            index_option=index_option,
                            correct_option=correct_option,
+                           cross=quiz_svg_icons.icons['cross'],
+                           check=quiz_svg_icons.icons['check'],
                            lang=g.lang)
 
 
