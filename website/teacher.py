@@ -273,7 +273,7 @@ def routes (app, database, achievements):
 
         user = DATABASE.user_by_username(body['username'])
         if not user:
-            return "User doesn't exist!", 400
+            return "Student doesn't exist", 400
         if user['username'] in Class['students']:
             return "Student already in your class", 400
 

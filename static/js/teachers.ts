@@ -131,14 +131,9 @@ export function invite_student(class_id: string) {
           contentType: 'application/json',
           dataType: 'json'
       }).done(function(response) {
-          console.log(response);
+          return modal.alert(response.responseText);
       }).fail(function(err) {
-          console.log(err);
-          // Todo: We want to return two types of errors:
-          /*
-            -   This student doesn't exist
-            -   This student is already in your class
-           */
+          return modal.alert(err.responseText);
       });
   });
 }
