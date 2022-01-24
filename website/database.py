@@ -33,6 +33,7 @@ CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey
 #       "hide_prev_level": false,
 #       "hide_next_level": false
 #     }
+INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', sort_key='class_id')
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 
@@ -308,6 +309,9 @@ class Database:
 
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
+
+    def add_class_invite(self, username, class_id):
+        INVITATIONS.create({'username': username, 'id': class_id})
 
     def remove_customizations_class(self, class_id, level):
         CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
