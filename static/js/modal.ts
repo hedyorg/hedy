@@ -36,8 +36,7 @@ class Modal {
     if(title != '') {
       $('#modal_alert_title').html(title);
       $('#modal_alert_title').removeClass('hidden');
-    }
-    else{
+    } else{
       $('#modal-alert-title').html('');
       $('#modal-alert-title').addClass('hidden');
     }
