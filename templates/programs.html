@@ -6,29 +6,42 @@
   {% if from_user %}<h2>{{from_user}}'s recent programs</h2>
   {% else %}<h2>{{texts.recent}}</h2>{% endif %}
   <div class="programs w-full">
+  <!-- First: Check if we have a public profile and favourite program
+  If so, show this one first
+  Add a check to the for-loop to prevent duplicate showing
+  However, how do we perform this on selecting another favourite program?
+  As this is currently a front-end re-fresh task it is difficult to alter the program ordering without re-load
+  -->
   {% for program in programs %}
     <div id="program_{{ loop.index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
         <h3 id="submitted_header_{{ loop.index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{ texts.submitted_header }}</h3>
-        <table class="table-auto mb-4">
-        <thead>
-            <tr class="text-left">
-                <th class="w-1/4 text-blue-600">{{ texts.title }}</th>
-                <th class="w-1/4 text-blue-600">{{ texts.level }}</th>
-                <th class="w-1/4 text-blue-600">{{ texts.last_edited }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-              {% if program.adventure_name %}
-                <td>{{ui.adventure}}: {{adventures.get (program.adventure_name, {}).name or program.adventure_name}} - {{program.name}}</td>
-              {% else %}
-                <td>{{program.name}}</td>
-              {% endif %}
-              <td>{{ texts.level }} {{ program.level }}</td>
-              <td>{{ program.date }}</td>
-            </tr>
-        </tbody>
-        </table>
+        <div class="flex flex-row">
+            <table class="table-auto mb-4 w-1/2">
+            <thead>
+                <tr class="text-left">
+                    <th class="w-1/4 text-blue-600">{{ texts.title }}</th>
+                    <th class="w-1/4 text-blue-600">{{ texts.level }}</th>
+                    <th class="w-1/4 text-blue-600">{{ texts.last_edited }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  {% if program.adventure_name %}
+                    <td>{{ui.adventure}}: {{adventures.get (program.adventure_name, {}).name or program.adventure_name}} - {{program.name}}</td>
+                  {% else %}
+                    <td>{{program.name}}</td>
+                  {% endif %}
+                  <td>{{ texts.level }} {{ program.level }}</td>
+                  <td>{{ program.date }}</td>
+                </tr>
+            </tbody>
+            </table>
+            {% if public_profile %}
+                <div class="ml-auto favourite_program_container {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
+                    <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }});" aria-hidden="true"></i>
+                </div>
+            {% endif %}
+        </div>
         <div class="w-3/4 border-solid border-2 rounded w-1/2 p-2 mb-4">
           <pre>{{program.code | truncate (50) }}</pre>
         </div>

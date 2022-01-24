@@ -688,6 +688,7 @@ def programs_page(request):
     adventures = load_adventure_for_language(g.lang)
 
     result = DATABASE.programs_for_user(from_user or username)
+    public_profile = DATABASE.get_public_profile_settings(username)
     programs = []
     now = timems()
     for item in result:
@@ -698,7 +699,8 @@ def programs_page(request):
              'public': item.get('public')})
 
     return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
-                           current_page='programs', from_user=from_user, adventures=adventures)
+                           current_page='programs', from_user=from_user, adventures=adventures,
+                           public_profile=public_profile)
 
 
 @app.route('/logs/query', methods=['POST'])
@@ -1104,8 +1106,7 @@ def main_page(page):
     if page == 'favicon.ico':
         abort(404)
 
-    if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
-        print('Hier komen we!')
+    if page in ['signup', 'login', 'my-profile', 'recover', 'reset']:
         return auth_templates(page, hedyweb.get_page_title(page))
 
     if page == "my-achievements":
@@ -1192,15 +1193,18 @@ def get_admin_page():
         return 'unauthorized', 403
 
     category = request.args.get('filter', default=None, type=str)
+    category = None if category == "null" else category
+
+    substring = request.args.get('substring', default=None, type=str)
     start_date = request.args.get('start', default=None, type=str)
     end_date = request.args.get('end', default=None, type=str)
 
-    filter = None if category == "null" else category
+    substring = None if substring == "null" else substring
     start_date = None if start_date == "null" else start_date
     end_date = None if end_date == "null" else end_date
 
     filtering = False
-    if start_date or end_date:
+    if substring or start_date or end_date or category == "all":
         filtering = True
 
     # After hitting 1k users, it'd be wise to add pagination.
@@ -1213,12 +1217,15 @@ def get_admin_page():
         data['email_verified'] = not bool(data['verification_pending'])
         data['is_teacher'] = bool(data['is_teacher'])
         data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
-        if filtering and filter == "created":
+        if filtering and category == "email":
+            if substring not in data['email']:
+                continue
+        if filtering and category == "created":
             if (start_date and utils.datetotimeordate(start_date) >= data['created']) or (end_date and utils.datetotimeordate(end_date) <= data['created']):
                 continue
         if data['last_login']:
             data['last_login'] = utils.datetotimeordate(utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
-            if filtering and filter == "last_login":
+            if filtering and category == "last_login":
                 if (start_date and utils.datetotimeordate(start_date) >= data['last_login']) or (end_date and utils.datetotimeordate(end_date) <= data['last_login']):
                     continue
         userdata.append(data)
@@ -1230,7 +1237,7 @@ def get_admin_page():
         counter = counter + 1
 
     return render_template('admin.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
-                           filter=filter, start_date=start_date, end_date=end_date,
+                           filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
                            program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 
@@ -1368,6 +1375,11 @@ def delete_program(user):
     DATABASE.delete_program_by_id(body['id'])
     DATABASE.increase_user_program_count(user['username'], -1)
 
+    # This only happens in the situation were a user deletes their favourite program -> Delete from public profile
+    public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
+    if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
+        DATABASE.set_favourite_program(user['username'], None)
+
     achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "do_you_have_copy")
     if achievement:
         return {'achievement': achievement}, 200
@@ -1459,6 +1471,11 @@ def share_unshare_program(user):
     if not result or result['username'] != user['username']:
         return 'No such program!', 404
 
+    #This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
+    public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
+    if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
+        DATABASE.set_favourite_program(user['username'], None)
+
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
     achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
     if achievement:
@@ -1487,6 +1504,21 @@ def submit_program(user):
         return jsonify({"achievements": ACHIEVEMENTS.get_earned_achievements()})
     return jsonify({})
 
+@app.route('/programs/set_favourite', methods=['POST'])
+@requires_login
+def set_favourite_program(user):
+    body = request.json
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('id'), str):
+        return 'id must be a string', 400
+
+    result = DATABASE.program_by_id(body['id'])
+    if not result or result['username'] != user['username']:
+        return 'No such program!', 404
+
+    DATABASE.set_favourite_program(user['username'], body['id'])
+    return jsonify({})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
@@ -1547,6 +1579,34 @@ def update_yaml():
     return Response(dump_yaml_rt(data),
                     mimetype='application/x-yaml',
                     headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
+
+
+@app.route('/user/<username>')
+def public_user_page(username):
+    user = DATABASE.user_by_username(username.lower())
+    if not user:
+        return utils.error_page(error=404, ui_message='user_not_private')
+    user_public_info = DATABASE.get_public_profile_settings(username)
+    if user_public_info:
+        user_programs = DATABASE.public_programs_for_user(username)
+        user_achievements = DATABASE.progress_by_username(username)
+
+        favourite_program = None
+        if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
+            favourite_program = DATABASE.program_by_id(user_public_info['favourite_program'])
+        if len(user_programs) >= 5:
+            user_programs = user_programs[:5]
+
+        last_achieved = None
+        if 'achieved' in user_achievements:
+            last_achieved = user_achievements['achieved'][-1]
+
+        return render_template('public-page.html', user_info=user_public_info,
+                               favourite_program=favourite_program,
+                               programs=user_programs,
+                               last_achieved=last_achieved,
+                               user_achievements=user_achievements)
+    return utils.error_page(error=404, ui_message='user_not_private')
 
 
 @app.route('/invite/<code>', methods=['GET'])

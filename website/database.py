@@ -35,6 +35,7 @@ CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey
 #     }
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
+PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='username')
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -99,6 +100,10 @@ class Database:
         Returns: [{ code, name, program, level, adventure_name, date }]
         """
         return PROGRAMS.get_many({'username': username}, reverse=True)
+
+    def public_programs_for_user(self, username):
+        programs = PROGRAMS.get_many({'username': username}, reverse=True)
+        return [p for p in programs if p.get('public') == 1]
 
     def program_by_id(self, id):
         """Get program by ID.
@@ -407,6 +412,27 @@ class Database:
 
     def increase_user_submit_count(self, username):
         ACHIEVEMENTS.update({'username': username}, {'submitted_programs': dynamo.DynamoIncrement(1)})
+
+    def update_public_profile(self, username, data):
+        data['username'] = username
+        PUBLIC_PROFILES.put(data)
+
+    def set_favourite_program(self, username, program_id):
+        data = PUBLIC_PROFILES.get({'username': username})
+        if data and 'favourite_program' in data:
+            data['favourite_program'] = program_id
+            self.update_public_profile(username, data)
+            return True
+        # We can't set a favourite program without a public page!
+        # Todo: In the feature we might enable users to set any program as favourite -> requires some work
+        return False
+
+
+    def get_public_profile_settings(self, username):
+        return PUBLIC_PROFILES.get({'username': username})
+
+    def forget_public_profile(self, username):
+        PUBLIC_PROFILES.delete({'username': username})
 
     def add_program_stats(self, id, level, exception):
         key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
