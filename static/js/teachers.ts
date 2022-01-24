@@ -126,7 +126,7 @@ export function invite_student(class_id: string) {
           url: '/invite_student',
           data: JSON.stringify({
             username: username,
-            class_name: class_id
+            class_id: class_id
           }),
           contentType: 'application/json',
           dataType: 'json'

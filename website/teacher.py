@@ -196,7 +196,7 @@ def routes (app, database, achievements):
     @requires_login
     def get_class_info(user, class_id):
         if not is_teacher(user):
-            return utils.error_page_403(error=403, ui_message='retrieve_class')
+            return utils.error_page(error=403, ui_message='retrieve_class')
         Class = DATABASE.get_class(class_id)
         if not Class or Class['teacher'] != user['username']:
             return utils.error_page(error=404,  ui_message='no_such_class')
@@ -252,6 +252,31 @@ def routes (app, database, achievements):
         if achievement:
             return {'achievement': achievement}, 200
         return {}, 200
+
+    @app.route('/invite_student', methods=['POST'])
+    @requires_login
+    def invite_student(user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return 'body must be an object', 400
+        if not isinstance(body.get('username'), str):
+            return 'username must be a string', 400
+        if not isinstance(body.get('class_id'), str):
+            return 'class id must be a string', 400
+
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_class')
+        Class = DATABASE.get_class(body['class_id'])
+        if not Class or Class['teacher'] != user['username']:
+            return utils.error_page(error=404, ui_message='no_such_class')
+
+        user = DATABASE.user_by_username(body['username'])
+        if not user:
+            return "User doesn't exist!", 400
+        if user['username'] in Class['students']:
+            return "Student already in your class", 400
+
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):
