@@ -178,16 +178,10 @@ def atomic_write_file(filename, mode='wb'):
 def mstoisostring(date):
     unix_ts = date / 1000
     dt = datetime.datetime.fromtimestamp(unix_ts)
-
-    print('dt', dt)
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
 
 def datetotimeordate(date):
-    datestamp = date.split("T")[0]
-    if (datestamp == datetime.date.fromtimestamp(time.time()).isoformat()):
-        return date.split("T")[1]
-    else:
-        return date.replace("T", " ")
+    return date.replace("T", " ")
 
 # https://stackoverflow.com/a/2257449
 def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
@@ -200,11 +194,9 @@ def markdown_to_html_tags(markdown):
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all()
 
-def page_403(page_error=None, ui_message=None, menu=True):
-    return render_template("403.html", menu=menu, page_error=page_error or g.ui_texts.get(ui_message) or ''), 403
-
-def page_404(page_error=None, ui_message=None, menu=True):
-    return render_template("404.html", menu=menu, page_error=page_error or g.ui_texts.get(ui_message) or ''), 404
-
-def page_500(page_error=None, ui_message=None, menu=True):
-    return render_template("500.html", menu=menu, page_error=page_error or g.ui_texts.get(ui_message) or ''), 500
+def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None):
+    if error not in [403, 404, 500]:
+        error = 404
+    return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
+                           page_error=page_error or g.ui_texts.get(ui_message) or '',
+                           default=g.ui_texts.get("default_" + str(error))), error

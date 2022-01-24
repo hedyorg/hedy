@@ -10,12 +10,18 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
+var StopExecution = false;
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
   if (!window.State) {
     window.State = {};
   }
+
+  // Set const value to determine the current page direction -> useful for ace editor settings
+  const dir = $("#main_container").attr("dir");
+
 
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
@@ -28,6 +34,10 @@ export let theModalEditor: AceAjax.Editor;
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     exampleEditor.setOptions({ minLines: 2 });
+
+    if (dir === "rtl") {
+         exampleEditor.setOptions({ rtl: true });
+    }
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
@@ -75,6 +85,10 @@ export let theModalEditor: AceAjax.Editor;
       editor.on('blur', function(_e: Event) {
         storage.setItem(levelKey, editor.getValue());
       });
+
+      if (dir === "rtl") {
+         editor.setOptions({ rtl: true });
+      }
 
       // If prompt is shown and user enters text in the editor, hide the prompt.
       editor.on('change', function () {
@@ -191,8 +205,8 @@ function clearErrors(editor: AceAjax.Editor) {
 
 export function runit(level: string, lang: string, cb: () => void) {
   if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
-
   if (reloadOnExpiredSession ()) return;
+  StopExecution = true;
 
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -240,10 +254,13 @@ export function runit(level: string, lang: string, cb: () => void) {
         }
         return;
       }
-        runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
-        console.log(err)
-        error.show(ErrorMessages['Execute_error'], err.message);
-        reportClientError(level, code, err.message);
+        runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
+        // If it is an error we throw due to program execution while another is running -> don't show and log it
+        if (!(err.message == "\"program_interrupt\"")) {
+          console.log(err);
+          error.show(ErrorMessages['Execute_error'], err.message);
+          reportClientError(level, code, err.message);
+        }
       });
     }).fail(function(xhr) {
       console.error(xhr);
@@ -261,11 +278,11 @@ export function runit(level: string, lang: string, cb: () => void) {
   }
 }
 function showBulb(level: string){
-  let parsedlevel = parseInt(level);
+  const parsedlevel = parseInt(level)
   if(parsedlevel <= 2){
-    const repair_button = document.getElementById("repair_button")!;
-    repair_button.style.visibility = "visible";
-    repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(parsedlevel)};
+    const repair_button = $('#repair_button');
+    repair_button.show();
+    repair_button.attr('onclick', 'hedyApp.modalStepOne(' + parsedlevel + ');event.preventDefault();');
   }
 
 }
@@ -325,8 +342,8 @@ function showAchievement(achievement: any[]){
 }
 
 function removeBulb(){
-    const repair_button = document.getElementById("repair_button")!;
-    repair_button.style.visibility = "hidden";
+    const repair_button = $('#repair_button');
+    repair_button.hide();
 }
 
 export function fix_code(level: string, lang: string){
@@ -556,10 +573,16 @@ function change_shared (shared: boolean, index: number) {
   if (shared) {
     $('#non_public_button_container_' + index).hide();
     $('#public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).show();
   } else {
     $('#modal-copy-button').hide();
     $('#public_button_container_' + index).hide();
     $('#non_public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).hide();
+
+    // In the theoretical situation that a user unshares their favourite program -> Change UI
+    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
+    $('#favourite_program_container_' + index).addClass('text-white');
   }
 }
 
@@ -630,6 +653,34 @@ export function delete_program(id: string, index: number) {
           $('#program_' + index).remove();
       }
       modal.alert (auth.texts['delete_success'], 3000);
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    });
+  });
+}
+
+function set_favourite(index: number) {
+    $('.favourite_program_container').removeClass('text-yellow-400');
+    $('.favourite_program_container').addClass('text-white');
+
+    $('#favourite_program_container_' + index).removeClass('text-white');
+    $('#favourite_program_container_' + index).addClass('text-yellow-400');
+}
+
+export function set_favourite_program(id: string, index: number) {
+  modal.confirm (auth.texts['favourite_confirm'], function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/set_favourite',
+      data: JSON.stringify({
+        id: id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function() {
+      set_favourite(index)
+      modal.alert (auth.texts['favourite_success'], 3000);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
@@ -727,11 +778,10 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean, cb: () => void) {
+function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
-  if (! window.State.programsInExecution) window.State.programsInExecution = 0;
-  window.State.programsInExecution++;
+  window.State.programsInExecution = 1;
 
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -766,18 +816,27 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     __future__: Sk.python3,
     timeoutMsg: function () {
       pushAchievement("hedy_hacking");
-      return ErrorMessages ['Program_too_long']},
+      return ErrorMessages ['Program_too_long']
+    },
     // Give up after three seconds of execution, there might be an infinite loop.
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
       // const level = window.State.level;
-      return ((hasTurtle) ? 20000 : 3000);
+      return ((hasTurtle || hasSleep) ? 20000 : 3000);
     }) ()
   });
 
-  return Sk.misceval.asyncToPromise(function () {
-    return Sk.importMainWithBody("<stdin>", false, code, true);
-  }).then(function(_mod) {
+  StopExecution = false;
+  return Sk.misceval.asyncToPromise( () =>
+    Sk.importMainWithBody("<stdin>", false, code, true), {
+      "*": () => {
+        if (StopExecution) {
+          window.State.programsInExecution = 0;
+          throw "program_interrupt";
+        }
+      }
+    }
+   ).then(function(_mod) {
     console.log('Program executed');
 
     // Check if the program was correct but the output window is empty: Return a warning
@@ -837,7 +896,6 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
     return new Promise(function(ok) {
-
       window.State.disable_run = true;
       $ ('#runit').css('background-color', 'gray');
 
@@ -1144,6 +1202,7 @@ export function toggle_developers_mode(example_programs: boolean) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
+    theGlobalEditor.resize();
   } else {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
@@ -1178,4 +1237,24 @@ export function change_language(lang: string) {
     }).fail(function(xhr) {
       console.error(xhr);
     });
+}
+
+export function select_profile_image(image: number) {
+  $('.profile_image').removeClass("border-2 border-blue-600");
+  $('#profile_image_' + image).addClass("border-2 border-blue-600");
+  $('#profile_picture').val(image);
+}
+
+export function filter_programs() {
+  const level = $('#explore_page_level').val();
+  const adventure = $('#explore_page_adventure').val();
+  window.open('?level=' + level + "&adventure=" + adventure, "_self");
+}
+
+export function filter_admin() {
+  const filter = $('#admin_filter_category').val();
+  const start_date = $('#admin_start_date').val();
+  console.log(start_date)
+  const end_date = $('#admin_end_date').val();
+  window.open('?filter=' + filter + "&start=" + start_date + "&end=" + end_date, "_self");
 }

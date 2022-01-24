@@ -1,6 +1,7 @@
 import hedy
 import textwrap
 from test_level_01 import HedyTester
+from parameterized import parameterized
 
 class TestsLevel18(HedyTester):
     level = 18
@@ -33,10 +34,11 @@ class TestsLevel18(HedyTester):
           expected=expected,
           extra_check_function=self.is_not_turtle()
         )
-
-    def test_input(self):
-        code = textwrap.dedent("""\
-        leeftijd is input('Hoe oud ben jij?')
+        
+    @parameterized.expand(['=', 'is'])
+    def test_input(self, assigment):
+        code = textwrap.dedent(f"""\
+        leeftijd {assigment} input('Hoe oud ben jij?')
         print(leeftijd)""")
         expected = textwrap.dedent("""\
         leeftijd = input(f'Hoe oud ben jij?')
@@ -204,6 +206,30 @@ class TestsLevel18(HedyTester):
           expected=expected,
           extra_check_function=self.is_not_turtle()
       )
+    
+    def test_input_without_text_inside(self):
+      code = "x = input()"
+      expected = textwrap.dedent("""\
+      x = input(f'')
+      try:
+        x = int(x)
+      except ValueError:
+        try:
+          x = float(x)
+        except ValueError:
+          pass""")
+      self.multi_level_tester(
+        code=code,
+        expected=expected,
+        extra_check_function=self.is_not_turtle()
+      )
+    
+    def test_print_without_text_inside(self):
+      self.multi_level_tester(
+        code="print()",
+        expected="print(f'')",
+        extra_check_function=self.is_not_turtle()
+      )
 
     # negative tests
 
@@ -230,3 +256,9 @@ class TestsLevel18(HedyTester):
       # deze extra check functie kan nu niet mee omdat die altijd op result werkt
       # evt toch splitsen in 2 (pos en neg?)
       # self.assertEqual('name', context.exception.arguments['name'])
+    
+    def test_input_without_argument(self):
+      self.multi_level_tester(
+        code="name is input",
+        exception=hedy.exceptions.IncompleteCommandException
+      )   

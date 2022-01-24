@@ -8,6 +8,8 @@ from os import path
 
 TRANSLATOR_LOOKUP = {}
 
+KEYWORD_LANGUAGES = ['en', 'nl', 'es']
+
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
@@ -20,6 +22,14 @@ def keywords_to_dict(to_lang="nl"):
 
     return command_combinations
 
+def all_keywords_to_dict():
+    """Return a dictionary where each key is a list of the translations of that keyword. Used for testing"""    
+    keyword_list = []
+    for lang in KEYWORD_LANGUAGES:
+        commands = keywords_to_dict(lang)
+        keyword_list.append(commands)
+    all_translations = {k: [d[k] for d in keyword_list] for k in keyword_list[0]}
+    return all_translations
 
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
@@ -248,6 +258,12 @@ class ConvertToLang6(ConvertToLang5):
         var = args[0]
         var_list = args[1]
         return var + " " + self.keywords["is"] + " " + var_list + " " + self.keywords["at"]  + " " + args[2]
+    
+    def equality_check_is(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + " ".join([str(c) for c in args[1:]]) + " "
+
+    def equality_check_equals(self, args):
+        return args[0] + " = ".join([str(c) for c in args[1:]]) + " "
 
 @hedy_translator(level=7)
 class ConvertToLang7(ConvertToLang6):
@@ -269,8 +285,11 @@ class ConvertToLang8(ConvertToLang7):
     def elses(self, args):
         return self.keywords["else"] + indent(args[0:])
 
-    def equality_check(self, args):
+    def equality_check_is(self, args):
         return args[0] + " " + self.keywords["is"] + " " + " ".join([str(c) for c in args[1:]])
+
+    def equality_check_equals(self, args):
+        return args[0] + " = " + " ".join([str(c) for c in args[1:]])
 
     def end_block(self, args):
         return args
@@ -319,6 +338,9 @@ class ConvertToLang13(ConvertToLang12):
 
 @hedy_translator(level=14)
 class ConvertToLang14(ConvertToLang13):
+
+    def equality_check_dequals(self, args):
+       return args[0] + " == " + " ".join([str(c) for c in args[1:]])     
 
     def bigger(self, args):
         return args[0] + " > " + args[1]
@@ -381,16 +403,31 @@ class ConvertToLang17(ConvertToLang16):
 @hedy_translator(level=18)
 class ConvertToLang18(ConvertToLang17):
 
-    def input(self, args):
+    def input_is(self, args):
         var = args[0]
         remaining_args = args[1:]
         return var + " " + self.keywords["is"] + " " + self.keywords["input"] + "(" + ''.join(remaining_args) + ")"
+
+    def input_equals(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return var + " = " + self.keywords["input"] + "(" + ''.join(remaining_args) + ")"
+    
+    def input_is_empty_brackets(self, args):
+        var = args[0]        
+        return var + " " + self.keywords["is"] + " " + self.keywords["input"] + "()"
+
+    def input_equals_empty_brackets(self, args):
+        var = args[0]
+        return var + " = " + self.keywords["input"] + "()"
 
     def for_loop(self, args):
         return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + \
                f'{self.keywords["range"]}({args[1]},{args[2]})' + ":" + indent(args[3:])
 
-
     def print(self, args):
         argument_string = ''.join(args)
         return f'{self.keywords["print"]}({argument_string})'
+
+    def print_empty_brackets(self, args):
+        return f'{self.keywords["print"]}()'

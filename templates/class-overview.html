@@ -41,12 +41,17 @@
   <p>{{auth.class_link}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
   <div class="mt-4 flex flex-row">
     <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{ auth.customize_class }}</button>
-    <button class="green-btn mx-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
-    <button class="green-btn" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
+    <button class="green-btn ml-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
+    <button class="green-btn ml-4" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link
+      }}</button>
+    {% if is_beta_teacher %}
+    <button class="green-btn ml-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{auth
+      .class_stats}}</button>
+    {% endif %}
   </div>
   <div class="mt-4 flex flex-row">
     <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{auth.back_to_class_list}}</button>
-    <button class="red-btn ml-4" onclick="hedyApp.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
+    <button class="red-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
   </div>
 </div>
 {% endblock %}

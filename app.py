@@ -2,8 +2,8 @@
 import sys
 from website.yaml_file import YamlFile
 
-if (sys.version_info.major < 3 or sys.version_info.minor < 6):
-    print('Hedy requires Python 3.6 or newer to run. However, your version of Python is',
+if (sys.version_info.major < 3 or sys.version_info.minor < 7):
+    print('Hedy requires Python 3.7 or newer to run. However, your version of Python is',
           '.'.join([str(sys.version_info.major), str(sys.version_info.minor), str(sys.version_info.micro)]))
     quit()
 
@@ -22,7 +22,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, \
-    is_teacher, update_is_teacher
+    is_teacher, update_is_teacher, pick
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -36,7 +36,7 @@ from flask_compress import Compress
 import hedy_content
 import hedyweb
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements, quiz_svg_icons
-
+from website.log_fetcher import log_fetcher
 import quiz
 
 # Set the current directory to the root Hedy folder
@@ -813,43 +813,19 @@ def get_quiz(level_source, question_nr, attempt):
     chosen_option = session.get('chosenOption', None)
     wrong_answer_hint = session.get('wrong_answer_hint', None)
 
-    # Store the answer in the database. If we don't have a username,
-    # use the session ID as a username.
-    username = current_user()['username'] or f'anonymous:{session_id()}'
-
-    if attempt == 1:
-        is_correct = quiz.is_correct_answer(question, chosen_option)
-        # the answer is not yet answered so is_correct is None
-        DATABASE.record_quiz_answer(session['quiz-attempt-id'],
-                                    username=username,
-                                    level=level_source,
-                                    is_correct=is_correct,
-                                    question_number=question_nr,
-                                    answer=None)
-
-    quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-
     return render_template('quiz_question.html',
-                            level_source=level_source,
-                            quiz_answers = quiz_answers,
-                            questionStatus=question_status,
-                            questions=questions,
-                            question_options=question_obj,
-                            chosen_option=chosen_option,
-                            wrong_answer_hint=wrong_answer_hint,
-                            question=question,
-                            question_nr=question_nr,
-                            correct=session.get('correct_answer'),attempt=attempt,
-                            is_last_attempt=attempt == quiz.MAX_ATTEMPTS,
-                            lang=g.lang,
-                            cross=quiz_svg_icons.icons['cross'],
-                            check=quiz_svg_icons.icons['check'],
-                            triangle = quiz_svg_icons.icons['triangle'],
-                            diamond = quiz_svg_icons.icons['diamond'],
-                            square = quiz_svg_icons.icons['square'],
-                            circle = quiz_svg_icons.icons['circle'],
-                            pentagram = quiz_svg_icons.icons['pentagram'],
-                            triangle_6 = quiz_svg_icons.icons['triangle_6'])
+                           level_source=level_source,
+                           questionStatus=question_status,
+                           questions=questions,
+                           question_options=question_obj,
+                           chosen_option=chosen_option,
+                           wrong_answer_hint=wrong_answer_hint,
+                           question=question,
+                           question_nr=question_nr,
+                           correct=session.get('correct_answer'),
+                           attempt=attempt,
+                           is_last_attempt=attempt == quiz.MAX_ATTEMPTS,
+                           lang=g.lang)
 
 
 @app.route('/quiz/finished/<int:level>', methods=['GET'])
@@ -900,54 +876,50 @@ def submit_answer(level_source, question_nr, attempt):
     #
     # The number should always be the same as 'question_nr', or otherwise
     # be 'question_nr - 1', so is unnecessary. But we'll leave it here for now.
-    if request.method == "POST":
-        # The value is a character and not a text
-        chosen_option = request.form.get("submit-button")
-        print('-----------------chosen option', chosen_option)
+    chosen_option = request.form["radio_option"]
+    chosen_option = chosen_option.split('-')[1]
 
-        # Reading the yaml file
-        questions = quiz.quiz_data_file_for(g.lang, level_source)
-        if not questions:
-            return no_quiz_data_error()
+    # Reading the yaml file
+    questions = quiz.quiz_data_file_for(g.lang, level_source)
+    if not questions:
+        return no_quiz_data_error()
 
-        # Convert question_nr to an integer
-        q_nr = int(question_nr)
+    # Convert question_nr to an integer
+    q_nr = int(question_nr)
 
-        # Convert the corresponding chosen option to the index of an option
-        question = quiz.get_question(questions, q_nr)
+    # Convert the corresponding chosen option to the index of an option
+    question = quiz.get_question(questions, q_nr)
 
-        is_correct = quiz.is_correct_answer(question, chosen_option)
+    is_correct = quiz.is_correct_answer(question, chosen_option)
 
-        session['chosenOption'] = chosen_option
-        if not is_correct:
-            session['wrong_answer_hint'] = quiz.get_hint(question, chosen_option)
-        else:
-            # Correct answer -- make sure there is no hint on the next display page
-            session.pop('wrong_answer_hint', None)
+    session['chosenOption'] = chosen_option
+    if not is_correct:
+        session['wrong_answer_hint'] = quiz.get_hint(question, chosen_option)
+    else:
+        # Correct answer -- make sure there is no hint on the next display page
+        session.pop('wrong_answer_hint', None)
 
-        # Store the answer in the database. If we don't have a username,
-        # use the session ID as a username.
-        username = current_user()['username'] or f'anonymous:{session_id()}'
+    # Store the answer in the database. If we don't have a username,
+    # use the session ID as a username.
+    username = current_user()['username'] or f'anonymous:{session_id()}'
 
-        DATABASE.record_quiz_answer(session['quiz-attempt-id'],
-                                    username=username,
-                                    level=level_source,
-                                    is_correct=is_correct,
-                                    question_number=question_nr,
-                                    answer=chosen_option)
+    DATABASE.record_quiz_answer(session['quiz-attempt-id'],
+                                username=username,
+                                level=level_source,
+                                is_correct=is_correct,
+                                question_number=question_nr,
+                                answer=chosen_option)
 
-        if is_correct:
-            score = quiz.correct_answer_score(question)
-            session['total_score'] = session.get('total_score', 0) + score
-            session['correct_answer'] = session.get('correct_answer', 0) + 1
+    if is_correct:
+        score = quiz.correct_answer_score(question)
+        session['total_score'] = session.get('total_score', 0) + score
+        session['correct_answer'] = session.get('correct_answer', 0) + 1
 
-            quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-            return redirect(url_for('quiz_feedback', quiz_answers= quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang))
+        return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr, lang=g.lang))
 
-        # Not a correct answer. You can try again if you haven't hit your max attempts yet.
-        if attempt >= quiz.MAX_ATTEMPTS:
-            quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-            return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang, ))
+    # Not a correct answer. You can try again if you haven't hit your max attempts yet.
+    if attempt >= quiz.MAX_ATTEMPTS:
+        return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr, lang=g.lang))
 
     # Redirect to the display page to try again
     return redirect(url_for('get_quiz', chosen_option=chosen_option, level_source=level_source, question_nr=question_nr,
@@ -982,14 +954,7 @@ def quiz_feedback(level_source, question_nr):
 
     question_options = quiz.question_options_for(question)
 
-    # use the session ID as a username.
-    username = current_user()['username'] or f'anonymous:{session_id()}'
-
-    quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-
-    return render_template('feedback.html',
-                           quiz_answers=quiz_answers,
-                           question=question,
+    return render_template('feedback.html', question=question,
                            questions=questions,
                            question_options=question_options,
                            level_source=level_source,
@@ -999,8 +964,6 @@ def quiz_feedback(level_source, question_nr):
                            wrong_answer_hint=wrong_answer_hint,
                            index_option=index_option,
                            correct_option=correct_option,
-                           cross=quiz_svg_icons.icons['cross'],
-                           check=quiz_svg_icons.icons['check'],
                            lang=g.lang)
 
 
