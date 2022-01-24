@@ -177,6 +177,7 @@ def routes (app, database, achievements):
             return utils.error_page(error=404,  ui_message='invalid_class_link')
 
         DATABASE.add_student_to_class(Class['id'], user['username'])
+        DATABASE.remove_class_invite(user['username'])
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "epic_education")
         if achievement:
             return {'achievement': achievement}, 200
