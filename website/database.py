@@ -325,7 +325,7 @@ class Database:
         for invite in invites:
             if invite.get('class_id') == class_id:
                 result.append(invite)
-        return result if len(result) > 0 else None
+        return result
 
     def remove_customizations_class(self, class_id, level):
         CUSTOMIZATIONS.delete({'id': class_id, 'level': level})

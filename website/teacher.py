@@ -60,10 +60,9 @@ def routes (app, database, achievements):
         teachers = os.getenv('BETA_TEACHERS', '').split(',')
         is_beta_teacher = user['username'] in teachers
 
-        invites = DATABASE.get_class_invites(Class['id'])
-        if invites:
-            for invite in invites:
-                invite['timestamp'] = utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))
+        invites = []
+        for invite in DATABASE.get_class_invites(Class['id']):
+            invites.append({'username': invite['username'], 'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))})
 
         return render_template ('class-overview.html', current_page='for-teachers',
                                 page_title=hedyweb.get_page_title('class overview'),
@@ -289,6 +288,30 @@ def routes (app, database, achievements):
 
         # So: The class and student exist and are currently not a combination -> invite!
         DATABASE.add_class_invite(username, class_id)
+        return {}, 200
+
+    @app.route('/remove_student_invite', methods=['POST'])
+    @requires_login
+    def remove_invite(user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return 'body must be an object', 400
+        if not isinstance(body.get('username'), str):
+            return 'username must be a string', 400
+        if not isinstance(body.get('class_id'), str):
+            return 'class id must be a string', 400
+
+        username = body.get('username')
+        class_id = body.get('class_id')
+
+        if not is_teacher(user) and username != user.get('username'):
+            return utils.error_page(error=403, ui_message='retrieve_class')
+        Class = DATABASE.get_class(class_id)
+        if not Class or (Class['teacher'] != user['username'] and username != user.get('username')):
+            return utils.error_page(error=404, ui_message='no_such_class')
+
+        DATABASE.remove_class_invite(username)
         return {}, 200
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])

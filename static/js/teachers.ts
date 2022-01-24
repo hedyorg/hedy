@@ -138,12 +138,13 @@ export function invite_student(class_id: string) {
   });
 }
 
-export function remove_student_invite(username: string) {
+export function remove_student_invite(username: string, class_id: string) {
   $.ajax({
     type: 'POST',
-    url: '/remove_invite_student',
+    url: '/remove_student_invite',
     data: JSON.stringify({
-      username: username
+      username: username,
+      class_id: class_id
     }),
     contentType: 'application/json',
     dataType: 'json'
