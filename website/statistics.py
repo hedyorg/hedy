@@ -21,7 +21,7 @@ def routes(app, db):
     @app.route('/stats/class/<class_id>', methods=['GET'])
     @requires_login
     def render_class_stats(user, class_id):
-        if not is_teacher(user):
+        if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message='retrieve_class')
 
         class_ = DATABASE.get_class(class_id)
