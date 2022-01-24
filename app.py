@@ -300,6 +300,7 @@ def enrich_context_with_user_info():
     data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
     if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
         user_data = DATABASE.user_by_username(user.get('username'))
+        data['user_messages'] = 0
         if 'language' in user_data:
             if user_data['language'] in ALL_LANGUAGES.keys():
                 g.lang = session['lang'] = user_data['language']
@@ -312,7 +313,7 @@ def enrich_context_with_user_info():
         user_invites = DATABASE.get_username_invite(user.get('username'))
         if user_invites:
             data['user_invites'] = user_invites
-            data['user_messages'] = 1
+            data['user_messages'] += 1
     return data
 
 @app.context_processor
