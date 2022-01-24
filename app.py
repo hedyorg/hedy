@@ -1204,7 +1204,7 @@ def get_admin_page():
     end_date = None if end_date == "null" else end_date
 
     filtering = False
-    if substring or start_date or end_date:
+    if substring or start_date or end_date or filter == "all":
         filtering = True
 
     # After hitting 1k users, it'd be wise to add pagination.
