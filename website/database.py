@@ -319,6 +319,14 @@ class Database:
     def remove_class_invite(self, username):
         INVITATIONS.delete({'username': username})
 
+    def get_class_invites(self, class_id):
+        invites = INVITATIONS.scan()
+        result = []
+        for invite in invites:
+            if invite.get('class_id') == class_id:
+                result.append(invite)
+        return result
+
     def remove_customizations_class(self, class_id, level):
         CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
 
