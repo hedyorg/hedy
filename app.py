@@ -309,6 +309,9 @@ def enrich_context_with_user_info():
         user_achievements = DATABASE.achievements_by_username(user.get('username'))
         if user_achievements:
             data['user_achievements'] = user_achievements
+        user_invites = DATABASE.get_username_invite(user.get('username'))
+        if user_invites:
+            data['user_invites'] = user_invites
     return data
 
 @app.context_processor
@@ -1105,7 +1108,6 @@ def main_page(page):
         abort(404)
 
     if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
-        print('Hier komen we!')
         return auth_templates(page, hedyweb.get_page_title(page))
 
     if page == "my-achievements":
