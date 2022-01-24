@@ -116,6 +116,34 @@ export function join_class(id: string, name: string) {
     });
 }
 
+export function invite_student(class_id: string) {
+  modal.prompt ("Enter student username", '', function (username) {
+      if (!username) {
+          return modal.alert("This value is empty");
+      }
+      $.ajax({
+          type: 'POST',
+          url: '/invite_student',
+          data: JSON.stringify({
+            username: username,
+            class_name: class_id
+          }),
+          contentType: 'application/json',
+          dataType: 'json'
+      }).done(function(response) {
+          console.log(response);
+      }).fail(function(err) {
+          console.log(err);
+          // Todo: We want to return two types of errors:
+          /*
+            -   This student doesn't exist
+            -   This student is already in your class
+           */
+      });
+  });
+}
+
+
 export function remove_student(class_id: string, student_id: string, self_removal: boolean) {
   let confirm_text;
   if (self_removal) {

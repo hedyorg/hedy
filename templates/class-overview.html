@@ -40,12 +40,15 @@
   </div>
   <p>{{auth.class_link}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
   <div class="mt-4 flex flex-row">
+
     <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{ auth.customize_class }}</button>
-    <button class="green-btn ml-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
-    <button class="green-btn ml-4" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link
-      }}</button>
+    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
+    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.invite_student ('{{class_info.id}}')">Add student</button>
+
+    <!-- Todo: TB -> I think this button is redundant as the link is already there, remove? -->
+    <!-- <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link }}</button> -->
     {% if is_beta_teacher %}
-    <button class="green-btn ml-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{auth
+    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{auth
       .class_stats}}</button>
     {% endif %}
   </div>
