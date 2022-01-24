@@ -28,7 +28,7 @@ def routes(app, db):
         if not class_ or (class_['teacher'] != user['username'] and not is_admin(user)):
             return utils.error_page(error=404, ui_message='no_such_class')
 
-        return render_template('class-stats.html', class_info={'id': class_id})
+        return render_template('class-stats.html', class_info={'id': class_id, 'students': sorted(class_['students'])})
 
     @app.route('/class-stats/<class_id>', methods=['GET'])
     @requires_login

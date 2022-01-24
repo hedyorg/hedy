@@ -704,12 +704,18 @@ def programs_page(request):
 @app.route('/logs/query', methods=['POST'])
 def query_logs():
     user = current_user()
-    if not is_admin(user):
+    if not is_admin(user) and not is_teacher(user):
         return utils.error_page(error=403, ui_message='unauthorized')
 
     body = request.json
     if body is not None and not isinstance(body, dict):
         return 'body must be an object', 400
+
+    class_id = body.get('class_id')
+    if class_id and not is_admin(user):
+        class_ = DATABASE.get_class(class_id)
+        if class_['teacher'] != user['username'] or body.get('username') not in class_.get('students'):
+            return utils.error_page(error=403, ui_message='unauthorized')
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -722,7 +728,7 @@ def get_log_results():
     next_token = request.args.get('next_token', default=None, type=str)
 
     user = current_user()
-    if not is_admin(user):
+    if not is_admin(user) and not is_teacher(user):
         return utils.error_page(error=403, ui_message='unauthorized')
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
