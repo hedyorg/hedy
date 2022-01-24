@@ -1193,14 +1193,15 @@ def get_admin_page():
 
     category = request.args.get('filter', default=None, type=str)
     filter = None if category == "null" else category
-    if filter == "email":
-        substring = request.args.get('substring', default=None, type=str)
-        substring = None if substring == "null" else substring
-    else:
-        start_date = request.args.get('start', default=None, type=str)
-        end_date = request.args.get('end', default=None, type=str)
-        start_date = None if start_date == "null" else start_date
-        end_date = None if end_date == "null" else end_date
+
+
+    substring = request.args.get('substring', default=None, type=str)
+    start_date = request.args.get('start', default=None, type=str)
+    end_date = request.args.get('end', default=None, type=str)
+
+    substring = None if substring == "null" else substring
+    start_date = None if start_date == "null" else start_date
+    end_date = None if end_date == "null" else end_date
 
     filtering = False
     if substring or start_date or end_date:
@@ -1236,7 +1237,7 @@ def get_admin_page():
         counter = counter + 1
 
     return render_template('admin.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
-                           filter=filter, start_date=start_date, end_date=end_date,
+                           filter=filter, start_date=start_date, end_date=end_date, email_filter=substring,
                            program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 
