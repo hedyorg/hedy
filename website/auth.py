@@ -339,6 +339,12 @@ def routes(app, database):
         DATABASE.forget_user(user['username'])
         return '', 200
 
+    @app.route('/auth/destroy_public', methods=['POST'])
+    @requires_login
+    def destroy_public(user):
+        DATABASE.forget_public_profile(user['username'])
+        return '', 200
+
     @app.route('/auth/change_password', methods=['POST'])
     @requires_login
     def change_password(user):
@@ -526,6 +532,24 @@ def routes(app, database):
 
         return '', 200
 
+    @app.route('/auth/public_profile', methods=['POST'])
+    @requires_login
+    def update_public_profile(user):
+        body = request.json
+
+        # Validations
+        if not isinstance(body, dict):
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('image'), str):
+            return g.auth_texts.get('image_invalid'), 400
+        if not isinstance(body.get('personal_text'), str):
+            return g.auth_texts.get('personal_text_invalid'), 400
+        if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
+            return g.auth_texts.get('favourite_program_invalid'), 400
+
+        DATABASE.update_public_profile(user['username'], body);
+        return '', 200
+
     # *** ADMIN ROUTES ***
 
     @app.route('/admin/markAsTeacher', methods=['POST'])
@@ -644,7 +668,10 @@ def send_email_template(template, email, link):
 
 def auth_templates(page, page_title):
     if page == 'my-profile':
-        return render_template('profile.html', page_title=page_title, current_page='my-profile')
+        programs = DATABASE.public_programs_for_user(current_user()['username'])
+        public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
+        return render_template('profile.html', page_title=page_title, programs=programs,
+                               public_settings=public_profile_settings, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
         return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
 
