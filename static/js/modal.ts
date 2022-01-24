@@ -78,15 +78,16 @@ class Modal {
 
   public repair(message: string, timeoutMs?: number,  title: string = '') {
     if(title != '') {
-      $('#repair_modal_title').html(title);
-      $('#repair_modal_text').removeClass('hidden');
+      $('#modal-repair-title').html(title);
+      $('#modal-repair-title').removeClass('hidden');
     }
     else{
-      $('#repair_modal_title').html('');
-      $('#repair_modal_text').addClass('hidden');
+      $('#modal-repair-title').html('');
+      $('#modal-repair-title').addClass('hidden');
     }
-    $('#repair_modal_text').html(message);
-    this.show_alert();
+    $('#modal-repair-text').html(message);
+    this.show();
+    $('#modal-repair').show();
     if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
     // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
     if(this._timeout) {
