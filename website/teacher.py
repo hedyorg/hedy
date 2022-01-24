@@ -263,9 +263,9 @@ def routes (app, database, achievements):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return 'username must be a string', 400
+            return g.auth_texts.get('username_invalid'), 400
         if not isinstance(body.get('class_id'), str):
             return 'class id must be a string', 400
 
@@ -280,11 +280,11 @@ def routes (app, database, achievements):
 
         user = DATABASE.user_by_username(username)
         if not user:
-            return "Student doesn't exist", 400
+            return g.auth_texts.get('student_not_existing'), 400
         if user['username'] in Class['students']:
-            return "Student already in your class", 400
+            return g.auth_texts.get('student_already_in_class'), 400
         if DATABASE.get_username_invite(user['username']):
-            return "Student already has a pending invite", 400
+            return g.auth_texts.get('student_already_invite'), 400
 
         # So: The class and student exist and are currently not a combination -> invite!
         DATABASE.add_class_invite(username, class_id)
