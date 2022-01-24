@@ -774,11 +774,11 @@ def get_quiz(level_source, question_nr, attempt):
     if not is_quiz_enabled():
         return quiz_disabled_error()
 
-    # If we don't have an attempt ID yet, redirect to the start page
+        # If we don't have an attempt ID yet, redirect to the start page
     if not session.get('quiz-attempt-id'):
         return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
-    # Reading the yaml file
+        # Reading the yaml file
     questions = quiz.quiz_data_file_for(g.lang, level_source)
     if not questions:
         return no_quiz_data_error()
@@ -800,8 +800,25 @@ def get_quiz(level_source, question_nr, attempt):
     chosen_option = session.get('chosenOption', None)
     wrong_answer_hint = session.get('wrong_answer_hint', None)
 
+    # Store the answer in the database. If we don't have a username,
+    # use the session ID as a username.
+    username = current_user()['username'] or f'anonymous:{session_id()}'
+
+    if attempt == 1:
+        is_correct = quiz.is_correct_answer(question, chosen_option)
+        # the answer is not yet answered so is_correct is None
+        DATABASE.record_quiz_answer(session['quiz-attempt-id'],
+                                    username=username,
+                                    level=level_source,
+                                    is_correct=is_correct,
+                                    question_number=question_nr,
+                                    answer=None)
+
+    quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+
     return render_template('quiz_question.html',
                            level_source=level_source,
+                           quiz_answers=quiz_answers,
                            questionStatus=question_status,
                            questions=questions,
                            question_options=question_obj,
@@ -809,10 +826,17 @@ def get_quiz(level_source, question_nr, attempt):
                            wrong_answer_hint=wrong_answer_hint,
                            question=question,
                            question_nr=question_nr,
-                           correct=session.get('correct_answer'),
-                           attempt=attempt,
+                           correct=session.get('correct_answer'), attempt=attempt,
                            is_last_attempt=attempt == quiz.MAX_ATTEMPTS,
-                           lang=g.lang)
+                           lang=g.lang,
+                           cross=quiz_svg_icons.icons['cross'],
+                           check=quiz_svg_icons.icons['check'],
+                           triangle=quiz_svg_icons.icons['triangle'],
+                           diamond=quiz_svg_icons.icons['diamond'],
+                           square=quiz_svg_icons.icons['square'],
+                           circle=quiz_svg_icons.icons['circle'],
+                           pentagram=quiz_svg_icons.icons['pentagram'],
+                           triangle_6=quiz_svg_icons.icons['triangle_6'])
 
 
 @app.route('/quiz/finished/<int:level>', methods=['GET'])
