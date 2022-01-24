@@ -9,6 +9,7 @@ class Modal {
     $('#modal-cancel-button').on('click', () => this.hide());
     $('#modal-copy-ok-button').on('click', () => this.hide());
     $('#modal-alert-button').on('click', () => this.hide());
+    $('#modal-repair-button').on('click', () => this.hide());
   }
 
   private _timeout?: ReturnType<typeof setTimeout>
