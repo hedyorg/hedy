@@ -279,6 +279,8 @@ def routes (app, database, achievements):
             return "Student doesn't exist", 400
         if user['username'] in Class['students']:
             return "Student already in your class", 400
+        if DATABASE.get_username_invite(user['username'], class_id):
+            return "Student already has a pending invite", 400
 
         # So: The class and student exist and are currently not a combination -> invite!
         DATABASE.add_class_invite(username, class_id)

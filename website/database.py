@@ -310,8 +310,14 @@ class Database:
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
 
+    def get_username_invite(self, username, class_id):
+        return INVITATIONS.get({'username': username, 'class_id': class_id})
+
     def add_class_invite(self, username, class_id):
-        INVITATIONS.create({'username': username, 'id': class_id})
+        INVITATIONS.create({'username': username, 'class_id': class_id})
+
+    def remove_class_invite(self, username, class_id):
+        INVITATIONS.delete({'username': username, 'class_id': class_id})
 
     def remove_customizations_class(self, class_id, level):
         CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
