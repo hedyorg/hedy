@@ -41,12 +41,16 @@ class Modal {
       $('#modal-alert-title').addClass('hidden');
     }
     $('#modal_alert_text').html(message);
-    if (error) {
+    if (!error) {
       $('#modal_alert_container').removeClass('bg-green-100 border-green-400 text-green-700');
+      $('#modal-alert-button').removeClass('text-green-500');
       $('#modal_alert_container').addClass('bg-red-100 border-red-400 text-red-700');
+      $('#modal-alert-button').addClass('text-red-500');
     } else {
       $('#modal_alert_container').removeClass('bg-red-100 border-red-400 text-red-700');
+      $('#modal-alert-button').removeClass('text-red-500');
       $('#modal_alert_container').addClass('bg-green-100 border-green-400 text-green-700');
+      $('#modal-alert-button').addClass('text-green-500');
     }
     this.show_alert();
     if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
