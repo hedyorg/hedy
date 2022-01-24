@@ -853,16 +853,16 @@ def quiz_finished(level):
     # set globals
     g.prefix = '/hedy'
 
-    achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "next_question")
-    if round(session.get('total_score', 0) / quiz.max_score(questions) * 100) == 100:
+    achievement = None
+    if current_user()['username']:
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "next_question")
+        if round(session.get('total_score', 0) / quiz.max_score(questions) * 100) == 100:
+            if achievement:
+                achievement.append(ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")[0])
+            else:
+                achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")
         if achievement:
-            achievement.append(ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")[0])
-        else:
-            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")
-    if achievement:
-        achievement = json.dumps(achievement)
-
-    print(achievement)
+            achievement = json.dumps(achievement)
 
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
                            total_score=round(session.get('total_score', 0) / quiz.max_score(questions) * 100),
