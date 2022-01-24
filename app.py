@@ -311,7 +311,7 @@ def enrich_context_with_user_info():
             data['user_achievements'] = user_achievements
         user_invites = DATABASE.get_username_invite(user.get('username'))
         if user_invites:
-            data['user_invites'] = user_invites
+            data['user_invites'] = [user_invites]
     return data
 
 @app.context_processor
