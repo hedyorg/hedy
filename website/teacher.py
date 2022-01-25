@@ -64,7 +64,7 @@ def routes (app, database, achievements):
         for invite in DATABASE.get_class_invites(Class['id']):
             invites.append({'username': invite['username'], 'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))})
 
-        return render_template ('class-overview.html', current_page='for-teachers',
+        return render_template ('class-overview.html', current_page='my-profile',
                                 page_title=hedyweb.get_page_title('class overview'),
                                 achievement=achievement, invites=invites,
                                 is_beta_teacher=is_beta_teacher,
@@ -215,7 +215,7 @@ def routes (app, database, achievements):
 
         return render_template('customize-class.html', page_title=hedyweb.get_page_title('customize class'),
                                class_info={'name': Class['name'], 'id': Class['id']}, levels=levels,
-                               adventures=adventures, preferences=preferences, current_page='for-teachers')
+                               adventures=adventures, preferences=preferences, current_page='my-profile')
 
     @app.route('/customize-class/<class_id>', methods=['PUT'])
     @requires_login

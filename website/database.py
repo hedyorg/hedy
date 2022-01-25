@@ -95,6 +95,17 @@ class Database:
 
         return QUIZ_ANSWERS.update(key, updates)
 
+    def get_quiz_answer(self, username, level, attempt_id):
+        """Load a quiz answer from the database."""
+
+        quizAnswers = QUIZ_ANSWERS.get({'user': username, 'levelAttempt': str(level).zfill(4) + '_' + attempt_id})
+
+        array_quiz_answers = []
+        for question_number in range(len(quizAnswers)):
+            answers = quizAnswers.get("q" + str(question_number))
+            array_quiz_answers.append(answers)
+        return array_quiz_answers
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 
@@ -327,6 +338,9 @@ class Database:
     def get_class_invites(self, class_id):
         invitations = INVITATIONS.get_many({'class_id': class_id})
         return invitations if invitations else []
+
+    def all_classes(self):
+        return CLASSES.scan()
 
     def remove_customizations_class(self, class_id, level):
         CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
