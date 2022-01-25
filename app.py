@@ -1161,8 +1161,10 @@ def explore():
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
 
+    achievement = None
     if level or adventure:
         programs = DATABASE.get_filtered_explore_programs(level, adventure)
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
         programs = DATABASE.get_all_explore_programs()
 
@@ -1175,6 +1177,7 @@ def explore():
 
     return render_template('explore.html', programs=programs,
                            filtered_level=level,
+                           achievement=achievement,
                            filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures=adventures,
