@@ -1,7 +1,10 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<h1>Admin page</h1>
+<div class="flex flex-row">
+    <h1>Admin page</h1>
+    <button type="reset" class="yellow-btn my-1 mx-4 text-white ltr:ml-auto rtl:mr-auto" onclick="window.open('?filter=all', '_self');">View all users</button>
+</div>
 <div class="w-full mt-4 mb-4" id="program_filter">
     <form onsubmit="event.preventDefault (); hedyApp.filter_admin();">
         <div class="px-4 w-full flex flex-row border border-gray-400 py-2 rounded-lg">
@@ -10,55 +13,59 @@
                 <div class="flex flex-row items-center">
                     <div class="flex flex-col">
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="username" name="username"><label class="inline-block w-1/2" for="subscribe">Username</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username"><label class="inline-block w-1/2" for="subscribe">Username</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="count" name="count"><label class="inline-block w-1/2" for="subscribe">Count</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="count" name="count"><label class="inline-block w-1/2" for="subscribe">Count</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="email" name="email"><label class="inline-block w-1/2" for="subscribe">Email</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="email" name="email"><label class="inline-block w-1/2" for="subscribe">Email</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="created" name="created"><label class="inline-block w-1/2" for="subscribe">Created</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="created" name="created"><label class="inline-block w-1/2" for="subscribe">Created</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="last_login" name="last_login"><label class="inline-block w-1/2" for="subscribe">Last login</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_login" name="last_login"><label class="inline-block w-1/2" for="subscribe">Last login</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="birth_year" name="birth_year"><label class="inline-block w-1/2" for="subscribe">Birth year</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="birth_year" name="birth_year"><label class="inline-block w-1/2" for="subscribe">Birth year</label>
                         </div>
                     </div>
                     <div class="flex flex-col">
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="country" name="country"><label class="inline-block w-1/2" for="subscribe">Country</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="country" name="country"><label class="inline-block w-1/2" for="subscribe">Country</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="gender" name="gender"><label class="inline-block w-1/2" for="subscribe">Gender</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="gender" name="gender"><label class="inline-block w-1/2" for="subscribe">Gender</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="experience" name="experience"><label class="inline-block w-1/2" for="subscribe">Experience</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="experience" name="experience"><label class="inline-block w-1/2" for="subscribe">Experience</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="teacher" name="teacher"><label class="inline-block w-1/2" for="subscribe">Teacher</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="teacher" name="teacher"><label class="inline-block w-1/2" for="subscribe">Teacher</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ml-0 mr-3" type="checkbox" checked id="verified" name="verified"><label class="inline-block w-1/2" for="subscribe">Verified</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="verified" name="verified"><label class="inline-block w-1/2" for="subscribe">Verified</label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="w-3/4 p-2 mx-4">
-                <h2 class="px-8">Filtering options</h2>
+                <h2 class="px-8 pb-2">Filtering options</h2>
                 <select id="admin_filter_category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
                     <option value="created" {% if filter and filter == "created" %} selected {% endif %}>Created</option>
                     <option value="last_login" {% if filter and filter == "last_login" %} selected {% endif %}>Last login</option>
+                    <option value="email" {% if filter and filter == "email" %} selected {% endif %}>E-mail</option>
                 </select>
                 <div class="flex flex-row items-center">
-                    <input type="date" id="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
-                    <input type="date" id="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 mx-2">
-                    <div class="flex flex-row ml-auto">
-                        <button type="reset" class="red-btn" onclick="window.open('/admin', '_self');">Reset</button>
-                        <button type="submit" class="green-btn ml-4 px-4">Filter</button>
+                    <input placeholder="Enter a substring..." id="email_filter_input" type="text" {% if email_filter %} value="{{ email_filter }}" {% endif %} class="inline-block {% if not filter or filter != "email" %}hidden{% endif %} appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2">
+                    <div id="date_filter_input" class="flex flex-row w-full {% if filter and filter == "email" %}hidden{% endif %}">
+                        <input type="date" id="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-1 rtl:ml-1">
+                        <input type="date" id="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
+                    </div>
+                    <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
+                        <button type="reset" class="red-btn mx-2" onclick="window.open('/admin', '_self');">Reset</button>
+                        <button type="submit" class="green-btn ltr:ml-2 rtl:mr-2 px-4">Filter</button>
                     </div>
                 </div>
             </div>
@@ -113,6 +120,15 @@
                 $('#' + attribute + '_header').show();
                 $('.' + attribute + '_cell').show();
             }
+        });
+        $('#admin_filter_category').change(function() {
+           if ($('#admin_filter_category').val() == "email") {
+               $('#date_filter_input').hide();
+               $('#email_filter_input').show();
+           } else {
+               $('#date_filter_input').show();
+               $('#email_filter_input').hide();
+           }
         });
     });
 </script>
