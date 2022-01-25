@@ -1177,6 +1177,8 @@ def explore():
     adventures = None
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
+    else:
+        adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
     return render_template('explore.html', programs=programs,
                            filtered_level=level,
