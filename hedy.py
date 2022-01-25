@@ -1336,8 +1336,8 @@ class ConvertToPython_4(ConvertToPython_3):
         args = self.check_var_usage(args)
         result = ''
         for argument in args:
-            argument = argument.replace("'", '')  # no quotes needed in fstring
             result += self.process_variable_for_fstring(argument)
+            argument = argument.replace("'", '')  # no quotes needed in fstring
         return result
 
     def print(self, args):

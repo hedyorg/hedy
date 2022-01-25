@@ -12,6 +12,19 @@ class TestsLevel5(HedyTester):
   # is
 
 
+  def test_print_var_1795(self):
+    code = textwrap.dedent("""\
+    naam is 'Daan'
+    woord1 is zomerkamp
+    print 'naam' ' is naar het' 'woord1'""")
+
+    expected = textwrap.dedent("""\
+    naam = '\'Daan\''
+    woord1 = 'zomerkamp'
+    print(f'naam is naar het woord1')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
   def test_assign_list_multiple_spaces(self):
     code = textwrap.dedent("""\
     dieren is Hond,  Kat,       Kangoeroe
