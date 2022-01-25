@@ -207,6 +207,29 @@ class TestsLevel12(HedyTester):
       extra_check_function=self.result_in(list),
       max_level=15)
 
+  def test_list_comma(self):
+    code = textwrap.dedent("""\
+    voorspellingen = 'je wordt rijk' , 'je wordt verliefd' , 'je glijdt uit over een bananenschil'
+    print 'Ik pak mijn glazen bol erbij...'
+    print 'Ik zie... Ik zie...'
+    sleep 2
+    print voorspellingen at random""")
+
+    expected = textwrap.dedent("""\
+    voorspellingen = ['je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil']
+    print(f'Ik pak mijn glazen bol erbij...')
+    print(f'Ik zie... Ik zie...')
+    time.sleep(2)
+    print(f'{random.choice(voorspellingen)}')""")
+
+    list = ['je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil']
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.result_in(list),
+      max_level=15)
+
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
     items is 'red'
