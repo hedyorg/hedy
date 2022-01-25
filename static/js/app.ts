@@ -160,6 +160,12 @@ var StopExecution = false;
         showPrintMargin: false,
         highlightActiveLine: false
       });
+      // When it is the main editor -> we want to show line numbers!
+      if (element.getAttribute('id') === "editor") {
+        editor.setOptions({
+        showGutter: true
+      });
+      }
     }
 
     // a variable which turns on(1) highlighter or turns it off(0)
