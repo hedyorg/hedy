@@ -867,6 +867,9 @@ def quiz_finished(level):
 
     print(achievement)
 
+    # use the session ID as a username.
+    username = current_user()['username'] or f'anonymous:{session_id()}'
+
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
                            total_score=round(session.get('total_score', 0) / quiz.max_score(questions) * 100),
                            level_source=level,
@@ -874,7 +877,6 @@ def quiz_finished(level):
                            level=int(level) + 1,
                            questions=questions,
                            next_assignment=1,
-                           quiz_answers = quiz_answers,
                            cross = quiz_svg_icons.icons['cross'],
                            check = quiz_svg_icons.icons['check'],
                             )
