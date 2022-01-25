@@ -1144,11 +1144,6 @@ def main_page(page):
         else:
             return utils.error_page(error=403, ui_message='not_teacher')
 
-    if page == 'stats':
-        if not is_admin(current_user()):
-            return utils.error_page(error=403, ui_message='unauthorized')
-        return render_template('admin-stats.html')
-
     requested_page = hedyweb.PageTranslations(page)
     if not requested_page.exists():
         abort(404)
@@ -1189,18 +1184,17 @@ def explore():
 
 @app.route('/admin', methods=['GET'])
 @requires_login
-def get_admin_page():
-    if not utils.is_testing_request(request) and not is_admin(current_user()):
-        return 'unauthorized', 403
-
+def get_admin_page(username):
+    if not is_admin(current_user()):
+        return utils.error_page(error=403, ui_message='unauthorized')
     return render_template('admin.html', page_title=hedyweb.get_page_title('admin'))
 
 
 @app.route('/admin/users', methods=['GET'])
 @requires_login
-def get_admin_users_page():
-    if not utils.is_testing_request(request) and not is_admin(current_user()):
-        return 'unauthorized', 403
+def get_admin_users_page(user):
+    if not is_admin(user.get('username')):
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     category = request.args.get('filter', default=None, type=str)
     category = None if category == "null" else category
@@ -1246,9 +1240,16 @@ def get_admin_users_page():
         user['index'] = counter
         counter = counter + 1
 
-    return render_template('admin.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
+    return render_template('admin-users.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
                            filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
                            program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
+
+@app.route('/admin/stats', methods=['GET'])
+@requires_login
+def get_admin_stats_page(user):
+    if not is_admin(user.get('username')):
+        return utils.error_page(error=403, ui_message='unauthorized')
+    return render_template('admin-stats.html')
 
 
 @app.route('/change_language', methods=['POST'])
