@@ -61,10 +61,8 @@ def routes (app, database, achievements):
         is_beta_teacher = user['username'] in teachers
 
         invites = []
-        result = DATABASE.get_class_invites(Class['id'])
-        if result:
-            for invite in result:
-                invites.append({'username': invite['username'], 'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))})
+        for invite in DATABASE.get_class_invites(Class['id']):
+            invites.append({'username': invite['username'], 'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))})
 
         return render_template ('class-overview.html', current_page='for-teachers',
                                 page_title=hedyweb.get_page_title('class overview'),
