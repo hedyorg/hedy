@@ -839,7 +839,8 @@ def get_quiz(level_source, question_nr, attempt):
                             wrong_answer_hint=wrong_answer_hint,
                             question=question,
                             question_nr=question_nr,
-                            correct=session.get('correct_answer'),attempt=attempt,
+                            correct=session.get('correct_answer'),
+                            attempt=attempt,
                             is_last_attempt=attempt == quiz.MAX_ATTEMPTS,
                             lang=g.lang,
                             cross=quiz_svg_icons.icons['cross'],
@@ -876,6 +877,9 @@ def quiz_finished(level):
         achievement = json.dumps(achievement)
 
     print(achievement)
+    # use the session ID as a username.
+    username = current_user()['username'] or f'anonymous:{session_id()}'
+    quiz_answers = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
 
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
                            total_score=round(session.get('total_score', 0) / quiz.max_score(questions) * 100),
@@ -883,7 +887,11 @@ def quiz_finished(level):
                            achievement=achievement,
                            level=int(level) + 1,
                            questions=questions,
-                           next_assignment=1)
+                           next_assignment=1,
+                           quiz_answers = quiz_answers,
+                           cross = quiz_svg_icons.icons['cross'],
+                           check = quiz_svg_icons.icons['check'],
+                            )
 
 
 @app.route('/quiz/submit_answer/<int:level_source>/<int:question_nr>/<int:attempt>', methods=["POST"])
