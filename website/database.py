@@ -325,7 +325,7 @@ class Database:
         INVITATIONS.delete({'username': username})
 
     def get_class_invites(self, class_id):
-        return INVITATIONS.get({'class_id': class_id})
+        return INVITATIONS.get_many({'class_id': class_id})
 
     def remove_customizations_class(self, class_id, level):
         CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
