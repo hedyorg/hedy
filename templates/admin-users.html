@@ -3,7 +3,10 @@
 {% block main %}
 <div class="flex flex-row">
     <h1>Users overview</h1>
-    <button type="reset" class="yellow-btn my-1 mx-4 text-white ltr:ml-auto rtl:mr-auto" onclick="window.open('?filter=all', '_self');">View all users</button>
+    <div class="ltr:ml-auto rtl:mr-auto">
+        <button type="reset" class="green-btn my-1 mx-2 text-white" onclick="window.open('/admin', '_self');">Return to admin page</button>
+        <button type="reset" class="yellow-btn my-1 text-white" onclick="window.open('?filter=all', '_self');">View all users</button>
+    </div>
 </div>
 <div class="w-full mt-4 mb-4" id="program_filter">
     <form onsubmit="event.preventDefault (); hedyApp.filter_admin();">
