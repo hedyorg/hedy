@@ -19,7 +19,7 @@ class TestsLevel5(HedyTester):
     print 'naam' ' is naar het' 'woord1'""")
 
     expected = textwrap.dedent("""\
-    naam = '\'Daan\''
+    naam = '\\'Daan\\''
     woord1 = 'zomerkamp'
     print(f'naam is naar hetwoord1')""")
 
