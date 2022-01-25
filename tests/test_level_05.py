@@ -21,7 +21,7 @@ class TestsLevel5(HedyTester):
     expected = textwrap.dedent("""\
     naam = '\'Daan\''
     woord1 = 'zomerkamp'
-    print(f'naam is naar het woord1')""")
+    print(f'naam is naar hetwoord1')""")
 
     self.single_level_tester(code=code, expected=expected)
 
