@@ -14,8 +14,8 @@ equality_check_equals: textwithoutspaces _SPACE _EQUALS _SPACE textwithoutspaces
 list_access_var_is: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
 list_access_var_equals: var _SPACE _EQUALS _SPACE var _SPACE _AT _SPACE (INT | random)
 
-assign_list_is: var _SPACE _IS _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
-assign_list_equals: var _SPACE _EQUALS _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
+assign_list_is: var _SPACE _IS _SPACE textwithspaces (_COMMA textwithspaces)+
+assign_list_equals: var _SPACE _EQUALS _SPACE textwithspaces (_COMMA textwithspaces)+
 
 assign_is: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
 assign_equals: var _SPACE _EQUALS _SPACE sum | var _SPACE _EQUALS _SPACE textwithoutspaces
