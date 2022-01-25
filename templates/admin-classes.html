@@ -1,8 +1,11 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div>
+<div class="flex flex-row">
     <h1>Classes overview</h1>
+    <div class="ltr:ml-auto rtl:mr-auto">
+        <button type="reset" class="green-btn my-1 mx-2 text-white" onclick="window.open('/admin', '_self');">Return to admin page</button>
+    </div>
 </div>
 <h4 class="text-center">Total amount of shown classes: {{ classes|length }}</h4>
 <div class="program w-1/2 mx-auto border-solid border-2 border-orange-400 rounded p-4">
