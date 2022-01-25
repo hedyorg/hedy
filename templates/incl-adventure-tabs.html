@@ -26,7 +26,7 @@
               <div>
               {{ assignment.text|commonmark }}
               {% if assignment.short_name == 'end' %}
-                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}}, '{{g.lang}}')">
+                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}})">
               {% endif %}
               </div>
               <div class="ltr:clear-right rtl:clear-left"></div>
