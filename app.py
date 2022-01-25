@@ -1250,7 +1250,9 @@ def get_admin_users_page(user):
 def get_admin_classes_page(user):
     if not is_admin(user):
         return utils.error_page(error=403, ui_message='unauthorized')
-    return render_template('admin-classes.html')
+
+    classes = DATABASE.all_classes()
+    return render_template('admin-classes.html', classes=classes, page_title=hedyweb.get_page_title('admin'))
 
 
 @app.route('/admin/stats', methods=['GET'])
@@ -1258,7 +1260,7 @@ def get_admin_classes_page(user):
 def get_admin_stats_page(user):
     if not is_admin(user):
         return utils.error_page(error=403, ui_message='unauthorized')
-    return render_template('admin-stats.html')
+    return render_template('admin-stats.html', page_title=hedyweb.get_page_title('admin'))
 
 
 @app.route('/change_language', methods=['POST'])
