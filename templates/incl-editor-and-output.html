@@ -3,8 +3,7 @@
     <!-- Row 1: editor, output pane -->
     <div class="flex flex-col order-1" id="code_editor" style="height: 22rem;">
       <div class="w-full flex-1 flex flex-col">
-        <div id="editor"
-          style="background: #272822; font-family: monospace; color: white"
+        <div id="editor" style="background: #272822; font-family: monospace; color: white"
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or start_code}}</div>
@@ -15,7 +14,7 @@
           <p class="close-dialog" onclick="hedyApp.error.hide ()">X</p>
           <div class="flex">
             <div class="py-1">
-              <svg class="fill-current h-6 w-6 text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <svg class="fill-current h-6 w-6 text-red-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path
                   d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
               </svg>
@@ -33,7 +32,7 @@
           <p class="close-dialog" onclick="hedyApp.error.hide ()">X</p>
           <div class="flex">
             <div class="py-1">
-              <svg class="fill-current h-6 w-6 text-yellow-500 mr-4" xmlns="http://www.w3.org/2000/svg"
+              <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20">
                 <path
                   d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
@@ -73,20 +72,19 @@
           <form>
             <div class="my-2 flex">
               <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="{{ ui.enter_text }}">
-              <input type="submit" onclick="hedyApp.ScrollOutputToBottom()" class="green-btn ml-3" value="{{ ui.enter }}"></p>
+              <input type="submit" onclick="hedyApp.ScrollOutputToBottom()" class="green-btn ltr:ml-3 rtl:mr-3" value="{{ ui.enter }}"></p>
             </div>
           </form>
         </div>
       </div>
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
-    <div class="order-2 lg:order-4">
-      <br>
+  <div class="order-2 lg:order-4">
+      <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="cursor-pointer hidden h-28 absolute ltr:ml-96 rtl:mr-96 -mt-6" id="repair_button">
       <div class="flex justify-between">
         <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{ui.run_code_button}} </button>
-          <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="cursor-pointer" id="repair_button" style="height: 7rem; visibility: hidden; position: absolute; margin-left: 24rem; margin-top: -2rem;">
-          {% if show_edit_button %}
-        <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{ui.edit_code_button}}</a>
+        {% if show_edit_button %}
+            <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{ui.edit_code_button}}</a>
         {% endif %}
       </div>
       <div id="speak_container" class="hidden mt-4">
@@ -102,19 +100,19 @@
           <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{ui.regress_button}} {{ prev_level }}</button>
         {% endif %}
         {% if next_level and not hide_next_level %}
-            <button class="green-btn ml-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ ui.advance_button }} {{ next_level }}</button>
+            <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ ui.advance_button }} {{ next_level }}</button>
         {% endif %}
       </div>
     </div>
   </div>
 <!-- developer mode toggle -->
-<div class="mx-auto w-64 border-gray-400 border-2 rounded-full py-2 px-4">
+<div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4{% if editor_readonly %} hidden{% endif %}" id="developers_toggle_container">
   <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
     <div class="relative">
       <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode({% if example_programs %}true{% else %}false{% endif %})" class="sr-only" />
       <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-      <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition" style="top: -5px;"></div>
+      <div class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" style="top: -5px;"></div>
     </div>
-    <div class="ml-3">{{ ui.developers_mode }}</div>
+    <div class="ltr:ml-3 rtl:mr-3">{{ ui.developers_mode }}</div>
   </label>
 </div>

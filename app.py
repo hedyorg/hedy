@@ -2,8 +2,8 @@
 import sys
 from website.yaml_file import YamlFile
 
-if (sys.version_info.major < 3 or sys.version_info.minor < 6):
-    print('Hedy requires Python 3.6 or newer to run. However, your version of Python is',
+if (sys.version_info.major < 3 or sys.version_info.minor < 7):
+    print('Hedy requires Python 3.7 or newer to run. However, your version of Python is',
           '.'.join([str(sys.version_info.major), str(sys.version_info.minor), str(sys.version_info.micro)]))
     quit()
 
@@ -22,7 +22,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, \
-    is_teacher, update_is_teacher
+    is_teacher, update_is_teacher, pick
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -36,7 +36,7 @@ from flask_compress import Compress
 import hedy_content
 import hedyweb
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements, quiz_svg_icons
-
+from website.log_fetcher import log_fetcher
 import quiz
 
 # Set the current directory to the root Hedy folder
@@ -208,12 +208,6 @@ def initialize_session():
     login_user_from_token_cookie()
 
 
-@app.before_request
-def initialize_achievements():
-    if current_user()['username'] and 'achieved' not in session:
-        ACHIEVEMENTS.initialize_user_data(current_user()['username'])
-
-
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
     def reject_e2e_requests():
@@ -278,12 +272,20 @@ def setup_language():
         session['lang'] = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
     g.lang = session['lang']
 
+    # Set the page direction -> automatically set it to "left-to-right"
+    # Switch to "right-to-left" if one of the language in the list is selected
+    # This is the only place to expand / shrink the list of RTL languages -> front-end is fixed based on this value
+    g.dir = "ltr"
+    if g.lang in ['ar', 'he', 'ur']:
+        g.dir = "rtl"
+
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
         return "Language " + g.lang + " not supported", 404
     # Also get the 'ui' translations into a global object for this language, these
     # are used a lot so we can clean up a fair bit by initializing here.
     g.ui_texts = TRANSLATIONS.get_translations(g.lang, 'ui')
+    g.auth_texts = TRANSLATIONS.get_translations(g.lang, 'Auth')
 
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
@@ -491,13 +493,16 @@ def parse():
                 response['Code'] = NORMAL_PREFIX_CODE + transpile_result.code
         except:
             pass
-
+        try:
+            if 'sleep' in hedy.all_commands(code, level, lang):
+                response['has_sleep'] = True
+        except:
+            pass
         try:
             if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
-
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
@@ -651,7 +656,6 @@ def version_page():
                            heroku_release_time=the_date,
                            commit=commit)
 
-
 def achievements_page():
     user = current_user()
     username = user['username']
@@ -676,14 +680,15 @@ def programs_page(request):
     from_user = request.args.get('user') or None
     if from_user and not is_admin(user):
         if not is_teacher(user):
-            return utils.page_403(ui_message='not_teacher')
+            return utils.error_page(error=403, ui_message='not_teacher')
         students = DATABASE.get_teacher_students(username)
         if from_user not in students:
-            return utils.page_403(ui_message='not_enrolled')
+            return utils.error_page(error=403, ui_message='not_enrolled')
 
     adventures = load_adventure_for_language(g.lang)
 
     result = DATABASE.programs_for_user(from_user or username)
+    public_profile = DATABASE.get_public_profile_settings(username)
     programs = []
     now = timems()
     for item in result:
@@ -694,57 +699,39 @@ def programs_page(request):
              'public': item.get('public')})
 
     return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
-                           current_page='programs', from_user=from_user, adventures=adventures)
+                           current_page='programs', from_user=from_user, adventures=adventures,
+                           public_profile=public_profile)
 
-@app.route('/program-stats')
-def get_program_stats():
-    start_date = request.args.get('start', default=None, type=str)
-    end_date = request.args.get('end', default=None, type=str)
+
+@app.route('/logs/query', methods=['POST'])
+def query_logs():
+    user = current_user()
+    if not is_admin(user):
+        return utils.error_page(error=403, ui_message='unauthorized')
+
+    body = request.json
+    if body is not None and not isinstance(body, dict):
+        return 'body must be an object', 400
+
+    (exec_id, status) = log_fetcher.query(body)
+    response = {'query_status': status, 'query_execution_id': exec_id}
+    return jsonify(response)
+
+
+@app.route('/logs/results', methods=['GET'])
+def get_log_results():
+    query_execution_id = request.args.get('query_execution_id', default=None, type=str)
+    next_token = request.args.get('next_token', default=None, type=str)
 
     user = current_user()
     if not is_admin(user):
-        return utils.page_403(ui_message='unauthorized')
+        return utils.error_page(error=403, ui_message='unauthorized')
 
-    data = DATABASE.get_all_program_stats(start_date, end_date)
-    processed_data = _program_runs_stats(data)
-    response = [{'level': k, 'data': v} for k, v in processed_data.items()]
-    response.sort(key=lambda el: el['level'])
-    for r in response:
-        r['level'] = str(r['level'])
+    data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
+    response = {'data': data, 'next_token': next_token}
     return jsonify(response)
 
-def _program_runs_stats(data):
-    result = {}
-    for rec in data:
-        level = rec['level']
-        result[level] = _process_program_runs_rec(result.get(level), rec)
-    _add_error_rate(result)
-    return result
 
-def _process_program_runs_rec(data, rec):
-    if not data:
-        data = {'failed_runs': 0, 'successful_runs': 0}
-
-    successes = rec.get('successful_runs')
-    if successes:
-        data['successful_runs'] += successes
-
-    for k, v in _filter_exceptions(rec).items():
-        if not data.get(k):
-            data[k] = 0
-        data[k] += v
-        data['failed_runs'] += v
-
-    return data
-
-def _filter_exceptions(s):
-    return {k: v for k, v in s.items() if k.lower().endswith('exception')}
-
-def _add_error_rate(data):
-    for k, v in data.items():
-        fails = v['failed_runs']
-        successes = v['successful_runs']
-        v['error_rate'] = fails / (successes + fails)
 
 def get_user_formatted_age(now, date):
     texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
@@ -787,11 +774,11 @@ def get_quiz(level_source, question_nr, attempt):
     if not is_quiz_enabled():
         return quiz_disabled_error()
 
-    # If we don't have an attempt ID yet, redirect to the start page
+        # If we don't have an attempt ID yet, redirect to the start page
     if not session.get('quiz-attempt-id'):
         return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
-    # Reading the yaml file
+        # Reading the yaml file
     questions = quiz.quiz_data_file_for(g.lang, level_source)
     if not questions:
         return no_quiz_data_error()
@@ -867,19 +854,18 @@ def quiz_finished(level):
     # set globals
     g.prefix = '/hedy'
 
-    achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "next_question")
-    if round(session.get('total_score', 0) / quiz.max_score(questions) * 100) == 100:
+    achievement = None
+    if current_user()['username']:
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "next_question")
+        if round(session.get('total_score', 0) / quiz.max_score(questions) * 100) == 100:
+            if achievement:
+                achievement.append(ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")[0])
+            else:
+                achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")
         if achievement:
-            achievement.append(ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")[0])
-        else:
-            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")
-    if achievement:
-        achievement = json.dumps(achievement)
+            achievement = json.dumps(achievement)
 
     print(achievement)
-    # use the session ID as a username.
-    username = current_user()['username'] or f'anonymous:{session_id()}'
-    quiz_answers = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
 
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
                            total_score=round(session.get('total_score', 0) / quiz.max_score(questions) * 100),
@@ -962,6 +948,7 @@ def submit_answer(level_source, question_nr, attempt):
                             attempt=attempt + 1, lang=g.lang))
 
 
+
 @app.route('/quiz/feedback/<int:level_source>/<int:question_nr>', methods=["GET"])
 def quiz_feedback(level_source, question_nr):
     if not is_quiz_enabled():
@@ -1017,11 +1004,11 @@ def is_quiz_enabled():
 
 
 def quiz_disabled_error():
-    return utils.page_404('Hedy quiz disabled!', menu=False)
+    return utils.error_page(error=404, page_error='Hedy quiz disabled!', menu=False, iframe=True)
 
 
 def no_quiz_data_error():
-    return utils.page_404('No quiz data found for this level', menu=False)
+    return utils.error_page(error=404, page_error='No quiz data found for this level', menu=False, iframe=True)
 
 
 # routing to index.html
@@ -1037,9 +1024,9 @@ def index(level, step):
         try:
             g.level = level = int(level)
         except:
-            return utils.page_404(ui_message='no_such_level')
+            return utils.error_page(error=404, ui_message='no_such_level')
     else:
-        return utils.page_404(ui_message='no_such_level')
+        return utils.error_page(error=404, ui_message='no_such_level')
 
     g.prefix = '/hedy'
 
@@ -1050,13 +1037,13 @@ def index(level, step):
     if step and isinstance(step, str) and len(step) > 2:
         result = DATABASE.program_by_id(step)
         if not result:
-            return utils.page_404(ui_message='no_such_program')
+            return utils.error_page(error=404, ui_message='no_such_program')
 
         user = current_user()
         public_program = 'public' in result and result['public']
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(
                 user):
-            return utils.page_404(ui_message='no_such_program')
+            return utils.error_page(error=404, ui_message='no_such_program')
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
         if 'adventure_name' in result:
@@ -1067,7 +1054,7 @@ def index(level, step):
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
     if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
-        return utils.page_404(ui_message='no_such_level')
+        return utils.error_page(error=404, ui_message='no_such_level')
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
@@ -1090,7 +1077,7 @@ def view_program(id):
 
     result = DATABASE.program_by_id(id)
     if not result:
-        return utils.page_404(ui_message='no_such_program')
+        return utils.error_page(error=404, ui_message='no_such_program')
 
     # If we asked for a specific language, use that, otherwise use the language
     # of the program's author.
@@ -1143,14 +1130,14 @@ def client_messages():
 
 @app.errorhandler(404)
 def not_found(exception):
-    return utils.page_404(ui_message='page_not_found')
+    return utils.error_page(error=404, ui_message='page_not_found')
 
 
 @app.errorhandler(500)
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return utils.page_500()
+    return utils.error_page(error=500)
 
 
 @app.route('/index.html')
@@ -1164,8 +1151,8 @@ def main_page(page):
     if page == 'favicon.ico':
         abort(404)
 
-    if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
-        return auth_templates(page, hedyweb.get_page_title(page), g.lang, request)
+    if page in ['signup', 'login', 'my-profile', 'recover', 'reset']:
+        return auth_templates(page, hedyweb.get_page_title(page))
 
     if page == "my-achievements":
         return achievements_page()
@@ -1185,7 +1172,7 @@ def main_page(page):
             return render_template('landing-page.html', page_title=hedyweb.get_page_title(page),
                                    text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
-            return utils.page_403(ui_message='not_user')
+            return utils.error_page(error=403, ui_message='not_user')
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -1200,11 +1187,11 @@ def main_page(page):
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
                                    welcome_teacher=welcome_teacher)
         else:
-            return utils.page_403(ui_message='not_teacher')
+            return utils.error_page(error=403, ui_message='not_teacher')
 
     if page == 'stats':
         if not is_admin(current_user()):
-            return utils.page_403(ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message='unauthorized')
         return render_template('admin-stats.html')
 
     requested_page = hedyweb.PageTranslations(page)
@@ -1214,6 +1201,83 @@ def main_page(page):
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
                            content=main_page_translations)
+
+
+@app.route('/explore', methods=['GET'])
+def explore():
+    level = request.args.get('level', default=None, type=str)
+    adventure = request.args.get('adventure', default=None, type=str)
+
+    level = None if level == "null" else level
+    adventure = None if adventure == "null" else adventure
+
+    if level or adventure:
+        programs = DATABASE.get_filtered_explore_programs(level, adventure)
+    else:
+        programs = DATABASE.get_all_explore_programs()
+
+    for program in programs:
+        program['code'] = "\n".join(program['code'].split("\n")[:4])
+
+    adventures = None
+    if hedy_content.Adventures(session['lang']).has_adventures():
+        adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
+
+    return render_template('explore.html', programs=programs,
+                           filtered_level=level,
+                           filtered_adventure=adventure,
+                           max_level=hedy.HEDY_MAX_LEVEL,
+                           adventures=adventures,
+                           page_title=hedyweb.get_page_title('explore'),
+                           current_page='explore')
+
+
+@app.route('/admin', methods=['GET'])
+def get_admin_page():
+    if not utils.is_testing_request(request) and not is_admin(current_user()):
+        return 'unauthorized', 403
+
+    category = request.args.get('filter', default=None, type=str)
+    start_date = request.args.get('start', default=None, type=str)
+    end_date = request.args.get('end', default=None, type=str)
+
+    filter = None if category == "null" else category
+    start_date = None if start_date == "null" else start_date
+    end_date = None if end_date == "null" else end_date
+
+    filtering = False
+    if start_date or end_date:
+        filtering = True
+
+    # After hitting 1k users, it'd be wise to add pagination.
+    users = DATABASE.all_users(filtering)
+    userdata =[]
+    fields =['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
+
+    for user in users:
+        data = pick(user, *fields)
+        data['email_verified'] = not bool(data['verification_pending'])
+        data['is_teacher'] = bool(data['is_teacher'])
+        data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
+        if filtering and filter == "created":
+            if (start_date and utils.datetotimeordate(start_date) >= data['created']) or (end_date and utils.datetotimeordate(end_date) <= data['created']):
+                continue
+        if data['last_login']:
+            data['last_login'] = utils.datetotimeordate(utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
+            if filtering and filter == "last_login":
+                if (start_date and utils.datetotimeordate(start_date) >= data['last_login']) or (end_date and utils.datetotimeordate(end_date) <= data['last_login']):
+                    continue
+        userdata.append(data)
+
+    userdata.sort(key=lambda user: user['created'], reverse=True)
+    counter = 1
+    for user in userdata:
+        user['index'] = counter
+        counter = counter + 1
+
+    return render_template('admin.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
+                           filter=filter, start_date=start_date, end_date=end_date,
+                           program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 
 @app.route('/change_language', methods=['POST'])
@@ -1333,7 +1397,7 @@ def render_main_menu(current_page):
 @app.route('/programs_list', methods=['GET'])
 @requires_login
 def list_programs(user):
-    return {'programs': DATABASE.programs_for_user(user['username'])}
+    return {'programs': DATABASE.programs_for_user(user['username']).records}
 
 
 @app.route('/programs/delete/', methods=['POST'])
@@ -1349,6 +1413,11 @@ def delete_program(user):
         return "", 404
     DATABASE.delete_program_by_id(body['id'])
     DATABASE.increase_user_program_count(user['username'], -1)
+
+    # This only happens in the situation were a user deletes their favourite program -> Delete from public profile
+    public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
+    if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
+        DATABASE.set_favourite_program(user['username'], None)
 
     achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "do_you_have_copy")
     if achievement:
@@ -1391,7 +1460,7 @@ def save_program(user):
     # We check if a program with a name `xyz` exists in the database for the username.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
-    programs = DATABASE.programs_for_user(user['username'])
+    programs = DATABASE.programs_for_user(user['username']).records
     program_id = uuid.uuid4().hex
     overwrite = False
     for program in programs:
@@ -1441,6 +1510,11 @@ def share_unshare_program(user):
     if not result or result['username'] != user['username']:
         return 'No such program!', 404
 
+    #This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
+    public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
+    if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
+        DATABASE.set_favourite_program(user['username'], None)
+
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
     achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
     if achievement:
@@ -1469,6 +1543,21 @@ def submit_program(user):
         return jsonify({"achievements": ACHIEVEMENTS.get_earned_achievements()})
     return jsonify({})
 
+@app.route('/programs/set_favourite', methods=['POST'])
+@requires_login
+def set_favourite_program(user):
+    body = request.json
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('id'), str):
+        return 'id must be a string', 400
+
+    result = DATABASE.program_by_id(body['id'])
+    if not result or result['username'] != user['username']:
+        return 'No such program!', 404
+
+    DATABASE.set_favourite_program(user['username'], body['id'])
+    return jsonify({})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
@@ -1531,13 +1620,41 @@ def update_yaml():
                     headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
 
 
+@app.route('/user/<username>')
+def public_user_page(username):
+    user = DATABASE.user_by_username(username.lower())
+    if not user:
+        return utils.error_page(error=404, ui_message='user_not_private')
+    user_public_info = DATABASE.get_public_profile_settings(username)
+    if user_public_info:
+        user_programs = DATABASE.public_programs_for_user(username)
+        user_achievements = DATABASE.progress_by_username(username)
+
+        favourite_program = None
+        if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
+            favourite_program = DATABASE.program_by_id(user_public_info['favourite_program'])
+        if len(user_programs) >= 5:
+            user_programs = user_programs[:5]
+
+        last_achieved = None
+        if 'achieved' in user_achievements:
+            last_achieved = user_achievements['achieved'][-1]
+
+        return render_template('public-page.html', user_info=user_public_info,
+                               favourite_program=favourite_program,
+                               programs=user_programs,
+                               last_achieved=last_achieved,
+                               user_achievements=user_achievements)
+    return utils.error_page(error=404, ui_message='user_not_private')
+
+
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):
     user = current_user()
     lang = g.lang
 
     if os.getenv('TEACHER_INVITE_CODE') != code:
-        return utils.page_404(ui_message='invalid_teacher_invitation_code')
+        return utils.error_page(error=404, ui_message='invalid_teacher_invitation_code')
     if not user['username']:
         return render_template('teacher-invitation.html')
 
@@ -1564,6 +1681,11 @@ teacher.routes(app, DATABASE, ACHIEVEMENTS)
 
 ACHIEVEMENTS.routes(app, DATABASE)
 
+# *** STATISTICS ***
+
+from website import statistics
+
+statistics.routes(app, DATABASE)
 
 # *** START SERVER ***
 

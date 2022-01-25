@@ -1,0 +1,88 @@
+{% extends "auth.html" %}
+
+{% block main %}
+    <div id="general_info" class="flex flex-row items-center h-64 mt-8 mx-2">
+        <div class="w-1/3 mr-4 h-full flex items-center justify-center">
+            {% if user_info.image %}
+                <img src="{{static('/images/profile_images/' + user_info.image + '.png')}}" class="w-64">
+            {% else %}
+                <img src="{{static('/images/Hedy-logo.png')}}" class="w-64">
+            {% endif %}
+        </div>
+        <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
+            <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
+                <div class="text-white tracking-wide text-4xl">{{ user_info.username }}</div>
+                {% if user_achievements['achieved'] %}
+                    <div class="text-white text-xl ml-auto">{{ user_achievements['achieved']|length }} {{ auth.achievements }}</div>
+                {% endif %}
+            </div>
+            {% if user_info.personal_text %}
+                <div class="my-auto px-16 text-xl italic" rel="noreferrer">
+                    {{ user_info.personal_text }}
+                </div>
+            {% endif %}
+            {% if achievements %}
+                <div class="mt-auto">
+                    <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-center rounded-b-lg">
+                        {% if user_achievements.run_programs %}
+                            <div>{{ user_achievements.run_programs }} {{ texts.amount_created }}</div>
+                        {% else %}
+                            <div>0 {{ texts.amount_created }}</div>
+                        {% endif %}
+                        <div class="mx-2">|</div>
+                        {% if user_achievements.saved_programs %}
+                            <div>{{ user_achievements.saved_programs }} {{ texts.amount_saved }}</div>
+                        {% else %}
+                            <div>0 {{ texts.amount_saved }}</div>
+                        {% endif %}
+                        <div class="mx-2">|</div>
+                        {% if user_achievements.submitted_programs %}
+                            <div>{{ user_achievements.submitted_programs }} {{ texts.amount_submitted }}</div>
+                        {% else %}
+                            <div>0 {{ texts.amount_submitted }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        {% if last_achieved %}
+        <div class="text-center rounded-lg bg-yellow-400 w-1/3 ml-4 mr-4 border border-black">
+            <h3>{{ auth.last_achievement }}</h3>
+            <img class="w-full px-8 mt-2" src="{{static('/images/achievement.png')}}">
+            <h4>{{ achievements[last_achieved].title }}</h4>
+        </div>
+        {% endif %}
+    </div>
+    <h2 class="ml-4">{{ auth.program_header }}</h2>
+    {% if favourite_program or programs %}
+        <div class="flex flex-wrap w-full turn-pre-into-ace">
+        {% if favourite_program %}
+             <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-yellow-400 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{favourite_program.id}}'))">
+                 <div class="text-white text-gray-700 text-2xl flex items-center justify-center mt-2 mb-2">
+                    <p>{{ favourite_program.name }}</p>
+                </div>
+                <div class="relative px-4 mb-4">
+                    <pre class="no-copy-button max-h-full" id="{{ favourite_program.level }}">{{ favourite_program.code | truncate(150) }}</pre>
+                </div>
+            </div>
+        {% endif %}
+        {% if programs %}
+            {% for program in programs %}
+                {% if program.id != favourite_program.id %}
+                    <div class="w-full rounded-lg border border-black ml-4 mr-4 mt-4 relative bg-blue-200 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+                        <div class="flex items-center justify-center mt-2 mb-2">
+                            <p>{{ program.name }}</p>
+                        </div>
+                        <div class="relative px-4 mb-4">
+                            <pre class="no-copy-button" id="{{ program.level }}">{{ program.code | truncate(50) }}</pre>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </div>
+    {% else %}
+        <div class="ml-4">{{ user_info.username }} {{ texts.no_shared_programs }}</div>
+
+    {% endif %}
+{% endblock %}

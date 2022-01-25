@@ -52,6 +52,13 @@
         ```
 
         Print still works as in level 1, and you no longer need `echo`.
+
+        Another new command in this level is `sleep`, which pauses your program for a second. If you type a number behind the sleep command, the program pauses for that amout of seconds.
+        ```
+        print 'My favorite colour is...'
+        sleep 2
+        print 'green!'
+        ```
     start_code: "print hello world!"
     commands:
     -   name: "is"
@@ -66,6 +73,15 @@
         demo_code: |-
             color is ask What is your favorite color?
             print color is your favorite!
+    -   name: "sleep"
+        explanation: "Let Hedy pause for a (couple of) second(s)."
+        example: "Example: sleep 2 "
+        demo_code: |-
+            print Let me think for one second...
+            sleep
+            print Hmm.. I need 3 more seconds...
+            sleep 3
+            print Eureka! Ive got it!
     -   explanation: "Give a number a name using `is`. You can choose the name yourself."
         example: "Example: angle is 90"
         demo_code: |-
@@ -81,7 +97,14 @@
         print animals at random
         ```
 
-        You find all the codes of level 3 in the left bar. There are also tabs with assignments.
+        You can also add items to the list with `add` and remove items with `remove`.
+        ```
+        animals is dog, cat, kangaroo
+        add penguin to animals
+        remove cat from animals
+        print animals at random
+        ```
+
     start_code: "print hello world!"
     commands:
     -   name: choose_random
@@ -90,6 +113,18 @@
         demo_code: |-
             animals is dog, cat, kangaroo
             print animals at random
+    -   name: "Add"
+        explanation: "Add an item to a list"
+        example: "Example: add dog to animals"
+        demo_code: |-
+            animals is cow, cat
+            add dog to animals
+    -   name: "Remove"
+        explanation: "Remove an item from a list"
+        example: "Example: remove dog from animals"
+        demo_code: |-
+            animals is cat, dog, cow
+            remove dog from animals
 4:
     start_code: "print 'Hello world'"
     intro_text: |
@@ -418,8 +453,14 @@
         This allows you to save two words as 1 item on the list, for example 'Iron Man'.
 
         ```
-        superheroes is 'Spiderman', 'Batman', 'Iron Man'
+        superheroes = 'Spiderman', 'Batman', 'Iron Man'
         print superheroes at random
+        ```
+        ## All text after `if` comparisons need quotation marks too
+        ```
+        name = ask 'What is your name?'
+        if name = 'Hedy the Robot'
+            print 'Hi there!'
         ```
         ## Numbers don't need quotation marks
         For numbers, you do not use quotation marks in the `=`:
@@ -441,6 +482,13 @@
         demo_code: |
             name = 'Hedy the Robot'
             print 'Hello ' name
+    -   name: "quotes after if comparison"
+        explanation: "Text with quotation marks after if"
+        example: "naam = 'Hedy'"
+        demo_code: |
+            name = ask 'Who are you?'
+            if naam = 'Hedy'
+                print 'Hi there!'
     -   name: "quotes in list"
         explanation: "A list with quotation marks"
         example: "name = 'Hedy', 'Felienne'"

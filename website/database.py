@@ -7,10 +7,10 @@ import operator
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
-USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.Key('email')])
+USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.Key('username')])
-CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.Key(v) for v in ['teacher', 'link']])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey('username')])
+CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 
 # Customizations contains the class customizations made by a teacher on a specific class/level combination.
 # Each entry stores a unique class_id / level combination and the selected adventures, example programs and/or hiding of level
@@ -35,6 +35,7 @@ CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.Key(v) f
 #     }
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
+PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='username')
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -68,7 +69,7 @@ QUIZ_ANSWERS = dynamo.Table(storage, 'quizAnswers', partition_key='user', sort_k
 # }
 #
 PROGRAM_STATS = dynamo.Table(storage, 'program-stats', partition_key='id#level', sort_key='week',
-                             indexed_fields=[dynamo.Key('id', 'week')])
+                             indexed_fields=[dynamo.IndexKey('id', 'week')])
 
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
@@ -110,6 +111,10 @@ class Database:
         Returns: [{ code, name, program, level, adventure_name, date }]
         """
         return PROGRAMS.get_many({'username': username}, reverse=True)
+
+    def public_programs_for_user(self, username):
+        programs = PROGRAMS.get_many({'username': username}, reverse=True)
+        return [p for p in programs if p.get('public') == 1]
 
     def program_by_id(self, id):
         """Get program by ID.
@@ -198,9 +203,43 @@ class Database:
         for Class in self.get_teacher_classes (username, False):
             self.delete_class (Class)
 
-    def all_users(self):
+    def all_users(self, filtering=False):
         """Return all users."""
-        return USERS.scan()
+        #If we have some filtering -> return all possible users, otherwise return last 500
+        if filtering:
+            return USERS.scan()
+        return USERS.scan(limit=500)
+
+    def get_all_explore_programs(self):
+        programs = PROGRAMS.scan()
+        public_programs = []
+        for program in programs:
+            if 'public' in program:
+                public_programs.append(program)
+        return public_programs[-50:]
+        #Todo:
+        # This [-50:] is a bucket-fix, we would like to add a partition key to the programs table
+        # Enabling us to directly only retrieve the last x programs by using the filter() function
+
+    def get_filtered_explore_programs(self, level=None, adventure=None):
+        programs = PROGRAMS.scan()
+        result = []
+        for program in programs:
+            if 'public' in program:
+                result.append(program)
+        level_programs = []
+        if level:
+            for program in result:
+                if program['level'] == int(level):
+                    level_programs.append(program)
+            result = level_programs
+        adventure_programs = []
+        if adventure:
+            for program in result:
+                if 'adventure_name' in program and program['adventure_name'] == adventure:
+                    adventure_programs.append(program)
+            result = adventure_programs
+        return result[-50:]
 
     def all_programs_count(self):
         """Return the total number of all programs."""
@@ -331,7 +370,6 @@ class Database:
             restrictions['hide_level'] = False
             restrictions['hide_prev_level'] = False
             restrictions['hide_next_level'] = False
-
         return display_adventures, restrictions
 
     def progress_by_username(self, username):
@@ -352,7 +390,6 @@ class Database:
             user_achievements['achieved'] = []
         if achievement not in user_achievements['achieved']:
             user_achievements['achieved'].append(achievement)
-            user_achievements['achieved'] = list(dict.fromkeys(user_achievements['achieved']))
             ACHIEVEMENTS.put(user_achievements)
 
     def add_achievements_to_username(self, username, achievements):
@@ -386,6 +423,27 @@ class Database:
 
     def increase_user_submit_count(self, username):
         ACHIEVEMENTS.update({'username': username}, {'submitted_programs': dynamo.DynamoIncrement(1)})
+
+    def update_public_profile(self, username, data):
+        data['username'] = username
+        PUBLIC_PROFILES.put(data)
+
+    def set_favourite_program(self, username, program_id):
+        data = PUBLIC_PROFILES.get({'username': username})
+        if data and 'favourite_program' in data:
+            data['favourite_program'] = program_id
+            self.update_public_profile(username, data)
+            return True
+        # We can't set a favourite program without a public page!
+        # Todo: In the feature we might enable users to set any program as favourite -> requires some work
+        return False
+
+
+    def get_public_profile_settings(self, username):
+        return PUBLIC_PROFILES.get({'username': username})
+
+    def forget_public_profile(self, username):
+        PUBLIC_PROFILES.delete({'username': username})
 
     def add_program_stats(self, id, level, exception):
         key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
