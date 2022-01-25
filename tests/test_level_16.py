@@ -26,6 +26,27 @@ class TestsLevel16(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_print_list_commas(self):
+        code = textwrap.dedent("""\
+            szamok1 = ['1' , '2' , '3' , '4' , '5']
+            szamok2 = ['6' , '7' , '8' , '9']
+            print szamok1[random]""")
+
+        expected = textwrap.dedent("""\
+            szamok1 = ['1', '2', '3', '4', '5']
+            szamok2 = ['6', '7', '8', '9']
+            print(f'{random.choice(szamok1)}')""")
+
+        szamok1 = ['1', '2', '3', '4', '5']
+        check_in_list = (lambda x: HedyTester.run_code(x) in szamok1)
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            extra_check_function=check_in_list
+        )
+
     def test_print_list_access(self):
         code = textwrap.dedent("""\
             fruit is ['banaan', 'appel', 'kers'] 
