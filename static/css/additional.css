@@ -78,12 +78,10 @@ body[dir='rtl'] .ace_scroller {
 }
 
 .ace_layer .ace_gutter-layer {
-    /* original width is 48px */
     width: 32px !important;
 }
 
 .ace_gutter-layer > * {
-    /* 48 - 32 = 16 */
     margin-left: 2px;
     margin-right: 0px;
     padding-left: 2px;
@@ -92,6 +90,11 @@ body[dir='rtl'] .ace_scroller {
 }
 
 body[dir='rtl'] .ace_gutter-layer {
+    margin-left: 0px;
+    margin-right: 2px;
+    padding-left: 0px;
+    padding-right: 2px;
+    text-align: right;
     direction:rtl;
     unicode-bidi:bidi-override;
 }
