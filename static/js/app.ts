@@ -204,7 +204,7 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function runit(level: string, lang: string, cb: () => void) {
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000, true);
   if (reloadOnExpiredSession ()) return;
   StopExecution = true;
 
@@ -347,9 +347,7 @@ function removeBulb(){
 }
 
 export function fix_code(level: string, lang: string){
-
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
-
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000, true);
   if (reloadOnExpiredSession ()) return;
 
   try {
@@ -442,7 +440,7 @@ export function tryPaletteCode(exampleCode: string) {
     } else {
       $("#commands-window").hide();
       $("#toggle-button").hide();
-      modal.alert(auth.texts['examples_used'], 3000);
+      modal.alert(auth.texts['examples_used'], 3000, true);
       return;
     }
   }
@@ -479,7 +477,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       // The auth functions use this callback function.
       if (cb) return response.Error ? cb (response) : cb (null, response);
 
-      modal.alert (auth.texts['save_success_detail'], 3000);
+      modal.alert (auth.texts['save_success_detail'], 3000, false);
       if (response.achievements) {
         showAchievements(response.achievements, false, "");
       }
@@ -587,7 +585,7 @@ function change_shared (shared: boolean, index: number) {
 }
 
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
 
   var share = function (id: string) {
     $.ajax({
@@ -609,7 +607,7 @@ export function share_program (level: number, lang: string, id: string | true, i
         change_shared(true, index);
       } else {
         $('#modal-copy-ok-button').show();
-        modal.alert (auth.texts['unshare_success_detail'], 3000);
+        modal.alert (auth.texts['unshare_success_detail'], 3000, false);
         change_shared(false, index);
       }
     }).fail(function(err) {
@@ -652,7 +650,7 @@ export function delete_program(id: string, index: number) {
       } else {
           $('#program_' + index).remove();
       }
-      modal.alert (auth.texts['delete_success'], 3000);
+      modal.alert (auth.texts['delete_success'], 3000, false);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
@@ -699,7 +697,7 @@ function change_to_submitted (index: number) {
 }
 
 export function submit_program (id: string, index: number) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   $.ajax({
     type: 'POST',
     url: '/programs/submit',
@@ -737,7 +735,7 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
   }
   if (! noAlert) {
     modal.hide();
-    modal.alert (auth.texts['copy_clipboard'], 3000);
+    modal.alert (auth.texts['copy_clipboard'], 3000, false);
   }
 }
 
@@ -1079,7 +1077,7 @@ function showSuccesMessage(){
 function createModal(level:number ){
   let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ErrorMessages['Program_repair'];
-  modal.alert(editor, 0, title);
+  modal.repair(editor, 0, title);
 }
  function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     const editor = ace.edit(element);
