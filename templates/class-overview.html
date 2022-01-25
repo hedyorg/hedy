@@ -44,7 +44,7 @@
     <button class="green-btn ml-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
     <button class="green-btn ml-4" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link
       }}</button>
-    {% if not is_beta_teacher %}
+    {% if is_beta_teacher %}
     <button class="green-btn ml-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{auth
       .class_stats}}</button>
     {% endif %}
