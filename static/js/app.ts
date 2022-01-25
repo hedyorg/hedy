@@ -1003,7 +1003,7 @@ export function prompt_unsaved(cb: () => void) {
 }
 
 export function load_quiz(level: string) {
-  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full 100vh" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
 
 export function get_trimmed_code() {
