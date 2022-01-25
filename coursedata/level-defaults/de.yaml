@@ -76,10 +76,10 @@
             sleep 3
             print Eureka! Jetzt hab ich's!
     -   explanation: Vergib einen Namen an eine Zahl mit `is`. Du kannst den Namen selbst wählen.
-        example: 'Beispiel: Winkel is 90'
+        example: 'Beispiel: winkel is 90'
         demo_code: |-
-            Winkel is 90
-            turn Winkel
+            winkel is 90
+            turn winkel
             forward 100 
         name: is - turtle
 3:
@@ -96,22 +96,22 @@
     commands:
     -   name: "choose_random"
         explanation: "Wähle mit `at` und `random` zufällig ein Wort aus einer Gruppe aus."
-        example: "Beispiel: Tiere is Hund, Katze, Känguru."
+        example: "Beispiel: tiere is Hund, Katze, Känguru."
         demo_code: |-
-            Tiere is Hund, Katze, Känguru
-            print Tiere at random
+            tiere is Hund, Katze, Känguru
+            print tiere at random
     -   name: Add
         explanation: Füge ein Ding zu einer Liste hinzu.
-        example: 'Beispiel: add Hund to Tiere'
+        example: 'Beispiel: add Hund to tiere'
         demo_code: |-
-            Tiere is Kuh, Katze
-            add Hund to Tiere
+            tiere is Kuh, Katze
+            add Hund to tiere
     -   name: Remove
         explanation: Entferne ein Ding aus einer Liste
-        example: 'Beispiel: remove Hund from Tiere'
+        example: 'Beispiel: remove Hund from tiere'
         demo_code: |-
-            Tiere is Katze, Hund, Kuh
-            remove Hund from Tiere
+            tiere is Katze, Hund, Kuh
+            remove Hund from tiere
 4:
     start_code: "print 'Hallo Welt'"
     intro_text: |
@@ -189,11 +189,11 @@
             if Antwort is weit forward 100 else forward 5
     -   name: in
         explanation: Prüfe ob ein Ding in einer Liste enthalten ist
-        example: "Beispiel: if Farbe in schöne_farben print 'Schön!' else print 'meh'"
+        example: "Beispiel: if farbe in schöne_farben print 'Schön!' else print 'meh'"
         demo_code: |-
             schöne_farben is Grün, Gelb
-            Farbe is ask 'Was ist deine Lieblingsfarbe?'
-            if Farbe in schöne_farben print 'Schön!' else print 'meh'
+            farbe is ask 'Was ist deine Lieblingsfarbe?'
+            if farbe in schöne_farben print 'Schön!' else print 'meh'
 6:
     start_code: "print '5 mal 5 ist ' 5 * 5"
     intro_text: |
