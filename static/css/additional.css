@@ -51,3 +51,44 @@ input:checked ~ .dot {
     margin-left: 12rem !important;
   }
 }
+
+.ace_gutter {
+    width: 32px !important;
+    position: absolute;
+}
+
+body[dir='ltr'] .ace_gutter {
+    margin-right: auto;
+    left: 0;
+}
+
+body[dir='rtl'] .ace_gutter {
+    margin-left: auto;
+    right: 0;
+}
+
+body[dir='ltr'] .ace_scroller {
+    left: 32px !important;
+    right: 0px !important;
+}
+
+body[dir='rtl'] .ace_scroller {
+    left: 0px !important;
+    right: 32px !important;
+}
+
+.ace_layer .ace_gutter-layer {
+    /* original width is 48px */
+    width: 32px !important;
+}
+
+.ace_gutter-layer > * {
+    /* 48 - 32 = 16 */
+    margin-left: 2px;
+    margin-right: 0px;
+    padding-left: 2px;
+    padding-right: 0px;
+    text-align: left;
+}
+
+
