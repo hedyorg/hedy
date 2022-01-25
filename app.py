@@ -1541,6 +1541,7 @@ def set_favourite_program(user):
     DATABASE.set_favourite_program(user['username'], body['id'])
     return jsonify({})
 
+
 @app.route('/auth/public_profile', methods=['POST'])
 @requires_login
 def update_public_profile(user):
