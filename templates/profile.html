@@ -1,6 +1,13 @@
 {% extends "auth.html" %}
 
 {% block main %}
+    {% if achievement %}
+    <script>
+    $(function() {
+        hedyApp.showAchievements({{ achievement|safe }}, false, "");
+    });
+    </script>
+    {% endif %}
    <h2 class="px-8 mb-4">{{auth.account_overview}}</h2>
    <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#public_profile').toggle()">{{auth.public_profile}}</h1>
    <div id="public_profile" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
