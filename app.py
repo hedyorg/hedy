@@ -1188,7 +1188,17 @@ def explore():
 
 
 @app.route('/admin', methods=['GET'])
+@requires_login
 def get_admin_page():
+    if not utils.is_testing_request(request) and not is_admin(current_user()):
+        return 'unauthorized', 403
+
+    return render_template('admin.html', page_title=hedyweb.get_page_title('admin'))
+
+
+@app.route('/admin/users', methods=['GET'])
+@requires_login
+def get_admin_users_page():
     if not utils.is_testing_request(request) and not is_admin(current_user()):
         return 'unauthorized', 403
 
