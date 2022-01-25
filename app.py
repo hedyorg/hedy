@@ -1183,9 +1183,8 @@ def explore():
 
 
 @app.route('/admin', methods=['GET'])
-@requires_login
-def get_admin_page(user):
-    if not utils.is_testing_request(request) and not is_admin(user):
+def get_admin_page():
+    if not utils.is_testing_request(request) and not is_admin(current_user()):
         return utils.error_page(error=403, ui_message='unauthorized')
     return render_template('admin.html', page_title=hedyweb.get_page_title('admin'))
 
