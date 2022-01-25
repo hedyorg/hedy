@@ -314,6 +314,9 @@ class Database:
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
 
+    def all_classes(self):
+        return CLASSES.scan()
+
     def remove_customizations_class(self, class_id, level):
         CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
 
