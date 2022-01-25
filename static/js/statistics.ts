@@ -134,7 +134,7 @@ export const stats = {
     return false;
   },
 
-  searchProgramLogs: function (classId: any) {
+  searchProgramLogs: function (classId: string) {
     var raw_data = $('#logs-search-form').serializeArray();
     var payload: any = {}
     $.map(raw_data, function(n){

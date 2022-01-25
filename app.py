@@ -734,7 +734,7 @@ def get_log_results():
 
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return utils.error_page(error=403, ui_message='unauthorized')
+        return 'unauthorized', 403
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
@@ -1201,15 +1201,18 @@ def get_admin_page():
         return 'unauthorized', 403
 
     category = request.args.get('filter', default=None, type=str)
+    category = None if category == "null" else category
+
+    substring = request.args.get('substring', default=None, type=str)
     start_date = request.args.get('start', default=None, type=str)
     end_date = request.args.get('end', default=None, type=str)
 
-    filter = None if category == "null" else category
+    substring = None if substring == "null" else substring
     start_date = None if start_date == "null" else start_date
     end_date = None if end_date == "null" else end_date
 
     filtering = False
-    if start_date or end_date:
+    if substring or start_date or end_date or category == "all":
         filtering = True
 
     # After hitting 1k users, it'd be wise to add pagination.
@@ -1222,12 +1225,15 @@ def get_admin_page():
         data['email_verified'] = not bool(data['verification_pending'])
         data['is_teacher'] = bool(data['is_teacher'])
         data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
-        if filtering and filter == "created":
+        if filtering and category == "email":
+            if substring not in data['email']:
+                continue
+        if filtering and category == "created":
             if (start_date and utils.datetotimeordate(start_date) >= data['created']) or (end_date and utils.datetotimeordate(end_date) <= data['created']):
                 continue
         if data['last_login']:
             data['last_login'] = utils.datetotimeordate(utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
-            if filtering and filter == "last_login":
+            if filtering and category == "last_login":
                 if (start_date and utils.datetotimeordate(start_date) >= data['last_login']) or (end_date and utils.datetotimeordate(end_date) <= data['last_login']):
                     continue
         userdata.append(data)
@@ -1239,7 +1245,7 @@ def get_admin_page():
         counter = counter + 1
 
     return render_template('admin.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
-                           filter=filter, start_date=start_date, end_date=end_date,
+                           filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
                            program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 
