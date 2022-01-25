@@ -297,9 +297,9 @@ def routes (app, database, achievements):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return 'username must be a string', 400
+            return g.auth_texts.get('username_invalid'), 400
         if not isinstance(body.get('class_id'), str):
             return 'class id must be a string', 400
 
