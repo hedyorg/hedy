@@ -33,7 +33,7 @@ CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey
 #       "hide_prev_level": false,
 #       "hide_next_level": false
 #     }
-INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username')
+INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='username')
@@ -325,12 +325,7 @@ class Database:
         INVITATIONS.delete({'username': username})
 
     def get_class_invites(self, class_id):
-        invites = INVITATIONS.scan()
-        result = []
-        for invite in invites:
-            if invite.get('class_id') == class_id:
-                result.append(invite)
-        return result
+        return INVITATIONS.get({'class_id': class_id})
 
     def remove_customizations_class(self, class_id, level):
         CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
