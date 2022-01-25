@@ -1583,7 +1583,8 @@ def update_yaml():
 
 
 @app.route('/user/<username>')
-def public_user_page(username):
+@requires_login
+def public_user_page(user, username):
     user = DATABASE.user_by_username(username.lower())
     if not user:
         return utils.error_page(error=404, ui_message='user_not_private')
@@ -1601,6 +1602,8 @@ def public_user_page(username):
         last_achieved = None
         if 'achieved' in user_achievements:
             last_achieved = user_achievements['achieved'][-1]
+
+        # Todo: TB -> In the near future: add achievement for user visiting their own profile
 
         return render_template('public-page.html', user_info=user_public_info,
                                favourite_program=favourite_program,
