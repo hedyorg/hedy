@@ -186,6 +186,11 @@ export function delete_adventure(adventure_id: string) {
   });
 }
 
+export function preview_adventure() {
+    const content = $('#custom_adventure_content').val();
+    console.log(content);
+}
+
 export function show_doc_section(section_key: string) {
   $(".section-button").each(function(){
        if ($(this).hasClass('blue-btn')) {

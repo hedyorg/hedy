@@ -58,7 +58,9 @@ $('#show-hide-missing-translations').click(function() {
 $('textarea').each((_i, el) => resizeArea(el)).on('input', e => {
   const target = $(e.target);
   if (!target.hasClass('touched')) {
-    target.addClass('touched');
+    target.addClass('');
+    // Todo: TB -> Temporary remove the 'touched' class as it changed ANY textarea on the website
+    //  We have to make this a bit nicer that it only concerns the translating onces
 
     // Change the 'data-name="xxx"' attribute into an actual 'name="xxx"' attribute
     // so that the value is actually submitted via the form.
