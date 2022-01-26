@@ -1,6 +1,7 @@
 /**
  * The modal we pop up to have children confirm things
  */
+
 class Modal {
   constructor() {
     // Just one binding, never needs stat
@@ -10,6 +11,7 @@ class Modal {
     $('#modal-copy-ok-button').on('click', () => this.hide());
     $('#modal-alert-button').on('click', () => this.hide());
     $('#modal-repair-button').on('click', () => this.hide());
+    $('#modal-preview-button').on('click', () => this.hide());
   }
 
   private _timeout?: ReturnType<typeof setTimeout>
@@ -32,6 +34,7 @@ class Modal {
     $('#modal-alert').hide();
     $('#modal-copy').hide();
     $('#modal-repair').hide();
+    $('#modal-preview').hide();
   }
 
   public alert(message: string, timeoutMs?: number, error?: boolean) {
@@ -75,6 +78,17 @@ class Modal {
       this._timeout = undefined;
     }
     if (timeoutMs) this._timeout = setTimeout(() => this.hide(), timeoutMs);
+  }
+
+  public preview(content: JQuery, title: string) {
+    console.log(content);
+    console.log(title);
+
+    $('#modal-preview-title').html(title);
+    $('#modal-preview-content').append(content);
+
+    this.show();
+    $('#modal-repair').show();
   }
 
   public repair(message: string, timeoutMs?: number,  title: string = '') {
