@@ -188,7 +188,16 @@ export function delete_adventure(adventure_id: string) {
 
 export function preview_adventure() {
     const content = $('#custom_adventure_content').val();
+    const level = $('#custom_adventure_level').val();
+    console.log(level)
     console.log(content);
+    if (level) {
+        console.log(level);
+        // We have to get the correct syntax highlighting!
+    }
+    // Todo after coffee break:
+    // Get the repair modal -> input the content data
+    // Make sure the <code> elements are parsed correctly! -> give level as attribute
 }
 
 export function show_doc_section(section_key: string) {
