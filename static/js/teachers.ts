@@ -188,25 +188,8 @@ export function delete_adventure(adventure_id: string) {
 }
 
 export function preview_adventure() {
-    let content = <string>$('#custom_adventure_content').val();
-    const level = $('#custom_adventure_level').val();
-    if (level) {
-        content = content.replace(/<pre>/g, "<pre class='preview' id='" + level + "'>");
-    }
-    let editor = $('<div>').addClass('w-80 h-64 bg-gray-200 border border-black rounded-lg text-black text-left p-4');
-    for (const preview of $('.preview pre').get()) {
-        console.log("we vinden weer een pre!");
-        $(preview).addClass('text-lg rounded');
-        const exampleEditor = turnIntoAceEditor(preview, true)
-        exampleEditor.setOptions({ maxLines: Infinity });
-        exampleEditor.setOptions({ minLines: 2 });
-    }
-    editor.html(content);
-
-    console.log(editor);
-
-    let title = "Adventure preview";
-    modal.repair(editor.prop('outerHTML'), 0, title);
+    //let content = <string>$('#custom_adventure_content').val();
+    //const level = $('#custom_adventure_level').val();
 }
 
 export function show_doc_section(section_key: string) {
