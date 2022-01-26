@@ -270,7 +270,7 @@ def routes (app, database, achievements):
         if not isinstance(body.get('class_id'), str):
             return 'class id must be a string', 400
 
-        username = body.get('username')
+        username = body.get('username').lower()
         class_id = body.get('class_id')
 
         if not is_teacher(user):
