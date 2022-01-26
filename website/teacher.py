@@ -254,6 +254,12 @@ def routes (app, database, achievements):
             return {'achievement': achievement}, 200
         return {}, 200
 
+    @app.route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])
+    @requires_login
+    def view_adventure(user, adventure_id):
+        adventure = DATABASE.get_adventure(adventure_id)
+        return render_template('view-adventure.html', adventure=adventure, current_page='my-profile')
+
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['GET'])
     @requires_login
     def get_adventure_info(user, adventure_id):

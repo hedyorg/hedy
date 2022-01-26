@@ -17,7 +17,7 @@
                         <select id="custom_adventure_level" required class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
                             <option disabled selected value="">{{ texts.level }}</option>
                             {% for i in range(1, (max_level + 1)) %}
-                                <option value="{{ i }}" {% if i == adventure.level %}selected{% endif %}>{{ i }}</option>
+                                <option value="{{ i }}" {% if i|string == adventure.level %}selected{% endif %}>{{ i }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -32,15 +32,15 @@
                         <pre>&lt;pre&gt;Hello world!&lt;pre&gt;</pre>
                     </div>
                     <div class="mt-4 mb-4 flex flex-row items-center text-center border-red-500 border p-4 rounded-lg">
-                        <input type="checkbox" name="agree_terms" id="agree_terms "required class="mr-4" {% if public_settings %}checked{% endif %}>
+                        <input type="checkbox" name="agree_terms" id="agree_terms "required class="mr-4" {% if adventure.content|length > 5 %}checked{% endif %}>
                         <label for="agree_terms" class="text-sm italic w-full">I agree that my adventure might be made publicly available on Hedy.</label>
                     </div>
                 </div>
                 <div class="flex flex-col ltr:ml-4 rtl:mr-4">
                     <h3 class="text-center mt-0 mb-4">Adventure</h3>
-                    <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded"></textarea>
+                    <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{{ adventure.content }}</textarea>
                     <div class="flex flex-row mt-4">
-                        <!-- <button class="blue-btn" onclick="hedyApp.preview_adventure();event.preventDefault();">Preview</button> -->
+                        <button class="blue-btn hidden" id="preview_adventure_button" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">Preview</button>
                         <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2">Save</button>
                         <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}');">Delete</button>
                     </div>

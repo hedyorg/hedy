@@ -187,6 +187,7 @@ export function update_adventure(adventure_id: string) {
       dataType: 'json'
     }).done(function() {
       modal.alert("Adventure has been updated!", 3000, false);
+      $('#preview_adventure_button').show();
     }).fail(function(err) {
       console.error(err);
       modal.alert("Something went wrong!", 3000, true);
@@ -208,32 +209,6 @@ export function delete_adventure(adventure_id: string) {
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
   });
-}
-
-function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
-    const editor = ace.edit(element);
-    editor.setTheme("ace/theme/monokai");
-    if (isReadOnly) {
-      editor.setOptions({
-        readOnly: true,
-        showGutter: false,
-        showPrintMargin: false,
-        highlightActiveLine: false
-      });
-    }
-    return editor;
-}
-
-export function preview_adventure() {
-    let content = <string>$('#custom_adventure_content').val();
-    let container = $('<div>');
-    container.addClass('bg-white text-black border border-black rounded-lg p-4');
-    container.append(content);
-
-    $(container).find('pre').each(function(){
-         turnIntoAceEditor(this, true);
-     });
-    modal.preview(container, "Adventure preview");
 }
 
 export function show_doc_section(section_key: string) {

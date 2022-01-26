@@ -30,6 +30,7 @@
           <tr><th class="p-2">{{auth.name}}</th>
               <th class="p-2">Level</th>
               <th class="p-2">Last update</th>
+              <th class="p2">View</th>
               <th class="p-2">Delete</th>
           </tr>
         </thead>
@@ -39,6 +40,7 @@
               <td class="px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}">{{adventure.name|e}}</a></td>
               <td class="text-center p-2">{% if adventure.level %}{{adventure.level}}{% else %}-{% endif %}</td>
               <td class="text-center p-2">{{adventure.date}}</td>
+              <td class="text-center p-2"><a href="#" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">View</a></td>
               <td class="text-center p-2"><a href="#" onclick="hedyApp.delete_adventure ('{{adventure.id}}')">Delete</a></td>
             </tr>
           {% endfor %}
