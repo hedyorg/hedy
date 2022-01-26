@@ -4,15 +4,17 @@
 <div id="teacher_classes" class="flex flex-col items-center pb-4 border-b-2">
     <h2>{{auth.teacher_classes}}</h2>
     {% if teacher_classes %}
-      <table class="table-auto border-separate space-y-6 border border-black mt-4 mb-4">
+      <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4 text-le">
         <thead class="bg-gray-200">
-          <tr><th class="p-2 w-1/4">{{auth.name}}</th><th class="p-2 w-1/4">{{auth.students[0]|upper}}{{auth.students[1:]}}</th></tr>
+          <tr><th class="p-2">{{auth.name}}</th>
+              <th class="p-2">{{auth.students[0]|upper}}{{auth.students[1:]}}</th>
+          </tr>
         </thead>
         <tbody>
           {% for class in teacher_classes %}
             <tr>
-              <td class="text-center p-2"><a href="for-teachers/class/{{class.id}}">{{class.name|e}}</a></td>
-              <td class="text-center p-2">{{class.students|length}}</td></tr>
+              <td class="px-4 py-2"><a href="for-teachers/class/{{class.id}}">{{class.name|e}}</a></td>
+              <td class="text-center p-2">{{class.students|length}}</td>
             </tr>
           {% endfor %}
         </tbody>
@@ -23,7 +25,25 @@
 <div id="teacher_adventures" class="flex flex-col items-center mt-4 mb-4 pb-4 border-b-2">
     <h2>My adventures</h2>
     {% if teacher_adventures %}
-        <!-- Todo: Store adventure name, level -> creation date? -->
+        <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4">
+        <thead class="bg-gray-200">
+          <tr><th class="p-2">{{auth.name}}</th>
+              <th class="p-2">Level</th>
+              <th class="p-2">Last update</th>
+              <th class="p-2">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for adventure in teacher_adventures %}
+            <tr>
+              <td class="px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}">{{adventure.name|e}}</a></td>
+              <td class="text-center p-2">{% if adventure.level %}{{adventure.level}}{% else %}-{% endif %}</td>
+              <td class="text-center p-2">{{adventure.date}}</td>
+              <td class="text-center p-2"><a href="#" onclick="hedyApp.delete_adventure ('{{adventure.id}}')">Delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     {% endif %}
     <button class="green-btn mt-4" onclick="hedyApp.create_adventure ()">Create adventure</button>
 </div>

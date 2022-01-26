@@ -169,6 +169,23 @@ export function create_adventure() {
   });
 }
 
+export function delete_adventure(adventure_id: string) {
+    modal.confirm ("Are you sure you want to remove this adventure?", function () {
+
+    $.ajax({
+      type: 'DELETE',
+      url: '/for-teachers/customize-adventure/' + adventure_id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function() {
+        location.reload();
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    });
+  });
+}
+
 export function show_doc_section(section_key: string) {
   $(".section-button").each(function(){
        if ($(this).hasClass('blue-btn')) {

@@ -266,6 +266,12 @@ def routes (app, database, achievements):
         return render_template('customize-adventure.html', page_title=hedyweb.get_page_title('customize adventure'),
                                adventure=adventure, current_page='my-profile')
 
+    @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])
+    @requires_login
+    def delete_adventure(user, adventure_id):
+        print(adventure_id)
+        print("DIT GAAT GOED!")
+
     @app.route('/for-teachers/adventure', methods=['POST'])
     @requires_login
     def create_adventure(user):
