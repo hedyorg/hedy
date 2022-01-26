@@ -329,8 +329,7 @@ class Database:
         return CLASSES.get({'link': link_id})
 
     def get_username_invite(self, username):
-        invite = INVITATIONS.get({'username': username})
-        return invite if invite else None
+        return INVITATIONS.get({'username': username}) or None
 
     def add_class_invite(self, username, class_id):
         INVITATIONS.put({'username': username, 'class_id': class_id, 'timestamp': timems ()})
@@ -339,8 +338,7 @@ class Database:
         INVITATIONS.delete({'username': username})
 
     def get_class_invites(self, class_id):
-        invitations = INVITATIONS.get_many({'class_id': class_id})
-        return invitations if invitations else []
+        return INVITATIONS.get_many({'class_id': class_id}) or []
 
     def all_classes(self):
         return CLASSES.scan()
