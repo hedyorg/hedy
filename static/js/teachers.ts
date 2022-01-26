@@ -210,7 +210,6 @@ export function delete_adventure(adventure_id: string) {
   });
 }
 
-/*
 function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
@@ -223,17 +222,17 @@ function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.E
       });
     }
     return editor;
-}*/
+}
 
 export function preview_adventure() {
     let content = <string>$('#custom_adventure_content').val();
     let container = $('<div>');
-    container.addClass('border border-black rounded-lg');
+    container.addClass('bg-white text-black border border-black rounded-lg p-4');
     container.append(content);
 
-
-
-    //const level = $('#custom_adventure_level').val();
+    $(container).find('pre').each(function(){
+         turnIntoAceEditor(this, true);
+     });
     modal.preview(container, "Adventure preview");
 }
 

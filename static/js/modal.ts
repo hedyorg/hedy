@@ -85,10 +85,12 @@ class Modal {
     console.log(title);
 
     $('#modal-preview-title').html(title);
-    $('#modal-preview-content').append(content);
+    const target = $('#modal-preview-content');
+    content.attr('id', 'modal-preview-content');
+    target.replaceWith(content);
 
     this.show();
-    $('#modal-repair').show();
+    $('#modal-preview').show();
   }
 
   public repair(message: string, timeoutMs?: number,  title: string = '') {
