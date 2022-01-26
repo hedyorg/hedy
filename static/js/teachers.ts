@@ -170,14 +170,32 @@ export function create_adventure() {
 }
 
 export function update_adventure(adventure_id: string) {
-    //let content = <string>$('#custom_adventure_content').val();
-    //const level = $('#custom_adventure_level').val();
-    console.log(adventure_id);
-
+   const adventure_name = $('#custom_adventure_name').val();
+   const level = $('#custom_adventure_level').val();
+   const content = $('#custom_adventure_content').val();
+   modal.confirm ("Are you sure you want to update this adventure?", function () {
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/customize-adventure',
+      data: JSON.stringify({
+        id: adventure_id,
+        name: adventure_name,
+        level: level,
+        content: content
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function() {
+      modal.alert("Adventure has been updated!", 3000, false);
+    }).fail(function(err) {
+      console.error(err);
+      modal.alert(err.responseText, 3000, false);
+    });
+  });
 }
 
 export function delete_adventure(adventure_id: string) {
-    modal.confirm ("Are you sure you want to remove this adventure?", function () {
+  modal.confirm ("Are you sure you want to remove this adventure?", function () {
     $.ajax({
       type: 'DELETE',
       url: '/for-teachers/customize-adventure/' + adventure_id,

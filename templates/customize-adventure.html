@@ -4,13 +4,13 @@
 <div class="px-8">
     <h2>Customize adventure: {{adventure.name}}</h2>
     <div class="mt-4 border-gray-400 border-2 rounded-lg p-4">
-        <form>
+        <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}');">
             <div class="flex flex-row">
                 <div class="flex flex-col ltr:mr-4 rtl:ml-4">
                     <h3 class="text-center mt-0 mb-4">General settings</h3>
                     <div class="flex flex-row items-center mb-4">
                         <label for="name" class="inline-block w-40 text-xl">Name</label>
-                        <input id="name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+                        <input id="custom_adventure_name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
                     </div>
                     <div class="flex flex-row items-center mb-4">
                         <label for="level" class="inline-block w-40 text-xl">Level</label>
@@ -41,7 +41,7 @@
                     <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded"></textarea>
                     <div class="flex flex-row mt-4">
                         <button class="blue-btn" onclick="hedyApp.preview_adventure();event.preventDefault();">Preview</button>
-                        <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2" onclick="window.open('/explore', '_self');">Save</button>
+                        <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2">Save</button>
                         <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}');">Delete</button>
                     </div>
                 </div>

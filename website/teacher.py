@@ -266,6 +266,32 @@ def routes (app, database, achievements):
         return render_template('customize-adventure.html', page_title=hedyweb.get_page_title('customize adventure'),
                                adventure=adventure, max_level=hedy.HEDY_MAX_LEVEL, current_page='my-profile')
 
+    @app.route('/for-teachers/customize-adventure', methods=['POST'])
+    @requires_login
+    def update_adventure(user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return 'body must be an object', 400
+        if not isinstance(body.get('id'), str):
+            return 'incorrect id', 400
+        if not isinstance(body.get('name'), str):
+            return 'incorrect name', 400
+        if not isinstance(body.get('level'), str):
+            return 'incorrect lvl', 400
+        if not isinstance(body.get('content'), str):
+            return 'incorrect content', 400
+
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_adventure')
+        adventure = DATABASE.get_adventure(body['id'])
+        if not adventure or adventure['creator'] != user['username']:
+            return utils.error_page(error=404,  ui_message='no_such_adventure')
+
+        print(body)
+
+
+
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])
     @requires_login
     def delete_adventure(user, adventure_id):
