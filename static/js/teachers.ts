@@ -1,6 +1,7 @@
 import { modal, error } from './modal';
 import { auth } from './auth';
-import {showAchievements} from "./app";
+import {showAchievements, theGlobalEditor} from "./app";
+import {turnIntoAceEditor} from "./app";
 
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
@@ -187,17 +188,26 @@ export function delete_adventure(adventure_id: string) {
 }
 
 export function preview_adventure() {
-    const content = $('#custom_adventure_content').val();
+    let content = <string>$('#custom_adventure_content').val();
     const level = $('#custom_adventure_level').val();
-    console.log(level)
-    console.log(content);
     if (level) {
-        console.log(level);
-        // We have to get the correct syntax highlighting!
+        content = content.replace(/<pre>/g, "<pre id='" + level + "'>");
     }
-    // Todo after coffee break:
-    // Get the repair modal -> input the content data
-    // Make sure the <code> elements are parsed correctly! -> give level as attribute
+    let editor = $('<div>').addClass('w-80 h-64 bg-gray-200 border border-black rounded-lg text-black text-left p-4');
+    editor.html(content);
+
+    console.log(editor);
+
+    $(editor).find('pre').each(function(){
+        console.log("We vinden een pre!");
+        console.log(this);
+        turnIntoAceEditor(this, true);
+    });
+
+    console.log(editor);
+
+    let title = "Adventure preview";
+    modal.repair(editor.prop('outerHTML'), 0, title);
 }
 
 export function show_doc_section(section_key: string) {

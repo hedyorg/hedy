@@ -1085,7 +1085,7 @@ function createModal(level:number ){
   let title = ErrorMessages['Program_repair'];
   modal.repair(editor, 0, title);
 }
- function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
+export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
     if (isReadOnly) {

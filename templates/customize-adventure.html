@@ -23,11 +23,13 @@
                     </div>
                     <div class="border border-black rounded-lg p-4 text-sm">
                         Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under "customizations".
-                        If you want to include code in your adventure please use code snippets like this:
+                        If you want to include a command in your adventure please use "code" anchors like this:
                         <br>
-                        <pre>&lt;code&gt;This is Hedy Code!&lt;code&gt;</pre>
+                        <pre>&lt;code&gt;echo&lt;code&gt;</pre>
                         <br>
-                         If you're curious how the result would look, please press the <b>preview</b> button.
+                        If you want to show actual code snippets, for example to give student a template or example of the code. Please use "pre" anchors like this:
+                        <br>
+                        <pre>&lt;pre&gt;Hello world!&lt;pre&gt;</pre>
                     </div>
                     <div class="mt-4 mb-4 flex flex-row items-center text-center border-red-500 border p-4 rounded-lg">
                         <input type="checkbox" name="agree_terms" id="agree_terms "required class="mr-4" {% if public_settings %}checked{% endif %}>
@@ -36,7 +38,7 @@
                 </div>
                 <div class="flex flex-col ltr:ml-4 rtl:mr-4">
                     <h3 class="text-center mt-0 mb-4">Adventure</h3>
-                    <textarea id="custom_adventure_content" class="block appearance-none w-full h-80 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded"></textarea>
+                    <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded"></textarea>
                     <div class="flex flex-row mt-4">
                         <button class="blue-btn" onclick="hedyApp.preview_adventure();event.preventDefault();">Preview</button>
                         <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2" onclick="window.open('/explore', '_self');">Save</button>
