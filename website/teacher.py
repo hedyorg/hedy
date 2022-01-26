@@ -256,16 +256,20 @@ def routes (app, database, achievements):
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['GET'])
     @requires_login
     def get_adventure_info(user, adventure_id):
-        return render_template('customize-adventure.html')
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_adventure')
+        adventure = DATABASE.get_adventure(adventure_id)
+        print(adventure)
+        if not adventure or adventure['creator'] != user['username']:
+            return utils.error_page(error=404,  ui_message='no_such_adventure')
+
+        return render_template('customize-adventure.html', page_title=hedyweb.get_page_title('customize adventure'),
+                               adventure=adventure, current_page='my-profile')
 
     @app.route('/for-teachers/adventure', methods=['POST'])
     @requires_login
     def create_adventure(user):
         body = request.json
-        print(body)
-        print(user)
-
-        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         adventures = DATABASE.get_teacher_adventures(user['username'])
         for adventure in adventures:
             if adventure['name'] == body['name']:
@@ -275,7 +279,6 @@ def routes (app, database, achievements):
             'id': uuid.uuid4().hex,
             'date': utils.timems(),
             'creator': user['username'],
-            'link': utils.random_id_generator(7),
             'name': body['name']
         }
 

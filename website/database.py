@@ -11,7 +11,7 @@ USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexK
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey('username')])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
-ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['creator', 'link']])
+ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey('creator')])
 
 # Customizations contains the class customizations made by a teacher on a specific class/level combination.
 # Each entry stores a unique class_id / level combination and the selected adventures, example programs and/or hiding of level
@@ -289,12 +289,15 @@ class Database:
                     students.append (student)
         return students
 
+    def get_adventure(self, adventure_id):
+        return ADVENTURES.get({'id': adventure_id})
+
     def store_adventure(self, adventure):
-        """Store a class."""
+        """Store an adventure."""
         ADVENTURES.create(adventure)
 
     def get_teacher_adventures(self, username):
-        return []
+        return ADVENTURES.get_many({'creator': username})
 
     def get_student_classes(self, username):
         """Return all the classes of which the user is a student."""
