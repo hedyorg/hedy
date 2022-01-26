@@ -2836,20 +2836,96 @@ Level 13 supports:
 
 ## Level 14
 
-### Commands
+### Commands and types
 
 Level 14 supports:
-* `print`
-* `ask`
-* `is`
-* `sleep`
-* `at random`
-* `add to`
-* `remove from`
-* `if`
-* `if else`
-* `repeat`
-* `for`
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string | float</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string | float</td>
+  </tr>
+  <tr>
+    <td>is | = (assignment)</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>repeat</td>
+    <td>integer + 'times'</td>
+  </tr>
+  <tr>
+    <td>for</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+  </tr>
+  <tr>
+    <td>and</td>
+    <td>boolean (before `and`) + boolean (after `and`)</td>
+  </tr>
+  <tr>
+    <td>or</td>
+    <td>boolean (before `or`) + boolean (after `or`)</td>
+  </tr>
+  <tr>
+    <td><</td>
+    <td>integer (before <) + integer (after <) | float (before <) + float (after <)</td>
+  </tr>
+  <tr>
+    <td>></td>
+    <td>integer (before >) + integer (after >) | float (before >) + float (after >)</td>
+  </tr>
+  <tr>
+    <td>== | is | = (comparison)</td>
+    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command)</td>
+  </tr>
+  <tr>
+    <td>!=</td>
+    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before !=) + list (after !=)</td>
+  </tr>
+  <tr>
+    <td><=</td>
+    <td>integer (before <=) + integer (after <=) | float (before <=) + float (after <=)</td>
+  </tr>
+  <tr>
+    <td>>=</td>
+    <td>integer (before >=) + integer (after >=) | float (before >=) + float (after >=)</td>
+  </tr>
+</tbody>
+</table>
 
 #### Correct Programs
 
