@@ -1178,12 +1178,11 @@ def main_page(page):
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        print(for_teacher_translations)
         if is_teacher(user):
             welcome_teacher = session.get('welcome-teacher') or False
             session.pop('welcome-teacher', None)
-            teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(
-                current_user()['username'], True)
+            teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(current_user()['username'], True)
+
             return render_template('for-teachers.html', current_page='my-profile',
                                    page_title=hedyweb.get_page_title(page),
                                    content=for_teacher_translations, teacher_classes=teacher_classes,

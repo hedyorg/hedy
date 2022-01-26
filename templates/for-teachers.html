@@ -20,6 +20,11 @@
   {% endif %}
   <button class="green-btn mt-4" onclick="hedyApp.create_class ()">{{auth.create_class}}</button>
 </div>
+<div id="teacher_adventures" class="flex flex-col items-center mt-4 mb-4 pb-4 border-b-2">
+    {% if teacher_adventures %}
+        <h2>My adventures</h2>
+    {% endif %}
+</div>
 <div class="w-full mt-4">
     <h2 class="text-center">{{ content['title'] }}</h2>
     <div class="flex flex-row justify-center mb-4 pb-4 border-b-2">

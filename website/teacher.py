@@ -212,6 +212,12 @@ def routes (app, database, achievements):
                                class_info={'name': Class['name'], 'id': Class['id']}, levels=levels,
                                adventures=adventures, preferences=preferences, current_page='my-profile')
 
+    # Let's stick to a similar structure as class customization
+    @app.route('/for-teachers/customize-adventure', methods=['GET'])
+    @requires_login
+    def get_adventure_info(user):
+        return render_template('customize-adventure.html')
+
     @app.route('/customize-class/<class_id>', methods=['PUT'])
     @requires_login
     def update_level_preferences(user, class_id):
