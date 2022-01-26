@@ -259,6 +259,31 @@ def routes (app, database, achievements):
             return {'achievement': achievement}, 200
         return {}, 200
 
+    @app.route('/for-teachers/adventure', methods=['POST'])
+    @requires_login
+    def create_adventure(user):
+        body = request.json
+        print(body)
+        print(user)
+
+        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        adventures = DATABASE.get_teacher_adventures(user['username'])
+        for adventure in adventures:
+            if adventure['name'] == body['name']:
+                return "duplicate", 200
+
+        adventure = {
+            'id': uuid.uuid4().hex,
+            'date': utils.timems(),
+            'creator': user['username'],
+            'link': utils.random_id_generator(7),
+            'name': body['name']
+        }
+
+        DATABASE.store_adventure(adventure)
+
+        return {}, 200
+
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):
         Class = DATABASE.resolve_class_link (link_id)
