@@ -288,6 +288,9 @@ class Database:
                     students.append (student)
         return students
 
+    def get_teacher_adventures(self, username):
+        return []
+
     def get_student_classes(self, username):
         """Return all the classes of which the user is a student."""
         classes = []

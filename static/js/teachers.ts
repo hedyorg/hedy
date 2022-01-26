@@ -142,6 +142,33 @@ export function remove_student(class_id: string, student_id: string, self_remova
   });
 }
 
+export function create_adventure() {
+    modal.prompt ("Please enter the name of the adventure", '', function (adventure_name) {
+    if (!adventure_name) {
+      modal.alert("Adventure name is empty!", 3000, true);
+      return;
+    }
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/adventure',
+      data: JSON.stringify({
+        name: adventure_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
+    }).fail(function(err) {
+      if (err.responseText == "duplicate") {
+        modal.alert("Adventure name already exists!", 3000, true);
+        return;
+      }
+      console.error(err);
+      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    });
+  });
+}
+
 export function show_doc_section(section_key: string) {
   $(".section-button").each(function(){
        if ($(this).hasClass('blue-btn')) {

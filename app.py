@@ -1182,11 +1182,12 @@ def main_page(page):
             welcome_teacher = session.get('welcome-teacher') or False
             session.pop('welcome-teacher', None)
             teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(current_user()['username'], True)
+            teacher_adventures = DATABASE.get_teacher_adventures(current_user()['username'])
 
             return render_template('for-teachers.html', current_page='my-profile',
                                    page_title=hedyweb.get_page_title(page),
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
-                                   welcome_teacher=welcome_teacher)
+                                   teacher_adventure=teacher_adventures, welcome_teacher=welcome_teacher)
         else:
             return utils.error_page(error=403, ui_message='not_teacher')
 

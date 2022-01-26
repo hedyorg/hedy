@@ -2,8 +2,8 @@
 
 {% block main %}
 <div id="teacher_classes" class="flex flex-col items-center pb-4 border-b-2">
-  {% if teacher_classes %}
-      <h2>{{auth.teacher_classes}}</h2>
+    <h2>{{auth.teacher_classes}}</h2>
+    {% if teacher_classes %}
       <table class="table-auto border-separate space-y-6 border border-black mt-4 mb-4">
         <thead class="bg-gray-200">
           <tr><th class="p-2 w-1/4">{{auth.name}}</th><th class="p-2 w-1/4">{{auth.students[0]|upper}}{{auth.students[1:]}}</th></tr>
@@ -17,13 +17,15 @@
           {% endfor %}
         </tbody>
       </table>
-  {% endif %}
+    {% endif %}
   <button class="green-btn mt-4" onclick="hedyApp.create_class ()">{{auth.create_class}}</button>
 </div>
 <div id="teacher_adventures" class="flex flex-col items-center mt-4 mb-4 pb-4 border-b-2">
+    <h2>My adventures</h2>
     {% if teacher_adventures %}
-        <h2>My adventures</h2>
+        <!-- Todo: Store adventure name, level -> creation date? -->
     {% endif %}
+    <button class="green-btn mt-4" onclick="hedyApp.create_adventure ()">Create adventure</button>
 </div>
 <div class="w-full mt-4">
     <h2 class="text-center">{{ content['title'] }}</h2>
