@@ -6,13 +6,13 @@
        <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#messages').toggle()">{{auth.my_messages}}</h1>
        <div id="messages" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
          <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.my_messages}}</h2>
-         {% if user_invites %}
+         {% if invite_data %}
              <div>
-                 {{auth.invite_message}} <b>{{ user_invites['class_name'] }}</b>.<br>
-                 {{auth.sent_by}} <b>{{ user_invites['teacher'] }}</b>. {{auth.prompt_join_class}}
+                 {{auth.invite_message}} <b>{{ invite_data['class_name'] }}</b>.<br>
+                 {{auth.sent_by}} <b>{{ invite_data['teacher'] }}</b>. {{auth.prompt_join_class}}
                  <div class="flex flex-row mt-4">
-                        <button type="reset" class="green-btn" onclick="window.open('/hedy/l/{{ user_invites['join_link'] }}', '_self');">{{auth.join_class}}</button>
-                        <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{user_invites['username']}}', '{{user_invites['class_id']}}')">{{auth.delete_invite}}</button>
+                        <button type="reset" class="green-btn" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{auth.join_class}}</button>
+                        <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{invite_data['username']}}', '{{invite_data['class_id']}}')">{{auth.delete_invite}}</button>
                 </div>
              </div>
          {% endif %}

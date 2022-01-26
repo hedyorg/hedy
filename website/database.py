@@ -322,16 +322,18 @@ class Database:
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
         CUSTOMIZATIONS.del_many({'id': Class['id']})
+        INVITATIONS.del_many({'class_id': Class['id']})
         CLASSES.delete({'id': Class['id']})
 
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
 
     def get_username_invite(self, username):
-        return INVITATIONS.get({'username': username})
+        invite = INVITATIONS.get({'username': username})
+        return invite if invite else None
 
     def add_class_invite(self, username, class_id):
-        INVITATIONS.create({'username': username, 'class_id': class_id, 'timestamp': timems ()})
+        INVITATIONS.put({'username': username, 'class_id': class_id, 'timestamp': timems ()})
 
     def remove_class_invite(self, username):
         INVITATIONS.delete({'username': username})

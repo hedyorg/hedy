@@ -314,10 +314,11 @@ def enrich_context_with_user_info():
         if user_invites:
             Class = DATABASE.get_class(user_invites['class_id'])
             if Class:
-                user_invites['class_name'] = Class.get('name')
-                user_invites['teacher'] = Class.get('teacher')
-                user_invites['join_link'] = Class.get('link')
-                data['user_invites'] = user_invites
+                invite_data = user_invites.copy()
+                invite_data['class_name'] = Class.get('name')
+                invite_data['teacher'] = Class.get('teacher')
+                invite_data['join_link'] = Class.get('link')
+                data['invite_data'] = invite_data
                 data['user_messages'] += 1
     return data
 
