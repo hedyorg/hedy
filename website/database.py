@@ -192,6 +192,7 @@ class Database:
         """Forget the given user."""
         classes = USERS.get({'username': username}).get ('classes') or []
         USERS.delete({'username': username})
+        INVITATIONS.delete({'username': username})
         # The recover password token may exist, so we delete it
         TOKENS.delete({'id': username})
         PROGRAMS.del_many({'username': username})
