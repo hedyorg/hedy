@@ -2,7 +2,7 @@ import textwrap
 
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
-from lark import Tree, Transformer, visitors, v_args
+from lark import Tree, Transformer, Visitor, visitors, v_args
 from os import path, environ
 
 import warnings
@@ -914,6 +914,18 @@ def all_print_arguments(input_string, level, lang='en'):
     program_root = parse_input(input_string, level, lang)
 
     return AllPrintArguments(level).transform(program_root)
+
+
+class IsProgramValid(Visitor):
+    def __init__(self, level, code):
+        self.level = level
+        self.code = code
+
+    def error_print_nq(self, tree):
+        # tree contains meta + every child contains its own meta
+        # self.code contains the original user input
+        raise exceptions.UnquotedTextException(level=self.level)
+
 
 @v_args(meta=True)  # Note that setting meta=True here is required regardless of the annotation of the Filter class
 class IsValid(Filter):
@@ -2087,6 +2099,9 @@ def parse_input(input_string, level, lang):
 
 
 def is_program_valid(program_root, input_string, level, lang):
+    validator = IsProgramValid(level, input_string)
+    validator.visit(program_root)
+
     # IsValid returns (True,) or (False, args)
     instance = IsValid()
     instance.level = level # could be done in a constructor once we are sure we will go this way
