@@ -189,7 +189,7 @@ export function update_adventure(adventure_id: string) {
       modal.alert("Adventure has been updated!", 3000, false);
     }).fail(function(err) {
       console.error(err);
-      modal.alert(err.responseText, 3000, false);
+      modal.alert("Something went wrong!", 3000, true);
     });
   });
 }

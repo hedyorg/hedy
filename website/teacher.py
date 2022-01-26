@@ -272,15 +272,17 @@ def routes (app, database, achievements):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('id'), str):
-            return 'incorrect id', 400
+            return g.auth_texts.get('adventure_id_invalid'), 400
         if not isinstance(body.get('name'), str):
-            return 'incorrect name', 400
+            return g.auth_texts.get('adventure_name_invalid'), 400
         if not isinstance(body.get('level'), str):
-            return 'incorrect lvl', 400
-        if not isinstance(body.get('content'), str):
-            return 'incorrect content', 400
+            return g.auth_texts.get('level_invalid'), 400
+        if not isinstance(body.get('content'), str) or len(body.get('content')) < 5:
+            return g.auth_texts.get('content_invalid'), 400
+
+        # Todo: TB -> Write error messages in yamls
 
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='retrieve_adventure')
@@ -288,7 +290,16 @@ def routes (app, database, achievements):
         if not adventure or adventure['creator'] != user['username']:
             return utils.error_page(error=404,  ui_message='no_such_adventure')
 
-        print(body)
+        adventure = {
+            'date': utils.timems(),
+            'creator': user['username'],
+            'name': body['name'],
+            'level': body['level'],
+            'content': body['content']
+        }
+
+        DATABASE.update_adventure(body['id'], adventure)
+        return {}, 200
 
 
 

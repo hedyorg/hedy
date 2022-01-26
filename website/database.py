@@ -299,6 +299,9 @@ class Database:
         """Store an adventure."""
         ADVENTURES.create(adventure)
 
+    def update_adventure(self, adventure_id, adventure):
+        ADVENTURES.update({'id': adventure_id}, adventure)
+
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({'creator': username})
 
