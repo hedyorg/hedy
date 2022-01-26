@@ -187,7 +187,7 @@ export function update_adventure(adventure_id: string) {
       dataType: 'json'
     }).done(function() {
       modal.alert("Adventure has been updated!", 3000, false);
-      $('#preview_adventure_button').show();
+      $('#preview_adventure_button').show();0
     }).fail(function(err) {
       console.error(err);
       modal.alert("Something went wrong!", 3000, true);
@@ -203,7 +203,7 @@ export function delete_adventure(adventure_id: string) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function() {
-        window.location.pathname = '/for-teachers';
+      location.reload();
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));

@@ -258,7 +258,8 @@ def routes (app, database, achievements):
     @requires_login
     def view_adventure(user, adventure_id):
         adventure = DATABASE.get_adventure(adventure_id)
-        return render_template('view-adventure.html', adventure=adventure, current_page='my-profile')
+        return render_template('view-adventure.html', adventure=adventure,
+                               page_title=hedyweb.get_page_title('view adventure'), current_page='my-profile')
 
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['GET'])
     @requires_login
