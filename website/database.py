@@ -211,32 +211,15 @@ class Database:
         return USERS.scan(limit=500)
 
     def get_all_explore_programs(self):
-        programs = PROGRAMS.get_many({'public': 1})
-        public_programs = []
-        for program in programs:
-            if 'public' in program:
-                public_programs.append(program)
-        return public_programs[-50:]
+        return PROGRAMS.get_many({'public': 1}, limit=50)
 
     def get_filtered_explore_programs(self, level=None, adventure=None):
-        programs = PROGRAMS.scan()
-        result = []
-        for program in programs:
-            if 'public' in program:
-                result.append(program)
-        level_programs = []
+        programs = PROGRAMS.get_many({'public': 1})
         if level:
-            for program in result:
-                if program['level'] == int(level):
-                    level_programs.append(program)
-            result = level_programs
-        adventure_programs = []
+            programs = [x for x in programs if x.get('level') == int(level)]
         if adventure:
-            for program in result:
-                if 'adventure_name' in program and program['adventure_name'] == adventure:
-                    adventure_programs.append(program)
-            result = adventure_programs
-        return result[-50:]
+            programs = [x for x in programs if x.get('adventure_name') == adventure]
+        return programs[-48:]
 
     def all_programs_count(self):
         """Return the total number of all programs."""
@@ -435,7 +418,7 @@ class Database:
             self.update_public_profile(username, data)
             return True
         # We can't set a favourite program without a public page!
-        # Todo: In the feature we might enable users to set any program as favourite -> requires some work
+        # Todo: In the future we might enable users to set any program as favourite -> requires some work
         return False
 
 
