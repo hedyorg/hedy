@@ -212,12 +212,6 @@ def routes (app, database, achievements):
                                class_info={'name': Class['name'], 'id': Class['id']}, levels=levels,
                                adventures=adventures, preferences=preferences, current_page='my-profile')
 
-    # Let's stick to a similar structure as class customization
-    @app.route('/for-teachers/customize-adventure', methods=['GET'])
-    @requires_login
-    def get_adventure_info(user):
-        return render_template('customize-adventure.html')
-
     @app.route('/customize-class/<class_id>', methods=['PUT'])
     @requires_login
     def update_level_preferences(user, class_id):
@@ -259,6 +253,11 @@ def routes (app, database, achievements):
             return {'achievement': achievement}, 200
         return {}, 200
 
+    @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['GET'])
+    @requires_login
+    def get_adventure_info(user, adventure_id):
+        return render_template('customize-adventure.html')
+
     @app.route('/for-teachers/adventure', methods=['POST'])
     @requires_login
     def create_adventure(user):
@@ -281,8 +280,7 @@ def routes (app, database, achievements):
         }
 
         DATABASE.store_adventure(adventure)
-
-        return {}, 200
+        return {'id': adventure['id']}, 200
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):
