@@ -42,7 +42,7 @@
                     <div class="flex flex-row mt-4">
                         <button class="blue-btn" onclick="hedyApp.preview_adventure();event.preventDefault();">Preview</button>
                         <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2" onclick="window.open('/explore', '_self');">Save</button>
-                        <button type="reset" class="red-btn" onclick="window.open('/explore', '_self');">Delete</button>
+                        <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}');">Delete</button>
                     </div>
                 </div>
             </div>

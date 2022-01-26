@@ -1,7 +1,6 @@
 import { modal, error } from './modal';
 import { auth } from './auth';
 import {showAchievements} from "./app";
-import {turnIntoAceEditor} from "./app";
 
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
@@ -170,16 +169,22 @@ export function create_adventure() {
   });
 }
 
+export function update_adventure(adventure_id: string) {
+    //let content = <string>$('#custom_adventure_content').val();
+    //const level = $('#custom_adventure_level').val();
+    console.log(adventure_id);
+
+}
+
 export function delete_adventure(adventure_id: string) {
     modal.confirm ("Are you sure you want to remove this adventure?", function () {
-
     $.ajax({
       type: 'DELETE',
       url: '/for-teachers/customize-adventure/' + adventure_id,
       contentType: 'application/json',
       dataType: 'json'
     }).done(function() {
-        location.reload();
+        window.location.pathname = '/for-teachers';
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
