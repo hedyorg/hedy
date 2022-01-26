@@ -259,7 +259,6 @@ def routes (app, database, achievements):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='retrieve_adventure')
         adventure = DATABASE.get_adventure(adventure_id)
-        print(adventure)
         if not adventure or adventure['creator'] != user['username']:
             return utils.error_page(error=404,  ui_message='no_such_adventure')
 
@@ -269,8 +268,14 @@ def routes (app, database, achievements):
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])
     @requires_login
     def delete_adventure(user, adventure_id):
-        print(adventure_id)
-        print("DIT GAAT GOED!")
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_adventure')
+        adventure = DATABASE.get_adventure(adventure_id)
+        if not adventure or adventure['creator'] != user['username']:
+            return utils.error_page(error=404, ui_message='no_such_adventure')
+
+        DATABASE.delete_adventure(adventure_id)
+        return {}, 200
 
     @app.route('/for-teachers/adventure', methods=['POST'])
     @requires_login

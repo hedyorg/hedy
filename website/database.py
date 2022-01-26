@@ -292,6 +292,9 @@ class Database:
     def get_adventure(self, adventure_id):
         return ADVENTURES.get({'id': adventure_id})
 
+    def delete_adventure(self, adventure_id):
+        ADVENTURES.delete({'id': adventure_id})
+
     def store_adventure(self, adventure):
         """Store an adventure."""
         ADVENTURES.create(adventure)
