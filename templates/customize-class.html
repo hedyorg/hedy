@@ -10,7 +10,7 @@
          <button class="{% if level == 1 %} blue-btn {% else %} green-btn {% endif %} ltr:mr-4 rtl:ml-4 mt-2 w-32" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
      {% endfor %}
  </div>
- <div class="mt-4 border-gray-400 border-2 pb-4 px-4" id="level_settings">
+ <div class="mt-4 border-gray-400 border-2 rounded-lg pb-4 px-4" id="level_settings">
      <div class="mt-4 flex flex-row">
          <div class="ltr:mr-4 rtl:ml-4 w-1/2" id="adventure_selector">
              <h4>{{auth.available_adventures}}</h4>

@@ -2,9 +2,26 @@
 
 {% block main %}
 <div class="px-8">
-    <h1>Customize adventure</h1>
-    <div>
-        {{ adventure }}
+    <h2>Customize adventure: {{adventure.name}}</h2>
+    <div class="mt-4 border-gray-400 border-2 rounded-lg p-4">
+        <form>
+            <div class="flex flex-row items-center mb-4">
+                <label for="name" class="inline-block w-40 text-xl">Name</label>
+                <input id="name" value="{{ adventure.name }}" class="block appearance-none w-64 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+            </div>
+            <div class="flex flex-row items-center">
+                <label for="level" class="inline-block w-40 text-xl">Level</label>
+                <select id="level" class="block appearance-none w-64 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+                    <option disabled selected value="">{{ texts.level }}</option>
+                    {% for i in range(1, (max_level + 1)) %}
+                        <option value="{{ i }}" {% if i == adventure.level %}selected{% endif %}>{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="mt-4 flex flex-row">
+        <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{auth.back_to_teachers_page}}</button>
     </div>
 </div>
 {% endblock %}

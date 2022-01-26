@@ -1,5 +1,6 @@
 import json
 
+import hedy
 from website.auth import requires_login, is_teacher, current_user
 import utils
 import uuid
@@ -263,7 +264,7 @@ def routes (app, database, achievements):
             return utils.error_page(error=404,  ui_message='no_such_adventure')
 
         return render_template('customize-adventure.html', page_title=hedyweb.get_page_title('customize adventure'),
-                               adventure=adventure, current_page='my-profile')
+                               adventure=adventure, max_level=hedy.HEDY_MAX_LEVEL, current_page='my-profile')
 
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])
     @requires_login
@@ -290,7 +291,9 @@ def routes (app, database, achievements):
             'id': uuid.uuid4().hex,
             'date': utils.timems(),
             'creator': user['username'],
-            'name': body['name']
+            'name': body['name'],
+            'level': 1,
+            'content': ""
         }
 
         DATABASE.store_adventure(adventure)
