@@ -1362,7 +1362,7 @@ def change_language():
 def translate_keywords():
     body = request.json
     translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'))
-    translated_code = translated_code.replace(" ", " ") # Fixme: Remove added space: cause unknown
+    translated_code = translated_code.replace("  ", " ") # Fixme: Remove added space: cause unknown
     return jsonify({'success': 200, 'code': translated_code})
 
 def session_id():
