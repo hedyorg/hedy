@@ -197,9 +197,10 @@ export function update_adventure(adventure_id: string) {
 
 export function preview_adventure() {
      let content = <string>$('#custom_adventure_content').val();
+     const name = <string>$('#custom_adventure_name').val();
      const level = <number>$('#custom_adventure_level').val();
      let container = $('<div>');
-     container.addClass('preview border border-black px-8 py-4 text-left w-rounded-lg bg-gray-200 text-black turn-pre-into-ace');
+     container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
      container.css('white-space', 'pre-wrap');
      container.css('width', '40em');
      container.html(content);
@@ -219,7 +220,7 @@ export function preview_adventure() {
         const mode = getHighlighter(level);
         exampleEditor.session.setMode(mode);
     }
-    modal.preview(container, "Adventure preview");
+    modal.preview(container, name);
 }
 
 export function delete_adventure(adventure_id: string) {
