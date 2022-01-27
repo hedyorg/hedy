@@ -30,7 +30,7 @@
                      </ul>
                      <ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 ltr:pl-4 rtl:pr-4" id="teacher_adventures_overview">
                          {% for adventure in teacher_adventures %}
-                                <li {% if adventure.level != 1 %} class="hidden" {% endif %} level="{{adventure.level}}" id="{{adventure.name}}">
+                                <li {% if adventure.level != 1 and adventure.level != '1' %} class="hidden" {% endif %} level="{{adventure.level}}" id="{{adventure.name}}">
                                     <input type="checkbox" name="teacher_adventures" class="ltr:mr-4 rtl:ml-4" value="" {% if preferences[level] and key_name not in preferences[level]['teacher_adventures'] %} unchecked {% else %} checked {% endif %} >
                                     <label><b>{{ adventure.name }}</b></label>
                                 </li>
