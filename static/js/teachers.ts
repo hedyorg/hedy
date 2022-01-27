@@ -295,6 +295,13 @@ export function save_level_settings(id: string, level: number) {
          }
      });
 
+     let selected_teacher_adventures: (string | null)[] = [];
+     $('#teacher_adventures_overview li').each(function() {
+         if ($(this).is(':visible') && $(this).find(':input').prop('checked')) {
+             selected_adventures.push(this.getAttribute('id'));
+         }
+     });
+
      const hide_level = !!$(`#hide_level${level}`).prop('checked');
      const hide_next_level = !!$(`#hide_level${level - 1}`).prop('checked');
      const example_programs = !!$(`#example_programs${level}`).prop('checked');
@@ -305,6 +312,7 @@ export function save_level_settings(id: string, level: number) {
        url: '/customize-class/' + id,
        data: JSON.stringify({
          adventures: selected_adventures,
+         teacher_adventures: selected_teacher_adventures,
          example_programs: example_programs,
          hide_level: hide_level,
          hide_prev_level: hide_prev_level,
