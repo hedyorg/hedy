@@ -152,16 +152,18 @@ def routes (app, database, achievements):
             token = DATABASE.get_token(request.cookies.get (cookie_name))
             if token:
                 if token ['username'] in Class.get ('students', []):
-                    return render_template ('class-already-joined.html', page_title=hedyweb.get_page_title('join class'),
+                    return render_template ('class-prejoin.html', joined=True,
+                                            page_title=hedyweb.get_page_title('join class'),
                                             current_page='my-profile', class_info={'name': Class ['name']})
                 user = DATABASE.user_by_username(token ['username'])
 
-        return render_template ('class-prejoin.html', page_title=hedyweb.get_page_title('join class'),
-            current_page='my-profile',
-            class_info={
-                'id': Class ['id'],
-                'name': Class ['name'],
-            })
+        return render_template ('class-prejoin.html', joined=False,
+                                page_title=hedyweb.get_page_title('join class'),
+                                current_page='my-profile',
+                                class_info={
+                                    'id': Class ['id'],
+                                    'name': Class ['name'],
+                                })
 
     @app.route('/class/join', methods=['POST'])
     @requires_login

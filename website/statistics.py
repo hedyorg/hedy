@@ -23,14 +23,14 @@ def routes(app, db):
     @app.route('/stats/class/<class_id>', methods=['GET'])
     @requires_login
     def render_class_stats(user, class_id):
-        if not is_teacher(user):
+        if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message='retrieve_class')
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or (class_['teacher'] != user['username'] and not is_admin(user)):
             return utils.error_page(error=404, ui_message='no_such_class')
 
-        return render_template('class-stats.html', class_info={'id': class_id},
+        return render_template('class-stats.html', class_info={'id': class_id, 'students': sorted(class_['students'])},
                                current_page='my-profile', page_title=hedyweb.get_page_title('class statistics'))
 
     @app.route('/class-stats/<class_id>', methods=['GET'])
