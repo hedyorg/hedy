@@ -117,7 +117,7 @@ export function join_class(id: string, name: string) {
 }
 
 export function invite_student(class_id: string) {
-  modal.prompt (auth.texts['invite_prompt'], '', function (username) {
+    modal.prompt (auth.texts['invite_prompt'], '', function (username) {
       if (!username) {
           return modal.alert("This value is empty");
       }
@@ -133,9 +133,9 @@ export function invite_student(class_id: string) {
       }).done(function() {
           location.reload();
       }).fail(function(err) {
-          return modal.alert(err.responseText);
+          return modal.alert(err.responseText, 3000, true);
       });
-  });
+    });
 }
 
 export function remove_student_invite(username: string, class_id: string) {
