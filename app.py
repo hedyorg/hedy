@@ -1072,6 +1072,7 @@ def index(level, step):
 
     adventures, teacher_adventures, restrictions = DATABASE.get_student_restrictions(load_adventures_per_level(g.lang, level),
                                                                  current_user()['username'], level)
+
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
     if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
