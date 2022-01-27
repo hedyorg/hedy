@@ -229,7 +229,6 @@ def routes (app, database, achievements):
             return 'Only teachers can update class preferences', 403
 
         body = request.json
-        print(body)
         # Validations
         if not isinstance(body, dict):
             return 'body must be an object', 400
