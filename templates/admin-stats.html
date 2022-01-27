@@ -1,5 +1,7 @@
 {% extends "auth.html" %}
 
+{% from "stats-shared.html" import insert_log_search, insert_accordion_tab %}
+
 {% block main %}
 <div class="flex flex-row mb-4 border-b">
     <h1>Statistics overview</h1>
@@ -8,181 +10,71 @@
     </div>
 </div>
 <div class="px-8">
-  <h2 class="inline-block">Load data for: </h2>
+  <div class="inline-block medium text-2xl">Load data for: </div>
   <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(1, this)">This week</a> |
   <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(2, this)">Past 2 weeks</a> |
   <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(4, this)">Past 4 weeks</a> |
   <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(52, this)">Past year</a>
+
   <div class="shadow-md stats accordion">
-    <div class="accordion-tab w-full overflow-hidden border-t">
-      <input class="absolute opacity-0 " id="tab-multi-one" type="checkbox" name="tabs" checked="checked">
-      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-one">
-        Program runs per level</label>
-      <div class="tab-content overflow-hidden leading-normal">
-        <div class="stats-spinner flex justify-center items-center h-64">
-          <div
-              class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
-          ></div>
-        </div>
-        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
-          <div class="flex flex-col order-1">
-            <div class="w-full flex-1 flex flex-col">
-              <canvas id="programRunsPerLevelChart" width="400" height="400"></canvas>
-            </div>
+
+    {% call insert_accordion_tab('tab-multi-one', 'Program runs per level') %}
+      <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
+        <div class="flex flex-col order-1">
+          <div class="w-full flex-1 flex flex-col">
+            <canvas id="programRunsPerLevelChart" width="400" height="400"></canvas>
           </div>
-          <div class="flex flex-col order-2">
-            <div class="w-full flex-1 flex flex-col">
-              <canvas id="errorRatePerLevelChart" width="400" height="400"></canvas>
-            </div>
+        </div>
+        <div class="flex flex-col order-2">
+          <div class="w-full flex-1 flex flex-col">
+            <canvas id="errorRatePerLevelChart" width="400" height="400"></canvas>
           </div>
         </div>
       </div>
-    </div>
-    <div class="accordion-tab w-full overflow-hidden border-t">
-      <input class="absolute opacity-0" id="tab-multi-two" type="checkbox" name="tabs" checked="checked">
-      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-two">
-        Program runs per level per week</label>
-      <div class="tab-content overflow-hidden leading-normal">
-        <div class="stats-spinner flex justify-center items-center h-64">
-          <div
-              class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
-          ></div>
-        </div>
-        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
-          <div class="flex flex-col order-1">
-            <div class="w-full flex-1 flex flex-col">
-              <canvas id="successfulRunsPerWeekChart" width="400" height="400"></canvas>
-            </div>
+    {% endcall %}
+
+    {% call insert_accordion_tab('tab-multi-two', 'Program runs per week') %}
+      <div>
+        <ul id="admin-program-runs-legend" class="stats-legend"></ul>
+      </div>
+
+      <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
+        <div class="flex flex-col order-1">
+          <div class="w-full flex-1 flex flex-col">
+            <canvas id="successfulRunsPerWeekChart" class="admin-runs-chart" width="400" height="400"></canvas>
           </div>
-          <div class="flex flex-col order-2">
-            <div class="w-full flex-1 flex flex-col">
-              <canvas id="failedRunsPerWeekChart" width="400" height="400"></canvas>
-            </div>
+        </div>
+        <div class="flex flex-col order-2">
+          <div class="w-full flex-1 flex flex-col">
+            <canvas id="failedRunsPerWeekChart" class="admin-runs-chart" width="400" height="400"></canvas>
           </div>
         </div>
       </div>
-    </div>
-    <div class="accordion-tab w-full overflow-hidden border-t">
-      <input class="absolute opacity-0" id="tab-multi-three" type="checkbox" name="tabs" checked="checked">
-      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-three">
-        Exceptions per level and per week</label>
-      <div class="tab-content overflow-hidden leading-normal">
-        <div class="stats-spinner flex justify-center items-center h-64">
-          <div
-              class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
-          ></div>
-        </div>
-        <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
-          <div class="flex flex-col order-1">
-            <div class="w-full flex-1 flex flex-col">
-              <canvas id="exceptionsPerLevelChart" width="400" height="400"></canvas>
-            </div>
+    {% endcall %}
+
+    {% call insert_accordion_tab('tab-multi-three', 'Exceptions per level and per week') %}
+      <div>
+        <ul id="admin-exceptions-legend" class="stats-legend"></ul>
+      </div>
+
+      <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
+        <div class="flex flex-col order-1">
+          <div class="w-full flex-1 flex flex-col">
+            <canvas id="exceptionsPerLevelChart" class="admin-exceptions-chart" width="400" height="400"></canvas>
           </div>
-          <div class="flex flex-col order-2">
-            <div class="w-full flex-1 flex flex-col">
-              <canvas id="exceptionsPerWeekChart" width="400" height="400"></canvas>
-            </div>
+        </div>
+        <div class="flex flex-col order-2">
+          <div class="w-full flex-1 flex flex-col">
+            <canvas id="exceptionsPerWeekChart" class="admin-exceptions-chart" width="400" height="400"></canvas>
           </div>
         </div>
       </div>
-    </div>
-    <div class="accordion-tab w-full overflow-hidden border-t">
-      <input class="absolute opacity-0" id="tab-multi-four" type="checkbox" name="tabs" checked="checked">
-      <label class="block p-3 leading-normal cursor-pointer border-b font-light text-xl" for="tab-multi-four">
-        Search program logs</label>
-      <div class="tab-content overflow-hidden leading-normal">
-        <div class="stats-spinner flex justify-center items-center h-64">
-          <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400">
-          </div>
-        </div>
-        <form id="logs-search-form" class="w-full grid grid-cols-1 lg:grid-cols-3 gap-4 p-3">
-          <div class="flex flex-col">
-            <div class="w-full flex-1 flex flex-col">
-              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="logs-start-date">
-                Start date
-              </label>
-              <input
-                  class="block w-full py-2 px-4 outline-none border-2 border-gray-400" id="logs-start-date"
-                  type="text" name="start" placeholder="2022-01-01 00:00:00">
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div class="w-full flex-1 flex flex-col">
-              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="logs-end-date">
-                End date
-              </label>
-              <input
-                  class="block w-full py-2 px-4 outline-none border-2 border-gray-400" id="logs-end-date" type="text"
-                  name="end" placeholder="2022-12-31 23:59:59">
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div class="w-full flex-1 flex flex-col">
-              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="logs-level">
-                Level
-              </label>
-              <input class="block w-full py-2 px-4 outline-none border-2 border-gray-400" id="logs-level" type="text"
-                     name="level" placeholder="e.g. 15 or 1%">
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div class="w-full flex-1 flex flex-col">
-              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="logs-exception">
-                Exception
-              </label>
-              <input class="block w-full py-2 px-4 outline-none border-2 border-gray-400" id="logs-exception"
-                     type="text" name="exception" placeholder="e.g. ParseException or Parse%">
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div class="w-full flex-1 flex flex-col">
-              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="logs-username">
-                Username
-              </label>
-              <input class="block w-full py-2 px-4 outline-none border-2 border-gray-400" id="logs-username"
-                     type="text" name="username" placeholder="e.g. hedy, h% or %hedy%">
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div class="w-full flex-1 flex flex-col">
-             <button id="search-logs-button"
-                 class="shadow green-btn focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 lg:mt-6 rounded" type="button" onclick="hedyApp.stats.searchProgramLogs()">
-                Search
-             </button>
-           </div>
-          </div>
-        </form>
-        <table id="search-logs-table" class="table-auto mb-4 w-full">
-          <thead>
-            <tr>
-              <th class="px-4 py-2">Date</th>
-              <th class="px-4 py-2">Level</th>
-              <th class="px-4 py-2">Username</th>
-              <th class="px-4 py-2">Exception</th>
-              <th class="px-4 py-2">Code</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-        <div class="text-center">
-          <button type="button" id="logs-load-more" onclick="hedyApp.stats.fetchProgramLogsResults()"
-                 class="green-btn mb-4 hidden"
-          >Load more</button>
-        </div>
-        <div id="search-logs-failed-msg" class="text-center font-semibold my-5">
-          Query failed. Review supplied parameters and try again.
-        </div>
-        <div id="search-logs-empty-msg" class="text-center font-semibold my-5">
-          No data found matching the search criteria.
-        </div>
-        <div id="logs-spinner" class="flex justify-center items-center h-64">
-          <div
-              class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
-          ></div>
-        </div>
-      </div>
-    </div>
+    {% endcall %}
+
+    {% call insert_accordion_tab('tab-multi-four', 'Search program logs') %}
+        {{ insert_log_search() }}
+    {% endcall %}
+
   </div>
 </div>
 
