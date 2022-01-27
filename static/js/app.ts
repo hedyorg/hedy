@@ -46,13 +46,12 @@ var StopExecution = false;
       $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
       });
-    } else {
-      if($(preview).attr('id')){
-        // @ts-ignore
-        let level = String($(preview).attr('id'));
-        const mode = getHighlighter(parseInt(level));
-        exampleEditor.session.setMode(mode);
-      }
+    }
+    if($(preview).attr('id')){
+      // @ts-ignore
+      let level = String($(preview).attr('id'));
+      const mode = getHighlighter(parseInt(level));
+      exampleEditor.session.setMode(mode);
     }
   }
 
