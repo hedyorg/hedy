@@ -344,7 +344,6 @@ class Database:
         CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
 
     def update_customizations_class(self, level_customizations):
-        print(level_customizations)
         CUSTOMIZATIONS.put(level_customizations)
         for customization in CUSTOMIZATIONS.get_many({'id': level_customizations['id']}):
             if customization['level'] == (level_customizations['level']-1):
