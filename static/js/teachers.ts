@@ -119,7 +119,7 @@ export function join_class(id: string, name: string) {
 export function invite_student(class_id: string) {
     modal.prompt (auth.texts['invite_prompt'], '', function (username) {
       if (!username) {
-          return modal.alert("This value is empty");
+          return modal.alert(auth.texts['username_empty']);
       }
       $.ajax({
           type: 'POST',
@@ -185,9 +185,9 @@ export function remove_student(class_id: string, student_id: string, self_remova
 }
 
 export function create_adventure() {
-    modal.prompt ("Please enter the name of the adventure", '', function (adventure_name) {
+    modal.prompt (auth.texts['adventure_prompt'], '', function (adventure_name) {
     if (!adventure_name) {
-      modal.alert("Adventure name is empty!", 3000, true);
+      modal.alert(auth.texts['adventure_empty'], 3000, true);
       return;
     }
     $.ajax({
@@ -201,12 +201,8 @@ export function create_adventure() {
     }).done(function(response) {
       window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
     }).fail(function(err) {
-      if (err.responseText == "duplicate") {
-        modal.alert("Adventure name already exists!", 3000, true);
-        return;
-      }
       console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      return modal.alert(err.responseText, 3000, true);
     });
   });
 }
@@ -215,7 +211,7 @@ export function update_adventure(adventure_id: string) {
    const adventure_name = $('#custom_adventure_name').val();
    const level = $('#custom_adventure_level').val();
    const content = $('#custom_adventure_content').val();
-   modal.confirm ("Are you sure you want to update this adventure?", function () {
+   modal.confirm (auth.texts['update_adventure_prompt'], function () {
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-adventure',
@@ -227,12 +223,11 @@ export function update_adventure(adventure_id: string) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function() {
-      modal.alert("Adventure has been updated!", 3000, false);
-      $('#preview_adventure_button').show();0
-    }).fail(function(err) {
-      console.error(err);
-      modal.alert("Something went wrong!", 3000, true);
+    }).done(function(response) {
+      modal.alert(response.responseText, 3000, false);
+      $('#preview_adventure_button').show();
+    }).fail(function() {
+      modal.alert(ErrorMessages['Connection_error'], 3000, true);
     });
   });
 }
@@ -268,6 +263,7 @@ export function delete_adventure(adventure_id: string) {
       dataType: 'json'
     }).done(function() {
       location.reload();
+      //Todo TB -> If we delete from edit screen -> re-direct
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
