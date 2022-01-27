@@ -1,6 +1,6 @@
 import { modal, error } from './modal';
 import { auth } from './auth';
-import {showAchievements} from "./app";
+import {showAchievements, turnIntoAceEditor} from "./app";
 
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
@@ -194,6 +194,24 @@ export function update_adventure(adventure_id: string) {
     });
   });
 }
+
+export function preview_adventure() {
+     let content = <string>$('#custom_adventure_content').val();
+     let container = $('<div>');
+     container.addClass('border border-black rounded-lg bg-gray-200 text-black');
+     container.css("white-space","pre-wrap"); //Essential for it to work!
+     container.html(content);
+
+     $(container).find('pre').each(function(){
+         turnIntoAceEditor(this, true);
+     });
+
+     $(content).find('pre').each(function(){
+         turnIntoAceEditor(this, true);
+     });
+     $('#preview_container').html(content);
+
+ }
 
 export function delete_adventure(adventure_id: string) {
   modal.confirm ("Are you sure you want to remove this adventure?", function () {

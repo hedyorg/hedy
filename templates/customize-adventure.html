@@ -23,15 +23,15 @@
                     </div>
                     <div class="border border-black rounded-lg p-4 text-sm">
                         Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under "customizations".
-                        If you want to include a command in your adventure please use single "code quotes" like this:
+                        If you want to include a command in your adventure please use code anchors like this:
                         <div class="flex flex-row my-2 items-center">
-                            <pre>`echo`</pre>
+                            <pre>&lt;code&gt;echo&lt;/code&gt;</pre>
                             <b class="mx-4">&rarr;</b>
                             <code>echo</code>
                         </div>
-                        If you want to show actual code snippets, for example to give student a template or example of the code. Please use triple "code quotes" like this:
+                        If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:
                         <div class="flex flex-row items-center">
-                            <pre>```<br>print Hello world!<br>```</pre>
+                            <pre>&lt;pre&gt;<br>print Hello world!<br>&lt;/pre&gt;</pre>
                             <b class="mx-4">&rarr;</b>
                             <div class="turn-pre-into-ace w-64" style="white-space: pre-wrap;">
                                 <pre id="1" class="no-copy-button">print hello world!</pre>
@@ -48,13 +48,15 @@
                         <label for="agree_terms" class="text-sm italic w-full">I agree that my adventure might be made publicly available on Hedy.</label>
                     </div>
                     <div class="flex flex-row my-2">
-                        <button class="blue-btn hidden" id="preview_adventure_button" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">Preview</button>
+                        <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">Preview</button>
                         <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2">Save</button>
                         <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}');">Delete</button>
                     </div>
                 </div>
             </div>
         </form>
+    </div>
+    <div class="mt-4 border-gray-400 border-2 rounded-lg px-4 w-3/4 mx-auto" style="white-space: pre-wrap;" id="preview_container">
     </div>
     <div class="mt-4 flex flex-row">
         <button class="blue-btn" onclick="window.open('/for-teachers', '_self');">{{auth.back_to_teachers_page}}</button>
