@@ -1223,15 +1223,22 @@ def explore():
     else:
         programs = DATABASE.get_all_explore_programs()
 
+    filtered_programs = []
     for program in programs:
-        program['code'] = "\n".join(program['code'].split("\n")[:3])
+        filtered_programs.append({
+            'username': program['username'],
+            'name': program['name'],
+            'level': program['level'],
+            'id': program['id'],
+            'code': "\n".join(program['code'].split("\n")[:4])
+        })
 
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
     else:
         adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
-    return render_template('explore.html', programs=programs,
+    return render_template('explore.html', programs=filtered_programs,
                            filtered_level=level,
                            achievement=achievement,
                            filtered_adventure=adventure,
