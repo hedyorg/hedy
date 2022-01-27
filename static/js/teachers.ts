@@ -263,8 +263,7 @@ export function delete_adventure(adventure_id: string) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function() {
-      location.reload();
-      //Todo TB -> If we delete from edit screen -> re-direct
+      window.location.pathname = '/for-teachers';
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));

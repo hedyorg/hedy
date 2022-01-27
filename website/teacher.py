@@ -356,16 +356,21 @@ def routes (app, database, achievements):
             return g.auth_texts.get('adventure_name_invalid'), 400
         if not isinstance(body.get('level'), str):
             return g.auth_texts.get('level_invalid'), 400
-        if not isinstance(body.get('content'), str) or len(body.get('content')) < 5:
+        if not isinstance(body.get('content'), str):
             return g.auth_texts.get('content_invalid'), 400
-
-        # Todo: TB -> Write error messages in yamls
+        if len(body.get('content')) < 20:
+            return g.auth_texts.get('adventure_length'), 400
 
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='retrieve_adventure')
-        adventure = DATABASE.get_adventure(body['id'])
-        if not adventure or adventure['creator'] != user['username']:
+        current_adventure = DATABASE.get_adventure(body['id'])
+        if not current_adventure or current_adventure['creator'] != user['username']:
             return utils.error_page(error=404,  ui_message='no_such_adventure')
+
+        adventures = DATABASE.get_teacher_adventures(user['username'])
+        for adventure in adventures:
+            if adventure['name'] == body['name'] and adventure['id'] != body['id']:
+                return g.auth_texts.get('adventure_duplicate'), 400
 
         adventure = {
             'date': utils.timems(),
@@ -397,7 +402,7 @@ def routes (app, database, achievements):
         adventures = DATABASE.get_teacher_adventures(user['username'])
         for adventure in adventures:
             if adventure['name'] == body['name']:
-                return "duplicate", 200
+                return g.auth_texts.get('adventure_duplicate'), 400
 
         adventure = {
             'id': uuid.uuid4().hex,
