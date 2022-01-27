@@ -288,10 +288,37 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
 
-  def test_one_space_in_rhs_if(self):
+  def test_unquoted_space_rhs(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken' else print 'biertje!'""")
+
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.ParseException)
+
+  def test_unquoted_space_rhs_no_else(self):
     code = textwrap.dedent("""\
     naam is James
     if naam is James Bond print 'shaken'""")
+
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.ParseException)
+
+  def test_unquoted_space_rhs_assign(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond naam is 'Pietjansma'""")
+
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.ParseException)
+
+  def test_one_space_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is 'James Bond' print 'shaken'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'
@@ -303,7 +330,7 @@ class TestsLevel5(HedyTester):
   def test_multiple_spaces_in_rhs_if(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is Bond James Bond print 'shaken'""")
+    if naam is 'Bond James Bond' print 'shaken'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'
@@ -315,7 +342,7 @@ class TestsLevel5(HedyTester):
   def test_one_space_in_rhs_if_else(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is James Bond print 'shaken' else print 'biertje!'""")
+    if naam is 'James Bond' print 'shaken' else print 'biertje!'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'

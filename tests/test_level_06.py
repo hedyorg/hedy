@@ -358,7 +358,7 @@ class TestsLevel6(HedyTester):
   def test_one_space_in_rhs_if(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is James Bond print 'shaken'""")
+    if naam is 'James Bond' print 'shaken'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'
@@ -373,7 +373,7 @@ class TestsLevel6(HedyTester):
   def test_one_space_in_rhs_if_else(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is James Bond print 'shaken' else print 'biertje!'""")
+    if naam is 'James Bond' print 'shaken' else print 'biertje!'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'
@@ -387,10 +387,20 @@ class TestsLevel6(HedyTester):
       expected=expected,
       max_level=7)
 
+  def test_unquoted_space_rhs(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken' else print 'biertje!'""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.ParseException,
+      max_level=7)
+
   def test_multiple_spaces_in_rhs_if(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is Bond James Bond print 'shaken'""")
+    if naam is 'Bond James Bond' print 'shaken'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'

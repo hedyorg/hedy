@@ -8,8 +8,8 @@ ask_equals: var _SPACE _EQUALS _SPACE _ASK (_SPACE _print_argument)?
 
 condition:+= equality_check_is | equality_check_equals -= equality_check
 
-equality_check_is: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces (_SPACE textwithoutspaces)*
-equality_check_equals: textwithoutspaces _SPACE _EQUALS _SPACE textwithoutspaces (_SPACE textwithoutspaces)*
+equality_check_is: textwithoutspaces _SPACE _IS _SPACE (textwithoutspaces | quoted_text)
+equality_check_equals: textwithoutspaces _SPACE _EQUALS _SPACE (textwithoutspaces | quoted_text)
 
 list_access_var_is: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
 list_access_var_equals: var _SPACE _EQUALS _SPACE var _SPACE _AT _SPACE (INT | random)
