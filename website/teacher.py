@@ -61,9 +61,13 @@ def routes (app, database, achievements):
         teachers = os.getenv('BETA_TEACHERS', '').split(',')
         is_beta_teacher = user['username'] in teachers
 
+        invites = []
+        for invite in DATABASE.get_class_invites(Class['id']):
+            invites.append({'username': invite['username'], 'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))})
+
         return render_template ('class-overview.html', current_page='my-profile',
                                 page_title=hedyweb.get_page_title('class overview'),
-                                achievement=achievement,
+                                achievement=achievement, invites=invites,
                                 is_beta_teacher=is_beta_teacher,
                                 class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class ['link'],
                                             'name': Class ['name'], 'id': Class ['id']})
@@ -153,16 +157,18 @@ def routes (app, database, achievements):
             token = DATABASE.get_token(request.cookies.get (cookie_name))
             if token:
                 if token ['username'] in Class.get ('students', []):
-                    return render_template ('class-already-joined.html', page_title=hedyweb.get_page_title('join class'),
+                    return render_template ('class-prejoin.html', joined=True,
+                                            page_title=hedyweb.get_page_title('join class'),
                                             current_page='my-profile', class_info={'name': Class ['name']})
                 user = DATABASE.user_by_username(token ['username'])
 
-        return render_template ('class-prejoin.html', page_title=hedyweb.get_page_title('join class'),
-            current_page='my-profile',
-            class_info={
-                'id': Class ['id'],
-                'name': Class ['name'],
-            })
+        return render_template ('class-prejoin.html', joined=False,
+                                page_title=hedyweb.get_page_title('join class'),
+                                current_page='my-profile',
+                                class_info={
+                                    'id': Class ['id'],
+                                    'name': Class ['name'],
+                                })
 
     @app.route('/class/join', methods=['POST'])
     @requires_login
@@ -174,6 +180,7 @@ def routes (app, database, achievements):
             return utils.error_page(error=404,  ui_message='invalid_class_link')
 
         DATABASE.add_student_to_class(Class['id'], user['username'])
+        DATABASE.remove_class_invite(user['username'])
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "epic_education")
         if achievement:
             return {'achievement': achievement}, 200
@@ -197,7 +204,7 @@ def routes (app, database, achievements):
     @requires_login
     def get_class_info(user, class_id):
         if not is_teacher(user):
-            return utils.error_page_403(error=403, ui_message='retrieve_class')
+            return utils.error_page(error=403, ui_message='retrieve_class')
         Class = DATABASE.get_class(class_id)
         if not Class or Class['teacher'] != user['username']:
             return utils.error_page(error=404,  ui_message='no_such_class')
@@ -252,6 +259,63 @@ def routes (app, database, achievements):
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "my_class_my_rules")
         if achievement:
             return {'achievement': achievement}, 200
+        return {}, 200
+
+    @app.route('/invite_student', methods=['POST'])
+    @requires_login
+    def invite_student(user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('username'), str):
+            return g.auth_texts.get('username_invalid'), 400
+        if not isinstance(body.get('class_id'), str):
+            return 'class id must be a string', 400
+
+        username = body.get('username').lower()
+        class_id = body.get('class_id')
+
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_class')
+        Class = DATABASE.get_class(class_id)
+        if not Class or Class['teacher'] != user['username']:
+            return utils.error_page(error=404, ui_message='no_such_class')
+
+        user = DATABASE.user_by_username(username)
+        if not user:
+            return g.auth_texts.get('student_not_existing'), 400
+        if 'students' in Class and user['username'] in Class['students']:
+            return g.auth_texts.get('student_already_in_class'), 400
+        if DATABASE.get_username_invite(user['username']):
+            return g.auth_texts.get('student_already_invite'), 400
+
+        # So: The class and student exist and are currently not a combination -> invite!
+        DATABASE.add_class_invite(username, class_id)
+        return {}, 200
+
+    @app.route('/remove_student_invite', methods=['POST'])
+    @requires_login
+    def remove_invite(user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('username'), str):
+            return g.auth_texts.get('username_invalid'), 400
+        if not isinstance(body.get('class_id'), str):
+            return 'class id must be a string', 400
+
+        username = body.get('username')
+        class_id = body.get('class_id')
+
+        if not is_teacher(user) and username != user.get('username'):
+            return utils.error_page(error=403, ui_message='retrieve_class')
+        Class = DATABASE.get_class(class_id)
+        if not Class or (Class['teacher'] != user['username'] and username != user.get('username')):
+            return utils.error_page(error=404, ui_message='no_such_class')
+
+        DATABASE.remove_class_invite(username)
         return {}, 200
 
     @app.route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])
