@@ -252,6 +252,7 @@ def routes (app, database, achievements):
         customizations['id'] = class_id
         customizations['level'] = int(body.get('level'))
         customizations['adventures'] = body.get('adventures')
+        customizations['teacher_adventures'] = body.get('teacher_adventures')
         customizations['example_programs'] = body.get('example_programs')
         customizations['hide'] = body.get('hide_level')
         customizations['hide_prev_level'] = body.get('hide_prev_level')
