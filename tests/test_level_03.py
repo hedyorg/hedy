@@ -204,8 +204,6 @@ class TestsLevel3(HedyTester):
       রং is ask আপনার প্রিয় রং কি?
       print রং is আপনার প্রিয""")
 
-    
-
     expected = textwrap.dedent("""\
     ve1760b6272d4c9f816e62af4882d874f = input('আপনার প্রিয় রং কি'+'?')
     print(f'{ve1760b6272d4c9f816e62af4882d874f} is আপনার প্রিয')""")
@@ -233,6 +231,17 @@ class TestsLevel3(HedyTester):
     print(f'{dieren}')""")
 
     self.single_level_tester(code=code, expected=expected)
+
+  def test_list_access_with_type_input_gives_error(self):
+    code = textwrap.dedent("""\
+    animals is ask 'What are the animals?'
+    print animals at random""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
 
   def test_turn_number(self):
     code = textwrap.dedent("""\
@@ -534,6 +543,18 @@ class TestsLevel3(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
+  def test_add_to_list_with_input_var_gives_error(self):
+    code = textwrap.dedent("""\
+    colors is ask 'What are the colors?' 
+    favorite is red
+    add favorite to colors""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   def test_remove_from_list_with_string_var_gives_error(self):
     code = textwrap.dedent("""\
     color is yellow 
@@ -545,6 +566,19 @@ class TestsLevel3(HedyTester):
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
+
+  def test_remove_from_list_with_input_var_gives_error(self):
+    code = textwrap.dedent("""\
+    colors is ask 'What are the colors?' 
+    favorite is red
+    remove favorite from colors""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   #negative tests
   def test_echo_no_longer_in_use(self):
     code = textwrap.dedent("""\
