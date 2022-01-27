@@ -534,7 +534,9 @@
     intro_text: |
         We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
         The `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` is smaller than 12.
+        If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.
         The `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.
+        If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.
         You use these comparisons in an `if`, like this:
         ```
         age = ask 'How old are you?'
@@ -585,6 +587,22 @@
             answer = ask 'What is 5 * 5?'
             if answer != 25
                 print 'That is not correct!'
+
+    -   name: "Smaller or equal"
+        explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
+        example: "For example: age <= 12"
+        demo_code: |-
+            age = ask 'How old are you?'
+            if age <= 12
+                print 'You are younger than me!'
+
+    -   name: "Bigger or equal"
+        explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
+        example: "For example: age >= 14"
+        demo_code: |-
+            age = ask 'How old are you?'
+            if age >= 14
+                print 'You are older than me!'
 
 15:
     start_code: |-
