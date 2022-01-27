@@ -196,21 +196,16 @@ export function update_adventure(adventure_id: string) {
 }
 
 export function preview_adventure() {
-     let content = <string>$('#custom_adventure_content').val();
-     const name = <string>$('#custom_adventure_name').val();
-     const level = <number>$('#custom_adventure_level').val();
-     let container = $('<div>');
-     container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
-     container.css('white-space', 'pre-wrap');
-     container.css('width', '40em');
-     container.html(content);
+    let content = <string>$('#custom_adventure_content').val();
+    const name = <string>$('#custom_adventure_name').val();
+    const level = <number>$('#custom_adventure_level').val();
+    let container = $('<div>');
+    container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
+    container.css('white-space', 'pre-wrap');
+    container.css('width', '40em');
+    container.html(content);
 
-     // Fixme: Current bucket-fix to make sure the <pre> element can be correctly found!
-     const current_empty_div = $('#hidden_div');
-     let empty_div = $('<div>').attr('id', 'hidden_div');
-     current_empty_div.replaceWith(empty_div);
-     $('#hidden_div').append(container);
-
+    modal.preview(container, name);
     for (const preview of $('.preview pre').get()) {
         $(preview).addClass('text-lg rounded w-3/4');
         const exampleEditor = turnIntoAceEditor(preview, true)
@@ -220,7 +215,6 @@ export function preview_adventure() {
         const mode = getHighlighter(level);
         exampleEditor.session.setMode(mode);
     }
-    modal.preview(container, name);
 }
 
 export function delete_adventure(adventure_id: string) {
