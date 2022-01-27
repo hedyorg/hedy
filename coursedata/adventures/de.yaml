@@ -86,55 +86,59 @@ adventures:
                 start_code: ""
             9:
                 story_text: |
-                    ## Story
-                    In this level you can use nesting to put if, repeat or for commands inside other if, repeat or for commands. This gives you many options and really helps you to make your story interactive.
+                    ## Geschichte
+                    In diesem Level nutzt Du Verschachtelungen, um `if`-, `repeat`- oder `for`-Befehle in anderen `if`-, `repeat`- oder `for`-Befehlen zu verwenden.
+                    Das eröffnet Dir viele Möglichkeiten und hilft Dir, Deine Geschichte richtig interaktiv werden zu lassen.
 
-                    ## Example Simple Hedy Code
+                    ## Einfacher Hedy Beispiel-Code
                     ```
-                    print 'Robin is walking downtown'
-                    location = ask 'Is Robin going into a shop, or does she go home?'
-                    if location is shop
-                        print 'She enters the shop.'
-                        print 'Robin sees an interesting looking book'
-                        book = ask 'Does Robin buy the book?'
-                        if book is yes
-                            print 'Robin buys the book and goes home'
+                    print 'Robin läuft durch die Innenstadt.'
+                    Ort = ask 'Geht Robin in ein Geschäft oder nach Hause?'
+                    if Ort is Geschäft
+                        print 'Sie betritt ein Geschäft.'
+                        print 'Robin sieht ein Buch, das spannend wirkt.'
+                        Buch = ask 'Kauft Robin das Buch?'
+                        if Buch is ja
+                            print 'Robin kauft das Buch und geht nach Hause.'
                         else
-                            print 'Robin leaves the shop and goes home'
+                            print 'Robin verlässt das Geschäft und geht nach Hause.'
                     else
-                        print 'Robin goes home'
+                        print 'Robin geht nach Hause.'
                     ```
 
-                    ## More elaborate
-                    The example above is pretty straightforward, but with nesting you can really elaborate your code and turn your story into a real game. Check out this example!
+                    ## Etwas komplizierter
+                    Das obige Beispiel ist recht simpel, denn mit Verschachtelungen kannst Du richtig aufwendigen Code schreiben und aus Deiner Geschichte ein richtiges Spiel machen.
+                    Sieh Dir einmal dieses Beispiel an!
 
-                    ## Elaborate code
+                    ## Aufwendiger Hedy Beispiel-Code
                     ```
-                    sword = lost
-                    game = on
-                    print 'Our hero is walking through the forest'
-                    print 'The path splits two ways'
+                    Schwert is verloren
+                    Spiel is an
+                    print 'Unsere Heldin läuft durch den Wald.'
+                    print 'Der Weg gabelt sich.'
                     repeat 2 times
-                        if game is on
-                            path = ask 'Which path should she choose?'
-                            if path is left
-                                if sword is found
-                                    print 'Our hero comes across a dragon!'
-                                    print 'Luckily our hero has a sword to defeat the beast!'
-                                    game = over
+                        if Spiel is an
+                            Pfad is ask 'In welche Richtung soll sie gehen?'
+                            if Pfad is links
+                                if Schwert is gefunden
+                                    print 'Unsere Heldin begegnet einem Drachen!'
+                                    print 'Zum Glück hat sie das Schwert gefunden.'
+                                    print 'Damit vertreibt sie den Drachen.'
+                                    Spiel is aus
                                 else
-                                    print 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                    print 'Our hero is beaten by the dragon...'
-                                    print 'Try again'
-                                    game = over
-                            if path is right
-                                if sword is lost
-                                    print 'Our hero finds a sword'
-                                    print 'This could come in very handy'
-                                    sword = found
+                                    print 'Unsere Heldin begegnet einem Drachen, aber sie hat keine Waffe.'
+                                    print 'Unsere Heldin wird durch den Drachen besiegt...'
+                                    print 'Versuch es nochmal.'
+                                    Spiel is aus
+                            if Pfad is rechts
+                                if Schwert is verloren
+                                    print 'Unsere Heldin findet ein Schwert.'
+                                    print 'Das könnte sich noch als nützlich erweisen.'
+                                    Schwert is gefunden
                                 else
-                                    print 'You have already found the sword. There is nothing left here.'
-                                    print 'She walks back'
+                                    print 'Das Schwert hast Du bereits gefunden.'
+                                    print 'Hier gibt es nichts weiter zu entdecken.'
+                                    print 'Sie läuft zurück.'
                     ```
                 start_code: ""
             8:
