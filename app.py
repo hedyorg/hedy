@@ -1070,7 +1070,7 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures, restrictions = DATABASE.get_student_restrictions(load_adventures_per_level(g.lang, level),
+    adventures, teacher_adventures, restrictions = DATABASE.get_student_restrictions(load_adventures_per_level(g.lang, level),
                                                                  current_user()['username'], level)
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
@@ -1085,6 +1085,7 @@ def index(level, step):
         level_number=level,
         version=version(),
         adventures=adventures,
+        teacher_adventures=teacher_adventures,
         restrictions=restrictions,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
