@@ -28,6 +28,7 @@
                              {% endfor %}
                          {% endfor %}
                      </ul>
+                    <h4>{{auth.my_adventures}}</h4>
                      <ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 ltr:pl-4 rtl:pr-4" id="teacher_adventures_overview">
                          {% for adventure in teacher_adventures %}
                                 <li {% if adventure.level != 1 and adventure.level != '1' %} class="hidden" {% endif %} level="{{adventure.level}}" id="{{adventure.name}}">
