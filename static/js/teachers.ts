@@ -201,7 +201,6 @@ export function create_adventure() {
     }).done(function(response) {
       window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
     }).fail(function(err) {
-      console.error(err);
       return modal.alert(err.responseText, 3000, true);
     });
   });
@@ -225,9 +224,8 @@ export function update_adventure(adventure_id: string) {
       dataType: 'json'
     }).done(function(response) {
       modal.alert(response.responseText, 3000, false);
-      $('#preview_adventure_button').show();
-    }).fail(function() {
-      modal.alert(ErrorMessages['Connection_error'], 3000, true);
+    }).fail(function(err) {
+      modal.alert(err.responseText, 3000, true);
     });
   });
 }
@@ -265,7 +263,6 @@ export function delete_adventure(adventure_id: string) {
     }).done(function() {
       window.location.pathname = '/for-teachers';
     }).fail(function(err) {
-      console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
   });

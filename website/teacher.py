@@ -381,7 +381,7 @@ def routes (app, database, achievements):
         }
 
         DATABASE.update_adventure(body['id'], adventure)
-        return {}, 200
+        return g.auth_texts.get('adventure_updated'), 200
 
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])
     @requires_login
