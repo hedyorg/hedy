@@ -706,12 +706,21 @@ def programs_page(request):
 @app.route('/logs/query', methods=['POST'])
 def query_logs():
     user = current_user()
-    if not is_admin(user):
-        return utils.error_page(error=403, ui_message='unauthorized')
+    if not is_admin(user) and not is_teacher(user):
+        return 'unauthorized', 403
 
     body = request.json
     if body is not None and not isinstance(body, dict):
         return 'body must be an object', 400
+
+    class_id = body.get('class_id')
+    if not is_admin(user):
+        if not class_id:
+            return 'unauthorized', 403
+
+        class_ = DATABASE.get_class(class_id)
+        if not class_ or class_['teacher'] != user['username'] or body.get('username') not in class_.get('students'):
+            return 'unauthorized', 403
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -724,13 +733,12 @@ def get_log_results():
     next_token = request.args.get('next_token', default=None, type=str)
 
     user = current_user()
-    if not is_admin(user):
-        return utils.error_page(error=403, ui_message='unauthorized')
+    if not is_admin(user) and not is_teacher(user):
+        return 'unauthorized', 403
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
     return jsonify(response)
-
 
 
 def get_user_formatted_age(now, date):
