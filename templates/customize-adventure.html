@@ -48,7 +48,7 @@
                         <label for="agree_terms" class="text-sm italic w-full">I agree that my adventure might be made publicly available on Hedy.</label>
                     </div>
                     <div class="flex flex-row my-2">
-                        <button class="blue-btn" id="preview_adventure_button" onclick="event.preventDefault();hedyApp.preview_adventure();">Preview</button>
+                        <button class="blue-btn" id="preview_adventure_button" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">Preview</button>
                         <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2">Save</button>
                         <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}');">Delete</button>
                     </div>
