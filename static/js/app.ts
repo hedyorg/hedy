@@ -183,7 +183,7 @@ var StopExecution = false;
   }
 })();
 
-function getHighlighter(level: number) {
+export function getHighlighter(level: number) {
   const modeExceptions: Record<string, string> = {
         '9': 'ace/mode/level9and10',
         '10': 'ace/mode/level9and10',

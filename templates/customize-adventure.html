@@ -48,7 +48,7 @@
                         <label for="agree_terms" class="text-sm italic w-full">I agree that my adventure might be made publicly available on Hedy.</label>
                     </div>
                     <div class="flex flex-row my-2">
-                        <button class="blue-btn" id="preview_adventure_button" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">Preview</button>
+                        <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">Preview</button>
                         <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2">Save</button>
                         <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}');">Delete</button>
                     </div>
@@ -56,6 +56,8 @@
             </div>
         </form>
     </div>
+    <!-- This div is only here to make sure the <pre> converter function finds the <pre> elements! -->
+    <div id="hidden_div"></div>
     <div class="mt-4 flex flex-row">
         <button class="blue-btn" onclick="window.open('/for-teachers', '_self');">{{auth.back_to_teachers_page}}</button>
     </div>

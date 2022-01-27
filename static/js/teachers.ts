@@ -1,6 +1,6 @@
 import { modal, error } from './modal';
 import { auth } from './auth';
-import {showAchievements, turnIntoAceEditor} from "./app";
+import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
@@ -197,16 +197,30 @@ export function update_adventure(adventure_id: string) {
 
 export function preview_adventure() {
      let content = <string>$('#custom_adventure_content').val();
+     const level = <number>$('#custom_adventure_level').val();
      let container = $('<div>');
-     container.addClass('border border-black rounded-lg bg-gray-200 text-black');
-     container.css("white-space","pre-wrap"); //Essential for it to work!
+     container.addClass('preview border border-black px-8 py-4 text-left w-rounded-lg bg-gray-200 text-black turn-pre-into-ace');
+     container.css('white-space', 'pre-wrap');
+     container.css('width', '40em');
      container.html(content);
 
-     $(container).find('pre').each(function(){
-         turnIntoAceEditor(this, true);
-     });
-     modal.preview(container, "Adventure preview");
- }
+     // Fixme: Current bucket-fix to make sure the <pre> element can be correctly found!
+     const current_empty_div = $('#hidden_div');
+     let empty_div = $('<div>').attr('id', 'hidden_div');
+     current_empty_div.replaceWith(empty_div);
+     $('#hidden_div').append(container);
+
+    for (const preview of $('.preview pre').get()) {
+        $(preview).addClass('text-lg rounded w-3/4');
+        const exampleEditor = turnIntoAceEditor(preview, true)
+        exampleEditor.setOptions({ maxLines: Infinity });
+        exampleEditor.setOptions({ minLines: 2 });
+        exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
+        const mode = getHighlighter(level);
+        exampleEditor.session.setMode(mode);
+    }
+    modal.preview(container, "Adventure preview");
+}
 
 export function delete_adventure(adventure_id: string) {
   modal.confirm ("Are you sure you want to remove this adventure?", function () {
