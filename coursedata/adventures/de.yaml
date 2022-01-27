@@ -173,29 +173,31 @@ adventures:
                 start_code: "repeat 5 times print 'Help!'"
             5:
                 story_text: |
-                    ## Story
-                    In this level you can program different endings, which will make your story even more fun.
+                    ## Geschichte
+                    In diesem Level programmierst Du unterschiedliche Enden, was Deine Geschicht noch spannender werden lässt.
 
-                    Think of two endings for your story, for example:
+                    Denke Dir einfach eine Geschichte mit zwei möglichen Enden aus, zum Beispiel:
 
-                    - The princess is walking through the forest
-                    - She runs into a monster
+                    - Die Prinzessin läuft durch den Wald.
+                    - Sie begegnet einem Monster.
 
-                    - Happy ending: She takes her sword and the monster quickly runs away
-                    - Bad Ending: The monster eats the princess
+                    - Schönes Ende: Sie zieht ihr Schwert und das Monster ergreift die Flucht.
+                    - Nicht so schönes Ende: Das Monster frisst die Prinzessin.
 
-                    You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `if`, and then you have already made a whole program!
+                    Du kannst auch wieder sicherstellen, dass ein Name eingegeben werden kann.
+                    Das funktioniert genau wie in den vorherigen Levels.
+                    Wenn Du das mit einem `if` kombinierst, dann hast Du bereits ein richtiges Programm!
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    name is ask Who is walking in the forest?
-                    print name 'walks through the forest'
-                    print name 'encounter a monster'
-                    end is ask Would you like a good or a bad ending?
-                    if end is good print name 'takes the sword and the monster quickly runs away'
-                    else print 'The monster eats' name
+                    name is ask 'Wer läuft durch den Wald?'
+                    print name ' läuft durch den Wald.'
+                    print name ' begegnet einem Monster.'
+                    ende is ask 'Soll das Ende gut oder schlecht sein?'
+                    if ende is gut print name ' zieht ihr Schwert und das Monster ergreift die Flucht.'
+                    else print 'Das Monster frisst ' name '.'
                     ```
-                start_code: "print 'Here your story will start!'"
+                start_code: "print 'Deine Geschichte beginnt genau hier.'"
             4:
                 story_text: |
                     ## Geschichte
