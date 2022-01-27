@@ -262,6 +262,8 @@ def routes (app, database, achievements):
         adventure = DATABASE.get_adventure(adventure_id)
         if not adventure or adventure['creator'] != user['username']:
             return utils.error_page(error=404, ui_message='no_such_adventure')
+
+        adventure['content'] = adventure['content'].replace("<pre>", "<pre id='" + str(adventure['level']) + "'>")
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=hedyweb.get_page_title('view adventure'), current_page='my-profile')
 
@@ -312,8 +314,6 @@ def routes (app, database, achievements):
         DATABASE.update_adventure(body['id'], adventure)
         return {}, 200
 
-
-
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])
     @requires_login
     def delete_adventure(user, adventure_id):
@@ -326,7 +326,7 @@ def routes (app, database, achievements):
         DATABASE.delete_adventure(adventure_id)
         return {}, 200
 
-    @app.route('/for-teachers/adventure', methods=['POST'])
+    @app.route('/for-teachers/create_adventure', methods=['POST'])
     @requires_login
     def create_adventure(user):
         body = request.json

@@ -150,7 +150,7 @@ export function create_adventure() {
     }
     $.ajax({
       type: 'POST',
-      url: '/for-teachers/adventure',
+      url: '/for-teachers/create_adventure',
       data: JSON.stringify({
         name: adventure_name
       }),
@@ -207,7 +207,7 @@ export function preview_adventure() {
 
     modal.preview(container, name);
     for (const preview of $('.preview pre').get()) {
-        $(preview).addClass('text-lg rounded w-3/4');
+        $(preview).addClass('text-lg rounded');
         const exampleEditor = turnIntoAceEditor(preview, true)
         exampleEditor.setOptions({ maxLines: Infinity });
         exampleEditor.setOptions({ minLines: 2 });
