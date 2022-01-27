@@ -1303,8 +1303,6 @@ function update_keywords_commands(target_id: any, start_lang: string, goal_lang:
       ace.edit(target_id).setValue(response.code);
       $('#' + target_id).attr('lang', goal_lang);
     }
-    console.log("De taal is nu....");
-    console.log($('#' + target_id).attr('lang'));
   }).fail(function (xhr) {
     console.error(xhr);
   });
@@ -1316,11 +1314,10 @@ function update_view(selector_container: string) {
   });
 }
 
-export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string){
-  console.log("De taal was....");
-  console.log($('#' + target_id).attr('lang'));
+export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string) {
   update_view(selector_container);
   update_keywords_commands(target_id, old_lang, new_lang);
+}
 
 export function select_profile_image(image: number) {
   $('.profile_image').removeClass("border-2 border-blue-600");
