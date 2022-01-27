@@ -10,38 +10,38 @@ window.State = {};
 }
 
 // Set this to true to use keywords from languages other than english
-var localKeywordsEnable = false;
+var localKeywordsEnable = true;
 
 // Contains the current keywords based on the current language
-var currentLang: { 
-  _PRINT: string; 
-  _IS: string; 
-  _ASK: string; 
-  _ECHO: string; 
-  _FORWARD: string; 
-  _TURN: string; 
-  _SLEEP: string; 
-  _ADD_LIST: string; 
-  _TO_LIST: string; 
-  _REMOVE: string; 
-  _FROM: string; 
-  _AT: string; 
-  _RANDOM: string; 
-  _IN: string; 
-  _IF: string; 
-  _ELSE: string; 
-  _AND: string; 
-  _REPEAT: string; 
-  _TIMES: string; 
-  _FOR: string; 
-  _RANGE: string; 
-  _TO: string; 
-  _STEP: string; 
-  _ELIF: string; 
-  _INPUT: string; 
-  _OR: string; 
-  _WHILE: string; 
-  _LENGTH: string; 
+var currentLang: {
+  _PRINT: string;
+  _IS: string;
+  _ASK: string;
+  _ECHO: string;
+  _FORWARD: string;
+  _TURN: string;
+  _SLEEP: string;
+  _ADD_LIST: string;
+  _TO_LIST: string;
+  _REMOVE: string;
+  _FROM: string;
+  _AT: string;
+  _RANDOM: string;
+  _IN: string;
+  _IF: string;
+  _ELSE: string;
+  _AND: string;
+  _REPEAT: string;
+  _TIMES: string;
+  _FOR: string;
+  _RANGE: string;
+  _TO: string;
+  _STEP: string;
+  _ELIF: string;
+  _INPUT: string;
+  _OR: string;
+  _WHILE: string;
+  _LENGTH: string;
 };
 if(localKeywordsEnable){
   switch(window.State.lang){
@@ -666,9 +666,18 @@ function rule_forRangeParen() {
  * The keyword must be followed by space.
  */
 function keywordWithSpace(keyword: string) {
-  return '\\b' + keyword + ' ';
+  // We used to use \b here to match a "word boundary". However,
+  // "word boundary" seems to be defined rather narrowly, and for whatever
+  // reason does not work properly with non-ASCII languages.
+  //
+  // Instead, we'll do a negative lookbehind assertion for unicode letter.
+  return '(?<!\\p{L})' + keyword + ' ';
+  //                     keyword
+  //      (?<!      )    if it is not preceded by
+  //           \p{L}     something that Unicode considers a "letter"
+  //          \\         escape the backslash
 }
-  
+
 /**
  * Modify the given ruleset, replacing literal spaces with "one or more spaces"
  */
