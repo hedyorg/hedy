@@ -29,14 +29,14 @@ export const stats = {
       updateChart('errorRatePerLevelChart', [errorRatePerLevelDataset]);
 
 
-      // update program runs per week per level charts
+      // update program runs per week charts
       const levels = flattenWeekProps(response['per_week'], (el: string) => el.toLowerCase().startsWith('l'));
       const successfulRunsPerWeekDatasets = generateDatasets(levels, response['per_week'], 'week', 'data.successful_runs.', chart_level_colors, false);
       const failedRunsPerWeekDatasets = generateDatasets(levels, response['per_week'], 'week', 'data.failed_runs.', chart_level_colors, false);
 
       updateChart('successfulRunsPerWeekChart', successfulRunsPerWeekDatasets);
       updateChart('failedRunsPerWeekChart', failedRunsPerWeekDatasets);
-
+      updateSharedLegend('#admin-program-runs-legend', successfulRunsPerWeekDatasets, '.admin-runs-chart');
 
       // update exceptions per level and per week charts
       const exceptions = flattenExProps(response['per_level'], (el: string) => el.toLowerCase().endsWith('exception'));
@@ -46,6 +46,7 @@ export const stats = {
 
       updateChart('exceptionsPerLevelChart', exceptionsPerLevelDatasets);
       updateChart('exceptionsPerWeekChart', exceptionsPerWeekDatasets);
+      updateSharedLegend('#admin-exceptions-legend', exceptionsPerLevelDatasets, '.admin-exceptions-chart');
 
     }).fail (function (error) {
       console.log(error);
@@ -133,13 +134,15 @@ export const stats = {
     return false;
   },
 
-  searchProgramLogs: function () {
+  searchProgramLogs: function (classId: string) {
     var raw_data = $('#logs-search-form').serializeArray();
     var payload: any = {}
     $.map(raw_data, function(n){
         payload[n['name']] = n['value'];
     });
+    payload['class_id'] = classId;
 
+    $('#search-logs-empty-msg').hide();
     $('#search-logs-failed-msg').hide();
     $('#logs-spinner').show();
     $('#logs-load-more').hide();
@@ -190,7 +193,7 @@ export const stats = {
           <td class="border px-4 py-2">${e.username}</td> \
           <td class="border px-4 py-2">${e.exception || ''}</td> \
           <td class="border px-4 py-2"> \
-            <button class="green-btn float-right top-2 right-2" onclick=hedyApp.auth.copyCode(this)>⇥</button> \
+            <button class="green-btn float-right top-2 right-2" onclick=hedyApp.stats.copyCode(this)>⇥</button> \
             <pre>${e.code}</pre> \
           </td></tr>`)
       });
@@ -231,11 +234,11 @@ export const stats = {
     initChart('programRunsPerLevelChart', 'bar', 'Program runs per level', 'Level #', 'top', false, true);
     initChart('errorRatePerLevelChart', 'line', 'Error rate per level', 'Level #', 'top', true, false);
 
-    initChart('successfulRunsPerWeekChart', 'bar', 'Successful runs per week', 'Week #', 'right', false, false);
-    initChart('failedRunsPerWeekChart', 'bar', 'Failed runs per week', 'Week #', 'right', false, false);
+    initChart('successfulRunsPerWeekChart', 'bar', 'Successful runs per week', 'Week #', null, false, false);
+    initChart('failedRunsPerWeekChart', 'bar', 'Failed runs per week', 'Week #', null, false, false);
 
-    initChart('exceptionsPerLevelChart', 'line', 'Exceptions per level', 'Level #', 'right', false, false);
-    initChart('exceptionsPerWeekChart', 'line', 'Exceptions per week', 'Week #', 'right', false, false);
+    initChart('exceptionsPerLevelChart', 'line', 'Exceptions per level', 'Level #', null, false, false);
+    initChart('exceptionsPerWeekChart', 'line', 'Exceptions per week', 'Week #', null, false, false);
 
     initializeElements();
   },
@@ -325,6 +328,10 @@ function initializeElements() {
   $('#logs-spinner').hide();
   $('#search-logs-failed-msg').hide();
   $('#search-logs-empty-msg').hide();
+
+  const today = new Date().toISOString().split('T')[0];
+  $('#logs-start-date').val(today + ' 00:00:00');
+  $('#logs-end-date').val(today + ' 23:59:59');
 }
 
 function setActive(element: any) {

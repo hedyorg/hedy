@@ -5,7 +5,7 @@ command:+= ifelse | ifs  |  list_access_var -= error_invalid | error_ask_no_quot
 
 //todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
 list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
-assign_list: var _SPACE _IS _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
+assign_list: var _SPACE _IS _SPACE textwithspaces (_COMMA textwithspaces)+
 assign: var _SPACE _IS _SPACE textwithspaces
 // Why are we redefining this rule if it's not used in further levels? JP Dec-2021
 error_invalid: textwithoutspaces (_SPACE textwithspaces)?

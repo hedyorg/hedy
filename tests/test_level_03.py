@@ -133,6 +133,19 @@ class TestsLevel3(HedyTester):
     dieren = ['Hond', 'Kat', 'Kangoeroe']""")
 
     self.single_level_tester(code=code, expected=expected)
+
+  def test_assign_list_spaces(self):
+    code = textwrap.dedent("""\
+    dieren is Hond , Kat , Kangoeroe""")
+
+    #spaces are parsed in the text here, that is fine (could be avoided if we say text
+    # can't *end* (or start) in a space but I find this ok for now
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond ', 'Kat ', 'Kangoeroe']""")
+
+    self.single_level_tester(code=code, expected=expected)
+
   def test_assign_random_value(self):
     code = textwrap.dedent("""\
     dieren is hond, kat, kangoeroe

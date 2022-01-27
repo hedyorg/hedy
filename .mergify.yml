@@ -1,0 +1,17 @@
+pull_request_rules:
+  - name: Automatic merge on approval
+    conditions:
+        - and:
+          - "#approved-reviews-by>=1"
+          - "check-success=Unit tests / build"
+    actions:
+      merge:
+        method: merge
+        
+  - name: automatic update for PR marked as “Ready“
+    conditions:
+      - -conflict # skip PRs with conflicts
+      - -draft # filter-out GH draft PRs
+      - label="Ready"
+    actions:
+      update:
