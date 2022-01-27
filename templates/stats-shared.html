@@ -93,6 +93,7 @@
     <tr>
       <th class="px-4 py-2">Date</th>
       <th class="px-4 py-2">Level</th>
+      <th class="px-4 py-2">Lang</th>
       <th class="px-4 py-2">Username</th>
       <th class="px-4 py-2">Exception</th>
       <th class="px-4 py-2">Code</th>
@@ -102,9 +103,10 @@
   </tbody>
 </table>
 <div class="text-center">
-  <button type="button" id="logs-load-more" onclick="hedyApp.stats.fetchProgramLogsResults()"
-         class="green-btn mb-4 hidden"
-  >Load more</button>
+  <button type="button" id="logs-load-more" class="green-btn mb-4 hidden"
+          onclick="hedyApp.stats.fetchProgramLogsResults()">
+    Load more
+  </button>
 </div>
 <div id="search-logs-failed-msg" class="text-center font-semibold my-5">
   Query failed. Review supplied parameters and try again.
@@ -113,8 +115,6 @@
   No data found matching the search criteria.
 </div>
 <div id="logs-spinner" class="flex justify-center items-center h-64">
-  <div
-      class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
-  ></div>
+  <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"></div>
 </div>
 {% endmacro %}
