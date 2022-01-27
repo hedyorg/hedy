@@ -205,12 +205,7 @@ export function preview_adventure() {
      $(container).find('pre').each(function(){
          turnIntoAceEditor(this, true);
      });
-
-     $(content).find('pre').each(function(){
-         turnIntoAceEditor(this, true);
-     });
-     $('#preview_container').html(content);
-
+     modal.preview(container, "Adventure preview");
  }
 
 export function delete_adventure(adventure_id: string) {
