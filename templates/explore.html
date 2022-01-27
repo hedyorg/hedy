@@ -2,6 +2,13 @@
 
 {% block body %}
 <div class="px-8 py-12">
+    {% if achievement %}
+    <script>
+    $(function() {
+        hedyApp.showAchievements({{ achievement|safe }}, false, "");
+    });
+    </script>
+    {% endif %}
     <h2 class="px-8 mb-4">{{auth.explore_programs}}</h2>
     <div class="w-full mb-8" id="program_filter">
         <!-- It would be really nice to use some dynamic loading using AJAX to present the data -->

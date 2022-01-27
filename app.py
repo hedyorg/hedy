@@ -706,12 +706,21 @@ def programs_page(request):
 @app.route('/logs/query', methods=['POST'])
 def query_logs():
     user = current_user()
-    if not is_admin(user):
-        return utils.error_page(error=403, ui_message='unauthorized')
+    if not is_admin(user) and not is_teacher(user):
+        return 'unauthorized', 403
 
     body = request.json
     if body is not None and not isinstance(body, dict):
         return 'body must be an object', 400
+
+    class_id = body.get('class_id')
+    if not is_admin(user):
+        if not class_id:
+            return 'unauthorized', 403
+
+        class_ = DATABASE.get_class(class_id)
+        if not class_ or class_['teacher'] != user['username'] or body.get('username') not in class_.get('students'):
+            return 'unauthorized', 403
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -724,13 +733,12 @@ def get_log_results():
     next_token = request.args.get('next_token', default=None, type=str)
 
     user = current_user()
-    if not is_admin(user):
-        return utils.error_page(error=403, ui_message='unauthorized')
+    if not is_admin(user) and not is_teacher(user):
+        return 'unauthorized', 403
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
     return jsonify(response)
-
 
 
 def get_user_formatted_age(now, date):
@@ -1208,8 +1216,10 @@ def explore():
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
 
+    achievement = None
     if level or adventure:
         programs = DATABASE.get_filtered_explore_programs(level, adventure)
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
         programs = DATABASE.get_all_explore_programs()
 
@@ -1223,6 +1233,7 @@ def explore():
 
     return render_template('explore.html', programs=programs,
                            filtered_level=level,
+                           achievement=achievement,
                            filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures=adventures,
@@ -1588,6 +1599,34 @@ def set_favourite_program(user):
 
     DATABASE.set_favourite_program(user['username'], body['id'])
     return jsonify({})
+
+
+@app.route('/auth/public_profile', methods=['POST'])
+@requires_login
+def update_public_profile(user):
+    body = request.json
+
+    # Validations
+    if not isinstance(body, dict):
+        return g.auth_texts.get('ajax_error'), 400
+    if not isinstance(body.get('image'), str):
+        return g.auth_texts.get('image_invalid'), 400
+    if not isinstance(body.get('personal_text'), str):
+        return g.auth_texts.get('personal_text_invalid'), 400
+    if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
+        return g.auth_texts.get('favourite_program_invalid'), 400
+
+    achievement = None
+    current_profile = DATABASE.get_public_profile_settings(user['username'])
+    if current_profile:
+        if current_profile.get('image') != body.get('image'):
+            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
+    else:
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
+    DATABASE.update_public_profile(user['username'], body)
+    if achievement:
+        return {'achievement': achievement}, 200
+    return '', 200
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):

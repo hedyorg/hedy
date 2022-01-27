@@ -9,7 +9,7 @@ storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_databa
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey('username')])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 
 # Customizations contains the class customizations made by a teacher on a specific class/level combination.
@@ -211,35 +211,15 @@ class Database:
         return USERS.scan(limit=500)
 
     def get_all_explore_programs(self):
-        programs = PROGRAMS.scan()
-        public_programs = []
-        for program in programs:
-            if 'public' in program:
-                public_programs.append(program)
-        return public_programs[-50:]
-        #Todo:
-        # This [-50:] is a bucket-fix, we would like to add a partition key to the programs table
-        # Enabling us to directly only retrieve the last x programs by using the filter() function
+        return PROGRAMS.get_many({'public': 1}, limit=48)
 
     def get_filtered_explore_programs(self, level=None, adventure=None):
-        programs = PROGRAMS.scan()
-        result = []
-        for program in programs:
-            if 'public' in program:
-                result.append(program)
-        level_programs = []
+        programs = PROGRAMS.get_many({'public': 1})
         if level:
-            for program in result:
-                if program['level'] == int(level):
-                    level_programs.append(program)
-            result = level_programs
-        adventure_programs = []
+            programs = [x for x in programs if x.get('level') == int(level)]
         if adventure:
-            for program in result:
-                if 'adventure_name' in program and program['adventure_name'] == adventure:
-                    adventure_programs.append(program)
-            result = adventure_programs
-        return result[-50:]
+            programs = [x for x in programs if x.get('adventure_name') == adventure]
+        return programs[-48:]
 
     def all_programs_count(self):
         """Return the total number of all programs."""
@@ -438,7 +418,7 @@ class Database:
             self.update_public_profile(username, data)
             return True
         # We can't set a favourite program without a public page!
-        # Todo: In the feature we might enable users to set any program as favourite -> requires some work
+        # Todo: In the future we might enable users to set any program as favourite -> requires some work
         return False
 
 
