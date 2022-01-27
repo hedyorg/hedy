@@ -242,6 +242,7 @@ export function preview_adventure() {
     container.css('width', '40em');
     container.html(content);
 
+    // We have to show the modal first before we can "find" the <pre> attributes and convert them to ace editors
     modal.preview(container, name);
     for (const preview of $('.preview pre').get()) {
         $(preview).addClass('text-lg rounded');
