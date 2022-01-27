@@ -30,6 +30,8 @@
                         If you want to show actual code snippets, for example to give student a template or example of the code. Please use "pre" anchors like this:
                         <br>
                         <pre>&lt;pre&gt;Hello world!&lt;pre&gt;</pre>
+                        <br>
+                        After saving a "preview" button will appear. Make sure to save you program before viewing the adventure. Non-saved changes will be lost!
                     </div>
                     <div class="mt-4 mb-4 flex flex-row items-center text-center border-red-500 border p-4 rounded-lg">
                         <input type="checkbox" name="agree_terms" id="agree_terms "required class="mr-4" {% if adventure.content|length > 5 %}checked{% endif %}>
@@ -38,7 +40,7 @@
                 </div>
                 <div class="flex flex-col ltr:ml-4 rtl:mr-4">
                     <h3 class="text-center mt-0 mb-4">Adventure</h3>
-                    <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{{ adventure.content }}</textarea>
+                    <textarea id="custom_adventure_content" style="height:30em;" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{{ adventure.content }}</textarea>
                     <div class="flex flex-row mt-4">
                         <button class="blue-btn hidden" id="preview_adventure_button" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">Preview</button>
                         <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2">Save</button>
