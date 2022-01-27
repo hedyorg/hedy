@@ -261,7 +261,7 @@ export function delete_adventure(adventure_id: string) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function() {
-      window.location.pathname = '/for-teachers';
+      window.location.href = '/for-teachers';
     }).fail(function(err) {
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
