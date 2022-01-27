@@ -60,7 +60,7 @@ def routes (app, database, achievements):
         teachers = os.getenv('BETA_TEACHERS', '').split(',')
         is_beta_teacher = user['username'] in teachers
 
-        return render_template ('class-overview.html', current_page='for-teachers',
+        return render_template ('class-overview.html', current_page='my-profile',
                                 page_title=hedyweb.get_page_title('class overview'),
                                 achievement=achievement,
                                 is_beta_teacher=is_beta_teacher,
@@ -212,7 +212,7 @@ def routes (app, database, achievements):
 
         return render_template('customize-class.html', page_title=hedyweb.get_page_title('customize class'),
                                class_info={'name': Class['name'], 'id': Class['id']}, levels=levels,
-                               adventures=adventures, preferences=preferences, current_page='for-teachers')
+                               adventures=adventures, preferences=preferences, current_page='my-profile')
 
     @app.route('/customize-class/<class_id>', methods=['PUT'])
     @requires_login

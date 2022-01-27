@@ -66,6 +66,13 @@ export const auth = {
       });
     });
   },
+  destroy_public: function () {
+    modal.confirm (auth.texts['are_you_sure'], function () {
+      $.ajax ({type: 'POST', url: '/auth/destroy_public'}).done (function () {
+        auth.redirect ('programs');
+      });
+    });
+  },
   error: function (message: string, element?: string | null, id?: string) {
     $ (id || '#error').html (message);
     $ (id || '#error').css ('display', 'block');
@@ -235,6 +242,30 @@ export const auth = {
         }
       });
     }
+
+    if (op === 'public_profile') {
+      const data = {
+        image: $('#profile_picture').val() ? $('#profile_picture').val():  undefined,
+        personal_text: $('#personal_text').val() ? $('#personal_text').val():  undefined,
+        favourite_program: $('#favourite_program').val() ? $('#favourite_program').val():  undefined
+      }
+
+      $.ajax ({
+        type: 'POST',
+        url: '/auth/public_profile',
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
+        auth.success (auth.texts['public_profile_updated']);
+        $('#public_profile_redirect').show();
+      }).fail (function (response) {
+        if (response.responseText) {
+          return auth.error(response.responseText);
+        } else {
+          auth.error(auth.texts['ajax_error']);
+        }
+      });
+    }
   },
   markAsTeacher: function (username: string, is_teacher: boolean) {
     let text = "Are you sure you want to remove " + username + " as a teacher?";
@@ -248,10 +279,10 @@ export const auth = {
         data: JSON.stringify({username: username, is_teacher: is_teacher}),
         contentType: 'application/json; charset=utf-8'
       }).done(function () {
-        modal.alert(['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join(' '), 2000);
+        modal.alert(['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join(' '), 2000, false);
       }).fail(function (error) {
         console.log(error);
-        modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '));
+        modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
       });
     });
   },
@@ -259,13 +290,12 @@ export const auth = {
   changeUserEmail: function (username: string, email: string) {
     modal.prompt ('Please enter the corrected email', email, function (correctedEmail) {
       if (correctedEmail === email) return;
-      if (! correctedEmail.match (auth.emailRegex)) return modal.alert ('Please enter a valid email.');
+      if (! correctedEmail.match (auth.emailRegex)) return modal.alert ('Please enter a valid email.', 2000, true);
       $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
-        modal.alert (['Successfully changed the email for User', username, 'to', correctedEmail].join (' '));
         location.reload ();
       }).fail (function (error) {
         console.log (error);
-        modal.alert (['Error when changing the email for User', username].join (' '));
+        modal.alert (['Error when changing the email for User', username].join (' '), 2000, true);
       });
     });
   },
