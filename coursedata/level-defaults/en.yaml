@@ -52,6 +52,13 @@
         ```
 
         Print still works as in level 1, and you no longer need `echo`.
+
+        Another new command in this level is `sleep`, which pauses your program for a second. If you type a number behind the sleep command, the program pauses for that amout of seconds.
+        ```
+        print 'My favorite colour is...'
+        sleep 2
+        print 'green!'
+        ```
     start_code: "print hello world!"
     commands:
     -   name: "is"
@@ -66,6 +73,15 @@
         demo_code: |-
             color is ask What is your favorite color?
             print color is your favorite!
+    -   name: "sleep"
+        explanation: "Let Hedy pause for a (couple of) second(s)."
+        example: "Example: sleep 2 "
+        demo_code: |-
+            print Let me think for one second...
+            sleep
+            print Hmm.. I need 3 more seconds...
+            sleep 3
+            print Eureka! Ive got it!
     -   explanation: "Give a number a name using `is`. You can choose the name yourself."
         example: "Example: angle is 90"
         demo_code: |-
@@ -81,7 +97,14 @@
         print animals at random
         ```
 
-        You find all the codes of level 3 in the left bar. There are also tabs with assignments.
+        You can also add items to the list with `add` and remove items with `remove`.
+        ```
+        animals is dog, cat, kangaroo
+        add penguin to animals
+        remove cat from animals
+        print animals at random
+        ```
+
     start_code: "print hello world!"
     commands:
     -   name: choose_random
@@ -90,6 +113,18 @@
         demo_code: |-
             animals is dog, cat, kangaroo
             print animals at random
+    -   name: "Add"
+        explanation: "Add an item to a list"
+        example: "Example: add dog to animals"
+        demo_code: |-
+            animals is cow, cat
+            add dog to animals
+    -   name: "Remove"
+        explanation: "Remove an item from a list"
+        example: "Example: remove dog from animals"
+        demo_code: |-
+            animals is cat, dog, cow
+            remove dog from animals
 4:
     start_code: "print 'Hello world'"
     intro_text: |
@@ -499,7 +534,9 @@
     intro_text: |
         We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
         The `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` is smaller than 12.
+        If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.
         The `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.
+        If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.
         You use these comparisons in an `if`, like this:
         ```
         age = ask 'How old are you?'
@@ -550,6 +587,22 @@
             answer = ask 'What is 5 * 5?'
             if answer != 25
                 print 'That is not correct!'
+
+    -   name: "Smaller or equal"
+        explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
+        example: "For example: age <= 12"
+        demo_code: |-
+            age = ask 'How old are you?'
+            if age <= 12
+                print 'You are younger than me!'
+
+    -   name: "Bigger or equal"
+        explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
+        example: "For example: age >= 14"
+        demo_code: |-
+            age = ask 'How old are you?'
+            if age >= 14
+                print 'You are older than me!'
 
 15:
     start_code: |-

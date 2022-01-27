@@ -27,6 +27,18 @@
         demo_code: |-
             ask Was ist deine Lieblingsfarbe?
             echo Also deine Lieblingsfarbe ist 
+    -   name: forward
+        explanation: Zeichne eine Linie mit `forward`.
+        example: 'Beispiel: forward 100'
+        demo_code: forward 100
+    -   name: turn
+        explanation: Zeichne eine sich drehende Schildkröte mit `turn`
+        example: turn
+        demo_code: |-
+            forward 25
+            turn left
+            forward 25
+            turn right
 2:
     intro_text: |
         In Level 2 lernen wir etwas Neues. Du kannst ein Wort mit `is` benennen. `is` bedeutet ist. 
@@ -54,6 +66,22 @@
         demo_code: |-
             farbe is ask Was ist deine Lieblingsfarbe?
             print Du magst am liebsten farbe
+    -   name: sleep
+        explanation: Lass Hedy für ein paar Sekunden pausieren.
+        example: sleep 2
+        demo_code: |-
+            print Lass mich einen Moment nachdenken...
+            sleep
+            print Hmm.. Ich brauche noch 3 Sekunden mehr...
+            sleep 3
+            print Eureka! Jetzt hab ich's!
+    -   explanation: Vergib einen Namen an eine Zahl mit `is`. Du kannst den Namen selbst wählen.
+        example: 'Beispiel: winkel is 90'
+        demo_code: |-
+            winkel is 90
+            turn winkel
+            forward 100
+        name: is - turtle
 3:
     intro_text: |
         In Level 3 kannst Du auch eine Liste erstellen. Du kannst den Computer etwas zufällig aus der Liste auswählen lassen. Du machst dies mit `at random` (es bedeutet zufällig und man spricht es "ät rän-dum" aus).
@@ -72,6 +100,18 @@
         demo_code: |-
             tiere is Hund, Katze, Känguru
             print tiere at random
+    -   name: Add
+        explanation: Füge ein Ding zu einer Liste hinzu.
+        example: 'Beispiel: add Hund to tiere'
+        demo_code: |-
+            tiere is Kuh, Katze
+            add Hund to tiere
+    -   name: Remove
+        explanation: Entferne ein Ding aus einer Liste
+        example: 'Beispiel: remove Hund from tiere'
+        demo_code: |-
+            tiere is Katze, Hund, Kuh
+            remove Hund from tiere
 4:
     start_code: "print 'Hallo Welt'"
     intro_text: |
@@ -141,6 +181,19 @@
         demo_code: |-
             farbe is ask 'Was ist deine Lieblingsfarbe?'
             if farbe is grün print 'Hübsch!' else print 'Bäh'
+    -   name: if with turtle
+        explanation: Triff eine Entscheidung mit `if`
+        example: 'Beispiel: if Antwort is weit forward 100 else forward 5'
+        demo_code: |-
+            Antwort is ask 'Wie weit soll ich laufen?'
+            if Antwort is weit forward 100 else forward 5
+    -   name: in
+        explanation: Prüfe ob ein Ding in einer Liste enthalten ist
+        example: "Beispiel: if farbe in schöne_farben print 'Schön!' else print 'meh'"
+        demo_code: |-
+            schöne_farben is Grün, Gelb
+            farbe is ask 'Was ist deine Lieblingsfarbe?'
+            if farbe in schöne_farben print 'Schön!' else print 'meh'
 6:
     start_code: "print '5 mal 5 ist ' 5 * 5"
     intro_text: |
@@ -245,27 +298,34 @@
             else
                 print 'Ups!'
                 print 'Die Antwort is 10'
+    -   name: '`repeat` with turtle'
+        explanation: Wiederhole mehrere Befehlszeilen
+        example: 'Beispiel: Zeichne ein Quadrat'
+        demo_code: |-
+            repeat 4 times
+                turn 90
+                forward 50
 9:
     start_code: |-
         repeat 3 times
-            food = ask 'What do you want?'
-            if food is 'pizza'
-                print 'nice!'
+            food = ask 'Was möchtest du gern?'
+            if food is 'Pizza'
+                print 'Gut!'
             else
-                print 'pizza is better'
+                print 'Pizza ist besser'
     intro_text: |
-        In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
-        In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
-        Give it a try!
+        In diesem Level lernst du wie die `if` und `repeat` zusammen verwenden kannst.
+        Im Beispiel siehst du einen `if` Befehl innerhalb eines `repeat` Befehls. Es ist auch anders herum erlaubt. Und ebenso ist `if` innerhalb eines anderen `if` Befehls erlaubt, genau wie `repeat` in einem anderen `repeat` Befehl.
+        Versuch es mal!
 
-        ## Example Hedy code
+        ## Beispiel Hedy code
         ```
         repeat 3 times
-            food = ask 'What do you want?'
-            if food is 'pizza'
-                print 'nice!'
+            food = ask 'Was möchtest du gern?'
+            if food is 'Pizza'
+                print 'Gut!'
             else
-                print 'pizza is better'
+                print 'Pizza ist besser'
         ```
 
     commands:
