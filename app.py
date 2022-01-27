@@ -1216,8 +1216,10 @@ def explore():
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
 
+    achievement = None
     if level or adventure:
         programs = DATABASE.get_filtered_explore_programs(level, adventure)
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
         programs = DATABASE.get_all_explore_programs()
 
@@ -1231,6 +1233,7 @@ def explore():
 
     return render_template('explore.html', programs=programs,
                            filtered_level=level,
+                           achievement=achievement,
                            filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures=adventures,
@@ -1596,6 +1599,34 @@ def set_favourite_program(user):
 
     DATABASE.set_favourite_program(user['username'], body['id'])
     return jsonify({})
+
+
+@app.route('/auth/public_profile', methods=['POST'])
+@requires_login
+def update_public_profile(user):
+    body = request.json
+
+    # Validations
+    if not isinstance(body, dict):
+        return g.auth_texts.get('ajax_error'), 400
+    if not isinstance(body.get('image'), str):
+        return g.auth_texts.get('image_invalid'), 400
+    if not isinstance(body.get('personal_text'), str):
+        return g.auth_texts.get('personal_text_invalid'), 400
+    if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
+        return g.auth_texts.get('favourite_program_invalid'), 400
+
+    achievement = None
+    current_profile = DATABASE.get_public_profile_settings(user['username'])
+    if current_profile:
+        if current_profile.get('image') != body.get('image'):
+            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
+    else:
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
+    DATABASE.update_public_profile(user['username'], body)
+    if achievement:
+        return {'achievement': achievement}, 200
+    return '', 200
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):

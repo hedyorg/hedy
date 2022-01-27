@@ -532,24 +532,6 @@ def routes(app, database):
 
         return '', 200
 
-    @app.route('/auth/public_profile', methods=['POST'])
-    @requires_login
-    def update_public_profile(user):
-        body = request.json
-
-        # Validations
-        if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
-        if not isinstance(body.get('image'), str):
-            return g.auth_texts.get('image_invalid'), 400
-        if not isinstance(body.get('personal_text'), str):
-            return g.auth_texts.get('personal_text_invalid'), 400
-        if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
-            return g.auth_texts.get('favourite_program_invalid'), 400
-
-        DATABASE.update_public_profile(user['username'], body);
-        return '', 200
-
     # *** ADMIN ROUTES ***
 
     @app.route('/admin/markAsTeacher', methods=['POST'])
