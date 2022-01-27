@@ -215,33 +215,39 @@ adventures:
                 start_code: "print 'Your story will be printed here!'"
             3:
                 story_text: |
-                    ## Story
-                    In level 3 you can make your story more fun. You can also add something random to your story. Any monster, animal or other obstacle.
+                    ## Geschichte
+                    In Level 3 wird es etwas witziger.
+                    Du kannst nun etwas ganz zufälliges zu Deiner Geschichte hinzufügen.
+                    Ein beliebiges Monster, ein Tier oder ein Hindernis.
 
-                    It goes like this:
+                    Das funktioniert so:
                     ```
-                    animals is owl, hedgehog, armadillo
-                    print He now hears the sound of an animals at random
+                    Tiere is Wildschwein, Eichhörnchen, Gürteltier
+                    print Da hört er plötzlich ein Tiere at random
+                    ```
+                    Den Effekt erkennst Du, wenn Du mehrmals hintereinander auf 'Programm ausführen' klickst.
+
+                    Der Befehl `add` kann in Deiner Geschichte auch sehr nützlich sein.
+                    Add bedeutet hinzufügen.
+                    Zum Beispiel:
+                    ```
+                    print Er hört ein Geräusch.
+                    Tiere is Wildschwein, Eichhörnchen, Gürteltier
+                    Tier is ask Was glaubst Du, was es ist?
+                    add Tier to Tiere
+                    print Es war ein Tiere at random
                     ```
 
-                    The command `add` can also come in handy in your story. For example:
+                    Hier ist ein Beispiel, wie der Befehl `remove` in Deine Geschichte eingebaut werden kann.
+                    Remove bedeutet entfernen.
                     ```
-                    print He hears a sound
-                    animals is owl, hedgehog, armadillo
-                    animal is ask What do you think it is?
-                    add animal to animals
-                    print it was a animals at random
+                    print Sein Rucksack wurde viel zu schwer.
+                    print Darin befanden sich Wasser, eine Taschenlampe und ein Ziegelstein.
+                    Tasche is Wasser, Taschenlampe, Ziegelstein
+                    wegwerfen is ask Welchen Gegenstand sollte er zurücklassen?
+                    remove wegwerfen from Tasche
                     ```
-
-                    This is an example of the `remove` command in your story
-                    ```
-                    print His backpack got way too heavy.
-                    print Inside were a bottle of water, a flashlight and a brick.
-                    bag is water, flashlight, brick
-                    dump is ask Which item should he dump?
-                    remove dump from bag
-                    ```
-                start_code: "print Your story"
+                start_code: "print Deine Geschichte beginnt genau hier."
             15:
                 story_text: |
                     ## Story
