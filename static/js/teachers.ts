@@ -116,6 +116,48 @@ export function join_class(id: string, name: string) {
     });
 }
 
+export function invite_student(class_id: string) {
+  modal.prompt (auth.texts['invite_prompt'], '', function (username) {
+      if (!username) {
+          return modal.alert("This value is empty");
+      }
+      $.ajax({
+          type: 'POST',
+          url: '/invite_student',
+          data: JSON.stringify({
+            username: username,
+            class_id: class_id
+          }),
+          contentType: 'application/json',
+          dataType: 'json'
+      }).done(function() {
+          location.reload();
+      }).fail(function(err) {
+          return modal.alert(err.responseText);
+      });
+  });
+}
+
+export function remove_student_invite(username: string, class_id: string) {
+  return modal.confirm (auth.texts['delete_invite_prompt'], function () {
+      $.ajax({
+          type: 'POST',
+          url: '/remove_student_invite',
+          data: JSON.stringify({
+              username: username,
+              class_id: class_id
+          }),
+          contentType: 'application/json',
+          dataType: 'json'
+      }).done(function () {
+          location.reload();
+      }).fail(function (err) {
+          return modal.alert(err.responseText);
+      });
+  });
+}
+
+
 export function remove_student(class_id: string, student_id: string, self_removal: boolean) {
   let confirm_text;
   if (self_removal) {
