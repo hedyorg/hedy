@@ -369,7 +369,7 @@ def routes(app, database):
         hashed = hash(body['password'], make_salt())
         DATABASE.update_user(body['username'], {'password': hashed})
 
-        return {'success': g.auth_texts.get("password_changed")}, 200
+        return {'success': g.auth_texts.get("password_change_success")}, 200
 
     @app.route('/auth/change_password', methods=['POST'])
     @requires_login
