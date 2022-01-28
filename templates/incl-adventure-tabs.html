@@ -35,7 +35,7 @@
                   {% endif %}
               </div>
             {% if assignment.text_2 %}
-                <div class="flex flex-row">
+                <div class="flex flex-row border-t-2">
                     <div class="{% if assignment.example_code_2 %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
                         {{ assignment.text_2|commonmark }}
                     </div>

@@ -146,7 +146,7 @@ def load_adventures_per_level(lang, level):
             'text': adventure['levels'][level].get('story_text', 'No Story Text'),
             'example_code': adventure['levels'][level].get('example_code'),
             #Sometimtes we have a second story and example code
-            'text_2': adventure['levels'][level].get('story_text_2', 'No Story Text'),
+            'text_2': adventure['levels'][level].get('story_text_2'),
             'example_code_2': adventure['levels'][level].get('example_code_2'),
             'start_code': adventure['levels'][level].get('start_code', ''),
             'loaded_program': '' if not loaded_programs.get(short_name) else {
