@@ -300,6 +300,7 @@ def enrich_context_with_user_info():
     data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
     if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
         user_data = DATABASE.user_by_username(user.get('username'))
+        data['user_messages'] = 0
         if 'language' in user_data:
             if user_data['language'] in ALL_LANGUAGES.keys():
                 g.lang = session['lang'] = user_data['language']
@@ -309,6 +310,16 @@ def enrich_context_with_user_info():
         user_achievements = DATABASE.achievements_by_username(user.get('username'))
         if user_achievements:
             data['user_achievements'] = user_achievements
+        user_invites = DATABASE.get_username_invite(user.get('username'))
+        if user_invites:
+            Class = DATABASE.get_class(user_invites['class_id'])
+            if Class:
+                invite_data = user_invites.copy()
+                invite_data['class_name'] = Class.get('name')
+                invite_data['teacher'] = Class.get('teacher')
+                invite_data['join_link'] = Class.get('link')
+                data['invite_data'] = invite_data
+                data['user_messages'] += 1
     return data
 
 @app.context_processor
@@ -669,8 +680,9 @@ def achievements_page():
     return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
                            template_achievements=achievement_translations, current_page='my-profile')
 
-def programs_page(request):
-    user = current_user()
+@app.route('/programs', methods=['GET'])
+@requires_login
+def programs_page(user):
     username = user['username']
     if not username:
         # redirect users to /login if they are not logged in
@@ -678,6 +690,7 @@ def programs_page(request):
         return redirect(url, code=302)
 
     from_user = request.args.get('user') or None
+    # If from_user -> A teacher is trying to view the user programs
     if from_user and not is_admin(user):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='not_teacher')
@@ -686,9 +699,26 @@ def programs_page(request):
             return utils.error_page(error=403, ui_message='not_enrolled')
 
     adventures = load_adventure_for_language(g.lang)
+    if hedy_content.Adventures(session['lang']).has_adventures():
+        adventures_names = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
+    else:
+        adventures_names = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
-    result = DATABASE.programs_for_user(from_user or username)
-    public_profile = DATABASE.get_public_profile_settings(username)
+    # We request our own page -> also get the public_profile settings
+    public_profile = None
+    if not from_user:
+        public_profile = DATABASE.get_public_profile_settings(username)
+
+    level = request.args.get('level', default=None, type=str)
+    adventure = request.args.get('adventure', default=None, type=str)
+    level = None if level == "null" else level
+    adventure = None if adventure == "null" else adventure
+
+    if level or adventure:
+        result = DATABASE.filtered_programs_for_user(from_user or username, level, adventure)
+    else:
+        result = DATABASE.programs_for_user(from_user or username)
+
     programs = []
     now = timems()
     for item in result:
@@ -700,18 +730,29 @@ def programs_page(request):
 
     return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
                            current_page='programs', from_user=from_user, adventures=adventures,
-                           public_profile=public_profile)
+                           filtered_level=level, filtered_adventure=adventure, adventure_names=adventures_names,
+                           public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
 
 
 @app.route('/logs/query', methods=['POST'])
 def query_logs():
     user = current_user()
-    if not is_admin(user):
-        return utils.error_page(error=403, ui_message='unauthorized')
+    if not is_admin(user) and not is_teacher(user):
+        return 'unauthorized', 403
 
     body = request.json
     if body is not None and not isinstance(body, dict):
         return 'body must be an object', 400
+
+    class_id = body.get('class_id')
+    if not is_admin(user):
+        username_filter = body.get('username')
+        if not class_id or not username_filter:
+            return 'unauthorized', 403
+
+        class_ = DATABASE.get_class(class_id)
+        if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', []):
+            return 'unauthorized', 403
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -724,13 +765,12 @@ def get_log_results():
     next_token = request.args.get('next_token', default=None, type=str)
 
     user = current_user()
-    if not is_admin(user):
-        return utils.error_page(error=403, ui_message='unauthorized')
+    if not is_admin(user) and not is_teacher(user):
+        return 'unauthorized', 403
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
     return jsonify(response)
-
 
 
 def get_user_formatted_age(now, date):
@@ -1159,9 +1199,6 @@ def main_page(page):
     if page == "my-achievements":
         return achievements_page()
 
-    if page == 'programs':
-        return programs_page(request)
-
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
@@ -1208,21 +1245,31 @@ def explore():
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
 
+    achievement = None
     if level or adventure:
         programs = DATABASE.get_filtered_explore_programs(level, adventure)
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
         programs = DATABASE.get_all_explore_programs()
 
+    filtered_programs = []
     for program in programs:
-        program['code'] = "\n".join(program['code'].split("\n")[:4])
+        filtered_programs.append({
+            'username': program['username'],
+            'name': program['name'],
+            'level': program['level'],
+            'id': program['id'],
+            'code': "\n".join(program['code'].split("\n")[:4])
+        })
 
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
     else:
         adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
-    return render_template('explore.html', programs=programs,
+    return render_template('explore.html', programs=filtered_programs,
                            filtered_level=level,
+                           achievement=achievement,
                            filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures=adventures,
@@ -1588,6 +1635,34 @@ def set_favourite_program(user):
 
     DATABASE.set_favourite_program(user['username'], body['id'])
     return jsonify({})
+
+
+@app.route('/auth/public_profile', methods=['POST'])
+@requires_login
+def update_public_profile(user):
+    body = request.json
+
+    # Validations
+    if not isinstance(body, dict):
+        return g.auth_texts.get('ajax_error'), 400
+    if not isinstance(body.get('image'), str):
+        return g.auth_texts.get('image_invalid'), 400
+    if not isinstance(body.get('personal_text'), str):
+        return g.auth_texts.get('personal_text_invalid'), 400
+    if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
+        return g.auth_texts.get('favourite_program_invalid'), 400
+
+    achievement = None
+    current_profile = DATABASE.get_public_profile_settings(user['username'])
+    if current_profile:
+        if current_profile.get('image') != body.get('image'):
+            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
+    else:
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
+    DATABASE.update_public_profile(user['username'], body)
+    if achievement:
+        return {'achievement': achievement}, 200
+    return '', 200
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):

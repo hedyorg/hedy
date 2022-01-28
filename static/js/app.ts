@@ -30,6 +30,7 @@ var StopExecution = false;
   // read-only editors (for syntax highlighting)
   for (const preview of $('.turn-pre-into-ace pre').get()) {
     $(preview).addClass('text-lg rounded');
+    $(preview).addClass('overflow-x-hidden');
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
@@ -1253,6 +1254,16 @@ export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
   window.open('?level=' + level + "&adventure=" + adventure, "_self");
+}
+
+export function filter_user_programs(username: string, own_request?: boolean) {
+  const level = $('#user_program_page_level').val();
+  const adventure = $('#user_program_page_adventure').val();
+  if (own_request) {
+    window.open('?level=' + level + "&adventure=" + adventure, "_self");
+  } else {
+    window.open('?user=' + username + '&level=' + level + "&adventure=" + adventure, "_self");
+  }
 }
 
 export function filter_admin() {
