@@ -163,8 +163,6 @@ def load_adventures_per_level(lang, level):
             else:
                 break
         current_adventure['extra_stories'] = extra_stories
-        print(current_adventure)
-
         all_adventures.append(current_adventure)
     # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
     all_adventures.append({
