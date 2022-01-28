@@ -5,7 +5,7 @@
 <div class="px-8">
   {% if from_user %}<h2>{{from_user}}'s recent programs</h2>
   {% else %}<h2>{{texts.recent}}</h2>{% endif %}
-  <div class="w-full mb-8 {% if programs|length < 2 %}hidden{% endif %}" id="program_filter">
+  <div class="w-full mb-8" id="program_filter">
     <form onsubmit="event.preventDefault (); hedyApp.filter_user_programs({% if from_user %}'{{ from_user }}', false{% else %}'', true{% endif %});">
         <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg">
             <select id="user_program_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
@@ -23,7 +23,7 @@
                 {% endfor %}
             </select>
             <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
-                <button type="reset" class="red-btn" onclick="window.open('/explore', '_self');">Reset</button>
+                <button type="reset" class="red-btn" onclick="window.open('/programs{% if from_user %}?user={{ from_user }}{% endif %}', '_self');">Reset</button>
                 <button type="submit" class="green-btn ltr:ml-4 rtl:mr-4 px-4">{{ texts.search }}</button>
             </div>
         </div>
@@ -82,7 +82,7 @@
         </div>
     </div>
   {% endfor %}
-  {% if programs|length == 0 and not from_user %}
+  {% if programs|length == 0 and not from_user and not filtered_level and not filtered_adventure %}
   <p>{{texts.no_programs}}
     <br><br>
     <button class="btn block flex-none self-end" onclick="window.open ('/hedy', '_self')">{{texts.write_first}}</button>
