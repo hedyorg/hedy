@@ -265,24 +265,25 @@ adventures:
                 start_code: "print Deine Geschichte beginnt genau hier."
             15:
                 story_text: |
-                    ## Story
-                    Using the `while` loop can make your stories more interesting. For example, you can use `while game is 'on'` so you can play until the game is over.
-                    Or you can use `while sword is 'lost'` so the player can't continu the game until they have found something.
+                    ## Geschichte
+                    Mit der `while`-Schleife kannst Du Deine Geschichten noch interessanter gestalten.
+                    So kannst Du zum Beispiel mit `while Spiel is 'an'` Dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
+                    Oder Du lässt die Spieler mit `while Schwert is 'verloren'` so lange weiter suchen, bis sie etwas finden.
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    keys = 'lost'
-                    print 'You are standing in your garden and you have lost your keys.'
-                    print 'Where do you want to look for them?'
-                    print 'You can choose: tree, flowerbed, rock, postbox'
-                    while keys == 'lost'
-                        location = ask 'Where do you want to look?'
-                        if location == 'flowerbed'
-                            print 'Here they are!'
-                            keys = 'found'
+                    Schlüssel = 'verloren'
+                    print 'Du stehst in Deinem Garten, hast jedoch Deine Schlüssel verloren.'
+                    print 'Wo willst Du nach ihnen suchen?'
+                    print 'Wähle zwischen: Baum, Blumenbeet, Stein, Briefkasten'
+                    while Schlüssel == 'verloren'
+                        Ort = ask 'Wo willst Du suchen?'
+                        if Ort == 'Blumenbeet'
+                            print 'Ah, hier sind sie!'
+                            Schlüssel = 'gefunden'
                         else
-                            print 'Nope they are not at the ' location
-                    print 'Now you can enter the house!'
+                            print 'Nope, sie sind nicht beim ' Ort '.'
+                    print 'Jetzt kannst Du ins Haus!'
                 start_code: ""
             13:
                 story_text: |
