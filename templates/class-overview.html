@@ -31,30 +31,26 @@
                     </div>
                     <div class="flex flex-col mx-2">
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
-                            <label class="inline-block" for="subscribe">Aantal programma's</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="amount_programs" name="amount_programs">
+                            <label class="inline-block" for="amount_programs">Aantal programma's</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
-                            <label class="inline-block" for="subscribe">Programma overzicht</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="overview" name="overview">
+                            <label class="inline-block" for="overview">Programma overzicht</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="count" name="count">
-                            <label class="inline-block" for="subscribe">Verander wachtwoord</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_shared" name="last_shared">
+                            <label class="inline-block" for="last_shared">Laatst gedeeld</label>
                         </div>
                     </div>
                     <div class="flex flex-col mx-2">
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
-                            <label class="inline-block" for="subscribe">Laatst gedeeld</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="change_password" name="change_password">
+                            <label class="inline-block" for="change_password">Verander wachtwoord</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
-                            <label class="inline-block" for="subscribe">Verander wachtwoord</label>
-                        </div>
-                        <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="count" name="count">
-                            <label class="inline-block" for="subscribe">Verwijder leerling</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="remove_student" name="remove_student">
+                            <label class="inline-block" for="remove_student">Verwijder leerling</label>
                         </div>
                     </div>
                 </div>
@@ -68,7 +64,7 @@
           <th class="text-blue-600">{{auth.username}}</th>
           <th class="text-blue-600">{{auth.last_login}}</th>
           <th class="text-blue-600">{{auth.highest_level_reached}}</th>
-          <th class="text-blue-600">{{auth.number_programs.split(" ")[0]}}</th>
+          <th class="text-blue-600">{{auth.number_programs}}</th>
           <th class="text-blue-600">{{auth.programs}}</th>
           <th class="text-blue-600">{{auth.latest_shared_program}}</th>
           <th class="text-blue-600">Reset password</th>
