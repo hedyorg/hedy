@@ -24,7 +24,11 @@
         example: "Example: echo so your favorite color is "
         demo_code: |-
             ask What is your favorite color?
-            echo so your favorite color is 
+            echo so your favorite color is
+    -   name: "print emojis"
+        explanation: "Print an emoji with `print`"
+        example: "Example: print 🙋‍ 🌍 ❗"
+        demo_code: "print 🙋 🌍 ❗"
     -   name: "forward"
         explanation: "Draw a line with `forward`."
         example: "Example: forward 100"
@@ -53,7 +57,7 @@
 
         Print still works as in level 1, and you no longer need `echo`.
 
-        Another new command in this level is `sleep`, which pauses your program for a second. If you type a number behind the sleep command, the program pauses for that amout of seconds.
+        Another new command in this level is `sleep`, which pauses your program for a second. If you type a number behind the sleep command, the program pauses for that amount of seconds.
         ```
         print 'My favorite colour is...'
         sleep 2
@@ -167,7 +171,7 @@
 
          ## Example Hedy Code
          ```
-         name is ask 'what's your name?'
+         name is ask 'what is your name?'
          if name is Hedy print 'nice' else print 'boo!'
          ```
 
@@ -187,7 +191,7 @@
          ## Tip
          Sometimes code with an `if` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `else` like this:
          ```
-         name is ask 'what's your name?'
+         name is ask 'what is your name?'
          if name is Hedy print 'nice'
          else print 'boo!'
          ```
@@ -214,7 +218,7 @@
             if color is green print 'pretty!' else print 'meh'
     -   name: "if with turtle"
         explanation: "Make a choice with `if`"
-        example: "Bijvoorbeeld: if answer is far forward 100 else forward 5"
+        example: "Example: if answer is far forward 100 else forward 5"
         demo_code: |-
             answer is ask 'How far should I walk?'
             if answer is far forward 100 else forward 5
@@ -478,16 +482,16 @@
             print 2.5 + 2.5
     -   name: "assign text"
         explanation: "Text with quotation marks after ="
-        example: "naam = 'Hedy'"
+        example: "name = 'Hedy'"
         demo_code: |
             name = 'Hedy the Robot'
             print 'Hello ' name
     -   name: "quotes after if comparison"
         explanation: "Text with quotation marks after if"
-        example: "naam = 'Hedy'"
+        example: "name = 'Hedy'"
         demo_code: |
             name = ask 'Who are you?'
-            if naam = 'Hedy'
+            if name = 'Hedy'
                 print 'Hi there!'
     -   name: "quotes in list"
         explanation: "A list with quotation marks"
@@ -499,7 +503,7 @@
 13:
     start_code: |-
         name = ask 'what is your name?'
-        leeftijd = ask 'what is your age?'
+        age = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
