@@ -66,29 +66,6 @@
     window.State.default_program = {{start_code|tojson }};
     window.State.loaded_program = {{ loaded_program|tojson }};
     window.State.default_program_name = {{ (ui.level_title + ' ' + level_nr)|tojson }};
-    function toggleCommands() {
-        if ($('#commands-window').width() == 250) {
-            {% if g.dir == "ltr" %}
-                $('#toggle-button').html('&#8594;');
-            {% else %}
-                $('#toggle-button').html('&#8592;');
-            {% endif %}
-            $('#command_window_content').hide();
-            $( "#commands-window" ).animate({
-           width: "55px",
-            }, 500 );
-        } else {
-            {% if g.dir == "ltr" %}
-                $('#toggle-button').html('&#8592; ' + '{{ ui.hide_commands }}');
-            {% else %}
-                $('#toggle-button').html('&#8594; ' + '{{ ui.hide_commands }}');
-            {% endif %}
-            $( "#commands-window" ).animate({
-           width: "250px",
-            }, 500 );
-            $('#command_window_content').show();
-        }
-    }
   </script>
   <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
