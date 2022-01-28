@@ -739,11 +739,12 @@ def query_logs():
 
     class_id = body.get('class_id')
     if not is_admin(user):
-        if not class_id:
+        username_filter = body.get('username')
+        if not class_id or not username_filter:
             return 'unauthorized', 403
 
         class_ = DATABASE.get_class(class_id)
-        if not class_ or class_['teacher'] != user['username'] or body.get('username') not in class_.get('students'):
+        if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', []):
             return 'unauthorized', 403
 
     (exec_id, status) = log_fetcher.query(body)
