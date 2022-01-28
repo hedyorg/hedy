@@ -286,34 +286,36 @@ adventures:
                 start_code: ""
             13:
                 story_text: |
-                    ## Story
-                    By using the `and` and `or` commands, you can shorten your stories. For example, check out the dragon story.
+                    ## Geschichte
+                    Mit den Befehlen `and` und `or` kannst Du Deine Geschichte etwas abkürzen.
+                    Sieh Dir zum Beispiel noch einmal die Geschichte mit dem Drachen an.
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    sword = 'lost'
-                    game = 'on'
-                    print 'Our hero is walking through the forest'
-                    print 'The path splits two ways'
+                    Schwert = 'verloren'
+                    Spiel = 'an'
+                    print 'Unsere Heldin läuft durch den Wald.'
+                    print 'Der Weg gabelt sich.'
                     for i in range 0 to 2
-                        if game is 'on'
-                            path = ask 'Which path should she choose?'
-                            if path is 'left' and sword is 'found'
-                                print 'Our hero comes across a dragon!'
-                                print 'Luckily our hero has a sword to defeat the beast!'
-                                game = 'over'
-                            if path is 'left' and sword is 'lost'
-                                print 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                print 'Our hero is beaten by the dragon...'
-                                print 'Try again'
-                                game = 'over'
-                            if path is 'right' and sword is 'found'
-                                print 'You have already found the sword. There is nothing left here.'
-                                print 'She walks back'
-                            if path is 'right' and sword is 'lost'
-                                print 'Our hero finds a sword'
-                                print 'This could come in very handy'
-                                sword = 'found'
+                        if Spiel is 'an'
+                            Pfad = ask 'In welche Richtung soll sie gehen?'
+                            if Pfad is 'links' and Schwert is 'gefunden'
+                                print 'Unsere Heldin begegnet einem Drachen!'
+                                print 'Zum Glück hat sie ein Schwert, um das Ungetüm zu besiegen!'
+                                Spiel = 'aus'
+                            if Pfad is 'links' and Schwert is 'verloren'
+                                print 'Unsere Heldin begegnet einem Drachen, sie hat jedoch keine Waffe!'
+                                print 'Sie wird vom Drachen besiegt...'
+                                print 'Versuche es noch einmal.'
+                                Spiel = 'aus'
+                            if Pfad is 'rechts' and Schwert is 'gefunden'
+                                print 'Das Schwert hast Du bereits gefunden.'
+                                print 'Hier gibt es nichts weiter zu entdecken.'
+                                print 'Sie geht zurück.'
+                            if Pfad is 'rechts' and Schwert is 'verloren'
+                                print 'Unsere Heldin findet ein Schwert.'
+                                print 'Das könnte sich noch als nützlich erweisen.'
+                                Schwert = 'gefunden'
                     ```
                 start_code: ""
     parrot:
