@@ -34,19 +34,19 @@
                       </div>
                   {% endif %}
               </div>
-            {% if assignment.text_2 %}
+            {% for story in assignment.extra_stories %}
                 <div class="flex flex-row border-t-2">
-                    <div class="{% if assignment.example_code_2 %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
-                        {{ assignment.text_2|commonmark }}
-                    </div>
-                    {% if assignment.example_code_2 %}
+                    <div class="{% if story.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                      {{ story.text|commonmark }}
+                  </div>
+                  {% if story.example_code %}
                       <div class="border"></div>
                       <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
-                          {{ assignment.example_code_2|commonmark }}
+                          {{ story.example_code|commonmark }}
                       </div>
                   {% endif %}
                 </div>
-            {% endif %}
+            {% endfor %}
           </div>
           {% endif %}
         {% endfor %}
