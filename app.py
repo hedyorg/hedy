@@ -715,7 +715,7 @@ def programs_page(user):
     adventure = None if adventure == "null" else adventure
 
     if level or adventure:
-        result = DATABASE.programs_for_user(from_user or username)
+        result = DATABASE.filtered_programs_for_user(from_user or username, level, adventure)
     else:
         result = DATABASE.programs_for_user(from_user or username)
 
