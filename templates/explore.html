@@ -2,6 +2,13 @@
 
 {% block body %}
 <div class="px-8 py-12">
+    {% if achievement %}
+    <script>
+    $(function() {
+        hedyApp.showAchievements({{ achievement|safe }}, false, "");
+    });
+    </script>
+    {% endif %}
     <h2 class="px-8 mb-4">{{auth.explore_programs}}</h2>
     <div class="w-full mb-8" id="program_filter">
         <!-- It would be really nice to use some dynamic loading using AJAX to present the data -->
@@ -38,13 +45,13 @@
                   <div class="px-4">
                       {{ texts.level }}: <b>{{ program.level }}</b>
                   </div>
-                  <div class="px-4 mb-2 z-10">
-                      {{ texts.creator }}: <a {% if username %}onclick="window.open('/user/{{program.username}}', '_self')"{% endif %} class="{% if username %}cursor-pointer{% endif %} no-underline{% if program.username|length > 20 %}text-xs{% elif program.username|length > 15 %}text-sm{% endif %}">{{ program.username | truncate(25) }}</a>
+                  <div class="px-4 mb-1 z-10">
+                      {{ texts.creator }}: <a {% if username %}onclick="window.open('/user/{{program.username}}', '_self')"{% endif %} class="{% if username %}cursor-pointer{% else %}text-black{% endif %} no-underline {% if program.username|length > 20 %}text-xs{% elif program.username|length > 15 %}text-sm{% endif %}">{{ program.username | truncate(25) }}</a>
                   </div>
-                 <div class="relative px-4 mb-2 cursor-pointer">
-                     <pre class="no-copy-button max-h-full" id="{{ program.level }}">{{ program.code }}</pre>
+                 <div class="relative px-4">
+                     <pre class="no-copy-button" id="{{ program.level }}">{{ program.code }}</pre>
                  </div>
-                 <div class="mt-auto mb-4 flex items-center justify-center">
+                 <div class="mt-auto mb-2 flex items-center justify-center">
                     <button class="blue-btn border border-blue-600 py-1 rounded-lg" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{ texts.view_program }}</button>
                  </div>
             </div>

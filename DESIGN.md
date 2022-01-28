@@ -95,11 +95,13 @@ Note that if in the future the transpiler still does not require any of the look
 system, type validation and transpiling can run in parallel.
 
 The type system requires as input a lookup table containing the names of all variable definitions, which it later
-enriches with their inferred types. The supported types are `string`, `integer`, `float`, `list`, `boolean`, `any` and
-`none`. The type `any` is used when types cannot be inferred and is ignored in all type validations. The lookup table 
-is also used by the transpiler to differentiate literals from expressions, e.g. the literal 'text' vs a variable called
-'text'. Because of that the lookup table does not contain only variable definitions, but also all expressions that need 
-to be escaped, e.g. variable access such as `animals[0]`.
+enriches with their inferred types. The supported types are `string`, `integer`, `float`, `list`, `boolean`, `input`,
+`any` and `none`. The type `any` is used when types cannot be inferred and is ignored in all type validations. The type
+`input` is a composite data type used to denote user input (retrieved through the `ask` and `input` commands), which
+means `input` can be multiple types depending on the value the user enters. At the moment, the user input could be
+interpreted as `string`, `integer` or `float`. The lookup table is also used by the transpiler to differentiate literals
+from expressions, e.g. the literal 'text' vs a variable called 'text'. Because of that the lookup table does not contain
+only variable definitions, but also all expressions that need to be escaped, e.g. variable access such as `animals[0]`.
 
 The lookup table is created and enriched in two separate steps. The first traversal of the abstract syntax tree puts in
 the lookup table the entries required by the transpiler along with a reference to the sub-tree needed to infer their 
