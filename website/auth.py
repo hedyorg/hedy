@@ -349,6 +349,7 @@ def routes(app, database):
     @requires_login
     def change_student_password(user):
         body = request.json
+        print(body)
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
@@ -359,10 +360,10 @@ def routes(app, database):
             return g.auth_texts.get('password_six'), 400
 
         if not is_teacher(user):
-            return g.auth_texts.get("test"), 400
+            return g.auth_texts.get("password_change_not_allowed"), 400
         students = DATABASE.get_teacher_students(user['username'])
         if body['username'] not in students:
-            return g.auth_texts.get("test"), 400
+            return g.auth_texts.get("password_change_not_allowed"), 400
 
 
     @app.route('/auth/change_password', methods=['POST'])
