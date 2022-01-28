@@ -157,7 +157,6 @@ export function remove_student_invite(username: string, class_id: string) {
   });
 }
 
-
 export function remove_student(class_id: string, student_id: string, self_removal: boolean) {
   let confirm_text;
   if (self_removal) {
@@ -182,6 +181,13 @@ export function remove_student(class_id: string, student_id: string, self_remova
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
   });
+}
+
+export function change_password_student(username: string) {
+    //We want to perform a double-check:
+    //Use modal.prompt and then use modal.confirm
+    //Give feedback as expected -> modal.alert()
+    console.log(username);
 }
 
 export function show_doc_section(section_key: string) {
