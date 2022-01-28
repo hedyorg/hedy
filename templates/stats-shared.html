@@ -65,15 +65,16 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="logs-username">
         Username
       </label>
-      {% if usernames %}
-      <select id="logs-username" name="username" class="border-gray-400 border-2 px-4 py-2">
+      {% if class_id %}
+      <select id="logs-username" name="username" class="block appearance-none border-gray-400 border-2 px-4 py-2"
+              style="outline:none">
         {% for user in usernames %}
           <option value="{{user}}">{{user}}</option>
         {% endfor %}
       </select>
       {% else %}
-      <input class="block w-full py-2 px-4 outline-none border-2 border-gray-400" id="logs-username"
-             type="text" name="username" placeholder="e.g. hedy, h% or %hedy%">
+      <input id="logs-username" name="username" class="block w-full py-2 px-4 outline-none border-2 border-gray-400"
+             type="text" placeholder="e.g. hedy, h% or %hedy%">
       {% endif %}
     </div>
   </div>
