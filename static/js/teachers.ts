@@ -184,10 +184,24 @@ export function remove_student(class_id: string, student_id: string, self_remova
 }
 
 export function change_password_student(username: string) {
-    //We want to perform a double-check:
-    //Use modal.prompt and then use modal.confirm
-    //Give feedback as expected -> modal.alert()
-    console.log(username);
+    modal.prompt ("Enter a new password for " + username + ":", '', function (password) {
+        modal.confirm ("Are you really sure you want to change this password?", function () {
+            $.ajax({
+              type: 'POST',
+              url: '/change_student_password',
+              data: JSON.stringify({
+                  username: username,
+                  password: password
+              }),
+              contentType: 'application/json',
+              dataType: 'json'
+            }).done(function (response) {
+              modal.alert(response.success);
+            }).fail(function (err) {
+              modal.alert(err.responseText);
+            });
+        });
+    });
 }
 
 export function show_doc_section(section_key: string) {
