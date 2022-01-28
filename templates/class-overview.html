@@ -9,7 +9,58 @@
     });
     </script>
     {% endif %}
-  <h2>{{auth.class_overview}}: {{class_info.name}}</h2>
+    <div class="flex flex-row mb-4 items-center w-full">
+        <h1 class="inline-block w-80">{{class_info.name}}</h1>
+        <div class="px-4 flex w-full flex-row border border-gray-400 py-2 rounded-lg">
+            <div class="flex flex-row items-center">
+                <h3 class="inline-block w-64 my-2">Visible attributes</h3>
+                <div class="flex flex-row w-full ml-auto">
+                    <div class="flex flex-col mx-2">
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
+                            <label class="inline-block" for="subscribe">Gebruikersnaam</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_login" name="last_login">
+                            <label class="inline-block" for="last_login">Laatste login</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="highest_level" name="highest_level">
+                            <label class="inline-block" for="highest_level">Hoogste level</label>
+                        </div>
+                    </div>
+                    <div class="flex flex-col mx-2">
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
+                            <label class="inline-block" for="subscribe">Aantal programma's</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
+                            <label class="inline-block" for="subscribe">Programma overzicht</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="count" name="count">
+                            <label class="inline-block" for="subscribe">Verander wachtwoord</label>
+                        </div>
+                    </div>
+                    <div class="flex flex-col mx-2">
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
+                            <label class="inline-block" for="subscribe">Laatst gedeeld</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
+                            <label class="inline-block" for="subscribe">Verander wachtwoord</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="count" name="count">
+                            <label class="inline-block" for="subscribe">Verwijder leerling</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
       <table class="table-auto mb-4 w-full">
       <thead>
@@ -17,9 +68,10 @@
           <th class="text-blue-600">{{auth.username}}</th>
           <th class="text-blue-600">{{auth.last_login}}</th>
           <th class="text-blue-600">{{auth.highest_level_reached}}</th>
-          <th class="text-blue-600">{{auth.number_programs}}</th>
+          <th class="text-blue-600">{{auth.number_programs.split(" ")[0]}}</th>
           <th class="text-blue-600">{{auth.programs}}</th>
           <th class="text-blue-600">{{auth.latest_shared_program}}</th>
+          <th class="text-blue-600">Reset password</th>
           <th class="text-blue-600">{{auth.remove_student}}</th>
         </tr>
       </thead>
@@ -78,4 +130,18 @@
   {% endif %}
   </div>
 </div>
+<script>
+$(document).ready(function() {
+$('.attribute').change(function() {
+    const attribute = $(this).attr('id');
+    if(!this.checked) {
+        $('#' + attribute + '_header').hide();
+        $('.' + attribute + '_cell').hide();
+    } else {
+        $('#' + attribute + '_header').show();
+        $('.' + attribute + '_cell').show();
+    }
+});
+});
+</script>
 {% endblock %}
