@@ -365,6 +365,11 @@ def routes(app, database):
         if body['username'] not in students:
             return g.auth_texts.get("password_change_not_allowed"), 400
 
+        user = DATABASE.user_by_username(body['username'])
+        hashed = hash(body['password'], make_salt())
+        DATABASE.update_user(body['username'], {'password': hashed})
+
+        return {'success': g.auth_texts.get("password_changed")}, 200
 
     @app.route('/auth/change_password', methods=['POST'])
     @requires_login

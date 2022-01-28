@@ -196,9 +196,9 @@ export function change_password_student(username: string) {
               contentType: 'application/json',
               dataType: 'json'
             }).done(function (response) {
-              modal.alert(response.success);
+              modal.alert(response.success, 3000, false);
             }).fail(function (err) {
-              modal.alert(err.responseText);
+              modal.alert(err.responseText, 3000, true);
             });
         });
     });
