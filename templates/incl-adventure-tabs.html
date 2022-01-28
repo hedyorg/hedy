@@ -19,17 +19,19 @@
         </div>
         {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
-            <div data-tabtarget="{{assignment.short_name}}" class="hidden">
-              {% if assignment.image %}
-                <img class="ltr:float-right rtl:float-left w-48" src="{{static('/images/' + assignment.image)}}">
-              {% endif %}
-              <div>
-              {{ assignment.text|commonmark }}
-              {% if assignment.short_name == 'end' %}
-                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}})">
-              {% endif %}
+            <div data-tabtarget="{{assignment.short_name}}" class="flex flex-row hidden">
+              <div class="{% if assignment.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                  {{ assignment.text|commonmark }}
+                  {% if assignment.short_name == 'end' %}
+                    <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}})">
+                  {% endif %}
               </div>
-              <div class="ltr:clear-right rtl:clear-left"></div>
+              {% if assignment.example_code %}
+                  <div class="border"></div>
+                  <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                      {{ assignment.example_code|commonmark }}
+                  </div>
+              {% endif %}
             </div>
           {% endif %}
         {% endfor %}
