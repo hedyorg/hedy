@@ -345,6 +345,26 @@ def routes(app, database):
         DATABASE.forget_public_profile(user['username'])
         return '', 200
 
+    @app.route('/auth/change_student_password', methods=['POST'])
+    @requires_login
+    def change_student_password(user):
+        body = request.json
+        if not isinstance(body, dict):
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('username'), str):
+            return g.auth_texts.get('username_invalid'), 400
+        if not isinstance(body.get('password'), str):
+            return g.auth_texts.get('password_invalid'), 400
+        if len(body['password']) < 6:
+            return g.auth_texts.get('password_six'), 400
+
+        if not is_teacher(user):
+            return g.auth_texts.get("test"), 400
+        students = DATABASE.get_teacher_students(user['username'])
+        if body['username'] not in students:
+            return g.auth_texts.get("test"), 400
+
+
     @app.route('/auth/change_password', methods=['POST'])
     @requires_login
     def change_password(user):

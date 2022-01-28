@@ -184,11 +184,11 @@ export function remove_student(class_id: string, student_id: string, self_remova
 }
 
 export function change_password_student(username: string) {
-    modal.prompt ("Enter a new password for " + username + ":", '', function (password) {
-        modal.confirm ("Are you really sure you want to change this password?", function () {
+    modal.prompt ( auth.texts['enter_password'] + " " + username + ":", '', function (password) {
+        modal.confirm (auth.texts['password_change_prompt'], function () {
             $.ajax({
               type: 'POST',
-              url: '/change_student_password',
+              url: '/auth/change_student_password',
               data: JSON.stringify({
                   username: username,
                   password: password
