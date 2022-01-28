@@ -263,7 +263,7 @@ export function preview_adventure() {
 }
 
 export function delete_adventure(adventure_id: string) {
-  modal.confirm ("Are you sure you want to remove this adventure?", function () {
+  modal.confirm (auth.texts['delete_adventure_prompt'], function () {
     $.ajax({
       type: 'DELETE',
       url: '/for-teachers/customize-adventure/' + adventure_id,
