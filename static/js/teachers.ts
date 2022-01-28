@@ -206,11 +206,10 @@ export function create_adventure() {
   });
 }
 
-export function update_adventure(adventure_id: string) {
+function update_db_adventure(adventure_id: string) {
    const adventure_name = $('#custom_adventure_name').val();
    const level = $('#custom_adventure_level').val();
    const content = $('#custom_adventure_content').val();
-   modal.confirm (auth.texts['update_adventure_prompt'], function () {
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-adventure',
@@ -227,7 +226,17 @@ export function update_adventure(adventure_id: string) {
     }).fail(function(err) {
       modal.alert(err.responseText, 3000, true);
     });
-  });
+}
+
+export function update_adventure(adventure_id: string, first_edit: boolean) {
+   if (!first_edit) {
+    modal.confirm (auth.texts['update_adventure_prompt'], function () {
+        update_db_adventure(adventure_id);
+    });
+   } else {
+       update_db_adventure(adventure_id);
+   }
+
 }
 
 export function preview_adventure() {
