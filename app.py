@@ -690,6 +690,7 @@ def programs_page(user):
         return redirect(url, code=302)
 
     from_user = request.args.get('user') or None
+    # If from_user -> A teacher is trying to view the user programs
     if from_user and not is_admin(user):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='not_teacher')
@@ -703,11 +704,21 @@ def programs_page(user):
     else:
         adventures_names = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
-    result = DATABASE.programs_for_user(from_user or username)
+    # We request our own page -> also get the public_profile settings
     public_profile = None
     if not from_user:
-        #We don't want to show the 'set favourite' option when a teacher views the profile
         public_profile = DATABASE.get_public_profile_settings(username)
+
+    level = request.args.get('level', default=None, type=str)
+    adventure = request.args.get('adventure', default=None, type=str)
+    level = None if level == "null" else level
+    adventure = None if adventure == "null" else adventure
+
+    if level or adventure:
+        result = DATABASE.programs_for_user(from_user or username)
+    else:
+        result = DATABASE.programs_for_user(from_user or username)
+
     programs = []
     now = timems()
     for item in result:
@@ -719,7 +730,8 @@ def programs_page(user):
 
     return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
                            current_page='programs', from_user=from_user, adventures=adventures,
-                           adventure_names=adventures_names, public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
+                           filtered_level=level, filtered_adventure=adventure, adventure_names=adventures_names,
+                           public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
 
 
 @app.route('/logs/query', methods=['POST'])
