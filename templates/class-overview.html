@@ -58,29 +58,30 @@
         </div>
     </div>
   <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
-      <table class="table-auto mb-4 w-full">
+      <table class="table-auto mb-4 w-full text-sm">
       <thead>
         <tr class="font-bold text-left">
-          <th class="text-blue-600">{{auth.username}}</th>
-          <th class="text-blue-600">{{auth.last_login}}</th>
-          <th class="text-blue-600">{{auth.highest_level_reached}}</th>
-          <th class="text-blue-600">{{auth.number_programs}}</th>
-          <th class="text-blue-600">{{auth.programs}}</th>
-          <th class="text-blue-600">{{auth.latest_shared_program}}</th>
-          <th class="text-blue-600">Reset password</th>
-          <th class="text-blue-600">{{auth.remove_student}}</th>
+          <th id="username_header">{{auth.username}}</th>
+          <th id="last_login_header">{{auth.last_login}}</th>
+          <th id="highest_level_header">{{auth.highest_level_reached}}</th>
+          <th id="amount_programs_header">{{auth.number_programs}}</th>
+          <th id="overview_header">{{auth.programs}}</th>
+          <th id="last_shared_header">{{auth.latest_shared_program}}</th>
+          <th id="change_password_header">Reset password</th>
+          <th id="remove_student_header">{{auth.remove_student}}</th>
         </tr>
       </thead>
       <tbody>
         {% for student in class_info.students %}
           <tr class="ltr:text-left rtl:text-right my-2">
-            <td>{{student.username}}</td>
-            <td>{{student.last_login}}</td>
-            <td>{{student.highest_level}}</td>
-            <td>{{student.programs}}</td>
-            <td><a href="/programs?user={{student.username}}">{{student.username}}'s {{auth.page}}</a></td>
-            <td>{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
-            <td><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}', false)">{{auth.remove}} {{student.username}}</a></td>
+            <td class="username_cell">{{student.username}}</td>
+            <td class="last_login_cell">{{student.last_login}}</td>
+            <td class="highest_level_cell">{{student.highest_level}}</td>
+            <td class="amount_programs_cell">{{student.programs}}</td>
+            <td class="overview_cell"><a href="/programs?user={{student.username}}">{{student.username}}'s {{auth.page}}</a></td>
+            <td class="last_shared_cell">{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
+            <td class="change_password_cell">Test</td>
+            <td class="remove_student_cell"><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}', false)">{{auth.remove}} {{student.username}}</a></td>
           </tr>
         {% endfor %}
       </tbody>
@@ -128,16 +129,16 @@
 </div>
 <script>
 $(document).ready(function() {
-$('.attribute').change(function() {
-    const attribute = $(this).attr('id');
-    if(!this.checked) {
-        $('#' + attribute + '_header').hide();
-        $('.' + attribute + '_cell').hide();
-    } else {
-        $('#' + attribute + '_header').show();
-        $('.' + attribute + '_cell').show();
-    }
-});
+    $('.attribute').change(function() {
+        const attribute = $(this).attr('id');
+        if(!this.checked) {
+            $('#' + attribute + '_header').hide();
+            $('.' + attribute + '_cell').hide();
+        } else {
+            $('#' + attribute + '_header').show();
+            $('.' + attribute + '_cell').show();
+        }
+    });
 });
 </script>
 {% endblock %}
