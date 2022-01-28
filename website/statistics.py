@@ -1,5 +1,7 @@
 from collections import namedtuple
 from flask import request, jsonify
+
+import hedyweb
 from flask_helpers import render_template
 from website.auth import requires_login, is_admin, is_teacher
 
@@ -21,14 +23,16 @@ def routes(app, db):
     @app.route('/stats/class/<class_id>', methods=['GET'])
     @requires_login
     def render_class_stats(user, class_id):
-        if not is_teacher(user):
+        if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message='retrieve_class')
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or (class_['teacher'] != user['username'] and not is_admin(user)):
             return utils.error_page(error=404, ui_message='no_such_class')
 
-        return render_template('class-stats.html', class_info={'id': class_id})
+        students = sorted(class_.get('students', []))
+        return render_template('class-stats.html', class_info={'id': class_id, 'students': students},
+                               current_page='my-profile', page_title=hedyweb.get_page_title('class statistics'))
 
     @app.route('/class-stats/<class_id>', methods=['GET'])
     @requires_login
@@ -37,10 +41,11 @@ def routes(app, db):
         end_date = request.args.get('end', default=None, type=str)
 
         cls = DATABASE.get_class(class_id)
-        if not cls or (cls['teacher'] != user['username'] and not is_admin(user)):
-            return utils.error_page(error=403, ui_message='no_such_class')
+        students = cls.get('students', [])
+        if not cls or not students or (cls['teacher'] != user['username'] and not is_admin(user)):
+            return 'No such class or class empty', 403
 
-        data = DATABASE.get_class_program_stats(cls['students'], start_date, end_date)
+        data = DATABASE.get_class_program_stats(students, start_date, end_date)
 
         per_level_data = _aggregate_for_keys(data, [level_key])
         per_week_data = _aggregate_for_keys(data, [week_key, level_key])

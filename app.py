@@ -35,7 +35,7 @@ from flask_compress import Compress
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
+from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements, quiz_svg_icons
 from website.log_fetcher import log_fetcher
 import quiz
 
@@ -301,6 +301,7 @@ def enrich_context_with_user_info():
     data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
     if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
         user_data = DATABASE.user_by_username(user.get('username'))
+        data['user_messages'] = 0
         if 'language' in user_data:
             if user_data['language'] in ALL_LANGUAGES.keys():
                 g.lang = session['lang'] = user_data['language']
@@ -310,6 +311,16 @@ def enrich_context_with_user_info():
         user_achievements = DATABASE.achievements_by_username(user.get('username'))
         if user_achievements:
             data['user_achievements'] = user_achievements
+        user_invites = DATABASE.get_username_invite(user.get('username'))
+        if user_invites:
+            Class = DATABASE.get_class(user_invites['class_id'])
+            if Class:
+                invite_data = user_invites.copy()
+                invite_data['class_name'] = Class.get('name')
+                invite_data['teacher'] = Class.get('teacher')
+                invite_data['join_link'] = Class.get('link')
+                data['invite_data'] = invite_data
+                data['user_messages'] += 1
     return data
 
 @app.context_processor
@@ -707,12 +718,22 @@ def programs_page(request):
 @app.route('/logs/query', methods=['POST'])
 def query_logs():
     user = current_user()
-    if not is_admin(user):
-        return utils.error_page(error=403, ui_message='unauthorized')
+    if not is_admin(user) and not is_teacher(user):
+        return 'unauthorized', 403
 
     body = request.json
     if body is not None and not isinstance(body, dict):
         return 'body must be an object', 400
+
+    class_id = body.get('class_id')
+    if not is_admin(user):
+        username_filter = body.get('username')
+        if not class_id or not username_filter:
+            return 'unauthorized', 403
+
+        class_ = DATABASE.get_class(class_id)
+        if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', []):
+            return 'unauthorized', 403
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -725,13 +746,12 @@ def get_log_results():
     next_token = request.args.get('next_token', default=None, type=str)
 
     user = current_user()
-    if not is_admin(user):
-        return utils.error_page(error=403, ui_message='unauthorized')
+    if not is_admin(user) and not is_teacher(user):
+        return 'unauthorized', 403
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
     return jsonify(response)
-
 
 
 def get_user_formatted_age(now, date):
@@ -775,11 +795,11 @@ def get_quiz(level_source, question_nr, attempt):
     if not is_quiz_enabled():
         return quiz_disabled_error()
 
-    # If we don't have an attempt ID yet, redirect to the start page
+        # If we don't have an attempt ID yet, redirect to the start page
     if not session.get('quiz-attempt-id'):
         return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
-    # Reading the yaml file
+        # Reading the yaml file
     questions = quiz.quiz_data_file_for(g.lang, level_source)
     if not questions:
         return no_quiz_data_error()
@@ -801,19 +821,44 @@ def get_quiz(level_source, question_nr, attempt):
     chosen_option = session.get('chosenOption', None)
     wrong_answer_hint = session.get('wrong_answer_hint', None)
 
+    # Store the answer in the database. If we don't have a username,
+    # use the session ID as a username.
+    username = current_user()['username'] or f'anonymous:{session_id()}'
+
+    if attempt == 1:
+        is_correct = quiz.is_correct_answer(question, chosen_option)
+        # the answer is not yet answered so is_correct is None
+        DATABASE.record_quiz_answer(session['quiz-attempt-id'],
+                                    username=username,
+                                    level=level_source,
+                                    is_correct=is_correct,
+                                    question_number=question_nr,
+                                    answer=None)
+
+    quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+
     return render_template('quiz_question.html',
-                           level_source=level_source,
-                           questionStatus=question_status,
-                           questions=questions,
-                           question_options=question_obj,
-                           chosen_option=chosen_option,
-                           wrong_answer_hint=wrong_answer_hint,
-                           question=question,
-                           question_nr=question_nr,
-                           correct=session.get('correct_answer'),
-                           attempt=attempt,
-                           is_last_attempt=attempt == quiz.MAX_ATTEMPTS,
-                           lang=g.lang)
+                            level_source=level_source,
+                            quiz_answers = quiz_answers,
+                            questionStatus=question_status,
+                            questions=questions,
+                            question_options=question_obj,
+                            chosen_option=chosen_option,
+                            wrong_answer_hint=wrong_answer_hint,
+                            question=question,
+                            question_nr=question_nr,
+                            correct=session.get('correct_answer'),
+                            attempt=attempt,
+                            is_last_attempt=attempt == quiz.MAX_ATTEMPTS,
+                            lang=g.lang,
+                            cross=quiz_svg_icons.icons['cross'],
+                            check=quiz_svg_icons.icons['check'],
+                            triangle = quiz_svg_icons.icons['triangle'],
+                            diamond = quiz_svg_icons.icons['diamond'],
+                            square = quiz_svg_icons.icons['square'],
+                            circle = quiz_svg_icons.icons['circle'],
+                            pentagram = quiz_svg_icons.icons['pentagram'],
+                            triangle_6 = quiz_svg_icons.icons['triangle_6'])
 
 
 @app.route('/quiz/finished/<int:level>', methods=['GET'])
@@ -830,16 +875,21 @@ def quiz_finished(level):
     # set globals
     g.prefix = '/hedy'
 
-    achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "next_question")
-    if round(session.get('total_score', 0) / quiz.max_score(questions) * 100) == 100:
+    achievement = None
+    if current_user()['username']:
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "next_question")
+        if round(session.get('total_score', 0) / quiz.max_score(questions) * 100) == 100:
+            if achievement:
+                achievement.append(ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")[0])
+            else:
+                achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")
         if achievement:
-            achievement.append(ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")[0])
-        else:
-            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")
-    if achievement:
-        achievement = json.dumps(achievement)
+            achievement = json.dumps(achievement)
 
     print(achievement)
+
+    # use the session ID as a username.
+    username = current_user()['username'] or f'anonymous:{session_id()}'
 
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
                            total_score=round(session.get('total_score', 0) / quiz.max_score(questions) * 100),
@@ -847,7 +897,10 @@ def quiz_finished(level):
                            achievement=achievement,
                            level=int(level) + 1,
                            questions=questions,
-                           next_assignment=1)
+                           next_assignment=1,
+                           cross = quiz_svg_icons.icons['cross'],
+                           check = quiz_svg_icons.icons['check'],
+                            )
 
 
 @app.route('/quiz/submit_answer/<int:level_source>/<int:question_nr>/<int:attempt>', methods=["POST"])
@@ -864,54 +917,59 @@ def submit_answer(level_source, question_nr, attempt):
     #
     # The number should always be the same as 'question_nr', or otherwise
     # be 'question_nr - 1', so is unnecessary. But we'll leave it here for now.
-    chosen_option = request.form["radio_option"]
-    chosen_option = chosen_option.split('-')[1]
+    if request.method == "POST":
+        # The value is a character and not a text
+        chosen_option = request.form.get("submit-button")
+        print('-----------------chosen option', chosen_option)
 
-    # Reading the yaml file
-    questions = quiz.quiz_data_file_for(g.lang, level_source)
-    if not questions:
-        return no_quiz_data_error()
+        # Reading the yaml file
+        questions = quiz.quiz_data_file_for(g.lang, level_source)
+        if not questions:
+            return no_quiz_data_error()
 
-    # Convert question_nr to an integer
-    q_nr = int(question_nr)
+        # Convert question_nr to an integer
+        q_nr = int(question_nr)
 
-    # Convert the corresponding chosen option to the index of an option
-    question = quiz.get_question(questions, q_nr)
+        # Convert the corresponding chosen option to the index of an option
+        question = quiz.get_question(questions, q_nr)
 
-    is_correct = quiz.is_correct_answer(question, chosen_option)
+        is_correct = quiz.is_correct_answer(question, chosen_option)
 
-    session['chosenOption'] = chosen_option
-    if not is_correct:
-        session['wrong_answer_hint'] = quiz.get_hint(question, chosen_option)
-    else:
-        # Correct answer -- make sure there is no hint on the next display page
-        session.pop('wrong_answer_hint', None)
+        session['chosenOption'] = chosen_option
+        if not is_correct:
+            session['wrong_answer_hint'] = quiz.get_hint(question, chosen_option)
+        else:
+            # Correct answer -- make sure there is no hint on the next display page
+            session.pop('wrong_answer_hint', None)
 
-    # Store the answer in the database. If we don't have a username,
-    # use the session ID as a username.
-    username = current_user()['username'] or f'anonymous:{session_id()}'
+        # Store the answer in the database. If we don't have a username,
+        # use the session ID as a username.
+        username = current_user()['username'] or f'anonymous:{session_id()}'
 
-    DATABASE.record_quiz_answer(session['quiz-attempt-id'],
-                                username=username,
-                                level=level_source,
-                                is_correct=is_correct,
-                                question_number=question_nr,
-                                answer=chosen_option)
+        DATABASE.record_quiz_answer(session['quiz-attempt-id'],
+                                    username=username,
+                                    level=level_source,
+                                    is_correct=is_correct,
+                                    question_number=question_nr,
+                                    answer=chosen_option)
 
-    if is_correct:
-        score = quiz.correct_answer_score(question)
-        session['total_score'] = session.get('total_score', 0) + score
-        session['correct_answer'] = session.get('correct_answer', 0) + 1
+        if is_correct:
+            score = quiz.correct_answer_score(question)
+            session['total_score'] = session.get('total_score', 0) + score
+            session['correct_answer'] = session.get('correct_answer', 0) + 1
 
-        return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr, lang=g.lang))
+            quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+            return redirect(url_for('quiz_feedback', quiz_answers= quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang))
 
-    # Not a correct answer. You can try again if you haven't hit your max attempts yet.
-    if attempt >= quiz.MAX_ATTEMPTS:
-        return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr, lang=g.lang))
+        # Not a correct answer. You can try again if you haven't hit your max attempts yet.
+        if attempt >= quiz.MAX_ATTEMPTS:
+            quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+            return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source, question_nr=question_nr, lang=g.lang, ))
 
     # Redirect to the display page to try again
     return redirect(url_for('get_quiz', chosen_option=chosen_option, level_source=level_source, question_nr=question_nr,
                             attempt=attempt + 1, lang=g.lang))
+
 
 
 @app.route('/quiz/feedback/<int:level_source>/<int:question_nr>', methods=["GET"])
@@ -942,7 +1000,14 @@ def quiz_feedback(level_source, question_nr):
 
     question_options = quiz.question_options_for(question)
 
-    return render_template('feedback.html', question=question,
+    # use the session ID as a username.
+    username = current_user()['username'] or f'anonymous:{session_id()}'
+
+    quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+
+    return render_template('feedback.html',
+                           quiz_answers=quiz_answers,
+                           question=question,
                            questions=questions,
                            question_options=question_options,
                            level_source=level_source,
@@ -952,6 +1017,8 @@ def quiz_feedback(level_source, question_nr):
                            wrong_answer_hint=wrong_answer_hint,
                            index_option=index_option,
                            correct_option=correct_option,
+                           cross=quiz_svg_icons.icons['cross'],
+                           check=quiz_svg_icons.icons['check'],
                            lang=g.lang)
 
 
@@ -1145,11 +1212,6 @@ def main_page(page):
         else:
             return utils.error_page(error=403, ui_message='not_teacher')
 
-    if page == 'stats':
-        if not is_admin(current_user()):
-            return utils.error_page(error=403, ui_message='unauthorized')
-        return render_template('admin-stats.html')
-
     requested_page = hedyweb.PageTranslations(page)
     if not requested_page.exists():
         abort(404)
@@ -1167,20 +1229,31 @@ def explore():
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
 
+    achievement = None
     if level or adventure:
         programs = DATABASE.get_filtered_explore_programs(level, adventure)
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
         programs = DATABASE.get_all_explore_programs()
 
+    filtered_programs = []
     for program in programs:
-        program['code'] = "\n".join(program['code'].split("\n")[:4])
+        filtered_programs.append({
+            'username': program['username'],
+            'name': program['name'],
+            'level': program['level'],
+            'id': program['id'],
+            'code': "\n".join(program['code'].split("\n")[:4])
+        })
 
-    adventures = None
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
+    else:
+        adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
-    return render_template('explore.html', programs=programs,
+    return render_template('explore.html', programs=filtered_programs,
                            filtered_level=level,
+                           achievement=achievement,
                            filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures=adventures,
@@ -1191,7 +1264,15 @@ def explore():
 @app.route('/admin', methods=['GET'])
 def get_admin_page():
     if not utils.is_testing_request(request) and not is_admin(current_user()):
-        return 'unauthorized', 403
+        return utils.error_page(error=403, ui_message='unauthorized')
+    return render_template('admin.html', page_title=hedyweb.get_page_title('admin'))
+
+
+@app.route('/admin/users', methods=['GET'])
+@requires_login
+def get_admin_users_page(user):
+    if not is_admin(user):
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     category = request.args.get('filter', default=None, type=str)
     category = None if category == "null" else category
@@ -1237,9 +1318,27 @@ def get_admin_page():
         user['index'] = counter
         counter = counter + 1
 
-    return render_template('admin.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
+    return render_template('admin-users.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
                            filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
                            program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
+
+
+@app.route('/admin/classes', methods=['GET'])
+@requires_login
+def get_admin_classes_page(user):
+    if not is_admin(user):
+        return utils.error_page(error=403, ui_message='unauthorized')
+
+    classes = DATABASE.all_classes()
+    return render_template('admin-classes.html', classes=classes, page_title=hedyweb.get_page_title('admin'))
+
+
+@app.route('/admin/stats', methods=['GET'])
+@requires_login
+def get_admin_stats_page(user):
+    if not is_admin(user):
+        return utils.error_page(error=403, ui_message='unauthorized')
+    return render_template('admin-stats.html', page_title=hedyweb.get_page_title('admin'))
 
 
 @app.route('/change_language', methods=['POST'])
@@ -1521,6 +1620,34 @@ def set_favourite_program(user):
     DATABASE.set_favourite_program(user['username'], body['id'])
     return jsonify({})
 
+
+@app.route('/auth/public_profile', methods=['POST'])
+@requires_login
+def update_public_profile(user):
+    body = request.json
+
+    # Validations
+    if not isinstance(body, dict):
+        return g.auth_texts.get('ajax_error'), 400
+    if not isinstance(body.get('image'), str):
+        return g.auth_texts.get('image_invalid'), 400
+    if not isinstance(body.get('personal_text'), str):
+        return g.auth_texts.get('personal_text_invalid'), 400
+    if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
+        return g.auth_texts.get('favourite_program_invalid'), 400
+
+    achievement = None
+    current_profile = DATABASE.get_public_profile_settings(user['username'])
+    if current_profile:
+        if current_profile.get('image') != body.get('image'):
+            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
+    else:
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
+    DATABASE.update_public_profile(user['username'], body)
+    if achievement:
+        return {'achievement': achievement}, 200
+    return '', 200
+
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
     source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml').to_dict()
@@ -1583,7 +1710,8 @@ def update_yaml():
 
 
 @app.route('/user/<username>')
-def public_user_page(username):
+@requires_login
+def public_user_page(user, username):
     user = DATABASE.user_by_username(username.lower())
     if not user:
         return utils.error_page(error=404, ui_message='user_not_private')
@@ -1601,6 +1729,8 @@ def public_user_page(username):
         last_achieved = None
         if 'achieved' in user_achievements:
             last_achieved = user_achievements['achieved'][-1]
+
+        # Todo: TB -> In the near future: add achievement for user visiting their own profile
 
         return render_template('public-page.html', user_info=user_public_info,
                                favourite_program=favourite_program,

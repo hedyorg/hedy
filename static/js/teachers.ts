@@ -5,7 +5,7 @@ import {showAchievements} from "./app";
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
     if (!class_name) {
-      modal.alert(auth.texts['class_name_empty']);
+      modal.alert(auth.texts['class_name_empty'], 2000, true);
       return;
     }
     $.ajax({
@@ -24,7 +24,7 @@ export function create_class() {
       }
     }).fail(function(err) {
       if (err.responseText == "duplicate") {
-        modal.alert(auth.texts['class_name_duplicate']);
+        modal.alert(auth.texts['class_name_duplicate'], 2000, true);
         return;
       }
       console.error(err);
@@ -36,7 +36,7 @@ export function create_class() {
 export function rename_class(id: string) {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
     if (!class_name) {
-      modal.alert(auth.texts['class_name_empty']);
+      modal.alert(auth.texts['class_name_empty'], 2000, true);
       return;
     }
     $.ajax({
@@ -55,7 +55,7 @@ export function rename_class(id: string) {
       }
     }).fail(function(err) {
       if (err.responseText == "duplicate") {
-        modal.alert(auth.texts['class_name_duplicate']);
+        modal.alert(auth.texts['class_name_duplicate'], 2000, true);
         return;
       }
       console.error(err);
@@ -115,6 +115,48 @@ export function join_class(id: string, name: string) {
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
 }
+
+export function invite_student(class_id: string) {
+  modal.prompt (auth.texts['invite_prompt'], '', function (username) {
+      if (!username) {
+          return modal.alert("This value is empty");
+      }
+      $.ajax({
+          type: 'POST',
+          url: '/invite_student',
+          data: JSON.stringify({
+            username: username,
+            class_id: class_id
+          }),
+          contentType: 'application/json',
+          dataType: 'json'
+      }).done(function() {
+          location.reload();
+      }).fail(function(err) {
+          return modal.alert(err.responseText);
+      });
+  });
+}
+
+export function remove_student_invite(username: string, class_id: string) {
+  return modal.confirm (auth.texts['delete_invite_prompt'], function () {
+      $.ajax({
+          type: 'POST',
+          url: '/remove_student_invite',
+          data: JSON.stringify({
+              username: username,
+              class_id: class_id
+          }),
+          contentType: 'application/json',
+          dataType: 'json'
+      }).done(function () {
+          location.reload();
+      }).fail(function (err) {
+          return modal.alert(err.responseText);
+      });
+  });
+}
+
 
 export function remove_student(class_id: string, student_id: string, self_removal: boolean) {
   let confirm_text;

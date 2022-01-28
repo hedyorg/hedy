@@ -52,36 +52,40 @@ input:checked ~ .dot {
   }
 }
 
-.ace_gutter {
+/*
+https://github.com/ajaxorg/ace/issues/1104
+Force the gutter to be smaller, looks better from 1-999 lines (probably all of our programs)
+*/
+#editor-area .ace_gutter {
     width: 32px !important;
     position: absolute;
 }
 
-body[dir='ltr'] .ace_gutter {
+body[dir='ltr'] #editor-area .ace_gutter {
     margin-right: auto;
     left: 0;
 }
 
-body[dir='rtl'] .ace_gutter {
+body[dir='rtl'] #editor-area .ace_gutter {
     margin-left: auto;
     right: 0;
 }
 
-body[dir='ltr'] .ace_scroller {
+body[dir='ltr'] #editor-area .ace_scroller {
     left: 32px !important;
     right: 0px !important;
 }
 
-body[dir='rtl'] .ace_scroller {
+body[dir='rtl'] #editor-area .ace_scroller {
     left: 0px !important;
     right: 32px !important;
 }
 
-.ace_layer .ace_gutter-layer {
+#editor-area .ace_layer .ace_gutter-layer {
     width: 32px !important;
 }
 
-.ace_gutter-layer > * {
+#editor-area .ace_gutter-layer > * {
     margin-left: 2px;
     margin-right: 0px;
     padding-left: 2px;
@@ -89,12 +93,10 @@ body[dir='rtl'] .ace_scroller {
     text-align: left;
 }
 
-body[dir='rtl'] .ace_gutter-layer {
+body[dir='rtl'] #editor-area .ace_gutter-layer {
     margin-left: 0px;
     margin-right: 2px;
     padding-left: 0px;
     padding-right: 2px;
     text-align: right;
 }
-
-

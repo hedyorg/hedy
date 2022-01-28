@@ -21,7 +21,7 @@
               <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span> {{auth.my_achievements}}</li>
           </a>
           <a class="no-underline" href="/my-profile">
-              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span> {{auth.account}}</li>
+              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span> {{auth.account}}{% if user_messages > 0 %} ({{ user_messages }}){% endif %}</li>
           </a>
           {% if is_teacher %}
               <a class="no-underline" href="/for-teachers">
