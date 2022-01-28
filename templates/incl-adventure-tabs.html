@@ -19,21 +19,35 @@
         </div>
         {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
-            <div data-tabtarget="{{assignment.short_name}}" class="flex flex-row hidden">
-              <div class="{% if assignment.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
-                  {{ assignment.text|commonmark }}
-                  {% if assignment.short_name == 'end' %}
-                    <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}})">
+            <div data-tabtarget="{{assignment.short_name}}" class="hidden">
+              <div class="flex flex-row">
+                  <div class="{% if assignment.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                      {{ assignment.text|commonmark }}
+                      {% if assignment.short_name == 'end' %}
+                        <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}})">
+                      {% endif %}
+                  </div>
+                  {% if assignment.example_code %}
+                      <div class="border"></div>
+                      <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                          {{ assignment.example_code|commonmark }}
+                      </div>
                   {% endif %}
               </div>
-              {% if assignment.example_code %}
-                  <div class="border"></div>
-                  <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
-                      {{ assignment.example_code|commonmark }}
-                  </div>
-              {% endif %}
-            </div>
-          {% endif %}
+            {% if assignment.text_2 %}
+                <div class="flex flex-row">
+                    <div class="{% if assignment.example_code_2 %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                        {{ assignment.text_2|commonmark }}
+                    </div>
+                    {% if assignment.example_code_2 %}
+                      <div class="border"></div>
+                      <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                          {{ assignment.example_code_2|commonmark }}
+                      </div>
+                  {% endif %}
+                </div>
+            {% endif %}
+          </div>
         {% endfor %}
       </div>
     </div>
