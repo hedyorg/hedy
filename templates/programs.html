@@ -5,13 +5,31 @@
 <div class="px-8">
   {% if from_user %}<h2>{{from_user}}'s recent programs</h2>
   {% else %}<h2>{{texts.recent}}</h2>{% endif %}
+  <div class="w-full mb-8 {% if programs|length < 10 %}hidden{% endif %}" id="program_filter">
+    <form onsubmit="event.preventDefault (); hedyApp.filter_programs();">
+        <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg">
+            <select id="explore_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                <option disabled selected value="">{{ texts.level }}</option>
+                {% for i in range(1, (max_level + 1)) %}
+                    <option value="{{ i }}" {% if filtered_level and i|string == filtered_level %}selected{% endif %}>{{ i }}</option>
+                {% endfor %}
+            </select>
+            <select id="explore_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                <option disabled selected value="">{{ ui.adventure }}</option>
+                {% for adventure_key, adventure in adventure_names.items() %}
+                    {% for name, levels in adventure.items() %}
+                        <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                {% endfor %}
+            </select>
+            <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
+                <button type="reset" class="red-btn" onclick="window.open('/explore', '_self');">Reset</button>
+                <button type="submit" class="green-btn ltr:ml-4 rtl:mr-4 px-4">{{ texts.search }}</button>
+            </div>
+        </div>
+    </form>
+  </div>
   <div class="programs w-full">
-  <!-- First: Check if we have a public profile and favourite program
-  If so, show this one first
-  Add a check to the for-loop to prevent duplicate showing
-  However, how do we perform this on selecting another favourite program?
-  As this is currently a front-end re-fresh task it is difficult to alter the program ordering without re-load
-  -->
   {% for program in programs %}
     <div id="program_{{ loop.index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
         <h3 id="submitted_header_{{ loop.index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{ texts.submitted_header }}</h3>

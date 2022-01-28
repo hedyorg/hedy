@@ -697,6 +697,10 @@ def programs_page(request):
             return utils.error_page(error=403, ui_message='not_enrolled')
 
     adventures = load_adventure_for_language(g.lang)
+    if hedy_content.Adventures(session['lang']).has_adventures():
+        adventures_names = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
+    else:
+        adventures_names = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
     result = DATABASE.programs_for_user(from_user or username)
     public_profile = DATABASE.get_public_profile_settings(username)
@@ -711,7 +715,7 @@ def programs_page(request):
 
     return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
                            current_page='programs', from_user=from_user, adventures=adventures,
-                           public_profile=public_profile)
+                           adventure_names=adventures_names, public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
 
 
 @app.route('/logs/query', methods=['POST'])
