@@ -680,8 +680,9 @@ def achievements_page():
     return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
                            template_achievements=achievement_translations, current_page='my-profile')
 
-def programs_page(request):
-    user = current_user()
+@app.route('/programs', methods=['GET'])
+@requires_login
+def programs_page(user):
     username = user['username']
     if not username:
         # redirect users to /login if they are not logged in
@@ -703,7 +704,10 @@ def programs_page(request):
         adventures_names = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
     result = DATABASE.programs_for_user(from_user or username)
-    public_profile = DATABASE.get_public_profile_settings(username)
+    public_profile = None
+    if not from_user:
+        #We don't want to show the 'set favourite' option when a teacher views the profile
+        public_profile = DATABASE.get_public_profile_settings(username)
     programs = []
     now = timems()
     for item in result:
@@ -1182,9 +1186,6 @@ def main_page(page):
 
     if page == "my-achievements":
         return achievements_page()
-
-    if page == 'programs':
-        return programs_page(request)
 
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
