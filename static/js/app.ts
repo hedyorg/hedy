@@ -1251,6 +1251,16 @@ export function filter_programs() {
   window.open('?level=' + level + "&adventure=" + adventure, "_self");
 }
 
+export function filter_user_programs(username: string, own_request?: boolean) {
+  const level = $('#user_program_page_level').val();
+  const adventure = $('#user_program_page_adventure').val();
+  if (own_request) {
+    window.open('?level=' + level + "&adventure=" + adventure, "_self");
+  } else {
+    window.open('?user=' + username + '&level=' + level + "&adventure=" + adventure, "_self");
+  }
+}
+
 export function filter_admin() {
   const filter = $('#admin_filter_category').val();
   if (filter == "email") {

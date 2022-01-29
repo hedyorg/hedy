@@ -261,7 +261,7 @@ adventures:
                     print 'De naam van de hoofdpersoon is' naam
                     print naam 'gaat nu in het bos lopen'
                     print naam 'is wel een beetje bang'
-                    dieren is uil, egel, gordeldier
+                    dieren is 🦔, 🦉, 🐿, 🦇
                     print 'Hij hoort het geluid van een ' dieren at random
                     print naam ' is bang dat dit een spookbos is'
                     ```
@@ -274,13 +274,13 @@ adventures:
 
                     Dat gaat zo:
                     ```
-                    dieren is uil, egel, gordeldier
+                    dieren is 🦇, 🐿, 🦉, 🦔
                     print Hij hoort nu het geluid van een dieren at random
                     ```
                     Het `add`commando kun je misschien ook in je verhaal gebruiken. Bijvoorbeeld zo:
                     ```
                     print Hij hoort een geluid...
-                    dieren is uil, egel
+                    dieren is 🦉, 🐿, 🦇
                     dier is ask Wat denk jij dat het is?
                     add dier to dieren
                     print het was een dieren at random
@@ -341,8 +341,8 @@ adventures:
                     print Train je papegaai!
                     nieuw_woord is ask Welk woord moet je papegaai leren?
                     add nieuw_woord to woorden
-                    print Jij: Zeg nieuw_woord , Hedy!
-                    print Hedy de papegaai: woorden at random
+                    print 🧒: Zeg nieuw_woord , Hedy!
+                    print 🦜: woorden at random
                     ```
                 start_code: ""
             5:
@@ -356,11 +356,11 @@ adventures:
                     print 'Train je papegaai!'
                     nieuw_woord is ask 'Welk woord moet je papegaai leren?'
                     add nieuw_woord to woorden
-                    print 'Jij: Zeg ' nieuw_woord ', Hedy!'
+                    print '🧒 Zeg ' nieuw_woord ', Hedy!'
                     gezegd_woord is woorden at random
-                    print 'Hedy de papegaai: ' gezegd_woord
-                    if gezegd_woord is nieuw_woord print 'Jij: Goedzo!'
-                    else print 'Jij: Nee! Zeg ' nieuw_woord
+                    print '🦜 ' gezegd_woord
+                    if gezegd_woord is nieuw_woord print '🧒 Goedzo! 🍪'
+                    else print '🧒 Nee! Zeg ' nieuw_woord
                     ```
 
                 start_code: ""
@@ -1003,6 +1003,8 @@ adventures:
                     ask kies uit steen, papier of schaar
                     echo dus jouw keuze was:
                     ```
+
+                    Je kunt in plaats van woorden natuurlijk ook emoji's gebruiken: ✊✋✌
                 start_code: "print Welkom bij jouw eigen steen papier schaar!"
             10:
                 story_text: |
@@ -1457,7 +1459,7 @@ adventures:
                     print 'Hoi ik ben Hedy de Waarzegger'
                     print 'Ik kan voorspellen wie morgen de loterij wint!'
                     naam is ask 'Wie ben jij?'
-                    if naam is Hedy print 'Hoera, je wint!' else print 'Helaas, iemand anders wint'
+                    if naam is Hedy print 'Hoera, je wint! 🤩' else print 'Helaas, iemand anders wint 😭'
                     ```
 
                 story_text_2 : |
@@ -1534,7 +1536,7 @@ adventures:
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    print Welkom bij McHedy!
+                    print Welkom bij McHedy! 🍟
                     ask Wat wilt u bestellen?
                     echo Dus u wilt graag
                     print Bedankt voor uw bestelling!
@@ -1926,6 +1928,24 @@ adventures:
                     ## Challenge
                     Kun jij het spannende verhaal afmaken? Of je eigen spannende(re) intro bedenken?
                 start_code: "print Hoe ben ik hier terechtgekomen?"
+            2:
+                story_text: |
+                    ## Spookhuis
+                    In dit spookhuis kun je je monsters kiezen met emojis. Al kun je natuurlijk ook gewoon woorden gebruiken.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    monster1 is 👻
+                    monster2 is 🤡
+                    monster3 is 👶
+                    print Je stapt het oude verlaten spookhuis binnen
+                    print Meteen hoor je het geluid van een monster1
+                    print Dus snel ren je naar de volgende kamer.
+                    print Maar daar wordt je opgewacht door een monster2
+                    print HELP!
+                    print Je rent naar de keuken, maar wordt daar aangevallen door een monster3
+                    ```
+                start_code: "monster1 is _"
             14:
                 story_text: |
                     ## Spookhuis
@@ -2201,6 +2221,22 @@ adventures:
         image: languages.png
         default_save_name: language
         levels:
+            5:
+                story_text: |
+                    ## Leer een nieuwe taal
+                    Maak een programma om woordjes mee te leren in een andere taal.
+
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print 'Leer Frans!'
+                    kat is ask '🐱'
+                    if kat is chat print 'Goedzo!'
+                    else print 'Helaas, kat is chat'
+                    kikker is ask '🐸'
+                    if kikker is grenouille print 'Super!'
+                    else print 'Helaas, kikker is grenouille'
+                    ```
+                start_code: ""
             16:
                 story_text: |
                     ## Leer een nieuwe taal
