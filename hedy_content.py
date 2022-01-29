@@ -69,6 +69,9 @@ class DefaultValues:
 
   level = attr.ib()
   intro_text = attr.ib(default=None)
+  example_code = attr.ib(default=None)
+  intro_text_2 = attr.ib(default=None)
+  example_code_2 = attr.ib(default=None)
   start_code = attr.ib(default=None)
   commands = attr.ib(default=None)
 
