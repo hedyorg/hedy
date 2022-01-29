@@ -64,6 +64,7 @@ class HedyType:
     list = 'list'
     float = 'float'
     boolean = 'boolean'
+    input = 'input'
 
 
 # Type promotion rules are used to implicitly convert one type to another, e.g. integer should be auto converted
@@ -71,6 +72,9 @@ class HedyType:
 int_to_float = (HedyType.integer, HedyType.float)
 int_to_string = (HedyType.integer, HedyType.string)
 float_to_string = (HedyType.float, HedyType.string)
+input_to_int = (HedyType.input, HedyType.integer)
+input_to_float = (HedyType.input, HedyType.float)
+input_to_string = (HedyType.input, HedyType.string)
 
 
 def promote_types(types, rules):
@@ -107,45 +111,45 @@ command_turn_literals = ['right', 'left']
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
     Command.print: {
-        1: [HedyType.string, HedyType.integer],
-        12: [HedyType.string, HedyType.integer, HedyType.float],
-        16: [HedyType.string, HedyType.integer, HedyType.float, HedyType.list]
+        1: [HedyType.string, HedyType.integer, HedyType.input],
+        12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
     Command.ask: {
-        1: [HedyType.string, HedyType.integer],
-        12: [HedyType.string, HedyType.integer, HedyType.float],
-        16: [HedyType.string, HedyType.integer, HedyType.float, HedyType.list]
+        1: [HedyType.string, HedyType.integer, HedyType.input],
+        12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
-    Command.turn: {1: command_turn_literals + [HedyType.integer],
-                   2: [HedyType.integer]},
-    Command.forward: {1: [HedyType.integer]},
+    Command.turn: {1: command_turn_literals + [HedyType.integer, HedyType.input],
+                   2: [HedyType.integer, HedyType.input]},
+    Command.forward: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.float]},
+    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]},
     Command.addition: {
-        6: [HedyType.integer],
-        12: [HedyType.string, HedyType.integer, HedyType.float]
+        6: [HedyType.integer, HedyType.input],
+        12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
     },
     Command.subtraction: {
-        1: [HedyType.integer],
-        12: [HedyType.integer, HedyType.float],
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.multiplication: {
-        1: [HedyType.integer],
-        12: [HedyType.integer, HedyType.float],
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.division: {
-        1: [HedyType.integer],
-        12: [HedyType.integer, HedyType.float],
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.float, HedyType.input],
     },
-    Command.for_loop: {11: [HedyType.integer]},
-    Command.smaller: {14: [HedyType.integer, HedyType.float]},
-    Command.smaller_equal: {14: [HedyType.integer, HedyType.float]},
-    Command.bigger: {14: [HedyType.integer, HedyType.float]},
-    Command.bigger_equal: {14: [HedyType.integer, HedyType.float]},
-    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.list]}
+    Command.for_loop: {11: [HedyType.integer, HedyType.input]},
+    Command.smaller: {14: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.smaller_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.bigger: {14: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.bigger_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list]}
 }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -444,9 +448,9 @@ class TypeValidator(Transformer):
 
     def ask(self, tree):
         if self.level > 1:
-            self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
+            self.save_type_to_lookup(tree.children[0].children[0], HedyType.input)
         self.validate_args_type_allowed(tree.children[1:], Command.ask)
-        return self.to_typed_tree(tree, HedyType.any)
+        return self.to_typed_tree(tree, HedyType.input)
     
     def ask_is(self, tree):
         self.ask(tree)
@@ -456,7 +460,7 @@ class TypeValidator(Transformer):
 
     def input(self, tree):
         self.validate_args_type_allowed(tree.children[1:], Command.ask)
-        return self.to_typed_tree(tree, HedyType.any)
+        return self.to_typed_tree(tree, HedyType.input)
 
     def forward(self, tree):
         if tree.children:
@@ -527,7 +531,10 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def equality_check(self, tree):
-        rules = [int_to_float, int_to_string, float_to_string] if self.level < 12 else [int_to_float]
+        if self.level < 12:
+            rules = [int_to_float, int_to_string, float_to_string, input_to_string, input_to_int, input_to_float]
+        else:
+            rules = [int_to_float, input_to_string, input_to_int, input_to_float]
         self.validate_binary_command_args_type(Command.equality, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
     
@@ -606,7 +613,8 @@ class TypeValidator(Transformer):
         return self.to_sum_typed_tree(tree, Command.division)
 
     def to_sum_typed_tree(self, tree, command):
-        prom_left_type, prom_right_type = self.validate_binary_command_args_type(command, tree, [int_to_float])
+        rules = [int_to_float, input_to_int, input_to_float]
+        prom_left_type, prom_right_type = self.validate_binary_command_args_type(command, tree, rules)
         return TypedTree(tree.data, tree.children, tree.meta, prom_left_type)
 
     def smaller(self, tree):
@@ -622,7 +630,8 @@ class TypeValidator(Transformer):
         return self.to_comparison_tree(Command.bigger_equal, tree)
 
     def not_equal(self, tree):
-        self.validate_binary_command_args_type(Command.not_equal, tree, [int_to_float])
+        rules = [int_to_float, input_to_int, input_to_float, input_to_string]
+        self.validate_binary_command_args_type(Command.not_equal, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def to_comparison_tree(self, command, tree):

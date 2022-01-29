@@ -343,7 +343,7 @@ class TestsLevel17(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-  @parameterized.expand(HedyTester.number_comparisons_commands)
+  @parameterized.expand(HedyTester.number_comparison_commands)
   def test_smaller_with_string_gives_type_error(self, comparison):
     code = textwrap.dedent(f"""\
       a is 'text'
