@@ -28,7 +28,7 @@ adventures:
                     print Überall sind seltsame Geräusche zu hören.
                     echo Da rief doch jemand seinen / ihren Namen: 
                     print Es ist schon sehr gruselig hier.
-                    print Schließlich spukt es in diesem Wald.
+                    print Er / Sie befürchtet, dass es in diesem Wald spukt.
                     ```
 
                 start_code: "print Deine Geschichte beginnt genau hier."
@@ -51,37 +51,40 @@ adventures:
                     print name hat etwas Angst.
                     print Plötzlich ertönen seltsame Geräusche...
                     sleep
-                    print name hat Angst. Schließlich spukt es in diesem Wald.
+                    print name hat Angst, dass es in diesem Wald spukt.
                     ```
                 start_code: "print Deine Geschichte beginnt genau hier."
             12:
                 story_text: |
-                    ## Story
-                    In this level you can use the quotation marks to save multiple words in a variable.
+                    ## Geschichte
+                    In diesem Level kannst Du die Anführungszeichen nutzen, um mehrere Wörter in einer Variable zu speichern.
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    name = 'The Queen of England'
-                    print name ' was eating a piece of cake, when suddenly...'
+                    name = 'Die Königin von England'
+                    print name ' aß ein Stück Kuchen, als plötzlich...'
                     ```
                 start_code: ""
             10:
+                # Frankly, this section translates to German awfully.
+                # Anybody has a good idea that works well in German?
                 story_text: |
-                    ## Story
-                    In this level you can use the for command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
+                    ## Geschichte
+                    In diesem Level kannst Du den `for` Befehl für Deine Geschichte nutzen.
+                    Damit kannst Du zum Beispiel ganz einfach das Kinderbuch "Brauner Bär, brauner Bär, wen siehst denn Du?" programmieren.
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    animals = red bird, black sheep, green frog, yellow duck, little child
-                    print 'brown bear'
-                    print 'brown bear'
-                    print 'What do you see?'
-                    for animal in animals
-                        print 'I see a ' animal ' looking at me'
-                        print animal
-                        print animal
-                        print 'What do you see?'
-                    print 'I see all the animals looking at me!'
+                    Tiere = roter Vogel, schwarzes Schaf, grüner Frosch, gelbe Ente, kleines Kind
+                    print 'brauner Bär'
+                    print 'brauner Bär'
+                    print 'Wen siehst denn Du?'
+                    for Tier in Tiere
+                        print 'Ich sehen ein/e/n ' Tier '. Der/die/das schaut mir zu.'
+                        print Tier
+                        print Tier
+                        print 'Wen siehst denn Du?'
+                    print 'Ich sehe all die Tiere. Die schauen mir zu.'
                     ```
                 start_code: ""
             9:
@@ -106,7 +109,7 @@ adventures:
                         print 'Robin geht nach Hause.'
                     ```
 
-                    ## Etwas komplizierter
+                    ## Etwas aufwendiger
                     Das obige Beispiel ist recht simpel, denn mit Verschachtelungen kannst Du richtig aufwendigen Code schreiben und aus Deiner Geschichte ein richtiges Spiel machen.
                     Sieh Dir einmal dieses Beispiel an!
 
@@ -262,55 +265,58 @@ adventures:
                 start_code: "print Deine Geschichte beginnt genau hier."
             15:
                 story_text: |
-                    ## Story
-                    Using the `while` loop can make your stories more interesting. For example, you can use `while game is 'on'` so you can play until the game is over.
-                    Or you can use `while sword is 'lost'` so the player can't continu the game until they have found something.
+                    ## Geschichte
+                    Mit der `while`-Schleife kannst Du Deine Geschichten noch interessanter gestalten.
+                    So kannst Du zum Beispiel mit `while Spiel is 'an'` Dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
+                    Oder Du lässt die Spieler mit `while Schwert is 'verloren'` so lange weiter suchen, bis sie etwas finden.
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    keys = 'lost'
-                    print 'You are standing in your garden and you have lost your keys.'
-                    print 'Where do you want to look for them?'
-                    print 'You can choose: tree, flowerbed, rock, postbox'
-                    while keys == 'lost'
-                        location = ask 'Where do you want to look?'
-                        if location == 'flowerbed'
-                            print 'Here they are!'
-                            keys = 'found'
+                    Schlüssel = 'verloren'
+                    print 'Du stehst in Deinem Garten, hast jedoch Deine Schlüssel verloren.'
+                    print 'Wo willst Du nach ihnen suchen?'
+                    print 'Wähle zwischen: Baum, Blumenbeet, Stein, Briefkasten'
+                    while Schlüssel == 'verloren'
+                        Ort = ask 'Wo willst Du suchen?'
+                        if Ort == 'Blumenbeet'
+                            print 'Ah, hier sind sie!'
+                            Schlüssel = 'gefunden'
                         else
-                            print 'Nope they are not at the ' location
-                    print 'Now you can enter the house!'
+                            print 'Nope, sie sind nicht beim ' Ort '.'
+                    print 'Jetzt kannst Du ins Haus!'
                 start_code: ""
             13:
                 story_text: |
-                    ## Story
-                    By using the `and` and `or` commands, you can shorten your stories. For example, check out the dragon story.
+                    ## Geschichte
+                    Mit den Befehlen `and` und `or` kannst Du Deine Geschichte etwas abkürzen.
+                    Sieh Dir zum Beispiel noch einmal die Geschichte mit dem Drachen an.
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    sword = 'lost'
-                    game = 'on'
-                    print 'Our hero is walking through the forest'
-                    print 'The path splits two ways'
+                    Schwert = 'verloren'
+                    Spiel = 'an'
+                    print 'Unsere Heldin läuft durch den Wald.'
+                    print 'Der Weg gabelt sich.'
                     for i in range 0 to 2
-                        if game is 'on'
-                            path = ask 'Which path should she choose?'
-                            if path is 'left' and sword is 'found'
-                                print 'Our hero comes across a dragon!'
-                                print 'Luckily our hero has a sword to defeat the beast!'
-                                game = 'over'
-                            if path is 'left' and sword is 'lost'
-                                print 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                print 'Our hero is beaten by the dragon...'
-                                print 'Try again'
-                                game = 'over'
-                            if path is 'right' and sword is 'found'
-                                print 'You have already found the sword. There is nothing left here.'
-                                print 'She walks back'
-                            if path is 'right' and sword is 'lost'
-                                print 'Our hero finds a sword'
-                                print 'This could come in very handy'
-                                sword = 'found'
+                        if Spiel is 'an'
+                            Pfad = ask 'In welche Richtung soll sie gehen?'
+                            if Pfad is 'links' and Schwert is 'gefunden'
+                                print 'Unsere Heldin begegnet einem Drachen!'
+                                print 'Zum Glück hat sie ein Schwert, um das Ungetüm zu besiegen!'
+                                Spiel = 'aus'
+                            if Pfad is 'links' and Schwert is 'verloren'
+                                print 'Unsere Heldin begegnet einem Drachen, sie hat jedoch keine Waffe!'
+                                print 'Sie wird vom Drachen besiegt...'
+                                print 'Versuche es noch einmal.'
+                                Spiel = 'aus'
+                            if Pfad is 'rechts' and Schwert is 'gefunden'
+                                print 'Das Schwert hast Du bereits gefunden.'
+                                print 'Hier gibt es nichts weiter zu entdecken.'
+                                print 'Sie geht zurück.'
+                            if Pfad is 'rechts' and Schwert is 'verloren'
+                                print 'Unsere Heldin findet ein Schwert.'
+                                print 'Das könnte sich noch als nützlich erweisen.'
+                                Schwert = 'gefunden'
                     ```
                 start_code: ""
     parrot:
