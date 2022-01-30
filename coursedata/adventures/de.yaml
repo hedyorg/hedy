@@ -476,38 +476,46 @@ adventures:
             8:
                 story_text: |
                     ## Songs
-                    In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
+                    In einem vorigen Level hast Du das Lied über dei Bierflaschen programmiert.
+                    Du hast eine Strophe geschrieben und musstest sie dann 99 mal kopieren!
+                    In Level 8 kannst Du die Strophe 99 mal wiederholen lassen, indem Du nur eine Zeile hinzufügst.
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    verse = 99
+                    Strophe = 99
                     repeat 99 times
-                        print verse ' bottles of beer on the wall'
-                        print verse ' bottles of beer'
-                        print 'Take one down, pass it around'
-                        verse = verse - 1
-                        print verse ' bottles of beer on the wall'
+                        print Strophe ' Flaschen Bier an der Wand,'
+                        print Strophe ' Flaschen Bier.'
+                        print 'Nimm eine runter, reich sie herum,'
+                        Strophe = Strophe - 1
+                        print Strophe ' Flaschen Bier an der Wand.'
                     ```
                 start_code: ""
             7:
                 story_text: |
                     ## Songs
-                    Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
+                    In Liedern wiederholt sich oft einiges.
+                    So auch im Lied "Baby Shark"!
+                    Wenn Du es singst, singst Du eigentlich immer das gleiche:
 
                     Baby Shark tututudutudu <br>
                     Baby Shark tututudutudu <br>
                     Baby Shark tututudutudu <br>
                     Baby Shark
 
-                    You can make this song much shorter with a `repeat`! Can you finish the code?
+                    Baby Shark bedeutet übrigens Baby-Hai.
+                    Mit dem Befehl `repeat` kannst Du den Song abkürzen.
+                    Kannst Du den Code vervollständigen?
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
                     repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
-                    After Baby Shark you can of course also program other songs. There are many songs with repetition.
+                    Du kannst natürlich auch andere Lieder programmieren.
+                    In vielen Liedern wiederholt sich etwas.
+                    Fällt Dir eins ein?
                 start_code: "print 'Baby Shark'"
             6:
                 story_text: |
