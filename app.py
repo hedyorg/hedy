@@ -1726,9 +1726,11 @@ def update_yaml():
 
 
 @app.route('/user/<username>')
-@requires_login
-def public_user_page(user, username):
-    user = DATABASE.user_by_username(username.lower())
+def public_user_page(username):
+    if not current_user()['username']:
+        return utils.error_page(error=403, ui_message='unauthorized')
+    username = username.lower()
+    user = DATABASE.user_by_username(username)
     if not user:
         return utils.error_page(error=404, ui_message='user_not_private')
     user_public_info = DATABASE.get_public_profile_settings(username)
