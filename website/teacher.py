@@ -400,6 +400,8 @@ def routes (app, database, achievements):
     @app.route('/for-teachers/create_adventure', methods=['POST'])
     @requires_login
     def create_adventure(user):
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='create_adventure')
         body = request.json
         adventures = DATABASE.get_teacher_adventures(user['username'])
         for adventure in adventures:

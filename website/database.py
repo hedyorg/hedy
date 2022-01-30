@@ -368,7 +368,7 @@ class Database:
         if Class:
             teacher = Class['teacher']
             teacher_adventures = self.get_teacher_adventures(teacher)
-        return teacher_adventures if teacher_adventures else None
+        return teacher_adventures or []
 
     def get_student_restrictions(self, all_adventures, user, level):
         restrictions = {}
@@ -376,7 +376,7 @@ class Database:
         if user:
             student_classes = self.get_student_classes(user)
             if student_classes:
-                all_teacher_adventures = self.student_get_teacher_adventures(student_classes[0]['id']) or []
+                all_teacher_adventures = self.student_get_teacher_adventures(student_classes[0]['id'])
                 level_preferences = self.get_level_customizations_class(student_classes[0]['id'], level)
                 if level_preferences:
                     found_restrictions = True
