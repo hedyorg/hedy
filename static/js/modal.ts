@@ -80,9 +80,6 @@ class Modal {
   }
 
   public preview(content: JQuery, title: string) {
-    console.log(content);
-    console.log(title);
-
     $('#modal-preview-title').html(title);
     const target = $('#modal-preview-content');
     content.attr('id', 'modal-preview-content');
