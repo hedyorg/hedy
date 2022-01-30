@@ -580,7 +580,7 @@ function rule_ifElseOneLine() {
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('((' + currentLang._IS + ')|(' + currentLang._IN + '))'),
+      regex: keywordWithSpace(currentLang._IS + '|' + currentLang._IN),
       token: 'keyword',
       next: 'start',
     }),
@@ -599,7 +599,7 @@ function rule_ifElse() {
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('((' + currentLang._IS + ')|(' + currentLang._IN + '))'),
+      regex: keywordWithSpace(currentLang._IS + '|' + currentLang._IN),
       token: 'keyword',
       next: 'start',
     }),
