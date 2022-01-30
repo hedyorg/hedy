@@ -334,7 +334,8 @@ export function save_level_settings(id: string, level: number) {
        if (response.achievement) {
          showAchievements(response.achievement, true, "");
        } else {
-         //location.reload ();
+         // location.reload ();
+         // TODO TB -> Front-end already up to date; no need for re-load! Look into this with customizations impro.
        }
      }).fail(function(err) {
        console.error(err);
