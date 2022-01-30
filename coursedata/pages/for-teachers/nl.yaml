@@ -100,11 +100,13 @@ sections:
 
                 - Leerlingen vergeten de commando's te typen en schrijven bijvoorbeeld code's zonder te beginnen met print. Los dit op door het juiste commando vooraan de regel te typen.
                 - Leerlingen typen de commando's met een hoofdletter, waardoor de commando's niet meer werken. Commando's moeten getypt worden in kleine letters.
+                - Leerlingen gebruiken het `echo` commando, zonder `ask` commando. Echo herhaalt het antwoord dat wordt gegeven bij een ask commando en is dus niet opzichzelfstaand.
                 - Soms krijgen de leerlingen meldingen van de browser dat Hedy niet werkt. De oplossing is om de pagina opnieuw te laden.
 
                 Tekenturtle:
-                - De leerlingen laten het pijltje soms uit beeld lopen, waardoor ze denken dat de code het niet doet. Gebruik in dat geval kleinere getallen.
-                - De leerlingen weten niet hoe de turtle achteruit kan lopen. Dit kan door de turtle mingetallen te laten lopen, bijvoorbeeld -100.
+                - Leerlingen laten het pijltje soms uit beeld lopen, waardoor ze denken dat de code het niet doet. Gebruik in dat geval kleinere getallen.
+                - Leerlingen denken dat het `turn` commando niet werkt, omdat de turtle geen lijntje opzij trekt. Leg uit dat `turn` het pijltje alleen draait, als er een streepje bij willen moeten ze ook `forward` nog een keer gebruiken.
+                - Leerlingen weten niet hoe de turtle achteruit kan lopen. Dit kan door de turtle mingetallen te laten lopen, bijvoorbeeld -100.
         - title: "Veelgemaakte fouten in level 2"
           text: |
                 In level 2 zijn dit veelgemaakte fouten door de leerlingen:
@@ -114,28 +116,30 @@ sections:
                 Bijvoorbeeld `ask Hoe heet je?` oplossing:  `naam is ask Hoe heet je?`
                 - Leerlingen vergeten de commando's te typen en schrijven bijvoorbeeld code's zonder te beginnen met print.
                 - Leerlingen gebruiken het commando echo, maar dat werkt alleen in level 1. In level 2 kun je het gegeven antwoord herhalen door de variabele te gebruiken.
-                - Leerlingen gebruiken geen komma's bij het maken van een opsomming.
-                Bijvoorbeeld: `dieren is hond kat` oplossing: `dieren is hond, kat`
-                - Leerlingen gebruiken komma's na een printcommando, dit kan niet.
-                Bijvoorbeeld: `print Hallo, ik ben Hedy.` oplossing: `print Hallo ik ben Hedy`
-                - Leerlingen gebruiken de naam van hun variabele ook als woord in een print commando, maar dat kan pas vanaf level 3.
+                - Leerlingen maken codes met alleen het `sleep` commando en vragen zihc dan af waarom er niets gebeurt. Het sleep commando alleen levert natuurlijk geen uitvoer.
+                - Leerlingen gebruiken het sleep commando met erg grote getallen en denken dan dat Hedy kapot is als er niets gebeurt. Ze maken bijvoorbeeld een code met `sleep 500`, maar dat betekent natuurlijk dat er de komende 500 seconden niets gebeurt.
+                - Leerlingen gebruiken de naam van hun variabele ook als woord in een print commando. Dit probleem is opgelost als de leerlingen in level 4 aanhalingstekens leren te gebruiken.
                 Bijvoorbeeld:
                 <pre class="no-copy-button" id="2">
-                dier is hond, kat, koe
-                print Het leukste dier is…
-                print dier at random
+                naam is Hedy
+                print Hallo mijn naam is naam
                 </pre>
-                In regel 2 van deze code staat het woord dier, terwijl dat ook de naam van de variabele is. Los dit op door de variabele een andere naam te geven, bijvoorbeeld:
+                De leerling wil in dit voorbeeld natuurlijk dat er komt te staan `Hallo mijn naam is Hedy`, maar omdat de variabele 'naam' heet, wordt naam beide keren vervangen door Hedy en staat er 'Hallo mijn Hedy is Hedy.'
+                In level 4 wordt dit opgelost door aanhalingstekens te gebruiken. In dit level is de enige oplossing om een ander woord te gebruiken in plaats van de variabelenaam.
                 <pre class="no-copy-button" id="2">
-                dieren is hond, kat, koe
-                print Het leukste dier is...
-                print dieren at random
+                naam is Hedy
+                print Hallo ik heet naam
                 </pre>
         - title: "Veelgemaakte fouten in level 3"
           text: |
                 In level 3 zijn dit veelgemaakte fouten door de leerlingen:
 
                 - Dezelfde fouten als bij level 2.
+                - Leerlingen proberen lijstjes te printen en vergeten het `at random` commando toe te voegen.
+                - Leerlingen gebruiken geen komma's bij het maken van een opsomming.
+                  Bijvoorbeeld: `dieren is hond kat` oplossing: `dieren is hond, kat`
+          title: "Veelgemaakte fouten in level 4"
+          text: |
                 - Leerlingen vergeten de aanhalingstekens aan beide kanten te zetten.
                 Bijvoorbeeld: `print 'Hallo ` Oplossing: `print 'Hallo'`
                 - Leerlingen gebruiken de verkeerde aanhalingstekens. Het correcte aanhalingsteken is ' deze vindt je op de meeste toetsenborden naast de enterknop. Andere aanhalingstekens zoals de dubbele aanhalingstekens &quot; of het schuine aanhalingsteken ` (op de meeste toetsenborden linksboven samen met ~).
@@ -153,9 +157,9 @@ sections:
                 <pre class="no-copy-button" id="3">
                 print 'Er lopen twee omas door het park'
                 </pre>
-        - title: "Veelgemaakte fouten in level 4"
+        - title: "Veelgemaakte fouten in level 5"
           text: |
-                In level 4 zijn dit veelgemaakte fouten door de leerlingen:
+                In level 5 zijn dit veelgemaakte fouten door de leerlingen:
 
                 - Fout: Leerlingen vergeten het woord print bij een if commando.
 
@@ -259,10 +263,6 @@ sections:
                 <pre class="no-copy-button" id="4">
                 print 'Er lopen twee omas door het park'
                 </pre>
-        - title: "Veelgemaakte fouten in level 5"
+        - title: "Veelgemaakte fouten in hogere levels"
           text: |
-                In level 5 zijn dit veelgemaakte fouten door de leerlingen:
-
-                - Dezelfde fouten als in level 4 (zie level 4)
-                - De leerlingen vergeten vaak een woord in het commando: repeat 3 times print. Voornamelijk het woord 'times' of het woord 'print' worden vaak vergeten.
-                - Het woord repeat wordt vaak fout gespeld (bijvoorbeeld, repeet, repaet of repeate).
+                - Momenteel hebben we nog geen overzicht van fouten in hogere levels, maar we hopen dit binnenkort aan de website toe te voegen.
