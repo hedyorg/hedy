@@ -61,7 +61,8 @@ ALL_LANGUAGES = {
     'bn': 'বাংলা',
     'hi': 'हिंदी',
     'id': 'Bahasa Indonesia',
-    'fy': 'Frysk'
+    'fy': 'Frysk',
+    'ar': 'عربى'
 }
 # Define fall back languages for adventures
 FALL_BACK_ADVENTURE = {
