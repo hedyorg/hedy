@@ -127,7 +127,7 @@ class HedyTester(unittest.TestCase):
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
         result = hedy.transpile(snippet.code, int(snippet.level), snippet.language)
-        all_commands = hedy.all_commands(snippet.code, snippet.level)
+        all_commands = hedy.all_commands(snippet.code, snippet.level, snippet.language)
 
         if not result.has_turtle and (not 'ask' in all_commands) and (not 'input' in all_commands): #output from turtle cannot be captured
           output = HedyTester.run_code(result)
