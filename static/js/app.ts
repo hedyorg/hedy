@@ -10,12 +10,18 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
+var StopExecution = false;
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
   if (!window.State) {
     window.State = {};
   }
+
+  // Set const value to determine the current page direction -> useful for ace editor settings
+  const dir = $("#main_container").attr("dir");
+
 
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
@@ -24,10 +30,15 @@ export let theModalEditor: AceAjax.Editor;
   // read-only editors (for syntax highlighting)
   for (const preview of $('.turn-pre-into-ace pre').get()) {
     $(preview).addClass('text-lg rounded');
+    $(preview).addClass('overflow-x-hidden');
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     exampleEditor.setOptions({ minLines: 2 });
+
+    if (dir === "rtl") {
+         exampleEditor.setOptions({ rtl: true });
+    }
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
@@ -75,6 +86,10 @@ export let theModalEditor: AceAjax.Editor;
       editor.on('blur', function(_e: Event) {
         storage.setItem(levelKey, editor.getValue());
       });
+
+      if (dir === "rtl") {
+         editor.setOptions({ rtl: true });
+      }
 
       // If prompt is shown and user enters text in the editor, hide the prompt.
       editor.on('change', function () {
@@ -146,6 +161,12 @@ export let theModalEditor: AceAjax.Editor;
         showPrintMargin: false,
         highlightActiveLine: false
       });
+      // When it is the main editor -> we want to show line numbers!
+      if (element.getAttribute('id') === "editor") {
+        editor.setOptions({
+        showGutter: true
+      });
+      }
     }
 
     // a variable which turns on(1) highlighter or turns it off(0)
@@ -190,9 +211,9 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function runit(level: string, lang: string, cb: () => void) {
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
-
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000, true);
   if (reloadOnExpiredSession ()) return;
+  StopExecution = true;
 
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -240,10 +261,13 @@ export function runit(level: string, lang: string, cb: () => void) {
         }
         return;
       }
-        runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
-        console.log(err)
-        error.show(ErrorMessages['Execute_error'], err.message);
-        reportClientError(level, code, err.message);
+        runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
+        // If it is an error we throw due to program execution while another is running -> don't show and log it
+        if (!(err.message == "\"program_interrupt\"")) {
+          console.log(err);
+          error.show(ErrorMessages['Execute_error'], err.message);
+          reportClientError(level, code, err.message);
+        }
       });
     }).fail(function(xhr) {
       console.error(xhr);
@@ -261,11 +285,11 @@ export function runit(level: string, lang: string, cb: () => void) {
   }
 }
 function showBulb(level: string){
-  let parsedlevel = parseInt(level);
+  const parsedlevel = parseInt(level)
   if(parsedlevel <= 2){
-    const repair_button = document.getElementById("repair_button")!;
-    repair_button.style.visibility = "visible";
-    repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(parsedlevel)};
+    const repair_button = $('#repair_button');
+    repair_button.show();
+    repair_button.attr('onclick', 'hedyApp.modalStepOne(' + parsedlevel + ');event.preventDefault();');
   }
 
 }
@@ -325,14 +349,12 @@ function showAchievement(achievement: any[]){
 }
 
 function removeBulb(){
-    const repair_button = document.getElementById("repair_button")!;
-    repair_button.style.visibility = "hidden";
+    const repair_button = $('#repair_button');
+    repair_button.hide();
 }
 
 export function fix_code(level: string, lang: string){
-
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000);
-
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000, true);
   if (reloadOnExpiredSession ()) return;
 
   try {
@@ -425,7 +447,7 @@ export function tryPaletteCode(exampleCode: string) {
     } else {
       $("#commands-window").hide();
       $("#toggle-button").hide();
-      modal.alert(auth.texts['examples_used'], 3000);
+      modal.alert(auth.texts['examples_used'], 3000, true);
       return;
     }
   }
@@ -462,7 +484,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       // The auth functions use this callback function.
       if (cb) return response.Error ? cb (response) : cb (null, response);
 
-      modal.alert (auth.texts['save_success_detail'], 3000);
+      modal.alert (auth.texts['save_success_detail'], 3000, false);
       if (response.achievements) {
         showAchievements(response.achievements, false, "");
       }
@@ -556,15 +578,21 @@ function change_shared (shared: boolean, index: number) {
   if (shared) {
     $('#non_public_button_container_' + index).hide();
     $('#public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).show();
   } else {
     $('#modal-copy-button').hide();
     $('#public_button_container_' + index).hide();
     $('#non_public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).hide();
+
+    // In the theoretical situation that a user unshares their favourite program -> Change UI
+    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
+    $('#favourite_program_container_' + index).addClass('text-white');
   }
 }
 
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
 
   var share = function (id: string) {
     $.ajax({
@@ -586,7 +614,7 @@ export function share_program (level: number, lang: string, id: string | true, i
         change_shared(true, index);
       } else {
         $('#modal-copy-ok-button').show();
-        modal.alert (auth.texts['unshare_success_detail'], 3000);
+        modal.alert (auth.texts['unshare_success_detail'], 3000, false);
         change_shared(false, index);
       }
     }).fail(function(err) {
@@ -629,7 +657,35 @@ export function delete_program(id: string, index: number) {
       } else {
           $('#program_' + index).remove();
       }
-      modal.alert (auth.texts['delete_success'], 3000);
+      modal.alert (auth.texts['delete_success'], 3000, false);
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    });
+  });
+}
+
+function set_favourite(index: number) {
+    $('.favourite_program_container').removeClass('text-yellow-400');
+    $('.favourite_program_container').addClass('text-white');
+
+    $('#favourite_program_container_' + index).removeClass('text-white');
+    $('#favourite_program_container_' + index).addClass('text-yellow-400');
+}
+
+export function set_favourite_program(id: string, index: number) {
+  modal.confirm (auth.texts['favourite_confirm'], function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/set_favourite',
+      data: JSON.stringify({
+        id: id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function() {
+      set_favourite(index)
+      modal.alert (auth.texts['favourite_success'], 3000);
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
@@ -648,7 +704,7 @@ function change_to_submitted (index: number) {
 }
 
 export function submit_program (id: string, index: number) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   $.ajax({
     type: 'POST',
     url: '/programs/submit',
@@ -686,7 +742,7 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
   }
   if (! noAlert) {
     modal.hide();
-    modal.alert (auth.texts['copy_clipboard'], 3000);
+    modal.alert (auth.texts['copy_clipboard'], 3000, false);
   }
 }
 
@@ -727,11 +783,10 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean, cb: () => void) {
+function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
-  if (! window.State.programsInExecution) window.State.programsInExecution = 0;
-  window.State.programsInExecution++;
+  window.State.programsInExecution = 1;
 
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -766,18 +821,27 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     __future__: Sk.python3,
     timeoutMsg: function () {
       pushAchievement("hedy_hacking");
-      return ErrorMessages ['Program_too_long']},
+      return ErrorMessages ['Program_too_long']
+    },
     // Give up after three seconds of execution, there might be an infinite loop.
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
       // const level = window.State.level;
-      return ((hasTurtle) ? 20000 : 3000);
+      return ((hasTurtle || hasSleep) ? 20000 : 3000);
     }) ()
   });
 
-  return Sk.misceval.asyncToPromise(function () {
-    return Sk.importMainWithBody("<stdin>", false, code, true);
-  }).then(function(_mod) {
+  StopExecution = false;
+  return Sk.misceval.asyncToPromise( () =>
+    Sk.importMainWithBody("<stdin>", false, code, true), {
+      "*": () => {
+        if (StopExecution) {
+          window.State.programsInExecution = 0;
+          throw "program_interrupt";
+        }
+      }
+    }
+   ).then(function(_mod) {
     console.log('Program executed');
 
     // Check if the program was correct but the output window is empty: Return a warning
@@ -837,7 +901,6 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
     return new Promise(function(ok) {
-
       window.State.disable_run = true;
       $ ('#runit').css('background-color', 'gray');
 
@@ -944,8 +1007,8 @@ export function prompt_unsaved(cb: () => void) {
   modal.confirm(auth.texts['unsaved_changes'], cb);
 }
 
-export function load_quiz(level: string, lang: string) {
-  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '?lang=' + lang + '"></iframe>');
+export function load_quiz(level: string) {
+  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
 
 export function get_trimmed_code() {
@@ -1021,7 +1084,7 @@ function showSuccesMessage(){
 function createModal(level:number ){
   let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ErrorMessages['Program_repair'];
-  modal.alert(editor, 0, title);
+  modal.repair(editor, 0, title);
 }
  function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     const editor = ace.edit(element);
@@ -1127,16 +1190,11 @@ function createModal(level:number ){
     });
     return editor;
   }
-export function toggle_developers_mode(example_programs: boolean) {
+export function toggle_developers_mode() {
   if ($('#developers_toggle').is(":checked")) {
-      $('#commands-window-total').hide();
       $('#adventures').hide();
       pushAchievement("lets_focus");
   } else {
-      // If the example programs are hidden by class customization: keep hidden!
-      if (example_programs) {
-        $('#commands-window-total').show();
-      }
       $('#adventures').show();
   }
 
@@ -1144,6 +1202,7 @@ export function toggle_developers_mode(example_programs: boolean) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
+    theGlobalEditor.resize();
   } else {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
@@ -1178,4 +1237,38 @@ export function change_language(lang: string) {
     }).fail(function(xhr) {
       console.error(xhr);
     });
+}
+
+export function select_profile_image(image: number) {
+  $('.profile_image').removeClass("border-2 border-blue-600");
+  $('#profile_image_' + image).addClass("border-2 border-blue-600");
+  $('#profile_picture').val(image);
+}
+
+export function filter_programs() {
+  const level = $('#explore_page_level').val();
+  const adventure = $('#explore_page_adventure').val();
+  window.open('?level=' + level + "&adventure=" + adventure, "_self");
+}
+
+export function filter_user_programs(username: string, own_request?: boolean) {
+  const level = $('#user_program_page_level').val();
+  const adventure = $('#user_program_page_adventure').val();
+  if (own_request) {
+    window.open('?level=' + level + "&adventure=" + adventure, "_self");
+  } else {
+    window.open('?user=' + username + '&level=' + level + "&adventure=" + adventure, "_self");
+  }
+}
+
+export function filter_admin() {
+  const filter = $('#admin_filter_category').val();
+  if (filter == "email") {
+    const substring = $('#email_filter_input').val();
+    window.open('?filter=' + filter + "&substring=" + substring, "_self");
+  } else {
+    const start_date = $('#admin_start_date').val();
+    const end_date = $('#admin_end_date').val();
+    window.open('?filter=' + filter + "&start=" + start_date + "&end=" + end_date, "_self");
+  }
 }

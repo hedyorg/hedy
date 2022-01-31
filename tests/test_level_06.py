@@ -36,10 +36,21 @@ class TestsLevel6(HedyTester):
     code = textwrap.dedent("""\
     antwoord is ask 'wat is je lievelingskleur?'""")
 
-
-
     expected = textwrap.dedent("""\
     antwoord = input(f'wat is je lievelingskleur?')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_chained_ask(self):
+    code = textwrap.dedent("""\
+    a is ask 'What is a?'
+    b is ask 'Are you sure a is ' a '?'
+    print a b""")
+
+    expected = textwrap.dedent("""\
+      a = input(f'What is a?')
+      b = input(f'Are you sure a is {a}?')
+      print(f'{a}{b}')""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -427,4 +438,37 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.CyclicVariableDefinitionException
+    )
+
+  def test_type_reassignment_to_proper_type_valid(self):
+    code = textwrap.dedent("""\
+      a is Hello
+      a is 5
+      b is a + 1
+      print a + b""")
+
+    expected = textwrap.dedent("""\
+        a = 'Hello'
+        a = '5'
+        b = int(a) + int(1)
+        print(f'{int(a) + int(b)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected,
+      expected_commands=['is', 'is', 'is', 'addition', 'print', 'addition'],
+      extra_check_function=lambda x: self.run_code(x) == "11"
+    )
+  
+  def test_type_reassigment_to_wrong_type_raises_error(self):
+    code = textwrap.dedent("""\
+      a is 5
+      a is test
+      print a + 2""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )

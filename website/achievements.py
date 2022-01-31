@@ -10,6 +10,14 @@ class Achievements:
     def __init__(self):
         self.DATABASE = database.Database()
         self.TRANSLATIONS = AchievementTranslations()
+        self.all_commands = self.get_all_commands()
+
+    def get_all_commands(self):
+        commands = []
+        for i in range(1, hedy.HEDY_MAX_LEVEL+1):
+            for command in hedy.commands_per_level.get(i):
+                commands.append(command)
+        return set(commands)
 
     def initialize_user_data_if_necessary(self):
         if 'achieved' not in session:
@@ -80,9 +88,10 @@ class Achievements:
         if code and response:
             self.check_response_achievements(code, response)
 
-        if len(session['commands']) > 0:
+        if len(session['new_commands']) > 0:
             for command in session['new_commands']:
                 session['commands'].append(command)
+            session['new_commands'] = []
             self.DATABASE.add_commands_to_username(username, session['commands'])
 
         if len(session['new_achieved']) > 0:
@@ -172,10 +181,10 @@ class Achievements:
         commands_in_code = hedy.all_commands(code, level, session['lang'])
         if 'trying_is_key' not in session['achieved']:
             for command in set(commands_in_code):
-                if command not in session['commands']:
+                if command not in session['commands'] and command not in session['new_commands']:
                     session['new_commands'].append(command)
-        if set(session['commands']) == set(hedy.commands_per_level.get(hedy.HEDY_MAX_LEVEL)):
-            session['new_achieved'].append("trying_is_key")
+            if set(session['commands']).union(session['new_commands']) == self.all_commands:
+                session['new_achieved'].append("trying_is_key")
         if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
             session['new_achieved'].append("did_you_say_please")
         if 'talk-talk-talk' not in session['achieved'] and hedy.all_commands(code, level, session['lang']).count("ask") >= 5:
@@ -188,7 +197,6 @@ class Achievements:
                 if all_print_arguments.count(argument) >= 10:
                     session['new_achieved'].append("hedy-ious")
                     break
-
 
     def check_response_achievements(self, code, response):
         self.initialize_user_data_if_necessary()

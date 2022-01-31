@@ -2,11 +2,15 @@ command:+= assign_list | add | remove > error_invalid
 _print_argument: (_SPACE | list_access | textwithoutspaces | punctuation)*
 
 assign: var _SPACE _IS _SPACE (list_access | text) -> assign
-assign_list: var _SPACE _IS _SPACE text_list ((_COMMA _SPACE|_COMMA) text_list)+
-text_list: /([^\r\n,]+)/ -> text // list elements may contain punctionationm but not commas or course, these are separators
+assign_list: var _SPACE _IS _SPACE text_list (_COMMA  text_list)+
+text_list: /([^\r\n,]+)/ -> text // list elements may contain punctuation but not commas or course, these are separators
 
 list_access: var _SPACE _AT _SPACE (INT | random) -> list_access //todo: could be merged with list_access_var?
 turtle: _FORWARD (_SPACE (INT | list_access | textwithoutspaces))? -> forward | _TURN (_SPACE (list_access | textwithoutspaces))? -> turn
 
-add: _ADD_LIST _SPACE var _SPACE _TO_LIST _SPACE var
-remove: _REMOVE _SPACE var _SPACE _FROM _SPACE var
+// FH, jan 22: not exactly sure why this works, while textwithoutspaces parses the whole line in add/remove
+// leaving this for now
+some_spaces : /([^\r\n!?. ]+)/ (_SPACE /([^\r\n!?. ]+)/)* -> text_with_spaces
+
+add: _ADD_LIST _SPACE some_spaces _SPACE _TO_LIST _SPACE var
+remove: _REMOVE _SPACE some_spaces _SPACE _FROM _SPACE var

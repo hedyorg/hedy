@@ -23,9 +23,9 @@ class Snippet:
 class HedyTester(unittest.TestCase):
   level = None
   max_turtle_level = 10
-  number_comparisons_commands = ['>', '>=', '<', '<=']
-  comparison_commands = number_comparisons_commands + ['!=']
-  comparison_commands_with_double_equals = comparison_commands + ['==']
+  equality_comparison_commands = ['==', '=']
+  number_comparison_commands = ['>', '>=', '<', '<=']
+  comparison_commands = number_comparison_commands + ['!=']
 
   @staticmethod
   @contextmanager
@@ -63,6 +63,17 @@ class HedyTester(unittest.TestCase):
   def result_in(self, list):
     return (lambda result: HedyTester.run_code(result) in list)
 
+  @staticmethod
+  def as_list_of_tuples(*args):
+    # used to conver a variable number of paralel list
+    # into a list of tuples to be used by the parametrized tester
+    # All of the lists need to have the same size
+    res = []
+    for i in range(len(args[0])):
+      t = tuple((item[i] for item in args))
+      res.append(t)
+    return res
+    
   def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
@@ -115,7 +126,7 @@ class HedyTester(unittest.TestCase):
 
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
-        result = hedy.transpile(snippet.code, int(snippet.level))
+        result = hedy.transpile(snippet.code, int(snippet.level), snippet.language)
         all_commands = hedy.all_commands(snippet.code, snippet.level)
 
         if not result.has_turtle and (not 'ask' in all_commands) and (not 'input' in all_commands): #output from turtle cannot be captured

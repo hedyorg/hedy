@@ -9,7 +9,7 @@ storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_databa
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey('username')])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 
 # Customizations contains the class customizations made by a teacher on a specific class/level combination.
@@ -33,8 +33,10 @@ CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey
 #       "hide_prev_level": false,
 #       "hide_next_level": false
 #     }
+INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
+PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='username')
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -93,12 +95,35 @@ class Database:
 
         return QUIZ_ANSWERS.update(key, updates)
 
+    def get_quiz_answer(self, username, level, attempt_id):
+        """Load a quiz answer from the database."""
+
+        quizAnswers = QUIZ_ANSWERS.get({'user': username, 'levelAttempt': str(level).zfill(4) + '_' + attempt_id})
+
+        array_quiz_answers = []
+        for question_number in range(len(quizAnswers)):
+            answers = quizAnswers.get("q" + str(question_number))
+            array_quiz_answers.append(answers)
+        return array_quiz_answers
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 
         Returns: [{ code, name, program, level, adventure_name, date }]
         """
         return PROGRAMS.get_many({'username': username}, reverse=True)
+
+    def filtered_programs_for_user(self, username, level, adventure):
+        programs = PROGRAMS.get_many({'username': username}, reverse=True)
+        if level:
+            programs = [x for x in programs if x.get('level') == int(level)]
+        if adventure:
+            programs = [x for x in programs if x.get('adventure_name') == adventure]
+        return programs
+
+    def public_programs_for_user(self, username):
+        programs = PROGRAMS.get_many({'username': username}, reverse=True)
+        return [p for p in programs if p.get('public') == 1]
 
     def program_by_id(self, id):
         """Get program by ID.
@@ -175,6 +200,7 @@ class Database:
         """Forget the given user."""
         classes = USERS.get({'username': username}).get ('classes') or []
         USERS.delete({'username': username})
+        INVITATIONS.delete({'username': username})
         # The recover password token may exist, so we delete it
         TOKENS.delete({'id': username})
         PROGRAMS.del_many({'username': username})
@@ -187,9 +213,23 @@ class Database:
         for Class in self.get_teacher_classes (username, False):
             self.delete_class (Class)
 
-    def all_users(self):
+    def all_users(self, filtering=False):
         """Return all users."""
-        return USERS.scan()
+        #If we have some filtering -> return all possible users, otherwise return last 500
+        if filtering:
+            return USERS.scan()
+        return USERS.scan(limit=500)
+
+    def get_all_explore_programs(self):
+        return PROGRAMS.get_many({'public': 1}, limit=48)
+
+    def get_filtered_explore_programs(self, level=None, adventure=None):
+        programs = PROGRAMS.get_many({'public': 1})
+        if level:
+            programs = [x for x in programs if x.get('level') == int(level)]
+        if adventure:
+            programs = [x for x in programs if x.get('adventure_name') == adventure]
+        return programs[-48:]
 
     def all_programs_count(self):
         """Return the total number of all programs."""
@@ -270,10 +310,26 @@ class Database:
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
         CUSTOMIZATIONS.del_many({'id': Class['id']})
+        INVITATIONS.del_many({'class_id': Class['id']})
         CLASSES.delete({'id': Class['id']})
 
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
+
+    def get_username_invite(self, username):
+        return INVITATIONS.get({'username': username}) or None
+
+    def add_class_invite(self, username, class_id):
+        INVITATIONS.put({'username': username, 'class_id': class_id, 'timestamp': timems ()})
+
+    def remove_class_invite(self, username):
+        INVITATIONS.delete({'username': username})
+
+    def get_class_invites(self, class_id):
+        return INVITATIONS.get_many({'class_id': class_id}) or []
+
+    def all_classes(self):
+        return CLASSES.scan()
 
     def remove_customizations_class(self, class_id, level):
         CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
@@ -320,7 +376,6 @@ class Database:
             restrictions['hide_level'] = False
             restrictions['hide_prev_level'] = False
             restrictions['hide_next_level'] = False
-
         return display_adventures, restrictions
 
     def progress_by_username(self, username):
@@ -374,6 +429,27 @@ class Database:
 
     def increase_user_submit_count(self, username):
         ACHIEVEMENTS.update({'username': username}, {'submitted_programs': dynamo.DynamoIncrement(1)})
+
+    def update_public_profile(self, username, data):
+        data['username'] = username
+        PUBLIC_PROFILES.put(data)
+
+    def set_favourite_program(self, username, program_id):
+        data = PUBLIC_PROFILES.get({'username': username})
+        if data and 'favourite_program' in data:
+            data['favourite_program'] = program_id
+            self.update_public_profile(username, data)
+            return True
+        # We can't set a favourite program without a public page!
+        # Todo: In the future we might enable users to set any program as favourite -> requires some work
+        return False
+
+
+    def get_public_profile_settings(self, username):
+        return PUBLIC_PROFILES.get({'username': username})
+
+    def forget_public_profile(self, username):
+        PUBLIC_PROFILES.delete({'username': username})
 
     def add_program_stats(self, id, level, exception):
         key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}

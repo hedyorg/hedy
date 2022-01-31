@@ -17,16 +17,57 @@ ui:
     adventure: "Abenteuer"
     commands_title: "Befehle"
     by: "durch"
+    start_quiz: Starte das Quiz
+    end_quiz: Beende das Quiz
+    go_to_quiz: Gehe zum Quiz
+    go_to_first_question: Gehe zu Frage 1
+    go_to_question: Gehe zur Frage
+    go_to_quiz_result: Gehe zum Quizergebnis
+    go_to_level: Gehe zum Level
+    go_to_answer: Gehe zur Antwort
+    question: Frage
+    from_number_of_questions: von
+    answered_correctly: richtig beantwortet
+    correct: Richtig
+    incorrect: Nicht richtig!
+    attempt: Versuch
+    hint: Hinweis?
+    feedback_success: Gut!
+    feedback_failure: Falsch!
+    correct_answer: 'Die korrekte Antwort ist:'
+    submit_answer: Beantworte die Frage
+    score: Ergebnis
+    default_403: Scheint als bist du nicht authorisiert...
+    default_404: Wir können diese Seite nicht finden...
+    default_500: Etwas ging schief...
+    go_back_to_main: Gehe zurück zur Hauptseite
+    no_such_level: Kein solches Hedy Level!
+    no_such_class: Kein solche Hedy Klasse!
+    invalid_class_link: Ungültiger Link zur Teilnahme an der Klasse.
+    no_such_program: Kein solches Hedy Programm!
+    invalid_teacher_invitation_code: Der Lehrereinladungscode ist ungültig. Um Lehrer zu werden kontaktiere hedy@felienne.com
+    page_not_found: Wir können diese Seite nicht finden!
+    not_teacher: Scheint als wärst du kein Lehrer!
+    not_user: Scheint als wärst du nicht angemeldet!
+    not_enrolled: Scheint als wärst du nicht in dieser Klasse!
+    retrieve_class: Nur Lehrer können Klassen einsehen
 ClientErrorMessages:
-    Transpile_success: "Gut gemacht!"
+    Transpile_success:
+    -   Gut gemacht!
+    -   Toll!
+    -   Sehr gut gemacht!
+    -   Exzellent!
+    -   Das hast du großartig gemacht!
     Transpile_warning: "Warnung!"
     Transpile_error: "Wir konnten Ihr Hedy-Programm nicht lesen."
     Connection_error: "Wir konnten den Server nicht erreichen."
     Other_error: "Hoppla! Vielleicht haben wir einen kleinen Fehler gemacht."
-    Execute_error: "Etwas ist beim Ausführen des Prgramms schiefgegangen."
+    Execute_error: "Etwas ist beim Ausführen des Programms schiefgegangen."
     CheckInternet: "Funktioniert deine Internetverbindung?"
-    ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
+    ServerError: "Du hast ein Programm geschrieben das wir nicht erwartet haben. Wenn du uns hlefen möchtest, dann sende eine Email an hedy@felienne.com und gib darin das Level an in dem du dieses Programm geschrieben hast und füge den Programmcode hinzu. In der Zwischenzeit, probiere aus es ein bisschen anders zu formulieren und schau nochmal in die Beispiele. Danke!"
     Program_too_long: "Dein Programm ist zu lang um es auszuführen."
+    Empty_output: Dieses Programm funktioniert aber gibt nichts aus. Füge ein `print` Befehl hinzu oder benutz die Schildkröt um eine Ausgabe zu bekommen.
+    Program_repair: Das könnte der korrekte Code sein, kannst du es beheben?
 HedyErrorMessages:
     Wrong Level: "Das war richtige Hedy-Sprache, aber nicht im richtigen Level. Du hast ein Sprachelement aus Level {working_level} in Level {original_level} verwendet."
     Incomplete: "Hoppla! Du hast ein Programm-Stück vergessen! In Zeile {line_number}, musst du nach {incomplete_command} noch Text eingeben."
@@ -45,7 +86,25 @@ HedyErrorMessages:
     star: "ein Stern"
     single quotes: "ein einfaches Anführungszeichen"
     double quotes: "ein doppeltes Anführungszeichen"
-    slash: "ein Querstrich"
+    slash: "ein Schrägstrich"
+    Empty Program: Du hast ein leeres Programm erstellt. Füge Hedy Befehle im linken Feld ein und versuche es nochmal.
+    Has Blanks: Dein Befehl is unvollständig. Er enthält Leerzeichen die du mit Befehlen ersetzen musst.
+    Unquoted Assignment: Ab diesem Level musst du rechts neben einem `is` Befehl den Text in einfache Anführungszeichen setzen. Du hast das für {text} vergessen.
+    Cyclic Var Definition: Der Name {variable} muss gesetzt werden bevor du ihn auf der rechten Seite eines Befehls verwenden kannst.
+    Lonely Echo: Du hast ein echo vor einem ask verwendet, oder ein echo ohne ask. Benutze zuerst ein ask um eine Eingabe zu bekommen, danach echo.
+    Unexpected Indentation: Du hast zu viele Leerzeichen verwendet in Zeile {line_number}. Du hast {leading_spaces} zu Anfang verwendet, das ist zu viel. Starte jeden neuen Block mit {indent_size} Leerzeichen mehr als in der Zeile zuvor.
+    No Indentation: Du hast zu wenige Leerzeichen verwendet in Zeile {line_number}. Du hast {leading_spaces} zu Anfang verwendet, das ist zu wenig. Starte jeden neuen Block mit {indent_size} Leerzeichen mehr als in der Zeile zuvor.
+    Too Big: Wow! Dein Programm hat beeindruckende {lines_of_code} Befehlszeilen! Aber wir können höchstens {max_lines} Befehlszeilen verarbeiten in diesem Level. Verkleinere dein Programm und versuche es nochmal.
+    Invalid Argument: Du kannst den Befehl {command} nicht mit dem Argument {invalid_argument} benutzen. Ändere {invalid_argument} zu einem erlaubten Typ von {allowed_types}.
+    Invalid Argument Type: Du kannst den Befehl {command} nicht mit dem Argument {invalid_argument} benutzen weil es ein {invalid_type} ist. Ändere {invalid_argument} zu einem erlaubten Typ von {allowed_types}.
+    Invalid Type Combination: Du kannst die Argumente {invalid_argument} und {invalid_argument_2} nicht in {operation} verwenden weil das eine ein {invalid_type} und das andere ein {invalid_type_2} ist. Ändere {invalid_argument} zu {invalid_type_2} or {invalid_argument_2} zu {invalid_type} und versuche ob es funktioniert.
+    string: Text
+    nested blocks: ein Block in einem Block
+    or: oder
+    number: eine Zahl
+    integer: eine ganze Zahl
+    float: eine gebrochene Zahl
+    list: eine Liste
 Auth:
     create_account: "Neues Konto anlegen"
     create_account_explanation: "Dein eigenes Konto erlaubt es dir, deine Programme zu speichern."
@@ -75,16 +134,25 @@ Auth:
     repeat_new_password: "Wiederhole neues Passwort"
     change_password: "Ändere Passwort"
     are_you_sure: "Bist du sicher? Du kannst diese Aktion nicht rückgängig machen."
-    please_username: "Bitte Benutzernamen eingeben"
+
+    #Sign up validation
     username_three: "Der Benutzername muss mindestens aus drei Zeichen bestehen."
+    username_invalid: "Deiner Nutzername ist ungültig"
     username_special: "Der Benutzername darf nicht `:` oder `@` enthalten."
+    please_language: "Bitte wähle deine bevorzugte Sprache"
     please_password: "Bitte gib ein Passwort ein."
+    password_invalid: "Dein Passwort ist ungültig"
     password_six: "Das Passwort muss aus mindestens sechs Zeichen bestehen."
     repeat_match_email: "Die wiederholte E-mail Adresse stimmt nicht mit dem ersten überein."
     repeat_match_password: "Das wiederholte Passwort stimmt nicht mit dem ersten überein."
-    valid_email: "Bitte eine gültige E-mail-Adresse eingeben."
-    valid_year: "Bitte ein Jahr eingeben zwischen 1900 und "
+    email_invalid: "Bitte eine gültige E-mail-Adresse eingeben."
+    year_invalid: "Bitte ein Jahr eingeben zwischen 1900 und "
+    language_invalid: "Bitte wähle ein gültige Sprache"
+    gender_invalid: "Bitte wähle ein gültiges Geschlecht, nutze (weiblich, männlich, anderes)"
+    experience_invalid: "Bitte wähle eine gültige Erfahrung, nutze (Ja, Nein)"
+    programming_invalid: "Bitte nutze eine gültige Programmiersprache"
     ajax_error: "Ein Fehler ist aufgetreten. Bitte nochmal versuchen."
+
     please_username_email: "Bitte Benutzername oder E-mail-Adresse eingeben."
     profile_updated: "Das Profil wurde aktualisiert."
     password_updated: "Das Passwort wurde aktualisiert."
@@ -96,8 +164,6 @@ Auth:
     reset_password: "Passwort zurücksetzen"
     password_resetted: "Dein Passwort ist erfolgreich zurückgesetzt worden. Bitte log dich ein."
     invalid_username_password: "Benutzername/Passwort ist ungültig."
-    invalid_username: "Benutzername ist ungültig."
-    invalid_password: "Passwort ist ungültig."
     invalid_reset_link: "Wiederherstellungslink für Passwort ist ungültig."
     exists_email: "Diese Email-Adresse wird bereits verwendet."
     exists_username: "Dieser Benutzername wird bereits verwendet."
@@ -126,7 +192,7 @@ Auth:
     remove_student_prompt: "Soll der/die Schüler*in aus der Klasse entfernt werden?"
     student_classes: "Meine Klassen"
     teacher_classes: "Meine Klassen"
-    create_class: "Lete neue Klasse an"
+    create_class: "Erstelle eine neue Klasse"
     rename_class: "Klasse umbenennen"
     delete_class: "Klasse löschen"
     back_to_class_list: "Zurück zur Klassenliste"
@@ -145,6 +211,45 @@ Auth:
     students: "Schüler*innen"
     copy_class_link: "Link zum Beitreten der Klasse kopieren"
     join_prompt: "Zum beitreten benötigst du einen Account. Möchtest du dich einloggen?"
+    preferred_language: Bevorzugte Sprache
+    set_preferred_lang: Hedy unterstützt jetzt durch den Nutzer bevorzugte Sprache. Du kannst deine bevorzugte Sprache in deinem Profil einstellen unter "Mein Profil"
+    is_teacher: Ich bin eine Lehrerin / ein Lehrer und möchte mich für ein LehrerInkonto bewerben
+    account: Mein Konto
+    account_overview: Kontoübersicht
+    explore_programs: Entdecke die Programme
+    statistics: Meine Statistiken
+    leave_class: Verlasse die Klasse
+    for_teachers: Für LehrerInnen
+    token_invalid: Dein Token ist ungültig
+    teacher_invalid: Deine LehrerIn Wert ist ungültig
+    server_error: Etwas ging schief auf deiner Seite. Kannst du es bitte noch einmal versuchen? Wenn das Problem bestehen bleiben dann informiere uns bitte.
+    achievements: Meine Leistungen
+    achievement_earned: Du hast eine Leistung erbracht!
+    teacher_invitation_require_login: Um dein LehrerIn Profil zu erstellen musst du dich anmelden. Wenn du noch kein Konto besitzt, dann erstell dir bitte eins.
+    teacher_welcome: Willkommen bei Hedy! Du bist nun eine stolze BesitzerIn eines LehrerIn Kontos, welches dir erlaubt Klassen zu erstellen und Schüler einzuladen.
+    examples_used: Du hast bereits die maximal erlaubte Anzahl an Beispielprogrammen ausprobiert in diesem level! Versuch als Nächstes etwas eigenes zu erstellen.
+    explore: Erkunde
+    overwrite_warning: Du hast bereits eine Programm mit diesem Namen, wenn du jetzt speicherst überschreibst du das Vorhandene. Bist du dir sicher?
+    copy_link_to_share: Kopiere den Link um ihn zu teilen
+    must_be_shared: Dein Programm muss zunächst verteilt werden bevor es dir erlaubt ist, es abzusenden.
+    class_name_empty: Du hast keinen Namen für die Klasse eingegeben!
+    class_name_duplicate: Du hast bereits eine Klasse mit diesem Namen!
+    delete_confirm: Bist du dir sicher, dass du das Programm löschen willst?
+    delete_success: Programm erfolgreich gelöscht
+    self_removal_prompt: Bist du dir sicher, dass du die Klasse verlassen möchtest?
+    name: Name
+    customize_class: Passe eine Klasse an
+    back_to_class: Gehe zurück zur Klasse
+    amount_programs: Gespeicherte Programm
+    remove: Löschen
+    available_adventures: Welches Abenteuer möchtest du verfügbar machen?
+    other_settings: Andere Einstellungen
+    example_programs: Beispielprogramme?
+    hide_level: Das Level verstecken?
+    save: Speichern
+    reset: Level zurücksetzen
+    programs: Programme
+    page: Seite
 Programs:
     recent: "Zuletzt verwendete Programme"
     level: "Level"
@@ -152,7 +257,7 @@ Programs:
     hours: "Stunden"
     days: "Tage"
     ago-1: "seit"
-    ago-2: ""
+    ago-2: "seit"
     open: "Öffnen"
     delete: "Löschen"
     delete_confirm: "Bist du sicher, dass du das Programm löschen möchtest?"
@@ -163,3 +268,26 @@ Programs:
     copy_link_to_share: "Kopiere Link zum Weitergeben"
     no_programs: "Du hast noch kein Programm."
     write_first: "Schreibe dein erstes Programm!"
+    title: Titel
+    created: Erstellungsdatum
+    last_edited: Zuletzt geändert
+    creator: Ersteller
+    submit_program: Absenden
+    submit_warning: Bist du dir sicher dass du das Programm absenden willst?
+    submitted_header: Das ist ein bereits versendetes Programm und kann nicht mehr geändert werden.
+    search: Suche
+Landing_page:
+    welcome: Willkommen
+    intro_text: |-
+        Willkommen zur wundervollen Welt von Hedy! Hier kannst du erlernen wie man ein Programm in kleinen Schritten erstellt ohne unnötig komplizierten Anhang.
+        Wir starten ganz leicht in Level 1, dann bauen wir größere und komplexere Programme!
+
+        Wähle einer der folgenden Optionen um zu starten.
+    start_programming: Starte das programmieren
+    create_class: Erstelle eine neue Klasse
+    read_docs: Lerne mehr über Hedy
+    create_class_text: Gruppiere deine Schüler*innen in Klassen und ändere den Inhalt jeder Klasse
+    read_docs_text: Besuche die Anleitung deiner LehrerIn zu Unterrichtsplänen und üblichen Fehlern die Schülern passieren
+    general_text: Starte mit Level 1 Erläuterungen
+    story_text: Erstelle deine eigene Geschichte
+    turtle_text: Erstelle eine Zeichnung mit Hilfe von Befehlen

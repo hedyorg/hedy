@@ -1,7 +1,7 @@
 //symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
 
 _SPACE: " "+
-_COMMA: ","
+_COMMA: _SPACE? "," _SPACE? //always allow commas to be surrounded by spaces
 _COLON: ":"
 _LEFT_BRACKET : "("
 _RIGHT_BRACKET : ")"

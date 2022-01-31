@@ -60,9 +60,11 @@ $(function() {
       $ ('#adventures-tab').css('max-height', '100%');
       $ ('#level-header input').hide ();
       $ ('#editor-area').hide ();
+      $('#developers_toggle_container').hide ();
       return;
     }
     $ ('#adventures-tab').css('max-height', '20em')
+    $('#developers_toggle_container').show ();
     $ ('#level-header input').show ();
     $ ('#editor-area').show ();
 

@@ -133,6 +133,19 @@ class TestsLevel3(HedyTester):
     dieren = ['Hond', 'Kat', 'Kangoeroe']""")
 
     self.single_level_tester(code=code, expected=expected)
+
+  def test_assign_list_spaces(self):
+    code = textwrap.dedent("""\
+    dieren is Hond , Kat , Kangoeroe""")
+
+    #spaces are parsed in the text here, that is fine (could be avoided if we say text
+    # can't *end* (or start) in a space but I find this ok for now
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond ', 'Kat ', 'Kangoeroe']""")
+
+    self.single_level_tester(code=code, expected=expected)
+
   def test_assign_random_value(self):
     code = textwrap.dedent("""\
     dieren is hond, kat, kangoeroe
@@ -191,8 +204,6 @@ class TestsLevel3(HedyTester):
       রং is ask আপনার প্রিয় রং কি?
       print রং is আপনার প্রিয""")
 
-    
-
     expected = textwrap.dedent("""\
     ve1760b6272d4c9f816e62af4882d874f = input('আপনার প্রিয় রং কি'+'?')
     print(f'{ve1760b6272d4c9f816e62af4882d874f} is আপনার প্রিয')""")
@@ -220,6 +231,17 @@ class TestsLevel3(HedyTester):
     print(f'{dieren}')""")
 
     self.single_level_tester(code=code, expected=expected)
+
+  def test_list_access_with_type_input_gives_error(self):
+    code = textwrap.dedent("""\
+    animals is ask 'What are the animals?'
+    print animals at random""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
 
   def test_turn_number(self):
     code = textwrap.dedent("""\
@@ -415,7 +437,60 @@ class TestsLevel3(HedyTester):
     )
 
   #add/remove tests
-  def test_add_to_list(self):
+  def test_add_text_to_list(self):
+    code = textwrap.dedent("""\
+    dieren is koe, kiep
+    add muis to dieren
+    print dieren at random""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['koe', 'kiep']
+    dieren.append('muis')
+    print(f'{random.choice(dieren)}')""")
+
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function = self.result_in(['koe', 'kiep', 'muis']),
+    )
+  def test_remove_text_from_list(self):
+    code = textwrap.dedent("""\
+    dieren is koe, kiep
+    remove kiep from dieren
+    print dieren at random""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['koe', 'kiep']
+    try:
+        dieren.remove('kiep')
+    except:
+       pass
+    print(f'{random.choice(dieren)}')""")
+
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.result_in(['koe']),
+    )
+
+  def test_add_text_with_spaces_to_list(self):
+    code = textwrap.dedent("""\
+    opties is zeker weten, misschien wel
+    add absoluut niet to opties
+    print opties at random""")
+
+    expected = textwrap.dedent("""\
+    opties = ['zeker weten', 'misschien wel']
+    opties.append('absoluut niet')
+    print(f'{random.choice(opties)}')""")
+
+    self.single_level_tester(
+      # max_level=3,
+      code=code,
+      expected=expected
+    )
+
+  def test_add_ask_to_list(self):
     code = textwrap.dedent("""\
     color is ask what is your favorite color? 
     colors is green, red, blue
@@ -433,7 +508,8 @@ class TestsLevel3(HedyTester):
       code=code,
       expected=expected
     )
-  def test_remove_from_list(self):
+
+  def test_remove_ask_from_list(self):
     code = textwrap.dedent("""\
     colors is green, red, blue
     color is ask what color to remove?
@@ -467,6 +543,18 @@ class TestsLevel3(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
+  def test_add_to_list_with_input_var_gives_error(self):
+    code = textwrap.dedent("""\
+    colors is ask 'What are the colors?' 
+    favorite is red
+    add favorite to colors""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   def test_remove_from_list_with_string_var_gives_error(self):
     code = textwrap.dedent("""\
     color is yellow 
@@ -478,6 +566,19 @@ class TestsLevel3(HedyTester):
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
+
+  def test_remove_from_list_with_input_var_gives_error(self):
+    code = textwrap.dedent("""\
+    colors is ask 'What are the colors?' 
+    favorite is red
+    remove favorite from colors""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   #negative tests
   def test_echo_no_longer_in_use(self):
     code = textwrap.dedent("""\
