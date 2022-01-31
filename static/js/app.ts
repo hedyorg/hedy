@@ -52,7 +52,7 @@ var StopExecution = false;
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
         if (!($('#editor').attr('lang') === $(preview).attr('lang'))) {
           $('#editor').attr('lang', <string>$(preview).attr('lang'));
-          update_view("main_editor_keyword_selector");
+          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
         }
       });
     } else {
@@ -493,7 +493,7 @@ export function tryPaletteCode(exampleCode: string) {
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');
-      update_view("main_editor_keyword_selector");
+      update_view("main_editor_keyword_selector", "en");
   }
   window.State.unsaved_changes = false;
 }
@@ -1303,14 +1303,18 @@ function update_keywords_commands(target_id: any, start_lang: string, goal_lang:
   });
 }
 
-function update_view(selector_container: string) {
+function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {
-    $(this).toggle();
+    if ($(this).attr('lang') == new_lang) {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
   });
 }
 
 export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string) {
-  update_view(selector_container);
+  update_view(selector_container, new_lang);
   update_keywords_commands(target_id, old_lang, new_lang);
 }
 
