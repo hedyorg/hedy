@@ -818,7 +818,7 @@ class AllCommands(Transformer):
         # some keywords have names that are not a valid name for a command
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
-        if keyword in ['assign', 'assign_is', 'assign_list', 'assign_list_is']:
+        if keyword in ['assign', 'assign_is', 'assign_equals', 'assign_list', 'assign_list_is', 'assign_list_equals']:
             return 'is'
         if keyword == 'ifelse':
             return 'else'
