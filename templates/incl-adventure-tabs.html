@@ -15,7 +15,17 @@
       {# PANES #}
       <div id="adventures-tab" style="height: 20em;" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
         <div data-tabtarget="level">
-          {{intro_text|commonmark}}
+            <div class="flex flex-row">
+              <div class="{% if example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                  {{ intro_text|commonmark }}
+              </div>
+              {% if example_code %}
+                  <div class="border"></div>
+                  <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                      {{ example_code|commonmark }}
+                  </div>
+              {% endif %}
+            </div>
         </div>
         {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
