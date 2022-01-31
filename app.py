@@ -1396,7 +1396,10 @@ def translate_keywords():
     body = request.json
     translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'))
     translated_code = translated_code.replace("  ", " ") # Fixme: Remove added space: cause unknown
-    return jsonify({'success': 200, 'code': translated_code})
+    if translated_code:
+        return jsonify({'success': 200, 'code': translated_code})
+    else:
+        return g.auth_texts.get('translate_error'), 400
 
 def session_id():
     """Returns or sets the current session ID."""
