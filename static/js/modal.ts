@@ -35,7 +35,7 @@ class Modal {
   }
 
   public hide_alert() {
-    $('#modal-alert').hide();
+    $('#modal-alert').fadeOut(1000);
   }
 
   public alert(message: string, timeoutMs?: number, error?: boolean) {
