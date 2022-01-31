@@ -114,6 +114,14 @@ class Database:
         """
         return PROGRAMS.get_many({'username': username}, reverse=True)
 
+    def filtered_programs_for_user(self, username, level, adventure):
+        programs = PROGRAMS.get_many({'username': username}, reverse=True)
+        if level:
+            programs = [x for x in programs if x.get('level') == int(level)]
+        if adventure:
+            programs = [x for x in programs if x.get('adventure_name') == adventure]
+        return programs
+
     def public_programs_for_user(self, username):
         programs = PROGRAMS.get_many({'username': username}, reverse=True)
         return [p for p in programs if p.get('public') == 1]

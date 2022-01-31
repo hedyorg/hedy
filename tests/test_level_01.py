@@ -111,6 +111,23 @@ class TestsLevel1(HedyTester):
                              output=output,
                              lang='nl')
 
+  def test_print_ar(self):
+    code = "قول أهلا ومرحبا بكم في هيدي!"
+    expected = "print('أهلا ومرحبا بكم في هيدي!')"
+    output ='أهلا ومرحبا بكم في هيدي!'
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             output=output,
+                             lang='ar')
+
+  def test_print_ar_2(self):
+    code = "قول مرحبا أيها العالم!"
+    expected = "print('مرحبا أيها العالم!')"
+    output ='مرحبا أيها العالم!'
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             output=output,
+                             lang='ar')
 
   # ask tests
   def test_ask(self):

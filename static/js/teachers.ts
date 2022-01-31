@@ -159,7 +159,6 @@ export function remove_student_invite(username: string, class_id: string) {
   });
 }
 
-
 export function remove_student(class_id: string, student_id: string, self_removal: boolean) {
   let confirm_text;
   if (self_removal) {
@@ -276,6 +275,27 @@ export function delete_adventure(adventure_id: string) {
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
   });
+
+export function change_password_student(username: string) {
+    modal.prompt ( auth.texts['enter_password'] + " " + username + ":", '', function (password) {
+        modal.confirm (auth.texts['password_change_prompt'], function () {
+            $.ajax({
+              type: 'POST',
+              url: '/auth/change_student_password',
+              data: JSON.stringify({
+                  username: username,
+                  password: password
+              }),
+              contentType: 'application/json',
+              dataType: 'json'
+            }).done(function (response) {
+              modal.alert(response.success, 3000, false);
+            }).fail(function (err) {
+              modal.alert(err.responseText, 3000, true);
+            });
+        });
+    });
+
 }
 
 export function show_doc_section(section_key: string) {
