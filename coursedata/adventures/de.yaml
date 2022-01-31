@@ -320,71 +320,71 @@ adventures:
                     ```
                 start_code: ""
     parrot:
-        name: "Parrot"
-        description: "Create your own online pet parrot that will copy you!"
+        name: "Papagei"
+        description: "Erschaffe Dir deinen eigenen zahmen Papageien, der Dir alles nachplappert!"
         image: "story.png"
-        default_save_name: "Parrot"
+        default_save_name: "Papagei"
         levels:
             1:
                 story_text: |
-                    ## Parrot
-                    Create your own online pet parrot that will copy you!
+                    ## Papagei
+                    Erschaffe Dir deinen eigenen zahmen Papageien, der Dir alles nachplappert!
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    print Im Hedy the parrot
-                    ask whats your name?
+                    print Ich bin Hedy der Papagei!
+                    ask Wie lautet Dein Name?
                     echo
                     echo
                     ```
-                start_code: "print Im Hedy the parrot"
+                start_code: "print Ich bin Hedy der Papagei!"
             2:
                 story_text: |
-                    ## Parrot
-                    Create your own online pet parrot that will copy you!
+                    ## Papagei
+                    Lass Deinen zahmen Papageien noch etwas echter klingen!
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    print Im Hedy the parrot
-                    name is ask whats your name?
-                    print name
+                    print Ich bin Hedy der Papagei.
+                    Name is ask Wie lautet Dein Name?
+                    print Name
                     sleep
-                    print squawk
+                    print Aaaaaak
                     sleep
-                    print name
+                    print Name
                     ```
-                start_code: "print Im Hedy the parrot!"
+                start_code: "print Ich bin Hedy der Papagei!"
             3:
                 story_text: |
-                    ## Parrot
-                    Teach your parrot a new word with `add`.
+                    ## Papagei
+                    Bringe Deinem Papageien mit dem Befehl `add` neue Wörter bei.
 
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
                     ```
-                    words is squawk, Hedy
-                    print Train your parrot!
-                    new_word is ask Which word do you want to teach them?
-                    add new_word to words
-                    print You: Say new_word , Hedy!
-                    print Hedy the Parrot: words at random
+                    Wörter is Aaaaaaak, Hedy
+                    print Bring Deinem Papageien etwas bei!
+                    Neues_Wort is ask Welches Wort willst Du ihm beibringen?
+                    add Neues_Wort to Wörter
+                    print 🧒 Sag Neues_Wort , Hedy!
+                    print 🦜 Wörter at random
                     ```
                 start_code: ""
             5:
                 story_text: |
-                    ## Parrot
-                    Reward your parrot if it says the correct word!
+                    ## Papagei
+                    Belohne Deinen Papageien, wenn er das richtige Wort sagt!
 
-                    ## Example Hedy Code
+                    ## Hedy Beispiel-Code
                     ```
-                    words is squawk, Hedy
-                    print 'Train your parrot!'
-                    new_word is ask 'Which word do you want to teach them?'
-                    add new_word to words
-                    said_word is words at random
-                    print 'You: Say ' new_word ', Hedy!'
-                    print 'Hedy the Parrot: ' said_word
-                    if said_word is new_word print 'You: Great job, Hedy!'
-                    else print 'You: No, Hedy! Say ' new_word
+                    Wörter is Aaaaaaak, Hedy
+                    print 'Bring Deinem Papageien etwas bei!'
+                    Neues_Wort is ask 'Welches Wort willst Du ihm beibringen?'
+                    add Neues_Wort to Wörter
+                    gesagtes_Wort is Wörter at random
+                    print '🧒 Sag ' Neues_Wort ', Hedy!'
+                    print '🦜 ' gesagtes_Wort
+                    if gesagtes_Wort is Neues_Wort print '🧒 Gut gemacht, Hedy! 🍪'
+                    else print '🧒 Nein, Hedy! Sag ' Neues_Wort '!'
                     ```
                 start_code: ""
     songs:
@@ -1007,7 +1007,7 @@ adventures:
                     ask choose from rock, paper or scissors
                     echo so your choice was: 
                     ```
-
+                    Instead of using words, you could also use emojis of course: ✊✋✌
                 start_code: "print Welcome to your own rock scissors paper!"
             10:
                 story_text: |
@@ -1140,7 +1140,7 @@ adventures:
                     if computer_choice is your_choice
                         print 'Tie'
                     if computer_choice is 'rock' and your_choice is 'paper'
-                        print 'Jij wint!'
+                        print 'You win!'
                     if computer_choice is 'rock' and your_choice is 'scissors'
                         print 'The computer wins!'
                     ```
@@ -1291,7 +1291,7 @@ adventures:
 
                     ## Example Hedy code
                       ```
-                     print Welcome to Hedy's restaurant
+                     print Welcome to Hedy's restaurant 🍟
                      ask What would you like to order?
                      echo So you would like to order 
                      print Thank you for your order!
@@ -1790,7 +1790,7 @@ adventures:
                     print 'Im Hedy the fortune teller!'
                     print 'I can predict if youll win the lottery tomorrow!'
                     person is ask 'Who are you?'
-                    if person is Hedy print 'You will definitely win!' else print 'Bad luck! Someone else will win!'
+                    if person is Hedy print 'You will definitely win!🤩' else print 'Bad luck! Someone else will win!😭'
                     ```
 
                     Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!
@@ -1865,7 +1865,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Haunted house game
+                    ## Haunted house
                     In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.
                     If you pick the right door you'll survive, but if not a terrible monster might...
 
@@ -1891,6 +1891,23 @@ adventures:
                     ## Challenge
                     Can you finish the scary story? Or make up your own haunted house story?
                 start_code: "print How did I get here?"
+            2:
+                story_text: |
+                    ## Haunted House
+                    In this haunted house you can choose your monsters with emojis. Of course you could also use words.
+
+                    ## Example Hedy Code
+                    ```
+                    monster1 is 👻
+                    monster2 is 🤡
+                    monster3 is 👶
+                    print You enter the hounted house.
+                    print Suddenly you see a monster1
+                    print You run into the other room, but a monster2 is waiting there for you!
+                    print Oh no! Quickly get to the kitchen.
+                    print But as you enter monster3 attacks you!
+                    ```
+                start_code: "monster1 is _"
             14:
                 story_text: |
                     ## Haunted House
@@ -2152,6 +2169,22 @@ adventures:
         image: languages.png
         default_save_name: language
         levels:
+            5:
+                story_text: |
+                    ## Learn a new language
+                    Make your own program to practice your vocabulary in a new language.
+
+                    ## Example Hedy code
+                    ```
+                    print 'Learn French!'
+                    cat is ask '🐱'
+                    if cat is chat print 'Terrific!'
+                    else print 'No, cat is chat'
+                    frog is ask '🐸'
+                    if frog is grenouille print 'Super!'
+                    else print 'No, frog is grenouille'
+                    ```
+                start_code: ""
             16:
                 story_text: |
                     ## Learn a new language
