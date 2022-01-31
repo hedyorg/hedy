@@ -263,18 +263,19 @@ export function preview_adventure() {
 }
 
 export function delete_adventure(adventure_id: string) {
-  modal.confirm (auth.texts['delete_adventure_prompt'], function () {
-    $.ajax({
-      type: 'DELETE',
-      url: '/for-teachers/customize-adventure/' + adventure_id,
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function() {
-      window.location.href = '/for-teachers';
-    }).fail(function(err) {
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    modal.confirm(auth.texts['delete_adventure_prompt'], function () {
+        $.ajax({
+            type: 'DELETE',
+            url: '/for-teachers/customize-adventure/' + adventure_id,
+            contentType: 'application/json',
+            dataType: 'json'
+        }).done(function () {
+            window.location.href = '/for-teachers';
+        }).fail(function (err) {
+            error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+        });
     });
-  });
+}
 
 export function change_password_student(username: string) {
     modal.prompt ( auth.texts['enter_password'] + " " + username + ":", '', function (password) {
@@ -295,7 +296,6 @@ export function change_password_student(username: string) {
             });
         });
     });
-
 }
 
 export function show_doc_section(section_key: string) {
@@ -362,15 +362,15 @@ export function save_level_settings(id: string, level: number) {
        console.error(err);
        error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
      });
- }
+}
 
- export  function reset_level_preferences(level: number) {
-     $('#adventures_overview li').each(function() {
-         if ($(this).is(':visible')) {
-             $(this).find(':input').prop("checked", true);
-         }
-     });
-     $('#example_programs' + level).prop("checked", true);
-     $('#hide_level' + level).prop("checked", false);
- }
+export  function reset_level_preferences(level: number) {
+ $('#adventures_overview li').each(function() {
+     if ($(this).is(':visible')) {
+         $(this).find(':input').prop("checked", true);
+     }
+ });
+ $('#example_programs' + level).prop("checked", true);
+ $('#hide_level' + level).prop("checked", false);
+}
 
