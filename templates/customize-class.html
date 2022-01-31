@@ -2,83 +2,43 @@
 
 {% block main %}
 <div class="px-8">
- <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
- <div class="mt-4 w-full" id="explanation_text">
- </div>
- <div class="mt-4 text-center" id="customize_level_button_container">
-     {% for level in range(1, max_level) %}
-         <button class="{% if level == 1 %} blue-btn {% else %} green-btn {% endif %} ltr:mr-4 rtl:ml-4 mt-2 w-32" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
-     {% endfor %}
- </div>
- <div class="mt-4 border-gray-400 border-2 pb-4 px-4" id="level_settings">
-     <div class="mt-4 flex flex-row">
-         <div class="ltr:mr-4 rtl:ml-4 w-1/2" id="adventure_selector">
-             <h4>{{auth.available_adventures}}</h4>
-             <form>
-                 <div class="flex flex-row items-center">
-                 <ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 ltr:pl-4 rtl:pr-4" id="adventures_overview">
-                     {% for key_name, name_levels in adventures.items() %}
-                         {% for name, levels in name_levels.items() %}
-                             {% for level in levels %}
-                                 <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{key_name}}">
-                                     <input type="checkbox" name="adventures" class="ltr:mr-4 rtl:ml-4" value="">
-                                     <label style>{{ name }}</label>
-                                 </li>
-                             {% endfor %}
-                         {% endfor %}
-                     {% endfor %}
-                 </ul>
-                 </div>
-             </form>
-         </div>
-         {% for level in range(1, max_level) %}
-             <div class="other_settings {% if level != 1 %} hidden {% endif %}" level="{{level}}">
-                <h4>{{auth.other_settings}}</h4>
-                     <div class="mb-4">
-                         <label class="inline-block w-3/4" for="example_programs">{{auth.example_programs}}</label><input type="checkbox" id="example_programs{{ level }}" name="example_program" value="">
-                     </div>
-                     <div class="mb-4">
-                         <label class="inline-block w-3/4" for="hide_level">{{auth.hide_level}}</label><input type="checkbox" id="hide_level{{ level }}" name="hide_level" value="">
-                     </div>
-             </div>
-         {% endfor %}
-     </div>
+    <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
+    <div class="flex flex-row w-full items-center">
+        <h3 class="mt-0 mr-4 inline-block w-64">Algemene instellingen</h3>
+        <div>
+            <div class="flex flex-col w-full border border-gray-400 py-2 px-4 rounded-lg">
+                <div class="flex flex-row">
+                    <div>
+                        <label class="inline-block w-40">Programmeermodus</label>
+                        <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="username" name="username">
+                    </div>
+                    <div>
+                        <label class="inline-block w-40">Ontdekken pagina</label>
+                        <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="username" name="username">
+                    </div>
+                    <div>
+                        <label class="inline-block w-40">Openbaar profiel</label>
+                        <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="username" name="username">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="px-4 flex w-full flex-row border border-gray-400 mt-4 rounded-lg">
+        <div class="flex flex-col">
+            <h3>Level instellingen</h3>
+            <div>
+                Test
+            </div>
+        </div>
+    </div>
      <div class="mt-4">
          <button class="blue-btn" onclick="hedyApp.save_level_settings ('{{class_info.id}}', level)">{{auth.save}}</button>
          <button class="red-btn" onclick="hedyApp.reset_level_preferences (level)">{{auth.reset}}</button>
      </div>
- </div>
- <div class="mt-4">
+    <div class="mt-4">
         <button class="green-btn" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
- </div>
+    </div>
 </div>
-<script>
- let level = 1;
- $('#customize_level_button_container button').click(function(){
-     $("button[level='" + level + "']").removeClass('blue-btn');
-     $("button[level='" + level + "']").addClass('green-btn');
 
-     $(this).removeClass('green-btn');
-     $(this).addClass('blue-btn');
-
-     level = this.getAttribute('level');
-     $('#level_settings').hide();
-     $('.other_settings').each(function() {
-         $(this).hide();
-     });
-     $('#adventures_overview li').each(function() {
-         $(this).hide();
-         if (this.getAttribute('level') == level) {
-             $(this).show();
-         }
-     });
-     $('#level_settings').show();
-     $('.other_settings').each(function() {
-         if (this.getAttribute('level') == level) {
-             $(this).show();
-         }
-     });
-
- });
-</script>
 {% endblock %}
