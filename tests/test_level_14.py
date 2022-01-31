@@ -9,7 +9,7 @@ class TestsLevel14(HedyTester):
 
 
   @parameterized.expand(HedyTester.comparison_commands)
-  def test_comparisons(self, comparison):
+  def test_comparisons_with_int(self, comparison):
     code = textwrap.dedent(f"""\
       leeftijd is ask 'Hoe oud ben jij?'
       if leeftijd {comparison} 12
@@ -25,6 +25,53 @@ class TestsLevel14(HedyTester):
           pass
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+    )
+
+  def test_inequality_with_string(self):
+    code = textwrap.dedent(f"""\
+      name is ask 'What is your name?'
+      if name != 'Hedy'
+        print 'meh'""")
+    expected = textwrap.dedent(f"""\
+      name = input(f'What is your name?')
+      try:
+        name = int(name)
+      except ValueError:
+        try:
+          name = float(name)
+        except ValueError:
+          pass
+      if str(name).zfill(100)!='Hedy'.zfill(100):
+        print(f'meh')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+    )
+
+  @parameterized.expand(HedyTester.equality_comparison_commands)
+  def test_equality_with_string(self, comparison):
+    code = textwrap.dedent(f"""\
+      name is ask 'What is your name?'
+      if name {comparison} 'Hedy'
+        print 'meh'""")
+    expected = textwrap.dedent(f"""\
+      name = input(f'What is your name?')
+      try:
+        name = int(name)
+      except ValueError:
+        try:
+          name = float(name)
+        except ValueError:
+          pass
+      if str(name) == str('Hedy'):
+        print(f'meh')""")
 
     self.multi_level_tester(
       code=code,
@@ -84,7 +131,7 @@ class TestsLevel14(HedyTester):
       expected=expected
     )
 
-  @parameterized.expand(HedyTester.number_comparisons_commands)
+  @parameterized.expand(HedyTester.number_comparison_commands)
   def test_comparison_with_string_gives_type_error(self, comparison):
     code = textwrap.dedent(f"""\
       a is 'text'
@@ -98,7 +145,7 @@ class TestsLevel14(HedyTester):
     )
 
 
-  @parameterized.expand(HedyTester.number_comparisons_commands)
+  @parameterized.expand(HedyTester.number_comparison_commands)
   def test_comparison_with_list_gives_type_error(self, comparison):
     code = textwrap.dedent(f"""\
       a is 1, 2, 3

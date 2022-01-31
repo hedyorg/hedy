@@ -1230,16 +1230,11 @@ function createModal(level:number ){
     });
     return editor;
   }
-export function toggle_developers_mode(example_programs: boolean) {
+export function toggle_developers_mode() {
   if ($('#developers_toggle').is(":checked")) {
-      $('#commands-window-total').hide();
       $('#adventures').hide();
       pushAchievement("lets_focus");
   } else {
-      // If the example programs are hidden by class customization: keep hidden!
-      if (example_programs) {
-        $('#commands-window-total').show();
-      }
       $('#adventures').show();
   }
 
@@ -1329,6 +1324,16 @@ export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
   window.open('?level=' + level + "&adventure=" + adventure, "_self");
+}
+
+export function filter_user_programs(username: string, own_request?: boolean) {
+  const level = $('#user_program_page_level').val();
+  const adventure = $('#user_program_page_adventure').val();
+  if (own_request) {
+    window.open('?level=' + level + "&adventure=" + adventure, "_self");
+  } else {
+    window.open('?user=' + username + '&level=' + level + "&adventure=" + adventure, "_self");
+  }
 }
 
 export function filter_admin() {

@@ -24,8 +24,22 @@ class LevelDefaults:
 
   def get_defaults_for_level(self, level):
     #grabs level defaults from yaml and converts to DefaultValues type
-    default_values = self.levels[level]
+    default_values = copy.deepcopy(self.levels[level])
 
+    # Sometimes we have multiple text and example_code -> iterate these and add as well!
+    extra_examples = []
+    for i in range(2, 10):
+      extra_example = {}
+      if default_values.get('intro_text_' + str(i)):
+        extra_example['intro_text'] = default_values.get('intro_text_' + str(i))
+        default_values.pop('intro_text_' + str(i))
+        if default_values.get('example_code_' + str(i)):
+          extra_example['example_code'] = default_values.get('example_code_' + str(i))
+          default_values.pop('example_code_' + str(i))
+        extra_examples.append(extra_example)
+      else:
+        break
+    default_values['extra_examples'] = extra_examples
     default_type = {
       "level": str(level),
     }
@@ -69,6 +83,8 @@ class DefaultValues:
 
   level = attr.ib()
   intro_text = attr.ib(default=None)
+  example_code = attr.ib(default=None)
+  extra_examples = attr.ib(default=None)
   start_code = attr.ib(default=None)
   commands = attr.ib(default=None)
 

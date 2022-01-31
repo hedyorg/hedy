@@ -69,7 +69,7 @@ export const auth = {
   destroy_public: function () {
     modal.confirm (auth.texts['are_you_sure'], function () {
       $.ajax ({type: 'POST', url: '/auth/destroy_public'}).done (function () {
-        auth.redirect ('programs');
+        auth.redirect ('my-profile');
       });
     });
   },
