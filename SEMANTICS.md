@@ -2195,10 +2195,6 @@ Level 11 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
-  </tr>
-  <tr>
     <td>for</td>
     <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
   </tr>
@@ -2413,10 +2409,6 @@ Level 12 supports:
   <tr>
     <td>if else</td>
     <td>boolean</td>
-  </tr>
-  <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
   </tr>
   <tr>
     <td>for</td>
@@ -2642,10 +2634,6 @@ Level 13 supports:
   <tr>
     <td>if else</td>
     <td>boolean</td>
-  </tr>
-  <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
   </tr>
   <tr>
     <td>for</td>
@@ -2883,10 +2871,6 @@ Level 14 supports:
   <tr>
     <td>if else</td>
     <td>boolean</td>
-  </tr>
-  <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
   </tr>
   <tr>
     <td>for</td>
@@ -3156,10 +3140,6 @@ Level 15 supports:
   <tr>
     <td>if else</td>
     <td>boolean</td>
-  </tr>
-  <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
   </tr>
   <tr>
     <td>for</td>
