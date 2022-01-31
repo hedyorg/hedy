@@ -1106,11 +1106,13 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures, restrictions = DATABASE.get_student_restrictions(load_adventures_per_level(g.lang, level),
-                                                                 current_user()['username'], level)
+    adventures = load_adventures_per_level(g.lang, level)
+    customizations = {}
+    if current_user()['username']:
+        customizations = DATABASE.get_student_class_customizations(current_user()['username'])
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
-    if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
+    if level not in level_defaults_for_lang.levels or level in customizations.get('hidden_levels', []):
         return utils.error_page(error=404, ui_message='no_such_level')
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
@@ -1121,7 +1123,7 @@ def index(level, step):
         level_number=level,
         version=version(),
         adventures=adventures,
-        restrictions=restrictions,
+        customizations=customizations,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
 

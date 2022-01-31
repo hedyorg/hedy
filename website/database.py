@@ -345,8 +345,8 @@ class Database:
         student_classes = self.get_student_classes(user)
         if student_classes:
             class_customizations = self.get_class_customizations(student_classes[0]['id'])
-            return class_customizations
-        return None
+            return class_customizations or {}
+        return {}
 
     def progress_by_username(self, username):
         return ACHIEVEMENTS.get({'username': username})
