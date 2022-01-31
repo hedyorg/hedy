@@ -24,7 +24,7 @@ class LevelDefaults:
 
   def get_defaults_for_level(self, level):
     #grabs level defaults from yaml and converts to DefaultValues type
-    default_values = self.levels[level]
+    default_values = copy.deepcopy(self.levels[level])
 
     # Sometimes we have multiple text and example_code -> iterate these and add as well!
     extra_examples = []
