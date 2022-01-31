@@ -1300,14 +1300,13 @@ function update_keywords_commands(target_id: any, start_lang: string, new_lang: 
       $('#' + target_id).attr('lang', new_lang);
       update_view(selector_container, new_lang);
     }
-  }).fail(function (xhr) {
-    console.error(xhr);
+  }).fail(function (err) {
+      modal.alert(err.responseText, 3000, true);
   });
 }
 
 function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {
-    console.log("Yes, hello! We should be with 2...");
     if ($(this).attr('lang') == new_lang) {
       $(this).show();
     } else {
