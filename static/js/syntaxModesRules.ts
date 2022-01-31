@@ -670,12 +670,17 @@ function keywordWithSpace(keyword: string) {
   // "word boundary" seems to be defined rather narrowly, and for whatever
   // reason does not work properly with non-ASCII languages.
   //
+  // Then, we tried negative lookbehind (?<!\p{L}), but lookbehinds are not
+  // really properly supported outside of Chrome.
+  //
+  // Instead, we'll look for start-of-string OR a non-letter character, and
+  // hope that the character we're consuming isn't part of something important.
+  //
+  // "Most of the time" users should be putting spaces there anyway, so it "should"
+  // be fine (*_*).
+
   // Instead, we'll do a negative lookbehind assertion for unicode letter.
-  return '(?<!\\p{L})' + keyword + ' ';
-  //                     keyword
-  //      (?<!      )    if it is not preceded by
-  //           \p{L}     something that Unicode considers a "letter"
-  //          \\         escape the backslash
+  return '(?:^|\\p{L})' + keyword + ' ';
 }
 
 /**
