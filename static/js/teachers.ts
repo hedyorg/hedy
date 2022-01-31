@@ -238,7 +238,6 @@ export function update_adventure(adventure_id: string, first_edit: boolean) {
    } else {
        update_db_adventure(adventure_id);
    }
-
 }
 
 export function preview_adventure() {
