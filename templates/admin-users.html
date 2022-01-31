@@ -96,9 +96,9 @@
     <tbody>
       {% for user in users %}
           <tr>
-            <td class="username_cell"><a href="programs?user={{user.username}}" target="_blank">{{user.username}}</a></td>
+            <td class="username_cell cursor-pointer"><a class="no-underline" onclick="window.open('/programs?user={{ user.username }}', '_blank');">{{user.username}}</a></td>
             <td class="count_cell">{{user.program_count or 0}}</td>
-            <td class="email_cell">{{user.email}}</td>
+            <td class="email_cell cursor-pointer"><a class="no-underline" onclick="hedyApp.auth.changeUserEmail ('{{user.username}}', '{{user.email}}')">{{user.email}}</a></td>
             <td class="created_cell">{{user.created}}</td>
             <td class="last_login_cell">{{user.last_login}}</td>
             <td class="birth_year_cell">{{user.birth_year}}</td>
