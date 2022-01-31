@@ -29,7 +29,7 @@
         <div class="flex flex-row flex-wrap items-center w-full border border-gray-400 py-2 px-4 rounded-lg">
             {% for i in range(1, max_level + 1) %}
                 <label class="inline-block w-24" for="{{ i }}">Level {{ i }}</label>
-                <input class="inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3 level_selector" level="{{ i }}" checked type="checkbox">
+                <input class="inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3 level_selector" level="{{ i }}" type="checkbox">
             {% endfor %}
         </div>
     </div>
@@ -51,7 +51,7 @@
                         {% for name, levels in adventure.items() %}
                             <td class="text-left">{{ name }}</td>
                             {% for i in range(1, max_level + 1) %}
-                                <td><input class="adventure_level_{{ loop.index }}" type="checkbox" {% if i not in levels %}disabled {% else %}checked{% endif %}></td>
+                                <td><input class="adventure_level_{{ loop.index }}" adventure="{{ key }}" level="{{ i }}" type="checkbox" {% if i not in levels %}disabled{% endif %}></td>
                             {% endfor %}
                         {% endfor %}
                      </tr>
@@ -61,7 +61,7 @@
         </div>
     </div>
      <div class="mt-4">
-         <button class="blue-btn" onclick="hedyApp.save_level_settings ('{{class_info.id}}', level)">{{auth.save}}</button>
+         <button class="blue-btn" onclick="hedyApp.save_customizations ('{{class_info.id}}')">{{auth.save}}</button>
          <button class="red-btn" onclick="hedyApp.reset_level_preferences (level)">{{auth.reset}}</button>
      </div>
     <div class="mt-4">
@@ -81,6 +81,7 @@ $(document).ready(function() {
         } else {
             $('.adventure_level_' + level).each(function(){
                 this.checked = false;
+
             });
         }
     });
