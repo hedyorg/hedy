@@ -673,14 +673,13 @@ function keywordWithSpace(keyword: string) {
   // Then, we tried negative lookbehind (?<!\p{L}), but lookbehinds are not
   // really properly supported outside of Chrome.
   //
-  // Instead, we'll look for start-of-string OR a non-letter character, and
-  // hope that the character we're consuming isn't part of something important.
-  //
-  // "Most of the time" users should be putting spaces there anyway, so it "should"
-  // be fine (*_*).
-
-  // Instead, we'll do a negative lookbehind assertion for unicode letter.
-  return '(?:^|\\p{L})' + keyword + ' ';
+  // Instead, we'll look for start-of-string OR a whitespace character. This
+  // means users now MUST type spaces in order to get syntax highlighting,
+  // whereas they might used to be able to get away with typing it directly
+  // after a parenthesis or '+' symbol or something... but since the symbol
+  // would be highlighted as well that's not desirable, and most of these commands
+  // for the start of the line anyway.
+  return '(?:^|\\s)' + keyword + ' ';
 }
 
 /**
