@@ -3,8 +3,8 @@
 {% block main %}
 <div class="px-8">
     <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
-    <div class="flex flex-row w-full items-center">
-        <h3 class="mt-0 mr-4 inline-block w-64">Algemene instellingen</h3>
+    <div class="flex flex-col">
+        <h3>Algemene instellingen</h3>
         <div>
             <div class="flex flex-col w-full border border-gray-400 py-2 px-4 rounded-lg">
                 <div class="flex flex-row">
@@ -24,12 +24,22 @@
             </div>
         </div>
     </div>
-    <div class="px-4 flex w-full flex-row border border-gray-400 mt-4 rounded-lg">
-        <div class="flex flex-col">
-            <h3>Level instellingen</h3>
-            <div>
-                Test
-            </div>
+    <div class="flex flex-col">
+        <h3>Level selecteren</h3>
+        <div class="flex flex-row flex-wrap items-center w-full border border-gray-400 py-2 px-4 rounded-lg">
+            {% for i in range(1, max_level + 1) %}
+                <label class="inline-block w-24" for="{{ i }}">Level {{ i }}</label>
+                <input class="inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" name="level_{{ i }}" type="checkbox">
+            {% endfor %}
+        </div>
+    </div>
+    <div class="flex flex-col">
+        <h3>Avonturen selecteren</h3>
+        <div class="grid grid-cols-{{ max_level+1 }}">
+            {% for adventure in adventures.items() %}
+                {{ adventure[1] }}
+                <br><br>
+            {% endfor %}
         </div>
     </div>
      <div class="mt-4">
