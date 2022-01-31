@@ -1279,9 +1279,10 @@ export function change_language(lang: string) {
     });
 }
 
-function update_keywords_commands(target_id: any, start_lang: string, goal_lang: string) {
+function update_keywords_commands(target_id: any, start_lang: string, new_lang: string, selector_container: string) {
+  // If the target isn't an ace editor -> There is nothing we can do!
   if (!ace.edit(target_id)) {
-    return
+    return;
   }
   $.ajax({
     type: 'POST',
@@ -1289,14 +1290,15 @@ function update_keywords_commands(target_id: any, start_lang: string, goal_lang:
     data: JSON.stringify({
       code: ace.edit(target_id).getValue(),
       start_lang: start_lang,
-      goal_lang: goal_lang
+      goal_lang: new_lang
     }),
     contentType: 'application/json',
     dataType: 'json'
   }).done(function (response: any) {
     if (response.success) {
       ace.edit(target_id).setValue(response.code);
-      $('#' + target_id).attr('lang', goal_lang);
+      $('#' + target_id).attr('lang', new_lang);
+      update_view(selector_container, new_lang);
     }
   }).fail(function (xhr) {
     console.error(xhr);
@@ -1305,6 +1307,7 @@ function update_keywords_commands(target_id: any, start_lang: string, goal_lang:
 
 function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {
+    console.log("Yes, hello! We should be with 2...");
     if ($(this).attr('lang') == new_lang) {
       $(this).show();
     } else {
@@ -1314,8 +1317,7 @@ function update_view(selector_container: string, new_lang: string) {
 }
 
 export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string) {
-  update_view(selector_container, new_lang);
-  update_keywords_commands(target_id, old_lang, new_lang);
+  update_keywords_commands(target_id, old_lang, new_lang, selector_container);
 }
 
 export function select_profile_image(image: number) {
