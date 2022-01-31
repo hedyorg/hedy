@@ -379,6 +379,16 @@ class TestsLevel5(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
+  def test_if_in_list_with_input_gives_type_error(self):
+    code = textwrap.dedent("""\
+    items is ask 'What are the items?'
+    if red in items print 'found!'""")
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   def test_equality_with_list_gives_error(self):
     code = textwrap.dedent("""\
     color is 5, 6, 7

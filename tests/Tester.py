@@ -23,9 +23,9 @@ class Snippet:
 class HedyTester(unittest.TestCase):
   level = None
   max_turtle_level = 10
-  number_comparisons_commands = ['>', '>=', '<', '<=']
-  comparison_commands = number_comparisons_commands + ['!=']
-  comparison_commands_with_double_equals = comparison_commands + ['==']
+  equality_comparison_commands = ['==', '=']
+  number_comparison_commands = ['>', '>=', '<', '<=']
+  comparison_commands = number_comparison_commands + ['!=']
 
   @staticmethod
   @contextmanager
@@ -126,7 +126,7 @@ class HedyTester(unittest.TestCase):
 
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
-        result = hedy.transpile(snippet.code, int(snippet.level))
+        result = hedy.transpile(snippet.code, int(snippet.level), snippet.language)
         all_commands = hedy.all_commands(snippet.code, snippet.level)
 
         if not result.has_turtle and (not 'ask' in all_commands) and (not 'input' in all_commands): #output from turtle cannot be captured

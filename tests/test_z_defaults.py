@@ -16,6 +16,7 @@ def collect_snippets(path):
     Hedy_snippets = []
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
     for file in files:
+        lang = file.split(".")[0]
         file = os.path.join(path, file)
         yaml = YamlFile.for_file(file)
 

@@ -36,10 +36,21 @@ class TestsLevel6(HedyTester):
     code = textwrap.dedent("""\
     antwoord is ask 'wat is je lievelingskleur?'""")
 
-
-
     expected = textwrap.dedent("""\
     antwoord = input(f'wat is je lievelingskleur?')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_chained_ask(self):
+    code = textwrap.dedent("""\
+    a is ask 'What is a?'
+    b is ask 'Are you sure a is ' a '?'
+    print a b""")
+
+    expected = textwrap.dedent("""\
+      a = input(f'What is a?')
+      b = input(f'Are you sure a is {a}?')
+      print(f'{a}{b}')""")
 
     self.single_level_tester(code=code, expected=expected)
 

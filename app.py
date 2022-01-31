@@ -61,7 +61,8 @@ ALL_LANGUAGES = {
     'bn': 'বাংলা',
     'hi': 'हिंदी',
     'id': 'Bahasa Indonesia',
-    'fy': 'Frysk'
+    'fy': 'Frysk',
+    'ar': 'عربى'
 }
 # Define fall back languages for adventures
 FALL_BACK_ADVENTURE = {
@@ -138,18 +139,32 @@ def load_adventures_per_level(lang, level):
         # if quizzes are not enabled, do not load it
         if short_name == 'end' and not config['quiz-enabled']:
             continue
-        all_adventures.append({
+        current_adventure = {
             'short_name': short_name,
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure['default_save_name'],
             'text': adventure['levels'][level].get('story_text', 'No Story Text'),
+            'example_code': adventure['levels'][level].get('example_code'),
             'start_code': adventure['levels'][level].get('start_code', ''),
             'loaded_program': '' if not loaded_programs.get(short_name) else {
                 'name': loaded_programs.get(short_name)['name'],
                 'code': loaded_programs.get(short_name)['code']
             }
-        })
+        }
+        #Sometimes we have multiple text and example_code -> iterate these and add as well!
+        extra_stories = []
+        for i in range(2, 10):
+            extra_story = {}
+            if adventure['levels'][level].get('story_text_' + str(i)):
+                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i))
+                if adventure['levels'][level].get('example_code_' + str(i)):
+                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i))
+                extra_stories.append(extra_story)
+            else:
+                break
+        current_adventure['extra_stories'] = extra_stories
+        all_adventures.append(current_adventure)
     # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
     all_adventures.append({
         'short_name': 'level',
@@ -680,8 +695,9 @@ def achievements_page():
     return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
                            template_achievements=achievement_translations, current_page='my-profile')
 
-def programs_page(request):
-    user = current_user()
+@app.route('/programs', methods=['GET'])
+@requires_login
+def programs_page(user):
     username = user['username']
     if not username:
         # redirect users to /login if they are not logged in
@@ -689,6 +705,7 @@ def programs_page(request):
         return redirect(url, code=302)
 
     from_user = request.args.get('user') or None
+    # If from_user -> A teacher is trying to view the user programs
     if from_user and not is_admin(user):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='not_teacher')
@@ -697,9 +714,26 @@ def programs_page(request):
             return utils.error_page(error=403, ui_message='not_enrolled')
 
     adventures = load_adventure_for_language(g.lang)
+    if hedy_content.Adventures(session['lang']).has_adventures():
+        adventures_names = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
+    else:
+        adventures_names = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
-    result = DATABASE.programs_for_user(from_user or username)
-    public_profile = DATABASE.get_public_profile_settings(username)
+    # We request our own page -> also get the public_profile settings
+    public_profile = None
+    if not from_user:
+        public_profile = DATABASE.get_public_profile_settings(username)
+
+    level = request.args.get('level', default=None, type=str)
+    adventure = request.args.get('adventure', default=None, type=str)
+    level = None if level == "null" else level
+    adventure = None if adventure == "null" else adventure
+
+    if level or adventure:
+        result = DATABASE.filtered_programs_for_user(from_user or username, level, adventure)
+    else:
+        result = DATABASE.programs_for_user(from_user or username)
+
     programs = []
     now = timems()
     for item in result:
@@ -711,7 +745,8 @@ def programs_page(request):
 
     return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
                            current_page='programs', from_user=from_user, adventures=adventures,
-                           public_profile=public_profile)
+                           filtered_level=level, filtered_adventure=adventure, adventure_names=adventures_names,
+                           public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
 
 
 @app.route('/logs/query', methods=['POST'])
@@ -726,11 +761,12 @@ def query_logs():
 
     class_id = body.get('class_id')
     if not is_admin(user):
-        if not class_id:
+        username_filter = body.get('username')
+        if not class_id or not username_filter:
             return 'unauthorized', 403
 
         class_ = DATABASE.get_class(class_id)
-        if not class_ or class_['teacher'] != user['username'] or body.get('username') not in class_.get('students'):
+        if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', []):
             return 'unauthorized', 403
 
     (exec_id, status) = log_fetcher.query(body)
@@ -1178,9 +1214,6 @@ def main_page(page):
     if page == "my-achievements":
         return achievements_page()
 
-    if page == 'programs':
-        return programs_page(request)
-
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
@@ -1234,15 +1267,22 @@ def explore():
     else:
         programs = DATABASE.get_all_explore_programs()
 
+    filtered_programs = []
     for program in programs:
-        program['code'] = "\n".join(program['code'].split("\n")[:4])
+        filtered_programs.append({
+            'username': program['username'],
+            'name': program['name'],
+            'level': program['level'],
+            'id': program['id'],
+            'code': "\n".join(program['code'].split("\n")[:4])
+        })
 
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
     else:
         adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
-    return render_template('explore.html', programs=programs,
+    return render_template('explore.html', programs=filtered_programs,
                            filtered_level=level,
                            achievement=achievement,
                            filtered_adventure=adventure,
@@ -1701,9 +1741,11 @@ def update_yaml():
 
 
 @app.route('/user/<username>')
-@requires_login
-def public_user_page(user, username):
-    user = DATABASE.user_by_username(username.lower())
+def public_user_page(username):
+    if not current_user()['username']:
+        return utils.error_page(error=403, ui_message='unauthorized')
+    username = username.lower()
+    user = DATABASE.user_by_username(username)
     if not user:
         return utils.error_page(error=404, ui_message='user_not_private')
     user_public_info = DATABASE.get_public_profile_settings(username)
