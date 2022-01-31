@@ -344,7 +344,7 @@ class Database:
     def get_student_class_customizations(self, user):
         student_classes = self.get_student_classes(user)
         if student_classes:
-            class_customizations = self.get_level_customizations_class(student_classes[0]['id'])
+            class_customizations = self.get_class_customizations(student_classes[0]['id'])
             return class_customizations
         return None
 
