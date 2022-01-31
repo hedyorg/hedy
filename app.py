@@ -139,18 +139,32 @@ def load_adventures_per_level(lang, level):
         # if quizzes are not enabled, do not load it
         if short_name == 'end' and not config['quiz-enabled']:
             continue
-        all_adventures.append({
+        current_adventure = {
             'short_name': short_name,
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure['default_save_name'],
             'text': adventure['levels'][level].get('story_text', 'No Story Text'),
+            'example_code': adventure['levels'][level].get('example_code'),
             'start_code': adventure['levels'][level].get('start_code', ''),
             'loaded_program': '' if not loaded_programs.get(short_name) else {
                 'name': loaded_programs.get(short_name)['name'],
                 'code': loaded_programs.get(short_name)['code']
             }
-        })
+        }
+        #Sometimes we have multiple text and example_code -> iterate these and add as well!
+        extra_stories = []
+        for i in range(2, 10):
+            extra_story = {}
+            if adventure['levels'][level].get('story_text_' + str(i)):
+                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i))
+                if adventure['levels'][level].get('example_code_' + str(i)):
+                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i))
+                extra_stories.append(extra_story)
+            else:
+                break
+        current_adventure['extra_stories'] = extra_stories
+        all_adventures.append(current_adventure)
     # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
     all_adventures.append({
         'short_name': 'level',

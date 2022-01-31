@@ -1189,16 +1189,11 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
     });
     return editor;
   }
-export function toggle_developers_mode(example_programs: boolean) {
+export function toggle_developers_mode() {
   if ($('#developers_toggle').is(":checked")) {
-      $('#commands-window-total').hide();
       $('#adventures').hide();
       pushAchievement("lets_focus");
   } else {
-      // If the example programs are hidden by class customization: keep hidden!
-      if (example_programs) {
-        $('#commands-window-total').show();
-      }
       $('#adventures').show();
   }
 
