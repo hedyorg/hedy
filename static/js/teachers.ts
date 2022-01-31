@@ -242,7 +242,7 @@ export function update_adventure(adventure_id: string, first_edit: boolean) {
 }
 
 export function preview_adventure() {
-    let content = <string>$('#custom_adventure_content').val();
+    let content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
     const name = <string>$('#custom_adventure_name').val();
     const level = <number>$('#custom_adventure_level').val();
     let container = $('<div>');
