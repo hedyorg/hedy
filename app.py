@@ -1792,8 +1792,10 @@ def teacher_invitation(code):
 # *** WSL CHECK
 def determine_expose_address():
     try:
-        if "wsl" not in os.uname().release.lower():
+        if "wsl" in os.uname().release.lower():
             return "127.0.0.1"
+        else:
+            return "0.0.0.0"
     except:
         return "0.0.0.0"
 
