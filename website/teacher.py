@@ -1,5 +1,6 @@
 import json
 
+import hedy
 from website.auth import requires_login, is_teacher, current_user
 import utils
 import uuid
@@ -212,12 +213,11 @@ def routes (app, database, achievements):
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-        levels = hedy_content.LevelDefaults(g.lang).levels
-        preferences = DATABASE.get_customizations_class(class_id)
+        customizations = DATABASE.get_class_customizations(class_id)
 
         return render_template('customize-class.html', page_title=hedyweb.get_page_title('customize class'),
-                               class_info={'name': Class['name'], 'id': Class['id']}, levels=levels,
-                               adventures=adventures, preferences=preferences, current_page='my-profile')
+                               class_info={'name': Class['name'], 'id': Class['id']}, max_level=hedy.HEDY_MAX_LEVEL,
+                               adventures=adventures, customizations=customizations, current_page='my-profile')
 
     @app.route('/customize-class/<class_id>', methods=['PUT'])
     @requires_login

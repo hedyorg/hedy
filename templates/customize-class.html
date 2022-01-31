@@ -6,7 +6,7 @@
  <div class="mt-4 w-full" id="explanation_text">
  </div>
  <div class="mt-4 text-center" id="customize_level_button_container">
-     {% for level in levels %}
+     {% for level in range(1, max_level) %}
          <button class="{% if level == 1 %} blue-btn {% else %} green-btn {% endif %} ltr:mr-4 rtl:ml-4 mt-2 w-32" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
      {% endfor %}
  </div>
@@ -21,7 +21,7 @@
                          {% for name, levels in name_levels.items() %}
                              {% for level in levels %}
                                  <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{key_name}}">
-                                     <input type="checkbox" name="adventures" class="ltr:mr-4 rtl:ml-4" value="" {% if preferences[level] and key_name not in preferences[level]['adventures'] %} unchecked {% else %} checked {% endif %}>
+                                     <input type="checkbox" name="adventures" class="ltr:mr-4 rtl:ml-4" value="">
                                      <label style>{{ name }}</label>
                                  </li>
                              {% endfor %}
@@ -31,16 +31,14 @@
                  </div>
              </form>
          </div>
-         {% for level in levels %}
+         {% for level in range(1, max_level) %}
              <div class="other_settings {% if level != 1 %} hidden {% endif %}" level="{{level}}">
                 <h4>{{auth.other_settings}}</h4>
                      <div class="mb-4">
-                         <label class="inline-block w-3/4" for="example_programs">{{auth.example_programs}}</label><input type="checkbox" id="example_programs{{ level }}" name="example_program"
-                                                                                                                value=""{% if preferences[level] and not preferences[level]['example_programs'] %}unchecked{% else %}checked{% endif %}>
+                         <label class="inline-block w-3/4" for="example_programs">{{auth.example_programs}}</label><input type="checkbox" id="example_programs{{ level }}" name="example_program" value="">
                      </div>
                      <div class="mb-4">
-                         <label class="inline-block w-3/4" for="hide_level">{{auth.hide_level}}</label><input type="checkbox" id="hide_level{{ level }}" name="hide_level"
-                                                                                                              value="" {% if preferences[level] and preferences[level]['hide'] %}checked{% endif %}>
+                         <label class="inline-block w-3/4" for="hide_level">{{auth.hide_level}}</label><input type="checkbox" id="hide_level{{ level }}" name="hide_level" value="">
                      </div>
              </div>
          {% endfor %}
