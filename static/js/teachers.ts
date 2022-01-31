@@ -2,9 +2,6 @@ import { modal, error } from './modal';
 import { auth } from './auth';
 import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
-import createPurify from "dompurify";
-const purify = createPurify();
-
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
     if (!class_name) {
@@ -212,12 +209,7 @@ export function create_adventure() {
 function update_db_adventure(adventure_id: string) {
    const adventure_name = $('#custom_adventure_name').val();
    const level = $('#custom_adventure_level').val();
-   let content = <string>$('#custom_adventure_content').val();
-   console.log(content);
-   content = purify.sanitize(content);
-   console.log(content);
-   return;
-
+   const content = $('#custom_adventure_content').val();
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-adventure',
