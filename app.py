@@ -1261,9 +1261,10 @@ def explore():
     adventure = None if adventure == "null" else adventure
 
     achievement = None
-    if (level or adventure) and current_user()['username']:
+    if level or adventure:
         programs = DATABASE.get_filtered_explore_programs(level, adventure)
-        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
+        if current_user()['username']:
+            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
         programs = DATABASE.get_all_explore_programs()
 
