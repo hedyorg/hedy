@@ -2,36 +2,50 @@
 
 {% block main %}
 <div class="px-8">
-    <h2>Create multiple student accounts</h2>
+    <h2>Meerdere accounts aanmaken</h2>
+    <!--
+    <div class="flex flex-row items-center mb-4 border rounded-lg px-4 py-2">
+        <h4 class="inline-block w-64 mt-0">Accounts toevoegen</h4>
+        <select id="explore_page_level" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+            <option disabled selected value="">Aantal</option>
+            {% for i in range(1, (10 + 1)) %}
+                <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+        <button class="green-btn">Toevoegen</button>
+    </div>
+    -->
     <div>
-        <div class="flex flex-col">
-            <div class="flex flex-row w-3/4 mb-4">
-                <div class="flex flex-col">
-                    <label class="font-bold mb-2 px-4">Username</label>
-                    <input id="username" name="username" type=text placeholder="Username..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                </div>
-                <div class="flex flex-col">
-                    <label class="font-bold mb-2 px-4">E-mail</label>
-                    <input id="mail" name="mail"  type=email placeholder="E-mail..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                </div>
-                <div class="flex flex-col">
-                    <label class="font-bold mb-2 px-4">Password</label>
-                    <input id="password" name="password"  type=password placeholder="Password..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                </div>
-            </div>
-            {% for i in range(4) %}
-                <div class="flex flex-row w-3/4 mb-4">
+        <h3 class="px-4">Accounts</h3>
+        <div class="flex flex-col border rounded-lg px-4 py-2">
+            {% for i in range(10) %}
+                <div class="flex flex-row w-full items-center mb-4" id="account_row_{{ i }}">
                     <div class="flex flex-col">
-                        <input id="username" name="username" type=text placeholder="Username..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                        <input id="username" name="username" required type=text placeholder="Gebruikersnaam" class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                     </div>
                     <div class="flex flex-col">
-                        <input id="mail" name="mail"  type=email placeholder="E-mail..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                        <input id="mail" name="mail" required type=email placeholder="E-mail" class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                     </div>
                     <div class="flex flex-col">
-                        <input id="password" name="password"  type=password placeholder="Password..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                        <input id="password" name="password" required type=password placeholder="Wachtwoord" class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                     </div>
+                    <div class="flex flex-col">
+                        <select id="classes" required class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                            <option value="" selected disabled>Klas kiezen</option>
+                            {% for class in classes %}
+                                <option value="">{{ class.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <svg class="fill-current h-full w-40 text-red-500 ltr:ml-4 rtl:mr-4 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="$('#account_row_{{ i }}').remove();" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
                 </div>
             {% endfor %}
+        </div>
+        <div class="flex flex-row mt-4">
+            <div class="ltr:ml-auto">
+                <button type="reset" class="red-btn" onclick="window.open('/for-teachers/create-accounts', '_self');">Wissen</button>
+                <button type="submit" class="green-btn ltr:ml-4 rtl:mr-4 px-4">Aanmaken</button>
+            </div>
         </div>
     </div>
 </div>

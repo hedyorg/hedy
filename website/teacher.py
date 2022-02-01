@@ -322,7 +322,10 @@ def routes (app, database, achievements):
     def create_accounts(user):
         if not is_teacher(user):
             return 'Only teachers can create multiple accounts', 403
-        return render_template('create-accounts.html')
+
+        classes = DATABASE.get_teacher_classes(user['username'], False)
+
+        return render_template('create-accounts.html', classes=classes)
 
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
