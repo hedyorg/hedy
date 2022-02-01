@@ -280,3 +280,32 @@ export function add_account_placeholders() {
         row.appendTo("#account_rows_container");
     }
 }
+
+export function create_accounts() {
+    modal.confirm ("Are you sure you want to create these accounts?", function () {
+        let accounts: {}[] = [];
+        $('.account_row').each(function () {
+            if ($(this).is(':visible')) { //We want to skip the hidden first "copy" row
+                let account = {};
+                $(this).find(':input').each(function () {
+                    // @ts-ignore
+                    account[$(this).attr("name")] = $(this).val();
+                });
+                accounts.push(account);
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/for-teachers/create-accounts',
+            data: JSON.stringify({
+                accounts: accounts
+            }),
+            contentType: 'application/json',
+            dataType: 'json'
+        }).done(function (response) {
+            modal.alert(response.success, 3000, false);
+        }).fail(function (err) {
+            modal.alert(err.responseText, 3000, true);
+        });
+    });
+}

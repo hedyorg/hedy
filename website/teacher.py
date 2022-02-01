@@ -322,11 +322,21 @@ def routes (app, database, achievements):
     def create_accounts(user):
         if not is_teacher(user):
             return 'Only teachers can create multiple accounts', 403
-
         classes = DATABASE.get_teacher_classes(user['username'], False)
 
         return render_template('create-accounts.html', classes=classes)
 
+    @app.route('/for-teachers/create-accounts', methods=['POST'])
+    @requires_login
+    def store_accounts(user):
+        if not is_teacher(user):
+            return 'Only teachers can create multiple accounts', 403
+        classes = DATABASE.get_teacher_classes(user['username'], False)
+
+        body = request.json
+        print(body)
+
+        return {}, 200
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):
