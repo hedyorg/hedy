@@ -282,7 +282,7 @@ export function add_account_placeholders() {
 }
 
 export function create_accounts() {
-    modal.confirm ("Are you sure you want to create these accounts?", function () {
+    modal.confirm (auth.texts['create_accounts_prompt'], function () {
         $('#account_rows_container').find(':input').each(function () {
             $(this).removeClass('border-2 border-red-500');
         });
@@ -291,7 +291,7 @@ export function create_accounts() {
             if ($(this).is(':visible')) { //We want to skip the hidden first "copy" row
                 let account = {};
                 $(this).find(':input').each(function () {
-                    // @ts-ignore
+                    // @ts-ignore -> Not sure why TypeScript has issues, this should be valid
                     account[$(this).attr("name")] = $(this).val();
                 });
                 accounts.push(account);
