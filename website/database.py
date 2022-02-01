@@ -334,8 +334,8 @@ class Database:
     def delete_class_customizations(self, class_id):
         CUSTOMIZATIONS.delete({'id': class_id})
 
-    def update_class_customizations(self, level_customizations):
-        CUSTOMIZATIONS.put(level_customizations)
+    def update_class_customizations(self, customizations):
+        CUSTOMIZATIONS.put(customizations)
 
     def get_class_customizations(self, class_id):
         customizations = CUSTOMIZATIONS.get({'id': class_id})
