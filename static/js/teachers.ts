@@ -275,21 +275,25 @@ export function save_customizations(class_id: string) {
       dataType: 'json'
     }).done(function (response) {
       modal.alert(response.success, 3000, false);
+      $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
       modal.alert(err.responseText, 3000, true);
     });
 }
 
 export function remove_customizations(class_id: string) {
-    $.ajax({
-      type: 'DELETE',
-      url: '/for-teachers/customize-class/' + class_id,
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function (response) {
-      modal.alert(response.success, 3000, false);
-    }).fail(function (err) {
-      modal.alert(err.responseText, 3000, true);
+    modal.confirm (auth.texts['remove_customizations_prompt'], function () {
+        $.ajax({
+            type: 'DELETE',
+            url: '/for-teachers/customize-class/' + class_id,
+            contentType: 'application/json',
+            dataType: 'json'
+        }).done(function (response) {
+            modal.alert(response.success, 3000, false);
+            $('#remove_customizations_button').addClass('hidden');
+        }).fail(function (err) {
+            modal.alert(err.responseText, 3000, true);
+        });
     });
 }
 

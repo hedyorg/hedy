@@ -70,9 +70,7 @@
      <div class="mt-4 flex flex-row">
          <button class="blue-btn ltr:mr-4 rtl:ml-4" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{auth.save}}</button>
          <button class="yellow-btn text-white" onclick="$('.adventure_level_input').prop('checked', false);">Reset alle avonturen</button>
-         {% if customizations %}
-             <button class="red-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.remove_customizations('{{class_info.id}}')">Verwijder personalisatie</button>
-         {% endif %}
+         <button class="red-btn ltr:ml-auto rtl:mr-auto {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">Verwijder personalisatie</button>
      </div>
     <div class="mt-4">
         <button class="green-btn" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>

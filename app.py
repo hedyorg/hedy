@@ -1117,6 +1117,12 @@ def index(level, step):
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
+    # Todo: We have to retrieve the personal_adventures as well! If they exist we want to show them before all others
+    # Possible implementation idea:
+    # Only store the adventure_id in the customizations -> retrieve all at runtime
+    # If level corresponds with our current level -> add, otherwise empty
+    # However, this might be expensive as we always perform a db call in this call, but it might be the best solution
+
     return hedyweb.render_code_editor_with_tabs(
         level_defaults=defaults,
         max_level=max_level,
