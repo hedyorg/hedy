@@ -309,8 +309,8 @@ class Database:
         for student_id in Class.get ('students', []):
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
-        CUSTOMIZATIONS.del_many({'id': Class['id']})
         INVITATIONS.del_many({'class_id': Class['id']})
+        CUSTOMIZATIONS.delete({'id': Class['id']})
         CLASSES.delete({'id': Class['id']})
 
     def resolve_class_link(self, link_id):
