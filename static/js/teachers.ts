@@ -291,6 +291,8 @@ export function remove_customizations(class_id: string) {
         }).done(function (response) {
             modal.alert(response.success, 3000, false);
             $('#remove_customizations_button').addClass('hidden');
+            $('.adventure_level_input').prop('checked', false);
+            $('.level_selector').prop('checked', false);
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
         });

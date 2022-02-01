@@ -229,7 +229,7 @@ def routes (app, database, achievements):
             return utils.error_page(error=404, ui_message='no_such_class')
 
         DATABASE.delete_class_customizations(class_id)
-        return {}, 200
+        return {'success': g.auth_texts.get('customization_deleted')}, 200
 
     @app.route('/for-teachers/customize-class/<class_id>', methods=['POST'])
     @requires_login
@@ -263,7 +263,7 @@ def routes (app, database, achievements):
         }
 
         DATABASE.update_class_customizations(customizations)
-        return {}, 200
+        return {'success': g.auth_texts.get('class_customize_success')}, 200
 
     @app.route('/invite_student', methods=['POST'])
     @requires_login
