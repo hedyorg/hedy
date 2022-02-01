@@ -74,7 +74,7 @@ class HedyTester(unittest.TestCase):
       res.append(t)
     return res
     
-  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None):
+  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None, lang='en'):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
 
@@ -93,7 +93,7 @@ class HedyTester(unittest.TestCase):
     # Or use expect to check for an expected Python program
     # In the second case, you can also pass an extra function to check
     for level in range(self.level, max_level + 1):
-      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands)
+      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands, lang=lang)
       print(f'Passed for level {level}')
 
   def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en'):

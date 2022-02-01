@@ -38,13 +38,20 @@ class TestsLevel3(HedyTester):
       expected = textwrap.dedent("""\
       vbd60ecd50ef1238a3f6a563bcfb1d331 = ['احمد', 'خالد', 'حسن']""")
 
-      self.single_level_tester(code=code, expected=expected, lang='ar')
+      self.multi_level_tester(
+        code=code,
+        max_level=6,
+        expected=expected,
+        lang='ar')
 
   def test_assign_arabic_comma(self):
     code = "animals is cat، dog، platypus"
     expected = "animals = ['cat', 'dog', 'platypus']"
 
-    self.single_level_tester(code=code, expected=expected)
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected)
 
   def test_assign_comma_arabic(self):
     code = "صديقي هو احمد، خالد، حسن"
