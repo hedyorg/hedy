@@ -265,7 +265,6 @@ export function save_customizations(class_id: string) {
 }
 
 export function reset_customizations() {
-    $('.level_selector').prop("checked", false);
     $('.adventure_level_input').prop("checked", false);
 }
 
