@@ -401,15 +401,11 @@ def routes (app, database, achievements):
                 'last_login': utils.timems()
             }
 
-            print(user)
             DATABASE.store_user(user)
-
             if account.get('class'):
-                print("We willen ook in een klas!")
-                print("Dat is deze:" + account.get('class'))
-                class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')]
-                print(class_id)
-                DATABASE.add_student_to_class(class_id, username)
+                class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]
+                if class_id:
+                    DATABASE.add_student_to_class(class_id, username)
 
             send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
         return {'success': g.auth_texts.get('accounts_created')}, 200
