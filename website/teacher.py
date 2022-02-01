@@ -351,7 +351,7 @@ def routes (app, database, achievements):
                 return g.auth_texts.get('email_invalid'), 400
             if not isinstance(account.get('password'), str):
                 return g.auth_texts.get('password_invalid'), 400
-            if len(account.get('password') < 6):
+            if len(account.get('password')) < 6:
                 return g.auth_texts.get('passwords_six'), 400
             if not isinstance(account.get('class'), str):
                 return g.auth_texts.get('class_invalid'), 400
