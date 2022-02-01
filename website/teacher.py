@@ -346,22 +346,26 @@ def routes (app, database, achievements):
         # Validation for correct types and duplicates
         for account in body.get('accounts', []):
             if not isinstance(account.get('username'), str):
-                return "username invalid", 400
-            if not isinstance(account.get('mail'), str) or not utils.valid_email(body['email']):
-                return "mail invalid", 400
-            if not isinstance(account.get('password'), str) or len(account.get('password') < 6):
-                return "password invalid", 400
+                return g.auth_texts.get('username_invalid'), 400
+            if not isinstance(account.get('mail'), str) or not utils.valid_email(account.get('mail')):
+                return g.auth_texts.get('email_invalid'), 400
+            if not isinstance(account.get('password'), str):
+                return g.auth_texts.get('password_invalid'), 400
+            if len(account.get('password') < 6):
+                return g.auth_texts.get('passwords_six'), 400
             if not isinstance(account.get('class'), str):
-                return "class invalid", 400
+                return g.auth_texts.get('class_invalid'), 400
 
             if account.get('username') in usernames:
-                return "every username needs to be unique", 400
-            else:
-                usernames.append(account.get('username'))
+                return g.auth_texts.get('unique_usernames'), 400
+            usernames.append(account.get('username'))
+
             if account.get('mail') in mails:
-                return "every mail address needs to be unique", 400
-            else:
-                mails.append(account.get('mail'))
+                return g.auth_texts.get('unique_emails'), 400
+            mails.append(account.get('mail'))
+
+        usernames = []
+        mails = []
 
         # Validation for duplicates in the db
         class_names = [i.get('name') for i in DATABASE.get_teacher_classes(user['username'], False)]
@@ -370,10 +374,16 @@ def routes (app, database, achievements):
                 return "not your class", 400
             user = DATABASE.user_by_username(account['username'].strip().lower())
             if user:
-                return "username already exists", 403
+                usernames.append(account.get('username'))
             email = DATABASE.user_by_email(account['email'].strip().lower())
             if email:
-                return "mail already exists", 403
+                mails.append(account.get('mail'))
+
+        # If we find some usernames or mail addresses that already exist -> return values: turn red!
+        if len(usernames) > 0:
+            return {'error': g.auth_texts.get('usernames_exist'), 'values': usernames}, 400
+        if len(mails) > 0:
+            return {'error': g.auth_texts.get('mails_exist'), 'values': mails}, 400
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):

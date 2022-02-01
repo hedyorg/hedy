@@ -305,6 +305,7 @@ export function create_accounts() {
         }).done(function (response) {
             modal.alert(response.success, 3000, false);
         }).fail(function (err) {
+            console.log(err);
             modal.alert(err.responseText, 3000, true);
         });
     });
