@@ -231,8 +231,6 @@ export function save_customizations(class_id: string) {
         // @ts-ignore
         adventures[name] = [];
     });
-    console.log(adventures);
-
     $('.adventure_level_input').each(function() {
         const name = <string>$(this).attr('adventure');
         // @ts-ignore
@@ -243,8 +241,8 @@ export function save_customizations(class_id: string) {
             adventures[name] = current_list;
         }
     });
-
     console.log(class_id);
+    console.log(adventures);
 }
 
  export  function reset_level_preferences(level: number) {
