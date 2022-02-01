@@ -235,7 +235,7 @@ export function save_customizations(class_id: string) {
         const name = <string>$(this).attr('adventure');
         // @ts-ignore
         let current_list = adventures[name];
-        if ($(this).prop("checked", true)) {
+        if ($(this).prop("checked")) {
             current_list.push(<string>$(this).attr('level'));
             // @ts-ignore
             adventures[name] = current_list;
@@ -244,14 +244,4 @@ export function save_customizations(class_id: string) {
     console.log(class_id);
     console.log(adventures);
 }
-
- export  function reset_level_preferences(level: number) {
-     $('#adventures_overview li').each(function() {
-         if ($(this).is(':visible')) {
-             $(this).find(':input').prop("checked", true);
-         }
-     });
-     $('#example_programs' + level).prop("checked", true);
-     $('#hide_level' + level).prop("checked", false);
- }
 
