@@ -10,9 +10,12 @@
             <ol>
                 <li>Selecteer de levels voor jouw klas</li>
                     <ul class="mt-0 pt-0">
-                        <li>Automatisch verschijnen de avonturen die voor deze levels beschikbaar zijn</li>
+                        <li>Er verschijnen "checkboxes" voor de beschikbare avonturen voor deze levels</li>
                     </ul>
                 <li>Selecteer de avonturen die je beschikbaar wilt maken</li>
+                    <ul class="mt-0 pt-0">
+                        <li>Klik op de naam van een avontuur om deze voor alle levels te selecteren</li>
+                    </ul>
                 <li>Voeg eventueel persoonlijke avonturen toe</li>
                 <li>Kies "opslaan" -> je bent helemaal klaar!</li>
             </ol>
@@ -48,11 +51,11 @@
                     {% for key, adventure in adventures.items() %}
                      <tr>
                         {% for name, levels in adventure.items() %}
-                            <td class="text-left adventure_keys border-t border-r border-gray-400" adventure="{{ key }}">{{ name }}</td>
+                            <td class="text-left adventure_keys border-t border-r border-gray-400 cursor-pointer" onclick="hedyApp.select_all_levels_adventure('{{ key }}');" adventure="{{ key }}">{{ name }}</td>
                             {% for i in range(1, max_level + 1) %}
                                 <td class="border-t border-gray-400">
                                     {% if i in levels %}<input class="adventure_level_{{ loop.index }} adventure_level_input
-                                        {% if customizations and i not in customizations['levels'] %}hidden{% endif %}"
+                                        {% if not customizations or i not in customizations['levels'] %}hidden{% endif %}"
                                         adventure="{{ key }}" level="{{ i }}"
                                         {% if customizations and customizations['adventures'][key] and i in customizations['adventures'][key] %}
                                             checked

@@ -241,7 +241,6 @@ def routes (app, database, achievements):
             return utils.error_page(error=404, ui_message='no_such_class')
 
         body = request.json
-        print(body)
         #Validations
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
