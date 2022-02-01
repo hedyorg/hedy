@@ -362,9 +362,9 @@ def routes (app, database, achievements):
             mails.append(account.get('mail'))
 
         # Validation for duplicates in the db
-        class_names = [i.get('name') for i in DATABASE.get_teacher_classes(user['username'], False)]
+        classes = DATABASE.get_teacher_classes(user['username'], False)
         for account in body.get('accounts', []):
-            if account.get('class') and account['class'] not in class_names:
+            if account.get('class') and account['class'] not in [i.get('name') for i in classes]:
                 return "not your class", 400
             user = DATABASE.user_by_username(account.get('username').strip().lower())
             if user:
@@ -402,6 +402,9 @@ def routes (app, database, achievements):
             }
 
             DATABASE.store_user(user)
+            if account.get('class'):
+                class_id = [i.get('id') for i in classes if i.get('name') == account.get('name')]
+                DATABASE.add_student_to_class(class_id, username)
 
             send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
         return {}, 200
