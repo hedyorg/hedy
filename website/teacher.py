@@ -1,6 +1,8 @@
 import json
+import urllib
 
-from website.auth import requires_login, is_teacher, current_user
+from website.auth import requires_login, is_teacher, current_user, make_salt, MAILCHIMP_API_URL, \
+    mailchimp_subscribe_user, send_email, send_email_template, email_base_url
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
@@ -331,11 +333,79 @@ def routes (app, database, achievements):
     def store_accounts(user):
         if not is_teacher(user):
             return 'Only teachers can create multiple accounts', 403
-        classes = DATABASE.get_teacher_classes(user['username'], False)
-
         body = request.json
-        print(body)
+        #Validations
+        if not isinstance(body, dict):
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('accounts'), list):
+            return "accounts should be a list!", 400
 
+        usernames = []
+        mails = []
+
+        # Validation for correct types and duplicates
+        for account in body.get('accounts', []):
+            if not isinstance(account.get('username'), str):
+                return "username invalid", 400
+            if not isinstance(account.get('mail'), str) or not utils.valid_email(body['email']):
+                return "mail invalid", 400
+            if not isinstance(account.get('password'), str) or len(account.get('password') < 6):
+                return "password invalid", 400
+            if not isinstance(account.get('class'), str):
+                return "class invalid", 400
+
+            if account.get('username') in usernames:
+                return "every username needs to be unique", 400
+            else:
+                usernames.append(account.get('username'))
+            if account.get('mail') in mails:
+                return "every mail address needs to be unique", 400
+            else:
+                mails.append(account.get('mail'))
+
+        # Validation for duplicates in the db
+        class_names = [i.get('name') for i in DATABASE.get_teacher_classes(user['username'], False)]
+        for account in body.get('accounts', []):
+            if account.get('class') not in class_names:
+                return "not your class", 400
+            user = DATABASE.user_by_username(account['username'].strip().lower())
+            if user:
+                return "username already exists", 403
+            email = DATABASE.user_by_email(account['email'].strip().lower())
+            if email:
+                return "mail already exists", 403
+
+        # Now -> actually store the users in the db
+        for account in body.get('accounts', []):
+            hashed = hash(account['password'], make_salt())
+            token = make_salt()
+            hashed_token = hash(token, make_salt())
+            username = account['username'].strip().lower()
+            email = account['mail'].strip().lower()
+
+            if not utils.is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
+                # If we have a Mailchimp API key, we use it to add the subscriber through the API
+                if MAILCHIMP_API_URL:
+                    mailchimp_subscribe_user(email)
+                # Otherwise, we send an email to notify about the subscription to the main email address
+                else:
+                    send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
+
+            if not utils.is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
+                send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+
+            user = {
+                'username': username,
+                'password': hashed,
+                'email':    email,
+                'created':  utils.timems(),
+                'verification_pending': hashed_token,
+                'last_login': utils.timems()
+            }
+
+            DATABASE.store_user(user)
+
+            send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
         return {}, 200
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
