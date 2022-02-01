@@ -225,7 +225,7 @@ export function show_doc_section(section_key: string) {
 
 //https://stackoverflow.com/questions/7196212/how-to-create-dictionary-and-add-key-value-pairs-dynamically?rq=1
 export function save_customizations(class_id: string) {
-    let levels = [];
+    let levels: (string | undefined)[] = [];
     $('.level_selector').each(function() {
         if ($(this).prop("checked")) {
             levels.push($(this).attr('level'));
