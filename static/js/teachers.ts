@@ -256,8 +256,8 @@ export function save_level_settings(id: string, level: number) {
          location.reload ();
        }
      }).fail(function(err) {
-       // @ts-ignore
-         console.error(err.error);
+       console.error(err);
+       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
      });
  }
 
@@ -283,6 +283,9 @@ export function add_account_placeholders() {
 
 export function create_accounts() {
     modal.confirm ("Are you sure you want to create these accounts?", function () {
+        $('#account_rows_container').find(':input').each(function () {
+            $(this).removeClass('border-2 border-red-500');
+        });
         let accounts: {}[] = [];
         $('.account_row').each(function () {
             if ($(this).is(':visible')) { //We want to skip the hidden first "copy" row
@@ -303,9 +306,17 @@ export function create_accounts() {
             contentType: 'application/json',
             dataType: 'json'
         }).done(function (response) {
+            if (response.error) {
+                modal.alert(response.error, 3000, true);
+                $('#account_rows_container').find(':input').each(function () {
+                    if ($(this).val() == response.value) {
+                        $(this).addClass('border-2 border-red-500');
+                    }
+                });
+                return;
+            }
             modal.alert(response.success, 3000, false);
         }).fail(function (err) {
-            console.log(err.responseText);
             modal.alert(err.responseText, 3000, true);
         });
     });
