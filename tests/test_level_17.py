@@ -300,14 +300,22 @@ class TestsLevel17(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
-  def test_equality_with_list_gives_error(self):
+  def test_equality_with_lists(self):
     code = textwrap.dedent("""\
-      color is [5, 6, 7]
-      if 1 is color:
-          a is 1""")
+      m is [1, 2]
+      n is [1, 2]
+      if m is n:
+        a is 1""")
+
+    expected = textwrap.dedent("""\
+      m = [1, 2]
+      n = [1, 2]
+      if str(m) == str(n):
+        a = 1""")
+
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException
+      expected=expected
     )
 
   def test_equality_with_incompatible_types_gives_error(self):

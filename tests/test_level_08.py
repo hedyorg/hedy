@@ -106,6 +106,25 @@ class TestsLevel8(HedyTester):
       expected=expected
     )
 
+  def test_equality_with_lists(self):
+    code = textwrap.dedent("""\
+      m is 1, 2
+      n is 1, 2
+      if m is n
+        print 'success!'""")
+
+    expected = textwrap.dedent("""\
+      m = ['1', '2']
+      n = ['1', '2']
+      if str(m) == str(n):
+        print(f'success!')""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected
+    )
+
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
     items is red
@@ -117,15 +136,15 @@ class TestsLevel8(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
-  def test_equality_with_list_gives_error(self):
+  def test_equality_with_test_and_list_gives_error(self):
     code = textwrap.dedent("""\
     color is 5, 6, 7
     if red is color
         print 'success!'""")
     self.multi_level_tester(
-      max_level=12,
+      max_level=11,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException
+      exception=hedy.exceptions.InvalidTypeCombinationException
     )
 
   def test_repeat_with_indent(self):
