@@ -276,6 +276,7 @@ export function save_customizations(class_id: string) {
     }).done(function (response) {
       modal.alert(response.success, 3000, false);
       $('#remove_customizations_button').removeClass('hidden');
+      $('#customizations_alert').addClass('hidden');
     }).fail(function (err) {
       modal.alert(err.responseText, 3000, true);
     });
@@ -291,6 +292,7 @@ export function remove_customizations(class_id: string) {
         }).done(function (response) {
             modal.alert(response.success, 3000, false);
             $('#remove_customizations_button').addClass('hidden');
+            $('#customizations_alert').removeClass('hidden');
             $('.adventure_level_input').prop('checked', false);
             $('.level_selector').prop('checked', false);
         }).fail(function (err) {
