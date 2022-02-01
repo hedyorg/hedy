@@ -229,8 +229,21 @@ export function save_customizations(class_id: string) {
     $('.adventure_keys').each(function() {
         const name = <string>$(this).attr('adventure');
         // @ts-ignore
-        adventures[name] = {};
+        adventures[name] = [];
     });
+    console.log(adventures);
+
+    $('.adventure_level_input').each(function() {
+        const name = <string>$(this).attr('adventure');
+        // @ts-ignore
+        let current_list = adventures[name];
+        if ($(this).prop("checked", true)) {
+            current_list.push(<string>$(this).attr('level'));
+            // @ts-ignore
+            adventures[name] = current_list;
+        }
+    });
+
     console.log(class_id);
 }
 
