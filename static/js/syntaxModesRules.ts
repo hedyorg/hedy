@@ -491,7 +491,7 @@ function rule_isAsk(next?: string) {
  */
 function rule_is(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( ' + currentLang._IS + ' )',
+    regex: '(\[0-9a-zA-Zء-ي]+)( ' + currentLang._IS + ' )',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
