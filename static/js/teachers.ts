@@ -2,6 +2,23 @@ import { modal, error } from './modal';
 import { auth } from './auth';
 import {showAchievements} from "./app";
 
+// Because we don't put this inside a function it always works on the change!
+$('.level_selector').change(function() {
+    const level = $(this).attr('level');
+    if ($(this).prop("checked")) {
+        $('.adventure_level_' + level).each(function(){
+            $(this).removeClass('hidden');
+            if ($(this).is(':enabled')) {
+                $(this).prop("checked", true);
+            }
+        });
+    } else {
+        $('.adventure_level_' + level).each(function(){
+            $(this).addClass('hidden');
+        });
+    }
+});
+
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
     if (!class_name) {
@@ -231,8 +248,7 @@ export function save_customizations(class_id: string) {
             levels.push($(this).attr('level'));
         }
     });
-
-    var adventures = {};
+    let adventures = {};
     $('.adventure_keys').each(function() {
         const name = <string>$(this).attr('adventure');
         // @ts-ignore

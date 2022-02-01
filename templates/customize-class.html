@@ -41,7 +41,10 @@
                                 <td class="border-t border-gray-400">
                                     {% if i in levels %}<input class="adventure_level_{{ loop.index }} adventure_level_input
                                         {% if customizations and i not in customizations['levels'] %}hidden{% endif %}"
-                                        adventure="{{ key }}" level="{{ i }}" {% if customizations and i in customizations['adventures'][key] %} checked {% endif %} type="checkbox">
+                                        adventure="{{ key }}" level="{{ i }}"
+                                        {% if customizations and customizations['adventures'][key] and i in customizations['adventures'][key] %}
+                                            checked
+                                        {% endif %} type="checkbox">
                                     {% endif %}
                                 </td>
                             {% endfor %}
@@ -60,23 +63,4 @@
         <button class="green-btn" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
     </div>
 </div>
-<script>
-$(document).ready(function() {
-    $('.level_selector').change(function() {
-        const level = $(this).attr('level');
-        if (this.checked) {
-            $('.adventure_level_' + level).each(function(){
-                $(this).removeClass('hidden');
-                if ($(this).is(':enabled')) {
-                    this.checked = true;
-                }
-            });
-        } else {
-            $('.adventure_level_' + level).each(function(){
-                $(this).addClass('hidden');
-            });
-        }
-    });
-});
-</script>
 {% endblock %}
