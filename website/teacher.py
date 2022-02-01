@@ -2,7 +2,7 @@ import json
 import urllib
 
 from website.auth import requires_login, is_teacher, MAILCHIMP_API_URL, \
-    mailchimp_subscribe_user, send_email, send_email_template, email_base_url, make_salt
+    mailchimp_subscribe_user, send_email, send_email_template, email_base_url, make_salt, hash
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
@@ -407,7 +407,7 @@ def routes (app, database, achievements):
             if account.get('class'):
                 print("We willen ook in een klas!")
                 print("Dat is deze:" + account.get('class'))
-                class_id = [i.get('id') for i in classes if i.get('name') == account.get('name')]
+                class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')]
                 print(class_id)
                 DATABASE.add_student_to_class(class_id, username)
 
