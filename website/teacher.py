@@ -353,9 +353,6 @@ def routes (app, database, achievements):
                 return g.auth_texts.get('password_invalid'), 400
             if len(account.get('password')) < 6:
                 return g.auth_texts.get('passwords_six'), 400
-            if not isinstance(account.get('class'), str):
-                return g.auth_texts.get('class_invalid'), 400
-
             if account.get('username') in usernames:
                 return g.auth_texts.get('unique_usernames'), 400
             usernames.append(account.get('username'))
@@ -364,20 +361,17 @@ def routes (app, database, achievements):
                 return g.auth_texts.get('unique_emails'), 400
             mails.append(account.get('mail'))
 
-        usernames = []
-        mails = []
-
         # Validation for duplicates in the db
         class_names = [i.get('name') for i in DATABASE.get_teacher_classes(user['username'], False)]
         for account in body.get('accounts', []):
-            if account.get('class') not in class_names:
+            if account.get('class') and account['class'] not in class_names:
                 return "not your class", 400
             user = DATABASE.user_by_username(account.get('username').strip().lower())
             if user:
-                usernames.append(account.get('username'))
+                g.auth_texts.get('exists_username') + ": " + account.get('username') , 403
             email = DATABASE.user_by_email(account.get('mail').strip().lower())
             if email:
-                mails.append(account.get('mail'))
+                g.auth_texts.get('exists_email') + ": " + account.get('mail'), 403
 
         # If we find some usernames or mail addresses that already exist -> return values: turn red!
         if len(usernames) > 0:
