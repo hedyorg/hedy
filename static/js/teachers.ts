@@ -309,7 +309,7 @@ export function create_accounts() {
             if (response.error) {
                 modal.alert(response.error, 3000, true);
                 $('#account_rows_container').find(':input').each(function () {
-                    if ($(this).val() == response.value) {
+                    if ((<string>$(this).val()).trim().toLowerCase() == response.value) {
                         $(this).addClass('border-2 border-red-500');
                     }
                 });

@@ -353,13 +353,13 @@ def routes (app, database, achievements):
                 return g.auth_texts.get('password_invalid'), 400
             if len(account.get('password')) < 6:
                 return g.auth_texts.get('passwords_six'), 400
-            if account.get('username') in usernames:
-                return g.auth_texts.get('unique_usernames'), 400
-            usernames.append(account.get('username'))
 
-            if account.get('mail') in mails:
-                return g.auth_texts.get('unique_emails'), 400
-            mails.append(account.get('mail'))
+            if account.get('username').strip().lower() in usernames:
+                return {'error': g.auth_texts.get('unique_usernames'), 'value': account.get('username')}, 200
+            usernames.append(account.get('username').strip().lower())
+            if account.get('mail').strip().lower() in mails:
+                return {'error': g.auth_texts.get('unique_emails'), 'value': account.get('mail')}, 200
+            mails.append(account.get('mail').strip().lower())
 
         # Validation for duplicates in the db
         classes = DATABASE.get_teacher_classes(user['username'], False)
@@ -368,10 +368,10 @@ def routes (app, database, achievements):
                 return "not your class", 400
             user = DATABASE.user_by_username(account.get('username').strip().lower())
             if user:
-                return {'error': g.auth_texts.get('usernames_exist'), 'value': account.get('username')}, 200
+                return {'error': g.auth_texts.get('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
             email = DATABASE.user_by_email(account.get('mail').strip().lower())
             if email:
-                return {'error': g.auth_texts.get('emails_exist'), 'value': account.get('mail')}, 200
+                return {'error': g.auth_texts.get('emails_exist'), 'value': account.get('mail').strip().lower()}, 200
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):
