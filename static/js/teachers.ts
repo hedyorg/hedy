@@ -133,7 +133,7 @@ export function invite_student(class_id: string) {
       }).done(function() {
           location.reload();
       }).fail(function(err) {
-          return modal.alert(err.responseText);
+          return modal.alert(err.responseText, 3000, true);
       });
   });
 }
@@ -152,7 +152,7 @@ export function remove_student_invite(username: string, class_id: string) {
       }).done(function () {
           location.reload();
       }).fail(function (err) {
-          return modal.alert(err.responseText);
+          return modal.alert(err.responseText, 3000, true);
       });
   });
 }
