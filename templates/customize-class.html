@@ -3,11 +3,23 @@
 {% block main %}
 <div class="px-8">
     <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
-    <div class="w-full px-4">
-        Hoi! Hier kun je jouw klas personaliseren. Selecteer eerst levels die voor jouw leerlingen beschikbaar mogen zijn.
-        De leerlingen kunnen dan alleen deze Hedy levels bezoeken en in programmeren. Kies vervolgens de avonturen die je beschikbaar wilt maken.
-        <b>Let op:</b> Niet elk avontuur is voor elk level beschikbaar! Als laatste kun je jouw zelfgemaakt avonturen toevoegen aan de levels.
-        Deze kunnen alleen worden toegevoegd aan de levels waarvoor ze gemaakt zijn. Succes!
+    <div class="w-full ltr:pr-4 rtl:pl-4">
+        Hoi! Hier kun je jouw klas personaliseren. Door het selecteren van levels en avonturen kun je kiezen wat jouw leerlingen kunnen zien.
+        Ook kun je jouw zelfgemaakte avonturen aan levels toevoegen. <b>Let op:</b> Niet elk avontuur is voor elk level beschikbaar! Het instellen gaat als volgt:
+        <div class="border border-gray-400 w-3/4 rounded-lg px-2 py-1 my-2">
+            <ol>
+                <li>Selecteer de levels voor jouw klas</li>
+                    <ul class="mt-0 pt-0">
+                        <li>Automatisch verschijnen de avonturen die voor deze levels beschikbaar zijn</li>
+                    </ul>
+                <li>Selecteer de avonturen die je beschikbaar wilt maken</li>
+                <li>Voeg eventueel persoonlijke avonturen toe</li>
+                <li>Kies "opslaan" -> je bent helemaal klaar!</li>
+            </ol>
+        </div>
+        Je kunt deze instellingen altijd op een later moment wijzigen. Zo kun je bijvoorbeeld tijdens het les geven nieuwe avonturen of levels beschikbaar maken.
+        Hierdoor is het voor leerlingen (en voor de leraar!) makkelijker om te kiezen waar aan gewerkt kan worden en wat er geleerd wordt.
+        Als je alles beschikbaar wilt maken voor jouw klas kun je het beste de "personalisatie" verwijderen, doe dit met de "verwijder" knop beneden in het scherm.
     </div>
     <div class="flex flex-col">
         <h3>Levels selecteren</h3>
@@ -55,9 +67,12 @@
             </table>
         </div>
     </div>
-     <div class="mt-4">
-         <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{auth.save}}</button>
-         <button class="red-btn" onclick="hedyApp.reset_customizations()">Wis alle avonturen</button>
+     <div class="mt-4 flex flex-row">
+         <button class="blue-btn ltr:mr-4 rtl:ml-4" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{auth.save}}</button>
+         <button class="yellow-btn text-white" onclick="$('.adventure_level_input').prop('checked', false);">Reset alle avonturen</button>
+         {% if customizations %}
+             <button class="red-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.remove_customizations('{{class_info.id}}')">Verwijder personalisatie</button>
+         {% endif %}
      </div>
     <div class="mt-4">
         <button class="green-btn" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>

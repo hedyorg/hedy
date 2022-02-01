@@ -219,9 +219,21 @@ def routes (app, database, achievements):
                                class_info={'name': Class['name'], 'id': Class['id']}, max_level=hedy.HEDY_MAX_LEVEL,
                                adventures=adventures, customizations=customizations, current_page='my-profile')
 
+    @app.route('/for-teachers/customize-class/<class_id>', methods=['DELETE'])
+    @requires_login
+    def delete_customizations(user, class_id):
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_class')
+        Class = DATABASE.get_class(class_id)
+        if not Class or Class['teacher'] != user['username']:
+            return utils.error_page(error=404, ui_message='no_such_class')
+
+        DATABASE.delete_class_customizations(class_id)
+        return {}, 200
+
     @app.route('/for-teachers/customize-class/<class_id>', methods=['POST'])
     @requires_login
-    def update_level_customizations(user, class_id):
+    def update_customizations(user, class_id):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='retrieve_class')
         Class = DATABASE.get_class(class_id)
