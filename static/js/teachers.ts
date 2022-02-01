@@ -225,6 +225,13 @@ export function show_doc_section(section_key: string) {
 
 //https://stackoverflow.com/questions/7196212/how-to-create-dictionary-and-add-key-value-pairs-dynamically?rq=1
 export function save_customizations(class_id: string) {
+    let levels = [];
+    $('.level_selector').each(function() {
+        if ($(this).prop("checked")) {
+            levels.push($(this).attr('level'));
+        }
+    });
+
     var adventures = {};
     $('.adventure_keys').each(function() {
         const name = <string>$(this).attr('adventure');
@@ -242,6 +249,7 @@ export function save_customizations(class_id: string) {
         }
     });
     console.log(class_id);
+    console.log(levels);
     console.log(adventures);
 }
 
