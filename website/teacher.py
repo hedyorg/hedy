@@ -193,6 +193,7 @@ def routes (app, database, achievements):
             return g.auth_texts.get('ajax_error'), 400
 
         DATABASE.remove_student_from_class (Class['id'], student_id)
+        achievement = None
         if Class['teacher'] == user['username']:
             achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "detention")
         if achievement:
