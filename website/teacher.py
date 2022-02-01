@@ -355,10 +355,10 @@ def routes (app, database, achievements):
                 return g.auth_texts.get('passwords_six'), 400
 
             if account.get('username').strip().lower() in usernames:
-                return {'error': g.auth_texts.get('unique_usernames'), 'value': account.get('username')}, 200
+                return {'error': g.auth_texts.get('unique_usernames'), 'value': account.get('username').strip().lower()}, 200
             usernames.append(account.get('username').strip().lower())
             if account.get('mail').strip().lower() in mails:
-                return {'error': g.auth_texts.get('unique_emails'), 'value': account.get('mail')}, 200
+                return {'error': g.auth_texts.get('unique_emails'), 'value': account.get('mail').strip().lower()}, 200
             mails.append(account.get('mail').strip().lower())
 
         # Validation for duplicates in the db

@@ -308,14 +308,21 @@ export function create_accounts() {
         }).done(function (response) {
             if (response.error) {
                 modal.alert(response.error, 3000, true);
+                console.log(response.value);
                 $('#account_rows_container').find(':input').each(function () {
+                    console.log($(this).val());
+                    console.log((<string>$(this).val()).trim().toLowerCase());
                     if ((<string>$(this).val()).trim().toLowerCase() == response.value) {
                         $(this).addClass('border-2 border-red-500');
                     }
                 });
                 return;
+            } else {
+                modal.alert(response.success, 3000, false);
+                $('#account_rows_container').find(':input').each(function () {
+                   $(this).val("");
+                });
             }
-            modal.alert(response.success, 3000, false);
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
         });
