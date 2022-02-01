@@ -368,16 +368,10 @@ def routes (app, database, achievements):
                 return "not your class", 400
             user = DATABASE.user_by_username(account.get('username').strip().lower())
             if user:
-                g.auth_texts.get('exists_username') + ": " + account.get('username') , 403
+                return {'error': g.auth_texts.get('usernames_exist'), 'value': account.get('username')}, 400
             email = DATABASE.user_by_email(account.get('mail').strip().lower())
             if email:
-                g.auth_texts.get('exists_email') + ": " + account.get('mail'), 403
-
-        # If we find some usernames or mail addresses that already exist -> return values: turn red!
-        if len(usernames) > 0:
-            return {'error': g.auth_texts.get('usernames_exist'), 'values': usernames}, 400
-        if len(mails) > 0:
-            return {'error': g.auth_texts.get('mails_exist'), 'values': mails}, 400
+                return {'error': g.auth_texts.get('mails_exist'), 'value': account.get('mail')}, 400
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):

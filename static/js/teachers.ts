@@ -256,8 +256,8 @@ export function save_level_settings(id: string, level: number) {
          location.reload ();
        }
      }).fail(function(err) {
-       console.error(err);
-       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+       // @ts-ignore
+         console.error(err.error);
      });
  }
 
@@ -305,6 +305,7 @@ export function create_accounts() {
         }).done(function (response) {
             modal.alert(response.success, 3000, false);
         }).fail(function (err) {
+            console.log(err.responseText);
             modal.alert(err.responseText, 3000, true);
         });
     });
