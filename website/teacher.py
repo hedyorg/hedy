@@ -317,6 +317,14 @@ def routes (app, database, achievements):
         DATABASE.remove_class_invite(username)
         return {}, 200
 
+    @app.route('/for-teachers/create-accounts', methods=['GET'])
+    @requires_login
+    def create_accounts(user):
+        if not is_teacher(user):
+            return 'Only teachers can create multiple accounts', 403
+        return render_template('create-accounts.html')
+
+
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):
         Class = DATABASE.resolve_class_link (link_id)

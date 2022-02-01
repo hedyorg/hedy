@@ -1,0 +1,38 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+    <h2>Create multiple student accounts</h2>
+    <div>
+        <div class="flex flex-col">
+            <div class="flex flex-row w-3/4 mb-4">
+                <div class="flex flex-col">
+                    <label class="font-bold mb-2 px-4">Username</label>
+                    <input id="username" name="username" type=text placeholder="Username..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                </div>
+                <div class="flex flex-col">
+                    <label class="font-bold mb-2 px-4">E-mail</label>
+                    <input id="mail" name="mail"  type=email placeholder="E-mail..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                </div>
+                <div class="flex flex-col">
+                    <label class="font-bold mb-2 px-4">Password</label>
+                    <input id="password" name="password"  type=password placeholder="Password..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                </div>
+            </div>
+            {% for i in range(4) %}
+                <div class="flex flex-row w-3/4 mb-4">
+                    <div class="flex flex-col">
+                        <input id="username" name="username" type=text placeholder="Username..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                    </div>
+                    <div class="flex flex-col">
+                        <input id="mail" name="mail"  type=email placeholder="E-mail..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                    </div>
+                    <div class="flex flex-col">
+                        <input id="password" name="password"  type=password placeholder="Password..." class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
