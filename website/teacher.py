@@ -219,45 +219,14 @@ def routes (app, database, achievements):
                                class_info={'name': Class['name'], 'id': Class['id']}, max_level=hedy.HEDY_MAX_LEVEL,
                                adventures=adventures, customizations=customizations, current_page='my-profile')
 
-    @app.route('/customize-class/<class_id>', methods=['PUT'])
+    @app.route('/for-teachers/customize-class/<class_id>', methods=['POST'])
     @requires_login
-    def update_level_preferences(user, class_id):
+    def update_level_customizations(user, class_id):
         if not is_teacher(user):
             return 'Only teachers can update class preferences', 403
 
         body = request.json
         print(body)
-        # Validations
-        if not isinstance(body, dict):
-            return 'body must be an object', 400
-        if not isinstance(body.get('example_programs'), bool):
-            return 'amount of example programs must be an integer', 400
-        if not isinstance(body.get('hide_level'), bool):
-            return 'level switch must be a boolean', 400
-        if not isinstance(body.get('hide_prev_level'), bool):
-            return 'level switch must be a boolean', 400
-        if not isinstance(body.get('hide_next_level'), bool):
-            return 'level switch must be a boolean', 400
-        if not isinstance(int(body.get('level')), int):
-            return 'level must ben an integer', 400
-
-        Class = DATABASE.get_class(class_id)
-        if not Class or Class['teacher'] != user['username']:
-            return 'No such class', 404
-
-        customizations = {}
-        customizations['id'] = class_id
-        customizations['level'] = int(body.get('level'))
-        customizations['adventures'] = body.get('adventures')
-        customizations['example_programs'] = body.get('example_programs')
-        customizations['hide'] = body.get('hide_level')
-        customizations['hide_prev_level'] = body.get('hide_prev_level')
-        customizations['hide_next_level'] = body.get('hide_next_level')
-
-        DATABASE.update_customizations_class(customizations)
-        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "my_class_my_rules")
-        if achievement:
-            return {'achievement': achievement}, 200
         return {}, 200
 
     @app.route('/invite_student', methods=['POST'])

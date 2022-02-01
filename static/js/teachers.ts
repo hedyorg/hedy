@@ -248,8 +248,24 @@ export function save_customizations(class_id: string) {
             adventures[name] = current_list;
         }
     });
-    console.log(class_id);
-    console.log(levels);
-    console.log(adventures);
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/customize-class/' + class_id,
+      data: JSON.stringify({
+          levels: levels,
+          adventures: adventures
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+      modal.alert(response.success, 3000, false);
+    }).fail(function (err) {
+      modal.alert(err.responseText, 3000, true);
+    });
+}
+
+export function reset_customizations() {
+    $('.level_selector').prop("checked", false);
+    $('.adventure_level_input').prop("checked", false);
 }
 
