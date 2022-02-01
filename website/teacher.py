@@ -189,10 +189,11 @@ def routes (app, database, achievements):
     @requires_login
     def leave_class (user, class_id, student_id):
         Class = DATABASE.get_class (class_id)
-        if not Class or Class ['teacher'] != user ['username'] or student_id != user ['username']:
-            return 'No such class', 404
+        if not Class or (Class['teacher'] != user['username'] and student_id != user['username']):
+            return g.auth_texts.get('ajax_error'), 400
 
-        DATABASE.remove_student_from_class (Class ['id'], student_id)
+        DATABASE.remove_student_from_class (Class['id'], student_id)
+        achievement = None
         if Class['teacher'] == user['username']:
             achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "detention")
         if achievement:
