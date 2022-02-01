@@ -32,7 +32,7 @@
         <div class="flex flex-col flex-wrap h-24 border border-gray-400 px-4 pt-2 rounded-lg">
             {% for i in range(1, max_level + 1) %}
                 <div class="flex flex-row items-center">
-                    <label class="inline-block w-24" for="{{ i }}">Level {{ i }}</label>
+                    <label class="inline-block w-24" for="{{ i }}">{{ ui.level_title }} {{ i }}</label>
                     <input class="inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3 level_selector" level="{{ i }}" {% if customizations and i in customizations['levels'] %}checked{% endif %} type="checkbox">
                 </div>
             {% endfor %}
@@ -44,7 +44,7 @@
             <table class="table-auto w-full text-center customize_adventure_overview">
                 <thead>
                     <tr>
-                        <th class="w-40 text-left border-r border-gray-400">Adventure / Level</th>
+                        <th class="w-40 text-left border-r border-gray-400">{{ ui.adventure }} / {{ ui.level_title }}</th>
                         {% for i in range(1, max_level + 1) %}
                             <th class="w-12">{{ i }}</th>
                         {% endfor %}
