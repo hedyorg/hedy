@@ -372,10 +372,10 @@ def routes (app, database, achievements):
         for account in body.get('accounts', []):
             if account.get('class') not in class_names:
                 return "not your class", 400
-            user = DATABASE.user_by_username(account['username'].strip().lower())
+            user = DATABASE.user_by_username(account.get('username').strip().lower())
             if user:
                 usernames.append(account.get('username'))
-            email = DATABASE.user_by_email(account['email'].strip().lower())
+            email = DATABASE.user_by_email(account.get('mail').strip().lower())
             if email:
                 mails.append(account.get('mail'))
 
