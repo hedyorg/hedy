@@ -49,7 +49,7 @@
                     {% for key, adventure in adventures.items() %}
                      <tr>
                         {% for name, levels in adventure.items() %}
-                            <td class="text-left">{{ name }}</td>
+                            <td class="text-left adventure_keys" adventure="{{ key }}">{{ name }}</td>
                             {% for i in range(1, max_level + 1) %}
                                 <td><input class="adventure_level_{{ loop.index }}" adventure="{{ key }}" level="{{ i }}" type="checkbox" {% if i not in levels %}disabled{% endif %}></td>
                             {% endfor %}

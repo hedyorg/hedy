@@ -224,7 +224,16 @@ export function show_doc_section(section_key: string) {
 }
 
 export function save_customizations(class_id: string) {
-    console.log(class_id)
+    var adventures: { key: string | undefined; value: number; }[] = [];
+    $('.adventure_keys').each(function() {
+        const name = $(this).attr('adventure');
+        adventures.push({
+            key: name,
+            value: 0
+        })
+    });
+    console.log(class_id);
+    console.log(adventures);
 }
 
  export  function reset_level_preferences(level: number) {
