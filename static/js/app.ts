@@ -458,7 +458,7 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
-function storeProgram(level: number | [number, string], lang: string, name: string, code: string, parse_error?: boolean, cb?: (err: any, resp?: any) => void) {
+function storeProgram(level: number | [number, string], lang: string, name: string, code: string, parse_error: boolean, cb?: (err: any, resp?: any) => void) {
   window.State.unsaved_changes = false;
 
     var adventure_name = window.State.adventure_name;
@@ -509,7 +509,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     });
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, parse_error?: boolean, cb?: (err: any, resp?: any) => void) {
+export function saveit(level: number | [number, string], lang: string, name: string, code: string, parse_error: boolean, cb?: (err: any, resp?: any) => void) {
   error.hide();
   success.hide();
 
@@ -638,22 +638,34 @@ function verify_call_index(level:number, lang: string, id: string | true, index:
     });
 }
 
-function get_code_by_id(id: string) {
-  console.log(id);
-  return "prit hello world!"
+function get_parse_code_by_id(id: string) {
+  $.ajax({
+      type: 'POST',
+      url: '/parse_by_id',
+      data: JSON.stringify({
+        id: id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+      if (response.error) {
+        return true;
+      } return false;
+    }).fail(function (err) {
+      console.log(err);
+    });
+  return false;
 }
 
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
-
   if (!Public) {
-    // The request comes from the programs page -> we have to retrieve the program first
-    let code = ""
+    // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
     if (id !== true) {
-      code = get_code_by_id(id);
-    } else {
-      code = get_trimmed_code();
+      const parse_error = get_parse_code_by_id(id);
+      return verify_call_index(level, lang, id, index, Public, parse_error);
     }
+    const code = get_trimmed_code();
     $.ajax({
       type: 'POST',
       url: '/parse',
