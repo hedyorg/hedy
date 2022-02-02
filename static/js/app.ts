@@ -458,7 +458,7 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
-function storeProgram(level: number | [number, string], lang: string, name: string, code: string, parse_error: boolean, cb?: (err: any, resp?: any) => void) {
+function storeProgram(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
   window.State.unsaved_changes = false;
 
     var adventure_name = window.State.adventure_name;
@@ -476,7 +476,6 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
         lang:  lang,
         name:  name,
         code:  code,
-        error: parse_error,
         adventure_name: adventure_name
       }),
       contentType: 'application/json',
@@ -509,7 +508,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     });
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, parse_error: boolean, cb?: (err: any, resp?: any) => void) {
+export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
   error.hide();
   success.hide();
 
@@ -537,11 +536,11 @@ export function saveit(level: number | [number, string], lang: string, name: str
     }).done(function(response) {
       if (response['duplicate']) {
         modal.confirm (auth.texts['overwrite_warning'], function () {
-          storeProgram(level, lang, name, code, parse_error, cb);
+          storeProgram(level, lang, name, code, cb);
           pushAchievement("double_check");
         });
       } else {
-         storeProgram(level, lang, name, code, parse_error, cb);
+         storeProgram(level, lang, name, code, cb);
       }
     });
   } catch (e: any) {
@@ -555,7 +554,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
  */
 export function saveitP(level: number | [number, string], lang: string, name: string, code: string) {
   return new Promise<any>((ok, ko) => {
-    saveit(level, lang, name, code, false, (err, response) => {
+    saveit(level, lang, name, code, (err, response) => {
       if (err) {
         ko(err);
       } else {
@@ -592,13 +591,14 @@ function change_shared (shared: boolean, index: number) {
   }
 }
 
-function share_function(id: string, index: number, Public: boolean) {
+function share_function(id: string, index: number, Public: boolean, parse_error: boolean) {
   $.ajax({
       type: 'POST',
       url: '/programs/share',
       data: JSON.stringify({
         id: id,
-        public: Public
+        public: Public,
+        error: parse_error
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -623,18 +623,18 @@ function share_function(id: string, index: number, Public: boolean) {
 
 function verify_call_index(level:number, lang: string, id: string | true, index: number, Public: boolean, parse_error: boolean) {
   // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
-  if (id !== true) return share_function(id, index, Public);
+  if (id !== true) return share_function(id, index, Public, parse_error);
   // Otherwise, we save the program and then share it.
   // Saving the program makes things way simpler for many reasons: it covers the cases where:
   // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
   const name = `${$('#program_name').val()}`;
   const code = get_trimmed_code();
-  return saveit(level, lang, name, code, parse_error, (err: any, resp: any) => {
+  return saveit(level, lang, name, code, (err: any, resp: any) => {
       if (err && err.Warning)
         return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
       if (err && err.Error)
         return error.show(ErrorMessages['Transpile_error'], err.Error);
-      share_function(resp.id, index, Public);
+      share_function(resp.id, index, Public, parse_error);
     });
 }
 
@@ -665,7 +665,6 @@ export function share_program (level: number, lang: string, id: string | true, i
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   if (Public) {
     // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
-    console.log(id);
     if (id !== true) {
       return get_parse_code_by_id(level, lang, id,  index, Public);
     } else {
@@ -681,7 +680,6 @@ export function share_program (level: number, lang: string, id: string | true, i
         contentType: 'application/json',
         dataType: 'json'
       }).done(function (response) {
-        console.log(response);
         if (response.Error) {
           modal.confirm("This program contains an error, are you sure you want to share it?", function () {
             verify_call_index(level, lang, id, index, Public, true);

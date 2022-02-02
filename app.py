@@ -569,19 +569,12 @@ def parse_by_id(user):
     if not isinstance(body.get('id'), str):
         return 'class id must be a string', 400
 
-    print(body)
-
     program = DATABASE.program_by_id(body.get('id'))
-    print(program)
     if program and program.get('username') == user['username']:
-        print("Dit is jouw programma!")
         try:
-            print("We gaan proberen te parsen")
             hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
-            print("Dat gaat goed!")
             return {}, 200
         except:
-            print("Dat gaat niet goed!")
             return {"error": "parsing error"}, 200
     else:
         return 'this is not your program!', 400
@@ -1625,6 +1618,8 @@ def share_unshare_program(user):
         return 'id must be a string', 400
     if not isinstance(body.get('public'), bool):
         return 'public must be a boolean', 400
+    if not isinstance(body.get('error'), bool):
+        return 'parse error must be a boolean', 400
 
     result = DATABASE.program_by_id(body['id'])
     if not result or result['username'] != user['username']:
@@ -1635,7 +1630,7 @@ def share_unshare_program(user):
     if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
         DATABASE.set_favourite_program(user['username'], None)
 
-    DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
+    DATABASE.set_program_public_by_id(body['id'], bool(body['public']), bool(body['error']))
     achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
     if achievement:
         return jsonify({'achievement': achievement, 'id': body['id']})
