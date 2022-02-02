@@ -1,6 +1,7 @@
 title: "Hedy documentation"
 sections:
     - title: "Pengenalan Hedy"
+      key: "intro"
       subsections:
         - title: "Apa itu Hedy?"
           text: |
@@ -29,6 +30,7 @@ sections:
             Jadi laptop, chromebooks, tablet, ataupun perangkat mobile dapat digunakan untuk menggunakan Hedy.
             Tidak ada kebutuhan untuk unduh apapun agar dapat menggunakan Hedy, guru hanya perlu ke websitenya dan memulainya!
     - title: "Persiapan-persiapan"
+      key: "preparations"
       subsections:
         - title: "Login (masuk ke website)"
           text: |
@@ -43,6 +45,7 @@ sections:
             Guru dapat menyimpan proyek-proyek guru dengan memberikan nama di bar putih dan menekan tombol hijau Save Code.
             Mari memulai pemrograman yang menyenangkan!
     - title: "Mengajar dengan Hedy"
+      key: "teaching"
       subsections:
         - title: ""
           text: |
@@ -78,13 +81,13 @@ sections:
             Bagaimana mereka belajar dari kesalahan-kesalahan mereka? Dan tentu saja: Apa yang mereka berhasil buat?
             Para siswa cenderung bangga atas hasil kreasi mereka sendiri, jadi adalah baik untuk menyediakan waktu dan kesempatan bagi para siswa untuk menampilkan karya mereka di depan teman-temannya.
     - title: "Kesalahan-kesalahan yang sering terjadi"
-      subsections:
-        - title: ""
-          text: |
-            Para siswa dapat belajar dari kesalahan-kesalahan mereka, terutama dalam pemrograman! Kesalahan tidak dapat terhindarkan dan ini adalah sebuah peluang baik untuk belajar.
-            Namun untuk para guru, mencari solusi untuk kesalahan-kesalahan yang ada dapat menjadi menantang! Terutama ketika kode program yang ada semakin panjang seiring meningkatnya level.
-            Karenanya, kami menyediakan daftar kesalahan-kesalahan umum pada setiap level, beserta solusinya.
-        - title: "Kesalahan-kesalahan yang sering terjadi di level 1"
+      key: "common_mistakes"
+      intro: |
+          Para siswa dapat belajar dari kesalahan-kesalahan mereka, terutama dalam pemrograman! Kesalahan tidak dapat terhindarkan dan ini adalah sebuah peluang baik untuk belajar.
+          Namun untuk para guru, mencari solusi untuk kesalahan-kesalahan yang ada dapat menjadi menantang! Terutama ketika kode program yang ada semakin panjang seiring meningkatnya level.
+          Karenanya, kami menyediakan daftar kesalahan-kesalahan umum pada setiap level, beserta solusinya.
+      levels:
+        - level: 1
           text: |
             Berikut adalah kesalahan-kesalahan yang sering dilakukan para siswa pada level 1:
 
@@ -95,7 +98,7 @@ sections:
             Kura-kura (Turtle):
             - Siswa membiarkan panahnya bergerak keluar layar, dan berpikir bahwa kodenya tidak berjalan. Mereka harus menggunakan angka-angka yang lebih kecil.
             - Siswa tidak tahu bagaimana membuat sang kura-kura berjalan mundur. Kura-kura dapat berjalan mundur dengan menggunakan angka negatif, misalnya -100.
-        - title: "Kesalahan-kesalahan yang sering terjadi di level 2"
+        - level: 2
           text: |
             Berikut adalah kesalahan-kesalahan yang sering dilakukan para siswa pada level 2:
 
@@ -124,7 +127,7 @@ sections:
             print binatang terbaik adalah…
             print hewan at random
             </pre>
-        - title: "Kesalahan-kesalahan yang sering terjadi di level 3"
+        - level: 3
           text: |
             Berikut adalah kesalahan-kesalahan yang sering dilakukan para siswa pada level 3:
 
@@ -132,7 +135,7 @@ sections:
             - Siswa lupa menggunakan tanda kutip satu di awal dan akhir teks yang akan ditampilkan menggunakan perintah `print`.
             - Siswa menggunakan tanda kutip satu yang salah. Tanda kutip yang benar adalah ' yang kamu temukan disebelah tombol enter pada kebanyakan keyboard. Tanda kutip lainnya seperti tanda kutip dua &quot; atau kutip satu miring `` (ditemukan di sisi kiri dengan ~) tidak akan berfungsi.
             - Siswa lupa menggunakan tanda kutip satu di perintah `ask`.
-        - title: "Kesalahan-kesalahan yang sering terjadi di level 4"
+        - level: 4
           text: |
             Berikut adalah kesalahan-kesalahan yang sering dilakukan para siswa pada level 4:
 
@@ -227,7 +230,7 @@ sections:
             passwordrahasia is ask Apa password rahasianya?
             If passwordrahasia is password print 'Kamu bisa masuk!' else print 'Akses ditolak!'
             </pre>
-        - title: "Kesalahan-kesalahan yang sering terjadi di level 5"
+        - level: 5
           text: |
             Berikut adalah kesalahan-kesalahan yang sering dilakukan para siswa pada level 5:
 
