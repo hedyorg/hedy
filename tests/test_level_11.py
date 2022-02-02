@@ -82,6 +82,22 @@ class TestsLevel11(HedyTester):
       expected=expected,
       expected_commands=['for', 'print', 'print'])
 
+  def test_for_loop_hindi(self):
+    code = textwrap.dedent("""\
+    for काउंटर in range 1 to 5
+        print काउंटर""")
+
+    expected = textwrap.dedent("""\
+    step = 1 if int(1) < int(5) else -1
+    for v7693a3e5c7a942bd47bf4b5af10576ac in range(int(1), int(5) + step, step):
+      print(f'{v7693a3e5c7a942bd47bf4b5af10576ac}')
+      time.sleep(0.1)""")
+
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['for', 'print'])
+
   def test_for_loop_with_assignment(self):
     code = textwrap.dedent("""\
       for i in range 1 to 10
