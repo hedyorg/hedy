@@ -671,29 +671,30 @@ export function share_program (level: number, lang: string, id: string | true, i
       } else {
         return verify_call_index(level, lang, id, index, Public, parse_error);
       }
+    } else {
+      const code = get_trimmed_code();
+      $.ajax({
+        type: 'POST',
+        url: '/parse',
+        data: JSON.stringify({
+          level: level,
+          lang: lang,
+          code: code
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+      }).done(function (response) {
+        console.log(response);
+        if (response.Error) {
+          modal.confirm("This program contains an error, are you sure you want to share it?", function () {
+            return verify_call_index(level, lang, id, index, Public, true);
+          });
+          return;
+        }
+      }).fail(function (err) {
+        console.log(err);
+      });
     }
-    const code = get_trimmed_code();
-    $.ajax({
-      type: 'POST',
-      url: '/parse',
-      data: JSON.stringify({
-        level: level,
-        lang: lang,
-        code: code
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function (response) {
-      console.log(response);
-      if (response.Error) {
-        modal.confirm("This program contains an error, are you sure you want to share it?", function() {
-          return verify_call_index(level, lang, id, index, Public, true);
-        });
-        return;
-      }
-    }).fail(function (err) {
-      console.log(err);
-    });
   }
   verify_call_index(level, lang, id, index, Public, false);
 }
