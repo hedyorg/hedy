@@ -223,12 +223,12 @@ const LEVELS = [
     rule_ifElse(),
     rule_expressions(),
     rule_arithmetic(),
-    rule_for() //<- is this for on a list too?>
+    rule_for()
     ),
   },
   {
     // Allows for with range
-    name: 'level11',
+    name: 'level11and12',
     rules: pipe(baseRules(),
       rule_printSpace(),
       rule_isAsk(),
@@ -236,20 +236,8 @@ const LEVELS = [
       rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
+      rule_for(),
       rule_forRange(),
-    ),
-  },
-  {
-    // Adding fncall parens
-    name: 'level12',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
     ),
   },
 // ----------------------------------------------------------------
