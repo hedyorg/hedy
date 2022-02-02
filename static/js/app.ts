@@ -641,7 +641,7 @@ function verify_call_index(level:number, lang: string, id: string | true, index:
 function get_parse_code_by_id(id: string) {
   $.ajax({
       type: 'POST',
-      url: '/parse_by_id',
+      url: '/parse-by-id',
       data: JSON.stringify({
         id: id
       }),
@@ -659,7 +659,7 @@ function get_parse_code_by_id(id: string) {
 
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
-  if (!Public) {
+  if (Public) {
     // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
     if (id !== true) {
       const parse_error = get_parse_code_by_id(id);
