@@ -1,6 +1,7 @@
 title: "Hedy documentation"
 sections:
     - title: "Einführung zu Hedy"
+      key: "intro"
       subsections:
         - title: "Was ist Hedy?"
           text: |
@@ -29,6 +30,7 @@ sections:
             Hedy ist webbasiert, d.h. es funktioniert auf jedem Gerät mit einem Browser (Chrome, Firefox, Edge usw.), so dass Laptops, ChromeBuhks, Tablets und sogar Smartphones geeignet sind, um Hedy zu verwenden.
             Sie müssen nichts herunterladen, bevor Sie mit Hedy arbeiten, gehen Sie einfach auf die Website und schon können Sie loslegen!
     - title: "Vorbereitungen"
+      key: "preparations"
       subsections:
         - title: "Programme speichern"
           text: |
@@ -37,6 +39,7 @@ sections:
             Sie können Ihre Projekte ganz einfach speichern, indem Sie Ihrem Projekt in der weißen Leiste einen Namen geben und die grüne Taste "Programm speichern" drücken.
             Der Programmierspaß kann beginnen!
     - title: "Teaching with Hedy"
+      key: "teaching"
       subsections:
         - title: ""
           text: |
@@ -73,13 +76,13 @@ sections:
             How did they learn from their mistakes? And of course: What did they create?
             Students are often very proud of their own creations, so it's nice to save a little time and gove your students the opportunity to show their work to their classmates.
     - title: "Frequently made mistakes"
-      subsections:
-        - title: ""
-          text: |
-            You can learn from your mistakes, especially in coding!
-            Making mistakes is unavoidable, and a great opportunity to learn, but for teachers it can be a challenge to find the correct fix for a mistake!
-            Especially as the codes get longer and longer as the levels progress. That's why we've made a list with frequently made mistakes in each level, and their solutions.
-        - title: "Common mistakes in level 1"
+      key: "common_mistakes"
+      intro: |
+          You can learn from your mistakes, especially in coding!
+          Making mistakes is unavoidable, and a great opportunity to learn, but for teachers it can be a challenge to find the correct fix for a mistake!
+          Especially as the codes get longer and longer as the levels progress. That's why we've made a list with frequently made mistakes in each level, and their solutions.
+      levels:
+        - level: 1
           text: |
             These are the frequently made mistakes by students in level 1:
 
@@ -90,7 +93,7 @@ sections:
             Turtle:
             - Students let their arrow walk out of the screen, and think the code doesn't work. They should use smaller numbers.
             - Students don't know how to let the turtle walk backwards. The turtle can walk backwards by using negative numbers, for example -100.
-        - title: "Common mistakes in level 2"
+        - level: 2
           text: |
             These are the frequently made mistakes in level 2:
 
@@ -119,7 +122,7 @@ sections:
             print the best animal is…
             print animals at random
             </pre>
-        - title: "Common mistakes in level 3"
+        - level: 3
           text: |
             These are the frequently made mistakes by students in level 3
 
@@ -127,7 +130,7 @@ sections:
             - Students forget putting the quotation marks on both sides of the text after a print command.
             - Students use the wrong quotation marks. The correct quotation mark is ' you find in next to the enter button on most keyboards. Different quotation marks like the double marks &quot; or the skewed quotation mark ` (found in the left corner with ~) will not work.
             - Students forget to use quotation marks in the `ask` command.
-        - title: "Common mistakes in level 4"
+        - level: 4
           text: |
             These are the frequently made mistakes by students in level 4:
 
@@ -222,7 +225,7 @@ sections:
             secretpassword is ask What is the secret password?
             If secretpassword is password print 'You can enter!' else print 'Access denied!'
             </pre>
-        - title: "Common mistakes in level 5"
+        - level: 5
           text: |
             These are the frequently made mistakes by students in level 5:
 
