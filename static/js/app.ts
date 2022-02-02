@@ -187,10 +187,8 @@ var StopExecution = false;
 
 function getHighlighter(level: number) {
   const modeExceptions: Record<string, string> = {
-        '9': 'ace/mode/level9and10',
-        '10': 'ace/mode/level9and10',
-        '18': 'ace/mode/level18and19',
-        '19': 'ace/mode/level18and19',
+        '8': 'ace/mode/level8and9',
+        '9': 'ace/mode/level8and9',
       };
   return modeExceptions[level] || `ace/mode/level` + level;
 }

@@ -130,21 +130,31 @@ const LEVELS = [
     ),
   },
   {
-    // Adds lists and 'at random'
+    // Adds variables
     name: 'level2',
     rules: pipe(baseRules(),
-
       rule_printSpace('expression_eol'),
       rule_isAsk('gobble'),
       rule_is('gobble'),
       rule_turtle(),
       rule_sleep(),
-
+    ),
+  },
+  {
+    // Adds lists and 'at random'
+    // TODO (FH, jan 2022) add "add" and "remove" for lists
+    name: 'level3',
+    rules: pipe(baseRules(),
+      rule_printSpace('expression_eol'),
+      rule_isAsk('gobble'),
+      rule_is('gobble'),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
     // Adds quoted text
-    name: 'level3',
+    name: 'level4',
     rules: pipe(baseRules(),
       rule_turtle(),
       rule_printSpace('expression_eol'),
@@ -153,18 +163,7 @@ const LEVELS = [
     ),
   },
   {
-    // Adds if/else
-    name: 'level4',
-    rules: pipe(baseRules(),
-      rule_printSpace(),
-      rule_isAsk(),
-      rule_is(),
-      rule_ifElseOneLine(),
-      rule_expressions(),
-    ),
-  },
-  {
-    // Adds repeat
+    // Adds if
     name: 'level5',
     rules: pipe(baseRules(),
       rule_printSpace(),
@@ -172,7 +171,6 @@ const LEVELS = [
       rule_is(),
       rule_ifElseOneLine(),
       rule_expressions(),
-      rule_repeat(),
     ),
   },
   {
@@ -184,12 +182,11 @@ const LEVELS = [
       rule_is(),
       rule_ifElseOneLine(),
       rule_expressions(),
-      rule_repeat(),
       rule_arithmetic(),
     ),
   },
   {
-    // Adds indented blocks -- no changes to highlighter necessary
+  // level 7 adds repeat x times
     name: 'level7',
     rules: pipe(baseRules(),
       rule_printSpace(),
@@ -197,13 +194,14 @@ const LEVELS = [
       rule_is(),
       rule_ifElse(),
       rule_expressions(),
-      rule_repeat(),
       rule_arithmetic(),
+      rule_repeat(),
     ),
   },
   {
-    // Replaces 'repeat' with 'for' <---- todo!
-    name: 'level8',
+    // Level 8 adds indented block
+    // Level 9 adds doubly indented blocks
+    name: 'level8and9',
     rules: pipe(baseRules(),
       rule_printSpace(),
       rule_isAsk(),
@@ -211,12 +209,13 @@ const LEVELS = [
       rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
-      rule_for()
+      rule_repeat(),
     ),
   },
+
   {
     // Replaces 'repeat' with 'for' over a list (for a in animals)
-    name: 'level9and10',
+    name: 'level10',
     rules: pipe(baseRules(),
     rule_printSpace(),
     rule_isAsk(),
@@ -224,7 +223,7 @@ const LEVELS = [
     rule_ifElse(),
     rule_expressions(),
     rule_arithmetic(),
-    rule_for()
+    rule_for() //<- is this for on a list too?>
     ),
   },
   {
@@ -317,55 +316,7 @@ const LEVELS = [
     ),
   },
   {
-    name: 'level18and19',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
-  {
-    name: 'level20',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
-  {
-    name: 'level21',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
-  {
-    name: 'level22',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
-  {
-    name: 'level23',
+    name: 'level18',
     rules: pipe(baseRules(),
       rule_printParen(),
       rule_isInputParen(),
@@ -671,8 +622,11 @@ function keywordWithSpace(keyword: string) {
   // after a parenthesis or '+' symbol or something... but since the symbol
   // would be highlighted as well that's not desirable, and most of these commands
   // for the start of the line anyway.
-  return '(?:^|\\s)' + keyword + ' ';
+  return '(?:^|\\s+)' + keyword + ' ';
 }
+
+
+
 
 /**
  * Modify the given ruleset, replacing literal spaces with "one or more spaces"
