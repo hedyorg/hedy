@@ -622,6 +622,8 @@ function keywordWithSpace(keyword: string) {
   // after a parenthesis or '+' symbol or something... but since the symbol
   // would be highlighted as well that's not desirable, and most of these commands
   // for the start of the line anyway.
+
+  //FH Jan: loosened this to s+ allow for indented rules
   return '(?:^|\\s+)' + keyword + ' ';
 }
 
