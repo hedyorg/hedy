@@ -458,7 +458,7 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
-function storeProgram(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+function storeProgram(level: number | [number, string], lang: string, name: string, code: string, parse_error?: boolean, cb?: (err: any, resp?: any) => void) {
   window.State.unsaved_changes = false;
 
     var adventure_name = window.State.adventure_name;
@@ -476,6 +476,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
         lang:  lang,
         name:  name,
         code:  code,
+        error: parse_error,
         adventure_name: adventure_name
       }),
       contentType: 'application/json',
@@ -508,7 +509,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     });
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+export function saveit(level: number | [number, string], lang: string, name: string, code: string, parse_error?: boolean, cb?: (err: any, resp?: any) => void) {
   error.hide();
   success.hide();
 
@@ -536,11 +537,11 @@ export function saveit(level: number | [number, string], lang: string, name: str
     }).done(function(response) {
       if (response['duplicate']) {
         modal.confirm (auth.texts['overwrite_warning'], function () {
-          storeProgram(level, lang, name, code, cb);
+          storeProgram(level, lang, name, code, parse_error, cb);
           pushAchievement("double_check");
         });
       } else {
-         storeProgram(level, lang, name, code, cb);
+         storeProgram(level, lang, name, code, parse_error, cb);
       }
     });
   } catch (e: any) {
@@ -554,7 +555,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
  */
 export function saveitP(level: number | [number, string], lang: string, name: string, code: string) {
   return new Promise<any>((ok, ko) => {
-    saveit(level, lang, name, code, (err, response) => {
+    saveit(level, lang, name, code, false, (err, response) => {
       if (err) {
         ko(err);
       } else {
@@ -620,7 +621,7 @@ function share_function(id: string, index: number, Public: boolean) {
     });
 }
 
-function verify_call_index(level:number, lang: string, id: string | true, index: number, Public: boolean) {
+function verify_call_index(level:number, lang: string, id: string | true, index: number, Public: boolean, parse_error: boolean) {
   // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
   if (id !== true) return share_function(id, index, Public);
   // Otherwise, we save the program and then share it.
@@ -628,7 +629,7 @@ function verify_call_index(level:number, lang: string, id: string | true, index:
   // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
   const name = `${$('#program_name').val()}`;
   const code = get_trimmed_code();
-  return saveit(level, lang, name, code, (err: any, resp: any) => {
+  return saveit(level, lang, name, code, parse_error, (err: any, resp: any) => {
       if (err && err.Warning)
         return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
       if (err && err.Error)
@@ -667,7 +668,7 @@ export function share_program (level: number, lang: string, id: string | true, i
       console.log(response);
       if (response.Error) {
         modal.confirm("This program contains an error, are you sure you want to share it?", function() {
-          return verify_call_index(level, lang, id, index, Public);
+          return verify_call_index(level, lang, id, index, Public, true);
         });
         return;
       }
@@ -675,7 +676,7 @@ export function share_program (level: number, lang: string, id: string | true, i
       console.log(err);
     });
   }
-  verify_call_index(level, lang, id, index, Public);
+  verify_call_index(level, lang, id, index, Public, false);
 }
 
 export function delete_program(id: string, index: number) {
