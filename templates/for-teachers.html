@@ -2,8 +2,8 @@
 
 {% block main %}
 <div id="teacher_classes" class="flex flex-col items-center pb-4 border-b-2">
-  {% if teacher_classes %}
       <h2>{{auth.teacher_classes}}</h2>
+  {% if teacher_classes %}
       <table class="table-auto border-separate space-y-6 border border-black mt-4 mb-4">
         <thead class="bg-gray-200">
           <tr><th class="p-2 w-1/4">{{auth.name}}</th><th class="p-2 w-1/4">{{auth.students[0]|upper}}{{auth.students[1:]}}</th></tr>
