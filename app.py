@@ -1295,6 +1295,7 @@ def explore():
             'name': program['name'],
             'level': program['level'],
             'id': program['id'],
+            'error': program['error'] if 'error' in program else None,
             'code': "\n".join(program['code'].split("\n")[:4])
         })
 

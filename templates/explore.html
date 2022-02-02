@@ -39,7 +39,7 @@
     {% for program in programs %}
         <div class="explore-program-box overflow-hidden">
             <div class="flex flex-col h-full">
-                  <div class="explore-program-box-title bg-blue-600 text-white text-lg text-center ltr:-ml-2 rtl:-mr-2 -mt-8 pt-10 ltr:pl-12 rtl:pr-12 ltr:rotate-6 rtl:-rotate-6 w-72">
+                  <div class="explore-program-box-title {% if program.error %}bg-red-500{% else %}bg-blue-600{% endif %} text-white text-lg text-center ltr:-ml-2 rtl:-mr-2 -mt-8 pt-10 ltr:pl-12 rtl:pr-12 ltr:rotate-6 rtl:-rotate-6 w-72">
                           {{ program.name | truncate(20) }}
                   </div>
                   <div class="px-4">
