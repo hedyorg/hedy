@@ -50,7 +50,7 @@ def main():
 
     try:
         hedy.execute(program, level)
-    except hedy.HedyException as e:
+    except hedy.exceptions.HedyException as e:
         sys.stderr.write('An error occurred: %s\n' % e.error_code)
         sys.stderr.write('Error attributes:\n')
         for key, value in e.arguments.items():

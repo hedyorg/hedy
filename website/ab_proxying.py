@@ -65,7 +65,7 @@ def redirect_ab (request):
     if utils.is_testing_request (request):
         return True
     # If the user is logged in, we use their username as identifier, otherwise we use the session id
-    user_identifier = current_user(request) ['username'] or str (session['session_id'])
+    user_identifier = current_user()['username'] or str(session['session_id'])
 
     # This will send either % PROXY_TO_TEST_PROPORTION of the requests into redirect, or 50% if that variable is not specified.
     redirect_proportion = int (os.getenv ('PROXY_TO_TEST_PROPORTION', '50'))

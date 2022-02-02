@@ -3,9 +3,10 @@ import socket
 
 app_name = os.getenv('HEROKU_APP_NAME', socket.gethostname())
 dyno = os.getenv('DYNO')
+athena_query = os.getenv('AWS_ATHENA_PREPARE_STATEMENT')
 
 config = {
-    'port': os.getenv ('PORT') or 5000,
+    'port': os.getenv ('PORT') or 8080,
     'session': {
         'cookie_name': 'hedy',
         # in minutes
@@ -34,7 +35,13 @@ config = {
         'postfix': ('-' + dyno if dyno else '') + '-' + str(os.getpid()),
         'region': 'eu-west-1'
     },
+    'athena': {
+        'region': 'eu-west-1',
+        'database': 'hedy-logs',
+        'prepare_statement': athena_query,
+        's3_output': 's3://hedy-query-outputs/',
+        'max_results': 50
+    },
     #enables the quiz environment by setting the config variable on True
     'quiz-enabled': True,
-    'quiz-max-attempts': 3,
 }

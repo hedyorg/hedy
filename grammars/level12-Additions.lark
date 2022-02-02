@@ -1,9 +1,17 @@
-// Adds brackets to for and print and changes ask to input
+//assigning a string now must be done with quotes
+assign_is: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE text_in_quotes
+assign_equals: var _EQUALS sum | var _EQUALS text_in_quotes
 
-command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | assign
+assign_list_is: var _SPACE _IS _SPACE (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|NUMBER))+
+assign_list_equals: var _EQUALS (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|NUMBER))+
 
-print: _PRINT (_SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | var_access | sum) (_SPACE (quoted_text | list_access | var_access | sum))* _RIGHT_BRACKET)?
-input: var _SPACE _IS _SPACE _INPUT _SPACE? _LEFT_BRACKET  (quoted_text | list_access | var_access | sum) (_SPACE (quoted_text | list_access | var_access | sum))*  _RIGHT_BRACKET
+?atom: NUMBER | var //unsupported numbers are gone, we can now allow floats with NUMBER
 
-// todo: some of these vars sould alse be var_access (things that do not define like the loop var)
-for_loop: _FOR _SPACE var _SPACE _IN _SPACE _RANGE _SPACE? _LEFT_BRACKET (NUMBER | var) (_COMMA _SPACE|_COMMA) (NUMBER | var) ((_COMMA _SPACE |_COMMA) (NUMBER | var))? _RIGHT_BRACKET _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+equality_check_is: (var | text_in_quotes | NUMBER) _SPACE _IS _SPACE (var | text_in_quotes | NUMBER)
+equality_check_equals: (var | text_in_quotes | NUMBER) _EQUALS (var | text_in_quotes | NUMBER)
+
+in_list_check: (var | text_in_quotes | NUMBER) _SPACE _IN _SPACE var
+
+error_invalid: "Supercalifragilisticexpialidocious" //invalid node should be deleted but this probably never matches anything :D
+textwithspaces: /(?:[^\n,' ]| (?!else))+/ -> text //anything can be parsed except for a newline and a comma for list separators, and now single quotes
+text_in_quotes: _SINGLE_QUOTE textwithspaces _SINGLE_QUOTE

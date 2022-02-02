@@ -41,3 +41,4 @@ We would love to have a few more programmers join the Hedy core team!
 See how you can get started with contributing in our docs: [CONTRIBUTING.md](CONTRIBUTING.md). 
 
 You can follow the [Discussions](https://github.com/Felienne/hedy/discussions) to stay up to date on things we are working on and considering. Full documentation including our design and design principles can be found [DESIGN.md](DESIGN.md)
+

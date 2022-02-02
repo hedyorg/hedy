@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+#  Give the TypeScript a compile on GitHub as well, so that if a PR
+#  introduces compilation failures we'll find them at PR creation time
+#  instead of at deploy time.
+#
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+
+echo "------> Compiling the TypeScript"
+
+cd $scriptdir/../heroku
+./generate-typescript

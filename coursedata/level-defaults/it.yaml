@@ -37,11 +37,8 @@
         risposta is ask come ti chiami?
         ```
 
-        La stampa funziona ancora come nel livello 1 e non è più necessaria un'ecografia.
+        `print` funziona ancora come nel livello 1 e non è più necessaria `echo`.
 
-        Nel livello 2 puoi anche fare una lista. Puoi quindi scegliere qualsiasi cosa dall'elenco. Lo fai con `at random` (dici: et ren-dom).
-
-        Troverai tutti i codici di livello 2 nella barra di sinistra. Ci sono anche schede con compiti.
     start_code: "print ciao mondo!"
     commands:
     -   name: "is"
@@ -56,16 +53,28 @@
         demo_code: |-
             colore is ask Qual è il tuo colore preferito?
             print colore è il tuo preferito!
+3:
+    intro_text: |
+        Nel livello 3 puoi anche fare una lista. Puoi quindi scegliere qualsiasi cosa dall'elenco. Lo fai con `at random` (dici: et ren-dom).
+
+        ```
+        animali is cane, gatto, canguro
+        print animali at random
+        ```
+
+        Troverai tutti i codici di livello 3 nella barra di sinistra. Ci sono anche schede con compiti.
+    start_code: "print ciao mondo!"
+    commands:
     -   name: "scegli_acaso"
         explanation: "Scegli una parola a caso da un gruppo con `at` e `random`"
         example: "Esempio: animali is cane, gatto, canguro."
         demo_code: |-
             animali is cane, gatto, canguro
             print animali at random
-3:
+4:
     start_code: "print 'Ciao mondo'"
     intro_text: |
-        `print` e `ask` cambiano al livello 3.
+        `print` e `ask` cambiano al livello 4.
 
         È necessario inserire il testo che si desidera stampare tra virgolette.
 
@@ -93,12 +102,12 @@
         demo_code: |-
             colore is ask 'Qual è il tuo colore preferito?'
             print colore ' è il tuo preferito!'
-4:
+5:
     start_code: |-
         nome is ask 'Come ti chiami?'
         if nome is Hedy print 'che bello!' else print 'mah'
     intro_text: |
-        `ask` e` print` funzionano ancora come nel livello 3.
+        `ask` e` print` funzionano ancora come nel livello 5.
 
          Nel livello 4 c'è qualcosa di nuovo, il `if`! If è l'inglese per se. Con `if` puoi scegliere tra due diverse opzioni.
 
@@ -130,11 +139,11 @@
         demo_code: |-
             colore is ask 'Qual è il tuo colore preferito?'
             if colore is verde print 'carino!' else print 'mah'
-5:
+6:
     start_code: "print '5 per 5 è ' 5 * 5"
     intro_text: |
-        `ask`,` print` e `if` funzionano ancora come nei livelli 4.
-        Ma nel livello 5 c'è qualcosa di nuovo, ora puoi anche calcolare.
+        `ask`,` print` e `if` funzionano ancora come nei livelli 5.
+        Ma nel livello 6 c'è qualcosa di nuovo, ora puoi anche calcolare.
 
         Il vantaggio è facile, lo scrivi come con la matematica: `5 + 5` per esempio. Anche il segno meno funziona bene, che è `5 - 5`.
 
@@ -153,22 +162,22 @@
         demo_code: "print '5 per 5 è ' 5 * 5"
     -   name: "ask e if con calcoli"
         explanation: "Chiedi di fare un calcolo e giudicalo."
-        example: "Esempio: risposta is ask 'Quanto fa 10 più 10?'"
+        example: "Esempio: risposta = ask 'Quanto fa 10 più 10?'"
         demo_code: |-
-            risposta is ask 'Quanto fa 10 più 10?'
+            risposta = ask 'Quanto fa 10 più 10?'
             if risposta is 20 print 'Yes!' else print 'Ops'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
-6:
+7:
     start_code: "repeat 3 times print 'Hedy è divertente!'"
     intro_text: |
-        `ask`, `print` e `if` funzionano esattamente come funzionavano nel quarto livello.
-        Il quinto livello introduce il comando `repeat`.
+        `ask`, `print` e `if` funzionano esattamente come funzionavano nel livello 6.
+        Il 7 livello introduce il comando `repeat`.
         `repeat` può essere usato per ripetere una parte di codice 'x' volte.
         ## Esempio di codice Hedy
         ```
@@ -181,22 +190,22 @@
         demo_code: "print 'Ciao benvenuta/o su Hedy.'"
     -   name: "ask"
         explanation: "Chiedi qualcosa con `ask`."
-        example: "Esempio: colore is ask 'Qual è il tuo colore preferito?'"
+        example: "Esempio: colore = ask 'Qual è il tuo colore preferito?'"
         demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
+            colore = ask 'Qual è il tuo colore preferito?'
             print colore ' è il tuo preferito!'
     -   name: "if"
         explanation: "Fai una scelta con `if`."
         example: "Esempio: if colore is verde print 'carino!' else print 'mah'"
         demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
+            colore = ask 'Qual è il tuo colore preferito?'
             if colore is verde print 'carino!' else print 'mah'
     -   name: "repeat - turtle"
         explanation: "Repeat a line of code with `repeat`."
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |-
         repeat 5 times
             print 'Ciao a tutti'
@@ -212,18 +221,7 @@
              print 'Ciao a tutti'
              print 'Questo sarà scritto 5 volte'
          ```
-         Se usi un `repeat` e un `if` insieme devi indentare più e più volte.
 
-         ## Esempio di codice Hedy
-         ```
-         colore is ask 'Qual è il tuo colore preferito?'
-         if colore is verde
-             repeat 3 times
-                 print 'carino!'
-         else
-             repeat 5 times
-                 print 'mah'
-         ```
     commands:
     -   name: "print"
         explanation: "Scrivi qualcosa. Ricorda di usare le virgolette per scrivere parole e frasi."
@@ -231,23 +229,12 @@
         demo_code: "print '5 volte 5 è ' 5 * 5"
     -   name: "if con più righe"
         explanation: "Chiedi la risposta per una somma e controlla se è corretta. Ora possiamo scrivere due righe."
-        example: "Esempio: risposta is ask 'Quanto fa 5 più 5?'"
+        example: "Esempio: risposta = ask 'Quanto fa 5 più 5?'"
         demo_code: |-
-            risposta is ask 'Quanto fa 5 più 5?'
+            risposta = ask 'Quanto fa 5 più 5?'
             if risposta is 10
                 print 'Ben fatto!'
                 print 'Esatto, la risposta corretta era ' risposta
             else
                 print 'Ops!'
                 print 'La risposta è ' risposta
-    -   name: "if e repeat insieme"
-        explanation: "`if` e `repeat` insieme"
-        example: "Esempio: if colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"
-        demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
-            if colore is verde
-                repeat 3 times
-                    print 'carino!'
-            else
-                repeat 5 times
-                    print 'mah'

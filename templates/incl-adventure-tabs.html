@@ -1,33 +1,77 @@
       {# TABS #}
-      <div>
-        <div class="flex cursor-pointer flex-end">
-        <a tabindex="0" href="#" data-tab="level" class="block text-black no-underline font-light tab tab-selected" tabindex="0">{{ level_title }} {{ level_nr }}</a>
-        {% for assignment in adventures %}
-          {% if assignment.short_name != 'level' %}
-            <a tabindex="0" href="#" data-tab="{{assignment.short_name}}" class="text-black no-underline font-light tab" tabindex="0">{{ assignment.name }}</a>
-          {% endif %}
-        {% endfor %}
-        </ul>
-      </div>
+      <div id="adventures">
+        <div class="flex flex-row overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2 cursor-pointer">
+            <div class="tab z-10 tab-selected whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="level">
+                {{ ui.level_title }} {{ level_nr }}
+            </div>
+            {% for assignment in adventures %}
+              {% if assignment.short_name != 'level' %}
+                <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{assignment.short_name}}">
+                    {{ assignment.name }}
+                </div>
+              {% endif %}
+            {% endfor %}
+        </div>
       {# PANES #}
-      <div style='width: 100%; min-height: 10em;' class="bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
+      <div id="adventures-tab" style="height: 20em;" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
         <div data-tabtarget="level">
-          {{intro_text|commonmark}}
+            <div class="flex flex-row">
+              <div class="{% if example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                  {{ intro_text|commonmark }}
+              </div>
+              {% if example_code %}
+                  <div class="border"></div>
+                  <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                      {{ example_code|commonmark }}
+                  </div>
+              {% endif %}
+            </div>
+            {% for example in extra_examples %}
+                <div class="flex flex-row border-t-2">
+                    <div class="{% if example.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                      {{ example.intro_text|commonmark }}
+                  </div>
+                  {% if example.example_code %}
+                      <div class="border"></div>
+                      <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                          {{ example.example_code|commonmark }}
+                      </div>
+                  {% endif %}
+                </div>
+            {% endfor %}
         </div>
         {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
             <div data-tabtarget="{{assignment.short_name}}" class="hidden">
-              {% if assignment.image %}
-                <img class="float-right w-48" src="{{static('/images/' + assignment.image)}}">
-              {% endif %}
-              <div>
-              {{ assignment.text|commonmark }}
-              {% if assignment.short_name == 'end' %}
-                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ start_quiz }}" onclick="window.load_quiz ({{level_nr}})">
-              {% endif %}
+              <div class="flex flex-row">
+                  <div class="{% if assignment.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                      {{ assignment.text|commonmark }}
+                      {% if assignment.short_name == 'end' %}
+                        <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}})">
+                      {% endif %}
+                  </div>
+                  {% if assignment.example_code %}
+                      <div class="border"></div>
+                      <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                          {{ assignment.example_code|commonmark }}
+                      </div>
+                  {% endif %}
               </div>
-              <div class="clear-right"></div>
-            </div>
+            {% for story in assignment.extra_stories %}
+                <div class="flex flex-row border-t-2">
+                    <div class="{% if story.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                      {{ story.text|commonmark }}
+                  </div>
+                  {% if story.example_code %}
+                      <div class="border"></div>
+                      <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                          {{ story.example_code|commonmark }}
+                      </div>
+                  {% endif %}
+                </div>
+            {% endfor %}
+          </div>
           {% endif %}
         {% endfor %}
       </div>
+    </div>

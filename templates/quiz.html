@@ -2,18 +2,39 @@
     <link rel="stylesheet" href="{{static('/css/generated.css')}}">
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
     <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
-    <div class="px-6 bg-blue-200 border-b-8 border-blue-600" >
-        <div class="flex justify-around bg-blue-200">
-            <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-start bg-blue-600 p-4 m-8"> Level {{ quiz.level }} </div>
-            {% if questionStatus == 'false' %}
-                 <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-red-600 p-4 m-8">Onjuist!</div>
-            {% elif questionStatus== 'start'%}
-                 <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-blue-600 p-4 m-8">Vraag {{question_nr }}</div>
-            {% else %}
-                <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-green-600 p-4 m-8">Juist</div>
-            {% endif %}
-
-            <div class="font-slab italic text-white text-xl font-normal rounded-full flex items-center justify-self-end bg-blue-600 p-4 m-8"> {{ correct }} van de {{ questions|length }} vragen goed</div>
+    <link rel="stylesheet" href="{{ static('/css/progress-bar.css') }}">
+    <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    {% if achievement %}
+    <script>
+    $(function() {
+        hedyApp.showAchievements({{ achievement|safe }}, false, "");
+    });
+    </script>
+    {% endif %}
+    <div class="container" >
+         <!-- Responsive Arrow Progress Bar -->
+          <div class="arrow-steps clearfix">
+              {% for i in range(questions|length)%}
+                   {% if i + 1 == question_nr %}
+                    <div class="step current"><span><a class="step-text" href="#">Vraag {{ i + 1 }}<br>Poging {{ attempt }}</a></span></div>
+                   {% elif not quiz_answers[i + 1] %}
+                       <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
+                   {% elif quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
+                         <div class="step incorrect flex flex-row justify-items ">{{ cross|safe }}<p class="mr-3 font-bold">{{ i + 1 }}</p></div>
+                   {% elif quiz_answers[i + 1][-1] == questions[i + 1].correct_answer %}
+                       <div class="step check flex flex-row justify-items ">{{ check|safe }}<p class="mr-3 font-bold">{{ i + 1 }}</p></div>
+                  {% endif %}
+              {% endfor %}
         </div>
     </div>
-    {% block question %}{% endblock %}
+    <div id="achievement_pop-up" class="inset-0 absolute z-10 fixed w-1/2 hidden" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
+            <h3 class="text-white">{{auth.achievement_earned}}</h3>
+            <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">
+            <h4 class="text-white italic" id="achievement_reached_title"></h4>
+            <p id="achievement_reached_text"></p>
+        </div>
+    </div>
+{% block question %}{% endblock %}

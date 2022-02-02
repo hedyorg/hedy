@@ -172,7 +172,7 @@ class TranspileJob:
             pycode = ""
             t1 = perf_counter()
             pycode = hedy.transpile(self.code, self.level).code
-        except hedy.HedyException as e:
+        except hedy.exceptions.HedyException as e:
             self.error = True
             self.error_msg = str(e)
         except UnexpectedEOF as e:

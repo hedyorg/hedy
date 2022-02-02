@@ -1,10 +1,6 @@
 ui:
     level_title: Level
     step_title: Tugas
-    code_title: Kode
-    docs_title: Penjelasan
-    contact: Kontak
-    video_title: Video-video
     run_code_button: Jalankan kode
     read_code_label: Bacakan dengan nyaring
     save_code_button: Simpan kode
@@ -12,18 +8,13 @@ ui:
     share_code_button: Simpan dan bagikan kode
     regress_button: Kembali ke level
     advance_button: Lanjut ke level
-    advance_step_button: Lanjut ke tugas
+    developers_mode: "Developers mode"
     try_button: Coba
     enter_text: Tuliskan jawaban kamu disini...
     enter: Tuliskan
-    assignment_header: Tugas
-    show_explanation: Tampilkan penjelasan
-    hide_explanation: Sembunyikan penjelasan
     hide_commands: "Hide"
+    search: "Search..."
     adventure: Petualangan
-    switch_to_levels: Keluar dari mode petualangan
-    switch_to_adventures: Lanjut ke petualangan
-    switch_to_another_adventure: Pilih petualangan lain
     commands_title: Perintah-perintah
     by: dengan
 ClientErrorMessages:
@@ -34,6 +25,7 @@ ClientErrorMessages:
     Execute_error: Sesuatu berjalan tidak seharusnya ketika program sedang dijalankan
     CheckInternet: Cobalah cek apakah internet kamu berjalan dengan baik?
     ServerError: Kamu menuliskan sebuah program yang tidak kami duga. Jika kamu butuh bantuan, kirimkan email dengan informasi level dan program kamu ke hedy@felienne.com. Sembari menunggu respon, cobalah cara lain atau lihat kembali contoh-contoh yang disediakan. Terima kasih!
+    Program_too_long: Your program takes too long to run.
 HedyErrorMessages:
     Wrong Level: Itu adalah kode Hedy yang benar, namun tidak pada level yang tepat. Kamu menulis kode untuk level {original_level} pada level {working_level}.
     Incomplete: Ups! Kamu melupakan sedikit bagian kode! Pada baris {line_number}, kamu perlu memberikan teks sebelum {incomplete_command}.
@@ -84,16 +76,25 @@ Auth:
     repeat_new_password: Ulangi password baru
     change_password: Ubah password
     are_you_sure: Apakah kamu yakin? Kamu tidak dapat membatalkan aksi ini.
-    please_username: Silakan masukkan username
+
+    #Sign up validation
     username_three: Username harus berisi paling tidak tiga karakter
+    username_invalid: "Your username is invalid"
     username_special: Username tidak boleh berisi ':' atau '@'.
+    please_language: "Please select a preferred language"
     please_password: Silakan masukkan password
+    password_invalid: "Your password is invalid"
     password_six: Password harus berisi paling tidak enam karakter
     repeat_match_email: Email yang dimasukkan ulang tidak sesuai.
     repeat_match_password: Password yang dimasukkan ulang tidak sesuai.
-    valid_email: Silakan masukkan email yang valid.
-    valid_year: Silakan masukkan tahun diantara 1900 dan
+    email_invalid: Silakan masukkan email yang valid.
+    year_invalid: Silakan masukkan tahun diantara 1900 dan
+    language_invalid: "Please select a valid language"
+    gender_invalid: "Please select a valid gender, choose (Female, Male, Other)"
+    experience_invalid: "Please select a valid experience, choose (Yes, No)"
+    programming_invalid: "Please select a valid programming language"
     ajax_error: Ditemukan sebuah error. Silakan coba lagi.
+
     please_username_email: Silakan masukkan username atau email
     profile_updated: Profil berhasil diubah.
     password_updated: Password berhasil diubah.
@@ -105,8 +106,6 @@ Auth:
     reset_password: Set ulang password
     password_resetted: Password kamu sudah berhasil di-set ulang. Silakan login.
     invalid_username_password: Username/password tidak valid.
-    invalid_username: Username tidak valid.
-    invalid_password: Password tidak valid.
     invalid_reset_link: Tautan set ulang password tidak valid.
     exists_email: Email ini sudah terpakai untuk akun lain.
     exists_username: Username ini sudah terpakai untuk akun lain.
@@ -137,8 +136,9 @@ Auth:
     unsaved_changes: Kamu memiliki program yang belum disimpan. Apakah kamu mau keluar tanpa menyimpannya?
     save_success: Sukses
     save_success_detail: Program tersimpan dengan sukses
-    share_success_detail: Program dibagikan dengan sukses dan tautannya telah disalin ke clipboard
+    share_success_detail: Program dibagikan dengan sukses
     unshare_success_detail: Program berhasil untuk berhenti dibagikan
+    copy_link_to_share: Salin tautan untuk berbagi
     copy_clipboard: Berhasil disalin ke clipboard
     answer_question: Kamu tidak dapat menjalankan program sebelum kamu menjawab pertanyaannya terlebih dahulu
     must_be_logged: Kamu harus masuk menggunakan akun kamu untuk menyimpan program
@@ -182,6 +182,5 @@ Programs:
     share_confirm: Apakah kamu yakin ingin membuat program kamu publik?
     unshare: Berhenti berbagi
     unshare_confirm: Apakah kamu yakin ingin membuat program kamu privat?
-    copy_link_to_share: Salin tautan untuk berbagi
     no_programs: Kamu belum memiliki program
     write_first: Tulis program pertamamu!

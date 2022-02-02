@@ -1,54 +1,34 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
-<div>
-  <button class="green-btn absolute mt-1 ml-1" id="toggle-button" onclick="toggleCommands();">&#8592; {{ hide_commands }}</button>
-</div>
-<div style="width: 250px;" id="commands-window" class="right-hand-shadow flex-none">
-  <div id="command_window_content">
-      <div class="p-3 shadow-md">
-        <div></div>
-        <h2>{{ commands_title }}</h2>
-      </div>
-      <div>
-        {% for command in commands %}
-        <div class="justify-between my-2 shadow-md p-3 pl-4">
-          <div class="font-thin text-lg flex-grow mb-1" tabindex=0>
-            {{ command.explanation|commonmark }}
-          </div>
-          <div class="flex">
-            <div class="font-thin text-sm flex-grow" tabindex=0>
-              {# placeholder to make button go right, was originally in use for the example code 3#}
-            </div>
-            <button class="btn block flex-none self-end ml-1" style="min-width:6em"
-              onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-  </div>
-</div>
-<div tabindex="0" class="flex-grow p-8">
-  {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
-  {% include "incl-adventure-tabs.html" %}
+<div tabindex="0" class="flex-grow p-4 overflow-y-scroll">
+    {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
+    {% include "incl-adventure-tabs.html" %}
 
-  {% include "incl-editor-and-output.html" %}
+    {% include "incl-editor-and-output.html" %}
 
-  <div class="text-sm mt-10 mr-5 font-thin">
+    <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">
     Latest update: {{latest}}
-  </div>
+    </div>
 </div>
 
 {% endblock %}
 
 {% block scripts %}
   <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="/client_messages.js?lang={{ lang }}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
   <script>
     window.State = {};
-    window.State.lang = "{{ lang }}";
+    window.State.lang = "{{ g.lang }}";
     window.State.level = "{{ level }}";
-    window.State.level_title = "{{ level_title }}";
+    window.State.level_title = "{{ ui.level_title }}";
+    {% if username %}
+        window.State.examples_left = 20;
+    {% endif %}
+    {% if not username %}
+        window.State.examples_left = Number.MAX_SAFE_INTEGER; // We want to give the user unlimited tries
+    {% endif %}
     window.State.adventure_name = "{{ adventure_name }}";
     // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
     window.State.adventure_name_onload = window.State.adventure_name;
@@ -56,29 +36,9 @@
     window.State.adventures = {{ adventures|tojson }};
     window.State.default_program = {{start_code|tojson }};
     window.State.loaded_program = {{ loaded_program|tojson }};
-    window.State.default_program_name = {{ (level_title + ' ' + level_nr)|tojson }};
-    function toggleCommands() {
-        if ($('#commands-window').width() == 250) {
-            $('#toggle-button').html('&#8594;');
-            content = $('#commands-window').html();
-            $('#command_window_content').hide();
-            $( "#commands-window" ).animate({
-           width: "55px",
-            }, 500 );
-        } else {
-            $('#toggle-button').html('&#8592; ' + '{{ hide_commands }}');
-            $( "#commands-window" ).animate({
-           width: "250px",
-            }, 500 );
-            $('#command_window_content').show();
-        }
-    }
+    window.State.default_program_name = {{ (ui.level_title + ' ' + level_nr)|tojson }};
   </script>
-  {# Important syntaxModeRules.js gets loaded first #}
-  <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/js/app.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/js/auth.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/js/tabs.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
