@@ -662,8 +662,9 @@ export function share_program (level: number, lang: string, id: string | true, i
   if (!Public) {
     // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
     if (id !== true) {
-      const parse_error = get_parse_code_by_id(id);
-      return verify_call_index(level, lang, id, index, Public, parse_error);
+      if (get_parse_code_by_id(id)) {
+        verify_call_index(level, lang, id, index, Public, true);
+      }
     }
     const code = get_trimmed_code();
     $.ajax({
