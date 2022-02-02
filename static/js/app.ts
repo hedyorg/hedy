@@ -671,14 +671,11 @@ export function share_program (level: number, lang: string, id: string | true, i
         });
         return;
       }
-      verify_call_index(level, lang, id, index, Public);
     }).fail(function (err) {
       console.log(err);
     });
-  } else {
-    // If we want to unshare a program -> no need for parsing and verification
-    verify_call_index(level, lang, id, index, Public, false);
   }
+  verify_call_index(level, lang, id, index, Public);
 }
 
 export function delete_program(id: string, index: number) {
