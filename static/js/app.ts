@@ -660,14 +660,15 @@ function get_code_by_id(id: string) {
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
 
-  // The request comes from the programs page -> we have to retrieve the program first
-  let code = ""
-  if (id !== true) {
-    code = get_code_by_id(id);
-  } else {
-    code = get_trimmed_code();
-  }
-  $.ajax({
+  if (!Public) {
+    // The request comes from the programs page -> we have to retrieve the program first
+    let code = ""
+    if (id !== true) {
+      code = get_code_by_id(id);
+    } else {
+      code = get_trimmed_code();
+    }
+    $.ajax({
       type: 'POST',
       url: '/parse',
       data: JSON.stringify({
@@ -677,16 +678,20 @@ export function share_program (level: number, lang: string, id: string | true, i
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(response) {
+    }).done(function (response) {
       console.log(response);
       if (response.Error) {
         verify_call_index(level, lang, id, index, Public, true);
       } else {
         verify_call_index(level, lang, id, index, Public, false);
       }
-    }).fail(function(err) {
+    }).fail(function (err) {
       console.log(err);
     });
+  } else {
+    // If we want to unshare a program -> no need for parsing and verification
+    verify_call_index(level, lang, id, index, Public, false);
+  }
 }
 
 export function delete_program(id: string, index: number) {
