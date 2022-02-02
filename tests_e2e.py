@@ -732,7 +732,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program private
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'public': False})
+        self.post_data('programs/share', {'id': program_id, 'public': False, 'error': False})
 
         saved_programs = self.get_data('programs_list')['programs']
         for program in saved_programs:
