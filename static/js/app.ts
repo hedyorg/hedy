@@ -687,7 +687,7 @@ export function share_program (level: number, lang: string, id: string | true, i
         console.log(response);
         if (response.Error) {
           modal.confirm("This program contains an error, are you sure you want to share it?", function () {
-            return verify_call_index(level, lang, id, index, Public, true);
+            verify_call_index(level, lang, id, index, Public, true);
           });
         } else {
             verify_call_index(level, lang, id, index, Public, false);
@@ -696,6 +696,8 @@ export function share_program (level: number, lang: string, id: string | true, i
         console.log(err);
       });
     }
+  } else {
+    verify_call_index(level, lang, id, index, Public, false);
   }
 }
 
