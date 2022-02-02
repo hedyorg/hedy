@@ -9,6 +9,11 @@ if (!window.State) {
 window.State = {};
 }
 
+// Defines a word with letters in any language
+// TODO FH jan 2022: Now just does latin including accented and Arabic, needs to be
+// improved for f.e. Hindi and Chinese
+var word = '[0-9A-zÀ-ÿء-ي]+';
+
 // Set this to true to use keywords from languages other than english
 var localKeywordsEnable = true;
 
@@ -197,7 +202,7 @@ const LEVELS = [
     ),
   },
   {
-    // Replaces 'repeat' with 'for'
+    // Replaces 'repeat' with 'for' <---- todo!
     name: 'level8',
     rules: pipe(baseRules(),
       rule_printSpace(),
@@ -210,7 +215,7 @@ const LEVELS = [
     ),
   },
   {
-    // Replaces 'repeat' with 'for'
+    // Replaces 'repeat' with 'for' over a list (for a in animals)
     name: 'level9and10',
     rules: pipe(baseRules(),
     rule_printSpace(),
@@ -219,12 +224,11 @@ const LEVELS = [
     rule_ifElse(),
     rule_expressions(),
     rule_arithmetic(),
-    rule_forRange(),
     rule_for()
     ),
   },
   {
-    // Nesting of 'for' loops (no changes necessary)
+    // Allows for with range
     name: 'level11',
     rules: pipe(baseRules(),
       rule_printSpace(),
@@ -252,18 +256,6 @@ const LEVELS = [
 // ----------------------------------------------------------------
 //  Everything below this line hasn't been done yet
 // ----------------------------------------------------------------
-  {
-    name: 'level11',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
   {
     name: 'level13',
     rules: pipe(baseRules(),
@@ -480,7 +472,7 @@ function rule_printSpace(next?: string) {
  */
 function rule_isAsk(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( ' + currentLang._IS + ' ' + currentLang._ASK + ')',
+    regex: '('+ word + ')( ' + currentLang._IS + ' ' + currentLang._ASK + ')',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -491,7 +483,7 @@ function rule_isAsk(next?: string) {
  */
 function rule_is(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( ' + currentLang._IS + ' )',
+    regex: '('+ word + ')( ' + currentLang._IS + ' )',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -538,7 +530,7 @@ function rule_sleep() {
  */
 function rule_isInputParen() {
   return recognize('start', {
-    regex: '(\\w+)( ' + currentLang._IS + ' ' + currentLang._INPUT + ')(\\()',
+    regex: '('+ word + ')( ' + currentLang._IS + ' ' + currentLang._INPUT + ')(\\()',
     token: ['text', 'keyword', 'paren.lparen'],
     next: 'start'
   });
@@ -631,28 +623,28 @@ function rule_arithmetic() {
  */
 function rule_repeat() {
   return recognize('start', {
-    regex: '(' + currentLang._REPEAT + ')( \\w+ )(' + currentLang._TIMES + ')',
+    regex: '(' + currentLang._REPEAT + ')( '+ word +' )(' + currentLang._TIMES + ')',
     token: ['keyword', 'text', 'keyword'],
   });
 }
 
 function rule_for(){
   return recognize('start', {
-    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' )(\\w+)',
+    regex: '(' + currentLang._FOR + ' )('+word+')( ' + currentLang._IN + ' )('+word+')',
     token: ['keyword', 'text', 'keyword', 'text'],
   });
 }
 
 function rule_forRange() {
   return recognize('start', {
-    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' ' + currentLang._RANGE + ' )(\\w+)( to )(\\w+)',
+    regex: '(' + currentLang._FOR + ' )('+word+')( ' + currentLang._IN + ' ' + currentLang._RANGE + ' )('+word+')( to )('+word+')',
     token: ['keyword', 'text', 'keyword', 'text', 'keyword', 'text'],
   });
 }
 
 function rule_forRangeParen() {
   return recognize('start', {
-    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' ' + currentLang._RANGE + ')(\\()([\\s\\w]+)(,)([\\s\\w]+)(\\))',
+    regex: '(' + currentLang._FOR + ' )('+word+')( ' + currentLang._IN + ' ' + currentLang._RANGE + ')(\\(\\s*)('+word+')(\\s*,\\s*)('+word+')(\\s*\\))',
     token: ['keyword', 'text', 'keyword', 'paren.lparen', 'text', 'punctuation.operator', 'text', 'paren.rparen'],
   });
 }
