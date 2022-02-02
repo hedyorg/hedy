@@ -689,14 +689,14 @@ export function share_program (level: number, lang: string, id: string | true, i
           modal.confirm("This program contains an error, are you sure you want to share it?", function () {
             return verify_call_index(level, lang, id, index, Public, true);
           });
-          return;
+        } else {
+            verify_call_index(level, lang, id, index, Public, false);
         }
       }).fail(function (err) {
         console.log(err);
       });
     }
   }
-  verify_call_index(level, lang, id, index, Public, false);
 }
 
 export function delete_program(id: string, index: number) {
