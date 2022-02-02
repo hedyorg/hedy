@@ -559,6 +559,27 @@ def parse():
     return jsonify(response)
 
 
+@app.route('/parse-by-id', methods=['POST'])
+@requires_login
+def parse_by_id(user):
+    body = request.json
+    #Validations
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('id'), str):
+        return 'class id must be a string', 400
+
+    program = DATABASE.program_by_id(body.get('id'))
+    if program and program.get('username') == user['username']:
+        try:
+            hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
+            return {}, 200
+        except:
+            return {"error": "parsing error"}, 200
+    else:
+        return 'this is not your program!', 400
+
+
 def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     try:
