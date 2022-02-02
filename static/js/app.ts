@@ -620,36 +620,21 @@ function share_function(id: string, index: number, Public: boolean) {
     });
 }
 
-function verify_call_index(level:number, lang: string, id: string | true, index: number, Public: boolean, parse_error: boolean) {
-  if (parse_error) {
-    modal.confirm("This program contains an error, are you sure you want to share it?", function(){
-      // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
-      if (id !== true) return share_function(id, index, Public);
-      // Otherwise, we save the program and then share it.
-      // Saving the program makes things way simpler for many reasons: it covers the cases where:
-      // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
-      const name = `${$('#program_name').val()}`;
-      const code = get_trimmed_code();
-      return saveit(level, lang, name, code, (err: any, resp: any) => {
-          if (err && err.Warning)
-            return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
-          if (err && err.Error)
-            return error.show(ErrorMessages['Transpile_error'], err.Error);
-          share_function(resp.id, index, Public);
-        });
+function verify_call_index(level:number, lang: string, id: string | true, index: number, Public: boolean) {
+  // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
+  if (id !== true) return share_function(id, index, Public);
+  // Otherwise, we save the program and then share it.
+  // Saving the program makes things way simpler for many reasons: it covers the cases where:
+  // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
+  const name = `${$('#program_name').val()}`;
+  const code = get_trimmed_code();
+  return saveit(level, lang, name, code, (err: any, resp: any) => {
+      if (err && err.Warning)
+        return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
+      if (err && err.Error)
+        return error.show(ErrorMessages['Transpile_error'], err.Error);
+      share_function(resp.id, index, Public);
     });
-  } else {
-      if (id !== true) return share_function(id, index, Public);
-      const name = `${$('#program_name').val()}`;
-      const code = get_trimmed_code();
-      return saveit(level, lang, name, code, (err: any, resp: any) => {
-          if (err && err.Warning)
-            return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
-          if (err && err.Error)
-            return error.show(ErrorMessages['Transpile_error'], err.Error);
-          share_function(resp.id, index, Public);
-        });
-  }
 }
 
 function get_code_by_id(id: string) {
@@ -681,10 +666,12 @@ export function share_program (level: number, lang: string, id: string | true, i
     }).done(function (response) {
       console.log(response);
       if (response.Error) {
-        verify_call_index(level, lang, id, index, Public, true);
-      } else {
-        verify_call_index(level, lang, id, index, Public, false);
+        modal.confirm("This program contains an error, are you sure you want to share it?", function() {
+          return verify_call_index(level, lang, id, index, Public);
+        });
+        return;
       }
+      verify_call_index(level, lang, id, index, Public);
     }).fail(function (err) {
       console.log(err);
     });
