@@ -591,11 +591,8 @@ function change_shared (shared: boolean, index: number) {
   }
 }
 
-export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
-
-  var share = function (id: string) {
-    $.ajax({
+function share_function(id: string, index: number, Public: boolean) {
+  $.ajax({
       type: 'POST',
       url: '/programs/share',
       data: JSON.stringify({
@@ -621,11 +618,16 @@ export function share_program (level: number, lang: string, id: string | true, i
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
+}
+
+function verify_call_index(level:number, lang: string, id: string | true, index: number, Public: boolean, parse_error: boolean) {
+  if (parse_error) {
+    modal.confirm("This program contains an error, are you sure you want to share it?", function(){
+
+    });
   }
-
   // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
-  if (id !== true) return share (id);
-
+  if (id !== true) return share_function(id, index, Public);
   // Otherwise, we save the program and then share it.
   // Saving the program makes things way simpler for many reasons: it covers the cases where:
   // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
@@ -636,9 +638,29 @@ export function share_program (level: number, lang: string, id: string | true, i
         return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
       if (err && err.Error)
         return error.show(ErrorMessages['Transpile_error'], err.Error);
-      share(resp.id);
+      share_function(resp.id, index, Public);
     });
+}
 
+export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
+  $.ajax({
+      type: 'POST',
+      url: '/parse',
+      data: JSON.stringify({
+        code: get_trimmed_code()
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (response.error) {
+        verify_call_index(level, lang, id, index, Public, true);
+      } else {
+        verify_call_index(level, lang, id, index, Public, false);
+      }
+    }).fail(function(err) {
+      console.log(err);
+    });
 }
 
 export function delete_program(id: string, index: number) {
