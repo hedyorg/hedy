@@ -638,7 +638,7 @@ function verify_call_index(level:number, lang: string, id: string | true, index:
     });
 }
 
-function get_parse_code_by_id(id: string) {
+function get_parse_code_by_id(level: number, lang:string, id:string | true,  index: number, Public: boolean) {
   $.ajax({
       type: 'POST',
       url: '/parse-by-id',
@@ -649,28 +649,25 @@ function get_parse_code_by_id(id: string) {
       dataType: 'json'
     }).done(function (response) {
       if (response.error) {
-        return true;
-      } return false;
+        modal.confirm("This program contains an error, are you sure you want to share it?", function() {
+          return verify_call_index(level, lang, id, index, Public, true);
+        });
+        return;
+      } else {
+        return verify_call_index(level, lang, id, index, Public, false);
+      }
     }).fail(function (err) {
       console.log(err);
     });
-  return false;
 }
 
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   if (Public) {
     // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
+    console.log(id);
     if (id !== true) {
-      const parse_error = get_parse_code_by_id(id);
-      if (parse_error) {
-        modal.confirm("This program contains an error, are you sure you want to share it?", function() {
-          return verify_call_index(level, lang, id, index, Public, parse_error);
-        });
-        return;
-      } else {
-        return verify_call_index(level, lang, id, index, Public, parse_error);
-      }
+      return get_parse_code_by_id(level, lang, id,  index, Public);
     } else {
       const code = get_trimmed_code();
       $.ajax({

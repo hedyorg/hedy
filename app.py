@@ -569,12 +569,19 @@ def parse_by_id(user):
     if not isinstance(body.get('id'), str):
         return 'class id must be a string', 400
 
+    print(body)
+
     program = DATABASE.program_by_id(body.get('id'))
+    print(program)
     if program and program.get('username') == user['username']:
+        print("Dit is jouw programma!")
         try:
+            print("We gaan proberen te parsen")
             hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
+            print("Dat gaat goed!")
             return {}, 200
         except:
+            print("Dat gaat niet goed!")
             return {"error": "parsing error"}, 200
     else:
         return 'this is not your program!', 400
