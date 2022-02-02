@@ -461,6 +461,7 @@ def fix_code():
 @app.route('/parse', methods=['POST'])
 def parse():
     body = request.json
+    print(body)
     if not body:
         return "body must be an object", 400
     if 'code' not in body:
@@ -472,6 +473,9 @@ def parse():
 
     code = body['code']
     level = int(body['level'])
+
+    print(code)
+    print(level)
 
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
