@@ -214,10 +214,12 @@ export function show_doc_section(section_key: string) {
        $("#button-" + section_key).removeClass("blue-btn");
        $("#button-" + section_key).addClass("green-btn");
        $ ('.section').hide ();
+       $ ('.common-mistakes-section').hide ();
    } else {
      $("#button-" + section_key).removeClass("green-btn");
      $("#button-" + section_key).addClass("blue-btn");
      $('.section').hide();
+     $ ('.common-mistakes-section').hide ();
      $('#section-' + section_key).toggle();
    }
 }

@@ -28,7 +28,7 @@
     {% endfor %}
     </div>
     {% for section in content['sections'] %}
-        <div class="section hidden turn-pre-into-ace" id="section-{{loop.index}}">
+        <div class="section hidden" id="section-{{loop.index}}">
         {% if section.key != "common_mistakes" %}
             {% for subsection in section['subsections'] %}
                 <h4>{{ subsection.title }}</h4>
@@ -42,7 +42,7 @@
                 {% endfor %}
             </div>
             {% for level in section['levels'] %}
-                <div class="common-mistakes-section hidden turn-pre-into-ace" id="common_mistakes-{{loop.index}}">
+                <div class="common-mistakes-section hidden turn-pre-into-ace mt-4" id="common_mistakes-{{loop.index}}">
                 {{ level.text|commonmark }}
                 </div>
             {% endfor %}
