@@ -29,10 +29,24 @@
     </div>
     {% for section in content['sections'] %}
         <div class="section hidden turn-pre-into-ace" id="section-{{loop.index}}">
-        {% for subsection in section['subsections'] %}
-            <h4>{{ subsection.title }}</h4>
-            <p>{{ subsection.text|commonmark }}</p>
-        {% endfor %}
+        {% if section.key != "common_mistakes" %}
+            {% for subsection in section['subsections'] %}
+                <h4>{{ subsection.title }}</h4>
+                <p>{{ subsection.text|commonmark }}</p>
+            {% endfor %}
+        {% else %}
+            <p>{{ section.intro|commonmark }}</p>
+            <div class="flex flex-row justify-center">
+                {% for level in section['levels'] %}
+                    <button class="green-btn text-xl p-4 mx-2 common-mistakes-button" id="cm-button-{{loop.index}}" onclick="hedyApp.show_common_mistakes('{{loop.index}}')">Level {{ level.level }}</button>
+                {% endfor %}
+            </div>
+            {% for level in section['levels'] %}
+                <div class="common-mistakes-section hidden turn-pre-into-ace" id="common_mistakes-{{loop.index}}">
+                {{ level.text|commonmark }}
+                </div>
+            {% endfor %}
+        {% endif %}
         </div>
     {% endfor %}
 </div>
