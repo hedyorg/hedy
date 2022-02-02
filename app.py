@@ -1360,7 +1360,18 @@ def get_admin_classes_page(user):
     if not is_admin(user):
         return utils.error_page(error=403, ui_message='unauthorized')
 
-    classes = DATABASE.all_classes()
+    classes = []
+    for Class in DATABASE.all_classes():
+        current_class = {
+            "name": Class.get('name'),
+            "teacher": Class.get('teacher'),
+            "students": len(Class.get('students')) if 'students' in Class else 0,
+            "id": Class.get('id'),
+            "last_used": utils.datetotimeordate(utils.mstoisostring(DATABASE.user_by_username(Class.get('teacher')).get('last_login')))
+        }
+        classes.append(current_class)
+    classes = sorted(classes, key=lambda d: d['last_used'], reverse=True)
+
     return render_template('admin-classes.html', classes=classes, page_title=hedyweb.get_page_title('admin'))
 
 
