@@ -214,7 +214,6 @@ export function show_doc_section(section_key: string) {
        $("#button-" + section_key).removeClass("blue-btn");
        $("#button-" + section_key).addClass("green-btn");
        $ ('.section').hide ();
-       $ ('.common-mistakes-section').hide ();
    } else {
      $("#button-" + section_key).removeClass("green-btn");
      $("#button-" + section_key).addClass("blue-btn");
@@ -222,6 +221,8 @@ export function show_doc_section(section_key: string) {
      $ ('.common-mistakes-section').hide ();
      $('#section-' + section_key).toggle();
    }
+   // Loop-index -1 doesn't exist -> automatically hide all "common mistakes" sections
+   show_common_mistakes("-1");
 }
 
 export function show_common_mistakes(section_key: string) {
