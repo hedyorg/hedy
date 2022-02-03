@@ -288,12 +288,12 @@ export function select_all_levels_adventure(adventure_name: string) {
     let first_input = true;
     let checked = true;
     $('.adventure_level_input').each(function() {
-        if (first_input) {
-            checked = $(this).prop("checked");
-            first_input = false;
-        }
         const name = <string>$(this).attr('adventure');
         if (name == adventure_name && $(this).is(":visible")) {
+            if (first_input) {
+                checked = $(this).prop("checked");
+                first_input = false;
+            }
             $(this).prop("checked", !checked);
         }
     });
