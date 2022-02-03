@@ -1290,6 +1290,7 @@ def explore():
 
     filtered_programs = []
     for program in programs:
+        # If program does not have an error value set -> parse it and set value
         if 'error' not in program:
             try:
                 hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
