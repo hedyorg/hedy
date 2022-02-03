@@ -27,8 +27,6 @@ class TestsLevel11(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-
-
   def test_for_loop(self):
     code = textwrap.dedent("""\
     a is 2

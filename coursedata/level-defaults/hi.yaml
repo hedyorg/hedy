@@ -69,9 +69,9 @@
         demo_code: "print 'Hello welcome to Hedy!'"
 9:
     start_code: |-
-        for इ in range 1 to 3:
-            for ज in range 1 to 5:
-                print ' हम दौर में हैं: ' इ  ' और हम गिनते हैं: ' ज
+        repeat 3 times
+            repeat 3 times
+                print 'looping!'
     intro_text: अब से हम, लूप को अक्सर दोहरा सकते हैं| उदाहरण में हम ५ तक गिनते हैं और वह ३ बार करते हैं| तो हम ३ दौर लगाते  हैं और ५ तक गिनते हैं हर बार|
     commands:
     -   name: "print"
@@ -257,27 +257,10 @@
             print फल[i]
     intro_text: हम सूचियों के आस पास चोकोर ब्रैकेट्स लगाने जा रहे हैं! अब हमें इकहरा उदाहरण चिन्ह(') लगाने की भी आवश्यकता है सूचियों में वस्तुओं के आस पास|
     commands:
-    -   name: चोकोर ब्रैकेट्स
-        explanation: हम सूचियों के आस पास चोकोर ब्रैकेट्स लगाने जा रहे हैं! हमें ' लगाने की भी आवश्यकता है सूचियों में वस्तुओं के आस पास|
-        example: "उदाहरण: फल is ['सेब', 'केला', 'चेरी']"
-        demo_code: |
-            फल is ['सेब', 'केला', 'चेरी']
-            print(फल)
-    -   name: सूची में से एक वस्तु को लो
-        explanation: सूची में से एक वस्तु को पाने के लिए हम [संख्या] का उपयोग करते हैं तो फल[१] का मतलब, सूची में से पहला फल लो!
-        example: "उदाहरण: पहलाफल  is फल[१]"
-        demo_code: |
-            फल is ['सेब', 'केला', 'चेरी']
-            पहलाफल is फल[१]
-            print(पहलाफल)
-    -   name: सूची में से क्रमरहित वस्तु को लो
-        explanation: सूची में से क्रमरहित वस्तु को पाने के लिए हम [random] का उपयोग करते हैं तो फल[random] का मतलब, सूची में से एक क्रमरहित फल को लो!
-        example: "उदाहरण: क्रमरहितफल is फल[random]"
-        demo_code: |
-            फल is ['सेब', 'केला', 'चेरी']
-            क्रमरहितफल is फल[random]
-            print(क्रमरहितफल)
-
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 
 17:
     start_code: |-
@@ -286,35 +269,10 @@
         print 'तैयार या नहीं, यहाँ मैं  आया!'
     intro_text: अब हम इंडेंटेशन के साथ थोड़ा बदलाव करेंगे| जब भी हमें इंडेंटेशन की आवश्यकता पड़ती है, हम ':' का इस्तेमाल करेंगे इंडेंटेशन के पहले वाली लाइन पर|
     commands:
-    -   name: print
-        explanation: "'जब हम `for` का उपयोग करते हैं, हमें ':' लगाने की आवश्यकता पड़ती है `for` पंक्ति के आखिर में| '"
-        example: 'for इ in range १-१०:'
-        demo_code: |-
-            for इ in range 1 to 5:
-                print इ
-            print 'तैयार या नहीं, यहाँ मैं  आया!'
-    -   name: if
-        explanation: हमें हमारी सारी 'if' पंक्तियों के साथ यही करने की आवश्यकता है
-        example: if रंग is हरा:'
-        demo_code: |-
-            रंग is हरा
-            if रंग is हरा:
-                print 'रंग हरा है'
-            else:
-                 print 'रंग हरा नहीं है'
-    -   name: elif
-        explanation: "'हम आपको एक नया आदेश बताएंगे जिसे उपयोग करने की आपको अनुमति है: 'elif'. 'elif' मतलब \"else if\"। हम जांचने की शुरुआत करते हैं 'if' पंक्ति से, अगर वह सही नहीं है तो हम 'elif' को जांचते हैं और अगर वह भी सही नहीं है तो हम 'else' पर जाते हैं|  '"
-        example: 'elif अ is ५:'
-        demo_code: |-
-            अ is २
-            if अ is १:
-                print 'अ १ है'
-            elif अ is २:
-                 print 'अ २ है'
-            else:
-                 print 'अ ना १ है ना ही २'
-
-
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 #13:
 #    start_code: |-
 #        उम्र is input('आपकी उम्र कितनी है?')
