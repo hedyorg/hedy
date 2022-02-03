@@ -253,6 +253,7 @@ def routes (app, database, achievements):
             return 'adventures must be a dict', 400
 
         #Values are always strings from the front-end -> convert to numbers
+        print(body)
         levels = [int(i) for i in body['levels']]
         adventures = {}
         for name, adventure_levels in body['adventures'].items():

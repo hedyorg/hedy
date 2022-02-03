@@ -25,7 +25,7 @@
                     <tr>
                         <th class="w-40 text-left border-r border-gray-400">{{ ui.adventure }} / {{ ui.level_title }}</th>
                         {% for i in range(1, max_level + 1) %}
-                            <th class="w-12"><button class="level-select-button blue-btn w-12" id="level_button_{{ i }}" onclick="hedyApp.select_all_level_adventures('{{ i }}');">{{ i }}</button></th>
+                            <th class="w-12"><button class="level-select-button blue-btn w-12" id="level_button_{{ i }}" onclick="hedyApp.select_all_level_adventures('{{ i }}');" value="{{ i }}">{{ i }}</button></th>
                         {% endfor %}
                     </tr>
                 </thead>
