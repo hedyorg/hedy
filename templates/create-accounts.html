@@ -3,9 +3,10 @@
 {% block main %}
 <div class="px-8">
     <h2>{{ auth.create_accounts }}</h2>
-
+    <div class="w-full mb-4">
+        {{ auth.accounts_intro|commonmark }}
+    </div>
     <div>
-        <h3 class="px-4">{{ auth.accounts }}</h3>
         <form onsubmit="hedyApp.create_accounts();event.preventDefault();">
         <div class="border rounded-lg px-4 py-2">
             <div class="flex flex-col" id="account_rows_container">
