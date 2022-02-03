@@ -2137,7 +2137,6 @@ def is_program_valid(program_root, input_string, level, lang):
                     pass
                 else:
                     # current mutant contains no error, save it and stop
-                    print(mutant)
                     program_repair.save_mutant(mutant, mutant_result)
                     break
             raise exceptions.UnquotedTextException(level=level, fixed_code=program_repair.fixed_code,
