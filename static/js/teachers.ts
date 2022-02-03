@@ -271,14 +271,11 @@ export function reset_level_preferences(level: number) {
     $('#hide_level' + level).prop("checked", false);
 }
 
-export function add_account_placeholders() {
-    const amount = <number>$('#add_placeholders').val();
-    for (let i = 0; i < amount; i++) {
-        let row = $("#account_row_unique").clone();
-        row.removeClass('hidden');
-        row.attr('id', "");
-        row.appendTo("#account_rows_container");
-    }
+export function add_account_placeholder() {
+    let row = $("#account_row_unique").clone();
+    row.removeClass('hidden');
+    row.attr('id', "");
+    row.appendTo("#account_rows_container");
 }
 
 export function create_accounts() {
