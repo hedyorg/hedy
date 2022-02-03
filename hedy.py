@@ -1907,6 +1907,7 @@ def get_parser(level, lang="en"):
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
+    program_repair.clear_mutants()
     transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
 
@@ -2126,7 +2127,21 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
-            raise exceptions.UnquotedTextException(level=level)
+            program_repair.make_mutants(input_string, line)
+            while program_repair.mutants:
+                mutant = program_repair.mutants.pop(0)
+                try:
+                    mutant_result = transpile_inner(mutant, level, lang)
+                except exceptions.HedyException:
+                    # current mutant contains (another) error, try next
+                    pass
+                else:
+                    # current mutant contains no error, save it and stop
+                    print(mutant)
+                    program_repair.save_mutant(mutant, mutant_result)
+                    break
+            raise exceptions.UnquotedTextException(level=level, fixed_code=program_repair.fixed_code,
+                                                   fixed_result=program_repair.fixed_result)
         elif invalid_info.error_type == 'empty program':
             raise exceptions.EmptyProgramException()
         elif invalid_info.error_type == 'unsupported number':

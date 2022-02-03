@@ -140,9 +140,12 @@ class IncompleteCommandException(HedyException):
         # Location can be either [row, col] or just [row]
         self.location = [line_number]
 
-class UnquotedTextException(HedyException):
-    def __init__(self, level):
-        super().__init__('Unquoted Text', level=level)
+class UnquotedTextException(FtfyException):
+    def __init__(self, level, fixed_code, fixed_result):
+        super().__init__('Unquoted Text',
+                         level=level,
+                         fixed_code=fixed_code,
+                         fixed_result=fixed_result)
 
 class UnquotedAssignTextException(HedyException):
     def __init__(self, text):

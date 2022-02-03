@@ -1,3 +1,9 @@
+mutants = []
+fixed_code = None
+fixed_result = None
+mutants_made = False
+
+
 def insert(input_string, line, column, new_string):
     """"insert new_string at (line, column)"""
     rows = input_string.splitlines()
@@ -20,6 +26,30 @@ def replace(input_string, line, column, length, new_string):
     result = insert(result, line, column, new_string)
 
     return result
+
+
+def make_mutants(input_string, line):
+    global mutants_made
+    if not mutants_made:  # make list only once
+        mutants_made = True
+        length = len(input_string.splitlines()[line - 1]) + 2
+        print('length', length)
+        for i in range(1, length):
+            mutants.append(add_quote(input_string, line, i))
+
+
+def clear_mutants():
+    global fixed_code, fixed_result, mutants_made, mutants
+    fixed_code = None
+    fixed_result = None
+    mutants_made = False
+    mutants = []
+
+
+def save_mutant(mutant, mutant_result):
+    global fixed_code, fixed_result
+    fixed_code = mutant
+    fixed_result = mutant_result
 
 
 def remove_leading_spaces(input_string):
