@@ -35,7 +35,9 @@ var StopExecution = false;
 
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
-    exampleEditor.setOptions({ minLines: 2 });
+    if ($(preview).hasClass('common-mistakes')) {
+      exampleEditor.setOptions({ minLines: 10 });
+    }
 
     if (dir === "rtl") {
          exampleEditor.setOptions({ rtl: true });
@@ -154,9 +156,6 @@ var StopExecution = false;
    */
   function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     console.log(element);
-    if ($(element).hasClass('common-mistakes')) {
-      isReadOnly = false;
-    }
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
     if (isReadOnly) {
@@ -169,8 +168,16 @@ var StopExecution = false;
       // When it is the main editor -> we want to show line numbers!
       if (element.getAttribute('id') === "editor") {
         editor.setOptions({
-        showGutter: true
-      });
+          showGutter: true
+        });
+      }
+      if ($(element).hasClass('common-mistakes')) {
+        $(element).height("22rem");
+        editor.setOptions({
+          showGutter: true,
+          showPrintMargin: true,
+          highlightActiveLine: true
+        });
       }
     }
 
