@@ -65,7 +65,7 @@
     </div>
      <div class="mt-4 flex flex-row">
          <button class="blue-btn ltr:mr-4 rtl:ml-4" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
-         <button class="yellow-btn text-white" onclick="$('.adventure_level_input').prop('checked', false);">{{ auth.reset_adventures }}</button>
+         <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);});">{{ auth.reset_adventures }}</button>
          <button class="red-btn ltr:ml-auto rtl:mr-auto {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
              {{ auth.remove_customization }}</button>
      </div>
