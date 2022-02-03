@@ -1,38 +1,83 @@
 1:
     intro_text: "हेडी मे आपका स्वागत है! स्तर 1 में आप `print`, `ask` और `echo` जैसे आदेशों  का उपयोग कर सकते है। नीले बटन को दबाने से आपका कोड आपके लिये टाइप हो जाएगा। अब प्रोग्रामिंग क्षेत्र में नीचे बाएं  जाकर हरे बटन “रन द  कोड दबाएं ।"
     start_code: "print हेलो दुनिया!"
+    commands:
+        - name: "print"
+          explanation: "Print something with `print`."
+          example: "Example: print Hello welcome to Hedy!"
+          demo_code: "print Hello welcome to Hedy!"
 2:
     intro_text: "print वैसे ही काम करेगा जैसे स्तर १ में किया, लेकिन ask बदल गया है और अब उसको किसी नाम की ज़रूरत है, जो कि आप `print` कर सकते हैं| `echo` की अब कोई ज़रूरत नहीं है| अब आप इन आदेशों का भी इस्तेमाल कर सकते हैं:"
     start_code: "print हेलो दुनिया  !"
+    commands:
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print Hello welcome to Hedy!"
 3:
     intro_text: "print वैसे ही काम करेगा जैसे स्तर १ में किया, लेकिन ask बदल गया है और अब उसको किसी नाम की ज़रूरत है, जो कि आप `print` कर सकते हैं| `echo` की अब कोई ज़रूरत नहीं है| अब आप इन आदेशों का भी इस्तेमाल कर सकते हैं:"
     start_code: "print हेलो दुनिया  !"
+    commands:
+        - name: "print"
+          explanation: "Print something with `print`."
+          example: "Example: print Hello welcome to Hedy!"
+          demo_code: "print Hello welcome to Hedy!"
 4:
     start_code: "print 'हेलो  दुनिया'"
     intro_text: "`ask` अभी भी स्तर ३ में बिल्कुल वैसा ही है, लेकिन `print` अब अलग है| जो भी टेक्स्ट आपको `print` करवाना है उसको दोहरा उदाहरण चिन्ह में रखना होगा| "
+    commands:
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 5:
     start_code: |-
         नाम is ask आपका नाम क्या है?
         if नाम is हेडी print 'कूल!' else print 'मेह'
     intro_text: "`ask` और `print` दोनों बिल्कुल वैसा ही काम करते है जैसा स्तर ३ में किया था| स्तर ४ में `if` आदेश जुड़ा है|"
+    commands:
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 6:
     start_code: "print '५ गुणा ५ है ' 5 * 5"
     intro_text: "`ask`, `print` और  `if` वैसे ही हैं जैसे स्तर ४ में हैं| स्तर ५ में कुछ नया है ... अब आप हिसाब कर सकते हैं|"
+    commands:
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 7:
     start_code: "repeat 3 times print 'हेडी मजेदार है!'"
     intro_text: "`ask`, `print` और `if` वैसे ही काम करते है जैसा स्तर ४ और ५ में करते थे| लेकिन स्तर ६ में `repeat` आदेश जुड़ जाता है| repeat एक कोड की लाइन को बहुत बार निष्पादित करने के काम आता है|"
+    commands:
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 8:
     start_code: |
         repeat 5 times
           print 'हेलो दोस्तों'
           print 'ये सब ५ बार प्रिंट होंगे'
     intro_text: "ask और print दोनों वैसा ही काम करेंगे जैसे हमें पता है|लेकिन if और repeat बदल चुके है! अब आप एक साथ कोड के समूहों को चला सकते हैं, लेकिन आपको कोड को इंडेंट करना होगा| इसका मतलब है कि लाइन की शुरुआत में चार रिक्त स्थान डालने होंगे |यह तब भी लागू होगा जब आप केवल एक पंक्ति का एक ब्लॉक बनाना चाहते हैं| यदि आप एक repeat और if को जोड़ते हैं, तो आपको प्रत्येक ब्लॉक को इंडेंट करना होगा| अधिक जानकारी के लिए उदाहरण कोड पर एक नज़र डालें!"
+    commands:
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 9:
     start_code: |-
         for इ in range 1 to 3:
             for ज in range 1 to 5:
                 print ' हम दौर में हैं: ' इ  ' और हम गिनते हैं: ' ज
     intro_text: अब से हम, लूप को अक्सर दोहरा सकते हैं| उदाहरण में हम ५ तक गिनते हैं और वह ३ बार करते हैं| तो हम ३ दौर लगाते  हैं और ५ तक गिनते हैं हर बार|
+    commands:
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 10:
     start_code: |-
         जानवरों is कुत्ता, बिल्ली, ब्लॉबफिश
@@ -48,6 +93,11 @@
         for जानवर in जानवरों
             print 'मुझे पसंद है ' जानवर
         ```
+    commands:
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 11:
     start_code: |-
         for काउंटर in range 1 to 5
@@ -56,6 +106,11 @@
         `print` वैसा ही काम करेगा जैसा हमें पता है लेकिन `repeat` के स्थान पर अब `for` है !
         अब आप 'for  काउंटर  in range १-५' लिख सकते हैं और आपके प्रोग्राम में 'काउंटर' का उपयोग कर सकते हैं| कोशिश करके देखो क्या होता है!
         `for` और 'if' पंक्तियों के बाद इंडेंटेशन का उपयोग करना ध्यान में रखें (जिसका मतलब है कि सेंटेंस लिखने से पहले ४ रिक्त स्थान डाल दें|)
+    commands:
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
@@ -153,11 +208,16 @@
 14:
     start_code: |-
         उम्र is ask 'आप कितने साल के हैं?'
-        if उम्र < १२:
+        if उम्र > 12
             print 'आप मुझसे छोटे हैं!'
-        elif उम्र > १२:
+        else
             print 'आप मुझसे बड़े हैं!'
     intro_text: हम नए विषय के बारे में सीखने जा रहे हैं| आप पहले से जानते होंगे गणित में, '<' और '>'| '<' जांचता है अगर पहली संख्या दूसरी से छोटी है, जैसे '४<५'| '>' जांचता है अगर पहली संख्या दूसरी से बड़ी है, जैसे '६>५'|
+    commands:
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print 'Hello welcome to Hedy!'"
 15:
     start_code: |-
         answer = 0
@@ -193,7 +253,8 @@
 16:
     start_code: |
         फल is ['सेब', 'केला', 'चेरी']
-        print(फल)
+        for i in range 1 to 3
+            print फल[i]
     intro_text: हम सूचियों के आस पास चोकोर ब्रैकेट्स लगाने जा रहे हैं! अब हमें इकहरा उदाहरण चिन्ह(') लगाने की भी आवश्यकता है सूचियों में वस्तुओं के आस पास|
     commands:
     -   name: चोकोर ब्रैकेट्स
