@@ -31,7 +31,8 @@ var StopExecution = false;
   for (const preview of $('.turn-pre-into-ace pre').get()) {
     $(preview).addClass('text-lg rounded');
     $(preview).addClass('overflow-x-hidden');
-    const exampleEditor = turnIntoAceEditor(preview, true)
+    const exampleEditor = turnIntoAceEditor(preview, true);
+
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     exampleEditor.setOptions({ minLines: 2 });
@@ -152,6 +153,10 @@ var StopExecution = false;
    * Turn an HTML element into an Ace editor
    */
   function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
+    console.log(element);
+    if ($(element).hasClass('common-mistakes')) {
+      isReadOnly = false;
+    }
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
     if (isReadOnly) {
