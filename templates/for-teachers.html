@@ -43,7 +43,15 @@
             </div>
             {% for level in section['levels'] %}
                 <div class="common-mistakes-section hidden turn-pre-into-ace mt-4" id="common_mistakes-{{loop.index}}">
-                {{ level.text|commonmark }}
+                    {% for mistake_section in level.sections %}
+                        <h3>{{ mistake_section.title }}</h3>
+                        <p>{{ mistake_section.text|commonmark }}</p>
+                        {% if mistake_section.code %}
+                            <div class="w-1/2 turn-pre-into-ace mx-auto my-5">
+                                <pre class="common-mistakes" id="{{ level.level }}">{{ mistake_section.code }}</pre>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             {% endfor %}
         {% endif %}
