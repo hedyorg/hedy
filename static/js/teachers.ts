@@ -2,23 +2,6 @@ import { modal, error } from './modal';
 import { auth } from './auth';
 import {showAchievements} from "./app";
 
-// Because we don't put this inside a function it always works on the change!
-$('.level_selector').change(function() {
-    const level = $(this).attr('level');
-    if ($(this).prop("checked")) {
-        $('.adventure_level_' + level).each(function(){
-            $(this).removeClass('hidden');
-            if ($(this).is(':enabled')) {
-                $(this).prop("checked", true);
-            }
-        });
-    } else {
-        $('.adventure_level_' + level).each(function(){
-            $(this).addClass('hidden');
-        });
-    }
-});
-
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
     if (!class_name) {
@@ -314,5 +297,26 @@ export function select_all_levels_adventure(adventure_name: string) {
             $(this).prop("checked", !checked);
         }
     });
+}
+
+export function select_all_level_adventures(level: string) {
+    // It is not selected yet -> select all and change color
+    if ($('#level_button_' + level).hasClass('blue-btn')) {
+        $('.adventure_level_' + level).each(function(){
+            $(this).removeClass('hidden');
+            if ($(this).is(':enabled')) {
+                $(this).prop("checked", true);
+            }
+        });
+        $('#level_button_' + level).removeClass('blue-btn');
+        $('#level_button_' + level).addClass('green-btn');
+    } else {
+        $('.adventure_level_' + level).each(function () {
+            $(this).prop("checked", false);
+            $(this).addClass('hidden');
+        });
+        $('#level_button_' + level).removeClass('green-btn');
+        $('#level_button_' + level).addClass('blue-btn');
+    }
 }
 
