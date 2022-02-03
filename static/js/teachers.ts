@@ -228,7 +228,7 @@ export function save_customizations(class_id: string) {
     let levels: (string | undefined)[] = [];
     $('.level-select-button').each(function() {
         if ($(this).hasClass("green-btn")) {
-            levels.push($(this).attr('level'));
+            levels.push(<string>$(this).val());
         }
     });
     let adventures = {};
