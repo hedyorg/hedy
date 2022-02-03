@@ -1290,12 +1290,19 @@ def explore():
 
     filtered_programs = []
     for program in programs:
+        if 'error' not in program:
+            try:
+                hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
+                program['error'] = False
+            except:
+                program['error'] = True
+            DATABASE.store_program(program)
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
             'level': program['level'],
             'id': program['id'],
-            'error': program['error'] if 'error' in program else None,
+            'error': program['error'],
             'code': "\n".join(program['code'].split("\n")[:4])
         })
 
