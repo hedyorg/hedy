@@ -3,16 +3,6 @@
 {% block main %}
 <div class="px-8">
     <h2>{{ auth.create_accounts }}</h2>
-    <div class="flex flex-row items-center mb-4 border rounded-lg px-4 py-2">
-        <h4 class="inline-block w-64 mt-0">{{ auth.add_accounts }}</h4>
-        <select id="add_placeholders" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-            <option disabled selected value="">{{ auth.amount }}</option>
-            {% for i in range(1, (10 + 1)) %}
-                <option value="{{ i }}">{{ i }}</option>
-            {% endfor %}
-        </select>
-        <button class="green-btn" onclick="hedyApp.add_account_placeholders();">{{ auth.add }}</button>
-    </div>
     <div>
         <h3 class="px-4">{{ auth.accounts }}</h3>
         <form onsubmit="hedyApp.create_accounts();event.preventDefault();">
@@ -21,7 +11,7 @@
                 <!-- we create one hidden row -> we can simply copy this one and append() below when adding rows -->
                 <div class="flex flex-row w-full items-center mb-4 account_row {% if i == 0 %}hidden{% endif %}" {% if i == 0 %}id="account_row_unique"{% endif %}>
                     <div class="flex flex-col">
-                        <input id="username" name="username" {% if i != 0 %}required{% endif %} type=text placeholder="{{ auth.password }}" class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                        <input id="username" name="username" {% if i != 0 %}required{% endif %} type=text placeholder="{{ auth.username }}" class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                     </div>
                     <div class="flex flex-col">
                         <input id="mail" name="mail" {% if i != 0 %}required{% endif %} type=email placeholder="{{ auth.email }}" class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
