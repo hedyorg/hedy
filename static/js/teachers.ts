@@ -302,12 +302,16 @@ export function remove_customizations(class_id: string) {
 }
 
 export function select_all_levels_adventure(adventure_name: string) {
-    console.log("Hier komen we!");
+    let first_input = true;
+    let checked = true;
     $('.adventure_level_input').each(function() {
+        if (first_input) {
+            checked = $(this).prop("checked");
+            first_input = false;
+        }
         const name = <string>$(this).attr('adventure');
-        console.log(name)
         if (name == adventure_name && $(this).is(":visible")) {
-            $(this).prop("checked", true);
+            $(this).prop("checked", !checked);
         }
     });
 }
