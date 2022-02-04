@@ -1,46 +1,17 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="px-8">
-  <h2>Total programs: {{ program_count }}</h2>
-  <h2>Users ({{ user_count }})</h2>
-  <table class="users">
-    <thead>
-      <td>#</td>
-      <td>Username</td>
-      <td>Programs</td>
-      <td>Program count</td>
-      <td>Email</td>
-      <td>Created</td>
-      <td>Last login</td>
-      <td>Birth year</td>
-      <td>Country</td>
-      <td>Gender</td>
-      <td>Programming experience</td>
-      <td>Experience with languages</td>
-      <td>Is teacher</td>
-      <td>Email verified</td>
-    </thead>
-    <tbody>
-      {% for user in users %}
-      <tr>
-        <td>{{user.index}}</td>
-        <td>{{user.username}}</td>
-        <td><a href="programs?user={{user.username}}">Programs</a></td>
-        <td>{{user.program_count or 0}}</td>
-        <td>{{user.email}}&nbsp;<a style="cursor: pointer" onclick="hedyApp.auth.changeUserEmail ('{{user.username}}', '{{user.email}}')">change</a></td>
-        <td>{{user.created}}</td>
-        <td>{{user.last_login}}</td>
-        <td>{{user.birth_year}}</td>
-        <td>{{user.country}}</td>
-        <td>{{user.gender}}</td>
-        <td>{{user.prog_experience}}</td>
-        <td>{{user.experience_languages}}</td>
-        <td><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.auth.markAsTeacher ('{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"</td>
-        <td>{{user.email_verified}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="bg-white w-1/2 mx-auto px-8 py-8 shadow-md rounded-lg">
+    <div class="flex flex-col items-center">
+        <h1>Admin overview</h1>
+        <div>
+            Welcome, {{ username }}!
+        </div>
+    </div>
+    <div class="mt-8 flex flex-row items-center justify-center">
+        <button class="green-btn text-xl m-2 p-4 section-button"  onclick="window.open('/admin/users', '_self')">Users overview</button>
+        <button class="green-btn text-xl m-2 p-4 section-button"  onclick="window.open('/admin/classes', '_self')">Classes overview</button>
+        <button class="green-btn text-xl m-2 p-4 section-button"  onclick="window.open('/admin/stats', '_self')">Statistics</button>
+    </div>
 </div>
 {% endblock %}

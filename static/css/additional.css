@@ -2,7 +2,7 @@
  * Handwritten CSS
  *
  * Styles here should be minimal; most of the stuff should go into
- * `tailwind/styles.css` (and then run `tailwind/generate-css` to regenerate
+ * `build-tools/heroku/tailwind/styles.css` (and then run `build-tools/heroku/tailwind/generate-css` to regenerate
  * the generated css file).
  */
 
@@ -50,4 +50,53 @@ input:checked ~ .dot {
   #repair_button{
     margin-left: 12rem !important;
   }
+}
+
+/*
+https://github.com/ajaxorg/ace/issues/1104
+Force the gutter to be smaller, looks better from 1-999 lines (probably all of our programs)
+*/
+#editor-area .ace_gutter {
+    width: 32px !important;
+    position: absolute;
+}
+
+body[dir='ltr'] #editor-area .ace_gutter {
+    margin-right: auto;
+    left: 0;
+}
+
+body[dir='rtl'] #editor-area .ace_gutter {
+    margin-left: auto;
+    right: 0;
+}
+
+body[dir='ltr'] #editor-area .ace_scroller {
+    left: 32px !important;
+    right: 0px !important;
+}
+
+body[dir='rtl'] #editor-area .ace_scroller {
+    left: 0px !important;
+    right: 32px !important;
+}
+
+#editor-area .ace_layer .ace_gutter-layer {
+    width: 32px !important;
+}
+
+#editor-area .ace_gutter-layer > * {
+    margin-left: 2px;
+    margin-right: 0px;
+    padding-left: 2px;
+    padding-right: 0px;
+    text-align: left;
+}
+
+body[dir='rtl'] #editor-area .ace_gutter-layer {
+    margin-left: 0px;
+    margin-right: 2px;
+    padding-left: 0px;
+    padding-right: 2px;
+    text-align: right;
 }

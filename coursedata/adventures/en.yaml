@@ -21,11 +21,14 @@ adventures:
                     After that first line, start with `print` if the sentence needs to be printed.
                     You use `echo` if you want your main character to be at the end of the sentence.
 
+                example_code: |
                     ## Example Hedy code
+
+
                     ```
                     ask The main character of this story is
                     print The main character is now going to walk in the forest
-                    echo He's a bit scared, 
+                    echo He's a bit scared,
                     print He hears crazy noises everywhere
                     print He's afraid this is a haunted forest
                     ```
@@ -39,14 +42,16 @@ adventures:
                     You do have to program a little bit extra for that. You must now name your main character first.
 
                     You can then put that name anywhere in a sentence.
-
+                example_code: |
                     ## Example Hedy code
+
 
                     ```
                     name is ask What is the name of the main character?
                     print name is now going to run in the woods
                     print name is a bit scared
-                    print He hears crazy noises everywhere
+                    print Suddenly he hears a crazy noise...
+                    sleep
                     print name is afraid this is a haunted forest
                     ```
                 start_code: "print Your story"
@@ -55,7 +60,10 @@ adventures:
                     ## Story
                     In this level you can use the quotation marks to save multiple words in a variable.
 
+                example_code: |
                     ## Example Hedy code
+
+
                     ```
                     name = 'The Queen of England'
                     print name ' was eating a piece of cake, when suddenly...'
@@ -66,7 +74,9 @@ adventures:
                     ## Story
                     In this level you can use the for command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     animals = red bird, black sheep, green frog, yellow duck, little child
                     print 'brown bear'
@@ -138,19 +148,21 @@ adventures:
                     ## Story
                     In this level you can use multiple lines in your if commands, this way you can upgrade your happy or sad ending!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'OH NO! The T-rex is closing in!'
                     end = ask 'Do you want a happy or a sad ending?'
                     if end is happy
                         print 'Just in time Richard jumps back into the time machine!'
                         print 'Michael types in the code and...'
-                        print 'ZAP!'
+                        print '💥ZAP!💥'
                         print 'They are back in their garage'
                     else
                         print 'Michael yells COME ON RICHARD! RUN FASTER!'
                         print 'But Richard is too slow...'
-                        print 'The T-rex closes in and eats him in one big bite!'
+                        print 'The T-rex closes in and eats him in one big bite!🦖'
                     ```
                 start_code: ""
             7:
@@ -159,7 +171,9 @@ adventures:
                     In a story, someone says words several times. For example, when someone calls for help or sings a song.
                     You can put such repetitions in your story, in this level with `repeat`.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'The prince kept calling for help'
                     repeat 5 times print 'Help!'
@@ -182,7 +196,9 @@ adventures:
 
                     You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `if`, and then you have already made a whole program!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     name is ask Who is walking in the forest?
                     print name 'walks through the forest'
@@ -198,13 +214,15 @@ adventures:
                     You may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?
                     You can solve that in this level. You must use quotation marks for everything that you are going to print.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     name is Hans
                     print 'The name of the main character is' name
                     print name 'is now going to walk in the woods'
                     print name 'is a bit scared'
-                    animals is owl, hedgehog, armadillo
+                    animals is 🦔, 🐿, 🦉, 🦇
                     print 'He hears the sound of an' animals at random
                     print name 'is afraid this is a haunted forest'
                     ```
@@ -212,12 +230,33 @@ adventures:
             3:
                 story_text: |
                     ## Story
-                    In level 3 you can make your story more fun. You can also add something random to your story. Any monster, animal or other obstacle.
+                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle.
 
+                example_code: |
                     It goes like this:
                     ```
-                    animals is owl, hedgehog, armadillo
+                    animals is 🦔, 🐿, 🦉, 🦇
                     print He now hears the sound of an animals at random
+                    ```
+                story_text_2: |
+                    The command `add` can also come in handy in your story. For example:
+                    ```
+                example_code_2: |
+                    print He hears a sound
+                    animals is 🐿, 🦔, 🦇, 🦉
+                    animal is ask What do you think it is?
+                    add animal to animals
+                    print it was a animals at random
+                    ```
+                story_text_3: |
+                    This is an example of the `remove` command in your story
+                example_code_3: |
+                    ```
+                    print His backpack got way too heavy.
+                    print Inside were a bottle of water, a flashlight and a brick.
+                    bag is water, flashlight, brick
+                    dump is ask Which item should he dump?
+                    remove dump from bag
                     ```
                 start_code: "print Your story"
             15:
@@ -226,15 +265,17 @@ adventures:
                     Using the `while` loop can make your stories more interesting. For example, you can use `while game is 'on'` so you can play until the game is over.
                     Or you can use `while sword is 'lost'` so the player can't continu the game until they have found something.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     keys = 'lost'
                     print 'You are standing in your garden and you have lost your keys.'
                     print 'Where do you want to look for them?'
                     print 'You can choose: tree, flowerbed, rock, postbox'
-                    while keys is 'lost'
+                    while keys == 'lost'
                         location = ask 'Where do you want to look?'
-                        if location is 'flowerbed'
+                        if location == 'flowerbed'
                             print 'Here they are!'
                             keys = 'found'
                         else
@@ -246,7 +287,9 @@ adventures:
                     ## Story
                     By using the `and` and `or` commands, you can shorten your stories. For example, check out the dragon story.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     sword = 'lost'
                     game = 'on'
@@ -273,6 +316,82 @@ adventures:
                                 sword = 'found'
                     ```
                 start_code: ""
+    parrot:
+        name: "Parrot"
+        description: "Create your own online pet parrot that will copy you!"
+        image: "story.png"
+        default_save_name: "Parrot"
+        levels:
+            1:
+                story_text: |
+                    ## Parrot
+                    Create your own online pet parrot that will copy you!
+
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    print Im Hedy the parrot
+                    ask whats your name?
+                    echo
+                    echo
+                    ```
+                start_code: "print Im Hedy the parrot"
+            2:
+                story_text: |
+                    ## Parrot
+                    Create your own online pet parrot that will copy you!
+
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    print Im Hedy the parrot
+                    name is ask whats your name?
+                    print name
+                    sleep
+                    print squawk
+                    sleep
+                    print name
+                    ```
+                start_code: "print Im Hedy the parrot!"
+            3:
+                story_text: |
+                    ## Parrot
+                    Teach your parrot a new word with `add`.
+
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    words is squawk, Hedy
+                    print Train your parrot!
+                    new_word is ask Which word do you want to teach them?
+                    add new_word to words
+                    print 🧒 Say new_word , Hedy!
+                    print 🦜 words at random
+                    ```
+                start_code: ""
+            5:
+                story_text: |
+                    ## Parrot
+                    Reward your parrot if it says the correct word!
+
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    words is squawk, Hedy
+                    print 'Train your parrot!'
+                    new_word is ask 'Which word do you want to teach them?'
+                    add new_word to words
+                    said_word is words at random
+                    print '🧒 Say ' new_word ', Hedy!'
+                    print '🦜 ' said_word
+                    if said_word is new_word print '🧒 Great job, Hedy! 🍪'
+                    else print '🧒 No, Hedy! Say ' new_word
+                    ```
+                start_code: ""
     songs:
         name: "Sing a song!"
         description: "Print a song"
@@ -283,7 +402,9 @@ adventures:
                 story_text: |
                     ## Sing a song!
                     In this song we can make it even easier to program 'if you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                     for action in actions
@@ -364,7 +485,9 @@ adventures:
                     ## Songs
                     In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     verse = 99
                     repeat 99 times
@@ -387,7 +510,9 @@ adventures:
 
                     You can make this song much shorter with a `repeat`! Can you finish the code?
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
@@ -401,7 +526,9 @@ adventures:
                     Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
                     For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     verse = 99
                     print verse ' bottles of beer on the wall'
@@ -417,7 +544,7 @@ adventures:
             16:
                 story_text: |
                     ## Sing a song!
-                    In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in teh same place in the list.
+                    In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
                     The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
 
                     ## Old MacDonald
@@ -465,7 +592,9 @@ adventures:
 
                     This is the start of a little staircase. Can you make it have 5 steps?
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     turn right
                     forward 50
@@ -483,7 +612,9 @@ adventures:
                     Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
                     Can you make a figure with this code? Maybe a triangle or a circle?
 
+                example_code: |
                     ## Example Hedy code
+
 
                     ```
                     print Drawing figures
@@ -504,7 +635,9 @@ adventures:
                     In this level you can use use `random` with the drawing turtle. A random choice makes the turtle walk a different path each time.
                     Use `at random` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.
 
+                example_code: |
                     ## Example Hedy code
+
 
                     ```
                     angles is 10, 50, 90, 150, 250
@@ -521,7 +654,9 @@ adventures:
                     ## Let's draw
                     In level 4 you have to use quotation marks with `print` and `ask`. Also when drawing!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Drawing figures'
                     angle is 90
@@ -542,7 +677,9 @@ adventures:
                     ## Let's draw
                     In level 5 you can make a choice with `if`. For example between different types of figures.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Drawing Figures'
                     figure is ask 'Do you want a square or a triangle?'
@@ -569,19 +706,23 @@ adventures:
                     Now that we can repeat several lines, we can make figures more easily.
                     We only have to set the angle once and then use that variable in the `repeat`.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     angle = 90
                     repeat 10 times
                         turn angle
                         forward 50
                     ```
-
+                story_text_2: |
                     ## Interaction
                     Also, we can now improve the program that draws different figures.
                     Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
 
+                example_code_2: |
                     ## Example Hedy code
+
                     ```
                     angles = ask 'How many angles should I draw?'
                     angle = 360 / angles
@@ -596,7 +737,9 @@ adventures:
                     ## Let's draw
                     In this level you can repeat one line of code with `repeat`.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Draw figures'
                     repeat 3 times forward 10
@@ -613,7 +756,9 @@ adventures:
                     That's why you also use 90 degrees for a square. 360 divided by 4 is 90.
                     Now that we can do math with Hedy, we can draw all the figures we want!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     angles = ask 'How many angles do you want?'
                     angle = 360 / angles
@@ -656,7 +801,9 @@ adventures:
                     ## Dishwashing
                     With the `repeat` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     people = mom, dad, Emma, Sophie
                     repeat _ _ print 'the dishwasher is' _
@@ -667,7 +814,9 @@ adventures:
                     ## Dishwashing
                     How often is everyone going to do the dishes? Is that fair? You can count it in this level.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     people = mom, dad, Emma, Sophie
                     emma_washes = 0
@@ -680,6 +829,23 @@ adventures:
                     Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
                     Do you make the code for the whole week?
 
+                    ## Make it fair
+                    If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!
+                    To create a fairer system you can use the `remove` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.
+
+                    Monday and tuesday are ready for you! Can you add the rest of the week?
+                    And... can you come up with a solution for when your list is empty?
+                    ```
+                    people = mom, dad, Emma, Sophie
+                    dishwasher = people at random
+                    print 'Monday the dishes are done by: ' dishwasher
+                    remove dishwasher from people
+                    dishwasher = people at random
+                    print 'Tuesday the dishes are done by: ' dishwasher
+                    remove dishwasher from people
+                    dishwasher = people at random
+                    ```
+
                 start_code: "print 'Who does the dishes?'"
             5:
                 story_text: |
@@ -689,7 +855,9 @@ adventures:
                     Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
                     Don't forget the quotes!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     people is mom, dad, Emma, Sophie
                     dishwasher is people at random
@@ -705,10 +873,13 @@ adventures:
                     Can you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.
 
                     Tip: Don't forget the quotation marks!
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     people is mom, dad, Emma, Sophie
                     print _ the dishes are done by _
+                    sleep
                     print people at _
                     ```
                 start_code: "print 'Who does the dishes?'"
@@ -719,12 +890,22 @@ adventures:
                     Then you can let the computer choose very fairly. You can program that in this level!
                     You first make a list of the members of your family. Then choose 'at random' from the list.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     people is mom, dad, Emma, Sophie
                     print people at random
                     ```
+                    ## Hack the dishwashing program!
+                    Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
 
+                    ```
+                    people is mom, dad, Emma, Sophie
+                    your_name is ask Who are you?
+                    remove your_name from people
+                    print people at random does the dishes
+                    ```
                 start_code: "print Who does the dishes?"
     dice:
         name: "Dice"
@@ -737,12 +918,15 @@ adventures:
                     ## Dice
                     Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     players = Ann, John, Jesse
                     choices = 1, 2, 3, 4, 5, 6
                     for player in players
                         print player ' throws ' choices at random
+                        sleep
                     ```
                 start_code: ""
             7:
@@ -753,7 +937,9 @@ adventures:
 
                     But maybe you want to make a completely different die. Of course you can!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     choices = 1, 2, 3, 4, 5, earthworm
                     repeat _ _ print _ _ _
@@ -766,7 +952,9 @@ adventures:
                     You may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.
                     This is the code to calculate points for one die:
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     choices = 1, 2, 3, 4, 5, earthworm
                     points = 0
@@ -789,7 +977,9 @@ adventures:
 
                     But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something else.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
                     throw is _
@@ -803,7 +993,9 @@ adventures:
                     In this level we can make sentences with the die value in the sentence, with quotes of course.
                     This time the sample code is not quite complete. Can you finish the code?
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
                     print _ you threw _
@@ -821,7 +1013,9 @@ adventures:
 
                     ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
                     print choices at random
@@ -833,7 +1027,9 @@ adventures:
                     ## Dice
                     In this game you have to throw 6 in as little tries as possible.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     options = 1, 2, 3, 4, 5, 6
                     print 'Throw 6 as fast as you can!'
@@ -859,21 +1055,25 @@ adventures:
 
                     With `ask` you can make a choice, and with `echo` you can repeat that choice.
 
+                example_code: |
                     ## Example Hedy code
+
 
                     ```
                     print what do you choose?
                     ask choose from rock, paper or scissors
-                    echo so your choice was: 
+                    echo so your choice was:
                     ```
-
+                    Instead of using words, you could also use emojis of course: ✊✋✌
                 start_code: "print Welcome to your own rock scissors paper!"
             10:
                 story_text: |
                     ## Rock, Paper, Scissors
                     Feeling too lazy to play the game yourself? Let Hedy play it for you!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     choices = rock, paper, scissors
                     players = Marleen, Michael
@@ -885,7 +1085,9 @@ adventures:
                 story_text: |
                     ## Rock, paper, scissors
                     In this level you can program the whole rock, paper, scissors game by nesting the if-commands. Can you finish the code?
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     choices is rock, paper, scisscors
                     your_choice is ask 'What do you choose?'
@@ -911,7 +1113,9 @@ adventures:
                     Then you can use `if` to see if they are the same or different.
                     Will you finish the code?
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     options = rock, paper, scissors
                     computer_choice is _
@@ -930,7 +1134,9 @@ adventures:
                     In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
                     Do you complete the code by entering the correct commands or characters on the underscores?
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     choices is rock, paper, scissors
                     print _ The computer chose: _ _ at _
@@ -944,7 +1150,9 @@ adventures:
                     You first make a list with `is`. Then you can let the computer choose something from the list with `at random`.
                     For example, you can let the computer pick from rock, paper and scissors.
 
+                example_code: |
                     ## Example Hedy code
+
 
                     ```
                     choices is rock, paper, scissors
@@ -956,7 +1164,9 @@ adventures:
                     ## Rock, paper, scissors
                     In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     choice is _
                     print I choose choice
@@ -967,20 +1177,22 @@ adventures:
                     ## Rock, Paper, Scissors
                     Play until you beat the computer! But first, finish the example code...
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     won = 'no'
                     options = 'rock', 'paper', 'scissors'
-                    while won is 'no'
+                    while won == 'no'
                         your_choice = ask 'What do you choose?'
                         computer_choice = options at random
                         print 'you chose ' your_choice
                         print 'the computer chose ' computer_choice
-                        if computer_choice is your_choice
+                        if computer_choice == your_choice
                             print 'Tie!'
-                        if computer_choice is 'rock' and your_choice is 'scissors'
+                        if computer_choice == 'rock' and your_choice == 'scissors'
                             print 'You lose!'
-                        if computer_choice is 'rock' and your_choice is 'paper'
+                        if computer_choice == 'rock' and your_choice == 'paper'
                             print 'You win!'
                             won = 'yes'
                 start_code: ""
@@ -989,7 +1201,9 @@ adventures:
                     ## Rock, paper, scissors
                     With the `and` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     options = 'rock', 'paper', 'scissors'
                     your_choice = ask 'What do you choose?'
@@ -999,7 +1213,7 @@ adventures:
                     if computer_choice is your_choice
                         print 'Tie'
                     if computer_choice is 'rock' and your_choice is 'paper'
-                        print 'Jij wint!'
+                        print 'You win!'
                     if computer_choice is 'rock' and your_choice is 'scissors'
                         print 'The computer wins!'
                     ```
@@ -1015,20 +1229,22 @@ adventures:
                     ## Guess which number
                     In this level you can programm the game 'Guess which number'
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Guess which number'
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     number = numbers at random
                     game = 'on'
                     for i in range 1 to 10
-                        if game is 'on'
+                        if game == 'on'
                             guess = ask 'Which number do you think it is?'
                             if guess > number
                                 print 'Lower!'
                             if guess < number
                                 print 'Higher!'
-                            if guess is number
+                            if guess == number
                                 print 'You win!'
                                 game = 'over'
                 start_code: ""
@@ -1037,7 +1253,9 @@ adventures:
                     ## Calculator
                     Now you can make a calculator that works for decimal numbers.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     number1 = ask 'What is the first number?'
                     number2 = ask 'What is the second number?'
@@ -1050,7 +1268,9 @@ adventures:
                     This calculator game helps you practise your tables of multiplication!
                     If you add more numbers to the list, you can practise all the multiplications.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     numbers = 1, 2, 3
                     for number1 in numbers
@@ -1068,7 +1288,9 @@ adventures:
                     ## Calculator
                     In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     score = 0
                     repeat 10 times
@@ -1089,19 +1311,23 @@ adventures:
                     ## Calculator
                     Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     correct_answer = 11 * 27
                     answer = ask 'How much is 11 times 27?'
                     if answer is correct_answer print 'good job!'
                     else print 'Wrong! It was ' correct_answer
                     ```
-
+                story_text_2: |
                     ## Random numbers
                     You can also let the computer do random sums on its own using random.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
 
+                example_code_2: |
                     ## Example Hedy code
+
                     ```
                     tables = 4, 5, 6, 8
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -1120,7 +1346,9 @@ adventures:
                     You can add the `while` loop to the calculator game you've learned to make in a previous level.
                     This makes sure the player can't continue to the next question if they answer incorrectly.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     score = 0
                     for i in range 0 to 9
@@ -1148,11 +1376,13 @@ adventures:
                     ## Restaurant
                      In level 1 you can make your own virtual restaurant and take your guests' orders.
 
+                example_code: |
                     ## Example Hedy code
+
                       ```
-                     print Welcome to Hedy's restaurant
+                     print Welcome to Hedy's restaurant 🍟
                      ask What would you like to order?
-                     echo So you would like to order 
+                     echo So you would like to order
                      print Thanks you for your order!
                      print It's on its way!
                      ```
@@ -1184,7 +1414,9 @@ adventures:
                     ## Restaurant
                     From this level on you can use decimal numbers to make you menu more realistic.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     price = 0
                     food = ask 'What would you like to order?'
@@ -1205,7 +1437,9 @@ adventures:
                     ## Restaurant
                     We can use the `for i in range 1 to 5` to print the orders from multiple customers in an orderly manner.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Welcome to Restaurant Hedy!'
                     people = ask 'For how many people would you like to order?'
@@ -1227,15 +1461,22 @@ adventures:
                     ## Restaurant
                     In this level you'll learn how to easily ask your guests' orders in a short code.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     courses = appetizer, main course, dessert
                     for course in courses
                         food = ask 'What would you like to eat as your ' course '?'
                         print food ' will be your ' course
                     ```
+
+                story_text_2: |
                     ## Example Hedy code
+
                     Of course, you could also order for multiple people!
+
+                example_code_2: |
                     ```
                     courses = appetizer, main course, dessert
                     names = Timon, Onno
@@ -1252,7 +1493,9 @@ adventures:
                     For example you would ask for sauce if somebody orders fries, but you wouldn't if someone orders pizza!
                     Check out the example, and try this at your own virtual restaurant!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Welcome to Hedys restaurant!'
                     people = ask 'How many people will be joining us today?'
@@ -1312,7 +1555,8 @@ adventures:
                     ## Restaurant
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
-                    ## Example Hedy Code (Simple)
+                example_code: |
+                    ## Example Hedy code (Simple)
                     You can make a simple restaurant code, like this:
                     ```
                     print 'Welcome to Hedys restaurant'
@@ -1327,9 +1571,11 @@ adventures:
                     print 'That will be ' price ' dollars, please'
                     print 'Thank you, enjoy your meal!'
                     ```
+                story_text_2: |
                     But you can also add many more things to your virtual restaurant, for example more courses.
 
-                    ## Example Hedy Code (Elaborate)
+                example_code_2: |
+                    ## Example Hedy code(Elaborate)
                     In this example there are three courses, which requires more code and more additions in calculating the price.
                     ```
                     print 'Welcome to Hedys restaurant'
@@ -1367,7 +1613,9 @@ adventures:
                     In this level the if command allows you to ask your customers questions and give different responses to the answers.
                     In the example below, you see that you can ask the customer if they want to hear the specials and Hedy can respond accordingly.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     print 'Welcome to Hedys restaurant!'
                     special is ask 'Would you like to hear our specials today?'
@@ -1417,7 +1665,8 @@ adventures:
                     Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
                     You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
 
-                    ## Example Hedy Code Random Restaurant
+                example_code: |
+                    ## Example Hedy code
 
                     ```
                     print Welcome to Hedy's Random Restaurant!
@@ -1434,20 +1683,31 @@ adventures:
                     print That will be: prices at random
                     print Thank you and enjoy your meal!
                     ```
+                story_text_2: |
+                    ## Allergies
+                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `remove`command to remove it from your menu.
 
-                    ## Challenge
-                    Can you think of any fun additions in your restaurant code?
+                example_code_2: |
+                    ```
+                    print Mystery milkshake
+                    flavors is strawberry, chocolate, vanilla
+                    allergies is ask Are you allergic to any falvors?
+                    remove allergies from flavors
+                    print You get a flavors at random milkshake
+                    ```
                 start_code: ""
             15:
                 story_text: |
                     ## Restaurant
                     With the `while` you can make sure your costumers can keep adding orders until they are done.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Welcome at McHedy'
                     more = 'yes'
-                    while more is 'yes'
+                    while more == 'yes'
                         order = ask 'What would you like to order?'
                         print order
                         more = ask 'Would you like to order anything else?'
@@ -1457,8 +1717,10 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In this level we can use the new commands to upgrade our restaurant.
+                    We use `and` to see if two things are both the case.
 
-                    ## Example Hedy code with the `and` command
+                example_code: |
+                    ## Example Hedy code
                     ```
                     price = 10
                     food = ask 'What would you like to eat?'
@@ -1468,8 +1730,11 @@ adventures:
                         price = price - 3
                     print 'That will be ' price ' dollars'
                     ```
+                story_text_2: |
+                    We use `or` to see if one our of two things is the case.
 
-                    ## Example Hedy code with the `or` command
+                example_code_2: |
+                    ## Example Hedy code
                     ```
                     drinks = ask 'What would you like to drink?'
                     if drinks is 'water' or drinks is 'juice'
@@ -1492,13 +1757,15 @@ adventures:
                     In level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her echo the players' answers.
                     Like this:
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print Hello, I'm Hedy the fortune teller!
                     ask Who are you?
                     print Let me take a look in my crystal ball
                     print I see... I see...
-                    echo Your name is 
+                    echo Your name is
                     ```
 
                     ## Challenge
@@ -1513,20 +1780,25 @@ adventures:
                     ## Fortune Teller
                     In this level you can make your fortunes multiple words. Like in this example below:
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
                     print 'I will take a look in my crystall ball for your future.'
                     print 'I see... I see...'
+                    sleep
                     print fortunes at random
                     ```
                 start_code: ""
             10:
                 story_text: |
                     ## Fortune Teller
-                    In this level you'll learn how to programm the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
+                    In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     houses = mansion, apartment, shack, house
                     loves = nobody, a royal, their neighbour, their true love
@@ -1536,9 +1808,13 @@ adventures:
                         print name ' lives in a ' houses at random
                         print name ' will marry ' loves at random
                         print name ' will get a ' pets at random ' as their pet.'
+                        sleep
                     ```
+                story_text_2:
+                    We can also make a Harry Potter themed fortune teller.
 
-                    ## Example Hedy Code - Harry Potter
+                example_code_2: |
+                    ## Example Hedy code
                     ```
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
                     subjects = potions, defence against the dark arts, charms, transfiguration
@@ -1557,7 +1833,9 @@ adventures:
                     Now that problem is solved, because of the new way of using the repeat command.
                     In the next example you can have your fortune teller ask 3 questions and also print them!
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     print 'I am Hedy the fortune teller!'
                     print 'You can ask me 3 questions.'
@@ -1565,6 +1843,7 @@ adventures:
                     repeat 3 times
                        question = ask 'What do you want to know?'
                        print question
+                       sleep
                        print 'My crystal ball says...' answers at random
                     ```
                 start_code: ""
@@ -1573,7 +1852,9 @@ adventures:
                     ## Fortune Teller
                     In this level you can use the `repeat` command to make your machine tell multiple fortunes at once.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     print 'Im Hedy the fortune teller!'
                     print 'You can ask 3 questions!'
@@ -1599,7 +1880,9 @@ adventures:
                     In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
                     For example you could calculate how rich you'll get or how many kids you will have when you grow up.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     print 'I am Hedy the fortune teller!'
                     print 'I can predict how many kids youll get when you grow up!'
@@ -1609,6 +1892,7 @@ adventures:
                     kids = length / age
                     kids = kids - siblings
                     print 'You will get ...'
+                    sleep
                     print kids ' kids!'
                     ```
 
@@ -1633,19 +1917,23 @@ adventures:
                     By using `if` and `else` you can make sure that you will always get a good fotune, while other people might not.
                     Check out this example to find out how.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     print 'Im Hedy the fortune teller!'
                     print 'I can predict if youll win the lottery tomorrow!'
                     person is ask 'Who are you?'
-                    if person is Hedy print 'You will definitely win!' else print 'Bad luck! Someone else will win!'
+                    if person is Hedy print 'You will definitely win!🤩' else print 'Bad luck! Someone else will win!😭'
                     ```
 
+                story_text_2: |
                     Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!
                     Of course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.
                     But of course, still gives you a positive answer and the other players a negative one.
 
-                    ## Example Hedy Code 2
+                example_code_2: |
+                    ## Example Hedy code
                     ```
                     print 'Im Hedy the fortune teller!'
                     print 'I can predict if you will win the lottery tomorrow!'
@@ -1673,13 +1961,17 @@ adventures:
                     Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
                     Make sure to remove those apostrophes and change the spelling to Im or Whats.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     print 'Im Hedy the fortune teller!'
                     question is ask 'What do you want to know?'
                     print 'This is your question: ' question
                     answers is yes, no, maybe
-                    print 'My crystal ball says...' answers at random
+                    print 'My crystal ball says...'
+                    sleep 2
+                    print answers at random
                     ```
                 start_code: ""
             3:
@@ -1688,14 +1980,18 @@ adventures:
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only echo.
                     In this level you can use a variable and the `at random` command to really let Hedy choose an answer for you. Check out this code for instance:
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     In this example the player can ask Hedy a yes-no question and Hedy will pick a random answer for you.
                     ```
                     print I’m Hedy the fortune teller!
                     question is ask What do you want to know?
                     print This is what you want to know: question
                     answers is yes, no, maybe
-                    print My crystal ball says... answers at random
+                    print My crystal ball says...
+                    sleep 2
+                    print answers at random
                     ```
 
                     ## Challenges
@@ -1709,13 +2005,15 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Haunted house game
+                    ## Haunted house
                     In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.
                     If you pick the right door you'll survive, but if not a terrible monster might...
 
                     In level 1 we start our haunted house game by making up a scary story and ask the player what monster they'll see in the haunted house.
 
+                example_code: |
                     ## Example Hedy code
+
 
                     ```
                     print How did I get here?
@@ -1728,19 +2026,38 @@ adventures:
                     print I need to get out of here!
                     print There are 3 doors in front of me..
                     ask Which door should i pick?
-                    echo I choose door 
+                    echo I choose door
                     print ...?
                     ```
 
                     ## Challenge
                     Can you finish the scary story? Or make up your own haunted house story?
                 start_code: "print How did I get here?"
+            2:
+                story_text: |
+                    ## Haunted House
+                    In this haunted house you can choose your monsters with emojis. Of course you could also use words.
+
+                    ## Example Hedy Code
+                    ```
+                    monster1 is 👻
+                    monster2 is 🤡
+                    monster3 is 👶
+                    print You enter the hounted house.
+                    print Suddenly you see a monster1
+                    print You run into the other room, but a monster2 is waiting there for you!
+                    print Oh no! Quickly get to the kitchen.
+                    print But as you enter monster3 attacks you!
+                    ```
+                start_code: "monster1 is _"
             14:
                 story_text: |
                     ## Haunted House
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Escape from the haunted house'
                     lives = 3
@@ -1751,11 +2068,11 @@ adventures:
                             good_door = doors at random
                             monster = monsters at random
                             chosen_door = ask 'Which door do you choose?'
-                            if good_door is chosen_door
+                            if good_door == chosen_door
                                 print 'You have chosen the correct door'
                             else
                                 print 'You see...' monster
-                                if monster is 'a sleeping 3 headed dog'
+                                if monster == 'a sleeping 3 headed dog'
                                     print 'Pffieuw.... Its asleep'
                                 else
                                     print 'You lose one life'
@@ -1769,7 +2086,9 @@ adventures:
                     ## Haunted House
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     print 'Escape from the Haunted House!'
                     player is alive
@@ -1797,7 +2116,9 @@ adventures:
                     ## Haunted House
                     In this level you can use nesting, which allows you to make the haunted house even more interactive!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Escape from the Haunted House!'
                     player = alive
@@ -1830,7 +2151,9 @@ adventures:
                     If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
                     In this level you can only win the game by picking the same door Hedy picked randomly.
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Escape from the haunted house!'
                     print 'There are 3 doors in front of you...'
@@ -1838,6 +2161,7 @@ adventures:
                     monsters is werewolf, mummy, vampire, zombie
                     chosen_door is ask 'Which door do you choose?'
                     print 'You chose door...' chosen_door
+                    sleep
                     correct_door is doors at random
                     if chosen_door is correct_door print 'Great! Youve escaped!'
                     else print 'Oh no! You are being eaten by a...' monsters at random
@@ -1858,7 +2182,9 @@ adventures:
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     print Escape from the haunted house!
                     print There are 3 doors in front of you...
@@ -1866,6 +2192,7 @@ adventures:
                     print You picked door ... choice
                     monsters is a zombie, a vampire, NOTHING YOUVE ESCAPED
                     print You see...
+                    sleep
                     print monsters at random
                     ```
 
@@ -1884,7 +2211,9 @@ adventures:
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
                     Check out the code!
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     numbers = [1, 2, 3]
                     i = numbers[random]
@@ -1893,16 +2222,16 @@ adventures:
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
                     good_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
-                    print 'Youre standing in front of an old mension'
+                    print 'You are standing in front of an old mension'
                     print 'Something is not right here'
                     print 'You hear ' hint[i]
-                    print 'Youre going to explore it'
+                    print 'You are going to explore it'
                     print 'You enter the kitchen en see a lighter, a raw ham and a garlic.'
                     your_weapon = ask 'What do you bring with you?'
                     print 'With your ' your_weapon ' you enter the living room'
                     print 'There you find a ' monsters[i]
                     needed_weapon = weapons[i]
-                    if your_weapon is needed_weapon
+                    if your_weapon == needed_weapon
                         print 'You use your ' your_weapon
                         print good_fate[i]
                         print 'YOU WIN!'
@@ -1923,7 +2252,9 @@ adventures:
                     ## Piggybank
                     In this level you can let Hedy tell you if you have saved up enough money!
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     money = ask 'How much money have you saved?'
                     wish = ask 'How much money do you need?'
@@ -1943,7 +2274,9 @@ adventures:
                     ## Piggy Bank
                     In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
 
-                    ## Example Hedy Code
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     print 'The digital piggy bank'
                     wish = ask 'What would you like to buy?'
@@ -1966,18 +2299,20 @@ adventures:
                     In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
                     You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
 
+                example_code: |
                     ## Example Hedy code
+
                     ```
                     print 'Make your own quiz'
                     points_a = 0
                     points_b = 0
                     print 'Question'
-                    print 'Answeroption A'
-                    print 'Answeroption B'
+                    print 'Answer option A'
+                    print 'Answer option B'
                     answer = ask 'Which answer?'
-                    if answer is 'A'
+                    if answer == 'A'
                         points_a = points_a + 1
-                    if answer is 'B'
+                    if answer == 'B'
                         points_b = points_b + 1
                     print 'End of the quiz!'
                     print 'Lets see the results!'
@@ -1994,12 +2329,30 @@ adventures:
         image: languages.png
         default_save_name: language
         levels:
-            16:
+            5:
                 story_text: |
                     ## Learn a new language
                     Make your own program to practice your vocabulary in a new language.
 
                     ## Example Hedy code
+                    ```
+                    print 'Learn French!'
+                    cat is ask '🐱'
+                    if cat is chat print 'Terrific!'
+                    else print 'No, cat is chat'
+                    frog is ask '🐸'
+                    if frog is grenouille print 'Super!'
+                    else print 'No, frog is grenouille'
+                    ```
+                start_code: ""
+            16:
+                story_text: |
+                    ## Learn a new language
+                    Make your own program to practice your vocabulary in a new language.
+
+                example_code: |
+                    ## Example Hedy code
+
                     ```
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
                     translation = ['hello', 'computer', 'potato']
@@ -2007,7 +2360,7 @@ adventures:
                     for i in range 1 to 3
                         answer = ask 'What does ' french_words[i] ' mean?'
                         correct = translation[i]
-                        if answer is correct
+                        if answer == correct
                             print 'Correct!'
                             score = score + 1
                         else
@@ -2074,6 +2427,10 @@ adventures:
 
                     In the next level you'll learn the `if` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.
                     So let's take a peak!
+
+                    ```
+                    password is ask 'What is the correct password?'
+                    ```
                 start_code: "print 'Lets go to the next level!'"
             5:
                 story_text: |
@@ -2084,7 +2441,17 @@ adventures:
                     The next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.
                     Another option in the next level is programming your own maths game, for your little brother or sister to practice their multiplications.
                     Go see for yourself in the next level!
-
+                    ```
+                    print 'Welcome at McHedy'
+                    order is ask 'What would you like to eat?'
+                    print 'You would like ' order
+                    if order is hamburger price is 5
+                    if order is fries price is 2
+                    drinks is ask 'What would you like to drink?'
+                    print 'You would like ' drinks
+                    print 'That will be ' price ' dollars for your ' order ' please'
+                    print 'The drinks are free in this level because Hedy cant calculate the price yet...'
+                    ```
                 start_code: "print 'On to the next level!'"
             6:
                 story_text: |
@@ -2120,13 +2487,14 @@ adventures:
 
                     For example:
                     ```
-                    answer = ask 'Would you like something to drink?'
-                    if answer is yes
-                        drinks = ask 'What would you like to drink?'
-                    if drinks is _
-                            print 'We are out of that'
+                    answer = ask 'Would you like to go to teh next level?'
+                    if answer is 'yes'
+                        print 'Great! You can use the repeat commando in the if command!'
+                        print 'Hooray!'
+                        print 'Hooray!'
+                        print 'Hooray!'
                     else
-                            print 'Your drink is on its way!'
+                        print 'Okay, you can stay here for a little longer!'
                     ```
                     In this code Hedy will still say 'Your drink is on its way' even if you didn't even want to drink something! In the next level this will be fixed!
                 start_code: "print 'Lets go to the next level!'"
@@ -2154,66 +2522,127 @@ adventures:
                     You have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
                     In Python there is no `repeat` command, but there is a command that works like repeat. Are you curious to find out how to say `repeat` in Python language? Quickly go on to find out!
                 start_code: "print 'Lets go to the next level!'"
-# These are still empty, I'll fill them up soon.
             11:
                 story_text: |
                     ## What's next?
+                    Maybe you have tried using decimal numbers in your restaurant adventure. If you did, you probably noticed that Hedy didn't understand them yet and always rounded off.
+                    From the next level on you can use decimal numbers.
 
+                    Another cool feauture in the next level is that you can use mulitiple words in a variable.
+                    For intance, you could already do this...
+                    ```
+                    name = ask 'Who is your favorite cartoon character?'
+                    print 'I love watching ' name
+                    ```
+                    But you couldn't use multiple words in a variable like the example below. This program does not work yet in this level!
+                    ```
+                    show = SpongeBob SquarePants
+                    print show 'is my favorite show!'
+                    ```
+                    Go to the next level to make this code work!
                 start_code: "print 'Lets go to the next level!'"
             12:
                 story_text: |
                     ## What's next?
-
+                    In the previous levels you learned how to put two `if`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:
+                    ```
+                    username is ask 'What is your username?'
+                    password is ask 'What is your password?'
+                    if username is 'Hedy'
+                        if password is 'secret'
+                            print 'Welcome Hedy!'
+                        else
+                            print 'Access denied'
+                    else
+                        print 'Access denied!'
+                    ```
+                    In this system you have to give both the correct username and the correct password.
+                    In the next level you will learn the `and` command that will make this code a ot shorter and more understandable!
+                    Check it out!
                 start_code: "print 'Lets go to the next level!'"
             13:
                 story_text: |
                     ## What's next?
-
+                    With the program below you can calulate if you've passed a subject at school (so, a grade of six or higher).
+                    You can see this code is extremely inefficient, du to the very long code in line 5.
+                    All the different grades from 1 to 5 had to be programmed seperately. Lucky for you, in the next level you'll learn how to do this without this extremely long code!
+                    ```
+                    first_grade = ask 'What score did you get on your first test?'
+                    second_grade = ask 'What score did you get on your second test?'
+                    added is first_grade + second_grade
+                    mean_grade is added / 2
+                    if mean_grade = 1 or mean_grade = 2 or mean_grade = 3 or mean_grade = 4 or mean_grade = 5
+                        print 'Oh no! You have failed the subject...'
+                    else
+                        print 'Great! You have passed the subject!'
+                    ```
                 start_code: "print 'Lets go to the next level!'"
             14:
                 story_text: |
                     ## What's next?
-
+                    In this game below a code has been made to make sure the player can play on as long as he/she wants...
+                    But the code is ineffective and way too long. Also, what if the player wants to play 101 games instead of 100?
+                    You can't play to infinity?
+                    In the next level you will learn a command that makes all of this a lot easier!
+                    ```
+                    game is 'on'
+                    for i in range 1 to 100
+                        if game is 'on'
+                            answer = ask 'Do you want to continue?'
+                            if answer is 'no'
+                                game is 'over'
+                            if answer is 'yes'
+                                print 'Ok we will continue'
+                    ```
                 start_code: "print 'Lets go to the next level!'"
             15:
                 story_text: |
                     ## What's next?
-
+                    In the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.
+                    This way you can program a code in which the correct animal is matched to the right sound.
+                    Because the two codes below... Are obviously nonsense!
+                    ```
+                    animals = 'chicken', 'horse', 'cow'
+                    sounds = 'cluck', 'neigh', 'moo'
+                    for animal in animals
+                        print 'A ' animal ' says ' sounds at random
+                    ```
+                    You could also try to make it work this way, but....
+                    ```
+                    animals = 'chicken', 'horse', 'cow'
+                    sounds = 'cluck', 'neigh', 'moo'
+                    for animal in animals
+                        for sound in sounds
+                            print 'A ' animal ' says ' sound
+                    ```
                 start_code: "print 'Lets go to the next level!'"
             16:
                 story_text: |
                     ## What's next?
-
+                    In the next level it's time for a new command. You might have noticed in the previous levels that `if` and `else` sometimes aren't enough.
+                    For example in this code:
+                    ```
+                    print 'What is for dinner tonight?'
+                    options = ['pizza', 'broccoli', 'green beans']
+                    chosen = options at random
+                    if chosen = pizza
+                        print 'Yummy! Pizza!'
+                    else
+                        print 'Yikes...'
+                    ```
+                    In this code it would be great to have 2x an `else` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `elif` that makes this possible!
+                    So check out the next level now!
                 start_code: "print 'Lets go to the next level!'"
             17:
                 story_text: |
                     ## What's next?
-
+                    In the next level you will learn a real Python way to use `print`.
                 start_code: "print 'Lets go to the next level!'"
-
-# Felienne, not activating this one yet. Because it probably needs a change.
-#            10:
-#                story_text: |
-#                    ## What's next?
-#                    Your code is looking more and more like a python code, great! In level 11 you will learn another small step to make it even more like python.
-#                    Another great thing you'll learn in level 11 is a new command. In level 10, you might have noticed that you sometimes could use another `else` in your code.
-#                    For example:
-#                    ```
-#                    print 'What is for dinner tonight?'
-#                    options is pizza, broccoli, green beans
-#                    chosen is options at random
-#                    if options is pizza
-#                        print 'Yummy! Pizza!'
-#                    else
-#                        print 'Yikes...'
-#                    ```
-#                    In this code it would be great to have 2x an `else` so you could have one option for the broccoli and one for the green beans. Level 9 comes with the new command `elif` that makes this possible!
-#                    So check out the next level now!
-#                start_code: "print 'Lets go to the next level!'"
-#
-#
-
-
+            18:
+                story_text: |
+                    ## What's next?
+                    Congratulations! You have reached the last level of Hedy! But no worries, we are working very hard to create more levels and new adventures. So please come back later to check out the newest levels!
+                start_code: "print ('Great job!!!')"
     end:
         name: "End"
         description: "Test your Hedy knowledge"

@@ -32,6 +32,21 @@ class Translations:
     d.update(**self.data.get(language, {}).get(section, {}))
     return d
 
+class AchievementTranslations:
+  def __init__(self):
+    self.data = {}
+
+    translations = glob.glob('coursedata/achievements/*.yaml')
+    for trans_file in translations:
+      lang = path.splitext(path.basename(trans_file))[0]
+      self.data[lang] = YamlFile.for_file(trans_file)
+
+  def get_translations(self, language):
+    d = collections.defaultdict(lambda: 'Unknown Exception')
+    d.update(**self.data.get('en', {}))
+    d.update(**self.data.get(language, {}))
+    return d
+
 class PageTranslations:
   def __init__(self, page):
     self.data = {}
@@ -61,11 +76,11 @@ def get_page_title(current_page):
     return page_titles_json['start'].get("en")
 
 
-def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, restrictions, adventure_name):
+def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, customizations, teacher_adventures, adventure_name):
   user = current_user()
 
   if not level_defaults:
-    return utils.page_404 (ui_message='no_such_level')
+    return utils.error_page(error=404,  ui_message='no_such_level')
 
 
   arguments_dict = {}
@@ -75,9 +90,8 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   arguments_dict['level'] = level_number
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
-  arguments_dict['example_programs'] = restrictions['example_programs']
-  arguments_dict['hide_prev_level'] = restrictions['hide_prev_level']
-  arguments_dict['hide_next_level'] = restrictions['hide_next_level']
+  arguments_dict['customizations'] = customizations
+  arguments_dict['teacher_adventures'] = teacher_adventures
   arguments_dict['menu'] = True
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'

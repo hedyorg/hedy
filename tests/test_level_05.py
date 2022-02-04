@@ -10,19 +10,20 @@ class TestsLevel5(HedyTester):
   # print & ask -> no changes, covered by tests of earlier levels
 
   # is
-  def test_assign_list_access(self):
+
+
+  def test_print_var_1795(self):
     code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe
-    dier is dieren at random
-    print dier""")
+    naam is 'Daan'
+    woord1 is zomerkamp
+    print 'naam' ' is naar het' 'woord1'""")
 
     expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']
-    dier=random.choice(dieren)
-    print(f'{dier}')""")
+    naam = '\\'Daan\\''
+    woord1 = 'zomerkamp'
+    print(f'naam is naar hetwoord1')""")
 
-    list = ['Hond', 'Kat', 'Kangoeroe']
-    self.single_level_tester(code=code, expected=expected, extra_check_function=self.result_in(list))
+    self.single_level_tester(code=code, expected=expected)
 
   def test_assign_list_multiple_spaces(self):
     code = textwrap.dedent("""\
@@ -32,7 +33,7 @@ class TestsLevel5(HedyTester):
 
     expected = textwrap.dedent("""\
     dieren = ['Hond', 'Kat', 'Kangoeroe']
-    dier=random.choice(dieren)
+    dier = random.choice(dieren)
     print(f'{dier}')""")
 
     self.single_level_tester(code=code, expected=expected)
@@ -192,7 +193,7 @@ class TestsLevel5(HedyTester):
 
     expected = textwrap.dedent("""\
     people = ['mom', 'dad', 'Emma', 'Sophie']
-    dishwasher=random.choice(people)
+    dishwasher = random.choice(people)
     if dishwasher == 'Sophie':
       print(f'too bad I have to do the dishes')
     else:
@@ -240,7 +241,7 @@ class TestsLevel5(HedyTester):
 
     expected = textwrap.dedent("""\
     people = ['1', '2', '3', '3']
-    dishwasher=random.choice(people)
+    dishwasher = random.choice(people)
     test = '1'
     if dishwasher == test:
       print(f'too bad I have to do the dishes!')""")
@@ -277,7 +278,54 @@ class TestsLevel5(HedyTester):
     if selected in items:
       print(f'found!')""")
 
-    self.single_level_tester(code=code, expected=expected, output='found!')
+    #todo: whould be tested for higher levels too (FH, dec 21)
+    self.single_level_tester(code=code, expected=expected, output='found!', expected_commands=['is', 'is', 'if', 'in', 'print'])
+
+  def test_undefined_list_if_in_list(self):
+    code = textwrap.dedent("""\
+    selected is red
+    if selected in items print 'found!'""")
+
+    self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
+
+  def test_one_space_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_multiple_spaces_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is Bond James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'Bond James Bond':
+      print(f'shaken')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_one_space_in_rhs_if_else(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
 
   # todo would be good to make combinations with if and turtle
 
@@ -297,6 +345,16 @@ class TestsLevel5(HedyTester):
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
     items is red
+    if red in items print 'found!'""")
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
+  def test_if_in_list_with_input_gives_type_error(self):
+    code = textwrap.dedent("""\
+    items is ask 'What are the items?'
     if red in items print 'found!'""")
     self.multi_level_tester(
       max_level=7,
@@ -376,3 +434,22 @@ class TestsLevel5(HedyTester):
   #     if নাম is হেডি print 'ভালো!' else print 'মন্দ'\"""")
   #
   #
+
+  def test_meta_column_missing_quote(self):
+    code = textwrap.dedent("""\
+        name is ask 'what is your name?'
+        if name is Hedy print nice' else print 'boo!'""")
+
+    instance = hedy.IsValid()
+    instance.level = self.level
+    program_root = hedy.parse_input(code, self.level, 'en')
+    is_valid = instance.transform(program_root)
+    _, invalid_info = is_valid
+
+    invalid_info = invalid_info[0]
+
+    line = invalid_info.line
+    column = invalid_info.column
+
+    self.assertEqual(2, line)
+    self.assertEqual(23, column)

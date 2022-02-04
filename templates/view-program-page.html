@@ -10,12 +10,10 @@
   {% endif %}
   <h1>{{loaded_program.name}}</h1>
   <h2 class="mt-0">{{ui.level_title}} {{level}}</h2>
-  <div>{{ui.by}} <strong>{{loaded_program.username}}</strong></div>
+  <div>{{ui.by}} <a class="no-underline cursor-pointer" onclick="window.open('/user/{{loaded_program.username}}', '_self')">{{loaded_program.username}}</a></div>
   {% include "incl-editor-and-output.html" %}
 </div>
-
 {% endblock %}
-
 {% block scripts %}
   <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>

@@ -1,6 +1,7 @@
 import unittest
 import app
 import hedy
+import re
 import sys
 import io
 from contextlib import contextmanager
@@ -22,8 +23,9 @@ class Snippet:
 class HedyTester(unittest.TestCase):
   level = None
   max_turtle_level = 10
-  number_comparisons_commands = ['>', '>=', '<', '<=']
-  comparison_commands = number_comparisons_commands + ['!=']
+  equality_comparison_commands = ['==', '=']
+  number_comparison_commands = ['>', '>=', '<', '<=']
+  comparison_commands = number_comparison_commands + ['!=']
 
   @staticmethod
   @contextmanager
@@ -42,6 +44,9 @@ class HedyTester(unittest.TestCase):
       code = app.TURTLE_PREFIX_CODE + parse_result.code
     else:
       code = app.NORMAL_PREFIX_CODE + parse_result.code
+# remove sleep comments to make program execution less slow
+    code = re.sub(r'time\.sleep\([^)]*\)', '', code)
+
     with HedyTester.captured_output() as (out, err):
       exec(code)
     return out.getvalue().strip()
@@ -58,7 +63,18 @@ class HedyTester(unittest.TestCase):
   def result_in(self, list):
     return (lambda result: HedyTester.run_code(result) in list)
 
-  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None):
+  @staticmethod
+  def as_list_of_tuples(*args):
+    # used to conver a variable number of paralel list
+    # into a list of tuples to be used by the parametrized tester
+    # All of the lists need to have the same size
+    res = []
+    for i in range(len(args[0])):
+      t = tuple((item[i] for item in args))
+      res.append(t)
+    return res
+    
+  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None, lang='en'):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
 
@@ -77,7 +93,7 @@ class HedyTester(unittest.TestCase):
     # Or use expect to check for an expected Python program
     # In the second case, you can also pass an extra function to check
     for level in range(self.level, max_level + 1):
-      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands)
+      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands, lang=lang)
       print(f'Passed for level {level}')
 
   def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en'):
@@ -98,7 +114,7 @@ class HedyTester(unittest.TestCase):
       all_commands = hedy.all_commands(code, level, lang)
       if expected_commands is not None:
         self.assertEqual(expected_commands, all_commands)
-      if True: #(not 'ask' in all_commands) and (not 'input' in all_commands): #<- use this to run tests locally with unittest
+      if (not 'ask' in all_commands) and (not 'input' in all_commands): #<- use this to run tests locally with unittest
         self.assertTrue(self.validate_Python_code(result))
       if output is not None:
         self.assertEqual(output, HedyTester.run_code(result))
@@ -110,8 +126,10 @@ class HedyTester(unittest.TestCase):
 
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
-        result = hedy.transpile(snippet.code, int(snippet.level))
-        if not result.has_turtle: #ouput from turtle cannot be captured
+        result = hedy.transpile(snippet.code, int(snippet.level), snippet.language)
+        all_commands = hedy.all_commands(snippet.code, snippet.level, snippet.language)
+
+        if not result.has_turtle and (not 'ask' in all_commands) and (not 'input' in all_commands): #output from turtle cannot be captured
           output = HedyTester.run_code(result)
     except hedy.exceptions.CodePlaceholdersPresentException as E: # Code with blanks is allowed
       pass

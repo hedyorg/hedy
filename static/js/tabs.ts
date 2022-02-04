@@ -55,14 +55,27 @@ $(function() {
     document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
 
+    if (tab.hasClass('teacher_tab')) {
+      // Fixme: This should do for now, but it would be nice if we:
+      //  - Store the teacher_adventure code in the state -> similar to "normal" adventures
+      //  - We load on the correct tab
+      $ ('#program_name').val (tabName);
+      window.State.adventure_name = tabName;
+      window.State.unsaved_changes = false;
+      theGlobalEditor?.setValue ("");
+      return;
+    }
+
     if (tabName === 'end') {
       $ ('#adventures-tab').css('height', '');
       $ ('#adventures-tab').css('max-height', '100%');
       $ ('#level-header input').hide ();
       $ ('#editor-area').hide ();
+      $('#developers_toggle_container').hide ();
       return;
     }
     $ ('#adventures-tab').css('max-height', '20em')
+    $('#developers_toggle_container').show ();
     $ ('#level-header input').show ();
     $ ('#editor-area').show ();
 

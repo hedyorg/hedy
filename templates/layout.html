@@ -10,27 +10,20 @@
     <link rel="stylesheet" href="{{static('/vendor/gh-fork-ribbon.min.css')}}"/>
     <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
   </head>
-  <body class="bg-gray-400">
+  <body id="main_container" class="bg-gray-400" dir="{{ g.dir }}">
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
     <div id="modal-mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
-    <div id="modal-content" class="hidden fixed z-50 p-12 pl-16 pr-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
-       <div id="modal-alert" class="hidden">
-          <div id="modal-alert-title" class="text-white mb-8 text-xl hidden"></div>
-          <div id="modal-alert-text" class="text-white mb-8 text-xl"></div>
-          <div class="ml-auto mr-auto mt-4 flex flex-row justify-center">
-            <button id="modal-confirm-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.ok}}</button>
-          </div>
-       </div>
+    <div id="modal-content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
        <div id="modal-confirm" class="hidden">
           <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
-          <div class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+          <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
             <button id="modal-yes-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.yes}}</button>
             <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{auth.no}}</button>
           </div>
        </div>
        <div id="modal-prompt" class="hidden">
           <div id="modal-prompt-text" class="text-white mb-8 text-xl"></div>
-          <div class="ml-auto mr-auto">
+          <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto">
             <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <div class="mt-4 flex flex-row justify-center">
                 <button id="modal-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.ok}}</button>
@@ -38,6 +31,43 @@
             </div>
           </div>
        </div>
+       <div id="modal-copy" class="hidden">
+           <div class="absolute top-2 right-2">
+              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-copy-close-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+          </svg></div>
+          <div id="modal-copy-title" class="text-white mb-8 text-xl hidden"></div>
+          <div id="modal-copy-text" class="text-white mb-8 text-xl"></div>
+          <div id="modal-copy-buttons" class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
+            <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.copy_link_to_share}}</button>
+          </div>
+       </div>
+       <div id="modal-repair" class="hidden">
+          <div class="absolute top-2 right-2">
+              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+          </svg></div>
+          <div id="modal-repair-title" class="text-white mb-8 text-xl hidden"></div>
+          <div id="modal-repair-text" class="text-white mb-8 text-xl"></div>
+       </div>
+        <div id="modal-preview" class="hidden">
+          <div class="absolute top-2 right-2">
+              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-preview-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+          </svg></div>
+          <div id="modal-preview-title" class="text-black mb-4 text-2xl"></div>
+          <div id="modal-preview-content"></div>
+       </div>
+    </div>
+    <div id="modal-alert" class="z-50 fixed hidden" role="alert" style="top: 10%; left: 50%; transform: translate(-50%, -50%);">
+        <div id="modal_alert_container" class="mx-auto text-center bg-green-100 border-green-400 text-green-700 border rounded px-4 py-3">
+            <span id="modal_alert_title" class="block sm:inline"></span>
+            <span id="modal_alert_text" class="block sm:inline"></span>
+            <svg class="fill-current h-6 w-6 text-green-500 block sm:inline" id="modal-alert-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+        </div>
     </div>
     <div class="lg:container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
       {% if menu != False %}
@@ -51,7 +81,14 @@
 
       <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
     </div>
-
+    <div id="achievement_pop-up" class="z-10 fixed hidden" style="width: 500px; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
+            <h3 class="text-white">{{auth.achievement_earned}}</h3>
+            <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">
+            <h4 class="text-white italic" id="achievement_reached_title"></h4>
+            <p id="achievement_reached_text"></p>
+        </div>
+    </div>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}

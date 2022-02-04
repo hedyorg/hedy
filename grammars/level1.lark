@@ -1,7 +1,7 @@
 //symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
 
 _SPACE: " "+
-_COMMA: ","
+_COMMA: _SPACE? (","|"،") _SPACE? //support latin and arabic comma;s and always allow these to be surrounded by spaces
 _COLON: ":"
 _LEFT_BRACKET : "("
 _RIGHT_BRACKET : ")"
@@ -10,7 +10,7 @@ _RIGHT_SQUARE_BRACKET : "]"
 _HASH: "#"
 _SMALLER : "<"
 _LARGER: ">"
-_EQUALS: "="
+_EQUALS: _SPACE? "=" _SPACE? //always allow = to be surrounded by spaces
 _DOUBLE_EQUALS: "=="
 _NOT_EQUALS: "!="
 _SMALLER_EQUALS : "<="

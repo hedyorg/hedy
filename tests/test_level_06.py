@@ -18,7 +18,35 @@ class TestsLevel6(HedyTester):
     print(f'ik heet {naam}')""")
 
     self.multi_level_tester(
-      max_level=10,
+      max_level=11,
+      code=code,
+      expected=expected
+    )
+
+  def test_print_equals(self):
+    code = textwrap.dedent("""\
+    naam = 'Hedy'
+    print 'ik heet ' naam""")
+    expected = textwrap.dedent("""\
+    naam = '\\'Hedy\\''
+    print(f'ik heet {naam}')""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected
+    )
+
+  def test_print_equals_no_space(self):
+    code = textwrap.dedent("""\
+    naam='Hedy'
+    print 'ik heet ' naam""")
+    expected = textwrap.dedent("""\
+    naam = '\\'Hedy\\''
+    print(f'ik heet {naam}')""")
+
+    self.multi_level_tester(
+      max_level=11,
       code=code,
       expected=expected
     )
@@ -36,10 +64,21 @@ class TestsLevel6(HedyTester):
     code = textwrap.dedent("""\
     antwoord is ask 'wat is je lievelingskleur?'""")
 
-
-
     expected = textwrap.dedent("""\
     antwoord = input(f'wat is je lievelingskleur?')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_chained_ask(self):
+    code = textwrap.dedent("""\
+    a is ask 'What is a?'
+    b is ask 'Are you sure a is ' a '?'
+    print a b""")
+
+    expected = textwrap.dedent("""\
+      a = input(f'What is a?')
+      b = input(f'Are you sure a is {a}?')
+      print(f'{a}{b}')""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -270,7 +309,7 @@ class TestsLevel6(HedyTester):
       expected = textwrap.dedent("""\
       keuzes = ['1', '2', '3', '4', '5', 'regenworm']
       punten = '0'
-      worp=random.choice(keuzes)
+      worp = random.choice(keuzes)
       if str(worp) == str('regenworm'):
         punten = int(punten) + int(5)
       else:
@@ -354,6 +393,54 @@ class TestsLevel6(HedyTester):
       expected=expected
     )
 
+
+  def test_one_space_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
+  def test_one_space_in_rhs_if_else(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
+  def test_multiple_spaces_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is Bond James Bond print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('Bond James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
   def test_calc_chained_vars(self):
     code = textwrap.dedent("""\
       a is 5
@@ -379,4 +466,37 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.CyclicVariableDefinitionException
+    )
+
+  def test_type_reassignment_to_proper_type_valid(self):
+    code = textwrap.dedent("""\
+      a is Hello
+      a is 5
+      b is a + 1
+      print a + b""")
+
+    expected = textwrap.dedent("""\
+        a = 'Hello'
+        a = '5'
+        b = int(a) + int(1)
+        print(f'{int(a) + int(b)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected,
+      expected_commands=['is', 'is', 'is', 'addition', 'print', 'addition'],
+      extra_check_function=lambda x: self.run_code(x) == "11"
+    )
+  
+  def test_type_reassigment_to_wrong_type_raises_error(self):
+    code = textwrap.dedent("""\
+      a is 5
+      a is test
+      print a + 2""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )

@@ -93,7 +93,8 @@ class AuthHelper(unittest.TestCase):
 
         if username in USERS:
             return USERS[username]
-        body = {'username': username, 'email': username + '@hedy.com', 'password': 'foobar'}
+        body = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
+                'language': 'nl', 'password': 'foobar', 'password_repeat': 'foobar'}
         response = request('post', 'auth/signup', {}, body, cookies=self.user_cookies[username])
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
@@ -266,7 +267,8 @@ class TestAuth(AuthHelper):
     def test_signup(self):
         # GIVEN a valid username and signup body
         username = self.make_username()
-        user = {'username': username, 'email': username + '@hedy.com', 'password': 'foobar'}
+        user = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
+                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl'}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server
@@ -392,15 +394,17 @@ class TestAuth(AuthHelper):
         # GIVEN a logged in user
         self.given_user_is_logged_in()
 
-        # WHEN attempting signups with invalid bodies
+        # WHEN attempting change password with invalid bodies
         invalid_bodies = [
             '',
             [],
             {},
             {'old_password': 123456},
             {'old_password': 'pass1'},
-            {'old_password': 'pass1', 'new_password': 123456},
-            {'old_password': 'pass1', 'new_password': 'short'},
+            {'old_password': 'pass1', 'password': 123456},
+            {'old_password': 'pass1', 'password': 'short'},
+            {'old_password': 'pass1', 'password': 123456, 'password_repeat': 'panda'},
+            {'old_password': 'pass1', 'password_repeat': 'panda'},
         ]
 
         for invalid_body in invalid_bodies:
@@ -409,10 +413,8 @@ class TestAuth(AuthHelper):
 
         # WHEN attempting to change password without sending the correct old password
         # THEN receive an invalid response code from the server
-        self.post_data('auth/change_password', {
-            'old_password': 'password',
-            'new_password': self.user['password'] + 'foo'
-        }, expect_http_code=403)
+        body = {'old_password': 'pass1', 'password': '123456', 'password_repeat': '123456'}
+        self.post_data('auth/change_password', body, expect_http_code=403)
 
     def test_change_password(self):
         # GIVEN a logged in user
@@ -421,7 +423,8 @@ class TestAuth(AuthHelper):
         # WHEN attempting to change the user's password
         new_password = 'pas1234'
         # THEN receive an OK response code from the server
-        self.post_data('auth/change_password', {'old_password': self.user['password'], 'new_password': 'pas1234'})
+        self.post_data('auth/change_password', {'old_password': self.user['password'],
+                                                'password': 'pas1234', 'password_repeat': 'pas1234'})
 
         # WHEN attempting to login with old password
         # THEN receive a forbidden response code from the server
@@ -496,7 +499,7 @@ class TestAuth(AuthHelper):
         }
 
         for key in profile_changes:
-            body = {}
+            body = {'email': self.user['email'], 'language': self.user['language']}
             body[key] = profile_changes[key]
             # THEN receive an OK response code from the server
             self.post_data('profile', body)
@@ -510,7 +513,7 @@ class TestAuth(AuthHelper):
         # (we check email change separately since it involves a flow with a token)
         # THEN receive an OK response code from the server
         new_email = self.username + '@newhedy.com'
-        body = self.post_data('profile', {'email': new_email})
+        body = self.post_data('profile', {'email': new_email, 'language': self.user['language']})
 
         # THEN confirm that the server replies with an email verification token
         self.assertIsInstance(body['token'], str)
@@ -562,7 +565,9 @@ class TestAuth(AuthHelper):
             {'username': 'foobar', 'token': 1},
             {'username': 'foobar', 'token': 'some'},
             {'username': 'foobar', 'token': 'some', 'password': 1},
-            {'username': 'foobar', 'token': 'some', 'password': 'short'}
+            {'username': 'foobar', 'token': 'some', 'password': 'short'},
+            {'username': 'foobar', 'token': 'some', 'password': 'short', 'password_repeat': 123},
+            {'username': 'foobar', 'token': 'some', 'password_repeat': 'panda123'}
         ]
 
         for invalid_body in invalid_bodies:
@@ -571,7 +576,8 @@ class TestAuth(AuthHelper):
 
         # WHEN attempting a password reset with an invalid token
         # THEN receive a forbidden response code from the server
-        self.post_data('auth/reset', {'username': self.username, 'password': '123456', 'token': 'foobar'}, expect_http_code=403)
+        self.post_data('auth/reset', {'username': self.username, 'password': '123456',
+                                      'password_repeat': '123456', 'token': 'foobar'}, expect_http_code=403)
 
     def test_reset_password(self):
         # GIVEN an existing user
@@ -581,7 +587,8 @@ class TestAuth(AuthHelper):
         new_password = 'pas1234'
         recover_token = self.post_data('auth/recover', {'username': self.username})['token']
         # THEN receive an OK response code from the server
-        self.post_data('auth/reset', {'username': self.username, 'password': new_password, 'token': recover_token})
+        self.post_data('auth/reset', {'username': self.username, 'password': new_password,
+                                      'password_repeat': new_password, 'token': recover_token})
 
         # WHEN attempting a login with the new password
         # THEN receive an OK response code from the server
@@ -653,12 +660,15 @@ class TestProgram(AuthHelper):
 
         # WHEN retrieving programs after saving a program
         saved_programs = self.get_data('programs_list')['programs']
+        print(saved_programs)
 
         # THEN verify that the program we just saved is in the list
         self.assertEqual(len(saved_programs), 1)
         saved_program = saved_programs[0]
         for key in program:
-            self.assertEqual(program[key], saved_program[key])
+            # WHEN we create a program an achievement is achieved, being in the response but not the saved_program
+            if key != "achievements":
+                self.assertEqual(program[key], saved_program[key])
 
     def test_invalid_make_program_public(self):
         # GIVEN a logged in user
@@ -745,8 +755,8 @@ class TestProgram(AuthHelper):
         program_id = '123456'
 
         # WHEN deleting a program that does not exist
-        # THEN receive a not ound response code from the server
-        self.get_data('programs/delete/' + program_id, expect_http_code=404)
+        # THEN receive a not found response code from the server
+        self.post_data('programs/delete/', {'id': program_id}, expect_http_code=404)
 
     def test_valid_delete_program(self):
         # GIVEN a logged in user with at least one program
@@ -756,9 +766,7 @@ class TestProgram(AuthHelper):
 
         # WHEN deleting a program
         # THEN receive an OK response code from the server
-        headers = self.get_data('programs/delete/' + program_id, expect_http_code=302, return_headers=True)
-        # THEN verify that the header has a `location` header pointing to `/programs`
-        self.assertEqual(headers['location'], HOST + 'programs')
+        headers = self.post_data('programs/delete/', {'id': program_id}, return_headers=True)
 
         saved_programs = self.get_data('programs_list')['programs']
         for program in saved_programs:
@@ -901,13 +909,13 @@ class TestClasses(AuthHelper):
         self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes') [0]
 
+        # WHEN attempting to join a class without being logged in
+        # THEN receive a forbidden status code from the server
+        self.post_data('class/join', {'id': Class['id']}, no_cookie=True, expect_http_code=403)
+
         # GIVEN a student (user without teacher permissions)
         self.given_fresh_user_is_logged_in()
         student = self.user
-
-        # WHEN attempting to join a class without being logged in
-        # THEN receive a forbidden status code from the server
-        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], no_cookie=True, expect_http_code=403)
 
         # WHEN retrieving the short link of a class
         # THEN receive a redirect to `class/ID/join/LINK`
@@ -916,16 +924,8 @@ class TestClasses(AuthHelper):
             raise Exception('Invalid or missing redirect link')
 
         # WHEN joining a class
-        # THEN receive a redirect to `class/ID/join/LINK`
-        body = self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
-        if not re.search(HOST + 'my-profile', body):
-            raise Exception('Invalid redirect')
-
-        # WHEN joining a class again (idempotent call)
-        # THEN receive a redirect to `class/ID/join/LINK`
-        body = self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
-        if not re.search(HOST + 'my-profile', body):
-            raise Exception('Invalid redirect')
+        # THEN we receive a 200 code
+        body = self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
 
         # WHEN getting own profile after joining a class
         profile = self.get_data('profile')
@@ -948,7 +948,7 @@ class TestClasses(AuthHelper):
         # GIVEN a student (user without teacher permissions) that has joined the class
         self.given_fresh_user_is_logged_in()
         student = self.user
-        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
+        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
 
         # GIVEN the aforementioned teacher
         self.switch_user(teacher)
@@ -979,7 +979,7 @@ class TestClasses(AuthHelper):
         # GIVEN a student (user without teacher permissions) that has joined the class and has a public program
         self.given_fresh_user_is_logged_in()
         student = self.user
-        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
+        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
         # GIVEN a student with two programs, one public and one private
         public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
         public_program_id = self.post_data('programs', public_program)['id']

@@ -76,16 +76,25 @@ Auth:
     repeat_new_password: Ulangi password baru
     change_password: Ubah password
     are_you_sure: Apakah kamu yakin? Kamu tidak dapat membatalkan aksi ini.
-    please_username: Silakan masukkan username
+
+    #Sign up validation
     username_three: Username harus berisi paling tidak tiga karakter
+    username_invalid: "Your username is invalid"
     username_special: Username tidak boleh berisi ':' atau '@'.
+    please_language: "Please select a preferred language"
     please_password: Silakan masukkan password
+    password_invalid: "Your password is invalid"
     password_six: Password harus berisi paling tidak enam karakter
     repeat_match_email: Email yang dimasukkan ulang tidak sesuai.
     repeat_match_password: Password yang dimasukkan ulang tidak sesuai.
-    valid_email: Silakan masukkan email yang valid.
-    valid_year: Silakan masukkan tahun diantara 1900 dan
+    email_invalid: Silakan masukkan email yang valid.
+    year_invalid: Silakan masukkan tahun diantara 1900 dan
+    language_invalid: "Please select a valid language"
+    gender_invalid: "Please select a valid gender, choose (Female, Male, Other)"
+    experience_invalid: "Please select a valid experience, choose (Yes, No)"
+    programming_invalid: "Please select a valid programming language"
     ajax_error: Ditemukan sebuah error. Silakan coba lagi.
+
     please_username_email: Silakan masukkan username atau email
     profile_updated: Profil berhasil diubah.
     password_updated: Password berhasil diubah.
@@ -97,8 +106,6 @@ Auth:
     reset_password: Set ulang password
     password_resetted: Password kamu sudah berhasil di-set ulang. Silakan login.
     invalid_username_password: Username/password tidak valid.
-    invalid_username: Username tidak valid.
-    invalid_password: Password tidak valid.
     invalid_reset_link: Tautan set ulang password tidak valid.
     exists_email: Email ini sudah terpakai untuk akun lain.
     exists_username: Username ini sudah terpakai untuk akun lain.
@@ -129,8 +136,9 @@ Auth:
     unsaved_changes: Kamu memiliki program yang belum disimpan. Apakah kamu mau keluar tanpa menyimpannya?
     save_success: Sukses
     save_success_detail: Program tersimpan dengan sukses
-    share_success_detail: Program dibagikan dengan sukses dan tautannya telah disalin ke clipboard
+    share_success_detail: Program dibagikan dengan sukses
     unshare_success_detail: Program berhasil untuk berhenti dibagikan
+    copy_link_to_share: Salin tautan untuk berbagi
     copy_clipboard: Berhasil disalin ke clipboard
     answer_question: Kamu tidak dapat menjalankan program sebelum kamu menjawab pertanyaannya terlebih dahulu
     must_be_logged: Kamu harus masuk menggunakan akun kamu untuk menyimpan program
@@ -143,7 +151,7 @@ Auth:
     create_class: Buat kelas baru
     rename_class: Beri nama baru untuk kelas
     delete_class: Hapus kelas secara permanen
-    back_to_class_list: Kembali ke daftar kelas
+    back_to_teachers_page: "Go back to teachers page"
     class_link: Tautan untuk bergabung dalam kelas
     prompt_join_class: Apakah kamu ingin bergabung dengan kelas ini?
     join_class: Gabung kelas
@@ -174,6 +182,5 @@ Programs:
     share_confirm: Apakah kamu yakin ingin membuat program kamu publik?
     unshare: Berhenti berbagi
     unshare_confirm: Apakah kamu yakin ingin membuat program kamu privat?
-    copy_link_to_share: Salin tautan untuk berbagi
     no_programs: Kamu belum memiliki program
     write_first: Tulis program pertamamu!

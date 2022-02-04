@@ -34,10 +34,14 @@ class TestsLevel1(HedyTester):
       expected_commands=expected_commands
     )
 
+    self.assertEqual(['Hallo welkom bij Hedy!'], hedy.all_print_arguments(code, self.level))
+
   def test_print_has_no_turtle(self):
-    result = hedy.transpile_inner("print koekoek", self.level)
+    code = "print koekoek"
+    result = hedy.transpile_inner(code, self.level)
     expected = False
     self.assertEqual(expected, result.has_turtle)
+    self.assertEqual(['koekoek'], hedy.all_print_arguments(code, self.level))
 
 
   def test_print_with_comma(self):
@@ -56,6 +60,7 @@ class TestsLevel1(HedyTester):
     expected = "print('Hallo welkom bij Hedy')\nprint('Mooi hoor')"
 
     self.single_level_tester(code=code, expected=expected)
+    self.assertEqual(['Hallo welkom bij Hedy', 'Mooi hoor'], hedy.all_print_arguments(code, self.level))
 
 
   def test_print_with_quotes(self):
@@ -106,6 +111,23 @@ class TestsLevel1(HedyTester):
                              output=output,
                              lang='nl')
 
+  def test_print_ar(self):
+    code = "قول أهلا ومرحبا بكم في هيدي!"
+    expected = "print('أهلا ومرحبا بكم في هيدي!')"
+    output ='أهلا ومرحبا بكم في هيدي!'
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             output=output,
+                             lang='ar')
+
+  def test_print_ar_2(self):
+    code = "قول مرحبا أيها العالم!"
+    expected = "print('مرحبا أيها العالم!')"
+    output ='مرحبا أيها العالم!'
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             output=output,
+                             lang='ar')
 
   # ask tests
   def test_ask(self):
