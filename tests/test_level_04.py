@@ -321,16 +321,17 @@ class TestsLevel4(HedyTester):
     print(f'jouw lievelingskleur is dus{kleur}!')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_ask_assign(self):
 
     code = textwrap.dedent("""
     ding is kleur
-    kleur is ask 'Wat is je lievelings ' ding
-    print 'Jouw favoriet is dus ' kleur""")
+    antwoord is ask 'Wat is je lievelings ' ding
+    print 'Jouw favoriet is dus ' antwoord""")
     expected = textwrap.dedent("""\
     ding = 'kleur'
-    kleur = input(f'Wat is je lievelings {ding}')
-    print(f'Jouw favoriet is dus {kleur}')""")
+    antwoord = input(f'Wat is je lievelings {ding}')
+    print(f'Jouw favoriet is dus {antwoord}')""")
 
     self.single_level_tester(code=code, expected=expected)
 
