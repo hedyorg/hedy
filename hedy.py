@@ -1555,11 +1555,12 @@ class ConvertToPython_10(ConvertToPython_8_9):
 class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        iterator = hash_var(args[0])
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
         return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
-for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
+for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
 
 
