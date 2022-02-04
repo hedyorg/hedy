@@ -82,7 +82,7 @@
         {% endif %}
         <div class="flex flex-col mt-8 ltr:ml-6 rtl:mr-6 items-start">
             <div class="flex flex-row ml-auto">
-                <button class="yellow-btn ltr:mr-4 rtl:ml-4 text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);});">{{ auth.reset_adventures }}</button>
+                <button class="yellow-btn ltr:mr-4 rtl:ml-4 text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
                 <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
             </div>
             <div class="flex flex-row ml-auto mt-4">
