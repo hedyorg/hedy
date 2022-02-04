@@ -1106,8 +1106,9 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures, restrictions = DATABASE.get_student_restrictions(load_adventures_per_level(g.lang, level),
+    adventures, teacher_adventures, restrictions = DATABASE.get_student_restrictions(load_adventures_per_level(g.lang, level),
                                                                  current_user()['username'], level)
+
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
     if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
@@ -1121,6 +1122,7 @@ def index(level, step):
         level_number=level,
         version=version(),
         adventures=adventures,
+        teacher_adventures=teacher_adventures,
         restrictions=restrictions,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
@@ -1230,16 +1232,20 @@ def main_page(page):
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        print(for_teacher_translations)
         if is_teacher(user):
             welcome_teacher = session.get('welcome-teacher') or False
             session.pop('welcome-teacher', None)
-            teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(
-                current_user()['username'], True)
+            teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(current_user()['username'], True)
+            adventures = []
+            for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+                adventures.append({'id': adventure.get('id'), 'name': adventure.get('name'),
+                                   'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+                                   'level': adventure.get('level')})
+
             return render_template('for-teachers.html', current_page='my-profile',
                                    page_title=hedyweb.get_page_title(page),
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
-                                   welcome_teacher=welcome_teacher)
+                                   teacher_adventures=adventures, welcome_teacher=welcome_teacher)
         else:
             return utils.error_page(error=403, ui_message='not_teacher')
 
@@ -1361,7 +1367,15 @@ def get_admin_classes_page(user):
     if not is_admin(user):
         return utils.error_page(error=403, ui_message='unauthorized')
 
-    classes = DATABASE.all_classes()
+    # Retrieving the user for each class to find the "last_used" is expensive -> improve when we have 100+ classes
+    classes = [{
+        "name": Class.get('name'),
+        "teacher": Class.get('teacher'),
+        "students": len(Class.get('students')) if 'students' in Class else 0,
+        "id": Class.get('id'),
+        "last_used": utils.datetotimeordate(utils.mstoisostring(DATABASE.user_by_username(Class.get('teacher')).get('last_login')))} for Class in DATABASE.all_classes()]
+    classes = sorted(classes, key=lambda d: d['last_used'], reverse=True)
+
     return render_template('admin-classes.html', classes=classes, page_title=hedyweb.get_page_title('admin'))
 
 
