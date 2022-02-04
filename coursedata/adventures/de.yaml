@@ -443,11 +443,14 @@ adventures:
                 start_code: ""
             10:
                 story_text: |
-                    ## Songs
-                    In this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?
-                    You can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
-                    Or you can make Old McDonald with all the different animals.
+                    ## Lieder
+                    In diesem Level kannst Du ganz einfach das englische Kinderlied 'Five little monkeys' programmieren.
+                    Kriegst Du die letzte Strophe auch alleine hin?
+                    Wenn Du noch nicht so gut Englisch sprichst, kannst Du es mit Baby Shark versuchen.
+                    Inklusive aller Familienmitglieder funktioniert das in nur sechs Zeilen!
+                    Und auch "Old MacDonald hat ne Farm" kriegst Du ganz einfach mit allen Tieren hin, die Dir einfallen.
 
+                example_code : |
                     ## 5 Little Monkeys Jumping on the bed
                     ```
                     monkeys = 5, 4, 3, 2
@@ -460,32 +463,34 @@ adventures:
 
                     ## Baby Shark
                     ```
-                    sharks = baby, mommy, daddy, grandma, grandpa
-                    for shark in sharks
-                        print shark 'tututututudu'
-                        print shark 'tututututudu'
-                        print shark 'tututututudu'
-                        print shark
+                    Haie = Baby, Mami, Papi, Omi, Opi
+                    for Hai in Haie
+                        print Hai ' shark tututututudu'
+                        print Hai ' shark tututututudu'
+                        print Hai ' shark tututututudu'
+                        print Hai ' shark'
                     ```
-                    ## Old McDonald
+                    ## Old McDonald hat ne Farm
                     ```
-                    animals = pig, dog, cow
-                    for animal in animals
-                        if animal is pig
-                            sound = oink
-                        if animal is dog
-                            sound = woof
-                        if animal is cow
-                            sound = moo
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                    Tiere = Schweine, Hunde, Kühe
+                    for Tier in Tiere
+                        if Tier is Schweine
+                            Geräusch = grunz
+                        if Tier is Hunde
+                            Geräusch = wuff
+                        if Tier is Kühe
+                            Geräusch = muh
+                        print 'Old McDonald hat ne Farm'
+                        print 'I A I A O!'
+                        print 'und auf der Farm da gibt es ' Tier
+                        print 'I A I A O!'
+                        print 'mit nem ' Geräusch Geräusch ' hier'
+                        print 'und nem ' Geräusch Geräusch ' da'
+                        print 'hier ein ' Geräusch
+                        print 'dort ein ' Geräusch
+                        print 'überall ein ' Geräusch Geräusch
+                        print 'Old McDonald hat ne Farm'
+                        print 'I A I A O!'
                     ```
                 start_code: ""
             8:
