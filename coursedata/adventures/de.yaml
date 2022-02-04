@@ -492,7 +492,7 @@ adventures:
                         print Hai ' shark tututututudu'
                         print Hai ' shark'
                     ```
-                    ## Old McDonald hat ne Farm
+                    ## Old MacDonald hat ne Farm
                     ```
                     Tiere = Schweine, Hunde, Kühe
                     for Tier in Tiere
@@ -502,7 +502,7 @@ adventures:
                             Geräusch = wuff
                         if Tier is Kühe
                             Geräusch = muh
-                        print 'Old McDonald hat ne Farm'
+                        print 'Old MacDonald hat ne Farm'
                         print 'I A I A O!'
                         print 'und auf der Farm da gibt es ' Tier
                         print 'I A I A O!'
@@ -511,7 +511,7 @@ adventures:
                         print 'hier ein ' Geräusch
                         print 'dort ein ' Geräusch
                         print 'überall ein ' Geräusch Geräusch
-                        print 'Old McDonald hat ne Farm'
+                        print 'Old MacDonald hat ne Farm'
                         print 'I A I A O!'
                     ```
                 start_code: ""
@@ -587,34 +587,40 @@ adventures:
                 start_code: "print 'Baby Shark'"
             16:
                 story_text: |
-                    ## Sing a song!
-                    In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
-                    The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
+                    ## Lieder
+                    In diesem Level kannst Du 'Old MacDonald hat ne Farm' sogar noch schneller programmieren.
+                    Du kannst jedem Tier das richtige Geräusch zuordnen, indem Du sie an die selbe Stelle einer Liste speicherst.
+                    Wenn Du schon Englisch sprichst, kennst Du vielleicht das Lied 'The Drunken Sailor'.
+                    Hierfür benötigst Du nur 8 Zeilen Code.
+                    Sieh es Dir an!
 
-                    ## Old MacDonald
+                example_code: |
+                    ## Old MacDonald hat ne Farm
                     ```
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
+                    Tiere = ['Schweine', 'Hunde', 'Kühe']
+                    Geräusche = ['grunz', 'wuff', 'muh']
                     for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                        Tier = Tiere[i]
+                        Geräusch = Geräusche[i]
+                        print 'Old MacDonald hat ne Farm'
+                        print 'I A I A O!'
+                        print 'und auf der Farm da gibt es ' Tier
+                        print 'I A I A O!'
+                        print 'mit nem ' Geräusch Geräusch ' hier'
+                        print 'und nem ' Geräusch Geräusch ' da'
+                        print 'hier ein ' Geräusch
+                        print 'dort ein ' Geräusch
+                        print 'überall ein ' Geräusch Geräusch
+                        print 'Old MacDonald hat ne Farm'
+                        print 'I A I A O!'
                     ```
 
                     ## Drunken Sailor
                     ```
-                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
-                    for line in lines
+                    Zeilen = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    for Zeile in Zeilen
                         for i in range 1 to 3
-                            print line
+                            print Zeile
                         print 'early in the morning'
                         for i in range 1 to 3
                             print 'way hay and up she rises'
