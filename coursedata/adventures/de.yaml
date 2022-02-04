@@ -426,9 +426,12 @@ adventures:
                 start_code: ""
             11:
                 story_text: |
-                    ## Songs
-                    In this level you can use the `for i in range` command to make songs that use counting.
+                    ## Lieder
+                    In diesem Level nutzt Du den Befehl `for i in range` für Lieder, in denen gezählt wird.
+                    Das klappt besonders gut mit 'Five little monkeys'.
+                    Wenn Du noch nicht so gut Englisch sprichst, kannst Du Dir die hustenden Würmchen ansehen.
 
+                example_code: |
                     ## 5 little monkeys
                     ```
                     for i in range 5 to 1
@@ -439,6 +442,22 @@ adventures:
                             print 'PUT THOSE MONKEYS RIGHT TO BED!'
                         else
                             print 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    ```
+
+                    ## Ein kleines Würmchen hatte Husten
+                    ```
+                    for i in range 1 to 4
+                        if i is 1
+                            print i ' kleines Würmchen hatte Husten.'
+                        else
+                            print i ' kleine Würmchen hatten Husten.'
+                        print 'hust hust'
+                    for i in range 4 to 1
+                        if i is 1
+                            print i ' kleines Würmchen hatte Husten.'
+                        else
+                            print i ' kleine Würmchen hatten Husten.'
+                        print 'hust hust'
                     ```
                 start_code: ""
             10:
