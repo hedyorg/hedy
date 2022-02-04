@@ -70,7 +70,9 @@
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{ adventure.name }}</td>
                                 <td class="border-t border-r border-gray-400">{{ adventure.level }}</td>
-                                <td class="border-t border-gray-400 "><input class="teacher_adventures_checkbox" type="checkbox" id="{{ adventure.id }}"></td>
+                                <td class="border-t border-gray-400 ">
+                                    <input class="teacher_adventures_checkbox" {% if adventure.id in customizations['teacher_adventures'] %}checked{% endif %} type="checkbox" id="{{ adventure.id }}">
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
