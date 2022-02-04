@@ -154,7 +154,7 @@ export function remove_student_invite(username: string, class_id: string) {
       }).done(function () {
           location.reload();
       }).fail(function (err) {
-          return modal.alert(err.responseText);
+          return modal.alert(err.responseText, 3000, true);
       });
   });
 }
@@ -179,8 +179,7 @@ export function remove_student(class_id: string, student_id: string, self_remova
           location.reload();
       }
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+        modal.alert(err.responseText, 3000, true);
     });
   });
 }

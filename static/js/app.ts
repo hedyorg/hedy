@@ -612,7 +612,6 @@ export function share_program (level: number, lang: string, id: string | true, i
         modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
         change_shared(true, index);
       } else {
-        $('#modal-copy-ok-button').show();
         modal.alert (auth.texts['unshare_success_detail'], 3000, false);
         change_shared(false, index);
       }

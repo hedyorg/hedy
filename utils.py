@@ -187,8 +187,8 @@ def datetotimeordate(date):
 def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-# This function takes a markdown string and returns a list with each of the HTML elements obtained
-# by rendering the markdown into HTML.
+# This function takes a Markdown string and returns a list with each of the HTML elements obtained
+# by rendering the Markdown into HTML.
 def markdown_to_html_tags(markdown):
     _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
     soup = BeautifulSoup(_html, 'html.parser')
