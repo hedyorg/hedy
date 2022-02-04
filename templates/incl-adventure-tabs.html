@@ -4,8 +4,15 @@
             <div class="tab z-10 tab-selected whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="level">
                 {{ ui.level_title }} {{ level_nr }}
             </div>
+            {% for adventure in teacher_adventures %}
+                {% if adventure.level == level_nr %}
+                    <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.name}}">
+                        {{ adventure.name }}
+                    </div>
+                {% endif %}
+            {% endfor %}
             {% for assignment in adventures %}
-              {% if assignment.short_name != 'level' %}
+              {% if assignment.short_name != 'level' and ('adventures' not in customizations or customizations['adventures'][assignment.short_name] and level|int in customizations['adventures'][assignment.short_name]) %}
                 <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{assignment.short_name}}">
                     {{ assignment.name }}
                 </div>
@@ -15,22 +22,70 @@
       {# PANES #}
       <div id="adventures-tab" style="height: 20em;" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
         <div data-tabtarget="level">
-          {{intro_text|commonmark}}
-        </div>
-        {% for assignment in adventures %}
-          {% if assignment.short_name != 'level' %}
-            <div data-tabtarget="{{assignment.short_name}}" class="hidden">
-              {% if assignment.image %}
-                <img class="ltr:float-right rtl:float-left w-48" src="{{static('/images/' + assignment.image)}}">
-              {% endif %}
-              <div>
-              {{ assignment.text|commonmark }}
-              {% if assignment.short_name == 'end' %}
-                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}})">
-              {% endif %}
+            <div class="flex flex-row">
+              <div class="{% if example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                  {{ intro_text|commonmark }}
               </div>
-              <div class="ltr:clear-right rtl:clear-left"></div>
+              {% if example_code %}
+                  <div class="border"></div>
+                  <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                      {{ example_code|commonmark }}
+                  </div>
+              {% endif %}
             </div>
+            {% for example in extra_examples %}
+                <div class="flex flex-row border-t-2">
+                    <div class="{% if example.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                      {{ example.intro_text|commonmark }}
+                  </div>
+                  {% if example.example_code %}
+                      <div class="border"></div>
+                      <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                          {{ example.example_code|commonmark }}
+                      </div>
+                  {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        {% for adventure in teacher_adventures %}
+            <div data-tabtarget="{{adventure.name}}" class="hidden">
+                <div>
+                    {{ adventure.content|commonmark }}
+                </div>
+                <div class="ltr:clear-right rtl:clear-left"></div>
+            </div>
+        {% endfor %}
+        {% for assignment in adventures %}
+          {% if assignment.short_name != 'level' and ('adventures' not in customizations or customizations['adventures'][assignment.short_name] and level|int in customizations['adventures'][assignment.short_name])  %}
+            <div data-tabtarget="{{assignment.short_name}}" class="hidden">
+              <div class="flex flex-row">
+                  <div class="{% if assignment.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                      {{ assignment.text|commonmark }}
+                      {% if assignment.short_name == 'end' %}
+                        <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}})">
+                      {% endif %}
+                  </div>
+                  {% if assignment.example_code %}
+                      <div class="border"></div>
+                      <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                          {{ assignment.example_code|commonmark }}
+                      </div>
+                  {% endif %}
+              </div>
+            {% for story in assignment.extra_stories %}
+                <div class="flex flex-row border-t-2">
+                    <div class="{% if story.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                      {{ story.text|commonmark }}
+                  </div>
+                  {% if story.example_code %}
+                      <div class="border"></div>
+                      <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                          {{ story.example_code|commonmark }}
+                      </div>
+                  {% endif %}
+                </div>
+            {% endfor %}
+          </div>
           {% endif %}
         {% endfor %}
       </div>

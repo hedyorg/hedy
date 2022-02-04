@@ -20,7 +20,7 @@ adventures:
 
                     En la segunda línea puedes empezar usando `print` si quieres imprimir una oración.
                     Puedes usar `echo` si quieres poner el nombre del protagonista al final de la oración.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     ask El protagonista de esta historia es
@@ -42,7 +42,7 @@ adventures:
                     Para eso debes realizar un poquito más de programación. Debes dar primero un nombre al protagonista de tu historia.
 
                     Puedes luego usar este nombre en las oraciones que siguen.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
 
                     ```
@@ -59,7 +59,7 @@ adventures:
                     ## Una historia
                     En una historia, a veces es necesario repetir algo. Por ejemplo, si alguien pide ayuda, o si se canta una canción.
                     Eso lo puedes hacer ahora en el nivel 6 usando `repeat`.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     print 'La princesa grita pidiendo ayuda'
@@ -82,7 +82,7 @@ adventures:
                     - Final triste: el monstruo se come a la princesa
 
                     Puedes también hacer que se ingrese un nombre para el protagonista. Eso sigue funcionando igual que en el nivel 3. Puedes combinar eso con un `if`.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     nombre is ask 'Quién camina por el bosque?'
@@ -102,7 +102,7 @@ adventures:
                     Lamentablemente eso no va a funcionar! Como resultado de ese ejemplo, obtendrás: `mi Manuel es Manuel`. Pero ahora puedes resolver este problema en el nivel 3.
 
                     Para ello ahora debes usar comillas para rodear los textos que deseas imprimir.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     nombre is Carlos
@@ -137,7 +137,7 @@ adventures:
                 story_text: |
                     ## Canciones
                     En nivel 6 has programado la canción 'Bottles of beer'. Hiciste un versículo y entonces tenías que copiar los versículos 99 veces. En nivel 7 puede repetir la canción 99 veces, ¡simplemente agregando una línea simplee!
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     versículo is 99
@@ -155,7 +155,7 @@ adventures:
                     ## Canciones
                     En las canciones hay a menudo mucha repetición. Por ejemplo, hay canciones que repiten con números.
                     Por ejemplo, la canción de los elefantes que se balancean! Ahora puedes programar esa canción programando con números.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     elefantes is 2
@@ -186,7 +186,7 @@ adventures:
                     Bebé Tiburón
 
                     Puedes acortar mucho este programa usando el comando `repeat`! Puedes intentar escribir el programa?
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     repeat _ _ print 'Bebé Tiburón tututudutudu'
@@ -210,7 +210,7 @@ adventures:
                     Usando `forward` dibuja una línea hacia adelante. El numero detrás de él determina qué tan lejos caminará la tortuga. `turn right` gira un cuarto de vuelta en el sentido de las agujas del reloj, `turn left` gira en sentido contrario a las agujas del reloj.
 
                     Este es el comienzo de unas pequeñas escaleras. ¿Puedes llegar a 5 pasos?
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     forward 50
@@ -228,7 +228,7 @@ adventures:
 
                     Usa 90 para girar un cuarto. A esto lo llamamos grados. Un giro completo es de 360 grados.
                     ¿Puedes hacer una figura con este código? ¿Tal vez un triángulo o un círculo?
-
+                example_code: |
                     ## Programa Hedy de ejemplo
 
                     ```
@@ -252,7 +252,7 @@ adventures:
                     ## Dibujemos
                     hora que podemos repetir varias líneas, podemos hacer cifras más fácilmente.
                     Solo tenemos que establecer el ángulo una vez y luego usar esa variable en el `repeat`.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     ángulo is 90
@@ -260,11 +260,11 @@ adventures:
                         turn ángulo
                         forward 50
                     ```
-
+                story_text_2: |
                     ## Interacción
                     También, ahora podemos mejorar el programa que dibuja diferentes figuras.
                     ¿Puedes averiguar hasta dónde tiene que llegar la tortuga aquí? ¡Termina el código y podrás dibujar cualquier polígono que quieras!
-
+                example_code_2: |
                     ## Programa Hedy de ejemplo
                     ```
                     ángulos is ask '¿Cuántos ángulos debo dibujar?'
@@ -279,7 +279,7 @@ adventures:
                 story_text: |
                     ## Dibujemos
                     Enivel 6 puede repetir una línea de código con `repeat`.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     print 'Dibujar figuras'
@@ -296,7 +296,7 @@ adventures:
                     Es posible que haya aprendido en la escuela que girar un círculo completo es de 360 grados. Si no, ¡ahora ya lo sabes!
                     Es por eso que también usas 90 grados para un cuadrado. 360 dividido por 4 es 90.
                     Ahora que podemos hacer matemáticas con Hedy, ¡podemos dibujar todas las figuras que queramos!
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     ángulos is ask '¿Cuántos ángulos quieres?'
@@ -320,7 +320,7 @@ adventures:
                 story_text: |
                     ## Dibujemos
                     En nivel 4 puede elegir con `if`. Por ejemplo, entre diferentes tipos de figuras.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     print 'Figuras de dibujo'
@@ -344,7 +344,7 @@ adventures:
                 story_text: |
                     ## Dibujemos
                     En nivel 3 tienes que usar comillas con `print` y `ask`. ¡También al dibujar!
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     print 'Figuras de dibujo'
@@ -366,7 +366,7 @@ adventures:
                     ## Tortuga en busca
                     También puedes usar `random` con la tortuga de dibujo. Una elección aleatoria hace que la tortuga camine por un camino diferente cada vez..
                     Usar `at random` para elegir un valor de una lista. Puede copiar y pegar las líneas 2 y 3, así que cree una ruta aleatoria más larga.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
 
                     ```
@@ -390,7 +390,7 @@ adventures:
                 story_text: |
                     ## Programa de lavado de platos en el nivel 6
                     Cuán seguido lava los platos cada miembro de la familia? Es eso justo? Ahora podemos calcularlo.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     personas is mama, papa, Maria, Carlos
@@ -412,7 +412,7 @@ adventures:
                 story_text: |
                     ## Programa de lavado de platos en el nivel 5
                     Usando el comando `repeat` puedes repetir porciones de tu programa. De esa forma, puedes determinar quien ha de lavar los platos cada día de la semana.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     personas is mamá, papá, María, Carlos
@@ -426,7 +426,7 @@ adventures:
 
                     Puede hacer que tu programa imprima 'oh no' si is tu turno de lavar los platos, y 'sí!' en caso de que no sea tu turno de lavar los platos?
                     No olvides las comillas!
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     personas is mamá, papá, María, Carlos
@@ -443,7 +443,7 @@ adventures:
                     Puedes completar el código reemplazando los guiones bajos con los comandos correctos y las comillas?
                     En cada guión bajo debes colocar un comando o una comilla.
 
-                    Consejo: no olvides las comillas!
+                    Consejo: no olvides las comillas!                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     personas is mamá, papá, Carlos, María
@@ -459,7 +459,7 @@ adventures:
                     Ahora puedes dejar que la computadora elija honestamente a quien debe hacerlo. Puedes programar esto ahora en el nivel 2!
 
                     Primero debes hacer una lista con los miembros de tu familia. Luego puedes elegir a alguien de la lista usando el comando `at random`.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     personas is mamá, papá, María, Carlos
@@ -485,7 +485,7 @@ adventures:
                     En el nivel 6 puedes nuevamente crear dados, pero ahora puedes contar cuántos puntos se han tirado ya.
 
                     Tal vez sepas que tirar un gusanito cuenta como 5 puntos. Ahora puedes tirar un dado y luego sumar cuántos puntos has obtenido ya. El siguiente ejemplo es para tirar un sólo dado:
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
@@ -508,7 +508,7 @@ adventures:
                     Puedes usar el programa de ejemplo para terminar el juego!
 
                     Pero tal vez prefieras crear un dado distinto o sino inventar un juego completamente distinto.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
@@ -522,7 +522,7 @@ adventures:
                     En el nivel 4 puedes nuevamente crear dados, y ahora puedes usar el comando `if`.
                     Puedes modificar el programa de ejemplo para que éste diga "Puedes dejar de tirar los dados" si el jugador ha obtenido un gusanito.
                     Pero tal vez prefieras crear un dado distinto o sino inventar un juego completamente distinto. Por ejemplo, puedes hacer que el juego responda de manera distinta. Por ejemplo, diciendo 'éxito' si arrojas un 6 o 'que injusticia!' si arrojas algo distinto.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
@@ -536,7 +536,7 @@ adventures:
                 story_text: |
                     ## Dados
                     En el nivel 3 podemos crear oraciones que incluyan el valor obtenido de la tirada de dados, pero usando comillas.
-                    Puedes escribir el programa, reemplazando los guiones bajos?
+                    Puedes escribir el programa, reemplazando los guiones bajos?                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
@@ -556,7 +556,7 @@ adventures:
                     Por ejemplo, los dados del juego Gusanitos, que tienen los números del 1 al 5, y en lugar de 6, un gusanito.
 
                     ![Dado con números del 1 al 5 y un gusanito en lugar del 6](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
@@ -583,7 +583,7 @@ adventures:
                     En el nivel 1 comenzamos el juego de piedra, papel o tijera.
 
                     Con `ask` puedes tomar una opción, y con `echo` puedes repetir la opción elegida.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
 
                     ```
@@ -605,7 +605,7 @@ adventures:
                     Graba tu opción con el nombre opción y la opción de la computadora como opcióncomputadora.
                     Luego puedes usar `if` para comprobar si ambas opciones fueron iguales o si fueron distintas.
                     Puedes escribir el código?
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is piedra, papel, tijera
@@ -624,7 +624,7 @@ adventures:
                     ## Piedra, papel o tijera
                     En el nivel 3 podemos seguir desarrollando nuestro juego de piedra, papel o tijera. Pero ahora, si quieres imprimir texto, debes usar comillas.
                     Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is piedra, papel, tijera
@@ -640,7 +640,7 @@ adventures:
                     Primero debes ingresar una lista con el comando `is`. Luego puedes hacer que la computadora escoja un elemento de la lista con el comando `at random`.
 
                     De esa manera, la computadora puede elegir una opción: piedra, papel o tijera.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
 
                     ```
@@ -663,7 +663,7 @@ adventures:
                 story_text: |
                     ## Calculadora
                     En nivel 6 has aprendido a hacer una calculadora, en nivel 7 puedes expandir ese código y convertirlo en un pequeño juego de matemáticas. Así...
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     marcado is 0
@@ -684,7 +684,7 @@ adventures:
                 story_text: |
                     ## Calculadora
                     Ahora que puedes calcular, puedes escribir un programa para practicar las tablas de multiplicar. Puedes decidir que cuentas incluir, por ejemplo:
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                     ```
                     respuestacorrecta is 11 * 27
@@ -692,12 +692,12 @@ adventures:
                     if respuesta is respuestacorrecta print 'Bien hecho'
                     else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
                     ```
-
+                story_text_2: |
                     ## Multiplicaciones al azar
                     También puedes hacer que la computadora elija multiplicaciones al azar con `random`.
 
                     Entonces puedes listar algunas tablas para practicar, y elegir un número distinto para multipicarlas:
-
+                example_code_2: |
                     ## Programa Hedy de ejemplo
                     ```
                     tablas is 4, 5, 6, 8
@@ -720,7 +720,7 @@ adventures:
                 story_text: |
                     ## Restaurante
                      En nivel 1 puedes hacer tu propio restaurante virtual y tomar los pedidos de tus invitados.
-
+                example_code: |
                     ## Programa Hedy de ejemplo
                       ```
                      print Bienvenido al restaurante Hedy's

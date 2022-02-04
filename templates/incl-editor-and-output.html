@@ -94,12 +94,11 @@
       </div>
     </div>
     <div class="order-5">
-      <br>
       <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
-        {% if prev_level and not hide_prev_level %}
+        {% if prev_level and prev_level in customizations['levels'] %}
           <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{ui.regress_button}} {{ prev_level }}</button>
         {% endif %}
-        {% if next_level and not hide_next_level %}
+        {% if next_level and next_level in customizations['levels'] %}
             <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ ui.advance_button }} {{ next_level }}</button>
         {% endif %}
       </div>
@@ -109,7 +108,7 @@
 <div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4{% if editor_readonly %} hidden{% endif %}" id="developers_toggle_container">
   <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
     <div class="relative">
-      <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode({% if example_programs %}true{% else %}false{% endif %})" class="sr-only" />
+      <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode()" class="sr-only" />
       <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
       <div class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" style="top: -5px;"></div>
     </div>

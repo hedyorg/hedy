@@ -1,6 +1,7 @@
 import {LANG_en} from './syntaxLang-en';
 import {LANG_es} from './syntaxLang-es';
 import {LANG_nl} from './syntaxLang-nl';
+import {LANG_ar} from './syntaxLang-ar';
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
@@ -9,43 +10,46 @@ window.State = {};
 }
 
 // Set this to true to use keywords from languages other than english
-var localKeywordsEnable = false;
+var localKeywordsEnable = true;
 
 // Contains the current keywords based on the current language
-var currentLang: { 
-  _PRINT: string; 
-  _IS: string; 
-  _ASK: string; 
-  _ECHO: string; 
-  _FORWARD: string; 
-  _TURN: string; 
-  _SLEEP: string; 
-  _ADD_LIST: string; 
-  _TO_LIST: string; 
-  _REMOVE: string; 
-  _FROM: string; 
-  _AT: string; 
-  _RANDOM: string; 
-  _IN: string; 
-  _IF: string; 
-  _ELSE: string; 
-  _AND: string; 
-  _REPEAT: string; 
-  _TIMES: string; 
-  _FOR: string; 
-  _RANGE: string; 
-  _TO: string; 
-  _STEP: string; 
-  _ELIF: string; 
-  _INPUT: string; 
-  _OR: string; 
-  _WHILE: string; 
-  _LENGTH: string; 
+var currentLang: {
+  _PRINT: string;
+  _IS: string;
+  _ASK: string;
+  _ECHO: string;
+  _FORWARD: string;
+  _TURN: string;
+  _SLEEP: string;
+  _ADD_LIST: string;
+  _TO_LIST: string;
+  _REMOVE: string;
+  _FROM: string;
+  _AT: string;
+  _RANDOM: string;
+  _IN: string;
+  _IF: string;
+  _ELSE: string;
+  _AND: string;
+  _REPEAT: string;
+  _TIMES: string;
+  _FOR: string;
+  _RANGE: string;
+  _TO: string;
+  _STEP: string;
+  _ELIF: string;
+  _INPUT: string;
+  _OR: string;
+  _WHILE: string;
+  _LENGTH: string;
 };
 if(localKeywordsEnable){
   switch(window.State.lang){
     case 'nl':
       currentLang = LANG_nl;
+      break;
+    case 'ar':
+      currentLang = LANG_ar;
       break;
     case 'es':
       currentLang = LANG_es;
@@ -487,7 +491,7 @@ function rule_isAsk(next?: string) {
  */
 function rule_is(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( ' + currentLang._IS + ' )',
+    regex: '([0-9A-zÀ-ÿء-ي]+)( ' + currentLang._IS + ' )',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -576,7 +580,7 @@ function rule_ifElseOneLine() {
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('((' + currentLang._IS + ')|(' + currentLang._IN + '))'),
+      regex: keywordWithSpace(currentLang._IS + '|' + currentLang._IN),
       token: 'keyword',
       next: 'start',
     }),
@@ -595,7 +599,7 @@ function rule_ifElse() {
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('((' + currentLang._IS + ')|(' + currentLang._IN + '))'),
+      regex: keywordWithSpace(currentLang._IS + '|' + currentLang._IN),
       token: 'keyword',
       next: 'start',
     }),
@@ -662,9 +666,22 @@ function rule_forRangeParen() {
  * The keyword must be followed by space.
  */
 function keywordWithSpace(keyword: string) {
-  return '\\b' + keyword + ' ';
+  // We used to use \b here to match a "word boundary". However,
+  // "word boundary" seems to be defined rather narrowly, and for whatever
+  // reason does not work properly with non-ASCII languages.
+  //
+  // Then, we tried negative lookbehind (?<!\p{L}), but lookbehinds are not
+  // really properly supported outside of Chrome.
+  //
+  // Instead, we'll look for start-of-string OR a whitespace character. This
+  // means users now MUST type spaces in order to get syntax highlighting,
+  // whereas they might used to be able to get away with typing it directly
+  // after a parenthesis or '+' symbol or something... but since the symbol
+  // would be highlighted as well that's not desirable, and most of these commands
+  // for the start of the line anyway.
+  return '(?:^|\\s)' + keyword + ' ';
 }
-  
+
 /**
  * Modify the given ruleset, replacing literal spaces with "one or more spaces"
  */
