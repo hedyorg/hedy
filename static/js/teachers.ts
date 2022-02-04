@@ -212,6 +212,8 @@ function update_db_adventure(adventure_id: string) {
    const adventure_name = $('#custom_adventure_name').val();
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+   const agree_public = $('#agree_public').prop('checked');
+
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-adventure',
@@ -219,7 +221,8 @@ function update_db_adventure(adventure_id: string) {
         id: adventure_id,
         name: adventure_name,
         level: level,
-        content: content
+        content: content,
+        public: agree_public
       }),
       contentType: 'application/json',
       dataType: 'json'

@@ -380,7 +380,8 @@ def routes (app, database, achievements):
             'creator': user['username'],
             'name': body['name'],
             'level': body['level'],
-            'content': body['content']
+            'content': body['content'],
+            'public': body['public']
         }
 
         DATABASE.update_adventure(body['id'], adventure)
