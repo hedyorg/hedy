@@ -19,7 +19,7 @@ assign: var _SPACE _IS _SPACE text -> assign
 
 //in Level 2 we need to treat punctuation differently, since it can be used to separate arguments (variables)
 textwithoutspaces: /([^\r\n!?. ]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
-text: /([^\r\n,!?.]+)/ -> text
+text: /([^\r\n,!?،.]+)/ -> text //todo FH, feb 2022 this can go to level 3 cause in (the new) level 2 it is allowed to have commas, lists are now introduced in level 2
 
 text_ask: /([^\r\n!?.]+)/ -> text //as ask may contain commas (punctionation is still needed separately so they can be printed after vars)
 
