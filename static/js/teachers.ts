@@ -345,12 +345,20 @@ export function save_customizations(class_id: string) {
             adventures[name] = current_list;
         }
     });
+    let own_adventures = [];
+    $('.own_adventures_checkbox').each(function() {
+        if ($(this).prop("checked")) {
+            own_adventures.push(<string>$(this).attr('id'));
+        }
+    });
+
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
       data: JSON.stringify({
           levels: levels,
-          adventures: adventures
+          adventures: adventures,
+          own_adventures: adventures
       }),
       contentType: 'application/json',
       dataType: 'json'
