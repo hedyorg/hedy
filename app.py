@@ -1361,6 +1361,7 @@ def get_admin_classes_page(user):
         return utils.error_page(error=403, ui_message='unauthorized')
 
     classes = []
+    # Retrieving the user for each class to find the "last_used" is expensive -> improve when we have 100+ classes
     for Class in DATABASE.all_classes():
         current_class = {
             "name": Class.get('name'),
