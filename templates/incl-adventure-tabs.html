@@ -5,12 +5,14 @@
                 {{ ui.level_title }} {{ level_nr }}
             </div>
             {% for adventure in teacher_adventures %}
-                <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.name}}">
-                    {{ adventure.name }}
-                </div>
+                {% if adventure.level == level_nr %}
+                    <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.name}}">
+                        {{ adventure.name }}
+                    </div>
+                {% endif %}
             {% endfor %}
             {% for assignment in adventures %}
-              {% if assignment.short_name != 'level' %}
+              {% if assignment.short_name != 'level' and ('adventures' not in customizations or customizations['adventures'][assignment.short_name] and level|int in customizations['adventures'][assignment.short_name]) %}
                 <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{assignment.short_name}}">
                     {{ assignment.name }}
                 </div>
@@ -54,7 +56,7 @@
             </div>
         {% endfor %}
         {% for assignment in adventures %}
-          {% if assignment.short_name != 'level' %}
+          {% if assignment.short_name != 'level' and ('adventures' not in customizations or customizations['adventures'][assignment.short_name] and level|int in customizations['adventures'][assignment.short_name])  %}
             <div data-tabtarget="{{assignment.short_name}}" class="hidden">
               <div class="flex flex-row">
                   <div class="{% if assignment.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">

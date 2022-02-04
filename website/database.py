@@ -12,30 +12,8 @@ TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey('creator')])
-
-# Customizations contains the class customizations made by a teacher on a specific class/level combination.
-# Each entry stores a unique class_id / level combination and the selected adventures, example programs and/or hiding of level
-# Example of structure:
-#     {
-#       "id": "db192a35efbc492ca5d1ad9ccd3e5b26",
-#       "level": 1,
-#       "adventures": [
-#         "story",
-#         "turtle",
-#         "rock",
-#         "fortune",
-#         "restaurant",
-#         "haunted",
-#         "next",
-#         "end"
-#       ],
-#       "example_programs": true,
-#       "hide": false,
-#       "hide_prev_level": false,
-#       "hide_next_level": false
-#     }
 INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
-CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
+CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id')
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='username')
 
@@ -283,7 +261,15 @@ class Database:
         return ADVENTURES.get({'id': adventure_id})
 
     def delete_adventure(self, adventure_id):
+        # If we delete an adventure -> also delete is from possible class customizations
+        teacher = self.get_adventure(adventure_id).get('creator', '')
         ADVENTURES.delete({'id': adventure_id})
+        for Class in self.get_teacher_classes(teacher, True):
+            customizations = self.get_class_customizations(Class.get('id'))
+            if customizations and adventure_id in customizations.get('teacher_adventures',[]):
+                customizations['teacher_adventures'].remove(adventure_id)
+                self.update_class_customizations(customizations)
+
 
     def store_adventure(self, adventure):
         """Store an adventure."""
@@ -328,6 +314,7 @@ class Database:
 
         CUSTOMIZATIONS.del_many({'id': Class['id']})
         INVITATIONS.del_many({'class_id': Class['id']})
+        CUSTOMIZATIONS.delete({'id': Class['id']})
         CLASSES.delete({'id': Class['id']})
 
     def resolve_class_link(self, link_id):
@@ -348,61 +335,22 @@ class Database:
     def all_classes(self):
         return CLASSES.scan()
 
-    def remove_customizations_class(self, class_id, level):
-        CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
+    def delete_class_customizations(self, class_id):
+        CUSTOMIZATIONS.delete({'id': class_id})
 
-    def update_customizations_class(self, level_customizations):
-        CUSTOMIZATIONS.put(level_customizations)
-        for customization in CUSTOMIZATIONS.get_many({'id': level_customizations['id']}):
-            if customization['level'] == (level_customizations['level']-1):
-                customization['hide_next_level'] = level_customizations['hide']
-                CUSTOMIZATIONS.put(customization)
-            elif customization['level'] == (level_customizations['level']+1):
-                customization['hide_prev_level'] = level_customizations['hide']
-                CUSTOMIZATIONS.put(customization)
+    def update_class_customizations(self, customizations):
+        CUSTOMIZATIONS.put(customizations)
 
-    def get_customizations_class(self, class_id):
-        customizations = {}
-        for customization in CUSTOMIZATIONS.get_many({'id': class_id}):
-            customizations[customization['level']] = customization
+    def get_class_customizations(self, class_id):
+        customizations = CUSTOMIZATIONS.get({'id': class_id})
         return customizations
 
-    def get_level_customizations_class(self, class_id, level):
-        customizations = CUSTOMIZATIONS.get({'id': class_id, 'level': level})
-        return customizations if customizations else None
-
-    def student_get_teacher_adventures(self, class_id):
-        Class = self.get_class(class_id)
-        if Class:
-            teacher = Class['teacher']
-            teacher_adventures = self.get_teacher_adventures(teacher)
-        return teacher_adventures or []
-
-    def get_student_restrictions(self, all_adventures, user, level):
-        restrictions = {}
-        found_restrictions = False
-        if user:
-            student_classes = self.get_student_classes(user)
-            if student_classes:
-                all_teacher_adventures = self.student_get_teacher_adventures(student_classes[0]['id'])
-                level_preferences = self.get_level_customizations_class(student_classes[0]['id'], level)
-                if level_preferences:
-                    found_restrictions = True
-                    display_adventures = [a for a in all_adventures if a['short_name'] in level_preferences['adventures']]
-                    display_teacher_adventures = [a for a in all_teacher_adventures if a['name'] in level_preferences['teacher_adventures']]
-                    restrictions['example_programs'] = level_preferences['example_programs']
-                    restrictions['hide_level'] = level_preferences['hide']
-                    restrictions['hide_prev_level'] = level_preferences['hide_prev_level']
-                    restrictions['hide_next_level'] = level_preferences['hide_next_level']
-
-        if not found_restrictions:
-            display_adventures = all_adventures
-            display_teacher_adventures = []
-            restrictions['example_programs'] = True
-            restrictions['hide_level'] = False
-            restrictions['hide_prev_level'] = False
-            restrictions['hide_next_level'] = False
-        return display_adventures, display_teacher_adventures, restrictions
+    def get_student_class_customizations(self, user):
+        student_classes = self.get_student_classes(user)
+        if student_classes:
+            class_customizations = self.get_class_customizations(student_classes[0]['id'])
+            return class_customizations or {}
+        return {}
 
     def progress_by_username(self, username):
         return ACHIEVEMENTS.get({'username': username})

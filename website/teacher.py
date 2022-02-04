@@ -214,55 +214,61 @@ def routes (app, database, achievements):
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-        levels = hedy_content.LevelDefaults(g.lang).levels
-        preferences = DATABASE.get_customizations_class(class_id)
-        teacher_adventures = DATABASE.get_teacher_adventures(user['username'])
+
+        teacher_adventures = DATABASE.get_teacher_adventures(user['username']);
+        customizations = DATABASE.get_class_customizations(class_id)
+        customize_class_translations = hedyweb.PageTranslations('customize-class').get_page_translations(g.lang)
 
         return render_template('customize-class.html', page_title=hedyweb.get_page_title('customize class'),
-                               class_info={'name': Class['name'], 'id': Class['id']}, levels=levels,
-                               adventures=adventures, teacher_adventures=teacher_adventures,
-                               preferences=preferences, current_page='my-profile')
+                               class_info={'name': Class['name'], 'id': Class['id']}, max_level=hedy.HEDY_MAX_LEVEL,
+                               adventures=adventures, page_translations=customize_class_translations,
+                               teacher_adventures=teacher_adventures, customizations=customizations, current_page='my-profile')
 
-    @app.route('/customize-class/<class_id>', methods=['PUT'])
+    @app.route('/for-teachers/customize-class/<class_id>', methods=['DELETE'])
     @requires_login
-    def update_level_preferences(user, class_id):
+    def delete_customizations(user, class_id):
         if not is_teacher(user):
-            return 'Only teachers can update class preferences', 403
-
-        body = request.json
-        # Validations
-        if not isinstance(body, dict):
-            return 'body must be an object', 400
-        if not isinstance(body.get('example_programs'), bool):
-            return 'amount of example programs must be an integer', 400
-        if not isinstance(body.get('hide_level'), bool):
-            return 'level switch must be a boolean', 400
-        if not isinstance(body.get('hide_prev_level'), bool):
-            return 'level switch must be a boolean', 400
-        if not isinstance(body.get('hide_next_level'), bool):
-            return 'level switch must be a boolean', 400
-        if not isinstance(int(body.get('level')), int):
-            return 'level must ben an integer', 400
-
+            return utils.error_page(error=403, ui_message='retrieve_class')
         Class = DATABASE.get_class(class_id)
         if not Class or Class['teacher'] != user['username']:
-            return 'No such class', 404
+            return utils.error_page(error=404, ui_message='no_such_class')
 
-        customizations = {}
-        customizations['id'] = class_id
-        customizations['level'] = int(body.get('level'))
-        customizations['adventures'] = body.get('adventures')
-        customizations['teacher_adventures'] = body.get('teacher_adventures')
-        customizations['example_programs'] = body.get('example_programs')
-        customizations['hide'] = body.get('hide_level')
-        customizations['hide_prev_level'] = body.get('hide_prev_level')
-        customizations['hide_next_level'] = body.get('hide_next_level')
+        DATABASE.delete_class_customizations(class_id)
+        return {'success': g.auth_texts.get('customization_deleted')}, 200
 
-        DATABASE.update_customizations_class(customizations)
-        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "my_class_my_rules")
-        if achievement:
-            return {'achievement': achievement}, 200
-        return {}, 200
+    @app.route('/for-teachers/customize-class/<class_id>', methods=['POST'])
+    @requires_login
+    def update_customizations(user, class_id):
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_class')
+        Class = DATABASE.get_class(class_id)
+        if not Class or Class['teacher'] != user['username']:
+            return utils.error_page(error=404, ui_message='no_such_class')
+
+        body = request.json
+        #Validations
+        if not isinstance(body, dict):
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('levels'), list):
+            return "Levels must be a list", 400
+        if not isinstance(body.get('adventures'), dict):
+            return 'adventures must be a dict', 400
+
+        #Values are always strings from the front-end -> convert to numbers
+        levels = [int(i) for i in body['levels']]
+        adventures = {}
+        for name, adventure_levels in body['adventures'].items():
+            adventures[name] = [int(i) for i in adventure_levels]
+
+        customizations = {
+            'id': class_id,
+            'levels': levels,
+            'adventures': adventures,
+            'teacher_adventures': body['teacher_adventures']
+        }
+
+        DATABASE.update_class_customizations(customizations)
+        return {'success': g.auth_texts.get('class_customize_success')}, 200
 
     @app.route('/invite_student', methods=['POST'])
     @requires_login

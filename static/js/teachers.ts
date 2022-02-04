@@ -321,60 +321,110 @@ export function show_doc_section(section_key: string) {
    }
 }
 
-export function save_level_settings(id: string, level: number) {
-     let selected_adventures: (string | null)[] = [];
-     $('#adventures_overview li').each(function() {
-         if ($(this).is(':visible') && $(this).find(':input').prop('checked')) {
-             selected_adventures.push(this.getAttribute('id'));
-         }
-     });
+//https://stackoverflow.com/questions/7196212/how-to-create-dictionary-and-add-key-value-pairs-dynamically?rq=1
+export function save_customizations(class_id: string) {
+    let levels: (string | undefined)[] = [];
+    $('.level-select-button').each(function() {
+        if ($(this).hasClass("green-btn")) {
+            levels.push(<string>$(this).val());
+        }
+    });
+    let adventures = {};
+    $('.adventure_keys').each(function() {
+        const name = <string>$(this).attr('adventure');
+        // @ts-ignore
+        adventures[name] = [];
+    });
+    $('.adventure_level_input').each(function() {
+        const name = <string>$(this).attr('adventure');
+        // @ts-ignore
+        let current_list = adventures[name];
+        if ($(this).prop("checked")) {
+            current_list.push(<string>$(this).attr('level'));
+            // @ts-ignore
+            adventures[name] = current_list;
+        }
+    });
+    let teacher_adventures: string[] = [];
+    $('.teacher_adventures_checkbox').each(function() {
+        if ($(this).prop("checked")) {
+            teacher_adventures.push(<string>$(this).attr('id'));
+        }
+    });
 
-     let selected_teacher_adventures: (string | null)[] = [];
-     $('#teacher_adventures_overview li').each(function() {
-         if ($(this).is(':visible') && $(this).find(':input').prop('checked')) {
-             selected_teacher_adventures.push(this.getAttribute('id'));
-         }
-     });
-
-     const hide_level = !!$(`#hide_level${level}`).prop('checked');
-     const hide_next_level = !!$(`#hide_level${level - 1}`).prop('checked');
-     const example_programs = !!$(`#example_programs${level}`).prop('checked');
-     const hide_prev_level = !!$(`#hide_level${level - 1}`).prop('checked');
-
-     $.ajax({
-       type: 'PUT',
-       url: '/customize-class/' + id,
-       data: JSON.stringify({
-         adventures: selected_adventures,
-         teacher_adventures: selected_teacher_adventures,
-         example_programs: example_programs,
-         hide_level: hide_level,
-         hide_prev_level: hide_prev_level,
-         hide_next_level: hide_next_level,
-         level: level
-       }),
-       contentType: 'application/json',
-       dataType: 'json'
-     }).done(function(response) {
-       if (response.achievement) {
-         showAchievements(response.achievement, true, "");
-       } else {
-         // location.reload ();
-         // TODO TB -> Front-end already up to date; no need for re-load! Look into this with customizations impro.
-       }
-     }).fail(function(err) {
-       console.error(err);
-       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
-     });
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/customize-class/' + class_id,
+      data: JSON.stringify({
+          levels: levels,
+          adventures: adventures,
+          teacher_adventures: teacher_adventures
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+      modal.alert(response.success, 3000, false);
+      $('#remove_customizations_button').removeClass('hidden');
+      $('#customizations_alert').addClass('hidden');
+    }).fail(function (err) {
+      modal.alert(err.responseText, 3000, true);
+    });
 }
 
-export  function reset_level_preferences(level: number) {
- $('#adventures_overview li').each(function() {
-     if ($(this).is(':visible')) {
-         $(this).find(':input').prop("checked", true);
-     }
- });
- $('#example_programs' + level).prop("checked", true);
- $('#hide_level' + level).prop("checked", false);
+export function remove_customizations(class_id: string) {
+    modal.confirm (auth.texts['remove_customizations_prompt'], function () {
+        $.ajax({
+            type: 'DELETE',
+            url: '/for-teachers/customize-class/' + class_id,
+            contentType: 'application/json',
+            dataType: 'json'
+        }).done(function (response) {
+            modal.alert(response.success, 3000, false);
+            $('#remove_customizations_button').addClass('hidden');
+            $('#customizations_alert').removeClass('hidden');
+            $('.adventure_level_input').prop('checked', false);
+            $('.teacher_adventures_checkbox').prop('checked', false);
+            $('.level-select-button').removeClass('green-btn');
+            $('.level-select-button').addClass('blue-btn');
+        }).fail(function (err) {
+            modal.alert(err.responseText, 3000, true);
+        });
+    });
+}
+
+export function select_all_levels_adventure(adventure_name: string) {
+    let first_input = true;
+    let checked = true;
+    $('.adventure_level_input').each(function() {
+        const name = <string>$(this).attr('adventure');
+        if (name == adventure_name && $(this).is(":visible")) {
+            if (first_input) {
+                checked = $(this).prop("checked");
+                first_input = false;
+            }
+            $(this).prop("checked", !checked);
+        }
+    });
+}
+
+export function select_all_level_adventures(level: string) {
+    // It is not selected yet -> select all and change color
+    if ($('#level_button_' + level).hasClass('blue-btn')) {
+        $('.adventure_level_' + level).each(function(){
+            $(this).removeClass('hidden');
+            if ($(this).is(':enabled')) {
+                $(this).prop("checked", true);
+            }
+        });
+        $('#level_button_' + level).removeClass('blue-btn');
+        $('#level_button_' + level).addClass('green-btn');
+    } else {
+        $('.adventure_level_' + level).each(function () {
+            $(this).prop("checked", false);
+            $(this).addClass('hidden');
+        });
+        $('#level_button_' + level).removeClass('green-btn');
+        $('#level_button_' + level).addClass('blue-btn');
+    }
 }
 

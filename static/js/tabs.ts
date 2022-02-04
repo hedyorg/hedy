@@ -60,7 +60,8 @@ $(function() {
       //  - Store the teacher_adventure code in the state -> similar to "normal" adventures
       //  - We load on the correct tab
       $ ('#program_name').val (tabName);
-      window.State.adventure_name = tabName
+      window.State.adventure_name = tabName;
+      window.State.unsaved_changes = false;
       theGlobalEditor?.setValue ("");
       return;
     }
