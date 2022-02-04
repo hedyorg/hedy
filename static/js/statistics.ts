@@ -190,8 +190,8 @@ export const stats = {
         $logsTable.append(`<tr> \
           <td class="border px-4 py-2">${e.date}</td> \
           <td class="border px-4 py-2">${e.level}</td> \
-          <td class="border px-4 py-2">${e.lang}</td> \
-          <td class="border px-4 py-2">${e.username}</td> \
+          <td class="border px-4 py-2">${e.lang || ''}</td> \
+          <td class="border px-4 py-2">${e.username || ''}</td> \
           <td class="border px-4 py-2">${e.exception || ''}</td> \
           <td class="border px-4 py-2"> \
             <button class="green-btn float-right top-2 right-2" onclick=hedyApp.stats.copyCode(this)>⇥</button> \
