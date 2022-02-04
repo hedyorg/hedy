@@ -365,7 +365,7 @@ def routes (app, database, achievements):
         classes = DATABASE.get_teacher_classes(user['username'], False)
         for account in body.get('accounts', []):
             if account.get('class') and account['class'] not in [i.get('name') for i in classes]:
-                return "not your class", 400
+                return "not your class", 404
             user = DATABASE.user_by_username(account.get('username').strip().lower())
             if user:
                 return {'error': g.auth_texts.get('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
