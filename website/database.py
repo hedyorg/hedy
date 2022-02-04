@@ -261,7 +261,15 @@ class Database:
         return ADVENTURES.get({'id': adventure_id})
 
     def delete_adventure(self, adventure_id):
+        # If we delete an adventure -> also delete is from possible class customizations
+        teacher = self.get_adventure(adventure_id).get('teacher')
         ADVENTURES.delete({'id': adventure_id})
+        for Class in self.get_teacher_classes(teacher):
+            customizations = self.get_class_customizations(Class.get('id'))
+            if adventure_id in customizations['teacher_adventures']:
+                customizations['teacher_adventures'].remove(adventure_id)
+                self.update_class_customizations(customizations)
+
 
     def store_adventure(self, adventure):
         """Store an adventure."""
