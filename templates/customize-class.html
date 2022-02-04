@@ -52,14 +52,43 @@
             </table>
         </div>
     </div>
-     <div class="mt-4 flex flex-row">
-         <button class="blue-btn ltr:mr-4 rtl:ml-4" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
-         <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);});">{{ auth.reset_adventures }}</button>
-         <button class="red-btn ltr:ml-auto rtl:mr-auto {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
-             {{ auth.remove_customization }}</button>
-     </div>
-    <div class="mt-4">
-        <button class="green-btn" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
+    <div class="flex flex-row">
+        {% if teacher_adventures %}
+        <div class="flex flex-col">
+            <h3 class="px-4">{{ auth.select_own_adventures }}</h3>
+            <div class="border border-gray-400 py-2 px-4 rounded-lg">
+                <table class="table-auto text-center w-full customize_own_adventure_overview">
+                    <thead>
+                        <tr>
+                            <th class="w-64 text-left border-r border-gray-400">Avontuur</th>
+                            <th class="w-64 border-r border-gray-400">Level</th>
+                            <th class="w-64">Selecteren?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for adventure in teacher_adventures %}
+                            <tr>
+                                <td class="text-left border-t border-r border-gray-400">{{ adventure.name }}</td>
+                                <td class="border-t border-r border-gray-400">{{ adventure.level }}</td>
+                                <td class="border-t border-gray-400"><input type="checkbox"></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+        <div class="flex flex-col mt-8 ltr:ml-6 rtl:mr-6 items-start">
+            <div class="flex flex-row ml-auto">
+                <button class="yellow-btn ltr:mr-4 rtl:ml-4 text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);});">{{ auth.reset_adventures }}</button>
+                <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
+            </div>
+            <div class="flex flex-row ml-auto mt-4">
+                <button class="red-btn ltr:mr-4 rtl:ml-4 {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
+                 {{ auth.remove_customization }}</button>
+                <button class="green-btn" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
