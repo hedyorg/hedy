@@ -51,6 +51,9 @@ QUIZ_ANSWERS = dynamo.Table(storage, 'quizAnswers', partition_key='user', sort_k
 PROGRAM_STATS = dynamo.Table(storage, 'program-stats', partition_key='id#level', sort_key='week',
                              indexed_fields=[dynamo.IndexKey('id', 'week')])
 
+QUIZ_STATS = dynamo.Table(storage, 'quiz-stats', partition_key='id#level', sort_key='week',
+                          indexed_fields=[dynamo.IndexKey('id', 'week')])
+
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
         """Update the current quiz record with a new answer.
@@ -424,6 +427,36 @@ class Database:
 
     def forget_public_profile(self, username):
         PUBLIC_PROFILES.delete({'username': username})
+
+    def add_quiz_started(self, id, level):
+        key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
+
+        add_attributes = {'id': id, 'level': level, 'started': dynamo.DynamoIncrement()}
+
+        return QUIZ_STATS.update(key, add_attributes)
+
+    def add_quiz_finished(self, id, level, score):
+        key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
+
+        add_attributes = {'id': id, 'level': level,
+                          'finished': dynamo.DynamoIncrement(),
+                          'scores': dynamo.DynamoAddToList(score)}
+
+        return QUIZ_STATS.update(key, add_attributes)
+
+    def get_class_quiz_stats(self, users, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+
+        data = [QUIZ_STATS.get_many({'id': u, 'week': dynamo.Between(start_week, end_week)}, sort_key='week')
+                for u in users]
+        return functools.reduce(operator.iconcat, data, [])
+
+    def get_all_quiz_stats(self, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+
+        return QUIZ_STATS.get_many({'id': '@all', 'week': dynamo.Between(start_week, end_week)}, sort_key='week')
 
     def add_program_stats(self, id, level, exception):
         key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
