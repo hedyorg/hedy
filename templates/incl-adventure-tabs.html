@@ -4,6 +4,11 @@
             <div class="tab z-10 tab-selected whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="level">
                 {{ ui.level_title }} {{ level_nr }}
             </div>
+            {% for adventure in teacher_adventures %}
+                <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.name}}">
+                    {{ adventure.name }}
+                </div>
+            {% endfor %}
             {% for assignment in adventures %}
               {% if assignment.short_name != 'level' and ('adventures' not in customizations or customizations['adventures'][assignment.short_name] and level|int in customizations['adventures'][assignment.short_name]) %}
                 <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{assignment.short_name}}">
@@ -40,6 +45,14 @@
                 </div>
             {% endfor %}
         </div>
+        {% for adventure in teacher_adventures %}
+            <div data-tabtarget="{{adventure.name}}" class="hidden">
+                <div>
+                    {{ adventure.content|commonmark }}
+                </div>
+                <div class="ltr:clear-right rtl:clear-left"></div>
+            </div>
+        {% endfor %}
         {% for assignment in adventures %}
           {% if assignment.short_name != 'level' and ('adventures' not in customizations or customizations['adventures'][assignment.short_name] and level|int in customizations['adventures'][assignment.short_name])  %}
             <div data-tabtarget="{{assignment.short_name}}" class="hidden">

@@ -190,10 +190,11 @@ def routes (app, database, achievements):
     @requires_login
     def leave_class (user, class_id, student_id):
         Class = DATABASE.get_class (class_id)
-        if not Class or Class ['teacher'] != user ['username'] or student_id != user ['username']:
-            return 'No such class', 404
+        if not Class or (Class['teacher'] != user['username'] and student_id != user['username']):
+            return g.auth_texts.get('ajax_error'), 400
 
-        DATABASE.remove_student_from_class (Class ['id'], student_id)
+        DATABASE.remove_student_from_class (Class['id'], student_id)
+        achievement = None
         if Class['teacher'] == user['username']:
             achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "detention")
         if achievement:
@@ -324,6 +325,109 @@ def routes (app, database, achievements):
 
         DATABASE.remove_class_invite(username)
         return {}, 200
+
+    @app.route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])
+    @requires_login
+    def view_adventure(user, adventure_id):
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_adventure')
+        adventure = DATABASE.get_adventure(adventure_id)
+        if not adventure or adventure['creator'] != user['username']:
+            return utils.error_page(error=404, ui_message='no_such_adventure')
+
+        adventure['content'] = adventure['content'].replace("<pre>", "<pre id='" + str(adventure['level']) + "'>")
+        return render_template('view-adventure.html', adventure=adventure,
+                               page_title=hedyweb.get_page_title('view adventure'), current_page='my-profile')
+
+    @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['GET'])
+    @requires_login
+    def get_adventure_info(user, adventure_id):
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_adventure')
+        adventure = DATABASE.get_adventure(adventure_id)
+        if not adventure or adventure['creator'] != user['username']:
+            return utils.error_page(error=404,  ui_message='no_such_adventure')
+
+        return render_template('customize-adventure.html', page_title=hedyweb.get_page_title('customize adventure'),
+                               adventure=adventure, max_level=hedy.HEDY_MAX_LEVEL, current_page='my-profile')
+
+    @app.route('/for-teachers/customize-adventure', methods=['POST'])
+    @requires_login
+    def update_adventure(user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('id'), str):
+            return g.auth_texts.get('adventure_id_invalid'), 400
+        if not isinstance(body.get('name'), str):
+            return g.auth_texts.get('adventure_name_invalid'), 400
+        if not isinstance(body.get('level'), str):
+            return g.auth_texts.get('level_invalid'), 400
+        if not isinstance(body.get('content'), str):
+            return g.auth_texts.get('content_invalid'), 400
+        if len(body.get('content')) < 20:
+            return g.auth_texts.get('adventure_length'), 400
+        if not isinstance(body.get('public'), bool):
+            return g.auth_texts.get('adventure_length'), 400
+
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_adventure')
+        current_adventure = DATABASE.get_adventure(body['id'])
+        if not current_adventure or current_adventure['creator'] != user['username']:
+            return utils.error_page(error=404,  ui_message='no_such_adventure')
+
+        adventures = DATABASE.get_teacher_adventures(user['username'])
+        for adventure in adventures:
+            if adventure['name'] == body['name'] and adventure['id'] != body['id']:
+                return g.auth_texts.get('adventure_duplicate'), 400
+
+        adventure = {
+            'date': utils.timems(),
+            'creator': user['username'],
+            'name': body['name'],
+            'level': body['level'],
+            'content': body['content'],
+            'public': body['public']
+        }
+
+        DATABASE.update_adventure(body['id'], adventure)
+        return {'success': g.auth_texts.get('adventure_updated')}, 200
+
+    @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])
+    @requires_login
+    def delete_adventure(user, adventure_id):
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='retrieve_adventure')
+        adventure = DATABASE.get_adventure(adventure_id)
+        if not adventure or adventure['creator'] != user['username']:
+            return utils.error_page(error=404, ui_message='no_such_adventure')
+
+        DATABASE.delete_adventure(adventure_id)
+        return {}, 200
+
+    @app.route('/for-teachers/create_adventure', methods=['POST'])
+    @requires_login
+    def create_adventure(user):
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='create_adventure')
+        body = request.json
+        adventures = DATABASE.get_teacher_adventures(user['username'])
+        for adventure in adventures:
+            if adventure['name'] == body['name']:
+                return g.auth_texts.get('adventure_duplicate'), 400
+
+        adventure = {
+            'id': uuid.uuid4().hex,
+            'date': utils.timems(),
+            'creator': user['username'],
+            'name': body['name'],
+            'level': 1,
+            'content': ""
+        }
+
+        DATABASE.store_adventure(adventure)
+        return {'id': adventure['id']}, 200
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):

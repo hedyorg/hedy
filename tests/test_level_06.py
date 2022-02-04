@@ -18,7 +18,35 @@ class TestsLevel6(HedyTester):
     print(f'ik heet {naam}')""")
 
     self.multi_level_tester(
-      max_level=10,
+      max_level=11,
+      code=code,
+      expected=expected
+    )
+
+  def test_print_equals(self):
+    code = textwrap.dedent("""\
+    naam = 'Hedy'
+    print 'ik heet ' naam""")
+    expected = textwrap.dedent("""\
+    naam = '\\'Hedy\\''
+    print(f'ik heet {naam}')""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected
+    )
+
+  def test_print_equals_no_space(self):
+    code = textwrap.dedent("""\
+    naam='Hedy'
+    print 'ik heet ' naam""")
+    expected = textwrap.dedent("""\
+    naam = '\\'Hedy\\''
+    print(f'ik heet {naam}')""")
+
+    self.multi_level_tester(
+      max_level=11,
       code=code,
       expected=expected
     )

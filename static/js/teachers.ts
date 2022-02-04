@@ -1,6 +1,8 @@
 import { modal, error } from './modal';
 import { auth } from './auth';
-import {showAchievements} from "./app";
+import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
+
+import DOMPurify from 'dompurify'
 
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
@@ -117,9 +119,9 @@ export function join_class(id: string, name: string) {
 }
 
 export function invite_student(class_id: string) {
-  modal.prompt (auth.texts['invite_prompt'], '', function (username) {
+    modal.prompt (auth.texts['invite_prompt'], '', function (username) {
       if (!username) {
-          return modal.alert("This value is empty");
+          return modal.alert(auth.texts['username_empty']);
       }
       $.ajax({
           type: 'POST',
@@ -135,7 +137,7 @@ export function invite_student(class_id: string) {
       }).fail(function(err) {
           return modal.alert(err.responseText, 3000, true);
       });
-  });
+    });
 }
 
 export function remove_student_invite(username: string, class_id: string) {
@@ -177,10 +179,106 @@ export function remove_student(class_id: string, student_id: string, self_remova
           location.reload();
       }
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+        modal.alert(err.responseText, 3000, true);
     });
   });
+}
+
+export function create_adventure() {
+    modal.prompt (auth.texts['adventure_prompt'], '', function (adventure_name) {
+        adventure_name = adventure_name.trim();
+        console.log("test");
+        if (!adventure_name) {
+          modal.alert(auth.texts['adventure_empty'], 3000, true);
+          return;
+    }
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/create_adventure',
+      data: JSON.stringify({
+        name: adventure_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
+    }).fail(function(err) {
+      return modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
+function update_db_adventure(adventure_id: string) {
+   const adventure_name = $('#custom_adventure_name').val();
+   const level = $('#custom_adventure_level').val();
+   const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+   const agree_public = $('#agree_public').prop('checked');
+
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/customize-adventure',
+      data: JSON.stringify({
+        id: adventure_id,
+        name: adventure_name,
+        level: level,
+        content: content,
+        public: agree_public
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      modal.alert (response.success, 3000, false);
+    }).fail(function(err) {
+      modal.alert(err.responseText, 3000, true);
+    });
+}
+
+export function update_adventure(adventure_id: string, first_edit: boolean) {
+   if (!first_edit) {
+    modal.confirm (auth.texts['update_adventure_prompt'], function () {
+        update_db_adventure(adventure_id);
+    });
+   } else {
+       update_db_adventure(adventure_id);
+   }
+}
+
+export function preview_adventure() {
+    let content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+    const name = <string>$('#custom_adventure_name').val();
+    const level = <number>$('#custom_adventure_level').val();
+    let container = $('<div>');
+    container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
+    container.css('white-space', 'pre-wrap');
+    container.css('width', '40em');
+    container.html(content);
+
+    // We have to show the modal first before we can "find" the <pre> attributes and convert them to ace editors
+    modal.preview(container, name);
+    for (const preview of $('.preview pre').get()) {
+        $(preview).addClass('text-lg rounded');
+        const exampleEditor = turnIntoAceEditor(preview, true)
+        exampleEditor.setOptions({ maxLines: Infinity });
+        exampleEditor.setOptions({ minLines: 2 });
+        exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
+        const mode = getHighlighter(level);
+        exampleEditor.session.setMode(mode);
+    }
+}
+
+export function delete_adventure(adventure_id: string) {
+    modal.confirm(auth.texts['delete_adventure_prompt'], function () {
+        $.ajax({
+            type: 'DELETE',
+            url: '/for-teachers/customize-adventure/' + adventure_id,
+            contentType: 'application/json',
+            dataType: 'json'
+        }).done(function () {
+            window.location.href = '/for-teachers';
+        }).fail(function (err) {
+            error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+        });
+    });
 }
 
 export function change_password_student(username: string) {

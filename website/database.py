@@ -11,6 +11,7 @@ USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexK
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
+ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey('creator')])
 INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id')
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
@@ -256,6 +257,22 @@ class Database:
                     students.append (student)
         return students
 
+    def get_adventure(self, adventure_id):
+        return ADVENTURES.get({'id': adventure_id})
+
+    def delete_adventure(self, adventure_id):
+        ADVENTURES.delete({'id': adventure_id})
+
+    def store_adventure(self, adventure):
+        """Store an adventure."""
+        ADVENTURES.create(adventure)
+
+    def update_adventure(self, adventure_id, adventure):
+        ADVENTURES.update({'id': adventure_id}, adventure)
+
+    def get_teacher_adventures(self, username):
+        return ADVENTURES.get_many({'creator': username})
+
     def get_student_classes(self, username):
         """Return all the classes of which the user is a student."""
         classes = []
@@ -287,6 +304,7 @@ class Database:
         for student_id in Class.get ('students', []):
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
+        CUSTOMIZATIONS.del_many({'id': Class['id']})
         INVITATIONS.del_many({'class_id': Class['id']})
         CUSTOMIZATIONS.delete({'id': Class['id']})
         CLASSES.delete({'id': Class['id']})
