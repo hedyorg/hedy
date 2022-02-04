@@ -1253,6 +1253,7 @@ def main_page(page):
 
 
 @app.route('/explore', methods=['GET'])
+@requires_login
 def explore():
     level = request.args.get('level', default=None, type=str)
     adventure = request.args.get('adventure', default=None, type=str)
@@ -1263,8 +1264,7 @@ def explore():
     achievement = None
     if level or adventure:
         programs = DATABASE.get_filtered_explore_programs(level, adventure)
-        if current_user()['username']:
-            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
         programs = DATABASE.get_all_explore_programs()
 
