@@ -145,6 +145,28 @@ def login_user_from_token_cookie():
     if user:
         remember_current_user(user)
 
+
+def prepare_user_db(username, password, email):
+    hashed = hash(password, make_salt())
+
+    token = make_salt()
+    hashed_token = hash(token, make_salt())
+    username = username.strip().lower()
+    email = email.strip().lower()
+
+    return username, hashed, hashed_token
+
+def validate_signup_data(account):
+    if not isinstance(account.get('username'), str):
+        return g.auth_texts.get('username_invalid')
+    if not isinstance(account.get('mail'), str) or not utils.valid_email(account.get('mail')):
+        return g.auth_texts.get('email_invalid')
+    if not isinstance(account.get('password'), str):
+        return g.auth_texts.get('password_invalid')
+    if len(account.get('password')) < 6:
+        return g.auth_texts.get('passwords_six')
+    return None
+
 # Note: translations are used only for texts that will be seen by a GUI user.
 def routes(app, database):
     global DATABASE
@@ -246,12 +268,7 @@ def routes(app, database):
         if email:
             return g.auth_texts.get('exists_email'), 403
 
-        hashed = hash(body['password'], make_salt())
-
-        token = make_salt()
-        hashed_token = hash(token, make_salt())
-        username = body['username'].strip().lower()
-        email = body['email'].strip().lower()
+        username, hashed, hashed_token = prepare_user_db(body['username'], body['password'], body['email'])
 
         if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API

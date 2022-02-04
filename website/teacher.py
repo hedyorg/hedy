@@ -2,7 +2,8 @@ import json
 import urllib
 
 from website.auth import requires_login, is_teacher, MAILCHIMP_API_URL, \
-    mailchimp_subscribe_user, send_email, send_email_template, email_base_url, make_salt, hash
+    mailchimp_subscribe_user, send_email, send_email_template, email_base_url, make_salt, hash, validate_signup_data, \
+    prepare_user_db
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
@@ -345,15 +346,9 @@ def routes (app, database, achievements):
 
         # Validation for correct types and duplicates
         for account in body.get('accounts', []):
-            if not isinstance(account.get('username'), str):
-                return g.auth_texts.get('username_invalid'), 400
-            if not isinstance(account.get('mail'), str) or not utils.valid_email(account.get('mail')):
-                return g.auth_texts.get('email_invalid'), 400
-            if not isinstance(account.get('password'), str):
-                return g.auth_texts.get('password_invalid'), 400
-            if len(account.get('password')) < 6:
-                return g.auth_texts.get('passwords_six'), 400
-
+            validation = validate_signup_data(account)
+            if validation:
+                return validation, 400
             if account.get('username').strip().lower() in usernames:
                 return {'error': g.auth_texts.get('unique_usernames'), 'value': account.get('username')}, 200
             usernames.append(account.get('username').strip().lower())
@@ -375,11 +370,7 @@ def routes (app, database, achievements):
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):
-            hashed = hash(account['password'], make_salt())
-            token = make_salt()
-            hashed_token = hash(token, make_salt())
-            username = account['username'].strip().lower()
-            email = account['mail'].strip().lower()
+            username, hashed, hashed_token = prepare_user_db(account['username'], account['password'], account['mail'])
 
             if not utils.is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
                 # If we have a Mailchimp API key, we use it to add the subscriber through the API
