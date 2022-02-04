@@ -1117,6 +1117,10 @@ def index(level, step):
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
+    teacher_adventures = []
+    for adventure in customizations['own_adventures']:
+        teacher_adventures.append(DATABASE.get_adventure(adventure))
+
     return hedyweb.render_code_editor_with_tabs(
         level_defaults=defaults,
         max_level=max_level,
@@ -1124,6 +1128,7 @@ def index(level, step):
         version=version(),
         adventures=adventures,
         customizations=customizations,
+        teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
 
