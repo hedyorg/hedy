@@ -1259,7 +1259,8 @@ def main_page(page):
 
 
 @app.route('/explore', methods=['GET'])
-def explore():
+@requires_login
+def explore(user):
     level = request.args.get('level', default=None, type=str)
     adventure = request.args.get('adventure', default=None, type=str)
 
