@@ -8,11 +8,13 @@ class Modal {
     $('#modal-no-button').on('click', () => this.hide());
     $('#modal-cancel-button').on('click', () => this.hide());
     $('#modal-copy-ok-button').on('click', () => this.hide());
-    $('#modal-alert-button').on('click', () => this.hide());
+    $('#modal-copy-close-button').on('click', () => this.hide());
     $('#modal-repair-button').on('click', () => this.hide());
+    $('#modal-alert-button').on('click', () => this.hide_alert());
   }
 
   private _timeout?: ReturnType<typeof setTimeout>
+  private _alert_timeout?: ReturnType<typeof setTimeout>
 
   public show() {
     $('#modal-mask').show();
@@ -29,9 +31,12 @@ class Modal {
     $('#modal-content').hide();
     $('#modal-prompt').hide();
     $('#modal-confirm').hide();
-    $('#modal-alert').hide();
     $('#modal-copy').hide();
     $('#modal-repair').hide();
+  }
+
+  public hide_alert() {
+    $('#modal-alert').fadeOut(1000);
   }
 
   public alert(message: string, timeoutMs?: number, error?: boolean) {
@@ -48,13 +53,12 @@ class Modal {
     }
     $('#modal_alert_text').html(message);
     this.show_alert();
-    if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
     // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
-    if(this._timeout) {
-      clearTimeout(this._timeout);
-      this._timeout = undefined;
+    if(this._alert_timeout) {
+      clearTimeout(this._alert_timeout);
+      this._alert_timeout = undefined;
     }
-    if (timeoutMs) this._timeout = setTimeout(() => this.hide(), timeoutMs);
+    if (timeoutMs) this._alert_timeout = setTimeout(() => this.hide_alert(), timeoutMs);
   }
 
   public copy_alert(message: string, timeoutMs?: number, title: string = '',) {
