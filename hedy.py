@@ -32,7 +32,6 @@ TRANSPILER_LOOKUP = {}
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
 
-# TODO: in error messages we need to translate the names of the commands to the used language
 class Command:
     print = 'print'
     ask = 'ask'
@@ -105,7 +104,6 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'],
                       18: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif', 'input']
                       }
 
-# TODO: these need to be taken from the translated grammar keywords based on the language
 command_turn_literals = ['right', 'left']
 
 # Commands and their types per level (only partially filled!)
@@ -818,7 +816,7 @@ class AllCommands(Transformer):
         # some keywords have names that are not a valid name for a command
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
-        if keyword in ['assign', 'assign_is', 'assign_list', 'assign_list_is']:
+        if keyword in ['assign', 'assign_is', 'assign_equals', 'assign_list', 'assign_list_is', 'assign_list_equals']:
             return 'is'
         if keyword == 'ifelse':
             return 'else'
@@ -957,7 +955,6 @@ class IsValid(Filter):
 
     def error_invalid(self, args, meta):
         # TODO: this will not work for misspelling 'at', needs to be improved!
-        # TODO: add more information to the InvalidInfo
 
         error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
         return False, error, meta
