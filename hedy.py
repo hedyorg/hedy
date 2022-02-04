@@ -1290,9 +1290,13 @@ class ConvertToPython_2(ConvertToPython_1):
         if self.is_random(value):
             return parameter + " = " + value
         else:
-            # if the assigned value contains single quotes, escape them
-            value = process_characters_needing_escape(value)
-            return parameter + " = '" + value + "'"
+            if self.is_variable(value):
+                value = self.process_variable(value)
+                return parameter + " = " + value
+            else:
+                # if the assigned value is not a variable and contains single quotes, escape them
+                value = process_characters_needing_escape(value)
+                return parameter + " = '" + value + "'"
 
 
     def sleep(self, args):
@@ -1308,6 +1312,7 @@ class ConvertToPython_3(ConvertToPython_2):
         parameter = args[0]
         values = ["'" + a + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
+
     def list_access(self, args):
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
@@ -1316,10 +1321,12 @@ class ConvertToPython_3(ConvertToPython_2):
             return 'random.choice(' + args[0] + ')'
         else:
             return args[0] + '[' + args[1] + '-1]'
+
     def add(self, args):
         var = self.process_variable(args[0])
         list = args[1]
         return f"{list}.append({var})"
+
     def remove(self, args):
         var = self.process_variable(args[0])
         list = args[1]
@@ -1429,9 +1436,13 @@ class ConvertToPython_6(ConvertToPython_5):
         if type(value) is Tree:
             return parameter + " = " + value.children[0]
         else:
-            #assigns may contain string (accidentally) i.e. name = 'Hedy'
-            value = process_characters_needing_escape(value)
-            return parameter + " = '" + value + "'"
+            if self.is_variable(value):
+                value = self.process_variable(value)
+                return parameter + " = " + value
+            else:
+                # if the assigned value is not a variable and contains single quotes, escape them
+                value = process_characters_needing_escape(value)
+                return parameter + " = '" + value + "'"
 
     def assign_is(self, args):
         return self.assign(args)
