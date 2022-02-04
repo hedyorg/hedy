@@ -345,7 +345,7 @@ export function save_customizations(class_id: string) {
             adventures[name] = current_list;
         }
     });
-    let own_adventures = [];
+    let own_adventures: string[] = [];
     $('.own_adventures_checkbox').each(function() {
         if ($(this).prop("checked")) {
             own_adventures.push(<string>$(this).attr('id'));
@@ -358,7 +358,7 @@ export function save_customizations(class_id: string) {
       data: JSON.stringify({
           levels: levels,
           adventures: adventures,
-          own_adventures: adventures
+          own_adventures: own_adventures
       }),
       contentType: 'application/json',
       dataType: 'json'
