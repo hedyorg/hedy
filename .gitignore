@@ -135,7 +135,6 @@ dmypy.json
 
 # Don't checkin log file (otherwise it'd be overwritten on Heroku on push)
 logs.txt
-.vscode
 
 #macos things
 .DS_Store
@@ -160,3 +159,17 @@ grammars-Total/*.lark
 *.tsbuildinfo
 !/coursedata/adventures-transformed/
 !/coursedata/level-defaults-transformed/
+
+#vscode excludes (from github)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
