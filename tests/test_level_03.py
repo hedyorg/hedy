@@ -651,3 +651,15 @@ class TestsLevel3(HedyTester):
       code=code,
       exception=hedy.exceptions.WrongLevelException
     )
+
+  def test_list_assign_numeric(self):
+    code = textwrap.dedent("lengte is 50, 75, 100")
+    expected = textwrap.dedent("lengte = [50, 75, 100]")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_list_assign_alphanumeric(self):
+    code = textwrap.dedent("lengte is a, 75, 100")
+    expected = textwrap.dedent("lengte = ['a', '75', '100']")
+
+    self.single_level_tester(code=code, expected=expected)

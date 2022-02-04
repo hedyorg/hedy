@@ -1306,7 +1306,8 @@ class ConvertToPython_2(ConvertToPython_1):
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, args):
         parameter = args[0]
-        values = ["'" + a + "'" for a in args[1:]]
+        is_numeric = all(argument.isnumeric() for argument in args[1:])
+        values = [a if is_numeric else "'" + a + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
     def list_access(self, args):
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
