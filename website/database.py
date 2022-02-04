@@ -262,11 +262,11 @@ class Database:
 
     def delete_adventure(self, adventure_id):
         # If we delete an adventure -> also delete is from possible class customizations
-        teacher = self.get_adventure(adventure_id).get('teacher')
+        teacher = self.get_adventure(adventure_id).get('creator', '')
         ADVENTURES.delete({'id': adventure_id})
-        for Class in self.get_teacher_classes(teacher):
+        for Class in self.get_teacher_classes(teacher, True):
             customizations = self.get_class_customizations(Class.get('id'))
-            if adventure_id in customizations['teacher_adventures']:
+            if customizations and adventure_id in customizations.get('teacher_adventures',[]):
                 customizations['teacher_adventures'].remove(adventure_id)
                 self.update_class_customizations(customizations)
 
