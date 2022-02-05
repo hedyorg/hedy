@@ -1809,16 +1809,6 @@ def teacher_invitation(code):
     url = request.url.replace(f'/invite/{code}', '/for-teachers')
     return redirect(url)
 
-# *** WSL CHECK
-def determine_expose_address():
-    try:
-        if "wsl" in os.uname().release.lower():
-            return "127.0.0.1"
-        else:
-            return "0.0.0.0"
-    except:
-        return "0.0.0.0"
-
 # *** AUTH ***
 
 from website import auth
@@ -1863,9 +1853,7 @@ if __name__ == '__main__':
 
     on_server_start()
 
-    exposed_address = determine_expose_address()
-
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=not is_in_debugger, port=config['port'], host=exposed_address)
+    app.run(threaded=True, debug=not is_in_debugger, port=config['port'])
 
     # See `Procfile` for how the server is started on Heroku.
