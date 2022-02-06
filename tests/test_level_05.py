@@ -1,6 +1,7 @@
 import hedy
 import textwrap
 from test_level_01 import HedyTester
+from hedy import repair_enabled
 
 class TestsLevel5(HedyTester):
   level=5
@@ -454,31 +455,32 @@ class TestsLevel5(HedyTester):
     self.assertEqual(2, line)
     self.assertEqual(23, column)
 
-  # not yet in use
-  # def test_repair_opening_quote(self):
-  #   code = textwrap.dedent("""\
-  #   print 'good'
-  #   print bad'""")
-  #
-  #   fixed_code = textwrap.dedent("""\
-  #   print 'good'
-  #   print 'bad'""")
-  #
-  #   with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
-  #     result = hedy.transpile(code, self.level)
-  #
-  #   self.assertEqual(fixed_code, context.exception.fixed_code)
-  #
-  # def test_repair_closing_quote(self):
-  #   code = textwrap.dedent("""\
-  #   print 'bad
-  #   print 'good'""")
-  #
-  #   fixed_code = textwrap.dedent("""\
-  #   print 'bad'
-  #   print 'good'""")
-  #
-  #   with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
-  #     result = hedy.transpile(code, self.level)
-  #
-  #   self.assertEqual(fixed_code, context.exception.fixed_code)
+  def test_repair_opening_quote(self):
+    code = textwrap.dedent("""\
+    print 'good'
+    print bad'""")
+
+    fixed_code = textwrap.dedent("""\
+    print 'good'
+    print 'bad'""")
+
+    with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
+      hedy.repair_enabled = True
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual(fixed_code, context.exception.fixed_code)
+
+  def test_repair_closing_quote(self):
+    code = textwrap.dedent("""\
+    print 'bad
+    print 'good'""")
+
+    fixed_code = textwrap.dedent("""\
+    print 'bad'
+    print 'good'""")
+
+    with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
+      hedy.repair_enabled = True
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual(fixed_code, context.exception.fixed_code)

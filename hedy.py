@@ -24,6 +24,7 @@ LEVEL_STARTING_INDENTATION = 8
 
 # Boolean variables to allow code which is under construction to not be executed
 local_keywords_enabled = True
+repair_enabled = False
 
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
@@ -2142,6 +2143,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
+            if repair_enabled:
+                mutation_repair(input_string, line, level, lang)
             raise exceptions.UnquotedTextException(level=level, fixed_code=program_repair.fixed_code,
                                                    fixed_result=program_repair.fixed_result)
         elif invalid_info.error_type == 'empty program':
