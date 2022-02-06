@@ -2093,6 +2093,21 @@ def parse_input(input_string, level, lang):
             raise e
 
 
+def mutation_repair(input_string, line, level, lang):
+    program_repair.make_mutants(input_string, line)
+    while program_repair.mutants:
+        mutant = program_repair.mutants.pop(0)
+        try:
+            mutant_result = transpile_inner(mutant, level, lang)
+        except exceptions.HedyException:
+            # current mutant contains (another) error, pass and try next
+            pass
+        else:
+            # current mutant contains no error, save it and stop
+            program_repair.save_mutant(mutant, mutant_result)
+            break
+
+
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
     instance = IsValid()
@@ -2127,18 +2142,6 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
-            program_repair.make_mutants(input_string, line)
-            while program_repair.mutants:
-                mutant = program_repair.mutants.pop(0)
-                try:
-                    mutant_result = transpile_inner(mutant, level, lang)
-                except exceptions.HedyException:
-                    # current mutant contains (another) error, try next
-                    pass
-                else:
-                    # current mutant contains no error, save it and stop
-                    program_repair.save_mutant(mutant, mutant_result)
-                    break
             raise exceptions.UnquotedTextException(level=level, fixed_code=program_repair.fixed_code,
                                                    fixed_result=program_repair.fixed_result)
         elif invalid_info.error_type == 'empty program':
