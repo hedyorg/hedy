@@ -741,10 +741,9 @@ def are_all_arguments_true(args):
     arguments_of_false_nodes = flatten_list_of_lists_to_list([x[1] for x in args if not x[0]])
     return all(bool_arguments), arguments_of_false_nodes
 
+
 # this class contains code shared between IsValid and IsComplete, which are quite similar
 # because both filter out some types of 'wrong' nodes
-# TODO: this could also use a default lark rule like AllAssignmentCommands does now
-
 @v_args(meta=True)
 class Filter(Transformer):
     def __default__(self, data, children, meta):
@@ -922,7 +921,8 @@ def all_print_arguments(input_string, level, lang='en'):
 
     return AllPrintArguments(level).transform(program_root)
 
-@v_args(meta=True)  # Note that setting meta=True here is required regardless of the annotation of the Filter class
+
+@v_args(meta=True)
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
@@ -939,18 +939,6 @@ class IsValid(Filter):
 
     def error_print_nq(self, args, meta):
         # return error source to indicate what went wrong
-
-        # Boryana Jan 22
-        # The meta variable passed as a parameter here contains the metadata of the current node.
-        # The args parameter is an array of the triples, of which the last part holds the metadata of the
-        # IMMEDIATE children. Two important points:
-        # - If an error rule has more than 2 levels of nested children, we lose the metadata of the
-        # deeper ones and get only the data of the immediate children. This does work for now, because the parse trees
-        # of all error grammar rules are only 1 level deep. For now.
-        # - At level 5, the error_print_nq can have multiple arguments and we cannot assume that it is the first one
-        # that has a missing quote. Further analysis is required to pinpoint where the quote should be added.
-
-        #TODO, fh jan 2022 maybe we want to take end_column?
         return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_invalid(self, args, meta):
@@ -1645,10 +1633,6 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, args):
         name = args[0]
-        # TODO (FH, dec 2021) if we check for var usage here (which in principle we should do)
-        # we can no longer use if name = green, we will have to do if name = 'green'
-        # which is a thing kids need to learn at one point but it also involves changing all
-        # examples so I will leave it for now.
         # self.check_var_usage(args)
         return hash_var(name)
 
