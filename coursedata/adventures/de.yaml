@@ -403,32 +403,38 @@ adventures:
                     ```
                 start_code: ""
     songs:
-        name: "Sing a song!"
-        description: "Print a song"
+        name: "Singe ein Lied!"
+        description: "Geben einen Songtext aus."
         image: "songs.png"
         default_save_name: "Song"
         levels:
             12:
                 story_text: |
-                    ## Sing a song!
-                    In this song we can make it even easier to program 'if you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
-                    ## Example Hedy code
+                    ## Lieder
+                    Jetzt machen wir es uns richtig einfach und programmieren 'Wenn Du glücklich bist, dann klatsche in die Hand'.
+                    Alles, was wir tun möchten, wenn wir glücklich sind, speichern wir in einer Variablen.
+                    Sieh es Dir an:
+
+                example_code: |
+                    ## Wenn Du glücklich bist dann klatsche in die Hand
                     ```
-                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    for action in actions
+                    Aktionen = 'klatsche in die Hand', 'stampfe mit dem Fuß', 'ruf Hurra'
+                    for Aktion in Aktionen
                         for i in range 1 to 2
-                            print 'if youre happy and you know it'
-                            print action
-                        print 'if youre happy and you know it and you really want to show it'
-                        print 'if youre happy and you know it'
-                        print action
+                            print 'Wenn Du glücklich bist, dann ' Aktion '!'
+                        print 'Zeig mir, wenn du bei mir bist,'
+                        print 'wie dir so zumute ist.'
+                        print 'Wenn Du glücklich bist dann ' Aktion '!'
                     ```
                 start_code: ""
             11:
                 story_text: |
-                    ## Songs
-                    In this level you can use the `for i in range` command to make songs that use counting.
+                    ## Lieder
+                    In diesem Level nutzt Du den Befehl `for i in range` für Lieder, in denen gezählt wird.
+                    Das klappt besonders gut mit 'Five little monkeys'.
+                    Wenn Du noch nicht so gut Englisch sprichst, kannst Du Dir die hustenden Würmchen ansehen.
 
+                example_code: |
                     ## 5 little monkeys
                     ```
                     for i in range 5 to 1
@@ -440,14 +446,33 @@ adventures:
                         else
                             print 'NO MORE MONKEYS JUMPING ON THE BED!'
                     ```
+
+                    ## Ein kleines Würmchen hatte Husten
+                    ```
+                    for i in range 1 to 4
+                        if i is 1
+                            print i ' kleines Würmchen hatte Husten.'
+                        else
+                            print i ' kleine Würmchen hatten Husten.'
+                        print 'hust hust'
+                    for i in range 4 to 1
+                        if i is 1
+                            print i ' kleines Würmchen hatte Husten.'
+                        else
+                            print i ' kleine Würmchen hatten Husten.'
+                        print 'hust hust'
+                    ```
                 start_code: ""
             10:
                 story_text: |
-                    ## Songs
-                    In this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?
-                    You can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
-                    Or you can make Old McDonald with all the different animals.
+                    ## Lieder
+                    In diesem Level kannst Du ganz einfach das englische Kinderlied 'Five little monkeys' programmieren.
+                    Kriegst Du die letzte Strophe auch alleine hin?
+                    Wenn Du noch nicht so gut Englisch sprichst, kannst Du es mit Baby Shark versuchen.
+                    Inklusive aller Familienmitglieder funktioniert das in nur sechs Zeilen!
+                    Und auch "Old MacDonald hat ne Farm" kriegst Du ganz einfach mit allen Tieren hin, die Dir einfallen.
 
+                example_code : |
                     ## 5 Little Monkeys Jumping on the bed
                     ```
                     monkeys = 5, 4, 3, 2
@@ -460,119 +485,143 @@ adventures:
 
                     ## Baby Shark
                     ```
-                    sharks = baby, mommy, daddy, grandma, grandpa
-                    for shark in sharks
-                        print shark 'tututututudu'
-                        print shark 'tututututudu'
-                        print shark 'tututututudu'
-                        print shark
+                    Haie = Baby, Mami, Papi, Omi, Opi
+                    for Hai in Haie
+                        print Hai ' shark tututututudu'
+                        print Hai ' shark tututututudu'
+                        print Hai ' shark tututututudu'
+                        print Hai ' shark'
                     ```
-                    ## Old McDonald
+                    ## Old MacDonald hat ne Farm
                     ```
-                    animals = pig, dog, cow
-                    for animal in animals
-                        if animal is pig
-                            sound = oink
-                        if animal is dog
-                            sound = woof
-                        if animal is cow
-                            sound = moo
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                    Tiere = Schweine, Hunde, Kühe
+                    for Tier in Tiere
+                        if Tier is Schweine
+                            Geräusch = grunz
+                        if Tier is Hunde
+                            Geräusch = wuff
+                        if Tier is Kühe
+                            Geräusch = muh
+                        print 'Old MacDonald hat ne Farm'
+                        print 'I A I A O!'
+                        print 'und auf der Farm da gibt es ' Tier
+                        print 'I A I A O!'
+                        print 'mit nem ' Geräusch Geräusch ' hier'
+                        print 'und nem ' Geräusch Geräusch ' da'
+                        print 'hier ein ' Geräusch
+                        print 'dort ein ' Geräusch
+                        print 'überall ein ' Geräusch Geräusch
+                        print 'Old MacDonald hat ne Farm'
+                        print 'I A I A O!'
                     ```
                 start_code: ""
             8:
                 story_text: |
-                    ## Songs
-                    In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
+                    ## Lieder
+                    In einem vorigen Level hast Du das Lied über dei Bierflaschen programmiert.
+                    Du hast eine Strophe geschrieben und musstest sie dann 99 mal kopieren!
+                    In Level 8 kannst Du die Strophe 99 mal wiederholen lassen, indem Du nur eine einfache Zeile hinzufügst.
 
-                    ## Example Hedy code
+                example_code : |
+                    ## Hedy Beispiel-Code
                     ```
-                    verse = 99
+                    Strophe = 99
                     repeat 99 times
-                        print verse ' bottles of beer on the wall'
-                        print verse ' bottles of beer'
-                        print 'Take one down, pass it around'
-                        verse = verse - 1
-                        print verse ' bottles of beer on the wall'
+                        print Strophe ' Flaschen Bier an der Wand,'
+                        print Strophe ' Flaschen Bier.'
+                        print 'Nimm eine runter, reich sie herum,'
+                        Strophe = Strophe - 1
+                        print Strophe ' Flaschen Bier an der Wand.'
                     ```
                 start_code: ""
             7:
                 story_text: |
-                    ## Songs
-                    Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
+                    ## Lieder
+                    In Liedern wiederholt sich oft einiges.
+                    So auch im Lied "Baby Shark"!
+                    Wenn Du es singst, singst Du eigentlich immer das gleiche:
 
                     Baby Shark tututudutudu <br>
                     Baby Shark tututudutudu <br>
                     Baby Shark tututudutudu <br>
                     Baby Shark
 
-                    You can make this song much shorter with a `repeat`! Can you finish the code?
+                    Baby Shark bedeutet übrigens Baby-Hai.
+                    Mit dem Befehl `repeat` kannst Du den Song abkürzen.
+                    Kannst Du den Code vervollständigen?
 
-                    ## Example Hedy code
+                example_code : |
+                    ## Hedy Beispiel-Code
                     ```
                     repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
-                    After Baby Shark you can of course also program other songs. There are many songs with repetition.
+                    Du kannst natürlich auch andere Lieder programmieren.
+                    In vielen Liedern wiederholt sich etwas.
+                    Fällt Dir eins ein?
+
                 start_code: "print 'Baby Shark'"
             6:
                 story_text: |
-                    ## Songs
-                    Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
-                    For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
+                    ## Lieder
+                    In Liedern wiederholt sich oft einiges.
+                    Manchmal beinhaltet die Wiederholung auch, dass etwas gezählt wird.
+                    So zum Beispiel beim Lied über die Bierflaschen.
+                    Dies ist eigentlich ein englisches Lied und hat den Titel "99 bottles of beer".
+                    Dieses Lied kannst Du mit einem kleinen bisschen Mathematik einfach programmieren.
 
-                    ## Example Hedy code
+                example_code : |
+                    ## Hedy Beispiel-Code
                     ```
-                    verse = 99
-                    print verse ' bottles of beer on the wall'
-                    print verse ' bottles of beer'
-                    print 'Take one down, pass it around'
-                    verse = verse - 1
-                    print verse ' bottles of beer on the wall'
+                    Strophe = 99
+                    print Strophe ' Flaschen Bier an der Wand,'
+                    print Strophe ' Flaschen Bier.'
+                    print 'Nimm eine runter, reich sie herum,'
+                    Strophe = Strophe - 1
+                    print Strophe ' Flaschen Bier an der Wand.'
                     ```
 
-                    You can now repeat lines 2 to 9 as many times as you want by copying the lines.
+                    Du kannst jetzt die Zeilen 2 bis 6 so oft wiederholen, wie Du möchtest.
+                    Dazu kopierst Du sie und fügst sie am Ende wieder ein.
 
-                start_code: "print 'Baby shark'"
+                start_code: "print 'Baby Shark'"
             16:
                 story_text: |
-                    ## Sing a song!
-                    In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
-                    The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
+                    ## Lieder
+                    In diesem Level kannst Du 'Old MacDonald hat ne Farm' sogar noch schneller programmieren.
+                    Du kannst jedem Tier das richtige Geräusch zuordnen, indem Du sie an die selbe Stelle einer Liste speicherst.
+                    Vielleicht kennst Du ja auch schon das englischsprachige Lied 'The Drunken Sailor'.
+                    Hierfür benötigst Du nur 8 Zeilen Code.
+                    Sieh es Dir an!
 
-                    ## Old MacDonald
+                example_code: |
+                    ## Old MacDonald hat ne Farm
                     ```
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
+                    Tiere = ['Schweine', 'Hunde', 'Kühe']
+                    Geräusche = ['grunz', 'wuff', 'muh']
                     for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                        Tier = Tiere[i]
+                        Geräusch = Geräusche[i]
+                        print 'Old MacDonald hat ne Farm'
+                        print 'I A I A O!'
+                        print 'und auf der Farm da gibt es ' Tier
+                        print 'I A I A O!'
+                        print 'mit nem ' Geräusch Geräusch ' hier'
+                        print 'und nem ' Geräusch Geräusch ' da'
+                        print 'hier ein ' Geräusch
+                        print 'dort ein ' Geräusch
+                        print 'überall ein ' Geräusch Geräusch
+                        print 'Old MacDonald hat ne Farm'
+                        print 'I A I A O!'
                     ```
 
                     ## Drunken Sailor
                     ```
-                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
-                    for line in lines
+                    Zeilen = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    for Zeile in Zeilen
                         for i in range 1 to 3
-                            print line
+                            print Zeile
                         print 'early in the morning'
                         for i in range 1 to 3
                             print 'way hay and up she rises'
