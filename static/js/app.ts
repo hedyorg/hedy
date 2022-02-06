@@ -47,13 +47,12 @@ var StopExecution = false;
       $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
       });
-    } else {
-      if($(preview).attr('id')){
-        // @ts-ignore
-        let level = String($(preview).attr('id'));
-        const mode = getHighlighter(parseInt(level));
-        exampleEditor.session.setMode(mode);
-      }
+    }
+    if($(preview).attr('id')){
+      // @ts-ignore
+      let level = String($(preview).attr('id'));
+      const mode = getHighlighter(parseInt(level));
+      exampleEditor.session.setMode(mode);
     }
   }
 
@@ -185,7 +184,7 @@ var StopExecution = false;
   }
 })();
 
-function getHighlighter(level: number) {
+export function getHighlighter(level: number) {
   const modeExceptions: Record<string, string> = {
         '9': 'ace/mode/level9and10',
         '10': 'ace/mode/level9and10',
@@ -613,7 +612,6 @@ export function share_program (level: number, lang: string, id: string | true, i
         modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
         change_shared(true, index);
       } else {
-        $('#modal-copy-ok-button').show();
         modal.alert (auth.texts['unshare_success_detail'], 3000, false);
         change_shared(false, index);
       }
@@ -1086,7 +1084,7 @@ function createModal(level:number ){
   let title = ErrorMessages['Program_repair'];
   modal.repair(editor, 0, title);
 }
- function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
+export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
     if (isReadOnly) {
