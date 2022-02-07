@@ -642,13 +642,13 @@ adventures:
 
                     Mit `forward` ziehst Du eine Linie vorwärts.
                     Die Zahl dahinter legt fest, wie weit die Schildkröte wandert.
-                    Mit `turn right` ("drehe Dich nach rechts") machst Du eine viertel Umdrehung im Uhrzeigersinn, mit `turn left` ("drehe Dich nach links") entgegen dem Uhrzeigersinn.
+                    Mit `turn right` ("drehe Dich nach rechts") macht sie eine viertel Umdrehung im Uhrzeigersinn, mit `turn left` ("drehe Dich nach links") entgegen dem Uhrzeigersinn.
 
-                    Du siehst den Anfang einer kleinen Treppe.
+                    Das ist der Anfang einer kleinen Treppe.
                     Kannst Du sie so zeichnen, dass sie 5 Stufen hat?
 
                 example_code: |
-                    ## Hedy Beispiel-Code
+                    ## Hedy-Beispiel-Code
 
                     ```
                     turn right
@@ -668,17 +668,17 @@ adventures:
                     In Level 2 kann sie ihre Nase in alle Richtungen strecken.
 
                     Nutze 90, um wieder eine viertel Drehung zu machen.
-                    Diese Angabe ist in "Grad (°)".
+                    Diese Angabe ist in Grad (°).
                     Eine volle Drehung um sich selbst sind 360° (360 Grad).
                     Kannst Du mit diesem Code eine bestimmte Form zeichnen?
                     Ein Dreieck zum Beispiel, oder einen Kreis?
 
                 example_code: |
-                    ## Hedy Beispiel-Code
+                    ## Hedy-Beispiel-Code
 
 
                     ```
-                    print Zeichne Formen
+                    print Formen zeichnen
                     Winkel is 90
                     turn Winkel
                     forward 25
@@ -693,13 +693,13 @@ adventures:
             3:
                 story_text: |
                     ## Suchende Schildkröte
-                    In diesem Level kannst Du den Befehl `random` nutzen, während die Schildkröte etwas zeichnet.
-                    Durch eine zufällige Wahl sieht die Zeichnung jedes Mal anders aus.
+                    In diesem Level kannst Du `random` nutzen, während die Schildkröte etwas zeichnet.
+                    Durch eine zufällige Wahl nimmt die Schildkröte jedes Mal einen anderen Weg.
                     Nutze `at random` um einen zufälligen Wert einer Liste zu wählen.
                     Wenn Du die Zeilen 2 und 3 kopierst und wieder einfügst, kannst Du einen längeren Pfad erzeugen.
 
                 example_code: |
-                    ## Hedy Beispiel-Code
+                    ## Hedy-Beispiel-Code
 
 
                     ```
@@ -715,14 +715,14 @@ adventures:
             4:
                 story_text: |
                     ## Lass uns zeichnen
-                    In Level 4 musst Du nun auch die Anführungszeichen bei `print` und `ask` nutzen.
+                    In Level 4 musst Du bei `print` und `ask` Anführungszeichen nutzen.
                     Das gilt auch für's Zeichnen!
 
                 example_code: |
-                    ## Hedy Beispiel-Code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    print 'Zeichne Figuren:'
+                    print 'Formen zeichnen'
                     Winkel is 90
                     turn Winkel
                     forward 25
@@ -731,7 +731,7 @@ adventures:
                     ```
 
                 start_code: |
-                    print 'Zeichne Figuren'
+                    print 'Formen zeichnen'
                     Winkel is 90
                     turn Winkel
                     forward 25
@@ -740,14 +740,14 @@ adventures:
                 story_text: |
                     ## Lass uns zeichnen
                     In Level 5 kannst Du mit dem Befehl `if` Entscheidungen treffen.
-                    Diú kannst Dich zum Beispiel zwischen verschiedenen Formen entscheiden.
+                    Du kannst Dich zum Beispiel zwischen verschiedenen Formen entscheiden.
 
                 example_code: |
-                    ## Hedy Beispiel-Code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    print 'Zeichne Formen'
-                    Form is ask 'Möchtest Du ein Quadrat oder ein Dreieck zeichnen?'
+                    print 'Formen zeichnen'
+                    Form is ask 'Möchtest Du ein Quadrat oder ein Dreieck?'
                     if Form is Dreieck Winkel is 120
                     else Winkel is 90
                     turn Winkel
@@ -760,8 +760,8 @@ adventures:
                     forward 25
                     ```
                 start_code: |
-                    print 'Zeichne Formen'
-                    Form is ask 'Möchtest Du ein Quadrat oder ein Dreieck zeichnen?'
+                    print 'Formen zeichnen'
+                    Form is ask 'Möchtest Du ein Quadrat oder ein Dreieck?'
                     if Form is Dreieck Winkel is 120 else Winkel is 90
                     turn Winkel
                     forward 25
@@ -772,7 +772,7 @@ adventures:
                     Wir setzen den Winkel einmalig und nutzen dann die Variable mit `repeat`.
 
                 example_code: |
-                    ## Hedy Beispiel-Code
+                    ## Hedy-Beispiel-Code
 
                     ```
                     Winkel = 90
@@ -787,7 +787,7 @@ adventures:
                     Vervollständige den Code und zeichne jedes Vieleck, das Du möchtest.
 
                 example_code_2: |
-                    ## Hedy Beispiel-Code
+                    ## Hedy-Beispiel-Code
 
                     ```
                     Ecken = ask 'Wie viele Ecken soll die Form haben?'
@@ -801,33 +801,33 @@ adventures:
             7:
                 story_text: |
                     ## Lass uns zeichnen!
-                    In diesem Level kannst Du mit dem Befehl `repeat` eine Linie mehrfach zeichnen.
+                    In diesem Level kannst Du mit dem Befehl `repeat` eine Code-Zeile wiederholen.
 
                 example_code: |
-                    ## Hedy Beispiel-Code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    print 'Zeichne Formen'
+                    print 'Formen zeichnen'
                     repeat 3 times forward 10
                     ```
                 start_code: |
-                    print 'zeichne Formen'
+                    print 'Formen zeichnen'
                     repeat 3 times forward 10
 
             6:
                 story_text: |
                     ## Lass uns zeichnen!
-                    In diesem Level nutzen wir Berechnungen um verschiedene Formen zu zeichnen.
+                    In diesem Level nutzen wir Berechnungen, um verschiedene Formen zu zeichnen.
                     Du hast vielleicht schon gelernt, dass eine komplette Umdrehung 360° sind.
                     Falls nicht, dann weißt Du es jetzt!
 
                     Deswegen benutzen wir immer 90° für ein Rechteck.
                     360 geteilt durch 4 ist 90.
 
-                    Jetzt, wo wir Mathe mit Hedy machen können, können wir alle Formen zeichnen, die wir uns wünschen!
+                    Jetzt, da wir Mathe mit Hedy machen können, können wir alle Formen zeichnen, die wir wollen!
 
                 example_code: |
-                    ## Hedy Beispiel-Code
+                    ## Hedy-Beispiel-Code
 
                     ```
                     Ecken = ask 'Wie viele Ecken soll die Form haben?'
@@ -846,7 +846,7 @@ adventures:
                     turn Winkel
                     ```
                 start_code: |
-                    print 'Zeichne Formen'
+                    print 'Formen zeichnen'
     dishes:
         name: "Dishes?"
         description: "Use the computer to see who does the dishes (Start at level 2)"
