@@ -2070,7 +2070,7 @@ def parse_input(input_string, level, lang):
             characters_expected = str(e.allowed) #not yet in use, could be used in the future (when our parser rules are better organize, now it says ANON*__12 etc way too often!)
             character_found = beautify_parse_error(e.char)
 
-            fixed_code = program_repair.remove_unexpected_char(input_string, location[0], location[1])
+            fixed_code = program_repair.remove_char(input_string, location[0], location[1])
             raise exceptions.ParseException(level=level, location=location, found=character_found, fixed_code=fixed_code) from e
         except UnexpectedEOF:
             # this one can't be beautified (for now), so give up :)

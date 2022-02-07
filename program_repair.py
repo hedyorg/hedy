@@ -1,4 +1,3 @@
-mutants = []
 fixed_code = None
 mutants_made = False
 import hedy
@@ -31,7 +30,7 @@ def make_mutants(input_string, line):
     mutants = []
     length = len(input_string.splitlines()[line - 1]) + 2
     for i in range(1, length):
-        mutants.append(add_quote(input_string, line, i))
+        mutants.append(insert(input_string, line, i, '\''))
     return mutants
 
 
@@ -50,11 +49,10 @@ def mutation_repair(input_string, line, level, lang):
     return None # no mutants found that compile
 
 def remove_leading_spaces(input_string):
-    # the only repair we can do now is remove leading spaces, more can be added!
     return '\n'.join([x.lstrip() for x in input_string.split('\n')])
 
 
-def remove_unexpected_char(input_string, line, column):
+def remove_char(input_string, line, column):
     return delete(input_string, line, column, 1)
 
 
@@ -67,5 +65,3 @@ def fix_indent(input_string, line, leading_spaces, indent_size):
         return delete(input_string, line, 1, leading_spaces - indent_size)
 
 
-def add_quote(input_string, line, column):
-    return insert(input_string, line, column, '\'')
