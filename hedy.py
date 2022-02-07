@@ -25,6 +25,9 @@ LEVEL_STARTING_INDENTATION = 8
 # Boolean variables to allow code which is under construction to not be executed
 local_keywords_enabled = True
 
+# Boolean to indicate whether gradual grammars are used
+gradual_grammars = False
+
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
@@ -1854,7 +1857,10 @@ def get_additional_rules_for_level(level, sub = 0):
 def get_full_grammar_for_level(level):
     script_dir = path.abspath(path.dirname(__file__))
     filename = "level" + str(level) + ".lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+    grammar_location = "grammars"
+    if gradual_grammars:
+        grammar_location = "gradual_grammars"
+    with open(path.join(script_dir, grammar_location, filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
 
