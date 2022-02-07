@@ -1,8 +1,7 @@
 mutants = []
 fixed_code = None
-fixed_result = None
 mutants_made = False
-
+import hedy
 
 def insert(input_string, line, column, new_string):
     """"insert new_string at (line, column)"""
@@ -29,28 +28,26 @@ def replace(input_string, line, column, length, new_string):
 
 
 def make_mutants(input_string, line):
-    global mutants_made
-    if not mutants_made:  # make list only once
-        mutants_made = True
-        length = len(input_string.splitlines()[line - 1]) + 2
-        print('length', length)
-        for i in range(1, length):
-            mutants.append(add_quote(input_string, line, i))
-
-
-def clear_mutants():
-    global fixed_code, fixed_result, mutants_made, mutants
-    fixed_code = None
-    fixed_result = None
-    mutants_made = False
     mutants = []
+    length = len(input_string.splitlines()[line - 1]) + 2
+    for i in range(1, length):
+        mutants.append(add_quote(input_string, line, i))
+    return mutants
 
 
-def save_mutant(mutant, mutant_result):
-    global fixed_code, fixed_result
-    fixed_code = mutant
-    fixed_result = mutant_result
+def mutation_repair(input_string, line, level, lang):
+    mutants = make_mutants(input_string, line)
+    while mutants:
+        mutant = mutants.pop(0)
+        try:
+            program_root = hedy.parse_input(mutant, level, lang)
+            hedy.is_program_valid(program_root, input_string, level, lang)
+            return mutant
+        except hedy.exceptions.HedyException as E:
+            # current mutant contains (another) error, pass and try next
+            pass
 
+    return None # no mutants found that compile
 
 def remove_leading_spaces(input_string):
     # the only repair we can do now is remove leading spaces, more can be added!

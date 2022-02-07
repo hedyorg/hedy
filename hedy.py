@@ -24,7 +24,7 @@ LEVEL_STARTING_INDENTATION = 8
 
 # Boolean variables to allow code which is under construction to not be executed
 local_keywords_enabled = True
-repair_enabled = False
+repair_enabled = True
 
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
@@ -1893,7 +1893,6 @@ def get_parser(level, lang="en"):
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
-    program_repair.clear_mutants()
     transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
 
@@ -2070,8 +2069,7 @@ def parse_input(input_string, level, lang):
             location = e.line, e.column
             characters_expected = str(e.allowed) #not yet in use, could be used in the future (when our parser rules are better organize, now it says ANON*__12 etc way too often!)
             character_found = beautify_parse_error(e.char)
-            # print(e.args[0])
-            # print(location, character_found, characters_expected)
+
             fixed_code = program_repair.remove_unexpected_char(input_string, location[0], location[1])
             raise exceptions.ParseException(level=level, location=location, found=character_found, fixed_code=fixed_code) from e
         except UnexpectedEOF:
@@ -2079,19 +2077,6 @@ def parse_input(input_string, level, lang):
             raise e
 
 
-def mutation_repair(input_string, line, level, lang):
-    program_repair.make_mutants(input_string, line)
-    while program_repair.mutants:
-        mutant = program_repair.mutants.pop(0)
-        try:
-            mutant_result = transpile_inner(mutant, level, lang)
-        except exceptions.HedyException:
-            # current mutant contains (another) error, pass and try next
-            pass
-        else:
-            # current mutant contains no error, save it and stop
-            program_repair.save_mutant(mutant, mutant_result)
-            break
 
 
 def is_program_valid(program_root, input_string, level, lang):
@@ -2129,9 +2114,11 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             if repair_enabled:
-                mutation_repair(input_string, line, level, lang)
-            raise exceptions.UnquotedTextException(level=level, fixed_code=program_repair.fixed_code,
-                                                   fixed_result=program_repair.fixed_result)
+                mutation_result = program_repair.mutation_repair(input_string, line, level, lang)
+                raise exceptions.UnquotedTextException(level=level, fixed_code=mutation_result)
+
+
+
         elif invalid_info.error_type == 'empty program':
             raise exceptions.EmptyProgramException()
         elif invalid_info.error_type == 'unsupported number':
@@ -2168,6 +2155,7 @@ def is_program_valid(program_root, input_string, level, lang):
                                                      guessed_command=closest, line_number=line,
                                                      fixed_code=fixed_code, fixed_result=result)
 
+    return True
 
 def is_program_complete(abstract_syntax_tree, level):
     is_complete = IsComplete(level).transform(abstract_syntax_tree)

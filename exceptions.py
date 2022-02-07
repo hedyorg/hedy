@@ -141,7 +141,7 @@ class IncompleteCommandException(HedyException):
         self.location = [line_number]
 
 class UnquotedTextException(FtfyException):
-    def __init__(self, level, fixed_code, fixed_result):
+    def __init__(self, level, fixed_code, fixed_result=None):
         super().__init__('Unquoted Text',
                          level=level,
                          fixed_code=fixed_code,
