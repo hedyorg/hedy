@@ -24,7 +24,7 @@ LEVEL_STARTING_INDENTATION = 8
 
 # Boolean variables to allow code which is under construction to not be executed
 local_keywords_enabled = True
-repair_enabled = True
+repair_enabled = False
 
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
