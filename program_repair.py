@@ -41,6 +41,10 @@ def mutation_repair(input_string, line, level, lang):
         try:
             program_root = hedy.parse_input(mutant, level, lang)
             hedy.is_program_valid(program_root, input_string, level, lang)
+            # TODO Dolfein: here we would like to do a few further (focused!!) checks like
+            # checking whether it does not result in another error (such as undefined variable), but not a full
+            # transpile because that leads to potential recursion and is expensive
+
             return mutant
         except hedy.exceptions.HedyException as E:
             # current mutant contains (another) error, pass and try next

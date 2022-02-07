@@ -2115,7 +2115,9 @@ def is_program_valid(program_root, input_string, level, lang):
             # grammar rule is agnostic of line number so we can't easily return that here
             if repair_enabled:
                 mutation_result = program_repair.mutation_repair(input_string, line, level, lang)
-                raise exceptions.UnquotedTextException(level=level, fixed_code=mutation_result)
+            else:
+                mutation_result = None
+            raise exceptions.UnquotedTextException(level=level, fixed_code=mutation_result)
 
 
 
