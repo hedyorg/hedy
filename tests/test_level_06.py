@@ -252,18 +252,32 @@ class TestsLevel6(HedyTester):
     print(f'{int(nummer) * int(nummertwee)}')""")
 
     self.single_level_tester(code=code, expected=expected, output='30')
-  def test_calc_vars_print_divide(self):
+
+  def test_calc_vars_print(self):
     code = textwrap.dedent("""\
     nummer is 5
     nummertwee is 6
-    print nummer / nummertwee""")
+    print nummer * nummertwee""")
 
     expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
-    print(f'{int(nummer) // int(nummertwee)}')""")
+    print(f'{int(nummer) * int(nummertwee)}')""")
 
-    self.single_level_tester(code=code, expected=expected, output='0')
+    self.single_level_tester(code=code, expected=expected, output='30')
+
+  def test_calc_vars_print_add_arabic(self):
+    code = textwrap.dedent("""\
+    nummer is ١
+    nummertwee is ١
+    print nummer + nummertwee""")
+
+    expected = textwrap.dedent("""\
+    nummer = '١'
+    nummertwee = '١'
+    print(f'{vint(nummer) + vint(nummertwee)}')""")
+
+    self.single_level_tester(code=code, expected=expected, output='2')
 
   def test_calc_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\

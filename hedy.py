@@ -308,6 +308,9 @@ class ExtractAST(Transformer):
     def text_with_spaces(self, args):
         return Tree('text', [' '.join([str(c) for c in args])])
 
+    def NUMBER(self, args):
+        return Tree('integer', [str(int(args))])
+
     def INT(self, args):
         return Tree('integer', [str(args)])
 
@@ -1448,7 +1451,7 @@ class ConvertToPython_6(ConvertToPython_5):
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
             return f'{str(argument.children[0])}'
-        return f"int({argument})"
+        return f"vint({argument})"
 
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
@@ -1487,7 +1490,7 @@ class ConvertToPython_7(ConvertToPython_6):
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
         command = sleep_after(command, False)
-        return f"""for {var_name} in range(int({str(times)})):
+        return f"""for {var_name} in range(vint({str(times)})):
 {ConvertToPython.indent(command)}"""
 
 @hedy_transpiler(level=8)
@@ -1505,7 +1508,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
-        return "for i in range(int(" + str(args[0]) + ")):\n" + body
+        return "for i in range(vint(" + str(args[0]) + ")):\n" + body
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -1547,8 +1550,8 @@ class ConvertToPython_11(ConvertToPython_10):
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
-        return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
-for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
+        return f"""{stepvar_name} = 1 if vint({args[1]}) < vint({args[2]}) else -1
+for {iterator} in range(vint({args[1]}), vint({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
 
 
@@ -1572,7 +1575,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return textwrap.dedent(f"""\
         {assign}
         try:
-          {var} = int({var})
+          {var} = vint({var})
         except ValueError:
           try:
             {var} = float({var})

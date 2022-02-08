@@ -101,6 +101,10 @@ TURTLE_PREFIX_CODE = textwrap.dedent("""\
 NORMAL_PREFIX_CODE = textwrap.dedent("""\
     # coding=utf8
     import random, time
+    numbers = {'١':'1'}
+    def vint(s):
+      regular_numerals = ''.join([numbers[letter] for letter in s])
+      return int(regular_numerals)
 """)
 
 
