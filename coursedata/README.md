@@ -37,9 +37,9 @@ level if not supplied.
   commands: {as under course definitions}
 ```
 
-## MarkDown docs pages
+## Markdown docs pages
 
-MarkDown docs must end in `.md` extension and have a "front matter" section
+Markdown docs must end in `.md` extension and have a "front matter" section
 (which is a YAML object ending in `---` before the start of the real document).
 
 The front matter must have the following fields:

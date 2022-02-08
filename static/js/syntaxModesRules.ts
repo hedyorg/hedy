@@ -491,7 +491,7 @@ function rule_isAsk(next?: string) {
  */
 function rule_is(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( ' + currentLang._IS + ' )',
+    regex: '([0-9A-zÀ-ÿء-ي]+)( ' + currentLang._IS + ' )',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -670,12 +670,16 @@ function keywordWithSpace(keyword: string) {
   // "word boundary" seems to be defined rather narrowly, and for whatever
   // reason does not work properly with non-ASCII languages.
   //
-  // Instead, we'll do a negative lookbehind assertion for unicode letter.
-  return '(?<!\\p{L})' + keyword + ' ';
-  //                     keyword
-  //      (?<!      )    if it is not preceded by
-  //           \p{L}     something that Unicode considers a "letter"
-  //          \\         escape the backslash
+  // Then, we tried negative lookbehind (?<!\p{L}), but lookbehinds are not
+  // really properly supported outside of Chrome.
+  //
+  // Instead, we'll look for start-of-string OR a whitespace character. This
+  // means users now MUST type spaces in order to get syntax highlighting,
+  // whereas they might used to be able to get away with typing it directly
+  // after a parenthesis or '+' symbol or something... but since the symbol
+  // would be highlighted as well that's not desirable, and most of these commands
+  // for the start of the line anyway.
+  return '(?:^|\\s)' + keyword + ' ';
 }
 
 /**

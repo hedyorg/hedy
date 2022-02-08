@@ -4,7 +4,7 @@ _print_argument: (_SPACE | quoted_text | list_access | var_access | sum)*
 command:+= ask_is | ask_equals | list_access_var_equals | list_access_var_is | assign_is | assign_equals | assign_list_is | assign_list_equals -= ask | list_access | assign | assign_list
 
 ask_is: var _SPACE _IS _SPACE _ASK (_SPACE _print_argument)?
-ask_equals: var _SPACE _EQUALS _SPACE _ASK (_SPACE _print_argument)?
+ask_equals: var _EQUALS _ASK (_SPACE _print_argument)?
 
 condition:+= equality_check_is | equality_check_equals -= equality_check
 
@@ -12,13 +12,13 @@ equality_check_is: textwithoutspaces _SPACE _IS _SPACE (textwithoutspaces | quot
 equality_check_equals: textwithoutspaces _SPACE _EQUALS _SPACE (textwithoutspaces | quoted_text)
 
 list_access_var_is: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
-list_access_var_equals: var _SPACE _EQUALS _SPACE var _SPACE _AT _SPACE (INT | random)
+list_access_var_equals: var _EQUALS var _SPACE _AT _SPACE (INT | random)
 
 assign_list_is: var _SPACE _IS _SPACE textwithspaces (_COMMA textwithspaces)+
-assign_list_equals: var _SPACE _EQUALS _SPACE textwithspaces (_COMMA textwithspaces)+
+assign_list_equals: var _EQUALS textwithspaces (_COMMA textwithspaces)+
 
 assign_is: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
-assign_equals: var _SPACE _EQUALS _SPACE sum | var _SPACE _EQUALS _SPACE textwithoutspaces
+assign_equals: var _EQUALS sum | var _EQUALS textwithoutspaces
 
 ?sum: product | sum _SPACE* _ADD _SPACE* product -> addition | sum _SPACE* _SUBTRACT _SPACE* product -> subtraction
 ?product: atom | product _SPACE* _MULTIPLY _SPACE* atom -> multiplication | product _SPACE* _DIVIDE _SPACE* atom -> division
