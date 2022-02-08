@@ -1,6 +1,5 @@
-fixed_code = None
-mutants_made = False
 import hedy
+
 
 def insert(input_string, line, column, new_string):
     """"insert new_string at (line, column)"""
@@ -28,6 +27,7 @@ def replace(input_string, line, column, length, new_string):
 
 def make_mutants(input_string, line):
     mutants = []
+    # +2 because we start counting from 1, and we are adding a character
     length = len(input_string.splitlines()[line - 1]) + 2
     for i in range(1, length):
         mutants.append(insert(input_string, line, i, '\''))
@@ -51,6 +51,7 @@ def mutation_repair(input_string, line, level, lang):
             pass
 
     return None # no mutants found that compile
+
 
 def remove_leading_spaces(input_string):
     return '\n'.join([x.lstrip() for x in input_string.split('\n')])
