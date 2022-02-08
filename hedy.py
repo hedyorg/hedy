@@ -951,6 +951,11 @@ class IsValid(Filter):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_equality_check(self, args, meta):
+        error = InvalidInfo('unquoted equality check', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
+
     #other rules are inherited from Filter
 
 def valid_echo(ast):
@@ -2080,7 +2085,7 @@ def parse_input(input_string, level, lang):
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
     instance = IsValid()
-    instance.level = level # could be done in a constructor once we are sure we will go this way
+    instance.level = level # TODO: could be done in a constructor once we are sure we will go this way
     is_valid = instance.transform(program_root)
 
     if not is_valid[0]:
@@ -2114,6 +2119,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnquotedTextException(level=level)
         elif invalid_info.error_type == 'empty program':
             raise exceptions.EmptyProgramException()
+        elif invalid_info.error_type == 'unquoted equality check':
+            raise exceptions.UnquotedEqualityCheck(line)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
