@@ -1368,8 +1368,15 @@ class ConvertToPython_5(ConvertToPython_4):
 {ConvertToPython.indent(args[1])}
 else:
 {ConvertToPython.indent(args[2])}"""
+
     def condition(self, args):
         return ' and '.join(args)
+
+    def condition_spaces(self, args):
+        result = args[0] + " == '" + ' '.join(args[1:]) + "'"
+        return result
+
+
     def equality_check(self, args):
         arg0 = self.process_variable(args[0])
         remaining_text = ' '.join(args[1:])

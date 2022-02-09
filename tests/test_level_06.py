@@ -479,7 +479,7 @@ class TestsLevel6(HedyTester):
 
     expected = textwrap.dedent("""\
     naam = 'James'
-    if naam == 'James Bond':
+    if str(naam) == str('James Bond'):
       print(f'shaken')
     else:
       print(f'biertje!')""")
