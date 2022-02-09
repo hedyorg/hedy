@@ -285,11 +285,11 @@ levels:
                 print age
             mp_choice_options:
                 -   "option_text": "age ask is Quel age as-tu ?"
-                    "feedback": "That is the wrong order"
+                    "feedback": "Ce n'est pas le bon ordre !"
                 -   "option_text": "ask is age Quel age as-tu ?"
-                    "feedback": "That is the wrong order"
+                    "feedback": "Ce n'est pas le bon ordre !"
                 -   "option_text": "age is ask Quel age as-tu ?"
-                    "feedback": "You get it!"
+                    "feedback": "C'est le bon ordre !"
                 -   "option_text": "age is Quel age as-tu ?"
                     "feedback": "Où est la commande 'ask' ?"
             correct_answer: "C"
@@ -437,180 +437,171 @@ levels:
             correct_answer: "B"
             hint: "Are n'est pas une commande."
             question_score: 10
-
     4:
         1:
-            question_text: "Which of these is true?"
+            question_text: "Laquelle de ces réponses est vraie ?"
             code: "..."
             mp_choice_options:
-                -   "option_text": "print and ask now need quotation marks"
-                    "feedback": "That's right"
-                -   "option_text": "Only print needs quotation marks"
-                    "feedback": "Ask needs quotation marks too!"
-                -   "option_text": "At random doesn't work anymore in level 4"
-                    "feedback": "At random still works"
-                -   "option_text": "At random now needs quotation marks"
-                    "feedback": "No, but 2 other commands do."
+                -   "option_text": "`print` et `ask` maintenant ont a besoin de guillemets"
+                    "feedback": "C'est exact !"
+                -   "option_text": "Seul le `print` a besoin de guillemets"
+                    "feedback": "`ask` a aussi besoin de guillemets !"
+                -   "option_text": "`at random` ne fonctionne plus au niveau 4"
+                    "feedback": "`at random` fonctionne encore !"
+                -   "option_text": "`at random` a besoin de guillemets"
+                    "feedback": "Pas seulement !"
             correct_answer: "A"
-            hint: "In level 4 you need quotation marks for 2 commands."
+            hint: "Au niveau 4, il y a plusieurs commandes qui ont besoin de guillemets"
             question_score: 10
         2:
-            question_text: "Which code uses the proper quotation marks?"
+            question_text: "Quel code utilise les guillemets corrects ?"
             code: "..."
             mp_choice_options:
-                -   "code": " print `hello` "
-                    "feedback": "This quotation mark is skewed, you need a straight one."
-                -   "code": " print 'hello' "
+                -   "code": " print `Salut !` "
+                    "feedback": "Le guillemet n'est pas le bon !"
+                -   "code": " print 'Salut !' "
                     "feedback": "Correct"
-                -   "code": " print \" hello \" "
-                    "feedback": "these are double quotation marks, you need single ones."
-                -   "code": " print , hello, "
-                    "feedback": "This is a comma, you need quotation marks."
+                -   "code": " print \" Salut \" "
+                    "feedback": "Ce sont des guillemets doubles, il faut des guillemets simples."
+                -   "code": " print , Salut, "
+                    "feedback": "C'est une virgule, tu as besoin de guillemets."
             correct_answer: "B"
-            hint: "Pick the right quotation marks."
+            hint: "Choisis les bons guillemets."
             question_score: 10
         3:
-            question_text: "Where are the quotation marks used correctly?"
+            question_text: "Où les guillemets sont-ils utilisés correctement ?"
             code: "..."
             mp_choice_options:
-                -   "code": " print Hi Im Hedy"
-                    "feedback": "Add quotation marks please!"
-                -   "code": " print 'Hi Im Hedy"
-                    "feedback": "Both before and after the words you want to print should be a quotation\
-              \ mark."
-                -   "code": " 'print Hi Im Hedy' "
-                    "feedback": "the first quotation mark should be behind the word print"
-                -   "code": " print 'Hi Im Hedy'"
-                    "feedback": "Perfect!"
+                -   "code": " print Salut, je suis Hedy"
+                    "feedback": "Il manque quelque chose !"
+                -   "code": " print 'Salut, je suis Hedy"
+                    "feedback": "Il faut des guillemets des 2 cotés !"
+                -   "code": " 'print Salut, je suis Hedy' "
+                    "feedback": "Il faut des guillemets des 2 cotés !"
+                -   "code": " print 'Salut, je suis Hedy'"
+                    "feedback": "Parfait !"
             correct_answer: "D"
-            hint: "Both before and after the words you want to print should be a quotation\
-            \ mark. "
+            hint: "Les mots que tu veux afficher doivent être précédés et suivis d'un guillemet. "
             question_score: 10
         4:
-            question_text: "Which statement is true?"
+            question_text: "Laquelle de ces réponses est vraie ?"
             code: "..."
             mp_choice_options:
-                -   "option_text": "You need quotation marks around the word print, like this: 'print'."
-                    "feedback": "The quotation marks shouldn't be around the command itself."
-                -   "option_text": "You need quotation marks around the words you want to print. "
+                -   "option_text": "Vous avez besoin de guillemets autour du mot imprimer, comme ceci : 'print'."
+                    "feedback": "Les guillemets ne doivent pas entourer la commande elle-même."
+                -   "option_text": "Tu dois mettre des guillemets autour des mots que tu veux imprimer."
                     "feedback": "Super!"
-                -   "option_text": "You do not need quotation marks when using the ask command"
-                    "feedback": "Both print and ask require quotation marks"
-                -   "option_text": "You can choose yourself whether to use quotation marks or not."
-                    "feedback": "Unfortunately, Hedy is stricter than that."
+                -   "option_text": "Vous n'avez pas besoin de guillemets lorsque vous utilisez la commande `ask`."
+                    "feedback": "Tu es sûr ?"
+                -   "option_text": "Vous pouvez choisir vous-même d'utiliser ou non des guillemets."
+                    "feedback": "Malheureusement, Hedy est plus strict que ça."
             correct_answer: "B"
-            hint: "From level 4 on you need to use quotation marks."
+            hint: "À partir du niveau 4, vous devez utiliser des guillemets."
             question_score: 10
         5:
-            question_text: "What has to be changed in order for the game to work?"
+            question_text: "Qu'est-ce qui doit être changé pour que le code fonctionne ?"
             code: |-
-                options is rock, paper, scissors
+                options is pierre, feuille, ciseaux
                 print 'options at random'
             mp_choice_options:
                 -   "code": " 'print options at random'"
-                    "feedback": "Never put the quotation mark in front of the print command."
+                    "feedback": "Ne mettez jamais de guillemets devant la commande print."
                 -   "code": " print 'options' at random "
-                    "feedback": "Options is a variable. You don't literally want to print 'options\
-              \ at random'."
+                    "feedback": "Si tu fait cela, tu affichera le mot options."
                 -   "code": " print options at random"
-                    "feedback": "That's right"
-                -   "option_text": "Nothing, the game already works!"
-                    "feedback": "Look carefully. There is an error."
+                    "feedback": "Super !"
+                -   "option_text": "Rien, le code fonctionne !"
+                    "feedback": "Regarde mieux !"
             correct_answer: "C"
-            hint: "You don't want Hedy to literally print 'options at random', you want it\
-            \ to print 'rock' or 'paper' or 'scissors'."
+            hint: "Tu ne veux pas qu'Hedy affiche littéralement 'options at random', tu veux que cela affiche 'pierre' ou 'papier' ou 'ciseaux'."
             question_score: 10
         6:
-            question_text: "What would be a good next line in this code?"
+            question_text: "Quelle serait la prochaine ligne de ce code ?"
             code: |-
-                prices is 1 dollar, 100 dollar, 1 million dollar
+                prix is 1 euro, 100 euros, 1000 euros
             mp_choice_options:
-                -   "code": " print 'You win...' prices at random"
-                    "feedback": "Great! You get it!"
-                -   "code": "print You win... 'prices at random' "
-                    "feedback": "Hedy will literally print 'prices at random'"
-                -   "code": "print You win... prices at random"
-                    "feedback": " You need some quotation marks! "
-                -   "code": "print 'You win... prices at random'"
-                    "feedback": "Hedy will literally print 'prices at random''"
+                -   "code": "print 'Tu gagnes...' prix at random"
+                    "feedback": "Super ! Tu l'as eu !"
+                -   "code": "print Tu gagnes... 'prix at random' "
+                    "feedback": "Hedy va afficher 'prix at random'."
+                -   "code": "print Tu gagnes... prix at random"
+                    "feedback": "Il faut des guillemets !"
+                -   "code": "print 'Tu gagnes... prix at random'"
+                    "feedback": "Hedy va afficher 'Tu gagnes... prix at random'."
             correct_answer: "A"
-            hint: "Think carefully: what is a variable and should be outside of the quotation\
-            \ marks? And what are normal words that should be inside?."
+            hint: "Réfléchis bien à l'emplacement des guillemets"
             question_score: 10
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "Quel est le problème avec ce code ?"
             code: |-
-                question is ask What do you want to know?
-                answers is yes, no, maybe
-                print answers at random
+                question is ask Que veux tu savoir ?
+                réponses is oui, non, peut-être
+                print réponses at random
             mp_choice_options:
-                -   "option_text": "Quotation marks are missing in line 1"
-                    "feedback": "Correct!"
-                -   "option_text": "Quotation marks are missing in line 2"
-                    "feedback": "A variable doesn't need quotes"
-                -   "option_text": "Quotation marks are missing in line 3"
-                    "feedback": " You don't want Hedy to literally print 'answers at random' so\
-              \ no quotation marks needed here!"
-                -   "option_text": "Nothing, this code is good as is!"
-                    "feedback": "Look carefully. You missed a mistake!"
+                -   "option_text": "Les guillemets manquent à la ligne 1"
+                    "feedback": "Correct !"
+                -   "option_text": "Les guillemets manquent à la ligne 2"
+                    "feedback": "Une variable n'a pas besoin de guillemets"
+                -   "option_text": "Les guillemets manquent à la ligne 3"
+                    "feedback": "Réfléchis mieux à l'emplacement des guillemets !"
+                -   "option_text": "Rien, le code est bien comme ça !"
+                    "feedback": "Regarde bien. Tu as loupé une erreur !"
             correct_answer: "A"
-            hint: "Check each line on whether they'd need quotation marks or not."
+            hint: "Regarde pour chaque ligne si elle a besoin de guillemets ou pas."
             question_score: 10
         8:
-            question_text: "What would be a good next line for this code?"
+            question_text: "Quelle serait la prochaine ligne à ajouter à ce code ?"
             code: |-
-                print 'Welcome at the money show!'
-                print 'in front of you are 3 doors'
-                door is ask 'Which door do you choose?'
+                print 'Bienvenue au monty hall !'
+                print 'Il y a 3 portes devant toi !'
+                porte is ask 'Quel est la porte que tu choisi !'
             mp_choice_options:
-                -   "option_text": "print So you pick door door"
-                    "feedback": "We need quotation marks"
-                -   "option_text": "print 'So you pick ' door door"
-                    "feedback": "If the player chooses door 3, Hedy will say 'So you pick 3 3"
-                -   "option_text": "print 'So you pick door ' door"
-                    "feedback": "Super! "
-                -   "option_text": "print 'So you pick door door'"
-                    "feedback": "Hedy will literally print 'So you pick door door"
+                -   "code": "print Donc tu choisis la porte porte"
+                    "feedback": "Il faut des guillemets"
+                -   "code": "print 'Donc tu choisis la 'porte porte"
+                    "feedback": "Si le joueur choisit la porte 3, Hedy dira 'Donc vous choisissez 3 3'."
+                -   "code": "print 'Donc tu choisis la porte' porte"
+                    "feedback": "Super !"
+                -   "code": "print 'Donc tu choisis la porte porte'"
+                    "feedback": "Hedy affichera 'Donc vous choisissez la porte de la porte'."
             correct_answer: "C"
-            hint: "The second word door should be replaced with the number, the first should\
-            \ still be the word door..."
+            hint: "Le deuxième mot 'porte' devrait être remplacé par le numéro, le premier devrait toujours être le mot 'porte'..."
             question_score: 10
         9:
-            question_text: "What will never appear in your output screen? "
+            question_text: "Qu'est-ce qui ne pourra pas être affiché sur ton écran de sortie ?"
             code: |-
-                clubs is Real Madrid, Bayern Munchen, Manchester United, Ajax
-                print clubs at random ' is going the win the champions league'
+                glace is chocolat pistache, fraise vanille, chocolat menthe, chocolat
+                print glace at random 'est ma glace préférée'
             mp_choice_options:
-                -   "option_text": "Ajax is going to win the champions league"
-                    "feedback": "Hedy could print that"
-                -   "option_text": "Real Madrid is going to win the champions league"
-                    "feedback": "Hedy could print that"
-                -   "option_text": "Bayer Munchen is going to win the champions league"
-                    "feedback": "Hedy could print that"
-                -   "option_text": "FC Barcelona is going to win the champions league"
-                    "feedback": "That's right. It's not in the list"
+                -   "option_text": "chocolat est ma glace préférée"
+                    "feedback": "Hedy pourra afficher ça"
+                -   "option_text": "fraise vanille est ma glace préférée"
+                    "feedback": "Hedy pourra afficher ça"
+                -   "option_text": "chocolat pistache est ma glace préférée"
+                    "feedback": "Hedy pourra afficher ça"
+                -   "option_text": "fraise est ma glace préférée"
+                    "feedback": "C'est vrai. Cette option n'est pas dans la liste"
             correct_answer: "D"
-            hint: "What are Hedy's options to randomly pick from?"
+            hint: "Regarde bien les options !"
             question_score: 10
         10:
-            question_text: "Which statement is true?"
+            question_text: "Quelle affirmation est vraie ?"
             code: |-
-                people is mom, dad, Emma, Sophie
-                print The dishes are done by...
-                print people at random
+                famille is ma maman, mon papa, moi, mon frère, ma soeur 
+                print La vaisselle est faite par...
+                print famille at random
             mp_choice_options:
-                -   "option_text": "Quotation marks are missing in line 1"
-                    "feedback": "A list doesn't need quotation marks"
-                -   "option_text": "Quotation marks are missing in line 2"
+                -   "option_text": "Les guillemets manquent à la ligne 1"
+                    "feedback": "Une liste n'a pas besoin de guillemets"
+                -   "option_text": "Les guillemets manquent à la ligne 2"
                     "feedback": "Correct"
-                -   "option_text": "Quotation marks are missing in both line 2 and 3"
-                    "feedback": "Line 3 doesn't need quotation marks because it's not printed literally"
-                -   "option_text": "Nothing, this code has no mistakes"
-                    "feedback": "You missed one!"
+                -   "option_text": "Les guillemets sont absents aux lignes 2 et 3."
+                    "feedback": "La ligne 3 n'a pas besoin de guillemets car elle n'est pas imprimée littéralement."
+                -   "option_text": "Rien, ce code n'a pas d'erreurs"
+                    "feedback": "Tu en as loupé une !"
             correct_answer: "B"
-            hint: "One line needs quotation marks, because you want it to be printed literally."
+            hint: "Regarde bien les guillemets !"
             question_score: 10
-
     5:
         1:
             question_text: "Which statement is true?"
