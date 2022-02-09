@@ -472,15 +472,33 @@ class TestsLevel6(HedyTester):
       expected=expected,
       max_level=7)
 
-  def test_unquoted_space_rhs(self):
+  def test_quoted_space_rhs(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is James Bond print 'shaken' else print 'biertje!'""")
+    if naam is 'James Bond' print 'shaken' else print 'biertje!'""")
 
-    self.multi_level_tester(
-      code=code,
-      exception=hedy.exceptions.UnquotedEqualityCheck,
-      max_level=7)
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+    self.single_level_tester(code=code, expected=expected)
+
+
+  def test_space_enter_rhs(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond
+    print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+    self.single_level_tester(code=code, expected=expected)
 
   def test_multiple_spaces_in_rhs_if(self):
     code = textwrap.dedent("""\
