@@ -1,5 +1,6 @@
 import textwrap
 
+import lark
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
@@ -2072,6 +2073,8 @@ def parse_input(input_string, level, lang):
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
+    except lark.UnexpectedEOF:
+        raise exceptions.UnquotedEqualityCheck(line_number=4)
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
