@@ -144,7 +144,7 @@ sections:
                 solution_code: |
                     ask Wat is de leukste programmeertaal?
                     echo De beste is
-            - title: "Tekenschildpad: Leerlingen laten het pijltje uit beeld lopen."
+            - title: "Tekenschildpad: Leerlingen laten het pijltje uit beeld lopen"
               example:
                 error_text: |
                     Vaak vinden leerlingen het leuk om hoge getallen uit te testen in de turtle, waardoor het pijltje uit beeld loopt.
@@ -156,7 +156,7 @@ sections:
                 solution_code: |
                     forward 100
                     turn 90
-            - title: "Tekenschildpad: Leerlingen weten niet hoe de schildpad achteruit moet lopen."
+            - title: "Tekenschildpad: Leerlingen weten niet hoe de schildpad achteruit moet lopen"
               example:
                 error_text: |
                     Achteruit lopen doet de turtle met mingetallen. Dit kan verwarrend zijn voor leerlingen.
@@ -183,12 +183,12 @@ sections:
                 error_text: |
                     In dit level leren de leerlingen werken met variabelen. Ook het ask commando gebruikt variabelen in dit level, wat nogal eens wordt vergeten door leerlingen.
                 error_code: |
-                    ask 'Wat wil je bestellen?'
+                    ask Wat wil je bestellen?
                 solution_text: |
                     In dit level moet je altijd aangeven waar Hedy de tekst moet opslaan, zodat je het later nog kunt gebruiken. Een variabele dus!
                 solution_code: |
-                    bestelling is ask 'Wat wil je bestellen?'
-            - title: "Leerlingen gebruiken het echo commando, wat niet werkt in level 2. "
+                    bestelling is ask Wat wil je bestellen?
+            - title: "Leerlingen gebruiken het echo commando, wat niet werkt in level 2 "
               example:
                 error_text: |
                     Voor sommige leerlingen kan het frusterend zijn dat het echo commando niet meer werkt. Het is daarom belangrijk om de voordelen van variabelen uit te leggen. Zo kun je nu meerdere variabelen gebruiken en kun je variabelen midden in een zin gebruiken.
@@ -196,11 +196,11 @@ sections:
                     antwoord is ask Waarom werkt echo niet meer?!
                     echo
                 solution_text: |
-                    Dit is de oplossing tekst
+                    Gebruik in plaats van echo een variabele.
                 solution_code: |
-                    vraag is ask Waarom werkt echo niet meer?!
+                    antwoord is ask Waarom werkt echo niet meer?!
                     print antwoord
-            - title: "Leerlingen gebruiken de naam van een variabele of lijstje in een printcommando als woord."
+            - title: "Leerlingen gebruiken de naam van een variabele in een printcommando als woord"
               example:
                 error_text: |
                     In het voorbeeld hieronder wordt 'naam' gebruikt als variabele, maar ook als gewone tekst. De uitvoer van deze code wordt 'hoi mijn Hedy is Hedy', wat natuurlijk niet de bedoeling is.
@@ -212,6 +212,29 @@ sections:
                 solution_code: |
                     naam is Hedy
                     print hoi ik heet naam
+            - title: "Leerlingen geven variabelen namen met meerdere woorden"
+              example:
+                error_text: |
+                  Je mag variabelen geen naam geven met twee woorden. Het moet altijd één woord zijn.
+                  In het voorbeeld hieronder heeft een leerling de variabele bijvoorbeeld 'gekozen deur' genoemd. Dit is fout.
+                error_code: |
+                  gekozen deur is ask Welke deur kies jij?
+                solution_text: |
+                  Voeg een laag streepje toe aan de variabelenaam. Zo wordt het gerekend als één woord.
+                solution_code: |
+                  gekozen_deur is ask Welke deur kies jij?
+            - title: "Leerlingen gebruiken twee verschillende namen voor dezelfde variabele"
+              example:
+                error_text: |
+                  In dit voorbeeld gebruikt een leerling bijvoorbeeld de namen 'paard' en 'naam' voor dezelfde variabele.
+                error_code: |
+                  paard is ask Hoe heet jouw paard?
+                  print Jouw paard heet naam
+                solution_text: |
+                  Gebruik altijd dezelfde naam voor een variabele. Controleer ook of de variabelenaam enkelvoud of meervoud is, daar lees je gemakkelijk overheen (antwoord/antwoorden).
+                solution_code: |
+                  naam is ask Hoe heet jouw paard?
+                  print Jouw paard heet naam
         - level: 3
           sections:
             - title: "Leerlingen proberen lijstjes te printen"
@@ -230,7 +253,7 @@ sections:
 
                     boodschappen is appels, melk, chocolade
                     print boodschappen at random
-            - title: "Leerlingen gebruiken de naam van een variabele of lijstje in een printcommando als woord."
+            - title: "Leerlingen gebruiken de naam van een variabele of lijstje in een printcommando als woord"
               example:
                 error_text: |
                     In het voorbeeld hieronder wordt 'naam' gebruikt als variabele, maar ook als gewone tekst. De uitveor van deze code wordt 'hoi mijn Hedy is Hedy', wat natuurlijk niet de bedoeling is.
@@ -264,7 +287,7 @@ sections:
                 solution_code: |
                     dieren is hond, koe, meeuw
                     print dieren at random
-            - title: "Leerlingen vergeten het print commando te gebruiken bij een at random."
+            - title: "Leerlingen vergeten het print commando te gebruiken bij een at random"
               example:
                 error_text: |
                     Soms zetten leerlingen at random aan het begin van de zin, of ze vergeten het print commando.
@@ -288,7 +311,7 @@ sections:
                 solution_code: |
                     pizzas is funghi, tonno, quattro stagioni
                     print pizzas at random
-            - title: "Leerlingen proberen het at random commando te gebruiken zonder lijst."
+            - title: "Leerlingen proberen het at random commando te gebruiken zonder lijst"
               example:
                 error_text: |
                     Zoals in het voorbeeld hieronder
@@ -306,17 +329,17 @@ sections:
                     In het voorbeeld hieronder is namen een variabele, maar geen lijstje. Je kunt hier dus niets aan toevoegen.
                 error_code: |
                     namen is Jake
-                    jouw_naam is ask 'Hoe heet jij?'
+                    jouw_naam is ask Hoe heet jij?
                     add jouw_naam to namen
                     print namen at random
                 solution_text: |
                     Je moet dus eerst een lijstje hebben, dus moet je een tweede naam toevoegen (Amy) aan namen om het een lijstje te maken. Als je Amy niet wil gebruiken, kun je Amy wel weer verwijderen uit het lijstje met remove.
                 solution_code: |
                     namen is Jake, Amy
-                    jouw_naam is ask 'Hoe heet jij?'
+                    jouw_naam is ask Hoe heet jij?
                     add jouw_naam to namen
                     print namen at random
-            - title: "Leerlingen vergeten het to en from gedeelte van add en remove."
+            - title: "Leerlingen vergeten het to en from gedeelte van add en remove"
               example:
                 error_text: |
                     Bij add hoort to en bij remove hoort from.
@@ -348,7 +371,7 @@ sections:
                 solution_code: |
                   print 'Hallo'
                   naam is ask 'Hoe heet jij?'
-            - title: "Leerlingen gebruiken de verkeerde aanhalingstekens."
+            - title: "Leerlingen gebruiken de verkeerde aanhalingstekens"
               example:
                 error_text: |
                     Het is van belang om aan het begin van de les te demonstreren hoe je het correcte aanhalingsteken typt. Veel leerlingen weten dit teken namelijk nog niet te vinden op hun toetsenbord en kiezen dan een schuin aanhalingsteken of de dubbele aanhalingstekens.
@@ -411,7 +434,7 @@ sections:
                 solution_code: |
                   if naam is Hedy print 'leuk'
                   else print 'minder leuk!'
-            - title: "Leerlingen gebruiken aanhalingstekens rond de naam van de variabele."
+            - title: "Leerlingen gebruiken aanhalingstekens rond de naam van de variabele"
               example:
                 error_text: |
                   Er moeten (in dit level) geen aanhalingstekens om een variabele.
@@ -451,11 +474,11 @@ sections:
 
                   of
 
-                  naam is ask hoe heet jij?
+                  naam is ask 'hoe heet jij?'
                   if naam is Jesse print 'leuk'
                   if naam is David print 'leuk'
                   if naam is Souf print 'leuk'
-            - title: "De leerlingen vullen bij ask hetzelfde in als bij de variabelenaam, dus de variabele wordt de zelfde waarde als de variabelenaam."
+            - title: "De leerlingen vullen bij ask hetzelfde in als bij de variabelenaam, dus de variabele wordt de zelfde waarde als de variabelenaam"
               example:
                 error_text: |
                   In het voorbeeld hieronder was bijvoorbeeld het wachtwoord 'wachtwoord'. Hedy zal hierbij altijd 'Je mag computeren!' printen.
