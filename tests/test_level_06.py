@@ -486,7 +486,7 @@ class TestsLevel6(HedyTester):
     self.single_level_tester(code=code, expected=expected)
 
 
-  def test_space_enter_rhs(self):
+  def test_space_enter_rhs_ifelse(self):
     code = textwrap.dedent("""\
     naam is James
     if naam is James Bond
@@ -499,6 +499,19 @@ class TestsLevel6(HedyTester):
     else:
       print(f'biertje!')""")
     self.single_level_tester(code=code, expected=expected)
+
+  def test_space_enter_rhs_ifelse(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond
+    print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')""")
+    self.single_level_tester(code=code, expected=expected)
+
 
   def test_multiple_spaces_in_rhs_if(self):
     code = textwrap.dedent("""\

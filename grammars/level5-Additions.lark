@@ -14,7 +14,7 @@ error_print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var) (_S
 
 // new commands for level 5
 ifelse: _IF _SPACE (condition (_SPACE|_EOL*) | condition_spaces _EOL*) command (_SPACE|_EOL*) _ELSE (_SPACE|_EOL*) command
-ifs: _IF _SPACE condition (_SPACE|_EOL*) command //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+ifs: _IF _SPACE (condition (_SPACE|_EOL*) | condition_spaces _EOL*) command //'if' cannot be used in Python, hence the name of the rule is 'ifs'
 
 condition_spaces: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces (_SPACE textwithspaces)+
 condition: equality_check | in_list_check
