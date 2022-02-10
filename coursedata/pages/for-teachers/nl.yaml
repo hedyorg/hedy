@@ -99,46 +99,241 @@ sections:
       levels:
         - level: 1
           sections:
-            - title: "Introductie"
-              text: |
-                In level 1 zijn dit veelgemaakte fouten door de leerlingen:
-                - Leerlingen vergeten de commando's te typen en schrijven bijvoorbeeld code's zonder te beginnen met print. Los dit op door het juiste commando vooraan de regel te typen.
-                - Leerlingen typen de commando's met een hoofdletter, waardoor de commando's niet meer werken. Commando's moeten getypt worden in kleine letters.
-                - Soms krijgen de leerlingen meldingen van de browser dat Hedy niet werkt. De oplossing is om de pagina opnieuw te laden.
-                Tekenturtle:
-                - De leerlingen laten het pijltje soms uit beeld lopen, waardoor ze denken dat de code het niet doet. Gebruik in dat geval kleinere getallen.
-                - De leerlingen weten niet hoe de turtle achteruit kan lopen. Dit kan door de turtle mingetallen te laten lopen, bijvoorbeeld -100.
+            - title: "Leerlingen vergeten de commando's te typen"
+              example:
+                error_text: |
+                    Zo vergeten leerlingen het print commando vaak.
+                error_code: |
+                    Hedy kan dit niet printen!
+                solution_text: |
+                    Leer de leerlingen aan om altijd te beginnen met een commando
+                solution_code: |
+                    print Hedy kan dit wel printen!
+            - title: "Leerlingen typen commando's met hoofdletters"
+              example:
+                error_text: |
+                    Commando's werken niet als zij getypt worden met een hoofdletter.
+                error_code: |
+                    Ask Waarom werkt mijn code niet?
+                    Print Er moeten geen hoofdletters bij de commando's
+                solution_text: |
+                    Haal de hoofdletters weg.
+                solution_code: |
+                    ask Waarom werkt mijn code nu wel?
+                    print Omdat ik de hoofdletters weggehaald heb!
+            - title: "Leerlingen gebruiken echo zonder ask"
+              example:
+                error_text: |
+                    Het commando echo herhaalt het antwoord van een ask commando. Zonder ask werkt de echo dus niet.
+                error_code: |
+                    echo Jouw naam is
+                solution_text: |
+                    Voeg een vraag toe met een ask commando.
+                solution_code: |
+                    ask Hoe heet jij?
+                    echo Jouw naam is
+            - title: "Leerlingen willen hun echo-woord (variabele) in het midden van de zin in plaats van aan het einde"
+              example:
+                error_text: |
+                    En groot gelijk hebben ze! Daarom leren ze in het volgende level variabelen gebruiken.
+                error_code: |
+                    ask Wat is de leukste programmeertaal?
+                    echo is de beste!
+                solution_text: |
+                    In level 1 moeten we het hier op houden:
+                solution_code: |
+                    ask Wat is de leukste programmeertaal?
+                    echo De beste is
+            - title: "Tekenschildpad: Leerlingen laten het pijltje uit beeld lopen."
+              example:
+                error_text: |
+                    Vaak vinden leerlingen het leuk om hoge getallen uit te testen in de turtle, waardoor het pijltje uit beeld loopt.
+                error_code: |
+                    forward 300
+                    turn 90
+                solution_text: |
+                    Ze denken dat het turn commando niet werkt, terwijl het pijltje al buiten beeld is.
+                solution_code: |
+                    forward 100
+                    turn 90
+            - title: "Tekenschildpad: Leerlingen weten niet hoe de schildpad achteruit moet lopen."
+              example:
+                error_text: |
+                    Achteruit lopen doet de turtle met mingetallen. Dit kan verwarrend zijn voor leerlingen.
+                error_code: |
+                    backward 100
+                solution_text: |
+                    Gebruik forward en mingetallen.
+                solution_code: |
+                    forward -100
         - level: 2
           sections:
-            - title: "Introductie"
-              text: |
-                  In level 2 zijn dit veelgemaakte fouten door de leerlingen:
-                  - Leerlingen maken spelfouten in de commando's.
-                  - Leerlingen vergeten bij ask de variabele eerst te noemen en gebruiken ask hetzelfde als in level 1. Vanaf level 2 heeft een ask commando altijd eerst een variabelenaam en een is nodig.
-                  Bijvoorbeeld `ask Hoe heet je?` oplossing:  `naam is ask Hoe heet je?`
-                  - Leerlingen vergeten de commando's te typen en schrijven bijvoorbeeld code's zonder te beginnen met print.
-                  - Leerlingen gebruiken het commando echo, maar dat werkt alleen in level 1. In level 2 kun je het gegeven antwoord herhalen door de variabele te gebruiken.
-                  - Leerlingen gebruiken geen komma's bij het maken van een opsomming.
-                  Bijvoorbeeld: `dieren is hond kat` oplossing: `dieren is hond, kat`
-                  - Leerlingen gebruiken komma's na een printcommando, dit kan niet.
-                  Bijvoorbeeld: `print Hallo, ik ben Hedy.` oplossing: `print Hallo ik ben Hedy`
-                  - Leerlingen gebruiken de naam van hun variabele ook als woord in een print commando, maar dat kan pas vanaf level 3.
-              code: |
-                  dier is hond, kat, koe
-                  print Het leukste dier is…
-                  print dier at random
-            - title: "Voorbeeld"
-              text: |
-                  Bijvoorbeeld: In regel 2 van deze code staat het woord dier, terwijl dat ook de naam van de variabele is. Los dit op door de variabele een andere naam te geven, bijvoorbeeld:
-              code: |
-                  dieren is hond, kat, koe
-                  print Het leukste dier is...
-                  print dieren at random
+            - title: "Leerlingen maken spelfouten in de commando's"
+              example:
+                error_text: |
+                    Als een leerling een spelfout maakt in een commando, kan Hedy het commando niet herkennen.
+                error_code: |
+                    prinnt Maak geen spelfouten!
+                solution_text: |
+                    Leer de leerlingen aan om de foutmeldingen te lezen. Deze geven namelijk aan welk woord fout gespeld is.
+                solution_code: |
+                    print Maak geen spelfouten!
+            - title: "Leerlingen vergeten dat het ask commando is veranderd"
+              example:
+                error_text: |
+                    In dit level leren de leerlingen werken met variabelen. Ook het ask commando gebruikt variabelen in dit level, wat nogal eens wordt vergeten door leerlingen.
+                error_code: |
+                    ask 'Wat wil je bestellen?'
+                solution_text: |
+                    In dit level moet je altijd aangeven waar Hedy de tekst moet opslaan, zodat je het later nog kunt gebruiken. Een variabele dus!
+                solution_code: |
+                    bestelling is ask 'Wat wil je bestellen?'
+            - title: "Leerlingen gebruiken het echo commando, wat niet werkt in level 2. "
+              example:
+                error_text: |
+                    Voor sommige leerlingen kan het frusterend zijn dat het echo commando niet meer werkt. Het is daarom belangrijk om de voordelen van variabelen uit te leggen. Zo kun je nu meerdere variabelen gebruiken en kun je variabelen midden in een zin gebruiken.
+                error_code: |
+                    antwoord is ask Waarom werkt echo niet meer?!
+                    echo
+                solution_text: |
+                    Dit is de oplossing tekst
+                solution_code: |
+                    vraag is ask Waarom werkt echo niet meer?!
+                    print antwoord
+            - title: "Leerlingen gebruiken de naam van een variabele of lijstje in een printcommando als woord."
+              example:
+                error_text: |
+                    In het voorbeeld hieronder wordt 'naam' gebruikt als variabele, maar ook als gewone tekst. De uitvoer van deze code wordt 'hoi mijn Hedy is Hedy', wat natuurlijk niet de bedoeling is.
+                error_code: |
+                    naam is Hedy
+                    print hoi mijn naam is naam
+                solution_text: |
+                    Gebruik daarom andere variabelenamen dan de tekst die je wil printen. In level 4 wordt dit probleem opgelost met aanhalingstekens.
+                solution_code: |
+                    naam is Hedy
+                    print hoi ik heet naam
         - level: 3
           sections:
-            - title: "Introductie"
-              text: |
-                  Coming soon.
+            - title: "Leerlingen proberen lijstjes te printen"
+              example:
+                error_text: |
+                    Een lijstje kan niet geprint worden. Je kunt wel een item uit een lijst printen met at random.
+                error_code: |
+                    boodschappen is appels, melk, chocolade
+                    print boodschappen
+                solution_text: |
+                    Om alle boodschappen te printen kun je ze gewoon achter een print commando zetten. Anders kun je het lijstje gebruiken met at random om een willekeurig item van het lijstje te printen.
+                solution_code: |
+                    print appels, melk, chocolade
+
+                    of
+
+                    boodschappen is appels, melk, chocolade
+                    print boodschappen at random
+            - title: "Leerlingen gebruiken de naam van een variabele of lijstje in een printcommando als woord."
+              example:
+                error_text: |
+                    In het voorbeeld hieronder wordt 'naam' gebruikt als variabele, maar ook als gewone tekst. De uitveor van deze code wordt 'hoi mijn Hedy is Hedy', wat natuurlijk niet de bedoeling is.
+                error_code: |
+                    naam is Hedy
+                    print hoi mijn naam is naam
+
+                    of
+
+                    dier is nijlpaard, bij, zwaan
+                    print het leukste dier is... dier at random
+                solution_text: |
+                    Gebruik daarom andere variabelenamen dan de tekst die je wil printen. In level 4 wordt dit probleem opgelost met aanhalingstekens.
+                solution_code: |
+                    naam is Hedy
+                    print hoi ik heet naam
+
+                    of
+
+                    dieren is nijlpaard, bij, zwaan
+                    print het leukste dier is... dieren at random
+            - title: "Leerlingen maken spelfouten in at random of vergeten een van de twee woorden"
+              example:
+                error_text: |
+                    Zo worden add en at soms verward. Of wordt at vergeten.
+                error_code: |
+                    dieren is hond, koe, meeuw
+                    print dieren add random
+                solution_text: |
+                    Dit probleem wordt opgelost door de correcte spelling te gebruiken
+                solution_code: |
+                    dieren is hond, koe, meeuw
+                    print dieren at random
+            - title: "Leerlingen vergeten het print commando te gebruiken bij een at random."
+              example:
+                error_text: |
+                    Soms zetten leerlingen at random aan het begin van de zin, of ze vergeten het print commando.
+                error_code: |
+                    fruit is appel, kers, banaan
+                    fruit at random
+                solution_text: |
+                    Benadruk dat je Hedy iets wil laten printen, dus dat het printcommando nodig is.
+                solution_code: |
+                    fruit is appel, kers, banaan
+                    print fruit at random
+            - title: "Leerlingen vergeten komma's in hun lijstjes"
+              example:
+                error_text: |
+                    In een lijst scheidt je de items met een komma. Als je de komma's vergeet herkent Hedy het lijstje niet.
+                error_code: |
+                    pizzas is funghi tonno quattro stagioni
+                    print pizzas at random
+                solution_text: |
+                    Na elk item in een lijst komt een komma.
+                solution_code: |
+                    pizzas is funghi, tonno, quattro stagioni
+                    print pizzas at random
+            - title: "Leerlingen proberen het at random commando te gebruiken zonder lijst."
+              example:
+                error_text: |
+                    Zoals in het voorbeeld hieronder
+                error_code: |
+                    voetbalclubs is Ajax
+                    print voetbalclubs at random
+                solution_text: |
+                    In het voorbeeld hierboven valt er voor Hedy natuurlijk niets at random te kiezen, want er is geen lijstje gemaakt om uit te kiezen. Om at random te kunnen gebruiken is er dus echt een lijstje nodig!
+                solution_code: |
+                    voetbalclubs is Ajax, PSV, Feyenoord
+                    print voetbalclubs at random
+            - title: "Leerlingen proberen add/remove te gebruiken zonder lijst "
+              example:
+                error_text: |
+                    In het voorbeeld hieronder is namen een variabele, maar geen lijstje. Je kunt hier dus niets aan toevoegen.
+                error_code: |
+                    namen is Jake
+                    jouw_naam is ask 'Hoe heet jij?'
+                    add jouw_naam to namen
+                    print namen at random
+                solution_text: |
+                    Je moet dus eerst een lijstje hebben, dus moet je een tweede naam toevoegen (Amy) aan namen om het een lijstje te maken. Als je Amy niet wil gebruiken, kun je Amy wel weer verwijderen uit het lijstje met remove.
+                solution_code: |
+                    namen is Jake, Amy
+                    jouw_naam is ask 'Hoe heet jij?'
+                    add jouw_naam to namen
+                    print namen at random
+            - title: "Leerlingen vergeten het to en from gedeelte van add en remove."
+              example:
+                error_text: |
+                    Bij add hoort to en bij remove hoort from.
+                error_code: |
+                    avonturen is verhaal, papegaai, dobbelsteen
+                    keuze is ask Wat vind jij het leukste Hedy avontuur?
+                    add keuze
+                    remove dobbelsteen
+                    print Ik hou van avonturen at random
+                solution_text: |
+                    Hedy moeten weten aan welk lijstje het nieuwe item moet worden toegevoegd of van welk lijstje het verwijderd moet worden.
+                solution_code: |
+                    avonturen is verhaal, papegaai, dobbelsteen
+                    keuze is ask Wat vind jij het leukste Hedy avontuur?
+                    add keuze to avonturen
+                    remove dobbelsteen from avonturen
+                    print Ik hou van avonturen at random
         - level: 4
           sections:
             - title: "Leerlingen vergeten de aanhalingstekens aan beide kanten te zetten"
@@ -274,15 +469,3 @@ sections:
                   geheim_wachtwoord is ask 'Wat is het wachtwoord?'
                   if geheim_wachtwoord is wachtwoord print 'Je mag er door!'
                   else print 'Verboden toegang!'
-
-#nieuwe fout
-#            - title: "Voorbeeld"
-#              example:
-#                error_text: |
-#                    Dit is de error tekst
-#                error_code: |
-#                    Dit is de error code
-#                solution_text: |
-#                    Dit is de oplossing tekst
-#                solution_code: |
-#                    Dit is de oplossing code
