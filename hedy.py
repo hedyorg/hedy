@@ -1,5 +1,6 @@
 import textwrap
 
+import lark
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
@@ -951,6 +952,8 @@ class IsValid(Filter):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+
+
     #other rules are inherited from Filter
 
 def valid_echo(ast):
@@ -1373,8 +1376,15 @@ class ConvertToPython_5(ConvertToPython_4):
 {ConvertToPython.indent(args[1])}
 else:
 {ConvertToPython.indent(args[2])}"""
+
     def condition(self, args):
         return ' and '.join(args)
+
+    def condition_spaces(self, args):
+        result = args[0] + " == '" + ' '.join(args[1:]) + "'"
+        return result
+
+
     def equality_check(self, args):
         arg0 = self.process_variable(args[0])
         remaining_text = ' '.join(args[1:])
@@ -2074,6 +2084,10 @@ def parse_input(input_string, level, lang):
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
+    except lark.UnexpectedEOF:
+        lines = input_string.split('\n')
+        last_line = len(lines)
+        raise exceptions.UnquotedEqualityCheck(line_number=last_line)
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
@@ -2091,7 +2105,7 @@ def parse_input(input_string, level, lang):
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
     instance = IsValid()
-    instance.level = level # could be done in a constructor once we are sure we will go this way
+    instance.level = level # TODO: could be done in a constructor once we are sure we will go this way
     is_valid = instance.transform(program_root)
 
     if not is_valid[0]:

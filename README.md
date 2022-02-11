@@ -13,11 +13,9 @@ If you want to see what the core team will work on next, you can follow [our Pro
 Živjo Hedy! Привет Hedy! !Hedy سلام
 ------------
 
-A great and simple way to help out Hedy is to help us translate Hedy [into more languages](TRANSLATING.md)! You do not need programming experience or knowledge to translate Hedy.
+A simple way to help out Hedy is to help us translate Hedy [into more languages](TRANSLATING.md)! You do not need programming experience or knowledge to translate Hedy.
 
-Note that at this point we only support left to right languages, but we are working on right to left too.
-
-I have an idea for what you should build!
+I have an idea for what you should build or improve!
 ------------
 
 Great! We have two ways of monitoring ideas. 
@@ -32,13 +30,12 @@ If it is a new idea, [start a discussion](https://github.com/Felienne/hedy/discu
 * new meanings for existing keywords
 * Experimental improvements to the parser/transpiler
 
+Please note that we want to be a friendly and welcoming open source project. If you submit an issue, refrain from saying things are "bad", or "wrong" or "broken". Assume that code that is there was made by people that do their best! Neutrally phrased messages are nicer for everyone. For example use "did not do what I expected", "appears not to work" or "could be improved".
 
 Want to help improve Hedy?
 ------------
 
-We would love to have a few more programmers join the Hedy core team! 
-
-See how you can get started with contributing in our docs: [CONTRIBUTING.md](CONTRIBUTING.md). 
+We would love to have a few more programmers join the Hedy team as regular contributors! See how you can get started with contributing in our docs: [CONTRIBUTING.md](CONTRIBUTING.md). 
 
 You can follow the [Discussions](https://github.com/Felienne/hedy/discussions) to stay up to date on things we are working on and considering. Full documentation including our design and design principles can be found [DESIGN.md](DESIGN.md)
 
