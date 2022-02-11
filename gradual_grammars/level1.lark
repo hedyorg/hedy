@@ -1,1 +1,35 @@
-empty file so we get the folder in git :)
+%import common.NUMBER -> NUMBER
+%import common.SIGNED_INT -> INT
+_SPACE: " "+
+
+_COMMA: _SPACE? ("," | "،") _SPACE?
+
+_EQUALS: _SPACE? "=" _SPACE?
+
+start: _EOL* (command _EOL+)* command? -> program
+
+command: "print" (_SPACE text)? -> print
+  | "ask" (_SPACE text)? -> ask
+  | "echo" (_SPACE text)? -> echo
+  | turtle -> turtle
+  | "#" /([^\n]+)/ -> comment
+  | _SPACE text? -> error_invalid_space // error production
+  | textwithoutspaces text? -> error_invalid // error production
+
+turtle: "forward" (_SPACE (text | NUMBER))? -> forward
+  | "turn" (_SPACE text)? -> turn
+
+_EOL: "\r"? "\n"
+
+text: /([^\n]+)/ -> text
+
+textwithoutspaces: /([^\n *+-\/]+)/ -> text
+
+NAME: ID_START ID_CONTINUE*
+
+ID_START: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
+
+ID_CONTINUE: ID_START
+  | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
+
+_END_BLOCK: "end-block"

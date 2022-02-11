@@ -1,0 +1,83 @@
+%import common.NUMBER -> NUMBER
+%import common.SIGNED_INT -> INT
+_SPACE: " "+
+
+_COMMA: _SPACE? ("," | "،") _SPACE?
+
+_EQUALS: _SPACE? "=" _SPACE?
+
+start: _EOL* (command _EOL+)* command? -> program
+
+_EOL: "\r"? "\n"
+
+NAME: ID_START ID_CONTINUE*
+
+ID_START: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
+
+ID_CONTINUE: ID_START
+  | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
+
+_END_BLOCK: "end-block"
+
+text_ask: /([^\r\n!?.]+)/ -> text
+
+punctuation: PUNCTUATION -> punctuation
+
+PUNCTUATION: "!"
+  | "?"
+  | "."
+
+var: NAME -> var
+
+text_list: /([^\r\n,،]+)/ -> text
+
+list_access: var _SPACE "at" _SPACE (INT | random) -> list_access
+
+turtle: "forward" (_SPACE (INT | list_access | textwithoutspaces))? -> forward
+  | "turn" (_SPACE (list_access | textwithoutspaces))? -> turn
+
+some_spaces: /([^\r\n!?. ]+)/ (_SPACE /([^\r\n!?. ]+)/)* -> text_with_spaces
+
+_print_argument: (_SPACE | list_access | quoted_text | var_access)* -> print_arg
+
+var_access: NAME
+
+text: /([^\n,]+)/ -> text
+
+quoted_text_no_escape: /'([^']*)'/ -> text
+
+quoted_text: /'((?:[^\\']|\\.)*)'/ -> text
+
+program: _EOL* (command | error_invalid) (_SPACE)* (_EOL+ (command | error_invalid) (_SPACE)*)* _EOL*
+
+command: "print" (_SPACE _print_argument)? -> print
+  | var _SPACE "is" _SPACE "ask" (_SPACE _print_argument)? -> ask
+  | turtle -> turtle
+  | "#" /([^\n]+)/ -> comment
+  | var _SPACE "is" _SPACE (list_access | text) -> assign
+  | "sleep" (_SPACE INT)? -> sleep
+  | var _SPACE "is" _SPACE text_list (_COMMA text_list)+ -> assign_list
+  | "add" _SPACE some_spaces _SPACE "to" _SPACE var -> add
+  | "remove" _SPACE some_spaces _SPACE "from" _SPACE var -> remove
+  | "if" _SPACE condition (_SPACE | _EOL*) command (_SPACE | _EOL*) "else" (_SPACE | _EOL*) command -> ifelse
+  | "if" _SPACE condition (_SPACE | _EOL*) command -> ifs
+  | var _SPACE "is" _SPACE var _SPACE "at" _SPACE (INT | random) -> list_access_var
+  | var _SPACE "is" _SPACE textwithspaces (_COMMA textwithspaces)+ -> assign_list
+  | var _SPACE "is" _SPACE textwithspaces -> assign
+  | _SPACE text? -> error_invalid_space // error production
+  | "ask" (_SPACE error_text_dep_2)? -> error_ask_dep_2 // error production
+  | "echo" (_SPACE error_text_dep_2)? -> error_echo_dep_2 // error production
+  | /([^\n]+)/ -> text // error production
+  | var _SPACE "is" _SPACE "ask" _SPACE text -> error_ask_nq // error production
+  | "print" _SPACE text -> error_print_nq // error production
+  | textwithoutspaces (_SPACE textwithspaces)? -> error_invalid // error production
+  | "print" _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))* -> error_print_nq // error production
+
+condition: textwithoutspaces _SPACE "is" _SPACE textwithoutspaces (_SPACE textwithoutspaces)* -> equality_check
+  | textwithoutspaces _SPACE _IN _SPACE var -> in_list_check
+
+nospace: /[^\n, ]/
+
+textwithspaces: /(?:[^\n،, ]| (?!else))+/ -> text
+
+textwithoutspaces: /(?:[^\n،, ei]|e(?!lse)|i(?!f))+/ -> text

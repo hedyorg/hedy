@@ -1,0 +1,51 @@
+%import common.NUMBER -> NUMBER
+%import common.SIGNED_INT -> INT
+_SPACE: " "+
+
+_COMMA: _SPACE? ("," | "،") _SPACE?
+
+_EQUALS: _SPACE? "=" _SPACE?
+
+start: _EOL* (command _EOL+)* command? -> program
+
+_EOL: "\r"? "\n"
+
+NAME: ID_START ID_CONTINUE*
+
+ID_START: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
+
+ID_CONTINUE: ID_START
+  | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
+
+_END_BLOCK: "end-block"
+
+command: "print" (_SPACE _print_argument)? -> print
+  | var _SPACE "is" _SPACE "ask" (_SPACE+ (_SPACE | text_ask | punctuation)*)? -> ask
+  | turtle -> turtle
+  | "#" /([^\n]+)/ -> comment
+  | var _SPACE "is" _SPACE text -> assign
+  | "sleep" (_SPACE INT)? -> sleep
+  | _SPACE text? -> error_invalid_space // error production
+  | textwithoutspaces text? -> error_invalid // error production
+  | "ask" (_SPACE error_text_dep_2)? -> error_ask_dep_2 // error production
+  | "echo" (_SPACE error_text_dep_2)? -> error_echo_dep_2 // error production
+  | /([^\n]+)/ -> text // error production
+
+turtle: "forward" (_SPACE (INT | textwithoutspaces))? -> forward
+  | "turn" (_SPACE (textwithoutspaces))? -> turn
+
+_print_argument: (_SPACE | textwithoutspaces | punctuation)* -> print_arg
+
+textwithoutspaces: /([^\r\n!?. ]+)/ -> text
+
+text: /([^\r\n,!?،.]+)/ -> text
+
+text_ask: /([^\r\n!?.]+)/ -> text
+
+punctuation: PUNCTUATION -> punctuation
+
+PUNCTUATION: "!"
+  | "?"
+  | "."
+
+var: NAME -> var

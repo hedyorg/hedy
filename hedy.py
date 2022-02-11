@@ -26,7 +26,7 @@ LEVEL_STARTING_INDENTATION = 8
 local_keywords_enabled = True
 
 # Boolean to indicate whether gradual grammars are used
-gradual_grammars = False
+gradual_grammars = True
 
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
@@ -1821,6 +1821,10 @@ def get_remaining_rules(orig_def, sub_def):
 
 def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
+
+    if gradual_grammars:
+        return get_full_grammar_for_level(level);
+    
     result = get_full_grammar_for_level(1)
     keys = get_keywords_for_language(lang)
     result = merge_grammars(result, keys, 1)

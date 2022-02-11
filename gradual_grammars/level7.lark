@@ -1,0 +1,100 @@
+%import common.NUMBER -> NUMBER
+%import common.SIGNED_INT -> INT
+_SPACE: " "+
+
+_COMMA: _SPACE? ("," | "،") _SPACE?
+
+_EQUALS: _SPACE? "=" _SPACE?
+
+start: _EOL* (command _EOL+)* command? -> program
+
+_EOL: "\r"? "\n"
+
+NAME: ID_START ID_CONTINUE*
+
+ID_START: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
+
+ID_CONTINUE: ID_START
+  | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
+
+_END_BLOCK: "end-block"
+
+text_ask: /([^\r\n!?.]+)/ -> text
+
+punctuation: PUNCTUATION -> punctuation
+
+PUNCTUATION: "!"
+  | "?"
+  | "."
+
+var: NAME -> var
+
+text_list: /([^\r\n,،]+)/ -> text
+
+list_access: 
+
+turtle: "forward" (_SPACE (INT | list_access | textwithoutspaces))? -> forward
+  | "turn" (_SPACE (list_access | textwithoutspaces))? -> turn
+
+some_spaces: /([^\r\n!?. ]+)/ (_SPACE /([^\r\n!?. ]+)/)* -> text_with_spaces
+
+var_access: NAME
+
+text: /([^\n,]+)/ -> text
+
+quoted_text_no_escape: /'([^']*)'/ -> text
+
+quoted_text: /'((?:[^\\']|\\.)*)'/ -> text
+
+program: _EOL* (command | error_invalid) (_SPACE)* (_EOL+ (command | error_invalid) (_SPACE)*)* _EOL*
+
+nospace: /[^\n, ]/
+
+textwithspaces: /(?:[^\n،, ]| (?!else))+/ -> text
+
+_print_argument: (_SPACE | quoted_text | list_access | var_access | sum)* -> print_arg
+
+condition: textwithoutspaces _SPACE _IN _SPACE var -> in_list_check
+  | textwithoutspaces _SPACE "is" _SPACE textwithoutspaces (_SPACE textwithoutspaces)* -> equality_check_is
+  | textwithoutspaces _EQUALS textwithoutspaces (_SPACE textwithoutspaces)* -> equality_check_equals
+
+sum: product
+  | sum _SPACE* "+" _SPACE* product -> addition
+  | sum _SPACE* "-" _SPACE* product -> subtraction
+
+product: atom
+  | product _SPACE* "*" _SPACE* atom -> multiplication
+  | product _SPACE* "/" _SPACE* atom -> division
+
+atom: INT
+  | var_access
+  | /([-+]?(\d+[\.,]\d+))/ -> error_unsupported_number // error production
+
+textwithoutspaces: /(?:[^\n, *+\-\/ei]|e(?!lse)|i(?!f))+/ -> text
+
+command: "print" (_SPACE _print_argument)? -> print
+  | turtle -> turtle
+  | "#" /([^\n]+)/ -> comment
+  | "sleep" (_SPACE INT)? -> sleep
+  | "add" _SPACE some_spaces _SPACE "to" _SPACE var -> add
+  | "remove" _SPACE some_spaces _SPACE "from" _SPACE var -> remove
+  | "if" _SPACE condition (_SPACE | _EOL*) command (_SPACE | _EOL*) "else" (_SPACE | _EOL*) command -> ifelse
+  | "if" _SPACE condition (_SPACE | _EOL*) command -> ifs
+  | var _SPACE "is" _SPACE var _SPACE "at" _SPACE (INT | random) -> list_access_var
+  | var _SPACE "is" _SPACE "ask" (_SPACE _print_argument)? -> ask_is
+  | var _EQUALS "ask" (_SPACE _print_argument)? -> ask_equals
+  | var _EQUALS var _SPACE "at" _SPACE (INT | random) -> list_access_var_equals
+  | var _SPACE "is" _SPACE var _SPACE "at" _SPACE (INT | random) -> list_access_var_is
+  | var _SPACE "is" _SPACE sum -> assign_is
+  | var _SPACE "is" _SPACE textwithoutspaces
+  | var _EQUALS sum -> assign_equals
+  | var _EQUALS textwithoutspaces
+  | var _SPACE "is" _SPACE textwithspaces (_COMMA textwithspaces)+ -> assign_list_is
+  | var _EQUALS textwithspaces (_COMMA textwithspaces)+ -> assign_list_equals
+  | "repeat" _SPACE (INT | var) _SPACE "times" _SPACE command -> repeat
+  | _SPACE text? -> error_invalid_space // error production
+  | "ask" (_SPACE error_text_dep_2)? -> error_ask_dep_2 // error production
+  | "echo" (_SPACE error_text_dep_2)? -> error_echo_dep_2 // error production
+  | /([^\n]+)/ -> text // error production
+  | var _SPACE "is" _SPACE "ask" _SPACE text -> error_ask_nq // error production
+  | textwithoutspaces (_SPACE textwithspaces)? -> error_invalid // error production
