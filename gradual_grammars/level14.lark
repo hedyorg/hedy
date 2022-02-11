@@ -78,19 +78,13 @@ assign_list: var _SPACE "is" _SPACE textwithspaces (_COMMA textwithspaces)+
 
 assign: var _SPACE "is" _SPACE textwithspaces
 
-error_invalid: textwithoutspaces (_SPACE textwithspaces)?
-
 error_print_no_quotes: "print" _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))* -> error_print_nq
 
 ifelse: "if" _SPACE condition (_SPACE | _EOL*) command (_SPACE | _EOL*) "else" (_SPACE | _EOL*) command
 
 equality_check: textwithoutspaces _SPACE "is" _SPACE textwithoutspaces (_SPACE textwithoutspaces)*
 
-in_list_check: textwithoutspaces _SPACE "in" _SPACE var
-
 nospace: /[^\n, ]/
-
-textwithspaces: /(?:[^\n،, ]| (?!else))+/ -> text
 
 _print_argument: (_SPACE | quoted_text | list_access | var_access | sum)*
 
@@ -98,27 +92,9 @@ ask_is: var _SPACE "is" _SPACE "ask" (_SPACE _print_argument)?
 
 ask_equals: var "=" "ask" (_SPACE _print_argument)?
 
-condition: in_list_check
-  | equality_check_is
-  | equality_check_equals
-
-equality_check_is: textwithoutspaces _SPACE "is" _SPACE textwithoutspaces (_SPACE textwithoutspaces)*
-
-equality_check_equals: textwithoutspaces "=" textwithoutspaces (_SPACE textwithoutspaces)*
-
 list_access_var_is: var _SPACE "is" _SPACE var _SPACE "at" _SPACE (INT | random)
 
 list_access_var_equals: var "=" var _SPACE "at" _SPACE (INT | random)
-
-assign_list_is: var _SPACE "is" _SPACE textwithspaces (_COMMA textwithspaces)+
-
-assign_list_equals: var "=" textwithspaces (_COMMA textwithspaces)+
-
-assign_is: var _SPACE "is" _SPACE sum
-  | var _SPACE "is" _SPACE textwithoutspaces
-
-assign_equals: var "=" sum
-  | var "=" textwithoutspaces
 
 ?sum: product
   | sum _SPACE* "+" _SPACE* product -> addition
@@ -128,16 +104,17 @@ assign_equals: var "=" sum
   | product _SPACE* "*" _SPACE* atom -> multiplication
   | product _SPACE* "/" _SPACE* atom -> division
 
-?atom: INT
-  | var_access
-  | error_unsupported_number
-
 error_unsupported_number: /([-+]?(\d+[\.,]\d+))/ -> error_unsupported_number
 
 textwithoutspaces: /(?:[^\n, *+\-\/ei]|e(?!lse)|i(?!f))+/ -> text
 
+repeat: "repeat" _SPACE (INT | var) _SPACE "times" _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+
+elses: _EOL (_SPACE)* "else" (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+
+repeat_list: "for" _SPACE var _SPACE "in" _SPACE var _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+
 command: print
-  | turtle
   | add
   | remove
   | sleep
@@ -151,11 +128,65 @@ command: print
   | assign_equals
   | assign_list_is
   | assign_list_equals
-  | repeat
   | ifs elses?
+  | repeat_list
+  | for_loop
 
-repeat: "repeat" _SPACE (INT | var) _SPACE "times" _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+for_loop: "for" _SPACE (NAME | var) _SPACE "in" _SPACE "range" _SPACE (INT | var) _SPACE "to" _SPACE (INT | var) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
-elses: _EOL (_SPACE)* "else" (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+assign_is: var _SPACE "is" _SPACE sum
+  | var _SPACE "is" _SPACE text_in_quotes
 
-ifs: "if" _SPACE condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+assign_equals: var "=" sum
+  | var "=" text_in_quotes
+
+assign_list_is: var _SPACE "is" _SPACE (text_in_quotes | NUMBER) (_COMMA (text_in_quotes | NUMBER))+
+
+assign_list_equals: var "=" (text_in_quotes | NUMBER) (_COMMA (text_in_quotes | NUMBER))+
+
+?atom: NUMBER
+  | var
+
+in_list_check: (var | text_in_quotes | NUMBER) _SPACE "in" _SPACE var
+
+error_invalid: "Supercalifragilisticexpialidocious"
+
+textwithspaces: /(?:[^\n,' ]| (?!else))+/ -> text
+
+text_in_quotes: "'" textwithspaces "'"
+
+ifs: "if" _SPACE (condition | andcondition | orcondition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+
+andcondition: (condition) (_SPACE "and" _SPACE condition)*
+
+orcondition: (condition) (_SPACE "or" _SPACE condition)*
+
+condition: in_list_check
+  | equality_check_is
+  | equality_check_equals
+  | equality_check_dequals
+  | smaller
+  | bigger
+  | not_equal
+  | smaller_equal
+  | bigger_equal
+
+equality_check_is: comparison_arg _SPACE? "is" _SPACE? comparison_arg
+
+equality_check_equals: comparison_arg "=" comparison_arg
+
+equality_check_dequals: comparison_arg _SPACE? "==" _SPACE? comparison_arg
+
+smaller: comparison_arg _SPACE? "<" _SPACE? comparison_arg
+
+bigger: comparison_arg _SPACE? ">" _SPACE? comparison_arg
+
+smaller_equal: comparison_arg _SPACE? "<=" _SPACE? comparison_arg
+
+bigger_equal: comparison_arg _SPACE? ">=" _SPACE? comparison_arg
+
+not_equal: comparison_arg _SPACE? "!=" _SPACE? comparison_arg
+
+?comparison_arg: var
+  | text_in_quotes
+  | NUMBER

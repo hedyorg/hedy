@@ -4,9 +4,17 @@ _SPACE: " "+
 
 _COMMA: _SPACE? ("," | "،") _SPACE?
 
-_EQUALS: _SPACE? "=" _SPACE?
+start: program
 
-start: _EOL* (command _EOL+)* command? -> program
+program: _EOL* (command _EOL+)* command?
+
+echo: "echo" (_SPACE text)?
+
+error_invalid_space: _SPACE text?
+
+error_invalid: textwithoutspaces text?
+
+comment: "#" /([^\n]+)/
 
 _EOL: "\r"? "\n"
 
@@ -19,22 +27,35 @@ ID_CONTINUE: ID_START
 
 _END_BLOCK: "end-block"
 
-command: "print" (_SPACE _print_argument)? -> print
-  | var _SPACE "is" _SPACE "ask" (_SPACE+ (_SPACE | text_ask | punctuation)*)? -> ask
-  | turtle -> turtle
-  | "#" /([^\n]+)/ -> comment
-  | var _SPACE "is" _SPACE text -> assign
-  | "sleep" (_SPACE INT)? -> sleep
-  | _SPACE text? -> error_invalid_space // error production
-  | textwithoutspaces text? -> error_invalid // error production
-  | "ask" (_SPACE error_text_dep_2)? -> error_ask_dep_2 // error production
-  | "echo" (_SPACE error_text_dep_2)? -> error_echo_dep_2 // error production
-  | /([^\n]+)/ -> text // error production
+command: print
+  | ask
+  | turtle
+  | error_invalid_space
+  | comment
+  | assign
+  | error_ask_dep_2
+  | error_echo_dep_2
+  | sleep
+  | error_invalid
+
+print: "print" (_SPACE _print_argument)?
+
+_print_argument: (_SPACE | textwithoutspaces | punctuation)*
+
+ask: var _SPACE "is" _SPACE "ask" (_SPACE+ (_SPACE | text_ask | punctuation)*)?
+
+error_ask_dep_2: "ask" (_SPACE error_text_dep_2)?
+
+error_echo_dep_2: "echo" (_SPACE error_text_dep_2)?
+
+error_text_dep_2: /([^\n]+)/ -> text
+
+sleep: "sleep" (_SPACE INT)?
 
 turtle: "forward" (_SPACE (INT | textwithoutspaces))? -> forward
   | "turn" (_SPACE (textwithoutspaces))? -> turn
 
-_print_argument: (_SPACE | textwithoutspaces | punctuation)* -> print_arg
+assign: var _SPACE "is" _SPACE text -> assign
 
 textwithoutspaces: /([^\r\n!?. ]+)/ -> text
 

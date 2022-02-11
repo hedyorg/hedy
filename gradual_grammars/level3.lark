@@ -4,9 +4,17 @@ _SPACE: " "+
 
 _COMMA: _SPACE? ("," | "،") _SPACE?
 
-_EQUALS: _SPACE? "=" _SPACE?
+start: program
 
-start: _EOL* (command _EOL+)* command? -> program
+program: _EOL* (command _EOL+)* command?
+
+echo: "echo" (_SPACE text)?
+
+error_invalid_space: _SPACE text?
+
+error_invalid: textwithoutspaces text?
+
+comment: "#" /([^\n]+)/
 
 _EOL: "\r"? "\n"
 
@@ -18,6 +26,18 @@ ID_CONTINUE: ID_START
   | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
 
 _END_BLOCK: "end-block"
+
+print: "print" (_SPACE _print_argument)?
+
+ask: var _SPACE "is" _SPACE "ask" (_SPACE+ (_SPACE | text_ask | punctuation)*)?
+
+error_ask_dep_2: "ask" (_SPACE error_text_dep_2)?
+
+error_echo_dep_2: "echo" (_SPACE error_text_dep_2)?
+
+error_text_dep_2: /([^\n]+)/ -> text
+
+sleep: "sleep" (_SPACE INT)?
 
 textwithoutspaces: /([^\r\n!?. ]+)/ -> text
 
@@ -33,24 +53,29 @@ PUNCTUATION: "!"
 
 var: NAME -> var
 
-command: "print" (_SPACE _print_argument)? -> print
-  | var _SPACE "is" _SPACE "ask" (_SPACE+ (_SPACE | text_ask | punctuation)*)? -> ask
-  | turtle -> turtle
-  | "#" /([^\n]+)/ -> comment
-  | var _SPACE "is" _SPACE (list_access | text) -> assign
-  | "sleep" (_SPACE INT)? -> sleep
-  | var _SPACE "is" _SPACE text_list (_COMMA text_list)+ -> assign_list
-  | "add" _SPACE some_spaces _SPACE "to" _SPACE var -> add
-  | "remove" _SPACE some_spaces _SPACE "from" _SPACE var -> remove
-  | _SPACE text? -> error_invalid_space // error production
-  | textwithoutspaces text? -> error_invalid // error production
-  | "ask" (_SPACE error_text_dep_2)? -> error_ask_dep_2 // error production
-  | "echo" (_SPACE error_text_dep_2)? -> error_echo_dep_2 // error production
-  | /([^\n]+)/ -> text // error production
+command: print
+  | ask
+  | turtle
+  | error_invalid_space
+  | comment
+  | assign
+  | error_ask_dep_2
+  | error_echo_dep_2
+  | sleep
+  | assign_list
+  | add
+  | remove
+  | error_invalid
 
-_print_argument: (_SPACE | list_access | textwithoutspaces | punctuation)* -> print_arg
+_print_argument: (_SPACE | list_access | textwithoutspaces | punctuation)*
+
+assign: var _SPACE "is" _SPACE (list_access | text) -> assign
+
+assign_list: var _SPACE "is" _SPACE text_list (_COMMA text_list)+
 
 text_list: /([^\r\n,،]+)/ -> text
+
+random: "random"
 
 list_access: var _SPACE "at" _SPACE (INT | random) -> list_access
 
@@ -58,3 +83,7 @@ turtle: "forward" (_SPACE (INT | list_access | textwithoutspaces))? -> forward
   | "turn" (_SPACE (list_access | textwithoutspaces))? -> turn
 
 some_spaces: /([^\r\n!?. ]+)/ (_SPACE /([^\r\n!?. ]+)/)* -> text_with_spaces
+
+add: "add" _SPACE some_spaces _SPACE "to" _SPACE var
+
+remove: "remove" _SPACE some_spaces _SPACE "from" _SPACE var

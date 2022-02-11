@@ -4,20 +4,32 @@ _SPACE: " "+
 
 _COMMA: _SPACE? ("," | "،") _SPACE?
 
-_EQUALS: _SPACE? "=" _SPACE?
+start: program
 
-start: _EOL* (command _EOL+)* command? -> program
+program: _EOL* (command _EOL+)* command?
 
-command: "print" (_SPACE text)? -> print
-  | "ask" (_SPACE text)? -> ask
-  | "echo" (_SPACE text)? -> echo
-  | turtle -> turtle
-  | "#" /([^\n]+)/ -> comment
-  | _SPACE text? -> error_invalid_space // error production
-  | textwithoutspaces text? -> error_invalid // error production
+command: print
+  | ask
+  | echo
+  | turtle
+  | error_invalid_space
+  | comment
+  | error_invalid
+
+print: "print" (_SPACE text)?
+
+ask: "ask" (_SPACE text)?
+
+echo: "echo" (_SPACE text)?
 
 turtle: "forward" (_SPACE (text | NUMBER))? -> forward
   | "turn" (_SPACE text)? -> turn
+
+error_invalid_space: _SPACE text?
+
+error_invalid: textwithoutspaces text?
+
+comment: "#" /([^\n]+)/
 
 _EOL: "\r"? "\n"
 
