@@ -732,7 +732,7 @@ def replace_decimals(obj):
             obj[i] = replace_decimals(obj[i])
         return obj
     elif isinstance(obj, dict):
-        for k in obj.iterkeys():
+        for k in obj.keys():
             obj[k] = replace_decimals(obj[k])
         return obj
     elif isinstance(obj, decimal.Decimal):

@@ -1,6 +1,7 @@
 /**
  * The modal we pop up to have children confirm things
  */
+
 class Modal {
   constructor() {
     // Just one binding, never needs stat
@@ -8,7 +9,9 @@ class Modal {
     $('#modal-no-button').on('click', () => this.hide());
     $('#modal-cancel-button').on('click', () => this.hide());
     $('#modal-copy-ok-button').on('click', () => this.hide());
+    $('#modal-copy-close-button').on('click', () => this.hide());
     $('#modal-repair-button').on('click', () => this.hide());
+    $('#modal-preview-button').on('click', () => this.hide());
     $('#modal-alert-button').on('click', () => this.hide_alert());
   }
 
@@ -32,6 +35,7 @@ class Modal {
     $('#modal-confirm').hide();
     $('#modal-copy').hide();
     $('#modal-repair').hide();
+    $('#modal-preview').hide();
   }
 
   public hide_alert() {
@@ -39,16 +43,15 @@ class Modal {
   }
 
   public alert(message: string, timeoutMs?: number, error?: boolean) {
+    $('#modal_alert_container').removeClass('bg-red-100 border-red-400 text-red-700');
+    $('#modal-alert-button').removeClass('text-red-500');
+    $('#modal_alert_container').addClass('bg-green-100 border-green-400 text-green-700');
+    $('#modal-alert-button').addClass('text-green-500');
     if (error) {
       $('#modal_alert_container').removeClass('bg-green-100 border-green-400 text-green-700');
       $('#modal-alert-button').removeClass('text-green-500');
       $('#modal_alert_container').addClass('bg-red-100 border-red-400 text-red-700');
       $('#modal-alert-button').addClass('text-red-500');
-    } else {
-      $('#modal_alert_container').removeClass('bg-red-100 border-red-400 text-red-700');
-      $('#modal-alert-button').removeClass('text-red-500');
-      $('#modal_alert_container').addClass('bg-green-100 border-green-400 text-green-700');
-      $('#modal-alert-button').addClass('text-green-500');
     }
     $('#modal_alert_text').html(message);
     this.show_alert();
@@ -78,6 +81,16 @@ class Modal {
       this._timeout = undefined;
     }
     if (timeoutMs) this._timeout = setTimeout(() => this.hide(), timeoutMs);
+  }
+
+  public preview(content: JQuery, title: string) {
+    $('#modal-preview-title').html(title);
+    const target = $('#modal-preview-content');
+    content.attr('id', 'modal-preview-content');
+    target.replaceWith(content);
+
+    this.show();
+    $('#modal-preview').show();
   }
 
   public repair(message: string, timeoutMs?: number,  title: string = '') {

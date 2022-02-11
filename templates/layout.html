@@ -32,21 +32,34 @@
           </div>
        </div>
        <div id="modal-copy" class="hidden">
+           <div class="absolute top-2 right-2">
+              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-copy-close-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+          </svg></div>
           <div id="modal-copy-title" class="text-white mb-8 text-xl hidden"></div>
           <div id="modal-copy-text" class="text-white mb-8 text-xl"></div>
           <div id="modal-copy-buttons" class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
             <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.copy_link_to_share}}</button>
-            <button id="modal-copy-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4 hidden">{{auth.ok}}</button>
           </div>
        </div>
        <div id="modal-repair" class="hidden">
           <div class="absolute top-2 right-2">
-              <svg class="fill-current h-12 w-12 ml-auto text-white" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <title>Close</title>
               <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
           </svg></div>
           <div id="modal-repair-title" class="text-white mb-8 text-xl hidden"></div>
           <div id="modal-repair-text" class="text-white mb-8 text-xl"></div>
+       </div>
+        <div id="modal-preview" class="hidden">
+          <div class="absolute top-2 right-2">
+              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-preview-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+          </svg></div>
+          <div id="modal-preview-title" class="text-black mb-4 text-2xl"></div>
+          <div id="modal-preview-content"></div>
        </div>
     </div>
     <div id="modal-alert" class="z-50 fixed hidden" role="alert" style="top: 10%; left: 50%; transform: translate(-50%, -50%);">

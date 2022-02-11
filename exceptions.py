@@ -64,6 +64,12 @@ class ParseException(HedyException):
         #TODO (FH, 8 dec 21) many exceptions now support fixed code maybe we should move it to hedyexception?
         self.fixed_code = fixed_code
 
+class UnquotedEqualityCheck(HedyException):
+    def __init__(self, line_number):
+        super().__init__('Unquoted Equality Check',
+             line_number=line_number)
+        self.location = [line_number]
+
 class UndefinedVarException(HedyException):
     def __init__(self, name):
         super().__init__('Var Undefined',

@@ -1,5 +1,6 @@
 import textwrap
 
+import lark
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
@@ -741,10 +742,9 @@ def are_all_arguments_true(args):
     arguments_of_false_nodes = flatten_list_of_lists_to_list([x[1] for x in args if not x[0]])
     return all(bool_arguments), arguments_of_false_nodes
 
+
 # this class contains code shared between IsValid and IsComplete, which are quite similar
 # because both filter out some types of 'wrong' nodes
-# TODO: this could also use a default lark rule like AllAssignmentCommands does now
-
 @v_args(meta=True)
 class Filter(Transformer):
     def __default__(self, data, children, meta):
@@ -922,7 +922,8 @@ def all_print_arguments(input_string, level, lang='en'):
 
     return AllPrintArguments(level).transform(program_root)
 
-@v_args(meta=True)  # Note that setting meta=True here is required regardless of the annotation of the Filter class
+
+@v_args(meta=True)
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
@@ -939,18 +940,6 @@ class IsValid(Filter):
 
     def error_print_nq(self, args, meta):
         # return error source to indicate what went wrong
-
-        # Boryana Jan 22
-        # The meta variable passed as a parameter here contains the metadata of the current node.
-        # The args parameter is an array of the triples, of which the last part holds the metadata of the
-        # IMMEDIATE children. Two important points:
-        # - If an error rule has more than 2 levels of nested children, we lose the metadata of the
-        # deeper ones and get only the data of the immediate children. This does work for now, because the parse trees
-        # of all error grammar rules are only 1 level deep. For now.
-        # - At level 5, the error_print_nq can have multiple arguments and we cannot assume that it is the first one
-        # that has a missing quote. Further analysis is required to pinpoint where the quote should be added.
-
-        #TODO, fh jan 2022 maybe we want to take end_column?
         return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_invalid(self, args, meta):
@@ -962,6 +951,8 @@ class IsValid(Filter):
     def error_unsupported_number(self, args, meta):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
+
+
 
     #other rules are inherited from Filter
 
@@ -1378,8 +1369,15 @@ class ConvertToPython_5(ConvertToPython_4):
 {ConvertToPython.indent(args[1])}
 else:
 {ConvertToPython.indent(args[2])}"""
+
     def condition(self, args):
         return ' and '.join(args)
+
+    def condition_spaces(self, args):
+        result = args[0] + " == '" + ' '.join(args[1:]) + "'"
+        return result
+
+
     def equality_check(self, args):
         arg0 = self.process_variable(args[0])
         remaining_text = ' '.join(args[1:])
@@ -1555,11 +1553,12 @@ class ConvertToPython_10(ConvertToPython_8_9):
 class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        iterator = hash_var(args[0])
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
         return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
-for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
+for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
 
 
@@ -1644,10 +1643,6 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, args):
         name = args[0]
-        # TODO (FH, dec 2021) if we check for var usage here (which in principle we should do)
-        # we can no longer use if name = green, we will have to do if name = 'green'
-        # which is a thing kids need to learn at one point but it also involves changing all
-        # examples so I will leave it for now.
         # self.check_var_usage(args)
         return hash_var(name)
 
@@ -2078,6 +2073,10 @@ def parse_input(input_string, level, lang):
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
+    except lark.UnexpectedEOF:
+        lines = input_string.split('\n')
+        last_line = len(lines)
+        raise exceptions.UnquotedEqualityCheck(line_number=last_line)
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
@@ -2095,7 +2094,7 @@ def parse_input(input_string, level, lang):
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
     instance = IsValid()
-    instance.level = level # could be done in a constructor once we are sure we will go this way
+    instance.level = level # TODO: could be done in a constructor once we are sure we will go this way
     is_valid = instance.transform(program_root)
 
     if not is_valid[0]:
