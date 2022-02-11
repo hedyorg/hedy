@@ -18,6 +18,7 @@ Other project boards are student projects that keep track of their own issues, t
 The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhuals of the language or architecture. If you are interested in picking up such a large feature do [let us know](mailto:hedy@felienne.com) and read the corresponding discussion to see what has alrady been considered.
 
 **For newcomers: No PR without an issue and no "issue + PR"**
+
 While we really love people to help out, we work and prioritize our work as a team and we have a lot of work still on our backlog. 'Random' pull requests can be overwhelming and not always helpful. If you want to help, please pick an open issue to work on. We have a few labeled "good first issue" to get started, or [reach out](mailto:hedy@felienne.com). We are always happy to jump on a call to chat about how you can help!!
 
 Run Hedy code on your machine
