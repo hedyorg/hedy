@@ -309,9 +309,6 @@ class ExtractAST(Transformer):
     def text_with_spaces(self, args):
         return Tree('text', [' '.join([str(c) for c in args])])
 
-    def NUMBER(self, args):
-        return Tree('integer', [str(int(args))])
-
     def INT(self, args):
         return Tree('integer', [str(args)])
 
