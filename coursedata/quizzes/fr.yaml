@@ -790,108 +790,87 @@ levels:
 
     6:
         1:
-            question_text: "What's Hedy's output when you run this code?"
+            question_text: "Quelle est la sortie d'Hedy lorsque tu exécutes ce programme ?"
             code: "print 2*10"
             mp_choice_options:
                 -   "option_text": "20"
-                    "code": ""
                     "feedback": "Correct!"
                 -   "option_text": "12"
-                    "code": "?"
-                    "feedback": "No, the plus sign is used in addition"
+                    "feedback": "non, c'est une multiplication pas une addition"
                 -   "option_text": "2*10"
-                    "code": ""
-                    "feedback": "No, Hedy will calculate the answer"
+                    "feedback": "Non, Hedy va calculer la réponse"
                 -   "option_text": "210"
-                    "code": ""
-                    "feedback": "Mind it's a calculation."
+                    "feedback": "Attention, il y a un calcul."
             correct_answer: "A"
-            hint: "The * is used as a multiplication sign"
+            hint: "Le * est utilisé comme signe de multiplication"
             question_score: 10
         2:
-            question_text: "Which sign do you use for an addition?"
+            question_text: "Quel signe utilises tu pour une addition ?"
             code: "..."
             mp_choice_options:
                 -   "option_text": "-"
-                    "code": ""
-                    "feedback": "That's not it"
+                    "feedback": "Ce n'est pas ça."
                 -   "option_text": "plus"
-                    "code": ""
-                    "feedback": "That's not it"
+                    "feedback": "Ce n'est pas ça."
                 -   "option_text": "*"
-                    "code": ""
-                    "feedback": "That's not it"
+                    "feedback": "Ce n'est pas ça."
                 -   "option_text": "+"
-                    "code": ""
-                    "feedback": "Correct!"
+                    "feedback": "Correct !"
             correct_answer: "D"
-            hint: "It's the plus sign."
+            hint: "C'est le signe 'plus'."
             question_score: 10
         3:
-            question_text: "What's Hedy's output when you run this code?"
+            question_text: "Quelle est la sortie d'Hedy lorsque tu exécutes ce code ?"
             code: "print '3*10'"
             mp_choice_options:
                 -   "option_text": "30"
-                    "code": ""
-                    "feedback": "This would be the right answer if there were no quotation marks."
+                    "feedback": "Ce serait la bonne réponse s'il n'y avait pas de guillemets."
                 -   "option_text": "13"
-                    "code": "?"
-                    "feedback": "Try again.."
+                    "feedback": "Essaye encore.."
                 -   "option_text": "3*10"
-                    "code": ""
-                    "feedback": "Correct! There are quotation marks, so Hedy will print it literally."
-                -   "option_text": "Nothing, Hedy will give an error message."
-                    "code": ""
-                    "feedback": "No, Hedy will print it literally."
+                    "feedback": "Correct ! Il y a des guillemets, donc Hedy va l'afficher sans faire de calcul."
+                -   "option_text": "Rien, Hedy donnera un message d'erreur."
+                    "feedback": "Non, il n'y aura pas d'erreurs"
             correct_answer: "C"
-            hint: "Mind the quotation marks!!"
+            hint: "Attention aux guillemets !"
             question_score: 10
         4:
-            question_text: "Kim is 10 years old. What will Hedy print for her?"
+            question_text: "Eve a 10 ans. Que va imprimer Hedy pour elle ?"
             code: |-
-                name is ask 'How many letters are in your name?'
-                age is ask 'How old are you?'
-                luckynumber is name*age
-                print 'Your lucky number is...' luckynumber
+                nom is ask 'Combien de lettres y a-t-il dans votre nom ?'
+                age is ask 'Quel âge as-tu ?'
+                nombremagique is nom*age
+                print 'Ton numéro porte bonheur est...' nombremagique
             mp_choice_options:
                 -   "option_text": "30"
-                    "code": ""
-                    "feedback": "Mind, Hedy also prints 'Your lucky number is...'"
+                    "feedback": "Attention, Hedy imprime autre chose !"
                 -   "option_text": "10"
-                    "code": ""
-                    "feedback": "Please try again."
-                -   "option_text": "Your lucky number is... 30"
-                    "code": ""
+                    "feedback": "Recommence !"
+                -   "option_text": "Ton numéro porte bonheur est... 30"
                     "feedback": "That's right!"
-                -   "option_text": "Your lucky number is... 10"
-                    "code": ""
-                    "feedback": "Her lucky number is name times age..."
+                -   "option_text": "Ton numéro porte bonheur est... 10"
+                    "feedback": "Son numéro de chance est le nom multiplié par l'âge ..."
             correct_answer: "C"
-            hint: "Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30."
+            hint: "Kim a 3 lettres, elle a 10 ans donc : lettres fois âge = 3*10 = ..."
             question_score: 10
         5:
-            question_text: "If 5 people eat at this restaurant, how much do they have to pay\
-            \ in total?"
+            question_text: "Si 5 personnes mangent dans ce restaurant, combien doivent-elles payer au total ?"
             code: |-
-                print 'Welcome to Hedys!'
-                mensen is 'How many people are eating with us tonight?'
+                print 'Bienvenue chez Hedy !'
+                mensen is 'Combien de personnes mangent avec nous ce soir ?'
                 price is people * 10
-                print 'That will be ' price 'dollar please'
+                print 'Ce fera ' price 'euros s il te plait'
             mp_choice_options:
                 -   "option_text": "5 dollars"
-                    "code": ""
-                    "feedback": "Unfortunately, it's not that cheap."
+                    "feedback": "Helas, c est plus cher"
                 -   "option_text": "10 dollars"
-                    "code": ""
-                    "feedback": "No, it's 10 dollars each."
+                    "feedback": "Non, c est 10 par personne !"
                 -   "option_text": "15 dollars"
-                    "code": ""
-                    "feedback": "The * means multiplication."
+                    "feedback": "Attention, c'est une multiplication !"
                 -   "option_text": "50 dollars"
-                    "code": ""
-                    "feedback": "Great!"
+                    "feedback": "Bien !"
             correct_answer: "D"
-            hint: "price is people times 10"
+            hint: "Le prix sera le nombre de personne multiplié par 10"
             question_score: 10
         6:
             question_text: "How much does a hamburger cost is this virtual restaurant?"
