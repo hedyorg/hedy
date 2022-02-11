@@ -1,5 +1,6 @@
 import textwrap
 
+import lark
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
@@ -954,6 +955,8 @@ class IsValid(Filter):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+
+
     #other rules are inherited from Filter
 
 def valid_echo(ast):
@@ -1281,9 +1284,13 @@ class ConvertToPython_2(ConvertToPython_1):
         if self.is_random(value):
             return parameter + " = " + value
         else:
-            # if the assigned value contains single quotes, escape them
-            value = process_characters_needing_escape(value)
-            return parameter + " = '" + value + "'"
+            if self.is_variable(value):
+                value = self.process_variable(value)
+                return parameter + " = " + value
+            else:
+                # if the assigned value is not a variable and contains single quotes, escape them
+                value = process_characters_needing_escape(value)
+                return parameter + " = '" + value + "'"
 
 
     def sleep(self, args):
@@ -1299,6 +1306,7 @@ class ConvertToPython_3(ConvertToPython_2):
         parameter = args[0]
         values = ["'" + a + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
+
     def list_access(self, args):
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
@@ -1307,10 +1315,12 @@ class ConvertToPython_3(ConvertToPython_2):
             return 'random.choice(' + args[0] + ')'
         else:
             return args[0] + '[' + args[1] + '-1]'
+
     def add(self, args):
         var = self.process_variable(args[0])
         list = args[1]
         return f"{list}.append({var})"
+
     def remove(self, args):
         var = self.process_variable(args[0])
         list = args[1]
@@ -1369,8 +1379,15 @@ class ConvertToPython_5(ConvertToPython_4):
 {ConvertToPython.indent(args[1])}
 else:
 {ConvertToPython.indent(args[2])}"""
+
     def condition(self, args):
         return ' and '.join(args)
+
+    def condition_spaces(self, args):
+        result = args[0] + " == '" + ' '.join(args[1:]) + "'"
+        return result
+
+
     def equality_check(self, args):
         arg0 = self.process_variable(args[0])
         remaining_text = ' '.join(args[1:])
@@ -1420,9 +1437,13 @@ class ConvertToPython_6(ConvertToPython_5):
         if type(value) is Tree:
             return parameter + " = " + value.children[0]
         else:
-            #assigns may contain string (accidentally) i.e. name = 'Hedy'
-            value = process_characters_needing_escape(value)
-            return parameter + " = '" + value + "'"
+            if self.is_variable(value):
+                value = self.process_variable(value)
+                return parameter + " = " + value
+            else:
+                # if the assigned value is not a variable and contains single quotes, escape them
+                value = process_characters_needing_escape(value)
+                return parameter + " = '" + value + "'"
 
     def assign_is(self, args):
         return self.assign(args)
@@ -2066,6 +2087,10 @@ def parse_input(input_string, level, lang):
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
+    except lark.UnexpectedEOF:
+        lines = input_string.split('\n')
+        last_line = len(lines)
+        raise exceptions.UnquotedEqualityCheck(line_number=last_line)
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
@@ -2083,7 +2108,7 @@ def parse_input(input_string, level, lang):
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
     instance = IsValid()
-    instance.level = level # could be done in a constructor once we are sure we will go this way
+    instance.level = level # TODO: could be done in a constructor once we are sure we will go this way
     is_valid = instance.transform(program_root)
 
     if not is_valid[0]:
