@@ -334,6 +334,7 @@ class TestsLevel6(HedyTester):
       print(f'dat zijn dan {punten}')""")
 
       self.single_level_tester(code=code, expected=expected)
+
   def test_ifelse_should_go_before_assign(self):
     code = textwrap.dedent("""\
     kleur is geel
@@ -503,14 +504,11 @@ class TestsLevel6(HedyTester):
   def test_space_enter_rhs_if(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is James Bond
-    print 'shaken'""")
+    if naam is James Bond print 'shaken'""")
 
-    expected = textwrap.dedent("""\
-    naam = 'James'
-    if naam == 'James Bond':
-      print(f'shaken')""")
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.UnquotedEqualityCheck)
 
 
   def test_multiple_spaces_in_rhs_if(self):

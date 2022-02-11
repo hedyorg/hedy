@@ -2075,7 +2075,7 @@ def parse_input(input_string, level, lang):
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
     except lark.UnexpectedEOF:
         raise exceptions.UnquotedEqualityCheck(line_number=4)
-    #TODO still: rule for if!!! Dutch error message!!!
+    #TODO: linenumber
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column

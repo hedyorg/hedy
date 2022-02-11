@@ -295,7 +295,7 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(
       code=code,
-      exception=lark.exceptions.UnexpectedEOF)
+      exception=hedy.exceptions.UnquotedEqualityCheck)
 
   def test_unquoted_space_rhs_no_else(self):
     code = textwrap.dedent("""\
@@ -304,7 +304,7 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(
       code=code,
-      exception=lark.exceptions.UnexpectedEOF)
+      exception=hedy.exceptions.UnquotedEqualityCheck)
 
   def test_unquoted_space_rhs_assign(self):
     code = textwrap.dedent("""\
@@ -313,7 +313,7 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(
       code=code,
-      exception=lark.exceptions.UnexpectedEOF)
+      exception=hedy.exceptions.UnquotedEqualityCheck)
 
   def test_one_space_in_rhs_if(self):
     code = textwrap.dedent("""\
