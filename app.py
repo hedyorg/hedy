@@ -511,6 +511,10 @@ def parse():
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
                 exception = ex
+            except hedy.exceptions.UnquotedEqualityCheck as ex:
+                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Location'] = ex.error_location
+                exception = ex
         try:
             if transpile_result.has_turtle:
                 response['Code'] = TURTLE_PREFIX_CODE + transpile_result.code
@@ -563,10 +567,10 @@ def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     try:
         result = hedy.transpile(code, level, lang_)
-        add_program_stats(username, level)
+        statistics.add(username, lambda id_: DATABASE.add_program_stats(id_, level, None))
         return result
     except Exception as ex:
-        add_program_stats(username, level, get_class_name(ex))
+        statistics.add(username, lambda id_: DATABASE.add_program_stats(id_, level, get_class_name(ex)))
         raise
 
 
@@ -574,16 +578,6 @@ def get_class_name(i):
     if i is not None:
         return str(i.__class__.__name__)
     return i
-
-
-def add_program_stats(username, level, ex=None):
-    try:
-        DATABASE.add_program_stats('@all', level, ex)
-        if username:
-            DATABASE.add_program_stats(username, level, ex)
-    except Exception as ex:
-        # Adding stats should not cause failure. Log and continue.
-        querylog.log_value(server_error=ex)
 
 
 def hedy_error_to_response(ex, translations):
@@ -818,6 +812,8 @@ def get_quiz_start(level):
     session['total_score'] = 0
     session['correct_answer'] = 0
 
+    statistics.add(current_user()['username'], lambda id_: DATABASE.add_quiz_started(id_, level))
+
     return render_template('startquiz.html', level=level, next_assignment=1)
 
 
@@ -910,31 +906,29 @@ def quiz_finished(level):
     g.prefix = '/hedy'
 
     achievement = None
-    if current_user()['username']:
-        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "next_question")
-        if round(session.get('total_score', 0) / quiz.max_score(questions) * 100) == 100:
+    total_score = round(session.get('total_score', 0) / quiz.max_score(questions) * 100)
+    username = current_user()['username']
+    if username:
+        statistics.add(username, lambda id_: DATABASE.add_quiz_finished(id_, level, total_score))
+
+        achievement = ACHIEVEMENTS.add_single_achievement(username, "next_question")
+        if total_score == 100:
             if achievement:
-                achievement.append(ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")[0])
+                achievement.append(ACHIEVEMENTS.add_single_achievement(username, "quiz_master")[0])
             else:
-                achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")
+                achievement = ACHIEVEMENTS.add_single_achievement(username, "quiz_master")
         if achievement:
             achievement = json.dumps(achievement)
 
-    print(achievement)
-
-    # use the session ID as a username.
-    username = current_user()['username'] or f'anonymous:{session_id()}'
-
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
-                           total_score=round(session.get('total_score', 0) / quiz.max_score(questions) * 100),
+                           total_score=total_score,
                            level_source=level,
                            achievement=achievement,
                            level=int(level) + 1,
                            questions=questions,
                            next_assignment=1,
-                           cross = quiz_svg_icons.icons['cross'],
-                           check = quiz_svg_icons.icons['check'],
-                            )
+                           cross=quiz_svg_icons.icons['cross'],
+                           check=quiz_svg_icons.icons['check'])
 
 
 @app.route('/quiz/submit_answer/<int:level_source>/<int:question_nr>/<int:attempt>', methods=["POST"])
@@ -1809,7 +1803,6 @@ def teacher_invitation(code):
     url = request.url.replace(f'/invite/{code}', '/for-teachers')
     return redirect(url)
 
-
 # *** AUTH ***
 
 from website import auth
@@ -1855,6 +1848,6 @@ if __name__ == '__main__':
     on_server_start()
 
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=not is_in_debugger, port=config['port'], host="0.0.0.0")
+    app.run(threaded=True, debug=not is_in_debugger, port=config['port'])
 
     # See `Procfile` for how the server is started on Heroku.
