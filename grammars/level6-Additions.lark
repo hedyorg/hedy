@@ -22,7 +22,7 @@ assign_equals: var _EQUALS sum | var _EQUALS textwithoutspaces
 
 ?sum: product | sum _SPACE* _ADD _SPACE* product -> addition | sum _SPACE* _SUBTRACT _SPACE* product -> subtraction
 ?product: atom | product _SPACE* _MULTIPLY _SPACE* atom -> multiplication | product _SPACE* _DIVIDE _SPACE* atom -> division
-?atom: NUMBER | var_access | error_unsupported_number //TODO: means we cannot assign strings with spaces? would we want that?
+?atom: INT | var_access | error_unsupported_number //TODO: means we cannot assign strings with spaces? would we want that?
 error_unsupported_number: /([-+]?(\d+[\.,]\d+))/ -> error_unsupported_number
 
 textwithoutspaces: /(?:[^\n, *+\-\/ei]|e(?!lse)|i(?!f))+/ -> text //new cause in level 6 calculation elements need to be escaped too
