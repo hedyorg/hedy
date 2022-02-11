@@ -190,7 +190,7 @@ class TestsLevel6(HedyTester):
     print '5 keer 5 is ' 5 * 5""")
 
     expected = textwrap.dedent("""\
-    print(f'5 keer 5 is {vint(5) * vint(5)}')""")
+    print(f'5 keer 5 is {int(5) * int(5)}')""")
 
     self.single_level_tester(code=code, expected=expected)
   def test_print_multiple_calcs(self):
@@ -198,7 +198,7 @@ class TestsLevel6(HedyTester):
     print '5 keer 5 keer 5 is ' 5 * 5 * 5""")
 
     expected = textwrap.dedent("""\
-    print(f'5 keer 5 keer 5 is {vint(5) * vint(5) * vint(5)}')""")
+    print(f'5 keer 5 keer 5 is {int(5) * int(5) * int(5)}')""")
 
     output = '5 keer 5 keer 5 is 125'
     self.single_level_tester(code=code, expected=expected, output=output)
@@ -209,18 +209,18 @@ class TestsLevel6(HedyTester):
     print nummer""")
 
     expected = textwrap.dedent("""\
-    nummer = vint(4) + vint(5)
+    nummer = int(4) + int(5)
     print(f'{nummer}')""")
 
     self.single_level_tester(code=code, expected=expected, output='9')
 
   def test_calc_assign(self):
     code = "nummer is 4 + 5"
-    expected = "nummer = vint(4) + vint(5)"
+    expected = "nummer = int(4) + int(5)"
     self.single_level_tester(code=code, expected=expected)
   def test_calc_without_space(self):
     code = "nummer is 4+5"
-    expected = "nummer = vint(4) + vint(5)"
+    expected = "nummer = int(4) + int(5)"
     self.single_level_tester(code=code, expected=expected)
   def test_assign_calc(self):
     code = textwrap.dedent("""\
@@ -228,7 +228,7 @@ class TestsLevel6(HedyTester):
     print var + 5""")
     expected = textwrap.dedent("""\
     var = '5'
-    print(f'{vint(var) + vint(5)}')""")
+    print(f'{int(var) + int(5)}')""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -268,7 +268,7 @@ class TestsLevel6(HedyTester):
     expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
-    getal = vint(nummer) * vint(nummertwee)
+    getal = int(nummer) * int(nummertwee)
     print(f'{getal}')""")
 
     self.single_level_tester(code=code, expected=expected, output='30')
@@ -282,7 +282,7 @@ class TestsLevel6(HedyTester):
     expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
-    print(f'{vint(nummer) * vint(nummertwee)}')""")
+    print(f'{int(nummer) * int(nummertwee)}')""")
 
     self.single_level_tester(code=code, expected=expected, output='30')
 
@@ -295,7 +295,7 @@ class TestsLevel6(HedyTester):
     expected = textwrap.dedent("""\
     nummer = '١'
     nummertwee = '١'
-    print(f'{vint(nummer) + vint(nummertwee)}')""")
+    print(f'{int(nummer) + int(nummertwee)}')""")
 
     self.single_level_tester(code=code, expected=expected, output='2')
 
@@ -324,7 +324,7 @@ class TestsLevel6(HedyTester):
   #assign with =
   def test_calc_assign_equals(self):
     code = "nummer = 4 + 5"
-    expected = "nummer = vint(4) + vint(5)"
+    expected = "nummer = int(4) + int(5)"
     self.multi_level_tester(
       code=code,
       max_level=11,
@@ -345,9 +345,9 @@ class TestsLevel6(HedyTester):
       punten = '0'
       worp = random.choice(keuzes)
       if str(worp) == str('regenworm'):
-        punten = vint(punten) + vint(5)
+        punten = int(punten) + int(5)
       else:
-        punten = vint(punten) + vint(worp)
+        punten = int(punten) + int(worp)
       print(f'dat zijn dan {punten}')""")
 
       self.single_level_tester(code=code, expected=expected)
@@ -384,9 +384,9 @@ class TestsLevel6(HedyTester):
     test = '2'
     acu = '0'
     if str(test) == str(cmp):
-      acu = vint(acu) + vint(1)
+      acu = int(acu) + int(1)
     else:
-      acu = vint(acu) + vint(5)""")
+      acu = int(acu) + int(5)""")
     self.multi_level_tester(
       max_level=6,
       code=code,
@@ -405,7 +405,7 @@ class TestsLevel6(HedyTester):
     test = '2'
     acu = '0'
     if str(test) == str(cmp):
-      acu = vint(acu) + vint(1)""")
+      acu = int(acu) + int(1)""")
     self.multi_level_tester(
       max_level=6,
       code=code,
@@ -551,8 +551,8 @@ class TestsLevel6(HedyTester):
 
     expected = textwrap.dedent("""\
       a = '5'
-      b = vint(a) + vint(1)
-      print(f'{vint(a) + vint(b)}')""")
+      b = int(a) + int(1)
+      print(f'{int(a) + int(b)}')""")
 
     self.multi_level_tester(
       code=code,
@@ -580,8 +580,8 @@ class TestsLevel6(HedyTester):
     expected = textwrap.dedent("""\
         a = 'Hello'
         a = '5'
-        b = vint(a) + vint(1)
-        print(f'{vint(a) + vint(b)}')""")
+        b = int(a) + int(1)
+        print(f'{int(a) + int(b)}')""")
 
     self.multi_level_tester(
       code=code,

@@ -43,7 +43,7 @@ class TestsLevel18(HedyTester):
         expected = textwrap.dedent("""\
         leeftijd = input(f'Hoe oud ben jij?')
         try:
-          leeftijd = vint(leeftijd)
+          leeftijd = int(leeftijd)
         except ValueError:
           try:
             leeftijd = float(leeftijd)
@@ -79,7 +79,7 @@ class TestsLevel18(HedyTester):
     #         print('Dan ben je ouder dan ik!')""")
     #     expected = textwrap.dedent("""\
     #     leeftijd = input('Hoe oud ben jij?')
-    #     if vint(leeftijd) > vint('12'):
+    #     if int(leeftijd) > int('12'):
     #       print(f'Dan ben je ouder dan ik!')""")
     #
     #     self.multi_level_tester(
@@ -97,9 +97,9 @@ class TestsLevel18(HedyTester):
     #         print('Dan ben je ouder dan ik!')""")
     #     expected = textwrap.dedent("""\
     #     leeftijd = input('Hoe oud ben jij?')
-    #     if vint(leeftijd) < vint('12'):
+    #     if int(leeftijd) < int('12'):
     #       print(f'Dan ben je jonger dan ik!')
-    #     elif vint(leeftijd) > vint('12'):
+    #     elif int(leeftijd) > int('12'):
     #       print(f'Dan ben je ouder dan ik!')""")
     #
     #     self.multi_level_tester(
@@ -123,7 +123,7 @@ class TestsLevel18(HedyTester):
       expected = textwrap.dedent("""\
       antwoord = input(f'Hoeveel is 10 plus 10?')
       try:
-        antwoord = vint(antwoord)
+        antwoord = int(antwoord)
       except ValueError:
         try:
           antwoord = float(antwoord)
@@ -153,8 +153,8 @@ class TestsLevel18(HedyTester):
       expected = textwrap.dedent("""\
       a = 2
       b = 3
-      step = 1 if vint(2) < vint(4) else -1
-      for a in range(vint(2), vint(4) + step, step):
+      step = 1 if int(2) < int(4) else -1
+      for a in range(int(2), int(4) + step, step):
         a = a + 2
         b = b + 2
         time.sleep(0.1)""")
@@ -171,10 +171,10 @@ class TestsLevel18(HedyTester):
         for j in range(1,4):
           print('rondje: ', i, ' tel: ', j)""")
       expected = textwrap.dedent("""\
-      step = 1 if vint(1) < vint(3) else -1
-      for i in range(vint(1), vint(3) + step, step):
-        step = 1 if vint(1) < vint(4) else -1
-        for j in range(vint(1), vint(4) + step, step):
+      step = 1 if int(1) < int(3) else -1
+      for i in range(int(1), int(3) + step, step):
+        step = 1 if int(1) < int(4) else -1
+        for j in range(int(1), int(4) + step, step):
           print(f'rondje: {i} tel: {j}')
           time.sleep(0.1)""")
 
@@ -194,7 +194,7 @@ class TestsLevel18(HedyTester):
       color = ['green', 'blue']
       choice = input(f'Is your favorite color one of: {color}')
       try:
-        choice = vint(choice)
+        choice = int(choice)
       except ValueError:
         try:
           choice = float(choice)
@@ -212,7 +212,7 @@ class TestsLevel18(HedyTester):
       expected = textwrap.dedent("""\
       x = input(f'')
       try:
-        x = vint(x)
+        x = int(x)
       except ValueError:
         try:
           x = float(x)

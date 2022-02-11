@@ -110,7 +110,7 @@ class TestsLevel12(HedyTester):
     expected = textwrap.dedent("""\
     prijs = input(f'hoeveel?')
     try:
-      prijs = vint(prijs)
+      prijs = int(prijs)
     except ValueError:
       try:
         prijs = float(prijs)
@@ -135,7 +135,7 @@ class TestsLevel12(HedyTester):
       colors = ['orange', 'blue', 'green']
       favorite = input(f'Is your fav color{colors[1-1]}')
       try:
-        favorite = vint(favorite)
+        favorite = int(favorite)
       except ValueError:
         try:
           favorite = float(favorite)
@@ -157,7 +157,7 @@ class TestsLevel12(HedyTester):
       color = 'orange'
       favorite = input(f'Is your fav color{color}')
       try:
-        favorite = vint(favorite)
+        favorite = int(favorite)
       except ValueError:
         try:
           favorite = float(favorite)
@@ -180,7 +180,7 @@ class TestsLevel12(HedyTester):
       number = {number}
       favorite = input(f'Is your fav number{{number}}')
       try:
-        favorite = vint(favorite)
+        favorite = int(favorite)
       except ValueError:
         try:
           favorite = float(favorite)
@@ -530,8 +530,8 @@ class TestsLevel12(HedyTester):
     expected = textwrap.dedent("""\
     actions = ['clap your hands', 'stomp your feet', 'shout Hurray']
     for action in actions:
-      step = 1 if vint(1) < vint(2) else -1
-      for i in range(vint(1), vint(2) + step, step):
+      step = 1 if int(1) < int(2) else -1
+      for i in range(int(1), int(2) + step, step):
         print(f'if youre happy and you know it')
         print(f'{action}')
         time.sleep(0.1)
@@ -610,7 +610,7 @@ class TestsLevel12(HedyTester):
     expected = textwrap.dedent("""\
     antwoord = input(f'Hoeveel is 10 plus 10?')
     try:
-      antwoord = vint(antwoord)
+      antwoord = int(antwoord)
     except ValueError:
       try:
         antwoord = float(antwoord)
@@ -639,7 +639,7 @@ class TestsLevel12(HedyTester):
     expected = textwrap.dedent("""\
     color = input(f'what is your favorite color? ')
     try:
-      color = vint(color)
+      color = int(color)
     except ValueError:
       try:
         color = float(color)
@@ -665,7 +665,7 @@ class TestsLevel12(HedyTester):
     colors = ['green', 'red', 'blue']
     color = input(f'what color to remove?')
     try:
-      color = vint(color)
+      color = int(color)
     except ValueError:
       try:
         color = float(color)

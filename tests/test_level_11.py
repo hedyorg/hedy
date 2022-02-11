@@ -37,10 +37,10 @@ class TestsLevel11(HedyTester):
     expected = textwrap.dedent("""\
     a = '2'
     b = '3'
-    step = 1 if vint(2) < vint(4) else -1
-    for a in range(vint(2), vint(4) + step, step):
-      a = vint(a) + vint(2)
-      b = vint(b) + vint(2)
+    step = 1 if int(2) < int(4) else -1
+    for a in range(int(2), int(4) + step, step):
+      a = int(a) + int(2)
+      b = int(b) + int(2)
       time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
@@ -69,8 +69,8 @@ class TestsLevel11(HedyTester):
       print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
-    step = 1 if vint(1) < vint(10) else -1
-    for i in range(vint(1), vint(10) + step, step):
+    step = 1 if int(1) < int(10) else -1
+    for i in range(int(1), int(10) + step, step):
       print(f'{i}')
       time.sleep(0.1)
     print(f'wie niet weg is is gezien')""")
@@ -86,8 +86,8 @@ class TestsLevel11(HedyTester):
         print काउंटर""")
 
     expected = textwrap.dedent("""\
-    step = 1 if vint(1) < vint(5) else -1
-    for v7693a3e5c7a942bd47bf4b5af10576ac in range(vint(1), vint(5) + step, step):
+    step = 1 if int(1) < int(5) else -1
+    for v7693a3e5c7a942bd47bf4b5af10576ac in range(int(1), int(5) + step, step):
       print(f'{v7693a3e5c7a942bd47bf4b5af10576ac}')
       time.sleep(0.1)""")
 
@@ -101,9 +101,9 @@ class TestsLevel11(HedyTester):
       for i in range 1 to 10
         a is i + 1""")
     expected = textwrap.dedent("""\
-      step = 1 if vint(1) < vint(10) else -1
-      for i in range(vint(1), vint(10) + step, step):
-        a = vint(i) + vint(1)
+      step = 1 if int(1) < int(10) else -1
+      for i in range(int(1), int(10) + step, step):
+        a = int(i) + int(1)
         time.sleep(0.1)""")
 
     self.single_level_tester(
@@ -117,8 +117,8 @@ class TestsLevel11(HedyTester):
       print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
-    step = 1 if vint(10) < vint(1) else -1
-    for i in range(vint(10), vint(1) + step, step):
+    step = 1 if int(10) < int(1) else -1
+    for i in range(int(10), int(1) + step, step):
       print(f'{i}')
       time.sleep(0.1)
     print(f'wie niet weg is is gezien')""")
@@ -141,8 +141,8 @@ class TestsLevel11(HedyTester):
         i is 10""")
 
     expected = textwrap.dedent("""\
-    step = 1 if vint(0) < vint(10) else -1
-    for i in range(vint(0), vint(10) + step, step):
+    step = 1 if int(0) < int(10) else -1
+    for i in range(int(0), int(10) + step, step):
       antwoord = input(f'Wat is 5*5')
       if str(antwoord) == str('24'):
         print(f'Dat is fout!')
@@ -165,8 +165,8 @@ class TestsLevel11(HedyTester):
     print 'klaar met for loop'""")
 
     expected = textwrap.dedent("""\
-      step = 1 if vint(0) < vint(10) else -1
-      for i in range(vint(0), vint(10) + step, step):
+      step = 1 if int(0) < int(10) else -1
+      for i in range(int(0), int(10) + step, step):
         antwoord = input(f'Wat is 5*5')
         if str(antwoord) == str('24'):
           print(f'fout')
@@ -184,8 +184,8 @@ class TestsLevel11(HedyTester):
         print '2'""")
 
     expected = textwrap.dedent("""\
-      step = 1 if vint(0) < vint(10) else -1
-      for i in range(vint(0), vint(10) + step, step):
+      step = 1 if int(0) < int(10) else -1
+      for i in range(int(0), int(10) + step, step):
         if str(i) == str('2'):
           print(f'2')
         time.sleep(0.1)""")
