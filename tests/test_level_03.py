@@ -192,6 +192,23 @@ class TestsLevel3(HedyTester):
       extra_check_function=self.result_in(list),
       max_level=11)
 
+
+  def test_assign_var_to_var(self):
+    code = textwrap.dedent("""\
+    dier1 is hond
+    dier2 is dier1
+    print dier1""")
+
+    expected = textwrap.dedent("""\
+    dier1 = 'hond'
+    dier2 = dier1
+    print(f'{dier1}')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=5)
+
   def test_assign_list_exclamation_mark(self):
     code = textwrap.dedent("""\
     antwoorden is ja, NEE!, misschien
