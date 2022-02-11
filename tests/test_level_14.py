@@ -17,7 +17,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent(f"""\
       leeftijd = input(f'Hoe oud ben jij?')
       try:
-        leeftijd = int(leeftijd)
+        leeftijd = vint(leeftijd)
       except ValueError:
         try:
           leeftijd = float(leeftijd)
@@ -40,7 +40,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent(f"""\
       name = input(f'What is your name?')
       try:
-        name = int(name)
+        name = vint(name)
       except ValueError:
         try:
           name = float(name)
@@ -65,7 +65,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent(f"""\
       v6cdeb9dc4e33aa47ac927755899137f2 = input(f'आप कितने साल के हैं?')
       try:
-        v6cdeb9dc4e33aa47ac927755899137f2 = int(v6cdeb9dc4e33aa47ac927755899137f2)
+        v6cdeb9dc4e33aa47ac927755899137f2 = vint(v6cdeb9dc4e33aa47ac927755899137f2)
       except ValueError:
         try:
           v6cdeb9dc4e33aa47ac927755899137f2 = float(v6cdeb9dc4e33aa47ac927755899137f2)
@@ -93,7 +93,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent(f"""\
       name = input(f'What is your name?')
       try:
-        name = int(name)
+        name = vint(name)
       except ValueError:
         try:
           name = float(name)
@@ -119,7 +119,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent(f"""\
       leeftijd = input(f'Hoe oud ben jij?')
       try:
-        leeftijd = int(leeftijd)
+        leeftijd = vint(leeftijd)
       except ValueError:
         try:
           leeftijd = float(leeftijd)
@@ -145,7 +145,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent(f"""\
     leeftijd = input(f'Hoe oud ben jij?')
     try:
-      leeftijd = int(leeftijd)
+      leeftijd = vint(leeftijd)
     except ValueError:
       try:
         leeftijd = float(leeftijd)
@@ -259,7 +259,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent(f"""\
       leeftijd = input(f'Hoe oud ben jij?')
       try:
-        leeftijd = int(leeftijd)
+        leeftijd = vint(leeftijd)
       except ValueError:
         try:
           leeftijd = float(leeftijd)

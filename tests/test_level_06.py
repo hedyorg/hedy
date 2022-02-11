@@ -286,19 +286,6 @@ class TestsLevel6(HedyTester):
 
     self.single_level_tester(code=code, expected=expected, output='30')
 
-  def test_calc_vars_print(self):
-    code = textwrap.dedent("""\
-    nummer is 5
-    nummertwee is 6
-    print nummer * nummertwee""")
-
-    expected = textwrap.dedent("""\
-    nummer = '5'
-    nummertwee = '6'
-    print(f'{vint(nummer) * int(nummertwee)}')""")
-
-    self.single_level_tester(code=code, expected=expected, output='30')
-
   def test_calc_vars_print_add_arabic(self):
     code = textwrap.dedent("""\
     nummer is ١

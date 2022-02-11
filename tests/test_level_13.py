@@ -15,7 +15,7 @@ class TestsLevel13(HedyTester):
     expected = textwrap.dedent("""\
       naam = input(f'hoe heet jij?')
       try:
-        naam = int(naam)
+        naam = vint(naam)
       except ValueError:
         try:
           naam = float(naam)
@@ -23,7 +23,7 @@ class TestsLevel13(HedyTester):
           pass
       leeftijd = input(f'hoe oud ben jij?')
       try:
-        leeftijd = int(leeftijd)
+        leeftijd = vint(leeftijd)
       except ValueError:
         try:
           leeftijd = float(leeftijd)
@@ -48,7 +48,7 @@ class TestsLevel13(HedyTester):
     expected = textwrap.dedent("""\
       name = input(f'what is your name?')
       try:
-        name = int(name)
+        name = vint(name)
       except ValueError:
         try:
           name = float(name)
@@ -56,7 +56,7 @@ class TestsLevel13(HedyTester):
           pass
       leeftijd = input(f'what is your age?')
       try:
-        leeftijd = int(leeftijd)
+        leeftijd = vint(leeftijd)
       except ValueError:
         try:
           leeftijd = float(leeftijd)

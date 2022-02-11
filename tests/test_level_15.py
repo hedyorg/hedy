@@ -17,7 +17,7 @@ class TestsLevel15(HedyTester):
     while str(antwoord).zfill(100)!=str(25).zfill(100):
       antwoord = input(f'Wat is 5 keer 5?')
       try:
-        antwoord = int(antwoord)
+        antwoord = vint(antwoord)
       except ValueError:
         try:
           antwoord = float(antwoord)
@@ -55,7 +55,7 @@ class TestsLevel15(HedyTester):
     while str(getal).zfill(100)<str(100000).zfill(100):
       getal = input(f'HOGER!!!!!')
       try:
-        getal = int(getal)
+        getal = vint(getal)
       except ValueError:
         try:
           getal = float(getal)
