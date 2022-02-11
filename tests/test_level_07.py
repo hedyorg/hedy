@@ -11,7 +11,7 @@ class TestsLevel7(HedyTester):
     repeat 3 times forward 100""")
 
     expected = textwrap.dedent("""\
-    for i in range(int('3')):
+    for i in range(vint('3')):
       t.forward(100)
       time.sleep(0.1)""")
 
@@ -24,7 +24,7 @@ class TestsLevel7(HedyTester):
 
     expected = textwrap.dedent("""\
     n = '5'
-    for i in range(int(n)):
+    for i in range(vint(n)):
       print(f'me wants a cookie!')
       time.sleep(0.1)""")
 
@@ -48,7 +48,7 @@ class TestsLevel7(HedyTester):
     repeat 5 times print 'me wants a cookie!'""")
 
     expected = textwrap.dedent("""\
-    for i in range(int('5')):
+    for i in range(vint('5')):
       print(f'me wants a cookie!')
       time.sleep(0.1)""")
 
@@ -68,7 +68,7 @@ class TestsLevel7(HedyTester):
     repeat 10 times print 'me wants a cookie!'""")
 
     expected = textwrap.dedent("""\
-    for i in range(int('10')):
+    for i in range(vint('10')):
       print(f'me wants a cookie!')
       time.sleep(0.1)""")
 
@@ -97,7 +97,7 @@ class TestsLevel7(HedyTester):
 
       expected = textwrap.dedent("""\
       i = 'hallo!'
-      for _i in range(int('5')):
+      for _i in range(vint('5')):
         print(f'me wants a cookie!')
         time.sleep(0.1)
       print(f'{i}')""")
@@ -124,7 +124,7 @@ class TestsLevel7(HedyTester):
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
-      for i in range(int('3')):
+      for i in range(vint('3')):
         print(f'Hallo Hedy!')
         time.sleep(0.1)""")
 

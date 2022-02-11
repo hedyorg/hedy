@@ -164,7 +164,7 @@ class TestsLevel16(HedyTester):
         colors = ['orange', 'blue', 'green']
         favorite = input(f'Is your fav color{colors[1-1]}')
         try:
-          favorite = int(favorite)
+          favorite = vint(favorite)
         except ValueError:
           try:
             favorite = float(favorite)
@@ -187,7 +187,7 @@ class TestsLevel16(HedyTester):
         colors = ['orange', 'blue', 'green']
         favorite = input(f'Is your fav color{colors}')
         try:
-          favorite = int(favorite)
+          favorite = vint(favorite)
         except ValueError:
           try:
             favorite = float(favorite)
@@ -211,7 +211,7 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
         color = input(f'what is your favorite color? ')
         try:
-          color = int(color)
+          color = vint(color)
         except ValueError:
           try:
             color = float(color)
@@ -238,7 +238,7 @@ class TestsLevel16(HedyTester):
         colors = ['green', 'red', 'blue']
         color = input(f'what color to remove?')
         try:
-          color = int(color)
+          color = vint(color)
         except ValueError:
           try:
             color = float(color)

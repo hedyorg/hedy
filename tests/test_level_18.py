@@ -172,7 +172,7 @@ class TestsLevel18(HedyTester):
           print('rondje: ', i, ' tel: ', j)""")
       expected = textwrap.dedent("""\
       step = 1 if int(1) < int(3) else -1
-      for i in range(int(1), int(3) + step, step):
+      for i in range(vint(1), int(3) + step, step):
         step = 1 if int(1) < int(4) else -1
         for j in range(int(1), int(4) + step, step):
           print(f'rondje: {i} tel: {j}')
