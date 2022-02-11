@@ -68,6 +68,7 @@ class UnquotedEqualityCheck(HedyException):
     def __init__(self, line_number):
         super().__init__('Unquoted Equality Check',
              line_number=line_number)
+        self.location = [line_number]
 
 class UndefinedVarException(HedyException):
     def __init__(self, name):
