@@ -848,8 +848,8 @@ adventures:
                 start_code: |
                     print 'Formen zeichnen'
     dishes:
-        name: "Dishes?"
-        description: "Use the computer to see who does the dishes (Start at level 2)"
+        name: "Abwasch?"
+        description: "Nutze den Computer, um zu sehen, wer abwaschen muss (Beginne bei Level 3)"
         image: "dishes.png"
         default_save_name: "Dishes"
         levels:
@@ -955,28 +955,31 @@ adventures:
                 start_code: "print 'Who does the dishes?'"
             3:
                 story_text: |
-                    ## Dishwashing
-                    Do you always disagree at home about who should wash the dishes or change the litter box today?
-                    Then you can let the computer choose very fairly. You can program that in this level!
-                    You first make a list of the members of your family. Then choose 'at random' from the list.
+                    ## Abwaschen
+                    Gibt es bei Euch zu Hause immer Streit, wer mit dem Abwasch dran ist und wer den Müll raus bringen muss?
+                    Dann kannst Du den Computer völlig fair entscheiden lassen.
+                    Das kannst Du in diesem Level programmieren.
+                    Zunächst legst Du eine Liste Deiner Familienmitglieder an.
+                    Anschließend wählst Du mit `at random` zufällig jemanden von der Liste aus.
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    people is mom, dad, Emma, Sophie
-                    print people at random
+                    Familienmitglieder is Mama, Papa, Emma, Sophie
+                    print Familienmitglieder at random
                     ```
-                    ## Hack the dishwashing program!
-                    Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
+                    ## Hacke den Geschirrspüler!
+                    Keine Lust auf abwaschen?
+                    Hacke das Spülmaschinenprogramm und entferne Deinen Namen von der Liste.
 
                     ```
-                    people is mom, dad, Emma, Sophie
-                    your_name is ask Who are you?
-                    remove your_name from people
-                    print people at random does the dishes
+                    Familienmitglieder is Mama, Papa, Emma, Sophie
+                    Dein_Name is ask Wer bist Du?
+                    remove Dein_Name from Familienmitglieder
+                    print Familienmitglieder at random ist heute mit dem Abwasch dran.
                     ```
-                start_code: "print Who does the dishes?"
+                start_code: "print Wer macht den Abwasch?"
     dice:
         name: "Dice"
         description: "Make your own dice"
