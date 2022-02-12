@@ -873,38 +873,33 @@ levels:
             hint: "Le prix sera le nombre de personne multiplié par 10"
             question_score: 10
         6:
-            question_text: "How much does a hamburger cost is this virtual restaurant?"
+            question_text: "Combien coûte un hamburger dans ce restaurant ?"
             code: |-
-                print 'Welcome at Hedys diner'
-                food is ask 'What would you like to eat?'
-                price is 0
-                if food is hamburger price is 15
-                if food is fries price is 6
+                print 'Bienvenue chez Hedy !'
+                choix is ask 'Qu'est-ce que tu veux manger ?'
+                prix is 0
+                if choix is hamburger prix is 15
+                if choix is frites prix is 5
             mp_choice_options:
                 -   "option_text": "15 dollars"
-                    "code": ""
                     "feedback": "Super!"
-                -   "option_text": "6 dollars"
-                    "code": ""
-                    "feedback": "The fries are 6 dollars"
+                -   "option_text": "5 dollars"
+                    "feedback": "Les frites coûtent 5 dollars"
                 -   "option_text": "0 dollars"
-                    "code": ""
-                    "feedback": "The hamburger isn't free!"
-                -   "option_text": "21 dollars"
-                    "code": ""
-                    "feedback": "That's the price for a hamburger and fries!"
+                    "feedback": "Le hamburger n'est pas gratuit !"
+                -   "option_text": "20 dollars"
+                    "feedback": "C'est le prix d'un hamburger et de frites !"
             correct_answer: "A"
-            hint: "Mind the fourth line."
+            hint: "Regarde sur la 4eme ligne !"
             question_score: 10
         7:
-            question_text: "Why does line 7 say 'price is price + 3' instead of 'price is\
-            \ 3'?"
+            question_text: "Que veut dire la ligne 7 ?"
             code: |-
-                print 'Welcome at Hedys diner'
-                food is ask 'What would you like to eat?'
+                print 'Bienvenue chez Hedy !'
+                choix is ask 'Qu'est-ce que tu veux manger ?'
                 price is 0
-                if food is hamburger price is price + 15
-                if food is fries price is price + 6
+                if choix is hamburger price is price + 15
+                if choix is frites price is price + 6
                 drinks is 'What would you like to drink?'
                 if drinks is coke price is price + 3
                 if drinks is water price ie sprice + 1
