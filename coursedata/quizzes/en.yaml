@@ -281,7 +281,7 @@ levels:
         8:
             question_text: "How would you correct the first line of code?"
             code: |-
-                ask is 'How old are you?'
+                ask is How old are you?
                 print age
             mp_choice_options:
                 -   "option_text": "age ask is How old are you?"
@@ -301,13 +301,13 @@ levels:
                 dogs is animal
                 print I love animal
             mp_choice_options:
-                -   "option_text": "Line 1 should say: dogs is animals"
+                -   "option_text": "Line 1 should say: `dogs is animals`"
                     "feedback": "The variable name is animal"
-                -   "option_text": "Line 1 should say: animal is dogs"
+                -   "option_text": "Line 1 should say: `animal is dogs`"
                     "feedback": "Great!"
-                -   "option_text": "Line 2 should say: print I love animals"
+                -   "option_text": "Line 2 should say: `print I love animals`"
                     "feedback": "The variable name is animal"
-                -   "option_text": "Line 2 should say: sleep I love animals"
+                -   "option_text": "Line 2 should say: `sleep I love animals`"
                     "feedback": "Sleep is not used to print text"
             correct_answer: "B"
             hint: "You want to print 'I love dogs'"
@@ -918,7 +918,7 @@ levels:
                 if food is fries price is price + 6
                 drinks is 'What would you like to drink?'
                 if drinks is coke price is price + 3
-                if drinks is water price ie sprice + 1
+                if drinks is water price is price + 1
                 print price ' dollars please'
             mp_choice_options:
                 -   "option_text": "It could have been 'price is 3' just as well."
