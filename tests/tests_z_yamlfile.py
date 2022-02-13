@@ -6,7 +6,7 @@ from website.yaml_file import YamlFile
 
 class TestYamlFile(unittest.TestCase):
   def test_load_yaml_equivalent(self):
-    """Test that when we load a YAML file uncached and cached, it produces the same data.
+    """Test that when we load a YAML file uncached and cached, it produces the same content.
 
     Also get a gauge for the speedup we get from loading a pickled file,
     although we're not going to fail the test on the numbers we get from that.
@@ -15,7 +15,7 @@ class TestYamlFile(unittest.TestCase):
 
     # Pick a file with unicode in it so we're sure it gets handled properly
     file = YamlFile(
-      os.path.join(os.path.dirname(__file__), '..', 'coursedata/adventures/hu.yaml'), 
+      os.path.join(os.path.dirname(__file__), '..', 'content/adventures/hu.yaml'),
       try_pickle=True)
 
     # Remove pickled version of this file if it exists, it may

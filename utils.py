@@ -1,5 +1,6 @@
 import contextlib
 import datetime
+import glob
 import time
 import pickle
 import functools
@@ -7,6 +8,9 @@ import os
 import re
 import string
 import random
+from pathlib import Path
+from typing import List
+
 from ruamel import yaml
 from website import querylog
 import commonmark
@@ -200,3 +204,10 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
                            page_error=page_error or g.ui_texts.get(ui_message) or '',
                            default=g.ui_texts.get("default_" + str(error))), error
+
+def gather_content_files(*path) -> List[str]:
+    return glob.glob(f"{construct_content_path(*path)}{os.path.sep}.*yaml")
+
+def construct_content_path(*path) -> str:
+    utility_script_location = Path(__file__).parent.absolute()
+    return os.path.join(utility_script_location, "content", *path)
