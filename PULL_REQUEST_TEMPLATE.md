@@ -8,7 +8,8 @@
 
 **Fixes < issue or discussion number >**
 
-< Always link the number of the issue or of the discussion that your pr concerns. Exception: adding content may be done without an accompanying issue >
+< Always link the number of the issue or of the discussion that your pr concerns. >
+Notable exception: adding content may be done without an accompanying issue 
 
 **How to test**
 
