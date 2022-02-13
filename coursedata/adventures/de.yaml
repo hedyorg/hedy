@@ -855,30 +855,32 @@ adventures:
         levels:
             10:
                 story_text: |
-                    ## Dishwashing
-                    In this level you could make an even better dish washing shedule.
+                    ## Abwaschen
+                    In diesem Level kannst Du deinen Abwaschplan noch etwas verbessern.
 
-                    ## Hedy code example
+                example_code: |
+                    ## Hedy-Beispiel-Code
                     ```
-                    days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                    names = mom, dad, Emma, Sophie
-                    for day in days
-                        print names at random ' does the dishes on ' day
+                    Wochentage = Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag
+                    Familienmitglieder = Mama, Papa, Emma, Sophie
+                    for Tag in Wochentage
+                        print Familienmitglieder at random ' ist am ' Tag ' mit dem Abwasch dran.'
                     ```
                 start_code: ""
             7:
                 story_text: |
-                    ## Dishwashing
-                    With the `repeat` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
+                    ## Abwaschen
+                    Mit dem Befehl `repeat` kannst Du Code-Zeilen wiederholen.
+                    Das kannst Du nutzen, um für jeden Tag der Woche zu bestimmen, wer abwäscht.
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    people = mom, dad, Emma, Sophie
-                    repeat _ _ print 'the dishwasher is' _
+                    Familienmitglieder = Mama, Papa, Emma, Sophie
+                    repeat _ _ print _ ' ist mit dem Abwasch dran'
                     ```
-                start_code: "print 'Who does the dishes?'"
+                start_code: "print 'Wer macht den Abwasch?'"
             6:
                 story_text: |
                     ## Abwaschen
