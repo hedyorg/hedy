@@ -19,8 +19,8 @@ Notable exception: adding content may be done without an accompanying issue
 **Checklist**
 Done? Check if you have it all in place using this list*
   
-- [ ] Links to an existing issue or discussion 
 - [ ] Describes changes in the format above (present tense)
+- [ ] Links to an existing issue or discussion 
 - [ ] Has a "How to test" section
 
 * If you're unsure about any of these, don't hesitate to ask. We're here to help!
