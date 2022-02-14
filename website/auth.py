@@ -440,10 +440,6 @@ def routes(app, database):
                 if exists:
                     return g.auth_texts.get('exists_email'), 403
                 token = make_salt()
-                #The user switched the language -> reload the page
-                resp['reload'] = False
-                if exists.get('language') != body['language']:
-                    resp['reload'] = True
                 hashed_token = hash(token, make_salt())
                 DATABASE.update_user(user['username'], {'email': email, 'verification_pending': hashed_token})
                 # If this is an e2e test, we return the email verification token directly instead of emailing it.
@@ -473,6 +469,12 @@ def routes(app, database):
                    updates[field] = body[field]
            else:
                updates[field] = None
+
+        # We want to check if the user choose a new language, if so -> reload
+        # We can use g.lang for this to reduce the db calls
+        resp['reload'] = False
+        if g.lang != body['language']:
+            resp['reload'] = True
 
         if updates:
             DATABASE.update_user(username, updates)

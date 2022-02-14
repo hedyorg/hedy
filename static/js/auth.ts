@@ -170,9 +170,12 @@ export const auth = {
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
-        console.log(response);
-        modal.alert(auth.texts['profile_updated'], 2000, false);
-        setTimeout (function () {location.reload ()}, 2000);
+        if (response.reload) {
+          modal.alert(auth.texts['profile_updated_reload'], 2000, false);
+          setTimeout (function () {location.reload ()}, 2000);
+        } else {
+          modal.alert(auth.texts['profile_updated'], 3000, false);
+        }
       }).fail (function (response) {
         if (response.responseText) {
           modal.alert(response.responseText, 3000, true);
