@@ -106,9 +106,6 @@ def is_admin(user):
 
 def is_teacher(user):
     # the `is_teacher` field is either `0`, `1` or not present.
-    print("Hier komen we!")
-    print(user)
-    print(bool(user.get('is_teacher', False)))
     return bool(user.get('is_teacher', False))
 
 def update_is_teacher(user, is_teacher_value=1):

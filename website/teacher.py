@@ -215,7 +215,7 @@ def routes (app, database, achievements):
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
-        teacher_adventures = DATABASE.get_teacher_adventures(user['username']);
+        teacher_adventures = DATABASE.get_teacher_adventures(user['username'])
         customizations = DATABASE.get_class_customizations(class_id)
         customize_class_translations = hedyweb.PageTranslations('customize-class').get_page_translations(g.lang)
 
