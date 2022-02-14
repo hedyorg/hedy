@@ -126,7 +126,8 @@ commands_and_types_per_level = {
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]},
+    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+                       14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]},
     Command.addition: {
         6: [HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
