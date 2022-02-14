@@ -963,97 +963,95 @@ levels:
 
     7:
         1:
-            question_text: "How many lines can you repeat at once with the repeat command\
-            \ at this level?"
+            question_text: "Combien de lignes peut-on répéter à la fois avec la commande `repeat` à ce niveau ?"
             code: "..."
             mp_choice_options:
                 -   "option_text": "0"
-                    "feedback": "No you can repeat a line."
+                    "feedback": "Non.."
                 -   "option_text": "1"
-                    "feedback": "Correct, one line at a time"
+                    "feedback": "Correct, une ligne à la fois !"
                 -   "option_text": "2"
-                    "feedback": "In this level only one line at a time"
-                -   "option_text": "infinite"
-                    "feedback": "In this level you can only repeat one line at a time"
+                    "feedback": "Dans ce niveau, une seule ligne à la fois"
+                -   "option_text": "infini"
+                    "feedback": "Dans les niveaux suivant peut-être, mais pas encore !"
             correct_answer: "B"
-            hint: "You can only repeat 1 line at a time"
+            hint: "Tu ne peux répéter qu'une ligne à la fois !"
             question_score: 10
         2:
-            question_text: "Which code is right?"
+            question_text: "Quel code est le bon ?"
             code: "..."
             mp_choice_options:
-                -   "code": "print 100 times 'hello'"
-                    "feedback": "repeat 100 times print 'hello'."
-                -   "code": "print repeat 100 times 'hello'"
-                    "feedback": "repeat 100 times print 'hello'"
-                -   "code": "repeat 'hello' 100 times \""
-                    "feedback": "repeat 100 times print 'hello'"
-                -   "code": "repeat 100 times print 'hello'"
-                    "feedback": "That's right!"
+                -   "code": "print 100 times 'Salut !'"
+                    "feedback": "Malheureusement non"
+                -   "code": "print repeat 100 times 'Salut !'"
+                    "feedback": "Malheureusement non"
+                -   "code": "repeat 'Salut !' 100 times \""
+                    "feedback": "Malheureusement non"
+                -   "code": "repeat 100 times print 'Salut !'"
+                    "feedback": "Bien joué !"
             correct_answer: "D"
-            hint: "First the repeat command, then the print command"
+            hint: "D'abord la commande `repeat`, puis la commande `print`"
             question_score: 10
         3:
-            question_text: "Is this code right or wrong?"
-            code: "repeat 100 times 'Hello!'"
+            question_text: "Ce code est-il bon ou mauvais ?"
+            code: "repeat 100 times 'Salut !'"
             mp_choice_options:
-                -   "option_text": "Right"
-                    "feedback": "No a word is missing"
-                -   "option_text": "Wrong, the word repeat is missing"
-                    "feedback": "The word repeat is there, another word is missing"
-                -   "option_text": "Wrong, the word times is missing"
-                    "feedback": "The word times is there, another word is missing."
-                -   "option_text": "Wrong, the word print is missing"
-                    "feedback": "Correct"
-            correct_answer: "B"
-            hint: "It should be: repeat 100 times print 'Hello'"
+                -   "option_text": "Ce code est valide"
+                    "feedback": "Non, il manque un mot"
+                -   "option_text": "Faux, il manque la commande `repeat`"
+                    "feedback": "La commande `repeat` existe déjà !"
+                -   "option_text": "Faux, il manque la commande `times`"
+                    "feedback": "La commande `times` existe déjà !"
+                -   "option_text": "Faux, il manque la commande `print`"
+                    "feedback": "Correct !"
+            correct_answer: "D"
+            hint: "(?) Hello world !"
             question_score: 10
         4:
-            question_text: "Which word is wrong in the code?"
+            question_text: "Quel mot est incorrect dans le code ?"
             code: |-
                 print 'I'm blue'
                 repeat 7 times print 'da ba dee, da ba da'
             mp_choice_options:
                 -   "code": "I'm"
-                    "feedback": "That's right!"
+                    "feedback": "C'est ça !"
                 -   "code": "print"
-                    "feedback": "print is spelled correctly"
+                    "feedback": "l'orthographe est correcte"
                 -   "code": "repeat"
-                    "feedback": "repeat is spelled correctly"
+                    "feedback": "l'orthographe est correcte"
                 -   "code": "times"
-                    "feedback": "times is spelled correctly"
+                    "feedback": "l'orthographe est correcte"
             correct_answer: "A"
-            hint: "I'm is wrong, you can't use apostrophes"
+            hint: "Fais attention aux apostrophes !"
             question_score: 10
         5:
-            question_text: "Is this code right or wrong?"
+            question_text: "Ce code est-il bon ou mauvais ?"
             code: |-
-                repeat 100 print 'Hedy is awesome!'
+                repeat 100 print 'Hedy est génial !'
             mp_choice_options:
-                -   "option_text": "Correct"
-                -   "option_text": "Wrong"
-            correct_answer: "A"
-            hint: "The code is correct!"
+                -   "option_text": "Valide"
+                    "feedback": "Hélas non !"
+                -   "option_text": "Faux"
+                    "feedback": "Effectivement, il manque la commande `times` !"
+            correct_answer: "B"
+            hint: "Il manque une commande !"
             question_score: 10
         6:
-            question_text: "What will be the output from this code?"
+            question_text: "Quelle sera la sortie de ce code ?"
             code: |-
-                print 'The wheels on the bus go'
-                repeat 3 times print ' round and round'
+                print 'Quand on lance un yo-yo'
+                repeat 3 times print 'Il descend et remonte'
             mp_choice_options:
-                -   "code": "the wheels on the bus go\nround and round"
-                    "feedback": "Only the second line is repeated 3 times"
-                -   "code": "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the\
-              \ bus go\nround and round"
-                    "feedback": "Only the second line is repeated 3 times"
-                -   "code": "the wheels on the bus go\nround and round\nthe wheels on the bus go\n\
-              round and round\nthe wheels on the bus go\nround and round"
-                    "feedback": "Only the second line is repeated 3 times"
-                -   "code": "the wheels on the bus go\nround and round\nround and round\nround and\
-              \ round"
-                    "feedback": "All though the town! Perfect!"
+                -   "code": "Quand on lance un yo-yo\nIl descend et remonte"
+                    "feedback": "Regarde mieux où est le `repeat`"
+                -   "code": "Quand on lance un yo-yo\nQuand on lance un yo-yo\nthe wheels on the bus go\nIl descend et remonte"
+                    "feedback": "Regarde mieux où est le `repeat`"
+                -   "code": "Quand on lance un yo-yo\nIl descend et remonte\nQuand on lance un yo-yo\nIl descend et remonte\nQuand on lance un yo-yo\nIl descend et remonte"
+                    "feedback": "Regarde mieux où est le `repeat`"
+                -   "code": "Quand on lance un yo-yo\nIl descend et remonte\nIl descend et remonte\nIl descend et remonte"
+                    "feedback": "Bravo, tu as la bonne réponse !"
             correct_answer: "D"
-            hint: "Only 'round and round' is repeated 3 times."
+            hint: "Seul 'Il descend et remonte' est répété 3 fois."
             question_score: 10
         7:
             question_text: "What will be the output from this code?"
