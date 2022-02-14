@@ -17,7 +17,13 @@
   <a href="javascript:void(0);" class="stats-period-toggle"
      onclick="hedyApp.stats.getClassStats(('{{class_info.id}}'), 52, this)">Past year</a>
 
-  <div class="shadow-md stats accordion">
+
+    <button class="green-btn float-right" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
+      {{auth.back_to_class}}
+    </button>
+
+
+  <div class="shadow-md stats accordion mt-4">
 
     {% call insert_accordion_tab('tab-multi-one', 'Class program runs per level') %}
       <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">

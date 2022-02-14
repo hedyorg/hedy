@@ -2195,10 +2195,6 @@ Level 11 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
-  </tr>
-  <tr>
     <td>for</td>
     <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
   </tr>
@@ -2413,10 +2409,6 @@ Level 12 supports:
   <tr>
     <td>if else</td>
     <td>boolean</td>
-  </tr>
-  <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
   </tr>
   <tr>
     <td>for</td>
@@ -2642,10 +2634,6 @@ Level 13 supports:
   <tr>
     <td>if else</td>
     <td>boolean</td>
-  </tr>
-  <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
   </tr>
   <tr>
     <td>for</td>
@@ -2883,10 +2871,6 @@ Level 14 supports:
   <tr>
     <td>if else</td>
     <td>boolean</td>
-  </tr>
-  <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
   </tr>
   <tr>
     <td>for</td>
@@ -3158,10 +3142,6 @@ Level 15 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
-  </tr>
-  <tr>
     <td>for</td>
     <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
   </tr>
@@ -3383,6 +3363,294 @@ Level 15 supports:
   <tr>
     <td>for a in range 1 to 10<br/>print 'hello!'</td>
     <td>No Indentation Exception</td>
+  </tr>
+</tbody>
+</table>
+
+## Level 16
+
+### Commands and types
+
+Level 16 supports:
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string | float | input | list </td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>integer | string | float | input | list</td>
+  </tr>
+  <tr>
+    <td>is | = (assignment)</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>repeat</td>
+    <td>integer + 'times'</td>
+  </tr>
+  <tr>
+    <td>for</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+  </tr>
+  <tr>
+    <td>and</td>
+    <td>boolean (before `and`) + boolean (after `and`)</td>
+  </tr>
+  <tr>
+    <td>or</td>
+    <td>boolean (before `or`) + boolean (after `or`)</td>
+  </tr>
+  <tr>
+    <td><</td>
+    <td>integer (before <) + integer (after <) | float (before <) + float (after <)</td>
+  </tr>
+  <tr>
+    <td>></td>
+    <td>integer (before >) + integer (after >) | float (before >) + float (after >)</td>
+  </tr>
+  <tr>
+    <td>== | is | = (comparison)</td>
+    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command)</td>
+  </tr>
+  <tr>
+    <td>!=</td>
+    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before !=) + list (after !=)</td>
+  </tr>
+  <tr>
+    <td><=</td>
+    <td>integer (before <=) + integer (after <=) | float (before <=) + float (after <=)</td>
+  </tr>
+  <tr>
+    <td>>=</td>
+    <td>integer (before >=) + integer (after >=) | float (before >=) + float (after >=)</td>
+  </tr>
+  <tr>
+    <td>while</td>
+    <td>boolean<td>
+  </tr>
+</tbody>
+</table>
+
+#### Correct Programs
+
+<table>
+<thead>
+  <tr>
+    <th>Hedy</th>
+    <th>Python</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print 'x' 'y'</td>
+    <td>print('xy')</td>
+  </tr>
+  <tr>
+    <td>print 1 + 1</td>
+    <td>print(f'{1 + 1}')</td>
+  </tr>
+  <tr>
+    <td>print 1 - 1</td>
+    <td>print(f'{1 - 1}')</td>
+  </tr>
+  <tr>
+    <td>print 1 * 1</td>
+    <td>print(f'{1 * 1}')</td>
+  </tr>
+  <tr>
+    <td>print 1 / 1</td>
+    <td>print(f'{1 / 1}')</td>
+  </tr>
+   <tr>
+    <td>print 1.0 + 1</td>
+    <td>print(f'{1.0 / 1}')</td>
+  </tr>
+  <tr>
+    <td>a is 1<br/>print a</td>
+    <td>a = 1<br/>print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>a is 1.0<br/>print a</td>
+    <td>a = 1.0<br/>print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>a is 'text'<br/>print a</td>
+    <td>a = 'text'<br/>print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>time.sleep(1)</td>
+  </tr>
+  <tr>
+    <td>sleep 1</td>
+    <td>time.sleep(1)</td>
+  </tr>
+  <tr>
+    <td>x is ask 'y'<br>print x</td>
+    <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
+  </tr>
+  <tr>
+    <td>x is ['a', 'b', 'c']<br>print x at random</td>
+    <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>add f to a</td>
+    <td>a = [1, 2, 3]<br/>f = 4<br/>a.append(f)</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>remove f from a</td>
+    <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>remove f from a</td>
+    <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
+  </tr>
+  <tr>
+    <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+  </tr>
+  <tr>
+    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+  </tr>
+  <tr>
+    <td>a is 1<br/>if a (< | <= | > | >= | !=) 2<br/>&emsp;&emsp;print a</td>
+    <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>items is ['red', 'green']<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
+  </tr>
+  <tr>
+    <td>ns is [1, 2, 3]<br/>for n in ns<br/>&emsp;&emsp;print n</td>
+    <td>ns = [1, 2, 3]<br/>for n in ns:<br/>&emsp;&emsp;print(f'{n}')</td> 
+  </tr>
+  <tr>
+    <td>for a in range 2 to 4<br/>&emsp;&emsp;a is a + 2</td>
+    <td>step = 1 if int(2) &lt; int(4) else -1<br/>for a in range(int(2), int(4) + step, step):<br/>&emsp;&emsp;a = a + 2</td>
+  </tr>
+  <tr>
+    <td>a is 0<br/>while a < 3<br>&emsp;&emsp;a is a + 1</td>
+    <td>a = 0<br/>while str(a).zfill(100)&lt;str(3).zfill(100):<br/>&emsp;&emsp;a = a + 1</td>
+  </tr>
+</tbody>
+</table>
+
+
+#### Incorrect Programs
+
+<table>
+<thead>
+  <tr>
+    <th>Hedy</th>
+    <th>Exception</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>Incomplete Exception</td>
+  </tr>
+  <tr>
+    <td>print'x'</td>
+    <td>Invalid command</td>
+  </tr>
+  <tr>
+    <td>print 1,0 + 1</td>
+    <td>Invalid Command (TODO: this could be improved)</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>Incomplete Exception</td>
+  </tr>
+    <tr>
+    <td>(ask | print) (any text without quotes around it)</td>
+    <td>Unquoted Text Exception</td>
+  </tr>
+  <tr>
+    <td>(not (print | ask)) (any text) (not is) (any text)?</td>
+    <td>Invalid Exception</td>
+  </tr>
+  <tr>
+    <td>_SPACE (print | ask) (any text)?</td>
+    <td>Invalid space</td>
+  </tr>
+  <tr>
+    <td>_SPACE (any text) is (any text)?</td>
+    <td>Invalid space</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>answer is ask 'Is the number in ' a</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>(add | remove) a (to | from) f</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>items is [1, 2, 3]<br/>print items</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>a is 'test'<br/>print a + 1</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>a is 'text'<br/>one is 1<br/>if one in a<br/>&emsp;&emsp;print 'found!'</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>name is [1, 2]<br/>if '1' is name<br/>&emsp;&emsp;print 'found'</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>if '1' < 3<br/>&emsp;&emsp;print 'true'</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>for a in range 1 to 10<br/>print 'hello!'</td>
+    <td>No Indentation Exception</td>
+  </tr>
+  <tr>
+    <td>x is 1, 2, 3</td>
+    <td>Invalid Exception (?)</td>
+  </tr>
+  <tr>
+    <td>x is [one, two, three]</td>
+    <td>Unquoted text Exception</td>
   </tr>
 </tbody>
 </table>
