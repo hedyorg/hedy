@@ -1573,6 +1573,7 @@ def save_program(user):
         if program['name'] == body['name']:
             overwrite = True
             program_id = program['id']
+            program_public = program.get('public', None)
             break
 
     stored_program = {
@@ -1584,7 +1585,8 @@ def save_program(user):
         'level': body['level'],
         'code': body['code'],
         'name': body['name'],
-        'username': user['username']
+        'username': user['username'],
+        'public': program_public
     }
 
     if 'adventure_name' in body:
