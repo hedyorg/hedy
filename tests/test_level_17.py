@@ -347,8 +347,6 @@ class TestsLevel17(HedyTester):
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')""")
 
-
-
     self.single_level_tester(code=code, expected=expected)
 
   @parameterized.expand(HedyTester.number_comparison_commands)
@@ -363,14 +361,19 @@ class TestsLevel17(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
-
   def test_not_equal_string_literal(self):
     code = textwrap.dedent(f"""\
       if 'quoted' != 'string':
-        sleep 0""")
+        sleep""")
+
     expected = textwrap.dedent(f"""\
       if 'quoted'.zfill(100)!='string'.zfill(100):
-        time.sleep(0)""")
+        time.sleep(1)""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected
+    )
 
   @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])
   def test_not_equal(self, arg):
@@ -406,6 +409,3 @@ class TestsLevel17(HedyTester):
       code=code,
       exception=exceptions.InvalidTypeCombinationException
     )
-
-
-

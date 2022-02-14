@@ -439,26 +439,6 @@ class TestsLevel6(HedyTester):
       expected=expected
     )
 
-  def test_equality_with_lists(self):
-    code = textwrap.dedent("""\
-      n is 1, 2
-      m is 1, 2
-      if n is m print 'success!'""")
-
-    expected = textwrap.dedent("""\
-      n = ['1', '2']
-      m = ['1', '2']
-      if str(n) == str(m):
-        print(f'success!')""")
-
-    self.single_level_tester(code=code, expected=expected)
-
-    self.multi_level_tester(
-      max_level=7,
-      code=code,
-      expected=expected
-    )
-
   def test_one_space_in_rhs_if(self):
     code = textwrap.dedent("""\
     naam is James
