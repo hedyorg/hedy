@@ -792,6 +792,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
+
   // If the adventures are not shown -> increase height of turtleConfig
   if ($('#adventures').is(":hidden")) {
       turtleConfig.height = 600;
