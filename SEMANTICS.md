@@ -3841,6 +3841,10 @@ Level 17 supports:
     <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
+    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy:<br/>&emsp;&emsp;print 'great'<br/>elif name is Felienne:<br/>&emsp;&emsp;print 'lovely!'<br/>elif name is Julia:<br/>&emsp;&emsp;print 'Oh that is the most popular baby name in the Netherlands!'<br/>else:<br/>&emsp;&emsp;print 'fine'</td>
+    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+  </tr>
+  <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2:<br/>&emsp;&emsp;print a</td>
     <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
   </tr>
@@ -3948,6 +3952,10 @@ Level 17 supports:
   </tr>
   <tr>
     <td>(if | for | while) (boolean) (newline without ':' first) </td>
+    <td>Invalid Exception</td>
+  </tr>
+  <tr>
+    <td>(any lines with code without `if`) elif (boolean):</td>
     <td>Invalid Exception</td>
   </tr>
 </tbody>
