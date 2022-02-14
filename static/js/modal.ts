@@ -29,7 +29,6 @@ class Modal {
   }
 
   public hide() {
-    console.log("We gaan dingen verstoppen...");
     $('#modal-mask').hide();
     $('#modal-content').hide();
     $('#modal-prompt').hide();
