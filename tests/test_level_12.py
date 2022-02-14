@@ -40,6 +40,23 @@ class TestsLevel12(HedyTester):
       expected_commands=['is', 'if', 'print'],
       max_level=16)
 
+  def test_if_with_equals_sign_no_spaces(self):
+    code = textwrap.dedent("""\
+    naam='Hedy'
+    if naam = Hedy
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['is', 'if', 'print'],
+      max_level=16)
+
   # print tests
   def test_print_float(self):
     code = textwrap.dedent("""\

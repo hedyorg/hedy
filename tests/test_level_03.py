@@ -33,6 +33,33 @@ class TestsLevel3(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_assign_dutch_comma_arabic(self):
+      code = "صديقي هو احمد, خالد, حسن"
+      expected = textwrap.dedent("""\
+      vbd60ecd50ef1238a3f6a563bcfb1d331 = ['احمد', 'خالد', 'حسن']""")
+
+      self.multi_level_tester(
+        code=code,
+        max_level=6,
+        expected=expected,
+        lang='ar')
+
+  def test_assign_arabic_comma(self):
+    code = "animals is cat، dog، platypus"
+    expected = "animals = ['cat', 'dog', 'platypus']"
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected)
+
+  def test_assign_comma_arabic(self):
+    code = "صديقي هو احمد، خالد، حسن"
+    expected = textwrap.dedent("""\
+    vbd60ecd50ef1238a3f6a563bcfb1d331 = ['احمد', 'خالد', 'حسن']""")
+
+    self.single_level_tester(code=code, expected=expected, lang='ar')
+
   # issue #745
   def test_print_list_gives_type_error(self):
     code = textwrap.dedent("""\
@@ -164,6 +191,23 @@ class TestsLevel3(HedyTester):
       expected=expected,
       extra_check_function=self.result_in(list),
       max_level=11)
+
+
+  def test_assign_var_to_var(self):
+    code = textwrap.dedent("""\
+    dier1 is hond
+    dier2 is dier1
+    print dier1""")
+
+    expected = textwrap.dedent("""\
+    dier1 = 'hond'
+    dier2 = dier1
+    print(f'{dier1}')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=5)
 
   def test_assign_list_exclamation_mark(self):
     code = textwrap.dedent("""\
