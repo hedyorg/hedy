@@ -1,132 +1,60 @@
 1:
     intro_text: |
-        Bienvenue à Hedy ! Au niveau 1, tu peux utiliser les commandes `print`, `ask` et `echo`.
+        Bienvenue à Hedy! Au niveau 1, tu peux utiliser les commandes `print`,` ask` et `echo`.
 
-        Par exemple, tu peux afficher du texte à l'écran en utilisant `print`. Tu peux voir un exemple
-        exemple de code à droite.
+        Sur le côté gauche de votre écran se trouvent toutes les commandes du niveau 1.
 
-        Appuyez sur le bouton vert dans le bloc de code, et le code sera copié pour vous !
-        Essayez le code toi-même en cliquant sur le bouton vert "Exécuter le code" situé sous le champ de programmation.
+        Appuyez sur le bouton bleu et le code sera tapé pour toi!
 
-    example_code : |
-        ## Exemple de code
-        ```
-        print Salut !
-        print Bienvenue !
-        ```
+        Essayez le code toi-même avec le bouton vert «Exécuter le code» sous le champ de programmation de gauche.
 
-    intro_text_2: |
-        Tu peux aussi demander une entrée avec `ask` et la répéter avec la commande `echo`.
-        Essaye à nouveau le code à ta gauche.
-
-        Tu ne sais pas quoi créer ? Dans les onglets suivants, tu trouveras des idées de programmes à faire.
-    example_code_2: |
-        ## Exemple de code
-        ```
-        ask Quel est ton nom ?
-        echo Salut
-        ```
-
-    start_code: "print hello world !"
+        Vous ne savez pas quoi programmer? Dans les onglets suivants, vous trouverez des idées sur les éléments à construire.
+    start_code: "print bonjour le monde!"
     commands:
     -   name: "print"
-        explanation: "Print something with `print`."
-        example: "Exemple: print Salut Bienvenue à toi !"
-        demo_code: "print Salut Bienvenue à toi !"
+        explanation: "Affiche quelque chose avec `print`."
+        example: "Exemple: print Bonjour et bienvenue à Hedy!"
+        demo_code: "print Bonjour et bienvenue à Hedy!"
     -   name: "ask"
         explanation: "Demande quelque chose avec `ask`."
-        example: "Exemple: ask Quel est ta couleur favorite ?"
-        demo_code: "ask Quel est ta couleur favorite ?"
+        example: "Exemple: ask Quelle est ta couleur préférée?"
+        demo_code: "ask Quelle est ta couleur préférée?"
     -   name: "echo"
         explanation: "Répète quelque chose avec `echo`."
-        example: "Exemple: echo Donc ta couleur préférée est "
+        example: "Exemple: echo donc ta couleur préférée est "
         demo_code: |-
-            ask Quel est ta couleur favorite ?
-            echo Donc ta couleur préférée est 
-    -   name: "print smiley"
-        explanation: "Affiche des smileys avec `print`"
-        example: "Exemple: print 🙋‍ 🌍 ❗"
-        demo_code: "print 🙋 🌍 ❗"
-    -   name: "forward"
-        explanation: "Dessine une ligne droite avec `forward`."
-        example: "Exemple: forward 100"
-        demo_code: "forward 100"
-    -   name: "turn"
-        explanation: "Tourne avec la commande `turn`"
-        example: "Exemple: turn"
-        demo_code: |-
-            forward 25
-            turn left
-            forward 25
-            turn right
+            ask Quelle est ta couleur préférée?
+            echo donc ta couleur préférée est 
 2:
     intro_text: |
-        Au niveau 2, nous apprenons quelque chose de nouveau. Vous pouvez enregistrer un mot avec `is`. Par exemple, dans le code suivant, le mot `prenom` enregistrera le texte Hedy. Et on peut utiliser `prenom` partout !
+        Au niveau 2, nous apprenons quelque chose de nouveau. Vous pouvez nommer un mot avec `is`.
 
-    example_code : |
-        ```
-        prenom is Hedy
-        print Salut prenom
-        ```
-    intro_text_2: |
-        Attention : Le fonctionnent `ask` a changé, il faut maintenant enregistrer le texte dans un mot.
+        Si vous mettez le code `name is Hedy` en haut de votre programme, vous pouvez alors utiliser name partout. Cela sera alors remplacé par Hedy.
 
-    example_code_2: |
-        ```
-        reponse is ask Quel est ton nom ?
-        ```
-    intro_text_3: |
-        `print` fonctionne toujours comme au niveau 1, mais la commande `echo` ne fonctionne plus. Si tu veux repeter quelque chose, il faut l'enregistrer dans un nom et l'utiliser dans le `print`.
+        Le `ask` a changé au niveau 2, vous enregistrez également la réponse avec un nom:
 
-    example_code_3: |
         ```
-        reponse is ask Quel est ton nom ?
-        print bonjour reponse !
+        reponse is ask quel est votre nom?
         ```
 
-    intro_text_4: |
-        Une autre nouvelle commande dans ce niveau est `sleep`, qui met votre programme en pause pendant une seconde. Si on tape un nombre derrière la commande `sleep`, le programme se met en pause pendant ce nombre de secondes.
-    example_code_4: |
-        ```
-        print Attend ...
-        sleep
-        print Attend plus longtemps !
-        sleep 3
-        print Cest bon !
-        ```
-    start_code: "print hello world!"
+        L'impression fonctionne toujours comme au niveau 1 et vous n'avez plus besoin d'une échographie.
+    start_code: "print bonjour le monde!"
     commands:
     -   name: "is"
-        explanation: "Donnes à quelque chose un nom à utiliser dans le programme en utilisant `is`. Tu peux choisir le nom toi-même."
+        explanation: "Donne un nom à un mot que tu peux utiliser dans le programme avec `is`"
         example: "Exemple: nom is Hedy."
         demo_code: |-
             nom is Hedy
-            print Bienvenue nom
+            print bienvenue nom
     -   name: "ask"
-        explanation: "Demande quelque chose avec `ask`. Attention, il faut ensuite enregistrer la reponse avec la commande `is` "
-        example: "Exemple: couleur is ask Quel est ta couleur favorite ?"
+        explanation: "Demande quelque chose avec `ask`. Attention! Tu dois donner à la réponse un nom avec `is`."
+        example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
         demo_code: |-
-            couleur is ask Quel est ta couleur favorite ?
-            print moi aussi j'adore le couleur
-    -   name: "sleep"
-        explanation: "Laissons Hedy faire une pause pendant une ou deux secondes."
-        example: "Exemple: sleep 2 "
-        demo_code: |-
-            print Laisse moi réfléchir une seconde...
-            sleep
-            print Hmm... J'ai besoin de 3 secondes de plus...
-            sleep 3
-            print Eureka ! La réponse est 42 !
-    -   explanation: "Donnons un nom à un nombre en utilisant `is`. Tu peux choisir le nom toi-même."
-        example: "Exemple: angle is 90"
-        demo_code: |-
-            angle is 90
-            turn angle
-            forward 100
-        name: is - turtle
+            couleur is ask Quelle est ta couleur préférée?
+            print couleur est ton préféré !
 3:
     intro_text: |
-        Au niveau 3, vous pouvez également faire une liste. Vous pouvez ensuite choisir n'importe quoi dans la liste. Vous faites cela avec `at random`.
+        Au niveau 3, vous pouvez également faire une liste. Vous pouvez ensuite choisir n'importe quoi dans la liste. Vous faites cela avec `at random` (vous dites: et ren-dom).
 
         ```
         animaux is chien, chat, kangourou
