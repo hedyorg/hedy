@@ -29,6 +29,7 @@ class Modal {
   }
 
   public hide() {
+    console.log("We gaan dingen verstoppen...");
     $('#modal-mask').hide();
     $('#modal-content').hide();
     $('#modal-prompt').hide();
@@ -119,6 +120,7 @@ class Modal {
     this.show();
     $('#modal-confirm').show();
 
+
     // Since we need to close over the callback, replace the handler
     $('#modal-yes-button').off('click').on('click', () => {
       this.hide();
@@ -127,11 +129,19 @@ class Modal {
   }
 
   public prompt(message: string, defaultValue: string, confirmCb: (x: string) => void) {
+    // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
+    if(this._timeout) {
+      clearTimeout(this._timeout);
+      this._timeout = undefined;
+    }
     $('#modal-prompt-text').text(message);
     this.show();
     $('#modal-prompt').show();
     if (defaultValue) $('#modal-prompt-input').val(defaultValue);
-
+    if(this._timeout) {
+      clearTimeout(this._timeout);
+      this._timeout = undefined;
+    }
     // Since we need to close over the callback, replace the handler
     $('#modal-ok-button').off('click').on('click', () => {
       this.hide();
