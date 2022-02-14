@@ -792,6 +792,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
+  // If the adventures are not shown -> increase height of turtleConfig
   if ($('#adventures').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
@@ -799,8 +800,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
-  turtleConfig.width = 400;
-  turtleConfig.worldWidth = 400;
+  turtleConfig.width = $( '#output' ).width();
+  turtleConfig.worldWidth = $( '#output' ).width();
 
   if (!hasTurtle) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
