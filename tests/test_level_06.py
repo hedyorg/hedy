@@ -453,7 +453,6 @@ class TestsLevel6(HedyTester):
       expected=expected
     )
 
-
   def test_one_space_in_rhs_if(self):
     code = textwrap.dedent("""\
     naam is James
