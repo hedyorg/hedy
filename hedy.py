@@ -1191,7 +1191,7 @@ class ConvertToPython_1(ConvertToPython):
             return "t.right(90)"  # no arguments defaults to a right turn
 
         arg = args[0]
-        if self.is_variable(arg) or arg.isnumeric():
+        if self.is_variable(arg) or arg.lstrip("-").isnumeric():
             return f"t.right({arg})"
         elif arg == 'left':
             return "t.left(90)"
@@ -1268,9 +1268,13 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.right(90)"
 
-        arg = hash_var(args[0])
-        if self.is_variable(arg) or arg.isnumeric():
+        arg = args[0]
+        if arg.lstrip('-').isnumeric():
             return f"t.right({arg})"
+
+        hashed_arg = hash_var(arg)
+        if self.is_variable(hashed_arg):
+            return f"t.right({hashed_arg})"
 
         # the TypeValidator should protect against reaching this line:
         raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
