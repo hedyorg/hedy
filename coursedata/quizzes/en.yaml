@@ -1047,7 +1047,7 @@ levels:
         5:
             question_text: "Is this code right or wrong?"
             code: |-
-                repeat 100 print 'Hedy is awesome!'
+                repeat 100 times print 'Hedy is awesome!'
             mp_choice_options:
                 -   "option_text": "Correct"
                 -   "option_text": "Wrong"
@@ -1112,7 +1112,7 @@ levels:
                 -   "code": "repeat 2 times print 'Here comes the sun'\nrepeat 2 times print 'Do\
               \ do'\nprint 'And I say'\nprint 'Its alright'"
                     "feedback": "This is not in the right order"
-            correct_answer: "D"
+            correct_answer: "A"
             hint: "Repeat can only be used if you want the exact same line 2 (or more) times\
             \ in a row."
             question_score: 10
@@ -1132,7 +1132,8 @@ levels:
                     "feedback": "You repeated the wrong line"
                 -   "code": "print 'Batman was flying though Gotham.' \nprint 'When suddenly he\
               \ heard someone screaming...'\nrepeat 3 times 'Help!'\nprint 'Please help\
-              \ me!'\nfeedback: \"You missed the word print in line 3\""
+              \ me!'\n"
+                    "feedback": \"You missed the word print in line 3\""
                 -   "code": "print Batman was flying though Gotham.\nprint When suddenly he heard\
               \ someone screaming...\nrepeat 3 times print Help!\nprint Please help me!"
                     "feedback": "You forgot about the quotation marks"
