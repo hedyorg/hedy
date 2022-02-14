@@ -800,6 +800,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
+  // Always set the width to output panel width -> match the UI
   turtleConfig.width = $( '#output' ).width();
   turtleConfig.worldWidth = $( '#output' ).width();
 
