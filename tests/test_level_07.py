@@ -62,7 +62,7 @@ class TestsLevel7(HedyTester):
 
     self.single_level_tester(code=code, expected=expected, output=output)
 
-  @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫', '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
+  @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫', '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵', '八'])
   def test_repeat_all_numerals(self, number):
     code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
 
