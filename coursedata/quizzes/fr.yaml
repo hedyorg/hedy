@@ -34,13 +34,13 @@ levels:
             question_text: "Comment demander à quelqu'un quelle est sa couleur préférée ?"
             code: "..."
             mp_choice_options:
-                - "code": "print Quelle est votre couleur préférée ?"
+                - "code": "print Quelle est ta couleur préférée ?"
                   "feedback": "`print` affiche du texte, mais il ne pose pas de questions."
-                - "code": "ask print Quelle est votre couleur préférée ?"
+                - "code": "ask print Quelle est ta couleur préférée ?"
                   "feedback": "Tu n'as besoin que d'une commande, pas de deux."
-                - "code": "ask Quelle est votre couleur préférée ?"
+                - "code": "ask Quelle est ta couleur préférée ?"
                   "feedback": "Parfait !"
-                - "code": "echo Quelle est votre couleur préférée ?"
+                - "code": "echo Quelle est ta couleur préférée ?"
                   "feedback": "`echo` te répète la réponse que tu as donnée."
             correct_answer: "C"
             hint: "Tu peux demander quelque chose avec la commande `ask`."
@@ -66,8 +66,8 @@ levels:
         5:
             question_text: "Quelle commande manque à la ligne 2 ?"
             code: |-
-                ask Quel est votre animal préféré ?
-                ? Donc votre animal préféré est...
+                ask Quel est ton animal préféré ?
+                ? Donc ton animal préféré est...
             mp_choice_options:
                 - "code": "print"
                   "feedback": "Non, tu veux que la réponse te soit répétée."
@@ -93,11 +93,11 @@ levels:
                 - "option_text": "A la ligne 2, `ask` est mal écrit."
                   "feedback": "Super ! Tu as été attentif !"
                 - "option_text": "La ligne 3 doit commencer par `print` au lieu de `echo`."
-                  "feedback": "Echo est la bonne commande ; vérifiez l'orthographe des commandes."
+                  "feedback": "Echo est la bonne commande ; vérifie l'orthographe des commandes."
                 - "option_text": "A la ligne 4, `print` est mal orthographié."
                   "feedback": "Non, mais il y a une faute d'orthographe quelque part ailleurs..."
             correct_answer: "B"
-            hint: "Vérifiez la façon dont les commandes sont écrites."
+            hint: "Vérifie la façon dont les commandes sont écrites."
             question_score: 10
         7:
             question_text: "Quel est le problème avec ce code ?"
@@ -116,7 +116,7 @@ levels:
                 - "option_text": "Rien ! C'est un code parfait !"
                   "feedback": "Exact !"
             correct_answer: "D"
-            hint: "Vérifiez le code ligne par ligne"
+            hint: "Vérifie le code ligne par ligne"
             question_score: 10
         8:
             question_text: "A quoi sert la commande `echo` ?"
@@ -182,19 +182,19 @@ levels:
             question_text: "Quel code est correct ?"
             code: "..."
             mp_choice_options:
-                -   "code": "nom is ask Quel est votre nom ?"
+                -   "code": "nom is ask Quel est ton nom ?"
                     "feedback": "Super!"
-                -   "code": "ask is nom Quel est votre nom ?"
+                -   "code": "ask is nom Quel est ton nom ?"
                     "feedback": "Les mots sont justes, l'ordre ne l'est pas !"
-                -   "code": "ask Quel est votre nom ?"
+                -   "code": "ask Quel est ton nom ?"
                     "feedback": "Cela a fonctionné au niveau 1, mais au niveau 2 et plus, cela fonctionne différemment."
-                -   "code": "ask Quel est votre nom ? is nom"
+                -   "code": "ask Quel est ton nom ? is nom"
                     "feedback": "Les mots sont justes, l'ordre ne l'est pas !"
             correct_answer: "A"
             hint: "ask ne fonctionne pas comme au niveau 1"
             question_score: 10
         3:
-            question_text: "Qu'est-ce qui apparaît sur votre écran de sortie lorsque tu lance ce code ?"
+            question_text: "Qu'est-ce qui apparaît sur ton écran de sortie lorsque tu lance ce code ?"
             code: |-
                 nom is Marion
                 print nom va au marché et elle achète une pomme.
@@ -231,14 +231,14 @@ levels:
             question_text: "Que se passe-t-il lorsque tu utilise la commande `sleep` ?"
             code: ""
             mp_choice_options:
-                -   "option_text": "Il ralentit votre ordinateur"
+                -   "option_text": "Il ralentit ton ordinateur"
                     "feedback": "Heureusement, non !"
                 -   "option_text": "Il ferme Hedy"
                     "feedback": "Heureusement, non !"
                 -   "option_text": "Votre programme se met en pause pendant une seconde puis continue"
                     "feedback": "C'est vrai !"
                 -   "option_text": "On le met à la fin pour qu'Hedy sache que ton programme est terminé."
-                    "feedback": "Non, ce serait inutile à la fin de votre code."
+                    "feedback": "Non, ce serait inutile à la fin de ton code."
             correct_answer: "C"
             hint: "L'ordinateur attend une seconde à la commande de sommeil."
             question_score: 10
@@ -326,7 +326,7 @@ levels:
                     "feedback": "Tu ne veux pas d'une commande d'affichage au milieu de la ligne..."
                 -   "option_text": "fraises, chocolat, vanille"
                     "feedback": "Si tu fait cela, tu fera une liste. Tu ne veux pas de ça maintenant."
-                -   "option_text": "ask Quel parfum de glace aimez-tu ?"
+                -   "option_text": "ask Quel parfum de glace aimes-tu ?"
                     "feedback": "C'est vrai !"
             correct_answer: "D"
             hint: "Tu veux poser une question"
@@ -378,7 +378,7 @@ levels:
                 -   "code": "print options at random"
                     "feedback": "Très bien !"
                 -   "option_text": "Pas besoin, le code est correct !"
-                    "feedback": "Cherchez bien l'erreur"
+                    "feedback": "Cherche bien l'erreur"
             correct_answer: "C"
             hint: "La variable (la liste) est appelée options."
             question_score: 10
@@ -395,7 +395,7 @@ levels:
                 -   "code": "print at random prix"
                     "feedback": "Tu y es presque. L'ordre des mots n'est pas encore correct."
                 -   "option_text": "Rien, ce code est correct."
-                    "feedback": "Cherchez bien l'erreur que tu as loupée !"
+                    "feedback": "Cherche bien l'erreur que tu as loupée !"
             correct_answer: "B"
             hint: "Le nom de la variable est prix"
             question_score: 10
@@ -837,7 +837,7 @@ levels:
         4:
             question_text: "Eve a 10 ans. Que va imprimer Hedy pour elle ?"
             code: |-
-                nom is ask 'Combien de lettres y a-t-il dans votre nom ?'
+                nom is ask 'Combien de lettres y a-t-il dans ton nom ?'
                 age is ask 'Quel âge as-tu ?'
                 nombremagique is nom*age
                 print 'Ton numéro porte bonheur est...' nombremagique
@@ -851,7 +851,7 @@ levels:
                 -   "option_text": "Ton numéro porte bonheur est... 10"
                     "feedback": "Son numéro de chance est le nom multiplié par l'âge ..."
             correct_answer: "C"
-            hint: "Kim a 3 lettres, elle a 10 ans donc : lettres fois âge = 3*10 = ..."
+            hint: "Eve a 3 lettres, elle a 10 ans donc : lettres fois âge = 3*10 = ..."
             question_score: 10
         5:
             question_text: "Si 5 personnes mangent dans ce restaurant, combien doivent-elles payer au total ?"
