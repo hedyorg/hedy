@@ -169,7 +169,8 @@ export const auth = {
         type: 'POST', url: '/profile',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
-      }).done (function () {
+      }).done (function (response) {
+        console.log(response);
         modal.alert(auth.texts['profile_updated'], 2000, false);
         setTimeout (function () {location.reload ()}, 2000);
       }).fail (function (response) {

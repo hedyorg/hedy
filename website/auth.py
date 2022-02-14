@@ -440,6 +440,10 @@ def routes(app, database):
                 if exists:
                     return g.auth_texts.get('exists_email'), 403
                 token = make_salt()
+                #The user switched the language -> reload the page
+                resp['reload'] = False
+                if exists.get('language') != body['language']:
+                    resp['reload'] = True
                 hashed_token = hash(token, make_salt())
                 DATABASE.update_user(user['username'], {'email': email, 'verification_pending': hashed_token})
                 # If this is an e2e test, we return the email verification token directly instead of emailing it.
