@@ -995,8 +995,8 @@ adventures:
                     ```
                 start_code: "print Wer macht den Abwasch?"
     dice:
-        name: "Dice"
-        description: "Make your own dice"
+        name: "Würfel"
+        description: "Erstelle Deinen eigenen Würfel"
         image: "dice.png"
         default_save_name: "Dice"
         levels:
@@ -1092,23 +1092,25 @@ adventures:
                 start_code: "print 'What will the die indicate this time?'"
             3:
                 story_text: |
-                    ## Dice
-                    In this level we can choose from a list. With that we can let the computer choose one side of the die.
-                    Take a look at the games you have in your closet at home.
-                    Are there games with a (special) die? You can also copy it with this code.
-                    For example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.
+                    ## Würfel
+                    In diesem Level können wir von einer Liste wählen.
+                    Damit können wir den Computer eine Seite des Würfels wählen lassen.
+                    Schaut mal in die Brettspiele in Eurem Schrank zu Hause.
+                    Haben einige davon (besondere) Würfel?
+                    Die kannst Du auch mit diesem Code nachbauen.
+                    Zum Beispiel den Würfel aus "Heckmeck am Bratwurmeck" mit den Zahlen 1 bis 5 und einem Regenwurm darauf.
 
-                    ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
+                    ![Würfel aus "Heckmeck am Bratwurmeck" mit den Zahlen 1 bis 5 und einem Regenwurm darauf](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    choices is 1, 2, 3, 4, 5, earthworm
-                    print choices at random
+                    Würfelseiten is 1, 2, 3, 4, 5, Regenwurm
+                    print Würfelseiten at random
                     ```
 
-                start_code: "print What will the die indicate this time?"
+                start_code: "print Was zeigt der Würfel diesmal?"
             15:
                 story_text: |
                     ## Dice
