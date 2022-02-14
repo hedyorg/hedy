@@ -373,7 +373,7 @@ levels:
                 -   "code": "at random print options"
                     "feedback": "Tu y es presque. L'ordre des mots n'est pas encore correct."
                 -   "code": "print rock at random"
-                    "feedback": "tu ne veux pas toujours que l'Hedy affiche le pierre, parfois tu veux\
+                    "feedback": "tu ne veux pas toujours que qu'Hedy affiche le pierre, parfois tu veux\
               \ feuille ou ciseaux."
                 -   "code": "print options at random"
                     "feedback": "Très bien !"
@@ -422,15 +422,15 @@ levels:
             question_text: "Quel est le problème avec ce code ?"
             code: |-
                 question is ask Qu'est-ce que tu veux savoir ?
-                reponse are oui, non, peut-être
-                print reponse at random
+                réponse are oui, non, peut-être
+                print réponse at random
             mp_choice_options:
-                -   "option_text": "La ligne 2 doit être 'question' au lieu de 'reponse'."
+                -   "option_text": "La ligne 2 doit être 'question' au lieu de 'réponse'."
                     "feedback": "Non, ce n'est pas ça."
                 -   "option_text": "La ligne 2 doit être is au lieu de are"
                     "feedback": "Correct !"
-                -   "option_text": "La ligne 3 doit être 'reponses' au lieu de 'reponse'."
-                    "feedback": "Non, la variable s'appelle bien 'reponse'."
+                -   "option_text": "La ligne 3 doit être 'réponses' au lieu de 'réponse'."
+                    "feedback": "Non, la variable s'appelle bien 'réponse'."
                 -   "option_text": "Rien ! Ce code est génial !"
                     "feedback": "En fait, la ligne 2 comporte une erreur."
             correct_answer: "B"
@@ -624,7 +624,7 @@ levels:
                 if nom is Hedy print 'Bien' else print 'Mouais'
             mp_choice_options:
                 -   "option_text": "Bien"
-                    "feedback": "That's right!"
+                    "feedback": "Bien joué !"
                 -   "option_text": "Mouais"
                     "feedback": "Ce sera dans le cas où tu tapera autre chose qu'Hedy"
                 -   "option_text": "Hedy"
@@ -847,7 +847,7 @@ levels:
                 -   "option_text": "10"
                     "feedback": "Recommence !"
                 -   "option_text": "Ton numéro porte bonheur est... 30"
-                    "feedback": "That's right!"
+                    "feedback": "Bien joué !"
                 -   "option_text": "Ton numéro porte bonheur est... 10"
                     "feedback": "Son numéro de chance est le nom multiplié par l'âge ..."
             correct_answer: "C"
@@ -862,7 +862,7 @@ levels:
                 print 'Ce fera ' price 'euros s il te plait'
             mp_choice_options:
                 -   "option_text": "5 dollars"
-                    "feedback": "Helas, c est plus cher"
+                    "feedback": "Hélas, c est plus cher"
                 -   "option_text": "10 dollars"
                     "feedback": "Non, c est 10 par personne !"
                 -   "option_text": "15 dollars"
@@ -893,87 +893,72 @@ levels:
             hint: "Regarde sur la 4eme ligne !"
             question_score: 10
         7:
-            question_text: "Que veut dire la ligne 7 ?"
+            question_text: "Pourquoi n'a t-on pas mis 'prix + 3' à la place de 'prix is prix + 3' à la ligne 7 ?"
             code: |-
                 print 'Bienvenue chez Hedy !'
-                choix is ask 'Qu'est-ce que tu veux manger ?'
-                price is 0
-                if choix is hamburger price is price + 15
-                if choix is frites price is price + 6
-                drinks is 'What would you like to drink?'
-                if drinks is coke price is price + 3
-                if drinks is water price ie sprice + 1
-                print price ' dollars please'
+                prix is 0
+                boisson is ask 'Que veux tu boire ?'
+                if boisson is coca prix is prix + 3
+                if boisson is eau prix is prix + 1
+                plat is ask 'Que veux tu manger ?'
+                if plat is hamburger prix is prix + 15
+                if plat is frites prix is prix + 6
+                print 'cela fera' prix 'euros !'
             mp_choice_options:
-                -   "option_text": "It could have been 'price is 3' just as well."
-                    "code": ""
-                    "feedback": "No, that's not true. Hedy needs to add 3 dollars to the total."
-                -   "option_text": "Because Hedy doesn't understand 'price is 3'."
-                    "code": ""
-                    "feedback": "Hedy would understand, but it wouldn't be right."
-                -   "option_text": "Because Hedy would otherwise forget about the previous order.\
-              \ The price would be 3 dollars in total."
-                    "code": ""
-                    "feedback": "That's right!"
-                -   "option_text": "Because the price is 0 dollars to begin with."
-                    "code": ""
-                    "feedback": "That's true, but not the reason"
+                -   "option_text": "Les 2 sont équivalents."
+                    "feedback": "Non, ce n'est pas vrai !"
+                -   "option_text": "Parce que Hedy ne comprend pas"
+                    "feedback": "Hedy comprendrait, mais ne fera pas ce que tu veux !"
+                -   "option_text": "Parce que l'on veut ajouter 3 au total !"
+                    "feedback": "Bien joué !"
+                -   "option_text": "Parce que le prix est de 0 euros pour commencer."
+                    "feedback": "C'est vrai, mais ce n'est pas la raison !"
             correct_answer: "C"
-            hint: "The price shouldn't be 3, but 3 dollars more than it already was"
+            hint: "Le prix ne doit pas être de 3, mais de 3 euros de plus !"
             question_score: 10
         8:
-            question_text: "Why is this code incorrect?"
+            question_text: "Pourquoi ce code est-il incorrect ?"
             code: |-
-                correct answer is 3*12
-                answer is ask 'What is 3 times 12?'
-                if answer is correct answer print 'Good job!'
-                else print 'No... It was ' correct answer
+                réponse correcte is 3*12
+                réponse is ask 'Combien font 3 fois 12 ?'
+                if réponse is réponse correcte print 'Bien joué!'
+                else print 'Raté, la réponse etait ..' réponse correcte
             mp_choice_options:
-                -   "option_text": "There shouldn't be quotation marks in line 2"
-                    "code": ""
-                    "feedback": "No, there should be!"
-                -   "option_text": "The variable is called correct answer, but a variable's name\
-              \ can only be 1 word. So it should be correctanswer"
-                    "code": ""
-                    "feedback": "Correct!"
-                -   "option_text": "The if and else commands should be in the same line."
-                    "code": ""
-                    "feedback": "No, that's not true."
-                -   "option_text": "The variable in line 2 can't be called answer, because it is\
-              \ too similar to the variable correct answer."
-                    "code": ""
-                    "feedback": "Variable names can be similar, but they can't be 2 words..."
+                -   "option_text": "Il ne devrait pas y avoir de guillemets à la ligne 2."
+                    "feedback": "Non, il doit y en avoir !"
+                -   "option_text": "La variable s'appelle 'réponse correcte', mais le nom d'une variable ne peut être qu'un mot."
+                    "feedback": "Correct ! Il faudrait renommer la variable en 'réponsecorrecte' "
+                -   "option_text": "Les commandes if et else doivent être sur la même ligne."
+                    "feedback": "Non, c'est faux."
+                -   "option_text": "La variable de la ligne 2 ne peut pas être appelée réponse, car elle est trop similaire à la variable réponse correcte."
+                    "feedback": "Les noms des variables peuvent être similaires.."
             correct_answer: "B"
-            hint: "Inspect what the variables are called."
+            hint: "Fais attention aux noms des variables !"
             question_score: 10
         9:
-            question_text: "Imagine you love football a 10, you've eaten 2 bananas and have\
-            \ washed your hands 3 times today. How smart does the silly fortune teller think\
-            \ you are?"
+            question_text: "Imagine que tu aimes le football à 10, que tu as\
+            \ mangé 2 bananes et que tu t'es lavé les mains 3 fois aujourd'hui.\
+            \ A quel point la diseuse de bonne aventure pense que tu es intelligent ?"
             code: |-
-                print 'Im Hedy the silly fortune teller'
-                print 'I will predict how smart you are!'
-                football is ask 'On a scale of 0 to 10 how much do you love football?'
-                bananas is ask 'How many bananas have you eaten this week?'
-                hygiene is ask 'How many times did you wash your hands today??'
-                result is bananas + hygiene
-                result is result * football
-                print 'You are ' result 'percent smart.'
+                print 'Je suis Hedy la Voyante'
+                print 'Je vais prédire à quel point tu es intelligent !'
+                foot is ask 'Sur une échelle de 0 à 10, à quel point aimes-tu le football ?'
+                bananes is ask 'Combien de bananes as-tu mangé cette semaine ?'
+                main is ask 'Combien de fois t'es-tu lavé les mains aujourd'hui ?'
+                resultat is bananes + main
+                resultat is resultat * foot
+                print 'tu as un QI de ' resultat
             mp_choice_options:
-                -   "option_text": "10%"
-                    "code": ""
-                    "feedback": "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
-                -   "option_text": "32%"
-                    "code": ""
-                    "feedback": "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
-                -   "option_text": "50%"
-                    "code": ""
-                    "feedback": "Super! You are 100 percent smart!"
-                -   "option_text": "100%"
-                    "code": ""
-                    "feedback": "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
+                -   "option_text": "10"
+                    "feedback": "(2 bananes + 3 main) * 10 foot = 5*10 = ?"
+                -   "option_text": "32"
+                    "feedback": "(2 bananes + 3 main) * 10 foot = 5*10 = ?"
+                -   "option_text": "50"
+                    "feedback": "Super, tu es doué !"
+                -   "option_text": "100"
+                    "feedback": "(2 bananes + 3 main) * 10 foot = 5*10 = ?"
             correct_answer: "C"
-            hint: "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
+            hint: "(2 bananes + 3 main) * 10 foot = 5*10 = ?"
             question_score: 10
 
     7:
