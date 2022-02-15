@@ -328,7 +328,7 @@ def routes (app, database, achievements):
     @requires_login
     def create_accounts(user):
         if not is_teacher(user):
-            return 'Only teachers can create multiple accounts', 403
+            return utils.error_page(error=403, ui_message='not_teacher')
         classes = DATABASE.get_teacher_classes(user['username'], False)
 
         return render_template('create-accounts.html', classes=classes)
@@ -337,7 +337,7 @@ def routes (app, database, achievements):
     @requires_login
     def store_accounts(user):
         if not is_teacher(user):
-            return 'Only teachers can create multiple accounts', 403
+            return utils.error_page(error=403, ui_message='not_teacher')
         body = request.json
 
         print(body)
