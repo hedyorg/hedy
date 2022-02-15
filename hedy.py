@@ -313,6 +313,12 @@ class ExtractAST(Transformer):
     def INT(self, args):
         return Tree('integer', [str(args)])
 
+    def NUMBER(self, args):
+        return Tree('number', [str(args)])
+
+    def NEGATIVE_NUMBER(self, args):
+        return Tree('number', [str(args)])
+
     #level 2
     def var(self, args):
         return Tree('var', [''.join([str(c) for c in args])])
@@ -333,9 +339,7 @@ class ExtractAST(Transformer):
     def error_unsupported_number(self, args):
         return Tree('unsupported_number', [''.join([str(c) for c in args])])
 
-    #level 11
-    def NUMBER(self, args):
-        return Tree('number', [str(args)])
+
 
 
 # This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
@@ -774,6 +778,9 @@ class Filter(Transformer):
     def number(self, args, meta):
         return True, ''.join([c for c in args]), meta
 
+    def NEGATIVE_NUMBER(self, args, meta=None):
+        return True, ''.join([c for c in args]), meta
+
     def text(self, args, meta):
         return all(args), ''.join([c for c in args]), meta
       
@@ -808,6 +815,8 @@ class UsesTurtle(Transformer):
     def NUMBER(self, args):
         return False
 
+    def NEGATIVE_NUMBER(self, args):
+        return False
 
 class AllCommands(Transformer):
     def __init__(self, level):
@@ -873,6 +882,9 @@ class AllCommands(Transformer):
     def NUMBER(self, args):
         return []
 
+    def NEGATIVE_NUMBER(self, args):
+        return []
+
     def text(self, args):
         return []
 
@@ -908,6 +920,9 @@ class AllPrintArguments(Transformer):
         return []
 
     def NUMBER(self, args):
+        return []
+
+    def NEGATIVE_NUMBER(self, args):
         return []
 
     def text(self, args):
@@ -1155,6 +1170,9 @@ class ConvertToPython_1(ConvertToPython):
         return str(args[0])
 
     def number(self, args):
+        return str(args[0])
+
+    def NEGATIVE_NUMBER(self, args):
         return str(args[0])
 
     def print(self, args):
@@ -1583,6 +1601,9 @@ for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepva
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
+        return ''.join(args)
+
+    def NEGATIVE_NUMBER(self, args):
         return ''.join(args)
 
     def process_token_or_tree(self, argument):
