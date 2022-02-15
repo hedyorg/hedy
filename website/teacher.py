@@ -340,19 +340,27 @@ def routes (app, database, achievements):
             return utils.error_page(error=403, ui_message='not_teacher')
         body = request.json
 
-        print(body)
         #Validations
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('accounts'), list):
             return "accounts should be a list!", 400
 
+        if len(body.get('accounts', [])) < 1:
+            return g.auth_texts.get('no_accounts'), 400
+
         usernames = []
         mails = []
 
+        print(body)
+
         # Validation for correct types and duplicates
         for account in body.get('accounts', []):
+            print("Is even kijken!")
+            print(account)
             validation = validate_signup_data(account)
+
+            print(validation)
             if validation:
                 return validation, 400
             if account.get('username').strip().lower() in usernames:
