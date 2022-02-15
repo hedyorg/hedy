@@ -169,7 +169,8 @@ Level 2 supports:
 </tbody>
 </table>
 
-* From this level on, we have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* From this level on, we have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -323,7 +324,8 @@ Level 3 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -509,7 +511,8 @@ Level 4 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 
 #### Correct Programs
@@ -708,7 +711,8 @@ Level 5 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -927,7 +931,8 @@ Level 6 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -1181,7 +1186,8 @@ Level 7 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 
 #### Correct Programs
@@ -1445,7 +1451,7 @@ Level 8 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. 
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 
 #### Correct Programs
@@ -1713,7 +1719,8 @@ Level 9 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 
 #### Correct Programs
@@ -1984,7 +1991,8 @@ Level 10 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -2247,7 +2255,8 @@ Level 11 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -2469,7 +2478,8 @@ Level 12 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -2708,7 +2718,8 @@ Level 13 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -2975,8 +2986,9 @@ Level 14 supports:
 </tbody>
 </table>
 
-\* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
-\*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
+* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
 
 #### Correct Programs
 
@@ -3174,11 +3186,11 @@ Level 15 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string | float</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string | float</td>
+    <td>ask *</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
     <td>is | = (assignment)</td>
@@ -3214,39 +3226,39 @@ Level 15 supports:
   </tr>
   <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
   </tr>
   <tr>
     <td>and</td>
-    <td>boolean (before `and`) + boolean (after `and`)</td>
+    <td>boolean (on both sides of `and`)</td>
   </tr>
   <tr>
     <td>or</td>
-    <td>boolean (before `or`) + boolean (after `or`)</td>
+    <td>boolean (on both sides of `or`)</td>
   </tr>
   <tr>
-    <td><</td>
-    <td>integer (before <) + integer (after <) | float (before <) + float (after <)</td>
+    <td>< **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>></td>
-    <td>integer (before >) + integer (after >) | float (before >) + float (after >)</td>
+    <td>> **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>== | is | = (comparison)</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before command) + list (after command)</td>
+    <td>== | is | = (comparison) **</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td>!=</td>
-    <td>string (before !=) + string (after !=) | integer (before !=) + integer (after !=) | float (before !=) + float (after !=) | list (before !=) + list (after !=)</td>
+    <td>!= **</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td><=</td>
-    <td>integer (before <=) + integer (after <=) | float (before <=) + float (after <=)</td>
+    <td><= **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>>=</td>
-    <td>integer (before >=) + integer (after >=) | float (before >=) + float (after >=)</td>
+    <td>>= **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
     <td>while</td>
@@ -3254,6 +3266,10 @@ Level 15 supports:
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
+* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
 
 #### Correct Programs
 
@@ -3457,7 +3473,7 @@ Level 16 supports:
     <td>integer | string | float | input | list </td>
   </tr>
   <tr>
-    <td>ask</td>
+    <td>ask *</td>
     <td>integer | string | float | input | list</td>
   </tr>
   <tr>
@@ -3494,39 +3510,39 @@ Level 16 supports:
   </tr>
   <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
   </tr>
   <tr>
     <td>and</td>
-    <td>boolean (before `and`) + boolean (after `and`)</td>
+    <td>boolean (on both sides of `and`)</td>
   </tr>
   <tr>
     <td>or</td>
-    <td>boolean (before `or`) + boolean (after `or`)</td>
+    <td>boolean (on both sides of `or`)</td>
   </tr>
   <tr>
-    <td><</td>
-    <td>integer (before <) + integer (after <) | float (before <) + float (after <)</td>
+    <td>< **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>></td>
-    <td>integer (before >) + integer (after >) | float (before >) + float (after >)</td>
+    <td>> **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>== | is | = (comparison)</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before command) + list (after command)</td>
+    <td>== | is | = (comparison) **</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td>!=</td>
-    <td>string (before !=) + string (after !=) | integer (before !=) + integer (after !=) | float (before !=) + float (after !=) | list (before !=) + list (after !=)</td>
+    <td>!= **</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td><=</td>
-    <td>integer (before <=) + integer (after <=) | float (before <=) + float (after <=)</td>
+    <td><= **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>>=</td>
-    <td>integer (before >=) + integer (after >=) | float (before >=) + float (after >=)</td>
+    <td>>= **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
     <td>while</td>
@@ -3534,6 +3550,9 @@ Level 16 supports:
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
 
 #### Correct Programs
 
@@ -3745,7 +3764,7 @@ Level 17 supports:
     <td>integer | string | float | input | list </td>
   </tr>
   <tr>
-    <td>ask</td>
+    <td>ask *</td>
     <td>integer | string | float | input | list</td>
   </tr>
   <tr>
@@ -3777,7 +3796,7 @@ Level 17 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>elif*</td>
+    <td>elif***</td>
     <td>boolean</td>
   </tr>
   <tr>
@@ -3786,39 +3805,39 @@ Level 17 supports:
   </tr>
   <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
   </tr>
   <tr>
     <td>and</td>
-    <td>boolean (before `and`) + boolean (after `and`)</td>
+    <td>boolean (on both sides of `and`)</td>
   </tr>
   <tr>
     <td>or</td>
-    <td>boolean (before `or`) + boolean (after `or`)</td>
+    <td>boolean (on both sides of `or`)</td>
   </tr>
   <tr>
-    <td><</td>
-    <td>integer (before <) + integer (after <) | float (before <) + float (after <)</td>
+    <td>< **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>></td>
-    <td>integer (before >) + integer (after >) | float (before >) + float (after >)</td>
+    <td>> **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>== | is | = (comparison)</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command)</td>
+    <td>== | is | = (comparison) **</td>
+    <td>string | integer | float | input</td>
   </tr>
   <tr>
-    <td>!=</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before !=) + list (after !=)</td>
+    <td>!= **</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td><=</td>
-    <td>integer (before <=) + integer (after <=) | float (before <=) + float (after <=)</td>
+    <td><= **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>>=</td>
-    <td>integer (before >=) + integer (after >=) | float (before >=) + float (after >=)</td>
+    <td>>= **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
     <td>while</td>
@@ -3827,7 +3846,9 @@ Level 17 supports:
 </tbody>
 </table>
 
-* There has to be an `if` (with a boolean), before `elif` (with a boolean), but then, multiple times `elif` is possible. After that, using an `else` is optional.
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
+* \*\*\* There has to be an `if` (with a boolean), before `elif` (with a boolean), but then, multiple times `elif` is possible. After that, using an `else` is optional.
 
 #### Correct Programs
 
