@@ -360,7 +360,7 @@ def routes (app, database, achievements):
             usernames.append(account.get('username').strip().lower())
             if account.get('email').strip().lower() in mails:
                 return {'error': g.auth_texts.get('unique_emails'), 'value': account.get('email')}, 200
-            mails.append(account.get('mail').strip().lower())
+            mails.append(account.get('email').strip().lower())
 
         # Validation for duplicates in the db
         classes = DATABASE.get_teacher_classes(user['username'], False)
