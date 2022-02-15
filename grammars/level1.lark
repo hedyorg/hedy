@@ -31,7 +31,7 @@ command: print | ask | echo | turtle | error_invalid_space | comment | error_inv
 print: _PRINT (_SPACE text)?
 ask: _ASK (_SPACE text)?
 echo: _ECHO (_SPACE text)?
-turtle: _FORWARD (_SPACE (text | NUMBER))? -> forward | _TURN (_SPACE (text | NUMBER))? -> turn
+turtle: _FORWARD (_SPACE (text | NUMBER_WITH_NEGATIVE))? -> forward | _TURN (_SPACE (text | NUMBER_WITH_NEGATIVE))? -> turn
 error_invalid_space: _SPACE text?
 error_invalid: textwithoutspaces text?
 
@@ -39,11 +39,13 @@ comment: _HASH /([^\n]+)/
 
 _EOL: "\r"?"\n"
 
+NUMBER_WITH_NEGATIVE: _SUBTRACT /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
+NUMBER: /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
+INT: /[\p{Nl}\p{Nd}\p{No}]+/
+
 text: /([^\n]+)/ -> text //anything can be parsed except for a newline
 textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline)
 
-NUMBER: _SUBTRACT? /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
-INT: _SUBTRACT? /[\p{Nl}\p{Nd}\p{No}]+/
 
 // FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html
 // Exact grammar stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
