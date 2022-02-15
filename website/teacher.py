@@ -3,7 +3,7 @@ import urllib
 
 from website.auth import requires_login, is_teacher, MAILCHIMP_API_URL, \
     mailchimp_subscribe_user, send_email, send_email_template, email_base_url, validate_signup_data, \
-    prepare_user_db
+    prepare_user_db, store_account_db
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
@@ -370,35 +370,9 @@ def routes (app, database, achievements):
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):
-            username, hashed, hashed_token = prepare_user_db(account['username'], account['password'], account['mail'])
-
-            if not utils.is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
-                # If we have a Mailchimp API key, we use it to add the subscriber through the API
-                if MAILCHIMP_API_URL:
-                    mailchimp_subscribe_user(email)
-                # Otherwise, we send an email to notify about the subscription to the main email address
-                else:
-                    send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
-
-            if not utils.is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
-                send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
-
-            user = {
-                'username': username,
-                'password': hashed,
-                'email':    email,
-                'created':  utils.timems(),
-                'verification_pending': hashed_token,
-                'last_login': utils.timems()
-            }
-
-            DATABASE.store_user(user)
-            if account.get('class'):
-                class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]
-                if class_id:
-                    DATABASE.add_student_to_class(class_id, username)
-
-            send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
+            # Set the current user language as new account language
+            account['language'] = g.lang
+            store_account_db(account, email)
         return {'success': g.auth_texts.get('accounts_created')}, 200
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])

@@ -172,6 +172,61 @@ def validate_signup_data(account):
         return g.auth_texts.get('passwords_six')
     return None
 
+def store_account_db(account, email):
+    username, hashed, hashed_token = prepare_user_db(account['username'], account['password'], account['email'])
+
+    if not is_testing_request(request) and 'subscribe' in account and account['subscribe'] == True:
+        # If we have a Mailchimp API key, we use it to add the subscriber through the API
+        if MAILCHIMP_API_URL:
+            mailchimp_subscribe_user(email)
+        # Otherwise, we send an email to notify about the subscription to the main email address
+        else:
+            send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email,
+                       '<p>' + email + '</p>')
+
+    if not is_testing_request(request) and 'is_teacher' in account and account['is_teacher'] is True:
+        send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+
+    user = {
+        'username': username,
+        'password': hashed,
+        'email': email,
+        'language': account['language'],
+        'created': timems(),
+        'verification_pending': hashed_token,
+        'last_login': timems()
+    }
+
+    for field in ['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
+        if field in account:
+            if field == 'experience_languages' and len(account[field]) == 0:
+                continue
+            user[field] = account[field]
+
+    DATABASE.store_user(user)
+
+    # We automatically login the user
+    cookie = make_salt()
+    DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
+
+    # If this is an e2e test, we return the email verification token directly instead of emailing it.
+    if is_testing_request(request):
+        resp = make_response({'username': username, 'token': hashed_token})
+    # Otherwise, we send an email with a verification link and we return an empty body
+    else:
+        send_email_template('welcome_verify', email,
+                            email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
+                                username) + '&token=' + urllib.parse.quote_plus(hashed_token))
+        resp = make_response({})
+
+    # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
+    # The server will decide whether the cookie expires.
+    resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
+                    max_age=365 * 24 * 60 * 60)
+    remember_current_user(user)
+
+    return resp
+
 # Note: translations are used only for texts that will be seen by a GUI user.
 def routes(app, database):
     global DATABASE
@@ -267,55 +322,7 @@ def routes(app, database):
         email = DATABASE.user_by_email(body['email'].strip().lower())
         if email:
             return g.auth_texts.get('exists_email'), 403
-
-        username, hashed, hashed_token = prepare_user_db(body['username'], body['password'], body['email'])
-
-        if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
-            # If we have a Mailchimp API key, we use it to add the subscriber through the API
-            if MAILCHIMP_API_URL:
-                mailchimp_subscribe_user(email)
-            # Otherwise, we send an email to notify about the subscription to the main email address
-            else:
-                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
-
-        if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
-            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
-
-        user = {
-            'username': username,
-            'password': hashed,
-            'email':    email,
-            'created':  timems(),
-            'verification_pending': hashed_token,
-            'last_login': timems()
-        }
-
-        for field in['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
-           if field in body:
-               if field == 'experience_languages' and len(body[field]) == 0:
-                   continue
-               user[field] = body[field]
-
-        DATABASE.store_user(user)
-
-        # We automatically login the user
-        cookie = make_salt()
-        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
-
-        # If this is an e2e test, we return the email verification token directly instead of emailing it.
-        if is_testing_request(request):
-            resp = make_response({'username': username, 'token': hashed_token})
-        # Otherwise, we send an email with a verification link and we return an empty body
-        else:
-            send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
-            resp = make_response({})
-
-        # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
-        # The server will decide whether the cookie expires.
-        resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
-        remember_current_user(user)
-
-        return resp
+        return store_account_db(body, email)
 
     @app.route('/auth/verify', methods=['GET'])
     def verify_email():
