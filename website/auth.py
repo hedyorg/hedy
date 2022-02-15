@@ -156,9 +156,14 @@ def prepare_user_db(username, password, email):
 
     return username, hashed, hashed_token
 
+
 def validate_signup_data(account):
     if not isinstance(account.get('username'), str):
         return g.auth_texts.get('username_invalid')
+    if '@' in account.get('username') or ':' in account.get('username'):
+        return g.auth_texts.get('username_special'), 400
+    if len(account.get('username').strip()) < 3:
+        return g.auth_texts.get('username_three'), 400
     if not isinstance(account.get('mail'), str) or not utils.valid_email(account.get('mail')):
         return g.auth_texts.get('email_invalid')
     if not isinstance(account.get('password'), str):
@@ -221,22 +226,17 @@ def routes(app, database):
         # Validations, mandatory fields
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
-        if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
-        if '@' in body['username'] or ':' in body['username']:
-            return g.auth_texts.get('username_special'), 400
-        if len(body['username'].strip()) < 3:
-            return g.auth_texts.get('username_three'), 400
-        if not isinstance(body.get('email'), str) or not valid_email(body['email']):
-            return g.auth_texts.get('email_invalid'), 400
+
+        # Validate the essential data using a function -> also used for multiple account creation
+        validation = validate_signup_data(body)
+        if validation:
+            return validation, 400
+
+        # Validate fields only relevant when creating a single user account
         if not isinstance(body.get('mail_repeat'), str) or not valid_email(body['mail_repeat']):
             return g.auth_texts.get('repeat_match_email'), 400
         if body['email'] != body['mail_repeat']:
             return g.auth_texts.get('repeat_match_email'), 400
-        if not isinstance(body.get('password'), str):
-            return g.auth_texts.get('password_invalid'), 400
-        if len(body['password']) < 6:
-            return g.auth_texts.get('password_six'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return g.auth_texts.get('repeat_match_password'), 400
         if not isinstance(body.get('language'), str):

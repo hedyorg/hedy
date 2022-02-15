@@ -2,7 +2,7 @@ import json
 import urllib
 
 from website.auth import requires_login, is_teacher, MAILCHIMP_API_URL, \
-    mailchimp_subscribe_user, send_email, send_email_template, email_base_url, make_salt, hash, validate_signup_data, \
+    mailchimp_subscribe_user, send_email, send_email_template, email_base_url, validate_signup_data, \
     prepare_user_db
 import utils
 import uuid
