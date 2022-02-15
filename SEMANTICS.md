@@ -2975,8 +2975,8 @@ Level 14 supports:
 </tbody>
 </table>
 
-* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
-** All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
+\* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+\*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
 
 #### Correct Programs
 
