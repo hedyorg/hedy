@@ -691,6 +691,7 @@ def achievements_page():
     username = user['username']
     if not username:
         # redirect users to /login if they are not logged in
+        # Todo: TB -> I wrote this once, but wouldn't it make more sense to simply throw a 302 error?
         url = request.url.replace('/my-achievements', '/login')
         return redirect(url, code=302)
 
@@ -1386,6 +1387,24 @@ def get_admin_classes_page(user):
     classes = sorted(classes, key=lambda d: d['last_used'], reverse=True)
 
     return render_template('admin-classes.html', classes=classes, page_title=hedyweb.get_page_title('admin'))
+
+@app.route('/admin/adventures', methods=['GET'])
+@requires_login
+def get_admin_adventures_page(user):
+    if not is_admin(user):
+        return utils.error_page(error=403, ui_message='unauthorized')
+
+    adventures = [{
+        "id": adventure.get('id'),
+        "creator": adventure.get('creator'),
+        "name": adventure.get('name'),
+        "level": adventure.get('level'),
+        "public": "Yes" if adventure.get('public') else "No",
+        "date": utils.datetotimeordate(utils.mstoisostring(adventure.get('date')))
+    } for adventure in DATABASE.all_adventures()]
+    adventures = sorted(adventures, key=lambda d: d['date'], reverse=True)
+
+    return render_template('admin-adventures.html', adventures=adventures, page_title=hedyweb.get_page_title('admin'))
 
 
 @app.route('/admin/stats', methods=['GET'])

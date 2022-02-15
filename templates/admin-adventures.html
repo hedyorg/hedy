@@ -1,0 +1,37 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="flex flex-row border-b">
+    <h1>Adventures overview</h1>
+    <div class="ltr:ml-auto rtl:mr-auto">
+        <button type="reset" class="green-btn my-1 mx-2 text-white" onclick="window.open('/admin', '_self');">Return to admin page</button>
+    </div>
+</div>
+<h4 class="text-center">Total amount of shown adventures: {{ adventures|length }}</h4>
+<div class="program w-3/4 mx-auto border-solid border-2 border-orange-400 rounded p-4">
+  <table class="table-auto mb-4 w-full text-sm">
+    <thead>
+      <tr class="font-bold text-left">
+          <td id="classname_header">Adventure name</td>
+          <td id="teacher_header">Creator</td>
+          <td id="students_header">Level</td>
+          <td id="last_used_header">Created</td>
+          <td id="public_header">Public</td>
+          <td id="last_used_header">View</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for adventure in adventures %}
+          <tr>
+            <td class="classname_cell">{{adventure.name}}</td>
+            <td class="teacher_cell">{{adventure.creator}}</td>
+            <td class="students_cell">{{adventure.level}}</td>
+            <td class="last_used_cell">{{adventure.date}}</td>
+            <td class="public_cell">{{adventure.public}}</td>
+            <td id="statistics_cell"><a href="/for-teachers/customize-adventure/view/{{ adventure.id }}" target="_blank">Click here</a></td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
