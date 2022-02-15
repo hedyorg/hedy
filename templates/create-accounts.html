@@ -10,8 +10,8 @@
         <form onsubmit="hedyApp.create_accounts();event.preventDefault();">
         <div class="border rounded-lg px-4 py-2">
             <div class="flex flex-col" id="account_rows_container">
+                <!-- we create one hidden row -> we can simply copy this one and append() below when adding rows -->
                 {% for i in range(5) %}
-                    <!-- we create one hidden row -> we can simply copy this one and append() below when adding rows -->
                     <div class="flex flex-row w-full items-center mb-4 account_row {% if i == 0 %}hidden{% endif %}" {% if i == 0 %}id="account_row_unique"{% endif %}>
                         <div class="flex flex-col">
                             <input id="username" name="username" {% if i != 0 %}required{% endif %} type=text placeholder="{{ auth.username }}" class="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">

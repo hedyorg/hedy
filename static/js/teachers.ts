@@ -434,12 +434,9 @@ export function add_account_placeholder() {
     row.attr('id', "");
 
     // Set all inputs to required (expect for class)
-    row.children('input').each(function () {
-       if ($(this).attr('id') != 'classes') {
-           $(this).prop('required', true);
-       }
-    });
-    $('.class').prop('required',false);
+    $('.username').prop('required',true);
+    $('.email').prop('required',true);
+    $('.password').prop('required',true);
 
     row.appendTo("#account_rows_container");
 }
