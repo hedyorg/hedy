@@ -169,14 +169,18 @@ export const auth = {
         type: 'POST', url: '/profile',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
-      }).done (function () {
-        auth.success (auth.texts['profile_updated']);
-        setTimeout (function () {location.reload ()}, 1500);
+      }).done (function (response) {
+        if (response.reload) {
+          modal.alert(auth.texts['profile_updated_reload'], 2000, false);
+          setTimeout (function () {location.reload ()}, 2000);
+        } else {
+          modal.alert(auth.texts['profile_updated'], 3000, false);
+        }
       }).fail (function (response) {
         if (response.responseText) {
-           auth.error(response.responseText);
+          modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(response.responseText, 3000, true);
         }
       });
     }

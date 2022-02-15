@@ -474,6 +474,12 @@ def routes(app, database):
            else:
                updates[field] = None
 
+        # We want to check if the user choose a new language, if so -> reload
+        # We can use g.lang for this to reduce the db calls
+        resp['reload'] = False
+        if g.lang != body['language']:
+            resp['reload'] = True
+
         if updates:
             DATABASE.update_user(username, updates)
         remember_current_user(DATABASE.user_by_username(user['username']))
