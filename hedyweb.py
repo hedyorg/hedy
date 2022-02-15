@@ -76,7 +76,7 @@ def get_page_title(current_page):
     return page_titles_json['start'].get("en")
 
 
-def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, restrictions, adventure_name):
+def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, customizations, teacher_adventures, adventure_name):
   user = current_user()
 
   if not level_defaults:
@@ -90,9 +90,8 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   arguments_dict['level'] = level_number
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
-  arguments_dict['example_programs'] = restrictions['example_programs']
-  arguments_dict['hide_prev_level'] = restrictions['hide_prev_level']
-  arguments_dict['hide_next_level'] = restrictions['hide_next_level']
+  arguments_dict['customizations'] = customizations
+  arguments_dict['teacher_adventures'] = teacher_adventures
   arguments_dict['menu'] = True
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'

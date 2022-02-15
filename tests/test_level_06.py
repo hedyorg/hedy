@@ -18,7 +18,35 @@ class TestsLevel6(HedyTester):
     print(f'ik heet {naam}')""")
 
     self.multi_level_tester(
-      max_level=10,
+      max_level=11,
+      code=code,
+      expected=expected
+    )
+
+  def test_print_equals(self):
+    code = textwrap.dedent("""\
+    naam = 'Hedy'
+    print 'ik heet ' naam""")
+    expected = textwrap.dedent("""\
+    naam = '\\'Hedy\\''
+    print(f'ik heet {naam}')""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected
+    )
+
+  def test_print_equals_no_space(self):
+    code = textwrap.dedent("""\
+    naam='Hedy'
+    print 'ik heet ' naam""")
+    expected = textwrap.dedent("""\
+    naam = '\\'Hedy\\''
+    print(f'ik heet {naam}')""")
+
+    self.multi_level_tester(
+      max_level=11,
       code=code,
       expected=expected
     )
@@ -118,7 +146,24 @@ class TestsLevel6(HedyTester):
       code=code,
       expected=expected
     )
+  def test_print_if_else_with_is(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy print 'leuk' else print 'minder leuk'""")
 
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')
+    if str(naam) == str('Hedy'):
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
   def test_print_if_else_with_equals_sign(self):
     code = textwrap.dedent("""\
     naam is Hedy
@@ -196,6 +241,22 @@ class TestsLevel6(HedyTester):
       code=code,
       expected=expected
     )
+  def test_assign_var_to_var(self):
+    code = textwrap.dedent("""\
+    dier1 is hond
+    dier2 is dier1
+    print dier1""")
+
+    expected = textwrap.dedent("""\
+    dier1 = 'hond'
+    dier2 = dier1
+    print(f'{dier1}')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11)
+
 
   def test_calc_vars(self):
     code = textwrap.dedent("""\
@@ -224,6 +285,7 @@ class TestsLevel6(HedyTester):
     print(f'{int(nummer) * int(nummertwee)}')""")
 
     self.single_level_tester(code=code, expected=expected, output='30')
+
   def test_calc_vars_print_divide(self):
     code = textwrap.dedent("""\
     nummer is 5
@@ -236,6 +298,28 @@ class TestsLevel6(HedyTester):
     print(f'{int(nummer) // int(nummertwee)}')""")
 
     self.single_level_tester(code=code, expected=expected, output='0')
+
+  def test_calc_vars_print_subtract(self):
+    code = textwrap.dedent("""\
+    print '5 min 5 is ' 5 - 5""")
+
+    expected = textwrap.dedent("""\
+    print(f'5 min 5 is {int(5) - int(5)}')""")
+
+    self.single_level_tester(code=code, expected=expected, output='5 min 5 is 0')
+
+  def test_calc_vars_print_add_arabic(self):
+    code = textwrap.dedent("""\
+    nummer is ١
+    nummertwee is ١
+    print nummer + nummertwee""")
+
+    expected = textwrap.dedent("""\
+    nummer = '١'
+    nummertwee = '١'
+    print(f'{int(nummer) + int(nummertwee)}')""")
+
+    self.single_level_tester(code=code, expected=expected, output='2')
 
   def test_calc_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
@@ -289,6 +373,7 @@ class TestsLevel6(HedyTester):
       print(f'dat zijn dan {punten}')""")
 
       self.single_level_tester(code=code, expected=expected)
+
   def test_ifelse_should_go_before_assign(self):
     code = textwrap.dedent("""\
     kleur is geel
@@ -349,6 +434,18 @@ class TestsLevel6(HedyTester):
       expected=expected
     )
 
+  # So legal are:
+  #
+  # if name is Hedy print 'hello'
+  # if name is 'Hedy' print 'hello'
+  # if name is 'Hedy is het beste' print 'hello'
+  # if name is Hedy c is 5
+
+  # Illegal is:
+  #
+  # if name is Hedy is het beste print 'hello'
+  # if name is Hedy is het beste x is 5
+
   def test_equality_promotes_int_to_string(self):
     code = textwrap.dedent("""\
     a is test
@@ -365,11 +462,10 @@ class TestsLevel6(HedyTester):
       expected=expected
     )
 
-
   def test_one_space_in_rhs_if(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is James Bond print 'shaken'""")
+    if naam is 'James Bond' print 'shaken'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'
@@ -381,10 +477,27 @@ class TestsLevel6(HedyTester):
       expected=expected,
       max_level=7)
 
+  def test_no_space_nor_quotes_in_rhs(self):
+    code = textwrap.dedent("""\
+    warna = ask 'Apa warna favorit kamu?'
+    if warna is hijau print 'cantik!' else print 'meh!'""")
+
+    expected = textwrap.dedent("""\
+    warna = input(f'Apa warna favorit kamu?')
+    if str(warna) == str('hijau'):
+      print(f'cantik!')
+    else:
+      print(f'meh!')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
   def test_one_space_in_rhs_if_else(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is James Bond print 'shaken' else print 'biertje!'""")
+    if naam is 'James Bond' print 'shaken' else print 'biertje!'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'
@@ -398,10 +511,48 @@ class TestsLevel6(HedyTester):
       expected=expected,
       max_level=7)
 
+  def test_quoted_space_rhs(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is 'James Bond' print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+    self.single_level_tester(code=code, expected=expected)
+
+
+  def test_space_enter_rhs_ifelse(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond
+    print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_space_enter_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken'""")
+
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.UnquotedEqualityCheck)
+
+
   def test_multiple_spaces_in_rhs_if(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is Bond James Bond print 'shaken'""")
+    if naam is 'Bond James Bond' print 'shaken'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'
