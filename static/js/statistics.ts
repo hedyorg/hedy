@@ -50,9 +50,9 @@ export const stats = {
       updateSharedLegend('#admin-exceptions-legend', exceptionsPerLevelDatasets, '.admin-exceptions-chart');
 
       // update user types per level and week charts
-      const anonymousRunsPerLevelDataset = generatePerLevelDataset('Anonymous users', response['per_level'], 'data.anonymous_runs', chart_colors[3], false);
-      const loggedRunsPerLevelDataset = generatePerLevelDataset('Logged users', response['per_level'], 'data.logged_runs', chart_colors[4], false);
-      const studentRunsPerLevelDataset = generatePerLevelDataset('Student users', response['per_level'], 'data.student_runs', chart_colors[5], false);
+      const anonymousRunsPerLevelDataset = generatePerLevelDataset('Anonymous users', response['per_level'], 'data.anonymous_runs', chart_colors[0], false);
+      const loggedRunsPerLevelDataset = generatePerLevelDataset('Logged users', response['per_level'], 'data.logged_runs', chart_colors[1], false);
+      const studentRunsPerLevelDataset = generatePerLevelDataset('Student users', response['per_level'], 'data.student_runs', chart_colors[2], false);
       updateChart('usersPerLevelChart', [anonymousRunsPerLevelDataset, loggedRunsPerLevelDataset, studentRunsPerLevelDataset]);
 
       const userTypes = ['anonymous_runs', 'logged_runs', 'student_runs'];
