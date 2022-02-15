@@ -228,7 +228,7 @@ def initialize_session():
       later on).
     """
     # Invoke session_id() for its side effect
-    session_id()
+    utils.session_id()
     login_user_from_token_cookie()
 
 
@@ -420,7 +420,7 @@ def fix_code():
     username = current_user()['username'] or None
     exception = None
 
-    querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
+    querylog.log_value(level=level, lang=lang, session_id=utils.session_id(), username=username)
 
     try:
         hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
@@ -450,7 +450,7 @@ def fix_code():
 
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
-        'session': session_id(),
+        'session': utils.session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
         'lang': lang,
@@ -494,7 +494,7 @@ def parse():
     username = current_user()['username'] or None
     exception = None
 
-    querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
+    querylog.log_value(level=level, lang=lang, session_id=utils.session_id(), username=username)
 
     try:
         hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
@@ -555,7 +555,7 @@ def parse():
 
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
-        'session': session_id(),
+        'session': utils.session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
         'lang': lang,
@@ -635,7 +635,7 @@ def report_error():
     post_body = request.json
 
     parse_logger.log({
-        'session': session_id(),
+        'session': utils.session_id(),
         'date': str(datetime.datetime.now()),
         'level': post_body.get('level'),
         'code': post_body.get('code'),
@@ -653,7 +653,7 @@ def report_client_exception():
     post_body = request.json
 
     querylog.log_value(
-        session=session_id(),
+        session=utils.session_id(),
         date=str(datetime.datetime.now()),
         client_error=post_body,
         version=version(),
@@ -1226,7 +1226,7 @@ def save_program(user):
 
     stored_program = {
         'id': program_id,
-        'session': session_id(),
+        'session': utils.session_id(),
         'date': timems(),
         'lang': g.lang,
         'version': version(),

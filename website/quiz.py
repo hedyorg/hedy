@@ -200,7 +200,7 @@ def routes(app, database, achievements):
 
             # Store the answer in the database. If we don't have a username,
             # use the session ID as a username.
-            username = current_user()['username'] or f'anonymous:{session_id()}'
+            username = current_user()['username'] or f'anonymous:{utils.session_id()}'
 
             DATABASE.record_quiz_answer(session['quiz-attempt-id'],
                                         username=username,
@@ -258,7 +258,7 @@ def routes(app, database, achievements):
         question_options = question_options_for(question)
 
         # use the session ID as a username.
-        username = current_user()['username'] or f'anonymous:{session_id()}'
+        username = current_user()['username'] or f'anonymous:{utils.session_id()}'
 
         quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
 
