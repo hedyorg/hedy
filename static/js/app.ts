@@ -1337,13 +1337,15 @@ function update_keywords_commands(target_id: any, start_lang: string, new_lang: 
   if (!ace.edit(target_id)) {
     return;
   }
+
   $.ajax({
     type: 'POST',
     url: '/translate_keywords',
     data: JSON.stringify({
       code: ace.edit(target_id).getValue(),
       start_lang: start_lang,
-      goal_lang: new_lang
+      goal_lang: new_lang,
+      level: window.State.level
     }),
     contentType: 'application/json',
     dataType: 'json'

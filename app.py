@@ -1457,8 +1457,8 @@ def change_language():
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
-    translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'))
-    translated_code = translated_code.replace("  ", " ") # Fixme: Remove added space: cause unknown
+    print(body)
+    translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
     if translated_code:
         return jsonify({'success': 200, 'code': translated_code})
     else:
