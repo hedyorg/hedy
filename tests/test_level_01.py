@@ -301,6 +301,16 @@ class TestsLevel1(HedyTester):
       extra_check_function=self.is_turtle()
     )
 
+  def test_turn_negative_number(self):
+    code = "turn -180"
+    expected = "t.right(-180)"
+    self.multi_level_tester(
+      max_level=3, #@Boryana, I can't get this to properly type check over level 3, can you have a peek what goes wrong?
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle()
+    )
+
   def test_one_turn_with_text_gives_type_error(self):
     code = "turn koekoek"
     self.multi_level_tester(

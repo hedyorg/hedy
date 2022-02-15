@@ -299,6 +299,15 @@ class TestsLevel6(HedyTester):
 
     self.single_level_tester(code=code, expected=expected, output='0')
 
+  def test_calc_vars_print_subtract(self):
+    code = textwrap.dedent("""\
+    print '5 min 5 is ' 5 - 5""")
+
+    expected = textwrap.dedent("""\
+    print(f'5 min 5 is {int(5) - int(5)}')""")
+
+    self.single_level_tester(code=code, expected=expected, output='5 min 5 is 0')
+
   def test_calc_vars_print_add_arabic(self):
     code = textwrap.dedent("""\
     nummer is ١
@@ -452,7 +461,6 @@ class TestsLevel6(HedyTester):
       code=code,
       expected=expected
     )
-
 
   def test_one_space_in_rhs_if(self):
     code = textwrap.dedent("""\

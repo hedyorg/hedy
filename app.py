@@ -1578,11 +1578,13 @@ def save_program(user):
     # For now, we bring all existing programs for the user and then search within them for repeated names.
     programs = DATABASE.programs_for_user(user['username']).records
     program_id = uuid.uuid4().hex
+    program_public = None
     overwrite = False
     for program in programs:
         if program['name'] == body['name']:
             overwrite = True
             program_id = program['id']
+            program_public = program.get('public', None)
             break
 
     stored_program = {
@@ -1594,7 +1596,8 @@ def save_program(user):
         'level': body['level'],
         'code': body['code'],
         'name': body['name'],
-        'username': user['username']
+        'username': user['username'],
+        'public': program_public
     }
 
     if 'adventure_name' in body:
@@ -1858,6 +1861,6 @@ if __name__ == '__main__':
     on_server_start()
 
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=not is_in_debugger, port=config['port'])
+    app.run(threaded=True, debug=not is_in_debugger, port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
