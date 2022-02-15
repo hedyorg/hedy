@@ -1389,6 +1389,7 @@ def get_admin_adventures_page(user):
         "creator": adventure.get('creator'),
         "name": adventure.get('name'),
         "level": adventure.get('level'),
+        "public": "Yes" if adventure.get('public') else "No",
         "date": utils.datetotimeordate(utils.mstoisostring(adventure.get('date')))
     } for adventure in DATABASE.all_adventures()]
     adventures = sorted(adventures, key=lambda d: d['date'], reverse=True)

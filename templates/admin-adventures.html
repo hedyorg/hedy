@@ -16,6 +16,7 @@
           <td id="teacher_header">Creator</td>
           <td id="students_header">Level</td>
           <td id="last_used_header">Created</td>
+          <td id="public_header">Public</td>
           <td id="last_used_header">View</td>
       </tr>
     </thead>
@@ -26,6 +27,7 @@
             <td class="teacher_cell">{{adventure.creator}}</td>
             <td class="students_cell">{{adventure.level}}</td>
             <td class="last_used_cell">{{adventure.date}}</td>
+            <td class="public_cell">{{adventure.public}}</td>
             <td id="statistics_cell"><a href="/for-teachers/customize-adventure/view/{{ adventure.id }}" target="_blank">Click here</a></td>
           </tr>
       {% endfor %}
