@@ -1,7 +1,7 @@
 import json
 
 import hedy
-from website.auth import requires_login, is_teacher, current_user
+from website.auth import requires_login, is_teacher
 import utils
 import uuid
 from flask import g, request, jsonify, redirect

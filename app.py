@@ -35,7 +35,7 @@ from flask_compress import Compress
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, admin, achievements, quiz_svg_icons
+from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements, quiz_svg_icons
 from website.log_fetcher import log_fetcher
 import quiz
 
