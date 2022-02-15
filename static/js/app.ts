@@ -54,12 +54,11 @@ var StopExecution = false;
           $('#editor').attr('lang', <string>$(preview).attr('lang'));
           update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
         }
-      });
-    } else {
-      if($(preview).attr('level')){
-        let level = String($(preview).attr('level'));
-        exampleEditor.session.setMode(getHighlighter(level));
-      }
+    });
+    }
+    if($(preview).attr('level')){
+      let level = String($(preview).attr('level'));
+      exampleEditor.session.setMode(getHighlighter(level));
     }
     if (window.State.keyword_language && window.State.other_keyword_language) {
       // Increase minLines otherwise the dropdown menu doesn't fit
