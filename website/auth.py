@@ -173,6 +173,7 @@ def validate_signup_data(account):
 
 
 def store_account_db(account, email):
+    print(account)
     username, hashed, hashed_token = prepare_user_db(account['username'], account['password'], account['email'])
 
     if not is_testing_request(request) and 'subscribe' in account and account['subscribe'] == True:

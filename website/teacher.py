@@ -372,13 +372,13 @@ def routes (app, database, achievements):
                 return {'error': g.auth_texts.get('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
             email = DATABASE.user_by_email(account.get('email').strip().lower())
             if email:
-                return {'error': g.auth_texts.get('emails_exist'), 'value': account.get('mail').strip().lower()}, 200
+                return {'error': g.auth_texts.get('emails_exist'), 'value': account.get('email').strip().lower()}, 200
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):
-            # Set the current user language as new account language
+            # Set the current teacher language as new account language
             account['language'] = g.lang
-            store_account_db(account, email)
+            store_account_db(account, account.get('email').strip().lower())
         return {'success': g.auth_texts.get('accounts_created')}, 200
       
     @app.route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])
