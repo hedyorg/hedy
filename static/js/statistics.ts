@@ -49,6 +49,16 @@ export const stats = {
       updateChart('exceptionsPerWeekChart', exceptionsPerWeekDatasets);
       updateSharedLegend('#admin-exceptions-legend', exceptionsPerLevelDatasets, '.admin-exceptions-chart');
 
+      // update user types per level and week charts
+      const anonymousRunsPerLevelDataset = generatePerLevelDataset('Anonymous users', response['per_level'], 'data.anonymous_runs', chart_colors[3], false);
+      const loggedRunsPerLevelDataset = generatePerLevelDataset('Logged users', response['per_level'], 'data.logged_runs', chart_colors[4], false);
+      const studentRunsPerLevelDataset = generatePerLevelDataset('Student users', response['per_level'], 'data.student_runs', chart_colors[5], false);
+      updateChart('usersPerLevelChart', [anonymousRunsPerLevelDataset, loggedRunsPerLevelDataset, studentRunsPerLevelDataset]);
+
+      const userTypes = ['anonymous_runs', 'logged_runs', 'student_runs'];
+      const userTypesPerWeekDatasets = generateDatasets(userTypes, response['per_week'], 'week', 'data.', chart_colors, true);
+      updateChart('usersPerWeekChart', userTypesPerWeekDatasets);
+
       // update quiz scores per level charts
       const completedQuizPerLevelDatasets = generatePerLevelDataset('Completed quizzes', response['per_level'], 'data.completed_quizzes', chart_success_color, true);
       const abandonedQuizPerLevelDatasets = generatePerLevelDataset('Abandoned quizzes', response['per_level'], 'data.abandoned_quizzes', chart_fail_color, true);
@@ -291,6 +301,9 @@ export const stats = {
 
     initChart('exceptionsPerLevelChart', 'line', 'Exceptions per level', 'Level #', null, false, false);
     initChart('exceptionsPerWeekChart', 'line', 'Exceptions per week', 'Week #', null, false, false);
+
+    initChart('usersPerLevelChart', 'bar', 'User types per level', 'Level #', 'top', false, true);
+    initChart('usersPerWeekChart', 'bar', 'User types per week', 'Week #', 'top', false, true);
 
     initChart('completedQuizPerLevelChart', 'bar', 'Completed quizzes per level', 'Level #', null, false, false);
     initChart('completedQuizPerWeekChart', 'bar', 'Completed quizzes per week', 'Week #', null, false, false);

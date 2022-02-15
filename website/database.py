@@ -284,10 +284,14 @@ class Database:
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({'creator': username})
 
+    def get_student_classes_ids(self, username):
+        ids = USERS.get({'username': username}).get('classes')
+        return list(ids) if ids else []
+
     def get_student_classes(self, username):
         """Return all the classes of which the user is a student."""
         classes = []
-        for class_id in USERS.get({'username': username}).get ('classes') or []:
+        for class_id in self.get_student_classes_ids(username):
             Class = self.get_class (class_id)
             classes.append ({'id': Class ['id'], 'name': Class ['name']})
 
@@ -444,19 +448,12 @@ class Database:
 
         return QUIZ_STATS.update(key, add_attributes)
 
-    def get_class_quiz_stats(self, users, start=None, end=None):
+    def get_quiz_stats(self, ids, start=None, end=None):
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
 
-        data = [QUIZ_STATS.get_many({'id': u, 'week': dynamo.Between(start_week, end_week)}, sort_key='week')
-                for u in users]
+        data = [QUIZ_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}, sort_key='week') for i in ids]
         return functools.reduce(operator.iconcat, data, [])
-
-    def get_all_quiz_stats(self, start=None, end=None):
-        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
-        end_week = self.to_year_week(self.parse_date(end, date.today()))
-
-        return QUIZ_STATS.get_many({'id': '@all', 'week': dynamo.Between(start_week, end_week)}, sort_key='week')
 
     def add_program_stats(self, id, level, exception):
         key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
@@ -469,18 +466,12 @@ class Database:
 
         return PROGRAM_STATS.update(key, add_attributes)
 
-    def get_class_program_stats(self, users, start=None, end=None):
+    def get_program_stats(self, ids, start=None, end=None):
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
 
-        data = [PROGRAM_STATS.get_many({'id': u, 'week': dynamo.Between(start_week, end_week)}, sort_key='week') for u in users]
+        data = [PROGRAM_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}, sort_key='week') for i in ids]
         return functools.reduce(operator.iconcat, data, [])
-
-    def get_all_program_stats(self, start=None, end=None):
-        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
-        end_week = self.to_year_week(self.parse_date(end, date.today()))
-
-        return PROGRAM_STATS.get_many({'id': '@all', 'week': dynamo.Between(start_week, end_week)}, sort_key='week')
 
     def parse_date(self, d, default):
         return date(*map(int, d.split('-'))) if d else default
