@@ -573,6 +573,27 @@ def parse():
     return jsonify(response)
 
 
+@app.route('/parse-by-id', methods=['POST'])
+@requires_login
+def parse_by_id(user):
+    body = request.json
+    #Validations
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('id'), str):
+        return 'class id must be a string', 400
+
+    program = DATABASE.program_by_id(body.get('id'))
+    if program and program.get('username') == user['username']:
+        try:
+            hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
+            return {}, 200
+        except:
+            return {"error": "parsing error"}, 200
+    else:
+        return 'this is not your program!', 400
+
+
 def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     try:
@@ -1286,11 +1307,20 @@ def explore(user):
 
     filtered_programs = []
     for program in programs:
+        # If program does not have an error value set -> parse it and set value
+        if 'error' not in program:
+            try:
+                hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
+                program['error'] = False
+            except:
+                program['error'] = True
+            DATABASE.store_program(program)
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
             'level': program['level'],
             'id': program['id'],
+            'error': program['error'],
             'code': "\n".join(program['code'].split("\n")[:4])
         })
 
@@ -1643,6 +1673,8 @@ def share_unshare_program(user):
         return 'id must be a string', 400
     if not isinstance(body.get('public'), bool):
         return 'public must be a boolean', 400
+    if not isinstance(body.get('error'), bool):
+        return 'parse error must be a boolean', 400
 
     result = DATABASE.program_by_id(body['id'])
     if not result or result['username'] != user['username']:
@@ -1653,7 +1685,7 @@ def share_unshare_program(user):
     if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
         DATABASE.set_favourite_program(user['username'], None)
 
-    DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
+    DATABASE.set_program_public_by_id(body['id'], bool(body['public']), bool(body['error']))
     achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
     if achievement:
         return jsonify({'achievement': achievement, 'id': body['id']})
