@@ -120,12 +120,11 @@
       </div>
     </div>
     <div class="order-5">
-      <br>
       <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
-        {% if prev_level and not hide_prev_level %}
+        {% if prev_level and (customizations['levels']|length == 0 or prev_level in customizations['levels']) %}
           <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{ui.regress_button}} {{ prev_level }}</button>
         {% endif %}
-        {% if next_level and not hide_next_level %}
+        {% if next_level and (customizations['levels']|length == 0 or next_level in customizations['levels']) %}
             <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ ui.advance_button }} {{ next_level }}</button>
         {% endif %}
       </div>

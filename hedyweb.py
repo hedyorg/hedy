@@ -19,7 +19,7 @@ class Translations:
   def __init__(self):
     self.data = {}
 
-    translations = glob.glob('coursedata/texts/*.yaml')
+    translations = utils.gather_content_files('texts')
     for trans_file in translations:
       lang = path.splitext(path.basename(trans_file))[0]
       self.data[lang] = YamlFile.for_file(trans_file)
@@ -36,7 +36,7 @@ class AchievementTranslations:
   def __init__(self):
     self.data = {}
 
-    translations = glob.glob('coursedata/achievements/*.yaml')
+    translations = utils.gather_content_files('achievements')
     for trans_file in translations:
       lang = path.splitext(path.basename(trans_file))[0]
       self.data[lang] = YamlFile.for_file(trans_file)
@@ -50,13 +50,13 @@ class AchievementTranslations:
 class PageTranslations:
   def __init__(self, page):
     self.data = {}
-    translations = glob.glob('coursedata/pages/' + page + '/*.yaml')
+    translations = utils.gather_content_files('pages', page)
     for file in translations:
       lang = path.splitext(path.basename(file))[0]
       self.data[lang] = YamlFile.for_file(file)
 
   def exists(self):
-    """Whether or not any data was found for this page."""
+    """Whether or not any content was found for this page."""
     return len(self.data) > 0
 
   def get_page_translations(self, language):
@@ -66,7 +66,7 @@ class PageTranslations:
     return d
 
 def get_page_title(current_page):
-  with open(f'coursedata/pages/pages.json', 'r', encoding='utf-8') as f:
+  with open(utils.construct_content_path('pages', 'pages.json'), 'r', encoding='utf-8') as f:
     page_titles_json = json.load(f)
 
   current_page = page_titles_json[current_page]
@@ -76,7 +76,7 @@ def get_page_title(current_page):
     return page_titles_json['start'].get("en")
 
 
-def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, restrictions, adventure_name):
+def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, customizations, teacher_adventures, adventure_name):
   user = current_user()
 
   if not level_defaults:
@@ -90,9 +90,8 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   arguments_dict['level'] = level_number
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
-  arguments_dict['example_programs'] = restrictions['example_programs']
-  arguments_dict['hide_prev_level'] = restrictions['hide_prev_level']
-  arguments_dict['hide_next_level'] = restrictions['hide_next_level']
+  arguments_dict['customizations'] = customizations
+  arguments_dict['teacher_adventures'] = teacher_adventures
   arguments_dict['menu'] = True
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'

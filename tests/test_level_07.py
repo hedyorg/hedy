@@ -61,6 +61,7 @@ class TestsLevel7(HedyTester):
 
     self.single_level_tester(code=code, expected=expected, output=output)
 
+
   def test_repeat_over_9_times(self):
 
     code = textwrap.dedent("""\
@@ -114,3 +115,20 @@ class TestsLevel7(HedyTester):
         expected=expected,
         expected_commands=['is', 'repeat', 'print', 'print'],
         output=output)
+
+  def test_if_and_repeat(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    if naam is Hedy repeat 3 times print 'Hallo Hedy!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      for i in range(int('3')):
+        print(f'Hallo Hedy!')
+        time.sleep(0.1)""")
+
+    self.single_level_tester(
+      code=code,
+      expected=expected)
+

@@ -14,8 +14,7 @@ class Snippet:
     self.level = level
     self.field_name = field_name
     self.code = code
-    filename_shorter = filename.split("/")[3]
-    self.language = filename_shorter.split(".")[0]
+    self.language = filename[-7:-5] #fetch the 2 letters before the .yaml extenstion, those are the name of the lang file, hence the lang
     self.adventure_name = adventure_name
     self.name = f'{self.language}-{self.level}-{self.field_name}'
 
@@ -74,7 +73,7 @@ class HedyTester(unittest.TestCase):
       res.append(t)
     return res
     
-  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None):
+  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None, lang='en'):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
 
@@ -93,7 +92,7 @@ class HedyTester(unittest.TestCase):
     # Or use expect to check for an expected Python program
     # In the second case, you can also pass an extra function to check
     for level in range(self.level, max_level + 1):
-      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands)
+      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands, lang=lang)
       print(f'Passed for level {level}')
 
   def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en'):
@@ -127,7 +126,7 @@ class HedyTester(unittest.TestCase):
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
         result = hedy.transpile(snippet.code, int(snippet.level), snippet.language)
-        all_commands = hedy.all_commands(snippet.code, snippet.level)
+        all_commands = hedy.all_commands(snippet.code, snippet.level, snippet.language)
 
         if not result.has_turtle and (not 'ask' in all_commands) and (not 'input' in all_commands): #output from turtle cannot be captured
           output = HedyTester.run_code(result)

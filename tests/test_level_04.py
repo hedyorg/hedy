@@ -287,15 +287,15 @@ class TestsLevel4(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
   def test_assign_print_chinese(self):
-    hashed_var = hedy.hash_var("你好世界")
-    self.assertEqual('v65396ee4aad0b4f17aacd1c6112ee364', hashed_var)
+    hashed_var = hedy.hash_var("你世界")
+    self.assertEqual('v406b71a2caed270b782fe8a1f2d5741a', hashed_var)
 
     code = textwrap.dedent("""\
-    你好世界 is 你好世界
-    print 你好世界""")
+    你世界 is 你好世界
+    print 你世界""")
     expected = textwrap.dedent("""\
-    v65396ee4aad0b4f17aacd1c6112ee364 = '你好世界'
-    print(f'{v65396ee4aad0b4f17aacd1c6112ee364}')""")
+    v406b71a2caed270b782fe8a1f2d5741a = '你好世界'
+    print(f'{v406b71a2caed270b782fe8a1f2d5741a}')""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -321,16 +321,17 @@ class TestsLevel4(HedyTester):
     print(f'jouw lievelingskleur is dus{kleur}!')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_ask_assign(self):
 
     code = textwrap.dedent("""
     ding is kleur
-    kleur is ask 'Wat is je lievelings ' ding
-    print 'Jouw favoriet is dus ' kleur""")
+    antwoord is ask 'Wat is je lievelings ' ding
+    print 'Jouw favoriet is dus ' antwoord""")
     expected = textwrap.dedent("""\
     ding = 'kleur'
-    kleur = input(f'Wat is je lievelings {ding}')
-    print(f'Jouw favoriet is dus {kleur}')""")
+    antwoord = input(f'Wat is je lievelings {ding}')
+    print(f'Jouw favoriet is dus {antwoord}')""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -431,22 +432,6 @@ class TestsLevel4(HedyTester):
     self.assertEqual(True, hedy.hash_needed('éyyy'))
     self.assertEqual(True, hedy.hash_needed('héyyy'))
     self.assertEqual(False, hedy.hash_needed('heyyy'))
-
-  def test_chained_assignments(self):
-    code = textwrap.dedent("""\
-    a is dog
-    b is a
-    print a b""")
-
-    expected = textwrap.dedent("""\
-    a = 'dog'
-    b = 'a'
-    print(f'{a}{b}')""")
-    self.multi_level_tester(
-      max_level=11,
-      code=code,
-      expected=expected
-    )
 
 
   def test_meta_column_missing_closing_quote(self):
