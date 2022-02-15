@@ -1,7 +1,7 @@
 //symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
 
 _SPACE: " "+
-_COMMA: _SPACE? (","|"،") _SPACE? //support latin and arabic comma;s and always allow these to be surrounded by spaces
+_COMMA: _SPACE* (","|"،") _SPACE* //support latin and arabic comma;s and always allow these to be surrounded by spaces
 _COLON: ":"
 _LEFT_BRACKET : "("
 _RIGHT_BRACKET : ")"
@@ -10,7 +10,7 @@ _RIGHT_SQUARE_BRACKET : "]"
 _HASH: "#"
 _SMALLER : "<"
 _LARGER: ">"
-_EQUALS: _SPACE? "=" _SPACE? //always allow = to be surrounded by spaces
+_EQUALS: _SPACE* "=" _SPACE* //always allow = to be surrounded by spaces
 _DOUBLE_EQUALS: "=="
 _NOT_EQUALS: "!="
 _SMALLER_EQUALS : "<="
@@ -19,10 +19,10 @@ _EXCLAMATION_MARK: "!"
 _QUESTION_MARK: "?"
 _PERIOD: "."
 _SINGLE_QUOTE: "'"
-_MULTIPLY: "*"
-_ADD: "+"
-_SUBTRACT: "-"
-_DIVIDE: "/"
+_MULTIPLY: _SPACE* "*" _SPACE*
+_ADD: _SPACE* "+" _SPACE*
+_SUBTRACT: _SPACE* "-" _SPACE* //TODO FH Jan '22 now to we use if for negative numbers too maybe minus is nicer/better?
+_DIVIDE: _SPACE* "/" _SPACE*
 
 start: program
 program: _EOL* (command _EOL+)* command?
@@ -42,8 +42,8 @@ _EOL: "\r"?"\n"
 text: /([^\n]+)/ -> text //anything can be parsed except for a newline
 textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline)
 
-NUMBER: /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
-INT: /[\p{Nl}\p{Nd}\p{No}]+/
+NUMBER: _SUBTRACT? /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
+INT: _SUBTRACT? /[\p{Nl}\p{Nd}\p{No}]+/
 
 // FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html
 // Exact grammar stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
