@@ -220,7 +220,7 @@ function create_language_selector(index: number, current_lang: string, other_lan
   return dropdownContainer
 }
 
-function getHighlighter(level: string) {
+export function getHighlighter(level: string) {
   const modeExceptions: Record<string, string> = {
         '9': 'ace/mode/level9and10',
         '10': 'ace/mode/level9and10',
