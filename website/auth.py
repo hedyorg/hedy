@@ -181,11 +181,7 @@ def routes(app, database):
             DATABASE.record_login(user['username'], new_hash)
         else:
             DATABASE.record_login(user['username'])
-
-        if user.get('is_teacher'):
-            resp = make_response({'teacher': True})
-        else:
-            resp = make_response({'teacher': False})
+        resp = make_response({})
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
@@ -473,6 +469,12 @@ def routes(app, database):
                    updates[field] = body[field]
            else:
                updates[field] = None
+
+        # We want to check if the user choose a new language, if so -> reload
+        # We can use g.lang for this to reduce the db calls
+        resp['reload'] = False
+        if g.lang != body['language']:
+            resp['reload'] = True
 
         if updates:
             DATABASE.update_user(username, updates)

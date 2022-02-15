@@ -9,32 +9,27 @@
   </div>
   <div class="w-full flex items-center justify-end ltr:ml-auto rtl:mr-auto ltr:mr-4 rtl:ml-4">
     <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (ui.level_title + ' ' + level_nr)}}">
-    <input type="submit" class="green-btn ltr:ml-2 rtl:mr-2 cursor-pointer" value="{{ ui.save_code_button }}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code());">
-    <input type="submit" class="green-btn ltr:ml-2 rtl:mr-2 cursor-pointer" value="{{ ui.share_code_button }}" onclick="hedyApp.share_program({{ level }}, '{{ g.lang }}', true, -1, true);">
-      <div class="dropdown inline-block relative ltr:ml-2 rtl:mr-2">
-          <button class="green-btn font-semibold rounded inline-flex items-center">
+    <input type="submit" class="green-btn mx-2 cursor-pointer" value="{{ ui.save_code_button }}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code());">
+    <input type="submit" class="green-btn mx-2 cursor-pointer" value="{{ ui.share_code_button }}" onclick="hedyApp.share_program({{ level }}, '{{ g.lang }}', true, -1, true);">
+      <div class="dropdown inline-block relative green-btn mx-2 cursor-pointer">
             <span class="ltr:mr-1 rtl:ml-1">{{ "🤔" }}</span>
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
           </button>
-          <div class="dropdown-menu absolute hidden z-40 ltr:right-0 rtl:left-0">
-              <ul class="rounded-lg border border-black bg-green-400 mt-2 list-none ltr:ml-0 rtl:mr-0 w-48">
-              {% for command in commands %}
-                <div class="justify-between my-2 {% if loop.index != commands|length %}shadow-md{% endif %} p-3 pl-4">
-                  <div class="font-thin text-base flex-grow mb-1" tabindex=0>
-                    {{ command.explanation|commonmark }}
-                  </div>
-                  <div class="flex">
-                    <div class="font-thin text-sm flex-grow" tabindex=0>
-                    </div>
-                    <button class="btn block flex-none self-end ml-1" style="min-width:6em"
-                      onclick='hedyApp.tryPaletteCode({{command.demo_code|tojson}});'>{{ui.try_button}}</button>
-                  </div>
+          <ul class="dropdown-menu absolute hidden rounded-lg border-black mt-2 pt-1 list-none ltr:ml-0 rtl:mr-0 ltr:right-0 rtl:left-0 w-48" style="width: 14rem; border-width: 1px; z-index: 15; background-color: #48BB78;">
+          {% for command in commands %}
+            <div class="justify-between my-2 shadow-md p-3 pl-4">
+              <div class="font-thin text-base flex-grow mb-1" tabindex=0>
+                {{ command.explanation|commonmark }}
+              </div>
+              <div class="flex">
+                <div class="font-thin text-sm flex-grow" tabindex=0>
                 </div>
-                {% endfor %}
-              </ul>
-          </div>
-      </div>
-  </div>
+                <button class="btn block flex-none self-end ml-1" style="min-width:6em"
+                  onclick='hedyApp.tryPaletteCode({{command.demo_code|tojson}});'>{{ui.try_button}}</button>
+              </div>
+            </div>
+            {% endfor %}
+          </ul>
+      </div>  </div>
 </div>
 <div class="flex-grow flex items-stretch">
 {% block levelbody %}{% endblock %}

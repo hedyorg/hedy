@@ -3,7 +3,7 @@ const yaml = require ('yaml');
 
 const ajv = new (require ('ajv'));
 
-const path = require ('path').join (process.argv [2], '../../coursedata/texts') + '/';
+const path = require ('path').join (process.argv [2], '../../content/texts') + '/';
 
 // The English translation is our reference
 const texts = yaml.parse (fs.readFileSync(path + 'en.yaml', 'utf8'));
