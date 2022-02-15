@@ -1,26 +1,22 @@
-**Please fill out this template by replacing all content between < >**
-
-< Provide a one line summary of your changes in the Title of the PR >
+Provide a general summary of your changes in the Title of the PR
 
 **Description**
 
-< Changes in detail > Use present tense without a subject to describe your PR, for example: "Adds translations of levels 1 to 12 to Polish"
+Describe your changes in detail. Please use present tense without a subject to describe your PR, for example: "Fix**es** issue 123" or "Adds translations of levels 1 to 12 for Polish"
 
-**Fixes < issue or discussion number >**
+**Fix for**
 
-< Always link the number of the issue or of the discussion that your pr concerns. >
-Notable exception: adding content may be done without an accompanying issue 
+Describe what issue or discussion your pr concerns
 
 **How to test**
 
-< If this is a UI change, describe how to run your code to see it in action. See this https://github.com/Felienne/hedy/pull/880#issue-1016304308 for an example >
-< If this is a language change, add a few tests showing the difference >
+Describe how to run your code to see it is action. See this https://github.com/Felienne/hedy/pull/880#issue-1016304308 for an example.
 
 **Checklist**
-Done? Check if you have it all in place using this list*
-  
-- [ ] Describes changes in the format above (present tense)
-- [ ] Links to an existing issue or discussion 
-- [ ] Has a "How to test" section
 
-* If you're unsure about any of these, don't hesitate to ask. We're here to help!
+If you're unsure about any of these, don't hesitate to ask. We're here to help!
+- [ ] Links to an existing issue or discussion (if not, create an issue first)
+- [ ] Describes changes clear in the format above (present tense, no subject)
+- [ ] Has a "how to test" section
+- [ ] Only one thing is done in this pull request (specifically please try to refrain from mixing textual changes to the yamls from code changes)
+
