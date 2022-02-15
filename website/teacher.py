@@ -14,7 +14,7 @@ from config import config
 cookie_name     = config ['session'] ['cookie_name']
 
 
-def routes (app, database, achievements):
+def routes(app, database, achievements):
     global DATABASE
     global ACHIEVEMENTS
     DATABASE = database

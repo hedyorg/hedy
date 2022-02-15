@@ -22,22 +22,21 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, \
-    is_teacher, update_is_teacher, pick
+    is_teacher, update_is_teacher, session_id
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
 
 # app.py
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, url_for, Markup
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
 from flask_helpers import render_template
 from flask_compress import Compress
 
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements, quiz_svg_icons
+from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
-import quiz
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
@@ -1043,21 +1042,12 @@ def explore(user):
                            page_title=hedyweb.get_page_title('explore'),
                            current_page='explore')
 
+
 @app.route('/change_language', methods=['POST'])
 def change_language():
     body = request.json
     session['lang'] = body.get('lang')
     return jsonify({'succes': 200})
-
-
-def session_id():
-    """Returns or sets the current session ID."""
-    if 'session_id' not in session:
-        if os.getenv('IS_TEST_ENV') and 'X-session_id' in request.headers:
-            session['session_id'] = request.headers['X-session_id']
-        else:
-            session['session_id'] = uuid.uuid4().hex
-    return session['session_id']
 
 
 @app.template_global()
@@ -1481,6 +1471,11 @@ admin.routes(app, DATABASE)
 # *** ACHIEVEMENTS BACKEND
 
 ACHIEVEMENTS.routes(app, DATABASE)
+
+# *** QUIZ BACKEND
+
+from website import quiz
+quiz.routes(app, DATABASE, ACHIEVEMENTS)
 
 # *** STATISTICS ***
 
