@@ -4,16 +4,16 @@ File with quiz logic.
 Today, this does not yet contain the Flask routers, although in the future it
 should (once we can move the code because we have vanquished the global variables).
 
-For now, it contains helper functions that work on the quiz data.
+For now, it contains helper functions that work on the quiz content.
 """
-
+from utils import construct_content_path
 from website.yaml_file import YamlFile
 
 MAX_ATTEMPTS = 3
 
 
 def quiz_data_file_for(lang, level):
-    quiz_file = YamlFile.for_file(f'coursedata/quizzes/{lang}.yaml')
+    quiz_file = YamlFile.for_file(construct_content_path('quizzes', f'{lang}.yaml'))
     if not quiz_file.exists():
         return None
     if level not in quiz_file['levels'].keys():
@@ -22,7 +22,7 @@ def quiz_data_file_for(lang, level):
 
 
 def get_question(quiz_data, question_number):
-    """Return the question from the data based on a 1-based question_number.
+    """Return the question from the content based on a 1-based question_number.
 
     Return None if no such question.
     """

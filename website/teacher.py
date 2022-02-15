@@ -59,6 +59,9 @@ def routes (app, database, achievements):
         if achievement:
             achievement = json.dumps(achievement)
 
+        teachers = os.getenv('BETA_TEACHERS', '').split(',')
+        is_beta_teacher = user['username'] in teachers
+
         invites = []
         for invite in DATABASE.get_class_invites(Class['id']):
             invites.append({'username': invite['username'], 'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))})
@@ -66,6 +69,7 @@ def routes (app, database, achievements):
         return render_template ('class-overview.html', current_page='my-profile',
                                 page_title=hedyweb.get_page_title('class overview'),
                                 achievement=achievement, invites=invites,
+                                is_beta_teacher=is_beta_teacher,
                                 class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class ['link'],
                                             'name': Class ['name'], 'id': Class ['id']})
 
