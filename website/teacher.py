@@ -352,15 +352,9 @@ def routes (app, database, achievements):
         usernames = []
         mails = []
 
-        print(body)
-
         # Validation for correct types and duplicates
         for account in body.get('accounts', []):
-            print("Is even kijken!")
-            print(account)
             validation = validate_signup_data(account)
-
-            print(validation)
             if validation:
                 return validation, 400
             if account.get('username').strip().lower() in usernames:
