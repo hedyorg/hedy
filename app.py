@@ -16,8 +16,6 @@ import os
 from os import path
 import re
 import traceback
-import uuid
-from ruamel import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
