@@ -152,7 +152,6 @@ def prepare_user_db(username, password, email):
     token = make_salt()
     hashed_token = hash(token, make_salt())
     username = username.strip().lower()
-    email = email.strip().lower()
 
     return username, hashed, hashed_token
 
@@ -171,6 +170,7 @@ def validate_signup_data(account):
     if len(account.get('password')) < 6:
         return g.auth_texts.get('passwords_six')
     return None
+
 
 def store_account_db(account, email):
     username, hashed, hashed_token = prepare_user_db(account['username'], account['password'], account['email'])

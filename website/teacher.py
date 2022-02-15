@@ -1,9 +1,7 @@
 import json
 import urllib
 
-from website.auth import requires_login, is_teacher, MAILCHIMP_API_URL, \
-    mailchimp_subscribe_user, send_email, send_email_template, email_base_url, validate_signup_data, \
-    prepare_user_db, store_account_db
+from website.auth import requires_login, is_teacher, validate_signup_data, store_account_db
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
