@@ -2894,11 +2894,11 @@ Level 14 supports:
   </tr>
   <tr>
     <td>== | is | = (comparison)</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command)</td>
+    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before command) + list (after command)</td>
   </tr>
   <tr>
     <td>!=</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before !=) + list (after !=)</td>
+    <td>string (before !=) + string (after !=) | integer (before !=) + integer (after !=) | float (before !=) + float (after !=) | list (before !=) + list (after !=)</td>
   </tr>
   <tr>
     <td><=</td>
@@ -3163,11 +3163,11 @@ Level 15 supports:
   </tr>
   <tr>
     <td>== | is | = (comparison)</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command)</td>
+    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before command) + list (after command)</td>
   </tr>
   <tr>
     <td>!=</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before !=) + list (after !=)</td>
+    <td>string (before !=) + string (after !=) | integer (before !=) + integer (after !=) | float (before !=) + float (after !=) | list (before !=) + list (after !=)</td>
   </tr>
   <tr>
     <td><=</td>
@@ -3443,11 +3443,11 @@ Level 16 supports:
   </tr>
   <tr>
     <td>== | is | = (comparison)</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command)</td>
+    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before command) + list (after command)</td>
   </tr>
   <tr>
     <td>!=</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before !=) + list (after !=)</td>
+    <td>string (before !=) + string (after !=) | integer (before !=) + integer (after !=) | float (before !=) + float (after !=) | list (before !=) + list (after !=)</td>
   </tr>
   <tr>
     <td><=</td>
