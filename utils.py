@@ -206,7 +206,7 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
                            default=g.ui_texts.get("default_" + str(error))), error
 
 def gather_content_files(*path) -> List[str]:
-    return glob.glob(f"{construct_content_path(*path)}{os.path.sep}.*yaml")
+    return glob.glob(f"{construct_content_path(*path)}{os.path.sep}*.yaml")
 
 def construct_content_path(*path) -> str:
     utility_script_location = Path(__file__).parent.absolute()
