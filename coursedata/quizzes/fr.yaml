@@ -1054,98 +1054,80 @@ levels:
             hint: "Seul 'Il descend et remonte' est répété 3 fois."
             question_score: 10
         7:
-            question_text: "What will be the output from this code?"
+            question_text: "Quelle sera la sortie de ce code ?"
             code: |-
                 repeat 2 times 'We will'
                 print 'ROCK YOU!'
             mp_choice_options:
                 -   "code": "We will We will\nROCK YOU!"
-                    "feedback": "'We will' won't appear twice in the same line"
+                    "feedback": "'We will' n'apparait pas 2 fois sur la même ligne"
                 -   "code": "We will\nWe will\nROCK YOU!"
-                    "feedback": "Great!"
+                    "feedback": "Bien !"
                 -   "code": "We will\nROCK YOU!\nWe will\nROCK YOU!"
-                    "feedback": "ROCK YOU! won't be repeated"
+                    "feedback": "ROCK YOU! n'apparait qu'une fois !"
                 -   "code": "We will\nROCK YOU!"
-                    "feedback": "Mind the repeat command"
+                    "feedback": "Pense à la commande `repeat`"
             correct_answer: "B"
-            hint: "Mind the repeat command."
+            hint: "Regarde où est la commande `repeat`"
             question_score: 10
         8:
-            question_text: "What Hedy code belongs to this output?"
+            question_text: "Quel sera le code pour avoir cette sortie ?"
             code: |-
-                Here comes the sun
-                Do do do do
-                Here comes the sun
-                And I say
-                Its alright
+                1 2 3
+                chocolat
+                1 2 3
+                4 5 6
+                cassis
             mp_choice_options:
-                -   "code": "print 'Here comes the sun'\nprint 'Do do do do'\nprint 'Here comes\
-              \ the sun'\nprint 'And I say'\nprint 'Its alright'"
-                    "feedback": "Perfect, you can't use the repeat command here."
-                -   "code": "repeat 2 times print 'Here comes the sun'\nprint 'And I say'\nprint\
-              \ 'Its alright'"
-                    "feedback": "Where did the 'Do do do do' go?"
-                -   "code": "repeat 2 times print 'Here comes the sun'\nprint 'Do do do do'\nprint\
-              \ 'And I say'\nprint 'Its alright'"
-                    "feedback": "This is not in the right order"
-                -   "code": "repeat 2 times print 'Here comes the sun'\nrepeat 2 times print 'Do\
-              \ do'\nprint 'And I say'\nprint 'Its alright'"
-                    "feedback": "This is not in the right order"
-            correct_answer: "D"
-            hint: "Repeat can only be used if you want the exact same line 2 (or more) times\
-            \ in a row."
+                -   "code": "print '1 2 3'\nprint 'chocolat'\nprint '1 2 3'\nprint '4 5 6'\nprint 'cassis'"
+                    "feedback": "Parfait, tu ne peux pas utilisé la commande `repeat` ici"
+                -   "code": "repeat 2 times print '1 2 3'\nprint '4 5 6'\nprint 'cassis'"
+                    "feedback": "Où est passé le 'chocolat' ?"
+                -   "code": "repeat 2 times print '1 2 3'\nprint 'chocolat'\nprint '4 5 6'\nprint 'cassis'"
+                    "feedback": "Ce n'est pas dans le bon ordre"
+                -   "code": "repeat 2 times print '1 2 3'\nrepeat 2 times print 'Do do'\nprint '4 5 6'\nprint 'cassis'"
+                    "feedback": "Ce n'est pas dans le bon ordre"
+            correct_answer: "A"
+            hint: "On ne peut utiliser la `repeat` que si l'on veut avoir exactement la même ligne 2 fois (ou plus) de suite."
             question_score: 10
         9:
-            question_text: "What Hedy code belongs to this output?"
+            question_text: "Quel sera le code pour avoir cette sortie ?"
             code: |-
-                Batman was flying though Gotham.
-                When suddenly he heard someone screaming...
-                Help!
-                Help!
-                Help!
-                Please help me!
+                Batman survolait Gotham.
+                Quand soudain, il a entendu quelqu'un crier...
+                Au secours !
+                Au secours !
+                Au secours !
+                Aidez moi !
             mp_choice_options:
-                -   "code": "print 'Batman was flying though Gotham. '\nprint 'When suddenly he\
-              \ heard someone screaming...'\nprint 'Help!'\nrepeat 3 times print 'Please\
-              \ help me!'"
+                -   "code": "print 'Batman survolait Gotham.'\nprint 'Quand soudain, il a entendu quelqu'un crier...'\nprint 'Au secours !'\nrepeat 3 times print 'Aidez moi !'"
                     "feedback": "You repeated the wrong line"
-                -   "code": "print 'Batman was flying though Gotham.' \nprint 'When suddenly he\
-              \ heard someone screaming...'\nrepeat 3 times 'Help!'\nprint 'Please help\
-              \ me!'\nfeedback: \"You missed the word print in line 3\""
-                -   "code": "print Batman was flying though Gotham.\nprint When suddenly he heard\
-              \ someone screaming...\nrepeat 3 times print Help!\nprint Please help me!"
+                -   "code": "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu'un crier...'\nrepeat 3 times 'Au secours !'\nprint 'Aidez moi !'\nfeedback: \"You missed the word print in line 3\""
+                -   "code": "print Batman survolait Gotham.\nprint Quand soudain, il a entendu quelqu'un crier...\nrepeat 3 times print Au secours !\nprint Aidez moi !"
                     "feedback": "You forgot about the quotation marks"
-                -   "code": "print 'Batman was flying though Gotham.' \nprint 'When suddenly he\
-              \ heard someone screaming...'\nrepeat 3 times print 'Help!'\nprint 'Please\
-              \ help me!'"
+                -   "code": "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu'un crier...'\nrepeat 3 times print 'Au secours !'\nprint 'Aidez moi !'"
                     "feedback": "Perfect"
             correct_answer: "D"
-            hint: "'Help!' is repeated 3 times."
+            hint: "'Au secours !' doit apparaître 3 fois"
             question_score: 10
         10:
-            question_text: "What Hedy code belongs to this output?"
+            question_text: "Quel sera le code pour avoir cette sortie ?"
             code: |-
-                if youre happy and you know it clap your hands
-                if youre happy and you know it clap your hands
-                if youre happy and you know it and you really want to show it
-                if youre happy and you know it clap your hands
+                Si tu es content tape dans tes mains !
+                Si tu es content tape dans tes mains !
+                Si tu es vraiment content tape dans tes mains !
+                Si tu es content tape dans tes mains !
             mp_choice_options:
-                -   "code": "repeat 2 times 'if youre happy and you know it clap your hands'\nprint\
-              \ 'if youre happy and you know it and you really want to show it'\nprint 'if\
-              \ youre happy and you know it clap your hands'"
-                    "feedback": "Almost! the first line needs an extra word"
-                -   "code": "repeat 2 times print 'if youre happy and you know it clap your hands'\n\
-              print 'if youre happy and you know it and you really want to show it'\nprint\
-              \ 'if youre happy and you know it clap your hands'"
-                    "feedback": "Great!"
-                -   "code": "repeat 3 times print 'if youre happy and you know it clap your hands'\n\
-              print 'if youre happy and you know it and you really want to show it'"
-                    "feedback": "This is not in the right order."
-                -   "code": "repeat 4 times 'if youre happy and you know it'\nrepeat 2 times 'clap\
-              \ your hands'\nprint 'and you really want to show it'\nprint 'clap your hands'"
-                    "feedback": "This is not in the right order."
+                -   "code": "repeat 2 times 'Si tu es content tape dans tes mains !'\nprint 'Si tu es vraiment content tape dans tes mains !'\nprint 'Si tu es content tape dans tes mains !'"
+                    "feedback": "Il manque une commande !"
+                -   "code": "repeat 2 times print 'Si tu es content tape dans tes mains !'\nprint 'Si tu es vraiment content tape dans tes mains !'\nprint 'Si tu es content tape dans tes mains !'"
+                    "feedback": "Bien !"
+                -   "code": "repeat 3 times print 'Si tu es content tape dans tes mains !'\nprint 'Si tu es vraiment content tape dans tes mains !'"
+                    "feedback": "Ce n'est pas le bon ordre."
+                -   "code": "repeat 4 times print 'Si tu es content'\nprint 'vraiment'\nrepeat 4 times print 'clap your hands'"
+                    "feedback": "Ce n'est pas le bon ordre."
             correct_answer: "B"
-            hint: "Mind the order of the sentences."
+            hint: "Fais attention à l'ordre des phrases."
             question_score: 10
 
     9:
