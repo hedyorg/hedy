@@ -1,9 +1,8 @@
 import json
-import urllib
 
-from website.auth import requires_login, is_teacher, validate_signup_data, store_account_db
+from website.auth import validate_signup_data, store_account_db
 import hedy
-from website.auth import requires_login, is_teacher, current_user, is_admin
+from website.auth import requires_login, is_teacher, is_admin
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
@@ -13,7 +12,7 @@ import hedyweb
 import hedy_content
 TRANSLATIONS = hedyweb.Translations ()
 from config import config
-cookie_name     = config ['session'] ['cookie_name']
+cookie_name = config['session']['cookie_name']
 
 
 def routes (app, database, achievements):
