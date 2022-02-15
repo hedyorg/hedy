@@ -1,7 +1,7 @@
 import json
 
 import hedy
-from website.auth import requires_login, is_teacher, current_user
+from website.auth import requires_login, is_teacher, current_user, is_admin
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
@@ -330,12 +330,15 @@ def routes (app, database, achievements):
     @app.route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])
     @requires_login
     def view_adventure(user, adventure_id):
-        if not is_teacher(user):
+        if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message='retrieve_adventure')
         adventure = DATABASE.get_adventure(adventure_id)
-        if not adventure or adventure['creator'] != user['username']:
+        if not adventure:
             return utils.error_page(error=404, ui_message='no_such_adventure')
+        if adventure['creator'] != user['username'] and not is_admin(user):
+            return utils.error_page(error=403, ui_message='retrieve_adventure')
 
+        # Add id with current level to the <pre> tag to let syntax highlighting know which highlighting we need!
         adventure['content'] = adventure['content'].replace("<pre>", "<pre id='" + str(adventure['level']) + "'>")
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=hedyweb.get_page_title('view adventure'), current_page='my-profile')

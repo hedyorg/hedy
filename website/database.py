@@ -284,6 +284,9 @@ class Database:
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({'creator': username})
 
+    def all_adventures(self):
+        return ADVENTURES.scan()
+
     def get_student_classes(self, username):
         """Return all the classes of which the user is a student."""
         classes = []
