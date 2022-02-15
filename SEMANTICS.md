@@ -19,11 +19,11 @@ Level 1 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>string</td>
   </tr>
   <tr>
     <td>ask</td>
-    <td>integer | string</td>
+    <td>string</td>
   </tr>
   <tr>
     <td>forward</td>
@@ -35,7 +35,7 @@ Level 1 supports:
   </tr>
   <tr>
     <td>echo</td>
-    <td>integer | string | empty</td>
+    <td>string | empty</td>
   </tr>
 </tbody>
 </table>
@@ -144,30 +144,32 @@ Level 2 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
-    <td>string (before `is`) + any (after `is`)</td>
+    <td>string (before `is`) + string (after `is`)</td>
   </tr>
     <tr>
     <td>sleep</td>
-    <td> empty | integer</td>
+    <td>empty | integer</td>
   </tr>
 </tbody>
 </table>
+
+* From this level on, we have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 #### Correct Programs
 
@@ -284,19 +286,19 @@ Level 3 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -320,6 +322,8 @@ Level 3 supports:
   </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 #### Correct Programs
 
@@ -468,19 +472,19 @@ Level 4 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -504,6 +508,8 @@ Level 4 supports:
   </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 
 #### Correct Programs
@@ -653,19 +659,19 @@ Level 5 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -695,8 +701,14 @@ Level 5 supports:
     <td>if else</td>
     <td>boolean</td>
   </tr>
+  <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 #### Correct Programs
 
@@ -866,19 +878,19 @@ Level 6 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -908,8 +920,14 @@ Level 6 supports:
     <td>if else</td>
     <td>boolean</td>
   </tr>
+  <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 #### Correct Programs
 
@@ -1110,19 +1128,19 @@ Level 7 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1153,11 +1171,17 @@ Level 7 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>integer + 'times' | input + 'times'</td>
   </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 
 #### Correct Programs
@@ -1368,19 +1392,19 @@ Level 8 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1411,11 +1435,17 @@ Level 8 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>integer + 'times' | input + 'times'</td>
   </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. 
 
 
 #### Correct Programs
@@ -1630,19 +1660,19 @@ Level 9 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1673,11 +1703,17 @@ Level 9 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>integer + 'times' | input + 'times'</td>
   </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 
 #### Correct Programs
@@ -1891,19 +1927,19 @@ Level 10 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1934,8 +1970,12 @@ Level 10 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>integer + 'times' | input + 'times'</td>
   </tr>
   <tr>
     <td>for</td>
@@ -1943,6 +1983,8 @@ Level 10 supports:
   </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 #### Correct Programs
 
@@ -2160,11 +2202,11 @@ Level 11 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -2195,11 +2237,17 @@ Level 11 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input) </td>
   </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 #### Correct Programs
 
@@ -2376,11 +2424,11 @@ Level 12 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string | float</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string | float</td>
+    <td>ask*</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
     <td>is | =</td>
@@ -2411,11 +2459,17 @@ Level 12 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
   </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 #### Correct Programs
 
@@ -2601,11 +2655,11 @@ Level 13 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string | float</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string | float</td>
+    <td>ask*</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
     <td>is | =</td>
@@ -2636,19 +2690,25 @@ Level 13 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
   </tr>
   <tr>
     <td>and</td>
-    <td>boolean (before `and`) + boolean (after `and`)</td>
+    <td>boolean (on both sides of `and`)</td>
   </tr>
   <tr>
     <td>or</td>
-    <td>boolean (before `or`) + boolean (after `or`)</td>
+    <td>boolean (on both sides of `or`)</td>
   </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
 
 #### Correct Programs
 
@@ -2838,11 +2898,11 @@ Level 14 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string | float</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string | float</td>
+    <td>ask*</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
     <td>is | = (assignment)</td>
@@ -2873,43 +2933,50 @@ Level 14 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
   </tr>
   <tr>
     <td>and</td>
-    <td>boolean (before `and`) + boolean (after `and`)</td>
+    <td>boolean (on both sides of `and`)</td>
   </tr>
   <tr>
     <td>or</td>
-    <td>boolean (before `or`) + boolean (after `or`)</td>
+    <td>boolean (on both sides of `or`)</td>
   </tr>
   <tr>
-    <td><</td>
-    <td>integer (before <) + integer (after <) | float (before <) + float (after <)</td>
+    <td>< **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>></td>
-    <td>integer (before >) + integer (after >) | float (before >) + float (after >)</td>
+    <td>> **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>== | is | = (comparison)</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before command) + list (after command)</td>
+    <td>== | is | = (comparison)**</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td>!=</td>
-    <td>string (before !=) + string (after !=) | integer (before !=) + integer (after !=) | float (before !=) + float (after !=) | list (before !=) + list (after !=)</td>
+    <td>!= **</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td><=</td>
-    <td>integer (before <=) + integer (after <=) | float (before <=) + float (after <=)</td>
+    <td><= **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>>=</td>
-    <td>integer (before >=) + integer (after >=) | float (before >=) + float (after >=)</td>
+    <td>>= **</td>
+    <td>integer | float | input</td>
   </tr>
 </tbody>
 </table>
+
+* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`.
+** All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
 
 #### Correct Programs
 
@@ -3140,6 +3207,10 @@ Level 15 supports:
   <tr>
     <td>if else</td>
     <td>boolean</td>
+  </tr>
+  <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
   </tr>
   <tr>
     <td>for</td>
@@ -3418,8 +3489,8 @@ Level 16 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
   </tr>
   <tr>
     <td>for</td>
@@ -3710,8 +3781,8 @@ Level 17 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
   </tr>
   <tr>
     <td>for</td>
