@@ -1116,24 +1116,6 @@ def modify_query(**new_values):
     return '{}?{}'.format(request.path, url_encode(args))
 
 
-def no_none_sense(d):
-    """Remove all None values from a dict."""
-    return {k: v for k, v in d.items() if v is not None}
-
-
-def split_markdown_front_matter(md):
-    parts = re.split('^---', md, 1, re.M)
-    if len(parts) == 1:
-        return {}, md
-    # safe_load returns 'None' if the string is empty
-    front_matter = yaml.safe_load(parts[0]) or {}
-    if not isinstance(front_matter, dict):
-        # There was some kind of parsing error
-        return {}, md
-
-    return front_matter, parts[1]
-
-
 def render_main_menu(current_page):
     """Render a list of(caption, href, selected, color) from the main menu."""
     return [dict(
