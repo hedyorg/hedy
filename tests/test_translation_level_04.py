@@ -61,27 +61,6 @@ class TestsTranslationLevel4(HedyTester):
 
         self.assertEqual(expected, result)
 
-    def test_ask_vraag_var_name_reverse(self):
-        code = textwrap.dedent("""\
-        print 'Im Hedy the fortune teller!'
-        ask is ask 'What do you want to know?'
-        print 'This is your question: ' question
-        answers is yes, no, maybe
-        print 'My crystal ball says...'
-        sleep 2
-        print answers at random""")
-
-        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
-        expected = textwrap.dedent("""\
-        print 'Im Hedy the fortune teller!'
-        ask is vraag 'What do you want to know?'
-        print 'This is your question: ' question
-        answers is yes, no, maybe
-        print 'My crystal ball says...'
-        slaap 2
-        print answers op willekeurig""")
-
-        self.assertEqual(expected, result)
 
     def test_print_nl_en(self):
         code = "print 'Hello welcome to Hedy.'"
