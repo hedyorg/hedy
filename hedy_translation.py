@@ -6,6 +6,8 @@ import hedy
 import yaml
 from os import path
 
+from utils import construct_content_path
+
 TRANSLATOR_LOOKUP = {}
 
 KEYWORD_LANGUAGES = ['en', 'nl', 'es']
@@ -14,7 +16,7 @@ def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
 
-    keywords_path = 'coursedata/keywords/'
+    keywords_path = construct_content_path('keywords')
     yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r') as stream:

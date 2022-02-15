@@ -42,7 +42,7 @@ import quiz
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
-# Define and load all available language data
+# Define and load all available language content
 ALL_LANGUAGES = {
     'en': 'English',
     'nl': 'Nederlands',
@@ -681,6 +681,7 @@ def achievements_page():
     username = user['username']
     if not username:
         # redirect users to /login if they are not logged in
+        # Todo: TB -> I wrote this once, but wouldn't it make more sense to simply throw a 302 error?
         url = request.url.replace('/my-achievements', '/login')
         return redirect(url, code=302)
 
@@ -1377,6 +1378,24 @@ def get_admin_classes_page(user):
 
     return render_template('admin-classes.html', classes=classes, page_title=hedyweb.get_page_title('admin'))
 
+@app.route('/admin/adventures', methods=['GET'])
+@requires_login
+def get_admin_adventures_page(user):
+    if not is_admin(user):
+        return utils.error_page(error=403, ui_message='unauthorized')
+
+    adventures = [{
+        "id": adventure.get('id'),
+        "creator": adventure.get('creator'),
+        "name": adventure.get('name'),
+        "level": adventure.get('level'),
+        "public": "Yes" if adventure.get('public') else "No",
+        "date": utils.datetotimeordate(utils.mstoisostring(adventure.get('date')))
+    } for adventure in DATABASE.all_adventures()]
+    adventures = sorted(adventures, key=lambda d: d['date'], reverse=True)
+
+    return render_template('admin-adventures.html', adventures=adventures, page_title=hedyweb.get_page_title('admin'))
+
 
 @app.route('/admin/stats', methods=['GET'])
 @requires_login
@@ -1695,15 +1714,17 @@ def update_public_profile(user):
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
-    source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml').to_dict()
-    source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml').to_dict()
-    source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml').to_dict()
-    source_keywords = YamlFile.for_file(f'coursedata/keywords/{source}.yaml').to_dict()
+    source_file = f'{source}.yaml'
+    source_adventures = YamlFile.for_file(utils.construct_content_path('adventures', source_file)).to_dict()
+    source_levels = YamlFile.for_file(utils.construct_content_path('level-defaults', source_file)).to_dict()
+    source_texts = YamlFile.for_file(utils.construct_content_path('texts', source_file)).to_dict()
+    source_keywords = YamlFile.for_file(utils.construct_content_path('keywords', source_file)).to_dict()
 
-    target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml').to_dict()
-    target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml').to_dict()
-    target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml').to_dict()
-    target_keywords = YamlFile.for_file(f'coursedata/keywords/{target}.yaml').to_dict()
+    target_file = f'{target}.yaml'
+    target_adventures = YamlFile.for_file(utils.construct_content_path('adventures', target_file)).to_dict()
+    target_levels = YamlFile.for_file(utils.construct_content_path('level-defaults', target_file)).to_dict()
+    target_texts = YamlFile.for_file(utils.construct_content_path('texts', target_file)).to_dict()
+    target_keywords = YamlFile.for_file(utils.construct_content_path('keywords', target_file)).to_dict()
 
     files = []
 
@@ -1735,10 +1756,10 @@ def translate_fromto(source, target):
 
 @app.route('/update_yaml', methods=['POST'])
 def update_yaml():
-    filename = path.join('coursedata', request.form['file'])
-    # The file MUST point to something inside our 'coursedata' directory
+    filename = utils.construct_content_path(request.form['file'])
+    # The file MUST point to something inside our 'content' directory
     filepath = path.abspath(filename)
-    expected_path = path.abspath('coursedata')
+    expected_path = utils.construct_content_path()
     if not filepath.startswith(expected_path):
         raise RuntimeError('Invalid path given')
 
