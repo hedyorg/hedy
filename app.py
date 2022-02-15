@@ -683,6 +683,7 @@ def version_page():
                            heroku_release_time=the_date,
                            commit=commit)
 
+
 def achievements_page():
     user = current_user()
     username = user['username']
@@ -695,6 +696,7 @@ def achievements_page():
 
     return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
                            template_achievements=achievement_translations, current_page='my-profile')
+
 
 @app.route('/programs', methods=['GET'])
 @requires_login
