@@ -285,6 +285,7 @@ class TestsLevel6(HedyTester):
     print(f'{int(nummer) * int(nummertwee)}')""")
 
     self.single_level_tester(code=code, expected=expected, output='30')
+
   def test_calc_vars_print_divide(self):
     code = textwrap.dedent("""\
     nummer is 5
@@ -297,6 +298,28 @@ class TestsLevel6(HedyTester):
     print(f'{int(nummer) // int(nummertwee)}')""")
 
     self.single_level_tester(code=code, expected=expected, output='0')
+
+  def test_calc_vars_print_subtract(self):
+    code = textwrap.dedent("""\
+    print '5 min 5 is ' 5 - 5""")
+
+    expected = textwrap.dedent("""\
+    print(f'5 min 5 is {int(5) - int(5)}')""")
+
+    self.single_level_tester(code=code, expected=expected, output='5 min 5 is 0')
+
+  def test_calc_vars_print_add_arabic(self):
+    code = textwrap.dedent("""\
+    nummer is ١
+    nummertwee is ١
+    print nummer + nummertwee""")
+
+    expected = textwrap.dedent("""\
+    nummer = '١'
+    nummertwee = '١'
+    print(f'{int(nummer) + int(nummertwee)}')""")
+
+    self.single_level_tester(code=code, expected=expected, output='2')
 
   def test_calc_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
