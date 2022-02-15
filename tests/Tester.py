@@ -1,6 +1,6 @@
 import unittest
 import app
-import hedy
+import hedy, hedy_translation
 import re
 import sys
 import io
@@ -101,6 +101,7 @@ class HedyTester(unittest.TestCase):
     if exception is not None:
       with self.assertRaises(exception) as context:
         result = hedy.transpile(code, level, lang)
+
       if extra_check_function is not None:
         self.assertTrue(extra_check_function(context))
 
@@ -110,6 +111,12 @@ class HedyTester(unittest.TestCase):
     if expected is not None:
       result = hedy.transpile(code, level, lang)
       self.assertEqual(expected, result.code)
+
+      # if it transpiles we should be able to translate too
+      to_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
+      back_to_english = hedy_translation.translate_keywords(to_dutch, from_lang="nl", to_lang=lang, level=self.level)
+      self.assertEqual(code, back_to_english)
+
       all_commands = hedy.all_commands(code, level, lang)
       if expected_commands is not None:
         self.assertEqual(expected_commands, all_commands)
@@ -118,6 +125,7 @@ class HedyTester(unittest.TestCase):
       if output is not None:
         self.assertEqual(output, HedyTester.run_code(result))
         self.assertTrue(extra_check_function(result))
+
 
   @staticmethod
   def validate_Hedy_code(snippet):
