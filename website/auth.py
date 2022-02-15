@@ -163,7 +163,7 @@ def validate_signup_data(account):
         return g.auth_texts.get('username_special'), 400
     if len(account.get('username').strip()) < 3:
         return g.auth_texts.get('username_three'), 400
-    if not isinstance(account.get('mail'), str) or not utils.valid_email(account.get('mail')):
+    if not isinstance(account.get('email'), str) or not utils.valid_email(account.get('email')):
         return g.auth_texts.get('email_invalid')
     if not isinstance(account.get('password'), str):
         return g.auth_texts.get('password_invalid')

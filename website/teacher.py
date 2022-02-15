@@ -339,6 +339,8 @@ def routes (app, database, achievements):
         if not is_teacher(user):
             return 'Only teachers can create multiple accounts', 403
         body = request.json
+
+        print(body)
         #Validations
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
@@ -356,8 +358,8 @@ def routes (app, database, achievements):
             if account.get('username').strip().lower() in usernames:
                 return {'error': g.auth_texts.get('unique_usernames'), 'value': account.get('username')}, 200
             usernames.append(account.get('username').strip().lower())
-            if account.get('mail').strip().lower() in mails:
-                return {'error': g.auth_texts.get('unique_emails'), 'value': account.get('mail')}, 200
+            if account.get('email').strip().lower() in mails:
+                return {'error': g.auth_texts.get('unique_emails'), 'value': account.get('email')}, 200
             mails.append(account.get('mail').strip().lower())
 
         # Validation for duplicates in the db
@@ -368,7 +370,7 @@ def routes (app, database, achievements):
             user = DATABASE.user_by_username(account.get('username').strip().lower())
             if user:
                 return {'error': g.auth_texts.get('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
-            email = DATABASE.user_by_email(account.get('mail').strip().lower())
+            email = DATABASE.user_by_email(account.get('email').strip().lower())
             if email:
                 return {'error': g.auth_texts.get('emails_exist'), 'value': account.get('mail').strip().lower()}, 200
 
