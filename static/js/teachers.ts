@@ -432,12 +432,12 @@ export function add_account_placeholder() {
     let row = $("#account_row_unique").clone();
     row.removeClass('hidden');
     row.attr('id', "");
-
-    // Set all inputs to required (expect for class)
-    $('.username').prop('required',true);
-    $('.email').prop('required',true);
-    $('.password').prop('required',true);
-
+    // Set all inputs expect class to required
+    row.find(':input').each(function() {
+       if ($(this).prop('id') != 'classes') {
+           $(this).prop('required', true);
+       }
+    });
     row.appendTo("#account_rows_container");
 }
 
