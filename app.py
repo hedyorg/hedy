@@ -42,7 +42,7 @@ import quiz
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
-# Define and load all available language data
+# Define and load all available language content
 ALL_LANGUAGES = {
     'en': 'English',
     'nl': 'Nederlands',
@@ -511,6 +511,10 @@ def parse():
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
                 exception = ex
+            except hedy.exceptions.UnquotedEqualityCheck as ex:
+                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Location'] = ex.error_location
+                exception = ex
         try:
             if transpile_result.has_turtle:
                 response['Code'] = TURTLE_PREFIX_CODE + transpile_result.code
@@ -584,10 +588,10 @@ def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     try:
         result = hedy.transpile(code, level, lang_)
-        add_program_stats(username, level)
+        statistics.add(username, lambda id_: DATABASE.add_program_stats(id_, level, None))
         return result
     except Exception as ex:
-        add_program_stats(username, level, get_class_name(ex))
+        statistics.add(username, lambda id_: DATABASE.add_program_stats(id_, level, get_class_name(ex)))
         raise
 
 
@@ -595,16 +599,6 @@ def get_class_name(i):
     if i is not None:
         return str(i.__class__.__name__)
     return i
-
-
-def add_program_stats(username, level, ex=None):
-    try:
-        DATABASE.add_program_stats('@all', level, ex)
-        if username:
-            DATABASE.add_program_stats(username, level, ex)
-    except Exception as ex:
-        # Adding stats should not cause failure. Log and continue.
-        querylog.log_value(server_error=ex)
 
 
 def hedy_error_to_response(ex, translations):
@@ -708,6 +702,7 @@ def achievements_page():
     username = user['username']
     if not username:
         # redirect users to /login if they are not logged in
+        # Todo: TB -> I wrote this once, but wouldn't it make more sense to simply throw a 302 error?
         url = request.url.replace('/my-achievements', '/login')
         return redirect(url, code=302)
 
@@ -839,6 +834,8 @@ def get_quiz_start(level):
     session['total_score'] = 0
     session['correct_answer'] = 0
 
+    statistics.add(current_user()['username'], lambda id_: DATABASE.add_quiz_started(id_, level))
+
     return render_template('startquiz.html', level=level, next_assignment=1)
 
 
@@ -931,31 +928,29 @@ def quiz_finished(level):
     g.prefix = '/hedy'
 
     achievement = None
-    if current_user()['username']:
-        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "next_question")
-        if round(session.get('total_score', 0) / quiz.max_score(questions) * 100) == 100:
+    total_score = round(session.get('total_score', 0) / quiz.max_score(questions) * 100)
+    username = current_user()['username']
+    if username:
+        statistics.add(username, lambda id_: DATABASE.add_quiz_finished(id_, level, total_score))
+
+        achievement = ACHIEVEMENTS.add_single_achievement(username, "next_question")
+        if total_score == 100:
             if achievement:
-                achievement.append(ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")[0])
+                achievement.append(ACHIEVEMENTS.add_single_achievement(username, "quiz_master")[0])
             else:
-                achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "quiz_master")
+                achievement = ACHIEVEMENTS.add_single_achievement(username, "quiz_master")
         if achievement:
             achievement = json.dumps(achievement)
 
-    print(achievement)
-
-    # use the session ID as a username.
-    username = current_user()['username'] or f'anonymous:{session_id()}'
-
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
-                           total_score=round(session.get('total_score', 0) / quiz.max_score(questions) * 100),
+                           total_score=total_score,
                            level_source=level,
                            achievement=achievement,
                            level=int(level) + 1,
                            questions=questions,
                            next_assignment=1,
-                           cross = quiz_svg_icons.icons['cross'],
-                           check = quiz_svg_icons.icons['check'],
-                            )
+                           cross=quiz_svg_icons.icons['cross'],
+                           check=quiz_svg_icons.icons['check'])
 
 
 @app.route('/quiz/submit_answer/<int:level_source>/<int:question_nr>/<int:attempt>', methods=["POST"])
@@ -1127,14 +1122,20 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures, restrictions = DATABASE.get_student_restrictions(load_adventures_per_level(g.lang, level),
-                                                                 current_user()['username'], level)
+    adventures = load_adventures_per_level(g.lang, level)
+    customizations = {}
+    if current_user()['username']:
+        customizations = DATABASE.get_student_class_customizations(current_user()['username'])
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
-    if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
+    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in customizations['levels']):
         return utils.error_page(error=404, ui_message='no_such_level')
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
+
+    teacher_adventures = []
+    for adventure in customizations.get('teacher_adventures', []):
+        teacher_adventures.append(DATABASE.get_adventure(adventure))
 
     return hedyweb.render_code_editor_with_tabs(
         level_defaults=defaults,
@@ -1142,7 +1143,8 @@ def index(level, step):
         level_number=level,
         version=version(),
         adventures=adventures,
-        restrictions=restrictions,
+        customizations=customizations,
+        teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
 
@@ -1251,16 +1253,20 @@ def main_page(page):
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        print(for_teacher_translations)
         if is_teacher(user):
             welcome_teacher = session.get('welcome-teacher') or False
             session.pop('welcome-teacher', None)
-            teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(
-                current_user()['username'], True)
+            teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(current_user()['username'], True)
+            adventures = []
+            for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+                adventures.append({'id': adventure.get('id'), 'name': adventure.get('name'),
+                                   'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+                                   'level': adventure.get('level')})
+
             return render_template('for-teachers.html', current_page='my-profile',
                                    page_title=hedyweb.get_page_title(page),
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
-                                   welcome_teacher=welcome_teacher)
+                                   teacher_adventures=adventures, welcome_teacher=welcome_teacher)
         else:
             return utils.error_page(error=403, ui_message='not_teacher')
 
@@ -1274,7 +1280,8 @@ def main_page(page):
 
 
 @app.route('/explore', methods=['GET'])
-def explore():
+@requires_login
+def explore(user):
     level = request.args.get('level', default=None, type=str)
     adventure = request.args.get('adventure', default=None, type=str)
 
@@ -1390,8 +1397,34 @@ def get_admin_classes_page(user):
     if not is_admin(user):
         return utils.error_page(error=403, ui_message='unauthorized')
 
-    classes = DATABASE.all_classes()
+    # Retrieving the user for each class to find the "last_used" is expensive -> improve when we have 100+ classes
+    classes = [{
+        "name": Class.get('name'),
+        "teacher": Class.get('teacher'),
+        "students": len(Class.get('students')) if 'students' in Class else 0,
+        "id": Class.get('id'),
+        "last_used": utils.datetotimeordate(utils.mstoisostring(DATABASE.user_by_username(Class.get('teacher')).get('last_login')))} for Class in DATABASE.all_classes()]
+    classes = sorted(classes, key=lambda d: d['last_used'], reverse=True)
+
     return render_template('admin-classes.html', classes=classes, page_title=hedyweb.get_page_title('admin'))
+
+@app.route('/admin/adventures', methods=['GET'])
+@requires_login
+def get_admin_adventures_page(user):
+    if not is_admin(user):
+        return utils.error_page(error=403, ui_message='unauthorized')
+
+    adventures = [{
+        "id": adventure.get('id'),
+        "creator": adventure.get('creator'),
+        "name": adventure.get('name'),
+        "level": adventure.get('level'),
+        "public": "Yes" if adventure.get('public') else "No",
+        "date": utils.datetotimeordate(utils.mstoisostring(adventure.get('date')))
+    } for adventure in DATABASE.all_adventures()]
+    adventures = sorted(adventures, key=lambda d: d['date'], reverse=True)
+
+    return render_template('admin-adventures.html', adventures=adventures, page_title=hedyweb.get_page_title('admin'))
 
 
 @app.route('/admin/stats', methods=['GET'])
@@ -1713,15 +1746,17 @@ def update_public_profile(user):
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
-    source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml').to_dict()
-    source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml').to_dict()
-    source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml').to_dict()
-    source_keywords = YamlFile.for_file(f'coursedata/keywords/{source}.yaml').to_dict()
+    source_file = f'{source}.yaml'
+    source_adventures = YamlFile.for_file(utils.construct_content_path('adventures', source_file)).to_dict()
+    source_levels = YamlFile.for_file(utils.construct_content_path('level-defaults', source_file)).to_dict()
+    source_texts = YamlFile.for_file(utils.construct_content_path('texts', source_file)).to_dict()
+    source_keywords = YamlFile.for_file(utils.construct_content_path('keywords', source_file)).to_dict()
 
-    target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml').to_dict()
-    target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml').to_dict()
-    target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml').to_dict()
-    target_keywords = YamlFile.for_file(f'coursedata/keywords/{target}.yaml').to_dict()
+    target_file = f'{target}.yaml'
+    target_adventures = YamlFile.for_file(utils.construct_content_path('adventures', target_file)).to_dict()
+    target_levels = YamlFile.for_file(utils.construct_content_path('level-defaults', target_file)).to_dict()
+    target_texts = YamlFile.for_file(utils.construct_content_path('texts', target_file)).to_dict()
+    target_keywords = YamlFile.for_file(utils.construct_content_path('keywords', target_file)).to_dict()
 
     files = []
 
@@ -1753,10 +1788,10 @@ def translate_fromto(source, target):
 
 @app.route('/update_yaml', methods=['POST'])
 def update_yaml():
-    filename = path.join('coursedata', request.form['file'])
-    # The file MUST point to something inside our 'coursedata' directory
+    filename = utils.construct_content_path(request.form['file'])
+    # The file MUST point to something inside our 'content' directory
     filepath = path.abspath(filename)
-    expected_path = path.abspath('coursedata')
+    expected_path = utils.construct_content_path()
     if not filepath.startswith(expected_path):
         raise RuntimeError('Invalid path given')
 
@@ -1820,7 +1855,6 @@ def teacher_invitation(code):
     session['welcome-teacher'] = True
     url = request.url.replace(f'/invite/{code}', '/for-teachers')
     return redirect(url)
-
 
 # *** AUTH ***
 

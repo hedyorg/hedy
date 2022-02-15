@@ -55,6 +55,35 @@ class TestsLevel14(HedyTester):
       expected=expected,
     )
 
+  def test_inequality_Hindi(self):
+    code = textwrap.dedent(f"""\
+    उम्र is ask 'आप कितने साल के हैं?'
+    if उम्र > 12
+        print 'आप मुझसे छोटे हैं!'
+    else
+        print 'आप मुझसे बड़े हैं!'""")
+    expected = textwrap.dedent(f"""\
+      v6cdeb9dc4e33aa47ac927755899137f2 = input(f'आप कितने साल के हैं?')
+      try:
+        v6cdeb9dc4e33aa47ac927755899137f2 = int(v6cdeb9dc4e33aa47ac927755899137f2)
+      except ValueError:
+        try:
+          v6cdeb9dc4e33aa47ac927755899137f2 = float(v6cdeb9dc4e33aa47ac927755899137f2)
+        except ValueError:
+          pass
+      if str(v6cdeb9dc4e33aa47ac927755899137f2).zfill(100)>str(12).zfill(100):
+        print(f'आप मुझसे छोटे हैं!')
+      else:
+        print(f'आप मुझसे बड़े हैं!')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+    )
+
+
+
   @parameterized.expand(HedyTester.equality_comparison_commands)
   def test_equality_with_string(self, comparison):
     code = textwrap.dedent(f"""\
