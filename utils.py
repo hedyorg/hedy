@@ -7,6 +7,8 @@ import os
 import re
 import string
 import random
+import uuid
+
 from ruamel import yaml
 from website import querylog
 import commonmark
@@ -14,7 +16,7 @@ commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 from bs4 import BeautifulSoup
 from flask_helpers import render_template
-from flask import g
+from flask import g, session, request
 
 IS_WINDOWS = os.name == 'nt'
 
@@ -200,3 +202,14 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
                            page_error=page_error or g.ui_texts.get(ui_message) or '',
                            default=g.ui_texts.get("default_" + str(error))), error
+
+
+def session_id():
+    """Returns or sets the current session ID."""
+    if 'session_id' not in session:
+        if os.getenv('IS_TEST_ENV') and 'X-session_id' in request.headers:
+            session['session_id'] = request.headers['X-session_id']
+        else:
+            session['session_id'] = uuid.uuid4().hex
+    return session['session_id']
+

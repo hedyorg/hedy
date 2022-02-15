@@ -699,13 +699,3 @@ def email_base_url():
     if from_env:
         return from_env.rstrip('/')
     return request.host_url
-
-def session_id():
-    """Returns or sets the current session ID."""
-    if 'session_id' not in session:
-        if os.getenv('IS_TEST_ENV') and 'X-session_id' in request.headers:
-            session['session_id'] = request.headers['X-session_id']
-        else:
-            session['session_id'] = uuid.uuid4().hex
-    return session['session_id']
-

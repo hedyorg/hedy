@@ -3,7 +3,7 @@ import uuid
 
 from config import config
 from website import statistics
-from website.auth import current_user, session_id
+from website.auth import current_user
 import utils
 from flask import request, g, session, redirect, url_for
 from flask_helpers import render_template
