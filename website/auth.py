@@ -1,6 +1,4 @@
 import os
-import uuid
-
 import utils
 from website.yaml_file import YamlFile
 import bcrypt
