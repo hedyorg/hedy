@@ -45,7 +45,7 @@ class HedyTester(unittest.TestCase):
     else:
       code = app.NORMAL_PREFIX_CODE + parse_result.code
 # remove sleep comments to make program execution less slow
-    code = re.sub(r'time\.sleep\([^)]*\)', '', code)
+    code = re.sub(r'time\.sleep\([^)]*\)', 'pass', code)
 
     with HedyTester.captured_output() as (out, err):
       exec(code)

@@ -98,9 +98,19 @@ TURTLE_PREFIX_CODE = textwrap.dedent("""\
 """)
 
 # Preamble that will be used for non-Turtle programs
+# numerals list generated from: https://replit.com/@mevrHermans/multilangnumerals
+
 NORMAL_PREFIX_CODE = textwrap.dedent("""\
     # coding=utf8
     import random, time
+    global int_saver
+    int_saver = int
+    def int(s):
+      if isinstance(s, str):
+        numerals_dict = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '𑁦': '0', '𑁧': '1', '𑁨': '2', '𑁩': '3', '𑁪': '4', '𑁫': '5', '𑁬': '6', '𑁭': '7', '𑁮': '8', '𑁯': '9', '०': '0', '१': '1', '२': '2', '३': '3', '४': '4', '५': '5', '६': '6', '७': '7', '८': '8', '९': '9', '૦': '0', '૧': '1', '૨': '2', '૩': '3', '૪': '4', '૫': '5', '૬': '6', '૭': '7', '૮': '8', '૯': '9', '੦': '0', '੧': '1', '੨': '2', '੩': '3', '੪': '4', '੫': '5', '੬': '6', '੭': '7', '੮': '8', '੯': '9', '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9', '೦': '0', '೧': '1', '೨': '2', '೩': '3', '೪': '4', '೫': '5', '೬': '6', '೭': '7', '೮': '8', '೯': '9', '୦': '0', '୧': '1', '୨': '2', '୩': '3', '୪': '4', '୫': '5', '୬': '6', '୭': '7', '୮': '8', '୯': '9', '൦': '0', '൧': '1', '൨': '2', '൩': '3', '൪': '4', '൫': '5', '൬': '6', '൭': '7', '൮': '8', '൯': '9', '௦': '0', '௧': '1', '௨': '2', '௩': '3', '௪': '4', '௫': '5', '௬': '6', '௭': '7', '௮': '8', '௯': '9', '౦': '0', '౧': '1', '౨': '2', '౩': '3', '౪': '4', '౫': '5', '౬': '6', '౭': '7', '౮': '8', '౯': '9', '၀': '0', '၁': '1', '၂': '2', '၃': '3', '၄': '4', '၅': '5', '၆': '6', '၇': '7', '၈': '8', '၉': '9', '༠': '0', '༡': '1', '༢': '2', '༣': '3', '༤': '4', '༥': '5', '༦': '6', '༧': '7', '༨': '8', '༩': '9', '᠐': '0', '᠑': '1', '᠒': '2', '᠓': '3', '᠔': '4', '᠕': '5', '᠖': '6', '᠗': '7', '᠘': '8', '᠙': '9', '០': '0', '១': '1', '២': '2', '៣': '3', '៤': '4', '៥': '5', '៦': '6', '៧': '7', '៨': '8', '៩': '9', '๐': '0', '๑': '1', '๒': '2', '๓': '3', '๔': '4', '๕': '5', '๖': '6', '๗': '7', '๘': '8', '๙': '9', '໐': '0', '໑': '1', '໒': '2', '໓': '3', '໔': '4', '໕': '5', '໖': '6', '໗': '7', '໘': '8', '໙': '9', '꧐': '0', '꧑': '1', '꧒': '2', '꧓': '3', '꧔': '4', '꧕': '5', '꧖': '6', '꧗': '7', '꧘': '8', '꧙': '9', '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4', '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9', '〇': '0', '一': '1', '二': '2', '三': '3', '四': '4', '五': '5', '六': '6', '七': '7', '八': '8', '九': '9', '零': '0'}
+        latin_numerals = ''.join([numerals_dict[letter] for letter in s])
+        return int_saver(latin_numerals)
+      return(int_saver(s))
 """)
 
 
@@ -681,6 +691,7 @@ def achievements_page():
     username = user['username']
     if not username:
         # redirect users to /login if they are not logged in
+        # Todo: TB -> I wrote this once, but wouldn't it make more sense to simply throw a 302 error?
         url = request.url.replace('/my-achievements', '/login')
         return redirect(url, code=302)
 
@@ -1377,6 +1388,24 @@ def get_admin_classes_page(user):
 
     return render_template('admin-classes.html', classes=classes, page_title=hedyweb.get_page_title('admin'))
 
+@app.route('/admin/adventures', methods=['GET'])
+@requires_login
+def get_admin_adventures_page(user):
+    if not is_admin(user):
+        return utils.error_page(error=403, ui_message='unauthorized')
+
+    adventures = [{
+        "id": adventure.get('id'),
+        "creator": adventure.get('creator'),
+        "name": adventure.get('name'),
+        "level": adventure.get('level'),
+        "public": "Yes" if adventure.get('public') else "No",
+        "date": utils.datetotimeordate(utils.mstoisostring(adventure.get('date')))
+    } for adventure in DATABASE.all_adventures()]
+    adventures = sorted(adventures, key=lambda d: d['date'], reverse=True)
+
+    return render_template('admin-adventures.html', adventures=adventures, page_title=hedyweb.get_page_title('admin'))
+
 
 @app.route('/admin/stats', methods=['GET'])
 @requires_login
@@ -1568,11 +1597,13 @@ def save_program(user):
     # For now, we bring all existing programs for the user and then search within them for repeated names.
     programs = DATABASE.programs_for_user(user['username']).records
     program_id = uuid.uuid4().hex
+    program_public = None
     overwrite = False
     for program in programs:
         if program['name'] == body['name']:
             overwrite = True
             program_id = program['id']
+            program_public = program.get('public', None)
             break
 
     stored_program = {
@@ -1584,7 +1615,8 @@ def save_program(user):
         'level': body['level'],
         'code': body['code'],
         'name': body['name'],
-        'username': user['username']
+        'username': user['username'],
+        'public': program_public
     }
 
     if 'adventure_name' in body:
@@ -1848,6 +1880,6 @@ if __name__ == '__main__':
     on_server_start()
 
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=not is_in_debugger, port=config['port'])
+    app.run(threaded=True, debug=not is_in_debugger, port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.

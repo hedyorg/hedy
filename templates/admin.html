@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="bg-white w-1/2 mx-auto px-8 py-8 shadow-md rounded-lg">
+<div class="bg-white w-3/4 mx-auto px-8 py-8 shadow-md rounded-lg">
     <div class="flex flex-col items-center">
         <h1>Admin overview</h1>
         <div>
@@ -11,6 +11,7 @@
     <div class="mt-8 flex flex-row items-center justify-center">
         <button class="green-btn text-xl m-2 p-4 section-button"  onclick="window.open('/admin/users', '_self')">Users overview</button>
         <button class="green-btn text-xl m-2 p-4 section-button"  onclick="window.open('/admin/classes', '_self')">Classes overview</button>
+        <button class="green-btn text-xl m-2 p-4 section-button"  onclick="window.open('/admin/adventures', '_self')">Adventures overview</button>
         <button class="green-btn text-xl m-2 p-4 section-button"  onclick="window.open('/admin/stats', '_self')">Statistics</button>
     </div>
 </div>
