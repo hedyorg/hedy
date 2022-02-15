@@ -1390,7 +1390,7 @@ def get_admin_adventures_page(user):
         "name": adventure.get('name'),
         "level": adventure.get('level'),
         "date": utils.datetotimeordate(utils.mstoisostring(adventure.get('date')))
-    } for adventure in DATABASE.all_classes()]
+    } for adventure in DATABASE.all_adventures()]
     adventures = sorted(adventures, key=lambda d: d['date'], reverse=True)
 
     return render_template('admin-adventures.html', adventures=adventures, page_title=hedyweb.get_page_title('admin'))
