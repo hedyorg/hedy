@@ -326,7 +326,7 @@ def routes(app, database):
         email = DATABASE.user_by_email(body['email'].strip().lower())
         if email:
             return g.auth_texts.get('exists_email'), 403
-        return store_account_db(body, email)
+        return store_account_db(body, body['email'].strip().lower())
 
     @app.route('/auth/verify', methods=['GET'])
     def verify_email():
