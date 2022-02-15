@@ -91,3 +91,27 @@ class TestsTranslationLevel3(HedyTester):
 
 
         self.assertEqual(expected, result)
+
+    def test_issue_1856_v3(self):
+        code = textwrap.dedent("""\
+        print Hoi Ik ben Hedy de Waarzegger
+        vraag is ask Wat wil je weten?
+        print vraag
+        antwoorden is ja, nee, misschien
+        print Mijn glazen bol zegt...
+        slaap 2
+        print antwoorden op willekeurig""")
+
+        expected = textwrap.dedent("""\
+        print Hoi Ik ben Hedy de Waarzegger
+        vraag is ask Wat wil je weten?
+        print vraag
+        antwoorden is ja, nee, misschien
+        print Mijn glazen bol zegt...
+        sleep 2
+        print antwoorden at random""")
+
+        result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
+
+
+        self.assertEqual(expected, result)
