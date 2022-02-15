@@ -305,7 +305,7 @@ class TestsLevel1(HedyTester):
     code = "turn -180"
     expected = "t.right(-180)"
     self.multi_level_tester(
-      max_level=3, #@Boryana, I can't get this to properly type check over level 3, can you have a peek what goes wrong?
+      max_level=self.max_turtle_level,
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle()

@@ -316,7 +316,7 @@ class ExtractAST(Transformer):
     def NUMBER(self, args):
         return Tree('number', [str(args)])
 
-    def NUMBER_WITH_NEGATIVE(self, args):
+    def NEGATIVE_NUMBER(self, args):
         return Tree('number', [str(args)])
 
     #level 2
@@ -778,7 +778,7 @@ class Filter(Transformer):
     def number(self, args, meta):
         return True, ''.join([c for c in args]), meta
 
-    def NUMBER_WITH_NEGATIVE(self, args, meta=None):
+    def NEGATIVE_NUMBER(self, args, meta=None):
         return True, ''.join([c for c in args]), meta
 
     def text(self, args, meta):
@@ -815,7 +815,7 @@ class UsesTurtle(Transformer):
     def NUMBER(self, args):
         return False
 
-    def NUMBER_WITH_NEGATIVE(self, args):
+    def NEGATIVE_NUMBER(self, args):
         return False
 
 class AllCommands(Transformer):
@@ -882,7 +882,7 @@ class AllCommands(Transformer):
     def NUMBER(self, args):
         return []
 
-    def NUMBER_WITH_NEGATIVE(self, args):
+    def NEGATIVE_NUMBER(self, args):
         return []
 
     def text(self, args):
@@ -922,7 +922,7 @@ class AllPrintArguments(Transformer):
     def NUMBER(self, args):
         return []
 
-    def NUMBER_WITH_NEGATIVE(self, args):
+    def NEGATIVE_NUMBER(self, args):
         return []
 
     def text(self, args):
@@ -1172,7 +1172,7 @@ class ConvertToPython_1(ConvertToPython):
     def number(self, args):
         return str(args[0])
 
-    def number_with_negative(self, args):
+    def NEGATIVE_NUMBER(self, args):
         return str(args[0])
 
     def print(self, args):
@@ -1603,7 +1603,7 @@ class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
         return ''.join(args)
 
-    def number_with_negative(self, args):
+    def NEGATIVE_NUMBER(self, args):
         return ''.join(args)
 
     def process_token_or_tree(self, argument):
