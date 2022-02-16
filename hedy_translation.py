@@ -44,6 +44,8 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
     program_root = parser.parse(input_string + '\n').children[0]
 
+    # FH Feb 2022 todo trees containing invalid nodes are happily translated, should be stopped here!
+
     translated_program = TRANSLATOR_LOOKUP[level](keyword_dict, punctuation_symbols).transform(program_root)
 
     return translated_program
@@ -98,10 +100,16 @@ class ConvertToLang1(Transformer):
         return self.keywords["ask"] + " " + "".join([str(c) for c in args])
 
     def turn(self, args):
-        return self.keywords["turn"] + " " + "".join([str(c) for c in args])
+        if args:
+            return self.keywords["turn"] + " " + "".join([str(c) for c in args])
+        else:
+            return self.keywords["turn"]
 
     def forward(self, args):
-        return self.keywords["forward"] + " " + "".join([str(c) for c in args])
+        if args:
+            return self.keywords["forward"] + " " + "".join([str(c) for c in args])
+        else:
+            return self.keywords["forward"]
 
     def random(self, args):
         return self.keywords["random"] + "".join([str(c) for c in args])
@@ -110,8 +118,13 @@ class ConvertToLang1(Transformer):
         return ' '.join([str(c) for c in args])
 
     def __default__(self, data, children, meta):
+        # FH feb 2022 I am not sure I love this deafult, wouldn't it vbe better to:
+        # throw so we know something has not been translated? OR
+        # just flatten the string with data + ''.join(children) to do a sensible guess?
         return Tree(data, children, meta)
 
+    def comment(self, args):
+        return f"#{''.join(args)}"
 
 @hedy_translator(level=2)
 class ConvertToLang2(ConvertToLang1):

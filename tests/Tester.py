@@ -95,7 +95,7 @@ class HedyTester(unittest.TestCase):
       self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands, lang=lang)
       print(f'Passed for level {level}')
 
-  def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en'):
+  def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en', translate=True):
     if level is None: # no level set (from the multi-tester)? grap current level from class
       level = self.level
     if exception is not None:
@@ -112,10 +112,16 @@ class HedyTester(unittest.TestCase):
       result = hedy.transpile(code, level, lang)
       self.assertEqual(expected, result.code)
 
-      # if it transpiles we should be able to translate too
-      to_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
-      back_to_english = hedy_translation.translate_keywords(to_dutch, from_lang="nl", to_lang=lang, level=self.level)
-      self.assertEqual(code, back_to_english)
+      if translate:
+        if lang == 'en': # if it is English
+          # and if the code transpiles (evidenced by the fact that we reach this line) we should be able to translate too
+          in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
+          back_in_english = hedy_translation.translate_keywords(in_dutch, from_lang="nl", to_lang=lang, level=self.level)
+          self.assertEqual(code, back_in_english)
+        else: #not English? translate to it and back!
+          in_english = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)
+          back_in_org = hedy_translation.translate_keywords(in_english, from_lang="en", to_lang=lang, level=self.level)
+          self.assertEqual(code, back_in_org)
 
       all_commands = hedy.all_commands(code, level, lang)
       if expected_commands is not None:
