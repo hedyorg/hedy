@@ -435,3 +435,60 @@ export function select_all_level_adventures(level: string) {
     }
 }
 
+export function add_account_placeholder() {
+    let row = $("#account_row_unique").clone();
+    row.removeClass('hidden');
+    row.attr('id', "");
+    // Set all inputs expect class to required
+    row.find(':input').each(function() {
+       if ($(this).prop('id') != 'classes') {
+           $(this).prop('required', true);
+       }
+    });
+    row.appendTo("#account_rows_container");
+}
+
+export function create_accounts() {
+    modal.confirm (auth.texts['create_accounts_prompt'], function () {
+        $('#account_rows_container').find(':input').each(function () {
+            $(this).removeClass('border-2 border-red-500');
+        });
+        let accounts: {}[] = [];
+        $('.account_row').each(function () {
+            if ($(this).is(':visible')) { //We want to skip the hidden first "copy" row
+                let account = {};
+                $(this).find(':input').each(function () {
+                    // @ts-ignore -> Not sure why TypeScript has issues, this should be valid
+                    account[$(this).attr("name")] = $(this).val();
+                });
+                accounts.push(account);
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/for-teachers/create-accounts',
+            data: JSON.stringify({
+                accounts: accounts
+            }),
+            contentType: 'application/json',
+            dataType: 'json'
+        }).done(function (response) {
+            if (response.error) {
+                modal.alert(response.error, 3000, true);
+                $('#account_rows_container').find(':input').each(function () {
+                    if ($(this).val() == response.value) {
+                        $(this).addClass('border-2 border-red-500');
+                    }
+                });
+                return;
+            } else {
+                modal.alert(response.success, 3000, false);
+                $('#account_rows_container').find(':input').each(function () {
+                   $(this).val("");
+                });
+            }
+        }).fail(function (err) {
+            modal.alert(err.responseText, 3000, true);
+        });
+    });
+}
