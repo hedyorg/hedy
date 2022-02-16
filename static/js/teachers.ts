@@ -391,6 +391,7 @@ export function remove_customizations(class_id: string) {
             $('#customizations_alert').removeClass('hidden');
             $('.adventure_level_input').prop('checked', false);
             $('.teacher_adventures_checkbox').prop('checked', false);
+            $('.other_settings_checkbox').prop('checked', false);
             $('.level-select-button').removeClass('green-btn');
             $('.level-select-button').addClass('blue-btn');
         }).fail(function (err) {
