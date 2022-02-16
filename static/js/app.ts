@@ -1245,8 +1245,8 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
     });
     return editor;
   }
-export function toggle_developers_mode() {
-  if ($('#developers_toggle').is(":checked")) {
+export function toggle_developers_mode(enforced: boolean) {
+  if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures').hide();
       pushAchievement("lets_focus");
   } else {
