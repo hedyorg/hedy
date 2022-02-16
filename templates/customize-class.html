@@ -59,9 +59,9 @@
                 <table class="table-auto text-center w-full customize_own_adventure_overview">
                     <thead>
                         <tr>
-                            <th class="w-64 text-left border-r border-gray-400">Avontuur</th>
-                            <th class="w-64 border-r border-gray-400">Level</th>
-                            <th class="w-64">Selecteren?</th>
+                            <th class="w-64 text-left border-r border-gray-400">{{ ui.adventure }}</th>
+                            <th class="w-64 border-r border-gray-400">{{ ui.level_title }}</th>
+                            <th class="w-64">{{ auth.select }}?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,18 +79,18 @@
             </div>
         </div>
         <div class="flex flex-col ltr:ml-4 rtl:mr-4">
-            <h3 class="px-4">Other settings</h3>
+            <h3 class="px-4">{{ auth.other_settings}}</h3>
             <div class="border border-gray-400 py-2 px-4 rounded-lg">
                 <table class="table-auto text-center w-full customize_other_settings">
                     <thead>
                         <tr>
-                            <th class="w-64 text-left border-r border-gray-400">Optie</th>
-                            <th class="w-40">Selecteren?</th>
+                            <th class="w-64 text-left border-r border-gray-400">{{ auth.option }}</th>
+                            <th class="w-40">{{ auth.select }}?</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-left border-t border-r border-gray-400">Enforced developer's mode</td>
+                            <td class="text-left border-t border-r border-gray-400">{{ auth.mandatory_mode }}</td>
                             <td class="border-t border-gray-400">
                                 <input class="other_settings_checkbox" id="developer" type="checkbox">
                             </td>
@@ -100,13 +100,16 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-row mt-4">
-        <button class="yellow-btn ltr:ml-auto rtl:mr-auto text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
-        <button class="red-btn ltr:ml-2 rtl:mr-2 {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
-         {{ auth.remove_customization }}</button>
-        <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
-        <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
-
+    <div class="flex flex-col mt-4">
+        <div class="flex flex-row ml-auto">
+            <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
+            <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
+        </div>
+        <div class="flex flex-row mt-2 ml-auto">
+            <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
+            {{ auth.remove_customization }}</button>
+            <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
+        </div>
     </div>
 </div>
 {% endblock %}
