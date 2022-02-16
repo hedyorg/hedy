@@ -357,7 +357,6 @@ export function save_customizations(class_id: string) {
             other_settings.push(<string>$(this).attr('id'));
         }
     });
-
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
