@@ -172,7 +172,7 @@ def validate_signup_data(account):
     return None
 
 
-def store_account_db(account, email):
+def store_account_db(account, email, multiple_accounts=False):
     username, hashed, hashed_token = prepare_user_db(account['username'], account['password'], account['email'])
 
     if not is_testing_request(request) and 'subscribe' in account and account['subscribe'] == True:
@@ -205,9 +205,10 @@ def store_account_db(account, email):
 
     DATABASE.store_user(user)
 
-    # We automatically login the user
-    cookie = make_salt()
-    DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
+    if not multiple_accounts:
+        # We automatically login the user -> only if we create a single account
+        cookie = make_salt()
+        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
 
     # If this is an e2e test, we return the email verification token directly instead of emailing it.
     if is_testing_request(request):
