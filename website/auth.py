@@ -140,6 +140,8 @@ def login_user_from_token_cookie():
     if not token:
         return
 
+    # We update the login record with the current time -> this way the last login is closer to correct
+    DATABASE.record_login(token['username'])
     user = DATABASE.user_by_username(token['username'])
     if user:
         remember_current_user(user)
