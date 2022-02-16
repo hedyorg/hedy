@@ -43,8 +43,6 @@ class Modal {
   }
 
   public alert(message: string, timeoutMs?: number, error?: boolean) {
-    // Always hide possible previous alert -> make sure it is hidden
-    this.hide_alert();
     $('#modal_alert_container').removeClass('bg-red-100 border-red-400 text-red-700');
     $('#modal-alert-button').removeClass('text-red-500');
     $('#modal_alert_container').addClass('bg-green-100 border-green-400 text-green-700');
@@ -66,7 +64,6 @@ class Modal {
   }
 
   public copy_alert(message: string, timeoutMs?: number, title: string = '',) {
-    this.hide();
     if(title != '') {
       $('#modal-copy-title').html(title);
       $('#modal-copy-title').removeClass('hidden');
@@ -87,7 +84,6 @@ class Modal {
   }
 
   public preview(content: JQuery, title: string) {
-    this.hide();
     $('#modal-preview-title').html(title);
     const target = $('#modal-preview-content');
     content.attr('id', 'modal-preview-content');
@@ -95,15 +91,9 @@ class Modal {
 
     this.show();
     $('#modal-preview').show();
-    // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
-    if(this._timeout) {
-      clearTimeout(this._timeout);
-      this._timeout = undefined;
-    }
   }
 
   public repair(message: string, timeoutMs?: number,  title: string = '') {
-    this.hide();
     if(title != '') {
       $('#modal-repair-title').html(title);
       $('#modal-repair-title').removeClass('hidden');
@@ -125,15 +115,10 @@ class Modal {
   }
 
   public confirm(message: string, confirmCb: () => void) {
-    this.hide();
     $('#modal-confirm-text').text(message);
     this.show();
     $('#modal-confirm').show();
-    // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
-    if(this._timeout) {
-      clearTimeout(this._timeout);
-      this._timeout = undefined;
-    }
+
     // Since we need to close over the callback, replace the handler
     $('#modal-yes-button').off('click').on('click', () => {
       this.hide();
@@ -142,16 +127,10 @@ class Modal {
   }
 
   public prompt(message: string, defaultValue: string, confirmCb: (x: string) => void) {
-    this.hide();
     $('#modal-prompt-text').text(message);
     this.show();
     $('#modal-prompt').show();
     if (defaultValue) $('#modal-prompt-input').val(defaultValue);
-    // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
-    if(this._timeout) {
-      clearTimeout(this._timeout);
-      this._timeout = undefined;
-    }
 
     // Since we need to close over the callback, replace the handler
     $('#modal-ok-button').off('click').on('click', () => {

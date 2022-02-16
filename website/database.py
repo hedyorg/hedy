@@ -118,9 +118,9 @@ class Database:
         """Store a program."""
         PROGRAMS.create(program)
 
-    def set_program_public_by_id(self, id, public):
+    def set_program_public_by_id(self, id, public, error):
         """Store a program."""
-        PROGRAMS.update({'id': id}, {'public': 1 if public else None})
+        PROGRAMS.update({'id': id}, {'public': 1 if public else None, 'error': 1 if error else None})
 
     def submit_program_by_id(self, id):
         PROGRAMS.update({'id': id}, {'submitted': True})
@@ -283,6 +283,9 @@ class Database:
 
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({'creator': username})
+
+    def all_adventures(self):
+        return ADVENTURES.scan()
 
     def get_student_classes(self, username):
         """Return all the classes of which the user is a student."""

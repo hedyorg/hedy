@@ -6,6 +6,8 @@ import hedy
 import yaml
 from os import path
 
+from utils import construct_content_path
+
 TRANSLATOR_LOOKUP = {}
 
 KEYWORD_LANGUAGES = ['en', 'nl', 'es']
@@ -14,7 +16,7 @@ def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
 
-    keywords_path = 'coursedata/keywords/'
+    keywords_path = construct_content_path('keywords')
     yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r') as stream:
@@ -156,6 +158,11 @@ class ConvertToLang2(ConvertToLang1):
     def error_echo_dep_2(self, args):
         return self.keywords["echo"] + " " + ''.join([str(c) for c in args])
 
+    def sleep(self, args):
+        if args == []:
+            return self.keywords["sleep"]
+        else:
+            return self.keywords["sleep"] + " " + args[0]
 
 @hedy_translator(level=3)
 class ConvertToLang3(ConvertToLang2):
@@ -189,9 +196,16 @@ class ConvertToLang4(ConvertToLang3):
             argument_string += space + argument
             i += 1
         return self.keywords["print"] + argument_string
-
     def print_nq(self, args):
         return ConvertToLang2.print(self, args)
+    def add(self, args):
+        var = args[0]
+        list = args[1]
+        return f'{self.keywords["add"]} {var} {self.keywords["to_list"]} {list}'
+    def remove(self, args):
+        var = args[0]
+        list = args[1]
+        return f'{self.keywords["remove"]} {var} {self.keywords["from"]} {list}'
 
 
 @hedy_translator(level=5)
@@ -231,7 +245,7 @@ class ConvertToLang6(ConvertToLang5):
         return args[0] + " = " + ''.join([str(c) for c in args[1:]])
 
     def assign_is(self, args):
-        return args[0] + " "+ self.keywords["is"] + " " + ''.join([str(c) for c in args[1:]])
+        return args[0] + " " + self.keywords["is"] + " " + ''.join([str(c) for c in args[1:]])
 
     def ask_equals(self, args):
         var = args[0]

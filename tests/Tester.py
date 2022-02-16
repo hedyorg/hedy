@@ -14,8 +14,7 @@ class Snippet:
     self.level = level
     self.field_name = field_name
     self.code = code
-    filename_shorter = filename.split("/")[3]
-    self.language = filename_shorter.split(".")[0]
+    self.language = filename[-7:-5] #fetch the 2 letters before the .yaml extenstion, those are the name of the lang file, hence the lang
     self.adventure_name = adventure_name
     self.name = f'{self.language}-{self.level}-{self.field_name}'
 
@@ -45,7 +44,7 @@ class HedyTester(unittest.TestCase):
     else:
       code = app.NORMAL_PREFIX_CODE + parse_result.code
 # remove sleep comments to make program execution less slow
-    code = re.sub(r'time\.sleep\([^)]*\)', 'pass', code)
+    code = re.sub(r'time\.sleep\([^)]*\)', '', code)
 
     with HedyTester.captured_output() as (out, err):
       exec(code)
