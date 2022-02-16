@@ -351,6 +351,12 @@ export function save_customizations(class_id: string) {
             teacher_adventures.push(<string>$(this).attr('id'));
         }
     });
+    let other_settings: string[] = [];
+    $('.other_settings_checkbox').each(function() {
+        if ($(this).prop("checked")) {
+            other_settings.push(<string>$(this).attr('id'));
+        }
+    });
 
     $.ajax({
       type: 'POST',
@@ -358,7 +364,8 @@ export function save_customizations(class_id: string) {
       data: JSON.stringify({
           levels: levels,
           adventures: adventures,
-          teacher_adventures: teacher_adventures
+          teacher_adventures: teacher_adventures,
+          other_settings: other_settings
       }),
       contentType: 'application/json',
       dataType: 'json'

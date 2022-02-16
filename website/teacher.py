@@ -264,7 +264,8 @@ def routes (app, database, achievements):
             'id': class_id,
             'levels': levels,
             'adventures': adventures,
-            'teacher_adventures': body['teacher_adventures']
+            'teacher_adventures': body['teacher_adventures'],
+            'other_settings': body['other_settings']
         }
 
         DATABASE.update_class_customizations(customizations)
