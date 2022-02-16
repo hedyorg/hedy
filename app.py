@@ -1280,8 +1280,10 @@ def main_page(page):
 
 
 @app.route('/explore', methods=['GET'])
-@requires_login
-def explore(user):
+def explore():
+    if not current_user()['username']:
+        return redirect('/login')
+
     level = request.args.get('level', default=None, type=str)
     adventure = request.args.get('adventure', default=None, type=str)
 
