@@ -214,17 +214,6 @@ def store_account_db(account, email, multiple_accounts=False):
                             email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
                                 username) + '&token=' + urllib.parse.quote_plus(hashed_token))
         resp = make_response({})
-
-    if not multiple_accounts:
-        # We automatically login the user -> only if we create a single account
-        cookie = make_salt()
-        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
-        # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
-        # The server will decide whether the cookie expires.
-        resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
-                        max_age=365 * 24 * 60 * 60)
-        remember_current_user(user)
-
     return resp
 
 # Note: translations are used only for texts that will be seen by a GUI user.
@@ -322,7 +311,19 @@ def routes(app, database):
         email = DATABASE.user_by_email(body['email'].strip().lower())
         if email:
             return g.auth_texts.get('exists_email'), 403
-        return store_account_db(body, body['email'].strip().lower())
+
+        resp = store_account_db(body, body['email'].strip().lower())
+
+        # We automatically login the user
+        cookie = make_salt()
+        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
+        # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
+        # The server will decide whether the cookie expires.
+        resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
+                        max_age=365 * 24 * 60 * 60)
+
+        remember_current_user(user)
+        return resp
 
     @app.route('/auth/verify', methods=['GET'])
     def verify_email():
