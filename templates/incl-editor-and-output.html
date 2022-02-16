@@ -118,13 +118,11 @@
 <!-- If we enforce the developer's mode in customizations -> hide adventures, increase editor and output height -->
 {% if enforce_developers_mode %}
 <script>
-import {theGlobalEditor} from "../static/js";
 $(document).ready(function () {
     $('#adventures').hide();
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
-    theGlobalEditor.resize();
 });
 </script>
 {% endif %}
