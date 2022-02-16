@@ -81,18 +81,18 @@
         <div class="flex flex-col ltr:ml-4 rtl:mr-4">
             <h3 class="px-4">Other settings</h3>
             <div class="border border-gray-400 py-2 px-4 rounded-lg">
-                <table class="table-auto text-center w-full customize_own_adventure_overview">
+                <table class="table-auto text-center w-full customize_other_settings">
                     <thead>
                         <tr>
                             <th class="w-64 text-left border-r border-gray-400">Optie</th>
-                            <th class="w-64">Selecteren?</th>
+                            <th class="w-40">Selecteren?</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-left border-t border-r border-gray-400"></td>
+                            <td class="text-left border-t border-r border-gray-400">Enforced developer's mode</td>
                             <td class="border-t border-gray-400">
-                                <input class="teacher_adventures_checkbox" type="checkbox">
+                                <input class="other_settings_checkbox" id="developer" type="checkbox">
                             </td>
                         </tr>
                     </tbody>
@@ -100,16 +100,19 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col mt-8 ltr:ml-6 rtl:mr-6 items-start">
-        <div class="flex flex-row ml-auto">
-            <button class="yellow-btn ltr:mr-4 rtl:ml-4 text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
-            <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
+    <div class="flex flex-row">
+        <div class="flex flex-col mt-8 ltr:ml-6 rtl:mr-6 items-start">
+            <div class="flex flex-row ml-auto">
+                <button class="yellow-btn ltr:mr-4 rtl:ml-4 text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
+                <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
+            </div>
+            <div class="flex flex-row ml-auto mt-4">
+                <button class="red-btn ltr:mr-4 rtl:ml-4 {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
+                 {{ auth.remove_customization }}</button>
+                <button class="green-btn" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
+            </div>
         </div>
-        <div class="flex flex-row ml-auto mt-4">
-            <button class="red-btn ltr:mr-4 rtl:ml-4 {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
-             {{ auth.remove_customization }}</button>
-            <button class="green-btn" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
-        </div>
+    </div>
     </div>
 </div>
 {% endblock %}
