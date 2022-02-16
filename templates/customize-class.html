@@ -100,19 +100,13 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-row">
-        <div class="flex flex-col mt-8 ltr:ml-6 rtl:mr-6 items-start">
-            <div class="flex flex-row ml-auto">
-                <button class="yellow-btn ltr:mr-4 rtl:ml-4 text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
-                <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
-            </div>
-            <div class="flex flex-row ml-auto mt-4">
-                <button class="red-btn ltr:mr-4 rtl:ml-4 {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
-                 {{ auth.remove_customization }}</button>
-                <button class="green-btn" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
-            </div>
-        </div>
-    </div>
+    <div class="flex flex-row mt-4">
+        <button class="yellow-btn ltr:ml-auto rtl:mr-auto text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
+        <button class="red-btn ltr:ml-2 rtl:mr-2 {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
+         {{ auth.remove_customization }}</button>
+        <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
+        <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
+
     </div>
 </div>
 {% endblock %}
