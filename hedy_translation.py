@@ -171,6 +171,11 @@ class ConvertToLang2(ConvertToLang1):
     def error_echo_dep_2(self, args):
         return self.keywords["echo"] + " " + ''.join([str(c) for c in args])
 
+    def sleep(self, args):
+        if args == []:
+            return self.keywords["sleep"]
+        else:
+            return self.keywords["sleep"] + " " + args[0]
 
 @hedy_translator(level=3)
 class ConvertToLang3(ConvertToLang2):
@@ -204,9 +209,16 @@ class ConvertToLang4(ConvertToLang3):
             argument_string += space + argument
             i += 1
         return self.keywords["print"] + argument_string
-
     def print_nq(self, args):
         return ConvertToLang2.print(self, args)
+    def add(self, args):
+        var = args[0]
+        list = args[1]
+        return f'{self.keywords["add"]} {var} {self.keywords["to_list"]} {list}'
+    def remove(self, args):
+        var = args[0]
+        list = args[1]
+        return f'{self.keywords["remove"]} {var} {self.keywords["from"]} {list}'
 
 
 @hedy_translator(level=5)
@@ -246,7 +258,7 @@ class ConvertToLang6(ConvertToLang5):
         return args[0] + " = " + ''.join([str(c) for c in args[1:]])
 
     def assign_is(self, args):
-        return args[0] + " "+ self.keywords["is"] + " " + ''.join([str(c) for c in args[1:]])
+        return args[0] + " " + self.keywords["is"] + " " + ''.join([str(c) for c in args[1:]])
 
     def ask_equals(self, args):
         var = args[0]
