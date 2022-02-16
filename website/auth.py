@@ -1,5 +1,4 @@
 import os
-
 import utils
 from website.yaml_file import YamlFile
 import bcrypt
