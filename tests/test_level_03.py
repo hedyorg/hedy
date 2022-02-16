@@ -536,7 +536,7 @@ class TestsLevel3(HedyTester):
 
   def test_add_ask_to_list(self):
     code = textwrap.dedent("""\
-    color is ask what is your favorite color? 
+    color is ask what is your favorite color?
     colors is green, red, blue
     add color to colors
     print colors at random""")

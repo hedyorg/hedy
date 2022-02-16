@@ -133,7 +133,6 @@ class ConvertToLang2(ConvertToLang1):
         return args[0] + " " + self.keywords["is"] + " " + ''.join([str(c) for c in args[1:]])
 
     def print(self, args):
-
         argument_string = ""
         i = 0
 
@@ -150,6 +149,12 @@ class ConvertToLang2(ConvertToLang1):
 
         return self.keywords["print"] + " " + argument_string
 
+    def ask(self, args):
+        var = args[0]
+
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(
+            args[1:])
+
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
 
@@ -158,12 +163,7 @@ class ConvertToLang2(ConvertToLang1):
         all_parameters = ["'" + hedy.process_characters_needing_escape(a) + "'" for a in args[1:]]
         return var + ''.join(all_parameters)
 
-    def ask(self, args):
-        var = args[0]
-        all_parameters = [hedy.process_characters_needing_escape(a) for a in args]
 
-        return all_parameters[0] + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(
-            all_parameters[1:])
 
     def error_ask_dep_2(self, args):
         return self.keywords["ask"] + " " + ''.join([str(c) for c in args])
@@ -193,6 +193,14 @@ class ConvertToLang3(ConvertToLang2):
     def list_access(self, args):
         return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
 
+    def add(self, args):
+        var = args[0]
+        list = args[1]
+        return f'{self.keywords["add"]} {var} {self.keywords["to_list"]} {list}'
+    def remove(self, args):
+        var = args[0]
+        list = args[1]
+        return f'{self.keywords["remove"]} {var} {self.keywords["from"]} {list}'
 
 @hedy_translator(level=4)
 class ConvertToLang4(ConvertToLang3):
@@ -211,14 +219,7 @@ class ConvertToLang4(ConvertToLang3):
         return self.keywords["print"] + argument_string
     def print_nq(self, args):
         return ConvertToLang2.print(self, args)
-    def add(self, args):
-        var = args[0]
-        list = args[1]
-        return f'{self.keywords["add"]} {var} {self.keywords["to_list"]} {list}'
-    def remove(self, args):
-        var = args[0]
-        list = args[1]
-        return f'{self.keywords["remove"]} {var} {self.keywords["from"]} {list}'
+
 
 
 @hedy_translator(level=5)
