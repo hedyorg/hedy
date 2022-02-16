@@ -40,7 +40,7 @@ comment: _HASH /([^\n]+)/
 _EOL: "\r"?"\n"
 
 text: /([^\n]+)/ -> text //anything can be parsed except for a newline
-textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline)
+textwithoutspaces: /([^\n ]+)/ -> text //anything can be parsed except for a new line and spaces
 
 %import common.SIGNED_INT -> INT
 %import common.NUMBER -> NUMBER
