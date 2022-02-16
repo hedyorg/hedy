@@ -1,6 +1,6 @@
 import json
 
-from website.auth import validate_signup_data, store_account_db
+from website.auth import validate_signup_data, store_new_account
 import hedy
 from website.auth import requires_login, is_teacher, is_admin
 import utils
@@ -384,7 +384,7 @@ def routes (app, database, achievements):
         for account in body.get('accounts', []):
             # Set the current teacher language as new account language
             account['language'] = g.lang
-            store_account_db(account, account.get('email').strip().lower(), multiple_accounts=True)
+            store_new_account(account, account.get('email').strip().lower())
         return {'success': g.auth_texts.get('accounts_created')}, 200
       
     @app.route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])

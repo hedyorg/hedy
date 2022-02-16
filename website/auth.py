@@ -172,7 +172,7 @@ def validate_signup_data(account):
     return None
 
 
-def store_account_db(account, email, multiple_accounts=False):
+def store_new_account(account, email):
     username, hashed, hashed_token = prepare_user_db(account['username'], account['password'], account['email'])
 
     if not is_testing_request(request) and 'subscribe' in account and account['subscribe'] == True:
@@ -312,7 +312,7 @@ def routes(app, database):
         if email:
             return g.auth_texts.get('exists_email'), 403
 
-        resp = store_account_db(body, body['email'].strip().lower())
+        resp = store_new_account(body, body['email'].strip().lower())
 
         # We automatically login the user
         cookie = make_salt()
