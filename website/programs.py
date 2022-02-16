@@ -134,7 +134,7 @@ def routes(app, database, achievements):
             'id']:
             DATABASE.set_favourite_program(user['username'], None)
 
-        DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
+        DATABASE.set_program_public_by_id(body['id'], bool(body['public']), bool(body['error']))
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
         if achievement:
             return jsonify({'achievement': achievement, 'id': body['id']})
