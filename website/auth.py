@@ -316,7 +316,7 @@ def routes(app, database):
 
         # We automatically login the user
         cookie = make_salt()
-        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
+        DATABASE.store_token({'id': cookie, 'username': body['username'].strip().lower(), 'ttl': times() + session_length})
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
         resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
