@@ -370,6 +370,7 @@ def routes (app, database, achievements):
 
         # Validation for duplicates in the db
         classes = DATABASE.get_teacher_classes(user['username'], False)
+        print(classes)
         for account in body.get('accounts', []):
             if account.get('class') and account['class'] not in [i.get('name') for i in classes]:
                 return "not your class", 404
@@ -385,6 +386,9 @@ def routes (app, database, achievements):
             # Set the current teacher language as new account language
             account['language'] = g.lang
             store_new_account(account, account.get('email').strip().lower())
+            if account.get('class'):
+                class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]
+                DATABASE.add_student_to_class(class_id, account.get('username').strip().lower())
         return {'success': g.auth_texts.get('accounts_created')}, 200
       
     @app.route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])

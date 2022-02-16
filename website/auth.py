@@ -146,7 +146,7 @@ def login_user_from_token_cookie():
         remember_current_user(user)
 
 
-def prepare_user_db(username, password, email):
+def prepare_user_db(username, password):
     hashed = hash(password, make_salt())
 
     token = make_salt()
@@ -173,7 +173,7 @@ def validate_signup_data(account):
 
 
 def store_new_account(account, email):
-    username, hashed, hashed_token = prepare_user_db(account['username'], account['password'], account['email'])
+    username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])
 
     if not is_testing_request(request) and 'subscribe' in account and account['subscribe'] == True:
         # If we have a Mailchimp API key, we use it to add the subscriber through the API
