@@ -205,11 +205,6 @@ def store_account_db(account, email, multiple_accounts=False):
 
     DATABASE.store_user(user)
 
-    if not multiple_accounts:
-        # We automatically login the user -> only if we create a single account
-        cookie = make_salt()
-        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
-
     # If this is an e2e test, we return the email verification token directly instead of emailing it.
     if is_testing_request(request):
         resp = make_response({'username': username, 'token': hashed_token})
@@ -220,11 +215,15 @@ def store_account_db(account, email, multiple_accounts=False):
                                 username) + '&token=' + urllib.parse.quote_plus(hashed_token))
         resp = make_response({})
 
-    # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
-    # The server will decide whether the cookie expires.
-    resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
-                    max_age=365 * 24 * 60 * 60)
-    remember_current_user(user)
+    if not multiple_accounts:
+        # We automatically login the user -> only if we create a single account
+        cookie = make_salt()
+        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
+        # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
+        # The server will decide whether the cookie expires.
+        resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
+                        max_age=365 * 24 * 60 * 60)
+        remember_current_user(user)
 
     return resp
 
