@@ -1282,7 +1282,7 @@ def main_page(page):
 @app.route('/explore', methods=['GET'])
 def explore():
     if not current_user()['username']:
-        url = request.url.replace('/my-achievements', '/login')
+        url = request.url.replace('/explore', '/login')
         return redirect(url, code=302)
 
     level = request.args.get('level', default=None, type=str)
