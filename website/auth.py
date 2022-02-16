@@ -214,7 +214,7 @@ def store_new_account(account, email):
                             email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
                                 username) + '&token=' + urllib.parse.quote_plus(hashed_token))
         resp = make_response({})
-    return resp
+    return user, resp
 
 # Note: translations are used only for texts that will be seen by a GUI user.
 def routes(app, database):
@@ -312,11 +312,12 @@ def routes(app, database):
         if email:
             return g.auth_texts.get('exists_email'), 403
 
-        resp = store_new_account(body, body['email'].strip().lower())
+        # We receive the pre-processed user and response package from the function
+        user, resp = store_new_account(body, body['email'].strip().lower())
 
         # We automatically login the user
         cookie = make_salt()
-        DATABASE.store_token({'id': cookie, 'username': body['username'].strip().lower(), 'ttl': times() + session_length})
+        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
         resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
