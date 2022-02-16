@@ -105,7 +105,7 @@
     </div>
   </div>
 <!-- developer mode toggle -->
-<div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4{% if editor_readonly %} hidden{% endif %}" id="developers_toggle_container">
+<div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4{% if editor_readonly or enforce_developers_mode %} hidden{% endif %}" id="developers_toggle_container">
   <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
     <div class="relative">
       <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode()" class="sr-only" />
@@ -115,3 +115,13 @@
     <div class="ltr:ml-3 rtl:mr-3">{{ ui.developers_mode }}</div>
   </label>
 </div>
+{% if enforce_developers_mode %}
+<script>
+$(document).ready(function () {
+    $('#adventures').hide();
+    $('#editor-area').removeClass('mt-5');
+    $('#code_editor').css('height', 36 + "em");
+    $('#code_output').css('height', 36 + "em");
+});
+</script>
+{% endif %}
