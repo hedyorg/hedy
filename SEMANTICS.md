@@ -3825,7 +3825,7 @@ Level 17 supports:
   </tr>
   <tr>
     <td>== | is | = (comparison) **</td>
-    <td>string | integer | float | input</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
     <td>!= **</td>
