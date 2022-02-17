@@ -67,7 +67,7 @@
                         {% for i in range(1, max_level + 1) %}
                             <tr class="{% if i not in customizations['levels'] %}hidden{% endif %}">
                                 <td class="border-r border-t border-gray-400">{{ ui.level_title }} {{ i }}</td>
-                                <td class="border-t border-gray-400"><input type="datetime-local"></td>
+                                <td class="border-t border-gray-400"><input type="text" placeholder="Right now" onfocus="(this.type='datetime-local')"></td>
                             </tr>
                         {% endfor %}
                     </tbody>
