@@ -445,6 +445,83 @@ levels:
             correct_answer: "D"
             hint: "Deze code was goed!"
             question_score: 10
+        7:
+            question_text: "Wat doet het add commando"
+            code: |-
+                    boeken is Harry Potter, de Hobbit, Pluk van de Petteflet
+                    jouw_boek is ask Wat is jouw favoriete boek?
+                    add jouw_boek to boeken
+                    print boeken at random
+            mp_choice_options:
+            -   "option_text": "Het add commando haalt een random boek uit het lijstje boeken weg"
+                "feedback": "Add is Engels voor toevoegen"
+            -   "option_text": "Het add commando voegt een random boek aan het lijstje boeken toe"
+                "feedback": "Het voegt inderdaad een boek toe aan het lijstje, maar niet zomaar een random boek!"
+            -   "option_text": "Het add commando voegt jouw favoriete boek aan het lijstje toe"
+                "feedback": "Juist!"
+            -   "option_text": "Het add commando verwijdert jouw favoriete boek uit het lijstje."
+                "feedback": "Add is Engels voor toevoegen"
+            correct_answer: "C"
+            hint: "Add is Engels voor toevoegen!"
+            question_score: 10
+        8:
+            question_text: "Wat is de uitvoer van deze code?"
+            code: |-
+                    chips is naturel, paprika, cheese onion
+                    remove naturel from chips
+                    remove paprika from chips
+                    print chips at random
+            mp_choice_options:
+            -   "option_text": "Dat weet je nog niet, want Hedy kiest een van de 3 smaken at random"
+                "feedback": "Kijk goed naar de remove commando's"
+            -   "option_code": "naturel"
+                "feedback": "Naturel wordt uit het rijtje verwijderd"
+            -   "option_code": "paprika"
+                "feedback": "Paprika wordt uit het rijtje verwijderd"
+            -   "option_code": "cheese onion"
+                "feedback": "Klopt!"
+            correct_answer: "D"
+            hint: "Er staan 3 chipssmaken in het rijtje, maar er worden er twee verwijderd. Welke blijft over?"
+            question_score: 10
+        9:
+            question_text: "Wat is er fout in deze code?"
+            code: |-
+                    kleuren is blauw, paars, groen
+                    gekozen_kleur is ask Welke kleur wil je echt niet?
+                    remove gekozen_kleur from kleuren
+                    print Ik verf mijn haar kleur at random
+            mp_choice_options:
+            -   "option_text": "In regel 3 moet staan remove blauw from kleuren"
+                "feedback": "Misschien wil je wel graag blauwe haren!"
+            -   "option_text": "In regel 3 moet een add commando staan in plaats van een remove commando"
+                "feedback": "Je wil de gekozen kleur verwijderen, dus remove klopt"
+            -   "option_text": " In regel 4 moet de variabele kleuren heten in plaats van kleur"
+                "feedback": "Juist!"
+            -   "option_text": "Niets, alles is goed!"
+                "feedback": "Er zit toch echt een foutje in!"
+            correct_answer: "C"
+            hint: "Kijk goed naar regel 3!"
+            question_score: 10
+        10:
+            question_text: "Wat moet er op de streepjes komen te staan?"
+            code: |-
+                    uitlaters is papa, mama, Sam, Petra
+                    uitlater_gisteren is ask Wie heeft gisteren de honden uitgelaten?
+                    print uitlater_gisteren hoeft vandaag dan niet nog een keer!
+                    ___
+                    print uitlaters at random is vandaag aan de beurt om de honden uit te laten!
+            mp_choice_options:
+            -   "option_code": "remove uitlater_gisteren from uitlaters"
+                "feedback": "Super!"
+            -   "option_code": "remove uitlater_gisteren to uitlaters"
+                "feedback": "remove hoort bij from en add bij to"
+            -   "option_code": "remove uitlaters from gisteren"
+                "feedback": "gisteren is geen variabele"
+            -   "option_code": "add uitlater_gisteren to uitlaters"
+                "feedback": "Klopt!"
+            correct_answer: "A"
+            hint: "De uitlater van gisteren moet verwijderd worden uit het rijtje"
+            question_score: 10
 
     4:
         1:
