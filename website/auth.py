@@ -193,6 +193,7 @@ def store_new_account(account, email):
         'password': hashed,
         'email': email,
         'language': account['language'],
+        'keyword_language': account['keyword_language'],
         'created': timems(),
         'verification_pending': hashed_token,
         'last_login': timems()
@@ -286,6 +287,8 @@ def routes(app, database):
             return g.auth_texts.get('repeat_match_password'), 400
         if not isinstance(body.get('language'), str):
             return g.auth_texts.get('language_invalid'), 400
+        if not isinstance(body.get('keyword_language'), str):
+            return g.auth_texts.get('keyword_language_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
