@@ -323,10 +323,13 @@ export function show_doc_section(section_key: string) {
 
 //https://stackoverflow.com/questions/7196212/how-to-create-dictionary-and-add-key-value-pairs-dynamically?rq=1
 export function save_customizations(class_id: string) {
-    let levels: (string | undefined)[] = [];
-    $('.level-select-button').each(function() {
-        if ($(this).hasClass("green-btn")) {
-            levels.push(<string>$(this).val());
+    let levels_opening_dates = {};
+    $('.opening_date_container').each(function() {
+        if ($(this).is(":visible")) {
+            $(this).find(':input').each(function () {
+                // @ts-ignore
+                levels_opening_dates[<string>$(this).attr('level')] = $(this).val();
+            });
         }
     });
     let adventures = {};
@@ -351,17 +354,6 @@ export function save_customizations(class_id: string) {
             teacher_adventures.push(<string>$(this).attr('id'));
         }
     });
-    let opening_dates = {};
-    $('.opening_date_container').each(function() {
-        if ($(this).is(":visible")) {
-            $(this).find(':input').each(function () {
-                // @ts-ignore
-                opening_dates[<string>$(this).attr('level')] = $(this).val();
-            });
-        }
-    });
-    console.log(opening_dates);
-
     let other_settings: string[] = [];
     $('.other_settings_checkbox').each(function() {
         if ($(this).prop("checked")) {
@@ -372,7 +364,7 @@ export function save_customizations(class_id: string) {
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
       data: JSON.stringify({
-          levels: levels,
+          levels_opening_dates: levels_opening_dates,
           adventures: adventures,
           teacher_adventures: teacher_adventures,
           other_settings: other_settings
