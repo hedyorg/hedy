@@ -246,7 +246,7 @@ export function update_adventure(adventure_id: string, first_edit: boolean) {
 export function preview_adventure() {
     let content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
     const name = <string>$('#custom_adventure_name').val();
-    const level = <number>$('#custom_adventure_level').val();
+    const level = <string>$('#custom_adventure_level').val();
     let container = $('<div>');
     container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
     container.css('white-space', 'pre-wrap');
