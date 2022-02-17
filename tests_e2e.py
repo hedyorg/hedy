@@ -94,7 +94,7 @@ class AuthHelper(unittest.TestCase):
         if username in USERS:
             return USERS[username]
         body = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'language': 'nl', 'password': 'foobar', 'password_repeat': 'foobar'}
+                'language': 'nl', 'keyword_language': 'en', 'password': 'foobar', 'password_repeat': 'foobar'}
         response = request('post', 'auth/signup', {}, body, cookies=self.user_cookies[username])
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
@@ -256,6 +256,8 @@ class TestAuth(AuthHelper):
             {'username': username, 'password': 'foobar', 'email': 'me@something'},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': 123},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': True},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'keyword_language': 123},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'keyword_language': True},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': [2]},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': 'foo'},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'experience_languages': 'python'}
@@ -268,7 +270,7 @@ class TestAuth(AuthHelper):
         # GIVEN a valid username and signup body
         username = self.make_username()
         user = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl'}
+                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl', 'keyword_language': 'en'}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server
@@ -473,6 +475,8 @@ class TestAuth(AuthHelper):
             {'gender': 'a'},
             {'language': True},
             {'language': 123},
+            {'keyword_language': True},
+            {'keyword_language': 123},
             {'prog_experience': 1},
             {'prog_experience': 'foo'},
             {'prog_experience': True},
