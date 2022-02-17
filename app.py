@@ -842,8 +842,6 @@ def index(level, step):
     else:
         return utils.error_page(error=404, ui_message='no_such_level')
 
-    g.prefix = '/hedy'
-
     loaded_program = ''
     adventure_name = ''
 
@@ -892,8 +890,6 @@ def index(level, step):
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 def view_program(id):
-    g.prefix = '/hedy'
-
     user = current_user()
 
     result = DATABASE.program_by_id(id)
@@ -1134,7 +1130,7 @@ def nl2br(x):
 @app.template_global()
 def hedy_link(level_nr, assignment_nr, subpage=None):
     """Make a link to a Hedy page."""
-    parts = [g.prefix]
+    parts = ["./prefix"]
     parts.append('/' + str(level_nr))
     if str(assignment_nr) != '1' or subpage:
         parts.append('/' + str(assignment_nr if assignment_nr else '1'))
