@@ -425,8 +425,10 @@ export function select_all_level_adventures(level: string) {
         });
         $('#level_button_' + level).removeClass('blue-btn');
         $('#level_button_' + level).addClass('green-btn');
+
         // We also have to add this level to the "Opening dates" section
-        $('#opening_date_container_' + level).removeClass('hidden');
+        $('#opening_date_level_' + level).removeClass('hidden');
+        $('#opening_date_level_' + level).find('input').prop({type:"text"});
     } else {
         $('.adventure_level_' + level).each(function () {
             $(this).prop("checked", false);
@@ -435,7 +437,8 @@ export function select_all_level_adventures(level: string) {
         $('#level_button_' + level).removeClass('green-btn');
         $('#level_button_' + level).addClass('blue-btn');
 
-        $('#opening_date_container_' + level).addClass('hidden');
+        // We also have to remove this level from the "Opening dates" section
+        $('#opening_date_level_' + level).addClass('hidden');
     }
 }
 
