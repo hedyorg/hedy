@@ -234,10 +234,14 @@ class ConvertToLang5(ConvertToLang4):
         return self.keywords["if"] + " " + ''.join([str(c) for c in args])
 
     def ifelse(self, args):
-        return self.keywords["if"] + " " + args[0] + args[1] + " " + self.keywords["else"] + " " + args[2]
+        return self.keywords["if"] + " " + args[0].strip() + '\n' + args[1] + '\n' + self.keywords["else"] + " " + args[2]
 
     def condition(self, args):
         return ' and '.join(args)
+
+    def condition_spaces(self, args):
+        result = args[0] + ' ' + self.keywords["is"] + ' ' + ' '.join(args[1:])
+        return result
 
     def equality_check(self, args):
         return args[0] + " " + self.keywords["is"] + " " + " ".join([str(c) for c in args[1:]]) + " "

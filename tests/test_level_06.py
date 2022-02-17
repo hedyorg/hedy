@@ -167,7 +167,9 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=7)
+      max_level=7,
+      translate=False)
+
   def test_print_if_else_with_equals_sign(self):
     code = textwrap.dedent("""\
     naam is Hedy
@@ -357,7 +359,7 @@ class TestsLevel6(HedyTester):
         punten = int(punten) + int(worp)
       print(f'dat zijn dan {punten}')""")
 
-      self.single_level_tester(code=code, expected=expected)
+      self.single_level_tester(code=code, expected=expected, translate=False)
 
   def test_ifelse_should_go_before_assign(self):
     code = textwrap.dedent("""\
@@ -375,7 +377,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected
+      expected=expected,
+      translate=False
     )
   def test_ifelse_calc_vars(self):
     code = textwrap.dedent("""\
@@ -480,7 +483,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=7)
+      max_level=7,
+      translate=False)
 
   def test_one_space_in_rhs_if_else(self):
     code = textwrap.dedent("""\
@@ -497,7 +501,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=7)
+      max_level=7,
+      translate=False)
 
   def test_quoted_space_rhs(self):
     code = textwrap.dedent("""\
@@ -510,7 +515,10 @@ class TestsLevel6(HedyTester):
       print(f'shaken')
     else:
       print(f'biertje!')""")
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      translate=False)
 
 
   def test_space_enter_rhs_ifelse(self):
@@ -525,7 +533,11 @@ class TestsLevel6(HedyTester):
       print(f'shaken')
     else:
       print(f'biertje!')""")
-    self.single_level_tester(code=code, expected=expected)
+
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      translate=False)
 
   def test_space_enter_rhs_if(self):
     code = textwrap.dedent("""\
