@@ -403,6 +403,7 @@ export function remove_customizations(class_id: string) {
             $('.other_settings_checkbox').prop('checked', false);
             $('.level-select-button').removeClass('green-btn');
             $('.level-select-button').addClass('blue-btn');
+            $('.opening_date_container').addClass('hidden');
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
         });
