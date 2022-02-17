@@ -877,10 +877,11 @@ def index(level, step):
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
     if 'levels' in customizations:
-        if 'opening_dates' in customizations:
-            available_levels = customizations['levels']
-        else:
-            available_levels = customizations['levels']
+        available_levels = customizations['levels']
+        now = timems()
+        for current_level, timestamp in customizations.get('opening_dates', {}).items():
+            if utils.datetotimeordate(timestamp) > utils.datetotimeordate(utils.mstoisostring(now)):
+                available_levels.remove(int(current_level))
 
     if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
         return utils.error_page(error=404, ui_message='no_such_level')
