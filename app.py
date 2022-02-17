@@ -1076,6 +1076,7 @@ def explore():
 def change_language():
     body = request.json
     session['lang'] = body.get('lang')
+    session['dir'] = "ltr"
     if session['lang'] in RTL_LANGUAGES:
         session['dir'] = "rtl"
     return jsonify({'succes': 200})

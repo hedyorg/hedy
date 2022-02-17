@@ -45,7 +45,7 @@
           <ul class="dropdown-menu absolute hidden text-white rounded-lg border-black bg-blue-400 mt-2 pt-1 list-none ltr:ml-0 rtl:mr-0 ltr:right-0 rtl:left-0 w-48" style="border-width: 1px;">
               <li class="p-2"><input id="search_language" placeholder="{{ui.search}}" class="border-2 border-black text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></li>
             {% for lang in other_languages() %}
-                <a class="no-underline" href="#" onclick="hedyApp.change_language ('{{session['lang']}}');event.preventDefault();"><li class="hover:bg-blue-600 text-white py-2 px-4 block rounded-lg language">{{ lang.sym }}</li></a>
+                <a class="no-underline" href="#" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();"><li class="hover:bg-blue-600 text-white py-2 px-4 block rounded-lg language">{{ lang.sym }}</li></a>
             {% endfor %}
           </ul>
       </div>
