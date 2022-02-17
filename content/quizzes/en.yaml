@@ -1072,7 +1072,7 @@ levels:
                     "feedback": "The word times is there, another word is missing."
                 -   "option_text": "Wrong, the word print is missing"
                     "feedback": "Correct"
-            correct_answer: "B"
+            correct_answer: "D"
             hint: "It should be: repeat 100 times print 'Hello'"
             question_score: 10
         4:
@@ -1095,10 +1095,12 @@ levels:
         5:
             question_text: "Is this code right or wrong?"
             code: |-
-                repeat 100 print 'Hedy is awesome!'
+                repeat 100 times print 'Hedy is awesome!'
             mp_choice_options:
                 -   "option_text": "Correct"
+                    "feedback" : "That's right!"
                 -   "option_text": "Wrong"
+                    "feedback" : "That's not it"
             correct_answer: "A"
             hint: "The code is correct!"
             question_score: 10
@@ -1160,7 +1162,7 @@ levels:
                 -   "code": "repeat 2 times print 'Here comes the sun'\nrepeat 2 times print 'Do\
               \ do'\nprint 'And I say'\nprint 'Its alright'"
                     "feedback": "This is not in the right order"
-            correct_answer: "D"
+            correct_answer: "A"
             hint: "Repeat can only be used if you want the exact same line 2 (or more) times\
             \ in a row."
             question_score: 10
@@ -1512,7 +1514,7 @@ levels:
                   "feedback": "You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'..."
                 - "code": "dice"
                   "feedback": "Look at the names of the variables."
-            correct_answer: "A"
+            correct_answer: "B"
             hint: "Hedy needs to pick a number at random"
             question_score: 10
         6:
