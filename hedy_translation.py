@@ -183,10 +183,6 @@ class ConvertToLang2(ConvertToLang1):
 
 @hedy_translator(level=3)
 class ConvertToLang3(ConvertToLang2):
-    def ask(self, args):
-        var = args[0]
-        remaining_args = args[1:]
-        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ' '.join(remaining_args)
 
     def var_access(self, args):
         return ''.join([str(c) for c in args])
@@ -209,6 +205,11 @@ class ConvertToLang3(ConvertToLang2):
 
 @hedy_translator(level=4)
 class ConvertToLang4(ConvertToLang3):
+
+    def ask(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ' '.join(remaining_args)
 
     def print(self, args):
         i = 0
@@ -274,7 +275,7 @@ class ConvertToLang6(ConvertToLang5):
     def ask_is(self, args):
         var = args[0]
         remaining_args = args[1:]
-        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(remaining_args)
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ' '.join(remaining_args)
 
     def assign_list_is(self, args):
         return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])

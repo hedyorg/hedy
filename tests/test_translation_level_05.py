@@ -1,6 +1,7 @@
 import hedy
 from test_level_01 import HedyTester
 import hedy_translation
+import textwrap
 from parameterized import parameterized
 
     # tests should be ordered as follows:
@@ -39,7 +40,6 @@ class TestsTranslationLevel5(HedyTester):
         expected = "answer is vraag 'What is 10 plus 10?'"
 
         self.assertEqual(expected, result)
-
 
     def test_if_else_english_dutch(self):
         code = "if answer is far forward 100 else forward 5"
@@ -87,6 +87,20 @@ class TestsTranslationLevel5(HedyTester):
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = "if answer is far forward 100 else forward 5"
+
+        self.assertEqual(expected, result)
+
+    def test_ifelse_should_go_before_assign(self):
+        code = textwrap.dedent("""\
+          kleur is geel
+          als kleur is groen antwoord is ok anders antwoord is stom
+          print antwoord""")
+
+        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
+        expected = textwrap.dedent("""\
+            kleur is geel
+            if kleur is groen antwoord is ok else antwoord is stom
+            print antwoord""")
 
         self.assertEqual(expected, result)
 
