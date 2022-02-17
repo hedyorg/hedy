@@ -401,8 +401,9 @@ def routes(app, database, achievements):
         if adventure['creator'] != user['username'] and not is_admin(user):
             return utils.error_page(error=403, ui_message='retrieve_adventure')
 
-        # Add id with current level to the <pre> tag to let syntax highlighting know which highlighting we need!
-        adventure['content'] = adventure['content'].replace("<pre>", "<pre id='" + str(adventure['level']) + "'>")
+        # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
+        adventure['content'] = adventure['content'].replace("<pre>", "<pre level='" + str(adventure['level']) + "'>")
+        print(adventure['content'])
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=hedyweb.get_page_title('view adventure'), current_page='my-profile')
 
