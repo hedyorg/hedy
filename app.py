@@ -63,6 +63,8 @@ ALL_LANGUAGES = {
     'fy': 'Frysk',
     'ar': 'عربى'
 }
+
+RTL_LANGUAGES = ['ar', 'he', 'ur']
 # Define fall back languages for adventures
 FALL_BACK_ADVENTURE = {
     'fy': 'nl',
@@ -290,18 +292,10 @@ def setup_language():
     # header to do language negotiation.
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
-
-
-    # Always set the keyword languages to English when starting
-    g.keyword_lang = "en"
-
-    # Set the page direction -> automatically set it to "left-to-right"
-    # Switch to "right-to-left" if one of the language in the list is selected
-    # This is the only place to expand / shrink the list of RTL languages -> front-end is fixed based on this value
-    g.dir = "ltr"
-    if session['lang'] in ['ar', 'he', 'ur']:
-        g.dir = "rtl"
-
+    if 'keyword_lang' not in session:
+        session['keyword_lang'] = "en"
+    if 'dir' not in session:
+        session['dir'] = "ltr"
 
     # Check that requested language is supported, otherwise return 404
     if session['lang'] not in ALL_LANGUAGES.keys():
@@ -1082,6 +1076,8 @@ def explore():
 def change_language():
     body = request.json
     session['lang'] = body.get('lang')
+    if session['lang'] in RTL_LANGUAGES:
+    session['dir'] = "rtl"
     return jsonify({'succes': 200})
 
 @app.route('/translate_keywords', methods=['POST'])
