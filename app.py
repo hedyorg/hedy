@@ -836,7 +836,7 @@ def get_user_formatted_age(now, date):
 def index(level, step):
     if re.match('\\d', level):
         try:
-            g.level = level = int(level)
+            level = int(level)
         except:
             return utils.error_page(error=404, ui_message='no_such_level')
     else:
