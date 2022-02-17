@@ -11,7 +11,7 @@
     <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (ui.level_title + ' ' + level_nr)}}">
     <input type="submit" class="green-btn mx-2 cursor-pointer" value="{{ ui.save_code_button }}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code());">
     <input type="submit" class="green-btn mx-2 cursor-pointer" value="{{ ui.share_code_button }}" onclick="hedyApp.share_program({{ level }}, '{{ g.lang }}', true, -1, true);">
-      <div class="dropdown inline-block relative green-btn mx-2 cursor-pointer">
+      <div class="dropdown inline-block relative green-btn mx-2 {% if hide_cheatsheet %}hidden{% endif %} cursor-pointer">
             <span class="ltr:mr-1 rtl:ml-1">{{ "🤔" }}</span>
           </button>
           <ul class="dropdown-menu absolute hidden rounded-lg border-black mt-2 pt-1 list-none ltr:ml-0 rtl:mr-0 ltr:right-0 rtl:left-0 w-48" style="width: 14rem; border-width: 1px; z-index: 15; background-color: #48BB78;">

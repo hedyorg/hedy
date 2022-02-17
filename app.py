@@ -1141,6 +1141,10 @@ def index(level, step):
     if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
         enforce_developers_mode = True
 
+    hide_cheatsheet = False
+    if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
+        hide_cheatsheet = True
+
     return hedyweb.render_code_editor_with_tabs(
         level_defaults=defaults,
         max_level=max_level,
@@ -1148,6 +1152,7 @@ def index(level, step):
         version=version(),
         adventures=adventures,
         customizations=customizations,
+        hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
