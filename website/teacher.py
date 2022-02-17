@@ -246,7 +246,6 @@ def routes(app, database, achievements):
             return utils.error_page(error=404, ui_message='no_such_class')
 
         body = request.json
-        print(body)
         #Validations
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
@@ -260,7 +259,12 @@ def routes(app, database, achievements):
         #Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body['levels']]
 
-        # Todo: TB -> Add validation and pre-processing of opening dates
+        opening_dates = body.get('opening_dates').copy()
+        for level, timestamp in body.get('opening_dates').items():
+            if len(timestamp) < 1: # No date is selected -> simply remove it from the dict
+                opening_dates.pop(level)
+            else:
+                opening_dates[level] = utils.datetotimeordate(timestamp)
 
         adventures = {}
         for name, adventure_levels in body['adventures'].items():
@@ -269,6 +273,7 @@ def routes(app, database, achievements):
         customizations = {
             'id': class_id,
             'levels': levels,
+            'opening_dates': opening_dates,
             'adventures': adventures,
             'teacher_adventures': body['teacher_adventures'],
             'other_settings': body['other_settings']
