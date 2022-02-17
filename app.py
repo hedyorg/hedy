@@ -213,7 +213,7 @@ def after_request_log_status(response):
     return response
 
 
-@app.before_request
+@app.before_first_request
 def initialize_session():
     """Make sure the session is initialized.
 
@@ -229,13 +229,13 @@ def initialize_session():
 
 
 if os.getenv('IS_PRODUCTION'):
-    @app.before_request
+    @app.before_first_request
     def reject_e2e_requests():
         if utils.is_testing_request(request):
             return 'No E2E tests are allowed in production', 400
 
 
-@app.before_request
+@app.before_first_request
 def before_request_proxy_testing():
     if utils.is_testing_request(request):
         if os.getenv('IS_TEST_ENV'):
@@ -281,7 +281,7 @@ parse_logger = jsonbin.MultiParseLogger(
     jsonbin.S3ParseLogger.from_env_vars())
 querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_querylog_transmitter_from_env())
 
-@app.before_first_request
+@app.before_request
 def setup_language():
     # Determine the user's requested language code.
     #
@@ -306,6 +306,7 @@ def setup_language():
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
         return "Language " + g.lang + " not supported", 404
+
     # Also get the 'ui' translations into a global object for this language, these
     # are used a lot so we can clean up a fair bit by initializing here.
     g.ui_texts = TRANSLATIONS.get_translations(g.lang, 'ui')
