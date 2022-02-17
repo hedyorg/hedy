@@ -1105,6 +1105,23 @@ question_score: 10
             correct_answer: "C"
             hint: "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
             question_score: 10
+        10:
+            question_text: "Which statement is true?"
+            code: |-
+                name ___ Hedy
+                print name 'is walking trough the forrest'
+            mp_choice_options:
+            -   "option_text": "You can only fill in the word is on the ___" ""
+                "feedback": "You are allowed to use the = sign as well"
+            -   "option_text": "You can fill in either the word is or the = sign on the ___"
+                "feedback": "Amazing!"
+            -   "option_text": "You have to fill in =is= on the ___."
+                "feedback": "No, one = sign is enough"
+            -   "option_text": "You can only use the = sign when working with numbers, not with words." ""
+                "feedback": "You can also use = with words."
+            correct_answer: "B"
+            hint: "is and = are both allowed"
+            question_score: 10
 
     7:
         1:
