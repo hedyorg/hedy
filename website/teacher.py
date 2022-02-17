@@ -264,7 +264,10 @@ def routes(app, database, achievements):
             if len(timestamp) < 1:
                 opening_dates.pop(level)
             else:
-                opening_dates[level] = utils.datetotimeordate(timestamp)
+                try:
+                    opening_dates[level] = utils.datetotimeordate(timestamp)
+                except:
+                    return 'One or more of your opening dates is invalid', 400
 
         adventures = {}
         for name, adventure_levels in body['adventures'].items():
