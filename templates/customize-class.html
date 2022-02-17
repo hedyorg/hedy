@@ -64,11 +64,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Here we fix the dynamic loading of date inputs -->
-                        <tr>
-                            <td class="border-r border-t border-gray-400">Level 1</td>
-                            <td class="border-t border-gray-400"><input type="date"></td>
-                        </tr>
+                        {% for i in range(1, max_level + 1) %}
+                            <tr class="{% if i not in customizations['levels'] %}hidden{% endif %}">
+                                <td class="border-r border-t border-gray-400">{{ ui.level_title }} {{ i }}</td>
+                                <td class="border-t border-gray-400"><input type="date"></td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
