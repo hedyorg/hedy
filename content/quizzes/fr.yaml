@@ -23,12 +23,12 @@ levels:
                   "feedback": "`echo` répète une réponse donnée."
                 - "code": "print"
                   "feedback": "Correct !"
-                - "code": "bonjour"
+                - "code": "Bonjour"
                   "feedback": "Bonjour n'est pas une commande."
                 - "code": "ask"
                   "feedback": "Avec `ask`, tu peux poser une question."
             correct_answer: "B"
-            hint: "(?) Hello world!"
+            hint: "(?) Hello world !"
             question_score: 10
         3:
             question_text: "Comment demander à quelqu'un quelle est sa couleur préférée ?"
@@ -78,7 +78,7 @@ levels:
                 - "code": "echo"
                   "feedback": "C'est ça !"
             correct_answer: "D"
-            hint: "tu veux voir la réponse à la fin de la ligne 2..."
+            hint: "Tu veux voir la réponse à la fin de la ligne 2..."
             question_score: 10
         6:
             question_text: "Quel est le problème avec ce code ?"
@@ -88,13 +88,13 @@ levels:
                 echo Tu prefere...
                 print Cool ! Moi aussi !
             mp_choice_options:
-                - "option_text": "A la ligne 1, `print` doit être remplacé par `ask`."
+                - "option_text": "À la ligne 1, `print` doit être remplacé par `ask`."
                   "feedback": "L'affichage de la ligne 1 est correcte ; faites attention à l'orthographe des mots."
-                - "option_text": "A la ligne 2, `ask` est mal écrit."
+                - "option_text": "À la ligne 2, `ask` est mal écrit."
                   "feedback": "Super ! Tu as été attentif !"
                 - "option_text": "La ligne 3 doit commencer par `print` au lieu de `echo`."
                   "feedback": "Echo est la bonne commande ; vérifie l'orthographe des commandes."
-                - "option_text": "A la ligne 4, `print` est mal orthographié."
+                - "option_text": "À la ligne 4, `print` est mal orthographié."
                   "feedback": "Non, mais il y a une faute d'orthographe quelque part ailleurs..."
             correct_answer: "B"
             hint: "Vérifie la façon dont les commandes sont écrites."
@@ -109,7 +109,7 @@ levels:
             mp_choice_options:
                 - "option_text": "À la ligne 1, `print` doit être remplacé par `ask`."
                   "feedback": "Tu es sûr que c'est un problème ?"
-                - "option_text": "A la ligne 1 `print` doit être remplacé par `echo`"
+                - "option_text": "À la ligne 1 `print` doit être remplacé par `echo`"
                   "feedback": "Tu es sûr que quelque chose ne va pas ?"
                 - "option_text": "À la ligne 3, il faut remplacer `echo` par `print`."
                   "feedback": "Tu es sûr que c'est un problème ?"
@@ -119,10 +119,10 @@ levels:
             hint: "Vérifie le code ligne par ligne"
             question_score: 10
         8:
-            question_text: "A quoi sert la commande `echo` ?"
+            question_text: "À quoi sert la commande `echo` ?"
             code: "..."
             mp_choice_options:
-                - "option_text": "On peux l'utiliser pour poser une question."
+                - "option_text": "On peut l'utiliser pour poser une question."
                   "feedback": "Tu as confondu avec la commande `ask` !"
                 - "option_text": "Tu peux l'utiliser pour afficher du texte."
                   "feedback": "Tu as confondu avec la commande `print` !"
@@ -140,14 +140,14 @@ levels:
                 print Comment vas-tu ?
                 echo Alors tu vas bien..."
             mp_choice_options:
-                - "option_text": "le `print` à la ligne 1 devrait être `ask`"
+                - "option_text": "Le `print` à la ligne 1 devrait être `ask`"
                   "feedback": "Non, il faut bien un `print` ici !"
-                - "option_text": "le `print` à la ligne 2 devrait être `ask`"
+                - "option_text": "Le `print` à la ligne 2 devrait être `ask`"
                   "feedback": "Super !"
                 - "option_text": "`echo` à la ligne 3 devrait être `ask`"
                   "feedback": "Non, il faut bien un `echo` ici !"
                 - "option_text": "Rien. C'est un code parfait !"
-                  "feedback": "Regarde plus attentivement.."
+                  "feedback": "Regarde plus attentivement..."
             correct_answer: "B"
             hint: "`ask` te permet de poser une question"
             question_score: 10
@@ -183,7 +183,7 @@ levels:
             code: "..."
             mp_choice_options:
                 -   "code": "nom is ask Quel est ton nom ?"
-                    "feedback": "Super!"
+                    "feedback": "Super !"
                 -   "code": "ask is nom Quel est ton nom ?"
                     "feedback": "Les mots sont justes, l'ordre ne l'est pas !"
                 -   "code": "ask Quel est ton nom ?"
@@ -194,7 +194,7 @@ levels:
             hint: "ask ne fonctionne pas comme au niveau 1"
             question_score: 10
         3:
-            question_text: "Qu'est-ce qui apparaît sur ton écran de sortie lorsque tu lance ce code ?"
+            question_text: "Qu'est-ce qui apparaît sur ton écran de sortie lorsque tu lances ce code ?"
             code: |-
                 nom is Marion
                 print nom va au marché et elle achète une pomme.
@@ -206,29 +206,29 @@ levels:
                 -   "option_text": "Marion va au marché et elle achète une pomme."
                     "feedback": "Bien joué !"
                 -   "option_text": "Marion va au marché et Marion achète une pomme."
-                    "feedback": "elle n'est pas remplacée par le nom"
+                    "feedback": "'elle' n'est pas remplacée par le nom"
             correct_answer: "C"
             hint: "Le mot 'nom' est remplacé par 'Marion'."
             question_score: 10
         4: 
-            question_text: "Que verra tu sur l'écran de sortie lorsque tu lance ce code ?"
+            question_text: "Que verras-tu sur l'écran de sortie lorsque tu lances ce code ?"
             code: |-
                 nom is Hedy
-                print salut mon nom est nom !
+                print Salut mon nom est nom !
             mp_choice_options:
-                -   "option_text": "salut mon nom est nom !"
+                -   "option_text": "Salut mon nom est nom !"
                     "feedback": "La variable nom est remplacé par Hedy"
-                -   "option_text": "salut mon nom est Hedy !"
+                -   "option_text": "Salut mon nom est Hedy !"
                     "feedback": "La variable nom est remplacé par Hedy"
-                -   "option_text": "salut mon Hedy est nom !"
+                -   "option_text": "Salut mon Hedy est nom !"
                     "feedback": "La variable nom est remplacé par Hedy"
-                -   "option_text": "salut mon Hedy est Hedy !"
-                    "feedback": "Correct, ce problème sera corrigée dans le niveau 3 !"
+                -   "option_text": "Salut mon Hedy est Hedy !"
+                    "feedback": "Correct, ce problème sera corrigé dans le niveau 3 !"
             correct_answer: "D"
             hint: "Le mot 'nom' est remplacé par 'Hedy' aux deux endroits."
             question_score: 10
         5:
-            question_text: "Que se passe-t-il lorsque tu utilise la commande `sleep` ?"
+            question_text: "Que se passe-t-il lorsque tu utilises la commande `sleep` ?"
             code: ""
             mp_choice_options:
                 -   "option_text": "Il ralentit ton ordinateur"
@@ -281,16 +281,16 @@ levels:
         8:
             question_text: "Comment corriger la première ligne de code ?"
             code: |-
-                ask is 'Quel age as-tu ?'
-                print age
+                ask is 'Quel âge as-tu ?'
+                print âge
             mp_choice_options:
-                -   "option_text": "age ask is Quel age as-tu ?"
+                -   "option_text": "âge ask is Quel âge as-tu ?"
                     "feedback": "Ce n'est pas le bon ordre !"
-                -   "option_text": "ask is age Quel age as-tu ?"
+                -   "option_text": "ask is âge Quel âge as-tu ?"
                     "feedback": "Ce n'est pas le bon ordre !"
-                -   "option_text": "age is ask Quel age as-tu ?"
+                -   "option_text": "âge is ask Quel âge as-tu ?"
                     "feedback": "C'est le bon ordre !"
-                -   "option_text": "age is Quel age as-tu ?"
+                -   "option_text": "âge is Quel âge as-tu ?"
                     "feedback": "Où est la commande 'ask' ?"
             correct_answer: "C"
             hint: "Le nom de la variable doit venir en premier"
@@ -305,7 +305,7 @@ levels:
                     "feedback": "Le nom de la variable est animaux."
                 -   "option_text": "La ligne 1 devrait dire : animaux is chiens"
                     "feedback": "Bien !"
-                -   "option_text": "La ligne 2 devrait dire : print Jaime les animal"
+                -   "option_text": "La ligne 2 devrait dire : print Jaime les animals"
                     "feedback": "Le nom de la variable est animaux"
                 -   "option_text": "La ligne 2 devrait dire : sleep Jaime les animaux"
                     "feedback": "sleep n'est pas utilisé pour afficher du texte"
@@ -325,7 +325,7 @@ levels:
                 -   "option_text": "print fraises"
                     "feedback": "Tu ne veux pas d'une commande d'affichage au milieu de la ligne..."
                 -   "option_text": "fraises, chocolat, vanille"
-                    "feedback": "Si tu fait cela, tu fera une liste. Tu ne veux pas de ça maintenant."
+                    "feedback": "Si tu fait cela, tu feras une liste. Tu ne veux pas de ça maintenant."
                 -   "option_text": "ask Quel parfum de glace aimes-tu ?"
                     "feedback": "C'est vrai !"
             correct_answer: "D"
@@ -333,7 +333,7 @@ levels:
             question_score: 10
     3:
         1:
-            question_text: "Quelle commande utilise tu pour laisser Hedy choisir quelque chose arbitrairement ?"
+            question_text: "Quelle commande utilise-tu pour laisser Hedy choisir quelque chose arbitrairement ?"
             code: "..."
             mp_choice_options:
                 -   "code": "print"
@@ -343,7 +343,7 @@ levels:
                 -   "code": "is"
                     "feedback": "is est utilisé pour faire une liste"
                 -   "code": "at random"
-                    "feedback": "Correct!"
+                    "feedback": "Correct !"
             correct_answer: "D"
             hint: "Arbitrairement signifie au hasard."
             question_score: 10
@@ -357,10 +357,10 @@ levels:
                     "feedback": "Bon travail !"
                 -   "option_text": "La ligne 1 doit commencer par print."
                     "feedback": "Non, tu n'as pas besoin de print"
-                -   "option_text": "À la ligne 2, il faut dire 'animal' au lieu de 'animaux',"
+                -   "option_text": "À la ligne 2, il faut dire 'animal' au lieu de 'animaux'."
                     "feedback": "animaux is correct."
                 -   "option_text": "at random est mal écrit, il devrait être à ramdon"
-                    "feedback": "at random est l'orthographe correcte"
+                    "feedback": "at random est l'orthographe correcte."
             correct_answer: "A"
             hint: "Il y a un problème à la ligne 1"
             question_score: 10
@@ -441,7 +441,7 @@ levels:
             question_text: "Laquelle de ces réponses est vraie ?"
             code: "..."
             mp_choice_options:
-                -   "option_text": "`print` et `ask` maintenant ont a besoin de guillemets"
+                -   "option_text": "`print` et `ask` ont maintenant a besoin de guillemets"
                     "feedback": "C'est exact !"
                 -   "option_text": "Seul le `print` a besoin de guillemets"
                     "feedback": "`ask` a aussi besoin de guillemets !"
@@ -459,10 +459,10 @@ levels:
                 -   "code": "print `Salut !`"
                     "feedback": "Le guillemet n'est pas le bon !"
                 -   "code": "print 'Salut !'"
-                    "feedback": "Correct"
+                    "feedback": "Correct !"
                 -   "code": "print \" Salut \""
                     "feedback": "Ce sont des guillemets doubles, il faut des guillemets simples."
-                -   "code": "print , Salut,"
+                -   "code": "print ,Salut,"
                     "feedback": "C'est une virgule, tu as besoin de guillemets."
             correct_answer: "B"
             hint: "Choisis les bons guillemets."
@@ -489,7 +489,7 @@ levels:
                 -   "option_text": "Tu as besoin de guillemets autour du mot print, comme ceci : 'print'."
                     "feedback": "Les guillemets ne doivent pas entourer la commande elle-même."
                 -   "option_text": "Tu dois mettre des guillemets autour des mots que tu veux afficher."
-                    "feedback": "Super!"
+                    "feedback": "Super !"
                 -   "option_text": "Tu n'as pas besoin de guillemets lorsque tu utilise la commande `ask`."
                     "feedback": "Tu es sûr ?"
                 -   "option_text": "Tu peux choisir toi-même d'utiliser ou non des guillemets."
@@ -506,7 +506,7 @@ levels:
                 -   "code": "'print options at random'"
                     "feedback": "N'utilise jamais de guillemets devant la commande print."
                 -   "code": "print 'options' at random"
-                    "feedback": "Si tu fait cela, tu affichera le mot options."
+                    "feedback": "Si tu fait cela, tu afficheras le mot options."
                 -   "code": "print options at random"
                     "feedback": "Super !"
                 -   "option_text": "Rien, le code fonctionne !"
@@ -533,7 +533,7 @@ levels:
         7:
             question_text: "Quel est le problème avec ce code ?"
             code: |-
-                question is ask Que veux tu savoir ?
+                question is ask Que veux-tu savoir ?
                 réponses is oui, non, peut-être
                 print réponses at random
             mp_choice_options:
@@ -595,7 +595,7 @@ levels:
                 -   "option_text": "Les guillemets manquent à la ligne 2"
                     "feedback": "Correct"
                 -   "option_text": "Les guillemets sont absents aux lignes 2 et 3."
-                    "feedback": "La ligne 3 n'a pas besoin de guillemets car elle n'est pas affichée littéralement."
+                    "feedback": "La ligne 3 n'a pas besoin de guillemets, car elle n'est pas affichée littéralement."
                 -   "option_text": "Rien, ce code n'a pas d'erreurs"
                     "feedback": "Tu en as loupé une !"
             correct_answer: "B"
@@ -618,7 +618,7 @@ levels:
             hint: "Il n'y a pas eu de changement dans les commandes existantes."
             question_score: 10
         2:
-            question_text: "Qu'est-ce qui s'affichera lorsque tu tape le nom Hedy ?"
+            question_text: "Qu'est-ce qui s'affichera lorsque tu tapes le nom Hedy ?"
             code: |-
                 nom is ask 'Quel est ton nom ?'
                 if nom is Hedy print 'Bien' else print 'Mouais'
@@ -626,7 +626,7 @@ levels:
                 -   "option_text": "Bien"
                     "feedback": "Bien joué !"
                 -   "option_text": "Mouais"
-                    "feedback": "Ce sera dans le cas où tu tapera autre chose qu'Hedy"
+                    "feedback": "Ce sera dans le cas où tu taperas autre chose qu'Hedy"
                 -   "option_text": "Hedy"
                     "feedback": "Non, cela n'affichera pas le nom"
                 -   "option_text": "Erreur"
@@ -653,7 +653,7 @@ levels:
             hint: "if secret is ... print 'Correct !'"
             question_score: 10
         4:
-            question_text: "Qu'est-ce qu'Hedy affiche quand tu tape le mauvais mot de passe ?"
+            question_text: "Qu'est-ce qu'Hedy affiche quand tu tapes le mauvais mot de passe ?"
             code: |-
                 secret is ask 'Quel est le mot de passe ?'
                 if secret is ada print 'Correct !'
@@ -671,7 +671,7 @@ levels:
             hint: "L'ordinateur déclenchera l'alarme en cas d'intrusion !"
             question_score: 10
         5:
-            question_text: "Pourquoi Hedy sonnera l'alarme si tu tape Ada ?"
+            question_text: "Pourquoi Hedy sonnera l'alarme si tu tapes Ada ?"
             code: |-
                 secret is ask 'Quel est le mot de pass ?'
                 if secret is ada print 'Correct !'
@@ -683,7 +683,7 @@ levels:
                     "feedback": "Non, ce n'est pas le mot de passe."
                 -   "option_text": "Parce que ça s'écrit adda."
                     "feedback": "Regarde mieux !"
-                -   "option_text": "Parce qu'il manque un e à passe"
+                -   "option_text": "Parce qu'il manque un 'e' à passe"
                     "feedback": "C'est bien une faute de français, mais cela ne dérangera pas Hedy !"
             correct_answer: "A"
             hint: "Fais attention aux majuscules !"
@@ -794,7 +794,7 @@ levels:
             code: "print 2*10"
             mp_choice_options:
                 -   "option_text": "20"
-                    "feedback": "Correct!"
+                    "feedback": "Correct !"
                 -   "option_text": "12"
                     "feedback": "non, c'est une multiplication pas une addition"
                 -   "option_text": "2*10"
@@ -805,7 +805,7 @@ levels:
             hint: "Le * est utilisé comme signe de multiplication"
             question_score: 10
         2:
-            question_text: "Quel signe utilises tu pour une addition ?"
+            question_text: "Quel signe utilises-tu pour une addition ?"
             code: "..."
             mp_choice_options:
                 -   "option_text": "-"
@@ -838,8 +838,8 @@ levels:
             question_text: "Eve a 10 ans. Que va imprimer Hedy pour elle ?"
             code: |-
                 nom is ask 'Combien de lettres y a-t-il dans ton nom ?'
-                age is ask 'Quel âge as-tu ?'
-                nombremagique is nom*age
+                âge is ask 'Quel âge as-tu ?'
+                nombremagique is nom*âge
                 print 'Ton numéro porte bonheur est...' nombremagique
             mp_choice_options:
                 -   "option_text": "30"
@@ -862,15 +862,15 @@ levels:
                 print 'Ce fera ' prix 'euros s il te plait'
             mp_choice_options:
                 -   "option_text": "5 dollars"
-                    "feedback": "Hélas, c est plus cher"
+                    "feedback": "Hélas, c'est plus cher"
                 -   "option_text": "10 dollars"
-                    "feedback": "Non, c est 10 par personne !"
+                    "feedback": "Non, c'est 10 par personne !"
                 -   "option_text": "15 dollars"
                     "feedback": "Attention, c'est une multiplication !"
                 -   "option_text": "50 dollars"
                     "feedback": "Bien !"
             correct_answer: "D"
-            hint: "Le prix sera le nombre de personne multiplié par 10"
+            hint: "Le prix sera le nombre de personnes multiplié par 10"
             question_score: 10
         6:
             question_text: "Combien coûte un hamburger dans ce restaurant ?"
@@ -882,7 +882,7 @@ levels:
                 if choix is frites prix is 5
             mp_choice_options:
                 -   "option_text": "15 dollars"
-                    "feedback": "Super!"
+                    "feedback": "Super !"
                 -   "option_text": "5 dollars"
                     "feedback": "Les frites coûtent 5 dollars"
                 -   "option_text": "0 dollars"
@@ -893,14 +893,14 @@ levels:
             hint: "Regarde sur la 4eme ligne !"
             question_score: 10
         7:
-            question_text: "Pourquoi n'a t-on pas mis 'prix + 3' à la place de 'prix is prix + 3' à la ligne 7 ?"
+            question_text: "Pourquoi n'a-t-on pas mis 'prix + 3' à la place de 'prix is prix + 3' à la ligne 7 ?"
             code: |-
                 print 'Bienvenue chez Hedy !'
                 prix is 0
-                boisson is ask 'Que veux tu boire ?'
+                boisson is ask 'Que veux-tu boire ?'
                 if boisson is coca prix is prix + 3
                 if boisson is eau prix is prix + 1
-                plat is ask 'Que veux tu manger ?'
+                plat is ask 'Que veux-tu manger ?'
                 if plat is hamburger prix is prix + 15
                 if plat is frites prix is prix + 6
                 print 'cela fera' prix 'euros !'
@@ -1080,7 +1080,7 @@ levels:
                 cassis
             mp_choice_options:
                 -   "code": "print '1 2 3'\nprint 'chocolat'\nprint '1 2 3'\nprint '4 5 6'\nprint 'cassis'"
-                    "feedback": "Parfait, tu ne peux pas utilisé la commande `repeat` ici"
+                    "feedback": "Parfait, tu ne peux pas utiliser la commande `repeat` ici"
                 -   "code": "repeat 2 times print '1 2 3'\nprint '4 5 6'\nprint 'cassis'"
                     "feedback": "Où est passé le 'chocolat' ?"
                 -   "code": "repeat 2 times print '1 2 3'\nprint 'chocolat'\nprint '4 5 6'\nprint 'cassis'"
@@ -1098,15 +1098,15 @@ levels:
                 Au secours !
                 Au secours !
                 Au secours !
-                Aidez moi !
+                Aidez-moi !
             mp_choice_options:
-                -   "code": "print 'Batman survolait Gotham.'\nprint 'Quand soudain, il a entendu quelqu'un crier...'\nprint 'Au secours !'\nrepeat 3 times print 'Aidez moi !'"
-                    "feedback": "Tu ne répète pas la bonne ligne"
-                -   "code": "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu'un crier...'\nrepeat 3 times 'Au secours !'\nprint 'Aidez moi !'\n"
+                -   "code": "print 'Batman survolait Gotham.'\nprint 'Quand soudain, il a entendu quelqu'un crier...'\nprint 'Au secours !'\nrepeat 3 times print 'Aidez-moi !'"
+                    "feedback": "Tu ne répètes pas la bonne ligne"
+                -   "code": "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu'un crier...'\nrepeat 3 times 'Au secours !'\nprint 'Aidez-moi !'\n"
                     "feedback": "Hélas non !"
-                -   "code": "print Batman survolait Gotham.\nprint Quand soudain, il a entendu quelqu'un crier...\nrepeat 3 times print Au secours !\nprint Aidez moi !"
+                -   "code": "print Batman survolait Gotham.\nprint Quand soudain, il a entendu quelqu'un crier...\nrepeat 3 times print Au secours !\nprint Aidez-moi !"
                     "feedback": "Tu as oublié les guillemets"
-                -   "code": "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu'un crier...'\nrepeat 3 times print 'Au secours !'\nprint 'Aidez moi !'"
+                -   "code": "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu'un crier...'\nrepeat 3 times print 'Au secours !'\nprint 'Aidez-moi !'"
                     "feedback": "Parfait !"
             correct_answer: "D"
             hint: "'Au secours !' doit apparaître 3 fois"
@@ -1139,7 +1139,7 @@ levels:
                     print i
             mp_choice_options:
                 -   "code": "1\n2\n3"
-                    "feedback": "Correct!"
+                    "feedback": "Correct !"
                 -   "code": "1 2 3"
                     "feedback": "Ce n'est pas ça !"
                 -   "code": "1, 2, 3"
@@ -1147,7 +1147,7 @@ levels:
                 -   "code": "123"
                     "feedback": "Ce n'est pas ça !"
             correct_answer: "A"
-            hint: "Comment les nombres seront affiché ?"
+            hint: "Comment les nombres seront affichés ?"
             question_score: 10
         2:
             question_text: "Quel sera le code pour avoir cette sortie ?"
@@ -1157,15 +1157,15 @@ levels:
                 3
                 4
                 5
-                J'arrive.
+                Je suis là !
             mp_choice_options:
-                -   "code": "for i in range 1 to 5\n    print i\nprint 'J'arrive.'"
+                -   "code": "for i in range 1 to 5\n    print i\nprint 'Je suis là !'"
                     "feedback": "Parfait !"
-                -   "code": "for i in range 1 to 5\nprint i\nprint 'J'arrive.'"
+                -   "code": "for i in range 1 to 5\nprint i\nprint 'Je suis là !'"
                     "feedback": "Ce code ne fonctionnera pas. Tu as besoin d'une indentation après for."
-                -   "code": "for i in range 1 to 5\n    print i\n    print 'J'arrive.'"
-                    "feedback": "Hedy fera '1\nJ'arrive., 2\nJ'arrive. etc."
-                -   "code": "for i in range 1 to 5\n    print 'i'\nprint 'J'arrive.'"
+                -   "code": "for i in range 1 to 5\n    print i\n    print 'Je suis là !'"
+                    "feedback": "Hedy fera '1\nJe suis là !, 2\nJe suis là ! etc."
+                -   "code": "for i in range 1 to 5\n    print 'i'\nprint 'Je suis là !'"
                     "feedback": "`i` est une variable et ne devrait pas avoir de guillemets"
             correct_answer: "A"
             hint: "D'abord tous les nombres, puis la phrase !"
@@ -1188,7 +1188,7 @@ levels:
                 -   "code": "for i in range 0 to 10\n    print i"
                     "feedback": "Les nombres ne seront pas dans le bon sens"
                 -   "code": "for i in range 0 to 10\n    print - i"
-                    "feedback": "Les nombres seront négatif"
+                    "feedback": "Les nombres seront négatifs"
                 -   "code": "for i in range 10 to 0\n    print i"
                     "feedback": "Hélas, cela ne marchera pas"
                 -   "code": "for i in range 0 to 10\n    print 10 - i"
@@ -1287,8 +1287,8 @@ levels:
         9:
             question_text: "Combien de fois Hedy chante 'Hip hip Hourra !' ?"
             code: |-
-                age is ask 'Quel age as-tu ?'
-                for i in range 1 to age
+                âge is ask 'Quel âge as-tu ?'
+                for i in range 1 to âge
                     print is 'Hip hip Hourra !'
             mp_choice_options:
                 -   "option_text": "1 fois"
@@ -1300,10 +1300,10 @@ levels:
                 -   "option_text": "Cela dépend de ton âge."
                     "feedback": "C'est ça !"
             correct_answer: "D"
-            hint: "for i in range 1 to age"
+            hint: "for i in range 1 to âge"
             question_score: 10
         10:
-            question_text: "Quel est le code qui à fait cette affichage !"
+            question_text: "Quel est le code qui à fait cet affichage !"
             code: |-
                 blablablabla
                 blablablabla
@@ -1346,18 +1346,18 @@ levels:
             code: |-
                 plats = pizza, crêpe, glace
                 for plat in plats
-                    print 'je voudrai une ' plat
+                    print 'je voudrais une ' plat
             mp_choice_options:
-                - "code": "je voudrai une pizza"
+                - "code": "je voudrais une pizza"
                   "feedback": "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
-                - "code": "je voudrai une crêpe"
+                - "code": "je voudrais une crêpe"
                   "feedback": "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
-                - "code": "je voudrai une glace"
+                - "code": "je voudrais une glace"
                   "feedback": "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
                 - "code": |-
-                      je voudrai une pizza
-                      je voudrai une crêpe
-                      je voudrai une glace
+                      je voudrais une pizza
+                      je voudrais une crêpe
+                      je voudrais une glace
                   "feedback": "Bien !"
             correct_answer: "D"
             hint: "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
@@ -1491,17 +1491,17 @@ levels:
                 noms = Domitille, Camille, Charlotte
                 for nom in noms
                     for course in courses
-                        plat = ask nom ', que veux tu manger pour ' course '?'
+                        plat = ask nom ', que veux-tu manger pour ' course '?'
                         print nom ' choisis ' plat ' pour son ' course
             mp_choice_options:
-                - "option_text": "Domitille, que veux tu manger pour le plat principal ?"
+                - "option_text": "Domitille, que veux-tu manger pour le plat principal ?"
                   "feedback": "Parfait !"
-                - "option_text": "Camille, que veux tu manger pour le plat principal ?"
+                - "option_text": "Camille, que veux-tu manger pour le plat principal ?"
                   "feedback": "Domitille est la première de la liste !"
-                - "option_text": "Domitille, que veux tu manger pour le dessert ?"
+                - "option_text": "Domitille, que veux-tu manger pour le dessert ?"
                   "feedback": "le plat principal est en premier !"
                 - "option_text": "On ne sait pas ça. Hedy va choisir au hasard."
-                  "feedback": "Il n'y a pas la commande `at random` dans ce commande.."
+                  "feedback": "Il n'y a pas la commande `at random` dans ce code.."
             correct_answer: "A"
             hint: "Les premières options des deux listes sont choisies."
             question_score: 10
