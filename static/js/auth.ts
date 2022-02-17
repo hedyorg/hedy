@@ -16,6 +16,7 @@ interface User {
   password_repeat?: string;
   birth_year?: number;
   language?: string,
+  keyword_language?: string,
   country?: string;
   gender?: string;
   subscribe?: string;
@@ -30,6 +31,7 @@ interface UserForm {
   password?: string;
   birth_year?: string;
   language?: string,
+  keyword_language?: string,
   country?: string;
   gender?: string;
   subscribe?: string;
@@ -102,6 +104,7 @@ export const auth = {
         password: values.password,
         password_repeat: values.password_repeat,
         language: values.language,
+        keyword_language: values.keyword_language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
