@@ -259,9 +259,9 @@ def routes(app, database, achievements):
         #Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body['levels']]
 
-        opening_dates = body.get('opening_dates').copy()
+        opening_dates = body['opening_dates'].copy()
         for level, timestamp in body.get('opening_dates').items():
-            if len(timestamp) < 1: # No date is selected -> simply remove it from the dict
+            if len(timestamp) < 1:
                 opening_dates.pop(level)
             else:
                 opening_dates[level] = utils.datetotimeordate(timestamp)
