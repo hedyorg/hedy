@@ -497,9 +497,9 @@ def routes(app, database):
                updates[field] = None
 
         # We want to check if the user choose a new language, if so -> reload
-        # We can use g.lang for this to reduce the db calls
+        # We can use session['lang'] for this to reduce the db calls
         resp['reload'] = False
-        if g.lang != body['language']:
+        if session['lang'] != body['language']:
             resp['reload'] = True
 
         if updates:

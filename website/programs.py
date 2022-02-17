@@ -89,7 +89,7 @@ def routes(app, database, achievements):
             'id': program_id,
             'session': utils.session_id(),
             'date': utils.timems(),
-            'lang': g.lang,
+            'lang': session['lang'],
             'version': utils.version(),
             'level': body['level'],
             'code': body['code'],

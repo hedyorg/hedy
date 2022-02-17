@@ -210,14 +210,14 @@ def routes(app, database, achievements):
         if not Class or Class['teacher'] != user['username']:
             return utils.error_page(error=404,  ui_message='no_such_class')
 
-        if hedy_content.Adventures(g.lang).has_adventures():
-            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        if hedy_content.Adventures(session['lang']).has_adventures():
+            adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
         teacher_adventures = DATABASE.get_teacher_adventures(user['username']);
         customizations = DATABASE.get_class_customizations(class_id)
-        customize_class_translations = hedyweb.PageTranslations('customize-class').get_page_translations(g.lang)
+        customize_class_translations = hedyweb.PageTranslations('customize-class').get_page_translations(session['lang'])
 
         return render_template('customize-class.html', page_title=hedyweb.get_page_title('customize class'),
                                class_info={'name': Class['name'], 'id': Class['id']}, max_level=hedy.HEDY_MAX_LEVEL,
@@ -383,7 +383,7 @@ def routes(app, database, achievements):
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):
             # Set the current teacher language as new account language
-            account['language'] = g.lang
+            account['language'] = session['lang']
             store_new_account(account, account.get('email').strip().lower())
             if account.get('class'):
                 class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]
