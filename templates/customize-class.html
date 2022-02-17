@@ -54,13 +54,13 @@
     </div>
     <div class="flex flex-row">
         <div class="flex flex-col ltr:mr-4 rtl:ml-4">
-            <h3 class="px-4">Opening dates</h3>
+            <h3 class="px-4">{{ auth.opening_dates }}</h3>
             <div class="border border-gray-400 w-3/4 py-2 px-4 rounded-lg">
                 <table class="table-auto text-center opening_dates_overview">
                     <thead>
                         <tr>
-                            <th class="w-40 border-r border-gray-400 text-left px-4">Level</th>
-                            <th class="w-64">Opening date</th>
+                            <th class="w-40 border-r border-gray-400 text-left px-4">{{ ui.level_title }}</th>
+                            <th class="w-64">{{ auth.opening_date }}</th>
                         </tr>
                     </thead>
                     <tbody>
