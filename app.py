@@ -281,8 +281,7 @@ parse_logger = jsonbin.MultiParseLogger(
     jsonbin.S3ParseLogger.from_env_vars())
 querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_querylog_transmitter_from_env())
 
-
-@app.before_request
+@app.before_first_request
 def setup_language():
     # Determine the user's requested language code.
     #
