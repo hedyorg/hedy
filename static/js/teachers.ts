@@ -360,8 +360,6 @@ export function save_customizations(class_id: string) {
             });
         }
     });
-    console.log(opening_dates);
-
     let other_settings: string[] = [];
     $('.other_settings_checkbox').each(function() {
         if ($(this).prop("checked")) {
