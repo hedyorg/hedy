@@ -1077,7 +1077,7 @@ def change_language():
     body = request.json
     session['lang'] = body.get('lang')
     if session['lang'] in RTL_LANGUAGES:
-    session['dir'] = "rtl"
+        session['dir'] = "rtl"
     return jsonify({'succes': 200})
 
 @app.route('/translate_keywords', methods=['POST'])
