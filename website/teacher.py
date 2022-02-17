@@ -252,10 +252,15 @@ def routes(app, database, achievements):
         if not isinstance(body.get('levels'), list):
             return "Levels must be a list", 400
         if not isinstance(body.get('adventures'), dict):
-            return 'adventures must be a dict', 400
+            return 'Adventures must be a dict', 400
+        if not isinstance(body.get('opening_dates'), dict):
+            return 'Opening dates must be a dict', 400
 
         #Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body['levels']]
+
+        # Todo: TB -> Add validation and pre-processing of opening dates
+
         adventures = {}
         for name, adventure_levels in body['adventures'].items():
             adventures[name] = [int(i) for i in adventure_levels]

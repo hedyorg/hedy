@@ -374,6 +374,7 @@ export function save_customizations(class_id: string) {
       url: '/for-teachers/customize-class/' + class_id,
       data: JSON.stringify({
           levels: levels,
+          opening_dates: opening_dates,
           adventures: adventures,
           teacher_adventures: teacher_adventures,
           other_settings: other_settings
