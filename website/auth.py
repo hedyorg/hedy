@@ -441,7 +441,10 @@ def routes(app, database):
             return g.auth_texts.get('email_invalid'), 400
         if not isinstance(body.get('language'), str):
             return g.auth_texts.get('language_invalid'), 400
+        if not isinstance(body.get('keyword_language'), str):
+            return g.auth_texts.get('keyword_language_invalid'), 400
 
+        # Todo TB -> Store all validations inside a function, the signup / profile code is duplicate!
         # Validations, optional fields
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
@@ -490,13 +493,13 @@ def routes(app, database):
         username = user['username']
 
         updates = {}
-        for field in['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
-           if field in body:
+        for field in['country', 'birth_year', 'gender', 'language', 'keyword_language', 'prog_experience', 'experience_languages']:
+            if field in body:
                if field == 'experience_languages' and len(body[field]) == 0:
                    updates[field] = None
                else:
                    updates[field] = body[field]
-           else:
+            else:
                updates[field] = None
 
         # We want to check if the user choose a new language, if so -> reload

@@ -159,6 +159,7 @@ export const auth = {
       const payload: User = {
         email: values.email,
         language: values.language,
+        keyword_language: values.keyword_language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
