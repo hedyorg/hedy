@@ -114,7 +114,7 @@
         <label for="keyword_language">{{auth.preferred_keyword_language}}</label>
         <select id="keyword_language">
             {% for language in keyword_languages() %}
-                <option value="{{language.lang}}" {% if language.lang == current_language().lang %}selected{% endif %}>{{language.sym}}</option>
+                <option value="{{language.lang}}" {% if user_data and 'keyword_language' in user_data and user_data['keyword_language'] == language.lang %}selected{% endif %}>{{language.sym}}</option>
             {% endfor %}
         </select>
     </div>
