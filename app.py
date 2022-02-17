@@ -1,6 +1,8 @@
 # coding=utf-8
 import sys
 
+import flask
+
 import hedy_translation
 from website.yaml_file import YamlFile
 
@@ -284,6 +286,12 @@ parse_logger = jsonbin.MultiParseLogger(
 querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_querylog_transmitter_from_env())
 
 
+def get_translations():
+    if not flask.current_app.ui_texts:
+        flask.current_app.ui_texts = TRANSLATIONS.get_translations(session['lang'], 'ui')
+    if not flask.current_app.auth_texts:
+        flask.current_app.auth_texts = TRANSLATIONS.get_translations(session['lang'], 'Auth')
+
 @app.before_request
 def setup_language():
     # Determine the user's requested language code.
@@ -297,19 +305,15 @@ def setup_language():
     if 'dir' not in session:
         session['dir'] = "ltr"
 
+    get_translations()
+
     # Check that requested language is supported, otherwise return 404
     if session['lang'] not in ALL_LANGUAGES.keys():
         return "Language " + session['lang'] + " not supported", 404
-    # Also get the 'ui' translations into a global object for this language, these
-    # are used a lot so we can clean up a fair bit by initializing here.
-    g.ui_texts = TRANSLATIONS.get_translations(session['lang'], 'ui')
-    g.auth_texts = TRANSLATIONS.get_translations(session['lang'], 'Auth')
-
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning(
         'Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
-
 
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
@@ -1075,6 +1079,7 @@ def change_language():
     session['dir'] = "ltr"
     if session['lang'] in RTL_LANGUAGES:
         session['dir'] = "rtl"
+    get_translations()
     return jsonify({'succes': 200})
 
 @app.route('/translate_keywords', methods=['POST'])
@@ -1092,13 +1097,13 @@ def current_language():
 
 @app.template_global()
 def current_keyword_language():
-    return make_keyword_lang_obj(g.keyword_lang)
+    return make_keyword_lang_obj(session['keyword_lang'])
 
 @app.template_global()
 def other_keyword_language():
-    if session['lang'] in ALL_KEYWORD_LANGUAGES.keys() and g.keyword_lang != session['lang']:
+    if session['lang'] in ALL_KEYWORD_LANGUAGES.keys() and session['keyword_lang'] != session['lang']:
         return make_keyword_lang_obj(session['lang'])
-    if g.keyword_lang != "en": #Always return English as an option!
+    if session['keyword_lang'] != "en": #Always return English as an option!
         return make_keyword_lang_obj("en")
     return None
 

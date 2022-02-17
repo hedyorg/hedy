@@ -1,19 +1,13 @@
 import collections
 import json
-
 from website.yaml_file import YamlFile
 import attr
-import glob
 from os import path
-
-from flask import g, session
+from flask import session
 from flask_helpers import render_template
-
-import hedy_content
 from website.auth import current_user, is_teacher
-import re
 import utils
-from config import config
+
 
 class Translations:
   def __init__(self):
