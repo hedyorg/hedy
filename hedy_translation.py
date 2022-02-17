@@ -37,6 +37,9 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
     punctuation_symbols = ['!', '?', '.']
 
+    # FH feb 2022 this also replaces // by //// maybe we don't want to do that for translation with a
+    # extra argument?
+    # for now just don't test tests with // like level4.test_print_with_slashes()
     input_string = hedy.process_input_string(input_string, level)
 
     parser = hedy.get_parser(level, from_lang)
@@ -183,7 +186,7 @@ class ConvertToLang3(ConvertToLang2):
     def ask(self, args):
         var = args[0]
         remaining_args = args[1:]
-        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(remaining_args)
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ' '.join(remaining_args)
 
     def var_access(self, args):
         return ''.join([str(c) for c in args])

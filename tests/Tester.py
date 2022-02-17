@@ -116,7 +116,7 @@ class HedyTester(unittest.TestCase):
         if lang == 'en': # if it is English
           # and if the code transpiles (evidenced by the fact that we reach this line) we should be able to translate too
 
-          #TODO FH Feb 2022: we pcik Dutch here not really fair or good practice :D Maybe we should do a random language?
+          #TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D Maybe we should do a random language?
           in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
           back_in_english = hedy_translation.translate_keywords(in_dutch, from_lang="nl", to_lang=lang, level=self.level)
           self.assertEqual(code, back_in_english)
