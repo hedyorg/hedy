@@ -21,7 +21,7 @@ levels:
             question_score: 10
         2:
             question_text: "Welk commando moet je invullen op de streepjes om Hallo ! laten verschijnen in je uitvoerscherm ?"
-            code: "___ Hallo !"
+            code: "_?_ Hallo !"
             mp_choice_options:
                 -   code: "echo"
                     feedback: "Met echo herhaal je een antwoord..."
@@ -32,7 +32,7 @@ levels:
                 -   code: "ask"
                     feedback: "Met ask kun je een vraag stellen..."
             correct_answer: "B"
-            hint: "(?) Hello world !"
+            hint: "_?_ Hello world !"
             question_score: 10
         3:
             question_text: "Hoe vraag je: Wat is je lievelingskleur ?"
@@ -71,7 +71,7 @@ levels:
             question_text: "Welk commando mist in regel 2?"
             code: |-
                 ask Wat is jouw lievelingsdier ?
-                ? Dus jouw lievelingsdier is...
+                _?_ Dus jouw lievelingsdier is...
             mp_choice_options:
                 -   code: "print"
                     feedback: "Je wilt dat in regel 2 het antwoord herhaald wordt..."
@@ -251,7 +251,7 @@ levels:
             question_text: "Welk commando moet op de streepjes ?"
             code: |-
                 print En de prijs voor leukste programmeertaal gaat naar...
-                ___
+                _?_
                 print Hedy !
             mp_choice_options:
                 -   "option_text": "sleep"
@@ -269,7 +269,7 @@ levels:
             question_text: "Welke code moet er op het streepje staan ?"
             code: |-
                 print Ik ontplof over 3 seconden !
-                ___
+                _?_
                 print BOEM !
             mp_choice_options:
                 -   "code": "print 3"
@@ -320,7 +320,7 @@ levels:
         10:
             question_text: "Welk commando moet er op de lijntjes ?"
             code: |-
-                smaak is ___
+                smaak is _?_
                 print Jouw favoriete ijs is...
                 sleep 2
                 print smaak
@@ -714,7 +714,7 @@ levels:
                     print 'Hoi ik ben Hedy de voetbalvoorspeller !'
                     print 'Ik kan voorspellen op welke plek jouw club eindigt !'
                     club is ask Voor welke club ben je ?
-                    if club is ajax print 'Ajax wordt eerste natuurlijk !' ? print 'Helaas jouw club wordt laatste...'
+                    if club is ajax print 'Ajax wordt eerste natuurlijk !' _?_ print 'Helaas jouw club wordt laatste...'
             mp_choice_options:
             -   "option_text": ""
                 "code": "if"
@@ -736,7 +736,7 @@ levels:
             code: |-
                     print 'Ik kan voorspellen of jij miljonair wordt !'
                     naam is ask Hoe heet jij ?
-                    if naam is Hedy print 'Jij wordt miljonair !' else ? 'Helaas, geen miljoen voor jou.'
+                    if naam is Hedy print 'Jij wordt miljonair !' else _?_ 'Helaas, geen miljoen voor jou.'
             mp_choice_options:
             -   "option_text": ""
                 "code": "if"
@@ -757,7 +757,7 @@ levels:
             question_text: "Welk woord mist op de plek van het vraagteken ?"
             code: |-
                     dier is ask Wat is je lievelingsdier ?
-                    if ? is pinguin print 'Dat is ook mijn lievelingsdier !' else print 'Ik houd meer van pinguins.'
+                    if _?_ is pinguin print 'Dat is ook mijn lievelingsdier !' else print 'Ik houd meer van pinguins.'
             mp_choice_options:
             -   "option_text": ""
                 "code": "lievelingsdier"
@@ -1508,7 +1508,7 @@ levels:
         5:
             question_text: "Welk woord moet op de plek van het vraagteken ?"
             code: |-
-                for i in ? 1 to 10
+                for i in _?_ 1 to 10
                     print i
             mp_choice_options:
             -   "code": "rang"
@@ -1544,7 +1544,7 @@ levels:
             code: |-
                 print 'Welkom in restaurant Hedy'
                 mensen is ask 'Met hoeveel mensen komt u vanavond dineren ?'
-                ?
+                _?_
                     eten is ask 'Wat wilt u bestellen ?'
                     print eten
             mp_choice_options:
@@ -1620,10 +1620,10 @@ levels:
 
     10:
         1:
-            question_text: "Wat moet er op ___ komen te staan ?"
+            question_text: "Wat moet er op _?_ komen te staan ?"
             code: |-
                 complimentjes = super, goedzo, top
-                ___
+                _?_
                     print compliment
             mp_choice_options:
             - "code": "for each compliment"
@@ -1699,13 +1699,13 @@ levels:
             hint: "Kijk goed naar regel 2"
             question_score: 10
         5:
-            question_text: "Welk woord moet op je invullen op ___ bij deze digitale dobbelsteen ?"
+            question_text: "Welk woord moet op je invullen op _?_ bij deze digitale dobbelsteen ?"
             code: |-
                 print 'Welkom bij de digitale dobbelsteen !'
                 spelers = Anne, Jonneke, Jessie, Ilona
                 keuzes = 1, 2, 3, 4, 5, 6
                 for speler in spelers
-                    print speler ' gooit ' ___ at random
+                    print speler ' gooit ' _?_ at random
             mp_choice_options:
             - "code": "speler"
               "feedback": "Dan komt er te staan 'Anne gooit Ilona'. Dat is niet de bedoeling !"
@@ -1744,11 +1744,11 @@ levels:
             hint: "Elke speler kiest een optie. De speler die als eerste op het lijstje staat, wordt als eerst geprint."
             question_score: 10
         7:
-            question_text: "Wat moet er op de ___ staan in deze code die bepaalt wat je vanavond eet ?"
+            question_text: "Wat moet er op de _?_ staan in deze code die bepaalt wat je vanavond eet ?"
             code: |-
                 namen = Ron, Leslie, April, Andy
                 eten = pasta, friet, salade
-                ___
+                _?_
                     print naam ' eet vanavond ' food at random
             mp_choice_options:
             - "code": "for naam in namen"
@@ -1763,12 +1763,12 @@ levels:
             hint: "Elke naam moet weten wat hij/zij vanavond eet."
             question_score: 10
         8:
-            question_text: "Wat moet er op ___ staan bij deze code die bepaalt wat voor kleur short je draagt ?"
+            question_text: "Wat moet er op _?_ staan bij deze code die bepaalt wat voor kleur short je draagt ?"
             code: |-
                 namen = Donna, Tommy, Ben
                 kleuren = blauw, rood, geel
                 for naam in namen
-                    print ___
+                    print _?_
             mp_choice_options:
             - "code": "'naam krijgt een kleur shirt'"
               "feedback": "Dat is hem niet !"

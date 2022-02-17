@@ -28,7 +28,7 @@ levels:
                 - "code": "ask"
                   "feedback": "Avec `ask`, tu peux poser une question."
             correct_answer: "B"
-            hint: "(?) Hello world !"
+            hint: "_?_ Hello world !"
             question_score: 10
         3:
             question_text: "Comment demander à quelqu'un quelle est sa couleur préférée ?"
@@ -67,7 +67,7 @@ levels:
             question_text: "Quelle commande manque à la ligne 2 ?"
             code: |-
                 ask Quel est ton animal préféré ?
-                ? Donc ton animal préféré est...
+                _?_ Donc ton animal préféré est...
             mp_choice_options:
                 - "code": "print"
                   "feedback": "Non, tu veux que la réponse te soit répétée."
@@ -246,7 +246,7 @@ levels:
             question_text: "Qu'est-ce qui doit figurer sur les lignes ?"
             code: |-
                 print Et le prix du meilleur langage de programmation revient à...
-                ___
+                _?_
                 print Hedy !
             mp_choice_options:
                 -   "option_text": "sleep"
@@ -264,7 +264,7 @@ levels:
             question_text: ""
             code: |-
                 print Je vais exploser dans 3 secondes !
-                ___
+                _?_
                 print BOOM!
             mp_choice_options:
                 -   "code": "print 3"
@@ -315,7 +315,7 @@ levels:
         10:
             question_text: "Quelle commande doit être utilisée sur la ligne 1 ?"
             code: |-
-                gout is ___
+                gout is _?_
                 print Ta glace préférée is ...
                 sleep
                 print gout
@@ -695,7 +695,7 @@ levels:
                 print 'Je vais prédire quelle place ton équipe va occuper !'
                 club is ask 'Quel est ton club préféré ?'
                 if club is Brest print 'Le Stade brestois 29 va gagner !'
-                ? print 'Désolé, ton club va terminer à la dernière place...'
+                _?_ print 'Désolé, ton club va terminer à la dernière place...'
             mp_choice_options:
                 -   "code": "if"
                     "feedback": "if est déjà au début de la ligne"
@@ -714,7 +714,7 @@ levels:
                 print 'Je peux prédire si tu seras millionnaire ou pas !'
                 prenom is ask 'Dis moi ton nom..'
                 if prenom is Hedy print 'Tu seras millionnaire !'
-                else ? 'Malheureusement... Pas de grosses fortunes pour toi.'
+                else _?_ 'Malheureusement... Pas de grosses fortunes pour toi.'
             mp_choice_options:
                 -   "code": "if"
                     "feedback": "if est déjà sur la ligne juste au-dessus"
@@ -731,7 +731,7 @@ levels:
             question_text: "Quel mot devrait être à la place du point d'interrogation ?"
             code: |-
                 animal is ask 'Quel est ton animal favori ?'
-                if ? is pingouin print 'Cest aussi mon animal préféré !'
+                if _?_ is pingouin print 'Cest aussi mon animal préféré !'
                 else print 'Cool ! moi je préfère les pingouins.'
             mp_choice_options:
                 -   "code": "animal favori"
@@ -1216,7 +1216,7 @@ levels:
         5:
             question_text: "Quel est la commande manquante ?"
             code: |-
-                for i in ? 1 to 10
+                for i in _?_ 1 to 10
                     print i
             mp_choice_options:
                 -   "code": "rang"
@@ -1252,7 +1252,7 @@ levels:
             code: |-
                 print 'Bienvenue chez Hedy'
                 gens is ask 'Combien de personnes vont manger ici ce soir ?'
-                ?
+                _?_
                     plat is ask 'Que voulez-vous commander ?'
                     print plat
             mp_choice_options:
@@ -1327,7 +1327,7 @@ levels:
             question_text: "Quel est la ligne manquante ?"
             code: |-
                 compliments = parfait, bien, genial
-                _
+                _?_
                     print compliment
             mp_choice_options:
                 - "code": "for chaque compliment"
@@ -1408,7 +1408,7 @@ levels:
                 joueurs = deborah, camille, emma, marion, coline
                 choix = 1, 2, 3, 4, 5, 6
                 for joueur in joueurs
-                    print joueur ' à fait un ' _ at random
+                    print joueur ' à fait un ' _?_ at random
             mp_choice_options:
                 - "code": "joueurs"
                   "feedback": "Cela fera 'emma à fait un coline'"
@@ -1451,7 +1451,7 @@ levels:
             code: |-
                 noms = eloise, fanny, soledad
                 plats = pates, frites, salade
-                _
+                _?_
                     print nom ' veut manger ' plats at random ' ce soir '
             mp_choice_options:
                 - "code": "for nom in noms"
@@ -1471,7 +1471,7 @@ levels:
                 noms = Maria, Amelie, Delphine
                 couleurs = bleu, rouge, jaune, vert
                 for nom in noms
-                    print _
+                    print _?_
             mp_choice_options:
                 - "code": "'nom veut un pantalon'"
                   "feedback": "Ce n'est pas ça !"

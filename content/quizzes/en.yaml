@@ -28,7 +28,7 @@ levels:
                 - "code": "ask"
                   "feedback": "With ask, you can ask a question."
             correct_answer: "B"
-            hint: "(?) Hello world !"
+            hint: "_?_ Hello world !"
             question_score: 10
         3:
             question_text: "How do you ask what someone's favorite color is ?"
@@ -67,7 +67,7 @@ levels:
             question_text: "Which command is missing in line 2?"
             code: |-
                 ask What is your favorite pet ?
-                ? So your favorite pet is..."
+                _?_ So your favorite pet is..."
             mp_choice_options:
                 - "code": "print"
                   "feedback": "No, you would like the answer to be repeated back to you."
@@ -246,7 +246,7 @@ levels:
             question_text: "What should be on the lines ?"
             code: |-
                 print And the award for best programming language goes to...
-                ___
+                _?_
                 print Hedy !
             mp_choice_options:
                 -   "option_text": "sleep"
@@ -264,7 +264,7 @@ levels:
             question_text: ""
             code: |-
                 print I will explode in 3 seconds !
-                ___
+                _?_
                 print BOOM !
             mp_choice_options:
                 -   "code": "print 3"
@@ -315,7 +315,7 @@ levels:
         10:
             question_text: "What command should be used on the line ?"
             code: |-
-                flavor is ___
+                flavor is _?_
                 print Your favorite icecream is...
                 sleep
                 print flavor
@@ -709,7 +709,7 @@ levels:
                 print 'I will predict what place your team will end up !'
                 club is ask 'Which club is your favorite ?'
                 if club is ajax print 'Ajax is going to win of course !'
-                ? print 'Sorry, your club is gonna be in last place...'
+                _?_ print 'Sorry, your club is gonna be in last place...'
             mp_choice_options:
                 -   "option_text": ""
                     "code": "if"
@@ -732,7 +732,7 @@ levels:
                 print 'I can predict if you will be a millionair or not !'
                 name is ask 'Whats your name ?'
                 if name is Hedy print 'You will be a millionair !'
-                else ? 'Unfortunately... No big money for you.'
+                else _?_ 'Unfortunately... No big money for you.'
             mp_choice_options:
                 -   "option_text": ""
                     "code": "if"
@@ -753,7 +753,7 @@ levels:
             question_text: "Which word should be on the place of the question mark ?"
             code: |-
                 animal is ask 'What is your favorite animal ?'
-                if ? is penguin print 'Thats my favorite animal too !'
+                if _?_ is penguin print 'Thats my favorite animal too !'
                 else print 'Cool ! I like penguins.'
             mp_choice_options:
                 -   "option_text": ""
@@ -1306,7 +1306,7 @@ levels:
         5:
             question_text: "What word should be at the place of the question mark ?"
             code: |-
-                for i in ? 1 to 10
+                for i in _?_ 1 to 10
                     print i
             mp_choice_options:
                 -   "code": "rang"
@@ -1343,7 +1343,7 @@ levels:
             code: |-
                 print 'Welcome to Hedy's diner'
                 people is ask 'How many people will be eating here tonight ?'
-                ?
+                _?_
                     food is ask 'What would you like to order ?'
                     print food
             mp_choice_options:
@@ -1419,10 +1419,10 @@ levels:
 
     11:
         1:
-            question_text: "What do we need to fill in on the _ ?"
+            question_text: "What do we need to fill in on the _?_ ?"
             code: |-
                 compliments = perfect, great job, amazing
-                _
+                _?_
                     print compliment
             mp_choice_options:
                 - "code": "for each compliment"
@@ -1498,13 +1498,13 @@ levels:
             hint: "Line 2 says For each `item` in the list of groceries"
             question_score: 10
         5:
-            question_text: "What word should be on the _ with these digital dice ?"
+            question_text: "What word should be on the _?_ with these digital dice ?"
             code: |-
                 print 'Welcome to the digital dice !'
                 players = Ann, John, Jesse
                 choices = 1, 2, 3, 4, 5, 6
                 for player in players
-                    print player ' throws ' _ at random
+                    print player ' throws ' _?_ at random
             mp_choice_options:
                 - "code": "players"
                   "feedback": "It would say 'Ann throws Jesse', instead of 'Ann throws 6'."
@@ -1543,11 +1543,11 @@ levels:
             hint: "Each player will pick an option. The player that's first on the list will go first."
             question_score: 10
         7:
-            question_text: "What line should be on the _ in this code that decide what these people will have for dinner ?"
+            question_text: "What line should be on the _?_ in this code that decide what these people will have for dinner ?"
             code: |-
                 names = Ron, Leslie, April, Andy
                 food = pasta, fries, salad
-                _
+                _?_
                     print name ' has to eat ' food at random ' for dinner'
             mp_choice_options:
                 - "code": "for name in names"
@@ -1562,12 +1562,12 @@ levels:
             hint: "Each name should be told what they will have for dinner."
             question_score: 10
         8:
-            question_text: "What should be on the _ in this code that decides which color shirt you get ?"
+            question_text: "What should be on the _?_ in this code that decides which color shirt you get ?"
             code: |-
                 names = Donna, Tommy, Ben
                 colors = blue, red, purple
                 for name in names
-                    print _
+                    print _?_
             mp_choice_options:
                 - "code": "'name gets a color shirt'"
                   "feedback": "That's not it !"
