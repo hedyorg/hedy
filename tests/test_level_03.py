@@ -42,16 +42,19 @@ class TestsLevel3(HedyTester):
         code=code,
         max_level=6,
         expected=expected,
-        lang='ar')
+        lang='ar',
+        translate=False
+        )
 
-  def test_assign_arabic_comma(self):
-    code = "animals is cat، dog، platypus"
+  def test_assign_arabic_comma_and_is(self):
+    code = "animals هو cat، dog، platypus"
     expected = "animals = ['cat', 'dog', 'platypus']"
 
     self.multi_level_tester(
       code=code,
       max_level=11,
-      expected=expected)
+      expected=expected,
+      lang='ar')
 
   def test_assign_comma_arabic(self):
     code = "صديقي هو احمد، خالد، حسن"
@@ -93,7 +96,7 @@ class TestsLevel3(HedyTester):
     expected = textwrap.dedent("""\
     print(f'hallo!')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, translate=False)
 
   def test_print_asterisk(self):
     code = "print *Jouw* favoriet is dus kleur"
@@ -111,7 +114,7 @@ class TestsLevel3(HedyTester):
 
     output = "'Welcome to OceanView! '"
 
-    self.single_level_tester(code=code, expected=expected, output=output)
+    self.single_level_tester(code=code, expected=expected, output=output, translate=False)
 
   def test_print_slashes(self):
     code = "print Welcome to O/ceanView"
@@ -342,7 +345,7 @@ class TestsLevel3(HedyTester):
     expected = textwrap.dedent("""\
     print(f'hallo wereld')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, translate=False)
 
   #combined tests
   def test_ask_print(self):
@@ -531,7 +534,8 @@ class TestsLevel3(HedyTester):
     self.single_level_tester(
       # max_level=3,
       code=code,
-      expected=expected
+      expected=expected,
+      translate=False
     )
 
   def test_add_ask_to_list(self):

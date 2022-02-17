@@ -46,7 +46,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
     # FH Feb 2022 todo trees containing invalid nodes are happily translated, should be stopped here!
 
-    translated_program = TRANSLATOR_LOOKUP[level](keyword_dict, punctuation_symbols).transform(program_root)
+    translated_program = TRANSLATOR_LOOKUP[level](keyword_dict, punctuation_symbols, to_lang).transform(program_root)
 
     return translated_program
 
@@ -70,9 +70,10 @@ def indent(s):
 @hedy_translator(level=1)
 class ConvertToLang1(Transformer):
 
-    def __init__(self, keywords, punctuation_symbols):
+    def __init__(self, keywords, punctuation_symbols, to_lang):
         self.keywords = keywords
         self.punctuation_symbols = punctuation_symbols
+        self.to_lang = to_lang
         __class__.level = 1
 
     def command(self, args):
@@ -188,7 +189,8 @@ class ConvertToLang3(ConvertToLang2):
         return ''.join([str(c) for c in args])
 
     def assign_list(self, args):
-        return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
+        comma = "، " if self.to_lang == 'ar' else ", "
+        return args[0] + " " + self.keywords["is"] + " " + comma.join([str(c) for c in args[1:]])
 
     def list_access(self, args):
         return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
