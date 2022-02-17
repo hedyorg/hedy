@@ -54,6 +54,26 @@
     </div>
     <div class="flex flex-row">
         <div class="flex flex-col ltr:mr-4 rtl:ml-4">
+            <h3 class="px-4">Opening dates</h3>
+            <div class="border border-gray-400 w-3/4 py-2 px-4 rounded-lg">
+                <table class="table-auto w-full text-center opening_dates_overview">
+                    <thead>
+                        <tr>
+                            <th class="border-r border-gray-400">Level</th>
+                            <th>Opening date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Here we fix the dynamic loading of date inputs -->
+                        <tr>
+                            <td class="border-r border-t border-gray-400">Level 1</td>
+                            <td class="border-t border-gray-400"><input type="date"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="flex flex-col ltr:ml-4 rtl:mr-4">
             <h3 class="px-4">{{ auth.select_own_adventures }}</h3>
             <div class="border border-gray-400 py-2 px-4 rounded-lg">
                 <table class="table-auto text-center w-full customize_own_adventure_overview">
@@ -78,7 +98,9 @@
                 </table>
             </div>
         </div>
-        <div class="flex flex-col ltr:ml-4 rtl:mr-4">
+    </div>
+    <div class="flex flex-row mt-4">
+        <div class="flex flex-col ltr:mr-4 rtl:ml-4">
             <h3 class="px-4">{{ auth.other_settings}}</h3>
             <div class="border border-gray-400 py-2 px-4 rounded-lg">
                 <table class="table-auto text-center w-full customize_other_settings">
@@ -99,16 +121,16 @@
                 </table>
             </div>
         </div>
-    </div>
-    <div class="flex flex-col mt-4">
-        <div class="flex flex-row ml-auto">
-            <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
-            <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
-        </div>
-        <div class="flex flex-row mt-2 ml-auto">
-            <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
-            {{ auth.remove_customization }}</button>
-            <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
+        <div class="flex flex-col">
+            <div class="flex flex-row ml-auto">
+                <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
+                <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
+            </div>
+            <div class="flex flex-row mt-2 ml-auto">
+                <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
+                {{ auth.remove_customization }}</button>
+                <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
+            </div>
         </div>
     </div>
 </div>
