@@ -351,14 +351,20 @@ export function save_customizations(class_id: string) {
             teacher_adventures.push(<string>$(this).attr('id'));
         }
     });
-
+    let other_settings: string[] = [];
+    $('.other_settings_checkbox').each(function() {
+        if ($(this).prop("checked")) {
+            other_settings.push(<string>$(this).attr('id'));
+        }
+    });
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
       data: JSON.stringify({
           levels: levels,
           adventures: adventures,
-          teacher_adventures: teacher_adventures
+          teacher_adventures: teacher_adventures,
+          other_settings: other_settings
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -384,6 +390,7 @@ export function remove_customizations(class_id: string) {
             $('#customizations_alert').removeClass('hidden');
             $('.adventure_level_input').prop('checked', false);
             $('.teacher_adventures_checkbox').prop('checked', false);
+            $('.other_settings_checkbox').prop('checked', false);
             $('.level-select-button').removeClass('green-btn');
             $('.level-select-button').addClass('blue-btn');
         }).fail(function (err) {

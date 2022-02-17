@@ -885,6 +885,10 @@ def index(level, step):
     for adventure in customizations.get('teacher_adventures', []):
         teacher_adventures.append(DATABASE.get_adventure(adventure))
 
+    enforce_developers_mode = False
+    if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
+        enforce_developers_mode = True
+
     return hedyweb.render_code_editor_with_tabs(
         level_defaults=defaults,
         max_level=max_level,
@@ -892,6 +896,7 @@ def index(level, step):
         version=version(),
         adventures=adventures,
         customizations=customizations,
+        enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
