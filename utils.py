@@ -202,8 +202,8 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
     if error not in [403, 404, 500]:
         error = 404
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
-                           page_error=page_error or g.ui_texts.get(ui_message) or '',
-                           default=g.ui_texts.get("default_" + str(error))), error
+                           page_error=page_error or session['ui_texts'].get(ui_message) or '',
+                           default=session['ui_texts'].get("default_" + str(error))), error
 
 def gather_content_files(*path) -> List[str]:
     return glob.glob(f"{construct_content_path(*path)}{os.path.sep}*.yaml")

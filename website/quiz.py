@@ -57,10 +57,10 @@ def routes(app, database, achievements):
 
             # If we don't have an attempt ID yet, redirect to the start page
         if not session.get('quiz-attempt-id'):
-            return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
+            return redirect(url_for('get_quiz_start', level=level_source, lang=session['lang']))
 
             # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level_source)
+        questions = quiz_data_file_for(session['lang'], level_source)
         if not questions:
             return no_quiz_data_error()
 
@@ -70,7 +70,7 @@ def routes(app, database, achievements):
         question_status = 'start' if attempt == 1 else 'false'
 
         if question_nr > highest_question(questions):
-            return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
+            return redirect(url_for('quiz_finished', level=level_source, lang=session['lang']))
 
         question = get_question(questions, question_nr)
         question_obj = question_options_for(question)
@@ -110,7 +110,7 @@ def routes(app, database, achievements):
                                correct=session.get('correct_answer'),
                                attempt=attempt,
                                is_last_attempt=attempt == MAX_ATTEMPTS,
-                               lang=g.lang,
+                               lang=session['lang'],
                                cross=icons['cross'],
                                check=icons['check'],
                                triangle=icons['triangle'],
@@ -127,7 +127,7 @@ def routes(app, database, achievements):
             return quiz_disabled_error()
 
         # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level)
+        questions = quiz_data_file_for(session['lang'], level)
         if not questions:
             return no_quiz_data_error()
 
@@ -166,7 +166,7 @@ def routes(app, database, achievements):
 
         # If we don't have an attempt ID yet, redirect to the start page
         if not session.get('quiz-attempt-id'):
-            return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
+            return redirect(url_for('get_quiz_start', level=level_source, lang=session['lang']))
 
         # Get the chosen option from the request form with radio buttons
         # This looks like '1-B' or '5-C' or what have you.
@@ -179,7 +179,7 @@ def routes(app, database, achievements):
             print('-----------------chosen option', chosen_option)
 
             # Reading the yaml file
-            questions = quiz_data_file_for(g.lang, level_source)
+            questions = quiz_data_file_for(session['lang'], level_source)
             if not questions:
                 return no_quiz_data_error()
 
@@ -216,18 +216,18 @@ def routes(app, database, achievements):
 
                 quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
                 return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source,
-                                        question_nr=question_nr, lang=g.lang))
+                                        question_nr=question_nr, lang=session['lang']))
 
             # Not a correct answer. You can try again if you haven't hit your max attempts yet.
             if attempt >= MAX_ATTEMPTS:
                 quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
                 return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source,
-                                        question_nr=question_nr, lang=g.lang, ))
+                                        question_nr=question_nr, lang=session['lang'], ))
 
         # Redirect to the display page to try again
         return redirect(
             url_for('get_quiz', chosen_option=chosen_option, level_source=level_source, question_nr=question_nr,
-                    attempt=attempt + 1, lang=g.lang))
+                    attempt=attempt + 1, lang=session['lang']))
 
     @app.route('/quiz/feedback/<int:level_source>/<int:question_nr>', methods=["GET"])
     def quiz_feedback(level_source, question_nr):
@@ -236,10 +236,10 @@ def routes(app, database, achievements):
 
         # If we don't have an attempt ID yet, redirect to the start page
         if not session.get('quiz-attempt-id'):
-            return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
+            return redirect(url_for('get_quiz_start', level=level_source, lang=session['lang']))
 
         # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level_source)
+        questions = quiz_data_file_for(session['lang'], level_source)
         if not questions:
             return no_quiz_data_error()
 
@@ -276,7 +276,7 @@ def routes(app, database, achievements):
                                correct_option=correct_option,
                                cross=icons['cross'],
                                check=icons['check'],
-                               lang=g.lang)
+                               lang=session['lang'])
 
 
 def is_quiz_enabled():

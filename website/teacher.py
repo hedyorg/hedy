@@ -191,7 +191,7 @@ def routes(app, database, achievements):
     def leave_class (user, class_id, student_id):
         Class = DATABASE.get_class (class_id)
         if not Class or (Class['teacher'] != user['username'] and student_id != user['username']):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
 
         DATABASE.remove_student_from_class (Class['id'], student_id)
         achievement = None
@@ -210,14 +210,14 @@ def routes(app, database, achievements):
         if not Class or Class['teacher'] != user['username']:
             return utils.error_page(error=404,  ui_message='no_such_class')
 
-        if hedy_content.Adventures(g.lang).has_adventures():
-            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        if hedy_content.Adventures(session['lang']).has_adventures():
+            adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
         teacher_adventures = DATABASE.get_teacher_adventures(user['username']);
         customizations = DATABASE.get_class_customizations(class_id)
-        customize_class_translations = hedyweb.PageTranslations('customize-class').get_page_translations(g.lang)
+        customize_class_translations = hedyweb.PageTranslations('customize-class').get_page_translations(session['lang'])
 
         return render_template('customize-class.html', page_title=hedyweb.get_page_title('customize class'),
                                class_info={'name': Class['name'], 'id': Class['id']}, max_level=hedy.HEDY_MAX_LEVEL,
@@ -234,7 +234,7 @@ def routes(app, database, achievements):
             return utils.error_page(error=404, ui_message='no_such_class')
 
         DATABASE.delete_class_customizations(class_id)
-        return {'success': g.auth_texts.get('customization_deleted')}, 200
+        return {'success': session['auth_texts'].get('customization_deleted')}, 200
 
     @app.route('/for-teachers/customize-class/<class_id>', methods=['POST'])
     @requires_login
@@ -248,7 +248,7 @@ def routes(app, database, achievements):
         body = request.json
         #Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('levels'), list):
             return "Levels must be a list", 400
         if not isinstance(body.get('adventures'), dict):
@@ -268,7 +268,7 @@ def routes(app, database, achievements):
         }
 
         DATABASE.update_class_customizations(customizations)
-        return {'success': g.auth_texts.get('class_customize_success')}, 200
+        return {'success': session['auth_texts'].get('class_customize_success')}, 200
 
     @app.route('/invite_student', methods=['POST'])
     @requires_login
@@ -276,9 +276,9 @@ def routes(app, database, achievements):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
+            return session['auth_texts'].get('username_invalid'), 400
         if not isinstance(body.get('class_id'), str):
             return 'class id must be a string', 400
 
@@ -293,11 +293,11 @@ def routes(app, database, achievements):
 
         user = DATABASE.user_by_username(username)
         if not user:
-            return g.auth_texts.get('student_not_existing'), 400
+            return session['auth_texts'].get('student_not_existing'), 400
         if 'students' in Class and user['username'] in Class['students']:
-            return g.auth_texts.get('student_already_in_class'), 400
+            return session['auth_texts'].get('student_already_in_class'), 400
         if DATABASE.get_username_invite(user['username']):
-            return g.auth_texts.get('student_already_invite'), 400
+            return session['auth_texts'].get('student_already_invite'), 400
 
         # So: The class and student exist and are currently not a combination -> invite!
         DATABASE.add_class_invite(username, class_id)
@@ -309,9 +309,9 @@ def routes(app, database, achievements):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
+            return session['auth_texts'].get('username_invalid'), 400
         if not isinstance(body.get('class_id'), str):
             return 'class id must be a string', 400
 
@@ -345,12 +345,12 @@ def routes(app, database, achievements):
 
         #Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('accounts'), list):
             return "accounts should be a list!", 400
 
         if len(body.get('accounts', [])) < 1:
-            return g.auth_texts.get('no_accounts'), 400
+            return session['auth_texts'].get('no_accounts'), 400
 
         usernames = []
         mails = []
@@ -361,10 +361,10 @@ def routes(app, database, achievements):
             if validation:
                 return validation, 400
             if account.get('username').strip().lower() in usernames:
-                return {'error': g.auth_texts.get('unique_usernames'), 'value': account.get('username')}, 200
+                return {'error': session['auth_texts'].get('unique_usernames'), 'value': account.get('username')}, 200
             usernames.append(account.get('username').strip().lower())
             if account.get('email').strip().lower() in mails:
-                return {'error': g.auth_texts.get('unique_emails'), 'value': account.get('email')}, 200
+                return {'error': session['auth_texts'].get('unique_emails'), 'value': account.get('email')}, 200
             mails.append(account.get('email').strip().lower())
 
         # Validation for duplicates in the db
@@ -375,20 +375,20 @@ def routes(app, database, achievements):
                 return "not your class", 404
             user = DATABASE.user_by_username(account.get('username').strip().lower())
             if user:
-                return {'error': g.auth_texts.get('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
+                return {'error': session['auth_texts'].get('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
             email = DATABASE.user_by_email(account.get('email').strip().lower())
             if email:
-                return {'error': g.auth_texts.get('emails_exist'), 'value': account.get('email').strip().lower()}, 200
+                return {'error': session['auth_texts'].get('emails_exist'), 'value': account.get('email').strip().lower()}, 200
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):
             # Set the current teacher language as new account language
-            account['language'] = g.lang
+            account['language'] = session['lang']
             store_new_account(account, account.get('email').strip().lower())
             if account.get('class'):
                 class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]
                 DATABASE.add_student_to_class(class_id, account.get('username').strip().lower())
-        return {'success': g.auth_texts.get('accounts_created')}, 200
+        return {'success': session['auth_texts'].get('accounts_created')}, 200
 
     @app.route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])
     @requires_login
@@ -425,19 +425,19 @@ def routes(app, database, achievements):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('id'), str):
-            return g.auth_texts.get('adventure_id_invalid'), 400
+            return session['auth_texts'].get('adventure_id_invalid'), 400
         if not isinstance(body.get('name'), str):
-            return g.auth_texts.get('adventure_name_invalid'), 400
+            return session['auth_texts'].get('adventure_name_invalid'), 400
         if not isinstance(body.get('level'), str):
-            return g.auth_texts.get('level_invalid'), 400
+            return session['auth_texts'].get('level_invalid'), 400
         if not isinstance(body.get('content'), str):
-            return g.auth_texts.get('content_invalid'), 400
+            return session['auth_texts'].get('content_invalid'), 400
         if len(body.get('content')) < 20:
-            return g.auth_texts.get('adventure_length'), 400
+            return session['auth_texts'].get('adventure_length'), 400
         if not isinstance(body.get('public'), bool):
-            return g.auth_texts.get('adventure_length'), 400
+            return session['auth_texts'].get('adventure_length'), 400
 
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='retrieve_adventure')
@@ -448,7 +448,7 @@ def routes(app, database, achievements):
         adventures = DATABASE.get_teacher_adventures(user['username'])
         for adventure in adventures:
             if adventure['name'] == body['name'] and adventure['id'] != body['id']:
-                return g.auth_texts.get('adventure_duplicate'), 400
+                return session['auth_texts'].get('adventure_duplicate'), 400
 
         adventure = {
             'date': utils.timems(),
@@ -460,7 +460,7 @@ def routes(app, database, achievements):
         }
 
         DATABASE.update_adventure(body['id'], adventure)
-        return {'success': g.auth_texts.get('adventure_updated')}, 200
+        return {'success': session['auth_texts'].get('adventure_updated')}, 200
 
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])
     @requires_login
@@ -483,7 +483,7 @@ def routes(app, database, achievements):
         adventures = DATABASE.get_teacher_adventures(user['username'])
         for adventure in adventures:
             if adventure['name'] == body['name']:
-                return g.auth_texts.get('adventure_duplicate'), 400
+                return session['auth_texts'].get('adventure_duplicate'), 400
 
         adventure = {
             'id': uuid.uuid4().hex,

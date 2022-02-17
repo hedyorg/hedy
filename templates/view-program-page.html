@@ -15,7 +15,7 @@
 </div>
 {% endblock %}
 {% block scripts %}
-  <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="/client_messages.js?lang={{ session['lang'] }}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
@@ -24,7 +24,7 @@
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script>
     window.State = {};
-    window.State.lang = "{{ g.lang }}";
+    window.State.lang = "{{ session['lang'] }}";
     window.State.level = "{{ level }}";
     window.State.level_title = "{{ ui.level_title }}";
   </script>

@@ -6,7 +6,7 @@ import attr
 import glob
 from os import path
 
-from flask import g
+from flask import g, session
 from flask_helpers import render_template
 
 import hedy_content
@@ -71,7 +71,7 @@ def get_page_title(current_page):
 
   current_page = page_titles_json[current_page]
   if current_page:
-    return current_page.get(g.lang, current_page.get("en"))
+    return current_page.get(session['lang'], current_page.get("en"))
   else:
     return page_titles_json['start'].get("en")
 

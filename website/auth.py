@@ -159,17 +159,17 @@ def prepare_user_db(username, password):
 
 def validate_signup_data(account):
     if not isinstance(account.get('username'), str):
-        return g.auth_texts.get('username_invalid')
+        return session['auth_texts'].get('username_invalid')
     if '@' in account.get('username') or ':' in account.get('username'):
-        return g.auth_texts.get('username_special')
+        return session['auth_texts'].get('username_special')
     if len(account.get('username').strip()) < 3:
-        return g.auth_texts.get('username_three')
+        return session['auth_texts'].get('username_three')
     if not isinstance(account.get('email'), str) or not utils.valid_email(account.get('email')):
-        return g.auth_texts.get('email_invalid')
+        return session['auth_texts'].get('email_invalid')
     if not isinstance(account.get('password'), str):
-        return g.auth_texts.get('password_invalid')
+        return session['auth_texts'].get('password_invalid')
     if len(account.get('password')) < 6:
-        return g.auth_texts.get('passwords_six')
+        return session['auth_texts'].get('passwords_six')
     return None
 
 
@@ -227,11 +227,11 @@ def routes(app, database):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
+            return session['auth_texts'].get('username_invalid'), 400
         if not isinstance(body.get('password'), str):
-            return g.auth_texts.get('password_invalid'), 400
+            return session['auth_texts'].get('password_invalid'), 400
 
         # If username has an @-sign, then it's an email
         if '@' in body['username']:
@@ -240,7 +240,7 @@ def routes(app, database):
             user = DATABASE.user_by_username(body['username'])
 
         if not user or not check_password(body['password'], user['password']):
-            return g.auth_texts.get('invalid_username_password') + " " + g.auth_texts.get('no_account'), 403
+            return session['auth_texts'].get('invalid_username_password') + " " + session['auth_texts'].get('no_account'), 403
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
@@ -270,7 +270,7 @@ def routes(app, database):
         body = request.json
         # Validations, mandatory fields
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
 
         # Validate the essential data using a function -> also used for multiple account creation
         validation = validate_signup_data(body)
@@ -279,39 +279,39 @@ def routes(app, database):
 
         # Validate fields only relevant when creating a single user account
         if not isinstance(body.get('mail_repeat'), str) or not valid_email(body['mail_repeat']):
-            return g.auth_texts.get('repeat_match_email'), 400
+            return session['auth_texts'].get('repeat_match_email'), 400
         if body['email'] != body['mail_repeat']:
-            return g.auth_texts.get('repeat_match_email'), 400
+            return session['auth_texts'].get('repeat_match_email'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
-            return g.auth_texts.get('repeat_match_password'), 400
+            return session['auth_texts'].get('repeat_match_password'), 400
         if not isinstance(body.get('language'), str):
-            return g.auth_texts.get('language_invalid'), 400
+            return session['auth_texts'].get('language_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                return (g.auth_texts.get('year_invalid') + str(datetime.datetime.now().year)), 400
+                return (session['auth_texts'].get('year_invalid') + str(datetime.datetime.now().year)), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
-                return g.auth_texts.get('gender_invalid'), 400
+                return session['auth_texts'].get('gender_invalid'), 400
         if 'country' in body:
             if not body['country'] in countries:
-                return g.auth_texts.get('country_invalid'), 400
+                return session['auth_texts'].get('country_invalid'), 400
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
-            return g.auth_texts.get('experience_invalid'), 400
+            return session['auth_texts'].get('experience_invalid'), 400
         if 'experience_languages' in body:
             if not isinstance(body['experience_languages'], list):
-                return g.auth_texts.get('experience_invalid'), 400
+                return session['auth_texts'].get('experience_invalid'), 400
             for language in body['experience_languages']:
                 if language not in['scratch', 'other_block', 'python', 'other_text']:
-                    return g.auth_texts.get('programming_invalid'), 400
+                    return session['auth_texts'].get('programming_invalid'), 400
 
         user = DATABASE.user_by_username(body['username'].strip().lower())
         if user:
-            return g.auth_texts.get('exists_username'), 403
+            return session['auth_texts'].get('exists_username'), 403
         email = DATABASE.user_by_email(body['email'].strip().lower())
         if email:
-            return g.auth_texts.get('exists_email'), 403
+            return session['auth_texts'].get('exists_email'), 403
 
         # We receive the pre-processed user and response package from the function
         user, resp = store_new_account(body, body['email'].strip().lower())
@@ -377,25 +377,25 @@ def routes(app, database):
     def change_student_password(user):
         body = request.json
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
+            return session['auth_texts'].get('username_invalid'), 400
         if not isinstance(body.get('password'), str):
-            return g.auth_texts.get('password_invalid'), 400
+            return session['auth_texts'].get('password_invalid'), 400
         if len(body['password']) < 6:
-            return g.auth_texts.get('password_six'), 400
+            return session['auth_texts'].get('password_six'), 400
 
         if not is_teacher(user):
-            return g.auth_texts.get("password_change_not_allowed"), 400
+            return session['auth_texts'].get("password_change_not_allowed"), 400
         students = DATABASE.get_teacher_students(user['username'])
         if body['username'] not in students:
-            return g.auth_texts.get("password_change_not_allowed"), 400
+            return session['auth_texts'].get("password_change_not_allowed"), 400
 
         user = DATABASE.user_by_username(body['username'])
         hashed = hash(body['password'], make_salt())
         DATABASE.update_user(body['username'], {'password': hashed})
 
-        return {'success': g.auth_texts.get("password_change_success")}, 200
+        return {'success': session['auth_texts'].get("password_change_success")}, 200
 
     @app.route('/auth/change_password', methods=['POST'])
     @requires_login
@@ -403,21 +403,21 @@ def routes(app, database):
         body = request.json
 
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('old_password'), str) or not isinstance(body.get('password'), str):
-            return g.auth_texts.get('password_invalid'), 400
+            return session['auth_texts'].get('password_invalid'), 400
         if not isinstance(body.get( 'password_repeat'), str):
-            return g.auth_texts.get('repeat_match_password'), 400
+            return session['auth_texts'].get('repeat_match_password'), 400
         if len(body['password']) < 6:
-            return g.auth_texts.get('password_six'), 400
+            return session['auth_texts'].get('password_six'), 400
         if body['password'] != body['password_repeat']:
-            return g.auth_texts.get('repeat_match_password'), 400
+            return session['auth_texts'].get('repeat_match_password'), 400
 
         # The user object we got from 'requires_login' doesn't have the password, so look that up in the database
         user = DATABASE.user_by_username(user['username'])
 
         if not check_password(body['old_password'], user['password']):
-            return g.auth_texts.get('password_invalid'), 403
+            return session['auth_texts'].get('password_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
 
@@ -433,30 +433,30 @@ def routes(app, database):
     def update_profile(user):
         body = request.json
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('email'), str) or not valid_email(body['email']):
-            return g.auth_texts.get('email_invalid'), 400
+            return session['auth_texts'].get('email_invalid'), 400
         if not isinstance(body.get('language'), str):
-            return g.auth_texts.get('language_invalid'), 400
+            return session['auth_texts'].get('language_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                return g.auth_texts.get('year_invalid') + str(datetime.datetime.now().year), 400
+                return session['auth_texts'].get('year_invalid') + str(datetime.datetime.now().year), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
-                return g.auth_texts.get('gender_invalid'), 400
+                return session['auth_texts'].get('gender_invalid'), 400
         if 'country' in body:
             if not body['country'] in countries:
-                return g.auth_texts.get('country_invalid'), 400
+                return session['auth_texts'].get('country_invalid'), 400
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
-            return g.auth_texts.get('experience_invalid'), 400
+            return session['auth_texts'].get('experience_invalid'), 400
         if 'experience_languages' in body:
             if not isinstance(body['experience_languages'], list):
-                return g.auth_texts.get('experience_invalid'), 400
+                return session['auth_texts'].get('experience_invalid'), 400
             for language in body['experience_languages']:
                 if language not in['scratch', 'other_block', 'python', 'other_text']:
-                    return g.auth_texts.get('programming_invalid'), 400
+                    return session['auth_texts'].get('programming_invalid'), 400
 
         resp = {}
         if 'email' in body:
@@ -464,7 +464,7 @@ def routes(app, database):
             if email != user['email']:
                 exists = DATABASE.user_by_email(email)
                 if exists:
-                    return g.auth_texts.get('exists_email'), 403
+                    return session['auth_texts'].get('exists_email'), 403
                 token = make_salt()
                 hashed_token = hash(token, make_salt())
                 DATABASE.update_user(user['username'], {'email': email, 'verification_pending': hashed_token})
@@ -497,9 +497,9 @@ def routes(app, database):
                updates[field] = None
 
         # We want to check if the user choose a new language, if so -> reload
-        # We can use g.lang for this to reduce the db calls
+        # We can use session['lang'] for this to reduce the db calls
         resp['reload'] = False
-        if g.lang != body['language']:
+        if session['lang'] != body['language']:
             resp['reload'] = True
 
         if updates:
@@ -531,9 +531,9 @@ def routes(app, database):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
+            return session['auth_texts'].get('username_invalid'), 400
 
         # If username has an @-sign, then it's an email
         if '@' in body['username']:
@@ -542,7 +542,7 @@ def routes(app, database):
             user = DATABASE.user_by_username(body['username'].strip().lower())
 
         if not user:
-            return g.auth_texts.get('username_invalid'), 403
+            return session['auth_texts'].get('username_invalid'), 403
 
         token = make_salt()
         hashed = hash(token, make_salt())
@@ -561,24 +561,24 @@ def routes(app, database):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
+            return session['auth_texts'].get('username_invalid'), 400
         if not isinstance(body.get('token'), str):
-            return g.auth_texts.get('token_invalid'), 400
+            return session['auth_texts'].get('token_invalid'), 400
         if not isinstance(body.get('password'), str):
-            return g.auth_texts.get('password_invalid'), 400
+            return session['auth_texts'].get('password_invalid'), 400
         if len(body['password']) < 6:
-            return g.auth_texts.get('password_six'), 400
+            return session['auth_texts'].get('password_six'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
-            return g.auth_texts.get('repeat_match_password'), 400
+            return session['auth_texts'].get('repeat_match_password'), 400
 
         # There's no need to trim or lowercase username, because it should come within a link prepared by the app itself and not inputted manually by the user.
         token = DATABASE.get_token(body['username'])
         if not token:
-            return g.auth_texts.get('token_invalid'), 403
+            return session['auth_texts'].get('token_invalid'), 403
         if not check_password(body['token'], token['token']):
-            return g.auth_texts.get('token_invalid'), 403
+            return session['auth_texts'].get('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
         token = DATABASE.forget_token(body['username'])
@@ -602,16 +602,16 @@ def routes(app, database):
 
         # Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
+            return session['auth_texts'].get('username_invalid'), 400
         if not isinstance(body.get('is_teacher'), bool):
-            return g.auth_texts.get('teacher_invalid'), 400
+            return session['auth_texts'].get('teacher_invalid'), 400
 
         user = DATABASE.user_by_username(body['username'].strip().lower())
 
         if not user:
-            return g.auth_texts.get('username_invalid'), 400
+            return session['auth_texts'].get('username_invalid'), 400
 
         is_teacher_value = 1 if body['is_teacher'] else 0
         update_is_teacher(user, is_teacher_value)
@@ -628,16 +628,16 @@ def routes(app, database):
 
         # Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return session['auth_texts'].get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
+            return session['auth_texts'].get('username_invalid'), 400
         if not isinstance(body.get('email'), str) or not valid_email(body['email']):
-            return g.auth_texts.get('email_invalid'), 400
+            return session['auth_texts'].get('email_invalid'), 400
 
         user = DATABASE.user_by_username(body['username'].strip().lower())
 
         if not user:
-            return g.auth_texts.get('email_invalid'), 400
+            return session['auth_texts'].get('email_invalid'), 400
 
         token = make_salt()
         hashed_token = hash(token, make_salt())
