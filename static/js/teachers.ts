@@ -351,6 +351,17 @@ export function save_customizations(class_id: string) {
             teacher_adventures.push(<string>$(this).attr('id'));
         }
     });
+    let opening_dates = {};
+    $('.opening_date_container').each(function() {
+        if ($(this).is(":visible")) {
+            $(this).find(':input').each(function () {
+                // @ts-ignore
+                opening_dates[<string>$(this).attr('level')] = $(this).val();
+            });
+        }
+    });
+    console.log(opening_dates);
+
     let other_settings: string[] = [];
     $('.other_settings_checkbox').each(function() {
         if ($(this).prop("checked")) {
@@ -428,6 +439,7 @@ export function select_all_level_adventures(level: string) {
 
         // We also have to add this level to the "Opening dates" section
         $('#opening_date_level_' + level).removeClass('hidden');
+        $('#opening_date_level_' + level).find('input').val('');
         $('#opening_date_level_' + level).find('input').prop({type:"text"});
     } else {
         $('.adventure_level_' + level).each(function () {
