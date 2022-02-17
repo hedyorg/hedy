@@ -876,7 +876,13 @@ def index(level, step):
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
-    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in customizations['levels']):
+    if 'levels' in customizations:
+        if 'opening_dates' in customizations:
+            available_levels = customizations['levels']
+        else:
+            available_levels = customizations['levels']
+
+    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
         return utils.error_page(error=404, ui_message='no_such_level')
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
