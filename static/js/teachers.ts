@@ -356,6 +356,7 @@ export function save_customizations(class_id: string) {
         if ($(this).is(":visible")) {
             $(this).find(':input').each(function () {
                 // @ts-ignore
+                // Todo: TB -> Only create the entry if there is actually a value: prevent redundant storing!
                 opening_dates[<string>$(this).attr('level')] = $(this).val();
             });
         }
