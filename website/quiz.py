@@ -52,8 +52,12 @@ def routes(app, database, achievements):
     @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>', methods=['GET'], defaults={'attempt': 1})
     @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>/<int:attempt>', methods=['GET'])
     def get_quiz(level_source, question_nr, attempt):
+
+        print("Hier komen we!")
         if not is_quiz_enabled():
             return quiz_disabled_error()
+
+        print("Hier ook?")
 
             # If we don't have an attempt ID yet, redirect to the start page
         if not session.get('quiz-attempt-id'):
@@ -61,6 +65,7 @@ def routes(app, database, achievements):
 
             # Reading the yaml file
         questions = quiz_data_file_for(g.lang, level_source)
+        print(questions)
         if not questions:
             return no_quiz_data_error()
 
