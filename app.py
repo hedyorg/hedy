@@ -286,12 +286,6 @@ parse_logger = jsonbin.MultiParseLogger(
 querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_querylog_transmitter_from_env())
 
 
-def get_translations():
-    if not flask.current_app.ui_texts:
-        flask.current_app.ui_texts = TRANSLATIONS.get_translations(session['lang'], 'ui')
-    if not flask.current_app.auth_texts:
-        flask.current_app.auth_texts = TRANSLATIONS.get_translations(session['lang'], 'Auth')
-
 @app.before_request
 def setup_language():
     # Determine the user's requested language code.
@@ -304,8 +298,6 @@ def setup_language():
         session['keyword_lang'] = "en"
     if 'dir' not in session:
         session['dir'] = "ltr"
-
-    get_translations()
 
     # Check that requested language is supported, otherwise return 404
     if session['lang'] not in ALL_LANGUAGES.keys():
@@ -344,6 +336,7 @@ def enrich_context_with_user_info():
                 data['user_messages'] += 1
     return data
 
+
 @app.context_processor
 def enricht_context_with_translations():
     """Adds dicts with translations to the global template context.
@@ -356,6 +349,7 @@ def enricht_context_with_translations():
     achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(session['lang'])
     return dict(texts=texts, ui=ui, auth=auth, achievements=achievements)
 
+
 @app.after_request
 def set_security_headers(response):
     security_headers = {
@@ -366,6 +360,7 @@ def set_security_headers(response):
     # and that's okay.
     response.headers.update(security_headers)
     return response
+
 
 @app.teardown_request
 def teardown_request_finish_logging(exc):
