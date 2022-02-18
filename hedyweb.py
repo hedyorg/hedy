@@ -19,7 +19,7 @@ class Translations:
   def __init__(self):
     self.data = {}
 
-    translations = utils.gather_content_files('texts')
+    translations = glob.glob('coursedata/texts/*.yaml')
     for trans_file in translations:
       lang = path.splitext(path.basename(trans_file))[0]
       self.data[lang] = YamlFile.for_file(trans_file)
@@ -36,7 +36,7 @@ class AchievementTranslations:
   def __init__(self):
     self.data = {}
 
-    translations = utils.gather_content_files('achievements')
+    translations = glob.glob('coursedata/achievements/*.yaml')
     for trans_file in translations:
       lang = path.splitext(path.basename(trans_file))[0]
       self.data[lang] = YamlFile.for_file(trans_file)
@@ -50,13 +50,13 @@ class AchievementTranslations:
 class PageTranslations:
   def __init__(self, page):
     self.data = {}
-    translations = utils.gather_content_files('pages', page)
+    translations = glob.glob('coursedata/pages/' + page + '/*.yaml')
     for file in translations:
       lang = path.splitext(path.basename(file))[0]
       self.data[lang] = YamlFile.for_file(file)
 
   def exists(self):
-    """Whether or not any content was found for this page."""
+    """Whether or not any data was found for this page."""
     return len(self.data) > 0
 
   def get_page_translations(self, language):
@@ -66,7 +66,7 @@ class PageTranslations:
     return d
 
 def get_page_title(current_page):
-  with open(utils.construct_content_path('pages', 'pages.json'), 'r', encoding='utf-8') as f:
+  with open(f'coursedata/pages/pages.json', 'r', encoding='utf-8') as f:
     page_titles_json = json.load(f)
 
   current_page = page_titles_json[current_page]
