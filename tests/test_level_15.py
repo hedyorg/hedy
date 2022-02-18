@@ -35,10 +35,10 @@ class TestsLevel15(HedyTester):
 
   def test_while_fr_equals(self):
     code = textwrap.dedent("""\
-      antwoord is 0
+      antwoord est 0
       tant que antwoord != 25
-          antwoord is ask 'Wat is 5 keer 5?'
-      print 'Goed gedaan!'""")
+          antwoord est demande 'Wat is 5 keer 5?'
+      affiche 'Goed gedaan!'""")
     expected = textwrap.dedent("""\
     antwoord = 0
     while str(antwoord).zfill(100)!=str(25).zfill(100):

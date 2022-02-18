@@ -270,11 +270,11 @@ class TestsLevel17(HedyTester):
 
   def test_if_elif_french(self):
     code = textwrap.dedent("""\
-      a is 5
-      si a is 1:
-          x is 2
-      sinon si a is 2:
-          x is 222""")
+      a est 5
+      si a est 1:
+          x est 2
+      sinon si a est 2:
+          x est 222""")
     expected = textwrap.dedent("""\
       a = 5
       if str(a) == str('1'):
