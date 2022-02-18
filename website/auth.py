@@ -175,24 +175,6 @@ def validate_signup_data(account):
 
 def store_new_account(account, email):
     username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])
-
-    if not is_testing_request(request) and 'subscribe' in account and account['subscribe'] == True:
-        # If we have a Mailchimp API key, we use it to add the subscriber through the API
-        if MAILCHIMP_API_URL:
-            mailchimp_subscribe_user(email)
-        # Otherwise, we send an email to notify about the subscription to the main email address
-        else:
-            send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email,
-                       '<p>' + email + '</p>')
-
-    # If someone wants to be a Teacher -> sent a mail to manually set it
-    if not is_testing_request(request) and 'is_teacher' in account and account['is_teacher'] is True:
-        send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
-
-    # If someone agrees to the privacy terms -> sent a mail to manually write down
-    if not is_testing_request(request) and 'agree_terms' in account and account['agree_terms'] is True:
-        send_email(config['email']['sender'], 'Agreement to privacy terms on signup', email, f'<p>{email}</p>')
-
     user = {
         'username': username,
         'password': hashed,
@@ -322,6 +304,22 @@ def routes(app, database):
 
         # We receive the pre-processed user and response package from the function
         user, resp = store_new_account(body, body['email'].strip().lower())
+
+        if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] is True:
+            # If we have a Mailchimp API key, we use it to add the subscriber through the API
+            if MAILCHIMP_API_URL:
+                mailchimp_subscribe_user(email)
+            # Otherwise, we send an email to notify about the subscription to the main email address
+            else:
+                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
+
+        # If someone wants to be a Teacher -> sent a mail to manually set it
+        if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
+            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+
+        # If someone agrees to the privacy terms -> sent a mail to manually write down
+        if not is_testing_request(request) and 'agree_terms' in body and body['agree_terms'] is True:
+            send_email(config['email']['sender'], 'Agreement to privacy terms on signup', email, f'<p>{email}</p>')
 
         # We automatically login the user
         cookie = make_salt()
