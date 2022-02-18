@@ -32,6 +32,7 @@ from flask import Flask, request, jsonify, session, abort, g, redirect, Response
 from flask_helpers import render_template
 from flask_compress import Compress
 from flask_babel import Babel
+from flask_babel import gettext
 
 # Hedy-specific modules
 import hedy_content
