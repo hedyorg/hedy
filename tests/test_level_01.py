@@ -100,7 +100,7 @@ class TestsLevel1(HedyTester):
     expected = textwrap.dedent("""\
     print('hallo!')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, translate=False)
 
   def test_print_nl(self):
     code = "print Hallo welkom bij Hedy!"
@@ -161,7 +161,8 @@ class TestsLevel1(HedyTester):
 
     self.single_level_tester(code=code,
                              expected=expected,
-                             lang='nl')
+                             lang='nl',
+                             translate=False) #we are trying a Dutch keyword in en, can't be translated
 
   def test_mixes_languages_nl_en(self):
     code = textwrap.dedent("""\
@@ -179,7 +180,8 @@ class TestsLevel1(HedyTester):
     self.single_level_tester(code=code,
                              expected=expected,
                              expected_commands=['ask', 'echo', 'ask', 'print'],
-                             lang='nl')
+                             lang='nl',
+                             translate=False) #mixed codes will not translate back to their original form, sadly
 
   # echo tests
   def test_echo_without_argument(self):
@@ -359,6 +361,7 @@ class TestsLevel1(HedyTester):
       extra_check_function=self.is_turtle(),
       expected_commands=['forward', 'turn', 'forward']
     )
+
 
   # markup tests
   def test_lines_may_end_in_spaces(self):

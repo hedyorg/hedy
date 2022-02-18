@@ -36,7 +36,7 @@ class TestsLevel14(HedyTester):
     code = textwrap.dedent(f"""\
       name is ask 'What is your name?'
       if name != 'Hedy'
-        print 'meh'""")
+          print 'meh'""")
     expected = textwrap.dedent(f"""\
       name = input(f'What is your name?')
       try:
@@ -89,7 +89,7 @@ class TestsLevel14(HedyTester):
     code = textwrap.dedent(f"""\
       name is ask 'What is your name?'
       if name {comparison} 'Hedy'
-        print 'meh'""")
+          print 'meh'""")
     expected = textwrap.dedent(f"""\
       name = input(f'What is your name?')
       try:
@@ -140,8 +140,8 @@ class TestsLevel14(HedyTester):
   def tests_smaller_no_spaces(self, comparison):
     code = textwrap.dedent(f"""\
     leeftijd is ask 'Hoe oud ben jij?'
-    if leeftijd{comparison}12
-      print 'Dan ben je jonger dan ik!'""")
+    if leeftijd {comparison} 12
+        print 'Dan ben je jonger dan ik!'""")
     expected = textwrap.dedent(f"""\
     leeftijd = input(f'Hoe oud ben jij?')
     try:
@@ -211,12 +211,13 @@ class TestsLevel14(HedyTester):
     ('1', '1'),
     ('1.3', '1.3'),
     ('1, 2', '[1, 2]')])
+
   def test_not_equal(self, arg, exp):
     code = textwrap.dedent(f"""\
       a is {arg}
       b is {arg}
       if a != b
-        b is 1""")
+          b is 1""")
 
     expected = textwrap.dedent(f"""\
       a = {exp}

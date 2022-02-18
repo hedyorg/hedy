@@ -1,6 +1,6 @@
 _print_argument: (_SPACE | quoted_text | list_access | var_access | sum)*
 
-command:+= ask_is | ask_equals | list_access_var_equals | list_access_var_is | assign_is | assign_equals | assign_list_is | assign_list_equals -= ask | list_access | assign | assign_list
+command:+= ask_is | ask_equals | list_access_var_equals | list_access_var_is | assign_is | assign_equals | assign_list_is | assign_list_equals -= ask | list_access | list_access_var | assign | assign_list
 
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 ask_is: var _SPACE _IS _SPACE _ASK (_SPACE _print_argument)?

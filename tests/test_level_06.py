@@ -48,7 +48,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      expected=expected
+      expected=expected,
+      translate=False
     )
 
   @parameterized.expand(['1.5', '1,5'])
@@ -103,7 +104,8 @@ class TestsLevel6(HedyTester):
       max_level=7,
       code=code,
       expected=expected,
-      expected_commands=['is', 'print', 'else', 'print', 'print']
+      expected_commands=['is', 'print', 'else', 'print', 'print'],
+      translate=False
     )
   def test_print_if_else_with_line_break_and_space(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
@@ -125,7 +127,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected
+      expected=expected,
+      translate=False
     )
   def test_if_else_with_space(self):
     #this code has a space at the end of line 2
@@ -144,7 +147,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected
+      expected=expected,
+      translate=False
     )
   def test_print_if_else_with_is(self):
     code = textwrap.dedent("""\
@@ -163,7 +167,9 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=7)
+      max_level=7,
+      translate=False)
+
   def test_print_if_else_with_equals_sign(self):
     code = textwrap.dedent("""\
     naam is Hedy
@@ -181,7 +187,9 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=7)
+      max_level=7,
+      translate=False
+    )
 
   # calculation tests
   # todo should all be tested for higher levels too!
@@ -218,10 +226,12 @@ class TestsLevel6(HedyTester):
     code = "nummer is 4 + 5"
     expected = "nummer = int(4) + int(5)"
     self.single_level_tester(code=code, expected=expected)
+
   def test_calc_without_space(self):
     code = "nummer is 4+5"
     expected = "nummer = int(4) + int(5)"
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, translate=False)
+
   def test_assign_calc(self):
     code = textwrap.dedent("""\
     var is 5
@@ -372,7 +382,7 @@ class TestsLevel6(HedyTester):
         punten = int(punten) + int(worp)
       print(f'dat zijn dan {punten}')""")
 
-      self.single_level_tester(code=code, expected=expected)
+      self.single_level_tester(code=code, expected=expected, translate=False)
 
   def test_ifelse_should_go_before_assign(self):
     code = textwrap.dedent("""\
@@ -390,7 +400,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected
+      expected=expected,
+      translate=False
     )
   def test_ifelse_calc_vars(self):
     code = textwrap.dedent("""\
@@ -412,7 +423,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected
+      expected=expected,
+      translate=False
     )
 
   def test_if_calc_vars(self):
@@ -431,7 +443,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected
+      expected=expected,
+      translate=False
     )
 
   # So legal are:
@@ -492,7 +505,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=7)
+      max_level=7,
+      translate=False)
 
   def test_one_space_in_rhs_if_else(self):
     code = textwrap.dedent("""\
@@ -509,7 +523,8 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=7)
+      max_level=7,
+      translate=False)
 
   def test_quoted_space_rhs(self):
     code = textwrap.dedent("""\
@@ -522,7 +537,10 @@ class TestsLevel6(HedyTester):
       print(f'shaken')
     else:
       print(f'biertje!')""")
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      translate=False)
 
 
   def test_space_enter_rhs_ifelse(self):
@@ -537,7 +555,11 @@ class TestsLevel6(HedyTester):
       print(f'shaken')
     else:
       print(f'biertje!')""")
-    self.single_level_tester(code=code, expected=expected)
+
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      translate=False)
 
   def test_space_enter_rhs_if(self):
     code = textwrap.dedent("""\
