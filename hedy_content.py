@@ -1,14 +1,12 @@
 import copy
 import attr
-
-from utils import construct_content_path
 from website.yaml_file import YamlFile
 
 
 class LevelDefaults:
   def __init__(self, language):
     self.language = language
-    self.levels = YamlFile.for_file(construct_content_path('level-defaults', f'{self.language}.yaml'))
+    self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.language}.yaml')
 
   def max_level(self):
     all_levels = self.levels.keys()
@@ -61,7 +59,7 @@ class NoSuchDefaults:
 class Adventures:
   def __init__(self, language):
     self.language = language
-    self.adventures_file = YamlFile.for_file(construct_content_path('adventures', f'{self.language}.yaml'))
+    self.adventures_file = YamlFile.for_file(f'coursedata/adventures/{self.language}.yaml')
 
     # When customizing classes we only want to retrieve the name, (id) and level of each adventure
   def get_adventure_keyname_name_levels(self):
