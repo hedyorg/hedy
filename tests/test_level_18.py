@@ -186,9 +186,9 @@ class TestsLevel18(HedyTester):
       )
 
     def test_input_with_list(self):
-      code = textwrap.dedent("""
+      code = textwrap.dedent("""\
       color is ['green', 'blue']
-      choice is input('Is your favorite color one of: ' color)""")
+      choice is input('Is your favorite color one of: ', color)""")
 
       expected = textwrap.dedent("""\
       color = ['green', 'blue']
