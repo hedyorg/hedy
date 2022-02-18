@@ -185,8 +185,13 @@ def store_new_account(account, email):
             send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email,
                        '<p>' + email + '</p>')
 
+    # If someone wants to be a Teacher -> sent a mail to manually set it
     if not is_testing_request(request) and 'is_teacher' in account and account['is_teacher'] is True:
         send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+
+    # If someone agrees to the privacy terms -> sent a mail to manually write down
+    if not is_testing_request(request) and 'agree_terms' in account and account['agree_terms'] is True:
+        send_email(config['email']['sender'], 'Agreement to privacy terms on signup', email, f'<p>{email}</p>')
 
     user = {
         'username': username,
