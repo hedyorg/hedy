@@ -876,7 +876,14 @@ def index(level, step):
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
-    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in customizations['levels']):
+    if 'levels' in customizations:
+        available_levels = customizations['levels']
+        now = timems()
+        for current_level, timestamp in customizations.get('opening_dates', {}).items():
+            if utils.datetotimeordate(timestamp) > utils.datetotimeordate(utils.mstoisostring(now)):
+                available_levels.remove(int(current_level))
+
+    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
         return utils.error_page(error=404, ui_message='no_such_level')
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
@@ -885,6 +892,10 @@ def index(level, step):
     for adventure in customizations.get('teacher_adventures', []):
         teacher_adventures.append(DATABASE.get_adventure(adventure))
 
+    enforce_developers_mode = False
+    if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
+        enforce_developers_mode = True
+
     return hedyweb.render_code_editor_with_tabs(
         level_defaults=defaults,
         max_level=max_level,
@@ -892,6 +903,7 @@ def index(level, step):
         version=version(),
         adventures=adventures,
         customizations=customizations,
+        enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
