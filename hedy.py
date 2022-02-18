@@ -303,9 +303,6 @@ class TypedTree(Tree):
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
-        return Tree('text', [''.join([str(c) for c in args])])
-
-    def text_with_spaces(self, args):
         return Tree('text', [' '.join([str(c) for c in args])])
 
     def INT(self, args):
@@ -561,14 +558,6 @@ class TypeValidator(Transformer):
     def integer(self, tree):
         return self.to_typed_tree(tree, HedyType.integer)
 
-    def text_with_spaces(self, tree):
-        # under level 12 integers appear as text, so we parse them
-        if self.level < 12:
-            type_ = HedyType.integer if ConvertToPython.is_int(tree.children[0]) else HedyType.string
-        else:
-            type_ = HedyType.string
-        return self.to_typed_tree(tree, type_)
-
     def text(self, tree):
         # under level 12 integers appear as text, so we parse them
         if self.level < 12:
@@ -774,9 +763,7 @@ class Filter(Transformer):
 
     def text(self, args, meta):
         return all(args), ''.join([c for c in args]), meta
-      
-    def text_with_spaces(self, args, meta):
-        return all(args), ' '.join([c for c in args])
+
 
 class UsesTurtle(Transformer):
     # returns true if Forward or Turn are in the tree, false otherwise
@@ -874,8 +861,6 @@ class AllCommands(Transformer):
     def text(self, args):
         return []
 
-    def text_with_spaces(self, args):
-        return []
 
 def all_commands(input_string, level, lang='en'):
     input_string = process_input_string(input_string, level)
@@ -911,8 +896,6 @@ class AllPrintArguments(Transformer):
     def text(self, args):
         return ''.join(args)
 
-    def text_with_spaces(self, args):
-        return ''.join(args)
 
 
 def all_print_arguments(input_string, level, lang='en'):
@@ -1146,9 +1129,6 @@ class ConvertToPython_1(ConvertToPython):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
-    def text_with_spaces(self, args):
-        return ' '.join([str(c) for c in args])
-
     def integer(self, args):
         return str(args[0])
 
@@ -1316,7 +1296,6 @@ class ConvertToPython_3(ConvertToPython_2):
         var = self.process_variable(args[0])
         list = args[1]
         return f"{list}.append({var})"
-
     def remove(self, args):
         var = self.process_variable(args[0])
         list = args[1]
@@ -1961,6 +1940,7 @@ def find_indent_length(line):
     return number_of_spaces
 
 def needs_indentation(code):
+    keywords_requiring_indentation = ['if', 'als', 'si', 'for', 'repeat', 'répète', 'repete', 'herhaal']
     # this is done a bit half-assed, clearly *parsing* the one line would be superior
     # because now a line like
     # repeat is 5 would also require indentation!
@@ -1969,7 +1949,7 @@ def needs_indentation(code):
         return False
 
     first_keyword = all_words[0]
-    return first_keyword == "for" or first_keyword == "repeat" or first_keyword == "if"
+    return first_keyword in keywords_requiring_indentation
 
 
 

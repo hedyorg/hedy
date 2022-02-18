@@ -9,7 +9,7 @@ class TestsLevel10(HedyTester):
     code = textwrap.dedent("""\
     dieren is hond, kat, papegaai
     for dier in dieren
-      print dier""")
+        print dier""")
 
     expected = textwrap.dedent("""\
     dieren = ['hond', 'kat', 'papegaai']
@@ -43,10 +43,10 @@ class TestsLevel10(HedyTester):
     code = textwrap.dedent("""\
     familie is baby, mommy, daddy, grandpa, grandma
     for shark in familie
-      print shark ' shark tudutudutudu'
-      print shark ' shark tudutudutudu'
-      print shark ' shark tudutudutudu'
-      print shark ' shark'""")
+        print shark ' shark tudutudutudu'
+        print shark ' shark tudutudutudu'
+        print shark ' shark tudutudutudu'
+        print shark ' shark'""")
 
     expected = textwrap.dedent("""\
     familie = ['baby', 'mommy', 'daddy', 'grandpa', 'grandma']

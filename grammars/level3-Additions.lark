@@ -15,7 +15,7 @@ text_list: /([^\n,،]+)/ -> text // list elements are another exception since th
 
 // FH, jan 22: not exactly sure why this works, while textwithoutspaces parses the whole line in add/remove
 // leaving this for now
-some_spaces : /([^\r\n!?. ]+)/ (_SPACE /([^\r\n!?. ]+)/)* -> text_with_spaces
+some_spaces : /([^\r\n!?. ]+)/ (_SPACE /([^\r\n!?. ]+)/)* -> text
 
 add: _ADD_LIST _SPACE some_spaces _SPACE _TO_LIST _SPACE var
 remove: _REMOVE _SPACE some_spaces _SPACE _FROM _SPACE var
