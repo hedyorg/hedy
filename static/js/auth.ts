@@ -121,7 +121,7 @@ export const auth = {
       }).done (function () {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin();
+        afterLogin({"teacher": false});
       }).fail (function (response) {
         auth.clear_error();
         if (response.responseText) {
@@ -138,10 +138,10 @@ export const auth = {
         url: '/auth/login',
         data: JSON.stringify ({username: values.username, password: values.password}),
         contentType: 'application/json; charset=utf-8'
-      }).done (function () {
+      }).done (function (response) {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin();
+        afterLogin({"teacher": response['teacher']});
       }).fail (function (response) {
         auth.clear_error();
         if (response.responseText) {
@@ -169,18 +169,14 @@ export const auth = {
         type: 'POST', url: '/profile',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
-      }).done (function (response) {
-        if (response.reload) {
-          modal.alert(auth.texts['profile_updated_reload'], 2000, false);
-          setTimeout (function () {location.reload ()}, 2000);
-        } else {
-          modal.alert(auth.texts['profile_updated'], 3000, false);
-        }
+      }).done (function () {
+        auth.success (auth.texts['profile_updated']);
+        setTimeout (function () {location.reload ()}, 1500);
       }).fail (function (response) {
         if (response.responseText) {
-          modal.alert(response.responseText, 3000, true);
+           auth.error(response.responseText);
         } else {
-          modal.alert(response.responseText, 3000, true);
+          auth.error(auth.texts['ajax_error']);
         }
       });
     }
@@ -366,7 +362,7 @@ $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
  * - Check if we were supposed to be joining a class. If so, join it.
  * - Otherwise redirect to "my programs".
  */
-async function afterLogin() {
+async function afterLogin(loginData: any) {
   const savedProgramString = localStorage.getItem('hedy-first-save');
   const savedProgram = savedProgramString ? JSON.parse(savedProgramString) : undefined;
 
@@ -392,6 +388,10 @@ async function afterLogin() {
     return auth.redirect(redirect);
   }
 
+  // If the user is a teacher -> re-direct to for-teachers page after login
+  if (loginData['teacher']) {
+    return auth.redirect('for-teachers');
+  }
   auth.redirect('programs');
 }
 

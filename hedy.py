@@ -126,7 +126,8 @@ commands_and_types_per_level = {
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]},
+    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+                       14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]},
     Command.addition: {
         6: [HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
@@ -303,10 +304,19 @@ class TypedTree(Tree):
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
+        return Tree('text', [''.join([str(c) for c in args])])
+
+    def text_with_spaces(self, args):
         return Tree('text', [' '.join([str(c) for c in args])])
 
     def INT(self, args):
         return Tree('integer', [str(args)])
+
+    def NUMBER(self, args):
+        return Tree('number', [str(args)])
+
+    def NEGATIVE_NUMBER(self, args):
+        return Tree('number', [str(args)])
 
     #level 2
     def var(self, args):
@@ -328,9 +338,7 @@ class ExtractAST(Transformer):
     def error_unsupported_number(self, args):
         return Tree('unsupported_number', [''.join([str(c) for c in args])])
 
-    #level 11
-    def NUMBER(self, args):
-        return Tree('number', [str(args)])
+
 
 
 # This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
@@ -558,6 +566,14 @@ class TypeValidator(Transformer):
     def integer(self, tree):
         return self.to_typed_tree(tree, HedyType.integer)
 
+    def text_with_spaces(self, tree):
+        # under level 12 integers appear as text, so we parse them
+        if self.level < 12:
+            type_ = HedyType.integer if ConvertToPython.is_int(tree.children[0]) else HedyType.string
+        else:
+            type_ = HedyType.string
+        return self.to_typed_tree(tree, type_)
+
     def text(self, tree):
         # under level 12 integers appear as text, so we parse them
         if self.level < 12:
@@ -761,9 +777,14 @@ class Filter(Transformer):
     def number(self, args, meta):
         return True, ''.join([c for c in args]), meta
 
+    def NEGATIVE_NUMBER(self, args, meta=None):
+        return True, ''.join([c for c in args]), meta
+
     def text(self, args, meta):
         return all(args), ''.join([c for c in args]), meta
-
+      
+    def text_with_spaces(self, args, meta):
+        return all(args), ' '.join([c for c in args])
 
 class UsesTurtle(Transformer):
     # returns true if Forward or Turn are in the tree, false otherwise
@@ -793,6 +814,8 @@ class UsesTurtle(Transformer):
     def NUMBER(self, args):
         return False
 
+    def NEGATIVE_NUMBER(self, args):
+        return False
 
 class AllCommands(Transformer):
     def __init__(self, level):
@@ -858,9 +881,14 @@ class AllCommands(Transformer):
     def NUMBER(self, args):
         return []
 
+    def NEGATIVE_NUMBER(self, args):
+        return []
+
     def text(self, args):
         return []
 
+    def text_with_spaces(self, args):
+        return []
 
 def all_commands(input_string, level, lang='en'):
     input_string = process_input_string(input_string, level)
@@ -893,9 +921,14 @@ class AllPrintArguments(Transformer):
     def NUMBER(self, args):
         return []
 
+    def NEGATIVE_NUMBER(self, args):
+        return []
+
     def text(self, args):
         return ''.join(args)
 
+    def text_with_spaces(self, args):
+        return ''.join(args)
 
 
 def all_print_arguments(input_string, level, lang='en'):
@@ -1129,10 +1162,16 @@ class ConvertToPython_1(ConvertToPython):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
+    def text_with_spaces(self, args):
+        return ' '.join([str(c) for c in args])
+
     def integer(self, args):
         return str(args[0])
 
     def number(self, args):
+        return str(args[0])
+
+    def NEGATIVE_NUMBER(self, args):
         return str(args[0])
 
     def print(self, args):
@@ -1169,7 +1208,7 @@ class ConvertToPython_1(ConvertToPython):
             return "t.right(90)"  # no arguments defaults to a right turn
 
         arg = args[0]
-        if self.is_variable(arg) or arg.isnumeric():
+        if self.is_variable(arg) or arg.lstrip("-").isnumeric():
             return f"t.right({arg})"
         elif arg == 'left':
             return "t.left(90)"
@@ -1246,9 +1285,13 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.right(90)"
 
-        arg = hash_var(args[0])
-        if self.is_variable(arg) or arg.isnumeric():
+        arg = args[0]
+        if arg.lstrip('-').isnumeric():
             return f"t.right({arg})"
+
+        hashed_arg = hash_var(arg)
+        if self.is_variable(hashed_arg):
+            return f"t.right({hashed_arg})"
 
         # the TypeValidator should protect against reaching this line:
         raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
@@ -1296,6 +1339,7 @@ class ConvertToPython_3(ConvertToPython_2):
         var = self.process_variable(args[0])
         list = args[1]
         return f"{list}.append({var})"
+
     def remove(self, args):
         var = self.process_variable(args[0])
         list = args[1]
@@ -1556,6 +1600,9 @@ for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepva
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
+        return ''.join(args)
+
+    def NEGATIVE_NUMBER(self, args):
         return ''.join(args)
 
     def process_token_or_tree(self, argument):
@@ -1940,7 +1987,6 @@ def find_indent_length(line):
     return number_of_spaces
 
 def needs_indentation(code):
-    keywords_requiring_indentation = ['if', 'als', 'si', 'for', 'repeat', 'répète', 'repete', 'herhaal']
     # this is done a bit half-assed, clearly *parsing* the one line would be superior
     # because now a line like
     # repeat is 5 would also require indentation!
@@ -1949,7 +1995,7 @@ def needs_indentation(code):
         return False
 
     first_keyword = all_words[0]
-    return first_keyword in keywords_requiring_indentation
+    return first_keyword == "for" or first_keyword == "repeat" or first_keyword == "if"
 
 
 
