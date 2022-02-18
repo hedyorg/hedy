@@ -23,7 +23,7 @@
                 <label class="inline-block w-1/2" for="password_repeat">{{auth.password_repeat}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="password_repeat" name="password_repeat" type=password required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="language">{{auth.preferred_language}}</label><select class="block appearance-none w-1/2 bg-gray-200 text-gray-700 px-4 py-1 rounded" id="language" name="language" required>
+                <label class="inline-block w-1/2" for="language">{{auth.preferred_language}}</label><select class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" id="language" name="language" required>
                     <option value="" selected disabled hidden>{{auth.select}}</option>
                     <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
                     {% for language in other_languages() %}
@@ -32,10 +32,10 @@
                 </select>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="birth_year">{{auth.birth_year}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg border-2 border-gray-400" id="birth_year" name="birth_year" placeholder="1995" type="number">
+                <label class="inline-block w-1/2" for="birth_year">{{auth.birth_year}}</label><input class="block appearance-none w-1/2 px-2 py-1 rounded-lg border border-gray-400" id="birth_year" min="1900" max="2022" name="birth_year" placeholder="1995" type="number">
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="gender">{{auth.gender}}</label><select class="block appearance-none w-1/2 bg-gray-200 text-gray-700 px-4 py-1 rounded" id="gender" name="gender">
+                <label class="inline-block w-1/2" for="gender">{{auth.gender}}</label><select class="block appearance-none w-1/2 border border-gray-400 text-gray-700 px-4 py-1 rounded-lg" id="gender" name="gender">
                   <option value="" selected disabled hidden>{{auth.select}}</option>
                   <option value="f">{{auth.female}}</option>
                   <option value="m">{{auth.male}}</option>
@@ -43,7 +43,7 @@
                 </select>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="country">{{auth.country}}</label><select  class="block appearance-none w-1/2 bg-gray-200 text-gray-700 px-4 py-1 rounded" id="country" name="country">
+                <label class="inline-block w-1/2" for="country">{{auth.country}}</label><select  class="block appearance-none w-1/2 border border-gray-400 text-gray-700 px-4 py-1 rounded-lg" id="country" name="country">
                     <option value="" selected disabled hidden>{{auth.select}}</option>
                 </select>
             </div>
