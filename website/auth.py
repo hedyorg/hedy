@@ -317,7 +317,7 @@ def routes(app, database):
         if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
             send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
 
-        # If someone agrees to the privacy terms -> sent a mail to manually write down
+        # If someone agrees to the third party contacts -> sent a mail to manually write down
         if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
             send_email(config['email']['sender'], 'Agreement to Third party offers on signup', email, f'<p>{email}</p>')
 
