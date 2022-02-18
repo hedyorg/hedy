@@ -55,7 +55,8 @@ class TestsLevel12(HedyTester):
       code=code,
       expected=expected,
       expected_commands=['is', 'if', 'print'],
-      max_level=16)
+      max_level=16,
+     translate=False)
 
   # print tests
   def test_print_float(self):
@@ -245,7 +246,7 @@ class TestsLevel12(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=self.result_in(list),
-      max_level=15)
+      max_level=15, translate=False)
 
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
@@ -321,8 +322,7 @@ class TestsLevel12(HedyTester):
   def test_float_addition_in_var(self):
     code = textwrap.dedent("""\
             antwoord is 2.5 + 2.5
-            print antwoord
-            """)
+            print antwoord""")
     expected = textwrap.dedent("""\
             antwoord = 2.5 + 2.5
             print(f'{antwoord}')""")
@@ -337,8 +337,7 @@ class TestsLevel12(HedyTester):
     code = textwrap.dedent("""\
             getal1 is 5
             getal2 is 4.3
-            print 'dat is dan: ' getal1 + getal2
-            """)
+            print 'dat is dan: ' getal1 + getal2""")
     expected = textwrap.dedent("""\
             getal1 = 5
             getal2 = 4.3

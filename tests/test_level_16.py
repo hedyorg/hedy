@@ -44,12 +44,13 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
-            extra_check_function=check_in_list
+            extra_check_function=check_in_list,
+            translate=False
         )
 
     def test_print_list_access(self):
         code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers'] 
+            fruit is ['banaan', 'appel', 'kers']
             print fruit[1]""")
         expected = textwrap.dedent("""\
             fruit = ['banaan', 'appel', 'kers']
