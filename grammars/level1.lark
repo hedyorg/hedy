@@ -44,7 +44,7 @@ NUMBER: /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
 INT: /[\p{Nl}\p{Nd}\p{No}]+/
 
 text: /([^\n]+)/ -> text //anything can be parsed except for a newline
-textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline)
+textwithoutspaces: /([^\n ]+)/ -> text //anything can be parsed except for a new line and spaces
 
 
 // FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html
