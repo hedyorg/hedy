@@ -308,6 +308,7 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
         'Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
 # A context processor injects variables in the context that are available to all templates.
+# Todo TB -> We have to read into this documentation, is this called at each request -> very in-efficient!
 @app.context_processor
 def enrich_context_with_user_info():
     user = current_user()
@@ -336,7 +337,7 @@ def enrich_context_with_user_info():
                 data['user_messages'] += 1
     return data
 
-
+# Todo TB -> Similar as line 312, read into this function and decide on best implementation
 @app.context_processor
 def enricht_context_with_translations():
     """Adds dicts with translations to the global template context.
