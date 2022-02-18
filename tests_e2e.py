@@ -94,7 +94,7 @@ class AuthHelper(unittest.TestCase):
         if username in USERS:
             return USERS[username]
         body = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'language': 'nl', 'password': 'foobar', 'password_repeat': 'foobar'}
+                'language': 'nl', 'agree_terms': True, 'password': 'foobar', 'password_repeat': 'foobar'}
         response = request('post', 'auth/signup', {}, body, cookies=self.user_cookies[username])
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
@@ -268,7 +268,7 @@ class TestAuth(AuthHelper):
         # GIVEN a valid username and signup body
         username = self.make_username()
         user = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl'}
+                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl', 'agree_terms': True}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server

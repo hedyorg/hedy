@@ -273,7 +273,7 @@ def routes(app, database):
             return g.auth_texts.get('repeat_match_password'), 400
         if not isinstance(body.get('language'), str):
             return g.auth_texts.get('language_invalid'), 400
-        if not isinstance(body.get('agree_terms'), bool):
+        if not isinstance(body.get('agree_terms'), bool) or not body.get('agree_terms'):
             return g.auth_texts.get('agree_invalid'), 400
 
         # Validations, optional fields
