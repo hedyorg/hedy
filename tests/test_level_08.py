@@ -94,7 +94,7 @@ class TestsLevel8(HedyTester):
     a is test
     b is 15
     if a is b
-      c is 1""")
+        c is 1""")
     expected = textwrap.dedent("""\
     a = 'test'
     b = '15'
@@ -131,7 +131,7 @@ class TestsLevel8(HedyTester):
   def test_repeat_with_indent(self):
     code = textwrap.dedent("""\
     repeat 5 times
-      print 'koekoek'""")
+        print 'koekoek'""")
  
     expected = textwrap.dedent("""\
     for i in range(int(5)):
@@ -215,7 +215,7 @@ class TestsLevel8(HedyTester):
   def test_repeat_basic_print(self):
     code = textwrap.dedent("""\
     repeat 5 times
-      print 'me wants a cookie!'""")
+        print 'me wants a cookie!'""")
 
     expected = textwrap.dedent("""\
     for i in range(int(5)):
@@ -236,9 +236,9 @@ class TestsLevel8(HedyTester):
     code = textwrap.dedent("""\
     a is 1
     if a is 1
-      print a
+        print a
     else
-      print 'nee'""")
+        print 'nee'""")
 
     expected = textwrap.dedent("""\
     a = '1'
@@ -257,8 +257,8 @@ class TestsLevel8(HedyTester):
     code = textwrap.dedent("""\
     count is 1
     repeat 12 times
-      print count ' times 12 is ' count*12
-      count is count + 1""")
+        print count ' times 12 is ' count * 12
+        count is count + 1""")
 
     expected = textwrap.dedent("""\
     count = '1'
@@ -296,7 +296,7 @@ class TestsLevel8(HedyTester):
   def test_quote_in_if(self):
     code = textwrap.dedent("""\
     if eten is 'pizza'
-      print 'lekker'""")
+        print 'lekker'""")
 
     expected = textwrap.dedent("""\
     if str('eten') == str('pizza'):
