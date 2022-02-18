@@ -272,6 +272,8 @@ def routes(app, database):
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
 
+        print(body)
+
         # Validate the essential data using a function -> also used for multiple account creation
         validation = validate_signup_data(body)
         if validation:

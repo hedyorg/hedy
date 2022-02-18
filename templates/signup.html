@@ -20,7 +20,7 @@
                 <label class="inline-block w-1/2" for="password">{{auth.password}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password" name="password" type=password required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="password_repeat">{{auth.password_repeat}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="password_repeat" name="password_repeat" type=password required>
+                <label class="inline-block w-1/2" for="password_repeat">{{auth.password_repeat}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="=6" id="password_repeat" name="password_repeat" type=password required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
                 <label class="inline-block w-1/2" for="language">{{auth.preferred_language}}</label><select class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" id="language" name="language" required>
