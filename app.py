@@ -210,10 +210,17 @@ def get_locale():
         NOTE: We can shorten this notation by simply using _('english string')
     -   We can insert some variable like this: gettext(u'some string %(value)s', value=42)
     -   More interesting for us might be the 'lazy string' the can be defined outside requests, like this:
-    -       lazy_gettext(u'Account succesfully saved')
-    -   This will be really usefull when wanting to return translated error messages
+    -       lazy_gettext(u'Account successfully saved')
+    -   This will be really useful when wanting to return translated error messages
     
-    - We have to mark ALL translatable string with gettext() -> then create a .pot file
+    - We have to mark ALL translatable string (in english!) with gettext() -> then create a .pot file
+    - We create the file as follows: 
+        pybabel extract -F babel.cfg -o messages.pot .
+    - To add a translation (for dutch): 
+        pybabel init -i messages.pot -d translations -l nl
+    - To update your files (when adding new strings):
+        FIRST create new file:  pybabel extract -F babel.cfg -o messages.pot . 
+        THEN:                   pybabel update -i messages.pot -d translations
 """
 
 
