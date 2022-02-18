@@ -273,6 +273,8 @@ def routes(app, database):
             return g.auth_texts.get('repeat_match_password'), 400
         if not isinstance(body.get('language'), str):
             return g.auth_texts.get('language_invalid'), 400
+        if not isinstance(body.get('agree_terms'), bool):
+            return g.auth_texts.get('agree_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
@@ -316,8 +318,8 @@ def routes(app, database):
             send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
 
         # If someone agrees to the privacy terms -> sent a mail to manually write down
-        if not is_testing_request(request) and 'agree_terms' in body and body['agree_terms'] is True:
-            send_email(config['email']['sender'], 'Agreement to privacy terms on signup', email, f'<p>{email}</p>')
+        if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
+            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', email, f'<p>{email}</p>')
 
         # We automatically login the user
         cookie = make_salt()

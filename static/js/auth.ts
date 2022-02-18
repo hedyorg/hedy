@@ -20,6 +20,7 @@ interface User {
   gender?: string;
   subscribe?: string;
   agree_terms?: string;
+  agree_third_party?: string;
   prog_experience?: 'yes' | 'no';
   experience_languages?: string[];
   is_teacher?: string;
@@ -110,6 +111,7 @@ export const auth = {
         is_teacher: $('#is_teacher').prop('checked'),
         subscribe: $('#subscribe').prop('checked'),
         agree_terms: $('#agree_terms').prop('checked'),
+        agree_third_party: $('#agree_third_party').prop('checked'),
         prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
