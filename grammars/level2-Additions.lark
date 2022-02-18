@@ -14,7 +14,7 @@ error_text_dep_2: /([^\n]+)/ -> text //anything can be parsed except for a newli
 sleep: _SLEEP (_SPACE INT)?
 
 //in level 2, forward may also depend on a variable
-turtle: _FORWARD (_SPACE (INT | textwithoutspaces))? -> forward | _TURN (_SPACE (INT | textwithoutspaces))? -> turn
+turtle: _FORWARD (_SPACE (INT | textwithoutspaces))? -> forward | _TURN (_SPACE (textwithoutspaces))? -> turn
 assign: var _SPACE _IS _SPACE text -> assign
 
 //in Level 2 we need to treat punctuation differently, since it can be used to separate arguments (variables)

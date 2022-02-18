@@ -1,5 +1,4 @@
 import os
-
 import utils
 from website.yaml_file import YamlFile
 import bcrypt
@@ -141,9 +140,82 @@ def login_user_from_token_cookie():
     if not token:
         return
 
+    # We update the login record with the current time -> this way the last login is closer to correct
+    DATABASE.record_login(token['username'])
     user = DATABASE.user_by_username(token['username'])
     if user:
         remember_current_user(user)
+
+
+def prepare_user_db(username, password):
+    hashed = hash(password, make_salt())
+
+    token = make_salt()
+    hashed_token = hash(token, make_salt())
+    username = username.strip().lower()
+
+    return username, hashed, hashed_token
+
+
+def validate_signup_data(account):
+    if not isinstance(account.get('username'), str):
+        return g.auth_texts.get('username_invalid')
+    if '@' in account.get('username') or ':' in account.get('username'):
+        return g.auth_texts.get('username_special')
+    if len(account.get('username').strip()) < 3:
+        return g.auth_texts.get('username_three')
+    if not isinstance(account.get('email'), str) or not utils.valid_email(account.get('email')):
+        return g.auth_texts.get('email_invalid')
+    if not isinstance(account.get('password'), str):
+        return g.auth_texts.get('password_invalid')
+    if len(account.get('password')) < 6:
+        return g.auth_texts.get('passwords_six')
+    return None
+
+
+def store_new_account(account, email):
+    username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])
+
+    if not is_testing_request(request) and 'subscribe' in account and account['subscribe'] == True:
+        # If we have a Mailchimp API key, we use it to add the subscriber through the API
+        if MAILCHIMP_API_URL:
+            mailchimp_subscribe_user(email)
+        # Otherwise, we send an email to notify about the subscription to the main email address
+        else:
+            send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email,
+                       '<p>' + email + '</p>')
+
+    if not is_testing_request(request) and 'is_teacher' in account and account['is_teacher'] is True:
+        send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+
+    user = {
+        'username': username,
+        'password': hashed,
+        'email': email,
+        'language': account['language'],
+        'created': timems(),
+        'verification_pending': hashed_token,
+        'last_login': timems()
+    }
+
+    for field in ['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
+        if field in account:
+            if field == 'experience_languages' and len(account[field]) == 0:
+                continue
+            user[field] = account[field]
+
+    DATABASE.store_user(user)
+
+    # If this is an e2e test, we return the email verification token directly instead of emailing it.
+    if is_testing_request(request):
+        resp = make_response({'username': username, 'token': hashed_token})
+    # Otherwise, we send an email with a verification link and we return an empty body
+    else:
+        send_email_template('welcome_verify', email,
+                            email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
+                                username) + '&token=' + urllib.parse.quote_plus(hashed_token))
+        resp = make_response({})
+    return user, resp
 
 # Note: translations are used only for texts that will be seen by a GUI user.
 def routes(app, database):
@@ -199,22 +271,17 @@ def routes(app, database):
         # Validations, mandatory fields
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
-        if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
-        if '@' in body['username'] or ':' in body['username']:
-            return g.auth_texts.get('username_special'), 400
-        if len(body['username'].strip()) < 3:
-            return g.auth_texts.get('username_three'), 400
-        if not isinstance(body.get('email'), str) or not valid_email(body['email']):
-            return g.auth_texts.get('email_invalid'), 400
+
+        # Validate the essential data using a function -> also used for multiple account creation
+        validation = validate_signup_data(body)
+        if validation:
+            return validation, 400
+
+        # Validate fields only relevant when creating a single user account
         if not isinstance(body.get('mail_repeat'), str) or not valid_email(body['mail_repeat']):
             return g.auth_texts.get('repeat_match_email'), 400
         if body['email'] != body['mail_repeat']:
             return g.auth_texts.get('repeat_match_email'), 400
-        if not isinstance(body.get('password'), str):
-            return g.auth_texts.get('password_invalid'), 400
-        if len(body['password']) < 6:
-            return g.auth_texts.get('password_six'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return g.auth_texts.get('repeat_match_password'), 400
         if not isinstance(body.get('language'), str):
@@ -246,58 +313,18 @@ def routes(app, database):
         if email:
             return g.auth_texts.get('exists_email'), 403
 
-        hashed = hash(body['password'], make_salt())
-
-        token = make_salt()
-        hashed_token = hash(token, make_salt())
-        username = body['username'].strip().lower()
-        email = body['email'].strip().lower()
-
-        if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
-            # If we have a Mailchimp API key, we use it to add the subscriber through the API
-            if MAILCHIMP_API_URL:
-                mailchimp_subscribe_user(email)
-            # Otherwise, we send an email to notify about the subscription to the main email address
-            else:
-                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
-
-        if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
-            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
-
-        user = {
-            'username': username,
-            'password': hashed,
-            'email':    email,
-            'created':  timems(),
-            'verification_pending': hashed_token,
-            'last_login': timems()
-        }
-
-        for field in['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
-           if field in body:
-               if field == 'experience_languages' and len(body[field]) == 0:
-                   continue
-               user[field] = body[field]
-
-        DATABASE.store_user(user)
+        # We receive the pre-processed user and response package from the function
+        user, resp = store_new_account(body, body['email'].strip().lower())
 
         # We automatically login the user
         cookie = make_salt()
         DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
-
-        # If this is an e2e test, we return the email verification token directly instead of emailing it.
-        if is_testing_request(request):
-            resp = make_response({'username': username, 'token': hashed_token})
-        # Otherwise, we send an email with a verification link and we return an empty body
-        else:
-            send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
-            resp = make_response({})
-
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
-        resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
-        remember_current_user(user)
+        resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
+                        max_age=365 * 24 * 60 * 60)
 
+        remember_current_user(user)
         return resp
 
     @app.route('/auth/verify', methods=['GET'])
@@ -349,7 +376,6 @@ def routes(app, database):
     @requires_login
     def change_student_password(user):
         body = request.json
-        print(body)
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
@@ -469,6 +495,12 @@ def routes(app, database):
                    updates[field] = body[field]
            else:
                updates[field] = None
+
+        # We want to check if the user choose a new language, if so -> reload
+        # We can use g.lang for this to reduce the db calls
+        resp['reload'] = False
+        if g.lang != body['language']:
+            resp['reload'] = True
 
         if updates:
             DATABASE.update_user(username, updates)
