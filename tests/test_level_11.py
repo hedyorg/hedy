@@ -32,8 +32,8 @@ class TestsLevel11(HedyTester):
     a is 2
     b is 3
     for a in range 2 to 4
-      a is a + 2
-      b is b + 2""")
+        a is a + 2
+        b is b + 2""")
     expected = textwrap.dedent("""\
     a = '2'
     b = '3'
@@ -49,9 +49,9 @@ class TestsLevel11(HedyTester):
     code = textwrap.dedent("""\
     a is 5
     if a is 1
-      x is 2
+        x is 2
     else
-      x is 222""")
+        x is 222""")
     expected = textwrap.dedent("""\
     a = '5'
     if str(a) == str('1'):
@@ -66,7 +66,7 @@ class TestsLevel11(HedyTester):
   def test_for_loop_with_print(self):
     code = textwrap.dedent("""\
     for i in range 1 to 10
-      print i
+        print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
     step = 1 if int(1) < int(10) else -1
@@ -99,7 +99,7 @@ class TestsLevel11(HedyTester):
   def test_for_loop_with_assignment(self):
     code = textwrap.dedent("""\
       for i in range 1 to 10
-        a is i + 1""")
+          a is i + 1""")
     expected = textwrap.dedent("""\
       step = 1 if int(1) < int(10) else -1
       for i in range(int(1), int(10) + step, step):
@@ -114,7 +114,7 @@ class TestsLevel11(HedyTester):
   def test_reverse_range(self):
     code = textwrap.dedent("""\
     for i in range 10 to 1
-      print i
+        print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
     step = 1 if int(10) < int(1) else -1
@@ -132,13 +132,13 @@ class TestsLevel11(HedyTester):
   def test_if_under_else_in_for(self):
     code = textwrap.dedent("""\
     for i in range 0 to 10
-      antwoord is ask 'Wat is 5*5'
-      if antwoord is 24
-        print 'Dat is fout!'
-      else
-        print 'Dat is goed!'
-      if antwoord is 25
-        i is 10""")
+        antwoord is ask 'Wat is 5*5'
+        if antwoord is 24
+            print 'Dat is fout!'
+        else
+            print 'Dat is goed!'
+        if antwoord is 25
+            i is 10""")
 
     expected = textwrap.dedent("""\
     step = 1 if int(0) < int(10) else -1
@@ -159,9 +159,9 @@ class TestsLevel11(HedyTester):
   def test_for_ifbug(self):
     code = textwrap.dedent("""\
     for i in range 0 to 10
-      antwoord is ask 'Wat is 5*5'
-      if antwoord is 24
-        print 'fout'
+        antwoord is ask 'Wat is 5*5'
+        if antwoord is 24
+            print 'fout'
     print 'klaar met for loop'""")
 
     expected = textwrap.dedent("""\
@@ -180,8 +180,8 @@ class TestsLevel11(HedyTester):
   def test_for_loopbug599(self):
     code = textwrap.dedent("""\
     for i in range 0 to 10
-      if i is 2
-        print '2'""")
+        if i is 2
+            print '2'""")
 
     expected = textwrap.dedent("""\
       step = 1 if int(0) < int(10) else -1
