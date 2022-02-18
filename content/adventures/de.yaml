@@ -28,7 +28,7 @@ adventures:
                     ask Der Name der Hauptfigur lautet:
                     print Die Hauptfigur läuft nun durch einen dunklen Wald.
                     print Überall sind seltsame Geräusche zu hören.
-                    echo Da rief doch jemand seinen / ihren Namen: 
+                    echo Da rief doch jemand seinen / ihren Namen:
                     print Es ist schon sehr gruselig hier.
                     print Er / Sie befürchtet, dass es in diesem Wald spukt.
                     ```
@@ -1098,7 +1098,7 @@ adventures:
                     Are there games with a (special) die? You can also copy it with this code.
                     For example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.
 
-                    ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/content/img/dobbelsteen.jpeg)
+                    ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
 
                 example_code: |
                     ## Example Hedy code
@@ -1204,7 +1204,7 @@ adventures:
                     ## Example Hedy code
 
                     ```
-                    options is rock, paper, scissors
+                    options = rock, paper, scissors
                     computer_choice is _
                     choice is ask What do you choose?
                     print 'you chose ' _
@@ -2464,23 +2464,23 @@ adventures:
             1:
                 story_text: |
                     ## What's next?
-                    Congratulations! You've reached the end of level 1. Hopefully you've already made some awesome codes, but Hedy has a lot more to discover. 
+                    Congratulations! You've reached the end of level 1. Hopefully you've already made some awesome codes, but Hedy has a lot more to discover.
 
-                    In the first level you might've notice that the `echo` command can only save one bit of information at a time. 
-                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence. 
+                    In the first level you might've notice that the `echo` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
                     ```
                     print Welcome at Hedy's
                     ask What would you like to eat?
-                    echo So you want 
+                    echo So you want
                     ask what would you like to drink?
-                    echo So you want 
+                    echo So you want
                     ```
-                    If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. 
+                    If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line.
                     Also, the `echo` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.
 
                     That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
-                    Besides, you'll learn how to work with the `at random` command, that you can use to make games. 
+                    Besides, you'll learn how to work with the `at random` command, that you can use to make games.
                     So let's go to the next level!
 
                 start_code: "print Let's go!"
@@ -2502,7 +2502,7 @@ adventures:
                     name is Sophie
                     print My name is name
                     ```
-                    Of course you wanted to print `My name is Sophie` but Hedy prints `My Sophie is Sophie`. 
+                    Of course you wanted to print `My name is Sophie` but Hedy prints `My Sophie is Sophie`.
                     In the next level this problem is fixed by using quotation marks.
 
                 start_code: "print Let's go to the next level!"
