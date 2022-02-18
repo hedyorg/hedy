@@ -1940,6 +1940,7 @@ def find_indent_length(line):
     return number_of_spaces
 
 def needs_indentation(code):
+    keywords_requiring_indentation = ['if', 'als', 'si', 'for', 'repeat', 'répète', 'repete', 'herhaal']
     # this is done a bit half-assed, clearly *parsing* the one line would be superior
     # because now a line like
     # repeat is 5 would also require indentation!
@@ -1948,7 +1949,7 @@ def needs_indentation(code):
         return False
 
     first_keyword = all_words[0]
-    return first_keyword == "for" or first_keyword == "repeat" or first_keyword == "if"
+    return first_keyword in keywords_requiring_indentation
 
 
 
