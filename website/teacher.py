@@ -1,7 +1,7 @@
 import json
 
 import hedy
-from website.auth import requires_login, is_teacher, current_user
+from website.auth import validate_signup_data, store_new_account, requires_login, is_teacher
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
@@ -11,10 +11,10 @@ import hedyweb
 import hedy_content
 TRANSLATIONS = hedyweb.Translations ()
 from config import config
-cookie_name     = config ['session'] ['cookie_name']
+cookie_name = config['session']['cookie_name']
 
 
-def routes (app, database, achievements):
+def routes(app, database, achievements):
     global DATABASE
     global ACHIEVEMENTS
     DATABASE = database
@@ -58,6 +58,9 @@ def routes (app, database, achievements):
         if achievement:
             achievement = json.dumps(achievement)
 
+        teachers = os.getenv('BETA_TEACHERS', '').split(',')
+        is_beta_teacher = user['username'] in teachers
+
         invites = []
         for invite in DATABASE.get_class_invites(Class['id']):
             invites.append({'username': invite['username'], 'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))})
@@ -65,6 +68,7 @@ def routes (app, database, achievements):
         return render_template ('class-overview.html', current_page='my-profile',
                                 page_title=hedyweb.get_page_title('class overview'),
                                 achievement=achievement, invites=invites,
+                                is_beta_teacher=is_beta_teacher,
                                 class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class ['link'],
                                             'name': Class ['name'], 'id': Class ['id']})
 
@@ -323,16 +327,83 @@ def routes (app, database, achievements):
         DATABASE.remove_class_invite(username)
         return {}, 200
 
+    @app.route('/for-teachers/create-accounts', methods=['GET'])
+    @requires_login
+    def create_accounts(user):
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='not_teacher')
+        classes = DATABASE.get_teacher_classes(user['username'], False)
+
+        return render_template('create-accounts.html', classes=classes)
+
+    @app.route('/for-teachers/create-accounts', methods=['POST'])
+    @requires_login
+    def store_accounts(user):
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message='not_teacher')
+        body = request.json
+
+        #Validations
+        if not isinstance(body, dict):
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('accounts'), list):
+            return "accounts should be a list!", 400
+
+        if len(body.get('accounts', [])) < 1:
+            return g.auth_texts.get('no_accounts'), 400
+
+        usernames = []
+        mails = []
+
+        # Validation for correct types and duplicates
+        for account in body.get('accounts', []):
+            validation = validate_signup_data(account)
+            if validation:
+                return validation, 400
+            if account.get('username').strip().lower() in usernames:
+                return {'error': g.auth_texts.get('unique_usernames'), 'value': account.get('username')}, 200
+            usernames.append(account.get('username').strip().lower())
+            if account.get('email').strip().lower() in mails:
+                return {'error': g.auth_texts.get('unique_emails'), 'value': account.get('email')}, 200
+            mails.append(account.get('email').strip().lower())
+
+        # Validation for duplicates in the db
+        classes = DATABASE.get_teacher_classes(user['username'], False)
+        print(classes)
+        for account in body.get('accounts', []):
+            if account.get('class') and account['class'] not in [i.get('name') for i in classes]:
+                return "not your class", 404
+            user = DATABASE.user_by_username(account.get('username').strip().lower())
+            if user:
+                return {'error': g.auth_texts.get('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
+            email = DATABASE.user_by_email(account.get('email').strip().lower())
+            if email:
+                return {'error': g.auth_texts.get('emails_exist'), 'value': account.get('email').strip().lower()}, 200
+
+        # Now -> actually store the users in the db
+        for account in body.get('accounts', []):
+            # Set the current teacher language as new account language
+            account['language'] = g.lang
+            store_new_account(account, account.get('email').strip().lower())
+            if account.get('class'):
+                class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]
+                DATABASE.add_student_to_class(class_id, account.get('username').strip().lower())
+        return {'success': g.auth_texts.get('accounts_created')}, 200
+
     @app.route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])
     @requires_login
     def view_adventure(user, adventure_id):
-        if not is_teacher(user):
+        if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message='retrieve_adventure')
         adventure = DATABASE.get_adventure(adventure_id)
-        if not adventure or adventure['creator'] != user['username']:
+        if not adventure:
             return utils.error_page(error=404, ui_message='no_such_adventure')
+        if adventure['creator'] != user['username'] and not is_admin(user):
+            return utils.error_page(error=403, ui_message='retrieve_adventure')
 
-        adventure['content'] = adventure['content'].replace("<pre>", "<pre id='" + str(adventure['level']) + "'>")
+        # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
+        adventure['content'] = adventure['content'].replace("<pre>", "<pre level='" + str(adventure['level']) + "'>")
+        print(adventure['content'])
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=hedyweb.get_page_title('view adventure'), current_page='my-profile')
 
