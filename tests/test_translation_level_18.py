@@ -32,7 +32,7 @@ class TestsTranslationLevel18(HedyTester):
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        voor i in bereik(0,10):
+        voor i in bereik(0, 10):
             print('hallo!')""")
 
         self.assertEqual(expected, result)
