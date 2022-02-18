@@ -45,7 +45,7 @@ var currentLang: {
   _LENGTH: string;
 };
 if(localKeywordsEnable){
-  switch(window.State.lang){
+  switch(window.State.other_keyword_language){
     case 'nl':
       currentLang = LANG_nl;
       break;

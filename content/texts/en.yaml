@@ -149,6 +149,10 @@ Auth:
     account: "My account"
     account_overview: "Account overview"
     explore_programs: "Explore programs"
+    explore_explanation: |
+        On this page you can look through programs created by other Hedy users. You can filter on both a Hedy level and adventure.
+        Click on "View program" to open a program and run it. Programs with a red header contain a mistake. You can still open the program, but running it will result in an error. You can of course try to fix it!
+        If the creator has a public profile you can click their username to visit their profile. There you will find all their shared programs and much more!
     statistics: "My statistics"
     public_profile: "Public profile"
     profile_picture: "Profile picture"
@@ -201,6 +205,7 @@ Auth:
 
     please_username_email: "Please enter an username or email."
     profile_updated: "Profile updated."
+    profile_updated_reload: "Profile updated, page will be re-loaded."
     public_profile_updated: "Public profile updated."
     public_profile_visit: "You can visit your public profile! Click"
     public_profile_link: "here"
@@ -232,6 +237,7 @@ Auth:
     teacher_invitation_require_login: "To set up your profile as a teacher we will need you to log in. If you don't have an account, please create one."
     teacher_welcome: "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
     examples_used: "You've already tried the maximum amount of allowed example programs in this level! Next try programming something yourself."
+    translate_error: "Something went wrong with translating the code."
 
   # These variables are added here to make the code simpler, but conceptually they belong to the UI.
     program_header: "My programs"
@@ -324,6 +330,29 @@ Auth:
     reset_adventure_prompt: "Are you sure you want to reset all selected adventures?"
     reset_adventures: "Reset selected adventures"
     remove_customization: "Remove customization"
+
+    #Multi-accounts adding
+    create_student_accounts: "Create student accounts"
+    create_accounts: "Create multiple accounts"
+    add: "Add"
+    accounts: "Accounts"
+    select_class: "Select class"
+    reset_view: "Reset"
+    create: "Create accounts"
+    create_accounts_prompt: "Are you sure you want to create these accounts?"
+    no_accounts: "There are no accounts to create."
+    unique_usernames: "All usernames need to be unique."
+    unique_emails: "All mail addresses need to be unique."
+    passwords_six: "All passwords need to be six characters or longer."
+    class_invalid: "This class id is invalid."
+    usernames_exist: "One or more usernames is already in use."
+    emails_exist: "One or more mail addresses is already in use."
+    accounts_created: "Accounts where successfully created."
+    accounts_intro: |
+        On this page you can create accounts for multiple students at the same time. It is also possible to directly add them to one of your classes.
+        By pressing the green + on the bottom right of the page you can add extra rows. You can delete a row by pressing the corresponding red cross.
+        Make sure no rows are empty when you press "Create accounts". Please keep in mind that every username and mail address needs to be unique and the password needs to be <b>at least</b> 6 characters.
+    
     #Adventure customizations
     customize_adventure: "Customize adventure"
     general_settings: "General settings"
