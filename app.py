@@ -31,6 +31,7 @@ import textwrap
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
 from flask_helpers import render_template
 from flask_compress import Compress
+from flask_babel import Babel
 
 # Hedy-specific modules
 import hedy_content
@@ -192,6 +193,22 @@ logging.basicConfig(
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
+
+babel = Babel(app)
+
+
+# Return the session language, if not: return best match
+@babel.localeselector
+def get_locale():
+    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
+
+
+"""
+    Some important notes relates to Flask-Babel usage:
+    -   We can always get a translation using gettext(u'english string')
+    -   We can insert some variable like this: gettext(u'some string %(value)s', value=42)
+"""
+
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
