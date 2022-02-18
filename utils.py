@@ -2,12 +2,12 @@ import contextlib
 import datetime
 import glob
 import time
-import pickle
 import functools
 import os
 import re
 import string
 import random
+import uuid
 from pathlib import Path
 from typing import List
 
@@ -18,7 +18,7 @@ commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 from bs4 import BeautifulSoup
 from flask_helpers import render_template
-from flask import g
+from flask import g, session, request
 
 IS_WINDOWS = os.name == 'nt'
 
@@ -211,3 +211,13 @@ def gather_content_files(*path) -> List[str]:
 def construct_content_path(*path) -> str:
     utility_script_location = Path(__file__).parent.absolute()
     return os.path.join(utility_script_location, "content", *path)
+
+def session_id():
+    """Returns or sets the current session ID."""
+    if 'session_id' not in session:
+        if os.getenv('IS_TEST_ENV') and 'X-session_id' in request.headers:
+            session['session_id'] = request.headers['X-session_id']
+        else:
+            session['session_id'] = uuid.uuid4().hex
+    return session['session_id']
+

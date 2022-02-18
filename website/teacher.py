@@ -1,8 +1,7 @@
 import json
 
-from website.auth import validate_signup_data, store_new_account
 import hedy
-from website.auth import requires_login, is_teacher, is_admin
+from website.auth import validate_signup_data, store_new_account, requires_login, is_teacher
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
@@ -15,7 +14,7 @@ from config import config
 cookie_name = config['session']['cookie_name']
 
 
-def routes (app, database, achievements):
+def routes(app, database, achievements):
     global DATABASE
     global ACHIEVEMENTS
     DATABASE = database
@@ -390,7 +389,7 @@ def routes (app, database, achievements):
                 class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]
                 DATABASE.add_student_to_class(class_id, account.get('username').strip().lower())
         return {'success': g.auth_texts.get('accounts_created')}, 200
-      
+
     @app.route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])
     @requires_login
     def view_adventure(user, adventure_id):
@@ -402,8 +401,9 @@ def routes (app, database, achievements):
         if adventure['creator'] != user['username'] and not is_admin(user):
             return utils.error_page(error=403, ui_message='retrieve_adventure')
 
-        # Add id with current level to the <pre> tag to let syntax highlighting know which highlighting we need!
-        adventure['content'] = adventure['content'].replace("<pre>", "<pre id='" + str(adventure['level']) + "'>")
+        # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
+        adventure['content'] = adventure['content'].replace("<pre>", "<pre level='" + str(adventure['level']) + "'>")
+        print(adventure['content'])
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=hedyweb.get_page_title('view adventure'), current_page='my-profile')
 
