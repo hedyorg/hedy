@@ -53,11 +53,8 @@ def routes(app, database, achievements):
     @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>/<int:attempt>', methods=['GET'])
     def get_quiz(level_source, question_nr, attempt):
 
-        print("Hier komen we!")
         if not is_quiz_enabled():
             return quiz_disabled_error()
-
-        print("Hier ook?")
 
             # If we don't have an attempt ID yet, redirect to the start page
         if not session.get('quiz-attempt-id'):
@@ -88,7 +85,7 @@ def routes(app, database, achievements):
 
         # Store the answer in the database. If we don't have a username,
         # use the session ID as a username.
-        username = current_user()['username'] or f'anonymous:{session_id()}'
+        username = current_user()['username'] or f'anonymous:{utils.session_id()}'
 
         if attempt == 1:
             is_correct = is_correct_answer(question, chosen_option)
@@ -296,7 +293,7 @@ def no_quiz_data_error():
     return utils.error_page(error=404, page_error='No quiz data found for this level', menu=False, iframe=True)
 
 def quiz_data_file_for(lang, level):
-    quiz_file = YamlFile.for_file(f'coursedata/quizzes/{lang}.yaml')
+    quiz_file = YamlFile.for_file(f'content/quizzes/{lang}.yaml')
     if not quiz_file.exists():
         return None
     if level not in quiz_file['levels'].keys():
