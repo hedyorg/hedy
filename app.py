@@ -207,6 +207,7 @@ def get_locale():
     Some important notes relates to Flask-Babel usage:
     
     -   We can always get a translation using gettext(u'english string')
+        NOTE: We can shorten this notation by simply using _('english string')
     -   We can insert some variable like this: gettext(u'some string %(value)s', value=42)
     -   More interesting for us might be the 'lazy string' the can be defined outside requests, like this:
     -       lazy_gettext(u'Account succesfully saved')
