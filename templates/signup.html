@@ -47,7 +47,7 @@
                     <option value="" selected disabled hidden>{{auth.select}}</option>
                 </select>
             </div>
-            <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
+            <div class="flex flex-row items-center mx-auto w-full my-1">
               <label class="inline-block w-1/2" for="has_experience">{{auth.programming_experience}}</label><ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0" style="margin-top: -0.3em;">
                   <li>
                       <input type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()">
@@ -80,12 +80,17 @@
                 </li>
               </ul>
             </div>
-            <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400" id="is_teacher_div">
-              <label class="inline-block w-1/2" for="is_teacher">{{auth.is_teacher}}</label><input class="inline-block ltr:ml-0 rtl:mr-0" type="checkbox" id="is_teacher" name="is_teacher">
+            <div class="w-full border border-gray-400 rounded-lg px-4 py-2 mt-2 mb-4">
+                <div class="flex flex-row items-center mx-auto w-full my-2 border-b pb-2 border-gray-400" id="is_teacher_div">
+                  <label class="inline-block w-1/2" for="is_teacher">{{auth.is_teacher}}</label><input class="inline-block ltr:ml-0 rtl:mr-0" type="checkbox" id="is_teacher" name="is_teacher">
+                </div>
+                <div class="flex flex-row items-center mx-auto w-full my-1">
+                  <label class="inline-block w-1/2" for="subscribe">{{auth.subscribe_newsletter}}</label><input class="inline-block ltr:ml-0 rtl:mr-0" type="checkbox" id="subscribe" name="subscribe">
+                </div>
             </div>
-            <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-              <label class="inline-block w-1/2" for="subscribe">{{auth.subscribe_newsletter}}</label><input class="inline-block ltr:ml-0 rtl:mr-0" type="checkbox" id="subscribe" name="subscribe">
-            </div>
+        </div>
+        <div class="flex flex-row items-center justify-center w-full mx-auto px-16">
+            <input type="checkbox" class="ltr:mr-4 rtl:ml-4" id="agree_terms" name="agree_terms"><label class="inline-block" for="agree_terms">{{auth.agree_terms}}</label>
         </div>
         <div class="flex flex-row w-full mt-4">
             <button type="submit" class="green-btn mx-auto">{{auth.create_account}}</button>
