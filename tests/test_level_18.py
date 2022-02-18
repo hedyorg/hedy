@@ -147,7 +147,7 @@ class TestsLevel18(HedyTester):
       code = textwrap.dedent("""\
       a is 2
       b is 3
-      for a in range(2,4):
+      for a in range(2, 4):
           a is a + 2
           b is b + 2""")
       expected = textwrap.dedent("""\

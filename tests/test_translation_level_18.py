@@ -27,7 +27,7 @@ class TestsTranslationLevel18(HedyTester):
 
     def test_range_with_brackets(self):
         code = textwrap.dedent("""\
-        for i in range(0,10):
+        for i in range(0, 10):
             print('hallo!')""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
