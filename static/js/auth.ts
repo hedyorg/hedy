@@ -19,6 +19,7 @@ interface User {
   country?: string;
   gender?: string;
   subscribe?: string;
+  agree_terms?: string;
   prog_experience?: 'yes' | 'no';
   experience_languages?: string[];
   is_teacher?: string;
@@ -33,6 +34,7 @@ interface UserForm {
   country?: string;
   gender?: string;
   subscribe?: string;
+  agree_terms?: string;
   mail_repeat?: string;
   password_repeat?: string;
   old_password?: string;
@@ -105,8 +107,9 @@ export const auth = {
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
-        subscribe: $('#subscribe').prop('checked'),
         is_teacher: $('#is_teacher').prop('checked'),
+        subscribe: $('#subscribe').prop('checked'),
+        agree_terms: $('#agree_terms').prop('checked'),
         prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
