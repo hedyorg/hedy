@@ -272,9 +272,9 @@ class TestsLevel17(HedyTester):
     code = textwrap.dedent("""\
       a is 5
       si a is 1:
-        x is 2
+          x is 2
       sinon si a is 2:
-        x is 222""")
+          x is 222""")
     expected = textwrap.dedent("""\
       a = 5
       if str(a) == str('1'):
