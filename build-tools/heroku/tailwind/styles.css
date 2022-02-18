@@ -24,9 +24,6 @@ h4 {
   @apply font-bold text-base;
 }
 
-
-
-
 * + p, * + ul, * + ol, * + pre {
   @apply mt-4;
 }
@@ -215,6 +212,10 @@ ol {
 }
 
 /* AUTH */
+
+#signup input:required:valid {
+  @apply border-green-400;
+}
 
 form.auth {
   border: solid 1px #eeeeee;
