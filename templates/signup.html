@@ -89,8 +89,11 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row items-center justify-center w-full mx-auto px-16">
-            <input type="checkbox" class="ltr:mr-4 rtl:ml-4" id="agree_terms" name="agree_terms"><label class="inline-block" for="agree_terms">{{auth.agree_terms}}</label>
+        <div class="flex flex-row items-center w-full px-16">
+            <input type="checkbox" class="ltr:mr-4 rtl:ml-4 appearance-none w-4 h-4 rounded-lg" id="agree_terms" name="agree_terms" required><label class="inline-block" for="agree_terms">{{auth.agree_privacy}}</label>
+        </div>
+        <div class="flex flex-row items-center w-full mt-2 px-16">
+            <input type="checkbox" class="ltr:mr-4 rtl:ml-4" id="agree_terms" name="agree_terms"><label class="inline-block" for="agree_terms">{{auth.agree_third_party}}</label>
         </div>
         <div class="flex flex-row w-full mt-4">
             <button type="submit" class="green-btn mx-auto">{{auth.create_account}}</button>
