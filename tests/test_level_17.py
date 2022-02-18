@@ -270,6 +270,22 @@ class TestsLevel17(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_if_elif_french(self):
+    code = textwrap.dedent("""\
+      a is 5
+      si a is 1:
+        x is 2
+      sinon si a is 2:
+        x is 222""")
+    expected = textwrap.dedent("""\
+      a = 5
+      if str(a) == str('1'):
+        x = 2
+      elif str(a) == str('2'):
+        x = 222""")
+
+    self.single_level_tester(code=code, expected=expected, lang='fr')
+
   def test_if_with_multiple_elifs(self):
     code = textwrap.dedent("""\
       a is 5
