@@ -2,6 +2,7 @@ import {LANG_en} from './syntaxLang-en';
 import {LANG_es} from './syntaxLang-es';
 import {LANG_nl} from './syntaxLang-nl';
 import {LANG_ar} from './syntaxLang-ar';
+import {LANG_fr} from './syntaxLang-fr';
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
@@ -44,7 +45,7 @@ var currentLang: {
   _LENGTH: string;
 };
 if(localKeywordsEnable){
-  switch(window.State.lang){
+  switch(window.State.other_keyword_language){
     case 'nl':
       currentLang = LANG_nl;
       break;
@@ -53,6 +54,9 @@ if(localKeywordsEnable){
       break;
     case 'es':
       currentLang = LANG_es;
+      break;
+    case 'fr':
+      currentLang = LANG_fr;
       break;
     default:
       currentLang = LANG_en;

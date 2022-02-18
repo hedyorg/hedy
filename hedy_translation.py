@@ -179,7 +179,14 @@ class ConvertToLang3(ConvertToLang2):
 
     def list_access(self, args):
         return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
-
+    def add(self, args):
+        var = args[0]
+        list = args[1]
+        return f'{self.keywords["add"]} {var} {self.keywords["to_list"]} {list}'
+    def remove(self, args):
+        var = args[0]
+        list = args[1]
+        return f'{self.keywords["remove"]} {var} {self.keywords["from"]} {list}'
 
 @hedy_translator(level=4)
 class ConvertToLang4(ConvertToLang3):
@@ -198,14 +205,7 @@ class ConvertToLang4(ConvertToLang3):
         return self.keywords["print"] + argument_string
     def print_nq(self, args):
         return ConvertToLang2.print(self, args)
-    def add(self, args):
-        var = args[0]
-        list = args[1]
-        return f'{self.keywords["add"]} {var} {self.keywords["to_list"]} {list}'
-    def remove(self, args):
-        var = args[0]
-        list = args[1]
-        return f'{self.keywords["remove"]} {var} {self.keywords["from"]} {list}'
+
 
 
 @hedy_translator(level=5)

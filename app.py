@@ -1,5 +1,7 @@
 # coding=utf-8
 import sys
+
+import hedy_translation
 from website.yaml_file import YamlFile
 
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -65,6 +67,12 @@ ALL_LANGUAGES = {
 FALL_BACK_ADVENTURE = {
     'fy': 'nl',
     'pt_br': 'pt_pt'
+}
+
+ALL_KEYWORD_LANGUAGES = {
+    'en': 'EN',
+    'nl': 'NL',
+    'es': 'ES'
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
@@ -284,12 +292,17 @@ def setup_language():
         session['lang'] = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
     g.lang = session['lang']
 
+
+    # Always set the keyword languages to English when starting
+    g.keyword_lang = "en"
+
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language in the list is selected
     # This is the only place to expand / shrink the list of RTL languages -> front-end is fixed based on this value
     g.dir = "ltr"
     if g.lang in ['ar', 'he', 'ur']:
         g.dir = "rtl"
+
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
@@ -1072,11 +1085,30 @@ def change_language():
     session['lang'] = body.get('lang')
     return jsonify({'succes': 200})
 
+@app.route('/translate_keywords', methods=['POST'])
+def translate_keywords():
+    body = request.json
+    translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
+    if translated_code:
+        return jsonify({'success': 200, 'code': translated_code})
+    else:
+        return g.auth_texts.get('translate_error'), 400
 
 @app.template_global()
 def current_language():
     return make_lang_obj(g.lang)
 
+@app.template_global()
+def current_keyword_language():
+    return make_keyword_lang_obj(g.keyword_lang)
+
+@app.template_global()
+def other_keyword_language():
+    if session['lang'] in ALL_KEYWORD_LANGUAGES.keys() and g.keyword_lang != session['lang']:
+        return make_keyword_lang_obj(g.lang)
+    if g.keyword_lang != "en": #Always return English as an option!
+        return make_keyword_lang_obj("en")
+    return None
 
 @app.template_global()
 def main_menu_entries():
@@ -1125,6 +1157,13 @@ def make_lang_obj(lang):
     """Make a language object for a given language."""
     return {
         'sym': ALL_LANGUAGES[lang],
+        'lang': lang
+    }
+
+def make_keyword_lang_obj(lang):
+    """Make a language object for a given language."""
+    return {
+        'sym': ALL_KEYWORD_LANGUAGES[lang],
         'lang': lang
     }
 
