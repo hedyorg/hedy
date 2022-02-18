@@ -62,7 +62,6 @@ def routes(app, database, achievements):
 
             # Reading the yaml file
         questions = quiz_data_file_for(g.lang, level_source)
-        print(questions)
         if not questions:
             return no_quiz_data_error()
 
