@@ -100,7 +100,7 @@ class TestsLevel1(HedyTester):
     expected = textwrap.dedent("""\
     print('hallo!')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_print_nl(self):
     code = "print Hallo welkom bij Hedy!"
@@ -161,8 +161,7 @@ class TestsLevel1(HedyTester):
 
     self.single_level_tester(code=code,
                              expected=expected,
-                             lang='nl',
-                             translate=False) #we are trying a Dutch keyword in en, can't be translated
+                             lang='nl')
 
   def test_mixes_languages_nl_en(self):
     code = textwrap.dedent("""\
@@ -180,8 +179,7 @@ class TestsLevel1(HedyTester):
     self.single_level_tester(code=code,
                              expected=expected,
                              expected_commands=['ask', 'echo', 'ask', 'print'],
-                             lang='nl',
-                             translate=False) #mixed codes will not translate back to their original form, sadly
+                             lang='nl')
 
   # echo tests
   def test_echo_without_argument(self):
@@ -204,6 +202,30 @@ class TestsLevel1(HedyTester):
     code = "forward 50"
     expected = textwrap.dedent("""\
     t.forward(50)
+    time.sleep(0.1)""")
+    self.multi_level_tester(
+      max_level=self.max_turtle_level,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle()
+    )
+
+  def test_forward_arabic_numeral(self):
+    code = "forward ١١١١١١١"
+    expected = textwrap.dedent("""\
+    t.forward(1111111)
+    time.sleep(0.1)""")
+    self.multi_level_tester(
+      max_level=self.max_turtle_level,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle()
+    )
+
+  def test_forward_hindi_numeral(self):
+    code = "forward ५५५"
+    expected = textwrap.dedent("""\
+    t.forward(555)
     time.sleep(0.1)""")
     self.multi_level_tester(
       max_level=self.max_turtle_level,
@@ -279,6 +301,16 @@ class TestsLevel1(HedyTester):
       extra_check_function=self.is_turtle()
     )
 
+  def test_turn_negative_number(self):
+    code = "turn -180"
+    expected = "t.right(-180)"
+    self.multi_level_tester(
+      max_level=3, #@Boryana, I can't get this to properly type check over level 3, can you have a peek what goes wrong?
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle()
+    )
+
   def test_one_turn_with_text_gives_type_error(self):
     code = "turn koekoek"
     self.multi_level_tester(
@@ -327,7 +359,6 @@ class TestsLevel1(HedyTester):
       extra_check_function=self.is_turtle(),
       expected_commands=['forward', 'turn', 'forward']
     )
-
 
   # markup tests
   def test_lines_may_end_in_spaces(self):
