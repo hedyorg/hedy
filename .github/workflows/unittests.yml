@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: aws-actions/setup-sam@v1
+      with:
+        version: 1.37.0
     - uses: actions/checkout@v2
     - name: Set up Python 3.9
       uses: actions/setup-python@v1
