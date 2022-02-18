@@ -253,7 +253,7 @@ class TestsLevel14(HedyTester):
     a = 1, 2
     b = 1, 2
     if a {comparison} b
-      sleep""")
+        sleep""")
 
     expected = textwrap.dedent(f"""\
     a = [1, 2]
@@ -264,14 +264,15 @@ class TestsLevel14(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=15)
+      max_level=15,
+      translate=False)
 
   def test_inequality_with_lists(self):
     code = textwrap.dedent("""\
     a = 1, 2
     b = 1, 2
     if a != b
-      sleep""")
+        sleep""")
 
     expected = textwrap.dedent("""\
     a = [1, 2]
@@ -282,7 +283,8 @@ class TestsLevel14(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=15)
+      max_level=15,
+      translate=False)
 
   @parameterized.expand(HedyTester.comparison_commands)
   def test_comparisons_with_boolean(self, comparison):

@@ -19,8 +19,8 @@ assign: var _SPACE _IS _SPACE text -> assign
 
 // punctuation (?!.) has to be treated differently since it can be used to separate arguments, e.g.
 // by excluding punctuation symbols from the rules below, we ensure a ? can be printed after a variable
-textwithoutspaces: /([^\n!?. ]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
-text: /([^\r\n,!?،.]+)/ -> text //todo FH, feb 2022 this can go to level 3 cause in (the new) level 2 it is allowed to have commas, lists are now introduced in level 2
+textwithoutspaces: /([^\n!?. ]+)/ -> text
+text: /([^\n!?.]+)/ -> text
 
 punctuation : PUNCTUATION -> punctuation
 PUNCTUATION: _EXCLAMATION_MARK | _QUESTION_MARK | _PERIOD //uppercase places tokens in tree

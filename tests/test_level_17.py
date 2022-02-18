@@ -319,7 +319,7 @@ class TestsLevel17(HedyTester):
       m is [1, 2]
       n is [1, 2]
       if m is n:
-        a is 1""")
+          a is 1""")
 
     expected = textwrap.dedent("""\
       m = [1, 2]
