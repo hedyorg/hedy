@@ -1002,60 +1002,71 @@ adventures:
         levels:
             10:
                 story_text: |
-                    ## Dice
-                    Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
+                    ## Würfel
+                    Brauchen alle zu lange, um zu würfeln?
+                    In diesem Level kannst Du Hedy alle Würfel auf einmal werfen lassen.
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    players = Ann, John, Jesse
-                    choices = 1, 2, 3, 4, 5, 6
-                    for player in players
-                        print player ' throws ' choices at random
+                    SpielerListe = Ann, John, Jesse
+                    Würfelseiten = 1, 2, 3, 4, 5, 6
+                    for Spieler in SpielerListe
+                        print Spieler ' würfelt ' Würfelseiten at random
                         sleep
                     ```
                 start_code: ""
             7:
                 story_text: |
-                    ## Dice
-                    You can also make a die again in level 5. With the `repeat` code you can easily roll a whole hand of dice.
-                    Try to finish the sample code! The dashes should contain multiple commands and characters.
+                    ## Würfel
+                    Auch in Level 7 kannst Du wieder einen Würfel programmieren.
+                    Mit dem Befehl `repeat` kannst Du ganz einfach eine ganze Handvoll Würfel werfen.
+                    Versuche, den Beispiel-Code zu vervollständigen.
+                    Die Unterstriche müssen durch mehrere Befehle und Zeichen ersetzt werden.
 
-                    But maybe you want to make a completely different die. Of course you can!
+                    Vielleicht willst Du aber auch einen ganz anderen Würfel erstellen.
+                    Das geht natürlich auch!
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    choices = 1, 2, 3, 4, 5, earthworm
+                    Würfelseiten = 1, 2, 3, 4, 5, Regenwurm
                     repeat _ _ print _ _ _
                     ```
-                start_code: "print 'What will the die indicate this time?'"
+                start_code: "print 'Was wird der Würfel diesmal anzeigen?'"
             6:
                 story_text: |
-                    ## Dice
-                    You can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.
-                    You may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.
-                    This is the code to calculate points for one die:
+                    ## Würfel
+
+                    Hier kannst Du auch wieder der Regenwurmwürfel erstellen, aber hier kannst Du dazu auch noch berechnen, wie viele Punkte gewürfelt wurden.
+                    Vielleicht weißt Du ja, dass der Wurm 5 Punkte zählt.
+                    Jetzt kannst Du nach jedem Wurf direkt berechnen, wie viele Punkte Du bekommst.
+                    Hier ist der Code zur Berechnung der Punkte für einen Würfel:
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    choices = 1, 2, 3, 4, 5, earthworm
-                    points = 0
-                    throw = choices at random
-                    print 'you threw' throw
-                    if throw is earthworm points = points + 5 else points = points + throw
-                    print 'those are' points ' point'
+                    Würfelseiten = 1, 2, 3, 4, 5, Regenwurm
+                    Punkte = 0
+                    Wurf = Würfelseiten at random
+                    print 'Du hast ' Wurf ' gewürfelt.'
+                    if Wurf is Regenwurm Punkte = Punkte + 5 else Punkte = Punkte + Wurf
+                    print 'Jetzt hast Du ' Punkte ' Punkte.'
                     ```
-                    Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
+                    Kannst Du den Code so ändern, dass Du die Gesamtpunktzahl für 8 Würfel erhältst?
+                    Dafür musste Du einige Code-Zeilen kopieren und einfügen.
 
-                    ## Looking forward
+                story_text_2: |
+                    ## Blick nach vorn
 
-                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
-                start_code: "print 'What will the die indicate this time?'"
+                    Hast Du es geschafft, die Punkte für 8 Würfel zu berechnen?
+                    Dafür musstest Du viel kopieren und einfügen, nicht wahr?
+                    Das werden wir in Level 7 einfacher machen!
+
+                start_code: "print 'Was wird der Würfel diesmal anzeigen?'"
             5:
                 story_text: |
                     ## Würfel
