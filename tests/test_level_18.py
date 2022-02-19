@@ -147,9 +147,9 @@ class TestsLevel18(HedyTester):
       code = textwrap.dedent("""\
       a is 2
       b is 3
-      for a in range(2,4):
-        a is a + 2
-        b is b + 2""")
+      for a in range(2, 4):
+          a is a + 2
+          b is b + 2""")
       expected = textwrap.dedent("""\
       a = 2
       b = 3
@@ -168,8 +168,8 @@ class TestsLevel18(HedyTester):
     def test_for_nesting(self):
       code = textwrap.dedent("""\
       for i in range(1, 3):
-        for j in range(1,4):
-          print('rondje: ', i, ' tel: ', j)""")
+          for j in range(1, 4):
+              print('rondje: ', i, ' tel: ', j)""")
       expected = textwrap.dedent("""\
       step = 1 if int(1) < int(3) else -1
       for i in range(int(1), int(3) + step, step):
@@ -186,9 +186,9 @@ class TestsLevel18(HedyTester):
       )
 
     def test_input_with_list(self):
-      code = textwrap.dedent("""
+      code = textwrap.dedent("""\
       color is ['green', 'blue']
-      choice is input('Is your favorite color one of: ' color)""")
+      choice is input('Is your favorite color one of: ', color)""")
 
       expected = textwrap.dedent("""\
       color = ['green', 'blue']

@@ -33,6 +33,34 @@ class TestsLevel15(HedyTester):
       expected_commands=['is', 'while', 'ask', 'print']
     )
 
+  def test_while_fr_equals(self):
+    code = textwrap.dedent("""\
+      antwoord est 0
+      tant que antwoord != 25
+          antwoord est demande 'Wat is 5 keer 5?'
+      affiche 'Goed gedaan!'""")
+    expected = textwrap.dedent("""\
+    antwoord = 0
+    while str(antwoord).zfill(100)!=str(25).zfill(100):
+      antwoord = input(f'Wat is 5 keer 5?')
+      try:
+        antwoord = int(antwoord)
+      except ValueError:
+        try:
+          antwoord = float(antwoord)
+        except ValueError:
+          pass
+      time.sleep(0.1)
+    print(f'Goed gedaan!')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+      expected_commands=['is', 'while', 'ask', 'print'],
+      lang='fr'
+    )
+
   def test_while_undefined_var(self):
     code = textwrap.dedent("""\
       while antwoord != 25
