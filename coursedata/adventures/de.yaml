@@ -1058,38 +1058,42 @@ adventures:
                 start_code: "print 'What will the die indicate this time?'"
             5:
                 story_text: |
-                    ## Dice
-                    You can also make a die again in this level using the `if`.
-                    Complete the sample code so that the code says "You can stop throwing" once you have thrown an earthworm.
+                    ## Würfel
+                    Auch den Würfel kannst Du in diesem Level nochmal programmieren, diesmal mit dem `if`.
+                    Vervollständige den Beispiel-Code, sodass er ausgibt "Du kannst aufhören zu würfeln", sobald Du einen Regenwurm gewürfelt hast.
 
-                    But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something else.
+                    Vielleicht möchtest Du auch einen Würfel aus einem ganz anderen Spiel nachbauen.
+                    Das ist auch super!
+                    Dann überlege Dir selbst eine Reaktion.
+                    Z.B. 'ja' bei einer 6 und 'schade' für alles andere.
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    choices is 1, 2, 3, 4, 5, earthworm
-                    throw is _
-                    print 'you have' _ 'thrown'
-                    if _ is earthworm print 'You can stop throwing.' _ print 'You have to hear it again!'
+                    Würfelseiten is 1, 2, 3, 4, 5, Regenwurm
+                    Wurf is _
+                    print 'Du hast ' _ ' gewürfelt'
+                    if _ is Regenwurm print 'Du kannst aufhören zu würfeln.' _ print 'Du musst es nochmal versuchen!'
                     ```
-                start_code: "print 'What will the die indicate this time?'"
+                start_code: "print 'Was zeigt der Würfel diesmal?'"
             4:
                 story_text: |
-                    ## Dice
-                    In this level we can make sentences with the die value in the sentence, with quotes of course.
-                    This time the sample code is not quite complete. Can you finish the code?
+                    ## Würfel
+                    In diesem Level können wir Sätze mit dem Würfelwert im Satz bilden, natürlich mit Anführungszeichen.
+                    Diesmal ist der Beispiel-Code nicht ganz vollständig.
+                    Kannst Du den Code vervollständigen?
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    choices is 1, 2, 3, 4, 5, earthworm
-                    print _ you threw _
-                    print _ _ _ <- here you have to program the choice
+                    Würfelseiten is 1, 2, 3, 4, 5, Regenwurm
+                    print _ Der Würfel zeigt  _
+                    print _ _ _ <- Hier musst Du die Auswahl programmieren.
                     ```
 
-                start_code: "print 'What will the die indicate this time?'"
+                start_code: "print 'Was zeigt der Würfel diesmal?'"
             3:
                 story_text: |
                     ## Würfel
