@@ -254,7 +254,11 @@ def routes(app, database):
             DATABASE.record_login(user['username'], new_hash)
         else:
             DATABASE.record_login(user['username'])
-        resp = make_response({})
+
+        if user.get('is_teacher'):
+            resp = make_response({'teacher': True})
+        else:
+            resp = make_response({'teacher': False})
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.

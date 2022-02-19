@@ -53,7 +53,7 @@ class TestsLevel2(HedyTester):
     expected = textwrap.dedent("""\
     print(f'hallo!')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, translate=False) #has spaces that wont be preserved
   def test_print_asterisk(self):
     code = "print *Jouw* favoriet is dus kleur"
     expected = textwrap.dedent("""\
@@ -64,7 +64,7 @@ class TestsLevel2(HedyTester):
     code = "print 'Welcome to OceanView!'"
     expected = textwrap.dedent("""\
     print(f'\\'Welcome to OceanView! \\'')""")
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, translate=False) #has spaces that wont be preserved
 
   def test_print_slashes(self):
     code = "print Welcome to O/ceanView"
@@ -263,7 +263,7 @@ class TestsLevel2(HedyTester):
     expected = textwrap.dedent("""\
     print(f'hallo wereld')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, translate=False) #has spaces that wont be preserved
 
   #combined tests
   def test_ask_print(self):
