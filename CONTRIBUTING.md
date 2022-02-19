@@ -128,7 +128,7 @@ on which IDE you are using. Here are the IDEs we know about:
 {
   // ...
   "yaml.schemas": {
-    "content/adventures/adventures.schema.json": "adventures/*.yaml"
+    "coursedata/adventures/adventures.schema.json": "adventures/*.yaml"
   }
 }
 ```
@@ -138,6 +138,6 @@ on which IDE you are using. Here are the IDEs we know about:
 * Open **Preferences**
 * Navigate to **Languages & Frameworks → Schemas and DTDs → JSON Schema Mappings**.
 * Click the **+** to add a new schema.
-  * Behind **Schema file or URL**, click the browse button and navigate to the `<your Hedy checkout>/content/adventures/adventures.schema.json` file.
-  * Click the **+** at the bottom, select **Directory**. In the new line that appears, paste `content/adventures`.
+  * Behind **Schema file or URL**, click the browse button and navigate to the `<your Hedy checkout>/coursedata/adventures/adventures.schema.json` file.
+  * Click the **+** at the bottom, select **Directory**. In the new line that appears, paste `coursedata/adventures`.
 * Click **OK** to close the window.

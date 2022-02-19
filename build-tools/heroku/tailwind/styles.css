@@ -2,6 +2,9 @@
 
 html {
   @apply font-light;
+  /* https://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page */
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
 }
 
 .font-slab {
@@ -23,7 +26,6 @@ h3 {
 h4 {
   @apply font-bold text-base;
 }
-
 
 
 
