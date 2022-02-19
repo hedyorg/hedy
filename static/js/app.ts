@@ -1116,7 +1116,7 @@ export function get_trimmed_code() {
   }
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
-  Remove whitespace at the end of every line
+  // Remove whitespace at the end of every line
   return theGlobalEditor?.getValue().replace(/ +$/mg, '');
 }
 
