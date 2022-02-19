@@ -266,6 +266,17 @@ class TestsLevel4(HedyTester):
     )
 
 
+  # comment tests
+  def test_comment_after_quoted_print(self):
+    code = "print 'Hello, welcome to Hedy' #This is a comment"    
+    expected = "print(f'Hello, welcome to Hedy')"
+    
+    self.multi_level_tester(
+      max_level=17,
+      code=code,
+      expected=expected
+    )
+
   # negative tests
   def test_print_without_quotes(self):
     with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:

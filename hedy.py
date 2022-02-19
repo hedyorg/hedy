@@ -2050,12 +2050,32 @@ def process_input_string(input_string, level):
     if level >= 3:
         result = result.replace("\\", "\\\\")
 
+    result = remove_comments(result)
+
     # In level 8 we add indent-dedent blocks to the code before parsing
     if level >= hedy.LEVEL_STARTING_INDENTATION:
         result = preprocess_blocks(result, level)
 
     return result
 
+def remove_comments(code):
+    processed_input = []
+    lines = code.split('\n')
+    in_string = False
+    for line in lines:        
+        processed_line = line
+        for index, c in enumerate(line):
+            if c == '\'':
+                if not in_string:    
+                    in_string = True
+                else:
+                    in_string = False
+            if c == '#' and not in_string and index > 0:                
+                processed_line = line[:index]
+                break
+        
+        processed_input.append(processed_line)
+    return '\n'.join(processed_input)  
 
 def parse_input(input_string, level, lang):
     parser = get_parser(level, lang)

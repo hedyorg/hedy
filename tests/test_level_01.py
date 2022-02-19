@@ -294,6 +294,12 @@ class TestsLevel1(HedyTester):
       expected=expected
     )
 
+  def test_comment_after_uquoted_print(self):
+    code = "print Hallo welkom bij Hedy! #We are printing some stuff"
+    expected = "print('Hallo welkom bij Hedy! ')"
+    self.single_level_tester(code=code, expected=expected,
+                             output='Hallo welkom bij Hedy!')
+  
   # combined keywords tests
   def test_print_ask_echo(self):
       code = textwrap.dedent("""\
