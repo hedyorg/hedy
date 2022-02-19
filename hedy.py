@@ -126,7 +126,8 @@ commands_and_types_per_level = {
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]},
+    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+                       14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]},
     Command.addition: {
         6: [HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
@@ -163,7 +164,8 @@ def get_list_keywords(commands, to_lang):
     """
 
     translation_commands = []
-    path_keywords = utils.construct_content_path('keywords')
+    dir = path.abspath(path.dirname(__file__))
+    path_keywords = dir + "/coursedata/keywords"
 
     to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
     en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
@@ -308,6 +310,12 @@ class ExtractAST(Transformer):
     def INT(self, args):
         return Tree('integer', [str(args)])
 
+    def NUMBER(self, args):
+        return Tree('number', [str(args)])
+
+    def NEGATIVE_NUMBER(self, args):
+        return Tree('number', [str(args)])
+
     #level 2
     def var(self, args):
         return Tree('var', [''.join([str(c) for c in args])])
@@ -328,9 +336,7 @@ class ExtractAST(Transformer):
     def error_unsupported_number(self, args):
         return Tree('unsupported_number', [''.join([str(c) for c in args])])
 
-    #level 11
-    def NUMBER(self, args):
-        return Tree('number', [str(args)])
+
 
 
 # This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
@@ -761,6 +767,9 @@ class Filter(Transformer):
     def number(self, args, meta):
         return True, ''.join([c for c in args]), meta
 
+    def NEGATIVE_NUMBER(self, args, meta=None):
+        return True, ''.join([c for c in args]), meta
+
     def text(self, args, meta):
         return all(args), ''.join([c for c in args]), meta
 
@@ -793,6 +802,8 @@ class UsesTurtle(Transformer):
     def NUMBER(self, args):
         return False
 
+    def NEGATIVE_NUMBER(self, args):
+        return False
 
 class AllCommands(Transformer):
     def __init__(self, level):
@@ -858,6 +869,9 @@ class AllCommands(Transformer):
     def NUMBER(self, args):
         return []
 
+    def NEGATIVE_NUMBER(self, args):
+        return []
+
     def text(self, args):
         return []
 
@@ -891,6 +905,9 @@ class AllPrintArguments(Transformer):
         return []
 
     def NUMBER(self, args):
+        return []
+
+    def NEGATIVE_NUMBER(self, args):
         return []
 
     def text(self, args):
@@ -1135,6 +1152,9 @@ class ConvertToPython_1(ConvertToPython):
     def number(self, args):
         return str(args[0])
 
+    def NEGATIVE_NUMBER(self, args):
+        return str(args[0])
+
     def print(self, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
@@ -1169,7 +1189,7 @@ class ConvertToPython_1(ConvertToPython):
             return "t.right(90)"  # no arguments defaults to a right turn
 
         arg = args[0]
-        if self.is_variable(arg) or arg.isnumeric():
+        if self.is_variable(arg) or arg.lstrip("-").isnumeric():
             return f"t.right({arg})"
         elif arg == 'left':
             return "t.left(90)"
@@ -1246,9 +1266,13 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.right(90)"
 
-        arg = hash_var(args[0])
-        if self.is_variable(arg) or arg.isnumeric():
+        arg = args[0]
+        if arg.lstrip('-').isnumeric():
             return f"t.right({arg})"
+
+        hashed_arg = hash_var(arg)
+        if self.is_variable(hashed_arg):
+            return f"t.right({hashed_arg})"
 
         # the TypeValidator should protect against reaching this line:
         raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
@@ -1556,6 +1580,9 @@ for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepva
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
+        return ''.join(args)
+
+    def NEGATIVE_NUMBER(self, args):
         return ''.join(args)
 
     def process_token_or_tree(self, argument):
@@ -1940,6 +1967,7 @@ def find_indent_length(line):
     return number_of_spaces
 
 def needs_indentation(code):
+    keywords_requiring_indentation = ['if', 'als', 'si', 'for', 'repeat', 'répète', 'repete', 'herhaal']
     # this is done a bit half-assed, clearly *parsing* the one line would be superior
     # because now a line like
     # repeat is 5 would also require indentation!
@@ -1948,7 +1976,7 @@ def needs_indentation(code):
         return False
 
     first_keyword = all_words[0]
-    return first_keyword == "for" or first_keyword == "repeat" or first_keyword == "if"
+    return first_keyword in keywords_requiring_indentation
 
 
 
