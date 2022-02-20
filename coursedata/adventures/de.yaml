@@ -1128,22 +1128,22 @@ adventures:
                 start_code: "print Was zeigt der Würfel diesmal?"
             15:
                 story_text: |
-                    ## Dice
-                    In this game you have to throw 6 in as little tries as possible.
+                    ## Würfel
+                    In diesem Spiel musst Du in möglichst wenig Versuchen eine 6 würfeln.
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    options = 1, 2, 3, 4, 5, 6
-                    print 'Throw 6 as fast as you can!'
-                    thrown = 0
-                    tries = 0
-                    while thrown != 6
-                        thrown = options at random
-                        print 'You threw ' thrown
-                        tries = tries + 1
-                    print 'Yes! You have thrown 6 in ' tries ' tries.'
+                    Würfelseiten = 1, 2, 3, 4, 5, 6
+                    print 'Wirf so schnell wie möglich eine 6!'
+                    Wurf = 0
+                    Versuche = 0
+                    while Wurf != 6
+                        Wurf = Würfelseiten at random
+                        print 'Du hast eine ' Wurf ' gewürfelt.'
+                        Versuche = Versuche + 1
+                    print 'Ja! Du hast in ' Versuche ' Versuchen eine 6 gewürfelt.'
                     ```
                 start_code: ""
     rock:
