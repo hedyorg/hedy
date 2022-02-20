@@ -437,6 +437,83 @@ levels:
             correct_answer: "B"
             hint: "Are is not a command."
             question_score: 10
+        7:
+            question_text: "What does the add command do?"
+            code: |-
+                    books is Harry Potter, de Hobbit, Green eggs and Ham
+                    your_book is ask What is your favorite book?
+                    add your_book to books
+                    print books at random
+            mp_choice_options:
+            -   "option_text": "The add command removes a random book from the list"
+                "feedback": "The remove command removes, the add command adds"
+            -   "option_text": "The add command adds a random book to a list"
+                "feedback": "It doesn't. It adds your answer to the list!"
+            -   "option_text": "The add command adds your favotite book to the list"
+                "feedback": "Correct!"
+            -   "option_text": "The add command prints your favorite book."
+                "feedback": "No, it adds your favorite book to the list"
+            correct_answer: "C"
+            hint: "The add command adds a book, but which one?"
+            question_score: 10
+        8:
+            question_text: "What is the output of this code?"
+            code: |-
+                    crisps is sea salt, paprika, sour cream
+                    remove sea salt from crisps
+                    remove paprika from crisps
+                    print crisps at random
+            mp_choice_options:
+            -   "option_text": "You can't tell, because Hedy will print one of the 3 flavors at random"
+                "feedback": "Take a look at the remove commands"
+            -   "option_text": "sea salt"
+                "feedback": "sea salt is removed from the list"
+            -   "option_text": "paprika"
+                "feedback": "Paprika is removed from the list"
+            -   "option_text": "sour cream"
+                "feedback": "That's right!"
+            correct_answer: "D"
+            hint: "There are 3 flavors, bit 2 are removed. Which one remains?"
+            question_score: 10
+        9:
+            question_text: "What's wrong with this code??"
+            code: |-
+                    colors is blue, purple, green
+                    chosen_color is ask Which haircolor wouldn't your like to have?
+                    remove chosen_color from colors
+                    print I will dye my hair color at random
+            mp_choice_options:
+            -   "option_text": "Line 3 should say: remove blue from colors"
+                "feedback": "Maybe you want blue hair though!"
+            -   "option_text": "Line 3 should have an add command instead of a remove command"
+                "feedback": "You want to remove the chosen color so remove is right."
+            -   "option_text": "In line 4 the variable should be called colors instead of color"
+                "feedback": "Great job!"
+            -   "option_text": "Nothing, this is a correct code!"
+                "feedback": "Find the mistake!"
+            correct_answer: "C"
+            hint: "Look at line 3"
+            question_score: 10
+        10:
+            question_text: "What should be on the ___?"
+            code: |-
+                    walkers is dad, mom, Sam, Petra
+                    walked_yesterday is ask Who walked the dogs yesterday?
+                    print walked_yesterday shouldn't have to walk the dogs again today
+                    ___
+                    print walkers at random , it's your turn to walk the dogs!
+            mp_choice_options:
+            -   "option_text": "remove walked_yesterday from walkers"
+                "feedback": "Super!"
+            -   "option_text": "remove walked yesterday to walkers"
+                "feedback": "remove from or add to, not remove to"
+            -   "option_text": "remove walkers from yesterday"
+                "feedback": "yesterday is not a variable"
+            -   "option_text": "add walked_yesterday to walkers"
+                "feedback": "This increased the change that the person who walked yesterday now has to do it again. That's mean."
+            correct_answer: "A"
+            hint: "The person who walked the dog yesterday should be removed from the list."
+            question_score: 10
 
     4:
         1:
@@ -978,6 +1055,23 @@ levels:
                     "feedback": "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
             correct_answer: "C"
             hint: "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
+            question_score: 10
+        10:
+            question_text: "Which statement is true?"
+            code: |-
+                name ___ Hedy
+                print name 'is walking trough the forrest'
+            mp_choice_options:
+            -   "option_text": "You can only fill in the word is on the ___"
+                "feedback": "You are allowed to use the = sign as well"
+            -   "option_text": "You can fill in either the word is or the = sign on the ___"
+                "feedback": "Amazing!"
+            -   "option_text": "You have to fill in =is= on the ___."
+                "feedback": "No, one = sign is enough"
+            -   "option_text": "You can only use the = sign when working with numbers, not with words."
+                "feedback": "You can also use = with words."
+            correct_answer: "B"
+            hint: "is and = are both allowed"
             question_score: 10
 
     7:

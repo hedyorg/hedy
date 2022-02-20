@@ -767,8 +767,8 @@ class Filter(Transformer):
     def number(self, meta, args):
         return True, ''.join([c for c in args]), meta
 
-    def NEGATIVE_NUMBER(self, meta, args):
-        return True, ''.join([c for c in args]), meta
+    def NEGATIVE_NUMBER(self, args):
+        return True, ''.join([c for c in args]), None
 
     def text(self, meta, args):
         return all(args), ''.join([c for c in args]), meta
