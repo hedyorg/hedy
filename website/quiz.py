@@ -52,6 +52,7 @@ def routes(app, database, achievements):
     @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>', methods=['GET'], defaults={'attempt': 1})
     @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>/<int:attempt>', methods=['GET'])
     def get_quiz(level_source, question_nr, attempt):
+
         if not is_quiz_enabled():
             return quiz_disabled_error()
 
@@ -83,7 +84,7 @@ def routes(app, database, achievements):
 
         # Store the answer in the database. If we don't have a username,
         # use the session ID as a username.
-        username = current_user()['username'] or f'anonymous:{session_id()}'
+        username = current_user()['username'] or f'anonymous:{utils.session_id()}'
 
         if attempt == 1:
             is_correct = is_correct_answer(question, chosen_option)

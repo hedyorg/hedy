@@ -71,7 +71,26 @@
       </div>
     {% endcall %}
 
-    {% call insert_accordion_tab('tab-multi-four', 'Quiz scores per level') %}
+    {% call insert_accordion_tab('tab-multi-four', 'User types per level and per week') %}
+      <div>
+        <ul id="admin-users-legend" class="stats-legend"></ul>
+      </div>
+
+      <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
+        <div class="flex flex-col order-1">
+          <div class="w-full flex-1 flex flex-col">
+            <canvas id="usersPerLevelChart" width="400" height="400"></canvas>
+          </div>
+        </div>
+        <div class="flex flex-col order-2">
+          <div class="w-full flex-1 flex flex-col">
+            <canvas id="usersPerWeekChart" width="400" height="400"></canvas>
+          </div>
+        </div>
+      </div>
+    {% endcall %}
+
+    {% call insert_accordion_tab('tab-multi-five', 'Quiz scores per level') %}
       <div class="stats-data grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 mx-5">
         <div class="flex flex-col order-5">
           <div class="w-full flex-1 flex flex-col">
@@ -104,7 +123,7 @@
       </div>
     {% endcall %}
 
-    {% call insert_accordion_tab('tab-multi-five', 'Quiz scores per week') %}
+    {% call insert_accordion_tab('tab-multi-six', 'Quiz scores per week') %}
       <div>
         <ul id="admin-quiz-legend" class="stats-legend"></ul>
       </div>
@@ -141,7 +160,7 @@
       </div>
     {% endcall %}
 
-    {% call insert_accordion_tab('tab-multi-six', 'Search program logs') %}
+    {% call insert_accordion_tab('tab-multi-seven', 'Search program logs') %}
         {{ insert_log_search() }}
     {% endcall %}
 
