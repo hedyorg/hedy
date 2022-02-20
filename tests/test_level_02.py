@@ -63,8 +63,8 @@ class TestsLevel2(HedyTester):
   def test_print_quotes(self):
     code = "print 'Welcome to OceanView!'"
     expected = textwrap.dedent("""\
-    print(f'\\'Welcome to OceanView!\\'')""")
-    self.single_level_tester(code=code, expected=expected)
+    print(f'\\'Welcome to OceanView! \\'')""")
+    self.single_level_tester(code=code, expected=expected, translate=False)
 
   def test_print_slashes(self):
     code = "print Welcome to O/ceanView"
