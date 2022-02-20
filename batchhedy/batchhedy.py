@@ -65,7 +65,7 @@ def run(filenames, report, top, check = None, ):
             print(f"Total transpile time: {sum(runtimes):10f}s ")
             print(f"Average transpile time: {sum(runtimes)/len(runtimes):10f}s ")
         else:
-            # Compare with previous content
+            # Compare with previous data
             previous_total_time = sum(float(
                 checkdata[job.filename]["transpile time"]
                 ) for job in jobs)

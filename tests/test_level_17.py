@@ -164,7 +164,7 @@ class TestsLevel17(HedyTester):
     a is 1
     if a is 1:
         print a
-    else:   
+    else:
         print 'nee'""")
 
     expected = textwrap.dedent("""\
@@ -198,7 +198,7 @@ class TestsLevel17(HedyTester):
     a is 1
     if a is 1  :
         print a
-    else:   
+    else:
         print 'nee'""")
 
     expected = textwrap.dedent("""\
@@ -314,14 +314,22 @@ class TestsLevel17(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
-  def test_equality_with_list_gives_error(self):
+  def test_equality_with_lists(self):
     code = textwrap.dedent("""\
-      color is [5, 6, 7]
-      if 1 is color:
+      m is [1, 2]
+      n is [1, 2]
+      if m is n:
           a is 1""")
+
+    expected = textwrap.dedent("""\
+      m = [1, 2]
+      n = [1, 2]
+      if str(m) == str(n):
+        a = 1""")
+
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException
+      expected=expected
     )
 
   def test_equality_with_incompatible_types_gives_error(self):
@@ -353,8 +361,6 @@ class TestsLevel17(HedyTester):
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')""")
 
-
-
     self.single_level_tester(code=code, expected=expected)
 
   @parameterized.expand(HedyTester.number_comparison_commands)
@@ -368,7 +374,6 @@ class TestsLevel17(HedyTester):
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
-
 
   def test_not_equal_string_literal(self):
     code = textwrap.dedent(f"""\
@@ -416,6 +421,3 @@ class TestsLevel17(HedyTester):
       code=code,
       exception=exceptions.InvalidTypeCombinationException
     )
-
-
-

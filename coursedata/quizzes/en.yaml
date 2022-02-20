@@ -261,7 +261,7 @@ levels:
             hint: "Pause for dramatic effect..."
             question_score: 10
         7:
-            question_text: "What command should be used on the line 2 ?"
+            question_text: "What command should be used on line 2 ?"
             code: |-
                 print I will explode in 3 seconds !
                 _?_
@@ -301,13 +301,13 @@ levels:
                 dogs is animal
                 print I love animal
             mp_choice_options:
-                -   "option_text": "Line 1 should say: dogs is animals"
+                -   "option_text": "Line 1 should say: `dogs is animals`"
                     "feedback": "The variable name is animal"
                 -   "option_text": "Line 1 should say: animal is dogs"
                     "feedback": "Great !"
                 -   "option_text": "Line 2 should say: print I love animals"
                     "feedback": "The variable name is animal"
-                -   "option_text": "Line 2 should say: sleep I love animals"
+                -   "option_text": "Line 2 should say: `sleep I love animals`"
                     "feedback": "Sleep is not used to print text"
             correct_answer: "B"
             hint: "You want to print 'I love dogs'"
@@ -995,7 +995,7 @@ levels:
                 if food is fries price is price + 6
                 drinks is 'What would you like to drink ?'
                 if drinks is coke price is price + 3
-                if drinks is water price ie sprice + 1
+                if drinks is water price is price + 1
                 print price ' dollars please'
             mp_choice_options:
                 -   "option_text": "It could have been 'price is 3' just as well."

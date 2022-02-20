@@ -848,135 +848,152 @@ adventures:
                 start_code: |
                     print 'Formen zeichnen'
     dishes:
-        name: "Dishes?"
-        description: "Use the computer to see who does the dishes (Start at level 2)"
+        name: "Abwasch?"
+        description: "Nutze den Computer, um zu sehen, wer abwaschen muss (Beginne bei Level 3)"
         image: "dishes.png"
         default_save_name: "Dishes"
         levels:
             10:
                 story_text: |
-                    ## Dishwashing
-                    In this level you could make an even better dish washing shedule.
+                    ## Abwaschen
+                    In diesem Level kannst Du deinen Abwaschplan noch etwas verbessern.
 
-                    ## Hedy code example
+                example_code: |
+                    ## Hedy-Beispiel-Code
                     ```
-                    days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                    names = mom, dad, Emma, Sophie
-                    for day in days
-                        print names at random ' does the dishes on ' day
+                    Wochentage = Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag
+                    Familienmitglieder = Mama, Papa, Emma, Sophie
+                    for Tag in Wochentage
+                        print Familienmitglieder at random ' ist am ' Tag ' mit dem Abwasch dran.'
                     ```
                 start_code: ""
             7:
                 story_text: |
-                    ## Dishwashing
-                    With the `repeat` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
+                    ## Abwaschen
+                    Mit dem Befehl `repeat` kannst Du Code-Zeilen wiederholen.
+                    Das kannst Du nutzen, um für jeden Tag der Woche zu bestimmen, wer abwäscht.
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    people = mom, dad, Emma, Sophie
-                    repeat _ _ print 'the dishwasher is' _
+                    Familienmitglieder = Mama, Papa, Emma, Sophie
+                    repeat _ _ print _ ' ist mit dem Abwasch dran'
                     ```
-                start_code: "print 'Who does the dishes?'"
+                start_code: "print 'Wer macht den Abwasch?'"
             6:
                 story_text: |
-                    ## Dishwashing
-                    How often is everyone going to do the dishes? Is that fair? You can count it in this level.
+                    ## Abwaschen
+                    Wer ist wie oft mit dem Abwasch dran?
+                    Ist es gerecht verteilt?
+                    In diesem Level kannst Du mitzählen.
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    people = mom, dad, Emma, Sophie
-                    emma_washes = 0
-                    dishwasher = people at random
-                    print 'The dishwasher is' dishwasher
-                    if dishwasher is Emma emma_washes = emma_washes + 1
-                    print 'Emma will do the dishes this week' emma_washes 'times'
+                    Familienmitglieder = Mama, Papa, Emma, Sophie
+                    Emmas_Anzahl = 0
+                    Tellerwäscher = Familienmitglieder at random
+                    print 'Den Abwasch macht ' Tellerwäscher
+                    if Tellerwäscher is Emma Emmas_Anzahl = Emmas_Anzahl + 1
+                    print 'Emma ist diese Woche ' Emmas_Anzahl ' Mal mit dem Abwasch dran'
                     ```
 
-                    Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
-                    Do you make the code for the whole week?
+                    Jetzt kannst Du die Zeilen 3-5 ein paar mal kopieren (z.B. weitere 6 Mal für die ganze Woche), um einen Plan für die ganze Woche aufzustellen.
+                    Kannst Du den Code für eine ganze Woche schreiben?
 
-                    ## Make it fair
-                    If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!
-                    To create a fairer system you can use the `remove` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.
+                story_text_2: |
+                    ## Mache es gerecht
+                    Wenn Du ganz großes Pech hast, könnte Dich das vorigen Programm für die ganze Woche als Abwäscher bestimmen.
+                    Das ist ungerecht!
+                    Um das System gerechter zu gestalten, kannst Du mit dem Befehl `remove` die ausgewählt Person von der Liste entfernen.
+                    Auf diese Weise musst Du nicht nochmal abwaschen, bis jeder einmal dran war.
 
-                    Monday and tuesday are ready for you! Can you add the rest of the week?
-                    And... can you come up with a solution for when your list is empty?
+                    Montag and Dienstag sind schon vorbereitet! Kannst Du den Rest der Woche vervollständigen?
+                    Und... Kannst Du dir etwas einfallen lassen für den Fall, dass die Liste leer ist?
+
+                example_code_2: |
+                    ## Hedy-Beispiel-Code
                     ```
-                    people = mom, dad, Emma, Sophie
-                    dishwasher = people at random
-                    print 'Monday the dishes are done by: ' dishwasher
-                    remove dishwasher from people
-                    dishwasher = people at random
-                    print 'Tuesday the dishes are done by: ' dishwasher
-                    remove dishwasher from people
-                    dishwasher = people at random
+                    Familienmitglieder = Mama, Papa, Emma, Sophie
+                    Tellerwäscher = Familienmitglieder at random
+                    print 'Am Montag macht ' Tellerwäscher ' den Abwasch.'
+                    remove Tellerwäscher from Familienmitglieder
+                    Tellerwäscher = Familienmitglieder at random
+                    print 'Am Dienstag macht ' Tellerwäscher ' den Abwasch.'
+                    remove Tellerwäscher from Familienmitglieder
                     ```
 
-                start_code: "print 'Who does the dishes?'"
+                start_code: "print 'Wer wäscht ab?'"
             5:
                 story_text: |
-                    ## Dishwashing
-                    With the `if` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.
+                    ## Abwaschen
+                    Mit dem Befehl `if` kannst Du noch etwas mehr Spaß haben, wenn Du die Auswahl auswertest.
+                    Du kannst Dein Programm auf die Auswahl, die der Computer trifft, reagieren lassen.
 
-                    Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
-                    Don't forget the quotes!
+                    Kannst Du den Code so vervollständigen, dass er "So ein Pech" ausgibt, wenn Du dran bist und ansonsten "Zum Glück!"?
+                    Vergiss die Anführungszeichen nicht!
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    people is mom, dad, Emma, Sophie
-                    dishwasher is people at random
-                    if dishwasher is Sophie print _ too bad I have to do the dishes _ else print 'luckily no dishes because' _ 'is already washing up'
+                    Familienmitglieder is Mama, Papa, Emma, Sophie
+                    Tellerwäscher is Familienmitglieder at random
+                    if Tellerwäscher is Sophie print _ So ein Pech. Ich muss abwaschen. _ else print 'Zum Glück kein Abwasch, weil ' _ ' dran ist.'
                     ```
-                start_code: "print 'Who does the dishes?'"
+                start_code: "print 'Wer macht den Abwasch?'"
             4:
                 story_text: |
-                    ## Dishwashing
-                    With quotation marks you can make your dishwashing planning more beautiful.
-                    This time the sample code is not quite complete.
+                    ## Abwaschen
+                    Mit Anführungszeichen kannst Du deine Abwaschplanung etwas verschönern.
+                    Dieses Mal ist der Beispiel-Code noch nicht ganz vollständig.
 
-                    Can you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.
+                    Kannst Du den Code vervollständigen, indem Du die Lücken ausfüllst?
+                    Jede Lücke muss mit einem Wort oder Symbol ersetzt werden.
 
-                    Tip: Don't forget the quotation marks!
+                    Tipp: Denke an die Anführungszeichen!
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    people is mom, dad, Emma, Sophie
-                    print _ the dishes are done by _
+                    Familienmitglieder is Mama, Papa, Emma, Sophie
+                    print _ den Abwasch macht heute _
                     sleep
-                    print people at _
+                    print Familienmitglieder at random
                     ```
-                start_code: "print 'Who does the dishes?'"
+                start_code: "print 'Wer macht den Abwasch?'"
             3:
                 story_text: |
-                    ## Dishwashing
-                    Do you always disagree at home about who should wash the dishes or change the litter box today?
-                    Then you can let the computer choose very fairly. You can program that in this level!
-                    You first make a list of the members of your family. Then choose 'at random' from the list.
+                    ## Abwaschen
+                    Gibt es bei Euch zu Hause immer Streit, wer mit dem Abwasch dran ist und wer den Müll raus bringen muss?
+                    Dann kannst Du den Computer völlig fair entscheiden lassen.
+                    Das kannst Du in diesem Level programmieren.
+                    Zunächst legst Du eine Liste Deiner Familienmitglieder an.
+                    Anschließend wählst Du mit `at random` zufällig jemanden von der Liste aus.
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy-Beispiel-Code
 
                     ```
-                    people is mom, dad, Emma, Sophie
-                    print people at random
+                    Familienmitglieder is Mama, Papa, Emma, Sophie
+                    print Familienmitglieder at random
                     ```
-                    ## Hack the dishwashing program!
-                    Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
+                story_text_2: |
+                    ## Hacke den Geschirrspüler!
+                    Keine Lust auf abwaschen?
+                    Hacke das Spülmaschinenprogramm und entferne Deinen Namen von der Liste.
 
+                example_code_2: |
+                    ## Hedy-Beispiel-Code
                     ```
-                    people is mom, dad, Emma, Sophie
-                    your_name is ask Who are you?
-                    remove your_name from people
-                    print people at random does the dishes
+                    Familienmitglieder is Mama, Papa, Emma, Sophie
+                    Dein_Name is ask Wer bist Du?
+                    remove Dein_Name from Familienmitglieder
+                    print Familienmitglieder at random ist heute mit dem Abwasch dran.
                     ```
-                start_code: "print Who does the dishes?"
+                start_code: "print Wer macht den Abwasch?"
     dice:
         name: "Dice"
         description: "Make your own dice"
@@ -1081,7 +1098,7 @@ adventures:
                     Are there games with a (special) die? You can also copy it with this code.
                     For example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.
 
-                    ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/content/img/dobbelsteen.jpeg)
+                    ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
 
                 example_code: |
                     ## Example Hedy code
