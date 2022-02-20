@@ -178,8 +178,7 @@ class TestsLevel17(HedyTester):
       max_level=17,
       code=code,
       expected=expected,
-      expected_commands=['is', 'if', 'print', 'print'],
-      translate=False
+      expected_commands=['is', 'if', 'print', 'print']
     )
 
   def test_while_undefined_var(self):
@@ -212,7 +211,7 @@ class TestsLevel17(HedyTester):
       code=code,
       max_level=17,
       expected=expected,
-      translate=False
+      translate=False #space before : nor preserved
     )
 
   def test_if_under_else_in_for(self):
@@ -378,14 +377,15 @@ class TestsLevel17(HedyTester):
   def test_not_equal_string_literal(self):
     code = textwrap.dedent(f"""\
     if 'quoted' != 'string':
-      sleep 0""")
+      sleep""")
     expected = textwrap.dedent(f"""\
     if 'quoted'.zfill(100)!='string'.zfill(100):
-      time.sleep(0)""")
+      time.sleep(1)""")
 
-    # TODO for Boryana: this test missed an assert. I added it but it kept failing
-    # it does not validate the Python, but when I test it manually, it does work!
-    # maybe you want to see what is up here?
+    self.multi_level_tester(
+      code=code,
+      expected=expected
+    )
 
   @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])
   def test_not_equal(self, arg):

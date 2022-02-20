@@ -47,15 +47,14 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=4,
-      expected=expected,
-      translate=False
+      expected=expected
     )
   def test_print_with_slashes(self):
     code = "print 'Welcome to \\'"
     expected = textwrap.dedent("""\
     print(f'Welcome to \\\\')""")
     output = "Welcome to \\"
-    self.single_level_tester(code=code, expected=expected, output=output, translate=False)
+    self.single_level_tester(code=code, expected=expected, output=output, translate=False) #\\ is not preserved in tests properly at the moment
 
   # ask
   def test_assign_print(self):

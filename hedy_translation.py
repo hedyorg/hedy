@@ -247,6 +247,11 @@ class ConvertToLang5(ConvertToLang4):
     def in_list_check(self, args):
         return args[0] + " " + self.keywords["in"] + " " + ''.join([str(c) for c in args[1:]]) + " "
 
+    def list_access_var(self, args):
+        var = args[0]
+        var_list = args[1]
+        return var + " " + self.keywords["is"] + " " + var_list + " " + self.keywords["at"] + " " + args[2]
+
 
 @hedy_translator(level=6)
 class ConvertToLang6(ConvertToLang5):

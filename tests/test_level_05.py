@@ -37,8 +37,7 @@ class TestsLevel5(HedyTester):
     print(f'{dier}')""")
 
     self.single_level_tester(code=code,
-                             expected=expected,
-                             translate=False)
+                             expected=expected)
 
   def test_assign_single_quote(self):
     code = """message is 'Hello welcome to Hedy.'"""
@@ -63,8 +62,7 @@ class TestsLevel5(HedyTester):
     self.single_level_tester(
       code=code,
       expected=expected,
-      expected_commands=['is', 'else', 'print', 'print'],
-      translate=False
+      expected_commands=['is', 'else', 'print', 'print']
     )
   def test_ifelse_should_go_before_assign(self):
     code = textwrap.dedent("""\
@@ -82,8 +80,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=5,
       code=code,
-      expected=expected,
-      translate=False
+      expected=expected
     )
 
   def test_identifies_backtick_inside_conditional(self):
@@ -128,7 +125,7 @@ class TestsLevel5(HedyTester):
     else:
       print(f'minder leuk')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_print_if_else_ask(self):
 
@@ -143,7 +140,7 @@ class TestsLevel5(HedyTester):
     else:
       print(f'niet zo mooi')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_print_if_else_with_line_break(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
@@ -164,8 +161,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=5,
       code=code,
-      expected=expected,
-      translate=False
+      expected=expected
     )
   def test_print_if_else_with_line_break_after_condition(self):
     # line breaks after conditional should be allowed in if-elses until level 7 when we start with indentation
@@ -187,8 +183,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=5,
       code=code,
-      expected=expected,
-      translate=False
+      expected=expected
     )
   def test_if_else_newline_list_assigment_print(self):
     # line breaks after conditional should be allowed in if-elses until level 7 when we start with indentation
@@ -211,8 +206,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=5,
       code=code,
-      expected=expected,
-      translate=False #translations do not preserve newlines in if so we can't test them automatically
+      expected=expected
     )
 
 
@@ -236,8 +230,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=5,
       code=code,
-      expected=expected,
-      translate=False
+      expected=expected
     )
   def test_print_if_linebreak_statement(self):
     # Breaking an if statement and its following statement should be
@@ -261,8 +254,7 @@ class TestsLevel5(HedyTester):
       max_level=5,
       code=code,
       expected=expected,
-      expected_commands=['is', 'random', 'is', 'if', 'print'],
-      translate=False
+      expected_commands=['is', 'random', 'is', 'if', 'print']
     )
   def test_print_if_assign(self):
     code = textwrap.dedent("""\
@@ -363,7 +355,7 @@ class TestsLevel5(HedyTester):
     else:
       print(f'biertje!')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
 
   # todo would be good to make combinations with if and turtle

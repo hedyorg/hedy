@@ -134,4 +134,4 @@ class TestsLevel9(HedyTester):
         print(f'pizza is better')
       time.sleep(0.1)""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)

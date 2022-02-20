@@ -120,11 +120,11 @@ class HedyTester(unittest.TestCase):
           #TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D Maybe we should do a random language?
           in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
           back_in_english = hedy_translation.translate_keywords(in_dutch, from_lang="nl", to_lang=lang, level=self.level)
-          self.assertEqual(code, back_in_english)
+          self.assert_translated_code_equal(code, back_in_english)
         else: #not English? translate to it and back!
           in_english = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)
           back_in_org = hedy_translation.translate_keywords(in_english, from_lang="en", to_lang=lang, level=self.level)
-          self.assertEqual(code, back_in_org)
+          self.assert_translated_code_equal(code, back_in_org)
 
       all_commands = hedy.all_commands(code, level, lang)
       if expected_commands is not None:
@@ -135,6 +135,10 @@ class HedyTester(unittest.TestCase):
         self.assertEqual(output, HedyTester.run_code(result))
         self.assertTrue(extra_check_function(result))
 
+  def assert_translated_code_equal(self, orignal, translation):
+    # When we translate a program we lose information about the whitespaces of the original program.
+    # So when comparing the original and the translated code, we compress multiple whitespaces into one.
+    self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
 
   @staticmethod
   def validate_Hedy_code(snippet):
