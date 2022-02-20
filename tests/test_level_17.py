@@ -178,8 +178,7 @@ class TestsLevel17(HedyTester):
       max_level=17,
       code=code,
       expected=expected,
-      expected_commands=['is', 'if', 'print', 'print'],
-      translate=False
+      expected_commands=['is', 'if', 'print', 'print']
     )
 
   def test_while_undefined_var(self):
@@ -212,7 +211,7 @@ class TestsLevel17(HedyTester):
       code=code,
       max_level=17,
       expected=expected,
-      translate=False
+      translate=False #space before : nor preserved
     )
 
   def test_if_under_else_in_for(self):

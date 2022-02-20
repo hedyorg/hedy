@@ -125,7 +125,7 @@ class TestsLevel5(HedyTester):
     else:
       print(f'minder leuk')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_print_if_else_ask(self):
 
@@ -140,7 +140,7 @@ class TestsLevel5(HedyTester):
     else:
       print(f'niet zo mooi')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_print_if_else_with_line_break(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
@@ -355,7 +355,7 @@ class TestsLevel5(HedyTester):
     else:
       print(f'biertje!')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
 
   # todo would be good to make combinations with if and turtle

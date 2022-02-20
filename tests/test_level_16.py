@@ -45,7 +45,7 @@ class TestsLevel16(HedyTester):
             max_level=17,
             expected=expected,
             extra_check_function=check_in_list,
-            translate=False
+            translate=False #spaces between list elements not preserved
         )
 
     def test_print_list_access(self):
