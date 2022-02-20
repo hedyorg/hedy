@@ -378,14 +378,15 @@ class TestsLevel17(HedyTester):
   def test_not_equal_string_literal(self):
     code = textwrap.dedent(f"""\
     if 'quoted' != 'string':
-      sleep 0""")
+      sleep""")
     expected = textwrap.dedent(f"""\
     if 'quoted'.zfill(100)!='string'.zfill(100):
-      time.sleep(0)""")
+      time.sleep(1)""")
 
-    # TODO for Boryana: this test missed an assert. I added it but it kept failing
-    # it does not validate the Python, but when I test it manually, it does work!
-    # maybe you want to see what is up here?
+    self.multi_level_tester(
+      code=code,
+      expected=expected
+    )
 
   @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])
   def test_not_equal(self, arg):
