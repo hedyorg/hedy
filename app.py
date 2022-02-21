@@ -334,6 +334,7 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
 def enrich_context_with_user_info():
+    session['set_keyword_lang'] = False
     user = current_user()
     data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
     if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
@@ -343,6 +344,7 @@ def enrich_context_with_user_info():
             g.lang = session['lang'] = user_data['language']
         if user_data.get('keyword_language', '') in ALL_LANGUAGES.keys():
             g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
+            session['set_keyword_lang'] = True
 
         data['user_data'] = user_data
         if 'classes' in user_data:
@@ -1148,6 +1150,8 @@ def current_keyword_language():
 
 @app.template_global()
 def other_keyword_language():
+    if session['set_keyword_lang']:
+        return None
     if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang != g.keyword_lang:
         return make_keyword_lang_obj(g.lang)
     return None
