@@ -27,7 +27,7 @@
         echo hello
         ```
 
-    start_code: "print hello world!"
+    start_code: "{print} hello world!"
     commands:
     -   name: "print"
         explanation: "Print something with `print`."
@@ -81,7 +81,7 @@
         sleep 2
         print 'green!'
         ```
-    start_code: "print hello world!"
+    start_code: "{print} hello world!"
     commands:
     -   name: "is"
         explanation: "Give a word a name to use in the program using `is`. You can choose the name yourself."
@@ -127,7 +127,7 @@
         print animals at random
         ```
 
-    start_code: "print hello world!"
+    start_code: "{print} hello world!"
     commands:
     -   name: choose_random
         explanation: Choose a random word from a group with `at` and `random`
@@ -148,7 +148,7 @@
             animals is cat, dog, cow
             remove dog from animals
 4:
-    start_code: "print 'Hello world'"
+    start_code: "{print} 'Hello world'"
     intro_text: |
         In level 4 `ask` and `print` have changed.
 
@@ -180,8 +180,8 @@
             print color ' is your favorite!'
 5:
     start_code: |-
-        name is ask 'what is your name?'
-        if name is Hedy print 'cool!' else print 'meh'
+        name {is} {ask} 'what is your name?'
+        {if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'
     intro_text: |
         `ask` and `print` still work like they did in level 4.
 
@@ -248,7 +248,7 @@
             color is ask 'What is your favorite color?'
             if color in pretty_colors print 'pretty!' else print 'meh'
 6:
-    start_code: "print '5 times 5 is ' 5 * 5"
+    start_code: "{print} '5 {times} 5 is ' 5 * 5"
     intro_text: |
         `ask`, `print` and `if` still work as in level 4.
          But in level 6 you learn something new: you can now also calculate.
@@ -291,7 +291,7 @@
             angle = 360 / angles
             forward 50
 7:
-    start_code: "repeat 3 times print 'Hedy is fun!'"
+    start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
     intro_text: |
         `ask`, `print` and `if` work exactly like they did in level 5 and 6.
         But level 7 adds the `repeat` command. Repeat can be used to execute one line of code multiple times.
@@ -323,9 +323,9 @@
             repeat 3 times forward 10
 8:
     start_code: |-
-        repeat 5 times
-            print 'Hello folks'
-            print 'This will be printed 5 times'
+        {repeat} 5 {times}
+            {print} 'Hello folks'
+            {print} 'This will be printed 5 times'
     intro_text: |
         `ask` and `print` still work as you know them. But `if` and `repeat` have changed!
         You can now execute groups of code together, but you will have to *indent* the code.
@@ -362,12 +362,12 @@
                 forward 50
 9:
     start_code: |-
-        repeat 3 times
-            food = ask 'What do you want?'
-            if food is 'pizza'
-                print 'nice!'
-            else
-                print 'pizza is better'
+        {repeat} 3 {times}
+            food = {ask} 'What do you want?'
+            {if} food {is} 'pizza'
+                {print} 'nice!'
+            {else}
+                {print} 'pizza is better'
     intro_text: |
         In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
         In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
@@ -404,9 +404,9 @@
                 forward 50
 10:
     start_code: |-
-        animals is dog, cat, blobfish
-        for animal in animals
-          print 'I love ' animal
+        animals {is} dog, cat, blobfish
+        {for} animal {in} animals
+          {print} 'I love ' animal
     intro_text: |
         In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
         `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
@@ -431,8 +431,8 @@
               print 'I love ' animal
 11:
     start_code: |-
-        for counter in range 1 to 5
-            print counter
+        {for} counter {in} {range} 1 {to} 5
+            {print} counter
     intro_text: "`print` works just the same but the we add a new form of the `for`. You can now write `for counter in range 1 to 5` and use `counter` in your program. Try it out to see what happens! Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
     commands:
     -   name: "for loop"
@@ -454,8 +454,8 @@
                 print 'The answer is 10'
 12:
     start_code: |-
-        print 'decimal numbers now need to use a dot'
-        print 2.5 + 2.5
+        {print} 'decimal numbers now need to use a dot'
+        {print} 2.5 + 2.5
     intro_text: |
         ## Decimal numbers
         So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
@@ -520,10 +520,10 @@
 
 13:
     start_code: |-
-        name = ask 'what is your name?'
-        age = ask 'what is your age?'
-        if name is 'Hedy' and age is 2
-            print 'You are the real Hedy!'
+        name = {ask} 'what is your name?'
+        age = {ask} 'what is your age?'
+        {if} name {is} 'Hedy' {and} age {is} 2
+            {print} 'You are the real Hedy!'
     intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
     commands:
     -   name: "And"
@@ -548,11 +548,11 @@
                 print 'Both answers are wrong!'
 14:
     start_code: |-
-        age = ask 'How old are you?'
-        if age < 13
-            print 'You are younger than me!'
-        else
-            print 'You are older than me!'
+        age = {ask} 'How old are you?'
+        {if} age < 13
+            {print} 'You are younger than me!'
+        {else}
+            {print} 'You are older than me!'
     intro_text: |
         We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
         The `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` is smaller than 12.
@@ -629,9 +629,9 @@
 15:
     start_code: |-
         answer = 0
-        while answer != 25
-            answer = ask 'What is 5 times 5?'
-        print 'A correct answer has been given'
+        {while} answer != 25
+            answer = {ask} 'What is 5 times 5?'
+        {print} 'A correct answer has been given'
     intro_text: |
         We are going to learn a new loop, the `while` loop! We continue the loop as long as the statement is true.
         So don't forget to change the value in the loop.
@@ -660,7 +660,7 @@
 16:
     start_code: |-
         fruit = ['apple', 'banana', 'cherry']
-        print fruit 
+        {print} fruit
     intro_text: |
         We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
         You can use the square brackets as well to point out a place in the lists.
@@ -776,9 +776,9 @@
 #                print('No, that is wrong!')
 17:
     start_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Ready or not, here I come!'
+        {for} i {in} {range} 1 {to} 10:
+            {print} i
+        {print} 'Ready or not, here I come!'
     intro_text: |
         Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.
 

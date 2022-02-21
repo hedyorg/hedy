@@ -902,6 +902,11 @@ def index(level, step):
     if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
         return utils.error_page(error=404, ui_message='no_such_level')
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
+
+    keywords = YamlFile.for_file('coursedata/keywords/' + g.keyword_lang + '.yaml').to_dict()
+
+
+
     max_level = level_defaults_for_lang.max_level()
 
     teacher_adventures = []
