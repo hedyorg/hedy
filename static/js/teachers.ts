@@ -351,6 +351,12 @@ export function save_customizations(class_id: string) {
             teacher_adventures.push(<string>$(this).attr('id'));
         }
     });
+    let other_settings: string[] = [];
+    $('.other_settings_checkbox').each(function() {
+        if ($(this).prop("checked")) {
+            other_settings.push(<string>$(this).attr('id'));
+        }
+    });
     let opening_dates = {};
     $('.opening_date_container').each(function() {
         if ($(this).is(":visible")) {
@@ -358,12 +364,6 @@ export function save_customizations(class_id: string) {
                 // @ts-ignore
                 opening_dates[<string>$(this).attr('level')] = $(this).val();
             });
-        }
-    });
-    let other_settings: string[] = [];
-    $('.other_settings_checkbox').each(function() {
-        if ($(this).prop("checked")) {
-            other_settings.push(<string>$(this).attr('id'));
         }
     });
     $.ajax({
