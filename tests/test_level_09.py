@@ -22,7 +22,7 @@ class TestsLevel9(HedyTester):
   def test_repeat_with_indent(self):
     code = textwrap.dedent("""\
     repeat 5 times
-      print 'koekoek'""")
+        print 'koekoek'""")
 
 
     expected = textwrap.dedent("""\
@@ -59,9 +59,9 @@ class TestsLevel9(HedyTester):
     print 'kassabon'
     prijs is 0
     repeat 7 times
-      ingredient is ask 'wat wil je kopen?'
-      if ingredient is appel
-        prijs is prijs + 1
+        ingredient is ask 'wat wil je kopen?'
+        if ingredient is appel
+            prijs is prijs + 1
     print 'Dat is in totaal ' prijs ' euro.'""")
 
     expected = textwrap.dedent("""\
@@ -135,7 +135,3 @@ class TestsLevel9(HedyTester):
       time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
-
-
-
-
