@@ -252,6 +252,8 @@ def routes(app, database, achievements):
         if not isinstance(body.get('opening_dates'), dict):
             return 'Opening dates must be a dict', 400
 
+        print(body)
+
         #Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body['levels']]
 

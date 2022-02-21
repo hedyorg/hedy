@@ -133,6 +133,7 @@ Auth:
     birth_year: "Birth year (optional)"
     gender: "Gender (optional)"
     preferred_language: "Preferred language"
+    preferred_keyword_language: "Preferred keyword language"
     set_preferred_lang: "Hedy now supports preferred user languages. You can set one for your profile in \"My profile\""
     select: "Select"
     female: "Female"
@@ -186,6 +187,7 @@ Auth:
     email_invalid: "Please enter a valid email."
     year_invalid: "Please enter a year between 1900 and "
     language_invalid: "Please select a valid language"
+    keyword_language_invalid: "Please select a valid keyword language"
     gender_invalid: "Please select a valid gender, choose (Female, Male, Other)"
     experience_invalid: "Please select a valid experience, choose (Yes, No)"
     programming_invalid: "Please select a valid programming language"
@@ -241,7 +243,7 @@ Auth:
     teacher_invitation_require_login: "To set up your profile as a teacher we will need you to log in. If you don't have an account, please create one."
     teacher_welcome: "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
     examples_used: "You've already tried the maximum amount of allowed example programs in this level! Next try programming something yourself."
-    translate_error: "Something went wrong with translating the code."
+    translate_error: "Something went wrong while translating the code. Try running the code to see if it has an error. Code with errors can not be translated."
 
   # These variables are added here to make the code simpler, but conceptually they belong to the UI.
     program_header: "My programs"
@@ -334,13 +336,14 @@ Auth:
     reset_adventure_prompt: "Are you sure you want to reset all selected adventures?"
     reset_adventures: "Reset selected adventures"
     remove_customization: "Remove customization"
-    opening_date: "Opening date"
-    opening_dates: "Opening dates"
-    directly_available: "Directly open"
     other_settings: "Other settings"
     option: "Option"
     mandatory_mode: "Mandatory developer's mode"
-    
+    hide_cheatsheet: "Hide cheatsheet"
+    opening_date: "Opening date"
+    opening_dates: "Opening dates"
+    directly_available: "Directly open"
+
     #Multi-accounts adding
     create_student_accounts: "Create student accounts"
     create_accounts: "Create multiple accounts"
@@ -362,7 +365,7 @@ Auth:
         On this page you can create accounts for multiple students at the same time. It is also possible to directly add them to one of your classes.
         By pressing the green + on the bottom right of the page you can add extra rows. You can delete a row by pressing the corresponding red cross.
         Make sure no rows are empty when you press "Create accounts". Please keep in mind that every username and mail address needs to be unique and the password needs to be <b>at least</b> 6 characters.
-
+    
     #Adventure customizations
     customize_adventure: "Customize adventure"
     general_settings: "General settings"
