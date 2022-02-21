@@ -2,85 +2,151 @@
 
 {% block main %}
 <div class="px-8">
- <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
- <div class="mt-4 w-full" id="explanation_text">
- </div>
- <div class="mt-4 text-center" id="customize_level_button_container">
-     {% for level in levels %}
-         <button class="{% if level == 1 %} blue-btn {% else %} green-btn {% endif %} ltr:mr-4 rtl:ml-4 mt-2 w-32" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
-     {% endfor %}
- </div>
- <div class="mt-4 border-gray-400 border-2 pb-4 px-4" id="level_settings">
-     <div class="mt-4 flex flex-row">
-         <div class="ltr:mr-4 rtl:ml-4 w-1/2" id="adventure_selector">
-             <h4>{{auth.available_adventures}}</h4>
-             <form>
-                 <div class="flex flex-row items-center">
-                 <ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 ltr:pl-4 rtl:pr-4" id="adventures_overview">
-                     {% for key_name, name_levels in adventures.items() %}
-                         {% for name, levels in name_levels.items() %}
-                             {% for level in levels %}
-                                 <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{key_name}}">
-                                     <input type="checkbox" name="adventures" class="ltr:mr-4 rtl:ml-4" value="" {% if preferences[level] and key_name not in preferences[level]['adventures'] %} unchecked {% else %} checked {% endif %}>
-                                     <label style>{{ name }}</label>
-                                 </li>
-                             {% endfor %}
-                         {% endfor %}
-                     {% endfor %}
-                 </ul>
-                 </div>
-             </form>
-         </div>
-         {% for level in levels %}
-             <div class="other_settings {% if level != 1 %} hidden {% endif %}" level="{{level}}">
-                <h4>{{auth.other_settings}}</h4>
-                     <div class="mb-4">
-                         <label class="inline-block w-3/4" for="example_programs">{{auth.example_programs}}</label><input type="checkbox" id="example_programs{{ level }}" name="example_program"
-                                                                                                                value=""{% if preferences[level] and not preferences[level]['example_programs'] %}unchecked{% else %}checked{% endif %}>
-                     </div>
-                     <div class="mb-4">
-                         <label class="inline-block w-3/4" for="hide_level">{{auth.hide_level}}</label><input type="checkbox" id="hide_level{{ level }}" name="hide_level"
-                                                                                                              value="" {% if preferences[level] and preferences[level]['hide'] %}checked{% endif %}>
-                     </div>
-             </div>
-         {% endfor %}
-     </div>
-     <div class="mt-4">
-         <button class="blue-btn" onclick="hedyApp.save_level_settings ('{{class_info.id}}', level)">{{auth.save}}</button>
-         <button class="red-btn" onclick="hedyApp.reset_level_preferences (level)">{{auth.reset}}</button>
-     </div>
- </div>
- <div class="mt-4">
-        <button class="green-btn" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
- </div>
+    <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
+    <div class="w-full ltr:pr-4 rtl:pl-4">
+            {{ page_translations.explanation_1|commonmark }}
+        <div class="border border-gray-400 w-3/4 rounded-lg px-2 py-1 my-2">
+            <ol>
+                {% for step in page_translations.steps %}
+                    <li>{{ step }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+            {{ page_translations.explanation_2|commonmark }}
+    </div>
+    <div class="w-full text-center text-red-500 text-xl mt-4 font-bold {% if customizations %}hidden{% endif %}" id="customizations_alert">
+        {{ auth.no_customizations }}
+    </div>
+    <div class="flex flex-col">
+        <h3 class="px-4">{{ auth.select_adventures }}</h3>
+        <div class="border border-gray-400 py-2 px-4 rounded-lg">
+            <table class="table-auto w-full text-center customize_adventure_overview">
+                <thead>
+                    <tr>
+                        <th class="w-40 text-left border-r border-gray-400">{{ ui.adventure }} / {{ ui.level_title }}</th>
+                        {% for i in range(1, max_level + 1) %}
+                            <th class="w-12"><button class="level-select-button {% if i in customizations.levels %}green-btn{% else %}blue-btn{% endif %} w-12" id="level_button_{{ i }}" onclick="hedyApp.select_all_level_adventures('{{ i }}');" value="{{ i }}">{{ i }}</button></th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, adventure in adventures.items() %}
+                     <tr>
+                        {% for name, levels in adventure.items() %}
+                            <td class="text-left adventure_keys border-t border-r border-gray-400 cursor-pointer" onclick="hedyApp.select_all_levels_adventure('{{ key }}');" adventure="{{ key }}">{{ name }}</td>
+                            {% for i in range(1, max_level + 1) %}
+                                <td class="border-t border-gray-400">
+                                    {% if i in levels %}<input class="adventure_level_{{ loop.index }} adventure_level_input
+                                        {% if not customizations or i not in customizations['levels'] %} hidden{% endif %}"
+                                        adventure="{{ key }}" level="{{ i }}"
+                                        {% if customizations and customizations['adventures'][key] and i in customizations['adventures'][key] %}
+                                            checked
+                                        {% endif %} type="checkbox">
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        {% endfor %}
+                     </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="flex flex-row">
+        <div class="flex flex-col ltr:mr-4 rtl:ml-4">
+            <h3 class="px-4">{{ auth.opening_dates }}</h3>
+            <div class="border border-gray-400 w-3/4 py-2 px-4 rounded-lg">
+                <table class="table-auto text-center opening_dates_overview">
+                    <thead>
+                        <tr>
+                            <th class="w-40 border-r border-gray-400 text-left px-4">{{ ui.level_title }}</th>
+                            <th class="w-64">{{ auth.opening_date }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in range(1, max_level + 1) %}
+                            <tr class="{% if i not in customizations['levels'] %}hidden{% endif %} opening_date_container" id="opening_date_level_{{ i }}">
+                                <td class="border-r border-t border-gray-400">{{ ui.level_title }} {{ i }}</td>
+                                <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
+                                    <input level="{{ i }}"
+                                       {% if customizations and 'opening_dates' in customizations and i|string in customizations['opening_dates'] %}
+                                        type="date" value="{{ customizations['opening_dates'][i|string] }}"
+                                       {% else %}
+                                        type="text" onfocus="(this.type='date')" placeholder="{{ auth.directly_available }}"
+                                       {% endif %}
+                                       class="inline-block text-center appearance-none bg-gray-200 border border-gray-200 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="flex flex-col ltr:ml-4 rtl:mr-4">
+            <h3 class="px-4">{{ auth.select_own_adventures }}</h3>
+            <div class="border border-gray-400 py-2 px-4 rounded-lg">
+                <table class="table-auto text-center w-full customize_own_adventure_overview">
+                    <thead>
+                        <tr>
+                            <th class="w-64 text-left border-r border-gray-400">{{ ui.adventure }}</th>
+                            <th class="w-64 border-r border-gray-400">{{ ui.level_title }}</th>
+                            <th class="w-64">{{ auth.select }}?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for adventure in teacher_adventures %}
+                            <tr>
+                                <td class="text-left border-t border-r border-gray-400">{{ adventure.name }}</td>
+                                <td class="border-t border-r border-gray-400">{{ adventure.level }}</td>
+                                <td class="border-t border-gray-400 ">
+                                    <input class="teacher_adventures_checkbox" {% if adventure.id in customizations['teacher_adventures'] %}checked{% endif %} type="checkbox" id="{{ adventure.id }}">
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-row mt-4 items-center">
+        <div class="flex flex-col ltr:ml-4 rtl:mr-4">
+            <h3 class="px-4">{{ auth.other_settings}}</h3>
+            <div class="border border-gray-400 py-2 px-4 rounded-lg">
+                <table class="table-auto text-center w-full customize_other_settings">
+                    <thead>
+                        <tr>
+                            <th class="w-64 text-left border-r border-gray-400">{{ auth.option }}</th>
+                            <th class="w-40">{{ auth.select }}?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-left border-t border-r border-gray-400">{{ auth.mandatory_mode }}</td>
+                            <td class="border-t border-gray-400">
+                                <input class="other_settings_checkbox" id="developers_mode" type="checkbox" {% if "developers_mode" in customizations['other_settings'] %}checked{% endif %}>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left border-t border-r border-gray-400">{{ auth.hide_cheatsheet }}</td>
+                            <td class="border-t border-gray-400">
+                                <input class="other_settings_checkbox" id="hide_cheatsheet" type="checkbox" {% if "hide_cheatsheet" in customizations['other_settings'] %}checked{% endif %}>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="flex flex-col">
+            <div class="flex flex-row ml-auto">
+                <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
+                <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
+            </div>
+            <div class="flex flex-row mt-2 ml-auto">
+                <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
+                {{ auth.remove_customization }}</button>
+                <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
+            </div>
+        </div>
+    </div>
 </div>
-<script>
- let level = 1;
- $('#customize_level_button_container button').click(function(){
-     $("button[level='" + level + "']").removeClass('blue-btn');
-     $("button[level='" + level + "']").addClass('green-btn');
-
-     $(this).removeClass('green-btn');
-     $(this).addClass('blue-btn');
-
-     level = this.getAttribute('level');
-     $('#level_settings').hide();
-     $('.other_settings').each(function() {
-         $(this).hide();
-     });
-     $('#adventures_overview li').each(function() {
-         $(this).hide();
-         if (this.getAttribute('level') == level) {
-             $(this).show();
-         }
-     });
-     $('#level_settings').show();
-     $('.other_settings').each(function() {
-         if (this.getAttribute('level') == level) {
-             $(this).show();
-         }
-     });
-
- });
-</script>
 {% endblock %}

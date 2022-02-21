@@ -1,5 +1,6 @@
 import textwrap
 
+import lark
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
@@ -125,7 +126,8 @@ commands_and_types_per_level = {
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]},
+    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+                       14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]},
     Command.addition: {
         6: [HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
@@ -303,13 +305,16 @@ class TypedTree(Tree):
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
-        return Tree('text', [''.join([str(c) for c in args])])
-
-    def text_with_spaces(self, args):
         return Tree('text', [' '.join([str(c) for c in args])])
 
     def INT(self, args):
         return Tree('integer', [str(args)])
+
+    def NUMBER(self, args):
+        return Tree('number', [str(args)])
+
+    def NEGATIVE_NUMBER(self, args):
+        return Tree('number', [str(args)])
 
     #level 2
     def var(self, args):
@@ -331,9 +336,7 @@ class ExtractAST(Transformer):
     def error_unsupported_number(self, args):
         return Tree('unsupported_number', [''.join([str(c) for c in args])])
 
-    #level 11
-    def NUMBER(self, args):
-        return Tree('number', [str(args)])
+
 
 
 # This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
@@ -561,14 +564,6 @@ class TypeValidator(Transformer):
     def integer(self, tree):
         return self.to_typed_tree(tree, HedyType.integer)
 
-    def text_with_spaces(self, tree):
-        # under level 12 integers appear as text, so we parse them
-        if self.level < 12:
-            type_ = HedyType.integer if ConvertToPython.is_int(tree.children[0]) else HedyType.string
-        else:
-            type_ = HedyType.string
-        return self.to_typed_tree(tree, type_)
-
     def text(self, tree):
         # under level 12 integers appear as text, so we parse them
         if self.level < 12:
@@ -741,17 +736,16 @@ def are_all_arguments_true(args):
     arguments_of_false_nodes = flatten_list_of_lists_to_list([x[1] for x in args if not x[0]])
     return all(bool_arguments), arguments_of_false_nodes
 
+
 # this class contains code shared between IsValid and IsComplete, which are quite similar
 # because both filter out some types of 'wrong' nodes
-# TODO: this could also use a default lark rule like AllAssignmentCommands does now
-
 @v_args(meta=True)
 class Filter(Transformer):
     def __default__(self, data, children, meta):
         result, args = are_all_arguments_true(children)
         return result, args, meta
 
-    def program(self, args, meta=None):
+    def program(self, meta, args):
         bool_arguments = [x[0] for x in args]
         if all(bool_arguments):
             return [True] #all complete
@@ -761,23 +755,24 @@ class Filter(Transformer):
                     return False, a[1]
 
     #leafs are treated differently, they are True + their arguments flattened
-    def var(self, args, meta):
+    def var(self, meta, args):
         return True, ''.join([str(c) for c in args]), meta
 
-    def random(self, args, meta):
+    def random(self, meta, args):
         return True, 'random', meta
 
-    def punctuation(self, args, meta):
+    def punctuation(self, meta, args):
         return True, ''.join([c for c in args]), meta
 
-    def number(self, args, meta):
+    def number(self, meta, args):
         return True, ''.join([c for c in args]), meta
 
-    def text(self, args, meta):
+    def NEGATIVE_NUMBER(self, args):
+        return True, ''.join([c for c in args]), None
+
+    def text(self, meta, args):
         return all(args), ''.join([c for c in args]), meta
-      
-    def text_with_spaces(self, args, meta):
-        return all(args), ' '.join([c for c in args])
+
 
 class UsesTurtle(Transformer):
     # returns true if Forward or Turn are in the tree, false otherwise
@@ -807,6 +802,8 @@ class UsesTurtle(Transformer):
     def NUMBER(self, args):
         return False
 
+    def NEGATIVE_NUMBER(self, args):
+        return False
 
 class AllCommands(Transformer):
     def __init__(self, level):
@@ -872,11 +869,12 @@ class AllCommands(Transformer):
     def NUMBER(self, args):
         return []
 
+    def NEGATIVE_NUMBER(self, args):
+        return []
+
     def text(self, args):
         return []
 
-    def text_with_spaces(self, args):
-        return []
 
 def all_commands(input_string, level, lang='en'):
     input_string = process_input_string(input_string, level)
@@ -909,11 +907,12 @@ class AllPrintArguments(Transformer):
     def NUMBER(self, args):
         return []
 
+    def NEGATIVE_NUMBER(self, args):
+        return []
+
     def text(self, args):
         return ''.join(args)
 
-    def text_with_spaces(self, args):
-        return ''.join(args)
 
 
 def all_print_arguments(input_string, level, lang='en'):
@@ -922,46 +921,37 @@ def all_print_arguments(input_string, level, lang='en'):
 
     return AllPrintArguments(level).transform(program_root)
 
-@v_args(meta=True)  # Note that setting meta=True here is required regardless of the annotation of the Filter class
+
+@v_args(meta=True)
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    def program(self, args, meta=None):
+    def program(self, meta, args):
         if len(args) == 0:
             return False, InvalidInfo("empty program")
-        return super().program(args, meta)
+        return super().program(meta, args)
 
-    def error_invalid_space(self, args, meta):
+    def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
 
-    def error_print_nq(self, args, meta):
+    def error_print_nq(self, meta, args):
         # return error source to indicate what went wrong
-
-        # Boryana Jan 22
-        # The meta variable passed as a parameter here contains the metadata of the current node.
-        # The args parameter is an array of the triples, of which the last part holds the metadata of the
-        # IMMEDIATE children. Two important points:
-        # - If an error rule has more than 2 levels of nested children, we lose the metadata of the
-        # deeper ones and get only the data of the immediate children. This does work for now, because the parse trees
-        # of all error grammar rules are only 1 level deep. For now.
-        # - At level 5, the error_print_nq can have multiple arguments and we cannot assume that it is the first one
-        # that has a missing quote. Further analysis is required to pinpoint where the quote should be added.
-
-        #TODO, fh jan 2022 maybe we want to take end_column?
         return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
 
-    def error_invalid(self, args, meta):
+    def error_invalid(self, meta, args):
         # TODO: this will not work for misspelling 'at', needs to be improved!
 
         error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
         return False, error, meta
 
-    def error_unsupported_number(self, args, meta):
+    def error_unsupported_number(self, meta, args):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
+
+
 
     #other rules are inherited from Filter
 
@@ -984,7 +974,7 @@ class IsComplete(Filter):
     # tree is transformed to a node of [True] or [False, args, line_number]
 
 
-    def ask(self, args, meta=None):
+    def ask(self, meta, args):
         # in level 1 ask without arguments means args == []
         # in level 2 and up, ask without arguments is a list of 1, namely the var name
         incomplete = (args == [] and self.level == 1) or (len(args) == 1 and self.level >= 2)
@@ -992,23 +982,23 @@ class IsComplete(Filter):
             return not incomplete, ('ask', meta.line)
         else:
             return not incomplete, ('ask', 1)
-    def ask_is(self, args, meta):
-        return self.ask(args, meta)
-    def ask_equals(self, args, meta):
-        return self.ask(args, meta)
-    def print(self, args, meta):
+    def ask_is(self, meta, args):
+        return self.ask(meta, args)
+    def ask_equals(self, meta, args):
+        return self.ask(meta, args)
+    def print(self, meta, args):
         return args != [], ('print', meta.line)
-    def input(self, args, meta):
+    def input(self, meta, args):
         return len(args) > 1, ('input', meta.line)
-    def input_is(self, args, meta):
-        return self.input(args, meta)
-    def input_equals(self, args, meta):
-        return self.input(args, meta)
-    def length(self, args, meta):
+    def input_is(self, meta, args):
+        return self.input(meta, args)
+    def input_equals(self, meta, args):
+        return self.input(meta, args)
+    def length(self, meta, args):
         return args != [], ('len', meta.line)
-    def error_print_nq(self, args, meta):
+    def error_print_nq(self, meta, args):
         return args != [], ('print level 2', meta.line)
-    def echo(self, args, meta):
+    def echo(self, meta, args):
         #echo may miss an argument
         return True, ('echo', meta.line)
 
@@ -1156,13 +1146,13 @@ class ConvertToPython_1(ConvertToPython):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
-    def text_with_spaces(self, args):
-        return ' '.join([str(c) for c in args])
-
     def integer(self, args):
         return str(args[0])
 
     def number(self, args):
+        return str(args[0])
+
+    def NEGATIVE_NUMBER(self, args):
         return str(args[0])
 
     def print(self, args):
@@ -1199,7 +1189,7 @@ class ConvertToPython_1(ConvertToPython):
             return "t.right(90)"  # no arguments defaults to a right turn
 
         arg = args[0]
-        if self.is_variable(arg) or arg.isnumeric():
+        if self.is_variable(arg) or arg.lstrip("-").isnumeric():
             return f"t.right({arg})"
         elif arg == 'left':
             return "t.left(90)"
@@ -1276,9 +1266,13 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.right(90)"
 
-        arg = hash_var(args[0])
-        if self.is_variable(arg) or arg.isnumeric():
+        arg = args[0]
+        if arg.lstrip('-').isnumeric():
             return f"t.right({arg})"
+
+        hashed_arg = hash_var(arg)
+        if self.is_variable(hashed_arg):
+            return f"t.right({hashed_arg})"
 
         # the TypeValidator should protect against reaching this line:
         raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
@@ -1290,9 +1284,13 @@ class ConvertToPython_2(ConvertToPython_1):
         if self.is_random(value):
             return parameter + " = " + value
         else:
-            # if the assigned value contains single quotes, escape them
-            value = process_characters_needing_escape(value)
-            return parameter + " = '" + value + "'"
+            if self.is_variable(value):
+                value = self.process_variable(value)
+                return parameter + " = " + value
+            else:
+                # if the assigned value is not a variable and contains single quotes, escape them
+                value = process_characters_needing_escape(value)
+                return parameter + " = '" + value + "'"
 
 
     def sleep(self, args):
@@ -1308,6 +1306,7 @@ class ConvertToPython_3(ConvertToPython_2):
         parameter = args[0]
         values = ["'" + a + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
+
     def list_access(self, args):
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
@@ -1316,6 +1315,7 @@ class ConvertToPython_3(ConvertToPython_2):
             return 'random.choice(' + args[0] + ')'
         else:
             return args[0] + '[' + args[1] + '-1]'
+
     def add(self, args):
         var = self.process_variable(args[0])
         list = args[1]
@@ -1378,8 +1378,15 @@ class ConvertToPython_5(ConvertToPython_4):
 {ConvertToPython.indent(args[1])}
 else:
 {ConvertToPython.indent(args[2])}"""
+
     def condition(self, args):
         return ' and '.join(args)
+
+    def condition_spaces(self, args):
+        result = args[0] + " == '" + ' '.join(args[1:]) + "'"
+        return result
+
+
     def equality_check(self, args):
         arg0 = self.process_variable(args[0])
         remaining_text = ' '.join(args[1:])
@@ -1429,9 +1436,13 @@ class ConvertToPython_6(ConvertToPython_5):
         if type(value) is Tree:
             return parameter + " = " + value.children[0]
         else:
-            #assigns may contain string (accidentally) i.e. name = 'Hedy'
-            value = process_characters_needing_escape(value)
-            return parameter + " = '" + value + "'"
+            if self.is_variable(value):
+                value = self.process_variable(value)
+                return parameter + " = " + value
+            else:
+                # if the assigned value is not a variable and contains single quotes, escape them
+                value = process_characters_needing_escape(value)
+                return parameter + " = '" + value + "'"
 
     def assign_is(self, args):
         return self.assign(args)
@@ -1555,11 +1566,12 @@ class ConvertToPython_10(ConvertToPython_8_9):
 class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        iterator = hash_var(args[0])
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
         return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
-for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
+for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
 
 
@@ -1568,6 +1580,9 @@ for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
+        return ''.join(args)
+
+    def NEGATIVE_NUMBER(self, args):
         return ''.join(args)
 
     def process_token_or_tree(self, argument):
@@ -1644,10 +1659,6 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, args):
         name = args[0]
-        # TODO (FH, dec 2021) if we check for var usage here (which in principle we should do)
-        # we can no longer use if name = green, we will have to do if name = 'green'
-        # which is a thing kids need to learn at one point but it also involves changing all
-        # examples so I will leave it for now.
         # self.check_var_usage(args)
         return hash_var(name)
 
@@ -1956,6 +1967,7 @@ def find_indent_length(line):
     return number_of_spaces
 
 def needs_indentation(code):
+    keywords_requiring_indentation = ['if', 'als', 'si', 'for', 'repeat', 'répète', 'repete', 'herhaal']
     # this is done a bit half-assed, clearly *parsing* the one line would be superior
     # because now a line like
     # repeat is 5 would also require indentation!
@@ -1964,7 +1976,7 @@ def needs_indentation(code):
         return False
 
     first_keyword = all_words[0]
-    return first_keyword == "for" or first_keyword == "repeat" or first_keyword == "if"
+    return first_keyword in keywords_requiring_indentation
 
 
 
@@ -2078,6 +2090,10 @@ def parse_input(input_string, level, lang):
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
+    except lark.UnexpectedEOF:
+        lines = input_string.split('\n')
+        last_line = len(lines)
+        raise exceptions.UnquotedEqualityCheck(line_number=last_line)
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
@@ -2095,7 +2111,7 @@ def parse_input(input_string, level, lang):
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
     instance = IsValid()
-    instance.level = level # could be done in a constructor once we are sure we will go this way
+    instance.level = level # TODO: could be done in a constructor once we are sure we will go this way
     is_valid = instance.transform(program_root)
 
     if not is_valid[0]:

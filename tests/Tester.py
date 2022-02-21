@@ -1,6 +1,6 @@
 import unittest
 import app
-import hedy
+import hedy, hedy_translation
 import re
 import sys
 import io
@@ -45,7 +45,7 @@ class HedyTester(unittest.TestCase):
     else:
       code = app.NORMAL_PREFIX_CODE + parse_result.code
 # remove sleep comments to make program execution less slow
-    code = re.sub(r'time\.sleep\([^)]*\)', '', code)
+    code = re.sub(r'time\.sleep\([^)]*\)', 'pass', code)
 
     with HedyTester.captured_output() as (out, err):
       exec(code)
@@ -74,7 +74,7 @@ class HedyTester(unittest.TestCase):
       res.append(t)
     return res
     
-  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None):
+  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None, lang='en', translate=True):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
 
@@ -93,15 +93,16 @@ class HedyTester(unittest.TestCase):
     # Or use expect to check for an expected Python program
     # In the second case, you can also pass an extra function to check
     for level in range(self.level, max_level + 1):
-      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands)
+      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands, lang=lang, translate=translate)
       print(f'Passed for level {level}')
 
-  def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en'):
+  def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en', translate=True):
     if level is None: # no level set (from the multi-tester)? grap current level from class
       level = self.level
     if exception is not None:
       with self.assertRaises(exception) as context:
         result = hedy.transpile(code, level, lang)
+
       if extra_check_function is not None:
         self.assertTrue(extra_check_function(context))
 
@@ -111,6 +112,20 @@ class HedyTester(unittest.TestCase):
     if expected is not None:
       result = hedy.transpile(code, level, lang)
       self.assertEqual(expected, result.code)
+
+      if translate:
+        if lang == 'en': # if it is English
+          # and if the code transpiles (evidenced by the fact that we reach this line) we should be able to translate too
+
+          #TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D Maybe we should do a random language?
+          in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
+          back_in_english = hedy_translation.translate_keywords(in_dutch, from_lang="nl", to_lang=lang, level=self.level)
+          self.assert_translated_code_equal(code, back_in_english)
+        else: #not English? translate to it and back!
+          in_english = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)
+          back_in_org = hedy_translation.translate_keywords(in_english, from_lang="en", to_lang=lang, level=self.level)
+          self.assert_translated_code_equal(code, back_in_org)
+
       all_commands = hedy.all_commands(code, level, lang)
       if expected_commands is not None:
         self.assertEqual(expected_commands, all_commands)
@@ -120,6 +135,11 @@ class HedyTester(unittest.TestCase):
         self.assertEqual(output, HedyTester.run_code(result))
         self.assertTrue(extra_check_function(result))
 
+  def assert_translated_code_equal(self, orignal, translation):
+    # When we translate a program we lose information about the whitespaces of the original program.
+    # So when comparing the original and the translated code, we compress multiple whitespaces into one.
+    self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
+
   @staticmethod
   def validate_Hedy_code(snippet):
     # Code used in the Adventure and Level Defaults tester to validate Hedy code
@@ -127,7 +147,7 @@ class HedyTester(unittest.TestCase):
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
         result = hedy.transpile(snippet.code, int(snippet.level), snippet.language)
-        all_commands = hedy.all_commands(snippet.code, snippet.level)
+        all_commands = hedy.all_commands(snippet.code, snippet.level, snippet.language)
 
         if not result.has_turtle and (not 'ask' in all_commands) and (not 'input' in all_commands): #output from turtle cannot be captured
           output = HedyTester.run_code(result)

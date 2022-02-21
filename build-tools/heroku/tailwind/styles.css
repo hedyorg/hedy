@@ -2,6 +2,9 @@
 
 html {
   @apply font-light;
+  /* https://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page */
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
 }
 
 .font-slab {
@@ -23,9 +26,6 @@ h3 {
 h4 {
   @apply font-bold text-base;
 }
-
-
-
 
 * + p, * + ul, * + ol, * + pre {
   @apply mt-4;
@@ -215,6 +215,21 @@ ol {
 }
 
 /* AUTH */
+#signup input[type=checkbox] {
+  @apply appearance-none border border-gray-400 w-4 h-4;
+}
+
+#signup input:required, select:required {
+  @apply border border-red-400;
+}
+
+#signup input:required:valid, select:required:valid {
+  @apply border-green-400;
+}
+
+#signup input[type=checkbox]:checked {
+  @apply bg-green-400 border-green-600;
+}
 
 form.auth {
   border: solid 1px #eeeeee;
@@ -263,6 +278,10 @@ body[dir='rtl'] .right-hand-shadow {
   @apply py-2 px-1 mt-2 bg-gray-100 rounded-t-lg border-t-8 border-gray-300 text-sm;
   box-shadow:
     /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1);
+}
+
+.teacher_tab {
+  @apply border-green-300;
 }
 
 @screen lg {

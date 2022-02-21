@@ -28,8 +28,12 @@ var StopExecution = false;
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
+  let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
+    counter += 1;
     $(preview).addClass('text-lg rounded');
+    $(preview).attr('id', "code_block_" + counter);
+    $(preview).attr('lang', "en");
     $(preview).addClass('overflow-x-hidden');
     const exampleEditor = turnIntoAceEditor(preview, true);
 
@@ -46,17 +50,27 @@ var StopExecution = false;
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
     if (! $(preview).hasClass('no-copy-button')) {
-      const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
+      const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 60 }).appendTo(preview);
       $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
-      });
-    } else {
-      if($(preview).attr('id')){
-        // @ts-ignore
-        let level = String($(preview).attr('id'));
-        const mode = getHighlighter(parseInt(level));
-        exampleEditor.session.setMode(mode);
-      }
+        if (!($('#editor').attr('lang') === $(preview).attr('lang'))) {
+          $('#editor').attr('lang', <string>$(preview).attr('lang'));
+          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+        }
+    });
+    }
+    if($(preview).attr('level')){
+      let level = String($(preview).attr('level'));
+      exampleEditor.session.setMode(getHighlighter(level));
+    }
+    if (window.State.keyword_language && window.State.other_keyword_language) {
+      // Increase minLines otherwise the dropdown menu doesn't fit
+      exampleEditor.setOptions({ minLines: 4 });
+      const selectorContainer = $('<div>').css({ position: 'absolute', top: 5, right: 70, width: 'auto' }).appendTo(preview).attr('id', 'selector_container_' + counter);
+      const dropdownContainer1 = create_language_selector(counter, window.State.keyword_language, window.State.other_keyword_language, false);
+      const dropdownContainer2 = create_language_selector(counter, window.State.other_keyword_language, window.State.keyword_language, true);
+      selectorContainer.append(dropdownContainer1);
+      selectorContainer.append(dropdownContainer2);
     }
   }
 
@@ -188,7 +202,7 @@ var StopExecution = false;
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
       if (window.State.level) {
-        const mode = getHighlighter(parseInt(window.State.level));
+        const mode = getHighlighter(window.State.level);
         editor.session.setMode(mode);
       }
     }
@@ -197,7 +211,27 @@ var StopExecution = false;
   }
 })();
 
-function getHighlighter(level: number) {
+function create_language_selector(index: number, current_lang: string, other_lang: string, hidden: boolean) {
+  const dropdownContainer = $('<div>').addClass("dropdown font-sans inline-block right-0 absolute z-10 mx-2 mb-0 text-white").attr('id', 'keyword_selector');
+  dropdownContainer.attr('lang', current_lang);
+  if (hidden) {
+    dropdownContainer.addClass('hidden');
+  }
+  const button = $('<button>').addClass("inline-flex items-center text-xl px-2 py-1 bg-blue-600 rounded-lg").text(current_lang.toUpperCase());
+  button.append("<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\"  d=\"M19 9l-7 7-7-7\"></path></svg>");
+  const menu = $('<div>').addClass("dropdown-menu absolute hidden right-0");
+  const list = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 py-1 mr-1 bg-blue-600 rounded-lg mt-2 cursor-pointer");
+  const link = $('<a>').addClass("no-underline text-white").text(other_lang.toUpperCase());
+  link.attr('onclick', "hedyApp.change_keyword_language ('selector_container_" + index + "','code_block_" + index + "','" + current_lang + "','" + other_lang + "');event.preventDefault();");
+
+  list.append(link);
+  menu.append(list);
+  dropdownContainer.append(button);
+  dropdownContainer.append(menu);
+  return dropdownContainer
+}
+
+export function getHighlighter(level: string) {
   const modeExceptions: Record<string, string> = {
         '9': 'ace/mode/level9and10',
         '10': 'ace/mode/level9and10',
@@ -467,6 +501,11 @@ export function tryPaletteCode(exampleCode: string) {
 
   var MOVE_CURSOR_TO_END = 1;
   editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  //As the commands try-it buttons only contain english code -> make sure the selected language is english
+  if (!($('#editor').attr('lang') == 'en')) {
+      $('#editor').attr('lang', 'en');
+      update_view("main_editor_keyword_selector", "en");
+  }
   window.State.unsaved_changes = false;
 }
 
@@ -603,16 +642,14 @@ function change_shared (shared: boolean, index: number) {
   }
 }
 
-export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
-
-  var share = function (id: string) {
-    $.ajax({
+function share_function(id: string, index: number, Public: boolean, parse_error: boolean) {
+  $.ajax({
       type: 'POST',
       url: '/programs/share',
       data: JSON.stringify({
         id: id,
-        public: Public
+        public: Public,
+        error: parse_error
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -625,7 +662,6 @@ export function share_program (level: number, lang: string, id: string | true, i
         modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
         change_shared(true, index);
       } else {
-        $('#modal-copy-ok-button').show();
         modal.alert (auth.texts['unshare_success_detail'], 3000, false);
         change_shared(false, index);
       }
@@ -633,11 +669,11 @@ export function share_program (level: number, lang: string, id: string | true, i
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
-  }
+}
 
+function verify_call_index(level:number, lang: string, id: string | true, index: number, Public: boolean, parse_error: boolean) {
   // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
-  if (id !== true) return share (id);
-
+  if (id !== true) return share_function(id, index, Public, parse_error);
   // Otherwise, we save the program and then share it.
   // Saving the program makes things way simpler for many reasons: it covers the cases where:
   // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
@@ -648,9 +684,66 @@ export function share_program (level: number, lang: string, id: string | true, i
         return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
       if (err && err.Error)
         return error.show(ErrorMessages['Transpile_error'], err.Error);
-      share(resp.id);
+      share_function(resp.id, index, Public, parse_error);
     });
+}
 
+function get_parse_code_by_id(level: number, lang:string, id:string | true,  index: number, Public: boolean) {
+  $.ajax({
+      type: 'POST',
+      url: '/parse-by-id',
+      data: JSON.stringify({
+        id: id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+      if (response.error) {
+        modal.confirm("This program contains an error, are you sure you want to share it?", function() {
+          return verify_call_index(level, lang, id, index, Public, true);
+        });
+        return;
+      } else {
+        return verify_call_index(level, lang, id, index, Public, false);
+      }
+    }).fail(function (err) {
+      console.log(err);
+    });
+}
+
+export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
+  if (Public) {
+    // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
+    if (id !== true) {
+      return get_parse_code_by_id(level, lang, id,  index, Public);
+    } else {
+      const code = get_trimmed_code();
+      $.ajax({
+        type: 'POST',
+        url: '/parse',
+        data: JSON.stringify({
+          level: level,
+          lang: lang,
+          code: code
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+      }).done(function (response) {
+        if (response.Error) {
+          modal.confirm("This program contains an error, are you sure you want to share it?", function () {
+            verify_call_index(level, lang, id, index, Public, true);
+          });
+        } else {
+            verify_call_index(level, lang, id, index, Public, false);
+        }
+      }).fail(function (err) {
+        console.log(err);
+      });
+    }
+  } else {
+    verify_call_index(level, lang, id, index, Public, false);
+  }
 }
 
 export function delete_program(id: string, index: number) {
@@ -806,6 +899,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
+  // If the adventures are not shown -> increase height of turtleConfig
   if ($('#adventures').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
@@ -813,8 +907,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
-  turtleConfig.width = 400;
-  turtleConfig.worldWidth = 400;
+  // Always set the width to output panel width -> match the UI
+  turtleConfig.width = $( '#output' ).width();
+  turtleConfig.worldWidth = $( '#output' ).width();
 
   if (!hasTurtle) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
@@ -1031,7 +1126,10 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
-  return theGlobalEditor?.getValue();
+  // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
+  // but that upsets the parser so this removes those spaces also:
+  // Remove whitespace at the end of every line
+  return theGlobalEditor?.getValue().replace(/ +$/mg, '');
 }
 
 export function confetti_cannon(){
@@ -1098,7 +1196,7 @@ function createModal(level:number ){
   let title = ErrorMessages['Program_repair'];
   modal.repair(editor, 0, title);
 }
- function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
+export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
     if (isReadOnly) {
@@ -1117,7 +1215,7 @@ function createModal(level:number ){
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
       if (window.State.level) {
-        const mode = getHighlighter(parseInt(window.State.level));
+        const mode = getHighlighter(window.State.level);
         editor.session.setMode(mode);
       }
     }
@@ -1202,8 +1300,8 @@ function createModal(level:number ){
     });
     return editor;
   }
-export function toggle_developers_mode() {
-  if ($('#developers_toggle').is(":checked")) {
+export function toggle_developers_mode(enforced: boolean) {
+  if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures').hide();
       pushAchievement("lets_focus");
   } else {
@@ -1249,6 +1347,48 @@ export function change_language(lang: string) {
     }).fail(function(xhr) {
       console.error(xhr);
     });
+}
+
+function update_keywords_commands(target_id: any, start_lang: string, new_lang: string, selector_container: string) {
+  // If the target isn't an ace editor -> There is nothing we can do!
+  if (!ace.edit(target_id)) {
+    return;
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: '/translate_keywords',
+    data: JSON.stringify({
+      code: ace.edit(target_id).getValue(),
+      start_lang: start_lang,
+      goal_lang: new_lang,
+      level: window.State.level
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function (response: any) {
+    if (response.success) {
+      ace.edit(target_id).setValue(response.code);
+      $('#' + target_id).attr('lang', new_lang);
+      update_view(selector_container, new_lang);
+    }
+  }).fail(function (err) {
+      modal.alert(err.responseText, 3000, true);
+  });
+}
+
+function update_view(selector_container: string, new_lang: string) {
+  $('#' + selector_container + ' > div').map(function() {
+    if ($(this).attr('lang') == new_lang) {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
+}
+
+export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string) {
+  update_keywords_commands(target_id, old_lang, new_lang, selector_container);
 }
 
 export function select_profile_image(image: number) {

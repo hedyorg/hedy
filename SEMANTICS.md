@@ -19,11 +19,11 @@ Level 1 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>string</td>
   </tr>
   <tr>
     <td>ask</td>
-    <td>integer | string</td>
+    <td>string</td>
   </tr>
   <tr>
     <td>forward</td>
@@ -35,7 +35,7 @@ Level 1 supports:
   </tr>
   <tr>
     <td>echo</td>
-    <td>integer | string | empty</td>
+    <td>string | empty</td>
   </tr>
 </tbody>
 </table>
@@ -144,30 +144,33 @@ Level 2 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
-    <td>string (before `is`) + any (after `is`)</td>
+    <td>string (before `is`) + string (after `is`)</td>
   </tr>
     <tr>
     <td>sleep</td>
-    <td> empty | integer</td>
+    <td>empty | integer</td>
   </tr>
 </tbody>
 </table>
+
+* \* From this level on, we have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -284,19 +287,19 @@ Level 3 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -320,6 +323,9 @@ Level 3 supports:
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -468,19 +474,19 @@ Level 4 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -504,6 +510,9 @@ Level 4 supports:
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 
 #### Correct Programs
@@ -653,19 +662,19 @@ Level 5 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -695,8 +704,15 @@ Level 5 supports:
     <td>if else</td>
     <td>boolean</td>
   </tr>
+  <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -766,7 +782,7 @@ Level 5 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy print 'great' else print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items print 'found!'</td>
@@ -866,19 +882,19 @@ Level 6 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -908,8 +924,15 @@ Level 6 supports:
     <td>if else</td>
     <td>boolean</td>
   </tr>
+  <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -999,7 +1022,7 @@ Level 6 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy print 'great' else print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items print 'found!'</td>
@@ -1110,19 +1133,19 @@ Level 7 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1153,11 +1176,18 @@ Level 7 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>integer + 'times' | input + 'times'</td>
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 
 #### Correct Programs
@@ -1248,7 +1278,7 @@ Level 7 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy print 'great' else print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items print 'found!'</td>
@@ -1368,19 +1398,19 @@ Level 8 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1411,11 +1441,17 @@ Level 8 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>integer + 'times' | input + 'times'</td>
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 
 #### Correct Programs
@@ -1506,7 +1542,7 @@ Level 8 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -1630,19 +1666,19 @@ Level 9 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1673,11 +1709,18 @@ Level 9 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>integer + 'times' | input + 'times'</td>
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 
 #### Correct Programs
@@ -1768,7 +1811,7 @@ Level 9 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -1891,19 +1934,19 @@ Level 10 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>forward</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>turn</td>
-    <td>integer | empty</td>
+    <td>integer | empty | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -1934,8 +1977,12 @@ Level 10 supports:
     <td>boolean</td>
   </tr>
   <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
     <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>integer + 'times' | input + 'times'</td>
   </tr>
   <tr>
     <td>for</td>
@@ -1943,6 +1990,9 @@ Level 10 supports:
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -2032,7 +2082,7 @@ Level 10 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -2160,11 +2210,11 @@ Level 11 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string</td>
+    <td>ask*</td>
+    <td>integer | string | input</td>
   </tr>
   <tr>
     <td>is</td>
@@ -2195,15 +2245,18 @@ Level 11 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
   </tr>
   <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input) </td>
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -2269,7 +2322,7 @@ Level 11 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -2380,11 +2433,11 @@ Level 12 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string | float</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string | float</td>
+    <td>ask*</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
     <td>is | =</td>
@@ -2415,15 +2468,18 @@ Level 12 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
   </tr>
   <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -2484,7 +2540,7 @@ Level 12 supports:
     <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
   </tr>
   <tr>
-    <td>x is a, b, c<br>print x at random</td>
+    <td>x is 'a', 'b', 'c'<br>print x at random</td>
     <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
   </tr>
   <tr>
@@ -2500,11 +2556,11 @@ Level 12 supports:
     <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items is 'red', 'green'<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
     <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
   </tr>
   <tr>
@@ -2609,11 +2665,11 @@ Level 13 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string | float</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string | float</td>
+    <td>ask*</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
     <td>is | =</td>
@@ -2644,23 +2700,26 @@ Level 13 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
   </tr>
   <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
   </tr>
   <tr>
     <td>and</td>
-    <td>boolean (before `and`) + boolean (after `and`)</td>
+    <td>boolean (on both sides of `and`)</td>
   </tr>
   <tr>
     <td>or</td>
-    <td>boolean (before `or`) + boolean (after `or`)</td>
+    <td>boolean (on both sides of `or`)</td>
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
 
 #### Correct Programs
 
@@ -2721,7 +2780,7 @@ Level 13 supports:
     <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
   </tr>
   <tr>
-    <td>x is a, b, c<br>print x at random</td>
+    <td>x is 'a', 'b', 'c'<br>print x at random</td>
     <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
   </tr>
   <tr>
@@ -2737,15 +2796,15 @@ Level 13 supports:
     <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items is 'red', 'green'<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
     <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
   </tr>
   <tr>
@@ -2850,11 +2909,11 @@ Level 14 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string | float</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string | float</td>
+    <td>ask*</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
     <td>is | = (assignment)</td>
@@ -2885,47 +2944,51 @@ Level 14 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
   </tr>
   <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
   </tr>
   <tr>
     <td>and</td>
-    <td>boolean (before `and`) + boolean (after `and`)</td>
+    <td>boolean (on both sides of `and`)</td>
   </tr>
   <tr>
     <td>or</td>
-    <td>boolean (before `or`) + boolean (after `or`)</td>
+    <td>boolean (on both sides of `or`)</td>
   </tr>
   <tr>
-    <td><</td>
-    <td>integer (before <) + integer (after <) | float (before <) + float (after <)</td>
+    <td>< **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>></td>
-    <td>integer (before >) + integer (after >) | float (before >) + float (after >)</td>
+    <td>> **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>== | is | = (comparison)</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command)</td>
+    <td>== | is | = (comparison)**</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td>!=</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before !=) + list (after !=)</td>
+    <td>!= **</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td><=</td>
-    <td>integer (before <=) + integer (after <=) | float (before <=) + float (after <=)</td>
+    <td><= **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>>=</td>
-    <td>integer (before >=) + integer (after >=) | float (before >=) + float (after >=)</td>
+    <td>>= **</td>
+    <td>integer | float | input</td>
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
+* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
 
 #### Correct Programs
 
@@ -2986,7 +3049,7 @@ Level 14 supports:
     <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
   </tr>
   <tr>
-    <td>x is a, b, c<br>print x at random</td>
+    <td>x is 'a', 'b', 'c'<br>print x at random</td>
     <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
   </tr>
   <tr>
@@ -3002,19 +3065,19 @@ Level 14 supports:
     <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2<br/>&emsp;&emsp;print a</td>
     <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
   </tr>
   <tr>
-    <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items is 'red', 'green'<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
     <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
   </tr>
   <tr>
@@ -3123,11 +3186,11 @@ Level 15 supports:
 <tbody>
   <tr>
     <td>print</td>
-    <td>integer | string | float</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
-    <td>ask</td>
-    <td>integer | string | float</td>
+    <td>ask *</td>
+    <td>integer | string | float | input</td>
   </tr>
   <tr>
     <td>is | = (assignment)</td>
@@ -3158,44 +3221,44 @@ Level 15 supports:
     <td>boolean</td>
   </tr>
   <tr>
-    <td>repeat</td>
-    <td>integer + 'times'</td>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
   </tr>
   <tr>
     <td>for</td>
-    <td>string + 'in' + list | string + 'in' + 'range' + integer + 'to' + integer</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
   </tr>
   <tr>
     <td>and</td>
-    <td>boolean (before `and`) + boolean (after `and`)</td>
+    <td>boolean (on both sides of `and`)</td>
   </tr>
   <tr>
     <td>or</td>
-    <td>boolean (before `or`) + boolean (after `or`)</td>
+    <td>boolean (on both sides of `or`)</td>
   </tr>
   <tr>
-    <td><</td>
-    <td>integer (before <) + integer (after <) | float (before <) + float (after <)</td>
+    <td>< **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>></td>
-    <td>integer (before >) + integer (after >) | float (before >) + float (after >)</td>
+    <td>> **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>== | is | = (comparison)</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command)</td>
+    <td>== | is | = (comparison) **</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td>!=</td>
-    <td>string (before command) + string (after command) | integer (before command) + integer (after command) | float (before command) + float (after command) | list (before !=) + list (after !=)</td>
+    <td>!= **</td>
+    <td>string | integer | float | list | input</td>
   </tr>
   <tr>
-    <td><=</td>
-    <td>integer (before <=) + integer (after <=) | float (before <=) + float (after <=)</td>
+    <td><= **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
-    <td>>=</td>
-    <td>integer (before >=) + integer (after >=) | float (before >=) + float (after >=)</td>
+    <td>>= **</td>
+    <td>integer | float | input</td>
   </tr>
   <tr>
     <td>while</td>
@@ -3203,6 +3266,10 @@ Level 15 supports:
   </tr>
 </tbody>
 </table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+
+* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
 
 #### Correct Programs
 
@@ -3263,7 +3330,7 @@ Level 15 supports:
     <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
   </tr>
   <tr>
-    <td>x is a, b, c<br>print x at random</td>
+    <td>x is 'a', 'b', 'c'<br>print x at random</td>
     <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
   </tr>
   <tr>
@@ -3279,19 +3346,19 @@ Level 15 supports:
     <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2<br/>&emsp;&emsp;print a</td>
     <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
   </tr>
   <tr>
-    <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items is 'red', 'green'<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
     <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
   </tr>
   <tr>
@@ -3383,6 +3450,605 @@ Level 15 supports:
   <tr>
     <td>for a in range 1 to 10<br/>print 'hello!'</td>
     <td>No Indentation Exception</td>
+  </tr>
+</tbody>
+</table>
+
+## Level 16
+
+### Commands and types
+
+Level 16 supports:
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string | float | input | list </td>
+  </tr>
+  <tr>
+    <td>ask *</td>
+    <td>integer | string | float | input | list</td>
+  </tr>
+  <tr>
+    <td>is | = (assignment)</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
+    <td>for</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
+  </tr>
+  <tr>
+    <td>and</td>
+    <td>boolean (on both sides of `and`)</td>
+  </tr>
+  <tr>
+    <td>or</td>
+    <td>boolean (on both sides of `or`)</td>
+  </tr>
+  <tr>
+    <td>< **</td>
+    <td>integer | float | input</td>
+  </tr>
+  <tr>
+    <td>> **</td>
+    <td>integer | float | input</td>
+  </tr>
+  <tr>
+    <td>== | is | = (comparison) **</td>
+    <td>string | integer | float | list | input</td>
+  </tr>
+  <tr>
+    <td>!= **</td>
+    <td>string | integer | float | list | input</td>
+  </tr>
+  <tr>
+    <td><= **</td>
+    <td>integer | float | input</td>
+  </tr>
+  <tr>
+    <td>>= **</td>
+    <td>integer | float | input</td>
+  </tr>
+  <tr>
+    <td>while</td>
+    <td>boolean<td>
+  </tr>
+</tbody>
+</table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
+
+#### Correct Programs
+
+<table>
+<thead>
+  <tr>
+    <th>Hedy</th>
+    <th>Python</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print 'x' 'y'</td>
+    <td>print('xy')</td>
+  </tr>
+  <tr>
+    <td>print 1 + 1</td>
+    <td>print(f'{1 + 1}')</td>
+  </tr>
+  <tr>
+    <td>print 1 - 1</td>
+    <td>print(f'{1 - 1}')</td>
+  </tr>
+  <tr>
+    <td>print 1 * 1</td>
+    <td>print(f'{1 * 1}')</td>
+  </tr>
+  <tr>
+    <td>print 1 / 1</td>
+    <td>print(f'{1 / 1}')</td>
+  </tr>
+   <tr>
+    <td>print 1.0 + 1</td>
+    <td>print(f'{1.0 / 1}')</td>
+  </tr>
+  <tr>
+    <td>a is 1<br/>print a</td>
+    <td>a = 1<br/>print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>a is 1.0<br/>print a</td>
+    <td>a = 1.0<br/>print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>a is 'text'<br/>print a</td>
+    <td>a = 'text'<br/>print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>time.sleep(1)</td>
+  </tr>
+  <tr>
+    <td>sleep 1</td>
+    <td>time.sleep(1)</td>
+  </tr>
+  <tr>
+    <td>x is ask 'y'<br>print x</td>
+    <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
+  </tr>
+  <tr>
+    <td>x is ['a', 'b', 'c']<br>print x at random</td>
+    <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>add f to a</td>
+    <td>a = [1, 2, 3]<br/>f = 4<br/>a.append(f)</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>remove f from a</td>
+    <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>remove f from a</td>
+    <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
+  </tr>
+  <tr>
+    <td>name is 'Hedy'<br/>if name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+  </tr>
+  <tr>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+  </tr>
+  <tr>
+    <td>a is 1<br/>if a (< | <= | > | >= | !=) 2<br/>&emsp;&emsp;print a</td>
+    <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>items is ['red', 'green']<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
+  </tr>
+  <tr>
+    <td>ns is [1, 2, 3]<br/>for n in ns<br/>&emsp;&emsp;print n</td>
+    <td>ns = [1, 2, 3]<br/>for n in ns:<br/>&emsp;&emsp;print(f'{n}')</td> 
+  </tr>
+  <tr>
+    <td>for a in range 2 to 4<br/>&emsp;&emsp;a is a + 2</td>
+    <td>step = 1 if int(2) &lt; int(4) else -1<br/>for a in range(int(2), int(4) + step, step):<br/>&emsp;&emsp;a = a + 2</td>
+  </tr>
+  <tr>
+    <td>a is 0<br/>while a < 3<br>&emsp;&emsp;a is a + 1</td>
+    <td>a = 0<br/>while str(a).zfill(100)&lt;str(3).zfill(100):<br/>&emsp;&emsp;a = a + 1</td>
+  </tr>
+</tbody>
+</table>
+
+
+#### Incorrect Programs
+
+<table>
+<thead>
+  <tr>
+    <th>Hedy</th>
+    <th>Exception</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>Incomplete Exception</td>
+  </tr>
+  <tr>
+    <td>print'x'</td>
+    <td>Invalid command</td>
+  </tr>
+  <tr>
+    <td>print 1,0 + 1</td>
+    <td>Invalid Command (TODO: this could be improved)</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>Incomplete Exception</td>
+  </tr>
+    <tr>
+    <td>(ask | print) (any text without quotes around it)</td>
+    <td>Unquoted Text Exception</td>
+  </tr>
+  <tr>
+    <td>(not (print | ask)) (any text) (not is) (any text)?</td>
+    <td>Invalid Exception</td>
+  </tr>
+  <tr>
+    <td>_SPACE (print | ask) (any text)?</td>
+    <td>Invalid space</td>
+  </tr>
+  <tr>
+    <td>_SPACE (any text) is (any text)?</td>
+    <td>Invalid space</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>answer is ask 'Is the number in ' a</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>(add | remove) a (to | from) f</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>items is [1, 2, 3]<br/>print items</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>a is 'test'<br/>print a + 1</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>a is 'text'<br/>one is 1<br/>if one in a<br/>&emsp;&emsp;print 'found!'</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>name is [1, 2]<br/>if '1' is name<br/>&emsp;&emsp;print 'found'</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>if '1' < 3<br/>&emsp;&emsp;print 'true'</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>for a in range 1 to 10<br/>print 'hello!'</td>
+    <td>No Indentation Exception</td>
+  </tr>
+  <tr>
+    <td>x is 1, 2, 3</td>
+    <td>Invalid Exception (?)</td>
+  </tr>
+  <tr>
+    <td>x is [one, two, three]</td>
+    <td>Unquoted text Exception</td>
+  </tr>
+</tbody>
+</table>
+
+## Level 17
+
+### Commands and types
+
+Level 17 supports:
+
+<table>
+<thead>
+  <tr>
+    <th>Command</th>
+    <th>Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>integer | string | float | input | list </td>
+  </tr>
+  <tr>
+    <td>ask *</td>
+    <td>integer | string | float | input | list</td>
+  </tr>
+  <tr>
+    <td>is | = (assignment)</td>
+    <td>string (before `is`) + any (after `is`)</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>empty | integer</td>
+  </tr>
+  <tr>
+    <td>at random</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>add to</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>remove from</td>
+    <td>list</td>
+  </tr>
+  <tr>
+    <td>if</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>if else</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>elif***</td>
+    <td>boolean</td>
+  </tr>
+  <tr>
+    <td>in</td>
+    <td>any (before `in`) + list (after `in`)</td>
+  </tr>
+  <tr>
+    <td>for</td>
+    <td>string + 'in' + list | string + 'in' + 'range' + (integer | input) + 'to' + (integer | input)</td>
+  </tr>
+  <tr>
+    <td>and</td>
+    <td>boolean (on both sides of `and`)</td>
+  </tr>
+  <tr>
+    <td>or</td>
+    <td>boolean (on both sides of `or`)</td>
+  </tr>
+  <tr>
+    <td>< **</td>
+    <td>integer | float | input</td>
+  </tr>
+  <tr>
+    <td>> **</td>
+    <td>integer | float | input</td>
+  </tr>
+  <tr>
+    <td>== | is | = (comparison) **</td>
+    <td>string | integer | float | list | input</td>
+  </tr>
+  <tr>
+    <td>!= **</td>
+    <td>string | integer | float | list | input</td>
+  </tr>
+  <tr>
+    <td><= **</td>
+    <td>integer | float | input</td>
+  </tr>
+  <tr>
+    <td>>= **</td>
+    <td>integer | float | input</td>
+  </tr>
+  <tr>
+    <td>while</td>
+    <td>boolean<td>
+  </tr>
+</tbody>
+</table>
+
+* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
+* \*\*\* There has to be an `if` (with a boolean), before `elif` (with a boolean), but then, multiple times `elif` is possible. After that, using an `else` is optional.
+
+#### Correct Programs
+
+<table>
+<thead>
+  <tr>
+    <th>Hedy</th>
+    <th>Python</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print 'x' 'y'</td>
+    <td>print('xy')</td>
+  </tr>
+  <tr>
+    <td>print 1 + 1</td>
+    <td>print(f'{1 + 1}')</td>
+  </tr>
+  <tr>
+    <td>print 1 - 1</td>
+    <td>print(f'{1 - 1}')</td>
+  </tr>
+  <tr>
+    <td>print 1 * 1</td>
+    <td>print(f'{1 * 1}')</td>
+  </tr>
+  <tr>
+    <td>print 1 / 1</td>
+    <td>print(f'{1 / 1}')</td>
+  </tr>
+   <tr>
+    <td>print 1.0 + 1</td>
+    <td>print(f'{1.0 / 1}')</td>
+  </tr>
+  <tr>
+    <td>a is 1<br/>print a</td>
+    <td>a = 1<br/>print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>a is 1.0<br/>print a</td>
+    <td>a = 1.0<br/>print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>a is 'text'<br/>print a</td>
+    <td>a = 'text'<br/>print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>sleep</td>
+    <td>time.sleep(1)</td>
+  </tr>
+  <tr>
+    <td>sleep 1</td>
+    <td>time.sleep(1)</td>
+  </tr>
+  <tr>
+    <td>x is ask 'y'<br>print x</td>
+    <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
+  </tr>
+  <tr>
+    <td>x is ['a', 'b', 'c']<br>print x at random</td>
+    <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>add f to a</td>
+    <td>a = [1, 2, 3]<br/>f = 4<br/>a.append(f)</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>remove f from a</td>
+    <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>remove f from a</td>
+    <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
+  </tr>
+  <tr>
+    <td>name is 'Hedy'<br/>if name is 'Hedy':<br/>&emsp;&emsp;print 'great'<br/>else:<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+  </tr>
+  <tr>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy':<br/>&emsp;&emsp;print 'great'<br/>else:<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+  </tr>
+  <tr>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy':<br/>&emsp;&emsp;print 'great'<br/>elif name is 'Felienne':<br/>&emsp;&emsp;print 'lovely!'<br/>elif name is 'Julia':<br/>&emsp;&emsp;print 'Oh that is the most popular baby name in the Netherlands!'<br/>else:<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+  </tr>
+  <tr>
+    <td>a is 1<br/>if a (< | <= | > | >= | !=) 2:<br/>&emsp;&emsp;print a</td>
+    <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
+  </tr>
+  <tr>
+    <td>items is ['red', 'green']<br/>selected is 'red'<br/>if selected in items:<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
+  </tr>
+  <tr>
+    <td>ns is [1, 2, 3]<br/>for n in ns<br/>&emsp;&emsp;print n</td>
+    <td>ns = [1, 2, 3]<br/>for n in ns:<br/>&emsp;&emsp;print(f'{n}')</td> 
+  </tr>
+  <tr>
+    <td>for a in range 2 to 4:<br/>&emsp;&emsp;a is a + 2</td>
+    <td>step = 1 if int(2) &lt; int(4) else -1<br/>for a in range(int(2), int(4) + step, step):<br/>&emsp;&emsp;a = a + 2</td>
+  </tr>
+  <tr>
+    <td>a is 0<br/>while a < 3:<br>&emsp;&emsp;a is a + 1</td>
+    <td>a = 0<br/>while str(a).zfill(100)&lt;str(3).zfill(100):<br/>&emsp;&emsp;a = a + 1</td>
+  </tr>
+</tbody>
+</table>
+
+
+#### Incorrect Programs
+
+<table>
+<thead>
+  <tr>
+    <th>Hedy</th>
+    <th>Exception</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>print</td>
+    <td>Incomplete Exception</td>
+  </tr>
+  <tr>
+    <td>print'x'</td>
+    <td>Invalid command</td>
+  </tr>
+  <tr>
+    <td>print 1,0 + 1</td>
+    <td>Invalid Command (TODO: this could be improved)</td>
+  </tr>
+  <tr>
+    <td>ask</td>
+    <td>Incomplete Exception</td>
+  </tr>
+    <tr>
+    <td>(ask | print) (any text without quotes around it)</td>
+    <td>Unquoted Text Exception</td>
+  </tr>
+  <tr>
+    <td>(not (print | ask)) (any text) (not is) (any text)?</td>
+    <td>Invalid Exception</td>
+  </tr>
+  <tr>
+    <td>_SPACE (print | ask) (any text)?</td>
+    <td>Invalid space</td>
+  </tr>
+  <tr>
+    <td>_SPACE (any text) is (any text)?</td>
+    <td>Invalid space</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>answer is ask 'Is the number in ' a</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>a is [1, 2, 3]<br/>f is 4<br/>(add | remove) a (to | from) f</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>items is [1, 2, 3]<br/>print items</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>a is 'test'<br/>print a + 1</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>a is 'text'<br/>one is 1<br/>if one in a<br/>&emsp;&emsp;print 'found!'</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>name is [1, 2]<br/>if '1' is name<br/>&emsp;&emsp;print 'found'</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>if '1' < 3:<br/>&emsp;&emsp;print 'true'</td>
+    <td>Invalid Argument Type Exception</td>
+  </tr>
+  <tr>
+    <td>for a in range 1 to 10:<br/>print 'hello!'</td>
+    <td>No Indentation Exception</td>
+  </tr>
+  <tr>
+    <td>x is 1, 2, 3</td>
+    <td>Invalid Exception (?)</td>
+  </tr>
+  <tr>
+    <td>x is [one, two, three]</td>
+    <td>Unquoted text Exception</td>
+  </tr>
+  <tr>
+    <td>(if | for | while) (boolean) (newline without ':' first) </td>
+    <td>Invalid Exception</td>
+  </tr>
+  <tr>
+    <td>(any lines with code without `if`) elif (boolean):</td>
+    <td>Invalid Exception</td>
   </tr>
 </tbody>
 </table>

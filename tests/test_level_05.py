@@ -1,4 +1,4 @@
-import hedy
+import hedy, lark
 import textwrap
 from test_level_01 import HedyTester
 
@@ -36,7 +36,9 @@ class TestsLevel5(HedyTester):
     dier = random.choice(dieren)
     print(f'{dier}')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code,
+                             expected=expected)
+
   def test_assign_single_quote(self):
     code = """message is 'Hello welcome to Hedy.'"""
     expected = "message = '\\'Hello welcome to Hedy.\\''"
@@ -124,6 +126,7 @@ class TestsLevel5(HedyTester):
       print(f'minder leuk')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_print_if_else_ask(self):
 
     code = textwrap.dedent("""\
@@ -138,6 +141,7 @@ class TestsLevel5(HedyTester):
       print(f'niet zo mooi')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_print_if_else_with_line_break(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
     code = textwrap.dedent("""\
@@ -288,10 +292,37 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
 
-  def test_one_space_in_rhs_if(self):
+  def test_unquoted_space_rhs(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond print 'shaken' else print 'biertje!'""")
+
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.UnquotedEqualityCheck)
+
+  def test_unquoted_space_rhs_no_else(self):
     code = textwrap.dedent("""\
     naam is James
     if naam is James Bond print 'shaken'""")
+
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.UnquotedEqualityCheck)
+
+  def test_unquoted_space_rhs_assign(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond naam is 'Pietjansma'""")
+
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.UnquotedEqualityCheck)
+
+  def test_one_space_in_rhs_if(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is 'James Bond' print 'shaken'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'
@@ -303,7 +334,7 @@ class TestsLevel5(HedyTester):
   def test_multiple_spaces_in_rhs_if(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is Bond James Bond print 'shaken'""")
+    if naam is 'Bond James Bond' print 'shaken'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'
@@ -315,7 +346,7 @@ class TestsLevel5(HedyTester):
   def test_one_space_in_rhs_if_else(self):
     code = textwrap.dedent("""\
     naam is James
-    if naam is James Bond print 'shaken' else print 'biertje!'""")
+    if naam is 'James Bond' print 'shaken' else print 'biertje!'""")
 
     expected = textwrap.dedent("""\
     naam = 'James'
@@ -342,6 +373,18 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_equality_with_lists_gives_error(self):
+    code = textwrap.dedent("""\
+      n is 1, 2
+      m is 1, 2
+      if n is m print 'success!'""")
+
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
     items is red
@@ -356,16 +399,6 @@ class TestsLevel5(HedyTester):
     code = textwrap.dedent("""\
     items is ask 'What are the items?'
     if red in items print 'found!'""")
-    self.multi_level_tester(
-      max_level=7,
-      code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException
-    )
-
-  def test_equality_with_list_gives_error(self):
-    code = textwrap.dedent("""\
-    color is 5, 6, 7
-    if red is color print 'success!'""")
     self.multi_level_tester(
       max_level=7,
       code=code,

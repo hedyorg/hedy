@@ -111,6 +111,14 @@
         </select>
     </div>
     <div class="mb-4">
+        <label for="keyword_language">{{auth.preferred_keyword_language}}</label>
+        <select id="keyword_language">
+            {% for language in keyword_languages() %}
+                <option value="{{language.lang}}" {% if user_data and 'keyword_language' in user_data and user_data['keyword_language'] == language.lang %}selected{% endif %}>{{language.sym}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-4">
         <label for="gender">{{auth.gender}}</label>
         <select id="gender">
           <option value="">{{auth.select}}</option>
@@ -145,8 +153,8 @@
         <button type="submit" class="green-btn mt-4">{{auth.update_profile}}</button>
     </div>
     <div class="mb-4">
-        <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-        <div id="success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+        <div id="update_profile_error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+        <div id="update_profile_success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
     </div>
   </form>
     <button class="red-btn" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
