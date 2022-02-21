@@ -15,6 +15,6 @@ echo "👉 Generating CSS with all features enabled. This file's goan' be big!" 
 
 staticdir=../../../static
 
-npx tailwindcss build styles.css -c $scriptdir/tailwind.full.js -o $staticdir/css/generated.css
+npx tailwindcss build -c $scriptdir/tailwind.full.js -i styles.css -o $staticdir/css/generated.css
 npx minify $staticdir/css/generated.css > $staticdir/css/generated.css.min
 mv $staticdir/css/generated.css{.min,}
