@@ -342,8 +342,7 @@ def enrich_context_with_user_info():
         if user_data.get('language', '') in ALL_LANGUAGES.keys():
             g.lang = session['lang'] = user_data['language']
         if user_data.get('keyword_language', '') in ALL_LANGUAGES.keys():
-            g.keyword_lang = session['keyword_lang'] = "en"
-            #g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
+            g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
 
         data['user_data'] = user_data
         if 'classes' in user_data:
@@ -934,10 +933,8 @@ def index(level, step):
 
 
 def update_level_defaults_keywords(code):
-    if g.lang in ALL_KEYWORD_LANGUAGES.keys():
-        keywords = YamlFile.for_file('coursedata/keywords/' + g.lang + '.yaml').to_dict()
-        return code.format(**keywords)
-    return code
+    keywords = YamlFile.for_file('coursedata/keywords/' + g.lang + '.yaml').to_dict()
+    return code.format(**keywords)
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
