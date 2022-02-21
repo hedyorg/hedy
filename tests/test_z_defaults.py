@@ -51,11 +51,9 @@ def collect_snippets(path):
 
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../coursedata/level-defaults')]
-print(Hedy_snippets)
 keywords = YamlFile.for_file('../coursedata/keywords/en.yaml').to_dict()
 for snippet in Hedy_snippets:
-    print(snippet)
-    snippet.code = snippet.code.format(**keywords)
+    snippet[1].code = snippet[1].code.format(**keywords)
 
 
 class TestsLevelDefaultsPrograms(unittest.TestCase):
