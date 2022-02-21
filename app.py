@@ -1132,6 +1132,7 @@ def current_keyword_language():
 def other_keyword_language():
     if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang != g.keyword_lang:
         return make_keyword_lang_obj(g.lang)
+    return None
 
 @app.template_global()
 def main_menu_entries():
