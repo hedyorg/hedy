@@ -1,7 +1,7 @@
 from website.auth import requires_login, current_user
 import utils
 import uuid
-from flask import g, request, jsonify
+from flask import g, request, jsonify, session
 
 
 def routes(app, database, achievements):
