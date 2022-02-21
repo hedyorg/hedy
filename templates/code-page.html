@@ -23,7 +23,7 @@
     window.State.lang = "{{ g.lang }}";
     window.State.level = "{{ level }}";
     window.State.level_title = "{{ ui.level_title }}";
-    {% if other_keyword_language() and not (user_data and 'keyword_language' in user_data) %}
+    {% if other_keyword_language() %}
         window.State.keyword_language = "{{ current_keyword_language().lang }}"
         window.State.other_keyword_language = "{{ other_keyword_language().lang }}"
     {% endif %}

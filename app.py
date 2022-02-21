@@ -303,6 +303,7 @@ def setup_language():
     if 'keyword_lang' not in session:
         session['keyword_lang'] = "en"
 
+
     g.lang = session['lang']
     g.keyword_lang = session['keyword_lang']
 
@@ -339,7 +340,8 @@ def enrich_context_with_user_info():
         if user_data.get('language', '') in ALL_LANGUAGES.keys():
             g.lang = session['lang'] = user_data['language']
         if user_data.get('keyword_language', '') in ALL_LANGUAGES.keys():
-            g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
+            g.keyword_lang = session['keyword_lang'] = "en"
+            #g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
 
         data['user_data'] = user_data
         if 'classes' in user_data:
@@ -1128,11 +1130,8 @@ def current_keyword_language():
 
 @app.template_global()
 def other_keyword_language():
-    if session['lang'] in ALL_KEYWORD_LANGUAGES.keys() and g.keyword_lang != session['lang']:
+    if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang != g.keyword_lang:
         return make_keyword_lang_obj(g.lang)
-    if g.keyword_lang != "en": #Always return English as an option!
-        return make_keyword_lang_obj("en")
-    return None
 
 @app.template_global()
 def main_menu_entries():
@@ -1178,7 +1177,6 @@ def other_languages():
 
 @app.template_global()
 def keyword_languages():
-    cl = g.keyword_lang
     return [make_lang_obj(l) for l in ALL_KEYWORD_LANGUAGES.keys()]
 
 
