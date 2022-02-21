@@ -72,6 +72,8 @@ FALL_BACK_ADVENTURE = {
 ALL_KEYWORD_LANGUAGES = {
     'en': 'EN',
     'nl': 'NL',
+    'ar': 'AR',
+    'fr': 'FR',
     'es': 'ES'
 }
 
