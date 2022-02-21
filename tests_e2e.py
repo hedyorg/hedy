@@ -499,7 +499,7 @@ class TestAuth(AuthHelper):
         }
 
         for key in profile_changes:
-            body = {'email': self.user['email'], 'language': self.user['language']}
+            body = {'email': self.user['email'], 'language': self.user['language'], 'keyword_language': self.user['keyword_language']}
             body[key] = profile_changes[key]
             # THEN receive an OK response code from the server
             self.post_data('profile', body)
