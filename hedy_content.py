@@ -77,7 +77,7 @@ class NoSuchAdventure:
     return {}
 
 
-@attr.s(slots=True, frozen=True)
+@attr.s(slots=True)
 class DefaultValues:
   """Default texts for a level"""
 

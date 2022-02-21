@@ -901,11 +901,9 @@ def index(level, step):
 
     if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
         return utils.error_page(error=404, ui_message='no_such_level')
+
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
-
-    keywords = YamlFile.for_file('coursedata/keywords/' + g.keyword_lang + '.yaml').to_dict()
-
-
+    defaults.start_code = update_level_defaults_keywords(defaults.start_code)
 
     max_level = level_defaults_for_lang.max_level()
 
@@ -933,6 +931,11 @@ def index(level, step):
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
+
+
+def update_level_defaults_keywords(code):
+    keywords = YamlFile.for_file('coursedata/keywords/' + g.keyword_lang + '.yaml').to_dict()
+    return code.format(**keywords)
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
