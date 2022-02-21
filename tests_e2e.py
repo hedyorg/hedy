@@ -94,7 +94,7 @@ class AuthHelper(unittest.TestCase):
         if username in USERS:
             return USERS[username]
         body = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'language': 'nl', 'password': 'foobar', 'password_repeat': 'foobar'}
+                'language': 'nl', 'keyword_language': 'en', 'password': 'foobar', 'password_repeat': 'foobar'}
         response = request('post', 'auth/signup', {}, body, cookies=self.user_cookies[username])
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
@@ -256,6 +256,8 @@ class TestAuth(AuthHelper):
             {'username': username, 'password': 'foobar', 'email': 'me@something'},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': 123},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': True},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'keyword_language': 123},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'keyword_language': True},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': [2]},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': 'foo'},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'experience_languages': 'python'}
@@ -268,7 +270,7 @@ class TestAuth(AuthHelper):
         # GIVEN a valid username and signup body
         username = self.make_username()
         user = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl'}
+                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl', 'keyword_language': 'en'}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server
@@ -473,6 +475,8 @@ class TestAuth(AuthHelper):
             {'gender': 'a'},
             {'language': True},
             {'language': 123},
+            {'keyword_language': True},
+            {'keyword_language': 123},
             {'prog_experience': 1},
             {'prog_experience': 'foo'},
             {'prog_experience': True},
@@ -499,7 +503,7 @@ class TestAuth(AuthHelper):
         }
 
         for key in profile_changes:
-            body = {'email': self.user['email'], 'language': self.user['language']}
+            body = {'email': self.user['email'], 'language': self.user['language'], 'keyword_language': self.user['keyword_language']}
             body[key] = profile_changes[key]
             # THEN receive an OK response code from the server
             self.post_data('profile', body)
@@ -513,7 +517,7 @@ class TestAuth(AuthHelper):
         # (we check email change separately since it involves a flow with a token)
         # THEN receive an OK response code from the server
         new_email = self.username + '@newhedy.com'
-        body = self.post_data('profile', {'email': new_email, 'language': self.user['language']})
+        body = self.post_data('profile', {'email': new_email, 'language': self.user['language'], 'keyword_language': self.user['keyword_language']})
 
         # THEN confirm that the server replies with an email verification token
         self.assertIsInstance(body['token'], str)

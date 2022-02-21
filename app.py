@@ -72,6 +72,8 @@ FALL_BACK_ADVENTURE = {
 ALL_KEYWORD_LANGUAGES = {
     'en': 'EN',
     'nl': 'NL',
+    'ar': 'AR',
+    'fr': 'FR',
     'es': 'ES'
 }
 
@@ -300,11 +302,12 @@ def setup_language():
     # header to do language negotiation.
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
+    if 'keyword_lang' not in session:
+        session['keyword_lang'] = "en"
+
+
     g.lang = session['lang']
-
-
-    # Always set the keyword languages to English when starting
-    g.keyword_lang = "en"
+    g.keyword_lang = session['keyword_lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language in the list is selected
@@ -336,9 +339,12 @@ def enrich_context_with_user_info():
     if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
         user_data = DATABASE.user_by_username(user.get('username'))
         data['user_messages'] = 0
-        if 'language' in user_data:
-            if user_data['language'] in ALL_LANGUAGES.keys():
-                g.lang = session['lang'] = user_data['language']
+        if user_data.get('language', '') in ALL_LANGUAGES.keys():
+            g.lang = session['lang'] = user_data['language']
+        if user_data.get('keyword_language', '') in ALL_LANGUAGES.keys():
+            g.keyword_lang = session['keyword_lang'] = "en"
+            #g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
+
         data['user_data'] = user_data
         if 'classes' in user_data:
             data['user_classes'] = DATABASE.get_student_classes(user.get('username'))
@@ -1126,10 +1132,8 @@ def current_keyword_language():
 
 @app.template_global()
 def other_keyword_language():
-    if session['lang'] in ALL_KEYWORD_LANGUAGES.keys() and g.keyword_lang != session['lang']:
+    if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang != g.keyword_lang:
         return make_keyword_lang_obj(g.lang)
-    if g.keyword_lang != "en": #Always return English as an option!
-        return make_keyword_lang_obj("en")
     return None
 
 @app.template_global()
@@ -1173,6 +1177,10 @@ def hedy_link(level_nr, assignment_nr, subpage=None):
 def other_languages():
     cl = g.lang
     return [make_lang_obj(l) for l in ALL_LANGUAGES.keys() if l != cl]
+
+@app.template_global()
+def keyword_languages():
+    return [make_lang_obj(l) for l in ALL_KEYWORD_LANGUAGES.keys()]
 
 
 def make_lang_obj(lang):

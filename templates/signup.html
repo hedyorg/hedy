@@ -34,6 +34,14 @@
             </select>
         </div>
         <div class="mb-4">
+            <label class="inline-block w-1/2" for="keyword_language">{{auth.preferred_keyword_language}}</label><select class="inline-block w-1/2" id="keyword_language" name="keyword_language" required>
+                <option value="" selected disabled hidden>{{auth.select}}</option>
+                {% for language in keyword_languages() %}
+                    <option value="{{language.lang}}" {% if language.lang == current_language().lang %}selected{% endif %}>{{language.sym}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-4">
             <label class="inline-block w-1/2" for="gender">{{auth.gender}}</label><select class="inline-block w-1/2" id="gender" name="gender">
               <option value="" selected disabled hidden>{{auth.select}}</option>
               <option value="f">{{auth.female}}</option>
