@@ -934,8 +934,10 @@ def index(level, step):
 
 
 def update_level_defaults_keywords(code):
-    keywords = YamlFile.for_file('coursedata/keywords/' + g.keyword_lang + '.yaml').to_dict()
-    return code.format(**keywords)
+    if g.lang in ALL_KEYWORD_LANGUAGES.keys():
+        keywords = YamlFile.for_file('coursedata/keywords/' + g.lang + '.yaml').to_dict()
+        return code.format(**keywords)
+    return code
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
