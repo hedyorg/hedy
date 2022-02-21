@@ -94,7 +94,7 @@ class AuthHelper(unittest.TestCase):
         if username in USERS:
             return USERS[username]
         body = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'language': 'nl', 'password': 'foobar', 'password_repeat': 'foobar'}
+                'language': 'nl', 'keyword_language': 'en', 'agree_terms': True, 'password': 'foobar', 'password_repeat': 'foobar'}
         response = request('post', 'auth/signup', {}, body, cookies=self.user_cookies[username])
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
@@ -268,7 +268,7 @@ class TestAuth(AuthHelper):
         # GIVEN a valid username and signup body
         username = self.make_username()
         user = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl'}
+                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl', 'keyword_language': 'en', 'agree_terms': True}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server
@@ -499,7 +499,7 @@ class TestAuth(AuthHelper):
         }
 
         for key in profile_changes:
-            body = {'email': self.user['email'], 'language': self.user['language']}
+            body = {'email': self.user['email'], 'language': self.user['language'], 'keyword_language': self.user['keyword_language']}
             body[key] = profile_changes[key]
             # THEN receive an OK response code from the server
             self.post_data('profile', body)
@@ -513,7 +513,7 @@ class TestAuth(AuthHelper):
         # (we check email change separately since it involves a flow with a token)
         # THEN receive an OK response code from the server
         new_email = self.username + '@newhedy.com'
-        body = self.post_data('profile', {'email': new_email, 'language': self.user['language']})
+        body = self.post_data('profile', {'email': new_email, 'language': self.user['language'], 'keyword_language': self.user['keyword_language']})
 
         # THEN confirm that the server replies with an email verification token
         self.assertIsInstance(body['token'], str)

@@ -27,8 +27,6 @@ h4 {
   @apply font-bold text-base;
 }
 
-
-
 * + p, * + ul, * + ol, * + pre {
   @apply mt-4;
 }
@@ -217,6 +215,21 @@ ol {
 }
 
 /* AUTH */
+#signup input[type=checkbox] {
+  @apply appearance-none border border-gray-400 w-4 h-4;
+}
+
+#signup input:required, select:required {
+  @apply border border-red-400;
+}
+
+#signup input:required:valid, select:required:valid {
+  @apply border-green-400;
+}
+
+#signup input[type=checkbox]:checked {
+  @apply bg-green-400 border-green-600;
+}
 
 form.auth {
   border: solid 1px #eeeeee;

@@ -175,24 +175,12 @@ def validate_signup_data(account):
 
 def store_new_account(account, email):
     username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])
-
-    if not is_testing_request(request) and 'subscribe' in account and account['subscribe'] == True:
-        # If we have a Mailchimp API key, we use it to add the subscriber through the API
-        if MAILCHIMP_API_URL:
-            mailchimp_subscribe_user(email)
-        # Otherwise, we send an email to notify about the subscription to the main email address
-        else:
-            send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email,
-                       '<p>' + email + '</p>')
-
-    if not is_testing_request(request) and 'is_teacher' in account and account['is_teacher'] is True:
-        send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
-
     user = {
         'username': username,
         'password': hashed,
         'email': email,
         'language': account['language'],
+        'keyword_language': account['keyword_language'],
         'created': timems(),
         'verification_pending': hashed_token,
         'last_login': timems()
@@ -290,6 +278,10 @@ def routes(app, database):
             return g.auth_texts.get('repeat_match_password'), 400
         if not isinstance(body.get('language'), str):
             return g.auth_texts.get('language_invalid'), 400
+        if not isinstance(body.get('agree_terms'), bool) or not body.get('agree_terms'):
+            return g.auth_texts.get('agree_invalid'), 400
+        if not isinstance(body.get('keyword_language'), str):
+            return g.auth_texts.get('keyword_language_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
@@ -319,6 +311,22 @@ def routes(app, database):
 
         # We receive the pre-processed user and response package from the function
         user, resp = store_new_account(body, body['email'].strip().lower())
+
+        if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] is True:
+            # If we have a Mailchimp API key, we use it to add the subscriber through the API
+            if MAILCHIMP_API_URL:
+                mailchimp_subscribe_user(email)
+            # Otherwise, we send an email to notify about the subscription to the main email address
+            else:
+                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
+
+        # If someone wants to be a Teacher -> sent a mail to manually set it
+        if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
+            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+
+        # If someone agrees to the third party contacts -> sent a mail to manually write down
+        if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
+            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', email, f'<p>{email}</p>')
 
         # We automatically login the user
         cookie = make_salt()
@@ -442,7 +450,10 @@ def routes(app, database):
             return g.auth_texts.get('email_invalid'), 400
         if not isinstance(body.get('language'), str):
             return g.auth_texts.get('language_invalid'), 400
+        if not isinstance(body.get('keyword_language'), str):
+            return g.auth_texts.get('keyword_language_invalid'), 400
 
+        # Todo TB -> Store all validations inside a function, the signup / profile code is duplicate!
         # Validations, optional fields
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
@@ -491,19 +502,19 @@ def routes(app, database):
         username = user['username']
 
         updates = {}
-        for field in['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
-           if field in body:
+        for field in['country', 'birth_year', 'gender', 'language', 'keyword_language', 'prog_experience', 'experience_languages']:
+            if field in body:
                if field == 'experience_languages' and len(body[field]) == 0:
                    updates[field] = None
                else:
                    updates[field] = body[field]
-           else:
+            else:
                updates[field] = None
 
         # We want to check if the user choose a new language, if so -> reload
         # We can use g.lang for this to reduce the db calls
         resp['reload'] = False
-        if g.lang != body['language']:
+        if g.lang != body['language'] or g.keyword_lang != body['keyword_language']:
             resp['reload'] = True
 
         if updates:
