@@ -107,6 +107,8 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div class="flex flex-row mt-4 items-center">
         <div class="flex flex-col ltr:ml-4 rtl:mr-4">
             <h3 class="px-4">{{ auth.other_settings}}</h3>
             <div class="border border-gray-400 py-2 px-4 rounded-lg">
@@ -128,29 +130,6 @@
                             <td class="text-left border-t border-r border-gray-400">{{ auth.hide_cheatsheet }}</td>
                             <td class="border-t border-gray-400">
                                 <input class="other_settings_checkbox" id="hide_cheatsheet" type="checkbox" {% if "hide_cheatsheet" in customizations['other_settings'] %}checked{% endif %}>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="flex flex-row mt-4">
-        <div class="flex flex-col ltr:mr-4 rtl:ml-4">
-            <h3 class="px-4">{{ auth.other_settings}}</h3>
-            <div class="border border-gray-400 py-2 px-4 rounded-lg">
-                <table class="table-auto text-center w-full customize_other_settings">
-                    <thead>
-                        <tr>
-                            <th class="w-64 text-left border-r border-gray-400">{{ auth.option }}</th>
-                            <th class="w-40">{{ auth.select }}?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-left border-t border-r border-gray-400">{{ auth.mandatory_mode }}</td>
-                            <td class="border-t border-gray-400">
-                                <input class="other_settings_checkbox" id="developers_mode" type="checkbox" {% if "developers_mode" in customizations['other_settings'] %}checked{% endif %}>
                             </td>
                         </tr>
                     </tbody>
