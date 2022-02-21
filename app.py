@@ -905,6 +905,10 @@ def index(level, step):
 
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     defaults.start_code = update_level_defaults_keywords(defaults.start_code)
+    # Todo TB -> We have to improve this implementation
+    # Currently we only parse the start_code to replace placeholders
+    # However, it would be nice to call this function on everything inside the defaults
+    # Might be best to add keyword language as argument to get_defaults_for_level() -> return valid code
 
     max_level = level_defaults_for_lang.max_level()
 
