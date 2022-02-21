@@ -1023,6 +1023,11 @@ def main_page(page):
         return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
                                content=learn_more_translations)
 
+    if page == 'privacy':
+        privacy_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        return render_template('privacy.html', page_title=hedyweb.get_page_title(page),
+                               content=privacy_translations)
+
     user = current_user()
 
     if page == 'landing-page':
