@@ -135,16 +135,6 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col mt-4">
-        <div class="flex flex-row ml-auto">
-            <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
-            <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
-        </div>
-        <div class="flex flex-row mt-2 ml-auto">
-            <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
-            {{ auth.remove_customization }}</button>
-            <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
-    </div>
     <div class="flex flex-row mt-4">
         <div class="flex flex-col ltr:mr-4 rtl:ml-4">
             <h3 class="px-4">{{ auth.other_settings}}</h3>
