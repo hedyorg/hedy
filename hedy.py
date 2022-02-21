@@ -745,7 +745,7 @@ class Filter(Transformer):
         result, args = are_all_arguments_true(children)
         return result, args, meta
 
-    def program(self, args, meta=None):
+    def program(self, meta, args):
         bool_arguments = [x[0] for x in args]
         if all(bool_arguments):
             return [True] #all complete
@@ -755,22 +755,22 @@ class Filter(Transformer):
                     return False, a[1]
 
     #leafs are treated differently, they are True + their arguments flattened
-    def var(self, args, meta):
+    def var(self, meta, args):
         return True, ''.join([str(c) for c in args]), meta
 
-    def random(self, args, meta):
+    def random(self, meta, args):
         return True, 'random', meta
 
-    def punctuation(self, args, meta):
+    def punctuation(self, meta, args):
         return True, ''.join([c for c in args]), meta
 
-    def number(self, args, meta):
+    def number(self, meta, args):
         return True, ''.join([c for c in args]), meta
 
-    def NEGATIVE_NUMBER(self, args, meta=None):
-        return True, ''.join([c for c in args]), meta
+    def NEGATIVE_NUMBER(self, args):
+        return True, ''.join([c for c in args]), None
 
-    def text(self, args, meta):
+    def text(self, meta, args):
         return all(args), ''.join([c for c in args]), meta
 
 
@@ -928,26 +928,26 @@ class IsValid(Filter):
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    def program(self, args, meta=None):
+    def program(self, meta, args):
         if len(args) == 0:
             return False, InvalidInfo("empty program")
-        return super().program(args, meta)
+        return super().program(meta, args)
 
-    def error_invalid_space(self, args, meta):
+    def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
 
-    def error_print_nq(self, args, meta):
+    def error_print_nq(self, meta, args):
         # return error source to indicate what went wrong
         return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
 
-    def error_invalid(self, args, meta):
+    def error_invalid(self, meta, args):
         # TODO: this will not work for misspelling 'at', needs to be improved!
 
         error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
         return False, error, meta
 
-    def error_unsupported_number(self, args, meta):
+    def error_unsupported_number(self, meta, args):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
@@ -974,7 +974,7 @@ class IsComplete(Filter):
     # tree is transformed to a node of [True] or [False, args, line_number]
 
 
-    def ask(self, args, meta=None):
+    def ask(self, meta, args):
         # in level 1 ask without arguments means args == []
         # in level 2 and up, ask without arguments is a list of 1, namely the var name
         incomplete = (args == [] and self.level == 1) or (len(args) == 1 and self.level >= 2)
@@ -982,23 +982,23 @@ class IsComplete(Filter):
             return not incomplete, ('ask', meta.line)
         else:
             return not incomplete, ('ask', 1)
-    def ask_is(self, args, meta):
-        return self.ask(args, meta)
-    def ask_equals(self, args, meta):
-        return self.ask(args, meta)
-    def print(self, args, meta):
+    def ask_is(self, meta, args):
+        return self.ask(meta, args)
+    def ask_equals(self, meta, args):
+        return self.ask(meta, args)
+    def print(self, meta, args):
         return args != [], ('print', meta.line)
-    def input(self, args, meta):
+    def input(self, meta, args):
         return len(args) > 1, ('input', meta.line)
-    def input_is(self, args, meta):
-        return self.input(args, meta)
-    def input_equals(self, args, meta):
-        return self.input(args, meta)
-    def length(self, args, meta):
+    def input_is(self, meta, args):
+        return self.input(meta, args)
+    def input_equals(self, meta, args):
+        return self.input(meta, args)
+    def length(self, meta, args):
         return args != [], ('len', meta.line)
-    def error_print_nq(self, args, meta):
+    def error_print_nq(self, meta, args):
         return args != [], ('print level 2', meta.line)
-    def echo(self, args, meta):
+    def echo(self, meta, args):
         #echo may miss an argument
         return True, ('echo', meta.line)
 
