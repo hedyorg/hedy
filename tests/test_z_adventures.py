@@ -52,7 +52,7 @@ def collect_snippets(path):
   return Hedy_snippets
 
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path=utils.construct_content_path('adventures'))]
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../coursedata/adventures')]
 
 
 class TestsAdventurePrograms(unittest.TestCase):

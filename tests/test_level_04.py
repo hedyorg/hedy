@@ -54,7 +54,7 @@ class TestsLevel4(HedyTester):
     expected = textwrap.dedent("""\
     print(f'Welcome to \\\\')""")
     output = "Welcome to \\"
-    self.single_level_tester(code=code, expected=expected, output=output)
+    self.single_level_tester(code=code, expected=expected, output=output, translate=False) #\\ is not preserved in tests properly at the moment
 
   # ask
   def test_assign_print(self):
@@ -175,7 +175,7 @@ class TestsLevel4(HedyTester):
 
     code = textwrap.dedent("""\
     for is Hedy
-    print 'ik heet ' for """)
+    print 'ik heet ' for""")
 
     expected = textwrap.dedent("""\
     vd55669822f1a8cf72ec1911e462a54eb = 'Hedy'
@@ -280,7 +280,7 @@ class TestsLevel4(HedyTester):
 
     code = textwrap.dedent("""\
     নাম is হেডি
-    print 'আমার নাম is ' নাম """)
+    print 'আমার নাম is ' নাম""")
     expected = textwrap.dedent("""\
     veb9b5c786e8cde0910df4197f630ee75 = 'হেডি'
     print(f'আমার নাম is {veb9b5c786e8cde0910df4197f630ee75}')""")
@@ -313,7 +313,7 @@ class TestsLevel4(HedyTester):
     self.single_level_tester(code=code, expected=expected, extra_check_function=self.result_in(list))
   def test_ask_print(self):
 
-    code = textwrap.dedent("""
+    code = textwrap.dedent("""\
     kleur is ask 'wat is je lievelingskleur?'
     print 'jouw lievelingskleur is dus' kleur '!'""")
     expected = textwrap.dedent("""\
@@ -324,7 +324,7 @@ class TestsLevel4(HedyTester):
 
   def test_ask_assign(self):
 
-    code = textwrap.dedent("""
+    code = textwrap.dedent("""\
     ding is kleur
     antwoord is ask 'Wat is je lievelings ' ding
     print 'Jouw favoriet is dus ' antwoord""")

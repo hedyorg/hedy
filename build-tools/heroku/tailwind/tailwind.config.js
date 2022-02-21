@@ -6,7 +6,7 @@ module.exports = {
       // Put any file here that could contain HTML or CSS classes.
       '../../../templates/**/*.html',
       '../../../main/**/*.md',
-      '../../../content/**/*.md',
+      '../../../coursedata/**/*.md',
       '../../../static/js/**/*.js',
   ],
   theme: {
