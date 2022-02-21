@@ -45,7 +45,7 @@ class TestsLevel16(HedyTester):
             max_level=17,
             expected=expected,
             extra_check_function=check_in_list,
-            translate=False
+            translate=False #spaces between list elements not preserved
         )
 
     def test_print_list_access(self):
@@ -257,13 +257,28 @@ class TestsLevel16(HedyTester):
           expected=expected
         )
 
-    def test_equality_with_list_gives_error(self):
+    def test_equality_with_lists(self):
+        code = textwrap.dedent("""\
+        m is [1, 2]
+        n is [1, 2]
+        if m is n
+            print 'success!'""")
+
+        expected = textwrap.dedent("""\
+        m = [1, 2]
+        n = [1, 2]
+        if str(m) == str(n):
+          print(f'success!')""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_equality_with_number_and_list_gives_error(self):
         code = textwrap.dedent("""\
         color is [5, 6, 7]
         if 1 is color
             print 'success!'""")
 
-        with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException):
+        with self.assertRaises(hedy.exceptions.InvalidTypeCombinationException):
             hedy.transpile(code, self.level)
 
     @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])

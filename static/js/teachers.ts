@@ -357,11 +357,27 @@ export function save_customizations(class_id: string) {
             other_settings.push(<string>$(this).attr('id'));
         }
     });
+    let opening_dates = {};
+    $('.opening_date_container').each(function() {
+        if ($(this).is(":visible")) {
+            $(this).find(':input').each(function () {
+                // @ts-ignore
+                opening_dates[<string>$(this).attr('level')] = $(this).val();
+            });
+        }
+    });
+    let other_settings: string[] = [];
+    $('.other_settings_checkbox').each(function() {
+        if ($(this).prop("checked")) {
+            other_settings.push(<string>$(this).attr('id'));
+        }
+    });
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
       data: JSON.stringify({
           levels: levels,
+          opening_dates: opening_dates,
           adventures: adventures,
           teacher_adventures: teacher_adventures,
           other_settings: other_settings
@@ -393,6 +409,7 @@ export function remove_customizations(class_id: string) {
             $('.other_settings_checkbox').prop('checked', false);
             $('.level-select-button').removeClass('green-btn');
             $('.level-select-button').addClass('blue-btn');
+            $('.opening_date_container').addClass('hidden');
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
         });
@@ -425,6 +442,11 @@ export function select_all_level_adventures(level: string) {
         });
         $('#level_button_' + level).removeClass('blue-btn');
         $('#level_button_' + level).addClass('green-btn');
+
+        // We also have to add this level to the "Opening dates" section
+        $('#opening_date_level_' + level).removeClass('hidden');
+        $('#opening_date_level_' + level).find('input').val('');
+        $('#opening_date_level_' + level).find('input').prop({type:"text"});
     } else {
         $('.adventure_level_' + level).each(function () {
             $(this).prop("checked", false);
@@ -432,6 +454,9 @@ export function select_all_level_adventures(level: string) {
         });
         $('#level_button_' + level).removeClass('green-btn');
         $('#level_button_' + level).addClass('blue-btn');
+
+        // We also have to remove this level from the "Opening dates" section
+        $('#opening_date_level_' + level).addClass('hidden');
     }
 }
 
