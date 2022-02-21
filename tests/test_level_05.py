@@ -36,7 +36,9 @@ class TestsLevel5(HedyTester):
     dier = random.choice(dieren)
     print(f'{dier}')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code,
+                             expected=expected)
+
   def test_assign_single_quote(self):
     code = """message is 'Hello welcome to Hedy.'"""
     expected = "message = '\\'Hello welcome to Hedy.\\''"
@@ -124,6 +126,7 @@ class TestsLevel5(HedyTester):
       print(f'minder leuk')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_print_if_else_ask(self):
 
     code = textwrap.dedent("""\
@@ -138,6 +141,7 @@ class TestsLevel5(HedyTester):
       print(f'niet zo mooi')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_print_if_else_with_line_break(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
     code = textwrap.dedent("""\
@@ -369,6 +373,18 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_equality_with_lists_gives_error(self):
+    code = textwrap.dedent("""\
+      n is 1, 2
+      m is 1, 2
+      if n is m print 'success!'""")
+
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
     items is red
@@ -383,16 +399,6 @@ class TestsLevel5(HedyTester):
     code = textwrap.dedent("""\
     items is ask 'What are the items?'
     if red in items print 'found!'""")
-    self.multi_level_tester(
-      max_level=7,
-      code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException
-    )
-
-  def test_equality_with_list_gives_error(self):
-    code = textwrap.dedent("""\
-    color is 5, 6, 7
-    if red is color print 'success!'""")
     self.multi_level_tester(
       max_level=7,
       code=code,

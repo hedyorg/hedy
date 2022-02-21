@@ -1114,7 +1114,10 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
-  return theGlobalEditor?.getValue();
+  // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
+  // but that upsets the parser so this removes those spaces also:
+  // Remove whitespace at the end of every line
+  return theGlobalEditor?.getValue().replace(/ +$/mg, '');
 }
 
 export function confetti_cannon(){
@@ -1285,8 +1288,8 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
     });
     return editor;
   }
-export function toggle_developers_mode() {
-  if ($('#developers_toggle').is(":checked")) {
+export function toggle_developers_mode(enforced: boolean) {
+  if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures').hide();
       pushAchievement("lets_focus");
   } else {

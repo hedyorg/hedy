@@ -6,8 +6,6 @@ import hedy
 import yaml
 from os import path
 
-from utils import construct_content_path
-
 TRANSLATOR_LOOKUP = {}
 
 KEYWORD_LANGUAGES = ['en', 'nl', 'es']
@@ -16,7 +14,7 @@ def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
 
-    keywords_path = construct_content_path('keywords')
+    keywords_path = 'coursedata/keywords/'
     yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r') as stream:
@@ -37,6 +35,9 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
     punctuation_symbols = ['!', '?', '.']
 
+    # FH feb 2022 this also replaces // by //// maybe we don't want to do that for translation with a
+    # extra argument?
+    # for now just don't test tests with // like level4.test_print_with_slashes()
     input_string = hedy.process_input_string(input_string, level)
 
     parser = hedy.get_parser(level, from_lang)
@@ -44,7 +45,9 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
     program_root = parser.parse(input_string + '\n').children[0]
 
-    translated_program = TRANSLATOR_LOOKUP[level](keyword_dict, punctuation_symbols).transform(program_root)
+    # FH Feb 2022 todo trees containing invalid nodes are happily translated, should be stopped here!
+
+    translated_program = TRANSLATOR_LOOKUP[level](keyword_dict, punctuation_symbols, to_lang).transform(program_root)
 
     return translated_program
 
@@ -68,9 +71,10 @@ def indent(s):
 @hedy_translator(level=1)
 class ConvertToLang1(Transformer):
 
-    def __init__(self, keywords, punctuation_symbols):
+    def __init__(self, keywords, punctuation_symbols, to_lang):
         self.keywords = keywords
         self.punctuation_symbols = punctuation_symbols
+        self.to_lang = to_lang
         __class__.level = 1
 
     def command(self, args):
@@ -98,10 +102,16 @@ class ConvertToLang1(Transformer):
         return self.keywords["ask"] + " " + "".join([str(c) for c in args])
 
     def turn(self, args):
-        return self.keywords["turn"] + " " + "".join([str(c) for c in args])
+        if args:
+            return self.keywords["turn"] + " " + "".join([str(c) for c in args])
+        else:
+            return self.keywords["turn"]
 
     def forward(self, args):
-        return self.keywords["forward"] + " " + "".join([str(c) for c in args])
+        if args:
+            return self.keywords["forward"] + " " + "".join([str(c) for c in args])
+        else:
+            return self.keywords["forward"]
 
     def random(self, args):
         return self.keywords["random"] + "".join([str(c) for c in args])
@@ -110,8 +120,13 @@ class ConvertToLang1(Transformer):
         return ' '.join([str(c) for c in args])
 
     def __default__(self, data, children, meta):
+        # FH feb 2022 I am not sure I love this deafult, wouldn't it vbe better to:
+        # throw so we know something has not been translated? OR
+        # just flatten the string with data + ''.join(children) to do a sensible guess?
         return Tree(data, children, meta)
 
+    def comment(self, args):
+        return f"#{''.join(args)}"
 
 @hedy_translator(level=2)
 class ConvertToLang2(ConvertToLang1):
@@ -120,7 +135,6 @@ class ConvertToLang2(ConvertToLang1):
         return args[0] + " " + self.keywords["is"] + " " + ''.join([str(c) for c in args[1:]])
 
     def print(self, args):
-
         argument_string = ""
         i = 0
 
@@ -137,6 +151,12 @@ class ConvertToLang2(ConvertToLang1):
 
         return self.keywords["print"] + " " + argument_string
 
+    def ask(self, args):
+        var = args[0]
+
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(
+            args[1:])
+
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
 
@@ -145,12 +165,7 @@ class ConvertToLang2(ConvertToLang1):
         all_parameters = ["'" + hedy.process_characters_needing_escape(a) + "'" for a in args[1:]]
         return var + ''.join(all_parameters)
 
-    def ask(self, args):
-        var = args[0]
-        all_parameters = [hedy.process_characters_needing_escape(a) for a in args]
 
-        return all_parameters[0] + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(
-            all_parameters[1:])
 
     def error_ask_dep_2(self, args):
         return self.keywords["ask"] + " " + ''.join([str(c) for c in args])
@@ -166,19 +181,17 @@ class ConvertToLang2(ConvertToLang1):
 
 @hedy_translator(level=3)
 class ConvertToLang3(ConvertToLang2):
-    def ask(self, args):
-        var = args[0]
-        remaining_args = args[1:]
-        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(remaining_args)
 
     def var_access(self, args):
         return ''.join([str(c) for c in args])
 
     def assign_list(self, args):
-        return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
+        comma = "، " if self.to_lang == 'ar' else ", "
+        return args[0] + " " + self.keywords["is"] + " " + comma.join([str(c) for c in args[1:]])
 
     def list_access(self, args):
         return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
+
     def add(self, args):
         var = args[0]
         list = args[1]
@@ -190,6 +203,11 @@ class ConvertToLang3(ConvertToLang2):
 
 @hedy_translator(level=4)
 class ConvertToLang4(ConvertToLang3):
+
+    def ask(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ' '.join(remaining_args)
 
     def print(self, args):
         i = 0
@@ -214,16 +232,25 @@ class ConvertToLang5(ConvertToLang4):
         return self.keywords["if"] + " " + ''.join([str(c) for c in args])
 
     def ifelse(self, args):
-        return self.keywords["if"] + " " + args[0] + args[1] + " " + self.keywords["else"] + " " + args[2]
+        return self.keywords["if"] + " " + args[0].strip() + '\n' + args[1] + '\n' + self.keywords["else"] + " " + args[2]
 
     def condition(self, args):
         return ' and '.join(args)
+
+    def condition_spaces(self, args):
+        result = args[0] + ' ' + self.keywords["is"] + ' ' + ' '.join(args[1:])
+        return result
 
     def equality_check(self, args):
         return args[0] + " " + self.keywords["is"] + " " + " ".join([str(c) for c in args[1:]]) + " "
 
     def in_list_check(self, args):
         return args[0] + " " + self.keywords["in"] + " " + ''.join([str(c) for c in args[1:]]) + " "
+
+    def list_access_var(self, args):
+        var = args[0]
+        var_list = args[1]
+        return var + " " + self.keywords["is"] + " " + var_list + " " + self.keywords["at"] + " " + args[2]
 
 
 @hedy_translator(level=6)
@@ -255,7 +282,7 @@ class ConvertToLang6(ConvertToLang5):
     def ask_is(self, args):
         var = args[0]
         remaining_args = args[1:]
-        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(remaining_args)
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ' '.join(remaining_args)
 
     def assign_list_is(self, args):
         return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
@@ -420,12 +447,12 @@ class ConvertToLang18(ConvertToLang17):
     def input_is(self, args):
         var = args[0]
         remaining_args = args[1:]
-        return var + " " + self.keywords["is"] + " " + self.keywords["input"] + "(" + ''.join(remaining_args) + ")"
+        return var + " " + self.keywords["is"] + " " + self.keywords["input"] + "(" + ', '.join(remaining_args) + ")"
 
     def input_equals(self, args):
         var = args[0]
         remaining_args = args[1:]
-        return var + " = " + self.keywords["input"] + "(" + ''.join(remaining_args) + ")"
+        return var + " = " + self.keywords["input"] + "(" + ', '.join(remaining_args) + ")"
     
     def input_is_empty_brackets(self, args):
         var = args[0]        
@@ -437,10 +464,10 @@ class ConvertToLang18(ConvertToLang17):
 
     def for_loop(self, args):
         return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + \
-               f'{self.keywords["range"]}({args[1]},{args[2]})' + ":" + indent(args[3:])
+               f'{self.keywords["range"]}({args[1]}, {args[2]})' + ":" + indent(args[3:])
 
     def print(self, args):
-        argument_string = ''.join(args)
+        argument_string = ', '.join(args)
         return f'{self.keywords["print"]}({argument_string})'
 
     def print_empty_brackets(self, args):

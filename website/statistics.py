@@ -1,4 +1,5 @@
 from collections import namedtuple
+from enum import Enum
 from flask import request, jsonify
 
 import hedyweb
@@ -15,6 +16,13 @@ Key = namedtuple('Key', ['name', 'class_'])
 level_key = Key('level', int)
 username_key = Key('id', str)
 week_key = Key('week', str)
+
+
+class UserType(Enum):
+    ALL = '@all'  # Old value used before user types
+    ANONYMOUS = '@all-anonymous'
+    LOGGED = '@all-logged'
+    STUDENT = '@all-students'
 
 
 def routes(app, db):
@@ -46,8 +54,8 @@ def routes(app, db):
         if not cls or not students or (cls['teacher'] != user['username'] and not is_admin(user)):
             return 'No such class or class empty', 403
 
-        program_data = DATABASE.get_class_program_stats(students, start_date, end_date)
-        quiz_data = DATABASE.get_class_quiz_stats(students, start_date, end_date)
+        program_data = DATABASE.get_program_stats(students, start_date, end_date)
+        quiz_data = DATABASE.get_quiz_stats(students, start_date, end_date)
         data = program_data + quiz_data
 
         per_level_data = _aggregate_for_keys(data, [level_key])
@@ -76,9 +84,10 @@ def routes(app, db):
         if not is_admin(user):
             return utils.error_page(error=403, ui_message='unauthorized')
 
-        program_runs_data = DATABASE.get_all_program_stats(start_date, end_date)
-        quiz_data = DATABASE.get_all_quiz_stats(start_date, end_date)
-        data = program_runs_data.records + quiz_data.records
+        ids = [e.value for e in UserType]
+        program_runs_data = DATABASE.get_program_stats(ids, start_date, end_date)
+        quiz_data = DATABASE.get_quiz_stats(ids, start_date, end_date)
+        data = program_runs_data + quiz_data
 
         per_level_data = _aggregate_for_keys(data, [level_key])
         per_week_data = _aggregate_for_keys(data, [week_key, level_key])
@@ -96,9 +105,12 @@ def add(username, action):
     Ensures logging stats will not cause a failure.
     """
     try:
-        action('@all')
+        all_id = UserType.ANONYMOUS
         if username:
             action(username)
+            is_student = DATABASE.get_student_classes_ids(username) != []
+            all_id = UserType.STUDENT if is_student else UserType.LOGGED
+        action(all_id.value)
     except Exception as ex:
         # adding stats should never cause failure. Log and continue.
         querylog.log_value(server_error=ex)
@@ -116,6 +128,10 @@ def _data_to_response_per_level(data):
     _add_value_to_result(res, 'failed_runs', data['failed_runs'], is_counter=True)
     res['error_rate'] = _calc_error_rate(data.get('failed_runs'), data.get('successful_runs'))
     _add_exception_data(res, data)
+
+    _add_value_to_result(res, 'anonymous_runs', data['anonymous_runs'], is_counter=True)
+    _add_value_to_result(res, 'logged_runs', data['logged_runs'], is_counter=True)
+    _add_value_to_result(res, 'student_runs', data['student_runs'], is_counter=True)
 
     _add_value_to_result(res, 'abandoned_quizzes', data['total_attempts'] - data['completed_attempts'], is_counter=True)
     _add_value_to_result(res, 'completed_quizzes', data['completed_attempts'], is_counter=True)
@@ -147,6 +163,10 @@ def _to_response(data, values_field, series_selector, values_map=None):
         _add_dict_to_result(res[values], 'failed_runs', series, d['failed_runs'], is_counter=True)
         _add_dict_to_result(res[values], 'abandoned_quizzes', series, d['total_attempts'] - d['completed_attempts'], is_counter=True)
         _add_dict_to_result(res[values], 'completed_quizzes', series, d['completed_attempts'], is_counter=True)
+
+        _add_value_to_result(res[values], 'anonymous_runs', d['anonymous_runs'], is_counter=True)
+        _add_value_to_result(res[values], 'logged_runs', d['logged_runs'], is_counter=True)
+        _add_value_to_result(res[values], 'student_runs', d['student_runs'], is_counter=True)
 
         min_, max_, avg_ = _score_metrics(d['scores'])
         _add_dict_to_result(res[values], 'quiz_score_min', series, min_)
@@ -209,14 +229,26 @@ def _aggregate_key(record, keys):
 
 
 def _initialize():
-    return {'failed_runs': 0, 'successful_runs': 0, 'total_attempts': 0, 'completed_attempts': 0, 'scores': []}
+    return {'failed_runs': 0,
+            'successful_runs': 0,
+            'anonymous_runs': 0,
+            'logged_runs': 0,
+            'student_runs': 0,
+            'total_attempts': 0,
+            'completed_attempts': 0,
+            'scores': []
+            }
 
 
 def _add_program_run_data(data, rec):
     if not data:
         data = _initialize()
-    data['successful_runs'] += rec.get('successful_runs') or 0
+    value = rec.get('successful_runs') or 0
+    data['successful_runs'] += value
+
+    _add_user_type_runs(data, rec.get('id'), value)
     _add_exception_data(data, rec, True)
+
     return data
 
 
@@ -237,6 +269,16 @@ def _add_exception_data(entry, data, include_failed_runs=False):
         entry[k] += v
         if include_failed_runs:
             entry['failed_runs'] += v
+            _add_user_type_runs(entry, entry.get('id'), v)
+
+
+def _add_user_type_runs(data, id_, value):
+    if id_ == UserType.ANONYMOUS.value:
+        data['anonymous_runs'] += value
+    if id_ == UserType.LOGGED.value:
+        data['logged_runs'] += value
+    if id_ == UserType.STUDENT.value:
+        data['student_runs'] += value
 
 
 def _split_keys_data(k, v, keys):
