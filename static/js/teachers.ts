@@ -366,12 +366,6 @@ export function save_customizations(class_id: string) {
             });
         }
     });
-    let other_settings: string[] = [];
-    $('.other_settings_checkbox').each(function() {
-        if ($(this).prop("checked")) {
-            other_settings.push(<string>$(this).attr('id'));
-        }
-    });
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-class/' + class_id,
