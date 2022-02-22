@@ -169,7 +169,6 @@ var StopExecution = false;
    * Turn an HTML element into an Ace editor
    */
   function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
-    console.log(element);
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
     if (isReadOnly) {
@@ -351,7 +350,6 @@ export function pushAchievement(achievement: string) {
     dataType: 'json'
     }).done(function(response: any) {
       if (response.achievements) {
-        console.log(response.achievements);
         showAchievements(response.achievements, false, "");
       }
   });
