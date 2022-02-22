@@ -161,7 +161,7 @@
                 <input type="checkbox" name="languages" value="python" {% if "python" in user_data['experience_languages']  %}checked{% endif %} class="ltr:mr-2 rtl:ml-2"><label>Python</label>
             </li>
             <li class="flex flex-row items-center">
-                <input type="checkbox" name="languages" value="other_text {% if "other_text" in user_data['experience_languages']  %}checked{% endif %}" class="ltr:mr-2 rtl:ml-2"><label>{{auth.other_text}}</label>
+                <input type="checkbox" name="languages" value="other_text" {% if "other_text" in user_data['experience_languages']  %}checked{% endif %}" class="ltr:mr-2 rtl:ml-2"><label>{{auth.other_text}}</label>
             </li>
           </ul>
         </div>
