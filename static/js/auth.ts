@@ -364,19 +364,14 @@ if (window.location.pathname === '/signup') {
 }
 
 $("#language").change(function () {
-    $('#keyword_language').val("en");
     const lang = $(this).val();
-    if (lang == "en") {
+    $('#keyword_language').val("en");
+    if (lang == "en" || !($('#' + lang + '_option').length)) {
       $('#keyword_lang_container').hide();
     } else {
-      $("#keyword_language > option").each(function() {
-          const keyword_lang = $(this).val();
-          if (keyword_lang == "en" || keyword_lang == $('#language').val()) {
-            $(this).show();
-          } else {
-            $(this).hide();
-          }
-      });
+      $('.keyword_lang_option').hide();
+      $('#en_option').show();
+      $('#' + lang + '_option').show();
       $('#keyword_lang_container').show();
     }
 });
