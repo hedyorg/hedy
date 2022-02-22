@@ -36,16 +36,16 @@ class LevelDefaults:
     # Sometimes we have multiple text and example_code -> iterate these and add as well!
     extra_examples = []
     for i in range(2, 10):
-      extra_example = {}
-      if default_values.get('intro_text_' + str(i)):
-        extra_example['intro_text'] = default_values.get('intro_text_' + str(i)).format(**self.keywords)
-        default_values.pop('intro_text_' + str(i))
-        if default_values.get('example_code_' + str(i)):
-          extra_example['example_code'] = default_values.get('example_code_' + str(i)).format(**self.keywords)
-          default_values.pop('example_code_' + str(i))
-        extra_examples.append(extra_example)
-      else:
-        break
+        extra_example = {}
+        if default_values.get('intro_text_' + str(i)):
+            extra_example['intro_text'] = default_values.get('intro_text_' + str(i)).format(**self.keywords)
+            default_values.pop('intro_text_' + str(i))
+            if default_values.get('example_code_' + str(i)):
+                extra_example['example_code'] = default_values.get('example_code_' + str(i)).format(**self.keywords)
+                default_values.pop('example_code_' + str(i))
+            extra_examples.append(extra_example)
+        else:
+            break
     default_values['extra_examples'] = extra_examples
 
     # We have to verify if it's a string as the extra examples are stored within a list
