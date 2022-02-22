@@ -33,7 +33,7 @@ var StopExecution = false;
     counter += 1;
     $(preview).addClass('text-lg rounded');
     $(preview).attr('id', "code_block_" + counter);
-    $(preview).attr('lang', "en");
+    $(preview).attr('lang', <string>window.State.keyword_language);
     $(preview).addClass('overflow-x-hidden');
     const exampleEditor = turnIntoAceEditor(preview, true);
 
