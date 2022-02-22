@@ -556,70 +556,70 @@
     intro_text: |
         We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
         The `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.
-        If you want to check if the first number {is} smaller {or} equal {to_list} the second, you can use `<=`, {for} example `age <= 11`.
-        The `>` checks {if} the first number {is} bigger than the second, {for} example `points > 10` checks {if} `points` {is} larger than 10.
-        {if} you want {to_list} check {if} the first number {is} bigger {or} equal {to_list} the second, you can use `>=`, {for} example `points >= 11`.
-        You use these comparisons {in} an `{if}`, like this:
+        If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.
+        The `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.
+        If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.
+        You use these comparisons in an `{if}`, like this:
         ```
         age = {ask} 'How old are you?'
         {if} age > 12
             {print} 'You are older than I am!'
         ```
 
-        {from} this level on, {if} you want {to_list} compare exactly, you can use two equal signs. This {is} what most programming languages do:
+        From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:
         ```
-        name = {ask} 'What {is} your name?'
+        name = {ask} 'What is your name?'
         {if} name == 'Hedy'
             {print} 'You are coo!'
         ```
 
-        You can also compare {if} something {is} *not* equal {to_list} something {else} using `!=` like this:
+        You can also compare if something is *not* equal to something else using `!=` like this:
         ```
-        name = {ask} 'What {is} your name?'
+        name = {ask} 'What is your name?'
         {if} name != 'Hedy'
             {print} 'You are not Hedy'
         ```
 
     commands:
     -   name: "Smaller"
-        explanation: "We use the `<` {to_list} check {if} the first number {is} smaller than the second number."
+        explanation: "We use the `<` to check if the first number is smaller than the second number."
         example: "For example: age < 12"
         demo_code: |-
             age = {ask} 'How old are you?'
             {if} age < 13
                 {print} 'You are younger than me!'
     -   name: "Bigger"
-        explanation: "We use the `>` {to_list} check {if} the first number {is} bigger than the second number."
+        explanation: "We use the `>` to check if the first number is bigger than the second number."
         example: "For example: age > 12"
         demo_code: |-
             age = {ask} 'How old are you?'
             {if} age > 13
                 {print} 'You are older than me!'
     -   name: "Equal"
-        explanation: "We use the `==` {to_list} check {if} two things are the same."
+        explanation: "We use the `==` to check if two things are the same."
         example: "For example: answer == 25"
         demo_code: |-
-            answer = {ask} 'What {is} 5 * 5?'
+            answer = {ask} 'What is 5 * 5?'
             {if} answer == 25
                 {print} 'That {is} correct!'
     -   name: "Not equal"
-        explanation: "We use the `!=` {to_list} check {if} two things are not the same. "
+        explanation: "We use the `!=` to check if two things are not the same. "
         example: "For example: answer != 25"
         demo_code: |-
-            answer = {ask} 'What {is} 5 * 5?'
+            answer = {ask} 'What is 5 * 5?'
             {if} answer != 25
-                {print} 'That {is} not correct!'
+                {print} 'That is not correct!'
 
     -   name: "Smaller {or} equal"
-        explanation: "We use the `<=` {to_list} check {if} the first number {is} smaller than {or} equal {to_list} the second number."
+        explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
         example: "For example: age <= 12"
         demo_code: |-
             age = {ask} 'How old are you?'
             {if} age <= 12
                 {print} 'You are younger than me!'
 
-    -   name: "Bigger {or} equal"
-        explanation: "We use the `>=` {to_list} check {if} the first number {is} bigger than {or} equal {to_list} the second number."
+    -   name: "Bigger or equal"
+        explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
         example: "For example: age >= 14"
         demo_code: |-
             age = {ask} 'How old are you?'
@@ -630,14 +630,14 @@
     start_code: |-
         answer = 0
         {while} answer != 25
-            answer = {ask} 'What {is} 5 {times} 5?'
+            answer = {ask} 'What is 5 times 5?'
         {print} 'A correct answer has been given'
     intro_text: |
-        We are going {to_list} learn a new loop, the `{while}` loop! We continue the loop as long as the statement {is} true.
-        So don't forget {to_list} change the value {in} the loop.
+        We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
+        So don't forget to change the value in the loop.
 
-        {in} the example code, we continue until a correct answer has been given.
-        {if} the correct answer {is} never given, the loop never ends!
+        In the example code, we continue until a correct answer has been given.
+        If the correct answer is never given, the loop never ends!
     commands:
     -   name: "{while}"
         explanation: "We can use the `{while}` loop with not equal"
@@ -645,15 +645,15 @@
         demo_code: |-
             answer = 0
             {while} answer != 25
-                answer = {ask} 'What {is} 5 {times} 5?'
+                answer = {ask} 'What is 5 times 5?'
             {print} 'A correct answer has been given'
     -   name: "Smaller {while}"
-        explanation: "We can also use the `{while}` loop with `<` {and} `>`. "
+        explanation: "We can also use the `{while}` loop with `<` and `>`. "
         example: "For example: {while} count < 3"
         demo_code: |-
             count = 1
             {while} count < 3
-                {print} 'We do this ' 3 - count ' more {times}'
+                {print} 'We do this ' 3 - count ' more times'
                 count = count + 1
             {print} 'We are done'
 
@@ -662,13 +662,13 @@
         fruit = ['apple', 'banana', 'cherry']
         {print} fruit
     intro_text: |
-        We are going {to_list} make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned {in} previous levels.
-        You can use the square brackets as well {to_list} point out a place {in} the lists.
+        We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
+        You can use the square brackets as well to point out a place in the lists.
 
         ```
         friends = ['Ahmed', 'Ben', 'Cayden']
         lucky_numbers = [15, 18, 6]
-        {for} i {in} {range} 1 {to_list} 3
+        {for} i {in} {range} 1 {to} 3
             {print} 'the lucky number of ' friends[i]
             {print} 'is ' lucky_numbers[i]
         ```
@@ -679,15 +679,15 @@
         demo_code: |-
             fruit = ['apple', 'banana', 'cherry']
             {print} fruit
-    -   name: "Get an item {from} a list"
-        explanation: "{to_list} get an item {from} a list we use [number] so fruit[1] means, get the first fruit {from} the list!"
+    -   name: "Get an item from a list"
+        explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
         example: "For example: firstfruit = fruit[1]"
         demo_code: |-
             fruit = ['banana', 'apple', 'cherry']
             firstfruit = fruit[1]
             {print} firstfruit
-    -   name: "Get a random item {from} a list"
-        explanation: "{to_list} get a random item {from} a list we use [random] so fruit[random] means, get a random fruit {from} the list!"
+    -   name: "Get a random item from a list"
+        explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
         example: "For example: random_fruit {is} fruit[random]"
         demo_code: |-
             fruit = ['banana', 'apple', 'cherry']
@@ -776,13 +776,13 @@
 #                {print}('No, that {is} wrong!')
 17:
     start_code: |-
-        {for} i {in} {range} 1 {to_list} 10:
+        {for} i {in} {range} 1 {to} 10:
             {print} i
-        {print} 'Ready {or} not, here I come!'
+        {print} 'Ready or not, here I come!'
     intro_text: |
-        Now we are going {to_list} change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.
+        Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.
 
-        {in} this level you can also use a new command: `{elif}`. `{elif}` {is} short {for} {else} {if} {and} you need it when you you want {to_list} make 3 (or more!) options.
+        In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.
         Check it out!
         ```
         prices = ['1 million dollars', 'an apple pie', 'nothing']
@@ -792,7 +792,7 @@
             {print} 'Yeah! You are rich!'
         {elif} your_price == 'an apple pie' :
             {print} 'Lovely, an apple pie!'
-        else:
+        {else}:
             {print} 'Better luck next time..'
         ```
 
@@ -803,24 +803,24 @@
         demo_code: |-
             a = 2
             {if} a == 1:
-                {print} 'a {is} 1'
+                {print} 'a is 1'
             {elif} a == 2:
-                {print} 'a {is} 2'
-            else:
-                {print} 'a {is} not 1 {or} 2'
+                {print} 'a is 2'
+            {else}:
+                {print} 'a is not 1 or 2'
     -   name: "{print}"
-        explanation: "When we use a `{for}`, we need {to_list} put a `:` behind the `{for}` statement!"
-        example: "for i {in} {range} 1 {to_list} 10:"
+        explanation: "When we use a `{for}`, we need to put a `:` behind the `{for}` statement!"
+        example: "for i {in} {range} 1 {to} 10:"
         demo_code: |-
-            {for} i {in} {range} 1 {to_list} 12:
+            {for} i {in} {range} 1 {to} 12:
                 {print} i
-            {print} 'Ready {or} not, here I come!'
-    -   name: "if"
-        explanation: "We need {to_list} do the same with all of our `{if}` statements"
+            {print} 'Ready or not, here I come!'
+    -   name: "{if}"
+        explanation: "We need to do the same with all of our `{if}` statements"
         example: "if colour {is} green:'"
         demo_code: |-
-            colour = {ask} 'What {is} your favorite color?'
+            colour = {ask} 'What is your favorite color?'
             {if} colour == green:
-                {print} 'Your favorite colour {is} green'
-            else:
-                {print} 'Your favorite colour {is} not green'
+                {print} 'Your favorite colour is green'
+            {else}:
+                {print} 'Your favorite colour is not green'
