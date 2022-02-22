@@ -6,23 +6,23 @@
         <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-8 w-3/4 mx-auto" action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
             <h2 class="py-2">{{ content.mailing_title }}</h2>
             <div>
-                <div class="mb-4">
-                    <label for="mce-EMAIL">{{ content.mail }}  <span class="asterisk">*</span></label>
-                    <input type="email" value="" name="EMAIL" class="required email w-3/4" id="mce-EMAIL" required>
+                <div class="flex flex-row items-center justify-center mb-2">
+                    <label for="mce-EMAIL" class="inline-block w-40">{{ content.mail }}<span class="asterisk">*</span></label>
+                    <input type="email" value="" name="EMAIL" class="inline-block w-full px-2 py-1 rounded-lg" id="mce-EMAIL" required>
                 </div>
-                <div class="mb-4">
-                    <label for="mce-FNAME">{{ content.surname }} </label>
-                    <input type="text" value="" name="FNAME" class="w-3/4" id="mce-FNAME">
+                <div class="flex flex-row items-center justify-center mb-2">
+                    <label for="mce-FNAME" class="inline-block w-40">{{ content.surname }}</label>
+                    <input type="text" value="" name="FNAME" class="inline-block w-full px-2 py-1 rounded-lg" id="mce-FNAME">
                 </div>
-                <div class="mb-4">
-                    <label for="mce-LNAME">{{ content.lastname }} </label>
-                    <input type="text" value="" name="LNAME" class="w-3/4" id="mce-LNAME">
+                <div class="flex flex-row items-center justify-center mb-2">
+                    <label for="mce-LNAME" class="inline-block w-40">{{ content.lastname }}</label>
+                    <input type="text" value="" name="LNAME" class="inline-block w-full px-2 py-1 rounded-lg" id="mce-LNAME">
                 </div>
-                <div class="mb-4">
-                    <label for="mce-COUNTRY">{{ content.country }} </label>
-                    <input type="text" value="" name="COUNTRY" class="w-3/4" id="mce-COUNTRY">
+                <div class="flex flex-row items-center justify-center mb-2">
+                    <label for="mce-COUNTRY" class="inline-block w-40">{{ content.country }}</label>
+                    <input type="text" value="" name="COUNTRY" class="inline-block w-full px-2 py-1 rounded-lg" id="mce-COUNTRY">
                 </div>
-                <div class="mb-4">
+                <div class="flex flex-row items-center justify-center mb-2">
                     <div class="response" id="mce-error-response" style="display:none"></div>
                     <div class="response" id="mce-success-response" style="display:none"></div>
                 </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
