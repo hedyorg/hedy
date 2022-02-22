@@ -33,6 +33,7 @@ var StopExecution = false;
     counter += 1;
     $(preview).addClass('text-lg rounded');
     $(preview).attr('id', "code_block_" + counter);
+    // We set the language of the editor to the current keyword_language -> needed when copying to main editor
     $(preview).attr('lang', <string>window.State.keyword_language);
     $(preview).addClass('overflow-x-hidden');
     const exampleEditor = turnIntoAceEditor(preview, true);
