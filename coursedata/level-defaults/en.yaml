@@ -1,8 +1,8 @@
 1:
     intro_text: |
-        Welcome to Hedy! In Level 1 you can use the commands `{print}`, `{ask}` {and} `{echo}`.
+        Welcome to Hedy! In Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.
 
-        For example, you can {print} text to the screen using `{print}`. You can see an example
+        For example, you can print text to the screen using `{print}`. You can see an example
         code snippet to the left.
 
         Press the green button in the code block, and the code will be typed for you!
@@ -34,7 +34,7 @@
         example: "Example: {print} Hello welcome to Hedy!"
         demo_code: "{print} Hello welcome to Hedy!"
     -   name: "{ask}"
-        explanation: "{ask} something with `{ask}`."
+        explanation: "ask something with `{ask}`."
         example: "Example: {ask} What is your favorite color?"
         demo_code: "{ask} What is your favorite color?"
     -   name: "{echo}"
@@ -44,7 +44,7 @@
             {ask} What is your favorite color?
             {echo} so your favorite color is
     -   name: "{print} emojis"
-        explanation: "{print} an emoji with `{print}`"
+        explanation: "print an emoji with `{print}`"
         example: "Example: {print} 🙋‍ 🌍 ❗"
         demo_code: "{print} 🙋 🌍 ❗"
     -   name: "{forward}"
@@ -52,7 +52,7 @@
         example: "Example: {forward} 100"
         demo_code: "{forward} 100"
     -   name: "{turn}"
-        explanation: "{turn} the drawing turtle with `{turn}`"
+        explanation: "turn the drawing turtle with `{turn}`"
         example: "Example: {turn}"
         demo_code: |-
             {forward} 25
@@ -61,7 +61,7 @@
             {turn} right
 2:
     intro_text: |
-        In level 2 we learn something new. You can name a word with  `{is}`. You can use name anywhere in your code and it will be replaced by Hedy, like this:
+        In level 2 we learn something new. You can name a word with `{is}`. You can use name anywhere in your code and it will be replaced by Hedy, like this:
 
         ```name {is} Hedy
         {print} Hello name
@@ -73,7 +73,7 @@
         answer {is} {ask} What is your name?
         ```
 
-        {print} still works as in level 1, {and} you no longer need `{echo}`.
+        {print} still works as in level 1, and you no longer need `{echo}`.
 
         Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
         ```
@@ -84,27 +84,27 @@
     start_code: "{print} hello world!"
     commands:
     -   name: "is"
-        explanation: "Give a word a name {to_list} use {in} the program using  `{is}`. You can choose the name yourself."
+        explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
         example: "Example: name {is} Hedy."
         demo_code: |-
             name {is} Hedy
             {print} welcome name
     -   name: "{ask}"
-        explanation: "{ask} something with `{ask}`. Beware! You need {to_list} give the answer a name with  `{is}`."
-        example: "Example: color {is} {ask} What {is} your favorite color?"
+        explanation: "ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`."
+        example: "Example: color {is} {ask} What is your favorite color?"
         demo_code: |-
-            color {is} {ask} What {is} your favorite color?
-            {print} color {is} your favorite!
+            color {is} {ask} What is your favorite color?
+            {print} color is your favorite!
     -   name: "{sleep}"
-        explanation: "Let Hedy pause {for} a (couple of) second(s)."
+        explanation: "Let Hedy pause for a (couple of) second(s)."
         example: "Example: {sleep} 2 "
         demo_code: |-
-            {print} Let me think {for} one second...
+            {print} Let me think for one second...
             {sleep}
             {print} Hmm.. I need 3 more seconds...
             {sleep} 3
             {print} Eureka! Ive got it!
-    -   explanation: "Give a number a name using  `{is}`. You can choose the name yourself."
+    -   explanation: "Give a number a name using `{is}`. You can choose the name yourself."
         example: "Example: angle {is} 90"
         demo_code: |-
             angle {is} 90
@@ -113,13 +113,13 @@
         name: is - turtle
 3:
     intro_text: |
-        {in} level 3 you can also make a list. You can let the computer choose something random {from} the list. You do that with `{at} {random}`.
+        In level 3 you can also make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.
         ```
         animals {is} dog, cat, kangaroo
         {print} animals {at} {random}
         ```
 
-        You can also {add} items {to_list} the list with `{add}` {and} {remove} items with `{remove}`.
+        You can also add items to the list with `{add}` and remove items with `{remove}`.
         ```
         animals {is} dog, cat, kangaroo
         {add} penguin {to_list} animals
@@ -130,19 +130,19 @@
     start_code: "{print} hello world!"
     commands:
     -   name: choose_random
-        explanation: Choose a random word {from} a group with `at` {and} `random`
+        explanation: Choose a random word from a group with `{at}` and `{random}`
         example: 'Example: animals {is} dog, cat, kangaroo.'
         demo_code: |-
             animals {is} dog, cat, kangaroo
             {print} animals {at} {random}
     -   name: "{add}"
-        explanation: "{add} an item {to_list} a list"
+        explanation: "add an item to a list"
         example: "Example: {add} dog {to_list} animals"
         demo_code: |-
             animals {is} cow, cat
             {add} dog {to_list} animals
     -   name: "{remove}"
-        explanation: "{remove} an item {from} a list"
+        explanation: "remove an item from a list"
         example: "Example: {remove} dog {from} animals"
         demo_code: |-
             animals {is} cat, dog, cow
@@ -150,73 +150,73 @@
 4:
     start_code: "{print} 'Hello world'"
     intro_text: |
-        {in} level 4 `{ask}` {and} `{print}` have changed.
+        In level 4 `{ask}` and `{print}` have changed.
 
-        You must put text that you want {to_list} {print} between quotation marks.
+        You must put text that you want to print between quotation marks.
 
-        This is useful, because now you can {print} all the words you want. Also the words you used {to_list} store something with `{is}`.
+        This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
 
-        Most programming languages also use quotation marks when {print}ing, so we are also getting a step closer to real programming!
+        Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
 
-        ## Assignments are getting more {and} more difficult
-        You will find the commands on the left again, {and} assignments {in} the following tabs. The assignments are now getting more {and} more difficult {in} the successive tabs.
-        So it {is} best {to_list} start on the left with the s{to_list}ry, {and} work {to_list} the right, {in} order {to_list} be challenged more {and} more.
+        ## Assignments are getting more and more difficult
+        You will find the commands on the left again, and assignments in the following tabs. The assignments are now getting more and more difficult in the successive tabs.
+        So it is best to start on the left with the story, and work to the right, in order to be challenged more and more.
     commands:
     -   name: "{print}"
-        explanation: "{print} exactly using quotation marks"
-        example: "Example: {print} 'Hello welcome {to_list} Hedy.'"
-        demo_code: "{print} 'Hello welcome {to_list} Hedy.'"
+        explanation: "print exactly using quotation marks"
+        example: "Example: {print} 'Hello welcome to Hedy.'"
+        demo_code: "{print} 'Hello welcome to Hedy.'"
     -   name: "is"
-        explanation: "Give a name {to_list} some text {and} `{print}` without quotation marks"
+        explanation: "Give a name to some text and `{print}` without quotation marks"
         example: "Example: name {is} Hedy."
         demo_code: |-
             name {is} Hedy
-            {print} 'my name {is} ' name
+            {print} 'my name is ' name
     -   name: "{ask}"
-        explanation: "{ask} something with `{ask}`."
-        example: "Example: color {is} {ask} 'What {is} your favorite color?'"
+        explanation: "ask something with `{ask}`."
+        example: "Example: color {is} {ask} 'What is your favorite color?'"
         demo_code: |-
-            color {is} {ask} 'What {is} your favorite color?'
-            {print} color ' {is} your favorite!'
+            color {is} {ask} 'What is your favorite color?'
+            {print} color ' is your favorite!'
 5:
     start_code: |-
-        name {is} {ask} 'what {is} your name?'
+        name {is} {ask} 'what is your name?'
         {if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'
     intro_text: |
-        `{ask}` {and} `{print}` still work like they did {in} level 4.
+        `{ask}` {and} `{print}` still work like they did in level 4.
 
-         {in} level 5 there {is} something new, the `{if}`! With the `{if}` you can choose between two different options.
+         In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
 
          ## Example Hedy Code
          ```
-         name {is} {ask} 'what {is} your name?'
+         name {is} {ask} 'what is your name?'
          {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
          ```
 
-         This code {print}s nice {if} you enter Hedy as a name, {and} boo! {if} you enter something else.
+         This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
 
-         When we want {to_list} check {if} something {is} {in} a list, we can now use `in` between the thing {and} the list.
+         When we want to check if something is in a list, we can now use `in` between the thing and the list.
 
          ## Example Hedy Code
          ```
          pretty_colors {is} green, yellow
-         color {is} {ask} 'What {is} your favorite color?'
+         color {is} {ask} 'What is your favorite color?'
          {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
          ```
 
-         This code {print}s pretty! {if} you choose green {or} yellow, {and} meh otherwise.
+         This code prints pretty! if you choose green or yellow, and meh otherwise.
 
          ## Tip
-         Sometimes code with an `{if}` gets really long {and} does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:
+         Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:
          ```
-         name {is} {ask} 'what {is} your name?'
+         name {is} {ask} 'what is your name?'
          {if} name {is} Hedy {print} 'nice'
          {else} {print} 'boo!'
          ```
 
          ## Assignments are getting more {and} more difficult
 
-         {in} level 5 {to_list}o, the assignments {in} the tabs become more {and} more difficult. So, do them {from} left {to_list} right.
+         In level 5 too, the assignments in the tabs become more and more difficult. So, do them from left to right.
     commands:
     -   name: "{print}"
         explanation: "{print} exactly using quotation marks"
