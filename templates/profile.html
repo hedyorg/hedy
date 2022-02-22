@@ -107,7 +107,8 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="flex flex-row items-center mb-2" id="keyword_lang_container">
+        <div class="flex flex-row items-center mb-2" id="keyword_lang_container"
+             {% if user_data and 'language' in user_data and (user_data['language'] not in keyword_languages_keys() or user_data['language'] == "en") %}style="display: none;"{% endif %}>
             <label for="keyword_language" class="inline-block w-72">{{auth.preferred_keyword_language}}</label>
             <select id="keyword_language" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" required>
                 {% for language in keyword_languages() %}

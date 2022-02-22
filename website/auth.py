@@ -70,6 +70,8 @@ countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Alger
 def remember_current_user(db_user):
     session['user-ttl'] = times() + 5 * 60
     session['user'] = pick(db_user, 'username', 'email', 'is_teacher')
+    session['lang'] = db_user.get('lang', 'en')
+    session['keyword_lang'] = db_user.get('keyword_language', 'en')
 
 def pick(d, *requested_keys):
     return { key : d.get(key, None) for key in requested_keys }
@@ -511,14 +513,17 @@ def routes(app, database):
             else:
                updates[field] = None
 
+        if updates:
+            DATABASE.update_user(username, updates)
+
         # We want to check if the user choose a new language, if so -> reload
         # We can use g.lang for this to reduce the db calls
         resp['reload'] = False
-        if g.lang != body['language'] or g.keyword_lang != body['keyword_language']:
+        print(session['lang'])
+        print(session['keyword_lang'])
+        if session['lang'] != body['language'] or session['keyword_lang'] != body['keyword_language']:
             resp['reload'] = True
 
-        if updates:
-            DATABASE.update_user(username, updates)
         remember_current_user(DATABASE.user_by_username(user['username']))
         return jsonify(resp)
 

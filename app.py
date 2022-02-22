@@ -1196,6 +1196,9 @@ def other_languages():
 def keyword_languages():
     return [make_lang_obj(l) for l in ALL_KEYWORD_LANGUAGES.keys()]
 
+@app.template_global()
+def keyword_languages_keys():
+    return [l for l in ALL_KEYWORD_LANGUAGES.keys()]
 
 def make_lang_obj(lang):
     """Make a language object for a given language."""
