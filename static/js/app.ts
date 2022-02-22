@@ -63,15 +63,6 @@ var StopExecution = false;
       let level = String($(preview).attr('level'));
       exampleEditor.session.setMode(getHighlighter(level));
     }
-    if (window.State.keyword_language && window.State.other_keyword_language) {
-      // Increase minLines otherwise the dropdown menu doesn't fit
-      exampleEditor.setOptions({ minLines: 4 });
-      const selectorContainer = $('<div>').css({ position: 'absolute', top: 5, right: 70, width: 'auto' }).appendTo(preview).attr('id', 'selector_container_' + counter);
-      const dropdownContainer1 = create_language_selector(counter, window.State.keyword_language, window.State.other_keyword_language, false);
-      const dropdownContainer2 = create_language_selector(counter, window.State.other_keyword_language, window.State.keyword_language, true);
-      selectorContainer.append(dropdownContainer1);
-      selectorContainer.append(dropdownContainer2);
-    }
   }
 
   /**
@@ -209,26 +200,6 @@ var StopExecution = false;
     return editor;
   }
 })();
-
-function create_language_selector(index: number, current_lang: string, other_lang: string, hidden: boolean) {
-  const dropdownContainer = $('<div>').addClass("dropdown font-sans inline-block right-0 absolute z-10 mx-2 mb-0 text-white").attr('id', 'keyword_selector');
-  dropdownContainer.attr('lang', current_lang);
-  if (hidden) {
-    dropdownContainer.addClass('hidden');
-  }
-  const button = $('<button>').addClass("inline-flex items-center text-xl px-2 py-1 bg-blue-600 rounded-lg").text(current_lang.toUpperCase());
-  button.append("<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\"  d=\"M19 9l-7 7-7-7\"></path></svg>");
-  const menu = $('<div>').addClass("dropdown-menu absolute hidden right-0");
-  const list = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 py-1 mr-1 bg-blue-600 rounded-lg mt-2 cursor-pointer");
-  const link = $('<a>').addClass("no-underline text-white").text(other_lang.toUpperCase());
-  link.attr('onclick', "hedyApp.change_keyword_language ('selector_container_" + index + "','code_block_" + index + "','" + current_lang + "','" + other_lang + "');event.preventDefault();");
-
-  list.append(link);
-  menu.append(list);
-  dropdownContainer.append(button);
-  dropdownContainer.append(menu);
-  return dropdownContainer
-}
 
 export function getHighlighter(level: string) {
   const modeExceptions: Record<string, string> = {
