@@ -372,10 +372,9 @@ $("#language").change(function () {
       $("#keyword_language > option").each(function() {
           const keyword_lang = $(this).val();
           if (keyword_lang == "en" || keyword_lang == $('#language').val()) {
-            console.log("Hier komen we!");
-            $('#' + keyword_lang + '_container').show();
+            $(this).show();
           } else {
-            $('#' + keyword_lang + '_container').hide();
+            $(this).hide();
           }
       });
       $('#keyword_lang_container').show();
