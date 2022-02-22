@@ -83,7 +83,7 @@
         ```
     start_code: "{print} hello world!"
     commands:
-    -   name: "is"
+    -   name: "{is}"
         explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
         example: "Example: name {is} Hedy."
         demo_code: |-
@@ -166,7 +166,7 @@
         explanation: "print exactly using quotation marks"
         example: "Example: {print} 'Hello welcome to Hedy.'"
         demo_code: "{print} 'Hello welcome to Hedy.'"
-    -   name: "is"
+    -   name: "{is}"
         explanation: "Give a name to some text and `{print}` without quotation marks"
         example: "Example: name {is} Hedy."
         demo_code: |-
@@ -219,53 +219,53 @@
          In level 5 too, the assignments in the tabs become more and more difficult. So, do them from left to right.
     commands:
     -   name: "{print}"
-        explanation: "{print} exactly using quotation marks"
-        example: "Example: {print} 'Hello welcome {to_list} Hedy.'"
-        demo_code: "{print} 'Hello welcome {to_list} Hedy.'"
+        explanation: "print exactly using quotation marks"
+        example: "Example: {print} 'Hello welcome to Hedy.'"
+        demo_code: "{print} 'Hello welcome to Hedy.'"
     -   name: "{ask}"
-        explanation: "{ask} something with `{ask}`."
-        example: "Example: color {is} {ask} 'What {is} your favorite color?'"
+        explanation: "ask something with `{ask}`."
+        example: "Example: color {is} {ask} 'What is your favorite color?'"
         demo_code: |-
-            color {is} {ask} 'What {is} your favorite color?'
+            color {is} {ask} 'What is your favorite color?'
             {print} color ' {is} your favorite!'
-    -   name: "if"
+    -   name: "{if}"
         explanation: "Make a choice with `{if}`"
         example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
         demo_code: |-
-            color {is} {ask} 'What {is} your favorite color?'
+            color {is} {ask} 'What is your favorite color?'
             {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
-    -   name: "if with turtle"
+    -   name: "{if} with turtle"
         explanation: "Make a choice with `{if}`"
         example: "Example: {if} answer {is} far {forward} 100 {else} {forward} 5"
         demo_code: |-
             answer {is} {ask} 'How far should I walk?'
             {if} answer {is} far {forward} 100 {else} {forward} 5
-    -   name: "in"
-        explanation: "Check elements with `in`"
+    -   name: "{in}"
+        explanation: "Check elements with `{in}`"
         example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
         demo_code: |-
             pretty_colors {is} green, yellow
             color {is} {ask} 'What {is} your favorite color?'
             {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
 6:
-    start_code: "{print} '5 {times} 5 {is} ' 5 * 5"
+    start_code: "{print} '5 {times} 5 is ' 5 * 5"
     intro_text: |
-        `{ask}`, `{print}` {and} `{if}` still work as {in} level 4.
-         But {in} level 6 you learn something new: you can now also calculate.
+        `{ask}`, `{print}` and `{if}` still work as in level 5.
+         But in level 6 you learn something new: you can now also calculate.
 
-         The plus {is} easy, you write it like with math: `5 + 5` {for} example. The minus also works fine, it {is} `5 - 5`.
+         The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-         The {times} {is} a bit different, because there {is} no {times} symbol on your keyboard. Just search, there really isn't!
-         That {is} why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 {times} 5" that helps you remember it best.
+         The {times} is a bit different, because there is no {times} symbol on your keyboard. Just search, there really isn't!
+         That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 {times} 5" that helps you remember it best.
 
          ## Example Hedy code
          ```
-         {print} '5 plus 5 {is} ' 5 + 5
-         {print} '5 minus 5 {is} ' 5 - 5
-         {print} '5 {times} 5 {is} ' 5 * 5
+         {print} '5 plus 5 is ' 5 + 5
+         {print} '5 minus 5 is ' 5 - 5
+         {print} '5 {times} 5 is ' 5 * 5
          ```
 
-         We also make a change {in} s{to_list}ring! You may now use `=` instead of  `{is}` when we s{to_list}re a name {or} a number, like this:
+         We also make a change in storing! You may now use `=` instead of  `{is}` when we store a name or a number, like this:
 
          ```
          name = Hedy
@@ -274,14 +274,14 @@
 
     commands:
     -   name: "{print}"
-        explanation: "{print} exactly using quotation marks"
-        example: "Example: {print} '5 {times} 5 {is} ' 5 * 5"
-        demo_code: "{print} '5 {times} 5 {is} ' 5 * 5"
+        explanation: "print exactly using quotation marks"
+        example: "Example: {print} '5 {times} 5 is ' 5 * 5"
+        demo_code: "{print} '5 {times} 5 is ' 5 * 5"
     -   name: "{ask}"
-        explanation: "{ask} {for} a calculation {and} check whether it {is} correct."
-        example: "Example: answer {is} {ask} 'What {is} 10 plus 10?'"
+        explanation: "{ask} for a calculation and check whether it is correct."
+        example: "Example: answer {is} {ask} 'What is 10 plus 10?'"
         demo_code: |-
-            answer = {ask} 'What {is} 10 plus 10?'
+            answer = {ask} 'What is 10 plus 10?'
             {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
     -   name: "`{ask}` {and} `{if}` turtle"
         explanation: "{ask} the user how many angles they want"
@@ -291,33 +291,33 @@
             angle = 360 / angles
             {forward} 50
 7:
-    start_code: "{repeat} 3 {times} {print} 'Hedy {is} fun!'"
+    start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
     intro_text: |
-        `{ask}`, `{print}` {and} `{if}` work exactly like they did {in} level 5 {and} 6.
-        But level 7 {add}s the `{repeat}` command. {repeat} can be used {to_list} execute one line of code multiple {times}.
+        `{ask}`, `{print}` {and} `{if}` work exactly like they did in level 5 and 6.
+        But level 7 adds the `{repeat}` command. {repeat} can be used to execute one line of code multiple times.
         ## Example Hedy code
         ```
         {repeat} 3 {times} {print} 'Hedy {is} fun!'
         ```
     commands:
     -   name: "{print}"
-        explanation: "{print} exactly using quotation marks"
-        example: "Example: {print} 'Hello welcome {to_list} Hedy.'"
-        demo_code: "{print} 'Hello welcome {to_list} Hedy.'"
+        explanation: "print exactly using quotation marks"
+        example: "Example: {print} 'Hello welcome to Hedy.'"
+        demo_code: "{print} 'Hello welcome to Hedy.'"
     -   name: "{ask}"
-        explanation: "{ask} something with `{ask}`."
-        example: "Example: color = {ask} 'What {is} your favorite color?'"
+        explanation: "ask something with `{ask}`."
+        example: "Example: color = {ask} 'What is your favorite color?'"
         demo_code: |-
-            color = {ask} 'What {is} your favorite color?'
-            {print} color ' {is} your favorite!'
-    -   name: "if"
+            color = {ask} 'What is your favorite color?'
+            {print} color ' is your favorite!'
+    -   name: "{if}"
         explanation: "Make a choice with `{if}`"
         example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
         demo_code: |-
-            color = {ask} 'What {is} your favorite color?'
+            color = {ask} 'What is your favorite color?'
             {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
     -   name: "{repeat} - turtle"
-        explanation: "{repeat} a line of code with `{repeat}`."
+        explanation: "repeat a line of code with `{repeat}`."
         example: "Example: {repeat} 3 {times} {forward} 10"
         demo_code: |-
             {repeat} 3 {times} {forward} 10
@@ -325,7 +325,7 @@
     start_code: |-
         {repeat} 5 {times}
             {print} 'Hello folks'
-            {print} 'This will be {print}ed 5 {times}'
+            {print} 'This will be printed 5 times'
     intro_text: |
         `{ask}` {and} `{print}` still work as you know them. But `{if}` {and} `{repeat}` have changed!
         You can now execute groups of code {to_list}gether, but you will have {to_list} *indent* the code.
