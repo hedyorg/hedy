@@ -76,13 +76,13 @@ def routes(app, database, achievements):
         # For now, we bring all existing programs for the user and then search within them for repeated names.
         programs = DATABASE.programs_for_user(user['username']).records
         program_id = uuid.uuid4().hex
-        program_public = None
+        program_public = False
         overwrite = False
         for program in programs:
             if program['name'] == body['name']:
                 overwrite = True
                 program_id = program['id']
-                program_public = program.get('public', None)
+                program_public = program.get('public', False)
                 break
 
         stored_program = {
