@@ -47,6 +47,11 @@ class LevelDefaults:
             break
     default_values['extra_examples'] = extra_examples
 
+    # Todo TB -> We have to improve this coding (a lot!)
+    # We use the following section to replace the placeholders with the actual keywords, but this is complex
+    # One solution might be: Separate the commands from the level_defaults -> load them separately
+    # This way can use a more simplistic structure less keen to mistakes and easier to understand
+
     # We have to verify if it's a string as the extra examples are stored within a list
     for k,v in default_values.items():
         if isinstance(v, str):
