@@ -54,10 +54,7 @@ var StopExecution = false;
       const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 60 }).appendTo(preview);
       $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
-        if (!($('#editor').attr('lang') === $(preview).attr('lang'))) {
-          $('#editor').attr('lang', <string>$(preview).attr('lang'));
-          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-        }
+        update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
     });
     }
     if($(preview).attr('level')){
