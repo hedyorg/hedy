@@ -4,19 +4,21 @@
 
 {% block message %}{% endblock %}
 
-<div class="w-full max-w-md text-center mx-auto">
-  <div class="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4">
-      <form class="js-validated-form auth" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('login')">
-        <h2 class="py-2">{{auth.login_long}}</h2>
-        <div class="mb-4">
-            <label for="username">{{auth.username}}</label>
-            <input id="username" name="username" required>
+<div class="w-full max-w-md mx-auto">
+  <div class="bg-white shadow-md rounded pt-6 pb-4 mb-4">
+      <form class="js-validated-form" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('login')">
+        <h2 class="py-2 text-center">{{auth.login_long}}</h2>
+        <div class="flex flex-row items-center justify-center mb-2">
+            <label for="username" class="inline-block w-1/3">{{auth.username}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="username" minlength="3" name="username" required>
         </div>
-        <div class="mb-4">
-            <label for=password">{{auth.password}}</label>
-            <input id="password" name="password" type=password required>
+        <div class="flex flex-row items-center justify-center mb-2">
+            <label for=password" class="inline-block w-1/3">{{auth.password}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="password" minlength="6" name="password" type=password required>
         </div>
-        <button type="submit" class="green-btn mt-2">{{auth.login}}</button>
+        <div class="flex flex-row items-center justify-center">
+            <button type="submit" class="green-btn mt-2">
+                {{auth.login}}
+            </button>
+        </div>
         <div id="error" class="flex-0 mt-4 mb-4 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
       </form>
   </div>
