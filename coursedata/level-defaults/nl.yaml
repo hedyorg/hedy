@@ -27,7 +27,7 @@
             {ask} Wat {is} je lievelingskleur?
             {echo} dus je lievelingskleur is
     -   name: "{print} emojis"
-        explanation: "{print} een emoji met `{print}`"
+        explanation: "print een emoji met `{print}`"
         example: "Example: {print} 🙋‍ 🌍 ❗"
         demo_code: "{print} 🙋 🌍 ❗"
     -   name: "{forward}"
@@ -51,7 +51,7 @@
         {print} hallo naam
         ```
 
-        De `{ask}` {is} in level 2 ook veranderd, het antwoord sla je ook op met een naam:
+        De `{ask}` is in level 2 ook veranderd, het antwoord sla je ook op met een naam:
 
         ```
         antwoord {is} {ask} Hoe heet jij?
@@ -86,8 +86,8 @@
         explanation: "Iets vragen met `{ask}`. Maar let op! Je moet je antwoord een naam geven met `{is}`."
         example: "Bijvoorbeeld: kleur {is} {ask} Wat {is} je lievelingskleur?"
         demo_code: |-
-            kleur {is} {ask} Wat {is} je lievelingskleur?
-            {print} Jouw favoriet {is} dus kleur
+            kleur {is} {ask} Wat is je lievelingskleur?
+            {print} Jouw favoriet is dus kleur
 3:
     intro_text: |
         In level 3 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `{at} {random}` (je zegt: et ren-dom).
@@ -130,11 +130,11 @@
     intro_text: |
         In level 4 zijn `{ask}` en `{print}` anders.
 
-        Je moet tekst die je letterlijk wilt {print}en tussen aanhalingstekens zetten.
+        Je moet tekst die je letterlijk wilt printen tussen aanhalingstekens zetten.
 
-        Dat {is} handig, want nu kan je alle woorden {print}en die je maar wilt. Ook de woorden die je hebt gebruikt om iets in op te slaan met `{is}`.
+        Dat {is} handig, want nu kan je alle woorden printen die je maar wilt. Ook de woorden die je hebt gebruikt om iets in op te slaan met `{is}`.
 
-        De meeste programmeertalen gebruiken ook aanhalingstekens bij het {print}en, dus we komen zo al een stapje dichterbij echt programmeren!
+        De meeste programmeertalen gebruiken ook aanhalingstekens bij het printen, dus we komen zo al een stapje dichterbij echt programmeren!
 
         ## Opdrachten worden steeds moeilijker
         Je vindt de commando's weer links, en opdrachten in de volgende tabjes. De opdrachten worden in de opeenvolgende tabjes nu steeds iets moeilijker.
@@ -142,11 +142,11 @@
 
     commands:
     -   name: "{print}"
-        explanation: "Iets letterlijk {print}en met `{print}`."
+        explanation: "Iets letterlijk printen met `{print}`."
         example: "Bijvoorbeeld: {print} 'Hallo welkom bij Hedy.'"
         demo_code: "{print} 'Hallo welkom bij Hedy'"
     -   name: "is"
-        explanation: "Een stukje tekst een naam geven met `{is}` en {print}en zonder aanhalingstekens"
+        explanation: "Een stukje tekst een naam geven met `{is}` en printen zonder aanhalingstekens"
         example: "Bijvoorbeeld: naam {is} Hedy."
         demo_code: |-
             naam {is} Hedy
@@ -156,7 +156,7 @@
         example: "Bijvoorbeeld: kleur {is} {ask} 'Wat {is} je lievelingskleur?'"
         demo_code: |-
             kleur {is} {ask} 'Wat {is} je lievelingskleur?'
-            {print} 'Jouw favoriet {is} dus ' kleur
+            {print} 'Jouw favoriet is dus ' kleur
 5:
     start_code: |-
         naam {is} {ask} 'hoe heet jij?'
@@ -172,9 +172,9 @@
         {if} naam {is} Hedy {print} 'leuk' {else} {print} 'minder leuk!'
         ```
 
-        Deze code {print} leuk als je Hedy als naam invoert, en minder leuk als je iets anders invoert.
+        Deze code print leuk als je Hedy als naam invoert, en minder leuk als je iets anders invoert.
 
-        Je mag `{if}` ook combineren met `in`, om te kijken of iets in een lijst zit.
+        Je mag `{if}` ook combineren met `{in}`, om te kijken of iets in een lijst zit.
 
         ## Voorbeeld Hedy Code
         ```
@@ -183,7 +183,7 @@
         {if} kleur {in} mooie_kleuren {print} 'mooi' {else} {print} 'meh!'
         ```
 
-        Deze code {print} mooi als je geel of rood antwoordt, en anders meh!
+        Deze code print mooi als je geel of rood antwoordt, en anders meh!
 
         ## Tip
         Soms wordt code met een `{if}` erg lang en past het niet meer goed in het tekstvlak. Je mag dan een enter gebruiken en de code over twee regels verdelen. Begin dan de tweede regel met een `{else}`:
@@ -215,9 +215,9 @@
         `{ask}`, `{print}` en `{if}` werken nog zoals in level 5.
         Maar in Level 6 {is} er iets nieuws, je kunt nu ook rekenen.
 
-        De plus {is} makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat {is} `5 - 5`.
+        De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
 
-        De keer {is} een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die {is} er echt niet!
+        De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
         Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als "5 keer 5", dan onthoud je het het makkelijkst.
         ## Voorbeeld Hedy code
         ```
@@ -234,14 +234,14 @@
         ```
     commands:
     -   name: "{print}"
-        explanation: "Iets letterlijk {print}en met `{print}`."
+        explanation: "Iets letterlijk printen met `{print}`."
         example: "Bijvoorbeeld: {print} '5 keer 5 {is} ' 5 * 5"
         demo_code: "{print} '5 keer 5 {is} ' 5 * 5"
     -   name: "`{ask}` en `{if}` samen met rekenen"
         explanation: "Het antwoord van een som vragen met `{ask}` en kijken of het goed is."
-        example: "Bijvoorbeeld: antwoord = {ask} 'Hoeveel {is} 10 plus 10?'"
+        example: "Bijvoorbeeld: antwoord = {ask} 'Hoeveel is 10 plus 10?'"
         demo_code: |-
-            antwoord = {ask} 'Hoeveel {is} 10 plus 10?'
+            antwoord = {ask} 'Hoeveel is 10 plus 10?'
             {if} antwoord {is} 20 {print} 'Goedzo!' {else} {print} 'Foutje'
     -   name: "`{ask}` en `{if}` turtle"
         explanation: "De gebruiker vragen hoeveel hoeken hij wil"
@@ -251,7 +251,7 @@
             hoek = 360 / hoeken
             {forward} 50
 7:
-    start_code: "{repeat} 3 {times} {print} 'Hedy {is} leuk!'"
+    start_code: "{repeat} 3 {times} {print} 'Hedy is leuk!'"
     intro_text: |
         `{ask}`, `{print}` en `{if}` werken nog zoals in level 5 en 6.
         Maar in Level 7 {is} er iets nieuws: de `{repeat}`.
@@ -259,14 +259,14 @@
 
         ## Voorbeeld Hedy code
         ```
-        {repeat} 3 {times} {print} 'Hedy {is} leuk!'
+        {repeat} 3 {times} {print} 'Hedy is leuk!'
         ```
     commands:
     -   name: "{repeat}"
         explanation: "Iets herhalen met `{repeat}`."
-        example: "Bijvoorbeeld: {repeat} 3 {times} {print} 'Hedy {is} leuk!'"
+        example: "Bijvoorbeeld: {repeat} 3 {times} {print} 'Hedy is leuk!'"
         demo_code: |-
-            {repeat} 3 {times} {print} 'Hedy {is} leuk!'
+            {repeat} 3 {times} {print} 'Hedy is leuk!'
     -   name: "{repeat} - turtle"
         explanation: "Een regel code herhalen met `{repeat}`."
         example: "Bijvoorbeeld: {repeat} 3 {times} {forward} 10"
@@ -291,10 +291,10 @@
 
     commands:
     -   name: "`{if}` met meerdere regels"
-        explanation: "Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu {print}en we twee regels uit."
-        example: "Bijvoorbeeld: antwoord = {ask} 'Hoeveel {is} 10 plus 10?'"
+        explanation: "Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu printen we twee regels uit."
+        example: "Bijvoorbeeld: antwoord = {ask} 'Hoeveel is 10 plus 10?'"
         demo_code: |-
-            antwoord = {ask} 'Hoeveel {is} 10 plus 10?'
+            antwoord = {ask} 'Hoeveel is 10 plus 10?'
             {if} antwoord {is} 20
                 {print} 'Goedzo!'
                 {print} 'Het antwoord was inderdaad ' antwoord
@@ -333,10 +333,10 @@
 
     commands:
     -   name: "`{if}` met meerdere regels"
-        explanation: "Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu {print}en we twee regels uit."
-        example: "Bijvoorbeeld: antwoord = {ask} 'Hoeveel {is} 10 plus 10?'"
+        explanation: "Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu printen we twee regels uit."
+        example: "Bijvoorbeeld: antwoord = {ask} 'Hoeveel is 10 plus 10?'"
         demo_code: |-
-            antwoord = {ask} 'Hoeveel {is} 10 plus 10?'
+            antwoord = {ask} 'Hoeveel is 10 plus 10?'
             {if} antwoord {is} 20
                 {print} 'Goedzo!'
                 {print} 'Het antwoord was inderdaad ' antwoord
@@ -367,7 +367,7 @@
         ```
     commands:
     -   name: "{for} met een lijst"
-        explanation: "Alle dingen in een lijstje {print}en "
+        explanation: "Alle dingen in een lijstje printen "
         example: "Bijvoorbeeld: {for} dier {in} dieren"
         demo_code: |-
             dieren {is} hond, kat, papegaai
@@ -470,8 +470,8 @@
         explanation: "`And` {is} dus en. Beide dingen links en rechts van de `and` moeten waar zijn."
         example: "{if} 3+2 {is} 5 {and} 2+2 {is} 4"
         demo_code: |-
-            antwoord1 = {ask} 'hoeveel {is} 3+2?'
-            antwoord2 = {ask} 'hoeveel {is} 2+2?'
+            antwoord1 = {ask} 'Hoeveel is 3+2?'
+            antwoord2 = {ask} 'Hoeveel is 2+2?'
             {if} antwoord1 {is} 5 {and} antwoord2 {is} 4
                 {print} 'beide antwoorden zijn goed!'
             {else}
@@ -480,8 +480,8 @@
         explanation: "`Or` {is} dus of. Minimaal 1 van de 2 tussen de `or` moet goed zijn. Allebei goed mag ook."
         example: "{if} 3+2 {is} 5 {or} 2+2 {is} 4"
         demo_code: |-
-            antwoord1 = {ask} 'hoeveel {is} 3+2?'
-            antwoord2 = {ask} 'hoeveel {is} 2+2?'
+            antwoord1 = {ask} 'Hoeveel is 3+2?'
+            antwoord2 = {ask} 'Hoeveel is 2+2?'
             {if} antwoord1 {is} 5 {or} antwoord2 {is} 4
                 {print} 'Je hebt minimaal 1 antwoord goed!'
             {else}
@@ -706,7 +706,7 @@
         {print}('ik heet Hedy!')
         ```
 
-        Wil je meerdere dingen {print}en? Dan moeten daar steeds komma's tussen.
+        Wil je meerdere dingen printen? Dan moeten daar steeds komma's tussen.
 
         ```
         naam = 'Hedy'
@@ -729,7 +729,7 @@
 
 #21:
 #    start_code: |-
-#        {print}('Hoeveel {is} 5+3?')
+#        {print}('Hoeveel is 5+3?')
 #        antwoord = 5+3
 #        {print}('antwoord {is} nu:')
 #        {print}(antwoord)
@@ -751,7 +751,7 @@
 #        explanation: "Als we willen zeggen dat een variabele genaamd antwoord 8 is, dan doen we antwoord = 8."
 #        example: "Bijvoorbeeld: antwoord = 8"
 #        demo_code: |-
-#            {print}('Hoeveel {is} 5+3?')
+#            {print}('Hoeveel is 5+3?')
 #            antwoord = 5+3
 #            {print}('antwoord {is} nu:')
 #            {print}(antwoord)
@@ -759,7 +759,7 @@
 #        explanation: "Als we gaan vergelijken gebruiken we dus `==`. Als we een waarde geven dan gebruiken we `=`. "
 #        example: "Bijvoorbeeld: antwoord == 8, antwoord = 8"
 #        demo_code: |-
-#            {print}('Hoeveel {is} 5+3?')
+#            {print}('Hoeveel is 5+3?')
 #            antwoord = 5+3
 #            {print}('antwoord {is} nu:')
 #            {print}(antwoord)
