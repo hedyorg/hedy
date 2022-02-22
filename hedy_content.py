@@ -6,7 +6,14 @@ from website.yaml_file import YamlFile
 class LevelDefaults:
   def __init__(self, language):
     self.language = language
+    self.keyword_lang = "en"
+    self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.keyword_lang}.yaml')
     self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.language}.yaml')
+
+  def set_keyword_language(self, language):
+    if language != "en":
+      self.keyword_lang = language
+      self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
 
   def max_level(self):
     all_levels = self.levels.keys()
