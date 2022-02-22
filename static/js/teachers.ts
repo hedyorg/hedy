@@ -187,7 +187,6 @@ export function remove_student(class_id: string, student_id: string, self_remova
 export function create_adventure() {
     modal.prompt (auth.texts['adventure_prompt'], '', function (adventure_name) {
         adventure_name = adventure_name.trim();
-        console.log("test");
         if (!adventure_name) {
           modal.alert(auth.texts['adventure_empty'], 3000, true);
           return;
