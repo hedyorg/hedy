@@ -7,7 +7,7 @@ class LevelDefaults:
   def __init__(self, language):
     self.language = language
     self.keyword_lang = "en"
-    self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.keyword_lang}.yaml')
+    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
     self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.language}.yaml')
 
   def set_keyword_language(self, language):
@@ -38,15 +38,21 @@ class LevelDefaults:
     for i in range(2, 10):
       extra_example = {}
       if default_values.get('intro_text_' + str(i)):
-        extra_example['intro_text'] = default_values.get('intro_text_' + str(i))
+        extra_example['intro_text'] = default_values.get('intro_text_' + str(i)).format(**self.keywords)
         default_values.pop('intro_text_' + str(i))
         if default_values.get('example_code_' + str(i)):
-          extra_example['example_code'] = default_values.get('example_code_' + str(i))
+          extra_example['example_code'] = default_values.get('example_code_' + str(i)).format(**self.keywords)
           default_values.pop('example_code_' + str(i))
         extra_examples.append(extra_example)
       else:
         break
     default_values['extra_examples'] = extra_examples
+
+    # We have to verify if it's a string as the extra examples are stored within a list
+    for k,v in default_values.items():
+        if isinstance(v, str):
+            default_values[k] = v.format(**self.keywords)
+
     default_type = {
       "level": str(level),
     }
