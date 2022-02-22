@@ -305,7 +305,6 @@ def setup_language():
     if 'keyword_lang' not in session:
         session['keyword_lang'] = "en"
 
-
     g.lang = session['lang']
     g.keyword_lang = session['keyword_lang']
 
@@ -892,6 +891,9 @@ def index(level, step):
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
+    print(g.lang)
+    print(g.keyword_lang)
+
     level_defaults_for_lang.set_keyword_language(g.keyword_lang)
 
     if 'levels' in customizations:

@@ -11,7 +11,6 @@ class LevelDefaults:
     self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.language}.yaml')
 
   def set_keyword_language(self, language):
-    if language != "en":
       self.keyword_lang = language
       self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
 
