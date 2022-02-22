@@ -363,6 +363,19 @@ if (window.location.pathname === '/signup') {
   }
 }
 
+$("#language").change(function () {
+    const lang = $(this).val();
+    $('#keyword_language').val("en");
+    if (lang == "en" || !($('#' + lang + '_option').length)) {
+      $('#keyword_lang_container').hide();
+    } else {
+      $('.keyword_lang_option').hide();
+      $('#en_option').show();
+      $('#' + lang + '_option').show();
+      $('#keyword_lang_container').show();
+    }
+});
+
 $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
    return false;
