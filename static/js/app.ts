@@ -1318,17 +1318,12 @@ export function change_language(lang: string) {
     });
 }
 
-function update_keywords_commands(target_id: any, start_lang: string, new_lang: string, selector_container: string) {
-  // If the target isn't an ace editor -> There is nothing we can do!
-  if (!ace.edit(target_id)) {
-    return;
-  }
-
+export function change_keyword_language(start_lang: string, new_lang: string) {
   $.ajax({
     type: 'POST',
     url: '/translate_keywords',
     data: JSON.stringify({
-      code: ace.edit(target_id).getValue(),
+      code: ace.edit('editor').getValue(),
       start_lang: start_lang,
       goal_lang: new_lang,
       level: window.State.level
@@ -1337,9 +1332,9 @@ function update_keywords_commands(target_id: any, start_lang: string, new_lang: 
     dataType: 'json'
   }).done(function (response: any) {
     if (response.success) {
-      ace.edit(target_id).setValue(response.code);
-      $('#' + target_id).attr('lang', new_lang);
-      update_view(selector_container, new_lang);
+      ace.edit('editor').setValue(response.code);
+      $('#editor').attr('lang', new_lang);
+      update_view('main_editor_keyword_selector', new_lang);
     }
   }).fail(function (err) {
       modal.alert(err.responseText, 3000, true);
@@ -1354,10 +1349,6 @@ function update_view(selector_container: string, new_lang: string) {
       $(this).hide();
     }
   });
-}
-
-export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string) {
-  update_keywords_commands(target_id, old_lang, new_lang, selector_container);
 }
 
 export function select_profile_image(image: number) {
