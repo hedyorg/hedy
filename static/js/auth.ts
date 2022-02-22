@@ -364,7 +364,7 @@ if (window.location.pathname === '/signup') {
 }
 
 $("#language").change(function () {
-    $('#keyword_lang_container').val("en");
+    $('#keyword_language').val("en");
     const lang = $(this).val();
     if (lang == "en") {
       $('#keyword_lang_container').hide();
