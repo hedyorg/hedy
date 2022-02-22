@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+<link rel="stylesheet" href="{{static('/css/generated.css')}}">
+<link rel="stylesheet" href="{{static('/css/additional.css')}}">
+<link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
+<link rel="stylesheet" href="{{ static('/css/progress-bar.css') }}">
+<script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
+<script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+<script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+
+
+{% extends "quiz.html" %}
+
+{% block question %}
+<div class="flex flex-col">
+    <div class="text-green-900 text-2xl text-center flex flex-row justify-center font-slab">
+        <p>{{ ui.question }} {{ question_nr }} / {{ questions|length }} </p>
+    </div>
+
+
+    <button class="green-btn ltr:ml-1 rtl:mr-1"
+            onclick="window.parent.location = '{{ hedy_link(level, next_assignment) }}';"> {{ ui.go_to_level }} {{ level }} </button>
+</div>
+{% endblock %}
