@@ -31,6 +31,13 @@
                     {% endfor %}
                 </select>
             </div>
+            <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400" style="display: none;" id="keyword_lang_container">
+                 <label class="inline-block w-1/2" for="keyword_language">{{auth.preferred_keyword_language}}</label><select class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" id="keyword_language" name="keyword_language" required>
+                     {% for language in keyword_languages() %}
+                         <div id="{{ language.lang }}_container"><option value="{{language.lang}}" {% if language.lang == "en" %}selected{% endif %}>{{language.sym}}</option></div>
+                     {% endfor %}
+                 </select>
+            </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
                 <label class="inline-block w-1/2" for="birth_year">{{auth.birth_year}}</label><input class="block appearance-none w-1/2 px-2 py-1 rounded-lg border border-gray-400" id="birth_year" min="1900" max="2022" name="birth_year" placeholder="1995" type="number">
             </div>

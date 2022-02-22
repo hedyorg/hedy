@@ -363,6 +363,25 @@ if (window.location.pathname === '/signup') {
   }
 }
 
+$("#language").change(function () {
+    $('#keyword_lang_container').val("en");
+    const lang = $(this).val();
+    if (lang == "en") {
+      $('#keyword_lang_container').hide();
+    } else {
+      $("#keyword_language > option").each(function() {
+          const keyword_lang = $(this).val();
+          if (keyword_lang == "en" || keyword_lang == $('#language').val()) {
+            console.log("Hier komen we!");
+            $('#' + keyword_lang + '_container').show();
+          } else {
+            $('#' + keyword_lang + '_container').hide();
+          }
+      });
+      $('#keyword_lang_container').show();
+    }
+});
+
 $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
    return false;
