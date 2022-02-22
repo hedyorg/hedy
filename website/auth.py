@@ -280,7 +280,7 @@ def routes(app, database):
             return g.auth_texts.get('language_invalid'), 400
         if not isinstance(body.get('agree_terms'), bool) or not body.get('agree_terms'):
             return g.auth_texts.get('agree_invalid'), 400
-        if not isinstance(body.get('keyword_language'), str):
+        if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
             return g.auth_texts.get('keyword_language_invalid'), 400
 
         # Validations, optional fields
@@ -450,7 +450,7 @@ def routes(app, database):
             return g.auth_texts.get('email_invalid'), 400
         if not isinstance(body.get('language'), str):
             return g.auth_texts.get('language_invalid'), 400
-        if not isinstance(body.get('keyword_language'), str):
+        if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
             return g.auth_texts.get('keyword_language_invalid'), 400
 
         # Todo TB -> Store all validations inside a function, the signup / profile code is duplicate!
