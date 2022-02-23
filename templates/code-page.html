@@ -23,9 +23,7 @@
     window.State.lang = "{{ g.lang }}";
     window.State.level = "{{ level }}";
     window.State.level_title = "{{ ui.level_title }}";
-    {% if current_keyword_language() %}
-        window.State.keyword_language = "{{ current_keyword_language().lang }}"
-    {% endif %}
+    window.State.keyword_language = "{% if g.lang in keyword_languages_keys() %}{{ g.lang }}{% else %}en{% endif %}"
     {% if username %}
         window.State.examples_left = 20;
     {% endif %}
