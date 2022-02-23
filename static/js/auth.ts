@@ -153,9 +153,9 @@ export const auth = {
       }).fail (function (response) {
         auth.clear_error();
         if (response.responseText) {
-           auth.error(response.responseText);
+           modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
@@ -167,11 +167,7 @@ export const auth = {
         keyword_language: values.keyword_language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
-        gender: values.gender ? values.gender : undefined,
-        prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
-        experience_languages: $('#languages').is(':visible')
-          ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
-          : undefined,
+        gender: values.gender ? values.gender : undefined
       };
 
       $.ajax ({
@@ -189,7 +185,7 @@ export const auth = {
         if (response.responseText) {
           modal.alert(response.responseText, 3000, true);
         } else {
-          modal.alert(response.responseText, 3000, true);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
