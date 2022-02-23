@@ -6,7 +6,14 @@ from website.yaml_file import YamlFile
 class LevelDefaults:
   def __init__(self, language):
     self.language = language
+    self.keyword_lang = "en"
+    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
     self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.language}.yaml')
+
+  def set_keyword_language(self, language):
+      if language != self.keyword_lang:
+          self.keyword_lang = language
+          self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
 
   def max_level(self):
     all_levels = self.levels.keys()
@@ -29,17 +36,37 @@ class LevelDefaults:
     # Sometimes we have multiple text and example_code -> iterate these and add as well!
     extra_examples = []
     for i in range(2, 10):
-      extra_example = {}
-      if default_values.get('intro_text_' + str(i)):
-        extra_example['intro_text'] = default_values.get('intro_text_' + str(i))
-        default_values.pop('intro_text_' + str(i))
-        if default_values.get('example_code_' + str(i)):
-          extra_example['example_code'] = default_values.get('example_code_' + str(i))
-          default_values.pop('example_code_' + str(i))
-        extra_examples.append(extra_example)
-      else:
-        break
+        extra_example = {}
+        if default_values.get('intro_text_' + str(i)):
+            extra_example['intro_text'] = default_values.get('intro_text_' + str(i)).format(**self.keywords)
+            default_values.pop('intro_text_' + str(i))
+            if default_values.get('example_code_' + str(i)):
+                extra_example['example_code'] = default_values.get('example_code_' + str(i)).format(**self.keywords)
+                default_values.pop('example_code_' + str(i))
+            extra_examples.append(extra_example)
+        else:
+            break
     default_values['extra_examples'] = extra_examples
+
+    # Todo TB -> We have to improve this coding (a lot!)
+    # We use the following section to replace the placeholders with the actual keywords, but this is complex
+    # One solution might be: Separate the commands from the level_defaults -> load them separately
+    # This way can use a more simplistic structure less keen to mistakes and easier to understand
+
+    # We have to verify if it's a string as the extra examples are stored within a list
+    for k,v in default_values.items():
+        if isinstance(v, str):
+            default_values[k] = v.format(**self.keywords)
+        # The commands value is a list of dicts -> we have to parse this separately
+        if k == "commands":
+            parsed_commands = []
+            for command in v:
+                temp = {}
+                for command_key, command_value in command.items():
+                    temp[command_key] = command_value.format(**self.keywords)
+                parsed_commands.append(temp)
+            default_values[k] = parsed_commands
+
     default_type = {
       "level": str(level),
     }
@@ -59,7 +86,14 @@ class NoSuchDefaults:
 class Adventures:
   def __init__(self, language):
     self.language = language
+    self.keyword_lang = "en"
+    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
     self.adventures_file = YamlFile.for_file(f'coursedata/adventures/{self.language}.yaml')
+
+  def set_keyword_language(self, language):
+    if language != self.keyword_lang:
+        self.keyword_lang = language
+        self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
 
     # When customizing classes we only want to retrieve the name, (id) and level of each adventure
   def get_adventure_keyname_name_levels(self):
@@ -77,7 +111,7 @@ class NoSuchAdventure:
     return {}
 
 
-@attr.s(slots=True, frozen=True)
+@attr.s(slots=True)
 class DefaultValues:
   """Default texts for a level"""
 

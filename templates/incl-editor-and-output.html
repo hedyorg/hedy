@@ -11,7 +11,7 @@
                   </button>
                   <div class="dropdown-menu absolute hidden ltr:right-0 rtl:left-0">
                       <ul class="dropdown-menu list-none text-xl z-10 text-white px-4 ltr:mr-1 rtl:ml-1 bg-blue-600 rounded-lg mt-2">
-                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('main_editor_keyword_selector', 'editor', '{{ current_keyword_language().lang }}', '{{ other_keyword_language().lang }}');event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
+                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('{{ current_keyword_language().lang }}', '{{ other_keyword_language().lang }}');event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
                       </ul>
                   </div>
               </div>
@@ -21,7 +21,7 @@
                   </button>
                   <div class="dropdown-menu absolute hidden ltr:right-0 rtl:left-0">
                       <ul class="dropdown-menu list-none text-xl z-10 text-white px-4 ltr:mr-1 rtl:ml-1 bg-blue-600 rounded-lg mt-2">
-                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('main_editor_keyword_selector', 'editor','{{ other_keyword_language().lang }}', '{{ current_keyword_language().lang }}');event.preventDefault();"><li>{{ current_keyword_language().sym }}</li></a>
+                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('{{ other_keyword_language().lang }}', '{{ current_keyword_language().lang }}');event.preventDefault();"><li>{{ current_keyword_language().sym }}</li></a>
                       </ul>
                   </div>
               </div>
