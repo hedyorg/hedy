@@ -35,47 +35,12 @@ from flask_compress import Compress
 # Hedy-specific modules
 import hedy_content
 import hedyweb
+from hedy import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
-
-# Define and load all available language data
-ALL_LANGUAGES = {
-    'en': 'English',
-    'nl': 'Nederlands',
-    'es': 'Español',
-    'fr': 'Français',
-    'pt_pt': 'Português(pt)',
-    'pt_br': 'Português(br)',
-    'de': 'Deutsch',
-    'it': 'Italiano',
-    'sw': 'Swahili',
-    'hu': 'Magyar',
-    'el': 'Ελληνικά',
-    'zh': "简体中文",
-    'cs': 'Čeština',
-    'bg': 'Български',
-    'bn': 'বাংলা',
-    'hi': 'हिंदी',
-    'id': 'Bahasa Indonesia',
-    'fy': 'Frysk',
-    'ar': 'عربى'
-}
-# Define fall back languages for adventures
-FALL_BACK_ADVENTURE = {
-    'fy': 'nl',
-    'pt_br': 'pt_pt'
-}
-
-ALL_KEYWORD_LANGUAGES = {
-    'en': 'EN',
-    'nl': 'NL',
-    'ar': 'AR',
-    'fr': 'FR',
-    'es': 'ES'
-}
 
 LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
 for lang in ALL_LANGUAGES.keys():

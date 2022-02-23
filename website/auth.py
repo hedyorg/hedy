@@ -1,6 +1,6 @@
 import os
 import utils
-from app import ALL_LANGUAGES
+from hedy import ALL_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -279,7 +279,7 @@ def routes(app, database):
             return g.auth_texts.get('repeat_match_email'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return g.auth_texts.get('repeat_match_password'), 400
-        if not isinstance(body.get('language'), str):
+        if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
         if not isinstance(body.get('agree_terms'), bool) or not body.get('agree_terms'):
             return g.auth_texts.get('agree_invalid'), 400
