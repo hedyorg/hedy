@@ -211,8 +211,8 @@ adventures:
             4:
                 story_text: |
                     ## Story
-                    You may have noticed that there is still a problem in the previous levels. Did you try to {print} a sentence that contained the word name?
-                    You can solve that in this level. You must use quotation marks for everything that you are going to {print}.
+                    You may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?
+                    You can solve that in this level. You must use quotation marks for everything that you are going to print.
 
                 example_code: |
                     ## Example Hedy code
@@ -295,7 +295,7 @@ adventures:
                     game = 'on'
                     {print} 'Our hero is walking through the forest'
                     {print} 'The path splits two ways'
-                    {for} i {in} {range} 0 to 2
+                    {for} i {in} {range} 0 {to} 2
                         {if} game {is} 'on'
                             path = {ask} 'Which path should she choose?'
                             {if} path {is} 'left' {and} sword {is} 'found'
@@ -367,7 +367,7 @@ adventures:
                     words {is} squawk, Hedy
                     {print} Train your parrot!
                     new_word {is} {ask} Which word do you want to teach them?
-                    {add} new_word to words
+                    {add} new_word {to_list} words
                     {print} 🧒 Say new_word , Hedy!
                     {print} 🦜 words {at} {random}
                     ```
@@ -384,7 +384,7 @@ adventures:
                     words {is} squawk, Hedy
                     {print} 'Train your parrot!'
                     new_word {is} {ask} 'Which word do you want to teach them?'
-                    {add} new_word to words
+                    {add} new_word {to_list} words
                     said_word {is} words {at} {random}
                     {print} '🧒 Say ' new_word ', Hedy!'
                     {print} '🦜 ' said_word
@@ -408,7 +408,7 @@ adventures:
                     ```
                     actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                     {for} action {in} actions
-                        {for} i {in} {range} 1 to 2
+                        {for} i {in} {range} 1 {to} 2
                             {print} '{if} youre happy and you know it'
                             {print} action
                         {print} '{if} youre happy and you know it and you really want to show it'
@@ -423,7 +423,7 @@ adventures:
 
                     ## 5 little monkeys
                     ```
-                    {for} i {in} {range} 5 to 1
+                    {for} i {in} {range} 5 {to} 1
                         {print} i ' little monkeys jumping on the bed'
                         {print} 'One fell off and bumped his head'
                         {print} 'Mama called the doctor and the doctor said'
@@ -551,7 +551,7 @@ adventures:
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} 1 to 3
+                    {for} i {in} {range} 1 {to} 3
                         animal = animals[i]
                         sound = sounds[i]
                         {print} 'Old McDonald had a farm'
@@ -569,10 +569,10 @@ adventures:
                     ```
                     lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
                     {for} line {in} lines
-                        {for} i {in} {range} 1 to 3
+                        {for} i {in} {range} 1 {to} 3
                             {print} line
                         {print} 'early in the morning'
-                        {for} i {in} {range} 1 to 3
+                        {for} i {in} {range} 1 {to} 3
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
@@ -1237,7 +1237,7 @@ adventures:
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     number = numbers {at} {random}
                     game = 'on'
-                    {for} i {in} {range} 1 to 10
+                    {for} i {in} {range} 1 {to} 10
                         {if} game == 'on'
                             guess = {ask} 'Which number do you think it is?'
                             {if} guess > number
@@ -1351,7 +1351,7 @@ adventures:
 
                     ```
                     score = 0
-                    {for} i {in} {range} 0 to 9
+                    {for} i {in} {range} 0 {to} 9
                         numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         number1 = numbers {at} {random}
                         number2 = numbers {at} {random}
@@ -1435,7 +1435,7 @@ adventures:
             11:
                 story_text: |
                     ## Restaurant
-                    We can use the `{for} i {in} {range} 1 to 5` to {print} the orders from multiple customers in an orderly manner.
+                    We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
 
                 example_code: |
                     ## Example Hedy code
@@ -1443,7 +1443,7 @@ adventures:
                     ```
                     {print} 'Welcome to Restaurant Hedy!'
                     people = {ask} 'For how many people would you like to order?'
-                    {for} i {in} {range} 1 to people
+                    {for} i {in} {range} 1 {to} people
                         {print} 'Order number ' i
                         food = {ask} 'What would you like to eat?'
                         {print} food
@@ -1831,7 +1831,7 @@ adventures:
                     ## Fortune Teller
                     In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
                     Now that problem is solved, because of the new way of using the repeat command.
-                    In the next example you can have your fortune teller {ask} 3 questions and also {print} them!
+                    In the next example you can have your fortune teller {ask} 3 questions and also print them!
 
                 example_code: |
                     ## Example Hedy code
@@ -1866,10 +1866,10 @@ adventures:
                     ## Challenge
                     As you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.
                     Every time the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.
-                    This means you can't {print} all the questions this way.
+                    This means you can't print all the questions this way.
 
-                    By using 3 different variables instead of 1 (for example `question1` , `question2` and `question3`), you could solve the problem and {print} the questions.
-                    This does mean that you can only use `{repeat}` for the answers, and you will have to {ask} and {print} all the questions separately.
+                    By using 3 different variables instead of 1 (for example `question1` , `question2` and `question3`), you could solve the problem and print the questions.
+                    This does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.
                     Can you do it?
 
                     In the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.
@@ -2063,7 +2063,7 @@ adventures:
                     lives = 3
                     doors = 1, 2, 3
                     monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
-                    {for} i {in} {range} 1 to 10
+                    {for} i {in} {range} 1 {to} 10
                         {if} lives > 0
                             good_door = doors {at} {random}
                             monster = monsters {at} {random}
@@ -2094,7 +2094,7 @@ adventures:
                     player {is} alive
                     doors = 1, 2, 3
                     monsters = zombie, vampire, giant spider
-                    {for} i {in} {range} 1 to 3
+                    {for} i {in} {range} 1 {to} 3
                         {if} player {is} alive
                             correct_door = doors {at} {random}
                             {print} 'Room ' i
@@ -2357,7 +2357,7 @@ adventures:
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
                     translation = ['hello', 'computer', 'potato']
                     score = 0
-                    {for} i {in} {range} 1 to 3
+                    {for} i {in} {range} 1 {to} 3
                         answer = {ask} 'What does ' french_words[i] ' mean?'
                         correct = translation[i]
                         {if} answer == correct
@@ -2392,7 +2392,7 @@ adventures:
                     If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. 
                     Also, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.
 
-                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and {print} them in any place you want.
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
                     Besides, you'll learn how to work with the `{at} {random}` command, that you can use to make games. 
                     So let's go to the next level!
 
@@ -2415,7 +2415,7 @@ adventures:
                     name {is} Sophie
                     {print} My name is name
                     ```
-                    Of course you wanted to {print} `My name is Sophie` but Hedy prints `My Sophie is Sophie`. 
+                    Of course you wanted to print `My name is Sophie` but Hedy prints `My Sophie is Sophie`. 
                     In the next level this problem is fixed by using quotation marks.
 
                 start_code: "{print} Let's go to the next level!"
@@ -2586,7 +2586,7 @@ adventures:
                     In the next level you will learn a command that makes all of this a lot easier!
                     ```
                     game {is} 'on'
-                    {for} i {in} {range} 1 to 100
+                    {for} i {in} {range} 1 {to} 100
                         {if} game {is} 'on'
                             answer = {ask} 'Do you want to continue?'
                             {if} answer {is} 'no'
