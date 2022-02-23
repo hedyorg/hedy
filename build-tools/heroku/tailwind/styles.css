@@ -215,6 +215,10 @@ ol {
 }
 
 /* AUTH */
+#signup input:required, select:required {
+  @apply border border-red-400;
+}
+
 input[type=checkbox] {
   @apply appearance-none border border-gray-400 w-4 h-4;
 }
@@ -229,10 +233,6 @@ input[type=checkbox]:checked {
 
 input, select {
   @apply border border-gray-400;
-}
-
-#signup input:required, select:required {
-  @apply border border-red-400;
 }
 
 table.users thead {
