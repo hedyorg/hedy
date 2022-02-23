@@ -10,9 +10,6 @@ if (!window.State) {
 window.State = {};
 }
 
-// Set this to true to use keywords from languages other than english
-var localKeywordsEnable = true;
-
 // Contains the current keywords based on the current language
 var currentLang: {
   _PRINT: string;
@@ -44,26 +41,23 @@ var currentLang: {
   _WHILE: string;
   _LENGTH: string;
 };
-if(localKeywordsEnable){
-  switch(window.State.keyword_language){
-    case 'nl':
-      currentLang = LANG_nl;
-      break;
-    case 'ar':
-      currentLang = LANG_ar;
-      break;
-    case 'es':
-      currentLang = LANG_es;
-      break;
-    case 'fr':
-      currentLang = LANG_fr;
-      break;
-    default:
-      currentLang = LANG_en;
-      break;
-  }
-} else {
-  currentLang = LANG_en;
+
+switch(window.State.keyword_language){
+  case 'nl':
+    currentLang = LANG_nl;
+    break;
+  case 'ar':
+    currentLang = LANG_ar;
+    break;
+  case 'es':
+    currentLang = LANG_es;
+    break;
+  case 'fr':
+    currentLang = LANG_fr;
+    break;
+  default:
+    currentLang = LANG_en;
+    break;
 }
 
 interface Rule {
