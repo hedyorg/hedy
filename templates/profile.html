@@ -137,38 +137,6 @@
                 <option value="">{{auth.select}}</option>
             </select>
         </div>
-        <div class="flex flex-row items-center mb-2">
-          <label class="inline-block w-72" for="has_experience">{{auth.programming_experience}}</label>
-            <ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0" style="margin-top: -0.3em;">
-                <li class="flex flex-row items-center">
-                    <input class="ltr:pl-4 rtl:pr-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()" {% if user_data['prog_experience'] == "yes" %} checked {% endif %}>
-                    <label class="ltr:pl-2 rtl:pr-2">{{auth.yes}}</label>
-                </li>
-                <li class="flex flex-row items-center">
-                    <input class="ltr:pl-4 rtl:pr-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()" {% if user_data['prog_experience'] == "no" %} checked {% endif %}>
-                    <label class="ltr:pl-2 rtl:pr-2">{{auth.no}}</label>
-                </li>
-            </ul>
-        </div>
-        <div class="flex flex-row items-center mb-4 border rounded-lg border-gray-400 px-2 pb-4" {% if user_data['prog_experience'] != "yes" %} style="display:none;" {% endif %} id="languages">
-            <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
-            <label class="inline-block w-1/2" for="languages">{{auth.languages}}</label><ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 ltr:pl-4 rtl:pr-4">
-            <li class="flex flex-row items-center">
-                <input type="checkbox" name="languages" value="scratch" {% if "scratch" in user_data['experience_languages']  %}checked{% endif %} class="ltr:mr-2 rtl:ml-2"><label style>Scratch</label>
-            </li>
-            <li class="flex flex-row items-center">
-                <input type="checkbox" name="languages" value="other_block" {% if "other_block" in user_data['experience_languages']  %}checked{% endif %} class="ltr:mr-2 rtl:ml-2"><label>{{auth.other_block}}</label>
-            </li>
-            <li class="flex flex-row items-center">
-                <input type="checkbox" name="languages" value="python" {% if "python" in user_data['experience_languages']  %}checked{% endif %} class="ltr:mr-2 rtl:ml-2"><label>Python</label>
-            </li>
-            <li class="flex flex-row items-center">
-                <input type="checkbox" name="languages" value="other_text" {% if "other_text" in user_data['experience_languages']  %}checked{% endif %} class="ltr:mr-2 rtl:ml-2"><label>{{auth.other_text}}</label>
-            </li>
-          </ul>
-        </div>
-        <div class="clear-both {% if user_data['prog_experience'] == "no" %} hidden {% endif %} mb-4" id="languages">
-        </div>
         <div class="mb-4 clear-both">
             <button type="submit" class="green-btn mt-4">{{auth.update_profile}}</button>
         </div>
