@@ -761,7 +761,7 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message='not_enrolled')
 
-    adventures = load_adventure_for_language(g.lang)
+    adventures = load_adventure_for_language(g.lang).adventures_file['adventures']
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures_names = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
     else:
