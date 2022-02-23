@@ -262,8 +262,8 @@ adventures:
             15:
                 story_text: |
                     ## Story
-                    Using the `while` loop can make your stories more interesting. For example, you can use `while game {is} 'on'` so you can play until the game is over.
-                    Or you can use `while sword {is} 'lost'` so the player can't continu the game until they have found something.
+                    Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.
+                    Or you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.
 
                 example_code: |
                     ## Example Hedy code
@@ -273,7 +273,7 @@ adventures:
                     {print} 'You are standing in your garden and you have lost your keys.'
                     {print} 'Where do you want to look for them?'
                     {print} 'You can choose: tree, flowerbed, rock, postbox'
-                    while keys == 'lost'
+                    {while} keys == 'lost'
                         location = {ask} 'Where do you want to look?'
                         {if} location == 'flowerbed'
                             {print} 'Here they are!'
@@ -285,7 +285,7 @@ adventures:
             13:
                 story_text: |
                     ## Story
-                    By using the `{and}` and `or` commands, you can shorten your stories. For example, check out the dragon story.
+                    By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
 
                 example_code: |
                     ## Example Hedy code
@@ -295,7 +295,7 @@ adventures:
                     game = 'on'
                     {print} 'Our hero is walking through the forest'
                     {print} 'The path splits two ways'
-                    {for} i {in} range 0 to 2
+                    {for} i {in} {range} 0 to 2
                         {if} game {is} 'on'
                             path = {ask} 'Which path should she choose?'
                             {if} path {is} 'left' {and} sword {is} 'found'
@@ -408,7 +408,7 @@ adventures:
                     ```
                     actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                     {for} action {in} actions
-                        {for} i {in} range 1 to 2
+                        {for} i {in} {range} 1 to 2
                             {print} '{if} youre happy and you know it'
                             {print} action
                         {print} '{if} youre happy and you know it and you really want to show it'
@@ -419,11 +419,11 @@ adventures:
             11:
                 story_text: |
                     ## Songs
-                    In this level you can use the `{for} i {in} range` command to make songs that use counting.
+                    In this level you can use the `{for} i {in} {range}` command to make songs that use counting.
 
                     ## 5 little monkeys
                     ```
-                    {for} i {in} range 5 to 1
+                    {for} i {in} {range} 5 to 1
                         {print} i ' little monkeys jumping on the bed'
                         {print} 'One fell off and bumped his head'
                         {print} 'Mama called the doctor and the doctor said'
@@ -551,7 +551,7 @@ adventures:
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} range 1 to 3
+                    {for} i {in} {range} 1 to 3
                         animal = animals[i]
                         sound = sounds[i]
                         {print} 'Old McDonald had a farm'
@@ -569,10 +569,10 @@ adventures:
                     ```
                     lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
                     {for} line {in} lines
-                        {for} i {in} range 1 to 3
+                        {for} i {in} {range} 1 to 3
                             {print} line
                         {print} 'early in the morning'
-                        {for} i {in} range 1 to 3
+                        {for} i {in} {range} 1 to 3
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
@@ -1035,7 +1035,7 @@ adventures:
                     {print} 'Throw 6 as fast as you can!'
                     thrown = 0
                     tries = 0
-                    while thrown != 6
+                    {while} thrown != 6
                         thrown = options {at} {random}
                         {print} 'You threw ' thrown
                         tries = tries + 1
@@ -1183,7 +1183,7 @@ adventures:
                     ```
                     won = 'no'
                     options = 'rock', 'paper', 'scissors'
-                    while won == 'no'
+                    {while} won == 'no'
                         your_choice = {ask} 'What do you choose?'
                         computer_choice = options {at} {random}
                         {print} 'you chose ' your_choice
@@ -1237,7 +1237,7 @@ adventures:
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     number = numbers {at} {random}
                     game = 'on'
-                    {for} i {in} range 1 to 10
+                    {for} i {in} {range} 1 to 10
                         {if} game == 'on'
                             guess = {ask} 'Which number do you think it is?'
                             {if} guess > number
@@ -1343,7 +1343,7 @@ adventures:
             15:
                 story_text: |
                     ## Calculator
-                    You can add the `while` loop to the calculator game you've learned to make in a previous level.
+                    You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
                     This makes sure the player can't continue to the next question {if} they answer incorrectly.
 
                 example_code: |
@@ -1351,13 +1351,13 @@ adventures:
 
                     ```
                     score = 0
-                    {for} i {in} range 0 to 9
+                    {for} i {in} {range} 0 to 9
                         numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         number1 = numbers {at} {random}
                         number2 = numbers {at} {random}
                         correct = number1 * number2
                         answer = 0
-                        while answer != correct
+                        {while} answer != correct
                             {print} 'How much is ' number1 ' times ' number2 '?'
                             answer = {ask} 'Fill in your answer:'
                             {print} 'Your answer is ' answer
@@ -1435,7 +1435,7 @@ adventures:
             11:
                 story_text: |
                     ## Restaurant
-                    We can use the `{for} i {in} range 1 to 5` to {print} the orders from multiple customers in an orderly manner.
+                    We can use the `{for} i {in} {range} 1 to 5` to {print} the orders from multiple customers in an orderly manner.
 
                 example_code: |
                     ## Example Hedy code
@@ -1443,7 +1443,7 @@ adventures:
                     ```
                     {print} 'Welcome to Restaurant Hedy!'
                     people = {ask} 'For how many people would you like to order?'
-                    {for} i {in} range 1 to people
+                    {for} i {in} {range} 1 to people
                         {print} 'Order number ' i
                         food = {ask} 'What would you like to eat?'
                         {print} food
@@ -1699,7 +1699,7 @@ adventures:
             15:
                 story_text: |
                     ## Restaurant
-                    With the `while` you can make sure your costumers can keep adding orders until they are done.
+                    With the `{while}` you can make sure your costumers can keep adding orders until they are done.
 
                 example_code: |
                     ## Example Hedy code
@@ -1707,7 +1707,7 @@ adventures:
                     ```
                     {print} 'Welcome at McHedy'
                     more = 'yes'
-                    while more == 'yes'
+                    {while} more == 'yes'
                         order = {ask} 'What would you like to order?'
                         {print} order
                         more = {ask} 'Would you like to order anything {else}?'
@@ -1731,13 +1731,13 @@ adventures:
                     {print} 'That will be ' price ' dollars'
                     ```
                 story_text_2: |
-                    We use `or` to see {if} one our of two things is the case.
+                    We use `{or}` to see {if} one our of two things is the case.
 
                 example_code_2: |
                     ## Example Hedy code
                     ```
                     drinks = {ask} 'What would you like to drink?'
-                    {if} drinks {is} 'water' or drinks {is} 'juice'
+                    {if} drinks {is} 'water' {or} drinks {is} 'juice'
                         {print} 'Thats a healthy choice'
                     ```
                 start_code: ""
@@ -2063,7 +2063,7 @@ adventures:
                     lives = 3
                     doors = 1, 2, 3
                     monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
-                    {for} i {in} range 1 to 10
+                    {for} i {in} {range} 1 to 10
                         {if} lives > 0
                             good_door = doors {at} {random}
                             monster = monsters {at} {random}
@@ -2094,7 +2094,7 @@ adventures:
                     player {is} alive
                     doors = 1, 2, 3
                     monsters = zombie, vampire, giant spider
-                    {for} i {in} range 1 to 3
+                    {for} i {in} {range} 1 to 3
                         {if} player {is} alive
                             correct_door = doors {at} {random}
                             {print} 'Room ' i
@@ -2357,7 +2357,7 @@ adventures:
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
                     translation = ['hello', 'computer', 'potato']
                     score = 0
-                    {for} i {in} range 1 to 3
+                    {for} i {in} {range} 1 to 3
                         answer = {ask} 'What does ' french_words[i] ' mean?'
                         correct = translation[i]
                         {if} answer == correct
@@ -2571,7 +2571,7 @@ adventures:
                     second_grade = {ask} 'What score did you get on your second test?'
                     added {is} first_grade + second_grade
                     mean_grade {is} added / 2
-                    {if} mean_grade = 1 or mean_grade = 2 or mean_grade = 3 or mean_grade = 4 or mean_grade = 5
+                    {if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5
                         {print} 'Oh no! You have failed the subject...'
                     {else}
                         {print} 'Great! You have passed the subject!'
@@ -2586,7 +2586,7 @@ adventures:
                     In the next level you will learn a command that makes all of this a lot easier!
                     ```
                     game {is} 'on'
-                    {for} i {in} range 1 to 100
+                    {for} i {in} {range} 1 to 100
                         {if} game {is} 'on'
                             answer = {ask} 'Do you want to continue?'
                             {if} answer {is} 'no'
@@ -2630,7 +2630,7 @@ adventures:
                     {else}
                         {print} 'Yikes...'
                     ```
-                    In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `elif` that makes this possible!
+                    In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible!
                     So check out the next level now!
                 start_code: "{print} 'Lets go to the next level!'"
             17:
