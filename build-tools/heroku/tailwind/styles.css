@@ -219,6 +219,10 @@ input[type=checkbox] {
   @apply appearance-none border border-gray-400 w-4 h-4;
 }
 
+#signup input:required, #signup select:required, #update_profile input:required {
+  @apply border border-red-400;
+}
+
 /* Make this !important to it over-writes the red required border when valid */
 input:required:valid, select:required:valid {
   @apply border-green-400 !important;
@@ -230,10 +234,6 @@ input[type=checkbox]:checked {
 
 input, select {
   @apply border border-gray-400;
-}
-
-#signup input:required, select:required {
-  @apply border border-red-400;
 }
 
 table.users thead {

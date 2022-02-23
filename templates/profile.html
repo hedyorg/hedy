@@ -87,7 +87,7 @@
    {% endif %}
    <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{auth.settings}}</h1>
    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="profile">
-        <form class="js-validated-form" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
+        <form class="js-validated-form" id="update_profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
         <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.settings}}</h2>
         <div class="flex flex-row items-center mb-2">
             <label for="username" class="inline-block w-72">{{auth.username}}</label><strong id="username" class="inline-block w-1/2 px-4 py-1"></strong>
@@ -149,7 +149,7 @@
                 </li>
             </ul>
         </div>
-        <div class="flex flex-row items-center mb-4 border rounded-lg border-gray-400 px-2 pb-4" {% if user_data['prog_experience'] == "no" %} hidden {% endif %} id="languages">
+        <div class="flex flex-row items-center mb-4 border rounded-lg border-gray-400 px-2 pb-4" {% if user_data['prog_experience'] != "yes" %} style="display:none;" {% endif %} id="languages">
             <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
             <label class="inline-block w-1/2" for="languages">{{auth.languages}}</label><ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 ltr:pl-4 rtl:pr-4">
             <li class="flex flex-row items-center">
