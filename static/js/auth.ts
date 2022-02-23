@@ -204,15 +204,15 @@ export const auth = {
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
-        auth.success (auth.texts['password_updated'], '#success_password');
+        modal.alert(auth.texts['password_updated'], 3000, false);
         $ ('#old_password').val ('');
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
         if (response.responseText) {
-           auth.error(response.responseText);
+           modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
