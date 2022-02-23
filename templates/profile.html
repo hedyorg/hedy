@@ -137,34 +137,28 @@
                 <option value="">{{auth.select}}</option>
             </select>
         </div>
-        <div class="mb-4 clear-both">
+        <div class="mb-4">
             <button type="submit" class="green-btn mt-4">{{auth.update_profile}}</button>
         </div>
-        <div class="mb-4">
-            <div id="update_profile_error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-            <div id="update_profile_success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-        </div>
       </form>
-      <button class="red-btn" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
+        <div>
+             <button class="red-btn" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
+        </div>
    </div>
   <h1 id="password_toggle" class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#change_password').toggle()">{{auth.change_password}}</h1>
-   <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
+   <form class="js-validated-form bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.change_password}}</h2>
-    <div class="mb-4">
-        <label for="old_password">{{auth.current_password}}</label>
-        <input id="old_password" type=password required>
+    <div class="flex flex-row items-center mb-2">
+        <label for="old_password" class="inline-block w-72">{{auth.current_password}}</label>
+        <input id="old_password" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" minlength="6" type=password required>
     </div>
-    <div class="mb-4">
-        <label for="password">{{auth.new_password}}</label>
-        <input id="password" type=password required>
+    <div class="flex flex-row items-center mb-2">
+        <label for="password" class="inline-block w-72">{{auth.new_password}}</label>
+        <input id="password" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" minlength="6" type=password required>
     </div>
-    <div class="mb-4">
-        <label for="password_repeat">{{auth.repeat_new_password}}</label>
-        <input id="password_repeat" type=password required>
-    </div>
-    <div class="mb-4">
-        <div id="error_password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
-        <div id="success_password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
+    <div class="flex flex-row items-center mb-2">
+        <label for="password_repeat" class="inline-block w-72">{{auth.repeat_new_password}}</label>
+        <input id="password_repeat" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" minlength="6" type=password required>
     </div>
     <button type="submit" class="green-btn mt-4">{{auth.change_password}}</button>
   </form>
