@@ -93,12 +93,10 @@ class TestsLevel5(HedyTester):
   # combined tests
   def test_turn_forward(self):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
-    expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)
-    t.right(90)
-    t.forward(100)
-    time.sleep(0.1)""")
+    expected = HedyTester.dedent(
+      HedyTester.forward_transpiled(50),
+      "t.right(90)",
+      HedyTester.forward_transpiled(100))
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
   def test_ask_print(self):
