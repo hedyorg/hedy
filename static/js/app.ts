@@ -42,6 +42,8 @@ var StopExecution = false;
     exampleEditor.setOptions({ maxLines: Infinity });
     if ($(preview).hasClass('common-mistakes')) {
       exampleEditor.setOptions({ minLines: 10 });
+    } else {
+      exampleEditor.setOptions({ minLines: 2 });
     }
 
     if (dir === "rtl") {
@@ -55,7 +57,7 @@ var StopExecution = false;
       $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
         update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-    });
+      });
     }
     if($(preview).attr('level')){
       let level = String($(preview).attr('level'));
