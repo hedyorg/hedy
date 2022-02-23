@@ -40,6 +40,7 @@ var StopExecution = false;
 
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
+    exampleEditor.setOptions({ minLines: 2 });
     if ($(preview).hasClass('common-mistakes')) {
       exampleEditor.setOptions({ minLines: 10 });
     }
