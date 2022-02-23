@@ -1133,6 +1133,7 @@ def change_language():
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
+    print(body)
     try:
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
         if translated_code:
