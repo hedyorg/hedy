@@ -1,5 +1,6 @@
 import os
 import utils
+from app import ALL_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -450,7 +451,7 @@ def routes(app, database):
             return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('email'), str) or not valid_email(body['email']):
             return g.auth_texts.get('email_invalid'), 400
-        if not isinstance(body.get('language'), str):
+        if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
             return g.auth_texts.get('keyword_language_invalid'), 400
