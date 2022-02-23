@@ -122,13 +122,15 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
 
 
 def load_adventure_for_language(lang):
+    ADVENTURES[lang].set_keyword_language(g.keyword_lang)
     adventures_for_lang = ADVENTURES[lang]
 
     if not adventures_for_lang.has_adventures():
         # The default fall back language is English
         fall_back = FALL_BACK_ADVENTURE.get(lang, "en")
         adventures_for_lang = ADVENTURES[fall_back]
-    return adventures_for_lang.adventures_file['adventures']
+
+    return adventures_for_lang
 
 
 def load_adventures_per_level(lang, level):
@@ -147,7 +149,9 @@ def load_adventures_per_level(lang, level):
 
     all_adventures = []
 
-    adventures = load_adventure_for_language(lang)
+    adventure_object = load_adventure_for_language(lang)
+    keywords = adventure_object.keywords
+    adventures = adventure_object.adventures_file['adventures']
 
     for short_name, adventure in adventures.items():
         if not level in adventure['levels']:
@@ -161,9 +165,9 @@ def load_adventures_per_level(lang, level):
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure['default_save_name'],
-            'text': adventure['levels'][level].get('story_text', 'No Story Text'),
-            'example_code': adventure['levels'][level].get('example_code'),
-            'start_code': adventure['levels'][level].get('start_code', ''),
+            'text': adventure['levels'][level].get('story_text', 'No Story Text').format(**keywords),
+            'example_code': adventure['levels'][level].get('example_code').format(**keywords),
+            'start_code': adventure['levels'][level].get('start_code', '').format(**keywords),
             'loaded_program': '' if not loaded_programs.get(short_name) else {
                 'name': loaded_programs.get(short_name)['name'],
                 'code': loaded_programs.get(short_name)['code']
@@ -174,9 +178,9 @@ def load_adventures_per_level(lang, level):
         for i in range(2, 10):
             extra_story = {}
             if adventure['levels'][level].get('story_text_' + str(i)):
-                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i))
+                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i)).format(**keywords)
                 if adventure['levels'][level].get('example_code_' + str(i)):
-                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i))
+                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i)).format(**keywords)
                 extra_stories.append(extra_story)
             else:
                 break

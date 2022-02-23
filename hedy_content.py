@@ -86,7 +86,14 @@ class NoSuchDefaults:
 class Adventures:
   def __init__(self, language):
     self.language = language
+    self.keyword_lang = "en"
+    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
     self.adventures_file = YamlFile.for_file(f'coursedata/adventures/{self.language}.yaml')
+
+  def set_keyword_language(self, language):
+    if language != self.keyword_lang:
+        self.keyword_lang = language
+        self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
 
     # When customizing classes we only want to retrieve the name, (id) and level of each adventure
   def get_adventure_keyname_name_levels(self):
