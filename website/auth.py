@@ -1,5 +1,6 @@
 import os
 import utils
+from hedy import ALL_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -70,6 +71,8 @@ countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Alger
 def remember_current_user(db_user):
     session['user-ttl'] = times() + 5 * 60
     session['user'] = pick(db_user, 'username', 'email', 'is_teacher')
+    session['lang'] = db_user.get('lang', 'en')
+    session['keyword_lang'] = db_user.get('keyword_language', 'en')
 
 def pick(d, *requested_keys):
     return { key : d.get(key, None) for key in requested_keys }
@@ -276,7 +279,7 @@ def routes(app, database):
             return g.auth_texts.get('repeat_match_email'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return g.auth_texts.get('repeat_match_password'), 400
-        if not isinstance(body.get('language'), str):
+        if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
         if not isinstance(body.get('agree_terms'), bool) or not body.get('agree_terms'):
             return g.auth_texts.get('agree_invalid'), 400
@@ -448,7 +451,7 @@ def routes(app, database):
             return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('email'), str) or not valid_email(body['email']):
             return g.auth_texts.get('email_invalid'), 400
-        if not isinstance(body.get('language'), str):
+        if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
             return g.auth_texts.get('keyword_language_invalid'), 400
@@ -511,14 +514,17 @@ def routes(app, database):
             else:
                updates[field] = None
 
+        if updates:
+            DATABASE.update_user(username, updates)
+
         # We want to check if the user choose a new language, if so -> reload
         # We can use g.lang for this to reduce the db calls
         resp['reload'] = False
-        if g.lang != body['language'] or g.keyword_lang != body['keyword_language']:
+        print(session['lang'])
+        print(session['keyword_lang'])
+        if session['lang'] != body['language'] or session['keyword_lang'] != body['keyword_language']:
             resp['reload'] = True
 
-        if updates:
-            DATABASE.update_user(username, updates)
         remember_current_user(DATABASE.user_by_username(user['username']))
         return jsonify(resp)
 
