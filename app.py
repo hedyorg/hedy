@@ -87,13 +87,15 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
 
 
 def load_adventure_for_language(lang):
+    ADVENTURES[lang].set_keyword_language(g.keyword_lang)
     adventures_for_lang = ADVENTURES[lang]
 
     if not adventures_for_lang.has_adventures():
         # The default fall back language is English
         fall_back = FALL_BACK_ADVENTURE.get(lang, "en")
         adventures_for_lang = ADVENTURES[fall_back]
-    return adventures_for_lang.adventures_file['adventures']
+
+    return adventures_for_lang
 
 
 def load_adventures_per_level(lang, level):
@@ -112,7 +114,9 @@ def load_adventures_per_level(lang, level):
 
     all_adventures = []
 
-    adventures = load_adventure_for_language(lang)
+    adventure_object = load_adventure_for_language(lang)
+    keywords = adventure_object.keywords
+    adventures = adventure_object.adventures_file['adventures']
 
     for short_name, adventure in adventures.items():
         if not level in adventure['levels']:
@@ -126,9 +130,9 @@ def load_adventures_per_level(lang, level):
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure['default_save_name'],
-            'text': adventure['levels'][level].get('story_text', 'No Story Text'),
-            'example_code': adventure['levels'][level].get('example_code'),
-            'start_code': adventure['levels'][level].get('start_code', ''),
+            'text': adventure['levels'][level].get('story_text', 'No Story Text').format(**keywords),
+            'example_code': adventure['levels'][level].get('example_code').format(**keywords) if adventure['levels'][level].get('example_code') else '',
+            'start_code': adventure['levels'][level].get('start_code').format(**keywords) if adventure['levels'][level].get('start_code') else '',
             'loaded_program': '' if not loaded_programs.get(short_name) else {
                 'name': loaded_programs.get(short_name)['name'],
                 'code': loaded_programs.get(short_name)['code']
@@ -139,9 +143,9 @@ def load_adventures_per_level(lang, level):
         for i in range(2, 10):
             extra_story = {}
             if adventure['levels'][level].get('story_text_' + str(i)):
-                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i))
+                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i)).format(**keywords)
                 if adventure['levels'][level].get('example_code_' + str(i)):
-                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i))
+                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i)).format(**keywords)
                 extra_stories.append(extra_story)
             else:
                 break
@@ -270,7 +274,6 @@ def setup_language():
     if 'keyword_lang' not in session:
         session['keyword_lang'] = "en"
 
-
     g.lang = session['lang']
     g.keyword_lang = session['keyword_lang']
 
@@ -299,6 +302,7 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
 def enrich_context_with_user_info():
+    session['set_keyword_lang'] = False
     user = current_user()
     data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
     if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
@@ -307,8 +311,8 @@ def enrich_context_with_user_info():
         if user_data.get('language', '') in ALL_LANGUAGES.keys():
             g.lang = session['lang'] = user_data['language']
         if user_data.get('keyword_language', '') in ALL_LANGUAGES.keys():
-            g.keyword_lang = session['keyword_lang'] = "en"
-            #g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
+            g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
+            session['set_keyword_lang'] = True
 
         data['user_data'] = user_data
         if 'classes' in user_data:
@@ -722,7 +726,7 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message='not_enrolled')
 
-    adventures = load_adventure_for_language(g.lang)
+    adventures = load_adventure_for_language(g.lang).adventures_file['adventures']
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures_names = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
     else:
@@ -855,7 +859,9 @@ def index(level, step):
     customizations = {}
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
+
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
+    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -866,6 +872,7 @@ def index(level, step):
 
     if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
         return utils.error_page(error=404, ui_message='no_such_level')
+
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
@@ -1091,6 +1098,7 @@ def change_language():
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
+    print(body)
     try:
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
         if translated_code:
@@ -1111,8 +1119,13 @@ def current_keyword_language():
 
 @app.template_global()
 def other_keyword_language():
-    if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang != g.keyword_lang:
-        return make_keyword_lang_obj(g.lang)
+    # If the current keyword language isn't English: we are sure the other option is English
+    if g.keyword_lang != "en":
+        return make_keyword_lang_obj("en")
+    else:
+        # If the current language is in supported keyword languages and not equal to our current keyword language
+        if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang != g.keyword_lang:
+            return make_keyword_lang_obj(g.lang)
     return None
 
 @app.template_global()
