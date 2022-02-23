@@ -42,7 +42,7 @@ var currentLang: {
   _LENGTH: string;
 };
 
-switch(window.State.keyword_language){
+switch(window.State.lang){
   case 'nl':
     currentLang = LANG_nl;
     break;
