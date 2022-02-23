@@ -457,7 +457,6 @@ def routes(app, database):
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
             return g.auth_texts.get('keyword_language_invalid'), 400
 
-        # Todo TB -> Store all validations inside a function, the signup / profile code is duplicate!
         # Validations, optional fields
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
