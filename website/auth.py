@@ -505,14 +505,9 @@ def routes(app, database):
         username = user['username']
 
         updates = {}
-        for field in['country', 'birth_year', 'gender', 'language', 'keyword_language', 'prog_experience', 'experience_languages']:
+        for field in['country', 'birth_year', 'gender', 'language', 'keyword_language']:
             if field in body:
-               if field == 'experience_languages' and len(body[field]) == 0:
-                   updates[field] = None
-               else:
-                   updates[field] = body[field]
-            else:
-               updates[field] = None
+               updates[field] = body[field]
 
         if updates:
             DATABASE.update_user(username, updates)
