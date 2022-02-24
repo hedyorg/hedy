@@ -238,20 +238,27 @@ export const auth = {
     }
 
     if (op === 'reset') {
-      const payload = {username: auth.reset?.['username'], token: auth.reset?.['token'], password: values.password};
+      const payload = {
+        username: auth.reset?.['username'],
+        token: auth.reset?.['token'],
+        password: values.password,
+        password_repeat: values.password_repeat
+      };
 
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/reset', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        auth.success (auth.texts['password_resetted']);
+        modal.alert(auth.texts['password_resetted'], 2000, false);
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
         delete auth.reset;
-        auth.redirect ('login');
+        setTimeout(function (){
+          auth.redirect ('login');
+        }, 2000);
       }).fail (function (response) {
         if (response.responseText) {
-          return auth.error(response.responseText);
+          modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
