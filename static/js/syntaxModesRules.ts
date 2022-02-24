@@ -176,7 +176,7 @@ const LEVELS = [
     // Adds arithmetic
     name: 'level6',
     rules: pipe(baseRules(),
-      rule_printSpace(),
+      rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
       rule_ifElseOneLine(),
@@ -188,7 +188,7 @@ const LEVELS = [
   // level 7 adds repeat x times
     name: 'level7',
     rules: pipe(baseRules(),
-      rule_printSpace(),
+      rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
@@ -202,7 +202,7 @@ const LEVELS = [
     // Level 9 adds doubly indented blocks
     name: 'level8and9',
     rules: pipe(baseRules(),
-      rule_printSpace(),
+      rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
@@ -229,7 +229,7 @@ const LEVELS = [
     // Allows for with range
     name: 'level11and12',
     rules: pipe(baseRules(),
-      rule_printSpace(),
+      rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
