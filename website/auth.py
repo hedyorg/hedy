@@ -187,6 +187,8 @@ def store_new_account(account, email):
         'keyword_language': account['keyword_language'],
         'created': timems(),
         'verification_pending': hashed_token,
+        'level': 1,
+        'ad_index' : 0,
         'last_login': timems()
     }
 

@@ -137,6 +137,15 @@ def routes(app, database, achievements):
 
         achievement = None
         total_score = round(session.get('total_score', 0) / max_score(questions) * 100)
+        flag = 0
+        if total_score >= 60:
+            ad_index_db = 0
+            level_db = DATABASE.get_level(current_user () ['username'])
+            level_db += 1
+            # write to database
+            DATABASE.update_user(current_user() ['username'], {'level':level_db, 'ad_index':ad_index_db})
+            flag = 1
+
         username = current_user()['username']
         if username:
             statistics.add(username, lambda id_: DATABASE.add_quiz_finished(id_, level, total_score))
@@ -158,7 +167,8 @@ def routes(app, database, achievements):
                                questions=questions,
                                next_assignment=1,
                                cross=icons['cross'],
-                               check=icons['check'])
+                               check=icons['check'],
+                               flag=flag)
 
     @app.route('/quiz/submit_answer/<int:level_source>/<int:question_nr>/<int:attempt>', methods=["POST"])
     def submit_answer(level_source, question_nr, attempt):

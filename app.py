@@ -118,14 +118,20 @@ def load_adventures_per_level(lang, level):
     keywords = adventure_object.keywords
     adventures = adventure_object.adventures_file['adventures']
 
+    id_count = 0
     for short_name, adventure in adventures.items():
+        ad_index = DATABASE.get_ad(current_user () ['username'])
+        current_level =  DATABASE.get_level(current_user () ['username'])
         if not level in adventure['levels']:
             continue
         # end adventure is the quiz
         # if quizzes are not enabled, do not load it
         if short_name == 'end' and not config['quiz-enabled']:
             continue
-        current_adventure = {
+        print(ad_index, current_level)
+        if id_count <= ad_index or current_level > level:
+            current_adventure = {
+            'lock':'0',
             'short_name': short_name,
             'name': adventure['name'],
             'image': adventure.get('image', None),
@@ -136,8 +142,25 @@ def load_adventures_per_level(lang, level):
             'loaded_program': '' if not loaded_programs.get(short_name) else {
                 'name': loaded_programs.get(short_name)['name'],
                 'code': loaded_programs.get(short_name)['code']
+                }
             }
-        }
+        else:
+            print("test")
+            current_adventure = {
+            'lock':'1',
+            'short_name': short_name,
+            'name': adventure['name'],
+            'image': adventure.get('image', None),
+            'default_save_name': adventure['default_save_name'],
+            'text': adventure['levels'][level].get('story_text', 'No Story Text').format(**keywords),
+            'example_code': adventure['levels'][level].get('example_code').format(**keywords) if adventure['levels'][level].get('example_code') else '',
+            'start_code': adventure['levels'][level].get('start_code').format(**keywords) if adventure['levels'][level].get('start_code') else '',
+            'loaded_program': '' if not loaded_programs.get(short_name) else {
+                'name': loaded_programs.get(short_name)['name'],
+                'code': loaded_programs.get(short_name)['code']
+                }
+            }       
+        id_count = id_count + 1
         #Sometimes we have multiple text and example_code -> iterate these and add as well!
         extra_stories = []
         for i in range(2, 10):
@@ -452,7 +475,7 @@ def fix_code():
 
     return jsonify(response)
 
-
+RUN_COMMAND = []
 @app.route('/parse', methods=['POST'])
 def parse():
     body = request.json
@@ -472,6 +495,43 @@ def parse():
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', g.lang)
+
+# begin
+    ad_name = body['adventure_name']
+    current_level = int(body['level'])
+
+    adventures_for_level = load_adventures_per_level(g.lang, level)
+    for i in range(len(adventures_for_level)):
+        if adventures_for_level[i]['short_name'] == ad_name:
+            ad_index = i
+
+    ad_index_db = DATABASE.get_ad(current_user () ['username'])
+    level_db = DATABASE.get_level(current_user () ['username'])
+
+    level_def = load_yaml_rt(f'coursedata/level-defaults/{lang}.yaml')
+    commands = level_def[current_level]['commands']
+    global RUN_COMMAND
+    if len(RUN_COMMAND) == 0:
+        for i in range(len(commands)):
+            RUN_COMMAND.append(0)
+
+    if level_db == current_level:
+        # may unlock, flag may be set to 1
+        index = 0
+        for com in commands:
+            demo_code = com['demo_code']
+            demo_code += '\n'
+            print(code)
+            print(demo_code)
+            print(code==demo_code)
+            if code == demo_code:
+                RUN_COMMAND[index] = 1
+            index += 1
+        flag = 1
+        print(RUN_COMMAND)
+        for i in RUN_COMMAND:
+            if i == 0:
+                flag = 0
 
     # true if kid enabled the read aloud option
     read_aloud = body.get('read_aloud', False)
@@ -554,7 +614,42 @@ def parse():
         'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
         'adventure_name': body.get('adventure_name', None)
     })
-
+    if flag == 1:
+        max_index = LEVEL_MAX_NUM[current_level]
+        if level_db == current_level:
+            # unlock next level
+            ad_index_db = 0
+            level_db += 1
+            RUN_COMMAND = []
+            # write to database
+            DATABASE.update_user(current_user () ['username'], {'level':level_db, 'ad_index':ad_index_db})
+            
+        # else:
+        #     ad_index_db += 1
+        #     DATABASE.update_user(current_user (request) ['username'], {'level':level_db, 'ad_index':ad_index_db})
+        
+        for i in range(len(RUN_COMMAND)):
+            RUN_COMMAND[i] = 0
+    
+        response['flag'] = flag + 1
+        return jsonify(response)
+    
+    if ad_index == ad_index_db:
+        flag = 1
+    if flag == 1:
+        max_index = len(load_adventures_per_level(g.lang, current_level))
+        if max_index == ad_index_db:
+            # unlock next level
+            ad_index_db = 0
+            level_db += 1
+            RUN_COMMAND = []
+            # write to database
+            DATABASE.update_user(current_user() ['username'], {'level':level_db, 'ad_index':ad_index_db})
+        else:
+            ad_index_db += 1
+            DATABASE.update_user(current_user() ['username'], {'level':level_db, 'ad_index':ad_index_db})
+        
+    response['flag'] = flag
     return jsonify(response)
 
 

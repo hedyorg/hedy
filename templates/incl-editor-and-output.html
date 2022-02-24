@@ -125,7 +125,12 @@
           <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{ui.regress_button|replace("{level}", prev_level)}}</button>
         {% endif %}
         {% if next_level and (customizations['levels']|length == 0 or next_level in customizations['levels']) %}
-            <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ui.advance_button|replace("{level}", next_level)}}</button>
+        {% if next_level - 1 >= lock_level %}
+        <button class="grey-btn ltr:ml-1 rtl:mr-1" >{{ui.advance_button|replace("{level}", next_level)}}</button>
+      {% else %}
+      <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ui.advance_button|replace("{level}", next_level)}}</button>
+      {% endif %}
+            
         {% endif %}
       </div>
     </div>

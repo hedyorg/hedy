@@ -55,6 +55,19 @@ QUIZ_STATS = dynamo.Table(storage, 'quiz-stats', partition_key='id#level', sort_
                           indexed_fields=[dynamo.IndexKey('id', 'week')])
 
 class Database:
+    def get_level(self, username):
+        if username:
+            return USERS.get({'username': username})['level']
+        else:
+            return 1
+
+
+    def get_ad(self, username):
+        if username:
+            return USERS.get({'username': username})['ad_index']
+        else:
+            return 0
+            
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
         """Update the current quiz record with a new answer.
 

@@ -6,7 +6,7 @@ dyno = os.getenv('DYNO')
 athena_query = os.getenv('AWS_ATHENA_PREPARE_STATEMENT')
 
 config = {
-    'port': os.getenv ('PORT') or 8080,
+    'port': os.getenv ('PORT') or 5005,
     'session': {
         'cookie_name': 'hedy',
         # in minutes

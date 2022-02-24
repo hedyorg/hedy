@@ -14,6 +14,8 @@ from website.auth import current_user, is_teacher
 import re
 import utils
 from config import config
+import hedy
+from website import database
 
 class Translations:
   def __init__(self):
@@ -103,6 +105,14 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventures'] = adventures
   arguments_dict['adventure_name'] = adventure_name
+
+  arguments_dict['lock_level'] = (database.Database()).get_level(current_user () ['username']) 
+
+
+  temp = []
+  for i in range(hedy.HEDY_MAX_LEVEL):
+    temp.append(str(i+1))
+  arguments_dict['level_info1'] = temp
 
   # Merge level defaults into adventures so it is rendered as the first tab
   arguments_dict.update(**attr.asdict(level_defaults))

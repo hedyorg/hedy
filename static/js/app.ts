@@ -278,13 +278,25 @@ export function runit(level: string, lang: string, cb: () => void) {
         return;
       }
         runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
-        // If it is an error we throw due to program execution while another is running -> don't show and log it
+        
+          // If it is an error we throw due to program execution while another is running -> don't show and log it
         if (!(err.message == "\"program_interrupt\"")) {
           console.log(err);
           error.show(ErrorMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
         }
       });
+      setTimeout(function(){
+        if(response.flag == 1){
+          modal.alert('Congratulations on unlocking the next adventure!!!');
+        }
+        if(response.flag == 2){
+          modal.alert('Congratulations on unlocking the next level!!!');
+          
+        }
+    },2000);
+
+    setTimeout(function(){location.reload();},4000);
     }).fail(function(xhr) {
       console.error(xhr);
       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
