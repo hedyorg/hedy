@@ -352,20 +352,28 @@ def routes(app, database):
         if not username:
             return 'no username', 400
 
+        # Verify that user actually exists
         user = DATABASE.user_by_username(username)
-
         if not user:
             return 'invalid username/token', 403
 
-        # If user is verified, succeed anyway
+        # If user is already verified -> re-direct to landing-page anyway
         if not 'verification_pending' in user:
             return redirect('/landing-page')
 
+        # Verify the token
         if token != user['verification_pending']:
             return 'invalid username/token', 403
 
+        # Remove the token from the user
         DATABASE.update_user(username, {'verification_pending': None})
-        return redirect('/')
+
+        # We automatically login the user
+        cookie = make_salt()
+        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
+        remember_current_user(user)
+
+        return redirect('/landing-page')
 
     @app.route('/auth/logout', methods=['POST'])
     def logout():
