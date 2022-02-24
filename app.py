@@ -213,10 +213,8 @@ babel = Babel(app)
 def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
-
 """
     Some important notes relates to Flask-Babel usage:
-    
     -   We can always get a translation using gettext(u'english string')
         NOTE: We can shorten this notation by simply using _('english string')
     -   We can insert some variable like this: gettext(u'some string %(value)s', value=42)
@@ -232,6 +230,7 @@ def get_locale():
     - To update your files (when adding new strings):
         FIRST create new file:  pybabel extract -F babel.cfg -o messages.pot . 
         THEN:                   pybabel update -i messages.pot -d translations
+    LASTLY compile the files:   pybabel compile -d translations
 """
 
 
