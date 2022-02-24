@@ -1,3 +1,5 @@
+import textwrap
+
 import hedy
 from test_level_01 import HedyTester
 import hedy_translation
@@ -41,5 +43,90 @@ class TestsTranslationLevel3(HedyTester):
 
         result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
         expected = "print echo at random"
+
+        self.assertEqual(expected, result)
+
+    def test_issue_1856(self):
+        code = textwrap.dedent("""\
+        print Hoi Ik ben Hedy de Waarzegger
+        vraag is ask Wat wil je weten?
+        print vraag
+        antwoorden is ja, nee, misschien
+        print Mijn glazen bol zegt...
+        sleep 2
+        print antwoorden at random""")
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
+        expected = textwrap.dedent("""\
+        print Hoi Ik ben Hedy de Waarzegger
+        vraag is vraag Wat wil je weten?
+        print vraag
+        antwoorden is ja, nee, misschien
+        print Mijn glazen bol zegt...
+        slaap 2
+        print antwoorden op willekeurig""")
+
+        self.assertEqual(expected, result)
+
+    def test_issue_1856_reverse(self):
+        code = textwrap.dedent("""\
+        print Hoi Ik ben Hedy de Waarzegger
+        vraag is vraag Wat wil je weten?
+        print vraag
+        antwoorden is ja, nee, misschien
+        print Mijn glazen bol zegt...
+        slaap 2
+        print antwoorden op willekeurig""")
+
+        expected = textwrap.dedent("""\
+        print Hoi Ik ben Hedy de Waarzegger
+        vraag is ask Wat wil je weten?
+        print vraag
+        antwoorden is ja, nee, misschien
+        print Mijn glazen bol zegt...
+        sleep 2
+        print antwoorden at random""")
+
+        result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
+
+
+        self.assertEqual(expected, result)
+
+    def test_issue_1856_v3(self):
+        code = textwrap.dedent("""\
+        print Hoi Ik ben Hedy de Waarzegger
+        vraag is ask Wat wil je weten?
+        print vraag
+        antwoorden is ja, nee, misschien
+        print Mijn glazen bol zegt...
+        slaap 2
+        print antwoorden op willekeurig""")
+
+        expected = textwrap.dedent("""\
+        print Hoi Ik ben Hedy de Waarzegger
+        vraag is ask Wat wil je weten?
+        print vraag
+        antwoorden is ja, nee, misschien
+        print Mijn glazen bol zegt...
+        sleep 2
+        print antwoorden at random""")
+
+        result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
+
+        self.assertEqual(expected, result)
+
+    def test_add_remove_en_nl(self):
+        code = textwrap.dedent("""\
+        dieren is koe, kiep
+        add muis to dieren
+        remove koe from dieren
+        print dieren at random""")
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
+        expected = textwrap.dedent("""\
+        dieren is koe, kiep
+        voeg muis toe aan dieren
+        verwijder koe uit dieren
+        print dieren op willekeurig""")
 
         self.assertEqual(expected, result)

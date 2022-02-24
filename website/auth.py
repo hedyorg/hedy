@@ -1,6 +1,6 @@
 import os
-
 import utils
+from hedy import ALL_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -71,6 +71,8 @@ countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Alger
 def remember_current_user(db_user):
     session['user-ttl'] = times() + 5 * 60
     session['user'] = pick(db_user, 'username', 'email', 'is_teacher')
+    session['lang'] = db_user.get('lang', 'en')
+    session['keyword_lang'] = db_user.get('keyword_language', 'en')
 
 def pick(d, *requested_keys):
     return { key : d.get(key, None) for key in requested_keys }
@@ -98,6 +100,7 @@ def is_user_logged_in():
 def forget_current_user():
     session.pop('user', None) # We are not interested in the value of the use key.
     session.pop('achieved', None) # Delete session achievements if existing
+    session.pop('keyword_lang', None)  # Delete session achievements if existing
 
 
 def is_admin(user):
@@ -141,9 +144,70 @@ def login_user_from_token_cookie():
     if not token:
         return
 
+    # We update the login record with the current time -> this way the last login is closer to correct
+    DATABASE.record_login(token['username'])
     user = DATABASE.user_by_username(token['username'])
     if user:
         remember_current_user(user)
+
+
+def prepare_user_db(username, password):
+    hashed = hash(password, make_salt())
+
+    token = make_salt()
+    hashed_token = hash(token, make_salt())
+    username = username.strip().lower()
+
+    return username, hashed, hashed_token
+
+
+def validate_signup_data(account):
+    if not isinstance(account.get('username'), str):
+        return g.auth_texts.get('username_invalid')
+    if '@' in account.get('username') or ':' in account.get('username'):
+        return g.auth_texts.get('username_special')
+    if len(account.get('username').strip()) < 3:
+        return g.auth_texts.get('username_three')
+    if not isinstance(account.get('email'), str) or not utils.valid_email(account.get('email')):
+        return g.auth_texts.get('email_invalid')
+    if not isinstance(account.get('password'), str):
+        return g.auth_texts.get('password_invalid')
+    if len(account.get('password')) < 6:
+        return g.auth_texts.get('passwords_six')
+    return None
+
+
+def store_new_account(account, email):
+    username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])
+    user = {
+        'username': username,
+        'password': hashed,
+        'email': email,
+        'language': account['language'],
+        'keyword_language': account['keyword_language'],
+        'created': timems(),
+        'verification_pending': hashed_token,
+        'last_login': timems()
+    }
+
+    for field in ['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
+        if field in account:
+            if field == 'experience_languages' and len(account[field]) == 0:
+                continue
+            user[field] = account[field]
+
+    DATABASE.store_user(user)
+
+    # If this is an e2e test, we return the email verification token directly instead of emailing it.
+    if is_testing_request(request):
+        resp = make_response({'username': username, 'token': hashed_token})
+    # Otherwise, we send an email with a verification link and we return an empty body
+    else:
+        send_email_template('welcome_verify', email,
+                            email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
+                                username) + '&token=' + urllib.parse.quote_plus(hashed_token))
+        resp = make_response({})
+    return user, resp
 
 # Note: translations are used only for texts that will be seen by a GUI user.
 def routes(app, database):
@@ -181,7 +245,11 @@ def routes(app, database):
             DATABASE.record_login(user['username'], new_hash)
         else:
             DATABASE.record_login(user['username'])
-        resp = make_response({})
+
+        if user.get('is_teacher'):
+            resp = make_response({'teacher': True})
+        else:
+            resp = make_response({'teacher': False})
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
@@ -199,26 +267,25 @@ def routes(app, database):
         # Validations, mandatory fields
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
-        if not isinstance(body.get('username'), str):
-            return g.auth_texts.get('username_invalid'), 400
-        if '@' in body['username'] or ':' in body['username']:
-            return g.auth_texts.get('username_special'), 400
-        if len(body['username'].strip()) < 3:
-            return g.auth_texts.get('username_three'), 400
-        if not isinstance(body.get('email'), str) or not valid_email(body['email']):
-            return g.auth_texts.get('email_invalid'), 400
+
+        # Validate the essential data using a function -> also used for multiple account creation
+        validation = validate_signup_data(body)
+        if validation:
+            return validation, 400
+
+        # Validate fields only relevant when creating a single user account
         if not isinstance(body.get('mail_repeat'), str) or not valid_email(body['mail_repeat']):
             return g.auth_texts.get('repeat_match_email'), 400
         if body['email'] != body['mail_repeat']:
             return g.auth_texts.get('repeat_match_email'), 400
-        if not isinstance(body.get('password'), str):
-            return g.auth_texts.get('password_invalid'), 400
-        if len(body['password']) < 6:
-            return g.auth_texts.get('password_six'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return g.auth_texts.get('repeat_match_password'), 400
-        if not isinstance(body.get('language'), str):
+        if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
+        if not isinstance(body.get('agree_terms'), bool) or not body.get('agree_terms'):
+            return g.auth_texts.get('agree_invalid'), 400
+        if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
+            return g.auth_texts.get('keyword_language_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
@@ -246,14 +313,10 @@ def routes(app, database):
         if email:
             return g.auth_texts.get('exists_email'), 403
 
-        hashed = hash(body['password'], make_salt())
+        # We receive the pre-processed user and response package from the function
+        user, resp = store_new_account(body, body['email'].strip().lower())
 
-        token = make_salt()
-        hashed_token = hash(token, make_salt())
-        username = body['username'].strip().lower()
-        email = body['email'].strip().lower()
-
-        if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
+        if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] is True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
                 mailchimp_subscribe_user(email)
@@ -261,43 +324,23 @@ def routes(app, database):
             else:
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
 
+        # If someone wants to be a Teacher -> sent a mail to manually set it
         if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
             send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
 
-        user = {
-            'username': username,
-            'password': hashed,
-            'email':    email,
-            'created':  timems(),
-            'verification_pending': hashed_token,
-            'last_login': timems()
-        }
-
-        for field in['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
-           if field in body:
-               if field == 'experience_languages' and len(body[field]) == 0:
-                   continue
-               user[field] = body[field]
-
-        DATABASE.store_user(user)
+        # If someone agrees to the third party contacts -> sent a mail to manually write down
+        if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
+            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', email, f'<p>{email}</p>')
 
         # We automatically login the user
         cookie = make_salt()
         DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
-
-        # If this is an e2e test, we return the email verification token directly instead of emailing it.
-        if is_testing_request(request):
-            resp = make_response({'username': username, 'token': hashed_token})
-        # Otherwise, we send an email with a verification link and we return an empty body
-        else:
-            send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
-            resp = make_response({})
-
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
-        resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
-        remember_current_user(user)
+        resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
+                        max_age=365 * 24 * 60 * 60)
 
+        remember_current_user(user)
         return resp
 
     @app.route('/auth/verify', methods=['GET'])
@@ -349,7 +392,6 @@ def routes(app, database):
     @requires_login
     def change_student_password(user):
         body = request.json
-        print(body)
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('username'), str):
@@ -410,9 +452,12 @@ def routes(app, database):
             return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('email'), str) or not valid_email(body['email']):
             return g.auth_texts.get('email_invalid'), 400
-        if not isinstance(body.get('language'), str):
+        if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
+        if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
+            return g.auth_texts.get('keyword_language_invalid'), 400
 
+        # Todo TB -> Store all validations inside a function, the signup / profile code is duplicate!
         # Validations, optional fields
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
@@ -461,17 +506,26 @@ def routes(app, database):
         username = user['username']
 
         updates = {}
-        for field in['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
-           if field in body:
+        for field in['country', 'birth_year', 'gender', 'language', 'keyword_language', 'prog_experience', 'experience_languages']:
+            if field in body:
                if field == 'experience_languages' and len(body[field]) == 0:
                    updates[field] = None
                else:
                    updates[field] = body[field]
-           else:
+            else:
                updates[field] = None
 
         if updates:
             DATABASE.update_user(username, updates)
+
+        # We want to check if the user choose a new language, if so -> reload
+        # We can use g.lang for this to reduce the db calls
+        resp['reload'] = False
+        print(session['lang'])
+        print(session['keyword_lang'])
+        if session['lang'] != body['language'] or session['keyword_lang'] != body['keyword_language']:
+            resp['reload'] = True
+
         remember_current_user(DATABASE.user_by_username(user['username']))
         return jsonify(resp)
 

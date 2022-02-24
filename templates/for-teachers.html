@@ -4,7 +4,7 @@
 <div id="teacher_classes" class="flex flex-col items-center pb-4 border-b-2">
     <h2>{{auth.teacher_classes}}</h2>
     {% if teacher_classes %}
-      <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4 text-le">
+      <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4">
         <thead class="bg-gray-200">
           <tr><th class="p-2 w-3/4">{{auth.name}}</th>
               <th class="p-2">{{auth.students[0]|upper}}{{auth.students[1:]}}</th>
@@ -49,19 +49,60 @@
     {% endif %}
     <button class="green-btn mt-4" onclick="hedyApp.create_adventure ()">{{ auth.create_adventure }}</button>
 </div>
+<div class="flex flex-col items-center mt-4 border-b-2 pb-4">
+    <h2>{{ auth.create_student_accounts }}</h2>
+    <button class="green-btn mt-4" onclick="window.open('/for-teachers/create-accounts', '_self');">
+        {{ auth.create }}
+    </button>
+</div>
 <div class="w-full mt-4">
     <h2 class="text-center">{{ content['title'] }}</h2>
     <div class="flex flex-row justify-center mb-4 pb-4 border-b-2">
     {% for section in content['sections'] %}
-        <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{section_key}}" onclick="hedyApp.show_doc_section('{{loop.index}}')">{{section.title}}</button>
+        <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{loop.index}}" onclick="hedyApp.show_doc_section('{{loop.index}}')">{{section.title}}</button>
     {% endfor %}
     </div>
     {% for section in content['sections'] %}
-        <div class="section hidden turn-pre-into-ace" id="section-{{loop.index}}">
-        {% for subsection in section['subsections'] %}
-            <h4>{{ subsection.title }}</h4>
-            <p>{{ subsection.text|commonmark }}</p>
-        {% endfor %}
+        <div class="section hidden" id="section-{{loop.index}}">
+        {% if section.key != "common_mistakes" %}
+            {% for subsection in section['subsections'] %}
+                <h4>{{ subsection.title }}</h4>
+                <p>{{ subsection.text|commonmark }}</p>
+            {% endfor %}
+        {% else %}
+            <p>{{ section.intro|commonmark }}</p>
+            <div class="flex flex-row justify-center">
+                {% for level in section['levels'] %}
+                    <button class="green-btn text-xl p-4 mx-2 common-mistakes-button" id="cm-button-{{loop.index}}" onclick="hedyApp.show_common_mistakes('{{loop.index}}')">Level {{ level.level }}</button>
+                {% endfor %}
+            </div>
+            {% for level in section['levels'] %}
+                <div class="common-mistakes-section hidden turn-pre-into-ace mt-4" id="common_mistakes-{{loop.index}}">
+                    {% for mistake_section in level.sections %}
+                        <div class="mt-12">
+                            <h2>{{ mistake_section.title }}</h2>
+                            {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
+                                <p>{{ mistake_section.example.error_text|commonmark }}</p>
+                                <div class="w-1/2 turn-pre-into-ace my-5">
+                                    <pre class="common-mistakes no-copy-button" level="{{ level.level }}">{{ mistake_section.example.error_code }}</pre>
+                                </div>
+                                <p>{{ mistake_section.example.solution_text|commonmark }}</p>
+                                <div class="w-1/2 turn-pre-into-ace my-5">
+                                    <pre class="common-mistakes no-copy-button" level="{{ level.level }}">{{ mistake_section.example.solution_code }}</pre>
+                                </div>
+                            {% else %}
+                                <p>{{ mistake_section.text|commonmark }}</p>
+                                {% if mistake_section.code %}
+                                     <div class="w-1/2 turn-pre-into-ace my-5">
+                                         <pre class="common-mistakes no-copy-button" level="{{ level.level }}">{{ mistake_section.code }}</pre>
+                                     </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endif %}
         </div>
     {% endfor %}
 </div>

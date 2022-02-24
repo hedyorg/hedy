@@ -42,16 +42,19 @@ class TestsLevel3(HedyTester):
         code=code,
         max_level=6,
         expected=expected,
-        lang='ar')
+        lang='ar',
+        translate=False
+        )
 
-  def test_assign_arabic_comma(self):
-    code = "animals is cat، dog، platypus"
+  def test_assign_arabic_comma_and_is(self):
+    code = "animals هو cat، dog، platypus"
     expected = "animals = ['cat', 'dog', 'platypus']"
 
     self.multi_level_tester(
       code=code,
-      max_level=11,
-      expected=expected)
+      max_level=6, #TODO: should be 11 but Arabic translation is not ready over level 6 (misses _REPEAT) can be extended when translation is ready
+      expected=expected,
+      lang='ar')
 
   def test_assign_comma_arabic(self):
     code = "صديقي هو احمد، خالد، حسن"
@@ -93,7 +96,7 @@ class TestsLevel3(HedyTester):
     expected = textwrap.dedent("""\
     print(f'hallo!')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, translate=False)
 
   def test_print_asterisk(self):
     code = "print *Jouw* favoriet is dus kleur"
@@ -111,7 +114,7 @@ class TestsLevel3(HedyTester):
 
     output = "'Welcome to OceanView! '"
 
-    self.single_level_tester(code=code, expected=expected, output=output)
+    self.single_level_tester(code=code, expected=expected, output=output, translate=False)
 
   def test_print_slashes(self):
     code = "print Welcome to O/ceanView"
@@ -191,6 +194,23 @@ class TestsLevel3(HedyTester):
       expected=expected,
       extra_check_function=self.result_in(list),
       max_level=11)
+
+
+  def test_assign_var_to_var(self):
+    code = textwrap.dedent("""\
+    dier1 is hond
+    dier2 is dier1
+    print dier1""")
+
+    expected = textwrap.dedent("""\
+    dier1 = 'hond'
+    dier2 = dier1
+    print(f'{dier1}')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=5)
 
   def test_assign_list_exclamation_mark(self):
     code = textwrap.dedent("""\
@@ -325,7 +345,7 @@ class TestsLevel3(HedyTester):
     expected = textwrap.dedent("""\
     print(f'hallo wereld')""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, translate=False)
 
   #combined tests
   def test_ask_print(self):
@@ -514,12 +534,13 @@ class TestsLevel3(HedyTester):
     self.single_level_tester(
       # max_level=3,
       code=code,
-      expected=expected
+      expected=expected,
+      translate=False
     )
 
   def test_add_ask_to_list(self):
     code = textwrap.dedent("""\
-    color is ask what is your favorite color? 
+    color is ask what is your favorite color?
     colors is green, red, blue
     add color to colors
     print colors at random""")

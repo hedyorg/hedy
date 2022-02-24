@@ -7,8 +7,8 @@ ui:
     save_code_button: "Code opslaan"
     edit_code_button: "Pas de code aan"
     share_code_button: "Code opslaan & delen"
-    regress_button: "Ga terug naar level"
-    advance_button: "Ga naar level"
+    regress_button: "Ga terug naar level {level}"
+    advance_button: "Ga naar level {level}"
     developers_mode: "Programmeursmodus"
     enter_text: "Vul hier je antwoord in..."
     enter: "Invullen"
@@ -52,6 +52,8 @@ ui:
     retrieve_class: "Alleen leerkrachten mogen klassen openen"
     page_not_found: "We konden deze pagina niet vinden!"
     user_not_private: "Deze gebruiker bestaat niet of heeft geen openbaar profiel"
+    retrieve_adventure: "Jij mag dit avontuur niet bekijken!"
+    no_such_adventures: "Dit avontuur bestaat niet!"
 ClientErrorMessages:
     Transpile_success:
       - "Goed gedaan!"
@@ -121,17 +123,21 @@ Auth:
     email_repeat: "Herhaal je email"
     password: "Wachtwoord"
     password_repeat: "Herhaal je wachtwoord"
-    birth_year: "Geboortejaar (optioneel)"
-    gender: "Geslacht (optioneel)"
+    birth_year: "Geboortejaar"
+    gender: "Geslacht"
     preferred_language: "Voorkeurstaal"
+    preferred_keyword_language: "Commando voorkeurstaal"
     set_preferred_lang: "Hedy accounts kunnen vanaf nu een voorkeurstaal kiezen. Je kunt er voor jouw account een instellen via \"Mijn profiel\""
     select: "Kies"
     female: "Meisje"
     male: "Jongen"
     other: "Anders"
-    country: "Land waarin je woont (optioneel)"
-    is_teacher: "Ben je leerkracht? Selecteer dit veld om een leerkrachtenaccount aan te vragen"
+    country: "Land waarin je woont"
+    is_teacher: "Wil je een lerarenaccount aanvragen?"
     subscribe_newsletter: "Schrijf je in voor de nieuwsbrief"
+    agree_with: "Ik ga akkoord met de"
+    privacy_terms: "privacyverklaring"
+    agree_third_party: "Ik geef toestemming om benaderd te worden door partners van Universiteit Leiden (optioneel)"
     already_account: "Heb je al een account?"
     login_long: "Inloggen"
     login: "Log in"
@@ -140,6 +146,11 @@ Auth:
     account: "Mijn account"
     account_overview: "Account overzicht"
     explore_programs: "Programma's ontdekken"
+    explore_explanation: |
+        Op deze pagina kun je kijken naar programma's gemaakt door andere Hedy gebruikers. Je kunt filteren op Hedy level en avontuur.
+        Klik op "Bekijk programma" om het programma te open en te proberen, Programma's met een rode titel hebben een foutje. Je kunt deze nog steeds openen, maar proberen geeft een error.
+        Je kunt natuurlijk proberen het foutje zelf op te lossen! Als de maker van het programma een openbaar profiel heeft kun je op de gebruikersnaam klikken om die te bezoeken.
+        Daar kun je al hen gedeelde programma's zien en nog veel meer!
     statistics: "Mijn statistieken"
     public_profile: "Openbaar profiel"
     profile_picture: "Profielfoto"
@@ -170,9 +181,11 @@ Auth:
     email_invalid: "Vul een geldig email in."
     year_invalid: "Dit is geen geldig jaartal, die moet liggen tussen 1900 en "
     language_invalid: "Dit is geen geldige taal"
+    keyword_language_invalid: "Dit is geen geldige commando taal (kies Engels of je eigen taal)"
     gender_invalid: "Dit gender is niet geldig, kies uit (Meisje, Jongen, Anders)"
     experience_invalid: "Dit is geen geldige programmeerervaring, kies uit (Ja, Nee)"
     programming_invalid: "Dit is geen geldige programmeertaal, kies een ander"
+    agree_invalid: "Je moet akkoord gaan met de privacyverklaring"
     token_invalid: "Je token is ongeldig"
     teacher_invalid: "Jouw leraren waarde is ongeldig"
     image_invalid: "Jouw profielfoto is ongeldig"
@@ -192,6 +205,7 @@ Auth:
 
     please_username_email: "Vul een gebruikersnaam of email adres in."
     profile_updated: "Je profiel is aangepast."
+    profile_updated_reload: "Je profiel is aangepast, pagina wordt herladen."
     public_profile_updated: "Je openbare profiel is aangepast"
     public_profile_visit: "Je kunt jouw openbare profiel bezoeken! Klik"
     public_profile_link: "hier"
@@ -223,6 +237,7 @@ Auth:
     teacher_invitation_require_login: "Om je leerkrachtenaccount te activeren moet je eerst inloggen. Als je nog geen account hebt, maak dan eerst een account aan."
     teacher_welcome: "Welkom bij Hedy! Jouw account is omgezet naar een leerkrachtenaccount. Je kan nu klassen maken en er leerlingen in uitnodigen."
     examples_used: "Je hebt jouw maximaal aantal voorbeeldprogramma's voor dit level al gebruikt! Probeer nu zelf iets te programmeren."
+    translate_error: "Er is iets misgegaan met het vertalen van de code. Probeer je code te runnen om te kijken of er misschien een foutje in zit. Code met foutjes kan niet vertaald worden."
 
   # These variables are added here to make the code simpler, but conceptually they belong to the UI.
     program_header: "Mijn programma's"
@@ -265,8 +280,8 @@ Auth:
     invite_prompt: "Vul een gebruikersnaam in"
     delete_invite_prompt: "Weet je zeker dat je deze uitnodiging wilt verwijderen?"
     student_not_existing: "Deze gebruikersnaam bestaat niet"
-    student_already_in_class: "Deze student zit al in jouw klas"
-    student_already_invite: "Deze student heeft al een openstaande uitnodiging"
+    student_already_in_class: "Deze leerling zit al in jouw klas"
+    student_already_invite: "Deze leerling heeft al een openstaande uitnodiging"
     invite_message: "Je hebt een uitnodiging ontvangen voor de klas"
     sent_by: "Deze uitnodiging is verstuurd door"
     my_messages: "Mijn berichten"
@@ -315,6 +330,37 @@ Auth:
     reset_adventure_prompt: "Weet je zeker dat je alle geselecteerde avonturen wilt wissen?"
     reset_adventures: "Wis gekozen avonturen"
     remove_customization: "Verwijder Personalisatie"
+    other_settings: "Andere instellingen"
+    option: "Optie"
+    mandatory_mode: "Verplichte programmeursmodus"
+    hide_cheatsheet: "Verberg spiekbriefje"
+    opening_date: "Openingsdatum"
+    opening_dates: "Openingsdata"
+    directly_available: "Gelijk open"
+
+    #Multi-accounts adding
+    create_student_accounts: "Maak leerling accounts"
+    create_accounts: "Meerdere accounts aanmaken"
+    add: "Toevoegen"
+    accounts: "Accounts"
+    select_class: "Kies klas"
+    reset_view: "Reset"
+    create: "Accounts aanmaken"
+    create_accounts_prompt: "Weet je zeker dat je deze accounts wilt aanmaken?"
+    no_accounts: "Er zijn geen accounts om aan te maken."
+    unique_usernames: "Alle gebruikersnamen moeten uniek zijn."
+    unique_emails: "Alle e-mailadressen moeten uniek zijn."
+    passwords_six: "Alle wachtwoorden moeten 6 of meer karakters zijn."
+    class_invalid: "Deze klas id is ongeldig."
+    usernames_exist: "Een of meerdere gebruikersnamen is al in gebruik."
+    emails_exist: "Een of meerdere e-mailadressen is al in gebruik."
+    accounts_created: "Account succesvol aangemaakt."
+    accounts_intro: |
+        Op deze pagina kun je accounts aan maken voor meerdere studenten tegelijkertijd. Ook is het mogelijk ze gelijk toe te voegen aan een klas.
+        Door op het groene kruisje rechtsonderin te klikken kun je meer rijen toevoegen. Met het rode kruisje kun je een rij weer verwijderen.
+        Zorg ervoor dat alle rijen gevuld zijn voordat je klikt op "Accounts aanmaken". Denk eraan dat elke gebruikersnaam en elk e-mailadres uniek moet zijn. 
+        Ook moet het wachtwoord <b>minimaal</b> 6 tekens zijn.
+    
     #Adventure customizations
     customize_adventure: "Avontuur aanpassen"
     general_settings: "Algemene instellingen"

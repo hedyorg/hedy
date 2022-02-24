@@ -64,7 +64,7 @@ class TestsLevel2(HedyTester):
     code = "print 'Welcome to OceanView!'"
     expected = textwrap.dedent("""\
     print(f'\\'Welcome to OceanView! \\'')""")
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, translate=False)
 
   def test_print_slashes(self):
     code = "print Welcome to O/ceanView"
@@ -363,20 +363,4 @@ class TestsLevel2(HedyTester):
       code=code,
       max_level=2,
       exception=hedy.exceptions.WrongLevelException
-    )
-
-  def test_chained_assignments(self):
-    code = textwrap.dedent("""\
-    a is dog
-    b is a
-    print a b""")
-
-    expected = textwrap.dedent("""\
-    a = 'dog'
-    b = 'a'
-    print(f'{a} {b}')""")
-    self.multi_level_tester(
-      max_level=3,
-      code=code,
-      expected=expected
     )

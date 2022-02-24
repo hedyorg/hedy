@@ -16,9 +16,12 @@ interface User {
   password_repeat?: string;
   birth_year?: number;
   language?: string,
+  keyword_language?: string,
   country?: string;
   gender?: string;
   subscribe?: string;
+  agree_terms?: string;
+  agree_third_party?: string;
   prog_experience?: 'yes' | 'no';
   experience_languages?: string[];
   is_teacher?: string;
@@ -30,9 +33,11 @@ interface UserForm {
   password?: string;
   birth_year?: string;
   language?: string,
+  keyword_language?: string,
   country?: string;
   gender?: string;
   subscribe?: string;
+  agree_terms?: string;
   mail_repeat?: string;
   password_repeat?: string;
   old_password?: string;
@@ -102,11 +107,14 @@ export const auth = {
         password: values.password,
         password_repeat: values.password_repeat,
         language: values.language,
+        keyword_language: values.keyword_language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
-        subscribe: $('#subscribe').prop('checked'),
         is_teacher: $('#is_teacher').prop('checked'),
+        subscribe: $('#subscribe').prop('checked'),
+        agree_terms: $('#agree_terms').prop('checked'),
+        agree_third_party: $('#agree_third_party').prop('checked'),
         prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
@@ -121,7 +129,7 @@ export const auth = {
       }).done (function () {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin();
+        afterLogin({"teacher": false});
       }).fail (function (response) {
         auth.clear_error();
         if (response.responseText) {
@@ -138,10 +146,10 @@ export const auth = {
         url: '/auth/login',
         data: JSON.stringify ({username: values.username, password: values.password}),
         contentType: 'application/json; charset=utf-8'
-      }).done (function () {
+      }).done (function (response) {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin();
+        afterLogin({"teacher": response['teacher']});
       }).fail (function (response) {
         auth.clear_error();
         if (response.responseText) {
@@ -156,6 +164,7 @@ export const auth = {
       const payload: User = {
         email: values.email,
         language: values.language,
+        keyword_language: values.keyword_language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
@@ -169,14 +178,18 @@ export const auth = {
         type: 'POST', url: '/profile',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
-      }).done (function () {
-        auth.success (auth.texts['profile_updated']);
-        setTimeout (function () {location.reload ()}, 1500);
+      }).done (function (response) {
+        if (response.reload) {
+          modal.alert(auth.texts['profile_updated_reload'], 2000, false);
+          setTimeout (function () {location.reload ()}, 2000);
+        } else {
+          modal.alert(auth.texts['profile_updated'], 3000, false);
+        }
       }).fail (function (response) {
         if (response.responseText) {
-           auth.error(response.responseText);
+          modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(response.responseText, 3000, true);
         }
       });
     }
@@ -350,6 +363,19 @@ if (window.location.pathname === '/signup') {
   }
 }
 
+$("#language").change(function () {
+    const lang = $(this).val();
+    $('#keyword_language').val("en");
+    if (lang == "en" || !($('#' + lang + '_option').length)) {
+      $('#keyword_lang_container').hide();
+    } else {
+      $('.keyword_lang_option').hide();
+      $('#en_option').show();
+      $('#' + lang + '_option').show();
+      $('#keyword_lang_container').show();
+    }
+});
+
 $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
    return false;
@@ -362,7 +388,7 @@ $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
  * - Check if we were supposed to be joining a class. If so, join it.
  * - Otherwise redirect to "my programs".
  */
-async function afterLogin() {
+async function afterLogin(loginData: any) {
   const savedProgramString = localStorage.getItem('hedy-first-save');
   const savedProgram = savedProgramString ? JSON.parse(savedProgramString) : undefined;
 
@@ -388,6 +414,10 @@ async function afterLogin() {
     return auth.redirect(redirect);
   }
 
+  // If the user is a teacher -> re-direct to for-teachers page after login
+  if (loginData['teacher']) {
+    return auth.redirect('for-teachers');
+  }
   auth.redirect('programs');
 }
 

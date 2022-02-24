@@ -2,6 +2,9 @@
 
 html {
   @apply font-light;
+  /* https://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page */
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
 }
 
 .font-slab {
@@ -23,9 +26,6 @@ h3 {
 h4 {
   @apply font-bold text-base;
 }
-
-
-
 
 * + p, * + ul, * + ol, * + pre {
   @apply mt-4;
@@ -215,29 +215,25 @@ ol {
 }
 
 /* AUTH */
-
-form.auth {
-  border: solid 1px #eeeeee;
-  padding-bottom: 10px;
+input[type=checkbox] {
+  @apply appearance-none border border-gray-400 w-4 h-4;
 }
 
-form.auth label {
-  width: 140px;
-  display: inline-block;
+#signup input:required, #signup select:required, #update_profile input:required {
+  @apply border border-red-400;
 }
 
-form.auth input {
-  padding: 5px;
-  border: solid 2px grey;
+/* Make this !important to it over-writes the red required border when valid */
+input:required:valid, select:required:valid {
+  @apply border-green-400 !important;
 }
 
-form.auth .pointer {
-  cursor: pointer;
+input[type=checkbox]:checked {
+  @apply bg-green-400 border-green-600;
 }
 
-form.auth select {
-  padding: 5px;
-  width: 180px;
+input, select {
+  @apply border border-gray-400;
 }
 
 table.users thead {

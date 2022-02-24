@@ -28,13 +28,23 @@ var StopExecution = false;
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
+  let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
+    counter += 1;
     $(preview).addClass('text-lg rounded');
+    $(preview).attr('id', "code_block_" + counter);
+    // We set the language of the editor to the current keyword_language -> needed when copying to main editor
+    $(preview).attr('lang', <string>window.State.keyword_language);
     $(preview).addClass('overflow-x-hidden');
-    const exampleEditor = turnIntoAceEditor(preview, true)
+    const exampleEditor = turnIntoAceEditor(preview, true);
+
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
-    exampleEditor.setOptions({ minLines: 2 });
+    if ($(preview).hasClass('common-mistakes')) {
+      exampleEditor.setOptions({ minLines: 10 });
+    } else {
+      exampleEditor.setOptions({ minLines: 2 });
+    }
 
     if (dir === "rtl") {
          exampleEditor.setOptions({ rtl: true });
@@ -43,16 +53,15 @@ var StopExecution = false;
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
     if (! $(preview).hasClass('no-copy-button')) {
-      const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
+      const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 60 }).appendTo(preview);
       $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
+        update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
       });
     }
-    if($(preview).attr('id')){
-      // @ts-ignore
-      let level = String($(preview).attr('id'));
-      const mode = getHighlighter(parseInt(level));
-      exampleEditor.session.setMode(mode);
+    if($(preview).attr('level')){
+      let level = String($(preview).attr('level'));
+      exampleEditor.session.setMode(getHighlighter(level));
     }
   }
 
@@ -163,8 +172,16 @@ var StopExecution = false;
       // When it is the main editor -> we want to show line numbers!
       if (element.getAttribute('id') === "editor") {
         editor.setOptions({
-        showGutter: true
-      });
+          showGutter: true
+        });
+      }
+      if ($(element).hasClass('common-mistakes')) {
+        $(element).height("22rem");
+        editor.setOptions({
+          showGutter: true,
+          showPrintMargin: true,
+          highlightActiveLine: true
+        });
       }
     }
 
@@ -175,7 +192,7 @@ var StopExecution = false;
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
       if (window.State.level) {
-        const mode = getHighlighter(parseInt(window.State.level));
+        const mode = getHighlighter(window.State.level);
         editor.session.setMode(mode);
       }
     }
@@ -184,7 +201,7 @@ var StopExecution = false;
   }
 })();
 
-export function getHighlighter(level: number) {
+export function getHighlighter(level: string) {
   const modeExceptions: Record<string, string> = {
         '8': 'ace/mode/level8and9',
         '9': 'ace/mode/level8and9',
@@ -304,7 +321,6 @@ export function pushAchievement(achievement: string) {
     dataType: 'json'
     }).done(function(response: any) {
       if (response.achievements) {
-        console.log(response.achievements);
         showAchievements(response.achievements, false, "");
       }
   });
@@ -454,6 +470,11 @@ export function tryPaletteCode(exampleCode: string) {
 
   var MOVE_CURSOR_TO_END = 1;
   editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  //As the commands try-it buttons only contain english code -> make sure the selected language is english
+  if (!($('#editor').attr('lang') == 'en')) {
+      $('#editor').attr('lang', 'en');
+      update_view("main_editor_keyword_selector", "en");
+  }
   window.State.unsaved_changes = false;
 }
 
@@ -590,16 +611,14 @@ function change_shared (shared: boolean, index: number) {
   }
 }
 
-export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
-
-  var share = function (id: string) {
-    $.ajax({
+function share_function(id: string, index: number, Public: boolean, parse_error: boolean) {
+  $.ajax({
       type: 'POST',
       url: '/programs/share',
       data: JSON.stringify({
         id: id,
-        public: Public
+        public: Public,
+        error: parse_error
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -619,11 +638,11 @@ export function share_program (level: number, lang: string, id: string | true, i
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
-  }
+}
 
+function verify_call_index(level:number, lang: string, id: string | true, index: number, Public: boolean, parse_error: boolean) {
   // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
-  if (id !== true) return share (id);
-
+  if (id !== true) return share_function(id, index, Public, parse_error);
   // Otherwise, we save the program and then share it.
   // Saving the program makes things way simpler for many reasons: it covers the cases where:
   // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
@@ -634,9 +653,66 @@ export function share_program (level: number, lang: string, id: string | true, i
         return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
       if (err && err.Error)
         return error.show(ErrorMessages['Transpile_error'], err.Error);
-      share(resp.id);
+      share_function(resp.id, index, Public, parse_error);
     });
+}
 
+function get_parse_code_by_id(level: number, lang:string, id:string | true,  index: number, Public: boolean) {
+  $.ajax({
+      type: 'POST',
+      url: '/parse-by-id',
+      data: JSON.stringify({
+        id: id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+      if (response.error) {
+        modal.confirm("This program contains an error, are you sure you want to share it?", function() {
+          return verify_call_index(level, lang, id, index, Public, true);
+        });
+        return;
+      } else {
+        return verify_call_index(level, lang, id, index, Public, false);
+      }
+    }).fail(function (err) {
+      console.log(err);
+    });
+}
+
+export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
+  if (Public) {
+    // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
+    if (id !== true) {
+      return get_parse_code_by_id(level, lang, id,  index, Public);
+    } else {
+      const code = get_trimmed_code();
+      $.ajax({
+        type: 'POST',
+        url: '/parse',
+        data: JSON.stringify({
+          level: level,
+          lang: lang,
+          code: code
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+      }).done(function (response) {
+        if (response.Error) {
+          modal.confirm("This program contains an error, are you sure you want to share it?", function () {
+            verify_call_index(level, lang, id, index, Public, true);
+          });
+        } else {
+            verify_call_index(level, lang, id, index, Public, false);
+        }
+      }).fail(function (err) {
+        console.log(err);
+      });
+    }
+  } else {
+    verify_call_index(level, lang, id, index, Public, false);
+  }
 }
 
 export function delete_program(id: string, index: number) {
@@ -792,6 +868,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
+  // If the adventures are not shown -> increase height of turtleConfig
   if ($('#adventures').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
@@ -799,8 +876,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
-  turtleConfig.width = 400;
-  turtleConfig.worldWidth = 400;
+  // Always set the width to output panel width -> match the UI
+  turtleConfig.width = $( '#output' ).width();
+  turtleConfig.worldWidth = $( '#output' ).width();
 
   if (!hasTurtle) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
@@ -1017,7 +1095,10 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
-  return theGlobalEditor?.getValue();
+  // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
+  // but that upsets the parser so this removes those spaces also:
+  // Remove whitespace at the end of every line
+  return theGlobalEditor?.getValue().replace(/ +$/mg, '');
 }
 
 export function confetti_cannon(){
@@ -1103,7 +1184,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
       if (window.State.level) {
-        const mode = getHighlighter(parseInt(window.State.level));
+        const mode = getHighlighter(window.State.level);
         editor.session.setMode(mode);
       }
     }
@@ -1188,8 +1269,8 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
     });
     return editor;
   }
-export function toggle_developers_mode() {
-  if ($('#developers_toggle').is(":checked")) {
+export function toggle_developers_mode(enforced: boolean) {
+  if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures').hide();
       pushAchievement("lets_focus");
   } else {
@@ -1235,6 +1316,39 @@ export function change_language(lang: string) {
     }).fail(function(xhr) {
       console.error(xhr);
     });
+}
+
+export function change_keyword_language(start_lang: string, new_lang: string) {
+  $.ajax({
+    type: 'POST',
+    url: '/translate_keywords',
+    data: JSON.stringify({
+      code: ace.edit('editor').getValue(),
+      start_lang: start_lang,
+      goal_lang: new_lang,
+      level: window.State.level
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function (response: any) {
+    if (response.success) {
+      ace.edit('editor').setValue(response.code);
+      $('#editor').attr('lang', new_lang);
+      update_view('main_editor_keyword_selector', new_lang);
+    }
+  }).fail(function (err) {
+      modal.alert(err.responseText, 3000, true);
+  });
+}
+
+function update_view(selector_container: string, new_lang: string) {
+  $('#' + selector_container + ' > div').map(function() {
+    if ($(this).attr('lang') == new_lang) {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
 }
 
 export function select_profile_image(image: number) {
