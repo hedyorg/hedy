@@ -734,7 +734,7 @@ def auth_templates(page, page_title):
         public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
         return render_template('profile.html', page_title=page_title, programs=programs,
                                public_settings=public_profile_settings, current_page='my-profile')
-    # Todo TB -> We have to clean this up (a lot!)
+    # Todo TB Feb 2022 -> We have to clean this up (a lot!)
     # Short overview of the to-do:
     #   - Verify that the user is not logged in when attempting to visit signup / login / recover
     #   - If so, redirect to my-profile -> This is currently done on the front-end: remove there
