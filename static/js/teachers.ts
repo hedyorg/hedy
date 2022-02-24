@@ -187,7 +187,6 @@ export function remove_student(class_id: string, student_id: string, self_remova
 export function create_adventure() {
     modal.prompt (auth.texts['adventure_prompt'], '', function (adventure_name) {
         adventure_name = adventure_name.trim();
-        console.log("test");
         if (!adventure_name) {
           modal.alert(auth.texts['adventure_empty'], 3000, true);
           return;
@@ -317,7 +316,29 @@ export function show_doc_section(section_key: string) {
      $("#button-" + section_key).removeClass("green-btn");
      $("#button-" + section_key).addClass("blue-btn");
      $('.section').hide();
+     $ ('.common-mistakes-section').hide ();
      $('#section-' + section_key).toggle();
+   }
+   // Loop-index -1 doesn't exist -> automatically hide all "common mistakes" sections
+   show_common_mistakes("-1");
+}
+
+export function show_common_mistakes(section_key: string) {
+    $(".common-mistakes-button").each(function(){
+       if ($(this).hasClass('blue-btn')) {
+           $(this).removeClass("blue-btn");
+           $(this).addClass("green-btn");
+       }
+   });
+   if ($ ('#common_mistakes-' + section_key).is (':visible')) {
+       $("#cm-button-" + section_key).removeClass("blue-btn");
+       $("#cm-button-" + section_key).addClass("green-btn");
+       $ ('.common-mistakes-section').hide ();
+   } else {
+     $("#cm-button-" + section_key).removeClass("green-btn");
+     $("#cm-button-" + section_key).addClass("blue-btn");
+     $('.common-mistakes-section').hide();
+     $('#common_mistakes-' + section_key).toggle();
    }
 }
 
@@ -351,6 +372,12 @@ export function save_customizations(class_id: string) {
             teacher_adventures.push(<string>$(this).attr('id'));
         }
     });
+    let other_settings: string[] = [];
+    $('.other_settings_checkbox').each(function() {
+        if ($(this).prop("checked")) {
+            other_settings.push(<string>$(this).attr('id'));
+        }
+    });
     let opening_dates = {};
     $('.opening_date_container').each(function() {
         if ($(this).is(":visible")) {
@@ -358,12 +385,6 @@ export function save_customizations(class_id: string) {
                 // @ts-ignore
                 opening_dates[<string>$(this).attr('level')] = $(this).val();
             });
-        }
-    });
-    let other_settings: string[] = [];
-    $('.other_settings_checkbox').each(function() {
-        if ($(this).prop("checked")) {
-            other_settings.push(<string>$(this).attr('id'));
         }
     });
     $.ajax({

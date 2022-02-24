@@ -252,6 +252,8 @@ def routes(app, database, achievements):
         if not isinstance(body.get('opening_dates'), dict):
             return 'Opening dates must be a dict', 400
 
+        print(body)
+
         #Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body['levels']]
 
@@ -393,8 +395,9 @@ def routes(app, database, achievements):
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):
-            # Set the current teacher language as new account language
+            # Set the current teacher language and keyword language as new account language
             account['language'] = g.lang
+            account['keyword_language'] = g.keyword_lang
             store_new_account(account, account.get('email').strip().lower())
             if account.get('class'):
                 class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]

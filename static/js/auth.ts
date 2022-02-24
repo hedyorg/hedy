@@ -16,9 +16,12 @@ interface User {
   password_repeat?: string;
   birth_year?: number;
   language?: string,
+  keyword_language?: string,
   country?: string;
   gender?: string;
   subscribe?: string;
+  agree_terms?: string;
+  agree_third_party?: string;
   prog_experience?: 'yes' | 'no';
   experience_languages?: string[];
   is_teacher?: string;
@@ -30,9 +33,11 @@ interface UserForm {
   password?: string;
   birth_year?: string;
   language?: string,
+  keyword_language?: string,
   country?: string;
   gender?: string;
   subscribe?: string;
+  agree_terms?: string;
   mail_repeat?: string;
   password_repeat?: string;
   old_password?: string;
@@ -102,11 +107,14 @@ export const auth = {
         password: values.password,
         password_repeat: values.password_repeat,
         language: values.language,
+        keyword_language: values.keyword_language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
-        subscribe: $('#subscribe').prop('checked'),
         is_teacher: $('#is_teacher').prop('checked'),
+        subscribe: $('#subscribe').prop('checked'),
+        agree_terms: $('#agree_terms').prop('checked'),
+        agree_third_party: $('#agree_third_party').prop('checked'),
         prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
@@ -156,6 +164,7 @@ export const auth = {
       const payload: User = {
         email: values.email,
         language: values.language,
+        keyword_language: values.keyword_language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
@@ -353,6 +362,19 @@ if (window.location.pathname === '/signup') {
     $ ('#is_teacher_div').hide();
   }
 }
+
+$("#language").change(function () {
+    const lang = $(this).val();
+    $('#keyword_language').val("en");
+    if (lang == "en" || !($('#' + lang + '_option').length)) {
+      $('#keyword_lang_container').hide();
+    } else {
+      $('.keyword_lang_option').hide();
+      $('#en_option').show();
+      $('#' + lang + '_option').show();
+      $('#keyword_lang_container').show();
+    }
+});
 
 $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
