@@ -347,12 +347,12 @@ class TestAuth(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         # WHEN attepting to verify the user
-        # THEN receive a redirect from the server taking us to `/`
+        # THEN receive a redirect from the server taking us to `/landing-page`
         headers = self.get_data('auth/verify?' + urllib.parse.urlencode({'username': self.username, 'token': self.user['verify_token']}), expect_http_code=302, return_headers=True)
-        self.assertEqual(headers['location'], HOST)
+        self.assertEqual(headers['location'], HOST + 'landing-page')
 
         # WHEN attepting to verify the user again (the operation should be idempotent)
-        # THEN (again) receive a redirect from the server taking us to `/`
+        # THEN (again) receive a redirect from the server taking us to `/landing-page`
         headers = self.get_data('auth/verify?' + urllib.parse.urlencode({'username': self.username, 'token': self.user['verify_token']}), expect_http_code=302, return_headers=True)
         self.assertEqual(headers['location'], HOST + 'landing-page')
 
@@ -473,11 +473,6 @@ class TestAuth(AuthHelper):
             {'gender': 'a'},
             {'language': True},
             {'language': 123},
-            {'prog_experience': 1},
-            {'prog_experience': 'foo'},
-            {'prog_experience': True},
-            {'experience_languages': 'python'},
-            {'experience_languages': ['python', 'foo']}
         ]
 
         for invalid_body in invalid_bodies:
@@ -493,9 +488,7 @@ class TestAuth(AuthHelper):
         profile_changes = {
            'birth_year': 1989,
            'country': 'NL',
-           'gender': 'o',
-           'prog_experience': 'yes',
-           'experience_languages': ['python', 'other_block']
+           'gender': 'o'
         }
 
         for key in profile_changes:
