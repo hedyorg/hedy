@@ -92,27 +92,27 @@ adventures:
                     ```
                 start_code: ""
             15:
-                    story_text: |
-                        ## Verhaal
-                        In dit level kun je de `{while}` loop gebruiken om je verhaaltjes nog interessanter te maken. Zo kun je `{while} spelletje {is} 'aan'` gebruiken om het spel te laten werken totdat je game over bent.
-                        Of je kunt `{while} zwaard {is} 'kwijt'` gebruiken, zodat de speler niet verder kan totdat hij/zij het zwaard gevonden heeft.
-                    example_code: |
-                        ## Voorbeeld Hedy code
-                        ```
-                        sleutels = 'kwijt'
-                        {print} 'Je staat in de voortuin en bent je sleutels kwijt.'
-                        {print} 'Waar ga je zoeken?'
-                        {print} 'kies uit: boom, steen, bloembed, brievenbus'
-                        {while} sleutels == 'kwijt'
-                            locatie = {ask} 'Waar wil je zoeken?'
-                            {if} locatie == 'bloembed'
-                                {print} 'Hier zijn ze!'
-                                sleutels = 'gevonden'
-                            {else}
-                                {print} 'Helaas, ze liggen niet bij de ' locatie
-                        {print} 'Nu kun je het huis in!'
-                        ```
-                    start_code: ""
+                story_text: |
+                    ## Verhaal
+                    In dit level kun je de `{while}` loop gebruiken om je verhaaltjes nog interessanter te maken. Zo kun je `{while} spelletje {is} 'aan'` gebruiken om het spel te laten werken totdat je game over bent.
+                    Of je kunt `{while} zwaard {is} 'kwijt'` gebruiken, zodat de speler niet verder kan totdat hij/zij het zwaard gevonden heeft.
+                example_code: |
+                    ## Voorbeeld Hedy code
+                    ```
+                    sleutels = 'kwijt'
+                    {print} 'Je staat in de voortuin en bent je sleutels kwijt.'
+                    {print} 'Waar ga je zoeken?'
+                    {print} 'kies uit: boom, steen, bloembed, brievenbus'
+                    {while} sleutels == 'kwijt'
+                        locatie = {ask} 'Waar wil je zoeken?'
+                        {if} locatie == 'bloembed'
+                            {print} 'Hier zijn ze!'
+                            sleutels = 'gevonden'
+                        {else}
+                            {print} 'Helaas, ze liggen niet bij de ' locatie
+                    {print} 'Nu kun je het huis in!'
+                    ```
+                start_code: ""
             10:
                 story_text: |
                     ## Verhaal
@@ -137,54 +137,6 @@ adventures:
                 story_text: |
                     ## Verhaal
                     In dit level kun je {if} commando's in andere {if} commando's stoppen. Hierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!
-                example_code: |
-                    ## Voorbeeld Simpele Hedy Code
-                    ```
-                    {print} 'Robin loopt door de stad'
-                    locatie = {ask} 'Gaat Robin een winkel in of gaat ze naar huis?'
-                    {if} locatie {is} winkel
-                        {print} 'Ze stapt de winkel binnen'
-                        {print} 'Robin ziet een interessant boek.'
-                        boek = {ask} 'Koopt Robin het boek?'
-                        {if} boek {is} ja
-                            {print} 'Robin koopt het boek en gaat naar huis'
-                        {else}
-                            {print} 'Robin verlaat de winkel en gaat naar huis'
-                    {else}
-                        {print} 'Robin gaat naar huis'
-                    ```
-
-                    ## Uitgebreider
-                    Het voorbeeld hierboven is nog een simpel verhaaltje. Maar door {if} commando's in elkaar te zetten, kun je ook een super uitgebreid verhaal maken, dat al echt op een game lijkt!
-                    Kijk maar...
-
-                    ## Uitgebreide code
-                    ```
-                    zwaard = kwijt
-                    spel = aan
-                    {print} 'Onze held loopt door het bos'
-                    {print} 'Ineens komt ze bij een splitsing...'
-                    {repeat} 2 {times}
-                        {if} spel {is} aan
-                            pad = {ask} 'Welk pad moet onze held kiezen?'
-                            {if} pad {is} links
-                                {if} zwaard {is} gevonden
-                                    {print} 'Onze held komt een draak tegen op het pad!'
-                                    {print} 'Gelukkig heeft ze een zwaard om het beest te verslaan!'
-                                    spel = over
-                                {else}
-                                    {print} 'Onze held vindt een draak, maar ze heeft geen wapens!'
-                                    {print} 'Onze held wordt met huid en haar verslonden...'
-                                    spel = over
-                            {if} pad {is} rechts
-                                {if} zwaard {is} kwijt
-                                    {print} 'Onze held vindt een zwaard'
-                                    {print} 'Die kan nog goed van pas komen'
-                                    zwaard = gevonden
-                                {else}
-                                    {print} 'Je hebt het zwaard al gevonden. Er is hier niks meer.'
-                                    {print} 'Ze loopt terug'
-                    ```
                 start_code: ""
             8:
                 story_text: |
@@ -391,20 +343,6 @@ adventures:
                 story_text: |
                     ## Zing een stapelliedje!
                     In dit level kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren.
-                example_code: |
-                    ## 10 kleine visjes
-                    ```
-                    {for} i {in} {range} 10 {to} 1
-                        {print} i ' kleine visjes zwommen naar de zee'
-                        {print} 'Moeder zei: ik ga niet mee'
-                        {print} 'Ik blijf liever in de vieze oude sloot'
-                        {print} 'Want in de zee daar zwemmen haaien en die bijten je...'
-                        {if} i {is} 1
-                            {print} 'DOOD'
-                        {else}
-                            {print} 'Blub, blub, blub, blubblubblub'
-                            {print} 'Blubblubblub, blub, blubblubblub'
-                    ```
                 start_code: ""
             10:
                 story_text: |
@@ -414,37 +352,6 @@ adventures:
                     Eerst zetten we alle dieren in een lijst familie. Nu gaan we steeds voor een van de familieleden het liedje printen.
 
                     Dat scheelt een hoop regels code!
-                example_code: |
-                    ## Baby Shark
-                    ```
-                    familie = baby, mommy, daddy, grandpa, grandma
-                    {for} shark {in} familie
-                      {print} shark ' shark tudutudutudu'
-                      {print} shark ' shark tudutudutudu'
-                      {print} shark ' shark tudutudutudu'
-                      {print} shark ' shark'
-                    ```
-
-                    ## Old McDonald
-                    ```
-                    dieren = big, hond, koe
-                    {for} dier {in} dieren
-                        {if} dier {is} big
-                            geluid = knor
-                        {if} dier {is} hond
-                            geluid = woef
-                        {if} dier {is} koe
-                            geluid = boe
-                        {print} 'De oude boer die had een wei'
-                        {print} 'hi ja hi ja ho!'
-                        {print} 'En in die wei daar stond een ' dier
-                        {print} 'hi ja hi ja ho!'
-                        {print} 'met een ' geluid geluid ' hier'
-                        {print} 'en een ' geluid geluid ' daar'
-                        {print} 'hier een ' geluid
-                        {print} 'daar een ' geluid
-                        {print} 'overal een ' geluid geluid
-                    ```
                 start_code: ""
             8:
                 story_text: |
@@ -513,36 +420,6 @@ adventures:
                     ## Zing een lied!
                     Maak het nog makkelijker om een liedje te programmeren zoals old MacDonald! Je kunt nu de dieren en hun geluiden aan elkaar koppelen, door ze op dezelfde plaats in het lijstje te zetten.
                     Ook de Dronken Zeeman gaat lekker snel in dit level! Je hebt maar 5 regels nodig voor het gehele lied. Kijk maar!
-                example_code: |
-                    ## Old MacDonald
-                    ```
-                    dieren = ['big', 'hond', 'koe']
-                    geluiden = ['knor', 'woef', 'boe']
-                    {for} i {in} {range} 1 {to} 3
-                        dier = dieren[i]
-                        geluid = geluiden[i]
-                        {print} 'Old MacDonald had een wei'
-                        {print} 'hi ja hi ja ho!'
-                        {print} 'En in die wei daar stond een ' dier
-                        {print} 'hi ja hi ja ho!'
-                        {print} 'met een ' geluid geluid ' hier'
-                        {print} 'en een ' geluid geluid ' daar'
-                        {print} 'hier een ' geluid
-                        {print} 'daar een ' geluid
-                        {print} 'overal een ' geluid geluid
-                    ```
-
-                    ## Dronken Zeeman
-                    ```
-                    coupletten = ['wat zullen we doen met de dronken zeeman?', 'hang hem aan de mast om uit te waaien', 'stop hem met zijn kop in een emmer water', 'dat zullen we doen met de dronken zeeman']
-                    {for} couplet {in} coupletten
-                        {for} i {in} {range} 1 {to} 3
-                            {print} couplet
-                        {print} 's morgens in de vroegte'
-                        {for} i {in} {range} 1 {to} 3
-                            {print} 'HELA HUP! daar gaat ie!'
-                        {print} 's morgens in de vroegte'
-                    ```
                 start_code: ""
     turtle:
         name: "Tekenen"
@@ -745,14 +622,6 @@ adventures:
                     ## Afwasprogramma
                     In dit level kun je je afwasrooster nog beter maken.
 
-                example_code: |
-                    ## Voorbeeld Hedy code
-                    ```
-                    dagen = maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag
-                    namen = mama, papa, Emma, Sophie
-                    {for} dag {in} dagen
-                        {print} namen {at} {random} ' doet de afwas op ' dag
-                    ```
                 start_code: ""
             7:
                 story_text: |
@@ -811,13 +680,13 @@ adventures:
                     Vergeet de aanhalingstekens niet!
 
                 example_code: |
-                   ## Voorbeeld Hedy code
-                    ```
-                    mensen {is} mama, papa, Emma, Sophie
-                    afwasser {is} mensen {at} {random}
-                    {if} afwasser {is} Sophie {print} _ chips ik moet de afwas doen _
-                    {else} {print} ' gelukkig geen afwas want ' _ ' wast al af'
-                    ```
+                    ## Voorbeeld Hedy code
+                     ```
+                     mensen {is} mama, papa, Emma, Sophie
+                     afwasser {is} mensen {at} {random}
+                     {if} afwasser {is} Sophie {print} _ chips ik moet de afwas doen _
+                     {else} {print} ' gelukkig geen afwas want ' _ ' wast al af'
+                     ```
                 start_code: "{print} 'Wie doet de afwas?'"
             4:
                 story_text: |
@@ -1462,7 +1331,7 @@ adventures:
                     {if} naam {is} Hedy {print} 'Hoera, je wint! 🤩' {else} {print} 'Helaas, iemand anders wint 😭'
                     ```
 
-                story_text_2 : |
+                story_text_2: |
                     Verander Hedy in je eigen naam en jij zult altijd de loterij winnen! Natuurlijk is dit wel een beetje verdacht voor andere spelers...
                     Om dat op te lossen kun je ervoor zorgen dat Hedy wel steeds iets anders zegt, maar bij jou altijd een goed antwoord en bij de anderen een slechte.
                     Kijk maar naar dit voorbeeld:
@@ -1551,16 +1420,6 @@ adventures:
                     ## Restaurant level 2
                     In level 2 kun je variabelen gebruiken om je restaurant interactiever te maken! Kijk maar naar het voorbeeld.
 
-                example_code: |
-                    ## Voorbeeld Hedy code
-                    ```
-                    {print} Welkom bij McHedy!
-                    eten {is} {ask} Wat wilt u eten?
-                    saus {is} {ask} Welke saus wilt u daarbij?
-                    drinken {is} {ask} Wat wilt u drinken?
-                    {print} U heeft eten met saus en drinken besteld.
-                    {print} Bedankt voor uw bestelling!
-                    ```
                 start_code: ""
             12:
                 story_text: |
@@ -1623,7 +1482,7 @@ adventures:
                         {print} eten ' wordt uw ' gang
                     ```
 
-                story_text_2 : |
+                story_text_2: |
                     ## Voorbeeld Hedy code
                     Dit kun je uiteraard ook voor meerdere mensen toepassen!
 
@@ -1671,67 +1530,12 @@ adventures:
                     In dit level kun je meerdere regels code herhalen, wat betekent dat je meerdere mensen kunt vragen wat ze willen eten en drinken en dat ook nog kunt printen.
                     Kijk maar naar het voorbeeld!
 
-                example_code: |
-                    ## Voorbeeld Hedy code
-                    ```
-                    {print} 'Welkom bij McHedy!'
-                    {print} 'U kunt hier uw bestelling doorgeven'
-                    mensen = {ask} 'Voor hoeveel personen wilt u bestellen?'
-                    {repeat} mensen {times}
-                        eten = {ask} 'Wat wilt u eten?'
-                        {print} eten
-                        drinken = {ask} 'Wat wilt u drinken?'
-                        {print} drinken
-                    prijs = 4 * mensen
-                    {print} 'Dat wordt dan ' prijs ' euro!'
-                    ```
-
-                    ## Toevoegingen met `{if}`
-                    Je kunt natuurlijk ook zorgen dat er vervolgvragen komen.
-                    Als men bijvoorbeeld een patatje bestelt, kun je vragen welke saus ze daarbij willen. Of je kunt vragen of ze cola light willen of normale cola.
-                    En zo kun je vast zelf nog veel meer vragen bedenken!
-                    ```
-                    {print} 'Welkom bij McHedy!'
-                    {print} 'U kunt hier uw bestelling doorgeven'
-                    eten = {ask} 'Wat wilt u eten?'
-                    {print} eten
-                    {if} eten {is} patat
-                        saus = {ask} 'Wat voor saus wil je?'
-                        {print} saus
-                    drinken = {ask} 'Wat wilt u drinken?'
-                    {if} drinken {is} cola
-                        light = {ask} 'Normaal of light?'
-                        {print} drinken light
-                    {print} 'Bedankt voor uw bestelling!'
-                    ```
-
-                    ## Uitdaging prijzen
-                    De prijs = nu altijd 4 euro per persoon, kun jij nog een andere manier bedenken om de prijs te berekenen?
-                    Bijvoorbeeld:
-
-                    ```
-                    prijs = 0
-                    {if} eten {is} patat
-                        prijs = prijs + 3
-                    {if} drinken {is} cola
-                        prijs = prijs + 1
-                    ```
                 start_code: "{print} 'Welkom bij McHedy!' "
             7:
                 story_text: |
                     ## Restaurant
                     Nu kun je het `{repeat}` commando gebruiken om van meerdere klanten de bestelling op te nemen.
 
-                example_code: |
-                    ## Voorbeeld Hedy code
-                    ```
-                    {print} 'Welkom bij restaurant Hedy'
-                    mensen = {ask} 'Voor hoeveel personen wilt u bestellen vandaag?'
-                    {repeat} mensen {times} eten = {ask} 'Wat wilt u bestellen?'
-                    {print} 'Bedankt voor uw bestelling!'
-                    ```
-                    Nu kun je zoals je ziet wel aan meerdere mensen vragen wat ze willen eten, maar het printen van al die bestellingen lukt nog niet.
-                    Later wordt dit probleem opgelost, want dan kun je meerdere regels code printen.
                 start_code: ""
             6:
                 story_text: |
@@ -1756,8 +1560,8 @@ adventures:
                       ```
                       In de hierboven kan je maar één gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
 
-                story_text_2 : |
-                      Je kunt de code nog een stuk uitgebreider maken, kijk maar naar dit voorbeeld waarin je 3 gangen kunt bestellen.
+                story_text_2: |
+                    Je kunt de code nog een stuk uitgebreider maken, kijk maar naar dit voorbeeld waarin je 3 gangen kunt bestellen.
 
                 example_code_2: |
                     ## Voorbeeld Hedy code
@@ -1808,10 +1612,6 @@ adventures:
                     {if} eten {is} pizza topping {is} {ask} 'Welke topping wilt u op de pizza?'
                     {print} eten
                     ```
-                story_text_2 : |
-                    ## Prijslijst toevoegen
-                    Je kunt het `{if}` commando ook goed gebruiken om een prijslijst te maken.
-
                 example_code_2: |
                     ## Voorbeeld Hedy code
                     {print} 'Welkom bij McHedy'
@@ -2418,7 +2218,7 @@ adventures:
                     Kijk maar...
                 start_code: "{print} 'Op naar het volgende level!'"
             10:
-                story_text:  |
+                story_text: |
                     ## Vooruitblik
                     Je bent alweer aan het einde van dit level, knap hoor! Je staat op het punt om door te gaan naar het volgende level. In de hogere levels gaan we steeds een beetje meer toewerken naar de programmeertaal Python.
                     In Python bestaat het commando `{repeat}` echter niet, dus gaan we dat vervangen door 'echte' programmeertaal!
@@ -2567,10 +2367,6 @@ adventures:
                 ## start_code is only added because it is required by the schema of Adventures
                 start_code: ""
             8:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
                 start_code: ""
 #            9:
 #                story_text: |

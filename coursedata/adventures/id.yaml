@@ -250,10 +250,7 @@ adventures:
                         turn sudut
                         forward 50
                     ```
-                story_text_2:
-                    ## Interaksi
-                    Selain itu, kita juga bisa meningkatkan kemampuan program untuk menggambar banyak bentuk.
-                    Dapatkah kamu tebak seberapa jauh sang kura-kura perlu berbelok disini? Selesaikan kodenya dan kamu dapat menggambar bentuk poligon apapun yang kamu suka!
+                story_text_2: Selain itu, kita juga bisa meningkatkan kemampuan program untuk menggambar banyak bentuk. Dapatkah kamu tebak seberapa jauh sang kura-kura perlu berbelok disini? Selesaikan kodenya dan kamu dapat menggambar bentuk poligon apapun yang kamu suka!
 
                 example_code_2: |
                     ## Contoh kode Hedy
@@ -663,11 +660,6 @@ adventures:
                     ```
                 start_code: print 'Selamat datang di kalkulator ini!'
             7:
-                story_text: |-
-                    ## Kalkulator
-                    Sekarang karena kamu dapat menghitung, kamu juga bisa membuat program untuk melakukan perhitungan matematika.
-                    Kamu bisa membuat sendiri contoh perhitungannya. Misal:
-
                 example_code: |
                     ## Contoh kode Hedy
                     ```
@@ -676,12 +668,6 @@ adventures:
                     if jawaban is jawaban_benar print 'bagus!'
                     else print 'Salah! Jawaban benarnya ' jawaban_benar
                     ```
-                story_text_2: |
-                    ## Angka-angka acak
-                    Kamu juga dapat meminta komputer untuk melakukan penjumlahan terhadap angka-angka acak dengan perintah `random`.
-
-                    Berikut adalah cara memilih sebuah angka dari daftar angka, dan dengan cara ini kamu pasti akan mendapatkan hasil yang berbeda-beda:
-
                 example_code_2: |
                     ## Contoh kode Hedy
                     ```
@@ -694,7 +680,6 @@ adventures:
                     if jawaban is jawaban_benar print 'oke'
                     else print 'salah! jawaban seharusnya adalah ' jawaban_benar
                     ```
-                start_code: print 'Selamat datang di kalkulator ini!'
     restaurant:
         name: Rumah makan
         description: Buat restoran virtual kamu sendiri!
@@ -724,20 +709,6 @@ adventures:
                     ## Rumah makan
                     Pada level 2 kamu bisa mengembangkan kode rumah makan kamu dengan menggunakan variabel. Pada level 1 Hedy hanya dapat mengulang pesanan dan hanya mengingat pesanan terakhir.
                     Sekarang kamu dapat menggunakan variabel dan Hedy dapat mengingat makanan dan minuman yang dipesan!
-
-                example_code: |
-                    ## Contoh kode Hedy
-                    ```
-                    print Selamat datang di rumah makan Hedy!
-                    print Hari ini kami menyediakan pizza atau lasagna.
-                    makanan is ask Apa yang ingin kamu makan?
-                    print Pilihan baik! makanan itu juga kesukaanku!
-                    topping is ask Apakah kamu mau daging atau sayuran diatas makanan itu?
-                    print makanan dengan topping sedang dipersiapkan!
-                    minuman is ask Apa minuman yang kamu inginkan?
-                    print Terima kasih atas pesanannya.
-                    print makanan dan minuman kamu akan segera tersedia!
-                    ```
 
                 start_code: print Selamat datang di rumah makan Hedy
             11:
@@ -827,8 +798,7 @@ adventures:
                     print 'Terima kasih, selamat menikmati!'
                     ```
 
-                story_text_2:
-                    Tapi kamu juga dapat menambahkan hal-hal lain di rumah makan virtual kamu, misalnya menu makanan yang lebih banyak.
+                story_text_2: Tapi kamu juga dapat menambahkan hal-hal lain di rumah makan virtual kamu, misalnya menu makanan yang lebih banyak.
 
                 example_code_2: |
                     ## Contoh kode Hedy (detil)
@@ -898,19 +868,6 @@ adventures:
 
                     Berhati-hatilah! Pada level 2 tanda kutip diperbolehkan di teks namun pada level 3 Hedy tidak akan bisa membedakannya dengan pembatas pada perintah `print`.
 
-                example_code: |
-                    ## Contoh kode Hedy
-                    ```
-                    print 'Selamat datang di rumah makan Hedy!'
-                    print 'Hari ini kami menyediakan pizza atau lasagna.'
-                    makanan is ask 'Apa yang ingin kamu makan?'
-                    print 'Pilihan baik! Makanan itu juga kesukaanku!'
-                    topping is ask 'Apakah kamu mau daging atau sayuran diatas makanan itu?'
-                    print makanan ' dengan ' topping ' sedang dipersiapkan!'
-                    minuman is ask 'Apa minuman yang kamu inginkan?'
-                    print 'Terima kasih atas pesanannya.'
-                    print makanan ' dan ' minuman ' kamu akan segera tersedia!'
-                    ```
                 start_code: print 'Selamat datang di rumah makan Hedy'
             3:
                 story_text: |-
@@ -1067,9 +1024,7 @@ adventures:
                     orang is ask 'Siapa kamu?'
                     if orang is Hedy print 'Kamu pasti menang!' else print 'Nasib buruk! Orang lain yang akan menang!'
                     ```
-                story_text_2:
-                    Ganti Hedy dengan nama kamu pada baris terakhir dan Hedy pasti akan meramal kalau kamu akan memenangkan undian walaupun yang lain tidak!
-                    Tentu ini mungkin akan menimbulan kecurigaan bagi para pemain lainnya.... Untuk menghindari itu, kamu dapat memastikan bahwa Hedy memberikan jawaban yang berbeda-beda setiap kali kamu menjalankan kodenya. Tapi tentu saja, tetap memberikan kamu jawaban positif dan memberikan jawaban negatif pada pemain lainnya.
+                story_text_2: Ganti Hedy dengan nama kamu pada baris terakhir dan Hedy pasti akan meramal kalau kamu akan memenangkan undian walaupun yang lain tidak! Tentu ini mungkin akan menimbulan kecurigaan bagi para pemain lainnya.... Untuk menghindari itu, kamu dapat memastikan bahwa Hedy memberikan jawaban yang berbeda-beda setiap kali kamu menjalankan kodenya. Tapi tentu saja, tetap memberikan kamu jawaban positif dan memberikan jawaban negatif pada pemain lainnya.
 
                 example_code_2: |
                     ## Contoh kode Hedy 2
