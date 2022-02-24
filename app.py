@@ -128,7 +128,6 @@ def load_adventures_per_level(lang, level):
         # if quizzes are not enabled, do not load it
         if short_name == 'end' and not config['quiz-enabled']:
             continue
-        print(ad_index, current_level)
         if id_count <= ad_index or current_level > level:
             current_adventure = {
             'lock':'0',
@@ -145,7 +144,6 @@ def load_adventures_per_level(lang, level):
                 }
             }
         else:
-            print("test")
             current_adventure = {
             'lock':'1',
             'short_name': short_name,
@@ -521,14 +519,10 @@ def parse():
         for com in commands:
             demo_code = com['demo_code']
             demo_code += '\n'
-            print(code)
-            print(demo_code)
-            print(code==demo_code)
             if code == demo_code:
                 RUN_COMMAND[index] = 1
             index += 1
         flag = 1
-        print(RUN_COMMAND)
         for i in RUN_COMMAND:
             if i == 0:
                 flag = 0
