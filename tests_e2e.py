@@ -475,9 +475,7 @@ class TestAuth(AuthHelper):
             {'language': 123},
             {'prog_experience': 1},
             {'prog_experience': 'foo'},
-            {'prog_experience': True},
-            {'experience_languages': 'python'},
-            {'experience_languages': ['python', 'foo']}
+            {'prog_experience': True}
         ]
 
         for invalid_body in invalid_bodies:
@@ -494,8 +492,7 @@ class TestAuth(AuthHelper):
            'birth_year': 1989,
            'country': 'NL',
            'gender': 'o',
-           'prog_experience': 'yes',
-           'experience_languages': ['python', 'other_block']
+           'prog_experience': 'yes'
         }
 
         for key in profile_changes:
