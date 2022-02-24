@@ -340,7 +340,7 @@ $ ('.auth input').get ().map (function (el) {
 });
 
 // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
-// Todo TB -> Why do we do this ?!
+// Todo TB Feb 2022 -> Why do we do this ?!
 // This request returns A LOT of front-end errors, something we really really don't want
 // It isn't relevant to the front-end if we are logged in as the back-end will take care of that
 // We have to do some deep clean-up here to make the code understandable, readable and efficient
