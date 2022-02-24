@@ -738,6 +738,14 @@ def auth_templates(page, page_title):
         public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
         return render_template('profile.html', page_title=page_title, programs=programs,
                                public_settings=public_profile_settings, current_page='my-profile')
+    # Todo TB Feb 2022 -> We have to clean this up (a lot!)
+    # Short overview of the to-do:
+    #   - Verify that the user is not logged in when attempting to visit signup / login / recover
+    #   - If so, redirect to my-profile -> This is currently done on the front-end: remove there
+    #   - If a user attempts to visit reset:
+    #       - If logged in: destory session, we can't reset with an active account logged in
+    #       - Catch the two arguments: username / token
+    #       - Sent these to the front-end REMOVE current front-end retrieval of arguments this makes no sense
     if page in['signup', 'login', 'recover', 'reset']:
         return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
 
