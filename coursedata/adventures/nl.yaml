@@ -1612,15 +1612,6 @@ adventures:
                     {if} eten {is} pizza topping {is} {ask} 'Welke topping wilt u op de pizza?'
                     {print} eten
                     ```
-                example_code_2: |
-                    ## Voorbeeld Hedy code
-                    {print} 'Welkom bij McHedy'
-                    prijs {is} 0
-                    eten {is} {ask} 'Wilt u friet of pizza?'
-                    {if} eten {is} friet prijs {is} 3
-                    {if} eten {is} pizza prijs {is} 4
-                    {print} 'Dat wordt dan ' prijs ' euro, alstublieft.'
-
                 start_code: ""
             4:
                 story_text: |
@@ -2366,14 +2357,7 @@ adventures:
                     Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
                 ## start_code is only added because it is required by the schema of Adventures
                 start_code: ""
-            8:
-                start_code: ""
-#            9:
-#                story_text: |
-#                    ## Eind
-#                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-#                ## start_code is only added because it is required by the schema of Adventures
-#                start_code: ""
+            8: {}
             7:
                 story_text: |
                     ## Eind
