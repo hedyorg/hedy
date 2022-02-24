@@ -165,7 +165,7 @@ const LEVELS = [
     // Adds if
     name: 'level5',
     rules: pipe(baseRules(),
-      rule_printSpace(),
+      rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
       rule_ifElseOneLine(),
