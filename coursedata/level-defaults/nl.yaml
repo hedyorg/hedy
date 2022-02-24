@@ -28,8 +28,8 @@
             {echo} dus je lievelingskleur is
     -   name: "{print} emojis"
         explanation: "print een emoji met `{print}`"
-        example: "Example: {print} 🙋‍ 🌍 ❗"
-        demo_code: "{print} 🙋 🌍 ❗"
+        example: "Example: {print} \U0001F64B‍ \U0001F30D ❗"
+        demo_code: "{print} \U0001F64B \U0001F30D ❗"
     -   name: "{forward}"
         explanation: "Een lijn trekken met `{forward}`."
         example: "Bijvoorbeeld: {forward} 100"
@@ -695,9 +695,6 @@
             {else}:
                 {print} 'Jouw kleur is zeker niet groen'
 18:
-    start_code: |-
-        naam = 'Hedy'
-        {print}('ik heet ', naam)
     intro_text: |-
         We zijn aangekomen bij echte Pythoncode! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
         Zo gaat dat:
@@ -715,14 +712,10 @@
 
 
     commands:
-    -   name: "{print}"
-        explanation: "Bij `{print}` moet je haakjes gebruiken"
-        example: "{print}"
+    -   explanation: "Bij `{print}` moet je haakjes gebruiken"
         demo_code: |-
             {print}('hallo!')
-    -   name: "{print} met var"
-        explanation: "Bij `{print}` moet je haakjes gebruiken en komma's als je meerdere dingen {print}"
-        example: "{print}"
+    -   explanation: "Bij `{print}` moet je haakjes gebruiken en komma's als je meerdere dingen {print}"
         demo_code: |-
             naam = 'Hedy'
             {print}('ik heet', naam)
