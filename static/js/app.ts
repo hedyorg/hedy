@@ -456,16 +456,6 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, le
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
-  if (auth.profile) {
-    if (window.State.examples_left > 0) {
-      window.State.examples_left = window.State.examples_left - 1;
-    } else {
-      $("#commands-window").hide();
-      $("#toggle-button").hide();
-      modal.alert(auth.texts['examples_used'], 3000, true);
-      return;
-    }
-  }
   var editor = ace.edit("editor");
 
   var MOVE_CURSOR_TO_END = 1;

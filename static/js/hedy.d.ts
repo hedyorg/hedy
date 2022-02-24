@@ -23,7 +23,6 @@ interface State {
    * Current keyword language
    */
   keyword_language?: string;
-  other_keyword_language?: string;
   /**
    * Title of current level
    */
@@ -63,8 +62,6 @@ interface State {
   disable_run?: boolean;
 
   unsaved_changes?: boolean;
-
-  examples_left?: integer;
 
   no_unload_prompt?: boolean;
 
