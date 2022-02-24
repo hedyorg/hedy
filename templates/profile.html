@@ -113,6 +113,7 @@
             <select id="keyword_language" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" required>
                 {% for language in keyword_languages() %}
                     <option value="{{language.lang}}" id="{{language.lang}}_option" class="keyword_lang_option"
+                            {% if language.lang != user_data['language'] and language.lang != "en" %}style="display: none;"{% endif %}
                             {% if user_data and 'keyword_language' in user_data %}
                                 {% if user_data['keyword_language'] == language.lang %}selected{% endif %}
                             {% else %}
@@ -136,66 +137,28 @@
                 <option value="">{{auth.select}}</option>
             </select>
         </div>
-        <div class="flex flex-row items-center mb-2">
-          <label class="inline-block w-72" for="has_experience">{{auth.programming_experience}}</label>
-            <ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0" style="margin-top: -0.3em;">
-                <li class="flex flex-row items-center">
-                    <input class="ltr:pl-4 rtl:pr-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()" {% if user_data['prog_experience'] == "yes" %} checked {% endif %}>
-                    <label class="ltr:pl-2 rtl:pr-2">{{auth.yes}}</label>
-                </li>
-                <li class="flex flex-row items-center">
-                    <input class="ltr:pl-4 rtl:pr-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()" {% if user_data['prog_experience'] == "no" %} checked {% endif %}>
-                    <label class="ltr:pl-2 rtl:pr-2">{{auth.no}}</label>
-                </li>
-            </ul>
-        </div>
-        <div class="flex flex-row items-center mb-4 border rounded-lg border-gray-400 px-2 pb-4" {% if user_data['prog_experience'] != "yes" %} style="display:none;" {% endif %} id="languages">
-            <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
-            <label class="inline-block w-1/2" for="languages">{{auth.languages}}</label><ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 ltr:pl-4 rtl:pr-4">
-            <li class="flex flex-row items-center">
-                <input type="checkbox" name="languages" value="scratch" {% if "scratch" in user_data['experience_languages']  %}checked{% endif %} class="ltr:mr-2 rtl:ml-2"><label style>Scratch</label>
-            </li>
-            <li class="flex flex-row items-center">
-                <input type="checkbox" name="languages" value="other_block" {% if "other_block" in user_data['experience_languages']  %}checked{% endif %} class="ltr:mr-2 rtl:ml-2"><label>{{auth.other_block}}</label>
-            </li>
-            <li class="flex flex-row items-center">
-                <input type="checkbox" name="languages" value="python" {% if "python" in user_data['experience_languages']  %}checked{% endif %} class="ltr:mr-2 rtl:ml-2"><label>Python</label>
-            </li>
-            <li class="flex flex-row items-center">
-                <input type="checkbox" name="languages" value="other_text" {% if "other_text" in user_data['experience_languages']  %}checked{% endif %} class="ltr:mr-2 rtl:ml-2"><label>{{auth.other_text}}</label>
-            </li>
-          </ul>
-        </div>
-        <div class="clear-both {% if user_data['prog_experience'] == "no" %} hidden {% endif %} mb-4" id="languages">
-        </div>
-        <div class="mb-4 clear-both">
+        <div class="mb-4">
             <button type="submit" class="green-btn mt-4">{{auth.update_profile}}</button>
         </div>
-        <div class="mb-4">
-            <div id="update_profile_error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-            <div id="update_profile_success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-        </div>
       </form>
-      <button class="red-btn" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
+        <div>
+             <button class="red-btn" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
+        </div>
    </div>
   <h1 id="password_toggle" class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#change_password').toggle()">{{auth.change_password}}</h1>
-   <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
+   <form class="js-validated-form bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.change_password}}</h2>
-    <div class="mb-4">
-        <label for="old_password">{{auth.current_password}}</label>
-        <input id="old_password" type=password required>
+    <div class="flex flex-row items-center mb-2">
+        <label for="old_password" class="inline-block w-72">{{auth.current_password}}</label>
+        <input id="old_password" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" minlength="6" type=password required>
     </div>
-    <div class="mb-4">
-        <label for="password">{{auth.new_password}}</label>
-        <input id="password" type=password required>
+    <div class="flex flex-row items-center mb-2">
+        <label for="password" class="inline-block w-72">{{auth.new_password}}</label>
+        <input id="password" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" minlength="6" type=password required>
     </div>
-    <div class="mb-4">
-        <label for="password_repeat">{{auth.repeat_new_password}}</label>
-        <input id="password_repeat" type=password required>
-    </div>
-    <div class="mb-4">
-        <div id="error_password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
-        <div id="success_password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
+    <div class="flex flex-row items-center mb-2">
+        <label for="password_repeat" class="inline-block w-72">{{auth.repeat_new_password}}</label>
+        <input id="password_repeat" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" minlength="6" type=password required>
     </div>
     <button type="submit" class="green-btn mt-4">{{auth.change_password}}</button>
   </form>
