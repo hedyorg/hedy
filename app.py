@@ -362,6 +362,7 @@ def enrich_context_with_user_info():
                 data['user_messages'] += 1
     return data
 
+
 @app.after_request
 def set_security_headers(response):
     security_headers = {
@@ -721,9 +722,10 @@ def achievements_page():
         return redirect(url, code=302)
 
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
+    achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
 
     return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
-                           template_achievements=achievement_translations, current_page='my-profile')
+                           achievements=achievements, template_achievements=achievement_translations, current_page='my-profile')
 
 
 @app.route('/programs', methods=['GET'])
@@ -1391,6 +1393,7 @@ def public_user_page(username):
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
 
         return render_template('public-page.html', user_info=user_public_info,
+                               achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang),
                                favourite_program=favourite_program,
                                programs=user_programs,
                                last_achieved=last_achieved,
