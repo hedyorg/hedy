@@ -21,8 +21,7 @@ import traceback
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, \
-    is_teacher, update_is_teacher, forget_current_user
+from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -1009,15 +1008,6 @@ def internal_error(exception):
 def default_landing_page():
     return main_page('start')
 
-    def auth_templates(page, page_title):
-        if page == 'my-profile':
-            programs = DATABASE.public_programs_for_user(current_user()['username'])
-            public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
-            return render_template('profile.html', page_title=page_title, programs=programs,
-                                   public_settings=public_profile_settings, current_page='my-profile')
-
-        if page in ['signup', 'login', 'recover', 'reset']:
-            return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
 
 @app.route('/signup', methods=['GET'])
 def signup_page():
@@ -1057,13 +1047,20 @@ def reset_page():
     return render_template('reset.html', page_title=hedyweb.get_page_title('reset'), username=username, token=token, current_page='login')
 
 
+@app.route('/my-profile', methods=['GET'])
+@requires_login
+def profile_page(user):
+    programs = DATABASE.public_programs_for_user(user['username'])
+    public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
+
+    return render_template('profile.html', page_title=hedyweb.get_page_title('my-profile'), programs=programs,
+                           public_settings=public_profile_settings, current_page='my-profile')
+
+
 @app.route('/<page>')
 def main_page(page):
     if page == 'favicon.ico':
         abort(404)
-
-    if page in ['signup', 'login', 'my-profile', 'recover', 'reset']:
-        return auth_templates(page, hedyweb.get_page_title(page))
 
     if page == "my-achievements":
         return achievements_page()
