@@ -94,8 +94,8 @@ adventures:
                 story_text: |
                     ## Story
                     In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.
-
-                    ## Example Simple Hedy Code
+                example_code: |
+                    ## Example Hedy Code
                     ```
                     {print} 'Robin is walking downtown'
                     location = {ask} 'Is Robin going into a shop, or does she go home?'
@@ -110,10 +110,9 @@ adventures:
                     {else}
                         {print} 'Robin goes home'
                     ```
-
-                    ## More elaborate
+                story_text_2: |
                     The example above is pretty straightforward, but with nesting you can really elaborate your code and turn your story into a real game. Check out this example!
-
+                example_code_2: |
                     ## Elaborate code
                     ```
                     sword = lost
@@ -421,6 +420,7 @@ adventures:
                     ## Songs
                     In this level you can use the `{for} i {in} {range}` command to make songs that use counting.
 
+                example_code: |
                     ## 5 little monkeys
                     ```
                     {for} i {in} {range} 5 {to} 1
@@ -440,6 +440,7 @@ adventures:
                     You can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
                     Or you can make Old McDonald with all the different animals.
 
+                example_code: |
                     ## 5 Little Monkeys Jumping on the bed
                     ```
                     monkeys = 5, 4, 3, 2
@@ -788,7 +789,8 @@ adventures:
                     ## Dishwashing
                     In this level you could make an even better dish washing shedule.
 
-                    ## Hedy code example
+                example_code: |
+                    ## Example Hedy code
                     ```
                     days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
                     names = mom, dad, Emma, Sophie
@@ -829,12 +831,15 @@ adventures:
                     Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
                     Do you make the code for the whole week?
 
+                story_text_2: |
                     ## Make it fair
                     If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!
                     To create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.
 
                     Monday and tuesday are ready for you! Can you add the rest of the week?
                     And... can you come up with a solution for when your list is empty?
+
+                example_code_2: |
                     ```
                     people = mom, dad, Emma, Sophie
                     dishwasher = people {at} {random}
@@ -965,7 +970,8 @@ adventures:
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
 
-                    ## Looking {forward}
+                example_code_2: |
+                    ## Looking forward
 
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: "{print} 'What will the die indicate this time?'"
@@ -1395,8 +1401,8 @@ adventures:
                     ## Restaurant
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
                     Now you can use variables and Hedy can remember both the food and the drinks!
-
-                    ## Example Hedy Restaurant
+                example_code : |
+                    ## Example Hedy Code
                     ```
                     {print} Welcome to Hedy's restaurant!
                     {print} Today we're serving pizza or lasagna.
@@ -1523,6 +1529,7 @@ adventures:
                     ## Restaurant
                     In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
 
+                example_code: |
                     ```
                     {print} 'Welcome to Hedys restaurant!'
                     people = {ask} 'How many people will be joining us today?'

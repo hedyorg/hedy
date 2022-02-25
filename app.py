@@ -31,6 +31,8 @@ import textwrap
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
 from flask_helpers import render_template
 from flask_compress import Compress
+from flask_babel import Babel
+from flask_babel import gettext
 
 # Hedy-specific modules
 import hedy_content
@@ -173,6 +175,35 @@ logging.basicConfig(
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
+
+babel = Babel(app)
+
+
+# Return the session language, if not: return best match
+@babel.localeselector
+def get_locale():
+    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
+
+"""
+    Some important notes relates to Flask-Babel usage:
+    -   We can always get a translation using gettext(u'english string')
+        NOTE: We can shorten this notation by simply using _('english string')
+    -   We can insert some variable like this: gettext(u'some string %(value)s', value=42)
+    -   More interesting for us might be the 'lazy string' the can be defined outside requests, like this:
+    -       lazy_gettext(u'Account successfully saved')
+    -   This will be really useful when wanting to return translated error messages
+    
+    - We have to mark ALL translatable string (in english!) with gettext() -> then create a .pot file
+    - We create the file as follows: 
+        pybabel extract -F babel.cfg -o messages.pot .
+    - To add a translation (for dutch): 
+        pybabel init -i messages.pot -d translations -l nl
+    - To update your files (when adding new strings):
+        FIRST create new file:  pybabel extract -F babel.cfg -o messages.pot . 
+        THEN:                   pybabel update -i messages.pot -d translations
+    LASTLY compile the files:   pybabel compile -d translations
+"""
+
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
@@ -1004,7 +1035,7 @@ def main_page(page):
 
     if page == 'landing-page':
         if user['username']:
-            return render_template('landing-page.html', page_title=hedyweb.get_page_title(page),
+            return render_template('landing-page.html', page_title=hedyweb.get_page_title(page), user=user['username'],
                                    text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
             return utils.error_page(error=403, ui_message='not_user')
