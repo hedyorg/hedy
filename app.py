@@ -362,18 +362,6 @@ def enrich_context_with_user_info():
                 data['user_messages'] += 1
     return data
 
-@app.context_processor
-def enricht_context_with_translations():
-    """Adds dicts with translations to the global template context.
-
-    For some reason these are held in various different sections in the YAMLs.
-    """
-    texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
-    ui = TRANSLATIONS.get_translations(g.lang, 'ui')
-    auth = TRANSLATIONS.get_translations(g.lang, 'Auth')
-    achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
-    return dict(texts=texts, ui=ui, auth=auth, achievements=achievements)
-
 @app.after_request
 def set_security_headers(response):
     security_headers = {
