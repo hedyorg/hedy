@@ -23,7 +23,7 @@
                     {% endfor %}
                 </select>
                 <select id="explore_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                    <option disabled selected value="">{{ ui.adventure }}</option>
+                    <option disabled selected value="">{{ _('adventure') }}</option>
                     {% for adventure_key, adventure in adventures.items() %}
                         {% for name, levels in adventure.items() %}
                             <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>

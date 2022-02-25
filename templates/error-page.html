@@ -9,7 +9,7 @@
           {{page_error or ui.default_403}}
       </div>
       <button class="green-btn" onclick="{% if iframe %}parent.{% endif %}window.location.href = '/'">
-          {{ui.go_back_to_main}}
+          {{_('go_back_to_main')}}
       </button>
   </div>
 {% endblock %}
