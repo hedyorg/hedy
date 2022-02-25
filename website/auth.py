@@ -585,6 +585,7 @@ def routes(app, database):
     @app.route('/auth/reset', methods=['POST'])
     def reset():
         body = request.json
+        print(body)
         # Validations
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400

@@ -30,6 +30,7 @@ interface User {
 interface UserForm {
   username?: string;
   email?: string;
+  token?: string;
   password?: string;
   birth_year?: string;
   language?: string,
@@ -235,18 +236,14 @@ export const auth = {
 
     if (op === 'reset') {
       const payload = {
-        username: auth.reset?.['username'],
-        token: auth.reset?.['token'],
+        username: values.username,
+        token: values.token,
         password: values.password,
         password_repeat: values.password_repeat
       };
 
-      auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/reset', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         modal.alert(auth.texts['password_resetted'], 2000, false);
-        $ ('#password').val ('');
-        $ ('#password_repeat').val ('');
-        delete auth.reset;
         setTimeout(function (){
           auth.redirect ('login');
         }, 2000);
@@ -330,11 +327,6 @@ if ($ ('#country')) {
   $ ('#country').html (html);
 }
 
-$ ('.auth input').get ().map (function (el) {
-  // Clear red borders if input was marked from a previous error.
-  el.addEventListener ('input', () => auth.clear_error());
-});
-
 // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
 // Todo TB Feb 2022 -> Why do we do this ?!
 // This request returns A LOT of front-end errors, something we really really don't want
@@ -344,18 +336,6 @@ $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
    if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
    auth.profile = response;
 });
-
-if (window.location.pathname === '/reset') {
-  const query = window.location.search.slice (1).split ('&');
-  const params: Record<string, string> = {};
-  query.map (function (item) {
-    const split = item.split ('=');
-    params [split [0]] = decodeURIComponent (split [1]);
-  });
-  // If we don't receive username and token, the redirect link is invalid. We redirect the user to /recover.
-  if (! params['username'] || ! params['token']) auth.redirect ('recover')
-  else auth.reset = params;
-}
 
 if (window.location.pathname === '/signup') {
   const login_username = localStorage.getItem ('hedy-login-username');
