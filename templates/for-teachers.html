@@ -2,7 +2,7 @@
 
 {% block main %}
 <div id="teacher_classes" class="flex flex-col items-center pb-4 border-b-2">
-    <h2>{{_('teacher_classes')}}</h2>
+    <h2>{{_('my_classes')}}</h2>
     {% if teacher_classes %}
       <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4">
         <thead class="bg-gray-200">
@@ -52,7 +52,7 @@
 <div class="flex flex-col items-center mt-4 border-b-2 pb-4">
     <h2>{{_('create_student_accounts')}}</h2>
     <button class="green-btn mt-4" onclick="window.open('/for-teachers/create-accounts', '_self');">
-        {{_('create')}}
+        {{_('create_accounts')}}
     </button>
 </div>
 <div class="w-full mt-4">

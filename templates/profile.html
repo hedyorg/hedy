@@ -75,9 +75,9 @@
      </ul>
    </div>
    {% if user_classes %}
-       <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#classes').toggle()">{{_('student_classes')}}</h1>
+       <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#classes').toggle()">{{_('my_classes')}}</h1>
        <div id="classes" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
-           <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('student_classes')}}</h2>
+           <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('my_classes')}}</h2>
            {% for user_class in user_classes %}
              <div id="student_class" class="border-2 rounded-lg border-gray-400 px-4 py-4 flex flex-row mb-4">
                 <p class="text-3xl text-blue-600 inline-block w-1/2">{{ user_class['name']}}</p><button class="red-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.remove_student('{{user_class['id']}}', '{{user_data['username']}}', true)">{{_('leave_class')}}</button>
