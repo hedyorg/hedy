@@ -580,7 +580,7 @@ def routes(app, database):
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
             send_email_template('recover_password', user['email'], email_base_url() + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token))
-            return '', 200
+            return g.auth_texts.get('sent_password_recovery'), 200
 
     @app.route('/auth/reset', methods=['POST'])
     def reset():

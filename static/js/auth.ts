@@ -215,21 +215,20 @@ export const auth = {
     }
 
     if (op === 'recover') {
-      const payload = {username: values.username};
-
-      auth.clear_error ();
+      const payload = {
+        username: values.username
+      };
       $.ajax ({
         type: 'POST', url: '/auth/recover',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
-      }).done (function () {
-        auth.success (auth.texts['sent_password_recovery']);
-        $ ('#username').val ('');
+      }).done (function (response) {
+        modal.alert(response.responseText, 3000, false);
       }).fail (function (response) {
         if (response.responseText) {
-          return auth.error(response.responseText);
+          modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
@@ -242,7 +241,11 @@ export const auth = {
         password_repeat: values.password_repeat
       };
 
-      $.ajax ({type: 'POST', url: '/auth/reset', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function (response) {
+      $.ajax ({
+        type: 'POST', url: '/auth/reset',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function (response) {
         modal.alert(response.responseText, 2000, false);
         setTimeout(function (){
           auth.redirect ('login');
