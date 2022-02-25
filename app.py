@@ -1009,6 +1009,45 @@ def internal_error(exception):
 def default_landing_page():
     return main_page('start')
 
+    def auth_templates(page, page_title):
+        if page == 'my-profile':
+            programs = DATABASE.public_programs_for_user(current_user()['username'])
+            public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
+            return render_template('profile.html', page_title=page_title, programs=programs,
+                                   public_settings=public_profile_settings, current_page='my-profile')
+
+        if page in ['signup', 'login', 'recover', 'reset']:
+            return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
+
+@app.route('/signup', methods=['GET'])
+def signup_page():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('signup.html', page_title=hedyweb.get_page_title('signup'), current_page='login')
+
+
+@app.route('/login', methods=['GET'])
+def login_page():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('login.html', page_title=hedyweb.get_page_title('login'), current_page='login')
+
+
+@app.route('/recover', methods=['GET'])
+def recover_page():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('recover.html', page_title=hedyweb.get_page_title('recover'), current_page='login')
+
+
+@app.route('/reset', methods=['GET'])
+def reset_page():
+    #If there is a current user: log out!
+    #Retrieve username and token and add to render_template
+    if current_user()['username']:
+        return
+    return
+
 
 @app.route('/<page>')
 def main_page(page):
