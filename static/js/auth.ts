@@ -55,7 +55,6 @@ export const auth = {
   entityify: function (string: string) {
       return string.replace (/&/g, '&amp;').replace (/</g, '&lt;').replace (/>/g, '&gt;').replace (/"/g, '&quot;').replace (/'/g, '&#39;').replace (/`/g, '&#96;');
    },
-  emailRegex: /^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/,
   redirect: function (where: string) {
     where = '/' + where;
     window.location.pathname = where;
@@ -287,6 +286,7 @@ export const auth = {
       });
     }
   },
+  // Todo TB Feb 2022 -> Re-write part of this functionality to the back-end as well (separate PR from #2101)
   markAsTeacher: function (username: string, is_teacher: boolean) {
     let text = "Are you sure you want to remove " + username + " as a teacher?";
     if (is_teacher) {
@@ -307,10 +307,10 @@ export const auth = {
     });
   },
 
+  // Todo TB Feb 2022 -> Re-write part of this functionality to the back-end as well (separate PR from #2101)
   changeUserEmail: function (username: string, email: string) {
     modal.prompt ('Please enter the corrected email', email, function (correctedEmail) {
       if (correctedEmail === email) return;
-      if (! correctedEmail.match (auth.emailRegex)) return modal.alert ('Please enter a valid email.', 2000, true);
       $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
         location.reload ();
       }).fail (function (error) {
