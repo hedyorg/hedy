@@ -1,0 +1,64 @@
+
+.grey-btn {
+    font-weight: 700;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-bottom-width: 4px;
+    border-radius: 0.25rem;
+    display: inline-block;
+  
+    background-color: #9fa8a3;
+  
+    color: rgb(247, 242, 242);
+  
+  
+    border-color: #595c5b;
+  
+  }
+
+.grey-btn:hover {
+
+    background-color: #9fa8a3;
+  
+  
+    border-color: #b4beb8;
+  
+}
+
+.greytab {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    margin-top: 0.5rem;
+    --bg-opacity: 1;
+    background-color: #f7fafc;
+    background-color: rgba(159,168,163, var(--bg-opacity));
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-top-width: 8px;
+    --border-opacity: 1;
+    border-color: #e2e8f0;
+    border-color: rgba(89,92,91, var(--border-opacity));
+    font-size: 0.875rem;
+    box-shadow:
+      /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1);
+  }
+  
+  @media (min-width: 1024px) { .greytab { padding-left: 0.5rem; padding-right: 0.5rem;
+  }
+  }
+  
+  @media (min-width: 1280px) { .greytab { padding-left: 1rem; padding-right: 1rem;
+  }
+  }
+  
+  .greytab + .greytab {
+  box-shadow:
+    /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1),
+    /* left */ inset 4px 0px 4px -1px rgba(0,0,0,0.1);
+  }
+
+
