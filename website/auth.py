@@ -585,7 +585,6 @@ def routes(app, database):
     @app.route('/auth/reset', methods=['POST'])
     def reset():
         body = request.json
-        print(body)
         # Validations
         if not isinstance(body, dict):
             return g.auth_texts.get('ajax_error'), 400
@@ -623,7 +622,7 @@ def routes(app, database):
     def mark_as_teacher():
         user = current_user()
         if not is_admin(user) and not is_testing_request(request):
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
         body = request.json
 
@@ -643,13 +642,14 @@ def routes(app, database):
         is_teacher_value = 1 if body['is_teacher'] else 0
         update_is_teacher(user, is_teacher_value)
 
+        # Todo TB feb 2022 -> Return the success message here instead of fixing in the front-end
         return '', 200
 
     @app.route('/admin/changeUserEmail', methods=['POST'])
     def change_user_email():
         user = current_user()
         if not is_admin(user):
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
         body = request.json
 
@@ -678,6 +678,7 @@ def routes(app, database):
         else:
             send_email_template('welcome_verify', body['email'], email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
 
+        # Todo TB feb 2022 -> Return the success message here instead of fixing in the front-end
         return '', 200
 
 

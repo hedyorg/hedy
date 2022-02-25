@@ -796,7 +796,7 @@ def programs_page(user):
 def query_logs():
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return 'unauthorized', 403
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     body = request.json
     if body is not None and not isinstance(body, dict):
@@ -806,11 +806,11 @@ def query_logs():
     if not is_admin(user):
         username_filter = body.get('username')
         if not class_id or not username_filter:
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', []):
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -824,7 +824,7 @@ def get_log_results():
 
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return 'unauthorized', 403
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
