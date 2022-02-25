@@ -1288,6 +1288,7 @@ def render_main_menu(current_page):
     ) for item in main_menu_json['nav']]
 
 
+# We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
 @app.route('/auth/public_profile', methods=['POST'])
 @requires_login
 def update_public_profile(user):
