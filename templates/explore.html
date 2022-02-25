@@ -9,9 +9,9 @@
     });
     </script>
     {% endif %}
-    <h2 class="px-8 mb-4">{{auth.explore_programs}}</h2>
+    <h2 class="px-8 mb-4">{{_('explore_programs')}}</h2>
     <div class="mb-4">
-        {{ auth.explore_explanation }}
+        {{_('explore_explanation')S}}
     </div>
     <div class="w-full mb-8" id="program_filter">
         <form onsubmit="event.preventDefault (); hedyApp.filter_programs();">
