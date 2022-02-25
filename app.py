@@ -640,7 +640,6 @@ def parse():
         'adventure_name': body.get('adventure_name', None)
     })
     if flag == 1:
-        max_index = LEVEL_MAX_NUM[current_level]
         if level_db == current_level:
             # unlock next level
             ad_index_db = 0
@@ -649,10 +648,6 @@ def parse():
             # write to database
             DATABASE.update_user(current_user () ['username'], {'level':level_db, 'ad_index':ad_index_db})
             
-        # else:
-        #     ad_index_db += 1
-        #     DATABASE.update_user(current_user (request) ['username'], {'level':level_db, 'ad_index':ad_index_db})
-        
         for i in range(len(RUN_COMMAND)):
             RUN_COMMAND[i] = 0
     

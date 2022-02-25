@@ -26,7 +26,7 @@
               {% if assignment.short_name != 'level' and ('adventures' not in customizations or customizations['adventures'][assignment.short_name] and level|int in customizations['adventures'][assignment.short_name]) %}
                 
               {% if assignment.lock == '1' %}
-              <div class="tab z-10 whitespace-nowrap flex items-center justify-center greytab" tabindex="0"  href ="javascript:return false; data-tab="{{assignment.short_name}}">
+              <div class="tab z-10 whitespace-nowrap flex items-center justify-center greytab" tabindex="0"  href ="javascript:return false;" data-tab="{{assignment.short_name}}">
                 {{ assignment.name }}
             </div>
               <!-- <a tabindex="0"   class="block text-black no-underline font-light greytab " tabindex="0" title="编辑"  href ="javascript:return false;" onclick="return false;" ><i>{{ assignment.name }}</i></a> -->
