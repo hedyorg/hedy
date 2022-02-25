@@ -2,15 +2,13 @@ import {LANG_en} from './syntaxLang-en';
 import {LANG_es} from './syntaxLang-es';
 import {LANG_nl} from './syntaxLang-nl';
 import {LANG_ar} from './syntaxLang-ar';
+import {LANG_fr} from './syntaxLang-fr';
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
 if (!window.State) {
 window.State = {};
 }
-
-// Set this to true to use keywords from languages other than english
-var localKeywordsEnable = true;
 
 // Contains the current keywords based on the current language
 var currentLang: {
@@ -43,23 +41,23 @@ var currentLang: {
   _WHILE: string;
   _LENGTH: string;
 };
-if(localKeywordsEnable){
-  switch(window.State.other_keyword_language){
-    case 'nl':
-      currentLang = LANG_nl;
-      break;
-    case 'ar':
-      currentLang = LANG_ar;
-      break;
-    case 'es':
-      currentLang = LANG_es;
-      break;
-    default:
-      currentLang = LANG_en;
-      break;
-  }
-} else {
-  currentLang = LANG_en;
+
+switch(window.State.lang){
+  case 'nl':
+    currentLang = LANG_nl;
+    break;
+  case 'ar':
+    currentLang = LANG_ar;
+    break;
+  case 'es':
+    currentLang = LANG_es;
+    break;
+  case 'fr':
+    currentLang = LANG_fr;
+    break;
+  default:
+    currentLang = LANG_en;
+    break;
 }
 
 interface Rule {

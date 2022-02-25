@@ -31,49 +31,18 @@ import textwrap
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
 from flask_helpers import render_template
 from flask_compress import Compress
+from flask_babel import Babel
+from flask_babel import gettext
 
 # Hedy-specific modules
 import hedy_content
 import hedyweb
+from hedy import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
-
-# Define and load all available language content
-ALL_LANGUAGES = {
-    'en': 'English',
-    'nl': 'Nederlands',
-    'es': 'Español',
-    'fr': 'Français',
-    'pt_pt': 'Português(pt)',
-    'pt_br': 'Português(br)',
-    'de': 'Deutsch',
-    'it': 'Italiano',
-    'sw': 'Swahili',
-    'hu': 'Magyar',
-    'el': 'Ελληνικά',
-    'zh': "简体中文",
-    'cs': 'Čeština',
-    'bg': 'Български',
-    'bn': 'বাংলা',
-    'hi': 'हिंदी',
-    'id': 'Bahasa Indonesia',
-    'fy': 'Frysk',
-    'ar': 'عربى'
-}
-# Define fall back languages for adventures
-FALL_BACK_ADVENTURE = {
-    'fy': 'nl',
-    'pt_br': 'pt_pt'
-}
-
-ALL_KEYWORD_LANGUAGES = {
-    'en': 'EN',
-    'nl': 'NL',
-    'es': 'ES'
-}
 
 LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
 for lang in ALL_LANGUAGES.keys():
@@ -103,20 +72,32 @@ TURTLE_PREFIX_CODE = textwrap.dedent("""\
 """)
 
 # Preamble that will be used for non-Turtle programs
+# numerals list generated from: https://replit.com/@mevrHermans/multilangnumerals
+
 NORMAL_PREFIX_CODE = textwrap.dedent("""\
     # coding=utf8
     import random, time
+    global int_saver
+    int_saver = int
+    def int(s):
+      if isinstance(s, str):
+        numerals_dict = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '𑁦': '0', '𑁧': '1', '𑁨': '2', '𑁩': '3', '𑁪': '4', '𑁫': '5', '𑁬': '6', '𑁭': '7', '𑁮': '8', '𑁯': '9', '०': '0', '१': '1', '२': '2', '३': '3', '४': '4', '५': '5', '६': '6', '७': '7', '८': '8', '९': '9', '૦': '0', '૧': '1', '૨': '2', '૩': '3', '૪': '4', '૫': '5', '૬': '6', '૭': '7', '૮': '8', '૯': '9', '੦': '0', '੧': '1', '੨': '2', '੩': '3', '੪': '4', '੫': '5', '੬': '6', '੭': '7', '੮': '8', '੯': '9', '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9', '೦': '0', '೧': '1', '೨': '2', '೩': '3', '೪': '4', '೫': '5', '೬': '6', '೭': '7', '೮': '8', '೯': '9', '୦': '0', '୧': '1', '୨': '2', '୩': '3', '୪': '4', '୫': '5', '୬': '6', '୭': '7', '୮': '8', '୯': '9', '൦': '0', '൧': '1', '൨': '2', '൩': '3', '൪': '4', '൫': '5', '൬': '6', '൭': '7', '൮': '8', '൯': '9', '௦': '0', '௧': '1', '௨': '2', '௩': '3', '௪': '4', '௫': '5', '௬': '6', '௭': '7', '௮': '8', '௯': '9', '౦': '0', '౧': '1', '౨': '2', '౩': '3', '౪': '4', '౫': '5', '౬': '6', '౭': '7', '౮': '8', '౯': '9', '၀': '0', '၁': '1', '၂': '2', '၃': '3', '၄': '4', '၅': '5', '၆': '6', '၇': '7', '၈': '8', '၉': '9', '༠': '0', '༡': '1', '༢': '2', '༣': '3', '༤': '4', '༥': '5', '༦': '6', '༧': '7', '༨': '8', '༩': '9', '᠐': '0', '᠑': '1', '᠒': '2', '᠓': '3', '᠔': '4', '᠕': '5', '᠖': '6', '᠗': '7', '᠘': '8', '᠙': '9', '០': '0', '១': '1', '២': '2', '៣': '3', '៤': '4', '៥': '5', '៦': '6', '៧': '7', '៨': '8', '៩': '9', '๐': '0', '๑': '1', '๒': '2', '๓': '3', '๔': '4', '๕': '5', '๖': '6', '๗': '7', '๘': '8', '๙': '9', '໐': '0', '໑': '1', '໒': '2', '໓': '3', '໔': '4', '໕': '5', '໖': '6', '໗': '7', '໘': '8', '໙': '9', '꧐': '0', '꧑': '1', '꧒': '2', '꧓': '3', '꧔': '4', '꧕': '5', '꧖': '6', '꧗': '7', '꧘': '8', '꧙': '9', '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4', '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9', '〇': '0', '一': '1', '二': '2', '三': '3', '四': '4', '五': '5', '六': '6', '七': '7', '八': '8', '九': '9', '零': '0'}
+        latin_numerals = ''.join([numerals_dict[letter] for letter in s])
+        return int_saver(latin_numerals)
+      return(int_saver(s))
 """)
 
 
 def load_adventure_for_language(lang):
+    ADVENTURES[lang].set_keyword_language(g.keyword_lang)
     adventures_for_lang = ADVENTURES[lang]
 
     if not adventures_for_lang.has_adventures():
         # The default fall back language is English
         fall_back = FALL_BACK_ADVENTURE.get(lang, "en")
         adventures_for_lang = ADVENTURES[fall_back]
-    return adventures_for_lang.adventures_file['adventures']
+
+    return adventures_for_lang
 
 
 def load_adventures_per_level(lang, level):
@@ -135,7 +116,9 @@ def load_adventures_per_level(lang, level):
 
     all_adventures = []
 
-    adventures = load_adventure_for_language(lang)
+    adventure_object = load_adventure_for_language(lang)
+    keywords = adventure_object.keywords
+    adventures = adventure_object.adventures_file['adventures']
 
     for short_name, adventure in adventures.items():
         if not level in adventure['levels']:
@@ -149,9 +132,9 @@ def load_adventures_per_level(lang, level):
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure['default_save_name'],
-            'text': adventure['levels'][level].get('story_text', 'No Story Text'),
-            'example_code': adventure['levels'][level].get('example_code'),
-            'start_code': adventure['levels'][level].get('start_code', ''),
+            'text': adventure['levels'][level].get('story_text', 'No Story Text').format(**keywords),
+            'example_code': adventure['levels'][level].get('example_code').format(**keywords) if adventure['levels'][level].get('example_code') else '',
+            'start_code': adventure['levels'][level].get('start_code').format(**keywords) if adventure['levels'][level].get('start_code') else '',
             'loaded_program': '' if not loaded_programs.get(short_name) else {
                 'name': loaded_programs.get(short_name)['name'],
                 'code': loaded_programs.get(short_name)['code']
@@ -162,9 +145,9 @@ def load_adventures_per_level(lang, level):
         for i in range(2, 10):
             extra_story = {}
             if adventure['levels'][level].get('story_text_' + str(i)):
-                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i))
+                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i)).format(**keywords)
                 if adventure['levels'][level].get('example_code_' + str(i)):
-                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i))
+                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i)).format(**keywords)
                 extra_stories.append(extra_story)
             else:
                 break
@@ -192,6 +175,35 @@ logging.basicConfig(
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
+
+babel = Babel(app)
+
+
+# Return the session language, if not: return best match
+@babel.localeselector
+def get_locale():
+    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
+
+"""
+    Some important notes relates to Flask-Babel usage:
+    -   We can always get a translation using gettext(u'english string')
+        NOTE: We can shorten this notation by simply using _('english string')
+    -   We can insert some variable like this: gettext(u'some string %(value)s', value=42)
+    -   More interesting for us might be the 'lazy string' the can be defined outside requests, like this:
+    -       lazy_gettext(u'Account successfully saved')
+    -   This will be really useful when wanting to return translated error messages
+    
+    - We have to mark ALL translatable string (in english!) with gettext() -> then create a .pot file
+    - We create the file as follows: 
+        pybabel extract -F babel.cfg -o messages.pot .
+    - To add a translation (for dutch): 
+        pybabel init -i messages.pot -d translations -l nl
+    - To update your files (when adding new strings):
+        FIRST create new file:  pybabel extract -F babel.cfg -o messages.pot . 
+        THEN:                   pybabel update -i messages.pot -d translations
+    LASTLY compile the files:   pybabel compile -d translations
+"""
+
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
@@ -290,11 +302,11 @@ def setup_language():
     # header to do language negotiation.
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
+    if 'keyword_lang' not in session:
+        session['keyword_lang'] = "en"
+
     g.lang = session['lang']
-
-
-    # Always set the keyword languages to English when starting
-    g.keyword_lang = "en"
+    g.keyword_lang = session['keyword_lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language in the list is selected
@@ -321,14 +333,18 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
 def enrich_context_with_user_info():
+    session['set_keyword_lang'] = False
     user = current_user()
     data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
     if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
         user_data = DATABASE.user_by_username(user.get('username'))
         data['user_messages'] = 0
-        if 'language' in user_data:
-            if user_data['language'] in ALL_LANGUAGES.keys():
-                g.lang = session['lang'] = user_data['language']
+        if user_data.get('language', '') in ALL_LANGUAGES.keys():
+            g.lang = session['lang'] = user_data['language']
+        if user_data.get('keyword_language', '') in ALL_LANGUAGES.keys():
+            g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
+            session['set_keyword_lang'] = True
+
         data['user_data'] = user_data
         if 'classes' in user_data:
             data['user_classes'] = DATABASE.get_student_classes(user.get('username'))
@@ -741,7 +757,7 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message='not_enrolled')
 
-    adventures = load_adventure_for_language(g.lang)
+    adventures = load_adventure_for_language(g.lang).adventures_file['adventures']
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures_names = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
     else:
@@ -874,16 +890,34 @@ def index(level, step):
     customizations = {}
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
-    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
-    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in customizations['levels']):
+    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
+    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
+
+    if 'levels' in customizations:
+        available_levels = customizations['levels']
+        now = timems()
+        for current_level, timestamp in customizations.get('opening_dates', {}).items():
+            if utils.datetotimeordate(timestamp) > utils.datetotimeordate(utils.mstoisostring(now)):
+                available_levels.remove(int(current_level))
+
+    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
         return utils.error_page(error=404, ui_message='no_such_level')
+
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
         teacher_adventures.append(DATABASE.get_adventure(adventure))
+
+    enforce_developers_mode = False
+    if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
+        enforce_developers_mode = True
+
+    hide_cheatsheet = False
+    if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
+        hide_cheatsheet = True
 
     return hedyweb.render_code_editor_with_tabs(
         level_defaults=defaults,
@@ -892,6 +926,8 @@ def index(level, step):
         version=version(),
         adventures=adventures,
         customizations=customizations,
+        hide_cheatsheet=hide_cheatsheet,
+        enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
@@ -990,11 +1026,16 @@ def main_page(page):
         return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
                                content=learn_more_translations)
 
+    if page == 'privacy':
+        privacy_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        return render_template('privacy.html', page_title=hedyweb.get_page_title(page),
+                               content=privacy_translations)
+
     user = current_user()
 
     if page == 'landing-page':
         if user['username']:
-            return render_template('landing-page.html', page_title=hedyweb.get_page_title(page),
+            return render_template('landing-page.html', page_title=hedyweb.get_page_title(page), user=user['username'],
                                    text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
             return utils.error_page(error=403, ui_message='not_user')
@@ -1088,11 +1129,16 @@ def change_language():
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
-    translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
-    if translated_code:
-        return jsonify({'success': 200, 'code': translated_code})
-    else:
+    print(body)
+    try:
+        translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
+        if translated_code:
+            return jsonify({'success': 200, 'code': translated_code})
+        else:
+            return g.auth_texts.get('translate_error'), 400
+    except:
         return g.auth_texts.get('translate_error'), 400
+
 
 @app.template_global()
 def current_language():
@@ -1104,10 +1150,13 @@ def current_keyword_language():
 
 @app.template_global()
 def other_keyword_language():
-    if session['lang'] in ALL_KEYWORD_LANGUAGES.keys() and g.keyword_lang != session['lang']:
-        return make_keyword_lang_obj(g.lang)
-    if g.keyword_lang != "en": #Always return English as an option!
+    # If the current keyword language isn't English: we are sure the other option is English
+    if g.keyword_lang != "en":
         return make_keyword_lang_obj("en")
+    else:
+        # If the current language is in supported keyword languages and not equal to our current keyword language
+        if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang != g.keyword_lang:
+            return make_keyword_lang_obj(g.lang)
     return None
 
 @app.template_global()
@@ -1152,6 +1201,13 @@ def other_languages():
     cl = g.lang
     return [make_lang_obj(l) for l in ALL_LANGUAGES.keys() if l != cl]
 
+@app.template_global()
+def keyword_languages():
+    return [make_lang_obj(l) for l in ALL_KEYWORD_LANGUAGES.keys()]
+
+@app.template_global()
+def keyword_languages_keys():
+    return [l for l in ALL_KEYWORD_LANGUAGES.keys()]
 
 def make_lang_obj(lang):
     """Make a language object for a given language."""
@@ -1218,17 +1274,15 @@ def update_public_profile(user):
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
-    source_file = f'{source}.yaml'
-    source_adventures = YamlFile.for_file(utils.construct_content_path('adventures', source_file)).to_dict()
-    source_levels = YamlFile.for_file(utils.construct_content_path('level-defaults', source_file)).to_dict()
-    source_texts = YamlFile.for_file(utils.construct_content_path('texts', source_file)).to_dict()
-    source_keywords = YamlFile.for_file(utils.construct_content_path('keywords', source_file)).to_dict()
+    source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml').to_dict()
+    source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml').to_dict()
+    source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml').to_dict()
+    source_keywords = YamlFile.for_file(f'coursedata/keywords/{source}.yaml').to_dict()
 
-    target_file = f'{target}.yaml'
-    target_adventures = YamlFile.for_file(utils.construct_content_path('adventures', target_file)).to_dict()
-    target_levels = YamlFile.for_file(utils.construct_content_path('level-defaults', target_file)).to_dict()
-    target_texts = YamlFile.for_file(utils.construct_content_path('texts', target_file)).to_dict()
-    target_keywords = YamlFile.for_file(utils.construct_content_path('keywords', target_file)).to_dict()
+    target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml').to_dict()
+    target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml').to_dict()
+    target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml').to_dict()
+    target_keywords = YamlFile.for_file(f'coursedata/keywords/{target}.yaml').to_dict()
 
     files = []
 
@@ -1260,10 +1314,10 @@ def translate_fromto(source, target):
 
 @app.route('/update_yaml', methods=['POST'])
 def update_yaml():
-    filename = utils.construct_content_path(request.form['file'])
-    # The file MUST point to something inside our 'content' directory
+    filename = path.join('coursedata', request.form['file'])
+    # The file MUST point to something inside our 'coursedata' directory
     filepath = path.abspath(filename)
-    expected_path = utils.construct_content_path()
+    expected_path = path.abspath('coursedata')
     if not filepath.startswith(expected_path):
         raise RuntimeError('Invalid path given')
 

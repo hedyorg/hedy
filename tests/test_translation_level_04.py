@@ -85,19 +85,3 @@ class TestsTranslationLevel4(HedyTester):
         expected = "print 'my name is ' name"
 
         self.assertEqual(expected, result)
-
-    def test_add_remove_en_nl(self):
-        code = textwrap.dedent("""\
-        dieren is koe, kiep
-        add muis to dieren
-        remove koe from dieren
-        print dieren at random""")
-
-        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
-        expected = textwrap.dedent("""\
-        dieren is koe, kiep
-        voeg muis toe aan dieren
-        verwijder koe uit dieren
-        print dieren op willekeurig""")
-
-        self.assertEqual(expected, result)

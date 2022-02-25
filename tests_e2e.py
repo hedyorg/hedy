@@ -94,7 +94,7 @@ class AuthHelper(unittest.TestCase):
         if username in USERS:
             return USERS[username]
         body = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'language': 'nl', 'password': 'foobar', 'password_repeat': 'foobar'}
+                'language': 'nl', 'keyword_language': 'en', 'agree_terms': True, 'password': 'foobar', 'password_repeat': 'foobar'}
         response = request('post', 'auth/signup', {}, body, cookies=self.user_cookies[username])
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
@@ -268,7 +268,7 @@ class TestAuth(AuthHelper):
         # GIVEN a valid username and signup body
         username = self.make_username()
         user = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl'}
+                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl', 'keyword_language': 'en', 'agree_terms': True}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server
@@ -347,12 +347,12 @@ class TestAuth(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         # WHEN attepting to verify the user
-        # THEN receive a redirect from the server taking us to `/`
+        # THEN receive a redirect from the server taking us to `/landing-page`
         headers = self.get_data('auth/verify?' + urllib.parse.urlencode({'username': self.username, 'token': self.user['verify_token']}), expect_http_code=302, return_headers=True)
-        self.assertEqual(headers['location'], HOST)
+        self.assertEqual(headers['location'], HOST + 'landing-page')
 
         # WHEN attepting to verify the user again (the operation should be idempotent)
-        # THEN (again) receive a redirect from the server taking us to `/`
+        # THEN (again) receive a redirect from the server taking us to `/landing-page`
         headers = self.get_data('auth/verify?' + urllib.parse.urlencode({'username': self.username, 'token': self.user['verify_token']}), expect_http_code=302, return_headers=True)
         self.assertEqual(headers['location'], HOST + 'landing-page')
 
@@ -473,11 +473,6 @@ class TestAuth(AuthHelper):
             {'gender': 'a'},
             {'language': True},
             {'language': 123},
-            {'prog_experience': 1},
-            {'prog_experience': 'foo'},
-            {'prog_experience': True},
-            {'experience_languages': 'python'},
-            {'experience_languages': ['python', 'foo']}
         ]
 
         for invalid_body in invalid_bodies:
@@ -493,13 +488,11 @@ class TestAuth(AuthHelper):
         profile_changes = {
            'birth_year': 1989,
            'country': 'NL',
-           'gender': 'o',
-           'prog_experience': 'yes',
-           'experience_languages': ['python', 'other_block']
+           'gender': 'o'
         }
 
         for key in profile_changes:
-            body = {'email': self.user['email'], 'language': self.user['language']}
+            body = {'email': self.user['email'], 'language': self.user['language'], 'keyword_language': self.user['keyword_language']}
             body[key] = profile_changes[key]
             # THEN receive an OK response code from the server
             self.post_data('profile', body)
@@ -513,7 +506,7 @@ class TestAuth(AuthHelper):
         # (we check email change separately since it involves a flow with a token)
         # THEN receive an OK response code from the server
         new_email = self.username + '@newhedy.com'
-        body = self.post_data('profile', {'email': new_email, 'language': self.user['language']})
+        body = self.post_data('profile', {'email': new_email, 'language': self.user['language'], 'keyword_language': self.user['keyword_language']})
 
         # THEN confirm that the server replies with an email verification token
         self.assertIsInstance(body['token'], str)

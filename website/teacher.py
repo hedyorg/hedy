@@ -58,9 +58,6 @@ def routes(app, database, achievements):
         if achievement:
             achievement = json.dumps(achievement)
 
-        teachers = os.getenv('BETA_TEACHERS', '').split(',')
-        is_beta_teacher = user['username'] in teachers
-
         invites = []
         for invite in DATABASE.get_class_invites(Class['id']):
             invites.append({'username': invite['username'], 'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))})
@@ -68,7 +65,6 @@ def routes(app, database, achievements):
         return render_template ('class-overview.html', current_page='my-profile',
                                 page_title=hedyweb.get_page_title('class overview'),
                                 achievement=achievement, invites=invites,
-                                is_beta_teacher=is_beta_teacher,
                                 class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class ['link'],
                                             'name': Class ['name'], 'id': Class ['id']})
 
@@ -252,10 +248,25 @@ def routes(app, database, achievements):
         if not isinstance(body.get('levels'), list):
             return "Levels must be a list", 400
         if not isinstance(body.get('adventures'), dict):
-            return 'adventures must be a dict', 400
+            return 'Adventures must be a dict', 400
+        if not isinstance(body.get('opening_dates'), dict):
+            return 'Opening dates must be a dict', 400
+
+        print(body)
 
         #Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body['levels']]
+
+        opening_dates = body['opening_dates'].copy()
+        for level, timestamp in body.get('opening_dates').items():
+            if len(timestamp) < 1:
+                opening_dates.pop(level)
+            else:
+                try:
+                    opening_dates[level] = utils.datetotimeordate(timestamp)
+                except:
+                    return 'One or more of your opening dates is invalid', 400
+
         adventures = {}
         for name, adventure_levels in body['adventures'].items():
             adventures[name] = [int(i) for i in adventure_levels]
@@ -263,8 +274,10 @@ def routes(app, database, achievements):
         customizations = {
             'id': class_id,
             'levels': levels,
+            'opening_dates': opening_dates,
             'adventures': adventures,
-            'teacher_adventures': body['teacher_adventures']
+            'teacher_adventures': body['teacher_adventures'],
+            'other_settings': body['other_settings']
         }
 
         DATABASE.update_class_customizations(customizations)
@@ -382,8 +395,9 @@ def routes(app, database, achievements):
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):
-            # Set the current teacher language as new account language
+            # Set the current teacher language and keyword language as new account language
             account['language'] = g.lang
+            account['keyword_language'] = g.keyword_lang
             store_new_account(account, account.get('email').strip().lower())
             if account.get('class'):
                 class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]
