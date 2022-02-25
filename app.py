@@ -1312,8 +1312,8 @@ def update_public_profile(user):
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
-        return {'achievement': achievement}, 200
-    return '', 200
+        return {'success': g.auth_texts.get('public_profile_updated'), 'achievement': achievement}, 200
+    return {'success': g.auth_texts.get('public_profile_updated')}, 200
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):

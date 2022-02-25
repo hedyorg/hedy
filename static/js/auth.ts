@@ -78,21 +78,6 @@ export const auth = {
       });
     });
   },
-  error: function (message: string, element?: string | null, id?: string) {
-    $ (id || '#error').html (message);
-    $ (id || '#error').css ('display', 'block');
-    if (element) $ ('#' + element).css ('border', 'solid 1px red');
-  },
-  clear_error: function (id?: string) {
-    $ (id || '#error').html ('');
-    $ (id || '#error').css ('display', 'none');
-    $ ('form *').css ('border', '');
-  },
-  success: function (message: string, id?: string) {
-    $ ('#error').css ('display', 'none');
-    $ (id || '#success').html (message);
-    $ (id || '#success').css ('display', 'block');
-  },
   submit: function (op: string) {
     const values: UserForm = {};
     $ ('form.js-validated-form *').map (function (_k, el) {
@@ -150,7 +135,6 @@ export const auth = {
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
         afterLogin({"teacher": response['teacher']});
       }).fail (function (response) {
-        auth.clear_error();
         if (response.responseText) {
            modal.alert(response.responseText, 3000, true);
         } else {
@@ -272,21 +256,20 @@ export const auth = {
         data: JSON.stringify(data),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
-        auth.success (auth.texts['public_profile_updated']);
+        modal.alert(response.success, 3000, false);
         if (response.achievement) {
           showAchievements(response.achievement, false, "");
         }
         $('#public_profile_redirect').show();
       }).fail (function (response) {
         if (response.responseText) {
-          return auth.error(response.responseText);
+          modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
   },
-  // Todo TB Feb 2022 -> Re-write part of this functionality to the back-end as well (separate PR from #2101)
   markAsTeacher: function (username: string, is_teacher: boolean) {
     let text = "Are you sure you want to remove " + username + " as a teacher?";
     if (is_teacher) {
@@ -311,11 +294,15 @@ export const auth = {
   changeUserEmail: function (username: string, email: string) {
     modal.prompt ('Please enter the corrected email', email, function (correctedEmail) {
       if (correctedEmail === email) return;
-      $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
+      $.ajax ({
+        type: 'POST',
+        url: '/admin/changeUserEmail',
+        data: JSON.stringify ({username: username, email: correctedEmail}),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         location.reload ();
-      }).fail (function (error) {
-        console.log (error);
-        modal.alert (['Error when changing the email for User', username].join (' '), 2000, true);
+      }).fail (function () {
+        modal.alert (['Error when changing the email for user', username].join (' '), 2000, true);
       });
     });
   },
