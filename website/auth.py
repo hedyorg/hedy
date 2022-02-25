@@ -678,7 +678,6 @@ def routes(app, database):
         else:
             send_email_template('welcome_verify', body['email'], email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
 
-        # Todo TB feb 2022 -> Return the success message here instead of fixing in the front-end
         return '', 200
 
 
