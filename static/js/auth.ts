@@ -132,11 +132,10 @@ export const auth = {
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
         afterLogin({"teacher": false});
       }).fail (function (response) {
-        auth.clear_error();
         if (response.responseText) {
-          auth.error(response.responseText);
+          modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
@@ -192,9 +191,12 @@ export const auth = {
     }
 
     if (op === 'change_password') {
-      const payload = {old_password: values.old_password, password: values.password, password_repeat: values.password_repeat};
+      const payload = {
+        old_password: values.old_password,
+        password: values.password,
+        password_repeat: values.password_repeat
+      };
 
-      auth.clear_error ('#error-password');
       $.ajax ({
         type: 'POST',
         url: '/auth/change_password',
@@ -265,7 +267,6 @@ export const auth = {
         personal_text: $('#personal_text').val() ? $('#personal_text').val():  undefined,
         favourite_program: $('#favourite_program').val() ? $('#favourite_program').val():  undefined
       }
-
       $.ajax ({
         type: 'POST',
         url: '/auth/public_profile',
@@ -328,29 +329,6 @@ if ($ ('#country')) {
     html += '<option value="' + code + '">' + countries [code] + '</option>';
   });
   $ ('#country').html (html);
-}
-
-// We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
-// Todo TB Feb 2022 -> Why do we do this ?!
-// This request returns A LOT of front-end errors, something we really really don't want
-// It isn't relevant to the front-end if we are logged in as the back-end will take care of that
-// We have to do some deep clean-up here to make the code understandable, readable and efficient
-$.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-   if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
-   auth.profile = response;
-});
-
-if (window.location.pathname === '/signup') {
-  const login_username = localStorage.getItem ('hedy-login-username');
-  if (login_username) {
-    localStorage.removeItem ('hedy-login-username');
-    if (login_username.match ('@')) $ ('#email').val (login_username);
-    else                            $ ('#username').val (login_username);
-  }
-  const redirect = localStorage.getItem('hedy-save-redirect');
-  if (redirect && redirect.includes('invite')) {
-    $ ('#is_teacher_div').hide();
-  }
 }
 
 $("#language").change(function () {
