@@ -28,8 +28,8 @@
             {echo} dus je lievelingskleur is
     -   name: "{print} emojis"
         explanation: "print een emoji met `{print}`"
-        example: "Example: {print} 🙋‍ 🌍 ❗"
-        demo_code: "{print} 🙋 🌍 ❗"
+        example: "Example: {print} \U0001F64B‍ \U0001F30D ❗"
+        demo_code: "{print} \U0001F64B \U0001F30D ❗"
     -   name: "{forward}"
         explanation: "Een lijn trekken met `{forward}`."
         example: "Bijvoorbeeld: {forward} 100"
@@ -42,6 +42,9 @@
             {turn} left
             {forward} 25
             {turn} right
+    example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
 2:
     intro_text: |
         In level 2 leren we iets nieuws. Je kunt een woord een naam geven met `{is}`. Je kunt daarna in je code overal naam gebruiken. Dat wordt dan vervangen door Hedy. Zo:
@@ -209,6 +212,18 @@
         demo_code: |-
             antwoord {is} {ask} 'Hoe ver moet ik lopen?'
             {if} antwoord {is} ver {forward} 100 {else} {forward} 5
+    -   name: '{if}'
+        explanation: Make a choice with `{if}`
+        example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+        demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+    -   name: '{if} with turtle'
+        explanation: Make a choice with `{if}`
+        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
+        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    -   name: '{in}'
+        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        explanation: Check elements with `{in}`
+        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
     start_code: "{print} '5 keer 5 is ' 5 * 5"
     intro_text: |
@@ -272,6 +287,14 @@
         example: "Bijvoorbeeld: {repeat} 3 {times} {forward} 10"
         demo_code: |-
             {repeat} 3 {times} {forward} 10
+    -   demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+        name: '{if}'
+        explanation: Make a choice with `{if}`
+        example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+    -   name: '{repeat} - turtle'
+        explanation: repeat a line of code with `{repeat}`.
+        example: 'Example: {repeat} 3 {times} {forward} 10'
+        demo_code: '{repeat} 3 {times} {forward} 10'
 8:
     start_code: |-
         {repeat} 5 {times}
@@ -308,6 +331,10 @@
             {repeat} 4 {times}
                 {turn} 90
                 {forward} 50
+    -   example: 'Example: draw a square'
+        name: '`{repeat}` with turtle'
+        explanation: '{repeat} multiple lines'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
     start_code: |-
         {repeat} 3 {times}
@@ -373,6 +400,10 @@
             dieren {is} hond, kat, papegaai
             {for} dier {in} dieren
               {print} dier
+    -   explanation: 'print all things in a list '
+        example: 'Example: {for} animal {in} animals'
+        demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
+        name: '{for} with a list'
 11:
     start_code: |-
         {for} i {in} {range} 1 {to} 10
@@ -388,6 +419,10 @@
             {for} i {in} {range} 1 {to} 10
                 {print} i
             {print} 'Wie niet weg is is gezien'
+    -   demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+        name: '{ask}'
+        explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+        example: "Example: answer = {ask} 'What is 5 plus 5?'"
 12:
     start_code: |-
         {print} 'kommagetallen gaan met een punt!'
@@ -695,75 +730,6 @@
             {else}:
                 {print} 'Jouw kleur is zeker niet groen'
 18:
-    start_code: |-
-        naam = 'Hedy'
-        {print}('ik heet ', naam)
-    intro_text: |-
-        We zijn aangekomen bij echte Pythoncode! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
-        Zo gaat dat:
-
-        ```
-        {print}('ik heet Hedy!')
-        ```
-
-        Wil je meerdere dingen printen? Dan moeten daar steeds komma's tussen.
-
-        ```
-        naam = 'Hedy'
-        {print}('ik heet ', naam)
-        ```
-
-
     commands:
-    -   name: "{print}"
-        explanation: "Bij `{print}` moet je haakjes gebruiken"
-        example: "{print}"
-        demo_code: |-
-            {print}('hallo!')
-    -   name: "{print} met var"
-        explanation: "Bij `{print}` moet je haakjes gebruiken en komma's als je meerdere dingen {print}"
-        example: "{print}"
-        demo_code: |-
-            naam = 'Hedy'
-            {print}('ik heet', naam)
-
-#21:
-#    start_code: |-
-#        {print}('Hoeveel is 5+3?')
-#        antwoord = 5+3
-#        {print}('antwoord {is} nu:')
-#        {print}(antwoord)
-#        {if} antwoord == 8:
-#            {print}('Dat {is} goed!')
-#        {else}:
-#            {print}('Helaas dat {is} fout!')
-#    intro_text: "Nu veranderen we {is} in `=` en `==`. Je gebruikt `=` als je iets een getal wilt maken. Als je bijvoorbeeld antwoord 8 wilt maken zeg je antwoord = 8. `==` gebruik je om te kijken of twee dingen hetzelfde zijn."
-#    commands:
-#    -   name: "Vergelijken"
-#        explanation: "Als we gaan vergelijken gebruiken we dus ==. 5+3 == 8 kijkt dus of 5+3 gelijk {is} aan 8"
-#        example: "Bijvoorbeeld: 5+3 == 8"
-#        demo_code: |-
-#            {if} 5+3 == 8:
-#                {print}('5+3 {is} inderdaad 8')
-#            {else}:
-#                {print}('Dit wordt niet ge{print} want 5+3 {is} 8!')
-#    -   name: "Waarde geven"
-#        explanation: "Als we willen zeggen dat een variabele genaamd antwoord 8 is, dan doen we antwoord = 8."
-#        example: "Bijvoorbeeld: antwoord = 8"
-#        demo_code: |-
-#            {print}('Hoeveel is 5+3?')
-#            antwoord = 5+3
-#            {print}('antwoord {is} nu:')
-#            {print}(antwoord)
-#    -   name: "Vergelijken en waarde geven"
-#        explanation: "Als we gaan vergelijken gebruiken we dus `==`. Als we een waarde geven dan gebruiken we `=`. "
-#        example: "Bijvoorbeeld: antwoord == 8, antwoord = 8"
-#        demo_code: |-
-#            {print}('Hoeveel is 5+3?')
-#            antwoord = 5+3
-#            {print}('antwoord {is} nu:')
-#            {print}(antwoord)
-#            {if} antwoord == 8:
-#                {print}('Dat {is} goed!')
-#            {else}:
-#                {print}('Helaas dat {is} fout!')
+    -   {}
+    -   {}

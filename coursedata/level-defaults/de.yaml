@@ -39,6 +39,13 @@
             turn left
             forward 25
             turn right
+    -   demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+        name: '{turn}'
+        explanation: turn the drawing turtle with `{turn}`
+        example: 'Example: {turn}'
+    example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
 2:
     intro_text: |
         In Level 2 lernen wir etwas Neues. Du kannst ein Wort mit `is` benennen. `is` bedeutet ist. 
@@ -392,6 +399,11 @@
             for i in range 1 to 10
               print i
             print 'Bereit oder nicht, hier komme ich!'
+        name: '{for} loop'
+    -   name: '{ask}'
+        explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+        example: "Example: answer = {ask} 'What is 5 plus 5?'"
+        demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
 12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
@@ -428,6 +440,14 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
+    -   example: name = 'Hedy'
+        name: quotes after {if} comparison
+        explanation: Text with quotation marks after {if}
+        demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
+    -   name: quotes in list
+        explanation: A list with quotation marks
+        example: name = 'Hedy', 'Felienne'
+        demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
 13:
     start_code: |-
         Name = ask 'Wie heißt Du?'
@@ -519,6 +539,22 @@
             alter = ask 'Wie alt bist du?'
             if alter > 13
                 print 'Du bist älter als ich!'
+    -   name: Equal
+        explanation: We use the `==` to check if two things are the same.
+        example: 'For example: answer == 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+    -   name: Not equal
+        example: 'For example: answer != 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+        explanation: 'We use the `!=` to check if two things are not the same. '
+    -   explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+        example: 'For example: age <= 12'
+        name: Smaller {or} equal
+        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+    -   example: 'For example: age >= 14'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+        name: Bigger or equal
+        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
 15:
     start_code: |-
         antwort = 0
@@ -566,6 +602,7 @@
         demo_code: |-
             früchte = ['Apfel', 'Banane', 'Kirsche']
             print früchte
+        name: square brackets
     -   name: "Nimm ein Element aus einer Liste"
         explanation: |-
             Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
@@ -600,6 +637,7 @@
             for i in range 1 to 12:
                 print i
             print 'Bereit oder nicht, hier komme ich!'
+        name: '{elif}'
     -   explanation: "Wir müssen dasselbe mit allen unseren `if`-Anweisungen tun."
         example: "if farbe is grün:'"
         demo_code: |-
@@ -608,6 +646,7 @@
                 print 'Die Farbe ist grün.'
             else:
                 print 'Die Farbe ist nicht grün.'
+        name: '{print}'
     -   explanation: |-
             Wir zeigen euch einen neuen Befehl, den ihr verwenden könnt: `elif`.
             `elif` steht für \"else if\".
@@ -621,3 +660,4 @@
                 print 'a ist 2'
             else:
                 print 'a ist nicht 1 oder 2'
+        name: '{if}'

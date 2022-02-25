@@ -51,6 +51,9 @@ ui:
     not_user: Scheint als wärst du nicht angemeldet!
     not_enrolled: Scheint als wärst du nicht in dieser Klasse!
     retrieve_class: Nur Lehrer können Klassen einsehen
+    user_not_private: This user doesn't exist or doesn't have a public profile
+    retrieve_adventure: You're not allowed to view this adventure!
+    no_such_adventures: This adventure doesn't exist!
 ClientErrorMessages:
     Transpile_success:
     -   Gut gemacht!
@@ -68,6 +71,13 @@ ClientErrorMessages:
     Program_too_long: "Dein Programm ist zu lang um es auszuführen."
     Empty_output: Dieses Programm funktioniert aber gibt nichts aus. Füge ein `print` Befehl hinzu oder benutz die Schildkröt um eine Ausgabe zu bekommen.
     Program_repair: Das könnte der korrekte Code sein, kannst du es beheben?
+    turtle: 🐢
+    rock: ✂️, 📜, 🗻
+    haunted: 🦇, 👻, 🎃
+    restaurant: 🍣, 🍕, 🍔
+    fortune: 🔮, ✨
+    songs: 🎵,🎶
+    dice: 🎲
 HedyErrorMessages:
     Wrong Level: "Das war richtige Hedy-Sprache, aber nicht im richtigen Level. Du hast ein Sprachelement aus Level {working_level} in Level {original_level} verwendet."
     Incomplete: "Hoppla! Du hast ein Programm-Stück vergessen! In Zeile {line_number}, musst du nach {incomplete_command} noch Text eingeben."
@@ -105,6 +115,13 @@ HedyErrorMessages:
     integer: eine ganze Zahl
     float: eine gebrochene Zahl
     list: eine Liste
+    Missing Command: It looks like you forgot to use a command on line {line_number}.
+    input: input from ask
+    Unquoted Equality Check: If you want to check if a variable is equal to multiple words, the words should be surrounded by quotation marks!
+    Unsupported Float: Non-integer numbers are not supported yet but they will be in a few levels. For now change {value} to an integer.
+    Locked Language Feature: You are using {concept}! That is awesome, but {concept} is not unlocked yet! It will be unlocked in a later level.
+    ask_needs_var: "Starting in level 2, ask needs to be used with a variable and quotation marks. Example: name is ask 'What are you called?'"
+    echo_out: "Starting in level 2 echo is no longer needed. You can repeat an answer with ask and print now. Example: name is ask 'What are you called?' print 'hello' name"
 Auth:
     create_account: "Neues Konto anlegen"
     create_account_explanation: "Dein eigenes Konto erlaubt es dir, deine Programme zu speichern."
@@ -249,6 +266,112 @@ Auth:
     reset: Level zurücksetzen
     programs: Programme
     page: Seite
+    translate_error: Something went wrong while translating the code. Try running the code to see if it has an error. Code with errors can not be translated.
+    delete_public: Delete public profile
+    update_public: Update public profile
+    invite_date: Invite date
+    my_messages: My messages
+    delete_invite: Delete invitation
+    create_adventure: Create adventure
+    adventure_prompt: Please enter the name of the adventure
+    username_empty: You didn't enter an username!
+    adventure_empty: You didn't enter an adventure name!
+    update_adventure_prompt: Are you sure you want to update this adventure?
+    delete_adventure_prompt: Are you sure you want to remove this adventure?
+    customize_adventure: Customize adventure
+    general_settings: General settings
+    preferred_keyword_language: Preferred keyword language
+    settings: My personal settings
+    agree_with: I agree to the
+    privacy_terms: privacy terms
+    agree_third_party: I consent to being contacted by partners of Leiden University with sales opportunities (optional)
+    public_profile: Public profile
+    profile_picture: Profile picture
+    personal_text: Personal text
+    your_personal_text: Your personal text...
+    keyword_language_invalid: Please select a valid keyword language (select English or your own language)
+    agree_invalid: You have to agree with the privacy terms
+    image_invalid: Your image is invalid
+    personal_text_invalid: Your personal text is invalid
+    favourite_program_invalid: Your favourite program is invalid
+    adventure_id_invalid: This adventure id is invalid
+    adventure_name_invalid: This adventure name is invalid
+    level_invalid: This Hedy level in invalid
+    content_invalid: This adventure is invalid
+    public_invalid: This agreement selection is invalid
+    adventure_length: Your adventure has to be at least 20 characters
+    adventure_updated: The adventure has been updated!
+    profile_updated_reload: Profile updated, page will be re-loaded.
+    public_profile_updated: Public profile updated.
+    public_profile_visit: You can visit your public profile! Click
+    public_profile_link: here
+    my_achievements: My achievements
+    last_achievement: Last earned achievement
+    favourite_confirm: Are you sure you want to set this program as your favourite?
+    favourite_success: Your program is set as favourite
+    invite_student: Invite student
+    pending_invites: Pending invites
+    remove_invite: Remove invite
+    invite_prompt: Enter a username
+    student_already_in_class: This student is already in your class
+    student_already_invite: This student already has a pending invitation
+    invite_message: You have received an invitation to join class
+    sent_by: This invitation is sent by
+    visible_columns: Visible columns
+    enter_password: Enter a new password for
+    password_change_prompt: Are you sure you want to change this password?
+    password_change_not_allowed: You're not allowed to change the password of this user
+    password_change_success: Password of your student is successfully changed
+    class_stats: Show class statistics
+    remove_customizations_prompt: Are you sure you want to remove this class their customizations?
+    select_levels: Select levels
+    select_adventures: Select adventures
+    mandatory_mode: Mandatory developer's mode
+    hide_cheatsheet: Hide cheatsheet
+    select_own_adventures: Select own adventures
+    reset_adventure_prompt: Are you sure you want to reset all selected adventures?
+    reset_adventures: Reset selected adventures
+    accounts: Accounts
+    select_class: Select class
+    reset_view: Reset
+    create: Create accounts
+    no_accounts: There are no accounts to create.
+    unique_usernames: All usernames need to be unique.
+    unique_emails: All mail addresses need to be unique.
+    emails_exist: One or more mail addresses is already in use.
+    accounts_created: Accounts where successfully created.
+    adventure_exp_2: 'If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:'
+    adventure_exp_3: You can use the "preview" button to view a styled version of your adventure. To view the adventure on a dedicated page, select "view" from the teachers page.
+    template_code: "This is the explanation of my adventure!\n\nThis way I can show a command: <code>print</code>\n\nBut sometimes I might want to show a piece of code, like this:\n<pre>\nask What's your name?\necho so your name is \n</pre>"
+    last_update: Last update
+    explore_explanation: "On this page you can look through programs created by other Hedy users. You can filter on both a Hedy level and adventure.\nClick on \"View program\" to open a program and run it. Programs with a red header contain a mistake. You can still open the program, but running it will result in an error. You can of course try to fix it!\nIf the creator has a public profile you can click their username to visit their profile. There you will find all their shared programs and much more!\n"
+    favourite_program: Favourite program
+    adventure_duplicate: You already have an adventure with this name
+    delete_invite_prompt: Are you sure you want to remove this class invitation?
+    student_not_existing: This username doesn't exist
+    class_customize_success: Class successfully customized.
+    customization_deleted: Customizations successfully deleted.
+    no_customizations: There are not (yet) customizations for this class
+    remove_customization: Remove customization
+    option: Option
+    opening_date: Opening date
+    opening_dates: Opening dates
+    directly_available: Directly open
+    create_student_accounts: Create student accounts
+    create_accounts: Create multiple accounts
+    add: Add
+    create_accounts_prompt: Are you sure you want to create these accounts?
+    passwords_six: All passwords need to be six characters or longer.
+    class_invalid: This class id is invalid.
+    usernames_exist: One or more usernames is already in use.
+    accounts_intro: "On this page you can create accounts for multiple students at the same time. It is also possible to directly add them to one of your classes.\nBy pressing the green + on the bottom right of the page you can add extra rows. You can delete a row by pressing the corresponding red cross.\nMake sure no rows are empty when you press \"Create accounts\". Please keep in mind that every username and mail address needs to be unique and the password needs to be <b>at least</b> 6 characters.\n"
+    adventure: Adventure
+    my_adventures: My adventures
+    level: Level
+    adventure_terms: I agree that my adventure might be made publicly available on Hedy.
+    preview: Preview
+    adventure_exp_1: 'Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under "customizations". If you want to include a command in your adventure please use code anchors like this:'
+    view: View
 Programs:
     recent: "Zuletzt verwendete Programme"
     level: "Level"
@@ -275,6 +398,12 @@ Programs:
     submit_warning: Bist du dir sicher dass du das Programm absenden willst?
     submitted_header: Das ist ein bereits versendetes Programm und kann nicht mehr geändert werden.
     search: Suche
+    amount_saved: programs saved
+    amount_submitted: programs submitted
+    no_shared_programs: has no shared programs...
+    public_profile_info: By selecting this box I make my profile visible for everyone. Be careful not to share personal information like your name or home address, because everyone will be able to see it!
+    view_program: View program
+    amount_created: programs created
 Landing_page:
     welcome: Willkommen
     intro_text: |-
