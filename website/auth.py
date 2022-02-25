@@ -615,7 +615,7 @@ def routes(app, database):
         if not is_testing_request(request):
             send_email_template('reset_password', user['email'], None)
 
-        return '', 200
+        return g.auth_texts.get('password_resetted'), 200
 
     # *** ADMIN ROUTES ***
 

@@ -242,8 +242,8 @@ export const auth = {
         password_repeat: values.password_repeat
       };
 
-      $.ajax ({type: 'POST', url: '/auth/reset', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        modal.alert(auth.texts['password_resetted'], 2000, false);
+      $.ajax ({type: 'POST', url: '/auth/reset', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function (response) {
+        modal.alert(response.responseText, 2000, false);
         setTimeout(function (){
           auth.redirect ('login');
         }, 2000);
