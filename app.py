@@ -1041,12 +1041,8 @@ def reset_page():
     username = None if username == "null" else username
     token = None if token == "null" else token
 
-    print(username)
-    print(token)
-
     if not username or not token:
         return utils.error_page(error=403, ui_message='unauthorized')
-
     return render_template('reset.html', page_title=hedyweb.get_page_title('reset'), reset_username=username, reset_token=token, current_page='login')
 
 
