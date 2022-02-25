@@ -5,11 +5,11 @@
   <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('reset')">
     <h2 class="py-2">{{auth.reset_password}}</h2>
     <div class="flex flex-row items-center justify-center mb-2">
-        <label class="inline-block w-1/3">{{auth.password}}</label>
+        <label class="inline-block w-1/3">{{_('password')}}</label>
         <input class="inline-block w-1/2 px-2 py-1 rounded-lg border-gray-400" id="password" minlength="6" type=password required>
     </div>
     <div class="flex flex-row items-center justify-center mb-2">
-        <label class="inline-block w-1/3">{{auth.password_repeat}}</label>
+        <label class="inline-block w-1/3">{{_('password_repeat')}}</label>
         <input class="inline-block w-1/2 px-2 py-1 rounded-lg border-gray-400" id="password_repeat" minlength="6" type=password required>
     </div>
     <button type="submit" class="green-btn py-2">{{auth.reset_password}}</button>

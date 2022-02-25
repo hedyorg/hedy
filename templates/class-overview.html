@@ -18,7 +18,7 @@
                     <div class="flex flex-col mx-2">
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
-                            <label class="inline-block" for="subscribe">{{auth.username}}</label>
+                            <label class="inline-block" for="subscribe">{{_('username')}}</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_login" name="last_login">
@@ -61,7 +61,7 @@
       <table class="table-auto w-full text-sm">
       <thead>
         <tr class="font-bold text-left">
-          <th id="username_header">{{auth.username}}</th>
+          <th id="username_header">{{_('username')}}</th>
           <th id="last_login_header">{{auth.last_login}}</th>
           <th id="highest_level_header">{{auth.highest_level_reached}}</th>
           <th id="amount_programs_header">{{auth.number_programs}}</th>
@@ -105,7 +105,7 @@
         <table class="table-auto w-full text-sm">
         <thead>
             <tr class="font-bold text-left">
-                <th>{{auth.username}}</th>
+                <th>{{_('username')}}</th>
                 <th>{{auth.invite_date}}</th>
                 <th>{{auth.remove_invite}}</th>
             </tr>

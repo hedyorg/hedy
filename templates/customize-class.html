@@ -23,7 +23,7 @@
             <table class="table-auto w-full text-center customize_adventure_overview">
                 <thead>
                     <tr>
-                        <th class="w-40 text-left border-r border-gray-400">{{ ui.adventure }} / {{ ui.level_title }}</th>
+                        <th class="w-40 text-left border-r border-gray-400">{{ ui.adventure }} / {{ _('level_title') }}</th>
                         {% for i in range(1, max_level + 1) %}
                             <th class="w-12"><button class="level-select-button {% if i in customizations.levels %}green-btn{% else %}blue-btn{% endif %} w-12" id="level_button_{{ i }}" onclick="hedyApp.select_all_level_adventures('{{ i }}');" value="{{ i }}">{{ i }}</button></th>
                         {% endfor %}
@@ -59,14 +59,14 @@
                 <table class="table-auto text-center opening_dates_overview">
                     <thead>
                         <tr>
-                            <th class="w-40 border-r border-gray-400 text-left px-4">{{ ui.level_title }}</th>
+                            <th class="w-40 border-r border-gray-400 text-left px-4">{{ _('level_title') }}</th>
                             <th class="w-64">{{ auth.opening_date }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for i in range(1, max_level + 1) %}
                             <tr class="{% if i not in customizations['levels'] %}hidden{% endif %} opening_date_container" id="opening_date_level_{{ i }}">
-                                <td class="border-r border-t border-gray-400">{{ ui.level_title }} {{ i }}</td>
+                                <td class="border-r border-t border-gray-400">{{ _('level_title') }} {{ i }}</td>
                                 <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
                                     <input level="{{ i }}"
                                        {% if customizations and 'opening_dates' in customizations and i|string in customizations['opening_dates'] %}
@@ -89,7 +89,7 @@
                     <thead>
                         <tr>
                             <th class="w-64 text-left border-r border-gray-400">{{ ui.adventure }}</th>
-                            <th class="w-64 border-r border-gray-400">{{ ui.level_title }}</th>
+                            <th class="w-64 border-r border-gray-400">{{ _('level_title') }}</th>
                             <th class="w-64">{{ auth.select }}?</th>
                         </tr>
                     </thead>

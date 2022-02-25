@@ -108,13 +108,13 @@
   <div class="order-2 lg:order-4">
       <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="cursor-pointer hidden h-28 absolute ltr:ml-96 rtl:mr-96 -mt-6" id="repair_button">
       <div class="flex justify-between">
-        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{ui.run_code_button}} </button>
+        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{ui._('run_code_button')}} </button>
         {% if show_edit_button %}
-            <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{ui.edit_code_button}}</a>
+            <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{_('edit_code_button')}}</a>
         {% endif %}
       </div>
       <div id="speak_container" class="hidden mt-4">
-        <label for="speak_dropdown">{{ui.read_code_label}} </label><select id="speak_dropdown" class="p-2 border-grey border">
+        <label for="speak_dropdown">{{_('read_code_label')}} </label><select id="speak_dropdown" class="p-2 border-grey border">
           <option value="">🤫</option>
         </select>
       </div>
@@ -122,10 +122,10 @@
     <div class="order-5">
       <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
         {% if prev_level and (customizations['levels']|length == 0 or prev_level in customizations['levels']) %}
-          <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{ui.regress_button|replace("{level}", prev_level)}}</button>
+          <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
         {% endif %}
         {% if next_level and (customizations['levels']|length == 0 or next_level in customizations['levels']) %}
-            <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ui.advance_button|replace("{level}", next_level)}}</button>
+            <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
         {% endif %}
       </div>
     </div>

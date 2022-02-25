@@ -44,7 +44,7 @@
          <div class="mb-4">
              <h3 class="mb-2 font-semibold">{{auth.favourite_program}}</h3>
              <select id="favourite_program" class="block">
-                <option value="" selected disabled hidden>{{auth.select}}</option>
+                <option value="" selected disabled hidden>{{_('select')}}</option>
                 {% for program in programs %}
                     <option value="{{program.id}}" {% if public_settings.favourite_program and public_settings.favourite_program == program.id %} selected {% endif %}>{{program.name}}</option>
                 {% endfor %}
@@ -90,16 +90,16 @@
         <form class="js-validated-form" id="update_profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
         <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.settings}}</h2>
         <div class="flex flex-row items-center mb-2">
-            <label for="username" class="inline-block w-72">{{auth.username}}</label><strong id="username" class="inline-block w-1/2 px-4 py-1"></strong>
+            <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-4 py-1"></strong>
         </div>
         <div class="flex flex-row items-center mb-2">
-            <label for="email" class="inline-block w-72">{{auth.email}}</label><input id="email" type="email" class="inline-block w-1/2 px-4 py-1 rounded-lg" required>
+            <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" type="email" class="inline-block w-1/2 px-4 py-1 rounded-lg" required>
         </div>
         <div class="flex flex-row items-center mb-2">
             <label for="birth_year" class="inline-block w-72">{{auth.birth_year}}</label><input id="birth_year" class="inline-block w-1/2 px-4 py-1 rounded-lg" type="number">
         </div>
         <div class="flex flex-row items-center mb-2">
-            <label for="language" class="inline-block w-72">{{auth.preferred_language}}</label>
+            <label for="language" class="inline-block w-72">{{_('preferred_language')}}</label>
             <select id="language" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" required>
                 <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
                 {% for language in other_languages() %}
@@ -125,7 +125,7 @@
         <div class="flex flex-row items-center mb-2">
             <label for="gender" class="inline-block w-72">{{auth.gender}}</label>
             <select id="gender" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg">
-              <option value="">{{auth.select}}</option>
+              <option value="">{{_('select')}}</option>
               <option value="f">{{auth.female}}</option>
               <option value="m">{{auth.male}}</option>
               <option value="o">{{auth.other}}</option>
@@ -134,7 +134,7 @@
         <div class="flex flex-row items-center mb-2">
             <label for="country" class="inline-block w-72">{{auth.country}}</label>
             <select id="country" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg">
-                <option value="">{{auth.select}}</option>
+                <option value="">{{_('select')}}</option>
             </select>
         </div>
         <div class="mb-4">

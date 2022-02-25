@@ -4,27 +4,27 @@
 </style>
 <div class="w-3/4 bg-white shadow-md rounded p-4 mb-4 mx-auto">
   <form id="signup" class="js-validated-form mx-auto" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')">
-        <h2 class="text-center">{{auth.create_account}}</h2>
-        <h4 class="text-blue-500 mb-4 text-center">{{auth.create_account_explanation}}</h4>
+        <h2 class="text-center">{{_('create_account')}}</h2>
+        <h4 class="text-blue-500 mb-4 text-center">{{_('create_account_explanation')}}</h4>
         <div class="flex flex-col w-full px-16">
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="username">{{auth.username}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="3" id="username" name="username" required>
+                <label class="inline-block w-1/2" for="username">{{_('username')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="3" id="username" name="username" required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="email">{{auth.email}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="email" name="email" type="email" required>
+                <label class="inline-block w-1/2" for="email">{{_('email')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="email" name="email" type="email" required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="mail_repeat">{{auth.email_repeat}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="mail_repeat" name="mail_repeat" type="email" autocomplete="off" required>
+                <label class="inline-block w-1/2" for="mail_repeat">{{_('email_repeat')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="mail_repeat" name="mail_repeat" type="email" autocomplete="off" required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="password">{{auth.password}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password" name="password" type=password required>
+                <label class="inline-block w-1/2" for="password">{{_('password')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password" name="password" type=password required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="password_repeat">{{auth.password_repeat}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password_repeat" name="password_repeat" type=password required>
+                <label class="inline-block w-1/2" for="password_repeat">{{_('password_repeat')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password_repeat" name="password_repeat" type=password required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="language">{{auth.preferred_language}}</label><select class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" id="language" name="language" required>
-                    <option value="" selected disabled hidden>{{auth.select}}</option>
+                <label class="inline-block w-1/2" for="language">{{_('preferred_language')}}</label><select class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" id="language" name="language" required>
+                    <option value="" selected disabled hidden>{{_('select')}}</option>
                     <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
                     {% for language in other_languages() %}
                         <option value="{{language.lang}}">{{language.sym}}</option>
@@ -43,7 +43,7 @@
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
                 <label class="inline-block w-1/2" for="gender">{{auth.gender}}</label><select class="block appearance-none w-1/2 border border-gray-400 text-gray-700 px-4 py-1 rounded-lg" id="gender" name="gender">
-                  <option value="" selected disabled hidden>{{auth.select}}</option>
+                  <option value="" selected disabled hidden>{{_('select')}}</option>
                   <option value="f">{{auth.female}}</option>
                   <option value="m">{{auth.male}}</option>
                   <option value="o">{{auth.other}}</option>
@@ -51,7 +51,7 @@
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
                 <label class="inline-block w-1/2" for="country">{{auth.country}}</label><select  class="block appearance-none w-1/2 border border-gray-400 text-gray-700 px-4 py-1 rounded-lg" id="country" name="country">
-                    <option value="" selected disabled hidden>{{auth.select}}</option>
+                    <option value="" selected disabled hidden>{{_('select')}}</option>
                 </select>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1">
