@@ -247,6 +247,11 @@ adventures:
                     ```
 
                 start_code: "{print} Hier komt straks jouw verhaal!"
+                example_code: "It goes like this:\n```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
+                story_text_2: "The command `{add}` can also come in handy in your story. For example:\n```\n"
+                story_text_3: "This is an example of the `{remove}` command in your story\n"
+                example_code_2: "{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
+                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
     parrot:
         name: "Papegaai"
         description: "Maak je eigen online papegaai die je napraat!"
@@ -1099,7 +1104,8 @@ adventures:
                             score = score +1
                     {print} 'Je score is ' score
                     ```
-                start_code: ""
+                start_code: "{print} 'Welcome to this calculator!'"
+                example_code: "## Example Hedy code\n\n```\nscore = 0\n{repeat} 10 {times}\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct_answer = number1 * number2\n    {print} 'What is ' number1 ' times ' number2 '?'\n    answer = {ask} 'Type your answer here...'\n    {print} 'Your answer is' answer\n    {if} answer {is} correct_answer\n        score = score + 1\n{print} 'Great job! Your score is... ' score ' out of 10!'\n```\n"
             6:
                 story_text: |
                     ## Rekenmachine
@@ -1155,6 +1161,7 @@ adventures:
                     {print} 'Je hebt gewonnen!'
                     ```
                 start_code: ""
+                example_code: "## Example Hedy code\n\n```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
     fortune:
         name: "Waarzegger"
         description: "Laat Hedy jouw toekomst voorspellen"
@@ -1231,6 +1238,8 @@ adventures:
                         {print} naam 's grootste angst is ' angsten {at} {random}
                     ```
                 start_code: ""
+                example_code_2: "## Example Hedy code\n```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n{for} name in names\n    {print} name ' is placed in ' houses {at} {random}\n    {print} name ' is great at ' subjects {at} {random}\n    {print} name 's greatest fear is ' fears {at} {random}\n```\n"
+                story_text_2: We can also make a Harry Potter themed fortune teller.
             8:
                 story_text: |
                     ## Hedy de waarzegger
@@ -1648,6 +1657,9 @@ adventures:
                     {print} Jij krijgt een milkshake  smaken {at} {random}
                     ```
                 start_code: ""
+                example_code: "## Example Hedy code\n\n```\n{print} Welcome to Hedy's Random Restaurant!\n{print} The only restaurant that will randomly choose your meal and its price for you!\nstarters {is} salad, soup, carpaccio\nmains {is} pizza, brussels sprouts, spaghetti\ndesserts {is} brownies, ice cream, french cheeses\ndrinks {is} cola, beer, water\nprices {is} 1 dollar, 10 dollars, 100 dollars\n{print} You will start with: starters {at} {random}\n{print} Then we'll serve: mains {at} {random}\n{print} And as dessert: desserts {at} {random}\n{print} You will get a drinks {at} {random} to drink\n{print} That will be: prices {at} {random}\n{print} Thank you and enjoy your meal!\n```\n"
+                story_text_2: "## Allergies\nDoes your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
+                example_code_2: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n{remove} allergies {from} flavors\n{print} You get a flavors {at} {random} milkshake\n```\n"
             15:
                 story_text: |
                     ## Restaurant
@@ -1687,6 +1699,9 @@ adventures:
                         {print} 'Dat is een gezonde keuze!'
                     ```
                 start_code: ""
+                example_code: "## Example Hedy code\n```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
+                story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
+                example_code_2: "## Example Hedy code\n```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
     haunted:
         name: "Spookhuis"
         description: "Ontsnap uit het spookhuis"
@@ -2388,3 +2403,5 @@ adventures:
                     Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
                 ## start_code is only added because it is required by the schema of Adventures
                 start_code: ""
+            9:
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
