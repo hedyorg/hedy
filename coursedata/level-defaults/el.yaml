@@ -24,6 +24,21 @@
         demo_code: |-
             ask Ποιό είναι το αγαπημένο σου χρώμα;
             echo ώστε το αγαπημένο σου χρώμα είναι το 
+    -   name: '{print} emojis'
+        explanation: print an emoji with `{print}`
+        example: 'Example: {print} 🙋‍ 🌍 ❗'
+        demo_code: '{print} 🙋 🌍 ❗'
+    -   demo_code: '{forward} 100'
+        name: '{forward}'
+        explanation: Draw a line with `{forward}`.
+        example: 'Example: {forward} 100'
+    -   name: '{turn}'
+        explanation: turn the drawing turtle with `{turn}`
+        example: 'Example: {turn}'
+        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
 2:
     intro_text: |-
         Στο επίπεδο 2 θα μάθουμε κάτι καινούριο. Μπορείς να ονοματίσεις μια λέξη με την `is`.
@@ -49,6 +64,14 @@
         demo_code: |-
             color is ask Ποιό είναι το αγαπημένο σου χρώμα;
             print το color είναι το αγαπημένο σου!
+    -   explanation: Let Hedy pause for a (couple of) second(s).
+        name: '{sleep}'
+        example: 'Example: {sleep} 2 '
+        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+    -   name: is - turtle
+        explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        example: 'Example: angle {is} 90'
+        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
     intro_text: |-
         Στο επίπεδο 3 μπορείς να δημιουργήσεις μια λίστα. Μπορείς να αφήσεις τον υπολογιστή να επιλέξει κάτι τυχαία από τη λίστα. Αυτό γίνεται με τη χρήση της `at random`.
@@ -67,6 +90,14 @@
         demo_code: |-
             animals is σκύλος, γάτα, καγκουρό
             print animals at random
+    -   name: '{add}'
+        explanation: add an item to a list
+        example: 'Example: {add} dog {to_list} animals'
+        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    -   name: '{remove}'
+        explanation: remove an item from a list
+        example: 'Example: {remove} dog {from} animals'
+        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 4:
     start_code: "print 'Γειά σου κόσμε'"
     intro_text: |-
@@ -131,6 +162,14 @@
         demo_code: |-
             color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
+    -   name: '{if} with turtle'
+        explanation: Make a choice with `{if}`
+        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
+        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    -   name: '{in}'
+        explanation: Check elements with `{in}`
+        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
     start_code: "print '5 επί 5 ίσον με ' 5 * 5"
     intro_text: |-
@@ -230,6 +269,10 @@
             else
                 print 'Ουπς!'
                 print 'Η απάντηση είναι 10'
+    -   example: 'Example: draw a square'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+        name: '`{repeat}` with turtle'
+        explanation: '{repeat} multiple lines'
 9:
     start_code: |-
         repeat 3 times
@@ -313,6 +356,10 @@
             for i in range 1 to 10
               print i
             print 'Έτοιμοι ή όχι, έρχομαι!'
+    -   name: '{ask}'
+        explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+        example: "Example: answer = {ask} 'What is 5 plus 5?'"
+        demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
 12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
@@ -350,6 +397,14 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
+    -   example: name = 'Hedy'
+        demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
+        name: quotes after {if} comparison
+        explanation: Text with quotation marks after {if}
+    -   name: quotes in list
+        explanation: A list with quotation marks
+        example: name = 'Hedy', 'Felienne'
+        demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
 13:
     start_code: |-
         name = ask 'what is your name?'
@@ -426,6 +481,22 @@
             age = ask 'Πόσο χρονών είσαι;'
             if age > 13
                 print 'Είσαι μεγαλύτερη από εμένα!'
+    -   name: Equal
+        explanation: We use the `==` to check if two things are the same.
+        example: 'For example: answer == 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+    -   explanation: 'We use the `!=` to check if two things are not the same. '
+        example: 'For example: answer != 25'
+        name: Not equal
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+    -   demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+        name: Smaller {or} equal
+        explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+        example: 'For example: age <= 12'
+    -   name: Bigger or equal
+        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+        example: 'For example: age >= 14'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
 15:
     start_code: |-
         answer = 0
