@@ -56,11 +56,11 @@ ui:
     no_such_adventures: "Dit avontuur bestaat niet!"
 ClientErrorMessages:
     Transpile_success:
-      - "Goed gedaan!"
-      - "Ga zo door!"
-      - "Topper!"
-      - "Super!"
-      - "Bravo!"
+    -   "Goed gedaan!"
+    -   "Ga zo door!"
+    -   "Topper!"
+    -   "Super!"
+    -   "Bravo!"
     Transpile_warning: "Let op!"
     Transpile_error: "We konden je code niet goed lezen."
     Connection_error: "We konden niet goed met de server praten."
@@ -71,6 +71,13 @@ ClientErrorMessages:
     ServerError: "Je hebt een programma geschreven dat we niet verwacht hadden. Als je wilt helpen, stuur ons dan een mailtje met het level en je programma op hedy@felienne.com. Probeer om verder te gaan je programma een beetje aan te passen en kijk nog eens goed naar de voorbeelden. Bedankt!"
     Program_too_long: "Your program takes too long to run."
     Program_repair: "Dit kan de correcte code zijn, kan je jouw code repareren?"
+    turtle: 🐢
+    rock: ✂️, 📜, 🗻
+    haunted: 🦇, 👻, 🎃
+    restaurant: 🍣, 🍕, 🍔
+    fortune: 🔮, ✨
+    songs: 🎵,🎶
+    dice: 🎲
 HedyErrorMessages:
     Empty Program: "Je hebt een leeg programma gemaakt. Typ Hedy code in het linkerveld en probeer het opnieuw."
     Wrong Level: "Dat was goede code hoor, maar niet op het goede level. Je schreef een {offending_keyword} voor level {working_level}. Tip: {tip}"
@@ -85,7 +92,7 @@ HedyErrorMessages:
     Unquoted Assignment: "Let op. Vanaf dit level moet je tekst rechts van de `is` tussen aanhalingstekens zetten. Jij bent dat vergeten voor de tekst {text}."
     Unquoted Equality Check: "Als je wilt kijken of een variabele gelijk is aan meerdere woorden, moeten die woorden tussen aanhalingstekens staan."
     Var Undefined: "Je probeert de variabele {name} te gebruiken, maar die heb je niet ingesteld. Het kan ook zijn dat je het woord {name} wilde gebruiken en aanhalingstekens vergeten bent."
-    Cyclic Var Definition:  "De variabele {variable} moet worden ingesteld voor je die aan de rechterkant van een is mag gebruiken."
+    Cyclic Var Definition: "De variabele {variable} moet worden ingesteld voor je die aan de rechterkant van een is mag gebruiken."
     Lonely Echo: "Je gebruikt een echo voor een ask, of een echo zonder een ask. Vraag eerst met een ask om invoer voordat je die herhaalt met een echo."
     Too Big: "Wow! Jouw programma is wel {lines_of_code} regels lang! Maar... wij kunnen maar {max_lines} regels aan in dit level. Maak je programma wat kleiner en probeer het nog eens."
     Invalid Argument Type: "Je kan {command} niet gebruiken met {invalid_argument} omdat dat {invalid_type} is. Je kan {command} wel gebruiken met {allowed_types}."
@@ -359,7 +366,7 @@ Auth:
         Door op het groene kruisje rechtsonderin te klikken kun je meer rijen toevoegen. Met het rode kruisje kun je een rij weer verwijderen.
         Zorg ervoor dat alle rijen gevuld zijn voordat je klikt op "Accounts aanmaken". Denk eraan dat elke gebruikersnaam en elk e-mailadres uniek moet zijn. 
         Ook moet het wachtwoord <b>minimaal</b> 6 tekens zijn.
-    
+
     #Adventure customizations
     customize_adventure: "Avontuur aanpassen"
     general_settings: "Algemene instellingen"
@@ -374,6 +381,7 @@ Auth:
     template_code: "Dit is de uitleg van mijn avontuur!\n\nOp deze manier laat ik een commando zien: <code>print</code>\n\nMaar soms wil ik een stukje code laten zien, dat doe ik zo:\n<pre>\nask Wat is jouw naam?\necho dus jouw naam is \n</pre>"
     last_update: "Laatste update"
     view: "Bekijk"
+    amount_programs: Saved programs
 Programs:
     recent: "Mijn programma's"
     level: "Level"
