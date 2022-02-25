@@ -25,21 +25,21 @@
                 <div class="mt-auto">
                     <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-center rounded-b-lg">
                         {% if user_achievements.run_programs %}
-                            <div>{{ user_achievements.run_programs }} {{ texts.amount_created }}</div>
+                            <div>{{ user_achievements.run_programs }} {{_('amount_created')}}</div>
                         {% else %}
-                            <div>0 {{ texts.amount_created }}</div>
+                            <div>0 {{_('amount_created')}}</div>
                         {% endif %}
                         <div class="mx-2">|</div>
                         {% if user_achievements.saved_programs %}
-                            <div>{{ user_achievements.saved_programs }} {{ texts.amount_saved }}</div>
+                            <div>{{ user_achievements.saved_programs }} {{_('amount_saved')}}</div>
                         {% else %}
-                            <div>0 {{ texts.amount_saved }}</div>
+                            <div>0 {{_('amount_saved')}}</div>
                         {% endif %}
                         <div class="mx-2">|</div>
                         {% if user_achievements.submitted_programs %}
-                            <div>{{ user_achievements.submitted_programs }} {{ texts.amount_submitted }}</div>
+                            <div>{{ user_achievements.submitted_programs }} {{_('amount_submitted')}}</div>
                         {% else %}
-                            <div>0 {{ texts.amount_submitted }}</div>
+                            <div>0 {{_('amount_submitted')}}</div>
                         {% endif %}
                     </div>
                 </div>
@@ -82,7 +82,7 @@
         {% endif %}
         </div>
     {% else %}
-        <div class="ml-4">{{ user_info.username }} {{ texts.no_shared_programs }}</div>
+        <div class="ml-4">{{ user_info.username }} {{_('no_shared_programs')}}</div>
 
     {% endif %}
 {% endblock %}

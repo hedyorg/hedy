@@ -4,8 +4,8 @@
 <div tabindex="0" class="flex-grow px-8">
   {% if loaded_program.submitted %}
       <div class="text-center">
-        <h2>{{texts.submitted_header}}</h2>
-        <h3 class="inline-block mt-0">{{texts.last_edited}}: {{program_timestamp}}</h3> - {{program_age}}
+        <h2>{{_('submitted_header')}}</h2>
+        <h3 class="inline-block mt-0">{{_('last_edited')}}: {{program_timestamp}}</h3> - {{program_age}}
       </div>
   {% endif %}
   <h1>{{loaded_program.name}}</h1>
