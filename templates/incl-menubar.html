@@ -11,30 +11,30 @@
         </a>
     {% endfor %}
     {% if username %}
-      <a class="menubar-btn hover:bg-blue-600 ltr:ml-auto rtl:mr-auto {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{auth.program_header}}</a>
+      <a class="menubar-btn hover:bg-blue-600 ltr:ml-auto rtl:mr-auto {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{_('program_header')}}</a>
       <div class="dropdown relative z-40" style="display: flex;">
         <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="/my-profile">
           <span class="fas fa-fw fa-user"></span> {{username}}
         </a>
         <ul class="dropdown-menu absolute hidden text-white rounded-lg border-black bg-blue-400 list-none ltr:ml-0 rtl:mr-0 ltr:right-0 rtl:left-0 mt-12 ltr:mr-4 rtl:ml-4" style="border-width: 1px; width: max-content;">
           <a class="no-underline" href="/my-achievements">
-              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span> {{auth.my_achievements}}</li>
+              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span> {{_('my_achievements')}}</li>
           </a>
           <a class="no-underline" href="/my-profile">
-              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span> {{auth.account}}{% if user_messages > 0 %} ({{ user_messages }}){% endif %}</li>
+              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span> {{_('account')}}{% if user_messages > 0 %} ({{ user_messages }}){% endif %}</li>
           </a>
           {% if is_teacher %}
               <a class="no-underline" href="/for-teachers">
-                  <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span> {{auth.for_teachers}}</li>
+                  <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span> {{_('for_teachers')}}</li>
               </a>
           {% endif %}
           <a class="no-underline" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();">
-              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span> {{auth.logout}}</li>
+              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span> {{_('logout')}}</li>
           </a>
         </ul>
       </div>
     {% else %}
-      <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{auth.login}}</a>
+      <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{_('login')}}</a>
     {% endif %}
     {% if not username or not 'language' in user_data %}
       <div class="dropdown inline-block relative {% if not username %}ltr:ml-auto rtl:mr-auto{% endif %} py-2 z-40">

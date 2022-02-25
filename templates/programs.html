@@ -23,7 +23,7 @@
                 {% endfor %}
             </select>
             <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
-                <button type="reset" class="red-btn" onclick="window.open('/programs{% if from_user %}?user={{ from_user }}{% endif %}', '_self');">{{ auth.reset_view }}</button>
+                <button type="reset" class="red-btn" onclick="window.open('/programs{% if from_user %}?user={{ from_user }}{% endif %}', '_self');">{{_('reset_view')}}</button>
                 <button type="submit" class="green-btn ltr:ml-4 rtl:mr-4 px-4">{{ texts.search }}</button>
             </div>
         </div>
@@ -65,7 +65,7 @@
         </div>
         <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row {% if not program.submitted %} hidden {% endif %}">
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{ texts.open }}</button>
-            <button class="blue-btn mx-2" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'))">{{ auth.copy_link_to_share }}</button>
+            <button class="blue-btn mx-2" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'))">{{_('copy_link_to_share')}}</button>
             <button class="red-btn" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }})">{{ texts.delete }}</button>
         </div>
         <div id="non_submitted_button_container_{{ loop.index }}" class="flex flex-row w-full {% if program.submitted %} hidden {% endif %}">
@@ -73,7 +73,7 @@
             <button class="red-btn mx-2" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }})">{{ texts.delete }}</button>
             <div id="public_button_container_{{ loop.index }}" class="flex flex-row w-full {% if not program.public %} hidden {% endif %}">
                 <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{ texts.unshare_confirm }}', function () {hedyApp.share_program ({{program.level}}, '{{ g.lang }}', '{{program.id}}', {{ loop.index }}, false)})">{{ texts.unshare}}</button>
-                <button class="blue-btn mx-2" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'))">{{ auth.copy_link_to_share }}</button>
+                <button class="blue-btn mx-2" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'))">{{_('copy_link_to_share')}}</button>
                 <button class="green-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.modal.confirm ('{{ texts.submit_warning }}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{ texts.submit_program }}</button>
             </div>
             <div id="non_public_button_container_{{ loop.index }}" class="flex flex-row {% if program.public %} hidden {% endif %}">
