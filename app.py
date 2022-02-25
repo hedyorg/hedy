@@ -22,7 +22,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, \
-    is_teacher, update_is_teacher
+    is_teacher, update_is_teacher, forget_current_user
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -1042,11 +1042,19 @@ def recover_page():
 
 @app.route('/reset', methods=['GET'])
 def reset_page():
-    #If there is a current user: log out!
-    #Retrieve username and token and add to render_template
+    #If there is a user logged in -> don't allow password reset
     if current_user()['username']:
-        return
-    return
+        return redirect('/my-profile')
+
+    username = request.args.get('username', default=None, type=str)
+    token = request.args.get('token', default=None, type=str)
+    username = None if username == "null" else username
+    token = None if token == "null" else token
+
+    if not username or not token:
+        return utils.error_page(error=403, ui_message='unauthorized')
+
+    return render_template('reset.html', page_title=hedyweb.get_page_title('reset'), username=username, token=token, current_page='login')
 
 
 @app.route('/<page>')
