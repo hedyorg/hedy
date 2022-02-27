@@ -300,6 +300,8 @@ def routes(app, database, achievements):
 
         quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
 
+        #get a datastructure for the result overview
+        get_result_items(quiz_answers, questions)
         return render_template('quiz-result-overview.html',
                                quiz_answers=quiz_answers,
                                questions=questions,
@@ -309,6 +311,20 @@ def routes(app, database, achievements):
                                cross=icons['cross'],
                                check=icons['check'],
                                lang=g.lang)
+
+
+def get_result_items(quiz_answers, questions):
+    result_items = []
+    for i in range(len(questions)):
+        item = {}
+        item["question_text"] = questions[i + 1]["question_text"]
+        item["is_correct"] = quiz_answers[i + 1][-1] == questions[i + 1]["correct_answer"]
+        if "option_text" in question_options_for(questions[i + 1]):
+            item["option_text"] = question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["option_text"]
+        elif "code" in question_options_for(questions[i + 1]):
+            item["code"] =  question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["code"]
+        result_items.append(item)
+    return result_items
 
 
 def is_quiz_enabled():
@@ -341,7 +357,7 @@ def get_question(quiz_data, question_number):
 
 
 def is_correct_answer(question, letter):
-    return question['correct_answer'] == letter
+    return question['correct_answerq'] == letter
 
 
 def get_correct_answer(question):

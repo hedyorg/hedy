@@ -12,12 +12,21 @@
 
 {% block question %}
 <div class="flex flex-col">
-    <div class="text-green-900 text-2xl text-center flex flex-row justify-center font-slab">
-        <p>{{ ui.question }} {{ question_nr }} / {{ questions|length }} </p>
-    </div>
+    <ul class="result-list">
 
+       {% for i in range(questions|length)%}\
+
+                 <li class="text-green-900 text-2xl flex flex-row font-slab">{{ i + 1 }}) {{questions[i + 1].question_text}}
+                       {% if quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
+                             <div class="step incorrect flex flex-row justify-items ">{{ cross|safe }}<p class="mr-3 font-bold">{{ i + 1 }}</p></div>
+                       {% elif quiz_answers[i + 1][-1] == questions[i + 1].correct_answer %}
+                      {% endif %}
+                 </li>
+       {% endfor %}
+    </ul>
 
     <button class="green-btn ltr:ml-1 rtl:mr-1"
             onclick="window.parent.location = '{{ hedy_link(level, next_assignment) }}';"> {{ ui.go_to_level }} {{ level }} </button>
 </div>
 {% endblock %}
+
