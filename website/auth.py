@@ -1,5 +1,6 @@
 import os
 import utils
+from hedy import ALL_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -70,6 +71,8 @@ countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Alger
 def remember_current_user(db_user):
     session['user-ttl'] = times() + 5 * 60
     session['user'] = pick(db_user, 'username', 'email', 'is_teacher')
+    session['lang'] = db_user.get('lang', 'en')
+    session['keyword_lang'] = db_user.get('keyword_language', 'en')
 
 def pick(d, *requested_keys):
     return { key : d.get(key, None) for key in requested_keys }
@@ -97,6 +100,7 @@ def is_user_logged_in():
 def forget_current_user():
     session.pop('user', None) # We are not interested in the value of the use key.
     session.pop('achieved', None) # Delete session achievements if existing
+    session.pop('keyword_lang', None)  # Delete session achievements if existing
 
 
 def is_admin(user):
@@ -276,11 +280,11 @@ def routes(app, database):
             return g.auth_texts.get('repeat_match_email'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return g.auth_texts.get('repeat_match_password'), 400
-        if not isinstance(body.get('language'), str):
+        if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
         if not isinstance(body.get('agree_terms'), bool) or not body.get('agree_terms'):
             return g.auth_texts.get('agree_invalid'), 400
-        if not isinstance(body.get('keyword_language'), str):
+        if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
             return g.auth_texts.get('keyword_language_invalid'), 400
 
         # Validations, optional fields
@@ -348,20 +352,28 @@ def routes(app, database):
         if not username:
             return 'no username', 400
 
+        # Verify that user actually exists
         user = DATABASE.user_by_username(username)
-
         if not user:
             return 'invalid username/token', 403
 
-        # If user is verified, succeed anyway
+        # If user is already verified -> re-direct to landing-page anyway
         if not 'verification_pending' in user:
             return redirect('/landing-page')
 
+        # Verify the token
         if token != user['verification_pending']:
             return 'invalid username/token', 403
 
+        # Remove the token from the user
         DATABASE.update_user(username, {'verification_pending': None})
-        return redirect('/')
+
+        # We automatically login the user
+        cookie = make_salt()
+        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
+        remember_current_user(user)
+
+        return redirect('/landing-page')
 
     @app.route('/auth/logout', methods=['POST'])
     def logout():
@@ -448,12 +460,11 @@ def routes(app, database):
             return g.auth_texts.get('ajax_error'), 400
         if not isinstance(body.get('email'), str) or not valid_email(body['email']):
             return g.auth_texts.get('email_invalid'), 400
-        if not isinstance(body.get('language'), str):
+        if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
-        if not isinstance(body.get('keyword_language'), str):
+        if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
             return g.auth_texts.get('keyword_language_invalid'), 400
 
-        # Todo TB -> Store all validations inside a function, the signup / profile code is duplicate!
         # Validations, optional fields
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
@@ -502,23 +513,23 @@ def routes(app, database):
         username = user['username']
 
         updates = {}
-        for field in['country', 'birth_year', 'gender', 'language', 'keyword_language', 'prog_experience', 'experience_languages']:
+        for field in['country', 'birth_year', 'gender', 'language', 'keyword_language']:
             if field in body:
-               if field == 'experience_languages' and len(body[field]) == 0:
-                   updates[field] = None
-               else:
-                   updates[field] = body[field]
+               updates[field] = body[field]
             else:
-               updates[field] = None
+                updates[field] = None
+
+        if updates:
+            DATABASE.update_user(username, updates)
 
         # We want to check if the user choose a new language, if so -> reload
         # We can use g.lang for this to reduce the db calls
         resp['reload'] = False
-        if g.lang != body['language'] or g.keyword_lang != body['keyword_language']:
+        print(session['lang'])
+        print(session['keyword_lang'])
+        if session['lang'] != body['language'] or session['keyword_lang'] != body['keyword_language']:
             resp['reload'] = True
 
-        if updates:
-            DATABASE.update_user(username, updates)
         remember_current_user(DATABASE.user_by_username(user['username']))
         return jsonify(resp)
 
@@ -727,6 +738,14 @@ def auth_templates(page, page_title):
         public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
         return render_template('profile.html', page_title=page_title, programs=programs,
                                public_settings=public_profile_settings, current_page='my-profile')
+    # Todo TB Feb 2022 -> We have to clean this up (a lot!)
+    # Short overview of the to-do:
+    #   - Verify that the user is not logged in when attempting to visit signup / login / recover
+    #   - If so, redirect to my-profile -> This is currently done on the front-end: remove there
+    #   - If a user attempts to visit reset:
+    #       - If logged in: destory session, we can't reset with an active account logged in
+    #       - Catch the two arguments: username / token
+    #       - Sent these to the front-end REMOVE current front-end retrieval of arguments this makes no sense
     if page in['signup', 'login', 'recover', 'reset']:
         return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
 

@@ -32,6 +32,41 @@ TRANSPILER_LOOKUP = {}
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
+# Define and load all available language data
+ALL_LANGUAGES = {
+    'en': 'English',
+    'nl': 'Nederlands',
+    'es': 'Español',
+    'fr': 'Français',
+    'pt_pt': 'Português(pt)',
+    'pt_br': 'Português(br)',
+    'de': 'Deutsch',
+    'it': 'Italiano',
+    'sw': 'Swahili',
+    'hu': 'Magyar',
+    'el': 'Ελληνικά',
+    'zh': "简体中文",
+    'cs': 'Čeština',
+    'bg': 'Български',
+    'bn': 'বাংলা',
+    'hi': 'हिंदी',
+    'id': 'Bahasa Indonesia',
+    'fy': 'Frysk',
+    'ar': 'عربى'
+}
+# Define fall back languages for adventures
+FALL_BACK_ADVENTURE = {
+    'fy': 'nl',
+    'pt_br': 'pt_pt'
+}
+
+ALL_KEYWORD_LANGUAGES = {
+    'en': 'EN',
+    'nl': 'NL',
+    'ar': 'AR',
+    'fr': 'FR',
+    'es': 'ES'
+}
 
 class Command:
     print = 'print'
