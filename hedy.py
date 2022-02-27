@@ -1936,17 +1936,17 @@ def get_keywords_for_language(language):
 PARSER_CACHE = {}
 
 
-def get_parser(level, lang="en"):
+def get_parser(level, lang="en", keep_all_tokens=False):
     """Return the Lark parser for a given level.
 
     Uses caching if Hedy is NOT running in development mode.
     """
-    key = str(level) + "." + lang
+    key = str(level) + "." + lang + '.' + str(keep_all_tokens)
     existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True, propagate_positions=True) #ambiguity='explicit'
+    ret = Lark(grammar, regex=True, propagate_positions=True, keep_all_tokens=keep_all_tokens) #ambiguity='explicit'
     PARSER_CACHE[key] = ret
     return ret
 
