@@ -301,10 +301,11 @@ def routes(app, database, achievements):
         quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
 
         #get a datastructure for the result overview
-        get_result_items(quiz_answers, questions)
+        result_items = get_result_items(quiz_answers, questions)
         return render_template('quiz-result-overview.html',
                                quiz_answers=quiz_answers,
                                questions=questions,
+                               result_items = result_items,
                                level_source=level_source,
                                level=int(level_source) + 1,
                                next_assignment=1,

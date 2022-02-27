@@ -12,14 +12,15 @@
 
 {% block question %}
 <div class="flex flex-col">
+    <h1 class="p-8 font-bold text-4xl font-slab"> {{ ui.end_quiz }} </h1>
     <ul class="result-list">
 
-       {% for i in range(questions|length)%}\
-
-                 <li class="text-green-900 text-2xl flex flex-row font-slab">{{ i + 1 }}) {{questions[i + 1].question_text}}
-                       {% if quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
+       {% for i in range(result_items|length)%}
+                 <li class="text-green-900 text-2xl flex flex-row font-slab">{{ i + 1 }}) {{ result_items[i].question_text}}
+                       {% if not result_items[i].is_correct  %}
                              <div class="step incorrect flex flex-row justify-items ">{{ cross|safe }}<p class="mr-3 font-bold">{{ i + 1 }}</p></div>
-                       {% elif quiz_answers[i + 1][-1] == questions[i + 1].correct_answer %}
+                       {% else %}
+                              <div class="step correct flex flex-row justify-items ">{{ check|safe }}<p class="mr-3 font-bold">{{ i + 1 }}</p></div>
                       {% endif %}
                  </li>
        {% endfor %}
