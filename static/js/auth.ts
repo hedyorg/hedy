@@ -47,6 +47,8 @@ if (!(window as any).AuthMessages) {
   throw new Error('On a page where you load this JavaScript, you must also load the "client_messages.js" script');
 }
 
+// Todo in this PR: TB -> Remove all AuthMessages dependencies from this (and other) ts files
+
 export const auth = {
   texts: AuthMessages,
   profile: undefined as (Profile | undefined),
