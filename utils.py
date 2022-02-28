@@ -8,6 +8,7 @@ import string
 import random
 import uuid
 
+from flask_babel import gettext
 from ruamel import yaml
 from website import querylog
 import commonmark
@@ -195,12 +196,14 @@ def markdown_to_html_tags(markdown):
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all()
 
+
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None):
     if error not in [403, 404, 500]:
         error = 404
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
-                           page_error=page_error or g.ui_texts.get(ui_message) or '',
-                           default=g.ui_texts.get("default_" + str(error))), error
+                           page_error=page_error or gettext(u'' + str(ui_message)) or '',
+                           default=gettext(u'default' + str(error))), error
+
 
 def session_id():
     """Returns or sets the current session ID."""
