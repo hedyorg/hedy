@@ -108,3 +108,30 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   arguments_dict.update(**attr.asdict(level_defaults))
 
   return render_template("code-page.html", **arguments_dict)
+
+def render_specific_adventure(level_defaults, level_number, adventures):
+    arguments_dict = {}
+
+    # Meta stuff
+    arguments_dict['level_nr'] = str(level_number)
+    arguments_dict['level'] = level_number
+    arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
+    arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < 18 else None
+    arguments_dict['customizations'] = []
+    arguments_dict['hide_cheatsheet'] = None
+    arguments_dict['enforce_developers_mode'] = None
+    arguments_dict['teacher_adventures'] = []
+    arguments_dict['menu'] = True
+    arguments_dict['latest'] = None
+    arguments_dict['selected_page'] = 'code'
+    arguments_dict['page_title'] = f'Level {level_number} – Hedy'
+    arguments_dict['username'] = None
+    arguments_dict['is_teacher'] = None
+    arguments_dict['loaded_program'] = None
+    arguments_dict['adventures'] = adventures
+    arguments_dict['adventure_name'] = None
+
+    # Merge level defaults into adventures so it is rendered as the first tab
+    arguments_dict.update(**attr.asdict(level_defaults))
+
+    return render_template("code-page.html", **arguments_dict)
