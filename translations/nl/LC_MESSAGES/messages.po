@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-02-28 15:19+0100\n"
+"POT-Creation-Date: 2022-02-28 15:29+0100\n"
 "PO-Revision-Date: 2022-02-25 13:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl\n"
@@ -17,6 +17,34 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
+
+#: app.py:1166 app.py:1168
+msgid "translate_error"
+msgstr "Er is iets misgegaan met het vertalen van de code. Probeer je code te runnen om te kijken of er misschien een foutje in zit. Code met foutjes kan niet vertaald worden."
+
+#: app.py:1284 website/auth.py:225 website/auth.py:272 website/auth.py:407
+#: website/auth.py:433 website/auth.py:463 website/auth.py:563
+#: website/auth.py:593 website/auth.py:634 website/auth.py:660
+#: website/teacher.py:192 website/teacher.py:249 website/teacher.py:294
+#: website/teacher.py:327 website/teacher.py:363 website/teacher.py:444
+msgid "ajax_error"
+msgstr "Er is een fout opgetreden, probeer het nog eens."
+
+#: app.py:1286
+msgid "image_invalid"
+msgstr "Jouw gekozen profielfoto is ongeldig."
+
+#: app.py:1288
+msgid "personal_text_invalid"
+msgstr "Jouw persoonlijke tekst is ongeldig."
+
+#: app.py:1290
+msgid "favourite_program_invalid"
+msgstr "Jouw gekozen favoriete programma is ongeldig."
+
+#: app.py:1301 app.py:1302
+msgid "public_profile_updated"
+msgstr "Je openbare profiel is aangepast."
 
 #: templates/class-overview.html:16
 msgid "visible_columns"
@@ -851,6 +879,7 @@ msgstr "door"
 #: website/auth.py:169 website/auth.py:227 website/auth.py:409
 #: website/auth.py:565 website/auth.py:574 website/auth.py:595
 #: website/auth.py:636 website/auth.py:643 website/auth.py:662
+#: website/teacher.py:296 website/teacher.py:329
 msgid "username_invalid"
 msgstr "Je gebruikersnaam is ongeldig."
 
@@ -875,12 +904,6 @@ msgstr "Je wachtwoord is ongeldig."
 #: website/auth.py:179
 msgid "passwords_six"
 msgstr "Alle wachtwoorden moeten 6 of meer karakters zijn."
-
-#: website/auth.py:225 website/auth.py:272 website/auth.py:407
-#: website/auth.py:433 website/auth.py:463 website/auth.py:563
-#: website/auth.py:593 website/auth.py:634 website/auth.py:660
-msgid "ajax_error"
-msgstr "Er is een fout opgetreden, probeer het nog eens."
 
 #: website/auth.py:238
 msgid "invalid_username_password"
@@ -955,4 +978,76 @@ msgstr "Jouw token is ongeldig."
 #: website/auth.py:638
 msgid "teacher_invalid"
 msgstr "Jouw leraren waarde is ongeldig."
+
+#: website/teacher.py:235
+msgid "customization_deleted"
+msgstr "Personalisatie succesvol verwijderd."
+
+#: website/teacher.py:286
+msgid "class_customize_success"
+msgstr "Klas succesvol gepersonaliseerd."
+
+#: website/teacher.py:311
+msgid "student_not_existing"
+msgstr "Deze gebruikersnaam bestaat niet."
+
+#: website/teacher.py:313
+msgid "student_already_in_class"
+msgstr "Deze leerling zit al in jouw klas."
+
+#: website/teacher.py:315
+msgid "student_already_invite"
+msgstr "Deze leerling heeft al een openstaande uitnodiging."
+
+#: website/teacher.py:368
+msgid "no_accounts"
+msgstr "Er zijn geen accounts om aan te maken."
+
+#: website/teacher.py:379
+msgid "unique_usernames"
+msgstr "Alle gebruikersnamen moeten uniek zijn."
+
+#: website/teacher.py:382
+msgid "unique_emails"
+msgstr "Alle e-mailadressen moeten uniek zijn."
+
+#: website/teacher.py:393
+msgid "usernames_exist"
+msgstr "Een of meerdere gebruikersnamen is al in gebruik."
+
+#: website/teacher.py:396
+msgid "emails_exist"
+msgstr "Een of meerdere e-mailadressen is al in gebruik."
+
+#: website/teacher.py:407
+msgid "accounts_created"
+msgstr "Account succesvol aangemaakt."
+
+#: website/teacher.py:446
+msgid "adventure_id_invalid"
+msgstr "Dit avontuur id is ongeldig."
+
+#: website/teacher.py:448
+msgid "adventure_name_invalid"
+msgstr "Deze avontuur naam is ongeldig."
+
+#: website/teacher.py:450
+msgid "level_invalid"
+msgstr "Dit Hedy level is ongeldig."
+
+#: website/teacher.py:452
+msgid "content_invalid"
+msgstr "Dit avontuur is ongeldig."
+
+#: website/teacher.py:454 website/teacher.py:456
+msgid "adventure_length"
+msgstr "Jouw avontuur moet minimaal 20 karakters zijn."
+
+#: website/teacher.py:467 website/teacher.py:502
+msgid "adventure_duplicate"
+msgstr "Je hebt al een avontuur met deze naam."
+
+#: website/teacher.py:479
+msgid "adventure_updated"
+msgstr "Jouw avontuur is bijgewerkt!"
 
