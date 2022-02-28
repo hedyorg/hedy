@@ -1,14 +1,13 @@
-import { modal, error } from './modal';
+import { modal } from './modal';
 import { auth } from './auth';
 import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 import DOMPurify from 'dompurify'
 
-export function create_class() {
-  modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
+export function create_class(class_name_prompt: string, class_name_empty: string) {
+  modal.prompt (class_name_prompt, '', function (class_name) {
     if (!class_name) {
-      modal.alert(auth.texts['class_name_empty'], 2000, true);
-      return;
+      return modal.alert(class_name_empty, 2000, true);
     }
     $.ajax({
       type: 'POST',
@@ -25,21 +24,15 @@ export function create_class() {
         window.location.pathname = '/for-teachers/customize-class/' + response.id ;
       }
     }).fail(function(err) {
-      if (err.responseText == "duplicate") {
-        modal.alert(auth.texts['class_name_duplicate'], 2000, true);
-        return;
-      }
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      return modal.alert(err.responseText, 3000, true);
     });
   });
 }
 
-export function rename_class(id: string) {
-  modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
+export function rename_class(id: string, class_name_prompt: string, class_name_empty: string) {
+  modal.prompt (class_name_prompt, '', function (class_name) {
     if (!class_name) {
-      modal.alert(auth.texts['class_name_empty'], 2000, true);
-      return;
+      return modal.alert(class_name_empty, 2000, true);
     }
     $.ajax({
       type: 'PUT',
@@ -56,12 +49,7 @@ export function rename_class(id: string) {
         location.reload();
       }
     }).fail(function(err) {
-      if (err.responseText == "duplicate") {
-        modal.alert(auth.texts['class_name_duplicate'], 2000, true);
-        return;
-      }
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      return modal.alert(err.responseText, 3000, true);
     });
   });
 }

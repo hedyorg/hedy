@@ -90,7 +90,7 @@
   <p>{{_('class_link')}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
   <div class="mt-4 flex flex-row">
     <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{_('rename_class')}}</button>
+    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.rename_class ('{{class_info.id}}', '{{_('class_name_prompt')}}', '{{_('class_name_empty')}}')">{{_('rename_class')}}</button>
     <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.invite_student ('{{class_info.id}}')">{{_('invite_student')}}</button>
     <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
   </div>
