@@ -1063,8 +1063,7 @@ def main_page(page):
 
     if page == 'landing-page':
         if user['username']:
-            return render_template('landing-page.html', page_title=hedyweb.get_page_title(page), user=user['username'],
-                                   text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
+            return render_template('landing-page.html', page_title=hedyweb.get_page_title(page), user=user['username'])
         else:
             return utils.error_page(error=403, ui_message='not_user')
 
