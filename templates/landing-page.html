@@ -4,7 +4,7 @@
 <div class="px-8">
     <div id="landing_page_text" class="mt-4 w-3/4 mx-auto">
         <h2>{{_('welcome')}} {{ user }}!</h2>
-        {{_('text.intro_text')|commonmark}}
+        {{_('intro_text_landing_page')|commonmark}}
     </div>
     <div class="mt-8 w-full flex flex-row justify-around" style="height: 20rem;">
         {% if is_teacher %}
@@ -20,7 +20,7 @@
                 <div class="mt-4">
                     {{_('create_class_text')}}
                 </div>
-                <button class="green-btn mb-4 mt-auto" onclick="location.href='/for-teachers'">{{_('text.create_class')}}</button>
+                <button class="green-btn mb-4 mt-auto" onclick="location.href='/for-teachers'">{{_('create_class')}}</button>
             </div>
             <div class="border-2 border-gray-400 rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center">
                 <img src="/images/404.png" class="h-32 mt-8">
