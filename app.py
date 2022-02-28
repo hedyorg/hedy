@@ -1163,9 +1163,9 @@ def translate_keywords():
         if translated_code:
             return jsonify({'success': 200, 'code': translated_code})
         else:
-            return g.auth_texts.get('translate_error'), 400
+            return gettext(u'translate_error'), 400
     except:
-        return g.auth_texts.get('translate_error'), 400
+        return gettext(u'translate_error'), 400
 
 
 @app.template_global()
@@ -1281,13 +1281,13 @@ def update_public_profile(user):
 
     # Validations
     if not isinstance(body, dict):
-        return g.auth_texts.get('ajax_error'), 400
+        return gettext(u'ajax_error'), 400
     if not isinstance(body.get('image'), str):
-        return g.auth_texts.get('image_invalid'), 400
+        return gettext(u'image_invalid'), 400
     if not isinstance(body.get('personal_text'), str):
-        return g.auth_texts.get('personal_text_invalid'), 400
+        return gettext(u'personal_text_invalid'), 400
     if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
-        return g.auth_texts.get('favourite_program_invalid'), 400
+        return gettext(u'favourite_program_invalid'), 400
 
     achievement = None
     current_profile = DATABASE.get_public_profile_settings(user['username'])
@@ -1298,8 +1298,8 @@ def update_public_profile(user):
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
-        return {'success': g.auth_texts.get('public_profile_updated'), 'achievement': achievement}, 200
-    return {'success': g.auth_texts.get('public_profile_updated')}, 200
+        return {'success': gettext(u'public_profile_updated'), 'achievement': achievement}, 200
+    return {'success': gettext(u'public_profile_updated')}, 200
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
