@@ -876,6 +876,7 @@ def index(level, step):
         if not result:
             return utils.error_page(error=404, ui_message='no_such_program')
 
+        # Todo TB -> I don't think this code works as expected: Discuss with Felienne
         user = current_user()
         public_program = 'public' in result and result['public']
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(
@@ -905,9 +906,9 @@ def index(level, step):
                     print("Error: there is an openings date without a level")
 
     if level not in level_defaults_for_lang.levels:
-        return utils.error_page(error=404, ui_message='no_such_level')
+        return utils.error_page(error=404, ui_message='level_not_translated')
     if 'levels' in customizations and level not in available_levels:
-        return utils.error_page(error=403, ui_message='no_such_level')
+        return utils.error_page(error=403, ui_message='level_not_class')
 
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
