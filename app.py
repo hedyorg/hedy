@@ -904,7 +904,7 @@ def index(level, step):
                 except:
                     print("Error: there is an openings date without a level")
 
-    if level not in level_defaults_for_lang.levels:
+    if level not in level_defaults_for_lang.levels and level <= hedy.HEDY_MAX_LEVEL:
         return utils.error_page(error=404, ui_message='level_not_translated')
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message='level_not_class')
