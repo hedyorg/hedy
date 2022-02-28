@@ -27,7 +27,7 @@
                 <div class="mt-4">
                     {{_('read_docs_text')}}
                 </div>
-                <button class="green-btn mb-4 mt-auto" onclick="location.href='/for-teachers'">{{ text.read_docs }}</button>
+                <button class="green-btn mb-4 mt-auto" onclick="location.href='/for-teachers'">{{_('read_docs')}}</button>
             </div>
         {% else %}
             <div class="border-2 border-gray-400 rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center">
@@ -35,21 +35,21 @@
                 <div class="mt-4">
                     {{_('general_text_landing_page')}}
                 </div>
-                <button class="green-btn mb-4 mt-auto" onclick="location.href='/hedy'">{{ text.start_programming }}</button>
+                <button class="green-btn mb-4 mt-auto" onclick="location.href='/hedy'">{{_('start_programming')}}</button>
             </div>
             <div class="border-2 border-gray-400 rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center">
                 <img src="/images/story.png" class="h-32 mt-8">
                 <div class="mt-4">
                     {{_('story_text')}}
                 </div>
-                <button class="green-btn mb-4 mt-auto" onclick="location.href='/hedy#story'">{{ text.start_programming }}</button>
+                <button class="green-btn mb-4 mt-auto" onclick="location.href='/hedy#story'">{{_('start_programming')}}</button>
             </div>
             <div class="border-2 border-gray-400 rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center">
                 <img src="/images/turtle.png" class="h-32 mt-8">
                 <div class="mt-4">
                     {{_('turtle_text')}}
                 </div>
-                <button class="green-btn mb-4 mt-auto" onclick="location.href='/hedy#turtle'">{{ text.start_programming }}</button>
+                <button class="green-btn mb-4 mt-auto" onclick="location.href='/hedy#turtle'">{{_('start_programming')}}</button>
             </div>
         {% endif %}
     </div>
