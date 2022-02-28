@@ -453,7 +453,7 @@ def routes(app, database):
         if not is_testing_request(request):
             send_email_template('change_password', user['email'], None)
 
-        return '', 200
+        return gettext(u'password_updated'), 200
 
     @app.route('/profile', methods=['POST'])
     @requires_login
@@ -528,10 +528,11 @@ def routes(app, database):
         # We want to check if the user choose a new language, if so -> reload
         # We can use g.lang for this to reduce the db calls
         resp['reload'] = False
-        print(session['lang'])
-        print(session['keyword_lang'])
         if session['lang'] != body['language'] or session['keyword_lang'] != body['keyword_language']:
+            resp['message'] = gettext(u'profile_updated')
             resp['reload'] = True
+        else:
+            resp['message'] = gettext(u'profile_updated_reload')
 
         remember_current_user(DATABASE.user_by_username(user['username']))
         return jsonify(resp)
@@ -583,7 +584,7 @@ def routes(app, database):
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
             send_email_template('recover_password', user['email'], email_base_url() + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token))
-            return '', 200
+            return gettext(u'sent_password_recovery'), 200
 
     @app.route('/auth/reset', methods=['POST'])
     def reset():
@@ -617,7 +618,7 @@ def routes(app, database):
         if not is_testing_request(request):
             send_email_template('reset_password', user['email'], None)
 
-        return '', 200
+        return gettext(u'password_resetted'), 200
 
     # *** ADMIN ROUTES ***
 

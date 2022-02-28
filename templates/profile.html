@@ -58,7 +58,7 @@
      <div class="mb-4 mt-6 flex flex-row">
         <button type="submit" class="green-btn">{{_('update_public')}}</button>
         {% if public_settings %}
-            <button type="reset" class="ml-auto red-btn" onclick="event.preventDefault(); hedyApp.auth.destroy_public ();">{{_('delete_public')}}</button>
+            <button type="reset" class="ml-auto red-btn" onclick="event.preventDefault(); hedyApp.auth.destroy_public ('{{_('are_you_sure')}}');">{{_('delete_public')}}</button>
         {% endif %}
      </div>
      <div>
@@ -142,7 +142,7 @@
         </div>
       </form>
         <div>
-             <button class="red-btn" onclick="hedyApp.auth.destroy ()">{{_('destroy_profile')}}</button>
+             <button class="red-btn" onclick="hedyApp.auth.destroy ('{{_('are_you_sure')}}')">{{_('destroy_profile')}}</button>
         </div>
    </div>
   <h1 id="password_toggle" class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#change_password').toggle()">{{_('change_password')}}</h1>

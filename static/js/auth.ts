@@ -43,14 +43,7 @@ interface UserForm {
   old_password?: string;
 }
 
-if (!(window as any).AuthMessages) {
-  throw new Error('On a page where you load this JavaScript, you must also load the "client_messages.js" script');
-}
-
-// Todo in this PR: TB -> Remove all AuthMessages dependencies from this (and other) ts files
-
 export const auth = {
-  texts: AuthMessages,
   profile: undefined as (Profile | undefined),
   reset: undefined as (Record<string, string> | undefined),
   entityify: function (string: string) {
@@ -66,15 +59,15 @@ export const auth = {
       auth.redirect ('login');
     });
   },
-  destroy: function () {
-    modal.confirm (auth.texts['are_you_sure'], function () {
+  destroy: function (confirmation: string) {
+    modal.confirm (confirmation, function () {
       $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
         auth.redirect ('');
       });
     });
   },
-  destroy_public: function () {
-    modal.confirm (auth.texts['are_you_sure'], function () {
+  destroy_public: function (confirmation: string) {
+    modal.confirm (confirmation, function () {
       $.ajax ({type: 'POST', url: '/auth/destroy_public'}).done (function () {
         auth.redirect ('my-profile');
       });
@@ -134,11 +127,7 @@ export const auth = {
         afterLogin({"teacher": false});
       }).fail (function (response) {
         auth.clear_error();
-        if (response.responseText) {
-          auth.error(response.responseText);
-        } else {
-          auth.error(auth.texts['ajax_error']);
-        }
+        auth.error(response.responseText);
       });
     }
 
@@ -154,11 +143,7 @@ export const auth = {
         afterLogin({"teacher": response['teacher']});
       }).fail (function (response) {
         auth.clear_error();
-        if (response.responseText) {
-           modal.alert(response.responseText, 3000, true);
-        } else {
-          modal.alert(auth.texts['ajax_error'], 3000, true);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
@@ -178,17 +163,13 @@ export const auth = {
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
         if (response.reload) {
-          modal.alert(auth.texts['profile_updated_reload'], 2000, false);
+          modal.alert(response.message, 2000, false);
           setTimeout (function () {location.reload ()}, 2000);
         } else {
-          modal.alert(auth.texts['profile_updated'], 3000, false);
+          modal.alert(response.message, 3000, false);
         }
       }).fail (function (response) {
-        if (response.responseText) {
-          modal.alert(response.responseText, 3000, true);
-        } else {
-          modal.alert(auth.texts['ajax_error'], 3000, true);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
@@ -201,17 +182,13 @@ export const auth = {
         url: '/auth/change_password',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
-      }).done (function () {
-        modal.alert(auth.texts['password_updated'], 3000, false);
+      }).done (function (response) {
+        modal.alert(response.responseText, 3000, false);
         $ ('#old_password').val ('');
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
-        if (response.responseText) {
-           modal.alert(response.responseText, 3000, true);
-        } else {
-          modal.alert(auth.texts['ajax_error'], 3000, true);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
@@ -223,15 +200,11 @@ export const auth = {
         type: 'POST', url: '/auth/recover',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
-      }).done (function () {
-        auth.success (auth.texts['sent_password_recovery']);
+      }).done (function (response) {
+        modal.alert(response.responseText, 3000, false);
         $ ('#username').val ('');
       }).fail (function (response) {
-        if (response.responseText) {
-          return auth.error(response.responseText);
-        } else {
-          auth.error(auth.texts['ajax_error']);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
@@ -244,8 +217,13 @@ export const auth = {
       };
 
       auth.clear_error ();
-      $.ajax ({type: 'POST', url: '/auth/reset', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        modal.alert(auth.texts['password_resetted'], 2000, false);
+      $.ajax ({
+        type: 'POST',
+        url: '/auth/reset',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function (response) {
+        modal.alert(response.responseText, 3000, false);
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
         delete auth.reset;
@@ -253,11 +231,7 @@ export const auth = {
           auth.redirect ('login');
         }, 2000);
       }).fail (function (response) {
-        if (response.responseText) {
-          modal.alert(response.responseText, 3000, true);
-        } else {
-          modal.alert(auth.texts['ajax_error'], 3000, true);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
@@ -274,17 +248,13 @@ export const auth = {
         data: JSON.stringify(data),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
-        auth.success (auth.texts['public_profile_updated']);
+        modal.alert(response.message, 3000, false);
         if (response.achievement) {
           showAchievements(response.achievement, false, "");
         }
         $('#public_profile_redirect').show();
       }).fail (function (response) {
-        if (response.responseText) {
-          return auth.error(response.responseText);
-        } else {
-          auth.error(auth.texts['ajax_error']);
-        }
+        return modal.alert(response.responseText, 3000, true);
       });
     }
   },
