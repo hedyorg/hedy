@@ -30,7 +30,7 @@ import textwrap
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
 from flask_helpers import render_template
 from flask_compress import Compress
-from flask_babel import Babel
+from flask_babel import Babel, refresh
 from flask_babel import gettext
 
 # Hedy-specific modules
@@ -177,7 +177,6 @@ app.url_map.strict_slashes = False
 
 babel = Babel(app)
 
-
 # Return the session language, if not: return best match
 @babel.localeselector
 def get_locale():
@@ -318,10 +317,6 @@ def setup_language():
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
         return "Language " + g.lang + " not supported", 404
-    # Also get the 'ui' translations into a global object for this language, these
-    # are used a lot so we can clean up a fair bit by initializing here.
-    g.ui_texts = TRANSLATIONS.get_translations(g.lang, 'ui')
-    g.auth_texts = TRANSLATIONS.get_translations(g.lang, 'Auth')
 
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
