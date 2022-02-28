@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-02-28 12:56+0100\n"
+"POT-Creation-Date: 2022-02-28 15:19+0100\n"
 "PO-Revision-Date: 2022-02-25 13:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl\n"
@@ -528,7 +528,7 @@ msgstr "Probeer"
 msgid "login_long"
 msgstr "Inloggen op jouw account"
 
-#: templates/login.html:26
+#: templates/login.html:26 website/auth.py:238
 msgid "no_account"
 msgstr "Nog geen account?"
 
@@ -847,4 +847,112 @@ msgstr ""
 #: templates/view-program-page.html:13
 msgid "by"
 msgstr "door"
+
+#: website/auth.py:169 website/auth.py:227 website/auth.py:409
+#: website/auth.py:565 website/auth.py:574 website/auth.py:595
+#: website/auth.py:636 website/auth.py:643 website/auth.py:662
+msgid "username_invalid"
+msgstr "Je gebruikersnaam is ongeldig."
+
+#: website/auth.py:171
+msgid "username_special"
+msgstr "Er mag geen `:` of `@` in je gebruikersnaam zitten."
+
+#: website/auth.py:173
+msgid "username_three"
+msgstr "Je gebruikersnaam moet minstens 3 tekens hebben."
+
+#: website/auth.py:175 website/auth.py:465 website/auth.py:664
+#: website/auth.py:669
+msgid "email_invalid"
+msgstr "Vul een geldig e-mailadres in."
+
+#: website/auth.py:177 website/auth.py:229 website/auth.py:411
+#: website/auth.py:435 website/auth.py:447 website/auth.py:599
+msgid "password_invalid"
+msgstr "Je wachtwoord is ongeldig."
+
+#: website/auth.py:179
+msgid "passwords_six"
+msgstr "Alle wachtwoorden moeten 6 of meer karakters zijn."
+
+#: website/auth.py:225 website/auth.py:272 website/auth.py:407
+#: website/auth.py:433 website/auth.py:463 website/auth.py:563
+#: website/auth.py:593 website/auth.py:634 website/auth.py:660
+msgid "ajax_error"
+msgstr "Er is een fout opgetreden, probeer het nog eens."
+
+#: website/auth.py:238
+msgid "invalid_username_password"
+msgstr "Ongeldige gebruikersnaam/wachtwoord combinatie."
+
+#: website/auth.py:281 website/auth.py:283
+msgid "repeat_match_email"
+msgstr "De e-mailadressen zijn niet hetzelfde."
+
+#: website/auth.py:285 website/auth.py:437 website/auth.py:441
+#: website/auth.py:603
+msgid "repeat_match_password"
+msgstr "Herhaal nieuw wachtwoord"
+
+#: website/auth.py:287 website/auth.py:467
+msgid "language_invalid"
+msgstr "Dit is geen geldige taal, kies een taal vanuit de lijst."
+
+#: website/auth.py:289
+msgid "agree_invalid"
+msgstr "Je moet akkoord gaan met de privacyverklaring."
+
+#: website/auth.py:291 website/auth.py:469
+msgid "keyword_language_invalid"
+msgstr "Dit is geen geldige commando taal (kies Engels of je eigen taal)."
+
+#: website/auth.py:296 website/auth.py:474
+msgid "year_invalid"
+msgstr "Dit is geen geldig jaartal, die moet liggen tussen 1900 en {current_year}."
+
+#: website/auth.py:299 website/auth.py:477
+msgid "gender_invalid"
+msgstr "Dit gender is niet geldig, kies uit (Meisje, Jongen, Anders)."
+
+#: website/auth.py:302 website/auth.py:480
+msgid "country_invalid"
+msgstr "Dit is geen geldig land, kies er een vanuit de lijst."
+
+#: website/auth.py:304 website/auth.py:307 website/auth.py:482
+#: website/auth.py:485
+msgid "experience_invalid"
+msgstr "Dit is geen geldige programmeerervaring, kies uit (Ja, Nee)."
+
+#: website/auth.py:310 website/auth.py:488
+msgid "programming_invalid"
+msgstr "Dit is geen geldige programmeertaal, selecteer van de opties."
+
+#: website/auth.py:314
+msgid "exists_username"
+msgstr "Deze gebruikersnaam is al in gebruik."
+
+#: website/auth.py:317 website/auth.py:496
+msgid "exists_email"
+msgstr "Dit emailadres is al in gebruik."
+
+#: website/auth.py:413 website/auth.py:439 website/auth.py:601
+msgid "password_six"
+msgstr "Je wachtwoord moet minstens 6 letters hebben."
+
+#: website/auth.py:416 website/auth.py:419
+msgid "password_change_not_allowed"
+msgstr "Je hebt geen rechten op het wachtwoord van deze gebruiker te wijzigen."
+
+#: website/auth.py:425
+msgid "password_change_success"
+msgstr "Wachtwoord van jouw leerling is succesvol gewijzigd."
+
+#: website/auth.py:597 website/auth.py:608 website/auth.py:610
+msgid "token_invalid"
+msgstr "Jouw token is ongeldig."
+
+#: website/auth.py:638
+msgid "teacher_invalid"
+msgstr "Jouw leraren waarde is ongeldig."
 
