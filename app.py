@@ -871,16 +871,15 @@ def index(level, step):
     adventure_name = ''
 
     # If step is a string that has more than two characters, it must be an id of a program
+    # Todo TB -> I don't like this structure, can't we use a dedicated URL for loaded programs?!
     if step and isinstance(step, str) and len(step) > 2:
         result = DATABASE.program_by_id(step)
         if not result:
             return utils.error_page(error=404, ui_message='no_such_program')
 
-        # Todo TB -> I don't think this code works as expected: Discuss with Felienne
         user = current_user()
         public_program = 'public' in result and result['public']
-        if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(
-                user):
+        if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
             return utils.error_page(error=404, ui_message='no_such_program')
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
