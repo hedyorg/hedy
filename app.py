@@ -899,10 +899,15 @@ def index(level, step):
         now = timems()
         for current_level, timestamp in customizations.get('opening_dates', {}).items():
             if utils.datetotimeordate(timestamp) > utils.datetotimeordate(utils.mstoisostring(now)):
-                available_levels.remove(int(current_level))
+                try:
+                    available_levels.remove(int(current_level))
+                except:
+                    print("Error: there is an openings date without a level")
 
-    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
+    if level not in level_defaults_for_lang.levels:
         return utils.error_page(error=404, ui_message='no_such_level')
+    if 'levels' in customizations and level not in available_levels:
+        return utils.error_page(error=403, ui_message='no_such_level')
 
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
