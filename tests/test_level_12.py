@@ -56,7 +56,7 @@ class TestsLevel12(HedyTester):
       expected=expected,
       expected_commands=['is', 'if', 'print'],
       max_level=16,
-     translate=False)
+     translate=False) #space between = is not preserved (but is needed for the test)
 
   # print tests
   def test_print_float(self):
