@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-02-28 15:46+0100\n"
+"POT-Creation-Date: 2022-02-28 18:05+0100\n"
 "PO-Revision-Date: 2022-02-25 13:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl\n"
@@ -18,34 +18,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app.py:1165 app.py:1167
+#: app.py:1144 app.py:1146
 msgid "translate_error"
 msgstr ""
 "Er is iets misgegaan met het vertalen van de code. Probeer je code te "
 "runnen om te kijken of er misschien een foutje in zit. Code met foutjes "
 "kan niet vertaald worden."
 
-#: app.py:1283 website/auth.py:225 website/auth.py:272 website/auth.py:407
-#: website/auth.py:433 website/auth.py:463 website/auth.py:563
-#: website/auth.py:593 website/auth.py:634 website/auth.py:660
+#: app.py:1262 website/auth.py:225 website/auth.py:272 website/auth.py:407
+#: website/auth.py:433 website/auth.py:463 website/auth.py:564
+#: website/auth.py:594 website/auth.py:635 website/auth.py:661
 #: website/teacher.py:192 website/teacher.py:249 website/teacher.py:294
 #: website/teacher.py:327 website/teacher.py:363 website/teacher.py:444
 msgid "ajax_error"
 msgstr "Er is een fout opgetreden, probeer het nog eens."
 
-#: app.py:1285
+#: app.py:1264
 msgid "image_invalid"
 msgstr "Jouw gekozen profielfoto is ongeldig."
 
-#: app.py:1287
+#: app.py:1266
 msgid "personal_text_invalid"
 msgstr "Jouw persoonlijke tekst is ongeldig."
 
-#: app.py:1289
+#: app.py:1268
 msgid "favourite_program_invalid"
 msgstr "Jouw gekozen favoriete programma is ongeldig."
 
-#: app.py:1300 app.py:1301
+#: app.py:1279 app.py:1280
 msgid "public_profile_updated"
 msgstr "Je openbare profiel is aangepast."
 
@@ -672,6 +672,10 @@ msgstr ""
 msgid "update_public"
 msgstr "Openbaar profiel opslaan"
 
+#: templates/profile.html:61 templates/profile.html:145
+msgid "are_you_sure"
+msgstr "Weet je het zeker? Je kunt dit niet meer ongedaan maken."
+
 #: templates/profile.html:61
 msgid "delete_public"
 msgstr "Openbaar profiel verwijderen"
@@ -922,8 +926,8 @@ msgid "by"
 msgstr "door"
 
 #: website/auth.py:169 website/auth.py:227 website/auth.py:409
-#: website/auth.py:565 website/auth.py:574 website/auth.py:595
-#: website/auth.py:636 website/auth.py:643 website/auth.py:662
+#: website/auth.py:566 website/auth.py:575 website/auth.py:596
+#: website/auth.py:637 website/auth.py:644 website/auth.py:663
 #: website/teacher.py:296 website/teacher.py:329
 msgid "username_invalid"
 msgstr "Je gebruikersnaam is ongeldig."
@@ -936,13 +940,13 @@ msgstr "Er mag geen `:` of `@` in je gebruikersnaam zitten."
 msgid "username_three"
 msgstr "Je gebruikersnaam moet minstens 3 tekens hebben."
 
-#: website/auth.py:175 website/auth.py:465 website/auth.py:664
-#: website/auth.py:669
+#: website/auth.py:175 website/auth.py:465 website/auth.py:665
+#: website/auth.py:670
 msgid "email_invalid"
 msgstr "Vul een geldig e-mailadres in."
 
 #: website/auth.py:177 website/auth.py:229 website/auth.py:411
-#: website/auth.py:435 website/auth.py:447 website/auth.py:599
+#: website/auth.py:435 website/auth.py:447 website/auth.py:600
 msgid "password_invalid"
 msgstr "Je wachtwoord is ongeldig."
 
@@ -959,7 +963,7 @@ msgid "repeat_match_email"
 msgstr "De e-mailadressen zijn niet hetzelfde."
 
 #: website/auth.py:285 website/auth.py:437 website/auth.py:441
-#: website/auth.py:603
+#: website/auth.py:604
 msgid "repeat_match_password"
 msgstr "Herhaal nieuw wachtwoord"
 
@@ -1004,7 +1008,7 @@ msgstr "Deze gebruikersnaam is al in gebruik."
 msgid "exists_email"
 msgstr "Dit emailadres is al in gebruik."
 
-#: website/auth.py:413 website/auth.py:439 website/auth.py:601
+#: website/auth.py:413 website/auth.py:439 website/auth.py:602
 msgid "password_six"
 msgstr "Je wachtwoord moet minstens 6 letters hebben."
 
@@ -1016,11 +1020,31 @@ msgstr "Je hebt geen rechten op het wachtwoord van deze gebruiker te wijzigen."
 msgid "password_change_success"
 msgstr "Wachtwoord van jouw leerling is succesvol gewijzigd."
 
-#: website/auth.py:597 website/auth.py:608 website/auth.py:610
+#: website/auth.py:456
+msgid "password_updated"
+msgstr "Je wachtwoord is aangepast."
+
+#: website/auth.py:532
+msgid "profile_updated"
+msgstr "Je profiel is aangepast."
+
+#: website/auth.py:535
+msgid "profile_updated_reload"
+msgstr "Je profiel is aangepast, pagina wordt herladen."
+
+#: website/auth.py:587
+msgid "sent_password_recovery"
+msgstr "Je krijgt zo een mailtje met informatie over hoe je een nieuw wachtwoord kiest."
+
+#: website/auth.py:598 website/auth.py:609 website/auth.py:611
 msgid "token_invalid"
 msgstr "Jouw token is ongeldig."
 
-#: website/auth.py:638
+#: website/auth.py:621
+msgid "password_resetted"
+msgstr "Je wachtwoord is gereset. Je wordt doorgestuurd naar de inlogpagina."
+
+#: website/auth.py:639
 msgid "teacher_invalid"
 msgstr "Jouw leraren waarde is ongeldig."
 

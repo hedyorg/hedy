@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-02-28 15:46+0100\n"
+"POT-Creation-Date: 2022-02-28 18:05+0100\n"
 "PO-Revision-Date: 2022-02-25 13:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,34 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app.py:1165 app.py:1167
+#: app.py:1144 app.py:1146
 msgid "translate_error"
-msgstr "Something went wrong while translating the code. Try running the code to see if it has an error. Code with errors can not be translated."
+msgstr ""
+"Something went wrong while translating the code. Try running the code to "
+"see if it has an error. Code with errors can not be translated."
 
-#: app.py:1283 website/auth.py:225 website/auth.py:272 website/auth.py:407
-#: website/auth.py:433 website/auth.py:463 website/auth.py:563
-#: website/auth.py:593 website/auth.py:634 website/auth.py:660
+#: app.py:1262 website/auth.py:225 website/auth.py:272 website/auth.py:407
+#: website/auth.py:433 website/auth.py:463 website/auth.py:564
+#: website/auth.py:594 website/auth.py:635 website/auth.py:661
 #: website/teacher.py:192 website/teacher.py:249 website/teacher.py:294
 #: website/teacher.py:327 website/teacher.py:363 website/teacher.py:444
 msgid "ajax_error"
 msgstr "There was an error, please try again."
 
-#: app.py:1285
+#: app.py:1264
 #, fuzzy
 msgid "image_invalid"
 msgstr "Your chosen image is invalid."
 
-#: app.py:1287
+#: app.py:1266
 #, fuzzy
 msgid "personal_text_invalid"
 msgstr "Your personal text is invalid."
 
-#: app.py:1289
+#: app.py:1268
 #, fuzzy
 msgid "favourite_program_invalid"
 msgstr "Your chosen favourite program is invalid."
 
-#: app.py:1300 app.py:1301
+#: app.py:1279 app.py:1280
 msgid "public_profile_updated"
 msgstr "Public profile updated."
 
@@ -176,7 +178,14 @@ msgstr "Create multiple accounts"
 
 #: templates/create-accounts.html:7
 msgid "accounts_intro"
-msgstr "On this page you can create accounts for multiple students at the same time. It is also possible to directly add them to one of your classes. By pressing the green + on the bottom right of the page you can add extra rows. You can delete a row by pressing the corresponding red cross. Make sure no rows are empty when you press \"Create accounts\". Please keep in mind that every username and mail address needs to be unique and the password needs to be <b>at least</b> 6 characters."
+msgstr ""
+"On this page you can create accounts for multiple students at the same "
+"time. It is also possible to directly add them to one of your classes. By"
+" pressing the green + on the bottom right of the page you can add extra "
+"rows. You can delete a row by pressing the corresponding red cross. Make "
+"sure no rows are empty when you press \"Create accounts\". Please keep in"
+" mind that every username and mail address needs to be unique and the "
+"password needs to be <b>at least</b> 6 characters."
 
 #: templates/create-accounts.html:17 templates/profile.html:96
 #: templates/recover.html:8 templates/signup.html:14
@@ -222,15 +231,24 @@ msgstr "Level"
 
 #: templates/customize-adventure.html:25
 msgid "adventure_exp_1"
-msgstr "Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under \"customizations\". If you want to include a command in your adventure please use code anchors like this:"
+msgstr ""
+"Type your adventure of choice on the right-hand side. After creating your"
+" adventure you can include it in one of your classes under "
+"\"customizations\". If you want to include a command in your adventure "
+"please use code anchors like this:"
 
 #: templates/customize-adventure.html:31
 msgid "adventure_exp_2"
-msgstr "If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:"
+msgstr ""
+"If you want to show actual code snippets, for example to give student a "
+"template or example of the code. Please use pre anchors like this:"
 
 #: templates/customize-adventure.html:39
 msgid "adventure_exp_3"
-msgstr "You can use the \"preview\" button to view a styled version of your adventure. To view the adventure on a dedicated page, select \"view\" from the teachers page."
+msgstr ""
+"You can use the \"preview\" button to view a styled version of your "
+"adventure. To view the adventure on a dedicated page, select \"view\" "
+"from the teachers page."
 
 #: templates/customize-adventure.html:43 templates/customize-class.html:26
 #: templates/customize-class.html:91 templates/explore.html:26
@@ -241,7 +259,16 @@ msgstr "Adventure"
 
 #: templates/customize-adventure.html:44
 msgid "template_code"
-msgstr "This is the explanation of my adventure!\n\nThis way I can show a command: <code>print</code>\n\nBut sometimes I might want to show a piece of code, like this:\n<pre>\nask What's your name?\necho so your name is \n</pre>"
+msgstr ""
+"This is the explanation of my adventure!\n"
+"\n"
+"This way I can show a command: <code>print</code>\n"
+"\n"
+"But sometimes I might want to show a piece of code, like this:\n"
+"<pre>\n"
+"ask What's your name?\n"
+"echo so your name is \n"
+"</pre>"
 
 #: templates/customize-adventure.html:47
 msgid "adventure_terms"
@@ -340,7 +367,14 @@ msgstr "Explore programs"
 
 #: templates/explore.html:14
 msgid "explore_explanation"
-msgstr "On this page you can look through programs created by other Hedy users. You can filter on both a Hedy level and adventure. Click on \"View program\" to open a program and run it. Programs with a red header contain a mistake. You can still open the program, but running it will result in an error. You can of course try to fix it! If the creator has a public profile you can click their username to visit their profile. There you will find all their shared programs and much more!"
+msgstr ""
+"On this page you can look through programs created by other Hedy users. "
+"You can filter on both a Hedy level and adventure. Click on \"View "
+"program\" to open a program and run it. Programs with a red header "
+"contain a mistake. You can still open the program, but running it will "
+"result in an error. You can of course try to fix it! If the creator has a"
+" public profile you can click their username to visit their profile. "
+"There you will find all their shared programs and much more!"
 
 #: templates/explore.html:35 templates/incl-menubar.html:46
 #: templates/programs.html:27
@@ -414,7 +448,9 @@ msgstr "Create student accounts"
 
 #: templates/for-teachers.html:113
 msgid "teacher_welcome"
-msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
+msgstr ""
+"Welcome to Hedy! Your are now the proud owner of a teachers account which"
+" allows you to create classes and invite students."
 
 #: templates/incl-adventure-tabs.html:65
 msgid "go_to_quiz"
@@ -483,7 +519,11 @@ msgstr "Welcome"
 
 #: templates/landing-page.html:7
 msgid "intro_text_landing_page"
-msgstr "Welcome to the wonderful world of Hedy! Here you can learn to program in small steps, without unnecessary complicated stuff. We start easy at level 1, and slowly build towards bigger and more complex programs! Choose one of the options below to get started"
+msgstr ""
+"Welcome to the wonderful world of Hedy! Here you can learn to program in "
+"small steps, without unnecessary complicated stuff. We start easy at "
+"level 1, and slowly build towards bigger and more complex programs! "
+"Choose one of the options below to get started"
 
 #: templates/landing-page.html:14 templates/landing-page.html:36
 msgid "general_text_landing_page"
@@ -500,7 +540,9 @@ msgstr "Group your students into classes and change the content for each class."
 
 #: templates/landing-page.html:28
 msgid "read_docs_text"
-msgstr "Visit our teacher's manual for lesson plans and common mistakes by students."
+msgstr ""
+"Visit our teacher's manual for lesson plans and common mistakes by "
+"students."
 
 #: templates/landing-page.html:30
 msgid "read_docs"
@@ -537,7 +579,9 @@ msgstr "Copy link to share"
 
 #: templates/layout.html:78
 msgid "set_preferred_lang"
-msgstr "Hedy now supports preferred user languages. You can set one for your profile in \"My profile\""
+msgstr ""
+"Hedy now supports preferred user languages. You can set one for your "
+"profile in \"My profile\""
 
 #: templates/level-page.html:8
 msgid "step_title"
@@ -621,11 +665,18 @@ msgstr "Favourite program"
 
 #: templates/profile.html:56
 msgid "public_profile_info"
-msgstr "By selecting this box I make my profile visible for everyone. Be careful not to share personal information like your name or home address, because everyone will be able to see it!"
+msgstr ""
+"By selecting this box I make my profile visible for everyone. Be careful "
+"not to share personal information like your name or home address, because"
+" everyone will be able to see it!"
 
 #: templates/profile.html:59
 msgid "update_public"
 msgstr "Update public profile"
+
+#: templates/profile.html:61 templates/profile.html:145
+msgid "are_you_sure"
+msgstr ""
 
 #: templates/profile.html:61
 msgid "delete_public"
@@ -850,7 +901,9 @@ msgstr "privacy terms"
 
 #: templates/signup.html:100
 msgid "agree_third_party"
-msgstr "I consent to being contacted by partners of Leiden University with sales opportunities (optional)"
+msgstr ""
+"I consent to being contacted by partners of Leiden University with sales "
+"opportunities (optional)"
 
 #: templates/signup.html:111
 msgid "already_account"
@@ -866,15 +919,17 @@ msgstr "Go to question 1"
 
 #: templates/teacher-invitation.html:5
 msgid "teacher_invitation_require_login"
-msgstr "To set up your profile as a teacher we will need you to log in. If you don't have an account, please create one."
+msgstr ""
+"To set up your profile as a teacher we will need you to log in. If you "
+"don't have an account, please create one."
 
 #: templates/view-program-page.html:13
 msgid "by"
 msgstr "by"
 
 #: website/auth.py:169 website/auth.py:227 website/auth.py:409
-#: website/auth.py:565 website/auth.py:574 website/auth.py:595
-#: website/auth.py:636 website/auth.py:643 website/auth.py:662
+#: website/auth.py:566 website/auth.py:575 website/auth.py:596
+#: website/auth.py:637 website/auth.py:644 website/auth.py:663
 #: website/teacher.py:296 website/teacher.py:329
 msgid "username_invalid"
 msgstr "Your username is invalid."
@@ -887,13 +942,13 @@ msgstr "Username cannot contain `:` or `@`."
 msgid "username_three"
 msgstr "Username must contain at least three characters."
 
-#: website/auth.py:175 website/auth.py:465 website/auth.py:664
-#: website/auth.py:669
+#: website/auth.py:175 website/auth.py:465 website/auth.py:665
+#: website/auth.py:670
 msgid "email_invalid"
 msgstr "Please enter a valid email."
 
 #: website/auth.py:177 website/auth.py:229 website/auth.py:411
-#: website/auth.py:435 website/auth.py:447 website/auth.py:599
+#: website/auth.py:435 website/auth.py:447 website/auth.py:600
 #, fuzzy
 msgid "password_invalid"
 msgstr "Your password is invalid."
@@ -912,7 +967,7 @@ msgid "repeat_match_email"
 msgstr "The repeated email does not match."
 
 #: website/auth.py:285 website/auth.py:437 website/auth.py:441
-#: website/auth.py:603
+#: website/auth.py:604
 msgid "repeat_match_password"
 msgstr "The repeated password does not match."
 
@@ -926,7 +981,9 @@ msgstr "You have to agree with the privacy terms."
 
 #: website/auth.py:291 website/auth.py:469
 msgid "keyword_language_invalid"
-msgstr "Please select a valid keyword language (select English or your own language)."
+msgstr ""
+"Please select a valid keyword language (select English or your own "
+"language)."
 
 #: website/auth.py:296 website/auth.py:474
 msgid "year_invalid"
@@ -958,7 +1015,7 @@ msgstr "That username is already in use."
 msgid "exists_email"
 msgstr "That email is already in use."
 
-#: website/auth.py:413 website/auth.py:439 website/auth.py:601
+#: website/auth.py:413 website/auth.py:439 website/auth.py:602
 msgid "password_six"
 msgstr "Your password must contain at least six characters."
 
@@ -970,11 +1027,36 @@ msgstr "You're not allowed to change the password of this user."
 msgid "password_change_success"
 msgstr "Password of your student is successfully changed."
 
-#: website/auth.py:597 website/auth.py:608 website/auth.py:610
+#: website/auth.py:456
+#, fuzzy
+msgid "password_updated"
+msgstr "Repeat password"
+
+#: website/auth.py:532
+#, fuzzy
+msgid "profile_updated"
+msgstr "Public profile updated."
+
+#: website/auth.py:535
+#, fuzzy
+msgid "profile_updated_reload"
+msgstr "Public profile updated."
+
+#: website/auth.py:587
+#, fuzzy
+msgid "sent_password_recovery"
+msgstr "Send me a password recovery link"
+
+#: website/auth.py:598 website/auth.py:609 website/auth.py:611
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
-#: website/auth.py:638
+#: website/auth.py:621
+#, fuzzy
+msgid "password_resetted"
+msgstr "Repeat password"
+
+#: website/auth.py:639
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
@@ -1050,3 +1132,4 @@ msgstr "You already have an adventure with this name."
 #, fuzzy
 msgid "adventure_updated"
 msgstr "The adventure has been updated!"
+
