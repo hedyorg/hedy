@@ -954,6 +954,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   function outf(text: string) {
     // If there's more than one program being executed at a time, we ignore it.
     // This happens when a program requiring user input is suspended when the user changes the code.
+    const pythonVariables = Sk.globals;
+    load_variables(pythonVariables);
     if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
@@ -1079,6 +1081,40 @@ export function prompt_unsaved(cb: () => void) {
 
 export function load_quiz(level: string) {
   $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+}
+
+export function show_variables(){
+  const variableList = $('.variable-list');
+  if(variableList.hasClass('hidden')){
+    variableList.removeClass('hidden');
+  }
+  // makes it able to collapse the list
+  else{
+    variableList.addClass('hidden');
+  }
+}
+
+export function load_variables(variables: any){
+     //@ts-ignore
+     variables = clean_variables(variables);
+     const variableList = $('.variable-list');
+     variableList.empty();
+      for (const i in variables){
+        variableList.append(`<li>${variables[i][0]}: ${variables[i][1]}</li>`);
+      }
+}
+
+//hiding certain variables from the list unwanted for users
+function clean_variables(variables:any){
+  const new_variables = [];
+  const unwanted_variables = ["random","time"];
+  for (const variable in variables){
+    if (!variable.includes('__') && !unwanted_variables.includes(variable)){
+      let newTuple = [variable, variables[variable].v];
+      new_variables.push(newTuple);
+    }
+  }
+  return new_variables;
 }
 
 export function get_trimmed_code() {
