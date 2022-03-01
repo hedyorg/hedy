@@ -303,8 +303,7 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
     });
 
   } catch (e: any) {
-    console.error(e);
-    error.show(ErrorMessages['Other_error'], e.message);
+    modal.alert(e.responseText, 3000, true);
   }
 }
 function showBulb(level: string){
