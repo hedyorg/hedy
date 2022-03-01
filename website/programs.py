@@ -1,3 +1,5 @@
+from flask_babel import gettext
+
 from website.auth import requires_login, current_user
 import utils
 import uuid
@@ -110,8 +112,8 @@ def routes(app, database, achievements):
         if ACHIEVEMENTS.verify_save_achievements(user['username'],
                                                  'adventure_name' in body and len(body['adventure_name']) > 2):
             return jsonify(
-                {'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
-        return jsonify({'name': body['name'], 'id': program_id})
+                {'message': gettext(u'save_success_detail'), 'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
+        return jsonify({'message': gettext(u'save_success_detail'), 'name': body['name'], 'id': program_id})
 
     @app.route('/programs/share', methods=['POST'])
     @requires_login

@@ -119,7 +119,11 @@ var StopExecution = false;
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
       if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return auth.texts['unsaved_changes'];
+        //return auth.texts['unsaved_changes'];
+        return "You have unsaved changes, are you sure you want to leave?";
+        // TODO TB -> We have to figure out a smart way to get the translated string in this place
+        // One option might be to set them on window.State as we can get gettext() to the templates
+        // But this is will set the starting point of a chaotic "window.State mega parser"
       } else {
         return undefined;
       }
@@ -230,8 +234,10 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
-export function runit(level: string, lang: string, cb: () => void) {
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000, true);
+export function runit(level: string, lang: string, answer_question: string, cb: () => void) {
+  if (window.State.disable_run) {
+    return modal.alert (answer_question, 3000, true);
+  }
   if (reloadOnExpiredSession ()) return;
   StopExecution = true;
 
@@ -373,7 +379,9 @@ function removeBulb(){
 }
 
 export function fix_code(level: string, lang: string){
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000, true);
+  if (window.State.disable_run) {
+    return modal.alert ("Running a program is disabled", 3000, true);
+  }
   if (reloadOnExpiredSession ()) return;
 
   try {
@@ -496,9 +504,10 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       dataType: 'json'
     }).done(function(response) {
       // The auth functions use this callback function.
-      if (cb) return response.Error ? cb (response) : cb (null, response);
-
-      modal.alert (auth.texts['save_success_detail'], 3000, false);
+      if (cb) {
+        return response.Error ? cb (response) : cb (null, response);
+      }
+      modal.alert (response.message, 3000, false);
       if (response.achievements) {
         showAchievements(response.achievements, false, "");
       }
@@ -512,8 +521,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
         }
       });
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
       if (err.status === 403) {
          localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
          localStorage.setItem ('hedy-save-redirect', 'hedy');
