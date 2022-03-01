@@ -712,10 +712,7 @@ def send_email_template(template, email, link, lang="en", username=None):
 
     subject = texts['email_' + template + '_subject']
     body = texts['email_' + template + '_body'].split('\n')
-    if username:
-        body = [texts['email_hello']] + [" "] + [username] + ["!"] + body
-    else:
-        body = [texts['email_hello']] + ["!"] + body
+    body = [texts['email_hello'].format({'username': username})] + body
     if link:
         body[len(body) - 1] = body[len(body ) - 1] + ' @@LINK@@'
     body = body + texts['email_goodbye'].split('\n')
