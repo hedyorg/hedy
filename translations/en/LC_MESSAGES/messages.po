@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-01 12:14+0100\n"
+"POT-Creation-Date: 2022-03-01 15:26+0100\n"
 "PO-Revision-Date: 2022-02-25 13:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,38 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app.py:556
+#: app.py:572
 msgid "program_contains_error"
 msgstr "This program contains an error, are you sure you want to share it?"
 
-#: app.py:1132 app.py:1134
+#: app.py:1158 app.py:1160
 msgid "translate_error"
 msgstr ""
 "Something went wrong while translating the code. Try running the code to "
 "see if it has an error. Code with errors can not be translated."
 
-#: app.py:1262 website/auth.py:225 website/auth.py:272 website/auth.py:407
-#: website/auth.py:433 website/auth.py:463 website/auth.py:564
-#: website/auth.py:594 website/auth.py:635 website/auth.py:661
+#: app.py:1265 website/auth.py:221 website/auth.py:268 website/auth.py:401
+#: website/auth.py:427 website/auth.py:457 website/auth.py:558
+#: website/auth.py:588 website/auth.py:629 website/auth.py:655
 #: website/teacher.py:82 website/teacher.py:192 website/teacher.py:249
 #: website/teacher.py:294 website/teacher.py:327 website/teacher.py:363
 #: website/teacher.py:444
 msgid "ajax_error"
 msgstr "There was an error, please try again."
 
-#: app.py:1264
+#: app.py:1267
 msgid "image_invalid"
 msgstr "Your chosen image is invalid."
 
-#: app.py:1266
+#: app.py:1269
 msgid "personal_text_invalid"
 msgstr "Your personal text is invalid."
 
-#: app.py:1268
+#: app.py:1271
 msgid "favourite_program_invalid"
 msgstr "Your chosen favourite program is invalid."
 
-#: app.py:1279 app.py:1280
+#: app.py:1282 app.py:1283
 msgid "public_profile_updated"
 msgstr "Public profile updated."
 
@@ -209,7 +209,7 @@ msgstr "Go back to class"
 #: templates/customize-class.html:26 templates/customize-class.html:62
 #: templates/customize-class.html:69 templates/customize-class.html:92
 #: templates/incl-adventure-tabs.html:5 templates/level-page.html:6
-#: templates/level-page.html:11 templates/startquiz.html:10
+#: templates/level-page.html:11 templates/quiz/startquiz.html:10
 #: templates/view-program-page.html:12 templates/view-program-page.html:28
 msgid "level_title"
 msgstr "Level"
@@ -399,22 +399,6 @@ msgstr "Are you sure you want to remove this class their customizations?"
 msgid "remove_customization"
 msgstr "Remove customization"
 
-#: templates/endquiz.html:18 templates/layout.html:86 templates/quiz.html:33
-msgid "achievement_earned"
-msgstr "You've earned an achievement!"
-
-#: templates/endquiz.html:27
-msgid "end_quiz"
-msgstr "Quiz end"
-
-#: templates/endquiz.html:29
-msgid "score"
-msgstr "Score"
-
-#: templates/endquiz.html:37
-msgid "go_to_level"
-msgstr "Go to level"
-
 #: templates/error-page.html:12
 msgid "go_back_to_main"
 msgstr "Go back to main page"
@@ -434,7 +418,7 @@ msgstr ""
 " public profile you can click their username to visit their profile. "
 "There you will find all their shared programs and much more!"
 
-#: templates/explore.html:35 templates/incl-menubar.html:46
+#: templates/explore.html:35 templates/incl-menubar.html:45
 #: templates/programs.html:27
 msgid "search"
 msgstr "Search..."
@@ -446,30 +430,6 @@ msgstr "Creator"
 #: templates/explore.html:57
 msgid "view_program"
 msgstr "View program"
-
-#: templates/feedback.html:7 templates/quiz.html:20
-msgid "question"
-msgstr "Question"
-
-#: templates/feedback.html:13
-msgid "feedback_success"
-msgstr "Good!"
-
-#: templates/feedback.html:19
-msgid "feedback_failure"
-msgstr "Wrong!"
-
-#: templates/feedback.html:32
-msgid "correct_answer"
-msgstr "The correct answer is"
-
-#: templates/feedback.html:45
-msgid "go_to_question"
-msgstr "Go to question"
-
-#: templates/feedback.html:49
-msgid "go_to_quiz_result"
-msgstr "Go to quiz result"
 
 #: templates/for-teachers.html:5 templates/profile.html:78
 #: templates/profile.html:80
@@ -558,27 +518,43 @@ msgstr "Go to level {level}"
 msgid "developers_mode"
 msgstr "Programmer's mode"
 
-#: templates/incl-menubar.html:14 templates/public-page.html:56
+#: templates/incl-menubar.html:8
+msgid "nav_start"
+msgstr "Home"
+
+#: templates/incl-menubar.html:9
+msgid "nav_hedy"
+msgstr "Hedy"
+
+#: templates/incl-menubar.html:10
+msgid "nav_explore"
+msgstr "Explore"
+
+#: templates/incl-menubar.html:11
+msgid "nav_learn_more"
+msgstr "Learn more"
+
+#: templates/incl-menubar.html:13 templates/public-page.html:56
 msgid "program_header"
 msgstr "My programs"
 
-#: templates/incl-menubar.html:21
+#: templates/incl-menubar.html:20
 msgid "my_achievements"
 msgstr "My achievements"
 
-#: templates/incl-menubar.html:24
+#: templates/incl-menubar.html:23
 msgid "my_account"
 msgstr "My account"
 
-#: templates/incl-menubar.html:28
+#: templates/incl-menubar.html:27
 msgid "for_teachers"
 msgstr "For teachers"
 
-#: templates/incl-menubar.html:32
+#: templates/incl-menubar.html:31
 msgid "logout"
 msgstr "Log out"
 
-#: templates/incl-menubar.html:37 templates/login.html:19
+#: templates/incl-menubar.html:36 templates/login.html:19
 #: templates/signup.html:111
 msgid "login"
 msgstr "Log in"
@@ -653,6 +629,11 @@ msgstr ""
 "Hedy now supports preferred user languages. You can set one for your "
 "profile in \"My profile\""
 
+#: templates/layout.html:86 templates/quiz/endquiz.html:18
+#: templates/quiz/quiz.html:33
+msgid "achievement_earned"
+msgstr "You've earned an achievement!"
+
 #: templates/level-page.html:8
 msgid "step_title"
 msgstr "Assignment"
@@ -679,7 +660,7 @@ msgstr "Try"
 msgid "login_long"
 msgstr "Log in to your account"
 
-#: templates/login.html:26 website/auth.py:238
+#: templates/login.html:26 website/auth.py:234
 msgid "no_account"
 msgstr "No account?"
 
@@ -918,23 +899,6 @@ msgstr "Last earned achievement"
 msgid "no_shared_programs"
 msgstr "has no shared programs..."
 
-#: templates/quiz.html:20
-msgid "attempt"
-msgstr "Attempt"
-
-#: templates/quiz_question.html:10 templates/quiz_question.html:16
-#: templates/quiz_question.html:44
-msgid "hint"
-msgstr "Hint?"
-
-#: templates/quiz_question.html:82
-msgid "go_to_answer"
-msgstr "Go to answer"
-
-#: templates/quiz_question.html:84
-msgid "submit_answer"
-msgstr "Answer question"
-
 #: templates/recover.html:6
 msgid "recover_password"
 msgstr "Request a password reset"
@@ -1001,14 +965,6 @@ msgstr ""
 msgid "already_account"
 msgstr "Already have an account?"
 
-#: templates/startquiz.html:9
-msgid "start_quiz"
-msgstr "Start quiz"
-
-#: templates/startquiz.html:15
-msgid "go_to_first_question"
-msgstr "Go to question 1"
-
 #: templates/teacher-invitation.html:5
 msgid "teacher_invitation_require_login"
 msgstr ""
@@ -1019,132 +975,193 @@ msgstr ""
 msgid "by"
 msgstr "by"
 
-#: website/auth.py:169 website/auth.py:227 website/auth.py:409
-#: website/auth.py:566 website/auth.py:575 website/auth.py:596
-#: website/auth.py:637 website/auth.py:644 website/auth.py:663
+#: templates/quiz/endquiz.html:27
+msgid "end_quiz"
+msgstr "Quiz end"
+
+#: templates/quiz/endquiz.html:28
+msgid "score"
+msgstr "Score"
+
+#: templates/quiz/endquiz.html:37
+msgid "go_to_level"
+msgstr "Go to level"
+
+#: templates/quiz/feedback.html:8 templates/quiz/quiz.html:20
+msgid "question"
+msgstr "Question"
+
+#: templates/quiz/feedback.html:17
+msgid "feedback_success"
+msgstr "Good!"
+
+#: templates/quiz/feedback.html:23
+msgid "feedback_failure"
+msgstr "Wrong!"
+
+#: templates/quiz/feedback.html:36
+msgid "correct_answer"
+msgstr "The correct answer is"
+
+#: templates/quiz/feedback.html:52
+msgid "go_to_question"
+msgstr "Go to question"
+
+#: templates/quiz/feedback.html:56
+msgid "go_to_quiz_result"
+msgstr "Go to quiz result"
+
+#: templates/quiz/quiz.html:20
+msgid "attempt"
+msgstr "Attempt"
+
+#: templates/quiz/quiz_question.html:9 templates/quiz/quiz_question.html:15
+#: templates/quiz/quiz_question.html:41
+msgid "hint"
+msgstr "Hint?"
+
+#: templates/quiz/quiz_question.html:77
+msgid "go_to_answer"
+msgstr "Go to answer"
+
+#: templates/quiz/quiz_question.html:79
+msgid "submit_answer"
+msgstr "Answer question"
+
+#: templates/quiz/startquiz.html:9
+msgid "start_quiz"
+msgstr "Start quiz"
+
+#: templates/quiz/startquiz.html:15
+msgid "go_to_first_question"
+msgstr "Go to question 1"
+
+#: website/auth.py:167 website/auth.py:223 website/auth.py:403
+#: website/auth.py:560 website/auth.py:569 website/auth.py:590
+#: website/auth.py:631 website/auth.py:638 website/auth.py:657
 #: website/teacher.py:296 website/teacher.py:329
 msgid "username_invalid"
 msgstr "Your username is invalid."
 
-#: website/auth.py:171
+#: website/auth.py:169
 msgid "username_special"
 msgstr "Username cannot contain `:` or `@`."
 
-#: website/auth.py:173
+#: website/auth.py:171
 msgid "username_three"
 msgstr "Username must contain at least three characters."
 
-#: website/auth.py:175 website/auth.py:465 website/auth.py:665
-#: website/auth.py:670
+#: website/auth.py:173 website/auth.py:459 website/auth.py:659
+#: website/auth.py:664
 msgid "email_invalid"
 msgstr "Please enter a valid email."
 
-#: website/auth.py:177 website/auth.py:229 website/auth.py:411
-#: website/auth.py:435 website/auth.py:447 website/auth.py:600
+#: website/auth.py:175 website/auth.py:225 website/auth.py:405
+#: website/auth.py:429 website/auth.py:441 website/auth.py:594
 msgid "password_invalid"
 msgstr "Your password is invalid."
 
-#: website/auth.py:179
+#: website/auth.py:177
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
-#: website/auth.py:238
+#: website/auth.py:234
 msgid "invalid_username_password"
 msgstr "Invalid username/password."
 
-#: website/auth.py:281 website/auth.py:283
+#: website/auth.py:277 website/auth.py:279
 msgid "repeat_match_email"
 msgstr "The repeated email does not match."
 
-#: website/auth.py:285 website/auth.py:437 website/auth.py:441
-#: website/auth.py:604
+#: website/auth.py:281 website/auth.py:431 website/auth.py:435
+#: website/auth.py:598
 msgid "repeat_match_password"
 msgstr "The repeated password does not match."
 
-#: website/auth.py:287 website/auth.py:467
+#: website/auth.py:283 website/auth.py:461
 msgid "language_invalid"
 msgstr "Please select a valid language."
 
-#: website/auth.py:289
+#: website/auth.py:285
 msgid "agree_invalid"
 msgstr "You have to agree with the privacy terms."
 
-#: website/auth.py:291 website/auth.py:469
+#: website/auth.py:287 website/auth.py:463
 msgid "keyword_language_invalid"
 msgstr ""
 "Please select a valid keyword language (select English or your own "
 "language)."
 
-#: website/auth.py:296 website/auth.py:474
+#: website/auth.py:292 website/auth.py:468
 msgid "year_invalid"
 msgstr "Please enter a year between 1900 and {year}."
 
-#: website/auth.py:299 website/auth.py:477
+#: website/auth.py:295 website/auth.py:471
 msgid "gender_invalid"
 msgstr "Please select a valid gender, choose (Female, Male, Other)."
 
-#: website/auth.py:302 website/auth.py:480
+#: website/auth.py:298 website/auth.py:474
 msgid "country_invalid"
 msgstr "Please select a valid country."
 
-#: website/auth.py:304 website/auth.py:307 website/auth.py:482
-#: website/auth.py:485
+#: website/auth.py:300 website/auth.py:303 website/auth.py:476
+#: website/auth.py:479
 msgid "experience_invalid"
 msgstr "Please select a valid experience, choose (Yes, No)."
 
-#: website/auth.py:310 website/auth.py:488
+#: website/auth.py:306 website/auth.py:482
 msgid "programming_invalid"
 msgstr "Please select a valid programming language."
 
-#: website/auth.py:314
+#: website/auth.py:309
 msgid "exists_username"
 msgstr "That username is already in use."
 
-#: website/auth.py:317 website/auth.py:496
+#: website/auth.py:311 website/auth.py:490
 msgid "exists_email"
 msgstr "That email is already in use."
 
-#: website/auth.py:413 website/auth.py:439 website/auth.py:602
+#: website/auth.py:407 website/auth.py:433 website/auth.py:596
 msgid "password_six"
 msgstr "Your password must contain at least six characters."
 
-#: website/auth.py:416 website/auth.py:419
+#: website/auth.py:410 website/auth.py:413
 msgid "password_change_not_allowed"
 msgstr "You're not allowed to change the password of this user."
 
-#: website/auth.py:425
+#: website/auth.py:419
 msgid "password_change_success"
 msgstr "Password of your student is successfully changed."
 
-#: website/auth.py:456
+#: website/auth.py:450
 msgid "password_updated"
 msgstr "Password updated."
 
-#: website/auth.py:532
+#: website/auth.py:526
 msgid "profile_updated"
 msgstr "Profile updated."
 
-#: website/auth.py:535
+#: website/auth.py:529
 msgid "profile_updated_reload"
 msgstr "Profile updated, page will be re-loaded."
 
-#: website/auth.py:587
+#: website/auth.py:581
 msgid "sent_password_recovery"
 msgstr ""
 "You should soon receive an email with instructions on how to reset your "
 "password."
 
-#: website/auth.py:598 website/auth.py:609 website/auth.py:611
+#: website/auth.py:592 website/auth.py:603 website/auth.py:605
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
-#: website/auth.py:621
+#: website/auth.py:615
 msgid "password_resetted"
 msgstr ""
 "Your password has been successfully reset. You are being redirected to "
 "the login page."
 
-#: website/auth.py:639
+#: website/auth.py:633
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
