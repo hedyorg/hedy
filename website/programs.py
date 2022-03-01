@@ -38,9 +38,10 @@ def routes(app, database, achievements):
             DATABASE.set_favourite_program(user['username'], None)
 
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "do_you_have_copy")
+        resp = {'message': gettext(u'delete_success')}
         if achievement:
-            return {'achievement': achievement}, 200
-        return {}, 200
+            resp['achievement'] = achievement
+        return jsonify(resp)
 
     @app.route('/programs/duplicate-check', methods=['POST'])
     @requires_login
@@ -54,7 +55,7 @@ def routes(app, database, achievements):
         programs = DATABASE.programs_for_user(user['username'])
         for program in programs:
             if program['name'] == body['name']:
-                return jsonify({'duplicate': True})
+                return jsonify({'duplicate': True, 'message': gettext(u'overwrite_warning')})
         return jsonify({'duplicate': False})
 
     @app.route('/programs', methods=['POST'])
@@ -138,9 +139,15 @@ def routes(app, database, achievements):
 
         DATABASE.set_program_public_by_id(body['id'], bool(body['public']), bool(body['error']))
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
+
+        resp = {'id': body['id']}
+        if bool(body['public']):
+            resp['message'] = gettext(u'share_success_detail')
+        else:
+            resp['message'] = gettext(u'unshare_success_detail')
         if achievement:
-            return jsonify({'achievement': achievement, 'id': body['id']})
-        return jsonify({'id': body['id']})
+            resp['achievement'] = achievement
+        return jsonify(resp)
 
     @app.route('/programs/submit', methods=['POST'])
     @requires_login
@@ -177,4 +184,4 @@ def routes(app, database, achievements):
             return 'No such program!', 404
 
         DATABASE.set_favourite_program(user['username'], body['id'])
-        return jsonify({})
+        return jsonify({'message': gettext(u'favourite_success')})

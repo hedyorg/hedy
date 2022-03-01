@@ -458,6 +458,10 @@ def parse():
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
 
+    error_check = False
+    if 'error_check' in body:
+        error_check = True
+
     code = body['code']
     level = int(body['level'])
 
@@ -548,6 +552,8 @@ def parse():
         'adventure_name': body.get('adventure_name', None)
     })
 
+    if "Error" in response and error_check:
+        response["message"] = gettext(u'program_contains_error')
     return jsonify(response)
 
 

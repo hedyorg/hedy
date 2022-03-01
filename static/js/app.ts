@@ -530,7 +530,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     });
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+export function saveit(level: number | [number, string], lang: string, name: string, code: string, prompt: string, cb?: (err: any, resp?: any) => void) {
   error.hide();
   success.hide();
 
@@ -539,7 +539,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
   try {
     // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
     if (! auth.profile) {
-       return modal.confirm (auth.texts['save_prompt'], function () {
+       return modal.confirm (prompt, function () {
          // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
          if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
          localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
@@ -556,8 +556,8 @@ export function saveit(level: number | [number, string], lang: string, name: str
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response['duplicate']) {
-        modal.confirm (auth.texts['overwrite_warning'], function () {
+      if (response.duplicate) {
+        modal.confirm (response.message, function () {
           storeProgram(level, lang, name, code, cb);
           pushAchievement("double_check");
         });
@@ -567,7 +567,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
     });
   } catch (e: any) {
     console.error(e);
-    error.show(ErrorMessages['Other_error'], e.message);
+    modal.alert(e.message, 3000, true);
   }
 }
 
@@ -576,7 +576,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
  */
 export function saveitP(level: number | [number, string], lang: string, name: string, code: string) {
   return new Promise<any>((ok, ko) => {
-    saveit(level, lang, name, code, (err, response) => {
+    saveit(level, lang, name, code, "", (err, response) => {
       if (err) {
         ko(err);
       } else {
@@ -630,15 +630,14 @@ function share_function(id: string, index: number, Public: boolean, parse_error:
       }
       if (Public) {
         $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
-        modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
+        modal.copy_alert (response.message, 5000);
         change_shared(true, index);
       } else {
-        modal.alert (auth.texts['unshare_success_detail'], 3000, false);
+        modal.alert (response.message, 3000, false);
         change_shared(false, index);
       }
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
 }
 
@@ -650,7 +649,7 @@ function verify_call_index(level:number, lang: string, id: string | true, index:
   // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
   const name = `${$('#program_name').val()}`;
   const code = get_trimmed_code();
-  return saveit(level, lang, name, code, (err: any, resp: any) => {
+  return saveit(level, lang, name, code, "", (err: any, resp: any) => {
       if (err && err.Warning)
         return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
       if (err && err.Error)
@@ -682,8 +681,7 @@ function get_parse_code_by_id(level: number, lang:string, id:string | true,  ind
     });
 }
 
-export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
+export function share_program(level: number, lang: string, id: string | true, index: number, Public: boolean, prompt: string) {
   if (Public) {
     // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
     if (id !== true) {
@@ -696,13 +694,14 @@ export function share_program (level: number, lang: string, id: string | true, i
         data: JSON.stringify({
           level: level,
           lang: lang,
-          code: code
+          code: code,
+          error_check: true
         }),
         contentType: 'application/json',
         dataType: 'json'
       }).done(function (response) {
         if (response.Error) {
-          modal.confirm("This program contains an error, are you sure you want to share it?", function () {
+          modal.confirm(response.message, function () {
             verify_call_index(level, lang, id, index, Public, true);
           });
         } else {
@@ -717,8 +716,8 @@ export function share_program (level: number, lang: string, id: string | true, i
   }
 }
 
-export function delete_program(id: string, index: number) {
-  modal.confirm (auth.texts['delete_confirm'], function () {
+export function delete_program(id: string, index: number, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'POST',
       url: '/programs/delete',
@@ -733,10 +732,9 @@ export function delete_program(id: string, index: number) {
       } else {
           $('#program_' + index).remove();
       }
-      modal.alert (auth.texts['delete_success'], 3000, false);
+      modal.alert(response.message, 3000, false);
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
   });
 }
@@ -749,8 +747,8 @@ function set_favourite(index: number) {
     $('#favourite_program_container_' + index).addClass('text-yellow-400');
 }
 
-export function set_favourite_program(id: string, index: number) {
-  modal.confirm (auth.texts['favourite_confirm'], function () {
+export function set_favourite_program(id: string, index: number, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'POST',
       url: '/programs/set_favourite',
@@ -759,12 +757,11 @@ export function set_favourite_program(id: string, index: number) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function() {
+    }).done(function(response) {
       set_favourite(index)
-      modal.alert (auth.texts['favourite_success'], 3000);
+      modal.alert (response.message, 3000, false);
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
   });
 }
@@ -780,7 +777,6 @@ function change_to_submitted (index: number) {
 }
 
 export function submit_program (id: string, index: number) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   $.ajax({
     type: 'POST',
     url: '/programs/submit',
