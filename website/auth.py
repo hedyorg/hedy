@@ -287,7 +287,7 @@ def routes(app, database):
 
     @app.route('/auth/login', methods=['POST'])
     def login():
-        send_email_template('welcome_verify', 'timonbakker@hotmail.com', username="Tibiba")
+        send_email_template('welcome_verify', 'timonbakker@hotmail.com', username="Tibiba", link="www.bier.nl")
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -813,8 +813,6 @@ def send_email_template(template, email, link='', lang="en", username=''):
     body = texts['hello'].format(username=username) + "\n\n"
     body += texts[template + '_body'] + "\n\n"
     body += texts['goodbye']
-
-    print(body)
 
     with open('templates/base_email.html', 'r', encoding='utf-8') as f:
         body_html = f.read()
