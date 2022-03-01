@@ -121,8 +121,6 @@ def update_is_teacher(user, is_teacher_value=1):
         send_email_template('welcome_teacher', user['email'], '')
 
 
-EMAILS = YamlFile.for_file('website/emails.yaml')
-
 # Thanks to https://stackoverflow.com/a/34499643
 def requires_login(f):
     @wraps(f)
@@ -203,9 +201,7 @@ def store_new_account(account, email):
         resp = make_response({'username': username, 'token': hashed_token})
     # Otherwise, we send an email with a verification link and we return an empty body
     else:
-        send_email_template('welcome_verify', email,
-                            email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                username) + '&token=' + urllib.parse.quote_plus(hashed_token))
+        send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'], username=user['username'])
         resp = make_response({})
     return user, resp
 
@@ -446,7 +442,7 @@ def routes(app, database):
         DATABASE.update_user(user['username'], {'password': hashed})
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
         if not is_testing_request(request):
-            send_email_template('change_password', user['email'], None)
+            send_email_template('change_password', user['email'], None, lang=user['language'], username=user['username'])
 
         return '', 200
 
@@ -496,7 +492,7 @@ def routes(app, database):
                 if is_testing_request(request):
                    resp = {'username': user['username'], 'token': hashed_token}
                 else:
-                    send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
+                    send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=body['language'], username=user['username'])
 
                 # We check whether the user is in the Mailchimp list.
                 if not is_testing_request(request) and MAILCHIMP_API_URL:
@@ -577,7 +573,7 @@ def routes(app, database):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
-            send_email_template('recover_password', user['email'], email_base_url() + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token))
+            send_email_template('recover_password', user['email'], email_base_url() + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token), lang=user['language'], username=user['username'])
             return '', 200
 
     @app.route('/auth/reset', methods=['POST'])
@@ -610,7 +606,7 @@ def routes(app, database):
         user = DATABASE.user_by_username(body['username'])
 
         if not is_testing_request(request):
-            send_email_template('reset_password', user['email'], None)
+            send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
 
         return '', 200
 
@@ -673,7 +669,7 @@ def routes(app, database):
         if is_testing_request(request):
            resp = {'username': user['username'], 'token': hashed_token}
         else:
-            send_email_template('welcome_verify', body['email'], email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
+            send_email_template('welcome_verify', body['email'], email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'], username=user['username'])
 
         return '', 200
 
@@ -709,11 +705,17 @@ def send_email(recipient, subject, body_plain, body_html):
     else:
         print('Email sent to ' + recipient)
 
-def send_email_template(template, email, link):
-    texts = EMAILS
+def send_email_template(template, email, link, lang="en", username=None):
+    texts = YamlFile.for_file(f'coursedata/emails/{lang}.yaml')
+    if not texts.exists():
+        texts = YamlFile.for_file('coursedata/emails/en.yaml')
+
     subject = texts['email_' + template + '_subject']
     body = texts['email_' + template + '_body'].split('\n')
-    body =[texts['email_hello']] + body
+    if username:
+        body = [texts['email_hello']] + " " + username + "!" + body
+    else:
+        body = [texts['email_hello']] + "!" + body
     if link:
         body[len(body) - 1] = body[len(body ) - 1] + ' @@LINK@@'
     body = body + texts['email_goodbye'].split('\n')
