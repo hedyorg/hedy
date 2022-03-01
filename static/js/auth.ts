@@ -132,7 +132,9 @@ export const auth = {
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
+        console.log("We loggen in!");
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
+        console.log(auth.profile);
         afterLogin({"teacher": response['teacher']});
       }).fail (function (response) {
         if (response.responseText) {

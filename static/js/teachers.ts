@@ -89,6 +89,7 @@ export function delete_class(id: string) {
 
 export function join_class(id: string, name: string) {
   // If there's no session but we want to join the class, we store the program data in localStorage and redirect to /login.
+  console.log(auth.profile);
   if (! auth.profile) {
     return modal.confirm (auth.texts['join_prompt'], function () {
       localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));

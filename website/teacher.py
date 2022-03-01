@@ -170,6 +170,7 @@ def routes(app, database, achievements):
     @requires_login
     def join_class(user):
         body = request.json
+        Class = None
         if 'id' in body:
             Class = DATABASE.get_class(body['id'])
         if not Class or Class ['id'] != body['id']:
