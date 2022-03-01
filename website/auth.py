@@ -574,7 +574,7 @@ def routes(app, database):
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
             send_email_template('recover_password', user['email'], email_base_url() + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token), lang=user['language'], username=user['username'])
-            return '', 200
+            return g.auth_texts.get('sent_password_recovery'), 200
 
     @app.route('/auth/reset', methods=['POST'])
     def reset():
@@ -608,7 +608,7 @@ def routes(app, database):
         if not is_testing_request(request):
             send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
 
-        return '', 200
+        return g.auth_texts.get('password_resetted'), 200
 
     # *** ADMIN ROUTES ***
 
@@ -616,7 +616,7 @@ def routes(app, database):
     def mark_as_teacher():
         user = current_user()
         if not is_admin(user) and not is_testing_request(request):
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
         body = request.json
 
@@ -636,13 +636,14 @@ def routes(app, database):
         is_teacher_value = 1 if body['is_teacher'] else 0
         update_is_teacher(user, is_teacher_value)
 
+        # Todo TB feb 2022 -> Return the success message here instead of fixing in the front-end
         return '', 200
 
     @app.route('/admin/changeUserEmail', methods=['POST'])
     def change_user_email():
         user = current_user()
         if not is_admin(user):
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
         body = request.json
 
@@ -731,23 +732,6 @@ def send_email_template(template, email, link, lang="en", username=None):
         body_html = body_html.replace('@@LINK@@', '<a href="' + link + '">Link</a>')
 
     send_email(email, subject, body_plain, body_html)
-
-def auth_templates(page, page_title):
-    if page == 'my-profile':
-        programs = DATABASE.public_programs_for_user(current_user()['username'])
-        public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
-        return render_template('profile.html', page_title=page_title, programs=programs,
-                               public_settings=public_profile_settings, current_page='my-profile')
-    # Todo TB Feb 2022 -> We have to clean this up (a lot!)
-    # Short overview of the to-do:
-    #   - Verify that the user is not logged in when attempting to visit signup / login / recover
-    #   - If so, redirect to my-profile -> This is currently done on the front-end: remove there
-    #   - If a user attempts to visit reset:
-    #       - If logged in: destory session, we can't reset with an active account logged in
-    #       - Catch the two arguments: username / token
-    #       - Sent these to the front-end REMOVE current front-end retrieval of arguments this makes no sense
-    if page in['signup', 'login', 'recover', 'reset']:
-        return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
 
 
 def email_base_url():
