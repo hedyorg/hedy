@@ -105,10 +105,10 @@ export function join_class(id: string, name: string) {
       }
     }).fail(function(err) {
       if (err.status == 403) {
-         return modal.confirm (auth.texts['join_prompt'], function () {
-              localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
-              window.location.pathname = '/login';
-          });
+         return modal.confirm (err.responseText, function () {
+            localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
+            window.location.pathname = '/login';
+         });
       } else {
           error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
       }
