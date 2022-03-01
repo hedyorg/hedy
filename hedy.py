@@ -388,12 +388,6 @@ class LookupEntryCollector(visitors.Visitor):
         # in level 1 there is no variable name on the left side of the ask command
         if self.level > 1:
             self.add_to_lookup(tree.children[0].children[0], tree)
-    
-    def ask_is(self, tree):
-        self.ask(tree)
-    
-    def ask_equals(self, tree):
-        self.ask(tree)
 
     def input(self, tree):
         var_name = tree.children[0].children[0]
@@ -531,12 +525,6 @@ class TypeValidator(Transformer):
             rules = [int_to_float, input_to_string, input_to_int, input_to_float]
         self.validate_binary_command_args_type(Command.equality, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
-    
-    def equality_check_is(self, tree):
-        return self.equality_check(tree)
-    
-    def equality_check_equals(self, tree):
-        return self.equality_check(tree)
 
     def repeat_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
@@ -806,7 +794,7 @@ class AllCommands(Transformer):
         # some keywords have names that are not a valid name for a command
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
-        if keyword in ['assign', 'assign_is', 'assign_equals', 'assign_list', 'assign_list_is', 'assign_list_equals']:
+        if keyword in ['assign', 'assign_list']:
             return 'is'
         if keyword == 'ifelse':
             return 'else'
@@ -824,8 +812,6 @@ class AllCommands(Transformer):
             return 'and'
         if keyword == 'while_loop':
             return 'while'
-        if keyword == 'ask_is' or keyword == 'ask_equals':
-            return 'ask'
         if keyword == 'in_list_check':
             return 'in'
         if keyword in ['input_is', 'input_equals', 'input_is_empty_brackets', 'input_equals_empty_brackets']:
@@ -1414,12 +1400,6 @@ class ConvertToPython_6(ConvertToPython_5):
 
         return f"str({arg0}) == str({arg1})"
 
-    def equality_check_is(self, args):
-        return self.equality_check(args)
-
-    def equality_check_equals(self, args):
-        return self.equality_check(args)
-
     def assign(self, args):
         parameter = args[0]
         value = args[1]
@@ -1433,12 +1413,6 @@ class ConvertToPython_6(ConvertToPython_5):
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'"
-
-    def assign_is(self, args):
-        return self.assign(args)
-    
-    def assign_equals(self, args):
-        return self.assign(args)
     
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
@@ -1595,12 +1569,6 @@ class ConvertToPython_12(ConvertToPython_11):
         parameter = args[0]
         values = args[1:]
         return parameter + " = [" + ", ".join(values) + "]"
-
-    def assign_list_is(self, args):
-        return self.assign_list(args)
-
-    def assign_list_equals(self, args):
-        return self.assign_list(args)
 
     def assign(self, args):
         right_hand_side = args[1]
