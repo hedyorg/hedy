@@ -197,11 +197,8 @@ class Translator(Visitor):
         self.add_rule('_IS', 'is', tree)
         self.add_rule('_INPUT', 'input', tree)
 
-    def input_is_empty_brackets(self, tree):
+    def input_empty_brackets(self, tree):
         self.add_rule('_IS', 'is', tree)
-        self.add_rule('_INPUT', 'input', tree)
-
-    def input_equals_empty_brackets(self, tree):
         self.add_rule('_INPUT', 'input', tree)
 
     def add_rule(self, token_name, token_keyword, tree):

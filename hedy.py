@@ -808,7 +808,7 @@ class AllCommands(Transformer):
             return 'while'
         if keyword == 'in_list_check':
             return 'in'
-        if keyword in ['input_is', 'input_equals', 'input_is_empty_brackets', 'input_equals_empty_brackets']:
+        if keyword == 'input_empty_brackets':
             return 'input'
         if keyword == 'print_empty_brackets':
             return 'print'
@@ -1682,11 +1682,8 @@ class ConvertToPython_18(ConvertToPython_17):
 
     def input_equals(self, args):
         return self.input(args)
-    
-    def input_is_empty_brackets(self, args):
-        return self.input(args)
 
-    def input_equals_empty_brackets(self, args):
+    def input_empty_brackets(self, args):
         return self.input(args)
     
     def print_empty_brackets(self, args):
