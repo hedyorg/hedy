@@ -660,7 +660,7 @@ class TestProgram(AuthHelper):
         saved_program = saved_programs[0]
         for key in program:
             # WHEN we create a program an achievement is achieved, being in the response but not the saved_program
-            if key != "achievements":
+            if key != "achievements" and key != "message":
                 self.assertEqual(program[key], saved_program[key])
 
     def test_invalid_make_program_public(self):
