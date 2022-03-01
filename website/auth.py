@@ -710,18 +710,17 @@ def send_email_template(template, email, link, lang="en", username=None):
     if not texts.exists():
         texts = YamlFile.for_file('coursedata/emails/en.yaml')
 
-    subject = texts['email_' + template + '_subject']
-    body = texts['email_' + template + '_body'].split('\n')
-    body = [texts['email_hello'].format({'username': username})] + body
-    if link:
-        body[len(body) - 1] = body[len(body ) - 1] + ' @@LINK@@'
-    body = body + texts['email_goodbye'].split('\n')
+    subject = texts[template + '_subject']
+    body = [texts['hello'].format({'username': username})]
+    body += texts[template + '_body'].split('\n')
+    body += texts['goodbye'].split('\n')
 
     body_plain = '\n'.join(body)
 
     with open('templates/base_email.html', 'r', encoding='utf-8') as f:
         body_html = f.read()
-    body_html += '<p>' + '</p><p>'.join(body) + '</p>'
+
+    body_html += '<p>'.join(body) + '</p>'
     body_html += '</div>'
     if link:
         body_plain = body_plain.replace('@@LINK@@', 'Please copy and paste this link into a new tab: ' + link)
