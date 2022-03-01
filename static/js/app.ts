@@ -53,8 +53,12 @@ var StopExecution = false;
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
     if (! $(preview).hasClass('no-copy-button')) {
-      const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 60 }).appendTo(preview);
-      $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
+      const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+      let symbol = "⇥";
+      if (dir === "rtl") {
+        symbol = "⇤";
+      }
+      $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
         update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
       });
@@ -203,10 +207,10 @@ var StopExecution = false;
 
 export function getHighlighter(level: string) {
   const modeExceptions: Record<string, string> = {
-        '9': 'ace/mode/level9and10',
-        '10': 'ace/mode/level9and10',
-        '18': 'ace/mode/level18and19',
-        '19': 'ace/mode/level18and19',
+        '8': 'ace/mode/level8and9',
+        '9': 'ace/mode/level8and9',
+        '11': 'ace/mode/level11and12',
+        '12': 'ace/mode/level11and12',
       };
   return modeExceptions[level] || `ace/mode/level` + level;
 }
@@ -456,16 +460,6 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, le
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
-  if (auth.profile) {
-    if (window.State.examples_left > 0) {
-      window.State.examples_left = window.State.examples_left - 1;
-    } else {
-      $("#commands-window").hide();
-      $("#toggle-button").hide();
-      modal.alert(auth.texts['examples_used'], 3000, true);
-      return;
-    }
-  }
   var editor = ace.edit("editor");
 
   var MOVE_CURSOR_TO_END = 1;

@@ -153,9 +153,9 @@ export const auth = {
       }).fail (function (response) {
         auth.clear_error();
         if (response.responseText) {
-           auth.error(response.responseText);
+           modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
@@ -167,11 +167,7 @@ export const auth = {
         keyword_language: values.keyword_language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
-        gender: values.gender ? values.gender : undefined,
-        prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
-        experience_languages: $('#languages').is(':visible')
-          ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
-          : undefined,
+        gender: values.gender ? values.gender : undefined
       };
 
       $.ajax ({
@@ -189,7 +185,7 @@ export const auth = {
         if (response.responseText) {
           modal.alert(response.responseText, 3000, true);
         } else {
-          modal.alert(response.responseText, 3000, true);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
@@ -204,15 +200,15 @@ export const auth = {
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
-        auth.success (auth.texts['password_updated'], '#success_password');
+        modal.alert(auth.texts['password_updated'], 3000, false);
         $ ('#old_password').val ('');
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
         if (response.responseText) {
-           auth.error(response.responseText);
+           modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
@@ -238,20 +234,27 @@ export const auth = {
     }
 
     if (op === 'reset') {
-      const payload = {username: auth.reset?.['username'], token: auth.reset?.['token'], password: values.password};
+      const payload = {
+        username: auth.reset?.['username'],
+        token: auth.reset?.['token'],
+        password: values.password,
+        password_repeat: values.password_repeat
+      };
 
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/reset', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        auth.success (auth.texts['password_resetted']);
+        modal.alert(auth.texts['password_resetted'], 2000, false);
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
         delete auth.reset;
-        auth.redirect ('login');
+        setTimeout(function (){
+          auth.redirect ('login');
+        }, 2000);
       }).fail (function (response) {
         if (response.responseText) {
-          return auth.error(response.responseText);
+          modal.alert(response.responseText, 3000, true);
         } else {
-          auth.error(auth.texts['ajax_error']);
+          modal.alert(auth.texts['ajax_error'], 3000, true);
         }
       });
     }
@@ -333,6 +336,10 @@ $ ('.auth input').get ().map (function (el) {
 });
 
 // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
+// Todo TB Feb 2022 -> Why do we do this ?!
+// This request returns A LOT of front-end errors, something we really really don't want
+// It isn't relevant to the front-end if we are logged in as the back-end will take care of that
+// We have to do some deep clean-up here to make the code understandable, readable and efficient
 $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
    if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
    auth.profile = response;

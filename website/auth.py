@@ -306,11 +306,9 @@ def routes(app, database):
                 if language not in['scratch', 'other_block', 'python', 'other_text']:
                     return g.auth_texts.get('programming_invalid'), 400
 
-        user = DATABASE.user_by_username(body['username'].strip().lower())
-        if user:
+        if DATABASE.user_by_username(body['username'].strip().lower()):
             return g.auth_texts.get('exists_username'), 403
-        email = DATABASE.user_by_email(body['email'].strip().lower())
-        if email:
+        if DATABASE.user_by_email(body['email'].strip().lower()):
             return g.auth_texts.get('exists_email'), 403
 
         # We receive the pre-processed user and response package from the function
@@ -319,18 +317,18 @@ def routes(app, database):
         if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] is True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
-                mailchimp_subscribe_user(email)
+                mailchimp_subscribe_user(user['email'])
             # Otherwise, we send an email to notify about the subscription to the main email address
             else:
-                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
+                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', user['email'], '<p>' + user['email'] + '</p>')
 
         # If someone wants to be a Teacher -> sent a mail to manually set it
         if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
-            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', user['email'], '<p>' + user['email'] + '</p>')
 
         # If someone agrees to the third party contacts -> sent a mail to manually write down
         if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
-            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', email, f'<p>{email}</p>')
+            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', user['email'], '<p>' + user['email'] + '</p>')
 
         # We automatically login the user
         cookie = make_salt()
@@ -352,20 +350,28 @@ def routes(app, database):
         if not username:
             return 'no username', 400
 
+        # Verify that user actually exists
         user = DATABASE.user_by_username(username)
-
         if not user:
             return 'invalid username/token', 403
 
-        # If user is verified, succeed anyway
+        # If user is already verified -> re-direct to landing-page anyway
         if not 'verification_pending' in user:
             return redirect('/landing-page')
 
+        # Verify the token
         if token != user['verification_pending']:
             return 'invalid username/token', 403
 
+        # Remove the token from the user
         DATABASE.update_user(username, {'verification_pending': None})
-        return redirect('/')
+
+        # We automatically login the user
+        cookie = make_salt()
+        DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
+        remember_current_user(user)
+
+        return redirect('/landing-page')
 
     @app.route('/auth/logout', methods=['POST'])
     def logout():
@@ -457,7 +463,6 @@ def routes(app, database):
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
             return g.auth_texts.get('keyword_language_invalid'), 400
 
-        # Todo TB -> Store all validations inside a function, the signup / profile code is duplicate!
         # Validations, optional fields
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
@@ -506,14 +511,11 @@ def routes(app, database):
         username = user['username']
 
         updates = {}
-        for field in['country', 'birth_year', 'gender', 'language', 'keyword_language', 'prog_experience', 'experience_languages']:
+        for field in['country', 'birth_year', 'gender', 'language', 'keyword_language']:
             if field in body:
-               if field == 'experience_languages' and len(body[field]) == 0:
-                   updates[field] = None
-               else:
-                   updates[field] = body[field]
+               updates[field] = body[field]
             else:
-               updates[field] = None
+                updates[field] = None
 
         if updates:
             DATABASE.update_user(username, updates)
@@ -734,6 +736,14 @@ def auth_templates(page, page_title):
         public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
         return render_template('profile.html', page_title=page_title, programs=programs,
                                public_settings=public_profile_settings, current_page='my-profile')
+    # Todo TB Feb 2022 -> We have to clean this up (a lot!)
+    # Short overview of the to-do:
+    #   - Verify that the user is not logged in when attempting to visit signup / login / recover
+    #   - If so, redirect to my-profile -> This is currently done on the front-end: remove there
+    #   - If a user attempts to visit reset:
+    #       - If logged in: destory session, we can't reset with an active account logged in
+    #       - Catch the two arguments: username / token
+    #       - Sent these to the front-end REMOVE current front-end retrieval of arguments this makes no sense
     if page in['signup', 'login', 'recover', 'reset']:
         return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
 

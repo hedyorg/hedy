@@ -31,6 +31,8 @@ import textwrap
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
 from flask_helpers import render_template
 from flask_compress import Compress
+from flask_babel import Babel
+from flask_babel import gettext
 
 # Hedy-specific modules
 import hedy_content
@@ -162,10 +164,6 @@ def load_adventures_per_level(lang, level):
     return all_adventures
 
 
-# Load main menu(do it once, can be cached)
-with open(f'menu.json', 'r', encoding='utf-8') as f:
-    main_menu_json = json.load(f)
-
 logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
@@ -173,6 +171,35 @@ logging.basicConfig(
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
+
+babel = Babel(app)
+
+
+# Return the session language, if not: return best match
+@babel.localeselector
+def get_locale():
+    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
+
+"""
+    Some important notes relates to Flask-Babel usage:
+    -   We can always get a translation using gettext(u'english string')
+        NOTE: We can shorten this notation by simply using _('english string')
+    -   We can insert some variable like this: gettext(u'some string %(value)s', value=42)
+    -   More interesting for us might be the 'lazy string' the can be defined outside requests, like this:
+    -       lazy_gettext(u'Account successfully saved')
+    -   This will be really useful when wanting to return translated error messages
+    
+    - We have to mark ALL translatable string (in english!) with gettext() -> then create a .pot file
+    - We create the file as follows: 
+        pybabel extract -F babel.cfg -o messages.pot .
+    - To add a translation (for dutch): 
+        pybabel init -i messages.pot -d translations -l nl
+    - To update your files (when adding new strings):
+        FIRST create new file:  pybabel extract -F babel.cfg -o messages.pot . 
+        THEN:                   pybabel update -i messages.pot -d translations
+    LASTLY compile the files:   pybabel compile -d translations
+"""
+
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
@@ -840,6 +867,7 @@ def index(level, step):
     adventure_name = ''
 
     # If step is a string that has more than two characters, it must be an id of a program
+    # Todo TB -> I don't like this structure, can't we use a dedicated URL for loaded programs?!
     if step and isinstance(step, str) and len(step) > 2:
         result = DATABASE.program_by_id(step)
         if not result:
@@ -847,8 +875,7 @@ def index(level, step):
 
         user = current_user()
         public_program = 'public' in result and result['public']
-        if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(
-                user):
+        if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
             return utils.error_page(error=404, ui_message='no_such_program')
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
@@ -868,10 +895,15 @@ def index(level, step):
         now = timems()
         for current_level, timestamp in customizations.get('opening_dates', {}).items():
             if utils.datetotimeordate(timestamp) > utils.datetotimeordate(utils.mstoisostring(now)):
-                available_levels.remove(int(current_level))
+                try:
+                    available_levels.remove(int(current_level))
+                except:
+                    print("Error: there is an openings date without a level")
 
-    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
-        return utils.error_page(error=404, ui_message='no_such_level')
+    if level not in level_defaults_for_lang.levels and level <= hedy.HEDY_MAX_LEVEL:
+        return utils.error_page(error=404, ui_message='level_not_translated')
+    if 'levels' in customizations and level not in available_levels:
+        return utils.error_page(error=403, ui_message='level_not_class')
 
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
@@ -993,7 +1025,7 @@ def main_page(page):
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
-                               content=learn_more_translations)
+                               current_page='learn-more', content=learn_more_translations)
 
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -1004,7 +1036,7 @@ def main_page(page):
 
     if page == 'landing-page':
         if user['username']:
-            return render_template('landing-page.html', page_title=hedyweb.get_page_title(page),
+            return render_template('landing-page.html', page_title=hedyweb.get_page_title(page), user=user['username'],
                                    text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
             return utils.error_page(error=403, ui_message='not_user')
@@ -1034,7 +1066,7 @@ def main_page(page):
 
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
-                           content=main_page_translations)
+                           current_page='start', content=main_page_translations)
 
 
 @app.route('/explore', methods=['GET'])
@@ -1128,17 +1160,6 @@ def other_keyword_language():
             return make_keyword_lang_obj(g.lang)
     return None
 
-@app.template_global()
-def main_menu_entries():
-    """Return the entries that make up the main menu.
-
-    Calls render_main_menu() to do it, and assume the first part of the current
-    request's path is the "current page".
-    """
-    # path starts with '/', in case of empty call it 'start'
-    first_path_component = request.path[1:].split('/')[0] or 'start'
-    return render_main_menu(first_path_component)
-
 
 @app.template_filter()
 def nl2br(x):
@@ -1201,17 +1222,6 @@ def modify_query(**new_values):
         args[key] = value
 
     return '{}?{}'.format(request.path, url_encode(args))
-
-
-def render_main_menu(current_page):
-    """Render a list of(caption, href, selected, color) from the main menu."""
-    return [dict(
-        caption=item.get(g.lang, item.get('en', '???')),
-        href='/' + item['_'],
-        selected=(current_page == item['_']),
-        accent_color=item.get('accent_color', 'white'),
-        short_name=item['_']
-    ) for item in main_menu_json['nav']]
 
 
 @app.route('/auth/public_profile', methods=['POST'])
