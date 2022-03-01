@@ -487,12 +487,6 @@ class TypeValidator(Transformer):
             self.save_type_to_lookup(tree.children[0].children[0], HedyType.input)
         self.validate_args_type_allowed(tree.children[1:], Command.ask)
         return self.to_typed_tree(tree, HedyType.input)
-    
-    def ask_is(self, tree):
-        self.ask(tree)
-    
-    def ask_equals(self, tree):
-        self.ask(tree)
 
     def input(self, tree):
         self.validate_args_type_allowed(tree.children[1:], Command.ask)
@@ -1017,10 +1011,7 @@ class IsComplete(Filter):
             return not incomplete, ('ask', meta.line)
         else:
             return not incomplete, ('ask', 1)
-    def ask_is(self, meta, args):
-        return self.ask(meta, args)
-    def ask_equals(self, meta, args):
-        return self.ask(meta, args)
+
     def print(self, meta, args):
         return args != [], ('print', meta.line)
     def input(self, meta, args):
@@ -1490,12 +1481,7 @@ class ConvertToPython_6(ConvertToPython_5):
     
     def list_access_var_equals(self, args):
         return super().list_access_var(args)
-    
-    def ask_is(self, args):
-        return super().ask(args)
-    
-    def ask_equals(self, args):
-        return super().ask(args)
+
     
     def assign_list_is(self, args):
         return super().assign_list(args)
@@ -1639,12 +1625,6 @@ class ConvertToPython_12(ConvertToPython_11):
             {var} = float({var})
           except ValueError:
             pass""")  # no number? leave as string
-
-    def ask_is(self, args):
-        return self.ask(args)
-    
-    def ask_equals(self, args):
-        return self.ask(args)
 
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
@@ -1953,6 +1933,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
+    transpile_result = transpile_inner(input_string, level, lang)
     transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
 
