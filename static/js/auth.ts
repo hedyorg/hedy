@@ -372,7 +372,7 @@ async function afterLogin(loginData: any) {
   const savedProgram = savedProgramString ? JSON.parse(savedProgramString) : undefined;
 
   if (savedProgram) {
-    await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3], "");
+    await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3]);
     localStorage.removeItem('hedy-first-save');
 
     const redirect = getSavedRedirectPath();
@@ -385,7 +385,7 @@ async function afterLogin(loginData: any) {
   const joinClass = joinClassString ? JSON.parse(joinClassString) : undefined;
   if (joinClass) {
     localStorage.removeItem('hedy-join');
-    return join_class(joinClass.link, joinClass.name);
+    return join_class(joinClass.link, joinClass.name, "");
   }
 
   const redirect = getSavedRedirectPath();
