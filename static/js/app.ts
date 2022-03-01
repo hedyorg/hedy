@@ -954,6 +954,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   function outf(text: string) {
     // If there's more than one program being executed at a time, we ignore it.
     // This happens when a program requiring user input is suspended when the user changes the code.
+    //@ts-ignore
     const pythonVariables = Sk.globals;
     load_variables(pythonVariables);
     if (window.State.programsInExecution > 1) return;
