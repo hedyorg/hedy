@@ -159,6 +159,8 @@ const LEVELS = [
       rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -170,6 +172,8 @@ const LEVELS = [
       rule_is(),
       rule_ifElseOneLine(),
       rule_expressions(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -182,6 +186,8 @@ const LEVELS = [
       rule_ifElseOneLine(),
       rule_expressions(),
       rule_arithmetic(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -195,6 +201,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_repeat(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -209,6 +217,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_repeat(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
 
@@ -216,13 +226,15 @@ const LEVELS = [
     // Replaces 'repeat' with 'for' over a list (for a in animals)
     name: 'level10',
     rules: pipe(baseRules(),
-    rule_printSpace(),
-    rule_isAsk(),
-    rule_is(),
-    rule_ifElse(),
-    rule_expressions(),
-    rule_arithmetic(),
-    rule_for()
+      rule_printSpace(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_for(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -237,6 +249,8 @@ const LEVELS = [
       rule_arithmetic(),
       rule_for(),
       rule_forRange(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
 // ----------------------------------------------------------------
@@ -252,6 +266,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -264,6 +280,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -276,6 +294,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -288,6 +308,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -300,6 +322,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -312,6 +336,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
 ];
