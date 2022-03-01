@@ -393,12 +393,6 @@ class LookupEntryCollector(visitors.Visitor):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree)
 
-    def input_is(self, tree):
-        self.input(tree)
-    
-    def input_equals(self, tree):
-        self.input(tree)
-
     def assign(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree.children[1])
@@ -966,10 +960,7 @@ class IsComplete(Filter):
         return args != [], ('print', meta.line)
     def input(self, meta, args):
         return len(args) > 1, ('input', meta.line)
-    def input_is(self, meta, args):
-        return self.input(meta, args)
-    def input_equals(self, meta, args):
-        return self.input(meta, args)
+
     def length(self, meta, args):
         return args != [], ('len', meta.line)
     def error_print_nq(self, meta, args):
@@ -1694,7 +1685,7 @@ class ConvertToPython_18(ConvertToPython_17):
     
     def input_is_empty_brackets(self, args):
         return self.input(args)
-    
+
     def input_equals_empty_brackets(self, args):
         return self.input(args)
     

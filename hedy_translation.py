@@ -193,11 +193,8 @@ class Translator(Visitor):
     def orcondition(self, tree):
         self.add_rule('_OR', 'or', tree)
 
-    def input_is(self, tree):
+    def input(self, tree):
         self.add_rule('_IS', 'is', tree)
-        self.add_rule('_INPUT', 'input', tree)
-
-    def input_equals(self, tree):
         self.add_rule('_INPUT', 'input', tree)
 
     def input_is_empty_brackets(self, tree):
