@@ -7,7 +7,7 @@
         {{_('accounts_intro')|commonmark }}
     </div>
     <div>
-        <form onsubmit="hedyApp.create_accounts();event.preventDefault();">
+        <form onsubmit="hedyApp.create_accounts('{{_('create_accounts_prompt')}}');event.preventDefault();">
         <div class="border rounded-lg px-4 py-2">
             <div class="flex flex-col" id="account_rows_container">
                 <!-- we create one hidden row -> we can simply copy this one and append() below when adding rows -->

@@ -163,26 +163,24 @@ export function remove_student(class_id: string, student_id: string, prompt: str
   });
 }
 
-export function create_adventure() {
-    modal.prompt (auth.texts['adventure_prompt'], '', function (adventure_name) {
-        adventure_name = adventure_name.trim();
-        if (!adventure_name) {
-          modal.alert(auth.texts['adventure_empty'], 3000, true);
-          return;
-    }
-    $.ajax({
-      type: 'POST',
-      url: '/for-teachers/create_adventure',
-      data: JSON.stringify({
-        name: adventure_name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
-    }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
-    });
+export function create_adventure(prompt: string, adventure_empty: string) {
+    modal.prompt (prompt, '', function (adventure_name) {
+        if (!adventure_name.trim()) {
+          return modal.alert(adventure_empty, 3000, true);
+        }
+        $.ajax({
+          type: 'POST',
+          url: '/for-teachers/create_adventure',
+          data: JSON.stringify({
+            name: adventure_name
+          }),
+          contentType: 'application/json',
+          dataType: 'json'
+        }).done(function(response) {
+          window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
+        }).fail(function(err) {
+          return modal.alert(err.responseText, 3000, true);
+        });
   });
 }
 
@@ -211,9 +209,9 @@ function update_db_adventure(adventure_id: string) {
     });
 }
 
-export function update_adventure(adventure_id: string, first_edit: boolean) {
+export function update_adventure(adventure_id: string, first_edit: boolean, prompt: string) {
    if (!first_edit) {
-    modal.confirm (auth.texts['update_adventure_prompt'], function () {
+    modal.confirm (prompt, function () {
         update_db_adventure(adventure_id);
     });
    } else {
@@ -244,8 +242,8 @@ export function preview_adventure() {
     }
 }
 
-export function delete_adventure(adventure_id: string) {
-    modal.confirm(auth.texts['delete_adventure_prompt'], function () {
+export function delete_adventure(adventure_id: string, prompt: string) {
+    modal.confirm(prompt, function () {
         $.ajax({
             type: 'DELETE',
             url: '/for-teachers/customize-adventure/' + adventure_id,
@@ -254,14 +252,14 @@ export function delete_adventure(adventure_id: string) {
         }).done(function () {
             window.location.href = '/for-teachers';
         }).fail(function (err) {
-            error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+            modal.alert(err.responseText, 3000, true);
         });
     });
 }
 
-export function change_password_student(username: string) {
-    modal.prompt ( auth.texts['enter_password'] + " " + username + ":", '', function (password) {
-        modal.confirm (auth.texts['password_change_prompt'], function () {
+export function change_password_student(username: string, enter_password: string, password_prompt: string) {
+    modal.prompt ( enter_password + " " + username + ":", '', function (password) {
+        modal.confirm (password_prompt, function () {
             $.ajax({
               type: 'POST',
               url: '/auth/change_student_password',
@@ -387,8 +385,8 @@ export function save_customizations(class_id: string) {
     });
 }
 
-export function remove_customizations(class_id: string) {
-    modal.confirm (auth.texts['remove_customizations_prompt'], function () {
+export function remove_customizations(class_id: string, prompt: string) {
+    modal.confirm (prompt, function () {
         $.ajax({
             type: 'DELETE',
             url: '/for-teachers/customize-class/' + class_id,
@@ -467,8 +465,8 @@ export function add_account_placeholder() {
     row.appendTo("#account_rows_container");
 }
 
-export function create_accounts() {
-    modal.confirm (auth.texts['create_accounts_prompt'], function () {
+export function create_accounts(prompt: string) {
+    modal.confirm (prompt, function () {
         $('#account_rows_container').find(':input').each(function () {
             $(this).removeClass('border-2 border-red-500');
         });

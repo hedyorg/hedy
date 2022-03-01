@@ -4,7 +4,7 @@
 <div class="px-8">
     <h2>{{_('customize_adventure')}}: {{adventure.name}}</h2>
     <div class="mt-4 border-gray-400 border-2 rounded-lg p-4">
-        <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %});">
+        <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %}, '{{_('update_adventure_prompt')}}')">
             <div class="flex flex-row">
                 <div class="flex flex-col ltr:mr-4 rtl:ml-4">
                     <h3 class="text-center mt-0 mb-4">{{_('general_settings')}}</h3>
@@ -49,7 +49,7 @@
                     <div class="flex flex-row my-2">
                         <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
                         <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2">{{_('save')}}</button>
-                        <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}');">{{_('remove')}}</button>
+                        <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
                     </div>
                 </div>
             </div>
