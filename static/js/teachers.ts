@@ -104,7 +104,7 @@ export function join_class(id: string, name: string) {
           window.location.pathname = '/programs';
       }
     }).fail(function(err) {
-      if (err.status == 403) {
+      if (err.status == 403) { //The user is not logged in -> ask if they want to
          return modal.confirm (err.responseText, function () {
             localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
             window.location.pathname = '/login';
