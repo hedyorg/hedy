@@ -287,7 +287,6 @@ def routes(app, database):
 
     @app.route('/auth/login', methods=['POST'])
     def login():
-        send_email_template('welcome_verify', 'timonbakker@hotmail.com', username="Tibiba", link="www.bier.nl")
         body = request.json
         # Validations
         if not isinstance(body, dict):
