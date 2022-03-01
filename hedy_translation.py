@@ -6,7 +6,7 @@ import yaml
 from os import path
 
 
-KEYWORD_LANGUAGES = ['en', 'nl', 'es']
+KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr', 'ar']
 
 # Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
@@ -100,12 +100,6 @@ class Translator(Visitor):
     def print_empty_brackets(self, tree):
         self.print(tree)
 
-    def ask_equals(self, tree):
-        self.ask(tree)
-
-    def ask_is(self, tree):
-        self.ask(tree)
-
     def ask(self, tree):
         self.add_rule('_IS', 'is', tree)
         self.add_rule('_ASK', 'ask', tree)
@@ -125,12 +119,6 @@ class Translator(Visitor):
         for comma in commas:
             rule = Rule('comma', comma.line, comma.column - 1, comma.end_column - 2, comma.value)
             self.rules.append(rule)
-
-    def assign_list_is(self, tree):
-        self.assign(tree)
-
-    def assign_is(self, tree):
-        self.assign(tree)
 
     def assign(self, tree):
         self.add_rule('_IS', 'is', tree)
@@ -176,14 +164,8 @@ class Translator(Visitor):
     def in_list_check(self, tree):
         self.add_rule('_IN', 'in', tree)
 
-    def list_access_var_equals(self, tree):
-        self.list_access(tree)
-
     def list_access(self, tree):
         self.add_rule('_AT', 'at', tree)
-
-    def list_access_var_is(self, tree):
-        return self.list_access_var(tree)
 
     def list_access_var(self, tree):
         self.add_rule('_IS', 'is', tree)
