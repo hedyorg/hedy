@@ -163,10 +163,6 @@ def load_adventures_per_level(lang, level):
     return all_adventures
 
 
-# Load main menu(do it once, can be cached)
-with open(f'menu.json', 'r', encoding='utf-8') as f:
-    main_menu_json = json.load(f)
-
 logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
@@ -870,6 +866,7 @@ def index(level, step):
     adventure_name = ''
 
     # If step is a string that has more than two characters, it must be an id of a program
+    # Todo TB -> I don't like this structure, can't we use a dedicated URL for loaded programs?!
     if step and isinstance(step, str) and len(step) > 2:
         result = DATABASE.program_by_id(step)
         if not result:
@@ -877,8 +874,7 @@ def index(level, step):
 
         user = current_user()
         public_program = 'public' in result and result['public']
-        if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(
-                user):
+        if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
             return utils.error_page(error=404, ui_message='no_such_program')
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
@@ -898,10 +894,15 @@ def index(level, step):
         now = timems()
         for current_level, timestamp in customizations.get('opening_dates', {}).items():
             if utils.datetotimeordate(timestamp) > utils.datetotimeordate(utils.mstoisostring(now)):
-                available_levels.remove(int(current_level))
+                try:
+                    available_levels.remove(int(current_level))
+                except:
+                    print("Error: there is an openings date without a level")
 
-    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
-        return utils.error_page(error=404, ui_message='no_such_level')
+    if level not in level_defaults_for_lang.levels and level <= hedy.HEDY_MAX_LEVEL:
+        return utils.error_page(error=404, ui_message='level_not_translated')
+    if 'levels' in customizations and level not in available_levels:
+        return utils.error_page(error=403, ui_message='level_not_class')
 
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
@@ -1067,7 +1068,7 @@ def main_page(page):
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
-                               content=learn_more_translations)
+                               current_page='learn-more', content=learn_more_translations)
 
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -1108,7 +1109,7 @@ def main_page(page):
 
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
-                           content=main_page_translations)
+                           current_page='start', content=main_page_translations)
 
 
 @app.route('/explore', methods=['GET'])
@@ -1202,17 +1203,6 @@ def other_keyword_language():
             return make_keyword_lang_obj(g.lang)
     return None
 
-@app.template_global()
-def main_menu_entries():
-    """Return the entries that make up the main menu.
-
-    Calls render_main_menu() to do it, and assume the first part of the current
-    request's path is the "current page".
-    """
-    # path starts with '/', in case of empty call it 'start'
-    first_path_component = request.path[1:].split('/')[0] or 'start'
-    return render_main_menu(first_path_component)
-
 
 @app.template_filter()
 def nl2br(x):
@@ -1275,17 +1265,6 @@ def modify_query(**new_values):
         args[key] = value
 
     return '{}?{}'.format(request.path, url_encode(args))
-
-
-def render_main_menu(current_page):
-    """Render a list of(caption, href, selected, color) from the main menu."""
-    return [dict(
-        caption=item.get(g.lang, item.get('en', '???')),
-        href='/' + item['_'],
-        selected=(current_page == item['_']),
-        accent_color=item.get('accent_color', 'white'),
-        short_name=item['_']
-    ) for item in main_menu_json['nav']]
 
 
 # We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
