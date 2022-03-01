@@ -58,7 +58,7 @@ var StopExecution = false;
       if (dir === "rtl") {
         symbol = "⇤";
       }
-      $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
+      $('<button>').css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
         update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
       });
