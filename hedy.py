@@ -438,13 +438,6 @@ class LookupEntryCollector(visitors.Visitor):
 
     def list_access_var(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree)
-
-    def list_access_var_is(self, tree):
-        return self.list_access_var(tree)
-
-    def list_access_var_equals(self, tree):
-        return self.list_access_var(tree)
-
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, True)
 
@@ -541,12 +534,6 @@ class TypeValidator(Transformer):
     def list_access_var(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
         return self.to_typed_tree(tree)
-
-    def list_access_var_is(self, tree):
-        return self.list_access_var(tree)
-
-    def list_access_var_equals(self, tree):
-        return self.list_access_var(tree)
 
     def add(self, tree):
         self.validate_args_type_allowed(tree.children[1], Command.add_to_list)
@@ -1475,13 +1462,6 @@ class ConvertToPython_6(ConvertToPython_5):
     
     def assign_equals(self, args):
         return self.assign(args)
-
-    def list_access_var_is(self, args):
-        return super().list_access_var(args)
-    
-    def list_access_var_equals(self, args):
-        return super().list_access_var(args)
-
     
     def assign_list_is(self, args):
         return super().assign_list(args)
