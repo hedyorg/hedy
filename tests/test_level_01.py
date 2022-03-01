@@ -100,7 +100,7 @@ class TestsLevel1(HedyTester):
     expected = textwrap.dedent("""\
     print('hallo!')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_print_nl(self):
     code = "print Hallo welkom bij Hedy!"

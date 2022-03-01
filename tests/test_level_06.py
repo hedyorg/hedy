@@ -48,8 +48,7 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      expected=expected,
-      translate=False
+      expected=expected
     )
 
   @parameterized.expand(['1.5', '1,5'])
@@ -182,8 +181,7 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=7,
-      translate=False #spaces in text not perserved
+      max_level=7
     )
 
   # calculation tests
@@ -225,7 +223,7 @@ class TestsLevel6(HedyTester):
   def test_calc_without_space(self):
     code = "nummer is 4+5"
     expected = "nummer = int(4) + int(5)"
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_assign_calc(self):
     code = textwrap.dedent("""\
