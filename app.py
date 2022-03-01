@@ -420,7 +420,6 @@ def fix_code():
     querylog.log_value(level=level, lang=lang, session_id=utils.session_id(), username=username)
 
     try:
-        hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
         with querylog.log_time('transpile'):
 
             try:
@@ -428,7 +427,7 @@ def fix_code():
                 response = "OK"
             except hedy.exceptions.FtfyException as ex:
                 # The code was fixed with a warning
-                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Error'] = translate_error(ex.error_code, ex.arguments)
                 response['FixedCode'] = ex.fixed_code
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
@@ -436,7 +435,7 @@ def fix_code():
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
-        response = hedy_error_to_response(ex, hedy_errors)
+        response = hedy_error_to_response(ex)
         exception = ex
 
     except Exception as E:
@@ -544,7 +543,7 @@ def parse():
             print(f"error determining achievements for {code} with {E}")
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
-        response = hedy_error_to_response(ex, hedy_errors)
+        response = hedy_error_to_response(ex)
         exception = ex
 
     except Exception as E:
@@ -625,11 +624,13 @@ def translate_error(code, arguments):
     arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2',
                                            'variable']
     # fetch the error template
-    print(code)
-    error_template = gettext(u'' + str(code))
-    print(code)
-    print(error_template)
+    #print(code)
+    #error_template = gettext(u'' + str(code))
+    #print(code)
+    #print(error_template)
 
+    translations = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
+    error_template = translations[code]
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
         if k in arguments_that_require_highlighting:
