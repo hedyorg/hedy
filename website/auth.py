@@ -302,11 +302,9 @@ def routes(app, database):
                 if language not in['scratch', 'other_block', 'python', 'other_text']:
                     return g.auth_texts.get('programming_invalid'), 400
 
-        user = DATABASE.user_by_username(body['username'].strip().lower())
-        if user:
+        if DATABASE.user_by_username(body['username'].strip().lower()):
             return g.auth_texts.get('exists_username'), 403
-        email = DATABASE.user_by_email(body['email'].strip().lower())
-        if email:
+        if DATABASE.user_by_email(body['email'].strip().lower()):
             return g.auth_texts.get('exists_email'), 403
 
         # We receive the pre-processed user and response package from the function
@@ -315,18 +313,18 @@ def routes(app, database):
         if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] is True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
-                mailchimp_subscribe_user(email)
+                mailchimp_subscribe_user(user['email'])
             # Otherwise, we send an email to notify about the subscription to the main email address
             else:
-                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
+                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', user['email'], '<p>' + user['email'] + '</p>')
 
         # If someone wants to be a Teacher -> sent a mail to manually set it
         if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
-            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', user['email'], '<p>' + user['email'] + '</p>')
 
         # If someone agrees to the third party contacts -> sent a mail to manually write down
         if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
-            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', email, f'<p>{email}</p>')
+            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', user['email'], '<p>' + user['email'] + '</p>')
 
         # We automatically login the user
         cookie = make_salt()
