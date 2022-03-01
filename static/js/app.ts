@@ -793,7 +793,7 @@ export function submit_program (id: string, index: number) {
   });
 }
 
-export function copy_to_clipboard (string: string, noAlert: boolean) {
+export function copy_to_clipboard (string: string, prompt: string) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
   el.value = string;
@@ -812,10 +812,8 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  if (! noAlert) {
-    modal.hide();
-    modal.alert (auth.texts['copy_clipboard'], 3000, false);
-  }
+  modal.hide_alert();
+  modal.alert (prompt, 3000, false);
 }
 
 /**
