@@ -203,9 +203,7 @@ def store_new_account(account, email):
         resp = make_response({'username': username, 'token': hashed_token})
     # Otherwise, we send an email with a verification link and we return an empty body
     else:
-        send_email_template('welcome_verify', email,
-                            email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                username) + '&token=' + urllib.parse.quote_plus(hashed_token))
+        send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
         resp = make_response({})
     return user, resp
 
@@ -711,11 +709,14 @@ def send_email(recipient, subject, body_plain, body_html):
     else:
         print('Email sent to ' + recipient)
 
-def send_email_template(template, email, link):
+def send_email_template(template, email, link, username=None):
     texts = EMAILS
     subject = texts['email_' + template + '_subject']
     body = texts['email_' + template + '_body'].split('\n')
-    body =[texts['email_hello']] + body
+    if username:
+        body = [texts['email_hello']] + " " + username + "!" + body
+    else:
+        body = [texts['email_hello']] + "!" + body
     if link:
         body[len(body) - 1] = body[len(body ) - 1] + ' @@LINK@@'
     body = body + texts['email_goodbye'].split('\n')
