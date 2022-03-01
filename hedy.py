@@ -418,12 +418,7 @@ class LookupEntryCollector(visitors.Visitor):
     def assign_list(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree)
-    
-    def assign_list_is(self, tree):
-        self.assign_list(tree)
 
-    def assign_list_equals(self, tree):
-        self.assign_list(tree)
 
     # list access is added to the lookup table not because it must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
@@ -511,12 +506,6 @@ class TypeValidator(Transformer):
     def assign_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.list)
         return self.to_typed_tree(tree, HedyType.list)
-
-    def assign_list_is(self, tree):
-        return self.assign_list(tree)
-
-    def assign_list_equals(self, tree):
-        return self.assign_list(tree)
         
     def list_access(self, tree):
         self.validate_args_type_allowed(tree.children[0], Command.list_access)
@@ -1462,12 +1451,6 @@ class ConvertToPython_6(ConvertToPython_5):
     
     def assign_equals(self, args):
         return self.assign(args)
-    
-    def assign_list_is(self, args):
-        return super().assign_list(args)
-    
-    def assign_list_equals(self, args):
-        return super().assign_list(args)
     
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
