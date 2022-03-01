@@ -119,11 +119,7 @@ var StopExecution = false;
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
       if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        //return auth.texts['unsaved_changes'];
-        return "You have unsaved changes, are you sure you want to leave?";
-        // TODO TB -> We have to figure out a smart way to get the translated string in this place
-        // One option might be to set them on window.State as we can get gettext() to the templates
-        // But this is will set the starting point of a chaotic "window.State mega parser"
+        return window.State.unsaved_changes_message;
       } else {
         return undefined;
       }
@@ -144,7 +140,7 @@ var StopExecution = false;
         if (!window.State.level || !window.State.lang) {
           throw new Error('Oh no');
         }
-        runit (window.State.level, window.State.lang, function () {
+        runit (window.State.level, window.State.lang, "", function () {
           $ ('#output').focus ();
         });
       }
@@ -681,7 +677,7 @@ function get_parse_code_by_id(level: number, lang:string, id:string | true,  ind
     });
 }
 
-export function share_program(level: number, lang: string, id: string | true, index: number, Public: boolean, prompt: string) {
+export function share_program(level: number, lang: string, id: string | true, index: number, Public: boolean) {
   if (Public) {
     // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
     if (id !== true) {
@@ -1076,7 +1072,7 @@ export function prompt_unsaved(cb: () => void) {
   // This variable avoids showing the generic native `onbeforeunload` prompt
   window.State.no_unload_prompt = true;
   if (! window.State.unsaved_changes || ! auth.profile) return cb ();
-  modal.confirm(auth.texts['unsaved_changes'], cb);
+  modal.confirm(<string>window.State.unsaved_changes_message, cb);
 }
 
 export function load_quiz(level: string) {
@@ -1225,7 +1221,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
       if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return auth.texts['unsaved_changes'];
+        return window.State.unsaved_changes_message;
       } else {
         return undefined;
       }
@@ -1246,7 +1242,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
         if (!window.State.level || !window.State.lang) {
           throw new Error('Oh no');
         }
-        runit (window.State.level, window.State.lang, function () {
+        runit (window.State.level, window.State.lang, "", function () {
           $ ('#output').focus ();
         });
       }
