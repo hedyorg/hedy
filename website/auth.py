@@ -523,8 +523,7 @@ def routes(app, database):
         DATABASE.update_user(user['username'], {'password': hashed})
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
         if not is_testing_request(request):
-            send_email_template('change_password', user['email'], None, lang=user['language'],
-                                username=user['username'])
+            send_email_template('change_password', user['email'], '', lang=user['language'], username=user['username'])
 
         return '', 200
 
