@@ -6,7 +6,7 @@ import yaml
 from os import path
 
 
-KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr', 'ar']
+KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr']
 
 # Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
@@ -37,8 +37,7 @@ def all_keywords_to_dict():
 
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
-    # FH feb 2022 this also replaces // by //// maybe we don't want to do that for translation with an extra argument?
-    # for now just don't test tests with // like level4.test_print_with_slashes()
+
     processed_input = hedy.process_input_string(input_string_, level)
 
     parser = hedy.get_parser(level, from_lang, True)
