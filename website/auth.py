@@ -821,8 +821,7 @@ def send_email_template(template, email, link='', lang="en", username=''):
         body_plain = body.format(link='Please copy and paste this link into a new tab: ' + link)
         body_html = body_html.format(link='<a href="' + link + '">Link</a>')
 
-    print(body_html)
-    # send_email(email, subject, body_plain, body_html)
+    send_email(email, subject, body_plain, body_html)
 
 
 def auth_templates(page, page_title):
