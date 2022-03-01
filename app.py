@@ -937,24 +937,6 @@ def view_program(id):
     return render_template("view-program-page.html", **arguments_dict)
 
 
-@app.route('/client_messages.js', methods=['GET'])
-def client_messages():
-    error_messages = TRANSLATIONS.get_translations(g.lang, "ClientErrorMessages")
-    ui_messages = TRANSLATIONS.get_translations(g.lang, "ui")
-    auth_messages = TRANSLATIONS.get_translations(g.lang, "Auth")
-
-    response = make_response(render_template("client_messages.js",
-                                             error_messages=json.dumps(error_messages),
-                                             ui_messages=json.dumps(ui_messages),
-                                             auth_messages=json.dumps(auth_messages)))
-
-    if not is_debug_mode():
-        # Cache for longer when not devving
-        response.cache_control.max_age = 60 * 60  # Seconds
-
-    return response
-
-
 @app.errorhandler(404)
 def not_found(exception):
     return utils.error_page(error=404, ui_message='page_not_found')
