@@ -1,5 +1,6 @@
 # coding=utf-8
 import sys
+import re
 
 import hedy_translation
 from website.yaml_file import YamlFile
@@ -529,6 +530,7 @@ def parse():
     ad_name = body['adventure_name']
     current_level = int(body['level'])
 
+    ad_index = 0
     adventures_for_level = load_adventures_per_level(g.lang, level)
     for i in range(len(adventures_for_level)):
         if adventures_for_level[i]['short_name'] == ad_name:
@@ -547,13 +549,21 @@ def parse():
     if level_db == current_level:
         # may unlock, flag may be set to 1
         index = 0
+
+        
         for com in commands:
+
             demo_code = com['demo_code']
-            demo_code += '\n'
-            if code == demo_code:
+            code_key_word = re.compile(r'\{(.*?)\}', re.S)
+            keyword_list = re.findall(code_key_word, demo_code)
+
+            for k in keyword_list:
                 RUN_COMMAND[index] = 1
+                if k not in code:
+                    RUN_COMMAND[index] = 0
             index += 1
         flag = 1
+
         for i in RUN_COMMAND:
             if i == 0:
                 flag = 0
@@ -641,9 +651,9 @@ def parse():
     })
     if flag == 1:
         if level_db == current_level:
+            max_index = len(load_adventures_per_level(g.lang, current_level))
             # unlock next level
-            ad_index_db = 0
-            level_db += 1
+            ad_index_db = max_index
             RUN_COMMAND = []
             # write to database
             DATABASE.update_user(current_user () ['username'], {'level':level_db, 'ad_index':ad_index_db})
