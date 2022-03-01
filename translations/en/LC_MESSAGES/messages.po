@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-01 11:20+0100\n"
+"POT-Creation-Date: 2022-03-01 12:03+0100\n"
 "PO-Revision-Date: 2022-02-25 13:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -19,9 +19,8 @@ msgstr ""
 "Generated-By: Babel 2.9.1\n"
 
 #: app.py:556
-#, fuzzy
 msgid "program_contains_error"
-msgstr "My programs"
+msgstr "This program contains an error, are you sure you want to share it?"
 
 #: app.py:1132 app.py:1134
 msgid "translate_error"
@@ -29,7 +28,7 @@ msgstr ""
 "Something went wrong while translating the code. Try running the code to "
 "see if it has an error. Code with errors can not be translated."
 
-#: app.py:1250 website/auth.py:225 website/auth.py:272 website/auth.py:407
+#: app.py:1262 website/auth.py:225 website/auth.py:272 website/auth.py:407
 #: website/auth.py:433 website/auth.py:463 website/auth.py:564
 #: website/auth.py:594 website/auth.py:635 website/auth.py:661
 #: website/teacher.py:82 website/teacher.py:192 website/teacher.py:249
@@ -38,19 +37,19 @@ msgstr ""
 msgid "ajax_error"
 msgstr "There was an error, please try again."
 
-#: app.py:1252
+#: app.py:1264
 msgid "image_invalid"
 msgstr "Your chosen image is invalid."
 
-#: app.py:1254
+#: app.py:1266
 msgid "personal_text_invalid"
 msgstr "Your personal text is invalid."
 
-#: app.py:1256
+#: app.py:1268
 msgid "favourite_program_invalid"
 msgstr "Your chosen favourite program is invalid."
 
-#: app.py:1267 app.py:1268
+#: app.py:1279 app.py:1280
 msgid "public_profile_updated"
 msgstr "Public profile updated."
 
@@ -101,19 +100,16 @@ msgid "page"
 msgstr "page"
 
 #: templates/class-overview.html:83
-#, fuzzy
 msgid "enter_password"
-msgstr "New password"
+msgstr "Enter a new password for"
 
 #: templates/class-overview.html:83
-#, fuzzy
 msgid "password_change_prompt"
-msgstr "You're not allowed to change the password of this user."
+msgstr "Are you sure you want to change this password?"
 
 #: templates/class-overview.html:84
-#, fuzzy
 msgid "remove_student_prompt"
-msgstr "Remove student"
+msgstr "Are you sure you want to remove the student from the class?"
 
 #: templates/class-overview.html:84 templates/class-overview.html:118
 #: templates/customize-adventure.html:52 templates/for-teachers.html:34
@@ -131,25 +127,23 @@ msgstr "Customize class"
 
 #: templates/class-overview.html:93 templates/for-teachers.html:23
 msgid "class_name_prompt"
-msgstr ""
+msgstr "Please enter the name of the class"
 
 #: templates/class-overview.html:93 templates/for-teachers.html:23
 msgid "class_name_empty"
-msgstr ""
+msgstr "You didn't enter a class name!"
 
 #: templates/class-overview.html:93
 msgid "rename_class"
 msgstr "Rename class"
 
 #: templates/class-overview.html:94
-#, fuzzy
 msgid "invite_prompt"
-msgstr "Invite date"
+msgstr "Enter a username"
 
 #: templates/class-overview.html:94
-#, fuzzy
 msgid "username_empty"
-msgstr "One or more usernames is already in use."
+msgstr "You didn't enter an username!"
 
 #: templates/class-overview.html:94
 msgid "invite_student"
@@ -164,9 +158,8 @@ msgid "back_to_teachers_page"
 msgstr "Go back to teachers page"
 
 #: templates/class-overview.html:99
-#, fuzzy
 msgid "delete_class_prompt"
-msgstr "Delete class permanently"
+msgstr "Are you sure you want to delete the class?"
 
 #: templates/class-overview.html:99
 msgid "delete_class"
@@ -185,9 +178,8 @@ msgid "remove_invite"
 msgstr "Remove invite"
 
 #: templates/class-overview.html:118 templates/profile.html:15
-#, fuzzy
 msgid "delete_invite_prompt"
-msgstr "Delete invitation"
+msgstr "Are you sure you want to remove this class invitation?"
 
 #: templates/class-prejoin.html:7
 msgid "class_already_joined"
@@ -203,7 +195,7 @@ msgstr "Do you want to join this class?"
 
 #: templates/class-prejoin.html:17
 msgid "join_prompt"
-msgstr ""
+msgstr "You need to have an account to join a class. Would you like to login now?"
 
 #: templates/class-prejoin.html:17 templates/profile.html:14
 msgid "join_class"
@@ -213,7 +205,7 @@ msgstr "Join class"
 msgid "back_to_class"
 msgstr "Go back to class"
 
-#: templates/code-page.html:24 templates/code-page.html:33
+#: templates/code-page.html:25 templates/code-page.html:34
 #: templates/customize-class.html:26 templates/customize-class.html:62
 #: templates/customize-class.html:69 templates/customize-class.html:92
 #: templates/incl-adventure-tabs.html:5 templates/level-page.html:6
@@ -222,9 +214,9 @@ msgstr "Go back to class"
 msgid "level_title"
 msgstr "Level"
 
-#: templates/code-page.html:34
+#: templates/code-page.html:35
 msgid "unsaved_changes"
-msgstr ""
+msgstr "You have an unsaved program. Do you want to leave without saving it?"
 
 #: templates/create-accounts.html:5
 msgid "create_multiple_accounts"
@@ -242,9 +234,8 @@ msgstr ""
 "password needs to be <b>at least</b> 6 characters."
 
 #: templates/create-accounts.html:10
-#, fuzzy
 msgid "create_accounts_prompt"
-msgstr "Create multiple accounts"
+msgstr "Are you sure you want to create these accounts?"
 
 #: templates/create-accounts.html:17 templates/profile.html:96
 #: templates/recover.html:8 templates/signup.html:14
@@ -273,9 +264,8 @@ msgid "customize_adventure"
 msgstr "Customize adventure"
 
 #: templates/customize-adventure.html:7
-#, fuzzy
 msgid "update_adventure_prompt"
-msgstr "Are you sure you want to reset all selected adventures?"
+msgstr "Are you sure you want to update this adventure?"
 
 #: templates/customize-adventure.html:10
 msgid "general_settings"
@@ -347,9 +337,8 @@ msgid "save"
 msgstr "Save"
 
 #: templates/customize-adventure.html:52 templates/for-teachers.html:44
-#, fuzzy
 msgid "delete_adventure_prompt"
-msgstr "Are you sure you want to reset all selected adventures?"
+msgstr "Are you sure you want to remove this adventure?"
 
 #: templates/customize-class.html:18
 msgid "no_customizations"
@@ -407,9 +396,8 @@ msgid "reset_adventures"
 msgstr "Reset selected adventures"
 
 #: templates/customize-class.html:145
-#, fuzzy
 msgid "remove_customizations_prompt"
-msgstr "Remove customization"
+msgstr "Are you sure you want to remove this class their customizations?"
 
 #: templates/customize-class.html:146
 msgid "remove_customization"
@@ -513,17 +501,12 @@ msgid "view"
 msgstr "View"
 
 #: templates/for-teachers.html:50
-#, fuzzy
 msgid "adventure_prompt"
-msgstr "Are you sure you want to reset all selected adventures?"
+msgstr "Please enter the name of the adventure"
 
 #: templates/for-teachers.html:50
-#, fuzzy
 msgid "adventure_empty"
-msgstr ""
-"You can use the \"preview\" button to view a styled version of your "
-"adventure. To view the adventure on a dedicated page, select \"view\" "
-"from the teachers page."
+msgstr "You didn't enter an adventure name!"
 
 #: templates/for-teachers.html:50
 msgid "create_adventure"
@@ -552,9 +535,8 @@ msgid "enter"
 msgstr "Enter"
 
 #: templates/incl-editor-and-output.html:111
-#, fuzzy
 msgid "answer_question"
-msgstr "Question"
+msgstr "You can't run the program until you answer the question first"
 
 #: templates/incl-editor-and-output.html:111
 msgid "run_code_button"
@@ -684,9 +666,8 @@ msgid "save_code_button"
 msgstr "Save code"
 
 #: templates/level-page.html:12
-#, fuzzy
 msgid "save_prompt"
-msgstr "Are you sure you want to reset all selected adventures?"
+msgstr "You need to have an account to save your program. Would you like to login now?"
 
 #: templates/level-page.html:13
 msgid "share_code_button"
@@ -864,23 +845,20 @@ msgid "last_edited"
 msgstr "Last edited"
 
 #: templates/programs.html:59
-#, fuzzy
 msgid "favourite_confirm"
-msgstr "Are you sure you want to make the program public?"
+msgstr "Are you sure you want to set this program as your favourite?"
 
 #: templates/programs.html:67 templates/programs.html:72
 msgid "open"
 msgstr "Open"
 
 #: templates/programs.html:68 templates/programs.html:76
-#, fuzzy
 msgid "copy_clipboard"
-msgstr "Copy link to share"
+msgstr "Successfully copied to clipboard"
 
 #: templates/programs.html:69 templates/programs.html:73
-#, fuzzy
 msgid "delete_confirm"
-msgstr "Are you sure you want to make the program public?"
+msgstr "Are you sure you want to delete the program?"
 
 #: templates/programs.html:69 templates/programs.html:73
 msgid "delete"
@@ -1173,51 +1151,44 @@ msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
 #: website/programs.py:41
-#, fuzzy
 msgid "delete_success"
-msgstr "Delete class permanently"
+msgstr "Program deleted successfully."
 
 #: website/programs.py:58
-#, fuzzy
 msgid "overwrite_warning"
-msgstr "Are you sure you want to submit this program?"
+msgstr "You already have a program with this name, saving this program will overwrite the old one. Are you sure?"
 
 #: website/programs.py:116 website/programs.py:117
 msgid "save_success_detail"
-msgstr ""
+msgstr "Program saved successfully."
 
 #: website/programs.py:145
 msgid "share_success_detail"
-msgstr ""
+msgstr "Program shared successfully."
 
 #: website/programs.py:147
 msgid "unshare_success_detail"
-msgstr ""
+msgstr "Program unshared successfully."
 
 #: website/programs.py:187
-#, fuzzy
 msgid "favourite_success"
-msgstr "Good!"
+msgstr "Your program is set as favourite."
 
 #: website/teacher.py:77
-#, fuzzy
 msgid "only_teacher_create_class"
-msgstr "Create a new class"
+msgstr "Only teachers are allowed to create classes!"
 
 #: website/teacher.py:84
-#, fuzzy
 msgid "class_name_invalid"
-msgstr "Your username is invalid."
+msgstr "This class name is invalid."
 
 #: website/teacher.py:90
-#, fuzzy
 msgid "class_name_duplicate"
-msgstr "You already have an adventure with this name."
+msgstr "You already have a class with this name."
 
 #: website/teacher.py:140
-#, fuzzy
 msgid "no_such_class"
-msgstr "Select class"
+msgstr "No such Hedy class"
 
 #: website/teacher.py:235
 msgid "customization_deleted"
