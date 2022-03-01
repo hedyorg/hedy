@@ -408,12 +408,6 @@ class LookupEntryCollector(visitors.Visitor):
     def assign(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree.children[1])
-    
-    def assign_is(self, tree):
-        self.assign(tree)
-    
-    def assign_equals(self, tree):
-        self.assign(tree)
 
     def assign_list(self, tree):
         var_name = tree.children[0].children[0]
@@ -496,12 +490,6 @@ class TypeValidator(Transformer):
         type_ = self.get_type(tree.children[1])
         self.save_type_to_lookup(tree.children[0].children[0], type_)
         return self.to_typed_tree(tree, HedyType.none)
-
-    def assign_is(self, tree):
-        return self.assign(tree)
-    
-    def assign_equals(self, tree):
-        return self.assign(tree)
     
     def assign_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.list)
@@ -1639,12 +1627,6 @@ class ConvertToPython_12(ConvertToPython_11):
         name = args[0]
         # self.check_var_usage(args)
         return hash_var(name)
-
-    def assign_is(self, args):
-        return self.assign(args)
-    
-    def assign_equals(self, args):
-        return self.assign(args)
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):

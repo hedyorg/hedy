@@ -1,6 +1,6 @@
 _print_argument: (_SPACE | quoted_text | list_access | var_access | sum)*
 
-command:+= ask | list_access_var | assign_is | assign_equals -= ask | list_access | list_access_var | assign
+command:+= ask | list_access_var | assign -= ask | list_access | list_access_var | assign
 
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 ask: var (_SPACE _IS _SPACE | _EQUALS) _ASK (_SPACE _print_argument)?
@@ -13,9 +13,7 @@ condition:+= equality_check_is | equality_check_equals -= equality_check
 list_access_var: var (_SPACE _IS _SPACE | _EQUALS) var _SPACE _AT _SPACE (INT | random)
 
 assign_list: var (_SPACE _IS _SPACE | _EQUALS) textwithspaces (_COMMA textwithspaces)+
-
-assign_is: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
-assign_equals: var _EQUALS sum | var _EQUALS textwithoutspaces
+assign: var (_SPACE _IS _SPACE | _EQUALS) sum | var (_SPACE _IS _SPACE | _EQUALS) textwithoutspaces
 
 ?sum: product | sum _ADD product -> addition | sum _SUBTRACT product -> subtraction
 ?product: atom | product _MULTIPLY atom -> multiplication | product _DIVIDE atom -> division
