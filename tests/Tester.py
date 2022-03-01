@@ -1,4 +1,4 @@
-import unittest
+import textwrap
 import app
 import hedy, hedy_translation
 import re
@@ -73,7 +73,7 @@ class HedyTester(unittest.TestCase):
       t = tuple((item[i] for item in args))
       res.append(t)
     return res
-    
+
   def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None, lang='en', translate=True):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
@@ -173,3 +173,35 @@ class HedyTester(unittest.TestCase):
     except Exception as E:
       return False
     return True
+
+  # The turtle commands get transpiled into big pieces of code that probably will change
+  # The followings methods abstract the specifics of the tranpilation and keep tests succinct
+  @staticmethod
+  def forward_transpiled(val):
+    return HedyTester.turtle_command_transpiled('forward', val)
+
+  @staticmethod
+  def turn_transpiled(val):
+    return HedyTester.turtle_command_transpiled('right', val)
+
+  @staticmethod
+  def turtle_command_transpiled(command, val):
+    command_text = 'turn'
+    suffix = ''
+    if command == 'forward':
+      command_text = 'forward'
+      suffix = '\n      time.sleep(0.1)'
+    return textwrap.dedent(f"""\
+      trtl = {val}
+      try:
+        trtl = int(trtl)
+      except ValueError:
+        raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try changing the value to a number.')
+      t.{command}(min(600, trtl) if trtl > 0 else max(-600, trtl)){suffix}""")
+
+  # Used to overcome indentation issues when the above code is inserted
+  # in test cases which use different indentation style (e.g. 2 or 4 spaces)
+  @staticmethod
+  def dedent(*args):
+    return '\n'.join([textwrap.indent(textwrap.dedent(a[0]), a[1]) if type(a) is tuple else textwrap.dedent(a)
+                      for a in args])

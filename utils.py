@@ -200,9 +200,11 @@ def markdown_to_html_tags(markdown):
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None):
     if error not in [403, 404, 500]:
         error = 404
+    # Todo TB -> Instead of giving the key in the function an finding it here: Give the correct string as argument
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
                            page_error=page_error or gettext(u'' + str(ui_message)) or '',
                            default=gettext(u'default' + str(error))), error
+
 
 
 def session_id():

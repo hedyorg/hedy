@@ -5,11 +5,10 @@
       </a>
     </div>
     {% block menu %}
-    {% for item in main_menu_entries() %}
-        <a class="menubar-btn {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} hover:bg-blue-600" href="{{item.href}}">
-          {{ item.caption }}
-        </a>
-    {% endfor %}
+    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'start' %}border-white{% else %}border-transparent{% endif %}" href="/start">{{ ui.nav_start }}</a>
+    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'hedy' %}border-white{% else %}border-transparent{% endif %}" href="/hedy">{{ ui.nav_hedy }}</a>
+    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'explore' %}border-white{% else %}border-transparent{% endif %}" href="/explore">{{ ui.nav_explore }}</a>
+    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'learn-more' %}border-white{% else %}border-transparent{% endif %}" href="/learn-more">{{ ui.nav_learn_more }}</a>
     {% if username %}
       <a class="menubar-btn hover:bg-blue-600 ltr:ml-auto rtl:mr-auto {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{_('program_header')}}</a>
       <div class="dropdown relative z-40" style="display: flex;">
