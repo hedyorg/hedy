@@ -63,8 +63,6 @@ interface State {
 
   unsaved_changes?: boolean;
 
-  readonly unsaved_changes_message?: string;
-
   no_unload_prompt?: boolean;
 
   programsInExecution?: integer;

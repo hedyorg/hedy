@@ -119,7 +119,7 @@ var StopExecution = false;
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
       if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return window.State.unsaved_changes_message;
+        return ErrorMessages['Unsaved_Changes'];
       } else {
         return undefined;
       }
@@ -1071,7 +1071,7 @@ export function prompt_unsaved(cb: () => void) {
   // This variable avoids showing the generic native `onbeforeunload` prompt
   window.State.no_unload_prompt = true;
   if (! window.State.unsaved_changes || ! auth.profile) return cb ();
-  modal.confirm(<string>window.State.unsaved_changes_message, cb);
+  modal.confirm(ErrorMessages['Unsaved_Changes'], cb);
 }
 
 export function load_quiz(level: string) {
@@ -1220,7 +1220,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
       if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return window.State.unsaved_changes_message;
+        return ErrorMessages['Unsaved_Changes'];
       } else {
         return undefined;
       }
