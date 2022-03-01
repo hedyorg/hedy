@@ -480,7 +480,6 @@ def parse():
     querylog.log_value(level=level, lang=lang, session_id=utils.session_id(), username=username)
 
     try:
-        hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
         with querylog.log_time('transpile'):
 
             try:
@@ -489,22 +488,22 @@ def parse():
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.InvalidSpaceException as ex:
-                response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Warning'] = translate_error(ex.error_code, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
                 exception = ex
             except hedy.exceptions.InvalidCommandException as ex:
-                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Error'] = translate_error(ex.error_code, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
                 exception = ex
             except hedy.exceptions.FtfyException as ex:
-                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Error'] = translate_error(ex.error_code, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
                 exception = ex
             except hedy.exceptions.UnquotedEqualityCheck as ex:
-                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Error'] = translate_error(ex.error_code, ex.arguments)
                 response['Location'] = ex.error_location
                 exception = ex
         try:
@@ -595,20 +594,23 @@ def get_class_name(i):
     return i
 
 
-def hedy_error_to_response(ex, translations):
+def hedy_error_to_response(ex):
     return {
-        "Error": translate_error(ex.error_code, translations, ex.arguments),
+        "Error": translate_error(ex.error_code, ex.arguments),
         "Location": ex.error_location
     }
 
 
-def translate_error(code, translations, arguments):
+def translate_error(code, arguments):
     arguments_that_require_translation = ['allowed_types', 'invalid_type', 'invalid_type_2', 'character_found',
                                           'concept', 'tip']
     arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2',
                                            'variable']
     # fetch the error template
-    error_template = translations[code]
+    print(code)
+    error_template = gettext(u'' + str(code))
+    print(code)
+    print(error_template)
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
