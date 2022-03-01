@@ -136,14 +136,14 @@ def routes(app, database, achievements):
     @requires_login
     def delete_class (user, class_id):
         Class = DATABASE.get_class (class_id)
-        if not Class or Class ['teacher'] != user ['username']:
-            return 'No such class', 404
+        if not Class or Class['teacher'] != user['username']:
+            return gettext(u'no_such_class'), 404
 
         DATABASE.delete_class (Class)
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "end_of_semester")
         if achievement:
             return {'achievement': achievement}, 200
-        return {}, 200
+        return '', 200
 
     @app.route('/class/<class_id>/prejoin/<link>', methods=['GET'])
     def prejoin_class (class_id, link):
@@ -174,7 +174,7 @@ def routes(app, database, achievements):
         body = request.json
         if 'id' in body:
             Class = DATABASE.get_class(body['id'])
-        if not Class or Class ['id'] != body['id']:
+        if not Class or Class['id'] != body['id']:
             return utils.error_page(error=404,  ui_message='invalid_class_link')
 
         DATABASE.add_student_to_class(Class['id'], user['username'])
@@ -182,7 +182,7 @@ def routes(app, database, achievements):
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "epic_education")
         if achievement:
             return {'achievement': achievement}, 200
-        return {}, 200
+        return '', 200
 
     @app.route('/class/<class_id>/student/<student_id>', methods=['DELETE'])
     @requires_login

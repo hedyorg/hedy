@@ -54,9 +54,8 @@ export function rename_class(id: string, class_name_prompt: string, class_name_e
   });
 }
 
-export function delete_class(id: string) {
-  modal.confirm (auth.texts['delete_class_prompt'], function () {
-
+export function delete_class(id: string, confirmation: string) {
+  modal.confirm (confirmation, function () {
     $.ajax({
       type: 'DELETE',
       url: '/class/' + id,
@@ -69,19 +68,18 @@ export function delete_class(id: string) {
         window.location.pathname = '/for-teachers';
       }
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
   });
 }
 
-export function join_class(id: string, name: string) {
+export function join_class(id: string, name: string, prompt: string) {
   // If there's no session but we want to join the class, we store the program data in localStorage and redirect to /login.
   if (! auth.profile) {
-    return modal.confirm (auth.texts['join_prompt'], function () {
+    return modal.confirm (prompt, function () {
       localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
       window.location.pathname = '/login';
-      return;
+      //return; Todo TB -> I think this return is redundant? Test when file is fixed!
     });
   }
 
@@ -101,15 +99,14 @@ export function join_class(id: string, name: string) {
           window.location.pathname = '/programs';
       }
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
 }
 
-export function invite_student(class_id: string) {
-    modal.prompt (auth.texts['invite_prompt'], '', function (username) {
+export function invite_student(class_id: string, prompt: string, username_empty: string) {
+    modal.prompt (prompt, '', function (username) {
       if (!username) {
-          return modal.alert(auth.texts['username_empty']);
+          return modal.alert(username_empty);
       }
       $.ajax({
           type: 'POST',
@@ -123,13 +120,13 @@ export function invite_student(class_id: string) {
       }).done(function() {
           location.reload();
       }).fail(function(err) {
-          return modal.alert(err.responseText, 3000, true);
+          modal.alert(err.responseText, 3000, true);
       });
     });
 }
 
-export function remove_student_invite(username: string, class_id: string) {
-  return modal.confirm (auth.texts['delete_invite_prompt'], function () {
+export function remove_student_invite(username: string, class_id: string, prompt: string) {
+  return modal.confirm (prompt, function () {
       $.ajax({
           type: 'POST',
           url: '/remove_student_invite',
@@ -147,14 +144,8 @@ export function remove_student_invite(username: string, class_id: string) {
   });
 }
 
-export function remove_student(class_id: string, student_id: string, self_removal: boolean) {
-  let confirm_text;
-  if (self_removal) {
-    confirm_text = auth.texts['self_removal_prompt'];
-  } else {
-    confirm_text = auth.texts['remove_student_prompt'];
-  }
-  modal.confirm (confirm_text, function () {
+export function remove_student(class_id: string, student_id: string, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'DELETE',
       url: '/class/' + class_id + '/student/' + student_id,

@@ -12,7 +12,7 @@
                  {{_('sent_by')}} <b>{{ invite_data['teacher'] }}</b>. {{_('prompt_join_class')}}
                  <div class="flex flex-row mt-4">
                         <button type="reset" class="green-btn" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{_('join_class')}}</button>
-                        <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{invite_data['username']}}', '{{invite_data['class_id']}}')">{{_('delete_invite')}}</button>
+                        <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{invite_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
                 </div>
              </div>
          {% endif %}
@@ -80,7 +80,7 @@
            <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('my_classes')}}</h2>
            {% for user_class in user_classes %}
              <div id="student_class" class="border-2 rounded-lg border-gray-400 px-4 py-4 flex flex-row mb-4">
-                <p class="text-3xl text-blue-600 inline-block w-1/2">{{ user_class['name']}}</p><button class="red-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.remove_student('{{user_class['id']}}', '{{user_data['username']}}', true)">{{_('leave_class')}}</button>
+                <p class="text-3xl text-blue-600 inline-block w-1/2">{{ user_class['name']}}</p><button class="red-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.remove_student('{{user_class['id']}}', '{{user_data['username']}}', '{{_('self_removal_prompt')}}')">{{_('leave_class')}}</button>
              </div>
            {% endfor %}
        </div>
