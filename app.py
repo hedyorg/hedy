@@ -164,10 +164,6 @@ def load_adventures_per_level(lang, level):
     return all_adventures
 
 
-# Load main menu(do it once, can be cached)
-with open(f'menu.json', 'r', encoding='utf-8') as f:
-    main_menu_json = json.load(f)
-
 logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
@@ -1029,7 +1025,7 @@ def main_page(page):
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
-                               content=learn_more_translations)
+                               current_page='learn-more', content=learn_more_translations)
 
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -1070,7 +1066,7 @@ def main_page(page):
 
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
-                           content=main_page_translations)
+                           current_page='start', content=main_page_translations)
 
 
 @app.route('/explore', methods=['GET'])
@@ -1164,17 +1160,6 @@ def other_keyword_language():
             return make_keyword_lang_obj(g.lang)
     return None
 
-@app.template_global()
-def main_menu_entries():
-    """Return the entries that make up the main menu.
-
-    Calls render_main_menu() to do it, and assume the first part of the current
-    request's path is the "current page".
-    """
-    # path starts with '/', in case of empty call it 'start'
-    first_path_component = request.path[1:].split('/')[0] or 'start'
-    return render_main_menu(first_path_component)
-
 
 @app.template_filter()
 def nl2br(x):
@@ -1237,17 +1222,6 @@ def modify_query(**new_values):
         args[key] = value
 
     return '{}?{}'.format(request.path, url_encode(args))
-
-
-def render_main_menu(current_page):
-    """Render a list of(caption, href, selected, color) from the main menu."""
-    return [dict(
-        caption=item.get(g.lang, item.get('en', '???')),
-        href='/' + item['_'],
-        selected=(current_page == item['_']),
-        accent_color=item.get('accent_color', 'white'),
-        short_name=item['_']
-    ) for item in main_menu_json['nav']]
 
 
 @app.route('/auth/public_profile', methods=['POST'])
