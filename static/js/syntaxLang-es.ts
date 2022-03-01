@@ -5,7 +5,7 @@ export const LANG_es = {
 '_ECHO':'(?:eco|echo)',
 '_FORWARD':'(?:adelante|forward)',
 '_TURN':'(?:girar|turn)',
-'_IS':'(?:es|is)',
+'_IS':'(?:es|is|=)',
 '_SLEEP':'(?:dormir|sleep)',
 '_ADD_LIST':'(?:añadir|add)',
 '_TO_LIST':'(?:a|to)',
