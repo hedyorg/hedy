@@ -720,11 +720,10 @@ def send_email_template(template, email, link, lang="en", username=None):
     with open('templates/base_email.html', 'r', encoding='utf-8') as f:
         body_html = f.read()
 
-    body_html += '<p>'.join(body) + '</p>'
-    body_html += '</div>'
+    body_html = body_html.format({'content': body})
     if link:
-        body_plain = body_plain.replace('@@LINK@@', 'Please copy and paste this link into a new tab: ' + link)
-        body_html = body_html.replace('@@LINK@@', '<a href="' + link + '">Link</a>')
+        body_plain = body_plain.format({'link': 'Please copy and paste this link into a new tab: ' + link})
+        body_html = body_html.format({'link': '<a href="' + link + '">Link</a>'})
 
     send_email(email, subject, body_plain, body_html)
 
