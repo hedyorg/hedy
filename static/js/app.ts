@@ -292,14 +292,13 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
         }
       });
     }).fail(function(xhr) {
-      modal.alert(xhr.responseText, 3000, true);
-      //console.error(xhr);
-      // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
-      //if (xhr.readyState < 4) {
-      //  error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
-      //} else {
-      //  error.show(ErrorMessages['Other_error'], ErrorMessages['ServerError']);
-      //}
+      console.error(xhr);
+       https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+      if (xhr.readyState < 4) {
+        error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
+      } else {
+        error.show(ErrorMessages['Other_error'], ErrorMessages['ServerError']);
+      }
     });
 
   } catch (e: any) {
