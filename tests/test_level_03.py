@@ -292,12 +292,12 @@ class TestsLevel3(HedyTester):
 
   def test_turn_number(self):
     code = textwrap.dedent("""\
-    print Turtle race
-    turn 90""")
+      print Turtle race
+      turn 90""")
 
-    expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    t.right(90)""")
+    expected = HedyTester.dedent(
+      "print(f'Turtle race')",
+      HedyTester.turn_transpiled(90))
 
     self.single_level_tester(
       code=code,
@@ -311,10 +311,10 @@ class TestsLevel3(HedyTester):
     direction is 70
     turn direction""")
 
-    expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    direction = '70'
-    t.right(direction)""")
+    expected = HedyTester.dedent("""\
+      print(f'Turtle race')
+      direction = '70'""",
+      HedyTester.turn_transpiled('direction'))
 
     self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
 
@@ -366,39 +366,39 @@ class TestsLevel3(HedyTester):
     print(f'{naam}')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_forward_ask(self):
     code = textwrap.dedent("""\
-    afstand is ask hoe ver dan?
-    forward afstand""")
+      afstand is ask hoe ver dan?
+      forward afstand""")
 
-    expected = textwrap.dedent("""\
-    afstand = input('hoe ver dan'+'?')
-    t.forward(afstand)
-    time.sleep(0.1)""")
+    expected = HedyTester.dedent(
+      "afstand = input('hoe ver dan'+'?')",
+      HedyTester.forward_transpiled('afstand'))
     self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
 
   def test_turn_ask(self):
     code = textwrap.dedent("""\
-    print Turtle race
-    direction is ask Where to turn?
-    turn direction""")
+      print Turtle race
+      direction is ask Where to turn?
+      turn direction""")
 
-    expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    direction = input('Where to turn'+'?')
-    t.right(direction)""")
+    expected = HedyTester.dedent("""\
+      print(f'Turtle race')
+      direction = input('Where to turn'+'?')""",
+      HedyTester.turn_transpiled('direction'))
 
     self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
   def test_random_turn(self):
     code = textwrap.dedent("""\
-    print Turtle race
-    directions is 10, 100, 360
-    turn directions at random""")
+      print Turtle race
+      directions is 10, 100, 360
+      turn directions at random""")
 
-    expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    directions = ['10', '100', '360']
-    t.right(random.choice(directions))""")
+    expected = HedyTester.dedent("""\
+      print(f'Turtle race')
+      directions = ['10', '100', '360']""",
+      HedyTester.turn_transpiled('random.choice(directions)'))
 
     self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
 

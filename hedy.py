@@ -1152,13 +1152,8 @@ class ConvertToPython_1(ConvertToPython):
 
     def forward(self, args):
         if len(args) == 0:
-            return self.make_forward(50)
-
-        parameter = int(args[0])
-        return self.make_forward(parameter)
-
-    def make_forward(self, parameter):
-        return sleep_after(f"t.forward({parameter})", False)
+            return sleep_after('t.forward(50)', False)
+        return self.make_forward(int(args[0]))
 
     def turn(self, args):
         if len(args) == 0:
@@ -1166,7 +1161,7 @@ class ConvertToPython_1(ConvertToPython):
 
         arg = args[0]
         if self.is_variable(arg) or arg.lstrip("-").isnumeric():
-            return f"t.right({arg})"
+            return self.make_turn(arg)
         elif arg == 'left':
             return "t.left(90)"
         elif arg == 'right':
@@ -1176,6 +1171,24 @@ class ConvertToPython_1(ConvertToPython):
             raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
                                                           allowed_types=get_allowed_types(Command.turn, self.level))
 
+    def make_turn(self, parameter):
+        return self.make_turtle_command(parameter, Command.turn, 'right', False)
+
+    def make_forward(self, parameter):
+        return self.make_turtle_command(parameter, Command.forward, 'forward', True)
+
+    def make_turtle_command(self, parameter, command, command_text, add_sleep):
+        variable = self.get_fresh_var('trtl')
+        transpiled = textwrap.dedent(f"""\
+            {variable} = {parameter}
+            try:
+              {variable} = int({variable})
+            except ValueError:
+              raise Exception(f'While running your program the command {style_closest_command(command)} received the value {style_closest_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
+            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
+        if add_sleep:
+            return sleep_after(transpiled, False)
+        return transpiled
 
 
 
@@ -1228,7 +1241,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def forward(self, args):
         if len(args) == 0:
-            return self.make_forward(50)
+            return sleep_after('t.forward(50)', False)
 
         if ConvertToPython.is_int(args[0]):
             parameter = int(args[0])
@@ -1244,11 +1257,11 @@ class ConvertToPython_2(ConvertToPython_1):
 
         arg = args[0]
         if arg.lstrip('-').isnumeric():
-            return f"t.right({arg})"
+            return self.make_turn(arg)
 
         hashed_arg = hash_var(arg)
         if self.is_variable(hashed_arg):
-            return f"t.right({hashed_arg})"
+            return self.make_turn(hashed_arg)
 
         # the TypeValidator should protect against reaching this line:
         raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
