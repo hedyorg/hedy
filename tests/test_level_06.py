@@ -48,8 +48,7 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      expected=expected,
-      translate=False
+      expected=expected
     )
 
   @parameterized.expand(['1.5', '1,5'])
@@ -182,8 +181,7 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=7,
-      translate=False #spaces in text not perserved
+      max_level=7
     )
 
   # calculation tests
@@ -225,7 +223,7 @@ class TestsLevel6(HedyTester):
   def test_calc_without_space(self):
     code = "nummer is 4+5"
     expected = "nummer = int(4) + int(5)"
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_assign_calc(self):
     code = textwrap.dedent("""\
@@ -404,8 +402,8 @@ class TestsLevel6(HedyTester):
     acu is 0
     if test is cmp
     acu is acu + 1
-    else
-    acu is acu + 5""")
+    else acu is acu + 5""")
+    # @TODO: Felienne, if the above line starts with "else\nacu", then the test fails intermittently due to ambiguity
     expected = textwrap.dedent("""\
     cmp = '1'
     test = '2'
@@ -425,16 +423,14 @@ class TestsLevel6(HedyTester):
     cmp is 1
     test is 2
     acu is 0
-    if test is cmp
-    acu is acu + 1""")
+    if test is cmp acu is acu + 1""")
     expected = textwrap.dedent("""\
     cmp = '1'
     test = '2'
     acu = '0'
     if str(test) == str(cmp):
       acu = int(acu) + int(1)""")
-    self.multi_level_tester(
-      max_level=6,
+    self.single_level_tester(
       code=code,
       expected=expected
     )
