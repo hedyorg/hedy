@@ -163,10 +163,6 @@ def load_adventures_per_level(lang, level):
     return all_adventures
 
 
-# Load main menu(do it once, can be cached)
-with open(f'menu.json', 'r', encoding='utf-8') as f:
-    main_menu_json = json.load(f)
-
 logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
