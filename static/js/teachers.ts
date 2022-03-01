@@ -102,7 +102,6 @@ export function join_class(id: string, name: string) {
           return modal.confirm (auth.texts['join_prompt'], function () {
               localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
               window.location.pathname = '/login';
-              return;
           });
       }
       if (response.achievement) {
