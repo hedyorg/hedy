@@ -625,11 +625,7 @@ def translate_error(code, arguments):
                                            'variable']
 
     translations = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-
-    print(code)
     error_template = gettext(u'' + str(code))
-
-    print(error_template)
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
@@ -638,21 +634,21 @@ def translate_error(code, arguments):
 
         if k in arguments_that_require_translation:
             if isinstance(v, list):
-                arguments[k] = translate_list(translations, v)
+                arguments[k] = translate_list(v)
             else:
                 arguments[k] = gettext(u'' + str(v))
 
     return error_template.format(**arguments)
 
 
-def translate_list(translations, args):
-    translated_args = [translations.get(a, a) for a in args]
+def translate_list(args):
+    translated_args = [gettext(u'' + str(a)) for a in args]
     # Deduplication is needed because diff values could be translated to the same value, e.g. int and float => a number
     translated_args = list(dict.fromkeys(translated_args))
 
     if len(translated_args) > 1:
         return f"{', '.join(translated_args[0:-1])}" \
-               f" {translations.get('or', 'or')} " \
+               f" {gettext(u'or')} " \
                f"{translated_args[-1]}"
     return ''.join(translated_args)
 
