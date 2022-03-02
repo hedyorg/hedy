@@ -82,6 +82,26 @@ class TestsTranslationLevel5(HedyTester):
 
         self.assertEqual(expected, result)
 
+    def test_2116(self):
+        code = textwrap.dedent("""\
+            people is mom, dad, Emma, Sophie
+            dishwasher is people op willekeurig
+            als dishwasher is Sophie
+            print 'too bad I have to do the dishes'
+            anders
+            print 'luckily no dishes because' dishwasher 'is already washing up'""")
+
+        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
+        expected = textwrap.dedent("""\
+            people is mom, dad, Emma, Sophie
+            dishwasher is people at random
+            if dishwasher is Sophie
+            print 'too bad I have to do the dishes'
+            else
+            print 'luckily no dishes because' dishwasher 'is already washing up'""")
+
+        self.assertEqual(expected, result)
+
     def test_if_else_dutch_english(self):
         code = textwrap.dedent("als answer is far vooruit 100 anders vooruit 5")
 
