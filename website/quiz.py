@@ -61,7 +61,7 @@ def routes(app, database, achievements):
             return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
             # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level_source)
+        questions = quiz_data_file_for(g.lang, g.keyword_lang, level_source)
         if not questions:
             return no_quiz_data_error()
 
@@ -130,7 +130,7 @@ def routes(app, database, achievements):
             return quiz_disabled_error()
 
         # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level)
+        questions = quiz_data_file_for(g.lang, g.keyword_lang, level)
         if not questions:
             return no_quiz_data_error()
 
@@ -182,7 +182,7 @@ def routes(app, database, achievements):
             print('-----------------chosen option', chosen_option)
 
             # Reading the yaml file
-            questions = quiz_data_file_for(g.lang, level_source)
+            questions = quiz_data_file_for(g.lang, g.keyword_lang, level_source)
             if not questions:
                 return no_quiz_data_error()
 
@@ -242,7 +242,7 @@ def routes(app, database, achievements):
             return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
         # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level_source)
+        questions = quiz_data_file_for(g.lang, g.keyword_lang, level_source)
         if not questions:
             return no_quiz_data_error()
 
@@ -293,12 +293,20 @@ def quiz_disabled_error():
 def no_quiz_data_error():
     return utils.error_page(error=404, page_error='No quiz data found for this level', menu=False, iframe=True)
 
-def quiz_data_file_for(lang, level):
+def quiz_data_file_for(lang, keyword_lang, level):
     quiz_file = YamlFile.for_file(f'coursedata/quizzes/{lang}.yaml')
     if not quiz_file.exists():
         return None
     if level not in quiz_file['levels'].keys():
         return None
+
+    for k, v in quiz_file['levels'][level].items():
+        print(k)
+        print(v)
+        #question_text
+        #code
+        #mp_choice_options -> list of dicts -> {option_text, feedback}
+        #hint
     return quiz_file['levels'][level]
 
 
