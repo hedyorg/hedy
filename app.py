@@ -983,12 +983,11 @@ def get_specific_adventure(name, level):
         return utils.error_page(error=404, ui_message='no_such_level')
 
     adventure = [x for x in load_adventures_per_level(g.lang, level) if x.get('short_name') == name]
-    prev_level = False
-    if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name]:
-        prev_level = True
-    next_level = False
-    if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name]:
-        next_level = True
+    prev_level = level-1 if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name] else False
+    next_level = level+1 if [x for x in load_adventures_per_level(g.lang, level+1) if x.get('short_name') == name] else False
+
+    print(prev_level)
+    print(next_level)
 
     if not adventure:
         return utils.error_page(error=404, ui_message='no_such_adventure')
@@ -997,9 +996,7 @@ def get_specific_adventure(name, level):
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     return hedyweb.render_specific_adventure(
-        level_defaults=defaults,
-        level_number=level,
-        adventures=adventure)
+        level_defaults=defaults, level_number=level, adventure=adventure, prev_level=prev_level, next_level=next_level)
 
 
 @app.route('/client_messages.js', methods=['GET'])
