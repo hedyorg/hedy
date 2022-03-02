@@ -363,8 +363,7 @@ def routes(app, database):
 
         # Validations, optional fields
         if 'birth_year' in body:
-            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body[
-                'birth_year'] > datetime.datetime.now().year:
+            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return (g.auth_texts.get('year_invalid') + str(datetime.datetime.now().year)), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
