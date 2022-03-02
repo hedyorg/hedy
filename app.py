@@ -623,14 +623,10 @@ def translate_error(code, arguments):
                                           'concept', 'tip']
     arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2',
                                            'variable']
-    # fetch the error template
-    #print(code)
-    #error_template = gettext(u'' + str(code))
-    #print(code)
-    #print(error_template)
 
     translations = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-    error_template = translations[code]
+    error_template = gettext(u'' + str(code))
+    print(arguments.items())
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():

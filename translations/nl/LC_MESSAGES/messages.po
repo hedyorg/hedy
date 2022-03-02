@@ -55,188 +55,179 @@ msgid "public_profile_updated"
 msgstr "Je openbare profiel is aangepast."
 
 #: coursedata/error-messages.txt:1
-#, fuzzy
 msgid "Empty Program"
-msgstr "Inleveren"
+msgstr "Je hebt een leeg programma gemaakt. Typ Hedy code in het linkerveld en probeer het opnieuw."
 
 #: coursedata/error-messages.txt:2
-#, fuzzy
 msgid "Wrong Level"
-msgstr "Level"
+msgstr "Dat was goede code hoor, maar niet op het goede level. Je schreef een {offending_keyword} voor level {working_level}. Tip: {tip}"
 
 #: coursedata/error-messages.txt:3
 msgid "Incomplete"
-msgstr ""
+msgstr "Let op, je bent een stukje code vergeten. Op regel {line_number} moet er achter {incomplete_command} nog tekst komen."
 
 #: coursedata/error-messages.txt:4
-#, fuzzy
 msgid "Invalid"
-msgstr "Dit is geen geldig jaartal, die moet liggen tussen 1900 en {current_year}."
+msgstr "{invalid_command} is geen commando in Hedy level {level}. Bedoelde je {guessed_command}?"
 
 #: coursedata/error-messages.txt:5
 msgid "Invalid Space"
-msgstr ""
+msgstr "Oeps! Regel {line_number} begint met een spatie. Computers kunnen niet zo goed tegen spaties, kun je 'm weghalen?"
 
 #: coursedata/error-messages.txt:6
 msgid "Has Blanks"
-msgstr ""
+msgstr "Let op! Jouw code is nog niet compleet. Er staat nog een laag streepje in, daar moet jij de juiste code nog invullen."
 
 #: coursedata/error-messages.txt:7
 msgid "No Indentation"
-msgstr ""
+msgstr "Je hebt te weinig spaties voor regel {line_number} gebruikt. Er staan {leading_spaces} spaties, maar dat is te weinig. Begin een blok steeds met {indent_size} meer spaties dan de regel ervoor."
 
 #: coursedata/error-messages.txt:8
 msgid "Unexpected Indentation"
-msgstr ""
+msgstr "Je hebt te veel spaties voor regel {line_number} gebruikt. Er staan {leading_spaces} spaties, maar dat is te veel. Begin een blok steeds met {indent_size} spaties."
 
 #: coursedata/error-messages.txt:9
-#, fuzzy
 msgid "Parse"
-msgstr "pagina"
+msgstr "De code die jij intypte is geen geldige Hedy code. Er zit een foutje op regel {location[0]}, op positie {location[1]}. Jij typte {character_found}, maar dat mag op die plek niet."
 
 #: coursedata/error-messages.txt:10
-#, fuzzy
 msgid "Unquoted Text"
-msgstr "Een andere teksttaal"
+msgstr "Let op! Bij print en ask moet voor én achter de tekst een aanhalingsteken komen. Jij bent er ergens eentje vergeten."
 
 #: coursedata/error-messages.txt:11
 msgid "Unquoted Assignment"
-msgstr ""
+msgstr "Let op. Vanaf dit level moet je tekst rechts van de `is` tussen aanhalingstekens zetten. Jij bent dat vergeten voor de tekst {text}."
 
 #: coursedata/error-messages.txt:12
 msgid "Unquoted Equality Check"
-msgstr ""
+msgstr "Als je wilt kijken of een variabele gelijk is aan meerdere woorden, moeten die woorden tussen aanhalingstekens staan."
 
 #: coursedata/error-messages.txt:13
 msgid "Var Undefined"
-msgstr ""
+msgstr "Je probeert de variabele {name} te gebruiken, maar die heb je niet ingesteld. Het kan ook zijn dat je het woord {name} wilde gebruiken en aanhalingstekens vergeten bent."
 
 #: coursedata/error-messages.txt:14
 msgid "Cyclic Var Definition"
-msgstr ""
+msgstr "De variabele {variable} moet worden ingesteld voor je die aan de rechterkant van een is mag gebruiken."
 
 #: coursedata/error-messages.txt:15
 msgid "Lonely Echo"
-msgstr ""
+msgstr "Je gebruikt een echo voor een ask, of een echo zonder een ask. Vraag eerst met een ask om invoer voordat je die herhaalt met een echo."
 
 #: coursedata/error-messages.txt:16
 msgid "Too Big"
-msgstr ""
+msgstr "Wow! Jouw programma is wel {lines_of_code} regels lang! Maar... wij kunnen maar {max_lines} regels aan in dit level. Maak je programma wat kleiner en probeer het nog eens."
 
 #: coursedata/error-messages.txt:17
 msgid "Invalid Argument Type"
-msgstr ""
+msgstr "Je kan {command} niet gebruiken met {invalid_argument} omdat dat {invalid_type} is. Je kan {command} wel gebruiken met {allowed_types}."
 
 #: coursedata/error-messages.txt:18
 msgid "Invalid Argument"
-msgstr ""
+msgstr "Je kan {command} niet gebruiken met {invalid_argument}. Je kan {command} wel gebruiken met {allowed_types}."
 
 #: coursedata/error-messages.txt:19
 msgid "Invalid Type Combination"
-msgstr ""
+msgstr "Je kan {invalid_argument} en {invalid_argument_2} niet gebruiken met {operation} omdat de ene {invalid_type} is, en de andere {invalid_type_2}. Verander {invalid_argument} in {invalid_type_2} of {invalid_argument_2} in {invalid_type}."
 
 #: coursedata/error-messages.txt:20
 msgid "Unsupported Float"
-msgstr ""
+msgstr "Helaas, Hedy ondersteunt nog geen kommagetallen. Verander {value} in een geheel getal."
 
 #: coursedata/error-messages.txt:21
 msgid "Locked Language Feature"
-msgstr ""
+msgstr "In jouw programma zit {concept}! Goed gedaan! Maar {concept} is nog niet beschikbaar. Dat komt in een later level."
 
 #: coursedata/error-messages.txt:22
 msgid "Missing Command"
-msgstr ""
+msgstr "Het lijkt erop dat je vergeten bent om een commando te gebruiken op regel {line_number}."
 
 #: coursedata/error-messages.txt:23
 msgid "ask_needs_var"
-msgstr ""
+msgstr "Vanaf level 2 hoort ask met een variabele ervoor en aanhalingstekens. Bijv: naam is ask 'Hoe heet jij?'"
 
 #: coursedata/error-messages.txt:24
 msgid "echo_out"
-msgstr ""
+msgstr "Vanaf level 2 heb je geen echo meer nodig! Je kunt een variabele gebruiken om iets te herhalen. Voorbeeld: naam is ask 'Hoe heet jij?' print 'hallo' naam"
 
 #: coursedata/error-messages.txt:25
-#, fuzzy
 msgid "space"
-msgstr "Opslaan"
+msgstr "een spatie"
 
 #: coursedata/error-messages.txt:26
 msgid "comma"
-msgstr ""
+msgstr "een komma"
 
 #: coursedata/error-messages.txt:27
-#, fuzzy
 msgid "question mark"
-msgstr "Vraag"
+msgstr "een vraagteken"
 
 #: coursedata/error-messages.txt:28
 msgid "newline"
-msgstr ""
+msgstr "een enter"
 
 #: coursedata/error-messages.txt:29
 msgid "period"
-msgstr ""
+msgstr "een punt"
 
 #: coursedata/error-messages.txt:30
 msgid "exclamation mark"
-msgstr ""
+msgstr "een uitroepteken"
 
 #: coursedata/error-messages.txt:31
 msgid "dash"
-msgstr ""
+msgstr "een streepje"
 
 #: coursedata/error-messages.txt:32
 #, fuzzy
 msgid "star"
-msgstr "Share"
+msgstr "een sterretje"
 
 #: coursedata/error-messages.txt:33
 msgid "single quotes"
-msgstr ""
+msgstr "een hoge komma"
 
 #: coursedata/error-messages.txt:34
 msgid "double quotes"
-msgstr ""
+msgstr "twee hoge komma's"
 
 #: coursedata/error-messages.txt:35
 msgid "slash"
-msgstr ""
+msgstr "een schuin streepje"
 
 #: coursedata/error-messages.txt:36
 #, fuzzy
 msgid "string"
-msgstr "Mijn gegevens"
+msgstr "tekst"
 
 #: coursedata/error-messages.txt:37
 msgid "nested blocks"
-msgstr ""
+msgstr "een blok in een blok"
 
 #: coursedata/error-messages.txt:38
 msgid "or"
-msgstr ""
+msgstr "of"
 
 #: coursedata/error-messages.txt:39
-#, fuzzy
 msgid "number"
-msgstr "Naam"
+msgstr "een getal"
 
 #: coursedata/error-messages.txt:40
-#, fuzzy
 msgid "integer"
-msgstr "Invullen"
+msgstr "een getal"
 
 #: coursedata/error-messages.txt:41
 msgid "float"
-msgstr ""
+msgstr "een getal"
 
 #: coursedata/error-messages.txt:42
 msgid "list"
-msgstr ""
+msgstr "een lijstje"
 
 #: coursedata/error-messages.txt:43
 #, fuzzy
 msgid "input"
-msgstr "Hint?"
+msgstr "invoer van een ask"
 
 #: templates/class-overview.html:16
 msgid "visible_columns"
