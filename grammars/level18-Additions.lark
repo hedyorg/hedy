@@ -1,6 +1,6 @@
 // adds round brackets in print() and range(), and changes ask to input
 
-command:+= input_is | input_equals | input_is_empty_brackets |  input_equals_empty_brackets | print_empty_brackets -= ask > assign_is | assign_equals
+command:+= input_is | input_equals | input_is_empty_brackets |  input_equals_empty_brackets | print_empty_brackets -= ask > assign
 
 print: _PRINT (_SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | var_access | sum) (_COMMA (quoted_text | list_access | var_access | sum))* _SPACE* _RIGHT_BRACKET _SPACE*)?
 print_empty_brackets: _PRINT _SPACE* _LEFT_BRACKET _SPACE* _RIGHT_BRACKET

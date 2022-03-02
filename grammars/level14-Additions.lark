@@ -2,8 +2,7 @@
 
 condition:+= equality_check_dequals | smaller | bigger | not_equal | smaller_equal | bigger_equal
 
-equality_check_is: comparison_arg _SPACE? _IS _SPACE? comparison_arg
-equality_check_equals: comparison_arg _EQUALS comparison_arg
+equality_check: comparison_arg (_SPACE _IS _SPACE | _EQUALS) comparison_arg
 equality_check_dequals: comparison_arg _SPACE? _DOUBLE_EQUALS _SPACE? comparison_arg
 smaller: comparison_arg _SPACE? _SMALLER _SPACE? comparison_arg
 bigger: comparison_arg _SPACE? _LARGER _SPACE? comparison_arg
