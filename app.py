@@ -1156,10 +1156,12 @@ def translate_keywords():
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
-    error_messages = YamlFile.for_file(f'coursedata/client-messages/{lang}.yaml').to_dict()
-    if not error_messages:
-        error_messages = YamlFile.for_file('coursedata/client-messages/en.yaml').to_dict()
-    response = make_response(render_template("client_messages.js", error_messages=json.dumps(error_messages)))
+    # Not really nice, but we don't call this often as it is cached
+    d = collections.defaultdict(lambda: 'Unknown Exception')
+    d.update(YamlFile.for_file('coursedata/client-messages/en.yaml').to_dict())
+    d.update(YamlFile.for_file(f'coursedata/client-messages/{g.lang}.yaml').to_dict())
+
+    response = make_response(render_template("client_messages.js", error_messages=json.dumps(d)))
 
     if not is_debug_mode():
         # Cache for longer when not devving
