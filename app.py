@@ -1158,7 +1158,9 @@ def translate_keywords():
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
-    error_messages = TRANSLATIONS.get_translations(g.lang, "ClientErrorMessages")
+    error_messages = YamlFile.for_file(f'coursedata/client-messages/{lang}.yaml')
+    if not error_messages.exists():
+        error_messages = YamlFile.for_file('coursedata/emails/en.yaml')
     response = make_response(render_template("client_messages.js", error_messages=json.dumps(error_messages)))
 
     if not is_debug_mode():
