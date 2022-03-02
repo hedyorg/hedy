@@ -47,6 +47,15 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(expected, result)
 
+    def test_sleep(self):
+        code = "sleep"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
+        expected = "slaap"
+
+        self.assertEqual(expected, result)
+
+
     def test_print_var_text(self):
         code = "welkom is Hallo welkom bij Hedy\nprint welkom Veel plezier"
 
