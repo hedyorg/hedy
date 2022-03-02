@@ -361,7 +361,7 @@ async function afterLogin(loginData: any) {
   const joinClass = joinClassString ? JSON.parse(joinClassString) : undefined;
   if (joinClass) {
     localStorage.removeItem('hedy-join');
-    return join_class(joinClass.link, joinClass.name);
+    return join_class(joinClass.id, joinClass.name);
   }
 
   const redirect = getSavedRedirectPath();
