@@ -1166,7 +1166,6 @@ def client_messages():
     if not is_debug_mode():
         # Cache for longer when not developing
         response.cache_control.max_age = 60 * 60  # Seconds
-
     return response
 
 
