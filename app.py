@@ -625,8 +625,11 @@ def translate_error(code, arguments):
                                            'variable']
 
     translations = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-    error_template = gettext(u'%(code)', code=str(code))
-    print(arguments.items())
+
+    print(code)
+    error_template = gettext(u'' + str(code))
+
+    print(error_template)
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
@@ -637,7 +640,7 @@ def translate_error(code, arguments):
             if isinstance(v, list):
                 arguments[k] = translate_list(translations, v)
             else:
-                arguments[k] = translations.get(v, v)
+                arguments[k] = gettext(u'' + str(v))
 
     return error_template.format(**arguments)
 
