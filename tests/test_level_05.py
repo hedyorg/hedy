@@ -191,8 +191,8 @@ class TestsLevel5(HedyTester):
     dishwasher is people at random
     if dishwasher is Sophie
     print 'too bad I have to do the dishes'
-    else print 'luckily no dishes because' dishwasher 'is already washing up'""")
-    # @TODO: Felienne, if the above line starts with "else\nprint", then the test fails intermittently due to ambiguity
+    else
+    print 'luckily no dishes because' dishwasher 'is already washing up'""")
 
     expected = textwrap.dedent("""\
     people = ['mom', 'dad', 'Emma', 'Sophie']
@@ -230,6 +230,7 @@ class TestsLevel5(HedyTester):
       code=code,
       expected=expected
     )
+
   def test_print_if_linebreak_statement(self):
     # Breaking an if statement and its following statement should be
     # permited until level 7
@@ -238,8 +239,8 @@ class TestsLevel5(HedyTester):
     people is 1, 2, 3, 3
     dishwasher is people at random
     test is 1
-    if dishwasher is test print 'too bad I have to do the dishes!'""")
-    # @TODO: Felienne, if the above line changes to "test\nprint", then the test fails intermittently due to ambiguity
+    if dishwasher is test
+    print 'too bad I have to do the dishes!'""")
 
     expected = textwrap.dedent("""\
     people = ['1', '2', '3', '3']
