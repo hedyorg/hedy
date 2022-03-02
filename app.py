@@ -1436,7 +1436,7 @@ ACHIEVEMENTS.routes(app, DATABASE)
 # *** QUIZ BACKEND ***
 
 from website import quiz
-quiz.routes(app, DATABASE, ACHIEVEMENTS)
+quiz.routes(app, DATABASE, ACHIEVEMENTS, QUIZZES)
 
 # *** STATISTICS ***
 

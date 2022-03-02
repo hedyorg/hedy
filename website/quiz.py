@@ -22,31 +22,15 @@ icons = {
   'triangle_6': '<svg class="option-icon" viewBox="0 0 50 50"><polygon class="shape" points="25.03 1.95 0.78 43.95 49.28 43.95 25.03 1.95"></polygon><path class="number" d="M24.01,36.97c-4.41,0-6.45-3.05-6.45-8.33,0-5.31,2.07-11.76,8.78-11.76,2.19,0,4.47.69,5.61,2.7l-2.48,2.31a4.00,4.00,0,0,0-3.36-1.59c-2.58,0-3.80,1.98-4.26,6.21a5.46,5.46,0,0,1,4.71-2.43c3.53,0,4.8,2.64,4.8,5.46A7.06,7.06,0,0,1,24.01,36.97Zm.9-9.62a3.03,3.03,0,0,0-3.21,2.7c-.03,2.31.57,3.39,2.49,3.39,2.22,0,3.09-1.5,3.09-3.48C27.28,28.3,26.68,27.34,24.91,27.34Z"></path></svg>',
 }
 
-# Todo TB -> This temporary here, move to hedy_content and duplicate ADVENTURES structure
-class QuizData:
-    def __init__(self, language):
-        self.language = language
-        self.keyword_lang = "en"
-        self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
-        self.quizzes = YamlFile.for_file(f'coursedata/quizzes/{self.language}.yaml').to_dict()
 
-    def set_keyword_language(self, language):
-        if language != self.keyword_lang:
-            self.keyword_lang = language
-            self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
-
-    def get_quiz_data_for_level(self, level):
-        return self.quizzes.get(level)
-
-    def get_quiz_data_for_level_question(self, level, question):
-        return self.quizzes.get(level).get(question)
-
-
-def routes(app, database, achievements):
+def routes(app, database, achievements, quizzes):
     global DATABASE
     global ACHIEVEMENTS
+    global QUIZZES
+
     DATABASE = database
     ACHIEVEMENTS = achievements
+    QUIZZES = quizzes
 
     @app.route('/quiz/start/<int:level>', methods=['GET'])
     def get_quiz_start(level):
@@ -200,7 +184,6 @@ def routes(app, database, achievements):
         if request.method == "POST":
             # The value is a character and not a text
             chosen_option = request.form.get("submit-button")
-            print('-----------------chosen option', chosen_option)
 
             # Reading the yaml file
             questions = quiz_data_file_for(g.lang, g.keyword_lang, level_source)
@@ -321,13 +304,6 @@ def quiz_data_file_for(lang, keyword_lang, level):
     if level not in quiz_file['levels'].keys():
         return None
 
-    for k, v in quiz_file['levels'][level].items():
-        print(k)
-        print(v)
-        #question_text
-        #code
-        #mp_choice_options -> list of dicts -> {option_text, feedback}
-        #hint
     return quiz_file['levels'][level]
 
 
