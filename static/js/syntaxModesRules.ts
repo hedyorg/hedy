@@ -668,6 +668,10 @@ function rule_level3() {
     regex: START_WORD + currentLang._FORWARD + END_WORD,
     token: ['keyword'],
     next: 'start',
+  },{
+    regex: '\,',
+    token: ['keyword'],
+    next: 'start',
   }];
 }
 
