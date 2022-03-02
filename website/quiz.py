@@ -66,6 +66,9 @@ def routes(app, database, achievements, quizzes):
         quiz_for_lang = QUIZZES[g.lang]
         quiz_for_lang.set_keyword_language(g.keyword_lang)
 
+        if question_nr > quiz_for_lang.get_highest_question_level(level_source):
+            return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
+
         questions = quiz_for_lang.get_quiz_data_for_level(level_source)
         question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
 
@@ -76,9 +79,6 @@ def routes(app, database, achievements, quizzes):
         g.prefix = '/hedy'
 
         question_status = 'start' if attempt == 1 else 'false'
-
-        if question_nr > quiz_for_lang.get_highest_question_level(level_source):
-            return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
 
         question_obj = question_options_for(question)
 
