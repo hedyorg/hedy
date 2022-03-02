@@ -311,20 +311,31 @@ def routes(app, database, achievements):
                                next_assignment=1,
                                cross=icons['cross'],
                                check=icons['check'],
+                               triangle=icons['triangle'],
+                               diamond=icons['diamond'],
+                               square=icons['square'],
+                               circle=icons['circle'],
+                               pentagram=icons['pentagram'],
+                               triangle_6=icons['triangle_6'],
                                lang=g.lang)
 
 
 def get_result_items(quiz_answers, questions):
+
     result_items = []
     for i in range(len(questions)):
         item = {}
         item["question_text"] = questions[i + 1]["question_text"]
+        item["question_code"] = questions[i + 1]["code"]
         item["is_correct"] = quiz_answers[i + 1][-1] == questions[i + 1]["correct_answer"]
-        if "option_text" in question_options_for(questions[i + 1]):
+        item["index_chosen"] = index_from_letter(quiz_answers[i + 1][-1])
+        item["index_correct"] = index_from_letter(questions[i + 1]["correct_answer"])
+        if "option_text" in question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]:
             item["option_text"] = question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["option_text"]
-        elif "code" in question_options_for(questions[i + 1]):
-            item["code"] =  question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["code"]
+        elif "code" in question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]:
+            item["code"] = question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["code"]
         result_items.append(item)
+    print(result_items)
     return result_items
 
 
@@ -358,7 +369,7 @@ def get_question(quiz_data, question_number):
 
 
 def is_correct_answer(question, letter):
-    return question['correct_answerq'] == letter
+    return question['correct_answer'] == letter
 
 
 def get_correct_answer(question):

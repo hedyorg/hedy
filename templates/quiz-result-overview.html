@@ -1,33 +1,57 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
-<link rel="stylesheet" href="{{static('/css/generated.css')}}">
-<link rel="stylesheet" href="{{static('/css/additional.css')}}">
-<link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
-<link rel="stylesheet" href="{{ static('/css/progress-bar.css') }}">
-<script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
-<script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-<script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-
-
 {% extends "quiz.html" %}
 
 {% block question %}
-<div class="flex flex-col">
-    <h1 class="p-8 font-bold text-4xl font-slab"> {{ ui.end_quiz }} </h1>
-    <ul class="result-list">
+    <body>
+    <div class="flex flex-col">
+        <h1 class="p-8 font-bold text-4xl font-slab"> {{ ui.results_quiz }} </h1>
 
-       {% for i in range(result_items|length)%}
-                 <li class="text-green-900 text-2xl flex flex-row font-slab">{{ i + 1 }}) {{ result_items[i].question_text}}
-                       {% if not result_items[i].is_correct  %}
-                             <div class="step incorrect flex flex-row justify-items ">{{ cross|safe }}<p class="mr-3 font-bold">{{ i + 1 }}</p></div>
-                       {% else %}
-                              <div class="step correct flex flex-row justify-items ">{{ check|safe }}<p class="mr-3 font-bold">{{ i + 1 }}</p></div>
-                      {% endif %}
-                 </li>
-       {% endfor %}
-    </ul>
+        {% for i in range(result_items|length) %}
+              <div class="flex flex-col option-col">
 
-    <button class="green-btn ltr:ml-1 rtl:mr-1"
-            onclick="window.parent.location = '{{ hedy_link(level, next_assignment) }}';"> {{ ui.go_to_level }} {{ level }} </button>
-</div>
+            <div class="bg-gray-200">
+                <div class="flex-col">
+                    {% if "question_text" in result_items[i] %}
+                        <p class="question-text text-l font-bold align-top"> {{ result_items[i].question_text | nl2br }}</p>
+                    {% endif %}
+                    {% if "question_code" in result_items[i] %}
+                        {% if result_items[i]["question_code"] != "..." %}
+                        <pre><code class="block text-l">{{ result_items[i].question_code | nl2br }}</code></pre>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="
+                {% if not result_items[i].is_correct %}
+                    option-block incorrect-option p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row
+                {% else %}
+                    option-block p-1 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row
+                {% endif %}
+                     ">
+                    {% if result_items[i].index_chosen == 0 %}
+                        {{ triangle|safe }}
+                    {% elif result_items[i].index_chosen == 1 %}
+                        {{ diamond|safe }}
+                    {% elif result_items[i].index_chosen == 2 %}
+                        {{ square|safe }}
+                    {% elif result_items[i].index_chosen == 3 %}
+                        {{ circle|safe }}
+                    {% elif result_items[i].index_chosen == 4 %}
+                        {{ pentagram |safe }}
+                    {% elif result_items[i].index_chosen == 5 %}
+                        {{ triangle_6|safe }}
+                    {% endif %}
+                    {% if "option_text" in result_items[i] %}
+                        <p class="option-text text-l font-bold align-top"> {{ result_items[i].option_text | nl2br }}</p>
+                    {% elif "code" in result_items[i] %}
+                        <pre><code class="block text-l">{{ result_items[i].code | nl2br }}</code></pre>
+                    {% endif %}
+                </div>
+            </div>
+            </div>
+            </div>
+        {% endfor %}
+        <button class="green-btn ltr:ml-1 rtl:mr-1"
+                onclick="window.parent.location = '{{ hedy_link(level, next_assignment) }}';"> {{ ui.go_to_level }} {{ level }} </button>
+    </div>
+    </body>
 {% endblock %}
 
