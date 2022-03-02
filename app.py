@@ -21,8 +21,7 @@ import traceback
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, \
-    is_teacher, update_is_teacher
+from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -793,7 +792,7 @@ def programs_page(user):
 def query_logs():
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return 'unauthorized', 403
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     body = request.json
     if body is not None and not isinstance(body, dict):
@@ -803,11 +802,11 @@ def query_logs():
     if not is_admin(user):
         username_filter = body.get('username')
         if not class_id or not username_filter:
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', []):
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -821,7 +820,7 @@ def get_log_results():
 
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return 'unauthorized', 403
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
@@ -1011,13 +1010,57 @@ def default_landing_page():
     return main_page('start')
 
 
+@app.route('/signup', methods=['GET'])
+def signup_page():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('signup.html', page_title=hedyweb.get_page_title('signup'), current_page='login')
+
+
+@app.route('/login', methods=['GET'])
+def login_page():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('login.html', page_title=hedyweb.get_page_title('login'), current_page='login')
+
+
+@app.route('/recover', methods=['GET'])
+def recover_page():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('recover.html', page_title=hedyweb.get_page_title('recover'), current_page='login')
+
+
+@app.route('/reset', methods=['GET'])
+def reset_page():
+    #If there is a user logged in -> don't allow password reset
+    if current_user()['username']:
+        return redirect('/my-profile')
+
+    username = request.args.get('username', default=None, type=str)
+    token = request.args.get('token', default=None, type=str)
+    username = None if username == "null" else username
+    token = None if token == "null" else token
+
+    if not username or not token:
+        return utils.error_page(error=403, ui_message='unauthorized')
+    return render_template('reset.html', page_title=hedyweb.get_page_title('reset'), reset_username=username, reset_token=token, current_page='login')
+
+
+@app.route('/my-profile', methods=['GET'])
+@requires_login
+def profile_page(user):
+    programs = DATABASE.public_programs_for_user(user['username'])
+    public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
+
+    return render_template('profile.html', page_title=hedyweb.get_page_title('my-profile'), programs=programs,
+                           public_settings=public_profile_settings, current_page='my-profile')
+
+
 @app.route('/<page>')
 def main_page(page):
     if page == 'favicon.ico':
         abort(404)
-
-    if page in ['signup', 'login', 'my-profile', 'recover', 'reset']:
-        return auth_templates(page, hedyweb.get_page_title(page))
 
     if page == "my-achievements":
         return achievements_page()
@@ -1224,6 +1267,7 @@ def modify_query(**new_values):
     return '{}?{}'.format(request.path, url_encode(args))
 
 
+# We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
 @app.route('/auth/public_profile', methods=['POST'])
 @requires_login
 def update_public_profile(user):
@@ -1248,8 +1292,8 @@ def update_public_profile(user):
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
-        return {'achievement': achievement}, 200
-    return '', 200
+        return {'success': g.auth_texts.get('public_profile_updated'), 'achievement': achievement}, 200
+    return {'success': g.auth_texts.get('public_profile_updated')}, 200
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
