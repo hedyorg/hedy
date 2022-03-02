@@ -69,6 +69,16 @@ class TestsLevel6(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_ask_equals(self):
+    code = textwrap.dedent("""\
+    antwoord = ask 'wat is je lievelingskleur?'""")
+
+    expected = textwrap.dedent("""\
+    antwoord = input(f'wat is je lievelingskleur?')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+
   def test_chained_ask(self):
     code = textwrap.dedent("""\
     a is ask 'What is a?'
