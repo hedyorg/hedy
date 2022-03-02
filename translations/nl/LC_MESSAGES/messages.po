@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-02 11:03+0100\n"
+"POT-Creation-Date: 2022-03-02 11:36+0100\n"
 "PO-Revision-Date: 2022-02-25 13:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl\n"
@@ -18,43 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app.py:572
+#: app.py:571
 msgid "program_contains_error"
 msgstr "Dit programma bevat een foutje, weet je zeker dat je hem wilt delen?"
 
-#: app.py:628
-msgid "%(code)"
+#: app.py:823
+msgid "minutes"
+msgstr "minuten"
+
+#: app.py:826
+msgid "hours"
+msgstr "uur"
+
+#: app.py:829
+msgid "days"
+msgstr "dagen"
+
+#: app.py:832
+msgid "ago-1"
 msgstr ""
 
-#: app.py:1155 app.py:1157
+#: app.py:832
+msgid "ago-2"
+msgstr "geleden"
+
+#: app.py:1152 app.py:1154
 msgid "translate_error"
 msgstr ""
 "Er is iets misgegaan met het vertalen van de code. Probeer je code te "
 "runnen om te kijken of er misschien een foutje in zit. Code met foutjes "
 "kan niet vertaald worden."
 
-#: app.py:1263 website/auth.py:219 website/auth.py:266 website/auth.py:399
+#: app.py:1262 website/auth.py:219 website/auth.py:266 website/auth.py:399
 #: website/auth.py:425 website/auth.py:455 website/auth.py:556
 #: website/auth.py:586 website/auth.py:627 website/auth.py:654
-#: website/teacher.py:82 website/teacher.py:192 website/teacher.py:249
-#: website/teacher.py:294 website/teacher.py:327 website/teacher.py:363
-#: website/teacher.py:444
+#: website/teacher.py:80 website/teacher.py:190 website/teacher.py:247
+#: website/teacher.py:292 website/teacher.py:325 website/teacher.py:361
+#: website/teacher.py:442
 msgid "ajax_error"
 msgstr "Er is een fout opgetreden, probeer het nog eens."
 
-#: app.py:1265
+#: app.py:1264
 msgid "image_invalid"
 msgstr "Jouw gekozen profielfoto is ongeldig."
 
-#: app.py:1267
+#: app.py:1266
 msgid "personal_text_invalid"
 msgstr "Jouw persoonlijke tekst is ongeldig."
 
-#: app.py:1269
+#: app.py:1268
 msgid "favourite_program_invalid"
 msgstr "Jouw gekozen favoriete programma is ongeldig."
 
-#: app.py:1281 app.py:1282
+#: app.py:1280 app.py:1281
 msgid "public_profile_updated"
 msgstr "Je openbare profiel is aangepast."
 
@@ -239,7 +255,6 @@ msgid "dash"
 msgstr "een streepje"
 
 #: coursedata/error-messages.txt:32
-#, fuzzy
 msgid "star"
 msgstr "een sterretje"
 
@@ -256,7 +271,6 @@ msgid "slash"
 msgstr "een schuin streepje"
 
 #: coursedata/error-messages.txt:36
-#, fuzzy
 msgid "string"
 msgstr "tekst"
 
@@ -285,7 +299,6 @@ msgid "list"
 msgstr "een lijstje"
 
 #: coursedata/error-messages.txt:43
-#, fuzzy
 msgid "input"
 msgstr "invoer van een ask"
 
@@ -1277,7 +1290,7 @@ msgstr "Ga naar vraag 1 van de quiz"
 #: website/auth.py:165 website/auth.py:221 website/auth.py:401
 #: website/auth.py:558 website/auth.py:567 website/auth.py:588
 #: website/auth.py:629 website/auth.py:636 website/auth.py:656
-#: website/teacher.py:296 website/teacher.py:329
+#: website/teacher.py:294 website/teacher.py:327
 msgid "username_invalid"
 msgstr "Je gebruikersnaam is ongeldig."
 
@@ -1425,91 +1438,94 @@ msgstr "Programma wordt niet meer gedeeld."
 msgid "favourite_success"
 msgstr "Je programma is ingesteld als favoriet."
 
-#: website/teacher.py:77
+#: website/teacher.py:75
 msgid "only_teacher_create_class"
 msgstr "Alleen leerkrachten mogen klassen maken!"
 
-#: website/teacher.py:84
+#: website/teacher.py:82
 msgid "class_name_invalid"
 msgstr "Deze klasnaam is ongeldig."
 
-#: website/teacher.py:90
+#: website/teacher.py:88
 msgid "class_name_duplicate"
 msgstr "Je hebt al een klas met deze naam."
 
-#: website/teacher.py:140
+#: website/teacher.py:138
 msgid "no_such_class"
 msgstr "Deze klas bestaat niet."
 
-#: website/teacher.py:235
+#: website/teacher.py:233
 msgid "customization_deleted"
 msgstr "Personalisatie succesvol verwijderd."
 
-#: website/teacher.py:286
+#: website/teacher.py:284
 msgid "class_customize_success"
 msgstr "Klas succesvol gepersonaliseerd."
 
-#: website/teacher.py:311
+#: website/teacher.py:309
 msgid "student_not_existing"
 msgstr "Deze gebruikersnaam bestaat niet."
 
-#: website/teacher.py:313
+#: website/teacher.py:311
 msgid "student_already_in_class"
 msgstr "Deze leerling zit al in jouw klas."
 
-#: website/teacher.py:315
+#: website/teacher.py:313
 msgid "student_already_invite"
 msgstr "Deze leerling heeft al een openstaande uitnodiging."
 
-#: website/teacher.py:368
+#: website/teacher.py:366
 msgid "no_accounts"
 msgstr "Er zijn geen accounts om aan te maken."
 
-#: website/teacher.py:379
+#: website/teacher.py:377
 msgid "unique_usernames"
 msgstr "Alle gebruikersnamen moeten uniek zijn."
 
-#: website/teacher.py:382
+#: website/teacher.py:380
 msgid "unique_emails"
 msgstr "Alle e-mailadressen moeten uniek zijn."
 
-#: website/teacher.py:393
+#: website/teacher.py:391
 msgid "usernames_exist"
 msgstr "Een of meerdere gebruikersnamen is al in gebruik."
 
-#: website/teacher.py:396
+#: website/teacher.py:394
 msgid "emails_exist"
 msgstr "Een of meerdere e-mailadressen is al in gebruik."
 
-#: website/teacher.py:407
+#: website/teacher.py:405
 msgid "accounts_created"
 msgstr "Account succesvol aangemaakt."
 
-#: website/teacher.py:446
+#: website/teacher.py:444
 msgid "adventure_id_invalid"
 msgstr "Dit avontuur id is ongeldig."
 
-#: website/teacher.py:448
+#: website/teacher.py:446
 msgid "adventure_name_invalid"
 msgstr "Deze avontuur naam is ongeldig."
 
-#: website/teacher.py:450
+#: website/teacher.py:448
 msgid "level_invalid"
 msgstr "Dit Hedy level is ongeldig."
 
-#: website/teacher.py:452
+#: website/teacher.py:450
 msgid "content_invalid"
 msgstr "Dit avontuur is ongeldig."
 
-#: website/teacher.py:454 website/teacher.py:456
+#: website/teacher.py:452 website/teacher.py:454
 msgid "adventure_length"
 msgstr "Jouw avontuur moet minimaal 20 karakters zijn."
 
-#: website/teacher.py:467 website/teacher.py:502
+#: website/teacher.py:465 website/teacher.py:500
 msgid "adventure_duplicate"
 msgstr "Je hebt al een avontuur met deze naam."
 
-#: website/teacher.py:479
+#: website/teacher.py:477
 msgid "adventure_updated"
 msgstr "Jouw avontuur is bijgewerkt!"
+
+#~ msgid "%(code)"
+#~ msgstr ""
 
