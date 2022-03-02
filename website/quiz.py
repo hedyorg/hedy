@@ -80,8 +80,8 @@ def routes(app, database, achievements):
             return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
             # Reading the yaml file
+            # Todo: It doesn't make any sense to read the YAML each time: store once and keep retrieving
         questions = quiz_data_file_for(g.lang, g.keyword_lang, level_source)
-        print(questions)
 
         if not questions:
             return no_quiz_data_error()

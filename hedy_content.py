@@ -111,6 +111,29 @@ class NoSuchAdventure:
     return {}
 
 
+class Quizzes:
+    def __init__(self, language):
+        self.language = language
+        self.keyword_lang = "en"
+        self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
+        self.quizzes = YamlFile.for_file(f'coursedata/quizzes/{self.language}.yaml').to_dict()
+
+    def set_keyword_language(self, language):
+        if language != self.keyword_lang:
+            self.keyword_lang = language
+            self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
+
+    def get_quiz_data_for_level(self, level):
+        return self.quizzes.get(level)
+
+    def get_quiz_data_for_level_question(self, level, question):
+        return self.quizzes.get(level).get(question)
+
+
+class NoSuchQuiz:
+    def get_defaults(self, level):
+        return {}
+
 @attr.s(slots=True)
 class DefaultValues:
   """Default texts for a level"""
