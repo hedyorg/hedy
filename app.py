@@ -1164,7 +1164,7 @@ def client_messages():
     response = make_response(render_template("client_messages.js", error_messages=json.dumps(d)))
 
     if not is_debug_mode():
-        # Cache for longer when not devving
+        # Cache for longer when not developing
         response.cache_control.max_age = 60 * 60  # Seconds
 
     return response
