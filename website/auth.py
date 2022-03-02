@@ -135,7 +135,7 @@ countries = {'AF': 'Afghanistan', 'AX': 'Åland Islands', 'AL': 'Albania', 'DZ':
 def remember_current_user(db_user):
     session['user-ttl'] = times() + 5 * 60
     session['user'] = pick(db_user, 'username', 'email', 'is_teacher')
-    session['lang'] = db_user.get('lang', 'en')
+    session['lang'] = db_user.get('language', 'en')
     session['keyword_lang'] = db_user.get('keyword_language', 'en')
 
 
