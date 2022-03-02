@@ -17,7 +17,7 @@ class TestsTranslationLevel17(HedyTester):
     def test_indent_for_loop_english_dutch(self):
         code = textwrap.dedent("""\
         for i in range 1 to 12:
-             print 'Hedy' i""")
+            print 'Hedy' i""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\

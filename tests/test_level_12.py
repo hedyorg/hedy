@@ -55,8 +55,7 @@ class TestsLevel12(HedyTester):
       code=code,
       expected=expected,
       expected_commands=['is', 'if', 'print'],
-      max_level=16,
-     translate=False) #space between = is not preserved (but is needed for the test)
+      max_level=16) #space between = is not preserved (but is needed for the test)
 
   # print tests
   def test_print_float(self):
@@ -246,7 +245,7 @@ class TestsLevel12(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=self.result_in(list),
-      max_level=15, translate=False)
+      max_level=15)
 
   def test_equality_with_lists(self):
     code = textwrap.dedent("""\

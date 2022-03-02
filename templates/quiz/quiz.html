@@ -3,7 +3,6 @@
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
     <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
     <link rel="stylesheet" href="{{ static('/css/progress-bar.css') }}">
-    <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     {% if achievement %}
@@ -22,9 +21,9 @@
                    {% elif not quiz_answers[i + 1] %}
                        <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
                    {% elif quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
-                         <div class="step incorrect flex flex-row justify-items ">{{ cross|safe }}<p class="mr-3 font-bold">{{ i + 1 }}</p></div>
+                         <div class="step incorrect flex flex-row justify-items ">{{ cross|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
                    {% elif quiz_answers[i + 1][-1] == questions[i + 1].correct_answer %}
-                       <div class="step check flex flex-row justify-items ">{{ check|safe }}<p class="mr-3 font-bold">{{ i + 1 }}</p></div>
+                       <div class="step check flex flex-row justify-items ">{{ check|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
                   {% endif %}
               {% endfor %}
         </div>

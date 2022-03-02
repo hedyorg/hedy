@@ -21,8 +21,7 @@ import traceback
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, \
-    is_teacher, update_is_teacher
+from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -163,10 +162,6 @@ def load_adventures_per_level(lang, level):
     })
     return all_adventures
 
-
-# Load main menu(do it once, can be cached)
-with open(f'menu.json', 'r', encoding='utf-8') as f:
-    main_menu_json = json.load(f)
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -797,7 +792,7 @@ def programs_page(user):
 def query_logs():
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return 'unauthorized', 403
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     body = request.json
     if body is not None and not isinstance(body, dict):
@@ -807,11 +802,11 @@ def query_logs():
     if not is_admin(user):
         username_filter = body.get('username')
         if not class_id or not username_filter:
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', []):
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -825,7 +820,7 @@ def get_log_results():
 
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return 'unauthorized', 403
+        return utils.error_page(error=403, ui_message='unauthorized')
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
@@ -871,6 +866,7 @@ def index(level, step):
     adventure_name = ''
 
     # If step is a string that has more than two characters, it must be an id of a program
+    # Todo TB -> I don't like this structure, can't we use a dedicated URL for loaded programs?!
     if step and isinstance(step, str) and len(step) > 2:
         result = DATABASE.program_by_id(step)
         if not result:
@@ -878,8 +874,7 @@ def index(level, step):
 
         user = current_user()
         public_program = 'public' in result and result['public']
-        if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(
-                user):
+        if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
             return utils.error_page(error=404, ui_message='no_such_program')
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
@@ -899,10 +894,15 @@ def index(level, step):
         now = timems()
         for current_level, timestamp in customizations.get('opening_dates', {}).items():
             if utils.datetotimeordate(timestamp) > utils.datetotimeordate(utils.mstoisostring(now)):
-                available_levels.remove(int(current_level))
+                try:
+                    available_levels.remove(int(current_level))
+                except:
+                    print("Error: there is an openings date without a level")
 
-    if level not in level_defaults_for_lang.levels or ('levels' in customizations and level not in available_levels):
-        return utils.error_page(error=404, ui_message='no_such_level')
+    if level not in level_defaults_for_lang.levels and level <= hedy.HEDY_MAX_LEVEL:
+        return utils.error_page(error=404, ui_message='level_not_translated')
+    if 'levels' in customizations and level not in available_levels:
+        return utils.error_page(error=403, ui_message='level_not_class')
 
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
@@ -1010,13 +1010,57 @@ def default_landing_page():
     return main_page('start')
 
 
+@app.route('/signup', methods=['GET'])
+def signup_page():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('signup.html', page_title=hedyweb.get_page_title('signup'), current_page='login')
+
+
+@app.route('/login', methods=['GET'])
+def login_page():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('login.html', page_title=hedyweb.get_page_title('login'), current_page='login')
+
+
+@app.route('/recover', methods=['GET'])
+def recover_page():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('recover.html', page_title=hedyweb.get_page_title('recover'), current_page='login')
+
+
+@app.route('/reset', methods=['GET'])
+def reset_page():
+    #If there is a user logged in -> don't allow password reset
+    if current_user()['username']:
+        return redirect('/my-profile')
+
+    username = request.args.get('username', default=None, type=str)
+    token = request.args.get('token', default=None, type=str)
+    username = None if username == "null" else username
+    token = None if token == "null" else token
+
+    if not username or not token:
+        return utils.error_page(error=403, ui_message='unauthorized')
+    return render_template('reset.html', page_title=hedyweb.get_page_title('reset'), reset_username=username, reset_token=token, current_page='login')
+
+
+@app.route('/my-profile', methods=['GET'])
+@requires_login
+def profile_page(user):
+    programs = DATABASE.public_programs_for_user(user['username'])
+    public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
+
+    return render_template('profile.html', page_title=hedyweb.get_page_title('my-profile'), programs=programs,
+                           public_settings=public_profile_settings, current_page='my-profile')
+
+
 @app.route('/<page>')
 def main_page(page):
     if page == 'favicon.ico':
         abort(404)
-
-    if page in ['signup', 'login', 'my-profile', 'recover', 'reset']:
-        return auth_templates(page, hedyweb.get_page_title(page))
 
     if page == "my-achievements":
         return achievements_page()
@@ -1024,7 +1068,7 @@ def main_page(page):
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
-                               content=learn_more_translations)
+                               current_page='learn-more', content=learn_more_translations)
 
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -1065,7 +1109,7 @@ def main_page(page):
 
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
-                           content=main_page_translations)
+                           current_page='start', content=main_page_translations)
 
 
 @app.route('/explore', methods=['GET'])
@@ -1159,17 +1203,6 @@ def other_keyword_language():
             return make_keyword_lang_obj(g.lang)
     return None
 
-@app.template_global()
-def main_menu_entries():
-    """Return the entries that make up the main menu.
-
-    Calls render_main_menu() to do it, and assume the first part of the current
-    request's path is the "current page".
-    """
-    # path starts with '/', in case of empty call it 'start'
-    first_path_component = request.path[1:].split('/')[0] or 'start'
-    return render_main_menu(first_path_component)
-
 
 @app.template_filter()
 def nl2br(x):
@@ -1234,17 +1267,7 @@ def modify_query(**new_values):
     return '{}?{}'.format(request.path, url_encode(args))
 
 
-def render_main_menu(current_page):
-    """Render a list of(caption, href, selected, color) from the main menu."""
-    return [dict(
-        caption=item.get(g.lang, item.get('en', '???')),
-        href='/' + item['_'],
-        selected=(current_page == item['_']),
-        accent_color=item.get('accent_color', 'white'),
-        short_name=item['_']
-    ) for item in main_menu_json['nav']]
-
-
+# We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
 @app.route('/auth/public_profile', methods=['POST'])
 @requires_login
 def update_public_profile(user):
@@ -1269,8 +1292,8 @@ def update_public_profile(user):
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
-        return {'achievement': achievement}, 200
-    return '', 200
+        return {'success': g.auth_texts.get('public_profile_updated'), 'achievement': achievement}, 200
+    return {'success': g.auth_texts.get('public_profile_updated')}, 200
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
