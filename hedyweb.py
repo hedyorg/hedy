@@ -1,36 +1,13 @@
 import collections
 import json
-
 from website.yaml_file import YamlFile
 import attr
 import glob
 from os import path
-
 from flask import g
 from flask_helpers import render_template
-
-import hedy_content
 from website.auth import current_user, is_teacher
-import re
 import utils
-from config import config
-
-class Translations:
-  def __init__(self):
-    self.data = {}
-
-    translations = glob.glob('coursedata/texts/*.yaml')
-    for trans_file in translations:
-      lang = path.splitext(path.basename(trans_file))[0]
-      self.data[lang] = YamlFile.for_file(trans_file)
-
-  def get_translations(self, language, section):
-    # Merge with English when lacking translations
-    # Start from a defaultdict
-    d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(**self.data.get('en', {}).get(section, {}))
-    d.update(**self.data.get(language, {}).get(section, {}))
-    return d
 
 class AchievementTranslations:
   def __init__(self):
