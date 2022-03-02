@@ -631,6 +631,7 @@ def translate_error(code, arguments):
 
     translations = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
     error_template = translations[code]
+
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
         if k in arguments_that_require_highlighting:
@@ -1255,6 +1256,7 @@ def modify_query(**new_values):
     return '{}?{}'.format(request.path, url_encode(args))
 
 
+# We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
 @app.route('/auth/public_profile', methods=['POST'])
 @requires_login
 def update_public_profile(user):
@@ -1279,6 +1281,7 @@ def update_public_profile(user):
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
+        #Todo TB -> Check if we require message or success on front-end
         return {'message': gettext(u'public_profile_updated'), 'achievement': achievement}, 200
     return {'message': gettext(u'public_profile_updated')}, 200
 

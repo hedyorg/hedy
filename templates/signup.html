@@ -1,7 +1,6 @@
 {% extends "auth.html" %}
 
 {% block main %}
-</style>
 <div class="w-3/4 bg-white shadow-md rounded p-4 mb-4 mx-auto">
   <form id="signup" class="js-validated-form mx-auto" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')">
         <h2 class="text-center">{{_('create_account')}}</h2>
@@ -101,10 +100,6 @@
         </div>
         <div class="flex flex-row w-full mt-4">
             <button type="submit" class="green-btn mx-auto">{{_('create_account')}}</button>
-        </div>
-        <div class="my-2">
-            <div id="error" class="flex-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md text-center" role="alert" style="display: none;"></div>
-            <div id="success" class="flex-0 bg-red-100 border-t-4 border-green-500 rounded-b text-red-900 px-4 py-3 shadow-md text-center" role="alert" style="display: none;"></div>
         </div>
   </form>
   <form class="text-center" onsubmit="event.preventDefault (); window.location.href='/login'">

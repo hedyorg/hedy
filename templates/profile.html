@@ -22,11 +22,11 @@
    <div id="public_profile" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
      <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('public_profile')}}</h2>
      <h4 class="text-center {% if not public_settings %}hidden{% endif %}" id="public_profile_redirect">{{_('public_profile_visit')}} <a href="/user/{{ username }}">{{_('public_profile_link')}}</a></h4>
-     <form class="js-validated-form auth" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
-     <div class="mb-4 w-full">
-         <h3 class="font-semibold">{{_('profile_picture')}}</h3>
-         <input name="profile_picture" id="profile_picture" type=number style="display: none;" {% if public_settings.image %} value="{{ public_settings.image }}" {% endif %}>
-         <div class="flex flex-wrap w-full">
+     <form class="js-validated-form" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
+     <div class="flex flex-col">
+         <h3 class="px-8 font-semibold">{{_('profile_picture')}}</h3>
+         <input name="profile_picture" id="profile_picture" type=number class="hidden" required {% if public_settings.image %} value="{{ public_settings.image }}" {% endif %}>
+         <div class="flex flex-wrap w-3/4 border border-gray-400 rounded-lg p-4">
             {% for i in range(1, 12) %}
                 <div class="w-32 h-32 rounded-lg mr-4 relative profile_image {% if public_settings.image and public_settings.image == i|string() %}border-2 border-blue-600{% endif %}" id="profile_image_{{ i }}" onclick="hedyApp.select_profile_image({{ i }});">
                     <div class="relative h-full">
@@ -36,14 +36,14 @@
             {% endfor %}
          </div>
      </div>
-     <div class="mb-4">
-         <h3 class="mb-2 font-semibold">{{_('personal_text')}}</h3>
-         <textarea class="block w-1/2 h-32 px-2 py-1 text-gray-700 border border-solid border-gray-300 rounded" id="personal_text" maxlength="200" minlength="5" placeholder="{{_('your_personal_text')}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
+     <div class="flex flex-col">
+         <h3 class="px-8 font-semibold">{{_('personal_text')}}</h3>
+         <textarea class="block w-3/4 h-32 px-2 py-1 border border-gray-400 rounded-lg" id="personal_text" required maxlength="200" minlength="5" placeholder="{{_('your_personal_text')}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
      </div>
      {% if programs %}
          <div class="mb-4">
-             <h3 class="mb-2 font-semibold">{{_('favourite_program')}}</h3>
-             <select id="favourite_program" class="block">
+             <h3 class="px-8 font-semibold">{{_('favourite_program')}}</h3>
+             <select id="favourite_program" class="block appearance-none w-3/4 border border-gray-400 py-3 px-4 rounded-lg">
                 <option value="" selected disabled hidden>{{_('select')}}</option>
                 {% for program in programs %}
                     <option value="{{program.id}}" {% if public_settings.favourite_program and public_settings.favourite_program == program.id %} selected {% endif %}>{{program.name}}</option>
@@ -51,9 +51,9 @@
             </select>
          </div>
      {% endif %}
-     <div class="mb-4 mt-6 flex flex-row items-center text-center border-red-500 border p-4 rounded-lg w-full">
-        <input type="checkbox" name="agree_terms" id="agree_terms" required class="mr-4" {% if public_settings %}checked{% endif %}>
-        <label for="agree_terms" class="cursor-pointer" style="width: 100%;">{{_('public_profile_info')}}</label>
+     <div class="mb-4 mt-6 flex flex-row items-center border-gray-400 border p-4 rounded-lg w-3/4">
+        <input type="checkbox" name="agree_terms" id="agree_terms" required class="ltr:mr-6 rtl:ml-6" {% if public_settings %}checked{% endif %}>
+        <label for="agree_terms" class="cursor-pointer w-full">{{_('public_profile_info')}}</label>
      </div>
      <div class="mb-4 mt-6 flex flex-row">
         <button type="submit" class="green-btn">{{_('update_public')}}</button>

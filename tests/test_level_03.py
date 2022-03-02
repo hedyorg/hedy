@@ -96,7 +96,7 @@ class TestsLevel3(HedyTester):
     expected = textwrap.dedent("""\
     print(f'hallo!')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_print_asterisk(self):
     code = "print *Jouw* favoriet is dus kleur"
@@ -114,7 +114,7 @@ class TestsLevel3(HedyTester):
 
     output = "'Welcome to OceanView! '"
 
-    self.single_level_tester(code=code, expected=expected, output=output, translate=False)
+    self.single_level_tester(code=code, expected=expected, output=output)
 
   def test_print_slashes(self):
     code = "print Welcome to O/ceanView"
@@ -345,7 +345,7 @@ class TestsLevel3(HedyTester):
     expected = textwrap.dedent("""\
     print(f'hallo wereld')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   #combined tests
   def test_ask_print(self):

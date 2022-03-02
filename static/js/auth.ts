@@ -30,6 +30,7 @@ interface User {
 interface UserForm {
   username?: string;
   email?: string;
+  token?: string;
   password?: string;
   birth_year?: string;
   language?: string,
@@ -49,7 +50,6 @@ export const auth = {
   entityify: function (string: string) {
       return string.replace (/&/g, '&amp;').replace (/</g, '&lt;').replace (/>/g, '&gt;').replace (/"/g, '&quot;').replace (/'/g, '&#39;').replace (/`/g, '&#96;');
    },
-  emailRegex: /^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/,
   redirect: function (where: string) {
     where = '/' + where;
     window.location.pathname = where;
@@ -72,21 +72,6 @@ export const auth = {
         auth.redirect ('my-profile');
       });
     });
-  },
-  error: function (message: string, element?: string | null, id?: string) {
-    $ (id || '#error').html (message);
-    $ (id || '#error').css ('display', 'block');
-    if (element) $ ('#' + element).css ('border', 'solid 1px red');
-  },
-  clear_error: function (id?: string) {
-    $ (id || '#error').html ('');
-    $ (id || '#error').css ('display', 'none');
-    $ ('form *').css ('border', '');
-  },
-  success: function (message: string, id?: string) {
-    $ ('#error').css ('display', 'none');
-    $ (id || '#success').html (message);
-    $ (id || '#success').css ('display', 'block');
   },
   submit: function (op: string) {
     const values: UserForm = {};
@@ -126,8 +111,7 @@ export const auth = {
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
         afterLogin({"teacher": false});
       }).fail (function (response) {
-        auth.clear_error();
-        auth.error(response.responseText);
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
@@ -142,7 +126,6 @@ export const auth = {
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
         afterLogin({"teacher": response['teacher']});
       }).fail (function (response) {
-        auth.clear_error();
         modal.alert(response.responseText, 3000, true);
       });
     }
@@ -174,9 +157,12 @@ export const auth = {
     }
 
     if (op === 'change_password') {
-      const payload = {old_password: values.old_password, password: values.password, password_repeat: values.password_repeat};
+      const payload = {
+        old_password: values.old_password,
+        password: values.password,
+        password_repeat: values.password_repeat
+      };
 
-      auth.clear_error ('#error-password');
       $.ajax ({
         type: 'POST',
         url: '/auth/change_password',
@@ -193,9 +179,9 @@ export const auth = {
     }
 
     if (op === 'recover') {
-      const payload = {username: values.username};
-
-      auth.clear_error ();
+      const payload = {
+        username: values.username
+      };
       $.ajax ({
         type: 'POST', url: '/auth/recover',
         data: JSON.stringify (payload),
@@ -210,23 +196,20 @@ export const auth = {
 
     if (op === 'reset') {
       const payload = {
-        username: auth.reset?.['username'],
-        token: auth.reset?.['token'],
+        username: values.username,
+        token: values.token,
         password: values.password,
         password_repeat: values.password_repeat
       };
 
-      auth.clear_error ();
       $.ajax ({
-        type: 'POST',
-        url: '/auth/reset',
+        type: 'POST', url: '/auth/reset',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
-        modal.alert(response.responseText, 3000, false);
+        modal.alert(response.responseText, 2000, false);
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
-        delete auth.reset;
         setTimeout(function (){
           auth.redirect ('login');
         }, 2000);
@@ -241,7 +224,6 @@ export const auth = {
         personal_text: $('#personal_text').val() ? $('#personal_text').val():  undefined,
         favourite_program: $('#favourite_program').val() ? $('#favourite_program').val():  undefined
       }
-
       $.ajax ({
         type: 'POST',
         url: '/auth/public_profile',
@@ -278,15 +260,20 @@ export const auth = {
     });
   },
 
+  // Todo TB Feb 2022 -> Re-write part of this functionality to the back-end as well (separate PR from #2101)
   changeUserEmail: function (username: string, email: string) {
     modal.prompt ('Please enter the corrected email', email, function (correctedEmail) {
       if (correctedEmail === email) return;
-      if (! correctedEmail.match (auth.emailRegex)) return modal.alert ('Please enter a valid email.', 2000, true);
-      $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
+      $.ajax ({
+        type: 'POST',
+        url: '/admin/changeUserEmail',
+        data: JSON.stringify ({username: username, email: correctedEmail}),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         location.reload ();
-      }).fail (function (error) {
-        console.log (error);
-        modal.alert (['Error when changing the email for User', username].join (' '), 2000, true);
+      }).fail (function () {
+        // Todo TB -> Remove hard-coded string
+        modal.alert (['Error when changing the email for user', username].join (' '), 2000, true);
       });
     });
   },
@@ -300,46 +287,6 @@ if ($ ('#country')) {
     html += '<option value="' + code + '">' + countries [code] + '</option>';
   });
   $ ('#country').html (html);
-}
-
-$ ('.auth input').get ().map (function (el) {
-  // Clear red borders if input was marked from a previous error.
-  el.addEventListener ('input', () => auth.clear_error());
-});
-
-// We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
-// Todo TB Feb 2022 -> Why do we do this ?!
-// This request returns A LOT of front-end errors, something we really really don't want
-// It isn't relevant to the front-end if we are logged in as the back-end will take care of that
-// We have to do some deep clean-up here to make the code understandable, readable and efficient
-$.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-   if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
-   auth.profile = response;
-});
-
-if (window.location.pathname === '/reset') {
-  const query = window.location.search.slice (1).split ('&');
-  const params: Record<string, string> = {};
-  query.map (function (item) {
-    const split = item.split ('=');
-    params [split [0]] = decodeURIComponent (split [1]);
-  });
-  // If we don't receive username and token, the redirect link is invalid. We redirect the user to /recover.
-  if (! params['username'] || ! params['token']) auth.redirect ('recover')
-  else auth.reset = params;
-}
-
-if (window.location.pathname === '/signup') {
-  const login_username = localStorage.getItem ('hedy-login-username');
-  if (login_username) {
-    localStorage.removeItem ('hedy-login-username');
-    if (login_username.match ('@')) $ ('#email').val (login_username);
-    else                            $ ('#username').val (login_username);
-  }
-  const redirect = localStorage.getItem('hedy-save-redirect');
-  if (redirect && redirect.includes('invite')) {
-    $ ('#is_teacher_div').hide();
-  }
 }
 
 $("#language").change(function () {
