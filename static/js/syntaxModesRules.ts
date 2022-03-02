@@ -661,6 +661,10 @@ function rule_level3() {
     token: ['keyword'],
     next: 'start',
   },{
+    regex: "^(" + currentLang._SLEEP + ")(.*)$",
+    token: ['keyword','text'],
+    next: 'start',
+  },{
     regex: START_WORD + currentLang._FORWARD + END_WORD,
     token: ['keyword'],
     next: 'start',
