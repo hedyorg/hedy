@@ -45,7 +45,7 @@ def routes(app, database, achievements):
 
         statistics.add(current_user()['username'], lambda id_: DATABASE.add_quiz_started(id_, level))
 
-        return render_template('startquiz.html', level=level, next_assignment=1)
+        return render_template('quiz/startquiz.html', level=level, next_assignment=1)
 
     # Quiz mode
     # Fill in the filename as source
@@ -98,7 +98,7 @@ def routes(app, database, achievements):
 
         quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
 
-        return render_template('quiz_question.html',
+        return render_template('quiz/quiz_question.html',
                                level_source=level_source,
                                quiz_answers=quiz_answers,
                                questionStatus=question_status,
@@ -150,7 +150,7 @@ def routes(app, database, achievements):
             if achievement:
                 achievement = json.dumps(achievement)
 
-        return render_template('endquiz.html', correct=session.get('correct_answer', 0),
+        return render_template('quiz/endquiz.html', correct=session.get('correct_answer', 0),
                                total_score=total_score,
                                level_source=level,
                                achievement=achievement,
@@ -263,7 +263,7 @@ def routes(app, database, achievements):
 
         quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
 
-        return render_template('feedback.html',
+        return render_template('quiz/feedback.html',
                                quiz_answers=quiz_answers,
                                question=question,
                                questions=questions,

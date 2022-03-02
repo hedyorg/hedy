@@ -45,10 +45,7 @@ class TestsTranslationLevel5(HedyTester):
         code = "if answer is far forward 100 else forward 5"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = textwrap.dedent("""\
-        als answer is far
-        vooruit 100
-        anders vooruit 5""")
+        expected = "als answer is far vooruit 100 anders vooruit 5"
 
         self.assertEqual(expected, result)
 
@@ -86,28 +83,23 @@ class TestsTranslationLevel5(HedyTester):
         self.assertEqual(expected, result)
 
     def test_if_else_dutch_english(self):
-        code = "als answer is far vooruit 100 anders vooruit 5"
+        code = textwrap.dedent("als answer is far vooruit 100 anders vooruit 5")
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        expected = textwrap.dedent("""\
-        if answer is far
-        forward 100
-        else forward 5""")
+        expected = "if answer is far forward 100 else forward 5"
 
         self.assertEqual(expected, result)
 
     def test_ifelse_should_go_before_assign(self):
         code = textwrap.dedent("""\
-          kleur is geel
-          als kleur is groen antwoord is ok anders antwoord is stom
-          print antwoord""")
+            kleur is geel
+            als kleur is groen antwoord is ok anders antwoord is stom
+            print antwoord""")
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = textwrap.dedent("""\
             kleur is geel
-            if kleur is groen
-            antwoord is ok
-            else antwoord is stom
+            if kleur is groen antwoord is ok else antwoord is stom
             print antwoord""")
 
         self.assertEqual(expected, result)
@@ -125,9 +117,6 @@ class TestsTranslationLevel5(HedyTester):
         code = f"{if_keyword} name {is_kwrd} Hedy {print_keyword} 'Great!' {else_kwrd} {print_keyword} 'Oh no'"
 
         result = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)
-        expected = textwrap.dedent("""\
-        if name is Hedy
-        print 'Great!'
-        else print 'Oh no'""")
+        expected = "if name is Hedy print 'Great!' else print 'Oh no'"
 
         self.assertEqual(expected, result)

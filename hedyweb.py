@@ -88,6 +88,7 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   # Meta stuff
   arguments_dict['level_nr'] = str(level_number)
   arguments_dict['level'] = level_number
+  arguments_dict['current_page'] = 'hedy'
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
   arguments_dict['customizations'] = customizations

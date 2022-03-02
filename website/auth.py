@@ -121,8 +121,6 @@ def update_is_teacher(user, is_teacher_value=1):
         send_email_template('welcome_teacher', user['email'], '')
 
 
-EMAILS = YamlFile.for_file('website/emails.yaml')
-
 # Thanks to https://stackoverflow.com/a/34499643
 def requires_login(f):
     @wraps(f)
@@ -203,9 +201,7 @@ def store_new_account(account, email):
         resp = make_response({'username': username, 'token': hashed_token})
     # Otherwise, we send an email with a verification link and we return an empty body
     else:
-        send_email_template('welcome_verify', email,
-                            email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                username) + '&token=' + urllib.parse.quote_plus(hashed_token))
+        send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'], username=user['username'])
         resp = make_response({})
     return user, resp
 
@@ -306,11 +302,9 @@ def routes(app, database):
                 if language not in['scratch', 'other_block', 'python', 'other_text']:
                     return g.auth_texts.get('programming_invalid'), 400
 
-        user = DATABASE.user_by_username(body['username'].strip().lower())
-        if user:
+        if DATABASE.user_by_username(body['username'].strip().lower()):
             return g.auth_texts.get('exists_username'), 403
-        email = DATABASE.user_by_email(body['email'].strip().lower())
-        if email:
+        if DATABASE.user_by_email(body['email'].strip().lower()):
             return g.auth_texts.get('exists_email'), 403
 
         # We receive the pre-processed user and response package from the function
@@ -319,18 +313,18 @@ def routes(app, database):
         if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] is True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
-                mailchimp_subscribe_user(email)
+                mailchimp_subscribe_user(user['email'])
             # Otherwise, we send an email to notify about the subscription to the main email address
             else:
-                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
+                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', user['email'], '<p>' + user['email'] + '</p>')
 
         # If someone wants to be a Teacher -> sent a mail to manually set it
         if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
-            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', user['email'], '<p>' + user['email'] + '</p>')
 
         # If someone agrees to the third party contacts -> sent a mail to manually write down
         if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
-            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', email, f'<p>{email}</p>')
+            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', user['email'], '<p>' + user['email'] + '</p>')
 
         # We automatically login the user
         cookie = make_salt()
@@ -448,7 +442,7 @@ def routes(app, database):
         DATABASE.update_user(user['username'], {'password': hashed})
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
         if not is_testing_request(request):
-            send_email_template('change_password', user['email'], None)
+            send_email_template('change_password', user['email'], None, lang=user['language'], username=user['username'])
 
         return '', 200
 
@@ -498,7 +492,7 @@ def routes(app, database):
                 if is_testing_request(request):
                    resp = {'username': user['username'], 'token': hashed_token}
                 else:
-                    send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
+                    send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=body['language'], username=user['username'])
 
                 # We check whether the user is in the Mailchimp list.
                 if not is_testing_request(request) and MAILCHIMP_API_URL:
@@ -579,8 +573,8 @@ def routes(app, database):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
-            send_email_template('recover_password', user['email'], email_base_url() + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token))
-            return '', 200
+            send_email_template('recover_password', user['email'], email_base_url() + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token), lang=user['language'], username=user['username'])
+            return g.auth_texts.get('sent_password_recovery'), 200
 
     @app.route('/auth/reset', methods=['POST'])
     def reset():
@@ -612,9 +606,9 @@ def routes(app, database):
         user = DATABASE.user_by_username(body['username'])
 
         if not is_testing_request(request):
-            send_email_template('reset_password', user['email'], None)
+            send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
 
-        return '', 200
+        return g.auth_texts.get('password_resetted'), 200
 
     # *** ADMIN ROUTES ***
 
@@ -622,7 +616,7 @@ def routes(app, database):
     def mark_as_teacher():
         user = current_user()
         if not is_admin(user) and not is_testing_request(request):
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
         body = request.json
 
@@ -642,13 +636,14 @@ def routes(app, database):
         is_teacher_value = 1 if body['is_teacher'] else 0
         update_is_teacher(user, is_teacher_value)
 
+        # Todo TB feb 2022 -> Return the success message here instead of fixing in the front-end
         return '', 200
 
     @app.route('/admin/changeUserEmail', methods=['POST'])
     def change_user_email():
         user = current_user()
         if not is_admin(user):
-            return 'unauthorized', 403
+            return utils.error_page(error=403, ui_message='unauthorized')
 
         body = request.json
 
@@ -675,7 +670,7 @@ def routes(app, database):
         if is_testing_request(request):
            resp = {'username': user['username'], 'token': hashed_token}
         else:
-            send_email_template('welcome_verify', body['email'], email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
+            send_email_template('welcome_verify', body['email'], email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'], username=user['username'])
 
         return '', 200
 
@@ -711,11 +706,17 @@ def send_email(recipient, subject, body_plain, body_html):
     else:
         print('Email sent to ' + recipient)
 
-def send_email_template(template, email, link):
-    texts = EMAILS
+def send_email_template(template, email, link, lang="en", username=None):
+    texts = YamlFile.for_file(f'coursedata/emails/{lang}.yaml')
+    if not texts.exists():
+        texts = YamlFile.for_file('coursedata/emails/en.yaml')
+
     subject = texts['email_' + template + '_subject']
     body = texts['email_' + template + '_body'].split('\n')
-    body =[texts['email_hello']] + body
+    if username:
+        body = [texts['email_hello']] + [" "] + [username] + ["!"] + body
+    else:
+        body = [texts['email_hello']] + ["!"] + body
     if link:
         body[len(body) - 1] = body[len(body ) - 1] + ' @@LINK@@'
     body = body + texts['email_goodbye'].split('\n')
@@ -731,23 +732,6 @@ def send_email_template(template, email, link):
         body_html = body_html.replace('@@LINK@@', '<a href="' + link + '">Link</a>')
 
     send_email(email, subject, body_plain, body_html)
-
-def auth_templates(page, page_title):
-    if page == 'my-profile':
-        programs = DATABASE.public_programs_for_user(current_user()['username'])
-        public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
-        return render_template('profile.html', page_title=page_title, programs=programs,
-                               public_settings=public_profile_settings, current_page='my-profile')
-    # Todo TB Feb 2022 -> We have to clean this up (a lot!)
-    # Short overview of the to-do:
-    #   - Verify that the user is not logged in when attempting to visit signup / login / recover
-    #   - If so, redirect to my-profile -> This is currently done on the front-end: remove there
-    #   - If a user attempts to visit reset:
-    #       - If logged in: destory session, we can't reset with an active account logged in
-    #       - Catch the two arguments: username / token
-    #       - Sent these to the front-end REMOVE current front-end retrieval of arguments this makes no sense
-    if page in['signup', 'login', 'recover', 'reset']:
-        return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
 
 
 def email_base_url():
