@@ -117,6 +117,8 @@ class Quizzes:
         self.keyword_lang = "en"
         self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
         self.quizzes = YamlFile.for_file(f'coursedata/quizzes/{self.language}.yaml').to_dict()
+        if not self.quizzes:
+            self.quizzes = YamlFile.for_file(f'coursedata/quizzes/en.yaml').to_dict()
 
     def set_keyword_language(self, language):
         if language != self.keyword_lang:
