@@ -1,3 +1,4 @@
+import collections
 import os
 import utils
 from hedy import ALL_LANGUAGES
@@ -805,9 +806,10 @@ def send_email(recipient, subject, body_plain, body_html):
 
 
 def send_email_template(template, email, link='', lang="en", username=''):
-    texts = YamlFile.for_file(f'coursedata/emails/{lang}.yaml')
-    if not texts.exists():
-        texts = YamlFile.for_file('coursedata/emails/en.yaml')
+    # Not really nice, but we don't call this often as it is cached
+    texts = collections.defaultdict(lambda: 'Unknown Exception')
+    texts.update(YamlFile.for_file('coursedata/emails/en.yaml').to_dict())
+    texts.update(YamlFile.for_file(f'coursedata/emails/{lang}.yaml').to_dict())
 
     subject = texts[template + '_subject']
     body = texts['hello'].format(username=username) + "\n\n"
