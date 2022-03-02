@@ -51,7 +51,6 @@ ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
 
-TRANSLATIONS = hedyweb.Translations()
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
@@ -819,19 +818,18 @@ def get_log_results():
 
 
 def get_user_formatted_age(now, date):
-    texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
     program_age = now - date
     if program_age < 1000 * 60 * 60:
-        measure = texts['minutes']
+        measure = gettext(u'minutes')
         date = round(program_age / (1000 * 60))
     elif program_age < 1000 * 60 * 60 * 24:
-        measure = texts['hours']
+        measure = gettext(u'hours')
         date = round(program_age / (1000 * 60 * 60))
     else:
-        measure = texts['days']
+        measure = gettext(u'days')
         date = round(program_age / (1000 * 60 * 60 * 24))
 
-    return f"{texts['ago-1']} {date} {measure} {texts['ago-2']}"
+    return f"{gettext(u'ago-1')} {date} {measure} {gettext(u'ago-2')}"
 
 
 # routing to index.html
@@ -1158,9 +1156,9 @@ def translate_keywords():
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
-    error_messages = YamlFile.for_file(f'coursedata/client-messages/{lang}.yaml')
-    if not error_messages.exists():
-        error_messages = YamlFile.for_file('coursedata/emails/en.yaml')
+    error_messages = YamlFile.for_file(f'coursedata/client-messages/{lang}.yaml').to_dict()
+    if not error_messages:
+        error_messages = YamlFile.for_file('coursedata/client-messages/en.yaml').to_dict()
     response = make_response(render_template("client_messages.js", error_messages=json.dumps(error_messages)))
 
     if not is_debug_mode():
