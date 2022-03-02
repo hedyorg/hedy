@@ -106,6 +106,7 @@ class Adventures:
   def has_adventures(self):
     return self.adventures_file.exists() and self.adventures_file.get('adventures')
 
+
 class NoSuchAdventure:
   def get_defaults(self, level):
     return {}
@@ -138,6 +139,7 @@ class Quizzes:
 class NoSuchQuiz:
     def get_defaults(self, level):
         return {}
+
 
 @attr.s(slots=True)
 class DefaultValues:
