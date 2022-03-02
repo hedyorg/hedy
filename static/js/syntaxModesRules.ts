@@ -10,20 +10,16 @@ if (!window.State) {
 window.State = {};
 }
 
-// Defines a word with letters in any language
-// TODO FH jan 2022: Now just does latin including accented and Arabic, needs to be
-// improved for f.e. Hindi and Chinese
 
 // extension of \w
-const LETTER    = '_A-Za-zÀ-ÿء-ي';
-const CHARACTER = '0-9' + LETTER; 
-const WORD = '[' + CHARACTER + "]+";
-const SPACE    = " +";
-
-
+// A-z is different from A-Za-z (see an ascii table)
+const CHARACTER = '0-9_A-Za-zÀ-ÿء-ي'; 
+const WORD      = '[' + CHARACTER + "]+";
+const SPACE     = " +";
 
 
 // replacement of \b (or rather \m and \M )
+// to detect the beginning and the end of a word without selecting them
 // https://www.regular-expressions.info/wordboundaries.html
 const START_WORD = '(?<![' + CHARACTER + '])(?=[' + CHARACTER + '])';
 const END_WORD = '(?<=[' + CHARACTER + '])(?![' + CHARACTER + '])';
@@ -80,6 +76,7 @@ switch(window.State.lang){
     currentLang = LANG_en;
     break;
 }
+
 
 // Lists of keywords by level
 const COMMANDS = [
@@ -371,7 +368,6 @@ const COMMANDS = [
 ]
 
 
-
 // List of rules by level
 const LEVELS = [
   {
@@ -565,12 +561,6 @@ const LEVELS = [
 
 
 
-
-
-
-
-
-
 /*
 In the first levels, the strings are not yet well defined,
 so we have to color them with respect to what is around,
@@ -686,6 +676,8 @@ and any keyword in the code can be colored independently
 of what is around it, so we use a general function
 */
 
+/* A symbol is different from a keyword, because a keyword must be surrounded by a beginning and an end.
+While a symbol will be recognized independently of its surrounding */
 function rule_keywords(level : number) {
   var rules = [];
   for (const command in COMMANDS[level-1]) {
@@ -729,8 +721,6 @@ function rule_number(with_decimal = false) {
     }; 
   }
 }
-
-
 
 
 
