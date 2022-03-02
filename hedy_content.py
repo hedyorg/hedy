@@ -133,6 +133,19 @@ class Quizzes:
         return self.quizzes['levels'].get(level)
 
     def get_quiz_data_for_level_question(self, level, question):
+        # We have to parse the keywords before returning
+        for k, v in self.quizzes['levels'].get(level).get(question).items():
+            if isinstance(self.quizzes['levels'].get(level).get(question)[k], str):
+                self.quizzes['levels'].get(level).get(question)[k] = self.quizzes['levels'].get(level).get(question)[k].format(**self.keywords)
+            elif isinstance(self.quizzes['levels'].get(level).get(question)[k], list):
+                options = []
+                for option in self.quizzes['levels'].get(level).get(question)[k]:
+                    temp = {}
+                    for key, value in option.items():
+                        temp[key] = value.format(**self.keywords)
+                        temp[key] = value.format(**self.keywords)
+                    options.append(temp)
+                self.quizzes['levels'].get(level).get(question)[k] = options
         return self.quizzes['levels'].get(level).get(question)
 
 
