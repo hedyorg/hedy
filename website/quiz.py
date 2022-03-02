@@ -69,7 +69,7 @@ def routes(app, database, achievements, quizzes):
         questions = quiz_for_lang.get_quiz_data_for_level(level_source)
         question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
 
-        if not quiz_for_lang:
+        if not questions:
             return no_quiz_data_error()
 
         # set globals
@@ -135,8 +135,11 @@ def routes(app, database, achievements, quizzes):
         if not is_quiz_enabled():
             return quiz_disabled_error()
 
-        # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, g.keyword_lang, level)
+        quiz_for_lang = QUIZZES[g.lang]
+        quiz_for_lang.set_keyword_language(g.keyword_lang)
+
+        questions = quiz_for_lang.get_quiz_data_for_level(level)
+
         if not questions:
             return no_quiz_data_error()
 
@@ -192,7 +195,7 @@ def routes(app, database, achievements, quizzes):
             questions = quiz_for_lang.get_quiz_data_for_level(level_source)
             question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
 
-            if not quiz_for_lang:
+            if not questions:
                 return no_quiz_data_error()
 
             is_correct = is_correct_answer(question, chosen_option)
@@ -250,7 +253,7 @@ def routes(app, database, achievements, quizzes):
         questions = quiz_for_lang.get_quiz_data_for_level(level_source)
         question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
 
-        if not quiz_for_lang:
+        if not questions:
             return no_quiz_data_error()
 
         # Read from session and remove the variables from it (this is the
