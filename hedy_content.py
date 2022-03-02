@@ -123,11 +123,14 @@ class Quizzes:
             self.keyword_lang = language
             self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
 
+    def get_highest_question_level(self, level):
+        return len(self.quizzes['levels'].get(level))
+
     def get_quiz_data_for_level(self, level):
-        return self.quizzes.get(level)
+        return self.quizzes['levels'].get(level)
 
     def get_quiz_data_for_level_question(self, level, question):
-        return self.quizzes.get(level).get(question)
+        return self.quizzes['levels'].get(level).get(question)
 
 
 class NoSuchQuiz:
