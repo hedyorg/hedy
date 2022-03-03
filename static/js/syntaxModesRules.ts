@@ -570,15 +570,15 @@ so we use particular functions
 function rule_level1() {
   return [{
     regex: "^(" + currentLang._ASK + ")(.*)$",
-    token: ['keyword','constant.character'],
+    token: ['keyword','text'],
     next: 'start',
   },{
     regex: "^(" + currentLang._PRINT + ")(.*)$",
-    token: ['keyword','constant.character'],
+    token: ['keyword','text'],
     next: 'start',
   },{
     regex: "^(" + currentLang._ECHO + ")(.*)$",
-    token: ['keyword','constant.character'],
+    token: ['keyword','text'],
     next: 'start',
   },{
     regex: "^(" + currentLang._FORWARD + ")(" + SPACE + ")([0-9]*)( *)$",
@@ -602,11 +602,11 @@ function rule_level1() {
 function rule_level2() {
   return [{
     regex: "^("+WORD+")(" + SPACE + ")(" + currentLang._IS +")(" + SPACE + ")(" + currentLang._ASK + ")(.*)$",
-    token: ['text','text','keyword','text','keyword','constant.character'],
+    token: ['text','text','keyword','text','keyword','text'],
     next: 'start',
   },{
     regex: "^("+WORD+")(" + SPACE + ")(" + currentLang._IS +")(" + SPACE + ")(.*)$",
-    token: ['text','text','keyword','text','constant.character'],
+    token: ['text','text','keyword','text','text'],
     next: 'start',
   },{
     regex: "^(" + currentLang._PRINT + ")(.*)$",
@@ -630,7 +630,7 @@ function rule_level2() {
 function rule_level3() {
   return [{
     regex: "^("+WORD+")(" + SPACE + ")(" + currentLang._IS +")(" + SPACE + ")(" + currentLang._ASK + ")(.*)$",
-    token: ['text','text','keyword','text','keyword','constant.character'],
+    token: ['text','text','keyword','text','keyword','text'],
     next: 'start',
   },{
     regex: "^(" + currentLang._REMOVE + ")(" + SPACE + ")(.*)(" + SPACE + ")(" + currentLang._FROM + ")(" + SPACE + ")(.*)$",
