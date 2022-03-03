@@ -648,6 +648,7 @@ def routes(app, database):
         else:
             user = DATABASE.user_by_username(body['username'].strip().lower())
 
+        print(user)
         if not user:
             return g.auth_texts.get('username_invalid'), 403
 
@@ -664,7 +665,7 @@ def routes(app, database):
                                 email_base_url() + '/reset?username=' + urllib.parse.quote_plus(
                                     user['username']) + '&token=' + urllib.parse.quote_plus(token),
                                 lang=user['language'], username=user['username'])
-            return g.auth_texts.get('sent_password_recovery'), 200
+            return jsonify({'message':g.auth_texts.get('sent_password_recovery')}), 200
 
 
     @app.route('/auth/reset', methods=['POST'])
@@ -699,7 +700,7 @@ def routes(app, database):
         if not is_testing_request(request):
             send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
 
-        return g.auth_texts.get('password_resetted'), 200
+        return jsonify({'message':g.auth_texts.get('password_resetted')}), 200
 
     # *** ADMIN ROUTES ***
 
