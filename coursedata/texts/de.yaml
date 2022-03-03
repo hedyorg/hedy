@@ -6,8 +6,8 @@ ui:
     save_code_button: "Programm speichern"
     edit_code_button: "Programm ändern"
     share_code_button: "Speichern und weitergeben"
-    regress_button: "Gehe zurück zu Level"
-    advance_button: "Gehe zu Level"
+    regress_button: "Gehe zurück zu Level {level}"
+    advance_button: "Gehe zu Level {level}"
     developers_mode: "Developers mode"
     try_button: "Ausprobieren"
     enter_text: "Gib deine Antwort hier ein..."
@@ -51,6 +51,11 @@ ui:
     not_user: Scheint als wärst du nicht angemeldet!
     not_enrolled: Scheint als wärst du nicht in dieser Klasse!
     retrieve_class: Nur Lehrer können Klassen einsehen
+    # The following entries are for the navigation bar
+    nav_start: "Willkommen"
+    nav_hedy: "Hedy"
+    nav_explore: "Explore"
+    nav_learn_more: "Mehr Infos"
 ClientErrorMessages:
     Transpile_success:
     -   Gut gemacht!
@@ -227,7 +232,6 @@ Auth:
     achievement_earned: Du hast eine Leistung erbracht!
     teacher_invitation_require_login: Um dein LehrerIn Profil zu erstellen musst du dich anmelden. Wenn du noch kein Konto besitzt, dann erstell dir bitte eins.
     teacher_welcome: Willkommen bei Hedy! Du bist nun eine stolze BesitzerIn eines LehrerIn Kontos, welches dir erlaubt Klassen zu erstellen und Schüler einzuladen.
-    examples_used: Du hast bereits die maximal erlaubte Anzahl an Beispielprogrammen ausprobiert in diesem level! Versuch als Nächstes etwas eigenes zu erstellen.
     explore: Erkunde
     overwrite_warning: Du hast bereits eine Programm mit diesem Namen, wenn du jetzt speicherst überschreibst du das Vorhandene. Bist du dir sicher?
     copy_link_to_share: Kopiere den Link um ihn zu teilen

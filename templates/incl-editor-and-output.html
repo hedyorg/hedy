@@ -5,23 +5,23 @@
       <!-- language selector overlay -->
       {% if other_keyword_language() %}
           <div id="main_editor_keyword_selector">
-              <div class="dropdown inline-block right-0 absolute z-10 mx-2 mt-2 mb-0 text-white" lang="{{ current_keyword_language().lang }}">
+              <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white" lang="{{ current_keyword_language().lang }}">
                   <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button">
                       {{ current_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
                   </button>
-                  <div class="dropdown-menu absolute hidden right-0">
-                      <ul class="dropdown-menu list-none text-xl z-10 text-white px-4 mr-1 bg-blue-600 rounded-lg mt-2">
-                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('main_editor_keyword_selector', 'editor', '{{ current_keyword_language().lang }}', '{{ other_keyword_language().lang }}');event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
+                  <div class="dropdown-menu absolute hidden ltr:right-0 rtl:left-0">
+                      <ul class="dropdown-menu list-none text-xl z-10 text-white px-4 ltr:mr-1 rtl:ml-1 bg-blue-600 rounded-lg mt-2">
+                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('{{ current_keyword_language().lang }}', '{{ other_keyword_language().lang }}');event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
                       </ul>
                   </div>
               </div>
-              <div class="dropdown inline-block right-0 absolute z-10 mx-2 mt-2 mb-0 text-white hidden" lang="{{ other_keyword_language().lang }}">
+              <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white hidden" lang="{{ other_keyword_language().lang }}">
                   <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button">
                       {{ other_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
                   </button>
-                  <div class="dropdown-menu absolute hidden right-0">
-                      <ul class="dropdown-menu list-none text-xl z-10 text-white px-4 mr-1 bg-blue-600 rounded-lg mt-2">
-                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('main_editor_keyword_selector', 'editor','{{ other_keyword_language().lang }}', '{{ current_keyword_language().lang }}');event.preventDefault();"><li>{{ current_keyword_language().sym }}</li></a>
+                  <div class="dropdown-menu absolute hidden ltr:right-0 rtl:left-0">
+                      <ul class="dropdown-menu list-none text-xl z-10 text-white px-4 ltr:mr-1 rtl:ml-1 bg-blue-600 rounded-lg mt-2">
+                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('{{ other_keyword_language().lang }}', '{{ current_keyword_language().lang }}');event.preventDefault();"><li>{{ current_keyword_language().sym }}</li></a>
                       </ul>
                   </div>
               </div>
@@ -120,14 +120,25 @@
       </div>
     </div>
     <div class="order-5">
-      <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
-        {% if prev_level and (customizations['levels']|length == 0 or prev_level in customizations['levels']) %}
-          <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{ui.regress_button}} {{ prev_level }}</button>
-        {% endif %}
-        {% if next_level and (customizations['levels']|length == 0 or next_level in customizations['levels']) %}
-            <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ ui.advance_button }} {{ next_level }}</button>
-        {% endif %}
-      </div>
+      {% if not specific_adventure %}
+          <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
+            {% if prev_level and (customizations['levels']|length == 0 or prev_level in customizations['levels']) %}
+              <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{ui.regress_button|replace("{level}", prev_level)}}</button>
+            {% endif %}
+            {% if next_level and (customizations['levels']|length == 0 or next_level in customizations['levels']) %}
+                <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ui.advance_button|replace("{level}", next_level)}}</button>
+            {% endif %}
+          </div>
+      {% else %}
+          <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
+            {% if prev_level %}
+              <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{prev_level}}'})">{{ui.regress_button|replace("{level}", prev_level)}}</button>
+            {% endif %}
+            {% if next_level %}
+                <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}'})">{{ui.advance_button|replace("{level}", next_level)}}</button>
+            {% endif %}
+          </div>
+      {% endif %}
     </div>
   </div>
 <!-- developer mode toggle -->

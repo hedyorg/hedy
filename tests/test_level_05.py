@@ -93,12 +93,10 @@ class TestsLevel5(HedyTester):
   # combined tests
   def test_turn_forward(self):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
-    expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)
-    t.right(90)
-    t.forward(100)
-    time.sleep(0.1)""")
+    expected = HedyTester.dedent(
+      HedyTester.forward_transpiled(50),
+      "t.right(90)",
+      HedyTester.forward_transpiled(100))
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
   def test_ask_print(self):
@@ -185,6 +183,7 @@ class TestsLevel5(HedyTester):
       code=code,
       expected=expected
     )
+
   def test_if_else_newline_list_assigment_print(self):
     # line breaks after conditional should be allowed in if-elses until level 7 when we start with indentation
     code = textwrap.dedent("""\
@@ -203,8 +202,7 @@ class TestsLevel5(HedyTester):
     else:
       print(f'luckily no dishes because{dishwasher}is already washing up')""")
 
-    self.multi_level_tester(
-      max_level=5,
+    self.single_level_tester(
       code=code,
       expected=expected
     )
@@ -232,6 +230,7 @@ class TestsLevel5(HedyTester):
       code=code,
       expected=expected
     )
+
   def test_print_if_linebreak_statement(self):
     # Breaking an if statement and its following statement should be
     # permited until level 7
@@ -250,8 +249,7 @@ class TestsLevel5(HedyTester):
     if dishwasher == test:
       print(f'too bad I have to do the dishes!')""")
 
-    self.multi_level_tester(
-      max_level=5,
+    self.single_level_tester(
       code=code,
       expected=expected,
       expected_commands=['is', 'random', 'is', 'if', 'print']
