@@ -974,6 +974,31 @@ def view_program(id):
     return render_template("view-program-page.html", **arguments_dict)
 
 
+@app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1})
+@app.route('/adventure/<name>/<level>', methods=['GET'])
+def get_specific_adventure(name, level):
+    try:
+        level = int(level)
+    except:
+        return utils.error_page(error=404, ui_message='no_such_level')
+
+    adventure = [x for x in load_adventures_per_level(g.lang, level) if x.get('short_name') == name]
+    prev_level = level-1 if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name] else False
+    next_level = level+1 if [x for x in load_adventures_per_level(g.lang, level+1) if x.get('short_name') == name] else False
+
+    print(prev_level)
+    print(next_level)
+
+    if not adventure:
+        return utils.error_page(error=404, ui_message='no_such_adventure')
+
+    g.prefix = '/hedy'
+    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
+    defaults = level_defaults_for_lang.get_defaults_for_level(level)
+    return hedyweb.render_specific_adventure(
+        level_defaults=defaults, level_number=level, adventure=adventure, prev_level=prev_level, next_level=next_level)
+
+
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
     error_messages = TRANSLATIONS.get_translations(g.lang, "ClientErrorMessages")
@@ -1080,7 +1105,7 @@ def main_page(page):
     if page == 'landing-page':
         if user['username']:
             return render_template('landing-page.html', page_title=hedyweb.get_page_title(page), user=user['username'],
-                                   text=TRANSLATIONS.get_translations(session['lang'], 'Landing_page'))
+                                   text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
             return utils.error_page(error=403, ui_message='not_user')
 

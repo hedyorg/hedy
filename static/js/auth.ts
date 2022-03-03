@@ -208,7 +208,7 @@ export const auth = {
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
-        modal.alert(response.responseText, 3000, false);
+        modal.alert(response.message, 3000, false);
       }).fail (function (response) {
         if (response.responseText) {
           modal.alert(response.responseText, 3000, true);
@@ -231,7 +231,7 @@ export const auth = {
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
-        modal.alert(response.responseText, 2000, false);
+        modal.alert(response.message, 2000, false);
         setTimeout(function (){
           auth.redirect ('login');
         }, 2000);
@@ -373,7 +373,7 @@ async function afterLogin(loginData: any) {
   if (loginData['teacher']) {
     return auth.redirect('for-teachers');
   }
-  auth.redirect('programs');
+  auth.redirect('landing-page');
 }
 
 function getSavedRedirectPath() {
