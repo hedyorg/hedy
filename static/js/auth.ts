@@ -114,7 +114,7 @@ export const auth = {
       }).done (function () {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin({"teacher": false, "first_time": true});
+        afterLogin({"first_time": true});
       }).fail (function (response) {
         if (response.responseText) {
           modal.alert(response.responseText, 3000, true);
