@@ -819,6 +819,7 @@ def send_email_template(template, email, link='', lang="en", username=''):
         body_html = f.read()
 
     body_html = body_html.format(content=body)
+    body_plain = body_html
     if link:
         body_plain = body.format(link='Please copy and paste this link into a new tab: ' + link)
         body_html = body_html.format(link='<a href="' + link + '">Link</a>')
