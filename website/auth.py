@@ -648,7 +648,6 @@ def routes(app, database):
         else:
             user = DATABASE.user_by_username(body['username'].strip().lower())
 
-        print(user)
         if not user:
             return g.auth_texts.get('username_invalid'), 403
 
