@@ -664,7 +664,7 @@ def routes(app, database):
                                 email_base_url() + '/reset?username=' + urllib.parse.quote_plus(
                                     user['username']) + '&token=' + urllib.parse.quote_plus(token),
                                 lang=user['language'], username=user['username'])
-            return g.auth_texts.get('sent_password_recovery'), 200
+            return jsonify({'message':g.auth_texts.get('sent_password_recovery')}), 200
 
 
     @app.route('/auth/reset', methods=['POST'])
@@ -699,7 +699,7 @@ def routes(app, database):
         if not is_testing_request(request):
             send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
 
-        return g.auth_texts.get('password_resetted'), 200
+        return jsonify({'message':g.auth_texts.get('password_resetted')}), 200
 
     # *** ADMIN ROUTES ***
 
@@ -819,8 +819,9 @@ def send_email_template(template, email, link='', lang="en", username=''):
         body_html = f.read()
 
     body_html = body_html.format(content=body)
+    body_plain = body
     if link:
-        body_plain = body.format(link='Please copy and paste this link into a new tab: ' + link)
+        body_plain = body_plain.format(link='Please copy and paste this link into a new tab: ' + link)
         body_html = body_html.format(link='<a href="' + link + '">Link</a>')
 
     send_email(email, subject, body_plain, body_html)
