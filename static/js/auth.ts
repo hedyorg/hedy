@@ -114,7 +114,7 @@ export const auth = {
       }).done (function () {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin({"teacher": false});
+        afterLogin({"teacher": false, "first_time": true});
       }).fail (function (response) {
         if (response.responseText) {
           modal.alert(response.responseText, 3000, true);
@@ -370,10 +370,14 @@ async function afterLogin(loginData: any) {
   }
 
   // If the user is a teacher -> re-direct to for-teachers page after login
+  if (loginData['first_time']) {
+    return auth.redirect('landing-page');
+  }
   if (loginData['teacher']) {
     return auth.redirect('for-teachers');
   }
-  auth.redirect('landing-page');
+
+  auth.redirect('programs');
 }
 
 function getSavedRedirectPath() {
