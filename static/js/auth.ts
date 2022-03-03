@@ -373,7 +373,7 @@ async function afterLogin(loginData: any) {
   if (loginData['teacher']) {
     return auth.redirect('for-teachers');
   }
-  auth.redirect('programs');
+  auth.redirect('landing-page');
 }
 
 function getSavedRedirectPath() {
