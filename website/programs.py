@@ -41,15 +41,17 @@ def routes(app, database, achievements):
         return {}, 200
 
     @app.route('/programs/duplicate-check', methods=['POST'])
-    @requires_login
-    def check_duplicate_program(user):
+    def check_duplicate_program():
         body = request.json
         if not isinstance(body, dict):
             return 'body must be an object', 400
         if not isinstance(body.get('name'), str):
             return 'name must be a string', 400
 
-        programs = DATABASE.programs_for_user(user['username'])
+        if not current_user()['username']:
+            return 'not_logged', 403
+
+        programs = DATABASE.programs_for_user(current_user()['username'])
         for program in programs:
             if program['name'] == body['name']:
                 return jsonify({'duplicate': True})
