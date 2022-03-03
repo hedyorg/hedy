@@ -369,14 +369,15 @@ async function afterLogin(loginData: any) {
     return auth.redirect(redirect);
   }
 
-  // If the user is a teacher -> re-direct to for-teachers page after login
+  // If the user logs in for the first time -> redirect to the landing-page after signup
   if (loginData['first_time']) {
     return auth.redirect('landing-page');
   }
+  // If the user is a teacher -> re-direct to for-teachers page after login
   if (loginData['teacher']) {
     return auth.redirect('for-teachers');
   }
-
+  // Otherwise, redirect to the programs page
   auth.redirect('programs');
 }
 
