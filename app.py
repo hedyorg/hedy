@@ -874,6 +874,7 @@ def index(level, step):
 
         user = current_user()
         public_program = 'public' in result and result['public']
+        #Todo TB -> This code is wrong! Currently any teacher can view ALL programs (doesn't seem right...)
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
             return utils.error_page(error=404, ui_message='no_such_program')
         loaded_program = {'code': result['code'], 'name': result['name'],
