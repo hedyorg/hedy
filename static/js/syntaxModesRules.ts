@@ -10,6 +10,12 @@ if (!window.State) {
 window.State = {};
 }
 
+// Defines a word with letters in any language
+// TODO FH jan 2022: Now just does latin including accented and Arabic, needs to be
+// improved for f.e. Hindi and Chinese
+var word = '[0-9A-zÀ-ÿء-ي]+';
+
+
 // Contains the current keywords based on the current language
 var currentLang: {
   _PRINT: string;
@@ -123,80 +129,102 @@ const LEVELS = [
     ),
   },
   {
-    // Adds lists and 'at random'
+    // Adds variables
     name: 'level2',
     rules: pipe(baseRules(),
-
       rule_printSpace('expression_eol'),
       rule_isAsk('gobble'),
       rule_is('gobble'),
       rule_turtle(),
       rule_sleep(),
-
+    ),
+  },
+  {
+    // Adds lists and 'at random'
+    // TODO (FH, jan 2022) add "add" and "remove" for lists
+    name: 'level3',
+    rules: pipe(baseRules(),
+      rule_printSpace('expression_eol'),
+      rule_isAsk('gobble'),
+      rule_is('gobble'),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
     // Adds quoted text
-    name: 'level3',
+    name: 'level4',
     rules: pipe(baseRules(),
       rule_turtle(),
       rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
-    // Adds if/else
-    name: 'level4',
-    rules: pipe(baseRules(),
-      rule_printSpace(),
-      rule_isAsk(),
-      rule_is(),
-      rule_ifElseOneLine(),
-      rule_expressions(),
-    ),
-  },
-  {
-    // Adds repeat
+    // Adds if
     name: 'level5',
     rules: pipe(baseRules(),
-      rule_printSpace(),
+      rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
       rule_ifElseOneLine(),
       rule_expressions(),
-      rule_repeat(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
     // Adds arithmetic
     name: 'level6',
     rules: pipe(baseRules(),
-      rule_printSpace(),
+      rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
       rule_ifElseOneLine(),
       rule_expressions(),
-      rule_repeat(),
       rule_arithmetic(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
-    // Adds indented blocks -- no changes to highlighter necessary
+  // level 7 adds repeat x times
     name: 'level7',
     rules: pipe(baseRules(),
-      rule_printSpace(),
+      rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
       rule_expressions(),
+      rule_arithmetic(),
       rule_repeat(),
-      rule_arithmetic(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
-    // Replaces 'repeat' with 'for'
-    name: 'level8',
+    // Level 8 adds indented block
+    // Level 9 adds doubly indented blocks
+    name: 'level8and9',
+    rules: pipe(baseRules(),
+      rule_printSpace('expression_eol'),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_repeat(),
+      rule_turtle(),
+      rule_sleep(),
+    ),
+  },
+
+  {
+    // Replaces 'repeat' with 'for' over a list (for a in animals)
+    name: 'level10',
     rules: pipe(baseRules(),
       rule_printSpace(),
       rule_isAsk(),
@@ -204,64 +232,30 @@ const LEVELS = [
       rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
-      rule_for()
+      rule_for(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
-    // Replaces 'repeat' with 'for'
-    name: 'level9and10',
+    // Allows for with range
+    name: 'level11and12',
     rules: pipe(baseRules(),
-    rule_printSpace(),
-    rule_isAsk(),
-    rule_is(),
-    rule_ifElse(),
-    rule_expressions(),
-    rule_arithmetic(),
-    rule_forRange(),
-    rule_for()
-    ),
-  },
-  {
-    // Nesting of 'for' loops (no changes necessary)
-    name: 'level11',
-    rules: pipe(baseRules(),
-      rule_printSpace(),
+      rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
+      rule_for(),
       rule_forRange(),
-    ),
-  },
-  {
-    // Adding fncall parens
-    name: 'level12',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
 // ----------------------------------------------------------------
 //  Everything below this line hasn't been done yet
 // ----------------------------------------------------------------
-  {
-    name: 'level11',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
   {
     name: 'level13',
     rules: pipe(baseRules(),
@@ -272,6 +266,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -284,6 +280,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -296,6 +294,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -308,6 +308,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
@@ -320,10 +322,12 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
   {
-    name: 'level18and19',
+    name: 'level18',
     rules: pipe(baseRules(),
       rule_printParen(),
       rule_isInputParen(),
@@ -332,54 +336,8 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
-    ),
-  },
-  {
-    name: 'level20',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
-  {
-    name: 'level21',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
-  {
-    name: 'level22',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
-  {
-    name: 'level23',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
+      rule_turtle(),
+      rule_sleep(),
     ),
   },
 ];
@@ -478,7 +436,7 @@ function rule_printSpace(next?: string) {
  */
 function rule_isAsk(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( ' + currentLang._IS + ' ' + currentLang._ASK + ')',
+    regex: '('+ word + ')( ' + currentLang._IS + ' ' + currentLang._ASK + ')',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -489,7 +447,7 @@ function rule_isAsk(next?: string) {
  */
 function rule_is(next?: string) {
   return recognize('start', {
-    regex: '([0-9A-zÀ-ÿء-ي]+)( ' + currentLang._IS + ' )',
+    regex: '('+ word + ')( ' + currentLang._IS + ' )',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -536,7 +494,7 @@ function rule_sleep() {
  */
 function rule_isInputParen() {
   return recognize('start', {
-    regex: '(\\w+)( ' + currentLang._IS + ' ' + currentLang._INPUT + ')(\\()',
+    regex: '('+ word + ')( ' + currentLang._IS + ' ' + currentLang._INPUT + ')(\\()',
     token: ['text', 'keyword', 'paren.lparen'],
     next: 'start'
   });
@@ -629,28 +587,28 @@ function rule_arithmetic() {
  */
 function rule_repeat() {
   return recognize('start', {
-    regex: '(' + currentLang._REPEAT + ')( \\w+ )(' + currentLang._TIMES + ')',
+    regex: '(' + currentLang._REPEAT + ')( '+ word +' )(' + currentLang._TIMES + ')',
     token: ['keyword', 'text', 'keyword'],
   });
 }
 
 function rule_for(){
   return recognize('start', {
-    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' )(\\w+)',
+    regex: '(' + currentLang._FOR + ' )('+word+')( ' + currentLang._IN + ' )('+word+')',
     token: ['keyword', 'text', 'keyword', 'text'],
   });
 }
 
 function rule_forRange() {
   return recognize('start', {
-    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' ' + currentLang._RANGE + ' )(\\w+)( to )(\\w+)',
+    regex: '(' + currentLang._FOR + ' )('+word+')( ' + currentLang._IN + ' ' + currentLang._RANGE + ' )('+word+')( to )('+word+')',
     token: ['keyword', 'text', 'keyword', 'text', 'keyword', 'text'],
   });
 }
 
 function rule_forRangeParen() {
   return recognize('start', {
-    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' ' + currentLang._RANGE + ')(\\()([\\s\\w]+)(,)([\\s\\w]+)(\\))',
+    regex: '(' + currentLang._FOR + ' )('+word+')( ' + currentLang._IN + ' ' + currentLang._RANGE + ')(\\(\\s*)('+word+')(\\s*,\\s*)('+word+')(\\s*\\))',
     token: ['keyword', 'text', 'keyword', 'paren.lparen', 'text', 'punctuation.operator', 'text', 'paren.rparen'],
   });
 }
@@ -677,8 +635,13 @@ function keywordWithSpace(keyword: string) {
   // after a parenthesis or '+' symbol or something... but since the symbol
   // would be highlighted as well that's not desirable, and most of these commands
   // for the start of the line anyway.
-  return '(?:^|\\s)' + keyword + ' ';
+
+  //FH Jan: loosened this to s+ allow for indented rules
+  return '(?:^|\\s+)' + keyword + ' ';
 }
+
+
+
 
 /**
  * Modify the given ruleset, replacing literal spaces with "one or more spaces"

@@ -137,6 +137,54 @@ adventures:
                 story_text: |
                     ## Verhaal
                     In dit level kun je {if} commando's in andere {if} commando's stoppen. Hierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!
+                example_code: |
+                    ## Voorbeeld Simpele Hedy Code
+                    ```
+                    {print} 'Robin loopt door de stad'
+                    locatie = {ask} 'Gaat Robin een winkel in of gaat ze naar huis?'
+                    {if} locatie {is} winkel
+                        {print} 'Ze stapt de winkel binnen'
+                        {print} 'Robin ziet een interessant boek.'
+                        boek = {ask} 'Koopt Robin het boek?'
+                        {if} boek {is} ja
+                            {print} 'Robin koopt het boek en gaat naar huis'
+                        {else}
+                            {print} 'Robin verlaat de winkel en gaat naar huis'
+                    {else}
+                        {print} 'Robin gaat naar huis'
+                    ```
+
+                story_text_2:
+                    Het voorbeeld hierboven is nog een simpel verhaaltje. Maar door {if} commando's in elkaar te zetten, kun je ook een super uitgebreid verhaal maken, dat al echt op een game lijkt!
+                    Kijk maar...
+                example_code_2: |
+                    ## Uitgebreide code
+                    ```
+                    zwaard = kwijt
+                    spel = aan
+                    {print} 'Onze held loopt door het bos'
+                    {print} 'Ineens komt ze bij een splitsing...'
+                    {repeat} 2 {times}
+                        {if} spel {is} aan
+                            pad = {ask} 'Welk pad moet onze held kiezen?'
+                            {if} pad {is} links
+                                {if} zwaard {is} gevonden
+                                    {print} 'Onze held komt een draak tegen op het pad!'
+                                    {print} 'Gelukkig heeft ze een zwaard om het beest te verslaan!'
+                                    spel = over
+                                {else}
+                                    {print} 'Onze held vindt een draak, maar ze heeft geen wapens!'
+                                    {print} 'Onze held wordt met huid en haar verslonden...'
+                                    spel = over
+                            {if} pad {is} rechts
+                                {if} zwaard {is} kwijt
+                                    {print} 'Onze held vindt een zwaard'
+                                    {print} 'Die kan nog goed van pas komen'
+                                    zwaard = gevonden
+                                {else}
+                                    {print} 'Je hebt het zwaard al gevonden. Er is hier niks meer.'
+                                    {print} 'Ze loopt terug'
+                    ```
                 start_code: ""
             8:
                 story_text: |
@@ -1861,7 +1909,7 @@ adventures:
                 story_text: |
                     ## Spookhuis
                     In dit level heb je geleerd hoe je aanhalingstekens moet gebruiken.
-                    Kun jij je spookhuis ook in level 3 aan de praat krijgen?
+                    Kun jij je spookhuis ook in level 4 aan de praat krijgen?
                 start_code: "{print} 'Ontsnap uit het spookhuis!'"
             3:
                 story_text: |

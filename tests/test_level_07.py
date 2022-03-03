@@ -8,13 +8,11 @@ class TestsLevel7(HedyTester):
 
   #repeat tests
   def test_repeat_turtle(self):
-    code = textwrap.dedent("""\
-    repeat 3 times forward 100""")
+    code = "repeat 3 times forward 100"
 
-    expected = textwrap.dedent("""\
-    for i in range(int('3')):
-      t.forward(100)
-      time.sleep(0.1)""")
+    expected = HedyTester.dedent(
+      "for i in range(int('3')):",
+      (HedyTester.forward_transpiled(100), '  '))
 
     self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
 
