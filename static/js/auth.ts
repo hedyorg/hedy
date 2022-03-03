@@ -350,11 +350,7 @@ async function afterLogin(loginData: any) {
   if (savedProgram) {
     await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3]);
     localStorage.removeItem('hedy-first-save');
-
-    const redirect = getSavedRedirectPath();
-    if (redirect) {
-      return auth.redirect(redirect);
-    }
+    return auth.redirect('programs');
   }
 
   const joinClassString = localStorage.getItem('hedy-join');
