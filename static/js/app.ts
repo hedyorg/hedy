@@ -1084,38 +1084,96 @@ export function load_quiz(level: string) {
   $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
 
+//Feature flag for variable and values view
+const variable_view = false;
+
+//Hides the HTML DIV for variables if feature flag is false
+if (variable_view === false) {
+  let variableDiv = document.getElementById("variables");
+  variableDiv.style.display = "none";
+}
+
 export function show_variables(){
-  const variableList = $('.variable-list');
-  if(variableList.hasClass('hidden')){
-    variableList.removeClass('hidden');
-  }
-  // makes it able to collapse the list
-  else{
-    variableList.addClass('hidden');
+  if (variable_view === true) {
+    const variableBox = $('#variables');
+    const variableList = $('.variable-list');
+    if (variableList.hasClass('hidden')) {
+      variableList.removeClass('hidden');
+      dragElement(variableBox[0]);
+    }
+    // makes it able to collapse the list
+    else {
+      variableList.addClass('hidden');
+    }
   }
 }
 
 export function load_variables(variables: any){
-     //@ts-ignore
-     variables = clean_variables(variables);
-     const variableList = $('.variable-list');
-     variableList.empty();
-      for (const i in variables){
+    if (variable_view === true) {
+      //@ts-ignore
+      variables = clean_variables(variables);
+      const variableList = $('.variable-list');
+      variableList.empty();
+      for (const i in variables) {
         variableList.append(`<li>${variables[i][0]}: ${variables[i][1]}</li>`);
       }
+    }
 }
 
 //hiding certain variables from the list unwanted for users
-function clean_variables(variables:any){
-  const new_variables = [];
-  const unwanted_variables = ["random","time"];
-  for (const variable in variables){
-    if (!variable.includes('__') && !unwanted_variables.includes(variable)){
-      let newTuple = [variable, variables[variable].v];
-      new_variables.push(newTuple);
+function clean_variables(variables: any) {
+  if (variable_view === true) {
+    const new_variables = [];
+    const unwanted_variables = ["random", "time"];
+    for (const variable in variables) {
+      if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
+        let newTuple = [variable, variables[variable].v];
+        new_variables.push(newTuple);
+      }
     }
+    return new_variables;
   }
-  return new_variables;
+}
+
+// Making the list of variables draggable:
+function dragElement(element: HTMLElement) {
+  var XfromR = 0, Ybottom = 0, XfromL = 0, YfromTop = 0;
+  if (document.getElementById(element.id + "header")) {
+    document.getElementById(element.id + "header")!.onmousedown! = dragMouse;
+  }
+  else {
+    element.onmousedown = dragMouse;
+  }
+
+  function dragMouse(e: MouseEvent) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    XfromL = e.clientX;
+    YfromTop = e.clientY;
+    document.onmouseup = stopDragging;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDragging;
+  }
+
+  function elementDragging(e: MouseEvent) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the position of cursor movement:
+    XfromR = XfromL - e.clientX;
+    Ybottom = YfromTop - e.clientY;
+    XfromL = e.clientX;
+    YfromTop = e.clientY;
+    // set the new position of the variable list:
+    element.style.top = (element.offsetTop - Ybottom) + "px";
+    element.style.left = (element.offsetLeft - XfromR) + "px";
+  }
+
+  function stopDragging() {
+    // when mouse stops or is released, stop dragging element
+    document.onmousemove = null;
+    document.onmouseup = null;
+  }
 }
 
 export function get_trimmed_code() {
