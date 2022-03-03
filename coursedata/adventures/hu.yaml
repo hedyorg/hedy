@@ -159,7 +159,7 @@ adventures:
 
                     ## Példa Hedy kód
                     ```
-                    repeat _ _ print 'Baby Shark tututudutudu'
+                    repeat _?_ _?_ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
@@ -203,7 +203,7 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     emberek is anya, apa, Edit, Gizi
-                    repeat _ _ print 'a mosogató:' _
+                    repeat _?_ _?_ print 'a mosogató:' _?_
                     ```
             6:
                 start_code: print 'Ki mosogat?'
@@ -240,8 +240,8 @@ adventures:
                     ```
                     emberek is anya, apa, Edit, Gizi
                     mosogato is emberek at random
-                    if mosogato is Gizi print _ sajnos mosogatnom kell _ else print 'szerencsére nem én,
-                    mert' _ 'már mosogat'
+                    if mosogato is Gizi print _?_ sajnos mosogatnom kell _?_ else print 'szerencsére nem én,
+                    mert' _?_ 'már mosogat'
                     ```
             4:
                 start_code: print 'Ki mosogat?'
@@ -257,8 +257,8 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     emberek is anya, apa, Edit, Gizi
-                    print _ ő mosogat: _
-                    print emberek at _
+                    print _?_ ő mosogat: _?_
+                    print emberek at _?_
                     ```
             3:
                 start_code: |-
@@ -301,7 +301,7 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     dobások is 1, 2, 3, 4, 5, giliszta
-                    repeat _ _ print _ _
+                    repeat _?_ _?_ print _?_ _?_
                     ```
                 start_code: print 'Mit dobunk ezúttal?'
             6:
@@ -340,9 +340,9 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     dobasok is 1, 2, 3, 4, 5, giliszta
-                    dobas _
-                    print 'Te' _ 'dobtál'
-                    if _ is giliszta print 'Megállhatsz.' _ print 'Dobj újra!'
+                    dobas _?_
+                    print 'Te' _?_ 'dobtál'
+                    if _?_ is giliszta print 'Megállhatsz.' _?_ print 'Dobj újra!'
                     ```
                 start_code: print 'Mit dobunk ezúttal?'
             4:
@@ -353,8 +353,8 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     dobasok is 1, 2, 3, 4, 5, earthworm
-                    print _ te jössz _
-                    print _ _ _ <- itt kell beprogramozni a dobást
+                    print _?_ te jössz _?_
+                    print _?_ _?_ _?_ <- itt kell beprogramozni a dobást
                     ```
                 start_code: print 'Mit dobunk ezúttal?'
             3:
@@ -416,11 +416,11 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     lehetoseg is kő, papír, olló
-                    szamitogepe is _
+                    szamitogepe is _?_
                     valaszt is ask Mit választasz?
-                    print 'ezt választottad: ' _
-                    print 'a számítógép választása: ' _
-                    if _ is _ print 'döntetlen!' else print 'nem döntetlen'
+                    print 'ezt választottad: ' _?_
+                    print 'a számítógép választása: ' _?_
+                    if _?_ is _?_ print 'döntetlen!' else print 'nem döntetlen'
                     if valaszt is kő and szamitogepe is papír print 'számítógép nyert'
                     ```
 
@@ -437,7 +437,7 @@ adventures:
                     ## Példa Hedy
                     ```
                     valasztas is kő, papír, olló
-                    print _ A számítógép ezt választotta: _ _ at _
+                    print _?_ A számítógép ezt választotta: _?_ _?_ at _?_
                     ```
             3:
                 story_text: |
@@ -824,7 +824,7 @@ adventures:
                     szogek is ask 'How many angles should I draw?'
                     szog is 360 / szogek
                     repeat szog times
-                        turn _
+                        turn _?_
                         forward_
                     ```
                 start_code: szogek is ask 'Hány szöget kell rajzolnom?'
