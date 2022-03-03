@@ -695,6 +695,34 @@
             {print} random_fruit
 
 
+18:
+    start_code: |-
+        naam = 'Hedy'
+        {print}('ik heet ', naam)
+    intro_text: |-
+        We zijn aangekomen bij echte Pythoncode! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
+        Zo gaat dat:
+        ```
+        {print}('ik heet Hedy!')
+        ```
+        Wil je meerdere dingen printen? Dan moeten daar steeds komma's tussen.
+        ```
+        naam = 'Hedy'
+        {print}('ik heet ', naam)
+        ```
+    commands:
+    -   name: "{print}"
+        explanation: "Bij `{print}` moet je haakjes gebruiken"
+        example: "{print}"
+        demo_code: |-
+            {print}('hallo!')
+    -   name: "{print} met var"
+        explanation: "Bij `{print}` moet je haakjes gebruiken en komma's als je meerdere dingen {print}"
+        example: "{print}"
+        demo_code: |-
+            naam = 'Hedy'
+            {print}('ik heet', naam)
+
 #16:
 #    start_code: |-
 #        # This {is} a program that {is} going {to_list} {ask} a couple of math questions
