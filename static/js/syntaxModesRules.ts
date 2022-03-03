@@ -582,7 +582,7 @@ function rule_level1() {
     next: 'start',
   },{
     regex: "^(" + currentLang._FORWARD + ")(" + SPACE + ")([0-9]*)( *)$",
-    token: ['keyword','text','variable','text'],
+    token: ['keyword','text','text','text'],
     next: 'start',
   },{
     regex: "^(" + currentLang._FORWARD + ")( *)$",
