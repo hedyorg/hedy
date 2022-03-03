@@ -696,33 +696,32 @@
 
 
 18:
-    start_code: |-
-        naam = 'Hedy'
-        {print}('ik heet ', naam)
+  start_code: |-
+      naam = 'Hedy'
+      {print}('My name is ', naam)
     intro_text: |-
-        We zijn aangekomen bij echte Pythoncode! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
-        Zo gaat dat:
-        ```
-        {print}('ik heet Hedy!')
-        ```
-        Wil je meerdere dingen printen? Dan moeten daar steeds komma's tussen.
-        ```
-        naam = 'Hedy'
-        {print}('ik heet ', naam)
-        ```
+      We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.
+      That looks like this:
+      ```
+      {print}('my name is Hedy!')
+      ```
+      If you want to print more thant one items, you need to separate them by commas.
+      ```
+      naam = 'Hedy'
+      {print}('my name is ', naam)
+      ```
     commands:
-    -   name: "{print}"
-        explanation: "Bij `{print}` moet je haakjes gebruiken"
+      - name: "{print}"
+        explanation: "With `{print}` you need to use parentheses"
         example: "{print}"
         demo_code: |-
-            {print}('hallo!')
-    -   name: "{print} met var"
-        explanation: "Bij `{print}` moet je haakjes gebruiken en komma's als je meerdere dingen {print}"
+          {print}('hi!')
+      - name: "{print} with var"
+        explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
         example: "{print}"
         demo_code: |-
-            naam = 'Hedy'
-            {print}('ik heet', naam)
-
+          naam = 'Hedy'
+          {print}('my name is ', naam)
 #16:
 #    start_code: |-
 #        # This {is} a program that {is} going {to_list} {ask} a couple of math questions
