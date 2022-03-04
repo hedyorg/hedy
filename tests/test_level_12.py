@@ -55,7 +55,7 @@ class TestsLevel12(HedyTester):
       code=code,
       expected=expected,
       expected_commands=['is', 'if', 'print'],
-      max_level=16)
+      max_level=16) #space between = is not preserved (but is needed for the test)
 
   # print tests
   def test_print_float(self):
@@ -247,6 +247,19 @@ class TestsLevel12(HedyTester):
       extra_check_function=self.result_in(list),
       max_level=15)
 
+  def test_equality_with_lists(self):
+    code = textwrap.dedent("""\
+      m is 1, 2
+      n is 1, 2
+      if m is n
+        print 'success!'""")
+
+    self.multi_level_tester(
+      max_level=13,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
     items is 'red'
@@ -264,7 +277,7 @@ class TestsLevel12(HedyTester):
     if 1 is color
         print 'success!'""")
     self.multi_level_tester(
-      max_level=15,
+      max_level=13,
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
@@ -321,8 +334,7 @@ class TestsLevel12(HedyTester):
   def test_float_addition_in_var(self):
     code = textwrap.dedent("""\
             antwoord is 2.5 + 2.5
-            print antwoord
-            """)
+            print antwoord""")
     expected = textwrap.dedent("""\
             antwoord = 2.5 + 2.5
             print(f'{antwoord}')""")
@@ -337,8 +349,7 @@ class TestsLevel12(HedyTester):
     code = textwrap.dedent("""\
             getal1 is 5
             getal2 is 4.3
-            print 'dat is dan: ' getal1 + getal2
-            """)
+            print 'dat is dan: ' getal1 + getal2""")
     expected = textwrap.dedent("""\
             getal1 = 5
             getal2 = 4.3

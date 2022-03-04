@@ -1,20 +1,24 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="w-full max-w-xl text-center mx-auto">
+<div class="w-full max-w-xl mx-auto">
   <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('reset')">
-    <h2 class="py-2">{{auth.reset_password}}</h2>
-    <div class="mb-4">
-        <label>{{auth.password}}</label>
-        <input id="password" type=password required>
+    <h2 class="py-2 text-center">{{auth.reset_password}}</h2>
+    <div class="flex flex-row items-center justify-center mb-2">
+        <label class="inline-block w-1/3 ltr:mr-4 rtl:ml-4">{{auth.password}}</label>
+        <input class="inline-block w-1/2 px-2 py-1 rounded-lg border-gray-400" id="password" minlength="6" type=password required>
     </div>
-    <div class="mb-4">
-        <label>{{auth.password_repeat}}</label>
-        <input id="password_repeat" type=password required>
+    <div class="flex flex-row items-center justify-center mb-2">
+        <label class="inline-block w-1/3 ltr:mr-4 rtl:ml-4">{{auth.password_repeat}}</label>
+        <input class="inline-block w-1/2 px-2 py-1 rounded-lg border-gray-400" id="password_repeat" minlength="6" type=password required>
     </div>
-    <div id="error" class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
-    <div id="success" class="flex-0 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 mb-4 shadow-md" role="alert" style="display: none;"></div>
-    <button type="submit" class="green-btn py-2">{{auth.reset_password}}</button>
+    <input type="hidden" id="username" name="username" value="{{ reset_username }}">
+    <input type="hidden" id="token" name="token" value="{{ reset_token }}">
+    <div class="flex flex-row items-center justify-center mt-4">
+        <button type="submit" class="green-btn py-2">
+            {{auth.reset_password}}
+        </button>
+    </div>
   </form>
 </div>
 {% endblock %}

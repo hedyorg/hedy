@@ -1,6 +1,5 @@
 import contextlib
 import datetime
-import glob
 import time
 import functools
 import os
@@ -8,8 +7,6 @@ import re
 import string
 import random
 import uuid
-from pathlib import Path
-from typing import List
 
 from ruamel import yaml
 from website import querylog
@@ -198,19 +195,15 @@ def markdown_to_html_tags(markdown):
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all()
 
+
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None):
     if error not in [403, 404, 500]:
         error = 404
+    # Todo TB -> Instead of giving the key in the function an finding it here: Give the correct string as argument
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
                            page_error=page_error or g.ui_texts.get(ui_message) or '',
                            default=g.ui_texts.get("default_" + str(error))), error
 
-def gather_content_files(*path) -> List[str]:
-    return glob.glob(f"{construct_content_path(*path)}{os.path.sep}*.yaml")
-
-def construct_content_path(*path) -> str:
-    utility_script_location = Path(__file__).parent.absolute()
-    return os.path.join(utility_script_location, "content", *path)
 
 def session_id():
     """Returns or sets the current session ID."""
@@ -220,4 +213,3 @@ def session_id():
         else:
             session['session_id'] = uuid.uuid4().hex
     return session['session_id']
-

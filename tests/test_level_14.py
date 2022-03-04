@@ -36,7 +36,7 @@ class TestsLevel14(HedyTester):
     code = textwrap.dedent(f"""\
       name is ask 'What is your name?'
       if name != 'Hedy'
-        print 'meh'""")
+          print 'meh'""")
     expected = textwrap.dedent(f"""\
       name = input(f'What is your name?')
       try:
@@ -89,7 +89,7 @@ class TestsLevel14(HedyTester):
     code = textwrap.dedent(f"""\
       name is ask 'What is your name?'
       if name {comparison} 'Hedy'
-        print 'meh'""")
+          print 'meh'""")
     expected = textwrap.dedent(f"""\
       name = input(f'What is your name?')
       try:
@@ -140,8 +140,8 @@ class TestsLevel14(HedyTester):
   def tests_smaller_no_spaces(self, comparison):
     code = textwrap.dedent(f"""\
     leeftijd is ask 'Hoe oud ben jij?'
-    if leeftijd{comparison}12
-      print 'Dan ben je jonger dan ik!'""")
+    if leeftijd {comparison} 12
+        print 'Dan ben je jonger dan ik!'""")
     expected = textwrap.dedent(f"""\
     leeftijd = input(f'Hoe oud ben jij?')
     try:
@@ -211,12 +211,13 @@ class TestsLevel14(HedyTester):
     ('1', '1'),
     ('1.3', '1.3'),
     ('1, 2', '[1, 2]')])
+
   def test_not_equal(self, arg, exp):
     code = textwrap.dedent(f"""\
       a is {arg}
       b is {arg}
       if a != b
-        b is 1""")
+          b is 1""")
 
     expected = textwrap.dedent(f"""\
       a = {exp}
@@ -246,6 +247,42 @@ class TestsLevel14(HedyTester):
       expected=expected,
       max_level=16)
 
+  @parameterized.expand(HedyTester.equality_comparison_commands)
+  def test_equality_with_lists(self, comparison):
+    code = textwrap.dedent(f"""\
+    a = 1, 2
+    b = 1, 2
+    if a {comparison} b
+        sleep""")
+
+    expected = textwrap.dedent(f"""\
+    a = [1, 2]
+    b = [1, 2]
+    if str(a) == str(b):
+      time.sleep(1)""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=15)
+
+  def test_inequality_with_lists(self):
+    code = textwrap.dedent("""\
+    a = 1, 2
+    b = 1, 2
+    if a != b
+        sleep""")
+
+    expected = textwrap.dedent("""\
+    a = [1, 2]
+    b = [1, 2]
+    if str(a).zfill(100)!=str(b).zfill(100):
+      time.sleep(1)""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=15)
 
   @parameterized.expand(HedyTester.comparison_commands)
   def test_comparisons_with_boolean(self, comparison):

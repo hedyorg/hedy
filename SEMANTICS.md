@@ -782,7 +782,7 @@ Level 5 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy print 'great' else print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items print 'found!'</td>
@@ -1022,7 +1022,7 @@ Level 6 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy print 'great' else print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items print 'found!'</td>
@@ -1278,7 +1278,7 @@ Level 7 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy print 'great' else print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items print 'found!'</td>
@@ -1542,7 +1542,7 @@ Level 8 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -1811,7 +1811,7 @@ Level 9 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -2082,7 +2082,7 @@ Level 10 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -2322,7 +2322,7 @@ Level 11 supports:
   </tr>
   <tr>
     <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
@@ -2540,7 +2540,7 @@ Level 12 supports:
     <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
   </tr>
   <tr>
-    <td>x is a, b, c<br>print x at random</td>
+    <td>x is 'a', 'b', 'c'<br>print x at random</td>
     <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
   </tr>
   <tr>
@@ -2556,11 +2556,11 @@ Level 12 supports:
     <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items is 'red', 'green'<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
     <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
   </tr>
   <tr>
@@ -2780,7 +2780,7 @@ Level 13 supports:
     <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
   </tr>
   <tr>
-    <td>x is a, b, c<br>print x at random</td>
+    <td>x is 'a', 'b', 'c'<br>print x at random</td>
     <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
   </tr>
   <tr>
@@ -2796,15 +2796,15 @@ Level 13 supports:
     <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items is 'red', 'green'<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
     <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
   </tr>
   <tr>
@@ -3049,7 +3049,7 @@ Level 14 supports:
     <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
   </tr>
   <tr>
-    <td>x is a, b, c<br>print x at random</td>
+    <td>x is 'a', 'b', 'c'<br>print x at random</td>
     <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
   </tr>
   <tr>
@@ -3065,19 +3065,19 @@ Level 14 supports:
     <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2<br/>&emsp;&emsp;print a</td>
     <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
   </tr>
   <tr>
-    <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items is 'red', 'green'<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
     <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
   </tr>
   <tr>
@@ -3330,7 +3330,7 @@ Level 15 supports:
     <td>x = input('y')<br>try:<br>&emsp;&emsp;x = int(x)<br>except ValueError:<br/>&emsp;&emsp;x = float(x)<br>&emsp;&emsp;except ValueError:<br/>&emsp;&emsp;&emsp;&emsp;pass<br/>print(x)</td>
   </tr>
   <tr>
-    <td>x is a, b, c<br>print x at random</td>
+    <td>x is 'a', 'b', 'c'<br>print x at random</td>
     <td>x = ['a', 'b', 'c']<br>print(random.choice(x))</td>
   </tr>
   <tr>
@@ -3346,19 +3346,19 @@ Level 15 supports:
     <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2<br/>&emsp;&emsp;print a</td>
     <td>a = 1<br/>if str(a).zfill(100) (< | <= | > | >= | !=) str('2').zfill(100):<br/>&emsp;&emsp;print(f'{a}')</td>
   </tr>
   <tr>
-    <td>items is red, green<br/>selected is red<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
+    <td>items is 'red', 'green'<br/>selected is 'red'<br/>if selected in items<br/>&emsp;&emsp;print 'found!'</td>
     <td>items = ['red', 'green']<br/>selected = 'red'<br/>if selected in items:<br/>&emsp;&emsp;print(f'found!')</td>
   </tr>
   <tr>
@@ -3629,12 +3629,12 @@ Level 16 supports:
     <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy'<br/>&emsp;&emsp;print 'great'<br/>else<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2<br/>&emsp;&emsp;print a</td>
@@ -3925,16 +3925,16 @@ Level 17 supports:
     <td>a = [1, 2, 3]<br/>f = 4<br/>try:<br/>&emsp;&emsp;a.remove(f)<br/>except:<br/>&emsp;&emsp;pass</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is Hedy:<br/>&emsp;&emsp;print 'great'<br/>else:<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'Hedy':<br/>&emsp;&emsp;print 'great'<br/>else:<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if name == 'Hedy':<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy:<br/>&emsp;&emsp;print 'great'<br/>else:<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy':<br/>&emsp;&emsp;print 'great'<br/>else:<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
-    <td>name is Hedy<br/>if name is hedy (or | and) name is Hedy:<br/>&emsp;&emsp;print 'great'<br/>elif name is Felienne:<br/>&emsp;&emsp;print 'lovely!'<br/>elif name is Julia:<br/>&emsp;&emsp;print 'Oh that is the most popular baby name in the Netherlands!'<br/>else:<br/>&emsp;&emsp;print 'fine'</td>
-    <td>naam = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
+    <td>name is 'Hedy'<br/>if name is 'hedy' (or | and) name is 'Hedy':<br/>&emsp;&emsp;print 'great'<br/>elif name is 'Felienne':<br/>&emsp;&emsp;print 'lovely!'<br/>elif name is 'Julia':<br/>&emsp;&emsp;print 'Oh that is the most popular baby name in the Netherlands!'<br/>else:<br/>&emsp;&emsp;print 'fine'</td>
+    <td>name = 'Hedy'<br/>if str(name) == str('Hedy') (or | and) str(name) == str('hedy'):<br/>&emsp;&emsp;print(f'great')<br/>else:<br/>&emsp;&emsp;print(f'fine')</td>
   </tr>
   <tr>
     <td>a is 1<br/>if a (< | <= | > | >= | !=) 2:<br/>&emsp;&emsp;print a</td>

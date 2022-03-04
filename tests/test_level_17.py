@@ -70,8 +70,7 @@ class TestsLevel17(HedyTester):
     if userc is computerc and ucerc is 'Hedy':
         print 'SERI'
     else:
-        print 'Komputer'
-    """)
+        print 'Komputer'""")
 
     expected = textwrap.dedent("""\
     computerc = 'PC'
@@ -114,8 +113,8 @@ class TestsLevel17(HedyTester):
     a is 2
     b is 3
     for a in range 2 to 4:
-      a is a + 2
-      b is b + 2""")
+        a is a + 2
+        b is b + 2""")
     expected = textwrap.dedent("""\
     a = 2
     b = 3
@@ -133,24 +132,21 @@ class TestsLevel17(HedyTester):
     code = textwrap.dedent("""\
     a is 5
     if a is 1:
-      x is 2
+        x is 2
     else:
-      x is 222""")
+        x is 222""")
     expected = textwrap.dedent("""\
     a = 5
     if str(a) == str('1'):
       x = 2
     else:
       x = 222""")
-
-
-
     self.single_level_tester(code=code, expected=expected)
 
   def test_forloop(self):
     code = textwrap.dedent("""\
     for i in range 1 to 10:
-      print i
+        print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
     step = 1 if int(1) < int(10) else -1
@@ -167,9 +163,9 @@ class TestsLevel17(HedyTester):
     code = textwrap.dedent("""\
     a is 1
     if a is 1:
-      print a
-    else:   
-      print 'nee'""")
+        print a
+    else:
+        print 'nee'""")
 
     expected = textwrap.dedent("""\
     a = 1
@@ -200,9 +196,9 @@ class TestsLevel17(HedyTester):
     code = textwrap.dedent("""\
     a is 1
     if a is 1  :
-      print a
-    else:   
-      print 'nee'""")
+        print a
+    else:
+        print 'nee'""")
 
     expected = textwrap.dedent("""\
     a = 1
@@ -221,13 +217,13 @@ class TestsLevel17(HedyTester):
     # todo can me multitester with higher levels!
     code = textwrap.dedent("""\
     for i in range 0 to 10:
-      antwoord is ask 'Wat is 5*5'
-      if antwoord is 24:
-        print 'Dat is fout!'
-      else:
-        print 'Dat is goed!'
-      if antwoord is 25:
-        i is 10""")
+        antwoord is ask 'Wat is 5*5'
+        if antwoord is 24:
+            print 'Dat is fout!'
+        else:
+            print 'Dat is goed!'
+        if antwoord is 25:
+            i is 10""")
 
     expected = textwrap.dedent("""\
     step = 1 if int(0) < int(10) else -1
@@ -256,9 +252,9 @@ class TestsLevel17(HedyTester):
     code = textwrap.dedent("""\
       a is 5
       if a is 1:
-        x is 2
+          x is 2
       elif a is 2:
-        x is 222""")
+          x is 222""")
     expected = textwrap.dedent("""\
       a = 5
       if str(a) == str('1'):
@@ -272,11 +268,11 @@ class TestsLevel17(HedyTester):
 
   def test_if_elif_french(self):
     code = textwrap.dedent("""\
-      a is 5
-      si a is 1:
-        x is 2
-      sinon si a is 2:
-        x is 222""")
+      a est 5
+      si a est 1:
+          x est 2
+      sinon si a est 2:
+          x est 222""")
     expected = textwrap.dedent("""\
       a = 5
       if str(a) == str('1'):
@@ -290,11 +286,11 @@ class TestsLevel17(HedyTester):
     code = textwrap.dedent("""\
       a is 5
       if a is 1:
-        x is 2
+          x is 2
       elif a is 4:
-        x is 3
+          x is 3
       elif a is 2:
-        x is 222""")
+          x is 222""")
     expected = textwrap.dedent("""\
       a = 5
       if str(a) == str('1'):
@@ -316,14 +312,22 @@ class TestsLevel17(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
-  def test_equality_with_list_gives_error(self):
+  def test_equality_with_lists(self):
     code = textwrap.dedent("""\
-      color is [5, 6, 7]
-      if 1 is color:
+      m is [1, 2]
+      n is [1, 2]
+      if m is n:
           a is 1""")
+
+    expected = textwrap.dedent("""\
+      m = [1, 2]
+      n = [1, 2]
+      if str(m) == str(n):
+        a = 1""")
+
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException
+      expected=expected
     )
 
   def test_equality_with_incompatible_types_gives_error(self):
@@ -355,8 +359,6 @@ class TestsLevel17(HedyTester):
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')""")
 
-
-
     self.single_level_tester(code=code, expected=expected)
 
   @parameterized.expand(HedyTester.number_comparison_commands)
@@ -371,14 +373,18 @@ class TestsLevel17(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
-
   def test_not_equal_string_literal(self):
     code = textwrap.dedent(f"""\
-      if 'quoted' != 'string':
-        sleep 0""")
+    if 'quoted' != 'string':
+      sleep""")
     expected = textwrap.dedent(f"""\
-      if 'quoted'.zfill(100)!='string'.zfill(100):
-        time.sleep(0)""")
+    if 'quoted'.zfill(100)!='string'.zfill(100):
+      time.sleep(1)""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected
+    )
 
   @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])
   def test_not_equal(self, arg):
@@ -386,7 +392,7 @@ class TestsLevel17(HedyTester):
       a = {arg}
       b = {arg}
       if a != b:
-        b = 1""")
+          b = 1""")
 
     expected = textwrap.dedent(f"""\
       a = {arg}
@@ -414,6 +420,3 @@ class TestsLevel17(HedyTester):
       code=code,
       exception=exceptions.InvalidTypeCombinationException
     )
-
-
-

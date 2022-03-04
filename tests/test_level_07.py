@@ -1,5 +1,6 @@
 import hedy
 import textwrap
+from parameterized import parameterized
 from test_level_01 import HedyTester
 
 class TestsLevel7(HedyTester):
@@ -7,13 +8,11 @@ class TestsLevel7(HedyTester):
 
   #repeat tests
   def test_repeat_turtle(self):
-    code = textwrap.dedent("""\
-    repeat 3 times forward 100""")
+    code = "repeat 3 times forward 100"
 
-    expected = textwrap.dedent("""\
-    for i in range(int('3')):
-      t.forward(100)
-      time.sleep(0.1)""")
+    expected = HedyTester.dedent(
+      "for i in range(int('3')):",
+      (HedyTester.forward_transpiled(100), '  '))
 
     self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
 
@@ -44,7 +43,7 @@ class TestsLevel7(HedyTester):
     self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
 
   def test_repeat_basic_print(self):
-    code = textwrap.dedent("""\
+    code = textwrap.dedent(f"""\
     repeat 5 times print 'me wants a cookie!'""")
 
     expected = textwrap.dedent("""\
@@ -58,6 +57,26 @@ class TestsLevel7(HedyTester):
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!""")
+
+    self.single_level_tester(code=code, expected=expected, output=output)
+
+  @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫', '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
+  def test_repeat_all_numerals(self, number):
+    code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
+
+    expected = textwrap.dedent(f"""\
+    for i in range(int('{number}')):
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
+
+    output = textwrap.dedent("""\
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!""")
+
+    print("number:", number)
 
     self.single_level_tester(code=code, expected=expected, output=output)
 

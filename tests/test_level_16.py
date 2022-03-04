@@ -49,7 +49,7 @@ class TestsLevel16(HedyTester):
 
     def test_print_list_access(self):
         code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers'] 
+            fruit is ['banaan', 'appel', 'kers']
             print fruit[1]""")
         expected = textwrap.dedent("""\
             fruit = ['banaan', 'appel', 'kers']
@@ -256,13 +256,28 @@ class TestsLevel16(HedyTester):
           expected=expected
         )
 
-    def test_equality_with_list_gives_error(self):
+    def test_equality_with_lists(self):
+        code = textwrap.dedent("""\
+        m is [1, 2]
+        n is [1, 2]
+        if m is n
+            print 'success!'""")
+
+        expected = textwrap.dedent("""\
+        m = [1, 2]
+        n = [1, 2]
+        if str(m) == str(n):
+          print(f'success!')""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_equality_with_number_and_list_gives_error(self):
         code = textwrap.dedent("""\
         color is [5, 6, 7]
         if 1 is color
             print 'success!'""")
 
-        with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException):
+        with self.assertRaises(hedy.exceptions.InvalidTypeCombinationException):
             hedy.transpile(code, self.level)
 
     @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])

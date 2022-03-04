@@ -33,12 +33,18 @@ var StopExecution = false;
     counter += 1;
     $(preview).addClass('text-lg rounded');
     $(preview).attr('id', "code_block_" + counter);
-    $(preview).attr('lang', "en");
+    // We set the language of the editor to the current keyword_language -> needed when copying to main editor
+    $(preview).attr('lang', <string>window.State.keyword_language);
     $(preview).addClass('overflow-x-hidden');
-    const exampleEditor = turnIntoAceEditor(preview, true)
+    const exampleEditor = turnIntoAceEditor(preview, true);
+
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
-    exampleEditor.setOptions({ minLines: 2 });
+    if ($(preview).hasClass('common-mistakes')) {
+      exampleEditor.setOptions({ minLines: 10 });
+    } else {
+      exampleEditor.setOptions({ minLines: 2 });
+    }
 
     if (dir === "rtl") {
          exampleEditor.setOptions({ rtl: true });
@@ -47,27 +53,19 @@ var StopExecution = false;
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
     // And add an overlay button to the editor, if the no-copy-button attribute isn't there
     if (! $(preview).hasClass('no-copy-button')) {
-      const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 60 }).appendTo(preview);
-      $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
+      const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+      let symbol = "⇥";
+      if (dir === "rtl") {
+        symbol = "⇤";
+      }
+      $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
-        if (!($('#editor').attr('lang') === $(preview).attr('lang'))) {
-          $('#editor').attr('lang', <string>$(preview).attr('lang'));
-          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-        }
-    });
+        update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+      });
     }
     if($(preview).attr('level')){
       let level = String($(preview).attr('level'));
       exampleEditor.session.setMode(getHighlighter(level));
-    }
-    if (window.State.keyword_language && window.State.other_keyword_language) {
-      // Increase minLines otherwise the dropdown menu doesn't fit
-      exampleEditor.setOptions({ minLines: 4 });
-      const selectorContainer = $('<div>').css({ position: 'absolute', top: 5, right: 70, width: 'auto' }).appendTo(preview).attr('id', 'selector_container_' + counter);
-      const dropdownContainer1 = create_language_selector(counter, window.State.keyword_language, window.State.other_keyword_language, false);
-      const dropdownContainer2 = create_language_selector(counter, window.State.other_keyword_language, window.State.keyword_language, true);
-      selectorContainer.append(dropdownContainer1);
-      selectorContainer.append(dropdownContainer2);
     }
   }
 
@@ -178,8 +176,16 @@ var StopExecution = false;
       // When it is the main editor -> we want to show line numbers!
       if (element.getAttribute('id') === "editor") {
         editor.setOptions({
-        showGutter: true
-      });
+          showGutter: true
+        });
+      }
+      if ($(element).hasClass('common-mistakes')) {
+        $(element).height("22rem");
+        editor.setOptions({
+          showGutter: true,
+          showPrintMargin: true,
+          highlightActiveLine: true
+        });
       }
     }
 
@@ -199,34 +205,8 @@ var StopExecution = false;
   }
 })();
 
-function create_language_selector(index: number, current_lang: string, other_lang: string, hidden: boolean) {
-  const dropdownContainer = $('<div>').addClass("dropdown font-sans inline-block right-0 absolute z-10 mx-2 mb-0 text-white").attr('id', 'keyword_selector');
-  dropdownContainer.attr('lang', current_lang);
-  if (hidden) {
-    dropdownContainer.addClass('hidden');
-  }
-  const button = $('<button>').addClass("inline-flex items-center text-xl px-2 py-1 bg-blue-600 rounded-lg").text(current_lang.toUpperCase());
-  button.append("<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\"  d=\"M19 9l-7 7-7-7\"></path></svg>");
-  const menu = $('<div>').addClass("dropdown-menu absolute hidden right-0");
-  const list = $('<ul>').addClass("dropdown-menu list-none text-xl z-10 text-white px-4 py-1 mr-1 bg-blue-600 rounded-lg mt-2 cursor-pointer");
-  const link = $('<a>').addClass("no-underline text-white").text(other_lang.toUpperCase());
-  link.attr('onclick', "hedyApp.change_keyword_language ('selector_container_" + index + "','code_block_" + index + "','" + current_lang + "','" + other_lang + "');event.preventDefault();");
-
-  list.append(link);
-  menu.append(list);
-  dropdownContainer.append(button);
-  dropdownContainer.append(menu);
-  return dropdownContainer
-}
-
 export function getHighlighter(level: string) {
-  const modeExceptions: Record<string, string> = {
-        '9': 'ace/mode/level9and10',
-        '10': 'ace/mode/level9and10',
-        '18': 'ace/mode/level18and19',
-        '19': 'ace/mode/level18and19',
-      };
-  return modeExceptions[level] || `ace/mode/level` + level;
+  return `ace/mode/level` + level;
 }
 
 function reloadOnExpiredSession () {
@@ -339,7 +319,6 @@ export function pushAchievement(achievement: string) {
     dataType: 'json'
     }).done(function(response: any) {
       if (response.achievements) {
-        console.log(response.achievements);
         showAchievements(response.achievements, false, "");
       }
   });
@@ -475,16 +454,6 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, le
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
-  if (auth.profile) {
-    if (window.State.examples_left > 0) {
-      window.State.examples_left = window.State.examples_left - 1;
-    } else {
-      $("#commands-window").hide();
-      $("#toggle-button").hide();
-      modal.alert(auth.texts['examples_used'], 3000, true);
-      return;
-    }
-  }
   var editor = ace.edit("editor");
 
   var MOVE_CURSOR_TO_END = 1;
@@ -554,16 +523,6 @@ export function saveit(level: number | [number, string], lang: string, name: str
   if (reloadOnExpiredSession ()) return;
 
   try {
-    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
-    if (! auth.profile) {
-       return modal.confirm (auth.texts['save_prompt'], function () {
-         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-         window.location.pathname = '/login';
-       });
-    }
-
     $.ajax({
       type: 'POST',
       url: '/programs/duplicate-check',
@@ -580,6 +539,17 @@ export function saveit(level: number | [number, string], lang: string, name: str
         });
       } else {
          storeProgram(level, lang, name, code, cb);
+      }
+    }).fail(function(err) {
+      if (err.status == 403) { // The user is not allowed -> so not logged in
+        return modal.confirm (auth.texts['save_prompt'], function () {
+           // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+           if (window.State && window.State.adventure_name && !Array.isArray(level)) {
+             level = [level, window.State.adventure_name];
+           }
+           localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+           window.location.pathname = '/login';
+         });
       }
     });
   } catch (e: any) {
@@ -1114,7 +1084,10 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
-  return theGlobalEditor?.getValue();
+  // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
+  // but that upsets the parser so this removes those spaces also:
+  // Remove whitespace at the end of every line
+  return theGlobalEditor?.getValue().replace(/ +$/mg, '');
 }
 
 export function confetti_cannon(){
@@ -1285,8 +1258,8 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
     });
     return editor;
   }
-export function toggle_developers_mode() {
-  if ($('#developers_toggle').is(":checked")) {
+export function toggle_developers_mode(enforced: boolean) {
+  if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures').hide();
       pushAchievement("lets_focus");
   } else {
@@ -1334,17 +1307,12 @@ export function change_language(lang: string) {
     });
 }
 
-function update_keywords_commands(target_id: any, start_lang: string, new_lang: string, selector_container: string) {
-  // If the target isn't an ace editor -> There is nothing we can do!
-  if (!ace.edit(target_id)) {
-    return;
-  }
-
+export function change_keyword_language(start_lang: string, new_lang: string) {
   $.ajax({
     type: 'POST',
     url: '/translate_keywords',
     data: JSON.stringify({
-      code: ace.edit(target_id).getValue(),
+      code: ace.edit('editor').getValue(),
       start_lang: start_lang,
       goal_lang: new_lang,
       level: window.State.level
@@ -1353,9 +1321,9 @@ function update_keywords_commands(target_id: any, start_lang: string, new_lang: 
     dataType: 'json'
   }).done(function (response: any) {
     if (response.success) {
-      ace.edit(target_id).setValue(response.code);
-      $('#' + target_id).attr('lang', new_lang);
-      update_view(selector_container, new_lang);
+      ace.edit('editor').setValue(response.code);
+      $('#editor').attr('lang', new_lang);
+      update_view('main_editor_keyword_selector', new_lang);
     }
   }).fail(function (err) {
       modal.alert(err.responseText, 3000, true);
@@ -1370,10 +1338,6 @@ function update_view(selector_container: string, new_lang: string) {
       $(this).hide();
     }
   });
-}
-
-export function change_keyword_language(selector_container: string, target_id: string, old_lang: string, new_lang: string) {
-  update_keywords_commands(target_id, old_lang, new_lang, selector_container);
 }
 
 export function select_profile_image(image: number) {

@@ -34,8 +34,6 @@ def routes(app, database, achievements):
         if not is_quiz_enabled():
             return quiz_disabled_error()
 
-        g.prefix = '/hedy'
-
         # A unique identifier to record the answers under
         session['quiz-attempt-id'] = uuid.uuid4().hex
 
@@ -45,13 +43,14 @@ def routes(app, database, achievements):
 
         statistics.add(current_user()['username'], lambda id_: DATABASE.add_quiz_started(id_, level))
 
-        return render_template('startquiz.html', level=level, next_assignment=1)
+        return render_template('quiz/startquiz.html', level=level, next_assignment=1)
 
     # Quiz mode
     # Fill in the filename as source
     @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>', methods=['GET'], defaults={'attempt': 1})
     @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>/<int:attempt>', methods=['GET'])
     def get_quiz(level_source, question_nr, attempt):
+
         if not is_quiz_enabled():
             return quiz_disabled_error()
 
@@ -63,9 +62,6 @@ def routes(app, database, achievements):
         questions = quiz_data_file_for(g.lang, level_source)
         if not questions:
             return no_quiz_data_error()
-
-        # set globals
-        g.prefix = '/hedy'
 
         question_status = 'start' if attempt == 1 else 'false'
 
@@ -83,7 +79,7 @@ def routes(app, database, achievements):
 
         # Store the answer in the database. If we don't have a username,
         # use the session ID as a username.
-        username = current_user()['username'] or f'anonymous:{session_id()}'
+        username = current_user()['username'] or f'anonymous:{utils.session_id()}'
 
         if attempt == 1:
             is_correct = is_correct_answer(question, chosen_option)
@@ -97,7 +93,7 @@ def routes(app, database, achievements):
 
         quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
 
-        return render_template('quiz_question.html',
+        return render_template('quiz/quiz_question.html',
                                level_source=level_source,
                                quiz_answers=quiz_answers,
                                questionStatus=question_status,
@@ -131,9 +127,6 @@ def routes(app, database, achievements):
         if not questions:
             return no_quiz_data_error()
 
-        # set globals
-        g.prefix = '/hedy'
-
         achievement = None
         total_score = round(session.get('total_score', 0) / max_score(questions) * 100)
         username = current_user()['username']
@@ -149,7 +142,7 @@ def routes(app, database, achievements):
             if achievement:
                 achievement = json.dumps(achievement)
 
-        return render_template('endquiz.html', correct=session.get('correct_answer', 0),
+        return render_template('quiz/endquiz.html', correct=session.get('correct_answer', 0),
                                total_score=total_score,
                                level_source=level,
                                achievement=achievement,
@@ -210,7 +203,7 @@ def routes(app, database, achievements):
                                         answer=chosen_option)
 
             if is_correct:
-                score = correct_answer_score(question)
+                score = int(correct_answer_score(question))
                 session['total_score'] = session.get('total_score', 0) + score
                 session['correct_answer'] = session.get('correct_answer', 0) + 1
 
@@ -262,7 +255,7 @@ def routes(app, database, achievements):
 
         quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
 
-        return render_template('feedback.html',
+        return render_template('quiz/feedback.html',
                                quiz_answers=quiz_answers,
                                question=question,
                                questions=questions,
