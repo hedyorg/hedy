@@ -114,7 +114,7 @@ export const auth = {
       }).done (function () {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin({"teacher": false});
+        afterLogin({"first_time": true});
       }).fail (function (response) {
         if (response.responseText) {
           modal.alert(response.responseText, 3000, true);
@@ -208,7 +208,7 @@ export const auth = {
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
-        modal.alert(response.responseText, 3000, false);
+        modal.alert(response.message, 3000, false);
       }).fail (function (response) {
         if (response.responseText) {
           modal.alert(response.responseText, 3000, true);
@@ -231,7 +231,7 @@ export const auth = {
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
-        modal.alert(response.responseText, 2000, false);
+        modal.alert(response.message, 2000, false);
         setTimeout(function (){
           auth.redirect ('login');
         }, 2000);
@@ -350,11 +350,7 @@ async function afterLogin(loginData: any) {
   if (savedProgram) {
     await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3]);
     localStorage.removeItem('hedy-first-save');
-
-    const redirect = getSavedRedirectPath();
-    if (redirect) {
-      return auth.redirect(redirect);
-    }
+    return auth.redirect('programs');
   }
 
   const joinClassString = localStorage.getItem('hedy-join');
@@ -369,11 +365,16 @@ async function afterLogin(loginData: any) {
     return auth.redirect(redirect);
   }
 
+  // If the user logs in for the first time -> redirect to the landing-page after signup
+  if (loginData['first_time']) {
+    return auth.redirect('landing-page');
+  }
   // If the user is a teacher -> re-direct to for-teachers page after login
   if (loginData['teacher']) {
     return auth.redirect('for-teachers');
   }
-  auth.redirect('landing-page');
+  // Otherwise, redirect to the programs page
+  auth.redirect('programs');
 }
 
 function getSavedRedirectPath() {
