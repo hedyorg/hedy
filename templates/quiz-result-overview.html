@@ -1,57 +1,101 @@
 {% extends "quiz.html" %}
 
+{% if achievement %}
+    <script>
+        $(function () {
+            hedyApp.showAchievements({{ achievement|safe }}, false, "");
+        });
+    </script>
+{% endif %}
+
+<div id="achievement_pop-up" class="inset-0 absolute z-10 fixed w-1/2 hidden"
+     style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
+        <h3 class="text-white">{{ auth.achievement_earned }}</h3>
+        <img id="achievement_reached_image" src="{{ static('/images/achievement.png') }}" class="h-32 mx-auto">
+        <h4 class="text-white italic" id="achievement_reached_title"></h4>
+        <p id="achievement_reached_text"></p>
+    </div>
+</div>
+
+
 {% block question %}
-    <body>
-    <div class="flex flex-col">
-        <h1 class="p-8 font-bold text-4xl font-slab"> {{ ui.results_quiz }} </h1>
+    <div class="flex flex-col justify-center items-center mb-4">
+        <h1 class="font-bold text-4xl font-slab"> {{ ui.results_quiz }} </h1>
+        <h3 class="font-semibold text-2xl italic font-slab"> {{ ui.score }} </h3>
+        <div class="border-4 border-yellow-600 rounded-full  h-24 w-24  flex items-center bg-yellow-300 justify-center">
+            <p class="text-yellow-600 font-bold text-4xl text-center font-slab ">{{ total_score|string }}</p></div>
+    </div>
 
+    <div class="container-results m-6">
         {% for i in range(result_items|length) %}
-              <div class="flex flex-col option-col">
+            <div class="flex grid grid-rows">
+                <div class=" grid-item grid grid-cols-2 gap-x-4">
 
-            <div class="bg-gray-200">
-                <div class="flex-col">
-                    {% if "question_text" in result_items[i] %}
-                        <p class="question-text text-l font-bold align-top"> {{ result_items[i].question_text | nl2br }}</p>
-                    {% endif %}
-                    {% if "question_code" in result_items[i] %}
-                        {% if result_items[i]["question_code"] != "..." %}
-                        <pre><code class="block text-l">{{ result_items[i].question_code | nl2br }}</code></pre>
+                    <div class="bg-blue-200 rounded-t-md pb-6 pt-2 flex-col-75">
+
+                        {% if "question_text" in result_items[i] %}
+                            <p class="font-slab font-bold text-xl italic question-text text-l text-center font-bold"> {{ i + 1 }}) {{ result_items[i].question_text | nl2br }}</p>
                         {% endif %}
+                        {% if "question_code" in result_items[i] %}
+                            {% if result_items[i]["question_code"] != "..." %}
+                                <pre class="m-3"><code
+                                        class=" text-white block text-l">{{ result_items[i].question_code | nl2br }}</code></pre>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    {% if result_items[i].is_correct %}
+                        <p class="place-content-center font-semibold text-xl font-slab bg-green-500 flex  m-0 rounded-t-md pb-6 pt-2 text-center flex-col-25">
+                            Goed! </p>
+                    {% else %}
+                        <p class="place-content-center font-semibold text-xl font-slab bg-red-500 flex m-0 rounded-t-md pb-6 pt-2 text-center flex-col-25">
+                            Fout! </p>
                     {% endif %}
                 </div>
-                <div class="
-                {% if not result_items[i].is_correct %}
-                    option-block incorrect-option p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row
-                {% else %}
-                    option-block p-1 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row
-                {% endif %}
-                     ">
+                <div class="grid-item grid grid-cols-2 gap-x-4">
+                    <div class="table-el bg-blue-500 shadow-lg flex flex-col-75 rounded-b-md">
                     {% if result_items[i].index_chosen == 0 %}
-                        {{ triangle|safe }}
-                    {% elif result_items[i].index_chosen == 1 %}
-                        {{ diamond|safe }}
-                    {% elif result_items[i].index_chosen == 2 %}
-                        {{ square|safe }}
-                    {% elif result_items[i].index_chosen == 3 %}
-                        {{ circle|safe }}
-                    {% elif result_items[i].index_chosen == 4 %}
-                        {{ pentagram |safe }}
-                    {% elif result_items[i].index_chosen == 5 %}
-                        {{ triangle_6|safe }}
-                    {% endif %}
-                    {% if "option_text" in result_items[i] %}
-                        <p class="option-text text-l font-bold align-top"> {{ result_items[i].option_text | nl2br }}</p>
-                    {% elif "code" in result_items[i] %}
-                        <pre><code class="block text-l">{{ result_items[i].code | nl2br }}</code></pre>
+                            {{ triangle|safe }}
+                        {% elif result_items[i].index_chosen == 1 %}
+                            {{ diamond|safe }}
+                        {% elif result_items[i].index_chosen == 2 %}
+                            {{ square|safe }}
+                        {% elif result_items[i].index_chosen == 3 %}
+                            {{ circle|safe }}
+                        {% elif result_items[i].index_chosen == 4 %}
+                            {{ pentagram |safe }}
+                        {% elif result_items[i].index_chosen == 5 %}
+                            {{ triangle_6|safe }}
+                        {% endif %}
+
+                        {% if "option_text" in result_items[i] %}
+                            <p class="pl-6 flex place-content-center text-white text-l font-bold"> {{ result_items[i].option_text | nl2br }}</p>
+                        {% elif "code" in result_items[i] %}
+                            <pre><code class="pl-6 block text-l">{{ result_items[i].code | nl2br }}</code></pre>
+                        {% endif %}
+                    </div>
+
+                    {% if result_items[i].is_correct and result_items[i].attempts ==  1 %}
+                         <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25">
+                            In {{ result_items[i].attempts - 1 }} poging </p>
+                         {% elif result_items[i].is_correct and result_items[i].attempts > 1 %}
+                               <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25"> In
+                            {{ result_items[i].attempts - 1 }}
+                            pogingen </p>
+                         {% else %}
+                        <p class="place-content-center table-el text-center bg-red-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25"> In
+                            {{ result_items[i].attempts - 1 }}
+                            pogingen </p>
                     {% endif %}
                 </div>
-            </div>
-            </div>
             </div>
         {% endfor %}
+    </div>
+    <div class="p-10 button-bar border-t-8 border-green-600">
+        <div></div>
         <button class="green-btn ltr:ml-1 rtl:mr-1"
                 onclick="window.parent.location = '{{ hedy_link(level, next_assignment) }}';"> {{ ui.go_to_level }} {{ level }} </button>
     </div>
-    </body>
+
 {% endblock %}
 

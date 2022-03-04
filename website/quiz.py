@@ -150,13 +150,37 @@ def routes(app, database, achievements):
             if achievement:
                 achievement = json.dumps(achievement)
 
-        return render_template('endquiz.html', correct=session.get('correct_answer', 0),
+        # Reading the yaml file
+        questions = quiz_data_file_for(g.lang, level)
+        if not questions:
+            return no_quiz_data_error()
+
+        # use the session ID as a username.
+        username = current_user()['username'] or f'anonymous:{utils.session_id()}'
+
+        quiz_answers = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
+
+        # get a datastructure for the result overview
+        result_items = get_result_items(quiz_answers, questions)
+        print(result_items)
+        return render_template('quiz-result-overview.html',
+                               correct=session.get('correct_answer', 0),
                                total_score=total_score,
                                level_source=level,
                                achievement=achievement,
+                               quiz_answers=quiz_answers,
                                questions=questions,
+                               result_items=result_items,
+                               level=int(level) + 1,
+                               next_assignment=1,
                                cross=icons['cross'],
                                check=icons['check'],
+                               triangle=icons['triangle'],
+                               diamond=icons['diamond'],
+                               square=icons['square'],
+                               circle=icons['circle'],
+                               pentagram=icons['pentagram'],
+                               triangle_6=icons['triangle_6'],
                                lang=g.lang)
 
     @app.route('/quiz/submit_answer/<int:level_source>/<int:question_nr>/<int:attempt>', methods=["POST"])
@@ -278,51 +302,11 @@ def routes(app, database, achievements):
                                check=icons['check'],
                                lang=g.lang)
 
-    @app.route('/quiz/result_overview/<int:level_source>', methods=["GET"])
-    def quiz_result_overview(level_source):
-        if not is_quiz_enabled():
-            return quiz_disabled_error()
-
-        # If we don't have an attempt ID yet, redirect to the start page
-        if not session.get('quiz-attempt-id'):
-            return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
-
-        # set globals
-        g.prefix = '/hedy'
-
-        # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level_source)
-        if not questions:
-            return no_quiz_data_error()
-
-        # use the session ID as a username.
-        username = current_user()['username'] or f'anonymous:{utils.session_id()}'
-
-        quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-
-        #get a datastructure for the result overview
-        result_items = get_result_items(quiz_answers, questions)
-        return render_template('quiz-result-overview.html',
-                               quiz_answers=quiz_answers,
-                               questions=questions,
-                               result_items = result_items,
-                               level_source=level_source,
-                               level=int(level_source) + 1,
-                               next_assignment=1,
-                               cross=icons['cross'],
-                               check=icons['check'],
-                               triangle=icons['triangle'],
-                               diamond=icons['diamond'],
-                               square=icons['square'],
-                               circle=icons['circle'],
-                               pentagram=icons['pentagram'],
-                               triangle_6=icons['triangle_6'],
-                               lang=g.lang)
-
 
 def get_result_items(quiz_answers, questions):
 
     result_items = []
+    print(questions)
     for i in range(len(questions)):
         item = {}
         item["question_text"] = questions[i + 1]["question_text"]
@@ -330,12 +314,12 @@ def get_result_items(quiz_answers, questions):
         item["is_correct"] = quiz_answers[i + 1][-1] == questions[i + 1]["correct_answer"]
         item["index_chosen"] = index_from_letter(quiz_answers[i + 1][-1])
         item["index_correct"] = index_from_letter(questions[i + 1]["correct_answer"])
+        item["attempts"] = len(quiz_answers[i + 1])
         if "option_text" in question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]:
             item["option_text"] = question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["option_text"]
         elif "code" in question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]:
             item["code"] = question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["code"]
         result_items.append(item)
-    print(result_items)
     return result_items
 
 
