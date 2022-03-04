@@ -687,11 +687,11 @@ def routes(app, database):
         token = DATABASE.get_token(body['token'])
         if not token:
             return g.auth_texts.get('token_invalid'), 403
-        if not check_password(body['token'], token['token']):
+        if body['token'] != token.get('id'):
             return g.auth_texts.get('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
-        token = DATABASE.forget_token(body['username'])
+        token = DATABASE.forget_token(body['token'])
         DATABASE.update_user(body['username'], {'password': hashed})
         user = DATABASE.user_by_username(body['username'])
 
