@@ -684,10 +684,7 @@ def routes(app, database):
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return g.auth_texts.get('repeat_match_password'), 400
 
-        # Todo TB -> This doesn't make any sense? A user can have multiple tokens
-        # We should retrieve the token by token id and then verify if the user is corresponding
-        # If so, remove the token so the password can't be reset again with the same link!
-        token = DATABASE.get_token(body['username'])
+        token = DATABASE.get_token(body['token'])
         if not token:
             return g.auth_texts.get('token_invalid'), 403
         if not check_password(body['token'], token['token']):
