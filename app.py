@@ -830,7 +830,7 @@ def get_user_formatted_age(now, date):
         measure = gettext(u'days')
         date = round(program_age / (1000 * 60 * 60 * 24))
 
-    return gettext(u'ago-1') + str(date) + str(measure) + gettext(u'ago-2')
+    return gettext(u'ago-1') + str(date) + " " + str(measure) + " " + gettext(u'ago-2')
 
 
 # routing to index.html
