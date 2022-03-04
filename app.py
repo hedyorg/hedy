@@ -844,14 +844,14 @@ def get_user_formatted_age(now, date):
 
 
 # routing to index.html
-@app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'step': 1})
-@app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'step': 1})
-@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'step': 1})
-@app.route('/space_eu', methods=['GET'], defaults={'level': '1', 'step': 1})
-@app.route('/hedy', methods=['GET'], defaults={'level': '1', 'step': 1})
-@app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
-@app.route('/hedy/<level>/<step>', methods=['GET'])
-def index(level, step):
+@app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
+@app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
+@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
+@app.route('/space_eu', methods=['GET'], defaults={'level': '1', 'program_id': None})
+@app.route('/hedy', methods=['GET'], defaults={'level': '1', 'program_id': None})
+@app.route('/hedy/<level>', methods=['GET'], defaults={'program_id': None})
+@app.route('/hedy/<level>/<program_id>', methods=['GET'])
+def index(level, program_id):
     if re.match('\\d', level):
         try:
             g.level = level = int(level)
@@ -860,22 +860,24 @@ def index(level, step):
     else:
         return utils.error_page(error=404, ui_message='no_such_level')
 
-    g.prefix = '/hedy'
-
     loaded_program = ''
     adventure_name = ''
 
-    # If step is a string that has more than two characters, it must be an id of a program
-    # Todo TB -> I don't like this structure, can't we use a dedicated URL for loaded programs?!
-    if step and isinstance(step, str) and len(step) > 2:
-        result = DATABASE.program_by_id(step)
+    if program_id:
+        result = DATABASE.program_by_id(program_id)
         if not result:
             return utils.error_page(error=404, ui_message='no_such_program')
 
         user = current_user()
-        public_program = 'public' in result and result['public']
+        public_program = result.get('public')
+        # Verify that the program is either public, the current user is the creator or the user is admin
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
             return utils.error_page(error=404, ui_message='no_such_program')
+
+        # If the current user is a teacher, perform an extra check -> user is their student
+        if is_teacher(user) and result['username'] not in DATABASE.get_teacher_students(user['username']):
+            return utils.error_page(error=404, ui_message='no_such_program')
+
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
         if 'adventure_name' in result:
@@ -935,8 +937,6 @@ def index(level, step):
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 def view_program(id):
-    g.prefix = '/hedy'
-
     user = current_user()
 
     result = DATABASE.program_by_id(id)
@@ -992,7 +992,6 @@ def get_specific_adventure(name, level):
     if not adventure:
         return utils.error_page(error=404, ui_message='no_such_adventure')
 
-    g.prefix = '/hedy'
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     return hedyweb.render_specific_adventure(
@@ -1245,7 +1244,7 @@ def nl2br(x):
 @app.template_global()
 def hedy_link(level_nr, assignment_nr, subpage=None):
     """Make a link to a Hedy page."""
-    parts = [g.prefix]
+    parts = ['/hedy']
     parts.append('/' + str(level_nr))
     if str(assignment_nr) != '1' or subpage:
         parts.append('/' + str(assignment_nr if assignment_nr else '1'))
