@@ -199,10 +199,10 @@ adventures:
                     ## Example Hedy code
 
                     ```
-                    name {is} {ask} Who is walking in the forest?
+                    name {is} {ask} 'Who is walking in the forest?'
                     {print} name 'walks through the forest'
                     {print} name 'encounter a monster'
-                    end {is} {ask} Would you like a good or a bad ending?
+                    end {is} {ask} 'Would you like a good or a bad ending?'
                     {if} end {is} good {print} name 'takes the sword and the monster quickly runs away'
                     {else} {print} 'The monster eats' name
                     ```
@@ -1125,7 +1125,7 @@ adventures:
                     ```
                     options {is} rock, paper, scissors
                     computer_choice {is} _
-                    choice {is} {ask} What do you choose?
+                    choice {is} {ask} 'What do you choose?'
                     {print} 'you chose ' _
                     {print} 'computer chose ' _
                     {if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'
