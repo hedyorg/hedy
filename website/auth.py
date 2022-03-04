@@ -312,7 +312,6 @@ def routes(app, database):
             new_hash = hash(body['password'], make_salt())
 
         cookie = make_salt()
-        # Todo TB -> Why do we store a token each time?! This makes our codebase really really weird
         DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
         if new_hash:
             DATABASE.record_login(user['username'], new_hash)
@@ -685,9 +684,7 @@ def routes(app, database):
             return g.auth_texts.get('repeat_match_password'), 400
 
         token = DATABASE.get_token(body['token'])
-        if not token:
-            return g.auth_texts.get('token_invalid'), 403
-        if body['token'] != token.get('id'):
+        if not token or body['token'] != token.get('id'):
             return g.auth_texts.get('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())

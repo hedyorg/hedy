@@ -148,7 +148,6 @@ class Database:
         return TOKENS.get({'id': token_id})
 
     def store_token(self, token):
-        print(token)
         """Store a token in the database."""
         TOKENS.create(token)
 
