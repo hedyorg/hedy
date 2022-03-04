@@ -170,7 +170,6 @@ def routes(app, database, achievements):
     @app.route('/class/join', methods=['POST'])
     def join_class():
         body = request.json
-        print(body)
         Class = None
         if 'id' in body:
             Class = DATABASE.get_class(body['id'])
