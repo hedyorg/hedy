@@ -312,6 +312,7 @@ def routes(app, database):
             new_hash = hash(body['password'], make_salt())
 
         cookie = make_salt()
+        # Todo TB -> Why do we store a token each time?! This makes our codebase really really weird
         DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
         if new_hash:
             DATABASE.record_login(user['username'], new_hash)
@@ -651,10 +652,9 @@ def routes(app, database):
         if not user:
             return g.auth_texts.get('username_invalid'), 403
 
+        # Create a token
         token = make_salt()
-        hashed = hash(token, make_salt())
-
-        DATABASE.store_token({'id': user['username'], 'token': hashed, 'ttl': times() + session_length})
+        DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + session_length})
 
         if is_testing_request(request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
@@ -684,7 +684,9 @@ def routes(app, database):
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return g.auth_texts.get('repeat_match_password'), 400
 
-        # There's no need to trim or lowercase username, because it should come within a link prepared by the app itself and not inputted manually by the user.
+        # Todo TB -> This doesn't make any sense? A user can have multiple tokens
+        # We should retrieve the token by token id and then verify if the user is corresponding
+        # If so, remove the token so the password can't be reset again with the same link!
         token = DATABASE.get_token(body['username'])
         if not token:
             return g.auth_texts.get('token_invalid'), 403
