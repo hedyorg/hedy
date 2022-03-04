@@ -551,7 +551,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
       }
     }).fail(function(err) {
       if (err.status == 403) { // The user is not allowed -> so not logged in
-        return modal.confirm (auth.texts['save_prompt'], function () {
+        return modal.confirm (prompt, function () {
            // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
            if (window.State && window.State.adventure_name && !Array.isArray(level)) {
              level = [level, window.State.adventure_name];
