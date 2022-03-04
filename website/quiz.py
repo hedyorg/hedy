@@ -211,7 +211,7 @@ def routes(app, database, achievements):
                                         answer=chosen_option)
 
             if is_correct:
-                score = correct_answer_score(question)
+                score = int(correct_answer_score(question))
                 session['total_score'] = session.get('total_score', 0) + score
                 session['correct_answer'] = session.get('correct_answer', 0) + 1
 
