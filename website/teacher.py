@@ -176,7 +176,7 @@ def routes(app, database, achievements):
         if not Class or Class['id'] != body['id']:
             return utils.error_page(error=404,  ui_message='invalid_class_link')
 
-        if not current_user()['username']:
+        if not current_user():
             return g.auth_texts.get('join_prompt'), 403
 
         DATABASE.add_student_to_class(Class['id'], current_user()['username'])
