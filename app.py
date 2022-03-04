@@ -130,7 +130,7 @@ def load_adventures_per_level(lang, level):
             'short_name': short_name,
             'name': adventure['name'],
             'image': adventure.get('image', None),
-            'default_save_name': adventure['default_save_name'],
+            'default_save_name': adventure.get('default_save_name', adventure['name']),
             'text': adventure['levels'][level].get('story_text', 'No Story Text').format(**keywords),
             'example_code': adventure['levels'][level].get('example_code').format(**keywords) if adventure['levels'][level].get('example_code') else '',
             'start_code': adventure['levels'][level].get('start_code').format(**keywords) if adventure['levels'][level].get('start_code') else '',
