@@ -860,8 +860,6 @@ def index(level, program_id):
     else:
         return utils.error_page(error=404, ui_message='no_such_level')
 
-    g.prefix = '/hedy'
-
     loaded_program = ''
     adventure_name = ''
 
@@ -875,7 +873,8 @@ def index(level, program_id):
         # Verify that the program is either public, the current user is the creator or the user is admin
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
             return utils.error_page(error=404, ui_message='no_such_program')
-        # If the current user is a teacher -> make sure the creator of the current program is actually their student
+
+        # If the current user is a teacher, perform an extra check -> user is their student
         if is_teacher(user) and result['username'] not in DATABASE.get_teacher_students(user['username']):
             return utils.error_page(error=404, ui_message='no_such_program')
 
@@ -938,8 +937,6 @@ def index(level, program_id):
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 def view_program(id):
-    g.prefix = '/hedy'
-
     user = current_user()
 
     result = DATABASE.program_by_id(id)
@@ -995,7 +992,6 @@ def get_specific_adventure(name, level):
     if not adventure:
         return utils.error_page(error=404, ui_message='no_such_adventure')
 
-    g.prefix = '/hedy'
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     return hedyweb.render_specific_adventure(
@@ -1248,7 +1244,7 @@ def nl2br(x):
 @app.template_global()
 def hedy_link(level_nr, assignment_nr, subpage=None):
     """Make a link to a Hedy page."""
-    parts = [g.prefix]
+    parts = ['/hedy']
     parts.append('/' + str(level_nr))
     if str(assignment_nr) != '1' or subpage:
         parts.append('/' + str(assignment_nr if assignment_nr else '1'))
