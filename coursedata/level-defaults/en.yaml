@@ -722,6 +722,33 @@
         naam = 'Hedy'
         {print}('my name is ', naam)
 
+18:
+    start_code: |-
+        naam = 'Hedy'
+        {print}('My name is ', naam)
+    intro_text: |-
+        We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.
+        That looks like this:
+        ```
+        {print}('my name is Hedy!')
+        ```
+        If you want to print more thant one items, you need to separate them by commas.
+        ```
+        naam = 'Hedy'
+        {print}('my name is ', naam)
+        ```
+    commands:
+    -   name: "{print}"
+        explanation: "With `{print}` you need to use parentheses"
+        example: "{print}"
+        demo_code: |-
+            {print}('hi!')
+    -   name: "{print} with var"
+        explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
+        example: "{print}"
+        demo_code: |-
+            naam = 'Hedy'
+            {print}('my name is ', naam)
 #16:
 #    start_code: |-
 #        # This {is} a program that {is} going {to_list} {ask} a couple of math questions

@@ -34,8 +34,6 @@ def routes(app, database, achievements):
         if not is_quiz_enabled():
             return quiz_disabled_error()
 
-        g.prefix = '/hedy'
-
         # A unique identifier to record the answers under
         session['quiz-attempt-id'] = uuid.uuid4().hex
 
@@ -64,9 +62,6 @@ def routes(app, database, achievements):
         questions = quiz_data_file_for(g.lang, level_source)
         if not questions:
             return no_quiz_data_error()
-
-        # set globals
-        g.prefix = '/hedy'
 
         question_status = 'start' if attempt == 1 else 'false'
 
@@ -131,9 +126,6 @@ def routes(app, database, achievements):
         questions = quiz_data_file_for(g.lang, level)
         if not questions:
             return no_quiz_data_error()
-
-        # set globals
-        g.prefix = '/hedy'
 
         achievement = None
         total_score = round(session.get('total_score', 0) / max_score(questions) * 100)
