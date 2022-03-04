@@ -79,14 +79,8 @@ switch(window.State.lang){
 
 
 // Lists of keywords by level
-const COMMANDS = [
-  [ // level 1 OK
-  ],
-  [ // level 2 OK
-  ],
-  [ // level 3 OK
-  ],
-  [ // level 4 OK
+const COMMANDS: {[key:number]: string[]} = {
+  4 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -100,24 +94,7 @@ const COMMANDS = [
     currentLang._REMOVE,
     currentLang._FROM,
   ],
-  [ // level 5 OK
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._FORWARD,
-    currentLang._TURN,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-  ],
-  [ // level 6 OK
+  5 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -134,7 +111,24 @@ const COMMANDS = [
     currentLang._IF,
     currentLang._ELSE,
   ],
-  [ // level 7 OK
+  6 :[
+    currentLang._ASK,
+    currentLang._IS,
+    currentLang._PRINT,
+    currentLang._FORWARD,
+    currentLang._TURN,
+    currentLang._SLEEP,
+    currentLang._AT,
+    currentLang._RANDOM,
+    currentLang._ADD_LIST,
+    currentLang._TO_LIST,
+    currentLang._REMOVE,
+    currentLang._FROM,
+    currentLang._IN,
+    currentLang._IF,
+    currentLang._ELSE,
+  ],
+  7 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -153,7 +147,7 @@ const COMMANDS = [
     currentLang._REPEAT,
     currentLang._TIMES,
   ],
-  [ // level 8 OK
+  8 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -172,7 +166,7 @@ const COMMANDS = [
     currentLang._REPEAT,
     currentLang._TIMES,
   ],
-  [ // level 9 OK
+  9 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -191,7 +185,7 @@ const COMMANDS = [
     currentLang._REPEAT,
     currentLang._TIMES,
   ],
-  [ // level 10 OK
+  10 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -211,7 +205,7 @@ const COMMANDS = [
     currentLang._TIMES,
     currentLang._FOR,
   ],
-  [ // level 11 OK
+  11 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -228,7 +222,7 @@ const COMMANDS = [
     currentLang._FOR,
     currentLang._RANGE,
   ],
-  [ // level 12 OK
+  12 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -245,7 +239,7 @@ const COMMANDS = [
     currentLang._FOR,
     currentLang._RANGE,
   ],
-  [ // level 13 OK
+  13 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -264,7 +258,7 @@ const COMMANDS = [
     currentLang._AND,
     currentLang._OR,
   ],
-  [ // level 14 OK
+  14 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -283,7 +277,7 @@ const COMMANDS = [
     currentLang._AND,
     currentLang._OR,
   ],
-  [ // level 15 OK
+  15 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -303,7 +297,7 @@ const COMMANDS = [
     currentLang._OR,
     currentLang._WHILE,
   ],
-  [ // level 16 OK
+  16 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -323,7 +317,7 @@ const COMMANDS = [
     currentLang._OR,
     currentLang._WHILE,
   ],
-  [ // level 17 OK
+  17 :[
     currentLang._ASK,
     currentLang._IS,
     currentLang._PRINT,
@@ -344,7 +338,7 @@ const COMMANDS = [
     currentLang._WHILE,
     currentLang._ELIF,
   ],
-  [ // level 18 
+  18 :[
     currentLang._IS,
     currentLang._PRINT,
     currentLang._SLEEP,
@@ -365,7 +359,7 @@ const COMMANDS = [
     currentLang._ELIF,
     currentLang._INPUT,
   ],
-]
+}
 
 
 // List of rules by level
@@ -675,9 +669,9 @@ of what is around it, so we use a general function
 While a symbol will be recognized independently of its surrounding */
 function rule_keywords(level : number) {
   var rules = [];
-  for (const command in COMMANDS[level-1]) {
+  for (const command in COMMANDS[level]) {
     rules.push({
-      regex: START_WORD + COMMANDS[level-1][command] + END_WORD,
+      regex: START_WORD + COMMANDS[level][command] + END_WORD,
       token: "keyword",
       next: "start", 
     })
