@@ -2,10 +2,33 @@
     intro_text: "हेडी मे आपका स्वागत है! स्तर 1 में आप `print`, `ask` और `echo` जैसे आदेशों  का उपयोग कर सकते है। नीले बटन को दबाने से आपका कोड आपके लिये टाइप हो जाएगा। अब प्रोग्रामिंग क्षेत्र में नीचे बाएं  जाकर हरे बटन “रन द  कोड दबाएं ।"
     start_code: "print हेलो दुनिया!"
     commands:
-        - name: "print"
-          explanation: "Print something with `print`."
-          example: "Example: print Hello welcome to Hedy!"
-          demo_code: "print Hello welcome to Hedy!"
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print Hello welcome to Hedy!"
+    -   explanation: ask something with `{ask}`.
+        example: 'Example: {ask} What is your favorite color?'
+        demo_code: '{ask} What is your favorite color?'
+        name: '{ask}'
+    -   name: '{echo}'
+        explanation: repeat something using `{echo}`.
+        example: 'Example: {echo} so your favorite color is '
+        demo_code: "{ask} What is your favorite color?\n{echo} so your favorite color is"
+    -   explanation: print an emoji with `{print}`
+        example: 'Example: {print} 🙋‍ 🌍 ❗'
+        demo_code: '{print} 🙋 🌍 ❗'
+        name: '{print} emojis'
+    -   example: 'Example: {forward} 100'
+        demo_code: '{forward} 100'
+        explanation: Draw a line with `{forward}`.
+        name: '{forward}'
+    -   demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+        name: '{turn}'
+        explanation: turn the drawing turtle with `{turn}`
+        example: 'Example: {turn}'
+    example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
 2:
     intro_text: "print वैसे ही काम करेगा जैसे स्तर १ में किया, लेकिन ask बदल गया है और अब उसको किसी नाम की ज़रूरत है, जो कि आप `print` कर सकते हैं| `echo` की अब कोई ज़रूरत नहीं है| अब आप इन आदेशों का भी इस्तेमाल कर सकते हैं:"
     start_code: "print हेलो दुनिया  !"
@@ -14,14 +37,34 @@
         explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print Hello welcome to Hedy!"
+    -   name: '{ask}'
+        explanation: ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
+        example: 'Example: color {is} {ask} What is your favorite color?'
+        demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
+    -   explanation: Let Hedy pause for a (couple of) second(s).
+        name: '{sleep}'
+        example: 'Example: {sleep} 2 '
+        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+    -   name: is - turtle
+        explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        example: 'Example: angle {is} 90'
+        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
     intro_text: "print वैसे ही काम करेगा जैसे स्तर १ में किया, लेकिन ask बदल गया है और अब उसको किसी नाम की ज़रूरत है, जो कि आप `print` कर सकते हैं| `echo` की अब कोई ज़रूरत नहीं है| अब आप इन आदेशों का भी इस्तेमाल कर सकते हैं:"
     start_code: "print हेलो दुनिया  !"
     commands:
-        - name: "print"
-          explanation: "Print something with `print`."
-          example: "Example: print Hello welcome to Hedy!"
-          demo_code: "print Hello welcome to Hedy!"
+    -   name: "print"
+        explanation: "Print something with `print`."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print Hello welcome to Hedy!"
+    -   demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+        name: '{add}'
+        explanation: add an item to a list
+        example: 'Example: {add} dog {to_list} animals'
+    -   name: '{remove}'
+        explanation: remove an item from a list
+        example: 'Example: {remove} dog {from} animals'
+        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 4:
     start_code: "print 'हेलो  दुनिया'"
     intro_text: "`ask` अभी भी स्तर ३ में बिल्कुल वैसा ही है, लेकिन `print` अब अलग है| जो भी टेक्स्ट आपको `print` करवाना है उसको दोहरा उदाहरण चिन्ह में रखना होगा| "
@@ -30,6 +73,14 @@
         explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print 'Hello welcome to Hedy!'"
+    -   name: '{is}'
+        explanation: Give a name to some text and `{print}` without quotation marks
+        example: 'Example: name {is} Hedy.'
+        demo_code: "name {is} Hedy\n{print} 'my name is ' name"
+    -   demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+        name: '{ask}'
+        example: "Example: color {is} {ask} 'What is your favorite color?'"
+        explanation: ask something with `{ask}`.
 5:
     start_code: |-
         नाम is ask आपका नाम क्या है?
@@ -40,6 +91,22 @@
         explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print 'Hello welcome to Hedy!'"
+    -   name: '{ask}'
+        example: "Example: color {is} {ask} 'What is your favorite color?'"
+        demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' {is} your favorite!'"
+        explanation: ask something with `{ask}`.
+    -   explanation: Make a choice with `{if}`
+        name: '{if}'
+        example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+        demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+    -   demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+        name: '{if} with turtle'
+        explanation: Make a choice with `{if}`
+        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
+    -   name: '{in}'
+        explanation: Check elements with `{in}`
+        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
     start_code: "print '५ गुणा ५ है ' 5 * 5"
     intro_text: "`ask`, `print` और  `if` वैसे ही हैं जैसे स्तर ४ में हैं| स्तर ५ में कुछ नया है ... अब आप हिसाब कर सकते हैं|"
@@ -48,6 +115,14 @@
         explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print 'Hello welcome to Hedy!'"
+    -   demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
+        name: '{ask}'
+        explanation: '{ask} for a calculation and check whether it is correct.'
+        example: "Example: answer {is} {ask} 'What is 10 plus 10?'"
+    -   demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
+        explanation: '{ask} the user how many angles they want'
+        example: "Example: angles {is} {ask} 'How many angles?'"
+        name: '`{ask}` {and} `{if}` turtle'
 7:
     start_code: "repeat 3 times print 'हेडी मजेदार है!'"
     intro_text: "`ask`, `print` और `if` वैसे ही काम करते है जैसा स्तर ४ और ५ में करते थे| लेकिन स्तर ६ में `repeat` आदेश जुड़ जाता है| repeat एक कोड की लाइन को बहुत बार निष्पादित करने के काम आता है|"
@@ -56,6 +131,18 @@
         explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print 'Hello welcome to Hedy!'"
+    -   name: '{ask}'
+        explanation: ask something with `{ask}`.
+        example: "Example: color = {ask} 'What is your favorite color?'"
+        demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    -   name: '{if}'
+        explanation: Make a choice with `{if}`
+        example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+        demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+    -   name: '{repeat} - turtle'
+        explanation: repeat a line of code with `{repeat}`.
+        example: 'Example: {repeat} 3 {times} {forward} 10'
+        demo_code: '{repeat} 3 {times} {forward} 10'
 8:
     start_code: |
         repeat 5 times
@@ -67,6 +154,14 @@
         explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print 'Hello welcome to Hedy!'"
+    -   example: "Example: answer {is} {ask} 'What is 5 plus 5?'"
+        explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+        demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+        name: '{ask}'
+    -   example: 'Example: draw a square'
+        name: '`{repeat}` with turtle'
+        explanation: '{repeat} multiple lines'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
     start_code: |-
         repeat 3 times
@@ -78,6 +173,10 @@
         explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print 'Hello welcome to Hedy!'"
+    -   example: 'Example: create a square'
+        name: '`{repeat}` and turtle'
+        explanation: '{repeat} multiple lines'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
     start_code: |-
         जानवरों is कुत्ता, बिल्ली, ब्लॉबफिश
@@ -98,6 +197,10 @@
         explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print 'Hello welcome to Hedy!'"
+    -   name: '{for} with a list'
+        explanation: 'print all things in a list '
+        example: 'Example: {for} animal {in} animals'
+        demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
 11:
     start_code: |-
         for काउंटर in range 1 to 5
@@ -111,6 +214,10 @@
         explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print 'Hello welcome to Hedy!'"
+    -   name: '{ask}'
+        explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+        example: "Example: answer = {ask} 'What is 5 plus 5?'"
+        demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
 12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
@@ -218,6 +325,26 @@
         explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print 'Hello welcome to Hedy!'"
+    -   name: Bigger
+        explanation: We use the `>` to check if the first number is bigger than the second number.
+        example: 'For example: age > 12'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age > 13\n    {print} 'You are older than me!'"
+    -   name: Equal
+        explanation: We use the `==` to check if two things are the same.
+        example: 'For example: answer == 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+    -   name: Not equal
+        explanation: 'We use the `!=` to check if two things are not the same. '
+        example: 'For example: answer != 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+    -   name: Smaller {or} equal
+        explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+        example: 'For example: age <= 12'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+    -   demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+        name: Bigger or equal
+        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+        example: 'For example: age >= 14'
 15:
     start_code: |-
         answer = 0
@@ -262,6 +389,14 @@
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print 'Hello welcome to Hedy!'"
 
+    -   name: Get an item from a list
+        explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
+        example: 'For example: firstfruit = fruit[1]'
+        demo_code: "fruit = ['banana', 'apple', 'cherry']\nfirstfruit = fruit[1]\n{print} firstfruit"
+    -   name: Get a random item from a list
+        explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
+        example: 'For example: random_fruit {is} fruit[random]'
+        demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[random]\n{print} random_fruit"
 17:
     start_code: |-
         for इ in range 1 to 10:
@@ -413,3 +548,23 @@
 #                print('बढ़िया काम!')
 #            else:
 #                 print('आपको ५ बोलने की अनुमति नहीं थी!')
+    -   explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
+        example: 'for i {in} {range} 1 {to} 10:'
+        demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
+        name: '{print}'
+    -   name: '{if}'
+        explanation: We need to do the same with all of our `{if}` statements
+        example: if colour {is} green:'
+        demo_code: "colour = {ask} 'What is your favorite color?'\n{if} colour == green:\n    {print} 'Your favorite colour is green'\n{else}:\n    {print} 'Your favorite colour is not green'"
+18:
+    commands:
+    -   demo_code: "{print}('hi!')"
+        name: '{print}'
+        explanation: With `{print}` you need to use parentheses
+        example: '{print}'
+    -   name: '{print} with var'
+        explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+        example: '{print}'
+        demo_code: "naam = 'Hedy'\n{print}('my name is ', naam)"
+    start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
+    intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
