@@ -1,5 +1,4 @@
 import { modal } from './modal';
-import { auth } from './auth';
 import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 import DOMPurify from 'dompurify'
@@ -73,7 +72,7 @@ export function delete_class(id: string, confirmation: string) {
   });
 }
 
-export function join_class(id: string, name: string, prompt: string) {
+export function join_class(id: string, name: string) {
   $.ajax({
       type: 'POST',
       url: '/class/join',
@@ -96,7 +95,7 @@ export function join_class(id: string, name: string, prompt: string) {
             window.location.pathname = '/login';
          });
       } else {
-          error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+          modal.alert(ErrorMessages['Connection_error'], 3000, true);
       }
     });
 }
