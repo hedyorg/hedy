@@ -23,6 +23,7 @@ echo "------> Validating YAML"
 
 pajv=$scriptdir/../../node_modules/.bin/pajv
 
+echo "------> Validating adventures"
 cd ../../coursedata/adventures/
 $pajv validate \
     --errors=text \
@@ -30,6 +31,7 @@ $pajv validate \
     -d "*.yaml"
 echo "------> Adventure yaml files are valid"
 
+echo "------> Validating level defaults"
 cd ../level-defaults/
 $pajv validate \
     --errors=text \
@@ -37,6 +39,7 @@ $pajv validate \
     -d "*.yaml"
 echo "------> Level default yaml files are valid"
 
+echo "------> Validating quizzes"
 cd ../quizzes/
 $pajv validate \
     --errors=text \
