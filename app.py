@@ -818,6 +818,7 @@ def get_log_results():
 
 
 def get_user_formatted_age(now, date):
+
     program_age = now - date
     if program_age < 1000 * 60 * 60:
         measure = gettext(u'minutes')
