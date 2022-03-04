@@ -5,7 +5,7 @@ export const LANG_nl = {
 '_ECHO':'(?:echo|echo)',
 '_FORWARD':'(?:vooruit|forward)',
 '_TURN':'(?:draai|turn)',
-'_IS':'(?:is|is|=)',
+'_IS':'(?:is|is)',
 '_SLEEP':'(?:slaap|sleep)',
 '_ADD_LIST':'(?:voeg|add)',
 '_TO_LIST':'(?:toe aan|to)',
