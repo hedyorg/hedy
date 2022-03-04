@@ -74,15 +74,6 @@ export function delete_class(id: string, confirmation: string) {
 }
 
 export function join_class(id: string, name: string, prompt: string) {
-  // If there's no session but we want to join the class, we store the program data in localStorage and redirect to /login.
-  if (! auth.profile) {
-    return modal.confirm (prompt, function () {
-      localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
-      window.location.pathname = '/login';
-      //return; Todo TB -> I think this return is redundant? Test when file is fixed!
-    });
-  }
-
   $.ajax({
       type: 'POST',
       url: '/class/join',
@@ -99,7 +90,14 @@ export function join_class(id: string, name: string, prompt: string) {
           window.location.pathname = '/programs';
       }
     }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
+      if (err.status == 403) { //The user is not logged in -> ask if they want to
+         return modal.confirm (err.responseText, function () {
+            localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
+            window.location.pathname = '/login';
+         });
+      } else {
+          error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      }
     });
 }
 

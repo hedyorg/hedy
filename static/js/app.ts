@@ -532,16 +532,6 @@ export function saveit(level: number | [number, string], lang: string, name: str
   if (reloadOnExpiredSession ()) return;
 
   try {
-    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
-    if (! auth.profile) {
-       return modal.confirm (prompt, function () {
-         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-         window.location.pathname = '/login';
-       });
-    }
-
     $.ajax({
       type: 'POST',
       url: '/programs/duplicate-check',
@@ -558,6 +548,17 @@ export function saveit(level: number | [number, string], lang: string, name: str
         });
       } else {
          storeProgram(level, lang, name, code, cb);
+      }
+    }).fail(function(err) {
+      if (err.status == 403) { // The user is not allowed -> so not logged in
+        return modal.confirm (auth.texts['save_prompt'], function () {
+           // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+           if (window.State && window.State.adventure_name && !Array.isArray(level)) {
+             level = [level, window.State.adventure_name];
+           }
+           localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+           window.location.pathname = '/login';
+         });
       }
     });
   } catch (e: any) {
