@@ -650,10 +650,9 @@ def routes(app, database):
         if not user:
             return gettext(u'username_invalid'), 403
 
+        # Create a token
         token = make_salt()
-        hashed = hash(token, make_salt())
-
-        DATABASE.store_token({'id': user['username'], 'token': hashed, 'ttl': times() + session_length})
+        DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + session_length})
 
         if is_testing_request(request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
@@ -683,15 +682,12 @@ def routes(app, database):
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return gettext(u'repeat_match_password'), 400
 
-        # There's no need to trim or lowercase username, because it should come within a link prepared by the app itself and not inputted manually by the user.
-        token = DATABASE.get_token(body['username'])
-        if not token:
-            return gettext(u'token_invalid'), 403
-        if not check_password(body['token'], token['token']):
+        token = DATABASE.get_token(body['token'])
+        if not token or body['token'] != token.get('id'):
             return gettext(u'token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
-        token = DATABASE.forget_token(body['username'])
+        token = DATABASE.forget_token(body['token'])
         DATABASE.update_user(body['username'], {'password': hashed})
         user = DATABASE.user_by_username(body['username'])
 

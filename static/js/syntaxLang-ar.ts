@@ -5,7 +5,7 @@ export const LANG_ar = {
 '_ECHO':'(?:echo|ردد)',
 '_FORWARD':'(?:forward|تقدم)',
 '_TURN':'(?:turn|انعطف)',
-'_IS':'(?:=|is|هو)',
+'_IS':'(?:is|هو)',
 '_RANDOM':'(?:random|عشوائي)',
 '_IN':'(?:in|في)',
 '_IF':'(?:if|اذا)',
