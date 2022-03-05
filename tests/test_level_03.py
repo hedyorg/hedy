@@ -139,6 +139,26 @@ class TestsLevel3(HedyTester):
       max_level=11,
       expected=expected
     )
+    
+  def test_print_list_random_fr(self):
+    code = textwrap.dedent("""\
+    animaux est chien, chat, kangourou
+    affiche animaux au hasard""")
+
+    expected = textwrap.dedent("""\
+    animaux = ['chien', 'chat', 'kangourou']
+    print(f'{random.choice(animaux)}')""")
+
+    # check if result is in the expected list
+    check_in_list = (lambda x: HedyTester.run_code(x) in ['chien', 'chat', 'kangourou'])
+
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      extra_check_function=check_in_list,
+      lang='fr'
+    )
 
   #is tests
   def test_assign(self):
