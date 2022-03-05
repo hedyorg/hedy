@@ -670,7 +670,7 @@ function get_parse_code_by_id(level: number, lang:string, id:string | true,  ind
 }
 
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
+  //if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   if (Public) {
     // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
     if (id !== true) {
