@@ -65,6 +65,7 @@ ALL_KEYWORD_LANGUAGES = {
     'nl': 'NL',
     'ar': 'AR',
     'fr': 'FR',
+    'hi': 'HI',
     'es': 'ES'
 }
 
