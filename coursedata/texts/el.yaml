@@ -22,6 +22,45 @@ ui:
     nav_hedy: "Hedy"
     nav_explore: "Explore"
     nav_learn_more: "Μάθε περισσότερα"
+    go_to_answer: Go to answer
+    no_such_level: No such Hedy level!
+    submit_answer: Answer question
+    default_404: We could not find that page...
+    go_back_to_main: Go back to the main page
+    level_not_translated: This level is not translated in your language (yet)
+    level_not_class: You're in a class where this level has not been made available yet
+    no_such_class: No such Hedy class!
+    invalid_class_link: Invalid link for joining the class.
+    no_such_program: No such Hedy program!
+    invalid_teacher_invitation_code: The teacher invitation code is invalid. To become a teacher, reach out to hedy@felienne.com.
+    page_not_found: We could not find that page!
+    not_teacher: Looks like you are not a teacher!
+    not_user: Looks like you are not logged in!
+    not_enrolled: Looks like you are not in this class!
+    retrieve_class: Only teachers can retrieve classes
+    user_not_private: This user doesn't exist or doesn't have a public profile
+    retrieve_adventure: You're not allowed to view this adventure!
+    no_such_adventures: This adventure doesn't exist!
+    default_403: Looks like you aren't authorized...
+    default_500: Something went wrong...
+    start_quiz: Start quiz
+    end_quiz: Quiz end
+    go_to_quiz: Go to quiz
+    go_to_first_question: Go to question 1
+    go_to_question: Go to question
+    go_to_quiz_result: Go to quiz result
+    go_to_level: Go to level
+    question: Question
+    from_number_of_questions: from
+    answered_correctly: answered correctly
+    correct: Correct
+    incorrect: Incorrect!
+    attempt: Attempt
+    hint: Hint?
+    feedback_success: Good!
+    feedback_failure: Wrong!
+    correct_answer: 'The correct answer is:'
+    score: Score
 ClientErrorMessages:
     Transpile_warning: 'Προσοχή!'
     Transpile_error: 'Δεν μπορούμε να εκτελέσουμε το πρόγραμμά σου.'
@@ -31,6 +70,21 @@ ClientErrorMessages:
     CheckInternet: "Have a look if your Internet connection is working properly?"
     ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the meantime, try something a little different and take another look at the examples. Thanks!"
     Program_too_long: "Your program takes too long to run."
+    turtle: 🐢
+    Transpile_success:
+    -   Good job!
+    -   Amazing!
+    -   Well done!
+    -   Excellent!
+    -   You did great!
+    Empty_output: This code works but does not print anything. Add a print command to your code or use the turtle to get output.
+    Program_repair: This could be the correct code, can you fix it?
+    rock: ✂️, 📜, 🗻
+    haunted: 🦇, 👻, 🎃
+    restaurant: 🍣, 🍕, 🍔
+    fortune: 🔮, ✨
+    songs: 🎵,🎶
+    dice: 🎲
 HedyErrorMessages:
     Wrong Level: 'Αυτός ήταν σωστός κώδικας Hedy, αλλά όχι στο σωστό επίπεδο. Έγραψες κώδικα για το επίπεδο {working_level} στο επίπεδο {original_level}.'
     Incomplete: 'Ουπς! Ξέχασες ένα κομμάτι κώδικα! Στη γραμμή {line_number}, πρέπει να γράψεις κείμενο ύστερα από την {incomplete_command}.'
@@ -50,6 +104,31 @@ HedyErrorMessages:
     single quotes: 'ένα μονό εισαγωγικό'
     double quotes: 'διπλά εισαγωγικά'
     slash: 'μία κάθετος'
+    Empty Program: You created an empty program. Type Hedy code in the left field and try again
+    Invalid Argument: You cannot use the command {command} with {invalid_argument} . Try changing {invalid_argument} to {allowed_types}.
+    input: input from ask
+    Has Blanks: Your code is incomplete. It contains blanks that you have to replace with code.
+    Unquoted Equality Check: If you want to check if a variable is equal to multiple words, the words should be surrounded by quotation marks!
+    Unquoted Assignment: ' From this level, you need to place texts to the right of the `is` between quotes. You forgot that for the text {text}.'
+    Cyclic Var Definition: The name {variable} needs to be set before you can use it on the right-hand side of the is command
+    Lonely Echo: You used an echo before an ask, or an echo without an ask. First ask for input, then echo.
+    Unexpected Indentation: You used too many spaces in line {line_number}. You used {leading_spaces} spaces, which is too much. Start every new block with {indent_size} spaces more than the line before.
+    No Indentation: You used too few spaces in line {line_number}. You used {leading_spaces} spaces, which is not enough. Start every new block with {indent_size} spaces more than the line before.
+    Invalid Type Combination: You cannot use {invalid_argument} and {invalid_argument_2} in {operation} because one is {invalid_type} and the other is {invalid_type_2}. Try changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} to {invalid_type}.
+    Unsupported Float: Non-integer numbers are not supported yet but they will be in a few levels. For now change {value} to an integer.
+    Locked Language Feature: You are using {concept}! That is awesome, but {concept} is not unlocked yet! It will be unlocked in a later level.
+    Too Big: Wow! Your program has an impressive {lines_of_code} lines of code! But we can only process {max_lines} lines in this level. Make your program smaller and try again.
+    Invalid Argument Type: You cannot use the command {command} with {invalid_argument} because it is {invalid_type}. Try changing {invalid_argument} to {allowed_types}.
+    ask_needs_var: "Starting in level 2, ask needs to be used with a variable and quotation marks. Example: name is ask 'What are you called?'"
+    echo_out: "Starting in level 2 echo is no longer needed. You can repeat an answer with ask and print now. Example: name is ask 'What are you called?' print 'hello' name"
+    string: text
+    nested blocks: a block in a block
+    or: or
+    number: a number
+    integer: a number
+    float: a number
+    list: a list
+    Missing Command: It looks like you forgot to use a command on line {line_number}.
 Auth:
     create_account: 'Δημιουργία λογαριασμού'
     create_account_explanation: 'Το να έχεις το δικό σου λογαριασμό, σου επιτρέπει να αποθηκεύεις τα προγράμματά σου.'
@@ -155,13 +234,154 @@ Auth:
     students: "students"
     copy_class_link: "Copy link to join class"
     join_prompt: "You need to have an account to join a class. Would you like to login now?"
+    teacher_invalid: Your teacher value is invalid
+    image_invalid: Your image is invalid
+    personal_text_invalid: Your personal text is invalid
+    adventure_name_invalid: This adventure name is invalid
+    adventure_id_invalid: This adventure id is invalid
+    level_invalid: This Hedy level in invalid
+    content_invalid: This adventure is invalid
+    public_invalid: This agreement selection is invalid
+    adventure_length: Your adventure has to be at least 20 characters
+    adventure_duplicate: You already have an adventure with this name
+    public_profile_link: here
+    class_name_duplicate: You already have a class with this name!
+    delete_confirm: Are you sure you want to delete the program?
+    delete_success: Program deleted successfully
+    favourite_confirm: Are you sure you want to set this program as your favourite?
+    create_adventure: Create adventure
+    adventure_prompt: Please enter the name of the adventure
+    username_empty: You didn't enter an username!
+    delete_adventure_prompt: Are you sure you want to remove this adventure?
+    back_to_class: Go back to class
+    visible_columns: Visible columns
+    adventure_exp_3: You can use the "preview" button to view a styled version of your adventure. To view the adventure on a dedicated page, select "view" from the teachers page.
+    template_code: "This is the explanation of my adventure!\n\nThis way I can show a command: <code>print</code>\n\nBut sometimes I might want to show a piece of code, like this:\n<pre>\nask What's your name?\necho so your name is \n</pre>"
+    preferred_language: Preferred language
+    settings: My personal settings
+    for_teachers: For teachers
+    favourite_program_invalid: Your favourite program is invalid
+    public_profile_visit: You can visit your public profile! Click
+    server_error: Something went wrong on our end. Could you please try again? If the problem persists, please let us know.
+    ok: OK
+    invite_student: Invite student
+    pending_invites: Pending invites
+    invite_date: Invite date
+    remove_invite: Remove invite
+    invite_prompt: Enter a username
+    student_already_invite: This student already has a pending invitation
+    option: Option
+    agree_third_party: I consent to being contacted by partners of Leiden University with sales opportunities (optional)
+    account: My account
+    set_preferred_lang: Hedy now supports preferred user languages. You can set one for your profile in "My profile"
+    account_overview: Account overview
+    explore_explanation: "On this page you can look through programs created by other Hedy users. You can filter on both a Hedy level and adventure.\nClick on \"View program\" to open a program and run it. Programs with a red header contain a mistake. You can still open the program, but running it will result in an error. You can of course try to fix it!\nIf the creator has a public profile you can click their username to visit their profile. There you will find all their shared programs and much more!\n"
+    adventure_updated: The adventure has been updated!
+    cancel: Cancel
+    my_achievements: My achievements
+    last_achievement: Last earned achievement
+    achievement_earned: You've earned an achievement!
+    teacher_welcome: Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.
+    translate_error: Something went wrong while translating the code. Try running the code to see if it has an error. Code with errors can not be translated.
+    explore: Explore
+    overwrite_warning: You already have a program with this name, saving this program will overwrite the old one. Are you sure?
+    favourite_success: Your program is set as favourite
+    delete_public: Delete public profile
+    self_removal_prompt: Are you sure you want to leave this class?
+    name: Name
+    invite_message: You have received an invitation to join class
+    sent_by: This invitation is sent by
+    my_messages: My messages
+    reset_adventures: Reset selected adventures
+    remove_customization: Remove customization
+    delete_invite: Delete invitation
+    adventure_empty: You didn't enter an adventure name!
+    update_adventure_prompt: Are you sure you want to update this adventure?
+    amount_programs: Saved programs
+    enter_password: Enter a new password for
+    password_change_prompt: Are you sure you want to change this password?
+    password_change_not_allowed: You're not allowed to change the password of this user
+    password_change_success: Password of your student is successfully changed
+    remove_customizations_prompt: Are you sure you want to remove this class their customizations?
+    class_customize_success: Class successfully customized.
+    customization_deleted: Customizations successfully deleted.
+    no_customizations: There are not (yet) customizations for this class
+    select_levels: Select levels
+    select_adventures: Select adventures
+    other_settings: Other settings
+    passwords_six: All passwords need to be six characters or longer.
+    accounts_created: Accounts where successfully created.
+    accounts_intro: "On this page you can create accounts for multiple students at the same time. It is also possible to directly add them to one of your classes.\nBy pressing the green + on the bottom right of the page you can add extra rows. You can delete a row by pressing the corresponding red cross.\nMake sure no rows are empty when you press \"Create accounts\". Please keep in mind that every username and mail address needs to be unique and the password needs to be <b>at least</b> 6 characters.\n"
+    customize_adventure: Customize adventure
+    general_settings: General settings
+    adventure: Adventure
+    my_adventures: My adventures
+    level: Level
+    adventure_terms: I agree that my adventure might be made publicly available on Hedy.
+    preview: Preview
+    adventure_exp_1: 'Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under "customizations". If you want to include a command in your adventure please use code anchors like this:'
+    adventure_exp_2: 'If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:'
+    last_update: Last update
+    view: View
+    preferred_keyword_language: Preferred keyword language
+    is_teacher: Would you like to apply for a teacher's account?
+    agree_with: I agree to the
+    privacy_terms: privacy terms
+    explore_programs: Explore programs
+    statistics: My statistics
+    public_profile: Public profile
+    profile_picture: Profile picture
+    personal_text: Personal text
+    your_personal_text: Your personal text...
+    favourite_program: Favourite program
+    leave_class: Leave class
+    keyword_language_invalid: Please select a valid keyword language (select English or your own language)
+    agree_invalid: You have to agree with the privacy terms
+    token_invalid: Your token is invalid
+    profile_updated_reload: Profile updated, page will be re-loaded.
+    public_profile_updated: Public profile updated.
+    achievements: achievements
+    teacher_invitation_require_login: To set up your profile as a teacher we will need you to log in. If you don't have an account, please create one.
+    must_be_shared: Your program must be shared before you're allowed to submit it
+    class_name_empty: You didn't enter a class name!
+    update_public: Update public profile
+    customize_class: Customize class
+    delete_invite_prompt: Are you sure you want to remove this class invitation?
+    student_not_existing: This username doesn't exist
+    student_already_in_class: This student is already in your class
+    remove: Remove
+    save: Save
+    programs: Programs
+    page: page
+    class_stats: Show class statistics
+    select_own_adventures: Select own adventures
+    reset_adventure_prompt: Are you sure you want to reset all selected adventures?
+    mandatory_mode: Mandatory developer's mode
+    hide_cheatsheet: Hide cheatsheet
+    opening_date: Opening date
+    opening_dates: Opening dates
+    directly_available: Directly open
+    create_student_accounts: Create student accounts
+    create_accounts: Create multiple accounts
+    add: Add
+    accounts: Accounts
+    select_class: Select class
+    reset_view: Reset
+    create: Create accounts
+    create_accounts_prompt: Are you sure you want to create these accounts?
+    no_accounts: There are no accounts to create.
+    unique_usernames: All usernames need to be unique.
+    unique_emails: All mail addresses need to be unique.
+    class_invalid: This class id is invalid.
+    usernames_exist: One or more usernames is already in use.
+    emails_exist: One or more mail addresses is already in use.
 Programs:
     recent: 'Τα πρόσφατα προγράμματά μου'
     level: 'Επίπεδο'
     minutes: 'λεπτά'
     hours: 'ώρες'
     days: 'ημέρες'
-    ago-1: ''
+    ago-1: ' '
     ago-2: 'πριν'
     open: 'Άνοιγμα'
     delete: 'Διαγραφή'
@@ -172,3 +392,28 @@ Programs:
     unshare_confirm: "Are you sure you want to make the program private?"
     no_programs: 'Δεν έχεις προγράμματα ακόμα.'
     write_first: 'Γράψε το πρώτο σου πρόγραμμα!'
+    creator: Creator
+    amount_saved: programs saved
+    title: Title
+    created: When created
+    last_edited: Last edited
+    submit_program: Submit
+    submit_warning: Are you sure you want to submit this program?
+    no_shared_programs: has no shared programs...
+    public_profile_info: By selecting this box I make my profile visible for everyone. Be careful not to share personal information like your name or home address, because everyone will be able to see it!
+    submitted_header: This is a submitted program and can't be altered
+    amount_created: programs created
+    amount_submitted: programs submitted
+    search: Search
+    view_program: View program
+Landing_page:
+    welcome: Welcome
+    intro_text: "Welcome to the wonderful world of Hedy! Here you can learn to program in small steps, without unnecessary complicated stuff.\nWe start easy at level 1, and slowly build towards bigger and more complex programs!\n\nChoose one of the options below to get started."
+    create_class: Create a new class
+    read_docs: Learn more about Hedy
+    create_class_text: Group your students into classes and change the content for each class
+    start_programming: Start programming
+    read_docs_text: Visit our teacher's manual for lesson plans and common mistakes by students
+    general_text: Start with level 1 explanations
+    story_text: Make your own story
+    turtle_text: Make a drawing with code

@@ -39,6 +39,13 @@
             turn left
             forward 25
             turn right
+    -   name: '{turn}'
+        explanation: turn the drawing turtle with `{turn}`
+        example: 'Example: {turn}'
+        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
 2:
     intro_text: |
         A 2. szinten valami újat tanulunk. El tudsz nevezni egy szót az 'is' utasítással.
@@ -67,6 +74,14 @@
         demo_code: |-
             szin is ask Mi a kedvenc színed?
             print szin a kedvenc színed!
+    -   explanation: Let Hedy pause for a (couple of) second(s).
+        name: '{sleep}'
+        example: 'Example: {sleep} 2 '
+        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+    -   name: is - turtle
+        explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        example: 'Example: angle {is} 90'
+        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
     intro_text: |
         A 3. szinten készíthetsz listát is. Kérheted a számítógépet, hogy véletlenszerűen
@@ -87,6 +102,14 @@
         demo_code: |-
             allatok is kutya, cica, kenguru
             print allatok at random
+    -   explanation: add an item to a list
+        example: 'Example: {add} dog {to_list} animals'
+        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+        name: '{add}'
+    -   name: '{remove}'
+        explanation: remove an item from a list
+        example: 'Example: {remove} dog {from} animals'
+        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 4:
     start_code: "print 'Helló világ'"
     intro_text: |-
@@ -163,6 +186,10 @@
         demo_code: |-
             valasz is ask 'Milyen messze menjek?'
             if valasz is messze forward 100 else forward 5
+    -   name: '{in}'
+        explanation: Check elements with `{in}`
+        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
     start_code: "print '5-ször 5 az ' 5 * 5"
     intro_text: |-
@@ -267,6 +294,10 @@
             else
                 print 'Hoppá!'
                 print 'A válasz 10'
+    -   example: 'Example: draw a square'
+        name: '`{repeat}` with turtle'
+        explanation: '{repeat} multiple lines'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
     start_code: |-
         repeat 3 times
@@ -401,6 +432,14 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
+    -   name: quotes after {if} comparison
+        example: name = 'Hedy'
+        explanation: Text with quotation marks after {if}
+        demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
+    -   name: quotes in list
+        explanation: A list with quotation marks
+        example: name = 'Hedy', 'Felienne'
+        demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
 13:
     start_code: |
         name = ask 'what is your name?'
@@ -555,6 +594,22 @@
             kor = ask 'Hány éves vagy?'
             if kor < 13
              print 'Idősebb vagy, mint én!'
+    -   name: Equal
+        explanation: We use the `==` to check if two things are the same.
+        example: 'For example: answer == 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+    -   name: Not equal
+        explanation: 'We use the `!=` to check if two things are not the same. '
+        example: 'For example: answer != 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+    -   explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+        example: 'For example: age <= 12'
+        name: Smaller {or} equal
+        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+    -   name: Bigger or equal
+        example: 'For example: age >= 14'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
 15:
     start_code: |-
         valasz = 0
@@ -650,3 +705,15 @@
                 print 'a értéke 2'
             else:
                 print 'a értéke nem 1 vagy 2'
+18:
+    start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
+    commands:
+    -   name: '{print}'
+        explanation: With `{print}` you need to use parentheses
+        example: '{print}'
+        demo_code: "{print}('hi!')"
+    -   demo_code: "naam = 'Hedy'\n{print}('my name is ', naam)"
+        name: '{print} with var'
+        explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+        example: '{print}'
+    intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
