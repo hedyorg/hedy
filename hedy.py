@@ -407,11 +407,12 @@ class LookupEntryCollector(visitors.Visitor):
     # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, tree):
         list_name = hash_var(tree.children[0].children[0])
-        if tree.children[1] == 'random':
+        position_name = hash_var(tree.children[1])
+        if position_name == 'random':
             name = f'random.choice({list_name})'
         else:
             # We want list access to be 1-based instead of 0-based, hence the -1
-            name = f'{list_name}[{tree.children[1]}-1]'
+            name = f'{list_name}[{position_name}-1]'
         self.add_to_lookup(name, tree, True)
 
     def list_access_var(self, tree):
@@ -1289,8 +1290,11 @@ class ConvertToPython_3(ConvertToPython_2):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
+        args = [hash_var(a) for a in args]
+
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
+
 
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
