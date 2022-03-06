@@ -733,3 +733,15 @@
             {else}:
                 {print} 'आपका पसंदीदा रंग हरा नहीं है'
 
+18:
+    commands:
+    -   demo_code: "{print}('hi!')"
+        name: '{print}'
+        explanation: With `{print}` you need to use parentheses
+        example: '{print}'
+    -   demo_code: "naam = 'Hedy'\n{print}('my name is ', naam)"
+        name: '{print} with var'
+        explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+        example: '{print}'
+    start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
+    intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
