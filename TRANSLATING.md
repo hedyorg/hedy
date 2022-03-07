@@ -33,12 +33,14 @@ Now, lets start looking at texts to translate.
 Click on Adventures to reach this screen:
 ![Weblate tour - Adventures](https://user-images.githubusercontent.com/28646458/156937285-2418f2b9-5dcb-46ba-85e4-ad8266a8aae4.jpg)
 
-Now you see an overview of this component. Little to much information maybe. If so, choose "Labeled: Automatically translated". These are strings that have the English text in place of the translation. This is the way we set up new texts. This way every text that has not been translated yet, is at least visible in English on the website. 
+Now you see an overview of this component. Little to much information maybe. Don't worry, just start with "Labeled: Automatically translated". These are strings that have the English text in place of the translation. This is the way we set up new texts. This way every text that has not been translated yet, is at least visible in English on the website. 
 If you're a little more expericend, you might want to try some of the texts that have specific checks failing. 
-At the end, you can see you can choose between Translate or Zen. If you choose for Translate, you'll see this:
+At the right, you can choose between Translate or Zen. 
+
+If you choose for Translate, you'll see this:
 ![Weblate tour - Translate](https://user-images.githubusercontent.com/28646458/156937676-0dfd72cd-8ccb-49d0-9ad7-bf10b3a7d906.jpg)
 
-Again, maybe a little to much information, but a lot is very helpfull. If your registered, you'll see a little more then others, but the screen below is from a registered user. Browse a little through this info. There is info about texts in the neighborhood, or suggestons of computer translations. If you think this is to much info for now, you can choos for the Zen option which looks like this:
+Again, maybe a little to much information, but a lot is very helpfull. If your registered, you'll see a little more then others, this screen is from a registered user. Browse a little through this info. There is info about texts in the neighborhood, or suggestons of computer translations. If you think this is to much info for now, you can choose for the Zen option which looks like this:
 ![Weblate tour - Zen](https://user-images.githubusercontent.com/28646458/156937825-c5b97c10-3928-40b9-93d1-68a80371d51f.jpg)
 
 That's all for now, any problems, let us know so we can addres them here for future translators. 
