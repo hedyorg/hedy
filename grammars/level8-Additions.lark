@@ -5,9 +5,8 @@ repeat: _REPEAT _SPACE (INT | var) _SPACE _TIMES _EOL (_SPACE command) (_EOL _SP
 
 // FH jan 2022 (#1817) we can allow unquoted rhs's again cause there now is a line break after
 // not sure of we want it, but we could
-condition: equality_check_is | equality_check_equals | in_list_check
-equality_check_is: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces (_SPACE textwithoutspaces)*
-equality_check_equals: textwithoutspaces _EQUALS textwithoutspaces (_SPACE textwithoutspaces)*
+condition: equality_check | in_list_check
+equality_check: textwithoutspaces (_SPACE _IS _SPACE | _EQUALS) textwithoutspaces (_SPACE textwithoutspaces)*
 
 
 // from level 8 on if is implemented slightly differently

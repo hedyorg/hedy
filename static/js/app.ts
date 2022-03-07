@@ -529,16 +529,6 @@ export function saveit(level: number | [number, string], lang: string, name: str
   if (reloadOnExpiredSession ()) return;
 
   try {
-    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
-    if (! auth.profile) {
-       return modal.confirm (auth.texts['save_prompt'], function () {
-         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-         window.location.pathname = '/login';
-       });
-    }
-
     $.ajax({
       type: 'POST',
       url: '/programs/duplicate-check',
@@ -555,6 +545,17 @@ export function saveit(level: number | [number, string], lang: string, name: str
         });
       } else {
          storeProgram(level, lang, name, code, cb);
+      }
+    }).fail(function(err) {
+      if (err.status == 403) { // The user is not allowed -> so not logged in
+        return modal.confirm (auth.texts['save_prompt'], function () {
+           // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+           if (window.State && window.State.adventure_name && !Array.isArray(level)) {
+             level = [level, window.State.adventure_name];
+           }
+           localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+           window.location.pathname = '/login';
+         });
       }
     });
   } catch (e: any) {
@@ -675,7 +676,7 @@ function get_parse_code_by_id(level: number, lang:string, id:string | true,  ind
 }
 
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
+  //if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   if (Public) {
     // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
     if (id !== true) {
