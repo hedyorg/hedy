@@ -198,10 +198,10 @@ adventures:
                     dapper = {ask} 'Gaat 'hoofdpersoon ' op het geluid af?'
                     {if} dapper {is} ja
                         {print} 'Dapper stapt ' hoofdpersoon ' op het geluid af'
-                        {print} _?_
+                        {print} _
                     {else}
                         {print} 'Snel zoekt ' hoofdpersoon ' een verstopplek'
-                        {print} _?_
+                        {print} _
                     ```
                     In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! Wat gebeurt er verder?
                 start_code: "# place your code here"
@@ -482,7 +482,7 @@ adventures:
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    {repeat} _?_ _?_ {print} 'Baby Shark tututudutudu'
+                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
                     {print} 'Baby Shark'
                     ```
 
@@ -641,8 +641,8 @@ adventures:
                     hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
                     hoek = 360 / hoeken
                     {repeat} hoeken {times}
-                        {turn} _?_
-                        {forward} _?_
+                        {turn} _
+                        {forward} _
                     ```
                 start_code: |
                     hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
@@ -766,7 +766,7 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     mensen = mama, papa, Emma, Sophie
-                    {repeat} _?_ _?_ {print} 'de afwasser is ' _?_
+                    {repeat} _ _ {print} 'de afwasser is ' _
                     ```
                 start_code: "{print} 'Wie doet de afwas?'"
             6:
@@ -837,8 +837,8 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     mensen {is} mama, papa, Emma, Sophie
-                    {print} _?_ de afwas wordt gedaan door _?_
-                    {print} mensen {at} _?_
+                    {print} _ de afwas wordt gedaan door _
+                    {print} mensen {at} _
                     ```
                 start_code: "{print} 'Wie doet de afwas?'"
             3:
@@ -897,7 +897,7 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes {is} 1, 2, 3, 4, 5, regenworm
-                    {repeat} _?_ _?_ {print} _?_ _?_ _?_
+                    {repeat} _ _ {print} _ _ _
                     ```
                 start_code: "{print} 'Wat zal de dobbelsteen deze keer aangeven?'"
             6:
@@ -933,10 +933,10 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes {is} 1, 2, 3, 4, 5, regenworm
-                    worp {is} _?_
-                    {print} 'je hebt ' _?_ ' gegooid'
-                    {if} _?_ {is} regenworm {print} 'Je mag stoppen met gooien.'
-                    _?_ {print} 'Je moet nog een keer hoor!'
+                    worp {is} _
+                    {print} 'je hebt ' _ ' gegooid'
+                    {if} _ {is} regenworm {print} 'Je mag stoppen met gooien.'
+                    _ {print} 'Je moet nog een keer hoor!'
                     ```
                 start_code: "{print} 'Wat zal de dobbelsteen deze keer aangeven?'"
             4:
@@ -948,8 +948,8 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes {is} 1, 2, 3, 4, 5, regenworm
-                    {print} _?_ jij gooide _?_
-                    {print} _?_ _?_ _?_ <- hier moet je het kiezen programmeren
+                    {print} _ jij gooide _
+                    {print} _ _ _ <- hier moet je het kiezen programmeren
                     ```
 
                 start_code: "{print} 'Wat zal de dobbelsteen deze keer aangeven?'"
@@ -1060,11 +1060,11 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     opties {is} steen, papier, schaar
-                    computerkeuze {is} _?_
+                    computerkeuze {is} _
                     keuze {is} {ask} 'Wat kies jij?'
-                    {print} 'jij koos ' _?_
-                    {print} 'computer koos ' _?_
-                    {if} _?_ {is} _?_ {print} 'gelijkspel!' {else} {print} 'geen gelijkspel'
+                    {print} 'jij koos ' _
+                    {print} 'computer koos ' _
+                    {if} _ {is} _ {print} 'gelijkspel!' {else} {print} 'geen gelijkspel'
                     ```
 
                     Vul op de stippeltjes eerst de goede code aan om te kijken of het gelijkspel is.
@@ -1080,7 +1080,7 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes {is} steen, papier, schaar
-                    {print} _?_ De computer koos: _?_ _?_ {at} _?_
+                    {print} _ De computer koos: _ _ {at} _
                     ```
                 start_code: "{print} 'Welkom bij jouw eigen steen papier schaar!'"
             3:
@@ -1105,7 +1105,7 @@ adventures:
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    keuze {is} _?_
+                    keuze {is} _
                     {print} ik kies keuze
                     ```
                 start_code: "# place your code here"
@@ -1961,7 +1961,7 @@ adventures:
                     {print} HELP!
                     {print} Je rent naar de keuken, maar wordt daar aangevallen door een monster3
                     ```
-                start_code: "monster1 {is} _?_"
+                start_code: "monster1 {is} _"
             14:
                 story_text: |
                     ## Spookhuis

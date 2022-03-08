@@ -515,7 +515,7 @@ adventures:
                     ## Example Hedy code
 
                     ```
-                    {repeat} _?_ _?_ {print} 'Baby Shark tututudutudu'
+                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
                     {print} 'Baby Shark'
                     ```
 
@@ -728,8 +728,8 @@ adventures:
                     angles = {ask} 'How many angles should I draw?'
                     angle = 360 / angles
                     {repeat} angle {times}
-                        {turn} _?_
-                        {forward} _?_
+                        {turn} _
+                        {forward} _
                     ```
                 start_code: |
                     hoeken = {ask} 'How many angles should I draw?'
@@ -808,7 +808,7 @@ adventures:
 
                     ```
                     people = mom, dad, Emma, Sophie
-                    {repeat} _?_ _?_ {print} 'the dishwasher is' _?_
+                    {repeat} _ _ {print} 'the dishwasher is' _
                     ```
                 start_code: "{print} 'Who does the dishes?'"
             6:
@@ -866,7 +866,7 @@ adventures:
                     ```
                     people {is} mom, dad, Emma, Sophie
                     dishwasher {is} people {at} {random}
-                    {if} dishwasher {is} Sophie {print} _?_ too bad I have to do the dishes _?_ {else} {print} 'luckily no dishes because' _?_ 'is already washing up'
+                    {if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'
                     ```
                 start_code: "{print} 'Who does the dishes?'"
             4:
@@ -883,9 +883,9 @@ adventures:
 
                     ```
                     people {is} mom, dad, Emma, Sophie
-                    {print} _?_ the dishes are done by _?_
+                    {print} _ the dishes are done by _
                     {sleep}
-                    {print} people {at} _?_
+                    {print} people {at} _
                     ```
                 start_code: "{print} 'Who does the dishes?'"
             3:
@@ -947,7 +947,7 @@ adventures:
 
                     ```
                     choices = 1, 2, 3, 4, 5, earthworm
-                    {repeat} _?_ _?_ {print} _?_ _?_ _?_
+                    {repeat} _ _ {print} _ _ _
                     ```
                 start_code: "{print} 'What will the die indicate this time?'"
             6:
@@ -988,9 +988,9 @@ adventures:
 
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
-                    throw {is} _?_
-                    {print} 'you have' _?_ 'thrown'
-                    {if} _?_ {is} earthworm {print} 'You can stop throwing.' _?_ {print} 'You have to hear it again!'
+                    throw {is} _
+                    {print} 'you have' _ 'thrown'
+                    {if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'
                     ```
                 start_code: "{print} 'What will the die indicate this time?'"
             4:
@@ -1004,8 +1004,8 @@ adventures:
 
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} _?_ you threw _?_
-                    {print} _?_ _?_ _?_ <- here you have to program the choice
+                    {print} _ you threw _
+                    {print} _ _ _ <- here you have to program the choice
                     ```
 
                 start_code: "{print} 'What will the die indicate this time?'"
@@ -1124,11 +1124,11 @@ adventures:
 
                     ```
                     options {is} rock, paper, scissors
-                    computer_choice {is} _?_
+                    computer_choice {is} _
                     choice {is} {ask} What do you choose?
-                    {print} 'you chose ' _?_
-                    {print} 'computer chose ' _?_
-                    {if} _?_ {is} _?_ {print} 'tie!' {else} {print} 'no tie'
+                    {print} 'you chose ' _
+                    {print} 'computer chose ' _
+                    {if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'
                     ```
 
                     Fill in the correct code on the blanks to see {if} it is a draw.
@@ -1145,7 +1145,7 @@ adventures:
 
                     ```
                     choices {is} rock, paper, scissors
-                    {print} _?_ The computer chose: _?_ _?_ {at} _?_
+                    {print} _ The computer chose: _ _ {at} _
                     ```
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             3:
@@ -1174,7 +1174,7 @@ adventures:
                     ## Example Hedy code
 
                     ```
-                    choice {is} _?_
+                    choice {is} _
                     {print} I choose choice
                     ```
                 start_code: "# place your code here"
@@ -2056,7 +2056,7 @@ adventures:
                     {print} Oh no! Quickly get to the kitchen.
                     {print} But as you enter monster3 attacks you!
                     ```
-                start_code: "monster1 {is} _?_"
+                start_code: "monster1 {is} _"
             14:
                 story_text: |
                     ## Haunted House

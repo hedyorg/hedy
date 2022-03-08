@@ -561,7 +561,7 @@ adventures:
                 example_code: |
                     ## Hedy Beispiel-Code
                     ```
-                    repeat _?_ _?_ print 'Baby Shark tututudutudu'
+                    repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
@@ -801,8 +801,8 @@ adventures:
                     Ecken = ask 'Wie viele Ecken soll die Form haben?'
                     Winkel = 360 / Ecken
                     repeat Ecken times
-                        turn _?_
-                        forward _?_
+                        turn _
+                        forward _
                     ```
                 start_code: |
                     Ecken = ask 'Wie viele Ecken soll die Form haben?'
@@ -886,7 +886,7 @@ adventures:
 
                     ```
                     Familienmitglieder = Mama, Papa, Emma, Sophie
-                    repeat _?_ _?_ print _?_ ' ist mit dem Abwasch dran'
+                    repeat _ _ print _ ' ist mit dem Abwasch dran'
                     ```
                 start_code: "print 'Wer macht den Abwasch?'"
             6:
@@ -949,7 +949,7 @@ adventures:
                     ```
                     Familienmitglieder is Mama, Papa, Emma, Sophie
                     Tellerwäscher is Familienmitglieder at random
-                    if Tellerwäscher is Sophie print _?_ So ein Pech. Ich muss abwaschen. _?_ else print 'Zum Glück kein Abwasch, weil ' _?_ ' dran ist.'
+                    if Tellerwäscher is Sophie print _ So ein Pech. Ich muss abwaschen. _ else print 'Zum Glück kein Abwasch, weil ' _ ' dran ist.'
                     ```
                 start_code: "print 'Wer macht den Abwasch?'"
             4:
@@ -967,7 +967,7 @@ adventures:
 
                     ```
                     Familienmitglieder is Mama, Papa, Emma, Sophie
-                    print _?_ den Abwasch macht heute _?_
+                    print _ den Abwasch macht heute _
                     sleep
                     print Familienmitglieder at random
                     ```
@@ -1041,7 +1041,7 @@ adventures:
 
                     ```
                     Würfelseiten = 1, 2, 3, 4, 5, Regenwurm
-                    repeat _?_ _?_ print _?_ _?_ _?_
+                    repeat _ _ print _ _ _
                     ```
                 start_code: "print 'Was wird der Würfel diesmal anzeigen?'"
             6:
@@ -1092,9 +1092,9 @@ adventures:
 
                     ```
                     Würfelseiten is 1, 2, 3, 4, 5, Regenwurm
-                    Wurf is _?_
-                    print 'Du hast ' _?_ ' gewürfelt'
-                    if _?_ is Regenwurm print 'Du kannst aufhören zu würfeln.' _?_ print 'Du musst es nochmal versuchen!'
+                    Wurf is _
+                    print 'Du hast ' _ ' gewürfelt'
+                    if _ is Regenwurm print 'Du kannst aufhören zu würfeln.' _ print 'Du musst es nochmal versuchen!'
                     ```
                 start_code: "print 'Was zeigt der Würfel diesmal?'"
             4:
@@ -1109,8 +1109,8 @@ adventures:
 
                     ```
                     Würfelseiten is 1, 2, 3, 4, 5, Regenwurm
-                    print _?_ Der Würfel zeigt  _?_
-                    print _?_ _?_ _?_ <- Hier musst Du die Auswahl programmieren.
+                    print _ Der Würfel zeigt  _
+                    print _ _ _ <- Hier musst Du die Auswahl programmieren.
                     ```
 
                 start_code: "print 'Was zeigt der Würfel diesmal?'"
@@ -1231,11 +1231,11 @@ adventures:
 
                     ```
                     options is rock, paper, scissors
-                    computer_choice is _?_
+                    computer_choice is _
                     choice is ask What do you choose?
-                    print 'you chose ' _?_
-                    print 'computer chose ' _?_
-                    if _?_ is _?_ print 'tie!' else print 'no tie'
+                    print 'you chose ' _
+                    print 'computer chose ' _
+                    if _ is _ print 'tie!' else print 'no tie'
                     ```
 
                     Fill in the correct code on the blanks to see if it is a draw.
@@ -1252,7 +1252,7 @@ adventures:
 
                     ```
                     choices is rock, paper, scissors
-                    print _?_ The computer chose: _?_ _?_ at _?_
+                    print _ The computer chose: _ _ at _
                     ```
                 start_code: "print 'Welcome to your own rock scissors paper!'"
             3:
@@ -1281,7 +1281,7 @@ adventures:
                     ## Example Hedy code
 
                     ```
-                    choice is _?_
+                    choice is _
                     print I choose choice
                     ```
                 start_code: "# place your code here"
@@ -2163,7 +2163,7 @@ adventures:
                     print Oh no! Quickly get to the kitchen.
                     print But as you enter monster3 attacks you!
                     ```
-                start_code: "monster1 is _?_"
+                start_code: "monster1 is _"
             14:
                 story_text: |
                     ## Haunted House

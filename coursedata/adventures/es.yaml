@@ -220,7 +220,7 @@ adventures:
                 example_code: |
                     ## Programa Hedy de ejemplo
                     ```
-                    {repeat} _?_ _?_ {print} 'Bebé Tiburón tututudutudu'
+                    {repeat} _ _ {print} 'Bebé Tiburón tututudutudu'
                     {print} 'Bebe Tiburón'
                     ```
 
@@ -316,8 +316,8 @@ adventures:
                     ángulos {is} {ask} '¿Cuántos ángulos debo dibujar?'
                     ángulo {is} 360 / ángulos
                     {repeat} ángulo {times}
-                        girar _?_
-                        adelante _?_
+                        girar _
+                        adelante _
                     ```
                 start_code: |
                     ángulos {is} {ask} '¿Cuántos ángulos debo dibujar?'
@@ -462,7 +462,7 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     personas {is} mamá, papá, María, Carlos
-                    {repeat} _?_ _?_ {print} 'lavará los platos' _?_
+                    {repeat} _ _ {print} 'lavará los platos' _
                     ```
                 start_code: "{print} 'Wie doet de afwas?'"
                 story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
@@ -479,7 +479,7 @@ adventures:
                     ```
                     personas {is} mamá, papá, María, Carlos
                     lavador {is} personas {at} {random}
-                    {if} lavador {is} María {print} 'oh no, hoy me toca lavar los platos' {else} {print} 'por suerte no debo lavar los platos porque' _?_ 'los lavará hoy!'
+                    {if} lavador {is} María {print} 'oh no, hoy me toca lavar los platos' {else} {print} 'por suerte no debo lavar los platos porque' _ 'los lavará hoy!'
                     ```
 
                 start_code: "{print} 'Quien lavará los platos hoy?'"
@@ -495,8 +495,8 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     personas {is} mamá, papá, Carlos, María
-                    {print} _?_ los platos serán lavados por _?_
-                    {print} personas {at} _?_
+                    {print} _ los platos serán lavados por _
+                    {print} personas {at} _
                     ```
                 start_code: "{print} 'Quien lavará los platos hoy?'"
                 example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
@@ -565,7 +565,7 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
-                    {repeat} _?_ _?_ {print} _?_ _?_ _?_
+                    {repeat} _ _ {print} _ _ _
                     ```
 
                 start_code: "{print} 'Qué salió esta vez?'"
@@ -580,9 +580,9 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
-                    tirada {is} _?_
-                    {print} 'haz tirado un ' _?_
-                    {if} _?_ {is} gusanito {print} 'Puedes dejar de tirar los dados' _?_ {print} 'Debes tirar los dados nuevamente!'
+                    tirada {is} _
+                    {print} 'haz tirado un ' _
+                    {if} _ {is} gusanito {print} 'Puedes dejar de tirar los dados' _ {print} 'Debes tirar los dados nuevamente!'
                     ```
 
                 start_code: "{print} 'Qué salió esta vez?'"
@@ -594,8 +594,8 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
-                    {print} 'has tirado un ' _?_
-                    {print} _?_ _?_ _?_ <- agregar código aquí
+                    {print} 'has tirado un ' _
+                    {print} _ _ _ <- agregar código aquí
                     ```
                 start_code: "{print} 'Qué salió esta vez?'"
                 example_code: "## Example Hedy code\n\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
@@ -672,11 +672,11 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones {is} piedra, papel, tijera
-                    opcióncomputadora {is} _?_
+                    opcióncomputadora {is} _
                     opción {is} {ask} 'Que eliges?'
-                    {print} 'Has elegido ' _?_
-                    {print} 'La computadora ha elegido ' _?_
-                    {if} _?_ {is} _?_ {print} 'empate!' {else} {print} 'no hay empate'
+                    {print} 'Has elegido ' _
+                    {print} 'La computadora ha elegido ' _
+                    {if} _ {is} _ {print} 'empate!' {else} {print} 'no hay empate'
                     ```
 
                     Reemplaza los guiones bajos con el código correcto para comprobar si alguien ganó el juego o si el juego resultó empatado.
@@ -691,7 +691,7 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones {is} piedra, papel, tijera
-                    {print} _?_ La computadora ha elegido: _?_ _?_ {at} _?_
+                    {print} _ La computadora ha elegido: _ _ {at} _
                     ```
                 start_code: "{print} 'Bienvenide a tu propio piedra, papel o tijera!'"
             3:

@@ -213,7 +213,7 @@ adventures:
                 example_code: |
                     ## Contoh kode Hedy
                     ```
-                    repeat _?_ _?_ print 'Baby Shark tututudutudu'
+                    repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
@@ -304,7 +304,7 @@ adventures:
                     jumlahsudut is ask 'Berapa banyak sudut yang kamu mau?'
                     sudut is 360 / jumlahsudut
                     repeat sudut times
-                        turn _?_
+                        turn _
                         forward_
                     ```
                 start_code: hoeken is ask 'Berapa banyak sudut yang aku harus gambar?'
@@ -447,7 +447,7 @@ adventures:
                     ## Contoh kode Hedy
                     ```
                     orang is ibu, ayah, Emma, Sophie
-                    repeat _?_ _?_ print 'pencuci piringnya adalah' _?_
+                    repeat _ _ print 'pencuci piringnya adalah' _
                     ```
                 start_code: print 'Siapa yang mencuci piring?'
                 story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
@@ -465,7 +465,7 @@ adventures:
                     ```
                     orang is ibu, ayah, Emma, Sophie
                     pencucipirng is orang at random
-                    if pencucipiring is Sophie print _?_ Yahh aku harus mencuci piring _?_ else print 'untungnya tidak ada piring yang perlu dicuci karena'  _?_ 'sudah mencucinya'
+                    if pencucipiring is Sophie print _ Yahh aku harus mencuci piring _ else print 'untungnya tidak ada piring yang perlu dicuci karena'  _ 'sudah mencucinya'
                     ```
                 start_code: print 'Siapa yang mencuci piring?'
             4:
@@ -481,8 +481,8 @@ adventures:
                     ## Contoh kode Hedy:
                     ```
                     orang is ibu, ayah, Emma, Sophie
-                    print _?_ cuci piring akan dilakukan oleh _?_
-                    print orang at _?_
+                    print _ cuci piring akan dilakukan oleh _
+                    print orang at _
                     ```
                 start_code: print 'Siapa yang mencuci piring?'
             3:
@@ -523,7 +523,7 @@ adventures:
                     ## Contoh kode Hedy
                     ```
                     pilihan is 1, 2, 3, 4, 5, cacing
-                    repeat _?_ _?_ print _?_ _?_ _?_
+                    repeat _ _ print _ _ _
                     ```
                 start_code: print 'Apakah yang akan dihasilkan dari lemparan dadu kali ini?'
             6:
@@ -564,9 +564,9 @@ adventures:
                     ## Contoh kode Hedy
                     ```
                     pilihan is 1, 2, 3, 4, 5, cacing
-                    lemparan is _?_
-                    print 'kamu memiliki' _?_ 'lemparan'
-                    if _?_ is cacing print 'Kamu dapat berhenti melempar.' _?_ print 'Kamu harus mendengarnya sekali lagi!'
+                    lemparan is _
+                    print 'kamu memiliki' _ 'lemparan'
+                    if _ is cacing print 'Kamu dapat berhenti melempar.' _ print 'Kamu harus mendengarnya sekali lagi!'
                     ```
                 start_code: print 'Apakah yang akan dihasilkan dari lemparan dadu kali ini?'
             4:
@@ -579,8 +579,8 @@ adventures:
                     ## Contoh kode Hedy
                     ```
                     pilihan is 1, 2, 3, 4, 5, cacing
-                    print _?_ you threw _?_
-                    print _?_ _?_ _?_ <- disini kamu harus memprogram pilihannya
+                    print _ you threw _
+                    print _ _ _ <- disini kamu harus memprogram pilihannya
                     ```
                 start_code: print 'Apakah yang akan dihasilkan dari lemparan dadu kali ini?'
             3:
@@ -647,11 +647,11 @@ adventures:
                     ## Contoh kode Hedy
                     ```
                     pilihan is batu, gunting, kertas
-                    pil_komputer is _?_
+                    pil_komputer is _
                     pil_kamu is ask Apa yang kamu pilih?
-                    print 'kamu memilih ' _?_
-                    print 'komputer memilih ' _?_
-                    if _?_ is _?_ print 'seri' else print 'tidak seri'
+                    print 'kamu memilih ' _
+                    print 'komputer memilih ' _
+                    if _ is _ print 'seri' else print 'tidak seri'
                     if pil_kamu is batu and pil_komputer is kertas print 'komputer menang'
                     ```
 
@@ -668,7 +668,7 @@ adventures:
                     ## Contoh kode Hedy:
                     ```
                     pilihan is batu, gunting, kertas
-                    print _?_ Komputer memilih: _?_ _?_ at _?_
+                    print _ Komputer memilih: _ _ at _
                     ```
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
             3:

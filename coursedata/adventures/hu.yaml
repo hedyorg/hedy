@@ -192,7 +192,7 @@ adventures:
 
                     ## Példa Hedy kód
                     ```
-                    repeat _?_ _?_ print 'Baby Shark tututudutudu'
+                    repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
@@ -253,7 +253,7 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     emberek is anya, apa, Edit, Gizi
-                    repeat _?_ _?_ print 'a mosogató:' _?_
+                    repeat _ _ print 'a mosogató:' _
                     ```
                 example_code: "## Example Hedy code\n\n```\npeople = mom, dad, Emma, Sophie\n{repeat} _ _ {print} 'the dishwasher is' _\n```\n"
             6:
@@ -294,8 +294,8 @@ adventures:
                     ```
                     emberek is anya, apa, Edit, Gizi
                     mosogato is emberek at random
-                    if mosogato is Gizi print _?_ sajnos mosogatnom kell _?_ else print 'szerencsére nem én,
-                    mert' _?_ 'már mosogat'
+                    if mosogato is Gizi print _ sajnos mosogatnom kell _ else print 'szerencsére nem én,
+                    mert' _ 'már mosogat'
                     ```
                 example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
             4:
@@ -312,8 +312,8 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     emberek is anya, apa, Edit, Gizi
-                    print _?_ ő mosogat: _?_
-                    print emberek at _?_
+                    print _ ő mosogat: _
+                    print emberek at _
                     ```
                 example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
             3:
@@ -362,7 +362,7 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     dobások is 1, 2, 3, 4, 5, giliszta
-                    repeat _?_ _?_ print _?_ _?_
+                    repeat _ _ print _ _
                     ```
                 start_code: print 'Mit dobunk ezúttal?'
                 example_code: "## Example Hedy code\n\n```\nchoices = 1, 2, 3, 4, 5, earthworm\n{repeat} _ _ {print} _ _ _\n```\n"
@@ -404,9 +404,9 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     dobasok is 1, 2, 3, 4, 5, giliszta
-                    dobas _?_
-                    print 'Te' _?_ 'dobtál'
-                    if _?_ is giliszta print 'Megállhatsz.' _?_ print 'Dobj újra!'
+                    dobas _
+                    print 'Te' _ 'dobtál'
+                    if _ is giliszta print 'Megállhatsz.' _ print 'Dobj újra!'
                     ```
                 start_code: print 'Mit dobunk ezúttal?'
                 example_code: "## Example Hedy code\n\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
@@ -418,8 +418,8 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     dobasok is 1, 2, 3, 4, 5, earthworm
-                    print _?_ te jössz _?_
-                    print _?_ _?_ _?_ <- itt kell beprogramozni a dobást
+                    print _ te jössz _
+                    print _ _ _ <- itt kell beprogramozni a dobást
                     ```
                 start_code: print 'Mit dobunk ezúttal?'
                 example_code: "## Example Hedy code\n\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
@@ -492,11 +492,11 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     lehetoseg is kő, papír, olló
-                    szamitogepe is _?_
+                    szamitogepe is _
                     valaszt is ask Mit választasz?
-                    print 'ezt választottad: ' _?_
-                    print 'a számítógép választása: ' _?_
-                    if _?_ is _?_ print 'döntetlen!' else print 'nem döntetlen'
+                    print 'ezt választottad: ' _
+                    print 'a számítógép választása: ' _
+                    if _ is _ print 'döntetlen!' else print 'nem döntetlen'
                     if valaszt is kő and szamitogepe is papír print 'számítógép nyert'
                     ```
 
@@ -514,7 +514,7 @@ adventures:
                     ## Példa Hedy
                     ```
                     valasztas is kő, papír, olló
-                    print _?_ A számítógép ezt választotta: _?_ _?_ at _?_
+                    print _ A számítógép ezt választotta: _ _ at _
                     ```
                 example_code: "## Example Hedy code\n\n```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
             3:
@@ -975,7 +975,7 @@ adventures:
                     szogek is ask 'How many angles should I draw?'
                     szog is 360 / szogek
                     repeat szog times
-                        turn _?_
+                        turn _
                         forward_
                     ```
                 start_code: szogek is ask 'Hány szöget kell rajzolnom?'
