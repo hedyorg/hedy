@@ -1086,7 +1086,7 @@ export function load_quiz(level: string) {
 }
 
 //Feature flag for variable and values view
-const variable_view = false;
+var variable_view = false;
 
 //Hides the HTML DIV for variables if feature flag is false
 if (variable_view === false) {
