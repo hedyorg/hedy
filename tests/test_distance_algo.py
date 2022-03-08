@@ -68,7 +68,6 @@ class TestsKeywordSuggestions(unittest.TestCase):
       {'level':5 ,'correct':'if'     ,'mistake':'fi'     },
       {'level':5 ,'correct':'in'     ,'mistake':'iv'     },
       {'level':6 ,'correct':'add'    ,'mistake':'dda'    },
-      {'level':6 ,'correct':'ask'    ,'mistake':'as'     },
       {'level':6 ,'correct':'remove' ,'mistake':'zremove'},
       {'level':7 ,'correct':'print'  ,'mistake':'pxrint' },
       {'level':7 ,'correct':'print'  ,'mistake':'pyrint' },
