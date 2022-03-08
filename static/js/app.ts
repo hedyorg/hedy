@@ -1089,15 +1089,12 @@ export function load_quiz(level: string) {
 var variable_view = false;
 
 //Hides the HTML DIV for variables if feature flag is false
-if (variable_view === false) {
-  let variableDiv = document.getElementById("variables");
-  if (variableDiv != null) {
-    variableDiv!.style.display = "none";
-  }
+if (!variable_view) {
+  $('#variables').hide();
 }
 
 export function show_variables() {
-  if (variable_view === true) {
+  if (variable_view) {
     const variableBox = $('#variables');
     const variableList = $('.variable-list');
     if (variableList.hasClass('hidden')) {
