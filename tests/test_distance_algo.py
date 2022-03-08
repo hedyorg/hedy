@@ -89,7 +89,6 @@ class TestsKeywordSuggestions(unittest.TestCase):
       (8 , 'remove' ,'rmeove' ),
       (8 , 'repeat' ,'repceat'),
       (9  ,'from'   ,'rfom'   ),
-      (9  ,'is'     ,'cs'     ),
       (9 , 'remove' ,'reove'  ),
       (9 , 'times'  ,'timers' ),
       (10 ,'add'    ,'ajdd'   ),
