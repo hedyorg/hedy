@@ -60,7 +60,6 @@ class TestsKeywordSuggestions(unittest.TestCase):
   def test_command_en(self):
     listTest = [
       {'level':1 ,'correct':'turn'   ,'mistake':'purn'   },
-      {'level':2 ,'correct':'ask'    ,'mistake':'sk'     },
       {'level':3 ,'correct':'ask'    ,'mistake':'aks'    },
       {'level':4 ,'correct':'add'    ,'mistake':'addg'   },
       {'level':4 ,'correct':'print'  ,'mistake':'pridnt' },
