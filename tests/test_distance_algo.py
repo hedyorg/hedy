@@ -1,5 +1,6 @@
 import unittest
 import hedy
+from parameterized import parameterized
 
 class TestsKeywordSuggestions(unittest.TestCase):
 
@@ -57,50 +58,68 @@ class TestsKeywordSuggestions(unittest.TestCase):
     closest = hedy.closest_command(invalid_command, keywords_nl_level_1)
     self.assertEqual('keyword', closest)
 
-  def test_command_en(self):
-    listTest = [
-      {'level':1 ,'correct':'turn'   ,'mistake':'purn'   },
-      {'level':3 ,'correct':'at'     ,'mistake':'mt'     },
-      {'level':4 ,'correct':'add'    ,'mistake':'addg'   },
-      {'level':4 ,'correct':'print'  ,'mistake':'pridnt' },
-      {'level':5 ,'correct':'else'   ,'mistake':'elyse'  },
-      {'level':5 ,'correct':'else'   ,'mistake':'esle'   },
-      {'level':5 ,'correct':'forward','mistake':'fowrard'},
-      {'level':5 ,'correct':'forward','mistake':'fwroard'},
-      {'level':5 ,'correct':'random' ,'mistake':'arndom' },
-      {'level':6 ,'correct':'add'    ,'mistake':'dda'    },
-      {'level':6 ,'correct':'else'   ,'mistake':'eles'   },
-      {'level':6 ,'correct':'remove' ,'mistake':'zremove'},
-      {'level':6 ,'correct':'turn'   ,'mistake':'tunr'   },
-      {'level':7 ,'correct':'print'  ,'mistake':'pxrint' },
-      {'level':7 ,'correct':'print'  ,'mistake':'pyrint' },
-      {'level':7 ,'correct':'random' ,'mistake':'radnom' },
-      {'level':7 ,'correct':'times'  ,'mistake':'tiems'  },
-      {'level':8 ,'correct':'ask'    ,'mistake':'abk'    },
-      {'level':8 ,'correct':'remove' ,'mistake':'reomve' },
-      {'level':8 ,'correct':'remove' ,'mistake':'rmeove' },
-      {'level':8 ,'correct':'repeat' ,'mistake':'repceat'},
-      {'level':9 ,'correct':'remove' ,'mistake':'reove'  },
-      {'level':9 ,'correct':'times'  ,'mistake':'timers' },
-      {'level':11,'correct':'for'    ,'mistake':'or'     },
-      {'level':11,'correct':'random' ,'mistake':'raodnm' },
-      {'level':12,'correct':'is'     ,'mistake':'isw'    },
-      {'level':12,'correct':'sleep'  ,'mistake':'suleep' },
-      {'level':13,'correct':'else'   ,'mistake':'lese'   },
-      {'level':14,'correct':'add'    ,'mistake':'dadd'   },
-      {'level':14,'correct':'range'  ,'mistake':'raige'  },
-      {'level':15,'correct':'else'   ,'mistake':'ese'    },
-      {'level':15,'correct':'print'  ,'mistake':'irpnt'  },
-      {'level':15,'correct':'print'  ,'mistake':'pribnt' },
-      {'level':15,'correct':'random' ,'mistake':'randoo' },
-      {'level':15,'correct':'while'  ,'mistake':'whcle'  },
-      {'level':16,'correct':'print'  ,'mistake':'prnit'  },
-      {'level':16,'correct':'remove' ,'mistake':'emove'  },
-      {'level':16,'correct':'while'  ,'mistake':'whilee' },
-      {'level':17,'correct':'sleep'  ,'mistake':'slkep'  },
-      {'level':18,'correct':'print'  ,'mistake':'prinbt' },
-    ]
-    for test in listTest :
-      keywords = hedy.get_suggestions_for_language('en', test['level'] )
-      closest = hedy.closest_command(test['mistake'], keywords)
-      self.assertEqual(test['correct'], closest)
+  @parameterized.expand([
+      (1  ,'print'  ,'pnirt'  ),
+      (1  ,'turn'   ,'tnru'   ),
+      (1 , 'turn'   ,'purn'   ),
+      (3  ,'sleep'  ,'sleepb' ),
+      (3 , 'at'     ,'mt'     ),
+      (4  ,'ask'    ,'sk'     ),
+      (4  ,'print'  ,'prtni'  ),
+      (4  ,'random' ,'nandom' ),
+      (4 , 'add'    ,'addg'   ),
+      (4 , 'print'  ,'pridnt' ),
+      (5  ,'add'    ,'wdd'    ),
+      (5 , 'else'   ,'elyse'  ),
+      (5 , 'else'   ,'esle'   ),
+      (5 , 'forward','fowrard'),
+      (5 , 'forward','fwroard'),
+      (5 , 'random' ,'arndom' ),
+      (6  ,'print'  ,'pritn'  ),
+      (6 , 'add'    ,'dda'    ),
+      (6 , 'else'   ,'eles'   ),
+      (6 , 'remove' ,'zremove'),
+      (6 , 'turn'   ,'tunr'   ),
+      (7 , 'print'  ,'pxrint' ),
+      (7 , 'print'  ,'pyrint' ),
+      (7 , 'random' ,'radnom' ),
+      (7 , 'times'  ,'tiems'  ),
+      (8 , 'ask'    ,'abk'    ),
+      (8 , 'remove' ,'reomve' ),
+      (8 , 'remove' ,'rmeove' ),
+      (8 , 'repeat' ,'repceat'),
+      (9  ,'from'   ,'rfom'   ),
+      (9  ,'is'     ,'cs'     ),
+      (9 , 'remove' ,'reove'  ),
+      (9 , 'times'  ,'timers' ),
+      (10 ,'add'    ,'ajdd'   ),
+      (11 ,'at'     ,'rt'     ),
+      (11, 'for'    ,'or'     ),
+      (11, 'random' ,'raodnm' ),
+      (12 ,'in'     ,'inm'    ),
+      (12 ,'print'  ,'rint'   ),
+      (12, 'sleep'  ,'suleep' ),
+      (13, 'else'   ,'lese'   ),
+      (14 ,'remove' ,'remoe'  ),
+      (14, 'add'    ,'dadd'   ),
+      (14, 'range'  ,'raige'  ),
+      (15 ,'and'    ,'asnd'   ),
+      (15 ,'random' ,'rakdom' ),
+      (15, 'else'   ,'ese'    ),
+      (15, 'print'  ,'irpnt'  ),
+      (15, 'print'  ,'pribnt' ),
+      (15, 'random' ,'randoo' ),
+      (15, 'while'  ,'whcle'  ),
+      (16, 'print'  ,'prnit'  ),
+      (16, 'remove' ,'emove'  ),
+      (16, 'while'  ,'whilee' ),
+      (17, 'sleep'  ,'slkep'  ),
+      (18 ,'is'     ,'si'     ),
+      (18 ,'or'     ,'oru'    ),
+      (18 ,'sleep'  ,'slvep'  ),
+      (18, 'print'  ,'prinbt' ),
+    ])
+  def test_command_en(self,level,correct,mistake):
+    keywords = hedy.get_suggestions_for_language('en', level )
+    closest = hedy.closest_command(mistake, keywords)
+    self.assertEqual(correct, closest)
