@@ -3,6 +3,7 @@ import {LANG_es} from './syntaxLang-es';
 import {LANG_nl} from './syntaxLang-nl';
 import {LANG_ar} from './syntaxLang-ar';
 import {LANG_fr} from './syntaxLang-fr';
+import {LANG_hi} from './syntaxLang-hi';
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
@@ -60,6 +61,9 @@ switch(window.State.lang){
     break;
   case 'fr':
     currentLang = LANG_fr;
+    break;
+  case 'hi':
+    currentLang = LANG_hi;
     break;
   default:
     currentLang = LANG_en;
@@ -149,6 +153,7 @@ const LEVELS = [
       rule_is('gobble'),
       rule_turtle(),
       rule_sleep(),
+      rule_listManipulation(),
     ),
   },
   {
@@ -159,6 +164,7 @@ const LEVELS = [
       rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
+      rule_listManipulation(),
       rule_turtle(),
       rule_sleep(),
     ),
@@ -170,6 +176,7 @@ const LEVELS = [
       rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
+      rule_listManipulation(),
       rule_ifElseOneLine(),
       rule_expressions(),
       rule_turtle(),
@@ -182,6 +189,7 @@ const LEVELS = [
     rules: pipe(baseRules(),
       rule_printSpace('expression_eol'),
       rule_isAsk(),
+      rule_listManipulation(),
       rule_is(),
       rule_ifElseOneLine(),
       rule_expressions(),
@@ -196,6 +204,7 @@ const LEVELS = [
     rules: pipe(baseRules(),
       rule_printSpace('expression_eol'),
       rule_isAsk(),
+      rule_listManipulation(),
       rule_is(),
       rule_ifElse(),
       rule_expressions(),
@@ -217,6 +226,7 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_repeat(),
+      rule_listManipulation(),
       rule_turtle(),
       rule_sleep(),
     ),
@@ -228,6 +238,7 @@ const LEVELS = [
     rules: pipe(baseRules(),
       rule_printSpace(),
       rule_isAsk(),
+      rule_listManipulation(),
       rule_is(),
       rule_ifElse(),
       rule_expressions(),
@@ -250,6 +261,7 @@ const LEVELS = [
       rule_for(),
       rule_forRange(),
       rule_turtle(),
+      rule_listManipulation(),
       rule_sleep(),
     ),
   },
@@ -266,6 +278,7 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_listManipulation(),
       rule_turtle(),
       rule_sleep(),
     ),
@@ -280,6 +293,7 @@ const LEVELS = [
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
+      rule_listManipulation(),
       rule_turtle(),
       rule_sleep(),
     ),
@@ -295,6 +309,7 @@ const LEVELS = [
       rule_arithmetic(),
       rule_forRangeParen(),
       rule_turtle(),
+      rule_listManipulation(),
       rule_sleep(),
     ),
   },
@@ -307,6 +322,7 @@ const LEVELS = [
       rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
+      rule_listManipulation(),
       rule_forRangeParen(),
       rule_turtle(),
       rule_sleep(),
@@ -318,6 +334,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
+      rule_listManipulation(),
       rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
@@ -330,6 +347,7 @@ const LEVELS = [
     name: 'level18',
     rules: pipe(baseRules(),
       rule_printParen(),
+      rule_listManipulation(),
       rule_isInputParen(),
       rule_is(),
       rule_ifElse(),
@@ -449,7 +467,7 @@ function rule_is(next?: string) {
   return recognize('start', {
     regex: '('+ word + ')( ' + currentLang._IS + ' )',
     token: ['text', 'keyword'],
-    next: next ?? 'expression_eol',
+    next: next ?? 'start',
   });
 }
 
@@ -520,6 +538,20 @@ function rule_expressions() {
   );
 }
 
+function rule_listManipulation() {
+  return comp(
+    recognize('start', {
+      regex: "^(" + currentLang._ADD_LIST + ")( )(.*)( )(" + currentLang._TO + ")( )(.*)$",
+      token: ['keyword','text','text','text','keyword','text','text'],
+      next: 'start',
+    }),
+    recognize('start', {
+      regex: "^(" + currentLang._REMOVE + ")( )(.*)( )(" + currentLang._FROM + ")( )(.*)$",
+      token: ['keyword','text','text','text','keyword','text','text'],
+      next: 'start',
+    }));
+}
+
 
 /**
  * Add highlighting for if/else, also add a condition
@@ -536,7 +568,12 @@ function rule_ifElseOneLine() {
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace(currentLang._IS + '|' + currentLang._IN),
+      regex: keywordWithSpace(currentLang._IS),
+      token: 'keyword',
+      next: 'start',
+    }),
+    recognize('condition', {
+      regex: keywordWithSpace(currentLang._IN),
       token: 'keyword',
       next: 'start',
     }),
