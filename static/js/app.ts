@@ -1091,7 +1091,7 @@ var variable_view = false;
 //Hides the HTML DIV for variables if feature flag is false
 if (variable_view === false) {
   let variableDiv = document.getElementById("variables");
-  variableDiv.style.display = "none";
+  variableDiv!.style.display = "none";
 }
 
 export function show_variables(){
@@ -1122,6 +1122,7 @@ export function load_variables(variables: any){
 }
 
 //hiding certain variables from the list unwanted for users
+// @ts-ignore
 function clean_variables(variables: any) {
   if (variable_view === true) {
     const new_variables = [];
