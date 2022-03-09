@@ -298,6 +298,7 @@ class TestsLevel1(HedyTester):
 
 
   def test_one_turn_with_text_gives_type_error(self):
+    #@Boryana, this is the only test I could not fix!
     code = "turn koekoek"
     self.multi_level_tester(
       max_level=self.max_turtle_level,
