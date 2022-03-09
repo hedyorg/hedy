@@ -1152,9 +1152,7 @@ class ConvertToPython_1(ConvertToPython):
             return "t.right(90)"  # no arguments defaults to a right turn
 
         arg = args[0]
-        if self.is_variable(arg) or arg.lstrip("-").isnumeric():
-            return self.make_turn(arg)
-        elif arg == 'left':
+        if arg == 'left':
             return "t.left(90)"
         elif arg == 'right':
             return "t.right(90)"
@@ -1196,6 +1194,10 @@ class ConvertToPython_2(ConvertToPython_1):
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
 
+    def turn(self, args):
+        arg = args[0]
+        if self.is_variable(arg) or arg.lstrip("-").isnumeric():
+            return self.make_turn(arg)
 
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
