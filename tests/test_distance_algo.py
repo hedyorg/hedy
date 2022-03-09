@@ -113,7 +113,6 @@ class TestsKeywordSuggestions(unittest.TestCase):
       (16, 'remove' ,'emove'  ),
       (16, 'while'  ,'whilee' ),
       (17, 'sleep'  ,'slkep'  ),
-      (18 ,'is'     ,'si'     ),
       (18 ,'or'     ,'oru'    ),
       (18 ,'sleep'  ,'slvep'  ),
       (18, 'print'  ,'prinbt' ),
