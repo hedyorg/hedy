@@ -239,8 +239,8 @@ adventures:
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example:
-                    ```
                 example_code_2: |
+                    ```
                     {print} He hears a sound
                     animals {is} 🐿, 🦔, 🦇, 🦉
                     animal {is} {ask} What do you think it is?
@@ -280,6 +280,7 @@ adventures:
                         {else}
                             {print} 'Nope they are not at the ' location
                     {print} 'Now you can enter the house!'
+                    ```
                 start_code: "# place your code here"
             13:
                 story_text: |
@@ -1201,6 +1202,7 @@ adventures:
                         {if} computer_choice == 'rock' {and} your_choice == 'paper'
                             {print} 'You win!'
                             won = 'yes'
+                    ```
                 start_code: "# place your code here"
             13:
                 story_text: |
@@ -1253,6 +1255,7 @@ adventures:
                             {if} guess == number
                                 {print} 'You win!'
                                 game = 'over'
+                    ```
                 start_code: "# place your code here"
             12:
                 story_text: |
@@ -1267,6 +1270,7 @@ adventures:
                     number2 = {ask} 'What is the second number?'
                     answer = number1 + number2
                     {print} number1 ' plus ' number2 ' is ' answer
+                    ```
                 start_code: "# place your code here"
             10:
                 story_text: |
@@ -1719,6 +1723,7 @@ adventures:
                         {print} order
                         more = {ask} 'Would you like to order anything {else}?'
                     {print} 'Thank you!'
+                    ```
                 start_code: "# place your code here"
             13:
                 story_text: |
@@ -2293,6 +2298,7 @@ adventures:
                     to_save = price - saved
                     weeks = to_save / allowance
                     {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
+                    ```
                 start_code: "# place your code here"
     quizmaster:
         name: Quizmaster
