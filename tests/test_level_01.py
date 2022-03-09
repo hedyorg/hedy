@@ -291,6 +291,8 @@ class TestsLevel1(HedyTester):
     code = "draai links"
     expected = "t.left(90)"
 
+    #TODO next step is add left/right to translation code!
+
     self.single_level_tester(code=code, expected=expected,
                              extra_check_function=self.is_turtle(), lang='nl', translate=False)
 
