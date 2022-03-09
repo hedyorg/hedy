@@ -188,6 +188,26 @@ class TestsLevel2(HedyTester):
       extra_check_function=self.is_turtle()
     )
 
+  def test_turn_number(self):
+    code = "turn 180"
+    expected = HedyTester.turn_transpiled(180)
+    self.multi_level_tester(
+      max_level=self.max_turtle_level,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle()
+    )
+
+  def test_turn_negative_number(self):
+    code = "turn -180"
+    expected = HedyTester.turn_transpiled(-180)
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle()
+    )
+
   def test_turn_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
       direction is ten

@@ -343,6 +343,16 @@ class ExtractAST(Transformer):
     def text(self, args):
         return Tree('text', [' '.join([str(c) for c in args])])
 
+    def left(self, args):
+        return 'left'
+    def right(self, args):
+        return 'right'
+
+
+    def text(self, args):
+        return Tree('text', [' '.join([str(c) for c in args])])
+
+
     def INT(self, args):
         return Tree('integer', [str(args)])
 
@@ -470,7 +480,7 @@ class TypeValidator(Transformer):
 
     def turn(self, tree):
         if tree.children:
-            name = tree.children[0].children[0]
+            name = tree.children[0]
             if self.level > 1 or name not in command_turn_literals:
                 self.validate_args_type_allowed(tree.children, Command.turn)
         return self.to_typed_tree(tree)
