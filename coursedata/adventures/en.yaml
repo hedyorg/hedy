@@ -1103,10 +1103,10 @@ adventures:
                     {print} 'The computer chooses ' computer_choice
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'
-                    {if} computer_choice {is} 'rock'
-                        {if} your_choice {is} 'paper'
+                    {if} computer_choice {is} rock
+                        {if} your_choice {is} paper
                             {print} 'You win!'
-                        {if} your_choice {is} 'scissors'
+                        {if} your_choice {is} scissors
                             {print} 'You lose!'
                     ```
                 start_code: "# place your code here"
@@ -2501,7 +2501,7 @@ adventures:
                     For example:
                     ```
                     answer = {ask} 'Would you like to go to teh next level?'
-                    {if} answer {is} 'yes'
+                    {if} answer {is} yes
                         {print} 'Great! You can use the {repeat} commando in the {if} command!'
                         {print} 'Hooray!'
                         {print} 'Hooray!'
@@ -2638,7 +2638,7 @@ adventures:
                     {print} 'What is for dinner tonight?'
                     options = ['pizza', 'broccoli', 'green beans']
                     chosen = options {at} {random}
-                    {if} chosen = pizza
+                    {if} chosen = 'pizza'
                         {print} 'Yummy! Pizza!'
                     {else}
                         {print} 'Yikes...'
