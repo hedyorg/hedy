@@ -1245,22 +1245,6 @@ class ConvertToPython_2(ConvertToPython_1):
 
         return self.make_forward(parameter)
 
-    def turn(self, args):
-        if len(args) == 0:
-            return "t.right(90)"
-
-        arg = args[0]
-        if arg.lstrip('-').isnumeric():
-            return self.make_turn(arg)
-
-        hashed_arg = hash_var(arg)
-        if self.is_variable(hashed_arg):
-            return self.make_turn(hashed_arg)
-
-        # the TypeValidator should protect against reaching this line:
-        raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
-                                                      allowed_types=get_allowed_types(Command.turn, self.level))
-
     def assign(self, args):
         parameter = args[0]
         value = args[1]
