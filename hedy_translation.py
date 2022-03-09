@@ -111,6 +111,8 @@ class Translator(Visitor):
 
     def turn(self, tree):
         self.add_rule('_TURN', 'turn', tree)
+        self.add_rule('left', 'left', tree)
+        self.add_rule('right', 'right', tree)
 
     def assign_list(self, tree):
         self.add_rule('_IS', 'is', tree)

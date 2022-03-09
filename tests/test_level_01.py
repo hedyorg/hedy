@@ -294,7 +294,7 @@ class TestsLevel1(HedyTester):
     #TODO next step is add left/right to translation code!
 
     self.single_level_tester(code=code, expected=expected,
-                             extra_check_function=self.is_turtle(), lang='nl', translate=False)
+                             extra_check_function=self.is_turtle(), lang='nl')
 
 
   def test_one_turn_with_text_gives_type_error(self):
