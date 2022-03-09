@@ -281,7 +281,7 @@ levels:
         8:
             question_text: "How would you correct the first line of code ?"
             code: |-
-                ask is 'How old are you ?'
+                ask is How old are you ?
                 print age
             mp_choice_options:
                 -   "option_text": "age ask is How old are you ?"
@@ -949,7 +949,7 @@ levels:
             \ in total ?"
             code: |-
                 print 'Welcome to Hedys !'
-                mensen is 'How many people are eating with us tonight ?'
+                people is ask 'How many people are eating with us tonight ?'
                 price is people * 10
                 print 'That will be ' price 'dollar please'
             mp_choice_options:
@@ -993,7 +993,7 @@ levels:
                 price is 0
                 if food is hamburger price is price + 15
                 if food is fries price is price + 6
-                drinks is 'What would you like to drink ?'
+                drinks is ask 'What would you like to drink ?'
                 if drinks is coke price is price + 3
                 if drinks is water price is price + 1
                 print price ' dollars please'
@@ -1173,7 +1173,7 @@ levels:
         7:
             question_text: "What will be the output from this code ?"
             code: |-
-                repeat 2 times 'We will'
+                repeat 2 times print 'We will'
                 print 'ROCK YOU !'
             mp_choice_options:
                 -   "code": "We will We will\nROCK YOU !"
@@ -1388,7 +1388,7 @@ levels:
         7:
             question_text: "What should be on the place of the question mark ?"
             code: |-
-                print 'Welcome to Hedy's diner'
+                print 'Welcome to Hedy s diner'
                 people is ask 'How many people will be eating here tonight ?'
                 _?_
                     food is ask 'What would you like to order ?'
