@@ -41,7 +41,7 @@ levels:
             -   "code": echo
                 "feedback": Right on !
             question_text: Which command is missing in line 2?
-            code: "ask What is your favorite pet ?\n___ So your favorite pet is...\""
+            code: "ask What is your favorite pet ?\n_?_ So your favorite pet is...\""
             correct_answer: D
             hint: You want to see the answer at the end of line 2...
             question_score: '10'
@@ -118,7 +118,7 @@ levels:
             -   "feedback": With ask, you can ask a question.
                 "code": ask
             correct_answer: B
-            hint: ___ Hello world !
+            hint: _?_ Hello world !
             question_score: '10'
         4:
             question_text: What is wrong with this code ?
@@ -204,7 +204,7 @@ levels:
             -   "option_text": ask
                 "feedback": There is no question there to be asked
             correct_answer: A
-            code: "print And the award for best programming language goes to...\n___\nprint Hedy !"
+            code: "print And the award for best programming language goes to...\n_?_\nprint Hedy !"
             hint: Pause for dramatic effect...
             question_score: '10'
         8:
@@ -239,7 +239,7 @@ levels:
             question_score: '10'
         10:
             question_text: What command should be used on the line 1 ?
-            code: "flavor is ___\nprint Your favorite icecream is...\nsleep\nprint flavor"
+            code: "flavor is _?_\nprint Your favorite icecream is...\nsleep\nprint flavor"
             mp_choice_options:
             -   "option_text": sleep 3
                 "feedback": You want to know the favorite flavor !
@@ -284,7 +284,7 @@ levels:
             question_score: '10'
         7:
             question_text: What command should be used on line 2 ?
-            code: "print I will explode in 3 seconds !\n___\nprint BOOM !"
+            code: "print I will explode in 3 seconds !\n_?_\nprint BOOM !"
             mp_choice_options:
             -   "code": print 3
                 "feedback": You don't need to print
@@ -374,7 +374,7 @@ levels:
             hint: The add command adds a book, but which one?
             question_score: '10'
         10:
-            question_text: What should be on the ___ ?
+            question_text: What should be on the ___?
             mp_choice_options:
             -   "option_text": remove walked_yesterday from walkers
                 "feedback": Super!
@@ -632,7 +632,7 @@ levels:
             question_score: '10'
         7:
             question_text: Which word should be in the place of the question mark ?
-            code: "print 'I can predict if you will be a millionair or not !'\nname is ask 'Whats your name ?'\nif name is Hedy print 'You will be a millionair !'\nelse ___ 'Unfortunately... No big money for you.'"
+            code: "print 'I can predict if you will be a millionair or not !'\nname is ask 'Whats your name ?'\nif name is Hedy print 'You will be a millionair !'\nelse _?_ 'Unfortunately... No big money for you.'"
             mp_choice_options:
             -   "code": if
                 "feedback": if is in the line above.
@@ -707,7 +707,7 @@ levels:
             question_score: '10'
         6:
             question_text: Which word should be on the place of the question mark in the last line ?
-            code: "print 'Im Hedy the football fortune teller !'\nprint 'I will predict what place your team will end up !'\nclub is ask 'Which club is your favorite ?'\nif club is ajax print 'Ajax is going to win of course !'\n___ print 'Sorry, your club is gonna be in last place...'"
+            code: "print 'Im Hedy the football fortune teller !'\nprint 'I will predict what place your team will end up !'\nclub is ask 'Which club is your favorite ?'\nif club is ajax print 'Ajax is going to win of course !'\n_?_ print 'Sorry, your club is gonna be in last place...'"
             mp_choice_options:
             -   "code": if
                 "feedback": if is already in the line above
@@ -722,7 +722,7 @@ levels:
             question_score: '10'
         8:
             question_text: Which word should be on the place of the question mark ?
-            code: "animal is ask 'What is your favorite animal ?'\nif ___ is penguin print 'Thats my favorite animal too !'\nelse print 'Cool ! I like penguins.'"
+            code: "animal is ask 'What is your favorite animal ?'\nif _?_ is penguin print 'Thats my favorite animal too !'\nelse print 'Cool ! I like penguins.'"
             mp_choice_options:
             -   "code": favorite animal
                 "feedback": That's not the variable name.
@@ -1120,7 +1120,7 @@ levels:
             -   "code": for i in range 0 to people
                 "feedback": That's one order too many !
             question_text: What should be on the place of the question mark ?
-            code: "print 'Welcome to Hedy's diner'\npeople is ask 'How many people will be eating here tonight ?'\n___\n    food is ask 'What would you like to order ?'\n    print food"
+            code: "print 'Welcome to Hedy's diner'\npeople is ask 'How many people will be eating here tonight ?'\n_?_\n    food is ask 'What would you like to order ?'\n    print food"
             correct_answer: C
             hint: Use the variable 'people'
             question_score: '10'
@@ -1156,7 +1156,7 @@ levels:
             question_score: '10'
         5:
             question_text: What word should be at the place of the question mark ?
-            code: "for i in ___ 1 to 10\n    print i"
+            code: "for i in _?_ 1 to 10\n    print i"
             mp_choice_options:
             -   "code": rang
                 "feedback": No
@@ -1219,8 +1219,8 @@ levels:
             correct_answer: B
             hint: Mind the quotation marks and the names of the variables
             question_score: '10'
-            question_text: What should be on the ___ in this code that decides which color shirt you get ?
-            code: "names = Donna, Tommy, Ben\ncolors = blue, red, purple\nfor name in names\n    print ___"
+            question_text: What should be on the _?_ in this code that decides which color shirt you get ?
+            code: "names = Donna, Tommy, Ben\ncolors = blue, red, purple\nfor name in names\n    print _?_"
             mp_choice_options:
             -   "code": "'name gets a color shirt'"
                 "feedback": That's not it !
@@ -1246,8 +1246,8 @@ levels:
             hint: Try to imagine the output of this code.
             question_score: '10'
         1:
-            question_text: What do we need to fill in on the ___ ?
-            code: "compliments = perfect, great job, amazing\n___\n    print compliment"
+            question_text: What do we need to fill in on the _?_ ?
+            code: "compliments = perfect, great job, amazing\n_?_\n    print compliment"
             mp_choice_options:
             -   "code": for each compliment
                 "feedback": That's not it
@@ -1291,8 +1291,8 @@ levels:
             hint: Line 2 says For each `item` in the list of groceries
             question_score: '10'
         5:
-            question_text: What word should be on the ___ with these digital dice ?
-            code: "print 'Welcome to the digital dice !'\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\nfor player in players\n    print player ' throws ' ___ at random"
+            question_text: What word should be on the _?_ with these digital dice ?
+            code: "print 'Welcome to the digital dice !'\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\nfor player in players\n    print player ' throws ' _?_ at random"
             mp_choice_options:
             -   "code": players
                 "feedback": It would say 'Ann throws Jesse', instead of 'Ann throws 6'.
@@ -1321,8 +1321,8 @@ levels:
             hint: Each player will pick an option. The player that's first on the list will go first.
             question_score: '10'
         7:
-            question_text: What line should be on the ___ in this code that decide what these people will have for dinner ?
-            code: "names = Ron, Leslie, April, Andy\nfood = pasta, fries, salad\n___\n    print name ' has to eat ' food at random ' for dinner'"
+            question_text: What line should be on the _?_ in this code that decide what these people will have for dinner ?
+            code: "names = Ron, Leslie, April, Andy\nfood = pasta, fries, salad\n_?_\n    print name ' has to eat ' food at random ' for dinner'"
             mp_choice_options:
             -   "code": for name in names
                 "feedback": You are on fire !
