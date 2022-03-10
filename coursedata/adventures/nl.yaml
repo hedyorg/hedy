@@ -294,10 +294,10 @@ adventures:
 
                 start_code: "{print} Hier komt straks jouw verhaal!"
                 example_code: "It goes like this:\n```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
-                story_text_2: "The command `{add}` can also come in handy in your story. For example:\n```\n"
+                story_text_2: "The command `{add}` can also come in handy in your story. For example:\n"
                 story_text_3: "This is an example of the `{remove}` command in your story\n"
                 example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
-                example_code_2: "{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
+                example_code_2: "```\n{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
     parrot:
         name: "Papegaai"
         description: "Maak je eigen online papegaai die je napraat!"
@@ -1040,11 +1040,11 @@ adventures:
                     {print} 'De computer kiest ' computer_keuze
                     {if} computer_keuze {is} jouw_keuze
                         {print} 'Gelijkspel'
-                    {if} computer_keuze {is} 'steen'
-                        {if} jouw_keuze {is} 'papier'
+                    {if} computer_keuze {is} steen
+                        {if} jouw_keuze {is} papier
                             {print} 'Jij wint!'
-                        {if} jouw_keuze {is} 'schaar'
-                            {print} 'De computer wint!'
+                        {if} jouw_keuze {is} schaar
+                            {print} 'De computer wint!'```
                 start_code: "# place your code here"
             5:
                 story_text: |
@@ -1151,7 +1151,7 @@ adventures:
                             {print} 'Je verliest!'
                         {if} computer_keuze == 'steen' {and} jouw_keuze == 'papier'
                             {print} 'Je wint!'
-                            gewonnen = 'ja'
+                            gewonnen = 'ja'```
                 start_code: "# place your code here"
     calculator:
         name: "Rekenmachine"
@@ -1180,7 +1180,7 @@ adventures:
                                 {print} 'Hoger!'
                             {if} gok == getal
                                 {print} 'Hoera!'
-                                spel = 'af'
+                                spel = 'af'```
                 start_code: "# place your code here"
             12:
                 story_text: |
@@ -1884,7 +1884,7 @@ adventures:
                         bestelling = {ask} 'Wat wil je bestellen?'
                         {print} bestelling
                         meer = {ask} 'Wilt u nog iets bestellen?'
-                    {print} 'Bedankt!'
+                    {print} 'Bedankt!'```
                 start_code: "# place your code here"
             13:
                 story_text: |
@@ -2542,7 +2542,7 @@ adventures:
                     {print} 'Wat gaan we eten vanavond?'
                     opties = ['pasta', 'spuitjes', 'boerenkool']
                     gekozen = opties {at} {random}
-                    {if} gekozen = pasta
+                    {if} gekozen = 'pasta'
                         {print} 'Hmmm lekker! Pasta!'
                     {else}
                         {print} 'Helaas pindakaas'
