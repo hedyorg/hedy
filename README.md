@@ -14,7 +14,12 @@ If you want to see what the core team will work on next, you can follow [our Pro
 Živjo Hedy! Привет Hedy! !Hedy سلام
 ----------------------------------------------
 
-A simple way to help out Hedy is to help us translate Hedy [into more languages](TRANSLATING.md) using Weblate! You do not need programming experience or knowledge to translate Hedy.
+A simple way to help out Hedy is to [help us translate Hedy](TRANSLATING.md) using Weblate! You do not need programming experience or knowledge to translate Hedy. Below the current status, help us complete a language, or add a new one.
+
+<a href="https://hosted.weblate.org/engage/hedy/">
+<img src="https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg" alt="Translation status" />
+</a>
+
 
 I have an idea for what you should build or improve!
 ----------------------------------------------------

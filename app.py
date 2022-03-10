@@ -1358,6 +1358,9 @@ def translate_fromto(source, target):
                            target_lang=target,
                            files=files)
 
+@app.route('/translating')
+def translating():
+    return render_template('translating.html')
 
 @app.route('/update_yaml', methods=['POST'])
 def update_yaml():
