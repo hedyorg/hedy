@@ -156,7 +156,7 @@ commands_and_types_per_level = {
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
-    Command.turn: {1: command_turn_literals + [HedyType.integer, HedyType.input],
+    Command.turn: {1: command_turn_literals,
                    2: [HedyType.integer, HedyType.input]},
     Command.forward: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
@@ -1199,7 +1199,9 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
         arg = args[0]
-        if self.is_variable(arg) or arg.lstrip("-").isnumeric():
+        if self.is_variable(arg):
+            return self.make_turn(hash_var(arg))
+        if arg.lstrip("-").isnumeric():
             return self.make_turn(arg)
 
     def punctuation(self, args):

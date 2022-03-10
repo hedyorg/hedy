@@ -297,13 +297,11 @@ class TestsLevel1(HedyTester):
                              extra_check_function=self.is_turtle(), lang='nl')
 
 
-  def test_one_turn_with_text_gives_type_error(self):
-    #@Boryana, this is the only test I could not fix!
+  def test_one_turn_with_text_gives_error(self):
     code = "turn koekoek"
-    self.multi_level_tester(
-      max_level=self.max_turtle_level,
+    self.single_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException
+      exception=hedy.exceptions.InvalidArgumentException
     )
 
   # comment test
