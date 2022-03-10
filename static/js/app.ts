@@ -290,10 +290,7 @@ export function runit(level: string, lang: string, cb: () => void) {
           console.log(err);
           error.show(ErrorMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
-
         }
-
-
       });
     }).fail(function(xhr) {
       console.error(xhr);
