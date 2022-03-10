@@ -138,7 +138,7 @@ levels:
             code: |-
                 print Bonjour !
                 print Comment vas-tu ?
-                echo Alors tu vas bien..."
+                echo Alors tu vas bien...
             mp_choice_options:
             -   "option_text": "Le `print` à la ligne 1 devrait être `ask`"
                 "feedback": "Non, il faut bien un `print` ici !"
@@ -281,7 +281,7 @@ levels:
         8:
             question_text: "Comment corriger la première ligne de code ?"
             code: |-
-                ask is 'Quel âge as-tu ?'
+                ask is Quel âge as-tu ?
                 print âge
             mp_choice_options:
             -   "option_text": "âge ask is Quel âge as-tu ?"
@@ -815,7 +815,7 @@ levels:
                 print 'Il y a 3 portes devant toi'
                 porte is ask 'Quelle porte choisis-tu ?'
                 monstres is vampire, loup-garou, araignée géante
-                if porte is 2 print 'Bravo, tu peux t'échapper !'
+                if porte is 2 print 'Bravo, tu peux t échapper !'
                 else print 'Tu es dévoré par un...' monstres at random
             mp_choice_options:
             -   "option_text": "1"
@@ -836,7 +836,7 @@ levels:
                 print 'Il y a 3 portes devant toi'
                 porte is ask 'Quelle porte choisis-tu ?'
                 monstres is vampire, loup-garou, araignée géante
-                if porte is 2 print 'Bravo, tu peux t'échapper !'
+                if porte is 2 print 'Bravo, tu peux t échapper !'
                 else print 'Tu es dévoré par un...' monstres at random
             mp_choice_options:
             -   "option_text": "Hedy choisit un monstre au hasard à chaque fois."
@@ -920,7 +920,7 @@ levels:
             question_text: "Si 5 personnes mangent dans ce restaurant, combien doivent-elles payer au total ?"
             code: |-
                 print 'Bienvenue chez Hedy !'
-                people is 'Combien de personnes mangent avec nous ce soir ?'
+                people is ask 'Combien de personnes mangent avec nous ce soir ?'
                 prix is people * 10
                 print 'Ce fera ' prix 'euros s il te plait'
             mp_choice_options:
@@ -939,7 +939,7 @@ levels:
             question_text: "Combien coûte un hamburger dans ce restaurant ?"
             code: |-
                 print 'Bienvenue chez Hedy !'
-                choix is ask 'Qu'est-ce que tu veux manger ?'
+                choix is ask 'Qu est-ce que tu veux manger ?'
                 prix is 0
                 if choix is hamburger prix is 15
                 if choix is frites prix is 5
@@ -1132,7 +1132,7 @@ levels:
         7:
             question_text: "Quelle sera la sortie de ce code ?"
             code: |-
-                repeat 2 times 'We will'
+                repeat 2 times print 'We will'
                 print 'ROCK YOU!'
             mp_choice_options:
             -   "code": "We will We will\nROCK YOU!"
@@ -1170,19 +1170,19 @@ levels:
             question_text: "Quel sera le code pour avoir cette sortie ?"
             code: |-
                 Batman survolait Gotham.
-                Quand soudain, il a entendu quelqu'un crier...
+                Quand soudain, il a entendu quelqu un crier...
                 Au secours !
                 Au secours !
                 Au secours !
                 Aidez-moi !
             mp_choice_options:
-            -   "code": "print 'Batman survolait Gotham.'\nprint 'Quand soudain, il a entendu quelqu'un crier...'\nprint 'Au secours !'\nrepeat 3 times print 'Aidez-moi !'"
+            -   "code": "print 'Batman survolait Gotham.'\nprint 'Quand soudain, il a entendu quelqu un crier...'\nprint 'Au secours !'\nrepeat 3 times print 'Aidez-moi !'"
                 "feedback": "Tu ne répètes pas la bonne ligne"
-            -   "code": "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu'un crier...'\nrepeat 3 times 'Au secours !'\nprint 'Aidez-moi !'\n"
+            -   "code": "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu un crier...'\nrepeat 3 times 'Au secours !'\nprint 'Aidez-moi !'\n"
                 "feedback": "Hélas non !"
-            -   "code": "print Batman survolait Gotham.\nprint Quand soudain, il a entendu quelqu'un crier...\nrepeat 3 times print Au secours !\nprint Aidez-moi !"
+            -   "code": "print Batman survolait Gotham.\nprint Quand soudain, il a entendu quelqu un crier...\nrepeat 3 times print Au secours !\nprint Aidez-moi !"
                 "feedback": "Tu as oublié les guillemets"
-            -   "code": "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu'un crier...'\nrepeat 3 times print 'Au secours !'\nprint 'Aidez-moi !'"
+            -   "code": "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu un crier...'\nrepeat 3 times print 'Au secours !'\nprint 'Aidez-moi !'"
                 "feedback": "Parfait !"
             correct_answer: "D"
             hint: "'Au secours !' doit apparaître 3 fois"
