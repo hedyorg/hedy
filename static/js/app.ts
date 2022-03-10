@@ -1085,6 +1085,10 @@ export function load_quiz(level: string) {
   $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
 
+export function showVariableView() {
+  alert("I am an alert box!");
+}
+
 //Feature flag for variable and values view
 var variable_view = false;
 
