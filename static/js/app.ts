@@ -236,9 +236,12 @@ export function runit(level: string, lang: string, cb: () => void) {
   StopExecution = true;
 
   const outputDiv = $('#output');
+  //Saving the variable button because sk will overwrite the output div
+  const variableButton = $(outputDiv).find('#variable_button');
   outputDiv.empty();
   $('#turtlecanvas').empty();
 
+  outputDiv.append(variableButton);
   error.hide();
   success.hide();
   try {
@@ -287,7 +290,10 @@ export function runit(level: string, lang: string, cb: () => void) {
           console.log(err);
           error.show(ErrorMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
+
         }
+
+
       });
     }).fail(function(xhr) {
       console.error(xhr);
@@ -856,9 +862,11 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
   window.State.programsInExecution = 1;
-
   const outputDiv = $('#output');
+  //Saving the variable button because sk will overwrite the output div
+  const variableButton = $(outputDiv).find('#variable_button');
   outputDiv.empty();
+  outputDiv.append(variableButton);
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
