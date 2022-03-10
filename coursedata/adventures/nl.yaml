@@ -268,17 +268,19 @@ adventures:
             3:
                 story_text: |
                     ## Verhaal
-                    In dit level kun je iets willekeurigs aan je verhaal toevoegen. Een willekeurig monster, dier of ander obstakel.
-
-                    Dat gaat zo:
+                    In dit level kun je iets willekeurigs aan je verhaal toevoegen. Een willekeurig monster, dier of ander obstakel. Dat gaat zo:
                 start_code: "{print} Hier komt straks jouw verhaal!"
                 example_code: |-
+                    ## Voorbeeld Hedy code
                     ```
                     dieren {is} 🦇, 🐿, 🦉, 🦔
                     {print} Hij hoort nu het geluid van een dieren {at} {random}
                     ```
-                story_text_2: "Het `{add}`commando kun je misschien ook in je verhaal gebruiken. Bijvoorbeeld zo:\n```\n"
+                story_text_2: |
+                    Het `{add}`commando kun je misschien ook in je verhaal gebruiken. Bijvoorbeeld zo:
+
                 example_code_2: |-
+                    ## Voorbeeld Hedy code
                     ```
                     {print} Hij hoort een geluid...
                     dieren {is} 🦉, 🐿, 🦇
@@ -286,8 +288,10 @@ adventures:
                     {add} dier {to_list} dieren
                     {print} het was een dieren {at} {random}
                     ```
-                story_text_3: "Hier zie je een voorbeeld van het `{remove}` commando in een verhaal\n"
+                story_text_3: "Hiernaast zie je een voorbeeld van het `{remove}` commando in een verhaal\n"
                 example_code_3: |-
+
+                    ## Voorbeeld Hedy code
                     ```
                     {print} Zijn rugzak is veel te zwaar...
                     {print} In de rugzak zitten een fles water, een zaklamp en een baksteen.
