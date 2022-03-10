@@ -1196,6 +1196,8 @@ class ConvertToPython_2(ConvertToPython_1):
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
 
     def turn(self, args):
+        if len(args) == 0:
+            return "t.right(90)"  # no arguments defaults to a right turn
         arg = args[0]
         if self.is_variable(arg) or arg.lstrip("-").isnumeric():
             return self.make_turn(arg)

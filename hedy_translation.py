@@ -6,7 +6,7 @@ import yaml
 from os import path
 
 
-KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr']
+KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr', 'ar']
 
 # Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
@@ -31,7 +31,9 @@ def all_keywords_to_dict():
     for lang in KEYWORD_LANGUAGES:
         commands = keywords_to_dict(lang)
         keyword_list.append(commands)
-    all_translations = {k: [d[k] for d in keyword_list] for k in keyword_list[0]}
+
+    #gets the translation but defaults to the key k (in En) when it is not present
+    all_translations = {k: [d.get(k, k) for d in keyword_list] for k in keyword_list[0]}
     return all_translations
 
 
