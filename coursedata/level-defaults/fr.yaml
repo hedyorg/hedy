@@ -286,7 +286,7 @@
     start_code: |-
         {repeat} 3 {times}
             food = {ask} 'What do you want?'
-            {if} food {is} 'pizza'
+            {if} food {is} pizza
                 {print} 'nice!'
             {else}
                 {print} 'pizza {is} better'
@@ -299,7 +299,7 @@
         ```
         {repeat} 3 {times}
             food = {ask} 'What do you want?'
-            {if} food {is} 'pizza'
+            {if} food {is} pizza
                 {print} 'nice!'
             {else}
                 {print} 'pizza is better'
@@ -385,10 +385,10 @@
             {print} ' Cache toi ou je te verrai !.'
     -   name: "`{if}` avec `:`"
         explanation: "Nous faisons de la même manière avec tous nos commandes `{if}`."
-        example: "{if} couleur {is} vert:"
+        example: "{if} couleur {is} 'vert':"
         demo_code: |-
             couleur = {ask} 'Quelle couleur préfères-tu ?'
-            {if} couleur {is} vert:
+            {if} couleur {is} 'vert':
                 {print} 'Tu as choisi le vert.'
             {else}:
                 {print} 'Tu as choisi un autre couleur que le vert.'
