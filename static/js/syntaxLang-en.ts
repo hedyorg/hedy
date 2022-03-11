@@ -5,6 +5,8 @@ export const LANG_en = {
 '_ECHO':'echo',
 '_FORWARD':'forward',
 '_TURN':'turn',
+'_LEFT':'left',
+'_RIGHT':'right',
 '_IS':'is',
 '_SLEEP':'sleep',
 '_ADD_LIST':'add',
