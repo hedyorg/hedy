@@ -90,10 +90,12 @@
              style="min-height: 3rem">
              <div class="dropdown" style="height: 30px;width: 62px;margin-left: 88%;margin-top: -54px;">
                  <button id="variable_button" onclick="hedyApp.showVariableView()" class="green-btn mt-4 inline-block absolute z-10 mx-2 mt-2 mb-0 text-white flex-0" style="cursor: pointer; right:0rem; top:0rem; background-color: #3182ce; border-bottom-width: 0px; font-family: Segoe UI Emoji; padding: 1.5px 8.2px 1.5px 8.2px;"><span style="float:left">🏷<svg style="float:right" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg></span></button>
-          <ul class="dropdown-menu absolute hidden text-white rounded-lg border-white bg-blue-400 mt-2 pt-1 list-none ltr:ml-0 rtl:mr-0 ltr:right-0 rtl:left-0 w-48" style="border-width: 1px; background-color: #3182ce; border-width: 1px; width: 9rem; margin-top: -4rem; margin-right: 0.5rem; height: 11rem;">
-                 <li>hallo</li>
-             </ul>
              </div>
+            <div id="variables" class="mx-auto w-64 invisible" style="display: block; padding: 0.5rem; position:absolute; z-index:9; border-width: 1px; background-color: #3182ce; border-width: 1px; width: 9rem; height: 11rem; color: white; border-radius: 0.5rem;" onclick="hedyApp.show_variables()" >
+  <div id="variables_header" style="cursor:move; z-index:10; margin-top:-3.75rem; text-align: center;">Variables</div>
+  <ul class="variable-list hidden" style="list-style-type:none; margin-left: 0; margin-top: -3.3rem;">
+  </ul>
+</div>
         </div>
         <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
       <div id="inline-modal" class="flex-0" style="display: none">
@@ -160,11 +162,7 @@
     <div class="ltr:ml-3 rtl:mr-3">{{ ui.developers_mode }}</div>
   </label>
 </div>
-<div id="variables" class="mx-auto w-64" style="display: block; padding: 0.5rem; position:absolute; z-index:9; border-width: 1px; background-color: #3182ce; border-width: 1px; width: 9rem; height: 11rem; color: white; border-radius: 0.5rem;" onclick="hedyApp.show_variables()" >
-  <div id="variables_header" style="cursor:move; z-index:10;">Variables</div>
-  <ul class="variable-list hidden" style="padding: 2rem; ">
-  </ul>
-</div>
+
 <!-- If we enforce the developer's mode in customizations -> hide adventures, increase editor and output height -->
 {% if enforce_developers_mode %}
 <script>

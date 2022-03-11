@@ -238,10 +238,12 @@ export function runit(level: string, lang: string, cb: () => void) {
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
+  const variables = $(outputDiv).find('#variables');
   outputDiv.empty();
   $('#turtlecanvas').empty();
 
   outputDiv.append(variableButton);
+  outputDiv.append(variables);
   error.hide();
   success.hide();
   try {
@@ -862,8 +864,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
+  const variables = $(outputDiv).find('#variables');
   outputDiv.empty();
   outputDiv.append(variableButton);
+  outputDiv.append(variables);
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
@@ -1091,7 +1095,17 @@ export function load_quiz(level: string) {
 }
 
 export function showVariableView() {
-  alert("I am an alert box!");
+// When blue label button is clicked, the view will appear or hide
+  const outputDiv = $('#output');
+  const variables = $(outputDiv).find('#variables');
+
+   if (variables.hasClass('invisible')) {
+      variables.removeClass('invisible');
+      $("#variables").trigger("click")
+   }
+   else {
+      variables.addClass('invisible');
+   }
 }
 
 //Feature flag for variable and values view
@@ -1110,10 +1124,6 @@ export function show_variables(){
     if (variableList.hasClass('hidden')) {
       variableList.removeClass('hidden');
       dragElement(variableBox[0]);
-    }
-    // makes it able to collapse the list
-    else {
-      variableList.addClass('hidden');
     }
   }
 }
