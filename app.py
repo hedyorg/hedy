@@ -81,7 +81,7 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
     def int(s):
       if isinstance(s, str):
         numerals_dict = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '𑁦': '0', '𑁧': '1', '𑁨': '2', '𑁩': '3', '𑁪': '4', '𑁫': '5', '𑁬': '6', '𑁭': '7', '𑁮': '8', '𑁯': '9', '०': '0', '१': '1', '२': '2', '३': '3', '४': '4', '५': '5', '६': '6', '७': '7', '८': '8', '९': '9', '૦': '0', '૧': '1', '૨': '2', '૩': '3', '૪': '4', '૫': '5', '૬': '6', '૭': '7', '૮': '8', '૯': '9', '੦': '0', '੧': '1', '੨': '2', '੩': '3', '੪': '4', '੫': '5', '੬': '6', '੭': '7', '੮': '8', '੯': '9', '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9', '೦': '0', '೧': '1', '೨': '2', '೩': '3', '೪': '4', '೫': '5', '೬': '6', '೭': '7', '೮': '8', '೯': '9', '୦': '0', '୧': '1', '୨': '2', '୩': '3', '୪': '4', '୫': '5', '୬': '6', '୭': '7', '୮': '8', '୯': '9', '൦': '0', '൧': '1', '൨': '2', '൩': '3', '൪': '4', '൫': '5', '൬': '6', '൭': '7', '൮': '8', '൯': '9', '௦': '0', '௧': '1', '௨': '2', '௩': '3', '௪': '4', '௫': '5', '௬': '6', '௭': '7', '௮': '8', '௯': '9', '౦': '0', '౧': '1', '౨': '2', '౩': '3', '౪': '4', '౫': '5', '౬': '6', '౭': '7', '౮': '8', '౯': '9', '၀': '0', '၁': '1', '၂': '2', '၃': '3', '၄': '4', '၅': '5', '၆': '6', '၇': '7', '၈': '8', '၉': '9', '༠': '0', '༡': '1', '༢': '2', '༣': '3', '༤': '4', '༥': '5', '༦': '6', '༧': '7', '༨': '8', '༩': '9', '᠐': '0', '᠑': '1', '᠒': '2', '᠓': '3', '᠔': '4', '᠕': '5', '᠖': '6', '᠗': '7', '᠘': '8', '᠙': '9', '០': '0', '១': '1', '២': '2', '៣': '3', '៤': '4', '៥': '5', '៦': '6', '៧': '7', '៨': '8', '៩': '9', '๐': '0', '๑': '1', '๒': '2', '๓': '3', '๔': '4', '๕': '5', '๖': '6', '๗': '7', '๘': '8', '๙': '9', '໐': '0', '໑': '1', '໒': '2', '໓': '3', '໔': '4', '໕': '5', '໖': '6', '໗': '7', '໘': '8', '໙': '9', '꧐': '0', '꧑': '1', '꧒': '2', '꧓': '3', '꧔': '4', '꧕': '5', '꧖': '6', '꧗': '7', '꧘': '8', '꧙': '9', '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4', '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9', '〇': '0', '一': '1', '二': '2', '三': '3', '四': '4', '五': '5', '六': '6', '七': '7', '八': '8', '九': '9', '零': '0'}
-        latin_numerals = ''.join([numerals_dict[letter] for letter in s])
+        latin_numerals = ''.join([numerals_dict.get(letter, letter) for letter in s])
         return int_saver(latin_numerals)
       return(int_saver(s))
 """)
@@ -130,7 +130,7 @@ def load_adventures_per_level(lang, level):
             'short_name': short_name,
             'name': adventure['name'],
             'image': adventure.get('image', None),
-            'default_save_name': adventure['default_save_name'],
+            'default_save_name': adventure.get('default_save_name', adventure['name']),
             'text': adventure['levels'][level].get('story_text', 'No Story Text').format(**keywords),
             'example_code': adventure['levels'][level].get('example_code').format(**keywords) if adventure['levels'][level].get('example_code') else '',
             'start_code': adventure['levels'][level].get('start_code').format(**keywords) if adventure['levels'][level].get('start_code') else '',
@@ -844,14 +844,14 @@ def get_user_formatted_age(now, date):
 
 
 # routing to index.html
-@app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'step': 1})
-@app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'step': 1})
-@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'step': 1})
-@app.route('/space_eu', methods=['GET'], defaults={'level': '1', 'step': 1})
-@app.route('/hedy', methods=['GET'], defaults={'level': '1', 'step': 1})
-@app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
-@app.route('/hedy/<level>/<step>', methods=['GET'])
-def index(level, step):
+@app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
+@app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
+@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
+@app.route('/space_eu', methods=['GET'], defaults={'level': '1', 'program_id': None})
+@app.route('/hedy', methods=['GET'], defaults={'level': '1', 'program_id': None})
+@app.route('/hedy/<level>', methods=['GET'], defaults={'program_id': None})
+@app.route('/hedy/<level>/<program_id>', methods=['GET'])
+def index(level, program_id):
     if re.match('\\d', level):
         try:
             g.level = level = int(level)
@@ -860,22 +860,24 @@ def index(level, step):
     else:
         return utils.error_page(error=404, ui_message='no_such_level')
 
-    g.prefix = '/hedy'
-
     loaded_program = ''
     adventure_name = ''
 
-    # If step is a string that has more than two characters, it must be an id of a program
-    # Todo TB -> I don't like this structure, can't we use a dedicated URL for loaded programs?!
-    if step and isinstance(step, str) and len(step) > 2:
-        result = DATABASE.program_by_id(step)
+    if program_id:
+        result = DATABASE.program_by_id(program_id)
         if not result:
             return utils.error_page(error=404, ui_message='no_such_program')
 
         user = current_user()
-        public_program = 'public' in result and result['public']
+        public_program = result.get('public')
+        # Verify that the program is either public, the current user is the creator or the user is admin
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
             return utils.error_page(error=404, ui_message='no_such_program')
+
+        # If the current user is a teacher, perform an extra check -> user is their student
+        if is_teacher(user) and result['username'] not in DATABASE.get_teacher_students(user['username']):
+            return utils.error_page(error=404, ui_message='no_such_program')
+
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
         if 'adventure_name' in result:
@@ -935,8 +937,6 @@ def index(level, step):
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 def view_program(id):
-    g.prefix = '/hedy'
-
     user = current_user()
 
     result = DATABASE.program_by_id(id)
@@ -992,7 +992,6 @@ def get_specific_adventure(name, level):
     if not adventure:
         return utils.error_page(error=404, ui_message='no_such_adventure')
 
-    g.prefix = '/hedy'
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     return hedyweb.render_specific_adventure(
@@ -1245,7 +1244,7 @@ def nl2br(x):
 @app.template_global()
 def hedy_link(level_nr, assignment_nr, subpage=None):
     """Make a link to a Hedy page."""
-    parts = [g.prefix]
+    parts = ['/hedy']
     parts.append('/' + str(level_nr))
     if str(assignment_nr) != '1' or subpage:
         parts.append('/' + str(assignment_nr if assignment_nr else '1'))
@@ -1359,6 +1358,9 @@ def translate_fromto(source, target):
                            target_lang=target,
                            files=files)
 
+@app.route('/translating')
+def translating_page():
+    return render_template('translating.html')
 
 @app.route('/update_yaml', methods=['POST'])
 def update_yaml():

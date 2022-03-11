@@ -49,8 +49,11 @@ def collect_snippets(path):
                                                  code=tag.contents[0].contents[0]))
     return Hedy_snippets
 
-
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../coursedata/level-defaults')]
+
+lang = None #useful if you want to test just 1 language
+if lang:
+    Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language == lang]
 
 # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
 keywords = YamlFile.for_file('../coursedata/keywords/en.yaml').to_dict()
