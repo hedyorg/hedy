@@ -34,8 +34,8 @@ var currentLang: {
   _ECHO: string;
   _FORWARD: string;
   _TURN: string;
-  /*_LEFT : string;
-  _RIGHT : string;*/
+  _LEFT: string;
+  _RIGHT: string;
   _SLEEP: string;
   _ADD_LIST: string;
   _TO_LIST: string;
