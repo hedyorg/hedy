@@ -1041,11 +1041,11 @@ adventures:
                     {print} 'De computer kiest ' computer_keuze
                     {if} computer_keuze {is} jouw_keuze
                         {print} 'Gelijkspel'
-                    {if} computer_keuze {is} 'steen'
-                        {if} jouw_keuze {is} 'papier'
+                    {if} computer_keuze {is} steen
+                        {if} jouw_keuze {is} papier
                             {print} 'Jij wint!'
-                        {if} jouw_keuze {is} 'schaar'
-                            {print} 'De computer wint!'
+                        {if} jouw_keuze {is} schaar
+                            {print} 'De computer wint!'```
                 start_code: "# place your code here"
             5:
                 story_text: |
@@ -1152,7 +1152,7 @@ adventures:
                             {print} 'Je verliest!'
                         {if} computer_keuze == 'steen' {and} jouw_keuze == 'papier'
                             {print} 'Je wint!'
-                            gewonnen = 'ja'
+                            gewonnen = 'ja'```
                 start_code: "# place your code here"
     calculator:
         name: "Rekenmachine"
@@ -1181,7 +1181,7 @@ adventures:
                                 {print} 'Hoger!'
                             {if} gok == getal
                                 {print} 'Hoera!'
-                                spel = 'af'
+                                spel = 'af'```
                 start_code: "# place your code here"
             12:
                 story_text: |
@@ -1879,7 +1879,7 @@ adventures:
                         bestelling = {ask} 'Wat wil je bestellen?'
                         {print} bestelling
                         meer = {ask} 'Wilt u nog iets bestellen?'
-                    {print} 'Bedankt!'
+                    {print} 'Bedankt!'```
                 start_code: "# place your code here"
             13:
                 story_text: |
@@ -2536,7 +2536,7 @@ adventures:
                     {print} 'Wat gaan we eten vanavond?'
                     opties = ['pasta', 'spuitjes', 'boerenkool']
                     gekozen = opties {at} {random}
-                    {if} gekozen = pasta
+                    {if} gekozen = 'pasta'
                         {print} 'Hmmm lekker! Pasta!'
                     {else}
                         {print} 'Helaas pindakaas'
