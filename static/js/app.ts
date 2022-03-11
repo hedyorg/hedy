@@ -892,6 +892,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#turtlecanvas').empty();
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
+    $("#variable_button").trigger("click")
     $('#turtlecanvas').show();
   }
 
@@ -1119,9 +1120,8 @@ if (variable_view === false) {
   variableDiv!.style.display = "none";
 }
 
-export function show_variables(){
+export function show_variables() {
   if (variable_view === true) {
-    // const variableBox = $('#variables');
     const variableList = $('.variable-list');
     if (variableList.hasClass('hidden')) {
       variableList.removeClass('hidden');
@@ -1146,7 +1146,7 @@ export function load_variables(variables: any){
 function clean_variables(variables: any) {
   if (variable_view === true) {
     const new_variables = [];
-    const unwanted_variables = ["random", "time", "int_saver","int_$rw$"];
+    const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
     for (const variable in variables) {
       if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
         let newTuple = [variable, variables[variable].v];
