@@ -2,13 +2,10 @@
     intro_text: |
         Welkom bij Hedy! In Level 1 kun je de commando's `{print}`, `{ask}` en `{echo}` gebruiken.
 
-        Links in jouw scherm staan alle commando's van Level 1.
-
-        Druk op de blauwe knop en de code wordt alvast voor jou getypt!
+        Je kunt bijvoorbeeld tekst laten verschijnen in het beeld met het commando `{print}`. Zoals in het voorbeeld hiernaast.
+        Je kunt het voorbeeld uittesten door op de groene knop in de hoek te klikken.
 
         Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het linker programmeerveld.
-
-        Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.
 
     start_code: "{print} hallo wereld!"
     commands:
@@ -39,12 +36,12 @@
         example: "Bijvoorbeeld: {turn}"
         demo_code: |-
             {forward} 25
-            {turn} left
+            {turn} {left}
             {forward} 25
-            {turn} right
-    example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
-    example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
+            {turn} {right}
+    example_code: "## Voorbeeldcode\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+    intro_text_2: "\n Je kunt ook een vraag stellen met `{ask}` en het antwoord laten herhalen met `{echo}`.\n Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.\n"
+    example_code_2: "## Voorbeeldcode\n```\n{ask} What is your name?\n{echo} hello\n```\n"
 2:
     intro_text: |
         In level 2 leren we iets nieuws. Je kunt een woord een naam geven met `{is}`. Je kunt daarna in je code overal naam gebruiken. Dat wordt dan vervangen door Hedy. Zo:
@@ -95,14 +92,22 @@
     intro_text: |
         In level 3 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `{at} {random}` (je zegt: et ren-dom).
 
+    example_code: |
+        ## Voorbeeld Hedy Code
+
         ```
         dieren {is} hond, kat, kangoeroe
         {print} dieren {at} {random}
         ```
 
+    intro_text_2: |
         Je kunt in dit level ook dingen aan een lijstje toevoegen met het commando `{add}`.
         Daarnaast kun je dingen van het lijstje verwijderen. Dat doe je met `{remove}`.
-         ```
+
+    example_code_2: |
+
+        ## Voorbeeld Hedy Code
+        ```
         taarten {is} aardbei, chocolade
         {add} appel {to_list} taarten
         {remove} chocolade {from} taarten
@@ -725,7 +730,7 @@
         example: "{if} kleur {is} groen:"
         demo_code: |-
             kleur = {ask} 'Wat vind jij de mooiste kleur?'
-            {if} kleur == groen:
+            {if} kleur == 'groen':
                 {print} 'Jouw kleur is groen'
             {else}:
                 {print} 'Jouw kleur is zeker niet groen'

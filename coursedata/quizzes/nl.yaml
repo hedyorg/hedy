@@ -109,7 +109,7 @@ levels:
                 print Welkom bij Restaurant Hedy !
                 ask Wat wilt u eten ?
                 echo Dus u wilt graag ...
-                print Komt er aan ! Eet smakelijk !"
+                print Komt er aan ! Eet smakelijk !
             mp_choice_options:
             -   option_text: "In regel 1 moest ask staan in plaats van print"
                 feedback: "Weet je zeker dat er iets mis is ?"
@@ -142,7 +142,7 @@ levels:
             code: |-
                 print Hallo !
                 print Hoe gaat het met jou ?
-                echo Dus het gaat..."
+                echo Dus het gaat...
             mp_choice_options:
             -   option_text: "print in regel 1 moet ask zijn"
                 feedback: "Nee, print is goed. Waar wordt de vraag gesteld ?"
@@ -704,7 +704,7 @@ levels:
         2:
             question_text: "Wat verschijnt er in het uitvoerscherm als je Hedy invult als naam ?"
             code: |-
-                naam is ask Hoe heet je ?
+                naam is ask 'Hoe heet je ?'
                 if naam is Hedy print 'leuk' else print 'minder leuk'
             mp_choice_options:
             -   "option_text": "leuk"
@@ -721,7 +721,7 @@ levels:
         3:
             question_text: "Wat is het goede wachtwoord ?"
             code: |-
-                wachtwoord is ask Wat is het wachtwoord ?
+                wachtwoord is ask 'Wat is het wachtwoord ?'
                 if wachtwoord is GEHEIM print 'Goed !' else print 'ALARM ! INDRINGER !'
             mp_choice_options:
             -   "option_text": "Goed"
@@ -738,7 +738,7 @@ levels:
         4:
             question_text: "Wat print Hedy als je een fout wachtwoord intypt ?"
             code: |-
-                wachtwoord is ask Wat is het wachtwoord ?
+                wachtwoord is ask 'Wat is het wachtwoord ?'
                 if wachtwoord is GEHEIM print 'Goed !' else print 'ALARM ! INDRINGER !'
             mp_choice_options:
             -   "option_text": "Goed"
@@ -755,7 +755,7 @@ levels:
         5:
             question_text: "Waarom zegt Hedy 'ALARM ! INDRINGER !' als je 'geheim' antwoordt op de vraag ?"
             code: |-
-                wachtwoord is ask Wat is het wachtwoord ?
+                wachtwoord is ask 'Wat is het wachtwoord ?'
                 if wachtwoord is GEHEIM print 'Goed !' else print 'ALARM ! INDRINGER !'
             mp_choice_options:
             -   "option_text": "Omdat je het in hoofdletters moet typen, dus GEHEIM"
@@ -774,7 +774,7 @@ levels:
             code: |-
                 print 'Hoi ik ben Hedy de voetbalvoorspeller !'
                 print 'Ik kan voorspellen op welke plek jouw club eindigt !'
-                club is ask Voor welke club ben je ?
+                club is ask 'Voor welke club ben je ?'
                 if club is ajax print 'Ajax wordt eerste natuurlijk !' _?_ print 'Helaas jouw club wordt laatste...'
             mp_choice_options:
             -   "code": "if"
@@ -792,7 +792,7 @@ levels:
             question_text: "Welk woord mist op de plek van het vraagteken ?"
             code: |-
                 print 'Ik kan voorspellen of jij miljonair wordt !'
-                naam is ask Hoe heet jij ?
+                naam is ask 'Hoe heet jij ?'
                 if naam is Hedy print 'Jij wordt miljonair !' else _?_ 'Helaas, geen miljoen voor jou.'
             mp_choice_options:
             -   "code": "if"
@@ -809,7 +809,7 @@ levels:
         8:
             question_text: "Welk woord mist op de plek van het vraagteken ?"
             code: |-
-                dier is ask Wat is je lievelingsdier ?
+                dier is ask 'Wat is je lievelingsdier ?'
                 if _?_ is pinguin print 'Dat is ook mijn lievelingsdier !' else print 'Ik houd meer van pinguins.'
             mp_choice_options:
             -   "code": "lievelingsdier"
@@ -828,7 +828,7 @@ levels:
             code: |-
                 print 'Ontsnap uit het spookhuis !'
                 print 'Voor je staan 3 deuren'
-                deur is ask Welke deur kies jij ?
+                deur is ask 'Welke deur kies jij ?'
                 monsters is vampier, weerwolf, reuzespin
                 if deur is 2 print 'Joepie ! Je ontsnapt !' else print 'Je wordt opgegeten door een... ' monsters at random
             mp_choice_options:
@@ -848,7 +848,7 @@ levels:
             code: |-
                 print 'Ontsnap uit het spookhuis !'
                 print 'Voor je staan 3 deuren'
-                deur is ask Welke deur kies jij ?
+                deur is ask 'Welke deur kies jij ?'
                 monsters is vampier, weerwolf, reuzespin
                 if deur is 2 print 'Joepie ! je ontsnapt !' else print 'Je wordt opgegeten door een... ' monsters at random
             mp_choice_options:
@@ -933,7 +933,7 @@ levels:
             question_text: "Hoeveel moeten je betalen als je met 5 mensen komt eten ?"
             code: |-
                 print 'Welkom in restaurant Hedy !'
-                mensen is 'Met hoeveel mensen komt u vanavond eten ?'
+                mensen is ask 'Met hoeveel mensen komt u vanavond eten ?'
                 prijs is mensen * 10
                 print 'Dat wordt dan ' prijs 'euro alstublieft'
             mp_choice_options:
@@ -1066,7 +1066,7 @@ levels:
                 "feedback": In this level only one line at a time
             -   "option_text": "repeat"
                 "feedback": In this level you can only repeat one line at a time
-            correct_answer: "D"
+            correct_answer: "B"
             hint: "Je spelt: repeat"
             question_score: '10'
         2:
@@ -1096,7 +1096,7 @@ levels:
                 "feedback": The word times is there, another word is missing.
             -   "option_text": Wrong, the word print is missing
                 "feedback": Correct
-            correct_answer: "B"
+            correct_answer: "D"
             hint: "Het antwoord is: repeat 100 times print 'Hoi'"
             question_score: '10'
         4:
@@ -1122,9 +1122,9 @@ levels:
                 repeat 100 print 'Hedy is gaaf !'
             mp_choice_options:
             -   "option_text": "Goed"
-                "feedback": That's right !
-            -   "option_text": "Fout"
                 "feedback": That's not it
+            -   "option_text": "Fout"
+                "feedback": That's right !
             correct_answer: "B"
             hint: "Bij repeat hoort nog een ander commando"
             question_score: '10'
@@ -1324,7 +1324,7 @@ levels:
             mp_choice_options:
             -   "code": |-
                     print 'Welkom bij restaurant Hedy'
-                    eten is ask 'Wat wilt u bestellen ?
+                    eten is ask 'Wat wilt u bestellen ?'
                     print eten
                 "feedback": "Hier zit geen herhaling in, er zijn twee bestellingen."
             -   "code": |-
@@ -1352,7 +1352,7 @@ levels:
             question_text: "Wat is er mis met deze code ?"
             code: |-
                 repeat 3 times
-                   ask Wat wilt u bestellen ?
+                   eten is ask 'Wat wilt u bestellen ?'
                    if eten is friet
                        saus is ask 'Welke saus wilt u daarbij ?'
                        print 'Een friet met ' saus
@@ -1385,13 +1385,13 @@ levels:
                     print 'De computer ontploft in 5... 4... 3... 2... 1...'
             mp_choice_options:
             -   "option_text": "Goed gedaan ! \n Goed gedaan !"
-                "feedback": ""
+                "feedback": "Niets !"
             -   "option_text": "De computer ontploft in 5... 4... 3... 2... 1..."
-                "feedback": ""
+                "feedback": "Niets !"
             -   "option_text": "Goed gedaan ! \n Goed gedaan ! \n Je mag computeren"
-                "feedback": ""
+                "feedback": "Niets !"
             -   "option_text": "Goed gedaan ! \n Je mag computeren ! \n Goed gedaan ! \n Je mag computeren"
-                "feedback": ""
+                "feedback": "Correct !"
             correct_answer: "D"
             hint: "Alles onder de repeat wordt 2 keer herhaald"
             question_score: '10'
@@ -1407,7 +1407,7 @@ levels:
                          if actie is openen
                              print 'Je maakt de koffer open en wint een appeltaart'
                 if koffer is 2
-                     verkoop is ask 'wil je de koffer verkopen of openen ?
+                     verkoop is ask 'wil je de koffer verkopen of openen ?'
                          if actie is verkopen
                              print 'Je verkoopt je koffer en krijgt 500 euro'
                          if actie is openen
@@ -1606,7 +1606,7 @@ levels:
             code: |-
                 leeftijd is ask 'Hoe oud ben je ?'
                 for i in range 1 to leeftijd
-                    print 'Hieperdepiep Hoera !
+                    print 'Hieperdepiep Hoera !'
             mp_choice_options:
             -   "option_text": "1 keer"
                 "feedback": "Probeer het opnieuw"

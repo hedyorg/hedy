@@ -25,6 +25,8 @@ var currentLang: {
   _ECHO: string;
   _FORWARD: string;
   _TURN: string;
+  _LEFT: string;
+  _RIGHT: string;
   _SLEEP: string;
   _ADD_LIST: string;
   _TO_LIST: string;
@@ -119,7 +121,7 @@ const LEVELS = [
     name: 'level1',
     rules: pipe(baseRules(),
       rule_printSpace('gobble'),
-      rule_turtle(),
+      rule_turtle_left_right(),
       recognize('start', {
         regex: keywordWithSpace(currentLang._ECHO),
         token: 'keyword',
@@ -482,11 +484,10 @@ function rule_printParen() {
   });
 }
 
-function rule_turtle() {
+function rule_turtle_left_right() {
     return comp(
       recognize('start', {
-        // Note: left and right are not yet keywords
-        regex: currentLang._TURN + ' (left|right)?',
+        regex: currentLang._TURN + ' (' + currentLang._LEFT + '|' + currentLang._RIGHT + ')?',
         token: 'keyword',
         next: 'start',
       }),
@@ -497,6 +498,22 @@ function rule_turtle() {
       })
     )
 }
+
+function rule_turtle() {
+    return comp(
+      recognize('start', {
+        regex: currentLang._TURN,
+        token: 'keyword',
+        next: 'start',
+      }),
+      recognize('start', {
+        regex: currentLang._FORWARD,
+        token: 'keyword',
+        next: 'start',
+      })
+    )
+}
+
 
 function rule_sleep() {
   return recognize('start', {

@@ -37,7 +37,7 @@
         explanation: turn the drawing turtle with `{turn}`
         example: 'Example: {turn}'
         demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
-    example_code: "## Exemple de code\n```\n{print} Bonjour !\n{print} Bienvenue sur Hedy !\n```\n"
+    example_code: "## Exemple de code\n```\n{print} Bonjour !\n{print} Bienvenue sur Hedy !\n```\n"
     intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
     example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
 2:
@@ -101,6 +101,9 @@
         explanation: remove an item from a list
         example: 'Example: {remove} dog {from} animals'
         demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
+    intro_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+    example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
 4:
     start_code: "{print} 'Bonjour le monde'"
     intro_text: |4
@@ -286,7 +289,7 @@
     start_code: |-
         {repeat} 3 {times}
             food = {ask} 'What do you want?'
-            {if} food {is} 'pizza'
+            {if} food {is} pizza
                 {print} 'nice!'
             {else}
                 {print} 'pizza {is} better'
@@ -299,7 +302,7 @@
         ```
         {repeat} 3 {times}
             food = {ask} 'What do you want?'
-            {if} food {is} 'pizza'
+            {if} food {is} pizza
                 {print} 'nice!'
             {else}
                 {print} 'pizza is better'
@@ -385,10 +388,10 @@
             {print} ' Cache toi ou je te verrai !.'
     -   name: "`{if}` avec `:`"
         explanation: "Nous faisons de la même manière avec tous nos commandes `{if}`."
-        example: "{if} couleur {is} vert:"
+        example: "{if} couleur {is} 'vert':"
         demo_code: |-
             couleur = {ask} 'Quelle couleur préfères-tu ?'
-            {if} couleur {is} vert:
+            {if} couleur {is} 'vert':
                 {print} 'Tu as choisi le vert.'
             {else}:
                 {print} 'Tu as choisi un autre couleur que le vert.'
