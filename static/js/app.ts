@@ -235,6 +235,7 @@ export function runit(level: string, lang: string, cb: () => void) {
   if (reloadOnExpiredSession ()) return;
   StopExecution = true;
 
+
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
@@ -242,6 +243,7 @@ export function runit(level: string, lang: string, cb: () => void) {
   outputDiv.empty();
   $('#turtlecanvas').empty();
 
+  outputDiv.addClass("overflow-auto");
   outputDiv.append(variableButton);
   outputDiv.append(variables);
   error.hide();
