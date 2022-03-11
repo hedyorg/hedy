@@ -1136,9 +1136,30 @@ export function load_variables(variables: any){
       const variableList = $('.variable-list');
       variableList.empty();
       for (const i in variables) {
-        variableList.append(`<li>${variables[i][0]}: ${variables[i][1]}</li>`);
+        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
       }
     }
+}
+
+// Color-coding string, numbers, booleans and lists
+// This will be cool to use in the future!
+// Just change the colors to use it
+function special_style_for_variable(variable: any){
+  let result = '';
+  let parsedVariable = parseInt(variable.v);
+  if (typeof parsedVariable == 'number' && !isNaN(parsedVariable)){
+     result =  "#ffffff";
+   }
+   if(typeof variable.v == 'string' && isNaN(parsedVariable)){
+     result = "#ffffff";
+   }
+   if(typeof variable.v == 'boolean'){
+     result = "#ffffff";
+   }
+   if (variable.tp$name == 'list'){
+    result =  "#ffffff";
+   }
+   return result;
 }
 
 //hiding certain variables from the list unwanted for users
@@ -1149,8 +1170,9 @@ function clean_variables(variables: any) {
     const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
     for (const variable in variables) {
       if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-        let newTuple = [variable, variables[variable].v];
-        new_variables.push(newTuple);
+      let extraStyle = special_style_for_variable(variables[variable]);
+      let newTuple = [variable, variables[variable].v, extraStyle];
+      new_variables.push(newTuple);
       }
     }
     return new_variables;
