@@ -1121,11 +1121,10 @@ if (variable_view === false) {
 
 export function show_variables(){
   if (variable_view === true) {
-    const variableBox = $('#variables');
+    // const variableBox = $('#variables');
     const variableList = $('.variable-list');
     if (variableList.hasClass('hidden')) {
       variableList.removeClass('hidden');
-      dragElement(variableBox[0]);
     }
   }
 }
@@ -1155,47 +1154,6 @@ function clean_variables(variables: any) {
       }
     }
     return new_variables;
-  }
-}
-
-// Making the list of variables draggable:
-function dragElement(element: HTMLElement) {
-  var XfromR = 0, Ybottom = 0, XfromL = 0, YfromTop = 0;
-  if (document.getElementById(element.id + "header")) {
-    document.getElementById(element.id + "header")!.onmousedown! = dragMouse;
-  }
-  else {
-    element.onmousedown = dragMouse;
-  }
-
-  function dragMouse(e: MouseEvent) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    XfromL = e.clientX;
-    YfromTop = e.clientY;
-    document.onmouseup = stopDragging;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDragging;
-  }
-
-  function elementDragging(e: MouseEvent) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the position of cursor movement:
-    XfromR = XfromL - e.clientX;
-    Ybottom = YfromTop - e.clientY;
-    XfromL = e.clientX;
-    YfromTop = e.clientY;
-    // set the new position of the variable list:
-    element.style.top = (element.offsetTop - Ybottom) + "px";
-    element.style.left = (element.offsetLeft - XfromR) + "px";
-  }
-
-  function stopDragging() {
-    // when mouse stops or is released, stop dragging element
-    document.onmousemove = null;
-    document.onmouseup = null;
   }
 }
 
