@@ -169,9 +169,8 @@ def atomic_write_file(filename, mode='wb'):
 
     try:
         os.rename(tmp_file, filename)
-    except:
-        print('file allready written')
-
+    except IOError:
+        pass
         
 # This function takes a date in milliseconds from the Unix epoch and transforms it into a printable date
 # It operates by converting the date to a string, removing its last 3 digits, converting it back to an int
