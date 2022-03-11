@@ -46,13 +46,42 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nname {is} Hans\n{print} 'The name of the main character is' name\n{print} name 'is now going to walk in the woods'\n{print} name 'is a bit scared'\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'He hears the sound of an' animals {at} {random}\n{print} name 'is afraid this is a haunted forest'\n```\n"
                 start_code: "{print} 'Your story will be printed here!'"
             3:
-                story_text_2: "The command `{add}` can also come in handy in your story. For example:\n```\n"
-                example_code_2: "{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
-                story_text: "## Story\nIn level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle.\n"
-                example_code: "It goes like this:\n```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
-                story_text_3: "This is an example of the `{remove}` command in your story\n"
-                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
-                start_code: '{print} Your story'
+                story_text: |
+                    ## Story
+                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+
+                example_code: |
+                    ## Example Hedy Code
+
+                    ```
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} He now hears the sound of an animals {at} {random}
+                    ```
+                story_text_2: |
+                    The command `{add}` can also come in handy in your story. For example
+
+                example_code_2: |
+                    ## Example Hedy Code
+
+                    {print} He hears a sound
+                    animals {is} 🐿, 🦔, 🦇, 🦉
+                    animal {is} {ask} What do you think it is?
+                    {add} animal {to_list} animals
+                    {print} it was a animals {at} {random}
+                    ```
+                story_text_3: |
+                    This is an example of the `{remove}` command in your story
+                example_code_3: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} His backpack got way too heavy.
+                    {print} Inside were a bottle of water, a flashlight and a brick.
+                    bag {is} water, flashlight, brick
+                    dump {is} {ask} Which item should he dump?
+                    {remove} dump {from} bag
+                    ```
+                start_code: "{print} Your story"
             15:
                 story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
                 example_code: "## Example Hedy code\n\n```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n"
