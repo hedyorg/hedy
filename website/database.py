@@ -481,4 +481,4 @@ class Database:
 
     def to_year_week(self, d):
         cal = d.isocalendar()
-        return f'{cal[0]}-{cal[1]}'
+        return f'{cal[0]}-{cal[1]:02d}'
