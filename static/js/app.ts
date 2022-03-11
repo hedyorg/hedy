@@ -1146,7 +1146,7 @@ export function load_variables(variables: any){
 function clean_variables(variables: any) {
   if (variable_view === true) {
     const new_variables = [];
-    const unwanted_variables = ["random", "time"];
+    const unwanted_variables = ["random", "time", "int_saver","int_$rw$"];
     for (const variable in variables) {
       if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
         let newTuple = [variable, variables[variable].v];
