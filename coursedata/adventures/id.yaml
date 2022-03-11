@@ -119,11 +119,37 @@ adventures:
                     print Dia sekarang mendengar suara seekor hewan at random
                     ```
                 start_code: print Cerita kamu
-                example_code_2: "{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
-                story_text_3: "This is an example of the `{remove}` command in your story\n"
-                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
-                example_code: "It goes like this:\n```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
-                story_text_2: "The command `{add}` can also come in handy in your story. For example:\n```\n"
+                example_code: |
+                    ## Example Hedy Code
+
+                    ```
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} He now hears the sound of an animals {at} {random}
+                    ```
+                story_text_2: |
+                    The command `{add}` can also come in handy in your story. For example
+
+                example_code_2: |
+                    ## Example Hedy Code
+
+                    {print} He hears a sound
+                    animals {is} 🐿, 🦔, 🦇, 🦉
+                    animal {is} {ask} What do you think it is?
+                    {add} animal {to_list} animals
+                    {print} it was a animals {at} {random}
+                    ```
+                story_text_3: |
+                    This is an example of the `{remove}` command in your story
+                example_code_3: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} His backpack got way too heavy.
+                    {print} Inside were a bottle of water, a flashlight and a brick.
+                    bag {is} water, flashlight, brick
+                    dump {is} {ask} Which item should he dump?
+                    {remove} dump {from} bag
+                    ```
             10:
                 story_text: "## Story\nIn this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.\n"
                 example_code: "## Example Hedy code\n\n```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
