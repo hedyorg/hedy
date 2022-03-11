@@ -1089,13 +1089,12 @@ export function load_quiz(level: string) {
 var variable_view = false;
 
 //Hides the HTML DIV for variables if feature flag is false
-if (variable_view === false) {
-  let variableDiv = document.getElementById("variables");
-  variableDiv!.style.display = "none";
+if (!variable_view) {
+  $('#variables').hide();
 }
 
-export function show_variables(){
-  if (variable_view === true) {
+export function show_variables() {
+  if (variable_view) {
     const variableBox = $('#variables');
     const variableList = $('.variable-list');
     if (variableList.hasClass('hidden')) {
@@ -1111,7 +1110,6 @@ export function show_variables(){
 
 export function load_variables(variables: any){
     if (variable_view === true) {
-      //@ts-ignore
       variables = clean_variables(variables);
       const variableList = $('.variable-list');
       variableList.empty();
@@ -1122,7 +1120,6 @@ export function load_variables(variables: any){
 }
 
 //hiding certain variables from the list unwanted for users
-// @ts-ignore
 function clean_variables(variables: any) {
   if (variable_view === true) {
     const new_variables = [];
@@ -1134,6 +1131,9 @@ function clean_variables(variables: any) {
       }
     }
     return new_variables;
+  }
+  else{
+    return null
   }
 }
 
