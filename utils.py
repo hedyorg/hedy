@@ -160,19 +160,19 @@ def atomic_write_file(filename, mode='wb'):
             f.write('hello')
 
     THIS WON'T WORK ON WINDOWS -- atomic file renames don't overwrite
-    on Windows. We could potentially do something else to make it work
-   (just swallow the exception, someone else already wrote the file?)
-    but for now we just don't support it.
+    on Windows. We now just swallow the exception, someone else already wrote the file?)
     """
-    if IS_WINDOWS:
-        raise RuntimeError('Cannot use atomic_write_file() on Windows!')
 
     tmp_file = f'{filename}.{os.getpid()}'
     with open(tmp_file, mode) as f:
         yield f
 
-    os.rename(tmp_file, filename)
+    try:
+        os.rename(tmp_file, filename)
+    except:
+        print('file allready written')
 
+        
 # This function takes a date in milliseconds from the Unix epoch and transforms it into a printable date
 # It operates by converting the date to a string, removing its last 3 digits, converting it back to an int
 # and then invoking the `isoformat` date function on it
