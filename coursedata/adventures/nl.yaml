@@ -268,14 +268,19 @@ adventures:
             3:
                 story_text: |
                     ## Verhaal
-                    In dit level kun je iets willekeurigs aan je verhaal toevoegen. Een willekeurig monster, dier of ander obstakel.
-
-                    Dat gaat zo:
+                    In dit level kun je iets willekeurigs aan je verhaal toevoegen. Een willekeurig monster, dier of ander obstakel. Dat gaat zo:
+                start_code: "{print} Hier komt straks jouw verhaal!"
+                example_code: |-
+                    ## Voorbeeld Hedy code
                     ```
                     dieren {is} 🦇, 🐿, 🦉, 🦔
                     {print} Hij hoort nu het geluid van een dieren {at} {random}
                     ```
+                story_text_2: |
                     Het `{add}`commando kun je misschien ook in je verhaal gebruiken. Bijvoorbeeld zo:
+
+                example_code_2: |-
+                    ## Voorbeeld Hedy code
                     ```
                     {print} Hij hoort een geluid...
                     dieren {is} 🦉, 🐿, 🦇
@@ -283,7 +288,10 @@ adventures:
                     {add} dier {to_list} dieren
                     {print} het was een dieren {at} {random}
                     ```
-                    Hier zie je een voorbeeld van het `{remove}` commando in een verhaal:
+                story_text_3: "Hiernaast zie je een voorbeeld van het `{remove}` commando in een verhaal\n"
+                example_code_3: |-
+
+                    ## Voorbeeld Hedy code
                     ```
                     {print} Zijn rugzak is veel te zwaar...
                     {print} In de rugzak zitten een fles water, een zaklamp en een baksteen.
@@ -291,13 +299,6 @@ adventures:
                     weggooien {is} {ask} Welk ding zal onze held weggooien?
                     {remove} weggooien {from} tas
                     ```
-
-                start_code: "{print} Hier komt straks jouw verhaal!"
-                example_code: "It goes like this:\n```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
-                story_text_2: "The command `{add}` can also come in handy in your story. For example:\n"
-                story_text_3: "This is an example of the `{remove}` command in your story\n"
-                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
-                example_code_2: "```\n{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
     parrot:
         name: "Papegaai"
         description: "Maak je eigen online papegaai die je napraat!"
@@ -1323,7 +1324,7 @@ adventures:
 
                     Zoals je merkt, is Hedy nog niet echt een goede waarzegger. Ze voorspelt alleen wat je haar vertelt!
                     Neem een kijkje in level 2 om te leren om echte voorspellingen te doen!
-                start_code: "# place your code here"
+                start_code: "# Maak jouw eigen code hier"
             12:
                 story_text: |
                     ## Waarzegger
@@ -1840,9 +1841,9 @@ adventures:
             3:
                 story_text: |
                     ## Random restaurant
-                    In level 3 kun je ook het commando `{at} {random}` gebruiken om Hedy voor jou te laten kiezen. Hierdoor kun je ook een grappig {random} restaurant bouwen, waarbij je Hedy laat kiezen wat jij te eten krijgt!
-
-                    ## Voorbeeld Hedy Code Random Restaurant
+                    In level 3 kun je ook het commando `{at} {random}` gebruiken om Hedy voor jou te laten kiezen. Hierdoor kun je ook een grappig {random} restaurant bouwen, waarbij je Hedy laat kiezen wat jij te eten krijgt!                  ```
+                start_code: "# place your code here"
+                example_code: |-
                     ```
                     gerechten {is} patat, pizza, spruitjes
                     toetjes {is} een ijsje, appeltaart, franse stinkkaas
@@ -1855,10 +1856,8 @@ adventures:
                     {print} Dat wordt dan prijzen {at} {random}
                     {print} Eet smakelijk!
                     ```
-
-                    ## Allergieën
-                    Vindt je klant iets niet lekker of is je klant allergisch? Haal dan een item van je menu met het `{remove}` commando.
-
+                story_text_2: "## Allergieën\nVindt je klant iets niet lekker of is je klant allergisch? Haal dan een item van je menu met het `{remove}` commando\n"
+                example_code_2: |-
                     ```
                     {print} Mysterie Milkshake
                     smaken {is} aardbei, banaan, chocolade
@@ -1866,10 +1865,6 @@ adventures:
                     {remove} allergie {from} smaken
                     {print} Jij krijgt een milkshake  smaken {at} {random}
                     ```
-                start_code: "# place your code here"
-                example_code: "## Example Hedy code\n\n```\n{print} Welcome to Hedy's Random Restaurant!\n{print} The only restaurant that will randomly choose your meal and its price for you!\nstarters {is} salad, soup, carpaccio\nmains {is} pizza, brussels sprouts, spaghetti\ndesserts {is} brownies, ice cream, french cheeses\ndrinks {is} cola, beer, water\nprices {is} 1 dollar, 10 dollars, 100 dollars\n{print} You will start with: starters {at} {random}\n{print} Then we'll serve: mains {at} {random}\n{print} And as dessert: desserts {at} {random}\n{print} You will get a drinks {at} {random} to drink\n{print} That will be: prices {at} {random}\n{print} Thank you and enjoy your meal!\n```\n"
-                story_text_2: "## Allergies\nDoes your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
-                example_code_2: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n{remove} allergies {from} flavors\n{print} You get a flavors {at} {random} milkshake\n```\n"
             15:
                 story_text: |
                     ## Restaurant
@@ -2300,7 +2295,6 @@ adventures:
                     Daarnaast echoot Hedy alleen woorden aan het einde van de zin. Dus je kunt in level 1 niet zeggen 'Je hamburger komt eraan!'
 
                     Dat verandert in level 2. In level 2 leer je namelijk werken met variabelen waardoor je Hedy heel veel verschillende stukjes informatie kunt laten onthouden en ze overal in de zin te printen.
-                    Daarnaast leer je in level 2 werken met het `{at} {random}` commando, waardoor je echte spelletjes kunt gaan maken.
                     Neem snel een kijkje!
 
                 start_code: "{print} Op naar het volgende level!"
