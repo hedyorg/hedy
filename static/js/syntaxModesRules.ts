@@ -25,6 +25,8 @@ var currentLang: {
   _ECHO: string;
   _FORWARD: string;
   _TURN: string;
+  _LEFT: string;
+  _RIGHT: string;
   _SLEEP: string;
   _ADD_LIST: string;
   _TO_LIST: string;
@@ -486,7 +488,7 @@ function rule_turtle() {
     return comp(
       recognize('start', {
         // Note: left and right are not yet keywords
-        regex: currentLang._TURN + ' (left|right)?',
+        regex: currentLang._TURN + ' (' + currentLang._LEFT + '|' + currentLang._RIGHT + ')?',
         token: 'keyword',
         next: 'start',
       }),
