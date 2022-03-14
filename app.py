@@ -1329,45 +1329,6 @@ def update_public_profile(user):
         return {'success': g.auth_texts.get('public_profile_updated'), 'achievement': achievement}, 200
     return {'success': g.auth_texts.get('public_profile_updated')}, 200
 
-@app.route('/translate/<source>/<target>')
-def translate_fromto(source, target):
-    source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml').to_dict()
-    source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml').to_dict()
-    source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml').to_dict()
-    source_keywords = YamlFile.for_file(f'coursedata/keywords/{source}.yaml').to_dict()
-
-    target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml').to_dict()
-    target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml').to_dict()
-    target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml').to_dict()
-    target_keywords = YamlFile.for_file(f'coursedata/keywords/{target}.yaml').to_dict()
-
-    files = []
-
-    files.append(translating.TranslatableFile(
-        'Levels',
-        f'level-defaults/{target}.yaml',
-        translating.struct_to_sections(source_levels, target_levels)))
-
-    files.append(translating.TranslatableFile(
-        'Messages',
-        f'texts/{target}.yaml',
-        translating.struct_to_sections(source_texts, target_texts)))
-
-    files.append(translating.TranslatableFile(
-        'Adventures',
-        f'adventures/{target}.yaml',
-        translating.struct_to_sections(source_adventures, target_adventures)))
-
-    files.append(translating.TranslatableFile(
-        'Keywords (make sure there are no duplicate translations of keywords)',
-        f'keywords/{target}.yaml',
-        translating.struct_to_sections(source_keywords, target_keywords)))
-
-    return render_template('translate-fromto.html',
-                           source_lang=source,
-                           target_lang=target,
-                           files=files)
-
 @app.route('/translating')
 def translating_page():
     return render_template('translating.html')
