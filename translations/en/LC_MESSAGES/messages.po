@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-04 15:43+0100\n"
+"POT-Creation-Date: 2022-03-14 09:37+0100\n"
 "PO-Revision-Date: 2022-02-25 13:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -50,10 +50,10 @@ msgstr ""
 
 #: app.py:1287 website/auth.py:295 website/auth.py:343 website/auth.py:479
 #: website/auth.py:505 website/auth.py:535 website/auth.py:640
-#: website/auth.py:674 website/auth.py:715 website/auth.py:742
-#: website/teacher.py:81 website/teacher.py:195 website/teacher.py:252
-#: website/teacher.py:297 website/teacher.py:330 website/teacher.py:366
-#: website/teacher.py:447
+#: website/auth.py:673 website/auth.py:711 website/auth.py:738
+#: website/teacher.py:81 website/teacher.py:194 website/teacher.py:251
+#: website/teacher.py:296 website/teacher.py:329 website/teacher.py:365
+#: website/teacher.py:446
 msgid "ajax_error"
 msgstr "There was an error, please try again."
 
@@ -439,7 +439,7 @@ msgstr "Go to my profile"
 msgid "prompt_join_class"
 msgstr "Do you want to join this class?"
 
-#: templates/class-prejoin.html:17
+#: templates/class-prejoin.html:17 website/teacher.py:180
 msgid "join_prompt"
 msgstr "You need to have an account to join a class. Would you like to login now?"
 
@@ -1285,9 +1285,9 @@ msgid "go_to_first_question"
 msgstr "Go to question 1"
 
 #: website/auth.py:237 website/auth.py:297 website/auth.py:481
-#: website/auth.py:642 website/auth.py:651 website/auth.py:676
-#: website/auth.py:717 website/auth.py:724 website/auth.py:744
-#: website/teacher.py:299 website/teacher.py:332
+#: website/auth.py:642 website/auth.py:651 website/auth.py:675
+#: website/auth.py:713 website/auth.py:720 website/auth.py:740
+#: website/teacher.py:298 website/teacher.py:331
 msgid "username_invalid"
 msgstr "Your username is invalid."
 
@@ -1299,13 +1299,13 @@ msgstr "Username cannot contain `:` or `@`."
 msgid "username_three"
 msgstr "Username must contain at least three characters."
 
-#: website/auth.py:243 website/auth.py:537 website/auth.py:746
-#: website/auth.py:751
+#: website/auth.py:243 website/auth.py:537 website/auth.py:742
+#: website/auth.py:747
 msgid "email_invalid"
 msgstr "Please enter a valid email."
 
 #: website/auth.py:245 website/auth.py:299 website/auth.py:483
-#: website/auth.py:507 website/auth.py:519 website/auth.py:680
+#: website/auth.py:507 website/auth.py:519 website/auth.py:679
 msgid "password_invalid"
 msgstr "Your password is invalid."
 
@@ -1322,7 +1322,7 @@ msgid "repeat_match_email"
 msgstr "The repeated email does not match."
 
 #: website/auth.py:356 website/auth.py:509 website/auth.py:513
-#: website/auth.py:684
+#: website/auth.py:683
 msgid "repeat_match_password"
 msgstr "The repeated password does not match."
 
@@ -1369,7 +1369,7 @@ msgstr "That username is already in use."
 msgid "exists_email"
 msgstr "That email is already in use."
 
-#: website/auth.py:485 website/auth.py:511 website/auth.py:682
+#: website/auth.py:485 website/auth.py:511 website/auth.py:681
 msgid "password_six"
 msgstr "Your password must contain at least six characters."
 
@@ -1393,23 +1393,23 @@ msgstr "Profile updated."
 msgid "profile_updated_reload"
 msgstr "Profile updated, page will be re-loaded."
 
-#: website/auth.py:666
+#: website/auth.py:665
 msgid "sent_password_recovery"
 msgstr ""
 "You should soon receive an email with instructions on how to reset your "
 "password."
 
-#: website/auth.py:678 website/auth.py:689 website/auth.py:691
+#: website/auth.py:677 website/auth.py:687
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
-#: website/auth.py:701
+#: website/auth.py:697
 msgid "password_resetted"
 msgstr ""
 "Your password has been successfully reset. You are being redirected to "
 "the login page."
 
-#: website/auth.py:719
+#: website/auth.py:715
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
@@ -1455,75 +1455,75 @@ msgstr "You already have a class with this name."
 msgid "no_such_class"
 msgstr "No such Hedy class"
 
-#: website/teacher.py:238
+#: website/teacher.py:237
 msgid "customization_deleted"
 msgstr "Customizations successfully deleted."
 
-#: website/teacher.py:289
+#: website/teacher.py:288
 msgid "class_customize_success"
 msgstr "Class successfully customized."
 
-#: website/teacher.py:314
+#: website/teacher.py:313
 msgid "student_not_existing"
 msgstr "This username doesn't exist."
 
-#: website/teacher.py:316
+#: website/teacher.py:315
 msgid "student_already_in_class"
 msgstr "This student is already in your class."
 
-#: website/teacher.py:318
+#: website/teacher.py:317
 msgid "student_already_invite"
 msgstr "This student already has a pending invitation."
 
-#: website/teacher.py:371
+#: website/teacher.py:370
 msgid "no_accounts"
 msgstr "There are no accounts to create."
 
-#: website/teacher.py:382
+#: website/teacher.py:381
 msgid "unique_usernames"
 msgstr "All usernames need to be unique."
 
-#: website/teacher.py:385
+#: website/teacher.py:384
 msgid "unique_emails"
 msgstr "All mail addresses need to be unique."
 
-#: website/teacher.py:396
+#: website/teacher.py:395
 msgid "usernames_exist"
 msgstr "One or more usernames is already in use."
 
-#: website/teacher.py:399
+#: website/teacher.py:398
 msgid "emails_exist"
 msgstr "One or more mail addresses is already in use."
 
-#: website/teacher.py:410
+#: website/teacher.py:409
 msgid "accounts_created"
 msgstr "Accounts where successfully created."
 
-#: website/teacher.py:449
+#: website/teacher.py:448
 msgid "adventure_id_invalid"
 msgstr "This adventure id is invalid."
 
-#: website/teacher.py:451
+#: website/teacher.py:450
 msgid "adventure_name_invalid"
 msgstr "This adventure name is invalid."
 
-#: website/teacher.py:453
+#: website/teacher.py:452
 msgid "level_invalid"
 msgstr "This Hedy level in invalid."
 
-#: website/teacher.py:455
+#: website/teacher.py:454
 msgid "content_invalid"
 msgstr "This adventure is invalid."
 
-#: website/teacher.py:457 website/teacher.py:459
+#: website/teacher.py:456 website/teacher.py:458
 msgid "adventure_length"
 msgstr "Your adventure has to be at least 20 characters."
 
-#: website/teacher.py:470 website/teacher.py:505
+#: website/teacher.py:469 website/teacher.py:504
 msgid "adventure_duplicate"
 msgstr "You already have an adventure with this name."
 
-#: website/teacher.py:482
+#: website/teacher.py:481
 msgid "adventure_updated"
 msgstr "The adventure has been updated!"
 
