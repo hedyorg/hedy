@@ -81,7 +81,7 @@ def routes(app, database, achievements):
             hedy.transpile(body.get('code'), body.get('level'), g.lang)
         except:
             error = True
-            if not utils.is_testing_request(request) and not body.get('force_save'):
+            if not body.get('force_save', True):
                 return jsonify({'parse_error': True})
 
         # We check if a program with a name `xyz` exists in the database for the username.
