@@ -70,8 +70,6 @@ var StopExecution = false;
     }
   }
 
-  console.log("En hier?!");
-
   /**
    * Initialize the main editor and attach all the required event handlers
    */
