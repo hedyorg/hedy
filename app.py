@@ -1001,7 +1001,11 @@ def get_specific_adventure(name, level):
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
 @app.route('/cheatsheet/<level>', methods=['GET'])
 def get_cheatsheet_page(level):
-    return render_template("cheatsheet.html")
+    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
+    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
+    defaults = level_defaults_for_lang.get_defaults_for_level(int(level))
+
+    return render_template("cheatsheet.html", defaults=defaults, level=level)
 
 
 @app.route('/client_messages.js', methods=['GET'])

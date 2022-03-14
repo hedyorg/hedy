@@ -22,14 +22,18 @@ var StopExecution = false;
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
 
-
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
+
+  console.log("Hier komen we?");
+  console.log($('.turn-pre-into-ace'));
+  console.log($('#test'));
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
+    console.log("Hoezo komen we hier niet?!");
     counter += 1;
     $(preview).addClass('text-lg rounded');
     $(preview).attr('id', "code_block_" + counter);
@@ -42,6 +46,8 @@ var StopExecution = false;
     exampleEditor.setOptions({ maxLines: Infinity });
     if ($(preview).hasClass('common-mistakes')) {
       exampleEditor.setOptions({ minLines: 10 });
+    } else if ($(preview).hasClass('cheatsheet')) {
+      exampleEditor.setOptions({ minLines: 1 });
     } else {
       exampleEditor.setOptions({ minLines: 2 });
     }
@@ -68,6 +74,8 @@ var StopExecution = false;
       exampleEditor.session.setMode(getHighlighter(level));
     }
   }
+
+  console.log("En hier?!");
 
   /**
    * Initialize the main editor and attach all the required event handlers
