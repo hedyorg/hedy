@@ -155,7 +155,7 @@ def routes(app, database, achievements):
         # get a datastructure for the result overview
         result_items = get_result_items(quiz_answers, questions)
         print(result_items)
-        return render_template('quiz-result-overview.html',
+        return render_template('quiz/quiz-result-overview.html',
                                correct=session.get('correct_answer', 0),
                                total_score=total_score,
                                level_source=level,
