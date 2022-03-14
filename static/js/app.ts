@@ -497,8 +497,12 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
   }).done(function(response) {
     // The auth functions use this callback function.
     if (cb) return response.Error ? cb (response) : cb (null, response);
-
-    modal.alert (auth.texts['save_success_detail'], 3000, false);
+    if (shared) {
+      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "')");
+      modal.copy_alert (auth.texts['share_success_detail'], 5000);
+    } else {
+      modal.alert(auth.texts['save_success_detail'], 3000, false);
+    }
     if (response.achievements) {
       showAchievements(response.achievements, false, "");
     }
