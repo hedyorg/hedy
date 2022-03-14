@@ -73,7 +73,7 @@ class TestsLevel1(HedyTester):
       code=code,
       expected=expected,
       output="'Welcome to OceanView!'")
-    
+
   def test_print_with_slashes(self):
     code = "print 'Welcome to \\O/ceanView!'"
 
@@ -94,13 +94,13 @@ class TestsLevel1(HedyTester):
       expected=expected,
       output="Welcome to \\"
     )
-    
+
   def test_print_with_spaces(self):
     code = "print        hallo!"
     expected = textwrap.dedent("""\
     print('hallo!')""")
 
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_print_nl(self):
     code = "print Hallo welkom bij Hedy!"
@@ -146,7 +146,7 @@ class TestsLevel1(HedyTester):
     answer = input('\\'Welcome to OceanView?\\'')""")
 
     self.single_level_tester(code=code, expected=expected)
-    
+
   def test_ask_nl_code_transpiled_in_nl(self):
     code = "vraag Heb je er zin in?"
     expected = "answer = input('Heb je er zin in?')"
@@ -202,9 +202,7 @@ class TestsLevel1(HedyTester):
   # forward tests
   def test_forward(self):
     code = "forward 50"
-    expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)""")
+    expected = HedyTester.dedent(HedyTester.forward_transpiled(50))
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
@@ -214,9 +212,7 @@ class TestsLevel1(HedyTester):
 
   def test_forward_arabic_numeral(self):
     code = "forward ١١١١١١١"
-    expected = textwrap.dedent("""\
-    t.forward(1111111)
-    time.sleep(0.1)""")
+    expected = HedyTester.forward_transpiled(1111111)
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
@@ -226,9 +222,7 @@ class TestsLevel1(HedyTester):
 
   def test_forward_hindi_numeral(self):
     code = "forward ५५५"
-    expected = textwrap.dedent("""\
-    t.forward(555)
-    time.sleep(0.1)""")
+    expected = HedyTester.forward_transpiled(555)
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
@@ -237,10 +231,10 @@ class TestsLevel1(HedyTester):
     )
 
   def test_forward_without_argument(self):
-    code = textwrap.dedent("""forward""")
+    code = 'forward'
     expected = textwrap.dedent("""\
-       t.forward(50)
-       time.sleep(0.1)""")
+      t.forward(50)
+      time.sleep(0.1)""")
 
     self.multi_level_tester(
       max_level=self.max_turtle_level,
@@ -293,32 +287,21 @@ class TestsLevel1(HedyTester):
                              extra_check_function=self.is_turtle())
 
 
-  def test_turn_number(self):
-    code = "turn 180"
-    expected = "t.right(180)"
-    self.multi_level_tester(
-      max_level=self.max_turtle_level,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_turtle()
-    )
+  def test_one_turn_left_nl(self):
+    code = "draai links"
+    expected = "t.left(90)"
 
-  def test_turn_negative_number(self):
-    code = "turn -180"
-    expected = "t.right(-180)"
-    self.multi_level_tester(
-      max_level=10,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_turtle()
-    )
+    #TODO next step is add left/right to translation code!
 
-  def test_one_turn_with_text_gives_type_error(self):
+    self.single_level_tester(code=code, expected=expected,
+                             extra_check_function=self.is_turtle(), lang='nl')
+
+
+  def test_one_turn_with_text_gives_error(self):
     code = "turn koekoek"
-    self.multi_level_tester(
-      max_level=self.max_turtle_level,
+    self.single_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException
+      exception=hedy.exceptions.InvalidArgumentException
     )
 
   # comment test
@@ -332,28 +315,29 @@ class TestsLevel1(HedyTester):
 
   # combined keywords tests
   def test_print_ask_echo(self):
-      code = textwrap.dedent("""\
+    code = textwrap.dedent("""\
       print Hallo
       ask Wat is je lievelingskleur
       echo je lievelingskleur is""")
 
-      expected = textwrap.dedent("""\
+    expected = textwrap.dedent("""\
       print('Hallo')
       answer = input('Wat is je lievelingskleur')
       print('je lievelingskleur is '+answer)""")
 
-      self.single_level_tester(
-        code=code,
-        expected=expected,
-        expected_commands=['print', 'ask', 'echo'])
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      expected_commands=['print', 'ask', 'echo'])
   def test_forward_turn_combined(self):
-    code = "forward 50\nturn\nforward 100"
-    expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)
-    t.right(90)
-    t.forward(100)
-    time.sleep(0.1)""")
+    code = textwrap.dedent("""\
+      forward 50
+      turn
+      forward 100""")
+    expected = HedyTester.dedent(
+      HedyTester.forward_transpiled(50),
+      't.right(90)',
+      HedyTester.forward_transpiled(100))
     self.multi_level_tester(
       max_level=7,
       code=code,

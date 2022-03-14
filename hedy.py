@@ -65,6 +65,7 @@ ALL_KEYWORD_LANGUAGES = {
     'nl': 'NL',
     'ar': 'AR',
     'fr': 'FR',
+    'hi': 'HI',
     'es': 'ES'
 }
 
@@ -120,25 +121,26 @@ def promote_types(types, rules):
 
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'],
-                      2: ['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
-                      3: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add', 'random', 'remove'],
-                      4: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove'],
-                      5: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else'],
-                      6: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else'],
-                      7: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
-                      8: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
-                      9: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
-                      10: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      11: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      12: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      13: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
-                      14: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
-                      15: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
-                      16: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
-                      17: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif'],
-                      18: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif', 'input']
-                      }
+commands_per_level = {
+    1 :['print', 'ask', 'echo', 'turn', 'forward'],
+    2 :['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
+    3 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
+    4 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
+    5 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
+    6 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
+    7 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    8 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    9 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    10 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times', 'for'],
+    11 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range'],
+    12 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range'],
+    13 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or'],
+    14 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or'],
+    15 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or', 'while'],
+    16 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or', 'while'],
+    17 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or', 'while', 'elif'],
+    18 :['is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or', 'while', 'elif', 'input'],
+}
 
 command_turn_literals = ['right', 'left']
 
@@ -154,7 +156,7 @@ commands_and_types_per_level = {
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
-    Command.turn: {1: command_turn_literals + [HedyType.integer, HedyType.input],
+    Command.turn: {1: command_turn_literals,
                    2: [HedyType.integer, HedyType.input]},
     Command.forward: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
@@ -388,63 +390,34 @@ class LookupEntryCollector(visitors.Visitor):
         # in level 1 there is no variable name on the left side of the ask command
         if self.level > 1:
             self.add_to_lookup(tree.children[0].children[0], tree)
-    
-    def ask_is(self, tree):
-        self.ask(tree)
-    
-    def ask_equals(self, tree):
-        self.ask(tree)
 
     def input(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree)
 
-    def input_is(self, tree):
-        self.input(tree)
-    
-    def input_equals(self, tree):
-        self.input(tree)
-
     def assign(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree.children[1])
-    
-    def assign_is(self, tree):
-        self.assign(tree)
-    
-    def assign_equals(self, tree):
-        self.assign(tree)
 
     def assign_list(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree)
-    
-    def assign_list_is(self, tree):
-        self.assign_list(tree)
 
-    def assign_list_equals(self, tree):
-        self.assign_list(tree)
 
     # list access is added to the lookup table not because it must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, tree):
         list_name = hash_var(tree.children[0].children[0])
-        if tree.children[1] == 'random':
+        position_name = hash_var(tree.children[1])
+        if position_name == 'random':
             name = f'random.choice({list_name})'
         else:
             # We want list access to be 1-based instead of 0-based, hence the -1
-            name = f'{list_name}[{tree.children[1]}-1]'
+            name = f'{list_name}[{position_name}-1]'
         self.add_to_lookup(name, tree, True)
 
     def list_access_var(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree)
-
-    def list_access_var_is(self, tree):
-        return self.list_access_var(tree)
-
-    def list_access_var_equals(self, tree):
-        return self.list_access_var(tree)
-
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, True)
 
@@ -487,12 +460,6 @@ class TypeValidator(Transformer):
             self.save_type_to_lookup(tree.children[0].children[0], HedyType.input)
         self.validate_args_type_allowed(tree.children[1:], Command.ask)
         return self.to_typed_tree(tree, HedyType.input)
-    
-    def ask_is(self, tree):
-        self.ask(tree)
-    
-    def ask_equals(self, tree):
-        self.ask(tree)
 
     def input(self, tree):
         self.validate_args_type_allowed(tree.children[1:], Command.ask)
@@ -505,7 +472,7 @@ class TypeValidator(Transformer):
 
     def turn(self, tree):
         if tree.children:
-            name = tree.children[0].children[0]
+            name = tree.children[0].data
             if self.level > 1 or name not in command_turn_literals:
                 self.validate_args_type_allowed(tree.children, Command.turn)
         return self.to_typed_tree(tree)
@@ -514,22 +481,10 @@ class TypeValidator(Transformer):
         type_ = self.get_type(tree.children[1])
         self.save_type_to_lookup(tree.children[0].children[0], type_)
         return self.to_typed_tree(tree, HedyType.none)
-
-    def assign_is(self, tree):
-        return self.assign(tree)
-    
-    def assign_equals(self, tree):
-        return self.assign(tree)
     
     def assign_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.list)
         return self.to_typed_tree(tree, HedyType.list)
-
-    def assign_list_is(self, tree):
-        return self.assign_list(tree)
-
-    def assign_list_equals(self, tree):
-        return self.assign_list(tree)
         
     def list_access(self, tree):
         self.validate_args_type_allowed(tree.children[0], Command.list_access)
@@ -547,12 +502,6 @@ class TypeValidator(Transformer):
     def list_access_var(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
         return self.to_typed_tree(tree)
-
-    def list_access_var_is(self, tree):
-        return self.list_access_var(tree)
-
-    def list_access_var_equals(self, tree):
-        return self.list_access_var(tree)
 
     def add(self, tree):
         self.validate_args_type_allowed(tree.children[1], Command.add_to_list)
@@ -573,12 +522,6 @@ class TypeValidator(Transformer):
             rules = [int_to_float, input_to_string, input_to_int, input_to_float]
         self.validate_binary_command_args_type(Command.equality, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
-    
-    def equality_check_is(self, tree):
-        return self.equality_check(tree)
-    
-    def equality_check_equals(self, tree):
-        return self.equality_check(tree)
 
     def repeat_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
@@ -848,7 +791,7 @@ class AllCommands(Transformer):
         # some keywords have names that are not a valid name for a command
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
-        if keyword in ['assign', 'assign_is', 'assign_equals', 'assign_list', 'assign_list_is', 'assign_list_equals']:
+        if keyword in ['assign', 'assign_list']:
             return 'is'
         if keyword == 'ifelse':
             return 'else'
@@ -866,11 +809,9 @@ class AllCommands(Transformer):
             return 'and'
         if keyword == 'while_loop':
             return 'while'
-        if keyword == 'ask_is' or keyword == 'ask_equals':
-            return 'ask'
         if keyword == 'in_list_check':
             return 'in'
-        if keyword in ['input_is', 'input_equals', 'input_is_empty_brackets', 'input_equals_empty_brackets']:
+        if keyword == 'input_empty_brackets':
             return 'input'
         if keyword == 'print_empty_brackets':
             return 'print'
@@ -1017,18 +958,12 @@ class IsComplete(Filter):
             return not incomplete, ('ask', meta.line)
         else:
             return not incomplete, ('ask', 1)
-    def ask_is(self, meta, args):
-        return self.ask(meta, args)
-    def ask_equals(self, meta, args):
-        return self.ask(meta, args)
+
     def print(self, meta, args):
         return args != [], ('print', meta.line)
     def input(self, meta, args):
         return len(args) > 1, ('input', meta.line)
-    def input_is(self, meta, args):
-        return self.input(meta, args)
-    def input_equals(self, meta, args):
-        return self.input(meta, args)
+
     def length(self, meta, args):
         return args != [], ('len', meta.line)
     def error_print_nq(self, meta, args):
@@ -1211,22 +1146,15 @@ class ConvertToPython_1(ConvertToPython):
 
     def forward(self, args):
         if len(args) == 0:
-            return self.make_forward(50)
-
-        parameter = int(args[0])
-        return self.make_forward(parameter)
-
-    def make_forward(self, parameter):
-        return sleep_after(f"t.forward({parameter})", False)
+            return sleep_after('t.forward(50)', False)
+        return self.make_forward(int(args[0]))
 
     def turn(self, args):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
 
-        arg = args[0]
-        if self.is_variable(arg) or arg.lstrip("-").isnumeric():
-            return f"t.right({arg})"
-        elif arg == 'left':
+        arg = args[0].data
+        if arg == 'left':
             return "t.left(90)"
         elif arg == 'right':
             return "t.right(90)"
@@ -1235,6 +1163,24 @@ class ConvertToPython_1(ConvertToPython):
             raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
                                                           allowed_types=get_allowed_types(Command.turn, self.level))
 
+    def make_turn(self, parameter):
+        return self.make_turtle_command(parameter, Command.turn, 'right', False)
+
+    def make_forward(self, parameter):
+        return self.make_turtle_command(parameter, Command.forward, 'forward', True)
+
+    def make_turtle_command(self, parameter, command, command_text, add_sleep):
+        variable = self.get_fresh_var('trtl')
+        transpiled = textwrap.dedent(f"""\
+            {variable} = {parameter}
+            try:
+              {variable} = int({variable})
+            except ValueError:
+              raise Exception(f'While running your program the command {style_closest_command(command)} received the value {style_closest_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
+            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
+        if add_sleep:
+            return sleep_after(transpiled, False)
+        return transpiled
 
 
 
@@ -1250,6 +1196,14 @@ class ConvertToPython_2(ConvertToPython_1):
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
 
+    def turn(self, args):
+        if len(args) == 0:
+            return "t.right(90)"  # no arguments defaults to a right turn
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_turn(hash_var(arg))
+        if arg.lstrip("-").isnumeric():
+            return self.make_turn(arg)
 
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
@@ -1287,7 +1241,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def forward(self, args):
         if len(args) == 0:
-            return self.make_forward(50)
+            return sleep_after('t.forward(50)', False)
 
         if ConvertToPython.is_int(args[0]):
             parameter = int(args[0])
@@ -1296,22 +1250,6 @@ class ConvertToPython_2(ConvertToPython_1):
             parameter = args[0]
 
         return self.make_forward(parameter)
-
-    def turn(self, args):
-        if len(args) == 0:
-            return "t.right(90)"
-
-        arg = args[0]
-        if arg.lstrip('-').isnumeric():
-            return f"t.right({arg})"
-
-        hashed_arg = hash_var(arg)
-        if self.is_variable(hashed_arg):
-            return f"t.right({hashed_arg})"
-
-        # the TypeValidator should protect against reaching this line:
-        raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
-                                                      allowed_types=get_allowed_types(Command.turn, self.level))
 
     def assign(self, args):
         parameter = args[0]
@@ -1343,8 +1281,11 @@ class ConvertToPython_3(ConvertToPython_2):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
+        args = [hash_var(a) for a in args]
+
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
+
 
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
@@ -1459,12 +1400,6 @@ class ConvertToPython_6(ConvertToPython_5):
 
         return f"str({arg0}) == str({arg1})"
 
-    def equality_check_is(self, args):
-        return self.equality_check(args)
-
-    def equality_check_equals(self, args):
-        return self.equality_check(args)
-
     def assign(self, args):
         parameter = args[0]
         value = args[1]
@@ -1478,30 +1413,6 @@ class ConvertToPython_6(ConvertToPython_5):
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'"
-
-    def assign_is(self, args):
-        return self.assign(args)
-    
-    def assign_equals(self, args):
-        return self.assign(args)
-
-    def list_access_var_is(self, args):
-        return super().list_access_var(args)
-    
-    def list_access_var_equals(self, args):
-        return super().list_access_var(args)
-    
-    def ask_is(self, args):
-        return super().ask(args)
-    
-    def ask_equals(self, args):
-        return super().ask(args)
-    
-    def assign_list_is(self, args):
-        return super().assign_list(args)
-    
-    def assign_list_equals(self, args):
-        return super().assign_list(args)
     
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
@@ -1640,12 +1551,6 @@ class ConvertToPython_12(ConvertToPython_11):
           except ValueError:
             pass""")  # no number? leave as string
 
-    def ask_is(self, args):
-        return self.ask(args)
-    
-    def ask_equals(self, args):
-        return self.ask(args)
-
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
         # tree resulting from earlier processing
@@ -1664,12 +1569,6 @@ class ConvertToPython_12(ConvertToPython_11):
         parameter = args[0]
         values = args[1:]
         return parameter + " = [" + ", ".join(values) + "]"
-
-    def assign_list_is(self, args):
-        return self.assign_list(args)
-
-    def assign_list_equals(self, args):
-        return self.assign_list(args)
 
     def assign(self, args):
         right_hand_side = args[1]
@@ -1696,12 +1595,6 @@ class ConvertToPython_12(ConvertToPython_11):
         name = args[0]
         # self.check_var_usage(args)
         return hash_var(name)
-
-    def assign_is(self, args):
-        return self.assign(args)
-    
-    def assign_equals(self, args):
-        return self.assign(args)
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
@@ -1785,11 +1678,8 @@ class ConvertToPython_18(ConvertToPython_17):
 
     def input_equals(self, args):
         return self.input(args)
-    
-    def input_is_empty_brackets(self, args):
-        return self.input(args)
-    
-    def input_equals_empty_brackets(self, args):
+
+    def input_empty_brackets(self, args):
         return self.input(args)
     
     def print_empty_brackets(self, args):
@@ -1936,23 +1826,24 @@ def get_keywords_for_language(language):
 PARSER_CACHE = {}
 
 
-def get_parser(level, lang="en"):
+def get_parser(level, lang="en", keep_all_tokens=False):
     """Return the Lark parser for a given level.
 
     Uses caching if Hedy is NOT running in development mode.
     """
-    key = str(level) + "." + lang
+    key = str(level) + "." + lang + '.' + str(keep_all_tokens)
     existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True, propagate_positions=True) #ambiguity='explicit'
+    ret = Lark(grammar, regex=True, propagate_positions=True, keep_all_tokens=keep_all_tokens) #ambiguity='explicit'
     PARSER_CACHE[key] = ret
     return ret
 
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
+    transpile_result = transpile_inner(input_string, level, lang)
     transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
 

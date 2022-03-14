@@ -1,7 +1,8 @@
 import json
 
 import hedy
-from website.auth import validate_signup_data, store_new_account, requires_login, is_teacher
+from website.auth import validate_signup_data, store_new_account, requires_login, is_teacher, is_admin, current_user
+
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
@@ -167,17 +168,21 @@ def routes(app, database, achievements):
                                 })
 
     @app.route('/class/join', methods=['POST'])
-    @requires_login
-    def join_class(user):
+    def join_class():
         body = request.json
+        print(body)
+        Class = None
         if 'id' in body:
             Class = DATABASE.get_class(body['id'])
         if not Class or Class ['id'] != body['id']:
             return utils.error_page(error=404,  ui_message='invalid_class_link')
 
-        DATABASE.add_student_to_class(Class['id'], user['username'])
-        DATABASE.remove_class_invite(user['username'])
-        achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "epic_education")
+        if not current_user()['username']:
+            return g.auth_texts.get('join_prompt'), 403
+
+        DATABASE.add_student_to_class(Class['id'], current_user()['username'])
+        DATABASE.remove_class_invite(current_user()['username'])
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "epic_education")
         if achievement:
             return {'achievement': achievement}, 200
         return {}, 200

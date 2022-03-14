@@ -264,8 +264,7 @@ class TestsLevel14(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=15,
-      translate=False)
+      max_level=15)
 
   def test_inequality_with_lists(self):
     code = textwrap.dedent("""\
@@ -283,8 +282,7 @@ class TestsLevel14(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
-      max_level=15,
-      translate=False)
+      max_level=15)
 
   @parameterized.expand(HedyTester.comparison_commands)
   def test_comparisons_with_boolean(self, comparison):
