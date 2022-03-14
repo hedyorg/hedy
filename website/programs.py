@@ -69,6 +69,8 @@ def routes(app, database, achievements):
             return 'name must be a string', 400
         if not isinstance(body.get('level'), int):
             return 'level must be an integer', 400
+        if not isinstance(body.get('shared'), bool):
+            return 'shared must be a boolean', 400
         if 'adventure_name' in body:
             if not isinstance(body.get('adventure_name'), str):
                 return 'if present, adventure_name must be a string', 400
@@ -78,13 +80,13 @@ def routes(app, database, achievements):
         # For now, we bring all existing programs for the user and then search within them for repeated names.
         programs = DATABASE.programs_for_user(user['username']).records
         program_id = uuid.uuid4().hex
-        program_public = 0
+        program_public = body.get('shared')
         overwrite = False
         for program in programs:
             if program['name'] == body['name']:
                 overwrite = True
                 program_id = program['id']
-                program_public = program.get('public', 0)
+                program_public = program.get('public', program_public)
                 break
 
         stored_program = {
