@@ -19,6 +19,8 @@ var StopExecution = false;
     window.State = {};
   }
 
+  console.log("Hier komen we!");
+
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
 
