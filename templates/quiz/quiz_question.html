@@ -42,7 +42,9 @@
                             {{ triangle_6|safe }}
                         {% endif %}
                         {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                            <pre><code class="block">{{ question_options[counter.value].code | nl2br }}</code></pre>
+                            <div class="turn-pre-into-ace w-3/4 mx-auto -mt-16 mb-2">
+                                <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ question_options[counter.value].code }}</pre>
+                            </div>
                         {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None' %}
                             <p class="option-text font-bold align-top"> {{ question_options[counter.value].option_text | nl2br }}</p>
                         {% endif %}
