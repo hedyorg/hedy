@@ -25,15 +25,10 @@ var StopExecution = false;
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
-  console.log("Hier komen we?");
-  console.log($('.turn-pre-into-ace'));
-  console.log($('#test'));
-
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
-    console.log("Hoezo komen we hier niet?!");
     counter += 1;
     $(preview).addClass('text-lg rounded');
     $(preview).attr('id', "code_block_" + counter);
