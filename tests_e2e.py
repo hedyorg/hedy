@@ -635,7 +635,7 @@ class TestProgram(AuthHelper):
 
         # WHEN submitting a program without being logged in
         # THEN receive a forbidden response code from the server
-        self.post_data('programs', {'code': 'hello world', 'name': 'program 1', 'level': 1}, expect_http_code=403, no_cookie=True)
+        self.post_data('programs', {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}, expect_http_code=403, no_cookie=True)
 
     def test_create_program(self):
         # GIVEN a new user
@@ -643,7 +643,7 @@ class TestProgram(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         # WHEN submitting a valid program
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         # THEN receive an OK response code from the server
         program = self.post_data('programs', program)
         # THEN verify that the returned program has both a name and an id
@@ -696,7 +696,7 @@ class TestProgram(AuthHelper):
     def test_valid_make_program_public(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
 
         # WHEN making a program public
@@ -719,7 +719,7 @@ class TestProgram(AuthHelper):
     def test_valid_make_program_private(self):
         # GIVEN a logged in user with at least one public program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
         self.post_data('programs/share', {'id': program_id, 'public': True})
 
@@ -743,7 +743,7 @@ class TestProgram(AuthHelper):
     def test_invalid_delete_program(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         self.post_data('programs', program)['id']
         program_id = '123456'
 
@@ -754,7 +754,7 @@ class TestProgram(AuthHelper):
     def test_valid_delete_program(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
 
         # WHEN deleting a program
@@ -769,7 +769,7 @@ class TestProgram(AuthHelper):
     def test_destroy_account_with_programs(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
 
         # WHEN deleting the user account
