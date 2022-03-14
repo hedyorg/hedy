@@ -974,10 +974,10 @@ class TestClasses(AuthHelper):
         student = self.user
         self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
         # GIVEN a student with two programs, one public and one private
-        public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         public_program_id = self.post_data('programs', public_program)['id']
         self.post_data('programs/share', {'id': public_program_id, 'public': True})
-        private_program = {'code': 'hello world', 'name': 'program 2', 'level': 2}
+        private_program = {'code': 'hello world', 'name': 'program 2', 'level': 2, 'shared': False}
         private_program_id = self.post_data('programs', private_program)['id']
 
         # GIVEN the aforementioned teacher
