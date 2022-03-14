@@ -499,9 +499,10 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     // If the program contains an error -> verify that the user really wants to save it and POST again
     // If we already answered this question with yes the "force_save" is true, so we skip this part
     if (response.parse_error && !force_save) {
-      modal.confirm("This program contains an error, are you sure you want to share it?", function() {
-          return storeProgram(level, lang, name, code, shared, true, cb);
-        });
+      modal.confirm(auth.texts['save_parse_warning'], function() {
+        return storeProgram(level, lang, name, code, shared, true, cb);
+      });
+      return;
     }
     // The auth functions use this callback function.
     if (cb) return response.Error ? cb (response) : cb (null, response);

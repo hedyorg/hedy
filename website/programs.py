@@ -78,10 +78,12 @@ def routes(app, database, achievements):
             if not isinstance(body.get('adventure_name'), str):
                 return 'if present, adventure_name must be a string', 400
 
-        if not body.get('force_save'):
-            try:
-                hedy.transpile(body.get('code'), body.get('level'), g.lang)
-            except:
+        error = False
+        try:
+            hedy.transpile(body.get('code'), body.get('level'), g.lang)
+        except:
+            error = True
+            if not body.get('force_save'):
                 return jsonify({'parse_error': True})
 
         # We check if a program with a name `xyz` exists in the database for the username.
@@ -108,7 +110,8 @@ def routes(app, database, achievements):
             'code': body['code'],
             'name': body['name'],
             'username': user['username'],
-            'public': program_public
+            'public': program_public,
+            'error': 1 if error else None
         }
 
         if 'adventure_name' in body:
