@@ -615,14 +615,13 @@ function change_shared (shared: boolean, index: number) {
   }
 }
 
-function share_function(id: string, index: number, Public: boolean, parse_error: boolean) {
+export function share_program(id: string, index: number, Public: boolean) {
   $.ajax({
       type: 'POST',
       url: '/programs/share',
       data: JSON.stringify({
         id: id,
-        public: Public,
-        error: parse_error
+        public: Public
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -642,36 +641,6 @@ function share_function(id: string, index: number, Public: boolean, parse_error:
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
-}
-
-function get_parse_code_by_id(id:string,  index: number, Public: boolean) {
-  $.ajax({
-      type: 'POST',
-      url: '/parse-by-id',
-      data: JSON.stringify({
-        id: id
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function (response) {
-      if (response.error) {
-        modal.confirm("This program contains an error, are you sure you want to share it?", function() {
-          return share_function(id, index, Public, true);
-        });
-        return;
-      } else {
-        return share_function(id, index, Public, false);
-      }
-    }).fail(function (err) {
-      console.log(err);
-    });
-}
-
-export function share_program (id: string, index: number, Public: boolean) {
-  if (Public) {
-    return get_parse_code_by_id(id,  index, Public);
-  }
-  share_function(id, index, Public, false);
 }
 
 export function delete_program(id: string, index: number) {
