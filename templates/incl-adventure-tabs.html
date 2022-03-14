@@ -18,6 +18,9 @@
                 </div>
               {% endif %}
             {% endfor %}
+            {% if specific_adventure %}
+                <h2 class="z-10 my-0 ml-auto pt-6 text-red-500 text-xl">{{ auth.specific_adventure_mode|replace("{adventure}", adventures[0].name) }}</h2>
+            {% endif %}
         </div>
       {# PANES #}
       <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
