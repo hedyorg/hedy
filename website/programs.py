@@ -72,8 +72,6 @@ def routes(app, database, achievements):
             return 'level must be an integer', 400
         if not isinstance(body.get('shared'), bool):
             return 'shared must be a boolean', 400
-        if not isinstance(body.get('force_save'), bool):
-            return 'forced saving must be a boolean', 400
         if 'adventure_name' in body:
             if not isinstance(body.get('adventure_name'), str):
                 return 'if present, adventure_name must be a string', 400
