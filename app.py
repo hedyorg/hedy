@@ -997,9 +997,12 @@ def get_specific_adventure(name, level):
     return hedyweb.render_specific_adventure(
         level_defaults=defaults, level_number=level, adventure=adventure, prev_level=prev_level, next_level=next_level)
 
+
+@app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
 @app.route('/cheatsheet/<level>', methods=['GET'])
 def get_cheatsheet_page(level):
-    render_template("cheatsheet.html")
+    return render_template("cheatsheet.html")
+
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
