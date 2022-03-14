@@ -77,9 +77,9 @@
 
     Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
     ```
-    {print} 'My favorite colour is...'
+    {print} My favorite colour is...
     {sleep} 2
-    {print} 'green!'
+    {print} green!
     ```
   start_code: "{print} hello world!"
   commands:
@@ -114,12 +114,21 @@
 3:
   intro_text: |
     In level 3 you can also make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.
+
+  example_code: |
+    ## Example Hedy Code
+
     ```
     animals {is} dog, cat, kangaroo
     {print} animals {at} {random}
     ```
 
+  intro_text_2:
     You can also add items to the list with `{add}` and remove items with `{remove}`.
+
+  example_code_2: |
+    ## Example Hedy Code
+
     ```
     animals {is} dog, cat, kangaroo
     {add} penguin {to_list} animals
@@ -364,7 +373,7 @@
   start_code: |-
     {repeat} 3 {times}
         food = {ask} 'What do you want?'
-        {if} food {is} 'pizza'
+        {if} food {is} pizza
             {print} 'nice!'
         else
             {print} 'pizza is better'
@@ -377,7 +386,7 @@
     ```
     {repeat} 3 {times}
         food = {ask} 'What do you want?'
-        {if} food {is} 'pizza'
+        {if} food {is} pizza
             {print} 'nice!'
         else
             {print} 'pizza is better'
@@ -847,7 +856,7 @@
       example: "if colour {is} green:'"
       demo_code: |-
         colour = {ask} 'What is your favorite color?'
-        {if} colour == green:
+        {if} colour == 'green':
             {print} 'Your favorite colour is green'
         {else}:
             {print} 'Your favorite colour is not green'
