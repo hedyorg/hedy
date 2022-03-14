@@ -1,3 +1,4 @@
+import hedy
 from website.auth import requires_login, current_user
 import utils
 import uuid
@@ -71,9 +72,17 @@ def routes(app, database, achievements):
             return 'level must be an integer', 400
         if not isinstance(body.get('shared'), bool):
             return 'shared must be a boolean', 400
+        if not isinstance(body.get('force_save'), bool):
+            return 'forced saving must be a boolean', 400
         if 'adventure_name' in body:
             if not isinstance(body.get('adventure_name'), str):
                 return 'if present, adventure_name must be a string', 400
+
+        if not body.get('force_save'):
+            try:
+                hedy.transpile(body.get('code'), body.get('level'), g.lang)
+            except:
+                return jsonify({'parse_error': True})
 
         # We check if a program with a name `xyz` exists in the database for the username.
         # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.

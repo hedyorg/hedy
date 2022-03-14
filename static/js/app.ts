@@ -472,7 +472,7 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
-function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, cb?: (err: any, resp?: any) => void) {
+function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
   window.State.unsaved_changes = false;
   var adventure_name = window.State.adventure_name;
   // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
@@ -480,8 +480,6 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
      adventure_name = level [1];
      level = level [0];
   }
-
-  // Todo TB -> If we also want to share this program -> first parse to verify correctness !
 
   $.ajax({
     type: 'POST',
@@ -492,11 +490,19 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       name:  name,
       code:  code,
       shared: shared,
+      force_save: force_save,
       adventure_name: adventure_name
     }),
     contentType: 'application/json',
     dataType: 'json'
   }).done(function(response) {
+    // If the program contains an error -> verify that the user really wants to save it and POST again
+    // If we already answered this question with yes the "force_save" is true, so we skip this part
+    if (response.parse_error && !force_save) {
+      modal.confirm("This program contains an error, are you sure you want to share it?", function() {
+          return storeProgram(level, lang, name, code, shared, true, cb);
+        });
+    }
     // The auth functions use this callback function.
     if (cb) return response.Error ? cb (response) : cb (null, response);
     if (shared) {
@@ -542,11 +548,11 @@ export function saveit(level: number | [number, string], lang: string, name: str
     }).done(function(response) {
       if (response['duplicate']) {
         modal.confirm (auth.texts['overwrite_warning'], function () {
-          storeProgram(level, lang, name, code, shared, cb);
+          storeProgram(level, lang, name, code, shared, false, cb);
           pushAchievement("double_check");
         });
       } else {
-         storeProgram(level, lang, name, code, shared, cb);
+         storeProgram(level, lang, name, code, shared, false, cb);
       }
     }).fail(function(err) {
       if (err.status == 403) { // The user is not allowed -> so not logged in
