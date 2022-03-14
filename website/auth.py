@@ -135,7 +135,7 @@ countries = {'AF': 'Afghanistan', 'AX': 'Åland Islands', 'AL': 'Albania', 'DZ':
 def remember_current_user(db_user):
     session['user-ttl'] = times() + 5 * 60
     session['user'] = pick(db_user, 'username', 'email', 'is_teacher')
-    session['lang'] = db_user.get('lang', 'en')
+    session['lang'] = db_user.get('language', 'en')
     session['keyword_lang'] = db_user.get('keyword_language', 'en')
 
 
@@ -651,10 +651,9 @@ def routes(app, database):
         if not user:
             return g.auth_texts.get('username_invalid'), 403
 
+        # Create a token
         token = make_salt()
-        hashed = hash(token, make_salt())
-
-        DATABASE.store_token({'id': user['username'], 'token': hashed, 'ttl': times() + session_length})
+        DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + session_length})
 
         if is_testing_request(request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
@@ -664,7 +663,7 @@ def routes(app, database):
                                 email_base_url() + '/reset?username=' + urllib.parse.quote_plus(
                                     user['username']) + '&token=' + urllib.parse.quote_plus(token),
                                 lang=user['language'], username=user['username'])
-            return g.auth_texts.get('sent_password_recovery'), 200
+            return jsonify({'message':g.auth_texts.get('sent_password_recovery')}), 200
 
 
     @app.route('/auth/reset', methods=['POST'])
@@ -684,22 +683,19 @@ def routes(app, database):
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return g.auth_texts.get('repeat_match_password'), 400
 
-        # There's no need to trim or lowercase username, because it should come within a link prepared by the app itself and not inputted manually by the user.
-        token = DATABASE.get_token(body['username'])
-        if not token:
-            return g.auth_texts.get('token_invalid'), 403
-        if not check_password(body['token'], token['token']):
+        token = DATABASE.get_token(body['token'])
+        if not token or body['token'] != token.get('id'):
             return g.auth_texts.get('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
-        token = DATABASE.forget_token(body['username'])
+        token = DATABASE.forget_token(body['token'])
         DATABASE.update_user(body['username'], {'password': hashed})
         user = DATABASE.user_by_username(body['username'])
 
         if not is_testing_request(request):
             send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
 
-        return g.auth_texts.get('password_resetted'), 200
+        return jsonify({'message':g.auth_texts.get('password_resetted')}), 200
 
     # *** ADMIN ROUTES ***
 
@@ -819,8 +815,9 @@ def send_email_template(template, email, link='', lang="en", username=''):
         body_html = f.read()
 
     body_html = body_html.format(content=body)
+    body_plain = body
     if link:
-        body_plain = body.format(link='Please copy and paste this link into a new tab: ' + link)
+        body_plain = body_plain.format(link='Please copy and paste this link into a new tab: ' + link)
         body_html = body_html.format(link='<a href="' + link + '">Link</a>')
 
     send_email(email, subject, body_plain, body_html)

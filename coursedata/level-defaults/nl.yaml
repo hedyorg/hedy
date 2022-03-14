@@ -2,13 +2,10 @@
     intro_text: |
         Welkom bij Hedy! In Level 1 kun je de commando's `{print}`, `{ask}` en `{echo}` gebruiken.
 
-        Links in jouw scherm staan alle commando's van Level 1.
-
-        Druk op de blauwe knop en de code wordt alvast voor jou getypt!
+        Je kunt bijvoorbeeld tekst laten verschijnen in het beeld met het commando `{print}`. Zoals in het voorbeeld hiernaast.
+        Je kunt het voorbeeld uittesten door op de groene knop in de hoek te klikken.
 
         Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het linker programmeerveld.
-
-        Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.
 
     start_code: "{print} hallo wereld!"
     commands:
@@ -28,8 +25,8 @@
             {echo} dus je lievelingskleur is
     -   name: "{print} emojis"
         explanation: "print een emoji met `{print}`"
-        example: "Example: {print} 🙋‍ 🌍 ❗"
-        demo_code: "{print} 🙋 🌍 ❗"
+        example: "Example: {print} \U0001F64B‍ \U0001F30D ❗"
+        demo_code: "{print} \U0001F64B \U0001F30D ❗"
     -   name: "{forward}"
         explanation: "Een lijn trekken met `{forward}`."
         example: "Bijvoorbeeld: {forward} 100"
@@ -39,9 +36,12 @@
         example: "Bijvoorbeeld: {turn}"
         demo_code: |-
             {forward} 25
-            {turn} left
+            {turn} {left}
             {forward} 25
-            {turn} right
+            {turn} {right}
+    example_code: "## Voorbeeldcode\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+    intro_text_2: "\n Je kunt ook een vraag stellen met `{ask}` en het antwoord laten herhalen met `{echo}`.\n Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.\n"
+    example_code_2: "## Voorbeeldcode\n```\n{ask} What is your name?\n{echo} hello\n```\n"
 2:
     intro_text: |
         In level 2 leren we iets nieuws. Je kunt een woord een naam geven met `{is}`. Je kunt daarna in je code overal naam gebruiken. Dat wordt dan vervangen door Hedy. Zo:
@@ -92,14 +92,22 @@
     intro_text: |
         In level 3 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `{at} {random}` (je zegt: et ren-dom).
 
+    example_code: |
+        ## Voorbeeld Hedy Code
+
         ```
         dieren {is} hond, kat, kangoeroe
         {print} dieren {at} {random}
         ```
 
+    intro_text_2: |
         Je kunt in dit level ook dingen aan een lijstje toevoegen met het commando `{add}`.
         Daarnaast kun je dingen van het lijstje verwijderen. Dat doe je met `{remove}`.
-         ```
+
+    example_code_2: |
+
+        ## Voorbeeld Hedy Code
+        ```
         taarten {is} aardbei, chocolade
         {add} appel {to_list} taarten
         {remove} chocolade {from} taarten
@@ -209,6 +217,18 @@
         demo_code: |-
             antwoord {is} {ask} 'Hoe ver moet ik lopen?'
             {if} antwoord {is} ver {forward} 100 {else} {forward} 5
+    -   demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+        example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+        name: '{if}'
+        explanation: Make a choice with `{if}`
+    -   explanation: Make a choice with `{if}`
+        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
+        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+        name: '{if} with turtle'
+    -   explanation: Check elements with `{in}`
+        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        name: '{in}'
+        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
     start_code: "{print} '5 keer 5 is ' 5 * 5"
     intro_text: |
@@ -272,6 +292,14 @@
         example: "Bijvoorbeeld: {repeat} 3 {times} {forward} 10"
         demo_code: |-
             {repeat} 3 {times} {forward} 10
+    -   demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+        name: '{if}'
+        explanation: Make a choice with `{if}`
+        example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+    -   name: '{repeat} - turtle'
+        explanation: repeat a line of code with `{repeat}`.
+        example: 'Example: {repeat} 3 {times} {forward} 10'
+        demo_code: '{repeat} 3 {times} {forward} 10'
 8:
     start_code: |-
         {repeat} 5 {times}
@@ -308,6 +336,10 @@
             {repeat} 4 {times}
                 {turn} 90
                 {forward} 50
+    -   example: 'Example: draw a square'
+        name: '`{repeat}` with turtle'
+        explanation: '{repeat} multiple lines'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
     start_code: |-
         {repeat} 3 {times}
@@ -373,6 +405,10 @@
             dieren {is} hond, kat, papegaai
             {for} dier {in} dieren
               {print} dier
+    -   explanation: 'print all things in a list '
+        example: 'Example: {for} animal {in} animals'
+        demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
+        name: '{for} with a list'
 11:
     start_code: |-
         {for} i {in} {range} 1 {to} 10
@@ -388,6 +424,10 @@
             {for} i {in} {range} 1 {to} 10
                 {print} i
             {print} 'Wie niet weg is is gezien'
+    -   example: "Example: answer = {ask} 'What is 5 plus 5?'"
+        demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+        name: '{ask}'
+        explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
 12:
     start_code: |-
         {print} 'kommagetallen gaan met een punt!'
@@ -690,7 +730,7 @@
         example: "{if} kleur {is} groen:"
         demo_code: |-
             kleur = {ask} 'Wat vind jij de mooiste kleur?'
-            {if} kleur == groen:
+            {if} kleur == 'groen':
                 {print} 'Jouw kleur is groen'
             {else}:
                 {print} 'Jouw kleur is zeker niet groen'
