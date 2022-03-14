@@ -1,33 +1,6 @@
 {% extends "quiz/quiz.html" %}
 
 {% block question %}
-    <head>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script type=text/javascript>
-            function changeHint() {
-                const btn = document.getElementById("hint-button");
-                if (btn.innerText === "{{ ui.hint }}") {
-                    btn.innerText = document.getElementById('hidden-hint').textContent;
-                    btn.innerHTML = "<i>" + document.getElementById('hidden-hint').textContent + "</i>";
-                    $('#hint-button').css('background-color', 'rgba(198,246,213,0.51)');
-                    $('#hint-button').css('border', '2.5px solid #2d9068');
-                } else {
-                    btn.innerText = "{{ ui.hint }}";
-                    $('#hint-button').css('background-color', '#bee3f8');
-                    $('#hint-button').css('border', '2.5px solid #3182ce');
-                    $('#hint-button').css('outline', '#3182ce');
-                }
-            }
-            $(document).on("ready", function () {
-                $('.option-block').not('.incorrect-option').on("click", function () {
-                    // remove active class except for the selected button
-                    $('.option-block').not($(this)).removeClass('active');
-                    $(this).toggleClass('active');
-                });
-            });
-        </script>
-    </head>
-    <body>
         <p class="italic text-3xl font-bold text-blue-900 text-center font-slab">{{ question.question_text }}</p>
         {% if question.code and question.code!= "..." %}
             <pre><code class="ltr:ml-6 rtl:mr-6">{{ question.code }}</code></pre>
