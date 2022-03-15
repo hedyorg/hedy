@@ -1,5 +1,4 @@
 from flask_babel import gettext
-
 from website.auth import requires_login, current_user
 import utils
 import uuid
@@ -185,5 +184,7 @@ def routes(app, database, achievements):
         if not result or result['username'] != user['username']:
             return 'No such program!', 404
 
-        DATABASE.set_favourite_program(user['username'], body['id'])
-        return jsonify({'message': gettext(u'favourite_success')})
+        if DATABASE.set_favourite_program(user['username'], body['id']):
+            return jsonify({'message': gettext(u'favourite_success')})
+        else:
+            return "You can't set a favourite program without a public profile", 400

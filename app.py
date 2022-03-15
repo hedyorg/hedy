@@ -720,7 +720,7 @@ def achievements_page():
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
     achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
 
-    return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
+    return render_template('achievements.html', page_title=g.ui_texts.get('title_achievements'),
                            achievements=achievements, template_achievements=achievement_translations, current_page='my-profile')
 
 
@@ -772,7 +772,7 @@ def programs_page(user):
              'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'),
              'public': item.get('public')})
 
-    return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
+    return render_template('programs.html', programs=programs, page_title=g.ui_texts.get('title_programs'),
                            current_page='programs', from_user=from_user, adventures=adventures,
                            filtered_level=level, filtered_adventure=adventure, adventure_names=adventures_names,
                            public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
@@ -1009,21 +1009,21 @@ def default_landing_page():
 def signup_page():
     if current_user()['username']:
         return redirect('/my-profile')
-    return render_template('signup.html', page_title=hedyweb.get_page_title('signup'), current_page='login')
+    return render_template('signup.html', page_title=g.ui_texts.get('title_signup'), current_page='login')
 
 
 @app.route('/login', methods=['GET'])
 def login_page():
     if current_user()['username']:
         return redirect('/my-profile')
-    return render_template('login.html', page_title=hedyweb.get_page_title('login'), current_page='login')
+    return render_template('login.html', page_title=g.ui_texts.get('title_login'), current_page='login')
 
 
 @app.route('/recover', methods=['GET'])
 def recover_page():
     if current_user()['username']:
         return redirect('/my-profile')
-    return render_template('recover.html', page_title=hedyweb.get_page_title('recover'), current_page='login')
+    return render_template('recover.html', page_title=g.ui_texts.get('title_recover'), current_page='login')
 
 
 @app.route('/reset', methods=['GET'])
@@ -1039,7 +1039,7 @@ def reset_page():
 
     if not username or not token:
         return utils.error_page(error=403, ui_message='unauthorized')
-    return render_template('reset.html', page_title=hedyweb.get_page_title('reset'), reset_username=username, reset_token=token, current_page='login')
+    return render_template('reset.html', page_title=g.ui_texts.get('title_reset'), reset_username=username, reset_token=token, current_page='login')
 
 
 @app.route('/my-profile', methods=['GET'])
@@ -1048,7 +1048,7 @@ def profile_page(user):
     programs = DATABASE.public_programs_for_user(user['username'])
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
-    return render_template('profile.html', page_title=hedyweb.get_page_title('my-profile'), programs=programs,
+    return render_template('profile.html', page_title=g.ui_texts.get('title_my-profile'), programs=programs,
                            public_settings=public_profile_settings, current_page='my-profile')
 
 
@@ -1062,19 +1062,19 @@ def main_page(page):
 
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
+        return render_template('learn-more.html', page_title=g.ui_texts.get('title_learn-more'),
                                current_page='learn-more', content=learn_more_translations)
 
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('privacy.html', page_title=hedyweb.get_page_title(page),
+        return render_template('privacy.html', page_title=g.ui_texts.get('title_privacy'),
                                content=privacy_translations)
 
     user = current_user()
 
     if page == 'landing-page':
         if user['username']:
-            return render_template('landing-page.html', page_title=hedyweb.get_page_title(page), user=user['username'])
+            return render_template('landing-page.html', page_title=g.ui_texts.get('title_landing-page'), user=user['username'])
         else:
             return utils.error_page(error=403, ui_message='not_user')
 
@@ -1091,7 +1091,7 @@ def main_page(page):
                                    'level': adventure.get('level')})
 
             return render_template('for-teachers.html', current_page='my-profile',
-                                   page_title=hedyweb.get_page_title(page),
+                                   page_title=g.ui_texts.get('title_for-teacher'),
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
                                    teacher_adventures=adventures, welcome_teacher=welcome_teacher)
         else:
@@ -1102,7 +1102,7 @@ def main_page(page):
         abort(404)
 
     main_page_translations = requested_page.get_page_translations(g.lang)
-    return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
+    return render_template('main-page.html', page_title=g.ui_texts.get('title_start'),
                            current_page='start', content=main_page_translations)
 
 
@@ -1154,7 +1154,7 @@ def explore():
                            filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures=adventures,
-                           page_title=hedyweb.get_page_title('explore'),
+                           page_title=g.ui_texts.get('title_explore'),
                            current_page='explore')
 
 
@@ -1304,45 +1304,6 @@ def update_public_profile(user):
         #Todo TB -> Check if we require message or success on front-end
         return {'message': gettext(u'public_profile_updated'), 'achievement': achievement}, 200
     return {'message': gettext(u'public_profile_updated')}, 200
-
-@app.route('/translate/<source>/<target>')
-def translate_fromto(source, target):
-    source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml').to_dict()
-    source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml').to_dict()
-    source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml').to_dict()
-    source_keywords = YamlFile.for_file(f'coursedata/keywords/{source}.yaml').to_dict()
-
-    target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml').to_dict()
-    target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml').to_dict()
-    target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml').to_dict()
-    target_keywords = YamlFile.for_file(f'coursedata/keywords/{target}.yaml').to_dict()
-
-    files = []
-
-    files.append(translating.TranslatableFile(
-        'Levels',
-        f'level-defaults/{target}.yaml',
-        translating.struct_to_sections(source_levels, target_levels)))
-
-    files.append(translating.TranslatableFile(
-        'Messages',
-        f'texts/{target}.yaml',
-        translating.struct_to_sections(source_texts, target_texts)))
-
-    files.append(translating.TranslatableFile(
-        'Adventures',
-        f'adventures/{target}.yaml',
-        translating.struct_to_sections(source_adventures, target_adventures)))
-
-    files.append(translating.TranslatableFile(
-        'Keywords (make sure there are no duplicate translations of keywords)',
-        f'keywords/{target}.yaml',
-        translating.struct_to_sections(source_keywords, target_keywords)))
-
-    return render_template('translate-fromto.html',
-                           source_lang=source,
-                           target_lang=target,
-                           files=files)
 
 @app.route('/translating')
 def translating_page():

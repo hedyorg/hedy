@@ -786,6 +786,8 @@ export function submit_program (id: string, index: number) {
       showAchievements(response.achievements, false, "");
     }
     change_to_submitted(index);
+  }).fail(function(err) {
+      return modal.alert(err.responseText, 3000, true);
   });
 }
 

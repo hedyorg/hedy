@@ -1,6 +1,6 @@
 from collections import namedtuple
 from enum import Enum
-from flask import request, jsonify
+from flask import request, jsonify, g
 
 import hedyweb
 from flask_helpers import render_template
@@ -41,7 +41,7 @@ def routes(app, db):
 
         students = sorted(class_.get('students', []))
         return render_template('class-stats.html', class_info={'id': class_id, 'students': students},
-                               current_page='my-profile', page_title=hedyweb.get_page_title('class statistics'))
+                               current_page='my-profile', page_title=g.ui_texts.get('title_class statistics'))
 
     @app.route('/class-stats/<class_id>', methods=['GET'])
     @requires_login
