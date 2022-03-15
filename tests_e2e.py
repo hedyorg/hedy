@@ -479,7 +479,7 @@ class TestAuth(AuthHelper):
 
         for invalid_body in invalid_bodies:
             # THEN receive an invalid response code from the server
-            self.post_data('/auth/public_profile', invalid_body, expect_http_code=400)
+            self.post_data('profile', invalid_body, expect_http_code=400)
 
     def test_profile_modify(self):
         # GIVEN a new user
