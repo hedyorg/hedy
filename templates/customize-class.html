@@ -14,9 +14,6 @@
         </div>
             {{ page_translations.explanation_2|commonmark }}
     </div>
-    <div class="w-full text-center text-red-500 text-xl mt-4 font-bold {% if customizations %}hidden{% endif %}" id="customizations_alert">
-        {{ auth.no_customizations }}
-    </div>
     <div class="flex flex-col">
         <h3 class="px-4">{{ auth.select_adventures }}</h3>
         <div class="border border-gray-400 py-2 px-4 rounded-lg">
