@@ -618,10 +618,10 @@ class TestAuth(AuthHelper):
             self.post_data('auth/public_profile', invalid_body, expect_http_code=400)
 
     def test_public_profile(self):
-        # GIVEN a valid username and signup body
-        username = self.make_username()
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
 
-        # Create a program that is public
+        # Create a program that is public -> can be set as favourite on the public profile
         program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
         program_id = self.post_data('programs', program)['id']
         self.post_data('programs/share', {'id': program_id, 'public': True, 'error': False})
