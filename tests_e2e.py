@@ -617,7 +617,17 @@ class TestAuth(AuthHelper):
             # THEN receive an invalid response code from the server
             self.post_data('auth/public_profile', invalid_body, expect_http_code=400)
 
-    def test_public_profile(self):
+    def test_public_profile_without_favourite(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        public_profile = {'image': 9, 'personal_text': 'welcome to my profile!'}
+
+        # WHEN creating a new public profile
+        # THEN receive an OK response code from the server
+        self.post_data('auth/public_profile', public_profile, expect_http_code=200)
+
+    def test_public_profile_with_favourite(self):
         # GIVEN a logged in user
         self.given_user_is_logged_in()
 
