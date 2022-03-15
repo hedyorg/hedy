@@ -22,7 +22,7 @@
    <div id="public_profile" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
      <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.public_profile}}</h2>
      <h4 class="text-center {% if not public_settings %}hidden{% endif %}" id="public_profile_redirect">{{ auth.public_profile_visit }} <a href="/user/{{ username }}">{{ auth.public_profile_link }}</a></h4>
-     <form class="js-validated-form" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
+     <form class="js-validated-form" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
      <div class="flex flex-col">
          <h3 class="px-8 font-semibold">{{auth.profile_picture}}</h3>
          <input name="profile_picture" id="profile_picture" type=number class="hidden" required {% if public_settings.image %} value="{{ public_settings.image }}" {% endif %}>
