@@ -638,7 +638,7 @@ class TestAuth(AuthHelper):
 
         public_profile = {'image': '9', 'personal_text': 'welcome to my profile!', 'favourite_program': program_id}
 
-        # WHEN creating a new public profile
+        # WHEN creating a new public profile with favourite program
         # THEN receive an OK response code from the server
         self.post_data('auth/public_profile', public_profile, expect_http_code=200)
 
