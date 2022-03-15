@@ -1048,10 +1048,26 @@ class TestClasses(AuthHelper):
 
 class TestCustomizeClasses(AuthHelper):
     def test_invalid_customization(self):
-        return None
+        # GIVEN a user with teacher permissions
+        # (we create a new user to ensure that the user has no classes yet)
+        self.given_teacher_is_logged_in()
+
+        # WHEN creating a class
+        # THEN receive an OK response code with the server
+        self.post_data('class', {'name': 'class1'})
+
+        # Todo TB -> Add invalid bodies for customizations
 
     def test_valid_customization(self):
-        return None
+        # GIVEN a user with teacher permissions
+        # (we create a new user to ensure that the user has no classes yet)
+        self.given_teacher_is_logged_in()
+
+        # WHEN creating a class
+        # THEN receive an OK response code with the server
+        self.post_data('class', {'name': 'class1'})
+
+        # Todo TB -> Add valid body for customizations
 
     def test_remove_customization(self):
         return None
