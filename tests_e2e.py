@@ -477,7 +477,7 @@ class TestAuth(AuthHelper):
 
         for invalid_body in invalid_bodies:
             # THEN receive an invalid response code from the server
-            self.post_data('profile', invalid_body, expect_http_code=400)
+            self.post_data('/auth/public_profile', invalid_body, expect_http_code=400)
 
     def test_profile_modify(self):
         # GIVEN a new user
@@ -589,6 +589,38 @@ class TestAuth(AuthHelper):
 
         # FINALLY update user's password and attempt login with new password
         self.user['password'] = new_password
+
+    def test_invalid_public_profile(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        # WHEN attempting to create a public profile with invalid bodies
+        invalid_bodies = [
+            '',
+            [],
+            {},
+            {'image': 123456},
+            {'image': '123'},
+            {'image': '123', 'personal_text': 123},
+            {'image': '123', 'personal_text': 123},
+            {'image': '123', 'personal_text': 123, 'favourite_program': 123},
+            {'image': '123', 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
+            {'image': 15, 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
+            {'image': 15, 'personal_text': 'Welcome to my profile!', 'favourite_program': "abcdefghi"}
+        ]
+        for invalid_body in invalid_bodies:
+            # THEN receive an invalid response code from the server
+            self.post_data('auth/public_profile', invalid_body, expect_http_code=400)
+
+    def test_public_profile(self):
+        # GIVEN a valid username and signup body
+        username = self.make_username()
+        public_profile = {'image': 9, 'personal_text': 'welcome to my profile!', 'favourite_program': 'abcdefgh'}
+
+        # WHEN signing up a new user
+        # THEN receive an OK response code from the server
+        self.post_data('auth/public_profile', public_profile, expect_http_code=200)
+
 
 class TestProgram(AuthHelper):
     def test_invalid_get_programs(self):
