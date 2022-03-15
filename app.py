@@ -1310,8 +1310,12 @@ def update_public_profile(user):
 
     # Verify that the set favourite program is actually from the user (and public)!
     if 'favourite_program' in body:
+        print("We add a favourite program!")
+        print(body)
         program = DATABASE.program_by_id(body.get('favourite_program'))
+        print(program)
         if not program or program.get('username') != user['username'] or not program.get('public'):
+            print("Do we return this?")
             return g.auth_texts.get('favourite_program_invalid'), 400
 
     achievement = None
