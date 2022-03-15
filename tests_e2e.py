@@ -609,9 +609,9 @@ class TestAuth(AuthHelper):
             {'image': '123', 'personal_text': 123},
             {'image': '123', 'personal_text': 123, 'favourite_program': 123},
             {'image': '123', 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
-            {'image': 15, 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
-            {'image': 15, 'personal_text': 'Welcome to my profile!', 'favourite_program': "abcdefghi"},
-            {'image': 15, 'personal_text': 'Welcome to my profile!', 'favourite_program': program_id},
+            {'image': '5', 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
+            {'image': '5', 'personal_text': 'Welcome to my profile!', 'favourite_program': "abcdefghi"},
+            {'image': '5', 'personal_text': 'Welcome to my profile!', 'favourite_program': program_id},
         ]
         for invalid_body in invalid_bodies:
             # THEN receive an invalid response code from the server
