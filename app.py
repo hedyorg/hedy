@@ -720,7 +720,7 @@ def achievements_page():
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
     achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
 
-    return render_template('achievements.html', page_title=g.ui_texts.get('title_achievements'),
+    return render_template('achievements.html', page_title=gettext(u'title_achievements'),
                            achievements=achievements, template_achievements=achievement_translations, current_page='my-profile')
 
 
@@ -772,7 +772,7 @@ def programs_page(user):
              'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'),
              'public': item.get('public')})
 
-    return render_template('programs.html', programs=programs, page_title=g.ui_texts.get('title_programs'),
+    return render_template('programs.html', programs=programs, page_title=gettext(u'title_programs'),
                            current_page='programs', from_user=from_user, adventures=adventures,
                            filtered_level=level, filtered_adventure=adventure, adventure_names=adventures_names,
                            public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
@@ -1009,21 +1009,21 @@ def default_landing_page():
 def signup_page():
     if current_user()['username']:
         return redirect('/my-profile')
-    return render_template('signup.html', page_title=g.ui_texts.get('title_signup'), current_page='login')
+    return render_template('signup.html', page_title=gettext(u'title_signup'), current_page='login')
 
 
 @app.route('/login', methods=['GET'])
 def login_page():
     if current_user()['username']:
         return redirect('/my-profile')
-    return render_template('login.html', page_title=g.ui_texts.get('title_login'), current_page='login')
+    return render_template('login.html', page_title=gettext(u'title_login'), current_page='login')
 
 
 @app.route('/recover', methods=['GET'])
 def recover_page():
     if current_user()['username']:
         return redirect('/my-profile')
-    return render_template('recover.html', page_title=g.ui_texts.get('title_recover'), current_page='login')
+    return render_template('recover.html', page_title=gettext(u'title_recover'), current_page='login')
 
 
 @app.route('/reset', methods=['GET'])
@@ -1039,7 +1039,7 @@ def reset_page():
 
     if not username or not token:
         return utils.error_page(error=403, ui_message='unauthorized')
-    return render_template('reset.html', page_title=g.ui_texts.get('title_reset'), reset_username=username, reset_token=token, current_page='login')
+    return render_template('reset.html', page_title=gettext(u'title_reset'), reset_username=username, reset_token=token, current_page='login')
 
 
 @app.route('/my-profile', methods=['GET'])
@@ -1048,7 +1048,7 @@ def profile_page(user):
     programs = DATABASE.public_programs_for_user(user['username'])
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
-    return render_template('profile.html', page_title=g.ui_texts.get('title_my-profile'), programs=programs,
+    return render_template('profile.html', page_title=gettext(u'title_my-profile'), programs=programs,
                            public_settings=public_profile_settings, current_page='my-profile')
 
 
@@ -1062,19 +1062,19 @@ def main_page(page):
 
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('learn-more.html', page_title=g.ui_texts.get('title_learn-more'),
+        return render_template('learn-more.html', page_title=gettext(u'title_learn-more'),
                                current_page='learn-more', content=learn_more_translations)
 
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('privacy.html', page_title=g.ui_texts.get('title_privacy'),
+        return render_template('privacy.html', page_title=gettext(u'title_privacy'),
                                content=privacy_translations)
 
     user = current_user()
 
     if page == 'landing-page':
         if user['username']:
-            return render_template('landing-page.html', page_title=g.ui_texts.get('title_landing-page'), user=user['username'])
+            return render_template('landing-page.html', page_title=gettext(u'title_landing-page'), user=user['username'])
         else:
             return utils.error_page(error=403, ui_message='not_user')
 
@@ -1091,7 +1091,7 @@ def main_page(page):
                                    'level': adventure.get('level')})
 
             return render_template('for-teachers.html', current_page='my-profile',
-                                   page_title=g.ui_texts.get('title_for-teacher'),
+                                   page_title=gettext(u'title_for-teacher'),
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
                                    teacher_adventures=adventures, welcome_teacher=welcome_teacher)
         else:
@@ -1102,7 +1102,7 @@ def main_page(page):
         abort(404)
 
     main_page_translations = requested_page.get_page_translations(g.lang)
-    return render_template('main-page.html', page_title=g.ui_texts.get('title_start'),
+    return render_template('main-page.html', page_title=gettext(u'title_start'),
                            current_page='start', content=main_page_translations)
 
 
@@ -1154,7 +1154,7 @@ def explore():
                            filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures=adventures,
-                           page_title=g.ui_texts.get('title_explore'),
+                           page_title=gettext(u'title_explore'),
                            current_page='explore')
 
 
