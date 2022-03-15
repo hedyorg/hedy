@@ -773,7 +773,6 @@ function change_to_submitted (index: number) {
 }
 
 export function submit_program (id: string, index: number) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   $.ajax({
     type: 'POST',
     url: '/programs/submit',
@@ -787,6 +786,8 @@ export function submit_program (id: string, index: number) {
       showAchievements(response.achievements, false, "");
     }
     change_to_submitted(index);
+  }).fail(function(err) {
+      return modal.alert(err.responseText, 3000, true);
   });
 }
 
