@@ -475,6 +475,8 @@ class TestAuth(AuthHelper):
             {'language': 123},
         ]
 
+        # Todo TB -> Add invalid bodies for keyword languages as well
+
         for invalid_body in invalid_bodies:
             # THEN receive an invalid response code from the server
             self.post_data('/auth/public_profile', invalid_body, expect_http_code=400)
@@ -490,6 +492,8 @@ class TestAuth(AuthHelper):
            'country': 'NL',
            'gender': 'o'
         }
+
+        # Todo TB -> Add valid bodies for language and keyword language as well
 
         for key in profile_changes:
             body = {'email': self.user['email'], 'language': self.user['language'], 'keyword_language': self.user['keyword_language']}
@@ -1041,6 +1045,27 @@ class TestClasses(AuthHelper):
         # THEN the class should contain a student with valid fields
         self.assertEqual(len(Class_data['students']), 1)
 
+
+class TestCustomizeClasses(AuthHelper):
+    def test_invalid_customization(self):
+        return None
+
+    def test_valid_customization(self):
+        return None
+
+    def test_remove_customization(self):
+        return None
+
+
+class TestCustomAdventures(AuthHelper):
+    def test_invalid_create_adventure(self):
+        return None
+
+    def test_create_adventure(self):
+        return None
+
+    def test_remove_adventure(self):
+        return None
 
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
 
