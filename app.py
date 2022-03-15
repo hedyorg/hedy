@@ -1305,9 +1305,14 @@ def update_public_profile(user):
         return g.auth_texts.get('image_invalid'), 400
     if not isinstance(body.get('personal_text'), str):
         return g.auth_texts.get('personal_text_invalid'), 400
-    # Todo TB -> We have to verify if the given favourite_program does actually exist for the user
     if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
         return g.auth_texts.get('favourite_program_invalid'), 400
+
+    # Verify that the set favourite program is actually from the user (and public)!
+    if 'favourite_program' in body:
+        program = DATABASE.program_by_id(body.get('favourite_program'))
+        if not program or program.get('username') != user['username'] or not program.get('public'):
+            return g.auth_texts.get('favourite_program_invalid'), 400
 
     achievement = None
     current_profile = DATABASE.get_public_profile_settings(user['username'])
