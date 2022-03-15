@@ -594,6 +594,10 @@ class TestAuth(AuthHelper):
         # GIVEN a logged in user
         self.given_user_is_logged_in()
 
+        # Create a program that is not public
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program_id = self.post_data('programs', program)['id']
+
         # WHEN attempting to create a public profile with invalid bodies
         invalid_bodies = [
             '',
@@ -606,7 +610,8 @@ class TestAuth(AuthHelper):
             {'image': '123', 'personal_text': 123, 'favourite_program': 123},
             {'image': '123', 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
             {'image': 15, 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
-            {'image': 15, 'personal_text': 'Welcome to my profile!', 'favourite_program': "abcdefghi"}
+            {'image': 15, 'personal_text': 'Welcome to my profile!', 'favourite_program': "abcdefghi"},
+            {'image': 15, 'personal_text': 'Welcome to my profile!', 'favourite_program': program_id},
         ]
         for invalid_body in invalid_bodies:
             # THEN receive an invalid response code from the server
@@ -615,7 +620,13 @@ class TestAuth(AuthHelper):
     def test_public_profile(self):
         # GIVEN a valid username and signup body
         username = self.make_username()
-        public_profile = {'image': 9, 'personal_text': 'welcome to my profile!', 'favourite_program': 'abcdefgh'}
+
+        # Create a program that is public
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program_id = self.post_data('programs', program)['id']
+        self.post_data('programs/share', {'id': program_id, 'public': True, 'error': False})
+
+        public_profile = {'image': 9, 'personal_text': 'welcome to my profile!', 'favourite_program': program_id}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server
