@@ -1177,7 +1177,7 @@ class TestCustomAdventures(AuthHelper):
         self.post_data('for-teachers/create_adventure', {}, expect_http_code=403)
 
     def test_invalid_create_adventure(self):
-        # GIVEN a new user without teacher permissions
+        # GIVEN a new teacher
         self.given_fresh_teacher_is_logged_in()
 
         # WHEN attempting to create an invalid adventure
@@ -1189,7 +1189,7 @@ class TestCustomAdventures(AuthHelper):
         ]
 
         for invalid_body in invalid_bodies:
-            self.post_data('for-teachers/create-adventure', invalid_body, expect_http_code=400)
+            self.post_data('for-teachers/create_adventure', invalid_body, expect_http_code=400)
 
         # WHEN attempting to create an adventure that already exists
         # THEN receive an 400 error from the server
@@ -1197,12 +1197,12 @@ class TestCustomAdventures(AuthHelper):
         self.post_data('for-teachers/create-adventure', {'name': 'test_adventure'}, expect_http_code=400)
 
     def test_create_adventure(self):
-        # GIVEN a new user without teacher permissions
+        # GIVEN a new teacher
         self.given_fresh_teacher_is_logged_in()
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
-        self.post_data('for-teachers/create-adventure', {'name': 'test_adventure'}, expect_http_code=200)
+        self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200)
 
     def test_invalid_view_adventure(self):
         return None
