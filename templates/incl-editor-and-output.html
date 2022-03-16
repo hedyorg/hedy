@@ -106,17 +106,19 @@
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-4">
-      <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="cursor-pointer hidden h-28 absolute ltr:ml-96 rtl:mr-96 -mt-6" id="repair_button">
-      <div class="flex justify-between">
+      <div class="flex justify-between items-start h-12 overflow-visible">
         <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{ui.run_code_button}} </button>
         {% if show_edit_button %}
-            <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{ui.edit_code_button}}</a>
+            <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn">{{ui.edit_code_button}}</button>
+        {% else %}
+            <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="hidden h-28 -mt-2" id="repair_button">
         {% endif %}
       </div>
-      <div id="speak_container" class="hidden mt-4">
-        <label for="speak_dropdown">{{ui.read_code_label}} </label><select id="speak_dropdown" class="p-2 border-grey border">
-          <option value="">🤫</option>
-        </select>
+      <div id="speak_container" class="hidden mt-4 flex flex-row items-center">
+        <label for="speak_dropdown" class="ltr:mr-2 rtl:ml-2">{{ui.read_code_label}}:</label>
+          <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
+            <option value="">🤫</option>
+          </select>
       </div>
     </div>
     <div class="order-5">
