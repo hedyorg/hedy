@@ -508,9 +508,7 @@ class TestAuth(AuthHelper):
         profile_changes = {
            'birth_year': 1989,
            'country': 'NL',
-           'gender': 'o',
-           'language': 'en',
-           'keyword_language': 'en',
+           'gender': 'o'
         }
 
         body = {
@@ -519,15 +517,12 @@ class TestAuth(AuthHelper):
             'keyword_language': self.user['keyword_language']
         }
         for key in profile_changes:
-            print(body)
             body[key] = profile_changes[key]
             # THEN receive an OK response code from the server
             self.post_data('profile', body)
 
             # WHEN retrieving the profile
             profile = self.get_data('profile')
-            print(profile_changes)
-            print(profile)
             # THEN confirm that our modification has been stored by the server and returned in the latest version of the profile
             self.assertEqual(profile[key], profile_changes[key])
 
