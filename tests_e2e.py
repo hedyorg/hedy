@@ -176,13 +176,13 @@ class AuthHelper(unittest.TestCase):
 
         return response['headers'] if return_headers else response['body']
 
-    def delete_data(self, path, body, expect_http_code=200, no_cookie=False, return_headers=False):
+    def delete_data(self, path, expect_http_code=200, no_cookie=False, return_headers=False):
         cookies = self.user_cookies[self.username] if self.username and not no_cookie else None
 
         method = 'delete'
-        response = request(method, path, body=body, cookies=cookies)
+        response = request(method, path, cookies=cookies)
         self.assertEqual(response['code'], expect_http_code,
-                         f'While {method}ing {body} to {path} (user: {self.username})')
+                         f'While {method}ing {path} (user: {self.username})')
 
         return response['headers'] if return_headers else response['body']
 
@@ -1164,7 +1164,7 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN deleting class customizations
         # THEN receive an OK response code with the server
-        self.delete_data('for-teachers/customize-class/' + class_id, body, expect_http_code=200)
+        self.delete_data('for-teachers/customize-class/' + class_id, expect_http_code=200)
 
 
 class TestCustomAdventures(AuthHelper):
@@ -1241,6 +1241,14 @@ class TestCustomAdventures(AuthHelper):
         # GIVEN a user with teacher permissions
         # (we create a new user to ensure that the user has no classes yet)
         self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to create a valid adventure
+        # THEN receive an OK response from the server
+        body = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200)
+
+        # WHEN attempting to remove the adventure
+        # THEN receive an OK response from the server
+        self.delete_data('for-teachers/customize-adventure/' + body.get('id', ""), ex)
 
 
 
