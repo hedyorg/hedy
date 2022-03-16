@@ -1193,8 +1193,8 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create an adventure that already exists
         # THEN receive an 400 error from the server
-        self.post_data('for-teachers/create-adventure', {'name': 'test_adventure'}, expect_http_code=200)
-        self.post_data('for-teachers/create-adventure', {'name': 'test_adventure'}, expect_http_code=400)
+        self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200)
+        self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=400)
 
     def test_create_adventure(self):
         # GIVEN a new teacher
