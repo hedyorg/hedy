@@ -560,7 +560,7 @@ class TestAuth(AuthHelper):
         body = {
             'email': self.user['email'],
             'language': 'nl',
-            'keyword_language': self.user['keyword_language']
+            'keyword_language': 'nl'
         }
         # THEN receive a valid response code from the server
         self.post_data('profile', body, expect_http_code=200)
@@ -569,6 +569,26 @@ class TestAuth(AuthHelper):
         profile = self.get_data('profile')
         # THEN verify that the language is successfully changed
         self.assertEqual(profile['language'], body['language'])
+
+    def test_invalid_keyword_language(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        # WHEN trying to update the profile with an invalid keyword language
+        invalid_keyword_language = [
+            'nl',
+            123,
+            'panda'
+        ]
+
+        body = {
+            'email': self.user['email'],
+            'language': 'en'
+        }
+        for invalid_lang in invalid_keyword_language:
+            body['keyword_language'] = invalid_lang
+            # THEN receive an invalid response code from the server
+            self.post_data('profile', body, expect_http_code=400)
 
 
     def test_invalid_recover_password(self):
