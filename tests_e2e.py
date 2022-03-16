@@ -252,7 +252,7 @@ class TestPages(AuthHelper):
         self.get_data('/my-achievements')
 
     def test_get_profile_page(self):
-        # WHEN attempting to get the achievements page
+        # WHEN attempting to get the profile page
         # THEN receive an OK response code from the server
         self.given_fresh_user_is_logged_in()
         self.get_data('/my-profile')
