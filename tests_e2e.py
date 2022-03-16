@@ -1083,7 +1083,8 @@ class TestCustomizeClasses(AuthHelper):
         self.post_data('class', {'name': 'class1'})
         class_id = self.get_data('classes')[0].get('id')
 
-        # WHEN attempting to create an invalid program
+        # WHEN attempting to create an invalid customization
+        # Todo TB -> These bodies should be updated to align with customization
         invalid_bodies = [
             '',
             [],
