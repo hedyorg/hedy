@@ -1061,6 +1061,17 @@ class TestClasses(AuthHelper):
 
 
 class TestCustomizeClasses(AuthHelper):
+    def test_not_allowed_customization(self):
+        # GIVEN a user without teacher permissions
+        self.given_user_is_logged_in()
+
+        # We create a fake class_id as the access should be denied immediately for not being a teacher
+        class_id = "123"
+
+        # WHEN customizing a class without being a teacher
+        # THEN receive a forbidden response code from the server
+        self.post_data('/for-teachers/customize-class/' + class_id, expect_http_code=403)
+
     def test_invalid_customization(self):
         # GIVEN a user with teacher permissions
         # (we create a new user to ensure that the user has no classes yet)
@@ -1068,9 +1079,31 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN creating a class
         # THEN receive an OK response code with the server
+        # AND retrieve the class_id from the first class of your classes
         self.post_data('class', {'name': 'class1'})
+        class_id = self.get_data('classes')[0].get('id')
 
-        # Todo TB -> Add invalid bodies for customizations
+        # WHEN attempting to create an invalid program
+        invalid_bodies = [
+            '',
+            [],
+            {},
+            {'code': 1},
+            {'code': ['1']},
+            {'code': 'hello world'},
+            {'code': 'hello world', 'name': 1},
+            {'code': 'hello world', 'name': 'program 1'},
+            {'code': 'hello world', 'name': 'program 1', 'level': '1'},
+            {'code': 'hello world', 'name': 'program 1', 'level': 1, 'adventure_name': 1},
+        ]
+
+        for invalid_body in invalid_bodies:
+            # THEN receive an invalid response code from the server
+            self.post_data('/for-teachers/customize-class/' + class_id, invalid_body, expect_http_code=400)
+
+        # WHEN customizing a class that doesn't exist
+        # THEN receive a not found response code from the server
+        self.post_data('/for-teachers/customize-class/123' + class_id, expect_http_code=404)
 
     def test_valid_customization(self):
         # GIVEN a user with teacher permissions
