@@ -508,11 +508,17 @@ class TestAuth(AuthHelper):
         profile_changes = {
            'birth_year': 1989,
            'country': 'NL',
-           'gender': 'o'
+           'gender': 'o',
+           'language': 'en',
+           'keyword_language': 'en',
         }
 
         for key in profile_changes:
-            body = {'email': self.user['email'], 'language': self.user['language'], 'keyword_language': self.user['keyword_language']}
+            body = {
+                'email': self.user['email'],
+                'language': self.user['language'],
+                'keyword_language': self.user['keyword_language']
+            }
             body[key] = profile_changes[key]
             # THEN receive an OK response code from the server
             self.post_data('profile', body)
@@ -534,6 +540,7 @@ class TestAuth(AuthHelper):
         # FINALLY update the email & email verification token on user
         self.user['email'] = new_email
         self.user['verify_token'] = body['token']
+
 
     def test_invalid_recover_password(self):
         # GIVEN an existing user
