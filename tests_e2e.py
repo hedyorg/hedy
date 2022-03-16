@@ -1229,7 +1229,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to view the adventure using the id from the returned body
         # THEN receive an OK response with the server
-        self.get_data('for-teachers/customize-adventure/view/' + body.get('id', ""), expect_http_code=200)
+        self.get_data('for-teachers/customize-adventure/view/' + body.get('id', ""))
 
     def test_invalid_update_adventure(self):
         return None
