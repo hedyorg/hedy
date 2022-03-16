@@ -1168,8 +1168,6 @@ class TestCustomizeClasses(AuthHelper):
         # THEN receive an OK response code with the server
         self.delete_data('for-teachers/' + class_id, body, expect_http_code=200)
 
-        return None
-
 
 class TestCustomAdventures(AuthHelper):
     def test_invalid_create_adventure(self):
