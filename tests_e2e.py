@@ -208,6 +208,27 @@ class TestPages(AuthHelper):
         # THEN receive an OK response code from the server
         self.get_data('/')
 
+    def test_get_code_page(self):
+        # WHEN attempting to get the code page
+        # THEN receive an OK response code from the server
+        self.get_data('/hedy')
+
+    def test_get_explore_page(self):
+        # WHEN attempting to get the explore page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/explore')
+
+    def test_get_learn_more_page(self):
+        # WHEN attempting to get the learn-more page
+        # THEN receive an OK response code from the server
+        self.get_data('/learn-more')
+
+    def test_get_login_page(self):
+        # WHEN attempting to get the login page
+        # THEN receive an OK response code from the server
+        self.get_data('/login')
+
     def test_get_admin_page(self):
         # WHEN attempting to get the admin page
         # THEN receive an OK response code from the server
