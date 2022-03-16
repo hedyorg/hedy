@@ -1255,6 +1255,7 @@ class TestCustomAdventures(AuthHelper):
 
         # THEN receive a 400 error from the server
         for invalid_body in invalid_bodies:
+            invalid_body['id'] = id
             self.post_data('for-teachers/customize-adventure', invalid_body, expect_http_code=400)
 
         # WHEN attempting to update a non-existing adventure
