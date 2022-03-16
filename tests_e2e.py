@@ -1065,7 +1065,7 @@ class TestCustomizeClasses(AuthHelper):
         # GIVEN a user without teacher permissions
         self.given_user_is_logged_in()
 
-        # We create a fake class_id as the access should be denied immediately for not being a teacher
+        # We create a fake class_id as the access should be denied before checking if the class exists
         class_id = "123"
 
         # WHEN customizing a class without being a teacher
