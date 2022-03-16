@@ -1535,6 +1535,8 @@ class ConvertToPython_12(ConvertToPython_11):
         if isinstance(argument, Tree):
             return f'{str(argument.children[0])}'
         else:
+            if "'" in argument:  # if quoted string, use " instead of ' to avoid f-str illegal syntax
+                return '"' + argument.replace("'", '').replace('"', '') + '"'
             return f'{argument}'
 
     def ask(self, args):
@@ -1550,16 +1552,6 @@ class ConvertToPython_12(ConvertToPython_11):
             {var} = float({var})
           except ValueError:
             pass""")  # no number? leave as string
-
-    def process_calculation(self, args, operator):
-        # arguments of a sum are either a token or a
-        # tree resulting from earlier processing
-        # for trees we need to grap the inner string
-        # for tokens we simply return the argument (no more casting to str needed)
-
-        args = [self.process_token_or_tree(a) for a in args]
-
-        return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
 
     def text_in_quotes(self, args):
         text = args[0]
