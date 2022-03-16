@@ -425,7 +425,7 @@ def routes(app, database, achievements):
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
         adventure['content'] = adventure['content'].replace("<pre>", "<pre level='" + str(adventure['level']) + "'>")
         return render_template('view-adventure.html', adventure=adventure,
-                               page_title=hedyweb.get_page_title('view adventure'), current_page='my-profile')
+                               page_title=g.ui_texts.get('title_view-adventure'), current_page='my-profile')
 
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['GET'])
     @requires_login
