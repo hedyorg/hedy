@@ -424,7 +424,6 @@ def routes(app, database, achievements):
 
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
         adventure['content'] = adventure['content'].replace("<pre>", "<pre level='" + str(adventure['level']) + "'>")
-        print(adventure['content'])
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=hedyweb.get_page_title('view adventure'), current_page='my-profile')
 

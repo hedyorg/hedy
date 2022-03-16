@@ -1205,10 +1205,31 @@ class TestCustomAdventures(AuthHelper):
         self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200)
 
     def test_invalid_view_adventure(self):
-        return None
+        # GIVEN a new user
+        self.given_fresh_user_is_logged_in()
+
+        # WHEN attempting to view a custom adventure
+        # THEN receive a 403 error from the server
+        self.get_data('for-teachers/customize-adventure/view/123', expect_http_code=403)
+
+        # GIVEN a new teacher
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to view a custom adventure that doesn't exist
+        # THEN receive a 404 error from the server
+        self.get_data('for-teachers/customize-adventure/view/123', expect_http_code=404)
 
     def test_valid_view_adventure(self):
-        return None
+        # GIVEN a new teacher
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to create a valid adventure
+        # THEN receive an OK response with the server
+        body = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200)
+
+        # WHEN attempting to view the adventure using the id from the returned body
+        # THEN receive an OK response with the server
+        self.get_data('for-teachers/customize-adventure/view/' + body.get('id', ""), expect_http_code=200)
 
     def test_invalid_update_adventure(self):
         return None
