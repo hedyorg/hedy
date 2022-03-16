@@ -1119,7 +1119,19 @@ class TestCustomizeClasses(AuthHelper):
 
         valid_bodies = [
             {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []},
-            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}, 'teacher_adventures': [], 'other_settings': []}
+            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}, 'teacher_adventures': [], 'other_settings': []},
+            {'levels': ['1', '2', '3'], 'opening_dates': {'1': '', '2': '', '3': ''},
+             'adventures': {'story': [], 'parrot': [], 'songs': [], 'turtle': [], 'dishes': [], 'dice': [], 'rock': [],
+                            'calculator': [], 'restaurant': [], 'fortune': [], 'haunted': [], 'piggybank': [],
+                            'quizmaster': [], 'language': [], 'next': [], 'end': []}, 'teacher_adventures': [],
+             'other_settings': []},
+            {'levels': ['1', '2', '3'], 'opening_dates': {'1': '', '2': '', '3': ''},
+             'adventures': {'story': ['1', '2', '3'], 'parrot': ['1', '2', '3'], 'songs': [], 'turtle': ['1', '2', '3'],
+                            'dishes': ['3'], 'dice': ['3'], 'rock': ['1', '2', '3'], 'calculator': [],
+                            'restaurant': ['1', '2', '3'], 'fortune': ['1', '3'], 'haunted': ['1', '2', '3'],
+                            'piggybank': [], 'quizmaster': [], 'language': [], 'next': ['1', '2', '3'],
+                            'end': ['1', '2', '3']}, 'teacher_adventures': [],
+             'other_settings': ['developers_mode', 'hide_cheatsheet']}
         ]
 
         for valid_body in valid_bodies:
