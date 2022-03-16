@@ -590,6 +590,18 @@ class TestAuth(AuthHelper):
             # THEN receive an invalid response code from the server
             self.post_data('profile', body, expect_http_code=400)
 
+    def test_valid_keyword_language(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        # WHEN trying to update the profile with a valid keyword language
+        body = {
+            'email': self.user['email'],
+            'language': 'nl',
+            'keyword_language': 'nl'
+        }
+        # THEN receive a valid response code from the server
+        self.post_data('profile', body, expect_http_code=200)
 
     def test_invalid_recover_password(self):
         # GIVEN an existing user
