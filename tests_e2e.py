@@ -646,6 +646,20 @@ class TestAuth(AuthHelper):
         # THEN receive an OK response code from the server
         self.post_data('auth/public_profile', public_profile, expect_http_code=200)
 
+    def test_destroy_public_profile(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        public_profile = {'image': '9', 'personal_text': 'welcome to my profile!'}
+
+        # WHEN creating a new public profile with favourite program
+        # THEN receive an OK response code from the server
+        self.post_data('auth/public_profile', public_profile, expect_http_code=200)
+
+        # WHEN destroying the public profile
+        # THEN receive an OK response from the server
+        self.post_data('auth/destroy_public', public_profile, expect_http_code=200)
+
 
 class TestProgram(AuthHelper):
     def test_invalid_get_programs(self):
