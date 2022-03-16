@@ -176,5 +176,7 @@ def routes(app, database, achievements):
         if not result or result['username'] != user['username']:
             return 'No such program!', 404
 
-        DATABASE.set_favourite_program(user['username'], body['id'])
-        return jsonify({})
+        if DATABASE.set_favourite_program(user['username'], body['id']):
+            return jsonify({})
+        else:
+            return "You can't set a favourite program without a public profile", 400
