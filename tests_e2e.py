@@ -1225,11 +1225,11 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
-        id = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200).get("id")
+        adventure_id = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200).get("id")
 
         # WHEN attempting to view the adventure using the id from the returned body
         # THEN receive an OK response with the server
-        self.get_data('for-teachers/customize-adventure/view/' + id)
+        self.get_data('for-teachers/customize-adventure/view/' + adventure_id)
 
     def test_invalid_update_adventure(self):
         # GIVEN a new teacher
@@ -1237,7 +1237,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
-        id = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200).get("id")
+        adventure_id = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200).get("id")
 
         # WHEN attempting to updating an adventure with invalid data
         invalid_bodies = [
@@ -1255,7 +1255,7 @@ class TestCustomAdventures(AuthHelper):
 
         # THEN receive a 400 error from the server
         for invalid_body in invalid_bodies:
-            invalid_body['id'] = id
+            invalid_body['id'] = adventure_id
             self.post_data('for-teachers/customize-adventure', invalid_body, expect_http_code=400)
 
         # WHEN attempting to update a non-existing adventure
