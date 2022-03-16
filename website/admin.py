@@ -66,7 +66,7 @@ def routes(app, database):
             user['index'] = counter
             counter = counter + 1
 
-        return render_template('admin/admin-users.html', users=userdata, page_title=hedyweb.get_page_title('admin'),
+        return render_template('admin/admin-users.html', users=userdata, page_title=g.ui_texts.get('title_admin'),
                                filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
                                program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
