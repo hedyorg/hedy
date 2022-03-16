@@ -19,7 +19,7 @@
               {% endif %}
             {% endfor %}
             {% if specific_adventure %}
-                <h2 class="z-10 my-0 ml-auto pt-6 text-red-500 text-xl">{{ auth.specific_adventure_mode|replace("{adventure}", adventures[0].name) }}</h2>
+                <h2 class="z-10 my-0 ml-auto pt-8 text-red-500 text-base">{{ auth.specific_adventure_mode|replace("{adventure}", adventures[0].name) }}</h2>
             {% endif %}
         </div>
       {# PANES #}
