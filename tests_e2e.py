@@ -478,16 +478,24 @@ class TestAuth(AuthHelper):
             {'email': 'foobar'},
             {'birth_year': 'a'},
             {'birth_year': 20},
-            {'country': 'Netherlands'},
             {'gender': 0},
             {'gender': 'a'},
             {'language': True},
             {'language': 123},
+            {'keyword_language': True},
+            {'keyword_language': True},
         ]
 
-        # Todo TB -> Add invalid bodies for keyword languages as well
-
         for invalid_body in invalid_bodies:
+            # Create a valid body that we overwrite with invalid values
+            if isinstance(invalid_body, dict):
+                body = {
+                    'email': self.user['email'],
+                    'language': self.user['language'],
+                    'keyword_language': self.user['keyword_language']
+                }
+                body.update(invalid_body)
+                invalid_body = body
             # THEN receive an invalid response code from the server
             self.post_data('profile', invalid_body, expect_http_code=400)
 
@@ -502,8 +510,6 @@ class TestAuth(AuthHelper):
            'country': 'NL',
            'gender': 'o'
         }
-
-        # Todo TB -> Add valid bodies for language and keyword language as well
 
         for key in profile_changes:
             body = {'email': self.user['email'], 'language': self.user['language'], 'keyword_language': self.user['keyword_language']}
