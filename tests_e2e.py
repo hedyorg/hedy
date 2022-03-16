@@ -1148,7 +1148,7 @@ class TestCustomizeClasses(AuthHelper):
     def test_remove_customization(self):
         # GIVEN a user with teacher permissions
         # (we create a new user to ensure that the user has no classes yet)
-        self.given_teacher_is_logged_in()
+        self.given_fresh_teacher_is_logged_in()
 
         # WHEN creating a class
         # THEN receive an OK response code with the server
