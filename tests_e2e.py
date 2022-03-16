@@ -483,7 +483,7 @@ class TestAuth(AuthHelper):
             {'language': True},
             {'language': 123},
             {'keyword_language': True},
-            {'keyword_language': True},
+            {'keyword_language': 123},
         ]
 
         for invalid_body in invalid_bodies:
