@@ -1167,6 +1167,14 @@ class TestCustomizeClasses(AuthHelper):
 
 
 class TestCustomAdventures(AuthHelper):
+    def test_not_allowed_create_adventure(self):
+        # GIVEN a new user without teacher permissions
+        self.given_fresh_user_is_logged_in()
+
+        # WHEN trying to create a custom adventure
+        # THEN receive a forbidden response code from the server
+        self.post_data('for-teachers/create_adventure', {}, expect_http_code=403)
+
     def test_invalid_create_adventure(self):
         return None
 
