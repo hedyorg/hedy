@@ -1070,7 +1070,7 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN customizing a class without being a teacher
         # THEN receive a forbidden response code from the server
-        self.post_data('/for-teachers/customize-class/' + class_id, expect_http_code=403)
+        self.post_data('for-teachers/customize-class/' + class_id, {}, expect_http_code=403)
 
     def test_invalid_customization(self):
         # GIVEN a user with teacher permissions
@@ -1104,7 +1104,7 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN customizing a class that doesn't exist
         # THEN receive a not found response code from the server
-        self.post_data('/for-teachers/customize-class/123' + class_id, expect_http_code=404)
+        self.post_data('/for-teachers/customize-class/123' + class_id, {}, expect_http_code=404)
 
     def test_valid_customization(self):
         # GIVEN a user with teacher permissions
