@@ -26,6 +26,7 @@ class HedyTester(unittest.TestCase):
   equality_comparison_commands = ['==', '=']
   number_comparison_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparison_commands + ['!=']
+  arithmetic_operations = ['+', '-', '*', '/']
 
   @staticmethod
   @contextmanager
