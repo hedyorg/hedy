@@ -829,11 +829,7 @@ def get_log_results():
 
 def get_user_formatted_age(now, date):
     texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
-
-    print(now)
-    print(date)
     program_age = now - date
-    print(program_age)
     if program_age < 1000 * 60 * 60:
         measure = texts['minutes']
         date = round(program_age / (1000 * 60))
@@ -844,9 +840,7 @@ def get_user_formatted_age(now, date):
         measure = texts['days']
         date = round(program_age / (1000 * 60 * 60 * 24))
 
-    print(date)
-
-    return f"{date} {measure} {texts['ago-2']}"
+    return f"{texts['ago-1']} {date} {measure} {texts['ago-2']}"
 
 
 # routing to index.html
