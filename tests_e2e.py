@@ -1102,7 +1102,8 @@ class TestCustomizeClasses(AuthHelper):
             {'levels': [1, 2, 3]},
             {'levels': [1, 2, 3], 'adventures': []},
             {'levels': [1, 2, 3], 'adventures': {}},
-            {'levels': [1, 2, 3], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []}
+            {'levels': [1, 2, 3], 'adventures': {}, 'opening_dates': {}},
+            {'levels': [1, 2, 3], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': []}
         ]
 
         for invalid_body in invalid_bodies:
