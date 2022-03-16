@@ -460,6 +460,30 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
+  def test_print_concat_quoted_strings(self):
+    code = """print 'Hi ' + 'there'"""
+    expected = """print(f'{"Hi " + "there"}')"""
+
+    self.multi_level_tester(
+      max_level=17,
+      code=code,
+      expected=expected
+    )
+
+  def test_print_concat_var_and_literal_string(self):
+    code = textwrap.dedent("""\
+      hi = 'Hi'
+      print hi + ' there'""")
+    expected = textwrap.dedent("""\
+      hi = 'Hi'
+      print(f'{hi + " there"}')""")
+
+    self.multi_level_tester(
+      max_level=17,
+      code=code,
+      expected=expected
+    )
+
   def test_calc_string_and_int_gives_type_error(self):
     code = textwrap.dedent("""\
       x is 'test1'
@@ -468,6 +492,25 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.InvalidTypeCombinationException
+    )
+
+  def test_calc_quoted_string_and_int_gives_type_error(self):
+    code = textwrap.dedent("""\
+      y is 'test1' + 1""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.InvalidTypeCombinationException
+    )
+
+  @parameterized.expand(['-', '*', '/'])
+  def test_calc_with_quoted_strings_gives_type_error(self, operation):
+    code = textwrap.dedent(f"""\
+      a is 1 {operation} 'Test'""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_print_chained_assignments(self):

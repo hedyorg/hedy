@@ -329,7 +329,7 @@ def max_score(quiz_data):
     max_score = 0
     for question_key, question_value in quiz_data.items():
         index = index + 1
-        max_score = max_score + question_value['question_score']
+        max_score = max_score + int(question_value['question_score'])
     return max_score
 
 
