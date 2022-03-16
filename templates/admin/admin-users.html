@@ -65,9 +65,17 @@
                     <option value="created" {% if filter and filter == "created" %} selected {% endif %}>Created</option>
                     <option value="last_login" {% if filter and filter == "last_login" %} selected {% endif %}>Last login</option>
                     <option value="email" {% if filter and filter == "email" %} selected {% endif %}>E-mail</option>
+                    <option value="language" {% if filter and filter == "language" %} selected {% endif %}>Language</option>
+                    <option value="keyword_language" {% if filter and filter == "keyword_language" %} selected {% endif %}>Keyword language</option>
                 </select>
                 <div class="flex flex-row items-center">
                     <input placeholder="Enter a substring..." id="email_filter_input" type="text" {% if email_filter %} value="{{ email_filter }}" {% endif %} class="inline-block {% if not filter or filter != "email" %}hidden{% endif %} appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2">
+                    <select id="language_filter_input" {% if language_filter %} value="{{ language_filter }}" {% endif %} class="{% if not filter or filter != "language" %}hidden{% endif %} inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2">
+                        <option>{{ current_language().sym }}</option>
+                        {% for lang in other_languages() %}
+                            <option>{{ lang.sym }}</option>
+                        {% endfor %}
+                    </select>
                     <div id="date_filter_input" class="flex flex-row w-full {% if filter and filter == "email" %}hidden{% endif %}">
                         <input type="date" id="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-1 rtl:ml-1">
                         <input type="date" id="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
@@ -93,7 +101,7 @@
           <td id="last_login_header">Last login</td>
           <td id="birth_year_header" class="hidden">Birth year</td>
           <td id="language_header">Language</td>
-          <td id="keyword_language_header">Keyword language</td>
+          <td id="keyword_language_header">Keyword lang</td>
           <td id="country_header">Country</td>
           <td id="gender_header">Gender</td>
           <td id="experience_header" class="hidden">Experience</td>
