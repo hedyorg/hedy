@@ -1118,8 +1118,8 @@ class TestCustomizeClasses(AuthHelper):
         class_id = self.get_data('classes')[0].get('id')
 
         valid_bodies = [
-            {'levels': [], 'adventures': {}, 'opening_dates': {}},
-            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}}
+            {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []},
+            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}, 'teacher_adventures': [], 'other_settings': []}
         ]
 
         for valid_body in valid_bodies:
