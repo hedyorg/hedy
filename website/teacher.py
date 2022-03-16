@@ -64,7 +64,7 @@ def routes(app, database, achievements):
             invites.append({'username': invite['username'], 'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))})
 
         return render_template ('class-overview.html', current_page='my-profile',
-                                page_title=hedyweb.get_page_title('class overview'),
+                                page_title=g.ui_texts.get('title_class-overview'),
                                 achievement=achievement, invites=invites,
                                 class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class ['link'],
                                             'name': Class ['name'], 'id': Class ['id']})
@@ -155,7 +155,7 @@ def routes(app, database, achievements):
             if token:
                 if token ['username'] in Class.get ('students', []):
                     return render_template ('class-prejoin.html', joined=True,
-                                            page_title=hedyweb.get_page_title('join class'),
+                                            page_title=g.ui_texts.get('title_join-class'),
                                             current_page='my-profile', class_info={'name': Class ['name']})
                 user = DATABASE.user_by_username(token ['username'])
 
@@ -220,7 +220,7 @@ def routes(app, database, achievements):
         customizations = DATABASE.get_class_customizations(class_id)
         customize_class_translations = hedyweb.PageTranslations('customize-class').get_page_translations(g.lang)
 
-        return render_template('customize-class.html', page_title=hedyweb.get_page_title('customize class'),
+        return render_template('customize-class.html', page_title=g.ui_texts.get('title_customize-class'),
                                class_info={'name': Class['name'], 'id': Class['id']}, max_level=hedy.HEDY_MAX_LEVEL,
                                adventures=adventures, page_translations=customize_class_translations,
                                teacher_adventures=teacher_adventures, customizations=customizations, current_page='my-profile')
@@ -435,7 +435,7 @@ def routes(app, database, achievements):
         if not adventure or adventure['creator'] != user['username']:
             return utils.error_page(error=404,  ui_message='no_such_adventure')
 
-        return render_template('customize-adventure.html', page_title=hedyweb.get_page_title('customize adventure'),
+        return render_template('customize-adventure.html', page_title=g.ui_texts.get('title_customize-adventure'),
                                adventure=adventure, max_level=hedy.HEDY_MAX_LEVEL, current_page='my-profile')
 
     @app.route('/for-teachers/customize-adventure', methods=['POST'])
