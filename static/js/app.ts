@@ -1115,9 +1115,9 @@ export function showVariableView() {
 var variable_view = false;
 
 //Hides the HTML DIV for variables if feature flag is false
-if (variable_view === false) {
-  let variableDiv = document.getElementById("variables");
-  variableDiv!.style.display = "none";
+if (!variable_view) {
+  $('#variables').hide();
+  $('#variable_button').hide();
 }
 
 export function show_variables() {
