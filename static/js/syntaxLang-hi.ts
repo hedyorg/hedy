@@ -5,6 +5,8 @@ export const LANG_hi = {
 '_ECHO':'(?:echo|गूंज)',
 '_FORWARD':'(?:forward|आगे)',
 '_TURN':'(?:|मोड़)',
+'_LEFT':'left',
+'_RIGHT':'right',
 '_IS':'(?:is|है)',
 '_SLEEP':'(?:sleep|नींद)',
 '_ADD_LIST':'(?:add|जोड़ना)',

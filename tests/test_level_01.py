@@ -286,32 +286,22 @@ class TestsLevel1(HedyTester):
     self.single_level_tester(code=code, expected=expected,
                              extra_check_function=self.is_turtle())
 
-  def test_turn_number(self):
-    code = "turn 180"
-    expected = HedyTester.turn_transpiled(180)
-    self.multi_level_tester(
-      max_level=self.max_turtle_level,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_turtle()
-    )
 
-  def test_turn_negative_number(self):
-    code = "turn -180"
-    expected = HedyTester.turn_transpiled(-180)
-    self.multi_level_tester(
-      max_level=10,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_turtle()
-    )
+  def test_one_turn_left_nl(self):
+    code = "draai links"
+    expected = "t.left(90)"
 
-  def test_one_turn_with_text_gives_type_error(self):
+    #TODO next step is add left/right to translation code!
+
+    self.single_level_tester(code=code, expected=expected,
+                             extra_check_function=self.is_turtle(), lang='nl')
+
+
+  def test_one_turn_with_text_gives_error(self):
     code = "turn koekoek"
-    self.multi_level_tester(
-      max_level=self.max_turtle_level,
+    self.single_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException
+      exception=hedy.exceptions.InvalidArgumentException
     )
 
   # comment test

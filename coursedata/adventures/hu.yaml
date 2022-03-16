@@ -123,12 +123,37 @@ adventures:
                     allatok is bagoly, sündisznó, tatu
                     print Most hallja a allatok at random hangját
                     ```
+                example_code: |
+                    ## Example Hedy Code
 
-                story_text_3: "This is an example of the `{remove}` command in your story\n"
-                example_code: "It goes like this:\n```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
-                story_text_2: "The command `{add}` can also come in handy in your story. For example:\n```\n"
-                example_code_2: "{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
-                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
+                    ```
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} He now hears the sound of an animals {at} {random}
+                    ```
+                story_text_2: |
+                    The command `{add}` can also come in handy in your story. For example
+
+                example_code_2: |
+                    ## Example Hedy Code
+
+                    {print} He hears a sound
+                    animals {is} 🐿, 🦔, 🦇, 🦉
+                    animal {is} {ask} What do you think it is?
+                    {add} animal {to_list} animals
+                    {print} it was a animals {at} {random}
+                    ```
+                story_text_3: |
+                    This is an example of the `{remove}` command in your story
+                example_code_3: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} His backpack got way too heavy.
+                    {print} Inside were a bottle of water, a flashlight and a brick.
+                    bag {is} water, flashlight, brick
+                    dump {is} {ask} Which item should he dump?
+                    {remove} dump {from} bag
+                    ```
             8:
                 story_text: "## Story\nIn this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n"
                 example_code: "## Example Hedy code\n\n```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '\U0001F4A5ZAP!\U0001F4A5'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!\U0001F996'\n```\n"
@@ -1449,7 +1474,7 @@ adventures:
                 start_code: '# place your code here'
             2:
                 start_code: monster1 {is} _
-                story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n\n## Example Hedy Code\n```\nmonster1 {is} \U0001F47B\nmonster2 {is} \U0001F921\nmonster3 {is} \U0001F476\n{print} You enter the hounted house.\n{print} Suddenly you see a monster1\n{print} You run into the other room, but a monster2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster3 attacks you!\n```\n"
+                story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n\n## Example Hedy Code\n```\nmonster1 {is} \U0001F47B\nmonster2 {is} \U0001F921\nmonster3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster1\n{print} You run into the other room, but a monster2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster3 attacks you!\n```\n"
     next:
         name: Mi a következő lépés?
         description: Mi a következő lépés?

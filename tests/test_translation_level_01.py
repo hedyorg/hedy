@@ -62,10 +62,10 @@ class TestsTranslationLevel1(HedyTester):
         self.assertEqual(expected, result)
 
     def test_turn_english_dutch(self):
-        code = "turn 50"
+        code = "turn left"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = "draai 50"
+        expected = "draai links"
 
         self.assertEqual(expected, result)
 

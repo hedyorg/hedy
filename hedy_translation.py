@@ -6,7 +6,7 @@ import yaml
 from os import path
 
 
-KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr']
+KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr', 'ar']
 
 # Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
@@ -19,7 +19,7 @@ def keywords_to_dict(to_lang="nl"):
     keywords_path = 'coursedata/keywords/'
     yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
 
-    with open(yaml_filesname_with_path, 'r') as stream:
+    with open(yaml_filesname_with_path, 'r', encoding='UTF-8') as stream:
         command_combinations = yaml.safe_load(stream)
 
     return command_combinations
@@ -31,7 +31,9 @@ def all_keywords_to_dict():
     for lang in KEYWORD_LANGUAGES:
         commands = keywords_to_dict(lang)
         keyword_list.append(commands)
-    all_translations = {k: [d[k] for d in keyword_list] for k in keyword_list[0]}
+
+    #gets the translation but defaults to the key k (in En) when it is not present
+    all_translations = {k: [d.get(k, k) for d in keyword_list] for k in keyword_list[0]}
     return all_translations
 
 
@@ -111,6 +113,16 @@ class Translator(Visitor):
 
     def turn(self, tree):
         self.add_rule('_TURN', 'turn', tree)
+
+    def left(self, tree):
+        token = tree.children[0]
+        rule = Rule('left', token.line, token.column - 1, token.end_column - 2, token.value)
+        self.rules.append(rule)
+
+    def right(self, tree):
+        token = tree.children[0]
+        rule = Rule('right', token.line, token.column - 1, token.end_column - 2, token.value)
+        self.rules.append(rule)
 
     def assign_list(self, tree):
         self.add_rule('_IS', 'is', tree)

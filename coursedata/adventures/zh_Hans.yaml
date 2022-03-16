@@ -14,13 +14,42 @@ adventures:
                 story_text: "## Story\nIn this level you can program different endings, which will make your story even more fun.\n\nThink of two endings for your story, for example:\n\n- The princess is walking through the forest\n- She runs into a monster\n\n- Happy ending: She takes her sword and the monster quickly runs away\n- Bad Ending: The monster eats the princess\n\nYou can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!\n"
                 example_code: "## Example Hedy code\n\n```\nname {is} {ask} Who is walking in the forest?\n{print} name 'walks through the forest'\n{print} name 'encounter a monster'\nend {is} {ask} Would you like a good or a bad ending?\n{if} end {is} good {print} name 'takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats' name\n```\n"
             3:
-                example_code: "It goes like this:\n```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
-                story_text: "## Story\nIn level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle.\n"
-                story_text_2: "The command `{add}` can also come in handy in your story. For example:\n```\n"
-                example_code_2: "{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
-                story_text_3: "This is an example of the `{remove}` command in your story\n"
-                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
-                start_code: '{print} Your story'
+                story_text: |
+                    ## Story
+                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+
+                example_code: |
+                    ## Example Hedy Code
+
+                    ```
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} He now hears the sound of an animals {at} {random}
+                    ```
+                story_text_2: |
+                    The command `{add}` can also come in handy in your story. For example
+
+                example_code_2: |
+                    ## Example Hedy Code
+
+                    {print} He hears a sound
+                    animals {is} 🐿, 🦔, 🦇, 🦉
+                    animal {is} {ask} What do you think it is?
+                    {add} animal {to_list} animals
+                    {print} it was a animals {at} {random}
+                    ```
+                story_text_3: |
+                    This is an example of the `{remove}` command in your story
+                example_code_3: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} His backpack got way too heavy.
+                    {print} Inside were a bottle of water, a flashlight and a brick.
+                    bag {is} water, flashlight, brick
+                    dump {is} {ask} Which item should he dump?
+                    {remove} dump {from} bag
+                    ```
+                start_code: "{print} Your story"
             13:
                 story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
                 example_code: "## Example Hedy code\n\n```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
@@ -364,7 +393,7 @@ adventures:
                 example_code: "## Example Hedy code\n\n\n```\n{print} How did I get here?\n{print} I remember my friend telling me to go into the old mansion...\n{print} and suddenly everything went black.\n{print} But how did I end up on the floor...?\n{print} My head hurts like Ive been hit by a baseball bat!\n{print} What's that sound?\n{print} Oh no! I feel like Im not alone in this house!\n{print} I need to get out of here!\n{print} There are 3 doors in front of me..\n{ask} Which door should i pick?\n{echo} I choose door\n{print} ...?\n```\n\n## Challenge\nCan you finish the scary story? Or make up your own haunted house story?\n"
             2:
                 start_code: monster1 {is} _
-                story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n\n## Example Hedy Code\n```\nmonster1 {is} \U0001F47B\nmonster2 {is} \U0001F921\nmonster3 {is} \U0001F476\n{print} You enter the hounted house.\n{print} Suddenly you see a monster1\n{print} You run into the other room, but a monster2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster3 attacks you!\n```\n"
+                story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n\n## Example Hedy Code\n```\nmonster1 {is} \U0001F47B\nmonster2 {is} \U0001F921\nmonster3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster1\n{print} You run into the other room, but a monster2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster3 attacks you!\n```\n"
             14:
                 story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
                 example_code: "## Example Hedy code\n\n```\n{print} 'Escape from the haunted house'\nlives = 3\ndoors = 1, 2, 3\nmonsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'\n{for} i {in} {range} 1 {to} 10\n    {if} lives > 0\n        good_door = doors {at} {random}\n        monster = monsters {at} {random}\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} good_door == chosen_door\n            {print} 'You have chosen the correct door'\n        {else}\n            {print} 'You see...' monster\n            {if} monster == 'a sleeping 3 headed dog'\n                {print} 'Pffieuw.... Its asleep'\n            {else}\n                {print} 'You lose one life'\n                lives = lives -1\n    {else}\n        {print} 'GAME OVER'\n```\n"

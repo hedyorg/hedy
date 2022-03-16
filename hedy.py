@@ -121,25 +121,26 @@ def promote_types(types, rules):
 
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'],
-                      2: ['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
-                      3: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add', 'random', 'remove'],
-                      4: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove'],
-                      5: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else'],
-                      6: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else'],
-                      7: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
-                      8: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
-                      9: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
-                      10: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      11: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      12: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
-                      13: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
-                      14: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and'],
-                      15: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
-                      16: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while'],
-                      17: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif'],
-                      18: ['print', 'ask', 'is', 'in', 'turn', 'forward', 'sleep', 'add', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'or', 'and', 'while', 'elif', 'input']
-                      }
+commands_per_level = {
+    1 :['print', 'ask', 'echo', 'turn', 'forward'],
+    2 :['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
+    3 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
+    4 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
+    5 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
+    6 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
+    7 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    8 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    9 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    10 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times', 'for'],
+    11 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range'],
+    12 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range'],
+    13 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or'],
+    14 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or'],
+    15 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or', 'while'],
+    16 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or', 'while'],
+    17 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or', 'while', 'elif'],
+    18 :['is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'and', 'or', 'while', 'elif', 'input'],
+}
 
 command_turn_literals = ['right', 'left']
 
@@ -155,7 +156,7 @@ commands_and_types_per_level = {
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
-    Command.turn: {1: command_turn_literals + [HedyType.integer, HedyType.input],
+    Command.turn: {1: command_turn_literals,
                    2: [HedyType.integer, HedyType.input]},
     Command.forward: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
@@ -206,11 +207,11 @@ def get_list_keywords(commands, to_lang):
     to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
     en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
 
-    with open(en_yaml_filesname_with_path, 'r') as stream:
+    with open(en_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
         en_yaml_dict = yaml.safe_load(stream)
 
     try:
-        with open(to_yaml_filesname_with_path, 'r') as stream:
+        with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
         for command in commands:
             try:
@@ -407,11 +408,12 @@ class LookupEntryCollector(visitors.Visitor):
     # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, tree):
         list_name = hash_var(tree.children[0].children[0])
-        if tree.children[1] == 'random':
+        position_name = hash_var(tree.children[1])
+        if position_name == 'random':
             name = f'random.choice({list_name})'
         else:
             # We want list access to be 1-based instead of 0-based, hence the -1
-            name = f'{list_name}[{tree.children[1]}-1]'
+            name = f'{list_name}[{position_name}-1]'
         self.add_to_lookup(name, tree, True)
 
     def list_access_var(self, tree):
@@ -470,7 +472,7 @@ class TypeValidator(Transformer):
 
     def turn(self, tree):
         if tree.children:
-            name = tree.children[0].children[0]
+            name = tree.children[0].data
             if self.level > 1 or name not in command_turn_literals:
                 self.validate_args_type_allowed(tree.children, Command.turn)
         return self.to_typed_tree(tree)
@@ -1151,10 +1153,8 @@ class ConvertToPython_1(ConvertToPython):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
 
-        arg = args[0]
-        if self.is_variable(arg) or arg.lstrip("-").isnumeric():
-            return self.make_turn(arg)
-        elif arg == 'left':
+        arg = args[0].data
+        if arg == 'left':
             return "t.left(90)"
         elif arg == 'right':
             return "t.right(90)"
@@ -1196,6 +1196,14 @@ class ConvertToPython_2(ConvertToPython_1):
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
 
+    def turn(self, args):
+        if len(args) == 0:
+            return "t.right(90)"  # no arguments defaults to a right turn
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_turn(hash_var(arg))
+        if arg.lstrip("-").isnumeric():
+            return self.make_turn(arg)
 
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
@@ -1243,22 +1251,6 @@ class ConvertToPython_2(ConvertToPython_1):
 
         return self.make_forward(parameter)
 
-    def turn(self, args):
-        if len(args) == 0:
-            return "t.right(90)"
-
-        arg = args[0]
-        if arg.lstrip('-').isnumeric():
-            return self.make_turn(arg)
-
-        hashed_arg = hash_var(arg)
-        if self.is_variable(hashed_arg):
-            return self.make_turn(hashed_arg)
-
-        # the TypeValidator should protect against reaching this line:
-        raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
-                                                      allowed_types=get_allowed_types(Command.turn, self.level))
-
     def assign(self, args):
         parameter = args[0]
         value = args[1]
@@ -1289,8 +1281,11 @@ class ConvertToPython_3(ConvertToPython_2):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
+        args = [hash_var(a) for a in args]
+
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
+
 
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
@@ -1540,6 +1535,8 @@ class ConvertToPython_12(ConvertToPython_11):
         if isinstance(argument, Tree):
             return f'{str(argument.children[0])}'
         else:
+            if "'" in argument:  # if quoted string, use " instead of ' to avoid f-str illegal syntax
+                return '"' + argument.replace("'", '').replace('"', '') + '"'
             return f'{argument}'
 
     def ask(self, args):
@@ -1555,16 +1552,6 @@ class ConvertToPython_12(ConvertToPython_11):
             {var} = float({var})
           except ValueError:
             pass""")  # no number? leave as string
-
-    def process_calculation(self, args, operator):
-        # arguments of a sum are either a token or a
-        # tree resulting from earlier processing
-        # for trees we need to grap the inner string
-        # for tokens we simply return the argument (no more casting to str needed)
-
-        args = [self.process_token_or_tree(a) for a in args]
-
-        return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
 
     def text_in_quotes(self, args):
         text = args[0]
@@ -2176,7 +2163,3 @@ def execute(input_string, level):
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
-
-# f = open('output.py', 'w+')
-# f.write(python)
-# f.close()

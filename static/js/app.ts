@@ -780,7 +780,6 @@ function change_to_submitted (index: number) {
 }
 
 export function submit_program (id: string, index: number) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   $.ajax({
     type: 'POST',
     url: '/programs/submit',
@@ -794,6 +793,8 @@ export function submit_program (id: string, index: number) {
       showAchievements(response.achievements, false, "");
     }
     change_to_submitted(index);
+  }).fail(function(err) {
+      return modal.alert(err.responseText, 3000, true);
   });
 }
 
@@ -863,6 +864,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
   window.State.programsInExecution = 1;
+
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
@@ -1470,6 +1472,12 @@ export function filter_admin() {
   if (filter == "email") {
     const substring = $('#email_filter_input').val();
     window.open('?filter=' + filter + "&substring=" + substring, "_self");
+  } else if (filter == "language") {
+    const lang = $('#language_filter_input').val();
+    window.open('?filter=' + filter + "&language=" + lang, "_self");
+  } else if (filter == "keyword_language") {
+    const keyword_lang = $('#keyword_language_filter_input').val();
+    window.open('?filter=' + filter + "&keyword_language=" + keyword_lang, "_self");
   } else {
     const start_date = $('#admin_start_date').val();
     const end_date = $('#admin_end_date').val();
