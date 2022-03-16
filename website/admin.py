@@ -56,10 +56,10 @@ def routes(app, database):
             data['is_teacher'] = bool(data['is_teacher'])
             data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
             if filtering and category == "language":
-                if keyword_language != data['language']:
+                if language != data['language']:
                     continue
             if filtering and category == "keyword_language":
-                if language != data['keyword_language']:
+                if keyword_language != data['keyword_language']:
                     continue
             if filtering and category == "email":
                 if substring not in data['email']:
