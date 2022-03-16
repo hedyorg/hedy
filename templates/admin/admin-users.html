@@ -11,49 +11,55 @@
 <div class="w-full mt-4 mb-4" id="program_filter">
     <form onsubmit="event.preventDefault (); hedyApp.filter_admin();">
         <div class="px-4 w-full flex flex-row border border-gray-400 py-2 rounded-lg">
-            <div class="w-80 p-2 mx-4">
+            <div class="p-2 ltr:mr-4 rtl:ml-4">
                 <h2 class="px-8">Visible attributes</h2>
-                <div class="flex flex-row items-center">
+                <div class="flex flex-row items-center w-80">
                     <div class="flex flex-col">
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username"><label class="inline-block w-1/2" for="subscribe">Username</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username"><label class="inline-block w-40" for="username">Username</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="count" name="count"><label class="inline-block w-1/2" for="subscribe">Count</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="count" name="count"><label class="inline-block w-40" for="count">Programs</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="email" name="email"><label class="inline-block w-1/2" for="subscribe">Email</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="email" name="email"><label class="inline-block w-40" for="email">Email</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="created" name="created"><label class="inline-block w-1/2" for="subscribe">Created</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="created" name="created"><label class="inline-block w-40" for="created">Created</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_login" name="last_login"><label class="inline-block w-1/2" for="subscribe">Last login</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_login" name="last_login"><label class="inline-block w-40" for="last_login">Last login</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="birth_year" name="birth_year"><label class="inline-block w-1/2" for="subscribe">Birth year</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="birth_year" name="birth_year"><label class="inline-block w-40" for="birth_year">Birth year</label>
                         </div>
                     </div>
                     <div class="flex flex-col">
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="country" name="country"><label class="inline-block w-1/2" for="subscribe">Country</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="language" name="language"><label class="inline-block w-40" for="language">Language</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="gender" name="gender"><label class="inline-block w-1/2" for="subscribe">Gender</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="country" name="keyword_language"><label class="inline-block w-40" for="keyword_language">Keyword language</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="experience" name="experience"><label class="inline-block w-1/2" for="subscribe">Experience</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="country" name="country"><label class="inline-block w-40" for="country">Country</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="teacher" name="teacher"><label class="inline-block w-1/2" for="subscribe">Teacher</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="gender" name="gender"><label class="inline-block w-40" for="gender">Gender</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="verified" name="verified"><label class="inline-block w-1/2" for="subscribe">Verified</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="experience" name="experience"><label class="inline-block w-40" for="experience">Experience</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="teacher" name="teacher"><label class="inline-block w-40" for="teacher">Teacher</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="verified" name="verified"><label class="inline-block w-40" for="verified">Verified</label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="w-3/4 p-2 mx-4">
+            <div class="w-full p-2 mx-4">
                 <h2 class="px-8 pb-2">Filtering options</h2>
                 <select id="admin_filter_category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
                     <option value="created" {% if filter and filter == "created" %} selected {% endif %}>Created</option>
@@ -81,7 +87,7 @@
     <thead>
       <tr class="font-bold text-left">
           <td id="username_header">Username</td>
-          <td id="count_header">Count</td>
+          <td id="count_header">Programs</td>
           <td id="email_header">Email</td>
           <td id="created_header">Created</td>
           <td id="last_login_header">Last login</td>
