@@ -1300,12 +1300,19 @@ def update_public_profile(user):
     # Validations
     if not isinstance(body, dict):
         return g.auth_texts.get('ajax_error'), 400
-    if not isinstance(body.get('image'), str):
+    # The images are given as a "picture id" from 1 till 12
+    if not isinstance(body.get('image'), str) or int(body.get('image'), 0) < 1 or int(body.get('image'), 0) > 12:
         return g.auth_texts.get('image_invalid'), 400
     if not isinstance(body.get('personal_text'), str):
         return g.auth_texts.get('personal_text_invalid'), 400
     if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
         return g.auth_texts.get('favourite_program_invalid'), 400
+
+    # Verify that the set favourite program is actually from the user (and public)!
+    if 'favourite_program' in body:
+        program = DATABASE.program_by_id(body.get('favourite_program'))
+        if not program or program.get('username') != user['username'] or not program.get('public'):
+            return g.auth_texts.get('favourite_program_invalid'), 400
 
     achievement = None
     current_profile = DATABASE.get_public_profile_settings(user['username'])
