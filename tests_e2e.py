@@ -1094,7 +1094,13 @@ class TestCustomAdventures(AuthHelper):
     def test_create_adventure(self):
         return None
 
-    def test_remove_adventure(self):
+    def test_invalid_view_adventure(self):
+        return None
+
+    def test_valid_view_adventure(self):
+        return None
+
+    def test_destroy_adventure(self):
         return None
 
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
