@@ -500,7 +500,14 @@ def routes(app, database, achievements):
     def create_adventure(user):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='create_adventure')
+
         body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('name'), str):
+            return g.auth_texts.get('adventure_name_invalid'), 400
+
         adventures = DATABASE.get_teacher_adventures(user['username'])
         for adventure in adventures:
             if adventure['name'] == body['name']:

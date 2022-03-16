@@ -1176,10 +1176,27 @@ class TestCustomAdventures(AuthHelper):
         self.post_data('for-teachers/create_adventure', {}, expect_http_code=403)
 
     def test_invalid_create_adventure(self):
-        return None
+        # GIVEN a new user without teacher permissions
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to create an invalid adventure
+        invalid_bodies = [
+            '',
+            [],
+            {},
+            {'name': 123}
+        ]
+
+        for invalid_body in invalid_bodies:
+            self.post_data('for-teachers/create-adventure', invalid_body, expect_http_code=400)
 
     def test_create_adventure(self):
-        return None
+        # GIVEN a new user without teacher permissions
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to create a valid adventure
+        # THEN receive an OK response with the server
+        self.post_data('for-teachers/create-adventure', {'name': 'test_adventure'}, expect_http_code=200)
 
     def test_invalid_view_adventure(self):
         return None
@@ -1187,8 +1204,18 @@ class TestCustomAdventures(AuthHelper):
     def test_valid_view_adventure(self):
         return None
 
-    def test_destroy_adventure(self):
+    def test_invalid_update_adventure(self):
         return None
+
+    def test_valid_update_adventure(self):
+        return None
+
+    def test_destroy_adventure(self):
+        # GIVEN a user with teacher permissions
+        # (we create a new user to ensure that the user has no classes yet)
+        self.given_fresh_teacher_is_logged_in()
+
+
 
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
 
