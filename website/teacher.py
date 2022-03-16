@@ -457,7 +457,7 @@ def routes(app, database, achievements):
         if len(body.get('content')) < 20:
             return g.auth_texts.get('adventure_length'), 400
         if not isinstance(body.get('public'), bool):
-            return g.auth_texts.get('adventure_length'), 400
+            return g.auth_texts.get('public_invalid'), 400
 
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='retrieve_adventure')

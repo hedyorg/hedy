@@ -1225,14 +1225,42 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
-        body = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200)
+        id = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200).get("id")
 
         # WHEN attempting to view the adventure using the id from the returned body
         # THEN receive an OK response with the server
-        self.get_data('for-teachers/customize-adventure/view/' + body.get('id', ""))
+        self.get_data('for-teachers/customize-adventure/view/' + id)
 
     def test_invalid_update_adventure(self):
-        return None
+        # GIVEN a new teacher
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to create a valid adventure
+        # THEN receive an OK response with the server
+        id = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200).get("id")
+
+        # WHEN attempting to updating an adventure with invalid data
+        invalid_bodies = [
+            '',
+            [],
+            {},
+            {'id': 123},
+            {'id': 123, 'name': 123},
+            {'id': '123', 'name': 123},
+            {'id': '123', 'name': 123, 'level': 5},
+            {'id': '123', 'name': 123, 'level': 5, 'content': 123},
+            {'id': '123', 'name': 'panda', 'level': '5', 'content': 'too short!'},
+            {'id': '123', 'name': 'panda', 'level': '5', 'content': 'This is just long enough!', 'public': 'panda'},
+        ]
+
+        # THEN receive a 400 error from the server
+        for invalid_body in invalid_bodies:
+            self.post_data('for-teachers/customize-adventure', invalid_body, expect_http_code=400)
+
+        # WHEN attempting to update a non-existing adventure
+        # THEN receive a 404 error from the server
+        body = {'id': '123', 'name': 'panda', 'level': '5', 'content': 'This is just long enough!', 'public': True}
+        self.post_data('for-teachers/customize-adventure', body, expect_http_code=404)
 
     def test_valid_update_adventure(self):
         return None
