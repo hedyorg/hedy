@@ -1,7 +1,7 @@
 import collections
 import os
 import utils
-from hedy import ALL_LANGUAGES
+from hedy import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -538,7 +538,7 @@ def routes(app, database):
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get(
-                'language')]:
+                'language')] or body.get('keyword_language') not in ALL_KEYWORD_LANGUAGES.keys():
             return g.auth_texts.get('keyword_language_invalid'), 400
 
         # Validations, optional fields
