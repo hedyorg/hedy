@@ -529,16 +529,6 @@ export function saveit(level: number | [number, string], lang: string, name: str
   if (reloadOnExpiredSession ()) return;
 
   try {
-    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
-    if (! auth.profile) {
-       return modal.confirm (auth.texts['save_prompt'], function () {
-         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-         window.location.pathname = '/login';
-       });
-    }
-
     $.ajax({
       type: 'POST',
       url: '/programs/duplicate-check',
@@ -555,6 +545,17 @@ export function saveit(level: number | [number, string], lang: string, name: str
         });
       } else {
          storeProgram(level, lang, name, code, cb);
+      }
+    }).fail(function(err) {
+      if (err.status == 403) { // The user is not allowed -> so not logged in
+        return modal.confirm (auth.texts['save_prompt'], function () {
+           // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+           if (window.State && window.State.adventure_name && !Array.isArray(level)) {
+             level = [level, window.State.adventure_name];
+           }
+           localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+           window.location.pathname = '/login';
+         });
       }
     });
   } catch (e: any) {
@@ -675,7 +676,7 @@ function get_parse_code_by_id(level: number, lang:string, id:string | true,  ind
 }
 
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
+  //if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   if (Public) {
     // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
     if (id !== true) {
@@ -954,6 +955,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   function outf(text: string) {
     // If there's more than one program being executed at a time, we ignore it.
     // This happens when a program requiring user input is suspended when the user changes the code.
+    //@ts-ignore
+    const pythonVariables = Sk.globals;
+    load_variables(pythonVariables);
     if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
@@ -1079,6 +1083,99 @@ export function prompt_unsaved(cb: () => void) {
 
 export function load_quiz(level: string) {
   $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+}
+
+//Feature flag for variable and values view
+var variable_view = false;
+
+//Hides the HTML DIV for variables if feature flag is false
+if (!variable_view) {
+  $('#variables').hide();
+}
+
+export function show_variables() {
+  if (variable_view) {
+    const variableBox = $('#variables');
+    const variableList = $('.variable-list');
+    if (variableList.hasClass('hidden')) {
+      variableList.removeClass('hidden');
+      dragElement(variableBox[0]);
+    }
+    // makes it able to collapse the list
+    else {
+      variableList.addClass('hidden');
+    }
+  }
+}
+
+export function load_variables(variables: any){
+    if (variable_view === true) {
+      variables = clean_variables(variables);
+      const variableList = $('.variable-list');
+      variableList.empty();
+      for (const i in variables) {
+        variableList.append(`<li>${variables[i][0]}: ${variables[i][1]}</li>`);
+      }
+    }
+}
+
+//hiding certain variables from the list unwanted for users
+function clean_variables(variables: any) {
+  if (variable_view === true) {
+    const new_variables = [];
+    const unwanted_variables = ["random", "time"];
+    for (const variable in variables) {
+      if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
+        let newTuple = [variable, variables[variable].v];
+        new_variables.push(newTuple);
+      }
+    }
+    return new_variables;
+  }
+  else{
+    return null
+  }
+}
+
+// Making the list of variables draggable:
+function dragElement(element: HTMLElement) {
+  var XfromR = 0, Ybottom = 0, XfromL = 0, YfromTop = 0;
+  if (document.getElementById(element.id + "header")) {
+    document.getElementById(element.id + "header")!.onmousedown! = dragMouse;
+  }
+  else {
+    element.onmousedown = dragMouse;
+  }
+
+  function dragMouse(e: MouseEvent) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    XfromL = e.clientX;
+    YfromTop = e.clientY;
+    document.onmouseup = stopDragging;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDragging;
+  }
+
+  function elementDragging(e: MouseEvent) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the position of cursor movement:
+    XfromR = XfromL - e.clientX;
+    Ybottom = YfromTop - e.clientY;
+    XfromL = e.clientX;
+    YfromTop = e.clientY;
+    // set the new position of the variable list:
+    element.style.top = (element.offsetTop - Ybottom) + "px";
+    element.style.left = (element.offsetLeft - XfromR) + "px";
+  }
+
+  function stopDragging() {
+    // when mouse stops or is released, stop dragging element
+    document.onmousemove = null;
+    document.onmouseup = null;
+  }
 }
 
 export function get_trimmed_code() {

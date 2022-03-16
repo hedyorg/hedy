@@ -88,15 +88,6 @@ export function delete_class(id: string) {
 }
 
 export function join_class(id: string, name: string) {
-  // If there's no session but we want to join the class, we store the program data in localStorage and redirect to /login.
-  if (! auth.profile) {
-    return modal.confirm (auth.texts['join_prompt'], function () {
-      localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
-      window.location.pathname = '/login';
-      return;
-    });
-  }
-
   $.ajax({
       type: 'POST',
       url: '/class/join',
@@ -113,8 +104,14 @@ export function join_class(id: string, name: string) {
           window.location.pathname = '/programs';
       }
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      if (err.status == 403) { //The user is not logged in -> ask if they want to
+         return modal.confirm (err.responseText, function () {
+            localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
+            window.location.pathname = '/login';
+         });
+      } else {
+          error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      }
     });
 }
 

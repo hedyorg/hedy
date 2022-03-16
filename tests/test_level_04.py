@@ -348,12 +348,11 @@ class TestsLevel4(HedyTester):
 
   def test_forward_ask(self):
     code = textwrap.dedent("""\
-    afstand is ask 'hoe ver dan?'
-    forward afstand""")
-    expected = textwrap.dedent("""\
-    afstand = input(f'hoe ver dan?')
-    t.forward(afstand)
-    time.sleep(0.1)""")
+      afstand is ask 'hoe ver dan?'
+      forward afstand""")
+    expected = HedyTester.dedent(
+      "afstand = input(f'hoe ver dan?')",
+      HedyTester.forward_transpiled('afstand'))
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,

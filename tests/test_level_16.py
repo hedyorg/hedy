@@ -44,8 +44,7 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
-            extra_check_function=check_in_list,
-            translate=False #spaces between list elements not preserved
+            extra_check_function=check_in_list
         )
 
     def test_print_list_access(self):
@@ -60,6 +59,29 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
+            extra_check_function=self.is_not_turtle()
+        )
+
+    def test_print_list_access_non_latin(self):
+        code = textwrap.dedent("""\
+            vrienden = ['Ahmed', 'Ben', 'Cayden']
+            geluksgetallen = [15, 18, 6]
+            voor म in bereik 1 tot 3
+               print 'het geluksgetal van ' vrienden[म]
+               print 'is ' geluksgetallen[म]""")
+        expected = textwrap.dedent("""\
+        vrienden = ['Ahmed', 'Ben', 'Cayden']
+        geluksgetallen = [15, 18, 6]
+        step = 1 if int(1) < int(3) else -1
+        for v7dd7ec2093c0f55999a450adc7e4fe49 in range(int(1), int(3) + step, step):
+          print(f'het geluksgetal van {vrienden[v7dd7ec2093c0f55999a450adc7e4fe49-1]}')
+          print(f'is {geluksgetallen[v7dd7ec2093c0f55999a450adc7e4fe49-1]}')
+          time.sleep(0.1)""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            lang='nl',
             extra_check_function=self.is_not_turtle()
         )
 

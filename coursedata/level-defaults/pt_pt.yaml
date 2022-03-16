@@ -14,14 +14,32 @@
     -   explanation: "Escreve alguma coisa usando `print`."
         example: "Exemplo: print Olá bem vindo(a) à Hedy!"
         demo_code: "print Olá bem vindo(a) à Hedy!"
+        name: '{print}'
     -   explanation: "Pergunta algo com `ask`."
         example: "Exemplo: ask Qual é a tua cor favorita?"
         demo_code: "ask Qual é a tua cor favorita?"
+        name: '{ask}'
     -   explanation: "Repete alguma coisa usando `echo`."
         example: "Exemplo: echo Então a tua cor favorita é "
         demo_code: |-
             ask Qual é a tua cor favorita?
             echo Então a tua cor favorita é 
+        name: '{echo}'
+    -   name: '{print} emojis'
+        explanation: print an emoji with `{print}`
+        example: 'Example: {print} 🙋‍ 🌍 ❗'
+        demo_code: '{print} 🙋 🌍 ❗'
+    -   name: '{forward}'
+        explanation: Draw a line with `{forward}`.
+        example: 'Example: {forward} 100'
+        demo_code: '{forward} 100'
+    -   explanation: turn the drawing turtle with `{turn}`
+        example: 'Example: {turn}'
+        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+        name: '{turn}'
+    example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
 2:
     intro_text: |
         No nível 2 vamos aprender algo novo. Podemos atribuir um nome a uma palavra utilizando `is`.
@@ -42,11 +60,21 @@
         demo_code: |-
             nome is Hedy
             print Bem vindo(a) nome
+        name: '{is}'
     -   explanation: "Pergunta algo usando `ask`. Atenção! Tens de atribuir um nome à resposta usando `is`."
         example: "Exemplo: cor is ask Qual é a tua cor favorita?"
         demo_code: |-
             cor is ask Qual é a tua cor favorita?
             print cor é a tua favorita!
+        name: '{ask}'
+    -   name: '{sleep}'
+        explanation: Let Hedy pause for a (couple of) second(s).
+        example: 'Example: {sleep} 2 '
+        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+    -   name: is - turtle
+        explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        example: 'Example: angle {is} 90'
+        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
     intro_text: |
         No nível 3 também podes criar uma lista. Podes fazer o computador escolher algo aleatório (ou seja, uma coisa ao calhas) dessa lista. Fazes isso utilizando 'at random'.
@@ -64,6 +92,18 @@
         demo_code: |-
             animais is cão, gato, canguru
             print animais at random
+        name: choose_random
+    -   explanation: add an item to a list
+        example: 'Example: {add} dog {to_list} animals'
+        name: '{add}'
+        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    -   explanation: remove an item from a list
+        name: '{remove}'
+        example: 'Example: {remove} dog {from} animals'
+        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
+    intro_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+    example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
 4:
     start_code: "print 'Olá mundo!'"
     intro_text: |
@@ -82,16 +122,19 @@
     -   explanation: "Escreve com exactidão usando as aspas simples."
         example: "Exemplo: print 'Olá, bem-vindo(a) à Hedy!'"
         demo_code: "print 'Olá, bem-vindo(a) à Hedy!'"
+        name: '{print}'
     -   explanation: "Atribui um nome a um pequeno texto e `print` sem usar aspas simples."
         example: "Exemplo: nome is Hedy."
         demo_code: |-
             nome is Hedy
             print 'O meu nome é ' nome
+        name: '{is}'
     -   explanation: "Pergunto algo com `ask`."
         example: "Exemplo: cor is ask Qual é a tua cor favorita?"
         demo_code: |-
             cor is ask 'Qual é a tua cor favorita?'
             print cor ' é a tua favorita!'
+        name: '{ask}'
 5:
     start_code: |-
         nome is ask Como te chamas?
@@ -116,16 +159,27 @@
     -   explanation: "Escreve com exactidão usando aspas simples."
         example: "Exemplo: print 'Olá, bem-vindo(a) à Hedy!'"
         demo_code: "print 'Olá, bem-vindo(a) à Hedy!'"
+        name: '{print}'
     -   explanation: "Pergunta algo utilizando `ask`."
         example: "Exemplo: cor is ask Qual é a tua cor favorita?"
         demo_code: |-
             cor is ask Qual é a tua cor favorita?
             print cor ' é a tua favorita!'
+        name: '{ask}'
     -   explanation: "Faz uma escolha com `if`."
         example: "Exemplo: if cor is verde print 'Linda!' else print 'pff'"
         demo_code: |-
             cor is ask Qual é a tua cor favorita?
             if cor is verde print 'Linda!' else print 'pff'
+        name: '{if}'
+    -   explanation: Make a choice with `{if}`
+        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
+        name: '{if} with turtle'
+        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    -   demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        name: '{in}'
+        explanation: Check elements with `{in}`
+        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
     start_code: "print '5 vezes 5 é ' 5 * 5"
     intro_text: |
@@ -148,11 +202,13 @@
     -   explanation: "Escreve com exactidão usando aspas simples."
         example: "Exemplo: print '5 vezes 5 é ' 5 * 5"
         demo_code: "print '5 vezes 5 é ' 5 * 5"
+        name: '{print}'
     -   explanation: "Pergunta por um cálculo e verifica se está correcto."
         example: "Exemplo: resultado is ask Quanto é 10 mais 10?"
         demo_code: |-
             resultado = ask 'Quanto é 10 mais 10?'
             if resultado is 20 print 'Sim!' else print 'Oops'
+        name: '{ask}'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
         example: "Example: angles = ask 'How many angles?'"
@@ -173,16 +229,19 @@
     -   explanation: "Escreve com exactidão utilizando aspas simples."
         example: "Exemplo: print 'Olá, bem-vindo(a) à Hedy.'"
         demo_code: "print 'Olá, bem-vindo(a) à Hedy.'"
+        name: '{print}'
     -   explanation: "Pergunta alguma coisa usando `ask`."
         example: "Exemplo: cor = ask Qual é a tua cor favorita?"
         demo_code: |-
             cor = ask 'Qual é a tua cor favorita?'
             print cor ' é a tua favorita!'
+        name: '{ask}'
     -   explanation: "Faz uma escolha utilizando o `if`."
         example: "Exemplo: if cor is verde print 'Linda!' else print 'pff'"
         demo_code: |-
             cor = ask 'Qual é a tua cor favorita?'
             if cor is verde print 'Linda!' else print 'pff'
+        name: '{if}'
     -   name: "repeat - turtle"
         explanation: "Repeat a line of code with `repeat`."
         example: "Example: repeat 3 times forward 10"
@@ -210,6 +269,7 @@
     -   explanation: "Escreve alguma coisa. Lembra-te de usar aspas simples para escreveres com exactidão."
         example: "Exemplo: print '5 vezes 5 é ' 5 * 5"
         demo_code: "print '5 vezes 5 é ' 5 * 5"
+        name: '{print}'
     -   explanation: "Pergunta pelo resultado de uma soma e verfica se está correcto. Podemos agora escrever 2 linhas."
         example: "Example: answer = ask What is 5 plus 5?"
         demo_code: |-
@@ -220,6 +280,11 @@
             else
                 print 'Oops!'
                 print 'A resposta certa é 10'
+        name: '{ask}'
+    -   name: '`{repeat}` with turtle'
+        explanation: '{repeat} multiple lines'
+        example: 'Example: draw a square'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
     start_code: |-
         repeat 3 times
@@ -307,6 +372,7 @@
             else
                 print 'Oops!'
                 print 'A resposta certa é 10'
+        name: '{ask}'
 12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
@@ -345,6 +411,14 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
+    -   name: quotes after {if} comparison
+        example: name = 'Hedy'
+        explanation: Text with quotation marks after {if}
+        demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
+    -   name: quotes in list
+        example: name = 'Hedy', 'Felienne'
+        demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
+        explanation: A list with quotation marks
 13:
     start_code: |-
         name = ask 'what is your name?'
@@ -496,6 +570,22 @@
             if idade > 13
                 print 'És mais velho a do que eu!'
 
+    -   name: Equal
+        explanation: We use the `==` to check if two things are the same.
+        example: 'For example: answer == 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+    -   name: Not equal
+        explanation: 'We use the `!=` to check if two things are not the same. '
+        example: 'For example: answer != 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+    -   example: 'For example: age <= 12'
+        explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+        name: Smaller {or} equal
+        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+    -   name: Bigger or equal
+        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+        example: 'For example: age >= 14'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
 15:
     start_code: |-
         resultado = 0
@@ -533,6 +623,7 @@
         demo_code: |-
             fruta = ['maçã', 'banana', 'cereja']
             print fruta 
+        name: square brackets
     -   name: "Obtém um elemento da lista."
         explanation: "Para obter um elemento da lista usamos [número], pelo que, fruta[1] significa: obtém a primeira fruta da lista!"
         example: "Por exemplo: primeirafruta = fruta[1]"
@@ -560,6 +651,7 @@
             for i in range 1 to 12:
                 print i
             print 'Preparados ou não, aqui vou eu!'
+        name: '{elif}'
     -   explanation: "Precisamos de fazer a mesma coisa para todas as intruções `if`."
         example: "if cor is verde:'"
         demo_code: |-
@@ -568,6 +660,7 @@
                 print 'A cor é verde.'
             else:
                 print 'A cor não é verde.'
+        name: '{print}'
     -   explanation: "Vamos-te mostrar um novo comando que podes usar: `elif`. `elif` significa \"else if\". Começamos por verificar se o `if` é verdadeiro, se não for esse o caso, verificamos em seguida o `elif`, e se esse também não for verdadeiro, avançamos para o `else`."
         example: "elif a is 5:"
         demo_code: |-
@@ -578,3 +671,16 @@
                 print 'a é 2'
             else:
                 print 'a não é 1 nem 2'
+        name: '{if}'
+18:
+    intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+    commands:
+    -   name: '{print}'
+        explanation: With `{print}` you need to use parentheses
+        example: '{print}'
+        demo_code: "{print}('hi!')"
+    -   explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+        example: '{print}'
+        demo_code: "naam = 'Hedy'\n{print}('my name is ', naam)"
+        name: '{print} with var'
+    start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"

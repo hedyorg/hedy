@@ -64,7 +64,7 @@ class TestsLevel2(HedyTester):
     code = "print 'Welcome to OceanView!'"
     expected = textwrap.dedent("""\
     print(f'\\'Welcome to OceanView! \\'')""")
-    self.single_level_tester(code=code, expected=expected, translate=False)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_print_slashes(self):
     code = "print Welcome to O/ceanView"
@@ -178,14 +178,42 @@ class TestsLevel2(HedyTester):
     code = textwrap.dedent("""\
       direction is 70
       turn direction""")
-    expected = textwrap.dedent("""\
-      direction = '70'
-      t.right(direction)""")
+    expected = HedyTester.dedent(
+      "direction = '70'",
+      HedyTester.turn_transpiled('direction'))
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle()
+    )
+
+  def test_turn_number(self):
+    code = "turn 180"
+    expected = HedyTester.turn_transpiled(180)
+    self.multi_level_tester(
+      max_level=self.max_turtle_level,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle()
+    )
+
+  def test_turn_negative_number(self):
+    code = "turn -180"
+    expected = HedyTester.turn_transpiled(-180)
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle()
+    )
+
+  def test_one_turn_with_text_gives_type_error(self):
+    code = "turn koekoek"
+    self.multi_level_tester(
+      max_level=self.max_turtle_level,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_turn_with_string_var_gives_type_error(self):
@@ -202,9 +230,9 @@ class TestsLevel2(HedyTester):
     code = textwrap.dedent("""\
       ángulo is 90
       turn ángulo""")
-    expected = textwrap.dedent("""\
-      vefd88f42b64136f16e8f305dd375a921 = '90'
-      t.right(vefd88f42b64136f16e8f305dd375a921)""")
+    expected = HedyTester.dedent(
+      "vefd88f42b64136f16e8f305dd375a921 = '90'",
+      HedyTester.turn_transpiled('vefd88f42b64136f16e8f305dd375a921'))
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
@@ -235,10 +263,9 @@ class TestsLevel2(HedyTester):
     code = textwrap.dedent("""\
       a is 50
       forward a""")
-    expected = textwrap.dedent("""\
-      a = '50'
-      t.forward(a)
-      time.sleep(0.1)""")
+    expected = HedyTester.dedent(
+      "a = '50'",
+      HedyTester.forward_transpiled('a'))
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
@@ -282,28 +309,27 @@ class TestsLevel2(HedyTester):
     print(f'{naam}')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_forward_ask(self):
     code = textwrap.dedent("""\
-    afstand is ask hoe ver dan?
-    forward afstand""")
+      afstand is ask hoe ver dan?
+      forward afstand""")
 
-    expected = textwrap.dedent("""\
-    afstand = input('hoe ver dan'+'?')
-    t.forward(afstand)
-    time.sleep(0.1)""")
+    expected = HedyTester.dedent(
+      "afstand = input('hoe ver dan'+'?')",
+      HedyTester.forward_transpiled('afstand'))
     self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
-
 
   def test_turn_ask(self):
     code = textwrap.dedent("""\
-    print Turtle race
-    direction is ask Where to turn?
-    turn direction""")
+      print Turtle race
+      direction is ask Where to turn?
+      turn direction""")
 
-    expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    direction = input('Where to turn'+'?')
-    t.right(direction)""")
+    expected = HedyTester.dedent("""\
+      print(f'Turtle race')
+      direction = input('Where to turn'+'?')""",
+      HedyTester.turn_transpiled('direction'))
 
     self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
   def test_assign_print_punctuation(self):
