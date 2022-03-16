@@ -257,6 +257,12 @@ class TestPages(AuthHelper):
         self.given_fresh_user_is_logged_in()
         self.get_data('/my-profile')
 
+    def test_get_landing_page(self):
+        # WHEN attempting to get the landing page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/landing-page')
+
     def test_get_admin_page(self):
         # WHEN attempting to get the admin page
         # THEN receive an OK response code from the server
