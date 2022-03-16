@@ -1094,18 +1094,15 @@ class TestCustomizeClasses(AuthHelper):
         class_id = self.get_data('classes')[0].get('id')
 
         # WHEN attempting to create an invalid customization
-        # Todo TB -> These bodies should be updated to align with customization
         invalid_bodies = [
             '',
             [],
             {},
-            {'code': 1},
-            {'code': ['1']},
-            {'code': 'hello world'},
-            {'code': 'hello world', 'name': 1},
-            {'code': 'hello world', 'name': 'program 1'},
-            {'code': 'hello world', 'name': 'program 1', 'level': '1'},
-            {'code': 'hello world', 'name': 'program 1', 'level': 1, 'adventure_name': 1},
+            {'levels': 1},
+            {'levels': [1, 2, 3]},
+            {'levels': [1, 2, 3], 'adventures': []},
+            {'levels': [1, 2, 3], 'adventures': {}},
+            {'levels': [1, 2, 3], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []}
         ]
 
         for invalid_body in invalid_bodies:
