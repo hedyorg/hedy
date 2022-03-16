@@ -1110,11 +1110,11 @@ class TestCustomizeClasses(AuthHelper):
 
         for invalid_body in invalid_bodies:
             # THEN receive an invalid response code from the server
-            self.post_data('/for-teachers/customize-class/' + class_id, invalid_body, expect_http_code=400)
+            self.post_data('for-teachers/customize-class/' + class_id, invalid_body, expect_http_code=400)
 
         # WHEN customizing a class that doesn't exist
         # THEN receive a not found response code from the server
-        self.post_data('/for-teachers/customize-class/123' + class_id, {}, expect_http_code=404)
+        self.post_data('for-teachers/customize-class/123' + class_id, {}, expect_http_code=404)
 
     def test_valid_customization(self):
         # GIVEN a user with teacher permissions
@@ -1146,9 +1146,28 @@ class TestCustomizeClasses(AuthHelper):
 
         for valid_body in valid_bodies:
             # THEN receive an invalid response code from the server
-            self.post_data('/for-teachers/customize-class/' + class_id, valid_body, expect_http_code=200)
+            self.post_data('for-teachers/customize-class/' + class_id, valid_body, expect_http_code=200)
 
     def test_remove_customization(self):
+        # GIVEN a user with teacher permissions
+        # (we create a new user to ensure that the user has no classes yet)
+        self.given_teacher_is_logged_in()
+
+        # WHEN creating a class
+        # THEN receive an OK response code with the server
+        # AND retrieve the class_id from the first class of your classes
+        self.post_data('class', {'name': 'class1'})
+        class_id = self.get_data('classes')[0].get('id')
+
+        # WHEN creating class customizations
+        # THEN receive an OK response code with the server
+        body = {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []}
+        self.post_data('for-teachers/' + class_id, body, expect_http_code=200)
+
+        # WHEN deleting class customizations
+        # THEN receive an OK response code with the server
+        self.delete_data('for-teachers/' + class_id, body, expect_http_code=200)
+
         return None
 
 
