@@ -539,6 +539,37 @@ class TestAuth(AuthHelper):
         self.user['email'] = new_email
         self.user['verify_token'] = body['token']
 
+    def test_invalid_change_language(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        # WHEN trying to update the profile with an invalid language
+        body = {
+            'email': self.user['email'],
+            'language': 'abc',
+            'keyword_language': self.user['keyword_language']
+        }
+        # THEN receive an invalid response code from the server
+        self.post_data('profile', body, expect_http_code=400)
+
+    def test_valid_change_language(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        # WHEN trying to update the profile with a valid language
+        body = {
+            'email': self.user['email'],
+            'language': 'nl',
+            'keyword_language': self.user['keyword_language']
+        }
+        # THEN receive a valid response code from the server
+        self.post_data('profile', body, expect_http_code=200)
+
+        # WHEN trying to retrieve the current profile
+        profile = self.get_data('profile')
+        # THEN verify that the language is successfully changed
+        self.assertEqual(profile['language'], body['language'])
+
 
     def test_invalid_recover_password(self):
         # GIVEN an existing user
