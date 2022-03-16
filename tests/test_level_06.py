@@ -245,6 +245,16 @@ class TestsLevel6(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  @parameterized.expand(HedyTester.arithmetic_operations)
+  def test_calc_precedes_quoted_string_in_assign(self, operation):  # issue #2067
+    code = f"a is '3{operation}10'"  # gets parsed to arithmetic operation of '3 and 10'
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   def test_assign_parses_periods(self):
     code = "period is ."
     expected = "period = '.'"
@@ -334,10 +344,11 @@ class TestsLevel6(HedyTester):
 
     self.single_level_tester(code=code, expected=expected, output='2')
 
-  def test_calc_with_string_var_gives_type_error(self):
-    code = textwrap.dedent("""\
+  @parameterized.expand(HedyTester.arithmetic_operations)
+  def test_calc_with_string_var_gives_type_error(self, operation):
+    code = textwrap.dedent(f"""\
       a is test
-      print a + 2""")
+      print a {operation} 2""")
 
     self.multi_level_tester(
       max_level=11,
@@ -345,10 +356,23 @@ class TestsLevel6(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
-  def test_calc_with_list_var_gives_type_error(self):
-    code = textwrap.dedent("""\
+  @parameterized.expand(HedyTester.arithmetic_operations)
+  def test_calc_with_quoted_string_gives_type_error(self, operation):
+    code = textwrap.dedent(f"""\
+      a is 1
+      print a {operation} 'Test'""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
+  @parameterized.expand(HedyTester.arithmetic_operations)
+  def test_calc_with_list_var_gives_type_error(self, operation):
+    code = textwrap.dedent(f"""\
       a is one, two
-      print a + 2""")
+      print a {operation} 2""")
 
     self.multi_level_tester(
       max_level=11,

@@ -45,8 +45,12 @@ def collect_snippets(path):
                     if tag.name != 'pre' or not tag.contents[0]:
                         continue
                     code_snippet_counter += 1
-                    Hedy_snippets.append(Snippet(filename=file, level=level, field_name='intro_text snippet #' + str(code_snippet_counter),
-                                                 code=tag.contents[0].contents[0]))
+                    try:
+                        code = tag.contents[0].contents[0]
+                        Hedy_snippets.append(Snippet(filename=file, level=level, field_name='intro_text snippet #' + str(code_snippet_counter),
+                                                 code=code))
+                    except:
+                        print(f'Intro snippet for level {level} has an error')
     return Hedy_snippets
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../coursedata/level-defaults')]
