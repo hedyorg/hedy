@@ -1263,7 +1263,17 @@ class TestCustomAdventures(AuthHelper):
         self.post_data('for-teachers/customize-adventure', body, expect_http_code=404)
 
     def test_valid_update_adventure(self):
-        return None
+        # GIVEN a new teacher
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to create a valid adventure
+        # THEN receive an OK response from the server
+        adventure_id = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200).get("id")
+
+        # WHEN attempting to update an adventure with a valid body
+        # THEN receive an OK response from the server
+        body = {'id': adventure_id, 'name': 'test_adventure', 'level': '5', 'content': 'This is just long enough!', 'public': True}
+        self.post_data('for-teachers/customize-adventure', body, expect_http_code=200)
 
     def test_destroy_adventure(self):
         # GIVEN a user with teacher permissions
