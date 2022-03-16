@@ -176,6 +176,16 @@ class AuthHelper(unittest.TestCase):
 
         return response['headers'] if return_headers else response['body']
 
+    def delete_data(self, path, body, expect_http_code=200, no_cookie=False, return_headers=False):
+        cookies = self.user_cookies[self.username] if self.username and not no_cookie else None
+
+        method = 'delete'
+        response = request(method, path, body=body, cookies=cookies)
+        self.assertEqual(response['code'], expect_http_code,
+                         f'While {method}ing {body} to {path} (user: {self.username})')
+
+        return response['headers'] if return_headers else response['body']
+
     def get_data(self, path, expect_http_code=200, no_cookie=False, return_headers=False):
         cookies = self.user_cookies[self.username] if self.username and not no_cookie else None
         response = request('get', path, body='', cookies=cookies)
