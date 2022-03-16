@@ -1249,13 +1249,12 @@ class TestCustomAdventures(AuthHelper):
             {'id': '123', 'name': 123},
             {'id': '123', 'name': 123, 'level': 5},
             {'id': '123', 'name': 123, 'level': 5, 'content': 123},
-            {'id': '123', 'name': 'panda', 'level': '5', 'content': 'too short!'},
-            {'id': '123', 'name': 'panda', 'level': '5', 'content': 'This is just long enough!', 'public': 'panda'},
+            {'id': adventure_id, 'name': 'panda', 'level': '5', 'content': 'too short!'},
+            {'id': adventure_id, 'name': 'panda', 'level': '5', 'content': 'This is just long enough!', 'public': 'panda'},
         ]
 
         # THEN receive a 400 error from the server
         for invalid_body in invalid_bodies:
-            invalid_body['id'] = adventure_id
             self.post_data('for-teachers/customize-adventure', invalid_body, expect_http_code=400)
 
         # WHEN attempting to update a non-existing adventure
