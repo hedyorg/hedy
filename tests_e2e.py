@@ -1113,9 +1113,18 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN creating a class
         # THEN receive an OK response code with the server
+        # AND retrieve the class_id from the first class of your classes
         self.post_data('class', {'name': 'class1'})
+        class_id = self.get_data('classes')[0].get('id')
 
-        # Todo TB -> Add valid body for customizations
+        valid_bodies = [
+            {'levels': [], 'adventures': {}, 'opening_dates': {}},
+            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}}
+        ]
+
+        for valid_body in valid_bodies:
+            # THEN receive an invalid response code from the server
+            self.post_data('/for-teachers/customize-class/' + class_id, valid_body, expect_http_code=200)
 
     def test_remove_customization(self):
         return None

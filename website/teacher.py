@@ -254,6 +254,10 @@ def routes(app, database, achievements):
             return "Levels must be a list", 400
         if not isinstance(body.get('adventures'), dict):
             return 'Adventures must be a dict', 400
+        if not isinstance(body.get('teacher_adventures'), list):
+            return 'Teacher adventures must be a list', 400
+        if not isinstance(body.get('other_settings'), list):
+            return 'Other settings must be a list', 400
         if not isinstance(body.get('opening_dates'), dict):
             return 'Opening dates must be a dict', 400
 
