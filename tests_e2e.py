@@ -1248,9 +1248,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to remove the adventure
         # THEN receive an OK response from the server
-        self.delete_data('for-teachers/customize-adventure/' + body.get('id', ""), ex)
-
-
+        self.delete_data('for-teachers/customize-adventure/' + body.get('id', ""), expect_http_code=200)
 
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
 
