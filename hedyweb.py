@@ -1,5 +1,8 @@
 import collections
 import json
+
+from flask_babel import gettext
+
 from website.yaml_file import YamlFile
 import attr
 import glob
