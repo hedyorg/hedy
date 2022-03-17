@@ -107,9 +107,9 @@
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-4">
       <div class="flex justify-between items-start h-12 overflow-visible">
-        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{ui.run_code_button}} </button>
+        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{_('run_code_button')}} </button>
         {% if show_edit_button %}
-            <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn">{{ui.edit_code_button}}</button>
+            <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn">{{_('edit_code_button')}}</button>
         {% else %}
             <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="hidden h-28 -mt-2" id="repair_button">
         {% endif %}

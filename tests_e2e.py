@@ -856,7 +856,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program public
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'public': 1, 'error': False})
+        self.post_data('programs/share', {'id': program_id, 'public': True, 'error': False})
 
         saved_programs = self.get_data('programs_list')['programs']
         for program in saved_programs:
@@ -876,11 +876,11 @@ class TestProgram(AuthHelper):
         self.given_user_is_logged_in()
         program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
         program_id = self.post_data('programs', program)['id']
-        self.post_data('programs/share', {'id': program_id, 'public': 1, 'error': False})
+        self.post_data('programs/share', {'id': program_id, 'public': True, 'error': False})
 
         # WHEN making a program private
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'public': 1, 'error': False})
+        self.post_data('programs/share', {'id': program_id, 'public': False, 'error': False})
 
         saved_programs = self.get_data('programs_list')['programs']
         for program in saved_programs:
