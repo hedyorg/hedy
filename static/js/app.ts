@@ -242,6 +242,11 @@ export function runit(level: string, lang: string, cb: () => void) {
 
   error.hide();
   success.hide();
+
+  var runItBtn = $('#runit');
+  runItBtn.prop('disabled', true);
+  setTimeout(function() {runItBtn.prop('disabled', false)}, 500);
+
   try {
     level = level.toString();
     var editor = theGlobalEditor;
