@@ -22,7 +22,6 @@ var StopExecution = false;
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
 
-
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
@@ -42,6 +41,8 @@ var StopExecution = false;
     exampleEditor.setOptions({ maxLines: Infinity });
     if ($(preview).hasClass('common-mistakes')) {
       exampleEditor.setOptions({ minLines: 10 });
+    } else if ($(preview).hasClass('cheatsheet')) {
+      exampleEditor.setOptions({ minLines: 1 });
     } else {
       exampleEditor.setOptions({ minLines: 2 });
     }
@@ -1470,6 +1471,12 @@ export function filter_admin() {
   if (filter == "email") {
     const substring = $('#email_filter_input').val();
     window.open('?filter=' + filter + "&substring=" + substring, "_self");
+  } else if (filter == "language") {
+    const lang = $('#language_filter_input').val();
+    window.open('?filter=' + filter + "&language=" + lang, "_self");
+  } else if (filter == "keyword_language") {
+    const keyword_lang = $('#keyword_language_filter_input').val();
+    window.open('?filter=' + filter + "&keyword_language=" + keyword_lang, "_self");
   } else {
     const start_date = $('#admin_start_date').val();
     const end_date = $('#admin_end_date').val();

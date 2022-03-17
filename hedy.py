@@ -207,11 +207,11 @@ def get_list_keywords(commands, to_lang):
     to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
     en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
 
-    with open(en_yaml_filesname_with_path, 'r') as stream:
+    with open(en_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
         en_yaml_dict = yaml.safe_load(stream)
 
     try:
-        with open(to_yaml_filesname_with_path, 'r') as stream:
+        with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
         for command in commands:
             try:
@@ -2163,7 +2163,3 @@ def execute(input_string, level):
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
-
-# f = open('output.py', 'w+')
-# f.write(python)
-# f.close()
