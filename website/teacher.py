@@ -414,12 +414,12 @@ def routes(app, database, achievements):
     @requires_login
     def view_adventure(user, adventure_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext(u'retrieve_adventure'))
+            return utils.error_page(error=403, ui_message=gettext(u'retrieve_adventure_error'))
         adventure = DATABASE.get_adventure(adventure_id)
         if not adventure:
             return utils.error_page(error=404, ui_message=gettext(u'no_such_adventure'))
         if adventure['creator'] != user['username'] and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext(u'retrieve_adventure'))
+            return utils.error_page(error=403, ui_message=gettext(u'retrieve_adventure_error'))
 
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
         adventure['content'] = adventure['content'].replace("<pre>", "<pre level='" + str(adventure['level']) + "'>")
@@ -430,7 +430,7 @@ def routes(app, database, achievements):
     @requires_login
     def get_adventure_info(user, adventure_id):
         if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext(u'retrieve_adventure'))
+            return utils.error_page(error=403, ui_message=gettext(u'retrieve_adventure_error'))
         adventure = DATABASE.get_adventure(adventure_id)
         if not adventure or adventure['creator'] != user['username']:
             return utils.error_page(error=404,  ui_message=gettext(u'no_such_adventure'))
@@ -459,7 +459,7 @@ def routes(app, database, achievements):
             return gettext(u'public_invalid'), 400
 
         if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext(u'retrieve_adventure'))
+            return utils.error_page(error=403, ui_message=gettext(u'retrieve_adventure_error'))
         current_adventure = DATABASE.get_adventure(body['id'])
         if not current_adventure or current_adventure['creator'] != user['username']:
             return utils.error_page(error=404,  ui_message=gettext(u'no_such_adventure'))
@@ -485,7 +485,7 @@ def routes(app, database, achievements):
     @requires_login
     def delete_adventure(user, adventure_id):
         if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext(u'retrieve_adventure'))
+            return utils.error_page(error=403, ui_message=gettext(u'retrieve_adventure_error'))
         adventure = DATABASE.get_adventure(adventure_id)
         if not adventure or adventure['creator'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext(u'no_such_adventure'))
