@@ -18,7 +18,8 @@ _LARGER_EQUALS: ">="
 _EXCLAMATION_MARK: "!"
 _QUESTION_MARK: "?"
 _PERIOD: "."
-_SINGLE_QUOTE: "'"
+//_SINGLE_QUOTE: "'"
+_SINGLE_QUOTE: ("'" | "\"")
 _MULTIPLY: _SPACE* "*" _SPACE*
 _ADD: _SPACE* "+" _SPACE*
 _SUBTRACT: _SPACE* "-" _SPACE* //TODO FH Jan '22 now to we use if for negative numbers too maybe minus is nicer/better?

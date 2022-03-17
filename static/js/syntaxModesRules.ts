@@ -541,7 +541,8 @@ function rule_isInputParen() {
 function rule_expressions() {
   return comp(
     recognize('start', {
-      regex: "'[^']*'",
+//      regex: "'[^']*'",
+        regex: "('|\")[^('|\")]*('|\")",
       token: 'constant.character',
     }),
     recognize('start', {
