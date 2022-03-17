@@ -34,7 +34,7 @@ def routes(app, db):
     @requires_login
     def render_class_stats(user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext(u'retrieve_class'))
+            return utils.error_page(error=403, ui_message=gettext(u'retrieve_class_error'))
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or (class_['teacher'] != user['username'] and not is_admin(user)):
