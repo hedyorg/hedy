@@ -703,7 +703,7 @@ def routes(app, database):
     def mark_as_teacher():
         user = current_user()
         if not is_admin(user) and not is_testing_request(request):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
 
         body = request.json
 
@@ -730,7 +730,7 @@ def routes(app, database):
     def change_user_email():
         user = current_user()
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
 
         body = request.json
 

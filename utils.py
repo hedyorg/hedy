@@ -208,7 +208,6 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
                            page_error=page_error or ui_message or '', default=default), error
 
 
-
 def session_id():
     """Returns or sets the current session ID."""
     if 'session_id' not in session:

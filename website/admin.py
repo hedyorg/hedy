@@ -14,7 +14,7 @@ def routes(app, database):
     @app.route('/admin', methods=['GET'])
     def get_admin_page():
         if not utils.is_testing_request(request) and not is_admin(current_user()):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
         return render_template('admin/admin.html', page_title=gettext(u'title_admin'))
 
 
@@ -22,7 +22,7 @@ def routes(app, database):
     @requires_login
     def get_admin_users_page(user):
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
 
         category = request.args.get('filter', default=None, type=str)
         category = None if category == "null" else category
@@ -92,7 +92,7 @@ def routes(app, database):
     @requires_login
     def get_admin_classes_page(user):
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
 
         # Retrieving the user for each class to find the "last_used" is expensive -> improve when we have 100+ classes
         classes = [{
@@ -109,7 +109,7 @@ def routes(app, database):
     @requires_login
     def get_admin_adventures_page(user):
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
 
         adventures = [{
             "id": adventure.get('id'),
@@ -127,6 +127,6 @@ def routes(app, database):
     @requires_login
     def get_admin_stats_page(user):
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
         return render_template('admin/admin-stats.html', page_title=gettext(u'title_admin'))
 

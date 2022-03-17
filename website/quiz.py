@@ -277,10 +277,12 @@ def is_quiz_enabled():
 
 
 def quiz_disabled_error():
+    # Todo TB -> Somewhere in the near future we should localize these messages
     return utils.error_page(error=404, page_error='Hedy quiz disabled!', menu=False, iframe=True)
 
 
 def no_quiz_data_error():
+    # Todo TB -> Somewhere in the near future we should localize these messages
     return utils.error_page(error=404, page_error='No quiz data found for this level', menu=False, iframe=True)
 
 def quiz_data_file_for(lang, level):
