@@ -856,7 +856,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program public
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'public': True, 'error': False})
+        self.post_data('programs/share', {'id': program_id, 'public': 1, 'error': False})
 
         saved_programs = self.get_data('programs_list')['programs']
         for program in saved_programs:
@@ -869,18 +869,18 @@ class TestProgram(AuthHelper):
         self.given_fresh_user_is_logged_in()
         # WHEN requesting a public program
         # THEN receive an OK response code from the server
-        self.get_data('hedy/1/' + program_id)
+        self.get_data('hedy/1/' + program_id, expect_http_code=200)
 
     def test_valid_make_program_private(self):
         # GIVEN a logged in user with at least one public program
         self.given_user_is_logged_in()
         program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
         program_id = self.post_data('programs', program)['id']
-        self.post_data('programs/share', {'id': program_id, 'public': True, 'error': False})
+        self.post_data('programs/share', {'id': program_id, 'public': 1, 'error': False})
 
         # WHEN making a program private
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'public': False, 'error': False})
+        self.post_data('programs/share', {'id': program_id, 'public': 1, 'error': False})
 
         saved_programs = self.get_data('programs_list')['programs']
         for program in saved_programs:
