@@ -535,6 +535,7 @@ class TestAuth(AuthHelper):
         # THEN confirm that the server replies with an email verification token
         self.assertIsInstance(body['token'], str)
 
+
         # FINALLY update the email & email verification token on user
         self.user['email'] = new_email
         self.user['verify_token'] = body['token']
