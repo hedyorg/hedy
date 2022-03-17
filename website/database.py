@@ -150,8 +150,6 @@ class Database:
     def store_token(self, token):
         """Store a token in the database."""
 
-        # But first, remove all already existing tokens for this user
-        TOKENS.del_many({'username': token['username']})
         TOKENS.create(token)
 
     def forget_token(self, token_id):
@@ -160,6 +158,10 @@ class Database:
         Returns the Token that was deleted.
         """
         return TOKENS.delete({'id': token_id})
+
+    def delete_all_tokens(self, username):
+        """Forget all Tokens from a user."""
+        TOKENS.del_many({'username': username})
 
     def store_user(self, user):
         """Store a user in the database."""
