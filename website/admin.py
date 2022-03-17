@@ -30,25 +30,39 @@ def routes(app, database):
         substring = request.args.get('substring', default=None, type=str)
         start_date = request.args.get('start', default=None, type=str)
         end_date = request.args.get('end', default=None, type=str)
+        language = request.args.get('language', default=None, type=str)
+        keyword_language = request.args.get('keyword_language', default=None, type=str)
 
         substring = None if substring == "null" else substring
         start_date = None if start_date == "null" else start_date
         end_date = None if end_date == "null" else end_date
+        language = None if language == "null" else language
+        keyword_language = None if keyword_language == "null" else keyword_language
 
         filtering = False
-        if substring or start_date or end_date or category == "all":
+        if substring or start_date or end_date or language or keyword_language or category == "all":
             filtering = True
 
         # After hitting 1k users, it'd be wise to add pagination.
         users = DATABASE.all_users(filtering)
         userdata =[]
-        fields =['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
+        fields = [
+            'username', 'email', 'birth_year', 'country',
+            'gender', 'created', 'last_login', 'verification_pending',
+            'is_teacher', 'program_count', 'prog_experience', 'experience_languages', 'language', 'keyword_language'
+        ]
 
         for user in users:
             data = pick(user, *fields)
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher'] = bool(data['is_teacher'])
             data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
+            if filtering and category == "language":
+                if language != data['language']:
+                    continue
+            if filtering and category == "keyword_language":
+                if keyword_language != data['keyword_language']:
+                    continue
             if filtering and category == "email":
                 if substring not in data['email']:
                     continue
@@ -70,6 +84,7 @@ def routes(app, database):
 
         return render_template('admin/admin-users.html', users=userdata, page_title=gettext(u'title_admin'),
                                filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
+                               language_filter=language, keyword_language_filter=keyword_language,
                                program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 

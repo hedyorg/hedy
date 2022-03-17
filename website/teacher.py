@@ -253,10 +253,12 @@ def routes(app, database, achievements):
             return "Levels must be a list", 400
         if not isinstance(body.get('adventures'), dict):
             return 'Adventures must be a dict', 400
+        if not isinstance(body.get('teacher_adventures'), list):
+            return 'Teacher adventures must be a list', 400
+        if not isinstance(body.get('other_settings'), list):
+            return 'Other settings must be a list', 400
         if not isinstance(body.get('opening_dates'), dict):
             return 'Opening dates must be a dict', 400
-
-        print(body)
 
         #Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body['levels']]
@@ -421,9 +423,8 @@ def routes(app, database, achievements):
 
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
         adventure['content'] = adventure['content'].replace("<pre>", "<pre level='" + str(adventure['level']) + "'>")
-        print(adventure['content'])
         return render_template('view-adventure.html', adventure=adventure,
-                               page_title=hedyweb.get_page_title('view adventure'), current_page='my-profile')
+                               page_title=g.ui_texts.get('title_view-adventure'), current_page='my-profile')
 
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['GET'])
     @requires_login
@@ -455,7 +456,7 @@ def routes(app, database, achievements):
         if len(body.get('content')) < 20:
             return gettext(u'adventure_length'), 400
         if not isinstance(body.get('public'), bool):
-            return gettext(u'adventure_length'), 400
+            return gettext(u'public_invalid'), 400
 
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='retrieve_adventure')
@@ -497,7 +498,14 @@ def routes(app, database, achievements):
     def create_adventure(user):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message='create_adventure')
+
         body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return g.auth_texts.get('ajax_error'), 400
+        if not isinstance(body.get('name'), str):
+            return g.auth_texts.get('adventure_name_invalid'), 400
+
         adventures = DATABASE.get_teacher_adventures(user['username'])
         for adventure in adventures:
             if adventure['name'] == body['name']:

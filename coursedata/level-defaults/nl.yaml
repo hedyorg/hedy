@@ -39,9 +39,9 @@
             {turn} {left}
             {forward} 25
             {turn} {right}
-    example_code: "## Voorbeeldcode\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+    example_code: "## Voorbeeldcode\n```\n{print} Hallo!\n{print} Welkom bij Hedy!\n```\n"
     intro_text_2: "\n Je kunt ook een vraag stellen met `{ask}` en het antwoord laten herhalen met `{echo}`.\n Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.\n"
-    example_code_2: "## Voorbeeldcode\n```\n{ask} What is your name?\n{echo} hello\n```\n"
+    example_code_2: "## Voorbeeldcode\n```\n{ask} Hoe heet je?\n{echo} hallo\n```\n"
 2:
     intro_text: |
         In level 2 leren we iets nieuws. Je kunt een woord een naam geven met `{is}`. Je kunt daarna in je code overal naam gebruiken. Dat wordt dan vervangen door Hedy. Zo:
@@ -104,7 +104,7 @@
         Je kunt in dit level ook dingen aan een lijstje toevoegen met het commando `{add}`.
         Daarnaast kun je dingen van het lijstje verwijderen. Dat doe je met `{remove}`.
 
-    example_code_2: |
+    example_code_2: |4
 
         ## Voorbeeld Hedy Code
         ```
@@ -217,18 +217,18 @@
         demo_code: |-
             antwoord {is} {ask} 'Hoe ver moet ik lopen?'
             {if} antwoord {is} ver {forward} 100 {else} {forward} 5
-    -   demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-        example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+    -   demo_code: "kleur {is} {ask} 'Wat is je lievelingskleur?'\n{if} kleur {is} groen {print} 'mooi!' {else} {print} 'bah'"
+        example: "Voorbeeld: {if} kleur {is} groen {print} 'mooi!' {else} {print} 'bah'"
         name: '{if}'
-        explanation: Make a choice with `{if}`
-    -   explanation: Make a choice with `{if}`
-        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
-        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+        explanation: Maak een keuze met `{if}`
+    -   explanation: Maak een keuze met `{if}`
+        example: 'Voorbeeld: {if} antwoord {is} ver {forward} 100 {else} {forward} 5'
+        demo_code: "antwoord {is} {ask} 'Hoe ver moet ik lopen?'\n{if} antwoord {is} ver {forward} 100 {else} {forward} 5"
         name: '{if} with turtle'
     -   explanation: Check elements with `{in}`
-        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        example: "Voorbeeld: {if} kleur {in} mooie_kleuren {print} 'mooi!' {else} {print} 'bah'"
         name: '{in}'
-        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        demo_code: "mooie_kleuren {is} groen, geel\nkleur {is} {ask} 'Wat {is} je lievelingskleur?'\n{if} kleur {in} mooie_kleuren {print} 'mooi!' {else} {print} 'bah'"
 6:
     start_code: "{print} '5 keer 5 is ' 5 * 5"
     intro_text: |
@@ -239,6 +239,7 @@
 
         De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
         Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als "5 keer 5", dan onthoud je het het makkelijkst.
+
         ## Voorbeeld Hedy code
         ```
         {print} '5 plus 5 is ' 5 + 5
@@ -254,7 +255,7 @@
         ```
     commands:
     -   name: "{print}"
-        explanation: "Iets letterlijk printen met `{print}`."
+        explanation: "Iets letterlijk printen met `{print}`"
         example: "Bijvoorbeeld: {print} '5 keer 5 {is} ' 5 * 5"
         demo_code: "{print} '5 keer 5 {is} ' 5 * 5"
     -   name: "`{ask}` en `{if}` samen met rekenen"

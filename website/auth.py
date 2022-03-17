@@ -2,7 +2,7 @@ import collections
 import os
 from flask_babel import gettext
 import utils
-from hedy import ALL_LANGUAGES
+from hedy import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -537,7 +537,8 @@ def routes(app, database):
             return gettext(u'email_invalid'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return gettext(u'language_invalid'), 400
-        if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
+        if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get(
+                'language')] or body.get('keyword_language') not in ALL_KEYWORD_LANGUAGES.keys():
             return gettext(u'keyword_language_invalid'), 400
 
         # Validations, optional fields
@@ -619,7 +620,7 @@ def routes(app, database):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = DATABASE.user_by_username(user['username'])
 
-        output = {'username': user['username'], 'email': user['email']}
+        output = {'username': user['username'], 'email': user['email'], 'language': user.get('language', 'en')}
         for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
             if field in user:
                 output[field] = user[field]

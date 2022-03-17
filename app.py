@@ -987,6 +987,16 @@ def get_specific_adventure(name, level):
     return hedyweb.render_specific_adventure(
         level_defaults=defaults, level_number=level, adventure=adventure, prev_level=prev_level, next_level=next_level)
 
+
+@app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
+@app.route('/cheatsheet/<level>', methods=['GET'])
+def get_cheatsheet_page(level):
+    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
+    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
+    defaults = level_defaults_for_lang.get_defaults_for_level(int(level))
+
+    return render_template("cheatsheet.html", defaults=defaults, level=level)
+
 @app.errorhandler(404)
 def not_found(exception):
     return utils.error_page(error=404, ui_message='page_not_found')
@@ -1285,12 +1295,19 @@ def update_public_profile(user):
     # Validations
     if not isinstance(body, dict):
         return gettext(u'ajax_error'), 400
-    if not isinstance(body.get('image'), str):
+    # The images are given as a "picture id" from 1 till 12
+    if not isinstance(body.get('image'), str) or int(body.get('image'), 0) < 1 or int(body.get('image'), 0) > 12:
         return gettext(u'image_invalid'), 400
     if not isinstance(body.get('personal_text'), str):
         return gettext(u'personal_text_invalid'), 400
     if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
         return gettext(u'favourite_program_invalid'), 400
+
+    # Verify that the set favourite program is actually from the user (and public)!
+    if 'favourite_program' in body:
+        program = DATABASE.program_by_id(body.get('favourite_program'))
+        if not program or program.get('username') != user['username'] or not program.get('public'):
+            return gettext(u'favourite_program_invalid'), 400
 
     achievement = None
     current_profile = DATABASE.get_public_profile_settings(user['username'])

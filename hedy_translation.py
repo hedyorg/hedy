@@ -19,7 +19,7 @@ def keywords_to_dict(to_lang="nl"):
     keywords_path = 'coursedata/keywords/'
     yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
 
-    with open(yaml_filesname_with_path, 'r') as stream:
+    with open(yaml_filesname_with_path, 'r', encoding='UTF-8') as stream:
         command_combinations = yaml.safe_load(stream)
 
     return command_combinations

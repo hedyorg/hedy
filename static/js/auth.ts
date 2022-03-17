@@ -240,7 +240,8 @@ export const auth = {
       });
     }
   },
-  markAsTeacher: function (username: string, is_teacher: boolean) {
+  markAsTeacher: function (checkbox: any, username: string, is_teacher: boolean) {
+    $(checkbox).prop('checked', false);
     let text = "Are you sure you want to remove " + username + " as a teacher?";
     if (is_teacher) {
       text = "Are you sure you want to make " + username + " a teacher?";
@@ -252,12 +253,13 @@ export const auth = {
         data: JSON.stringify({username: username, is_teacher: is_teacher}),
         contentType: 'application/json; charset=utf-8'
       }).done(function () {
+        $(checkbox).prop('checked', true);
         modal.alert(['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join(' '), 2000, false);
-      }).fail(function (error) {
-        console.log(error);
+      }).fail(function () {
         modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
       });
     });
+
   },
 
   // Todo TB Feb 2022 -> Re-write part of this functionality to the back-end as well (separate PR from #2101)
