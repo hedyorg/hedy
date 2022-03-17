@@ -424,7 +424,7 @@ def routes(app, database, achievements):
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
         adventure['content'] = adventure['content'].replace("<pre>", "<pre level='" + str(adventure['level']) + "'>")
         return render_template('view-adventure.html', adventure=adventure,
-                               page_title=g.ui_texts.get('title_view-adventure'), current_page='my-profile')
+                               page_title=gettext(u'title_view-adventure'), current_page='my-profile')
 
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['GET'])
     @requires_login
@@ -502,9 +502,9 @@ def routes(app, database, achievements):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return g.auth_texts.get('ajax_error'), 400
+            return gettext(u'ajax_error'), 400
         if not isinstance(body.get('name'), str):
-            return g.auth_texts.get('adventure_name_invalid'), 400
+            return gettext(u'adventure_name_invalid'), 400
 
         adventures = DATABASE.get_teacher_adventures(user['username'])
         for adventure in adventures:
