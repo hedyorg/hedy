@@ -3,7 +3,7 @@ import app
 import hedy, hedy_translation
 import re
 import sys
-import io
+import io, os
 from contextlib import contextmanager
 import inspect
 import unittest
@@ -14,7 +14,7 @@ class Snippet:
     self.level = level
     self.field_name = field_name
     self.code = code
-    filename_shorter = filename.split("/")[3]
+    filename_shorter = os.path.basename(filename)
     self.language = filename_shorter.split(".")[0]
     self.adventure_name = adventure_name
     self.name = f'{self.language}-{self.level}-{self.field_name}'
