@@ -149,7 +149,6 @@ class Database:
 
     def store_token(self, token):
         """Store a token in the database."""
-
         TOKENS.create(token)
 
     def forget_token(self, token_id):
