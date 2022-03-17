@@ -859,7 +859,7 @@ def index(level, program_id):
             return utils.error_page(error=404, ui_message='no_such_program')
 
         user = current_user()
-        public_program = bool(result.get('public', False))
+        public_program = True if result.get('public') == 1 else False
         # Verify that the program is either public, the current user is the creator or the user is admin
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
             return utils.error_page(error=404, ui_message='no_such_program')
