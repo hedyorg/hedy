@@ -145,7 +145,7 @@ msgstr ""
 #: website/teacher.py:298 website/teacher.py:331 website/teacher.py:367
 #: website/teacher.py:447 website/teacher.py:505
 msgid "ajax_error"
-msgstr ""
+msgstr "Nastala chyba, prosím zkus to znova."
 
 #: app.py:1300
 msgid "image_invalid"
@@ -189,19 +189,19 @@ msgstr ""
 
 #: coursedata/error-messages.txt:2
 msgid "Wrong Level"
-msgstr ""
+msgstr "Toto je správný kód v Hedy, ale na špatné úrovni. Napsal jsi kód úrovně {working_level} na úrovni {original_level}."
 
 #: coursedata/error-messages.txt:3
 msgid "Incomplete"
-msgstr ""
+msgstr "Jejda, zapomněl*a jsi kousek kódu! Na řádku {line_number} musíš ještě něco dopsat za {incomplete_command}."
 
 #: coursedata/error-messages.txt:4
 msgid "Invalid"
-msgstr ""
+msgstr "{invalid_command} není příkaz v Hedy na úrovni {level}. Nemyslel*a jsi spíš {guessed_command}?"
 
 #: coursedata/error-messages.txt:5
 msgid "Invalid Space"
-msgstr ""
+msgstr "Jejda, řádek číslo {line_number} začíná mezerou! Mezery dokáží počítač pořádně zmást, mohl*a bys ji prosím vymazat?"
 
 #: coursedata/error-messages.txt:6
 msgid "Has Blanks"
@@ -217,11 +217,11 @@ msgstr ""
 
 #: coursedata/error-messages.txt:9
 msgid "Parse"
-msgstr ""
+msgstr "Tebou zadaný kód není platný kód v Hedy. Chyba je na řádku {location[0]}, na pozici {location[1]}. Napsal*a jsi tam {character_found}, ale to není povoleno."
 
 #: coursedata/error-messages.txt:10
 msgid "Unquoted Text"
-msgstr ""
+msgstr "Dávej si pozor, pokud chceš něco vypsat, musí text začínat a končit uvozovkami. Někde jsi nějakou zapomněl*a."
 
 #: coursedata/error-messages.txt:11
 msgid "Unquoted Assignment"
@@ -233,7 +233,7 @@ msgstr ""
 
 #: coursedata/error-messages.txt:13
 msgid "Var Undefined"
-msgstr ""
+msgstr "Pokusil*a ses vypsat {name}, ale neinicializoval*a ji."
 
 #: coursedata/error-messages.txt:14
 msgid "Cyclic Var Definition"
@@ -281,47 +281,47 @@ msgstr ""
 
 #: coursedata/error-messages.txt:25
 msgid "space"
-msgstr ""
+msgstr "mezera"
 
 #: coursedata/error-messages.txt:26
 msgid "comma"
-msgstr ""
+msgstr "čárka"
 
 #: coursedata/error-messages.txt:27
 msgid "question mark"
-msgstr ""
+msgstr "otazník"
 
 #: coursedata/error-messages.txt:28
 msgid "newline"
-msgstr ""
+msgstr "nový řádek"
 
 #: coursedata/error-messages.txt:29
 msgid "period"
-msgstr ""
+msgstr "tečka"
 
 #: coursedata/error-messages.txt:30
 msgid "exclamation mark"
-msgstr ""
+msgstr "vykřičník"
 
 #: coursedata/error-messages.txt:31
 msgid "dash"
-msgstr ""
+msgstr "pomlčka"
 
 #: coursedata/error-messages.txt:32
 msgid "star"
-msgstr ""
+msgstr "hvězdička"
 
 #: coursedata/error-messages.txt:33
 msgid "single quotes"
-msgstr ""
+msgstr "jednoduché uvozovky"
 
 #: coursedata/error-messages.txt:34
 msgid "double quotes"
-msgstr ""
+msgstr "dvojité uvozovky"
 
 #: coursedata/error-messages.txt:35
 msgid "slash"
-msgstr ""
+msgstr "lomítko"
 
 #: coursedata/error-messages.txt:36
 msgid "string"
@@ -364,7 +364,7 @@ msgstr ""
 #: templates/login.html:12 templates/profile.html:93 templates/recover.html:8
 #: templates/signup.html:10
 msgid "username"
-msgstr ""
+msgstr "Uživatelské jméno"
 
 #: templates/class-overview.html:25 templates/class-overview.html:65
 msgid "last_login"
@@ -391,7 +391,7 @@ msgstr ""
 #: templates/class-overview.html:83 templates/profile.html:148
 #: templates/profile.html:150 templates/profile.html:163
 msgid "change_password"
-msgstr ""
+msgstr "Změnit heslo"
 
 #: templates/class-overview.html:53 templates/class-overview.html:71
 msgid "remove_student"
@@ -514,7 +514,7 @@ msgstr ""
 #: templates/level-page.html:11 templates/quiz/startquiz.html:10
 #: templates/view-program-page.html:12 templates/view-program-page.html:28
 msgid "level_title"
-msgstr ""
+msgstr "Úroveň"
 
 #: templates/create-accounts.html:5
 msgid "create_multiple_accounts"
@@ -531,12 +531,12 @@ msgstr ""
 #: templates/create-accounts.html:17 templates/profile.html:96
 #: templates/recover.html:8 templates/signup.html:13
 msgid "email"
-msgstr ""
+msgstr "Email"
 
 #: templates/create-accounts.html:18 templates/login.html:15
 #: templates/reset.html:8 templates/signup.html:19
 msgid "password"
-msgstr ""
+msgstr "Heslo"
 
 #: templates/create-accounts.html:20
 msgid "select_class"
@@ -591,7 +591,7 @@ msgstr ""
 #: templates/programs.html:18 templates/programs.html:48
 #: templates/view-adventure.html:6
 msgid "adventure"
-msgstr ""
+msgstr "Dobrodružství"
 
 #: templates/customize-adventure.html:44
 msgid "template_code"
@@ -638,7 +638,7 @@ msgstr ""
 #: templates/profile.html:137 templates/signup.html:26 templates/signup.html:45
 #: templates/signup.html:53
 msgid "select"
-msgstr ""
+msgstr "Vyber"
 
 #: templates/customize-class.html:110
 msgid "other_settings"
@@ -748,7 +748,7 @@ msgstr ""
 
 #: templates/incl-editor-and-output.html:100
 msgid "enter_text"
-msgstr ""
+msgstr "Zde napiš svou odpověď..."
 
 #: templates/incl-editor-and-output.html:101
 msgid "enter"
@@ -756,25 +756,25 @@ msgstr ""
 
 #: templates/incl-editor-and-output.html:110
 msgid "run_code_button"
-msgstr ""
+msgstr "Spustit kód"
 
 #: templates/incl-editor-and-output.html:112
 msgid "edit_code_button"
-msgstr ""
+msgstr "Upravit kód"
 
 #: templates/incl-editor-and-output.html:118
 msgid "read_code_label"
-msgstr ""
+msgstr "Přečíst kód nahlas"
 
 #: templates/incl-editor-and-output.html:128
 #: templates/incl-editor-and-output.html:137
 msgid "regress_button"
-msgstr ""
+msgstr "Vrátit se na úroveň {level}"
 
 #: templates/incl-editor-and-output.html:131
 #: templates/incl-editor-and-output.html:140
 msgid "advance_button"
-msgstr ""
+msgstr "Jít na úroveň {level}"
 
 #: templates/incl-editor-and-output.html:154
 msgid "developers_mode"
@@ -782,7 +782,7 @@ msgstr ""
 
 #: templates/incl-menubar.html:8
 msgid "nav_start"
-msgstr ""
+msgstr "Domů"
 
 #: templates/incl-menubar.html:9
 msgid "nav_hedy"
@@ -794,11 +794,11 @@ msgstr ""
 
 #: templates/incl-menubar.html:11
 msgid "nav_learn_more"
-msgstr ""
+msgstr "Zjisti víc"
 
 #: templates/incl-menubar.html:13 templates/public-page.html:56
 msgid "program_header"
-msgstr ""
+msgstr "Moje programy"
 
 #: templates/incl-menubar.html:20
 msgid "my_achievements"
@@ -814,12 +814,12 @@ msgstr ""
 
 #: templates/incl-menubar.html:31
 msgid "logout"
-msgstr ""
+msgstr "Odhlásit se"
 
 #: templates/incl-menubar.html:36 templates/login.html:19
 #: templates/signup.html:106
 msgid "login"
-msgstr ""
+msgstr "Přihlásit se"
 
 #: templates/landing-page.html:6
 msgid "welcome"
@@ -860,15 +860,15 @@ msgstr ""
 
 #: templates/layout.html:20 templates/signup.html:61
 msgid "yes"
-msgstr ""
+msgstr "Ano"
 
 #: templates/layout.html:21 templates/signup.html:65
 msgid "no"
-msgstr ""
+msgstr "Ne"
 
 #: templates/layout.html:29
 msgid "ok"
-msgstr ""
+msgstr "OK"
 
 #: templates/layout.html:30
 msgid "cancel"
@@ -877,7 +877,7 @@ msgstr ""
 #: templates/layout.html:43 templates/programs.html:68
 #: templates/programs.html:76
 msgid "copy_link_to_share"
-msgstr ""
+msgstr "Zkopírovat odkaz ke sdílení"
 
 #: templates/layout.html:78
 msgid "set_preferred_lang"
@@ -890,39 +890,39 @@ msgstr ""
 
 #: templates/level-page.html:8
 msgid "step_title"
-msgstr ""
+msgstr "Úkol"
 
 #: templates/level-page.html:12
 msgid "save_code_button"
-msgstr ""
+msgstr "Uložit kód"
 
 #: templates/level-page.html:12
 msgid "save_prompt"
-msgstr ""
+msgstr "Potřebuješ vlastní uživatelský účet, abys mohl*a uložit svůj program. Chceš se nyní přihlásit?"
 
 #: templates/level-page.html:13
 msgid "share_code_button"
-msgstr ""
+msgstr "Uložit a sdílet kód"
 
 #: templates/level-page.html:31
 msgid "try_button"
-msgstr ""
+msgstr "Vyzkoušet"
 
 #: templates/login.html:10
 msgid "login_long"
-msgstr ""
+msgstr "Přihlásit se ke svému účtu"
 
 #: templates/login.html:26 website/auth.py:308
 msgid "no_account"
-msgstr ""
+msgstr "Zatím nemáš svů účet?"
 
 #: templates/login.html:28 templates/signup.html:6 templates/signup.html:102
 msgid "create_account"
-msgstr ""
+msgstr "Vytvořit účet"
 
 #: templates/login.html:33
 msgid "forgot_password"
-msgstr ""
+msgstr "Zapomněl*a jsi heslo?"
 
 #: templates/profile.html:4
 msgid "account_overview"
@@ -982,7 +982,7 @@ msgstr ""
 
 #: templates/profile.html:61 templates/profile.html:145
 msgid "are_you_sure"
-msgstr ""
+msgstr "Opravdu to chceš udělat? Tato akce je nevratná."
 
 #: templates/profile.html:61
 msgid "delete_public"
@@ -1006,7 +1006,7 @@ msgstr ""
 
 #: templates/profile.html:99 templates/signup.html:41
 msgid "birth_year"
-msgstr ""
+msgstr "Rok narození"
 
 #: templates/profile.html:102 templates/signup.html:25
 msgid "preferred_language"
@@ -1018,43 +1018,43 @@ msgstr ""
 
 #: templates/profile.html:126 templates/signup.html:44
 msgid "gender"
-msgstr ""
+msgstr "Pohlaví"
 
 #: templates/profile.html:129 templates/signup.html:46
 msgid "female"
-msgstr ""
+msgstr "Žena"
 
 #: templates/profile.html:130 templates/signup.html:47
 msgid "male"
-msgstr ""
+msgstr "Muž"
 
 #: templates/profile.html:131 templates/signup.html:48
 msgid "other"
-msgstr ""
+msgstr "Jiné"
 
 #: templates/profile.html:135 templates/signup.html:52
 msgid "country"
-msgstr ""
+msgstr "Země"
 
 #: templates/profile.html:141
 msgid "update_profile"
-msgstr ""
+msgstr "Upravit profil"
 
 #: templates/profile.html:145
 msgid "destroy_profile"
-msgstr ""
+msgstr "Trvale odstranit účet"
 
 #: templates/profile.html:152
 msgid "current_password"
-msgstr ""
+msgstr "Současné heslo"
 
 #: templates/profile.html:156
 msgid "new_password"
-msgstr ""
+msgstr "Nové heslo"
 
 #: templates/profile.html:160
 msgid "repeat_new_password"
-msgstr ""
+msgstr "Zopakuj nové heslo"
 
 #: templates/programs.html:7
 msgid "recent"
@@ -1082,7 +1082,7 @@ msgstr ""
 
 #: templates/programs.html:68 templates/programs.html:76
 msgid "copy_clipboard"
-msgstr ""
+msgstr "Úspěšně skopírováno do schránky"
 
 #: templates/programs.html:69 templates/programs.html:73
 msgid "delete_confirm"
@@ -1150,43 +1150,43 @@ msgstr ""
 
 #: templates/recover.html:6
 msgid "recover_password"
-msgstr ""
+msgstr "Požádat o obnovení hesla"
 
 #: templates/recover.html:11
 msgid "send_password_recovery"
-msgstr ""
+msgstr "Pošlete mi odkaz na obnovení hesla"
 
 #: templates/reset.html:6 templates/reset.html:19
 msgid "reset_password"
-msgstr ""
+msgstr "Obnovit heslo"
 
 #: templates/reset.html:12 templates/signup.html:22
 msgid "password_repeat"
-msgstr ""
+msgstr "Zopakuj heslo"
 
 #: templates/signup.html:7
 msgid "create_account_explanation"
-msgstr ""
+msgstr "Vlastní účet ti umožňuje ukládat si své programy."
 
 #: templates/signup.html:16
 msgid "email_repeat"
-msgstr ""
+msgstr "Zopakuj email"
 
 #: templates/signup.html:57
 msgid "programming_experience"
-msgstr ""
+msgstr "Máš nějaké skušenosti s programováním?"
 
 #: templates/signup.html:71
 msgid "languages"
-msgstr ""
+msgstr "Které z těchto programovacích jazyku jsi už někdy použil*a?"
 
 #: templates/signup.html:76
 msgid "other_block"
-msgstr ""
+msgstr "Jiný blokový jazyk"
 
 #: templates/signup.html:82
 msgid "other_text"
-msgstr ""
+msgstr "Jiný textový jazyk"
 
 #: templates/signup.html:88
 msgid "request_teacher"
@@ -1194,7 +1194,7 @@ msgstr ""
 
 #: templates/signup.html:91
 msgid "subscribe_newsletter"
-msgstr ""
+msgstr "Přihlásit se k newsletteru"
 
 #: templates/signup.html:96
 msgid "agree_with"
@@ -1210,7 +1210,7 @@ msgstr ""
 
 #: templates/signup.html:106
 msgid "already_account"
-msgstr ""
+msgstr "Už máš svůj účet?"
 
 #: templates/teacher-invitation.html:5
 msgid "teacher_invitation_require_login"
@@ -1218,7 +1218,7 @@ msgstr ""
 
 #: templates/view-program-page.html:13
 msgid "by"
-msgstr ""
+msgstr "od"
 
 #: templates/quiz/endquiz.html:27
 msgid "end_quiz"
@@ -1294,16 +1294,16 @@ msgstr ""
 
 #: website/auth.py:239
 msgid "username_special"
-msgstr ""
+msgstr "Uživatelské jméno nesmí obsahovat `:` a `@`."
 
 #: website/auth.py:241
 msgid "username_three"
-msgstr ""
+msgstr "Uživatelské jméno musí obsahovat alespoň tři znaky."
 
 #: website/auth.py:243 website/auth.py:537 website/auth.py:743
 #: website/auth.py:748
 msgid "email_invalid"
-msgstr ""
+msgstr "Prosím zadej platný email."
 
 #: website/auth.py:245 website/auth.py:299 website/auth.py:483
 #: website/auth.py:507 website/auth.py:519 website/auth.py:680
@@ -1316,16 +1316,16 @@ msgstr ""
 
 #: website/auth.py:308
 msgid "invalid_username_password"
-msgstr ""
+msgstr "Neplatné uživatelské jméno/heslo."
 
 #: website/auth.py:352 website/auth.py:354
 msgid "repeat_match_email"
-msgstr ""
+msgstr "Zopakovaný email se neshoduje."
 
 #: website/auth.py:356 website/auth.py:509 website/auth.py:513
 #: website/auth.py:684
 msgid "repeat_match_password"
-msgstr ""
+msgstr "Zopakované heslo se neshoduje."
 
 #: website/auth.py:358 website/auth.py:539
 msgid "language_invalid"
@@ -1341,7 +1341,7 @@ msgstr ""
 
 #: website/auth.py:367 website/auth.py:547
 msgid "year_invalid"
-msgstr ""
+msgstr "Prosím zadej rok mezi 1900 a "
 
 #: website/auth.py:370 website/auth.py:550
 msgid "gender_invalid"
@@ -1362,15 +1362,15 @@ msgstr ""
 
 #: website/auth.py:384
 msgid "exists_username"
-msgstr ""
+msgstr "Toto uživatelské jméno už někdo používá."
 
 #: website/auth.py:386 website/auth.py:569
 msgid "exists_email"
-msgstr ""
+msgstr "Tento email už někdo používá."
 
 #: website/auth.py:485 website/auth.py:511 website/auth.py:682
 msgid "password_six"
-msgstr ""
+msgstr "Heslo musí obsahovat alespoň šest znaků."
 
 #: website/auth.py:488 website/auth.py:491
 msgid "password_change_not_allowed"
@@ -1382,11 +1382,11 @@ msgstr ""
 
 #: website/auth.py:528
 msgid "password_updated"
-msgstr ""
+msgstr "Heslo bylo změněno."
 
 #: website/auth.py:609
 msgid "profile_updated"
-msgstr ""
+msgstr "Profil byl upraven."
 
 #: website/auth.py:612
 msgid "profile_updated_reload"
@@ -1402,7 +1402,7 @@ msgstr ""
 
 #: website/auth.py:698
 msgid "password_resetted"
-msgstr ""
+msgstr "Tvé heslo bylo úspěšně obnoveno. Prosím přihlaš se."
 
 #: website/auth.py:716
 msgid "teacher_invalid"
@@ -1418,15 +1418,15 @@ msgstr ""
 
 #: website/programs.py:117 website/programs.py:118
 msgid "save_success_detail"
-msgstr ""
+msgstr "Program byl úspěšně uložen."
 
 #: website/programs.py:146
 msgid "share_success_detail"
-msgstr ""
+msgstr "Program byl úspěšně sdílen"
 
 #: website/programs.py:148
 msgid "unshare_success_detail"
-msgstr ""
+msgstr "Program už dále není sdílený"
 
 #: website/programs.py:188
 msgid "favourite_success"
@@ -1544,19 +1544,4 @@ msgstr ""
 #: website/teacher.py:482
 msgid "adventure_updated"
 msgstr ""
-
-#~ msgid "admin"
-#~ msgstr ""
-
-#~ msgid "no_customizations"
-#~ msgstr ""
-
-#~ msgid "answer_question"
-#~ msgstr ""
-
-#~ msgid "retrieve_class"
-#~ msgstr ""
-
-#~ msgid "retrieve_adventure"
-#~ msgstr ""
 
