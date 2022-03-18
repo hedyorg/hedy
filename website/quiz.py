@@ -153,7 +153,7 @@ def routes(app, database, achievements):
         quiz_answers = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
 
         # get a datastructure for the result overview
-        result_items = get_result_items(quiz_answers, questions)
+        result_items = get_result_items(questions)
         return render_template('quiz/quiz-result-overview.html',
                                correct=session.get('correct_answer', 0),
                                total_score=total_score,
@@ -293,21 +293,21 @@ def routes(app, database, achievements):
                                lang=g.lang)
 
 
-def get_result_items(quiz_answers, questions):
+def get_result_items(questions):
 
     result_items = []
-    for i in range(len(questions)):
+    for question in questions:
         item = {}
-        item["question_text"] = questions[i + 1]["question_text"]
-        item["question_code"] = questions[i + 1]["code"]
-        item["is_correct"] = quiz_answers[i + 1][-1] == questions[i + 1]["correct_answer"]
-        item["index_chosen"] = index_from_letter(quiz_answers[i + 1][-1])
-        item["index_correct"] = index_from_letter(questions[i + 1]["correct_answer"])
-        item["attempts"] = len(quiz_answers[i + 1])
-        if "option_text" in question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]:
-            item["option_text"] = question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["option_text"]
-        elif "code" in question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]:
-            item["code"] = question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["code"]
+        item["question_text"] = question["question_text"]
+        item["question_code"] = question["code"]
+        item["is_correct"] = question[-1] == question["correct_answer"]
+        item["index_chosen"] = index_from_letter(question[-1])
+        item["index_correct"] = index_from_letter(question["correct_answer"])
+        item["attempts"] = len(question)
+        if "option_text" in question_options_for(question)[index_from_letter(question["correct_answer"])]:
+            item["option_text"] = question_options_for(question)[index_from_letter(question["correct_answer"])]["option_text"]
+        elif "code" in question_options_for(question)[index_from_letter(question["correct_answer"])]:
+            item["code"] = question_options_for(question)[index_from_letter(question["correct_answer"])]["code"]
         result_items.append(item)
     return result_items
 
