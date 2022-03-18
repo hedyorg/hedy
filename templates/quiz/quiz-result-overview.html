@@ -82,7 +82,7 @@
                             <p class="flex pl-6  text-center font-slab text-2xl question-text text-2xl"> {{ result_items[i].option_text | nl2br }}</p>
                         {% elif "code" in result_items[i] %}
                             <div class="turn-pre-into-ace w-3/4 mx-auto my-4">
-                                <pre class="quiz-question no-copy-button">{{ result_items[i].code }}</pre>
+                                <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ result_items[i].code }}</pre>
                             </div>
                         {% endif %}
                     </div>
