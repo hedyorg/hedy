@@ -296,7 +296,7 @@ def routes(app, database, achievements):
 def get_result_items(questions):
 
     result_items = []
-    for question in questions:
+    for question in questions[1:]:
         item = {}
         item["question_text"] = question["question_text"]
         item["question_code"] = question["code"]
