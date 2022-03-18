@@ -669,7 +669,6 @@ def routes(app, database):
                                 lang=user['language'], username=user['username'])
             return jsonify({'message':g.auth_texts.get('sent_password_recovery')}), 200
 
-
     @app.route('/auth/reset', methods=['POST'])
     def reset():
         body = request.json
