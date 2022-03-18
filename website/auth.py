@@ -655,7 +655,7 @@ def routes(app, database):
         if not user:
             return g.auth_texts.get('username_invalid'), 403
 
-        # Create a token
+        # Create a token -> use the reset_length value as we don't want the token to live as long as a login one
         token = make_salt()
         DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + reset_length})
 
