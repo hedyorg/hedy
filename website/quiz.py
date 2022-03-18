@@ -154,7 +154,6 @@ def routes(app, database, achievements):
 
         # get a datastructure for the result overview
         result_items = get_result_items(quiz_answers, questions)
-        print(result_items)
         return render_template('quiz/quiz-result-overview.html',
                                correct=session.get('correct_answer', 0),
                                total_score=total_score,
@@ -192,7 +191,6 @@ def routes(app, database, achievements):
         if request.method == "POST":
             # The value is a character and not a text
             chosen_option = request.form.get("submit-button")
-            print('-----------------chosen option', chosen_option)
 
             # Reading the yaml file
             questions = quiz_data_file_for(g.lang, level_source)
@@ -298,7 +296,6 @@ def routes(app, database, achievements):
 def get_result_items(quiz_answers, questions):
 
     result_items = []
-    print(questions)
     for i in range(len(questions)):
         item = {}
         item["question_text"] = questions[i + 1]["question_text"]
