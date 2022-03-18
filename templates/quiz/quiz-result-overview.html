@@ -75,18 +75,17 @@
                             {% endif %}
                         </p>
                     {% endif %}
-
                 </div>
                 <div class="grid-item grid grid-cols-2 gap-x-4">
                     <div class="table-el bg-blue-200 shadow-lg flex flex-col-75 place-content-center rounded-b-md">
                         {% if "option_text" in result_items[i] %}
                             <p class="flex pl-6  text-center font-slab text-2xl question-text text-2xl"> {{ result_items[i].option_text | nl2br }}</p>
                         {% elif "code" in result_items[i] %}
-                            <pre><code
-                                    class="pl-6 flex block text-l">{{ result_items[i].code | nl2br }}</code></pre>
+                            <div class="turn-pre-into-ace w-3/4 mx-auto my-4">
+                                <pre class="quiz-question no-copy-button">{{ result_items[i].code }}</pre>
+                            </div>
                         {% endif %}
                     </div>
-
                     {% if result_items[i].is_correct and result_items[i].attempts ==  1 %}
                         <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
                             In {{ result_items[i].attempts - 1 }} {{ ui.attempt|lower }}
