@@ -8,7 +8,7 @@ import operator
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
-TOKENS = dynamo.Table(storage, 'tokens', 'id')
+TOKENS = dynamo.Table(storage, 'tokens', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['id', 'username']])
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey('creator')])
@@ -157,6 +157,10 @@ class Database:
         Returns the Token that was deleted.
         """
         return TOKENS.delete({'id': token_id})
+
+    def delete_all_tokens(self, username):
+        """Forget all Tokens from a user."""
+        TOKENS.del_many({'username': username})
 
     def store_user(self, user):
         """Store a user in the database."""

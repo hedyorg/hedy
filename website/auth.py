@@ -688,9 +688,11 @@ def routes(app, database):
             return gettext(u'token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
-        token = DATABASE.forget_token(body['token'])
         DATABASE.update_user(body['username'], {'password': hashed})
         user = DATABASE.user_by_username(body['username'])
+
+        # Delete all tokens of the user -> automatically logout all long-lived sessions
+        DATABASE.delete_all_tokens(body['username'])
 
         if not is_testing_request(request):
             send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
