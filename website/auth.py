@@ -1,7 +1,7 @@
 import collections
 import os
 import utils
-from hedy import ALL_LANGUAGES
+from hedy import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -538,7 +538,7 @@ def routes(app, database):
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get(
-                'language')]:
+                'language')] or body.get('keyword_language') not in ALL_KEYWORD_LANGUAGES.keys():
             return g.auth_texts.get('keyword_language_invalid'), 400
 
         # Validations, optional fields
@@ -620,7 +620,7 @@ def routes(app, database):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = DATABASE.user_by_username(user['username'])
 
-        output = {'username': user['username'], 'email': user['email']}
+        output = {'username': user['username'], 'email': user['email'], 'language': user.get('language', 'en')}
         for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
             if field in user:
                 output[field] = user[field]
@@ -688,9 +688,11 @@ def routes(app, database):
             return g.auth_texts.get('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
-        token = DATABASE.forget_token(body['token'])
         DATABASE.update_user(body['username'], {'password': hashed})
         user = DATABASE.user_by_username(body['username'])
+
+        # Delete all tokens of the user -> automatically logout all long-lived sessions
+        DATABASE.delete_all_tokens(body['username'])
 
         if not is_testing_request(request):
             send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
