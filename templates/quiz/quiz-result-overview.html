@@ -17,8 +17,6 @@
         <p id="achievement_reached_text"></p>
     </div>
 </div>
-
-
 {% block question %}
     <div class="flex flex-col justify-center items-center mb-4">
         <h1 class="font-bold text-4xl font-slab"> {{ ui.results_quiz }} </h1>
@@ -26,7 +24,6 @@
         <div class="border-4 border-yellow-600 rounded-full  h-24 w-24  flex items-center bg-yellow-300 justify-center">
             <p class="text-yellow-600 font-bold text-4xl text-center font-slab ">{{ total_score|string }}</p></div>
     </div>
-
     <div class="container-results m-6">
         {% for i in range(result_items|length) %}
             <div class="flex grid grid-rows">
@@ -43,11 +40,9 @@
                             {% endif %}
                         {% endif %}
                     </div>
-
                     {% if result_items[i].is_correct %}
-
                         <p class="place-content-center text-white font-semibold text-xl font-slab bg-green-500 flex  m-0 rounded-t-md pb-6 pt-2 text-center flex-col-25">
-                            </br> Goed!
+                            </br> {{ ui.correct }}
                             {% if result_items[i].index_chosen == 0 %}
                                 {{ triangle|safe }}
                             {% elif result_items[i].index_chosen == 1 %}
@@ -64,7 +59,7 @@
                         </p>
                     {% else %}
                         <p class="place-content-center text-white font-semibold text-xl font-slab bg-red-500 flex m-0 rounded-t-md pb-6 pt-2 text-center flex-col-25">
-                            </br>  Fout!
+                            </br>  {{ ui.incorrect }}
                             {% if result_items[i].index_chosen == 0 %}
                                 {{ triangle|safe }}
                             {% elif result_items[i].index_chosen == 1 %}
@@ -84,7 +79,6 @@
                 </div>
                 <div class="grid-item grid grid-cols-2 gap-x-4">
                     <div class="table-el bg-blue-200 shadow-lg flex flex-col-75 place-content-center rounded-b-md">
-
                         {% if "option_text" in result_items[i] %}
                             <p class="flex pl-6  text-center font-slab text-2xl question-text text-2xl"> {{ result_items[i].option_text | nl2br }}</p>
                         {% elif "code" in result_items[i] %}
@@ -95,17 +89,16 @@
 
                     {% if result_items[i].is_correct and result_items[i].attempts ==  1 %}
                         <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
-                            In {{ result_items[i].attempts - 1 }} poging </p>
+                            In {{ result_items[i].attempts - 1 }} {{ ui.attempt|lower }}
+                        </p>
                     {% elif result_items[i].is_correct and result_items[i].attempts > 1 %}
                         <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
-                            In
-                            {{ result_items[i].attempts - 1 }}
-                            pogingen </p>
+                            In {{ result_items[i].attempts - 1 }} {{ ui.attempts }}
+                        </p>
                     {% else %}
                         <p class="place-content-center table-el text-center bg-red-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
-                            In
-                            {{ result_items[i].attempts - 1 }}
-                            pogingen </p>
+                            In {{ result_items[i].attempts - 1 }} {{ ui.attempts }}
+                        </p>
                     {% endif %}
                 </div>
 
