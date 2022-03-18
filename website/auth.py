@@ -22,10 +22,10 @@ import hashlib
 
 TOKEN_COOKIE_NAME = config['session']['cookie_name']
 # The session_length in the session is set to 60 * 24 * 14 (in minutes) config.py#13
-# We multiply this by 60 to set the "normal" session_length to 14 days
-# We than divide this value again by 84 to set the reset_length to 4 hours
+# The reset_length in the session is set to 60 * 4 (in minutes) config.py#14
+# We multiply this by 60 to set the session_length to 14 days and reset_length to 4 hours
 session_length = config['session']['session_length'] * 60
-reset_length = session_length / 84
+reset_length = config['session']['reset_length'] * 60
 
 env = os.getenv('HEROKU_APP_NAME')
 
