@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-17 13:40+0100\n"
+"POT-Creation-Date: 2022-03-18 12:06+0100\n"
 "PO-Revision-Date: 2022-02-25 13:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -40,8 +40,8 @@ msgstr "Hedy - My programs"
 
 #: app.py:785 app.py:795 app.py:799 app.py:813 app.py:1051 app.py:1353
 #: website/admin.py:17 website/admin.py:25 website/admin.py:95
-#: website/admin.py:112 website/admin.py:130 website/auth.py:706
-#: website/auth.py:733 website/statistics.py:86
+#: website/admin.py:112 website/admin.py:130 website/auth.py:708
+#: website/auth.py:735 website/statistics.py:86
 msgid "unauthorized"
 msgstr "You don't have access rights for this page"
 
@@ -146,7 +146,7 @@ msgstr ""
 
 #: app.py:1297 website/auth.py:295 website/auth.py:343 website/auth.py:479
 #: website/auth.py:505 website/auth.py:535 website/auth.py:641
-#: website/auth.py:674 website/auth.py:712 website/auth.py:739
+#: website/auth.py:674 website/auth.py:714 website/auth.py:741
 #: website/teacher.py:81 website/teacher.py:194 website/teacher.py:251
 #: website/teacher.py:298 website/teacher.py:331 website/teacher.py:367
 #: website/teacher.py:447 website/teacher.py:505
@@ -175,7 +175,9 @@ msgstr "This user doesn't exist or doesn't have a public profile"
 
 #: app.py:1390
 msgid "invalid_teacher_invitation_code"
-msgstr "The teacher invitation code is invalid. To become a teacher, reach out to hedy@felienne.com."
+msgstr ""
+"The teacher invitation code is invalid. To become a teacher, reach out to"
+" hedy@felienne.com."
 
 #: utils.py:202
 msgid "default_404"
@@ -1398,7 +1400,7 @@ msgstr "Hedy - Administrator page"
 
 #: website/auth.py:237 website/auth.py:297 website/auth.py:481
 #: website/auth.py:643 website/auth.py:652 website/auth.py:676
-#: website/auth.py:714 website/auth.py:721 website/auth.py:741
+#: website/auth.py:716 website/auth.py:723 website/auth.py:743
 #: website/teacher.py:300 website/teacher.py:333
 msgid "username_invalid"
 msgstr "Your username is invalid."
@@ -1411,8 +1413,8 @@ msgstr "Username cannot contain `:` or `@`."
 msgid "username_three"
 msgstr "Username must contain at least three characters."
 
-#: website/auth.py:243 website/auth.py:537 website/auth.py:743
-#: website/auth.py:748
+#: website/auth.py:243 website/auth.py:537 website/auth.py:745
+#: website/auth.py:750
 msgid "email_invalid"
 msgstr "Please enter a valid email."
 
@@ -1515,13 +1517,13 @@ msgstr ""
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
-#: website/auth.py:698
+#: website/auth.py:700
 msgid "password_resetted"
 msgstr ""
 "Your password has been successfully reset. You are being redirected to "
 "the login page."
 
-#: website/auth.py:716
+#: website/auth.py:718
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
@@ -1563,6 +1565,10 @@ msgstr "Only teachers can retrieve classes"
 msgid "no_such_class"
 msgstr "No such Hedy class"
 
+#: website/teacher.py:67
+msgid "title_class-overview"
+msgstr "Hedy - Class overview"
+
 #: website/teacher.py:76
 msgid "only_teacher_create_class"
 msgstr "Only teachers are allowed to create classes!"
@@ -1578,6 +1584,14 @@ msgstr "You already have a class with this name."
 #: website/teacher.py:151 website/teacher.py:177 website/teacher.py:530
 msgid "invalid_class_link"
 msgstr "Invalid link for joining the class."
+
+#: website/teacher.py:158
+msgid "title_join-class"
+msgstr "Hedy - Join class"
+
+#: website/teacher.py:222
+msgid "title_customize-class"
+msgstr "Hedy - Customize class"
 
 #: website/teacher.py:237
 msgid "customization_deleted"
@@ -1632,6 +1646,10 @@ msgstr "You're not allowed to view this adventure!"
 msgid "title_view-adventure"
 msgstr "Hedy - View adventure"
 
+#: website/teacher.py:438
+msgid "title_customize-adventure"
+msgstr "Hedy - Customize adventure"
+
 #: website/teacher.py:449
 msgid "adventure_id_invalid"
 msgstr "This adventure id is invalid."
@@ -1663,3 +1681,4 @@ msgstr "You already have an adventure with this name."
 #: website/teacher.py:482
 msgid "adventure_updated"
 msgstr "The adventure has been updated!"
+
