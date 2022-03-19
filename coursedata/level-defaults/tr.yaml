@@ -130,30 +130,30 @@
     start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
     intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[random]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
 1:
-    intro_text: "Welcome to Hedy! In Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\n\nFor example, you can print text to the screen using `{print}`. You can see an example\ncode snippet to the left.\n\nPress the green button in the code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n"
-    example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
-    example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
-    start_code: '{print} hello world!'
+    intro_text: "Hedy'ye hoş geldiniz! Seviye 1'de `{print}`, `{ask}` ve `{echo}` komutlarını kullanabilirsiniz.\n\nÖrneğin, `{print}` kullanarak metni ekrana yazdırabilirsiniz. Soldaki kod bloğunda \nbir örnek görebilirsiniz\n\nKod bloğundaki yeşil düğmeye basarsanız kod sizin için ekrana yazılacaktır!\nProgramlama alanının altındaki yeşil 'Kodu çalıştır' düğmesi ile kodu kendiniz çalıştırabilirsiniz.\n"
+    example_code: "## Örnek kod\n```\n{print} Merhaba!\n{print} Hedy'ye Hoş Geldiniz!\n```\n"
+    intro_text_2: "Ayrıca kullanıcıdan girdi isteyebilir ve bir `{echo}` komutuyla bunu ekrana yazdırabilirsiniz.\nSolunuzdaki kodu tekrar deneyebilirsiniz.\n\nNe yapmanız gerektiğini bilmiyor musunuz? Sonraki sekmelerde, farklı programlar için fikirler bulacaksınız.\n"
+    example_code_2: "## Örnek kod\n```\n{ask} Adın ne?\n{echo} merhaba\n```\n"
+    start_code: '{print} merhaba dünya!'
     commands:
     -   name: '{print}'
-        explanation: '{print} something with `{print}`.'
-        example: 'Example: {print} Hello welcome to Hedy!'
-        demo_code: '{print} Hello welcome to Hedy!'
+        explanation: '{print}'' ile bir şey yazdırın.'
+        example: 'Örnek: {print} Merhaba, Hedy''ye hoş geldiniz!'
+        demo_code: '{print} Merhaba, Hedy''ye hoş geldiniz!'
     -   name: '{ask}'
-        explanation: ask something with `{ask}`.
-        example: 'Example: {ask} What is your favorite color?'
-        demo_code: '{ask} What is your favorite color?'
+        explanation: '`{ask}` ile bir şey sor.'
+        example: 'Örnek: {ask} En sevdiğiniz renk nedir?'
+        demo_code: '{ask} En sevdiğin renk nedir?'
     -   name: '{echo}'
-        explanation: repeat something using `{echo}`.
-        example: 'Example: {echo} so your favorite color is '
-        demo_code: "{ask} What is your favorite color?\n{echo} so your favorite color is"
-    -   name: '{print} emojis'
-        explanation: print an emoji with `{print}`
-        example: 'Example: {print} 🙋‍ 🌍 ❗'
+        explanation: "'{echo}' kullanarak bir şeyi tekrar ekrana yazdırın."
+        example: 'Örnek: {echo} favori renginizdir '
+        demo_code: "{ask} En sevdiğin renk nedir?\n{echo} en sevdiğin renk"
+    -   name: '{print} emojiler'
+        explanation: '`{print}` ile bir emoji yazdır'
+        example: 'Örnek: {print} 🙋‍ 🌍 ❗'
         demo_code: '{print} 🙋 🌍 ❗'
     -   name: '{forward}'
-        explanation: Draw a line with `{forward}`.
+        explanation: '"{ileri}" ile bir çizgi çizin.'
         example: 'Example: {forward} 100'
         demo_code: '{forward} 100'
     -   name: '{turn}'
