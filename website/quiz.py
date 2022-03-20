@@ -295,6 +295,7 @@ def routes(app, database, achievements):
 
 def get_result_items(questions):
     result_items = []
+    # TODO TB -> We should improve this for-loop, but first figure out the exact structure
     for i in range(len(questions)):
         question = questions[i + 1]
         item = {}
