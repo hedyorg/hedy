@@ -294,11 +294,9 @@ def routes(app, database, achievements):
 
 
 def get_result_items(questions):
-
     result_items = []
-    print(questions)
-    for question in questions.items():
-        print(question)
+    for i in range(len(questions)):
+        question = questions[i + 1]
         item = {}
         item["question_text"] = question["question_text"]
         item["question_code"] = question["code"]
