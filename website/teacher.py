@@ -61,7 +61,11 @@ def routes(app, database, achievements):
 
         invites = []
         for invite in DATABASE.get_class_invites(Class['id']):
-            invites.append({'username': invite['username'], 'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp']))})
+            print(invite)
+            print(utils.mstoisostring (invite['timestamp']))
+            invites.append({'username': invite['username'],
+                            'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp'])),
+                            'expire_timestamp': utils.datetotimeordate (utils.mstoisostring (invite['ttl']))})
 
         return render_template ('class-overview.html', current_page='my-profile',
                                 page_title=g.ui_texts.get('title_class-overview'),

@@ -107,6 +107,7 @@
             <tr class="font-bold text-left">
                 <th>{{auth.username}}</th>
                 <th>{{auth.invite_date}}</th>
+                <th>Expiration date</th>
                 <th>{{auth.remove_invite}}</th>
             </tr>
         </thead>
@@ -115,6 +116,7 @@
             <tr>
                 <td>{{invite.username}}</td>
                 <td>{{invite.timestamp}}</td>
+                <td>{{invite.expire_timestamp}}</td>
                 <td><a href="#" onclick="hedyApp.remove_student_invite('{{invite.username}}', '{{ class_info.id }}');">{{auth.remove}}</a></td>
             </tr>
         {% endfor %}
