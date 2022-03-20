@@ -2,7 +2,6 @@ import json
 
 import hedy
 from website.auth import validate_signup_data, store_new_account, requires_login, is_teacher, is_admin, current_user
-
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
@@ -12,8 +11,9 @@ import hedyweb
 import hedy_content
 TRANSLATIONS = hedyweb.Translations ()
 from config import config
-cookie_name = config['session']['cookie_name']
 
+cookie_name = config['session']['cookie_name']
+invite_length = config['session']['reset_length'] * 60
 
 def routes(app, database, achievements):
     global DATABASE
@@ -320,7 +320,13 @@ def routes(app, database, achievements):
             return g.auth_texts.get('student_already_invite'), 400
 
         # So: The class and student exist and are currently not a combination -> invite!
-        DATABASE.add_class_invite(username, class_id)
+        data = {
+            'username': username,
+            'class_id': class_id,
+            'timestamp': utils.times(),
+            'ttl': utils.times() + invite_length
+        }
+        DATABASE.add_class_invite(data)
         return {}, 200
 
     @app.route('/remove_student_invite', methods=['POST'])
