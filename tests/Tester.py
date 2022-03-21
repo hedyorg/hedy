@@ -64,6 +64,9 @@ class HedyTester(unittest.TestCase):
   def result_in(self, list):
     return (lambda result: HedyTester.run_code(result) in list)
 
+  def exception_command(self, command):
+    return lambda c: c.exception.arguments['command'] == command
+
   @staticmethod
   def as_list_of_tuples(*args):
     # used to conver a variable number of paralel list

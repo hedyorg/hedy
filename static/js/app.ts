@@ -22,7 +22,6 @@ var StopExecution = false;
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
 
-
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
@@ -42,6 +41,8 @@ var StopExecution = false;
     exampleEditor.setOptions({ maxLines: Infinity });
     if ($(preview).hasClass('common-mistakes')) {
       exampleEditor.setOptions({ minLines: 10 });
+    } else if ($(preview).hasClass('cheatsheet')) {
+      exampleEditor.setOptions({ minLines: 1 });
     } else {
       exampleEditor.setOptions({ minLines: 2 });
     }
@@ -206,13 +207,7 @@ var StopExecution = false;
 })();
 
 export function getHighlighter(level: string) {
-  const modeExceptions: Record<string, string> = {
-        '8': 'ace/mode/level8and9',
-        '9': 'ace/mode/level8and9',
-        '11': 'ace/mode/level11and12',
-        '12': 'ace/mode/level11and12',
-      };
-  return modeExceptions[level] || `ace/mode/level` + level;
+  return `ace/mode/level` + level;
 }
 
 function reloadOnExpiredSession () {

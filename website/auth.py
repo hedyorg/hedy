@@ -1,7 +1,7 @@
 import collections
 import os
 import utils
-from hedy import ALL_LANGUAGES
+from hedy import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -21,7 +21,11 @@ from website import querylog, database
 import hashlib
 
 TOKEN_COOKIE_NAME = config['session']['cookie_name']
+# The session_length in the session is set to 60 * 24 * 14 (in minutes) config.py#13
+# The reset_length in the session is set to 60 * 4 (in minutes) config.py#14
+# We multiply this by 60 to set the session_length to 14 days and reset_length to 4 hours
 session_length = config['session']['session_length'] * 60
+reset_length = config['session']['reset_length'] * 60
 
 env = os.getenv('HEROKU_APP_NAME')
 
@@ -538,7 +542,7 @@ def routes(app, database):
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return g.auth_texts.get('language_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get(
-                'language')]:
+                'language')] or body.get('keyword_language') not in ALL_KEYWORD_LANGUAGES.keys():
             return g.auth_texts.get('keyword_language_invalid'), 400
 
         # Validations, optional fields
@@ -620,7 +624,7 @@ def routes(app, database):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = DATABASE.user_by_username(user['username'])
 
-        output = {'username': user['username'], 'email': user['email']}
+        output = {'username': user['username'], 'email': user['email'], 'language': user.get('language', 'en')}
         for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
             if field in user:
                 output[field] = user[field]
@@ -651,9 +655,9 @@ def routes(app, database):
         if not user:
             return g.auth_texts.get('username_invalid'), 403
 
-        # Create a token
+        # Create a token -> use the reset_length value as we don't want the token to live as long as a login one
         token = make_salt()
-        DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + session_length})
+        DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + reset_length})
 
         if is_testing_request(request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
@@ -664,7 +668,6 @@ def routes(app, database):
                                     user['username']) + '&token=' + urllib.parse.quote_plus(token),
                                 lang=user['language'], username=user['username'])
             return jsonify({'message':g.auth_texts.get('sent_password_recovery')}), 200
-
 
     @app.route('/auth/reset', methods=['POST'])
     def reset():
@@ -688,9 +691,11 @@ def routes(app, database):
             return g.auth_texts.get('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
-        token = DATABASE.forget_token(body['token'])
         DATABASE.update_user(body['username'], {'password': hashed})
         user = DATABASE.user_by_username(body['username'])
+
+        # Delete all tokens of the user -> automatically logout all long-lived sessions
+        DATABASE.delete_all_tokens(body['username'])
 
         if not is_testing_request(request):
             send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])

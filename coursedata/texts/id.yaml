@@ -131,7 +131,7 @@ HedyErrorMessages:
     Unquoted Equality Check: If you want to check if a variable is equal to multiple words, the words should be surrounded by quotation marks!
     Unquoted Assignment: ' From this level, you need to place texts to the right of the `is` between quotes. You forgot that for the text {text}.'
     Cyclic Var Definition: The name {variable} needs to be set before you can use it on the right-hand side of the is command
-    Invalid Argument Type: You cannot use the command {command} with {invalid_argument} because it is {invalid_type}. Try changing {invalid_argument} to {allowed_types}.
+    Invalid Argument Type: You cannot use {command} with {invalid_argument} because it is {invalid_type}. Try changing {invalid_argument} to {allowed_types}.
     Unsupported Float: Non-integer numbers are not supported yet but they will be in a few levels. For now change {value} to an integer.
     string: text
     integer: a number
@@ -139,7 +139,7 @@ HedyErrorMessages:
     No Indentation: You used too few spaces in line {line_number}. You used {leading_spaces} spaces, which is not enough. Start every new block with {indent_size} spaces more than the line before.
     Too Big: Wow! Your program has an impressive {lines_of_code} lines of code! But we can only process {max_lines} lines in this level. Make your program smaller and try again.
     Invalid Argument: You cannot use the command {command} with {invalid_argument} . Try changing {invalid_argument} to {allowed_types}.
-    Invalid Type Combination: You cannot use {invalid_argument} and {invalid_argument_2} in {operation} because one is {invalid_type} and the other is {invalid_type_2}. Try changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} to {invalid_type}.
+    Invalid Type Combination: You cannot use {invalid_argument} and {invalid_argument_2} with {command} because one is {invalid_type} and the other is {invalid_type_2}. Try changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} to {invalid_type}.
     Missing Command: It looks like you forgot to use a command on line {line_number}.
     ask_needs_var: "Starting in level 2, ask needs to be used with a variable and quotation marks. Example: name is ask 'What are you called?'"
     echo_out: "Starting in level 2 echo is no longer needed. You can repeat an answer with ask and print now. Example: name is ask 'What are you called?' print 'hello' name"
@@ -407,6 +407,8 @@ Auth:
     general_settings: General settings
     adventure_exp_2: 'If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:'
     explore: Explore
+    specific_adventure_mode: You're currently in adventure '{adventure}', click on 'Hedy' to view all adventures.
+    cheatsheet: Cheatsheet
 Programs:
     recent: Program-program terbaru saya
     level: Level
