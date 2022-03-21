@@ -11,7 +11,8 @@ config = {
         'cookie_name': 'hedy',
         # in minutes
         'session_length': 60 * 24 * 14,
-        'reset_length': 60 * 4
+        'reset_length': 60 * 4,
+        'invite_length': 60 * 24 * 7
     },
     'email': {
         'sender': 'Hedy <hedy@felienne.com>',
