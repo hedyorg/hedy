@@ -24,11 +24,11 @@ msgstr ""
 
 #: app.py:740 app.py:1108 website/teacher.py:353 website/teacher.py:362
 msgid "not_teacher"
-msgstr ""
+msgstr "Parece que no eres un instructor."
 
 #: app.py:743
 msgid "not_enrolled"
-msgstr ""
+msgstr "No se encontró tu registro para esta clase"
 
 #: app.py:775
 msgid "title_programs"
@@ -63,11 +63,11 @@ msgstr ""
 
 #: app.py:849 app.py:851 app.py:973
 msgid "no_such_level"
-msgstr ""
+msgstr "No se encontró ese nivel de Hedy"
 
 #: app.py:859 app.py:865 app.py:869 app.py:934
 msgid "no_such_program"
-msgstr ""
+msgstr "No se encontró el programa de Hedy"
 
 #: app.py:895
 msgid "level_not_translated"
@@ -84,7 +84,7 @@ msgstr ""
 
 #: app.py:1002
 msgid "page_not_found"
-msgstr ""
+msgstr "¡No pudimos encontrar esta página!"
 
 #: app.py:1022
 msgid "title_signup"
@@ -120,7 +120,7 @@ msgstr ""
 
 #: app.py:1089
 msgid "not_user"
-msgstr ""
+msgstr "Parece que hay que registrarse o ingresar a tu cuenta"
 
 #: app.py:1104
 msgid "title_for-teacher"
@@ -169,19 +169,19 @@ msgstr ""
 
 #: app.py:1390
 msgid "invalid_teacher_invitation_code"
-msgstr ""
+msgstr "El código de instructor es inválido. Para ser instructor, por favor mande un mensaje a hedy@felienne.com."
 
 #: utils.py:202
 msgid "default_404"
-msgstr ""
+msgstr "No pudimos encontrar esa página..."
 
 #: utils.py:204
 msgid "default_403"
-msgstr ""
+msgstr "Parece que no tienes autorización..."
 
 #: utils.py:206
 msgid "default_500"
-msgstr ""
+msgstr "Algo salió mal..."
 
 #: coursedata/error-messages.txt:1
 msgid "Empty Program"
@@ -189,19 +189,19 @@ msgstr ""
 
 #: coursedata/error-messages.txt:2
 msgid "Wrong Level"
-msgstr ""
+msgstr "Ese código es correcto, pero no pertenece al nivel correcto. Has escrito código para el nivel {working_level} mientras trabajabas en el nivel {original_level}."
 
 #: coursedata/error-messages.txt:3
 msgid "Incomplete"
-msgstr ""
+msgstr "Oops! Has olvidado algo de código! En la línea {line_number}, debes agregar texto después de {incomplete_command}."
 
 #: coursedata/error-messages.txt:4
 msgid "Invalid"
-msgstr ""
+msgstr "{invalid_command} no es un comando de Hedy en nivel {level}. {guessed_command}?"
 
 #: coursedata/error-messages.txt:5
 msgid "Invalid Space"
-msgstr ""
+msgstr "Oops! Has comenzado una línea con un espacio en la línea {line_number}. Los espacios confunden a las computadoras, ¿podrías quitarlos?"
 
 #: coursedata/error-messages.txt:6
 msgid "Has Blanks"
@@ -217,11 +217,11 @@ msgstr ""
 
 #: coursedata/error-messages.txt:9
 msgid "Parse"
-msgstr ""
+msgstr "El servidor no puede traducir este programa de Hedy. Hay un error en la línea {location[0]}, carácter {location[1]}. Tu has ingresado {character_found}, pero eso no está permitido."
 
 #: coursedata/error-messages.txt:10
 msgid "Unquoted Text"
-msgstr ""
+msgstr "Ten cuidado! Si imprimes algo, el texto debe estar rodeado de comillas. Has olvidado agregar una comilla en alguna parte."
 
 #: coursedata/error-messages.txt:11
 msgid "Unquoted Assignment"
@@ -233,7 +233,7 @@ msgstr ""
 
 #: coursedata/error-messages.txt:13
 msgid "Var Undefined"
-msgstr ""
+msgstr "Intentaste imprimir {name}, pero no lo instanciaste."
 
 #: coursedata/error-messages.txt:14
 msgid "Cyclic Var Definition"
@@ -281,47 +281,47 @@ msgstr ""
 
 #: coursedata/error-messages.txt:25
 msgid "space"
-msgstr ""
+msgstr "un espacio"
 
 #: coursedata/error-messages.txt:26
 msgid "comma"
-msgstr ""
+msgstr "una coma"
 
 #: coursedata/error-messages.txt:27
 msgid "question mark"
-msgstr ""
+msgstr "un signo de interrogación"
 
 #: coursedata/error-messages.txt:28
 msgid "newline"
-msgstr ""
+msgstr "un salto de línea"
 
 #: coursedata/error-messages.txt:29
 msgid "period"
-msgstr ""
+msgstr "un punto"
 
 #: coursedata/error-messages.txt:30
 msgid "exclamation mark"
-msgstr ""
+msgstr "un signo de exclamación"
 
 #: coursedata/error-messages.txt:31
 msgid "dash"
-msgstr ""
+msgstr "un guión"
 
 #: coursedata/error-messages.txt:32
 msgid "star"
-msgstr ""
+msgstr "un asterisco"
 
 #: coursedata/error-messages.txt:33
 msgid "single quotes"
-msgstr ""
+msgstr "una comilla simple"
 
 #: coursedata/error-messages.txt:34
 msgid "double quotes"
-msgstr ""
+msgstr "una comilla doble"
 
 #: coursedata/error-messages.txt:35
 msgid "slash"
-msgstr ""
+msgstr "una barra"
 
 #: coursedata/error-messages.txt:36
 msgid "string"
@@ -364,7 +364,7 @@ msgstr ""
 #: templates/login.html:12 templates/profile.html:93 templates/recover.html:8
 #: templates/signup.html:10
 msgid "username"
-msgstr ""
+msgstr "Usuario"
 
 #: templates/class-overview.html:25 templates/class-overview.html:65
 msgid "last_login"
@@ -391,7 +391,7 @@ msgstr ""
 #: templates/class-overview.html:83 templates/profile.html:148
 #: templates/profile.html:150 templates/profile.html:163
 msgid "change_password"
-msgstr ""
+msgstr "Cambiar contraseña"
 
 #: templates/class-overview.html:53 templates/class-overview.html:71
 msgid "remove_student"
@@ -514,7 +514,7 @@ msgstr ""
 #: templates/level-page.html:11 templates/quiz/startquiz.html:10
 #: templates/view-program-page.html:12 templates/view-program-page.html:28
 msgid "level_title"
-msgstr ""
+msgstr "Nivel"
 
 #: templates/create-accounts.html:5
 msgid "create_multiple_accounts"
@@ -531,12 +531,12 @@ msgstr ""
 #: templates/create-accounts.html:17 templates/profile.html:96
 #: templates/recover.html:8 templates/signup.html:13
 msgid "email"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: templates/create-accounts.html:18 templates/login.html:15
 #: templates/reset.html:8 templates/signup.html:19
 msgid "password"
-msgstr ""
+msgstr "Contraseña"
 
 #: templates/create-accounts.html:20
 msgid "select_class"
@@ -591,7 +591,7 @@ msgstr ""
 #: templates/programs.html:18 templates/programs.html:48
 #: templates/view-adventure.html:6
 msgid "adventure"
-msgstr ""
+msgstr "Aventura"
 
 #: templates/customize-adventure.html:44
 msgid "template_code"
@@ -638,7 +638,7 @@ msgstr ""
 #: templates/profile.html:137 templates/signup.html:26 templates/signup.html:45
 #: templates/signup.html:53
 msgid "select"
-msgstr ""
+msgstr "Seleccionar"
 
 #: templates/customize-class.html:110
 msgid "other_settings"
@@ -674,7 +674,7 @@ msgstr ""
 
 #: templates/error-page.html:12
 msgid "go_back_to_main"
-msgstr ""
+msgstr "Volver a la página principal"
 
 #: templates/explore.html:12
 msgid "explore_programs"
@@ -687,7 +687,7 @@ msgstr ""
 #: templates/explore.html:35 templates/incl-menubar.html:45
 #: templates/programs.html:27
 msgid "search"
-msgstr ""
+msgstr "Busca..."
 
 #: templates/explore.html:51
 msgid "creator"
@@ -748,57 +748,57 @@ msgstr ""
 
 #: templates/incl-adventure-tabs.html:68
 msgid "go_to_quiz"
-msgstr ""
+msgstr "Seleccionar cuestionario"
 
 #: templates/incl-editor-and-output.html:100
 msgid "enter_text"
-msgstr ""
+msgstr "Ingresar tu respuesta aquí..."
 
 #: templates/incl-editor-and-output.html:101
 msgid "enter"
-msgstr ""
+msgstr "Ingresar"
 
 #: templates/incl-editor-and-output.html:110
 msgid "run_code_button"
-msgstr ""
+msgstr "Ejecutar código"
 
 #: templates/incl-editor-and-output.html:112
 msgid "edit_code_button"
-msgstr ""
+msgstr "Editar código"
 
 #: templates/incl-editor-and-output.html:118
 msgid "read_code_label"
-msgstr ""
+msgstr "¡Leer en voz alta!"
 
 #: templates/incl-editor-and-output.html:128
 #: templates/incl-editor-and-output.html:137
 msgid "regress_button"
-msgstr ""
+msgstr "Regresar al nivel {level}"
 
 #: templates/incl-editor-and-output.html:131
 #: templates/incl-editor-and-output.html:140
 msgid "advance_button"
-msgstr ""
+msgstr "Ir al nivel {level}"
 
 #: templates/incl-editor-and-output.html:154
 msgid "developers_mode"
-msgstr ""
+msgstr "Modo desarollador"
 
 #: templates/incl-menubar.html:8
 msgid "nav_start"
-msgstr ""
+msgstr "Inicio"
 
 #: templates/incl-menubar.html:9
 msgid "nav_hedy"
-msgstr ""
+msgstr "Hedy"
 
 #: templates/incl-menubar.html:10
 msgid "nav_explore"
-msgstr ""
+msgstr "Explore"
 
 #: templates/incl-menubar.html:11
 msgid "nav_learn_more"
-msgstr ""
+msgstr "Aprende más"
 
 #: templates/incl-menubar.html:13 templates/public-page.html:56
 msgid "program_header"
@@ -818,12 +818,12 @@ msgstr ""
 
 #: templates/incl-menubar.html:31
 msgid "logout"
-msgstr ""
+msgstr "Salir"
 
 #: templates/incl-menubar.html:36 templates/login.html:19
 #: templates/signup.html:106
 msgid "login"
-msgstr ""
+msgstr "Ingresar"
 
 #: templates/landing-page.html:6
 msgid "welcome"
@@ -894,11 +894,11 @@ msgstr ""
 
 #: templates/level-page.html:8
 msgid "step_title"
-msgstr ""
+msgstr "Tarea"
 
 #: templates/level-page.html:12
 msgid "save_code_button"
-msgstr ""
+msgstr "Guardar código"
 
 #: templates/level-page.html:12
 msgid "save_prompt"
@@ -906,23 +906,23 @@ msgstr ""
 
 #: templates/level-page.html:13
 msgid "share_code_button"
-msgstr ""
+msgstr "Guardar y compartir código"
 
 #: templates/level-page.html:31
 msgid "try_button"
-msgstr ""
+msgstr "Probar"
 
 #: templates/login.html:10
 msgid "login_long"
-msgstr ""
+msgstr "Ingresar a mi cuenta"
 
 #: templates/login.html:26 website/auth.py:312
 msgid "no_account"
-msgstr ""
+msgstr "¿Todavía no tienes una cuenta?"
 
 #: templates/login.html:28 templates/signup.html:6 templates/signup.html:102
 msgid "create_account"
-msgstr ""
+msgstr "Crear cuenta"
 
 #: templates/login.html:33
 msgid "forgot_password"
@@ -930,7 +930,7 @@ msgstr ""
 
 #: templates/profile.html:4
 msgid "account_overview"
-msgstr ""
+msgstr "Mi perfil"
 
 #: templates/profile.html:6 templates/profile.html:8
 msgid "my_messages"
@@ -986,7 +986,7 @@ msgstr ""
 
 #: templates/profile.html:61 templates/profile.html:145
 msgid "are_you_sure"
-msgstr ""
+msgstr "¿Estás segura/o? No puedes revertir esta acción."
 
 #: templates/profile.html:61
 msgid "delete_public"
@@ -1010,7 +1010,7 @@ msgstr ""
 
 #: templates/profile.html:99 templates/signup.html:41
 msgid "birth_year"
-msgstr ""
+msgstr "Año de nacimiento"
 
 #: templates/profile.html:102 templates/signup.html:25
 msgid "preferred_language"
@@ -1022,43 +1022,43 @@ msgstr ""
 
 #: templates/profile.html:126 templates/signup.html:44
 msgid "gender"
-msgstr ""
+msgstr "Género"
 
 #: templates/profile.html:129 templates/signup.html:46
 msgid "female"
-msgstr ""
+msgstr "Femenino"
 
 #: templates/profile.html:130 templates/signup.html:47
 msgid "male"
-msgstr ""
+msgstr "Masculino"
 
 #: templates/profile.html:131 templates/signup.html:48
 msgid "other"
-msgstr ""
+msgstr "Otro"
 
 #: templates/profile.html:135 templates/signup.html:52
 msgid "country"
-msgstr ""
+msgstr "País"
 
 #: templates/profile.html:141
 msgid "update_profile"
-msgstr ""
+msgstr "Actualizar perfil"
 
 #: templates/profile.html:145
 msgid "destroy_profile"
-msgstr ""
+msgstr "Borrar mi cuenta permanentemente"
 
 #: templates/profile.html:152
 msgid "current_password"
-msgstr ""
+msgstr "Contraseña actual"
 
 #: templates/profile.html:156
 msgid "new_password"
-msgstr ""
+msgstr "Nueva contraseña"
 
 #: templates/profile.html:160
 msgid "repeat_new_password"
-msgstr ""
+msgstr "Repetir nueva contraseña"
 
 #: templates/programs.html:7
 msgid "recent"
@@ -1166,15 +1166,15 @@ msgstr ""
 
 #: templates/reset.html:12 templates/signup.html:22
 msgid "password_repeat"
-msgstr ""
+msgstr "Repetir contraseña"
 
 #: templates/signup.html:7
 msgid "create_account_explanation"
-msgstr ""
+msgstr "Con tu cuenta puedes salvar tus programas."
 
 #: templates/signup.html:16
 msgid "email_repeat"
-msgstr ""
+msgstr "Repetir correo electrónico"
 
 #: templates/signup.html:57
 msgid "programming_experience"
@@ -1198,7 +1198,7 @@ msgstr ""
 
 #: templates/signup.html:91
 msgid "subscribe_newsletter"
-msgstr ""
+msgstr "Subscribirse al newsletter"
 
 #: templates/signup.html:96
 msgid "agree_with"
@@ -1214,7 +1214,7 @@ msgstr ""
 
 #: templates/signup.html:106
 msgid "already_account"
-msgstr ""
+msgstr "¿Ya tienes una cuenta?"
 
 #: templates/teacher-invitation.html:5
 msgid "teacher_invitation_require_login"
@@ -1222,67 +1222,67 @@ msgstr ""
 
 #: templates/view-program-page.html:13
 msgid "by"
-msgstr ""
+msgstr "por"
 
 #: templates/quiz/endquiz.html:27
 msgid "end_quiz"
-msgstr ""
+msgstr "Terminar cuestionario"
 
 #: templates/quiz/endquiz.html:28
 msgid "score"
-msgstr ""
+msgstr "Puntos"
 
 #: templates/quiz/endquiz.html:37
 msgid "go_to_level"
-msgstr ""
+msgstr "Ir al nivel"
 
 #: templates/quiz/feedback.html:8 templates/quiz/quiz.html:16
 msgid "question"
-msgstr ""
+msgstr "Pregunta"
 
 #: templates/quiz/feedback.html:17
 msgid "feedback_success"
-msgstr ""
+msgstr "¡Bien hecho!"
 
 #: templates/quiz/feedback.html:23
 msgid "feedback_failure"
-msgstr ""
+msgstr "¡Incorrecto!"
 
 #: templates/quiz/feedback.html:36
 msgid "correct_answer"
-msgstr ""
+msgstr "La respuesta correcta es:"
 
 #: templates/quiz/feedback.html:52
 msgid "go_to_question"
-msgstr ""
+msgstr "Ir a la pregunta"
 
 #: templates/quiz/feedback.html:56
 msgid "go_to_quiz_result"
-msgstr ""
+msgstr "Ir al resultado del cuestionario"
 
 #: templates/quiz/quiz.html:16
 msgid "attempt"
-msgstr ""
+msgstr "Intento"
 
 #: templates/quiz/quiz_question.html:15
 msgid "hint"
-msgstr ""
+msgstr "¿Consejo?"
 
 #: templates/quiz/quiz_question.html:53
 msgid "go_to_answer"
-msgstr ""
+msgstr "Ir a la respuesta"
 
 #: templates/quiz/quiz_question.html:55
 msgid "submit_answer"
-msgstr ""
+msgstr "Entregar respuesta"
 
 #: templates/quiz/startquiz.html:9
 msgid "start_quiz"
-msgstr ""
+msgstr "Empezar cuestionario"
 
 #: templates/quiz/startquiz.html:15
 msgid "go_to_first_question"
-msgstr ""
+msgstr "Ir a la pregunta primera"
 
 #: website/admin.py:18 website/admin.py:85 website/admin.py:106
 #: website/admin.py:124 website/admin.py:131
@@ -1440,13 +1440,13 @@ msgstr ""
 #: website/teacher.py:208 website/teacher.py:231 website/teacher.py:243
 #: website/teacher.py:308 website/teacher.py:341
 msgid "retrieve_class_error"
-msgstr ""
+msgstr "Solo los instructores pueden ver clases"
 
 #: website/statistics.py:41 website/teacher.py:39 website/teacher.py:139
 #: website/teacher.py:211 website/teacher.py:234 website/teacher.py:246
 #: website/teacher.py:311 website/teacher.py:344
 msgid "no_such_class"
-msgstr ""
+msgstr "No se encontró esa clase de Hedy"
 
 #: website/teacher.py:67
 msgid "title_class-overview"
@@ -1466,7 +1466,7 @@ msgstr ""
 
 #: website/teacher.py:151 website/teacher.py:177 website/teacher.py:530
 msgid "invalid_class_link"
-msgstr ""
+msgstr "Enlace incorrecto para unirse a la clase"
 
 #: website/teacher.py:158
 msgid "title_join-class"
