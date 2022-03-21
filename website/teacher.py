@@ -48,10 +48,16 @@ def routes(app, database, achievements):
                 latest_shared['link'] = f"/hedy/{latest_shared['id']}/view"
             else:
                 latest_shared = None
-            students.append ({'username': student_username, 'last_login': utils.datetotimeordate (utils.mstoisostring (student ['last_login'])), 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
+            students.append({
+                'username': student_username,
+                'last_login': utils.datetotimeordate (utils.mstoisostring (student ['last_login'])),
+                'programs': len (programs),
+                'highest_level': highest_level,
+                'latest_shared': latest_shared
+            })
 
-        if utils.is_testing_request (request):
-            return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        if utils.is_testing_request(request):
+            return jsonify({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
         achievement = None
         if len(students) > 20:
@@ -61,13 +67,11 @@ def routes(app, database, achievements):
 
         invites = []
         for invite in DATABASE.get_class_invites(Class['id']):
-            print(invite)
-            print(utils.mstoisostring (invite['timestamp']))
             invites.append({'username': invite['username'],
-                            'timestamp': utils.datetotimeordate (utils.mstoisostring (invite['timestamp'])),
-                            'expire_timestamp': utils.datetotimeordate (utils.mstoisostring (invite['ttl']))})
+                            'timestamp': utils.stoisostring(invite['timestamp']),
+                            'expire_timestamp': utils.stoisostring(invite['ttl'])})
 
-        return render_template ('class-overview.html', current_page='my-profile',
+        return render_template('class-overview.html', current_page='my-profile',
                                 page_title=g.ui_texts.get('title_class-overview'),
                                 achievement=achievement, invites=invites,
                                 class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class ['link'],
@@ -154,14 +158,14 @@ def routes(app, database, achievements):
         if not Class or Class ['link'] != link:
             return utils.error_page(error=404,  ui_message='invalid_class_link')
         user = {}
-        if request.cookies.get (cookie_name):
+        if request.cookies.get(cookie_name):
             token = DATABASE.get_token(request.cookies.get (cookie_name))
             if token:
                 if token ['username'] in Class.get ('students', []):
                     return render_template ('class-prejoin.html', joined=True,
                                             page_title=g.ui_texts.get('title_join-class'),
                                             current_page='my-profile', class_info={'name': Class ['name']})
-                user = DATABASE.user_by_username(token ['username'])
+                user = DATABASE.user_by_username(token['username'])
 
         return render_template ('class-prejoin.html', joined=False,
                                 page_title=hedyweb.get_page_title('join class'),
