@@ -59,3 +59,24 @@ class TestsLevel10(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_for_list_with_string_gives_type_error(self):
+    code = textwrap.dedent("""\
+    dieren is 'text'
+    for dier in dieren
+        print dier""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      exception=hedy.exceptions.InvalidArgumentTypeException)
+
+  def test_for_list_with_int_gives_type_error(self):
+    code = textwrap.dedent("""\
+      dieren is 5
+      for dier in dieren
+        print dier""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      exception=hedy.exceptions.InvalidArgumentTypeException)
