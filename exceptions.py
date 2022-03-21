@@ -89,9 +89,9 @@ class InvalidArgumentTypeException(HedyException):
             invalid_argument=invalid_argument)
 
 class InvalidTypeCombinationException(HedyException):
-    def __init__(self, operation, arg1, arg2, type1, type2):
+    def __init__(self, command, arg1, arg2, type1, type2):
         super().__init__('Invalid Type Combination',
-            operation=operation,
+            command=command,
             invalid_argument=arg1,
             invalid_argument_2=arg2,
             invalid_type=type1,
