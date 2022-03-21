@@ -24,27 +24,27 @@
         example: "Ejemplo: {echo} entonces tu color favorito es "
         demo_code: |-
             {ask} ¿Cuál es tu color favorito?
-            {echo} entonces tu color favorito es 
+            {echo} entonces tu color favorito es
     -   demo_code: '{print} 🙋 🌍 ❗'
         name: '{print} emojis'
-        explanation: print an emoji with `{print}`
-        example: 'Example: {print} 🙋‍ 🌍 ❗'
+        explanation: imprime un emoji con `{print}`
+        example: 'Ejemplo: {print} 🙋‍ 🌍 ❗'
     -   name: '{forward}'
         demo_code: '{forward} 100'
         example: 'Example: {forward} 100'
         explanation: Draw a line with `{forward}`.
-    -   explanation: turn the drawing turtle with `{turn}`
-        example: 'Example: {turn}'
+    -   explanation: Gira a la tortuga con `{turn}`
+        example: 'Ejemplo: {turn}'
         name: '{turn}'
         demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
-    example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
-    example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
+    example_code: "## Código de ejemplo\n```\n{print} Hola!\n{print} Bienvenido a Hedy!\n```\n"
+    intro_text_2: "También puedes solicitar  entrada y repetirla usando el comando`{echo}`.\nPrueba el código a tu izquierda de nuevo.\n\n¿No sabes qué crear? En las siguientes pestañas vas a encontrar ideas de programas para construir.\n"
+    example_code_2: "## Código de ejemplo\n```\n{ask} ¿Cuál es tu nombre?\n{echo} hola\n```\n"
 2:
     intro_text: |
         En el nivel 2 aprendemos algo nuevo. Puedes nombrar una palabra con `{is}`.
 
-        Si pones el código en la parte superior de tu programa, puedes usar `name` en cualquier parte y será reemplazado por Hedy:
+        Si pones el código en la parte superior de tu programa, puedes usar `nombre` en cualquier parte y será reemplazado por Hedy:
 
         ```
         nombre {is} Hedy
@@ -72,24 +72,17 @@
         demo_code: |-
             color {is} {ask} ¿Cuál es tu color favorito?
             {print} El color es tú favorito
-    -   explanation: Let Hedy pause for a (couple of) second(s).
+    -   explanation: Permite pausar a Hedy por un (par de) segundo(s).
         name: '{sleep}'
-        example: 'Example: {sleep} 2 '
-        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+        example: 'Ejemplo: {sleep} 2 '
+        demo_code: "{print} Déjame pensar por un segundo...\n{sleep}\n{print} Hmm.. Necesito 3 segundos más...\n{sleep} 3\n{print} ¡Eureka! ¡Lo tengo!"
     -   name: is - turtle
-        example: 'Example: angle {is} 90'
-        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
-        explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        example: 'Ejemplo: ángulo {is} 90'
+        demo_code: "ángulo {is} 90\n{turn} ángulo\n{forward} 100"
+        explanation: Dale un nombre a un número usando `{is}`. Puedes escoger el nombre tú misme.
 3:
     intro_text: |
         En el nivel 3 también puedes hacer una lista. Puedes dejar al ordenador escoger algo aleatorio de la lista, usando `{at} {random}` (se pronuncia: et ren-dom).
-
-        ```
-        animales {is} perro, gato, canguro
-        {print} animales {at} {random}
-        ```
-
-        Encontrarás todos los códigos del nivel 3 en la barra de la izquierda. También hay pestañas con ejemplos.
     start_code: "{print} hola mundo!"
     commands:
     -   name: "choose_random"
@@ -106,9 +99,9 @@
         explanation: remove an item from a list
         example: 'Example: {remove} dog {from} animals'
         demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
-    example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-    intro_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
-    example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+    example_code: "## Código de Hedy de ejemplo\n\n```\nanimales {is} perro, gato, canguro\n{print} animales {at} {random}\n```\n"
+    intro_text_2: También puedes añadir elementos a una lista con `{add}` y quitar elementos con `{remove}`.
+    example_code_2: "## Código de ejemplo de Hedy\n\n```\nanimales {is} perro, gato, canguro\n{add} pingüino {to_list} animales\n{remove} gato {from} animales\n{print} animales {at} {random}\n```\n"
 4:
     intro_text: |
         En el nivel 4 `{ask}` y `{print}` funcionan diferente.
