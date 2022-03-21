@@ -22,7 +22,11 @@ from website import querylog, database
 import hashlib
 
 TOKEN_COOKIE_NAME = config['session']['cookie_name']
+# The session_length in the session is set to 60 * 24 * 14 (in minutes) config.py#13
+# The reset_length in the session is set to 60 * 4 (in minutes) config.py#14
+# We multiply this by 60 to set the session_length to 14 days and reset_length to 4 hours
 session_length = config['session']['session_length'] * 60
+reset_length = config['session']['reset_length'] * 60
 
 env = os.getenv('HEROKU_APP_NAME')
 
@@ -651,9 +655,9 @@ def routes(app, database):
         if not user:
             return gettext(u'username_invalid'), 403
 
-        # Create a token
+        # Create a token -> use the reset_length value as we don't want the token to live as long as a login one
         token = make_salt()
-        DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + session_length})
+        DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + reset_length})
 
         if is_testing_request(request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
@@ -664,7 +668,6 @@ def routes(app, database):
                                     user['username']) + '&token=' + urllib.parse.quote_plus(token),
                                 lang=user['language'], username=user['username'])
             return jsonify({'message':gettext(u'sent_password_recovery')}), 200
-
 
     @app.route('/auth/reset', methods=['POST'])
     def reset():

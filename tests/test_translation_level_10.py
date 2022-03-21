@@ -1,5 +1,6 @@
 import hedy
 from test_level_01 import HedyTester
+from parameterized import parameterized
 import hedy_translation
 import textwrap
 
@@ -54,3 +55,20 @@ class TestsTranslationLevel10(HedyTester):
         result = hedy_translation.translate_keywords(result, from_lang="en", to_lang="nl", level=self.level)
 
         self.assertEqual(result, code)
+
+    @parameterized.expand([('en', 'for', 'in'),
+                           ('es', 'para', 'en'),
+                           ('es', 'para', 'in'),
+                           ('es', 'for', 'en')])
+    def test_for_list_type_error_translates_command(self, lang, for_, in_):
+        code = textwrap.dedent(f"""\
+            dieren is 'text'
+            {for_} dier {in_} dieren
+                print dier""")
+
+        self.multi_level_tester(
+            lang=lang,
+            code=code,
+            max_level=11,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            extra_check_function=self.exception_command(f'{for_} {in_}'))

@@ -207,13 +207,7 @@ var StopExecution = false;
 })();
 
 export function getHighlighter(level: string) {
-  const modeExceptions: Record<string, string> = {
-        '8': 'ace/mode/level8and9',
-        '9': 'ace/mode/level8and9',
-        '11': 'ace/mode/level11and12',
-        '12': 'ace/mode/level11and12',
-      };
-  return modeExceptions[level] || `ace/mode/level` + level;
+  return `ace/mode/level` + level;
 }
 
 function reloadOnExpiredSession () {
