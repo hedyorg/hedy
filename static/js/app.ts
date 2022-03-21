@@ -13,6 +13,7 @@ export let theModalEditor: AceAjax.Editor;
 var StopExecution = false;
 
 (function() {
+  console.log(ErrorMessages);
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
   if (!window.State) {
