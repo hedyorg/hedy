@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-21 21:26+0100\n"
+"POT-Creation-Date: 2022-03-22 16:20+0100\n"
 "PO-Revision-Date: 2022-02-25 13:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -1010,12 +1010,6 @@ msgstr "Assignment"
 msgid "save_code_button"
 msgstr "Save code"
 
-#: templates/level-page.html:12
-msgid "save_prompt"
-msgstr ""
-"You need to have an account to save your program. Would you like to login"
-" now?"
-
 #: templates/level-page.html:13
 msgid "share_code_button"
 msgstr "Save & share code"
@@ -1199,7 +1193,7 @@ msgstr "Are you sure you want to set this program as your favourite?"
 msgid "open"
 msgstr "Open"
 
-#: templates/programs.html:68 templates/programs.html:76
+#: templates/programs.html:68
 msgid "copy_clipboard"
 msgstr "Successfully copied to clipboard"
 
@@ -1552,29 +1546,39 @@ msgstr ""
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
-#: website/programs.py:40
+#: website/programs.py:41
 msgid "delete_success"
 msgstr "Program deleted successfully."
 
-#: website/programs.py:59
+#: website/programs.py:55
+msgid "save_prompt"
+msgstr ""
+"You need to have an account to save your program. Would you like to login"
+" now?"
+
+#: website/programs.py:60
 msgid "overwrite_warning"
 msgstr ""
 "You already have a program with this name, saving this program will "
 "overwrite the old one. Are you sure?"
 
-#: website/programs.py:117 website/programs.py:118
+#: website/programs.py:87
+msgid "save_parse_warning"
+msgstr "This program contains an error, are you sure you want to save it?"
+
+#: website/programs.py:131 website/programs.py:132
 msgid "save_success_detail"
 msgstr "Program saved successfully."
 
-#: website/programs.py:146
+#: website/programs.py:160
 msgid "share_success_detail"
 msgstr "Program shared successfully."
 
-#: website/programs.py:148
+#: website/programs.py:162
 msgid "unshare_success_detail"
 msgstr "Program unshared successfully."
 
-#: website/programs.py:188
+#: website/programs.py:202
 msgid "favourite_success"
 msgstr "Your program is set as favourite."
 
