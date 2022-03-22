@@ -53,8 +53,7 @@ To run the unit tests:
 (.env)$ python -m pytest tests/*.py
 ```
 
-## Working on the web frontent in TypeScript/JavaScript
-
+## Working on the web front-end in TypeScript/JavaScript
 Part of the code base of Hedy is written in Python, which runs on the server.
 The parts that run in the browser are written in TypeScript, and are compiled to
 JavaScript.
@@ -72,7 +71,29 @@ $ npm ci
 $ build-tools/heroku/generate-typescript --watch
 ```
 
-Before reloading your browser.
+The ```--watch``` command will keep looking for changes and automatically update the files. 
+To just keep it running while you are working on the front-end code. 
+If you just want to run the code once, simply remove this parameter.
+Make sure to re-load your browser (and work in incognito mode) to see the changes. 
+These files are also automatically generated on deploy, so don't worry if you forget to generate them.
+
+## Working on the web front-end in Tailwind
+All the styling in our front-end HTML templates is done using the Tailwind library. 
+This library has generated classes for styling which we can call on HTML elements.
+To make sure you have access to all possible styling classes, generate the development css file:
+```
+$ ./build-tools/heroku/tailwind/generate-development-css
+```
+For all possible styling classes and more, take a look at their [website](https://tailwindcss.com).
+If you want to combine different Tailwind classes into one class or one element, we can do this in the ```/build-tool/heroku/tailwind/styles.css``` file.
+By using the ```@apply``` attribute we can assign classes to other styling. For example, we styled the ```<h1>``` element with multiple Tailwind classes like this:
+```
+h1 {
+  @apply font-extralight text-4xl;
+}
+```
+If you want to use styling that is not available in the Tailwind library this can be added to the ```static/css/additional.css``` file.
+But please, try to use the Tailwind classes as much as possible as these are optimized and keep our code base consistent and readable.
 
 ## Using Docker
 
