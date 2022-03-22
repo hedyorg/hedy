@@ -47,8 +47,8 @@ export function rename_class(id: string, class_name_prompt: string) {
     });
 }
 
-export function delete_class(id: string, confirmation: string) {
-  modal.confirm (confirmation, function () {
+export function delete_class(id: string, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'DELETE',
       url: '/class/' + id,
