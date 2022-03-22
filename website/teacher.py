@@ -505,6 +505,8 @@ def routes(app, database, achievements):
             return gettext(u'ajax_error'), 400
         if not isinstance(body.get('name'), str):
             return gettext(u'adventure_name_invalid'), 400
+        if len(body.get('name')) < 1:
+            return gettext(u'adventure_empty'), 400
 
         adventures = DATABASE.get_teacher_adventures(user['username'])
         for adventure in adventures:
