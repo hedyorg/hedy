@@ -337,8 +337,8 @@ class Database:
     def get_username_invite(self, username):
         return INVITATIONS.get({'username': username}) or None
 
-    def add_class_invite(self, username, class_id):
-        INVITATIONS.put({'username': username, 'class_id': class_id, 'timestamp': timems ()})
+    def add_class_invite(self, data):
+        INVITATIONS.put(data)
 
     def remove_class_invite(self, username):
         INVITATIONS.delete({'username': username})
