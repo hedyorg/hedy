@@ -10,7 +10,7 @@ class TestsLevel17(HedyTester):
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
     naam is 'Hedy'
-    if naam is Hedy:
+    if naam is 'Hedy':
         print 'koekoek'""")
     expected = textwrap.dedent("""\
     naam = 'Hedy'
@@ -67,7 +67,7 @@ class TestsLevel17(HedyTester):
     computerc = 'PC'
     userc = 'Hedy'
     print 'Pilihan komputer: ' computerc
-    if userc is computerc and ucerc is 'Hedy':
+    if userc is computerc and userc is 'Hedy':
         print 'SERI'
     else:
         print 'Komputer'""")
@@ -76,7 +76,7 @@ class TestsLevel17(HedyTester):
     computerc = 'PC'
     userc = 'Hedy'
     print(f'Pilihan komputer: {computerc}')
-    if str(userc) == str(computerc) and str('ucerc') == str('Hedy'):
+    if str(userc) == str(computerc) and str(userc) == str('Hedy'):
       print(f'SERI')
     else:
       print(f'Komputer')""")
@@ -88,9 +88,9 @@ class TestsLevel17(HedyTester):
     computerc = 'PC'
     userc = 'Hedy'
     print 'Pilihan komputer: ' computerc
-    if userc is computerc and ucerc is 'Hedy':
+    if userc is computerc and userc is 'Hedy':
         print 'SERI'
-    elif userc is 'PC' and ucerc is 'Hedy':
+    elif userc is 'PC' and userc is 'Hedy':
         print 'HARI'
     else:
         print 'Komputer'""")
@@ -99,9 +99,9 @@ class TestsLevel17(HedyTester):
     computerc = 'PC'
     userc = 'Hedy'
     print(f'Pilihan komputer: {computerc}')
-    if str(userc) == str(computerc) and str('ucerc') == str('Hedy'):
+    if str(userc) == str(computerc) and str(userc) == str('Hedy'):
       print(f'SERI')
-    elif str(userc) == str('PC') and str('ucerc') == str('Hedy'):
+    elif str(userc) == str('PC') and str(userc) == str('Hedy'):
       print(f'HARI')
     else:
       print(f'Komputer')""")

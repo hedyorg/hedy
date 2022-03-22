@@ -13,44 +13,44 @@
         <h1 class="inline-block w-80">{{class_info.name}}</h1>
         <div class="px-4 flex w-full flex-row border border-gray-400 py-2 rounded-lg">
             <div class="flex flex-row items-center">
-                <h3 class="inline-block w-64 my-2">{{ auth.visible_columns }}</h3>
+                <h3 class="inline-block w-64 my-2">{{_('visible_columns')}}</h3>
                 <div class="flex flex-row w-full ml-auto">
                     <div class="flex flex-col mx-2">
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
-                            <label class="inline-block" for="subscribe">{{auth.username}}</label>
+                            <label class="inline-block" for="subscribe">{{_('username')}}</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_login" name="last_login">
-                            <label class="inline-block" for="last_login">{{auth.last_login}}</label>
+                            <label class="inline-block" for="last_login">{{_('last_login')}}</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="highest_level" name="highest_level">
-                            <label class="inline-block" for="highest_level">{{auth.highest_level_reached}}</label>
+                            <label class="inline-block" for="highest_level">{{_('highest_level_reached')}}</label>
                         </div>
                     </div>
                     <div class="flex flex-col mx-2">
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="amount_programs" name="amount_programs">
-                            <label class="inline-block" for="amount_programs">{{auth.number_programs}}</label>
+                            <label class="inline-block" for="amount_programs">{{_('number_programs')}}</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="overview" name="overview">
-                            <label class="inline-block" for="overview">{{auth.programs}}</label>
+                            <label class="inline-block" for="overview">{{_('programs')}}</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_shared" name="last_shared">
-                            <label class="inline-block" for="last_shared">{{auth.latest_shared_program}}</label>
+                            <label class="inline-block" for="last_shared">{{_('latest_shared_program')}}</label>
                         </div>
                     </div>
                     <div class="flex flex-col mx-2">
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="change_password" name="change_password">
-                            <label class="inline-block" for="change_password">{{auth.change_password}}</label>
+                            <label class="inline-block" for="change_password">{{_('change_password')}}</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="remove_student" name="remove_student">
-                            <label class="inline-block" for="remove_student">{{auth.remove_student}}</label>
+                            <label class="inline-block" for="remove_student">{{_('remove_student')}}</label>
                         </div>
                     </div>
                 </div>
@@ -61,14 +61,14 @@
       <table class="table-auto w-full text-sm">
       <thead>
         <tr class="font-bold text-left">
-          <th id="username_header">{{auth.username}}</th>
-          <th id="last_login_header">{{auth.last_login}}</th>
-          <th id="highest_level_header">{{auth.highest_level_reached}}</th>
-          <th id="amount_programs_header">{{auth.number_programs}}</th>
-          <th id="overview_header">{{auth.programs}}</th>
-          <th id="last_shared_header">{{auth.latest_shared_program}}</th>
-          <th id="change_password_header" class="hidden">{{auth.change_password}}</th>
-          <th id="remove_student_header" class="hidden">{{auth.remove_student}}</th>
+          <th id="username_header">{{_('username')}}</th>
+          <th id="last_login_header">{{_('last_login')}}</th>
+          <th id="highest_level_header">{{_('highest_level_reached')}}</th>
+          <th id="amount_programs_header">{{_('number_programs')}}</th>
+          <th id="overview_header">{{_('programs')}}</th>
+          <th id="last_shared_header">{{_('latest_shared_program')}}</th>
+          <th id="change_password_header" class="hidden">{{_('change_password')}}</th>
+          <th id="remove_student_header" class="hidden">{{_('remove_student')}}</th>
         </tr>
       </thead>
       <tbody>
@@ -78,36 +78,37 @@
             <td class="last_login_cell">{{student.last_login}}</td>
             <td class="highest_level_cell">{{student.highest_level}}</td>
             <td class="amount_programs_cell">{{student.programs}}</td>
-            <td class="overview_cell"><a href="/programs?user={{student.username}}">{{student.username}}'s {{auth.page}}</a></td>
+            <td class="overview_cell"><a href="/programs?user={{student.username}}">{{student.username}}'s {{_('page')}}</a></td>
             <td class="last_shared_cell">{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
-            <td class="change_password_cell hidden"><a href="#" onclick="hedyApp.change_password_student ('{{student.username}}')">{{auth.change_password}}</a></td>
-            <td class="remove_student_cell hidden"><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}', false)">{{auth.remove}} {{student.username}}</a></td>
+            <td class="change_password_cell hidden"><a href="#" onclick="hedyApp.change_password_student ('{{student.username}}', '{{_('enter_password')}}', '{{_('password_change_prompt')}}')">{{_('change_password')}}</a></td>
+            <td class="remove_student_cell hidden"><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}', '{{_('remove_student_prompt')}}')">{{_('remove')}} {{student.username}}</a></td>
           </tr>
         {% endfor %}
       </tbody>
       </table>
   </div>
-  <p>{{auth.class_link}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
+  <p>{{_('class_link')}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
   <div class="mt-4 flex flex-row">
-    <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{ auth.customize_class }}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.invite_student ('{{class_info.id}}')">{{ auth.invite_student }}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{auth.class_stats}}</button>
+    <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
+    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.rename_class ("{{class_info.id}}", {{_('class_name_prompt')|tojson}}, {{_('class_name_empty')|tojson}})'>{{_('rename_class')}}</button>
+    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.invite_student ("{{class_info.id}}", {{_('invite_prompt')|tojson}}, {{_('username_empty')|tojson}})'>{{_('invite_student')}}</button>
+    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
   </div>
   <div class="mt-4 flex flex-row">
-    <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{auth.back_to_teachers_page}}</button>
-    <button class="red-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
+    <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
+    <button class="red-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.delete_class ("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
   </div>
   <div class="mt-4">
   {% if invites %}
-      <h2>{{ auth.pending_invites }}</h2>
+      <h2>{{_('pending_invites')}}</h2>
       <div class=" w-1/2 border-solid border-2 border-orange-400 rounded my-5 p-4">
         <table class="table-auto w-full text-sm">
         <thead>
             <tr class="font-bold text-left">
-                <th>{{auth.username}}</th>
-                <th>{{auth.invite_date}}</th>
-                <th>{{auth.remove_invite}}</th>
+                <th>{{_('username')}}</th>
+                <th>{{_('invite_date')}}</th>
+                <th>{{_('expiration_date')}}</th>
+                <th>{{_('remove_invite')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -115,7 +116,8 @@
             <tr>
                 <td>{{invite.username}}</td>
                 <td>{{invite.timestamp}}</td>
-                <td><a href="#" onclick="hedyApp.remove_student_invite('{{invite.username}}', '{{ class_info.id }}');">{{auth.remove}}</a></td>
+                <td>{{invite.expire_timestamp}}</td>
+                <td><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|tojson}})'>{{_('remove')}}</a></td>
             </tr>
         {% endfor %}
         </tbody>

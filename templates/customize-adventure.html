@@ -2,33 +2,33 @@
 
 {% block main %}
 <div class="px-8">
-    <h2>{{ auth.customize_adventure }}: {{adventure.name}}</h2>
+    <h2>{{_('customize_adventure')}}: {{adventure.name}}</h2>
     <div class="mt-4 border-gray-400 border-2 rounded-lg p-4">
-        <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %});">
+        <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %}, '{{_('update_adventure_prompt')}}')">
             <div class="flex flex-row">
                 <div class="flex flex-col ltr:mr-4 rtl:ml-4">
-                    <h3 class="text-center mt-0 mb-4">{{ auth.general_settings }}</h3>
+                    <h3 class="text-center mt-0 mb-4">{{_('general_settings')}}</h3>
                     <div class="flex flex-row items-center mb-4">
-                        <label for="name" class="inline-block w-40 text-xl">{{ auth.name }}</label>
+                        <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
                         <input id="custom_adventure_name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
                     </div>
                     <div class="flex flex-row items-center mb-4">
-                        <label for="level" class="inline-block w-40 text-xl">{{ auth.level }}</label>
+                        <label for="level" class="inline-block w-40 text-xl">{{_('level')}}</label>
                         <select id="custom_adventure_level" required class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-                            <option disabled selected value="">{{ texts.level }}</option>
+                            <option disabled selected value="">{{_('level')}}</option>
                             {% for i in range(1, (max_level + 1)) %}
                                 <option value="{{ i }}" {% if i|string == adventure.level or i == adventure.level %}selected{% endif %}>{{ i }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="border border-black rounded-lg p-4 text-sm">
-                        {{ auth.adventure_exp_1 }}
+                        {{_('adventure_exp_1')}}
                         <div class="flex flex-row my-2 items-center">
                             <pre class="inline-block w-40">&lt;code&gt;print&lt;/code&gt;</pre>
                             <b class="mx-4">&rarr;</b>
                             <code class="text-base">print</code>
                         </div>
-                        {{ auth.adventure_exp_2 }}
+                        {{_('adventure_exp_2')}}
                         <div class="flex flex-row items-center">
                             <pre class="inline-block w-40">&lt;pre&gt;<br>print Hello world!<br>&lt;/pre&gt;</pre>
                             <b class="mx-4">&rarr;</b>
@@ -36,27 +36,27 @@
                                 <pre id="1" class="no-copy-button">print hello world!</pre>
                             </div>
                         </div>
-                        {{ auth.adventure_exp_3 }}
+                        {{_('adventure_exp_3')}}
                     </div>
                 </div>
                 <div class="flex flex-col ltr:ml-4 rtl:mr-4">
-                    <h3 class="text-center mt-0 mb-4">{{ ui.adventure }}</h3>
-                    <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{ auth.template_code }}{% endif %}</textarea>
+                    <h3 class="text-center mt-0 mb-4">{{ _('adventure') }}</h3>
+                    <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea>
                     <div class="my-2 flex flex-row items-center text-center border-red-500 border p-4 rounded-lg">
                         <input type="checkbox" name="agree_public" id="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
-                        <label for="agree_public" class="text-sm italic w-full">{{ auth.adventure_terms }}</label>
+                        <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
                     </div>
                     <div class="flex flex-row my-2">
-                        <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{ auth.preview }}</button>
-                        <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2">{{ auth.save }}</button>
-                        <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}');">{{ auth.remove }}</button>
+                        <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
+                        <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2">{{_('save')}}</button>
+                        <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
     <div class="mt-4 flex flex-row">
-        <button class="blue-btn" onclick="window.open('/for-teachers', '_self');">{{auth.back_to_teachers_page}}</button>
+        <button class="blue-btn" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
     </div>
 </div>
 {% endblock %}

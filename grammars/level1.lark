@@ -18,11 +18,10 @@ _LARGER_EQUALS: ">="
 _EXCLAMATION_MARK: "!"
 _QUESTION_MARK: "?"
 _PERIOD: "."
-//_SINGLE_QUOTE: "'"
-_SINGLE_QUOTE: ("'" | "\"")
+_SINGLE_QUOTE: "'"
+_PLUS: _SPACE* "+" _SPACE*
+_MINUS: _SPACE* "-" _SPACE*
 _MULTIPLY: _SPACE* "*" _SPACE*
-_ADD: _SPACE* "+" _SPACE*
-_SUBTRACT: _SPACE* "-" _SPACE* //TODO FH Jan '22 now to we use if for negative numbers too maybe minus is nicer/better?
 _DIVIDE: _SPACE* "/" _SPACE*
 
 start: program
@@ -40,7 +39,7 @@ comment: _HASH /([^\n]+)/
 
 _EOL: "\r"?"\n"
 
-NEGATIVE_NUMBER: _SUBTRACT /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
+NEGATIVE_NUMBER: _MINUS /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
 NUMBER: /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
 INT: /[\p{Nl}\p{Nd}\p{No}]+/
 

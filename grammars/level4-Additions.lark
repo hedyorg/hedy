@@ -1,10 +1,6 @@
 // redefining it entirely since it has many order-depending rules (e.g ask_no_quotes should be after ask and before assign)
 command:print | ask | turtle | assign_list | add | remove | sleep | error_ask_no_quotes| assign | error_print_no_quotes | comment | error_invalid
 
-// we need a separate rule for a var when used in a print argument
-// it parses the same, but should not be counted towards lookup table creation
-var_access : NAME
-
 print: _PRINT (_SPACE _print_argument)? -> print
 error_print_no_quotes: _PRINT _SPACE text -> error_print_nq
 ask: var _SPACE _IS _SPACE _ASK (_SPACE _print_argument)?

@@ -5,7 +5,7 @@
         <div class="flex flex-col">
             <div class="text-green-900 text-2xl text-center flex flex-row justify-center font-slab">
                 <p>
-                    {{ ui.question }} {{ question_nr }} / {{ questions|length }}
+                    {{_('question')}} {{ question_nr }} / {{ questions|length }}
                 </p>
             </div>
             <p class="italic text-3xl font-bold tracking-wide text-blue-900 text-center justify-center font-slab">
@@ -14,13 +14,13 @@
             {% if answer_was_correct %}
                 <div class="rounded-full bg-green-500 flex h-32 w-32 text-center flex items-center justify-center place-self-center">
                     <p class="m-4 text-white font-extrabold text-center text-4xl font-slab">
-                        {{ ui.feedback_success }}
+                        {{_('feedback_success')}}
                     </p>
                 </div>
             {% else %}
                 <div class="rounded-full bg-red-500 flex h-32 w-32 text-center flex items-center justify-center place-self-center">
                     <p class="m-4 text-white text-center font-extrabold text-4xl font-slab">
-                        {{ ui.feedback_failure }}
+                        {{_('feedback_failure')}}
                     </p>
                 </div>
             {% endif %}
@@ -33,7 +33,7 @@
             </p>
             <div class="flex flex-col justify-center">
                 <p class="text-black text-center font-extrabold text-4xl font-slab">
-                    {{ ui.correct_answer }}
+                    {{_('correct_answer')}}
                 </p>
                 <div class="italic text-2xl mx-auto">
                     {% if correct_option.option_text %}
@@ -49,11 +49,11 @@
         {% if question_nr < questions|length %}
             <button class="green-btn ltr:ml-1 rtl:mr-1 ltr:text-right-0 rtl:text-left-0"
                     onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ question_nr + 1 }}/1?lang={{lang}}'">
-                {{ ui.go_to_question }} {{ question_nr + 1 }}</button>
+                {{ _('go_to_question') }} {{ question_nr + 1 }}</button>
         {% else %}
             <button class="green-btn ltr:ml-1 rtl:mr-1 ltr:right-0 rtl:left-0"
                     onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ question_nr + 1 }}/1?lang={{lang}}'">
-                {{ ui.go_to_quiz_result }}
+                {{ _('go_to_quiz_result') }}
             </button>
         {% endif %}
     </div>
