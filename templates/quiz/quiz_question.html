@@ -12,7 +12,7 @@
     <div class="flex flex-row justify-center">
         <button type="button" onclick="changeHint()"
                 class="bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600"
-                name="hint-button" id="hint-button">{{ ui.hint }}
+                name="hint-button" id="hint-button">{{_('hint')}}
         </button>
     </div>
     <form action="{{ url_for('submit_answer', level_source=level_source, question_nr=question_nr, attempt=attempt, lang=lang) }}" method="POST">
@@ -50,9 +50,9 @@
                         {% endif %}
                         <button class="submit-button" type="submit" name="submit-button" value="{{ question_options[counter.value].char_index }}">
                         {% if is_last_attempt %}
-                            {{ ui.go_to_answer }}
+                            {{_('go_to_answer')}}
                         {% else %}
-                            {{ ui.submit_answer }} {{ question_nr }}
+                            {{_('submit_answer')}} {{ question_nr }}
                         {% endif %}
                         </button>
                     </div>
