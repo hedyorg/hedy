@@ -301,6 +301,8 @@ def routes(app, database, achievements):
             return gettext(u'username_invalid'), 400
         if not isinstance(body.get('class_id'), str):
             return 'class id must be a string', 400
+        if len(body.get('username')) < 1:
+            return gettext(u'username_empty'), 400
 
         username = body.get('username').lower()
         class_id = body.get('class_id')
