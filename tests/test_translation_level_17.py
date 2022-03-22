@@ -40,7 +40,7 @@ class TestsTranslationLevel17(HedyTester):
 
         self.assertEqual(expected, result)
 
-    def test_indent_repeat_list_english_dutch(self):
+    def test_indent_for_list_english_dutch(self):
         code = textwrap.dedent("""\
         hedy = ['hedy', 'andre', 'luca']
         for naam in hedy:

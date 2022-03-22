@@ -207,7 +207,7 @@ class Translator(Visitor):
         self.add_rule('_REPEAT', 'repeat', tree)
         self.add_rule('_TIMES', 'times', tree)
 
-    def repeat_list(self, tree):
+    def for_list(self, tree):
         self.add_rule('_FOR', 'for', tree)
         self.add_rule('_IN', 'in', tree)
 
