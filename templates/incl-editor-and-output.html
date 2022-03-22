@@ -84,20 +84,21 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col order-3" id="code_output" style="height: 22rem;">
-  <!-- tabindex=0 makes the div focusable -->
-        <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg" style="position:relative"
-             style="min-height: 3rem">
-             <div class="dropdown ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2" style="margin-top: -62px;">
-                 <button id="variable_button" onclick="hedyApp.showVariableView()" class="blue-btn bg-blue-600 mt-4 inline-block absolute z-10 mx-2 mt-2 mb-0 text-white flex-0 cursor-pointer font-sans" style="right:0rem; top:0rem; border-bottom-width: 0px; padding: 1.5px 8.2px 1.5px 8.2px;"><span class="float-left">🏷<svg class="float-right w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg></span></button>
-             </div>
-            <div id="variables" class="mx-auto w-64 invisible border rounded-lg block p-2 absolute bg-blue-600 z-10 text-white right-2 h-44" style="width: fit-content; top: 44px;" onclick="hedyApp.show_variables()" >
-  <div id="variables_header" class="z-10 text-center font-bold" style="margin-top:-3.75rem;">{{ui.variables}}</div>
-  <ul class="variable-list hidden list-none text-base" style="margin-left: 0; margin-top: -3.8rem; line-height: 120%;">
-  </ul>
-</div>
+    <div class="flex flex-col order-3 relative" id="code_output" style="height: 22rem;">
+        <div class="inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 text-white">
+            <button id="variable_button" class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" onclick="hedyApp.showVariableView()">
+                🏷<svg class="float-right w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path>
+                    </svg>
+            </button>
+            <div class="absolute hidden ltr:right-0 rtl:left-0 z-10 text-white bg-blue-600 rounded-lg px-4 ltr:mr-1 rtl:ml-1 mt-2" id="variables">
+                <div id="variables_header" class="text-center text-lg font-bold">Variables</div>
+                <ul id="variable-list" class="list-none overflow-auto"></ul>
+            </div>
         </div>
-        <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
+      <!-- tabindex=0 makes the div focusable -->
+      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem"></div>
+      <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
       <div id="inline-modal" class="flex-0" style="display: none">
         <div class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100">
           <!--Title-->

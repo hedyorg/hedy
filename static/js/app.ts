@@ -1100,21 +1100,20 @@ export function load_quiz(level: string) {
 }
 
 export function showVariableView() {
+  console.log("Hello!");
 // When blue label button is clicked, the view will appear or hide
-  const outputDiv = $('#output');
-  const variables = $(outputDiv).find('#variables');
-
-   if (variables.hasClass('invisible')) {
-      variables.removeClass('invisible');
-      $("#variables").trigger("click")
-   }
-   else {
-      variables.addClass('invisible');
-   }
+  const variables = $('#variables');
+  if (variables.is(":hidden")) {
+    variables.show();
+    $("#variables").trigger("click")
+  }
+  else {
+    variables.hide();
+  }
 }
 
 //Feature flag for variable and values view
-var variable_view = false;
+var variable_view = true;
 
 //Hides the HTML DIV for variables if feature flag is false
 if (!variable_view) {
@@ -1124,7 +1123,7 @@ if (!variable_view) {
 
 export function show_variables() {
   if (variable_view === true) {
-    const variableList = $('.variable-list');
+    const variableList = $('#variable-list');
     if (variableList.hasClass('hidden')) {
       variableList.removeClass('hidden');
     }
@@ -1135,7 +1134,7 @@ export function load_variables(variables: any){
     if (variable_view === true) {
       //@ts-ignore
       variables = clean_variables(variables);
-      const variableList = $('.variable-list');
+      const variableList = $('#variable-list');
       variableList.empty();
       for (const i in variables) {
         variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
