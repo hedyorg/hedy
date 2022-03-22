@@ -73,20 +73,22 @@ def routes(app, database, achievements):
     @requires_login
     def create_class (user):
         if not is_teacher(user):
-            return gettext('only_teacher_create_class'), 403
+            return gettext(u'only_teacher_create_class'), 403
 
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext('ajax_error'), 400
+            return gettext(u'ajax_error'), 400
         if not isinstance(body.get('name'), str):
-            return gettext('class_name_invalid'), 400
+            return gettext(u'class_name_invalid'), 400
+        if len(body.get('name')) < 1:
+            return gettext(u'class_name_empty'), 400
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         Classes = DATABASE.get_teacher_classes(user['username'], True)
         for Class in Classes:
             if Class['name'] == body['name']:
-                return gettext('class_name_duplicate'), 200
+                return gettext(u'class_name_duplicate'), 200
 
         Class = {
             'id': uuid.uuid4().hex,

@@ -3,11 +3,8 @@ import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 import DOMPurify from 'dompurify'
 
-export function create_class(class_name_prompt: string, class_name_empty: string) {
+export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
-    if (!class_name) {
-      return modal.alert(class_name_empty, 2000, true);
-    }
     $.ajax({
       type: 'POST',
       url: '/class',
