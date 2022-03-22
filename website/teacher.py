@@ -138,7 +138,11 @@ def routes(app, database, achievements):
         if not Class or Class['teacher'] != user['username']:
             return gettext(u'no_such_class'), 404
 
-        DATABASE.delete_class (Class)
+        print(user)
+        print(class_id)
+
+        DATABASE.delete_class(Class)
+        print("Klas verwijderd!")
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "end_of_semester")
         if achievement:
             return {'achievement': achievement}, 200

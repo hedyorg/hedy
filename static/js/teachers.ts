@@ -3,11 +3,7 @@ import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 import DOMPurify from 'dompurify'
 
-export function create_class(class_name_prompt: string, class_name_empty: string) {
-  modal.prompt (class_name_prompt, '', function (class_name) {
-    if (!class_name) {
-      return modal.alert(class_name_empty, 2000, true);
-    }
+export function create_class(class_name: string) {
     $.ajax({
       type: 'POST',
       url: '/class',
@@ -25,7 +21,6 @@ export function create_class(class_name_prompt: string, class_name_empty: string
     }).fail(function(err) {
       return modal.alert(err.responseText, 3000, true);
     });
-  });
 }
 
 export function rename_class(id: string, class_name_prompt: string, class_name_empty: string) {
@@ -54,15 +49,18 @@ export function rename_class(id: string, class_name_prompt: string, class_name_e
 }
 
 export function delete_class(id: string) {
+    console.log("Hier komen we!");
     $.ajax({
       type: 'DELETE',
       url: '/class/' + id,
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+        console.log("Verwijderd!");
       if (response.achievement) {
         showAchievements(response.achievement, false, '/for-teachers');
       } else {
+          console.log("En we gaan door...");
         window.location.pathname = '/for-teachers';
       }
     }).fail(function(err) {

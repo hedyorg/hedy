@@ -20,7 +20,7 @@
         </tbody>
       </table>
     {% endif %}
-  <button class="green-btn mt-4" onclick="hedyApp.create_class ('{{_('class_name_prompt')}}', '{{_('class_name_empty')}}')">{{_('create_class')}}</button>
+  <button class="green-btn mt-4" onclick='hedyApp.modal.prompt({{_('class_name_prompt')|tojson}}, "", function(class_name){hedyApp.create_class(class_name);});'>{{_('create_class')}}</button>
 </div>
 <div id="teacher_adventures" class="flex flex-col items-center mt-4 mb-4 pb-4 border-b-2">
     <h2>{{_('my_adventures')}}</h2>
