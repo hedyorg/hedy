@@ -88,7 +88,7 @@ export function join_class(id: string, name: string) {
             window.location.pathname = '/login';
          });
       } else {
-          modal.alert(ErrorMessages['Connection_error'], 3000, true);
+          modal.alert(err.responseText, 3000, true);
       }
     });
 }
