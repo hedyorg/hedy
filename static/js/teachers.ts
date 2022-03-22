@@ -157,25 +157,22 @@ export function remove_student(class_id: string, student_id: string, prompt: str
   });
 }
 
-export function create_adventure(prompt: string, adventure_empty: string) {
-    modal.prompt (prompt, '', function (adventure_name) {
-        if (!adventure_name.trim()) {
-          return modal.alert(adventure_empty, 3000, true);
-        }
-        $.ajax({
-          type: 'POST',
-          url: '/for-teachers/create_adventure',
-          data: JSON.stringify({
-            name: adventure_name
-          }),
-          contentType: 'application/json',
-          dataType: 'json'
-        }).done(function(response) {
-          window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
-        }).fail(function(err) {
-          return modal.alert(err.responseText, 3000, true);
-        });
-  });
+export function create_adventure(prompt: string) {
+modal.prompt (prompt, '', function (adventure_name) {
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/create_adventure',
+      data: JSON.stringify({
+        name: adventure_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
+    }).fail(function(err) {
+      return modal.alert(err.responseText, 3000, true);
+    });
+});
 }
 
 function update_db_adventure(adventure_id: string) {
