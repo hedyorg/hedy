@@ -101,6 +101,32 @@ h1 {
 If you want to use styling that is not available in the Tailwind library this can be added to the ```static/css/additional.css``` file.
 But please, try to use the Tailwind classes as much as possible as these are optimized and keep our code base consistent and readable.
 
+## Working with translations
+For our multilingual web structure we use a combination of YAML files and Babel to deliver language-dependent content.
+The adventures, level-defaults, mail-templates, achievements and quizzes are all stored using YAML files.
+All our front-end UI strings, error messages and other "small" translations are stored using Babel.
+To help translating any of these, please follow the explanation in TRANSLATING.md.
+
+However, when adding new content or implementing a feature that requires new translations you need to manually add these translation keys.
+When adding YAML related translations please add these to the corresponding YAML file in the ```/coursedata``` folder.
+Make sure that you comform to the already existing YAML structure.  As English is the fallback language, the translation should always be available in the english YAML file.
+Feel free to manually add the translation to as many languages as you know, but don't worry: otherwise these will be translated by other contributors through Weblate.
+
+When adding new Babel related translation the implementation is a bit more complex, but don't worry! It should al work fine with the following steps:
+1. First we add the translation "placeholder" to either the front-end or back-end
+    * When on the front-end (in a .html template) we do this like this: {{ _('test') }}
+    * When on the back-end we do this like this: gettext(u'test')
+2. Next we run the following command to let Babel search for keys:
+    * ```pybabel extract -F babel.cfg -o messages.pot .```
+3. We now have to add the found keys to all translation files, with the following command:
+    * ```pybabel update -i messages.pot -d translations```
+4. All keys will be automatically stored in the /translations folder
+5. Search for the .po files for the languages you know and find the empty msgstr for your added key(s)
+6. Add your translations there, the other translation will hopefully be quickly picked up by other translators
+7. If you want to test it locally, run:
+    * ```pybabel compile -d translations```
+8. This action will also always be run on deployment to make sure the translations are up-to-date
+
 ## Using Docker
 
 If you want to run the website locally, but would prefer to use Docker instead
