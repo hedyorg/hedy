@@ -455,7 +455,7 @@
 13:
     start_code: |-
         name = ask 'what is your name?'
-        leeftijd = ask 'what is your age?'
+        age = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
@@ -682,7 +682,7 @@
         example: 'if barva is zelená:'
         demo_code: |-
             barva = ask 'Jaká je tvoje nejoblíbenější barva?'
-            if barva is zelená:
+            if barva is 'zelená':
                 print 'Barva je zelená.'
             else:
                 print 'Barva není zelená.'
