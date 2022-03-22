@@ -478,7 +478,7 @@
 13:
     start_code: |
         name = ask 'what is your name?'
-        leeftijd = ask 'what is your age?'
+        age = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: |
@@ -733,7 +733,7 @@
         example: "if szin is zöld:'"
         demo_code: |-
             szin = ask 'Mi a kedvenc színed?'
-            if szin is zöld:
+            if szin is 'zöld':
                 print 'a szín zöld'
             else:
                 print 'A szin nem zöld'
