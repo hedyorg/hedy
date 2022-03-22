@@ -1,3 +1,5 @@
+from flask_babel import gettext
+
 from website.auth import requires_login, current_user, is_admin, pick
 import utils
 from flask import request, g
@@ -12,15 +14,15 @@ def routes(app, database):
     @app.route('/admin', methods=['GET'])
     def get_admin_page():
         if not utils.is_testing_request(request) and not is_admin(current_user()):
-            return utils.error_page(error=403, ui_message='unauthorized')
-        return render_template('admin/admin.html', page_title=g.ui_texts.get('title_admin'))
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
+        return render_template('admin/admin.html', page_title=gettext(u'title_admin'))
 
 
     @app.route('/admin/users', methods=['GET'])
     @requires_login
     def get_admin_users_page(user):
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
 
         category = request.args.get('filter', default=None, type=str)
         category = None if category == "null" else category
@@ -80,7 +82,7 @@ def routes(app, database):
             user['index'] = counter
             counter = counter + 1
 
-        return render_template('admin/admin-users.html', users=userdata, page_title=g.ui_texts.get('title_admin'),
+        return render_template('admin/admin-users.html', users=userdata, page_title=gettext(u'title_admin'),
                                filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
                                language_filter=language, keyword_language_filter=keyword_language,
                                program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
@@ -90,7 +92,7 @@ def routes(app, database):
     @requires_login
     def get_admin_classes_page(user):
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
 
         # Retrieving the user for each class to find the "last_used" is expensive -> improve when we have 100+ classes
         classes = [{
@@ -101,13 +103,13 @@ def routes(app, database):
             "last_used": utils.datetotimeordate(utils.mstoisostring(DATABASE.user_by_username(Class.get('teacher')).get('last_login')))} for Class in DATABASE.all_classes()]
         classes = sorted(classes, key=lambda d: d['last_used'], reverse=True)
 
-        return render_template('admin/admin-classes.html', classes=classes, page_title=g.ui_texts.get('title_admin'))
+        return render_template('admin/admin-classes.html', classes=classes, page_title=gettext(u'title_admin'))
 
     @app.route('/admin/adventures', methods=['GET'])
     @requires_login
     def get_admin_adventures_page(user):
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
 
         adventures = [{
             "id": adventure.get('id'),
@@ -119,12 +121,12 @@ def routes(app, database):
         } for adventure in DATABASE.all_adventures()]
         adventures = sorted(adventures, key=lambda d: d['date'], reverse=True)
 
-        return render_template('admin/admin-adventures.html', adventures=adventures, page_title=g.ui_texts.get('title_admin'))
+        return render_template('admin/admin-adventures.html', adventures=adventures, page_title=gettext(u'title_admin'))
 
     @app.route('/admin/stats', methods=['GET'])
     @requires_login
     def get_admin_stats_page(user):
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message='unauthorized')
-        return render_template('admin/admin-stats.html', page_title=g.ui_texts.get('title_admin'))
+            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
+        return render_template('admin/admin-stats.html', page_title=gettext(u'title_admin'))
 
