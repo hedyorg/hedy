@@ -81,6 +81,8 @@ def routes(app, database, achievements):
             return gettext('ajax_error'), 400
         if not isinstance(body.get('name'), str):
             return gettext('class_name_invalid'), 400
+        if len(body.get('name')) < 1:
+            return gettext('class_name_empty'), 400
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         Classes = DATABASE.get_teacher_classes(user['username'], True)
