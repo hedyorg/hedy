@@ -818,7 +818,6 @@ def get_log_results():
 
 
 def get_user_formatted_age(now, date):
-
     program_age = now - date
     if program_age < 1000 * 60 * 60:
         measure = gettext(u'minutes')
@@ -829,8 +828,8 @@ def get_user_formatted_age(now, date):
     else:
         measure = gettext(u'days')
         date = round(program_age / (1000 * 60 * 60 * 24))
-
-    return gettext(u'ago-1') + str(date) + " " + str(measure) + " " + gettext(u'ago-2')
+    age = {'time': str(date) + " " + measure}
+    return gettext(u'ago').format(**age)
 
 
 # routing to index.html

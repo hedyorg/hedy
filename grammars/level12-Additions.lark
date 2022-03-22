@@ -4,9 +4,9 @@ assign_list: var (_SPACE _IS _SPACE | _EQUALS) (text_in_quotes|NUMBER) (_COMMA (
 
 ?atom: NUMBER | var_access | text_in_quotes //unsupported numbers are gone, we can now allow floats with NUMBER
 
-equality_check: (var | text_in_quotes | NUMBER) (_SPACE _IS _SPACE | _EQUALS) (var | text_in_quotes | NUMBER)
+equality_check: (var_access | text_in_quotes | NUMBER) (_SPACE _IS _SPACE | _EQUALS) (var_access | text_in_quotes | NUMBER)
 
-in_list_check: (var | text_in_quotes | NUMBER) _SPACE _IN _SPACE var
+in_list_check: (var_access | text_in_quotes | NUMBER) _SPACE _IN _SPACE var_access
 error_invalid: "Supercalifragilisticexpialidocious" //invalid node should be deleted but this probably never matches anything :D
 
 // all literal strings have to be quoted now, so arithmetic operators don't need to be excluded anymore
