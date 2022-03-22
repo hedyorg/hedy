@@ -81,6 +81,9 @@ ui:
     title_explore: Hedy - Explore
     title_achievements: Hedy - My achievements
     title_privacy: Hedy - Privacy terms
+    attempts: attempts
+    results_quiz: Quiz results
+    go_to_quiz_result_overview: Go to the result overview
 ClientErrorMessages:
     Transpile_warning: "Vigyázat!"
     Transpile_error: "Nem tudjuk futtatni a kódodat."
@@ -140,8 +143,8 @@ HedyErrorMessages:
     ask_needs_var: "Starting in level 2, ask needs to be used with a variable and quotation marks. Example: name is ask 'What are you called?'"
     Unexpected Indentation: You used too many spaces in line {line_number}. You used {leading_spaces} spaces, which is too much. Start every new block with {indent_size} spaces more than the line before.
     No Indentation: You used too few spaces in line {line_number}. You used {leading_spaces} spaces, which is not enough. Start every new block with {indent_size} spaces more than the line before.
-    Invalid Argument Type: You cannot use the command {command} with {invalid_argument} because it is {invalid_type}. Try changing {invalid_argument} to {allowed_types}.
-    Invalid Type Combination: You cannot use {invalid_argument} and {invalid_argument_2} in {operation} because one is {invalid_type} and the other is {invalid_type_2}. Try changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} to {invalid_type}.
+    Invalid Argument Type: You cannot use {command} with {invalid_argument} because it is {invalid_type}. Try changing {invalid_argument} to {allowed_types}.
+    Invalid Type Combination: You cannot use {invalid_argument} and {invalid_argument_2} with {command} because one is {invalid_type} and the other is {invalid_type_2}. Try changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} to {invalid_type}.
     or: or
     number: a number
     integer: a number
@@ -394,6 +397,9 @@ Auth:
     last_update: Last update
     view: View
     update_public: Update public profile
+    specific_adventure_mode: You're currently in adventure '{adventure}', click on 'Hedy' to view all adventures.
+    cheatsheet: Cheatsheet
+    hide_keyword_switcher: Hide keyword language switcher
 Programs:
     recent: "Legutóbbi programjaim "
     level: "Szint"

@@ -140,3 +140,31 @@ class TestsTranslationLevel5(HedyTester):
         expected = "if name is Hedy print 'Great!' else print 'Oh no'"
 
         self.assertEqual(expected, result)
+
+    @parameterized.expand([('en', 'is'), ('es', 'es'), ('es', 'is')])
+    def test_equality_type_error_translates_command(self, lang, is_):
+        code = textwrap.dedent(f"""\
+            letters is a, b, c
+            if letters {is_} '10' print 'wrong!'""")
+
+        self.multi_level_tester(
+            lang=lang,
+            code=code,
+            max_level=7,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            extra_check_function=self.exception_command(is_)
+        )
+
+    @parameterized.expand([('en', 'in'), ('es', 'en'), ('es', 'in')])
+    def test_in_list_type_error_translates_command(self, lang, in_):
+        code = textwrap.dedent(f"""\
+            letters is 'test'
+            if 10 {in_} letters print 'wrong!'""")
+
+        self.multi_level_tester(
+            lang=lang,
+            code=code,
+            max_level=7,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            extra_check_function=self.exception_command(in_)
+        )

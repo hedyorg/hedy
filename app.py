@@ -998,6 +998,16 @@ def get_specific_adventure(name, level):
         level_defaults=defaults, level_number=level, adventure=adventure, prev_level=prev_level, next_level=next_level)
 
 
+@app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
+@app.route('/cheatsheet/<level>', methods=['GET'])
+def get_cheatsheet_page(level):
+    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
+    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
+    defaults = level_defaults_for_lang.get_defaults_for_level(int(level))
+
+    return render_template("cheatsheet.html", defaults=defaults, level=level)
+
+
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
     error_messages = TRANSLATIONS.get_translations(g.lang, "ClientErrorMessages")
@@ -1164,15 +1174,16 @@ def explore():
             except:
                 program['error'] = True
             DATABASE.store_program(program)
+        public_profile = DATABASE.get_public_profile_settings(program['username'])
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
             'level': program['level'],
             'id': program['id'],
             'error': program['error'],
+            'public_user': True if public_profile else None,
             'code': "\n".join(program['code'].split("\n")[:4])
         })
-
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
     else:
