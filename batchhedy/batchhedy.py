@@ -98,7 +98,7 @@ def create_checkdata(check):
         return None
 
     comparedata = {}
-    with open(check, newline="") as csvfile:
+    with open(check, newline="", encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         fields = None
         for row in reader:
@@ -141,7 +141,7 @@ class TranspileJob:
 
         # Get the level and code position
         try:
-            with open(filename) as f:
+            with open(filename, encoding='utf-8') as f:
                 all_lines = f.readlines()
                 # remove header info
                 firstline = all_lines[0]
@@ -231,7 +231,7 @@ def is_empty(program):
     return all(line == '' for line in all_lines)
 
 def _save_report(jobs, report):
-        with open(report, "w", newline="") as csvfile:
+        with open(report, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=[
                 "filename",
                 "date",

@@ -8,6 +8,7 @@ from os import path, environ
 
 import warnings
 import hedy
+import hedy_translation
 import utils
 from collections import namedtuple
 import hashlib
@@ -52,7 +53,8 @@ ALL_LANGUAGES = {
     'hi': 'हिंदी',
     'id': 'Bahasa Indonesia',
     'fy': 'Frysk',
-    'ar': 'عربى'
+    'ar': 'عربى',
+    'tr': 'Türk'
 }
 # Define fall back languages for adventures
 FALL_BACK_ADVENTURE = {
@@ -69,6 +71,7 @@ ALL_KEYWORD_LANGUAGES = {
     'es': 'ES'
 }
 
+
 class Command:
     print = 'print'
     ask = 'ask'
@@ -80,16 +83,33 @@ class Command:
     list_access = 'at random'
     in_list = 'in list'
     equality = 'is (equality)'
-    for_loop = 'for'
-    addition = 'addition'
-    subtraction = 'subtraction'
-    multiplication = 'multiplication'
-    division = 'division'
+    repeat = 'repeat'
+    for_list = 'for in'
+    for_loop = 'for in range'
+    addition = '+'
+    subtraction = '-'
+    multiplication = '*'
+    division = '/'
     smaller = '<'
     smaller_equal = '<='
     bigger = '>'
     bigger_equal = '>='
     not_equal = '!='
+
+
+translatable_commands = {Command.print: ['print'],
+                         Command.ask: ['ask'],
+                         Command.echo: ['echo'],
+                         Command.turn: ['turn'],
+                         Command.forward: ['forward'],
+                         Command.add_to_list: ['add', 'to_list'],
+                         Command.remove_from_list: ['remove', 'from'],
+                         Command.list_access: ['at', 'random'],
+                         Command.in_list: ['in'],
+                         Command.equality: ['is', '=', '=='],
+                         Command.repeat: ['repeat', 'times'],
+                         Command.for_list: ['for', 'in'],
+                         Command.for_loop: ['in', 'range', 'to']}
 
 
 class HedyType:
@@ -181,6 +201,8 @@ commands_and_types_per_level = {
         1: [HedyType.integer, HedyType.input],
         12: [HedyType.integer, HedyType.float, HedyType.input],
     },
+    Command.repeat: {7: [HedyType.integer, HedyType.input]},
+    Command.for_list: {10: {HedyType.list}},
     Command.for_loop: {11: [HedyType.integer, HedyType.input]},
     Command.smaller: {14: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.smaller_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
@@ -207,11 +229,11 @@ def get_list_keywords(commands, to_lang):
     to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
     en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
 
-    with open(en_yaml_filesname_with_path, 'r') as stream:
+    with open(en_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
         en_yaml_dict = yaml.safe_load(stream)
 
     try:
-        with open(to_yaml_filesname_with_path, 'r') as stream:
+        with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
         for command in commands:
             try:
@@ -339,10 +361,11 @@ class TypedTree(Tree):
         self.type_ = type_
 
 
+@v_args(meta=True)
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
-    def text(self, args):
-        return Tree('text', [' '.join([str(c) for c in args])])
+    def text(self, meta, args):
+        return Tree('text', [' '.join([str(c) for c in args])], meta)
 
     def INT(self, args):
         return Tree('integer', [str(args)])
@@ -354,26 +377,24 @@ class ExtractAST(Transformer):
         return Tree('number', [str(args)])
 
     #level 2
-    def var(self, args):
-        return Tree('var', [''.join([str(c) for c in args])])
+    def var(self, meta, args):
+        return Tree('var', [''.join([str(c) for c in args])], meta)
 
-    def punctuation(self, args):
-        return Tree('punctuation', [''.join([str(c) for c in args])])
+    def punctuation(self, meta, args):
+        return Tree('punctuation', [''.join([str(c) for c in args])], meta)
 
-    def list_access(self, args):
+    def list_access(self, meta, args):
         if type(args[1]) == Tree:
             if "random" in args[1].data:
-                return Tree('list_access', [args[0], 'random'])
+                return Tree('list_access', [args[0], 'random'], meta)
             else:
-                return Tree('list_access', [args[0], args[1].children[0]])
+                return Tree('list_access', [args[0], args[1].children[0]], meta)
         else:
-            return Tree('list_access', [args[0], args[1]])
+            return Tree('list_access', [args[0], args[1]], meta)
 
     #level 5
-    def error_unsupported_number(self, args):
-        return Tree('unsupported_number', [''.join([str(c) for c in args])])
-
-
+    def error_unsupported_number(self, meta, args):
+        return Tree('unsupported_number', [''.join([str(c) for c in args])], meta)
 
 
 # This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
@@ -446,35 +467,37 @@ class LookupEntryCollector(visitors.Visitor):
 # their inferred type. It also performs type validation for commands, e.g. 'text' + 1 results in error.
 @v_args(tree=True)
 class TypeValidator(Transformer):
-    def __init__(self, lookup, level):
+    def __init__(self, lookup, level, lang, input_string):
         super().__init__()
         self.lookup = lookup
         self.level = level
+        self.lang = lang
+        self.input_string = input_string
 
     def print(self, tree):
-        self.validate_args_type_allowed(tree.children, Command.print)
+        self.validate_args_type_allowed(Command.print, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def ask(self, tree):
         if self.level > 1:
             self.save_type_to_lookup(tree.children[0].children[0], HedyType.input)
-        self.validate_args_type_allowed(tree.children[1:], Command.ask)
+        self.validate_args_type_allowed(Command.ask, tree.children[1:], tree.meta)
         return self.to_typed_tree(tree, HedyType.input)
 
     def input(self, tree):
-        self.validate_args_type_allowed(tree.children[1:], Command.ask)
+        self.validate_args_type_allowed(Command.ask, tree.children[1:], tree.meta)
         return self.to_typed_tree(tree, HedyType.input)
 
     def forward(self, tree):
         if tree.children:
-            self.validate_args_type_allowed(tree.children, Command.forward)
+            self.validate_args_type_allowed(Command.forward, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def turn(self, tree):
         if tree.children:
             name = tree.children[0].data
             if self.level > 1 or name not in command_turn_literals:
-                self.validate_args_type_allowed(tree.children, Command.turn)
+                self.validate_args_type_allowed(Command.turn, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def assign(self, tree):
@@ -487,7 +510,7 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.list)
         
     def list_access(self, tree):
-        self.validate_args_type_allowed(tree.children[0], Command.list_access)
+        self.validate_args_type_allowed(Command.list_access, tree.children[0], tree.meta)
 
         list_name = hash_var(tree.children[0].children[0])
         if tree.children[1] == 'random':
@@ -504,15 +527,15 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree)
 
     def add(self, tree):
-        self.validate_args_type_allowed(tree.children[1], Command.add_to_list)
+        self.validate_args_type_allowed(Command.add_to_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree)
 
     def remove(self, tree):
-        self.validate_args_type_allowed(tree.children[1], Command.remove_from_list)
+        self.validate_args_type_allowed(Command.remove_from_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree)
 
     def in_list_check(self, tree):
-        self.validate_args_type_allowed(tree.children[1], Command.in_list)
+        self.validate_args_type_allowed(Command.in_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def equality_check(self, tree):
@@ -523,7 +546,16 @@ class TypeValidator(Transformer):
         self.validate_binary_command_args_type(Command.equality, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
 
+    def repeat(self, tree):
+        command = Command.repeat
+        allowed_types = get_allowed_types(command, self.level)
+        self.check_type_allowed(command, allowed_types, tree.children[0], tree.meta)
+        return self.to_typed_tree(tree, HedyType.none)
+
     def repeat_list(self, tree):
+        command = Command.for_list
+        allowed_types = get_allowed_types(command, self.level)
+        self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
         return self.to_typed_tree(tree, HedyType.none)
 
@@ -531,8 +563,8 @@ class TypeValidator(Transformer):
         command = Command.for_loop
         allowed_types = get_allowed_types(command, self.level)
 
-        start_type = self.check_type_allowed(command, allowed_types, tree.children[1])
-        self.check_type_allowed(command, allowed_types, tree.children[2])
+        start_type = self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
+        self.check_type_allowed(command, allowed_types, tree.children[2], tree.meta)
 
         iterator = str(tree.children[0])
         self.save_type_to_lookup(iterator, start_type)
@@ -607,15 +639,15 @@ class TypeValidator(Transformer):
 
     def to_comparison_tree(self, command, tree):
         allowed_types = get_allowed_types(command, self.level)
-        self.check_type_allowed(command, allowed_types, tree.children[0])
-        self.check_type_allowed(command, allowed_types, tree.children[1])
+        self.check_type_allowed(command, allowed_types, tree.children[0], tree.meta)
+        self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def validate_binary_command_args_type(self, command, tree, type_promotion_rules):
         allowed_types = get_allowed_types(command, self.level)
 
-        left_type = self.check_type_allowed(command, allowed_types, tree.children[0])
-        right_type = self.check_type_allowed(command, allowed_types, tree.children[1])
+        left_type = self.check_type_allowed(command, allowed_types, tree.children[0], tree.meta)
+        right_type = self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
 
         if self.ignore_type(left_type) or self.ignore_type(right_type):
             return HedyType.any, HedyType.any
@@ -628,16 +660,23 @@ class TypeValidator(Transformer):
             raise hedy.exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
         return prom_left_type, prom_right_type
 
-    def validate_args_type_allowed(self, children, command):
+    def validate_args_type_allowed(self, command, children, meta):
         allowed_types = get_allowed_types(command, self.level)
         children = children if type(children) is list else [children]
         for child in children:
-            self.check_type_allowed(command, allowed_types, child)
+            self.check_type_allowed(command, allowed_types, child, meta)
 
-    def check_type_allowed(self, command, allowed_types, tree):
+    def check_type_allowed(self, command, allowed_types, tree, meta=None):
         arg_type = self.get_type(tree)
         if arg_type not in allowed_types and not self.ignore_type(arg_type):
             variable = tree.children[0]
+
+            if command in translatable_commands:
+                keywords = translatable_commands[command]
+                result = hedy_translation.find_command_keywords(self.input_string, self.lang, self.level, keywords,
+                                                                meta.line, meta.end_line, meta.column-1, meta.end_column-2)
+                result = {k: v for k, v in result.items()}
+                command = ' '.join([v.strip() for v in result.values() if v is not None])
             raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=arg_type,
                                                           invalid_argument=variable, allowed_types=allowed_types)
         return arg_type
@@ -678,7 +717,7 @@ class TypeValidator(Transformer):
                 else:
                     match.currently_inferring = True
                     try:
-                        TypeValidator(self.lookup, self.level).transform(match.tree)
+                        TypeValidator(self.lookup, self.level, self.lang, self.input_string).transform(match.tree)
                     except VisitError as ex:
                         raise ex.orig_exc
                     match.currently_inferring = False
@@ -1535,6 +1574,8 @@ class ConvertToPython_12(ConvertToPython_11):
         if isinstance(argument, Tree):
             return f'{str(argument.children[0])}'
         else:
+            if "'" in argument:  # if quoted string, use " instead of ' to avoid f-str illegal syntax
+                return '"' + argument.replace("'", '').replace('"', '') + '"'
             return f'{argument}'
 
     def ask(self, args):
@@ -1550,16 +1591,6 @@ class ConvertToPython_12(ConvertToPython_11):
             {var} = float({var})
           except ValueError:
             pass""")  # no number? leave as string
-
-    def process_calculation(self, args, operator):
-        # arguments of a sum are either a token or a
-        # tree resulting from earlier processing
-        # for trees we need to grap the inner string
-        # for tokens we simply return the argument (no more casting to str needed)
-
-        args = [self.process_token_or_tree(a) for a in args]
-
-        return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
 
     def text_in_quotes(self, args):
         text = args[0]
@@ -2116,12 +2147,12 @@ def is_program_complete(abstract_syntax_tree, level):
                                                     line_number=line)
 
 
-def create_lookup_table(abstract_syntax_tree, level):
+def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
     visitor = LookupEntryCollector(level)
     visitor.visit_topdown(abstract_syntax_tree)
     entries = visitor.lookup
 
-    TypeValidator(entries, level).transform(abstract_syntax_tree)
+    TypeValidator(entries, level, lang, input_string).transform(abstract_syntax_tree)
 
     return entries
 
@@ -2148,7 +2179,7 @@ def transpile_inner(input_string, level, lang="en"):
         if not valid_echo(abstract_syntax_tree):
             raise exceptions.LonelyEchoException()
 
-        lookup_table = create_lookup_table(abstract_syntax_tree, level)
+        lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
 
         # grab the right transpiler from the lookup
         transpiler = TRANSPILER_LOOKUP[level]
@@ -2171,7 +2202,3 @@ def execute(input_string, level):
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
-
-# f = open('output.py', 'w+')
-# f.write(python)
-# f.close()

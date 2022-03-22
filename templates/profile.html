@@ -1,34 +1,34 @@
 {% extends "auth.html" %}
 
 {% block main %}
-   <h2 class="px-8 mb-4">{{auth.account_overview}}</h2>
+   <h2 class="px-8 mb-4">{{_('account_overview')}}</h2>
    {% if user_messages and user_messages > 0 %}
-       <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#messages').toggle()">{{auth.my_messages}}</h1>
+       <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
        <div id="messages" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
-         <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.my_messages}}</h2>
+         <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('my_messages')}}</h2>
          {% if invite_data %}
              <div>
-                 {{auth.invite_message}} <b>{{ invite_data['class_name'] }}</b>.<br>
-                 {{auth.sent_by}} <b>{{ invite_data['teacher'] }}</b>. {{auth.prompt_join_class}}
+                 {{_('invite_message')}} <b>{{ invite_data['class_name'] }}</b>.<br>
+                 {{_('sent_by')}} <b>{{ invite_data['teacher'] }}</b>. {{_('prompt_join_class')}}
                  <div class="flex flex-row mt-4">
-                        <button type="reset" class="green-btn" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{auth.join_class}}</button>
-                        <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{invite_data['username']}}', '{{invite_data['class_id']}}')">{{auth.delete_invite}}</button>
+                        <button type="reset" class="green-btn" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{_('join_class')}}</button>
+                        <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{invite_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
                 </div>
              </div>
          {% endif %}
        </div>
    {% endif %}
-   <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#public_profile').toggle()">{{auth.public_profile}}</h1>
+   <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#public_profile').toggle()">{{_('public_profile')}}</h1>
    <div id="public_profile" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
-     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.public_profile}}</h2>
-     <h4 class="text-center {% if not public_settings %}hidden{% endif %}" id="public_profile_redirect">{{ auth.public_profile_visit }} <a href="/user/{{ username }}">{{ auth.public_profile_link }}</a></h4>
-     <form class="js-validated-form" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
+     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('public_profile')}}</h2>
+     <h4 class="text-center {% if not public_settings %}hidden{% endif %}" id="public_profile_redirect">{{_('public_profile_visit')}} <a href="/user/{{ username }}">{{_('public_profile_link')}}</a></h4>
+     <form class="js-validated-form" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
      <div class="flex flex-col">
-         <h3 class="px-8 font-semibold">{{auth.profile_picture}}</h3>
-         <input name="profile_picture" id="profile_picture" type=number class="hidden" required {% if public_settings.image %} value="{{ public_settings.image }}" {% endif %}>
+         <h3 class="px-8 font-semibold">{{_('profile_picture')}}</h3>
+         <input name="profile_picture" id="profile_picture" type=number class="hidden" required {% if public_settings.image %} value="{{ public_settings.image }}" {% else %} value="1"{% endif %}>
          <div class="flex flex-wrap w-3/4 border border-gray-400 rounded-lg p-4">
             {% for i in range(1, 12) %}
-                <div class="w-32 h-32 rounded-lg mr-4 relative profile_image {% if public_settings.image and public_settings.image == i|string() %}border-2 border-blue-600{% endif %}" id="profile_image_{{ i }}" onclick="hedyApp.select_profile_image({{ i }});">
+                <div class="w-32 h-32 rounded-lg mr-4 relative profile_image {% if (public_settings.image and public_settings.image == i|string()) or (not public_settings.image and i == 1) %}border-2 border-blue-600{% endif %}" id="profile_image_{{ i }}" onclick="hedyApp.select_profile_image({{ i }});">
                     <div class="relative h-full">
                         <img src="{{static('/images/profile_images/' + i|string() + '.png')}}" class="absolute p-1">
                     </div>
@@ -37,14 +37,14 @@
          </div>
      </div>
      <div class="flex flex-col">
-         <h3 class="px-8 font-semibold">{{auth.personal_text}}</h3>
-         <textarea class="block w-3/4 h-32 px-2 py-1 border border-gray-400 rounded-lg" id="personal_text" required maxlength="200" minlength="5" placeholder="{{auth.your_personal_text}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
+         <h3 class="px-8 font-semibold">{{_('personal_text')}}</h3>
+         <textarea class="block w-3/4 h-32 px-2 py-1 border border-gray-400 rounded-lg" id="personal_text" required maxlength="200" minlength="5" placeholder="{{_('your_personal_text')}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
      </div>
      {% if programs %}
          <div class="mb-4">
-             <h3 class="px-8 font-semibold">{{auth.favourite_program}}</h3>
+             <h3 class="px-8 font-semibold">{{_('favourite_program')}}</h3>
              <select id="favourite_program" class="block appearance-none w-3/4 border border-gray-400 py-3 px-4 rounded-lg">
-                <option value="" selected disabled hidden>{{auth.select}}</option>
+                <option value="" selected disabled hidden>{{_('select')}}</option>
                 {% for program in programs %}
                     <option value="{{program.id}}" {% if public_settings.favourite_program and public_settings.favourite_program == program.id %} selected {% endif %}>{{program.name}}</option>
                 {% endfor %}
@@ -53,12 +53,12 @@
      {% endif %}
      <div class="mb-4 mt-6 flex flex-row items-center border-gray-400 border p-4 rounded-lg w-3/4">
         <input type="checkbox" name="agree_terms" id="agree_terms" required class="ltr:mr-6 rtl:ml-6" {% if public_settings %}checked{% endif %}>
-        <label for="agree_terms" class="cursor-pointer w-full">{{ texts.public_profile_info }}</label>
+        <label for="agree_terms" class="cursor-pointer w-full">{{_('public_profile_info')}}</label>
      </div>
      <div class="mb-4 mt-6 flex flex-row">
-        <button type="submit" class="green-btn">{{auth.update_public}}</button>
+        <button type="submit" class="green-btn">{{_('update_public')}}</button>
         {% if public_settings %}
-            <button type="reset" class="ml-auto red-btn" onclick="event.preventDefault(); hedyApp.auth.destroy_public ();">{{auth.delete_public}}</button>
+            <button type="reset" class="ml-auto red-btn" onclick="event.preventDefault(); hedyApp.auth.destroy_public ('{{_('are_you_sure')}}');">{{_('delete_public')}}</button>
         {% endif %}
      </div>
      <div>
@@ -67,39 +67,39 @@
      </div>
      </form>
    </div>
-   <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
+   <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#statistics').toggle()">{{_('statistics')}}</h1>
    <div id="statistics" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
-     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.statistics}}</h2>
+     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('statistics')}}</h2>
      <ul>
-         <li>{{auth.number_programs}}: <b>{{ user_data['program_count']}}</b></li>
+         <li>{{_('number_programs')}}: <b>{{ user_data['program_count']}}</b></li>
      </ul>
    </div>
    {% if user_classes %}
-       <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#classes').toggle()">{{auth.student_classes}}</h1>
+       <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#classes').toggle()">{{_('my_classes')}}</h1>
        <div id="classes" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
-           <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.student_classes}}</h2>
+           <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('my_classes')}}</h2>
            {% for user_class in user_classes %}
              <div id="student_class" class="border-2 rounded-lg border-gray-400 px-4 py-4 flex flex-row mb-4">
-                <p class="text-3xl text-blue-600 inline-block w-1/2">{{ user_class['name']}}</p><button class="red-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.remove_student('{{user_class['id']}}', '{{user_data['username']}}', true)">{{auth.leave_class}}</button>
+                <p class="text-3xl text-blue-600 inline-block w-1/2">{{ user_class['name']}}</p><button class="red-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.remove_student('{{user_class['id']}}', '{{user_data['username']}}', '{{_('self_removal_prompt')}}')">{{_('leave_class')}}</button>
              </div>
            {% endfor %}
        </div>
    {% endif %}
-   <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{auth.settings}}</h1>
+   <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{_('settings')}}</h1>
    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="profile">
         <form class="js-validated-form" id="update_profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
-        <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.settings}}</h2>
+        <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('settings')}}</h2>
         <div class="flex flex-row items-center mb-2">
-            <label for="username" class="inline-block w-72">{{auth.username}}</label><strong id="username" class="inline-block w-1/2 px-4 py-1"></strong>
+            <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-4 py-1"></strong>
         </div>
         <div class="flex flex-row items-center mb-2">
-            <label for="email" class="inline-block w-72">{{auth.email}}</label><input id="email" type="email" class="inline-block w-1/2 px-4 py-1 rounded-lg" required>
+            <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" type="email" class="inline-block w-1/2 px-4 py-1 rounded-lg" required>
         </div>
         <div class="flex flex-row items-center mb-2">
-            <label for="birth_year" class="inline-block w-72">{{auth.birth_year}}</label><input id="birth_year" class="inline-block w-1/2 px-4 py-1 rounded-lg" type="number">
+            <label for="birth_year" class="inline-block w-72">{{_('birth_year')}}</label><input id="birth_year" class="inline-block w-1/2 px-4 py-1 rounded-lg" type="number">
         </div>
         <div class="flex flex-row items-center mb-2">
-            <label for="language" class="inline-block w-72">{{auth.preferred_language}}</label>
+            <label for="language" class="inline-block w-72">{{_('preferred_language')}}</label>
             <select id="language" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" required>
                 <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
                 {% for language in other_languages() %}
@@ -109,7 +109,7 @@
         </div>
         <div class="flex flex-row items-center mb-2" id="keyword_lang_container"
              {% if user_data and 'language' in user_data and (user_data['language'] not in keyword_languages_keys() or user_data['language'] == "en") %}style="display: none;"{% endif %}>
-            <label for="keyword_language" class="inline-block w-72">{{auth.preferred_keyword_language}}</label>
+            <label for="keyword_language" class="inline-block w-72">{{_('preferred_keyword_language')}}</label>
             <select id="keyword_language" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" required>
                 {% for language in keyword_languages() %}
                     <option value="{{language.lang}}" id="{{language.lang}}_option" class="keyword_lang_option"
@@ -123,43 +123,43 @@
             </select>
         </div>
         <div class="flex flex-row items-center mb-2">
-            <label for="gender" class="inline-block w-72">{{auth.gender}}</label>
+            <label for="gender" class="inline-block w-72">{{_('gender')}}</label>
             <select id="gender" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg">
-              <option value="">{{auth.select}}</option>
-              <option value="f">{{auth.female}}</option>
-              <option value="m">{{auth.male}}</option>
-              <option value="o">{{auth.other}}</option>
+              <option value="">{{_('select')}}</option>
+              <option value="f">{{_('female')}}</option>
+              <option value="m">{{_('male')}}</option>
+              <option value="o">{{_('other')}}</option>
             </select>
         </div>
         <div class="flex flex-row items-center mb-2">
-            <label for="country" class="inline-block w-72">{{auth.country}}</label>
+            <label for="country" class="inline-block w-72">{{_('country')}}</label>
             <select id="country" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg">
-                <option value="">{{auth.select}}</option>
+                <option value="">{{_('select')}}</option>
             </select>
         </div>
         <div class="mb-4">
-            <button type="submit" class="green-btn mt-4">{{auth.update_profile}}</button>
+            <button type="submit" class="green-btn mt-4">{{_('update_profile')}}</button>
         </div>
       </form>
         <div>
-             <button class="red-btn" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
+             <button class="red-btn" onclick="hedyApp.auth.destroy ('{{_('are_you_sure')}}')">{{_('destroy_profile')}}</button>
         </div>
    </div>
-  <h1 id="password_toggle" class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#change_password').toggle()">{{auth.change_password}}</h1>
+  <h1 id="password_toggle" class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#change_password').toggle()">{{_('change_password')}}</h1>
    <form class="js-validated-form bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
-    <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.change_password}}</h2>
+    <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('change_password')}}</h2>
     <div class="flex flex-row items-center mb-2">
-        <label for="old_password" class="inline-block w-72">{{auth.current_password}}</label>
+        <label for="old_password" class="inline-block w-72">{{_('current_password')}}</label>
         <input id="old_password" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" minlength="6" type=password required>
     </div>
     <div class="flex flex-row items-center mb-2">
-        <label for="password" class="inline-block w-72">{{auth.new_password}}</label>
+        <label for="password" class="inline-block w-72">{{_('new_password')}}</label>
         <input id="password" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" minlength="6" type=password required>
     </div>
     <div class="flex flex-row items-center mb-2">
-        <label for="password_repeat" class="inline-block w-72">{{auth.repeat_new_password}}</label>
+        <label for="password_repeat" class="inline-block w-72">{{_('repeat_new_password')}}</label>
         <input id="password_repeat" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" minlength="6" type=password required>
     </div>
-    <button type="submit" class="green-btn mt-4">{{auth.change_password}}</button>
+    <button type="submit" class="green-btn mt-4">{{_('change_password')}}</button>
   </form>
 {% endblock %}

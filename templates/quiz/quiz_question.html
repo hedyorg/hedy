@@ -1,91 +1,66 @@
 {% extends "quiz/quiz.html" %}
-
 {% block question %}
-    <head>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script type=text/javascript>
-            function changeHint() {
-                const btn = document.getElementById("hint-button");
-                if (btn.innerText === "{{ ui.hint }}") {
-                    btn.innerText = document.getElementById('hidden-hint').textContent;
-                    btn.innerHTML = "<i>" + document.getElementById('hidden-hint').textContent + "</i>";
-                    $('#hint-button').css('background-color', 'rgba(198,246,213,0.51)');
-                    $('#hint-button').css('border', '2.5px solid #2d9068');
-                } else {
-                    btn.innerText = "{{ ui.hint }}";
-                    $('#hint-button').css('background-color', '#bee3f8');
-                    $('#hint-button').css('border', '2.5px solid #3182ce');
-                    $('#hint-button').css('outline', '#3182ce');
-                }
-            }
-            $(document).on("ready", function () {
-                $('.option-block').not('.incorrect-option').on("click", function () {
-                    // remove active class except for the selected button
-                    $('.option-block').not($(this)).removeClass('active');
-                    $(this).toggleClass('active');
-                });
-            });
-        </script>
-    </head>
-    <body>
-        <p class="italic text-3xl font-bold text-blue-900 text-center font-slab">{{ question.question_text }}</p>
-        {% if question.code and question.code!= "..." %}
-            <pre><code class="ltr:ml-6 rtl:mr-6">{{ question.code }}</code></pre>
-        {% endif %}
-        {% if wrong_answer_hint %}
-            <p class="text-red-900 text-2xl text-center font-slab font-semibold">{{ wrong_answer_hint }}</p>
-        {% endif %}
-        <div class="flex flex-row justify-center">
-            <button type="button" onclick="changeHint()"
-                    class="bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600"
-                    name="hint-button" id="hint-button">{{ ui.hint }}
-            </button>
+    <p class="italic text-3xl font-bold text-blue-900 text-center font-slab">{{ question.question_text }}</p>
+    {% if question.code and question.code!= "..." %}
+        <div class="turn-pre-into-ace w-3/4 mx-auto my-4">
+            <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ question.code }}</pre>
         </div>
-        <form action="{{ url_for('submit_answer', level_source=level_source, question_nr=question_nr, attempt=attempt, lang=lang) }}" method="POST">
-            {% set counter = namespace(value=0) %}
-            <div class="flex flex-col option-col">
-                {% for row in question.mp_choice_options|batch(2) %}
-                    <div class="flex flex-row option-row">
-                    {% for column in row %}
-                        <div class="
-                            {% if question_options[counter.value].char_index == chosen_option %}
-                                option-block incorrect-option p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row
-                            {% else %}
-                                option-block p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row
-                            {% endif %}
-                        ">
-                            {% if counter.value == 0 %}
-                                {{ triangle|safe }}
-                            {% elif counter.value == 1 %}
-                                {{ diamond|safe }}
-                            {% elif counter.value == 2 %}
-                                {{ square|safe }}
-                            {% elif counter.value == 3 %}
-                                {{ circle|safe }}
-                            {% elif counter.value == 4 %}
-                                {{ pentagram |safe }}
-                            {% elif counter.value == 5 %}
-                                {{ triangle_6|safe }}
-                            {% endif %}
-                            {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                                <pre><code class="block">{{ question_options[counter.value].code | nl2br }}</code></pre>
-                            {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None' %}
-                                <p class="option-text font-bold align-top"> {{ question_options[counter.value].option_text | nl2br }}</p>
-                            {% endif %}
-                            <button class="submit-button" type="submit" name="submit-button" value="{{ question_options[counter.value].char_index }}">
-                            {% if is_last_attempt %}
-                                {{ ui.go_to_answer }}
-                            {% else %}
-                                {{ ui.submit_answer }} {{ question_nr }}
-                            {% endif %}
-                            </button>
-                        </div>
-                        {% set counter.value = counter.value + 1 %}
-                    {% endfor %}
+    {% endif %}
+    {% if wrong_answer_hint %}
+        <p class="text-red-900 text-2xl text-center font-slab font-semibold">{{ wrong_answer_hint }}</p>
+    {% endif %}
+    <div class="flex flex-row justify-center">
+        <button type="button" onclick="changeHint()"
+                class="bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600"
+                name="hint-button" id="hint-button">{{_('hint')}}
+        </button>
+    </div>
+    <form action="{{ url_for('submit_answer', level_source=level_source, question_nr=question_nr, attempt=attempt, lang=lang) }}" method="POST">
+        {% set counter = namespace(value=0) %}
+        <div class="flex flex-col option-col">
+            {% for row in question.mp_choice_options|batch(2) %}
+                <div class="flex flex-row option-row">
+                {% for column in row %}
+                    <div class="
+                        {% if question_options[counter.value].char_index == chosen_option %}
+                            option-block incorrect-option p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row
+                        {% else %}
+                            option-block p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row
+                        {% endif %}
+                    ">
+                        {% if counter.value == 0 %}
+                            {{ triangle|safe }}
+                        {% elif counter.value == 1 %}
+                            {{ diamond|safe }}
+                        {% elif counter.value == 2 %}
+                            {{ square|safe }}
+                        {% elif counter.value == 3 %}
+                            {{ circle|safe }}
+                        {% elif counter.value == 4 %}
+                            {{ pentagram |safe }}
+                        {% elif counter.value == 5 %}
+                            {{ triangle_6|safe }}
+                        {% endif %}
+                        {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
+                            <div class="turn-pre-into-ace w-3/4 mx-auto -mt-16 mb-2">
+                                <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ question_options[counter.value].code }}</pre>
+                            </div>
+                        {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None' %}
+                            <p class="option-text font-bold align-top"> {{ question_options[counter.value].option_text | nl2br }}</p>
+                        {% endif %}
+                        <button class="submit-button" type="submit" name="submit-button" value="{{ question_options[counter.value].char_index }}">
+                        {% if is_last_attempt %}
+                            {{_('go_to_answer')}}
+                        {% else %}
+                            {{_('submit_answer')}} {{ question_nr }}
+                        {% endif %}
+                        </button>
                     </div>
+                    {% set counter.value = counter.value + 1 %}
                 {% endfor %}
-            </div>
-        </form>
-        <div class="invisible" id="hidden-hint"> {{ question.hint }}</div>
-    </body>
+                </div>
+            {% endfor %}
+        </div>
+    </form>
+    <div class="invisible" id="hidden-hint"> {{ question.hint }}</div>
 {% endblock %}

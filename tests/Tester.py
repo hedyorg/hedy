@@ -3,7 +3,7 @@ import app
 import hedy, hedy_translation
 import re
 import sys
-import io
+import io, os
 from contextlib import contextmanager
 import inspect
 import unittest
@@ -14,7 +14,7 @@ class Snippet:
     self.level = level
     self.field_name = field_name
     self.code = code
-    filename_shorter = filename.split("/")[3]
+    filename_shorter = os.path.basename(filename)
     self.language = filename_shorter.split(".")[0]
     self.adventure_name = adventure_name
     self.name = f'{self.language}-{self.level}-{self.field_name}'
@@ -26,6 +26,7 @@ class HedyTester(unittest.TestCase):
   equality_comparison_commands = ['==', '=']
   number_comparison_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparison_commands + ['!=']
+  arithmetic_operations = ['+', '-', '*', '/']
 
   @staticmethod
   @contextmanager
@@ -62,6 +63,9 @@ class HedyTester(unittest.TestCase):
 
   def result_in(self, list):
     return (lambda result: HedyTester.run_code(result) in list)
+
+  def exception_command(self, command):
+    return lambda c: c.exception.arguments['command'] == command
 
   @staticmethod
   def as_list_of_tuples(*args):

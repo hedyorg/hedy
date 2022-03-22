@@ -53,10 +53,17 @@ export const stats = {
       const anonymousRunsPerLevelDataset = generatePerLevelDataset('Anonymous users', response['per_level'], 'data.anonymous_runs', chart_colors[0], false);
       const loggedRunsPerLevelDataset = generatePerLevelDataset('Logged users', response['per_level'], 'data.logged_runs', chart_colors[1], false);
       const studentRunsPerLevelDataset = generatePerLevelDataset('Student users', response['per_level'], 'data.student_runs', chart_colors[2], false);
-      updateChart('usersPerLevelChart', [anonymousRunsPerLevelDataset, loggedRunsPerLevelDataset, studentRunsPerLevelDataset]);
+      const unknownRunsPerLevelDataset = generatePerLevelDataset('Unknown type users', response['per_level'], 'data.user_type_unknown_runs', chart_colors[3], false);
+      updateChart('usersPerLevelChart', [anonymousRunsPerLevelDataset, loggedRunsPerLevelDataset, studentRunsPerLevelDataset, unknownRunsPerLevelDataset]);
 
-      const userTypes = ['anonymous_runs', 'logged_runs', 'student_runs'];
-      const userTypesPerWeekDatasets = generateDatasets(userTypes, response['per_week'], 'week', 'data.', chart_colors, true);
+      const userTypes = ['anonymous_runs', 'logged_runs', 'student_runs', 'user_type_unknown_runs'];
+      const userTypeLabelMapper = (e: string) => {
+        if (e === 'anonymous_runs') return 'Anonymous users';
+        if (e === 'logged_runs') return 'Logged users';
+        if (e === 'student_runs') return 'Student users';
+        return 'Unknown type users'
+      };
+      const userTypesPerWeekDatasets = generateDatasets(userTypes, response['per_week'], 'week', 'data.', chart_colors, true, userTypeLabelMapper);
       updateChart('usersPerWeekChart', userTypesPerWeekDatasets);
 
       // update quiz scores per level charts
@@ -74,7 +81,7 @@ export const stats = {
 
       // update quiz scores per week charts
       const levels_quizzes = flattenWeekProps(response['per_week'], ['completed_quizzes', 'abandoned_quizzes'], (el: string) => el.toLowerCase().startsWith('l'));
-      console.log(levels_quizzes);
+
       const completedQuizPerWeekDatasets = generateDatasets(levels_quizzes, response['per_week'], 'week', 'data.completed_quizzes.', chart_colors, false);
       const abandonedQuizPerWeekDatasets = generateDatasets(levels_quizzes, response['per_week'], 'week', 'data.abandoned_quizzes.', chart_colors, false);
       const maxScorePerWeekDatasets = generateDatasets(levels_quizzes, response['per_week'], 'week', 'data.quiz_score_max.', chart_colors, false);

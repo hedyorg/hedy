@@ -34,7 +34,15 @@ class TestsLevel18(HedyTester):
           expected=expected,
           extra_check_function=self.is_not_turtle()
         )
-        
+
+    def test_print_comma(self):
+        code = "print('ik heet ,')"
+        expected = "print(f'ik heet ,')"
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_not_turtle())
+
     @parameterized.expand(['=', 'is'])
     def test_input(self, assigment):
         code = textwrap.dedent(f"""\

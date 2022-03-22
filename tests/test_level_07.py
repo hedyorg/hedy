@@ -42,6 +42,33 @@ class TestsLevel7(HedyTester):
 
     self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
 
+  def test_repeat_with_string_variable_gives_type_error(self):
+    code = textwrap.dedent("""\
+      n is 'test'
+      repeat n times print 'n'""")
+
+    self.single_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+
+  def test_repeat_with_list_variable_gives_type_error(self):
+    code = textwrap.dedent("""\
+      n is 1, 2, 3
+      repeat n times print 'n'""")
+
+    self.single_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+
+  def test_repeat_with_ask(self):
+    code = textwrap.dedent("""\
+      n is ask 'How many times?'
+      repeat n times print 'n'""")
+
+    expected = textwrap.dedent("""\
+      n = input(f'How many times?')
+      for i in range(int(n)):
+        print(f'{n}')
+        time.sleep(0.1)""")
+
+    self.single_level_tester(code=code, expected=expected)
+
   def test_repeat_basic_print(self):
     code = textwrap.dedent(f"""\
     repeat 5 times print 'me wants a cookie!'""")

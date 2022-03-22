@@ -3,12 +3,12 @@
 {% block body %}
 <div id="level-header" class="ltr:pl-8 rtl:pr-8 py-2 bg-blue-200 flex items-center">
   <div class="tracking-wide text-xl font-extralight py-2 ltr:mr-8 rtl:ml-8 mt-1 whitespace-nowrap">
-    {{ ui.level_title }} {{ level_nr }}
+    {{ _('level_title') }} {{ level_nr }}
     &nbsp;
-    {% if assignment_nr %} · {{ ui.step_title }} {{ assignment_nr }} {% endif %}
+    {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
   </div>
   <div class="w-full flex items-center justify-end ltr:ml-auto rtl:mr-auto ltr:mr-4 rtl:ml-4">
-    <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (ui.level_title + ' ' + level_nr)}}">
+    <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (_('level_title') + ' ' + level_nr)}}">
     <input type="submit" class="green-btn ltr:ml-2 rtl:mr-2 cursor-pointer" value="{{ ui.save_code_button }}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), false);">
     <input type="submit" class="green-btn ltr:ml-2 rtl:mr-2 cursor-pointer" value="{{ ui.share_code_button }}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), true);">
     {% if not hide_cheatsheet %}
@@ -28,7 +28,7 @@
                     <div class="font-thin text-sm flex-grow" tabindex=0>
                     </div>
                     <button class="btn block flex-none self-end ml-1" style="min-width:6em"
-                      onclick='hedyApp.tryPaletteCode({{command.demo_code|tojson}});'>{{ui.try_button}}</button>
+                      onclick='hedyApp.tryPaletteCode({{command.demo_code|tojson}});'>{{_('try_button')}}</button>
                   </div>
                 </div>
                 {% endfor %}

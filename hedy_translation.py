@@ -19,7 +19,7 @@ def keywords_to_dict(to_lang="nl"):
     keywords_path = 'coursedata/keywords/'
     yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
 
-    with open(yaml_filesname_with_path, 'r') as stream:
+    with open(yaml_filesname_with_path, 'r', encoding='UTF-8') as stream:
         command_combinations = yaml.safe_load(stream)
 
     return command_combinations
@@ -56,10 +56,11 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
 
     result = processed_input
     for rule in ordered_rules:
-        lines = result.splitlines()
-        line = lines[rule.line-1]
-        replaced_line = replace_token_in_line(line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
-        result = replace_line(lines, rule.line-1, replaced_line)
+        if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
+            lines = result.splitlines()
+            line = lines[rule.line-1]
+            replaced_line = replace_token_in_line(line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
+            result = replace_line(lines, rule.line-1, replaced_line)
 
     # For now the needed post processing is only removing the 'end-block's added during pre-processing
     result = '\n'.join([line for line in result.splitlines() if not line.startswith('end-block')])
@@ -84,6 +85,24 @@ def replace_token_in_line(line, rule, original, target):
     # Note that we need to replace the target value in the original value because some
     # grammar rules have ambiguous length and value, e.g. _COMMA: _SPACES* (latin_comma | arabic_comma) _SPACES*
     return before + rule.value.replace(original, target) + after
+
+
+def find_command_keywords(input_string, lang, level, keywords, start_line, end_line, start_column, end_column):
+    parser = hedy.get_parser(level, lang, True)
+    program_root = parser.parse(input_string).children[0]
+
+    translator = Translator(input_string)
+    translator.visit(program_root)
+
+    return {k: find_keyword_in_rules(translator.rules, k, start_line, end_line, start_column, end_column) for k in keywords}
+
+
+def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, end_column):
+    for rule in rules:
+        if rule.keyword == keyword and rule.line == start_line and rule.start >= start_column:
+            if rule.line < end_line or (rule.line == end_line and rule.end <= end_column):
+                return rule.value
+    return None
 
 
 class Translator(Visitor):
@@ -171,6 +190,8 @@ class Translator(Visitor):
 
     def equality_check(self, tree):
         self.add_rule('_IS', 'is', tree)
+        self.add_rule('_EQUALS', '=', tree)
+        self.add_rule('_DOUBLE_EQUALS', '==', tree)
 
     def in_list_check(self, tree):
         self.add_rule('_IN', 'in', tree)

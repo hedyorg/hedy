@@ -7,7 +7,7 @@ export const LANG_es = {
 '_TURN':'(?:girar|turn)',
 '_LEFT':'(?:izquierda|left)',
 '_RIGHT':'(?:derecha|right)',
-'_IS':'(?:es|is|=)',
+'_IS':'(?:es|is)',
 '_SLEEP':'(?:dormir|sleep)',
 '_ADD_LIST':'(?:añadir|add)',
 '_TO_LIST':'(?:a|to)',

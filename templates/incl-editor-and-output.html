@@ -3,7 +3,7 @@
     <!-- Row 1: editor, output pane -->
     <div class="flex flex-col order-1 relative" id="code_editor" style="height: 22rem;">
       <!-- language selector overlay -->
-      {% if other_keyword_language() %}
+      {% if other_keyword_language() and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
           <div id="main_editor_keyword_selector">
               <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white" lang="{{ current_keyword_language().lang }}">
                   <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button">
@@ -97,8 +97,8 @@
           <!--Body-->
           <form>
             <div class="my-2 flex">
-              <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="{{ ui.enter_text }}">
-              <input type="submit" onclick="hedyApp.ScrollOutputToBottom()" class="green-btn ltr:ml-3 rtl:mr-3" value="{{ ui.enter }}"></p>
+              <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="{{_('enter_text')}}">
+              <input type="submit" onclick="hedyApp.ScrollOutputToBottom()" class="green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
             </div>
           </form>
         </div>
@@ -106,36 +106,38 @@
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-4">
-      <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="cursor-pointer hidden h-28 absolute ltr:ml-96 rtl:mr-96 -mt-6" id="repair_button">
-      <div class="flex justify-between">
-        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{ui.run_code_button}} </button>
+      <div class="flex justify-between items-start h-12 overflow-visible">
+        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{_('run_code_button')}} </button>
         {% if show_edit_button %}
-            <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{ui.edit_code_button}}</a>
+            <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn">{{_('edit_code_button')}}</button>
+        {% else %}
+            <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="hidden h-28 -mt-2" id="repair_button">
         {% endif %}
       </div>
-      <div id="speak_container" class="hidden mt-4">
-        <label for="speak_dropdown">{{ui.read_code_label}} </label><select id="speak_dropdown" class="p-2 border-grey border">
-          <option value="">🤫</option>
-        </select>
+      <div id="speak_container" class="hidden mt-4 flex flex-row items-center">
+        <label for="speak_dropdown" class="ltr:mr-2 rtl:ml-2">{{_('read_code_label')}}:</label>
+          <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
+            <option value="">🤫</option>
+          </select>
       </div>
     </div>
     <div class="order-5">
       {% if not specific_adventure %}
           <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
             {% if prev_level and (customizations['levels']|length == 0 or prev_level in customizations['levels']) %}
-              <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{ui.regress_button|replace("{level}", prev_level)}}</button>
+              <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
             {% endif %}
             {% if next_level and (customizations['levels']|length == 0 or next_level in customizations['levels']) %}
-                <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ui.advance_button|replace("{level}", next_level)}}</button>
+                <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
             {% endif %}
           </div>
       {% else %}
           <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
             {% if prev_level %}
-              <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{prev_level}}'})">{{ui.regress_button|replace("{level}", prev_level)}}</button>
+              <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{prev_level}}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
             {% endif %}
             {% if next_level %}
-                <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}'})">{{ui.advance_button|replace("{level}", next_level)}}</button>
+                <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
             {% endif %}
           </div>
       {% endif %}
@@ -149,7 +151,7 @@
       <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
       <div class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" style="top: -5px;"></div>
     </div>
-    <div class="ltr:ml-3 rtl:mr-3">{{ ui.developers_mode }}</div>
+    <div class="ltr:ml-3 rtl:mr-3">{{_('developers_mode')}}</div>
   </label>
 </div>
 <div id="variables" class="mx-auto w-64 bg-yellow-100" style="display: block; padding: 0.5rem; position:absolute; z-index:9;" onclick="hedyApp.show_variables()" >

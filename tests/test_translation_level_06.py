@@ -1,5 +1,6 @@
 import hedy
 from test_level_01 import HedyTester
+from parameterized import parameterized
 import hedy_translation
 import textwrap
 
@@ -101,3 +102,31 @@ class TestsTranslationLevel6(HedyTester):
         a = lenguajes at 0""")
 
         self.assertEqual(result, expected)
+
+    @parameterized.expand([('en', '='), ('es', '=')])
+    def test_equality_type_error_translates_command(self, lang, is_):
+        code = textwrap.dedent(f"""\
+            letters is a, b, c
+            if letters {is_} '10' print 'wrong!'""")
+
+        self.multi_level_tester(
+            lang=lang,
+            code=code,
+            max_level=7,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            extra_check_function=self.exception_command(is_)
+        )
+
+    @parameterized.expand([('en', '+'), ('es', '+'), ('en', '-'), ('es', '-'), ('en', '*'), ('es', '*'), ('en', '/'), ('es', '/')])
+    def test_expression_type_error_uses_arith_operator(self, lang, operator):
+        code = textwrap.dedent(f"""\
+            a is test
+            print a {operator} 2""")
+
+        self.multi_level_tester(
+            lang=lang,
+            code=code,
+            max_level=7,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            extra_check_function=self.exception_command(operator)
+        )

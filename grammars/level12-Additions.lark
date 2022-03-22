@@ -1,8 +1,8 @@
 //assigning a string now must be done with quotes
-assign: var (_SPACE _IS _SPACE | _EQUALS) sum | var (_SPACE _IS _SPACE | _EQUALS) text_in_quotes
+assign: var (_SPACE _IS _SPACE | _EQUALS) (atom | expression)
 assign_list: var (_SPACE _IS _SPACE | _EQUALS) (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|NUMBER))+
 
-?atom: NUMBER | var //unsupported numbers are gone, we can now allow floats with NUMBER
+?atom: NUMBER | var_access | text_in_quotes //unsupported numbers are gone, we can now allow floats with NUMBER
 
 equality_check: (var | text_in_quotes | NUMBER) (_SPACE _IS _SPACE | _EQUALS) (var | text_in_quotes | NUMBER)
 
