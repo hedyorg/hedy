@@ -7,7 +7,7 @@ export const LANG_en = {
 '_TURN':'turn',
 '_LEFT':'left',
 '_RIGHT':'right',
-'_IS':'is|=', //would be nicer to do this in the rules based on the level but this works
+'_IS':'is',
 '_SLEEP':'sleep',
 '_ADD_LIST':'add',
 '_TO_LIST':'to',
