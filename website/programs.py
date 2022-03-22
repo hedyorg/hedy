@@ -1,4 +1,5 @@
 from flask_babel import gettext
+import hedy
 from website.auth import requires_login, current_user
 import utils
 import uuid
@@ -51,7 +52,7 @@ def routes(app, database, achievements):
             return 'name must be a string', 400
 
         if not current_user()['username']:
-            return 'not_logged', 403
+            return gettext(u'save_prompt'), 403
 
         programs = DATABASE.programs_for_user(current_user()['username'])
         for program in programs:
@@ -71,22 +72,34 @@ def routes(app, database, achievements):
             return 'name must be a string', 400
         if not isinstance(body.get('level'), int):
             return 'level must be an integer', 400
+        if not isinstance(body.get('shared'), bool):
+            return 'shared must be a boolean', 400
         if 'adventure_name' in body:
             if not isinstance(body.get('adventure_name'), str):
                 return 'if present, adventure_name must be a string', 400
+
+        error = False
+        try:
+            hedy.transpile(body.get('code'), body.get('level'), g.lang)
+        except:
+            error = True
+            if not body.get('force_save', True):
+                return jsonify({'parse_error': True, 'message': gettext(u'save_parse_warning')})
 
         # We check if a program with a name `xyz` exists in the database for the username.
         # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
         # For now, we bring all existing programs for the user and then search within them for repeated names.
         programs = DATABASE.programs_for_user(user['username']).records
         program_id = uuid.uuid4().hex
-        program_public = 0
+        program_public = body.get('shared')
         overwrite = False
         for program in programs:
             if program['name'] == body['name']:
                 overwrite = True
                 program_id = program['id']
-                program_public = program.get('public', 0)
+                # If a program was already shared, keep it that way
+                if program.get('public', False):
+                    program_public = True
                 break
 
         stored_program = {
@@ -99,7 +112,8 @@ def routes(app, database, achievements):
             'code': body['code'],
             'name': body['name'],
             'username': user['username'],
-            'public': program_public
+            'public': program_public,
+            'error': 1 if error else None
         }
 
         if 'adventure_name' in body:
@@ -138,7 +152,7 @@ def routes(app, database, achievements):
             'id']:
             DATABASE.set_favourite_program(user['username'], None)
 
-        DATABASE.set_program_public_by_id(body['id'], bool(body['public']), bool(body['error']))
+        DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
 
         resp = {'id': body['id']}

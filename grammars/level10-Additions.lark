@@ -1,6 +1,6 @@
 command:+= repeat_list
 
 //TODO: Maybe this should be called for_list instead of repeat_list? I find thi a bit confusing myself (FH, Nov 2021)
-repeat_list: _FOR _SPACE var _SPACE _IN _SPACE var _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+repeat_list: _FOR _SPACE var _SPACE _IN _SPACE var_access _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
 

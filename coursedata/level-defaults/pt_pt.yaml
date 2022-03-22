@@ -454,7 +454,7 @@
 13:
     start_code: |-
         name = ask 'what is your name?'
-        leeftijd = ask 'what is your age?'
+        age = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: "Vamos agora aprender `and` e `or`! Se queres verificar duas instruções, não precisas de usar dois `if` mas podes usar `and` e `or`. Se utilizares `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
@@ -696,7 +696,7 @@
         example: "if cor is verde:'"
         demo_code: |-
             cor = ask 'Qual é a tua cor favorita?'
-            if cor is verde:
+            if cor is 'verde':
                 print 'A cor é verde.'
             else:
                 print 'A cor não é verde.'

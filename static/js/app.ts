@@ -482,62 +482,71 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
-function storeProgram(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
   window.State.unsaved_changes = false;
+  var adventure_name = window.State.adventure_name;
+  // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
+  if (Array.isArray(level)) {
+     adventure_name = level [1];
+     level = level [0];
+  }
 
-    var adventure_name = window.State.adventure_name;
-    // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
-    if (Array.isArray(level)) {
-       adventure_name = level [1];
-       level = level [0];
-    }
-
-    $.ajax({
-      type: 'POST',
-      url: '/programs',
-      data: JSON.stringify({
-        level: level,
-        lang:  lang,
-        name:  name,
-        code:  code,
-        adventure_name: adventure_name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      // The auth functions use this callback function.
-      if (cb) {
-        return response.Error ? cb (response) : cb (null, response);
-      }
-      modal.alert (response.message, 3000, false);
-      if (response.achievements) {
-        showAchievements(response.achievements, false, "");
-      }
-      // If we succeed, we need to update the default program name & program for the currently selected tab.
-      // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
-      // The name of the program might have been changed by the server, so we use the name stated by the server.
-      $ ('#program_name').val (response.name);
-      window.State.adventures?.map (function (adventure) {
-        if (adventure.short_name === (adventure_name || 'level')) {
-          adventure.loaded_program = {name: response.name, code: code};
-        }
+  $.ajax({
+    type: 'POST',
+    url: '/programs',
+    data: JSON.stringify({
+      level: level,
+      lang:  lang,
+      name:  name,
+      code:  code,
+      shared: shared,
+      force_save: force_save,
+      adventure_name: adventure_name
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response) {
+    // If the program contains an error -> verify that the user really wants to save it and POST again
+    // If we already answered this question with yes the "force_save" is true, so we skip this part
+    if (response.parse_error && !force_save) {
+      modal.confirm(response.message, function() {
+        return storeProgram(level, lang, name, code, shared, true, cb);
       });
-    }).fail(function(err) {
-      modal.alert(err.responseText, 3000, true);
-      if (err.status === 403) {
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
-         localStorage.setItem ('hedy-save-redirect', 'hedy');
-         window.location.pathname = '/login';
+      return;
+    }
+    // The auth functions use this callback function.
+    if (cb) return response.Error ? cb (response) : cb (null, response);
+    if (shared) {
+      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "')");
+      modal.copy_alert (response.message, 5000);
+    } else {
+      modal.alert(response.message, 3000, false);
+    }
+    if (response.achievements) {
+      showAchievements(response.achievements, false, "");
+    }
+    // If we succeed, we need to update the default program name & program for the currently selected tab.
+    // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
+    // The name of the program might have been changed by the server, so we use the name stated by the server.
+    $ ('#program_name').val (response.name);
+    window.State.adventures?.map (function (adventure) {
+      if (adventure.short_name === (adventure_name || 'level')) {
+        adventure.loaded_program = {name: response.name, code: code};
       }
     });
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    if (err.status === 403) {
+       localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
+       localStorage.setItem ('hedy-save-redirect', 'hedy');
+       window.location.pathname = '/login';
+    }
+  });
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, prompt: string, cb?: (err: any, resp?: any) => void) {
-  error.hide();
-  success.hide();
-
+export function saveit(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, cb?: (err: any, resp?: any) => void) {
   if (reloadOnExpiredSession ()) return;
-
   try {
     $.ajax({
       type: 'POST',
@@ -548,22 +557,22 @@ export function saveit(level: number | [number, string], lang: string, name: str
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response.duplicate) {
+      if (response['duplicate']) {
         modal.confirm (response.message, function () {
-          storeProgram(level, lang, name, code, cb);
+          storeProgram(level, lang, name, code, shared, false, cb);
           pushAchievement("double_check");
         });
       } else {
-         storeProgram(level, lang, name, code, cb);
+         storeProgram(level, lang, name, code, shared, false, cb);
       }
     }).fail(function(err) {
       if (err.status == 403) { // The user is not allowed -> so not logged in
-        return modal.confirm (prompt, function () {
+        return modal.confirm (err.responseText, function () {
            // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
            if (window.State && window.State.adventure_name && !Array.isArray(level)) {
              level = [level, window.State.adventure_name];
            }
-           localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+           localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code, shared]));
            window.location.pathname = '/login';
          });
       }
@@ -577,9 +586,9 @@ export function saveit(level: number | [number, string], lang: string, name: str
 /**
  * The 'saveit' function, as an async function
  */
-export function saveitP(level: number | [number, string], lang: string, name: string, code: string) {
+export function saveitP(level: number | [number, string], lang: string, name: string, code: string, shared: boolean) {
   return new Promise<any>((ok, ko) => {
-    saveit(level, lang, name, code, "", (err, response) => {
+    saveit(level, lang, name, code, shared,(err, response) => {
       if (err) {
         ko(err);
       } else {
@@ -616,14 +625,13 @@ function change_shared (shared: boolean, index: number) {
   }
 }
 
-function share_function(id: string, index: number, Public: boolean, parse_error: boolean) {
+export function share_program(id: string, index: number, Public: boolean) {
   $.ajax({
       type: 'POST',
       url: '/programs/share',
       data: JSON.stringify({
         id: id,
-        public: Public,
-        error: parse_error
+        public: Public
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -642,81 +650,6 @@ function share_function(id: string, index: number, Public: boolean, parse_error:
     }).fail(function(err) {
       modal.alert(err.responseText, 3000, true);
     });
-}
-
-function verify_call_index(level:number, lang: string, id: string | true, index: number, Public: boolean, parse_error: boolean) {
-  // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
-  if (id !== true) return share_function(id, index, Public, parse_error);
-  // Otherwise, we save the program and then share it.
-  // Saving the program makes things way simpler for many reasons: it covers the cases where:
-  // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
-  const name = `${$('#program_name').val()}`;
-  const code = get_trimmed_code();
-  return saveit(level, lang, name, code, "", (err: any, resp: any) => {
-      if (err && err.Warning)
-        return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
-      if (err && err.Error)
-        return error.show(ErrorMessages['Transpile_error'], err.Error);
-      share_function(resp.id, index, Public, parse_error);
-    });
-}
-
-function get_parse_code_by_id(level: number, lang:string, id:string | true,  index: number, Public: boolean) {
-  $.ajax({
-      type: 'POST',
-      url: '/parse-by-id',
-      data: JSON.stringify({
-        id: id
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function (response) {
-      if (response.error) {
-        modal.confirm("This program contains an error, are you sure you want to share it?", function() {
-          return verify_call_index(level, lang, id, index, Public, true);
-        });
-        return;
-      } else {
-        return verify_call_index(level, lang, id, index, Public, false);
-      }
-    }).fail(function (err) {
-      console.log(err);
-    });
-}
-
-export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (Public) {
-    // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
-    if (id !== true) {
-      return get_parse_code_by_id(level, lang, id,  index, Public);
-    } else {
-      const code = get_trimmed_code();
-      $.ajax({
-        type: 'POST',
-        url: '/parse',
-        data: JSON.stringify({
-          level: level,
-          lang: lang,
-          code: code,
-          error_check: true
-        }),
-        contentType: 'application/json',
-        dataType: 'json'
-      }).done(function (response) {
-        if (response.Error) {
-          modal.confirm(response.message, function () {
-            verify_call_index(level, lang, id, index, Public, true);
-          });
-        } else {
-            verify_call_index(level, lang, id, index, Public, false);
-        }
-      }).fail(function (err) {
-        console.log(err);
-      });
-    }
-  } else {
-    verify_call_index(level, lang, id, index, Public, false);
-  }
 }
 
 export function delete_program(id: string, index: number, prompt: string) {
