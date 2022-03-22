@@ -101,6 +101,7 @@ export function join_class(id: string, name: string) {
 }
 
 export function invite_student(class_id: string, prompt: string, username_empty: string) {
+    // Todo TB -> We should remove all these extra "username_empty" string and depend solely on server response
     modal.prompt (prompt, '', function (username) {
       if (!username) {
           return modal.alert(username_empty);
