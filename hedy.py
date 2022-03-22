@@ -442,7 +442,7 @@ class LookupEntryCollector(visitors.Visitor):
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, True)
 
-    def repeat_list(self, tree):
+    def for_list(self, tree):
         iterator = str(tree.children[0].children[0])
         # the tree is trimmed to skip contain the inner commands of the loop since
         # they are not needed to infer the type of the iterator variable
@@ -559,7 +559,7 @@ class TypeValidator(Transformer):
         self.check_type_allowed(command, allowed_types, tree.children[0], tree.meta)
         return self.to_typed_tree(tree, HedyType.none)
 
-    def repeat_list(self, tree):
+    def for_list(self, tree):
         command = Command.for_list
         allowed_types = get_allowed_types(command, self.level)
         self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
@@ -857,7 +857,7 @@ class AllCommands(Transformer):
             return 'elif'
         if keyword == 'for_loop':
             return 'for'
-        if keyword == 'repeat_list':
+        if keyword == 'for_list':
             return 'for'
         if keyword == 'orcondition':
             return 'or'
@@ -1555,7 +1555,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
 @hedy_transpiler(level=10)
 class ConvertToPython_10(ConvertToPython_8_9):
-    def repeat_list(self, args):
+    def for_list(self, args):
       args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
       body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
