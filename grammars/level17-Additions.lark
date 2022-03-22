@@ -12,7 +12,7 @@ ifs: _IF _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE command
 // TODO: FH, jan 2022 (condition|andcondition|orcondition) could be made into a rule (also in use in level 13)
 elifs: _EOL _SPACE* _ELIF _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
-for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _SPACE (INT | var) _SPACE _TO _SPACE (INT | var) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _SPACE (INT | var_access) _SPACE _TO _SPACE (INT | var_access) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 while_loop: _WHILE _SPACE (condition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
-repeat_list: _FOR _SPACE var _SPACE _IN _SPACE var _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+repeat_list: _FOR _SPACE var _SPACE _IN _SPACE var_access _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 

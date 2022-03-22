@@ -25,5 +25,5 @@ text: /([^\n!?.]+)/ -> text
 punctuation : PUNCTUATION -> punctuation
 PUNCTUATION: _EXCLAMATION_MARK | _QUESTION_MARK | _PERIOD //uppercase places tokens in tree
 
-var: NAME -> var
-
+var: NAME // used for variable definitions, e.g. a = 1
+var_access: NAME // used for variable references, e.g. print a. It parses the same as var, but does not result in a lookup table entry

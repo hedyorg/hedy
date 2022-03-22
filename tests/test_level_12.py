@@ -10,7 +10,7 @@ class TestsLevel12(HedyTester):
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
     naam = 'Hedy'
-    if naam = Hedy
+    if naam = 'Hedy'
         print 'koekoek'""")
 
     expected = textwrap.dedent("""\
@@ -26,7 +26,7 @@ class TestsLevel12(HedyTester):
   def test_if_with_equals_sign(self):
     code = textwrap.dedent("""\
     naam is 'Hedy'
-    if naam = Hedy
+    if naam = 'Hedy'
         print 'koekoek'""")
 
     expected = textwrap.dedent("""\
@@ -43,7 +43,7 @@ class TestsLevel12(HedyTester):
   def test_if_with_equals_sign_no_spaces(self):
     code = textwrap.dedent("""\
     naam='Hedy'
-    if naam = Hedy
+    if naam = 'Hedy'
         print 'koekoek'""")
 
     expected = textwrap.dedent("""\
@@ -741,8 +741,8 @@ class TestsLevel12(HedyTester):
   # negative tests
   def test_assign_string_without_quotes(self):
     code = textwrap.dedent("""\
-            name is felienne
-            print name""")
+      name is felienne
+      print name""")
 
     self.multi_level_tester(
       code=code,

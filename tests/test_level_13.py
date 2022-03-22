@@ -41,7 +41,7 @@ class TestsLevel13(HedyTester):
   def test_equals(self):
     code = textwrap.dedent("""\
     name = ask 'what is your name?'
-    leeftijd = ask 'what is your age?'
+    age = ask 'what is your age?'
     if name is 'Hedy' and age is 2
         print 'You are the real Hedy!'""")
 
@@ -54,15 +54,15 @@ class TestsLevel13(HedyTester):
           name = float(name)
         except ValueError:
           pass
-      leeftijd = input(f'what is your age?')
+      age = input(f'what is your age?')
       try:
-        leeftijd = int(leeftijd)
+        age = int(age)
       except ValueError:
         try:
-          leeftijd = float(leeftijd)
+          age = float(age)
         except ValueError:
           pass
-      if str(name) == str('Hedy') and str('age') == str('2'):
+      if str(name) == str('Hedy') and str(age) == str('2'):
         print(f'You are the real Hedy!')""")
 
     self.multi_level_tester(
