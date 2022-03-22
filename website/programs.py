@@ -52,7 +52,7 @@ def routes(app, database, achievements):
             return 'name must be a string', 400
 
         if not current_user()['username']:
-            return 'not_logged', 403
+            return gettext(u'save_prompt'), 403
 
         programs = DATABASE.programs_for_user(current_user()['username'])
         for program in programs:
@@ -84,7 +84,7 @@ def routes(app, database, achievements):
         except:
             error = True
             if not body.get('force_save', True):
-                return jsonify({'parse_error': True})
+                return jsonify({'parse_error': True, 'message': gettext(u'save_parse_warning')})
 
         # We check if a program with a name `xyz` exists in the database for the username.
         # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.

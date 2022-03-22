@@ -502,7 +502,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     // If the program contains an error -> verify that the user really wants to save it and POST again
     // If we already answered this question with yes the "force_save" is true, so we skip this part
     if (response.parse_error && !force_save) {
-      modal.confirm(auth.texts['save_parse_warning'], function() {
+      modal.confirm(response.message, function() {
         return storeProgram(level, lang, name, code, shared, true, cb);
       });
       return;
@@ -511,9 +511,9 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     if (cb) return response.Error ? cb (response) : cb (null, response);
     if (shared) {
       $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "')");
-      modal.copy_alert (auth.texts['share_success_detail'], 5000);
+      modal.copy_alert (response.message, 5000);
     } else {
-      modal.alert(auth.texts['save_success_detail'], 3000, false);
+      modal.alert(response.message, 3000, false);
     }
     if (response.achievements) {
       showAchievements(response.achievements, false, "");
@@ -551,7 +551,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
       dataType: 'json'
     }).done(function(response) {
       if (response['duplicate']) {
-        modal.confirm (auth.texts['overwrite_warning'], function () {
+        modal.confirm (response.message, function () {
           storeProgram(level, lang, name, code, shared, false, cb);
           pushAchievement("double_check");
         });
@@ -560,7 +560,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
       }
     }).fail(function(err) {
       if (err.status == 403) { // The user is not allowed -> so not logged in
-        return modal.confirm (prompt, function () {
+        return modal.confirm (err.responseText, function () {
            // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
            if (window.State && window.State.adventure_name && !Array.isArray(level)) {
              level = [level, window.State.adventure_name];
@@ -645,8 +645,8 @@ export function share_program(id: string, index: number, Public: boolean) {
     });
 }
 
-export function delete_program(id: string, index: number) {
-  modal.confirm (auth.texts['delete_confirm'], function () {
+export function delete_program(id: string, index: number, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'POST',
       url: '/programs/delete',
