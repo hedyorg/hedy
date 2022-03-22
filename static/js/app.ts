@@ -1098,7 +1098,6 @@ export function load_quiz(level: string) {
 }
 
 export function showVariableView() {
-  console.log("Hello!");
 // When blue label button is clicked, the view will appear or hide
   const variables = $('#variables');
   if (variables.is(":hidden")) {
@@ -1111,7 +1110,7 @@ export function showVariableView() {
 }
 
 //Feature flag for variable and values view
-var variable_view = true;
+var variable_view = false;
 
 //Hides the HTML DIV for variables if feature flag is false
 if (!variable_view) {
