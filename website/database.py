@@ -118,9 +118,9 @@ class Database:
         """Store a program."""
         PROGRAMS.create(program)
 
-    def set_program_public_by_id(self, id, public, error):
+    def set_program_public_by_id(self, id, public):
         """Store a program."""
-        PROGRAMS.update({'id': id}, {'public': 1 if public else None, 'error': 1 if error else None})
+        PROGRAMS.update({'id': id}, {'public': 1 if public else None})
 
     def submit_program_by_id(self, id):
         PROGRAMS.update({'id': id}, {'submitted': True})
