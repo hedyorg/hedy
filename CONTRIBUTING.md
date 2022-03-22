@@ -84,6 +84,12 @@ To make sure you have access to all possible styling classes, generate the devel
 ```
 $ ./build-tools/heroku/tailwind/generate-development-css
 ```
+When merging we want to keep the CSS file as small as possible for performance reasons. 
+Tailwind has a built-in ```purge``` option to only generate CSS for classes that are actually being used.
+Please run the following command so Tailwind only generated actual used classes:
+```
+$ ./build-tools/heroku/tailwind/generate-css
+```
 For all possible styling classes and more, take a look at their [website](https://tailwindcss.com).
 If you want to combine different Tailwind classes into one class or one element, we can do this in the ```/build-tool/heroku/tailwind/styles.css``` file.
 By using the ```@apply``` attribute we can assign classes to other styling. For example, we styled the ```<h1>``` element with multiple Tailwind classes like this:
