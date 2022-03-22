@@ -13,7 +13,7 @@
             {% endfor %}
             {% for assignment in adventures %}
               {% if assignment.short_name != 'level' and ('adventures' not in customizations or customizations['adventures'][assignment.short_name] and level|int in customizations['adventures'][assignment.short_name]) %}
-                <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{assignment.short_name}}">
+                <div class="tab {% if assignment.short_name == "money" %}money_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{assignment.short_name}}">
                     {{ assignment.name }}
                 </div>
               {% endif %}
