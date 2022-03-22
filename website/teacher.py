@@ -11,7 +11,6 @@ import hedyweb
 import hedy_content
 from config import config
 
-TRANSLATIONS = hedyweb.Translations ()
 cookie_name = config['session']['cookie_name']
 invite_length = config['session']['invite_length'] * 60
 
