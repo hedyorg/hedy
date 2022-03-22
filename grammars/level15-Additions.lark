@@ -1,8 +1,6 @@
-// adds the while loop
-
-
 command:+= while_loop
 
+// new : while loop
 while_loop: _WHILE _SPACE (condition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
 
