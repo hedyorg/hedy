@@ -95,7 +95,9 @@ def routes(app, database, achievements):
             if program['name'] == body['name']:
                 overwrite = True
                 program_id = program['id']
-                program_public = program.get('public', program_public)
+                # If a program was already shared, keep it that way
+                if program.get('public', False):
+                    program_public = True
                 break
 
         stored_program = {
