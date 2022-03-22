@@ -208,6 +208,61 @@ class TestPages(AuthHelper):
         # THEN receive an OK response code from the server
         self.get_data('/')
 
+    def test_get_code_page(self):
+        # WHEN attempting to get the code page
+        # THEN receive an OK response code from the server
+        self.get_data('/hedy')
+
+    def test_get_explore_page(self):
+        # WHEN attempting to get the explore page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/explore')
+
+    def test_get_learn_more_page(self):
+        # WHEN attempting to get the learn-more page
+        # THEN receive an OK response code from the server
+        self.get_data('/learn-more')
+
+    def test_get_login_page(self):
+        # WHEN attempting to get the login page
+        # THEN receive an OK response code from the server
+        self.get_data('/login')
+
+    def test_get_signup_page(self):
+        # WHEN attempting to get the signup page
+        # THEN receive an OK response code from the server
+        self.get_data('/signup')
+
+    def test_get_recover_page(self):
+        # WHEN attempting to get the signup page
+        # THEN receive an OK response code from the server
+        self.get_data('/recover')
+
+    def test_get_programs_page(self):
+        # WHEN attempting to get the programs page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/programs')
+
+    def test_get_achievements_page(self):
+        # WHEN attempting to get the achievements page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/my-achievements')
+
+    def test_get_profile_page(self):
+        # WHEN attempting to get the profile page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/my-profile')
+
+    def test_get_landing_page(self):
+        # WHEN attempting to get the landing page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/landing-page')
+
     def test_get_admin_page(self):
         # WHEN attempting to get the admin page
         # THEN receive an OK response code from the server
@@ -539,6 +594,69 @@ class TestAuth(AuthHelper):
         self.user['email'] = new_email
         self.user['verify_token'] = body['token']
 
+    def test_invalid_change_language(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        # WHEN trying to update the profile with an invalid language
+        body = {
+            'email': self.user['email'],
+            'language': 'abc',
+            'keyword_language': self.user['keyword_language']
+        }
+        # THEN receive an invalid response code from the server
+        self.post_data('profile', body, expect_http_code=400)
+
+    def test_valid_change_language(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        # WHEN trying to update the profile with a valid language
+        body = {
+            'email': self.user['email'],
+            'language': 'nl',
+            'keyword_language': 'nl'
+        }
+        # THEN receive a valid response code from the server
+        self.post_data('profile', body, expect_http_code=200)
+
+        # WHEN trying to retrieve the current profile
+        profile = self.get_data('profile')
+        # THEN verify that the language is successfully changed
+        self.assertEqual(profile['language'], body['language'])
+
+    def test_invalid_keyword_language(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        # WHEN trying to update the profile with an invalid keyword language
+        invalid_keyword_language = [
+            'nl',
+            123,
+            'panda'
+        ]
+
+        body = {
+            'email': self.user['email'],
+            'language': 'en'
+        }
+        for invalid_lang in invalid_keyword_language:
+            body['keyword_language'] = invalid_lang
+            # THEN receive an invalid response code from the server
+            self.post_data('profile', body, expect_http_code=400)
+
+    def test_valid_keyword_language(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        # WHEN trying to update the profile with a valid keyword language
+        body = {
+            'email': self.user['email'],
+            'language': 'nl',
+            'keyword_language': 'nl'
+        }
+        # THEN receive a valid response code from the server
+        self.post_data('profile', body, expect_http_code=200)
 
     def test_invalid_recover_password(self):
         # GIVEN an existing user
@@ -752,7 +870,7 @@ class TestProgram(AuthHelper):
         saved_program = saved_programs[0]
         for key in program:
             # WHEN we create a program an achievement is achieved, being in the response but not the saved_program
-            if key != "achievements":
+            if key != "achievements" and key != "message":
                 self.assertEqual(program[key], saved_program[key])
 
     def test_invalid_make_program_public(self):
@@ -806,7 +924,7 @@ class TestProgram(AuthHelper):
         self.given_fresh_user_is_logged_in()
         # WHEN requesting a public program
         # THEN receive an OK response code from the server
-        self.get_data('hedy/1/' + program_id)
+        self.get_data('hedy/1/' + program_id, expect_http_code=200)
 
     def test_valid_make_program_private(self):
         # GIVEN a logged in user with at least one public program
