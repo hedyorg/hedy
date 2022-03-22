@@ -137,16 +137,11 @@ def routes(app, database, achievements):
         Class = DATABASE.get_class (class_id)
         if not Class or Class['teacher'] != user['username']:
             return gettext(u'no_such_class'), 404
-
-        print(user)
-        print(class_id)
-
         DATABASE.delete_class(Class)
-        print("Klas verwijderd!")
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "end_of_semester")
         if achievement:
             return {'achievement': achievement}, 200
-        return '', 200
+        return {}, 200
 
     @app.route('/class/<class_id>/prejoin/<link>', methods=['GET'])
     def prejoin_class (class_id, link):

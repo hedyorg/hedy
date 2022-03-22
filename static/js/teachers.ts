@@ -49,18 +49,15 @@ export function rename_class(id: string, class_name_prompt: string, class_name_e
 }
 
 export function delete_class(id: string) {
-    console.log("Hier komen we!");
     $.ajax({
       type: 'DELETE',
       url: '/class/' + id,
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-        console.log("Verwijderd!");
       if (response.achievement) {
         showAchievements(response.achievement, false, '/for-teachers');
       } else {
-          console.log("En we gaan door...");
         window.location.pathname = '/for-teachers';
       }
     }).fail(function(err) {
