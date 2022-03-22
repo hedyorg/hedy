@@ -5,36 +5,35 @@
       </a>
     </div>
     {% block menu %}
-    {% for item in main_menu_entries() %}
-        <a class="menubar-btn {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} hover:bg-blue-600" href="{{item.href}}">
-          {{ item.caption }}
-        </a>
-    {% endfor %}
+    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'start' %}border-white{% else %}border-transparent{% endif %}" href="/start">{{_('nav_start')}}</a>
+    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'hedy' %}border-white{% else %}border-transparent{% endif %}" href="/hedy">{{_('nav_hedy')}}</a>
+    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'explore' %}border-white{% else %}border-transparent{% endif %}" href="/explore">{{_('nav_explore')}}</a>
+    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'learn-more' %}border-white{% else %}border-transparent{% endif %}" href="/learn-more">{{_('nav_learn_more')}}</a>
     {% if username %}
-      <a class="menubar-btn hover:bg-blue-600 ltr:ml-auto rtl:mr-auto {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{auth.program_header}}</a>
+      <a class="menubar-btn hover:bg-blue-600 ltr:ml-auto rtl:mr-auto {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{_('program_header')}}</a>
       <div class="dropdown relative z-40" style="display: flex;">
         <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="/my-profile">
           <span class="fas fa-fw fa-user"></span> {{username}}
         </a>
         <ul class="dropdown-menu absolute hidden text-white rounded-lg border-black bg-blue-400 list-none ltr:ml-0 rtl:mr-0 ltr:right-0 rtl:left-0 mt-12 ltr:mr-4 rtl:ml-4" style="border-width: 1px; width: max-content;">
           <a class="no-underline" href="/my-achievements">
-              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span> {{auth.my_achievements}}</li>
+              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span> {{_('my_achievements')}}</li>
           </a>
           <a class="no-underline" href="/my-profile">
-              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span> {{auth.account}}{% if user_messages > 0 %} ({{ user_messages }}){% endif %}</li>
+              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span> {{_('my_account')}}{% if user_messages > 0 %} ({{ user_messages }}){% endif %}</li>
           </a>
           {% if is_teacher %}
               <a class="no-underline" href="/for-teachers">
-                  <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span> {{auth.for_teachers}}</li>
+                  <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span> {{_('for_teachers')}}</li>
               </a>
           {% endif %}
           <a class="no-underline" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();">
-              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span> {{auth.logout}}</li>
+              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span> {{_('logout')}}</li>
           </a>
         </ul>
       </div>
     {% else %}
-      <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{auth.login}}</a>
+      <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{_('login')}}</a>
     {% endif %}
     {% if not username or not 'language' in user_data %}
       <div class="dropdown inline-block relative {% if not username %}ltr:ml-auto rtl:mr-auto{% endif %} py-2 z-40">
@@ -43,7 +42,7 @@
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
           </button>
           <ul class="dropdown-menu absolute hidden text-white rounded-lg border-black bg-blue-400 mt-2 pt-1 list-none ltr:ml-0 rtl:mr-0 ltr:right-0 rtl:left-0 w-48" style="border-width: 1px;">
-              <li class="p-2"><input id="search_language" placeholder="{{ui.search}}" class="border-2 border-black text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></li>
+              <li class="p-2"><input id="search_language" placeholder="{{_('search')}}" class="border-2 border-black text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></li>
             {% for lang in other_languages() %}
                 <a class="no-underline" href="#" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();"><li class="hover:bg-blue-600 text-white py-2 px-4 block rounded-lg language">{{ lang.sym }}</li></a>
             {% endfor %}

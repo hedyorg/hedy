@@ -19,25 +19,24 @@ class TestsLevel4(HedyTester):
 
 
   # print tests
-  def test_print(self):
-    code = textwrap.dedent("""\
-    print 'hallo wereld!'""")
-    expected = textwrap.dedent("""\
-    print(f'hallo wereld!')""")
+  def test_print_quoted_string(self):
+    code = "print 'hallo wereld!'"
+    expected = "print(f'hallo wereld!')"
 
-    self.single_level_tester(code=code, expected=expected)
-  def test_print_comma(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet ,'""")
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'ik heet ,')""")
     self.multi_level_tester(
       code=code,
-      max_level=10,
+      max_level=17,
+      expected=expected)
+
+  def test_print_comma(self):
+    code = "print 'ik heet ,'"
+    expected = "print(f'ik heet ,')"
+    self.multi_level_tester(
+      code=code,
+      max_level=17,
       expected=expected
     )
+
   def test_print_two_spaces(self):
     code = "print        'hallo!'"
 
@@ -337,12 +336,11 @@ class TestsLevel4(HedyTester):
 
   def test_forward_ask(self):
     code = textwrap.dedent("""\
-    afstand is ask 'hoe ver dan?'
-    forward afstand""")
-    expected = textwrap.dedent("""\
-    afstand = input(f'hoe ver dan?')
-    t.forward(afstand)
-    time.sleep(0.1)""")
+      afstand is ask 'hoe ver dan?'
+      forward afstand""")
+    expected = HedyTester.dedent(
+      "afstand = input(f'hoe ver dan?')",
+      HedyTester.forward_transpiled('afstand'))
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,

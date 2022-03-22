@@ -30,6 +30,7 @@ interface User {
 interface UserForm {
   username?: string;
   email?: string;
+  token?: string;
   password?: string;
   birth_year?: string;
   language?: string,
@@ -43,18 +44,12 @@ interface UserForm {
   old_password?: string;
 }
 
-if (!(window as any).AuthMessages) {
-  throw new Error('On a page where you load this JavaScript, you must also load the "client_messages.js" script');
-}
-
 export const auth = {
-  texts: AuthMessages,
   profile: undefined as (Profile | undefined),
   reset: undefined as (Record<string, string> | undefined),
   entityify: function (string: string) {
       return string.replace (/&/g, '&amp;').replace (/</g, '&lt;').replace (/>/g, '&gt;').replace (/"/g, '&quot;').replace (/'/g, '&#39;').replace (/`/g, '&#96;');
    },
-  emailRegex: /^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/,
   redirect: function (where: string) {
     where = '/' + where;
     window.location.pathname = where;
@@ -64,34 +59,19 @@ export const auth = {
       auth.redirect ('login');
     });
   },
-  destroy: function () {
-    modal.confirm (auth.texts['are_you_sure'], function () {
+  destroy: function (confirmation: string) {
+    modal.confirm (confirmation, function () {
       $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
         auth.redirect ('');
       });
     });
   },
-  destroy_public: function () {
-    modal.confirm (auth.texts['are_you_sure'], function () {
+  destroy_public: function (confirmation: string) {
+    modal.confirm (confirmation, function () {
       $.ajax ({type: 'POST', url: '/auth/destroy_public'}).done (function () {
         auth.redirect ('my-profile');
       });
     });
-  },
-  error: function (message: string, element?: string | null, id?: string) {
-    $ (id || '#error').html (message);
-    $ (id || '#error').css ('display', 'block');
-    if (element) $ ('#' + element).css ('border', 'solid 1px red');
-  },
-  clear_error: function (id?: string) {
-    $ (id || '#error').html ('');
-    $ (id || '#error').css ('display', 'none');
-    $ ('form *').css ('border', '');
-  },
-  success: function (message: string, id?: string) {
-    $ ('#error').css ('display', 'none');
-    $ (id || '#success').html (message);
-    $ (id || '#success').css ('display', 'block');
   },
   submit: function (op: string) {
     const values: UserForm = {};
@@ -129,14 +109,9 @@ export const auth = {
       }).done (function () {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin({"teacher": false});
+        afterLogin({"first_time": true});
       }).fail (function (response) {
-        auth.clear_error();
-        if (response.responseText) {
-          auth.error(response.responseText);
-        } else {
-          auth.error(auth.texts['ajax_error']);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
@@ -151,12 +126,7 @@ export const auth = {
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
         afterLogin({"teacher": response['teacher']});
       }).fail (function (response) {
-        auth.clear_error();
-        if (response.responseText) {
-           modal.alert(response.responseText, 3000, true);
-        } else {
-          modal.alert(auth.texts['ajax_error'], 3000, true);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
@@ -176,86 +146,75 @@ export const auth = {
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
         if (response.reload) {
-          modal.alert(auth.texts['profile_updated_reload'], 2000, false);
+          modal.alert(response.message, 2000, false);
           setTimeout (function () {location.reload ()}, 2000);
         } else {
-          modal.alert(auth.texts['profile_updated'], 3000, false);
+          modal.alert(response.message, 3000, false);
         }
       }).fail (function (response) {
-        if (response.responseText) {
-          modal.alert(response.responseText, 3000, true);
-        } else {
-          modal.alert(auth.texts['ajax_error'], 3000, true);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
     if (op === 'change_password') {
-      const payload = {old_password: values.old_password, password: values.password, password_repeat: values.password_repeat};
+      const payload = {
+        old_password: values.old_password,
+        password: values.password,
+        password_repeat: values.password_repeat
+      };
 
-      auth.clear_error ('#error-password');
       $.ajax ({
         type: 'POST',
         url: '/auth/change_password',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
-      }).done (function () {
-        modal.alert(auth.texts['password_updated'], 3000, false);
+      }).done (function (response) {
+        modal.alert(response.responseText, 3000, false);
         $ ('#old_password').val ('');
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
-        if (response.responseText) {
-           modal.alert(response.responseText, 3000, true);
-        } else {
-          modal.alert(auth.texts['ajax_error'], 3000, true);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
     if (op === 'recover') {
-      const payload = {username: values.username};
-
-      auth.clear_error ();
+      const payload = {
+        username: values.username
+      };
       $.ajax ({
         type: 'POST', url: '/auth/recover',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
-      }).done (function () {
-        auth.success (auth.texts['sent_password_recovery']);
-        $ ('#username').val ('');
+      }).done (function (response) {
+        modal.alert(response.message, 3000, false);
+        $('#username').val('');
       }).fail (function (response) {
-        if (response.responseText) {
-          return auth.error(response.responseText);
-        } else {
-          auth.error(auth.texts['ajax_error']);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
     if (op === 'reset') {
       const payload = {
-        username: auth.reset?.['username'],
-        token: auth.reset?.['token'],
+        username: values.username,
+        token: values.token,
         password: values.password,
         password_repeat: values.password_repeat
       };
 
-      auth.clear_error ();
-      $.ajax ({type: 'POST', url: '/auth/reset', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        modal.alert(auth.texts['password_resetted'], 2000, false);
-        $ ('#password').val ('');
-        $ ('#password_repeat').val ('');
-        delete auth.reset;
+      $.ajax ({
+        type: 'POST', url: '/auth/reset',
+        data: JSON.stringify (payload),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function (response) {
+        modal.alert(response.message, 2000, false);
+        $('#password').val('');
+        $('#password_repeat').val('');
         setTimeout(function (){
           auth.redirect ('login');
         }, 2000);
       }).fail (function (response) {
-        if (response.responseText) {
-          modal.alert(response.responseText, 3000, true);
-        } else {
-          modal.alert(auth.texts['ajax_error'], 3000, true);
-        }
+        modal.alert(response.responseText, 3000, true);
       });
     }
 
@@ -265,28 +224,24 @@ export const auth = {
         personal_text: $('#personal_text').val() ? $('#personal_text').val():  undefined,
         favourite_program: $('#favourite_program').val() ? $('#favourite_program').val():  undefined
       }
-
       $.ajax ({
         type: 'POST',
         url: '/auth/public_profile',
         data: JSON.stringify(data),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
-        auth.success (auth.texts['public_profile_updated']);
+        modal.alert(response.message, 3000, false);
         if (response.achievement) {
           showAchievements(response.achievement, false, "");
         }
         $('#public_profile_redirect').show();
       }).fail (function (response) {
-        if (response.responseText) {
-          return auth.error(response.responseText);
-        } else {
-          auth.error(auth.texts['ajax_error']);
-        }
+        return modal.alert(response.responseText, 3000, true);
       });
     }
   },
-  markAsTeacher: function (username: string, is_teacher: boolean) {
+  markAsTeacher: function (checkbox: any, username: string, is_teacher: boolean) {
+    $(checkbox).prop('checked', false);
     let text = "Are you sure you want to remove " + username + " as a teacher?";
     if (is_teacher) {
       text = "Are you sure you want to make " + username + " a teacher?";
@@ -298,23 +253,29 @@ export const auth = {
         data: JSON.stringify({username: username, is_teacher: is_teacher}),
         contentType: 'application/json; charset=utf-8'
       }).done(function () {
+        $(checkbox).prop('checked', true);
         modal.alert(['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join(' '), 2000, false);
-      }).fail(function (error) {
-        console.log(error);
+      }).fail(function () {
         modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
       });
     });
+
   },
 
+  // Todo TB Feb 2022 -> Re-write part of this functionality to the back-end as well (separate PR from #2101)
   changeUserEmail: function (username: string, email: string) {
     modal.prompt ('Please enter the corrected email', email, function (correctedEmail) {
       if (correctedEmail === email) return;
-      if (! correctedEmail.match (auth.emailRegex)) return modal.alert ('Please enter a valid email.', 2000, true);
-      $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
+      $.ajax ({
+        type: 'POST',
+        url: '/admin/changeUserEmail',
+        data: JSON.stringify ({username: username, email: correctedEmail}),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
         location.reload ();
-      }).fail (function (error) {
-        console.log (error);
-        modal.alert (['Error when changing the email for User', username].join (' '), 2000, true);
+      }).fail (function () {
+        // Todo TB -> Remove hard-coded string
+        modal.alert (['Error when changing the email for user', username].join (' '), 2000, true);
       });
     });
   },
@@ -328,46 +289,6 @@ if ($ ('#country')) {
     html += '<option value="' + code + '">' + countries [code] + '</option>';
   });
   $ ('#country').html (html);
-}
-
-$ ('.auth input').get ().map (function (el) {
-  // Clear red borders if input was marked from a previous error.
-  el.addEventListener ('input', () => auth.clear_error());
-});
-
-// We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
-// Todo TB Feb 2022 -> Why do we do this ?!
-// This request returns A LOT of front-end errors, something we really really don't want
-// It isn't relevant to the front-end if we are logged in as the back-end will take care of that
-// We have to do some deep clean-up here to make the code understandable, readable and efficient
-$.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-   if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
-   auth.profile = response;
-});
-
-if (window.location.pathname === '/reset') {
-  const query = window.location.search.slice (1).split ('&');
-  const params: Record<string, string> = {};
-  query.map (function (item) {
-    const split = item.split ('=');
-    params [split [0]] = decodeURIComponent (split [1]);
-  });
-  // If we don't receive username and token, the redirect link is invalid. We redirect the user to /recover.
-  if (! params['username'] || ! params['token']) auth.redirect ('recover')
-  else auth.reset = params;
-}
-
-if (window.location.pathname === '/signup') {
-  const login_username = localStorage.getItem ('hedy-login-username');
-  if (login_username) {
-    localStorage.removeItem ('hedy-login-username');
-    if (login_username.match ('@')) $ ('#email').val (login_username);
-    else                            $ ('#username').val (login_username);
-  }
-  const redirect = localStorage.getItem('hedy-save-redirect');
-  if (redirect && redirect.includes('invite')) {
-    $ ('#is_teacher_div').hide();
-  }
 }
 
 $("#language").change(function () {
@@ -400,20 +321,16 @@ async function afterLogin(loginData: any) {
   const savedProgram = savedProgramString ? JSON.parse(savedProgramString) : undefined;
 
   if (savedProgram) {
-    await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3]);
+    await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3], savedProgram[4]);
     localStorage.removeItem('hedy-first-save');
-
-    const redirect = getSavedRedirectPath();
-    if (redirect) {
-      return auth.redirect(redirect);
-    }
+    return auth.redirect('programs');
   }
 
   const joinClassString = localStorage.getItem('hedy-join');
   const joinClass = joinClassString ? JSON.parse(joinClassString) : undefined;
   if (joinClass) {
     localStorage.removeItem('hedy-join');
-    return join_class(joinClass.link, joinClass.name);
+    return join_class(joinClass.id, joinClass.name);
   }
 
   const redirect = getSavedRedirectPath();
@@ -421,10 +338,15 @@ async function afterLogin(loginData: any) {
     return auth.redirect(redirect);
   }
 
+  // If the user logs in for the first time -> redirect to the landing-page after signup
+  if (loginData['first_time']) {
+    return auth.redirect('landing-page');
+  }
   // If the user is a teacher -> re-direct to for-teachers page after login
   if (loginData['teacher']) {
     return auth.redirect('for-teachers');
   }
+  // Otherwise, redirect to the programs page
   auth.redirect('programs');
 }
 

@@ -1,83 +1,128 @@
 1:
-    intro_text: |-
-        Καλωσήρθες στη Hedy! Στο επίπεδο 1 μπορείς να χρησιμοποιήσεις τις εντολές `print`, `ask`, και `echo`.
-        Στην αριστερή μπάρα μπορείς να δεις όλες τις εντολές του επιπέδου 1.
+    intro_text: |
+        Καλωσήρθες στη Hedy! Στο επίπεδο 1 μπορείς να χρησιμοποιήσεις τις εντολές `{print}`, `{ask}` και`{echo}`.
 
-        Πάτησε το μπλε κουμπί και ο κώδικας θα πληκτρολογηθεί για σένα.
+        Για παράδειγμα, μπορείς να εμφανίσεις κείμενο στην οθόνη χρησιμοποιώντας την `{print}`. Μπορείς να δεις ένα παράδειγμα 
+        με απόσπασμα κώδικα στα αριστερά.
 
-        Δοκίμασε και εσύ τον κώδικα πατώντας το πράσινο κουμπί 'Εκτέλεσε τον κώδικα' κάτω από το αριστερό προγραμματιστικό πεδίο.
-
-        Δεν ξέρεις τί να δημιουργήσεις; Στις επόμενες καρτέλες θα βρεις μερικές ιδέες για το τί θα δημιουργήσεις
+        Πάτησε το πράσινο κουμπί και ο κώδικας θα πληκτρολογηθεί για σένα.
+        Δοκίμασε και εσύ τον κώδικα πατώντας το πράσινο κουμπί 'Εκτέλεσε κώδικα' κάτω από το αριστερό προγραμματιστικό πεδίο.
     start_code: 'print γειά σου κόσμε!'
     commands:
     -   name: 'print'
         explanation: 'Εμφάνισε κάτι με την `print`.'
-        example: 'Παράδειγμα: print Γειά, καλωσήλθες στη Hedy!'
-        demo_code: 'print Γειά, καλωσήλθες στη Hedy!'
+        example: 'Παράδειγμα: print Γεια, καλωσήλθες στη Hedy!'
+        demo_code: 'print Γεια, καλωσήλθες στη Hedy!'
     -   name: 'ask'
         explanation: 'Ρώτησε κάτι με την `ask`.'
-        example: 'Παράδειγμα: ask Ποιό είναι το αγαπημένο σου χρώμα;'
-        demo_code: 'ask Ποιό είναι το αγαπημένο σου χρώμα;'
+        example: 'Παράδειγμα: ask Ποιο είναι το αγαπημένο σου χρώμα;'
+        demo_code: 'ask Ποιο είναι το αγαπημένο σου χρώμα;'
     -   name: 'echo'
-        explanation: 'Eπανάλαβε κάτι χρησιμποιώντας την `echo`.'
+        explanation: 'Eπανάλαβε κάτι χρησιμοποιώντας την `{echo}`.'
         example: 'Παράδειγμα: echo ώστε το αγαπημένο σου χρώμα είναι το '
         demo_code: |-
-            ask Ποιό είναι το αγαπημένο σου χρώμα;
-            echo ώστε το αγαπημένο σου χρώμα είναι το 
+            {ask} Ποιο είναι το αγαπημένο σου χρώμα;
+            {echo} ώστε το αγαπημένο σου χρώμα είναι το
+    -   name: '{print} emojis'
+        explanation: εμφάνιση ενός emoji με `{print}`
+        example: 'Παράδειγμα: {print} 🙋‍ 🌍 ❗'
+        demo_code: '{print} 🙋 🌍 ❗'
+    -   demo_code: '{forward} 100'
+        name: '{forward}'
+        explanation: Σχεδίασε μια γραμμή με `{forward}`.
+        example: 'Παράδειγμα: {forward} 100'
+    -   name: '{turn}'
+        explanation: στρίψε την χελώνα που σχεδιάζει με `{turn}`
+        example: 'Πααράδειγμα: {turn}'
+        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    example_code: "## Παράδειγμα κώδικα\n```\n{print} Γεια!\n{print} Καλώς ήρθες στη Hedy!\n```\n"
+    intro_text_2: "Μπορείς επίσης να ζητήσεις δεδομένα εισόδου και  να τα επαναλάβεις με μια εντολή  `{echo}`.\nΔοκίμασε τον κώδικα στα αριστερά σου πάλι. \n\nΔεν ξέρεις τι δημιούργησες;  Στις επόμενες καρτέλες θα βρεις ιδέες για προγράμματα προς κατασκευή.\n"
+    example_code_2: "## Παράδειγμα κώδικα\n```\n{ask} Ποιο είναι το όνομά σου;\n{echo} γεια\n```\n"
+    intro_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
 2:
-    intro_text: |-
-        Στο επίπεδο 2 θα μάθουμε κάτι καινούριο. Μπορείς να ονοματίσεις μια λέξη με την `is`.
-        Αν χρησιμοποιήσεις τον κώδικα `name is  Hedy`, μπορείς να χρησιμοποιήσεις το name οπουδήποτε στον κώδικά σου και αυτό θα αντικατασταθεί από τη λέξη Hedy.
+    intro_text: |
+        Στο επίπεδο 2 θα μάθουμε κάτι καινούριο. Μπορείς να ορίσεις μια λέξη με την `is`.  Μπορείς να χρησιμοποιήσεις τη λέξη οπουδήποτε στον κώδικά σου και θα αντικατασταθεί από την Hedy, ως εξής: 
 
-        Σημείωση: Η `ask έχει αλλάξει`, μπορείς να αποθηκεύσεις την απάντηση με ένα όνομα , κάπως έτσι:
+        ```name {is} Χέντι
+        {print} Γεια name
         ```
-        answer is ask Ποιό είναι το όνομά σου;
+
+        Σημείωση: Η `ask` έχει αλλάξει, μπορείς να αποθηκεύσεις την απάντηση με ένα όνομα , κάπως έτσι:
+        ```
+        answer {is} {ask} Ποιο είναι το όνομά σου;
         ```
 
         Η print λειτουργεί όπως και στο επίπεδο 1, και πλέον δεν χρειάζεσαι την `echo`.
-    start_code: 'print γειά σου κόσμε!'
+
+        Μια νέα εντολή  σ' αυτό το επίπεδο είναι η `{sleep}`, η οποία σταματάει το πρόγραμμα για ένα δευτερόλεπτο. Αν πλητρολογήσεις έναν αριθμό μετά την εντολή   `{sleep}`, το πρόγραμμα θα σταματήσει για τόσα δευτερόλεπτα όσα ο αριθμός που έθεσες. 
+        ```
+        {print} Το αγαπημένο μου χρώμα είναι...
+        {sleep} 2
+        {print} πράσινο!
+        ```
+    start_code: 'print γεια σου κόσμε!'
     commands:
-    -   name: 'is'
-        explanation: 'Δώσε ένα όνομα σε μια λέξη για να τη χρησιμοποιήσεις στο πρόγραμμα χρησιμοποιώντας την `is`'
+    -   name: '{is}'
+        explanation: 'Δώσε ένα όνομα σε μια λέξη για να τη χρησιμοποιήσεις στο πρόγραμμα χρησιμοποιώντας την `is`. Μπορείς να επιλέξεις ένα  δικό σου όνομα.'
         example: 'Παράδειγμα:  name is Hedy.'
         demo_code: |-
             name is Hedy
             print καλωσήλθες name
-    -   name: 'ask'
+    -   name: '{ask}'
         explanation: 'Ρώτησε κάτι με την `ask`. Πρόσεξε! Πρέπει να δώσεις στην απάντηση ένα όνομα με την `is`.'
-        example: 'Παράδειγμα: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
+        example: 'Παράδειγμα: color {is} {ask} Ποιο είναι το αγαπημένο σου χρώμα;'
         demo_code: |-
-            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            color {is} {ask} Ποιο είναι το αγαπημένο σου χρώμα;
             print το color είναι το αγαπημένο σου!
+    -   explanation: Ας κάνουμε τη Hedy να σταματήσει για (λίγα) δευτερόλεπτα.
+        name: '{sleep}'
+        example: 'Παράδειγμα: {sleep} 2 '
+        demo_code: "{print} Άσε με να σκεφτώ για ένα δευτερόλεπτο...\n{sleep}\n{print} Χμμ.. Χρειάζομαι ακόμα 3 more δευτερόλεπτα...\n{sleep} 3\n{print} Εύρηκα! Το έχω!"
+    -   explanation: Δώσε ένα όνομα σε έναν αριθμό με την  `{is}`. Μπορείς να επιλέξεις ένα δικό σου όνομα.
+        example: 'Παράδειγμα: angle {is} 90'
+        name: is - turtle
+        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+    intro_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+    example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
+    intro_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
+    example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
 3:
-    intro_text: |-
+    intro_text: |
         Στο επίπεδο 3 μπορείς να δημιουργήσεις μια λίστα. Μπορείς να αφήσεις τον υπολογιστή να επιλέξει κάτι τυχαία από τη λίστα. Αυτό γίνεται με τη χρήση της `at random`.
-
-        ```
-        animals is σκύλος, γάτα, καγκουρό
-        print animals at random
-        ```
-
-        Θα βρεις όλον τον κώδικα του επιπέδου 3 στην αριστερή μπάρα. Υπάρχουν επίσης καρτέλες με ασκήσεις.
-    start_code: 'print γειά σου κόσμε!'
+    start_code: 'print γεια σου κόσμε!'
     commands:
     -   name: 'choose_random'
-        explanation: 'Επίλεξε μια τυχαία λέξη από μια ομάδα με τις `at` και `random`'
+        explanation: 'Επίλεξε μια τυχαία λέξη από μια ομάδα με τις `{at}` και `{random}`'
         example: 'Παράδειγμα: animals is σκύλος, γάτα, καγκουρό.'
         demo_code: |-
             animals is σκύλος, γάτα, καγκουρό
             print animals at random
+    -   name: '{add}'
+        explanation: προσθήκη στοιχείου σε μια λίστα
+        example: 'Παράδειγμα: {add} σκύλος {to_list} animals'
+        demo_code: "animals {is} αγελάδα, γάτα\n{add} σκύλος {to_list} animals"
+    -   name: '{remove}'
+        explanation: αφαίρεση ενός στοιχείου από τη λίστα
+        example: 'Παράδειγμα: {remove} σκύλος {from} animals'
+        demo_code: "animals {is} γάτα, σκύλος, αγελάδα\n{remove} σκύλος {from} animals"
+    example_code: "## Παράδειγμα κώδικα Hedy \n\n```\nanimals {is} σκύλος, γάτα, καγκουρό\n{print} animals {at} {random}\n```\n"
+    intro_text_2: Μπορείς επίσης να προσθέσεις στοιχεία με την `{add}` και να αφαιρέσεις με την `{remove}`.
+    example_code_2: "## Example Hedy Code\n\n```\nanimals {is} σκύλος, γάτα, καγκουρό\n{add} πιγκουίνος {to_list} animals\n{remove} γάτα {from} animals\n{print} animals {at} {random}\n```\n"
 4:
-    start_code: "print 'Γειά σου κόσμε'"
-    intro_text: |-
-        Αλλαγή `print` και `ask` στο επίπεδο 4.Πρέπει να περικλείσεις το κείμενο που θέλεις να εμφανίσεις σε εισαγωγικά.
+    start_code: "print 'Γεια σου κόσμε'"
+    intro_text: |
+        Στο επίπεδο 4  οι εντολές `{ask}` and `{print}` αλλάζουν.
 
-        Αυτό είναι χρήσιμο, επειδή τώρα μπορείς να εμφανίσεις όσες λέξεις θέλεις. Επίσης, τις λέξεις που αποθήκευες με την `is`.
+        Πρέπει να περικλείσεις το κείμενο που θέλεις να εμφανίσεις σε εισαγωγικά.
 
-        Οι περισσότερες γλώσσες προγραμματισμού χρησιμοποιούν εισαγωγικά όταν εμφανίζουν στην οθόνη, οπότε βρισκόμαστε ένα βημα πιο κοντά στον πραγματικό προγραμματισμό!
+        Αυτό είναι χρήσιμο, επειδή τώρα μπορείς να εμφανίσεις όσες λέξεις θέλεις. Επίσης, τις λέξεις που αποθήκευες με την `{is}`.
+
+        Οι περισσότερες γλώσσες προγραμματισμού χρησιμοποιούν εισαγωγικά όταν εμφανίζουν στην οθόνη, οπότε βρισκόμαστε ένα βήμα πιο κοντά στον πραγματικό προγραμματισμό!
 
         ## Οι ασκήσεις γίνονται ολοένα και πιο δύσκολες
-        Θα βρεις τις εντολές στα αριστερά και πάλι, και τις ασκήσεις στις ακόλουθες καρτέλες. Οι ασκήσεις πλέον γίνονται όλο και πιο δύσκολες στις διαδοχικές καρτέλες. Έτσι, είναι καλύτερα να ξεκινήσεις από τα αριστερά με την ιστορία, και να συνεχίσεις προς τα δεξιά για να δυσκολευτείς όλο και περισσότερο.
+        Θα βρεις τις εντολές στα αριστερά και πάλι, και τις ασκήσεις στις ακόλουθες καρτέλες. Οι ασκήσεις πλέον γίνονται όλο και πιο δύσκολες στις διαδοχικές καρτέλες. 
+        Έτσι, είναι καλύτερα να ξεκινήσεις από τα αριστερά με την ιστορία, και να δουλεύεις στα δεξιά, έτσι ώστε να προσπαθείς όλο και περισσότερο.
     commands:
     -   name: 'print'
         explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
@@ -95,25 +140,44 @@
         demo_code: |-
             color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;?'
             print 'το ' color ' είναι το αγαπημένο σου!'
+    example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
+    intro_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
 5:
     start_code: |-
         name is ask 'Ποιό είναι το όνομά σου;'
         if name is Hedy print 'τέλεια!' else print 'έτσι κι έτσι'
-    intro_text: |-
+    intro_text: |
         Οι `ask` και `print` λειτουργούν ακριβώς όπως στο επίπεδο 4.
 
-        Στο επίπεδο 5 υπάρχει κάτι νέο, την εντολή `if`! Με την `if` μπορείς να επιλέξεις ανάμεσα σε δύο διαφορετικές επιλογές.
+        Στο επίπεδο 5 υπάρχει κάτι νέο, η εντολή `if`! Με την `if` μπορείς να διαλέξεις ανάμεσα σε δύο διαφορετικές επιλογές.
 
         ## Παράδειγμα κώδικα Hedy
         ```
-        name is ask 'ποιό είναι το όνομά σου;'
-        if name is Hedy print 'ωραία' else print 'μπου!'
+        name {is} {ask} 'ποιο είναι το όνομά σου;'
+        {if} name {is} Hedy print 'ωραία' else print 'μπου!'
         ```
+
+        Όταν θέλουμε να ελέγξουμε ότι κάτι είναι μέσα σε μια λίστα, μπορούμε τώρα να χρησιμοποιούμε το `in` ανάμεσα στο πράγμα και τη λίστα.
+
+         ## Παράδειγμα κώδικα Hedy
+         ```
+         pretty_colors {is} πράσινο, κίτρινο
+         color {is} {ask} 'Ποιο είναι το αγαπημένο σου χρώμα;'
+         {if} color {in} pretty_colors {print} 'ωραία!' {else} {print} 'μπου'
+         ```
 
         Αυτός ο κώδικας εμφανίζει 'ωραία' αν εισάγεις σαν όνομα το Hedy, και 'μπου!' αν εισάγεις κάτι άλλο.
 
+        ## Υπόδειξη
+         Μερικές φορές ο κώδικας με ένα `{if}` γίνεται μακρύς και δεν χωράει στη γραμμή. <br>Μπορεις να χωρίσεις τον κώδικα σε δύο γραμμές, ξεκινώντας τη δεύτερη γραμμή με ένα `{else}`ως εξής:
+         ```
+         name {is} {ask} 'ποιο είναι το όνομά σου;'
+         {if} name {is} Hedy {print} 'ωραία'
+         {else} {print} 'μπου!'
+         ```
         ## Οι ασκήσεις γίνονται όλο και πιο δύσκολες
-        Επίσης στο επίπεδο 4, οι ασκήσιες στις καρτέλες γίνονται ολοένα και πιο δύσκολες. Οπότε καλό θα είναι να τις κάνεις από τα αριστέρα προς τα δεξιά.
+
+        Επίσης στο επίπεδο 5, οι ασκήσεις στις καρτέλες γίνονται ολοένα και πιο δύσκολες. Οπότε καλό θα είναι να τις κάνεις από τα αριστερά προς τα δεξιά.
     commands:
     -   name: 'print'
         explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
@@ -131,21 +195,42 @@
         demo_code: |-
             color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
+    -   name: '{if} με χελώνα'
+        explanation: Κάνε μια επιλογή με `{if}`
+        example: 'Παράδειγμα: {if} answer {is} far {forward} 100 {else} {forward} 5'
+        demo_code: "answer {is} {ask} 'Πόσο μακρυά πρέπει να περπατήσω;'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    -   name: '{in}'
+        explanation: Έλεγξε τα στοιχεία με `{in}`
+        example: "Παράδειγμα: {if} color {in} pretty_colors {print} 'ωραίο!' {else} {print} 'ωχ'"
+        demo_code: "pretty_colors {is} πράσινο, κίτρινο\ncolor {is} {ask} 'Ποιο είναι το αγαπημένο σου χρώμα;'\n{if} color {in} pretty_colors {print} 'ωραίο!' {else} {print} 'ωχ'"
+    example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+    intro_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+    example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
+    intro_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
+    example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
 6:
     start_code: "print '5 επί 5 ίσον με ' 5 * 5"
-    intro_text: |-
-        Οι `ask`, `print` και `if` είναι ακόμα ίδιες όπως και στα Επίπεδα 5. Το Επίπεδο 6 προσθέτει κάτι καινούριο...Πλέον μπορείς να κάνεις υπολογισμούς.
+    intro_text: |
+        Οι `ask`, `print` και `if` είναι ακόμα ίδιες όπως και στο επίπεδο 5.
+        Αλλά στο επίπεδο 6 μαθαίνεις κάτι καινούριο: πλέον μπορείς να κάνεις υπολογισμούς.
 
-        Το σύν είναι εύκολο, το γράφεις όπως στα μαθηματικά: για παράδειγμα `5+5`. Το πλην επίσης λειτουργεί μια χαρά, έτσι `5-5`.
+        Το συν είναι εύκολο, το γράφεις όπως στα μαθηματικά: για παράδειγμα `5+5`. Το πλην επίσης λειτουργεί μια χαρά, έτσι `5-5`.
 
-        Το επί είναι λίγο διαφορετικό, επειδή δεν υπάρχει σύμβολο επί στο πληκτρολόγιο σου. Απλά ψάξε και θα δεις, δεν υπάρχει!
+        Το επί είναι λίγο διαφορετικό, επειδή δεν υπάρχει σύμβολο επί στο πληκτρολόγιό σου. Απλά ψάξε και θα δεις, δεν υπάρχει!
         Αυτός είναι ο λόγος που πολλαπλασιάζουμε με τον αστερίσκο στο πλήκτρο 8: `5 * 5`. Διάβαζε το σαν "5 φορές το 5" για να το θυμάσαι πιο εύκολα.
-        ## Παράδειγμά κώδικα Hedy
+        ## Παράδειγμα κώδικα Hedy
         ```
         print '5 συν 5 κάνει ' 5 + 5
         print '5 πλην 5 κάνει ' 5 - 5
         print '5 επί 5 κάνει ' 5 * 5
         ```
+
+        Μπορούμε επίσης να κάνουμε μια αλλαγή στην αποθήκευση! Μπορείς τώρα να χρησιμοποιήσεις `=` αντί για`{is}` όταν αποθηκεύεις ένα όνομα ή έναν αριθμό, ως εξής:
+
+         ```
+         name = Hedy
+         answer = 20 + 4
+         ```
     commands:
     -   name: 'print'
         explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
@@ -164,12 +249,14 @@
             angles = ask 'How many angles?'
             angle = 360 / angles
             forward 50
+    example_code: "## Example Hedy code\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
+    intro_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+    example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
 7:
     start_code: "repeat 3 times print 'Η Hedy είναι διασκεδαστική!'"
-    intro_text: |-
-        Οι `ask`, `print` και `if` λειτουργούν ακριβώς όπως και στο Επίπεδο 5 και 6.
-        Όμως, το Επίπεδο 7 προσθέτει την εντολή `repeat`. H Repeat (Επανάληψη) μπορεί να χρησιμποιηθεί για να εκτελέσουμε μια γραμμή κώδικα πολλές φορές.
-
+    intro_text: |
+        Οι `ask`, `print` και `if` λειτουργούν ακριβώς όπως και στο επίπεδο 5 και 6.
+        Όμως, το επίπεδο 7 προσθέτει την εντολή `repeat`. H repeat (επανάληψη) μπορεί να χρησιμοποιηθεί για να εκτελέσουμε μια γραμμή κώδικα πολλές φορές.
         ## Παράδειγμα Κώδικα Hedy
         ```
         repeat 3 times print 'H Hedy είναι διασκεδαστική!'
@@ -181,7 +268,7 @@
         demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
     -   name: 'ask'
         explanation: 'Ρώτησε κάτι με την `ask`.'
-        example: "Παράδειγμα: color = ask 'Ποιό είναι το αγαπημένο σου χρώμα;"
+        example: "Παράδειγμα: color = ask 'Ποιο είναι το αγαπημένο σου χρώμα;'"
         demo_code: |-
             color = ask 'Ποιό είναι το αγαπημένο σου χρώμα;?'
             print 'το ' color ' είναι το αγαπημένο σου!'
@@ -196,19 +283,21 @@
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
+    example_code: "## Example Hedy code\n```\n{repeat} 3 {times} {print} 'Hedy {is} fun!'\n```\n"
 8:
     start_code: |-
         repeat 5 times
             print 'Γειά σας παιδιά'
             print 'Αυτό θα εμφανιστεί 5 φορές'
-    intro_text: |-
-        Οι ask και print λειτουργούν ακόμα όπως τις γνωρίζετε. Όμως, οι if και repeat έχουν αλλάξει!
-        Τώρα μπορείτε να εκτελείτε μαζί ομάδες κώδικα, αλλά θα πρέπει να βάλετε εσοχή στον κώδικα. Αυτό σημαίνει να προσθέσετε τέσσερα κενά στην αρχή της γραμμής. Το ίδιο ισχύει όταν θέλετε να δημιουργήσετε ένα μπλοκ μιας γραμμής.
+    intro_text: |
+        Οι ask και print λειτουργούν ακόμα όπως τις γνωρίζεις. Όμως, οι if και repeat έχουν αλλάξει!
+        Τώρα μπορείτε να εκτελείς μαζί ομάδες κώδικα, αλλά θα πρέπει να βάλεις εσοχή στον κώδικα.
+        Αυτό σημαίνει να προσθέσεις τέσσερα κενά στην αρχή της γραμμής. Το ίδιο ισχύει όταν θέλεις να δημιουργήσεις ένα μπλοκ μιας γραμμής.
 
         ## Παράδειγμα κώδικα Hedy
         ```
         repeat 5 times
-            print 'Γειά σας'
+            print 'Γεια σας'
             print 'Αυτό θα επαναληφθεί 5 φορές'
         ```
 
@@ -230,27 +319,32 @@
             else
                 print 'Ουπς!'
                 print 'Η απάντηση είναι 10'
+    -   example: 'Παράγειγμα: σχεδίασε ένα τετράγωνο'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+        name: '`{repeat}` με χελώνα'
+        explanation: '{repeat} πολλές γραμμές'
+    example_code: "## Example Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
 9:
     start_code: |-
         repeat 3 times
-            food = ask 'What do you want?'
-            if food is 'pizza'
-                print 'nice!'
+            food = ask 'Τι θέλεις;'
+            if food is 'πίτσα'
+                print 'ωραία!'
             else
-                print 'pizza is better'
+                print 'η πίτσα είναι καλύτερη!'
     intro_text: |
-        In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
-        In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
-        Give it a try!
+        Σ΄αυτό το επίπεδο όχι μόνον μπορείς να χρησιμοποιήσεις πολλές γραμμές στις εντολές `if` and `repeat`, αλλά μπορέις και να τις τοποθετήσεις μαζί! 
+        Στο παρακάτω παράδειγμα βλέπεις μια εντολή  `if` μέσα σε μια εντολή `repeat`. Μπορεί να χρησιμοποιηθεί και αντίστροφα, επιτέπεται επίσης και ένα `if` μέσα σε ένα `if` και ένα `repeat` μέσα σε ένα `repeat`.
+        Δοκίμασέ το!
 
-        ## Example Hedy code
+        ## Παράδειγμα κώδικα Hedy 
         ```
         repeat 3 times
-            food = ask 'What do you want?'
-            if food is 'pizza'
-                print 'nice!'
+            food = ask 'Τι θέλεις;'
+            if food is 'πίτσα'
+                print 'ωραία!'
             else
-                print 'pizza is better'
+                print 'η πίτσα είναι καλύτερη!'
         ```
 
     commands:
@@ -272,6 +366,7 @@
             repeat 4 times
                 turn 90
                 forward 50
+    example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
 10:
     start_code: |-
         animals is dog, cat, blobfish
@@ -299,38 +394,61 @@
             animals is dog, cat, blobfish
             for animal in animals
               print 'I love ' animal
+    example_code: "## Example Hedy code\n```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
 11:
     start_code: |-
-        for i in range 1 to 10
-            print i
-        print 'Έτοιμοι ή όχι, έρχομαι!'
+        {for} counter {in} {range} 1 {to} 5
+            {print} counter
     intro_text: 'Η `print` λειτουργεί ακριβώς όπως και πριν, όμως η `repeat` τώρα αντικαθίσταται από τη `for`! Θα χρησιμοποιείς `for i in range 1 to 5`, αντί για `repeat 5 times`. Μπορείς επίσης να χρησιμοποιείς το `i` στο πρόγραμμα σου! Θυμήσου να χρησιμοποιείς εσοχές ύστερα από κάθε δήλωση `for` και `if` (Αυτό σημαίνει να ξεκινάς μια πρόταση με 4 κενά)'
     commands:
     -   name: 'repeat'
         explanation: 'αντικαθιστούμε τη `repeat` με τη `for`'
         example: 'for i in range 1 to 10'
-        demo_code: |
-            for i in range 1 to 10
-              print i
-            print 'Έτοιμοι ή όχι, έρχομαι!'
+        demo_code: |-
+            {for} counter {in} {range} 1 {to} 5
+                {print} counter
+    -   name: '{ask}'
+        demo_code: "answer = {ask} 'Πόσο κάνει 5 και 5;'\n{if} answer {is} 10\n    {print} 'Πολύ σωστά!'\n    {print} 'Πράγματι, η απάντηση ήταν  ' answer\nelse\n    {print} 'Λάθος!'\n    {print} 'Η απάντηση είναι 10'"
+        explanation: ζήτα μια απάντηση για ένα  άθροισμα  και έλεγξε αν είναι σωστή. Μπορείς τώρα να εμφανίσεις 2 γραμμές.
+        example: "Παράδειγμα : answer = {ask} 'Πόσο κάνει 5 και 5;'"
+    example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
 12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
     intro_text: |
-        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
-
-        For this level on you will also have to use quotation marks when storing a text with `is`:
+        ## Δεκαδικοί αριθμοί
+        Μέχρι τώρα η Hedy δενεπέτρεπε δεκαδικούς αριθμούς όπως 1.5, αλλά δεν θα το επιτρέψουμε πλέον. Σημείωσε ότι οι υπολογιστές χρησιμοποιούν το `.` για τους δεκαδικούς αριθμούς.
+        ```
+        {print} 'Δύο και μισό συν δύο και μισό είναι...'
+        {print} 2.5 + 2.5
+        ```
+        ## Όλα τα κείμενα πρέπει να βρίσκονται μέσα σε εισαωγικά
+        Από αυτό το επίπεδο και μετά πρέπει να χρησιμοποιείς τα εισαγωγικά όταν αποθηκεύεις κείμενο με `=`:
 
         ```
-        name = 'Hedy'
-        print 'Hello ' name
+        name = 'Hedy το Ρομπότ'
+        {print} 'Γεια' name
         ```
+        ## Όλα τα στοιχέια στις λίστες θέλουν εισαγωγικά επίσης
+        Οι λίστες είναι κείμενα, άρα θέλουν επίσης εισαγωγικά. Πρόσεξε ότι κάθε στοιχείο στη λίστα έχει εισαγωγικά. 
+        Αυτό σου επιτρέπει να αποθηκέυσεις δυο λέξεις ως ένα στοιχείο, πχ 'Iron Man'.
 
-        For numbers, you do not use quotation marks in the `is`:
+        ```
+        superheroes = 'Spiderman', 'Batman', 'Iron Man'
+        {print} superheroes {at} {random}
+        ```
+        ## Όλο το κείμενο μετά τις συγκρίσεις `{if}` comparisons χρειάζονται επίσης εισαγωγικά
+        ```
+        name = {ask} 'Ποιο είναι το όνομά σου;'
+        {if} name = 'Hedy το Ρομπότ'
+            {print} 'Γεια σου!'
+        ```
+        ## Οι αριθμοί δεν χρειάζονται εισαγωγικά
+        Για τους αριθμούς, δεν χρησιμοποιούνται εισαγωγικά στο `=`:
         ```
         score = 25
-        print 'You got ' score
+        {print} 'Έφερες ' score
         ```
 
     commands:
@@ -345,11 +463,28 @@
         explanation: "Storing a calculation with decimals"
         example: "antwoord = 2.5 + 2.5"
         demo_code: |
-            answer = 2.5 + 2.5
-            print 'Calculate away!'
-            print 'Two and a half plus two and a half is...'
-            print answer
+            name = 'Hedy τοΡομπότ'
+            {print} 'Γεια ' name
 
+    -   example: name = 'Hedy'
+        demo_code: "name = {ask} 'Ποιος είσαι;'\n{if} name = 'Hedy'\n    {print} 'Γεια σου!'\n"
+        name: εισαγωγικά μετά μια σύγκριση {if}
+        explanation: Κείμενο σε εισαγωγικά μετά το {if}
+    -   name: εισαγωγικά σε λίστα
+        explanation: Μια λίστα με εισαγωγικά
+        demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
+        example: name = 'Hedy', 'Felienne'
+    example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+    example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
+    example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
+    intro_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
+    intro_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+    example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+    intro_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
+    example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
+    intro_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
+    intro_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
+    example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
 13:
     start_code: |-
         name = ask 'what is your name?'
@@ -403,6 +538,7 @@
 #            # Δημιουργήθηκε με τη Hedy
 #            # Δεν κάνει τίποτα άλλο εκτός από το να εμφανίζει Γειά
 #            print('γειά!')
+    example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
 14:
     start_code: |-
         age = ask 'Πόσο χρονών είσαι;'
@@ -410,7 +546,7 @@
             print 'Είσαι νεότερη από εμένα!'
         else
             print 'Είσαι μεγαλύτερη από εμένα!'
-    intro_text: Θα μάθουμε μερικά ακόμα νέα πράγματα! Ίσως να τα γνωρίζεις ήδη από τα μαθηματικά, τα `<` και `>`. Το `<` ελέγχει αν ο πρώτος αριθμός είναι μικρότερος από το δεύτερο, πχ `4 < 5`. To `>` ελέγχει αν ο πρώτος αριθμός είναι μεγαλύτερος από το δεύτερο, πχ `6 > 5`.
+    intro_text: "Θα μάθουμε μερικά ακόμα νέα πράγματα! Ίσως να τα γνωρίζεις ήδη από τα μαθηματικά, τα `<` και `>`. \nΤο `<` ελέγχει αν ο πρώτος αριθμός είναι μικρότερος από τον δεύτερο, πχ `age < 12` ελέγχει αν το  `age` είναι μικρότερο από  12.\nΑν θέλεις να ελέγξεις αν ο πρώτος αριθμός είναι μικρότερος ή ίσος από τον δεύτερο, μπορείς να χρησιμοποιήσεις  `<=`, πχ`age <= 11`.\nΤο `>` ελέγχει αν ο πρώτος αριθμός είναι μεγαλύτερος από τον δεύτερο, πχ `points > 10` ελέγχει αν `points` είναι μεγαλύτερο  από 10.\nΑν θέλεις να ελέγξεις αν ο πρώτος αριθμός είναι μεγαλύτερος ή ίσος από τον δεύτερο, μπορείς να χρησιμοποιήσεις`>=`, πχ `points >= 11`.\nΧρησιμοποιείς αυτές τις συγκρίσεις μέσα σε ένα  `{if}`, ως εξής: \n```\nage = {ask} 'Πόσων ετών είσαι;'\n{if} age > 12\n    {print} 'Είσαι μεγαλύτερος από μένα!'\n```\n\nΑπό υτό το επίπεδο και μετά, αν θέλεις να συγκρίνεις ακριβώς, μπορείς να χρησιμοποιείς 2 σύμβολα ίσον. Αυτό είναι που κάνουν και οι περισσότερες γλώσσες προγραμματισμού: \n```\nname = {ask} 'Ποιο είναι το όνομά σου;'\n{if} name == 'Hedy'\n    {print} 'Είσαι τέλεια!'\n```\n\nΜπορείς επίσηςνα συγκρίνεις αν κάτι *δεν* έιναι ίσο με κάτι 'αλλο χρησιμοποιώντας το `!=`ως εξής:\n```\nname = {ask} 'Ποιο είναι το όνομά σου;'\n{if} name != 'Hedy'\n    {print} 'Δεν είσαι η Hedy'\n```\n"
     commands:
     -   name: Μικρότερο
         explanation: Χρησιμοποιούμε το `<` για να ελέγξουμε αν ο πρώτος αριθμός είναι μικρότερος από το δεύτερο αριθμό. Για παράδειγμα, αν θέλουμε να δούμε αν μια μεταβλητή είναι μικρότερη από 15, χρησιμοποιούμε `variable < 15`
@@ -426,13 +562,34 @@
             age = ask 'Πόσο χρονών είσαι;'
             if age > 13
                 print 'Είσαι μεγαλύτερη από εμένα!'
+    -   name: Ισότητα
+        explanation: Χρησιμοποιούμε το σύμβολο  `==` για να ελέγξουμε αν 2 πράματα είναι ίδια.
+        example: 'Για παράδειγμα: answer == 25'
+        demo_code: "answer = {ask} 'Πόσο κάνει 5 x 5;'\n{if} answer == 25\n    {print} 'Πολύ σωστά!'"
+    -   explanation: 'Χρησιμοποιούμε το σύμβολο  `!=` για να ελέγξουμε αν δυο πράγματα δεν είναι ίδια. '
+        name: Ανισότητα
+        example: 'Για παράδειγμα: answer != 25'
+        demo_code: "answer = {ask} 'Πόσο κάνει 5 x 5;'\n{if} answer != 25\n    {print} 'Δεν είναι σωστό!'"
+    -   demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+        explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+        example: 'For example: age <= 12'
+        name: Μικρότερο ή ίσο
+    -   name: Bigger or equal
+        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+        example: 'For example: age >= 14'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+    example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+    intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
+    example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
+    intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+    example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
 15:
     start_code: |-
         answer = 0
         while answer != 25
             answer = ask 'Πόσο κάνει 5 φορές το 5;'
         print 'Δόθηκε η σωστή απάντηση'
-    intro_text: Θα μάθουμε ένα νέο βρόχο, το βρόχο `while`! Συνεχίζουμε το βρόχο για όσο η πρόταση είναι αληθής/ορθή! Έτσι στο παράδειγμα κώδικα, συνεχίζουμε ώσπου να δοθεί μια σωστή απάντηση. Αν δε δοθεί ποτέ η σωστή απάντηση, ο βρόχος δε θα σταματήσει ποτέ!
+    intro_text: "Θα μάθουμε ένα νέο βρόχο, το βρόχο `while`! Συνεχίζουμε το βρόχο για όσο η πρόταση είναι αληθής/ορθή! \nΜην ξεχάσεις να αλλάξεις την τιμή στον βρόχο.\n\nΈτσι στο παράδειγμα του κώδικα, συνεχίζουμε ώσπου να δοθεί μια σωστή απάντηση. \nΑν δε δοθεί ποτέ η σωστή απάντηση, ο βρόχος δε θα σταματήσει ποτέ!\n"
     commands:
     -   name: Boolean while
         explanation: Μπορούμε να χρησιμοποιήσουμε το βρόχο `while` με το `True` και `False`
@@ -451,11 +608,12 @@
                 print 'Το κάνουμε αυτό ' 3 - count ' ακόμα φορές'
                 count = count + 1
             print 'Τελειώσαμε'
+    example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
 16:
     start_code: |-
         fruit = ['μήλο', 'μπανάνα', 'κεράσι']
         print fruit 
-    intro_text: "Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες. "
+    intro_text: "Θα κάνουμε λίστες με τον τρόπο που ακολουθεί η Python, με αγκύλες γύρω από τις λίστες! Επίσης διατηρούμε τα εισαγωγικά γύρω από κάθε στοιχείο 'οπως μάθαμε σε προηγούμενα επίπεδα. \nΜπορείς επίσης να χρησιμοποιήσεις τις αγκύλες για να υποδείξεις μια θέση μέσα στις λίστες. \n\n```\nfriends = ['Μαρία', 'Κώστας', 'Αλκμήνη']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'ο τυχερός αριθμός του/της' friends[i]\n    {print} 'είναι' lucky_numbers[i]\n```\n"
     commands:
     -   name: 'Αγκύλες γύρω από λίστες'
         explanation: "Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες."
@@ -477,37 +635,50 @@
             fruit = ['μήλο', 'μπανάνα', 'κεράσι']
             random_fruit = fruit[random]
             print random_fruit
+    example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
 17:
     start_code: |-
         for i in range 1 to 10:
             print i
         print 'Έτοιμοι ή όχι, έρχομαι!'
-    intro_text: 'Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.'
+    intro_text: "Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.\n\nΣ' αυτό το επίπεδο μπορείς επίσηςνα χρησιμοποιήσει ςμια νέα εντολή: `{elif}`. 'Η`{elif}` είναι σύντμηση των {else} {if}  και θα το χρειαστείς όταν θέλεις να έχεις 2 (ή περισσότερες!) επιλογές. \nΔοκίμασέ το!\n\nprices = ['1 εκατομμύριο ευρώ', 'μια μηλόπιτα', 'τίποτα']\nyour_price = prices[random]\n{print} 'Κέρδισες ' your_price\n{if} your_price == '1 εκατομμύριο ευρώ' :\n    {print} 'Είσαι πλούσιος!'\n{elif} your_price == 'μια μηλόπιτα' :\n    {print} 'Ωραιότατα, μια μηλόπιτα!'\n{else}:\n    {print} 'Θα έχεις περισσότερη φορά την επόμενη φορά..'\n```\n"
     commands:
     -   name: 'for με :'
         explanation: 'Όταν χρησιμοποιούμε μια `for`, πρέπει να προσθέσουμε ένα `:` ύστερα από τη δήλωση `for`!'
         example: 'for i in range 1 to 10:'
         demo_code: |-
-            for i in range 1 to 12:
-                print i
-            print 'Έτοιμοι ή όχι, έρχομαι!'
+            a = 2
+            {if} a == 1:
+                {print} 'a είναι 1'
+            {elif} a == 2:
+                {print} 'a είναι 2'
+            {else}:
+                {print} 'a δεν είναι 1 ή 2'
     -   name: 'if με :'
         explanation: 'Θα πρέπει να κάνουμε το ίδιο με όλες μας τις δηλώσεις `if`'
         example: "if color is πράσινο:'"
         demo_code: |-
-            color = ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
-            if color is πράσινο:
-                print 'To χρώμα είναι πράσινο'
-            else:
-                print 'Το χρώμα δεν είναι πράσινο'
+            {for} i {in} {range} 1 {to} 12:
+                {print} i
+            {print} 'Έτοιμος ή όχι, έρχομαι!'
     -   name: '(Προαιρετικό) elif'
         explanation: 'Θα σου δείξουμε μια νέα εντολή που επιτρέπεται να χρησιμοποιείς: την `elif`. H `elif` σημαίνει "else if" ( αλλιώς αν ). Θα ξεκινήσουμε ελέγχοντας αν η `if` είναι αληθής. Αν αυτή δεν είναι αληθής, ελέγχουμε την `elif` και αν επίσης δεν είναι αληθής, πηγαίνουμε στην `else`.'
         example: 'elif a is 5:'
         demo_code: |-
-            a = 2
-            if a is 1:
-                print 'a is 1'
-            elif a is 2:
-                print 'το a είναι 2'
-            else:
-                print 'το a δεν είναι 1 ή 2'
+            colour = {ask} 'Ποιο είναι το αγαπημένο σου χρώμα;'
+            {if} colour == 'πράσινο':
+                {print} 'Το αγαπημένο σου χρώμα είναι πράσινο'
+            {else}:
+                {print} 'Το αγαπημένο σου χρώμα δεν είναι πράσινο'
+18:
+    start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
+    commands:
+    -   name: '{print}'
+        example: '{print}'
+        explanation: With `{print}` you need to use parentheses
+        demo_code: "{print}('hi!')"
+    -   demo_code: "naam = 'Hedy'\n{print}('my name is ', naam)"
+        name: '{print} with var'
+        explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+        example: '{print}'
+    intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"

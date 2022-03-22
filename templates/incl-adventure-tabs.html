@@ -1,8 +1,8 @@
       {# TABS #}
       <div id="adventures">
-        <div class="flex flex-row overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2 cursor-pointer">
+        <div class="flex flex-row overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2">
             <div class="tab z-10 tab-selected whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="level">
-                {{ ui.level_title }} {{ level_nr }}
+                {{ _('level_title') }} {{ level_nr }}
             </div>
             {% for adventure in teacher_adventures %}
                 {% if adventure.level == level_nr %}
@@ -18,9 +18,12 @@
                 </div>
               {% endif %}
             {% endfor %}
+            {% if specific_adventure %}
+                <h2 class="z-10 my-0 ml-auto pt-8 text-red-500 text-base">{{ _('specific_adventure_mode')|replace("{adventure}", adventures[0].name) }}</h2>
+            {% endif %}
         </div>
       {# PANES #}
-      <div id="adventures-tab" style="height: 20em;" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
+      <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
         <div data-tabtarget="level">
             <div class="flex flex-row">
               <div class="{% if example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
@@ -62,7 +65,7 @@
                   <div class="{% if assignment.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
                       {{ assignment.text|commonmark }}
                       {% if assignment.short_name == 'end' %}
-                        <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}})">
+                        <input type="submit" class="green-btn h-3/5 mt-4" value="{{ _('go_to_quiz') }}" onclick="hedyApp.load_quiz ({{level_nr}})">
                       {% endif %}
                   </div>
                   {% if assignment.example_code %}

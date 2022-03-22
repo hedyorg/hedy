@@ -1,28 +1,22 @@
-_print_argument: (_SPACE | quoted_text | list_access | var_access | sum)*
+_print_argument: (_SPACE | quoted_text | list_access | print_expression)*
+?print_expression: INT | var_access | error_unsupported_number | expression
 
-command:+= ask_is | ask_equals | list_access_var_equals | list_access_var_is | assign_is | assign_equals | assign_list_is | assign_list_equals -= ask | list_access | list_access_var | assign | assign_list
+command:+= ask | list_access_var | assign -= ask | list_access | list_access_var | assign
 
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
-ask_is: var _SPACE _IS _SPACE _ASK (_SPACE _print_argument)?
-ask_equals: var _EQUALS _ASK (_SPACE _print_argument)?
+ask: var (_SPACE _IS _SPACE | _EQUALS) _ASK (_SPACE _print_argument)?
 
-equality_check_is: textwithoutspaces _SPACE _IS _SPACE (textwithoutspaces | quoted_text)
-equality_check_equals: textwithoutspaces _EQUALS (textwithoutspaces | quoted_text)
+equality_check: textwithoutspaces (_SPACE _IS _SPACE | _EQUALS) (textwithoutspaces | quoted_text)
 
-condition:+= equality_check_is | equality_check_equals -= equality_check
+condition:+= equality_check -= equality_check
 
-list_access_var_is: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
-list_access_var_equals: var _EQUALS var _SPACE _AT _SPACE (INT | random)
+list_access_var: var (_SPACE _IS _SPACE | _EQUALS) var _SPACE _AT _SPACE (INT | random)
+assign_list: var (_SPACE _IS _SPACE | _EQUALS) textwithspaces (_COMMA textwithspaces)+
+assign: var (_SPACE _IS _SPACE | _EQUALS) expression | var (_SPACE _IS _SPACE | _EQUALS) textwithoutspaces
 
-assign_list_is: var _SPACE _IS _SPACE textwithspaces (_COMMA textwithspaces)+
-assign_list_equals: var _EQUALS textwithspaces (_COMMA textwithspaces)+
-
-assign_is: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
-assign_equals: var _EQUALS sum | var _EQUALS textwithoutspaces
-
-?sum: product | sum _ADD product -> addition | sum _SUBTRACT product -> subtraction
-?product: atom | product _MULTIPLY atom -> multiplication | product _DIVIDE atom -> division
-?atom: INT | var_access | error_unsupported_number //TODO: means we cannot assign strings with spaces? would we want that?
+?expression: simple_expression | expression _MULTIPLY atom -> multiplication | expression _DIVIDE atom -> division | expression _ADD atom -> addition | expression _SUBTRACT atom -> subtraction
+?simple_expression: atom _MULTIPLY atom -> multiplication | atom _DIVIDE atom -> division | atom _ADD atom -> addition | atom _SUBTRACT atom -> subtraction
+?atom: INT | var_access | error_unsupported_number | textwithoutspaces
 error_unsupported_number: /([-+]?(\d+[\.,]\d+))/ -> error_unsupported_number
 
 textwithoutspaces: /(?:[^\n،, *+\-\/ei]|e(?!lse)|i(?!f))+/ -> text //new cause in level 6 calculation elements need to be escaped too

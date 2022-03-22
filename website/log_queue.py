@@ -72,7 +72,7 @@ class LogQueue:
             return
 
         filename = f'{self.name}_dump.{os.getpid()}.{time.time()}.jsonl'
-        with open(filename, 'w') as f:
+        with open(filename, 'w', encoding='utf-8') as f:
             json.dump(all_records, f)
 
     def try_load_emergency_saves(self):
@@ -93,7 +93,7 @@ class LogQueue:
                 # If this succeeded, we're guaranteed to be able to read this file (and because
                 # we renamed it to something not matching the glob pattern, no one else is going to
                 # try to pick it up later)
-                with open(claim_name, 'r') as f:
+                with open(claim_name, 'r', encoding='utf-8') as f:
                     all_records = json.load(f)
 
                 bucket = div_clip(time.time(), self.batch_window_s)

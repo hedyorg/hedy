@@ -1,14 +1,10 @@
 //assigning a string now must be done with quotes
-assign_is: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE text_in_quotes
-assign_equals: var _EQUALS sum | var _EQUALS text_in_quotes
+assign: var (_SPACE _IS _SPACE | _EQUALS) (atom | expression)
+assign_list: var (_SPACE _IS _SPACE | _EQUALS) (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|NUMBER))+
 
-assign_list_is: var _SPACE _IS _SPACE (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|NUMBER))+
-assign_list_equals: var _EQUALS (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|NUMBER))+
+?atom: NUMBER | var_access | text_in_quotes //unsupported numbers are gone, we can now allow floats with NUMBER
 
-?atom: NUMBER | var //unsupported numbers are gone, we can now allow floats with NUMBER
-
-equality_check_is: (var | text_in_quotes | NUMBER) _SPACE _IS _SPACE (var | text_in_quotes | NUMBER)
-equality_check_equals: (var | text_in_quotes | NUMBER) _EQUALS (var | text_in_quotes | NUMBER)
+equality_check: (var | text_in_quotes | NUMBER) (_SPACE _IS _SPACE | _EQUALS) (var | text_in_quotes | NUMBER)
 
 in_list_check: (var | text_in_quotes | NUMBER) _SPACE _IN _SPACE var
 error_invalid: "Supercalifragilisticexpialidocious" //invalid node should be deleted but this probably never matches anything :D

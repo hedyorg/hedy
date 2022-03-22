@@ -1,5 +1,7 @@
+from parameterized import parameterized
 from test_level_01 import HedyTester
 import hedy_translation
+import hedy
 
     # tests should be ordered as follows:
     # * Translation from English to Dutch
@@ -62,10 +64,10 @@ class TestsTranslationLevel1(HedyTester):
         self.assertEqual(expected, result)
 
     def test_turn_english_dutch(self):
-        code = "turn 50"
+        code = "turn left"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = "draai 50"
+        expected = "draai links"
 
         self.assertEqual(expected, result)
 
@@ -162,3 +164,15 @@ class TestsTranslationLevel1(HedyTester):
         expected = "ask"
 
         self.assertEqual(expected, result)
+
+    @parameterized.expand([('en', 'forward'), ('es', 'adelante')])
+    def test_forward_type_error_translates_command(self, lang, forward):
+        code = f'{forward} text'
+
+        self.multi_level_tester(
+            lang=lang,
+            code=code,
+            max_level=self.max_turtle_level,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            extra_check_function=self.exception_command(forward)
+        )
