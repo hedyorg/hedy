@@ -81,6 +81,9 @@ ui:
     title_explore: Hedy - Explore
     title_achievements: Hedy - My achievements
     title_privacy: Hedy - Privacy terms
+    results_quiz: Quiz results
+    attempts: attempts
+    go_to_quiz_result_overview: Go to the result overview
 ClientErrorMessages:
     Transpile_success:
     -   Gut gemacht!
@@ -134,7 +137,7 @@ HedyErrorMessages:
     Too Big: Wow! Dein Programm hat beeindruckende {lines_of_code} Befehlszeilen! Aber wir können höchstens {max_lines} Befehlszeilen verarbeiten in diesem Level. Verkleinere dein Programm und versuche es nochmal.
     Invalid Argument: Du kannst den Befehl {command} nicht mit dem Argument {invalid_argument} benutzen. Ändere {invalid_argument} zu einem erlaubten Typ von {allowed_types}.
     Invalid Argument Type: Du kannst den Befehl {command} nicht mit dem Argument {invalid_argument} benutzen weil es ein {invalid_type} ist. Ändere {invalid_argument} zu einem erlaubten Typ von {allowed_types}.
-    Invalid Type Combination: Du kannst die Argumente {invalid_argument} und {invalid_argument_2} nicht in {operation} verwenden weil das eine ein {invalid_type} und das andere ein {invalid_type_2} ist. Ändere {invalid_argument} zu {invalid_type_2} or {invalid_argument_2} zu {invalid_type} und versuche ob es funktioniert.
+    Invalid Type Combination: Du kannst die Argumente {invalid_argument} und {invalid_argument_2} nicht in {command} verwenden weil das eine ein {invalid_type} und das andere ein {invalid_type_2} ist. Ändere {invalid_argument} zu {invalid_type_2} or {invalid_argument_2} zu {invalid_type} und versuche ob es funktioniert.
     string: Text
     nested blocks: ein Block in einem Block
     or: oder
@@ -399,6 +402,9 @@ Auth:
     adventure_exp_2: 'If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:'
     template_code: "This is the explanation of my adventure!\n\nThis way I can show a command: <code>print</code>\n\nBut sometimes I might want to show a piece of code, like this:\n<pre>\nask What's your name?\necho so your name is \n</pre>"
     option: Option
+    specific_adventure_mode: You're currently in adventure '{adventure}', click on 'Hedy' to view all adventures.
+    cheatsheet: Cheatsheet
+    hide_keyword_switcher: Hide keyword language switcher
 Programs:
     recent: "Zuletzt verwendete Programme"
     level: "Level"
