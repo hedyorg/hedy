@@ -164,7 +164,7 @@ def routes(app, database, achievements):
                 user = DATABASE.user_by_username(token ['username'])
 
         return render_template ('class-prejoin.html', joined=False,
-                                page_title=hedyweb.g.ui_texts.get('title_join-class'), current_page='my-profile',
+                                page_title=gettext(u'title_join-class'), current_page='my-profile',
                                 class_info={
                                     'id': Class ['id'],
                                     'name': Class ['name'],
