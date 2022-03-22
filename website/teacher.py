@@ -113,21 +113,23 @@ def routes(app, database, achievements):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return 'body must be an object', 400
+            return gettext(u'ajax_error'), 400
         if not isinstance(body.get('name'), str):
-            return 'name must be a string', 400
+            return gettext(u'class_name_invalid'), 400
+        if len(body.get('name')) < 1:
+            return gettext(u'class_name_empty'), 400
 
         Class = DATABASE.get_class (class_id)
-        if not Class or Class ['teacher'] != user ['username']:
-            return 'No such class', 404
+        if not Class or Class['teacher'] != user['username']:
+            return gettext(u'no_such_class'), 404
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
-        Classes = DATABASE.get_teacher_classes(user ['username'], True)
+        Classes = DATABASE.get_teacher_classes(user['username'], True)
         for Class in Classes:
             if Class['name'] == body['name']:
                 return "duplicate", 200
 
-        Class = DATABASE.update_class (class_id, body ['name'])
+        DATABASE.update_class(class_id, body['name'])
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "on_second_thoughts")
         if achievement:
             return {'achievement': achievement}, 200
