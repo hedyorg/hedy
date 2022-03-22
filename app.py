@@ -1174,15 +1174,16 @@ def explore():
             except:
                 program['error'] = True
             DATABASE.store_program(program)
+        public_profile = DATABASE.get_public_profile_settings(program['username'])
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
             'level': program['level'],
             'id': program['id'],
             'error': program['error'],
+            'public_user': True if public_profile else None,
             'code': "\n".join(program['code'].split("\n")[:4])
         })
-
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
     else:

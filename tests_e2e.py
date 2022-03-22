@@ -208,6 +208,61 @@ class TestPages(AuthHelper):
         # THEN receive an OK response code from the server
         self.get_data('/')
 
+    def test_get_code_page(self):
+        # WHEN attempting to get the code page
+        # THEN receive an OK response code from the server
+        self.get_data('/hedy')
+
+    def test_get_explore_page(self):
+        # WHEN attempting to get the explore page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/explore')
+
+    def test_get_learn_more_page(self):
+        # WHEN attempting to get the learn-more page
+        # THEN receive an OK response code from the server
+        self.get_data('/learn-more')
+
+    def test_get_login_page(self):
+        # WHEN attempting to get the login page
+        # THEN receive an OK response code from the server
+        self.get_data('/login')
+
+    def test_get_signup_page(self):
+        # WHEN attempting to get the signup page
+        # THEN receive an OK response code from the server
+        self.get_data('/signup')
+
+    def test_get_recover_page(self):
+        # WHEN attempting to get the signup page
+        # THEN receive an OK response code from the server
+        self.get_data('/recover')
+
+    def test_get_programs_page(self):
+        # WHEN attempting to get the programs page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/programs')
+
+    def test_get_achievements_page(self):
+        # WHEN attempting to get the achievements page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/my-achievements')
+
+    def test_get_profile_page(self):
+        # WHEN attempting to get the profile page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/my-profile')
+
+    def test_get_landing_page(self):
+        # WHEN attempting to get the landing page
+        # THEN receive an OK response code from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data('/landing-page')
+
     def test_get_admin_page(self):
         # WHEN attempting to get the admin page
         # THEN receive an OK response code from the server

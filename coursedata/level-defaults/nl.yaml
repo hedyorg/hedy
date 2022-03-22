@@ -42,6 +42,7 @@
     example_code: "## Voorbeeldcode\n```\n{print} Hallo!\n{print} Welkom bij Hedy!\n```\n"
     intro_text_2: "\n Je kunt ook een vraag stellen met `{ask}` en het antwoord laten herhalen met `{echo}`.\n Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.\n"
     example_code_2: "## Voorbeeldcode\n```\n{ask} Hoe heet je?\n{echo} hallo\n```\n"
+    intro_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
 2:
     intro_text: |
         In level 2 leren we iets nieuws. Je kunt een woord een naam geven met `{is}`. Je kunt daarna in je code overal naam gebruiken. Dat wordt dan vervangen door Hedy. Zo:
@@ -88,6 +89,11 @@
         demo_code: |-
             kleur {is} {ask} Wat is je lievelingskleur?
             {print} Jouw favoriet is dus kleur
+    example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+    intro_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+    example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
+    intro_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
+    example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
 3:
     intro_text: |
         In level 3 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `{at} {random}` (je zegt: et ren-dom).
@@ -165,6 +171,8 @@
         demo_code: |-
             kleur {is} {ask} 'Wat is je lievelingskleur?'
             {print} 'Jouw favoriet is dus ' kleur
+    intro_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+    example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
 5:
     start_code: |-
         naam {is} {ask} 'hoe heet jij?'
@@ -229,6 +237,11 @@
         example: "Voorbeeld: {if} kleur {in} mooie_kleuren {print} 'mooi!' {else} {print} 'bah'"
         name: '{in}'
         demo_code: "mooie_kleuren {is} groen, geel\nkleur {is} {ask} 'Wat {is} je lievelingskleur?'\n{if} kleur {in} mooie_kleuren {print} 'mooi!' {else} {print} 'bah'"
+    example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+    intro_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+    example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
+    intro_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
+    example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
 6:
     start_code: "{print} '5 keer 5 is ' 5 * 5"
     intro_text: |
@@ -271,6 +284,9 @@
             hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
             hoek = 360 / hoeken
             {forward} 50
+    example_code: "## Example Hedy code\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
+    intro_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+    example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
 7:
     start_code: "{repeat} 3 {times} {print} 'Hedy is leuk!'"
     intro_text: |
@@ -301,6 +317,7 @@
         explanation: repeat a line of code with `{repeat}`.
         example: 'Example: {repeat} 3 {times} {forward} 10'
         demo_code: '{repeat} 3 {times} {forward} 10'
+    example_code: "## Example Hedy code\n```\n{repeat} 3 {times} {print} 'Hedy {is} fun!'\n```\n"
 8:
     start_code: |-
         {repeat} 5 {times}
@@ -341,6 +358,7 @@
         name: '`{repeat}` with turtle'
         explanation: '{repeat} multiple lines'
         demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+    example_code: "## Example Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
 9:
     start_code: |-
         {repeat} 3 {times}
@@ -383,6 +401,7 @@
             {repeat} 4 {times}
                 {turn} 90
                 {forward} 50
+    example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
 10:
     start_code: |-
         dieren {is} hond, kat, papegaai
@@ -410,6 +429,7 @@
         example: 'Example: {for} animal {in} animals'
         demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
         name: '{for} with a list'
+    example_code: "## Example Hedy code\n```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
 11:
     start_code: |-
         {for} i {in} {range} 1 {to} 10
@@ -429,6 +449,7 @@
         demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
         name: '{ask}'
         explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
 12:
     start_code: |-
         {print} 'kommagetallen gaan met een punt!'
@@ -499,6 +520,17 @@
             {print} 'Tweeënhalf plus tweeënhalf is...'
             {print} 2.5 + 2.5
 
+    example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
+    intro_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
+    example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+    intro_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
+    example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
+    intro_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+    example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+    example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
+    intro_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
+    example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+    intro_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
 13:
     start_code: |-
         naam = {ask} 'hoe heet jij?'
@@ -530,6 +562,7 @@
 
 
 
+    example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
 14:
     start_code: |-
         leeftijd = {ask} 'Hoe oud ben jij?'
@@ -613,6 +646,11 @@
             {if} leeftijd >= 14
                 {print} 'Dan ben je ouder dan ik!'
 
+    example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+    intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
+    example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
+    intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+    example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
 15:
     start_code: |-
         antwoord = 0
@@ -645,6 +683,7 @@
                 tel = tel + 1
             {print} 'We zijn klaar'
 
+    example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
 16:
     start_code: |-
         fruit = ['appel', 'banaan', 'kers']
@@ -686,6 +725,7 @@
             {print} randomfruit 
 
 
+    example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
 17:
     start_code: |-
         {for} i {in} {range} 1 {to} 10:
