@@ -232,18 +232,16 @@ export function preview_adventure() {
     }
 }
 
-export function delete_adventure(adventure_id: string, prompt: string) {
-    modal.confirm(prompt, function () {
-        $.ajax({
-            type: 'DELETE',
-            url: '/for-teachers/customize-adventure/' + adventure_id,
-            contentType: 'application/json',
-            dataType: 'json'
-        }).done(function () {
-            window.location.href = '/for-teachers';
-        }).fail(function (err) {
-            modal.alert(err.responseText, 3000, true);
-        });
+export function delete_adventure(adventure_id: string) {
+    $.ajax({
+        type: 'DELETE',
+        url: '/for-teachers/customize-adventure/' + adventure_id,
+        contentType: 'application/json',
+        dataType: 'json'
+    }).done(function () {
+        window.location.pathname = '/for-teachers';
+    }).fail(function (err) {
+        modal.alert(err.responseText, 3000, true);
     });
 }
 

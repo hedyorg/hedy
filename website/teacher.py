@@ -489,7 +489,7 @@ def routes(app, database, achievements):
             return utils.error_page(error=404, ui_message=gettext(u'no_such_adventure'))
 
         DATABASE.delete_adventure(adventure_id)
-        return '', 200
+        return {}, 200
 
     @app.route('/for-teachers/create_adventure', methods=['POST'])
     @requires_login

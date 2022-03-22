@@ -41,7 +41,7 @@
               <td class="text-center p-2">{% if adventure.level %}{{adventure.level}}{% else %}-{% endif %}</td>
               <td class="text-center p-2">{{adventure.date}}</td>
               <td class="text-center p-2"><a href="#" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">{{_('view')}}</a></td>
-              <td class="text-center p-2"><a href="#" onclick="hedyApp.delete_adventure ('{{adventure.id}}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</a></td>
+              <td class="text-center p-2"><a href="#" onclick='hedyApp.modal.confirm({{_('delete_adventure_prompt')|tojson}}, function(){hedyApp.delete_adventure("{{adventure.id}}");});'>{{_('remove')}}</a></td>
             </tr>
           {% endfor %}
         </tbody>
