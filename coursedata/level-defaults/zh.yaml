@@ -398,7 +398,7 @@
 13:
     start_code: |-
         name = ask 'what is your name?'
-        leeftijd = ask 'what is your age?'
+        age = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: "我们将要学习 `and` (且)和 `or`(或)! 如果你想判断两个语句，你不需要使用两个if，但可以使用`and`(且)和`or`(或). 如果你要用`and`那么'and`的左边和右边的两个语句都需要为真. 我们也可以使用`or'那么'or`的左边和右边的两个语句中只需要有一个语句是正确的."
@@ -562,7 +562,7 @@
         example: "if colour is 绿色:'"
         demo_code: |-
             colour = '绿色'
-            if colour is 绿色:
+            if colour is '绿色':
                 print 'The colour 是绿色'
             else:
                 print 'The colour 不是绿色'
