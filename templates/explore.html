@@ -9,21 +9,21 @@
     });
     </script>
     {% endif %}
-    <h2 class="px-8 mb-4">{{auth.explore_programs}}</h2>
+    <h2 class="px-8 mb-4">{{_('explore_programs')}}</h2>
     <div class="mb-4">
-        {{ auth.explore_explanation }}
+        {{_('explore_explanation')}}
     </div>
     <div class="w-full mb-8" id="program_filter">
         <form onsubmit="event.preventDefault (); hedyApp.filter_programs();">
             <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg">
                 <select id="explore_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                    <option disabled selected value="">{{ texts.level }}</option>
+                    <option disabled selected value="">{{_('level')}}</option>
                     {% for i in range(1, (max_level + 1)) %}
                         <option value="{{ i }}" {% if filtered_level and i|string == filtered_level %}selected{% endif %}>{{ i }}</option>
                     {% endfor %}
                 </select>
                 <select id="explore_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                    <option disabled selected value="">{{ ui.adventure }}</option>
+                    <option disabled selected value="">{{ _('adventure') }}</option>
                     {% for adventure_key, adventure in adventures.items() %}
                         {% for name, levels in adventure.items() %}
                             <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
@@ -32,7 +32,7 @@
                 </select>
                 <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
                     <button type="reset" class="red-btn" onclick="window.open('/explore', '_self');">Reset</button>
-                    <button type="submit" class="green-btn ltr:ml-4 rtl:mr-4 px-4">{{ texts.search }}</button>
+                    <button type="submit" class="green-btn ltr:ml-4 rtl:mr-4 px-4">{{_('search')}}</button>
                 </div>
             </div>
         </form>
@@ -45,16 +45,16 @@
                           {{ program.name | truncate(20) }}
                   </div>
                   <div class="px-4">
-                      {{ texts.level }}: <b>{{ program.level }}</b>
+                      {{_('level')}}: <b>{{ program.level }}</b>
                   </div>
                   <div class="px-4 mb-1 z-10">
-                      {{ texts.creator }}: <a {% if program.public_user %}onclick="window.open('/user/{{program.username}}', '_self')"{% endif %} class="{% if program.public_user %}cursor-pointer{% else %}text-black{% endif %} no-underline {% if program.username|length > 20 %}text-xs{% elif program.username|length > 15 %}text-sm{% endif %}">{{ program.username | truncate(25) }}</a>
+                      {{_('creator')}}: <a {% if program.public_user %}onclick="window.open('/user/{{program.username}}', '_self')"{% endif %} class="{% if program.public_user %}cursor-pointer{% else %}text-black{% endif %} no-underline {% if program.username|length > 20 %}text-xs{% elif program.username|length > 15 %}text-sm{% endif %}">{{ program.username | truncate(25) }}</a>
                   </div>
                  <div class="relative px-4">
                      <pre class="no-copy-button" level="{{ program.level }}">{{ program.code }}</pre>
                  </div>
                  <div class="mt-auto mb-2 flex items-center justify-center">
-                    <button class="blue-btn border border-blue-600 py-1 rounded-lg" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{ texts.view_program }}</button>
+                    <button class="blue-btn border border-blue-600 py-1 rounded-lg" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('view_program')}}</button>
                  </div>
             </div>
         </div>

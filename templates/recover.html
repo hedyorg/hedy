@@ -2,13 +2,13 @@
 
 {% block main %}
 <div class="w-full max-w-xl text-center mx-auto">
-  <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('recover')">
-    <h2 class="py-2">{{auth.recover_password}}</h2>
+  <form class="js-validated-form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('recover')">
+    <h2 class="py-2">{{_('recover_password')}}</h2>
     <div class="flex flex-row items-center justify-center mb-2">
-        <label class="inline-block w-1/3" for="username">{{auth.username}} / {{auth.email}}</label>
+        <label class="inline-block w-1/3" for="username">{{_('username')}} / {{_('email')}}</label>
         <input class="inline-block w-1/2 mx-2 px-2 py-1 rounded-lg border-gray-400" id="username" name="username" required>
     </div>
-    <button type="submit" class="green-btn my-2">{{auth.send_password_recovery}}</button>
+    <button type="submit" class="green-btn my-2">{{_('send_password_recovery')}}</button>
   </form>
 </div>
 {% endblock %}
