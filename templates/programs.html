@@ -77,7 +77,7 @@
                 <button class="green-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
             </div>
             <div id="non_public_button_container_{{ loop.index }}" class="flex flex-row {% if program.public %} hidden {% endif %}">
-                <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{_('share_confirm')}}', function () {hedyApp.share_program ('{{program.id}}', {{ loop.index }}, true)})">{{ texts.share}}</button>
+                <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{_('share_confirm')}}', function () {hedyApp.share_program ('{{program.id}}', {{ loop.index }}, true)})">{{_('share')}}</button>
             </div>
         </div>
     </div>
