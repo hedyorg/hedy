@@ -96,7 +96,7 @@
   </div>
   <div class="mt-4 flex flex-row">
     <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
-    <button class="red-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.delete_class ('{{class_info.id}}', '{{_('delete_class_prompt')}}')">{{_('delete_class')}}</button>
+    <button class="red-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.modal.confirm({{_('delete_class_prompt')|tojson}}, function(){hedyApp.delete_class("{{class_info.id}}");});'>{{_('delete_class')}}</button>
   </div>
   <div class="mt-4">
   {% if invites %}

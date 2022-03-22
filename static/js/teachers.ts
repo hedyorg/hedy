@@ -53,8 +53,7 @@ export function rename_class(id: string, class_name_prompt: string, class_name_e
   });
 }
 
-export function delete_class(id: string, confirmation: string) {
-  modal.confirm (confirmation, function () {
+export function delete_class(id: string) {
     $.ajax({
       type: 'DELETE',
       url: '/class/' + id,
@@ -69,7 +68,6 @@ export function delete_class(id: string, confirmation: string) {
     }).fail(function(err) {
       modal.alert(err.responseText, 3000, true);
     });
-  });
 }
 
 export function join_class(id: string, name: string) {
