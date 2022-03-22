@@ -142,7 +142,7 @@ def routes(app, database, achievements):
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "end_of_semester")
         if achievement:
             return {'achievement': achievement}, 200
-        return '', 200
+        return {}, 200
 
     @app.route('/class/<class_id>/prejoin/<link>', methods=['GET'])
     def prejoin_class (class_id, link):
@@ -183,7 +183,7 @@ def routes(app, database, achievements):
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "epic_education")
         if achievement:
             return {'achievement': achievement}, 200
-        return '', 200
+        return {}, 200
 
     @app.route('/class/<class_id>/student/<student_id>', methods=['DELETE'])
     @requires_login
@@ -490,7 +490,7 @@ def routes(app, database, achievements):
             return utils.error_page(error=404, ui_message=gettext(u'no_such_adventure'))
 
         DATABASE.delete_adventure(adventure_id)
-        return '', 200
+        return {}, 200
 
     @app.route('/for-teachers/create_adventure', methods=['POST'])
     @requires_login
