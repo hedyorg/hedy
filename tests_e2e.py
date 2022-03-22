@@ -738,7 +738,7 @@ class TestAuth(AuthHelper):
         self.given_user_is_logged_in()
 
         # Create a program -> make sure it is not public
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
 
         # WHEN attempting to create a public profile with invalid bodies
@@ -775,9 +775,8 @@ class TestAuth(AuthHelper):
         self.given_user_is_logged_in()
 
         # Create a program that is public -> can be set as favourite on the public profile
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': True}
         program_id = self.post_data('programs', program)['id']
-        self.post_data('programs/share', {'id': program_id, 'public': True, 'error': False})
 
         public_profile = {'image': '9', 'personal_text': 'welcome to my profile!', 'favourite_program': program_id}
 
@@ -845,7 +844,7 @@ class TestProgram(AuthHelper):
 
         # WHEN submitting a program without being logged in
         # THEN receive a forbidden response code from the server
-        self.post_data('programs', {'code': 'hello world', 'name': 'program 1', 'level': 1}, expect_http_code=403, no_cookie=True)
+        self.post_data('programs', {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}, expect_http_code=403, no_cookie=True)
 
     def test_create_program(self):
         # GIVEN a new user
@@ -853,7 +852,7 @@ class TestProgram(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         # WHEN submitting a valid program
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         # THEN receive an OK response code from the server
         program = self.post_data('programs', program)
         # THEN verify that the returned program has both a name and an id
@@ -901,17 +900,17 @@ class TestProgram(AuthHelper):
 
         # WHEN sharing a program that does not exist
         # THEN receive a not found response code from the server
-        self.post_data('programs/share', {'id': '123456', 'public': True, 'error': False}, expect_http_code=404)
+        self.post_data('programs/share', {'id': '123456', 'public': True}, expect_http_code=404)
 
     def test_valid_make_program_public(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
 
         # WHEN making a program public
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'public': True, 'error': False})
+        self.post_data('programs/share', {'id': program_id, 'public': True,})
 
         saved_programs = self.get_data('programs_list')['programs']
         for program in saved_programs:
@@ -929,13 +928,13 @@ class TestProgram(AuthHelper):
     def test_valid_make_program_private(self):
         # GIVEN a logged in user with at least one public program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
-        self.post_data('programs/share', {'id': program_id, 'public': True, 'error': False})
+        self.post_data('programs/share', {'id': program_id, 'public': True})
 
         # WHEN making a program private
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'public': False, 'error': False})
+        self.post_data('programs/share', {'id': program_id, 'public': False})
 
         saved_programs = self.get_data('programs_list')['programs']
         for program in saved_programs:
@@ -953,7 +952,7 @@ class TestProgram(AuthHelper):
     def test_invalid_delete_program(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         self.post_data('programs', program)['id']
         program_id = '123456'
 
@@ -964,7 +963,7 @@ class TestProgram(AuthHelper):
     def test_valid_delete_program(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
 
         # WHEN deleting a program
@@ -979,7 +978,7 @@ class TestProgram(AuthHelper):
     def test_destroy_account_with_programs(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
 
         # WHEN deleting the user account
@@ -1184,10 +1183,10 @@ class TestClasses(AuthHelper):
         student = self.user
         self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
         # GIVEN a student with two programs, one public and one private
-        public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         public_program_id = self.post_data('programs', public_program)['id']
-        self.post_data('programs/share', {'id': public_program_id, 'public': True, 'error': False})
-        private_program = {'code': 'hello world', 'name': 'program 2', 'level': 2}
+        self.post_data('programs/share', {'id': public_program_id, 'public': True})
+        private_program = {'code': 'hello world', 'name': 'program 2', 'level': 2, 'shared': False}
         private_program_id = self.post_data('programs', private_program)['id']
 
         # GIVEN the aforementioned teacher

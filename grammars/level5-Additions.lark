@@ -10,7 +10,7 @@ assign: var _SPACE _IS _SPACE textwithspaces
 // Why are we redefining this rule if it's not used in further levels? JP Dec-2021
 error_invalid: textwithoutspaces (_SPACE quoted_text | _SPACE textwithspaces)?
 
-error_print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))*  -> error_print_nq
+error_print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var_access) (_SPACE (textwithoutspaces | list_access | var_access))*  -> error_print_nq
 
 // new commands for level 5
 ifelse: _IF _SPACE (condition (_SPACE|_EOL*) | condition_spaces _EOL*) command (_SPACE|_EOL*) _ELSE (_SPACE|_EOL*) command
@@ -21,7 +21,7 @@ condition: equality_check | in_list_check
 equality_check: textwithoutspaces _SPACE _IS _SPACE (quoted_text | textwithoutspaces) //TODO FH nov 2021: not super pretty that this is textwithoutquotes for both a var and also a textual constant, level 12 handles this nicer now, could be done here too
 
 
-in_list_check: textwithoutspaces _SPACE _IN _SPACE var
+in_list_check: textwithoutspaces _SPACE _IN _SPACE var_access
 
 nospace: /[^\n, ]/
 

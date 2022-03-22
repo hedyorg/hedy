@@ -9,8 +9,8 @@
   </div>
   <div class="w-full flex items-center justify-end ltr:ml-auto rtl:mr-auto ltr:mr-4 rtl:ml-4">
     <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (_('level_title') + ' ' + level_nr)}}">
-    <input type="submit" class="green-btn ltr:ml-2 rtl:mr-2 cursor-pointer" value="{{ _('save_code_button') }}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), '{{_('save_prompt')}}');">
-    <input type="submit" class="green-btn ltr:ml-2 rtl:mr-2 cursor-pointer" value="{{ _('share_code_button') }}" onclick="hedyApp.share_program({{ level }}, '{{ g.lang }}', true, -1, true);">
+    <input type="submit" class="green-btn ltr:ml-2 rtl:mr-2 cursor-pointer" value="{{_('save_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), false);">
+    <input type="submit" class="green-btn ltr:ml-2 rtl:mr-2 cursor-pointer" value="{{_('share_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), true);">
     {% if not hide_cheatsheet %}
       <div class="dropdown inline-block relative ltr:ml-2 rtl:mr-2">
           <button class="green-btn font-semibold rounded inline-flex items-center">

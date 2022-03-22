@@ -318,7 +318,7 @@ async function afterLogin(loginData: any) {
   const savedProgram = savedProgramString ? JSON.parse(savedProgramString) : undefined;
 
   if (savedProgram) {
-    await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3]);
+    await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3], savedProgram[4]);
     localStorage.removeItem('hedy-first-save');
     return auth.redirect('programs');
   }
