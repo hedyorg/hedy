@@ -870,7 +870,7 @@ class TestProgram(AuthHelper):
         saved_program = saved_programs[0]
         for key in program:
             # WHEN we create a program an achievement is achieved, being in the response but not the saved_program
-            if key != "achievements":
+            if key != "achievements" and key != "message":
                 self.assertEqual(program[key], saved_program[key])
 
     def test_invalid_make_program_public(self):
@@ -924,7 +924,7 @@ class TestProgram(AuthHelper):
         self.given_fresh_user_is_logged_in()
         # WHEN requesting a public program
         # THEN receive an OK response code from the server
-        self.get_data('hedy/1/' + program_id)
+        self.get_data('hedy/1/' + program_id, expect_http_code=200)
 
     def test_valid_make_program_private(self):
         # GIVEN a logged in user with at least one public program

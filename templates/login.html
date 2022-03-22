@@ -7,30 +7,30 @@
 <div class="w-full max-w-md mx-auto">
   <div class="bg-white shadow-md rounded pt-6 pb-4 mb-4">
       <form class="js-validated-form" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('login')">
-        <h2 class="py-2 text-center">{{auth.login_long}}</h2>
+        <h2 class="py-2 text-center">{{_('login_long')}}</h2>
         <div class="flex flex-row items-center justify-center mb-2">
-            <label for="username" class="inline-block w-1/3">{{auth.username}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg border-gray-400" id="username" minlength="3" name="username" required>
+            <label for="username" class="inline-block w-1/3">{{_('username')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg border-gray-400" id="username" minlength="3" name="username" required>
         </div>
         <div class="flex flex-row items-center justify-center mb-2">
-            <label for=password" class="inline-block w-1/3">{{auth.password}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg border-gray-400" id="password" minlength="6" name="password" type=password required>
+            <label for=password" class="inline-block w-1/3">{{_('password')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg border-gray-400" id="password" minlength="6" name="password" type=password required>
         </div>
         <div class="flex flex-row items-center justify-center">
             <button type="submit" class="green-btn mt-2">
-                {{auth.login}}
+                {{_('login')}}
             </button>
         </div>
         <div id="error" class="flex-0 mt-4 mb-4 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
       </form>
   </div>
   <form id="create-account" class="flex flex-row items-center justify-center mt-2" onsubmit="event.preventDefault (); hedyApp.auth.redirect ('signup')">
-      <p class="ltr:mr-4 rtl:ml-4">{{auth.no_account}}</p>
+      <p class="ltr:mr-4 rtl:ml-4">{{_('no_account')}}</p>
       <button type="submit" class="green-btn">
-          {{auth.create_account}}
+          {{_('create_account')}}
       </button>
   </form>
   <form class="flex flex-row items-center justify-center mt-2" onsubmit="event.preventDefault (); window.location.href = '/recover'">
       <button type="submit" class="btn">
-          {{auth.forgot_password}}
+          {{_('forgot_password')}}
       </button>
   </form>
 </div>

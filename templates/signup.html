@@ -3,27 +3,27 @@
 {% block main %}
 <div class="w-3/4 bg-white shadow-md rounded p-4 mb-4 mx-auto">
   <form id="signup" class="js-validated-form mx-auto" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')">
-        <h2 class="text-center">{{auth.create_account}}</h2>
-        <h4 class="text-blue-500 mb-4 text-center">{{auth.create_account_explanation}}</h4>
+        <h2 class="text-center">{{_('create_account')}}</h2>
+        <h4 class="text-blue-500 mb-4 text-center">{{_('create_account_explanation')}}</h4>
         <div class="flex flex-col w-full px-16">
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="username">{{auth.username}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="3" id="username" name="username" required>
+                <label class="inline-block w-1/2" for="username">{{_('username')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="3" id="username" name="username" required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="email">{{auth.email}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="email" name="email" type="email" required>
+                <label class="inline-block w-1/2" for="email">{{_('email')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="email" name="email" type="email" required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="mail_repeat">{{auth.email_repeat}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="mail_repeat" name="mail_repeat" type="email" autocomplete="off" required>
+                <label class="inline-block w-1/2" for="mail_repeat">{{_('email_repeat')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="mail_repeat" name="mail_repeat" type="email" autocomplete="off" required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="password">{{auth.password}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password" name="password" type=password required>
+                <label class="inline-block w-1/2" for="password">{{_('password')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password" name="password" type=password required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="password_repeat">{{auth.password_repeat}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password_repeat" name="password_repeat" type=password required>
+                <label class="inline-block w-1/2" for="password_repeat">{{_('password_repeat')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password_repeat" name="password_repeat" type=password required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="language">{{auth.preferred_language}}</label><select class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" id="language" name="language" required>
-                    <option value="" selected disabled hidden>{{auth.select}}</option>
+                <label class="inline-block w-1/2" for="language">{{_('preferred_language')}}</label><select class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" id="language" name="language" required>
+                    <option value="" selected disabled hidden>{{_('select')}}</option>
                     <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
                     {% for language in other_languages() %}
                         <option value="{{language.lang}}">{{language.sym}}</option>
@@ -31,79 +31,79 @@
                 </select>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400" style="display: none;" id="keyword_lang_container">
-                 <label class="inline-block w-1/2" for="keyword_language">{{auth.preferred_keyword_language}}</label><select class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" id="keyword_language" name="keyword_language" required>
+                 <label class="inline-block w-1/2" for="keyword_language">{{_('preferred_keyword_language')}}</label><select class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" id="keyword_language" name="keyword_language" required>
                      {% for language in keyword_languages() %}
                          <option value="{{language.lang}}" id="{{language.lang}}_option" class="keyword_lang_option" {% if language.lang == "en" %}selected{% endif %}>{{language.sym}}</option>
                      {% endfor %}
                  </select>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="birth_year">{{auth.birth_year}}</label><input class="block appearance-none w-1/2 px-2 py-1 rounded-lg border border-gray-400" id="birth_year" min="1900" max="2022" name="birth_year" placeholder="1995" type="number">
+                <label class="inline-block w-1/2" for="birth_year">{{_('birth_year')}}</label><input class="block appearance-none w-1/2 px-2 py-1 rounded-lg border border-gray-400" id="birth_year" min="1900" max="2022" name="birth_year" placeholder="1995" type="number">
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="gender">{{auth.gender}}</label><select class="block appearance-none w-1/2 border border-gray-400 text-gray-700 px-4 py-1 rounded-lg" id="gender" name="gender">
-                  <option value="" selected disabled hidden>{{auth.select}}</option>
-                  <option value="f">{{auth.female}}</option>
-                  <option value="m">{{auth.male}}</option>
-                  <option value="o">{{auth.other}}</option>
+                <label class="inline-block w-1/2" for="gender">{{_('gender')}}</label><select class="block appearance-none w-1/2 border border-gray-400 text-gray-700 px-4 py-1 rounded-lg" id="gender" name="gender">
+                  <option value="" selected disabled hidden>{{_('select')}}</option>
+                  <option value="f">{{_('female')}}</option>
+                  <option value="m">{{_('male')}}</option>
+                  <option value="o">{{_('other')}}</option>
                 </select>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="country">{{auth.country}}</label><select  class="block appearance-none w-1/2 border border-gray-400 text-gray-700 px-4 py-1 rounded-lg" id="country" name="country">
-                    <option value="" selected disabled hidden>{{auth.select}}</option>
+                <label class="inline-block w-1/2" for="country">{{_('country')}}</label><select  class="block appearance-none w-1/2 border border-gray-400 text-gray-700 px-4 py-1 rounded-lg" id="country" name="country">
+                    <option value="" selected disabled hidden>{{_('select')}}</option>
                 </select>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1">
-              <label class="inline-block w-1/2" for="has_experience">{{auth.programming_experience}}</label>
+              <label class="inline-block w-1/2" for="has_experience">{{_('programming_experience')}}</label>
                 <ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0" style="margin-top: -0.3em;">
                   <li class="flex flex-row items-center">
                       <input type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()" class="ltr:mr-2 rtl:ml-2">
-                      <label for="has_experience"> {{auth.yes}}</label>
+                      <label for="has_experience"> {{_('yes')}}</label>
                   </li>
                   <li class="flex flex-row items-center">
                       <input type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()" class="ltr:mr-2 rtl:ml-2">
-                      <label  for="has_experience"> {{auth.no}}</label>
+                      <label  for="has_experience"> {{_('no')}}</label>
                   </li>
               </ul>
             </div>
             <div class="flex flex-row items-center mb-4 border rounded-lg border-gray-400 px-2 pb-4" style="display: none;" id="languages">
                 <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
-              <label class="inline-block w-1/2" for="languages">{{auth.languages}}</label><ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 ltr:pl-4 rtl:pr-4">
+              <label class="inline-block w-1/2" for="languages">{{_('languages')}}</label><ul class="inline-block w-1/2 list-none ltr:ml-0 rtl:mr-0 ltr:pl-4 rtl:pr-4">
                 <li class="flex flex-row items-center">
                     <input type="checkbox" name="languages" value="scratch" class="ltr:mr-2 rtl:ml-2"><label style>Scratch</label>
                 </li>
                 <li class="flex flex-row items-center">
-                    <input type="checkbox" name="languages" value="other_block" class="ltr:mr-2 rtl:ml-2"><label>{{auth.other_block}}</label>
+                    <input type="checkbox" name="languages" value="other_block" class="ltr:mr-2 rtl:ml-2"><label>{{_('other_block')}}</label>
                 </li>
                 <li class="flex flex-row items-center">
                     <input type="checkbox" name="languages" value="python" class="ltr:mr-2 rtl:ml-2"><label>Python</label>
                 </li>
                 <li class="flex flex-row items-center">
-                    <input type="checkbox" name="languages" value="other_text" class="ltr:mr-2 rtl:ml-2"><label>{{auth.other_text}}</label>
+                    <input type="checkbox" name="languages" value="other_text" class="ltr:mr-2 rtl:ml-2"><label>{{_('other_text')}}</label>
                 </li>
               </ul>
             </div>
             <div class="w-full border border-gray-400 rounded-lg px-4 py-1 my-2">
                 <div class="flex flex-row items-center mx-auto w-full my-2" id="is_teacher_div">
-                  <label class="inline-block w-1/2" for="is_teacher">{{auth.is_teacher}}</label><input class="inline-block ltr:ml-0 rtl:mr-0" type="checkbox" id="is_teacher" name="is_teacher">
+                  <label class="inline-block w-1/2" for="is_teacher">{{_('request_teacher')}}</label><input class="inline-block ltr:ml-0 rtl:mr-0" type="checkbox" id="is_teacher" name="is_teacher">
                 </div>
                 <div class="flex flex-row items-center mx-auto w-full my-1">
-                  <label class="inline-block w-1/2" for="subscribe">{{auth.subscribe_newsletter}}</label><input class="inline-block ltr:ml-0 rtl:mr-0" type="checkbox" id="subscribe" name="subscribe">
+                  <label class="inline-block w-1/2" for="subscribe">{{_('subscribe_newsletter')}}</label><input class="inline-block ltr:ml-0 rtl:mr-0" type="checkbox" id="subscribe" name="subscribe">
                 </div>
             </div>
         </div>
         <div class="flex flex-row items-center w-full px-16">
-            <input type="checkbox" class="ltr:mr-4 rtl:ml-4" id="agree_terms" name="agree_terms" required><label class="inline-block" for="agree_terms">{{auth.agree_with}} <a href="/privacy" target="_blank">{{ auth.privacy_terms }}</a></label>
+            <input type="checkbox" class="ltr:mr-4 rtl:ml-4" id="agree_terms" name="agree_terms" required><label class="inline-block" for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
         </div>
         <div class="flex flex-row items-center w-full mt-2 px-16">
-            <input type="checkbox" class="ltr:mr-4 rtl:ml-4" id="agree_third_party" name="agree_third_party"><label class="inline-block" for="agree_third_party">{{auth.agree_third_party}}</label>
+            <input type="checkbox" class="ltr:mr-4 rtl:ml-4" id="agree_third_party" name="agree_third_party"><label class="inline-block" for="agree_third_party">{{_('agree_third_party')}}</label>
         </div>
         <div class="flex flex-row w-full mt-4">
-            <button type="submit" class="green-btn mx-auto">{{auth.create_account}}</button>
+            <button type="submit" class="green-btn mx-auto">{{_('create_account')}}</button>
         </div>
   </form>
   <form class="text-center mt-2" onsubmit="event.preventDefault (); window.location.href='/login'">
-    {{auth.already_account}}&nbsp;&nbsp;<button type="submit" class="btn">{{auth.login}}</button>
+    {{_('already_account')}}&nbsp;&nbsp;<button type="submit" class="btn">{{_('login')}}</button>
   </form>
 </div>
 {% endblock %}
