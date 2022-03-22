@@ -26,3 +26,8 @@ tailwind/generate-css
 
 echo '-----> Compiling TypeScript'
 ./generate-typescript
+
+echo '-----> Compiling Babel translations'
+cd ..
+cd ..
+pybabel compile -d translations

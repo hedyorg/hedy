@@ -59,7 +59,7 @@ var StopExecution = false;
       if (dir === "rtl") {
         symbol = "⇤";
       }
-      $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
+      $('<button>').css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
         update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
       });
@@ -120,7 +120,7 @@ var StopExecution = false;
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
       if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return auth.texts['unsaved_changes'];
+        return ErrorMessages['Unsaved_Changes'];
       } else {
         return undefined;
       }
@@ -141,7 +141,7 @@ var StopExecution = false;
         if (!window.State.level || !window.State.lang) {
           throw new Error('Oh no');
         }
-        runit (window.State.level, window.State.lang, function () {
+        runit (window.State.level, window.State.lang, "", function () {
           $ ('#output').focus ();
         });
       }
@@ -225,8 +225,10 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
-export function runit(level: string, lang: string, cb: () => void) {
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000, true);
+export function runit(level: string, lang: string, answer_question: string, cb: () => void) {
+  if (window.State.disable_run) {
+    return modal.alert (answer_question, 3000, true);
+  }
   if (reloadOnExpiredSession ()) return;
   StopExecution = true;
 
@@ -236,6 +238,11 @@ export function runit(level: string, lang: string, cb: () => void) {
 
   error.hide();
   success.hide();
+
+  var runItBtn = $('#runit');
+  runItBtn.prop('disabled', true);
+  setTimeout(function() {runItBtn.prop('disabled', false)}, 500);
+
   try {
     level = level.toString();
     var editor = theGlobalEditor;
@@ -286,7 +293,7 @@ export function runit(level: string, lang: string, cb: () => void) {
       });
     }).fail(function(xhr) {
       console.error(xhr);
-      // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+       https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
       if (xhr.readyState < 4) {
         error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
       } else {
@@ -295,8 +302,7 @@ export function runit(level: string, lang: string, cb: () => void) {
     });
 
   } catch (e: any) {
-    console.error(e);
-    error.show(ErrorMessages['Other_error'], e.message);
+    modal.alert(e.responseText, 3000, true);
   }
 }
 function showBulb(level: string){
@@ -368,7 +374,9 @@ function removeBulb(){
 }
 
 export function fix_code(level: string, lang: string){
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000, true);
+  if (window.State.disable_run) {
+    return modal.alert ("Running a program is disabled", 3000, true);
+  }
   if (reloadOnExpiredSession ()) return;
 
   try {
@@ -491,9 +499,10 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
       dataType: 'json'
     }).done(function(response) {
       // The auth functions use this callback function.
-      if (cb) return response.Error ? cb (response) : cb (null, response);
-
-      modal.alert (auth.texts['save_success_detail'], 3000, false);
+      if (cb) {
+        return response.Error ? cb (response) : cb (null, response);
+      }
+      modal.alert (response.message, 3000, false);
       if (response.achievements) {
         showAchievements(response.achievements, false, "");
       }
@@ -507,8 +516,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
         }
       });
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
       if (err.status === 403) {
          localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
          localStorage.setItem ('hedy-save-redirect', 'hedy');
@@ -517,7 +525,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     });
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+export function saveit(level: number | [number, string], lang: string, name: string, code: string, prompt: string, cb?: (err: any, resp?: any) => void) {
   error.hide();
   success.hide();
 
@@ -533,8 +541,8 @@ export function saveit(level: number | [number, string], lang: string, name: str
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response['duplicate']) {
-        modal.confirm (auth.texts['overwrite_warning'], function () {
+      if (response.duplicate) {
+        modal.confirm (response.message, function () {
           storeProgram(level, lang, name, code, cb);
           pushAchievement("double_check");
         });
@@ -543,7 +551,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
       }
     }).fail(function(err) {
       if (err.status == 403) { // The user is not allowed -> so not logged in
-        return modal.confirm (auth.texts['save_prompt'], function () {
+        return modal.confirm (prompt, function () {
            // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
            if (window.State && window.State.adventure_name && !Array.isArray(level)) {
              level = [level, window.State.adventure_name];
@@ -555,7 +563,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
     });
   } catch (e: any) {
     console.error(e);
-    error.show(ErrorMessages['Other_error'], e.message);
+    modal.alert(e.message, 3000, true);
   }
 }
 
@@ -564,7 +572,7 @@ export function saveit(level: number | [number, string], lang: string, name: str
  */
 export function saveitP(level: number | [number, string], lang: string, name: string, code: string) {
   return new Promise<any>((ok, ko) => {
-    saveit(level, lang, name, code, (err, response) => {
+    saveit(level, lang, name, code, "", (err, response) => {
       if (err) {
         ko(err);
       } else {
@@ -618,15 +626,14 @@ function share_function(id: string, index: number, Public: boolean, parse_error:
       }
       if (Public) {
         $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
-        modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
+        modal.copy_alert (response.message, 5000);
         change_shared(true, index);
       } else {
-        modal.alert (auth.texts['unshare_success_detail'], 3000, false);
+        modal.alert (response.message, 3000, false);
         change_shared(false, index);
       }
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
 }
 
@@ -638,7 +645,7 @@ function verify_call_index(level:number, lang: string, id: string | true, index:
   // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
   const name = `${$('#program_name').val()}`;
   const code = get_trimmed_code();
-  return saveit(level, lang, name, code, (err: any, resp: any) => {
+  return saveit(level, lang, name, code, "", (err: any, resp: any) => {
       if (err && err.Warning)
         return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
       if (err && err.Error)
@@ -671,7 +678,6 @@ function get_parse_code_by_id(level: number, lang:string, id:string | true,  ind
 }
 
 export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  //if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   if (Public) {
     // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
     if (id !== true) {
@@ -684,13 +690,14 @@ export function share_program (level: number, lang: string, id: string | true, i
         data: JSON.stringify({
           level: level,
           lang: lang,
-          code: code
+          code: code,
+          error_check: true
         }),
         contentType: 'application/json',
         dataType: 'json'
       }).done(function (response) {
         if (response.Error) {
-          modal.confirm("This program contains an error, are you sure you want to share it?", function () {
+          modal.confirm(response.message, function () {
             verify_call_index(level, lang, id, index, Public, true);
           });
         } else {
@@ -705,8 +712,8 @@ export function share_program (level: number, lang: string, id: string | true, i
   }
 }
 
-export function delete_program(id: string, index: number) {
-  modal.confirm (auth.texts['delete_confirm'], function () {
+export function delete_program(id: string, index: number, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'POST',
       url: '/programs/delete',
@@ -721,10 +728,9 @@ export function delete_program(id: string, index: number) {
       } else {
           $('#program_' + index).remove();
       }
-      modal.alert (auth.texts['delete_success'], 3000, false);
+      modal.alert(response.message, 3000, false);
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
   });
 }
@@ -737,8 +743,8 @@ function set_favourite(index: number) {
     $('#favourite_program_container_' + index).addClass('text-yellow-400');
 }
 
-export function set_favourite_program(id: string, index: number) {
-  modal.confirm (auth.texts['favourite_confirm'], function () {
+export function set_favourite_program(id: string, index: number, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'POST',
       url: '/programs/set_favourite',
@@ -747,12 +753,11 @@ export function set_favourite_program(id: string, index: number) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function() {
+    }).done(function(response) {
       set_favourite(index)
-      modal.alert (auth.texts['favourite_success'], 3000);
+      modal.alert (response.message, 3000, false);
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
   });
 }
@@ -786,7 +791,7 @@ export function submit_program (id: string, index: number) {
   });
 }
 
-export function copy_to_clipboard (string: string, noAlert: boolean) {
+export function copy_to_clipboard (string: string, prompt: string) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
   el.value = string;
@@ -805,10 +810,8 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  if (! noAlert) {
-    modal.hide();
-    modal.alert (auth.texts['copy_clipboard'], 3000, false);
-  }
+  modal.hide_alert();
+  modal.alert (prompt, 3000, false);
 }
 
 /**
@@ -1074,7 +1077,7 @@ export function prompt_unsaved(cb: () => void) {
   // This variable avoids showing the generic native `onbeforeunload` prompt
   window.State.no_unload_prompt = true;
   if (! window.State.unsaved_changes || ! auth.profile) return cb ();
-  modal.confirm(auth.texts['unsaved_changes'], cb);
+  modal.confirm(ErrorMessages['Unsaved_Changes'], cb);
 }
 
 export function load_quiz(level: string) {
@@ -1316,7 +1319,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
       if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return auth.texts['unsaved_changes'];
+        return ErrorMessages['Unsaved_Changes'];
       } else {
         return undefined;
       }
@@ -1337,7 +1340,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
         if (!window.State.level || !window.State.lang) {
           throw new Error('Oh no');
         }
-        runit (window.State.level, window.State.lang, function () {
+        runit (window.State.level, window.State.lang, "", function () {
           $ ('#output').focus ();
         });
       }

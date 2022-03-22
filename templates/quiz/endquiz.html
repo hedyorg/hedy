@@ -3,7 +3,6 @@
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
     <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
     <link rel="stylesheet" href="{{ static('/css/progress-bar.css') }}">
-    <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     {% if achievement %}
@@ -16,7 +15,7 @@
 
     <div id="achievement_pop-up" class="inset-0 absolute z-10 fixed w-1/2 hidden" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
-            <h3 class="text-white">{{auth.achievement_earned}}</h3>
+            <h3 class="text-white">{{_('achievement_earned')}}</h3>
             <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">
             <h4 class="text-white italic" id="achievement_reached_title"></h4>
             <p id="achievement_reached_text"></p>
@@ -25,8 +24,8 @@
 
 {% block results %}
     <div class="flex flex-col justify-center items-center p-8">
-        <h1 class="p-8 font-bold text-4xl font-slab">{{ ui.end_quiz }}</h1>
-        <h3 class="p-8 font-semibold text-2xl italic font-slab">{{ ui.score }}</h3>
+        <h1 class="p-8 font-bold text-4xl font-slab">{{_('end_quiz')}}</h1>
+        <h3 class="p-8 font-semibold text-2xl italic font-slab">{{_('score')}}</h3>
         <div class="p-8 border-4 border-yellow-600 rounded-full h-24 w-24 flex items-center bg-yellow-300 justify-center">
             <p class="text-yellow-600 font-bold text-4xl text-center font-slab ">
                 {{ total_score|string }}
@@ -34,8 +33,8 @@
         </div>
     </div>
     <div class="p-10 button-bar border-t-8 border-green-600">
-        <button class="green-btn ltr:ml-1 rtl:mr-1"onclick="window.parent.location='/quiz/result_overview/{{ level_source }}';">
-            {{ ui.go_to_level }} {{ level }}
+        <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="window.parent.location='/quiz/result_overview/{{ level_source }}';">
+            {{_('go_to_level')}} {{ level }}
         </button>
     </div>
 

@@ -8,6 +8,7 @@ import string
 import random
 import uuid
 
+from flask_babel import gettext
 from ruamel import yaml
 from website import querylog
 import commonmark
@@ -198,10 +199,13 @@ def markdown_to_html_tags(markdown):
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None):
     if error not in [403, 404, 500]:
         error = 404
-    # Todo TB -> Instead of giving the key in the function an finding it here: Give the correct string as argument
+    default = gettext(u'default_404')
+    if error == 403:
+        default = gettext(u'default_403')
+    elif error == 500:
+        default = gettext(u'default_500')
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
-                           page_error=page_error or g.ui_texts.get(ui_message) or '',
-                           default=g.ui_texts.get("default_" + str(error))), error
+                           page_error=page_error or ui_message or '', default=default), error
 
 
 def session_id():

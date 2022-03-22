@@ -19,8 +19,8 @@
 </div>
 {% block question %}
     <div class="flex flex-col justify-center items-center mb-4">
-        <h1 class="font-bold text-4xl font-slab"> {{ ui.results_quiz }} </h1>
-        <h3 class="font-semibold text-2xl italic font-slab"> {{ ui.score }} </h3>
+        <h1 class="font-bold text-4xl font-slab">{{_('results_quiz')}}</h1>
+        <h3 class="font-semibold text-2xl italic font-slab">{{_('score')}}</h3>
         <div class="border-4 border-yellow-600 rounded-full  h-24 w-24  flex items-center bg-yellow-300 justify-center">
             <p class="text-yellow-600 font-bold text-4xl text-center font-slab ">{{ total_score|string }}</p></div>
     </div>
@@ -42,7 +42,7 @@
                     </div>
                     {% if result_items[i].is_correct %}
                         <p class="place-content-center text-white font-semibold text-xl font-slab bg-green-500 flex  m-0 rounded-t-md pb-6 pt-2 text-center flex-col-25">
-                            </br> {{ ui.correct }}
+                            </br> {{_('correct')}}
                             {% if result_items[i].index_chosen == 0 %}
                                 {{ triangle|safe }}
                             {% elif result_items[i].index_chosen == 1 %}
@@ -59,7 +59,7 @@
                         </p>
                     {% else %}
                         <p class="place-content-center text-white font-semibold text-xl font-slab bg-red-500 flex m-0 rounded-t-md pb-6 pt-2 text-center flex-col-25">
-                            </br>  {{ ui.incorrect }}
+                            </br>  {{_('incorrect')}}
                             {% if result_items[i].index_chosen == 0 %}
                                 {{ triangle|safe }}
                             {% elif result_items[i].index_chosen == 1 %}
@@ -88,15 +88,15 @@
                     </div>
                     {% if result_items[i].is_correct and result_items[i].attempts ==  1 %}
                         <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
-                            In {{ result_items[i].attempts - 1 }} {{ ui.attempt|lower }}
+                            In {{ result_items[i].attempts - 1 }} {{_('attempt')|lower }}
                         </p>
                     {% elif result_items[i].is_correct and result_items[i].attempts > 1 %}
                         <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
-                            In {{ result_items[i].attempts - 1 }} {{ ui.attempts }}
+                            In {{ result_items[i].attempts - 1 }} {{_('attempt')}}
                         </p>
                     {% else %}
                         <p class="place-content-center table-el text-center bg-red-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
-                            In {{ result_items[i].attempts - 1 }} {{ ui.attempts }}
+                            In {{ result_items[i].attempts - 1 }} {{_('attempt')}}
                         </p>
                     {% endif %}
                 </div>
@@ -105,7 +105,7 @@
     </div>
     <div class="p-10 button-bar border-t-8 border-green-600">
         <button class="green-btn ltr:ml-1 rtl:mr-1"
-                onclick="window.parent.location = '{{ hedy_link(level, next_assignment) }}';"> {{ ui.go_to_level }} {{ level }}
+                onclick="window.parent.location = '{{ hedy_link(level, next_assignment) }}';"> {{_('go_to_level')}} {{ level }}
         </button>
     </div>
 {% endblock %}
