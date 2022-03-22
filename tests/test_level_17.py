@@ -210,8 +210,7 @@ class TestsLevel17(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      translate=False #space before : nor preserved
+      expected=expected
     )
 
   def test_if_under_else_in_for(self):

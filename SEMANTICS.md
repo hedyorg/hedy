@@ -31,7 +31,7 @@ Level 1 supports:
   </tr>
   <tr>
     <td>turn</td>
-    <td>'right' + integer | 'left' + integer | empty</td>
+    <td>'right' | 'left' | empty</td>
   </tr>
   <tr>
     <td>echo</td>
@@ -74,10 +74,6 @@ Level 1 supports:
   <tr>
     <td>turn right</td>
     <td>t = turtle.Turtle()<br>t.right(90)</td>
-  </tr>
-  <tr>
-    <td>turn 100</td>
-    <td>t = turtle.Turtle()<br>t.right(100)</td>
   </tr>
   <tr>
     <td>ask x</td>

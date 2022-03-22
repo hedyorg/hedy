@@ -33,15 +33,15 @@ def transform_yaml_to_lark(only_new_lang=True):
     yaml_filesname_with_path = os.path.join(input_path, yaml_lang + '.yaml')
     default_yaml_with_path = os.path.join(input_path, 'en' + '.yaml')
 
-    with open(default_yaml_with_path, 'r') as stream:
+    with open(default_yaml_with_path, 'r', encoding='utf-8') as stream:
       en_command_combinations = yaml.safe_load(stream)
 
-    with open(yaml_filesname_with_path, 'r') as stream:
+    with open(yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
       command_combinations = yaml.safe_load(stream)
 
     lark_filesname_with_path = os.path.join(output_path, 'keywords-' + yaml_lang + '.lark')
 
-    with open(lark_filesname_with_path, 'w+') as f:
+    with open(lark_filesname_with_path, 'w+', encoding='utf-8') as f:
       list_of_translations = []
       
       for command, translation in command_combinations.items():   
@@ -96,7 +96,7 @@ def transform_level_defaults(old_level, new_level=None, function=nop):
       for key in sorted(transformed_dict):
         sorted_dict[key] = transformed_dict[key]
 
-      with open(output_path + yaml_filesname_without_path, 'w') as f:
+      with open(output_path + yaml_filesname_without_path, 'w', encoding='utf-8') as f:
         f.write(utils.dump_yaml_rt(sorted_dict))
 
 def transform_adventures(old_level, new_level=None, function=nop):
@@ -121,7 +121,7 @@ def transform_adventures(old_level, new_level=None, function=nop):
           file_transformed = True
 
     if file_transformed: #only write updated files
-      with open(output_path + yaml_filesname_without_path, 'w') as f:
+      with open(output_path + yaml_filesname_without_path, 'w', encoding='utf-8') as f:
         f.write(utils.dump_yaml_rt(transformed_dict))
 
 def transform_levels_in_all_YAMLs(old_level, new_level=None, function=nop):

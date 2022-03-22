@@ -1,36 +1,16 @@
 import collections
 import json
 
+from flask_babel import gettext
+
 from website.yaml_file import YamlFile
 import attr
 import glob
 from os import path
-
 from flask import g
 from flask_helpers import render_template
-
-import hedy_content
 from website.auth import current_user, is_teacher
-import re
 import utils
-from config import config
-
-class Translations:
-  def __init__(self):
-    self.data = {}
-
-    translations = glob.glob('coursedata/texts/*.yaml')
-    for trans_file in translations:
-      lang = path.splitext(path.basename(trans_file))[0]
-      self.data[lang] = YamlFile.for_file(trans_file)
-
-  def get_translations(self, language, section):
-    # Merge with English when lacking translations
-    # Start from a defaultdict
-    d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(**self.data.get('en', {}).get(section, {}))
-    d.update(**self.data.get(language, {}).get(section, {}))
-    return d
 
 class AchievementTranslations:
   def __init__(self):
@@ -65,22 +45,12 @@ class PageTranslations:
     d.update(**self.data.get(language, {}))
     return d
 
-def get_page_title(current_page):
-  with open(f'coursedata/pages/pages.json', 'r', encoding='utf-8') as f:
-    page_titles_json = json.load(f)
-
-  current_page = page_titles_json[current_page]
-  if current_page:
-    return current_page.get(g.lang, current_page.get("en"))
-  else:
-    return page_titles_json['start'].get("en")
-
 
 def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
   user = current_user()
 
   if not level_defaults:
-    return utils.error_page(error=404,  ui_message='no_such_level')
+    return utils.error_page(error=404,  ui_message=gettext(u'no_such_level'))
 
 
   arguments_dict = {}
@@ -88,6 +58,7 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   # Meta stuff
   arguments_dict['level_nr'] = str(level_number)
   arguments_dict['level'] = level_number
+  arguments_dict['current_page'] = 'hedy'
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
   arguments_dict['customizations'] = customizations
@@ -108,3 +79,31 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   arguments_dict.update(**attr.asdict(level_defaults))
 
   return render_template("code-page.html", **arguments_dict)
+
+def render_specific_adventure(level_defaults, level_number, adventure, prev_level, next_level):
+    arguments_dict = {}
+
+    # Meta stuff
+    arguments_dict['specific_adventure'] = True
+    arguments_dict['level_nr'] = str(level_number)
+    arguments_dict['level'] = level_number
+    arguments_dict['prev_level'] = prev_level
+    arguments_dict['next_level'] = next_level
+    arguments_dict['customizations'] = []
+    arguments_dict['hide_cheatsheet'] = None
+    arguments_dict['enforce_developers_mode'] = None
+    arguments_dict['teacher_adventures'] = []
+    arguments_dict['menu'] = True
+    arguments_dict['latest'] = None
+    arguments_dict['selected_page'] = 'code'
+    arguments_dict['page_title'] = f'Level {level_number} – Hedy'
+    arguments_dict['username'] = None
+    arguments_dict['is_teacher'] = None
+    arguments_dict['loaded_program'] = None
+    arguments_dict['adventures'] = adventure
+    arguments_dict['adventure_name'] = None
+
+    # Merge level defaults into adventures so it is rendered as the first tab
+    arguments_dict.update(**attr.asdict(level_defaults))
+
+    return render_template("code-page.html", **arguments_dict)

@@ -31,7 +31,7 @@ command: print | ask | echo | turtle | error_invalid_space | comment | error_inv
 print: _PRINT (_SPACE text)?
 ask: _ASK (_SPACE text)?
 echo: _ECHO (_SPACE text)?
-turtle: _FORWARD (_SPACE (NEGATIVE_NUMBER | NUMBER | text))? -> forward | _TURN (_SPACE (NUMBER | NEGATIVE_NUMBER | text ))? -> turn
+turtle: _FORWARD (_SPACE (NEGATIVE_NUMBER | NUMBER | text))? -> forward | _TURN (_SPACE (left | right ))? -> turn
 error_invalid_space: _SPACE text?
 error_invalid: textwithoutspaces text?
 

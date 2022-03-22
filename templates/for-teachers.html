@@ -2,12 +2,12 @@
 
 {% block main %}
 <div id="teacher_classes" class="flex flex-col items-center pb-4 border-b-2">
-    <h2>{{auth.teacher_classes}}</h2>
+    <h2>{{_('my_classes')}}</h2>
     {% if teacher_classes %}
       <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4">
         <thead class="bg-gray-200">
-          <tr><th class="p-2 w-3/4">{{auth.name}}</th>
-              <th class="p-2">{{auth.students[0]|upper}}{{auth.students[1:]}}</th>
+          <tr><th class="p-2 w-3/4">{{_('name')}}</th>
+              <th class="p-2">{{_('students')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -20,18 +20,18 @@
         </tbody>
       </table>
     {% endif %}
-  <button class="green-btn mt-4" onclick="hedyApp.create_class ()">{{auth.create_class}}</button>
+  <button class="green-btn mt-4" onclick="hedyApp.create_class ('{{_('class_name_prompt')}}', '{{_('class_name_empty')}}')">{{_('create_class')}}</button>
 </div>
 <div id="teacher_adventures" class="flex flex-col items-center mt-4 mb-4 pb-4 border-b-2">
-    <h2>{{ auth.my_adventures }}</h2>
+    <h2>{{_('my_adventures')}}</h2>
     {% if teacher_adventures %}
         <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4">
         <thead class="bg-gray-200">
-          <tr><th class="p-2">{{auth.name}}</th>
-              <th class="p-2">{{ auth.level }}</th>
-              <th class="p-2">{{ auth.last_update }}</th>
-              <th class="p2">{{ auth.view }}</th>
-              <th class="p-2">{{ auth.remove }}</th>
+          <tr><th class="p-2">{{_('name')}}</th>
+              <th class="p-2">{{_('level')}}</th>
+              <th class="p-2">{{_('last_update')}}</th>
+              <th class="p2">{{_('view')}}</th>
+              <th class="p-2">{{_('remove')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -40,19 +40,19 @@
               <td class="px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}">{{adventure.name|e}}</a></td>
               <td class="text-center p-2">{% if adventure.level %}{{adventure.level}}{% else %}-{% endif %}</td>
               <td class="text-center p-2">{{adventure.date}}</td>
-              <td class="text-center p-2"><a href="#" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">{{ auth.view }}</a></td>
-              <td class="text-center p-2"><a href="#" onclick="hedyApp.delete_adventure ('{{adventure.id}}')">{{ auth.remove }}</a></td>
+              <td class="text-center p-2"><a href="#" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">{{_('view')}}</a></td>
+              <td class="text-center p-2"><a href="#" onclick="hedyApp.delete_adventure ('{{adventure.id}}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</a></td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
     {% endif %}
-    <button class="green-btn mt-4" onclick="hedyApp.create_adventure ()">{{ auth.create_adventure }}</button>
+    <button class="green-btn mt-4" onclick="hedyApp.create_adventure ('{{_('adventure_prompt')}}', '{{_('adventure_empty')}}')">{{_('create_adventure')}}</button>
 </div>
 <div class="flex flex-col items-center mt-4 border-b-2 pb-4">
-    <h2>{{ auth.create_student_accounts }}</h2>
+    <h2>{{_('create_student_accounts')}}</h2>
     <button class="green-btn mt-4" onclick="window.open('/for-teachers/create-accounts', '_self');">
-        {{ auth.create }}
+        {{_('create_accounts')}}
     </button>
 </div>
 <div class="w-full mt-4">
@@ -110,7 +110,7 @@
 <script>
 {% if welcome_teacher %}
   window.onload = function() {
-    hedyApp.modal.alert('{{auth.teacher_welcome}}');
+    hedyApp.modal.alert('{{_('teacher_welcome')}}');
   };
 {% endif %}
 </script>

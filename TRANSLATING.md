@@ -1,54 +1,46 @@
 Translating Hedy
-======================
+================
 
-Hedy is now available in Dutch, Hindi, Bengali, Hungarian, Czech, French, English, Portugese, Brazilian Portugese, Greek, Mandarin, Hungarian and Spanish, but we'd love to support more languages!
+Hedy is now (partly) available in Arabic, Bengali, Bulgarian, Czech, Dutch, English, French, Frisian, German, Greek, Hindi, Hungarian, Indonesian, Italian, Mandarin, Portugese (Brazilian and Portugese), Spanish and Swahili but we'd love to support more languages! Text that is not yet translated will be shown in English.
 
 Help Hedy with translations (easy, no programming needed!)
-------------
+----------------------------------------------------------
 
-The easiest way to translate Hedy is by using or translation UI website!
+The easiest way to translate Hedy is by using the translation website of Weblate. You can find it [here](https://hosted.weblate.org/projects/hedy).
 
-Simply go to https://www.hedycode.com/translate/en/new and translate our texts that are shown on the left in the boxes on the right. When you are done, you can use the three download button at the end of the page, and [send us the files](mailto:hedy@felienne.com).
+The first time you'll land on this page:
+![Weblate tour - Projects](https://user-images.githubusercontent.com/28646458/156936569-9b8e2213-2789-4920-b746-0da22629dadc.jpg)
 
-![translating_page](https://user-images.githubusercontent.com/36051227/141782064-fb3645b3-d10e-404b-974b-4ed624cb7a5d.png)
+You see many projects you can support by translating, one of them is Hedy. You see a lock behind it's name, when you see this, Hedy is locked for maintenance and translation is not possible. We'll try to prevent this as much as possible, but now you know it's possible.
+Click on Hedy to start with this project.
 
-You can also use this interface to extend or repair existing translations, then you have to use the iso code of the langage that you want to work with in the url instead of new, f.e. https://www.hedycode.com/translate/en/es for Spanish. That will show the existing translated texts for you to update. After you have made changes again download the files and send them to us per email.
+Now you'll see the different component within Hedy you can work on:
+![Weblate tour - Components](https://user-images.githubusercontent.com/28646458/156936765-cf5ae1ef-e40d-47c3-8706-041bdd1088c2.jpg)
 
+On this page you see the progress of every component, calculated over all languages. At the time of this screenshot level-defaults was translated for 61% over 19 languages.
 
-Help Hedy with translations (in the code base, some coding experience needed)
-------------
+Click on "Languages" in the menu on top to get to this screen:
+![Weblate tour - Languages](https://user-images.githubusercontent.com/28646458/156936976-b740a30b-245b-4bc7-88bc-b70b7adf3afa.jpg)
 
-If you would like to add a new translation, there are five places where files are located that need to be translated:
+Here you can see the progress of languages, calculated over all components. There are a few reasons why a translation is not complete. First of course, because texts are not yet translated. But on this screen you can see more reasons. Often, the 100% is nog reached because of checks that failed. This tool checks many things, like "are question marks copied to the translation". The checks make translations better. You as a translator can dismiss any of these checks per text if you're sure it does not apply.
 
-1) The folder [level-defaults](https://github.com/Felienne/hedy/blob/main/coursedata/level-defaults/) has a file for each language. That file controls what the landing page for each levels looks like. It is probably easiest to copy the [English file](https://github.com/Felienne/hedy/blob/main/coursedata/level-defaults/en.yaml), rename it and translate that. Tip: example variables can be translated too, that is probably helpful for learners!
+Now click on Dutch to reach the following screen:
+![Weblate tour - Dutch](https://user-images.githubusercontent.com/28646458/156937240-dd24c51e-a100-4cd2-b160-c25b5e7a7827.jpg)
 
-2) In the folder [texts](https://github.com/Felienne/hedy/tree/main/coursedata/texts) there is a file for each language too. That file translate UI-elements like menu headers, and, important, the error messages Hedy programmers will see. As above, copying the [English file](https://github.com/Felienne/hedy/blob/main/coursedata/texts/en.yaml) and translate that.
+The components are shown again, but now with progress shown calculated for only Dutch. If you actually want to translate files for us, you have to register with Weblate. If you don't, you can still help. You can translate texts and click on "suggest translation". Registered translators can use your suggestions. If you do register however, you can click on "save and continue" to actually save the translation within Hedy.
+Now, lets start looking at texts to translate.
 
-3) In the folder [keywords](https://github.com/Felienne/hedy/tree/main/coursedata/keywords) there is a file for each language too. That file makes it possible for kids to write code using a translation for keywords like 'print' or 'echo'. 
+Click on Adventures to reach this screen:
+![Weblate tour - Adventures](https://user-images.githubusercontent.com/28646458/156937285-2418f2b9-5dcb-46ba-85e4-ad8266a8aae4.jpg)
 
-4) The [folder](https://github.com/Felienne/hedy/tree/main/coursedata/adventures) that control the assignments kids see in the user interface for each of the levels. While not mandatory, the assignments in this section are of help for kids to better explore each level. If you do not translate them, the English version will be shown.
+Now you see an overview of this component. Little too much information maybe. Don't worry, just start with "Labeled: Automatically translated". These are strings that have the English text in place of the translation. This is the way we set up texts. This way every text that has not been translated yet, is at least visible in English on the website.
+If you're a little more expericend, you might want to try some of the texts that have specific checks failing.
+At the right, you can choose between Translate or Zen.
 
-5) *optional* The folder [main](https://github.com/Felienne/hedy/tree/main/main) controls the web pages around Hedy. [start](https://github.com/Felienne/hedy/blob/main/main/start-en.md) holds the content of the start page, and there are page with press, contact info too. These do not necessariyl have to be translated, if you don't people will then see the English version, but kids can still program in their own native language.
+If you choose for Translate, you'll see this:
+![Weblate tour - Translate](https://user-images.githubusercontent.com/28646458/156937676-0dfd72cd-8ccb-49d0-9ad7-bf10b3a7d906.jpg)
 
+Again, maybe a little too much information, but a lot is very helpfull. If your registered, you'll see a little more then others, this screen is from a registered user. Browse a little through this info. There is info about texts in the neighborhood, or suggestons of computer translations. If you think this is too much info for now, you can choose for the Zen option which looks like this:
+![Weblate tour - Zen](https://user-images.githubusercontent.com/28646458/156937825-c5b97c10-3928-40b9-93d1-68a80371d51f.jpg)
 
-Translated all of that?
-
-Two more small things to do!
-
-1) Add your language to the [menu](https://github.com/Felienne/hedy/blob/main/main/menu.json).
-
-2) Now go to [app.py](https://github.com/Felienne/hedy/blob/main/app.py) and add your language to this list:
-
-```
-ALL_LANGUAGES = {
-    'en': 'English',
-    'nl': 'Nederlands',
-    'es': 'Español',
-    'fr': 'Français',
-    'pt_br': 'Português',
-    'de': 'Deutsch',
-    'it': 'Italiano',
-    .....
-}
-```
-
+That's all for now, any problems, let us know so we can address them here for future translators. You can reach us at [hedy@felienne.com](mailto:hedy@felienne.com).

@@ -1,14 +1,12 @@
-import { modal, error } from './modal';
-import { auth } from './auth';
+import { modal } from './modal';
 import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 import DOMPurify from 'dompurify'
 
-export function create_class() {
-  modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
+export function create_class(class_name_prompt: string, class_name_empty: string) {
+  modal.prompt (class_name_prompt, '', function (class_name) {
     if (!class_name) {
-      modal.alert(auth.texts['class_name_empty'], 2000, true);
-      return;
+      return modal.alert(class_name_empty, 2000, true);
     }
     $.ajax({
       type: 'POST',
@@ -25,21 +23,15 @@ export function create_class() {
         window.location.pathname = '/for-teachers/customize-class/' + response.id ;
       }
     }).fail(function(err) {
-      if (err.responseText == "duplicate") {
-        modal.alert(auth.texts['class_name_duplicate'], 2000, true);
-        return;
-      }
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      return modal.alert(err.responseText, 3000, true);
     });
   });
 }
 
-export function rename_class(id: string) {
-  modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
+export function rename_class(id: string, class_name_prompt: string, class_name_empty: string) {
+  modal.prompt (class_name_prompt, '', function (class_name) {
     if (!class_name) {
-      modal.alert(auth.texts['class_name_empty'], 2000, true);
-      return;
+      return modal.alert(class_name_empty, 2000, true);
     }
     $.ajax({
       type: 'PUT',
@@ -56,19 +48,13 @@ export function rename_class(id: string) {
         location.reload();
       }
     }).fail(function(err) {
-      if (err.responseText == "duplicate") {
-        modal.alert(auth.texts['class_name_duplicate'], 2000, true);
-        return;
-      }
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      return modal.alert(err.responseText, 3000, true);
     });
   });
 }
 
-export function delete_class(id: string) {
-  modal.confirm (auth.texts['delete_class_prompt'], function () {
-
+export function delete_class(id: string, confirmation: string) {
+  modal.confirm (confirmation, function () {
     $.ajax({
       type: 'DELETE',
       url: '/class/' + id,
@@ -81,22 +67,12 @@ export function delete_class(id: string) {
         window.location.pathname = '/for-teachers';
       }
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
   });
 }
 
 export function join_class(id: string, name: string) {
-  // If there's no session but we want to join the class, we store the program data in localStorage and redirect to /login.
-  if (! auth.profile) {
-    return modal.confirm (auth.texts['join_prompt'], function () {
-      localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
-      window.location.pathname = '/login';
-      return;
-    });
-  }
-
   $.ajax({
       type: 'POST',
       url: '/class/join',
@@ -113,15 +89,21 @@ export function join_class(id: string, name: string) {
           window.location.pathname = '/programs';
       }
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      if (err.status == 403) { //The user is not logged in -> ask if they want to
+         return modal.confirm (err.responseText, function () {
+            localStorage.setItem ('hedy-join', JSON.stringify ({id: id, name: name}));
+            window.location.pathname = '/login';
+         });
+      } else {
+          modal.alert(ErrorMessages['Connection_error'], 3000, true);
+      }
     });
 }
 
-export function invite_student(class_id: string) {
-    modal.prompt (auth.texts['invite_prompt'], '', function (username) {
+export function invite_student(class_id: string, prompt: string, username_empty: string) {
+    modal.prompt (prompt, '', function (username) {
       if (!username) {
-          return modal.alert(auth.texts['username_empty']);
+          return modal.alert(username_empty);
       }
       $.ajax({
           type: 'POST',
@@ -135,13 +117,13 @@ export function invite_student(class_id: string) {
       }).done(function() {
           location.reload();
       }).fail(function(err) {
-          return modal.alert(err.responseText, 3000, true);
+          modal.alert(err.responseText, 3000, true);
       });
     });
 }
 
-export function remove_student_invite(username: string, class_id: string) {
-  return modal.confirm (auth.texts['delete_invite_prompt'], function () {
+export function remove_student_invite(username: string, class_id: string, prompt: string) {
+  return modal.confirm (prompt, function () {
       $.ajax({
           type: 'POST',
           url: '/remove_student_invite',
@@ -159,14 +141,8 @@ export function remove_student_invite(username: string, class_id: string) {
   });
 }
 
-export function remove_student(class_id: string, student_id: string, self_removal: boolean) {
-  let confirm_text;
-  if (self_removal) {
-    confirm_text = auth.texts['self_removal_prompt'];
-  } else {
-    confirm_text = auth.texts['remove_student_prompt'];
-  }
-  modal.confirm (confirm_text, function () {
+export function remove_student(class_id: string, student_id: string, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'DELETE',
       url: '/class/' + class_id + '/student/' + student_id,
@@ -184,26 +160,24 @@ export function remove_student(class_id: string, student_id: string, self_remova
   });
 }
 
-export function create_adventure() {
-    modal.prompt (auth.texts['adventure_prompt'], '', function (adventure_name) {
-        adventure_name = adventure_name.trim();
-        if (!adventure_name) {
-          modal.alert(auth.texts['adventure_empty'], 3000, true);
-          return;
-    }
-    $.ajax({
-      type: 'POST',
-      url: '/for-teachers/create_adventure',
-      data: JSON.stringify({
-        name: adventure_name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
-    }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
-    });
+export function create_adventure(prompt: string, adventure_empty: string) {
+    modal.prompt (prompt, '', function (adventure_name) {
+        if (!adventure_name.trim()) {
+          return modal.alert(adventure_empty, 3000, true);
+        }
+        $.ajax({
+          type: 'POST',
+          url: '/for-teachers/create_adventure',
+          data: JSON.stringify({
+            name: adventure_name
+          }),
+          contentType: 'application/json',
+          dataType: 'json'
+        }).done(function(response) {
+          window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
+        }).fail(function(err) {
+          return modal.alert(err.responseText, 3000, true);
+        });
   });
 }
 
@@ -232,9 +206,9 @@ function update_db_adventure(adventure_id: string) {
     });
 }
 
-export function update_adventure(adventure_id: string, first_edit: boolean) {
+export function update_adventure(adventure_id: string, first_edit: boolean, prompt: string) {
    if (!first_edit) {
-    modal.confirm (auth.texts['update_adventure_prompt'], function () {
+    modal.confirm (prompt, function () {
         update_db_adventure(adventure_id);
     });
    } else {
@@ -265,8 +239,8 @@ export function preview_adventure() {
     }
 }
 
-export function delete_adventure(adventure_id: string) {
-    modal.confirm(auth.texts['delete_adventure_prompt'], function () {
+export function delete_adventure(adventure_id: string, prompt: string) {
+    modal.confirm(prompt, function () {
         $.ajax({
             type: 'DELETE',
             url: '/for-teachers/customize-adventure/' + adventure_id,
@@ -275,14 +249,14 @@ export function delete_adventure(adventure_id: string) {
         }).done(function () {
             window.location.href = '/for-teachers';
         }).fail(function (err) {
-            error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+            modal.alert(err.responseText, 3000, true);
         });
     });
 }
 
-export function change_password_student(username: string) {
-    modal.prompt ( auth.texts['enter_password'] + " " + username + ":", '', function (password) {
-        modal.confirm (auth.texts['password_change_prompt'], function () {
+export function change_password_student(username: string, enter_password: string, password_prompt: string) {
+    modal.prompt ( enter_password + " " + username + ":", '', function (password) {
+        modal.confirm (password_prompt, function () {
             $.ajax({
               type: 'POST',
               url: '/auth/change_student_password',
@@ -402,14 +376,13 @@ export function save_customizations(class_id: string) {
     }).done(function (response) {
       modal.alert(response.success, 3000, false);
       $('#remove_customizations_button').removeClass('hidden');
-      $('#customizations_alert').addClass('hidden');
     }).fail(function (err) {
       modal.alert(err.responseText, 3000, true);
     });
 }
 
-export function remove_customizations(class_id: string) {
-    modal.confirm (auth.texts['remove_customizations_prompt'], function () {
+export function remove_customizations(class_id: string, prompt: string) {
+    modal.confirm (prompt, function () {
         $.ajax({
             type: 'DELETE',
             url: '/for-teachers/customize-class/' + class_id,
@@ -418,7 +391,6 @@ export function remove_customizations(class_id: string) {
         }).done(function (response) {
             modal.alert(response.success, 3000, false);
             $('#remove_customizations_button').addClass('hidden');
-            $('#customizations_alert').removeClass('hidden');
             $('.adventure_level_input').prop('checked', false);
             $('.teacher_adventures_checkbox').prop('checked', false);
             $('.other_settings_checkbox').prop('checked', false);
@@ -488,8 +460,8 @@ export function add_account_placeholder() {
     row.appendTo("#account_rows_container");
 }
 
-export function create_accounts() {
-    modal.confirm (auth.texts['create_accounts_prompt'], function () {
+export function create_accounts(prompt: string) {
+    modal.confirm (prompt, function () {
         $('#account_rows_container').find(':input').each(function () {
             $(this).removeClass('border-2 border-red-500');
         });

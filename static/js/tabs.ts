@@ -1,5 +1,4 @@
 import { modal } from './modal';
-import { auth } from './auth';
 import { theGlobalEditor } from './app';
 
 /**
@@ -68,6 +67,7 @@ $(function() {
 
     if (tabName === 'end') {
       $ ('#adventures-tab').css('height', '');
+      $ ('#adventures-tab').css('min-height', '14em');
       $ ('#adventures-tab').css('max-height', '100%');
       $ ('#level-header input').hide ();
       $ ('#editor-area').hide ();
@@ -113,7 +113,7 @@ $(function() {
     e.preventDefault ();
 
     // If there are unsaved changes, we warn the user before changing tabs.
-    if (window.State.unsaved_changes) modal.confirm(auth.texts['unsaved_changes'], () => switchToTab(tabName));
+    if (window.State.unsaved_changes) modal.confirm(ErrorMessages['Unsaved_Changes'], () => switchToTab(tabName));
     else switchToTab(tabName);
 
     // Do a 'replaceState' to add a '#anchor' to the URL

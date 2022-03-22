@@ -1,6 +1,8 @@
 import hedy
-from test_level_01 import HedyTester
 import hedy_translation
+import textwrap
+from parameterized import parameterized
+from test_level_01 import HedyTester
 
 
 # tests should be ordered as follows:
@@ -54,3 +56,19 @@ class TestsTranslationLevel7(HedyTester):
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
 
         self.assertEqual(code, result)
+
+    @parameterized.expand([('en', 'repeat', 'times'),
+                           ('es', 'repetir', 'veces'),
+                           ('es', 'repetir', 'times'),
+                           ('es', 'repeat', 'veces')])
+    def test_repeat_type_error_translates_command(self, lang, repeat, times):
+        code = textwrap.dedent(f"""\
+            a is 1, 2, 3
+            {repeat} a {times} print 'n'""")
+
+        self.single_level_tester(
+            lang=lang,
+            code=code,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            extra_check_function=self.exception_command(f'{repeat} {times}')
+        )

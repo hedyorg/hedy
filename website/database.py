@@ -8,7 +8,7 @@ import operator
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
-TOKENS = dynamo.Table(storage, 'tokens', 'id')
+TOKENS = dynamo.Table(storage, 'tokens', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['id', 'username']])
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey('creator')])
@@ -118,9 +118,9 @@ class Database:
         """Store a program."""
         PROGRAMS.create(program)
 
-    def set_program_public_by_id(self, id, public, error):
+    def set_program_public_by_id(self, id, public):
         """Store a program."""
-        PROGRAMS.update({'id': id}, {'public': 1 if public else None, 'error': 1 if error else None})
+        PROGRAMS.update({'id': id}, {'public': 1 if public else None})
 
     def submit_program_by_id(self, id):
         PROGRAMS.update({'id': id}, {'submitted': True})
@@ -157,6 +157,10 @@ class Database:
         Returns the Token that was deleted.
         """
         return TOKENS.delete({'id': token_id})
+
+    def delete_all_tokens(self, username):
+        """Forget all Tokens from a user."""
+        TOKENS.del_many({'username': username})
 
     def store_user(self, user):
         """Store a user in the database."""
@@ -419,15 +423,13 @@ class Database:
         PUBLIC_PROFILES.put(data)
 
     def set_favourite_program(self, username, program_id):
+        # We can only set a favourite program is there is already a public profile
         data = PUBLIC_PROFILES.get({'username': username})
-        if data and 'favourite_program' in data:
+        if data:
             data['favourite_program'] = program_id
             self.update_public_profile(username, data)
             return True
-        # We can't set a favourite program without a public page!
-        # Todo: In the future we might enable users to set any program as favourite -> requires some work
         return False
-
 
     def get_public_profile_settings(self, username):
         return PUBLIC_PROFILES.get({'username': username})
@@ -481,4 +483,4 @@ class Database:
 
     def to_year_week(self, d):
         cal = d.isocalendar()
-        return f'{cal[0]}-{cal[1]}'
+        return f'{cal[0]}-{cal[1]:02d}'

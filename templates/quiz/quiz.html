@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+    </head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+        <link rel="stylesheet" href="{{static('/css/generated.css')}}">
+        <link rel="stylesheet" href="{{static('/css/additional.css')}}">
+        <link rel="stylesheet" href="{{ static('/css/quiz-css.css')}}">
+        <link rel="stylesheet" href="{{ static('/css/progress-bar.css')}}">
+    </head>
+    <body dir="{{ g.dir }}">
+        <div class="container" >
+             <!-- Responsive Arrow Progress Bar -->
+              <div class="arrow-steps clearfix">
+                  {% for i in range(questions|length)%}
+                       {% if i + 1 == question_nr %}
+                        <div class="step current"><span><a class="step-text" href="#">{{_('question')}} {{ i + 1 }}<br>{{_('attempt')}} {{ attempt }}</a></span></div>
+                       {% elif not quiz_answers[i + 1] %}
+                           <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
+                       {% elif quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
+                             <div class="step incorrect flex flex-row justify-items ">{{ cross|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
+                       {% elif quiz_answers[i + 1][-1] == questions[i + 1].correct_answer %}
+                           <div class="step check flex flex-row justify-items ">{{ check|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
+                      {% endif %}
+                  {% endfor %}
+            </div>
+        </div>
+        <div id="achievement_pop-up" class="inset-0 absolute z-10 fixed w-1/2 hidden" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
+                <h3 class="text-white">{{_('achievement_earned')}}</h3>
+                <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">
+                <h4 class="text-white italic" id="achievement_reached_title"></h4>
+                <p id="achievement_reached_text"></p>
+            </div>
+        </div>
+        {% block question %}{% endblock %}
+        <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+        <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
+        <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+        <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+        <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+        <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            window.State.lang = "{{ g.lang }}";
+        </script>
+        <script type=text/javascript>
+            function changeHint() {
+                const btn = document.getElementById("hint-button");
+                if (btn.innerText === "{{ ui.hint }}") {
+                    btn.innerText = document.getElementById('hidden-hint').textContent;
+                    btn.innerHTML = "<i>" + document.getElementById('hidden-hint').textContent + "</i>";
+                    $('#hint-button').css('background-color', 'rgba(198,246,213,0.51)');
+                    $('#hint-button').css('border', '2.5px solid #2d9068');
+                } else {
+                    btn.innerText = "{{ ui.hint }}";
+                    $('#hint-button').css('background-color', '#bee3f8');
+                    $('#hint-button').css('border', '2.5px solid #3182ce');
+                    $('#hint-button').css('outline', '#3182ce');
+                }
+            }
+            $(document).on("ready", function () {
+                $('.option-block').not('.incorrect-option').on("click", function () {
+                    // remove active class except for the selected button
+                    $('.option-block').not($(this)).removeClass('active');
+                    $(this).toggleClass('active');
+                });
+            });
+        </script>
+        {% if achievement %}
+            <script>
+                $(function() {
+                    hedyApp.showAchievements({{ achievement|safe }}, false, "");
+                });
+            </script>
+        {% endif %}
+    </body>
+</html>

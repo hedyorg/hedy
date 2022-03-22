@@ -1,12 +1,12 @@
 // adds round brackets in print() and range(), and changes ask to input
 
-command:+= input_is | input_equals | input_is_empty_brackets |  input_equals_empty_brackets | print_empty_brackets -= ask > assign_is | assign_equals
+command:+= input | input_empty_brackets | print_empty_brackets -= ask > assign
 
-print: _PRINT (_SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | var_access | sum) (_COMMA (quoted_text | list_access | var_access | sum))* _SPACE* _RIGHT_BRACKET _SPACE*)?
+print: _PRINT (_SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | print_expression) (_COMMA (quoted_text | list_access | print_expression))* _SPACE* _RIGHT_BRACKET _SPACE*)?
 print_empty_brackets: _PRINT _SPACE* _LEFT_BRACKET _SPACE* _RIGHT_BRACKET
-input_is_empty_brackets: var _SPACE _IS _SPACE _INPUT _SPACE* (_LEFT_BRACKET _SPACE? _RIGHT_BRACKET)
-input_equals_empty_brackets: var _SPACE* _EQUALS _SPACE* _INPUT _SPACE* (_LEFT_BRACKET _SPACE* _RIGHT_BRACKET)
-input_is: var _SPACE _IS _SPACE _INPUT _SPACE* (_LEFT_BRACKET  ((quoted_text | list_access | var_access | sum) (_COMMA (quoted_text | list_access | var_access | sum))*) _RIGHT_BRACKET)?
-input_equals: var _SPACE* _EQUALS _SPACE* _INPUT _SPACE* (_LEFT_BRACKET  ((quoted_text | list_access | var_access | sum) (_COMMA (quoted_text | list_access | var_access | sum))*) _RIGHT_BRACKET)?
+input_empty_brackets: var (_SPACE _IS _SPACE | _SPACE? _EQUALS _SPACE?) _INPUT _SPACE* (_LEFT_BRACKET _SPACE? _RIGHT_BRACKET)
+input: var (_SPACE _IS _SPACE | _EQUALS) _INPUT _SPACE* (_LEFT_BRACKET  ((quoted_text | list_access | print_expression) (_COMMA (quoted_text | list_access | print_expression))*) _RIGHT_BRACKET)?
 // todo: some of these vars sould alse be var_access (things that do not define like the loop var)
 for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _LEFT_BRACKET (NUMBER | var) _COMMA (NUMBER | var) (_COMMA (NUMBER | var))? _RIGHT_BRACKET _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+
+?print_expression: NUMBER | var_access | expression
