@@ -14,8 +14,8 @@ list_access_var: var (_SPACE _IS _SPACE | _EQUALS) var _SPACE _AT _SPACE (INT | 
 assign_list: var (_SPACE _IS _SPACE | _EQUALS) textwithspaces (_COMMA textwithspaces)+
 assign: var (_SPACE _IS _SPACE | _EQUALS) expression | var (_SPACE _IS _SPACE | _EQUALS) textwithoutspaces
 
-?expression: simple_expression | expression _MULTIPLY atom -> multiplication | expression _DIVIDE atom -> division | expression _ADD atom -> addition | expression _SUBTRACT atom -> subtraction
-?simple_expression: atom _MULTIPLY atom -> multiplication | atom _DIVIDE atom -> division | atom _ADD atom -> addition | atom _SUBTRACT atom -> subtraction
+?expression: simple_expression | expression _MULTIPLY atom -> multiplication | expression _DIVIDE atom -> division | expression _PLUS atom -> addition | expression _MINUS atom -> subtraction
+?simple_expression: atom _MULTIPLY atom -> multiplication | atom _DIVIDE atom -> division | atom _PLUS atom -> addition | atom _MINUS atom -> subtraction
 ?atom: INT | var_access | error_unsupported_number | textwithoutspaces
 error_unsupported_number: /([-+]?(\d+[\.,]\d+))/ -> error_unsupported_number
 
