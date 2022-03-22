@@ -839,8 +839,8 @@ def get_user_formatted_age(now, date):
     else:
         measure = texts['days']
         date = round(program_age / (1000 * 60 * 60 * 24))
-
-    return f"{date} {measure} {texts['ago-2']}"
+    age = {'time': str(date) + " " + measure}
+    return texts['ago'].format(**age)
 
 
 # routing to index.html
