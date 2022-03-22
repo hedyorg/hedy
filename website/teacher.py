@@ -161,23 +161,13 @@ def routes(app, database, achievements):
         Class = DATABASE.get_class(class_id)
         if not Class or Class['link'] != link:
             return utils.error_page(error=404, ui_message='invalid_class_link')
-        user = {}
         if request.cookies.get(cookie_name):
             token = DATABASE.get_token(request.cookies.get(cookie_name))
-            if token:
-                if token['username'] in Class.get('students', []):
-                    return render_template('class-prejoin.html', joined=True,
-                                           page_title=g.ui_texts.get('title_join-class'),
-                                           current_page='my-profile', class_info={'name': Class['name']})
-                user = DATABASE.user_by_username(token['username'])
-
-        return render_template('class-prejoin.html', joined=False,
-                               page_title=hedyweb.get_page_title('join class'),
-                               current_page='my-profile',
-                               class_info={
-                                   'id': Class['id'],
-                                   'name': Class['name'],
-                               })
+            if token and token.get('username') in Class.get('students', []):
+                return render_template('class-prejoin.html', joined=True, page_title=g.ui_texts.get('title_join-class'),
+                                       current_page='my-profile', class_info={'name': Class['name']})
+        return render_template('class-prejoin.html', joined=False, page_title=g.ui_texts.get('title_join-class'),
+                               current_page='my-profile', class_info={'id': Class['id'], 'name': Class['name']})
 
     @app.route('/class/join', methods=['POST'])
     def join_class():
