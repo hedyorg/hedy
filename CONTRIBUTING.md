@@ -100,6 +100,7 @@ h1 {
 ```
 If you want to use styling that is not available in the Tailwind library this can be added to the ```static/css/additional.css``` file.
 But please, try to use the Tailwind classes as much as possible as these are optimized and keep our code base consistent and readable.
+Also, please refrain from using inline CSS styling, as this makes the templates hard to read, maintain and alter.
 
 ## Working with translations
 For our multilingual web structure we use a combination of YAML files and Babel to deliver language-dependent content.
