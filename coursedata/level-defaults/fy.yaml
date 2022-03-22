@@ -479,7 +479,7 @@
 13:
     start_code: |-
         name = ask 'what is your name?'
-        leeftijd = ask 'what is your age?'
+        age = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: "We sille no `and` en `or` brûke. Ast 2 dingen kontroleare wolst, hoechst net mear 2 `if`-kes yninoar te dwaan, mar kinst no `and` brûke. Beide dingen yn 'e if moeten waar zijn als je een `and` gebruikt. We kunnen ek `or` brûke. Daarbij moet er 1 fan de twa waar zijn."
@@ -708,7 +708,7 @@
         example: "if kleur is grien:"
         demo_code: |-
             kleur = ask 'Wat is dyn favorite kleur?'
-            if kleur is grien:
+            if kleur is 'grien':
                 print 'De kleur is grien'
             else:
                 print 'De kleur is net grien'

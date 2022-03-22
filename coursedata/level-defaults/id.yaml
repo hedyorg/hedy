@@ -463,7 +463,7 @@
 13:
     start_code: |-
         name = ask 'what is your name?'
-        leeftijd = ask 'what is your age?'
+        age = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: "Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
@@ -683,7 +683,7 @@
         example: 'if warna is hijau:'
         demo_code: |-
             warna = 'hijau'
-            if warna is hijau:
+            if warna is 'hijau':
                 print 'Warnanya hijau'
             else:
                 print 'Warnanya bukan hijau'

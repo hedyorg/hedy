@@ -501,8 +501,15 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree)
 
     def assign(self, tree):
-        type_ = self.get_type(tree.children[1])
-        self.save_type_to_lookup(tree.children[0].children[0], type_)
+        try:
+            type_ = self.get_type(tree.children[1])
+            self.save_type_to_lookup(tree.children[0].children[0], type_)
+        except hedy.exceptions.UndefinedVarException as ex:
+            if self.level >= 12:
+                raise hedy.exceptions.UnquotedAssignTextException(text=ex.arguments['name'])
+            else:
+                raise
+
         return self.to_typed_tree(tree, HedyType.none)
     
     def assign_list(self, tree):
@@ -682,6 +689,16 @@ class TypeValidator(Transformer):
         return arg_type
 
     def get_type(self, tree):
+        # The rule var_access is used in the grammars definitions only in places where a variable needs to be accessed.
+        # So, if it cannot be found in the lookup table, then it is an undefined variable for sure.
+        if tree.data == 'var_access':
+            var_name = tree.children[0]
+            in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
+            if in_lookup:
+                return type_in_lookup
+            else:
+                raise hedy.exceptions.UndefinedVarException(name=var_name)
+
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
         if tree.type_ in [HedyType.none, HedyType.string] and len(tree.children) == 1:
@@ -1609,7 +1626,7 @@ class ConvertToPython_12(ConvertToPython_11):
         # either a var or quoted, if it is not (and undefined var is raised)
         # the real issue is probably that the kid forgot quotes
         try:
-            correct_rhs = self.check_var_usage([right_hand_side]) #check_var_usage expects a list of arguments so place this one in a list.
+            self.check_var_usage([right_hand_side]) #check_var_usage expects a list of arguments so place this one in a list.
         except exceptions.UndefinedVarException as E:
             # is the text a number? then no quotes are fine. if not, raise maar!
 
