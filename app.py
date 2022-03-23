@@ -864,7 +864,7 @@ def index(level, program_id):
             return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
 
         # If the current user is a teacher, perform an extra check -> user is their student
-        if not public_program and is_teacher(user) and result['username'] not in DATABASE.get_teacher_students(user['username']):
+        if is_teacher(user) and not public_program and user['username'] != result['username'] and result['username'] not in DATABASE.get_teacher_students(user['username']):
             return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
 
         loaded_program = {'code': result['code'], 'name': result['name'],
