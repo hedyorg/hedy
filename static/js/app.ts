@@ -1484,8 +1484,6 @@ editor.on("guttermousedown", function (e) {
   var target = e.domEvent.target;
   if (target.className.indexOf("ace_gutter-cell") == -1)
     return;
-  if (!editor.isFocused())
-    return;
 
   if (e.clientX > 25 + target.getBoundingClientRect().left)
     return;
@@ -1493,12 +1491,41 @@ editor.on("guttermousedown", function (e) {
   var breakpoints = e.editor.session.getBreakpoints(row, 0);
   console.log(breakpoints);
   var row = e.getDocumentPosition().row;
-
-
   if (typeof breakpoints[row] === typeof undefined)
     e.editor.session.setBreakpoint(row);
 
   else
     e.editor.session.clearBreakpoint(row);
   e.stop();
-})
+});
+
+editor.renderer.on("afterRender", function () {
+  var breakpoints = editor.session.getBreakpoints();
+  adjustLines(breakpoints);
+});
+
+function adjustLines(disabledRow: []) {
+  var editorContainer = document.getElementById("editor");
+  var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+  var lines = textContainer?.getElementsByClassName("ace_line");
+
+  if (lines) {
+    for (var i = 0; i < lines.length; i++) {
+      if (disabledRow[i] == 'ace_breakpoint') {
+        var pitem = lines[i];
+        addDisabledClass(pitem);
+      } else {
+        var pitem = lines[i];
+        removeDisabledClass(pitem);
+      }
+    }
+  }
+}
+
+function addDisabledClass(str: Element) {
+  str.classList.add("ace-disabled");
+}
+
+function removeDisabledClass(str: Element) {
+  str.classList.remove("ace-disabled");
+}
