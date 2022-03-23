@@ -26,7 +26,7 @@ _DIVIDE: _SPACE* "/" _SPACE*
 
 start: program
 program: _EOL* (command _EOL+)* command?
-command: print | ask | echo | turtle | error_invalid_space | comment | error_invalid
+command: print | ask | echo | turtle | error_invalid_space | error_invalid
 
 print: _PRINT (_SPACE text)?
 ask: _ASK (_SPACE text)?
@@ -35,7 +35,6 @@ turtle: _FORWARD (_SPACE (NEGATIVE_NUMBER | NUMBER | text))? -> forward | _TURN 
 error_invalid_space: _SPACE text?
 error_invalid: textwithoutspaces text?
 
-comment: _HASH /([^\n]+)/
 COMMENT: _HASH /([^\n]+)/
 %ignore COMMENT
 
