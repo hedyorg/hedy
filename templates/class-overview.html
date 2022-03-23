@@ -101,14 +101,14 @@
   <div class="mt-4">
   {% if invites %}
       <h2>{{_('pending_invites')}}</h2>
-      <div class=" w-1/2 border-solid border-2 border-orange-400 rounded my-5 p-4">
-        <table class="table-auto w-full text-sm">
+      <div class="inline-block border-solid border-2 border-orange-400 rounded my-5 p-4">
+        <table class="table-auto text-sm">
         <thead>
             <tr class="font-bold text-left">
-                <th>{{_('username')}}</th>
-                <th>{{_('invite_date')}}</th>
-                <th>{{_('expiration_date')}}</th>
-                <th>{{_('remove_invite')}}</th>
+                <th class="w-40">{{_('username')}}</th>
+                <th class="w-52">{{_('invite_date')}}</th>
+                <th class="w-52">{{_('expiration_date')}}</th>
+                <th class="w-64">{{_('remove_invite')}}</th>
             </tr>
         </thead>
         <tbody>

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-22 16:44+0100\n"
+"POT-Creation-Date: 2022-03-23 10:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "title_achievements"
 msgstr ""
 
-#: app.py:740 app.py:1107 website/teacher.py:352 website/teacher.py:361
+#: app.py:740 app.py:1107 website/teacher.py:359 website/teacher.py:368
 msgid "not_teacher"
 msgstr ""
 
@@ -73,8 +73,8 @@ msgstr ""
 msgid "level_not_class"
 msgstr ""
 
-#: app.py:982 website/teacher.py:419 website/teacher.py:435
-#: website/teacher.py:464 website/teacher.py:490
+#: app.py:982 website/teacher.py:426 website/teacher.py:442
+#: website/teacher.py:471 website/teacher.py:497
 msgid "no_such_adventure"
 msgstr ""
 
@@ -137,9 +137,9 @@ msgstr ""
 #: app.py:1297 website/auth.py:299 website/auth.py:347 website/auth.py:483
 #: website/auth.py:509 website/auth.py:539 website/auth.py:645
 #: website/auth.py:677 website/auth.py:717 website/auth.py:744
-#: website/teacher.py:81 website/teacher.py:193 website/teacher.py:250
-#: website/teacher.py:297 website/teacher.py:330 website/teacher.py:366
-#: website/teacher.py:446 website/teacher.py:504
+#: website/teacher.py:90 website/teacher.py:193 website/teacher.py:251
+#: website/teacher.py:298 website/teacher.py:337 website/teacher.py:373
+#: website/teacher.py:453 website/teacher.py:511
 msgid "ajax_error"
 msgstr "Ein Fehler ist aufgetreten. Bitte nochmal versuchen."
 
@@ -167,15 +167,15 @@ msgstr ""
 msgid "invalid_teacher_invitation_code"
 msgstr ""
 
-#: utils.py:202
+#: utils.py:203
 msgid "default_404"
 msgstr ""
 
-#: utils.py:204
+#: utils.py:205
 msgid "default_403"
 msgstr ""
 
-#: utils.py:206
+#: utils.py:207
 msgid "default_500"
 msgstr ""
 
@@ -452,7 +452,7 @@ msgstr ""
 msgid "remove_student_prompt"
 msgstr "Soll der/die Schüler*in aus der Klasse entfernt werden?"
 
-#: templates/class-overview.html:84 templates/class-overview.html:118
+#: templates/class-overview.html:84 templates/class-overview.html:120
 #: templates/customize-adventure.html:52 templates/for-teachers.html:34
 #: templates/for-teachers.html:44
 msgid "remove"
@@ -515,10 +515,14 @@ msgid "invite_date"
 msgstr ""
 
 #: templates/class-overview.html:110
+msgid "expiration_date"
+msgstr ""
+
+#: templates/class-overview.html:111
 msgid "remove_invite"
 msgstr ""
 
-#: templates/class-overview.html:118 templates/profile.html:15
+#: templates/class-overview.html:120 templates/profile.html:15
 msgid "delete_invite_prompt"
 msgstr ""
 
@@ -773,7 +777,7 @@ msgstr ""
 msgid "adventure_empty"
 msgstr ""
 
-#: templates/for-teachers.html:50 website/teacher.py:499
+#: templates/for-teachers.html:50 website/teacher.py:506
 msgid "create_adventure"
 msgstr ""
 
@@ -1366,7 +1370,7 @@ msgstr ""
 #: website/auth.py:241 website/auth.py:301 website/auth.py:485
 #: website/auth.py:647 website/auth.py:656 website/auth.py:679
 #: website/auth.py:719 website/auth.py:726 website/auth.py:746
-#: website/teacher.py:299 website/teacher.py:332
+#: website/teacher.py:300 website/teacher.py:339
 msgid "username_invalid"
 msgstr "Deiner Nutzername ist ungültig"
 
@@ -1528,38 +1532,38 @@ msgid "favourite_success"
 msgstr ""
 
 #: website/statistics.py:37 website/teacher.py:28 website/teacher.py:36
-#: website/teacher.py:207 website/teacher.py:230 website/teacher.py:242
-#: website/teacher.py:307 website/teacher.py:340
+#: website/teacher.py:207 website/teacher.py:231 website/teacher.py:243
+#: website/teacher.py:308 website/teacher.py:347
 msgid "retrieve_class_error"
 msgstr ""
 
-#: website/statistics.py:41 website/teacher.py:39 website/teacher.py:139
-#: website/teacher.py:210 website/teacher.py:233 website/teacher.py:245
-#: website/teacher.py:310 website/teacher.py:343
+#: website/statistics.py:41 website/teacher.py:39 website/teacher.py:148
+#: website/teacher.py:210 website/teacher.py:234 website/teacher.py:246
+#: website/teacher.py:311 website/teacher.py:350
 msgid "no_such_class"
 msgstr ""
 
-#: website/teacher.py:67
+#: website/teacher.py:76
 msgid "title_class-overview"
 msgstr ""
 
-#: website/teacher.py:76
+#: website/teacher.py:85
 msgid "only_teacher_create_class"
 msgstr ""
 
-#: website/teacher.py:83
+#: website/teacher.py:92
 msgid "class_name_invalid"
 msgstr ""
 
-#: website/teacher.py:89
+#: website/teacher.py:98
 msgid "class_name_duplicate"
 msgstr "Du hast bereits eine Klasse mit diesem Namen!"
 
-#: website/teacher.py:151 website/teacher.py:176 website/teacher.py:529
+#: website/teacher.py:160 website/teacher.py:176 website/teacher.py:536
 msgid "invalid_class_link"
 msgstr ""
 
-#: website/teacher.py:158
+#: website/teacher.py:164
 #, fuzzy
 msgid "title_join-class"
 msgstr "Klasse beitreten"
@@ -1569,93 +1573,93 @@ msgstr "Klasse beitreten"
 msgid "title_customize-class"
 msgstr "Passe eine Klasse an"
 
-#: website/teacher.py:236
+#: website/teacher.py:237
 msgid "customization_deleted"
 msgstr ""
 
-#: website/teacher.py:289
+#: website/teacher.py:290
 msgid "class_customize_success"
 msgstr ""
 
-#: website/teacher.py:314
+#: website/teacher.py:315
 msgid "student_not_existing"
 msgstr ""
 
-#: website/teacher.py:316
+#: website/teacher.py:317
 msgid "student_already_in_class"
 msgstr ""
 
-#: website/teacher.py:318
+#: website/teacher.py:319
 msgid "student_already_invite"
 msgstr ""
 
-#: website/teacher.py:371
+#: website/teacher.py:378
 msgid "no_accounts"
 msgstr ""
 
-#: website/teacher.py:382
+#: website/teacher.py:389
 msgid "unique_usernames"
 msgstr ""
 
-#: website/teacher.py:385
+#: website/teacher.py:392
 msgid "unique_emails"
 msgstr ""
 
-#: website/teacher.py:396
+#: website/teacher.py:403
 msgid "usernames_exist"
 msgstr ""
 
-#: website/teacher.py:399
+#: website/teacher.py:406
 msgid "emails_exist"
 msgstr ""
 
-#: website/teacher.py:410
+#: website/teacher.py:417
 msgid "accounts_created"
 msgstr ""
 
-#: website/teacher.py:416 website/teacher.py:421 website/teacher.py:432
-#: website/teacher.py:461 website/teacher.py:487
+#: website/teacher.py:423 website/teacher.py:428 website/teacher.py:439
+#: website/teacher.py:468 website/teacher.py:494
 msgid "retrieve_adventure_error"
 msgstr ""
 
-#: website/teacher.py:426
+#: website/teacher.py:433
 msgid "title_view-adventure"
 msgstr ""
 
-#: website/teacher.py:437
+#: website/teacher.py:444
 #, fuzzy
 msgid "title_customize-adventure"
 msgstr "Welches Abenteuer möchtest du verfügbar machen?"
 
-#: website/teacher.py:448
+#: website/teacher.py:455
 msgid "adventure_id_invalid"
 msgstr ""
 
-#: website/teacher.py:450 website/teacher.py:506
+#: website/teacher.py:457 website/teacher.py:513
 msgid "adventure_name_invalid"
 msgstr ""
 
-#: website/teacher.py:452
+#: website/teacher.py:459
 msgid "level_invalid"
 msgstr ""
 
-#: website/teacher.py:454
+#: website/teacher.py:461
 msgid "content_invalid"
 msgstr ""
 
-#: website/teacher.py:456
+#: website/teacher.py:463
 msgid "adventure_length"
 msgstr ""
 
-#: website/teacher.py:458
+#: website/teacher.py:465
 msgid "public_invalid"
 msgstr ""
 
-#: website/teacher.py:469 website/teacher.py:511
+#: website/teacher.py:476 website/teacher.py:518
 msgid "adventure_duplicate"
 msgstr ""
 
-#: website/teacher.py:481
+#: website/teacher.py:488
 msgid "adventure_updated"
 msgstr ""
 

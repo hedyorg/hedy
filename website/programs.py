@@ -113,7 +113,7 @@ def routes(app, database, achievements):
             'name': body['name'],
             'username': user['username'],
             'public': 1 if program_public else 0,
-            'error': 1 if error else None
+            'error': error
         }
 
         if 'adventure_name' in body:
