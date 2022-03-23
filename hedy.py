@@ -1127,7 +1127,7 @@ class ConvertToPython(Transformer):
     # static methods
     @staticmethod
     def is_quoted(s):
-        return s[0] == "'" and s[-1] == "'"
+        return (s[0] == "'" and s[-1] == "'") or (s[0] == '"' and s[-1] == '"')
 
     @staticmethod
     def is_int(n):
@@ -1375,7 +1375,7 @@ class ConvertToPython_4(ConvertToPython_3):
         result = ''
         for argument in args:
             argument = self.process_variable_for_fstring(argument)
-            argument = argument.replace("'", '')  # no quotes needed in fstring
+            argument = argument.replace("'", '').replace('"', '')  # no quotes needed in fstring
             result += argument
         return result
 
@@ -1444,7 +1444,7 @@ class ConvertToPython_6(ConvertToPython_5):
             if isinstance(a, Tree):
                 args_new.append("{" + a.children[0] + "}")
             else:
-                a = a.replace("'", "")  # no quotes needed in fstring
+                a = a.replace("'", "").replace('"', '')  # no quotes needed in fstring
                 args_new.append(self.process_variable_for_fstring(a))
 
         return ''.join(args_new)
@@ -1587,11 +1587,18 @@ class ConvertToPython_12(ConvertToPython_11):
     def NEGATIVE_NUMBER(self, args):
         return ''.join(args)
 
+    def text_in_quotes(self, args):
+        # We need to re-add the quotes, so that the Python code becomes name = 'Jan'
+        # Even though the quotes could be single or double, we could always use the same ones here
+        text = args[0]
+        return "'" + text + "'"
+
     def process_token_or_tree(self, argument):
         if isinstance(argument, Tree):
             return f'{str(argument.children[0])}'
         else:
-            if "'" in argument:  # if quoted string, use " instead of ' to avoid f-str illegal syntax
+            # If the string is quoted, we have to use " instead of ' to avoid f-str illegal syntax
+            if "'" in argument:  # Check only for single quotes because text_in_quotes re-adds single quotes only
                 return '"' + argument.replace("'", '').replace('"', '') + '"'
             return f'{argument}'
 
@@ -1608,10 +1615,6 @@ class ConvertToPython_12(ConvertToPython_11):
             {var} = float({var})
           except ValueError:
             pass""")  # no number? leave as string
-
-    def text_in_quotes(self, args):
-        text = args[0]
-        return "'" + text + "'" # keep quotes in the Python code (producing name = 'Henk')
 
     def assign_list(self, args):
         parameter = args[0]
