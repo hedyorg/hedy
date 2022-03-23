@@ -120,7 +120,7 @@ class Database:
 
     def set_program_public_by_id(self, id, public):
         """Store a program."""
-        PROGRAMS.update({'id': id}, {'public': 1 if public else None})
+        PROGRAMS.update({'id': id}, {'public': 1 if public else 0})
 
     def submit_program_by_id(self, id):
         PROGRAMS.update({'id': id}, {'submitted': True})
