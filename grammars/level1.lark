@@ -35,7 +35,7 @@ turtle: _FORWARD (_SPACE (NEGATIVE_NUMBER | NUMBER | text))? -> forward | _TURN 
 error_invalid_space: _SPACE text?
 error_invalid: textwithoutspaces text?
 
-COMMENT: /#.*/
+COMMENT: _HASH /([^\n]+)/
 %ignore COMMENT
 
 _EOL: "\r"?"\n"
@@ -44,7 +44,7 @@ NEGATIVE_NUMBER: _MINUS /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
 NUMBER: /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
 INT: /[\p{Nl}\p{Nd}\p{No}]+/
 
-text: /([^\n]+)/ -> text //anything can be parsed except for a newline
+text: /([^\n#]+)/ -> text //anything can be parsed except for a newline
 textwithoutspaces: /([^\n ]+)/ -> text //anything can be parsed except for a new line and spaces
 
 
