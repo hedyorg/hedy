@@ -238,17 +238,17 @@ def prepare_user_db(username, password):
 
 def validate_signup_data(account):
     if not isinstance(account.get('username'), str):
-        return gettext(u'username_invalid')
+        return gettext('username_invalid')
     if '@' in account.get('username') or ':' in account.get('username'):
-        return gettext(u'username_special')
+        return gettext('username_special')
     if len(account.get('username').strip()) < 3:
-        return gettext(u'username_three')
+        return gettext('username_three')
     if not isinstance(account.get('email'), str) or not utils.valid_email(account.get('email')):
-        return gettext(u'email_invalid')
+        return gettext('email_invalid')
     if not isinstance(account.get('password'), str):
-        return gettext(u'password_invalid')
+        return gettext('password_invalid')
     if len(account.get('password')) < 6:
-        return gettext(u'passwords_six')
+        return gettext('passwords_six')
     return None
 
 
@@ -296,11 +296,11 @@ def routes(app, database):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext(u'ajax_error'), 400
+            return gettext('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return gettext(u'username_invalid'), 400
+            return gettext('username_invalid'), 400
         if not isinstance(body.get('password'), str):
-            return gettext(u'password_invalid'), 400
+            return gettext('password_invalid'), 400
 
         # If username has an @-sign, then it's an email
         if '@' in body['username']:
@@ -309,7 +309,7 @@ def routes(app, database):
             user = DATABASE.user_by_username(body['username'])
 
         if not user or not check_password(body['password'], user['password']):
-            return gettext(u'invalid_username_password') + " " + gettext(u'no_account'), 403
+            return gettext('invalid_username_password') + " " + gettext('no_account'), 403
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
@@ -344,7 +344,7 @@ def routes(app, database):
         body = request.json
         # Validations, mandatory fields
         if not isinstance(body, dict):
-            return gettext(u'ajax_error'), 400
+            return gettext('ajax_error'), 400
 
         # Validate the essential data using a function -> also used for multiple account creation
         validation = validate_signup_data(body)
@@ -353,41 +353,41 @@ def routes(app, database):
 
         # Validate fields only relevant when creating a single user account
         if not isinstance(body.get('mail_repeat'), str) or not valid_email(body['mail_repeat']):
-            return gettext(u'repeat_match_email'), 400
+            return gettext('repeat_match_email'), 400
         if body['email'] != body['mail_repeat']:
-            return gettext(u'repeat_match_email'), 400
+            return gettext('repeat_match_email'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
-            return gettext(u'repeat_match_password'), 400
+            return gettext('repeat_match_password'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
-            return gettext(u'language_invalid'), 400
+            return gettext('language_invalid'), 400
         if not isinstance(body.get('agree_terms'), bool) or not body.get('agree_terms'):
-            return gettext(u'agree_invalid'), 400
+            return gettext('agree_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
-            return gettext(u'keyword_language_invalid'), 400
+            return gettext('keyword_language_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                return (gettext(u'year_invalid') + str(datetime.datetime.now().year)), 400
+                return (gettext('year_invalid') + str(datetime.datetime.now().year)), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
-                return gettext(u'gender_invalid'), 400
+                return gettext('gender_invalid'), 400
         if 'country' in body:
             if not body['country'] in countries:
-                return gettext(u'country_invalid'), 400
+                return gettext('country_invalid'), 400
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
-            return gettext(u'experience_invalid'), 400
+            return gettext('experience_invalid'), 400
         if 'experience_languages' in body:
             if not isinstance(body['experience_languages'], list):
-                return gettext(u'experience_invalid'), 400
+                return gettext('experience_invalid'), 400
             for language in body['experience_languages']:
                 if language not in['scratch', 'other_block', 'python', 'other_text']:
-                    return gettext(u'programming_invalid'), 400
+                    return gettext('programming_invalid'), 400
 
         if DATABASE.user_by_username(body['username'].strip().lower()):
-            return gettext(u'exists_username'), 403
+            return gettext('exists_username'), 403
         if DATABASE.user_by_email(body['email'].strip().lower()):
-            return gettext(u'exists_email'), 403
+            return gettext('exists_email'), 403
 
         # We receive the pre-processed user and response package from the function
         user, resp = store_new_account(body, body['email'].strip().lower())
@@ -480,25 +480,25 @@ def routes(app, database):
     def change_student_password(user):
         body = request.json
         if not isinstance(body, dict):
-            return gettext(u'ajax_error'), 400
+            return gettext('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return gettext(u'username_invalid'), 400
+            return gettext('username_invalid'), 400
         if not isinstance(body.get('password'), str):
-            return gettext(u'password_invalid'), 400
+            return gettext('password_invalid'), 400
         if len(body['password']) < 6:
-            return gettext(u'password_six'), 400
+            return gettext('password_six'), 400
 
         if not is_teacher(user):
-            return gettext(u"password_change_not_allowed"), 400
+            return gettext("password_change_not_allowed"), 400
         students = DATABASE.get_teacher_students(user['username'])
         if body['username'] not in students:
-            return gettext(u"password_change_not_allowed"), 400
+            return gettext("password_change_not_allowed"), 400
 
         user = DATABASE.user_by_username(body['username'])
         hashed = hash(body['password'], make_salt())
         DATABASE.update_user(body['username'], {'password': hashed})
 
-        return {'success': gettext(u"password_change_success")}, 200
+        return {'success': gettext("password_change_success")}, 200
 
     @app.route('/auth/change_password', methods=['POST'])
     @requires_login
@@ -506,21 +506,21 @@ def routes(app, database):
         body = request.json
 
         if not isinstance(body, dict):
-            return gettext(u'ajax_error'), 400
+            return gettext('ajax_error'), 400
         if not isinstance(body.get('old_password'), str) or not isinstance(body.get('password'), str):
-            return gettext(u'password_invalid'), 400
+            return gettext('password_invalid'), 400
         if not isinstance(body.get( 'password_repeat'), str):
-            return gettext(u'repeat_match_password'), 400
+            return gettext('repeat_match_password'), 400
         if len(body['password']) < 6:
-            return gettext(u'password_six'), 400
+            return gettext('password_six'), 400
         if body['password'] != body['password_repeat']:
-            return gettext(u'repeat_match_password'), 400
+            return gettext('repeat_match_password'), 400
 
         # The user object we got from 'requires_login' doesn't have the password, so look that up in the database
         user = DATABASE.user_by_username(user['username'])
 
         if not check_password(body['old_password'], user['password']):
-            return gettext(u'password_invalid'), 403
+            return gettext('password_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
 
@@ -529,40 +529,40 @@ def routes(app, database):
         if not is_testing_request(request):
             send_email_template('change_password', user['email'], '', lang=user['language'], username=user['username'])
 
-        return gettext(u'password_updated'), 200
+        return gettext('password_updated'), 200
 
     @app.route('/profile', methods=['POST'])
     @requires_login
     def update_profile(user):
         body = request.json
         if not isinstance(body, dict):
-            return gettext(u'ajax_error'), 400
+            return gettext('ajax_error'), 400
         if not isinstance(body.get('email'), str) or not valid_email(body['email']):
-            return gettext(u'email_invalid'), 400
+            return gettext('email_invalid'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
-            return gettext(u'language_invalid'), 400
+            return gettext('language_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get(
                 'language')] or body.get('keyword_language') not in ALL_KEYWORD_LANGUAGES.keys():
-            return gettext(u'keyword_language_invalid'), 400
+            return gettext('keyword_language_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                return gettext(u'year_invalid') + str(datetime.datetime.now().year), 400
+                return gettext('year_invalid') + str(datetime.datetime.now().year), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
-                return gettext(u'gender_invalid'), 400
+                return gettext('gender_invalid'), 400
         if 'country' in body:
             if not body['country'] in countries:
-                return gettext(u'country_invalid'), 400
+                return gettext('country_invalid'), 400
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
-            return gettext(u'experience_invalid'), 400
+            return gettext('experience_invalid'), 400
         if 'experience_languages' in body:
             if not isinstance(body['experience_languages'], list):
-                return gettext(u'experience_invalid'), 400
+                return gettext('experience_invalid'), 400
             for language in body['experience_languages']:
                 if language not in['scratch', 'other_block', 'python', 'other_text']:
-                    return gettext(u'programming_invalid'), 400
+                    return gettext('programming_invalid'), 400
 
         resp = {}
         if 'email' in body:
@@ -570,7 +570,7 @@ def routes(app, database):
             if email != user['email']:
                 exists = DATABASE.user_by_email(email)
                 if exists:
-                    return gettext(u'exists_email'), 403
+                    return gettext('exists_email'), 403
                 token = make_salt()
                 hashed_token = hash(token, make_salt())
                 DATABASE.update_user(user['username'], {'email': email, 'verification_pending': hashed_token})
@@ -610,10 +610,10 @@ def routes(app, database):
         # We can use g.lang for this to reduce the db calls
         resp['reload'] = False
         if session['lang'] != body['language'] or session['keyword_lang'] != body['keyword_language']:
-            resp['message'] = gettext(u'profile_updated')
+            resp['message'] = gettext('profile_updated')
             resp['reload'] = True
         else:
-            resp['message'] = gettext(u'profile_updated_reload')
+            resp['message'] = gettext('profile_updated_reload')
 
         remember_current_user(DATABASE.user_by_username(user['username']))
         return jsonify(resp)
@@ -642,9 +642,9 @@ def routes(app, database):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext(u'ajax_error'), 400
+            return gettext('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return gettext(u'username_invalid'), 400
+            return gettext('username_invalid'), 400
 
         # If username has an @-sign, then it's an email
         if '@' in body['username']:
@@ -653,7 +653,7 @@ def routes(app, database):
             user = DATABASE.user_by_username(body['username'].strip().lower())
 
         if not user:
-            return gettext(u'username_invalid'), 403
+            return gettext('username_invalid'), 403
 
         # Create a token -> use the reset_length value as we don't want the token to live as long as a login one
         token = make_salt()
@@ -667,28 +667,28 @@ def routes(app, database):
                                 email_base_url() + '/reset?username=' + urllib.parse.quote_plus(
                                     user['username']) + '&token=' + urllib.parse.quote_plus(token),
                                 lang=user['language'], username=user['username'])
-            return jsonify({'message':gettext(u'sent_password_recovery')}), 200
+            return jsonify({'message':gettext('sent_password_recovery')}), 200
 
     @app.route('/auth/reset', methods=['POST'])
     def reset():
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext(u'ajax_error'), 400
+            return gettext('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return gettext(u'username_invalid'), 400
+            return gettext('username_invalid'), 400
         if not isinstance(body.get('token'), str):
-            return gettext(u'token_invalid'), 400
+            return gettext('token_invalid'), 400
         if not isinstance(body.get('password'), str):
-            return gettext(u'password_invalid'), 400
+            return gettext('password_invalid'), 400
         if len(body['password']) < 6:
-            return gettext(u'password_six'), 400
+            return gettext('password_six'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
-            return gettext(u'repeat_match_password'), 400
+            return gettext('repeat_match_password'), 400
 
         token = DATABASE.get_token(body['token'])
         if not token or body['token'] != token.get('id'):
-            return gettext(u'token_invalid'), 403
+            return gettext('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
         DATABASE.update_user(body['username'], {'password': hashed})
@@ -700,7 +700,7 @@ def routes(app, database):
         if not is_testing_request(request):
             send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
 
-        return jsonify({'message':gettext(u'password_resetted')}), 200
+        return jsonify({'message':gettext('password_resetted')}), 200
 
     # *** ADMIN ROUTES ***
 
@@ -708,22 +708,22 @@ def routes(app, database):
     def mark_as_teacher():
         user = current_user()
         if not is_admin(user) and not is_testing_request(request):
-            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
         body = request.json
 
         # Validations
         if not isinstance(body, dict):
-            return gettext(u'ajax_error'), 400
+            return gettext('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return gettext(u'username_invalid'), 400
+            return gettext('username_invalid'), 400
         if not isinstance(body.get('is_teacher'), bool):
-            return gettext(u'teacher_invalid'), 400
+            return gettext('teacher_invalid'), 400
 
         user = DATABASE.user_by_username(body['username'].strip().lower())
 
         if not user:
-            return gettext(u'username_invalid'), 400
+            return gettext('username_invalid'), 400
 
         is_teacher_value = 1 if body['is_teacher'] else 0
         update_is_teacher(user, is_teacher_value)
@@ -735,22 +735,22 @@ def routes(app, database):
     def change_user_email():
         user = current_user()
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
         body = request.json
 
         # Validations
         if not isinstance(body, dict):
-            return gettext(u'ajax_error'), 400
+            return gettext('ajax_error'), 400
         if not isinstance(body.get('username'), str):
-            return gettext(u'username_invalid'), 400
+            return gettext('username_invalid'), 400
         if not isinstance(body.get('email'), str) or not valid_email(body['email']):
-            return gettext(u'email_invalid'), 400
+            return gettext('email_invalid'), 400
 
         user = DATABASE.user_by_username(body['username'].strip().lower())
 
         if not user:
-            return gettext(u'email_invalid'), 400
+            return gettext('email_invalid'), 400
 
         token = make_salt()
         hashed_token = hash(token, make_salt())
