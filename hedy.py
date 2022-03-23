@@ -1197,6 +1197,9 @@ class ConvertToPython_1(ConvertToPython):
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + " '+answer)"
 
+    def comment(self, args):
+        return f"#{''.join(args)}"
+
     def forward(self, args):
         if len(args) == 0:
             return sleep_after('t.forward(50)', False)
