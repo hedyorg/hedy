@@ -116,7 +116,7 @@ Feel free to manually add the translation to as many languages as you know, but 
 When adding new Babel related translation the implementation is a bit more complex, but don't worry! It should al work fine with the following steps:
 1. First we add the translation "placeholder" to either the front-end or back-end
     * When on the front-end (in a .html template) we do this like this: {{ _('test') }}
-    * When on the back-end we do this like this: gettext(u'test')
+    * When on the back-end we do this like this: gettext('test')
 2. Next we run the following command to let Babel search for keys:
     * ```pybabel extract -F babel.cfg -o messages.pot .```
 3. We now have to add the found keys to all translation files, with the following command:
