@@ -940,8 +940,8 @@ class TestProgram(AuthHelper):
         for program in saved_programs:
             if program['id'] != program_id:
                 continue
-            # THEN the program must have no `public` field
-            self.assertNotIn('public', program)
+            # THEN the program must have a '0' value for Public
+            self.assertEqual(program['public'], 0)
 
         # GIVEN another user
         self.given_fresh_user_is_logged_in()
