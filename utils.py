@@ -177,9 +177,10 @@ def atomic_write_file(filename, mode='wb'):
 # It operates by converting the date to a string, removing its last 3 digits, converting it back to an int
 # and then invoking the `isoformat` date function on it
 def mstoisostring(date):
-    unix_ts = date / 1000
-    dt = datetime.datetime.fromtimestamp(unix_ts)
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
+
+def stoisostring(date):
+    return datetime.datetime.fromtimestamp(date)
 
 def datetotimeordate(date):
     return date.replace("T", " ")

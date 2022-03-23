@@ -663,3 +663,33 @@ class TestsLevel6(HedyTester):
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
+
+  def test_space_in_string_assignment(self):
+    code = textwrap.dedent("""\
+      a is 'Hello World'
+      print a
+      
+      a = 'Hello World'
+      print a
+
+      a is Hello World
+      print a
+
+      a = Hello World
+      print a""")
+  
+    expected = textwrap.dedent("""\
+      a = '\\'Hello World\\''
+      print(f'{a}')
+      a = '\\'Hello World\\''
+      print(f'{a}')
+      a = 'Hello World'
+      print(f'{a}')
+      a = 'Hello World'
+      print(f'{a}')""")
+    
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected
+    )
