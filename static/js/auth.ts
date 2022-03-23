@@ -259,10 +259,7 @@ export const auth = {
         modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
       });
     });
-
   },
-
-  // Todo TB Feb 2022 -> Re-write part of this functionality to the back-end as well (separate PR from #2101)
   changeUserEmail: function (username: string, email: string) {
     modal.prompt ('Please enter the corrected email', email, function (correctedEmail) {
       if (correctedEmail === email) return;
