@@ -112,7 +112,7 @@ def routes(app, database, achievements):
             'code': body['code'],
             'name': body['name'],
             'username': user['username'],
-            'public': 1 if program_public else None,
+            'public': 1 if program_public else 0,
             'error': 1 if error else None
         }
 

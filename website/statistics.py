@@ -42,7 +42,7 @@ def routes(app, db):
 
         students = sorted(class_.get('students', []))
         return render_template('class-stats.html', class_info={'id': class_id, 'students': students},
-                               current_page='my-profile', page_title=g.ui_texts.get('title_class statistics'))
+                               current_page='my-profile', page_title=gettext(u'title_class statistics'))
 
     @app.route('/class-stats/<class_id>', methods=['GET'])
     @requires_login
