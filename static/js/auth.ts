@@ -82,12 +82,11 @@ export const auth = {
     if (op === 'signup') {
       const payload: User = {
         username: values.username,
-        email: values.email,
-        mail_repeat: values.mail_repeat,
         password: values.password,
         password_repeat: values.password_repeat,
         language: values.language,
         keyword_language: values.keyword_language,
+        email: values.email ? values.email : undefined,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,

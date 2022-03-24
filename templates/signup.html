@@ -10,12 +10,6 @@
                 <label class="inline-block w-1/2" for="username">{{_('username')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="3" id="username" name="username" required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="email">{{_('email')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="email" name="email" type="email" required>
-            </div>
-            <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                <label class="inline-block w-1/2" for="mail_repeat">{{_('email_repeat')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="mail_repeat" name="mail_repeat" type="email" autocomplete="off" required>
-            </div>
-            <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
                 <label class="inline-block w-1/2" for="password">{{_('password')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password" name="password" type=password required>
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
@@ -36,6 +30,9 @@
                          <option value="{{language.lang}}" id="{{language.lang}}_option" class="keyword_lang_option" {% if language.lang == "en" %}selected{% endif %}>{{language.sym}}</option>
                      {% endfor %}
                  </select>
+            </div>
+            <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
+                <label class="inline-block w-1/2" for="email">{{_('email')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="email" name="email" type="email">
             </div>
             <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
                 <label class="inline-block w-1/2" for="birth_year">{{_('birth_year')}}</label><input class="block appearance-none w-1/2 px-2 py-1 rounded-lg border border-gray-400" id="birth_year" min="1900" max="2022" name="birth_year" placeholder="1995" type="number">
