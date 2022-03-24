@@ -733,6 +733,7 @@ function rule_string() {
 
 
 function rule_blank() {
+  /* 'invalid' corresponds to a style predefined by monokai */
   return [{
     regex: /\_\?\_/,
     token: 'invalid',
