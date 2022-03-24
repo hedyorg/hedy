@@ -960,10 +960,10 @@ class IsValid(Filter):
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    def program(self, meta, args):
-        if len(args) == 0:
-            return False, InvalidInfo("empty program")
-        return super().program(meta, args)
+    # def program(self, meta, args):
+    #     if len(args) == 0:
+    #         return False, InvalidInfo("empty program")
+    #     return super().program(meta, args)
 
     def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
@@ -1893,6 +1893,7 @@ ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 def transpile(input_string, level, lang="en"):
     transpile_result = transpile_inner(input_string, level, lang)
     transpile_result = transpile_inner(input_string, level, lang)
+    print(transpile_result)
     return transpile_result
 
 def translate_characters(s):
@@ -2185,7 +2186,8 @@ def transpile_inner(input_string, level, lang="en"):
 
     input_string = process_input_string(input_string, level)
 
-    program_root = parse_input(input_string, level, lang)
+    program_root = parse_input(input_string, level, lang)    
+    print(program_root.pretty())
     is_program_valid(program_root, input_string, level, lang)
 
     try:
