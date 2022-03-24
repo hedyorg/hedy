@@ -1,14 +1,15 @@
 program: _EOL* (command | error_invalid) (_SPACE)* (_EOL+ (command | error_invalid) (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
-//placing assing at the end
-command:+= ifelse | ifs  |  list_access_var -= error_invalid | error_ask_no_quotes > assign
+
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
+command:+= ifelse | ifs | list_access_var -= error_invalid | error_ask_no_quotes > assign
+
+// error_invalid is moved from to command to program, so that command rules have priority over error_invalid
+error_invalid: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
 
 //todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
 list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
 assign_list: var _SPACE _IS _SPACE textwithspaces (_COMMA textwithspaces)+
 assign: var _SPACE _IS _SPACE textwithspaces
-// Why are we redefining this rule if it's not used in further levels? JP Dec-2021
-error_invalid: textwithoutspaces (_SPACE quoted_text | _SPACE textwithspaces)?
 
 error_print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var_access) (_SPACE (textwithoutspaces | list_access | var_access))*  -> error_print_nq
 
