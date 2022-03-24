@@ -104,8 +104,8 @@ export const auth = {
         url: '/auth/signup',
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
-      }).done (function (response) {
-        afterLogin({"first_time": true, "secret_key": response['secret_key']});
+      }).done (function () {
+        afterLogin({"first_time": true});
       }).fail (function (response) {
         modal.alert(response.responseText, 3000, true);
       });

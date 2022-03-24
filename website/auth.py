@@ -298,11 +298,8 @@ def routes(app, database):
         if not isinstance(body.get('password'), str):
             return gettext('password_invalid'), 400
 
-        # If username has an @-sign, then it's an email
-        if '@' in body['username']:
-            user = DATABASE.user_by_email(body['username'])
-        else:
-            user = DATABASE.user_by_username(body['username'])
+        # Todo TB 24-03-22 -> From now on we only allow login with username
+        user = DATABASE.user_by_username(body['username'])
 
         if not user or not check_password(body['password'], user['password']):
             return gettext('invalid_username_password') + " " + gettext('no_account'), 403
