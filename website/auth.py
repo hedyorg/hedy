@@ -264,7 +264,7 @@ def store_new_account(account):
         'keyword_language': account['keyword_language'],
         'created': timems(),
         'verification_pending': hashed_token,
-        'key': hashed_key,
+        #'key': hashed_key, --> Todo TB -> Don't store the key until we have the user implementation ready
         'last_login': timems()
     }
 
