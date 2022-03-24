@@ -7,49 +7,49 @@
  */
 
 #output {
-  white-space: pre-wrap;
+    white-space: pre-wrap;
 }
 
 .command-highlighted {
-  background-color: #272822;
-  color: #ff6188;
-  padding: 0.25rem;
-  font-family: monospace;
-  border-radius: 0.25rem;
+    background-color: #272822;
+    color: #ff6188;
+    padding: 0.25rem;
+    font-family: monospace;
+    border-radius: 0.25rem;
 }
 
 /* #868 hide ace's default mobile context menu until there is configuration to remove it */
 .ace_mobile-menu {
-  display: none;
+    display: none;
 }
 
 .editor-error {
-  position: absolute;
-  background: red !important;
+    position: absolute;
+    background: red !important;
 }
 
 input:checked ~ .dot {
-  transform: translateX(100%);
-  background-color: #48bb78;
+    transform: translateX(100%);
+    background-color: #48bb78;
 }
 
-#confetti{
-  width: 100%;
-  position: absolute;
-  height: auto;
-  top: 20%;
-  left: 30%;
+#confetti {
+    width: 100%;
+    position: absolute;
+    height: auto;
+    top: 20%;
+    left: 30%;
 }
 
-#repair_button:hover{
-  content: url('../images/Hedylightbulb_2.svg');
+#repair_button:hover {
+    content: url('../images/Hedylightbulb_2.svg');
 }
 
 /*Media Queries*/
 @media only screen and (max-width: 1280px) {
-  #repair_button{
-    margin-left: 12rem !important;
-  }
+    #repair_button {
+        margin-left: 12rem !important;
+    }
 }
 
 /*
@@ -101,17 +101,24 @@ body[dir='rtl'] #editor-area .ace_gutter-layer {
     text-align: right;
 }
 
-.ace_gutter-cell.ace_breakpoint{
-    border-radius: 14px 14px 14px 14px;
-    width: 21px;
-    background: red;
-    color: white;
+.ace_gutter-cell.ace_breakpoint {
+    visibility: hidden;
 }
 
-.ace_layer.ace_gutter-layer.ace_folding-enabled{
+.ace_gutter-cell.ace_breakpoint::after {
+    visibility: visible;
+    border-radius: 14px 14px 14px 14px;
+    width: 21px;
+    content: "😴";
+    z-index: 3;
+    position: absolute;
+    left: 0;
+}
+
+.ace_layer.ace_gutter-layer.ace_folding-enabled {
     width: 36px !important;
 }
 
-.ace-disabled{
-  text-decoration: line-through;
+.ace-disabled {
+    text-decoration: line-through;
 }
