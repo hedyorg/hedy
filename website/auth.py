@@ -653,7 +653,8 @@ def routes(app, database):
         else:
             user = DATABASE.user_by_username(body['username'].strip().lower())
 
-        if not user:
+        # If the user doesn't exist or doesn't have an e-mail -> We can't help them!
+        if not user or not user.get('email'):
             return gettext('username_invalid'), 403
 
         # Create a token -> use the reset_length value as we don't want the token to live as long as a login one
