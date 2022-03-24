@@ -243,8 +243,6 @@ def validate_signup_data(account):
         return gettext('username_special')
     if len(account.get('username').strip()) < 3:
         return gettext('username_three')
-    if not isinstance(account.get('email'), str) or not utils.valid_email(account.get('email')):
-        return gettext('email_invalid')
     if not isinstance(account.get('password'), str):
         return gettext('password_invalid')
     if len(account.get('password')) < 6:
@@ -252,12 +250,11 @@ def validate_signup_data(account):
     return None
 
 
-def store_new_account(account, email):
+def store_new_account(account):
     username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])
     user = {
         'username': username,
         'password': hashed,
-        'email': email,
         'language': account['language'],
         'keyword_language': account['keyword_language'],
         'created': timems(),
@@ -265,7 +262,7 @@ def store_new_account(account, email):
         'last_login': timems()
     }
 
-    for field in ['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
+    for field in ['email', 'birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
         if field in account:
             if field == 'experience_languages' and len(account[field]) == 0:
                 continue
@@ -277,8 +274,8 @@ def store_new_account(account, email):
     if is_testing_request(request):
         resp = make_response({'username': username, 'token': hashed_token})
     # Otherwise, we send an email with a verification link and we return an empty body
-    else:
-        send_email_template('welcome_verify', email,
+    elif 'email' in account:
+        send_email_template('welcome_verify', account['email'].strip().lower(),
                             email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
                                 username) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'],
                             username=user['username'])
@@ -352,10 +349,6 @@ def routes(app, database):
             return validation, 400
 
         # Validate fields only relevant when creating a single user account
-        if not isinstance(body.get('mail_repeat'), str) or not valid_email(body['mail_repeat']):
-            return gettext('repeat_match_email'), 400
-        if body['email'] != body['mail_repeat']:
-            return gettext('repeat_match_email'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return gettext('repeat_match_password'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
@@ -366,6 +359,9 @@ def routes(app, database):
             return gettext('keyword_language_invalid'), 400
 
         # Validations, optional fields
+        if 'email' in body:
+            if not isinstance(body.get('email'), str) or not utils.valid_email(body.get('email')):
+                return gettext('email_invalid')
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return (gettext('year_invalid') + str(datetime.datetime.now().year)), 400
@@ -386,13 +382,14 @@ def routes(app, database):
 
         if DATABASE.user_by_username(body['username'].strip().lower()):
             return gettext('exists_username'), 403
-        if DATABASE.user_by_email(body['email'].strip().lower()):
-            return gettext('exists_email'), 403
+        if 'email' in body:
+            if DATABASE.user_by_email(body['email'].strip().lower()):
+                return gettext('exists_email'), 403
 
         # We receive the pre-processed user and response package from the function
-        user, resp = store_new_account(body, body['email'].strip().lower())
+        user, resp = store_new_account(body)
 
-        if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] is True:
+        if not is_testing_request(request) and 'email' in body and 'subscribe' in body and body['subscribe'] is True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
                 mailchimp_subscribe_user(user['email'])
