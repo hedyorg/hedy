@@ -618,8 +618,8 @@ def routes(app, database):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = DATABASE.user_by_username(user['username'])
 
-        output = {'username': user['username'], 'email': user['email'], 'language': user.get('language', 'en')}
-        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
+        output = {'username': user['username'], 'language': user.get('language', 'en')}
+        for field in ['email', 'birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
             if field in user:
                 output[field] = user[field]
         if 'verification_pending' in user:
