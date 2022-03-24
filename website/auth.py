@@ -269,6 +269,7 @@ def store_new_account(account):
             user[field] = account[field]
 
     DATABASE.store_user(user)
+    resp = make_response({})
 
     # If this is an e2e test, we return the email verification token directly instead of emailing it.
     if is_testing_request(request):
@@ -279,7 +280,6 @@ def store_new_account(account):
                             email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
                                 username) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'],
                             username=user['username'])
-        resp = make_response({})
     return user, resp
 
 
