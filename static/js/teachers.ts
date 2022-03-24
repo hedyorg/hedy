@@ -3,11 +3,8 @@ import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 import DOMPurify from 'dompurify'
 
-export function create_class(class_name_prompt: string, class_name_empty: string) {
+export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
-    if (!class_name) {
-      return modal.alert(class_name_empty, 2000, true);
-    }
     $.ajax({
       type: 'POST',
       url: '/class',
@@ -28,33 +25,30 @@ export function create_class(class_name_prompt: string, class_name_empty: string
   });
 }
 
-export function rename_class(id: string, class_name_prompt: string, class_name_empty: string) {
-  modal.prompt (class_name_prompt, '', function (class_name) {
-    if (!class_name) {
-      return modal.alert(class_name_empty, 2000, true);
-    }
-    $.ajax({
-      type: 'PUT',
-      url: '/class/' + id,
-      data: JSON.stringify({
-        name: class_name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      if (response.achievement) {
-        showAchievements(response.achievement, true, "");
-      } else {
-        location.reload();
-      }
-    }).fail(function(err) {
-      return modal.alert(err.responseText, 3000, true);
+export function rename_class(id: string, class_name_prompt: string) {
+    modal.prompt (class_name_prompt, '', function (class_name) {
+        $.ajax({
+          type: 'PUT',
+          url: '/class/' + id,
+          data: JSON.stringify({
+            name: class_name
+          }),
+          contentType: 'application/json',
+          dataType: 'json'
+        }).done(function(response) {
+          if (response.achievement) {
+            showAchievements(response.achievement, true, "");
+          } else {
+            location.reload();
+          }
+        }).fail(function(err) {
+          return modal.alert(err.responseText, 3000, true);
+        });
     });
-  });
 }
 
-export function delete_class(id: string, confirmation: string) {
-  modal.confirm (confirmation, function () {
+export function delete_class(id: string, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'DELETE',
       url: '/class/' + id,
@@ -100,11 +94,8 @@ export function join_class(id: string, name: string) {
     });
 }
 
-export function invite_student(class_id: string, prompt: string, username_empty: string) {
+export function invite_student(class_id: string, prompt: string) {
     modal.prompt (prompt, '', function (username) {
-      if (!username) {
-          return modal.alert(username_empty);
-      }
       $.ajax({
           type: 'POST',
           url: '/invite_student',
@@ -160,11 +151,8 @@ export function remove_student(class_id: string, student_id: string, prompt: str
   });
 }
 
-export function create_adventure(prompt: string, adventure_empty: string) {
+export function create_adventure(prompt: string) {
     modal.prompt (prompt, '', function (adventure_name) {
-        if (!adventure_name.trim()) {
-          return modal.alert(adventure_empty, 3000, true);
-        }
         $.ajax({
           type: 'POST',
           url: '/for-teachers/create_adventure',
@@ -178,7 +166,7 @@ export function create_adventure(prompt: string, adventure_empty: string) {
         }).fail(function(err) {
           return modal.alert(err.responseText, 3000, true);
         });
-  });
+    });
 }
 
 function update_db_adventure(adventure_id: string) {

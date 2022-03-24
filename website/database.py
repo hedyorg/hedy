@@ -120,7 +120,7 @@ class Database:
 
     def set_program_public_by_id(self, id, public):
         """Store a program."""
-        PROGRAMS.update({'id': id}, {'public': 1 if public else None})
+        PROGRAMS.update({'id': id}, {'public': 1 if public else 0})
 
     def submit_program_by_id(self, id):
         PROGRAMS.update({'id': id}, {'submitted': True})
@@ -337,8 +337,8 @@ class Database:
     def get_username_invite(self, username):
         return INVITATIONS.get({'username': username}) or None
 
-    def add_class_invite(self, username, class_id):
-        INVITATIONS.put({'username': username, 'class_id': class_id, 'timestamp': timems ()})
+    def add_class_invite(self, data):
+        INVITATIONS.put(data)
 
     def remove_class_invite(self, username):
         INVITATIONS.delete({'username': username})
