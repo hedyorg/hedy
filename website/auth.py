@@ -234,6 +234,12 @@ def prepare_user_db(username, password):
     return username, hashed, hashed_token
 
 
+def prepare_user_secret_key():
+    key = utils.random_id_generator(4) + " " + utils.random_id_generator(4) + " " + utils.random_id_generator(4)
+    hashed = hash(key, make_salt())
+    return key, hashed
+
+
 def validate_signup_data(account):
     if not isinstance(account.get('username'), str):
         return gettext('username_invalid')
@@ -250,7 +256,7 @@ def validate_signup_data(account):
 
 def store_new_account(account):
     username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])
-    # Todo TB -> We should ALWAYS store a secret key token that can be used for password reset
+    secret_key, hashed_key = prepare_user_secret_key()
     user = {
         'username': username,
         'password': hashed,
@@ -258,6 +264,7 @@ def store_new_account(account):
         'keyword_language': account['keyword_language'],
         'created': timems(),
         'verification_pending': hashed_token,
+        'key': hashed_key,
         'last_login': timems()
     }
 
