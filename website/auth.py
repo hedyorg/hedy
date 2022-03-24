@@ -530,8 +530,6 @@ def routes(app, database):
         body = request.json
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400
-        if not isinstance(body.get('email'), str) or not valid_email(body['email']):
-            return gettext('email_invalid'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return gettext('language_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get(
@@ -539,6 +537,9 @@ def routes(app, database):
             return gettext('keyword_language_invalid'), 400
 
         # Validations, optional fields
+        if 'email' in body:
+            if not isinstance(body.get('email'), str) or not valid_email(body['email']):
+                return gettext('email_invalid'), 400
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return gettext('year_invalid') + str(datetime.datetime.now().year), 400
@@ -603,10 +604,10 @@ def routes(app, database):
         # We can use g.lang for this to reduce the db calls
         resp['reload'] = False
         if session['lang'] != body['language'] or session['keyword_lang'] != body['keyword_language']:
-            resp['message'] = gettext('profile_updated')
+            resp['message'] = gettext('profile_updated_reload')
             resp['reload'] = True
         else:
-            resp['message'] = gettext('profile_updated_reload')
+            resp['message'] = gettext('profile_updated')
 
         remember_current_user(DATABASE.user_by_username(user['username']))
         return jsonify(resp)
