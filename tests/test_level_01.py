@@ -367,8 +367,8 @@ class TestsLevel1(HedyTester):
     code = "word."
     self.single_level_tester(code, exception=hedy.exceptions.MissingCommandException)
 
-  def test_empty_gives_exception(self):
-    self.single_level_tester("", exception=hedy.exceptions.EmptyProgramException)
+  # def test_empty_gives_exception(self):
+  #   self.single_level_tester("", exception=hedy.exceptions.EmptyProgramException)
 
   def test_non_keyword_gives_Invalid(self):
     code = "groen"
@@ -384,10 +384,10 @@ class TestsLevel1(HedyTester):
     ask time travel """)
     self.single_level_tester(code, exception=hedy.exceptions.LonelyEchoException)
 
-  def test_newlines_only_gives_EmptyProgram(self):
-    code = textwrap.dedent("""\
-    """)
-    self.single_level_tester(code, exception=hedy.exceptions.EmptyProgramException)
+  # def test_newlines_only_gives_EmptyProgram(self):
+  #   code = textwrap.dedent("""\
+  #   """)
+  #   self.single_level_tester(code, exception=hedy.exceptions.EmptyProgramException)
 
   def test_incomplete_gives_Incomplete(self):
     with self.assertRaises(hedy.exceptions.IncompleteCommandException) as context:
