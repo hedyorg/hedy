@@ -1051,6 +1051,14 @@ def reset_page():
     return render_template('reset.html', page_title=gettext('title_reset'), reset_username=username, reset_token=token, current_page='login')
 
 
+@app.route('/reset_key', methods=['GET'])
+def reset_page_key():
+    #If there is a user logged in -> don't allow password reset
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('reset_key.html', page_title=gettext('title_reset'), current_page='login')
+
+
 @app.route('/my-profile', methods=['GET'])
 @requires_login
 def profile_page(user):
