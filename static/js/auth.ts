@@ -106,8 +106,6 @@ export const auth = {
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
-        // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
-        auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
         modal.confirm("Dit is jouw geheime sleutel, bewaar deze goed!" + response['secret_key'], function () {
           afterLogin({"first_time": true});
         });
