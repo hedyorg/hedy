@@ -640,7 +640,7 @@ def routes(app, database):
         if not isinstance(body.get('username'), str):
             return gettext('username_invalid'), 400
 
-        # If username has an @-sign, then it's an email
+        # Todo TB -> I think it is best to leave the reset option open for both username and email
         if '@' in body['username']:
             user = DATABASE.user_by_email(body['username'].strip().lower())
         else:
