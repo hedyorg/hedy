@@ -53,7 +53,8 @@ ALL_LANGUAGES = {
     'hi': 'हिंदी',
     'id': 'Bahasa Indonesia',
     'fy': 'Frysk',
-    'ar': 'عربى'
+    'ar': 'عربى',
+    'tr': 'Türk'
 }
 # Define fall back languages for adventures
 FALL_BACK_ADVENTURE = {
@@ -441,7 +442,7 @@ class LookupEntryCollector(visitors.Visitor):
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, True)
 
-    def repeat_list(self, tree):
+    def for_list(self, tree):
         iterator = str(tree.children[0].children[0])
         # the tree is trimmed to skip contain the inner commands of the loop since
         # they are not needed to infer the type of the iterator variable
@@ -500,8 +501,15 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree)
 
     def assign(self, tree):
-        type_ = self.get_type(tree.children[1])
-        self.save_type_to_lookup(tree.children[0].children[0], type_)
+        try:
+            type_ = self.get_type(tree.children[1])
+            self.save_type_to_lookup(tree.children[0].children[0], type_)
+        except hedy.exceptions.UndefinedVarException as ex:
+            if self.level >= 12:
+                raise hedy.exceptions.UnquotedAssignTextException(text=ex.arguments['name'])
+            else:
+                raise
+
         return self.to_typed_tree(tree, HedyType.none)
     
     def assign_list(self, tree):
@@ -551,7 +559,7 @@ class TypeValidator(Transformer):
         self.check_type_allowed(command, allowed_types, tree.children[0], tree.meta)
         return self.to_typed_tree(tree, HedyType.none)
 
-    def repeat_list(self, tree):
+    def for_list(self, tree):
         command = Command.for_list
         allowed_types = get_allowed_types(command, self.level)
         self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
@@ -681,6 +689,16 @@ class TypeValidator(Transformer):
         return arg_type
 
     def get_type(self, tree):
+        # The rule var_access is used in the grammars definitions only in places where a variable needs to be accessed.
+        # So, if it cannot be found in the lookup table, then it is an undefined variable for sure.
+        if tree.data == 'var_access':
+            var_name = tree.children[0]
+            in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
+            if in_lookup:
+                return type_in_lookup
+            else:
+                raise hedy.exceptions.UndefinedVarException(name=var_name)
+
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
         if tree.type_ in [HedyType.none, HedyType.string] and len(tree.children) == 1:
@@ -839,7 +857,7 @@ class AllCommands(Transformer):
             return 'elif'
         if keyword == 'for_loop':
             return 'for'
-        if keyword == 'repeat_list':
+        if keyword == 'for_list':
             return 'for'
         if keyword == 'orcondition':
             return 'or'
@@ -1537,7 +1555,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
 @hedy_transpiler(level=10)
 class ConvertToPython_10(ConvertToPython_8_9):
-    def repeat_list(self, args):
+    def for_list(self, args):
       args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
       body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
@@ -1608,7 +1626,7 @@ class ConvertToPython_12(ConvertToPython_11):
         # either a var or quoted, if it is not (and undefined var is raised)
         # the real issue is probably that the kid forgot quotes
         try:
-            correct_rhs = self.check_var_usage([right_hand_side]) #check_var_usage expects a list of arguments so place this one in a list.
+            self.check_var_usage([right_hand_side]) #check_var_usage expects a list of arguments so place this one in a list.
         except exceptions.UndefinedVarException as E:
             # is the text a number? then no quotes are fine. if not, raise maar!
 

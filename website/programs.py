@@ -1,3 +1,5 @@
+from flask_babel import gettext
+import hedy
 from website.auth import requires_login, current_user
 import utils
 import uuid
@@ -36,9 +38,10 @@ def routes(app, database, achievements):
             DATABASE.set_favourite_program(user['username'], None)
 
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "do_you_have_copy")
+        resp = {'message': gettext('delete_success')}
         if achievement:
-            return {'achievement': achievement}, 200
-        return {}, 200
+            resp['achievement'] = achievement
+        return jsonify(resp)
 
     @app.route('/programs/duplicate-check', methods=['POST'])
     def check_duplicate_program():
@@ -49,12 +52,12 @@ def routes(app, database, achievements):
             return 'name must be a string', 400
 
         if not current_user()['username']:
-            return 'not_logged', 403
+            return gettext('save_prompt'), 403
 
         programs = DATABASE.programs_for_user(current_user()['username'])
         for program in programs:
             if program['name'] == body['name']:
-                return jsonify({'duplicate': True})
+                return jsonify({'duplicate': True, 'message': gettext('overwrite_warning')})
         return jsonify({'duplicate': False})
 
     @app.route('/programs', methods=['POST'])
@@ -69,22 +72,34 @@ def routes(app, database, achievements):
             return 'name must be a string', 400
         if not isinstance(body.get('level'), int):
             return 'level must be an integer', 400
+        if not isinstance(body.get('shared'), bool):
+            return 'shared must be a boolean', 400
         if 'adventure_name' in body:
             if not isinstance(body.get('adventure_name'), str):
                 return 'if present, adventure_name must be a string', 400
+
+        error = False
+        try:
+            hedy.transpile(body.get('code'), body.get('level'), g.lang)
+        except:
+            error = True
+            if not body.get('force_save', True):
+                return jsonify({'parse_error': True, 'message': gettext('save_parse_warning')})
 
         # We check if a program with a name `xyz` exists in the database for the username.
         # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
         # For now, we bring all existing programs for the user and then search within them for repeated names.
         programs = DATABASE.programs_for_user(user['username']).records
         program_id = uuid.uuid4().hex
-        program_public = 0
+        program_public = body.get('shared')
         overwrite = False
         for program in programs:
             if program['name'] == body['name']:
                 overwrite = True
                 program_id = program['id']
-                program_public = program.get('public', 0)
+                # If a program was already shared, keep it that way
+                if program.get('public', False):
+                    program_public = True
                 break
 
         stored_program = {
@@ -97,7 +112,8 @@ def routes(app, database, achievements):
             'code': body['code'],
             'name': body['name'],
             'username': user['username'],
-            'public': program_public
+            'public': 1 if program_public else 0,
+            'error': error
         }
 
         if 'adventure_name' in body:
@@ -112,8 +128,8 @@ def routes(app, database, achievements):
         if ACHIEVEMENTS.verify_save_achievements(user['username'],
                                                  'adventure_name' in body and len(body['adventure_name']) > 2):
             return jsonify(
-                {'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
-        return jsonify({'name': body['name'], 'id': program_id})
+                {'message': gettext('save_success_detail'), 'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
+        return jsonify({'message': gettext('save_success_detail'), 'name': body['name'], 'id': program_id})
 
     @app.route('/programs/share', methods=['POST'])
     @requires_login
@@ -136,11 +152,17 @@ def routes(app, database, achievements):
             'id']:
             DATABASE.set_favourite_program(user['username'], None)
 
-        DATABASE.set_program_public_by_id(body['id'], bool(body['public']), bool(body['error']))
+        DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "sharing_is_caring")
+
+        resp = {'id': body['id']}
+        if bool(body['public']):
+            resp['message'] = gettext('share_success_detail')
+        else:
+            resp['message'] = gettext('unshare_success_detail')
         if achievement:
-            return jsonify({'achievement': achievement, 'id': body['id']})
-        return jsonify({'id': body['id']})
+            resp['achievement'] = achievement
+        return jsonify(resp)
 
     @app.route('/programs/submit', methods=['POST'])
     @requires_login
@@ -177,6 +199,6 @@ def routes(app, database, achievements):
             return 'No such program!', 404
 
         if DATABASE.set_favourite_program(user['username'], body['id']):
-            return jsonify({})
+            return jsonify({'message': gettext('favourite_success')})
         else:
             return "You can't set a favourite program without a public profile", 400

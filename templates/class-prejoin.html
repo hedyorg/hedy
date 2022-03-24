@@ -4,17 +4,17 @@
 <div class="px-8">
    {% if joined %}
         <div class="flex flex-col w-full items-center">
-            <h1>{{auth.class_already_joined}} <i>"{{class_info.name}}"</i></h1>
+            <h1>{{_('class_already_joined')}} <i>"{{class_info.name}}"</i></h1>
             <div class="w-1/2 mt-2">
                 <img class="w-full" src="/images/500.png">
             </div>
-            <button class="green-btn" onclick="window.open('/my-profile','_self')">{{auth.goto_profile}}</button>
+            <button class="green-btn" onclick="window.open('/my-profile','_self')">{{_('goto_profile')}}</button>
         </div>
    {% else %}
        <div class="flex flex-col w-full items-center">
-            <h1 class="mb-4">{{auth.prompt_join_class}}</h1>
+            <h1 class="mb-4">{{_('prompt_join_class')}}</h1>
             <h2 class="mt-0 mb-8">"{{class_info.name}}"</h2>
-            <button class="green-btn" onclick="hedyApp.join_class ('{{class_info.id}}', '{{class_info.name}}')">{{auth.join_class}}</button>
+            <button class="green-btn" onclick="hedyApp.join_class ('{{class_info.id}}', '{{class_info.name}}', '{{_('join_prompt')}}')">{{_('join_class')}}</button>
        </div>
    {% endif %}
 </div>
