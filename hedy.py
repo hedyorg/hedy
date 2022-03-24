@@ -1333,7 +1333,7 @@ class ConvertToPython_2(ConvertToPython_1):
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, args):
         parameter = args[0]
-        values = ["'" + a + "'" for a in args[1:]]
+        values = ["'" + a.replace("'", "\\'") + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
