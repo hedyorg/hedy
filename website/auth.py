@@ -268,18 +268,18 @@ def store_new_account(account):
             user[field] = account[field]
 
     DATABASE.store_user(user)
+    resp = make_response({})
 
     # If this is an e2e test, we return the email verification token directly instead of emailing it.
     if is_testing_request(request):
-        return user, make_response({'username': username, 'token': hashed_token})
+        resp = make_response({'username': username, 'token': hashed_token})
     # Otherwise, we send an email with a verification link and we return an empty body
-    if 'email' in account:
+    elif 'email' in account:
         send_email_template('welcome_verify', account['email'].strip().lower(),
                             email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
                                 username) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'],
                             username=user['username'])
-    # Todo TB -> Add the unhashed secret key to the response
-    return user, make_response({'secret_key': '123'})
+    return user, resp
 
 
 # Note: translations are used only for texts that will be seen by a GUI user.

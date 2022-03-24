@@ -148,8 +148,7 @@ def routes(app, database, achievements):
 
         # This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
         public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
-        if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body[
-            'id']:
+        if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
             DATABASE.set_favourite_program(user['username'], None)
 
         DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
