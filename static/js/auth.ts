@@ -295,6 +295,16 @@ $("#language").change(function () {
     }
 });
 
+$("#email").keyup(function () {
+  if ($(this).is(":valid")) {
+    $('#subscribe_newsletter_container').show();
+  } else {
+    $('#subscribe_newsletter_container').hide();
+    $('#subscribe').prop("checked", false);
+  }
+});
+
+
 $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
    return false;
