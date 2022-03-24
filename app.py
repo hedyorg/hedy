@@ -180,11 +180,11 @@ def get_locale():
 
 """
     Some important notes relates to Flask-Babel usage:
-    -   We can always get a translation using gettext(u'english string')
+    -   We can always get a translation using gettext('english string')
         NOTE: We can shorten this notation by simply using _('english string')
-    -   We can insert some variable like this: gettext(u'some string %(value)s', value=42)
+    -   We can insert some variable like this: gettext('some string %(value)s', value=42)
     -   More interesting for us might be the 'lazy string' the can be defined outside requests, like this:
-    -       lazy_gettext(u'Account successfully saved')
+    -       lazy_gettext('Account successfully saved')
     -   This will be really useful when wanting to return translated error messages
     
     - We have to mark ALL translatable string (in english!) with gettext() -> then create a .pot file
@@ -568,7 +568,7 @@ def parse():
     })
 
     if "Error" in response and error_check:
-        response["message"] = gettext(u'program_contains_error')
+        response["message"] = gettext('program_contains_error')
     return jsonify(response)
 
 
@@ -624,7 +624,7 @@ def translate_error(code, arguments):
                                            'variable']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
-    error_template = gettext(u'' + str(code))
+    error_template = gettext('' + str(code))
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
@@ -635,19 +635,19 @@ def translate_error(code, arguments):
             if isinstance(v, list):
                 arguments[k] = translate_list(v)
             else:
-                arguments[k] = gettext(u'' + str(v))
+                arguments[k] = gettext('' + str(v))
 
     return error_template.format(**arguments)
 
 
 def translate_list(args):
-    translated_args = [gettext(u'' + str(a)) for a in args]
+    translated_args = [gettext('' + str(a)) for a in args]
     # Deduplication is needed because diff values could be translated to the same value, e.g. int and float => a number
     translated_args = list(dict.fromkeys(translated_args))
 
     if len(translated_args) > 1:
         return f"{', '.join(translated_args[0:-1])}" \
-               f" {gettext(u'or')} " \
+               f" {gettext('or')} " \
                f"{translated_args[-1]}"
     return ''.join(translated_args)
 
@@ -720,7 +720,7 @@ def achievements_page():
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
     achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
 
-    return render_template('achievements.html', page_title=gettext(u'title_achievements'),
+    return render_template('achievements.html', page_title=gettext('title_achievements'),
                            achievements=achievements, template_achievements=achievement_translations, current_page='my-profile')
 
 
@@ -737,10 +737,10 @@ def programs_page(user):
     # If from_user -> A teacher is trying to view the user programs
     if from_user and not is_admin(user):
         if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext(u'not_teacher'))
+            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
         students = DATABASE.get_teacher_students(username)
         if from_user not in students:
-            return utils.error_page(error=403, ui_message=gettext(u'not_enrolled'))
+            return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
     adventures = load_adventure_for_language(g.lang).adventures_file['adventures']
     if hedy_content.Adventures(session['lang']).has_adventures():
@@ -772,7 +772,7 @@ def programs_page(user):
              'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'),
              'public': item.get('public')})
 
-    return render_template('programs.html', programs=programs, page_title=gettext(u'title_programs'),
+    return render_template('programs.html', programs=programs, page_title=gettext('title_programs'),
                            current_page='programs', from_user=from_user, adventures=adventures,
                            filtered_level=level, filtered_adventure=adventure, adventure_names=adventures_names,
                            public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
@@ -782,7 +782,7 @@ def programs_page(user):
 def query_logs():
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
+        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
     body = request.json
     if body is not None and not isinstance(body, dict):
@@ -792,11 +792,11 @@ def query_logs():
     if not is_admin(user):
         username_filter = body.get('username')
         if not class_id or not username_filter:
-            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', []):
-            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -810,7 +810,7 @@ def get_log_results():
 
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
+        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
     data, next_token = log_fetcher.get_query_results(query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
@@ -820,16 +820,16 @@ def get_log_results():
 def get_user_formatted_age(now, date):
     program_age = now - date
     if program_age < 1000 * 60 * 60:
-        measure = gettext(u'minutes')
+        measure = gettext('minutes')
         date = round(program_age / (1000 * 60))
     elif program_age < 1000 * 60 * 60 * 24:
-        measure = gettext(u'hours')
+        measure = gettext('hours')
         date = round(program_age / (1000 * 60 * 60))
     else:
-        measure = gettext(u'days')
+        measure = gettext('days')
         date = round(program_age / (1000 * 60 * 60 * 24))
     age = {'time': str(date) + " " + measure}
-    return gettext(u'ago').format(**age)
+    return gettext('ago').format(**age)
 
 
 # routing to index.html
@@ -845,9 +845,9 @@ def index(level, program_id):
         try:
             g.level = level = int(level)
         except:
-            return utils.error_page(error=404, ui_message=gettext(u'no_such_level'))
+            return utils.error_page(error=404, ui_message=gettext('no_such_level'))
     else:
-        return utils.error_page(error=404, ui_message=gettext(u'no_such_level'))
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = ''
     adventure_name = ''
@@ -855,17 +855,17 @@ def index(level, program_id):
     if program_id:
         result = DATABASE.program_by_id(program_id)
         if not result:
-            return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
+            return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         user = current_user()
         public_program = result.get('public')
         # Verify that the program is either public, the current user is the creator or the user is admin
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
-            return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
+            return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         # If the current user is a teacher, perform an extra check -> user is their student
         if is_teacher(user) and result['username'] not in DATABASE.get_teacher_students(user['username']):
-            return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
+            return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
@@ -891,9 +891,9 @@ def index(level, program_id):
                     print("Error: there is an openings date without a level")
 
     if level not in level_defaults_for_lang.levels and level <= hedy.HEDY_MAX_LEVEL:
-        return utils.error_page(error=404, ui_message=gettext(u'level_not_translated'))
+        return utils.error_page(error=404, ui_message=gettext('level_not_translated'))
     if 'levels' in customizations and level not in available_levels:
-        return utils.error_page(error=403, ui_message=gettext(u'level_not_class'))
+        return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
@@ -930,7 +930,7 @@ def view_program(id):
 
     result = DATABASE.program_by_id(id)
     if not result:
-        return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
+        return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
     # If we asked for a specific language, use that, otherwise use the language
     # of the program's author.
@@ -969,7 +969,7 @@ def get_specific_adventure(name, level):
     try:
         level = int(level)
     except:
-        return utils.error_page(error=404, ui_message=gettext(u'no_such_level'))
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     adventure = [x for x in load_adventures_per_level(g.lang, level) if x.get('short_name') == name]
     prev_level = level-1 if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name] else False
@@ -979,7 +979,7 @@ def get_specific_adventure(name, level):
     print(next_level)
 
     if not adventure:
-        return utils.error_page(error=404, ui_message=gettext(u'no_such_adventure'))
+        return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
@@ -998,7 +998,7 @@ def get_cheatsheet_page(level):
 
 @app.errorhandler(404)
 def not_found(exception):
-    return utils.error_page(error=404, ui_message=gettext(u'page_not_found'))
+    return utils.error_page(error=404, ui_message=gettext('page_not_found'))
 
 
 @app.errorhandler(500)
@@ -1018,21 +1018,21 @@ def default_landing_page():
 def signup_page():
     if current_user()['username']:
         return redirect('/my-profile')
-    return render_template('signup.html', page_title=gettext(u'title_signup'), current_page='login')
+    return render_template('signup.html', page_title=gettext('title_signup'), current_page='login')
 
 
 @app.route('/login', methods=['GET'])
 def login_page():
     if current_user()['username']:
         return redirect('/my-profile')
-    return render_template('login.html', page_title=gettext(u'title_login'), current_page='login')
+    return render_template('login.html', page_title=gettext('title_login'), current_page='login')
 
 
 @app.route('/recover', methods=['GET'])
 def recover_page():
     if current_user()['username']:
         return redirect('/my-profile')
-    return render_template('recover.html', page_title=gettext(u'title_recover'), current_page='login')
+    return render_template('recover.html', page_title=gettext('title_recover'), current_page='login')
 
 
 @app.route('/reset', methods=['GET'])
@@ -1047,8 +1047,8 @@ def reset_page():
     token = None if token == "null" else token
 
     if not username or not token:
-        return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
-    return render_template('reset.html', page_title=gettext(u'title_reset'), reset_username=username, reset_token=token, current_page='login')
+        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+    return render_template('reset.html', page_title=gettext('title_reset'), reset_username=username, reset_token=token, current_page='login')
 
 
 @app.route('/my-profile', methods=['GET'])
@@ -1057,7 +1057,7 @@ def profile_page(user):
     programs = DATABASE.public_programs_for_user(user['username'])
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
-    return render_template('profile.html', page_title=gettext(u'title_my-profile'), programs=programs,
+    return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
                            public_settings=public_profile_settings, current_page='my-profile')
 
 
@@ -1071,21 +1071,21 @@ def main_page(page):
 
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('learn-more.html', page_title=gettext(u'title_learn-more'),
+        return render_template('learn-more.html', page_title=gettext('title_learn-more'),
                                current_page='learn-more', content=learn_more_translations)
 
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('privacy.html', page_title=gettext(u'title_privacy'),
+        return render_template('privacy.html', page_title=gettext('title_privacy'),
                                content=privacy_translations)
 
     user = current_user()
 
     if page == 'landing-page':
         if user['username']:
-            return render_template('landing-page.html', page_title=gettext(u'title_landing-page'), user=user['username'])
+            return render_template('landing-page.html', page_title=gettext('title_landing-page'), user=user['username'])
         else:
-            return utils.error_page(error=403, ui_message=gettext(u'not_user'))
+            return utils.error_page(error=403, ui_message=gettext('not_user'))
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -1100,18 +1100,18 @@ def main_page(page):
                                    'level': adventure.get('level')})
 
             return render_template('for-teachers.html', current_page='my-profile',
-                                   page_title=gettext(u'title_for-teacher'),
+                                   page_title=gettext('title_for-teacher'),
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
                                    teacher_adventures=adventures, welcome_teacher=welcome_teacher)
         else:
-            return utils.error_page(error=403, ui_message=gettext(u'not_teacher'))
+            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
 
     requested_page = hedyweb.PageTranslations(page)
     if not requested_page.exists():
         abort(404)
 
     main_page_translations = requested_page.get_page_translations(g.lang)
-    return render_template('main-page.html', page_title=gettext(u'title_start'),
+    return render_template('main-page.html', page_title=gettext('title_start'),
                            current_page='start', content=main_page_translations)
 
 
@@ -1164,7 +1164,7 @@ def explore():
                            filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures=adventures,
-                           page_title=gettext(u'title_explore'),
+                           page_title=gettext('title_explore'),
                            current_page='explore')
 
 
@@ -1183,9 +1183,9 @@ def translate_keywords():
         if translated_code:
             return jsonify({'success': 200, 'code': translated_code})
         else:
-            return gettext(u'translate_error'), 400
+            return gettext('translate_error'), 400
     except:
-        return gettext(u'translate_error'), 400
+        return gettext('translate_error'), 400
 
 
 @app.route('/client_messages.js', methods=['GET'])
@@ -1294,20 +1294,20 @@ def update_public_profile(user):
 
     # Validations
     if not isinstance(body, dict):
-        return gettext(u'ajax_error'), 400
+        return gettext('ajax_error'), 400
     # The images are given as a "picture id" from 1 till 12
     if not isinstance(body.get('image'), str) or int(body.get('image'), 0) < 1 or int(body.get('image'), 0) > 12:
-        return gettext(u'image_invalid'), 400
+        return gettext('image_invalid'), 400
     if not isinstance(body.get('personal_text'), str):
-        return gettext(u'personal_text_invalid'), 400
+        return gettext('personal_text_invalid'), 400
     if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
-        return gettext(u'favourite_program_invalid'), 400
+        return gettext('favourite_program_invalid'), 400
 
     # Verify that the set favourite program is actually from the user (and public)!
     if 'favourite_program' in body:
         program = DATABASE.program_by_id(body.get('favourite_program'))
         if not program or program.get('username') != user['username'] or not program.get('public'):
-            return gettext(u'favourite_program_invalid'), 400
+            return gettext('favourite_program_invalid'), 400
 
     achievement = None
     current_profile = DATABASE.get_public_profile_settings(user['username'])
@@ -1319,8 +1319,8 @@ def update_public_profile(user):
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
         #Todo TB -> Check if we require message or success on front-end
-        return {'message': gettext(u'public_profile_updated'), 'achievement': achievement}, 200
-    return {'message': gettext(u'public_profile_updated')}, 200
+        return {'message': gettext('public_profile_updated'), 'achievement': achievement}, 200
+    return {'message': gettext('public_profile_updated')}, 200
 
 @app.route('/translating')
 def translating_page():
@@ -1350,11 +1350,11 @@ def update_yaml():
 @app.route('/user/<username>')
 def public_user_page(username):
     if not current_user()['username']:
-        return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
+        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
     username = username.lower()
     user = DATABASE.user_by_username(username)
     if not user:
-        return utils.error_page(error=404, ui_message=gettext(u'user_not_private'))
+        return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
     if user_public_info:
         user_programs = DATABASE.public_programs_for_user(username)
@@ -1378,7 +1378,7 @@ def public_user_page(username):
                                programs=user_programs,
                                last_achieved=last_achieved,
                                user_achievements=user_achievements)
-    return utils.error_page(error=404, ui_message=gettext(u'user_not_private'))
+    return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
 @app.route('/invite/<code>', methods=['GET'])
@@ -1387,7 +1387,7 @@ def teacher_invitation(code):
     lang = g.lang
 
     if os.getenv('TEACHER_INVITE_CODE') != code:
-        return utils.error_page(error=404, ui_message=gettext(u'invalid_teacher_invitation_code'))
+        return utils.error_page(error=404, ui_message=gettext('invalid_teacher_invitation_code'))
     if not user['username']:
         return render_template('teacher-invitation.html')
 

@@ -200,11 +200,11 @@ def markdown_to_html_tags(markdown):
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None):
     if error not in [403, 404, 500]:
         error = 404
-    default = gettext(u'default_404')
+    default = gettext('default_404')
     if error == 403:
-        default = gettext(u'default_403')
+        default = gettext('default_403')
     elif error == 500:
-        default = gettext(u'default_500')
+        default = gettext('default_500')
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
                            page_error=page_error or ui_message or '', default=default), error
 
