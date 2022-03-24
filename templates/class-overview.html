@@ -80,8 +80,8 @@
             <td class="amount_programs_cell">{{student.programs}}</td>
             <td class="overview_cell"><a href="/programs?user={{student.username}}">{{student.username}}'s {{_('page')}}</a></td>
             <td class="last_shared_cell">{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
-            <td class="change_password_cell hidden"><a href="#" onclick="hedyApp.change_password_student ('{{student.username}}', '{{_('enter_password')}}', '{{_('password_change_prompt')}}')">{{_('change_password')}}</a></td>
-            <td class="remove_student_cell hidden"><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}', '{{_('remove_student_prompt')}}')">{{_('remove')}} {{student.username}}</a></td>
+            <td class="change_password_cell hidden"><a href="#" onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|tojson}}, {{_('password_change_prompt')|tojson}})'>{{_('change_password')}}</a></td>
+            <td class="remove_student_cell hidden"><a href="#" onclick='hedyApp.remove_student("{{class_info.id}}", "{{student.username}}", {{_('remove_student_prompt')|tojson}})'>{{_('remove')}}{{student.username}}</a></td>
           </tr>
         {% endfor %}
       </tbody>
@@ -90,24 +90,25 @@
   <p>{{_('class_link')}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
   <div class="mt-4 flex flex-row">
     <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.rename_class ('{{class_info.id}}', '{{_('class_name_prompt')}}', '{{_('class_name_empty')}}')">{{_('rename_class')}}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.invite_student ('{{class_info.id}}', '{{_('invite_prompt')}}', '{{_('username_empty')}}')">{{_('invite_student')}}</button>
+    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|tojson}})'>{{_('rename_class')}}</button>
+    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_student')}}</button>
     <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
   </div>
   <div class="mt-4 flex flex-row">
     <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
-    <button class="red-btn ltr:ml-4 rtl:mr-4" onclick="hedyApp.delete_class ('{{class_info.id}}', '{{_('delete_class_prompt')}}')">{{_('delete_class')}}</button>
+    <button class="red-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.delete_class("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
   </div>
   <div class="mt-4">
   {% if invites %}
       <h2>{{_('pending_invites')}}</h2>
-      <div class=" w-1/2 border-solid border-2 border-orange-400 rounded my-5 p-4">
-        <table class="table-auto w-full text-sm">
+      <div class="inline-block border-solid border-2 border-orange-400 rounded my-5 p-4">
+        <table class="table-auto text-sm">
         <thead>
             <tr class="font-bold text-left">
-                <th>{{_('username')}}</th>
-                <th>{{_('invite_date')}}</th>
-                <th>{{_('remove_invite')}}</th>
+                <th class="w-40">{{_('username')}}</th>
+                <th class="w-52">{{_('invite_date')}}</th>
+                <th class="w-52">{{_('expiration_date')}}</th>
+                <th class="w-64">{{_('remove_invite')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -115,7 +116,8 @@
             <tr>
                 <td>{{invite.username}}</td>
                 <td>{{invite.timestamp}}</td>
-                <td><a href="#" onclick="hedyApp.remove_student_invite('{{invite.username}}', '{{ class_info.id }}', '{{_('delete_invite_prompt')}}')">{{_('remove')}}</a></td>
+                <td>{{invite.expire_timestamp}}</td>
+                <td><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|tojson}})'>{{_('remove')}}</a></td>
             </tr>
         {% endfor %}
         </tbody>

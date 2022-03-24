@@ -34,15 +34,15 @@ def routes(app, db):
     @requires_login
     def render_class_stats(user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext(u'retrieve_class_error'))
+            return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or (class_['teacher'] != user['username'] and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext(u'no_such_class'))
+            return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         students = sorted(class_.get('students', []))
         return render_template('class-stats.html', class_info={'id': class_id, 'students': students},
-                               current_page='my-profile', page_title=g.ui_texts.get('title_class statistics'))
+                               current_page='my-profile', page_title=gettext('title_class statistics'))
 
     @app.route('/class-stats/<class_id>', methods=['GET'])
     @requires_login
@@ -83,7 +83,7 @@ def routes(app, db):
         end_date = request.args.get('end', default=None, type=str)
 
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext(u'unauthorized'))
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
         ids = [e.value for e in UserType]
         program_runs_data = DATABASE.get_program_stats(ids, start_date, end_date)
