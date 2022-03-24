@@ -7,10 +7,8 @@ from website.yaml_file import YamlFile
 import bcrypt
 import re
 import urllib
-from flask import request, session, make_response, jsonify, redirect, g
-from flask_helpers import render_template
-from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, \
-    mstoisostring
+from flask import request, session, make_response, jsonify, redirect
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku
 import datetime
 from functools import wraps
 from config import config
@@ -252,6 +250,7 @@ def validate_signup_data(account):
 
 def store_new_account(account):
     username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])
+    # Todo TB -> We should ALWAYS store a secret key token that can be used for password reset
     user = {
         'username': username,
         'password': hashed,
@@ -269,18 +268,18 @@ def store_new_account(account):
             user[field] = account[field]
 
     DATABASE.store_user(user)
-    resp = make_response({})
 
     # If this is an e2e test, we return the email verification token directly instead of emailing it.
     if is_testing_request(request):
-        resp = make_response({'username': username, 'token': hashed_token})
+        return user, make_response({'username': username, 'token': hashed_token})
     # Otherwise, we send an email with a verification link and we return an empty body
-    elif 'email' in account:
+    if 'email' in account:
         send_email_template('welcome_verify', account['email'].strip().lower(),
                             email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
                                 username) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'],
                             username=user['username'])
-    return user, resp
+    # Todo TB -> Add the unhashed secret key to the response
+    return user, make_response({'secret_key': '123'})
 
 
 # Note: translations are used only for texts that will be seen by a GUI user.
