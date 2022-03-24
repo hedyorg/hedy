@@ -385,6 +385,7 @@ const LEVELS = [
     name: 'level1',
     rules: {
         "start" : [
+          rule_blank(),
           rule_level1(),
           rule_comment(),
         ]
@@ -394,6 +395,7 @@ const LEVELS = [
     name: 'level2',
     rules: {
         "start" : [
+          rule_blank(),
           rule_level2(),
           rule_comment(),
         ]
@@ -403,6 +405,7 @@ const LEVELS = [
     name: 'level3',
     rules: {
         "start" : [
+          rule_blank(),
           rule_level3(),
           rule_comment(),
         ]
@@ -416,6 +419,7 @@ const LEVELS = [
           rule_keywords(4),
           rule_symbols('\,'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -427,6 +431,7 @@ const LEVELS = [
           rule_keywords(5),
           rule_symbols('\,'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -438,6 +443,7 @@ const LEVELS = [
           rule_keywords(6),
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -449,6 +455,7 @@ const LEVELS = [
           rule_keywords(7),
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -460,6 +467,7 @@ const LEVELS = [
           rule_keywords(8),
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -471,6 +479,7 @@ const LEVELS = [
           rule_keywords(9),
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -482,6 +491,7 @@ const LEVELS = [
           rule_keywords(10),
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -493,6 +503,7 @@ const LEVELS = [
           rule_keywords(11),
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -504,6 +515,7 @@ const LEVELS = [
           rule_keywords(12),
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -515,6 +527,7 @@ const LEVELS = [
           rule_keywords(13),
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -526,6 +539,7 @@ const LEVELS = [
           rule_keywords(14),
           rule_symbols('\-\+\=\/\*\,\<\>\!'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -537,6 +551,7 @@ const LEVELS = [
           rule_keywords(15),
           rule_symbols('\-\+\=\/\*\,\<\>\!'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -548,6 +563,7 @@ const LEVELS = [
           rule_keywords(16),
           rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -559,6 +575,7 @@ const LEVELS = [
           rule_keywords(17),
           rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]\:'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -570,6 +587,7 @@ const LEVELS = [
           rule_keywords(18),
           rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]\\(\\)'),
           rule_comment(),
+          rule_blank(),
         ]
     },
   },
@@ -738,6 +756,19 @@ function rule_comment() {
   };
 }
 
+
+function rule_blank() {
+  /* 'invalid' corresponds to a style predefined by monokai */
+  return [{
+    regex: /\_\?\_/,
+    token: 'invalid',
+    next: 'start',
+  },{
+    regex: '(^| )(_)( |$)',
+    token: ['text','invalid','text'],
+    next: 'start',
+  }];
+}
 
 
 
