@@ -386,6 +386,7 @@ const LEVELS = [
     rules: {
         "start" : [
           rule_level1(),
+          rule_comment(),
         ]
     },
   },
@@ -394,6 +395,7 @@ const LEVELS = [
     rules: {
         "start" : [
           rule_level2(),
+          rule_comment(),
         ]
     },
   },
@@ -402,6 +404,7 @@ const LEVELS = [
     rules: {
         "start" : [
           rule_level3(),
+          rule_comment(),
         ]
     },
   },
@@ -412,6 +415,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(4),
           rule_symbols('\,'),
+          rule_comment(),
         ]
     },
   },
@@ -422,6 +426,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(5),
           rule_symbols('\,'),
+          rule_comment(),
         ]
     },
   },
@@ -432,6 +437,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(6),
           rule_symbols('\-\+\=\/\*\,'),
+          rule_comment(),
         ]
     },
   },
@@ -442,6 +448,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(7),
           rule_symbols('\-\+\=\/\*\,'),
+          rule_comment(),
         ]
     },
   },
@@ -452,6 +459,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(8),
           rule_symbols('\-\+\=\/\*\,'),
+          rule_comment(),
         ]
     },
   },
@@ -462,6 +470,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(9),
           rule_symbols('\-\+\=\/\*\,'),
+          rule_comment(),
         ]
     },
   },
@@ -472,6 +481,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(10),
           rule_symbols('\-\+\=\/\*\,'),
+          rule_comment(),
         ]
     },
   },
@@ -482,6 +492,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(11),
           rule_symbols('\-\+\=\/\*\,'),
+          rule_comment(),
         ]
     },
   },
@@ -492,6 +503,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(12),
           rule_symbols('\-\+\=\/\*\,'),
+          rule_comment(),
         ]
     },
   },
@@ -502,6 +514,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(13),
           rule_symbols('\-\+\=\/\*\,'),
+          rule_comment(),
         ]
     },
   },
@@ -512,6 +525,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(14),
           rule_symbols('\-\+\=\/\*\,\<\>\!'),
+          rule_comment(),
         ]
     },
   },
@@ -522,6 +536,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(15),
           rule_symbols('\-\+\=\/\*\,\<\>\!'),
+          rule_comment(),
         ]
     },
   },
@@ -532,6 +547,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(16),
           rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]'),
+          rule_comment(),
         ]
     },
   },
@@ -542,6 +558,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(17),
           rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]\:'),
+          rule_comment(),
         ]
     },
   },
@@ -552,6 +569,7 @@ const LEVELS = [
           rule_string(),
           rule_keywords(18),
           rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]\\(\\)'),
+          rule_comment(),
         ]
     },
   },
@@ -712,6 +730,13 @@ function rule_string() {
   };
 }
 
+function rule_comment() {
+  return {
+    regex: /#.*$/,
+    token: 'comment',
+    next: 'start',
+  };
+}
 
 
 
