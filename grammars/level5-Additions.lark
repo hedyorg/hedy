@@ -1,4 +1,4 @@
-program: _EOL* (command | error_invalid) (_SPACE)* (_EOL+ (command | error_invalid) (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
+program: _EOL* (command | error_invalid)* (_SPACE)* (_EOL+ (command | error_invalid) (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
 
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
 command:+= ifelse | ifs | list_access_var -= error_invalid | error_ask_no_quotes > assign
