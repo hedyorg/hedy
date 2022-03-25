@@ -264,6 +264,7 @@ adventures:
 
                 example_code: |
                     ## Hedy Beispiel-Code
+
                     ```
                     Schlüssel = 'verloren'
                     print 'Du stehst in Deinem Garten, hast jedoch Deine Schlüssel verloren.'
@@ -277,6 +278,7 @@ adventures:
                         else
                             print 'Nope, sie sind nicht beim ' Ort '.'
                     print 'Jetzt kannst Du ins Haus!'
+                    ```
                 start_code: "# schreibe deinen Code hier"
             13:
                 story_text: |
@@ -413,9 +415,7 @@ adventures:
             11:
                 story_text: |
                     ## Lieder
-                    In diesem Level nutzt Du den Befehl `for i in range` für Lieder, in denen gezählt wird.
-                    Das klappt besonders gut mit 'Five little monkeys'.
-                    Wenn Du noch nicht so gut Englisch sprichst, kannst Du Dir die hustenden Würmchen ansehen.
+                    In diesem Level nutzt Du den Befehl `{for} i {in} {range}` für Lieder, in denen gezählt wird. Das klappt besonders gut mit 'Five little monkeys'. Wenn Du noch nicht so gut Englisch sprichst, kannst Du Dir die hustenden Würmchen ansehen.
 
                 example_code: |
                     ## 5 little monkeys
@@ -1459,18 +1459,18 @@ adventures:
                      In level 1 you can make your own virtual restaurant and take your guests' orders.
 
                 example_code: |
-                    ## Example Hedy code
+                    ## Hedy Beispiel-Code
 
-                      ```
-                     print Welcome to Hedy's restaurant 🍟
-                     ask What would you like to order?
-                     echo So you would like to order
-                     print Thanks you for your order!
-                     print It's on its way!
-                     ```
+                    ```
+                    {print} Willkommen in Hedy's Restaurant 🍟
+                    {ask} Was würden Sie gerne bestellen?
+                    {echo} Sie hätten also gerne
+                    {print} Danke für Ihre Bestellung!
+                    {print} Kommt sofort!
+                    ```
 
                     ## Challenge
-                    Can you think of more lines to add to your restaurant code? For example, can you ask the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
+                    Fallen dir noch mehr Zeilen ein die du dem Restaurant-Code hinzufügen könntest? Du könntest die Gäste zum Beispiel fragen, was sie gerne trinken würden, Ihnen den Preis sagen oder einen guten Appetit wünschen?
                 start_code: "# place your code here"
                 story_text_2: "## Challenge\nFallen dir noch mehr Zeilen ein, die du zum Restaurant-Code hinzufügen kannst? Kannst du zum Beispiel die Gäste fragen ({ask}), was sie gerne trinken würden, wieviel es kosten wird, oder ihnen einen guten Appetit wünschen?\n"
             2:
@@ -1592,36 +1592,15 @@ adventures:
             8:
                 story_text: |
                     ## Restaurant
-                    In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
-
-                    ```
-                    print 'Welcome to Hedys restaurant!'
-                    people = ask 'How many people will be joining us today?'
-                    print 'Great!'
-                    repeat people times
-                        food = ask 'What would you like to order?'
-                        print food
-                    print 'Thank you for ordering!'
-                    print 'Enjoy your meal!'
-                    ```
-
-                    ## Challenge
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
+                    In diesem Level kannst du dein virtuelles Restaurant ausbauen, indem du mehrere Zeilen Code wiederholst. Das geht so:
                 start_code: "# place your code here"
                 example_code: "```\n{print} 'Willkommen in Hedy's Restaurant!'\nGäste = {ask} 'Zu wie vielen kommen Sie heute zu uns?'\n{print} 'Großartig!'\n{repeat} Gäste {times}\n    Essen = {ask} 'Was würden Sie gerne bestellen?'\n    {print} Essen\n{print} 'Danke für Ihre Bestellung!'\n{print} 'Guten Appetit!'\n```\n"
                 story_text_2: "## Challenge\nNatürlich kann dieser Code erweitert werden, mit mehr Speisen zur Auswahl, einem Getränkeangebot, und/oder mehreren Gängen. Füge also so viel Auswahl hinzu wie du magst!\n"
             7:
                 story_text: |
                     ## Restaurant
-                    In this level you've learned how to use the repeat command to repeat a line of code a certain amount of times.
-                    You can use that in your restaurant to ask multiple people what they'd like to eat. Like this:
-
-                    ```
-                    print 'Welcome to Hedys restaurant!'
-                    people = ask 'How many people are joining us today?'
-                    repeat people times food = ask 'What would you like to eat?'
-                    print 'Thanks for your order! Its coming right up!'
-                    ```
+                    In diesem Level hast du gelernt wie du den Befehl {repeat} verwenden kannst um eine Zeile Code eine bestimmte Anzahl Male zu wiederholen.
+                    Du kannst das in deinem Restaurant verwenden um mehrere Leute nach ihren Essenwünschen zu fragen. Das geht so:
                 start_code: "# place your code here"
                 example_code: "```\n{print} 'Willkommen in Hedy's Restaurant!'\nGäste = {ask} 'Zu wie vielen kommen Sie heute zu uns?'\n{repeat} Gäste {times} Essen = {ask} 'Was würden Sie gerne essen?'\n{print} 'Danke für Ihre Bestellung! Kommt sofort!'\n```\n"
             6:
@@ -1646,7 +1625,15 @@ adventures:
                     print 'Thank you, enjoy your meal!'
                     ```
                 story_text_2: |
-                    But you can also add many more things to your virtual restaurant, for example more courses.
+                    Aber du kannst auch noch viel mehr Elemente zu deinem virtuellen Restaurant hinzufügen, zum Beispiel mehrere Essensgänge.
+
+                    ## Challenge
+                    Es gibt noch viel was du deinem virtuellen Restaurant hinzufügen könntest. Kannst du zum Beispiel...
+                    - fragen ({ask}) wie viele Gäste kommen und den Preis mit dieser Anzahl multiplizieren?
+                    - einen weiteren Gang hinzufügen?
+                    - Gästen einen Rabatt geben wenn sie einen (geheimen) Gutscheincode eingeben?
+                    - ein Kindermenü hinzufügen?
+                    - dir noch weitere Ideen ausdenken?
 
                 example_code_2: |
                     ## Example Hedy code(Elaborate)
