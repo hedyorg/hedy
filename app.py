@@ -860,12 +860,9 @@ def index(level, program_id):
         user = current_user()
         public_program = result.get('public')
         # Verify that the program is either public, the current user is the creator or the user is admin
-        if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
-            return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
-
-        # If the current user is a teacher, perform an extra check -> user is their student
-        if is_teacher(user) and not public_program and user['username'] != result['username'] and result['username'] not in DATABASE.get_teacher_students(user['username']):
-            return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
+        if not public_program and user['username'] != result['username'] and not is_admin(user):
+            if (not is_teacher(user)) or (is_teacher(user) and result['username'] not in DATABASE.get_teacher_students(user['username'])):
+                return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
 
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
