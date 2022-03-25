@@ -1636,36 +1636,29 @@ adventures:
                     - dir noch weitere Ideen ausdenken?
 
                 example_code_2: |
-                    ## Example Hedy code(Elaborate)
-                    In this example there are three courses, which requires more code and more additions in calculating the price.
+                    ## Hedy Beispiel-Code (ausgebaut)
+                    In diesem Beispiel gibt es ein Drei-Gänge-Menü, was mehr Code erfordert sowie ein paar Zusätze in der Preisberechnung.
                     ```
-                    print 'Welcome to Hedys restaurant'
-                    print 'Here is our menu:'
-                    print 'Our starters are salad, soup, or carpaccio'
-                    print 'Our main courses are pizza, lasagne, or spaghetti'
-                    print 'Our desserts are brownie, icecream, or milkshake'
-                    starter = ask 'Which starter would you like to have?'
-                    main = ask 'Which main course would you like?'
-                    dessert = ask 'Which dessert do you pick?'
-                    price = 0
-                    if starter is soup price = price + 6 else price = price + 7
-                    if main is pizza price = price + 10
-                    if main is lasagne price = price + 12
-                    if main is spaghetti price = price + 8
-                    if dessert is brownie price = price + 7
-                    if dessert is icecream price = price + 5
-                    if dessert is milkshake price = price + 4
-                    print 'You have ordered ' starter ' , ' main ' and ' dessert
-                    print 'That will be ' price ' dollars, please'
-                    print 'Thank you, enjoy your meal!'
+                    {print} 'Willkommen in Hedy's Restaurant'
+                    {print} 'Hier ist die Speisekarte:'
+                    {print} 'Unsere Vorspeisen sind Salat, Suppe und Carpaccio'
+                    {print} 'Als Hauptspeise gibt es Pizza, Lasagne oder Spaghetti'
+                    {print} 'Zum Desserts gibt es Brownie, Eis oder Milchshake'
+                    Vorspeise = {ask} 'Welche Vorspeise hätten Sie gerne?'
+                    Hauptspeise = {ask} 'Welche Hauptspeise hätten Sie gerne?'
+                    Dessert = {ask} 'Was nehmen Sie als Dessert?'
+                    Preis = 0
+                    {if} Vorspeise {is} Suppe Preis = Preis + 6 else Preis = Preis + 7
+                    {if} Hauptspeise {is} Pizza Preis = Preis + 10
+                    {if} Hauptspeise {is} Lasagne Preis = Preis + 12
+                    {if} Hauptspeise {is} Spaghetti Preis = Preis + 8
+                    {if} Dessert {is} Brownie Preis = Preis + 7
+                    {if} Dessert {is} Eis Preis = Preis + 5
+                    {if} Dessert {is} Milchshake Preis = Preis + 4
+                    {print} 'Sie haben ' Vorspeise ' , ' Hauptspeise ' und ' Dessert ' bestellt'
+                    {print} 'Das macht dann ' Preis ' Euro, bitte'
+                    {print} 'Danekschön, guten Appetit!'
                     ```
-                    ## Challenge
-                    You can add many more things to your virtual restaurant. For example, can you...
-                    - ask how many people are coming and multiply the price by that amount?
-                    - add another course?
-                    - give people a discount when they enter a (secret) couponcode?
-                    - add a children's menu?
-                    - think of other fun things to add?
 
                 start_code: "# place your code here"
             5:
