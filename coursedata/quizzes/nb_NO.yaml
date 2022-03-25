@@ -92,3 +92,413 @@ levels:
             question_score: '10'
         7:
             question_text: What's wrong with this code ?
+            code: "print Welcome at Hedys restaurant !\nask What would you like to eat ?\necho So you want to order ...\nprint Coming right up ! Enjoy !"
+            mp_choice_options:
+            -   "option_text": In line 1 print needs to be replaced with ask
+                "feedback": Are you sure something is wrong ?
+            -   "option_text": In line 1 print needs to be replaced with echo
+                "feedback": Are you sure something's wrong ?
+            -   "option_text": In line 3 echo needs to be replaced with print
+                "feedback": Are you sure something is wrong ?
+            -   "option_text": Nothing ! This is a perfect code !
+                "feedback": Correct !
+            correct_answer: D
+            hint: Check the code line by line
+            question_score: '10'
+        8:
+            question_text: How do you use the echo command ?
+            code: '...'
+            mp_choice_options:
+            -   "option_text": You can use it to ask a question.
+                "feedback": That's what ask is for !
+            -   "option_text": You can use it to print text.
+                "feedback": That's what print is for !
+            -   "option_text": You can use it to repeat an answer.
+                "feedback": Good job !
+            -   "option_text": You can use it to make text disappear.
+                "feedback": That's not right...
+            correct_answer: C
+            hint: Echo is used after an ask command.
+            question_score: '10'
+        9:
+            question_text: What's wrong with this code ?
+            code: "print Hello !\nprint How are you doing ?\necho So you are doing..."
+            mp_choice_options:
+            -   "option_text": print in line 1 should be ask
+                "feedback": No, print is right. Where is the question being asked ?
+            -   "option_text": print in line 2 should be ask
+                "feedback": Super !
+            -   "option_text": echo in line 3 should be ask
+                "feedback": No, echo is right. Where is the question being asked ?
+            -   "option_text": Nothing. This is a perfect code !
+                "feedback": Look carefully for the mistake...
+            correct_answer: B
+            hint: ask allows you to ask a question
+            question_score: '10'
+        10:
+            question_text: Are you ready for level 2?
+            code: '...'
+            mp_choice_options:
+            -   "option_text": Yes !
+                "feedback": Great ! Let's go to the next level !
+            -   "option_text": No
+                "feedback": What a shame... You can practice some more in level 1!
+            correct_answer: A
+            hint: Let's go !
+            question_score: '10'
+    3:
+        3:
+            mp_choice_options:
+            -   "feedback": You're almost there. The order of the words isn't right yet.
+                "code": at random print options
+            -   "code": print rock at random
+                "feedback": you don't always want the Hedy to print rock, sometimes you want scissors or paper.
+            -   "code": print options at random
+                "feedback": Very good !
+            -   "option_text": Nothing, the code is correct !
+                "feedback": Look carefully for the mistake
+            correct_answer: C
+            hint: The variable (the list) is called options.
+            question_score: '10'
+            question_text: What's wrong in line 2 of this code ?
+            code: "options is rock, paper, scissors\nprint rock, paper, scissors at random"
+        4:
+            question_text: What should change in line to to print a random price ?
+            code: "prices is 1 dollar, 100 dollar, 1 million dollar\nprint price at random"
+            mp_choice_options:
+            -   "code": print price
+                "feedback": You don't want to print the word price, but you want to print one price out of your list at random
+            -   "code": print prices at random
+                "feedback": Great ! You've really paid attention.
+            -   "code": print at random price
+                "feedback": At random is places behind the variable.
+            -   "option_text": Nothing, this code is alright.
+                "feedback": Look carefully for the mistake you missed !
+            correct_answer: B
+            hint: The variable name is prices
+            question_score: '10'
+        7:
+            mp_choice_options:
+            -   "option_text": The add command removes a random book from the list
+                "feedback": The remove command removes, the add command adds
+            -   "option_text": The add command adds a random book to a list
+                "feedback": It doesn't. It adds your answer to the list!
+            -   "option_text": The add command adds your favotite book to the list
+                "feedback": Correct!
+            -   "option_text": The add command prints your favorite book.
+                "feedback": No, it adds your favorite book to the list
+            question_text: What does the add command do?
+            code: "books is Harry Potter, de Hobbit, Green eggs and Ham\nyour_book is ask What is your favorite book?\nadd your_book to books\nprint books at random"
+            correct_answer: C
+            hint: The add command adds a book, but which one?
+            question_score: '10'
+        10:
+            mp_choice_options:
+            -   "option_text": remove walked_yesterday from walkers
+                "feedback": Super!
+            -   "option_text": remove walked yesterday to walkers
+                "feedback": remove from or add to, not remove to
+            -   "option_text": remove walkers from yesterday
+                "feedback": yesterday is not a variable
+            -   "option_text": add walked_yesterday to walkers
+                "feedback": This increased the change that the person who walked yesterday now has to do it again. That's mean.
+            correct_answer: A
+            hint: The person who walked the dog yesterday should be removed from the list.
+            question_score: '10'
+            question_text: What should be on the _?_ ?
+            code: "walkers is dad, mom, Sam, Petra\nwalked_yesterday is ask Who walked the dogs yesterday?\nprint walked_yesterday shouldn't have to walk the dogs again today\n_?_\nprint walkers at random , it's your turn to walk the dogs!"
+        1:
+            question_text: What command do you use to let Hedy pick something arbitrarily ?
+            code: '...'
+            mp_choice_options:
+            -   "code": print
+                "feedback": print is used to print text
+            -   "code": ask
+                "feedback": ask is used to ask a question
+            -   "code": is
+                "feedback": is is used to make a list
+            -   "code": at random
+                "feedback": Correct !
+            correct_answer: D
+            hint: Arbitrarily means without a plan or randomly.
+            question_score: '10'
+        2:
+            question_text: What's wrong with this code ?
+            code: "animals is dog cat cow\nprint animals at random"
+            mp_choice_options:
+            -   "option_text": 'You need commas in line 1: dog, cat, cow.'
+                "feedback": Good job !
+            -   "option_text": Line 1 needs to start with print.
+                "feedback": No, you don't need print
+            -   "option_text": Line 2 needs to say 'animal' instead of 'animals'',
+                "feedback": animals is correct.
+            -   "option_text": "'at random is spelled incorrectly, it should be at ramdon"
+                "feedback": At random is the correct spelling
+            correct_answer: A
+            hint: There's something wrong in line 1
+            question_score: '10'
+        5:
+            question_text: What is wrong in this code ?
+            code: "question is ask What do you want to know ?\nprint question\nanswers is yes, no, maybe\nprint answers at random"
+            mp_choice_options:
+            -   "option_text": Line 1 needs ot say print instead of ask
+                "feedback": No, that's not wrong.?
+            -   "option_text": Line 2 needs to say ask instead of print
+                "feedback": No that's not wrong.
+            -   "option_text": Line 2 needs to say answers at random is yes, no, maybe
+                "feedback": No, that's not wrong.
+            -   "option_text": Nothing, this code is perfect
+                "feedback": That's right !
+            correct_answer: D
+            hint: Does this code even have a mistake ?
+            question_score: '10'
+        6:
+            question_text: What's wrong with this code ?
+            code: "question is ask What do you want to know ?\nanswers are yes, no, maybe\nprint answers at random"
+            mp_choice_options:
+            -   "option_text": Line 2 needs to say question instead of answers
+                "feedback": No that's not right
+            -   "option_text": Line 2 needs to say is instead of are
+                "feedback": Correct
+            -   "option_text": Line 3 needs to say answer instead of answers
+                "feedback": No the variable's called answers
+            -   "option_text": Nothing ! This code is great !
+                "feedback": Actually, line 2 has a mistake.
+            correct_answer: B
+            hint: Are is not a command.
+            question_score: '10'
+        8:
+            question_text: What is the output of this code?
+            code: "crisps is sea salt, paprika, sour cream\nremove sea salt from crisps\nremove paprika from crisps\nprint crisps at random"
+            mp_choice_options:
+            -   "option_text": You can't tell, because Hedy will print one of the 3 flavors at random
+                "feedback": Take a look at the remove commands
+            -   "option_text": sea salt
+                "feedback": sea salt is removed from the list
+            -   "option_text": paprika
+                "feedback": Paprika is removed from the list
+            -   "option_text": sour cream
+                "feedback": That's right!
+            correct_answer: D
+            hint: There are 3 flavors, bit 2 are removed. Which one remains?
+            question_score: '10'
+        9:
+            question_text: What's wrong with this code??
+            code: "colors is blue, purple, green\nchosen_color is ask Which haircolor wouldn't your like to have?\nremove chosen_color from colors\nprint I will dye my hair color at random"
+            mp_choice_options:
+            -   "option_text": 'Line 3 should say: remove blue from colors'
+                "feedback": Maybe you want blue hair though!
+            -   "option_text": Line 3 should have an add command instead of a remove command
+                "feedback": You want to remove the chosen color so remove is right.
+            -   "option_text": In line 4 the variable should be called colors instead of color
+                "feedback": Great job!
+            -   "option_text": Nothing, this is a correct code!
+                "feedback": Find the mistake!
+            correct_answer: C
+            hint: Look at line 3
+            question_score: '10'
+    4:
+        1:
+            question_text: Which of these is true ?
+            code: '...'
+            mp_choice_options:
+            -   "option_text": print and ask now need quotation marks
+                "feedback": That's right
+            -   "option_text": Only print needs quotation marks
+                "feedback": Ask needs quotation marks too !
+            -   "option_text": At random doesn't work anymore in level 4
+                "feedback": At random still works
+            -   "option_text": At random now needs quotation marks
+                "feedback": No, but 2 other commands do.
+            correct_answer: A
+            hint: In level 4 you need quotation marks for 2 commands.
+            question_score: '10'
+        2:
+            question_text: Which code uses the proper quotation marks ?
+            code: '...'
+            mp_choice_options:
+            -   "code": print `hello`
+                "feedback": This quotation mark is skewed, you need a straight one.
+            -   "code": print 'hello'
+                "feedback": Correct
+            -   "code": print "hello"
+                "feedback": these are double quotation marks, you need single ones.
+            -   "code": print ,hello,
+                "feedback": This is a comma, you need quotation marks.
+            correct_answer: B
+            hint: Pick the right quotation marks.
+            question_score: '10'
+        3:
+            question_text: Where are the quotation marks used correctly ?
+            code: '...'
+            mp_choice_options:
+            -   "code": print Hi Im Hedy
+                "feedback": Add quotation marks please !
+            -   "code": print 'Hi Im Hedy
+                "feedback": Both before and after the words you want to print should be a quotation mark.
+            -   "code": "'print Hi Im Hedy'"
+                "feedback": the first quotation mark should be behind the word print
+            -   "code": print 'Hi Im Hedy'
+                "feedback": Perfect !
+            correct_answer: D
+            hint: Both before and after the words you want to print should be a quotation mark.
+            question_score: '10'
+        4:
+            question_text: Which statement is true ?
+            code: '...'
+            mp_choice_options:
+            -   "option_text": "You need quotation marks around the word print, like this: 'print'."
+                "feedback": The quotation marks shouldn't be around the command itself.
+            -   "option_text": You need quotation marks around the words you want to print.
+                "feedback": Super !
+    2:
+        1:
+            question_text: Which statement is true ?
+            code: '...'
+            mp_choice_options:
+            -   "option_text": In level 2 the print command doesn't exist anymore
+                "feedback": Print still works
+            -   "option_text": In level 2 the ask command doesn't exist anymore
+                "feedback": Ask still works !
+            -   "option_text": In level 2 the echo command doesn't exist anymore
+                "feedback": Good
+            -   "option_text": In level 2 all the level 1 commands still work
+                "feedback": No one command doesn't work anymore.
+            correct_answer: C
+            hint: print and ask still exist.
+            question_score: '10'
+        2:
+            question_text: Which code is correct ?
+            code: '...'
+            mp_choice_options:
+            -   "code": name is ask What is your name ?
+                "feedback": Super !
+            -   "code": ask is name What is your name
+                "feedback": The words are right, the order is not !
+            -   "code": ask What is your name ?
+                "feedback": This worked in level 1, but in level 2 and up it works differently.
+            -   "code": ask What is your name ? is name
+                "feedback": The words are right, the order isn't !
+            correct_answer: A
+            hint: ask doesn't work like in level 1
+            question_score: '10'
+        3:
+            question_text: What appears on your output screen when you run this code ?
+            code: "name is Marleen\nprint name goes to the market and she buys an apple."
+            mp_choice_options:
+            -   "option_text": name goes to the market and she buys an apple.
+                "feedback": The word name is replaced with Marleen
+            -   "option_text": Marleen goes to the market.
+                "feedback": The second part of the sentence isn't left out !
+            -   "option_text": Marleen goes to the market and she buys an apple.
+                "feedback": Right on !
+            -   "option_text": Marleen goes to the market and Marleen buys an apple.
+                "feedback": She is not replaced with the name
+            correct_answer: C
+            hint: The word name is replaced with Marleen
+            question_score: '10'
+        4:
+            question_text: What will you see on the output screen when you run this code ?
+            code: "name is Hedy\nprint Hi my name is name !"
+            mp_choice_options:
+            -   "option_text": Hi my name is name
+                "feedback": The variable name is replaced with Hedy
+            -   "option_text": Hi my name is Hedy
+                "feedback": The variable name is replaced with Hedy
+            -   "option_text": Hi my Hedy is name
+                "feedback": The variable name is replaced with Hedy
+            -   "option_text": Hi my Hedy is Hedy
+                "feedback": Correct, this mistake will be fixed in level 3!
+            correct_answer: D
+            hint: "'name' is being replaced with 'Hedy' in both places"
+            question_score: '10'
+        5:
+            question_text: What happens when you use the `sleep` command
+            code: sleep
+            mp_choice_options:
+            -   "option_text": It slows down your computer
+                "feedback": Fortunately not !
+            -   "option_text": It closes down Hedy
+                "feedback": Fortunately not !
+            -   "option_text": Your program pauses for a second and then continues
+                "feedback": That's right !
+            -   "option_text": You put it at the end so Hedy knows your program is finished
+                "feedback": No it would be useless at the end of your code
+            correct_answer: C
+            hint: The computer waits for a second at the sleep command
+            question_score: '10'
+        6:
+            question_text: What should be on the lines ?
+            code: "print And the award for best programming language goes to...\n_?_\nprint Hedy !"
+            mp_choice_options:
+            -   "option_text": sleep
+                "feedback": Perfect !
+            -   "option_text": echo
+                "feedback": There is nothing to repeat back here
+            -   "option_text": print
+                "feedback": There is no text there to print there
+            -   "option_text": ask
+                "feedback": There is no question there to be asked
+            correct_answer: A
+            hint: Pause for dramatic effect...
+            question_score: '10'
+        7:
+            question_text: What command should be used on line 2 ?
+            code: "print I will explode in 3 seconds !\n_?_\nprint BOOM !"
+            mp_choice_options:
+            -   "code": print 3
+                "feedback": You don't need to print
+            -   "code": sleep 3
+                "feedback": Perfect !
+            -   "code": sleep
+                "feedback": This way the bomb will explode in 1 second
+            -   "code": sleep sleep sleep
+                "feedback": Make it easier on yourself by using the number 3
+            correct_answer: B
+            hint: You want the computer to wait for 3 seconds
+            question_score: '10'
+        8:
+            question_text: How would you correct the first line of code ?
+            code: "ask is How old are you ?\nprint age"
+            mp_choice_options:
+            -   "option_text": age ask is How old are you ?
+                "feedback": That is the wrong order
+            -   "option_text": ask is age How old are you ?
+                "feedback": That is the wrong order
+            -   "option_text": age is ask How old are you ?
+                "feedback": You get it !
+            -   "option_text": age is How old are you ?
+                "feedback": Where is the ask command
+            correct_answer: C
+            hint: The variable name should come first
+            question_score: '10'
+        9:
+            question_text: What is going wrong in this code ?
+            code: "dogs is animal\nprint I love animal"
+            mp_choice_options:
+            -   "option_text": 'Line 1 should say: `dogs is animals`'
+                "feedback": The variable name is animal
+            -   "option_text": 'Line 1 should say: animal is dogs'
+                "feedback": Great !
+            -   "option_text": 'Line 2 should say: print I love animals'
+                "feedback": The variable name is animal
+            -   "option_text": 'Line 2 should say: `sleep I love animals`'
+                "feedback": Sleep is not used to print text
+            correct_answer: B
+            hint: You want to print 'I love dogs'
+            question_score: '10'
+        10:
+            question_text: What command should be used on the line 1 ?
+            code: "flavor is _?_\nprint Your favorite icecream is...\nsleep\nprint flavor"
+            mp_choice_options:
+            -   "option_text": sleep 3
+                "feedback": You want to know the favorite flavor !
+            -   "option_text": print strawberries
+                "feedback": You do not want a print command at the middle of the line...
+            -   "option_text": strawberries, chocolate, vanilla
+                "feedback": This way you are making a list. You don't want that now.
+            -   "option_text": ask What flavor icecream do you like ?
+                "feedback": That's right !
+            correct_answer: D
+            hint: You want to ask a question
+            question_score: '10'
