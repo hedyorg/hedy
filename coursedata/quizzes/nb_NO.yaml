@@ -1,1 +1,94 @@
-{}
+levels:
+    1:
+        3:
+            code: '...'
+            question_text: How do you ask what someone's favorite color is ?
+            mp_choice_options:
+            -   "code": print What is your favorite color ?
+                "feedback": Print prints text, but it doesn't ask questions.
+            -   "code": ask print What is your favorite color ?
+                "feedback": You only need one command, not two.
+            -   "code": ask What is your favorite color ?
+                "feedback": Great !
+            -   "code": echo What is your favorite color ?
+                "feedback": Echo repeats your answer back to you.
+            correct_answer: C
+            hint: You can ask something with the ask command
+            question_score: '10'
+        1:
+            question_text: What's this programming language called ?
+            code: '...'
+            mp_choice_options:
+            -   "option_text": Hedy
+                "feedback": Good job !
+            -   "option_text": Heddy
+                "feedback": Not this one !
+            -   "option_text": Haydie
+                "feedback": Not this one !
+            -   "option_text": Heidi
+                "feedback": Not this one !
+            correct_answer: A
+            hint: It's named after Hedy Lamarr.
+            question_score: '10'
+        2:
+            question_text: Which command makes text appear ?
+            code: '...'
+            mp_choice_options:
+            -   "code": echo
+                "feedback": Echo repeats a given answer.
+            -   "code": print
+                "feedback": Correct !
+            -   "code": hello
+                "feedback": Hello isn't a command.
+            -   "code": ask
+                "feedback": With ask, you can ask a question.
+            correct_answer: B
+            hint: _?_ Hello world !
+            question_score: '10'
+        6:
+            mp_choice_options:
+            -   "option_text": In line 1 print should be replaced with ask.
+                "feedback": Print in line 1 is correct; mind the spelling of the words.
+            -   "option_text": In line 2, ask is spelled wrong.
+                "feedback": Great ! You paid attention !
+            -   "option_text": Line 3 has to begin with print instead of echo.
+                "feedback": Echo is correct; check the spelling of the commands.
+            -   "option_text": In line 4, print is spelled wrong.
+                "feedback": There is a spelling error somewhere else...
+            question_text: What's wrong with this code ?
+            code: "print Hi im Hedy !\naks Which football team do you support ?\necho You support...\nprint Cool ! Me too !"
+            correct_answer: B
+            hint: Check the way the commands are spelled.
+            question_score: '10'
+        4:
+            question_text: What is wrong with this code ?
+            code: "Hi Im Hedy !\nask Who are you ?\necho Hi..."
+            mp_choice_options:
+            -   "option_text": print in line 1 is missing.
+                "feedback": Correct !
+            -   "option_text": Im in line 1 is spelled wrong.
+                "feedback": Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
+            -   "option_text": Echo isn't a command.
+                "feedback": Echo is a command, there's another mistake.
+            -   "option_text": Nothing ! This is a perfect code !
+                "feedback": Wrong, look carefully !
+            correct_answer: A
+            hint: Line 1 doens't seem right
+            question_score: '10'
+        5:
+            question_text: Which command is missing in line 2?
+            code: "ask What is your favorite pet ?\n_?_ So your favorite pet is..."
+            mp_choice_options:
+            -   "code": print
+                "feedback": No, you would like the answer to be repeated back to you.
+            -   "code": ekko
+                "feedback": ekko isn't a command.
+            -   "code": ask
+                "feedback": With ask you can ask a question.
+            -   "code": echo
+                "feedback": Right on !
+            correct_answer: D
+            hint: You want to see the answer at the end of line 2...
+            question_score: '10'
+        7:
+            question_text: What's wrong with this code ?
