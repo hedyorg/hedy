@@ -1,1 +1,260 @@
-{}
+levels:
+    2:
+        2:
+            question_score: '10'
+            question_text: Which code is correct ?
+            code: '...'
+            mp_choice_options:
+            -   "code": name is ask What is your name ?
+                "feedback": Super !
+            -   "code": ask is name What is your name
+                "feedback": The words are right, the order is not !
+            -   "code": ask What is your name ?
+                "feedback": This worked in level 1, but in level 2 and up it works differently.
+            -   "code": ask What is your name ? is name
+                "feedback": The words are right, the order isn't !
+            correct_answer: A
+            hint: ask doesn't work like in level 1
+        3:
+            question_text: What appears on your output screen when you run this code ?
+            code: "name is Marleen\nprint name goes to the market and she buys an apple."
+            mp_choice_options:
+            -   "option_text": name goes to the market and she buys an apple.
+                "feedback": The word name is replaced with Marleen
+            -   "option_text": Marleen goes to the market.
+                "feedback": The second part of the sentence isn't left out !
+            -   "option_text": Marleen goes to the market and she buys an apple.
+                "feedback": Right on !
+            -   "option_text": Marleen goes to the market and Marleen buys an apple.
+                "feedback": She is not replaced with the name
+            correct_answer: C
+            hint: The word name is replaced with Marleen
+            question_score: '10'
+        1:
+            mp_choice_options:
+            -   "option_text": In level 2 the print command doesn't exist anymore
+                "feedback": Print still works
+            -   "option_text": In level 2 the ask command doesn't exist anymore
+                "feedback": Ask still works !
+            -   "feedback": Good
+                "option_text": In level 2 the echo command doesn't exist anymore
+            -   "option_text": In level 2 all the level 1 commands still work
+                "feedback": No one command doesn't work anymore.
+            question_text: Which statement is true ?
+            code: '...'
+            correct_answer: C
+            hint: print and ask still exist.
+            question_score: '10'
+        5:
+            code: sleep
+            mp_choice_options:
+            -   "option_text": It slows down your computer
+                "feedback": Fortunately not !
+            -   "option_text": It closes down Hedy
+                "feedback": Fortunately not !
+            -   "option_text": Your program pauses for a second and then continues
+                "feedback": That's right !
+            -   "option_text": You put it at the end so Hedy knows your program is finished
+                "feedback": No it would be useless at the end of your code
+            question_text: What happens when you use the `sleep` command
+            correct_answer: C
+            hint: The computer waits for a second at the sleep command
+            question_score: '10'
+        4:
+            question_text: What will you see on the output screen when you run this code ?
+            code: "name is Hedy\nprint Hi my name is name !"
+            mp_choice_options:
+            -   "option_text": Hi my name is name
+                "feedback": The variable name is replaced with Hedy
+            -   "option_text": Hi my name is Hedy
+                "feedback": The variable name is replaced with Hedy
+            -   "option_text": Hi my Hedy is name
+                "feedback": The variable name is replaced with Hedy
+            -   "option_text": Hi my Hedy is Hedy
+                "feedback": Correct, this mistake will be fixed in level 3!
+            correct_answer: D
+            hint: "'name' is being replaced with 'Hedy' in both places"
+            question_score: '10'
+        6:
+            question_text: What should be on the lines ?
+            code: "print And the award for best programming language goes to...\n_?_\nprint Hedy !"
+            mp_choice_options:
+            -   "option_text": sleep
+                "feedback": Perfect !
+            -   "option_text": echo
+                "feedback": There is nothing to repeat back here
+            -   "option_text": print
+                "feedback": There is no text there to print there
+            -   "option_text": ask
+                "feedback": There is no question there to be asked
+            correct_answer: A
+            hint: Pause for dramatic effect...
+            question_score: '10'
+        7:
+            question_text: What command should be used on line 2 ?
+            code: "print I will explode in 3 seconds !\n_?_\nprint BOOM !"
+            mp_choice_options:
+            -   "code": print 3
+                "feedback": You don't need to print
+            -   "code": sleep 3
+                "feedback": Perfect !
+            -   "code": sleep
+                "feedback": This way the bomb will explode in 1 second
+            -   "code": sleep sleep sleep
+                "feedback": Make it easier on yourself by using the number 3
+            correct_answer: B
+            hint: You want the computer to wait for 3 seconds
+            question_score: '10'
+        8:
+            question_text: How would you correct the first line of code ?
+            code: "ask is How old are you ?\nprint age"
+            mp_choice_options:
+            -   "option_text": age ask is How old are you ?
+                "feedback": That is the wrong order
+    1:
+        1:
+            question_text: What's this programming language called ?
+            code: '...'
+            mp_choice_options:
+            -   "option_text": Hedy
+                "feedback": Good job !
+            -   "option_text": Heddy
+                "feedback": Not this one !
+            -   "option_text": Haydie
+                "feedback": Not this one !
+            -   "option_text": Heidi
+                "feedback": Not this one !
+            correct_answer: A
+            hint: It's named after Hedy Lamarr.
+            question_score: '10'
+        2:
+            question_text: Which command makes text appear ?
+            code: '...'
+            mp_choice_options:
+            -   "code": echo
+                "feedback": Echo repeats a given answer.
+            -   "code": print
+                "feedback": Correct !
+            -   "code": hello
+                "feedback": Hello isn't a command.
+            -   "code": ask
+                "feedback": With ask, you can ask a question.
+            correct_answer: B
+            hint: _?_ Hello world !
+            question_score: '10'
+        3:
+            question_text: How do you ask what someone's favorite color is ?
+            code: '...'
+            mp_choice_options:
+            -   "code": print What is your favorite color ?
+                "feedback": Print prints text, but it doesn't ask questions.
+            -   "code": ask print What is your favorite color ?
+                "feedback": You only need one command, not two.
+            -   "code": ask What is your favorite color ?
+                "feedback": Great !
+            -   "code": echo What is your favorite color ?
+                "feedback": Echo repeats your answer back to you.
+            correct_answer: C
+            hint: You can ask something with the ask command
+            question_score: '10'
+        4:
+            question_text: What is wrong with this code ?
+            code: "Hi Im Hedy !\nask Who are you ?\necho Hi..."
+            mp_choice_options:
+            -   "option_text": print in line 1 is missing.
+                "feedback": Correct !
+            -   "option_text": Im in line 1 is spelled wrong.
+                "feedback": Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
+            -   "option_text": Echo isn't a command.
+                "feedback": Echo is a command, there's another mistake.
+            -   "option_text": Nothing ! This is a perfect code !
+                "feedback": Wrong, look carefully !
+            correct_answer: A
+            hint: Line 1 doens't seem right
+            question_score: '10'
+        5:
+            question_text: Which command is missing in line 2?
+            code: "ask What is your favorite pet ?\n_?_ So your favorite pet is..."
+            mp_choice_options:
+            -   "code": print
+                "feedback": No, you would like the answer to be repeated back to you.
+            -   "code": ekko
+                "feedback": ekko isn't a command.
+            -   "code": ask
+                "feedback": With ask you can ask a question.
+            -   "code": echo
+                "feedback": Right on !
+            correct_answer: D
+            hint: You want to see the answer at the end of line 2...
+            question_score: '10'
+        6:
+            question_text: What's wrong with this code ?
+            code: "print Hi im Hedy !\naks Which football team do you support ?\necho You support...\nprint Cool ! Me too !"
+            mp_choice_options:
+            -   "option_text": In line 1 print should be replaced with ask.
+                "feedback": Print in line 1 is correct; mind the spelling of the words.
+            -   "option_text": In line 2, ask is spelled wrong.
+                "feedback": Great ! You paid attention !
+            -   "option_text": Line 3 has to begin with print instead of echo.
+                "feedback": Echo is correct; check the spelling of the commands.
+            -   "option_text": In line 4, print is spelled wrong.
+                "feedback": There is a spelling error somewhere else...
+            correct_answer: B
+            hint: Check the way the commands are spelled.
+            question_score: '10'
+        7:
+            question_text: What's wrong with this code ?
+            code: "print Welcome at Hedys restaurant !\nask What would you like to eat ?\necho So you want to order ...\nprint Coming right up ! Enjoy !"
+            mp_choice_options:
+            -   "option_text": In line 1 print needs to be replaced with ask
+                "feedback": Are you sure something is wrong ?
+            -   "option_text": In line 1 print needs to be replaced with echo
+                "feedback": Are you sure something's wrong ?
+            -   "option_text": In line 3 echo needs to be replaced with print
+                "feedback": Are you sure something is wrong ?
+            -   "option_text": Nothing ! This is a perfect code !
+                "feedback": Correct !
+            correct_answer: D
+            hint: Check the code line by line
+            question_score: '10'
+        8:
+            question_text: How do you use the echo command ?
+            code: '...'
+            mp_choice_options:
+            -   "option_text": You can use it to ask a question.
+                "feedback": That's what ask is for !
+            -   "option_text": You can use it to print text.
+                "feedback": That's what print is for !
+            -   "option_text": You can use it to repeat an answer.
+                "feedback": Good job !
+            -   "option_text": You can use it to make text disappear.
+                "feedback": That's not right...
+            correct_answer: C
+            hint: Echo is used after an ask command.
+            question_score: '10'
+        9:
+            question_text: What's wrong with this code ?
+            code: "print Hello !\nprint How are you doing ?\necho So you are doing..."
+            mp_choice_options:
+            -   "option_text": print in line 1 should be ask
+                "feedback": No, print is right. Where is the question being asked ?
+            -   "option_text": print in line 2 should be ask
+                "feedback": Super !
+            -   "option_text": echo in line 3 should be ask
+                "feedback": No, echo is right. Where is the question being asked ?
+            -   "option_text": Nothing. This is a perfect code !
+                "feedback": Look carefully for the mistake...
+            correct_answer: B
+            hint: ask allows you to ask a question
+            question_score: '10'
+        10:
+            question_text: Are you ready for level 2?
+            code: '...'
+            mp_choice_options:
+            -   "option_text": Yes !
+                "feedback": Great ! Let's go to the next level !
+            -   "option_text": No
+                "feedback": What a shame... You can practice some more in level 1!
+            correct_answer: A
+            hint: Let's go !
+            question_score: '10'
