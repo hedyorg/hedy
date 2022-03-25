@@ -41,12 +41,14 @@
             <span class="ltr:mr-1 rtl:ml-1">{{ current_language().sym }}</span>
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
           </button>
-          <ul class="dropdown-menu absolute hidden text-white rounded-lg border-black bg-blue-400 mt-2 pt-1 list-none ltr:ml-0 rtl:mr-0 ltr:right-0 rtl:left-0 w-80 border border-black">
-              <li class="p-2"><input id="search_language" placeholder="{{_('search')}}" class="border-2 border-black text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></li>
+          <div class="dropdown-menu absolute hidden text-white rounded-lg border-black bg-blue-400 mt-2 pt-1 list-none ltr:ml-0 rtl:mr-0 ltr:right-0 rtl:left-0 border border-black">
+              <div class="p-2"><input id="search_language" placeholder="{{_('search')}}" class="border-2 border-black text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></div>
+              <div class="flex flex-wrap w-96">
             {% for lang in other_languages() %}
-                <a class="no-underline" href="#" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();"><li class="hover:bg-blue-600 text-white py-2 px-4 inline-block rounded-lg language">{{ lang.sym }}</li></a>
+                <div class="hover:bg-blue-600 cursor-pointer w-1/2 font-medium text-white py-2 px-4 rounded-lg language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
             {% endfor %}
-          </ul>
+              </div>
+          </div>
       </div>
     {% endif %}
     {% endblock %}
