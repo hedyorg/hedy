@@ -30,4 +30,4 @@ echo '-----> Compiling TypeScript'
 echo '-----> Compiling Babel translations'
 cd ..
 cd ..
-pybabel compile -d translations
+pybabel compile -f -d translations
