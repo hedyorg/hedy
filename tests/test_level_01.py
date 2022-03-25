@@ -313,6 +313,21 @@ class TestsLevel1(HedyTester):
       expected=expected
     )
 
+  def test_print_comment(self):
+    code = "print Hallo welkom bij Hedy! # This is a print"
+    expected = "print('Hallo welkom bij Hedy! ')"
+    expected_commands = ['print']
+
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      output='Hallo welkom bij Hedy!',
+      expected_commands=expected_commands
+    )
+
+    self.assertEqual(['Hallo welkom bij Hedy! '], hedy.all_print_arguments(code, self.level))
+
+
   # combined keywords tests
   def test_print_ask_echo(self):
     code = textwrap.dedent("""\
