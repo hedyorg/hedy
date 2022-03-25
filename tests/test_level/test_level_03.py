@@ -1,6 +1,7 @@
 import hedy
 import textwrap
 from Tester import HedyTester
+from parameterized import parameterized
 
 class TestsLevel3(HedyTester):
   level = 3
@@ -692,3 +693,47 @@ class TestsLevel3(HedyTester):
       code=code,
       exception=hedy.exceptions.WrongLevelException
     )
+
+  def test_list_values_in_single_quotes(self):
+    code = textwrap.dedent(f"""\
+      taart is 'appeltaart, choladetaart, kwarktaart'
+      print 'we bakken een' taart at random""")
+
+    expected = textwrap.dedent("""\
+      taart = ['\\'appeltaart', 'choladetaart', 'kwarktaart\\'']
+      print(f'\\'we bakken een\\' {random.choice(taart)}')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_list_values_with_single_quotes(self):
+    code = textwrap.dedent(f"""\
+      taart is 'appeltaart', 'choladetaart', 'kwarktaart'
+      print 'we bakken een' taart at random""")
+
+    expected = textwrap.dedent("""\
+      taart = ['\\'appeltaart\\'', '\\'choladetaart\\'', '\\'kwarktaart\\'']
+      print(f'\\'we bakken een\\' {random.choice(taart)}')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_list_values_in_double_quotes(self):
+    code = textwrap.dedent(f"""\
+      taart is "appeltaart, choladetaart, kwarktaart"
+      print 'we bakken een' taart at random""")
+
+    expected = textwrap.dedent("""\
+      taart = ['"appeltaart', 'choladetaart', 'kwarktaart"']
+      print(f'\\'we bakken een\\' {random.choice(taart)}')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_list_values_with_double_quotes(self):
+    code = textwrap.dedent(f"""\
+      taart is "appeltaart", "choladetaart", "kwarktaart"
+      print "we bakken een" taart at random""")
+
+    expected = textwrap.dedent("""\
+      taart = ['"appeltaart"', '"choladetaart"', '"kwarktaart"']
+      print(f'"we bakken een" {random.choice(taart)}')""")
+
+    self.single_level_tester(code=code, expected=expected)
