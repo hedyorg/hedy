@@ -38,7 +38,7 @@ def routes(app, database, achievements):
             DATABASE.set_favourite_program(user['username'], None)
 
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "do_you_have_copy")
-        resp = {'message': gettext(u'delete_success')}
+        resp = {'message': gettext('delete_success')}
         if achievement:
             resp['achievement'] = achievement
         return jsonify(resp)
@@ -52,12 +52,12 @@ def routes(app, database, achievements):
             return 'name must be a string', 400
 
         if not current_user()['username']:
-            return gettext(u'save_prompt'), 403
+            return gettext('save_prompt'), 403
 
         programs = DATABASE.programs_for_user(current_user()['username'])
         for program in programs:
             if program['name'] == body['name']:
-                return jsonify({'duplicate': True, 'message': gettext(u'overwrite_warning')})
+                return jsonify({'duplicate': True, 'message': gettext('overwrite_warning')})
         return jsonify({'duplicate': False})
 
     @app.route('/programs', methods=['POST'])
@@ -84,7 +84,7 @@ def routes(app, database, achievements):
         except:
             error = True
             if not body.get('force_save', True):
-                return jsonify({'parse_error': True, 'message': gettext(u'save_parse_warning')})
+                return jsonify({'parse_error': True, 'message': gettext('save_parse_warning')})
 
         # We check if a program with a name `xyz` exists in the database for the username.
         # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
@@ -113,7 +113,7 @@ def routes(app, database, achievements):
             'name': body['name'],
             'username': user['username'],
             'public': 1 if program_public else 0,
-            'error': 1 if error else None
+            'error': error
         }
 
         if 'adventure_name' in body:
@@ -128,8 +128,8 @@ def routes(app, database, achievements):
         if ACHIEVEMENTS.verify_save_achievements(user['username'],
                                                  'adventure_name' in body and len(body['adventure_name']) > 2):
             return jsonify(
-                {'message': gettext(u'save_success_detail'), 'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
-        return jsonify({'message': gettext(u'save_success_detail'), 'name': body['name'], 'id': program_id})
+                {'message': gettext('save_success_detail'), 'name': body['name'], 'id': program_id, "achievements": ACHIEVEMENTS.get_earned_achievements()})
+        return jsonify({'message': gettext('save_success_detail'), 'name': body['name'], 'id': program_id})
 
     @app.route('/programs/share', methods=['POST'])
     @requires_login
@@ -157,9 +157,9 @@ def routes(app, database, achievements):
 
         resp = {'id': body['id']}
         if bool(body['public']):
-            resp['message'] = gettext(u'share_success_detail')
+            resp['message'] = gettext('share_success_detail')
         else:
-            resp['message'] = gettext(u'unshare_success_detail')
+            resp['message'] = gettext('unshare_success_detail')
         if achievement:
             resp['achievement'] = achievement
         return jsonify(resp)
@@ -199,6 +199,6 @@ def routes(app, database, achievements):
             return 'No such program!', 404
 
         if DATABASE.set_favourite_program(user['username'], body['id']):
-            return jsonify({'message': gettext(u'favourite_success')})
+            return jsonify({'message': gettext('favourite_success')})
         else:
             return "You can't set a favourite program without a public profile", 400
