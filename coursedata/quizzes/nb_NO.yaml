@@ -2,406 +2,406 @@ levels:
     1:
         3:
             code: '...'
-            question_text: How do you ask what someone's favorite color is ?
+            question_text: Hvordan spør du hva noen sin favorittfarge er ?
             mp_choice_options:
-            -   "code": print What is your favorite color ?
-                "feedback": Print prints text, but it doesn't ask questions.
-            -   "code": ask print What is your favorite color ?
-                "feedback": You only need one command, not two.
-            -   "code": ask What is your favorite color ?
-                "feedback": Great !
-            -   "code": echo What is your favorite color ?
-                "feedback": Echo repeats your answer back to you.
+            -   "code": skriv Hva er din favorittfarge?
+                "feedback": skriv skriver ut tekst, men den stiller ikke spørsmål.
+            -   "code": spør skriv Hva er din favorittfarge?
+                "feedback": Du trenger bare en kommando, ikke to.
+            -   "code": spør Hva er din favorittfarge?
+                "feedback": Bra!
+            -   "code": ekko Hva er din favorittfarge?
+                "feedback": ekko gjentar svaret ditt.
             correct_answer: C
-            hint: You can ask something with the ask command
+            hint: Du kan stille spørsmål med spør-kommandoen
             question_score: '10'
         1:
-            question_text: What's this programming language called ?
+            question_text: Hva heter dette programmeringsspråket?
             code: '...'
             mp_choice_options:
             -   "option_text": Hedy
-                "feedback": Good job !
+                "feedback": Bra jobbet!
             -   "option_text": Heddy
-                "feedback": Not this one !
+                "feedback": Ikke denne !
             -   "option_text": Haydie
-                "feedback": Not this one !
+                "feedback": Ikke denne !
             -   "option_text": Heidi
-                "feedback": Not this one !
+                "feedback": Ikke denne !
             correct_answer: A
-            hint: It's named after Hedy Lamarr.
+            hint: Det er oppkalt etter Hedy Lamarr.
             question_score: '10'
         2:
-            question_text: Which command makes text appear ?
+            question_text: Hvilken kommando brukes til å vise tekst ?
             code: '...'
             mp_choice_options:
-            -   "code": echo
-                "feedback": Echo repeats a given answer.
-            -   "code": print
-                "feedback": Correct !
-            -   "code": hello
-                "feedback": Hello isn't a command.
-            -   "code": ask
-                "feedback": With ask, you can ask a question.
+            -   "code": ekko
+                "feedback": ekko sier hva som ble svart.
+            -   "code": skriv
+                "feedback": Riktig !
+            -   "code": hallo
+                "feedback": hello er ikke en kommando.
+            -   "code": spør
+                "feedback": Med spør, kan du spørre et spørsmål.
             correct_answer: B
-            hint: _?_ Hello world !
+            hint: _?_ Hallo verden !
             question_score: '10'
         6:
             mp_choice_options:
-            -   "option_text": In line 1 print should be replaced with ask.
-                "feedback": Print in line 1 is correct; mind the spelling of the words.
-            -   "option_text": In line 2, ask is spelled wrong.
-                "feedback": Great ! You paid attention !
-            -   "option_text": Line 3 has to begin with print instead of echo.
-                "feedback": Echo is correct; check the spelling of the commands.
-            -   "option_text": In line 4, print is spelled wrong.
-                "feedback": There is a spelling error somewhere else...
-            question_text: What's wrong with this code ?
-            code: "print Hi im Hedy !\naks Which football team do you support ?\necho You support...\nprint Cool ! Me too !"
+            -   "option_text": På linje 1 må skriv byttes med spør.
+                "feedback": skriv på linje 1 er korrekt; tenk på hvordan man staver ordene.
+            -   "option_text": På linje 2 er spør feilstavet.
+                "feedback": Kjempebra! Du er oppmerksom!
+            -   "option_text": Linje 3 må begynne med skriv istedenfor ekko.
+                "feedback": ekko er korrekt; tenk på hvordan man staver ordene.
+            -   "option_text": skriv på linje 4 er feilstavet.
+                "feedback": Det er en stavefeil en annen plass...
+            question_text: Hva er feil med denne koden?
+            code: "skriv Hei jeg er Hedy!\nsøpr Hvilket fotballlag heier du på?\nekko Du heier på...\nskriv Kult! Jeg også!"
             correct_answer: B
-            hint: Check the way the commands are spelled.
+            hint: Sjekk hvordan kommandoene er stavet.
             question_score: '10'
         4:
-            question_text: What is wrong with this code ?
-            code: "Hi Im Hedy !\nask Who are you ?\necho Hi..."
+            question_text: Hva er feil i denne koden?
+            code: "Hei eg er Hedy!\nspør Hvem er du?\nekko Hei..."
             mp_choice_options:
-            -   "option_text": print in line 1 is missing.
-                "feedback": Correct !
-            -   "option_text": Im in line 1 is spelled wrong.
-                "feedback": Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
-            -   "option_text": Echo isn't a command.
-                "feedback": Echo is a command, there's another mistake.
-            -   "option_text": Nothing ! This is a perfect code !
-                "feedback": Wrong, look carefully !
+            -   "option_text": Linje 1 mangler skriv-kommandoen.
+                "feedback": Korrekt!
+            -   "option_text": På linje 1 er 'jeg' feilstavet.
+                "feedback": "'Jeg' er feilstavet med vilje fordi Hedy kun forstår nynorsk."
+            -   "option_text": ekko er ikke en kommando.
+                "feedback": ekko er en kommando, det er en annen ting som er feil.
+            -   "option_text": Ingenting! Dette er perfekt kode!
+                "feedback": Det er feil, se nøye gjennom koden!
             correct_answer: A
-            hint: Line 1 doens't seem right
+            hint: Det virker som at linje 1 ikke er helt riktig
             question_score: '10'
         5:
-            question_text: Which command is missing in line 2?
-            code: "ask What is your favorite pet ?\n_?_ So your favorite pet is..."
+            question_text: Hvilken kommando mangler på linje 2?
+            code: "spør Hva er ditt favorittdyr?\n_?_ Så ditt favorittdyr er..."
             mp_choice_options:
-            -   "code": print
-                "feedback": No, you would like the answer to be repeated back to you.
+            -   "code": skriv
+                "feedback": Nei ikke helt riktig, du ønsker at svaret skal bli sagt tilbake til deg.
+            -   "code": eko
+                "feedback": eko er ikke en kommando.
+            -   "code": spør
+                "feedback": Med spør kan du stille et spørsmål.
             -   "code": ekko
-                "feedback": ekko isn't a command.
-            -   "code": ask
-                "feedback": With ask you can ask a question.
-            -   "code": echo
-                "feedback": Right on !
+                "feedback": Hurra! Riktig!
             correct_answer: D
-            hint: You want to see the answer at the end of line 2...
+            hint: Du har lyst til å se svaret på slutten av linje 2...
             question_score: '10'
         7:
-            question_text: What's wrong with this code ?
-            code: "print Welcome at Hedys restaurant !\nask What would you like to eat ?\necho So you want to order ...\nprint Coming right up ! Enjoy !"
+            question_text: Hva er feil med denne koden?
+            code: "skriv Velkommen til Hedys restaurant!\nspør Hva vil du ha å spise?\nekko Så du vil bestille...\nskriv Det skal bli! Nyt maten!"
             mp_choice_options:
-            -   "option_text": In line 1 print needs to be replaced with ask
-                "feedback": Are you sure something is wrong ?
-            -   "option_text": In line 1 print needs to be replaced with echo
-                "feedback": Are you sure something's wrong ?
-            -   "option_text": In line 3 echo needs to be replaced with print
-                "feedback": Are you sure something is wrong ?
-            -   "option_text": Nothing ! This is a perfect code !
-                "feedback": Correct !
+            -   "option_text": På linje 1 må skriv byttes ut med spør
+                "feedback": Er du sikker på at det er noe som er feil?
+            -   "option_text": På linje 1 må skriv byttes ut med ekko
+                "feedback": Er du sikker på at det er noe som er feil?
+            -   "option_text": På linje 3 må ekko byttes ut med skriv
+                "feedback": Er du sikker på at det er noe som er feil?
+            -   "option_text": Ingenting! Dette er perfekt kode!
+                "feedback": Korrekt!
             correct_answer: D
-            hint: Check the code line by line
+            hint: Undersøk denne koden linje for linje
             question_score: '10'
         8:
-            question_text: How do you use the echo command ?
+            question_text: Hvordan bruker du ekko kommandoen?
             code: '...'
             mp_choice_options:
-            -   "option_text": You can use it to ask a question.
-                "feedback": That's what ask is for !
-            -   "option_text": You can use it to print text.
-                "feedback": That's what print is for !
-            -   "option_text": You can use it to repeat an answer.
-                "feedback": Good job !
-            -   "option_text": You can use it to make text disappear.
-                "feedback": That's not right...
+            -   "option_text": Du kan bruke den til å stille et spørsmål.
+                "feedback": Det bruker vi spør-kommandoen til!
+            -   "option_text": Du kan bruke den til å skrive ut tekst.
+                "feedback": Det bruker vi skriv-kommandoen til!
+            -   "option_text": Du kan bruke den til å få gjentatt svaret ditt.
+                "feedback": Bra jobbet!
+            -   "option_text": Du kan bruke den til å få tekst til å forsvinne.
+                "feedback": Det er ikke riktig...
             correct_answer: C
-            hint: Echo is used after an ask command.
+            hint: Kommandoen ekko brukes etter en spør kommando.
             question_score: '10'
         9:
-            question_text: What's wrong with this code ?
-            code: "print Hello !\nprint How are you doing ?\necho So you are doing..."
+            question_text: Hva er feil med denne koden?
+            code: "skriv Hallo!\nskriv Hvordan har du det?\nekko Så du har det..."
             mp_choice_options:
-            -   "option_text": print in line 1 should be ask
-                "feedback": No, print is right. Where is the question being asked ?
-            -   "option_text": print in line 2 should be ask
-                "feedback": Super !
-            -   "option_text": echo in line 3 should be ask
-                "feedback": No, echo is right. Where is the question being asked ?
-            -   "option_text": Nothing. This is a perfect code !
-                "feedback": Look carefully for the mistake...
+            -   "option_text": skriv på linje 1 må byttes ut med spør
+                "feedback": Nei, skriv er riktig here. Hvor er det vi stiller spørsmålet?
+            -   "option_text": skriv på linje 2 må byttes ut med spør
+                "feedback": Riktig!
+            -   "option_text": ekko på linje 3 må byttes ut med spør
+                "feedback": Nei, ekko er riktig her. Hvor stiller vi spørsmålet?
+            -   "option_text": Ingenting. Denne koden er perfekt!
+                "feedback": Se nøye gjennom koden for å finne feilen...
             correct_answer: B
-            hint: ask allows you to ask a question
+            hint: spør lar deg stille et spørsmål
             question_score: '10'
         10:
-            question_text: Are you ready for level 2?
+            question_text: Er du klar for nivå 2?
             code: '...'
             mp_choice_options:
-            -   "option_text": Yes !
-                "feedback": Great ! Let's go to the next level !
-            -   "option_text": No
-                "feedback": What a shame... You can practice some more in level 1!
+            -   "option_text": JA!
+                "feedback": Konge! La oss gå videre til neste nivå!
+            -   "option_text": Nei
+                "feedback": Uffda... Du kan fortsatt øve mer på nivå 1!
             correct_answer: A
-            hint: Let's go !
+            hint: Okey! Kom igjen!
             question_score: '10'
     3:
         3:
             mp_choice_options:
-            -   "feedback": You're almost there. The order of the words isn't right yet.
-                "code": at random print options
-            -   "code": print rock at random
-                "feedback": you don't always want the Hedy to print rock, sometimes you want scissors or paper.
-            -   "code": print options at random
-                "feedback": Very good !
-            -   "option_text": Nothing, the code is correct !
-                "feedback": Look carefully for the mistake
+            -   "feedback": Nesten! Ordene er rett, men i feil rekkefølge.
+                "code": på tilfeldig skriv alternativer
+            -   "code": skriv stein på tilfeldig
+                "feedback": Du vil ikke alltid at Hedy skal skrive stein, noen ganger vil du at Hedy skal være saks eller papir.
+            -   "code": skriv alternativer på tilfeldig
+                "feedback": Veldig bra!
+            -   "option_text": Ingenting, koden er korrekt!
+                "feedback": Se nøye etter for å oppdage feilen
             correct_answer: C
-            hint: The variable (the list) is called options.
+            hint: Variabelen (listen) heter alternativer.
             question_score: '10'
-            question_text: What's wrong in line 2 of this code ?
-            code: "options is rock, paper, scissors\nprint rock, paper, scissors at random"
+            question_text: Hva er feil med linje 2 i denne koden?
+            code: "alternativer er stein, saks, papir\nskriv stein, saks, papir på tilfeldig"
         4:
-            question_text: What should change in line to to print a random price ?
-            code: "prices is 1 dollar, 100 dollar, 1 million dollar\nprint price at random"
+            question_text: Hva må linje 2 endres til for å skrive ut en tilfeldig pris?
+            code: "priser er 1 krone, 100 kroner, 1 million kroner\nskriv pris på tilfeldig"
             mp_choice_options:
-            -   "code": print price
-                "feedback": You don't want to print the word price, but you want to print one price out of your list at random
-            -   "code": print prices at random
-                "feedback": Great ! You've really paid attention.
-            -   "code": print at random price
-                "feedback": At random is places behind the variable.
-            -   "option_text": Nothing, this code is alright.
-                "feedback": Look carefully for the mistake you missed !
+            -   "code": skriv pris
+                "feedback": Du har ikke lyst til å skrive ordet pris, men du vil skrive ut en tilfeldig pris fra listen
+            -   "code": skriv priser på tilfeldig
+                "feedback": Flott! Du har virkelig fulgt med i timen.
+            -   "code": skriv på tifeldig priser
+                "feedback": "'på tilfeldig' må plasseres etter variabelen."
+            -   "option_text": Ingenting, koden er riktig.
+                "feedback": Se nøye igjennom koden for å oppdage feilen!
             correct_answer: B
-            hint: The variable name is prices
+            hint: Variabelens navn er priser
             question_score: '10'
         7:
             mp_choice_options:
-            -   "option_text": The add command removes a random book from the list
-                "feedback": The remove command removes, the add command adds
-            -   "option_text": The add command adds a random book to a list
-                "feedback": It doesn't. It adds your answer to the list!
-            -   "option_text": The add command adds your favotite book to the list
-                "feedback": Correct!
-            -   "option_text": The add command prints your favorite book.
-                "feedback": No, it adds your favorite book to the list
-            question_text: What does the add command do?
-            code: "books is Harry Potter, de Hobbit, Green eggs and Ham\nyour_book is ask What is your favorite book?\nadd your_book to books\nprint books at random"
+            -   "option_text": legg-kommandoen fjerner en tilfeldig bok fra listen
+                "feedback": "'fjern' kommandoen fjerner, 'legg' kommandoen legger til"
+            -   "option_text": legg-kommandoen legger til en tilfeldig bok i listen
+                "feedback": Det gjør den ikke. Den legger til svaret ditt til listen!
+            -   "option_text": legg-kommandoen legger til favorittboken din listen
+                "feedback": Korrekt!
+            -   "option_text": legg-kommandoen skriver ut din favorittbok.
+                "feedback": Nei, det legger til favorittboken din i listen
+            question_text: Hva gjør legg kommandoen?
+            code: "bøker er Harry Potter, Hobbiten, Ringenes Herre\ndin_bok er spør Hva er din favorittbok?\nlegg din_bok til bøker\nskriv bøker på tilfeldig"
             correct_answer: C
-            hint: The add command adds a book, but which one?
+            hint: legg-kommandoen legger til en bok i listen, men hvilken?
             question_score: '10'
         10:
             mp_choice_options:
-            -   "option_text": remove walked_yesterday from walkers
-                "feedback": Super!
-            -   "option_text": remove walked yesterday to walkers
-                "feedback": remove from or add to, not remove to
-            -   "option_text": remove walkers from yesterday
-                "feedback": yesterday is not a variable
-            -   "option_text": add walked_yesterday to walkers
-                "feedback": This increased the change that the person who walked yesterday now has to do it again. That's mean.
+            -   "option_text": fjern gikk_tur_igår fra turgåere
+                "feedback": Supert!
+            -   "option_text": fjern gikk tur igår til turgåere
+                "feedback": fjern fra eller legg til, ikke fjern til
+            -   "option_text": fjern turgåere fra igår
+                "feedback": igår er ikke en variabel
+            -   "option_text": legg gikk_tur_igår til turgåere
+                "feedback": Dette vil øke sjansen for at personen som gikk tur igår må gå tur igjen i dag. Det er slemt.
             correct_answer: A
-            hint: The person who walked the dog yesterday should be removed from the list.
+            hint: Personen som gikk tur med hunden i går burde fjernes fra listen.
             question_score: '10'
-            question_text: What should be on the _?_ ?
-            code: "walkers is dad, mom, Sam, Petra\nwalked_yesterday is ask Who walked the dogs yesterday?\nprint walked_yesterday shouldn't have to walk the dogs again today\n_?_\nprint walkers at random , it's your turn to walk the dogs!"
+            question_text: Hva burde være der istedenfor _?_ ?
+            code: "turgåere er pappa, mamma, Sebastian, Kristin\ngikk_tur_igår er spør Hvem gikk tur med hundene i går?\nskriv gikk_tur_igår burde slippe å gå tur med hundene igjen i dag\n_?_\nskriv turgåere på tilfeldig, det er din tur til å gå med hundene!"
         1:
-            question_text: What command do you use to let Hedy pick something arbitrarily ?
+            question_text: Hvilken kommando bruker du for å la Hedy velge noe vilkårlig?
             code: '...'
             mp_choice_options:
-            -   "code": print
-                "feedback": print is used to print text
-            -   "code": ask
-                "feedback": ask is used to ask a question
-            -   "code": is
-                "feedback": is is used to make a list
-            -   "code": at random
-                "feedback": Correct !
+            -   "code": skriv
+                "feedback": skriv brukes for å skrive ut tekst
+            -   "code": spør
+                "feedback": spør brukes for å stille et spørsmål
+            -   "code": er
+                "feedback": er brukes til å lage en variabel eller liste
+            -   "code": på tilfeldig
+                "feedback": Korrekt!
             correct_answer: D
-            hint: Arbitrarily means without a plan or randomly.
+            hint: Vilkårlig betyr uten en plan eller tilfeldig.
             question_score: '10'
         2:
-            question_text: What's wrong with this code ?
-            code: "animals is dog cat cow\nprint animals at random"
+            question_text: Hva er feil med denne koden?
+            code: "dyr er hund katt ku\nskriv dyr på tilfeldig"
             mp_choice_options:
-            -   "option_text": 'You need commas in line 1: dog, cat, cow.'
-                "feedback": Good job !
-            -   "option_text": Line 1 needs to start with print.
-                "feedback": No, you don't need print
-            -   "option_text": Line 2 needs to say 'animal' instead of 'animals'',
-                "feedback": animals is correct.
-            -   "option_text": "'at random is spelled incorrectly, it should be at ramdon"
-                "feedback": At random is the correct spelling
+            -   "option_text": 'Du trenger komma-tegn på linje 1: hund, katt, ku.'
+                "feedback": Riktig, bra jobbet!
+            -   "option_text": Linje 1 må begynne med skriv.
+                "feedback": Nei, du trenger ikke skriv-kommandoen her
+            -   "option_text": Linje 2 burde være 'dyrene' istedenfor 'dyr'
+                "feedback": dyr er det riktige å bruke, prøv igjen.
+            -   "option_text": "'på tilfeldig' er feilstavet, det burde vært 'på tifleldig'"
+                "feedback": "'på tilfeldig' er riktig stavemåte"
             correct_answer: A
-            hint: There's something wrong in line 1
+            hint: Det er noe feil med linje 1
             question_score: '10'
         5:
-            question_text: What is wrong in this code ?
-            code: "question is ask What do you want to know ?\nprint question\nanswers is yes, no, maybe\nprint answers at random"
+            question_text: Hva er feil i denne koden?
+            code: "spørsmål er spør Hva vil du vite?\nskriv spørsmål\nsvar er ja, nei, kanskje\nskriv svar på tilfeldig"
             mp_choice_options:
-            -   "option_text": Line 1 needs ot say print instead of ask
-                "feedback": No, that's not wrong.?
-            -   "option_text": Line 2 needs to say ask instead of print
-                "feedback": No that's not wrong.
-            -   "option_text": Line 2 needs to say answers at random is yes, no, maybe
-                "feedback": No, that's not wrong.
-            -   "option_text": Nothing, this code is perfect
-                "feedback": That's right !
+            -   "option_text": Linje 1 burde være skriv istedenfor spør
+                "feedback": Nei, det er riktig slik det er.
+            -   "option_text": Linje to burde være spør istedenfor skriv
+                "feedback": Nei, det er riktig slik det er.
+            -   "option_text": Linje 2 burde være svar på tilfeldig er ja, nei, kanskje
+                "feedback": Nei, det er feil.
+            -   "option_text": Ingenting, koden er perfekt
+                "feedback": Riktig!
             correct_answer: D
-            hint: Does this code even have a mistake ?
+            hint: Har denne koden i det hele tatt feil?
             question_score: '10'
         6:
-            question_text: What's wrong with this code ?
-            code: "question is ask What do you want to know ?\nanswers are yes, no, maybe\nprint answers at random"
+            question_text: Hva er feil med denne koden?
+            code: "spørsmål er spør Hva vil du vite?\nsvar kan være ja, nei, kanskje\nskriv svar på tilfeldig"
             mp_choice_options:
-            -   "option_text": Line 2 needs to say question instead of answers
-                "feedback": No that's not right
-            -   "option_text": Line 2 needs to say is instead of are
-                "feedback": Correct
-            -   "option_text": Line 3 needs to say answer instead of answers
-                "feedback": No the variable's called answers
-            -   "option_text": Nothing ! This code is great !
-                "feedback": Actually, line 2 has a mistake.
+            -   "option_text": Linje 2 burde vært 'spørsmål' istedenfor 'svar'
+                "feedback": Nei, det er ikke riktig
+            -   "option_text": Linje 2 burde vært 'er' istedenfor 'kan være'
+                "feedback": Korrekt
+            -   "option_text": Linje 3 burde være 'svaret' istedenfor 'svar'
+                "feedback": Det fins ingen variabel kalt svaret
+            -   "option_text": Ingenting! Dette er flott kode!
+                "feedback": Linje 2 har faktisk en feil.
             correct_answer: B
-            hint: Are is not a command.
+            hint: "'kan være' er ikke en kommando."
             question_score: '10'
         8:
-            question_text: What is the output of this code?
-            code: "crisps is sea salt, paprika, sour cream\nremove sea salt from crisps\nremove paprika from crisps\nprint crisps at random"
+            question_text: Hva blir resultatet når du kjører denne koden?
+            code: "potetgull er havsalt, paprika, rømme\nfjern havsalt fra potetgull\nfjern paprika fra potetgull\nskriv potetgull på tilfeldig"
             mp_choice_options:
-            -   "option_text": You can't tell, because Hedy will print one of the 3 flavors at random
-                "feedback": Take a look at the remove commands
-            -   "option_text": sea salt
-                "feedback": sea salt is removed from the list
+            -   "option_text": Det er umulig å si fordi Hedy vil velge en tilfeldig potetgullsmak
+                "feedback": Ta en nærmere titt på fjern-kommandoene
+            -   "option_text": havsalt
+                "feedback": havsalt er fjernet fra listen
             -   "option_text": paprika
-                "feedback": Paprika is removed from the list
-            -   "option_text": sour cream
-                "feedback": That's right!
+                "feedback": Paprika er fjernet fra listen
+            -   "option_text": rømme
+                "feedback": Det er riktig!
             correct_answer: D
-            hint: There are 3 flavors, bit 2 are removed. Which one remains?
+            hint: Det er tre smaker, men to av dem er fjernet. Hvilken smak er igjen i listen?
             question_score: '10'
         9:
-            question_text: What's wrong with this code??
-            code: "colors is blue, purple, green\nchosen_color is ask Which haircolor wouldn't your like to have?\nremove chosen_color from colors\nprint I will dye my hair color at random"
+            question_text: Hva er feil med denne koden?
+            code: "hår_farger er blått, lilla, grønt\nvalgt_farge er spør Hvilken hårfarge ville du aldri hatt?\nfjern valgt_farge fra hår_farger\nskriv Jeg skal farge håret mitt hår_farge på tilfeldig"
             mp_choice_options:
-            -   "option_text": 'Line 3 should say: remove blue from colors'
-                "feedback": Maybe you want blue hair though!
-            -   "option_text": Line 3 should have an add command instead of a remove command
-                "feedback": You want to remove the chosen color so remove is right.
-            -   "option_text": In line 4 the variable should be called colors instead of color
-                "feedback": Great job!
-            -   "option_text": Nothing, this is a correct code!
-                "feedback": Find the mistake!
+            -   "option_text": 'Linje 3 burde være: fjern blått fra hår_farger'
+                "feedback": Kanskje du har lyst på blått hår!
+            -   "option_text": Linje 3 burde bruke legg-kommando istedenfor fjern
+                "feedback": Du har lyst til å fjerne den valgte fargen, så fjern er korrekt.
+            -   "option_text": På linje 4 burde variabelen hete hår_farger istedenfor hår_farge
+                "feedback": Bra jobbet!
+            -   "option_text": Ingenting, dette er korrekt kode!
+                "feedback": Det er en feil, se nøye etter og finn den!
             correct_answer: C
-            hint: Look at line 3
+            hint: Se på linje 4
             question_score: '10'
     4:
         1:
-            question_text: Which of these is true ?
+            question_text: Hvilken av disse er sann?
             code: '...'
             mp_choice_options:
-            -   "option_text": print and ask now need quotation marks
-                "feedback": That's right
-            -   "option_text": Only print needs quotation marks
-                "feedback": Ask needs quotation marks too !
-            -   "option_text": At random doesn't work anymore in level 4
-                "feedback": At random still works
-            -   "option_text": At random now needs quotation marks
-                "feedback": No, but 2 other commands do.
+            -   "option_text": skriv og spør-kommandoene krever at du bruker fnutter nå
+                "feedback": Det er riktig
+            -   "option_text": Kun skriv krever fnutter
+                "feedback": spør trenger også fnutter!
+            -   "option_text": på tilfeldig fungerer ikke lengre på nivå 4
+                "feedback": på tilfeldig fungerer fortsatt
+            -   "option_text": på tilfeldig krever fnutter
+                "feedback": Nei, men to andre kommandoer krever det.
             correct_answer: A
-            hint: In level 4 you need quotation marks for 2 commands.
+            hint: På nivå 4 trenger du fnutter når du bruker to kommandoer.
             question_score: '10'
         2:
-            question_text: Which code uses the proper quotation marks ?
+            question_text: Hvilken kode bruker riktige fnutter?
             code: '...'
             mp_choice_options:
-            -   "code": print `hello`
-                "feedback": This quotation mark is skewed, you need a straight one.
-            -   "code": print 'hello'
-                "feedback": Correct
-            -   "code": print "hello"
-                "feedback": these are double quotation marks, you need single ones.
-            -   "code": print ,hello,
-                "feedback": This is a comma, you need quotation marks.
+            -   "code": skriv`hallo`
+                "feedback": Denne fnutter er på skrå, du trenger en som er bein.
+            -   "code": skriv 'hallo'
+                "feedback": Korrekt
+            -   "code": skriv "hallo"
+                "feedback": Dette er doble fnutter, du trenger enkle fnutter.
+            -   "code": skriv ,hallo,
+                "feedback": Dette er et komma, du trenger fnutter.
             correct_answer: B
-            hint: Pick the right quotation marks.
+            hint: Velg riktige fnutter.
             question_score: '10'
         3:
-            question_text: Where are the quotation marks used correctly ?
+            question_text: Hvor er fnuttene brukt riktig?
             code: '...'
             mp_choice_options:
-            -   "code": print Hi Im Hedy
-                "feedback": Add quotation marks please !
-            -   "code": print 'Hi Im Hedy
-                "feedback": Both before and after the words you want to print should be a quotation mark.
-            -   "code": "'print Hi Im Hedy'"
-                "feedback": the first quotation mark should be behind the word print
-            -   "code": print 'Hi Im Hedy'
-                "feedback": Perfect !
+            -   "code": skriv Hei jeg heter Hedy
+                "feedback": Legg til fnutter takk!
+            -   "code": skriv 'Hei jeg er Hedy
+                "feedback": Du må ha fnutter både før og etter ord du ønsker å skrive ut.
+            -   "code": "'skriv Hei jeg er Hedy'"
+                "feedback": Den første fnutten burde komme etter ordet 'skriv'
+            -   "code": skriv 'Hei jeg er Hedy
+                "feedback": Perfekt!
             correct_answer: D
-            hint: Both before and after the words you want to print should be a quotation mark.
+            hint: Du må ha fnutter både før og etter ord du ønsker å skrive ut.
             question_score: '10'
         4:
-            question_text: Which statement is true ?
+            question_text: Hvilken påstand er sann?
             code: '...'
             mp_choice_options:
-            -   "option_text": "You need quotation marks around the word print, like this: 'print'."
-                "feedback": The quotation marks shouldn't be around the command itself.
-            -   "option_text": You need quotation marks around the words you want to print.
-                "feedback": Super !
-            -   "feedback": Both print and ask require quotation marks
-                "option_text": You do not need quotation marks when using the ask command
-            -   "option_text": You can choose yourself whether to use quotation marks or not.
-                "feedback": Unfortunately, Hedy is stricter than that.
+            -   "option_text": "Du må ha fnutter rundt ordet skriv, slik som dette: 'skriv'"
+                "feedback": Fnuttene skal ikke brukes rundt kommandoen.
+            -   "option_text": Du må ha fnutter rundt ordene du ønsker å skrive ut.
+                "feedback": Supert!
+            -   "feedback": Både skriv- og spør-kommandoen krever at du bruker fnutter
+                "option_text": Du trenger ikke fnutter når du skal bruke spør-kommandoen
+            -   "option_text": Du kan bestemme selv om du vil bruke fnutter eller ikke.
+                "feedback": Uheldigvis er Hedy strengere enn det.
             correct_answer: B
-            hint: From level 4 on you need to use quotation marks.
+            hint: Fra nivå 4 og videre må du bruke fnutter.
             question_score: '10'
         5:
-            question_text: What has to be changed in order for the game to work ?
-            code: "options is rock, paper, scissors\nprint 'options at random'"
+            question_text: Hva må endres for at spillet skal fungere?
+            code: "alternativer er stein, saks, papir\nskriv 'alternativer på tilfeldig'"
             mp_choice_options:
-            -   "code": "'print options at random'"
-                "feedback": Never put the quotation mark in front of the print command.
-            -   "code": print 'options' at random
-                "feedback": Options is a variable. You don't literally want to print 'options at random'.
-            -   "code": print options at random
-                "feedback": That's right
-            -   "option_text": Nothing, the game already works !
-                "feedback": Look carefully. There is an error.
+            -   "code": "'skriv alternativer på tilfeldig'"
+                "feedback": Fnuttene skal aldri før skriv-kommandoen
+            -   "code": skriv 'alternativer' på tilfeldig
+                "feedback": alternativer er en variabel. Du har ikke lyst til å skrive ordet 'alternativer'
+            -   "code": skriv alternativer på tilfeldig
+                "feedback": Det er korrekt
+            -   "option_text": Ingenting, spillet fungerer allerede slik det skal!
+                "feedback": Se nøye etter, det er en feil i koden.
             correct_answer: C
-            hint: You don't want Hedy to literally print 'options at random', you want it to print 'rock' or 'paper' or 'scissors'.
+            hint: Du vil ikke at Hedy skal skrive ut teksten 'alternativer på tilfeldig', du vil at det skal skrive 'stein' eller 'saks' eller 'papir'.
             question_score: '10'
         6:
-            question_text: What would be a good next line in this code ?
-            code: prices is 1 dollar, 100 dollar, 1 million dollar
+            question_text: Hva hadde vært en god idé å legge inn på neste linje i denne koden?
+            code: premier er 1 krone, 100 kroner, 1 million kroner
             mp_choice_options:
-            -   "code": print 'You win...' prices at random
-                "feedback": Great ! You get it !
-            -   "code": print You win... 'prices at random'
-                "feedback": Hedy will literally print 'prices at random'
-            -   "code": print You win... prices at random
-                "feedback": You need some quotation marks !
-            -   "code": print 'You win... prices at random'
-                "feedback": Hedy will literally print 'prices at random''
+            -   "code": skriv 'Du vinner...' premier på tilfeldig
+                "feedback": Flott! Du har skjønt det!
+            -   "code": skriv Du vinner... 'premier på tilfeldig'
+                "feedback": Her vil Hedy skrive ut teksten 'premier på tilfeldig', ikke en tilfeldig premie
+            -   "code": skriv Du vinner... premier på tilfeldig
+                "feedback": Du mangler visst noen fnutter!
+            -   "code": skriv 'Du vinner.... premier på tilfeldig'
+                "feedback": Her vil Hedy skrive ut ordene 'Du vinner... premier på tilfeldig'
             correct_answer: A
-            hint: 'Think carefully: what is a variable and should be outside of the quotation marks ? And what are normal words that should be inside ?.'
+            hint: 'Tenk deg nøye om. Hva er en variabel og burde være utenfor fnuttene? Og hva er vanlige ord som må være inni fnuttene?'
             question_score: '10'
         7:
-            question_text: What's wrong with this code ?
-            code: "question is ask What do you want to know ?\nanswers is yes, no, maybe\nprint answers at random"
+            question_text: Hva er feil med denne koden?
+            code: "spørsmål er spør Hva vil du vite?\nsvar er ja, nei, kanskje\nskriv svar på tilfeldig"
             mp_choice_options:
-            -   "option_text": Quotation marks are missing in line 1
-                "feedback": Correct !
-            -   "option_text": Quotation marks are missing in line 2
-                "feedback": A variable doesn't need quotes
-            -   "option_text": Quotation marks are missing in line 3
-                "feedback": You don't want Hedy to literally print 'answers at random' so no quotation marks needed here !
-            -   "option_text": Nothing, this code is good as is !
-                "feedback": Look carefully. You missed a mistake !
+            -   "option_text": Det mangler fnutter på linje 1
+                "feedback": Korrekt!
+            -   "option_text": Det mangler fnutter på linje 2
+                "feedback": En variabel trenger ikke fnutter
+            -   "option_text": Fnutter mangler på linje 3
+                "feedback": Du vil ikke at Hedy skal skrive ordene 'svar på tilfeldig', så her trenger du ikke fnutter!
+            -   "option_text": Ingenting, denne koden er flott som den er!
+                "feedback": Se nøye etter, du gikk glipp av en feil!
             correct_answer: A
-            hint: Check each line on whether they'd need quotation marks or not.
+            hint: Sjekk hver linje om den trenger fnutter eller ikke.
             question_score: '10'
         8:
             question_text: What would be a good next line for this code ?
@@ -412,7 +412,7 @@ levels:
             -   "option_text": print 'So you pick ' door door
                 "feedback": If the player chooses door 3, Hedy will say 'So you pick 3 3
             -   "option_text": print 'So you pick door ' door
-                "feedback": Super !
+                "feedback": Supert!
             -   "option_text": print 'So you pick door door'
                 "feedback": Hedy will literally print 'So you pick door door
             correct_answer: C
@@ -423,24 +423,24 @@ levels:
             code: "clubs is Real Madrid, Bayern Munchen, Manchester United, Ajax\nprint clubs at random ' is going the win the champions league'"
             mp_choice_options:
             -   "option_text": Ajax is going to win the champions league
-                "feedback": Hedy could print that
+                "feedback": Hedy klarte ikke å skrive ut det
             -   "option_text": Real Madrid is going to win the champions league
-                "feedback": Hedy could print that
+                "feedback": Hedy klarte ikke å skrive ut det
             -   "option_text": Bayer Munchen is going to win the champions league
-                "feedback": Hedy could print that
+                "feedback": Hedy klarte ikke å skrive ut det
             -   "option_text": FC Barcelona is going to win the champions league
                 "feedback": That's right. It's not in the list
             correct_answer: D
             hint: What are Hedy's options to randomly pick from ?
             question_score: '10'
         10:
-            question_text: Which statement is true ?
+            question_text: Hvilken påstand er sann?
             code: "people is mom, dad, Emma, Sophie\nprint The dishes are done by...\nprint people at random"
             mp_choice_options:
             -   "option_text": Quotation marks are missing in line 1
                 "feedback": A list doesn't need quotation marks
             -   "option_text": Quotation marks are missing in line 2
-                "feedback": Correct
+                "feedback": Korrekt
             -   "option_text": Quotation marks are missing in both line 2 and 3
                 "feedback": Line 3 doesn't need quotation marks because it's not printed literally
             -   "option_text": Nothing, this code has no mistakes
@@ -450,173 +450,173 @@ levels:
             question_score: '10'
     2:
         1:
-            question_text: Which statement is true ?
+            question_text: Hvilket påstand er sann?
             code: '...'
             mp_choice_options:
-            -   "option_text": In level 2 the print command doesn't exist anymore
-                "feedback": Print still works
-            -   "option_text": In level 2 the ask command doesn't exist anymore
-                "feedback": Ask still works !
-            -   "option_text": In level 2 the echo command doesn't exist anymore
-                "feedback": Good
-            -   "option_text": In level 2 all the level 1 commands still work
-                "feedback": No one command doesn't work anymore.
+            -   "option_text": På nivå 2 fins ikke skriv-kommandoen lengre
+                "feedback": skriv-kommandoen fungerer fortsatt
+            -   "option_text": På nivå 2 fins ikke spør kommandoen lengre
+                "feedback": spør-kommandoen fungerer fortsatt!
+            -   "option_text": På nivå 2 fins ikke ekko kommandoen lengre
+                "feedback": Riktig!
+            -   "option_text": På nivå 2 fungerer fortsatt alle nivå 1 kommandoene
+                "feedback": Nei, en kommando er fjernet.
             correct_answer: C
-            hint: print and ask still exist.
+            hint: skriv- og spør-kommandoene eksisterer fortsatt.
             question_score: '10'
         2:
-            question_text: Which code is correct ?
+            question_text: Hvilken kode er korrekt?
             code: '...'
             mp_choice_options:
-            -   "code": name is ask What is your name ?
-                "feedback": Super !
-            -   "code": ask is name What is your name
-                "feedback": The words are right, the order is not !
-            -   "code": ask What is your name ?
-                "feedback": This worked in level 1, but in level 2 and up it works differently.
-            -   "code": ask What is your name ? is name
-                "feedback": The words are right, the order isn't !
+            -   "code": navn er spør Hva heter du?
+                "feedback": Supert!
+            -   "code": spør er navn Hva heter du?
+                "feedback": Ordene er rett, men rekkefølgen er feil!
+            -   "code": spør Hva heter du?
+                "feedback": Dette fungerte på nivå 1, men på nivå 2 og oppover fungerer det litt anderledes.
+            -   "code": spør Hva heter du? er navn
+                "feedback": Ordene er rett, men rekkefølgen er feil!
             correct_answer: A
-            hint: ask doesn't work like in level 1
+            hint: spør-kommandoen fungerer ikke helt som i nivå 1
             question_score: '10'
         3:
-            question_text: What appears on your output screen when you run this code ?
-            code: "name is Marleen\nprint name goes to the market and she buys an apple."
+            question_text: Hva vises i resultatfeltet når du kjører denne koden?
+            code: "navn er Maria\nskriv navn går på butikken og hun kjøper et eple."
             mp_choice_options:
-            -   "option_text": name goes to the market and she buys an apple.
-                "feedback": The word name is replaced with Marleen
-            -   "option_text": Marleen goes to the market.
-                "feedback": The second part of the sentence isn't left out !
-            -   "option_text": Marleen goes to the market and she buys an apple.
-                "feedback": Right on !
-            -   "option_text": Marleen goes to the market and Marleen buys an apple.
-                "feedback": She is not replaced with the name
+            -   "option_text": navn går på butikken og hun kjøper et eple.
+                "feedback": Ordet 'navn' blir byttet ut med Maria
+            -   "option_text": Maria går på butikken.
+                "feedback": Den andre delen av setningen mangler!
+            -   "option_text": Maria går på butikken og hun kjøper et eple.
+                "feedback": Korrekt!
+            -   "option_text": Maria går på butikken og Maria kjøper et eple.
+                "feedback": "'hun' blir ikke byttet ut med navnet"
             correct_answer: C
-            hint: The word name is replaced with Marleen
+            hint: Ordet 'navn' blir byttet ut med Maria
             question_score: '10'
         4:
-            question_text: What will you see on the output screen when you run this code ?
-            code: "name is Hedy\nprint Hi my name is name !"
+            question_text: Hva vil vises i resultatfeltet når du kjører denne koden?
+            code: "navn er Hedy\nskriv Hei mitt navn er navn!"
             mp_choice_options:
-            -   "option_text": Hi my name is name
-                "feedback": The variable name is replaced with Hedy
-            -   "option_text": Hi my name is Hedy
-                "feedback": The variable name is replaced with Hedy
-            -   "option_text": Hi my Hedy is name
-                "feedback": The variable name is replaced with Hedy
-            -   "option_text": Hi my Hedy is Hedy
-                "feedback": Correct, this mistake will be fixed in level 3!
+            -   "option_text": Hei mitt navn er navn!
+                "feedback": Variabelen 'navn' blir byttet ut med Hedy i teksten
+            -   "option_text": Hei mitt navn er Hedy!
+                "feedback": Variabelen 'navn' blir byttet ut med Hedy i teksten
+            -   "option_text": Hei mitt Hedy er navn!
+                "feedback": Variabelen 'navn' blir byttet ut med Hedy i teksten
+            -   "option_text": Hei mitt Hedy er Hedy!
+                "feedback": Riktig, denne feilen blir fikset i nivå 3!
             correct_answer: D
-            hint: "'name' is being replaced with 'Hedy' in both places"
+            hint: "'navn' blir byttet ut med 'Hedy' begge plassene"
             question_score: '10'
         5:
-            question_text: What happens when you use the `sleep` command
-            code: sleep
+            question_text: Hva skjer når du bruker `sov` kommandoen?
+            code: sov
             mp_choice_options:
-            -   "option_text": It slows down your computer
-                "feedback": Fortunately not !
-            -   "option_text": It closes down Hedy
-                "feedback": Fortunately not !
-            -   "option_text": Your program pauses for a second and then continues
-                "feedback": That's right !
-            -   "option_text": You put it at the end so Hedy knows your program is finished
-                "feedback": No it would be useless at the end of your code
+            -   "option_text": Det gjør at PCen din blir tregere
+                "feedback": Heldigvis ikke!
+            -   "option_text": Det lukker ned Hedy
+                "feedback": Heldigvis ikke!
+            -   "option_text": Programmet ditt settes på pause i et sekund før det fortsetter som vanlig
+                "feedback": Det stemmer!
+            -   "option_text": Du legger det til på slutten av koden din slik at Hedy vet at programmet ditt er ferdig
+                "feedback": Nei, det vil ikke være nyttig å legge sov til på slutten av koden
             correct_answer: C
-            hint: The computer waits for a second at the sleep command
+            hint: PCen din venter i et sekund når du bruker sov-kommandoen før den fortsetter å kjøre programmet ditt
             question_score: '10'
         6:
-            question_text: What should be on the lines ?
-            code: "print And the award for best programming language goes to...\n_?_\nprint Hedy !"
+            question_text: Hva skal være på linjene med spørsmålstegn?
+            code: "skriv Og premien for beste programmeringsspråk går til...\n_?_\nskriv Hedy!"
             mp_choice_options:
-            -   "option_text": sleep
-                "feedback": Perfect !
-            -   "option_text": echo
-                "feedback": There is nothing to repeat back here
-            -   "option_text": print
-                "feedback": There is no text there to print there
-            -   "option_text": ask
-                "feedback": There is no question there to be asked
+            -   "option_text": sov
+                "feedback": Perfekt!
+            -   "option_text": ekko
+                "feedback": Det er ingenting som skal gjentas der
+            -   "option_text": skriv
+                "feedback": Det er ingen tekst å skrive ut der
+            -   "option_text": spør
+                "feedback": Det er ingen spørsmål som skal stilles der
             correct_answer: A
-            hint: Pause for dramatic effect...
+            hint: Ta en pause for dramatisk effekt...
             question_score: '10'
         7:
-            question_text: What command should be used on line 2 ?
-            code: "print I will explode in 3 seconds !\n_?_\nprint BOOM !"
+            question_text: Hvilken kommando burde brukes på linje 2?
+            code: "skriv Jeg eksploderer om 3 sekunder!\n_?_\nskriv BANG!"
             mp_choice_options:
-            -   "code": print 3
-                "feedback": You don't need to print
-            -   "code": sleep 3
-                "feedback": Perfect !
-            -   "code": sleep
-                "feedback": This way the bomb will explode in 1 second
-            -   "code": sleep sleep sleep
-                "feedback": Make it easier on yourself by using the number 3
+            -   "code": skriv 3
+                "feedback": Du trenger ikke skrive ut noe her
+            -   "code": sov 3
+                "feedback": Perfekt!
+            -   "code": sov
+                "feedback": Nei, da vil bomben eksplodere etter 1 sekund
+            -   "code": sov sov sov
+                "feedback": Gjør det lettere for deg selv og skriv tallet 3
             correct_answer: B
-            hint: You want the computer to wait for 3 seconds
+            hint: Du vil at PCen skal vente i 3 sekunder
             question_score: '10'
         8:
-            question_text: How would you correct the first line of code ?
-            code: "ask is How old are you ?\nprint age"
+            question_text: Denne koden har en feil, hva må du gjøre på linje 1 for at det skal fungere?
+            code: "spør er Hvor gammel er du?\nskriv alder"
             mp_choice_options:
-            -   "option_text": age ask is How old are you ?
-                "feedback": That is the wrong order
-            -   "option_text": ask is age How old are you ?
-                "feedback": That is the wrong order
-            -   "option_text": age is ask How old are you ?
-                "feedback": You get it !
-            -   "option_text": age is How old are you ?
-                "feedback": Where is the ask command
+            -   "option_text": alder spør er Hvor gammel er du?
+                "feedback": Det var feil rekkefølge
+            -   "option_text": spør er alder Hvor gammel er du?
+                "feedback": Det var feil rekkefølge
+            -   "option_text": alder er spør Hvor gammel er du?
+                "feedback": Den tok du lett!
+            -   "option_text": alder er Hvor gammel er du?
+                "feedback": Hvor er spør-kommandoen?
             correct_answer: C
-            hint: The variable name should come first
+            hint: Variabelnavnet må skrives inn først
             question_score: '10'
         9:
-            question_text: What is going wrong in this code ?
-            code: "dogs is animal\nprint I love animal"
+            question_text: Hva er feil i denne koden?
+            code: "hunder er dyr\nskriv Jeg elsker dyr"
             mp_choice_options:
-            -   "option_text": 'Line 1 should say: `dogs is animals`'
-                "feedback": The variable name is animal
-            -   "option_text": 'Line 1 should say: animal is dogs'
-                "feedback": Great !
-            -   "option_text": 'Line 2 should say: print I love animals'
-                "feedback": The variable name is animal
-            -   "option_text": 'Line 2 should say: `sleep I love animals`'
-                "feedback": Sleep is not used to print text
+            -   "option_text": 'Linje 1 burde være: `hunder er dyrene`'
+                "feedback": Variabelnavnet er dyr
+            -   "option_text": 'Linje 1 burde være: dyr er hunder'
+                "feedback": Flott!
+            -   "option_text": 'Linje 2 burde være: skriv Jeg elsker dyrene'
+                "feedback": Variabelnavnet er dyr
+            -   "option_text": 'Linje 2 burde være: `sov Jeg elsker dyrene`'
+                "feedback": sov-kommandoen brukes ikke til å skrive ut tekst
             correct_answer: B
-            hint: You want to print 'I love dogs'
+            hint: Du har lyst til å skrive ut 'Jeg elsker hunder'
             question_score: '10'
         10:
-            question_text: What command should be used on the line 1 ?
-            code: "flavor is _?_\nprint Your favorite icecream is...\nsleep\nprint flavor"
+            question_text: Hvilken kommando burde brukes på linje 1?
+            code: "smak er _?_\nskriv din favoritt iskrem er...\nsov\nskriv smak"
             mp_choice_options:
-            -   "option_text": sleep 3
-                "feedback": You want to know the favorite flavor !
-            -   "option_text": print strawberries
-                "feedback": You do not want a print command at the middle of the line...
-            -   "option_text": strawberries, chocolate, vanilla
-                "feedback": This way you are making a list. You don't want that now.
-            -   "option_text": ask What flavor icecream do you like ?
-                "feedback": That's right !
+            -   "option_text": sov 3
+                "feedback": Du har lyst til å vite favorittsmaken!
+            -   "option_text": skriv Jordbær
+                "feedback": Du kan ikke bruke skriv-kommandoen midt i en kodelinje...
+            -   "option_text": jordbær, sjokolade, vanilje
+                "feedback": Dette er slik man lager lister, det er ikke det vi vil akkurat nå.
+            -   "option_text": spør Hvilken smak er din favorittiskrem?
+                "feedback": Det er riktig!
             correct_answer: D
-            hint: You want to ask a question
+            hint: Du har lyst til å stille et spørsmål
             question_score: '10'
     5:
         5:
             mp_choice_options:
             -   "option_text": Because it needs to be in capitals, so SECRET
                 "feedback": Indeed !
-            -   "option_text": Because the password is alarm
-                "feedback": No, this is not the password.
+            -   "option_text": Because the passord is alarm
+                "feedback": No, this is not the passord.
             -   "option_text": Because it's spelled secert.
                 "feedback": That's not how you spell secret
             -   "option_text": Because Hedy makes a mistake
                 "feedback": No, Hedy is right
             question_text: Why will Hedy say 'ALARM ! INTRUDER' when you type in 'secret'?
-            code: "password is ask 'What is the password ?'\nif password is SECRET print 'Correct !'\nelse print 'ALARM ! INTRUDER !'"
+            code: "passord is ask 'Hva er passordet ?'\nif passord is SECRET print 'Correct !'\nelse print 'ALARM ! INTRUDER !'"
             correct_answer: A
             hint: The spelling of the word has to be exactly the same.
             question_score: '10'
         1:
-            question_text: Which statement is true ?
+            question_text: Hvilken påstand er sann?
             code: '...'
             mp_choice_options:
             -   "option_text": In level 5 print works differently than in level 4
@@ -632,7 +632,7 @@ levels:
             question_score: '10'
         2:
             question_text: What appears in your output screen when you type in the name Hedy ?
-            code: "name is ask 'What is your name ?'\nif name is Hedy print 'fun' else print 'less fun'"
+            code: "name is ask 'Hva heter du? ?'\nif name is Hedy print 'fun' else print 'less fun'"
             mp_choice_options:
             -   "option_text": fun
                 "feedback": That's right !
@@ -646,29 +646,29 @@ levels:
             hint: if name is Hedy print ...?
             question_score: '10'
         3:
-            question_text: What is the right password
-            code: "password is ask 'What is the password ?'\nif password is SECRET print 'Correct !'\nelse print 'ALARM ! INTRUDER !'"
+            question_text: What is the right passord
+            code: "passord is ask 'Hva er passordet ?'\nif passord is SECRET print 'Correct !'\nelse print 'ALARM ! INTRUDER !'"
             mp_choice_options:
-            -   "option_text": Correct !
-                "feedback": This is printed when you type in the correct password
+            -   "option_text": Korrekt!
+                "feedback": This is printed when you type in the correct passord
             -   "option_text": SECRET
                 "feedback": That's right !'
             -   "option_text": password
-                "feedback": The password isn't password...
+                "feedback": The passord isn't passord...
             -   "option_text": ALARM INTRUDER
-                "feedback": This is printed when you type in the incorrect password !
+                "feedback": This is printed when you type in the incorrect passord !
             correct_answer: B
-            hint: if password is ... print 'Correct !'!'
+            hint: if passord is ... print 'Correct !'!'
             question_score: '10'
         4:
-            question_text: What does Hedy print when you type in the wrong password ?
-            code: "password is ask 'What is the password ?'\nif password is SECRET print 'Correct !'\nelse print 'ALARM ! INTRUDER !'"
+            question_text: What does Hedy print when you type in the wrong passord ?
+            code: "passord is ask 'Hva er passordet ?'\nif passord is SECRET print 'Correct !'\nelse print 'ALARM ! INTRUDER !'"
             mp_choice_options:
-            -   "option_text": Correct
+            -   "option_text": Korrekt
                 "feedback": That's being printed if the correct answer is given, not the wrong one...
             -   "option_text": SECRET
                 "feedback": That's not the right answer
-            -   "option_text": Wrong !
+            -   "option_text": Feil!
                 "feedback": No, this is not what Hedy will print
             -   "option_text": ALARM ! INTRUDER !
                 "feedback": Great job !
@@ -1336,7 +1336,7 @@ levels:
             hint: (2 bananas + 3 hygiene) * 10 football = 5*10 = ?
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Hvilken påstand er sann?
             code: "name _?_ Hedy\nprint name 'is walking trough the forrest'"
             mp_choice_options:
             -   "option_text": You can only fill in the word is on the _?_
