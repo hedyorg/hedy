@@ -634,13 +634,13 @@ levels:
             question_text: What appears in your output screen when you type in the name Hedy ?
             code: "name is ask 'Hva heter du? ?'\nif name is Hedy print 'fun' else print 'less fun'"
             mp_choice_options:
-            -   "option_text": fun
+            -   "option_text": gøy
                 "feedback": That's right !
-            -   "option_text": less fun
+            -   "option_text": mindre gøy
                 "feedback": If the name is Hedy, it will say 'fun''
             -   "option_text": Hedy
                 "feedback": Nee, it doesn't print the name
-            -   "option_text": Error
+            -   "option_text": Feil
                 "feedback": Fortunately not !
             correct_answer: A
             hint: if name is Hedy print ...?
@@ -651,11 +651,11 @@ levels:
             mp_choice_options:
             -   "option_text": Korrekt!
                 "feedback": This is printed when you type in the correct passord
-            -   "option_text": SECRET
+            -   "option_text": HEMMELIG
                 "feedback": That's right !'
-            -   "option_text": password
+            -   "option_text": passord
                 "feedback": The passord isn't passord...
-            -   "option_text": ALARM INTRUDER
+            -   "option_text": ALARM INNTRENGER
                 "feedback": This is printed when you type in the incorrect passord !
             correct_answer: B
             hint: if passord is ... print 'Correct !'!'
@@ -666,11 +666,11 @@ levels:
             mp_choice_options:
             -   "option_text": Korrekt
                 "feedback": That's being printed if the correct answer is given, not the wrong one...
-            -   "option_text": SECRET
+            -   "option_text": HEMMELIG
                 "feedback": That's not the right answer
             -   "option_text": Feil!
                 "feedback": No, this is not what Hedy will print
-            -   "option_text": ALARM ! INTRUDER !
+            -   "option_text": ALARM ! INNTRENGER !
                 "feedback": Great job !
             correct_answer: D
             hint: Your computer will sound the alarm for intruders !
@@ -696,7 +696,7 @@ levels:
             mp_choice_options:
             -   "code": if
                 "feedback": if is in the line above.
-            -   "code": at random
+            -   "code": tilfeldig
                 "feedback": No, you don't need at random.
             -   "code": else
                 "feedback": There already is an else command
@@ -741,10 +741,10 @@ levels:
             mp_choice_options:
             -   "option_text": Hedy picks a random monster each time.
                 "feedback": Awesome !
-            -   "option_text": vampire
-                "feedback": Not always...
-            -   "option_text": werewolf
-                "feedback": Not always...
+            -   "option_text": vampyr
+                "feedback": Ikke alltid...
+            -   "option_text": varulv
+                "feedback": Ikke alltid...
             -   "option_text": giant spider
                 "feedback": Not always...
             correct_answer: A
@@ -760,7 +760,7 @@ levels:
                 "feedback": Correct, one line at a time
             -   "option_text": '2'
                 "feedback": In this level only one line at a time
-            -   "option_text": infinite
+            -   "option_text": uendelig
                 "feedback": In this level you can only repeat one line at a time
             question_text: How many lines can you repeat at once with the repeat command at this level ?
             correct_answer: B
@@ -830,14 +830,14 @@ levels:
             question_text: Is this code right or wrong ?
             code: repeat 100 times 'Hello !'
             mp_choice_options:
-            -   "option_text": Right
+            -   "option_text": Høyre
                 "feedback": No a word is missing
             -   "option_text": Wrong, the word repeat is missing
                 "feedback": The word repeat is there, another word is missing
             -   "option_text": Wrong, the word times is missing
                 "feedback": The word times is there, another word is missing.
             -   "option_text": Wrong, the word print is missing
-                "feedback": Correct
+                "feedback": Korrekt
             correct_answer: D
             hint: "It should be: repeat 100 times print 'Hello'"
             question_score: '10'
@@ -845,9 +845,9 @@ levels:
             question_text: Is this code right or wrong ?
             code: repeat 100 times print 'Hedy is awesome !'
             mp_choice_options:
-            -   "option_text": Correct
+            -   "option_text": Korrect
                 "feedback": That's right !
-            -   "option_text": Wrong
+            -   "option_text": Feil
                 "feedback": That's not it
             correct_answer: A
             hint: The code is correct !
@@ -893,7 +893,7 @@ levels:
             -   "code": "print Batman was flying though Gotham.\nprint When suddenly he heard someone screaming...\nrepeat 3 times print Help !\nprint Please help me !"
                 "feedback": You forgot about the quotation marks
             -   "code": "print 'Batman was flying though Gotham.' \nprint 'When suddenly he heard someone screaming...'\nrepeat 3 times print 'Help !'\nprint 'Please help me !'"
-                "feedback": Perfect
+                "feedback": Perfekt
             correct_answer: D
             hint: "'Help !' is repeated 3 times."
             question_score: '10'
@@ -918,7 +918,7 @@ levels:
             code: "for i in range 1 to 3\n    print i"
             mp_choice_options:
             -   "code": "1\n2\n3"
-                "feedback": Correct !
+                "feedback": Korrekt !
             -   "code": 1 2 3
                 "feedback": That's not it
             -   "code": 1, 2, 3
@@ -937,7 +937,7 @@ levels:
             -   "option_text": Line 1 needs to start with an indention.
                 "feedback": Not line 1...
             -   "option_text": Line 2 needs to start with an indention
-                "feedback": Perfect !
+                "feedback": Perfekt !
             question_text: What's wrong with this code ?
             code: "for i in range 1 to 10\nprint i"
             correct_answer: D
@@ -948,7 +948,7 @@ levels:
             code: "1\n2\n3\n4\n5\nOnce I caught a fish alive !"
             mp_choice_options:
             -   "code": "for i in range 1 to 5\n    print i\nprint 'Once I caught a fish alive !'"
-                "feedback": Perfect
+                "feedback": Perfekt
             -   "code": "for i in range 1 to 5\nprint i\nprint 'Once I caught a fish alive !'"
                 "feedback": This code won't work. You need an indent after for.
             -   "code": "for i in range 1 to 5\n    print i\n    print 'Once I caught a fish alive !'"
@@ -963,13 +963,13 @@ levels:
             code: "for i in _?_ 1 to 10\n    print i"
             mp_choice_options:
             -   "code": rang
-                "feedback": No
+                "feedback": Nei
             -   "code": range
-                "feedback": Correct
+                "feedback": Korrekt
             -   "code": ragne
-                "feedback": No
+                "feedback": Nei
             -   "code": ranch
-                "feedback": No
+                "feedback": Nei
             correct_answer: B
             hint: What's the correct spelling ?
             question_score: '10'
@@ -977,14 +977,14 @@ levels:
             question_text: How many times does the word Hello appear on your screen when you run the code ?
             code: "for i in range 0 to 2\n    print 'Hello'"
             mp_choice_options:
-            -   "option_text": 1 time
-                "feedback": No
-            -   "option_text": 2 times
-                "feedback": No
-            -   "option_text": 3 times
+            -   "option_text": 1 gang
+                "feedback": Nei
+            -   "option_text": 2 ganger
+                "feedback": Nei
+            -   "option_text": 3 ganger
                 "feedback": That's right !
-            -   "option_text": Never
-                "feedback": No
+            -   "option_text": Aldri
+                "feedback": Nei
             correct_answer: C
             hint: 0 also counts. So 0,1,2 that's 3 times.
             question_score: '10'
@@ -1011,8 +1011,8 @@ levels:
                 "feedback": The numbers don't appear. It doesn't say print i.
             -   "code": 23 hi 24 hi 25 hi
                 "feedback": The numbers don't appear. It doesn't say print i
-            -   "code": "hi\nhi\nhi"
-                "feedback": Correct
+            -   "code": "hei\nhei\nhei"
+                "feedback": Korrekt
             -   "option_text": The word 'hi' will appear 25 times in a row.
                 "feedback": No it will only appear 3 times.
             correct_answer: C
@@ -1022,12 +1022,12 @@ levels:
             question_text: How many times does Hedy chant Hip Hip Hooray ?
             code: "age is ask 'How old are you ?'\nfor i in range 1 to age\n    print is 'Hip Hip Hoorray !'"
             mp_choice_options:
-            -   "option_text": 1 time
-                "feedback": Try again
-            -   "option_text": 2 times
-                "feedback": Try again
-            -   "option_text": Never
-                "feedback": Try again
+            -   "option_text": 1 gang
+                "feedback": Prøv igjen
+            -   "option_text": 2 ganger
+                "feedback": Prøv igjen
+            -   "option_text": Aldri
+                "feedback": Prøv igjen
             -   "option_text": That depends on how old you are
                 "feedback": That's right !
             correct_answer: D
@@ -1132,9 +1132,9 @@ levels:
                 "feedback": It would say 'Ann throws Jesse', instead of 'Ann throws 6'.
             -   "code": choices
                 "feedback": That's right !
-            -   "code": choice
+            -   "code": valg
                 "feedback": You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'...
-            -   "code": dice
+            -   "code": terning
                 "feedback": Look at the names of the variables.
             correct_answer: B
             hint: Hedy needs to pick a number at random
@@ -1189,7 +1189,7 @@ levels:
             code: "courses = appetizer, main course, dessert\nnames = Timon, Onno\nfor name in names\n    for course in courses\n        food = ask name ', what would you like to eat as your ' course '?'\n        print name ' orders ' food ' as their ' course"
             mp_choice_options:
             -   "option_text": Timon, what would you like to eat as your appetizer ?
-                "feedback": Perfect !
+                "feedback": Perfekt !
             -   "option_text": Onno, what would you like to eat as your appetizer ?
                 "feedback": Timon is first on the list !
             -   "option_text": Timon, what would you like to eat as your dessert ?
@@ -1205,7 +1205,7 @@ levels:
             code: print 2*10
             mp_choice_options:
             -   "option_text": '20'
-                "feedback": Correct !
+                "feedback": Korrekt !
             -   "option_text": '12'
                 "feedback": No, the plus sign is used in addition
             -   "option_text": 2*10
@@ -1221,12 +1221,12 @@ levels:
             mp_choice_options:
             -   "option_text": '-'
                 "feedback": That's not it
-            -   "option_text": plus
+            -   "option_text": pluss
                 "feedback": That's not it
             -   "option_text": '*'
                 "feedback": That's not it
             -   "option_text": +
-                "feedback": Correct !
+                "feedback": Korrekt !
             correct_answer: D
             hint: It's the plus sign.
             question_score: '10'
@@ -1237,7 +1237,7 @@ levels:
             -   "option_text": '30'
                 "feedback": This would be the right answer if there were no quotation marks.
             -   "option_text": '13'
-                "feedback": Try again..
+                "feedback": Prøv igjen..
             -   "option_text": 3*10
                 "feedback": Correct ! There are quotation marks, so Hedy will print it literally.
             -   "option_text": Nothing, Hedy will give an error message.
@@ -1252,7 +1252,7 @@ levels:
             -   "option_text": '30'
                 "feedback": Mind, Hedy also prints 'Your lucky number is...'
             -   "option_text": '10'
-                "feedback": Please try again.
+                "feedback": Vennlist prøv igjen.
             -   "option_text": Your lucky number is... 30
                 "feedback": That's right !
             -   "option_text": Your lucky number is... 10
@@ -1264,13 +1264,13 @@ levels:
             question_text: If 5 people eat at this restaurant, how much do they have to pay in total ?
             code: "print 'Welcome to Hedys !'\npeople is ask 'How many people are eating with us tonight ?'\nprice is people * 10\nprint 'That will be ' price 'dollar please'"
             mp_choice_options:
-            -   "option_text": 5 dollars
+            -   "option_text": 5 kroner
                 "feedback": Unfortunately, it's not that cheap.
-            -   "option_text": 10 dollars
+            -   "option_text": 10 kroner
                 "feedback": No, it's 10 dollars each.
-            -   "option_text": 15 dollars
+            -   "option_text": 15 kroner
                 "feedback": The * means multiplication.
-            -   "option_text": 50 dollars
+            -   "option_text": 50 kroner
                 "feedback": Great !
             correct_answer: D
             hint: price is people times 10
@@ -1281,9 +1281,9 @@ levels:
             mp_choice_options:
             -   "option_text": 15 dollars
                 "feedback": Super !
-            -   "option_text": 6 dollars
+            -   "option_text": 6 kroner
                 "feedback": The fries are 6 dollars
-            -   "option_text": 0 dollars
+            -   "option_text": 0 kroner
                 "feedback": The hamburger isn't free !
             -   "option_text": 21 dollars
                 "feedback": That's the price for a hamburger and fries !
@@ -1342,7 +1342,7 @@ levels:
             -   "option_text": You can only fill in the word is on the _?_
                 "feedback": You are allowed to use the = sign as well
             -   "option_text": You can fill in either the word is or the = sign on the _?_
-                "feedback": Amazing!
+                "feedback": Fantastisk!
             -   "option_text": You have to fill in =is= on the _?_.
                 "feedback": No, one = sign is enough
             -   "option_text": You can only use the = sign when working with numbers, not with words.
