@@ -1,29 +1,41 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-24 15:04+0100\n"
-"PO-Revision-Date: 2022-03-25 15:51+0000\n"
+"PO-Revision-Date: 2022-03-25 20:20+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Hungarian <https://hosted.weblate.org/projects/hedy/web-texts/"
-"hu/>\n"
-"Language: hu\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/hedy/web-texts/pl/"
+">\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.12-dev\n"
-"Generated-By: Babel 2.9.1\n"
+
+#: app.py:723
+#, fuzzy
+msgid "title_achievements"
+msgstr "Hedy - My achievements"
+
+#: coursedata/error-messages.txt:39
+#, fuzzy
+msgid "number"
+msgstr "a number"
+
+#: templates/profile.html:40
+#, fuzzy
+msgid "personal_text"
+msgstr "Personal text"
 
 #: app.py:571
 #, fuzzy
 msgid "program_contains_error"
 msgstr "This program contains an error, are you sure you want to share it?"
 
-#: app.py:723
+#: app.py:1302
 #, fuzzy
-msgid "title_achievements"
-msgstr "Hedy - My achievements"
+msgid "personal_text_invalid"
+msgstr "Your personal text is invalid."
 
 #: app.py:740 app.py:1107 website/teacher.py:365 website/teacher.py:374
 #, fuzzy
@@ -49,16 +61,19 @@ msgid "unauthorized"
 msgstr "You don't have access rights for this page"
 
 #: app.py:823
+#, fuzzy
 msgid "minutes"
-msgstr "percek"
+msgstr "minutes"
 
 #: app.py:826
+#, fuzzy
 msgid "hours"
-msgstr "órák"
+msgstr "hours"
 
 #: app.py:829
+#, fuzzy
 msgid "days"
-msgstr "napok"
+msgstr "days"
 
 #: app.py:832
 #, fuzzy
@@ -160,8 +175,8 @@ msgstr "Hedy - Explore"
 #, fuzzy
 msgid "translate_error"
 msgstr ""
-"Something went wrong while translating the code. Try running the code to "
-"see if it has an error. Code with errors can not be translated."
+"Something went wrong while translating the code. Try running the code to see "
+"if it has an error. Code with errors can not be translated."
 
 #: app.py:1297 website/auth.py:299 website/auth.py:347 website/auth.py:483
 #: website/auth.py:509 website/auth.py:539 website/auth.py:645
@@ -169,18 +184,14 @@ msgstr ""
 #: website/teacher.py:90 website/teacher.py:125 website/teacher.py:197
 #: website/teacher.py:255 website/teacher.py:302 website/teacher.py:343
 #: website/teacher.py:379 website/teacher.py:459 website/teacher.py:517
+#, fuzzy
 msgid "ajax_error"
-msgstr "Hiba történt, próbálkozz újra."
+msgstr "There was an error, please try again."
 
 #: app.py:1300
 #, fuzzy
 msgid "image_invalid"
 msgstr "Your chosen image is invalid."
-
-#: app.py:1302
-#, fuzzy
-msgid "personal_text_invalid"
-msgstr "Your personal text is invalid."
 
 #: app.py:1304 app.py:1310
 #, fuzzy
@@ -201,8 +212,8 @@ msgstr "This user doesn't exist or doesn't have a public profile"
 #, fuzzy
 msgid "invalid_teacher_invitation_code"
 msgstr ""
-"The teacher invitation code is invalid. To become a teacher, reach out to"
-" hedy@felienne.com."
+"The teacher invitation code is invalid. To become a teacher, reach out to "
+"hedy@felienne.com."
 
 #: utils.py:203
 #, fuzzy
@@ -223,74 +234,80 @@ msgstr "Something went wrong..."
 #, fuzzy
 msgid "Empty Program"
 msgstr ""
-"You created an empty program. Type Hedy code in the left field and try "
-"again"
+"You created an empty program. Type Hedy code in the left field and try again"
 
 #: coursedata/error-messages.txt:2
+#, fuzzy
 msgid "Wrong Level"
 msgstr ""
-"Ez helyes Hedy-kód volt, de nem a megfelelő szinten. A {working_level} "
-"szint kódját írtad {original_level} szinten."
+"That was correct Hedy code, but not at the right level. You wrote "
+"{offending_keyword} for level {working_level}. Tip: {tip}"
 
 #: coursedata/error-messages.txt:3
+#, fuzzy
 msgid "Incomplete"
 msgstr ""
-"Hoppá! Elfelejtettél egy kis kódot! A(z) {line_number}. sorban, szöveget "
-"kell beírnod a {incomplete_command} mögé."
+"Oops! You forgot a bit of code! On line {line_number}, you need to enter "
+"text behind {incomplete_command}."
 
 #: coursedata/error-messages.txt:4
+#, fuzzy
 msgid "Invalid"
 msgstr ""
-"{invalid_command} Nem Hedy szint {level} parancs. Erre gondoltál "
+"{invalid_command} is not a Hedy level {level} command. Did you mean "
 "{guessed_command}?"
 
 #: coursedata/error-messages.txt:5
+#, fuzzy
 msgid "Invalid Space"
 msgstr ""
-"Hoppá! Szóközzel kezdted a sort itt: {line_number}. sor. A szóközök "
-"összezavarják a számítógépet, el tudod távolítani?"
+"Oops! You started a line with a space on line {line_number}. Spaces confuse "
+"computers, can you remove it?"
 
 #: coursedata/error-messages.txt:6
+#, fuzzy
 msgid "Has Blanks"
 msgstr ""
-"A kódod hiányos. Tartalmaz üres helyeket, amelyeket kóddal kell "
-"helyettesíteni."
+"Your code is incomplete. It contains blanks that you have to replace with "
+"code."
 
 #: coursedata/error-messages.txt:7
 #, fuzzy
 msgid "No Indentation"
 msgstr ""
 "You used too few spaces in line {line_number}. You used {leading_spaces} "
-"spaces, which is not enough. Start every new block with {indent_size} "
-"spaces more than the line before."
+"spaces, which is not enough. Start every new block with {indent_size} spaces "
+"more than the line before."
 
 #: coursedata/error-messages.txt:8
 #, fuzzy
 msgid "Unexpected Indentation"
 msgstr ""
-"You used too many spaces in line {line_number}. You used {leading_spaces}"
-" spaces, which is too much. Start every new block with {indent_size} "
-"spaces more than the line before."
+"You used too many spaces in line {line_number}. You used {leading_spaces} "
+"spaces, which is too much. Start every new block with {indent_size} spaces "
+"more than the line before."
 
 #: coursedata/error-messages.txt:9
+#, fuzzy
 msgid "Parse"
 msgstr ""
-"A kód, amit beírtál, nem érvényes Hedy kód. Hiba van a következő sorban: "
-"{location[0]}, a következő helyen: {location[1]}. Ezt írtad: "
-"{character_found}, de ez nem megengedett"
+"The code you entered is not valid Hedy code. There is a mistake on line "
+"{location[0]}, at position {location[1]}. You typed {character_found}, but "
+"that is not allowed."
 
 #: coursedata/error-messages.txt:10
+#, fuzzy
 msgid "Unquoted Text"
 msgstr ""
-"Légy óvatos. Ha kiíratsz egy szöveget, akkor azt idézőjelbe kell tenni. "
-"Valahol egyet elfelejtettél."
+"Be careful. If you ask or print something the text should start and finish "
+"with a quotation mark. You forgot one somewhere."
 
 #: coursedata/error-messages.txt:11
 #, fuzzy
 msgid "Unquoted Assignment"
 msgstr ""
-"From this level, you need to place texts to the right of the `is` between"
-" quotes. You forgot that for the text {text}."
+"From this level, you need to place texts to the right of the `is` between "
+"quotes. You forgot that for the text {text}."
 
 #: coursedata/error-messages.txt:12
 #, fuzzy
@@ -300,65 +317,71 @@ msgstr ""
 "should be surrounded by quotation marks!"
 
 #: coursedata/error-messages.txt:13
+#, fuzzy
 msgid "Var Undefined"
-msgstr "Ki akartad íratni: {name}, de nem adtál neki értéket."
+msgstr ""
+"You tried to use the variable {name}, but you did not set it. It is also "
+"possible that you were trying to use the word {name} but forgot quotation "
+"marks."
 
 #: coursedata/error-messages.txt:14
 #, fuzzy
 msgid "Cyclic Var Definition"
 msgstr ""
-"The name {variable} needs to be set before you can use it on the right-"
-"hand side of the is command"
+"The name {variable} needs to be set before you can use it on the right-hand "
+"side of the is command"
 
 #: coursedata/error-messages.txt:15
+#, fuzzy
 msgid "Lonely Echo"
 msgstr ""
-"Echo -t használtál kérdezés előtt, vagy echo-t kérdés nélkül. Először az "
-"ask utasítással kérj be adatot, majd használd az echo -t."
+"You used an echo before an ask, or an echo without an ask. First ask for "
+"input, then echo."
 
 #: coursedata/error-messages.txt:16
+#, fuzzy
 msgid "Too Big"
 msgstr ""
-"Azta! A program lenyűgöző {lines_of_code} kódsorral rendelkezik! De ezen "
-"a szinten csak {max_lines} sort dolgozhatunk fel. Csökkentsd a programot,"
-" és próbáld újra."
+"Wow! Your program has an impressive {lines_of_code} lines of code! But we "
+"can only process {max_lines} lines in this level. Make your program smaller "
+"and try again."
 
 #: coursedata/error-messages.txt:17
 #, fuzzy
 msgid "Invalid Argument Type"
 msgstr ""
-"You cannot use the command {command} with {invalid_argument} because it "
-"is {invalid_type}. Try changing {invalid_argument} to {allowed_types}."
+"You cannot use the command {command} with {invalid_argument} because it is "
+"{invalid_type}. Try changing {invalid_argument} to {allowed_types}."
 
 #: coursedata/error-messages.txt:18
 #, fuzzy
 msgid "Invalid Argument"
 msgstr ""
-"You cannot use the command {command} with {invalid_argument} . Try "
-"changing {invalid_argument} to {allowed_types}."
+"You cannot use the command {command} with {invalid_argument} . Try changing "
+"{invalid_argument} to {allowed_types}."
 
 #: coursedata/error-messages.txt:19
 #, fuzzy
 msgid "Invalid Type Combination"
 msgstr ""
-"You cannot use {invalid_argument} and {invalid_argument_2} in {operation}"
-" because one is {invalid_type} and the other is {invalid_type_2}. Try "
-"changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} "
-"to {invalid_type}."
+"You cannot use {invalid_argument} and {invalid_argument_2} in {operation} "
+"because one is {invalid_type} and the other is {invalid_type_2}. Try "
+"changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} to "
+"{invalid_type}."
 
 #: coursedata/error-messages.txt:20
 #, fuzzy
 msgid "Unsupported Float"
 msgstr ""
-"Non-integer numbers are not supported yet but they will be in a few "
-"levels. For now change {value} to an integer."
+"Non-integer numbers are not supported yet but they will be in a few levels. "
+"For now change {value} to an integer."
 
 #: coursedata/error-messages.txt:21
 #, fuzzy
 msgid "Locked Language Feature"
 msgstr ""
-"You are using {concept}! That is awesome, but {concept} is not unlocked "
-"yet! It will be unlocked in a later level."
+"You are using {concept}! That is awesome, but {concept} is not unlocked yet! "
+"It will be unlocked in a later level."
 
 #: coursedata/error-messages.txt:22
 #, fuzzy
@@ -376,53 +399,64 @@ msgstr ""
 #, fuzzy
 msgid "echo_out"
 msgstr ""
-"Starting in level 2 echo is no longer needed. You can repeat an answer "
-"with ask and print now. Example: name is ask 'What are you called?' print"
-" 'hello' name"
+"Starting in level 2 echo is no longer needed. You can repeat an answer with "
+"ask and print now. Example: name is ask 'What are you called?' print 'hello' "
+"name"
 
 #: coursedata/error-messages.txt:25
+#, fuzzy
 msgid "space"
-msgstr "szóköz"
+msgstr "a space"
 
 #: coursedata/error-messages.txt:26
+#, fuzzy
 msgid "comma"
-msgstr "vessző"
+msgstr "a comma"
 
 #: coursedata/error-messages.txt:27
+#, fuzzy
 msgid "question mark"
-msgstr "kérdőjel"
+msgstr "a question mark"
 
 #: coursedata/error-messages.txt:28
+#, fuzzy
 msgid "newline"
-msgstr "új sor"
+msgstr "a new line"
 
 #: coursedata/error-messages.txt:29
+#, fuzzy
 msgid "period"
-msgstr "pont"
+msgstr "a period"
 
 #: coursedata/error-messages.txt:30
+#, fuzzy
 msgid "exclamation mark"
-msgstr "felkiáltójel"
+msgstr "an exclamation mark"
 
 #: coursedata/error-messages.txt:31
+#, fuzzy
 msgid "dash"
-msgstr "kötőjel"
+msgstr "a dash"
 
 #: coursedata/error-messages.txt:32
+#, fuzzy
 msgid "star"
-msgstr "csillag"
+msgstr "a star"
 
 #: coursedata/error-messages.txt:33
+#, fuzzy
 msgid "single quotes"
-msgstr "aposztróf"
+msgstr "a single quote"
 
 #: coursedata/error-messages.txt:34
+#, fuzzy
 msgid "double quotes"
-msgstr "idézőjel"
+msgstr "double quotes"
 
 #: coursedata/error-messages.txt:35
+#, fuzzy
 msgid "slash"
-msgstr "perjel"
+msgstr "a slash"
 
 #: coursedata/error-messages.txt:36
 #, fuzzy
@@ -438,11 +472,6 @@ msgstr "a block in a block"
 #, fuzzy
 msgid "or"
 msgstr "or"
-
-#: coursedata/error-messages.txt:39
-#, fuzzy
-msgid "number"
-msgstr "a number"
 
 #: coursedata/error-messages.txt:40
 #, fuzzy
@@ -473,39 +502,47 @@ msgstr "Visible columns"
 #: templates/class-overview.html:108 templates/create-accounts.html:16
 #: templates/login.html:12 templates/profile.html:93 templates/recover.html:8
 #: templates/signup.html:10
+#, fuzzy
 msgid "username"
-msgstr "Felhasználónév"
+msgstr "Username"
 
 #: templates/class-overview.html:25 templates/class-overview.html:65
+#, fuzzy
 msgid "last_login"
-msgstr "Utolsó belépés"
+msgstr "Last login"
 
 #: templates/class-overview.html:29 templates/class-overview.html:66
+#, fuzzy
 msgid "highest_level_reached"
-msgstr "A legnagyobb elért szint"
+msgstr "Highest level reached"
 
 #: templates/class-overview.html:35 templates/class-overview.html:67
 #: templates/profile.html:74
+#, fuzzy
 msgid "number_programs"
-msgstr "A programok száma"
+msgstr "Number of programs"
 
 #: templates/class-overview.html:39 templates/class-overview.html:68
+#, fuzzy
 msgid "programs"
-msgstr "Programok"
+msgstr "Programs"
 
 #: templates/class-overview.html:43 templates/class-overview.html:69
+#, fuzzy
 msgid "latest_shared_program"
-msgstr "Utolsó megosztott program"
+msgstr "Latest shared program"
 
 #: templates/class-overview.html:49 templates/class-overview.html:70
 #: templates/class-overview.html:83 templates/profile.html:148
 #: templates/profile.html:150 templates/profile.html:163
+#, fuzzy
 msgid "change_password"
-msgstr "Jelszó megváltoztatása"
+msgstr "Change password"
 
 #: templates/class-overview.html:53 templates/class-overview.html:71
+#, fuzzy
 msgid "remove_student"
-msgstr "Tanuló eltávolítása"
+msgstr "Remove student"
 
 #: templates/class-overview.html:81
 #, fuzzy
@@ -523,8 +560,9 @@ msgid "password_change_prompt"
 msgstr "Are you sure you want to change this password?"
 
 #: templates/class-overview.html:84
+#, fuzzy
 msgid "remove_student_prompt"
-msgstr "Biztos vagy benne, hogy eltávolítod a tanulót az osztályból?"
+msgstr "Are you sure you want to remove the student from the class?"
 
 #: templates/class-overview.html:84 templates/class-overview.html:120
 #: templates/customize-adventure.html:52 templates/for-teachers.html:34
@@ -534,8 +572,9 @@ msgid "remove"
 msgstr "Remove"
 
 #: templates/class-overview.html:90
+#, fuzzy
 msgid "class_link"
-msgstr "Link az osztályhoz"
+msgstr "Link to join class"
 
 #: templates/class-overview.html:92 templates/customize-class.html:5
 #, fuzzy
@@ -543,12 +582,14 @@ msgid "customize_class"
 msgstr "Customize class"
 
 #: templates/class-overview.html:93 templates/for-teachers.html:23
+#, fuzzy
 msgid "class_name_prompt"
-msgstr "Kérlek add meg az osztály nevét"
+msgstr "Please enter the name of the class"
 
 #: templates/class-overview.html:93
+#, fuzzy
 msgid "rename_class"
-msgstr "Osztály átnevezése"
+msgstr "Rename class"
 
 #: templates/class-overview.html:94
 #, fuzzy
@@ -563,7 +604,7 @@ msgstr "Invite student"
 #: templates/class-overview.html:95
 #, fuzzy
 msgid "class_stats"
-msgstr "Show class statistics"
+msgstr "Class statistics"
 
 #: templates/class-overview.html:98 templates/customize-adventure.html:59
 #, fuzzy
@@ -571,12 +612,14 @@ msgid "back_to_teachers_page"
 msgstr "Go back to teachers page"
 
 #: templates/class-overview.html:99
+#, fuzzy
 msgid "delete_class_prompt"
-msgstr "Biztos vagy benne, hogy törlöd az osztályt?"
+msgstr "Are you sure you want to delete the class?"
 
 #: templates/class-overview.html:99
+#, fuzzy
 msgid "delete_class"
-msgstr "Osztály végleges törlése "
+msgstr "Delete class permanently"
 
 #: templates/class-overview.html:103
 #, fuzzy
@@ -604,26 +647,40 @@ msgid "delete_invite_prompt"
 msgstr "Are you sure you want to remove this class invitation?"
 
 #: templates/class-prejoin.html:7
+#, fuzzy
 msgid "class_already_joined"
-msgstr "Már az osztály tagja vagy"
+msgstr "You are already a student of class"
 
 #: templates/class-prejoin.html:11
+#, fuzzy
 msgid "goto_profile"
-msgstr "A profilomhoz"
+msgstr "Go to my profile"
 
 #: templates/class-prejoin.html:15 templates/profile.html:12
+#, fuzzy
 msgid "prompt_join_class"
-msgstr "Ehhez az osztályhoz akarsz csatlakozni?"
+msgstr "Do you want to join this class?"
 
 #: templates/class-prejoin.html:17 website/teacher.py:183
+#, fuzzy
 msgid "join_prompt"
 msgstr ""
-"Ahhoz, hogy részt vehess egy kurzuson, rendelkezned kell fiókkal. "
-"Szeretnél most bejelentkezni?"
+"You need to have an account to join a class. Would you like to login now?"
 
 #: templates/class-prejoin.html:17 templates/profile.html:14
+#, fuzzy
 msgid "join_class"
-msgstr "Belépés az osztályba"
+msgstr "Join class"
+
+#: templates/customize-adventure.html:50
+#, fuzzy
+msgid "preview"
+msgstr "Preview"
+
+#: templates/customize-adventure.html:51 templates/customize-class.html:145
+#, fuzzy
+msgid "save"
+msgstr "Save"
 
 #: templates/class-stats.html:22 templates/customize-class.html:150
 #, fuzzy
@@ -636,8 +693,9 @@ msgstr "Go back to class"
 #: templates/incl-adventure-tabs.html:5 templates/level-page.html:6
 #: templates/level-page.html:11 templates/quiz/startquiz.html:10
 #: templates/view-program-page.html:12 templates/view-program-page.html:28
+#, fuzzy
 msgid "level_title"
-msgstr "Szint"
+msgstr "Level"
 
 #: templates/create-accounts.html:5
 #, fuzzy
@@ -648,13 +706,13 @@ msgstr "Create multiple accounts"
 #, fuzzy
 msgid "accounts_intro"
 msgstr ""
-"On this page you can create accounts for multiple students at the same "
-"time. It is also possible to directly add them to one of your classes. By"
-" pressing the green + on the bottom right of the page you can add extra "
-"rows. You can delete a row by pressing the corresponding red cross. Make "
-"sure no rows are empty when you press \"Create accounts\". Please keep in"
-" mind that every username and mail address needs to be unique and the "
-"password needs to be <b>at least</b> 6 characters."
+"On this page you can create accounts for multiple students at the same time. "
+"It is also possible to directly add them to one of your classes. By pressing "
+"the green + on the bottom right of the page you can add extra rows. You can "
+"delete a row by pressing the corresponding red cross. Make sure no rows are "
+"empty when you press \"Create accounts\". Please keep in mind that every "
+"username and mail address needs to be unique and the password needs to be "
+"<b>at least</b> 6 characters."
 
 #: templates/create-accounts.html:10
 #, fuzzy
@@ -663,13 +721,15 @@ msgstr "Are you sure you want to create these accounts?"
 
 #: templates/create-accounts.html:17 templates/profile.html:96
 #: templates/recover.html:8 templates/signup.html:13
+#, fuzzy
 msgid "email"
 msgstr "Email"
 
 #: templates/create-accounts.html:18 templates/login.html:15
 #: templates/reset.html:8 templates/signup.html:19
+#, fuzzy
 msgid "password"
-msgstr "Jelszó"
+msgstr "Password"
 
 #: templates/create-accounts.html:20
 #, fuzzy
@@ -703,24 +763,26 @@ msgstr "General settings"
 
 #: templates/customize-adventure.html:12 templates/for-teachers.html:9
 #: templates/for-teachers.html:30
+#, fuzzy
 msgid "name"
-msgstr "Név"
+msgstr "Name"
 
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:20 templates/explore.html:48
 #: templates/for-teachers.html:31 templates/programs.html:12
 #: templates/programs.html:41 templates/programs.html:52
+#, fuzzy
 msgid "level"
-msgstr "Szint"
+msgstr "Level"
 
 #: templates/customize-adventure.html:25
 #, fuzzy
 msgid "adventure_exp_1"
 msgstr ""
-"Type your adventure of choice on the right-hand side. After creating your"
-" adventure you can include it in one of your classes under "
-"\"customizations\". If you want to include a command in your adventure "
-"please use code anchors like this:"
+"Type your adventure of choice on the right-hand side. After creating your "
+"adventure you can include it in one of your classes under \"customizations\""
+". If you want to include a command in your adventure please use code anchors "
+"like this:"
 
 #: templates/customize-adventure.html:31
 #, fuzzy
@@ -734,15 +796,16 @@ msgstr ""
 msgid "adventure_exp_3"
 msgstr ""
 "You can use the \"preview\" button to view a styled version of your "
-"adventure. To view the adventure on a dedicated page, select \"view\" "
-"from the teachers page."
+"adventure. To view the adventure on a dedicated page, select \"view\" from "
+"the teachers page."
 
 #: templates/customize-adventure.html:43 templates/customize-class.html:23
 #: templates/customize-class.html:88 templates/explore.html:26
 #: templates/programs.html:18 templates/programs.html:48
 #: templates/view-adventure.html:6
+#, fuzzy
 msgid "adventure"
-msgstr "Kaland"
+msgstr "Adventure"
 
 #: templates/customize-adventure.html:44
 #, fuzzy
@@ -762,16 +825,6 @@ msgstr ""
 #, fuzzy
 msgid "adventure_terms"
 msgstr "I agree that my adventure might be made publicly available on Hedy."
-
-#: templates/customize-adventure.html:50
-#, fuzzy
-msgid "preview"
-msgstr "Preview"
-
-#: templates/customize-adventure.html:51 templates/customize-class.html:145
-#, fuzzy
-msgid "save"
-msgstr "Save"
 
 #: templates/customize-adventure.html:52 templates/for-teachers.html:44
 #, fuzzy
@@ -807,8 +860,9 @@ msgstr "Select own adventures"
 #: templates/profile.html:47 templates/profile.html:128
 #: templates/profile.html:137 templates/signup.html:26 templates/signup.html:45
 #: templates/signup.html:53
+#, fuzzy
 msgid "select"
-msgstr "Választ"
+msgstr "Select"
 
 #: templates/customize-class.html:110
 #, fuzzy
@@ -829,10 +883,6 @@ msgstr "Mandatory developer's mode"
 #, fuzzy
 msgid "hide_cheatsheet"
 msgstr "Hide cheatsheet"
-
-#: templates/customize-class.html:133
-msgid "hide_keyword_switcher"
-msgstr ""
 
 #: templates/customize-class.html:144
 #, fuzzy
@@ -868,13 +918,13 @@ msgstr "Explore programs"
 #, fuzzy
 msgid "explore_explanation"
 msgstr ""
-"On this page you can look through programs created by other Hedy users. "
-"You can filter on both a Hedy level and adventure. Click on \"View "
-"program\" to open a program and run it. Programs with a red header "
-"contain a mistake. You can still open the program, but running it will "
-"result in an error. You can of course try to fix it! If the creator has a"
-" public profile you can click their username to visit their profile. "
-"There you will find all their shared programs and much more!"
+"On this page you can look through programs created by other Hedy users. You "
+"can filter on both a Hedy level and adventure. Click on \"View program\" to "
+"open a program and run it. Programs with a red header contain a mistake. You "
+"can still open the program, but running it will result in an error. You can "
+"of course try to fix it! If the creator has a public profile you can click "
+"their username to visit their profile. There you will find all their shared "
+"programs and much more!"
 
 #: templates/explore.html:35 templates/incl-menubar.html:45
 #: templates/programs.html:27
@@ -894,16 +944,19 @@ msgstr "View program"
 
 #: templates/for-teachers.html:5 templates/profile.html:78
 #: templates/profile.html:80
+#, fuzzy
 msgid "my_classes"
-msgstr "Osztályaim"
+msgstr "My classes"
 
 #: templates/for-teachers.html:10
+#, fuzzy
 msgid "students"
-msgstr "tanulók"
+msgstr "students"
 
 #: templates/for-teachers.html:23 templates/landing-page.html:23
+#, fuzzy
 msgid "create_class"
-msgstr "Új osztály létrehozása"
+msgstr "Create a new class"
 
 #: templates/for-teachers.html:26
 #, fuzzy
@@ -939,8 +992,8 @@ msgstr "Create student accounts"
 #, fuzzy
 msgid "teacher_welcome"
 msgstr ""
-"Welcome to Hedy! Your are now the proud owner of a teachers account which"
-" allows you to create classes and invite students."
+"Welcome to Hedy! Your are now the proud owner of a teachers account which "
+"allows you to create classes and invite students."
 
 #: templates/incl-adventure-tabs.html:22
 #, fuzzy
@@ -955,8 +1008,9 @@ msgid "go_to_quiz"
 msgstr "Go to quiz"
 
 #: templates/incl-editor-and-output.html:100
+#, fuzzy
 msgid "enter_text"
-msgstr "Írd be a válaszodat ide..."
+msgstr "Enter your answer here..."
 
 #: templates/incl-editor-and-output.html:101
 #, fuzzy
@@ -964,26 +1018,31 @@ msgid "enter"
 msgstr "Enter"
 
 #: templates/incl-editor-and-output.html:110
+#, fuzzy
 msgid "run_code_button"
-msgstr "Kód futtatása"
+msgstr "Run code"
 
 #: templates/incl-editor-and-output.html:112
+#, fuzzy
 msgid "edit_code_button"
-msgstr "Kód szerkesztése"
+msgstr "Edit code"
 
 #: templates/incl-editor-and-output.html:118
+#, fuzzy
 msgid "read_code_label"
-msgstr "Hangosan olvas"
+msgstr "Read aloud"
 
 #: templates/incl-editor-and-output.html:128
 #: templates/incl-editor-and-output.html:137
+#, fuzzy
 msgid "regress_button"
-msgstr "Menj vissza: szint {level}"
+msgstr "Go back to level {level}"
 
 #: templates/incl-editor-and-output.html:131
 #: templates/incl-editor-and-output.html:140
+#, fuzzy
 msgid "advance_button"
-msgstr "Menj tovább: szint {level}"
+msgstr "Go to level {level}"
 
 #: templates/incl-editor-and-output.html:154
 #, fuzzy
@@ -991,8 +1050,9 @@ msgid "developers_mode"
 msgstr "Programmer's mode"
 
 #: templates/incl-menubar.html:8
+#, fuzzy
 msgid "nav_start"
-msgstr "Kezdőlap"
+msgstr "Home"
 
 #: templates/incl-menubar.html:9
 #, fuzzy
@@ -1000,16 +1060,19 @@ msgid "nav_hedy"
 msgstr "Hedy"
 
 #: templates/incl-menubar.html:10
+#, fuzzy
 msgid "nav_explore"
 msgstr "Explore"
 
 #: templates/incl-menubar.html:11
+#, fuzzy
 msgid "nav_learn_more"
-msgstr "Tudj meg többet"
+msgstr "Learn more"
 
 #: templates/incl-menubar.html:13 templates/public-page.html:56
+#, fuzzy
 msgid "program_header"
-msgstr "Programjaim"
+msgstr "My programs"
 
 #: templates/incl-menubar.html:20
 #, fuzzy
@@ -1017,8 +1080,9 @@ msgid "my_achievements"
 msgstr "My achievements"
 
 #: templates/incl-menubar.html:23
+#, fuzzy
 msgid "my_account"
-msgstr "Profilom"
+msgstr "My account"
 
 #: templates/incl-menubar.html:27
 #, fuzzy
@@ -1026,13 +1090,15 @@ msgid "for_teachers"
 msgstr "For teachers"
 
 #: templates/incl-menubar.html:31
+#, fuzzy
 msgid "logout"
-msgstr "Kilépés"
+msgstr "Log out"
 
 #: templates/incl-menubar.html:36 templates/login.html:19
 #: templates/signup.html:106
+#, fuzzy
 msgid "login"
-msgstr "Belépés"
+msgstr "Log in"
 
 #: templates/landing-page.html:6
 #, fuzzy
@@ -1044,9 +1110,9 @@ msgstr "Welcome"
 msgid "intro_text_landing_page"
 msgstr ""
 "Welcome to the wonderful world of Hedy! Here you can learn to program in "
-"small steps, without unnecessary complicated stuff. We start easy at "
-"level 1, and slowly build towards bigger and more complex programs! "
-"Choose one of the options below to get started"
+"small steps, without unnecessary complicated stuff. We start easy at level "
+"1, and slowly build towards bigger and more complex programs! Choose one of "
+"the options below to get started"
 
 #: templates/landing-page.html:14 templates/landing-page.html:36
 #, fuzzy
@@ -1068,8 +1134,7 @@ msgstr "Group your students into classes and change the content for each class."
 #, fuzzy
 msgid "read_docs_text"
 msgstr ""
-"Visit our teacher's manual for lesson plans and common mistakes by "
-"students."
+"Visit our teacher's manual for lesson plans and common mistakes by students."
 
 #: templates/landing-page.html:30
 #, fuzzy
@@ -1087,32 +1152,37 @@ msgid "turtle_text"
 msgstr "Make a drawing with code"
 
 #: templates/layout.html:20 templates/signup.html:61
+#, fuzzy
 msgid "yes"
-msgstr "Igen"
+msgstr "Yes"
 
 #: templates/layout.html:21 templates/signup.html:65
+#, fuzzy
 msgid "no"
-msgstr "Nem"
+msgstr "No"
 
 #: templates/layout.html:29
+#, fuzzy
 msgid "ok"
 msgstr "OK"
 
 #: templates/layout.html:30
+#, fuzzy
 msgid "cancel"
-msgstr "Mégsem"
+msgstr "Cancel"
 
 #: templates/layout.html:43 templates/programs.html:68
 #: templates/programs.html:76
+#, fuzzy
 msgid "copy_link_to_share"
-msgstr "Link másolása a megosztáshoz"
+msgstr "Copy link to share"
 
 #: templates/layout.html:78
 #, fuzzy
 msgid "set_preferred_lang"
 msgstr ""
-"Hedy now supports preferred user languages. You can set one for your "
-"profile in \"My profile\""
+"Hedy now supports preferred user languages. You can set one for your profile "
+"in \"My profile\""
 
 #: templates/layout.html:86 templates/quiz/endquiz.html:18
 #: templates/quiz/quiz.html:29
@@ -1121,36 +1191,44 @@ msgid "achievement_earned"
 msgstr "You've earned an achievement!"
 
 #: templates/level-page.html:8
+#, fuzzy
 msgid "step_title"
-msgstr "Feladat"
+msgstr "Assignment"
 
 #: templates/level-page.html:12
+#, fuzzy
 msgid "save_code_button"
-msgstr "Kód mentése"
+msgstr "Save code"
 
 #: templates/level-page.html:13
+#, fuzzy
 msgid "share_code_button"
-msgstr "Mentés és kód megosztása"
+msgstr "Save & share code"
 
 #: templates/level-page.html:31
+#, fuzzy
 msgid "try_button"
-msgstr "Próbáld ki"
+msgstr "Try"
 
 #: templates/login.html:10
+#, fuzzy
 msgid "login_long"
-msgstr "Belépés a fiókodba"
+msgstr "Log in to your account"
 
 #: templates/login.html:26 website/auth.py:312
+#, fuzzy
 msgid "no_account"
-msgstr "Nincs még fiókod?"
+msgstr "No account?"
 
 #: templates/login.html:28 templates/signup.html:6 templates/signup.html:102
+#, fuzzy
 msgid "create_account"
-msgstr "Készíts fiókot"
+msgstr "Create account"
 
 #: templates/login.html:33
+#, fuzzy
 msgid "forgot_password"
-msgstr "Elfelejtetted a jelszavad?"
+msgstr "Forgot your password?"
 
 #: templates/profile.html:4
 #, fuzzy
@@ -1197,11 +1275,6 @@ msgstr "here"
 msgid "profile_picture"
 msgstr "Profile picture"
 
-#: templates/profile.html:40
-#, fuzzy
-msgid "personal_text"
-msgstr "Personal text"
-
 #: templates/profile.html:41
 #, fuzzy
 msgid "your_personal_text"
@@ -1216,9 +1289,9 @@ msgstr "Favourite program"
 #, fuzzy
 msgid "public_profile_info"
 msgstr ""
-"By selecting this box I make my profile visible for everyone. Be careful "
-"not to share personal information like your name or home address, because"
-" everyone will be able to see it!"
+"By selecting this box I make my profile visible for everyone. Be careful not "
+"to share personal information like your name or home address, because "
+"everyone will be able to see it!"
 
 #: templates/profile.html:59
 #, fuzzy
@@ -1226,8 +1299,9 @@ msgid "update_public"
 msgstr "Update public profile"
 
 #: templates/profile.html:61 templates/profile.html:145
+#, fuzzy
 msgid "are_you_sure"
-msgstr "Biztos vagy ebben? Ezt a műveletet nem lehet visszavonni."
+msgstr "Are you sure? You cannot revert this action."
 
 #: templates/profile.html:61
 #, fuzzy
@@ -1255,8 +1329,9 @@ msgid "settings"
 msgstr "My personal settings"
 
 #: templates/profile.html:99 templates/signup.html:41
+#, fuzzy
 msgid "birth_year"
-msgstr "Születési év"
+msgstr "Birth year"
 
 #: templates/profile.html:102 templates/signup.html:25
 #, fuzzy
@@ -1269,48 +1344,59 @@ msgid "preferred_keyword_language"
 msgstr "Preferred keyword language"
 
 #: templates/profile.html:126 templates/signup.html:44
+#, fuzzy
 msgid "gender"
-msgstr "Neme"
+msgstr "Gender"
 
 #: templates/profile.html:129 templates/signup.html:46
+#, fuzzy
 msgid "female"
-msgstr "Nő"
+msgstr "Female"
 
 #: templates/profile.html:130 templates/signup.html:47
+#, fuzzy
 msgid "male"
-msgstr "Férfi"
+msgstr "Male"
 
 #: templates/profile.html:131 templates/signup.html:48
+#, fuzzy
 msgid "other"
-msgstr "Más"
+msgstr "Other"
 
 #: templates/profile.html:135 templates/signup.html:52
+#, fuzzy
 msgid "country"
-msgstr "Ország"
+msgstr "Country"
 
 #: templates/profile.html:141
+#, fuzzy
 msgid "update_profile"
-msgstr "Profil frissítése"
+msgstr "Update profile"
 
 #: templates/profile.html:145
+#, fuzzy
 msgid "destroy_profile"
-msgstr "Véglegesen törli a fiókot "
+msgstr "Delete profile"
 
 #: templates/profile.html:152
+#, fuzzy
 msgid "current_password"
-msgstr "Jelenlegi jelszó"
+msgstr "Current password"
 
 #: templates/profile.html:156
+#, fuzzy
 msgid "new_password"
-msgstr "Új jelszó"
+msgstr "New password"
 
 #: templates/profile.html:160
+#, fuzzy
 msgid "repeat_new_password"
-msgstr "Új jelszó mégegyszer"
+msgstr "Repeat new password"
 
 #: templates/programs.html:7
+#, fuzzy
 msgid "recent"
-msgstr "Legutóbbi programjaim "
+msgstr "My recent programs"
 
 #: templates/programs.html:35 templates/view-program-page.html:7
 #, fuzzy
@@ -1333,28 +1419,34 @@ msgid "favourite_confirm"
 msgstr "Are you sure you want to set this program as your favourite?"
 
 #: templates/programs.html:67 templates/programs.html:72
+#, fuzzy
 msgid "open"
-msgstr "Nyitva"
+msgstr "Open"
 
 #: templates/programs.html:68
+#, fuzzy
 msgid "copy_clipboard"
-msgstr "Sikeresen a vágólapra másolva"
+msgstr "Successfully copied to clipboard"
 
 #: templates/programs.html:69 templates/programs.html:73
+#, fuzzy
 msgid "delete_confirm"
-msgstr "Biztosan törlöd a programot?"
+msgstr "Are you sure you want to delete the program?"
 
 #: templates/programs.html:69 templates/programs.html:73
+#, fuzzy
 msgid "delete"
-msgstr "Törlés"
+msgstr "Delete"
 
 #: templates/programs.html:75
+#, fuzzy
 msgid "unshare_confirm"
-msgstr "Biztosan priváttá kívánod tenni a programot?"
+msgstr "Are you sure you want to make the program private?"
 
 #: templates/programs.html:75
+#, fuzzy
 msgid "unshare"
-msgstr "Megosztás megszüntetése"
+msgstr "Unshare"
 
 #: templates/programs.html:77
 #, fuzzy
@@ -1367,20 +1459,24 @@ msgid "submit_program"
 msgstr "Submit"
 
 #: templates/programs.html:80
+#, fuzzy
 msgid "share_confirm"
-msgstr "Biztosan nyilvánosságra szeretnéd hozni a programot?"
+msgstr "Are you sure you want to make the program public?"
 
 #: templates/programs.html:80
+#, fuzzy
 msgid "share"
-msgstr "Megosztás"
+msgstr "Share"
 
 #: templates/programs.html:86
+#, fuzzy
 msgid "no_programs"
-msgstr "Még nincs programod."
+msgstr "You have no programs yet."
 
 #: templates/programs.html:88
+#, fuzzy
 msgid "write_first_program"
-msgstr "Írd meg az első programot!"
+msgstr "Write your first program!"
 
 #: templates/public-page.html:16
 #, fuzzy
@@ -1413,28 +1509,34 @@ msgid "no_shared_programs"
 msgstr "has no shared programs..."
 
 #: templates/recover.html:6
+#, fuzzy
 msgid "recover_password"
-msgstr "Kérj jelszó-visszaállítást "
+msgstr "Request a password reset"
 
 #: templates/recover.html:11
+#, fuzzy
 msgid "send_password_recovery"
-msgstr "Küldj nekem egy jelszó-helyreállítási linket "
+msgstr "Send me a password recovery link"
 
 #: templates/reset.html:6 templates/reset.html:19
+#, fuzzy
 msgid "reset_password"
-msgstr "Jelszó törlése"
+msgstr "Reset password"
 
 #: templates/reset.html:12 templates/signup.html:22
+#, fuzzy
 msgid "password_repeat"
-msgstr "Jelszó mégegyszer"
+msgstr "Repeat password"
 
 #: templates/signup.html:7
+#, fuzzy
 msgid "create_account_explanation"
-msgstr "Saját fiók birtokában mentheted a programjaidat."
+msgstr "Having your own account allows you to save your programs."
 
 #: templates/signup.html:16
+#, fuzzy
 msgid "email_repeat"
-msgstr "Email mégegyszer"
+msgstr "Repeat email"
 
 #: templates/signup.html:57
 #, fuzzy
@@ -1442,16 +1544,19 @@ msgid "programming_experience"
 msgstr "Do you have programming experience?"
 
 #: templates/signup.html:71
+#, fuzzy
 msgid "languages"
-msgstr "Az alábbi programozási nyelvek közül melyiket használtad korábban?"
+msgstr "Which of these programming languages have you used before?"
 
 #: templates/signup.html:76
+#, fuzzy
 msgid "other_block"
-msgstr "Más blokkprogramozási nyelv"
+msgstr "Another block language"
 
 #: templates/signup.html:82
+#, fuzzy
 msgid "other_text"
-msgstr "Más szöveges programozási nyelv"
+msgstr "Another text language"
 
 #: templates/signup.html:88
 #, fuzzy
@@ -1459,8 +1564,9 @@ msgid "request_teacher"
 msgstr "Would you like to apply for a teacher's account?"
 
 #: templates/signup.html:91
+#, fuzzy
 msgid "subscribe_newsletter"
-msgstr "Iratkozz fel a hírlevélre "
+msgstr "Subscribe to the newsletter"
 
 #: templates/signup.html:96
 #, fuzzy
@@ -1480,15 +1586,16 @@ msgstr ""
 "opportunities (optional)"
 
 #: templates/signup.html:106
+#, fuzzy
 msgid "already_account"
-msgstr "Már van fiókod?"
+msgstr "Already have an account?"
 
 #: templates/teacher-invitation.html:5
 #, fuzzy
 msgid "teacher_invitation_require_login"
 msgstr ""
-"To set up your profile as a teacher we will need you to log in. If you "
-"don't have an account, please create one."
+"To set up your profile as a teacher we will need you to log in. If you don't "
+"have an account, please create one."
 
 #: templates/view-program-page.html:13
 #, fuzzy
@@ -1543,12 +1650,12 @@ msgstr "Go to quiz result"
 #: templates/quiz/quiz-result-overview.html:22
 #, fuzzy
 msgid "results_quiz"
-msgstr "Kvíz indítása"
+msgstr "Quiz results"
 
 #: templates/quiz/quiz-result-overview.html:45
 #, fuzzy
 msgid "correct"
-msgstr "Legutóbbi programjaim "
+msgstr "Correct"
 
 #: templates/quiz/quiz-result-overview.html:62
 #, fuzzy
@@ -1578,8 +1685,9 @@ msgid "submit_answer"
 msgstr "Answer question"
 
 #: templates/quiz/startquiz.html:9
+#, fuzzy
 msgid "start_quiz"
-msgstr "Kvíz indítása"
+msgstr "Start quiz"
 
 #: templates/quiz/startquiz.html:15
 #, fuzzy
@@ -1601,17 +1709,20 @@ msgid "username_invalid"
 msgstr "Your username is invalid."
 
 #: website/auth.py:243
+#, fuzzy
 msgid "username_special"
-msgstr "A felhaszálónévben nem lehet`:` or `@`."
+msgstr "Username cannot contain `:` or `@`."
 
 #: website/auth.py:245
+#, fuzzy
 msgid "username_three"
-msgstr "A felhasználónévnek legalább három karaktert kell tartalmaznia."
+msgstr "Username must contain at least three characters."
 
 #: website/auth.py:247 website/auth.py:541 website/auth.py:748
 #: website/auth.py:753
+#, fuzzy
 msgid "email_invalid"
-msgstr "Kérem adj meg érvényes email címet."
+msgstr "Please enter a valid email."
 
 #: website/auth.py:249 website/auth.py:303 website/auth.py:487
 #: website/auth.py:511 website/auth.py:523 website/auth.py:683
@@ -1625,17 +1736,20 @@ msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
 #: website/auth.py:312
+#, fuzzy
 msgid "invalid_username_password"
-msgstr "Érvénytelen felhasználónév/jelszó."
+msgstr "Invalid username/password."
 
 #: website/auth.py:356 website/auth.py:358
+#, fuzzy
 msgid "repeat_match_email"
-msgstr "Az ismételt e-mail nem egyezik."
+msgstr "The repeated email does not match."
 
 #: website/auth.py:360 website/auth.py:513 website/auth.py:517
 #: website/auth.py:687
+#, fuzzy
 msgid "repeat_match_password"
-msgstr "Az ismételt jelszó nem egyezik."
+msgstr "The repeated password does not match."
 
 #: website/auth.py:362 website/auth.py:543
 #, fuzzy
@@ -1651,12 +1765,12 @@ msgstr "You have to agree with the privacy terms."
 #, fuzzy
 msgid "keyword_language_invalid"
 msgstr ""
-"Please select a valid keyword language (select English or your own "
-"language)."
+"Please select a valid keyword language (select English or your own language)."
 
 #: website/auth.py:371 website/auth.py:551
+#, fuzzy
 msgid "year_invalid"
-msgstr "Adj meg egy évet 1900 és "
+msgstr "Please enter a year between 1900 and {year}."
 
 #: website/auth.py:374 website/auth.py:554
 #, fuzzy
@@ -1680,16 +1794,19 @@ msgid "programming_invalid"
 msgstr "Please select a valid programming language."
 
 #: website/auth.py:388
+#, fuzzy
 msgid "exists_username"
-msgstr "Ez a felhasználónév már használatban van."
+msgstr "That username is already in use."
 
 #: website/auth.py:390 website/auth.py:573
+#, fuzzy
 msgid "exists_email"
-msgstr "Ez az email cím már használatban van."
+msgstr "That email is already in use."
 
 #: website/auth.py:489 website/auth.py:515 website/auth.py:685
+#, fuzzy
 msgid "password_six"
-msgstr "A jelszónak legalább hat karaktert kell tartalmaznia."
+msgstr "Your password must contain at least six characters."
 
 #: website/auth.py:492 website/auth.py:495
 #, fuzzy
@@ -1702,12 +1819,14 @@ msgid "password_change_success"
 msgstr "Password of your student is successfully changed."
 
 #: website/auth.py:532
+#, fuzzy
 msgid "password_updated"
-msgstr "Jelszó frissítve."
+msgstr "Password updated."
 
 #: website/auth.py:613
+#, fuzzy
 msgid "profile_updated"
-msgstr "Profil frissítve."
+msgstr "Profile updated."
 
 #: website/auth.py:616
 #, fuzzy
@@ -1715,10 +1834,11 @@ msgid "profile_updated_reload"
 msgstr "Profile updated, page will be re-loaded."
 
 #: website/auth.py:670
+#, fuzzy
 msgid "sent_password_recovery"
 msgstr ""
-"Hamarosan kapnod kell egy e-mailt a jelszó visszaállítására vonatkozó "
-"utasításokkal."
+"You should soon receive an email with instructions on how to reset your "
+"password."
 
 #: website/auth.py:681 website/auth.py:691
 #, fuzzy
@@ -1726,8 +1846,11 @@ msgid "token_invalid"
 msgstr "Your token is invalid."
 
 #: website/auth.py:703
+#, fuzzy
 msgid "password_resetted"
-msgstr "Jelszavadat sikeresen visszaállítottad. Kérjük jelentkezz be."
+msgstr ""
+"Your password has been successfully reset. You are being redirected to the "
+"login page."
 
 #: website/auth.py:721
 #, fuzzy
@@ -1740,10 +1863,11 @@ msgid "delete_success"
 msgstr "Program deleted successfully."
 
 #: website/programs.py:55
+#, fuzzy
 msgid "save_prompt"
 msgstr ""
-"A program mentéséhez fiókkal kell rendelkezned. Szeretnél most "
-"bejelentkezni?"
+"You need to have an account to save your program. Would you like to login "
+"now?"
 
 #: website/programs.py:60
 #, fuzzy
@@ -1758,16 +1882,19 @@ msgid "save_parse_warning"
 msgstr "This program contains an error, are you sure you want to save it?"
 
 #: website/programs.py:131 website/programs.py:132
+#, fuzzy
 msgid "save_success_detail"
-msgstr "A programot sikeresen mentetted"
+msgstr "Program saved successfully."
 
 #: website/programs.py:160
+#, fuzzy
 msgid "share_success_detail"
-msgstr "A program sikeresen megosztva"
+msgstr "Program shared successfully."
 
 #: website/programs.py:162
+#, fuzzy
 msgid "unshare_success_detail"
-msgstr "Program megosztása megszüntetve"
+msgstr "Program unshared successfully."
 
 #: website/programs.py:202
 #, fuzzy
