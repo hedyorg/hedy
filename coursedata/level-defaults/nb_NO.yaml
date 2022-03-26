@@ -35,7 +35,7 @@
         explanation: A list with quotation marks
         example: name = 'Hedy', 'Felienne'
         demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
-    start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
+    start_code: "{print} 'desimaltall må bruke et punktum nå'\n{print} 2.5 + 2.5"
     intro_text: "## Numbers and texts\n**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.\n"
     example_code: "## Eksempel Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
     intro_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
@@ -224,43 +224,43 @@
         demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
     start_code: "{repeat} 3 {times}\n    matrett = {ask} 'Hva vil du ha?'\n    {if} matrett {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza er bedre'"
-    intro_text: "## Alt på en gang nå!\nIn this level you can not only use multiple lines with `{if}` {and} `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
-    example_code: "## Eksempel Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
+    intro_text: "## Alt på en gang nå!\nPå dette nivået kan du bruke både `{if}` med kodeblokker {and} `{repeat}` sammen!\nI eksempelet kan du se en `{if}` kommando inni en `{repeat}` kommando. Det er også mulig å gjøre det motsatte (`{repeat}` inni en `{if}`).\nDu kan også legge en `{if}` inni en annen `{if}` og en `{repeat}` inni en `{repeat}`.\nPrøv å se om du får det til!\n"
+    example_code: "## Eksempel Hedy kode\n```\n{repeat} 3 {times}\n    matrett = {ask} 'Hva vil du ha?'\n    {if} matrett {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza er bedre'\n```\n"
     commands:
-    -   name: '`{if}` with multiple lines'
-        explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
-        example: "Eksempel: answer = {ask} 'What is 20 plus 20?'"
-        demo_code: "answer = {ask} 'What is 20 plus 20?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\nelse\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
-    -   name: '`{repeat}` and turtle'
-        explanation: '{repeat} multiple lines'
+    -   name: '`{if}` med flere linjer'
+        explanation: "'{ask}' om svaret på et regnestykke og se om det er korrekt. Nå skriver vi ut to linjer."
+        example: "Eksempel: svaret = {ask} 'Hva er 20 pluss 20?'"
+        demo_code: "svaret = {ask} 'Hva er 20 pluss 20?'\n{if} svaret {is} 40\n    {print} 'Bra jobbet!'\n    {print} 'Svaret er ' svaret\nelse\n    {print} 'Feil'\n    {print} 'Svaret er 40'"
+    -   name: '`{repeat}` og skilpadden'
+        explanation: '{repeat} flere linjer'
         example: 'Eksempel : tegn en firkant'
         demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
-    start_code: "dyr {is} hund, katt, flyndre\n{for} et_dyr {in} dyr\n  {print} 'I love ' et_dyr"
-    intro_text: "## For each item in my list...\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces.\n"
-    example_code: "## Eksempel Hedy code\n```\ndyr {is} hund, katt, flyndre\n{for} et_dyr {in} dyr\n  {print} 'I love ' et_dyr\n```\n"
+    start_code: "dyrene {is} hunder, katter, flyndre\n{for} dyr {in} dyrene\n    {print} 'Jeg elsker ' dyr"
+    intro_text: "## For hver ting i listen min\nPå dette nivået skal vi lære et nytt nøkkelord `{for}`. Med `{for}` kan du lage en liste og bruke alle elementene i listen.\n`{for}` lager en kodeblokk, på samme måte som `{repeat}` og `{if}`, så alle linjene i kodeblokken må starte med 4 mellomrom (indentering).\n"
+    example_code: "## Eksempel Hedy kode\n```\ndyrene {is} hunder, katter, flyndre\n{for} dyr {in} dyrene\n    {print} 'Jeg elsker ' dyr\n```\n"
     commands:
     -   name: '{print}'
-        explanation: print something. Remember to use a quotation mark for literal printing.
-        example: "Eksempel: {print} '5 times 5 is ' 5 * 5"
-        demo_code: "{print} '5 times 5 is ' 5 * 5"
+        explanation: skriv ut noe. Husk å bruke fnutter når du skal skrive tekst.
+        example: "Eksempel: {print} '5 {times} 5 {is} ' 5 * 5"
+        demo_code: "{print} '5 {times} 5 {is} ' 5 * 5"
     -   name: '{for} med en liste'
-        explanation: 'print all things in a list '
-        example: 'Eksempel: {for} et_dyr {in} dyr'
-        demo_code: "dyr {is} hund, katt, flyndre\n{for} et_dyr {in} dyr\n  {print} 'I love ' et_dyr"
+        explanation: 'skriv ut alle tingene i en liste '
+        example: 'Eksempel: {for} dyr {in} dyrene'
+        demo_code: "dyrene {is} hunder, katter, flyndre\n{for} dyr {in} dyrene\n    {print} 'Jeg elsker ' dyr"
 11:
-    start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
-    intro_text: "## Loops!\n`{print}` works just the same but the we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.\nTry it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)\n"
-    example_code: "## Eksempel Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
+    start_code: "{for} teller {in} {range} 1 {to} 5\n    {print} teller"
+    intro_text: "## Løkker!\n`{print}` fungerer på samme måten som før, men vi legger til en ny versjon av `{for}`. Nå kan du skrive`{for} teller {in} {range} 1 {to} 5` and og bruke `teller` i programmet ditt. En {range} er bare noen tall som kommer etter hverandre på tall-linjen.\nPrøv det ut og se hva som skjer! Husk å bruke indentering etter `{for}` og `{if}` uttrykkene (det betyr at du må starte setningen med fire mellomrom)\n"
+    example_code: "## Eksempel Hedy kode\n```\n{for} teller {in} {range} 1 {to} 5\n    {print} teller\n```\n"
     commands:
     -   name: '{for} loop'
-        explanation: We can use `{for}` with a {range}
-        example: for counter {in} {range} 1 {to} 5
-        demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
+        explanation: Vi kan bruke `{for}` med en {range}
+        example: '{for} teller {in} {range} 1 {to} 5'
+        demo_code: "{for} teller {in} {range} 1 {to} 5\n    {print} teller"
     -   name: '{ask}'
-        explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-        example: "Eksempel: answer = {ask} 'What is 5 plus 5?'"
-        demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+        explanation: '{ask} etter svaret på et regnestykke og sjekk om det er korrekt. Vi kan skrive ut to linjer nå.'
+        example: "Eksempel: svaret = {ask} 'Hva er 5 pluss 5?'"
+        demo_code: "svaret = {ask} 'Hva er 5 pluss 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Det var rett og svaret var ' svaret\nelse\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
 13:
     start_code: "name = {ask} 'Hva heter du?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
     intro_text: "## And... Or..?\nWe are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.\n"
