@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-03-26 11:42+0000\n"
+"PO-Revision-Date: 2022-03-26 11:52+0000\n"
 "Last-Translator: Odd Martin Hansen <kegulf@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/hedy/"
 "web-texts/nb_NO/>\n"
@@ -331,26 +331,28 @@ msgstr ""
 #: coursedata/error-messages.txt:23
 msgid "ask_needs_var"
 msgstr ""
-"Fra nivå 2, ask trenger å bli brukt med en variabel og hermetegn. For "
-"eksempel: name is ask 'Hva heter du?'"
+"Fra nivå 2, må du lagre svaret fra spør-kommandoen i en variabel og skrive "
+"spørsmålet inni apostrofer. For eksempel: navn er spør 'Hva heter du?'"
 
 #: coursedata/error-messages.txt:24
 msgid "echo_out"
 msgstr ""
-"Fra nivå 2 er ikke echo nødvendig lenger. Du kan gjenta et spørsmål med ask "
-"og print now. For eksempel: name is ask 'Hva heter du?' print 'hello' name"
+"Fra nivå 2 er ikke ekko nødvendig lenger. Du kan skrive ut svaret på et "
+"spørsmål med spør- og skriv-kommandoene. For eksempel: \n"
+"navn er spør 'Hva heter du?'\n"
+"skriv 'hallo' navn"
 
 #: coursedata/error-messages.txt:25
 msgid "space"
-msgstr "ett mellomrom"
+msgstr "et mellomrom"
 
 #: coursedata/error-messages.txt:26
 msgid "comma"
-msgstr "ett komma"
+msgstr "et komma"
 
 #: coursedata/error-messages.txt:27
 msgid "question mark"
-msgstr "ett spørsmålstegn"
+msgstr "et spørsmålstegn"
 
 #: coursedata/error-messages.txt:28
 msgid "newline"
@@ -358,11 +360,11 @@ msgstr "en ny linje"
 
 #: coursedata/error-messages.txt:29
 msgid "period"
-msgstr "ett punktum"
+msgstr "et punktum"
 
 #: coursedata/error-messages.txt:30
 msgid "exclamation mark"
-msgstr "ett utropstegn"
+msgstr "et utropstegn"
 
 #: coursedata/error-messages.txt:31
 msgid "dash"
@@ -374,11 +376,11 @@ msgstr "en stjerne"
 
 #: coursedata/error-messages.txt:33
 msgid "single quotes"
-msgstr "en enkelfnutt"
+msgstr "en enkelapostrof"
 
 #: coursedata/error-messages.txt:34
 msgid "double quotes"
-msgstr "hermetegn"
+msgstr "dobbelapostrof"
 
 #: coursedata/error-messages.txt:35
 msgid "slash"
@@ -398,15 +400,15 @@ msgstr "eller"
 
 #: coursedata/error-messages.txt:39
 msgid "number"
-msgstr "ett nummer"
+msgstr "et tall"
 
 #: coursedata/error-messages.txt:40
 msgid "integer"
-msgstr "et nummer"
+msgstr "et tall"
 
 #: coursedata/error-messages.txt:41
 msgid "float"
-msgstr "et nummer"
+msgstr "et tall"
 
 #: coursedata/error-messages.txt:42
 msgid "list"
@@ -414,7 +416,7 @@ msgstr "en liste"
 
 #: coursedata/error-messages.txt:43
 msgid "input"
-msgstr "inndata fra ask"
+msgstr "innputt fra spør-kommandoen"
 
 #: templates/class-overview.html:16
 msgid "visible_columns"
@@ -446,7 +448,7 @@ msgstr "Forrige delte program"
 
 #: templates/class-prejoin.html:15 templates/profile.html:12
 msgid "prompt_join_class"
-msgstr "Vil du bli denne klassen?"
+msgstr "Vil du bli med i denne klassen?"
 
 #: templates/class-prejoin.html:17 website/teacher.py:183
 msgid "join_prompt"
@@ -460,7 +462,7 @@ msgstr "Endre passord"
 
 #: templates/class-overview.html:53 templates/class-overview.html:71
 msgid "remove_student"
-msgstr "Fjern student"
+msgstr "Fjern elev"
 
 #: templates/class-overview.html:81
 msgid "page"
@@ -476,7 +478,7 @@ msgstr "Er du sikker på du vil endre dette passordet?"
 
 #: templates/class-overview.html:84
 msgid "remove_student_prompt"
-msgstr "Er du sikker du vil fjerne studenten fra klassen?"
+msgstr "Er du sikker du vil fjerne eleven fra klassen?"
 
 #: templates/class-overview.html:84 templates/class-overview.html:120
 #: templates/customize-adventure.html:52 templates/for-teachers.html:34
@@ -490,7 +492,7 @@ msgstr "Lenke til å bli med i klassen"
 
 #: templates/class-overview.html:92 templates/customize-class.html:5
 msgid "customize_class"
-msgstr "Tilpass klasse"
+msgstr "Tilpass innstillingene for klassen"
 
 #: templates/class-overview.html:93 templates/for-teachers.html:23
 msgid "class_name_prompt"
@@ -506,7 +508,7 @@ msgstr "Oppgi et brukernavn"
 
 #: templates/class-overview.html:94
 msgid "invite_student"
-msgstr "Inviter student"
+msgstr "Inviter en elev"
 
 #: templates/class-overview.html:95
 msgid "class_stats"
@@ -522,15 +524,15 @@ msgstr "Er du sikker på at du vil slette klassen?"
 
 #: templates/class-overview.html:99
 msgid "delete_class"
-msgstr "Slett klassen permanent"
+msgstr "Slett klassen for alltid"
 
 #: templates/class-overview.html:103
 msgid "pending_invites"
-msgstr "Ventende invitasjoner"
+msgstr "Ubesvarte invitasjoner"
 
 #: templates/class-overview.html:109
 msgid "invite_date"
-msgstr "Dato for invitasjon"
+msgstr "Invitasjonsdato"
 
 #: templates/class-overview.html:110
 msgid "expiration_date"
@@ -546,7 +548,7 @@ msgstr "Er du sikker på at du vil fjerne denne klasseinvitasjonen?"
 
 #: templates/class-prejoin.html:7
 msgid "class_already_joined"
-msgstr "Du er allerede student i klassen"
+msgstr "Du er allerede elev i denne klassen"
 
 #: templates/class-prejoin.html:11
 msgid "goto_profile"
@@ -554,11 +556,11 @@ msgstr "Gå til min profil"
 
 #: templates/class-prejoin.html:17 templates/profile.html:14
 msgid "join_class"
-msgstr "Bli med klasse"
+msgstr "Bli med i klassen"
 
 #: templates/class-stats.html:22 templates/customize-class.html:150
 msgid "back_to_class"
-msgstr "Gå tilbake til klasse"
+msgstr "Gå tilbake til klassen"
 
 #: templates/code-page.html:25 templates/code-page.html:34
 #: templates/customize-class.html:23 templates/customize-class.html:59
@@ -576,12 +578,13 @@ msgstr "Opprett flere kontoer"
 #: templates/create-accounts.html:7
 msgid "accounts_intro"
 msgstr ""
-"På denne siden kan du opprette kontoer for flere studenter samtidig. Det er "
+"På denne siden kan du opprette kontoer for flere elever samtidig. Det er "
 "også mulig å legge de til i en av klassene dine. Ved å trykke på den grønnne "
-"+ til høyre på bunnen av skjermen kan du legge til ekstra rader. Du kan "
-"slette rader ved å trykke på det tilsvarende røde krysset. Pass på at ingen "
-"rader er tomme når du trykker på \"Opprett kontoer\". Vennligst pass på at "
-"hvert brukernavn og epost er unik og at passordet er <b>minst</b> 6 tegn."
+"+ knappen til høyre på bunnen av skjermen kan du legge til ekstra rader. Du "
+"kan slette rader ved å trykke på det tilsvarende røde krysset. Pass på at "
+"ingen rader er tomme når du trykker på \"Opprett kontoer\". Vennligst pass "
+"på at hvert brukernavn og epost er unik og at passordet er <b>minst</b> 6 "
+"tegn."
 
 #: templates/create-accounts.html:10
 msgid "create_accounts_prompt"
@@ -603,7 +606,7 @@ msgstr "Velg klasse"
 
 #: templates/create-accounts.html:36 templates/programs.html:26
 msgid "reset_view"
-msgstr "Resett"
+msgstr "Tilbakestill"
 
 #: templates/create-accounts.html:37 templates/for-teachers.html:55
 msgid "create_accounts"
@@ -644,14 +647,15 @@ msgstr ""
 #: templates/customize-adventure.html:31
 msgid "adventure_exp_2"
 msgstr ""
-"Hvis du vil vise en kodesnuttet, for eksempel for å gi en student en mal "
-"eller kodeeksempel, bruk pre-koden som dette:"
+"Hvis du vil vise en kodesnuttet, for eksempel for å gi en elev en mal eller "
+"kodeeksempel, bruk pre-tag som dette:"
 
 #: templates/customize-adventure.html:39
 msgid "adventure_exp_3"
 msgstr ""
-"Du kan bruke \"forhåndsvis\"knappen til å se en stilert versjon av eventyret "
-"ditt. For å se eventyret på en egen side, velg \"vis\" fra lærersiden."
+"Du kan bruke \"forhåndsvis\" knappen til å se en stilert versjon av "
+"eventyret ditt. For å se eventyret på en egen side, velg \"vis\" fra "
+"lærersiden."
 
 #: templates/customize-adventure.html:43 templates/customize-class.html:23
 #: templates/customize-class.html:88 templates/explore.html:26
@@ -665,12 +669,12 @@ msgid "template_code"
 msgstr ""
 "Dette er forklaringen for eventyret mitt!\n"
 "\n"
-"På denne måten kan jeg vise en kommando: <code>print</code>\n"
+"På denne måten kan jeg vise en kommando: <code>skriv</code>\n"
 "\n"
 "Men noen ganger ønsker jeg å vise en kodesnutt, som dette:\n"
 "<pre>\n"
-"ask Hva er navnet ditt?\n"
-"echo så navnet ditt er  \n"
+"spør Hva er navnet ditt?\n"
+"ekko så navnet ditt er\n"
 "</pre>"
 
 #: templates/customize-adventure.html:47
@@ -694,19 +698,16 @@ msgid "select_adventures"
 msgstr "Velg eventyr"
 
 #: templates/customize-class.html:54
-#, fuzzy
 msgid "opening_dates"
-msgstr "Opening dates"
+msgstr "Dato for tilgjengeliggjøring"
 
 #: templates/customize-class.html:60
-#, fuzzy
 msgid "opening_date"
-msgstr "Opening date"
+msgstr "Dato for tilgjengeliggjøring"
 
 #: templates/customize-class.html:72
-#, fuzzy
 msgid "directly_available"
-msgstr "Directly open"
+msgstr "Åpne på direkten"
 
 #: templates/for-teachers.html:32
 #, fuzzy
@@ -737,9 +738,8 @@ msgid "other_settings"
 msgstr "Other settings"
 
 #: templates/customize-class.html:115
-#, fuzzy
 msgid "option"
-msgstr "Option"
+msgstr "Alternativ"
 
 #: templates/customize-class.html:121
 #, fuzzy
