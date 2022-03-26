@@ -1,22 +1,22 @@
 6:
     commands:
     -   name: '{print}'
-        explanation: print exactly using quotation marks
-        example: "Example: {print} '5 times 5 is ' 5 * 5"
-        demo_code: "{print} '5 times 5 is ' 5 * 5"
+        explanation: skriv ut nøyaktig det du vil med fnutter
+        example: "Eksempel: {print} '5 {times} 5 er ' 5 * 5"
+        demo_code: "{print} '5 {times] 5 er ' 5 * 5"
     -   name: '{ask}'
-        explanation: '{ask} for a calculation and check whether it is correct.'
-        example: "Example: answer {is} {ask} 'What is 10 plus 10?'"
-        demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
-    -   name: '`{ask}` {and} `{if}` turtle'
-        explanation: '{ask} the user how many angles they want'
-        example: "Example: angles {is} {ask} 'How many angles?'"
-        demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
-    start_code: "{print} '5 times 5 is ' 5 * 5"
-    intro_text: "## 1 + 1\n In this level you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The {times} is a bit different, because there is no {times} symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
-    example_code: "## Example Hedy code\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
-    intro_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-    example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+        explanation: '{ask} om et regnestykke og sjekk om det er korrekt.'
+        example: "Eksempel: svar {is} {ask} 'Hva er 10 pluss 10?'"
+        demo_code: "svar = {ask} 'Hva er 10 pluss 10?'\n{if} svar {is} 20 {print} 'Korrekt!' {else} {print} 'Feil'"
+    -   name: '`{ask}` {and} `{if}` skilpadde'
+        explanation: '{ask} brukeren hvor mange grader de vil ha'
+        example: "Eksempel: grader{is} {ask} 'Hvor mange grader?'"
+        demo_code: "grader= {ask} 'Hvor mange grader?'\nvinkel = 360 / grader\n{forward} 50"
+    start_code: "{print} '5 ganget med 5 er ' 5 * 5"
+    intro_text: "## 1 + 1\nPå dette nivået skal du få lære noe nytt! Du kan nå bruke Hedy til å gjøre matte.\n\nÅ plusse sammen to tall er enkelt, du bare gjør som du ville gjort i mattetimen, for eksempel: `5 + 5`. Minus funker også: `5 - 5`.\n\nÅ gange er litt andreledes, fordi det ikke er et {times} symbol på tastaturet ditt. Bare se hvis du vil, der er virkelig ikke et gangeteng.\nDerfor bruker vi vanligvis en stjerne `*` når vi ganger. `5 * 5`kan leses som \"5 {times} 5\". Det kan være du må holde inne SHIFT knappen for å kunne skrive *-tegnet.\n"
+    example_code: "## Eksempel Hedy kode\n```\n{print} '5 pluss 5 er ' 5 + 5\n{print} '5 minus 5 er ' 5 - 5\n{print} '5 {times} 5 er ' 5 * 5\n```\n"
+    intro_text_2: "Vi skal også gjøre en liten endring i hvordan vi lagrer et ord i en variabel! Du kan nå bruke `=` istedenfor `{is}` når du lagrer en tekst eller et tall i en variabel, slik:\n"
+    example_code_2: "```\nnavn= Hedy\nsvar = 4 + 20\n```\n"
 12:
     commands:
     -   name: float directly
@@ -37,13 +37,13 @@
         demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
     start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
     intro_text: "## Numbers and texts\n**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.\n"
-    example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+    example_code: "## Eksempel Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
     intro_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
     example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
     intro_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
     example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
     intro_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
-    example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
+    example_code_4: "```\nname = {ask} 'Hva heter du??'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
     intro_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
     example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
     intro_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
@@ -52,7 +52,7 @@
     commands:
     -   name: '{while}'
         explanation: We can use the `{while}` loop with not equal
-        example: 'Example: {while} correct_answer != 25'
+        example: 'Eksempel: {while} correct_answer != 25'
         demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
     -   name: Mindre {while}
         explanation: 'We can also use the `{while}` loop with `<` and `>`. '
@@ -60,12 +60,12 @@
         demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
     start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
     intro_text: "## More loops!\nWe are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!\n"
-    example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+    example_code: "## Eksempel Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
 1:
-    intro_text: "## Velkommen til Hedy\nPå Nivå 1 kan du bruke kommandoene `{print}`, `{ask}` og `{echo}`.\nSkriv koden i programmeringsfeltet, eller trykk på den grønne boksen i eksempelkodeblokken og koden vil bli skrevet for deg!\nPrøv koden self med den grønne 'Kjør kode'knappen under programmeringsfeltet.\n\nDu kan skrive tekst til skjermen ved å bruke `{print}` kommandoen.\n"
+    intro_text: "## Velkommen til Hedy\nPå Nivå 1 kan du bruke kommandoene `{print}`, `{ask}` og `{echo}`.\nSkriv koden i programmeringsfeltet, eller trykk på den grønne boksen i eksempelkodeblokken og koden vil bli skrevet for deg!\nPrøv koden self med den grønne 'Kjør kode' knappen under programmeringsfeltet.\n\nDu kan skrive tekst til skjermen ved å bruke `{print}` kommandoen.\n"
     example_code: "## Eksempelkode\n```\n{print} Hallo!\n{print} Velkomen til Hedy!\n```\n"
-    intro_text_2: "Du kan også spørre etter inndata med `{ask}` og gjenta det tilbake med en `{echo}`kommando.\n"
-    intro_text_3: "La oss starte! Ikke sikker på hva du vil lage? I de neset fanene finner du ideer til programmer å bygge.\n"
+    intro_text_2: "Du kan også spørre etter input med `{ask}` og gjenta det tilbake med en `{echo}`kommando.\n"
+    intro_text_3: "La oss starte! Ikke sikker på hva du vil lage? I de neste fanene finner du ideer til programmer å bygge.\n"
     example_code_2: "## Eksempelkode\n```\n{ask} Hva er navnet ditt?\n{echo} hallo\n```\n"
     start_code: '{print} hallo verden!'
     commands:
@@ -74,13 +74,13 @@
         example: 'Eksempel: {print} Hallo, velkommen til Hedy!'
         demo_code: '{print} Hallo velkommen til Hedy!'
     -   name: '{ask}'
-        explanation: spør noe med `{ask}`.
-        example: 'Eksempel: {ask} Hva er yndlingsfargen din?'
-        demo_code: '{ask} Hva er yndlingsfargen din?'
+        explanation: Still et spørsmål med `{ask}`.
+        example: 'Eksempel: {ask} Hva er favorittfargen din?'
+        demo_code: '{ask} Hva er favorittfargen din?'
     -   name: '{echo}'
         explanation: gjenta noe med å bruke `{echo}`.
-        example: 'Eksempel: {echo} så yndlingsfargen din er '
-        demo_code: "{ask} Hva er yndlingsfargen din?\n{echo} så yndlingsfargen din er"
+        example: 'Eksempel: {echo} så favorittfargen din er '
+        demo_code: "{ask} Hva er favorittfargen din?\n{echo} så favorittfargen din er"
     -   name: '{print} emojier'
         explanation: print en emoji med `{print}`
         example: 'Eksempel: {print} 🙋‍ 🌍 ❗'
@@ -92,166 +92,166 @@
     -   name: '{turn}'
         explanation: snu tegneskilpadden med `{turn}`
         example: 'Eksempel: {turn}'
-        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+        demo_code: "{forward} 25\n{turn} venstre\n{forward} 25\n{turn} høyre"
 2:
-    intro_text: "## Variabler\nPå nivå 2 lærer vi to nye kommandoer: `{is}` og `{sleep}`.\nDu kan navngi et ord med `{is}`. Dette kalles en variabel. I dette eksempelet har vi laget en variable kalt navn og en variabel kalt alder. Du kan bruke ordet navn hvor som helst i koden og det vil bli erstattet av Hedy, som dette:\n\nPå denne måten trenger du ikke lenger `{echo}`kommandoen!\n"
+    intro_text: "## Variabler\nPå nivå 2 lærer vi to nye kommandoer: `{is}` og `{sleep}`.\nDu kan navngi et ord med `{is}`. Dette kalles en variabel. I dette eksempelet har vi laget en variabel kalt 'navn' og en variabel kalt 'alder'. Du kan bruke ordet 'navn' hvor som helst i koden og det vil bli erstattet av Hedy, som dette:\n\nPå denne måten trenger du ikke lenger `{echo}`kommandoen!\n"
     example_code: "## Eksempelkode\n```\nnavn {is} Hedy\nalder {is} 15\n{print} navn is alder år gammel\n```\n"
-    intro_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-    example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-    intro_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-    example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
+    intro_text_2: "`{print}` fungerer fortsatt som før, men `{ask}` kommandoen har endret seg. Fra nå må du bruke en variabel når du bruker `{ask}` kommandoen. Det ser slik ut:\n"
+    example_code_2: "```\nsvar {is} {ask} Hva heter du?\n{print} Hallo svar\n```\n"
+    intro_text_3: "Enda en ny kommando på dette nivået er `{sleep}`. Denne kommandoen setter programmet ditt på pause i et sekund. Hvis du skriver et tall bak {sleep} kommandoen, vil programmet settes på pause i så mange sekunder.\n"
+    example_code_3: "```\n{print} Min favorittfarge er...\n{sleep} 2\n{print} grønn!\n```\n"
     start_code: '{print} hallo verden!'
     commands:
     -   name: '{is}'
-        explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
-        example: 'Example: name {is} Hedy.'
-        demo_code: "name {is} Hedy\n{print} welcome name"
+        explanation: Gi et ord et navn som kan brukes andre steder i programmet med kommandoen `{is}`. Du kan velge navnet helt selv.
+        example: 'Eksempel: navn {is} Hedy.'
+        demo_code: "navn {is} Hedy\n{print} Velkommen navn"
     -   name: '{ask}'
-        explanation: ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
-        example: 'Example: color {is} {ask} What is your favorite color?'
-        demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
+        explanation: still et spørsmål med `{ask}`. Pass på! Du må gi svaret et navn ved hjelp av `{is}`.
+        example: 'Eksempel: farge {is} {ask} Hva er din favorittfarge?'
+        demo_code: "farge {is} {ask} Hva er din favorittfarge?\n{print} farge er din favoritt!"
     -   name: '{sleep}'
-        explanation: Let Hedy pause for a (couple of) second(s).
-        example: 'Example: {sleep} 2 '
-        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
-    -   explanation: Give a number a name using `{is}`. You can choose the name yourself.
-        example: 'Example: angle {is} 90'
-        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
-        name: is - turtle
+        explanation: La Hedy få seg en pause i et sekund eller fler.
+        example: 'Eksempel: {sleep} 2 '
+        demo_code: "{print} La meg tenke i et sekund...\n{sleep}\n{print} Hmm.. Jeg trenger tre sekunder til...\n{sleep} 3\n{print} Eureka! Jeg har svaret!"
+    -   explanation: Gi et tall et navn ved å bruke `{is}`. Du kan velge navnet selv.
+        example: 'Eksempel: vinkel {is} 90'
+        demo_code: "vinkel {is} 90\n{turn} vinkel \n{forward} 100"
+        name: er - skilpadde
 3:
-    intro_text: "## Make a list!\nIn level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.\n"
-    example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-    intro_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
-    example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+    intro_text: "## Lag en liste!\nPå nivå 3 kan du lage lister. Du kan la datamaskinen velge noe tilfeldig fra listen, du gjør det med `{at} {random}`.\n"
+    example_code: "## Eksempel Hedy Code\n\n```\ndyr {is} hund, katt, hest\n{print} dyr {at} {random}\n```\n"
+    intro_text_2: Du kan også legge til ting i listen med `{add}` og fjerne ting fra listen med `{remove}`.
+    example_code_2: "## Eksempel Hedy Code\n\n```\ndyr {is} hund, katt, hest\n{add} pingvin {to_list} dyr\n{remove} katt {from} dyr\n{print} dyr {at} {random}\n```\n"
     start_code: '{print} hallo verden!'
     commands:
-    -   name: choose_random
-        explanation: Choose a random word from a group with `{at}` and `{random}`
-        example: 'Example: animals {is} dog, cat, kangaroo.'
-        demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
+    -   name: velg_tilfeldig
+        explanation: Velg et tilfeldig ord fra en liste med `{at}` og `{random}`
+        example: 'Eksempel: dyr {is} hun, katt, hest.'
+        demo_code: "dyr {is} hund, katt, hest\n{print} dyr {at} {random}"
     -   name: '{add}'
-        explanation: add an item to a list
-        example: 'Example: {add} dog {to_list} animals'
-        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+        explanation: legg til en ting i listen
+        example: 'Eksempel: {add} hund {to_list} dyr'
+        demo_code: "dyr {is} ku, katt\n{add} hund {to_list} dyr"
     -   name: '{remove}'
-        explanation: remove an item from a list
-        example: 'Example: {remove} dog {from} animals'
-        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+        explanation: fjern en ting fra en liste
+        example: 'Eksempel: {remove} hund {from} dyr'
+        demo_code: "dyr {is} katt, hund, ku\n{remove} hund {from} dyr"
 4:
     start_code: "{print} 'Hallo verden'"
-    intro_text: "## 'Quotation marks'\nIn level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
-    example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-    intro_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+    intro_text: "## 'Quotation marks'\nPå nivå 4 har `{ask}` og`{print}` blitt endret.\n\nDu må fra nå av legge tekst du vil skrive ut mellom fnutter.\n\nDette er nyttig, fordi nå kan du skrive ut alle ordene du vil. Også de ordene du har brukt til å lagre noe med `{is}`.\n\nDe fleste programmeringsspråk bruker også fnutter når de skriver ut ting, så vi går altså enda et steg nærmere ekte programmering!\n"
+    example_code: "## Eksempel Hedy kode\n```\n{print} 'Du må bruke fnutter fra nå av!'\nsvar {is} {ask} 'Hva må vi bruke fra nå av?'\n{print} 'Vi må bruke' svar\n```\n"
+    intro_text_2: "## Eventyrene blir mer og mer vanskelig\nEventyrene blir mer og mer vanskelig nå i de rosa fanene.\nSå det er lurest å starte til venstre med Fortellingen, og jobbe seg mot høyre. På denne måten får du mer og mer utfordring for hvert eventyr.\n"
     commands:
     -   name: '{print}'
-        explanation: print exactly using quotation marks
-        example: "Example: {print} 'Hello welcome to Hedy.'"
-        demo_code: "{print} 'Hello welcome to Hedy.'"
+        explanation: skriv ut nøyaktig det du vil med fnutter
+        example: "Eksempel: {print} 'Hallo velkommen til Hedy.'"
+        demo_code: "{print} 'Hallo, velkommen til Hedy.'"
     -   name: '{is}'
-        explanation: Give a name to some text and `{print}` without quotation marks
-        example: 'Example: navn {is} Hedy.'
-        demo_code: "name {is} Hedy\n{print} 'my name is ' name"
+        explanation: Gi et navn til noe tekst og `{print}` ut uten fnutter
+        example: 'Eksempel: navn {is} Hedy.'
+        demo_code: "navn {is} Hedy\n{print} 'Mitt navn er ' navn"
     -   name: '{ask}'
-        explanation: spør noe med `{ask}`.
-        example: "Example: color {is} {ask} 'What is your favorite color?'"
-        demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+        explanation: still et spørsmål med `{ask}`.
+        example: "Eksempel: farge {is} {ask} 'Hva er din favorittfarge?'"
+        demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt!'"
 5:
-    start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
-    intro_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` {and} `{print}` still work like they did in level 4.\n"
-    example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-    intro_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-    example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-    intro_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
-    example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+    start_code: "navn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'kult!' {else} {print} 'meh'"
+    intro_text: "## Hvis... ellers...\nPå nivå 5 er det noe nytt å lære seg, `{if}`! Med `{if}` kommandoen kan du velge mellom to forskjellige valg.\nDenne koden skriver ut 'nice' hvis du skriver inn Hedy som navn, og 'buu!' hvis du skriver noe annet.\n`{ask}` and `{print}` vil fungere på samme måte som de gjorde i nivå 4.\n"
+    example_code: "## Eksempel Hedy kode\n```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+    intro_text_3: "## Lister\nHvis vi skal sjekke om noe er i en liste så kan vi nå bruke `{in}` kommandoen.\nDenne koden skriver ut 'Vakkert!' hvis du velger grønn eller gul, og 'meh' hvis du skriver noe annet.\n"
+    example_code_3: "```\nvakre_farger {is} grønn, gul\nfarge{is} {ask} 'Hva er din favorittfarge?'\n{if} farge {in} vakre_farger {print} 'Vakert!' {else} {print} 'meh'\n```\n"
+    intro_text_2: "Noen ganger kan kode som bruker `{if}` bli veldig lang. <br>Du kan splitte koden over to linjer og begynne neste linje med `{else}` slik som dette:\n"
+    example_code_2: "```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
     commands:
     -   name: '{print}'
-        explanation: print exactly using quotation marks
-        example: "Example: {print} 'Hello welcome to Hedy.'"
-        demo_code: "{print} 'Hello welcome to Hedy.'"
+        explanation: skriv ut nøyaktig det du vil med fnutter
+        example: "Eksempel: {print} 'Hallo, velkommen til Hedy.'"
+        demo_code: "{print} 'Hallo, velkommen til Hedy.'"
     -   name: '{ask}'
-        explanation: ask something with `{ask}`.
-        example: "Example: color {is} {ask} 'What is your favorite color?'"
-        demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' {is} your favorite!'"
+        explanation: still et spørsmål med `{ask}`.
+        example: "Eksempel: farge {is} {ask} 'Hva er din favorittfarge?'"
+        demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt'"
     -   name: '{if}'
-        explanation: Make a choice with `{if}`
-        example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-        demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-    -   name: '{if} with turtle'
-        explanation: Make a choice with `{if}`
-        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
-        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+        explanation: Ta et valg med `{if}`
+        example: "Eksempel: {if} farge {is} grønn {print} 'vakkert!' {else} {print} 'meh'"
+        demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{if} farge {is} grønn {print} 'vakkert!' {else} {print} 'meh'"
+    -   name: '{if} med skilpadden'
+        explanation: Ta et valg med `{if}`
+        example: 'Eksempel: {if} svaret {is} langt {forward} 100 {else} {forward} 5'
+        demo_code: "svaret {is} {ask} 'Hvor langt skal vi bevege skilpadden?'\n{if} svaret {is} langt {forward} 100 {else} {forward} 5"
     -   name: '{in}'
-        explanation: Check elements with `{in}`
-        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        explanation: Sjekk om lister inneholder elementer `{in}`
+        example: "Eksempel: {if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
+        demo_code: "vakre_farger {is} grønn, gul\nfarge {is} {ask} 'Hva er din favoritt farge'\n{if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
 7:
-    start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
-    intro_text: "## Level 7! Level 7!\nLevel 7 adds the `{repeat}` command. {repeat} can be used to execute one line of code multiple times.\n"
-    example_code: "## Example Hedy code\n```\n{repeat} 3 {times} {print} 'Hedy {is} fun!'\n```\n"
+    start_code: "{repeat} 3 {times} {print} 'Hedy er morro!'"
+    intro_text: "## Nivå 7! Nivå 7!\nNivå 7 legger til `{repeat}` kommandoen. {repeat} kan brukes til å kjøre en kodelinje flere ganger.\n"
+    example_code: "## Eksempel Hedy kode\n```\n{repeat} 3 {times} {print} 'Hedy {is} morro!'\n```\n"
     commands:
     -   name: '{print}'
-        explanation: print exactly using quotation marks
-        example: "Example: {print} 'Hello welcome to Hedy.'"
-        demo_code: "{print} 'Hello welcome to Hedy.'"
+        explanation: skriv nøyaktiv med bruk av fnutter
+        example: "Eksempel: {print} 'Hallo, velkommen til Hedy.'"
+        demo_code: "{print} 'Hallo, velkommen til Hedy.'"
     -   name: '{ask}'
-        explanation: ask something with `{ask}`.
-        example: "Example: color = {ask} 'What is your favorite color?'"
-        demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+        explanation: still et spørsmål med `{ask}`.
+        example: "Eksempel: farge = {ask} 'Hva er din favorittfarge?'"
+        demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt!'"
     -   name: '{if}'
-        explanation: Make a choice with `{if}`
-        example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-        demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-    -   name: '{repeat} - turtle'
-        explanation: repeat a line of code with `{repeat}`.
-        example: 'Example: {repeat} 3 {times} {forward} 10'
+        explanation: Ta et valg med `{if}`
+        example: "Eksempel: {if} farge{is} grønn {print} 'Vakkert!' {else} {print} 'meh'"
+        demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{if} farge {is} grønn {print} 'Vakkert!' {else} {print} 'meh'"
+    -   name: '{repeat} - skillpadde'
+        explanation: gjenta en kodelinje med `{repeat}`.
+        example: 'Eksempel: {repeat} 3 {times} {forward} 10'
         demo_code: '{repeat} 3 {times} {forward} 10'
 8:
-    start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
-    intro_text: "## Indentation\n`{ask}` {and} `{print}` still work as you know them. But `{if}` {and} `{repeat}` have changed!\nYou can now execute groups of code together, but you will have to *indent* the code.\nThat means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.\n"
-    example_code: "## Example Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
+    start_code: "{repeat} 5 {times}\n    {print} 'Hallo folkens'\n    {print} 'Dette vil bli skrevet ut 5 ganger'"
+    intro_text: "## Indentering\n`{ask}` {and} `{print}` fungerer fortsatt slik du er vandt til. Men `{if}` {and} `{repeat}` har endret seg litt!\nDu kan nå kjøre små blokker med kode sammen, men du må *indentere* koden.\nDet betyr at du må legge til fire mellomrom på starten av kodelinjen. Du må også indtentere når du skal lage en blokk på en linje.\n"
+    example_code: "## Eksempel Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hallo alle sammen'\n    {print} 'Dette blir gjentatt 5 ganger'\n```\n"
     commands:
     -   name: '{print}'
-        explanation: print something. Remember to use a quotation mark for literal printing.
-        example: "Example: {print} '5 times 5 is ' 5 * 5"
-        demo_code: "{print} '5 times 5 is ' 5 * 5"
+        explanation: skriv noe. Husk å bruke fnutter når du skal skrive ut tekst.
+        example: "Eksempel: {print} '5 {times} 5 {is} ' 5 * 5"
+        demo_code: "{print} '5 {times} 5 {is} ' 5 * 5"
     -   name: '{ask}'
-        explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-        example: "Example: answer {is} {ask} 'What is 5 plus 5?'"
-        demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
-    -   name: '`{repeat}` with turtle'
+        explanation: spør om svaret på et regnestykke og sjekk om det er rett. Vi kan printe to linjer nå.
+        example: "Eksempel: svaret {is} {ask} 'Hva er 5 pluss 5?'"
+        demo_code: "svaret = {ask} 'What is 5 plus 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Du har helt rett, svaret er ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
+    -   name: '`{repeat}` med skilpadden'
         explanation: '{repeat} flere linjer'
         example: 'Eksempel: tegn en firkant'
         demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
-    start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'"
-    intro_text: "## All together now!\nIn this level you can not only use multiple lines with `{if}` {and} `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
-    example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
+    start_code: "{repeat} 3 {times}\n    matrett = {ask} 'Hva vil du ha?'\n    {if} matrett {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza er bedre'"
+    intro_text: "## Alt på en gang nå!\nIn this level you can not only use multiple lines with `{if}` {and} `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
+    example_code: "## Eksempel Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
     commands:
     -   name: '`{if}` with multiple lines'
         explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
-        example: "Example: answer = {ask} 'What is 20 plus 20?'"
+        example: "Eksempel: answer = {ask} 'What is 20 plus 20?'"
         demo_code: "answer = {ask} 'What is 20 plus 20?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\nelse\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
     -   name: '`{repeat}` and turtle'
         explanation: '{repeat} multiple lines'
         example: 'Eksempel : tegn en firkant'
         demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
-    start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
+    start_code: "dyr {is} hund, katt, flyndre\n{for} et_dyr {in} dyr\n  {print} 'I love ' et_dyr"
     intro_text: "## For each item in my list...\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces.\n"
-    example_code: "## Example Hedy code\n```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
+    example_code: "## Eksempel Hedy code\n```\ndyr {is} hund, katt, flyndre\n{for} et_dyr {in} dyr\n  {print} 'I love ' et_dyr\n```\n"
     commands:
     -   name: '{print}'
         explanation: print something. Remember to use a quotation mark for literal printing.
-        example: "Example: {print} '5 times 5 is ' 5 * 5"
+        example: "Eksempel: {print} '5 times 5 is ' 5 * 5"
         demo_code: "{print} '5 times 5 is ' 5 * 5"
     -   name: '{for} med en liste'
         explanation: 'print all things in a list '
-        example: 'Example: {for} animal {in} animals'
-        demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
+        example: 'Eksempel: {for} et_dyr {in} dyr'
+        demo_code: "dyr {is} hund, katt, flyndre\n{for} et_dyr {in} dyr\n  {print} 'I love ' et_dyr"
 11:
     start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
     intro_text: "## Loops!\n`{print}` works just the same but the we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.\nTry it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)\n"
-    example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
+    example_code: "## Eksempel Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
     commands:
     -   name: '{for} loop'
         explanation: We can use `{for}` with a {range}
@@ -259,12 +259,12 @@
         demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
     -   name: '{ask}'
         explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-        example: "Example: answer = {ask} 'What is 5 plus 5?'"
+        example: "Eksempel: answer = {ask} 'What is 5 plus 5?'"
         demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
 13:
-    start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
+    start_code: "name = {ask} 'Hva heter du?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
     intro_text: "## And... Or..?\nWe are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.\n"
-    example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+    example_code: "```\nname = ask 'Hva heter du?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
     commands:
     -   name: '{and}'
         explanation: Two parts both need to be correct
@@ -277,11 +277,11 @@
 14:
     start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\nelse\n    {print} 'You are older than me!'"
     intro_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n"
-    example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+    example_code: "## Eksempel Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
     intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-    example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
+    example_code_2: "```\nname = {ask} 'Hva heter du??'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
     intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-    example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+    example_code_3: "```\nname = {ask} 'Hva heter du??'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
     commands:
     -   name: Mindre
         explanation: We use the `<` to check if the first number is smaller than the second number.
@@ -310,7 +310,7 @@
 16:
     start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
     intro_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists.\n"
-    example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+    example_code: "## Eksempel Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
     commands:
     -   name: firkantparantes
         explanation: Lists with square brackets
@@ -350,5 +350,5 @@
         demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
     -   name: '{if}'
         explanation: We need to do the same with all of our `{if}` statements
-        example: if colour {is} green:'
-        demo_code: "colour = {ask} 'What is your favorite color?'\n{if} colour == 'green':\n    {print} 'Your favorite colour is green'\n{else}:\n    {print} 'Your favorite colour is not green'"
+        example: if colour {is} grønn:'
+        demo_code: "colour = {ask} 'Hva er din favorittfarge?'\n{if} colour == 'grønn':\n    {print} 'Your favorite colour is grønn'\n{else}:\n    {print} 'Your favorite colour is not grønn'"
