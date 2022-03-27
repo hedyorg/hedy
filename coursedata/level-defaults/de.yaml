@@ -1,16 +1,11 @@
 1:
     intro_text: |
-        Willkommen bei Hedy! In Level 1 kannst du die Befehle `print`, `ask` und `echo` verwenden. 
-
-        Hedy benutzt englische Wörter für Befehle wie die meisten Programmiersprachen. `print` bedeutet drucken oder auf den Bildschirm ausgeben, `ask` bedeutet fragen und `echo` bedeutet wiederholen.
-
-        Auf der linken Seite deines Bildschirms befinden sich alle Befehle des Level 1.
-
-        Drücke den blauen Knopf und der Befehl wird in dein Programm übernommen!
-
+        ## Willkommen bei Hedy!
+        In Level 1 kannst du die Befehle `print`, `ask` und `echo` verwenden.
+        Tippe den Code in das Programmierfeld. Oder drücke den grünen Knopf beim Beispielcode um ihn in dein Programm zu übernehmen!
         Probiere den Code selbst mit der grünen Schaltfläche 'Code ausführen' unter dem linken Programmierfeld aus.
 
-        Du weißt nicht, was du erstellen sollst? Auf den nächsten Tabs findest du einige Ideen, was du erstellen kannst.
+        Du kannst Text auf dem Bildschirm ausgeben lassen indem du den Befehl `{print}` verwendest.
     start_code: "print Hallo Welt!"
     commands:
     -   name: "print"
@@ -23,23 +18,20 @@
         demo_code: "ask Was ist deine Lieblingsfarbe?"
     -   name: "echo"
         explanation: "Wiederhole etwas mit `echo`."
-        example: "Beispiel: echo Also deine Lieblingsfarbe ist"
+        example: "Beispiel: echo Also deine Lieblingsfarbe ist "
         demo_code: |-
             ask Was ist deine Lieblingsfarbe?
-            echo Also deine Lieblingsfarbe ist 
+            echo Also deine Lieblingsfarbe ist
     -   name: forward
-        explanation: Zeichne eine Linie mit `forward`.
+        explanation: Gebe ein emoji mit `{print}`aus
         example: 'Beispiel: forward 100'
         demo_code: forward 100
     -   name: turn
-        explanation: Zeichne eine sich drehende Schildkröte mit `turn`
+        explanation: Zeichne eine Linie mit `forward`.
         example: turn
         demo_code: |-
-            forward 25
-            turn left
-            forward 25
-            turn right
-    -   demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+            {forward} 100
+    -   demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
         explanation: Drehe die Schildkröte mit `{turn}`
         example: 'Beispiel: {turn}'
         name: '{turn}'
@@ -49,17 +41,11 @@
     intro_text_3: "Lass uns loslegen! Weißt du nicht was du programmieren sollst? In den nächsten Tabs warten Ideen für Programme auf dich.\n"
 2:
     intro_text: |
-        In Level 2 lernen wir etwas Neues. Du kannst ein Wort mit `is` benennen. `is` bedeutet ist. 
+        ## Variablen
+        In Level 2 lernen wir zwei neue Befehle: `{is}`und `{sleep}`.
+        Du kannst ein Wort mit `is` benennen. Das nennt man eine Variable. In diesem Beispiel machen wir eine Variable die sich Name nennt, und eine Variable die sich Alter nennt. Du kannst das Wort Name irgendwo in deinem Code verwenden und es wird dann durch Hedy ersetzt, und zwar so:
 
-        Wenn Du den Code `name is Hedy` oben in Dein Programm einfügst, kannst du `name` überall verwenden. Er wird dann durch "Hedy" ersetzt.
-
-        `ask` hat sich in Level 2 geändert. Die Antwort speicherst Du auch unter einem Namen ab:
-
-        ```
-        antwort is ask Wie heißt du?
-        ```
-
-        `print` funktioniert immer noch wie in Level 1, und Du benötigst `echo` nicht mehr.
+        Deswegen benötigst du den Befehl `echo` nicht mehr!
     start_code: "print Hallo Welt!"
     commands:
     -   name: "is"
@@ -72,11 +58,11 @@
         explanation: "Frage etwas mit `ask`. Aber pass auf! Du musst der Antwort einen Namen mit `is` geben."
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
         demo_code: |-
-            farbe is ask Was ist deine Lieblingsfarbe?
-            print Du magst am liebsten farbe
+            Farbe is ask Was ist deine Lieblingsfarbe?
+            print Du magst am liebsten Farbe !
     -   name: sleep
         explanation: Lass Hedy für ein paar Sekunden pausieren.
-        example: sleep 2
+        example: 'Beispiel: sleep 2 '
         demo_code: |-
             print Lass mich einen Moment nachdenken...
             sleep
@@ -89,7 +75,7 @@
             winkel is 90
             turn winkel
             forward 100
-        name: is - turtle
+        name: is - Schildkröte
     example_code: "## Example code\n```\nName {is} Hedy\nAlter {is} 15\n{print} Name ist Alter Jahre alt\n```\n"
     intro_text_2: "`{print}` funktioniert genauso wie vorher, aber der Befehl `{ask}` hat sich verändert. Du brauchst jetzt auch für den Befehl `{ask}` eine Variable. Das sieht so aus:\n"
     example_code_2: "```\nAntwort {is} {ask} Wie heißt du?\n{print} Hallo Antwort\n```\n"
@@ -97,18 +83,12 @@
     example_code_3: "```\n{print} Meine Lieblingsfarbe ist...\n{sleep} 2\n{print} grün!\n```\n"
 3:
     intro_text: |
-        In Level 3 kannst Du auch eine Liste erstellen. Du kannst den Computer etwas zufällig aus der Liste auswählen lassen. Du machst dies mit `at random` (es bedeutet zufällig und man spricht es "ät rän-dum" aus).
-
-        ```
-        tiere is Hund, Katze, Känguru
-        print tiere at random
-        ```
-
-        Du findest alle Befehle des Level 3 in der linken Leiste. Weitere Aufgaben findest du auf den folgenden Tabs.
+        ## Erstelle eine Liste!
+        In Level 3 kannst Du eine Liste erstellen. Du kannst den Computer etwas zufällig aus der Liste auswählen lassen. Du machst dies mit `at random` (es bedeutet zufällig und man spricht es "ät rän-dum" aus).
     start_code: "print Hallo Welt!"
     commands:
-    -   name: "choose_random"
-        explanation: "Wähle mit `at` und `random` zufällig ein Wort aus einer Gruppe aus."
+    -   name: "wähle_zufällig"
+        explanation: "Wähle mit `at` und `random` zufällig ein Wort aus einer Gruppe aus"
         example: "Beispiel: tiere is Hund, Katze, Känguru."
         demo_code: |-
             tiere is Hund, Katze, Känguru
@@ -131,6 +111,7 @@
 4:
     start_code: "print 'Hallo Welt'"
     intro_text: |
+        ## 'Anführungszeichen'
         In Level 4 haben sich `print` und `ask` geändert.
 
         Du musst Text, den du genau so mit `print` ausgeben möchtest, in Anführungszeichen setzen.
@@ -138,10 +119,6 @@
         Das ist nützlich, denn nun kannst du alle Wörter ausgeben, die du möchtest. Auch die Wörter, mit denen du etwas mit `is` gespeichert hast.
 
         Die meisten Programmiersprachen verwenden beim `print`-Befehl Anführungszeichen, sodass wir dem echten Programmieren einen Schritt näher kommen!
-
-        ## Aufgaben werden immer schwieriger
-        Du findest die Befehle wieder auf der linken Seite und die Aufgaben auf den folgenden Tabs. Die Aufgaben werden nun von Tab zu Tab immer schwieriger.
-        Beginne darum links mit der Geschichte und arbeite dich für größere Herausforderungen weiter nach rechts vor.
     commands:
     -   name: "print"
         explanation: "Benutze Anführungszeichen, um einen Text genau so auszugeben."
@@ -166,21 +143,10 @@
         name is ask 'Wie heisst du?'
         if name is Hedy print 'Toll!' else print 'Blöd'
     intro_text: |
+        ## Falls... sonst...
+        In Level 5 gibt es etwas neues, nämlich das `if`! Mit `if` kannst du zwischen zwei verschiedenen Möglichkeiten wählen.
+        Dieser Code gibt 'Toll!' aus, wenn du Hedy als Namen eingibst, und 'Blöd!', wenn du etwas anderes eingibst.
         `ask` und `print` funktionieren immer noch wie in Level 4.
-
-        In Level 5 gibt es etwas Neues, `if` und `else`! `if` ist Englisch für wenn, `else` bedeutet sonst. Mit `if` und `else` kannst du zwischen zwei verschiedenen Möglichkeiten wählen.
-
-        ## Beispiel Hedy Code
-        ```
-        Name is ask 'wie ist Ihr Name?'
-        if Name is Hedy print 'Toll!' else print 'Blöd!'
-        ```
-
-        Dieser Code gibt 'Toll!' aus, wenn du Hedy als Namen eingibst, und 'Blöd!', wenn de etwas anderes eingibst.
-
-        ## Aufgaben werden immer schwieriger
-
-        Auch in Stube 4 werden die Aufgaben in den Tabs immer etwas schwieriger. Löse sie also von links nach rechts.
 
     commands:
     -   name: "print"
@@ -220,19 +186,13 @@
 6:
     start_code: "print '5 mal 5 ist ' 5 * 5"
     intro_text: |
-        `ask`,` print` und `if` funktionieren immer noch wie in Level 5.
-        Aber in Level 6 gibt es etwas Neues, das du jetzt auch berechnen kannst.
+        ## 1 + 1
+        In diesem Level lernst du etwas neues: du kannst jetzt auch rechnen.
 
-        Das Plus schreibst du wie in Mathe: `5 + 5` zum Beispiel. Das Minus funktioniert genauso, zum Beispiel `5 - 5`.
+        Das Plus ist leicht, das schreibst du wie in Mathe: `5 + 5` zum Beispiel. Das Minus funktioniert genauso, zum Beispiel `5 - 5`.
 
-        Das Mal sind etwas anders, da auf deiner Tastatur kein Malzeichen (`·`) vorhanden ist. Suche mal, das gibt es wirklich nicht!
-        Deshalb multiplizieren wir mit dem Stern über dem Plus: `5 * 5`. Lies dies als "5 mal 5", dann kannst du dich am einfachsten daran erinnern.
-        ## Beispiel Hedy Code
-        ```
-        print '5 plus 5 ist ' 5 + 5
-        print '5 minus 5 ist ' 5 - 5
-        print '5 mal 5 ist ' 5 * 5
-        ```
+        Das Mal ist etwas anders, da auf deiner Tastatur kein Malzeichen (`·`) vorhanden ist. Suche mal, das gibt es wirklich nicht!
+        Deshalb multiplizieren wir mit dem Stern (auf der Tastatur über dem Plus): `5 * 5`. Lies das mal als "5 mal 5", dann kannst du dich am einfachsten daran erinnern.
 
     commands:
     -   name: "print"
@@ -253,22 +213,13 @@
             angle = 360 / angles
             forward 50
     example_code: "## Hedy Beispiel-Code\n```\n{print} '5 plus 5 macht ' 5 + 5\n{print} '5 minus 5 macht ' 5 - 5\n{print} '5 {times} 5 macht ' 5 * 5\n```\n"
-    intro_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\nWir verändern auch wie du ein Wort in einer Variable speichern kannst! Du darfst jetzt `=`anstatt `{is}` verwenden, wenn du ein Wort oder eine Zahl in einer Variable speicherst, und zwar so:\n"
+    intro_text_2: "Wir verändern auch wie du ein Wort in einer Variable speichern kannst! Du darfst jetzt `=`anstatt `{is}` verwenden, wenn du ein Wort oder eine Zahl in einer Variable speicherst, und zwar so:\n"
     example_code_2: "```\nName = Hedy\nAntwort = 20 + 4\n```\n"
 7:
     start_code: "repeat 3 times print 'Hedy macht Spaß!'"
     intro_text: |
-        `ask`, `print` und `if` funktionieren genau wie in Level 5 und 6.
-        Aber in Level 7 kommt der `repeat` Befehl dazu.
-        `repeat` bedeutet wiederhole.
-        Mit `repeat` kannst du eine Befehlszeile mehrmals auszuführen. 
-        Dabei kannst du angeben, wie oft etwas wiederholt werden soll.
-        `repeat 3 times` bedeutet zum Beispiel wiederhole 3 mal.
-
-        ## Beispiel Hedy code
-        ```
-        repeat 3 times print 'Hedy macht Spaß!'
-        ```
+        ## Level 7! Level 7!
+        In Level 7 kommt der Befehl `{repeat}`dazu. Mit {repeat} kannst du eine Zeile Code mehrmals ausführen.
     commands:
     -   name: "print"
         explanation: "Benutze Anführungszeichen, um einen Text genau so auszugeben."
@@ -298,17 +249,10 @@
             print 'Hello Leute'
             print 'Das wird 5 mal ausgegeben'
     intro_text: |
-        `ask` und `print` funktionieren immer noch wie du sie kennst.
-        Aber `if` und `repeat` haben sich verändert!
-        Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst die Befehle einrücken.
-        Das heisst, du musst die Befehlszeile mit vier Leerzeichen beginnen.
-        Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
-        ## Beispiel Hedy-Code
-        ```
-        repeat 5 times
-            print 'Hallo Leute'
-            print 'Dies wird 5 mal wiederholt'
-        ```
+        ## Die Einrückung
+        `ask` und `print` funktionieren immer noch wie du es gewohnt bist. Aber `if` und `repeat` haben sich verändert!
+        Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst den Code dafür *einrücken*.
+        Das bedeutet dass du die Befehlszeilen mit vier Leerzeichen beginnen musst. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
     commands:
     -   name: "print"
         explanation: "Gib etwas aus. Denke daran, Anführungszeichen für eine wörtliche Ausgabe zu verwenden."
@@ -336,25 +280,16 @@
 9:
     start_code: |-
         repeat 3 times
-            food = ask 'Was möchtest du gern?'
-            if food is 'Pizza'
+            Essen = ask 'Was möchtest du gern?'
+            if Essen is 'Pizza'
                 print 'Gut!'
             else
                 print 'Pizza ist besser'
     intro_text: |
-        In diesem Level lernst du wie die `if` und `repeat` zusammen verwenden kannst.
+        ## Jetzt alles auf einmal!
+        In diesem Level kannst du nicht nur mehrere Zeilen mit `if` und `repeat` verwenden, du kannst sie auch kombinieren!
         Im Beispiel siehst du einen `if` Befehl innerhalb eines `repeat` Befehls. Es ist auch anders herum erlaubt. Und ebenso ist `if` innerhalb eines anderen `if` Befehls erlaubt, genau wie `repeat` in einem anderen `repeat` Befehl.
         Versuch es mal!
-
-        ## Beispiel Hedy code
-        ```
-        repeat 3 times
-            food = ask 'Was möchtest du gern?'
-            if food is 'Pizza'
-                print 'Gut!'
-            else
-                print 'Pizza ist besser'
-        ```
 
     commands:
     -   name: "`if` with multiple lines"
@@ -370,7 +305,7 @@
                 print 'The answer is 20'
     -   name: "`repeat` and turtle"
         explanation: "Repeat multiple lines"
-        example: "Example: create a square"
+        example: "Beispiel: Zeichne ein Quadrat"
         demo_code: |-
             repeat 4 times
                 turn 90
@@ -382,22 +317,16 @@
         for animal in animals
           print 'I love ' animal
     intro_text: |
-        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
-        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
-
-        ## Example Hedy code
-        ```
-        animals is dog, cat, blobfish
-        for animal in animals
-          print 'I love ' animal
-        ```
+        ## Für jedes Element in meiner Liste...
+        In diesem Level lernen wir den neuen Befehl `for`. Mit `for` kannst du eine Liste machen und alle ihre Elemente verwenden.
+        `for` erstellt einen Block, so wie `repeat` und `if`, daher müssen alle Zeilen in dem Block mit Leerzeichen beginnen.
     commands:
     -   name: "print"
         explanation: "Print something. Remember to use a quotation mark for literal printing."
         example: "Example: print '5 times 5 is ' 5 * 5"
         demo_code: "print '5 times 5 is ' 5 * 5"
     -   name: "for with a list"
-        explanation: "print all things in a list "
+        explanation: "gebe alle Elemente einer Liste aus "
         example: "Example: for dier in dieren"
         demo_code: |-
             animals is dog, cat, blobfish
@@ -406,22 +335,18 @@
     example_code: "## Hedy Beispiel-Code\n```\nTiere {is} Hund, Katze, Kugelfisch\n{for} Tier {in} Tiere\n  {print} 'Ich mag ' Tier\n```\n"
 11:
     start_code: |-
-        for i in range 1 to 10
-            print i
-        print 'Bereit oder nicht, hier komme ich!'
-    intro_text: |-
-        `print` funktioniert genauso, aber `repeat` wird jetzt durch `for` ersetzt! 
-        Du verwendest `for i in range 1 to 5`, anstelle von `repeat 5 times`. 
-        `for i in range 1 to 5` bedeutet "für i im Bereich von 1 bis 5".
-        Du kannst auch `i` in Deinem Programm verwenden! 
-        Denke daran, Einrückungen nach den `for`- und `if`-Anweisungen zu verwenden (Das bedeutet, einen Satz mit vier Leerzeichen zu beginnen)."
+        for Zähler in range 1 to 5
+            print Zähler
+    intro_text: |
+        ## Schleifen!
+        `print` funktioniert exakt genauso, aber wir verwenden jetzt die neue Form des Befehls `for`. Du kannst jetzt `{for} Zähler {in} {range} 1 {to} 5` schreiben und `Zähler` in deinem Programm verwenden.
+        Probier es mal aus, und schau was passiert! Denke daran, Einrückungen nach den `for`- und `if`-Anweisungen zu verwenden (Das bedeutet, einen Satz mit vier Leerzeichen zu beginnen).
     commands:
     -   explanation: "wir ersetzen `repeat` mit `for`"
         example: "for i in range 1 to 10"
-        demo_code: |
-            for i in range 1 to 10
-              print i
-            print 'Bereit oder nicht, hier komme ich!'
+        demo_code: |-
+            for Zähler in range 1 to 5
+              print Zähler
         name: '{for}-Schleife'
     -   name: '{ask}'
         explanation: Frag nach der Antwort zu einer Summe und überprüfe ob sie stimmt. Wir können jetzt zwei Zeilen ausgeben.
@@ -433,22 +358,11 @@
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
     intro_text: |
-        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
-
-        For this level on you will also have to use quotation marks when storing a text with `is`:
-
-        ```
-        name = 'Hedy'
-        print 'Hello ' name
-        ```
-
-        For numbers, you do not use quotation marks in the `is`:
-        ```
-        score = 25
-        print 'You got ' score
-        ```
+        ## Zahlen und Texte
+        **Dezimalzahlen**
+        Bis jetzt konntest du mit Hedy keine Dezimalzahlen (das sind Kommazahlen) wie 1.5 verwenden, aber jetzt geht das. Denke daran, dass Computer anstatt des Kommas einen Punkt ('.') verwenden.
     commands:
-    -   name: "float directly"
+    -   name: "float direkt"
         explanation: "Calculation with decimals"
         example: "print 2.5 + 2.5"
         demo_code: |
@@ -459,10 +373,8 @@
         explanation: "Storing a calculation with decimals"
         example: "antwoord = 2.5 + 2.5"
         demo_code: |
-            answer = 2.5 + 2.5
-            print 'Calculate away!'
-            print 'Two and a half plus two and a half is...'
-            print answer
+            Name = 'Hedy der Roboter'
+            {print} 'Hallo ' Name
 
     -   name: Anführungszeichen nach einem {if} Vergleich
         example: Name = 'Hedy'
@@ -489,11 +401,9 @@
         Alter = ask 'Wie alt bist Du?'
         if Name is 'Hedy' and Alter is 2
             print 'Du bist die echte Hedy!'
-    intro_text: |-
-        Wir werden jetzt `and` und `or` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `if` verwenden, sondern kannst `und` und `oder` benutzen.
-        Wenn du `und` verwendest, müssen beide Angaben, links und rechts vom `und`, wahr sein.
-        Du kannst auch `oder` verwenden.
-        Dann muss nur eine Aussage richtig sein.
+    intro_text: |
+        ## Und... oder...?
+        Wir werden jetzt `{and}` und `{or}` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `{if}` verwenden, sondern kannst `{and}` und `{or}` benutzen. Wenn du `{and}` verwendest, müssen beide Angaben, also links und rechts vom `{and}`, wahr sein. Du kannst auch `{or}` verwenden. Dann muss nur eine der beiden Aussage wahr sein.
     commands:
     -   name: "`and`"
         explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
@@ -507,8 +417,7 @@
                 print 'Mindestens eine Antwort ist falsch.'
     -   name: "`or`"
         explanation: |-
-            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein.
-            Wenn beide richtig sind, ist es auch in Ordnung.
+            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein. Wenn beide richtig sind, ist es auch in Ordnung.
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
             antwort1 = ask 'Was ergibt 3+2?'
@@ -551,16 +460,18 @@
             print 'Du bist jünger als ich!'
         else
             print 'Du bist älter als ich!'
-    intro_text: |-
-        Wir lernen weitere neue Elemente kennen!
-        Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen
-        Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, wie `4 < 5`.
-        Das `>` prüft, ob die erste Zahl größer als die zweite ist, wie z.B. `6 > 5`.
+    intro_text: |
+        ## Groß, größer, am größten!
+        Wir lernen weitere neue Elemente kennen! Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen.
+        Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, so überprüft `Alter < 12` zum Beispiel ob `Alter` kleiner als 12 ist.
+        Wenn du überprüfen willst, ob die erste Zahl kleiner oder gleich der zweiten ist, kannst du `<=`verwenden, zum Beispiel `Alter <= 11`.
+        Das `>` prüft, ob die erste Zahl größer als die zweite ist, so überprüft `Punkte > 10` zum Beispiel ob `Punkte` größer als 10 ist.
+        Wenn du überprüfen willst, ob die erste Zahl größer oder gleich der zweiten ist, kannst du `>=`verwenden, also zum Beispiel `Punkte >= 11`.
+        All diese Vergleiche kannst du mit einem `{if}`verwenden, das geht so:
     commands:
     -   name: "Kleiner"
         explanation: |-
-            Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist.
-            Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
+            Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist. Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
         example: "alter < 13"
         demo_code: |-
             alter = ask 'Wie alt bist du?'
@@ -568,8 +479,7 @@
                 print 'Du bist jünger als ich!'
     -   name: "Größer"
         explanation: |-
-            Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist.
-            Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
+            Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist. Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
         example: "alter > 13"
         demo_code: |-
             alter = ask 'Wie alt bist du?'
@@ -602,9 +512,11 @@
         while antwort != 25
             antwort = ask 'Wieviel ist 5 mal 5?'
             print 'Das ist die richtge Antwort!'
-    intro_text: |-
-        Wir werden eine neue Schleife lernen, die `while`-Schleife!
-        Wir setzen die Schleife so lange fort, bis die Anweisung wahr/gültig ist!
+    intro_text: |
+        ## Mehr Schleifen!
+        Wir lernen eine neue Schleife kennen, die `{while}`-Schleife! Wir setzen die Schleife so lange fort, wie die Aussage wahr ist!
+        Also vergiss nicht den Wert innerhalb der Schleife zu ändern.
+
         Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde.
         Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
     commands:
@@ -618,9 +530,7 @@
                 print 'Das ist die richtge Antwort!'
     -   name: "while mit Ungleichungen"
         explanation: |-
-            Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
-            Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
-            Wir machen das hier mit `zähler = zähler + 1`.
+            Wir können die "while"-Schleife auch mit "<" und ">" verwenden. Beachte, dass du die Zahl ändern musst, damit die Schleife endet. Wir machen das hier mit `zähler = zähler + 1`. 
         example: "while zähler < 3"
         demo_code: |-
             zähler = 1
@@ -633,13 +543,13 @@
     start_code: |-
         früchte = ['Apfel', 'Banane', 'Kirsche']
         print früchte
-    intro_text: |-
-        Wir werden eckige Klammern um Listen setzen!
-        Außerdem müssen wir jetzt einfache Anführungszeichen `'` um Elemente in Listen setzen.
+    intro_text: |
+        ## Wir kommen dem richtigem Code immer näher!
+        Wir setzen jetzt eckige Klammern um Listen, so wie das in Python gemacht wird! Außerdem müssen wir jetzt einfache Anführungszeichen `'` um jedes Element einer Liste setzen, wie wir es in den vorherigen Leveln gelernt haben.
+        Du kannst die eckigen Klammern auch verwenden um eine Stelle in der Liste zu benennen.
     commands:
     -   explanation: |-
-            Wir werden eckige Klammern um Listen setzen!
-            Wir müssen auch `'` um Elemente in Listen setzen.
+            Wir werden eckige Klammern um Listen setzen! Wir müssen auch `'` um Elemente in Listen setzen.
         example: "früchte = ['Apfel', 'Banane', 'Kirsche']"
         demo_code: |-
             früchte = ['Apfel', 'Banane', 'Kirsche']
@@ -647,8 +557,7 @@
         name: Eckige Klammern
     -   name: "Nimm ein Element aus einer Liste"
         explanation: |-
-            Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
-            Mit `früchte[1]` erhalten wir also die erste Frucht aus der Liste.
+            Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`. Mit `früchte[1]` erhalten wir also die erste Frucht aus der Liste!
         example: "erste_frucht = früchte[1]"
         demo_code: |-
             früchte = ['Apfel', 'Banane', 'Kirsche']
@@ -656,8 +565,7 @@
             print erste_frucht
     -   name: "Nimm ein zufälliges Element aus einer Liste"
         explanation: |-
-            Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`.
-            Mit früchte[random] erhalten wir also eine zufällige Frucht aus der Liste.
+            Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`. Mit früchte[random] erhalten wir also eine zufällige Frucht aus der Liste!
         example: "zufällige_frucht = früchte[random]"
         demo_code: |-
             früchte = ['Apfel', 'Banane', 'Kirsche']
@@ -670,39 +578,50 @@
         for i in range 1 to 10:
             print i
         print 'Bereit oder nicht, hier komme ich!'
-    intro_text: |-
-        Jetzt werden wir ein wenig an der Einrückung ändern.
-        Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
+    intro_text: |
+        Jetzt werden wir ein wenig an der Einrückung ändern. Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
+
+        In diesem Level kannst du außerdem einen neuen Befehl benutzen: `{elif}`. `{elif}` ist eine Abkürzung für {else} {if} und du brauchst ihn wenn du drei (oder Mehr!) Optionen machen willst.
+        Probier es mal aus!
+        ```
+        Preise = ['1 Million Euro', 'ein Apfelkuchen', 'nichts']
+        dein_Preis = Preise[random]
+        {print} 'Du gewinnst ' dein_Preis
+        {if} dein_Preis == '1 Million Euro' :
+            {print} 'Juhuu! Du bist reich!'
+        {elif} dein_Preis == 'ein Apfelkuchen' :
+            {print} 'Wunderbar, ein Apfelkuchen!'
+        {else}:
+            {print} 'Viel Glück beim nächsten Mal...'
+        ```
     commands:
-    -   explanation: "Wenn wir ein `for` verwenden, müssen wir ein `:` hinter die `for`-Anweisung setzen!"
+    -   explanation: "`{elif}`."
         example: "for i in range 1 to 10:"
         demo_code: |-
-            for i in range 1 to 12:
-                print i
-            print 'Bereit oder nicht, hier komme ich!'
+            a = 2
+            {if} a == 1:
+                {print} 'a ist gleich 1'
+            {elif} a == 2:
+                {print} 'a ist gleich 2'
+            {else}:
+                {print} 'a ist nicht gleich 1 oder 2'
         name: '{elif}'
-    -   explanation: "Wir müssen dasselbe mit allen unseren `if`-Anweisungen tun."
-        example: "if farbe is grün:'"
+    -   explanation: "Wenn wir ein `{for}` verwenden, müssen wir ein `:` hinter die `{for}` Anweisung schreiben!"
+        example: "for i {in} {range} 1 {to} 10:"
         demo_code: |-
-            farbe = ask 'Was ist deine Lieblingsfarbe?'
-            if farbe is 'grün':
-                print 'Die Farbe ist grün.'
-            else:
-                print 'Die Farbe ist nicht grün.'
+            {for} i {in} {range} 1 {to} 12:
+                {print} i
+            {print} 'Ob ihr bereit seid oder nicht, ich komme!'
         name: '{print}'
     -   explanation: |-
-            Wir zeigen euch einen neuen Befehl, den ihr verwenden könnt: `elif`.
-            `elif` steht für \"else if\".
-            Wir überprüfen zuerst, ob das `if` korrekt ist, wenn das nicht wahr ist, überprüfen wir das `elif` und wenn das auch nicht wahr ist, gehen wir zum `else`."
-        example: "elif a is 5:"
+            Wir müssen dasselbe mit allen unseren `if`-Anweisungen tun.
+        example: "{if} Farbe {is} grün:'"
         demo_code: |-
-            a = 2
-            if a is 1:
-                print 'a ist 1'
-            elif a is 2:
-                print 'a ist 2'
-            else:
-                print 'a ist nicht 1 oder 2'
+            Farbe = {ask} 'Was ist deine Lieblingsfarbe?'
+            {if} Farbe == 'grün':
+                {print} 'Deine Lieblingsfarbe ist grün'
+            {else}:
+                {print} 'Deine Lieblingsfarbe ist nicht grün'
         name: '{if}'
 18:
     start_code: "Name = 'Hedy'\n{print}('Ich heiße ', Name)"
