@@ -52,19 +52,19 @@
     commands:
     -   name: '{while}'
         explanation: Vi kan bruke `{while}`løkken med ikke-lik
-        example: 'Eksempel: {while} korrekt_svar != 25'
-        demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'A correct svar has been given'"
+        example: 'Eksempel: {while} svar != 25'
+        demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Svaret er korrekt!'"
     -   name: Mindre {while}
-        explanation: 'We can also use the `{while}` loop with `<` and `>`. '
+        explanation: 'Vi kan også bruke `{while}` løkken med `<` og `>`. '
         example: 'For eksempel: {while} antall < 3'
-        demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
+        demo_code: "telling = 1\n{while} telling < 3\n    {print} 'Vi gjør dette ' 3 - telling ' flere ganger'\n    telling = telling + 1\n{print} 'Vi er ferdig å telle'"
     start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Det svaret var riktig'"
     intro_text: "## Flere løkker!\nVi skal lære en ny løkke, `{while}` løkken! Denne løkken fortsetter å kjøre så lenge påstanden er sann.\nDet er derfor veldig viktig å endre verdien i løkken.\n\nI eksempelkoden lar vi løkken kjøre til vi får det riktige svaret.\nHvis ikke vi aldri får det riktige svaret, så fortsetter løkken for alltid!\n"
     example_code: "## Eksempel Hedy kode\n```\nsvar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'A korrekt svar ble gitt'\n```\n"
 1:
     intro_text: "## Velkommen til Hedy\nPå Nivå 1 kan du bruke kommandoene `{print}`, `{ask}` og `{echo}`.\nSkriv koden i programmeringsfeltet, eller trykk på den grønne boksen i eksempelkodeblokken og koden vil bli skrevet for deg!\nPrøv koden self med den grønne 'Kjør kode' knappen under programmeringsfeltet.\n\nDu kan skrive tekst til skjermen ved å bruke `{print}` kommandoen.\n"
     example_code: "## Eksempelkode\n```\n{print} Hallo!\n{print} Velkomen til Hedy!\n```\n"
-    intro_text_2: "Du kan også spørre etter input med `{ask}` og gjenta det tilbake med en `{echo}`kommando.\n"
+    intro_text_2: "Du kan også spørre etter inndata med `{ask}` og gjenta det tilbake med en `{echo}`kommando.\n"
     intro_text_3: "La oss starte! Ikke sikker på hva du vil lage? I de neste fanene finner du ideer til programmer å bygge.\n"
     example_code_2: "## Eksempelkode\n```\n{ask} Hva er navnet ditt?\n{echo} hallo\n```\n"
     start_code: '{print} hallo verden!'
@@ -160,7 +160,7 @@
     intro_text: "## Hvis... ellers...\nPå nivå 5 er det noe nytt å lære seg, `{if}`! Med `{if}` kommandoen kan du velge mellom to forskjellige valg.\nDenne koden skriver ut 'nice' hvis du skriver inn Hedy som navn, og 'buu!' hvis du skriver noe annet.\n`{ask}` and `{print}` vil fungere på samme måte som de gjorde i nivå 4.\n"
     example_code: "## Eksempel Hedy kode\n```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
     intro_text_3: "## Lister\nHvis vi skal sjekke om noe er i en liste så kan vi nå bruke `{in}` kommandoen.\nDenne koden skriver ut 'Vakkert!' hvis du velger grønn eller gul, og 'meh' hvis du skriver noe annet.\n"
-    example_code_3: "```\nvakre_farger {is} grønn, gul\nfarge{is} {ask} 'Hva er din favorittfarge?'\n{if} farge {in} vakre_farger {print} 'Vakert!' {else} {print} 'meh'\n```\n"
+    example_code_3: "```\nvakre_farger {is} grønn, gul\nfarge{is} {ask} 'Hva er din favorittfarge?'\n{if} farge {in} vakre_farger {print} 'Vakert!'\n{else} {print} 'meh'\n```\n"
     intro_text_2: "Noen ganger kan kode som bruker `{if}` bli veldig lang. <br>Du kan splitte koden over to linjer og begynne neste linje med `{else}` slik som dette:\n"
     example_code_2: "```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
     commands:
@@ -253,7 +253,7 @@
     intro_text: "## Løkker!\n`{print}` fungerer på samme måten som før, men vi legger til en ny versjon av `{for}`. Nå kan du skrive`{for} teller {in} {range} 1 {to} 5` and og bruke `teller` i programmet ditt. En {range} er bare noen tall som kommer etter hverandre på tall-linjen.\nPrøv det ut og se hva som skjer! Husk å bruke indentering etter `{for}` og `{if}` uttrykkene (det betyr at du må starte setningen med fire mellomrom)\n"
     example_code: "## Eksempel Hedy kode\n```\n{for} teller {in} {range} 1 {to} 5\n    {print} teller\n```\n"
     commands:
-    -   name: '{for} loop'
+    -   name: '{for} løkke'
         explanation: Vi kan bruke `{for}` med en {range}
         example: '{for} teller {in} {range} 1 {to} 5'
         demo_code: "{for} teller {in} {range} 1 {to} 5\n    {print} teller"
@@ -308,47 +308,47 @@
         example: 'For eksempel: alder >= 14'
         demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder >= 14\n    {print} 'Du er eldre enn meg!'"
 16:
-    start_code: "frukt= ['eple', 'banan', 'kirsebær']\n{print} frukt"
-    intro_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists.\n"
-    example_code: "## Eksempel Hedy kode\n```\nvenner = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' venner[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+    start_code: "frukt = ['eple', 'banan', 'kirsebær']\n{print} frukt"
+    intro_text: "## Mer og mer likt virkelig kode\nVi skal nå lage lister på Python måten, med firkantparanteser rundt listene! Vi beholder fnuttene rundt tekstene i listen slik som vi lærte på et tidligere nivå.\nDu kan bruke firkanparantesene til å peke på en plass i listen.\n"
+    example_code: "## Eksempel Hedy kode\n```\nvenner = ['Ahmed', 'Benjamin', 'Marthe']\nlykketall = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'Lykketallet til ' venner[i]\n    {print} 'er ' lykketall[i]\n```\n"
     commands:
     -   name: firkantparantes
         explanation: Liste med firkantparanteser
-        example: "For eksempel: frukt= ['eple', 'banan', 'kirsebær']"
-        demo_code: "frukt= ['eple', 'banan', 'kirsebær']\n{print} frukt"
+        example: "For eksempel: frukt = ['eple', 'banan', 'kirsebær']"
+        demo_code: "frukt = ['eple', 'banan', 'kirsebær']\n{print} frukt"
     -   name: Hent en ting fra en liste
-        explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
-        example: 'For eksempel: firstfruit = fruit[1]'
-        demo_code: "frukt = ['banan', 'eple', 'kirsebær']\nførstefrukt= frukt[1]\n{print} førstefrukt"
+        explanation: For å hente en ting fra en liste bruker vi `[tall]`. Så frukt[1] betyr, hent første frukten i listen!
+        example: 'For eksempel: førstefrukt = frukt[1]'
+        demo_code: "frukt = ['banan', 'eple', 'vannmelon']\nførstefrukt = frukt[1]\n{print} førstefrukt"
     -   name: Hent en tilfeldig ting fra en liste
-        explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
-        example: 'For eksempel: tilfeldig_frukt {is} frukt[random]'
-        demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[random]\n{print} random_fruit"
+        explanation: For å få en tilfeldig til fra listen bruker vi [{random}]. Så `frukt[{random}]` betyr; hent en tilfeldig frukt fra listen!
+        example: 'For eksempel: tilfeldig_frukt = frukt[{random}]'
+        demo_code: "frukt = ['banan', 'eple', 'vannmelon']\ntilfeldig_frukt = frukt[{random}]\n{print} tilfeldig_frukt"
 18:
     start_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
-    intro_text: "## Level 18\nWe arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('Mitt navn er Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnavn = 'Hedy'\n{print}('Mitt navn er ', navn)\n```"
+    intro_text: "## Level 18\nVi har ankommet nivået hvor vi skriver virkelig pythonkode! Python er riktignok ikke på norsk, men du kan bruke knappen oppe i høyre hjørne av kodefeltet hvis du vil se hvordan koden ser ut på engelsk.\nNå når vi har nådd ekte pythonkode må vi bruke paranteser når vi bruker {print} og {range}.\nDette ser slik ut:\n```\n{print}('Mitt navn er Hedy!')\n```\nFor å skrive ut mer enn en ting må du bruke et komma mellom tingene.\n```\nnavn = 'Hedy'\n{print}('Mitt navn er ', navn)\n```"
     commands:
     -   name: '{print}'
         explanation: Med`{print}` må du bruke paranteser
         example: '{print}'
         demo_code: "{print}('hei!')"
     -   name: '{print} med var'
-        explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+        explanation: Med `{print}` må vi bruke parantes og komma for å skrive ut flere ting
         example: '{print}'
         demo_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
 17:
-    start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-    intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[random]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+    start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller ei, her kommer jeg!'"
+    intro_text: "Nå gjør vi en liten endring i koden når vi bruker indentering. Hver gang vi trenger indentering, må vi nå skrive `:` på linjen før indenteringen.\n\nPå dette nivået kan du også bruke en ny kommando `{elif}`. `{elif}` er en forkortelse for {else} {if} og du trenger det når du har lyst til å lage kode med 3 (eller fler!) alternativer.\nSjekk det ut!\n```\npremier = ['1 million kroner', 'en eplekake', 'ingenting']\ndin_premie = premie[{random}]\n{print} 'Du vinner ' din_premie \n{if} din_premie == '1 million kroner':\n    {print} 'Hurra! Du er rik!'\n{elif} din_premie == 'en eplekake':\n    {print} 'Digg, eplekake!'\n{else}:\n    {print} 'Bedre lykke neste gang..'\n```\n"
     commands:
     -   name: '{elif}'
         explanation: '`{elif}`.'
-        example: '{elif} a {is} 5:'
-        demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
+        example: '{elif} a == 5:'
+        demo_code: "a = 2\n{if} a == 1:\n    {print} 'a er 1'\n{elif} a == 2:\n    {print} 'a er 2'\n{else}:\n    {print} 'a er ikke 1 eller 2'"
     -   name: '{print}'
-        explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
+        explanation: Når vi bruker en `{for}` løkke, må vi legge til `:` på slutten av `{for}` linjen!
         example: 'for i {in} {range} 1 {to} 10:'
-        demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
+        demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Klar eller ei, her kommer jeg!'"
     -   name: '{if}'
-        explanation: We need to do the same with all of our `{if}` statements
-        example: if farge {is} grønn:'
-        demo_code: "colour = {ask} 'Hva er din favorittfarge?'\n{if} colour == 'grønn':\n    {print} 'Your favorite colour is grønn'\n{else}:\n    {print} 'Your favorite colour is not grønn'"
+        explanation: Vi må gjøre det samme med alle `{if}`-sjekkene våre
+        example: "{if} farge == 'grønn':"
+        demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{if} farge == 'grønn':\n    {print} 'Din favorittfarge er grønn'\n{else}:\n    {print} 'Din favorittfarge er ikke grønn'"
