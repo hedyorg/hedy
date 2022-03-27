@@ -275,7 +275,7 @@
         example: '{if} 3 + 2 {is} 5 {or} 2 + 2 {is} 4'
         demo_code: "svar1 = {ask} 'Hva er 3+2?'\nsvar2 = {ask} 'Hva er 2+2?'\n{if} svar1 {is} 5 {or} svar2 {is} 4\n    {print} 'Ihvertfall ett svar er riktig!'\nelse\n    {print} 'Begge svarene er feil!'"
 14:
-    start_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'\nelse\n    {print} 'Du er eldre enn meg!'"
+    start_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'\n{else}\n    {print} 'Du er eldre enn meg!'"
     intro_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `alder < 12` checks if `alder` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `alder <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n"
     example_code: "## Eksempel Hedy kode\n```\nalder = {ask} 'Hvor gammel er du?'\n{if} alder > 12\n    {print} 'You are older than I am!'\n```\n"
     intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
