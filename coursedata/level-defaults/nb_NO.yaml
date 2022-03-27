@@ -19,35 +19,35 @@
     example_code_2: "```\nnavn= Hedy\nsvar = 4 + 20\n```\n"
 12:
     commands:
-    -   name: float directly
+    -   name: flyt direkte
         explanation: Desimaltall
         example: '{print} 2.5 + 2.5'
-        demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
+        demo_code: "{print} 'Kjør på med kalkulasjoner!'\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n"
     -   name: tildel tekst
-        explanation: Text with quotation marks after =
-        example: name = 'Hedy'
-        demo_code: "name = 'Hedy the Robot'\n{print} 'Hello ' name\n"
-    -   name: apostrof etter {if}sammenligning
-        explanation: Text with quotation marks after {if}
+        explanation: Tekst med fnutter etter `=`
         example: navn = 'Hedy'
-        demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
+        demo_code: "navn = 'Roboten Hedy'\n{print} 'Hello ' navn\n"
+    -   name: apostrof etter {if}sammenligning
+        explanation: Tekst med fnutter etter {if}
+        example: navn = 'Hedy'
+        demo_code: "navn = {ask} 'Hvem er du?'\n{if} navn = 'Hedy'\n    {print} 'Hei hei!'\n"
     -   name: hermetegn i liste
-        explanation: A list with quotation marks
-        example: name = 'Hedy', 'Felienne'
-        demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
+        explanation: En liste med fnutter
+        example: navn = 'Hedy', 'Felienne'
+        demo_code: "superhelter = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
     start_code: "{print} 'desimaltall må bruke et punktum nå'\n{print} 2.5 + 2.5"
-    intro_text: "## Numbers and texts\n**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.\n"
-    example_code: "## Eksempel Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-    intro_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-    example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-    intro_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-    example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-    intro_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
-    example_code_4: "```\nname = {ask} 'Hva heter du??'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-    intro_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
-    example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-    intro_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
-    example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+    intro_text: "## Tall og tekst\n**Desimaltall**\nFør dette nivået har det ikke vært mulig å bruke desimaltall som 1.5 i Hedy, men fra nå av kan du det! Legg merke til at datamaskiner bruker punktum `.` som skilletegn i desimaltall.\n"
+    example_code: "## Eksempel Hedy kode\n```\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n```\n"
+    intro_text_2: "**All tekst må være inni fnutter**\nFra dette nivået må du nå ha fnutter rundt tekst som du lagrer ved hjelp av `=`:\n"
+    example_code_2: "```\nnavn = 'Roboten Hedy'\n{print} 'Hallo ' navn\n```\n"
+    intro_text_3: "**All tekst i lister krever nå fnutter også**\nTekst i lister er også tekst, de må også ha fnutter rundt seg. Med dette mener vi at hver element i listen krever fnutter.\nDette lar deg lagre to ord som et element i listen, for eksempel 'Iron Man'.\n"
+    example_code_3: "```\nsuperhelter = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+    intro_text_4: "**All tekst etter `{if}` sammenligninger krever også fnutter nå**\n"
+    example_code_4: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn= 'Roboten Hedy'\n    {print} 'Hei hei!'\n```\n"
+    intro_text_5: "**Tall trenger ikke fnutter**\nNår du lagrer tall med `=` trenger du ikke å bruke fnutter:\n"
+    example_code_5: "```\npoeng = 25\n{print} 'Du fikk ' poeng\n```\n"
+    intro_text_6: "**Matte med ord** Fra dette nivået kan du også bruke `+` tegnet til å legge sammen tekster. For eksempel:\n"
+    example_code_6: "```\na = 'Hallo '\nb = 'verden!'\nprint a + b\n```\n"
 15:
     commands:
     -   name: '{while}'
@@ -120,9 +120,9 @@
         name: er - skilpadde
 3:
     intro_text: "## Lag en liste!\nPå nivå 3 kan du lage lister. Du kan la datamaskinen velge noe tilfeldig fra listen, du gjør det med `{at} {random}`.\n"
-    example_code: "## Eksempel Hedy Code\n\n```\ndyr {is} hund, katt, hest\n{print} dyr {at} {random}\n```\n"
+    example_code: "## Eksempel Hedy kode\n\n```\ndyr {is} hund, katt, hest\n{print} dyr {at} {random}\n```\n"
     intro_text_2: Du kan også legge til ting i listen med `{add}` og fjerne ting fra listen med `{remove}`.
-    example_code_2: "## Eksempel Hedy Code\n\n```\ndyr {is} hund, katt, hest\n{add} pingvin {to_list} dyr\n{remove} katt {from} dyr\n{print} dyr {at} {random}\n```\n"
+    example_code_2: "## Eksempel Hedy kode\n\n```\ndyr {is} hund, katt, hest\n{add} pingvin {to_list} dyr\n{remove} katt {from} dyr\n{print} dyr {at} {random}\n```\n"
     start_code: '{print} hallo verden!'
     commands:
     -   name: velg_tilfeldig
@@ -262,35 +262,35 @@
         example: "Eksempel: svaret = {ask} 'Hva er 5 pluss 5?'"
         demo_code: "svaret = {ask} 'Hva er 5 pluss 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Det var rett og svaret var ' svaret\nelse\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
 13:
-    start_code: "name = {ask} 'Hva heter du?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
-    intro_text: "## And... Or..?\nWe are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.\n"
-    example_code: "```\nname = ask 'Hva heter du?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+    start_code: "navn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy!'"
+    intro_text: "## Og... Eller?\nNå skal vi lære om `{and}` og`{or}`! Hvis du har lyst til å sjekke to påstander trenger du ikke å bruke to `{if}`, du kan bruke `{and}` og `{or}`. Hvis du bruker `{and}` må begge påstandene være sann. Vi kan også bruke `{eller}`, da trenger kun en av påstandene å være sann.\n"
+    example_code: "```\nnavn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy'\n```\n"
     commands:
     -   name: '{and}'
-        explanation: Two parts both need to be correct
-        example: if 3+2 {is} 5 {and} 2+2 {is} 4
-        demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\nelse\n    {print} 'At least one answer is wrong!'"
+        explanation: Begge deler må være korrekt
+        example: '{if} 3 + 2 {is} 5 {and} 2 + 2 {is} 4'
+        demo_code: "svar1 = {ask} 'Hva er 3 + 2?'\nsvar2 = {ask} 'Hva er 2 + 2?'\n{if} svar1 {is} 5 {and} svar2 {is} 4\n    {print} 'Begge svarene må være rett!'\n{else}\n    {print} 'Minst et svar et feil!'"
     -   name: '{or}'
-        explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
-        example: if 3+2 {is} 5 {or} 2+2 {is} 4
-        demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\nelse\n    {print} 'Both answers are wrong!'"
+        explanation: Minst et av svarene må være rett. Det vil også fungere hvis begge er rett.
+        example: '{if} 3 + 2 {is} 5 {or} 2 + 2 {is} 4'
+        demo_code: "svar1 = {ask} 'What is 3+2?'\nsvar2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\nelse\n    {print} 'Both answers are wrong!'"
 14:
-    start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\nelse\n    {print} 'You are older than me!'"
-    intro_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n"
-    example_code: "## Eksempel Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+    start_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'\nelse\n    {print} 'Du er eldre enn meg!'"
+    intro_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `alder < 12` checks if `alder` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `alder <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n"
+    example_code: "## Eksempel Hedy kode\n```\nalder = {ask} 'Hvor gammel er du?'\n{if} alder > 12\n    {print} 'You are older than I am!'\n```\n"
     intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-    example_code_2: "```\nname = {ask} 'Hva heter du??'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
+    example_code_2: "```\nnavn = {ask} 'Hva heter du??'\n{if} navn == 'Hedy'\n    {print} 'You are coo!'\n```\n"
     intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-    example_code_3: "```\nname = {ask} 'Hva heter du??'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+    example_code_3: "```\nnavn = {ask} 'Hva heter du??'\n{if} navn != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
     commands:
     -   name: Mindre
         explanation: We use the `<` to check if the first number is smaller than the second number.
-        example: 'For example: age < 12'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
+        example: 'For example: alder < 12'
+        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'"
     -   name: Større
         explanation: We use the `>` to check if the first number is bigger than the second number.
-        example: 'For example: age > 12'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age > 13\n    {print} 'You are older than me!'"
+        example: 'For example: alder > 12'
+        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder > 13\n    {print} 'Du er eldre enn meg!'"
     -   name: Lik
         explanation: We use the `==` to check if two things are the same.
         example: 'For example: answer == 25'
@@ -301,16 +301,16 @@
         demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
     -   name: Smaller {or} equal
         explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-        example: 'For example: age <= 12'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+        example: 'For example: alder <= 12'
+        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder <= 12\n    {print} 'Du er yngre enn meg!'"
     -   name: Større eller lik
         explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-        example: 'For example: age >= 14'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+        example: 'For example: alder >= 14'
+        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder >= 14\n    {print} 'Du er eldre enn meg!'"
 16:
     start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
     intro_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists.\n"
-    example_code: "## Eksempel Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+    example_code: "## Eksempel Hedy kode\n```\nvenner = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' venner[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
     commands:
     -   name: firkantparantes
         explanation: Lists with square brackets
@@ -325,8 +325,8 @@
         example: 'For example: random_fruit {is} fruit[random]'
         demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[random]\n{print} random_fruit"
 18:
-    start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-    intro_text: "## Level 18\nWe arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+    start_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
+    intro_text: "## Level 18\nWe arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('Mitt navn er Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnavn = 'Hedy'\n{print}('Mitt navn er ', navn)\n```"
     commands:
     -   name: '{print}'
         explanation: With `{print}` you need to use parentheses
@@ -335,7 +335,7 @@
     -   name: '{print} med var'
         explanation: With `{print}` you need to use parentheses and commas if you {print} more items
         example: '{print}'
-        demo_code: "naam = 'Hedy'\n{print}('my name is ', naam)"
+        demo_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
 17:
     start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
     intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[random]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
