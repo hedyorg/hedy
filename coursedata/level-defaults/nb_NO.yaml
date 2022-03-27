@@ -52,15 +52,15 @@
     commands:
     -   name: '{while}'
         explanation: We can use the `{while}` loop with not equal
-        example: 'Eksempel: {while} correct_answer != 25'
-        demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
+        example: 'Eksempel: {while} correct_svar != 25'
+        demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 times 5?'\n{print} 'A correct svar has been given'"
     -   name: Mindre {while}
         explanation: 'We can also use the `{while}` loop with `<` and `>`. '
-        example: 'For example: {while} count < 3'
+        example: 'For eksempel: {while} count < 3'
         demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
-    start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
-    intro_text: "## More loops!\nWe are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!\n"
-    example_code: "## Eksempel Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+    start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Det svaret var riktig'"
+    intro_text: "## More loops!\nWe are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the eksempel code, we continue until a correct svar has been given.\nIf the correct svar is never given, the loop never ends!\n"
+    example_code: "## Eksempel Hedy code\n```\nsvar = 0\nwhile svar != 25\n    svar = ask 'Hva er 5 times 5?'\nprint 'A correct svar has been given'\n```\n"
 1:
     intro_text: "## Velkommen til Hedy\nPå Nivå 1 kan du bruke kommandoene `{print}`, `{ask}` og `{echo}`.\nSkriv koden i programmeringsfeltet, eller trykk på den grønne boksen i eksempelkodeblokken og koden vil bli skrevet for deg!\nPrøv koden self med den grønne 'Kjør kode' knappen under programmeringsfeltet.\n\nDu kan skrive tekst til skjermen ved å bruke `{print}` kommandoen.\n"
     example_code: "## Eksempelkode\n```\n{print} Hallo!\n{print} Velkomen til Hedy!\n```\n"
@@ -217,7 +217,7 @@
     -   name: '{ask}'
         explanation: spør om svaret på et regnestykke og sjekk om det er rett. Vi kan printe to linjer nå.
         example: "Eksempel: svaret {is} {ask} 'Hva er 5 pluss 5?'"
-        demo_code: "svaret = {ask} 'What is 5 plus 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Du har helt rett, svaret er ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
+        demo_code: "svaret = {ask} 'Hva er 5 plus 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Du har helt rett, svaret er ' svaret\n{else}\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
     -   name: '`{repeat}` med skilpadden'
         explanation: '{repeat} flere linjer'
         example: 'Eksempel: tegn en firkant'
@@ -273,39 +273,39 @@
     -   name: '{or}'
         explanation: Minst et av svarene må være rett. Det vil også fungere hvis begge er rett.
         example: '{if} 3 + 2 {is} 5 {or} 2 + 2 {is} 4'
-        demo_code: "svar1 = {ask} 'Hva er 3+2?'\nsvar2 = {ask} 'Hva er 2+2?'\n{if} svar1 {is} 5 {or} svar2 {is} 4\n    {print} 'Ihvertfall ett svar er riktig!'\nelse\n    {print} 'Begge svarene er feil!'"
+        demo_code: "svar1 = {ask} 'Hva er 3 + 2?'\nsvar2 = {ask} 'Hva er 2 + 2?'\n{if} svar1 {is} 5 {or} svar2 {is} 4\n    {print} 'Ihvertfall ett svar er riktig!'\n{else}\n    {print} 'Begge svarene er feil!'"
 14:
     start_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'\n{else}\n    {print} 'Du er eldre enn meg!'"
-    intro_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `alder < 12` checks if `alder` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `alder <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n"
-    example_code: "## Eksempel Hedy kode\n```\nalder = {ask} 'Hvor gammel er du?'\n{if} alder > 12\n    {print} 'You are older than I am!'\n```\n"
-    intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-    example_code_2: "```\nnavn = {ask} 'Hva heter du??'\n{if} navn == 'Hedy'\n    {print} 'You are coo!'\n```\n"
-    intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-    example_code_3: "```\nnavn = {ask} 'Hva heter du??'\n{if} navn != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+    intro_text: "## Stor, Større, Størst!\nVi skal lære enda flere nye ting. Det kan være du allerede kjenner til disse fra mattetimen, `<`og `>`.\n`<` kaller vi 'mindre enn'-tegnet. Dette bruker vi for å sjekke om det første tallet er *mindre enn* det andre, f.eks: `alder < 12`kan leses som `alder er mindre enn 12`.\nHvis du vil sjekke om det første tallet er mindre eller like stort som det andre, kan du bruke `<=`, f.eks: `alder <= 11`.\n`>` kaller vi `større enn`-tegnet. Dette bruker vi for å sjekke om det første tallet er *større enn* det andre, f.eks: `poeng > 10` kan leses som `poeng er større enn 10`.\nHvis du vil sjekke om det første tallet er større eller like stort som det andre, kan du bruke `>=`, f.eks: `poeng >= 11`.\nDu kan bruke disse sammenligningene i en `{hvis}`, for eksempel slik:\n"
+    example_code: "## Eksempel Hedy kode\n```\nalder = {ask} 'Hvor gammel er du?'\n{if} alder > 12\n    {print} 'Du er eldre enn meg!'\n```\n"
+    intro_text_2: "Fra dette nivået, hvis du vil sjekke om to ting er like, kan du nå bruke to er-lik tegn. Dette er måten å sjekke om ting er lik i de fleste programmeringsspråk:\n"
+    example_code_2: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn == 'Hedy'\n    {print} 'Du er kul!'\n```\n"
+    intro_text_3: "Du kan også sjekke om ting *ikke* er lik noe annet ved å bruke `!=`, for eksempel slik:\n"
+    example_code_3: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn != 'Hedy'\n    {print} 'Du er ikke Hedy!'\n```\n"
     commands:
     -   name: Mindre
-        explanation: We use the `<` to check if the first number is smaller than the second number.
-        example: 'For example: alder < 12'
+        explanation: Vi bruker `<` for å sjekke om det første tallet er mindre enn det andre tallet.
+        example: 'For eksempel: alder < 12'
         demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'"
     -   name: Større
-        explanation: We use the `>` to check if the first number is bigger than the second number.
-        example: 'For example: alder > 12'
+        explanation: Vi bruker `>` for å sjekke om det første tallet er større enn det andre.
+        example: 'For eksempel: alder > 12'
         demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder > 13\n    {print} 'Du er eldre enn meg!'"
-    -   name: Lik
-        explanation: We use the `==` to check if two things are the same.
-        example: 'For example: answer == 25'
-        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+    -   name: Er lik
+        explanation: Vi bruker `==` for å sjekke om to ting er like.
+        example: 'For eksempel: svar == 25'
+        demo_code: "svar = {ask} 'Hva er  5 * 5?'\n{if} svar == 25\n    {print} 'Det {is} korrekt!'"
     -   name: Ikke lik
-        explanation: 'We use the `!=` to check if two things are not the same. '
-        example: 'For example: answer != 25'
-        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
-    -   name: Smaller {or} equal
-        explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-        example: 'For example: alder <= 12'
+        explanation: 'Vi bruker`!=` å sjekke om ting er ''ikke lik''. '
+        example: 'For eksempel: svar != 25'
+        demo_code: "svar = {ask} 'Hva er 5 * 5?'\n{if} svar != 25\n    {print} 'Det er ikke korrekt!'"
+    -   name: Mindre {or} lik
+        explanation: Vi bruker `<=` for å sjekke om det første tallet er mindre enn det andre tallet.
+        example: 'For eksempel: alder <= 12'
         demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder <= 12\n    {print} 'Du er yngre enn meg!'"
     -   name: Større eller lik
-        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-        example: 'For example: alder >= 14'
+        explanation: Vi bruker `>=` til å sjekke om det første tallet er større eller lik det andre tallet.
+        example: 'For eksempel: alder >= 14'
         demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder >= 14\n    {print} 'Du er eldre enn meg!'"
 16:
     start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
@@ -314,15 +314,15 @@
     commands:
     -   name: firkantparantes
         explanation: Lists with square brackets
-        example: "For example: fruit = ['apple', 'banana', 'cherry']"
+        example: "For eksempel: fruit = ['apple', 'banana', 'cherry']"
         demo_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
     -   name: Get an item from a list
         explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
-        example: 'For example: firstfruit = fruit[1]'
+        example: 'For eksempel: firstfruit = fruit[1]'
         demo_code: "fruit = ['banana', 'apple', 'cherry']\nfirstfruit = fruit[1]\n{print} firstfruit"
     -   name: Get a random item from a list
         explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
-        example: 'For example: random_fruit {is} fruit[random]'
+        example: 'For eksempel: random_fruit {is} fruit[random]'
         demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[random]\n{print} random_fruit"
 18:
     start_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
