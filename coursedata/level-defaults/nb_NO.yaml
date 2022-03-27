@@ -53,14 +53,14 @@
     -   name: '{while}'
         explanation: Vi kan bruke `{while}`løkken med ikke-lik
         example: 'Eksempel: {while} korrekt_svar != 25'
-        demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 times 5?'\n{print} 'A correct svar has been given'"
+        demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'A correct svar has been given'"
     -   name: Mindre {while}
         explanation: 'We can also use the `{while}` loop with `<` and `>`. '
         example: 'For eksempel: {while} antall < 3'
         demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
     start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Det svaret var riktig'"
-    intro_text: "## More loops!\nWe are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the eksempel code, we continue until a correct svar has been given.\nIf the correct svar is never given, the loop never ends!\n"
-    example_code: "## Eksempel Hedy code\n```\nsvar = 0\nwhile svar != 25\n    svar = ask 'Hva er 5 times 5?'\nprint 'A correct svar has been given'\n```\n"
+    intro_text: "## Flere løkker!\nVi skal lære en ny løkke, `{while}` løkken! Denne løkken fortsetter å kjøre så lenge påstanden er sann.\nDet er derfor veldig viktig å endre verdien i løkken.\n\nI eksempelkoden lar vi løkken kjøre til vi får det riktige svaret.\nHvis ikke vi aldri får det riktige svaret, så fortsetter løkken for alltid!\n"
+    example_code: "## Eksempel Hedy kode\n```\nsvar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'A korrekt svar ble gitt'\n```\n"
 1:
     intro_text: "## Velkommen til Hedy\nPå Nivå 1 kan du bruke kommandoene `{print}`, `{ask}` og `{echo}`.\nSkriv koden i programmeringsfeltet, eller trykk på den grønne boksen i eksempelkodeblokken og koden vil bli skrevet for deg!\nPrøv koden self med den grønne 'Kjør kode' knappen under programmeringsfeltet.\n\nDu kan skrive tekst til skjermen ved å bruke `{print}` kommandoen.\n"
     example_code: "## Eksempelkode\n```\n{print} Hallo!\n{print} Velkomen til Hedy!\n```\n"
