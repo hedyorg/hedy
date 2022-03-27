@@ -408,7 +408,7 @@ levels:
             code: "print 'Welcome at the money show !'\nprint 'in front of you are 3 doors'\ndoor is ask 'Which door do you choose ?'"
             mp_choice_options:
             -   "option_text": print So you pick door door
-                "feedback": We need quotation marks
+                "feedback": Vi trenger hermetegn
             -   "option_text": print 'So you pick ' door door
                 "feedback": If the player chooses door 3, Hedy will say 'So you pick 3 3
             -   "option_text": print 'So you pick door ' door
@@ -444,7 +444,7 @@ levels:
             -   "option_text": Quotation marks are missing in both line 2 and 3
                 "feedback": Line 3 doesn't need quotation marks because it's not printed literally
             -   "option_text": Nothing, this code has no mistakes
-                "feedback": You missed one !
+                "feedback": Du glemte en !
             correct_answer: B
             hint: One line needs quotation marks, because you want it to be printed literally.
             question_score: '10'
@@ -603,13 +603,13 @@ levels:
         5:
             mp_choice_options:
             -   "option_text": Because it needs to be in capitals, so SECRET
-                "feedback": Indeed !
+                "feedback": Faktisk !
             -   "option_text": Because the passord is alarm
                 "feedback": No, this is not the passord.
-            -   "option_text": Because it's spelled secert.
+            -   "option_text": Fordi det staves secert.
                 "feedback": That's not how you spell secret
             -   "option_text": Because Hedy makes a mistake
-                "feedback": No, Hedy is right
+                "feedback": Nei, Hedy har rett
             question_text: Why will Hedy say 'ALARM ! INTRUDER' when you type in 'secret'?
             code: "passord is ask 'Hva er passordet ?'\nif passord is SECRET print 'Correct !'\nelse print 'ALARM ! INTRUDER !'"
             correct_answer: A
@@ -626,7 +626,7 @@ levels:
             -   "option_text": In level 5 both print and ask work differently than in level 3
                 "feedback": No, there have been no changes !
             -   "option_text": In level 5 neither print nor ask works differently than in level 3
-                "feedback": That's right !.
+                "feedback": Det stemmer !.
             correct_answer: D
             hint: There are no changes in the existing commands.
             question_score: '10'
@@ -635,13 +635,13 @@ levels:
             code: "name is ask 'Hva heter du? ?'\nif name is Hedy print 'fun' else print 'less fun'"
             mp_choice_options:
             -   "option_text": gøy
-                "feedback": That's right !
+                "feedback": Det stemmer !
             -   "option_text": mindre gøy
                 "feedback": If the name is Hedy, it will say 'fun''
             -   "option_text": Hedy
                 "feedback": Nee, it doesn't print the name
             -   "option_text": Feil
-                "feedback": Fortunately not !
+                "feedback": Heldigvis ikke !
             correct_answer: A
             hint: if name is Hedy print ...?
             question_score: '10'
@@ -652,9 +652,9 @@ levels:
             -   "option_text": Korrekt!
                 "feedback": This is printed when you type in the correct passord
             -   "option_text": HEMMELIG
-                "feedback": That's right !'
+                "feedback": Det stemmer !'
             -   "option_text": passord
-                "feedback": The passord isn't passord...
+                "feedback": Passordet er ikke passord...
             -   "option_text": ALARM INNTRENGER
                 "feedback": This is printed when you type in the incorrect passord !
             correct_answer: B
@@ -671,7 +671,7 @@ levels:
             -   "option_text": Feil!
                 "feedback": No, this is not what Hedy will print
             -   "option_text": ALARM ! INNTRENGER !
-                "feedback": Great job !
+                "feedback": Godt jobbet !
             correct_answer: D
             hint: Your computer will sound the alarm for intruders !
             question_score: '10'
@@ -679,13 +679,13 @@ levels:
             question_text: Which word should be on the place of the question mark in the last line ?
             code: "print 'Im Hedy the football fortune teller !'\nprint 'I will predict what place your team will end up !'\nclub is ask 'Which club is your favorite ?'\nif club is ajax print 'Ajax is going to win of course !'\n_?_ print 'Sorry, your club is gonna be in last place...'"
             mp_choice_options:
-            -   "code": if
+            -   "code": hvis
                 "feedback": if is already in the line above
-            -   "code": at random
-                "feedback": No, you need else.
-            -   "code": else
-                "feedback": Great !
-            -   "code": print
+            -   "code": tilfeldig
+                "feedback": Nei, du trenger ellers.
+            -   "code": ellers
+                "feedback": Flott !
+            -   "code": skriv
                 "feedback": Print is already there, we need a word before it !
             correct_answer: C
             hint: In level 5 you learn 2 new commands, if and ...?
@@ -694,14 +694,14 @@ levels:
             question_text: Which word should be in the place of the question mark ?
             code: "print 'I can predict if you will be a millionair or not !'\nname is ask 'Whats your name ?'\nif name is Hedy print 'You will be a millionair !'\nelse _?_ 'Unfortunately... No big money for you.'"
             mp_choice_options:
-            -   "code": if
+            -   "code": hvis
                 "feedback": if is in the line above.
             -   "code": tilfeldig
                 "feedback": No, you don't need at random.
-            -   "code": else
+            -   "code": ellers
                 "feedback": There already is an else command
-            -   "code": print
-                "feedback": Awesome !
+            -   "code": skriv
+                "feedback": Rått !
             correct_answer: D
             hint: After else a print command follows
             question_score: '10'
@@ -709,14 +709,14 @@ levels:
             question_text: Which word should be on the place of the question mark ?
             code: "animal is ask 'What is your favorite animal ?'\nif _?_ is penguin print 'Thats my favorite animal too !'\nelse print 'Cool ! I like penguins.'"
             mp_choice_options:
-            -   "code": favorite animal
+            -   "code": favorittdyr
                 "feedback": That's not the variable name.
-            -   "code": animal
-                "feedback": Great job !
-            -   "code": if
-                "feedback": If is already there
-            -   "code": print
-                "feedback": No, that's not it.
+            -   "code": dyr
+                "feedback": Godt jobbet !
+            -   "code": hvis
+                "feedback": Hvis allerede er der
+            -   "code": skriv
+                "feedback": Nei, det er det ikke.
             correct_answer: B
             hint: What the variable name ?
             question_score: '10'
@@ -731,7 +731,7 @@ levels:
             -   "option_text": '3'
                 "feedback": Bad choice ! You're being eaten.
             -   "option_text": It's a trap, you will always be eaten !
-                "feedback": Luckily not !
+                "feedback": Heldigvis ikke !
             correct_answer: B
             hint: One of the doors will keep you safe..
             question_score: '10'
@@ -740,13 +740,13 @@ levels:
             code: "print 'Escape from the haunted house !'\nprint 'There are 3 doors in front of you'\ndoor is ask 'Which door do you choose ?'\nmonsters is vampire, werewolf, giant spider\nif door is 2 print 'Yay, you can escape !'\nelse print 'You are being devoured by a... ' monsters at random"
             mp_choice_options:
             -   "option_text": Hedy picks a random monster each time.
-                "feedback": Awesome !
+                "feedback": Rått !
             -   "option_text": vampyr
                 "feedback": Ikke alltid...
             -   "option_text": varulv
                 "feedback": Ikke alltid...
-            -   "option_text": giant spider
-                "feedback": Not always...
+            -   "option_text": gigantisk edderkopp
+                "feedback": Ikke alltid...
             correct_answer: A
             hint: Mind the last 3 words... monsters at random...
             question_score: '10'
@@ -771,14 +771,14 @@ levels:
             question_text: Which word is wrong in the code ?
             code: "print 'I'm blue'\nrepeat 7 times print 'da ba dee, da ba da'"
             mp_choice_options:
-            -   "code": I'm
-                "feedback": That's right !
-            -   "code": print
-                "feedback": print is spelled correctly
-            -   "code": repeat
-                "feedback": repeat is spelled correctly
-            -   "code": times
-                "feedback": times is spelled correctly
+            -   "code": Jeg er
+                "feedback": Det stemmer !
+            -   "code": skriv
+                "feedback": skriv er stavet korrekt
+            -   "code": gjenta
+                "feedback": gjenta er stavet korrekt
+            -   "code": ganger
+                "feedback": ganger er stavet korrekt
             hint: I'm is wrong, you can't use apostrophes
             question_score: '10'
         8:
@@ -804,7 +804,7 @@ levels:
             -   "code": "repeat 2 times 'if youre happy and you know it clap your hands'\nprint 'if youre happy and you know it and you really want to show it'\nprint 'if youre happy and you know it clap your hands'"
                 "feedback": Almost ! the first line needs an extra word
             -   "code": "repeat 2 times print 'if youre happy and you know it clap your hands'\nprint 'if youre happy and you know it and you really want to show it'\nprint 'if youre happy and you know it clap your hands'"
-                "feedback": Great !
+                "feedback": Flott !
             -   "code": "repeat 3 times print 'if youre happy and you know it clap your hands'\nprint 'if youre happy and you know it and you really want to show it'"
                 "feedback": This is not in the right order.
             -   "code": "repeat 4 times 'if youre happy and you know it'\nrepeat 2 times 'clap your hands'\nprint 'and you really want to show it'\nprint 'clap your hands'"
@@ -815,14 +815,14 @@ levels:
             question_text: Which code is right ?
             code: '...'
             mp_choice_options:
-            -   "code": print 100 times 'hello'
+            -   "code": skriv 100 ganger 'hallo'
                 "feedback": repeat 100 times print 'hello'
             -   "code": print repeat 100 times 'hello'
                 "feedback": repeat 100 times print 'hello'
             -   "code": repeat 'hello' 100 times "
                 "feedback": repeat 100 times print 'hello'
             -   "code": repeat 100 times print 'hello'
-                "feedback": That's right !
+                "feedback": Det stemmer !
             correct_answer: D
             hint: First the repeat command, then the print command
             question_score: '10'
@@ -846,9 +846,9 @@ levels:
             code: repeat 100 times print 'Hedy is awesome !'
             mp_choice_options:
             -   "option_text": Korrect
-                "feedback": That's right !
+                "feedback": Det stemmer !
             -   "option_text": Feil
-                "feedback": That's not it
+                "feedback": Det er ikke det
             correct_answer: A
             hint: The code is correct !
             question_score: '10'
@@ -874,13 +874,13 @@ levels:
             -   "code": "We will We will\nROCK YOU !"
                 "feedback": "'We will' won't appear twice in the same line"
             -   "code": "We will\nWe will\nROCK YOU !"
-                "feedback": Great !
+                "feedback": Flott !
             -   "code": "We will\nROCK YOU !\nWe will\nROCK YOU !"
                 "feedback": ROCK YOU ! won't be repeated
             -   "code": "We will\nROCK YOU !"
-                "feedback": Mind the repeat command
+                "feedback": Pass på gjenta kommandoen
             correct_answer: B
-            hint: Mind the repeat command.
+            hint: Pass på gjenta kommandoen.
             question_score: '10'
         9:
             question_text: What Hedy code belongs to this output ?
@@ -910,7 +910,7 @@ levels:
             -   "code": "for i in range 10 to 0\n    print i"
                 "feedback": Unfortunately this does not exist.
             -   "code": "for i in range 0 to 10\n    print 10 - i"
-                "feedback": That's right !
+                "feedback": Det stemmer !
             hint: It has to be a calculation...
             question_score: '10'
         1:
@@ -920,22 +920,22 @@ levels:
             -   "code": "1\n2\n3"
                 "feedback": Korrekt !
             -   "code": 1 2 3
-                "feedback": That's not it
+                "feedback": Det er ikke det
             -   "code": 1, 2, 3
-                "feedback": That's not it
+                "feedback": Det er ikke det
             -   "code": '123'
-                "feedback": That's not it
+                "feedback": Det er ikke det
             correct_answer: A
             hint: How do the numbers appear in the screen ?
             question_score: '10'
         4:
             mp_choice_options:
             -   "option_text": The i in the last line need quotation marks
-                "feedback": No it doesn't.
+                "feedback": Det, det gjør det ikke.
             -   "option_text": You can't use 'range 1 to 5' only 'range 1 to 10'
                 "feedback": You could use 1 to 5 just as well !
             -   "option_text": Line 1 needs to start with an indention.
-                "feedback": Not line 1...
+                "feedback": Ikke linje 1...
             -   "option_text": Line 2 needs to start with an indention
                 "feedback": Perfekt !
             question_text: What's wrong with this code ?
@@ -964,7 +964,7 @@ levels:
             mp_choice_options:
             -   "code": rang
                 "feedback": Nei
-            -   "code": range
+            -   "code": sekvens
                 "feedback": Korrekt
             -   "code": ragne
                 "feedback": Nei
@@ -982,7 +982,7 @@ levels:
             -   "option_text": 2 ganger
                 "feedback": Nei
             -   "option_text": 3 ganger
-                "feedback": That's right !
+                "feedback": Det stemmer !
             -   "option_text": Aldri
                 "feedback": Nei
             correct_answer: C
@@ -997,11 +997,11 @@ levels:
             -   "code": for i in range 1 to guests
                 "feedback": The variable is not named guests
             -   "code": for i in range 1 to people
-                "feedback": Great !
+                "feedback": Flott !
             -   "code": for i in range 0 to people
                 "feedback": That's one order too many !
             correct_answer: C
-            hint: Use the variable 'people'
+            hint: Bruk variabelen 'mennesker'
             question_score: '10'
         8:
             question_text: What will be the output from this code ?
@@ -1029,7 +1029,7 @@ levels:
             -   "option_text": Aldri
                 "feedback": Prøv igjen
             -   "option_text": That depends on how old you are
-                "feedback": That's right !
+                "feedback": Det stemmer !
             correct_answer: D
             hint: for i in range 1 to age
             question_score: '10'
@@ -1038,15 +1038,15 @@ levels:
             code: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
             mp_choice_options:
             -   "code": "for i in range 1 to 3\n    print Baby shark tututudutudu\n    print Baby shark"
-                "feedback": Mind the indention
+                "feedback": Pass på innrykket
             -   "code": "for i in range 1 to 3\n    print Baby shark tututudutudu\nprint Baby shark"
-                "feedback": That's right !
+                "feedback": Det stemmer !
             -   "code": "for i in range 0 to 3\n    print Baby shark tututudutudu\n    print Baby shark"
                 "feedback": range 0 to 3 is 4 times.
             -   "code": "for i in range 0 to 3\n    print Baby shark tututudutudu\nprint Baby shark"
                 "feedback": range 0 to 3 is 4 times.
             correct_answer: B
-            hint: Mind the indention
+            hint: Pass på innrykket
             question_score: '10'
     11:
         10:
@@ -1068,14 +1068,14 @@ levels:
             question_text: What do we need to fill in on the _?_ ?
             code: "compliments = perfect, great job, amazing\n_?_\n    print compliment"
             mp_choice_options:
-            -   "code": for each compliment
-                "feedback": That's not it
-            -   "code": for compliment in compliments
+            -   "code": for hvert kompliment
+                "feedback": Det er ikke det
+            -   "code": for komplimenter i komplimenter
                 "feedback": You deserve all those compliments !
-            -   "code": if compliment in compliments
-                "feedback": That's not it
-            -   "code": for compliments in compliment
-                "feedback": Almost there !
+            -   "code": hvis kompliment i komplimenter
+                "feedback": Det er ikke det
+            -   "code": for komplimenter i kompliment
+                "feedback": Nesten der !
             correct_answer: B
             hint: for each compliment in the lists of compliments...
             question_score: '10'
@@ -1083,14 +1083,14 @@ levels:
             question_text: Which output is correct ?
             code: "meals = pizza, pasta, pancakes\nfor meal in meals\n    print 'I love ' meal"
             mp_choice_options:
-            -   "code": I love pizza
+            -   "code": Jeg elsker pizza
                 "feedback": Line 2 says for each meal in the list of meals. So each meal is printed.
-            -   "code": I love pasta
+            -   "code": Jeg elsker pasta
                 "feedback": Line 2 says for each meal in the list of meals. So each meal is printed.
-            -   "code": I love pancakes
+            -   "code": Jeg elsker pannekaker
                 "feedback": Line 2 says for each meal in the list of meals. So each meal is printed.
             -   "code": "I love pizza\nI love pasta\nI love pancakes"
-                "feedback": Great !
+                "feedback": Flott !
             correct_answer: D
             hint: Line 2 says for each meal in the list of meals. So each meal is printed.
             question_score: '10'
@@ -1098,12 +1098,12 @@ levels:
             question_text: Which output is correct ?
             code: "animals = dogs, cats, hamsters, chickens\nfor animal in animals\n    print animal ' are lovely pets'"
             mp_choice_options:
-            -   "code": dogs are lovely pets
+            -   "code": hunder er nydelige kjæledyr
                 "feedback": Line 2 says for each animal in the list of animals. So each animal is printed.
             -   "code": dogs, cats, hamsters, chickens are lovely pets
                 "feedback": Each animal gets their own line in the output.
             -   "code": "dogs are lovely pets\ncats are lovely pets\nhamsters are lovely pets\nchickens are lovely pets"
-                "feedback": Great !
+                "feedback": Flott !
             -   "option_text": You don't know yet. Because it chooses one of the animals at random.
                 "feedback": Line 2 says for each animal in the list of animals. So each animal is printed.
             correct_answer: C
@@ -1118,7 +1118,7 @@ levels:
             -   "option_text": Line 3 does not need to start with 4 spaces as indentation
                 "feedback": Line 2 is a `for`command so line 3 does need to start with an indent.
             -   "option_text": Line 3 should say item instead of groceries
-                "feedback": Good job !
+                "feedback": Godt jobbet !
             -   "option_text": Line 2 should say groceries instead of item
                 "feedback": No it does not.
             correct_answer: C
@@ -1128,10 +1128,10 @@ levels:
             question_text: What word should be on the _?_ with these digital dice ?
             code: "print 'Welcome to the digital dice !'\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\nfor player in players\n    print player ' throws ' _?_ at random"
             mp_choice_options:
-            -   "code": players
+            -   "code": spillere
                 "feedback": It would say 'Ann throws Jesse', instead of 'Ann throws 6'.
-            -   "code": choices
-                "feedback": That's right !
+            -   "code": valg
+                "feedback": Det stemmer !
             -   "code": valg
                 "feedback": You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'...
             -   "code": terning
@@ -1143,14 +1143,14 @@ levels:
             question_text: Which of the answers below is a possible outcome when you run the code ?
             code: "choices = rock, paper, scissors\nplayers = Kelly, Meredith\nfor player in players\n    print player ' chooses ' choices at random"
             mp_choice_options:
-            -   "code": Kelly chooses rock
+            -   "code": Kelly velger stein
                 "feedback": Meredith wants to play too !
             -   "code": "Meredith chooses scissors\nKelly chooses rock"
                 "feedback": So close ! But Kelly is first in the list, so she goes first
-            -   "code": Meredith chooses paper
+            -   "code": Meredith velger papir
                 "feedback": Kelly wants to play too !
             -   "code": "Kelly chooses paper\nMeredith chooses scissors"
-                "feedback": Amazing !
+                "feedback": Fantastisk !
             correct_answer: D
             hint: Each player will pick an option. The player that's first on the list will go first.
             question_score: '10'
@@ -1211,7 +1211,7 @@ levels:
             -   "option_text": 2*10
                 "feedback": No, Hedy will calculate the answer
             -   "option_text": '210'
-                "feedback": Mind it's a calculation.
+                "feedback": Husk at det er en beregning.
             correct_answer: A
             hint: The * is used as a multiplication sign
             question_score: '10'
@@ -1220,15 +1220,15 @@ levels:
             code: '...'
             mp_choice_options:
             -   "option_text": '-'
-                "feedback": That's not it
+                "feedback": Det er ikke det
             -   "option_text": pluss
-                "feedback": That's not it
+                "feedback": Det er ikke det
             -   "option_text": '*'
-                "feedback": That's not it
+                "feedback": Det er ikke det
             -   "option_text": +
                 "feedback": Korrekt !
             correct_answer: D
-            hint: It's the plus sign.
+            hint: Det er plusstegnet.
             question_score: '10'
         3:
             question_text: What's Hedy's output when you run this code ?
@@ -1254,7 +1254,7 @@ levels:
             -   "option_text": '10'
                 "feedback": Vennlist prøv igjen.
             -   "option_text": Your lucky number is... 30
-                "feedback": That's right !
+                "feedback": Det stemmer !
             -   "option_text": Your lucky number is... 10
                 "feedback": Her lucky number is name times age...
             correct_answer: C
@@ -1269,9 +1269,9 @@ levels:
             -   "option_text": 10 kroner
                 "feedback": No, it's 10 dollars each.
             -   "option_text": 15 kroner
-                "feedback": The * means multiplication.
+                "feedback": '* betyr multiplikasjon.'
             -   "option_text": 50 kroner
-                "feedback": Great !
+                "feedback": Flott !
             correct_answer: D
             hint: price is people times 10
             question_score: '10'
@@ -1279,16 +1279,16 @@ levels:
             question_text: How much does a hamburger cost is this virtual restaurant ?
             code: "print 'Welcome at Hedys diner'\nfood is ask 'What would you like to eat ?'\nprice is 0\nif food is hamburger price is 15\nif food is fries price is 6"
             mp_choice_options:
-            -   "option_text": 15 dollars
-                "feedback": Super !
+            -   "option_text": 15 kroner
+                "feedback": Supert !
             -   "option_text": 6 kroner
                 "feedback": The fries are 6 dollars
             -   "option_text": 0 kroner
                 "feedback": The hamburger isn't free !
-            -   "option_text": 21 dollars
+            -   "option_text": 21 kroner
                 "feedback": That's the price for a hamburger and fries !
             correct_answer: A
-            hint: Mind the fourth line.
+            hint: Pass på den fjerde linjen.
             question_score: '10'
         7:
             question_text: Why does line 7 say 'price is price + 3' instead of 'price is 3'?
@@ -1299,7 +1299,7 @@ levels:
             -   "option_text": Because Hedy doesn't understand 'price is 3'.
                 "feedback": Hedy would understand, but it wouldn't be right.
             -   "option_text": Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total.
-                "feedback": That's right !
+                "feedback": Det stemmer !
             -   "option_text": Because the price is 0 dollars to begin with.
                 "feedback": That's true, but not the reason
             correct_answer: C
@@ -1312,9 +1312,9 @@ levels:
             -   "option_text": There shouldn't be quotation marks in line 2
                 "feedback": No, there should be !
             -   "option_text": The variable is called correct answer, but a variable's name can only be 1 word. So it should be correctanswer
-                "feedback": Correct !
+                "feedback": Korrekt !
             -   "option_text": The if and else commands should be in the same line.
-                "feedback": No, that's not true.
+                "feedback": Nei, det er ikke sant.
             -   "option_text": The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
                 "feedback": Variable names can be similar, but they can't be 2 words...
             correct_answer: B
