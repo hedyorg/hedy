@@ -56,7 +56,7 @@ def transform_yaml_to_lark(only_new_lang=True):
           else:
             list_of_translations.append(translation)
         
-        if command != 'random':
+        if command != 'random' and type(command) != int:
           command_upper = command.upper()
           command = '_' + command_upper
 

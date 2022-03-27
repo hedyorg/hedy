@@ -4,6 +4,7 @@ import {LANG_nl} from './syntaxLang-nl';
 import {LANG_ar} from './syntaxLang-ar';
 import {LANG_fr} from './syntaxLang-fr';
 import {LANG_hi} from './syntaxLang-hi';
+import {LANG_tr} from './syntaxLang-tr';
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
@@ -77,6 +78,9 @@ switch(window.State.lang){
     break;
   case 'fr':
     currentLang = LANG_fr;
+    break;
+  case 'tr':
+    currentLang = LANG_tr;
     break;
   case 'hi':
     currentLang = LANG_hi;

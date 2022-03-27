@@ -1895,7 +1895,6 @@ ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
     transpile_result = transpile_inner(input_string, level, lang)
-    transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
 
 def translate_characters(s):
