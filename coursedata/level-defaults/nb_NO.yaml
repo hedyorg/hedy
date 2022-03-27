@@ -51,12 +51,12 @@
 15:
     commands:
     -   name: '{while}'
-        explanation: We can use the `{while}` loop with not equal
-        example: 'Eksempel: {while} correct_svar != 25'
+        explanation: Vi kan bruke `{while}`løkken med ikke-lik
+        example: 'Eksempel: {while} korrekt_svar != 25'
         demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 times 5?'\n{print} 'A correct svar has been given'"
     -   name: Mindre {while}
         explanation: 'We can also use the `{while}` loop with `<` and `>`. '
-        example: 'For eksempel: {while} count < 3'
+        example: 'For eksempel: {while} antall < 3'
         demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
     start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Det svaret var riktig'"
     intro_text: "## More loops!\nWe are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the eksempel code, we continue until a correct svar has been given.\nIf the correct svar is never given, the loop never ends!\n"
@@ -308,28 +308,28 @@
         example: 'For eksempel: alder >= 14'
         demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder >= 14\n    {print} 'Du er eldre enn meg!'"
 16:
-    start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
+    start_code: "frukt= ['eple', 'banan', 'kirsebær']\n{print} frukt"
     intro_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists.\n"
     example_code: "## Eksempel Hedy kode\n```\nvenner = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' venner[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
     commands:
     -   name: firkantparantes
         explanation: Liste med firkantparanteser
-        example: "For eksempel: fruit = ['apple', 'banana', 'cherry']"
-        demo_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
-    -   name: Get an item from a list
+        example: "For eksempel: frukt= ['eple', 'banan', 'kirsebær']"
+        demo_code: "frukt= ['eple', 'banan', 'kirsebær']\n{print} frukt"
+    -   name: Hent en ting fra en liste
         explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
         example: 'For eksempel: firstfruit = fruit[1]'
-        demo_code: "fruit = ['banana', 'apple', 'cherry']\nfirstfruit = fruit[1]\n{print} firstfruit"
-    -   name: Get a random item from a list
+        demo_code: "frukt = ['banan', 'eple', 'kirsebær']\nførstefrukt= frukt[1]\n{print} førstefrukt"
+    -   name: Hent en tilfeldig ting fra en liste
         explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
-        example: 'For eksempel: random_fruit {is} fruit[random]'
+        example: 'For eksempel: tilfeldig_frukt {is} frukt[random]'
         demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[random]\n{print} random_fruit"
 18:
     start_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
     intro_text: "## Level 18\nWe arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('Mitt navn er Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnavn = 'Hedy'\n{print}('Mitt navn er ', navn)\n```"
     commands:
     -   name: '{print}'
-        explanation: With `{print}` you need to use parentheses
+        explanation: Med`{print}` må du bruke paranteser
         example: '{print}'
         demo_code: "{print}('hei!')"
     -   name: '{print} med var'
