@@ -1,66 +1,3 @@
-6:
-    commands:
-    -   name: '{print}'
-        explanation: skriv ut nøyaktig det du vil med fnutter
-        example: "Eksempel: {print} '5 {times} 5 er ' 5 * 5"
-        demo_code: "{print} '5 ganget 5 er ' 5 * 5"
-    -   name: '{ask}'
-        explanation: '{ask} om et regnestykke og sjekk om det er korrekt.'
-        example: "Eksempel: svar {is} {ask} 'Hva er 10 pluss 10?'"
-        demo_code: "svar = {ask} 'Hva er 10 pluss 10?'\n{if} svar {is} 20 {print} 'Korrekt!' {else} {print} 'Feil'"
-    -   name: '`{ask}` {and} `{if}` skilpadde'
-        explanation: '{ask} brukeren hvor mange grader de vil ha'
-        example: "Eksempel: grader{is} {ask} 'Hvor mange grader?'"
-        demo_code: "grader= {ask} 'Hvor mange grader?'\nvinkel = 360 / grader\n{forward} 50"
-    start_code: "{print} '5 ganger 5 er ' 5 * 5"
-    intro_text: "## 1 + 1\nPå dette nivået skal du få lære noe nytt! Du kan nå bruke Hedy til å gjøre matte.\n\nÅ plusse sammen to tall er enkelt, du bare gjør som du ville gjort i mattetimen, for eksempel: `5 + 5`. Minus funker også: `5 - 5`.\n\nÅ gange er litt andreledes, fordi det ikke er et {times} symbol på tastaturet ditt. Bare se hvis du vil, der er virkelig ikke et gangeteng.\nDerfor bruker vi vanligvis en stjerne `*` når vi ganger. `5 * 5`kan leses som \"5 {times} 5\". Det kan være du må holde inne SHIFT knappen for å kunne skrive *-tegnet.\n"
-    example_code: "## Eksempel Hedy kode\n```\n{print} '5 pluss 5 er ' 5 + 5\n{print} '5 minus 5 er ' 5 - 5\n{print} '5 {times} 5 er ' 5 * 5\n```\n"
-    intro_text_2: "Vi skal også gjøre en liten endring i hvordan vi lagrer et ord i en variabel! Du kan nå bruke `=` istedenfor `{is}` når du lagrer en tekst eller et tall i en variabel, slik:\n"
-    example_code_2: "```\nnavn= Hedy\nsvar = 4 + 20\n```\n"
-12:
-    commands:
-    -   name: flyt direkte
-        explanation: Desimaltall
-        example: '{print} 2.5 + 2.5'
-        demo_code: "{print} 'Kjør på med kalkulasjoner!'\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n"
-    -   name: tildel tekst
-        explanation: Tekst med fnutter etter `=`
-        example: navn = 'Hedy'
-        demo_code: "navn = 'Roboten Hedy'\n{print} 'Hello ' navn\n"
-    -   name: apostrof etter {if}sammenligning
-        explanation: Tekst med fnutter etter {if}
-        example: navn = 'Hedy'
-        demo_code: "navn = {ask} 'Hvem er du?'\n{if} navn = 'Hedy'\n    {print} 'Hei hei!'\n"
-    -   name: hermetegn i liste
-        explanation: En liste med fnutter
-        example: navn = 'Hedy', 'Felienne'
-        demo_code: "superhelter = 'Iron Man', 'Batman', 'Superman'\n{print} superhelter {at} {random}\n"
-    start_code: "{print} 'desimaltall må bruke et punktum nå'\n{print} 2.5 + 2.5"
-    intro_text: "## Tall og tekst\n**Desimaltall**\nFør dette nivået har det ikke vært mulig å bruke desimaltall som 1.5 i Hedy, men fra nå av kan du det! Legg merke til at datamaskiner bruker punktum `.` som skilletegn i desimaltall.\n"
-    example_code: "## Eksempel Hedy kode\n```\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n```\n"
-    intro_text_2: "**All tekst må være inni fnutter**\nFra dette nivået må du nå ha fnutter rundt tekst som du lagrer ved hjelp av `=`:\n"
-    example_code_2: "```\nnavn = 'Roboten Hedy'\n{print} 'Hallo ' navn\n```\n"
-    intro_text_3: "**All tekst i lister krever nå fnutter også**\nTekst i lister er også tekst, de må også ha fnutter rundt seg. Med dette mener vi at hver element i listen krever fnutter.\nDette lar deg lagre to ord som et element i listen, for eksempel 'Iron Man'.\n"
-    example_code_3: "```\nsuperhelter = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-    intro_text_4: "**All tekst etter `{if}` sammenligninger krever også fnutter nå**\n"
-    example_code_4: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn= 'Roboten Hedy'\n    {print} 'Hei hei!'\n```\n"
-    intro_text_5: "**Tall trenger ikke fnutter**\nNår du lagrer tall med `=` trenger du ikke å bruke fnutter:\n"
-    example_code_5: "```\npoeng = 25\n{print} 'Du fikk ' poeng\n```\n"
-    intro_text_6: "**Matte med ord** Fra dette nivået kan du også bruke `+` tegnet til å legge sammen tekster. For eksempel:\n"
-    example_code_6: "```\na = 'Hallo '\nb = 'verden!'\nprint a + b\n```\n"
-15:
-    commands:
-    -   name: '{while}'
-        explanation: Vi kan bruke `{while}`løkken med ikke-lik
-        example: 'Eksempel: {while} svar != 25'
-        demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Svaret er korrekt!'"
-    -   name: Mindre {while}
-        explanation: 'Vi kan også bruke `{while}` løkken med `<` og `>`. '
-        example: 'For eksempel: {while} antall < 3'
-        demo_code: "telling = 1\n{while} telling < 3\n    {print} 'Vi gjør dette ' 3 - telling ' flere ganger'\n    telling = telling + 1\n{print} 'Vi er ferdig å telle'"
-    start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Det svaret var riktig'"
-    intro_text: "## Flere løkker!\nVi skal lære en ny løkke, `{while}` løkken! Denne løkken fortsetter å kjøre så lenge påstanden er sann.\nDet er derfor veldig viktig å endre verdien i løkken.\n\nI eksempelkoden lar vi løkken kjøre til vi får det riktige svaret.\nHvis ikke vi aldri får det riktige svaret, så fortsetter løkken for alltid!\n"
-    example_code: "## Eksempel Hedy kode\n```\nsvar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'A korrekt svar ble gitt'\n```\n"
 1:
     intro_text: "## Velkommen til Hedy\nPå Nivå 1 kan du bruke kommandoene `{print}`, `{ask}` og `{echo}`.\nSkriv koden i programmeringsfeltet, eller trykk på den grønne boksen i eksempelkodeblokken og koden vil bli skrevet for deg!\nPrøv koden self med den grønne 'Kjør kode' knappen under programmeringsfeltet.\n\nDu kan skrive tekst til skjermen ved å bruke `{print}` kommandoen.\n"
     example_code: "## Eksempelkode\n```\n{print} Hallo!\n{print} Velkomen til Hedy!\n```\n"
@@ -184,6 +121,25 @@
         explanation: Sjekk om lister inneholder elementer `{in}`
         example: "Eksempel: {if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
         demo_code: "vakre_farger {is} grønn, gul\nfarge {is} {ask} 'Hva er din favoritt farge'\n{if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
+6:
+    commands:
+    -   name: '{print}'
+        explanation: skriv ut nøyaktig det du vil med fnutter
+        example: "Eksempel: {print} '5 {times} 5 er ' 5 * 5"
+        demo_code: "{print} '5 ganget 5 er ' 5 * 5"
+    -   name: '{ask}'
+        explanation: '{ask} om et regnestykke og sjekk om det er korrekt.'
+        example: "Eksempel: svar {is} {ask} 'Hva er 10 pluss 10?'"
+        demo_code: "svar = {ask} 'Hva er 10 pluss 10?'\n{if} svar {is} 20 {print} 'Korrekt!' {else} {print} 'Feil'"
+    -   name: '`{ask}` {and} `{if}` skilpadde'
+        explanation: '{ask} brukeren hvor mange grader de vil ha'
+        example: "Eksempel: grader{is} {ask} 'Hvor mange grader?'"
+        demo_code: "grader= {ask} 'Hvor mange grader?'\nvinkel = 360 / grader\n{forward} 50"
+    start_code: "{print} '5 ganger 5 er ' 5 * 5"
+    intro_text: "## 1 + 1\nPå dette nivået skal du få lære noe nytt! Du kan nå bruke Hedy til å gjøre matte.\n\nÅ plusse sammen to tall er enkelt, du bare gjør som du ville gjort i mattetimen, for eksempel: `5 + 5`. Minus funker også: `5 - 5`.\n\nÅ gange er litt andreledes, fordi det ikke er et {times} symbol på tastaturet ditt. Bare se hvis du vil, der er virkelig ikke et gangeteng.\nDerfor bruker vi vanligvis en stjerne `*` når vi ganger. `5 * 5`kan leses som \"5 {times} 5\". Det kan være du må holde inne SHIFT knappen for å kunne skrive *-tegnet.\n"
+    example_code: "## Eksempel Hedy kode\n```\n{print} '5 pluss 5 er ' 5 + 5\n{print} '5 minus 5 er ' 5 - 5\n{print} '5 {times} 5 er ' 5 * 5\n```\n"
+    intro_text_2: "Vi skal også gjøre en liten endring i hvordan vi lagrer et ord i en variabel! Du kan nå bruke `=` istedenfor `{is}` når du lagrer en tekst eller et tall i en variabel, slik:\n"
+    example_code_2: "```\nnavn= Hedy\nsvar = 4 + 20\n```\n"
 7:
     start_code: "{repeat} 3 {times} {print} 'Hedy er morro!'"
     intro_text: "## Nivå 7! Nivå 7!\nNivå 7 legger til `{repeat}` kommandoen. {repeat} kan brukes til å kjøre en kodelinje flere ganger.\n"
@@ -261,6 +217,37 @@
         explanation: '{ask} etter svaret på et regnestykke og sjekk om det er korrekt. Vi kan skrive ut to linjer nå.'
         example: "Eksempel: svaret = {ask} 'Hva er 5 pluss 5?'"
         demo_code: "svaret = {ask} 'Hva er 5 pluss 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Det var rett og svaret var ' svaret\nelse\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
+12:
+    commands:
+    -   name: flyt direkte
+        explanation: Desimaltall
+        example: '{print} 2.5 + 2.5'
+        demo_code: "{print} 'Kjør på med kalkulasjoner!'\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n"
+    -   name: tildel tekst
+        explanation: Tekst med fnutter etter `=`
+        example: navn = 'Hedy'
+        demo_code: "navn = 'Roboten Hedy'\n{print} 'Hello ' navn\n"
+    -   name: apostrof etter {if}sammenligning
+        explanation: Tekst med fnutter etter {if}
+        example: navn = 'Hedy'
+        demo_code: "navn = {ask} 'Hvem er du?'\n{if} navn = 'Hedy'\n    {print} 'Hei hei!'\n"
+    -   name: hermetegn i liste
+        explanation: En liste med fnutter
+        example: navn = 'Hedy', 'Felienne'
+        demo_code: "superhelter = 'Iron Man', 'Batman', 'Superman'\n{print} superhelter {at} {random}\n"
+    start_code: "{print} 'desimaltall må bruke et punktum nå'\n{print} 2.5 + 2.5"
+    intro_text: "## Tall og tekst\n**Desimaltall**\nFør dette nivået har det ikke vært mulig å bruke desimaltall som 1.5 i Hedy, men fra nå av kan du det! Legg merke til at datamaskiner bruker punktum `.` som skilletegn i desimaltall.\n"
+    example_code: "## Eksempel Hedy kode\n```\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n```\n"
+    intro_text_2: "**All tekst må være inni fnutter**\nFra dette nivået må du nå ha fnutter rundt tekst som du lagrer ved hjelp av `=`:\n"
+    example_code_2: "```\nnavn = 'Roboten Hedy'\n{print} 'Hallo ' navn\n```\n"
+    intro_text_3: "**All tekst i lister krever nå fnutter også**\nTekst i lister er også tekst, de må også ha fnutter rundt seg. Med dette mener vi at hver element i listen krever fnutter.\nDette lar deg lagre to ord som et element i listen, for eksempel 'Iron Man'.\n"
+    example_code_3: "```\nsuperhelter = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+    intro_text_4: "**All tekst etter `{if}` sammenligninger krever også fnutter nå**\n"
+    example_code_4: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn= 'Roboten Hedy'\n    {print} 'Hei hei!'\n```\n"
+    intro_text_5: "**Tall trenger ikke fnutter**\nNår du lagrer tall med `=` trenger du ikke å bruke fnutter:\n"
+    example_code_5: "```\npoeng = 25\n{print} 'Du fikk ' poeng\n```\n"
+    intro_text_6: "**Matte med ord** Fra dette nivået kan du også bruke `+` tegnet til å legge sammen tekster. For eksempel:\n"
+    example_code_6: "```\na = 'Hallo '\nb = 'verden!'\nprint a + b\n```\n"
 13:
     start_code: "navn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy!'"
     intro_text: "## Og... Eller?\nNå skal vi lære om `{and}` og`{or}`! Hvis du har lyst til å sjekke to påstander trenger du ikke å bruke to `{if}`, du kan bruke `{and}` og `{or}`. Hvis du bruker `{and}` må begge påstandene være sann. Vi kan også bruke `{eller}`, da trenger kun en av påstandene å være sann.\n"
@@ -307,6 +294,19 @@
         explanation: Vi bruker `>=` til å sjekke om det første tallet er større eller lik det andre tallet.
         example: 'For eksempel: alder >= 14'
         demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder >= 14\n    {print} 'Du er eldre enn meg!'"
+15:
+    commands:
+    -   name: '{while}'
+        explanation: Vi kan bruke `{while}`løkken med ikke-lik
+        example: 'Eksempel: {while} svar != 25'
+        demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Svaret er korrekt!'"
+    -   name: Mindre {while}
+        explanation: 'Vi kan også bruke `{while}` løkken med `<` og `>`. '
+        example: 'For eksempel: {while} antall < 3'
+        demo_code: "telling = 1\n{while} telling < 3\n    {print} 'Vi gjør dette ' 3 - telling ' flere ganger'\n    telling = telling + 1\n{print} 'Vi er ferdig å telle'"
+    start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Det svaret var riktig'"
+    intro_text: "## Flere løkker!\nVi skal lære en ny løkke, `{while}` løkken! Denne løkken fortsetter å kjøre så lenge påstanden er sann.\nDet er derfor veldig viktig å endre verdien i løkken.\n\nI eksempelkoden lar vi løkken kjøre til vi får det riktige svaret.\nHvis ikke vi aldri får det riktige svaret, så fortsetter løkken for alltid!\n"
+    example_code: "## Eksempel Hedy kode\n```\nsvar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'A korrekt svar ble gitt'\n```\n"
 16:
     start_code: "frukt = ['eple', 'banan', 'kirsebær']\n{print} frukt"
     intro_text: "## Mer og mer likt virkelig kode\nVi skal nå lage lister på Python måten, med firkantparanteser rundt listene! Vi beholder fnuttene rundt tekstene i listen slik som vi lærte på et tidligere nivå.\nDu kan bruke firkanparantesene til å peke på en plass i listen.\n"
