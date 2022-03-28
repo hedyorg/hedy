@@ -1,6 +1,7 @@
 import hedy
 import textwrap
 from Tester import HedyTester
+from parameterized import parameterized
 
 class TestsLevel8(HedyTester):
   level = 8
@@ -305,14 +306,14 @@ class TestsLevel8(HedyTester):
 
     self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
 
-
-  def test_quote_in_if(self):
-    code = textwrap.dedent("""\
-    if eten is 'pizza'
+  @parameterized.expand(HedyTester.quotes)
+  def test_quote_in_if(self, q):
+    code = textwrap.dedent(f"""\
+    if eten is {q}pizza{q}
         print 'lekker'""")
 
-    expected = textwrap.dedent("""\
-    if str('eten') == str('pizza'):
+    expected = textwrap.dedent(f"""\
+    if str('eten') == str({q}pizza{q}):
       print(f'lekker')""")
 
     self.multi_level_tester(

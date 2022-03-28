@@ -4,6 +4,9 @@ import {LANG_nl} from './syntaxLang-nl';
 import {LANG_ar} from './syntaxLang-ar';
 import {LANG_fr} from './syntaxLang-fr';
 import {LANG_hi} from './syntaxLang-hi';
+import {LANG_tr} from './syntaxLang-tr';
+import {LANG_nb_NO} from './syntaxLang-nb_NO';
+
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
@@ -78,8 +81,14 @@ switch(window.State.lang){
   case 'fr':
     currentLang = LANG_fr;
     break;
+  case 'tr':
+    currentLang = LANG_tr;
+    break;
   case 'hi':
     currentLang = LANG_hi;
+    break;
+  case 'nb_NO':
+    currentLang = LANG_nb_NO;
     break;
   default:
     currentLang = LANG_en;
@@ -723,11 +732,15 @@ function rule_symbols(symbols : string) {
 }
 
 function rule_string() {
-  return {
+  return [{
+    regex: /\"[^\"]*\"/,
+    token: 'constant.character',
+    next: 'start',
+  },{
     regex: /\'[^\']*\'/,
     token: 'constant.character',
     next: 'start',
-  };
+  }];
 }
 
 

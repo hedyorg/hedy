@@ -16,7 +16,7 @@ class LevelDefaults:
           self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
 
   def max_level(self):
-    all_levels = self.levels.keys()
+    all_levels = sorted(self.levels.keys()) # We should sort this to make sure the max_level returned is correct
     max_consecutive_level = 1
     previous_level = 0
     for level in all_levels:

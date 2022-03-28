@@ -9,13 +9,15 @@ class TestsLevel6(HedyTester):
   # test/command order: 6: ['print', 'ask', 'is', 'if', 'turn', 'forward', calculations]
 
   # print tests
-  def test_print_quoted_var(self):
-    code = textwrap.dedent("""\
-    naam is 'Hedy'
-    print 'ik heet ' naam""")
-    expected = textwrap.dedent("""\
-    naam = '\\'Hedy\\''
-    print(f'ik heet {naam}')""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_print_quoted_var(self, q):
+    code = textwrap.dedent(f"""\
+    naam is {q}Hedy{q}
+    print {q}ik heet {q} naam""")
+    eq = "\\'" if q == "'" else '"'
+    expected = textwrap.dedent(f"""\
+    naam = '{eq}Hedy{eq}'
+    print(f'ik heet {{naam}}')""")
 
     self.multi_level_tester(
       max_level=11,
@@ -546,14 +548,15 @@ class TestsLevel6(HedyTester):
       expected=expected,
       max_level=7)
 
-  def test_quoted_space_rhs(self):
-    code = textwrap.dedent("""\
+  @parameterized.expand(HedyTester.quotes)
+  def test_quoted_space_rhs(self, q):
+    code = textwrap.dedent(f"""\
     naam is James
-    if naam is 'James Bond' print 'shaken' else print 'biertje!'""")
+    if naam is {q}James Bond{q} print {q}shaken{q} else print {q}biertje!{q}""")
 
-    expected = textwrap.dedent("""\
+    expected = textwrap.dedent(f"""\
     naam = 'James'
-    if str(naam) == str('James Bond'):
+    if str(naam) == str({q}James Bond{q}):
       print(f'shaken')
     else:
       print(f'biertje!')""")

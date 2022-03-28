@@ -1,6 +1,7 @@
 import hedy
 import textwrap
 from Tester import HedyTester
+from parameterized import parameterized
 
 class TestsLevel4(HedyTester):
   level = 4
@@ -19,8 +20,17 @@ class TestsLevel4(HedyTester):
 
 
   # print tests
-  def test_print_quoted_string(self):
+  def test_print_single_quoted_string(self):
     code = "print 'hallo wereld!'"
+    expected = "print(f'hallo wereld!')"
+
+    self.multi_level_tester(
+      code=code,
+      max_level=17,
+      expected=expected)
+
+  def test_print_double_quoted_string(self):
+    code = 'print "hallo wereld!"'
     expected = "print(f'hallo wereld!')"
 
     self.multi_level_tester(
@@ -45,37 +55,37 @@ class TestsLevel4(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=4,
+      max_level=17,
       expected=expected
     )
+
   def test_print_with_slashes(self):
     code = "print 'Welcome to \\'"
     expected = textwrap.dedent("""\
     print(f'Welcome to \\\\')""")
     output = "Welcome to \\"
-    self.single_level_tester(code=code, expected=expected, output=output, translate=False) #\\ is not preserved in tests properly at the moment
-
-  # ask
-  def test_assign_print(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet' naam""")
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'ik heet{naam}')""")
-
     self.multi_level_tester(
-      max_level=10,
       code=code,
-      expected=expected
+      max_level=17,
+      expected=expected,
+      translate=False  # \\ is not preserved in tests properly at the moment
     )
 
-  def test_ask_Spanish(self):
-    code = textwrap.dedent("""\
-    color is ask 'Cuál es tu color favorito?'""")
-    expected = textwrap.dedent("""\
-    color = input(f'Cuál es tu color favorito?')""")
+  # ask
+  @parameterized.expand(HedyTester.quotes)
+  def test_ask_quoted_string(self, q):
+    code = f"details is ask {q}tell me more{q}"
+    expected = "details = input(f'tell me more')"
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected)
+
+  @parameterized.expand(HedyTester.quotes)
+  def test_ask_Spanish(self, q):
+    code = f"""color is ask {q}Cuál es tu color favorito?{q}"""
+    expected = f"""color = input(f'Cuál es tu color favorito?')"""
     self.multi_level_tester(
       max_level=10,
       code=code,
@@ -149,6 +159,21 @@ class TestsLevel4(HedyTester):
     )
 
   # is - assign tests
+  def test_assign_print(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')""")
+
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected
+    )
+
   def test_assign_underscore(self):
     code = textwrap.dedent("""\
     voor_naam is Hedy
@@ -378,9 +403,9 @@ class TestsLevel4(HedyTester):
     self.assertEqual(1, context.exception.error_location[0])
     self.assertEqual(1, context.exception.error_location[1])
 
-  def test_missing_opening_quote(self):
-    code = textwrap.dedent("""\
-      print hallo wereld'""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_missing_opening_quote(self, q):
+    code = f"""print hallo wereld{q}"""
 
     self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
   
@@ -431,11 +456,11 @@ class TestsLevel4(HedyTester):
     self.assertEqual(True, hedy.hash_needed('héyyy'))
     self.assertEqual(False, hedy.hash_needed('heyyy'))
 
-
-  def test_meta_column_missing_closing_quote(self):
-    code = textwrap.dedent("""\
-    print 'Hello'
-    print 'World""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_meta_column_missing_closing_quote(self, q):
+    code = textwrap.dedent(f"""\
+    print {q}Hello{q}
+    print {q}World""")
 
     instance = hedy.IsValid()
     instance.level = self.level
@@ -448,17 +473,14 @@ class TestsLevel4(HedyTester):
     line = invalid_info.line
     column = invalid_info.column
 
-    # Boryana Jan 22
-    # Proabably we want to change the column so that it points to
-    # the place where the quote is actually missing?
     self.assertEqual(2, line)
     self.assertEqual(7, column)
 
-
-  def test_meta_column_missing_opening_quote(self):
-    code = textwrap.dedent("""\
-    print 'Hello'
-    print World'""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_meta_column_missing_opening_quote(self, q):
+    code = textwrap.dedent(f"""\
+    print {q}Hello{q}
+    print World{q}""")
 
     instance = hedy.IsValid()
     instance.level = self.level
