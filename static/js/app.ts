@@ -232,10 +232,17 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
   if (reloadOnExpiredSession ()) return;
   StopExecution = true;
 
+
   const outputDiv = $('#output');
+  //Saving the variable button because sk will overwrite the output div
+  const variableButton = $(outputDiv).find('#variable_button');
+  const variables = $(outputDiv).find('#variables');
   outputDiv.empty();
   $('#turtlecanvas').empty();
 
+  outputDiv.addClass("overflow-auto");
+  outputDiv.append(variableButton);
+  outputDiv.append(variables);
   error.hide();
   success.hide();
 
@@ -790,7 +797,12 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   window.State.programsInExecution = 1;
 
   const outputDiv = $('#output');
+  //Saving the variable button because sk will overwrite the output div
+  const variableButton = $(outputDiv).find('#variable_button');
+  const variables = $(outputDiv).find('#variables');
   outputDiv.empty();
+  outputDiv.append(variableButton);
+  outputDiv.append(variables);
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
@@ -813,6 +825,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#turtlecanvas').empty();
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
+    $("#variable_button").trigger("click")
     $('#turtlecanvas').show();
   }
 
@@ -851,6 +864,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       pushAchievement("error_or_empty");
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+      return;
     }
     window.State.programsInExecution--;
     if(!hasWarnings) {
@@ -1009,12 +1023,24 @@ function speak(text: string) {
 export function prompt_unsaved(cb: () => void) {
   // This variable avoids showing the generic native `onbeforeunload` prompt
   window.State.no_unload_prompt = true;
-  if (! window.State.unsaved_changes || ! auth.profile) return cb ();
+  if (! window.State.unsaved_changes) return cb ();
   modal.confirm(ErrorMessages['Unsaved_Changes'], cb);
 }
 
 export function load_quiz(level: string) {
   $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+}
+
+export function showVariableView() {
+// When blue label button is clicked, the view will appear or hide
+  const variables = $('#variables');
+  if (variables.is(":hidden")) {
+    variables.show();
+    $("#variables").trigger("click")
+  }
+  else {
+    variables.hide();
+  }
 }
 
 //Feature flag for variable and values view
@@ -1023,90 +1049,65 @@ var variable_view = false;
 //Hides the HTML DIV for variables if feature flag is false
 if (!variable_view) {
   $('#variables').hide();
+  $('#variable_button').hide();
 }
 
 export function show_variables() {
-  if (variable_view) {
-    const variableBox = $('#variables');
-    const variableList = $('.variable-list');
+  if (variable_view === true) {
+    const variableList = $('#variable-list');
     if (variableList.hasClass('hidden')) {
       variableList.removeClass('hidden');
-      dragElement(variableBox[0]);
-    }
-    // makes it able to collapse the list
-    else {
-      variableList.addClass('hidden');
     }
   }
 }
 
 export function load_variables(variables: any){
     if (variable_view === true) {
+      //@ts-ignore
       variables = clean_variables(variables);
-      const variableList = $('.variable-list');
+      const variableList = $('#variable-list');
       variableList.empty();
       for (const i in variables) {
-        variableList.append(`<li>${variables[i][0]}: ${variables[i][1]}</li>`);
+        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
       }
     }
+}
+
+// Color-coding string, numbers, booleans and lists
+// This will be cool to use in the future!
+// Just change the colors to use it
+function special_style_for_variable(variable: any){
+  let result = '';
+  let parsedVariable = parseInt(variable.v);
+  if (typeof parsedVariable == 'number' && !isNaN(parsedVariable)){
+     result =  "#ffffff";
+   }
+   if(typeof variable.v == 'string' && isNaN(parsedVariable)){
+     result = "#ffffff";
+   }
+   if(typeof variable.v == 'boolean'){
+     result = "#ffffff";
+   }
+   if (variable.tp$name == 'list'){
+    result =  "#ffffff";
+   }
+   return result;
 }
 
 //hiding certain variables from the list unwanted for users
+// @ts-ignore
 function clean_variables(variables: any) {
   if (variable_view === true) {
     const new_variables = [];
-    const unwanted_variables = ["random", "time"];
+    const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
     for (const variable in variables) {
       if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-        let newTuple = [variable, variables[variable].v];
-        new_variables.push(newTuple);
+      let extraStyle = special_style_for_variable(variables[variable]);
+      let newTuple = [variable, variables[variable].v, extraStyle];
+      new_variables.push(newTuple);
       }
     }
     return new_variables;
-  }
-  else{
-    return null
-  }
-}
-
-// Making the list of variables draggable:
-function dragElement(element: HTMLElement) {
-  var XfromR = 0, Ybottom = 0, XfromL = 0, YfromTop = 0;
-  if (document.getElementById(element.id + "header")) {
-    document.getElementById(element.id + "header")!.onmousedown! = dragMouse;
-  }
-  else {
-    element.onmousedown = dragMouse;
-  }
-
-  function dragMouse(e: MouseEvent) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    XfromL = e.clientX;
-    YfromTop = e.clientY;
-    document.onmouseup = stopDragging;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDragging;
-  }
-
-  function elementDragging(e: MouseEvent) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the position of cursor movement:
-    XfromR = XfromL - e.clientX;
-    Ybottom = YfromTop - e.clientY;
-    XfromL = e.clientX;
-    YfromTop = e.clientY;
-    // set the new position of the variable list:
-    element.style.top = (element.offsetTop - Ybottom) + "px";
-    element.style.left = (element.offsetLeft - XfromR) + "px";
-  }
-
-  function stopDragging() {
-    // when mouse stops or is released, stop dragging element
-    document.onmousemove = null;
-    document.onmouseup = null;
   }
 }
 
