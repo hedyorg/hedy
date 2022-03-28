@@ -851,6 +851,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       pushAchievement("error_or_empty");
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+      return;
     }
     window.State.programsInExecution--;
     if(!hasWarnings) {
