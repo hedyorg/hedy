@@ -44,6 +44,7 @@ ALL_LANGUAGES = {
     'it': 'Italiano',
     'hu': 'Magyar',
     'nl': 'Nederlands',
+    'nb_NO': 'Norsk',
     'pt_br': 'Português(br)',
     'pt_pt': 'Português(pt)',
     'sw': 'Swahili',
