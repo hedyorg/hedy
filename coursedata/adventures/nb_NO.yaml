@@ -374,8 +374,8 @@ adventures:
                 example_code: "## Eksempel Hedykode\n\n```\nordene {is} skrik, Hedy\n{print} Lær din papegøye!\nnytt_ord {is} {ask} Hvilket nytt ord vil du lære den?\n{add} nytt_ord {to_list} ordene\n{print} \U0001F9D2 Si nytt_ord , Hedy!\n{print} \U0001F99C ordene {at} {random}\n```\n"
                 start_code: '# skriv koden din her'
             5:
-                story_text: "## Parrot\nReward your parrot {if} it says the correct word!\n"
-                example_code: "## Example Hedy code\n\n```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
+                story_text: "## Papegøye\nBelønn papegøyen din om det sier det riktige ordet!\n"
+                example_code: "## Eksempel Hedykode\n\n```\nordene {is} skrik, Hedy\n{print} 'Tren papegøyen din!'\nnytt_ord {is} {ask} 'Hvilket nytt ord vil du lære den?'\n{add} nytt_ord {to_list} ordene\nuttalt_ord {is} ordene {at} {random}\n{print} '\U0001F9D2 Si ' nytt_ord ', Hedy!'\n{print} '\U0001F99C ' uttalt_ord\n{if} uttalt_ord {is} nytt_ord {print} '\U0001F9D2 Godt jobbet, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 Nei, Hedy! Si ' nytt_ord\n```\n"
                 start_code: '# skriv koden din her'
     songs:
         name: Syng en sang!
@@ -384,7 +384,7 @@ adventures:
         default_save_name: Sang
         levels:
             12:
-                story_text: "## Sing a song!\nIn this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:\n"
+                story_text: "## Syng en sang!\n\nIn this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:\n"
                 example_code: "## Example Hedy code\n\n```\nactions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n{for} action {in} actions\n    {for} i {in} {range} 1 {to} 2\n        {print} '{if} youre happy and you know it'\n        {print} action\n    {print} '{if} youre happy and you know it and you really want to show it'\n    {print} '{if} youre happy and you know it'\n    {print} action\n```\n"
                 start_code: '# skriv koden din her'
             11:
