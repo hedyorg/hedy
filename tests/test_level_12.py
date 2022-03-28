@@ -148,10 +148,11 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
-  def test_ask_with_string_var(self):
-    code = textwrap.dedent("""\
-      color is 'orange'
-      favorite is ask 'Is your fav color' color""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_ask_with_string_var(self, q):
+    code = textwrap.dedent(f"""\
+      color is {q}orange{q}
+      favorite is ask {q}Is your fav color{q} color""")
 
     expected = textwrap.dedent("""\
       color = 'orange'
@@ -260,11 +261,12 @@ class TestsLevel12(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
-  def test_if_in_list_with_string_var_gives_type_error(self):
-    code = textwrap.dedent("""\
-    items is 'red'
-    if 'red' in items
-        print 'found!'""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_if_in_list_with_string_var_gives_type_error(self, q):
+    code = textwrap.dedent(f"""\
+    items is {q}red{q}
+    if {q}red{q} in items
+        print {q}found!{q}""")
     self.multi_level_tester(
       max_level=16,
       code=code,
@@ -419,9 +421,10 @@ class TestsLevel12(HedyTester):
       extra_check_function=check_output
     )
 
-  def test_assign_string_with_quotes(self):
-    code = textwrap.dedent("""\
-            name is 'felienne'
+  @parameterized.expand(HedyTester.quotes)
+  def test_assign_string_with_quotes(self, q):
+    code = textwrap.dedent(f"""\
+            name is {q}felienne{q}
             print name""")
     expected = textwrap.dedent("""\
             name = 'felienne'
@@ -432,10 +435,11 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
-  def test_assign_string_with_quotes_and_string_value(self):
-    code = textwrap.dedent("""\
-            name is 'felienne'
-            print 'hallo ' name""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_assign_string_with_quotes_and_string_value(self, q):
+    code = textwrap.dedent(f"""\
+            name is {q}felienne{q}
+            print {q}hallo {q} name""")
     expected = textwrap.dedent("""\
             name = 'felienne'
             print(f'hallo {name}')""")
@@ -460,20 +464,22 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
-  def test_print_concat_quoted_strings(self):
-    code = """print 'Hi ' + 'there'"""
+  @parameterized.expand(HedyTester.quotes)
+  def test_print_concat_quoted_strings(self, q):
+    code = f"""print {q}Hi {q} + {q}there{q}"""
     expected = """print(f'{"Hi " + "there"}')"""
 
     self.multi_level_tester(
-      max_level=17,
+      max_level=12,
       code=code,
       expected=expected
     )
 
-  def test_print_concat_var_and_literal_string(self):
-    code = textwrap.dedent("""\
-      hi = 'Hi'
-      print hi + ' there'""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_print_concat_var_and_literal_string(self, q):
+    code = textwrap.dedent(f"""\
+      hi = {q}Hi{q}
+      print hi + {q} there{q}""")
     expected = textwrap.dedent("""\
       hi = 'Hi'
       print(f'{hi + " there"}')""")
@@ -494,9 +500,9 @@ class TestsLevel12(HedyTester):
       exception=hedy.exceptions.InvalidTypeCombinationException
     )
 
-  def test_calc_quoted_string_and_int_gives_type_error(self):
-    code = textwrap.dedent("""\
-      y is 'test1' + 1""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_calc_quoted_string_and_int_gives_type_error(self, q):
+    code = f"""y is {q}test1{q} + 1"""
 
     self.multi_level_tester(
       code=code,
@@ -504,9 +510,19 @@ class TestsLevel12(HedyTester):
     )
 
   @parameterized.expand(['-', '*', '/'])
-  def test_calc_with_quoted_strings_gives_type_error(self, operation):
+  def test_calc_with_single_quoted_strings_gives_type_error(self, operation):
     code = textwrap.dedent(f"""\
       a is 1 {operation} 'Test'""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
+  @parameterized.expand(['-', '*', '/'])
+  def test_calc_with_double_quoted_strings_gives_type_error(self, operation):
+    code = textwrap.dedent(f"""\
+      a is 1 {operation} "Test\"""")
 
     self.multi_level_tester(
       code=code,
@@ -608,11 +624,12 @@ class TestsLevel12(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-  def test_if_quotes_in_condition(self):
-    code = textwrap.dedent("""\
-    naam is 'Hedy'
-    if naam is 'Hedy'
-        print 'koekoek'""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_if_quotes_in_condition(self, q):
+    code = textwrap.dedent(f"""\
+    naam is {q}Hedy{q}
+    if naam is {q}Hedy{q}
+        print {q}koekoek{q}""")
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
@@ -621,11 +638,12 @@ class TestsLevel12(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-  def test_if_quotes_and_spaces_in_condition(self):
-    code = textwrap.dedent("""\
-    naam is 'Hedy is top'
-    if naam is 'Hedy is top'
-        print 'koekoek'""")
+  @parameterized.expand(HedyTester.quotes)
+  def test_if_quotes_and_spaces_in_condition(self, q):
+    code = textwrap.dedent(f"""\
+    naam is {q}Hedy is top{q}
+    if naam is {q}Hedy is top{q}
+        print {q}koekoek{q}""")
     expected = textwrap.dedent("""\
     naam = 'Hedy is top'
     if str(naam) == str('Hedy is top'):
@@ -634,13 +652,14 @@ class TestsLevel12(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-  def test_if_else_quotes_in_condition(self):
-    code = textwrap.dedent("""\
-    naam is 'Hedy'
-    if naam is 'Hedy'
-        print 'koekoek'
+  @parameterized.expand(HedyTester.quotes)
+  def test_if_else_quotes_in_condition(self, q):
+    code = textwrap.dedent(f"""\
+    naam is {q}Hedy{q}
+    if naam is {q}Hedy{q}
+        print {q}koekoek{q}
     else
-        print 'soepkip'""")
+        print {q}soepkip{q}""")
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
