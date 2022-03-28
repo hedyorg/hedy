@@ -143,6 +143,24 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_double_if_else_ask(self):
+
+    code = textwrap.dedent("""\
+    naam is ask 'hoe heet jij?'
+    if naam is Hedy print 'leuk'
+    else print 'stom'
+    if naam is Python print 'ook leuk'
+    else print 'minder leuk!'""")
+
+    expected = textwrap.dedent("""\
+    kleur = input(f'Wat is je lievelingskleur?')
+    if kleur == 'groen':
+      print(f'mooi!')
+    else:
+      print(f'niet zo mooi')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
   def test_print_if_else_with_line_break(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
     code = textwrap.dedent("""\
