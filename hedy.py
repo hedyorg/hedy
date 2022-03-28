@@ -35,27 +35,29 @@ reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal'
 
 # Define and load all available language data
 ALL_LANGUAGES = {
+    'id': 'Bahasa Indonesia',
+    'de': 'Deutsch',
     'en': 'English',
-    'nl': 'Nederlands',
     'es': 'Español',
     'fr': 'Français',
     'pt_PT': 'Português (pt)',
     'pt_BR': 'Português (br)',
-    'de': 'Deutsch',
+    'fy': 'Frysk',
     'it': 'Italiano',
-    'sw': 'Swahili',
     'hu': 'Magyar',
     'el': 'Ελληνικά',
     'zh_Hans': "简体中文",
+    'nl': 'Nederlands',
+    'nb_NO': 'Norsk',
+    'sw': 'Swahili',
+    'tr': 'Türk',
     'cs': 'Čeština',
     'bg': 'Български',
-    'bn': 'বাংলা',
-    'hi': 'हिंदी',
-    'id': 'Bahasa Indonesia',
-    'fy': 'Frysk',
     'ar': 'عربى',
-    'tr': 'Türk'
+    'hi': 'हिंदी',
+    'bn': 'বাংলা',
 }
+
 # Define fall back languages for adventures
 FALL_BACK_ADVENTURE = {
     'fy': 'nl',
