@@ -10,7 +10,7 @@ adventures:
             1:
                 story_text: |
                     ## Sing a song about money
-                    Use the `print` command to print line in the output screen.
+                    Use the `{print}` command to print line in the output screen.
                     
                     Do you want to hear Hedy sing it? Use the read-aloud function beneath the 'run code' button.
                     
@@ -23,15 +23,15 @@ adventures:
                 example_code: |
                     ## Example Hedy code
                     ```
-                    print I don't know what they want from me
-                    print It's like the more money we come across
-                    print The more problems we see
-                    print I don't know what they want from me
-                    print It's like the more money we come across
-                    print The more problems we see
+                    {print} I don't know what they want from me
+                    {print} It's like the more money we come across
+                    {print} The more problems we see
+                    {print} I don't know what they want from me
+                    {print} It's like the more money we come across
+                    {print} The more problems we see
                     ```
 
-                start_code: "print Mo money Mo problems"
+                start_code: "{print} Mo money Mo problems"
             2:
                 story_text: |
                     ## Make your own virtual shop
@@ -44,15 +44,15 @@ adventures:
                 example_code: |
                     ## Example Hedy code
                     ```
-                    price is 3
-                    print Welcome to my shop
-                    product is ask What would you like to buy?
-                    print You would like to buy a product
-                    print That will be price euro please
-                    print Thank you! Bye!
+                    price {is} 3
+                    {print} Welcome to my shop
+                    product {is} {ask} What would you like to buy?
+                    {print} You would like to buy a product
+                    {print} That will be price euro please
+                    {print} Thank you! Bye!
                     ```
 
-                start_code: "print Welcome to my shop"
+                start_code: "{print} Welcome to my shop"
             3:
                 story_text: |
                     ## Make smart choices
@@ -66,14 +66,14 @@ adventures:
                 example_code: |
                     ## Example Hedy code
                     ```
-                    price is 1 euro, 10 euros, 100 euros, 1 million euros
-                    product is skateboard, banana, race car, dog
+                    price {is} 1 euro, 10 euros, 100 euros, 1 million euros
+                    product {is} skateboard, banana, race car, dog
                     
                     print Would you buy...
-                    print  a product at random for price at random
-                    answer is ask Would you buy it?
+                    {print} a product {at} {random} for price {at} {random}
+                    answer {is} {ask} Would you buy it?
                     ```
-                start_code: "print Make smart choices!"
+                start_code: "{print} Make smart choices!"
             4:
                 story_text: |
                     ## Make your own virtual restaurant
@@ -87,20 +87,20 @@ adventures:
                 example_code: |
                     ## Example Hedy code
                     ```
-                    print 'Welcome to Hedys restaurant!'
-                    print 'Today we are serving pizza or lasagna.'
-                    food is ask 'What would you like to eat?'
-                    print 'Great choice! The ' food ' is my favorite!'
-                    drinks is ask 'What would you like to drink with that?'
-                    print 'Thank you for your order.'
-                    price is 20 euros
-                    print 'That will be ' price
-                    payment is ask 'Would you like to pay cash or card?'
-                    print 'No problem!'
-                    print 'Your ' food ' and ' drinks ' are on their way!'
+                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Today we are serving pizza or lasagna.'
+                    food {is} {ask} 'What would you like to eat?'
+                    {print} 'Great choice! The ' food ' is my favorite!'
+                    drinks {is} {ask} 'What would you like to drink with that?'
+                    {print} 'Thank you for your order.'
+                    price {is} 20 euros
+                    {print} 'That will be ' price
+                    payment {is} {ask} 'Would you like to pay cash or card?'
+                    {print} 'No problem!'
+                    {print} 'Your ' food ' and ' drinks ' are on their way!'
                     ```
 
-                start_code: "print 'Welcome to Hedys restaurant!'"
+                start_code: "{print} 'Welcome to Hedys restaurant!'"
 
             5:
                 story_text: |
@@ -114,17 +114,17 @@ adventures:
                 example_code: |
                     ## Example Hedy code
                     ```
-                    print 'Welcome to The Price Is Right!'
-                    print 'Im your host, Hedy.'
-                    print 'Our first price tonight is a skateboard!'
-                    price is 30
-                    print 'Your options are 5 euros, 15 euros or 30 euros'
-                    guess is ask 'How much do you guess it costs?'
-                    if guess is price print 'Great job! You won the skateboard!'
-                    else print 'No! You lose! The actual price was... ' price
+                    {print} 'Welcome to The Price Is Right!'
+                    {print} 'Im your host, Hedy.'
+                    {print} 'Our first price tonight is a skateboard!'
+                    price {is} 30
+                    {print} 'Your options are 5 euros, 15 euros or 30 euros'
+                    guess {is} {ask} 'How much do you guess it costs?'
+                    {if} guess {is} price {print} 'Great job! You won the skateboard!'
+                    {else} {print} 'No! You lose! The actual price was... ' price
                     ```
 
-                start_code: "print 'Welcome to The Price is right!'"
+                start_code: "{print} 'Welcome to The Price is right!'"
             6:
                 story_text: |
                     ## Piggybank
@@ -138,18 +138,18 @@ adventures:
                 example_code: |
                     ## Example Hedy code
                     ```
-                    print 'The digital piggy bank'
-                    wish = ask 'What would you like to buy?'
-                    price = ask 'How much does that cost?'
-                    saved = ask 'How much money have you saved already?'
-                    allowance = ask 'How much pocket money do you get per week?'
+                    {print} 'The digital piggy bank'
+                    wish = {ask} 'What would you like to buy?'
+                    price = {ask} 'How much does that cost?'
+                    saved = {ask} 'How much money have you saved already?'
+                    allowance = {ask} 'How much pocket money do you get per week?'
                     to_save = price - saved
                     weeks = to_save / allowance
-                    print 'You can buy a ' wish ' in ' weeks ' weeks.'
+                    {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
                     
                     ```
 
-                start_code: "print 'The digital piggy bank'"
+                start_code: "{print} 'The digital piggy bank'"
     story:
         name: "Story"
         description: "Story"
