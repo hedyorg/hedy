@@ -2293,7 +2293,7 @@ adventures:
             1:
                 story_text: |
                     ## Zing een liedje over geld
-                    Gebruik `print` om de songtekst van een liedje te laten verschijnen op het uitvoerscherm.
+                    Gebruik `{print}` om de songtekst van een liedje te laten verschijnen op het uitvoerscherm.
 
                     Wil je Hedy het liedje horen zingen? Gebruik dan de voorleesfuctie onder de uitvoerknop.
 
@@ -2306,15 +2306,15 @@ adventures:
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    print I don't know what they want from me
-                    print It's like the more money we come across
-                    print The more problems we see
-                    print I don't know what they want from me
-                    print It's like the more money we come across
-                    print The more problems we see
+                    {print} I don't know what they want from me
+                    {print} It's like the more money we come across
+                    {print} The more problems we see
+                    {print} I don't know what they want from me
+                    {print} It's like the more money we come across
+                    {print} The more problems we see
                     ```
 
-                start_code: "print Mo money Mo problems"
+                start_code: "{print} Mo money Mo problems"
             2:
                 story_text: |
                     ## Maak je eigen virtuele winkel
@@ -2327,15 +2327,15 @@ adventures:
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    prijs is 3
-                    print Welkom in mijn winkel
-                    product is ask Wat wil je kopen?
-                    print Jij wil graag een product kopen.
-                    print Dat wordt dan prijs euro alstublieft.
-                    print Bedankt en tot ziens!
+                    prijs {is} 3
+                    {print} Welkom in mijn winkel
+                    product {is} {ask} Wat wil je kopen?
+                    {print} Jij wil graag een product kopen.
+                    {print} Dat wordt dan prijs euro alstublieft.
+                    {print} Bedankt en tot ziens!
                     ```
 
-                start_code: "print Welkom in de winkel"
+                start_code: "{print} Welkom in de winkel"
             3:
                 story_text: |
                     ## Slim kiezen
@@ -2348,14 +2348,14 @@ adventures:
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    prijs is 1 euro, 10 euro, 100 euro, 1 miljoen euro
-                    product is skateboard, banaan, racewagen, konijn
+                    prijs {is} 1 euro, 10 euro, 100 euro, 1 miljoen euro
+                    product {is} skateboard, banaan, racewagen, konijn
 
-                    print Zou jij dit kopen...
-                    print  een product at random voor prijs at random
-                    antwoord is ask Zou jij het kopen?
+                    {print} Zou jij dit kopen...
+                    {print} een product {at} {random} voor prijs {at} {random}
+                    antwoord {is} {ask} Zou jij het kopen?
                     ```
-                start_code: "print Slim kiezen!"
+                start_code: "{print} Slim kiezen!"
             4:
                 story_text: |
                     ## Maak je eigen virtuele restaurant
@@ -2363,26 +2363,26 @@ adventures:
                     Kijk maar naar het voorbeeld. Let op! Op dit level moet je aanhalingstekens gebruiken bij print en ask.
 
                     ## Challenge
-                    Maak je eiegn versie van het restaurant. Misschien wil jij geen Italiaan, maar een broodjeszaak, snackbar of ijssalon?
+                    Maak je eigen versie van het restaurant. Misschien wil jij geen Italiaan, maar een broodjeszaak, snackbar of ijssalon?
                     Je kunt de code aanpassen naar wat jij maar wil!
 
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    print 'Welkom bij restaurant Hedy!'
-                    print 'Vandaag serveren we pizza of lasagna.'
-                    eten is ask 'Wat wil je eten?'
-                    print 'Goede keuze! Ik hou ook van ' eten
-                    drinken is ask 'Wat wil je drinken?'
-                    print 'Bedankt voor uw bestelling.'
-                    price is 20 euro
-                    print 'Dat wordt dan ' prijs
-                    betalen is ask 'Wilt u pinnen?'
-                    print 'Geen probleem!'
-                    print 'Uw ' eten ' and ' drinken ' zijn onderweg!'
+                    {print} 'Welkom bij restaurant Hedy!'
+                    {print} 'Vandaag serveren we pizza of lasagna.'
+                    eten {is} {ask} 'Wat wil je eten?'
+                    {print} 'Goede keuze! Ik hou ook van ' eten
+                    drinken {is} {ask} 'Wat wil je drinken?'
+                    {print} 'Bedankt voor uw bestelling.'
+                    prijs {is} 20 euro
+                    {print} 'Dat wordt dan ' prijs
+                    betalen {is} {ask} 'Wilt u pinnen?'
+                    {print} 'Geen probleem!'
+                    {print} 'Uw ' eten ' en ' drinken ' zijn onderweg!'
                     ```
 
-                start_code: "print 'Welkom in restaurant Hedy!'"
+                start_code: "{print} 'Welkom in restaurant Hedy!'"
 
             5:
                 story_text: |
@@ -2396,17 +2396,17 @@ adventures:
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    print 'Prijzenslag!'
-                    print 'Ik ben uw presentator, Hedy.'
-                    print 'Onze eerste prijs voor vanavond is een skateboard!'
-                    prijs is 30
-                    print 'De opties zijn 5 euro, 15 euro of 30 euro'
-                    gok is ask 'Hoeveel denk jij dat het kost?'
-                    if gok is prijs print 'Goed gedaan! Je wint het skateboard'
-                    else print 'Helaas... Het kostte ' prijs
+                    {print} 'Prijzenslag!'
+                    {print} 'Ik ben uw presentator, Hedy.'
+                    {print} 'Onze eerste prijs voor vanavond is een skateboard!'
+                    prijs {is} 30
+                    {print} 'De opties zijn 5 euro, 15 euro of 30 euro'
+                    gok {is} {ask} 'Hoeveel denk jij dat het kost?'
+                    {if} gok {is} prijs {print} 'Goed gedaan! Je wint het skateboard'
+                    {else} {print} 'Helaas... Het kostte ' prijs
                     ```
 
-                start_code: "print 'Welkom bij Prijzenslag!'"
+                start_code: "{print} 'Welkom bij Prijzenslag!'"
             6:
                 story_text: |
                     ## Spaarvarkentje
@@ -2419,17 +2419,17 @@ adventures:
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    print 'Het digitale spaarvarken'
-                    wens = ask 'Wat zou je graag willen hebben?'
-                    prijs = ask 'Hoeveel kost dat?'
-                    gespaard = ask 'Hoeveel geld heb je al gespaard?'
-                    zakgeld = ask 'Hoeveel zakgeld krijg je per week?'
+                    {print} 'Het digitale spaarvarken'
+                    wens = {ask} 'Wat zou je graag willen hebben?'
+                    prijs = {ask} 'Hoeveel kost dat?'
+                    gespaard = {ask} 'Hoeveel geld heb je al gespaard?'
+                    zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
                     sparen = prijs - gespaard
                     weken = sparen / zakgeld
-                    print 'Je kunt over ' weken ' weken een ' wens ' kopen!'
+                    {print} 'Je kunt over ' weken ' weken een ' wens ' kopen!'
                     ```
 
-                start_code: "print 'Het digitale spaarvarken'"
+                start_code: "{print} 'Het digitale spaarvarken'"
     next:
         name: "Vooruitblik"
         description: "Vooruitblik"
