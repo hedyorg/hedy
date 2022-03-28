@@ -723,11 +723,15 @@ function rule_symbols(symbols : string) {
 }
 
 function rule_string() {
-  return {
+  return [{
+    regex: /\"[^\"]*\"/,
+    token: 'constant.character',
+    next: 'start',
+  },{
     regex: /\'[^\']*\'/,
     token: 'constant.character',
     next: 'start',
-  };
+  }];
 }
 
 
