@@ -6,7 +6,7 @@ import yaml
 from os import path
 
 # TODO, FH mar 2022, why don't we grab ALL_KEYW_LANGS from hedy?
-KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr', 'ar', 'nb_NO']
+KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr', 'ar', 'tr', 'hi', 'nb_NO']
 
 # Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")

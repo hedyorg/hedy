@@ -55,8 +55,9 @@ def transform_yaml_to_lark(only_new_lang=True):
             print(f'Warning! {translation} is a duplicate translation. This is not desired when creating lark files')
           else:
             list_of_translations.append(translation)
-        
-        if command != 'random':
+
+        # random, left and right are tokens and need to be printed lowercase without _
+        if command != 'random' and  command != 'left' and  command != 'right' and type(command) != int:
           command_upper = command.upper()
           command = '_' + command_upper
 
