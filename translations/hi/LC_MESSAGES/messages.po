@@ -2,17 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-23 10:42+0100\n"
+"POT-Creation-Date: 2022-03-24 15:04+0100\n"
 "PO-Revision-Date: 2022-03-23 11:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Hindi <https://hosted.weblate.org/projects/hedy/web-texts/hi/>"
-"\n"
 "Language: hi\n"
+"Language-Team: Hindi <https://hosted.weblate.org/projects/hedy/web-texts/hi/"
+">\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app.py:571
@@ -25,8 +24,9 @@ msgstr "This program contains an error, are you sure you want to share it?"
 msgid "title_achievements"
 msgstr "Hedy - My achievements"
 
-#: app.py:740 app.py:1107 website/teacher.py:359 website/teacher.py:368
-#: website/teacher.py:352 website/teacher.py:361 app.py:1108
+#: app.py:740 app.py:1107 website/teacher.py:365 website/teacher.py:374
+#: website/teacher.py:359 website/teacher.py:368 website/teacher.py:352
+#: website/teacher.py:361 app.py:1108
 msgid "not_teacher"
 msgstr "लगता है आप शिक्षक नहीं हैं!"
 
@@ -83,10 +83,11 @@ msgstr "This level is not translated in your language (yet)"
 msgid "level_not_class"
 msgstr "You're in a class where this level has not been made available yet"
 
-#: app.py:982 website/teacher.py:426 website/teacher.py:442
-#: website/teacher.py:471 website/teacher.py:497 website/teacher.py:419
-#: website/teacher.py:435 website/teacher.py:464 website/teacher.py:490
-#: app.py:983
+#: app.py:982 website/teacher.py:432 website/teacher.py:448
+#: website/teacher.py:477 website/teacher.py:503 website/teacher.py:426
+#: website/teacher.py:442 website/teacher.py:471 website/teacher.py:497
+#: website/teacher.py:419 website/teacher.py:435 website/teacher.py:464
+#: website/teacher.py:490 app.py:983
 #, fuzzy
 msgid "no_such_adventure"
 msgstr "This adventure doesn't exist!"
@@ -164,12 +165,14 @@ msgstr ""
 #: app.py:1297 website/auth.py:299 website/auth.py:347 website/auth.py:483
 #: website/auth.py:509 website/auth.py:539 website/auth.py:645
 #: website/auth.py:677 website/auth.py:717 website/auth.py:744
-#: website/teacher.py:90 website/teacher.py:193 website/teacher.py:251
-#: website/teacher.py:298 website/teacher.py:337 website/teacher.py:373
-#: website/teacher.py:453 website/teacher.py:511 website/teacher.py:81
-#: website/teacher.py:250 website/teacher.py:297 website/teacher.py:330
-#: website/teacher.py:366 website/teacher.py:446 website/teacher.py:504
-#: app.py:1298
+#: website/teacher.py:90 website/teacher.py:125 website/teacher.py:197
+#: website/teacher.py:255 website/teacher.py:302 website/teacher.py:343
+#: website/teacher.py:379 website/teacher.py:459 website/teacher.py:517
+#: website/teacher.py:193 website/teacher.py:251 website/teacher.py:298
+#: website/teacher.py:337 website/teacher.py:373 website/teacher.py:453
+#: website/teacher.py:511 website/teacher.py:81 website/teacher.py:250
+#: website/teacher.py:297 website/teacher.py:330 website/teacher.py:366
+#: website/teacher.py:446 website/teacher.py:504 app.py:1298
 msgid "ajax_error"
 msgstr "एक त्रुटि थी, कृपया पुनः प्रयास करें।"
 
@@ -507,10 +510,6 @@ msgstr "कक्षा को अनुकूलित करें"
 msgid "class_name_prompt"
 msgstr "कृपया कक्षा का नाम दर्ज करें"
 
-#: templates/class-overview.html:93 templates/for-teachers.html:23
-msgid "class_name_empty"
-msgstr "आपने कक्षा का नाम नहीं डाला!"
-
 #: templates/class-overview.html:93
 msgid "rename_class"
 msgstr "कक्षा का नाम परिवर्तित करें"
@@ -518,10 +517,6 @@ msgstr "कक्षा का नाम परिवर्तित करे�
 #: templates/class-overview.html:94
 msgid "invite_prompt"
 msgstr "एक उपयोगकर्ता नाम दर्ज करें"
-
-#: templates/class-overview.html:94
-msgid "username_empty"
-msgstr "आपने उपयोगकर्ता नाम दर्ज नहीं किया!"
 
 #: templates/class-overview.html:94
 msgid "invite_student"
@@ -577,7 +572,8 @@ msgstr "मेरी प्रोफ़ाइल पर जाएँ"
 msgid "prompt_join_class"
 msgstr "क्या आप इस कक्षा में शामिल होना चाहते हैं?"
 
-#: templates/class-prejoin.html:17 website/teacher.py:179
+#: templates/class-prejoin.html:17 website/teacher.py:183
+#: website/teacher.py:179
 msgid "join_prompt"
 msgstr ""
 "कक्षा में शामिल होने के लिए आपके पास एक खाता होना चाहिए। क्या आप अभी लॉग इन करना "
@@ -859,11 +855,8 @@ msgstr "नज़र डालें"
 msgid "adventure_prompt"
 msgstr "कृपया adventure का नाम दर्ज करें"
 
-#: templates/for-teachers.html:50
-msgid "adventure_empty"
-msgstr "आपने एक adventure नाम दर्ज नहीं किया!"
-
-#: templates/for-teachers.html:50 website/teacher.py:506 website/teacher.py:499
+#: templates/for-teachers.html:50 website/teacher.py:512 website/teacher.py:506
+#: website/teacher.py:499
 msgid "create_adventure"
 msgstr "adventure बनाएं"
 
@@ -1466,8 +1459,8 @@ msgstr "Hedy - Administrator page"
 #: website/auth.py:241 website/auth.py:301 website/auth.py:485
 #: website/auth.py:647 website/auth.py:656 website/auth.py:679
 #: website/auth.py:719 website/auth.py:726 website/auth.py:746
-#: website/teacher.py:300 website/teacher.py:339 website/teacher.py:299
-#: website/teacher.py:332
+#: website/teacher.py:304 website/teacher.py:345 website/teacher.py:300
+#: website/teacher.py:339 website/teacher.py:299 website/teacher.py:332
 msgid "username_invalid"
 msgstr "आपका उपयोगकर्ता नाम अमान्य है"
 
@@ -1636,19 +1629,28 @@ msgid "favourite_success"
 msgstr "आपका प्रोग्राम पसंदीदा के रूप में सेट है"
 
 #: website/statistics.py:37 website/teacher.py:28 website/teacher.py:36
-#: website/teacher.py:207 website/teacher.py:231 website/teacher.py:243
-#: website/teacher.py:308 website/teacher.py:347 website/teacher.py:230
-#: website/teacher.py:242 website/teacher.py:307 website/teacher.py:340
+#: website/teacher.py:211 website/teacher.py:235 website/teacher.py:247
+#: website/teacher.py:314 website/teacher.py:353 website/teacher.py:207
+#: website/teacher.py:231 website/teacher.py:243 website/teacher.py:308
+#: website/teacher.py:347 website/teacher.py:230 website/teacher.py:242
+#: website/teacher.py:307 website/teacher.py:340
 msgid "retrieve_class_error"
 msgstr "केवल शिक्षक ही कक्षाएं पुनः प्राप्त कर सकते हैं"
 
-#: website/statistics.py:41 website/teacher.py:39 website/teacher.py:148
-#: website/teacher.py:210 website/teacher.py:234 website/teacher.py:246
-#: website/teacher.py:311 website/teacher.py:350 website/teacher.py:139
-#: website/teacher.py:233 website/teacher.py:245 website/teacher.py:310
-#: website/teacher.py:343
+#: website/statistics.py:41 website/teacher.py:39 website/teacher.py:133
+#: website/teacher.py:152 website/teacher.py:214 website/teacher.py:238
+#: website/teacher.py:250 website/teacher.py:317 website/teacher.py:356
+#: website/teacher.py:148 website/teacher.py:210 website/teacher.py:234
+#: website/teacher.py:246 website/teacher.py:311 website/teacher.py:350
+#: website/teacher.py:139 website/teacher.py:233 website/teacher.py:245
+#: website/teacher.py:310 website/teacher.py:343
 msgid "no_such_class"
 msgstr "ऐसी कोई हेडी कक्षा नहीं!"
+
+#: website/statistics.py:45
+#, fuzzy
+msgid "title_class statistics"
+msgstr "मेरे आंकड़े"
 
 #: website/teacher.py:76 website/teacher.py:67
 #, fuzzy
@@ -1660,131 +1662,147 @@ msgstr "Hedy - Class overview"
 msgid "only_teacher_create_class"
 msgstr "Only teachers are allowed to create classes!"
 
-#: website/teacher.py:92 website/teacher.py:83
+#: website/teacher.py:92 website/teacher.py:127 website/teacher.py:83
 #, fuzzy
 msgid "class_name_invalid"
 msgstr "This class name is invalid."
 
-#: website/teacher.py:98 website/teacher.py:89
+#: website/teacher.py:94 website/teacher.py:129
+#: templates/class-overview.html:93 templates/for-teachers.html:23
+msgid "class_name_empty"
+msgstr "आपने कक्षा का नाम नहीं डाला!"
+
+#: website/teacher.py:100 website/teacher.py:98 website/teacher.py:89
 msgid "class_name_duplicate"
 msgstr "आपके पास पहले से ही इस नाम की एक कक्षा है!"
 
+#: website/teacher.py:164 website/teacher.py:180 website/teacher.py:544
 #: website/teacher.py:160 website/teacher.py:176 website/teacher.py:536
 #: website/teacher.py:151 website/teacher.py:529
 msgid "invalid_class_link"
 msgstr "कक्षा में शामिल होने के लिए अमान्य लिंक|"
 
-#: website/teacher.py:164 website/teacher.py:158
+#: website/teacher.py:168 website/teacher.py:170 website/teacher.py:164
+#: website/teacher.py:158
 #, fuzzy
 msgid "title_join-class"
 msgstr "Hedy - Join class"
 
-#: website/teacher.py:221
+#: website/teacher.py:225 website/teacher.py:221
 #, fuzzy
 msgid "title_customize-class"
 msgstr "Hedy - Customize class"
 
-#: website/teacher.py:237 website/teacher.py:236
+#: website/teacher.py:241 website/teacher.py:237 website/teacher.py:236
 msgid "customization_deleted"
 msgstr "अनुकूलन सफलतापूर्वक हटा दिए गए।"
 
-#: website/teacher.py:290 website/teacher.py:289
+#: website/teacher.py:294 website/teacher.py:290 website/teacher.py:289
 msgid "class_customize_success"
 msgstr "कक्षा को सफलतापूर्वक अनुकूलित किया गया।"
 
-#: website/teacher.py:315 website/teacher.py:314
+#: website/teacher.py:308 templates/class-overview.html:94
+msgid "username_empty"
+msgstr "आपने उपयोगकर्ता नाम दर्ज नहीं किया!"
+
+#: website/teacher.py:321 website/teacher.py:315 website/teacher.py:314
 msgid "student_not_existing"
 msgstr "यह उपयोगकर्ता नाम मौजूद नहीं है"
 
-#: website/teacher.py:317 website/teacher.py:316
+#: website/teacher.py:323 website/teacher.py:317 website/teacher.py:316
 msgid "student_already_in_class"
 msgstr "यह छात्र पहले से ही आपकी कक्षा में है"
 
-#: website/teacher.py:319 website/teacher.py:318
+#: website/teacher.py:325 website/teacher.py:319 website/teacher.py:318
 msgid "student_already_invite"
 msgstr "इस छात्र के पास पहले से ही एक आमंत्रण लंबित है"
 
-#: website/teacher.py:378 website/teacher.py:371
+#: website/teacher.py:384 website/teacher.py:378 website/teacher.py:371
 #, fuzzy
 msgid "no_accounts"
 msgstr "There are no accounts to create."
 
-#: website/teacher.py:389 website/teacher.py:382
+#: website/teacher.py:395 website/teacher.py:389 website/teacher.py:382
 #, fuzzy
 msgid "unique_usernames"
 msgstr "All usernames need to be unique."
 
-#: website/teacher.py:392 website/teacher.py:385
+#: website/teacher.py:398 website/teacher.py:392 website/teacher.py:385
 #, fuzzy
 msgid "unique_emails"
 msgstr "All mail addresses need to be unique."
 
-#: website/teacher.py:403 website/teacher.py:396
+#: website/teacher.py:409 website/teacher.py:403 website/teacher.py:396
 #, fuzzy
 msgid "usernames_exist"
 msgstr "One or more usernames is already in use."
 
-#: website/teacher.py:406 website/teacher.py:399
+#: website/teacher.py:412 website/teacher.py:406 website/teacher.py:399
 #, fuzzy
 msgid "emails_exist"
 msgstr "One or more mail addresses is already in use."
 
-#: website/teacher.py:417 website/teacher.py:410
+#: website/teacher.py:423 website/teacher.py:417 website/teacher.py:410
 #, fuzzy
 msgid "accounts_created"
 msgstr "Accounts where successfully created."
 
-#: website/teacher.py:423 website/teacher.py:428 website/teacher.py:439
-#: website/teacher.py:468 website/teacher.py:494 website/teacher.py:416
-#: website/teacher.py:421 website/teacher.py:432 website/teacher.py:461
-#: website/teacher.py:487
+#: website/teacher.py:429 website/teacher.py:434 website/teacher.py:445
+#: website/teacher.py:474 website/teacher.py:500 website/teacher.py:423
+#: website/teacher.py:428 website/teacher.py:439 website/teacher.py:468
+#: website/teacher.py:494 website/teacher.py:416 website/teacher.py:421
+#: website/teacher.py:432 website/teacher.py:461 website/teacher.py:487
 #, fuzzy
 msgid "retrieve_adventure_error"
 msgstr "You're not allowed to view this adventure!"
 
-#: website/teacher.py:433 website/teacher.py:426
+#: website/teacher.py:439 website/teacher.py:433 website/teacher.py:426
 #, fuzzy
 msgid "title_view-adventure"
 msgstr "Hedy - View adventure"
 
-#: website/teacher.py:444 website/teacher.py:437
+#: website/teacher.py:450 website/teacher.py:444 website/teacher.py:437
 #, fuzzy
 msgid "title_customize-adventure"
 msgstr "Hedy - Customize adventure"
 
-#: website/teacher.py:455 website/teacher.py:448
+#: website/teacher.py:461 website/teacher.py:455 website/teacher.py:448
 msgid "adventure_id_invalid"
 msgstr "यह adventure आईडी अमान्य है"
 
-#: website/teacher.py:457 website/teacher.py:513 website/teacher.py:450
-#: website/teacher.py:506
+#: website/teacher.py:463 website/teacher.py:519 website/teacher.py:457
+#: website/teacher.py:513 website/teacher.py:450 website/teacher.py:506
 msgid "adventure_name_invalid"
 msgstr "यह adventure नाम अमान्य है"
 
-#: website/teacher.py:459 website/teacher.py:452
+#: website/teacher.py:465 website/teacher.py:459 website/teacher.py:452
 msgid "level_invalid"
 msgstr "यह हेडी स्तर अमान्य है"
 
-#: website/teacher.py:461 website/teacher.py:454
+#: website/teacher.py:467 website/teacher.py:461 website/teacher.py:454
 msgid "content_invalid"
 msgstr "यह adventure अमान्य है"
 
-#: website/teacher.py:463 website/teacher.py:456
+#: website/teacher.py:469 website/teacher.py:463 website/teacher.py:456
 msgid "adventure_length"
 msgstr "आपका adventure कम से कम 20 वर्णों का होना चाहिए"
 
-#: website/teacher.py:465 website/teacher.py:458
+#: website/teacher.py:471 website/teacher.py:465 website/teacher.py:458
 msgid "public_invalid"
 msgstr "यह अनुबंध चयन अमान्य है"
 
-#: website/teacher.py:476 website/teacher.py:518 website/teacher.py:469
-#: website/teacher.py:511
+#: website/teacher.py:482 website/teacher.py:526 website/teacher.py:476
+#: website/teacher.py:518 website/teacher.py:469 website/teacher.py:511
 msgid "adventure_duplicate"
 msgstr "आपके पास पहले से ही इस नाम का एक adventure है"
 
-#: website/teacher.py:488 website/teacher.py:481
+#: website/teacher.py:494 website/teacher.py:488 website/teacher.py:481
 msgid "adventure_updated"
 msgstr "adventure अद्यतन किया गया है!"
+
+#: website/teacher.py:521 templates/for-teachers.html:50
+msgid "adventure_empty"
+msgstr "आपने एक adventure नाम दर्ज नहीं किया!"
 
 #: app.py:833
 #, fuzzy
