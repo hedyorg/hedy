@@ -744,7 +744,7 @@ adventures:
                     ## Let's draw
                     You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!
 
-                    Using `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} right` turns a quarter turn in clockwise direction, `{turn} left` turns counter clockwise.
+                    Using `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.
 
                     This is the start of a little staircase. Can you make it have 5 steps?
 
@@ -752,14 +752,14 @@ adventures:
                     ## Example Hedy code
 
                     ```
-                    {turn} right
+                    {turn} {right}
                     {forward} 50
-                    {turn} left
+                    {turn} {left}
                     {forward} 50
                     ```
 
 
-                start_code: "{forward} 50\n{turn} left"
+                start_code: "{forward} 50\n{turn} {left}"
             2:
                 story_text: |
                     ## Turtle
@@ -2393,7 +2393,7 @@ adventures:
 
                     ```
                     numbers = [1, 2, 3]
-                    i = numbers[random]
+                    i = numbers[{random}]
                     hint = ['growling', 'a cackling laugh', 'fluttering batwings']
                     monsters = ['zombie', 'witch', 'vampire']
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
