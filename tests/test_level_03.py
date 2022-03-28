@@ -602,7 +602,7 @@ class TestsLevel3(HedyTester):
 
   def test_add_to_list_with_string_var_gives_error(self):
     code = textwrap.dedent("""\
-    color is yellow 
+    color is yellow
     colors is green, red, blue
     add colors to color""")
 
@@ -626,7 +626,7 @@ class TestsLevel3(HedyTester):
 
   def test_remove_from_list_with_string_var_gives_error(self):
     code = textwrap.dedent("""\
-    color is yellow 
+    color is yellow
     colors is green, red, blue
     remove colors from color""")
 
