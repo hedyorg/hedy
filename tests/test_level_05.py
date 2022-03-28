@@ -1,5 +1,6 @@
-import hedy, lark
+import hedy
 import textwrap
+from parameterized import parameterized
 from test_level_01 import HedyTester
 
 class TestsLevel5(HedyTester):
@@ -39,9 +40,11 @@ class TestsLevel5(HedyTester):
     self.single_level_tester(code=code,
                              expected=expected)
 
-  def test_assign_single_quote(self):
-    code = """message is 'Hello welcome to Hedy.'"""
-    expected = "message = '\\'Hello welcome to Hedy.\\''"
+  @parameterized.expand(HedyTester.quotes)
+  def test_assign_quotes(self, q):
+    code = f"""message is {q}Hello welcome to Hedy.{q}"""
+    eq = "\\'" if q == "'" else '"'
+    expected = f"message = '{eq}Hello welcome to Hedy.{eq}'"
     self.single_level_tester(code=code, expected=expected)
 
   # if
@@ -317,38 +320,41 @@ class TestsLevel5(HedyTester):
       code=code,
       exception=hedy.exceptions.UnquotedEqualityCheck)
 
-  def test_one_space_in_rhs_if(self):
-    code = textwrap.dedent("""\
+  @parameterized.expand(HedyTester.quotes)
+  def test_one_space_in_rhs_if(self, q):
+    code = textwrap.dedent(f"""\
     naam is James
-    if naam is 'James Bond' print 'shaken'""")
+    if naam is {q}James Bond{q} print {q}shaken{q}""")
 
-    expected = textwrap.dedent("""\
+    expected = textwrap.dedent(f"""\
     naam = 'James'
-    if naam == 'James Bond':
+    if naam == {q}James Bond{q}:
       print(f'shaken')""")
 
     self.single_level_tester(code=code, expected=expected)
 
-  def test_multiple_spaces_in_rhs_if(self):
-    code = textwrap.dedent("""\
+  @parameterized.expand(HedyTester.quotes)
+  def test_multiple_spaces_in_rhs_if(self, q):
+    code = textwrap.dedent(f"""\
     naam is James
-    if naam is 'Bond James Bond' print 'shaken'""")
+    if naam is {q}Bond James Bond{q} print 'shaken'""")
 
-    expected = textwrap.dedent("""\
+    expected = textwrap.dedent(f"""\
     naam = 'James'
-    if naam == 'Bond James Bond':
+    if naam == {q}Bond James Bond{q}:
       print(f'shaken')""")
 
     self.single_level_tester(code=code, expected=expected)
 
-  def test_one_space_in_rhs_if_else(self):
-    code = textwrap.dedent("""\
+  @parameterized.expand(HedyTester.quotes)
+  def test_one_space_in_rhs_if_else(self, q):
+    code = textwrap.dedent(f"""\
     naam is James
-    if naam is 'James Bond' print 'shaken' else print 'biertje!'""")
+    if naam is {q}James Bond{q} print {q}shaken{q} else print {q}biertje!{q}""")
 
-    expected = textwrap.dedent("""\
+    expected = textwrap.dedent(f"""\
     naam = 'James'
-    if naam == 'James Bond':
+    if naam == {q}James Bond{q}:
       print(f'shaken')
     else:
       print(f'biertje!')""")

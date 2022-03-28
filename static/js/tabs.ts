@@ -20,12 +20,17 @@ import { theGlobalEditor } from './app';
  * TARGET by the *absence* of the '.hidden' class.
  */
 $(function() {
-  function resetWindow() {
+function resetWindow() {
     $ ('#warningbox').hide ();
     $ ('#errorbox').hide ();
     $ ('#okbox').hide ();
-    $ ('#output').empty ();
+    const output = $('#output');
+    const variable_button = $(output).find('#variable_button');
+    const variables = $(output).find('#variables');
+    output.empty();
     $ ('#turtlecanvas').empty ();
+    output.append(variable_button);
+    output.append(variables);
     window.State.unsaved_changes = false;
   }
 

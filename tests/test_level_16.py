@@ -320,7 +320,8 @@ class TestsLevel16(HedyTester):
         self.single_level_tester(code, expected=expected)
 
     @parameterized.expand([
-        ("'text'", '1'),        # text and number
+        ('"text"', '1'),        # double-quoted text and number
+        ("'text'", '1'),        # single-quoted text and number
         ('[1, 2]', '1'),        # list and number
         ('[1, 2]', "'text'")])  # list and text
     def test_not_equal_with_diff_types_gives_error(self, left, right):
