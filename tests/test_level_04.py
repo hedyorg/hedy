@@ -495,3 +495,39 @@ class TestsLevel4(HedyTester):
 
     self.assertEqual(2, line)
     self.assertEqual(7, column)
+
+  def test_list_values_in_single_quotes(self):
+    code = textwrap.dedent(f"""\
+      taart is 'appeltaart, choladetaart, kwarktaart'
+      print 'we bakken een' taart at random""")
+
+    expected = textwrap.dedent("""\
+      taart = ['\\'appeltaart', 'choladetaart', 'kwarktaart\\'']
+      print(f'we bakken een{random.choice(taart)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected)
+
+  def test_list_values_with_single_quotes(self):
+    code = textwrap.dedent(f"""\
+      taart is 'appeltaart', 'choladetaart', 'kwarktaart'
+      print 'we bakken een' taart at random""")
+
+    expected = textwrap.dedent("""\
+      taart = ['\\'appeltaart\\'', '\\'choladetaart\\'', '\\'kwarktaart\\'']
+      print(f'we bakken een{random.choice(taart)}')""")
+
+    self.multi_level_tester(code=code, max_level=11, expected=expected)
+
+  def test_list_values_in_double_quotes(self):
+    code = textwrap.dedent(f"""\
+      taart is "appeltaart, choladetaart, kwarktaart"
+      print 'we bakken een' taart at random""")
+
+    expected = textwrap.dedent("""\
+      taart = ['"appeltaart', 'choladetaart', 'kwarktaart"']
+      print(f'we bakken een{random.choice(taart)}')""")
+
+    self.multi_level_tester(code=code, max_level=11, expected=expected)

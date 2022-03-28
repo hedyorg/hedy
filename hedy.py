@@ -412,6 +412,9 @@ class LookupEntryCollector(visitors.Visitor):
         if self.level > 1:
             self.add_to_lookup(tree.children[0].children[0], tree)
 
+    def input_empty_brackets(self, tree):
+        self.input(tree)
+
     def input(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree)
@@ -1333,7 +1336,7 @@ class ConvertToPython_2(ConvertToPython_1):
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, args):
         parameter = args[0]
-        values = ["'" + a + "'" for a in args[1:]]
+        values = ["'" + a.replace("'", "\\'") + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
@@ -1644,7 +1647,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, args):
         name = args[0]
-        # self.check_var_usage(args)
+        self.check_var_usage(args)
         return hash_var(name)
 
 @hedy_transpiler(level=13)
