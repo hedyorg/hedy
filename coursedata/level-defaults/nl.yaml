@@ -710,18 +710,18 @@
             fruit = ['appel', 'banaan', 'kers']
             {print} fruit
     -   name: "Pak iets uit een lijst"
-        explanation: "Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst !"
+        explanation: "Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst!"
         example: "Bijvoorbeeld: eerstefruit = fruit[1]"
         demo_code: |-
             fruit = ['banaan', 'appel', 'kers']
             eerstefruit = fruit[1]
             {print} eerstefruit
     -   name: "Pak een random item uit een lijst"
-        explanation: "Om een random item uit een lijst te pakken, gebruiken we [random]. Dus fruit[random] {is} pak een random fruit uit de lijst!"
-        example: "Bijvoorbeeld: randomfruit = fruit[random]"
+        explanation: "Om een random item uit een lijst te pakken, gebruiken we [{random}]. Dus fruit[{random}] pakt een random fruit uit de lijst!"
+        example: "Bijvoorbeeld: randomfruit = fruit[{random}]"
         demo_code: |-
             fruit = ['banaan', 'appel', 'kers']
-            randomfruit = fruit[random]
+            randomfruit = fruit[{random}]
             {print} randomfruit 
 
 
@@ -738,7 +738,7 @@
         Kijk maar...
         ```
         prijzen = ['1 miljoen euro', 'een appeltaart', 'niets']
-        jouw_prijs = prijzen[random]
+        jouw_prijs = prijzen[{random}]
         {print} 'Jij wint ' jouw_prijs
         {if} jouw_prijs == '1 miljoen euro' :
             {print} 'Joepie! Je bent rijk!'
