@@ -764,7 +764,7 @@ function rule_blank() {
     token: 'invalid',
     next: 'start',
   },{
-    regex: '(^| )(_)( |$)',
+    regex: '(^| )(_)(?=( |$))',
     token: ['text','invalid','text'],
     next: 'start',
   }];
