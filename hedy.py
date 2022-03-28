@@ -39,14 +39,14 @@ ALL_LANGUAGES = {
     'nl': 'Nederlands',
     'es': 'Español',
     'fr': 'Français',
-    'pt_pt': 'Português(pt)',
-    'pt_br': 'Português(br)',
+    'pt_PT': 'Português(pt)',
+    'pt_BR': 'Português(br)',
     'de': 'Deutsch',
     'it': 'Italiano',
     'sw': 'Swahili',
     'hu': 'Magyar',
     'el': 'Ελληνικά',
-    'zh': "简体中文",
+    'zh_Hans': "简体中文",
     'cs': 'Čeština',
     'bg': 'Български',
     'bn': 'বাংলা',
@@ -59,7 +59,7 @@ ALL_LANGUAGES = {
 # Define fall back languages for adventures
 FALL_BACK_ADVENTURE = {
     'fy': 'nl',
-    'pt_br': 'pt_pt'
+    'pt_BR': 'pt_PT'
 }
 
 ALL_KEYWORD_LANGUAGES = {
