@@ -39,7 +39,7 @@ ALL_LANGUAGES = {
     'nl': 'Nederlands',
     'es': 'Español',
     'fr': 'Français',
-    'nb_no': 'Norsk Bokmål',
+    'nb_NO': 'Norsk Bokmål',
     'pt_pt': 'Português(pt)',
     'pt_br': 'Português(br)',
     'de': 'Deutsch',
