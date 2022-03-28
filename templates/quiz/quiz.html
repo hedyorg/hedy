@@ -46,13 +46,13 @@
         <script type=text/javascript>
             function changeHint() {
                 const btn = document.getElementById("hint-button");
-                if (btn.innerText === "{{ ui.hint }}") {
+                if (btn.innerText === "{{ _('hint') }}") {
                     btn.innerText = document.getElementById('hidden-hint').textContent;
                     btn.innerHTML = "<i>" + document.getElementById('hidden-hint').textContent + "</i>";
                     $('#hint-button').css('background-color', 'rgba(198,246,213,0.51)');
                     $('#hint-button').css('border', '2.5px solid #2d9068');
                 } else {
-                    btn.innerText = "{{ ui.hint }}";
+                    btn.innerText = "{{ _('hint') }}";
                     $('#hint-button').css('background-color', '#bee3f8');
                     $('#hint-button').css('border', '2.5px solid #3182ce');
                     $('#hint-button').css('outline', '#3182ce');
