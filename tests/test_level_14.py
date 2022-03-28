@@ -207,11 +207,11 @@ class TestsLevel14(HedyTester):
     )
 
   @parameterized.expand([
+    ('"text"', "'text'"),
     ("'text'", "'text'"),
     ('1', '1'),
     ('1.3', '1.3'),
     ('1, 2', '[1, 2]')])
-
   def test_not_equal(self, arg, exp):
     code = textwrap.dedent(f"""\
       a is {arg}
@@ -314,9 +314,11 @@ class TestsLevel14(HedyTester):
     )
 
   @parameterized.expand([
-    ("'text'", '1'),      # text and number
+    ('"text"', '1'),      # double-quoted text and number
+    ("'text'", '1'),      # single-quoted text and number
     ('1, 2', '1'),        # list and number
-    ('1, 2', "'text'")])  # list and text
+    ('1, 2', "'text'"),   # list and single-quoted text
+    ('1, 2', '"text"')])  # list and double-quoted text
   def test_not_equal_with_diff_types_gives_error(self, left, right):
     code = textwrap.dedent(f"""\
       a is {left}

@@ -9,5 +9,5 @@ equality_check: (var_access | text_in_quotes | NUMBER) (_SPACE _IS _SPACE | _EQU
 in_list_check: (var_access | text_in_quotes | NUMBER) _SPACE _IN _SPACE var_access
 
 // all literal strings have to be quoted now, so arithmetic operators don't need to be excluded anymore
-textwithspaces: /(?:[^\n،,' ]| (?!else))+/ -> text
-text_in_quotes: _SINGLE_QUOTE textwithspaces _SINGLE_QUOTE
+textwithspaces: /(?:[^\n،,'" ]| (?!else))+/ -> text
+text_in_quotes: _QUOTE textwithspaces _QUOTE
