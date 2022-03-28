@@ -15,8 +15,8 @@
       </div>
       <div id="main_page_content">
           {% for section in content['sections'] %}
-          <h2>{{ section['title'] }}</h2>
-          <p>{{ section['text'] | commonmark }}</p>
+              <h2>{{ section['title'] }}</h2>
+              <p>{{ section['text'] | commonmark }}</p>
           {% endfor %}
       </div>
     </div>
