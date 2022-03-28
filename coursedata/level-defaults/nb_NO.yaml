@@ -34,7 +34,7 @@
     -   name: hermetegn i liste
         explanation: En liste med fnutter
         example: navn = 'Hedy', 'Felienne'
-        demo_code: "superhelter = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
+        demo_code: "superhelter = 'Iron Man', 'Batman', 'Superman'\n{print} superhelter {at} {random}\n"
     start_code: "{print} 'desimaltall må bruke et punktum nå'\n{print} 2.5 + 2.5"
     intro_text: "## Tall og tekst\n**Desimaltall**\nFør dette nivået har det ikke vært mulig å bruke desimaltall som 1.5 i Hedy, men fra nå av kan du det! Legg merke til at datamaskiner bruker punktum `.` som skilletegn i desimaltall.\n"
     example_code: "## Eksempel Hedy kode\n```\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n```\n"
@@ -92,7 +92,7 @@
     -   name: '{turn}'
         explanation: snu tegneskilpadden med `{turn}`
         example: 'Eksempel: {turn}'
-        demo_code: "{forward} 25\n{turn} venstre\n{forward} 25\n{turn} høyre"
+        demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
     intro_text: "## Variabler\nPå nivå 2 lærer vi to nye kommandoer: `{is}` og `{sleep}`.\nDu kan navngi et ord med `{is}`. Dette kalles en variabel. I dette eksempelet har vi laget en variabel kalt 'navn' og en variabel kalt 'alder'. Du kan bruke ordet 'navn' hvor som helst i koden og det vil bli erstattet av Hedy, som dette:\n\nPå denne måten trenger du ikke lenger `{echo}`kommandoen!\n"
     example_code: "## Eksempelkode\n```\nnavn {is} Hedy\nalder {is} 15\n{print} navn is alder år gammel\n```\n"
@@ -338,7 +338,7 @@
         demo_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
 17:
     start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller ei, her kommer jeg!'"
-    intro_text: "Nå gjør vi en liten endring i koden når vi bruker indentering. Hver gang vi trenger indentering, må vi nå skrive `:` på linjen før indenteringen.\n\nPå dette nivået kan du også bruke en ny kommando `{elif}`. `{elif}` er en forkortelse for {else} {if} og du trenger det når du har lyst til å lage kode med 3 (eller fler!) alternativer.\nSjekk det ut!\n```\npremier = ['1 million kroner', 'en eplekake', 'ingenting']\ndin_premie = premie[{random}]\n{print} 'Du vinner ' din_premie \n{if} din_premie == '1 million kroner':\n    {print} 'Hurra! Du er rik!'\n{elif} din_premie == 'en eplekake':\n    {print} 'Digg, eplekake!'\n{else}:\n    {print} 'Bedre lykke neste gang..'\n```\n"
+    intro_text: "Nå gjør vi en liten endring i koden når vi bruker indentering. Hver gang vi trenger indentering, må vi nå skrive `:` på linjen før indenteringen.\n\nPå dette nivået kan du også bruke en ny kommando `{elif}`. `{elif}` er en forkortelse for {else} {if} og du trenger det når du har lyst til å lage kode med 3 (eller fler!) alternativer.\nSjekk det ut!\n```\npremier = ['1 million kroner', 'en eplekake', 'ingenting']\ndin_premie = premier[{random}]\n{print} 'Du vinner ' din_premie \n{if} din_premie == '1 million kroner':\n    {print} 'Hurra! Du er rik!'\n{elif} din_premie == 'en eplekake':\n    {print} 'Digg, eplekake!'\n{else}:\n    {print} 'Bedre lykke neste gang..'\n```\n"
     commands:
     -   name: '{elif}'
         explanation: '`{elif}`.'
