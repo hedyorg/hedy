@@ -107,13 +107,19 @@ class TestsLevel3(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-  def test_print_quotes(self):
+  def test_print_single_quotes(self):
     code = "print 'Welcome to OceanView!'"
-    
-    expected = textwrap.dedent("""\
-    print(f'\\'Welcome to OceanView! \\'')""")
+    expected = """print(f'\\'Welcome to OceanView! \\'')"""
 
     output = "'Welcome to OceanView! '"
+
+    self.single_level_tester(code=code, expected=expected, output=output)
+
+  def test_print_double_quotes(self):
+    code = 'print "Welcome to OceanView!"'
+    expected = """print(f'"Welcome to OceanView! "')"""
+
+    output = '"Welcome to OceanView! "'
 
     self.single_level_tester(code=code, expected=expected, output=output)
 
