@@ -899,6 +899,9 @@ def index(level, program_id):
     for adventure in customizations.get('teacher_adventures', []):
         teacher_adventures.append(DATABASE.get_adventure(adventure))
 
+    print(loaded_program)
+    print(adventure_name)
+
     enforce_developers_mode = False
     if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
         enforce_developers_mode = True
