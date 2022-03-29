@@ -1220,10 +1220,6 @@ def other_keyword_language():
     # If the current keyword language isn't English: we are sure the other option is English
     if g.keyword_lang != "en":
         return make_keyword_lang_obj("en")
-    else:
-        # If the current language is in supported keyword languages and not equal to our current keyword language
-        if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang != g.keyword_lang:
-            return make_keyword_lang_obj(g.lang)
     return None
 
 
