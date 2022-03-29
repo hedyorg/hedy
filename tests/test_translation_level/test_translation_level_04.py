@@ -2,7 +2,7 @@ import textwrap
 
 import hedy
 from parameterized import parameterized
-from Tester import HedyTester
+from tests.Tester import HedyTester
 import hedy_translation
 
     # tests should be ordered as follows:

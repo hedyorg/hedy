@@ -1,6 +1,6 @@
 from parameterized import parameterized
 # from test_level_01 import HedyTester
-from Tester import HedyTester
+from tests.Tester import HedyTester
 import hedy_translation
 import hedy
 

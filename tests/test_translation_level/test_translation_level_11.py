@@ -1,5 +1,5 @@
 import hedy
-from Tester import HedyTester
+from tests.Tester import HedyTester
 import hedy_translation
 import textwrap
 from parameterized import parameterized

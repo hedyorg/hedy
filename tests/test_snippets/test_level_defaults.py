@@ -3,7 +3,7 @@ import hedy
 from website.yaml_file import YamlFile
 import utils
 import unittest
-from Tester import HedyTester, Snippet
+from tests.Tester import HedyTester, Snippet
 from parameterized import parameterized
 
 # file is called tests_z_ so they are executed last

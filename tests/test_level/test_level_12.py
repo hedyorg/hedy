@@ -2,7 +2,7 @@
 import hedy
 import textwrap
 from parameterized import parameterized
-from Tester import HedyTester
+from tests.Tester import HedyTester
 
 class TestsLevel12(HedyTester):
   level = 12
