@@ -2335,6 +2335,20 @@ adventures:
                     {print} 'Je hebt ' score ' goede antwoorden gegeven.'
                     ```
                 start_code: ""
+    secret:
+        name: "Geheim agent"
+        description: "Maak je eigen spy code"
+        image: "story.png"
+        default_save_name: "Agent"
+        levels:
+            12:
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Maak een geheime code als een geheim agent\nIn dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan oncijferen.\nAls je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.\n"
+                example_code: "## Voorbeeld Hedy code\n```\nnaam {is} {ask} 'Wat is je naam?'\n{if} naam {is} 'Agent007'\n    a {is} 'Ga naar het vliegveld '\n{else}\n    a {is} 'Ga naar het treinstation '\nwachtwoord {is} {ask} 'Wat is het wachtwoord?'\n{if} wachtwoord {is} 'TOPSECRET'\n    b {is} 'morgen om 02:00'\n{else}\n    b {is} 'vandaag om 10:00'\n{print} a + b\n```\n"
+            13:
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Geheim agent\nDe code die je gemaakt hebt kunnen we een stuk makkelijker maken met het `{and}` commando.\n"
+                example_code: "## Voorbeeld Hedy code\n```\nnaam {is} {ask} 'Wat is je naam?'\nwachtwoord {is} {ask} 'Wat is het wachtwoord?'\n{if} naam {is} 'Agent007' {and} wachtwoord {is} 'TOPSECRET'\n    {print} 'Ga naar het vliegveld om 02:00'\nelse\n    {print} 'Ga naar het treinstation om 10:00'\n ```\n"
     next:
         name: "Vooruitblik"
         description: "Vooruitblik"
@@ -2697,17 +2711,3 @@ adventures:
                     Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
                 ## start_code is only added because it is required by the schema of Adventures
                 start_code: "# Schrijf jouw code hier"
-    secret:
-        name: "Geheim agent"
-        description: "Maak je eigen spy code"
-        image: "story.png"
-        default_save_name: "Agent"
-        levels:
-            12:
-                start_code: '# Schrijf jouw code hier'
-                story_text: "## Maak een geheime code als een geheim agent\nIn dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan oncijferen.\nAls je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.\n"
-                example_code: "## Voorbeeld Hedy code\n```\nnaam {is} {ask} 'Wat is je naam?'\n{if} naam {is} 'Agent007'\n    a {is} 'Ga naar het vliegveld '\n{else}\n    a {is} 'Ga naar het treinstation '\nwachtwoord {is} {ask} 'Wat is het wachtwoord?'\n{if} wachtwoord {is} 'TOPSECRET'\n    b {is} 'morgen om 02:00'\n{else}\n    b {is} 'vandaag om 10:00'\n{print} a + b\n```\n"
-            13:
-                start_code: '# Schrijf jouw code hier'
-                story_text: "## Geheim agent\nDe code die je gemaakt hebt kunnen we een stuk makkelijker maken met het `{and}` commando.\n"
-                example_code: "## Voorbeeld Hedy code\n```\nnaam {is} {ask} 'Wat is je naam?'\nwachtwoord {is} {ask} 'Wat is het wachtwoord?'\n{if} naam {is} 'Agent007' {and} wachtwoord {is} 'TOPSECRET'\n    {print} 'Ga naar het vliegveld om 02:00'\nelse\n    {print} 'Ga naar het treinstation om 10:00'\n ```\n"
