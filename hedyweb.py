@@ -16,7 +16,7 @@ class AchievementTranslations:
   def __init__(self):
     self.data = {}
 
-    translations = glob.glob('coursedata/achievements/*.yaml')
+    translations = glob.glob('content/achievements/*.yaml')
     for trans_file in translations:
       lang = path.splitext(path.basename(trans_file))[0]
       self.data[lang] = YamlFile.for_file(trans_file)
@@ -30,7 +30,7 @@ class AchievementTranslations:
 class PageTranslations:
   def __init__(self, page):
     self.data = {}
-    translations = glob.glob('coursedata/pages/' + page + '/*.yaml')
+    translations = glob.glob('content/pages/' + page + '/*.yaml')
     for file in translations:
       lang = path.splitext(path.basename(file))[0]
       self.data[lang] = YamlFile.for_file(file)
