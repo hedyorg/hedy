@@ -40,7 +40,6 @@ adventures:
                     ## Challenge
                     Gebruik de voorbeeldcode als inspiratie en maak er je eigen winkel van. Wat voor winkel zou je willen?
                     Wat wil je verkopen en hoeveel kost dat? Wat kun je doen om je winkel nog aantrekkelijker te maken?
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -51,7 +50,6 @@ adventures:
                     {print} Dat wordt dan prijs euro alstublieft.
                     {print} Bedankt en tot ziens!
                     ```
-
                 start_code: "{print} Welkom in de winkel"
             3:
                 story_text: |
@@ -61,7 +59,6 @@ adventures:
                     
                     ## Challenge
                     Maak je eigen lijstje en speel met je vrienden. Zouden zij hetzelfde kopen als jij? Wie kan er het beste met geld om gaan?
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -82,7 +79,6 @@ adventures:
                     ## Challenge
                     Maak je eigen versie van het restaurant. Misschien wil jij geen Italiaan, maar een broodjeszaak, snackbar of ijssalon?
                     Je kunt de code aanpassen naar wat jij maar wil!
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -98,7 +94,6 @@ adventures:
                     {print} 'Geen probleem!'
                     {print} 'Uw ' eten ' en ' drinken ' zijn onderweg!'
                     ```
-
                 start_code: "{print} 'Welkom in restaurant Hedy!'"
 
             5:
@@ -109,7 +104,6 @@ adventures:
                     
                     ## Challenge
                     In het voorbeeld staat maar één prijs. Kun jij er meer toevoegen?
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -122,7 +116,6 @@ adventures:
                     {if} gok {is} prijs {print} 'Goed gedaan! Je wint het skateboard'
                     {else} {print} 'Helaas... Het kostte ' prijs
                     ```
-
                 start_code: "{print} 'Welkom bij Prijzenslag!'"
             6:
                 story_text: |
@@ -132,7 +125,6 @@ adventures:
                     
                     ## Challenge
                     Kun jij nog meer toevoegingen bedenken voor je spaarvarkentje?
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -145,7 +137,6 @@ adventures:
                     weken = sparen / zakgeld
                     {print} 'Je kunt over ' weken ' weken een ' wens ' kopen!'
                     ```
-
                 start_code: "{print} 'Het digitale spaarvarken'"
     story:
         name: "Verhaal"
@@ -285,7 +276,6 @@ adventures:
                     {repeat} 5 {times} {print} 'Help!'
                     {print} 'Waarom helpt niemand me nou toch?'
                     ```
-
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
             8:
                 story_text: |
@@ -509,7 +499,6 @@ adventures:
                     {if} gezegd_woord {is} nieuw_woord {print} '🧒 Goedzo! 🍪'
                     {else} {print} '🧒 Nee! Zeg ' nieuw_woord
                     ```
-
                 start_code: "# Schrijf jouw code hier"
     songs:
         name: "Zing een liedje!"
@@ -517,121 +506,6 @@ adventures:
         image: "songs.png"
         default_save_name: "Liedje"
         levels:
-            12:
-                story_text: |
-                    ## Zing een liedje
-                    In dit level kun je meerdere woorden in een variabele opslaan. Dat komt goed uit bij liedjes zoals het Engelse kinderliedje '{if} you're happy {and} you know it, clap your hands'. Kijk maar:
-                example_code: |
-                    ## Voorbeeld Hedy code
-                    ```
-                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    {for} action {in} actions
-                        {for} i {in} {range} 1 {to} 2
-                            {print} '{if} youre happy {and} you know it'
-                            {print} action
-                        {print} '{if} youre happy {and} you know it {and} you really want to show it'
-                        {print} '{if} youre happy {and} you know it'
-                        {print} action
-                    ```
-                start_code: "# Schrijf jouw code hier"
-            11:
-                story_text: |
-                    ## Zing een stapelliedje!
-                    In dit level kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren.
-                example_code: |
-                    ## 10 kleine visjes
-                    ```
-                    {for} i {in} {range} 10 {to} 1
-                        {print} i ' kleine visjes zwommen naar de zee'
-                        {print} 'Moeder zei: ik ga niet mee'
-                        {print} 'Ik blijf liever in de vieze oude sloot'
-                        {print} 'Want in de zee daar zwemmen haaien en die bijten je...'
-                        {if} i {is} 1
-                            {print} 'DOOD'
-                        {else}
-                            {print} 'Blub, blub, blub, blubblubblub'
-                            {print} 'Blubblubblub, blub, blubblubblub'
-                    ```
-                start_code: "# Schrijf jouw code hier"
-            10:
-                story_text: |
-                    ## Zing een liedje!
-                    Ook in dit level kunnen we weer liedjes zingen, bijv. Baby Shark.
-                    Met de nieuwe code `{for}` kunnen we voor de hele familie in een keer printen.
-                    Eerst zetten we alle dieren in een lijst familie. Nu gaan we steeds voor een van de familieleden het liedje printen.
-
-                    Dat scheelt een hoop regels code!
-                example_code: |
-                    ## Baby Shark
-                    ```
-                    familie = baby, mommy, daddy, grandpa, grandma
-                    {for} shark {in} familie
-                      {print} shark ' shark tudutudutudu'
-                      {print} shark ' shark tudutudutudu'
-                      {print} shark ' shark tudutudutudu'
-                      {print} shark ' shark'
-                    ```
-
-                    ## Old McDonald
-                    ```
-                    dieren = big, hond, koe
-                    {for} dier {in} dieren
-                        {if} dier {is} big
-                            geluid = knor
-                        {if} dier {is} hond
-                            geluid = woef
-                        {if} dier {is} koe
-                            geluid = boe
-                        {print} 'De oude boer die had een wei'
-                        {print} 'hi ja hi ja ho!'
-                        {print} 'En in die wei daar stond een ' dier
-                        {print} 'hi ja hi ja ho!'
-                        {print} 'met een ' geluid geluid ' hier'
-                        {print} 'en een ' geluid geluid ' daar'
-                        {print} 'hier een ' geluid
-                        {print} 'daar een ' geluid
-                        {print} 'overal een ' geluid geluid
-                    ```
-                start_code: "# Schrijf jouw code hier"
-            8:
-                story_text: |
-                    ## Zing een liedje!
-                    Nu kun je meerdere regels herhalen, wat heel fijn is in liedjes!
-                example_code: |
-                    ## Cowboy Billie Boem
-                    ```
-                    {repeat} 3 {times}
-                        dier = {ask} 'Welk dier kies je?'
-                        {print} 'En wie rijdt er op zijn ' dier ' door de prairie?'
-                        {print} 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
-                        {print} 'Er is nooit in het Wilde Westen een cowboy geweest, die zo dapper was als Cowboy Billie Boem.'
-                        {print} 'Van je hotsie knotsie knetter!'
-                        {print} 'Van je jippie jippie jeej!'
-                        {print} 'Maar zijn ' dier ' was zeer vermoeid en die kon niet langer mee'
-                        {print} 'Maar hij moest de boeven vangen, dus koos hij een ander beest'
-                        {print} 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
-                    ```
-                start_code: "# Schrijf jouw code hier"
-            7:
-                story_text: |
-                    ## Liedjes
-                    In liedjes zit vaak veel herhaling. Denk maar aan Baby Shark! Ze zingen steeds hetzelfde:
-
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark
-
-                    Dit liedje kan jij met een {repeat} veel korter maken! Lukt het jou om de code af te maken?
-                example_code: |
-                    ## Voorbeeld Hedy code
-                    ```
-                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
-                    {print} 'Baby Shark'
-                    ```
-
-                    Na Baby Shark kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met herhaling erin.
-                start_code: "{print} 'Baby Shark'"
             6:
                 story_text: |
                     ## Liedjes
@@ -655,6 +529,121 @@ adventures:
                     Na het potje met vet kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met tellen erin.
                     Misschien kun jij het liedje 99 bottles of beer ook wel maken! Daar tellen we af in plaats van op.
                 start_code: "{print} 'Baby shark'"
+            7:
+                story_text: |
+                    ## Liedjes
+                    In liedjes zit vaak veel herhaling. Denk maar aan Baby Shark! Ze zingen steeds hetzelfde:
+                    
+                    Baby Shark tututudutudu <br>
+                    Baby Shark tututudutudu <br>
+                    Baby Shark tututudutudu <br>
+                    Baby Shark
+                    
+                    Dit liedje kan jij met een {repeat} veel korter maken! Lukt het jou om de code af te maken?
+                example_code: |
+                    ## Voorbeeld Hedy code
+                    ```
+                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
+                    {print} 'Baby Shark'
+                    ```
+                    
+                    Na Baby Shark kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met herhaling erin.
+                start_code: "{print} 'Baby Shark'"
+            8:
+                story_text: |
+                    ## Zing een liedje!
+                    Nu kun je meerdere regels herhalen, wat heel fijn is in liedjes!
+                example_code: |
+                    ## Cowboy Billie Boem
+                    ```
+                    {repeat} 3 {times}
+                        dier = {ask} 'Welk dier kies je?'
+                        {print} 'En wie rijdt er op zijn ' dier ' door de prairie?'
+                        {print} 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
+                        {print} 'Er is nooit in het Wilde Westen een cowboy geweest, die zo dapper was als Cowboy Billie Boem.'
+                        {print} 'Van je hotsie knotsie knetter!'
+                        {print} 'Van je jippie jippie jeej!'
+                        {print} 'Maar zijn ' dier ' was zeer vermoeid en die kon niet langer mee'
+                        {print} 'Maar hij moest de boeven vangen, dus koos hij een ander beest'
+                        {print} 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
+                    ```
+                start_code: "# Schrijf jouw code hier"
+            10:
+                story_text: |
+                    ## Zing een liedje!
+                    Ook in dit level kunnen we weer liedjes zingen, bijv. Baby Shark.
+                    Met de nieuwe code `{for}` kunnen we voor de hele familie in een keer printen.
+                    Eerst zetten we alle dieren in een lijst familie. Nu gaan we steeds voor een van de familieleden het liedje printen.
+                    
+                    Dat scheelt een hoop regels code!
+                example_code: |
+                    ## Baby Shark
+                    ```
+                    familie = baby, mommy, daddy, grandpa, grandma
+                    {for} shark {in} familie
+                      {print} shark ' shark tudutudutudu'
+                      {print} shark ' shark tudutudutudu'
+                      {print} shark ' shark tudutudutudu'
+                      {print} shark ' shark'
+                    ```
+                    
+                    ## Old McDonald
+                    ```
+                    dieren = big, hond, koe
+                    {for} dier {in} dieren
+                        {if} dier {is} big
+                            geluid = knor
+                        {if} dier {is} hond
+                            geluid = woef
+                        {if} dier {is} koe
+                            geluid = boe
+                        {print} 'De oude boer die had een wei'
+                        {print} 'hi ja hi ja ho!'
+                        {print} 'En in die wei daar stond een ' dier
+                        {print} 'hi ja hi ja ho!'
+                        {print} 'met een ' geluid geluid ' hier'
+                        {print} 'en een ' geluid geluid ' daar'
+                        {print} 'hier een ' geluid
+                        {print} 'daar een ' geluid
+                        {print} 'overal een ' geluid geluid
+                    ```
+                start_code: "# Schrijf jouw code hier"
+            11:
+                story_text: |
+                    ## Zing een stapelliedje!
+                    In dit level kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren.
+                example_code: |
+                    ## 10 kleine visjes
+                    ```
+                    {for} i {in} {range} 10 {to} 1
+                        {print} i ' kleine visjes zwommen naar de zee'
+                        {print} 'Moeder zei: ik ga niet mee'
+                        {print} 'Ik blijf liever in de vieze oude sloot'
+                        {print} 'Want in de zee daar zwemmen haaien en die bijten je...'
+                        {if} i {is} 1
+                            {print} 'DOOD'
+                        {else}
+                            {print} 'Blub, blub, blub, blubblubblub'
+                            {print} 'Blubblubblub, blub, blubblubblub'
+                    ```
+                start_code: "# Schrijf jouw code hier"
+            12:
+                story_text: |
+                    ## Zing een liedje
+                    In dit level kun je meerdere woorden in een variabele opslaan. Dat komt goed uit bij liedjes zoals het Engelse kinderliedje '{if} you're happy {and} you know it, clap your hands'. Kijk maar:
+                example_code: |
+                    ## Voorbeeld Hedy code
+                    ```
+                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                    {for} action {in} actions
+                        {for} i {in} {range} 1 {to} 2
+                            {print} '{if} youre happy {and} you know it'
+                            {print} action
+                        {print} '{if} youre happy {and} you know it {and} you really want to show it'
+                        {print} '{if} youre happy {and} you know it'
+                        {print} action
+                    ```
+                start_code: "# Schrijf jouw code hier"
             16:
                 story_text: |
                     ## Zing een lied!
@@ -735,7 +724,6 @@ adventures:
                     {turn} hoek
                     {forward} 25
                     ```
-
                 start_code: |
                     {print} Schildpaddenrace!
                     hoek {is} 90
@@ -754,57 +742,56 @@ adventures:
                     {turn} hoeken {at} {random}
                     {forward} 25
                     ```
-
                 start_code: |
                     {print} Schildpaddenrace!
                     hoek {is} 90
                     {turn} hoek
                     {forward} 25
-            8:
+            4:
                 story_text: |
                     ## Tekenen maar
-                    Nu we meerdere regels kunnen herhalen, kunnen we makkelijker figuren maken.
-                    Want we hoeven maar één keer in te stellen wat de hoek is en dan steeds die variabele gebruiken in de `{repeat}`.
-                example_code: |
-                    ## Voorbeeld Hedy code
-                    ```
-                    hoek = 90
-                    {repeat} 10 {times}
-                        {turn} hoek
-                        {forward} 50
-                    ```
-
-                story_text_2: |
-                    ## Interactie
-                    Ook kunnen we nu het programma verbeteren dat verschillende figuren tekent.
-                    Week jij hoe ver de schildpad hier moet draaien? Maak de code af en je kunt iedere veelhoek tekenen.
-
-                example_code_2: |
-                    ## Voorbeeld Hedy code
-                    ```
-                    hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
-                    hoek = 360 / hoeken
-                    {repeat} hoeken {times}
-                        {turn} _
-                        {forward} _
-                    ```
-                start_code: |
-                    hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
-
-            7:
-                story_text: |
-                    ## Tekenen maar
-                    In dit level kun je één regel code herhalen met `{repeat}`.
+                    In dit level moet je aanhalingstekens gebruiken bij `{print}` en `{ask}`. Ook bij het tekenen dus!
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
                     {print} 'Figuren tekenen'
-                    {repeat} 3 {times} {forward} 10
+                    hoek {is} 90
+                    {turn} hoek
+                    {forward} 25
+                    {turn} hoek
+                    {forward} 25
+                    ```
+
+                start_code: |
+                    {print} 'Figuren tekenen'
+                    hoek {is} 90
+                    {turn} hoek
+                    {forward} 25
+            5:
+                story_text: |
+                    ## Tekenen maar
+                    In dit level kun je met `{if}` een keuze maken. Bijvoorbeeld tussen verschillende soorten figuren.
+                example_code: |
+                    ## Voorbeeld Hedy code
+                    ```
+                    {print} 'Figuren tekenen'
+                    figuur {is} {ask} 'Wil je een driehoek of een vierkant?'
+                    {if} figuur {is} driehoek hoek {is} 120
+                    {else} hoek {is} 90
+                    {turn} hoek
+                    {forward} 25
+                    {turn} hoek
+                    {forward} 25
+                    {turn} hoek
+                    {forward} 25
+                    {turn} hoek
+                    {forward} 25
                     ```
                 start_code: |
                     {print} 'Figuren tekenen'
-                    {repeat} 3 {times} {forward} 10
-
+                    hoek {is} 90
+                    {turn} hoek
+                    {forward} 25
             6:
                 story_text: |
                     ## Tekenen maar
@@ -832,55 +819,47 @@ adventures:
                     ```
                 start_code: |
                     {print} 'Figuren tekenen'
-
-            5:
+            7:
                 story_text: |
                     ## Tekenen maar
-                    In dit level kun je met `{if}` een keuze maken. Bijvoorbeeld tussen verschillende soorten figuren.
+                    In dit level kun je één regel code herhalen met `{repeat}`.
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
                     {print} 'Figuren tekenen'
-                    figuur {is} {ask} 'Wil je een driehoek of een vierkant?'
-                    {if} figuur {is} driehoek hoek {is} 120
-                    {else} hoek {is} 90
-                    {turn} hoek
-                    {forward} 25
-                    {turn} hoek
-                    {forward} 25
-                    {turn} hoek
-                    {forward} 25
-                    {turn} hoek
-                    {forward} 25
+                    {repeat} 3 {times} {forward} 10
                     ```
                 start_code: |
                     {print} 'Figuren tekenen'
-                    hoek {is} 90
-                    {turn} hoek
-                    {forward} 25
-
-            4:
+                    {repeat} 3 {times} {forward} 10
+            8:
                 story_text: |
                     ## Tekenen maar
-                    In dit level moet je aanhalingstekens gebruiken bij `{print}` en `{ask}`. Ook bij het tekenen dus!
+                    Nu we meerdere regels kunnen herhalen, kunnen we makkelijker figuren maken.
+                    Want we hoeven maar één keer in te stellen wat de hoek is en dan steeds die variabele gebruiken in de `{repeat}`.
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    {print} 'Figuren tekenen'
-                    hoek {is} 90
-                    {turn} hoek
-                    {forward} 25
-                    {turn} hoek
-                    {forward} 25
+                    hoek = 90
+                    {repeat} 10 {times}
+                        {turn} hoek
+                        {forward} 50
                     ```
-
+                story_text_2: |
+                    ## Interactie
+                    Ook kunnen we nu het programma verbeteren dat verschillende figuren tekent.
+                    Week jij hoe ver de schildpad hier moet draaien? Maak de code af en je kunt iedere veelhoek tekenen.
+                example_code_2: |
+                    ## Voorbeeld Hedy code
+                    ```
+                    hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
+                    hoek = 360 / hoeken
+                    {repeat} hoeken {times}
+                        {turn} _
+                        {forward} _
+                    ```
                 start_code: |
-                    {print} 'Figuren tekenen'
-                    hoek {is} 90
-                    {turn} hoek
-                    {forward} 25
-
-
+                    hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
     dishes:
         name: "Afwas?"
         description: "Gebruik de computer om te kijken wie de afwas doet (Start op level 2)"
