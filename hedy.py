@@ -40,6 +40,7 @@ ALL_LANGUAGES = {
     'en': 'English',
     'es': 'Español',
     'fr': 'Français',
+    'pl': 'Polski',
     'pt_PT': 'Português (pt)',
     'pt_BR': 'Português (br)',
     'fy': 'Frysk',
