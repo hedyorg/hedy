@@ -372,6 +372,19 @@
     example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
     intro_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
     example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+13:
+    commands:
+    -   explanation: Two parts both need to be correct
+        name: '{and}'
+        example: if 3+2 {is} 5 {and} 2+2 {is} 4
+        demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\nelse\n    {print} 'At least one answer is wrong!'"
+    -   explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
+        name: '{or}'
+        example: if 3+2 {is} 5 {or} 2+2 {is} 4
+        demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\nelse\n    {print} 'Both answers are wrong!'"
+    start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
+    intro_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+    example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
 14:
     commands:
     -   explanation: We use the `<` to check if the first number is smaller than the second number.
@@ -405,19 +418,19 @@
     example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
     intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
     example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
-13:
+15:
     commands:
-    -   explanation: Two parts both need to be correct
-        name: '{and}'
-        example: if 3+2 {is} 5 {and} 2+2 {is} 4
-        demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\nelse\n    {print} 'At least one answer is wrong!'"
-    -   explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
-        name: '{or}'
-        example: if 3+2 {is} 5 {or} 2+2 {is} 4
-        demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\nelse\n    {print} 'Both answers are wrong!'"
-    start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
-    intro_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
-    example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+    -   explanation: We can use the `{while}` loop with not equal
+        example: 'Example: {while} correct_answer != 25'
+        demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
+        name: '{while}'
+    -   demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
+        name: Smaller {while}
+        explanation: 'We can also use the `{while}` loop with `<` and `>`. '
+        example: 'For example: {while} count < 3'
+    start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
+    intro_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!\n"
+    example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
 16:
     commands:
     -   name: square brackets
@@ -463,16 +476,3 @@
         demo_code: "naam = 'Hedy'\n{print}('my name is ', naam)"
     start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
     intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
-15:
-    commands:
-    -   explanation: We can use the `{while}` loop with not equal
-        example: 'Example: {while} correct_answer != 25'
-        demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
-        name: '{while}'
-    -   demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
-        name: Smaller {while}
-        explanation: 'We can also use the `{while}` loop with `<` and `>`. '
-        example: 'For example: {while} count < 3'
-    start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
-    intro_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!\n"
-    example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
