@@ -91,9 +91,7 @@ function resetWindow() {
     }
     else {
       if (tab.hasClass('teacher_tab')) {
-        // Fixme: This should do for now, but it would be nice if we:
-        //  - Store the teacher_adventure code in the state -> similar to "normal" adventures
-        //  - We load on the correct tab
+        // Todo: TB -> We should re-write the adventures structure so Teacher adventures are included in "adventures"
         $ ('#program_name').val (tabName);
         window.State.adventure_name = tabName;
         theGlobalEditor?.setValue ("");
