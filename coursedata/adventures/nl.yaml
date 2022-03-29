@@ -1,11 +1,9 @@
-title: "Hedy avonturen!"
-subtitle: "Met Hedy kan je van alles maken! Bijvoorbeeld een interactief verhaal, een spel of een app om het leven makkelijker te maken"
 adventures:
     money:
         name: "Week van het geld"
         description: "Aflatoun"
         image: "piggybank.png"
-        default_save_name: "money"
+        default_save_name: "Geld"
         levels:
             1:
                 story_text: |
@@ -684,7 +682,7 @@ adventures:
         name: "Tekenen"
         description: "Maak jouw eigen tekening"
         image: "turtle.gif"
-        default_save_name: "schildpad"
+        default_save_name: "Schildpad"
         levels:
             1:
                 story_text: |
@@ -2225,11 +2223,29 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
     piggybank:
-        name: Spaarvarken
-        description: Tel je zakgeld!
-        image: piggy.png
-        default_save_name: Spaarvarken
+        name: "Spaarvarken"
+        description: "Tel je zakgeld!"
+        image: "piggy.png"
+        default_save_name: "Spaarvarken"
         levels:
+            12:
+                story_text: |
+                    ## Spaarvarken
+                    In dit avontuur kun je een digitaal spaarvarkentje maken, waarmee je je zakgeld kunt tellen en kan berekenen hoe lang het duurt voordat je iets kunt kopen!
+
+                example_code: |
+                    ## Voorbeeld Hedy code
+                    ```
+                    {print} 'Het digitale spaarvarken'
+                    wens = {ask} 'Wat zou je graag willen hebben?'
+                    prijs = {ask} 'Hoeveel kost dat?'
+                    gespaard = {ask} 'Hoeveel geld heb je al gespaard?'
+                    zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
+                    sparen = prijs - gespaard
+                    weken = sparen / zakgeld
+                    {print} 'Je kunt over ' weken ' weken een ' wens ' kopen!'
+                    ```
+                start_code: "# Schrijf jouw code hier"
             14:
                 story_text: |
                     ## Spaarvarken
@@ -2251,29 +2267,11 @@ adventures:
                         {print} 'Op naar de winkel!'
                     ```
                 start_code: "# Schrijf jouw code hier"
-            12:
-                story_text: |
-                    ## Spaarvarken
-                    In dit avontuur kun je een digitaal spaarvarkentje maken, waarmee je je zakgeld kunt tellen en kan berekenen hoe lang het duurt voordat je iets kunt kopen!
-
-                example_code: |
-                    ## Voorbeeld Hedy code
-                    ```
-                    {print} 'Het digitale spaarvarken'
-                    wens = {ask} 'Wat zou je graag willen hebben?'
-                    prijs = {ask} 'Hoeveel kost dat?'
-                    gespaard = {ask} 'Hoeveel geld heb je al gespaard?'
-                    zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
-                    sparen = prijs - gespaard
-                    weken = sparen / zakgeld
-                    {print} 'Je kunt over ' weken ' weken een ' wens ' kopen!'
-                    ```
-                start_code: "# Schrijf jouw code hier"
     quizmaster:
-        name: Quizmaster
-        description: Maak je eigen quiz!
-        image: quizmaster.png
-        default_save_name: Quizmaster
+        name: "Quizmaster"
+        description: "Maak je eigen quiz!"
+        image: "quizmaster.png"
+        default_save_name: "Quizmaster"
         levels:
             14:
                 story_text: |
@@ -2304,10 +2302,10 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
     language:
-        name: Woordjes leren
-        description: Maak je eigen programma om woordjes te leren in een vreemde taal
-        image: languages.png
-        default_save_name: language
+        name: "Woordjes leren"
+        description: "Maak je eigen programma om woordjes te leren in een vreemde taal"
+        image: "languages.png"
+        default_save_name: "Woordjes leren"
         levels:
             5:
                 story_text: |
