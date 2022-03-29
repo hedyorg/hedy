@@ -364,7 +364,7 @@ def routes(app, database):
         # Validations, optional fields
         if 'email' in body:
             if not isinstance(body.get('email'), str) or not utils.valid_email(body.get('email')):
-                return gettext('email_invalid')
+                return gettext('email_invalid'), 400
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return (gettext('year_invalid') + str(datetime.datetime.now().year)), 400
