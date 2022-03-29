@@ -40,6 +40,7 @@ ALL_LANGUAGES = {
     'en': 'English',
     'es': 'Español',
     'fr': 'Français',
+    'pl': 'Polski',
     'pt_PT': 'Português (pt)',
     'pt_BR': 'Português (br)',
     'fy': 'Frysk',
@@ -967,10 +968,10 @@ class IsValid(Filter):
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    def program(self, meta, args):
-        if len(args) == 0:
-            return False, InvalidInfo("empty program")
-        return super().program(meta, args)
+    # def program(self, meta, args):
+    #     if len(args) == 0:
+    #         return False, InvalidInfo("empty program")
+    #     return super().program(meta, args)
 
     def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
@@ -2195,6 +2196,7 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
+    
     is_program_valid(program_root, input_string, level, lang)
 
     try:

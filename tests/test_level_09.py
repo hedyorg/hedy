@@ -94,6 +94,27 @@ class TestsLevel9(HedyTester):
       code=code,
       expected=expected,
       expected_commands=['is', 'if', 'repeat', 'print'])
+  
+  def test_repeat_comment_nested_if(self):
+    code = textwrap.dedent("""\
+    print 'kassabon'
+    prijs is 0
+    repeat 7 times # Comment
+        ingredient is ask 'wat wil je kopen?'
+        if ingredient is appel
+            prijs is prijs + 1
+    print 'Dat is in totaal ' prijs ' euro.'""")
+
+    expected = textwrap.dedent("""\
+    print(f'kassabon')
+    prijs = '0'
+    for i in range(int(7)):
+      ingredient = input(f'wat wil je kopen?')
+      if str(ingredient) == str('appel'):
+        prijs = int(prijs) + int(1)
+      time.sleep(0.1)
+    print(f'Dat is in totaal {prijs} euro.')""")
+    self.single_level_tester(code=code, expected=expected)
 
   def test_issue_396(self):
     code = textwrap.dedent("""\
