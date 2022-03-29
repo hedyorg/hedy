@@ -1,40 +1,40 @@
 {% extends "auth.html" %}
 
 {% block main %}
-    <h2 class="px-8 mb-4">{{achievements[template_achievements.title_key]}}</h2>
-    {% for category in template_achievements.categories %}
+    <h2 class="px-8 mb-4">{{_('achievements_title')}}</h2>
+    {% for category in achievements.categories %}
         {% if category.key != "teacher" or is_teacher %}
-            <h1 class="bg-blue-200 ltr:pl-8 ltr:pr-8 py-2 mb-4 rounded-lg text-3xl w-full cursor-pointer" onclick="$ ('#{{category.key}}').toggle()">{{achievements[category.key]}}</h1>
+            <h1 class="bg-blue-200 ltr:pl-8 ltr:pr-8 py-2 mb-4 rounded-lg text-3xl w-full cursor-pointer" onclick="$ ('#{{category.key}}').toggle()">{{category.title}}</h1>
             <div class="hidden ltr:pl-4 rtl:pr-4 mt-4 mb-4" id="{{ category.key }}">
-            {% for subcategory in category['subcategory'] %}
-                <h3 class="px-16">{% if subcategory.sub_key in achievements %}{{ achievements[subcategory.sub_key] }}{% endif %}</h3>
+            {% for subcategory in category.subcategories %}
+                <h3 class="px-16">{{ subcategory.title }}</h3>
                 <div class="flex flex-wrap w-full px-16">
                 {% for achievement in subcategory.achievements %}
                     {% if achievement in user_achievements %}
                         <div class="w-40 rounded-lg ltr:mr-4 rtl:ml-4 mt-4 relative bg-blue-200">
                             <div class="relative h-40">
                                 <div class="flex items-center justify-center h-40">
-                                    <img src="{{static('/images/' + achievements[achievement].image)}}" class="px-2">
+                                    <img src="{{static('/images/achievement.png')}}" class="px-2">
                                     <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-2 block">
                                 </div>
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                                <p class="font-semibold">{{ achievements[achievement].text }}</p>
+                                <p class="font-semibold">{{ achievements.text }}</p>
                             </div>
                             <div class="text-center flex items-center justify-center h-16">
-                                <p>{{ achievements[achievement].title }}</p>
+                                <p>{{ achievement.title }}</p>
                             </div>
                         </div>
                     {% else %}
                         <div class="w-40 rounded-lg ltr:mr-4 rtl:ml-4 mt-4 relative bg-gray-500">
                             <div class="flex items-center justify-center h-40">
-                                <img src="{{static('/images/' + achievements[achievement].image)}}" class="px-2">
+                                <img src="{{static('/images/achievement.png')}}" class="px-2">
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                                <p class="font-semibold">{% if category.key == "hidden" %}???{% else %}{{ achievements[achievement].text }}{% endif %}</p>
+                                <p class="font-semibold">{% if category.key == "hidden" %}???{% else %}{{ achievement.text }}{% endif %}</p>
                             </div>
                             <div class="text-center flex items-center justify-center h-16">
-                                <p>{{ achievements[achievement].title }}</p>
+                                <p>{{ achievement.title }}</p>
                             </div>
                         </div>
                     {% endif %}
