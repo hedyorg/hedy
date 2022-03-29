@@ -453,6 +453,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
           rule_blank(),
+          rule_number(),
         ]
     },
   },
@@ -465,6 +466,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
           rule_blank(),
+          rule_number(),
         ]
     },
   },
@@ -477,6 +479,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
           rule_blank(),
+          rule_number(),
         ]
     },
   },
@@ -489,6 +492,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
           rule_blank(),
+          rule_number(),
         ]
     },
   },
@@ -501,6 +505,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
           rule_blank(),
+          rule_number(),
         ]
     },
   },
@@ -513,6 +518,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
           rule_blank(),
+          rule_number(),
         ]
     },
   },
@@ -525,6 +531,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
           rule_blank(),
+          rule_number(true),
         ]
     },
   },
@@ -537,6 +544,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,'),
           rule_comment(),
           rule_blank(),
+          rule_number(true),
         ]
     },
   },
@@ -549,6 +557,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,\<\>\!'),
           rule_comment(),
           rule_blank(),
+          rule_number(true),
         ]
     },
   },
@@ -561,6 +570,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,\<\>\!'),
           rule_comment(),
           rule_blank(),
+          rule_number(true),
         ]
     },
   },
@@ -573,6 +583,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]'),
           rule_comment(),
           rule_blank(),
+          rule_number(true),
         ]
     },
   },
@@ -585,6 +596,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]\:'),
           rule_comment(),
           rule_blank(),
+          rule_number(true),
         ]
     },
   },
@@ -597,6 +609,7 @@ const LEVELS = [
           rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]\\(\\)'),
           rule_comment(),
           rule_blank(),
+          rule_number(true),
         ]
     },
   },
@@ -781,6 +794,23 @@ function rule_blank() {
     token: ['text','invalid','text'],
     next: 'start',
   }];
+}
+
+
+function rule_number(with_decimal = false) {
+  if (with_decimal) {
+    return {
+      regex: START_WORD + '[0-9]*\\.?[0-9]+' + END_WORD,
+      token: 'variable', // it would be better to use `constant.numeric` but the color is the same as the text
+      next: 'start',
+    }; 
+  } else {
+    return {
+      regex: START_WORD + '[0-9]+' + END_WORD,
+      token: 'variable', // it would be better to use `constant.numeric` but the color is the same as the text
+      next: 'start',
+    }; 
+  }
 }
 
 
