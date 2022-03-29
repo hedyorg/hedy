@@ -12,7 +12,7 @@ adventures:
                 story_text: "## Fortelling\nDu kan ha lagt merke til at det fremdeles er et problem med forrige nivå. Prøvde du å skrive ut en settning som inneholdt ordet navn?\nDu kan fikse det på dette nivået. Du må bruke hermetegn rundt alt som du vil skrive ut.\n"
                 example_code: "## Eksempel Hedykode\n\n```\nnavn {is} Ola\n{print} 'Navnet på hovedpersonen er' navn\n{print} navn 'skal nå gå en tur i skogen'\n{print} navn 'er litt redd'\ndyrene {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'Han hører lyden av en' dyrene {at} {random}\n{print} navn 'er redd for at det spøker i skogen'\n```\n"
             1:
-                story_text: "## Lag en fortelling\nPå nivå 1 kan du lage en fortelling med en annen hovedperson som du oppgir selv.\n\nSom første linje, bruk denne koden:\n\n```\n{ask} hvem er stjernen i fortellingen din?\n```\n\nEtter den første linjen, start med `{print}` om setningen skal skrives ut. \nDu bruker `{echo}` hvis du vil ha hovedpersonen din skal være på slutten av setningen.\n"
+                story_text: "## Lag en fortelling\nPå nivå 1 kan du lage en fortelling med en hovedperson som du velger selv.\n\nSom første linje, bruk denne koden:\n\n```\n{ask} hvem er stjernen i fortellingen din?\n```\n\nEtter den første linjen, start med `{print}` hvis du vil at setningen skal skrives ut. \nDu bruker `{echo}` hvis du vil ha hovedpersonen din skal være på slutten av setningen.\n"
                 example_code: "## Eksempel Hedykode\n\n\n```\n{ask} Hovedpersonen i fortellingen er\n{print} Hovedpersonen skal nå på tur i skogen\n{echo} Han er litt redd,\n{print} Han hører skumle lyder overalt\n{print} Han er redd dette er en forhekset skog\n```\n"
                 start_code: '{print} Fortellingen din starter her'
             2:
@@ -626,10 +626,10 @@ adventures:
                 story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
                 start_code: '# skriv koden din her'
     money:
-        name: Money Week
+        name: Pengeuke
         description: Aflatoun
         image: piggybank.png
-        default_save_name: money
+        default_save_name: penger
         levels:
             1:
                 example_code: "## Example Hedy code\n```\n{print} I don't know what they want from me\n{print} It's like the more money we come across\n{print} The more problems we see\n{print} I don't know what they want from me\n{print} It's like the more money we come across\n{print} The more problems we see\n```\n"

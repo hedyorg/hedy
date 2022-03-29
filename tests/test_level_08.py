@@ -289,7 +289,7 @@ class TestsLevel8(HedyTester):
     code = textwrap.dedent("""\
     print 'kassabon'
     prijs is 0
-    repeat 7 times
+    repeat 7 times # TEST
         ingredient is ask 'wat wil je kopen?'
         if ingredient is appel
             prijs is prijs + 1
@@ -369,3 +369,14 @@ class TestsLevel8(HedyTester):
       exception=hedy.exceptions.IndentationException,
       extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
     )
+  
+  def test_repeat_with_comment(self):
+    code = textwrap.dedent("""\
+    repeat 5 times #This should be ignored
+        print 'koekoek'
+        print 'koekoek'""")
+ 
+    expected = textwrap.dedent("""\
+    for i in range(int(5)):
+      print(f'koekoek')
+      time.sleep(0.1)""")
