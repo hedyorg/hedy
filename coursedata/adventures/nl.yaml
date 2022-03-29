@@ -2712,16 +2712,16 @@ adventures:
                 story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
                 start_code: '# Schrijf jouw code hier'
     secret:
-        name: SuperSpy
-        description: Make your own spy code
-        image: story.png
-        default_save_name: language
+        name: "Geheim agent"
+        description: "Maak je eigen spy code"
+        image: "story.png"
+        default_save_name: "agent"
         levels:
             12:
-                start_code: '## Schrijf jouw code hier'
-                story_text: "## Make a secret code like a super spy\nIn this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.\nIf the enemy tries to crack the code, they will get some false info to waste their time.\n"
-                example_code: "## Example Hedy code\n```\nname is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the trainstation '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b\n```\n"
+                start_code: '# Schrijf jouw code hier'
+                story_text: "## Maak een geheime code als een geheim agent\nIn dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan oncijferen.\nAls je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.\n"
+                example_code: "## Voorbeeld Hedy code\n```\nnaam {is} {ask} 'Wat is je naam?'\n{if} naam {is} 'Agent007'\n    a {is} 'Ga naar het vliegveld '\n{else}\n    a {is} 'Ga naar het treinstation '\nwachtwoord {is} {ask} 'Wat is het wachtwoord?'\n{if} wachtwoord {is} 'TOPSECRET'\n    b {is} 'morgen om 02:00'\n{else}\n    b {is} 'vandaag om 10:00'\n{print} a + b\n```\n"
             13:
-                start_code: '## Schrijf jouw code hier'
+                start_code: '# Schrijf jouw code hier'
                 story_text: "## Superspy\nThe code you made in the previous level can be made a lot easier in this one with the `{and}` command.\n"
                 example_code: "## Example Hedy code\n```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
