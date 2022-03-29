@@ -1777,7 +1777,6 @@ adventures:
                 story_text: |
                     ## Restaurant
                     Nu kun je het `{repeat}` commando gebruiken om van meerdere klanten de bestelling op te nemen.
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -1794,7 +1793,6 @@ adventures:
                     ## Restaurant
                     In dit level kun je meerdere regels code herhalen, wat betekent dat je meerdere mensen kunt vragen wat ze willen eten en drinken en dat ook nog kunt printen.
                     Kijk maar naar het voorbeeld!
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -1846,7 +1844,6 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In dit level kun je het restaurant interactiever maken met {if} commando's in in commando's.
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -1874,7 +1871,6 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In dit level kun je gemakkelijk de bestelling opnemen van alle gasten in een korte code.
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -1883,7 +1879,6 @@ adventures:
                         eten = {ask} 'Wat wilt u bestellen als ' gang '?'
                         {print} eten ' wordt uw ' gang
                     ```
-
                 story_text_2: |
                     ## Voorbeeld Hedy code
                     Dit kun je uiteraard ook voor meerdere mensen toepassen!
@@ -1902,7 +1897,6 @@ adventures:
                 story_text: |
                     ## Maak je eigen restaurant
                     In dit level kun je de functie `i in {range} 1 {to} 5` gebruiken om een bestelling te printen voor meerdere mensen.
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -2124,7 +2118,6 @@ adventures:
                     ```
                     ## Uitdaging
                     Je spel in nu wel heel lastig te winnen... Kun jij je spel zo ombouwen dat er maar 1 foute deur is om te kiezen, in plaast van 2?
-
                 start_code: "{print} 'Ontsnap uit het spookhuis!'"
             11:
                 story_text: |
@@ -2232,7 +2225,6 @@ adventures:
                 story_text: |
                     ## Spaarvarken
                     In dit avontuur kun je een digitaal spaarvarkentje maken, waarmee je je zakgeld kunt tellen en kan berekenen hoe lang het duurt voordat je iets kunt kopen!
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -2250,7 +2242,6 @@ adventures:
                 story_text: |
                     ## Spaarvarken
                     In dit level kun je Hedy laten vertellen of je al genoeg geld hebt gespaard of niet!
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -2278,7 +2269,6 @@ adventures:
                     ## Maak je eigen quiz!
                     In dit avontuur leer je je eigen quiz maken. Vul het voorbeeld in, maak extra vragen en geniet van je eigen quiz!
                     Je kunt de quiz maken over wat je maar wil: je hobby, lievelingsdier, lievelingsboek of ...?
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -2328,7 +2318,6 @@ adventures:
                 story_text: |
                     ## Leer een nieuwe taal
                     Maak je eigen programma om woordjes te leren in een vreemde taal.
-
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -2350,7 +2339,7 @@ adventures:
         name: "Vooruitblik"
         description: "Vooruitblik"
         image: " "
-        default_save_name: "next"
+        default_save_name: "Vooruitblik"
         levels:
             1:
                 story_text: |
@@ -2398,7 +2387,6 @@ adventures:
                     Je wilde natuurlijk printen `Mijn naam is Sophie` maar Hedy {print} `Mijn Sophie is Sophie`.
 
                     In het volgende level wordt dit probleem opgelost door aanhalingstekens te gebruiken, kijk maar eens!
-
                 start_code: "{print} Op naar het volgende level!"
             4:
                 story_text: |4
@@ -2453,7 +2441,6 @@ adventures:
                     {print} 'in de gloria'
                     ```
                     Dit is een erg lange code voor maar 2 zinnetjes... In het volgende level leer je gelukkig het `{repeat}` commando, waardoor je regels code kunt herhalen.
-
                 start_code: "{print} 'Op naar het volgende level!'"
                 example_code: "## Example Hedy Code\n ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n ```\n"
             7:
@@ -2469,7 +2456,6 @@ adventures:
                     ```
                     {repeat} 5 {times} {print} 'vanaf het volgende level kun je meerdere regels code in een keer herhalen!'
                     ```
-
                 start_code: "{print} 'Op naar het volgende level!'"
                 example_code: "## Example Hedy Code\n```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
             8:
@@ -2489,7 +2475,6 @@ adventures:
                     {if} antwoord {is} nee
                         {print} 'blijf dan maar lekker hier'
                     ```
-
                 start_code: "{print} 'Op naar het volgende level!'"
                 example_code: "## Example Hedy Code\n```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
             9:
@@ -2646,8 +2631,6 @@ adventures:
                     ## Vooruitblik
                     Gefeliciteerd! Je hebt het laatste level van Hedy behaald! Maar niet getreurd, we zijn druk bezig om nog meer levels en avonturen te bouwen. Dus kom vooral later nog eens een kijkje nemen of er al nieuwe levels zijn!
                 start_code: "{print} ('Goed gedaan!')"
-
-
     end:
         name: "Eind quiz"
         description: "Test jouw Hedy kennis"
