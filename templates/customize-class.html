@@ -4,15 +4,20 @@
 <div class="px-8">
     <h2>{{_('customize_class')}}: {{class_info.name}}</h2>
     <div class="w-full ltr:pr-4 rtl:pl-4">
-            {{ page_translations.explanation_1|commonmark }}
+            {{ _('customize_class_exp_1')|commonmark }}
         <div class="border border-gray-400 w-3/4 rounded-lg px-2 py-1 my-2">
             <ol>
-                {% for step in page_translations.steps %}
-                    <li>{{ step }}</li>
-                {% endfor %}
+                <li>{{_('customize_class_step_1')}}</li>
+                <li>{{_('customize_class_step_2')}}</li>
+                <li>{{_('customize_class_step_3')}}</li>
+                <li>{{_('customize_class_step_4')}}</li>
+                <li>{{_('customize_class_step_5')}}</li>
+                <li>{{_('customize_class_step_6')}}</li>
+                <li>{{_('customize_class_step_7')}}</li>
+                <li>{{_('customize_class_step_8')}}</li>
             </ol>
         </div>
-            {{ page_translations.explanation_2|commonmark }}
+            {{ _('customize_class_exp_2')|commonmark }}
     </div>
     <div class="flex flex-col">
         <h3 class="px-4">{{_('select_adventures')}}</h3>
