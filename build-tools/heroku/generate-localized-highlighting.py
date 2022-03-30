@@ -6,7 +6,7 @@ import yaml
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.path.dirname(__file__), '../..'))
 
-language = 'nb_NO'
+language = 'id'
 
 keywords_path = 'coursedata/keywords/'
 typescript_path = 'static/js/'
