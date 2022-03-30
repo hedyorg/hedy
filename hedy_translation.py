@@ -5,7 +5,8 @@ import operator
 import yaml
 from os import path
 
-KEYWORD_LANGUAGES = ['en', 'es', 'fr', 'nl', 'nl', 'nb_NO', 'tr', 'ar', 'hi']
+
+KEYWORD_LANGUAGES = list(hedy.ALL_KEYWORD_LANGUAGES.keys())
 
 # Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
