@@ -899,7 +899,10 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    commands = level_commands_for_lang.get_commands_for_level(level)
+    try:
+        commands = level_commands_for_lang.get_commands_for_level(level)
+    except:
+        commands = None # No separate commands file for this language
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
