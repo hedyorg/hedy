@@ -99,16 +99,6 @@ class LevelDefaults:
     for k,v in default_values.items():
         if isinstance(v, str):
             default_values[k] = v.format(**self.keywords)
-        # The commands value is a list of dicts -> we have to parse this separately
-        if k == "commands":
-            parsed_commands = []
-            for command in v:
-                temp = {}
-                for command_key, command_value in command.items():
-                    temp[command_key] = command_value.format(**self.keywords)
-                parsed_commands.append(temp)
-            default_values[k] = parsed_commands
-
     default_type = {
       "level": str(level),
     }
