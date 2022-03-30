@@ -36,7 +36,7 @@ from flask_babel import gettext
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
+from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, RTL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
@@ -306,7 +306,7 @@ def setup_language():
     # Switch to "right-to-left" if one of the language in the list is selected
     # This is the only place to expand / shrink the list of RTL languages -> front-end is fixed based on this value
     g.dir = "ltr"
-    if g.lang in ['ar', 'he', 'ur']:
+    if g.lang in RTL_LANGUAGES:
         g.dir = "rtl"
 
 

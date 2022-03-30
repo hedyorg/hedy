@@ -23,10 +23,14 @@ ALL_LANGUAGES = {
     'tr': 'Türk',
     'cs': 'Čeština',
     'bg': 'Български',
+    'fa': 'فارسی',
     'ar': 'عربى',
     'hi': 'हिंदी',
     'bn': 'বাংলা',
 }
+
+# Add the right-to-left languages list here keep all language related stuff together
+RTL_LANGUAGES = ['ar', 'he', 'ur', 'fa']
 
 # Define fall back languages for adventures
 FALL_BACK_ADVENTURE = {
