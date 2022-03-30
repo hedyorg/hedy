@@ -393,42 +393,6 @@
         demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
         example: "Example: answer = {ask} 'What is 5 plus 5?'"
     example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
-17:
-    start_code: |-
-        {for} i {in} {range} 1 {to_list} 10:
-            {print} i
-        {print} 'Cache toi ou je te verrai !'
-    intro_text: "Maintenant on change encore un petit chose concernant l'indentation. Chaque fois que nous indentons, il faut ajouter un `:` à la fin du règle précédente."
-    commands:
-    -   name: "`{for}` avec `:`"
-        explanation: "Utilisant un `{for}` sur plusieurs lignes, il te faut un `:` à la fin"
-        example: "{for} i {in} {range} 1 {to_list} 10:"
-        demo_code: |-
-            {for} i {in} {range} 1 {to_list} 10:
-                {print} i
-            {print} ' Cache toi ou je te verrai !.'
-    -   name: "`{if}` avec `:`"
-        explanation: "Nous faisons de la même manière avec tous nos commandes `{if}`."
-        example: "{if} couleur {is} 'vert':"
-        demo_code: |-
-            couleur = {ask} 'Quelle couleur préfères-tu ?'
-            {if} couleur {is} 'vert':
-                {print} 'Tu as choisi le vert.'
-            {else}:
-                {print} 'Tu as choisi un autre couleur que le vert.'
-    -   name: "(Optionnel) `{elif}`"
-        explanation: "Pour compléter il-y-a encore un nouveau commande quelle tu peux utiliser: `{elif}`. `{elif}` signifie `{else} {if}`. Tu regardes alors auparavant à `{if}` et quand ça n'est pas vrai, tu avances à `{elif}`. Quand ça n'est pas vrai aussi, tu avances à `{else}`."
-        example: "{elif} a {is} 5"
-        demo_code: |-
-            a = 2
-            {if} a {is} 1:
-                {print} 'a est égal à 1'
-            {elif} a {is} 2:
-                {print} 'a est égal à 2'
-            {else}:
-                {print} 'a est ni 1 ni 2'
-
-
 12:
     start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
     commands:
@@ -536,6 +500,40 @@
     start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
     intro_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists.\n\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
     example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+17:
+    start_code: |-
+        {for} i {in} {range} 1 {to_list} 10:
+            {print} i
+        {print} 'Cache toi ou je te verrai !'
+    intro_text: "Maintenant on change encore un petit chose concernant l'indentation. Chaque fois que nous indentons, il faut ajouter un `:` à la fin du règle précédente."
+    commands:
+    -   name: "`{for}` avec `:`"
+        explanation: "Utilisant un `{for}` sur plusieurs lignes, il te faut un `:` à la fin"
+        example: "{for} i {in} {range} 1 {to_list} 10:"
+        demo_code: |-
+            {for} i {in} {range} 1 {to_list} 10:
+                {print} i
+            {print} ' Cache toi ou je te verrai !.'
+    -   name: "`{if}` avec `:`"
+        explanation: "Nous faisons de la même manière avec tous nos commandes `{if}`."
+        example: "{if} couleur {is} 'vert':"
+        demo_code: |-
+            couleur = {ask} 'Quelle couleur préfères-tu ?'
+            {if} couleur {is} 'vert':
+                {print} 'Tu as choisi le vert.'
+            {else}:
+                {print} 'Tu as choisi un autre couleur que le vert.'
+    -   name: "(Optionnel) `{elif}`"
+        explanation: "Pour compléter il-y-a encore un nouveau commande quelle tu peux utiliser: `{elif}`. `{elif}` signifie `{else} {if}`. Tu regardes alors auparavant à `{if}` et quand ça n'est pas vrai, tu avances à `{elif}`. Quand ça n'est pas vrai aussi, tu avances à `{else}`."
+        example: "{elif} a {is} 5"
+        demo_code: |-
+            a = 2
+            {if} a {is} 1:
+                {print} 'a est égal à 1'
+            {elif} a {is} 2:
+                {print} 'a est égal à 2'
+            {else}:
+                {print} 'a est ni 1 ni 2'
 18:
     start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
     intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
