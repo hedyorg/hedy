@@ -1,19 +1,25 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-29 10:01+0200\n"
-"PO-Revision-Date: 2022-03-30 09:52+0000\n"
+"PO-Revision-Date: 2022-03-30 09:53+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/hedy/web-texts/"
-"es/>\n"
-"Language: es\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/hedy/web-texts/"
+"fa/>\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.12-dev\n"
-"Generated-By: Babel 2.9.1\n"
+
+#: templates/profile.html:4
+#, fuzzy
+msgid "account_overview"
+msgstr "Account overview"
+
+#: website/auth.py:721
+#, fuzzy
+msgid "teacher_invalid"
+msgstr "Your teacher value is invalid."
 
 #: app.py:571
 #, fuzzy
@@ -26,12 +32,14 @@ msgid "title_achievements"
 msgstr "Hedy - My achievements"
 
 #: app.py:740 app.py:1111 website/teacher.py:365 website/teacher.py:374
+#, fuzzy
 msgid "not_teacher"
-msgstr "Parece que no eres un instructor."
+msgstr "Looks like you are not a teacher!"
 
 #: app.py:743
+#, fuzzy
 msgid "not_enrolled"
-msgstr "No se encontró tu registro para esta clase"
+msgstr "Looks like you are not in this class!"
 
 #: app.py:775
 #, fuzzy
@@ -47,16 +55,19 @@ msgid "unauthorized"
 msgstr "You don't have access rights for this page"
 
 #: app.py:823
+#, fuzzy
 msgid "minutes"
-msgstr "minutos"
+msgstr "minutes"
 
 #: app.py:826
+#, fuzzy
 msgid "hours"
-msgstr "horas"
+msgstr "hours"
 
 #: app.py:829
+#, fuzzy
 msgid "days"
-msgstr "días"
+msgstr "days"
 
 #: app.py:832
 #, fuzzy
@@ -64,12 +75,14 @@ msgid "ago"
 msgstr "{time} ago"
 
 #: app.py:848 app.py:850 app.py:976
+#, fuzzy
 msgid "no_such_level"
-msgstr "No se encontró ese nivel de Hedy"
+msgstr "No such Hedy level!"
 
 #: app.py:858 app.py:865 app.py:931 app.py:937
+#, fuzzy
 msgid "no_such_program"
-msgstr "No se encontró el programa de Hedy"
+msgstr "No such Hedy program!"
 
 #: app.py:891
 #, fuzzy
@@ -88,8 +101,9 @@ msgid "no_such_adventure"
 msgstr "This adventure doesn't exist!"
 
 #: app.py:1005
+#, fuzzy
 msgid "page_not_found"
-msgstr "¡No pudimos encontrar esta página!"
+msgstr "We could not find that page!"
 
 #: app.py:1025
 #, fuzzy
@@ -132,8 +146,9 @@ msgid "title_landing-page"
 msgstr "Welcome to Hedy!"
 
 #: app.py:1092
+#, fuzzy
 msgid "not_user"
-msgstr "Parece que hay que registrarse o ingresar a tu cuenta"
+msgstr "Looks like you are not logged in!"
 
 #: app.py:1107
 #, fuzzy
@@ -163,8 +178,9 @@ msgstr ""
 #: website/teacher.py:90 website/teacher.py:125 website/teacher.py:197
 #: website/teacher.py:255 website/teacher.py:302 website/teacher.py:343
 #: website/teacher.py:379 website/teacher.py:459 website/teacher.py:517
+#, fuzzy
 msgid "ajax_error"
-msgstr "Hubo un error, por favor intenta nuevamente."
+msgstr "There was an error, please try again."
 
 #: app.py:1304
 #, fuzzy
@@ -192,22 +208,26 @@ msgid "user_not_private"
 msgstr "This user doesn't exist or doesn't have a public profile"
 
 #: app.py:1394
+#, fuzzy
 msgid "invalid_teacher_invitation_code"
 msgstr ""
-"El código de instructor es inválido. Para ser instructor, por favor mande un "
-"mensaje a hedy@felienne.com."
+"The teacher invitation code is invalid. To become a teacher, reach out to "
+"hedy@felienne.com."
 
 #: utils.py:203
+#, fuzzy
 msgid "default_404"
-msgstr "No pudimos encontrar esa página..."
+msgstr "We could not find that page..."
 
 #: utils.py:205
+#, fuzzy
 msgid "default_403"
-msgstr "Parece que no tienes autorización..."
+msgstr "Looks like you aren't authorized..."
 
 #: utils.py:207
+#, fuzzy
 msgid "default_500"
-msgstr "Algo salió mal..."
+msgstr "Something went wrong..."
 
 #: coursedata/error-messages.txt:1
 #, fuzzy
@@ -216,29 +236,32 @@ msgstr ""
 "You created an empty program. Type Hedy code in the left field and try again"
 
 #: coursedata/error-messages.txt:2
+#, fuzzy
 msgid "Wrong Level"
 msgstr ""
-"Ese código es correcto, pero no pertenece al nivel correcto. Has escrito "
-"código para el nivel {working_level} mientras trabajabas en el nivel "
-"{original_level}."
+"That was correct Hedy code, but not at the right level. You wrote "
+"{offending_keyword} for level {working_level}. Tip: {tip}"
 
 #: coursedata/error-messages.txt:3
+#, fuzzy
 msgid "Incomplete"
 msgstr ""
-"Oops! Has olvidado algo de código! En la línea {line_number}, debes agregar "
-"texto después de {incomplete_command}."
+"Oops! You forgot a bit of code! On line {line_number}, you need to enter "
+"text behind {incomplete_command}."
 
 #: coursedata/error-messages.txt:4
+#, fuzzy
 msgid "Invalid"
 msgstr ""
-"{invalid_command} no es un comando de Hedy en nivel {level}. "
+"{invalid_command} is not a Hedy level {level} command. Did you mean "
 "{guessed_command}?"
 
 #: coursedata/error-messages.txt:5
+#, fuzzy
 msgid "Invalid Space"
 msgstr ""
-"Oops! Has comenzado una línea con un espacio en la línea {line_number}. Los "
-"espacios confunden a las computadoras, ¿podrías quitarlos?"
+"Oops! You started a line with a space on line {line_number}. Spaces confuse "
+"computers, can you remove it?"
 
 #: coursedata/error-messages.txt:6
 #, fuzzy
@@ -264,17 +287,19 @@ msgstr ""
 "more than the line before."
 
 #: coursedata/error-messages.txt:9
+#, fuzzy
 msgid "Parse"
 msgstr ""
-"El servidor no puede traducir este programa de Hedy. Hay un error en la "
-"línea {location[0]}, carácter {location[1]}. Tu has ingresado "
-"{character_found}, pero eso no está permitido."
+"The code you entered is not valid Hedy code. There is a mistake on line "
+"{location[0]}, at position {location[1]}. You typed {character_found}, but "
+"that is not allowed."
 
 #: coursedata/error-messages.txt:10
+#, fuzzy
 msgid "Unquoted Text"
 msgstr ""
-"Ten cuidado! Si imprimes algo, el texto debe estar rodeado de comillas. Has "
-"olvidado agregar una comilla en alguna parte."
+"Be careful. If you ask or print something the text should start and finish "
+"with a quotation mark. You forgot one somewhere."
 
 #: coursedata/error-messages.txt:11
 #, fuzzy
@@ -291,8 +316,12 @@ msgstr ""
 "should be surrounded by quotation marks!"
 
 #: coursedata/error-messages.txt:13
+#, fuzzy
 msgid "Var Undefined"
-msgstr "Intentaste imprimir {name}, pero no lo instanciaste."
+msgstr ""
+"You tried to use the variable {name}, but you did not set it. It is also "
+"possible that you were trying to use the word {name} but forgot quotation "
+"marks."
 
 #: coursedata/error-messages.txt:14
 #, fuzzy
@@ -362,59 +391,71 @@ msgstr "It looks like you forgot to use a command on line {line_number}."
 #, fuzzy
 msgid "ask_needs_var"
 msgstr ""
-"Starting in level 2, ask needs to be used with a variable. Example: name is "
-"ask What are you called?"
+"Starting in level 2, ask needs to be used with a variable and quotation "
+"marks. Example: name is ask 'What are you called?'"
 
 #: coursedata/error-messages.txt:24
 #, fuzzy
 msgid "echo_out"
 msgstr ""
 "Starting in level 2 echo is no longer needed. You can repeat an answer with "
-"ask and print now. Example: name is ask What are you called? print hello name"
+"ask and print now. Example: name is ask 'What are you called?' print 'hello' "
+"name"
 
 #: coursedata/error-messages.txt:25
+#, fuzzy
 msgid "space"
-msgstr "un espacio"
+msgstr "a space"
 
 #: coursedata/error-messages.txt:26
+#, fuzzy
 msgid "comma"
-msgstr "una coma"
+msgstr "a comma"
 
 #: coursedata/error-messages.txt:27
+#, fuzzy
 msgid "question mark"
-msgstr "un signo de interrogación"
+msgstr "a question mark"
 
 #: coursedata/error-messages.txt:28
+#, fuzzy
 msgid "newline"
-msgstr "un salto de línea"
+msgstr "a new line"
 
 #: coursedata/error-messages.txt:29
+#, fuzzy
 msgid "period"
-msgstr "un punto"
+msgstr "a period"
 
 #: coursedata/error-messages.txt:30
+#, fuzzy
 msgid "exclamation mark"
-msgstr "un signo de exclamación"
+msgstr "an exclamation mark"
 
 #: coursedata/error-messages.txt:31
+#, fuzzy
 msgid "dash"
-msgstr "un guión"
+msgstr "a dash"
 
 #: coursedata/error-messages.txt:32
+#, fuzzy
 msgid "star"
-msgstr "un asterisco"
+msgstr "a star"
 
 #: coursedata/error-messages.txt:33
+#, fuzzy
 msgid "single quotes"
-msgstr "una comilla simple"
+msgstr "a single quote"
 
 #: coursedata/error-messages.txt:34
+#, fuzzy
 msgid "double quotes"
-msgstr "una comilla doble"
+msgstr "double quotes"
 
 #: coursedata/error-messages.txt:35
+#, fuzzy
 msgid "slash"
-msgstr "una barra"
+msgstr "a slash"
 
 #: coursedata/error-messages.txt:36
 #, fuzzy
@@ -465,21 +506,25 @@ msgstr "Visible columns"
 #: templates/class-overview.html:108 templates/create-accounts.html:16
 #: templates/login.html:12 templates/profile.html:93 templates/recover.html:8
 #: templates/signup.html:10
+#, fuzzy
 msgid "username"
-msgstr "Usuario"
+msgstr "Username"
 
 #: templates/class-overview.html:25 templates/class-overview.html:65
+#, fuzzy
 msgid "last_login"
-msgstr "Último ingreso"
+msgstr "Last login"
 
 #: templates/class-overview.html:29 templates/class-overview.html:66
+#, fuzzy
 msgid "highest_level_reached"
-msgstr "Nivel más alto alcanzado"
+msgstr "Highest level reached"
 
 #: templates/class-overview.html:35 templates/class-overview.html:67
 #: templates/profile.html:74
+#, fuzzy
 msgid "number_programs"
-msgstr "Número de programas"
+msgstr "Number of programs"
 
 #: templates/class-overview.html:39 templates/class-overview.html:68
 #, fuzzy
@@ -487,18 +532,21 @@ msgid "programs"
 msgstr "Programs"
 
 #: templates/class-overview.html:43 templates/class-overview.html:69
+#, fuzzy
 msgid "latest_shared_program"
-msgstr "Último programa compartido"
+msgstr "Latest shared program"
 
 #: templates/class-overview.html:49 templates/class-overview.html:70
 #: templates/class-overview.html:83 templates/profile.html:148
 #: templates/profile.html:150 templates/profile.html:163
+#, fuzzy
 msgid "change_password"
-msgstr "Cambiar contraseña"
+msgstr "Change password"
 
 #: templates/class-overview.html:53 templates/class-overview.html:71
+#, fuzzy
 msgid "remove_student"
-msgstr "Quitar estudiante"
+msgstr "Remove student"
 
 #: templates/class-overview.html:81
 #, fuzzy
@@ -528,8 +576,9 @@ msgid "remove"
 msgstr "Remove"
 
 #: templates/class-overview.html:90
+#, fuzzy
 msgid "class_link"
-msgstr "Enlace para unirse a la clase"
+msgstr "Link to join class"
 
 #: templates/class-overview.html:92 templates/customize-class.html:5
 #, fuzzy
@@ -542,8 +591,9 @@ msgid "class_name_prompt"
 msgstr "Please enter the name of the class"
 
 #: templates/class-overview.html:93
+#, fuzzy
 msgid "rename_class"
-msgstr "Renombrar clase"
+msgstr "Rename class"
 
 #: templates/class-overview.html:94
 #, fuzzy
@@ -558,7 +608,7 @@ msgstr "Invite student"
 #: templates/class-overview.html:95
 #, fuzzy
 msgid "class_stats"
-msgstr "Show class statistics"
+msgstr "Class statistics"
 
 #: templates/class-overview.html:98 templates/customize-adventure.html:59
 #, fuzzy
@@ -571,8 +621,9 @@ msgid "delete_class_prompt"
 msgstr "Are you sure you want to delete the class?"
 
 #: templates/class-overview.html:99
+#, fuzzy
 msgid "delete_class"
-msgstr "Borrar clase permanentemente"
+msgstr "Delete class permanently"
 
 #: templates/class-overview.html:103
 #, fuzzy
@@ -600,25 +651,30 @@ msgid "delete_invite_prompt"
 msgstr "Are you sure you want to remove this class invitation?"
 
 #: templates/class-prejoin.html:7
+#, fuzzy
 msgid "class_already_joined"
-msgstr "Ya eres parte de la clase"
+msgstr "You are already a student of class"
 
 #: templates/class-prejoin.html:11
+#, fuzzy
 msgid "goto_profile"
-msgstr "Ir a mi perfil"
+msgstr "Go to my profile"
 
 #: templates/class-prejoin.html:15 templates/profile.html:12
+#, fuzzy
 msgid "prompt_join_class"
-msgstr "Deseas unirte a la clase?"
+msgstr "Do you want to join this class?"
 
 #: templates/class-prejoin.html:17 website/teacher.py:183
+#, fuzzy
 msgid "join_prompt"
 msgstr ""
-"Debes estar registrado para unirte a una clase. ¿Deseas entrar a tu cuenta?"
+"You need to have an account to join a class. Would you like to login now?"
 
 #: templates/class-prejoin.html:17 templates/profile.html:14
+#, fuzzy
 msgid "join_class"
-msgstr "Unirse a la clase"
+msgstr "Join class"
 
 #: templates/class-stats.html:22 templates/customize-class.html:155
 #, fuzzy
@@ -631,8 +687,9 @@ msgstr "Go back to class"
 #: templates/incl-adventure-tabs.html:5 templates/level-page.html:6
 #: templates/level-page.html:11 templates/quiz/startquiz.html:10
 #: templates/view-program-page.html:12 templates/view-program-page.html:28
+#, fuzzy
 msgid "level_title"
-msgstr "Nivel"
+msgstr "Level"
 
 #: templates/create-accounts.html:5
 #, fuzzy
@@ -658,13 +715,15 @@ msgstr "Are you sure you want to create these accounts?"
 
 #: templates/create-accounts.html:17 templates/learn-more.html:10
 #: templates/profile.html:96 templates/recover.html:8 templates/signup.html:13
+#, fuzzy
 msgid "email"
-msgstr "Correo electrónico"
+msgstr "Email"
 
 #: templates/create-accounts.html:18 templates/login.html:15
 #: templates/reset.html:8 templates/signup.html:19
+#, fuzzy
 msgid "password"
-msgstr "Contraseña"
+msgstr "Password"
 
 #: templates/create-accounts.html:20
 #, fuzzy
@@ -698,24 +757,26 @@ msgstr "General settings"
 
 #: templates/customize-adventure.html:12 templates/for-teachers.html:9
 #: templates/for-teachers.html:30
+#, fuzzy
 msgid "name"
-msgstr "Nombre"
+msgstr "Name"
 
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:20 templates/explore.html:48
 #: templates/for-teachers.html:31 templates/programs.html:12
 #: templates/programs.html:41 templates/programs.html:52
+#, fuzzy
 msgid "level"
-msgstr "Nivel"
+msgstr "Level"
 
 #: templates/customize-adventure.html:25
 #, fuzzy
 msgid "adventure_exp_1"
 msgstr ""
 "Type your adventure of choice on the right-hand side. After creating your "
-"adventure you can include it in one of your classes under \"customizations"
-"\". If you want to include a command in your adventure please use code "
-"anchors like this:"
+"adventure you can include it in one of your classes under \"customizations\""
+". If you want to include a command in your adventure please use code anchors "
+"like this:"
 
 #: templates/customize-adventure.html:31
 #, fuzzy
@@ -736,8 +797,9 @@ msgstr ""
 #: templates/customize-class.html:93 templates/explore.html:26
 #: templates/programs.html:18 templates/programs.html:48
 #: templates/view-adventure.html:6
+#, fuzzy
 msgid "adventure"
-msgstr "Aventura"
+msgstr "Adventure"
 
 #: templates/customize-adventure.html:44
 #, fuzzy
@@ -776,52 +838,63 @@ msgstr "Are you sure you want to remove this adventure?"
 #: templates/customize-class.html:7
 #, fuzzy
 msgid "customize_class_exp_1"
-msgstr "Customize class"
+msgstr ""
+"Hi! On this page you can customize your class. By selecting levels and "
+"adventures you can choose what you student can see. You can also add you own "
+"created adventures to levels. All levels and default adventures will be "
+"selected by default. <b>Notice:</b> Not every adventure is available for "
+"every level! Settings up your customizations goes as follows:"
 
 #: templates/customize-class.html:10
 #, fuzzy
 msgid "customize_class_step_1"
-msgstr "Customize class"
+msgstr "Select levels for your class by pressing the \"level buttons\""
 
 #: templates/customize-class.html:11
 #, fuzzy
 msgid "customize_class_step_2"
-msgstr "Customize class"
+msgstr ""
+"\"Checkboxes\" will appear for the adventures available for the chosen levels"
 
 #: templates/customize-class.html:12
 #, fuzzy
 msgid "customize_class_step_3"
-msgstr "Customize class"
+msgstr "Select the adventures you want to make available"
 
 #: templates/customize-class.html:13
 #, fuzzy
 msgid "customize_class_step_4"
-msgstr "Customize class"
+msgstr "Click the name of an adventure to (de)select for all levels"
 
 #: templates/customize-class.html:14
 #, fuzzy
 msgid "customize_class_step_5"
-msgstr "Customize class"
+msgstr "Add personal adventures"
 
 #: templates/customize-class.html:15
 #, fuzzy
 msgid "customize_class_step_6"
-msgstr "Customize class"
+msgstr "Selecting an opening date for each level (you can also leave it empty)"
 
 #: templates/customize-class.html:16
 #, fuzzy
 msgid "customize_class_step_7"
-msgstr "Customize class"
+msgstr "Selection other settings"
 
 #: templates/customize-class.html:17
 #, fuzzy
 msgid "customize_class_step_8"
-msgstr "Customize class"
+msgstr "Choose \"Save\" -> You're done!"
 
 #: templates/customize-class.html:20
 #, fuzzy
 msgid "customize_class_exp_2"
-msgstr "Customize class"
+msgstr ""
+"You can always change these settings later on. For example, you can make "
+"specific adventures or levels available while teaching a class. This way "
+"it's easy for you to determine which level and adventures your students will "
+"be working on. If you want to make everything available for your class it is "
+"easiest to remove the customization all together."
 
 #: templates/customize-class.html:23
 #, fuzzy
@@ -852,8 +925,9 @@ msgstr "Select own adventures"
 #: templates/profile.html:47 templates/profile.html:128
 #: templates/profile.html:137 templates/signup.html:26 templates/signup.html:45
 #: templates/signup.html:53
+#, fuzzy
 msgid "select"
-msgstr "Seleccionar"
+msgstr "Select"
 
 #: templates/customize-class.html:115
 #, fuzzy
@@ -874,10 +948,6 @@ msgstr "Mandatory developer's mode"
 #, fuzzy
 msgid "hide_cheatsheet"
 msgstr "Hide cheatsheet"
-
-#: templates/customize-class.html:138
-msgid "hide_keyword_switcher"
-msgstr ""
 
 #: templates/customize-class.html:149
 #, fuzzy
@@ -900,8 +970,9 @@ msgid "remove_customization"
 msgstr "Remove customization"
 
 #: templates/error-page.html:12
+#, fuzzy
 msgid "go_back_to_main"
-msgstr "Volver a la página principal"
+msgstr "Go back to main page"
 
 #: templates/explore.html:12
 #, fuzzy
@@ -923,7 +994,7 @@ msgstr ""
 #: templates/explore.html:35 templates/programs.html:27
 #, fuzzy
 msgid "search_button"
-msgstr "Guardar y compartir código"
+msgstr "Search"
 
 #: templates/explore.html:51
 #, fuzzy
@@ -937,16 +1008,19 @@ msgstr "View program"
 
 #: templates/for-teachers.html:5 templates/profile.html:78
 #: templates/profile.html:80
+#, fuzzy
 msgid "my_classes"
-msgstr "Mis clases"
+msgstr "My classes"
 
 #: templates/for-teachers.html:10
+#, fuzzy
 msgid "students"
-msgstr "estudiantes"
+msgstr "students"
 
 #: templates/for-teachers.html:23 templates/landing-page.html:23
+#, fuzzy
 msgid "create_class"
-msgstr "Crear nueva clase"
+msgstr "Create a new class"
 
 #: templates/for-teachers.html:26
 #, fuzzy
@@ -993,66 +1067,76 @@ msgstr ""
 "adventures."
 
 #: templates/incl-adventure-tabs.html:68
+#, fuzzy
 msgid "go_to_quiz"
-msgstr "Seleccionar cuestionario"
-
-#: templates/incl-editor-and-output.html:95
-msgid "variables"
-msgstr ""
+msgstr "Go to quiz"
 
 #: templates/incl-editor-and-output.html:111
+#, fuzzy
 msgid "enter_text"
-msgstr "Ingresar tu respuesta aquí..."
+msgstr "Enter your answer here..."
 
 #: templates/incl-editor-and-output.html:112
+#, fuzzy
 msgid "enter"
-msgstr "Ingresar"
+msgstr "Enter"
 
 #: templates/incl-editor-and-output.html:121
+#, fuzzy
 msgid "run_code_button"
-msgstr "Ejecutar código"
+msgstr "Run code"
 
 #: templates/incl-editor-and-output.html:123
+#, fuzzy
 msgid "edit_code_button"
-msgstr "Editar código"
+msgstr "Edit code"
 
 #: templates/incl-editor-and-output.html:129
+#, fuzzy
 msgid "read_code_label"
-msgstr "¡Leer en voz alta!"
+msgstr "Read aloud"
 
 #: templates/incl-editor-and-output.html:139
 #: templates/incl-editor-and-output.html:148
+#, fuzzy
 msgid "regress_button"
-msgstr "Regresar al nivel {level}"
+msgstr "Go back to level {level}"
 
 #: templates/incl-editor-and-output.html:142
 #: templates/incl-editor-and-output.html:151
+#, fuzzy
 msgid "advance_button"
-msgstr "Ir al nivel {level}"
+msgstr "Go to level {level}"
 
 #: templates/incl-editor-and-output.html:165
+#, fuzzy
 msgid "developers_mode"
-msgstr "Modo desarollador"
+msgstr "Programmer's mode"
 
 #: templates/incl-menubar.html:8
+#, fuzzy
 msgid "nav_start"
-msgstr "Inicio"
+msgstr "Home"
 
 #: templates/incl-menubar.html:9
+#, fuzzy
 msgid "nav_hedy"
 msgstr "Hedy"
 
 #: templates/incl-menubar.html:10
+#, fuzzy
 msgid "nav_explore"
 msgstr "Explore"
 
 #: templates/incl-menubar.html:11
+#, fuzzy
 msgid "nav_learn_more"
-msgstr "Aprende más"
+msgstr "Learn more"
 
 #: templates/incl-menubar.html:13 templates/public-page.html:56
+#, fuzzy
 msgid "program_header"
-msgstr "Mis programas"
+msgstr "My programs"
 
 #: templates/incl-menubar.html:20
 #, fuzzy
@@ -1070,17 +1154,20 @@ msgid "for_teachers"
 msgstr "For teachers"
 
 #: templates/incl-menubar.html:31
+#, fuzzy
 msgid "logout"
-msgstr "Salir"
+msgstr "Log out"
 
 #: templates/incl-menubar.html:36 templates/login.html:19
 #: templates/signup.html:106
+#, fuzzy
 msgid "login"
-msgstr "Ingresar"
+msgstr "Log in"
 
 #: templates/incl-menubar.html:45
+#, fuzzy
 msgid "search"
-msgstr "Busca..."
+msgstr "Search..."
 
 #: templates/landing-page.html:6
 #, fuzzy
@@ -1110,8 +1197,7 @@ msgstr "Start programming"
 #: templates/landing-page.html:21
 #, fuzzy
 msgid "create_class_text"
-msgstr ""
-"Group your students into classes and change the content for each class."
+msgstr "Group your students into classes and change the content for each class."
 
 #: templates/landing-page.html:28
 #, fuzzy
@@ -1135,25 +1221,30 @@ msgid "turtle_text"
 msgstr "Make a drawing with code"
 
 #: templates/layout.html:20 templates/signup.html:61
+#, fuzzy
 msgid "yes"
-msgstr "Sí"
+msgstr "Yes"
 
 #: templates/layout.html:21 templates/signup.html:65
+#, fuzzy
 msgid "no"
 msgstr "No"
 
 #: templates/layout.html:29
+#, fuzzy
 msgid "ok"
 msgstr "OK"
 
 #: templates/layout.html:30
+#, fuzzy
 msgid "cancel"
-msgstr "Cancelar"
+msgstr "Cancel"
 
 #: templates/layout.html:43 templates/programs.html:68
 #: templates/programs.html:76
+#, fuzzy
 msgid "copy_link_to_share"
-msgstr "Copiar vínculo para compartir"
+msgstr "Copy link to share"
 
 #: templates/layout.html:78
 #, fuzzy
@@ -1171,27 +1262,28 @@ msgstr "You've earned an achievement!"
 #: templates/learn-more.html:7
 #, fuzzy
 msgid "mailing_title"
-msgstr "Hedy"
+msgstr "Subscribe to the Hedy newsletter"
 
 #: templates/learn-more.html:14
 #, fuzzy
 msgid "surname"
-msgstr "Usuario"
+msgstr "First Name"
 
 #: templates/learn-more.html:18
 #, fuzzy
 msgid "lastname"
-msgstr "Nombre"
+msgstr "Last Name"
 
 #: templates/learn-more.html:22 templates/profile.html:135
 #: templates/signup.html:52
+#, fuzzy
 msgid "country"
-msgstr "País"
+msgstr "Country"
 
 #: templates/learn-more.html:31
 #, fuzzy
 msgid "subscribe"
-msgstr "Subscribirse al newsletter"
+msgstr "Subscribe"
 
 #: templates/learn-more.html:32
 #, fuzzy
@@ -1204,52 +1296,54 @@ msgid "previous_campaigns"
 msgstr "View previous campaigns"
 
 #: templates/level-page.html:8
+#, fuzzy
 msgid "step_title"
-msgstr "Tarea"
+msgstr "Assignment"
 
 #: templates/level-page.html:12
+#, fuzzy
 msgid "save_code_button"
-msgstr "Guardar código"
+msgstr "Save code"
 
 #: templates/level-page.html:13
+#, fuzzy
 msgid "share_code_button"
-msgstr "Guardar y compartir código"
+msgstr "Save & share code"
 
 #: templates/level-page.html:31
+#, fuzzy
 msgid "try_button"
-msgstr "Probar"
+msgstr "Try"
 
 #: templates/login.html:10
+#, fuzzy
 msgid "login_long"
-msgstr "Ingresar a mi cuenta"
+msgstr "Log in to your account"
 
 #: templates/login.html:26 website/auth.py:312
+#, fuzzy
 msgid "no_account"
-msgstr "¿Todavía no tienes una cuenta?"
+msgstr "No account?"
 
 #: templates/login.html:28 templates/signup.html:6 templates/signup.html:102
+#, fuzzy
 msgid "create_account"
-msgstr "Crear cuenta"
+msgstr "Create account"
 
 #: templates/login.html:33
+#, fuzzy
 msgid "forgot_password"
-msgstr "¿Olvidaste tu contraseña?"
+msgstr "Forgot your password?"
 
 #: templates/main-page.html:9
+#, fuzzy
 msgid "main_title"
 msgstr "Hedy"
 
 #: templates/main-page.html:10
+#, fuzzy
 msgid "main_subtitle"
-msgstr "Un lenguaje de programación gradual"
-
-#: templates/main-page.html:13
-msgid "try_it"
-msgstr "Pruébalo"
-
-#: templates/profile.html:4
-msgid "account_overview"
-msgstr "Mi perfil"
+msgstr "A gradual programming language"
 
 #: templates/profile.html:6 templates/profile.html:8
 #, fuzzy
@@ -1320,8 +1414,9 @@ msgid "update_public"
 msgstr "Update public profile"
 
 #: templates/profile.html:61 templates/profile.html:145
+#, fuzzy
 msgid "are_you_sure"
-msgstr "¿Estás segura/o? No puedes revertir esta acción."
+msgstr "Are you sure? You cannot revert this action."
 
 #: templates/profile.html:61
 #, fuzzy
@@ -1349,8 +1444,9 @@ msgid "settings"
 msgstr "My personal settings"
 
 #: templates/profile.html:99 templates/signup.html:41
+#, fuzzy
 msgid "birth_year"
-msgstr "Año de nacimiento"
+msgstr "Birth year"
 
 #: templates/profile.html:102 templates/signup.html:25
 #, fuzzy
@@ -1363,44 +1459,54 @@ msgid "preferred_keyword_language"
 msgstr "Preferred keyword language"
 
 #: templates/profile.html:126 templates/signup.html:44
+#, fuzzy
 msgid "gender"
-msgstr "Género"
+msgstr "Gender"
 
 #: templates/profile.html:129 templates/signup.html:46
+#, fuzzy
 msgid "female"
-msgstr "Femenino"
+msgstr "Female"
 
 #: templates/profile.html:130 templates/signup.html:47
+#, fuzzy
 msgid "male"
-msgstr "Masculino"
+msgstr "Male"
 
 #: templates/profile.html:131 templates/signup.html:48
+#, fuzzy
 msgid "other"
-msgstr "Otro"
+msgstr "Other"
 
 #: templates/profile.html:141
+#, fuzzy
 msgid "update_profile"
-msgstr "Actualizar perfil"
+msgstr "Update profile"
 
 #: templates/profile.html:145
+#, fuzzy
 msgid "destroy_profile"
-msgstr "Borrar mi cuenta permanentemente"
+msgstr "Delete profile"
 
 #: templates/profile.html:152
+#, fuzzy
 msgid "current_password"
-msgstr "Contraseña actual"
+msgstr "Current password"
 
 #: templates/profile.html:156
+#, fuzzy
 msgid "new_password"
-msgstr "Nueva contraseña"
+msgstr "New password"
 
 #: templates/profile.html:160
+#, fuzzy
 msgid "repeat_new_password"
-msgstr "Repetir nueva contraseña"
+msgstr "Repeat new password"
 
 #: templates/programs.html:7
+#, fuzzy
 msgid "recent"
-msgstr "Mis programas recientes"
+msgstr "My recent programs"
 
 #: templates/programs.html:35 templates/view-program-page.html:7
 #, fuzzy
@@ -1423,28 +1529,34 @@ msgid "favourite_confirm"
 msgstr "Are you sure you want to set this program as your favourite?"
 
 #: templates/programs.html:67 templates/programs.html:72
+#, fuzzy
 msgid "open"
-msgstr "Abrir"
+msgstr "Open"
 
 #: templates/programs.html:68
+#, fuzzy
 msgid "copy_clipboard"
-msgstr "Copiado al portapapeles"
+msgstr "Successfully copied to clipboard"
 
 #: templates/programs.html:69 templates/programs.html:73
+#, fuzzy
 msgid "delete_confirm"
-msgstr "Estás seguro de querer borrar este programa?"
+msgstr "Are you sure you want to delete the program?"
 
 #: templates/programs.html:69 templates/programs.html:73
+#, fuzzy
 msgid "delete"
-msgstr "Borrar"
+msgstr "Delete"
 
 #: templates/programs.html:75
+#, fuzzy
 msgid "unshare_confirm"
-msgstr "Estás seguro/a de querer volver privado tu programa?"
+msgstr "Are you sure you want to make the program private?"
 
 #: templates/programs.html:75
+#, fuzzy
 msgid "unshare"
-msgstr "Dejar de compartir"
+msgstr "Unshare"
 
 #: templates/programs.html:77
 #, fuzzy
@@ -1457,20 +1569,24 @@ msgid "submit_program"
 msgstr "Submit"
 
 #: templates/programs.html:80
+#, fuzzy
 msgid "share_confirm"
-msgstr "Estás seguro/a de querer volver público tu programa?"
+msgstr "Are you sure you want to make the program public?"
 
 #: templates/programs.html:80
+#, fuzzy
 msgid "share"
-msgstr "Compartir públicamente"
+msgstr "Share"
 
 #: templates/programs.html:86
+#, fuzzy
 msgid "no_programs"
-msgstr "Todavía no tienes programas guardados."
+msgstr "You have no programs yet."
 
 #: templates/programs.html:88
+#, fuzzy
 msgid "write_first_program"
-msgstr "¡Escribe tu primer programa!"
+msgstr "Write your first program!"
 
 #: templates/public-page.html:16
 #, fuzzy
@@ -1503,44 +1619,54 @@ msgid "no_shared_programs"
 msgstr "has no shared programs..."
 
 #: templates/recover.html:6
+#, fuzzy
 msgid "recover_password"
-msgstr "Reestablecer contraseña"
+msgstr "Request a password reset"
 
 #: templates/recover.html:11
+#, fuzzy
 msgid "send_password_recovery"
-msgstr "Envíame un link para reestablecer mi contraseña"
+msgstr "Send me a password recovery link"
 
 #: templates/reset.html:6 templates/reset.html:19
+#, fuzzy
 msgid "reset_password"
-msgstr "Establecer nueva contraseña"
+msgstr "Reset password"
 
 #: templates/reset.html:12 templates/signup.html:22
+#, fuzzy
 msgid "password_repeat"
-msgstr "Repetir contraseña"
+msgstr "Repeat password"
 
 #: templates/signup.html:7
+#, fuzzy
 msgid "create_account_explanation"
-msgstr "Con tu cuenta puedes salvar tus programas."
+msgstr "Having your own account allows you to save your programs."
 
 #: templates/signup.html:16
+#, fuzzy
 msgid "email_repeat"
-msgstr "Repetir correo electrónico"
+msgstr "Repeat email"
 
 #: templates/signup.html:57
+#, fuzzy
 msgid "programming_experience"
-msgstr "Tienes experiencia con programación?"
+msgstr "Do you have programming experience?"
 
 #: templates/signup.html:71
+#, fuzzy
 msgid "languages"
-msgstr "Cuáles de estos lenguages de programación has usado?"
+msgstr "Which of these programming languages have you used before?"
 
 #: templates/signup.html:76
+#, fuzzy
 msgid "other_block"
-msgstr "Otro lenguaje basado en bloques"
+msgstr "Another block language"
 
 #: templates/signup.html:82
+#, fuzzy
 msgid "other_text"
-msgstr "Otro lenguaje basado en texto"
+msgstr "Another text language"
 
 #: templates/signup.html:88
 #, fuzzy
@@ -1548,8 +1674,9 @@ msgid "request_teacher"
 msgstr "Would you like to apply for a teacher's account?"
 
 #: templates/signup.html:91
+#, fuzzy
 msgid "subscribe_newsletter"
-msgstr "Subscribirse al newsletter"
+msgstr "Subscribe to the newsletter"
 
 #: templates/signup.html:96
 #, fuzzy
@@ -1569,8 +1696,9 @@ msgstr ""
 "opportunities (optional)"
 
 #: templates/signup.html:106
+#, fuzzy
 msgid "already_account"
-msgstr "¿Ya tienes una cuenta?"
+msgstr "Already have an account?"
 
 #: templates/teacher-invitation.html:5
 #, fuzzy
@@ -1580,86 +1708,97 @@ msgstr ""
 "have an account, please create one."
 
 #: templates/view-program-page.html:13
+#, fuzzy
 msgid "by"
-msgstr "por"
+msgstr "by"
 
 #: templates/quiz/endquiz.html:27
+#, fuzzy
 msgid "end_quiz"
-msgstr "Terminar cuestionario"
+msgstr "Quiz end"
 
 #: templates/quiz/endquiz.html:28 templates/quiz/quiz-result-overview.html:23
+#, fuzzy
 msgid "score"
-msgstr "Puntos"
+msgstr "Score"
 
 #: templates/quiz/endquiz.html:37 templates/quiz/quiz-result-overview.html:108
+#, fuzzy
 msgid "go_to_level"
-msgstr "Ir al nivel"
+msgstr "Go to level"
 
 #: templates/quiz/feedback.html:8 templates/quiz/quiz.html:16
+#, fuzzy
 msgid "question"
-msgstr "Pregunta"
+msgstr "Question"
 
 #: templates/quiz/feedback.html:17
+#, fuzzy
 msgid "feedback_success"
-msgstr "¡Bien hecho!"
+msgstr "Good!"
 
 #: templates/quiz/feedback.html:23
+#, fuzzy
 msgid "feedback_failure"
-msgstr "¡Incorrecto!"
+msgstr "Wrong!"
 
 #: templates/quiz/feedback.html:36
+#, fuzzy
 msgid "correct_answer"
-msgstr "La respuesta correcta es:"
+msgstr "The correct answer is"
 
 #: templates/quiz/feedback.html:52
+#, fuzzy
 msgid "go_to_question"
-msgstr "Ir a la pregunta"
+msgstr "Go to question"
 
 #: templates/quiz/feedback.html:56
+#, fuzzy
 msgid "go_to_quiz_result"
-msgstr "Ir al resultado del cuestionario"
+msgstr "Go to quiz result"
 
 #: templates/quiz/quiz-result-overview.html:22
 #, fuzzy
 msgid "results_quiz"
-msgstr "Empezar cuestionario"
+msgstr "Quiz results"
 
 #: templates/quiz/quiz-result-overview.html:45
 #, fuzzy
 msgid "correct"
-msgstr "Puntos"
-
-#: templates/quiz/quiz-result-overview.html:62
-#, fuzzy
-msgid "incorrect"
-msgstr "La respuesta correcta es:"
+msgstr "Correct"
 
 #: templates/quiz/quiz-result-overview.html:91
 #: templates/quiz/quiz-result-overview.html:95
 #: templates/quiz/quiz-result-overview.html:99 templates/quiz/quiz.html:16
+#, fuzzy
 msgid "attempt"
-msgstr "Intento"
+msgstr "Attempt"
 
 #: templates/quiz/quiz.html:49 templates/quiz/quiz.html:55
 #: templates/quiz/quiz_question.html:15
+#, fuzzy
 msgid "hint"
-msgstr "¿Consejo?"
+msgstr "Hint?"
 
 #: templates/quiz/quiz_question.html:53
+#, fuzzy
 msgid "go_to_answer"
-msgstr "Ir a la respuesta"
+msgstr "Go to answer"
 
 #: templates/quiz/quiz_question.html:55
+#, fuzzy
 msgid "submit_answer"
-msgstr "Entregar respuesta"
+msgstr "Answer question"
 
 #: templates/quiz/startquiz.html:9
+#, fuzzy
 msgid "start_quiz"
-msgstr "Empezar cuestionario"
+msgstr "Start quiz"
 
 #: templates/quiz/startquiz.html:15
+#, fuzzy
 msgid "go_to_first_question"
-msgstr "Ir a la pregunta primera"
+msgstr "Go to question 1"
 
 #: website/admin.py:18 website/admin.py:85 website/admin.py:106
 #: website/admin.py:124 website/admin.py:131
@@ -1676,17 +1815,20 @@ msgid "username_invalid"
 msgstr "Your username is invalid."
 
 #: website/auth.py:243
+#, fuzzy
 msgid "username_special"
-msgstr "El nombre de usuario no puede contener los caracteres `:` o `@`."
+msgstr "Username cannot contain `:` or `@`."
 
 #: website/auth.py:245
+#, fuzzy
 msgid "username_three"
-msgstr "El nombre de usuario debe contener al menos tres caracteres."
+msgstr "Username must contain at least three characters."
 
 #: website/auth.py:247 website/auth.py:541 website/auth.py:748
 #: website/auth.py:753
+#, fuzzy
 msgid "email_invalid"
-msgstr "Por favor ingresa una dirección de correo electrónico válida."
+msgstr "Please enter a valid email."
 
 #: website/auth.py:249 website/auth.py:303 website/auth.py:487
 #: website/auth.py:511 website/auth.py:523 website/auth.py:683
@@ -1700,17 +1842,20 @@ msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
 #: website/auth.py:312
+#, fuzzy
 msgid "invalid_username_password"
-msgstr "Combinación de usuario/contraseña inválida."
+msgstr "Invalid username/password."
 
 #: website/auth.py:356 website/auth.py:358
+#, fuzzy
 msgid "repeat_match_email"
-msgstr "El email repetido es distinto."
+msgstr "The repeated email does not match."
 
 #: website/auth.py:360 website/auth.py:513 website/auth.py:517
 #: website/auth.py:687
+#, fuzzy
 msgid "repeat_match_password"
-msgstr "La contraseña repetida es distinta."
+msgstr "The repeated password does not match."
 
 #: website/auth.py:362 website/auth.py:543
 #, fuzzy
@@ -1729,8 +1874,9 @@ msgstr ""
 "Please select a valid keyword language (select English or your own language)."
 
 #: website/auth.py:371 website/auth.py:551
+#, fuzzy
 msgid "year_invalid"
-msgstr "Por favor ingresa un año entre 1900 y "
+msgstr "Please enter a year between 1900 and {year}."
 
 #: website/auth.py:374 website/auth.py:554
 #, fuzzy
@@ -1754,16 +1900,19 @@ msgid "programming_invalid"
 msgstr "Please select a valid programming language."
 
 #: website/auth.py:388
+#, fuzzy
 msgid "exists_username"
-msgstr "Ese nombre de usuario ya está en uso."
+msgstr "That username is already in use."
 
 #: website/auth.py:390 website/auth.py:573
+#, fuzzy
 msgid "exists_email"
-msgstr "Esa dirección de correo electrónico ya está en uso."
+msgstr "That email is already in use."
 
 #: website/auth.py:489 website/auth.py:515 website/auth.py:685
+#, fuzzy
 msgid "password_six"
-msgstr "La contraseña debe contener al menos seis caracteres."
+msgstr "Your password must contain at least six characters."
 
 #: website/auth.py:492 website/auth.py:495
 #, fuzzy
@@ -1776,12 +1925,14 @@ msgid "password_change_success"
 msgstr "Password of your student is successfully changed."
 
 #: website/auth.py:532
+#, fuzzy
 msgid "password_updated"
-msgstr "Contraseña actualizada."
+msgstr "Password updated."
 
 #: website/auth.py:613
+#, fuzzy
 msgid "profile_updated"
-msgstr "Perfil actualizado."
+msgstr "Profile updated."
 
 #: website/auth.py:616
 #, fuzzy
@@ -1789,10 +1940,11 @@ msgid "profile_updated_reload"
 msgstr "Profile updated, page will be re-loaded."
 
 #: website/auth.py:670
+#, fuzzy
 msgid "sent_password_recovery"
 msgstr ""
-"Pronto recibirás un correo electrónico con instrucciones sobre cómo "
-"reestablecer tu contraseña."
+"You should soon receive an email with instructions on how to reset your "
+"password."
 
 #: website/auth.py:681 website/auth.py:691
 #, fuzzy
@@ -1800,15 +1952,11 @@ msgid "token_invalid"
 msgstr "Your token is invalid."
 
 #: website/auth.py:703
+#, fuzzy
 msgid "password_resetted"
 msgstr ""
-"Tu contraseña ha sido cambiada exitosamente. Ya puedes entrar nuevamente a "
-"tu cuenta usando la nueva contraseña."
-
-#: website/auth.py:721
-#, fuzzy
-msgid "teacher_invalid"
-msgstr "Your teacher value is invalid."
+"Your password has been successfully reset. You are being redirected to the "
+"login page."
 
 #: website/programs.py:41
 #, fuzzy
@@ -1816,9 +1964,11 @@ msgid "delete_success"
 msgstr "Program deleted successfully."
 
 #: website/programs.py:55
+#, fuzzy
 msgid "save_prompt"
 msgstr ""
-"Debes estar registrado para guardar tu programa. ¿Deseas entrar a tu cuenta?"
+"You need to have an account to save your program. Would you like to login "
+"now?"
 
 #: website/programs.py:60
 #, fuzzy
@@ -1833,38 +1983,38 @@ msgid "save_parse_warning"
 msgstr "This program contains an error, are you sure you want to save it?"
 
 #: website/programs.py:131 website/programs.py:132
+#, fuzzy
 msgid "save_success_detail"
-msgstr "Tu programa se ha salvado exitosamente"
+msgstr "Program saved successfully."
 
 #: website/programs.py:160
+#, fuzzy
 msgid "share_success_detail"
-msgstr "Tu programa es ahora público!"
+msgstr "Program shared successfully."
 
 #: website/programs.py:162
+#, fuzzy
 msgid "unshare_success_detail"
-msgstr "Tu programa es ahora privado"
+msgstr "Program unshared successfully."
+
+#: website/statistics.py:37 website/teacher.py:28 website/teacher.py:36
+#: website/teacher.py:211 website/teacher.py:235 website/teacher.py:247
+#: website/teacher.py:314 website/teacher.py:353
+#, fuzzy
+msgid "retrieve_class_error"
+msgstr "Only teachers can retrieve classes"
 
 #: website/programs.py:202
 #, fuzzy
 msgid "favourite_success"
 msgstr "Your program is set as favourite."
 
-#: website/statistics.py:37 website/teacher.py:28 website/teacher.py:36
-#: website/teacher.py:211 website/teacher.py:235 website/teacher.py:247
-#: website/teacher.py:314 website/teacher.py:353
-msgid "retrieve_class_error"
-msgstr "Solo los instructores pueden ver clases"
-
 #: website/statistics.py:41 website/teacher.py:39 website/teacher.py:133
 #: website/teacher.py:152 website/teacher.py:214 website/teacher.py:238
 #: website/teacher.py:250 website/teacher.py:317 website/teacher.py:356
-msgid "no_such_class"
-msgstr "No se encontró esa clase de Hedy"
-
-#: website/statistics.py:45
 #, fuzzy
-msgid "title_class statistics"
-msgstr "My statistics"
+msgid "no_such_class"
+msgstr "No such Hedy class"
 
 #: website/teacher.py:76
 #, fuzzy
@@ -1892,8 +2042,9 @@ msgid "class_name_duplicate"
 msgstr "You already have a class with this name."
 
 #: website/teacher.py:164 website/teacher.py:180 website/teacher.py:544
+#, fuzzy
 msgid "invalid_class_link"
-msgstr "Enlace incorrecto para unirse a la clase"
+msgstr "Invalid link for joining the class."
 
 #: website/teacher.py:168 website/teacher.py:170
 #, fuzzy
