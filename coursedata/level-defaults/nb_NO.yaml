@@ -324,18 +324,6 @@
         explanation: For å få en tilfeldig til fra listen bruker vi [{random}]. Så `frukt[{random}]` betyr; hent en tilfeldig frukt fra listen!
         example: 'For eksempel: tilfeldig_frukt = frukt[{random}]'
         demo_code: "frukt = ['banan', 'eple', 'vannmelon']\ntilfeldig_frukt = frukt[{random}]\n{print} tilfeldig_frukt"
-18:
-    start_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
-    intro_text: "## Level 18\nVi har ankommet nivået hvor vi skriver virkelig pythonkode! Python er riktignok ikke på norsk, men du kan bruke knappen oppe i høyre hjørne av kodefeltet hvis du vil se hvordan koden ser ut på engelsk.\nNå når vi har nådd ekte pythonkode må vi bruke paranteser når vi bruker {print} og {range}.\nDette ser slik ut:\n```\n{print}('Mitt navn er Hedy!')\n```\nFor å skrive ut mer enn en ting må du bruke et komma mellom tingene.\n```\nnavn = 'Hedy'\n{print}('Mitt navn er ', navn)\n```"
-    commands:
-    -   name: '{print}'
-        explanation: Med`{print}` må du bruke paranteser
-        example: '{print}'
-        demo_code: "{print}('hei!')"
-    -   name: '{print} med var'
-        explanation: Med `{print}` må vi bruke parantes og komma for å skrive ut flere ting
-        example: '{print}'
-        demo_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
 17:
     start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller ei, her kommer jeg!'"
     intro_text: "Nå gjør vi en liten endring i koden når vi bruker innrykk. Hver gang vi trenger innrykk, må vi nå skrive `:` på linjen før innrykket.\n\nPå dette nivået kan du også bruke en ny kommando `{elif}`. `{elif}` er en forkortelse for {else} {if} og du trenger det når du har lyst til å lage kode med 3 (eller fler!) alternativer.\nSjekk hvordan det blir!\n```\npremier = ['1 million kroner', 'en eplekake', 'ingenting']\ndin_premie = premier[{random}]\n{print} 'Du vinner ' din_premie \n{if} din_premie == '1 million kroner':\n    {print} 'Hurra! Du er rik!'\n{elif} din_premie == 'en eplekake':\n    {print} 'Digg, eplekake!'\n{else}:\n    {print} 'Bedre lykke neste gang..'\n```\n"
@@ -352,3 +340,15 @@
         explanation: Vi må gjøre det samme med alle `{if}`-sjekkene våre
         example: "{if} farge == 'grønn':"
         demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{if} farge == 'grønn':\n    {print} 'Din favorittfarge er grønn'\n{else}:\n    {print} 'Din favorittfarge er ikke grønn'"
+18:
+    start_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
+    intro_text: "## Level 18\nVi har ankommet nivået hvor vi skriver virkelig pythonkode! Python er riktignok ikke på norsk, men du kan bruke knappen oppe i høyre hjørne av kodefeltet hvis du vil se hvordan koden ser ut på engelsk.\nNå når vi har nådd ekte pythonkode må vi bruke paranteser når vi bruker {print} og {range}.\nDette ser slik ut:\n```\n{print}('Mitt navn er Hedy!')\n```\nFor å skrive ut mer enn en ting må du bruke et komma mellom tingene.\n```\nnavn = 'Hedy'\n{print}('Mitt navn er ', navn)\n```"
+    commands:
+    -   name: '{print}'
+        explanation: Med`{print}` må du bruke paranteser
+        example: '{print}'
+        demo_code: "{print}('hei!')"
+    -   name: '{print} med var'
+        explanation: Med `{print}` må vi bruke parantes og komma for å skrive ut flere ting
+        example: '{print}'
+        demo_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
