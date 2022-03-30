@@ -126,8 +126,8 @@
 1:
     intro_text: "## Welcome to Hedy!\nIn Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\nType your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n\nYou can print text to the screen using the `{print}` command.\n"
     example_code: "## نمونه کد\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-    intro_text_2: "با دستور `{ask}` می‌تونی درخواست یک ورودی بکنی و با دستور `{echo}` اون رو روی صفحه چاپ کنی.\n"
-    intro_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    intro_text_2: "با دستور `{ask}` می‌تونی درخواست یک ورودی بکنی و با دستور `{echo}` اون رو روی صفحه تکرار کنی.\n"
+    intro_text_3: "بیا شروع کنیم. نمی‌دونی از کجا شروع کنی؟ توی برگه‌های بعدی یه سری ایده برای ساخت برنامه پیدا می‌کنی.\n"
     example_code_2: "## نمونه کد\n```\n{ask} What is your name?\n{echo} hello\n```\n"
     start_code: '{print} hello world!'
     commands:
@@ -140,44 +140,44 @@
         example: 'مثال: {ask} What is your favorite color?'
         demo_code: '{ask} What is your favorite color?'
     -   name: '{echo}'
-        explanation: repeat something using `{echo}`.
-        example: 'Example: {echo} so your favorite color is '
+        explanation: با دستور `{echo}` یک چیز را تکرار کنید.
+        example: 'مثال: {echo} so your favorite color is '
         demo_code: "{ask} What is your favorite color?\n{echo} so your favorite color is"
     -   name: '{print} emojis'
-        explanation: print an emoji with `{print}`
-        example: 'Example: {print} 🙋‍ 🌍 ❗'
+        explanation: یک شکلک رو با دستور `{print}` چاپ کن
+        example: 'مثال: {print} 🙋‍ 🌍 ❗'
         demo_code: '{print} 🙋 🌍 ❗'
     -   name: '{forward}'
-        explanation: Draw a line with `{forward}`.
-        example: 'Example: {forward} 100'
+        explanation: با دستور `{forward}` یک خط بکش.
+        example: 'مثال: {forward} 100'
         demo_code: '{forward} 100'
     -   name: '{turn}'
-        explanation: turn the drawing turtle with `{turn}`
-        example: 'Example: {turn}'
+        explanation: با دستور `{turn}` لاکپشت رو بچرخون
+        example: 'مثال: {turn}'
         demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
-    intro_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
-    example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-    intro_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+    intro_text: "## متغیرها\nدر مرحله دوم ما دو تا دستور جدید یاد می‌گیریم: `{is}` و `{sleep}`.\nتو می‌تونی با دستور `{is}` به یک کلمه، یک اسم اختصاص بدی. به این می‌گن «متغیر». توی این مثال ما دو متغیر به نام‌های name و age می‌سازیم. تو می‌تونی از این کلمات در هر جای کد استفاده کنی. مثل:\n\nاینطوری تو دیگه به دستور `{echo}`نیاز نداری!\n"
+    example_code: "## نمونه کد\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+    intro_text_2: "دستور `{print}` همچنان مثل قبل کار می‌کنه، اما دستور `{ask}` تغییر کرده. تو نیاز داری توی دستور `{ask}` از یک متغیر استفاده کنی. مثل این:\n"
     example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-    intro_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
+    intro_text_3: "دستور بعد `{sleep}` است، که برنامه رو برای یک ثانیه متوقف می‌کنه. اگر بعد از دستور {sleep} یک عدد بنویسید، برنامه به اون مقدار ثانیه توقف می‌کنه.\n"
     example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
     start_code: '{print} hello world!'
     commands:
     -   name: '{is}'
-        explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
-        example: 'Example: name {is} Hedy.'
+        explanation: با دستور `{is}` به یک کلمه، یک اسم بدید. اسم می‌تونه به انتخاب خودت باشه.
+        example: 'مثال: name {is} Hedy.'
         demo_code: "name {is} Hedy\n{print} welcome name"
     -   name: '{ask}'
-        explanation: ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
-        example: 'Example: color {is} {ask} What is your favorite color?'
+        explanation: با دستور `{ask}` یک چیزی بپرسید. توجه کنید که به یک اسم نیاز دارید تا بتونید از دستور `{is}` استفاده کنید.
+        example: 'مثال: color {is} {ask} What is your favorite color?'
         demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
     -   name: '{sleep}'
-        explanation: Let Hedy pause for a (couple of) second(s).
-        example: 'Example: {sleep} 2 '
+        explanation: بذار هِدی برای یک یا چند ثانیه توقف کنه.
+        example: 'مثال: {sleep} 2 '
         demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
-    -   explanation: Give a number a name using `{is}`. You can choose the name yourself.
-        example: 'Example: angle {is} 90'
+    -   explanation: با دستور `{is}` به یک عدد، یک اسم بده. اسم می‌تونه هر چیزی که می‌خوای باشه.
+        example: 'مثال: angle {is} 90'
         demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
         name: is - turtle
 3:
