@@ -45,7 +45,7 @@ def routes(app, database):
 
         # After hitting 1k users, it'd be wise to add pagination.
         users = DATABASE.all_users(filtering)
-        userdata =[]
+        userdata = []
         fields = [
             'username', 'email', 'birth_year', 'country',
             'gender', 'created', 'last_login', 'verification_pending',
