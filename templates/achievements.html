@@ -9,7 +9,6 @@
             {% for subcategory in category.subcategories %}
                 <h3 class="px-16">{{ subcategory.title }}</h3>
                 <div class="flex flex-wrap w-full px-16">
-                {{ achievements }}
                 {% for achievement in subcategory.achievements %}
                     {% if achievement.key in user_achievements %}
                         <div class="w-40 rounded-lg ltr:mr-4 rtl:ml-4 mt-4 relative bg-blue-200">
