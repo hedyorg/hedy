@@ -64,7 +64,7 @@ class TestsLevel7(HedyTester):
     expected = textwrap.dedent("""\
       n = input(f'How many times?')
       for i in range(int(n)):
-        print(f'{n}')
+        print(f'n')
         time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)

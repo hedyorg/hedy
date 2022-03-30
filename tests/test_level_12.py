@@ -449,6 +449,24 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
+  def test_assign_double_quoted_string_with_inner_single_quote(self):
+    code = '''a is "It's Hedy!"'''
+    expected = """a = 'It\\'s Hedy!'"""
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected
+    )
+
+  def test_assign_single_quoted_string_with_inner_double_quote(self):
+    code = """a is 'It says "Hedy"'"""
+    expected = """a = 'It says "Hedy"'"""
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected
+    )
+
   def test_print_multiple_calcs(self):
     code = textwrap.dedent("""\
             name is 1 + 2 + 3
@@ -470,10 +488,31 @@ class TestsLevel12(HedyTester):
     expected = """print(f'{"Hi " + "there"}')"""
 
     self.multi_level_tester(
-      max_level=12,
+      max_level=17,
       code=code,
       expected=expected
     )
+
+  # TODO: These cases have to be supported but they require moving away from f-strings
+  # def test_assign_concat_single_quoted_strings_with_inner_double_quotes(self):
+  #   code = """a is 'Hi there! ' + 'It says "Hedy"!'"""
+  #   expected = '''a = "Hi there! " + "It says \\"Hedy!\\""'''
+  #
+  #   self.multi_level_tester(
+  #     max_level=12,
+  #     code=code,
+  #     expected=expected
+  #   )
+  #
+  # def test_print_concat_single_quoted_strings_with_inner_double_quotes(self):
+  #   code = """print 'Hi there! ' + 'It says "Hedy"!'"""
+  #   expected = """print(f'{"Hi there! " + "It says Hedy!"}')"""
+  #
+  #   self.multi_level_tester(
+  #     max_level=12,
+  #     code=code,
+  #     expected=expected
+  #   )
 
   @parameterized.expand(HedyTester.quotes)
   def test_print_concat_var_and_literal_string(self, q):

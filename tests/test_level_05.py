@@ -320,6 +320,30 @@ class TestsLevel5(HedyTester):
       code=code,
       exception=hedy.exceptions.UnquotedEqualityCheck)
 
+  def test_equality_single_quoted_rhs_with_inner_double_quote(self):
+    code = textwrap.dedent(f"""\
+       answer is no
+       if answer is 'He said "no"' print 'no'""")
+
+    expected = textwrap.dedent(f"""\
+       answer = 'no'
+       if answer == 'He said "no"':
+         print(f'no')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_equality_double_quoted_rhs_with_inner_single_quote(self):
+    code = textwrap.dedent(f"""\
+       answer is no
+       if answer is "He said 'no'" print 'no'""")
+
+    expected = textwrap.dedent(f"""\
+       answer = 'no'
+       if answer == 'He said \\'no\\'':
+         print(f'no')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
   @parameterized.expand(HedyTester.quotes)
   def test_one_space_in_rhs_if(self, q):
     code = textwrap.dedent(f"""\
@@ -328,7 +352,7 @@ class TestsLevel5(HedyTester):
 
     expected = textwrap.dedent(f"""\
     naam = 'James'
-    if naam == {q}James Bond{q}:
+    if naam == 'James Bond':
       print(f'shaken')""")
 
     self.single_level_tester(code=code, expected=expected)
@@ -341,7 +365,7 @@ class TestsLevel5(HedyTester):
 
     expected = textwrap.dedent(f"""\
     naam = 'James'
-    if naam == {q}Bond James Bond{q}:
+    if naam == 'Bond James Bond':
       print(f'shaken')""")
 
     self.single_level_tester(code=code, expected=expected)
@@ -354,7 +378,7 @@ class TestsLevel5(HedyTester):
 
     expected = textwrap.dedent(f"""\
     naam = 'James'
-    if naam == {q}James Bond{q}:
+    if naam == 'James Bond':
       print(f'shaken')
     else:
       print(f'biertje!')""")

@@ -196,6 +196,30 @@ class TestsLevel6(HedyTester):
       max_level=7
     )
 
+  def test_equality_single_quoted_rhs_with_inner_double_quote(self):
+    code = textwrap.dedent(f"""\
+      answer is no
+      if answer is 'He said "no"' print 'no'""")
+
+    expected = textwrap.dedent(f"""\
+      answer = 'no'
+      if str(answer) == str('He said "no"'):
+        print(f'no')""")
+
+    self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+  def test_equality_double_quoted_rhs_with_inner_single_quote(self):
+    code = textwrap.dedent(f"""\
+      answer is no
+      if answer is "He said 'no'" print 'no'""")
+
+    expected = textwrap.dedent(f"""\
+      answer = 'no'
+      if str(answer) == str('He said \\'no\\''):
+        print(f'no')""")
+
+    self.multi_level_tester(code=code, expected=expected, max_level=7)
+
   # calculation tests
   # todo should all be tested for higher levels too!
   def test_print_calc(self):
@@ -556,7 +580,7 @@ class TestsLevel6(HedyTester):
 
     expected = textwrap.dedent(f"""\
     naam = 'James'
-    if str(naam) == str({q}James Bond{q}):
+    if str(naam) == str('James Bond'):
       print(f'shaken')
     else:
       print(f'biertje!')""")

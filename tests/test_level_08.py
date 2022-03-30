@@ -313,7 +313,7 @@ class TestsLevel8(HedyTester):
         print 'lekker'""")
 
     expected = textwrap.dedent(f"""\
-    if str('eten') == str({q}pizza{q}):
+    if str('eten') == str('pizza'):
       print(f'lekker')""")
 
     self.multi_level_tester(
@@ -369,3 +369,31 @@ class TestsLevel8(HedyTester):
       exception=hedy.exceptions.IndentationException,
       extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
     )
+
+  @parameterized.expand(["", "'"])
+  def test_equality_single_or_not_quoted_rhs_with_inner_double_quote(self, q):
+    code = textwrap.dedent(f"""\
+      answer is no
+      if answer is {q}He said "no"{q}
+        print 'no'""")
+
+    expected = textwrap.dedent(f"""\
+      answer = 'no'
+      if str(answer) == str('He said "no"'):
+        print(f'no')""")
+
+    self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+  @parameterized.expand(['', '"'])
+  def test_equality_double_or_not_quoted_rhs_with_inner_single_quote(self, q):
+    code = textwrap.dedent(f"""\
+      answer is no
+      if answer is {q}He said 'no'{q}
+        print 'no'""")
+
+    expected = textwrap.dedent(f"""\
+      answer = 'no'
+      if str(answer) == str('He said \\'no\\''):
+        print(f'no')""")
+
+    self.multi_level_tester(code=code, expected=expected, max_level=11)
