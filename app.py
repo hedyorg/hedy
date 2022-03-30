@@ -1372,11 +1372,16 @@ def public_user_page(username):
         last_achieved = None
         if 'achieved' in user_achievements:
             last_achieved = user_achievements['achieved'][-1]
-
-        # Todo: TB -> In the near future: add achievement for user visiting their own profile
+            # Todo TB -> It might be nice to simplify this, but not sure what would be the best approach
+            for category in ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang).get('categories'):
+                for subcategory in category.get('subcategories'):
+                    for achievement in subcategory.get('achievements'):
+                        print(achievement)
+                        if achievement.get('key') == last_achieved:
+                            last_achieved = achievement.get('title')
+                            break
 
         return render_template('public-page.html', user_info=user_public_info,
-                               achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang),
                                favourite_program=favourite_program,
                                programs=user_programs,
                                last_achieved=last_achieved,
