@@ -182,5 +182,4 @@ class DefaultValues:
   example_code = attr.ib(default=None)
   extra_examples = attr.ib(default=None)
   start_code = attr.ib(default=None)
-  commands = attr.ib(default=None)
 
