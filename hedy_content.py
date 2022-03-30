@@ -67,8 +67,6 @@ class LevelDefaults:
         max_consecutive_level = level
       else:
         return previous_level
-
-
     return max_consecutive_level
 
   def get_defaults_for_level(self, level):
@@ -103,9 +101,11 @@ class LevelDefaults:
 
     return copy.deepcopy(self.levels.get(int(level), {}))
 
+
 class NoSuchDefaults:
   def get_defaults(self):
     return {}
+
 
 class Commands:
     def __init__(self, language):
