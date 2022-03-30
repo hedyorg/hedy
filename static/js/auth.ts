@@ -124,7 +124,8 @@ export const auth = {
       }).done (function (response) {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin({"teacher": response['teacher']});
+        console.log(response);
+        afterLogin({"admin": response['admin'], "teacher": response['teacher']});
       }).fail (function (response) {
         modal.alert(response.responseText, 3000, true);
       });
@@ -339,6 +340,11 @@ async function afterLogin(loginData: any) {
   if (loginData['first_time']) {
     return auth.redirect('landing-page');
   }
+  // If the user is an admin -> re-direct to admin page after login
+  if (loginData['admin']) {
+    return auth.redirect('admin');
+  }
+
   // If the user is a teacher -> re-direct to for-teachers page after login
   if (loginData['teacher']) {
     return auth.redirect('for-teachers');
