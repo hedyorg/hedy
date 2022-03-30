@@ -436,14 +436,14 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
                 start_code: "{print} 'Hvem tar oppvasken?'"
             4:
-                story_text: "## Dishwashing\nWith quotation marks you can make your dishwashing planning more beautiful.\nThis time the sample code is not quite complete.\n\nCan you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.\n\nTip: Don't forget the quotation marks!\n"
-                example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
+                story_text: "## Oppvasken\nMed fnutter kan du gjøre oppvaskeplanleggingen penere.\nDenne gangen er eksempelkoden ikke helt ferdig.\n\nKan du fullføre koden ved å fylle inn det som mangler? Hver tomme plass må erstattes med et ord eller et symbol.\n\nTips: Ikke glem fnutter!\n"
+                example_code: "## Eksempel Hedykode\n\n```\nfamilie {is} mom, dad, Emma, Sofie\n{print} _ oppvasken blir tatt av _\n{sleep}\n{print} familie {at} _\n```\n"
                 start_code: "{print} 'Hvem tar oppvasken?'"
             3:
                 story_text: "## Oppvasken\nEr dere alltid uenig hjemme om hvem som skal ta oppvasken eller hvem som skal rense kattedoen?\nDa kan du la datamaskinen velge helt rettferdig. Du kan programmere det på dette nivået!\nFørst må du lage en liste over folk i familien. Så velger du `{at} {random}` fra listen.\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
-                example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\n"
-                story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
-                example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
+                example_code: "## Eksempel Hedykode\n\n```\nfamilie {is} mamma, pappa, Emma, Sofie\n{print} familie {at} {random}\n```\n"
+                story_text_2: "## Hack oppvaskeprogrammet!\nFøler du ikke for å ta oppvasken selv? Hack programmet til å fjerne navnet ditt fra listen.\n"
+                example_code_2: "```\nfamilie {is} mom, dad, Emma, Sofie\nditt_navn {is} {ask} Hvem er du?\n{remove} ditt_navn {from} familie\n{print} familie {at} {random} tar oppvasken\n```\n"
                 start_code: '{print} Hvem tar oppvasken?'
     dice:
         name: Terninger
