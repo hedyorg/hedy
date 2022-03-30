@@ -195,13 +195,14 @@ adventures:
                     {print} Hij hoort nu het geluid van een dieren {at} {random}
                     ```
                 story_text_2: |
-                    Het `{add}`commando kun je misschien ook in je verhaal gebruiken. Bijvoorbeeld zo:
+                    Het `{add}`commando kun je misschien ook in je verhaal gebruiken.
 
-                example_code_2: |-
+                example_code_2: |
                     ## Voorbeeld Hedy code
+
                     ```
                     {print} Hij hoort een geluid...
-                    dieren {is} 🦉, 🐿, 🦇
+                    dieren {is} 🐿, 🦔, 🦇, 🦉
                     dier {is} {ask} Wat denk jij dat het is?
                     {add} dier {to_list} dieren
                     {print} het was een dieren {at} {random}
@@ -1417,7 +1418,7 @@ adventures:
                     Zoals je merkt, is Hedy nog niet echt een goede waarzegger. Ze voorspelt alleen wat je haar vertelt!
                     Neem een kijkje in level 2 om te leren om echte voorspellingen te doen!
                 start_code: "# Maak jouw eigen code hier"
-                story_text_2: "## Challenge\nHedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?\nObviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!\nTake a look in level 2 to improve your fortune teller.\n"
+                story_text_2: "## Uitdaging\nHedy kan nu voorspellen hoe jij heet, maar kun jij ervoor zorgen dat Hedy meer voorspellingen over je kan maken?\nZoals je merkt, is Hedy nog niet echt een goede waarzegger. Ze voorspelt alleen wat je haar vertelt!\nNeem een kijkje in level 2 om te leren om echte voorspellingen te doen!\n"
             3:
                 story_text: |
                     ## Hedy de Waarzegger
@@ -1631,17 +1632,16 @@ adventures:
                     Je kunt met Hedy ook een virtueel restaurant bouwen en de bestellingen van je klanten opnemen!
                 example_code: |
                     ## Voorbeeld Hedy code
+
                     ```
                     {print} Welkom bij McHedy! 🍟
                     {ask} Wat wilt u bestellen?
                     {echo} Dus u wilt graag
                     {print} Bedankt voor uw bestelling!
+                    {print} Het komt eraan!
                     ```
-
-                    ## Uitdaging
-                    Kun jij het restaurant verder uitbreiden door meer regels code toe te voegen? Je zou bijvoorbeeld kunnen vragen of je klant ook iets wil drinken, vertellen hoe duur het is, of de klant eet smakelijk wensen!
                 start_code: "{print} Welkom bij McHedy!"
-                story_text_2: "## Challenge\nCan you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?\n"
+                story_text_2: "## Uitdaging\nKun jij het restaurant verder uitbreiden door meer regels code toe te voegen? Je zou bijvoorbeeld kunnen vragen ({ask}) of je klant ook iets wil drinken, vertellen hoe duur het is, of de klant eet smakelijk wensen!\n"
             2:
                 story_text: |
                     ## Restaurant level 2
@@ -2437,7 +2437,7 @@ adventures:
                     {print} 'Het drinken is gratis in dit level want Hedy kan de prijs nog niet berekenen...'
                     ```
                 start_code: "{print} 'Op naar het volgende level!'"
-                example_code: "## Free drinks!\n```\n{print} 'Welcome at McHedy'\norder {is} {ask} 'What would you like to eat?'\n{print} 'You would like ' order\n{if} order {is} hamburger price {is} 5\n{if} order {is} fries price {is} 2\ndrinks {is} {ask} 'What would you like to drink?'\n{print} 'You would like ' drinks\n{print} 'That will be ' price ' dollars for your ' order ' please'\n{print} 'The drinks are free in this level because Hedy cant calculate the price yet...'\n```\n"
+                example_code: "## Gratis drinken!\n```\n{print} 'Welkom bij McHedy'\nbestelling {is} {ask} 'Wat wilt u bestellen?'\n{print} 'U wilt graag ' bestelling\n{if} bestelling {is} hamburger prijs {is} 5\n{if} bestelling {is} friet prijs {is} 2\ndrinken {is} {ask} 'Wat wilt u drinken?'\n{print} 'U wilt graag ' drinken\n{print} 'Dat wordt dan ' prijs ' euro voor ' bestelling ' alstublieft'\n{print} 'Het drinken is gratis in dit level want Hedy kan de prijs nog niet berekenen...'\n```\n"
             6:
                 story_text: |
                     ## Vooruitblik
