@@ -11,7 +11,7 @@
                 <div class="flex flex-wrap w-full px-16">
                 {{ achievements }}
                 {% for achievement in subcategory.achievements %}
-                    {% if achievement in user_achievements %}
+                    {% if achievement.key in user_achievements %}
                         <div class="w-40 rounded-lg ltr:mr-4 rtl:ml-4 mt-4 relative bg-blue-200">
                             <div class="relative h-40">
                                 <div class="flex items-center justify-center h-40">
@@ -20,7 +20,7 @@
                                 </div>
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                                <p class="font-semibold">{{ achievements.text }}</p>
+                                <p class="font-semibold">{{ achievement.text }}</p>
                             </div>
                             <div class="text-center flex items-center justify-center h-16">
                                 <p>{{ achievement.title }}</p>
