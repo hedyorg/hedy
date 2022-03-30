@@ -63,9 +63,9 @@ adventures:
     turtle:
         levels:
             4:
-                start_code: "{print} Tegner figurer\nvinkel {is} 90\n{turn} vinkel\n{forward} 25\n"
+                start_code: "{print} 'Tegner figurer'\nvinkel {is} 90\n{turn} vinkel\n{forward} 25\n"
                 story_text: "## La oss tegne\nPå nivå 4 kan du bruke fnutter med `{print}` og `{ask}`. Også når du tegner!\n"
-                example_code: "## Eksempel Hedykode\n\n```\n{print} Tegner figurer\nvinkel {is} 90\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n```\n"
+                example_code: "## Eksempel Hedykode\n\n```\n{print} 'Tegner figurer'\nvinkel {is} 90\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n```\n"
             1:
                 story_text: "## La oss tegne\nDu ha også bruke Hedy til å tegne. Ved å kombinere svinger og linjer så kan du lage firkanter eller trapper!\n\nVed å bruke `{forward}` kan du tegne en linje fremover. Talle bak kommandoen bestemmer hvor langt skilpadden vil gå. `{turn} {right}` snur skilpadden en kvart runde med klokken, `{turn} {left}` snur skilpadden mot klokken.\n\nDette er starten på en liten trapp. Kan du få den til å ha 5 trinn?\n"
                 example_code: "## Eksempel Hedykode\n\n```\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
@@ -80,22 +80,22 @@ adventures:
                 start_code: "vinkler {is} 10, 50, 90, 150, 250\n{turn} vinkler {at} {random}\n{forward} 25\n"
             5:
                 story_text: "## La oss tegne\nPå nivå 5 kan du ta valg med `{if}`. For eksempel mellom forskjellige typer figurer.\n"
-                example_code: "## Eksempel Hedykode\n\n```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25\n"
+                example_code: "## Eksempel Hedykode\n\n```\n{print} 'Tegner figurer'\nfigur {is} {ask} 'Vil du lage en firkant eller en trekant?'\n{if} figur {is} trekant vinkel {is} 120\n{else} vinkel {is} 90\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n```\n"
+                start_code: "{print} 'Tegner figurer'\nfigur {is} {ask} 'Vil du lage en firkant eller en trekant?'\n{if} figur {is} trekant vinkel {is} 120 {else} vinkel {is} 90\n{turn} vinkel\n{forward} 25\n"
             8:
-                story_text: "## Let's draw\nNow that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n"
-                example_code: "## Example Hedy code\n\n```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
-                story_text_2: "## Interaction\nAlso, we can now improve the program that draws different figures.\nCan you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!\n"
-                example_code_2: "## Example Hedy code\n\n```\nangles = {ask} 'How many angles should I draw?'\nangle = 360 / angles\n{repeat} angle {times}\n    {turn} _\n    {forward} _\n```\n"
-                start_code: "hoeken = {ask} 'Hvor mange vinkler skal jeg tegne?'\n"
+                story_text: "## La oss tegne\nNå som vi kan repetere flere linjer så kan vi lage figurer lettere.\nVi trenger bare å sette vinkelen en gang og så bruke den variabelen i en `{repeat}`.\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvinkel = 90\n{repeat} 10 {times}\n    {turn} vinkel\n    {forward} 50\n```\n"
+                story_text_2: "## Interaksjon\nVi kan også forbedre programmet som tegner forskjellige figurer.\nKan du finne ut hvor langt skilpadden må snu seg her? Fullfør koden og du kan tegne et hvilket som helst polygon!\n"
+                example_code_2: "## Eksempel Hedykode\n\n```\nhjørner = {ask} 'Hvor mange hjørner skal jeg tegne?'\ngrader = 360 / hjørner\n{repeat} grader {times}\n    {turn} _\n    {forward} _\n```\n"
+                start_code: "hjørner = {ask} 'Hvor mange vinkler skal jeg tegne?'\n"
             7:
-                story_text: "## Let's draw\nIn this level you can repeat one line of code with `{repeat}`.\n"
-                example_code: "## Example Hedy code\n\n```\n{print} 'Draw figures'\n{repeat} 3 {times} {forward} 10\n```\n"
+                story_text: "## La oss tegne\nPå dette nivået kan du repetere en linje kode med `{repeat}`.\n"
+                example_code: "## Eksempel Hedykode\n\n```\n{print} 'Tegn figurer'\n{repeat} 3 {times} {forward} 10\n```\n"
                 start_code: "{print} 'Tegn figurer'\n{repeat} 3 {times} {forward} 10\n"
             6:
-                story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
-                example_code: "## Example Hedy code\n\n```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
-                start_code: "{print} 'Tegne figurer'\n"
+                story_text: "## La oss tegne\nPå dette nivået kan du bruke regning for å tegne forskjellige figurer.\nDu kan ha lært på skolen at å snu en full sirkel er 360 grader. Hvis ikke så vet du det nå!\nDet er derfor du bruker 90 grader for en firkant. 360 grader delt på 4 er 90.\nNå som vi kan gjøre matte med Hedy så kan vi tegne alle figurene vi vil!\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvinkler = {ask} 'Hvor mange vinkler vil du ha?'\ngrader = 360 / vinkler\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n```\n"
+                start_code: "{print} 'Tegner figurer'\n"
         name: Skilpadde
         description: Lag din egen tegning
         image: turtle.gif
