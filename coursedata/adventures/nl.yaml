@@ -253,6 +253,7 @@ adventures:
                     Je kunt ook zorgen dat er weer een naam ingevoerd kan worden. Dat werkt net zoals in level 3. Dat kun je combineren met een `{if}`, en dan heb je al een heel programma gemaakt!
                 example_code: |
                     ## Voorbeeld Hedy code
+
                     ```
                     naam {is} {ask} 'Wie loopt er in het bos?'
                     {print} naam ' loopt door het bos'
@@ -299,7 +300,7 @@ adventures:
             9:
                 story_text: |
                     ## Verhaal
-                    In dit level kun je {if} commando's in andere {if} commando's stoppen. Hierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!
+                    In dit level kun je {if}, {repeat}, en {for} commando's in andere {if}, {repeat} en {for} commando's stoppen. Hierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!
                 example_code: |
                     ## Voorbeeld Simpele Hedy Code
                     ```
@@ -415,6 +416,7 @@ adventures:
                     Of je kunt `{while} zwaard {is} 'kwijt'` gebruiken, zodat de speler niet verder kan totdat hij/zij het zwaard gevonden heeft.
                 example_code: |
                     ## Voorbeeld Hedy code
+
                     ```
                     sleutels = 'kwijt'
                     {print} 'Je staat in de voortuin en bent je sleutels kwijt.'
@@ -687,14 +689,14 @@ adventures:
             1:
                 story_text: |
                     ## Tekenen maar
-                    In level 1 kun je ook beginnen met een programmeer-tekening! Door lijnen te combineren met draaien kun je bijvoorbeeld een
-                    vierkant maken of een trapje.
+                    Je kunt met Hedy ook tekenen. Door lijnen te combineren met draaien kun je bijvoorbeeld een vierkant maken of een trapje.
 
                     Met `{forward}` ga je naar voren. Het getal erna bepaalt hoe ver naar voren. Met `{turn} {right}` draai je een kwartslag, met de klok mee. `{turn} {left}` draait tegen de klok in.
 
                     Dit is het begin van een trapje, zorg jij dat het wel 5 treden worden?
                 example_code: |
                     ## Voorbeeld Hedy code
+
                     ```
                     {turn} {right}
                     {forward} 50
@@ -730,7 +732,7 @@ adventures:
             3:
                 story_text: |
                     ## Zoekende schildpad
-                    Ook bij je teken-schildpad kun je `{random}` gebruiken! Dan loopt hij steeds een ander pad.
+                    Ook bij je teken-schildpad kun je `{at} {random}` gebruiken! Dan loopt hij steeds een ander pad.
                     Kies met `{at} {random}` een hoek uit een lijstje. Als je regels 2 en 3 een paar keer herhaalt, krijg je een langere tekening.
 
                 example_code: |
@@ -872,22 +874,14 @@ adventures:
                     Je maakt eerst een lijst met de leden van jouw gezin. Dan kies je met `{at} {random}` uit de lijst.
                 example_code: |
                     ## Voorbeeld Hedy code
+
                     ```
                     mensen {is} mama, papa, Emma, Sophie
                     {print} mensen {at} {random}
                     ```
-                    ## Hack het afwasprogramma met {remove}
-                    Heb jij geen zin om de afwas te doen? Hack dan het programma door jouw naam van het lijstje te halen!
-
-                    ```
-                    mensen {is} mama, papa, Emma, Sophie
-                    jouw_naam {is} {ask} Wie ben jij?
-                    {remove} jouw_naam {from} mensen
-                    {print} mensen {at} {random} doet de afwas vanavond!
-                    ```
                 start_code: "{print} Wie doet de afwas?"
-                story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
-                example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
+                story_text_2: "## Hack het afwasprogramma!\nHeb jij geen zin om de afwas te doen? Hack dan het programma door jouw naam van het lijstje te halen!\n"
+                example_code_2: "```\nmensen {is} mama, papa, Emma, Sophie\njouw_naam {is} {ask} Wie ben jij?\n{remove} jouw_naam {from} mensen\n{print} mensen {at} {random} doet de afwas vanavond!\n```\n"
             4:
                 story_text: |
                     ## Afwasprogramma
@@ -927,6 +921,7 @@ adventures:
                     Hoe vaak gaat iedereen eigenlijk afwassen? Is dat wel eerlijk? Dat kun je nu tellen.
                 example_code: |
                     ## Voorbeeld Hedy code
+
                     ```
                     mensen = mama, papa, Emma, Sophie
                     emma_wast_af = 0
@@ -938,25 +933,9 @@ adventures:
 
                     Nu kun je regels 3 t/m 5 een paar keer (bijv 7 keer voor een hele week) kopiëren om weer voor een hele week vooruit te rekenen.
                     Maak jij de code voor de hele week?
-
-                    ## Eerlijk afwasprogramma
-                    Als je heel veel pech hebt moet je bij het vorige afwasprogramma misschien wel de hele week afwassen! Dat is niet eerlijk!
-                    Daarom kun je ook het `{remove}` commando gebruiken om de gekozen afwasser uit het lijstje te halen. Zo hoeft de afwasser pas weer af te wassen als iedereen geweest is.
-                    De code voor maandag en dinsdag staat klaar, maak jij de rest van de week af?
-                    En kan jij een oplossing bedenken voor als het lijstje leeg is...?
-                    ```
-                    mensen = mama, papa, Emma, Sophie
-                    afwasser = mensen {at} {random}
-                    {print} 'Maandag is de afwasser: ' afwasser
-                    {remove} afwasser {from} mensen
-                    afwasser = mensen {at} {random}
-                    {print} 'Dinsdag is de afwasser: ' afwasser
-                    {remove} afwasser {from} mensen
-                    afwasser = mensen {at} {random}
-                    ```
                 start_code: "{print} 'Wie doet de afwas?'"
-                story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
-                example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
+                story_text_2: "## Eerlijk afwasprogramma\nAls je heel veel pech hebt moet je bij het vorige afwasprogramma misschien wel de hele week afwassen! Dat is niet eerlijk!\nDaarom kun je ook het `{remove}` commando gebruiken om de gekozen afwasser uit het lijstje te halen. Zo hoeft de afwasser pas weer af te wassen als iedereen geweest is.\n\nDe code voor maandag en dinsdag staat klaar, maak jij de rest van de week af?\nEn kan jij een oplossing bedenken voor als het lijstje leeg is...?\n"
+                example_code_2: "```\nmensen = mama, papa, Emma, Sophie\nafwasser = mensen {at} {random}\n{print} 'Maandag is de afwasser: ' afwasser\n{remove} afwasser {from} mensen\nafwasser = mensen {at} {random}\n{print} 'Dinsdag is de afwasser: ' afwasser\n{remove} afwasser {from} mensen\nafwasser = mensen {at} {random}\n```\n"
             7:
                 story_text: |
                     ## Afwasprogramma
@@ -1051,7 +1030,7 @@ adventures:
                     ```
                     Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
                 start_code: "{print} 'Wat zal de dobbelsteen deze keer aangeven?'"
-                example_code_2: "## Looking forward\n\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
+                example_code_2: "## Vooruitblik\n\nHeb je zelfs de score voor 8 dobbelstenen berekend? Veel knippen en plakken was dat zeg. Dat gaan we makkelijker doen in level 7!\n"
             7:
                 story_text: |
                     ## Dobbelsteen
@@ -1168,6 +1147,7 @@ adventures:
                     Maak jij de code af?
                 example_code: |
                     ## Voorbeeld Hedy code
+
                     ```
                     opties {is} steen, papier, schaar
                     computerkeuze {is} _
@@ -1177,7 +1157,7 @@ adventures:
                     {if} _ {is} _ {print} 'gelijkspel!' {else} {print} 'geen gelijkspel'
                     ```
 
-                    Vul op de stippeltjes eerst de goede code aan om te kijken of het gelijkspel is.
+                    Vul code in op de stippeltjes die zegt of je gelijk hebt gespeeld met de computer.
                 start_code: "{print} 'Welkom bij jouw eigen steen papier schaar!'"
             9:
                 story_text: |
@@ -1310,7 +1290,7 @@ adventures:
                             score = score +1
                     {print} 'Je score is ' score
                     ```
-                start_code: "{print} 'Welcome to this calculator!'"
+                start_code: "{print} 'Welkom bij de rekenmachine!'"
                 example_code: "## Example Hedy code\n\n```\nscore = 0\n{repeat} 10 {times}\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct_answer = number1 * number2\n    {print} 'What is ' number1 ' times ' number2 '?'\n    answer = {ask} 'Type your answer here...'\n    {print} 'Your answer is' answer\n    {if} answer {is} correct_answer\n        score = score + 1\n{print} 'Great job! Your score is... ' score ' out of 10!'\n```\n"
             10:
                 story_text: |
@@ -1337,6 +1317,7 @@ adventures:
                     In dit level kun je ook met kommagetallen werken met de rekenmachine. Onthoud wel dat je geen komma gebruikt, maar een punt!
                 example_code: |
                     ## Voorbeeld Hedy code
+
                     ```
                     getal1 = {ask} 'Wat is het eerste getal?'
                     getal2 = {ask} 'Wat is het tweede getal?'
@@ -1405,18 +1386,14 @@ adventures:
                     Kijk maar naar het voorbeeld:
                 example_code: |
                     ## Voorbeeld Hedy code
+
                     ```
                     {print} Hoi, ik ben Hedy de waarzegger!
                     {ask} Wie ben jij?
+                    {print} Ik kijk diep in mijn glazen bol
                     {print} Ik voorspel... Ik voorspel...
                     {echo} Jouw naam is
                     ```
-
-                    ## Uitdaging
-                    Hedy kan nu voorspellen hoe jij heet, maar kun jij ervoor zorgen dat Hedy meer voorspellingen over je kan maken?
-
-                    Zoals je merkt, is Hedy nog niet echt een goede waarzegger. Ze voorspelt alleen wat je haar vertelt!
-                    Neem een kijkje in level 2 om te leren om echte voorspellingen te doen!
                 start_code: "# Maak jouw eigen code hier"
                 story_text_2: "## Uitdaging\nHedy kan nu voorspellen hoe jij heet, maar kun jij ervoor zorgen dat Hedy meer voorspellingen over je kan maken?\nZoals je merkt, is Hedy nog niet echt een goede waarzegger. Ze voorspelt alleen wat je haar vertelt!\nNeem een kijkje in level 2 om te leren om echte voorspellingen te doen!\n"
             3:
@@ -1427,20 +1404,19 @@ adventures:
                     Kijk maar naar dit voorbeeld:
                 example_code: |
                     ## Voorbeeld Hedy code
+
+                    In dit voorbeeld kan je Hedy een ja/nee vraag stellen en Hedy kiest een willekeurig antwoord.
                     ```
                     {print} Hoi Ik ben Hedy de Waarzegger
                     vraag {is} {ask} Wat wil je weten?
-                    {print} vraag
+                    {print} Jij wil graag weten: vraag
                     antwoorden {is} ja, nee, misschien
                     {print} Mijn glazen bol zegt...
                     {sleep} 2
                     {print} antwoorden {at} {random}
                     ```
-
-                    ## Uitdaging
-                    Er zijn nu maar 3 antwoordopties waar Hedy uit kan kiezen, kun jij er meer toevoegen? Bijvoorbeeld: zeker weten, geen idee of probeer het nog eens!
                 start_code: "# Schrijf jouw code hier"
-                story_text_2: "## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
+                story_text_2: "## Uitdaging\nEr zijn nu maar 3 antwoordopties waar Hedy uit kan kiezen, kun jij er meer toevoegen? Bijvoorbeeld: 'zeker weten', 'geen idee' of 'nog eens'!\n"
             4:
                 story_text: |
                     ## Hedy de Waarzegger
@@ -1640,12 +1616,13 @@ adventures:
                     {print} Bedankt voor uw bestelling!
                     {print} Het komt eraan!
                     ```
-                start_code: "{print} Welkom bij McHedy!"
+                start_code: "# schrijf hier je code"
                 story_text_2: "## Uitdaging\nKun jij het restaurant verder uitbreiden door meer regels code toe te voegen? Je zou bijvoorbeeld kunnen vragen ({ask}) of je klant ook iets wil drinken, vertellen hoe duur het is, of de klant eet smakelijk wensen!\n"
             2:
                 story_text: |
                     ## Restaurant level 2
-                    In level 2 kun je variabelen gebruiken om je restaurant interactiever te maken! Kijk maar naar het voorbeeld.
+                    In level 2 kun je variabelen gebruiken om je restaurant interactiever te maken! In level 1 kon Hedy maar één ding tegelijk vragen en onthouden met {echo}.
+                    Nu kan je variabelen gebruiken om het eten en drinken tegelijk te onthouden.
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -1687,9 +1664,13 @@ adventures:
             4:
                 story_text: |
                     ## Restaurant
-                    Lukt het jou om aanhalingstekens toe te voegen aan je restaurantcode?
+                    In dit level moet je aanhalingstekens gebruiken bij het `{print}` commando.
+                    Kun je je code van het vorige level weer laten werken door aanhalingstekens toe te voegen?
+
+                    Let op! In het vorige level kon je aanhalingstekens in de tekst zetten. Maar nu raakt Hedy daarvan in de war en werkt je code niet meer!
+                    Dus in plaats van `{print} Welkom in Hedy's restaurant` moet je typen `{print} 'Welkom in Hedys restaurant'`
                 start_code: "# Schrijf jouw code hier"
-                example_code: "## Example Hedy Restaurant\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ntopping {is} {ask} 'Would you like meat or veggies on that?'\n{print} food ' with ' topping ' is on its way!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\n{print} 'Your ' food ' and ' drinks ' will be right there!'\n```\n"
+                example_code: "## Voorbeeld Hedy's Restaurant\n```\n{print} 'Welkom bij Restaurant Hedy!'\n{print} 'Vandaag hebben we pizza en lasagne.'\neten {is} {ask} 'Wat wil je eten?'\n{print} 'Onze ' eten ' is de beste in de stad!'\ntopping {is} {ask} 'Wil je die met vlees of vega?'\n{print} eten ' met ' topping ' komt eraan!'\ndrinken {is} {ask} 'Wat wil je erbij drinken?'\n{print} 'Bedankt voor je bestelling.'\n{print} 'Je ' eten ' en ' drinken ' komt er zo aan!'\n```\n"
             5:
                 story_text: |
                     ## Restaurant
@@ -1771,7 +1752,7 @@ adventures:
                       - nog een gang toevoegen?
                       - een kindermenu toevoegen?
                       - nog iets anders?
-                start_code: "{print} 'Welkom'"
+                start_code: "# schrijf hier je eigen code"
             7:
                 story_text: |
                     ## Restaurant
@@ -1837,7 +1818,7 @@ adventures:
                     {if} drinken {is} cola
                         prijs = prijs + 1
                     ```
-                start_code: "{print} 'Welkom bij McHedy!' "
+                start_code: "# zet hier je eigen code"
                 story_text_2: "## Challenge\nOf course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!\n"
             9:
                 story_text: |
@@ -1916,7 +1897,7 @@ adventures:
                     ```
                     ## Uitdaging
                     Alle uitdagingen die in level 7 worden genoemd zoals de extra `{if}` statements of de verbeterde prijzen, kun je natuurlijk in dit level nog steeds gebruiken!
-                start_code: "{print} 'Welkom bij McHedy!' "
+                start_code: "# zet hier je eigen code"
             12:
                 story_text: |
                     ## Restaurant
@@ -2014,21 +1995,8 @@ adventures:
                 story_text: |
                     ## Spookhuis
                     In dit spookhuis kun je je monsters kiezen met emojis. Al kun je natuurlijk ook gewoon woorden gebruiken.
-
-                    ## Voorbeeld Hedy code
-                    ```
-                    monster1 {is} 👻
-                    monster2 {is} 🤡
-                    monster3 {is} 👶
-                    {print} Je stapt het oude verlaten spookhuis binnen
-                    {print} Meteen hoor je het geluid van een monster1
-                    {print} Dus snel ren je naar de volgende kamer.
-                    {print} Maar daar wordt je opgewacht door een monster2
-                    {print} HELP!
-                    {print} Je rent naar de keuken, maar wordt daar aangevallen door een monster3
-                    ```
                 start_code: "monster1 {is} _"
-                example_code: "## Example Hedy Code\n```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
+                example_code: "## Voorbeeld Hedy code\n```\nmonster1 {is} \U0001F47B\nmonster2 {is} \U0001F921\nmonster3 {is} \U0001F476\n{print} Je stapt het oude verlaten spookhuis binnen\n{print} Meteen hoor je het geluid van een monster1\n{print} Dus snel ren je naar de volgende kamer. Maar daar staat een monster2 in de deuropening\n{print} HELP!\n{print} Je rent naar de keuken, maar wordt daar aangevallen door een monster3\n```\n"
             3:
                 story_text: |
                     ## Spookhuis
@@ -2041,29 +2009,21 @@ adventures:
                     {print} Ontsnap uit het spookhuis!
                     {print} Voor je staan drie deuren...
                     keuze {is} {ask} Welke deur kies je?
-                    {print} Je koos deur keuze
+                    {print} Je koos deur ... keuze
                     monsters {is} een zombie, een vampier, NIKS JE ONTSNAPT
                     {print} Jij ziet...
                     {sleep}
                     {print} monsters {at} {random}
                     ```
-                    ## Uitdaging
-                    Dit verhaal is kort maar krachtig. Kun jij het verhaal opleuken tot een echte spannende game?
-                    Daarbij zijn er nu maar 3 mogelijke opties voor wat er achter de deur zit, kun jij meer monsters toevoegen aan die lijst?
-
-                    ## Verander het spel in een tv prijzenshow!
-                    Tot slot willen we je graag uitdagen om dit spel om te bouwen tot een prijzenshow zoals op tv!
-                    In prijzenshows kiest de kandidaat een deur of een koffertje en vindt daarin een grote prijs (of niets natuurlijk...).
-                    Kun jij een prijzenshow bouwen?
-                start_code: "{print} Ontsnap uit het spookhuis!"
-                story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                start_code: "# schrijf hier je eigen code"
+                story_text_2: "## Uitdaging\nDit verhaal is kort maar krachtig. Kun jij het verhaal opleuken tot een echte spannende game?\nDaarbij zijn er nu maar 3 mogelijke opties voor wat er achter de deur zit, kun jij meer monsters toevoegen aan die lijst?\n\n## Verander het spel in een tv prijzenshow!\nTot slot willen we je graag uitdagen om dit spel om te bouwen tot een prijzenshow zoals op tv!\nIn prijzenshows kiest de kandidaat een deur of een koffertje en vindt daarin een grote prijs (of niets natuurlijk...). Kun jij een prijzenshow bouwen?\n"
             4:
                 story_text: |
                     ## Spookhuis
                     In dit level heb je geleerd hoe je aanhalingstekens moet gebruiken.
                     Kun jij je spookhuis ook in level 4 aan de praat krijgen?
-                start_code: "{print} 'Ontsnap uit het spookhuis!'"
-                example_code: "```\n{print} _Escape from the haunted house!_\n{print} _There are 3 doors in front of you..._\nchoice {is} {ask} _Which door do you choose?_\n{print} _You picked door ..._ choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} _You see..._\n{sleep}\n{print} monsters {at} {random}\n ```\n"
+                start_code: "# schrijf hier je eigen code"
+                example_code: "## Voorbeeld Hedy code\n```\n{print} Ontsnap uit het spookhuis!\n{print} Voor je staan drie deuren...\nkeuze {is} {ask} Welke deur kies je?\n{print} Je koos deur ... keuze\nmonsters {is} een zombie, een vampier, NIKS JE ONTSNAPT\n{print} Jij ziet...\n{sleep}\n{print} monsters {at} {random}\n```\n"
             5:
                 story_text: |
                     ## Spookhuis
@@ -2084,7 +2044,7 @@ adventures:
                     {if} gekozendeur {is} goededeur {print} 'Hoera! Je ontsnapt!'
                     {else} {print} 'Oh nee! Je wordt opgepeuzeld door een...' monsters {at} {random}
                     ```
-                start_code: "{print} 'Ontsnap uit het spookhuis!'"
+                start_code: "# schrijf hier je eigen code"
             9:
                 story_text: |
                     ## Spookhuis
@@ -2351,7 +2311,7 @@ adventures:
     next:
         name: "Vooruitblik"
         description: "Vooruitblik"
-        image: " "
+        image: "hedy-logo.png"
         default_save_name: "Vooruitblik"
         levels:
             1:
@@ -2385,7 +2345,6 @@ adventures:
                     {print} Mijn naam is naam
                     ```
                     Je wilde natuurlijk printen `Mijn naam is Sophie` maar Hedy {print} `Mijn Sophie is Sophie`.
-
                     In het volgende level wordt dit probleem opgelost door aanhalingstekens te gebruiken, kijk maar eens!
                 start_code: "{print} Op naar het volgende level!"
             4:
