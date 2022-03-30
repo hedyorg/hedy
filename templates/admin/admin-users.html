@@ -117,9 +117,9 @@
     <tbody>
       {% for user in users %}
           <tr>
-            <td class="username_cell cursor-pointer"><a class="no-underline" onclick="window.open('/programs?user={{ user.username }}', '_blank');">{{user.username}}</a></td>
+            <td class="username_cell cursor-pointer"><a class="no-underline" onclick="window.open('/programs?user={{ user.username }}', '_blank');">{% if user.username|length > 18 %}{{user.username[:15] + "..."}}{% else %}{{user.username}}{% endif %}</a></td>
             <td class="count_cell">{{user.program_count or 0}}</td>
-            <td class="email_cell cursor-pointer"><a class="no-underline" onclick="hedyApp.auth.changeUserEmail ('{{user.username}}', '{{user.email}}')">{{user.email}}</a></td>
+            <td class="email_cell cursor-pointer"><a class="no-underline" onclick="hedyApp.auth.changeUserEmail ('{{user.username}}', '{{user.email}}')">{% if user.email and user.email|length > 30 %}{{user.email[:27] + "..."}}{% else %}{{user.email}}{% endif %}</a></td>
             <td class="created_cell">{{user.created}}</td>
             <td class="last_login_cell">{{user.last_login}}</td>
             <td class="birth_year_cell hidden">{{user.birth_year}}</td>
