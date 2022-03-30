@@ -115,6 +115,35 @@ class NoSuchDefaults:
   def get_defaults(self, level):
     return {}
 
+class Commands:
+    def __init__(self, language):
+        self.language = language
+        self.keyword_lang = "en"
+        self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
+        self.levels = YamlFile.for_file(f'coursedata/commands/{self.language}.yaml')
+
+    def set_keyword_language(self, language):
+        if language != self.keyword_lang:
+            self.keyword_lang = language
+            self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
+
+    def get_commands_for_level(self, level):
+        # Commands are stored as a list of dicts, so iterate like a list, then get the dict values
+        level_commands = copy.deepcopy(self.levels.get(level, []))
+        for command in level_commands:
+            for k, v in command.items():
+                command[k] = v.format(**self.keywords)
+        return level_commands
+
+    def get_defaults(self, level):
+        return copy.deepcopy(self.levels.get(int(level), {}))
+
+
+class NoSuchCommand:
+  def get_commands(self, level):
+    return {}
+
+
 class Adventures:
   def __init__(self, language):
     self.language = language
@@ -138,8 +167,9 @@ class Adventures:
   def has_adventures(self):
     return self.adventures_file.exists() and self.adventures_file.get('adventures')
 
+
 class NoSuchAdventure:
-  def get_defaults(self, level):
+  def get_adventure(self, level):
     return {}
 
 

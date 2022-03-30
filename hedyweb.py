@@ -1,4 +1,5 @@
 import collections
+import copy
 import json
 
 from flask_babel import gettext
@@ -46,7 +47,7 @@ class PageTranslations:
     return d
 
 
-def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
+def render_code_editor_with_tabs(level_defaults, commands, max_level, level_number, version, loaded_program, adventures, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
   user = current_user()
 
   if not level_defaults:
