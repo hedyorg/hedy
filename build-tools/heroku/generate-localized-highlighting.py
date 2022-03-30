@@ -17,7 +17,6 @@ typescript_template_file_path = os.path.join(typescript_path, f'syntaxLang-templ
 
 with open(keywords_file_path, newline="", encoding='utf-8') as keywords_file:
     loc_keywords = yaml.safe_load(keywords_file)
-print(loc_keywords)
 
 with open(typescript_template_file_path, newline="", encoding='utf-8') as highlighting_template_file:
     highlighting_en = highlighting_template_file.readlines()
