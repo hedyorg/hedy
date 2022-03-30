@@ -1,3 +1,35 @@
+1:
+    intro_text: "Hedy'ye hoş geldiniz! Seviye 1'de `{print}`, `{ask}` ve `{echo}` komutlarını kullanabilirsiniz.\n\nÖrneğin, `{print}` kullanarak metni ekrana yazdırabilirsiniz. Soldaki kod bloğunda \nbir örnek görebilirsiniz\n\nKod bloğundaki yeşil düğmeye basarsanız kod sizin için ekrana yazılacaktır!\nProgramlama alanının altındaki yeşil 'Kodu çalıştır' düğmesi ile kodu kendiniz çalıştırabilirsiniz.\n"
+    example_code: "## Örnek kod\n```\n{print} Merhaba!\n{print} Hedy'ye Hoş Geldiniz!\n```\n"
+    intro_text_2: "Ayrıca kullanıcıdan girdi isteyebilir ve bir `{echo}` komutuyla bunu ekrana yazdırabilirsiniz.\nSolunuzdaki kodu tekrar deneyebilirsiniz.\n\nNe yapmanız gerektiğini bilmiyor musunuz? Sonraki sekmelerde, farklı programlar için fikirler bulacaksınız.\n"
+    example_code_2: "## Örnek kod\n```\n{ask} Adın ne?\n{echo} merhaba\n```\n"
+    start_code: '{print} merhaba dünya!'
+    commands:
+    -   name: '{print}'
+        explanation: '{print}'' ile bir şey yazdırın.'
+        example: 'Örnek: {print} Merhaba, Hedy''ye hoş geldiniz!'
+        demo_code: '{print} Merhaba, Hedy''ye hoş geldiniz!'
+    -   name: '{ask}'
+        explanation: '`{ask}` ile bir şey sor.'
+        example: 'Örnek: {ask} En sevdiğiniz renk nedir?'
+        demo_code: '{ask} En sevdiğin renk nedir?'
+    -   name: '{echo}'
+        explanation: "'{echo}' kullanarak bir şeyi tekrar ekrana yazdırın."
+        example: 'Örnek: {echo} favori renginizdir '
+        demo_code: "{ask} En sevdiğin renk nedir?\n{echo} en sevdiğin renk"
+    -   name: '{print} emojiler'
+        explanation: '`{print}` ile bir emoji yazdır'
+        example: 'Örnek: {print} 🙋‍ 🌍 ❗'
+        demo_code: '{print} 🙋 🌍 ❗'
+    -   name: '{forward}'
+        explanation: '"{forward}" ile bir çizgi çizin.'
+        example: 'Example: {forward} 100'
+        demo_code: '{forward} 100'
+    -   name: '{turn}'
+        explanation: turn the drawing turtle with `{turn}`
+        example: 'Example: {turn}'
+        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    intro_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
 2:
     commands:
     -   name: '{is}'
@@ -60,131 +92,6 @@
     intro_text: "In level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n\n## Assignments are getting more and more difficult\nYou will find the commands on the left again, and assignments in the following tabs. The assignments are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
     example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
     intro_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
-12:
-    commands:
-    -   name: float directly
-        explanation: Decimal numbers
-        example: '{print} 2.5 + 2.5'
-        demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
-    -   name: assign text
-        explanation: Text with quotation marks after =
-        example: name = 'Hedy'
-        demo_code: "name = 'Hedy the Robot'\n{print} 'Hello ' name\n"
-    -   name: quotes after {if} comparison
-        explanation: Text with quotation marks after {if}
-        example: name = 'Hedy'
-        demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
-    -   name: quotes in list
-        explanation: A list with quotation marks
-        example: name = 'Hedy', 'Felienne'
-        demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
-    start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
-    intro_text: "## Decimal numbers\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n## All texts need to be in quotation marks\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n\n```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n## All items in lists need quotation marks too\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n\n```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n## All text after `{if}` comparisons need quotation marks too\n```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n## Numbers don't need quotation marks\n{for} numbers, you do not use quotation marks in the `=`:\n```\nscore = 25\n{print} 'You got ' score\n```\n"
-    example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-    intro_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-    example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-    intro_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-    example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-    intro_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
-    example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-    intro_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
-    example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-    intro_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
-    example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
-13:
-    commands:
-    -   name: '{and}'
-        explanation: Two parts both need to be correct
-        example: if 3+2 {is} 5 {and} 2+2 {is} 4
-        demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\nelse\n    {print} 'At least one answer is wrong!'"
-    -   name: '{or}'
-        explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
-        example: if 3+2 {is} 5 {or} 2+2 {is} 4
-        demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\nelse\n    {print} 'Both answers are wrong!'"
-    start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
-    intro_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
-    example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
-14:
-    commands:
-    -   name: Smaller
-        explanation: We use the `<` to check if the first number is smaller than the second number.
-        example: 'For example: age < 12'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
-    -   name: Bigger
-        explanation: We use the `>` to check if the first number is bigger than the second number.
-        example: 'For example: age > 12'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age > 13\n    {print} 'You are older than me!'"
-    -   name: Equal
-        explanation: We use the `==` to check if two things are the same.
-        example: 'For example: answer == 25'
-        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
-    -   name: Not equal
-        explanation: 'We use the `!=` to check if two things are not the same. '
-        example: 'For example: answer != 25'
-        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
-    -   name: Smaller {or} equal
-        explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-        example: 'For example: age <= 12'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
-    -   name: Bigger or equal
-        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-        example: 'For example: age >= 14'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
-    start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\nelse\n    {print} 'You are older than me!'"
-    intro_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n\nFrom this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n\nYou can also compare if something is *not* equal to something else using `!=` like this:\n```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
-    example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-    intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-    example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
-    intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-    example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
-17:
-    commands:
-    -   name: '{elif}'
-        explanation: '`{elif}`.'
-        example: '{elif} a {is} 5:'
-        demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
-    -   name: '{print}'
-        explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
-        example: 'for i {in} {range} 1 {to} 10:'
-        demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
-    -   name: '{if}'
-        explanation: We need to do the same with all of our `{if}` statements
-        example: if colour {is} green:'
-        demo_code: "colour = {ask} 'What is your favorite color?'\n{if} colour == 'green':\n    {print} 'Your favorite colour is green'\n{else}:\n    {print} 'Your favorite colour is not green'"
-    start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-    intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[random]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
-1:
-    intro_text: "Hedy'ye hoş geldiniz! Seviye 1'de `{print}`, `{ask}` ve `{echo}` komutlarını kullanabilirsiniz.\n\nÖrneğin, `{print}` kullanarak metni ekrana yazdırabilirsiniz. Soldaki kod bloğunda \nbir örnek görebilirsiniz\n\nKod bloğundaki yeşil düğmeye basarsanız kod sizin için ekrana yazılacaktır!\nProgramlama alanının altındaki yeşil 'Kodu çalıştır' düğmesi ile kodu kendiniz çalıştırabilirsiniz.\n"
-    example_code: "## Örnek kod\n```\n{print} Merhaba!\n{print} Hedy'ye Hoş Geldiniz!\n```\n"
-    intro_text_2: "Ayrıca kullanıcıdan girdi isteyebilir ve bir `{echo}` komutuyla bunu ekrana yazdırabilirsiniz.\nSolunuzdaki kodu tekrar deneyebilirsiniz.\n\nNe yapmanız gerektiğini bilmiyor musunuz? Sonraki sekmelerde, farklı programlar için fikirler bulacaksınız.\n"
-    example_code_2: "## Örnek kod\n```\n{ask} Adın ne?\n{echo} merhaba\n```\n"
-    start_code: '{print} merhaba dünya!'
-    commands:
-    -   name: '{print}'
-        explanation: '{print}'' ile bir şey yazdırın.'
-        example: 'Örnek: {print} Merhaba, Hedy''ye hoş geldiniz!'
-        demo_code: '{print} Merhaba, Hedy''ye hoş geldiniz!'
-    -   name: '{ask}'
-        explanation: '`{ask}` ile bir şey sor.'
-        example: 'Örnek: {ask} En sevdiğiniz renk nedir?'
-        demo_code: '{ask} En sevdiğin renk nedir?'
-    -   name: '{echo}'
-        explanation: "'{echo}' kullanarak bir şeyi tekrar ekrana yazdırın."
-        example: 'Örnek: {echo} favori renginizdir '
-        demo_code: "{ask} En sevdiğin renk nedir?\n{echo} en sevdiğin renk"
-    -   name: '{print} emojiler'
-        explanation: '`{print}` ile bir emoji yazdır'
-        example: 'Örnek: {print} 🙋‍ 🌍 ❗'
-        demo_code: '{print} 🙋 🌍 ❗'
-    -   name: '{forward}'
-        explanation: '"{forward}" ile bir çizgi çizin.'
-        example: 'Example: {forward} 100'
-        demo_code: '{forward} 100'
-    -   name: '{turn}'
-        explanation: turn the drawing turtle with `{turn}`
-        example: 'Example: {turn}'
-        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
-    intro_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
 5:
     start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
     intro_text: "`{ask}` {and} `{print}` still work like they did in level 4.\n\n In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\n\n ## Example Hedy Code\n ```\n name {is} {ask} 'what is your name?'\n {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n ```\n\n This code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n\n When we want to check if something is in a list, we can now use `in` between the thing and the list.\n\n ## Example Hedy Code\n ```\n pretty_colors {is} green, yellow\n color {is} {ask} 'What is your favorite color?'\n {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'\n ```\n\n This code prints pretty! if you choose green or yellow, and meh otherwise.\n\n ## Tip\n Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n ```\n name {is} {ask} 'what is your name?'\n {if} name {is} Hedy {print} 'nice'\n {else} {print} 'boo!'\n ```\n\n ## Assignments are getting more {and} more difficult\n\n In level 5 too, the assignments in the tabs become more and more difficult. So, do them from left to right.\n"
@@ -310,6 +217,83 @@
         example: "Example: answer = {ask} 'What is 5 plus 5?'"
         demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
     example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
+12:
+    commands:
+    -   name: float directly
+        explanation: Decimal numbers
+        example: '{print} 2.5 + 2.5'
+        demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
+    -   name: assign text
+        explanation: Text with quotation marks after =
+        example: name = 'Hedy'
+        demo_code: "name = 'Hedy the Robot'\n{print} 'Hello ' name\n"
+    -   name: quotes after {if} comparison
+        explanation: Text with quotation marks after {if}
+        example: name = 'Hedy'
+        demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
+    -   name: quotes in list
+        explanation: A list with quotation marks
+        example: name = 'Hedy', 'Felienne'
+        demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
+    start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
+    intro_text: "## Decimal numbers\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n## All texts need to be in quotation marks\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n\n```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n## All items in lists need quotation marks too\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n\n```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n## All text after `{if}` comparisons need quotation marks too\n```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n## Numbers don't need quotation marks\n{for} numbers, you do not use quotation marks in the `=`:\n```\nscore = 25\n{print} 'You got ' score\n```\n"
+    example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+    intro_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
+    example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
+    intro_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+    example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+    intro_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
+    example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
+    intro_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
+    example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
+    intro_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
+    example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+13:
+    commands:
+    -   name: '{and}'
+        explanation: Two parts both need to be correct
+        example: if 3+2 {is} 5 {and} 2+2 {is} 4
+        demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\nelse\n    {print} 'At least one answer is wrong!'"
+    -   name: '{or}'
+        explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
+        example: if 3+2 {is} 5 {or} 2+2 {is} 4
+        demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\nelse\n    {print} 'Both answers are wrong!'"
+    start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
+    intro_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+    example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+14:
+    commands:
+    -   name: Smaller
+        explanation: We use the `<` to check if the first number is smaller than the second number.
+        example: 'For example: age < 12'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
+    -   name: Bigger
+        explanation: We use the `>` to check if the first number is bigger than the second number.
+        example: 'For example: age > 12'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age > 13\n    {print} 'You are older than me!'"
+    -   name: Equal
+        explanation: We use the `==` to check if two things are the same.
+        example: 'For example: answer == 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+    -   name: Not equal
+        explanation: 'We use the `!=` to check if two things are not the same. '
+        example: 'For example: answer != 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+    -   name: Smaller {or} equal
+        explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+        example: 'For example: age <= 12'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+    -   name: Bigger or equal
+        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+        example: 'For example: age >= 14'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+    start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\nelse\n    {print} 'You are older than me!'"
+    intro_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n\nFrom this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n\nYou can also compare if something is *not* equal to something else using `!=` like this:\n```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+    example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+    intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
+    example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
+    intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+    example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
 15:
     start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
     intro_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!\n"
@@ -340,6 +324,22 @@
         example: 'For example: random_fruit {is} fruit[random]'
         demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[random]\n{print} random_fruit"
     example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+17:
+    commands:
+    -   name: '{elif}'
+        explanation: '`{elif}`.'
+        example: '{elif} a {is} 5:'
+        demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
+    -   name: '{print}'
+        explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
+        example: 'for i {in} {range} 1 {to} 10:'
+        demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
+    -   name: '{if}'
+        explanation: We need to do the same with all of our `{if}` statements
+        example: if colour {is} green:'
+        demo_code: "colour = {ask} 'What is your favorite color?'\n{if} colour == 'green':\n    {print} 'Your favorite colour is green'\n{else}:\n    {print} 'Your favorite colour is not green'"
+    start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
+    intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[random]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
 18:
     start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
     intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
