@@ -1992,6 +1992,8 @@ adventures:
                     In level 1 beginnen we ons spookhuisspel door een spannend verhaal te verzinnen en de speler te vragen welk monster ze tegenkomen in het spookhuis.
                 example_code: |
                     ## Voorbeeld Hedy code
+
+
                     ```
                     {print} Hoe ben ik hier terechtgekomen?
                     {print} Ik herinner me dat ik mijn vrienden vertelde over die verlaten villa..
@@ -2006,10 +2008,8 @@ adventures:
                     {echo} Ik kies deur
                     {print} ...?
                     ```
-                    ## Challenge
-                    Kun jij het spannende verhaal afmaken? Of je eigen spannende(re) intro bedenken?
                 start_code: "{print} Hoe ben ik hier terechtgekomen?"
-                story_text_2: "## Challenge\nCan you finish the scary story? Or make up your own haunted house story?\n"
+                story_text_2: "## Challenge\nKun jij het spannende verhaal afmaken? Of je eigen spannende(re) intro bedenken?\n"
             2:
                 story_text: |
                     ## Spookhuis
@@ -2360,24 +2360,11 @@ adventures:
                     Gefeliciteerd! Je bent aan het einde gekomen van het eerste level van Hedy. Hopelijk heb je al wat mooie codes kunnen maken, maar er is in Hedy nog veel meer te ontdekken.
 
                     In level 1 ben je er misschien tegenaan gelopen dat Hedy in het `{echo}` commando maar één ding kan onthouden.
-                    In het restaurantavontuur kon je bijvoorbeeld alleen herhalen wat de klant wilde eten, of alleen wat hij wilde drinken. Kijk maar:
-
-                    ```
-                    {print} Welkom bij restaurant Hedy
-                    {ask} wat wilt u eten?
-                    {echo} Dus dit wilt u eten
-                    {ask} wat wilt u drinken
-                    {echo} Dus dit wilt u drinken
-                    ```
-                    Als de speler hamburger en cola invult, kun je nog niet zeggen `dus u wilt een hamburger en cola`, maar je moet daar twee lossen zinnen van maken.
-                    Daarnaast echoot Hedy alleen woorden aan het einde van de zin. Dus je kunt in level 1 niet zeggen 'Je hamburger komt eraan!'
-
-                    Dat verandert in level 2. In level 2 leer je namelijk werken met variabelen waardoor je Hedy heel veel verschillende stukjes informatie kunt laten onthouden en ze overal in de zin te printen.
-                    Neem snel een kijkje!
+                    In het restaurantavontuur kon je bijvoorbeeld alleen herhalen wat de klant wilde eten, of alleen wat hij wilde drinken. Kijk maar: 
 
                 start_code: "{print} Op naar het volgende level!"
-                example_code: "## Example code\n```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
-                story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nBesides, you'll learn how to work with the `{at} {random}` command, that you can use to make games. \nSo let's go to the next level!\n"
+                example_code: "## Voorbeeld Hedy code\n```\n{print} Welkom bij restaurant Hedy\n{ask} Wat wilt u eten?\n{echo} Dus dit wilt u eten\n{ask} Wat wilt u drinken\n{echo} Dus dit wilt u drinken\n```\n"
+                story_text_2: "Als de speler hamburger en cola invult, kun je nog niet zeggen `dus u wilt een hamburger en cola`, maar je moet daar twee losse zinnen van maken.\nDaarnaast echoot Hedy alleen woorden aan het einde van de zin. Dus je kunt in level 1 niet zeggen 'Je hamburger komt eraan!'\n\nDat verandert in level 2. In level 2 leer je namelijk werken met variabelen waardoor je Hedy heel veel verschillende stukjes informatie kunt laten onthouden en ze overal in de zin te printen.\nJe leert dan ook het `{at} {random}` commando, daarmee kun je spelletjes maken.\nNeem snel een kijkje!\n"
             2:
                 story_text: |
                     ## Vooruitblik
@@ -2418,24 +2405,13 @@ adventures:
             5:
                 story_text: |
                     ## Vooruitblik
-                    In dit level heb je goed geoefend met de `{if}` en `{ask}`. Wat je alleen nog niet kunt in dit level, is rekenen.
-                    Bijvoorbeeld om prijzen te berekenen voor je restaurant, of precies uit te rekenen hoe de teken-schildpad moet lopen.
-                    Zou het niet leuk zijn om precies te kunnen zeggen hoeveel de klanten moeten betalen, en stiekem een kortingscode toe te voegen voor jou en je vrienden?
+                    In dit level heb je goed geoefend met de `{if}` en `{ask}`. Je kunt bijvoorbeeld gasten vragen wat ze willen eten.
+                    Wat je alleen nog niet kunt in dit level, is de prijzen optellen.
+
+                    In het volgende level kun je optellen, aftrekken, en vermenigvuldigen in je programma's. Zou het niet leuk zijn om precies te kunnen zeggen hoeveel de klanten moeten betalen, en stiekem een kortingscode toe te voegen voor jou en je vrienden?
 
                     Vanaf het volgende level kan dit wel, want in level 6 kun je rekenen met Hedy. Je kunt daar ook proberen om een tafelsommen spel te programmeren (voor je broertje of zusje?).
                     Neem snel een kijkje!
-
-                    ```
-                    {print} 'Welkom bij McHedy'
-                    bestelling {is} {ask} 'Wat wilt u bestellen?'
-                    {print} 'U wilt graag ' bestelling
-                    {if} bestelling {is} hamburger prijs {is} 5
-                    {if} bestelling {is} friet prijs {is} 2
-                    drinken {is} {ask} 'Wat wilt u drinken?'
-                    {print} 'U wilt graag ' drinken
-                    {print} 'Dat wordt dan ' prijs ' euro voor ' bestelling ' alstublieft'
-                    {print} 'Het drinken is gratis in dit level want Hedy kan de prijs nog niet berekenen...'
-                    ```
                 start_code: "{print} 'Op naar het volgende level!'"
                 example_code: "## Gratis drinken!\n```\n{print} 'Welkom bij McHedy'\nbestelling {is} {ask} 'Wat wilt u bestellen?'\n{print} 'U wilt graag ' bestelling\n{if} bestelling {is} hamburger prijs {is} 5\n{if} bestelling {is} friet prijs {is} 2\ndrinken {is} {ask} 'Wat wilt u drinken?'\n{print} 'U wilt graag ' drinken\n{print} 'Dat wordt dan ' prijs ' euro voor ' bestelling ' alstublieft'\n{print} 'Het drinken is gratis in dit level want Hedy kan de prijs nog niet berekenen...'\n```\n"
             6:
