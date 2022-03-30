@@ -87,14 +87,14 @@ adventures:
                 example_code: "## Eksempel Hedykode\n\n```\nvinkel = 90\n{repeat} 10 {times}\n    {turn} vinkel\n    {forward} 50\n```\n"
                 story_text_2: "## Interaksjon\nVi kan også forbedre programmet som tegner forskjellige figurer.\nKan du finne ut hvor langt skilpadden må snu seg her? Fullfør koden og du kan tegne et hvilket som helst polygon!\n"
                 example_code_2: "## Eksempel Hedykode\n\n```\nhjørner = {ask} 'Hvor mange hjørner skal jeg tegne?'\ngrader = 360 / hjørner\n{repeat} grader {times}\n    {turn} _\n    {forward} _\n```\n"
-                start_code: "hjørner = {ask} 'Hvor mange vinkler skal jeg tegne?'\n"
+                start_code: "hjørner = {ask} 'Hvor mange hjørner skal jeg tegne?'\n"
             7:
                 story_text: "## La oss tegne\nPå dette nivået kan du repetere en linje kode med `{repeat}`.\n"
                 example_code: "## Eksempel Hedykode\n\n```\n{print} 'Tegn figurer'\n{repeat} 3 {times} {forward} 10\n```\n"
                 start_code: "{print} 'Tegn figurer'\n{repeat} 3 {times} {forward} 10\n"
             6:
                 story_text: "## La oss tegne\nPå dette nivået kan du bruke regning for å tegne forskjellige figurer.\nDu kan ha lært på skolen at å snu en full sirkel er 360 grader. Hvis ikke så vet du det nå!\nDet er derfor du bruker 90 grader for en firkant. 360 grader delt på 4 er 90.\nNå som vi kan gjøre matte med Hedy så kan vi tegne alle figurene vi vil!\n"
-                example_code: "## Eksempel Hedykode\n\n```\nvinkler = {ask} 'Hvor mange vinkler vil du ha?'\ngrader = 360 / vinkler\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n```\n"
+                example_code: "## Eksempel Hedykode\n\n```\nhjørner = {ask} 'Hvor mange hjørner vil du ha?'\ngrader = 360 / hjørner\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n```\n"
                 start_code: "{print} 'Tegner figurer'\n"
         name: Skilpadde
         description: Lag din egen tegning
