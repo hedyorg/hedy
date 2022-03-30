@@ -413,7 +413,7 @@ adventures:
                 start_code: '# skriv koden din her'
     dishes:
         name: Retter?
-        description: Use the computer to see who does the dishes (Start at level 2)
+        description: Bruk datamaskinen til å se hvem som skal ta oppvasken (Start på nivå 2)
         image: dishes.png
         default_save_name: Retter
         levels:
@@ -440,7 +440,7 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
                 start_code: "{print} 'Hvem tar oppvasken?'"
             3:
-                story_text: "## Dishwashing\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
+                story_text: "## Oppvasken\nEr dere alltid uenig hjemme om hvem som skal ta oppvasken eller hvem som skal rense kattedoen?\nDa kan du la datamaskinen velge helt rettferdig. Du kan programmere det på dette nivået!\nFørst må du lage en liste over folk i familien. Så velger du `{at} {random}` fra listen.\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
                 example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\n"
                 story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
                 example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
