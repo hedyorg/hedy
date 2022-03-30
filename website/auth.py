@@ -2,7 +2,7 @@ import collections
 import os
 from flask_babel import gettext
 import utils
-from hedy import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
+from hedy_content import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re

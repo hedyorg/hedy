@@ -50,7 +50,7 @@ If you want to run the website version locally, run:
 To run the unit tests:
 
 ```bash
-(.env)$ python -m pytest tests/*.py
+(.env)$ python -m pytest
 ```
 
 ## Working on the web front-end in TypeScript/JavaScript
