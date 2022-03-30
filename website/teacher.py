@@ -218,15 +218,13 @@ def routes(app, database, achievements):
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
-        teacher_adventures = DATABASE.get_teacher_adventures(user['username']);
+        teacher_adventures = DATABASE.get_teacher_adventures(user['username'])
         customizations = DATABASE.get_class_customizations(class_id)
-        customize_class_translations = hedyweb.PageTranslations('customize-class').get_page_translations(g.lang)
 
         return render_template('customize-class.html', page_title=gettext('title_customize-class'),
                                class_info={'name': Class['name'], 'id': Class['id']}, max_level=hedy.HEDY_MAX_LEVEL,
-                               adventures=adventures, page_translations=customize_class_translations,
-                               teacher_adventures=teacher_adventures, customizations=customizations,
-                               current_page='my-profile')
+                               adventures=adventures, teacher_adventures=teacher_adventures,
+                               customizations=customizations, current_page='my-profile')
 
     @app.route('/for-teachers/customize-class/<class_id>', methods=['DELETE'])
     @requires_login
