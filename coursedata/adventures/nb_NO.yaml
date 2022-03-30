@@ -452,29 +452,29 @@ adventures:
         default_save_name: Terninger
         levels:
             10:
-                story_text: "## Dice\nIs everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!\n"
-                example_code: "## Example Hedy code\n\n```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
+                story_text: "## Terning\nBruker alle for lang tid på å trille terninger? På dette nivået kan du la Hedy trille alle terningene på en gang!\n"
+                example_code: "## Eksempel Hedykode\n\n```\nspillere = Anne, Jon, Jørgen\nvalg = 1, 2, 3, 4, 5, 6\n{for} spiller {in} spillere\n    {print} spiller ' triller ' valg {at} {random}\n    {sleep}\n```\n"
                 start_code: '# skriv koden din her'
             7:
-                story_text: "## Dice\nYou can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.\nTry to finish the sample code! The dashes should contain multiple commands and characters.\n\nBut maybe you want to make a completely different die. Of course you can!\n"
-                example_code: "## Example Hedy code\n\n```\nchoices = 1, 2, 3, 4, 5, earthworm\n{repeat} _ _ {print} _ _ _\n```\n"
+                story_text: "## Terning\nDu kan også lage en terning igjen på nivå 5. Med `{repeat}` kan du enkelt trille en hel håndfull med terninger.\nPrøv å fullføre eksempelkoden. Der det er streker skal det være flere kommandoer og tegn.\n\nMen kanskje du har lyst å lage en helt annen terning. Selvfølgelig kan du det!\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalgene = 1, 2, 3, 4, 5, makk\n{repeat} _ _ {print} _ _ _\n```\n"
                 start_code: "{print} 'Hva vil terningen vise denne gangen?'"
             6:
-                story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
-                example_code: "## Example Hedy code\n\n```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw' throw\n{if} throw {is} earthworm points = points + 5 {else} points = points + throw\n{print} 'those are' points ' point'\n```\nCan you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.\n"
-                example_code_2: "## Looking forward\n\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
+                story_text: "## Terning\nDu kan også lage en Earthworm-terning igjen i dette, men nå kan du også kalkulere hvor mange poeng som har blitt trillet.\nDu vet kanskje at makken teller for 5 poeng i Earthworms. Etter hver trilling kan du umiddelbart kalkulere antall poeng du har trillet.\nDette er koden for å kalkulere poeng for 1 terning:\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalgene = 1, 2, 3, 4, 5, makk\npoeng = 0\nverdi = valgene {at} {random}\n{print} 'du trillet' verdi\n{if} verdi {is} makk poeng = poeng + 5 {else} poeng = poeng + verdi\n{print} 'det er' poeng ' poeng'\n```\nKan du gjøre det slik at koden gir deg den totale poengsummen for 8 terningkast? For å gjøre det må du kopiere og lime inn et par linjer kode.\n"
+                example_code_2: "## Vi ser fremover\n\nKlarte du å beregne poeng for 8 terninger? Det krevde mye kopiering og liming, sant? Vi skal gjøre det lettere på nivå 7!\n"
                 start_code: "{print} 'Hva vil terningen vise denne gangen?'"
             5:
-                story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
-                example_code: "## Example Hedy code\n\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
+                story_text: "## Terning\nDu ha også lage en terning igjen på dette nivået ved å bruke `{if}`.\nFullfør eksempelkoden slik at koden sier \"Du kan slutte å trille\" så snart du har trillet en makk.\n\nMen kanskje du har lyst å gjenskal en terning fra et annet spill. Det er også greit! Isåfall lager du din egen reaksjon. F.eks. 'ja' for 6 og 'det var synd' for alt annet.\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalgene {is} 1, 2, 3, 4, 5, makk\nkastet {is} _\n{print} 'du trillet ' _ 'med terningen'\n{if} _ {is} makk {print} 'Du kan slutte å trille.' _ {print} 'Prøv igjen!'\n```\n"
                 start_code: "{print} 'Hva vil terningen vise denne gangen?'"
             4:
-                story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
-                example_code: "## Example Hedy code\n\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
+                story_text: "## Terning\nPå dette nivået kan vi lage setninger med terningens verdi i setningen, med fnutter så klart.\nDenne gangen er ikke eksempelkoden helt ferdig. Kan du fullføre koden?\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalgene {is} 1, 2, 3, 4, 5, makk\n{print} _ du trillet _\n{print} _ _ _ <- her må du programmere et valg\n```\n"
                 start_code: "{print} 'Hva vil terningen vise denne gangen?'"
             3:
-                story_text: "## Terninger\nPå dette nivået kan vi velge fra en liste. Med det kan vi la datamaskinen velge en side av en terning.\nTa en titt på spillene du har i skapet hjemme.\nEr det spill der med en (spesiell) terning? Du kan også kopiere den med denne koden.\nFor eksempel, en terning fra spillet Earthworms med tallene 1 til 5 og en makk på\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
-                example_code: "## Example Hedy code\n\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} choices {at} {random}\n```\n"
+                story_text: "## Terninger\nPå dette nivået kan vi velge fra en liste. Med det kan vi la datamaskinen velge en side av en terning.\nTa en titt på spillene du har i skapet hjemme.\nEr det spill der med en (spesiell) terning? Du kan også kopiere den med denne koden.\nFor eksempel, en terning fra spillet Earthworms med tallene 1 til 5 og en makk på\n\n![Terning fra Earthworms med 1 til 5 og en makk på](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalgene {is} 1, 2, 3, 4, 5, makk\n{print} valgene {at} {random}\n```\n"
                 start_code: '{print} Hva vil terningen vise denne gangen?'
             15:
                 story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
