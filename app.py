@@ -36,7 +36,7 @@ from flask_babel import gettext
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from hedy import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
+from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
