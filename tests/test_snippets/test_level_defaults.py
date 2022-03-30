@@ -53,14 +53,14 @@ def collect_snippets(path):
                         print(f'Intro snippet for level {level} has an error')
     return Hedy_snippets
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../coursedata/level-defaults')]
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/level-defaults')]
 
 lang = None #useful if you want to test just 1 language
 if lang:
     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language == lang]
 
 # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
-keywords = YamlFile.for_file('../../coursedata/keywords/en.yaml').to_dict()
+keywords = YamlFile.for_file('../../content/keywords/en.yaml').to_dict()
 for snippet in Hedy_snippets:
     snippet[1].code = snippet[1].code.format(**keywords)
 
