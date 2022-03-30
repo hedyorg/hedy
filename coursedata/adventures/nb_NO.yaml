@@ -418,32 +418,32 @@ adventures:
         default_save_name: Retter
         levels:
             10:
-                story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
-                example_code: "## Example Hedy code\n```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
+                story_text: "## Oppvasken\nPå dette nivået kan du lage en enda bedre oppvaskeplan.\n"
+                example_code: "## Eksempel Hedykode\n```\ndager = Mandag, Tirsdag, Onsdag, Torsdag, Fredag, Lørdag, Søndag\nnavn = mamma, pappa, Emma, Sofie\n{for} day {in} days\n    {print} navn {at} {random} ' tar oppvasken på ' day\n```\n"
                 start_code: '# skriv koden din her'
             7:
-                story_text: "## Dishwashing\nWith the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.\n"
-                example_code: "## Example Hedy code\n\n```\npeople = mom, dad, Emma, Sophie\n{repeat} _ _ {print} 'the dishwasher is' _\n```\n"
+                story_text: "## Oppvasken\nMed `{repeat}` kan du repetere deler av kode. Du kan bruke dette til å beregne hvem som skal ta oppvasken for hele uken.\n"
+                example_code: "## Eksempel Hedykode\n\n```\nfamilie = mamma, pappa, Emma, Sofie\n{repeat} _ _ {print} 'Den som tar oppvasken er ' _\n```\n"
                 start_code: "{print} 'Hvem tar oppvasken?'"
             6:
-                story_text: "## Dishwashing\nHow often is everyone going to do the dishes? Is that fair? You can count it in this level.\n"
-                example_code: "## Example Hedy code\n\n```\npeople = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = people {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
-                story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
-                example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
+                story_text: "## Oppvasken\nHvor ofte må hver ta oppvasken? Er det rettferdig? Du kan telle det på dette nivået.\n"
+                example_code: "## Eksempel Hedykode\n\n```\nfamilie = mamma, pappa, Emma, Sofie\nemma_vasker = 0\noppvasker = familie {at} {random}\n{print} 'Den som tar oppvasken er ' dishwasher\n{if} oppvasker {is} Emma emma_vasker = emma_vasker + 1\n{print} 'Emma tar oppvasken ' emma_washes ' ganger denne uken'\n```\n\nDu kan nå kopiere linjene 3 til 5 et par ganger (f.eks. 7 ganger for en hel uke) for å regne ut for hele uken.\nLager du koden for hele uken?\n"
+                story_text_2: "## Gjør det rettferdig\nOm du er ekstremt uheldig så kan det forrige programmet velge deg til å gjøre oppvasken hele uken! Det er ikke rettferdig!\nFor å lage et mer rettferdig system så kan du bruke `{remove}`-kommandoen for å fjerne en gitt person fra listen. På denne måten trenger du ikke å ta oppvasken igjen før alle har tatt sin tur.\n\nMandag og tirsdag er klar for deg! Kan du legge til resten av uken?\nOg.. kan du komme på en løsning dersom listen er tom?\n"
+                example_code_2: "```\nfamilie = mamma, pappa, Emma, Sofie\noppvasker = familie {at} {random}\n{print} 'Mandag blir oppvasken tatt av: ' dishwasher\n{remove} oppvasker {from} familie\noppvasker = people {at} {random}\n{print} 'Tirsdag blir oppvasken tatt av: ' dishwasher\n{remove} oppvasker {from} familie\noppvasker = familie {at} {random}\n```\n"
                 start_code: "{print} 'Hvem tar oppvasken?'"
             5:
-                story_text: "## Dishwashing\nWith the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.\n\nCan you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?\nDon't forget the quotes!\n"
-                example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
+                story_text: "## Oppvasken\nMed `{if}`kan du nå ha det mer gøy med valg i programmet. Du kan få programmet til å respondere med det valget maskinen har tatt.\n\nKan du fullføre koden så det skriver ut 'det var dumt' når det er din tur og 'jippi!' ellers?\nIkke glem fnutter!\n"
+                example_code: "## Eksempel Hedykode\n\n```\nfamilie {is} mamma, pappa, Emma, Sofie\noppvasker {is} familie {at} {random}\n{if} oppvasker {is} Sofie {print} _ det var dumt at jeg må ta oppvasken _ {else} {print} 'heldigvis ingen oppvask fordi' _ 'allerede tar oppvasken'\n```\n"
                 start_code: "{print} 'Hvem tar oppvasken?'"
             4:
                 story_text: "## Oppvasken\nMed fnutter kan du gjøre oppvaskeplanleggingen penere.\nDenne gangen er eksempelkoden ikke helt ferdig.\n\nKan du fullføre koden ved å fylle inn det som mangler? Hver tomme plass må erstattes med et ord eller et symbol.\n\nTips: Ikke glem fnutter!\n"
-                example_code: "## Eksempel Hedykode\n\n```\nfamilie {is} mom, dad, Emma, Sofie\n{print} _ oppvasken blir tatt av _\n{sleep}\n{print} familie {at} _\n```\n"
+                example_code: "## Eksempel Hedykode\n\n```\nfamilie {is} mamma, pappa, Emma, Sofie\n{print} _ oppvasken blir tatt av _\n{sleep}\n{print} familie {at} _\n```\n"
                 start_code: "{print} 'Hvem tar oppvasken?'"
             3:
                 story_text: "## Oppvasken\nEr dere alltid uenig hjemme om hvem som skal ta oppvasken eller hvem som skal rense kattedoen?\nDa kan du la datamaskinen velge helt rettferdig. Du kan programmere det på dette nivået!\nFørst må du lage en liste over folk i familien. Så velger du `{at} {random}` fra listen.\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
                 example_code: "## Eksempel Hedykode\n\n```\nfamilie {is} mamma, pappa, Emma, Sofie\n{print} familie {at} {random}\n```\n"
                 story_text_2: "## Hack oppvaskeprogrammet!\nFøler du ikke for å ta oppvasken selv? Hack programmet til å fjerne navnet ditt fra listen.\n"
-                example_code_2: "```\nfamilie {is} mom, dad, Emma, Sofie\nditt_navn {is} {ask} Hvem er du?\n{remove} ditt_navn {from} familie\n{print} familie {at} {random} tar oppvasken\n```\n"
+                example_code_2: "```\nfamilie {is} mamma, pappa, Emma, Sofie\nditt_navn {is} {ask} Hvem er du?\n{remove} ditt_navn {from} familie\n{print} familie {at} {random} tar oppvasken\n```\n"
                 start_code: '{print} Hvem tar oppvasken?'
     dice:
         name: Terninger
@@ -473,7 +473,7 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
                 start_code: "{print} 'Hva vil terningen vise denne gangen?'"
             3:
-                story_text: "## Dice\nIn this level we can choose from a list. With that we can let the computer choose one side of the die.\nTake a look at the games you have in your closet at home.\nAre there games with a (special) die? You can also copy it with this code.\nFor example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
+                story_text: "## Terninger\nPå dette nivået kan vi velge fra en liste. Med det kan vi la datamaskinen velge en side av en terning.\nTa en titt på spillene du har i skapet hjemme.\nEr det spill der med en (spesiell) terning? Du kan også kopiere den med denne koden.\nFor eksempel, en terning fra spillet Earthworms med tallene 1 til 5 og en makk på\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "## Example Hedy code\n\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} choices {at} {random}\n```\n"
                 start_code: '{print} Hva vil terningen vise denne gangen?'
             15:
