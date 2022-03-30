@@ -1388,7 +1388,6 @@ def public_user_page(username):
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):
     user = current_user()
-    lang = g.lang
 
     if os.getenv('TEACHER_INVITE_CODE') != code:
         return utils.error_page(error=404, ui_message=gettext('invalid_teacher_invitation_code'))
