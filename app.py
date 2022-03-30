@@ -1376,16 +1376,12 @@ def public_user_page(username):
             for category in ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang).get('categories', {}):
                 for subcategory in category.get('subcategories', {}):
                     for achievement in subcategory.get('achievements', {}):
-                        print(achievement)
                         if achievement.get('key', '') == last_achieved:
                             last_achieved = achievement.get('title', None)
                             break
 
-        return render_template('public-page.html', user_info=user_public_info,
-                               favourite_program=favourite_program,
-                               programs=user_programs,
-                               last_achieved=last_achieved,
-                               user_achievements=user_achievements)
+        return render_template('public-page.html', user_info=user_public_info, favourite_program=favourite_program,
+                               programs=user_programs, last_achieved=last_achieved, user_achievements=user_achievements)
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
