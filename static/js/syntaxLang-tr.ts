@@ -28,6 +28,6 @@ export const LANG_tr = {
 '_ELIF':'(?:elif|elif)',
 '_INPUT':'(?:girdi|input)',
 '_OR':'(?:veya|or)',
-'_WHILE':'(?:while|while)',
+'_WHILE':'(?:iken|while)',
 '_LENGTH':'(?:uzunluk|length)',
 }

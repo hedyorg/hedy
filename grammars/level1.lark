@@ -28,7 +28,7 @@ _DIVIDE: _SPACE* "/" _SPACE*
 
 start: program
 program: _EOL* (command _EOL+)* command?
-command: print | ask | echo | turtle | error_invalid_space | comment | error_invalid
+command: print | ask | echo | turtle | error_invalid_space | error_invalid
 
 print: _PRINT (_SPACE text)?
 ask: _ASK (_SPACE text)?
@@ -37,7 +37,8 @@ turtle: _FORWARD (_SPACE (NEGATIVE_NUMBER | NUMBER | text))? -> forward | _TURN 
 error_invalid_space: _SPACE text?
 error_invalid: textwithoutspaces text?
 
-comment: _HASH /([^\n]+)/
+COMMENT: _HASH /([^\n]+)/
+%ignore COMMENT
 
 _EOL: "\r"?"\n"
 
@@ -45,8 +46,8 @@ NEGATIVE_NUMBER: _MINUS /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
 NUMBER: /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
 INT: /[\p{Nl}\p{Nd}\p{No}]+/
 
-text: /([^\n]+)/ -> text //anything can be parsed except for a newline
-textwithoutspaces: /([^\n ]+)/ -> text //anything can be parsed except for a new line and spaces
+text: /([^\n#]+)/ -> text //anything can be parsed except for a newline and a comment hash
+textwithoutspaces: /([^\n #]+)/ -> text //anything can be parsed except for a new line, spaces and a comment hash
 
 
 // FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html

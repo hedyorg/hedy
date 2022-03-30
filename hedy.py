@@ -33,49 +33,6 @@ TRANSPILER_LOOKUP = {}
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
-# Define and load all available language data
-ALL_LANGUAGES = {
-    'id': 'Bahasa Indonesia',
-    'de': 'Deutsch',
-    'en': 'English',
-    'es': 'Español',
-    'fr': 'Français',
-    'pt_PT': 'Português (pt)',
-    'pt_BR': 'Português (br)',
-    'fy': 'Frysk',
-    'it': 'Italiano',
-    'hu': 'Magyar',
-    'el': 'Ελληνικά',
-    'zh_Hans': "简体中文",
-    'nl': 'Nederlands',
-    'nb_NO': 'Norsk',
-    'sw': 'Swahili',
-    'tr': 'Türk',
-    'cs': 'Čeština',
-    'bg': 'Български',
-    'ar': 'عربى',
-    'hi': 'हिंदी',
-    'bn': 'বাংলা',
-}
-
-# Define fall back languages for adventures
-FALL_BACK_ADVENTURE = {
-    'fy': 'nl',
-    'pt_BR': 'pt_PT'
-}
-
-ALL_KEYWORD_LANGUAGES = {
-    'en': 'EN',
-    'es': 'ES',
-    'fr': 'FR',
-    'nl': 'NL',
-    'nb_NO': 'NB',
-    'tr': 'TR',
-    'ar': 'AR',
-    'hi': 'HI'
-}
-
-
 class Command:
     print = 'print'
     ask = 'ask'
@@ -967,10 +924,10 @@ class IsValid(Filter):
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    def program(self, meta, args):
-        if len(args) == 0:
-            return False, InvalidInfo("empty program")
-        return super().program(meta, args)
+    # def program(self, meta, args):
+    #     if len(args) == 0:
+    #         return False, InvalidInfo("empty program")
+    #     return super().program(meta, args)
 
     def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
@@ -2197,6 +2154,7 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
+    
     is_program_valid(program_root, input_string, level, lang)
 
     try:
