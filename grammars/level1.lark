@@ -3,10 +3,10 @@
 _SPACE: " "+
 _COMMA: _SPACE* (","|"،") _SPACE* //support latin and arabic comma;s and always allow these to be surrounded by spaces
 _COLON: ":"
-_LEFT_BRACKET : "("
-_RIGHT_BRACKET : ")"
-_LEFT_SQUARE_BRACKET : "["
-_RIGHT_SQUARE_BRACKET : "]"
+_LEFT_BRACKET : _SPACE* "(" _SPACE*
+_RIGHT_BRACKET : _SPACE* ")" _SPACE*
+_LEFT_SQUARE_BRACKET :  _SPACE* "[" _SPACE*
+_RIGHT_SQUARE_BRACKET : _SPACE* "]" _SPACE*
 _HASH: "#"
 _SMALLER : "<"
 _LARGER: ">"
