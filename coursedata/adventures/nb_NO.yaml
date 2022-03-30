@@ -104,39 +104,39 @@ adventures:
         levels:
             9:
                 start_code: '# skriv koden din her'
-                story_text: "## Rock, paper, scissors\nIn this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?\n"
-                example_code: "## Example Hedy code\n\n```\nchoices {is} rock, paper, scissors\nyour_choice {is} {ask} 'What do you choose?'\n{print} 'You choose ' your_choice\ncomputer_choice {is} choices {at} {random}\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} rock\n    {if} your_choice {is} paper\n        {print} 'You win!'\n    {if} your_choice {is} scissors\n        {print} 'You lose!'\n```\n"
+                story_text: "## Stein, saks, papir\nPå dette nivået kan du programmere hele stein, saks, papir ved å plassere `{if}`-kommandoer inni `{if}`-kommandoer. Kan du fullføre koden?\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalgene {is} stein, saks, papir\nditt_valg {is} {ask} 'Hva velger du?'\n{print} 'Du valgte ' your_choice\ndatamaskinens_valg {is} valgene {at} {random}\n{print} 'Datamaskinen valgte ' datamaskinens_valg\n{if} datamaskinens_valg {is} ditt_valg\n    {print} 'Uavgjort'\n{if} datamaskinens_valg {is} stein\n    {if} ditt_valg {is} papir\n        {print} 'Du vant!'\n    {if} ditt_valg {is} saks\n        {print} 'Du tapte!'\n```\n"
             1:
-                story_text: "## Rock, paper, scissors\nIn level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
-                example_code: "## Example Hedy code\n\n\n```\n{print} what do you choose?\n{ask} choose {from} rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
+                story_text: "## Stein, saks, papir\nPå nivå 1 kan du starte med spillet stein, saks, papir.\n\nMed `{ask}` kan du ta et valg og med `{echo}` kan du gjenta det valget.\n"
+                example_code: "## Eksempel Hedykode\n\n\n```\n{print} hva velger du?\n{ask} velg mellom stein, saks, papir\n{echo} du valgte:\n```\nIstedenfor å bruke ord så kan du selvfølgelig bruke emoji: ✊✋✌\n"
                 start_code: '{print} Velkommen til din egen stein saks papir!'
             10:
-                story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
-                example_code: "## Example Hedy code\n\n```\nchoices = rock, paper, scissors\nplayers = Marleen, Michael\n{for} player {in} players\n     {print} player ' chooses ' choices {at} {random}\n```\n"
+                story_text: "## Stein, saks, papir\nEr du for lat til å spille spillet selv? La Hedy spille det for deg!\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalgene = stein, saks, papir\nspillere = Maren, Magnus\n{for} spiller {in} spillere\n     {print} spiller ' velger ' valgene {at} {random}\n```\n"
                 start_code: '# skriv koden din her'
             5:
-                story_text: "## Rock, paper, scissors\nIn this level we can determine who won.\nFor that you need the new `{if}` code.\n\nSave your choice with the name of choice and the choice of computer as computer choice.\nThen you can use `{if}` to see {if} they are the same or different.\nWill you finish the code?\n"
-                example_code: "## Example Hedy code\n\n```\noptions {is} rock, paper, scissors\ncomputer_choice {is} _\nchoice {is} {ask} 'What do you choose?'\n{print} 'you chose ' _\n{print} 'computer chose ' _\n{if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'\n```\n\nFill in the correct code on the blanks to see {if} it is a draw.\n"
+                story_text: "## Stein, saks, papir\nPå dette nivået kan vi bestemme hvem som vant.\nTil det trenger vi den nye `{if}`-koden.\n\nTa vare på ditt valg og datamaskinens valg.\nSå kan du bruke `{if}` for å se om de er det samme eller forskjellig.\nKan du fullføre koden?\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalgene {is} stein, saks, papir\ndatamaskin_valg {is} _\nditt_valg {is} {ask} 'Hva velger du?'\n{print} 'du velger ' _\n{print} 'datamaskinen velger ' _\n{if} _ {is} _ {print} 'uavgjort!' {else} {print} 'ikke uavgjort'\n```\n\nFyll ut resten av koden der det er linjer for å se om det er uavgjort.\n"
                 start_code: "{print} 'Velkommen til din egen stein saks papir!'"
             4:
-                story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
-                example_code: "## Example Hedy code\n\n```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
+                story_text: "## Stein, saks, papir\nPå dette nivået kan vi programmere videre på stein, saks, papir. Om du vil legge til tekst må du bruke fnutter her også.\nKan du fullføre koden ved å fylle ut de riktige kommandoene og tengene der det er streker?\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalgene {is} stein, saks, papir\n{print} _ Datamaskinen valgte: _ _ {at} _\n```\n"
                 start_code: "{print} 'Velkommen til din egen stein saks papir!'"
             3:
-                story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
-                example_code: "## Example Hedy code\n\n\n```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
+                story_text: "## Stein, saks, papir\n\nPå dette nivået kan vi lage lister og velge ting fra de.\nDu kan først lage en liste med `{is}`. Så kan du la datamaskinen velge noe annet fra listen med `{at} {random}`.\nFor eksempel så kan du la datamaskinen velge mellom stein, saks og papir.\n"
+                example_code: "## Eksempel Hedykode\n\n\n```\nvalgene {is} stein, saks, papir\n{print} valgene {at} {random}\n```\n"
                 start_code: '{print} Velkommen til din egen stein saks papir!'
             2:
-                story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
-                example_code: "## Example Hedy code\n\n```\nchoice {is} _\n{print} I choose choice\n```\n"
+                story_text: "## Stein, saks, papir\nPå dette nivået kan du øve deg på å bruke variabler så du kan lage stein, saks, papir-spillet på neste nivå!\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalg {is} _\n{print} Jeg velger valg\n```\n"
                 start_code: '# skriv koden din her'
             15:
-                story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
-                example_code: "## Example Hedy code\n\n```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n```\n"
+                story_text: "## Stein, saks, papir\nSpill til du klarer å slå datamaskinen! Men først, fullfør eksempelkoden...\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvunnet = 'nei'\nvalgene = 'stein', 'saks', 'papir'\n{while} vunnet == 'nei'\n    ditt_valg = {ask} 'Hva velger du?'\n    datamaskinens_valg = options {at} {random}\n    {print} 'du valgte ' ditt_valg\n    {print} 'datamaskinen valgte ' datamaskinens_valg\n    {if} datamaskinens_valg == ditt_valg\n        {print} 'Uavgjort!'\n    {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'saks'\n        {print} 'Du tapte!'\n    {if} datamaskinens_valg == 'stein {and} ditt_valg == 'papir'\n        {print} 'Du vant!'\n        vunnet = 'yes'\n```\n"
                 start_code: '# skriv koden din her'
             13:
-                story_text: "## Rock, paper, scissors\nWith the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.\n"
-                example_code: "## Example Hedy code\n\n```\noptions = 'rock', 'paper', 'scissors'\nyour_choice = {ask} 'What do you choose?'\ncomputer_choice = options {at} {random}\n{print} 'You choose ' your_choice\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'\n    {print} 'You win!'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'\n    {print} 'The computer wins!'\n```\n"
+                story_text: "## Stein, saks, papir\nMed `{and}`-kommandoen kan du korte ned stein, saks, papir-koden din! Sjekk ut eksempelkoden under og prøv å fullføre den.\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalgene = 'stein', 'saks', 'papir'\nditt_valg = {ask} 'Hva velger du?'\ndatamaskinens_valg = valgene {at} {random}\n{print} 'Du valgte ' ditt_valg\n{print} 'Datamaskinen valgte ' datamaskinens_valg\n{if} datamaskinens_valg {is} ditt_valg\n    {print} 'Uavgjort'\n{if} datamaskinens_valg {is} 'stein' {and} ditt_valg {is} 'papir'\n    {print} 'Du vant!'\n{if} datamaskinens_valg {is} 'stein' {and} ditt_valg {is} 'saks'\n    {print} 'Datamaskinen vant!'\n```\n"
                 start_code: '# skriv koden din her'
         name: Stein, saks, papir
         description: Lag ditt eget stein, saks,papir-spill
@@ -146,29 +146,29 @@ adventures:
         levels:
             12:
                 start_code: '# skriv koden din her'
-                story_text: "## Calculator\nNow you can make a calculator that works for decimal numbers.\n"
-                example_code: "## Example Hedy code\n\n```\nnumber1 = {ask} 'What is the first number?'\nnumber2 = {ask} 'What is the second number?'\nanswer = number1 + number2\n{print} number1 ' plus ' number2 ' is ' answer\n```\n"
+                story_text: "## Kalkulator\nDu kan lage en kalkulator som fungerer med desimaltall.\n"
+                example_code: "## Eksempel Hedykode\n\n```\ntall1 = {ask} 'Hva er det første tallet?'\ntall2 = {ask} 'Hva er det andre tallet?'\nriktig_svar = tall1 + tall2\n{print} tall1 ' pluss ' tall2 ' er ' riktig_svar\n```\n"
             14:
-                story_text: "## Guess which number\nIn this level you can programm the game 'Guess which number'\n"
-                example_code: "## Example Hedy code\n\n```\n{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess > number\n            {print} 'Lower!'\n        {if} guess < number\n            {print} 'Higher!'\n        {if} guess == number\n            {print} 'You win!'\n            game = 'over'\n```\n"
+                story_text: "## Gjett hvilket nummer\nPå dette nivået kan du programmere spillet \"Gjett hvilket nummer\"\n"
+                example_code: "## Eksempel Hedykode\n\n```\n{print} 'Gjett hvilket nummer'\ntallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntallet = tallene {at} {random}\nspill = 'i gang'\n{for} i {in} {range} 1 {to} 10\n    {if} spill == 'i gang'\n        gjetting = {ask} 'Hvilket tall tror du det er?'\n        {if} gjetting > tallet\n            {print} 'Lavere!'\n        {if} gjetting < tallet\n            {print} 'Høyere!'\n        {if} gjetting == tallet\n            {print} 'Du vant!'\n            spill = 'slutt'\n```\n"
                 start_code: '# skriv koden din her'
             10:
-                story_text: "## Calculator\nThis calculator game helps you practise your tables of multiplication!\nIf you add more numbers to the list, you can practise all the multiplications.\n"
-                example_code: "## Example Hedy code\n\n```\nnumbers = 1, 2, 3\n{for} number1 {in} numbers\n    {for} number2 {in} numbers\n        answer = {ask} 'How much is ' number2 ' times ' number1 '?'\n        correct = number1 * number2\n        {if} answer {is} correct\n            {print} 'Great job!'\n        {else}\n            {print} 'Thats wrong. The right answer is ' correct\n```\n"
+                story_text: "## Kalkulator\nDette kalkulatorspillet hjelper med å øve på multiplikasjonstabeller!\nOm du legger til flere tall på listen så kan du øve på alle gangetabellene.\n"
+                example_code: "## Eksempel Hedykode\n\n```\ntallene = 1, 2, 3\n{for} tall1 {in} tallene\n    {for} tall2 {in} tallene\n        ditt_svar = {ask} 'Hvor mye er ' tall1 ' ganger ' tall2 '?'\n        riktig_svar = tall1 * tall2\n        {if} ditt_svar {is} riktig_svar\n            {print} 'Godt jobbet!'\n        {else}\n            {print} 'Det er feil. Det riktige svaret er ' riktig_svar\n```\n"
                 start_code: '# skriv koden din her'
             9:
-                story_text: "## Calculator\nIn previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...\n"
-                example_code: "## Example Hedy code\n\n```\nscore = 0\n{repeat} 10 {times}\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct_answer = number1 * number2\n    {print} 'What is ' number1 ' times ' number2 '?'\n    answer = {ask} 'Type your answer here...'\n    {print} 'Your answer is' answer\n    {if} answer {is} correct_answer\n        score = score + 1\n{print} 'Great job! Your score is... ' score ' out of 10!'\n```\n"
+                story_text: "## Kalkulator\nPå de forrige nivåene lærte du hvordan å lage en kalkulator. På dette nivået kan du utvide koden til å lage et lite mattespill. Slik som dette...\n"
+                example_code: "## Eksempel Hedykode\n\n```\npoengsum = 0\n{repeat} 10 {times}\n    tallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    tall1 = tallene {at} {random}\n    tall2 = tallene {at} {random}\n    riktig_svar = tall1 * tall2\n    {print} 'Hva er ' tall1 ' ganget med ' tall2 '?'\n    ditt_svar = {ask} 'Skriv svaret ditt her...'\n    {print} 'Ditt svar er ' ditt_svar\n    {if} ditt_svar {is} riktig_svar\n        poengsum = poengsum + 1\n{print} 'Godt jobbet! Din poengsum er... ' poengsum ' av 10!'\n```\n"
                 start_code: "{print} 'Velkommen til denne kalkulatoren!'"
             6:
-                story_text: "## Calculator\nNow that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:\n"
-                example_code: "## Example Hedy code\n\n```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} correct_answer {print} 'good job!'\n{else} {print} 'Wrong! It was ' correct_answer\n```\n"
-                story_text_2: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
-                example_code_2: "## Example Hedy code\n\n```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
+                story_text: "## Kalkulator\nNå som du kan regne så kan du også lage et program til å øve på regnestykker. Du kan lage regnestykker til deg selv, for eksempel:\n"
+                example_code: "## Eksempel Hedykode\n\n```\nriktig_svar = 11 * 27\nditt_svar = {ask} 'Hvor mye er 11 ganger 27?'\n{if} ditt_svar {is} riktig_svar {print} 'godt jobbet!'\n{else} {print} 'Feil! Riktig svar er ' riktig_svar\n```\n"
+                story_text_2: "## Tilfeldige tall\nDu kan også la datamaskinen lage tilfeldige regnestykker på egenhånd ved hjelp av `{at} {random}`.\nDette er hvordan du velger tall fra en tabell med tall å øve på og fra det vil du få forskjellige summer:\n"
+                example_code_2: "## Eksempel Hedykode\n\n```\ntabellene = 4, 5, 6, 8\ntallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntabell = tabellene {at} {random}\ntall = tallene {at} {random}\nriktig_svar = tabell * tall\nditt_svar = {ask} 'hvor mye er ' tabell ' ganget med ' tall '?'\n{if} ditt_svar {is} riktig_svar {print} 'riktig'\n{else} {print} 'feil! det var ' riktig_svar\n```\n"
                 start_code: "{print} 'Velkommen til denne kalkulatoren!'"
             15:
-                story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
-                example_code: "## Example Hedy code\n\n```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
+                story_text: "## Kalkulator\nDu kan legge til en `{while}`-løkke til kalkulatorspillet du lærte å lage på det forrige nivået.\nDette gjør det sånn at spilleren ikke kan fortsette til neste spørsmål om de har svart feil.\n"
+                example_code: "## Eksempel Hedykode\n\n```\npoengsum = 0\n{for} i {in} {range} 0 {to} 9\n    tallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    tall1 = tallene {at} {random}\n    tall2 = tallene {at} {random}\n    riktig_svar = tall1 * tall2\n    ditt_svar = 0\n    {while} ditt_svar != riktig_svar\n        {print} 'Hvor mye er ' tall1 ' ganger ' tall2 '?'\n        ditt_svar = {ask} 'Skriv inn ditt svar:'\n        {print} 'Ditt svar er ' ditt_svar\n    {print} 'Godt jobbet!'\n{print} 'Du vant!'\n```\n"
                 start_code: '# skriv koden din her'
         name: Kalkulator
         description: Lag en kalkulator
@@ -178,16 +178,16 @@ adventures:
         levels:
             2:
                 start_code: '# skriv koden din her'
-                story_text: "## Restaurant\nIn level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.\nNow you can use variables and Hedy can remember both the food and the drinks!\n"
-                example_code: "## Example Hedy Code\n```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} {ask} What would you like to drink with that?\n{print} Thank you for your order.\n{print} Your food and drinks will be right there!\n```\n"
+                story_text: "## Restaurant\nPå nivå 2 kan du utvide din restaurant ved å bruke variabler. På nivå 1 kunne Hedy bare svare med bestillingen 1 gang og den kunne bare huske siste ting som var bestilt.\nNå kan du bruke variabler og Hedy kan huske både mat og drikke!\n"
+                example_code: "## Eksempel Hedykode\n```\n{print} Velkommen til Hedys restaurant!\n{print} I dag har vi pizza og lasagne på menyen.\nmaten {is} {ask} Hva har du lyst til å spise?\n{print} Godt valg! maten er min favoritt!\ntilbehør {is} {ask} Foretrekker du vegetar eller med kjøtt?\n{print} maten med tilbehør skal bli!\ndrikken {is} {ask} Vil du ha noe å drikke med det?\n{print} Takk for bestillingen\n{print} maten og drikken kommer snart!\n```\n"
             7:
                 example_code: "```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people are joining us today?'\n{repeat} people times food = {ask} 'What would you like to eat?'\n{print} 'Thanks for your order! Its coming right up!'\n```\n"
                 story_text: "## Restaurant\nIn this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.\nYou can use that in your restaurant to {ask} multiple people what they'd like to eat. Like this:\n"
                 start_code: '# skriv koden din her'
             1:
-                story_text: "## Restaurant\n In level 1 you can make your own virtual restaurant and take your guests' orders.\n"
-                example_code: "## Example Hedy code\n\n  ```\n {print} Welcome to Hedy's restaurant \U0001F35F\n {ask} What would you like to order?\n {echo} So you would like to order\n {print} Thanks you for your order!\n {print} It's on its way!\n ```\n"
-                story_text_2: "## Challenge\nCan you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?\n"
+                story_text: "## Restaurant\n På nivå 1 kan du lage din egne virtuelle restaurant og ta imot dine gjesters bestillinger.\n"
+                example_code: "## Eksempel Hedykode\n\n  ```\n {print} Velkommen til Hedys restaurant \U0001F35F\n {ask} Hva har du lyst å bestille?\n {echo} Så du vil bestille\n {print} Takk for din bestilling!\n {print} Den er på vei!\n ```\n"
+                story_text_2: "## Utfordring\nKan du tenke deg flere linjer du kan legge til restaurantens kode? For eksempe, kan du spørre gjestene hva de har lyst å drikke, fortelle de prisen eller å ønske de et godt måltid?\n"
                 start_code: '# skriv koden din her'
             12:
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
@@ -477,8 +477,8 @@ adventures:
                 example_code: "## Eksempel Hedykode\n\n```\nvalgene {is} 1, 2, 3, 4, 5, makk\n{print} valgene {at} {random}\n```\n"
                 start_code: '{print} Hva vil terningen vise denne gangen?'
             15:
-                story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
-                example_code: "## Example Hedy code\n\n```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
+                story_text: "## Terning\nI dette spillet må du trille 6 på så få forsøk som mulig.\n"
+                example_code: "## Eksempel Hedykode\n\n```\nvalg = 1, 2, 3, 4, 5, 6\n{print} 'Trill 6 så raskt som du kan!'\ntrillet = 0\nforsøk = 0\n{while} trillet != 6\n    trillet = valg {at} {random}\n    {print} 'Du trillet ' trillet\n    forsøk = forsøk + 1\n{print} 'Jippi! Du trillet 6 på ' forsøk ' forsøk.'\n```\n"
                 start_code: '# skriv koden din her'
     quizmaster:
         name: Quizmester
