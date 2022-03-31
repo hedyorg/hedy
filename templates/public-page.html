@@ -49,7 +49,7 @@
         <div class="text-center rounded-lg bg-yellow-400 w-1/3 ml-4 mr-4 border border-black">
             <h3>{{_('last_achievement')}}</h3>
             <img class="w-full px-8 mt-2" src="{{static('/images/achievement.png')}}">
-            <h4>{{ last_achieved }}</h4>
+            <h4>{{ achievements[last_achieved].title }}</h4>
         </div>
         {% endif %}
     </div>
