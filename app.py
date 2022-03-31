@@ -19,24 +19,29 @@ from os import path
 import re
 import traceback
 from flask_commonmark import Commonmark
+from babel import Locale
 from werkzeug.urls import url_encode
 from config import config
-from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
-from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
-import utils
-import textwrap
-
-# app.py
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
 from flask_helpers import render_template
 from flask_compress import Compress
 from flask_babel import Babel, refresh
 from flask_babel import gettext
 
+# Setting up Flask and babel (web and translations)
+app = Flask(__name__, static_url_path='')
+app.url_map.strict_slashes = False # Ignore trailing slashes in URLs
+babel = Babel(app)
+
 # Hedy-specific modules
 import hedy_content
+hedy_content.fill_all_languages(babel)
 import hedyweb
-from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
+from hedy_content import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
+from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
+from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
+import utils
+import textwrap
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
@@ -88,14 +93,8 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
 
 def load_adventure_for_language(lang):
     ADVENTURES[lang].set_keyword_language(g.keyword_lang)
-    adventures_for_lang = ADVENTURES[lang]
 
-    if not adventures_for_lang.has_adventures():
-        # The default fall back language is English
-        fall_back = FALL_BACK_ADVENTURE.get(lang, "en")
-        adventures_for_lang = ADVENTURES[fall_back]
-
-    return adventures_for_lang
+    return ADVENTURES[lang]
 
 
 def load_adventures_per_level(lang, level):
@@ -165,13 +164,6 @@ def load_adventures_per_level(lang, level):
 logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
-
-app = Flask(__name__, static_url_path='')
-# Ignore trailing slashes in URLs
-app.url_map.strict_slashes = False
-
-babel = Babel(app)
-
 
 # Return the session language, if not: return best match
 @babel.localeselector
@@ -303,12 +295,11 @@ def setup_language():
     g.keyword_lang = session['keyword_lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
-    # Switch to "right-to-left" if one of the language in the list is selected
+    # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings. 
     # This is the only place to expand / shrink the list of RTL languages -> front-end is fixed based on this value
     g.dir = "ltr"
-    if g.lang in ['ar', 'he', 'ur']:
+    if Locale(g.lang).character_order == "right-to-left":
         g.dir = "rtl"
-
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():

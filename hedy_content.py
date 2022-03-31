@@ -2,38 +2,6 @@ import copy
 import attr
 from website.yaml_file import YamlFile
 
-# Define and load all available language data
-ALL_LANGUAGES = {
-    'id': 'Bahasa Indonesia',
-    'de': 'Deutsch',
-    'en': 'English',
-    'es': 'Español',
-    'fr': 'Français',
-    'pl': 'Polski',
-    'pt_PT': 'Português (pt)',
-    'pt_BR': 'Português (br)',
-    'fy': 'Frysk',
-    'it': 'Italiano',
-    'hu': 'Magyar',
-    'el': 'Ελληνικά',
-    'zh_Hans': "简体中文",
-    'nl': 'Nederlands',
-    'nb_NO': 'Norsk',
-    'sw': 'Swahili',
-    'tr': 'Türk',
-    'cs': 'Čeština',
-    'bg': 'Български',
-    'ar': 'عربى',
-    'hi': 'हिंदी',
-    'bn': 'বাংলা',
-}
-
-# Define fall back languages for adventures
-FALL_BACK_ADVENTURE = {
-    'fy': 'nl',
-    'pt_BR': 'pt_PT'
-}
-
 ALL_KEYWORD_LANGUAGES = {
     'en': 'EN',
     'es': 'ES',
@@ -44,6 +12,11 @@ ALL_KEYWORD_LANGUAGES = {
     'ar': 'AR',
     'hi': 'HI'
 }
+
+def fill_all_languages(babel):
+  # Define and load all available language data
+  global ALL_LANGUAGES
+  ALL_LANGUAGES = {loc.language:loc.language_name for loc in babel.list_translations()}
 
 class LevelDefaults:
   def __init__(self, language):
