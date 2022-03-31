@@ -2,6 +2,9 @@ import copy
 import attr
 from website.yaml_file import YamlFile
 
+#Define dictionairy for available languages. Fill dynamicly later. 
+ALL_LANGUAGES = {}
+
 ALL_KEYWORD_LANGUAGES = {
     'en': 'EN',
     'es': 'ES',
@@ -14,8 +17,7 @@ ALL_KEYWORD_LANGUAGES = {
 }
 
 def fill_all_languages(babel):
-  # Define and load all available language data
-  global ALL_LANGUAGES
+  # load all available languages
   ALL_LANGUAGES = {loc.language:loc.language_name for loc in babel.list_translations()}
 
 class LevelDefaults:
