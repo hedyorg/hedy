@@ -297,9 +297,7 @@ def setup_language():
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings. 
     # This is the only place to expand / shrink the list of RTL languages -> front-end is fixed based on this value
-    g.dir = "ltr"
-    if Locale(g.lang).character_order == "right-to-left":
-        g.dir = "rtl"
+    g.dir = Locale(g.lang).text_direction
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
