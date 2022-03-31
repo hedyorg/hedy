@@ -323,7 +323,9 @@ def routes(app, database):
         else:
             DATABASE.record_login(user['username'])
 
-        if user.get('is_teacher'):
+        if is_admin(user):
+            resp = make_response({'admin': True})
+        elif user.get('is_teacher'):
             resp = make_response({'teacher': True})
         else:
             resp = make_response({'teacher': False})
@@ -336,7 +338,6 @@ def routes(app, database):
         # Remember the current user on the session. This is "new style" logins, which should ultimately
         # replace "old style" logins (with the cookie above), as it requires fewer database calls.
         remember_current_user(user)
-
         return resp
 
     @app.route('/auth/signup', methods=['POST'])
