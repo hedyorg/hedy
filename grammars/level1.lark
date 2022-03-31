@@ -1,30 +1,30 @@
 //symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
 
 _SPACE: " "+
-_COMMA: _SPACE* (","|"،") _SPACE* //support latin and arabic comma;s and always allow these to be surrounded by spaces
+_COMMA: _SPACE? (","|"،") _SPACE? //support latin and arabic comma;s and always allow these to be surrounded by spaces
 _COLON: ":"
-_LEFT_BRACKET : _SPACE* "(" _SPACE*
-_RIGHT_BRACKET : _SPACE* ")" _SPACE*
-_LEFT_SQUARE_BRACKET :  _SPACE* "[" _SPACE*
-_RIGHT_SQUARE_BRACKET : _SPACE* "]" _SPACE*
+_LEFT_BRACKET : _SPACE? "(" _SPACE?
+_RIGHT_BRACKET : _SPACE? ")" _SPACE?
+_LEFT_SQUARE_BRACKET :  _SPACE? "[" _SPACE?
+_RIGHT_SQUARE_BRACKET : _SPACE? "]" _SPACE?
 _HASH: "#"
-_SMALLER : "<"
-_LARGER: ">"
-_EQUALS: _SPACE* "=" _SPACE* //always allow = to be surrounded by spaces
-_DOUBLE_EQUALS: "=="
-_NOT_EQUALS: "!="
-_SMALLER_EQUALS : "<="
-_LARGER_EQUALS: ">="
+_SMALLER : _SPACE? "<" _SPACE?
+_LARGER: _SPACE? ">" _SPACE?
+_EQUALS: _SPACE? "=" _SPACE? //always allow = to be surrounded by spaces
+_DOUBLE_EQUALS: _SPACE? "==" _SPACE?
+_NOT_EQUALS: _SPACE? "!=" _SPACE?
+_SMALLER_EQUALS : _SPACE? "<=" _SPACE?
+_LARGER_EQUALS: _SPACE? ">=" _SPACE?
 _EXCLAMATION_MARK: "!"
 _QUESTION_MARK: "?"
 _PERIOD: "."
 _SINGLE_QUOTE: "'"
 _DOUBLE_QUOTE: "\""
 _QUOTE: _SINGLE_QUOTE | _DOUBLE_QUOTE
-_PLUS: _SPACE* "+" _SPACE*
-_MINUS: _SPACE* "-" _SPACE*
-_MULTIPLY: _SPACE* "*" _SPACE*
-_DIVIDE: _SPACE* "/" _SPACE*
+_PLUS: _SPACE? "+" _SPACE?
+_MINUS: _SPACE? "-" _SPACE?
+_MULTIPLY: _SPACE? "*" _SPACE?
+_DIVIDE: _SPACE? "/" _SPACE?
 
 start: program
 program: _EOL* (command _EOL+)* command?
