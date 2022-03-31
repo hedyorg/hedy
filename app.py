@@ -721,11 +721,10 @@ def achievements_page():
         url = request.url.replace('/my-achievements', '/login')
         return redirect(url, code=302)
 
-    achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
     achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
 
     return render_template('achievements.html', page_title=gettext('title_achievements'),
-                           achievements=achievements, template_achievements=achievement_translations, current_page='my-profile')
+                           achievements=achievements, current_page='my-profile')
 
 
 @app.route('/programs', methods=['GET'])
@@ -1231,10 +1230,6 @@ def other_keyword_language():
     # If the current keyword language isn't English: we are sure the other option is English
     if g.keyword_lang != "en":
         return make_keyword_lang_obj("en")
-    else:
-        # If the current language is in supported keyword languages and not equal to our current keyword language
-        if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang != g.keyword_lang:
-            return make_keyword_lang_obj(g.lang)
     return None
 
 
@@ -1384,22 +1379,22 @@ def public_user_page(username):
         last_achieved = None
         if 'achieved' in user_achievements:
             last_achieved = user_achievements['achieved'][-1]
+            # Todo TB -> It might be nice to simplify this, but not sure what would be the best approach
+            for category in ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang).get('categories', {}):
+                for subcategory in category.get('subcategories', {}):
+                    for achievement in subcategory.get('achievements', {}):
+                        if achievement.get('key', '') == last_achieved:
+                            last_achieved = achievement.get('title', None)
+                            break
 
-        # Todo: TB -> In the near future: add achievement for user visiting their own profile
-
-        return render_template('public-page.html', user_info=user_public_info,
-                               achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang),
-                               favourite_program=favourite_program,
-                               programs=user_programs,
-                               last_achieved=last_achieved,
-                               user_achievements=user_achievements)
+        return render_template('public-page.html', user_info=user_public_info, favourite_program=favourite_program,
+                               programs=user_programs, last_achieved=last_achieved, user_achievements=user_achievements)
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):
     user = current_user()
-    lang = g.lang
 
     if os.getenv('TEACHER_INVITE_CODE') != code:
         return utils.error_page(error=404, ui_message=gettext('invalid_teacher_invitation_code'))
