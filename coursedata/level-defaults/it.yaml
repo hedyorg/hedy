@@ -10,33 +10,6 @@
 
         Non sai cosa programmare? Nelle schede successive trovi alcune idee su cosa costruire.
     start_code: "print ciao mondo!"
-    commands:
-    -   name: "print"
-        explanation: "Scrivi qualcosa con `print`."
-        example: "Esempio: print Ciao benvenuta/o su Hedy!"
-        demo_code: "print Ciao benvenuta/o su Hedy!"
-    -   name: "ask"
-        explanation: "Chiedi qualcosa con `ask`."
-        example: "Esempio: ask Qual è il tuo colore preferito?"
-        demo_code: "ask Qual è il tuo colore preferito?"
-    -   name: "echo"
-        explanation: "Ripeti qualcosa usando `echo`."
-        example: "Esempio: echo Quindi il tuo colore preferito è "
-        demo_code: |-
-            ask Qual è il tuo colore preferito?
-            echo Quindi il tuo colore preferito è 
-    -   name: '{print} emojis'
-        explanation: print an emoji with `{print}`
-        demo_code: '{print} 🙋 🌍 ❗'
-        example: 'Example: {print} 🙋‍ 🌍 ❗'
-    -   example: 'Example: {forward} 100'
-        name: '{forward}'
-        explanation: Draw a line with `{forward}`.
-        demo_code: '{forward} 100'
-    -   explanation: turn the drawing turtle with `{turn}`
-        example: 'Example: {turn}'
-        name: '{turn}'
-        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
     example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
     example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
     intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
@@ -56,27 +29,6 @@
         `print` funziona ancora come nel livello 1 e non è più necessaria `echo`.
 
     start_code: "print ciao mondo!"
-    commands:
-    -   name: "is"
-        explanation: "Dà un nomignolo da usare nel programma ad una parola con `is`."
-        example: "Esempio: nome is Hedy."
-        demo_code: |-
-            nome is Hedy
-            print benvenuta nome
-    -   name: "ask"
-        explanation: "Chiedi qualcosa con `ask`. Attenzione! Devi dare alla risposta un nome con `is`."
-        example: "Esempio: colore is ask Qual è il tuo colore preferito?"
-        demo_code: |-
-            colore is ask Qual è il tuo colore preferito?
-            print colore è il tuo preferito!
-    -   explanation: Let Hedy pause for a (couple of) second(s).
-        name: '{sleep}'
-        example: 'Example: {sleep} 2 '
-        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
-    -   explanation: Give a number a name using `{is}`. You can choose the name yourself.
-        name: is - turtle
-        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
-        example: 'Example: angle {is} 90'
     example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
     intro_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
     example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
@@ -93,21 +45,6 @@
 
         Troverai tutti i codici di livello 3 nella barra di sinistra. Ci sono anche schede con compiti.
     start_code: "print ciao mondo!"
-    commands:
-    -   name: "scegli_acaso"
-        explanation: "Scegli una parola a caso da un gruppo con `at` e `random`"
-        example: "Esempio: animali is cane, gatto, canguro."
-        demo_code: |-
-            animali is cane, gatto, canguro
-            print animali at random
-    -   explanation: add an item to a list
-        example: 'Example: {add} dog {to_list} animals'
-        name: '{add}'
-        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
-    -   demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
-        example: 'Example: {remove} dog {from} animals'
-        name: '{remove}'
-        explanation: remove an item from a list
     intro_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
     example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
     example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
@@ -125,23 +62,6 @@
         ## Le assegnazioni stanno diventando sempre più difficili
         Troverai di nuovo i comandi sulla sinistra e le assegnazioni nelle seguenti schede. Le assegnazioni stanno diventando sempre più difficili nelle schede successive.
         Quindi è meglio iniziare a sinistra con la storia e lavorare a destra per essere sempre più sfidati.
-    commands:
-    -   name: "print"
-        explanation: "Scrivi esattamente quello che metti tra virgolette"
-        example: "Esempio: print 'Ciao benvenuta/o su Hedy.'"
-        demo_code: "print 'Ciao benvenuta/o su Hedy.'"
-    -   name: "is"
-        explanation: "Dai un nomignolo ad un testo e scrivilo con `print` senza usare le virgolette"
-        example: "Esempio: nome is Hedy."
-        demo_code: |-
-            nome is Hedy
-            print 'Il mio nome è ' nome
-    -   name: "ask"
-        explanation: "Chiedi qualcosa con `ask`."
-        example: "Esempio: colore is ask 'Qual è il tuo colore preferito?'"
-        demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
-            print colore ' è il tuo preferito!'
     example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
     intro_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
 5:
@@ -164,31 +84,6 @@
          ## Le assegnazioni stanno diventando sempre più difficili
 
          Anche a livello 4, gli incarichi nelle schede diventano sempre più difficili. Quindi fallo da sinistra a destra.
-    commands:
-    -   name: "print"
-        explanation: "Scrivi esattamente quello che metti tra virgolette"
-        example: "Example: print 'Ciao benvenuta/o su Hedy.'"
-        demo_code: "print 'Ciao benvenuta/o su Hedy.'"
-    -   name: "ask"
-        explanation: "Chiedi qualcosa con `ask`."
-        example: "Esempio: colore is ask 'Qual è il tuo colore preferito?'"
-        demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
-            print colore ' è il tuo preferito!'
-    -   name: "if"
-        explanation: "Fai una scelta con `if`."
-        example: "Esempio: if colore is verde print 'carino!' else print 'mah'"
-        demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
-            if colore is verde print 'carino!' else print 'mah'
-    -   name: '{if} with turtle'
-        explanation: Make a choice with `{if}`
-        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
-        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
-    -   name: '{in}'
-        explanation: Check elements with `{in}`
-        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
     example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
     intro_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
     example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
