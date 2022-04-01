@@ -1,401 +1,358 @@
 1:
-  - name: "{print}"
-    explanation: "{print} something with `{print}`."
-    example: "Example: {print} Hello welcome to Hedy!"
-    demo_code: "{print} Hello welcome to Hedy!"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: {ask} What is your favorite color?"
-    demo_code: "{ask} What is your favorite color?"
-  - name: "{echo}"
-    explanation: "repeat something using `{echo}`."
-    example: "Example: {echo} so your favorite color is "
-    demo_code: |-
-      {ask} What is your favorite color?
-      {echo} so your favorite color is
-  - name: "{print} emojis"
-    explanation: "print an emoji with `{print}`"
-    example: "Example: {print} 🙋‍ 🌍 ❗"
-    demo_code: "{print} 🙋 🌍 ❗"
-  - name: "{forward}"
-    explanation: "Draw a line with `{forward}`."
-    example: "Example: {forward} 100"
-    demo_code: "{forward} 100"
-  - name: "{turn}"
-    explanation: "turn the drawing turtle with `{turn}`"
-    example: "Example: {turn}"
-    demo_code: |-
-      {forward} 25
-      {turn} {left}
-      {forward} 25
-      {turn} {right}
+    -   explanation: Tampilkan sesuatu dengan `print`.
+        example: 'Contoh: print Halo selamat datang di Hedy!'
+        demo_code: print Halo selamat datang di Hedy!
+        name: '{print}'
+    -   explanation: Tanyakan sesuatu dengan `ask`
+        example: 'Contoh: ask Apa warna favoritmu?'
+        demo_code: ask Apa warna favoritmu?
+        name: '{ask}'
+    -   explanation: Ulangi sesuatu dengan `echo`
+        example: 'Contoh: echo maka warna favoritmu adalah '
+        demo_code: |-
+            ask Apa warna favoritmu?
+            echo maka warna favoritmu adalah
+        name: '{echo}'
+    -   name: '{print} emojis'
+        explanation: print an emoji with `{print}`
+        example: 'Example: {print} 🙋‍ 🌍 ❗'
+        demo_code: '{print} 🙋 🌍 ❗'
+    -   explanation: Draw a line with `{forward}`.
+        example: 'Example: {forward} 100'
+        demo_code: '{forward} 100'
+        name: '{forward}'
+    -   name: '{turn}'
+        explanation: turn the drawing turtle with `{turn}`
+        example: 'Example: {turn}'
+        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
 2:
-  - name: "{is}"
-    explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
-    example: "Example: name {is} Hedy."
-    demo_code: |-
-      name {is} Hedy
-      {print} welcome name
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`."
-    example: "Example: color {is} {ask} What is your favorite color?"
-    demo_code: |-
-      color {is} {ask} What is your favorite color?
-      {print} color is your favorite!
-  - name: "{sleep}"
-    explanation: "Let Hedy pause for a (couple of) second(s)."
-    example: "Example: {sleep} 2 "
-    demo_code: |-
-      {print} Let me think for one second...
-      {sleep}
-      {print} Hmm.. I need 3 more seconds...
-      {sleep} 3
-      {print} Eureka! Ive got it!
-  - explanation: "Give a number a name using `{is}`. You can choose the name yourself."
-    example: "Example: angle {is} 90"
-    demo_code: |-
-      angle {is} 90
-      {turn} angle
-      {forward} 100
-    name: is - turtle
+    -   explanation: Berikan sebuah kata nama untuk digunakan di program dengan menggunakan `is`
+        example: 'Contoh: nama is Hedy'
+        demo_code: |-
+            nama is Hedy
+            print selamat datang nama
+        name: '{is}'
+    -   explanation: Tanyakan sesuatu dengan `ask`. Ingat, kamu harus memberikan jawabannya sebuah nama menggunakan `is`
+        example: 'Contoh: warna is ask Apa warna favoritmu?'
+        demo_code: |-
+            warna is ask Apa warna favoritmu?
+            print warna ini kesukaanmu
+        name: '{ask}'
+    -   explanation: Let Hedy pause for a (couple of) second(s).
+        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+        name: '{sleep}'
+        example: 'Example: {sleep} 2 '
+    -   explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        example: 'Example: angle {is} 90'
+        name: is - turtle
+        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
-  - name: choose_random
-    explanation: Choose a random word from a group with `{at}` and `{random}`
-    example: "Example: animals {is} dog, cat, kangaroo."
-    demo_code: |-
-      animals {is} dog, cat, kangaroo
-      {print} animals {at} {random}
-      - name: "{add}"
-        explanation: "add an item to a list"
-        example: "Example: {add} dog {to_list} animals"
+    -   explanation: Pilih satu kata acak dari kumpulan kata dengan `at` dan `random`
+        example: 'Contoh: hewan is anjing, kucing, kangguru'
         demo_code: |-
-          animals {is} cow, cat
-          {add} dog {to_list} animals
-      - name: "{remove}"
-        explanation: "remove an item from a list"
-        example: "Example: {remove} dog {from} animals"
-        demo_code: |-
-          animals {is} cat, dog, cow
-          {remove} dog {from} animals
+            hewan is anjing, kucing, kangguru
+            print hewan at random
+        name: choose_random
+    -   name: '{add}'
+        explanation: add an item to a list
+        example: 'Example: {add} dog {to_list} animals'
+        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    -   demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+        name: '{remove}'
+        explanation: remove an item from a list
+        example: 'Example: {remove} dog {from} animals'
 4:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{is}"
-    explanation: "Give a name to some text and `{print}` without quotation marks"
-    example: "Example: name {is} Hedy."
-    demo_code: |-
-      name {is} Hedy
-      {print} 'my name is ' name
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color {is} {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {print} color ' is your favorite!'
+    -   explanation: Tampilkan sama persis dengan menggunakan tanda kutip
+        example: "Contoh: print 'Halo selamat datang di Hedy'"
+        demo_code: print 'Halo selamat datang di Hedy'
+        name: '{print}'
+    -   explanation: Berikan sebuah nama ke sebuah teks dan `print` tanpa tanda kutip
+        example: 'Contoh: nama is Hedy'
+        demo_code: |-
+            nama is Hedy
+            print 'nama saya adalah ' nama
+        name: '{is}'
+    -   explanation: Tanyakan sesuatu dengan `ask`
+        example: "Contoh: warna is ask 'Apa warna favoritmu?'"
+        demo_code: |-
+            warna is ask 'Apa warna favoritmu?'
+            print warna ' ini adalah kesukaanmu!'
+        name: '{ask}'
 5:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color {is} {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {print} color ' {is} your favorite!'
-  - name: "{if}"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
-  - name: "{if} with turtle"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} answer {is} far {forward} 100 {else} {forward} 5"
-    demo_code: |-
-      answer {is} {ask} 'How far should I walk?'
-      {if} answer {is} far {forward} 100 {else} {forward} 5
-  - name: "{in}"
-    explanation: "Check elements with `{in}`"
-    example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      pretty_colors {is} green, yellow
-      color {is} {ask} 'What {is} your favorite color?'
-      {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+    -   explanation: Tampilkan sama persis dengan menggunakan tanda kutip
+        example: "Contoh: print 'Halo selamat datang di Hedy'"
+        demo_code: print 'Halo selamat datang di Hedy'
+        name: '{print}'
+    -   explanation: Tanyakan sesuatu dengan `ask`
+        example: "Contoh: warna is ask 'Apa warna favoritmu?'"
+        demo_code: |-
+            warna is ask 'Apa warna favoritmu?'
+            print warna ' ini adalah kesukaanmu!'
+        name: '{ask}'
+    -   explanation: Ambillah sebuah pilihan dengan `if`
+        example: "Contoh: if warna is hijau print 'cantik!' else print 'meh!'"
+        demo_code: |-
+            warna is ask 'Apa warna favorit kamu?'
+            if warna is hijau print 'cantik!' else print 'meh!'
+        name: '{if}'
+    -   name: '{if} with turtle'
+        explanation: Make a choice with `{if}`
+        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
+        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    -   name: '{in}'
+        explanation: Check elements with `{in}`
+        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
-  - name: "{ask}"
-    explanation: "{ask} for a calculation and check whether it is correct."
-    example: "Example: answer {is} {ask} 'What is 10 plus 10?'"
-    demo_code: |-
-      answer = {ask} 'What is 10 plus 10?'
-      {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
-  - name: "`{ask}` {and} `{if}` turtle"
-    explanation: "{ask} the user how many angles they want"
-    example: "Example: angles {is} {ask} 'How many angles?'"
-    demo_code: |-
-      angles = {ask} 'How many angles?'
-      angle = 360 / angles
-      {forward} 50
+    -   explanation: Tampilkan sama persis menggunakan tanda kutip satu
+        example: "Contoh: print '5 kali 5 adalah ' 5 * 5"
+        demo_code: print '5 kali 5 adalah ' 5 * 5
+        name: '{print}'
+    -   explanation: Tanyakan hasil suatu perhitungan dan cek apakah hasilnya benar
+        example: "Contoh: jawaban = ask 'Apa hasil dari 10 tambah 10?'"
+        demo_code: |-
+            jawaban = ask 'Apa hasil dari 10 tambah 10?'
+            if jawaban is 20 print 'Yeah!' else print 'Ups'
+        name: '{ask}'
+    -   name: '`{ask}` {and} `{if}` turtle'
+        explanation: '{ask} the user how many angles they want'
+        example: "Example: angles {is} {ask} 'How many angles?'"
+        demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
 7:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color = {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color = {ask} 'What is your favorite color?'
-      {print} color ' is your favorite!'
-  - name: "{if}"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      color = {ask} 'What is your favorite color?'
-      {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
-  - name: "{repeat} - turtle"
-    explanation: "repeat a line of code with `{repeat}`."
-    example: "Example: {repeat} 3 {times} {forward} 10"
-    demo_code: |-
-      {repeat} 3 {times} {forward} 10
+    -   explanation: Tampilkan sama persis menggunakan tanda kutip satu
+        example: "Contoh: print 'Halo selamat datang di Hedy'"
+        demo_code: print 'Halo selamat datang di Hedy'
+        name: '{print}'
+    -   explanation: Tanyakan sesuatu dengan `ask`
+        example: "Contoh: warna = ask 'Apa warna favoritmu?'"
+        demo_code: |-
+            warna = ask 'Apa warna favoritmu?'
+            print warna ' adalah warna favoritmu!'
+        name: '{ask}'
+    -   explanation: Ambillah sebuah pilihan dengan `if`
+        example: "Contoh: if warna is hijau print 'cantik!' else print 'meh!'"
+        demo_code: |-
+            warna = ask 'Apa warna favorit kamu?'
+            if warna is hijau print 'cantik!' else print 'meh!'
+        name: '{if}'
+    -   explanation: Gabungan `repeat` dan `if`
+        example: "Contoh: if warna is hijau repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+        demo_code: |-
+            warna = ask 'Apa warna favoritmu?'
+            if warna is hijau repeat 3 times print 'pretty!' else repeat 5 times print 'meh'
+        name: '{repeat} - turtle'
 8:
-  - name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
-  - name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-    example: "Example: answer {is} {ask} 'What is 5 plus 5?'"
-    demo_code: |-
-      answer = {ask} 'What is 5 plus 5?'
-      {if} answer {is} 10
-          {print} 'Well done!'
-          {print} 'Indeed, the answer was ' answer
-      else
-          {print} 'Oops!'
-          {print} 'The answer is 10'
-  - name: "`{repeat}` with turtle"
-    explanation: "{repeat} multiple lines"
-    example: "Example: draw a square"
-    demo_code: |-
-      {repeat} 4 {times}
-          {turn} 90
-          {forward} 50
+    -   explanation: Tampilkan sesuatu. Ingat untuk menggunakan tanda kutip satu jika ingin menampilkan teks sama persis.
+        example: "Contoh: print '5 kali 5 adalah ' 5 * 5"
+        demo_code: print '5 kali 5 adalah ' 5 * 5
+        name: '{print}'
+    -   explanation: Tanyakan jawaban dari sebuah penjumlahan dan cek apakah itu benar. Kita sekarang bisa menampilkan dua baris.
+        example: "Contoh: jawaban = ask 'Apa hasil dari 5 tambah 5?'"
+        demo_code: |-
+            jawaban = ask 'Apa hasil dari 5 tambah 5?'
+            if jawaban is 10
+                print 'Kerja bagus!'
+                print 'Betul, jawabannya adalah ' jawaban
+            else
+                print 'Ups!'
+                print 'Jawabannya adalah 10'
+        name: '{ask}'
+    -   example: 'Example: draw a square'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+        name: '`{repeat}` with turtle'
+        explanation: '{repeat} multiple lines'
 9:
-  - name: "`{if}` with multiple lines"
-    explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
-    example: "Example: answer = {ask} 'What is 20 plus 20?'"
-    demo_code: |-
-      answer = {ask} 'What is 20 plus 20?'
-      {if} answer {is} 20
-          {print} 'Well done!!'
-          {print} 'The answer is indeed' answer
-      else
-          {print} 'Wrong'
-          {print} 'The answer is 20'
-  - name: "`{repeat}` and turtle"
-    explanation: "{repeat} multiple lines"
-    example: "Example: create a square"
-    demo_code: |-
-      {repeat} 4 {times}
-          {turn} 90
-          {forward} 50
+    -   name: '`if` dengan beberapa baris'
+        explanation: Cek apakah jawaban dari penjumlahan yang ditanyakan dengan `ask` benar. Sekarang kita menampilkan dua baris.
+        example: "Contoh: jawaban = ask 'Apa hasil dari 20 tambah 20?'"
+        demo_code: |-
+            jawaban = ask 'Apa hasil dari 20 tambah 20?'
+            if jawaban is 20
+                print 'Bagus!!'
+                print 'Jawabannya betul' jawaban
+            else
+                print 'Salah'
+                print 'Jawabannya adalah 20'
+    -   name: '`repeat` dan kura-kura'
+        explanation: Ulangi beberapa kali
+        example: 'Contoh: buatlah sebuah kotak'
+        demo_code: |-
+            repeat 4 times
+                turn 90
+                forward 50
 10:
-  - name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
-  - name: "{for} with a list"
-    explanation: "print all things in a list "
-    example: "Example: {for} animal {in} animals"
-    demo_code: |-
-      animals {is} dog, cat, blobfish
-      {for} animal {in} animals
-        {print} 'I love ' animal
+    -   name: print
+        explanation: Menampilkan sesuatu. Ingat untuk menggunakan tanda kutip satu untuk menampilkan teks apa adanya.
+        example: "Example: print '5 kali 5 adalah ' 5 * 5"
+        demo_code: print '5 kali 5 adalah ' 5 * 5
+    -   name: for dengan daftar
+        explanation: menampilkan semua barang dari sebuah daftar
+        example: 'Contoh: for hewan in hewanhewan'
+        demo_code: |-
+            hewanhewan is anjing, kucing, ikan
+            for hewan in hewanhewan
+              print 'Aku suka ' hewan
 11:
-  - name: "{for} loop"
-    explanation: "We can use `{for}` with a {range}"
-    example: "for counter {in} {range} 1 {to} 5"
-    demo_code: |-
-      {for} counter {in} {range} 1 {to} 5
-          {print} counter
-  - name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-    example: "Example: answer = {ask} 'What is 5 plus 5?'"
-    demo_code: |-
-      answer = {ask} 'What is 5 plus 5?'
-      {if} answer {is} 10
-          {print} 'Well done!'
-          {print} 'Indeed, the answer was ' answer
-      else
-          {print} 'Oops!'
-          {print} 'The answer is 10'
+    -   name: Pengulangan `for`
+        explanation: Kami mengganti `repeat` dengan `for` dan menambahkan batasan untuk pembilang
+        example: for pembilang in range 1 to 5
+        demo_code: |-
+            for pembilang in range 1 to 5
+                print pembilang
+    -   explanation: Tanyakan jawaban dari sebuah penjumlahan dan cek apakah itu benar. Kita sekarang bisa menampilkan dua baris.
+        example: "Contoh: jawaban = ask 'Apa hasil dari 5 tambah 5?'"
+        demo_code: |-
+            jawaban = ask 'Apa hasil dari 5 tambah 5?'
+            if jawaban is 10
+                print 'Kerja bagus!'
+                print 'Betul, jawabannya adalah ' jawaban
+            else
+                print 'Ups!'
+                print 'Jawabannya adalah 10'
+        name: '{ask}'
 12:
-  - name: "float directly"
-    explanation: "Decimal numbers"
-    example: "{print} 2.5 + 2.5"
-    demo_code: |
-      {print} 'Calculate away!'
-      {print} 'Two and a half plus two and a half is...'
-      {print} 2.5 + 2.5
-  - name: "assign text"
-    explanation: "Text with quotation marks after ="
-    example: "name = 'Hedy'"
-    demo_code: |
-      name = 'Hedy the Robot'
-      {print} 'Hello ' name
-  - name: "quotes after {if} comparison"
-    explanation: "Text with quotation marks after {if}"
-    example: "name = 'Hedy'"
-    demo_code: |
-      name = {ask} 'Who are you?'
-      {if} name = 'Hedy'
-          {print} 'Hi there!'
-  - name: "quotes in list"
-    explanation: "A list with quotation marks"
-    example: "name = 'Hedy', 'Felienne'"
-    demo_code: |
-      superheroes = 'Iron Man', 'Batman', 'Superman'
-      {print} superheroes {at} {random}
+    -   name: Angka desimal langsung
+        explanation: Perhitungan dengan angka desimal
+        example: print 2.5 + 2.5
+        demo_code: |-
+            print 'Hitung langsung!'
+            print 'Dua setengah tambah dua setengah adalah...'
+            print 2.5 + 2.5
+    -   name: desimal di variabel
+        explanation: Menyimpan hasil perhitungan desimal
+        example: hasil = 2.5 + 2.5
+        demo_code: |-
+            jawaban = 2.5 + 2.5
+            print 'Hitung langsung!'
+            print 'Dua setengah tambah dua setengah adalah...'
+            print jawaban
+    -   name: quotes after {if} comparison
+        explanation: Text with quotation marks after {if}
+        example: name = 'Hedy'
+        demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
+    -   name: quotes in list
+        explanation: A list with quotation marks
+        example: name = 'Hedy', 'Felienne'
+        demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
 13:
-  - name: "{and}"
-    explanation: "Two parts both need to be correct"
-    example: "if 3+2 {is} 5 {and} 2+2 {is} 4"
-    demo_code: |-
-      answer1 = {ask} 'What is 3+2?'
-      answer2 = {ask} 'What is 2+2?'
-      {if} answer1 {is} 5 {and} answer2 {is} 4
-          {print} 'Both answers are correct!'
-      else
-          {print} 'At least one answer is wrong!'
-  - name: "{or}"
-    explanation: "At least 1 of the two parts need to be correct. If both are correct, it is also fine."
-    example: "if 3+2 {is} 5 {or} 2+2 {is} 4"
-    demo_code: |-
-      answer1 = {ask} 'What is 3+2?'
-      answer2 = {ask} 'What is 2+2?'
-      {if} answer1 {is} 5 {or} answer2 {is} 4
-          {print} 'At least one answer is correct!'
-      else
-          {print} 'Both answers are wrong!'
+    -   name: And
+        explanation: Kedua kondisi (kiri dan kanan dari perintah `and`) harus bernilai benar
+        example: if 3+2 is 5 and 2+2 is 4
+        demo_code: |-
+            jawaban1 = ask 'Apa hasil dari 3+2?'
+            jawaban2 = ask 'Apa hasil dari 2+2?'
+            if jawaban1 is 5 and jawaban2 is 4
+                print 'Kedua jawaban benar!'
+            else
+                print 'Paling tidak salah satu jawaban salah!'
+    -   name: Or
+        explanation: Perintah `or` memastikan bahwa paling tidak satu dari dua kondisi yang diberikan di kiri dan kanan `or` harus terpenuhi. Keduanya terpenuhi pun tidak masalah.
+        example: if 3+2 is 5 or 2+2 is 4
+        demo_code: |-
+            jawaban1 = ask 'Apa hasil dari 3+2?'
+            jawaban2 = ask 'Apa hasil dari 2+2?'
+            if jawaban1 is 5 or jawaban2 is 4
+                print 'Paling tidak salah satu jawaban benar!'
+            else
+                print 'Kedua jawaban salah!'
 14:
-  - name: "Smaller"
-    explanation: "We use the `<` to check if the first number is smaller than the second number."
-    example: "For example: age < 12"
-    demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age < 13
-          {print} 'You are younger than me!'
-  - name: "Bigger"
-    explanation: "We use the `>` to check if the first number is bigger than the second number."
-    example: "For example: age > 12"
-    demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age > 13
-          {print} 'You are older than me!'
-  - name: "Equal"
-    explanation: "We use the `==` to check if two things are the same."
-    example: "For example: answer == 25"
-    demo_code: |-
-      answer = {ask} 'What is 5 * 5?'
-      {if} answer == 25
-          {print} 'That {is} correct!'
-  - name: "Not equal"
-    explanation: "We use the `!=` to check if two things are not the same. "
-    example: "For example: answer != 25"
-    demo_code: |-
-      answer = {ask} 'What is 5 * 5?'
-      {if} answer != 25
-          {print} 'That is not correct!'
-
-  - name: "Smaller {or} equal"
-    explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
-    example: "For example: age <= 12"
-    demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age <= 12
-          {print} 'You are younger than me!'
-
-  - name: "Bigger or equal"
-    explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
-    example: "For example: age >= 14"
-    demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age >= 14
-          {print} 'You are older than me!'
+    -   name: Lebih kecil
+        explanation: Kita menggunakan `<` untuk mengecek apakah angka pertama lebih kecil daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih kecil dari 15, kita menggunakan `variabel < 15`.
+        example: 'Sebagai contoh: umur < 12'
+        demo_code: |-
+            umur = ask 'Berapa umur mu?'
+            if umur < 13
+                print 'Kamu lebih muda daripada aku!'
+    -   name: Lebih besar
+        explanation: Kita menggunakan `>` untuk mengecek apakah angka pertama lebih besar daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih besar dari 15, kita menggunakan `variabel > 15`.
+        example: 'Sebagai contoh: umur > 12'
+        demo_code: |-
+            umur = ask 'Berapa umur mu?'
+            if umur > 13
+                print 'Kamu lebih tua daripada aku!'
+    -   name: Equal
+        explanation: We use the `==` to check if two things are the same.
+        example: 'For example: answer == 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+    -   name: Not equal
+        example: 'For example: answer != 25'
+        explanation: 'We use the `!=` to check if two things are not the same. '
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+    -   explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+        example: 'For example: age <= 12'
+        name: Smaller {or} equal
+        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+    -   name: Bigger or equal
+        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+        example: 'For example: age >= 14'
 15:
-  - name: "{while}"
-    explanation: "We can use the `{while}` loop with not equal"
-    example: "Example: {while} correct_answer != 25"
-    demo_code: |-
-      answer = 0
-      {while} answer != 25
-          answer = {ask} 'What is 5 times 5?'
-      {print} 'A correct answer has been given'
-  - name: "Smaller {while}"
-    explanation: "We can also use the `{while}` loop with `<` and `>`. "
-    example: "For example: {while} count < 3"
-    demo_code: |-
-      count = 1
-      {while} count < 3
-          {print} 'We do this ' 3 - count ' more times'
-          count = count + 1
-      {print} 'We are done'
+    -   name: Pengulangan while dengan boolean
+        explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`
+        example: 'Contoh: while jawaban_benar is False'
+        demo_code: |-
+            jawaban = 0
+            while jawaban != 25
+                jawaban = ask 'Apa hasil 5 kali 5?'
+            print 'Sebuah jawaban benar telah diberikan'
+    -   name: Pengulangan while dengan cakupan lebih kecil
+        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang = pembilang + 1` untuk sekarang.
+        example: 'Sebagai contoh: while pembilang < 3'
+        demo_code: |-
+            pembilang = 1
+            while pembilang < 3
+                print 'Kita lakukan ini ' 3 - pembilang ' kali lagi'
+                pembilang = pembilang + 1
+            print 'Kita selesai'
 16:
-  - name: "square brackets"
-    explanation: "Lists with square brackets"
-    example: "For example: fruit = ['apple', 'banana', 'cherry']"
-    demo_code: |-
-      fruit = ['apple', 'banana', 'cherry']
-      {print} fruit
-  - name: "Get an item from a list"
-    explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
-    example: "For example: firstfruit = fruit[1]"
-    demo_code: |-
-      fruit = ['banana', 'apple', 'cherry']
-      firstfruit = fruit[1]
-      {print} firstfruit
-  - name: "Get a random item from a list"
-    explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
-    example: "For example: random_fruit {is} fruit[random]"
-    demo_code: |-
-      fruit = ['banana', 'apple', 'cherry']
-      random_fruit = fruit[random]
-      {print} random_fruit
+    -   name: Kurung siku
+        explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
+        example: "Sebagai contoh: buah = ['apel', 'pisang', 'ceri']"
+        demo_code: |-
+            buah = ['apel', 'pisang', 'ceri']
+            print buah
+    -   name: Mengambil sebuah nilai dari dalam list
+        explanation: Untuk mengambil sebuah nilai dalam list, kita menggunakan [posisi] jadi buah[1] artinya mengambil buah pertama dari dalam list!
+        example: 'Sebagai contoh: buahpertama is buah[1]'
+        demo_code: |-
+            buah = ['apel', 'pisang', 'ceri']
+            buahpertama = buah[1]
+            print buahpertama
+    -   name: Mengambil sebuah nilai dari dalam list secara acak
+        explanation: Untuk mengambil sebuah nilai dalam list secara acak, kita menggunakan [random] jadi buah[random] artinya mengambil buah dari dalam list secara acak!
+        example: 'Sebagai contoh: buahacak is buah[random]'
+        demo_code: |-
+            buah = ['apel', 'pisang', 'ceri']
+            buaha_cak = buah[random]
+            print buaha_cak
 17:
-  - name: "{elif}"
-    explanation: "`{elif}`."
-    example: "{elif} a {is} 5:"
-    demo_code: |-
-      a = 2
-      {if} a == 1:
-          {print} 'a is 1'
-      {elif} a == 2:
-          {print} 'a is 2'
-      {else}:
-          {print} 'a is not 1 or 2'
-  - name: "{print}"
-    explanation: "When we use a `{for}`, we need to put a `:` behind the `{for}` statement!"
-    example: "for i {in} {range} 1 {to} 10:"
-    demo_code: |-
-      {for} i {in} {range} 1 {to} 12:
-          {print} i
-      {print} 'Ready or not, here I come!'
-  - name: "{if}"
-    explanation: "We need to do the same with all of our `{if}` statements"
-    example: "if colour {is} green:'"
-    demo_code: |-
-      colour = {ask} 'What is your favorite color?'
-      {if} colour == 'green':
-          {print} 'Your favorite colour is green'
-      {else}:
-          {print} 'Your favorite colour is not green'
+    -   explanation: Ketika kita menggunakan `for`, kita perlu menambahkan `:` diakhir statemen `for`
+        example: 'for i in range 1 to 10:'
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'Siap atau tidak, aku datang!'
+        name: '{elif}'
+    -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
+        example: 'if warna is hijau:'
+        demo_code: |-
+            warna = 'hijau'
+            if warna is 'hijau':
+                print 'Warnanya hijau'
+            else:
+                print 'Warnanya bukan hijau'
+        name: '{print}'
+    -   explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
+        example: 'elif a is 5:'
+        demo_code: |-
+            a = 2
+            if a is 1:
+                print 'a bernilai 1'
+            elif a is 2:
+                print 'a bernilai 2'
+            else:
+                print 'a bukan bernilai 1 atau 2'
+        name: '{if}'
 18:
   - name: "{print}"
     explanation: "With `{print}` you need to use parentheses"
