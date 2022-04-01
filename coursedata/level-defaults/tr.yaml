@@ -35,19 +35,6 @@
 6:
     start_code: "{print} '5 times 5 is ' 5 * 5"
     intro_text: "`{ask}`, `{print}` and `{if}` still work as in level 5.\n But in level 6 you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The {times} is a bit different, because there is no {times} symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n\n ## Example Hedy code\n ```\n {print} '5 plus 5 is ' 5 + 5\n {print} '5 minus 5 is ' 5 - 5\n {print} '5 {times} 5 is ' 5 * 5\n ```\n\n We also make a change in storing! You may now use `=` instead of  `{is}` when we store a name or a number, like this:\n\n ```\n name = Hedy\n answer = 20 + 4\n ```\n"
-    commands:
-    -   name: '{print}'
-        explanation: print exactly using quotation marks
-        example: "Example: {print} '5 times 5 is ' 5 * 5"
-        demo_code: "{print} '5 times 5 is ' 5 * 5"
-    -   name: '{ask}'
-        explanation: '{ask} for a calculation and check whether it is correct.'
-        example: "Example: answer {is} {ask} 'What is 10 plus 10?'"
-        demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
-    -   name: '`{ask}` {and} `{if}` turtle'
-        explanation: '{ask} the user how many angles they want'
-        example: "Example: angles {is} {ask} 'How many angles?'"
-        demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
     example_code: "## Example Hedy code\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
     intro_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
     example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"

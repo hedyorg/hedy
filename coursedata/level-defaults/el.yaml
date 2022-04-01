@@ -200,17 +200,6 @@
         {for} counter {in} {range} 1 {to} 5
             {print} counter
     intro_text: 'Η `print` λειτουργεί ακριβώς όπως και πριν, όμως η `repeat` τώρα αντικαθίσταται από τη `for`! Θα χρησιμοποιείς `for i in range 1 to 5`, αντί για `repeat 5 times`. Μπορείς επίσης να χρησιμοποιείς το `i` στο πρόγραμμα σου! Θυμήσου να χρησιμοποιείς εσοχές ύστερα από κάθε δήλωση `for` και `if` (Αυτό σημαίνει να ξεκινάς μια πρόταση με 4 κενά)'
-    commands:
-    -   name: 'repeat'
-        explanation: 'αντικαθιστούμε τη `repeat` με τη `for`'
-        example: 'for i in range 1 to 10'
-        demo_code: |-
-            {for} counter {in} {range} 1 {to} 5
-                {print} counter
-    -   name: '{ask}'
-        demo_code: "answer = {ask} 'Πόσο κάνει 5 και 5;'\n{if} answer {is} 10\n    {print} 'Πολύ σωστά!'\n    {print} 'Πράγματι, η απάντηση ήταν  ' answer\nelse\n    {print} 'Λάθος!'\n    {print} 'Η απάντηση είναι 10'"
-        explanation: ζήτα μια απάντηση για ένα  άθροισμα  και έλεγξε αν είναι σωστή. Μπορείς τώρα να εμφανίσεις 2 γραμμές.
-        example: "Παράδειγμα : answer = {ask} 'Πόσο κάνει 5 και 5;'"
     example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
 12:
     start_code: |-
