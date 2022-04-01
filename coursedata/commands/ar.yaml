@@ -30,70 +30,60 @@
     explanation: turn the drawing turtle with `{turn}`
     name: '{turn}'
 2:
-  - name: "{is}"
-    explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
-    example: "Example: name {is} Hedy."
-    demo_code: |-
-      name {is} Hedy
-      {print} welcome name
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`."
-    example: "Example: color {is} {ask} What is your favorite color?"
-    demo_code: |-
-      color {is} {ask} What is your favorite color?
-      {print} color is your favorite!
-  - name: "{sleep}"
-    explanation: "Let Hedy pause for a (couple of) second(s)."
-    example: "Example: {sleep} 2 "
-    demo_code: |-
-      {print} Let me think for one second...
-      {sleep}
-      {print} Hmm.. I need 3 more seconds...
-      {sleep} 3
-      {print} Eureka! Ive got it!
-  - explanation: "Give a number a name using `{is}`. You can choose the name yourself."
-    example: "Example: angle {is} 90"
-    demo_code: |-
-      angle {is} 90
-      {turn} angle
-      {forward} 100
-    name: is - turtle
+    -   name: هو
+        explanation: اعط اسما لاي كلمة تريد استخدامها في البرنامج من خلال الأمر `هو`. بامكانك اختيار الاسم بنفسك.
+        example: 'مثال: اسمي هو هيدي'
+        demo_code: |-
+            اسمي هو هيدي
+            قول مرحبا اسمي
+    -   name: اسأل
+        explanation: اسأل عن شيء ما باستخدام `اسأل`. انتبه! يجب عليك أن تعطي الاجابة اسما باستخدام `هو`
+        example: 'مثال: لون هو اسأل ما لونك المفضل؟'
+        demo_code: |-
+            لون هو اسأل ما لونك المفضل؟ 
+            قول لون هو المفضل لديك
+    -   explanation: اعط اسما لرقم من خلال الأمر `هو`. بامكانك اختيار الاسم بنفسك.
+        example: 'مثال: زاوية هو 90'
+        demo_code: |-
+            انحناء هو 90 
+            انعطف انحناء
+            تقدم 100
+        name: هو
+    -   name: is - turtle
+        explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        example: 'Example: angle {is} 90'
+        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
-  - name: choose_random
-    explanation: Choose a random word from a group with `{at}` and `{random}`
-    example: "Example: animals {is} dog, cat, kangaroo."
-    demo_code: |-
-      animals {is} dog, cat, kangaroo
-      {print} animals {at} {random}
-      - name: "{add}"
-        explanation: "add an item to a list"
-        example: "Example: {add} dog {to_list} animals"
+    -   name: بشكل عشوائي
+        explanation: 'يختار كلمة من مجموعة او قائمة بشكل عشوائي '
+        example: 'مثال: حيوانات هو كلب، قطة، جمل'
         demo_code: |-
-          animals {is} cow, cat
-          {add} dog {to_list} animals
-      - name: "{remove}"
-        explanation: "remove an item from a list"
-        example: "Example: {remove} dog {from} animals"
-        demo_code: |-
-          animals {is} cat, dog, cow
-          {remove} dog {from} animals
+            صديقي هو احمد، خالد، حسن
+    -   name: '{add}'
+        explanation: add an item to a list
+        example: 'Example: {add} dog {to_list} animals'
+        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    -   example: 'Example: {remove} dog {from} animals'
+        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+        name: '{remove}'
+        explanation: remove an item from a list
 4:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{is}"
-    explanation: "Give a name to some text and `{print}` without quotation marks"
-    example: "Example: name {is} Hedy."
-    demo_code: |-
-      name {is} Hedy
-      {print} 'my name is ' name
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color {is} {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {print} color ' is your favorite!'
+    -   name: قول
+        explanation: يطبع محتوى ما بين علامات الاقتباس
+        example: "مثال: قول 'اهلا بكم ومرحبا في هيدي'"
+        demo_code: قول 'اهلا بكم ومرحبا في هيدي'
+    -   name: هو
+        explanation: اعط اسما لكلمة أو رقم معين. اطبع محتوى هذا الاسم بدون حاجة الى علامات اقتباس
+        example: 'مثال: اسمي هو هيدي '
+        demo_code: |
+            اسمي هو هيدي
+            قول 'انا اسمي ' اسمي
+    -   name: اسأل
+        explanation: اسأل عن شيء ما من خلال الأمر `اسأل`
+        example: "مثال: لوني هو اسأل 'ما هو لونك المفضل؟'"
+        demo_code: |-
+            لوني هو اسأل 'ما هو لونك المفضل؟'
+            قول لوني 'هو لوني المفضل'
 5:
   - name: "{print}"
     explanation: "print exactly using quotation marks"
