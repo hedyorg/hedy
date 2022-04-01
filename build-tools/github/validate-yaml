@@ -39,13 +39,13 @@ $pajv validate \
     -d "*.yaml"
 echo "------> Level default yaml files are valid"
 
-echo "------> Validating level commands"
-cd ../commands/
-$pajv validate \
-    --errors=text \
-    -s "commands.schema.json" \
-    -d "*.yaml"
-echo "------> Commands yaml files are valid"
+#echo "------> Validating level commands"
+#cd ../commands/
+#$pajv validate \
+#    --errors=text \
+#    -s "commands.schema.json" \
+#    -d "*.yaml"
+#echo "------> Commands yaml files are valid"
 
 echo "------> Validating quizzes"
 cd ../quizzes/
