@@ -195,23 +195,23 @@
       {for} animal {in} animals
         {print} 'I love ' animal
 11:
-  - name: "{for} loop"
-    explanation: "We can use `{for}` with a {range}"
-    example: "for counter {in} {range} 1 {to} 5"
-    demo_code: |-
-      {for} counter {in} {range} 1 {to} 5
-          {print} counter
-  - name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-    example: "Example: answer = {ask} 'What is 5 plus 5?'"
-    demo_code: |-
-      answer = {ask} 'What is 5 plus 5?'
-      {if} answer {is} 10
-          {print} 'Well done!'
-          {print} 'Indeed, the answer was ' answer
-      else
-          {print} 'Oops!'
-          {print} 'The answer is 10'
+    -   name: for loop
+        explanation: Nahradíme `repeat` za `for` a přidáme rozsah.
+        example: for pocitadlo in range 1  to 5
+        demo_code: |-
+            for pocitadlo in range 1  to 5
+                print pocitadlo
+    -   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
+        example: "Příklad: vysledek = ask 'Kolik je 5 plus 5?'"
+        demo_code: |-
+            vysledek = ask 'Kolik je 5 plus 5?'
+            if vysledek is 10
+                print 'Skvělá práce!'
+                print 'Výsledek opravdu je ' vysledek
+            else
+                print 'Ups, těsně vedle...'
+                print 'Správný výsledek je 10.'
+        name: '{ask}'
 12:
   - name: "float directly"
     explanation: "Decimal numbers"
@@ -240,138 +240,124 @@
       superheroes = 'Iron Man', 'Batman', 'Superman'
       {print} superheroes {at} {random}
 13:
-  - name: "{and}"
-    explanation: "Two parts both need to be correct"
-    example: "if 3+2 {is} 5 {and} 2+2 {is} 4"
-    demo_code: |-
-      answer1 = {ask} 'What is 3+2?'
-      answer2 = {ask} 'What is 2+2?'
-      {if} answer1 {is} 5 {and} answer2 {is} 4
-          {print} 'Both answers are correct!'
-      else
-          {print} 'At least one answer is wrong!'
-  - name: "{or}"
-    explanation: "At least 1 of the two parts need to be correct. If both are correct, it is also fine."
-    example: "if 3+2 {is} 5 {or} 2+2 {is} 4"
-    demo_code: |-
-      answer1 = {ask} 'What is 3+2?'
-      answer2 = {ask} 'What is 2+2?'
-      {if} answer1 {is} 5 {or} answer2 {is} 4
-          {print} 'At least one answer is correct!'
-      else
-          {print} 'Both answers are wrong!'
+    -   name: and
+        explanation: Obě tvrzení (nalevo i napravo od `and`) musí být pravdivé.
+        example: if 3+2 is 5 and 2+2 is 4
+        demo_code: |-
+            odpoved1 = ask 'Kolik je 3 + 2?'
+            odpoved2 = ask 'Kolik je 2 + 2?'
+            if odpoved1 is 5 and odpoved2 is 4
+                print 'Obě odpovědi jsou správně!'
+            else
+                print 'Minimálně jedna z odpovědí je špatně!'
+    -   name: or
+        explanation: Alespoň jedno z tvrzení (nalevo a napravo od `or`) musí být pravdivé, pokud platí obě, je to taky v pořádku.
+        example: if 3+2 is 5 or 2+2 is 4
+        demo_code: |-
+            odpoved1 = ask 'Kolik je 3 + 2?'
+            odpoved2 = ask 'Kolik je 2 + 2?'
+            if odpoved1 is 5 or odpoved2 is 4
+                print 'Alespoň jedna odpověď je správně!'
+            else
+                print 'Obě odpovědi jsou špatně!'
 14:
-  - name: "Smaller"
-    explanation: "We use the `<` to check if the first number is smaller than the second number."
-    example: "For example: age < 12"
-    demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age < 13
-          {print} 'You are younger than me!'
-  - name: "Bigger"
-    explanation: "We use the `>` to check if the first number is bigger than the second number."
-    example: "For example: age > 12"
-    demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age > 13
-          {print} 'You are older than me!'
-  - name: "Equal"
-    explanation: "We use the `==` to check if two things are the same."
-    example: "For example: answer == 25"
-    demo_code: |-
-      answer = {ask} 'What is 5 * 5?'
-      {if} answer == 25
-          {print} 'That {is} correct!'
-  - name: "Not equal"
-    explanation: "We use the `!=` to check if two things are not the same. "
-    example: "For example: answer != 25"
-    demo_code: |-
-      answer = {ask} 'What is 5 * 5?'
-      {if} answer != 25
-          {print} 'That is not correct!'
-
-  - name: "Smaller {or} equal"
-    explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
-    example: "For example: age <= 12"
-    demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age <= 12
-          {print} 'You are younger than me!'
-
-  - name: "Bigger or equal"
-    explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
-    example: "For example: age >= 14"
-    demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age >= 14
-          {print} 'You are older than me!'
+    -   name: Menší
+        explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.
+        example: 'Příklad: vek < 13'
+        demo_code: |-
+            vek = ask 'Kolik je ti let?'
+            if vek < 13
+                print 'Jsi mladší než já!'
+    -   name: Větší
+        explanation: Používáme `>`, abychom zjistili, jestli je první číslo větší než druhé. Například pokud chceme ověřit, že je proměnná větší než 15, použijeme `promenna > 15`.
+        example: 'Příklad: vek > 13'
+        demo_code: |-
+            vek = ask 'Kolik je ti let?'
+            if vek > 13
+                print 'Jsi mladší než já!'
+    -   name: Equal
+        explanation: We use the `==` to check if two things are the same.
+        example: 'For example: answer == 25'
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+    -   name: Not equal
+        example: 'For example: answer != 25'
+        explanation: 'We use the `!=` to check if two things are not the same. '
+        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+    -   example: 'For example: age <= 12'
+        explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+        name: Smaller {or} equal
+        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+    -   name: Bigger or equal
+        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+        example: 'For example: age >= 14'
+        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
 15:
-  - name: "{while}"
-    explanation: "We can use the `{while}` loop with not equal"
-    example: "Example: {while} correct_answer != 25"
-    demo_code: |-
-      answer = 0
-      {while} answer != 25
-          answer = {ask} 'What is 5 times 5?'
-      {print} 'A correct answer has been given'
-  - name: "Smaller {while}"
-    explanation: "We can also use the `{while}` loop with `<` and `>`. "
-    example: "For example: {while} count < 3"
-    demo_code: |-
-      count = 1
-      {while} count < 3
-          {print} 'We do this ' 3 - count ' more times'
-          count = count + 1
-      {print} 'We are done'
+    -   name: Pravdivostní while
+        explanation: Můžeme použít `while` cyklus s `True` a `False`.
+        example: 'Příklad: while spravna_odpoved is False'
+        demo_code: |-
+            odpoved = 0
+            while odpoved != 25
+                odpoved = ask 'Kolik je 5 * 5?'
+            print 'Dostala jsem správnou odpověď!'
+    -   name: While s operátory menší/větší než
+        explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
+        example: 'Příklad: while pocet < 3'
+        demo_code: |-
+            pocet = 1
+            while pocet < 3
+                print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
+                pocet = pocet + 1
+            print 'Hotovo'
 16:
-  - name: "square brackets"
-    explanation: "Lists with square brackets"
-    example: "For example: fruit = ['apple', 'banana', 'cherry']"
-    demo_code: |-
-      fruit = ['apple', 'banana', 'cherry']
-      {print} fruit
-  - name: "Get an item from a list"
-    explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
-    example: "For example: firstfruit = fruit[1]"
-    demo_code: |-
-      fruit = ['banana', 'apple', 'cherry']
-      firstfruit = fruit[1]
-      {print} firstfruit
-  - name: "Get a random item from a list"
-    explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
-    example: "For example: random_fruit {is} fruit[random]"
-    demo_code: |-
-      fruit = ['banana', 'apple', 'cherry']
-      random_fruit = fruit[random]
-      {print} random_fruit
+    -   explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
+        example: "Příklad: ovoce = ['jablko', 'banán', 'třešně']"
+        demo_code: |-
+            ovoce = ['jablko', 'banán', 'třešně']
+            print ovoce
+        name: square brackets
+    -   name: Vyber položku ze seznamu.
+        explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
+        example: 'Příklad: prvniovoce = ovoce[1]'
+        demo_code: |-
+            ovoce = ['jablko', 'banán', 'třešně']
+            prvni_ovoce = ovoce[1]
+            print prvni_ovoce
+    -   name: Získej náhodnou položku ze seznamu.
+        explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
+        example: 'Příklad: nahodneovoce is ovoce[random]'
+        demo_code: |-
+            ovoce = ['jablko', 'banán', 'třešně']
+            nahodne_ovoce = ovoce[random]
+            print nahodne_ovoce
 17:
-  - name: "{elif}"
-    explanation: "`{elif}`."
-    example: "{elif} a {is} 5:"
-    demo_code: |-
-      a = 2
-      {if} a == 1:
-          {print} 'a is 1'
-      {elif} a == 2:
-          {print} 'a is 2'
-      {else}:
-          {print} 'a is not 1 or 2'
-  - name: "{print}"
-    explanation: "When we use a `{for}`, we need to put a `:` behind the `{for}` statement!"
-    example: "for i {in} {range} 1 {to} 10:"
-    demo_code: |-
-      {for} i {in} {range} 1 {to} 12:
-          {print} i
-      {print} 'Ready or not, here I come!'
-  - name: "{if}"
-    explanation: "We need to do the same with all of our `{if}` statements"
-    example: "if colour {is} green:'"
-    demo_code: |-
-      colour = {ask} 'What is your favorite color?'
-      {if} colour == 'green':
-          {print} 'Your favorite colour is green'
-      {else}:
-          {print} 'Your favorite colour is not green'
+    -   explanation: Když používáme `for`, musíme na konec příkazu s ním dát `:`!
+        example: 'for i in range 1 to 10:'
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'Už jdu!'
+        name: '{elif}'
+    -   explanation: To stejné musíme udělat i u `if`.
+        example: 'if barva is zelená:'
+        demo_code: |-
+            barva = ask 'Jaká je tvoje nejoblíbenější barva?'
+            if barva is 'zelená':
+                print 'Barva je zelená.'
+            else:
+                print 'Barva není zelená.'
+        name: '{print}'
+    -   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
+        example: 'elif a is 5:'
+        demo_code: |-
+            a = 2
+            if a is 1:
+                print 'a je 1'
+            elif a is 2:
+                print 'a je 2'
+            else:
+                print 'a není ani 1 ani 2'
+        name: '{if}'
 18:
   - name: "{print}"
     explanation: "With `{print}` you need to use parentheses"
