@@ -190,27 +190,27 @@ adventures:
                 story_text_2: "## Utfordring\nKan du tenke deg flere linjer du kan legge til restaurantens kode? For eksempe, kan du spørre gjestene hva de har lyst å drikke, fortelle de prisen eller å ønske de et godt måltid?\n"
                 start_code: '# skriv koden din her'
             12:
-                story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
-                example_code: "## Example Hedy code\n\n```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drinks {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
+                story_text: "## Restaurant\nFra dette nivået av kan du bruke desimaltall for å gjøre menyen mer realistisk.\n"
+                example_code: "## Eksempel Hedykode\n\n```\npris = 0\nønsket_mat = {ask} 'What would you like to order?'\nønsket_drikke = {ask} 'What would you like to drink?'\n{if} ønsket_mat {is} 'hamburger'\n    pris = pris + 60.50\n{if} food {is} 'pizza'\n    pris = pris + 50.75\n{if} ønsket_drikke {is} 'vann'\n    pris = pris + 10.50\n{if} ønsket_drikke {is} 'brus'\n    pris = pris + 20.35\n{print} 'Det blir ' pris ' kroner, takk!'\n```\n"
                 start_code: '# skriv koden din her'
             11:
-                story_text: "## Restaurant\nWe can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.\n"
-                example_code: "## Example Hedy code\n\n```\n{print} 'Welcome to Restaurant Hedy!'\npeople = {ask} 'For how many people would you like to order?'\n{for} i {in} {range} 1 {to} people\n    {print} 'Order number ' i\n    food = {ask} 'What would you like to eat?'\n    {print} food\n    {if} food {is} fries\n        sauce = {ask} 'What kind of sauce would you like with that?'\n        {print} sauce\n    drinks = {ask} 'What would you like to drink?'\n    {print} drinks\nprice = 4 * people\n{print} 'That will be ' price ' dollars, please!'\n```\n"
+                story_text: "## Restaurant\nVi kan bruke `{for} i {in} {range} 1 {to} 5`til å skrive ut ordrene fra flere kunder på en ordnet måte.\n"
+                example_code: "## Eksempel Hedykode\n\n```\n{print} 'Velkommen til Restaurant Hedy!'\nantall_personer = {ask} 'Hvor mange personer er dere i dag?'\n{for} i {in} {range} 1 {to} antall_personer\n    {print} 'Ordre nummer ' i\n    ønsket_mat = {ask} 'Hva vil du ha å spise?'\n    {print} ønsket_mat\n    {if} ønsket_mat {is} pommes frites\n        dressing = {ask} 'Ønsker dere dressing med det?'\n        {print} dressing\n    drikke = {ask} 'Hva vil du ha å drikke?'\n    {print} drikke\npris = 40 * antall_personer\n{print} 'Det blir ' pris ' kroner, takk!'\n```\n"
                 start_code: '# skriv koden din her'
             10:
-                story_text: "## Restaurant\nIn this level you'll learn how to easily {ask} your guests' orders in a short code.\n"
-                example_code: "## Example Hedy code\n\n```\ncourses = appetizer, main course, dessert\n{for} course {in} courses\n    food = {ask} 'What would you like to eat as your ' course '?'\n    {print} food ' will be your ' course\n```\n"
-                story_text_2: "## Example Hedy code\n\nOf course, you could also order for multiple people!\n"
-                example_code_2: "```\ncourses = appetizer, main course, dessert\nnames = Timon, Onno\n{for} name {in} names\n    {for} course {in} courses\n        food = {ask} name ', what would you like to eat as your ' course '?'\n        {print} name ' orders ' food ' as their ' course\n```\n"
-                start_code: retter = forrett, hovedrett, desert
+                story_text: "## Restaurant\nPå dette nivået kan du lære hvordan å enkelt spørre om gjestenes ønsker i kort kode.\n"
+                example_code: "## Eksempel Hedykode\n\n```\nretter = forrett, hovedrett, dessert\n{for} rett {in} retter\n    ønsket_mat = {ask} 'Hva ønsker du til ' rett '?'\n    {print} ønsket_mat ' skal du få til ' rett\n```\n"
+                story_text_2: "## Eksempel Hedykode\n\nSelvfølgelig, du kan også bestille for flere personer!\n"
+                example_code_2: "```\nretter = forrett, hovedrett, dessert\nnavnene = Timon, Onno\n{for} navn {in} navnene\n    {for} rett {in} retter\n        ønsket_mat = {ask} navn ', hva vil du ha til ' rett '?'\n        {print} navn ' bestiller ' ønsket_mat ' til ' rett\n```\n"
+                start_code: retter = forrett, hovedrett, dessert
             9:
-                story_text: "## Restaurant\nIn this level you can use nesting to make your restaurant more realistic and more fun!\nFor example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!\nCheck out the example, and try this at your own virtual restaurant!\n"
-                example_code: "## Example Hedy code\n\n```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\nprice = 0\n{repeat} people {times}\n    food = {ask} 'What would you like to order?'\n    {print} food\n    {if} food {is} fries\n        price = price + 3\n        sauce = {ask} 'What kind of sauce would you like with your fries?'\n        {if} sauce {is} no\n            {print} 'no sauce'\n        {else}\n            price = price + 1\n            {print} 'with ' sauce\n    {if} food {is} pizza\n        price = price + 4\n{print} 'That will be ' price ' dollar'\n{print} 'Enjoy your meal!'\n```\n"
+                story_text: "## Restaurant\nPå dette nivået kan du putte `{if}` inni `{if}` for å gjøre restauranten din mer realistisk og gøy!\nDu kan for eksempel spørre om saus om noen bestiller pommes frites, men det passer kanskje ikke om noen bestiller lasagne!\nSjekk ut eksempelet og prøv dette på din egne virtuelle restaurant!\n"
+                example_code: "## Eksempel Hedykode\n\n```\n{print} 'Velkommen til Hedys restaurant!'\nantall_personer = {ask} 'Hvor mange er dere i dag?'\n{print} 'Supert!'\npris = 0\n{repeat} antall_personer {times}\n    ønsket_mat = {ask} 'Hva ønsker dere å bestille?'\n    {print} ønsket_mat\n    {if} ønsket_mat {is} pommes frites\n        pris = pris + 30\n        dressing = {ask} 'Ønsker dere dressing med det?'\n        {if} dressing {is} no\n            {print} 'ingen dressing'\n        {else}\n            pris = pris + 10\n            {print} 'med ' dressing\n    {if} ønsket_mat {is} pizza\n        pris = pris + 40\n{print} 'Det blir ' pris ' kroner'\n{print} 'Vel bekomme!'\n```\n"
                 start_code: '# skriv koden din her'
             8:
                 story_text: "## Restaurant\nPå dette nivået kan du lage din virtuelle restaurant enda mer forseggjort ved å reptere flere linjer med kode. Slik:\n"
-                example_code: "```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\n{repeat} people {times}\n    food = {ask} 'What would you like to order?'\n    {print} food\n{print} 'Thank you for ordering!'\n{print} 'Enjoy your meal!'\n```\n"
-                story_text_2: "## Challenge\nOf course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!\n"
+                example_code: "```\n{print} 'Velkommen til Hedys restaurant!'\nantall_personer = {ask} 'Hvor mange er dere i dag?'\n{print} 'Supert!'\n{repeat} antall_personer {times}\n    ønsker = {ask} 'Hva har dere lyst på?'\n    {print} ønsker\n{print} 'Takk for bestillingen!'\n{print} 'Vel bekomme!'\n```\n"
+                story_text_2: "## Utfordring\nSelvfølgelig, denne koden kan utvides med flere tin i menyen, tilbud om drikke, og/eller flere retter så legg til så mye du ønsker!\n"
                 start_code: '# skriv koden din her'
             6:
                 story_text: "## Restaurant\nPå dette nivået kan du bruke matte til å regne ut totalprisen på kundens bestilling. Dette vil gjøre den virtuelle restauranten mer realistisk.\n"
@@ -228,20 +228,20 @@ adventures:
                 example_code: "## Eksempel Hedys Restaurant\n```\n{print} 'Velkommen til Hedys Restaurant!'\n{print} 'I dag er det pizza og lasagne på menyen.'\nmaten {is} {ask} 'Hva har du lyst til å spise?'\n{print} 'Godt valg! ' maten ' er min favoritt!'\ntilbehør {is} {ask} 'Foretrekker du vegetar eller med kjøtt?'\n{print} maten ' med ' tilbehør ' skal bli!'\ndrikken {is} {ask} 'Vil du ha noe å drikke til?'\n{print} 'Takk for bestillingen.'\n{print} maten ' og ' drikken ' kommer snart!'\n```\n"
                 start_code: '# skriv koden din her'
             3:
-                story_text: "## Random Restaurant\nHaving trouble to decide what you wanna have for dinner? You can let Hedy choose for you!\nSimply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.\nYou can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?\n"
+                story_text: "## Random Restaurant\nHar du problemer med å bestemme hva du vil ha til middag? Du kan la Hedy bestemme for deg!\nLag en liste over dine favorittmåltid og Hedy kan tilfeldig plukke ut en middag til deg.\nDu kan også ha litt gøy ved å la Hedy velge prisen for middagen også. Hva blir det til middag i dag?`\n"
                 example_code: "## Eksempel Hedykode\n\n```\n{print} Velkommen til Hedys Tilfeldige Restaurant!\n{print} Den eneste restauranten som tilfeldig velger hva du får servert og hva det vil koste!\nforretter {is} salat, suppe, carpaccio\nhovedretter {is} pizza, rosenkål, spaghetti\ndesserter {is} brownies, iskrem, franske oster\ndrikker {is} cola, øl, vann\npriser {is} 10 kroner, 100 kroner, 1000 kroner\n{print} Du vil begynne med: forretter {at} {random}\n{print} Og så vil vi servere: hovedretter {at} {random}\n{print} Og til slutt: desserter {at} {random}\n{print} Til maten vil du få drikker {at} {random} å drikke\n{print} Det vil koste deg: priser {at} {random}\n{print} Takk og vel bekomme!\n```\n"
                 story_text_2: "## Allergier\nHar dine gjester noen allergier eller noen retter de ikke liker? Da kan du bruke `{remove}`-kommandoen til å fjerne ting fra menyen.\n"
                 example_code_2: "```\n{print} Mysteriemilkshake\nsmaker {is} jordbær, sjokolader, vanilje\nallergier {is} {ask} Er du allergisk til en av smakene?\n{remove} allergier {from} smaker\n{print} Du vil få en flavors {at} {random} milkshake\n```\n"
                 start_code: '# skriv koden din her'
             15:
-                story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
-                example_code: "## Example Hedy code\n\n```\n{print} 'Welcome at McHedy'\nmore = 'yes'\n{while} more == 'yes'\n    order = {ask} 'What would you like to order?'\n    {print} order\n    more = {ask} 'Would you like to order anything {else}?'\n{print} 'Thank you!'\n```\n"
+                story_text: "## Restaurant\nMed `{while}` kan du sørge for at kundene dine kan fortsette å bestille til de er ferdig.\n"
+                example_code: "## Eksempel Hedykode\n\n```\n{print} 'Velkommen til McHedy'\nmer = 'ja'\n{while} mer == 'ja'\n    ønsker = {ask} 'Hva vil du bestille?'\n    {print} ønsker\n    mer = {ask} 'Vil du ha noe mer?'\n{print} 'Takk!'\n```\n"
                 start_code: '# skriv koden din her'
             13:
-                story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
-                example_code: "## Example Hedy code\n```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
-                example_code_2: "## Example Hedy code\n```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
+                story_text: "## Restaurant\nPå dette nivået kan vi bruke de nye kommandoen til å oppgradere restauranten vår.\nVi bruker `{and}`til å se om to ting begge stemmer.\n"
+                example_code: "## Eksempel Hedykode\n```\npris = 100\nønsket_mat = {ask} 'Hva vil du ha å spise?'\nønsket_drikke = {ask} 'Hva ønsker du å drikke til maten?'\n{if} ønsket_mat {is} 'toast' {and} ønsket_drikke {is} 'juice'\n    {print} 'Det er på tilbudsmenyen'\n    pris = pris - 30\n{print} 'Det blir ' pris ' kroner'\n```\n"
+                story_text_2: "Vi bruker `{or}` til å sjekke om ihvertfall en av to ting stemmer.\n"
+                example_code_2: "## Eksempel Hedykode\n```\nønsket_drikke = {ask} 'Hva vil du ha å drikke?'\n{if} ønsket_drikke {is} 'vann' {or} ønsket_drikke {is} 'juice'\n    {print} 'Det er et sunt valg'\n```\n"
                 start_code: '# skriv koden din her'
         name: Restaurant
         description: Lag din egen virtuelle restaurant
