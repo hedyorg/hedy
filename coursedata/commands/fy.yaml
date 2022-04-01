@@ -1,34 +1,34 @@
 1:
-  - name: "{print}"
-    explanation: "Iets printen met `{print}`."
-    example: "Bijvoorbeeld: {print} Hallo welkom bij Hedy!"
-    demo_code: "{print} Hallo welkom bij Hedy!"
-  - name: "{ask}"
-    explanation: "Iets vragen met `{ask}`."
-    example: "Bijvoorbeeld: {ask} Wat is je lievelingskleur?"
-    demo_code: "{ask} Wat is je lievelingskleur?"
-  - name: "{echo}"
-    explanation: "Iets herhalen dat is ingetypt met `{echo}`."
-    example: "Bijvoorbeeld: {echo} dus je lievelingskleur is"
-    demo_code: |-
-      {ask} Wat is je lievelingskleur?
-      {echo} dus je lievelingskleur is
-  - name: "{print} emojis"
-    explanation: "print een emoji met `{print}`"
-    example: "Voorbeeld: {print} \U0001F64B‍ \U0001F30D ❗"
-    demo_code: "{print} \U0001F64B \U0001F30D ❗"
-  - name: "{forward}"
-    explanation: "Een lijn trekken met `{forward}`."
-    example: "Bijvoorbeeld: {forward} 100"
-    demo_code: "{forward} 100"
-  - name: "{turn}"
-    explanation: "De teken-schildpad draaien met `{turn}`"
-    example: "Bijvoorbeeld: {turn}"
-    demo_code: |-
-      {forward} 25
-      {turn} {left}
-      {forward} 25
-      {turn} {right}
+    -   name: "printe"
+        explanation: "Eat printe mei `{print}`."
+        example: "Foarbyld: {print} Hoi wolkom by Hedy!"
+        demo_code: "{print} Hoi wolkom by Hedy!"
+    -   name: "freegje"
+        explanation: "Eat freegje mei `{ask}`."
+        example: "Foarbyld: {ask} Wat is dyn favorite kleur?"
+        demo_code: "{ask} Wat is dyn favorite kleur?"
+    -   name: "echo"
+        explanation: "Eat werhelje mei `{echo}`."
+        example: "Foarbyld: echo Dus dyn favorite kleur is"
+        demo_code: |-
+            {ask} Wat is dyn favorite kleur?
+            {echo} Dus dyn favorite kleur is...
+    -   name: "foarút"
+        explanation: "Een line tekenje mei `{forward}`."
+        example: "Foarbyld: {forward} 100"
+        demo_code: "{forward} 100"
+    -   name: "draaie"
+        explanation: "De teken-skyldpod draaie mei `{turn}`"
+        example: "Foarbyld: {turn}"
+        demo_code: |-
+            {forward} 25
+            {turn} {left}
+            {forward} 25
+            {turn} {right}
+    -   example: 'Example: {turn}'
+        demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+        name: '{turn}'
+        explanation: turn the drawing turtle with `{turn}`
 2:
   - name: "{is}"
     explanation: "Een woord een naam geven met `{is}`. Je mag de naam zelf kiezen."
