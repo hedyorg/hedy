@@ -546,7 +546,7 @@ levels:
             -   "code": "\""
                 "feedback": "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
             -   "code": ","
-                "feedback": "Dit is een komma, je hebt een hoge komma nodig."
+                "feedback": "Dit is een komma, je hebt een aanhalingsteken nodig."
             correct_answer: "B"
             hint: "Kies het goede aanhalingsteken."
             question_score: '10'
@@ -1059,14 +1059,14 @@ levels:
             code: "..."
             mp_choice_options:
             -   "option_text": "repaet"
-                "feedback": No you can repeat a line.
+                "feedback": "fout gespeld"
             -   "option_text": "repete"
-                "feedback": Correct, one line at a time
+                "feedback": "fout gespeld"
             -   "option_text": "repite"
-                "feedback": In this level only one line at a time
+                "feedback": "fout gespeld"
             -   "option_text": "repeat"
-                "feedback": In this level you can only repeat one line at a time
-            correct_answer: "B"
+                "feedback": "Juist"
+            correct_answer: "D"
             hint: "Je spelt: repeat"
             question_score: '10'
         2:
@@ -1080,7 +1080,7 @@ levels:
             -   "code": "\""
                 "feedback": "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
             -   "code": ","
-                "feedback": "Dit is een komma, je hebt een hoge komma nodig."
+                "feedback": "Dit is een komma, je hebt een aanhalingsteken nodig."
             correct_answer: "B"
             hint: "Je spelt: repeat"
             question_score: '10'
@@ -1089,12 +1089,12 @@ levels:
             code: "repeat 100 times 'Hoi !'"
             mp_choice_options:
             -   "option_text": "Goed"
-                "feedback": No a word is missing
-            -   "option_text": "Fout"
-                "feedback": The word repeat is there, another word is missing
-            -   "option_text": Wrong, the word times is missing
-                "feedback": The word times is there, another word is missing.
-            -   "option_text": Wrong, the word print is missing
+                "feedback": Nope, er mist een woord
+            -   "option_text": "Fout, er moeten aanhalingstekens bij 100"
+                "feedback": 100 moet juist zonder aanhalingstekens
+            -   "option_text": Fout, het commando times mist
+                "feedback": times staat er wel, er mist een ander woord.
+            -   "option_text": Fout, het commando print mist
                 "feedback": Correct
             correct_answer: "D"
             hint: "Het antwoord is: repeat 100 times print 'Hoi'"
@@ -1106,15 +1106,15 @@ levels:
                 repeat 7 times print 'da ba dee, da ba dee'
             mp_choice_options:
             -   "code": "I'm"
-                "feedback": That's right !
+                "feedback": Goedzo !
             -   "code": "print"
-                "feedback": print is spelled correctly
+                "feedback": print is goed gespeld
             -   "code": "repeat"
-                "feedback": repeat is spelled correctly
+                "feedback": repeat is goed gespeld
             -   "code": "times"
-                "feedback": times is spelled correctly
+                "feedback": times is goed gespeld
             correct_answer: "A"
-            hint: "I'm is fout, je mag geen hoge komma's gebruiken"
+            hint: "I'm is fout, je mag geen aanhalingstekens gebruiken voor tekst"
             question_score: '10'
         5:
             question_text: "Is deze code goed of fout ?"
@@ -1122,9 +1122,9 @@ levels:
                 repeat 100 print 'Hedy is gaaf !'
             mp_choice_options:
             -   "option_text": "Goed"
-                "feedback": That's not it
+                "feedback": Nope, er mist een commando
             -   "option_text": "Fout"
-                "feedback": That's right !
+                "feedback": Correct!
             correct_answer: "B"
             hint: "Bij repeat hoort nog een ander commando"
             question_score: '10'
@@ -1151,9 +1151,9 @@ levels:
             hint: "Bekijk regel voor regel of er aanhalingstekens nodig zijn."
             question_score: '10'
         7:
-            question_text: "Als je dit liedje 'potje met vet' een paar keer wil kopiëren, welke zin moet je dan weglaten in de kopieën zodat de teller (2e couplet, 3e couplet etc) werkt ?"
+            question_text: "Hieronder code voor het liedje 'potje met vet'. Stel je wil de code een paar keer herhalen door deze te kopiëren, welke zin moet je dan weglaten in de kopieën zodat de teller (1e couplet, 2e couplet etc) werkt ?"
             code: |-
-                couplet is 1
+                couplet is 0
                 print 'Ik heb het potje met vet'
                 print 'al op de tafel gezet'
                 print 'Ik heb het'
@@ -1161,9 +1161,9 @@ levels:
                 print 'veeeeeet'
                 print 'al op de tafel gezet'
                 couplet is couplet + 1
-                print 'Door naar het ' couplet 'e couplet'
+                print 'Dit was het ' couplet 'e couplet'
             mp_choice_options:
-            -   "option_text": "couplet is 1"
+            -   "option_text": "couplet is 0"
                 "feedback": "Goed gezien ! Als deze blijft staan, zul je nooit verder kunnen tellen dan twee, want je zet de variabele couplet elke keer weer op 1."
                 "code": "We will We will\nROCK YOU !"
             -   "option_text": "repeat 4 times print 'potje'"
@@ -1180,50 +1180,50 @@ levels:
             question_score: '10'
 
         8:
-            mp_choice_options:
-            -   "feedback": Perfect, you can't use the repeat command here.
-                "code": "print 'Here comes the sun'\nprint 'Do do do do'\nprint 'Here comes the sun'\nprint 'And I say'\nprint 'Its alright'"
-            -   "code": "repeat 2 times print 'Here comes the sun'\nprint 'And I say'\nprint 'Its alright'"
-                "feedback": Where did the 'Do do do do' go ?
-            -   "code": "repeat 2 times print 'Here comes the sun'\nprint 'Do do do do'\nprint 'And I say'\nprint 'Its alright'"
-                "feedback": This is not in the right order
-            -   "feedback": This is not in the right order
-                "code": "repeat 2 times print 'Here comes the sun'\nrepeat 2 times print 'Do do'\nprint 'And I say'\nprint 'Its alright'"
-            hint: Repeat can only be used if you want the exact same line 2 (or more) times in a row.
+            question_text: "Welke Hedy code hoort bij dit resultaat"
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
-            question_text: What Hedy code belongs to this output ?
-            correct_answer: A
+            mp_choice_options:
+            -   "code": "print 'Here comes the sun'\nprint 'Do do do do'\nprint 'Here comes the sun'\nprint 'And I say'\nprint 'Its alright'"
+                "feedback": "Perfect, je kan het repeat commando hiet niet gebruiken."
+            -   "code": "repeat 2 times print 'Here comes the sun'\nprint 'And I say'\nprint 'Its alright'"
+                "feedback": "Waar is de 'Do do do do' gebleven?"
+            -   "code": "repeat 2 times print 'Here comes the sun'\nprint 'Do do do do'\nprint 'And I say'\nprint 'Its alright'"
+                "feedback": "Dit is niet de juiste volgorde.."
+            -   "code": "repeat 2 times print 'Here comes the sun'\nrepeat 2 times print 'Do do'\nprint 'And I say'\nprint 'Its alright'"
+                "feedback": "Dit is niet de juiste volgorde.."
+            hint: "Repeat kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren."
+            correct_answer: "A"
             question_score: '10'
         9:
+            question_text: Welke Hedy code hoort bij dit resultaat ?
+            code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp !\nHelp !\nHelp !\nPlease help me !"
             mp_choice_options:
-            -   "feedback": You repeated the wrong line
-                "code": "print 'Batman was flying though Gotham. '\nprint 'When suddenly he heard someone screaming...'\nprint 'Help !'\nrepeat 3 times print 'Please help me !'"
-            -   "code": "print 'Batman was flying though Gotham.' \nprint 'When suddenly he heard someone screaming...'\nrepeat 3 times 'Help !'\nprint 'Please help me !'\n"
-                "feedback": \"You missed the word print in line 3\"
-            -   "feedback": You forgot about the quotation marks
-                "code": "print Batman was flying though Gotham.\nprint When suddenly he heard someone screaming...\nrepeat 3 times print Help !\nprint Please help me !"
-            -   "feedback": Perfect
-                "code": "print 'Batman was flying though Gotham.' \nprint 'When suddenly he heard someone screaming...'\nrepeat 3 times print 'Help !'\nprint 'Please help me !'"
+            -   "code": "print 'Batman was flying through Gotham. '\nprint 'When suddenly he heard someone screaming...'\nprint 'Help !'\nrepeat 3 times print 'Please help me !'"
+                "feedback": "You repeated the wrong line"
+            -   "code": "print 'Batman was flying through Gotham.' \nprint 'When suddenly he heard someone screaming...'\nrepeat 3 times 'Help !'\nprint 'Please help me !'\n"
+                "feedback": "You missed the word print in line 3"
+            -   "code": "print Batman was flying through Gotham.\nprint When suddenly he heard someone screaming...\nrepeat 3 times print Help !\nprint Please help me !"
+                "feedback": "You forgot about the quotation marks"
+            -   "code": "print 'Batman was flying through Gotham.' \nprint 'When suddenly he heard someone screaming...'\nrepeat 3 times print 'Help !'\nprint 'Please help me !'"
+                "feedback": "Perfect"
             question_score: '10'
-            hint: "'Help !' is repeated 3 times."
-            question_text: What Hedy code belongs to this output ?
-            code: "Batman was flying though Gotham.\nWhen suddenly he heard someone screaming...\nHelp !\nHelp !\nHelp !\nPlease help me !"
-            correct_answer: D
+            hint: "'Help !' wordt 3x herhaald."
+            correct_answer: "D"
         10:
-            question_score: '10'
-            question_text: What Hedy code belongs to this output ?
+            question_text: Welke resultaat hoort bij deze Hedy code?
+            code: "hoi is 'hallo allemaal ik ben Hedy' \nrepeat 3 times print hoi"
             mp_choice_options:
-            -   "code": "repeat 2 times 'if youre happy and you know it clap your hands'\nprint 'if youre happy and you know it and you really want to show it'\nprint 'if youre happy and you know it clap your hands'"
-                "feedback": Almost ! the first line needs an extra word
-            -   "code": "repeat 2 times print 'if youre happy and you know it clap your hands'\nprint 'if youre happy and you know it and you really want to show it'\nprint 'if youre happy and you know it clap your hands'"
-                "feedback": Great !
-            -   "code": "repeat 3 times print 'if youre happy and you know it clap your hands'\nprint 'if youre happy and you know it and you really want to show it'"
-                "feedback": This is not in the right order.
-            -   "code": "repeat 4 times 'if youre happy and you know it'\nrepeat 2 times 'clap your hands'\nprint 'and you really want to show it'\nprint 'clap your hands'"
-                "feedback": This is not in the right order.
-            correct_answer: B
-            hint: Mind the order of the sentences.
-            code: "if youre happy and you know it clap your hands\nif youre happy and you know it clap your hands\nif youre happy and you know it and you really want to show it\nif youre happy and you know it clap your hands"
+            -   "code": "hoi \nhoi \nhoi"
+                "feedback": "'hoi' is een variabele"
+            -   "code": "hallo allemaal ik ben Hedy"
+                "feedback": "de code wordt herhaald"
+            -   "code": "hallo allemaal ik ben Hedy \nhallo allemaal ik ben Hedy \nhallo allemaal ik ben Hedy"
+                "feedback": "Correct!"
+            -   "code": "hoi allemaal ik ben Hedy \nhoi allemaal ik ben Hedy \nhoi allemaal ik ben Hedy"
+                "feedback": "hoi wordt niet geprint."
+            correct_answer: C
+            question_score: '10'
+            hint: Let op wat er wordt herhaald.
     8:
         1:
             question_text: "Welke uitvoer komt er uit Hedy als je deze code uitvoert ?"

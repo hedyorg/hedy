@@ -4,22 +4,22 @@
 <div class="px-8 py-12 relative">
     <div class="px-8">
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-8 w-3/4 mx-auto" action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-            <h2 class="py-2">{{ content.mailing_title }}</h2>
+            <h2 class="py-2">{{_('mailing_title')}}</h2>
             <div>
                 <div class="flex flex-row items-center justify-center mb-2">
-                    <label for="mce-EMAIL" class="inline-block w-40">{{ content.mail }}<span class="asterisk">*</span></label>
+                    <label for="mce-EMAIL" class="inline-block w-40">{{_('email')}}<span class="asterisk">*</span></label>
                     <input type="email" value="" name="EMAIL" class="inline-block w-full px-2 py-1 rounded-lg" id="mce-EMAIL" required>
                 </div>
                 <div class="flex flex-row items-center justify-center mb-2">
-                    <label for="mce-FNAME" class="inline-block w-40">{{ content.surname }}</label>
+                    <label for="mce-FNAME" class="inline-block w-40">{{_('surname')}}</label>
                     <input type="text" value="" name="FNAME" class="inline-block w-full px-2 py-1 rounded-lg" id="mce-FNAME">
                 </div>
                 <div class="flex flex-row items-center justify-center mb-2">
-                    <label for="mce-LNAME" class="inline-block w-40">{{ content.lastname }}</label>
+                    <label for="mce-LNAME" class="inline-block w-40">{{_('lastname')}}</label>
                     <input type="text" value="" name="LNAME" class="inline-block w-full px-2 py-1 rounded-lg" id="mce-LNAME">
                 </div>
                 <div class="flex flex-row items-center justify-center mb-2">
-                    <label for="mce-COUNTRY" class="inline-block w-40">{{ content.country }}</label>
+                    <label for="mce-COUNTRY" class="inline-block w-40">{{_('country')}}</label>
                     <input type="text" value="" name="COUNTRY" class="inline-block w-full px-2 py-1 rounded-lg" id="mce-COUNTRY">
                 </div>
                 <div class="flex flex-row items-center justify-center mb-2">
@@ -28,11 +28,11 @@
                 </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_22a3ce4e09535f82f587a7118_57f3b3c090" tabindex="-1" value=""></div>
                 <div class="flex flex-row">
-                    <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="green-btn mb-4">{{ content.subscribe }}</button>
-                    <p class="ltr:ml-4 rtl:mr-4 text-base">{{ content.required }}</p>
+                    <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="green-btn mb-4">{{_('subscribe')}}</button>
+                    <p class="ltr:ml-4 rtl:mr-4 text-base">{{_('required_field')}}</p>
                 </div>
             </div>
-            <a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" target="_blank" title="View previous campaigns">{{ content.archive }}</a>
+            <a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" target="_blank" title="View previous campaigns">{{_('previous_campaigns')}}</a>
         </form>
         <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='COUNTRY';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
     <div id="learn_more_content" class="text-xl">

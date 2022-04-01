@@ -191,6 +191,19 @@
         explanation: '{repeat} multiple lines'
         demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
     example_code: "## Example Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
+9:
+    commands:
+    -   name: '`{if}` with multiple lines'
+        explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
+        example: "Example: answer = {ask} 'What is 20 plus 20?'"
+        demo_code: "answer = {ask} 'What is 20 plus 20?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\nelse\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
+    -   example: 'Example: create a square'
+        name: '`{repeat}` and turtle'
+        explanation: '{repeat} multiple lines'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+    intro_text: "In this level you can not only use multiple lines with `{if}` {and} `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n\n## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} 'pizza'\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
+    start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} 'pizza'\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'"
+    example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
 10:
     start_code: |-
         animals is dog, cat, blobfish
@@ -235,84 +248,6 @@
         explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
         example: "Example: answer = {ask} 'What is 5 plus 5?'"
     example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
-16:
-    start_code: |-
-        matunda = ['embe', 'machungwa', 'ndizi']
-        print matunda 
-    intro_text: "Tutatumia mabano ya aina ya [ ] tukitaka kujenga orodha. Sasa tutatakiwa kutumia fungua semi na funga semi ya aina '' katika orodha(list). "
-    commands:
-    -   explanation: "Tutatumia mabano ya aina [ ] na pia tutatumia fungua semi na funga semi tukiandika majina vilivyo kwenye orodha."
-        example: "Mfano: matunda = ['embe', 'machungwa', 'ndizi']"
-        demo_code: |-
-            matunda = ['embe', 'machungwa', 'ndizi']
-            print matunda
-        name: square brackets
-    -   name: "Chagua kitu kutoka kwenye orodha."
-        explanation: "Kuchagua kitu kutoka kwenye orodha yetu, tutatumia mfumo ifuatoyo: [nambari] kwa mfano matunda[1] ikamaanisha, utachagua kitu cha kwanza iliyopo katika orodha."
-        example: "Mfano: matundayaywanya = matunda[1]"
-        demo_code: "matunda = ['embe', 'machungwa', 'ndizi']\nmatundayaywanya = matunda[1]\nprint matundayaywanya "
-    -   name: "Kuchagua matunda nasibu kutoka kwa orodha"
-        explanation: "Kuchagua matunda nasibu kutoka kwa orodha, tumia mfumo ufuatavyo, [random], mfano matunda[random] kupata matunda nasibu kutoka kwenye orodha."
-        example: "Mfano matundanasibu = matunda[random]"
-        demo_code: |-
-            matunda = ['embe', 'machungwa', 'ndizi']
-            matunda_nasibu = matunda[random]
-            print matunda_nasibu
-#12-old:
-#    start_code: "umri is input('Una miaka mingapi?')\nprint('Kumbe umri wako in:')\nfor i in range(0,umri):\n    print(i)"
-#    intro_text: "Tutanza kutumia mabano na tutabadilike mfumo wa kutumia as! Tutatumia input badala ya ask. Mfumo wa tukumia print, input na for, tutatumia mabano ya aina ya ()."
-#    commands:
-#    -   explanation: "Tutatumia mabano kwa kati wa kutumia print kwanzia sasa!"
-#        example: "Mfano: print('Salamu, dumia')"
-#        demo_code: "print('alamu, dumia')"
-#    -   explanation: "Tumeondoa ask na tutatumia input badala ya ask. Pia tutatumia mabano tukitumia input."
-#        example: "Mfano: jibu is input('Unaitwa nani?')"
-#        demo_code: "jibu is input('Unaitwa nani?')\nprint('Kumbe unaitwa ' jibu)"
-#    -   explanation: "Sasa tutatumia mabano katika mfumo wa tukumia kauli ya for. Tutaweka numberi yaliyo katika kauli ya for. for i in range (0,10):"
-#        example: "Mfano: for i in range(0,10):"
-#        demo_code: "for i in range(0,10):\n    print(i)\nprint('Tayari au la, nakuja!')"
-    example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
-17:
-    start_code: "for i in range 1 to 10:\n    print i\nprint 'Tayari au la, nakuja!'"
-    intro_text: "Sasa tutabadiliasha mfumo kidogo kuhusu ujazo(indent) mstari. Kama utaka ujazo kwenye mstari, tutatakiwa kutumia `:` kwenye mstari kinacho tokea kabla ya mstari ambapo tutaweka ujazo(indentataion)."
-    commands:
-    -   explanation: "Tukitumia `for`, tunatakiwa kutumia pia `:` baada ya kauli ya `for`!"
-        example: "for i in range 1 to 10:"
-        demo_code: "for i in range 1 to 12:\n    print i\nprint 'Tayari au la, nakuja!'"
-        name: '{elif}'
-    -   explanation: "Tunatakiwa kufuata hii mfumo pia tukitumia kauli ya `if`"
-        example: "if rangi is kijani:'"
-        demo_code: |-
-            rangi = 'kijani'
-            if rangi is 'kijani':
-                print 'Rangi ni ya Kijani'
-            else:
-                print 'Rangi sio ya Kijani'
-        name: '{print}'
-    -   explanation: "Tutawa fundisha mfumo mpya ambacho utafuata ikitaka kutumia: `elif`. `elif` ikimaanisha \"else if\". Tuananza kucheki kama `if` ni sahihi, kama sio kweli, tutacheki `elif` na kama sio kweli pia tutacheki `else`."
-        example: "elif a is 5:"
-        demo_code: |-
-            a = 2
-            if a is 1:
-                print 'a ni 1'
-            elif a is 2:
-                print 'a ni 2'
-            else:
-                print 'a sio 1 wala 2'
-        name: '{if}'
-9:
-    commands:
-    -   name: '`{if}` with multiple lines'
-        explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
-        example: "Example: answer = {ask} 'What is 20 plus 20?'"
-        demo_code: "answer = {ask} 'What is 20 plus 20?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\nelse\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
-    -   example: 'Example: create a square'
-        name: '`{repeat}` and turtle'
-        explanation: '{repeat} multiple lines'
-        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
-    intro_text: "In this level you can not only use multiple lines with `{if}` {and} `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n\n## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} 'pizza'\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
-    start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} 'pizza'\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'"
-    example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
 12:
     commands:
     -   name: float directly
@@ -403,6 +338,71 @@
     start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
     intro_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!\n"
     example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+16:
+    start_code: |-
+        matunda = ['embe', 'machungwa', 'ndizi']
+        print matunda 
+    intro_text: "Tutatumia mabano ya aina ya [ ] tukitaka kujenga orodha. Sasa tutatakiwa kutumia fungua semi na funga semi ya aina '' katika orodha(list). "
+    commands:
+    -   explanation: "Tutatumia mabano ya aina [ ] na pia tutatumia fungua semi na funga semi tukiandika majina vilivyo kwenye orodha."
+        example: "Mfano: matunda = ['embe', 'machungwa', 'ndizi']"
+        demo_code: |-
+            matunda = ['embe', 'machungwa', 'ndizi']
+            print matunda
+        name: square brackets
+    -   name: "Chagua kitu kutoka kwenye orodha."
+        explanation: "Kuchagua kitu kutoka kwenye orodha yetu, tutatumia mfumo ifuatoyo: [nambari] kwa mfano matunda[1] ikamaanisha, utachagua kitu cha kwanza iliyopo katika orodha."
+        example: "Mfano: matundayaywanya = matunda[1]"
+        demo_code: "matunda = ['embe', 'machungwa', 'ndizi']\nmatundayaywanya = matunda[1]\nprint matundayaywanya "
+    -   name: "Kuchagua matunda nasibu kutoka kwa orodha"
+        explanation: "Kuchagua matunda nasibu kutoka kwa orodha, tumia mfumo ufuatavyo, [random], mfano matunda[random] kupata matunda nasibu kutoka kwenye orodha."
+        example: "Mfano matundanasibu = matunda[random]"
+        demo_code: |-
+            matunda = ['embe', 'machungwa', 'ndizi']
+            matunda_nasibu = matunda[random]
+            print matunda_nasibu
+#12-old:
+#    start_code: "umri is input('Una miaka mingapi?')\nprint('Kumbe umri wako in:')\nfor i in range(0,umri):\n    print(i)"
+#    intro_text: "Tutanza kutumia mabano na tutabadilike mfumo wa kutumia as! Tutatumia input badala ya ask. Mfumo wa tukumia print, input na for, tutatumia mabano ya aina ya ()."
+#    commands:
+#    -   explanation: "Tutatumia mabano kwa kati wa kutumia print kwanzia sasa!"
+#        example: "Mfano: print('Salamu, dumia')"
+#        demo_code: "print('alamu, dumia')"
+#    -   explanation: "Tumeondoa ask na tutatumia input badala ya ask. Pia tutatumia mabano tukitumia input."
+#        example: "Mfano: jibu is input('Unaitwa nani?')"
+#        demo_code: "jibu is input('Unaitwa nani?')\nprint('Kumbe unaitwa ' jibu)"
+#    -   explanation: "Sasa tutatumia mabano katika mfumo wa tukumia kauli ya for. Tutaweka numberi yaliyo katika kauli ya for. for i in range (0,10):"
+#        example: "Mfano: for i in range(0,10):"
+#        demo_code: "for i in range(0,10):\n    print(i)\nprint('Tayari au la, nakuja!')"
+    example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+17:
+    start_code: "for i in range 1 to 10:\n    print i\nprint 'Tayari au la, nakuja!'"
+    intro_text: "Sasa tutabadiliasha mfumo kidogo kuhusu ujazo(indent) mstari. Kama utaka ujazo kwenye mstari, tutatakiwa kutumia `:` kwenye mstari kinacho tokea kabla ya mstari ambapo tutaweka ujazo(indentataion)."
+    commands:
+    -   explanation: "Tukitumia `for`, tunatakiwa kutumia pia `:` baada ya kauli ya `for`!"
+        example: "for i in range 1 to 10:"
+        demo_code: "for i in range 1 to 12:\n    print i\nprint 'Tayari au la, nakuja!'"
+        name: '{elif}'
+    -   explanation: "Tunatakiwa kufuata hii mfumo pia tukitumia kauli ya `if`"
+        example: "if rangi is kijani:'"
+        demo_code: |-
+            rangi = 'kijani'
+            if rangi is 'kijani':
+                print 'Rangi ni ya Kijani'
+            else:
+                print 'Rangi sio ya Kijani'
+        name: '{print}'
+    -   explanation: "Tutawa fundisha mfumo mpya ambacho utafuata ikitaka kutumia: `elif`. `elif` ikimaanisha \"else if\". Tuananza kucheki kama `if` ni sahihi, kama sio kweli, tutacheki `elif` na kama sio kweli pia tutacheki `else`."
+        example: "elif a is 5:"
+        demo_code: |-
+            a = 2
+            if a is 1:
+                print 'a ni 1'
+            elif a is 2:
+                print 'a ni 2'
+            else:
+                print 'a sio 1 wala 2'
+        name: '{if}'
 18:
     commands:
     -   name: '{print}'

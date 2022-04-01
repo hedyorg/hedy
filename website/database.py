@@ -201,7 +201,7 @@ class Database:
 
     def all_users(self, filtering=False):
         """Return all users."""
-        #If we have some filtering -> return all possible users, otherwise return last 500
+        # If we have some filtering -> return all possible users, otherwise return last 500
         if filtering:
             return USERS.scan()
         return USERS.scan(limit=500)
