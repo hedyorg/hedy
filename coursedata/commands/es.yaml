@@ -1,192 +1,168 @@
 1:
-  - name: "{print}"
-    explanation: "{print} something with `{print}`."
-    example: "Example: {print} Hello welcome to Hedy!"
-    demo_code: "{print} Hello welcome to Hedy!"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: {ask} What is your favorite color?"
-    demo_code: "{ask} What is your favorite color?"
-  - name: "{echo}"
-    explanation: "repeat something using `{echo}`."
-    example: "Example: {echo} so your favorite color is "
-    demo_code: |-
-      {ask} What is your favorite color?
-      {echo} so your favorite color is
-  - name: "{print} emojis"
-    explanation: "print an emoji with `{print}`"
-    example: "Example: {print} 🙋‍ 🌍 ❗"
-    demo_code: "{print} 🙋 🌍 ❗"
-  - name: "{forward}"
-    explanation: "Draw a line with `{forward}`."
-    example: "Example: {forward} 100"
-    demo_code: "{forward} 100"
-  - name: "{turn}"
-    explanation: "turn the drawing turtle with `{turn}`"
-    example: "Example: {turn}"
-    demo_code: |-
-      {forward} 25
-      {turn} {left}
-      {forward} 25
-      {turn} {right}
+    -   name: "{print}"
+        explanation: "Mostrar algo con `{print}`."
+        example: "Ejemplo: {print} Hola bienvenido a Hedy!"
+        demo_code: "{print} Hola bienvenido a Hedy!"
+    -   name: "{ask}"
+        explanation: "Preguntar algo con `{ask}`."
+        example: "Ejemplo: {ask} ¿Cuál es tu color favorito?"
+        demo_code: "{ask} ¿Cuál es tu color favorito?"
+    -   name: "{echo}"
+        explanation: "Repetir algo usando `{echo}`."
+        example: "Ejemplo: {echo} entonces tu color favorito es "
+        demo_code: |-
+            {ask} ¿Cuál es tu color favorito?
+            {echo} entonces tu color favorito es
+    -   demo_code: '{print} 🙋 🌍 ❗'
+        name: '{print} emojis'
+        explanation: imprime un emoji con `{print}`
+        example: 'Ejemplo: {print} 🙋‍ 🌍 ❗'
+    -   name: '{forward}'
+        demo_code: '{forward} 100'
+        example: 'Example: {forward} 100'
+        explanation: Draw a line with `{forward}`.
+    -   explanation: Gira a la tortuga con `{turn}`
+        example: 'Ejemplo: {turn}'
+        name: '{turn}'
+        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
 2:
-  - name: "{is}"
-    explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
-    example: "Example: name {is} Hedy."
-    demo_code: |-
-      name {is} Hedy
-      {print} welcome name
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`."
-    example: "Example: color {is} {ask} What is your favorite color?"
-    demo_code: |-
-      color {is} {ask} What is your favorite color?
-      {print} color is your favorite!
-  - name: "{sleep}"
-    explanation: "Let Hedy pause for a (couple of) second(s)."
-    example: "Example: {sleep} 2 "
-    demo_code: |-
-      {print} Let me think for one second...
-      {sleep}
-      {print} Hmm.. I need 3 more seconds...
-      {sleep} 3
-      {print} Eureka! Ive got it!
-  - explanation: "Give a number a name using `{is}`. You can choose the name yourself."
-    example: "Example: angle {is} 90"
-    demo_code: |-
-      angle {is} 90
-      {turn} angle
-      {forward} 100
-    name: is - turtle
+    -   name: "{is}"
+        explanation: "Dar un nombre a una palabra para usar en el programa con `{is}`."
+        example: "Ejemplo: nombre {is} Hedy"
+        demo_code: |-
+            nombre {is} Hedy
+            {print} Bienvenido nombre
+    -   name: "{ask}"
+        explanation: "Preguntar algo con `{ask}`. ¡Atención! Necesitas darle un nombre a la respuesta con `{is}`"
+        example: "Ejemplo: color {is} {ask} ¿Cuál es tu color favorito?"
+        demo_code: |-
+            color {is} {ask} ¿Cuál es tu color favorito?
+            {print} El color es tú favorito
+    -   explanation: Permite pausar a Hedy por un (par de) segundo(s).
+        name: '{sleep}'
+        example: 'Ejemplo: {sleep} 2 '
+        demo_code: "{print} Déjame pensar por un segundo...\n{sleep}\n{print} Hmm.. Necesito 3 segundos más...\n{sleep} 3\n{print} ¡Eureka! ¡Lo tengo!"
+    -   name: is - turtle
+        example: 'Ejemplo: ángulo {is} 90'
+        demo_code: "ángulo {is} 90\n{turn} ángulo\n{forward} 100"
+        explanation: Dale un nombre a un número usando `{is}`. Puedes escoger el nombre tú misme.
 3:
-  - name: choose_random
-    explanation: Choose a random word from a group with `{at}` and `{random}`
-    example: "Example: animals {is} dog, cat, kangaroo."
-    demo_code: |-
-      animals {is} dog, cat, kangaroo
-      {print} animals {at} {random}
-      - name: "{add}"
-        explanation: "add an item to a list"
-        example: "Example: {add} dog {to_list} animals"
+    -   name: "choose_random"
+        explanation: "Seleccionar una palabra aleatoria de un grupo usando `{at}` y `{random}`."
+        example: "Ejemplo: animales {is} perro, gato, canguro"
         demo_code: |-
-          animals {is} cow, cat
-          {add} dog {to_list} animals
-      - name: "{remove}"
-        explanation: "remove an item from a list"
-        example: "Example: {remove} dog {from} animals"
-        demo_code: |-
-          animals {is} cat, dog, cow
-          {remove} dog {from} animals
+            animales {is} perro, gato, canguro
+            {print} animales {at} {random}
+    -   example: 'Example: {add} dog {to_list} animals'
+        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+        explanation: add an item to a list
+        name: '{add}'
+    -   name: '{remove}'
+        explanation: remove an item from a list
+        example: 'Example: {remove} dog {from} animals'
+        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 4:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{is}"
-    explanation: "Give a name to some text and `{print}` without quotation marks"
-    example: "Example: name {is} Hedy."
-    demo_code: |-
-      name {is} Hedy
-      {print} 'my name is ' name
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color {is} {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {print} color ' is your favorite!'
+    -   name: "{print}"
+        explanation: "Para mostrar un texto literal con el comando `{print}` debes usar las comillas simples."
+        example: "Ejemplo: {print} 'Hola bienvenido a Hedy.'"
+        demo_code: "{print} 'Hola bienvenido a Hedy.'"
+    -   name: "{is}"
+        explanation: "Dar un nombre al texto y mostrar sin comillas simples."
+        example: "Ejemplo: nombre {is} Hedy."
+        demo_code: |-
+            nombre {is} Hedy
+            {print} 'Mi nombre es ' nombre
+    -   name: "{ask}"
+        explanation: "Preguntar algo con `{ask}`."
+        example: "Ejemplo: color {is} '{ask} ¿Cuál es tu color favorito?'"
+        demo_code: |-
+            color {is} {ask} '¿Cuál es tu color favorito?'
+            {print} 'Tu color favorito es ' color
 5:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color {is} {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {print} color ' {is} your favorite!'
-  - name: "{if}"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
-  - name: "{if} with turtle"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} answer {is} far {forward} 100 {else} {forward} 5"
-    demo_code: |-
-      answer {is} {ask} 'How far should I walk?'
-      {if} answer {is} far {forward} 100 {else} {forward} 5
-  - name: "{in}"
-    explanation: "Check elements with `{in}`"
-    example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      pretty_colors {is} green, yellow
-      color {is} {ask} 'What {is} your favorite color?'
-      {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+    -   name: "{print}"
+        explanation: "Mostrar un texto literal con el comando `{print}`."
+        example: "Ejemplo: {print} 'Hola bienvenido a Hedy.'"
+        demo_code: "{print} 'Hola bienvenido a Hedy.'"
+    -   name: "{ask}"
+        explanation: "Preguntar algo con `{ask}`."
+        example: "Ejemplo: color {is} {ask} ¿Cuál es tu color favorito?"
+        demo_code: |-
+            color {is} {ask} ¿Cuál es tu color favorito?
+            {print} 'Tu color favorito es ' color
+    -   name: "{if}"
+        explanation: "Elegir una opción con `{if}`"
+        example: "Ejemplo: {if} color {is} verde {print} 'qué bonito!' {else} {print} 'no es tan bonito'"
+        demo_code: |-
+            color {is} {ask} '¿Cuál es tu color favorito?'
+            {if} color {is} verde {print} 'qué bonito!' {else} {print} 'no es tan bonito'
+    -   demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
+        name: '{if} with turtle'
+        explanation: Make a choice with `{if}`
+    -   name: '{in}'
+        explanation: Check elements with `{in}`
+        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
-  - name: "{ask}"
-    explanation: "{ask} for a calculation and check whether it is correct."
-    example: "Example: answer {is} {ask} 'What is 10 plus 10?'"
-    demo_code: |-
-      answer = {ask} 'What is 10 plus 10?'
-      {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
-  - name: "`{ask}` {and} `{if}` turtle"
-    explanation: "{ask} the user how many angles they want"
-    example: "Example: angles {is} {ask} 'How many angles?'"
-    demo_code: |-
-      angles = {ask} 'How many angles?'
-      angle = 360 / angles
-      {forward} 50
+    -   name: "{print}"
+        explanation: "Mostrar un texto literal con `{print}` usando comillas simples."
+        example: "Ejemplo: {print} '5 multiplicado por 5 es ' 5 * 5"
+        demo_code: "{print} '5 multiplicado por 5 es ' 5 * 5"
+    -   name: "{ask} e {if} con operaciones"
+        explanation: "Pregunta por una operación y comprueba que sea correcta."
+        example: "Ejemplo: respuesta = {ask} ¿Cuánto es 10 más 10?"
+        demo_code: |-
+            resultado = {ask} '¿Cuánto es 10 más 10?'
+            {if} resultado {is} 20 {print} '¡¡Correcto!!' {else} {print} '¡Casi!, inténtalo otra vez'
+    -   name: "`{ask}` and `{if}` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles = {ask} 'How many angles?'"
+        demo_code: |-
+            angles = {ask} 'How many angles?'
+            angle = 360 / angles
+            {forward} 50
 7:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color = {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color = {ask} 'What is your favorite color?'
-      {print} color ' is your favorite!'
-  - name: "{if}"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      color = {ask} 'What is your favorite color?'
-      {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
-  - name: "{repeat} - turtle"
-    explanation: "repeat a line of code with `{repeat}`."
-    example: "Example: {repeat} 3 {times} {forward} 10"
-    demo_code: |-
-      {repeat} 3 {times} {forward} 10
+    -   name: "{print}"
+        explanation: "Imprimir un texto literal con `{print}`."
+        example: "Ejemplo: {print} 'Hola bienvenido a Hedy.'"
+        demo_code: "{print} 'Hola bienvenido a Hedy.'"
+    -   name: "{ask}"
+        explanation: "Preguntar algo con `{ask}`."
+        example: "Ejemplo: color = {ask} '¿Cuál es tu color favorito?'"
+        demo_code: |-
+            color = {ask} '¿Cuál es tu color favorito?'
+            {print} 'Tu color favorito es el ' color
+    -   name: "{if}"
+        explanation: "Tomar una decisión con `{if}`."
+        example: "Ejemplo: {if} color {is} verde {print} '¡qué bonito!' {else} {print} 'no es tan bonito'"
+        demo_code: |-
+            color = {ask} '¿Cuál es tu color favorito?'
+            {if} color {is} verde {print} '¡qué bonito!' {else} {print} 'no es tan bonito'
+    -   name: "{repeat} - turtle"
+        explanation: "Repeat a line of code with `{repeat}`."
+        example: "Example: {repeat} 3 {times} {forward} 10"
+        demo_code: |-
+            {repeat} 3 {times} {forward} 10
 8:
-  - name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
-  - name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-    example: "Example: answer {is} {ask} 'What is 5 plus 5?'"
-    demo_code: |-
-      answer = {ask} 'What is 5 plus 5?'
-      {if} answer {is} 10
-          {print} 'Well done!'
-          {print} 'Indeed, the answer was ' answer
-      else
-          {print} 'Oops!'
-          {print} 'The answer is 10'
-  - name: "`{repeat}` with turtle"
-    explanation: "{repeat} multiple lines"
-    example: "Example: draw a square"
-    demo_code: |-
-      {repeat} 4 {times}
-          {turn} 90
-          {forward} 50
+    -   name: "{print}"
+        explanation: "Imprime algo con `{print}`. Recuerda usar las comillas simples para mostrar el texto literal."
+        example: "Ejemplo: {print} '5 multiplicado por 5 es ' 5 * 5"
+        demo_code: "{print} '5 multiplicado por 5 es ' 5 * 5"
+    -   name: "`{if}` con varias líneas"
+        explanation: "Pregunta por la respuesta de una suma y comprueba el resultado. Ahora podemos mostrar 2 líneas."
+        example: "Ejemplo: resultado = {ask} '¿Cuánto es 5 más 5?'"
+        demo_code: |-
+            resultado = {ask} '¿Cuánto es 5 más 5?'
+            {if} resultado {is} 10
+                {print} '¡Muy bien!'
+                {print} 'Efectivamente, la respuesta es ' resultado
+            {else}
+                {print} '¡Ups!'
+                {print} 'La respuesta es 10'
+    -   example: 'Example: draw a square'
+        name: '`{repeat}` with turtle'
+        explanation: '{repeat} multiple lines'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
   - name: "`{if}` with multiple lines"
     explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
