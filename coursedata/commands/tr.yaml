@@ -1,34 +1,28 @@
 1:
-  - name: "{print}"
-    explanation: "{print} something with `{print}`."
-    example: "Example: {print} Hello welcome to Hedy!"
-    demo_code: "{print} Hello welcome to Hedy!"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: {ask} What is your favorite color?"
-    demo_code: "{ask} What is your favorite color?"
-  - name: "{echo}"
-    explanation: "repeat something using `{echo}`."
-    example: "Example: {echo} so your favorite color is "
-    demo_code: |-
-      {ask} What is your favorite color?
-      {echo} so your favorite color is
-  - name: "{print} emojis"
-    explanation: "print an emoji with `{print}`"
-    example: "Example: {print} 🙋‍ 🌍 ❗"
-    demo_code: "{print} 🙋 🌍 ❗"
-  - name: "{forward}"
-    explanation: "Draw a line with `{forward}`."
-    example: "Example: {forward} 100"
-    demo_code: "{forward} 100"
-  - name: "{turn}"
-    explanation: "turn the drawing turtle with `{turn}`"
-    example: "Example: {turn}"
-    demo_code: |-
-      {forward} 25
-      {turn} {left}
-      {forward} 25
-      {turn} {right}
+    -   name: '{print}'
+        explanation: '{print}'' ile bir şey yazdırın.'
+        example: 'Örnek: {print} Merhaba, Hedy''ye hoş geldiniz!'
+        demo_code: '{print} Merhaba, Hedy''ye hoş geldiniz!'
+    -   name: '{ask}'
+        explanation: '`{ask}` ile bir şey sor.'
+        example: 'Örnek: {ask} En sevdiğiniz renk nedir?'
+        demo_code: '{ask} En sevdiğin renk nedir?'
+    -   name: '{echo}'
+        explanation: "'{echo}' kullanarak bir şeyi tekrar ekrana yazdırın."
+        example: 'Örnek: {echo} favori renginizdir '
+        demo_code: "{ask} En sevdiğin renk nedir?\n{echo} en sevdiğin renk"
+    -   name: '{print} emojiler'
+        explanation: '`{print}` ile bir emoji yazdır'
+        example: 'Örnek: {print} 🙋‍ 🌍 ❗'
+        demo_code: '{print} 🙋 🌍 ❗'
+    -   name: '{forward}'
+        explanation: '"{forward}" ile bir çizgi çizin.'
+        example: 'Example: {forward} 100'
+        demo_code: '{forward} 100'
+    -   name: '{turn}'
+        explanation: turn the drawing turtle with `{turn}`
+        example: 'Example: {turn}'
+        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
 2:
   - name: "{is}"
     explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
