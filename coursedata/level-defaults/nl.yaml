@@ -782,19 +782,6 @@
 
         Daarnaast kun je in dit level een nieuw commando gebruiken `{elif}`. `{elif}` is de afkorting van {else} en {if} en zorgt ervoor dat je 3 (of meer!) opties kunt maken.
         Kijk maar...
-    example_code: |
-        ## Voorbeeld Hedy code
-        ```
-        prijzen = ['1 miljoen euro', 'een appeltaart', 'niets']
-        jouw_prijs = prijzen[{random}]
-        {print} 'Jij wint ' jouw_prijs
-        {if} jouw_prijs == '1 miljoen euro' :
-            {print} 'Joepie! Je bent rijk!'
-        {elif} jouw_prijs == 'een appeltaart' :
-            {print} 'Lekker! Een appeltaart!'
-        {else}:
-            {print} 'Volgende keer beter..'
-        ```
     commands:
     -   name: "elif"
         explanation: "`{elif}`."
@@ -831,18 +818,8 @@
         ## Het laatste level!
         We zijn aangekomen bij echte Pythoncode! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
         Zo gaat dat:
-    example_code: |
-        ## Voorbeeld Hedy code
-        ```
-        {print}('ik heet Hedy!')
-        ```
     intro_text_2: |
         Wil je meerdere dingen printen? Dan moeten daar steeds komma's tussen.
-    example_code_2: |
-        ```
-        naam = 'Hedy'
-        {print}('ik heet ', naam)
-        ```
     commands:
     -   name: "{print}"
         explanation: "Bij `{print}` moet je haakjes gebruiken"
