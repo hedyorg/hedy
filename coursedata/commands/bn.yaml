@@ -1,192 +1,165 @@
 1:
-  - name: "{print}"
-    explanation: "{print} something with `{print}`."
-    example: "Example: {print} Hello welcome to Hedy!"
-    demo_code: "{print} Hello welcome to Hedy!"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: {ask} What is your favorite color?"
-    demo_code: "{ask} What is your favorite color?"
-  - name: "{echo}"
-    explanation: "repeat something using `{echo}`."
-    example: "Example: {echo} so your favorite color is "
-    demo_code: |-
-      {ask} What is your favorite color?
-      {echo} so your favorite color is
-  - name: "{print} emojis"
-    explanation: "print an emoji with `{print}`"
-    example: "Example: {print} 🙋‍ 🌍 ❗"
-    demo_code: "{print} 🙋 🌍 ❗"
-  - name: "{forward}"
-    explanation: "Draw a line with `{forward}`."
-    example: "Example: {forward} 100"
-    demo_code: "{forward} 100"
-  - name: "{turn}"
-    explanation: "turn the drawing turtle with `{turn}`"
-    example: "Example: {turn}"
-    demo_code: |-
-      {forward} 25
-      {turn} {left}
-      {forward} 25
-      {turn} {right}
+    -   name: "print"
+        explanation: "কিছু `print` করার থাকলে `print` ব্যবহার করুন"
+        example: "উদাহরণ: print হেডিতে আপনার স্বাগত!"
+        demo_code: "print হেডিতে আপনার স্বাগত!"
+    -   name: "ask"
+        explanation: "কিছু `ask` করার থাকলে `ask` ব্যবহার করুন"
+        example: "উদাহরণ: ask আপনার প্রিয় রং কি ?"
+        demo_code: "ask আপনার প্রিয় রং কি ?"
+    -   name: "echo"
+        explanation: "কিছু পুনরাবৃত্তি করার থাকলে `echo` ব্যবহার করুন"
+        example: "উদাহরণ: echo তো আপনার প্রিয় রং হচ্ছে"
+        demo_code: |
+            ask আপনার প্রিয় রং কি ?
+            echo তো আপনার প্রিয় রং হচ্ছে "
+    -   explanation: print an emoji with `{print}`
+        example: 'Example: {print} 🙋‍ 🌍 ❗'
+        demo_code: '{print} 🙋 🌍 ❗'
+        name: '{print} emojis'
+    -   example: 'Example: {forward} 100'
+        demo_code: '{forward} 100'
+        name: '{forward}'
+        explanation: Draw a line with `{forward}`.
+    -   name: '{turn}'
+        explanation: turn the drawing turtle with `{turn}`
+        example: 'Example: {turn}'
+        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
 2:
-  - name: "{is}"
-    explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
-    example: "Example: name {is} Hedy."
-    demo_code: |-
-      name {is} Hedy
-      {print} welcome name
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`."
-    example: "Example: color {is} {ask} What is your favorite color?"
-    demo_code: |-
-      color {is} {ask} What is your favorite color?
-      {print} color is your favorite!
-  - name: "{sleep}"
-    explanation: "Let Hedy pause for a (couple of) second(s)."
-    example: "Example: {sleep} 2 "
-    demo_code: |-
-      {print} Let me think for one second...
-      {sleep}
-      {print} Hmm.. I need 3 more seconds...
-      {sleep} 3
-      {print} Eureka! Ive got it!
-  - explanation: "Give a number a name using `{is}`. You can choose the name yourself."
-    example: "Example: angle {is} 90"
-    demo_code: |-
-      angle {is} 90
-      {turn} angle
-      {forward} 100
-    name: is - turtle
+    -   name: "is"
+        explanation: "প্রোগ্রামে ব্যবহার করার জন্যে যে কোন শব্দকে নাম দাও `is` ব্যবহার  করে"
+        example: "উদাহরণ: নাম is  হেডি"
+        demo_code: "নাম is  হেডি \nprint স্বাগত হেডি"
+    -   name: "is"
+        explanation: "কিছু ask করার থাকলে `ask` ব্যবহার করুন`. সাবধান! উত্তর দিতে হবে নামের সাথে `is` ব্যবহার করে."
+        example: "উদাহরণ: রং is ask আপনার প্রিয় রং কি?"
+        demo_code: |
+            রং is ask আপনার প্রিয় রং কি?
+            print রং is আপনার প্রিয়!
+    -   name: '{sleep}'
+        explanation: Let Hedy pause for a (couple of) second(s).
+        example: 'Example: {sleep} 2 '
+        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+    -   name: is - turtle
+        explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        example: 'Example: angle {is} 90'
+        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
-  - name: choose_random
-    explanation: Choose a random word from a group with `{at}` and `{random}`
-    example: "Example: animals {is} dog, cat, kangaroo."
-    demo_code: |-
-      animals {is} dog, cat, kangaroo
-      {print} animals {at} {random}
-      - name: "{add}"
-        explanation: "add an item to a list"
-        example: "Example: {add} dog {to_list} animals"
-        demo_code: |-
-          animals {is} cow, cat
-          {add} dog {to_list} animals
-      - name: "{remove}"
-        explanation: "remove an item from a list"
-        example: "Example: {remove} dog {from} animals"
-        demo_code: |-
-          animals {is} cat, dog, cow
-          {remove} dog {from} animals
+    -   name: "লক্ষ্যহীন ভাবে পছন্দ কর"
+        explanation: "Choose a random word from a group with `at` and `random`"
+        example: "উদাহরণ: প্রাণী হল কুকুর বিড়াল ক্যাঙ্গারু"
+        demo_code: |
+            প্রাণী is হল, কুকুর, বিড়াল, ক্যাঙ্গারু
+            print প্রাণী at random
+    -   name: '{add}'
+        explanation: add an item to a list
+        example: 'Example: {add} dog {to_list} animals'
+        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    -   explanation: remove an item from a list
+        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+        name: '{remove}'
+        example: 'Example: {remove} dog {from} animals'
 4:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{is}"
-    explanation: "Give a name to some text and `{print}` without quotation marks"
-    example: "Example: name {is} Hedy."
-    demo_code: |-
-      name {is} Hedy
-      {print} 'my name is ' name
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color {is} {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {print} color ' is your favorite!'
+    -   name: "print"
+        explanation: "হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে "
+        example: "উদাহরণ: print 'হ্যালো হেডিতে আপনার স্বাগত'"
+        demo_code: "print 'হ্যালো হেডিতে আপনার স্বাগত'"
+    -   name: "is"
+        explanation: "কিছু পাঠকে নাম দিন এবং কোটেশন চিহ্ন ছাড়া print করুন"
+        example: "উদাহরণ: নাম is  হেডি"
+        demo_code: "নাম is  হেডি \nprint 'আমার নাম is ' নাম "
+    -   name: "ask"
+        explanation: "কিছু ask করার থাকলে `ask` ব্যবহার করুন"
+        example: "উদাহরণ:  রং is ask 'আপনার প্রিয় রং কি?'"
+        demo_code: |
+            রং is ask 'আপনার প্রিয় রং কি?'
+            print রং 'is আপনার প্রিয়!'
 5:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color {is} {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {print} color ' {is} your favorite!'
-  - name: "{if}"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
-  - name: "{if} with turtle"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} answer {is} far {forward} 100 {else} {forward} 5"
-    demo_code: |-
-      answer {is} {ask} 'How far should I walk?'
-      {if} answer {is} far {forward} 100 {else} {forward} 5
-  - name: "{in}"
-    explanation: "Check elements with `{in}`"
-    example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      pretty_colors {is} green, yellow
-      color {is} {ask} 'What {is} your favorite color?'
-      {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+    -   name: "print"
+        explanation: "হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে"
+        example: "উদাহরণ: print 'হ্যালো হেডিতে আপনার স্বাগত'"
+        demo_code: "print 'হ্যালো হেডিতে আপনার স্বাগত'"
+    -   name: "ask"
+        explanation: "কিছু ask করার থাকলে ` `ask` ব্যবহার করুন`."
+        example: "উদাহরণ: রং is ask আপনার প্রিয় রং কি?"
+        demo_code: |
+            রং is ask 'আপনার প্রিয় রং কি?'
+            print রং ' is আপনার প্রিয়!'
+    -   name: "if"
+        explanation: "`if`ব্যবহার করে পছন্দ করুন "
+        example: "উদাহরণ: if রং সবুজ হয়  print 'সুন্দর!' নাহলে print 'মন্দ'"
+        demo_code: |
+            রং is ask 'আপনার প্রিয় রং কি?'
+            if রং is হয় print 'সুন্দর!' else print 'মন্দ'
+    -   name: '{if} with turtle'
+        explanation: Make a choice with `{if}`
+        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
+        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    -   example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        name: '{in}'
+        explanation: Check elements with `{in}`
 6:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
-  - name: "{ask}"
-    explanation: "{ask} for a calculation and check whether it is correct."
-    example: "Example: answer {is} {ask} 'What is 10 plus 10?'"
-    demo_code: |-
-      answer = {ask} 'What is 10 plus 10?'
-      {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
-  - name: "`{ask}` {and} `{if}` turtle"
-    explanation: "{ask} the user how many angles they want"
-    example: "Example: angles {is} {ask} 'How many angles?'"
-    demo_code: |-
-      angles = {ask} 'How many angles?'
-      angle = 360 / angles
-      {forward} 50
+    -   name: "print"
+        explanation: "হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে"
+        example: "উদাহরণ: print '5 বার 5 is ' 5 * 5"
+        demo_code: "print  '5 বার 5 is ' 5 * 5"
+    -   name: " ask` এবং `if` গণনা সহ"
+        explanation: "একটি গণনা ask করুন এবং ত্রটি সঠিক কিনা তা পরীক্ষা করুন."
+        example: "উদাহরণ: উত্তর হল ask করুন 10 প্লাস 10 কি?"
+        demo_code: |
+            উত্তর = ask 'করুন 10 প্লাস 10 কি?'
+            if উত্তর is 20 print 'সঠিক!' else print 'ভুল'
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles = ask 'How many angles?'"
+        demo_code: |-
+            angles = ask 'How many angles?'
+            angle = 360 / angles
+            forward 50
 7:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color = {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color = {ask} 'What is your favorite color?'
-      {print} color ' is your favorite!'
-  - name: "{if}"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      color = {ask} 'What is your favorite color?'
-      {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
-  - name: "{repeat} - turtle"
-    explanation: "repeat a line of code with `{repeat}`."
-    example: "Example: {repeat} 3 {times} {forward} 10"
-    demo_code: |-
-      {repeat} 3 {times} {forward} 10
+    -   name: "print"
+        explanation: "হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে"
+        example: "উদাহরণ: print 'হ্যালো হেডিতে আপনার স্বাগত'"
+        demo_code: "print 'হ্যালো হেডিতে আপনার স্বাগত'"
+    -   name: "ask"
+        explanation: "কিছু ask করার থাকলে  `ask` ব্যবহার করুন`."
+        example: "উদাহরণ:  রং = ask 'আপনার প্রিয় রং কি?'"
+        demo_code: |
+            রং = ask 'আপনার প্রিয় রং কি?'
+            print রং 'is আপনার প্রিয়!'
+    -   name: "if"
+        explanation: "`if`ব্যবহার করে পছন্দ করুন "
+        demo_code: |
+            রং = ask 'আপনার প্রিয় রং কি?'
+            if রং is হয print 'সুন্দর!' else print 'মন্দ'
+        example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+    -   name: "repeat"
+        explanation: "`repeat` এবং `if` সম্মিলিত"
+        example: "উদাহরণ: if রং সবুজ হয় print 'সুন্দর 3 বার repeat নাহলে print 'মন্দ' 5 বার repeat"
+        demo_code: |
+            রং = ask 'আপনার প্রিয় রং কি?'
+            if রং is হয় repeat 3 times print 'সুন্দর' else repeat 5 times print 'মন্দ'
 8:
-  - name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
-  - name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-    example: "Example: answer {is} {ask} 'What is 5 plus 5?'"
-    demo_code: |-
-      answer = {ask} 'What is 5 plus 5?'
-      {if} answer {is} 10
-          {print} 'Well done!'
-          {print} 'Indeed, the answer was ' answer
-      else
-          {print} 'Oops!'
-          {print} 'The answer is 10'
-  - name: "`{repeat}` with turtle"
-    explanation: "{repeat} multiple lines"
-    example: "Example: draw a square"
-    demo_code: |-
-      {repeat} 4 {times}
-          {turn} 90
-          {forward} 50
+    -   name: "print"
+        explanation: "কিছু একটা  print করো . মনে রাখবেন আহ্মরিক মুদ্রনের জন্য কোটেশন চিহ্ন ব্যবহার করতে হবে"
+        example: "উদাহরণ: print '5 বার 5 is ' 5 * 5"
+        demo_code: "print '5 বার 5 is ' 5 * 5"
+    -   name: "`if` একাধিক লাইন সহ"
+        explanation: "একটি অঙ্কের উত্তর ask করুণ এবং এটি সঠিক কিনা তা পরীক্ষা করুন আমরা এখন 2  লাইন print করতে পারি."
+        example: "উদাহরণ: উত্তর হল ask করা হয় 5 প্লাস 5 কি?"
+        demo_code: |-
+            উত্তর = ask 'করা হয় 5 প্লাস 5 কি?'
+            if উত্তর is 10
+                print 'সাবাশ !'
+                print 'আসলেই উত্তরটি'
+            else
+                print 'উফ!'
+                print 'সঠিক উত্তর 10'
+    -   example: 'Example: draw a square'
+        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+        name: '`{repeat}` with turtle'
+        explanation: '{repeat} multiple lines'
 9:
   - name: "`{if}` with multiple lines"
     explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
