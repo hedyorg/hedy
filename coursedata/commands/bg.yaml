@@ -1,169 +1,163 @@
 1:
-  - name: "{print}"
-    explanation: "{print} something with `{print}`."
-    example: "Example: {print} Hello welcome to Hedy!"
-    demo_code: "{print} Hello welcome to Hedy!"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: {ask} What is your favorite color?"
-    demo_code: "{ask} What is your favorite color?"
-  - name: "{echo}"
-    explanation: "repeat something using `{echo}`."
-    example: "Example: {echo} so your favorite color is "
-    demo_code: |-
-      {ask} What is your favorite color?
-      {echo} so your favorite color is
-  - name: "{print} emojis"
-    explanation: "print an emoji with `{print}`"
-    example: "Example: {print} 🙋‍ 🌍 ❗"
-    demo_code: "{print} 🙋 🌍 ❗"
-  - name: "{forward}"
-    explanation: "Draw a line with `{forward}`."
-    example: "Example: {forward} 100"
-    demo_code: "{forward} 100"
-  - name: "{turn}"
-    explanation: "turn the drawing turtle with `{turn}`"
-    example: "Example: {turn}"
-    demo_code: |-
-      {forward} 25
-      {turn} {left}
-      {forward} 25
-      {turn} {right}
+    -   name: "print"
+        explanation: "Принтирай дума с командата `print`."
+        example: "Пример: print Привет, добре дошли при Хеди!"
+        demo_code: "print Привет, добре дошли при Хеди!"
+    -   name: "ask"
+        explanation: "Задай въпрос с `ask`, примерно любим цвят."
+        example: "Пример: ask Кой е любимият ти цвят?"
+        demo_code: "ask Кой е любимият ти цвят?"
+    -   name: "echo"
+        explanation: "Повтори това, което си написал(а) с `echo`."
+        example: "Пример: echo значи любимият ти цвят е ... "
+        demo_code: |-
+            ask Кой е любимият ти цвят?
+            echo значи любимият ти цвят e ...
+    -   name: "forward"
+        explanation: "Нарисувай линия с `forward`."
+        example: "Пример: forward 100"
+        demo_code: "forward 100"
+    -   name: "turn"
+        explanation: "Обърни нарисуваната костенурка с `turn`"
+        example: "Пример: turn"
+        demo_code: |-
+            forward 50
+            turn right
+            forward 25
+            turn left
+            forward 50
+            turn right
+            forward 25
+            turn left
+            forward 50
+    -   name: '{turn}'
+        explanation: turn the drawing turtle with `{turn}`
+        example: 'Example: {turn}'
+        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
 2:
-  - name: "{is}"
-    explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
-    example: "Example: name {is} Hedy."
-    demo_code: |-
-      name {is} Hedy
-      {print} welcome name
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`."
-    example: "Example: color {is} {ask} What is your favorite color?"
-    demo_code: |-
-      color {is} {ask} What is your favorite color?
-      {print} color is your favorite!
-  - name: "{sleep}"
-    explanation: "Let Hedy pause for a (couple of) second(s)."
-    example: "Example: {sleep} 2 "
-    demo_code: |-
-      {print} Let me think for one second...
-      {sleep}
-      {print} Hmm.. I need 3 more seconds...
-      {sleep} 3
-      {print} Eureka! Ive got it!
-  - explanation: "Give a number a name using `{is}`. You can choose the name yourself."
-    example: "Example: angle {is} 90"
-    demo_code: |-
-      angle {is} 90
-      {turn} angle
-      {forward} 100
-    name: is - turtle
+    -   name: "is"
+        explanation: "С командата `is` можеш да запишеш име в програмата. Избери си едно име, може и твоето."
+        example: "Например: име is Галя."
+        demo_code: |-
+            име is Галя
+            print Аз се казвам име.
+    -   name: "ask"
+        explanation: "Запитай с командата `ask`. Важно е да запомниш, че трябва да назовеш отговора си с командата `is`."
+        example: "Пример: цвят is ask Кой е любимият ти цвят?"
+        demo_code: |-
+            цвят is ask Кой е любимият ти цвят?
+            print Твоят любим е цвят.
+    -   name: "is - turtle"
+        explanation: "Назови число, използвайки командата `is`."
+        example: "Пример: число is 90."
+        demo_code: |-
+            hoek is 90
+            turn hoek
+            forward 100
+    -   explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        example: 'Example: angle {is} 90'
+        name: is - turtle
+        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
-  - name: choose_random
-    explanation: Choose a random word from a group with `{at}` and `{random}`
-    example: "Example: animals {is} dog, cat, kangaroo."
-    demo_code: |-
-      animals {is} dog, cat, kangaroo
-      {print} animals {at} {random}
-      - name: "{add}"
-        explanation: "add an item to a list"
-        example: "Example: {add} dog {to_list} animals"
+    -   name: "избери_произволно"
+        explanation: "Избери произволна дума от списък с думи като ползваш командите `at` и `random`."
+        example: 'Пример: животни is куче, котка, кенгуру.'
         demo_code: |-
-          animals {is} cow, cat
-          {add} dog {to_list} animals
-      - name: "{remove}"
-        explanation: "remove an item from a list"
-        example: "Example: {remove} dog {from} animals"
-        demo_code: |-
-          animals {is} cat, dog, cow
-          {remove} dog {from} animals
+            животни is куче, котка, кенгуру
+            print животни at random
+    -   name: '{add}'
+        explanation: add an item to a list
+        example: 'Example: {add} dog {to_list} animals'
+        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    -   name: '{remove}'
+        explanation: remove an item from a list
+        example: 'Example: {remove} dog {from} animals'
+        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 4:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{is}"
-    explanation: "Give a name to some text and `{print}` without quotation marks"
-    example: "Example: name {is} Hedy."
-    demo_code: |-
-      name {is} Hedy
-      {print} 'my name is ' name
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color {is} {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {print} color ' is your favorite!'
+    -   name: "print"
+        explanation: "Принтирай точно думите в кавички"
+        example: "Example: print 'Баба жаба живее в блатото.'"
+        demo_code: "print 'Баба жаба живее в блатото.'"
+    -   name: "is"
+        explanation: "назови цял текст с едно име с командата `print` без кавичките."
+        example: "Example: name is Иван Димитров Коларов."
+        demo_code: |-
+            име is Иван Димитров Коларов
+            print 'Казвам се ' име '.'
+    -   name: "ask"
+        explanation: "Запитай с командата `is ask`."
+        example: "Пример: цвят is ask 'Кой е любимият ти цвят?'"
+        demo_code: |-
+            цвят is ask 'кой е любимият ти цвят?'
+            print цвят ' е твоят любим цвят!'
 5:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color {is} {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {print} color ' {is} your favorite!'
-  - name: "{if}"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      color {is} {ask} 'What is your favorite color?'
-      {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
-  - name: "{if} with turtle"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} answer {is} far {forward} 100 {else} {forward} 5"
-    demo_code: |-
-      answer {is} {ask} 'How far should I walk?'
-      {if} answer {is} far {forward} 100 {else} {forward} 5
-  - name: "{in}"
-    explanation: "Check elements with `{in}`"
-    example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      pretty_colors {is} green, yellow
-      color {is} {ask} 'What {is} your favorite color?'
-      {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+    -   name: "print"
+        explanation: "Принтирай точно думите в кавички"
+        example: "Пример: print 'Това е изречение. Повече изречения образуват текст.'"
+        demo_code: "print 'Това е изречение. Повече изречения образуват текст.'"
+    -   name: "ask"
+        explanation: "Запитай с командата `ask`."
+        example: "Пример: възраст is ask 'На колко си години?'"
+        demo_code: |-
+            възраст is ask 'На колко си години?'
+            print 'Ти си на ' възраст ' години!'
+    -   name: "if"
+        explanation: "Направи избор с командите `if` и `else`."
+        example: "Пример: if цвят is бял print 'Красив е!' else print 'става'"
+        demo_code: |-
+            цвят is ask 'кой е любимият ти цвят?'
+            if цвят is бял print 'Красив е!' else print 'става'
+    -   name: "if with turtle"
+        explanation: "Направи избор с `if`"
+        example: "Пример: if отговор is далече forward 100 else forward 5"
+        demo_code: |-
+            отговор is ask 'Колко метра да вървя напред?'
+            if отговор is далече forward 100 else forward 5
+    -   name: '{in}'
+        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+        explanation: Check elements with `{in}`
+        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
-  - name: "{ask}"
-    explanation: "{ask} for a calculation and check whether it is correct."
-    example: "Example: answer {is} {ask} 'What is 10 plus 10?'"
-    demo_code: |-
-      answer = {ask} 'What is 10 plus 10?'
-      {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
-  - name: "`{ask}` {and} `{if}` turtle"
-    explanation: "{ask} the user how many angles they want"
-    example: "Example: angles {is} {ask} 'How many angles?'"
-    demo_code: |-
-      angles = {ask} 'How many angles?'
-      angle = 360 / angles
-      {forward} 50
+    -   name: "print"
+        explanation: "Принтирай точно думите в кавички"
+        example: "Пример: print '5 пъти по 5 е равно на ' 5 * 5"
+        demo_code: "print '5 пъти по 5 е равно на ' 5 * 5"
+    -   name: "ask"
+        explanation: "Програмирай задача с калкулация и въвеждане на отговор."
+        example: "Пример: решение = ask 'Колко прави 10 + 10?'"
+        demo_code: |-
+            решение = ask 'Колко прави 10 + 10?'
+            if решение is 20 print 'Да!' else print 'Невярно'
+    -   name: "`ask` and `if` turtle"
+        explanation: "Запитай въвеждане на брой ъгли"
+        example: "Пример: ъгли = ask 'Колко ъгли? (част първа)'"
+        demo_code: |-
+            ъгли = ask 'Колко ъгли?'
+            angle = 360 / ъгли
+            forward 50
 7:
-  - name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color = {ask} 'What is your favorite color?'"
-    demo_code: |-
-      color = {ask} 'What is your favorite color?'
-      {print} color ' is your favorite!'
-  - name: "{if}"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: |-
-      color = {ask} 'What is your favorite color?'
-      {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
-  - name: "{repeat} - turtle"
-    explanation: "repeat a line of code with `{repeat}`."
-    example: "Example: {repeat} 3 {times} {forward} 10"
-    demo_code: |-
-      {repeat} 3 {times} {forward} 10
+    -   name: "print"
+        explanation: "Принтирай точно думите в кавички"
+        example: "Пример: print 'Hello welcome to Hedy.'"
+        demo_code: "print 'Hello welcome to Hedy.'"
+    -   name: "ask"
+        explanation: "Запитай с `ask` за любимия спорт."
+        example: "Пример: спорт = ask 'Кой е любимият ти спорт?'"
+        demo_code: |-
+            спорт = ask 'Кой е любимият ти спорт?'
+            print 'Значи обичаш ' спорт '.'
+    -   name: "if"
+        explanation: "Запитай пак за любимия спорт и използвай `if`, за да дадеш специален резултат ако въведената дума е футбол."
+        example: "Пример: спорт = ask 'Кой е любимият ти спорт?'"
+        demo_code: |-
+            спорт = ask 'Кой е любимият ти спорт?'
+            if спорт is футбол repeat 3 times print 'Футбол, футбол и пак футбол!'
+            else print 'Значи обичаш ' спорт '.'
+    -   name: "repeat - turtle"
+        explanation: "Програмирай цикъл с командата `repeat`."
+        example: "Пример: repeat 3 times forward 10"
+        demo_code: |-
+            repeat 3 times forward 20
 8:
   - name: "{print}"
     explanation: "print something. Remember to use a quotation mark for literal printing."
