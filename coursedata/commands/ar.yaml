@@ -1,34 +1,34 @@
 1:
-  - name: "{print}"
-    explanation: "{print} something with `{print}`."
-    example: "Example: {print} Hello welcome to Hedy!"
-    demo_code: "{print} Hello welcome to Hedy!"
-  - name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: {ask} What is your favorite color?"
-    demo_code: "{ask} What is your favorite color?"
-  - name: "{echo}"
-    explanation: "repeat something using `{echo}`."
-    example: "Example: {echo} so your favorite color is "
+  - name: قول
+    explanation: اطبع شيئا على الشاشة باستخدام `قول`
+    example: 'مثال: قول أهلا ومرحبا بكم في هيدي!'
+    demo_code: قول أهلا ومرحبا بكم في هيدي!
+  - name: اسأل
+    explanation: اسأل عن شيء ما باستخدام `اسأل`
+    example: 'مثال: اسأل ما لونك المفضل؟'
+    demo_code: اسأل ما لونك المفضل؟
+  - name: ردد
+    explanation: اعد ترديد اجابة شخص ما على السؤال
+    example: 'مثال: ردد اذن لونك المفضل هو '
     demo_code: |-
-      {ask} What is your favorite color?
-      {echo} so your favorite color is
-  - name: "{print} emojis"
-    explanation: "print an emoji with `{print}`"
-    example: "Example: {print} 🙋‍ 🌍 ❗"
-    demo_code: "{print} 🙋 🌍 ❗"
-  - name: "{forward}"
-    explanation: "Draw a line with `{forward}`."
-    example: "Example: {forward} 100"
-    demo_code: "{forward} 100"
-  - name: "{turn}"
-    explanation: "turn the drawing turtle with `{turn}`"
-    example: "Example: {turn}"
+      اسأل ما لونك المفضل؟
+      ردد اذن لونك المفضل هو
+  - name: تقدم
+    explanation: ارسم خطا مستقيما باستخدام `تقدم`
+    example: 'مثال: تقدم 100'
+    demo_code: تقدم 100
+  - name: انعطف
+    explanation: قم بتحويل اتجاه الرسم باستخدام `انعطف`
+    example: 'مثال: انعطف'
     demo_code: |-
-      {forward} 25
-      {turn} {left}
-      {forward} 25
-      {turn} {right}
+      تقدم 25
+      انعطف left
+      تقدم 25
+      انعطف right
+  - example: 'Example: {turn}'
+    demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    explanation: turn the drawing turtle with `{turn}`
+    name: '{turn}'
 2:
   - name: "{is}"
     explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
