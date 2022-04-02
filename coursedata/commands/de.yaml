@@ -216,12 +216,13 @@
       {for} animal {in} animals
         {print} 'I love ' animal
 11:
--   explanation: "wir ersetzen `repeat` mit `for`"
+    -   name: '{for}-Schleife'
+        explanation: "wir ersetzen `repeat` mit `for`"
         example: "for i in range 1 to 10"
         demo_code: |-
             for Zähler in range 1 to 5
               print Zähler
-        name: '{for}-Schleife'
+
     -   name: '{ask}'
         explanation: Frag nach der Antwort zu einer Summe und überprüfe ob sie stimmt. Wir können jetzt zwei Zeilen ausgeben.
         example: "Beispiel: Antwort = {ask} 'Was ist 5 plus 5?'"
@@ -376,7 +377,7 @@
                 {print} 'Deine Lieblingsfarbe ist nicht grün'
         name: '{if}'
 18:
-   -   name: '{print}'
+    -   name: '{print}'
         explanation: Mit `{print}` musst du runde Klammern verwenden
         example: '{print}'
         demo_code: "{print}('Hi!')"

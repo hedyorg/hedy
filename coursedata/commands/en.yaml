@@ -59,24 +59,24 @@
       {forward} 100
     name: is - turtle
 3:
-  - name: choose_random
-    explanation: Choose a random word from a group with `{at}` and `{random}`
-    example: "Example: animals {is} dog, cat, kangaroo."
-    demo_code: |-
-      animals {is} dog, cat, kangaroo
-      {print} animals {at} {random}
-      - name: "{add}"
-        explanation: "add an item to a list"
-        example: "Example: {add} dog {to_list} animals"
-        demo_code: |-
-          animals {is} cow, cat
-          {add} dog {to_list} animals
-      - name: "{remove}"
-        explanation: "remove an item from a list"
-        example: "Example: {remove} dog {from} animals"
-        demo_code: |-
-          animals {is} cat, dog, cow
-          {remove} dog {from} animals
+    - name: choose_random
+      explanation: Choose a random word from a group with `{at}` and `{random}`
+      example: "Example: animals {is} dog, cat, kangaroo."
+      demo_code: |-
+        animals {is} dog, cat, kangaroo
+        {print} animals {at} {random}
+    - name: "{add}"
+      explanation: "add an item to a list"
+      example: "Example: {add} dog {to_list} animals"
+      demo_code: |-
+        animals {is} cow, cat
+        {add} dog {to_list} animals
+    - name: "{remove}"
+      explanation: "remove an item from a list"
+      example: "Example: {remove} dog {from} animals"
+      demo_code: |-
+        animals {is} cat, dog, cow
+        {remove} dog {from} animals
 4:
   - name: "{print}"
     explanation: "print exactly using quotation marks"
