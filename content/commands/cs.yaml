@@ -1,372 +1,372 @@
 1:
-    -   explanation: Vypiš něco pomocí `print`.
-        example: 'Příklad: print Vítej v Hedy!'
-        demo_code: print Vítej v Hedy!
-        name: '{print}'
-    -   explanation: Zeptej se na něco pomocí `ask`.
-        example: 'Příklad: ask Jaká je tvoje nejoblíbenější barva?'
-        demo_code: ask Jaká je tvoje nejoblíbenější barva?
-        name: '{ask}'
-    -   explanation: Zopakuj něco pomocí `echo`.
-        example: 'Příklad: echo Tvoje nejoblíbenější barva tedy je'
-        demo_code: |-
-            ask Jaká je tvoje nejoblíbenější barva?
-            echo Tvoje nejoblíbenější barva tedy je
-        name: '{echo}'
-    -   name: '{print} emojis'
-        explanation: print an emoji with `{print}`
-        example: 'Example: {print} 🙋‍ 🌍 ❗'
-        demo_code: '{print} 🙋 🌍 ❗'
-    -   explanation: Draw a line with `{forward}`.
-        example: 'Example: {forward} 100'
-        demo_code: '{forward} 100'
-        name: '{forward}'
-    -   demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
-        name: '{turn}'
-        explanation: turn the drawing turtle with `{turn}`
-        example: 'Example: {turn}'
+-   explanation: Vypiš něco pomocí `print`.
+    example: 'Příklad: print Vítej v Hedy!'
+    demo_code: print Vítej v Hedy!
+    name: '{print}'
+-   explanation: Zeptej se na něco pomocí `ask`.
+    example: 'Příklad: ask Jaká je tvoje nejoblíbenější barva?'
+    demo_code: ask Jaká je tvoje nejoblíbenější barva?
+    name: '{ask}'
+-   explanation: Zopakuj něco pomocí `echo`.
+    example: 'Příklad: echo Tvoje nejoblíbenější barva tedy je'
+    demo_code: |-
+        ask Jaká je tvoje nejoblíbenější barva?
+        echo Tvoje nejoblíbenější barva tedy je
+    name: '{echo}'
+-   name: '{print} emojis'
+    explanation: print an emoji with `{print}`
+    example: 'Example: {print} 🙋‍ 🌍 ❗'
+    demo_code: '{print} 🙋 🌍 ❗'
+-   explanation: Draw a line with `{forward}`.
+    example: 'Example: {forward} 100'
+    demo_code: '{forward} 100'
+    name: '{forward}'
+-   demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    name: '{turn}'
+    explanation: turn the drawing turtle with `{turn}`
+    example: 'Example: {turn}'
 2:
-    -   explanation: Pojmenuj slovo pomocí `is` pro další použití v kódu.
-        example: 'Příklad: jmeno is Hedy'
-        demo_code: |-
-            jmeno is Hedy
-            print Ahoj jmeno
-        name: '{is}'
-    -   explanation: Zeptej se na něco příkazem `ask`. Pozor! Musíš odpověď pojmenovat pomocí `is`.
-        example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
-        demo_code: |-
-            barva is ask Jaká je tvoje nejoblíbenější barva?
-            print barva je tvoje nejoblíbenější!
-        name: '{ask}'
-    -   name: '{sleep}'
-        example: 'Example: {sleep} 2 '
-        explanation: Let Hedy pause for a (couple of) second(s).
-        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
-    -   name: is - turtle
-        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
-        explanation: Give a number a name using `{is}`. You can choose the name yourself.
-        example: 'Example: angle {is} 90'
+-   explanation: Pojmenuj slovo pomocí `is` pro další použití v kódu.
+    example: 'Příklad: jmeno is Hedy'
+    demo_code: |-
+        jmeno is Hedy
+        print Ahoj jmeno
+    name: '{is}'
+-   explanation: Zeptej se na něco příkazem `ask`. Pozor! Musíš odpověď pojmenovat pomocí `is`.
+    example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
+    demo_code: |-
+        barva is ask Jaká je tvoje nejoblíbenější barva?
+        print barva je tvoje nejoblíbenější!
+    name: '{ask}'
+-   name: '{sleep}'
+    example: 'Example: {sleep} 2 '
+    explanation: Let Hedy pause for a (couple of) second(s).
+    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+-   name: is - turtle
+    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    explanation: Give a number a name using `{is}`. You can choose the name yourself.
+    example: 'Example: angle {is} 90'
 3:
-    -   explanation: Vyber náhodné slovo ze seznamu pomocí `at` a `random`.
-        example: 'Příklad: zvirata is pes, kočka, klokan'
-        demo_code: |-
-            zvirata is pes, kočka, klokan
-            print zvirata at random
-        name: choose_random
-    -   name: '{add}'
-        explanation: add an item to a list
-        example: 'Example: {add} dog {to_list} animals'
-        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
-    -   name: '{remove}'
-        explanation: remove an item from a list
-        example: 'Example: {remove} dog {from} animals'
-        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+-   explanation: Vyber náhodné slovo ze seznamu pomocí `at` a `random`.
+    example: 'Příklad: zvirata is pes, kočka, klokan'
+    demo_code: |-
+        zvirata is pes, kočka, klokan
+        print zvirata at random
+    name: choose_random
+-   name: '{add}'
+    explanation: add an item to a list
+    example: 'Example: {add} dog {to_list} animals'
+    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+-   name: '{remove}'
+    explanation: remove an item from a list
+    example: 'Example: {remove} dog {from} animals'
+    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 4:
-    -   explanation: Vypiš text s jednoduchými uvozovkami.
-        example: "Příklad: print 'Ahoj, vítej v Hedy!'"
-        demo_code: print 'Ahoj, vítej v Hedy!'
-        name: '{print}'
-    -   explanation: Pojmenuj nějaké slovo a vypiš jej pomocí `print` bez uvozovek.
-        example: 'Příklad: jmeno is Hedy'
-        demo_code: |-
-            jmeno is Hedy
-            print 'Jmenuji se ' jmeno
-        name: '{is}'
-    -   explanation: Zeptej se na něco pomocí `ask`.
-        example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
-        demo_code: |-
-            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-            print barva ' je tvoje nejoblíbenější barva.'
-        name: '{ask}'
+-   explanation: Vypiš text s jednoduchými uvozovkami.
+    example: "Příklad: print 'Ahoj, vítej v Hedy!'"
+    demo_code: print 'Ahoj, vítej v Hedy!'
+    name: '{print}'
+-   explanation: Pojmenuj nějaké slovo a vypiš jej pomocí `print` bez uvozovek.
+    example: 'Příklad: jmeno is Hedy'
+    demo_code: |-
+        jmeno is Hedy
+        print 'Jmenuji se ' jmeno
+    name: '{is}'
+-   explanation: Zeptej se na něco pomocí `ask`.
+    example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
+    demo_code: |-
+        barva is ask 'Jaká je tvoje nejoblíbenější barva?'
+        print barva ' je tvoje nejoblíbenější barva.'
+    name: '{ask}'
 5:
-    -   explanation: Připomeň si `print` s uvozovkami.
-        example: "Příklad: print 'Ahoj, vítej v Hedy!'"
-        demo_code: print 'Ahoj, vítej v Hedy!'
-        name: '{print}'
-    -   explanation: Zopakuj si příkaz `ask`.
-        example: "Příklad: barva is ask 'Jaká je tvoje nejoblíbenější barva?'"
-        demo_code: |-
-            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-            print barva ' je tvoje nejoblíbenější barva.'
-        name: '{ask}'
-    -   explanation: Rozhodni se pomocí `if`.
-        example: "Příklad: if barva is růžová print 'Moje taky!' else print 'Fuj'"
-        demo_code: |-
-            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-            if barva is růžová print 'Moje taky!' else print 'Fuj'
-        name: '{if}'
-    -   example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
-        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
-        name: '{if} with turtle'
-        explanation: Make a choice with `{if}`
-    -   name: '{in}'
-        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-        explanation: Check elements with `{in}`
-        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+-   explanation: Připomeň si `print` s uvozovkami.
+    example: "Příklad: print 'Ahoj, vítej v Hedy!'"
+    demo_code: print 'Ahoj, vítej v Hedy!'
+    name: '{print}'
+-   explanation: Zopakuj si příkaz `ask`.
+    example: "Příklad: barva is ask 'Jaká je tvoje nejoblíbenější barva?'"
+    demo_code: |-
+        barva is ask 'Jaká je tvoje nejoblíbenější barva?'
+        print barva ' je tvoje nejoblíbenější barva.'
+    name: '{ask}'
+-   explanation: Rozhodni se pomocí `if`.
+    example: "Příklad: if barva is růžová print 'Moje taky!' else print 'Fuj'"
+    demo_code: |-
+        barva is ask 'Jaká je tvoje nejoblíbenější barva?'
+        if barva is růžová print 'Moje taky!' else print 'Fuj'
+    name: '{if}'
+-   example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
+    demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    name: '{if} with turtle'
+    explanation: Make a choice with `{if}`
+-   name: '{in}'
+    demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+    explanation: Check elements with `{in}`
+    example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
-    -   explanation: Zkus si přesný výpis pomocí uvozovek.
-        example: "Příklad: print '5 krát 5 je ' 5 * 5"
-        demo_code: print '5 krát 5 je ' 5 * 5
-        name: '{print}'
-    -   explanation: Zadej příklad a ověř výsledek.
-        example: "Příklad: vysledek = ask 'Kolik je 10 plus 10?'"
-        demo_code: |-
-            vysledek = ask 'Kolik je 10 plus 10?'
-            if answer is 20 print 'Ano!' else print 'Těsně  vedle...'
-        name: '{ask}'
-    -   name: "`ask` and `if` turtle"
-        explanation: "Ask the user how many angles they want"
-        example: "Example: angles = ask 'How many angles?'"
-        demo_code: |-
-            angles = ask 'How many angles?'
-            angle = 360 / angles
-            forward 50
+-   explanation: Zkus si přesný výpis pomocí uvozovek.
+    example: "Příklad: print '5 krát 5 je ' 5 * 5"
+    demo_code: print '5 krát 5 je ' 5 * 5
+    name: '{print}'
+-   explanation: Zadej příklad a ověř výsledek.
+    example: "Příklad: vysledek = ask 'Kolik je 10 plus 10?'"
+    demo_code: |-
+        vysledek = ask 'Kolik je 10 plus 10?'
+        if answer is 20 print 'Ano!' else print 'Těsně  vedle...'
+    name: '{ask}'
+-   name: "`ask` and `if` turtle"
+    explanation: "Ask the user how many angles they want"
+    example: "Example: angles = ask 'How many angles?'"
+    demo_code: |-
+        angles = ask 'How many angles?'
+        angle = 360 / angles
+        forward 50
 7:
-    -   explanation: Připomeň si `print` s uvozovkami.
-        example: "Příklad: print 'Ahoj, vítej v Hedy!'"
-        demo_code: print 'Ahoj, vítej v Hedy!'
-        name: '{print}'
-    -   explanation: Zopakuj si příkaz `ask`.
-        example: 'Příklad: barva = ask Jaká je tvoje nejoblíbenější barva?'
-        demo_code: |-
-            barva = ask 'Jaká je tvoje nejoblíbenější barva?'
-            print barva ' je tvoje nejoblíbenější barva.'
-        name: '{ask}'
-    -   explanation: Rozhodni se pomocí `if`.
-        example: "Příklad: if barva is růžová print 'Moje taky!' else print 'Fuj...'"
-        demo_code: |-
-            barva = ask 'Jaká je tvoje nejoblíbenější barva?'
-            if barva is růžová print 'Moje taky!' else print 'Fuj...'
-        name: '{if}'
-    -   name: "repeat - turtle"
-        explanation: "Repeat a line of code with `repeat`."
-        example: "Example: repeat 3 times forward 10"
-        demo_code: |-
-            repeat 3 times forward 10
+-   explanation: Připomeň si `print` s uvozovkami.
+    example: "Příklad: print 'Ahoj, vítej v Hedy!'"
+    demo_code: print 'Ahoj, vítej v Hedy!'
+    name: '{print}'
+-   explanation: Zopakuj si příkaz `ask`.
+    example: 'Příklad: barva = ask Jaká je tvoje nejoblíbenější barva?'
+    demo_code: |-
+        barva = ask 'Jaká je tvoje nejoblíbenější barva?'
+        print barva ' je tvoje nejoblíbenější barva.'
+    name: '{ask}'
+-   explanation: Rozhodni se pomocí `if`.
+    example: "Příklad: if barva is růžová print 'Moje taky!' else print 'Fuj...'"
+    demo_code: |-
+        barva = ask 'Jaká je tvoje nejoblíbenější barva?'
+        if barva is růžová print 'Moje taky!' else print 'Fuj...'
+    name: '{if}'
+-   name: "repeat - turtle"
+    explanation: "Repeat a line of code with `repeat`."
+    example: "Example: repeat 3 times forward 10"
+    demo_code: |-
+        repeat 3 times forward 10
 8:
-    -   explanation: Něco vypiš a hlavně nezapomeň na uvozovky!
-        example: "Příklad: print '5 krát 5 je ' 5 * 5"
-        demo_code: print '5 krát 5 je ' 5 * 5
-        name: '{print}'
-    -   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
-        example: "Příklad: vysledek = ask 'Kolik je 5 plus 5?'"
-        demo_code: |-
-            vysledek = ask 'Kolik je 5 plus 5?'
-            if vysledek is 10
-                print 'Skvělá práce!'
-                print 'Výsledek opravdu je ' vysledek
-            else
-                print 'Ups, těsně vedle...'
-                print 'Správný výsledek je 10.'
-        name: '{ask}'
-    -   name: '`{repeat}` with turtle'
-        explanation: '{repeat} multiple lines'
-        example: 'Example: draw a square'
-        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   explanation: Něco vypiš a hlavně nezapomeň na uvozovky!
+    example: "Příklad: print '5 krát 5 je ' 5 * 5"
+    demo_code: print '5 krát 5 je ' 5 * 5
+    name: '{print}'
+-   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
+    example: "Příklad: vysledek = ask 'Kolik je 5 plus 5?'"
+    demo_code: |-
+        vysledek = ask 'Kolik je 5 plus 5?'
+        if vysledek is 10
+            print 'Skvělá práce!'
+            print 'Výsledek opravdu je ' vysledek
+        else
+            print 'Ups, těsně vedle...'
+            print 'Správný výsledek je 10.'
+    name: '{ask}'
+-   name: '`{repeat}` with turtle'
+    explanation: '{repeat} multiple lines'
+    example: 'Example: draw a square'
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
-  - name: "`{if}` with multiple lines"
+-   name: "`{if}` with multiple lines"
     explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
     example: "Example: answer = {ask} 'What is 20 plus 20?'"
     demo_code: |-
-      answer = {ask} 'What is 20 plus 20?'
-      {if} answer {is} 20
-          {print} 'Well done!!'
-          {print} 'The answer is indeed' answer
-      else
-          {print} 'Wrong'
-          {print} 'The answer is 20'
-  - name: "`{repeat}` and turtle"
+        answer = {ask} 'What is 20 plus 20?'
+        {if} answer {is} 20
+            {print} 'Well done!!'
+            {print} 'The answer is indeed' answer
+        else
+            {print} 'Wrong'
+            {print} 'The answer is 20'
+-   name: "`{repeat}` and turtle"
     explanation: "{repeat} multiple lines"
     example: "Example: create a square"
     demo_code: |-
-      {repeat} 4 {times}
-          {turn} 90
-          {forward} 50
+        {repeat} 4 {times}
+            {turn} 90
+            {forward} 50
 10:
-  - name: "{print}"
+-   name: "{print}"
     explanation: "print something. Remember to use a quotation mark for literal printing."
     example: "Example: {print} '5 times 5 is ' 5 * 5"
     demo_code: "{print} '5 times 5 is ' 5 * 5"
-  - name: "{for} with a list"
+-   name: "{for} with a list"
     explanation: "print all things in a list "
     example: "Example: {for} animal {in} animals"
     demo_code: |-
-      animals {is} dog, cat, blobfish
-      {for} animal {in} animals
-        {print} 'I love ' animal
+        animals {is} dog, cat, blobfish
+        {for} animal {in} animals
+          {print} 'I love ' animal
 11:
-    -   name: for loop
-        explanation: Nahradíme `repeat` za `for` a přidáme rozsah.
-        example: for pocitadlo in range 1  to 5
-        demo_code: |-
-            for pocitadlo in range 1  to 5
-                print pocitadlo
-    -   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
-        example: "Příklad: vysledek = ask 'Kolik je 5 plus 5?'"
-        demo_code: |-
-            vysledek = ask 'Kolik je 5 plus 5?'
-            if vysledek is 10
-                print 'Skvělá práce!'
-                print 'Výsledek opravdu je ' vysledek
-            else
-                print 'Ups, těsně vedle...'
-                print 'Správný výsledek je 10.'
-        name: '{ask}'
+-   name: for loop
+    explanation: Nahradíme `repeat` za `for` a přidáme rozsah.
+    example: for pocitadlo in range 1  to 5
+    demo_code: |-
+        for pocitadlo in range 1  to 5
+            print pocitadlo
+-   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
+    example: "Příklad: vysledek = ask 'Kolik je 5 plus 5?'"
+    demo_code: |-
+        vysledek = ask 'Kolik je 5 plus 5?'
+        if vysledek is 10
+            print 'Skvělá práce!'
+            print 'Výsledek opravdu je ' vysledek
+        else
+            print 'Ups, těsně vedle...'
+            print 'Správný výsledek je 10.'
+    name: '{ask}'
 12:
-  - name: "float directly"
+-   name: "float directly"
     explanation: "Decimal numbers"
     example: "{print} 2.5 + 2.5"
     demo_code: |
-      {print} 'Calculate away!'
-      {print} 'Two and a half plus two and a half is...'
-      {print} 2.5 + 2.5
-  - name: "assign text"
+        {print} 'Calculate away!'
+        {print} 'Two and a half plus two and a half is...'
+        {print} 2.5 + 2.5
+-   name: "assign text"
     explanation: "Text with quotation marks after ="
     example: "name = 'Hedy'"
     demo_code: |
-      name = 'Hedy the Robot'
-      {print} 'Hello ' name
-  - name: "quotes after {if} comparison"
+        name = 'Hedy the Robot'
+        {print} 'Hello ' name
+-   name: "quotes after {if} comparison"
     explanation: "Text with quotation marks after {if}"
     example: "name = 'Hedy'"
     demo_code: |
-      name = {ask} 'Who are you?'
-      {if} name = 'Hedy'
-          {print} 'Hi there!'
-  - name: "quotes in list"
+        name = {ask} 'Who are you?'
+        {if} name = 'Hedy'
+            {print} 'Hi there!'
+-   name: "quotes in list"
     explanation: "A list with quotation marks"
     example: "name = 'Hedy', 'Felienne'"
     demo_code: |
-      superheroes = 'Iron Man', 'Batman', 'Superman'
-      {print} superheroes {at} {random}
+        superheroes = 'Iron Man', 'Batman', 'Superman'
+        {print} superheroes {at} {random}
 13:
-    -   name: and
-        explanation: Obě tvrzení (nalevo i napravo od `and`) musí být pravdivé.
-        example: if 3+2 is 5 and 2+2 is 4
-        demo_code: |-
-            odpoved1 = ask 'Kolik je 3 + 2?'
-            odpoved2 = ask 'Kolik je 2 + 2?'
-            if odpoved1 is 5 and odpoved2 is 4
-                print 'Obě odpovědi jsou správně!'
-            else
-                print 'Minimálně jedna z odpovědí je špatně!'
-    -   name: or
-        explanation: Alespoň jedno z tvrzení (nalevo a napravo od `or`) musí být pravdivé, pokud platí obě, je to taky v pořádku.
-        example: if 3+2 is 5 or 2+2 is 4
-        demo_code: |-
-            odpoved1 = ask 'Kolik je 3 + 2?'
-            odpoved2 = ask 'Kolik je 2 + 2?'
-            if odpoved1 is 5 or odpoved2 is 4
-                print 'Alespoň jedna odpověď je správně!'
-            else
-                print 'Obě odpovědi jsou špatně!'
+-   name: and
+    explanation: Obě tvrzení (nalevo i napravo od `and`) musí být pravdivé.
+    example: if 3+2 is 5 and 2+2 is 4
+    demo_code: |-
+        odpoved1 = ask 'Kolik je 3 + 2?'
+        odpoved2 = ask 'Kolik je 2 + 2?'
+        if odpoved1 is 5 and odpoved2 is 4
+            print 'Obě odpovědi jsou správně!'
+        else
+            print 'Minimálně jedna z odpovědí je špatně!'
+-   name: or
+    explanation: Alespoň jedno z tvrzení (nalevo a napravo od `or`) musí být pravdivé, pokud platí obě, je to taky v pořádku.
+    example: if 3+2 is 5 or 2+2 is 4
+    demo_code: |-
+        odpoved1 = ask 'Kolik je 3 + 2?'
+        odpoved2 = ask 'Kolik je 2 + 2?'
+        if odpoved1 is 5 or odpoved2 is 4
+            print 'Alespoň jedna odpověď je správně!'
+        else
+            print 'Obě odpovědi jsou špatně!'
 14:
-    -   name: Menší
-        explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.
-        example: 'Příklad: vek < 13'
-        demo_code: |-
-            vek = ask 'Kolik je ti let?'
-            if vek < 13
-                print 'Jsi mladší než já!'
-    -   name: Větší
-        explanation: Používáme `>`, abychom zjistili, jestli je první číslo větší než druhé. Například pokud chceme ověřit, že je proměnná větší než 15, použijeme `promenna > 15`.
-        example: 'Příklad: vek > 13'
-        demo_code: |-
-            vek = ask 'Kolik je ti let?'
-            if vek > 13
-                print 'Jsi mladší než já!'
-    -   name: Equal
-        explanation: We use the `==` to check if two things are the same.
-        example: 'For example: answer == 25'
-        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
-    -   name: Not equal
-        example: 'For example: answer != 25'
-        explanation: 'We use the `!=` to check if two things are not the same. '
-        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
-    -   example: 'For example: age <= 12'
-        explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-        name: Smaller {or} equal
-        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
-    -   name: Bigger or equal
-        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-        example: 'For example: age >= 14'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+-   name: Menší
+    explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.
+    example: 'Příklad: vek < 13'
+    demo_code: |-
+        vek = ask 'Kolik je ti let?'
+        if vek < 13
+            print 'Jsi mladší než já!'
+-   name: Větší
+    explanation: Používáme `>`, abychom zjistili, jestli je první číslo větší než druhé. Například pokud chceme ověřit, že je proměnná větší než 15, použijeme `promenna > 15`.
+    example: 'Příklad: vek > 13'
+    demo_code: |-
+        vek = ask 'Kolik je ti let?'
+        if vek > 13
+            print 'Jsi mladší než já!'
+-   name: Equal
+    explanation: We use the `==` to check if two things are the same.
+    example: 'For example: answer == 25'
+    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+-   name: Not equal
+    example: 'For example: answer != 25'
+    explanation: 'We use the `!=` to check if two things are not the same. '
+    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+-   example: 'For example: age <= 12'
+    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+    name: Smaller {or} equal
+    demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+-   name: Bigger or equal
+    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+    example: 'For example: age >= 14'
+    demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
 15:
-    -   name: Pravdivostní while
-        explanation: Můžeme použít `while` cyklus s `True` a `False`.
-        example: 'Příklad: while spravna_odpoved is False'
-        demo_code: |-
-            odpoved = 0
-            while odpoved != 25
-                odpoved = ask 'Kolik je 5 * 5?'
-            print 'Dostala jsem správnou odpověď!'
-    -   name: While s operátory menší/větší než
-        explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
-        example: 'Příklad: while pocet < 3'
-        demo_code: |-
-            pocet = 1
-            while pocet < 3
-                print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
-                pocet = pocet + 1
-            print 'Hotovo'
+-   name: Pravdivostní while
+    explanation: Můžeme použít `while` cyklus s `True` a `False`.
+    example: 'Příklad: while spravna_odpoved is False'
+    demo_code: |-
+        odpoved = 0
+        while odpoved != 25
+            odpoved = ask 'Kolik je 5 * 5?'
+        print 'Dostala jsem správnou odpověď!'
+-   name: While s operátory menší/větší než
+    explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
+    example: 'Příklad: while pocet < 3'
+    demo_code: |-
+        pocet = 1
+        while pocet < 3
+            print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
+            pocet = pocet + 1
+        print 'Hotovo'
 16:
-    -   explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
-        example: "Příklad: ovoce = ['jablko', 'banán', 'třešně']"
-        demo_code: |-
-            ovoce = ['jablko', 'banán', 'třešně']
-            print ovoce
-        name: square brackets
-    -   name: Vyber položku ze seznamu.
-        explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
-        example: 'Příklad: prvniovoce = ovoce[1]'
-        demo_code: |-
-            ovoce = ['jablko', 'banán', 'třešně']
-            prvni_ovoce = ovoce[1]
-            print prvni_ovoce
-    -   name: Získej náhodnou položku ze seznamu.
-        explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
-        example: 'Příklad: nahodneovoce is ovoce[random]'
-        demo_code: |-
-            ovoce = ['jablko', 'banán', 'třešně']
-            nahodne_ovoce = ovoce[random]
-            print nahodne_ovoce
+-   explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
+    example: "Příklad: ovoce = ['jablko', 'banán', 'třešně']"
+    demo_code: |-
+        ovoce = ['jablko', 'banán', 'třešně']
+        print ovoce
+    name: square brackets
+-   name: Vyber položku ze seznamu.
+    explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
+    example: 'Příklad: prvniovoce = ovoce[1]'
+    demo_code: |-
+        ovoce = ['jablko', 'banán', 'třešně']
+        prvni_ovoce = ovoce[1]
+        print prvni_ovoce
+-   name: Získej náhodnou položku ze seznamu.
+    explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
+    example: 'Příklad: nahodneovoce is ovoce[random]'
+    demo_code: |-
+        ovoce = ['jablko', 'banán', 'třešně']
+        nahodne_ovoce = ovoce[random]
+        print nahodne_ovoce
 17:
-    -   explanation: Když používáme `for`, musíme na konec příkazu s ním dát `:`!
-        example: 'for i in range 1 to 10:'
-        demo_code: |-
-            for i in range 1 to 10:
-                print i
-            print 'Už jdu!'
-        name: '{elif}'
-    -   explanation: To stejné musíme udělat i u `if`.
-        example: 'if barva is zelená:'
-        demo_code: |-
-            barva = ask 'Jaká je tvoje nejoblíbenější barva?'
-            if barva is 'zelená':
-                print 'Barva je zelená.'
-            else:
-                print 'Barva není zelená.'
-        name: '{print}'
-    -   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
-        example: 'elif a is 5:'
-        demo_code: |-
-            a = 2
-            if a is 1:
-                print 'a je 1'
-            elif a is 2:
-                print 'a je 2'
-            else:
-                print 'a není ani 1 ani 2'
-        name: '{if}'
+-   explanation: Když používáme `for`, musíme na konec příkazu s ním dát `:`!
+    example: 'for i in range 1 to 10:'
+    demo_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Už jdu!'
+    name: '{elif}'
+-   explanation: To stejné musíme udělat i u `if`.
+    example: 'if barva is zelená:'
+    demo_code: |-
+        barva = ask 'Jaká je tvoje nejoblíbenější barva?'
+        if barva is 'zelená':
+            print 'Barva je zelená.'
+        else:
+            print 'Barva není zelená.'
+    name: '{print}'
+-   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
+    example: 'elif a is 5:'
+    demo_code: |-
+        a = 2
+        if a is 1:
+            print 'a je 1'
+        elif a is 2:
+            print 'a je 2'
+        else:
+            print 'a není ani 1 ani 2'
+    name: '{if}'
 18:
-  - name: "{print}"
+-   name: "{print}"
     explanation: "With `{print}` you need to use parentheses"
     example: "{print}"
     demo_code: |-
-      {print}('hi!')
-  - name: "{print} with var"
+        {print}('hi!')
+-   name: "{print} with var"
     explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
     example: "{print}"
     demo_code: |-
-      name = 'Hedy'
-      {print}('my name is ', name)
+        name = 'Hedy'
+        {print}('my name is ', name)
