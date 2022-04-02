@@ -9,13 +9,13 @@ def nop(s):
 
 
 def transform_yaml_to_lark(only_new_lang=True):
-  """Creates a lark file in ../grammars/ for  all yaml files located in ../coursedata/keywords/.
+  """Creates a lark file in ../grammars/ for  all yaml files located in ../content/keywords/.
   If a keyword is not yet translated, it will use the English translation of the keyword
 
   Args:
       only_new_lang (bool, optional): Specifies if only a lark file should be created for a new keyword language or for all languages. Defaults to True.
   """
-  input_path = '../coursedata/keywords/'
+  input_path = '../content/keywords/'
   current_grammar_path = '../grammars/'
   output_path = '../grammars-transformed/'
   Path(output_path).mkdir(parents=True, exist_ok=True)
@@ -67,8 +67,8 @@ def transform_yaml_to_lark(only_new_lang=True):
           f.write(f'{command}: "{translation}"\n')
 
 def transform_level_defaults(old_level, new_level=None, function=nop):
-  input_path = '../coursedata/level-defaults'
-  output_path = '../coursedata/level-defaults-transformed/'
+  input_path = '../content/level-defaults'
+  output_path = '../content/level-defaults-transformed/'
   yaml_filesnames = [f for f in os.listdir(input_path) if
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
@@ -101,8 +101,8 @@ def transform_level_defaults(old_level, new_level=None, function=nop):
         f.write(utils.dump_yaml_rt(sorted_dict))
 
 def transform_adventures(old_level, new_level=None, function=nop):
-  input_path = '../coursedata/adventures'
-  output_path = '../coursedata/adventures-transformed/'
+  input_path = '../content/adventures'
+  output_path = '../content/adventures-transformed/'
   yaml_filesnames = [f for f in os.listdir(input_path) if
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
