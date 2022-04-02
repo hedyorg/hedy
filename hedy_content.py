@@ -67,8 +67,6 @@ class LevelDefaults:
         max_consecutive_level = level
       else:
         return previous_level
-
-
     return max_consecutive_level
 
   def get_defaults_for_level(self, level):
@@ -89,31 +87,13 @@ class LevelDefaults:
         else:
             break
     default_values['extra_examples'] = extra_examples
-
-    # Todo TB -> We have to improve this coding (a lot!)
-    # We use the following section to replace the placeholders with the actual keywords, but this is complex
-    # One solution might be: Separate the commands from the level_defaults -> load them separately
-    # This way can use a more simplistic structure less keen to mistakes and easier to understand
-
-    # We have to verify if it's a string as the extra examples are stored within a list
     for k,v in default_values.items():
         if isinstance(v, str):
             default_values[k] = v.format(**self.keywords)
-        # The commands value is a list of dicts -> we have to parse this separately
-        if k == "commands":
-            parsed_commands = []
-            for command in v:
-                temp = {}
-                for command_key, command_value in command.items():
-                    temp[command_key] = command_value.format(**self.keywords)
-                parsed_commands.append(temp)
-            default_values[k] = parsed_commands
-
     default_type = {
       "level": str(level),
     }
     default_type.update(**default_values)
-
     return DefaultValues(**default_type)
 
   def get_defaults(self, level):
@@ -121,9 +101,40 @@ class LevelDefaults:
 
     return copy.deepcopy(self.levels.get(int(level), {}))
 
+
 class NoSuchDefaults:
-  def get_defaults(self, level):
+  def get_defaults(self):
     return {}
+
+
+class Commands:
+    def __init__(self, language):
+        self.language = language
+        self.keyword_lang = "en"
+        self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
+        self.levels = YamlFile.for_file(f'coursedata/commands/{self.language}.yaml')
+
+    def set_keyword_language(self, language):
+        if language != self.keyword_lang:
+            self.keyword_lang = language
+            self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
+
+    def get_commands_for_level(self, level):
+        # Commands are stored as a list of dicts, so iterate like a list, then get the dict values
+        level_commands = copy.deepcopy(self.levels.get(level, []))
+        for command in level_commands:
+            for k, v in command.items():
+                command[k] = v.format(**self.keywords)
+        return level_commands
+
+    def get_defaults(self, level):
+        return copy.deepcopy(self.levels.get(int(level), {}))
+
+
+class NoSuchCommand:
+  def get_commands(self):
+    return {}
+
 
 class Adventures:
   def __init__(self, language):
@@ -148,8 +159,9 @@ class Adventures:
   def has_adventures(self):
     return self.adventures_file.exists() and self.adventures_file.get('adventures')
 
+
 class NoSuchAdventure:
-  def get_defaults(self, level):
+  def get_adventure(self):
     return {}
 
 
@@ -162,5 +174,4 @@ class DefaultValues:
   example_code = attr.ib(default=None)
   extra_examples = attr.ib(default=None)
   start_code = attr.ib(default=None)
-  commands = attr.ib(default=None)
 

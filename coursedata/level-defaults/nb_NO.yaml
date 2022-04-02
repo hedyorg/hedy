@@ -5,31 +5,6 @@
     intro_text_3: "La oss begynne! Er du ikke sikker på hva du vil lage? I de andre fanene finner du ideer til programmer å bygge.\n"
     example_code_2: "## Eksempelkode\n```\n{ask} Hva er navnet ditt?\n{echo} hallo\n```\n"
     start_code: '{print} hallo verden!'
-    commands:
-    -   name: '{print}'
-        explanation: '{print} noe med `{print}`.'
-        example: 'Eksempel: {print} Hallo, velkommen til Hedy!'
-        demo_code: '{print} Hallo velkommen til Hedy!'
-    -   name: '{ask}'
-        explanation: Still et spørsmål med `{ask}`.
-        example: 'Eksempel: {ask} Hva er favorittfargen din?'
-        demo_code: '{ask} Hva er favorittfargen din?'
-    -   name: '{echo}'
-        explanation: gjenta noe med å bruke `{echo}`.
-        example: 'Eksempel: {echo} så favorittfargen din er '
-        demo_code: "{ask} Hva er favorittfargen din?\n{echo} så favorittfargen din er"
-    -   name: '{print} emojier'
-        explanation: print en emoji med `{print}`
-        example: 'Eksempel: {print} 🙋‍ 🌍 ❗'
-        demo_code: '{print} 🙋 🌍 ❗'
-    -   name: '{forward}'
-        explanation: Tegn en linje med `{forward}`.
-        example: 'Eksempel: {forward} 100'
-        demo_code: '{forward} 100'
-    -   name: '{turn}'
-        explanation: snu tegneskilpadden med `{turn}`
-        example: 'Eksempel: {turn}'
-        demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
     intro_text: "## Variabler\nPå nivå 2 lærer vi to nye kommandoer: `{is}` og `{sleep}`.\nDu kan navngi et ord med `{is}`. Dette kalles en variabel. I dette eksempelet har vi laget en variabel kalt 'navn' og en variabel kalt 'alder'. Du kan bruke ordet 'navn' hvor som helst i koden og det vil bli erstattet av Hedy, som dette:\n\nPå denne måten trenger du ikke lenger `{echo}`kommandoen!\n"
     example_code: "## Eksempelkode\n```\nnavn {is} Hedy\nalder {is} 15\n{print} navn is alder år gammel\n```\n"
@@ -38,60 +13,17 @@
     intro_text_3: "Enda en ny kommando på dette nivået er `{sleep}`. Denne kommandoen setter programmet ditt på pause i et sekund. Hvis du skriver et tall bak {sleep} kommandoen, vil programmet settes på pause i så mange sekunder.\n"
     example_code_3: "```\n{print} Min favorittfarge er...\n{sleep} 2\n{print} grønn!\n```\n"
     start_code: '{print} hallo verden!'
-    commands:
-    -   name: '{is}'
-        explanation: Gi et ord et navn som kan brukes andre steder i programmet med kommandoen `{is}`. Du kan velge navnet helt selv.
-        example: 'Eksempel: navn {is} Hedy.'
-        demo_code: "navn {is} Hedy\n{print} Velkommen navn"
-    -   name: '{ask}'
-        explanation: still et spørsmål med `{ask}`. Pass på! Du må gi svaret et navn ved hjelp av `{is}`.
-        example: 'Eksempel: farge {is} {ask} Hva er din favorittfarge?'
-        demo_code: "farge {is} {ask} Hva er din favorittfarge?\n{print} farge er din favoritt!"
-    -   name: '{sleep}'
-        explanation: La Hedy få seg en pause i et sekund eller fler.
-        example: 'Eksempel: {sleep} 2 '
-        demo_code: "{print} La meg tenke i et sekund...\n{sleep}\n{print} Hmm.. Jeg trenger tre sekunder til...\n{sleep} 3\n{print} Eureka! Jeg har svaret!"
-    -   explanation: Gi et tall et navn ved å bruke `{is}`. Du kan velge navnet selv.
-        example: 'Eksempel: vinkel {is} 90'
-        demo_code: "vinkel {is} 90\n{turn} vinkel\n{forward} 100"
-        name: er - skilpadde
 3:
     intro_text: "## Lag en liste!\nPå nivå 3 kan du lage lister. Du kan la datamaskinen velge noe tilfeldig fra listen, du gjør det med `{at} {random}`.\n"
     example_code: "## Eksempelkode\n\n```\ndyr {is} hund, katt, hest\n{print} dyr {at} {random}\n```\n"
     intro_text_2: Du kan også legge til ting i listen med `{add}` og fjerne ting fra listen med `{remove}`.
     example_code_2: "## Eksempelkode\n\n```\ndyr {is} hund, katt, hest\n{add} pingvin {to_list} dyr\n{remove} katt {from} dyr\n{print} dyr {at} {random}\n```\n"
     start_code: '{print} hallo verden!'
-    commands:
-    -   name: velg_tilfeldig
-        explanation: Velg et tilfeldig ord fra en liste med `{at}` og `{random}`
-        example: 'Eksempel: dyr {is} hun, katt, hest.'
-        demo_code: "dyr {is} hund, katt, hest\n{print} dyr {at} {random}"
-    -   name: '{add}'
-        explanation: legg til en ting i listen
-        example: 'Eksempel: {add} hund {to_list} dyr'
-        demo_code: "dyr {is} ku, katt\n{add} hund {to_list} dyr"
-    -   name: '{remove}'
-        explanation: fjern en ting fra en liste
-        example: 'Eksempel: {remove} hund {from} dyr'
-        demo_code: "dyr {is} katt, hund, ku\n{remove} hund {from} dyr"
 4:
     start_code: "{print} 'Hallo verden'"
     intro_text: "## 'Quotation marks'\nPå nivå 4 har `{ask}` og`{print}` blitt endret.\n\nDu må fra nå av legge tekst du vil skrive ut mellom fnutter.\n\nDette er nyttig, fordi nå kan du skrive ut alle ordene du vil. Også de ordene du har brukt til å lagre noe med `{is}`.\n\nDe fleste programmeringsspråk bruker også fnutter når de skriver ut ting, så vi går altså enda et steg nærmere ekte programmering!\n"
     example_code: "## Eksempelkode\n```\n{print} 'Du må bruke fnutter fra nå av!'\nsvar {is} {ask} 'Hva må vi bruke fra nå av?'\n{print} 'Vi må bruke' svar\n```\n"
     intro_text_2: "## Eventyrene blir mer og mer vanskelig\nEventyrene blir mer og mer vanskelig nå i de rosa fanene.\nSå det er lurest å starte til venstre med Fortellingen, og jobbe seg mot høyre. På denne måten får du mer og mer utfordring for hvert eventyr.\n"
-    commands:
-    -   name: '{print}'
-        explanation: skriv ut nøyaktig det du vil med fnutter
-        example: "Eksempel: {print} 'Hallo velkommen til Hedy.'"
-        demo_code: "{print} 'Hallo, velkommen til Hedy.'"
-    -   name: '{is}'
-        explanation: Gi et navn til noe tekst og `{print}` ut uten fnutter
-        example: 'Eksempel: navn {is} Hedy.'
-        demo_code: "navn {is} Hedy\n{print} 'Mitt navn er ' navn"
-    -   name: '{ask}'
-        explanation: still et spørsmål med `{ask}`.
-        example: "Eksempel: farge {is} {ask} 'Hva er din favorittfarge?'"
-        demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt!'"
 5:
     start_code: "navn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'kult!' {else} {print} 'meh'"
     intro_text: "## Hvis... ellers...\nPå nivå 5 er det noe nytt å lære seg, `{if}`! Med `{if}` kommandoen kan du velge mellom to forskjellige valg.\nDenne koden skriver ut 'nice' hvis du skriver inn Hedy som navn, og 'buu!' hvis du skriver noe annet.\n`{ask}` and `{print}` vil fungere på samme måte som de gjorde i nivå 4.\n"
@@ -100,41 +32,7 @@
     example_code_3: "```\nvakre_farger {is} grønn, gul\nfarge{is} {ask} 'Hva er din favorittfarge?'\n{if} farge {in} vakre_farger {print} 'Vakert!'\n{else} {print} 'meh'\n```\n"
     intro_text_2: "Noen ganger kan kode som bruker `{if}` bli veldig lang. <br>Du kan splitte koden over to linjer og begynne neste linje med `{else}` slik som dette:\n"
     example_code_2: "```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-    commands:
-    -   name: '{print}'
-        explanation: skriv ut nøyaktig det du vil med fnutter
-        example: "Eksempel: {print} 'Hallo, velkommen til Hedy.'"
-        demo_code: "{print} 'Hallo, velkommen til Hedy.'"
-    -   name: '{ask}'
-        explanation: still et spørsmål med `{ask}`.
-        example: "Eksempel: farge {is} {ask} 'Hva er din favorittfarge?'"
-        demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt'"
-    -   name: '{if}'
-        explanation: Ta et valg med `{if}`
-        example: "Eksempel: {if} farge {is} grønn {print} 'vakkert!' {else} {print} 'meh'"
-        demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{if} farge {is} grønn {print} 'vakkert!' {else} {print} 'meh'"
-    -   name: '{if} med skilpadden'
-        explanation: Ta et valg med `{if}`
-        example: 'Eksempel: {if} svaret {is} langt {forward} 100 {else} {forward} 5'
-        demo_code: "svaret {is} {ask} 'Hvor langt skal vi bevege skilpadden?'\n{if} svaret {is} langt {forward} 100 {else} {forward} 5"
-    -   name: '{in}'
-        explanation: Sjekk om lister inneholder elementer `{in}`
-        example: "Eksempel: {if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
-        demo_code: "vakre_farger {is} grønn, gul\nfarge {is} {ask} 'Hva er din favoritt farge'\n{if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
 6:
-    commands:
-    -   name: '{print}'
-        explanation: skriv ut nøyaktig det du vil med fnutter
-        example: "Eksempel: {print} '5 {times} 5 er ' 5 * 5"
-        demo_code: "{print} '5 ganget 5 er ' 5 * 5"
-    -   name: '{ask}'
-        explanation: '{ask} om et regnestykke og sjekk om det er korrekt.'
-        example: "Eksempel: svar {is} {ask} 'Hva er 10 pluss 10?'"
-        demo_code: "svar = {ask} 'Hva er 10 pluss 10?'\n{if} svar {is} 20 {print} 'Korrekt!' {else} {print} 'Feil'"
-    -   name: '`{ask}` {and} `{if}` skilpadde'
-        explanation: '{ask} brukeren hvor mange grader de vil ha'
-        example: "Eksempel: grader{is} {ask} 'Hvor mange grader?'"
-        demo_code: "grader= {ask} 'Hvor mange grader?'\nvinkel = 360 / grader\n{forward} 50"
     start_code: "{print} '5 ganger 5 er ' 5 * 5"
     intro_text: "## 1 + 1\nPå dette nivået skal du få lære noe nytt! Du kan nå bruke Hedy til å gjøre matte.\n\nÅ plusse sammen to tall er enkelt, du bare gjør som du ville gjort i mattetimen, for eksempel: `5 + 5`. Minus funker også: `5 - 5`.\n\nÅ gange er litt anederledes, fordi det ikke er et gangesymbol på tastaturet ditt. Bare se hvis du vil, der er virkelig ikke et gangeteng.\nDerfor bruker vi vanligvis en stjerne `*` når vi ganger. `5 * 5`kan leses som \"5 ganger 5\". Det kan være du må holde inne SHIFT knappen for å kunne skrive *-tegnet.\n"
     example_code: "## Eksempelkode\n```\n{print} '5 pluss 5 er ' 5 + 5\n{print} '5 minus 5 er ' 5 - 5\n{print} '5 ganger 5 er ' 5 * 5\n```\n"
@@ -144,97 +42,23 @@
     start_code: "{repeat} 3 {times} {print} 'Hedy er morro!'"
     intro_text: "## Nivå 7! Nivå 7!\nNivå 7 legger til `{repeat}` kommandoen. {repeat} kan brukes til å kjøre en kodelinje flere ganger.\n"
     example_code: "## Eksempelkode\n```\n{repeat} 3 {times} {print} 'Hedy {is} morro!'\n```\n"
-    commands:
-    -   name: '{print}'
-        explanation: skriv nøyaktiv med bruk av fnutter
-        example: "Eksempel: {print} 'Hallo, velkommen til Hedy.'"
-        demo_code: "{print} 'Hallo, velkommen til Hedy.'"
-    -   name: '{ask}'
-        explanation: still et spørsmål med `{ask}`.
-        example: "Eksempel: farge = {ask} 'Hva er din favorittfarge?'"
-        demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt!'"
-    -   name: '{if}'
-        explanation: Ta et valg med `{if}`
-        example: "Eksempel: {if} farge{is} grønn {print} 'Vakkert!' {else} {print} 'meh'"
-        demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{if} farge {is} grønn {print} 'Vakkert!' {else} {print} 'meh'"
-    -   name: '{repeat} - skillpadde'
-        explanation: gjenta en kodelinje med `{repeat}`.
-        example: 'Eksempel: {repeat} 3 {times} {forward} 10'
-        demo_code: '{repeat} 3 {times} {forward} 10'
 8:
     start_code: "{repeat} 5 {times}\n    {print} 'Hallo folkens'\n    {print} 'Dette vil bli skrevet ut 5 ganger'"
     intro_text: "## Innrykk\n`{ask}` {and} `{print}` fungerer fortsatt slik du er vandt til, men `{if}` {and} `{repeat}` har endret seg litt!\nDu kan nå kjøre små blokker med kode sammen, men du må gi koden korrekt *innrykk*.\nDet betyr at du må legge til fire mellomrom på starten av kodelinjen. Du må også ha nytt innrykk når du skal lage en blokk på en linje.\n"
     example_code: "## Eksempel Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hallo alle sammen'\n    {print} 'Dette blir gjentatt 5 ganger'\n```\n"
-    commands:
-    -   name: '{print}'
-        explanation: skriv noe. Husk å bruke fnutter når du skal skrive ut tekst.
-        example: "Eksempel: {print} '5 {times} 5 {is} ' 5 * 5"
-        demo_code: "{print} '5 {times} 5 {is} ' 5 * 5"
-    -   name: '{ask}'
-        explanation: spør om svaret på et regnestykke og sjekk om det er rett. Vi kan printe to linjer nå.
-        example: "Eksempel: svaret {is} {ask} 'Hva er 5 pluss 5?'"
-        demo_code: "svaret = {ask} 'Hva er 5 plus 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Du har helt rett, svaret er ' svaret\n{else}\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
-    -   name: '`{repeat}` med skilpadden'
-        explanation: '{repeat} flere linjer'
-        example: 'Eksempel: tegn en firkant'
-        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
     start_code: "{repeat} 3 {times}\n    matrett = {ask} 'Hva vil du ha?'\n    {if} matrett {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza er bedre'"
     intro_text: "## Alt på en gang nå!\nPå dette nivået kan du bruke både `{if}` med kodeblokker {and} `{repeat}` sammen!\nI eksempelet kan du se en `{if}` kommando inni en `{repeat}` kommando. Det er også mulig å gjøre det motsatte (`{repeat}` inni en `{if}`).\nDu kan også legge en `{if}` inni en annen `{if}` og en `{repeat}` inni en `{repeat}`.\nPrøv å se om du får det til!\n"
     example_code: "## Eksempelkode\n```\n{repeat} 3 {times}\n    matrett = {ask} 'Hva vil du ha?'\n    {if} matrett {is} pizza\n        {print} 'bra!'\n    else\n        {print} 'pizza er bedre'\n```\n"
-    commands:
-    -   name: '`{if}` med flere linjer'
-        explanation: "'{ask}' om svaret på et regnestykke og se om det er korrekt. Nå skriver vi ut to linjer."
-        example: "Eksempel: svaret = {ask} 'Hva er 20 pluss 20?'"
-        demo_code: "svaret = {ask} 'Hva er 20 pluss 20?'\n{if} svaret {is} 40\n    {print} 'Bra jobbet!'\n    {print} 'Svaret er ' svaret\nelse\n    {print} 'Feil'\n    {print} 'Svaret er 40'"
-    -   name: '`{repeat}` og skilpadden'
-        explanation: '{repeat} flere linjer'
-        example: 'Eksempel : tegn en firkant'
-        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
     start_code: "dyrene {is} hunder, katter, flyndre\n{for} dyr {in} dyrene\n    {print} 'Jeg elsker ' dyr"
     intro_text: "## For hver ting i listen min\nPå dette nivået skal vi lære et nytt nøkkelord `{for}`. Med `{for}` kan du lage en liste og bruke alle elementene i listen.\n`{for}` lager en kodeblokk, på samme måte som `{repeat}` og `{if}`, så alle linjene i kodeblokken må starte med 4 mellomrom (innrykk).\n"
     example_code: "## Eksempelkode\n```\ndyrene {is} hunder, katter, flyndre\n{for} dyr {in} dyrene\n    {print} 'Jeg elsker ' dyr\n```\n"
-    commands:
-    -   name: '{print}'
-        explanation: skriv ut noe. Husk å bruke fnutter når du skal skrive tekst.
-        example: "Eksempel: {print} '5 {times} 5 {is} ' 5 * 5"
-        demo_code: "{print} '5 {times} 5 {is} ' 5 * 5"
-    -   name: '{for} med en liste'
-        explanation: 'skriv ut alle tingene i en liste '
-        example: 'Eksempel: {for} dyr {in} dyrene'
-        demo_code: "dyrene {is} hunder, katter, flyndre\n{for} dyr {in} dyrene\n    {print} 'Jeg elsker ' dyr"
 11:
     start_code: "{for} teller {in} {range} 1 {to} 5\n    {print} teller"
     intro_text: "## Løkker!\n`{print}` fungerer på samme måten som før, men vi legger til en ny versjon av `{for}`. Nå kan du skrive`{for} teller {in} {range} 1 {to} 5` and og bruke `teller` i programmet ditt. En {range} er bare noen tall som kommer etter hverandre på tall-linjen.\nPrøv det ut og se hva som skjer! Husk å ha innrykk på linjen etter `{for}` og `{if}` uttrykkene (det betyr at du må starte setningen med fire mellomrom)\n"
     example_code: "## Eksempelkode\n```\n{for} teller {in} {range} 1 {to} 5\n    {print} teller\n```\n"
-    commands:
-    -   name: '{for} løkke'
-        explanation: Vi kan bruke `{for}` med en {range}
-        example: '{for} teller {in} {range} 1 {to} 5'
-        demo_code: "{for} teller {in} {range} 1 {to} 5\n    {print} teller"
-    -   name: '{ask}'
-        explanation: '{ask} etter svaret på et regnestykke og sjekk om det er korrekt. Vi kan skrive ut to linjer nå.'
-        example: "Eksempel: svaret = {ask} 'Hva er 5 pluss 5?'"
-        demo_code: "svaret = {ask} 'Hva er 5 pluss 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Det var rett og svaret var ' svaret\nelse\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
 12:
-    commands:
-    -   name: flyt direkte
-        explanation: Desimaltall
-        example: '{print} 2.5 + 2.5'
-        demo_code: "{print} 'Kjør på med kalkulasjoner!'\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n"
-    -   name: tildel tekst
-        explanation: Tekst med fnutter etter `=`
-        example: navn = 'Hedy'
-        demo_code: "navn = 'Roboten Hedy'\n{print} 'Hello ' navn\n"
-    -   name: apostrof etter {if}sammenligning
-        explanation: Tekst med fnutter etter {if}
-        example: navn = 'Hedy'
-        demo_code: "navn = {ask} 'Hvem er du?'\n{if} navn = 'Hedy'\n    {print} 'Hei hei!'\n"
-    -   name: hermetegn i liste
-        explanation: En liste med fnutter
-        example: navn = 'Hedy', 'Felienne'
-        demo_code: "superhelter = 'Iron Man', 'Batman', 'Superman'\n{print} superhelter {at} {random}\n"
     start_code: "{print} 'desimaltall må bruke et punktum nå'\n{print} 2.5 + 2.5"
     intro_text: "## Tall og tekst\n**Desimaltall**\nFør dette nivået har det ikke vært mulig å bruke desimaltall som 1.5 i Hedy, men fra nå av kan du det! Legg merke til at datamaskiner bruker punktum `.` som skilletegn i desimaltall.\n"
     example_code: "## Eksempelkode\n```\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n```\n"
@@ -252,15 +76,6 @@
     start_code: "navn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy!'"
     intro_text: "## Og... Eller?\nNå skal vi lære om `{and}` og`{or}`! Hvis du har lyst til å sjekke to påstander trenger du ikke å bruke to `{if}`, du kan bruke `{and}` og `{or}`. Hvis du bruker `{and}` må begge påstandene være sann. Vi kan også bruke `{eller}`, da trenger kun en av påstandene å være sann.\n"
     example_code: "```\nnavn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy'\n```\n"
-    commands:
-    -   name: '{and}'
-        explanation: Begge deler må være korrekt
-        example: '{if} 3 + 2 {is} 5 {and} 2 + 2 {is} 4'
-        demo_code: "svar1 = {ask} 'Hva er 3 + 2?'\nsvar2 = {ask} 'Hva er 2 + 2?'\n{if} svar1 {is} 5 {and} svar2 {is} 4\n    {print} 'Begge svarene må være rett!'\n{else}\n    {print} 'Minst et svar et feil!'"
-    -   name: '{or}'
-        explanation: Minst et av svarene må være rett. Det vil også fungere hvis begge er rett.
-        example: '{if} 3 + 2 {is} 5 {or} 2 + 2 {is} 4'
-        demo_code: "svar1 = {ask} 'Hva er 3 + 2?'\nsvar2 = {ask} 'Hva er 2 + 2?'\n{if} svar1 {is} 5 {or} svar2 {is} 4\n    {print} 'Ihvertfall ett svar er riktig!'\n{else}\n    {print} 'Begge svarene er feil!'"
 14:
     start_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'\n{else}\n    {print} 'Du er eldre enn meg!'"
     intro_text: "## Stor, Større, Størst!\nVi skal lære enda flere nye ting. Det kan være du allerede kjenner til disse fra mattetimen, `<`og `>`.\n`<` kaller vi 'mindre enn'-tegnet. Dette bruker vi for å sjekke om det første tallet er *mindre enn* det andre, f.eks: `alder < 12`kan leses som `alder er mindre enn 12`.\nHvis du vil sjekke om det første tallet er mindre eller like stort som det andre, kan du bruke `<=`, f.eks: `alder <= 11`.\n`>` kaller vi `større enn`-tegnet. Dette bruker vi for å sjekke om det første tallet er *større enn* det andre, f.eks: `poeng > 10` kan leses som `poeng er større enn 10`.\nHvis du vil sjekke om det første tallet er større eller like stort som det andre, kan du bruke `>=`, f.eks: `poeng >= 11`.\nDu kan bruke disse sammenligningene i en `{hvis}`, for eksempel slik:\n"
@@ -269,86 +84,16 @@
     example_code_2: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn == 'Hedy'\n    {print} 'Du er kul!'\n```\n"
     intro_text_3: "Du kan også sjekke om ting *ikke* er lik noe annet ved å bruke `!=`, for eksempel slik:\n"
     example_code_3: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn != 'Hedy'\n    {print} 'Du er ikke Hedy!'\n```\n"
-    commands:
-    -   name: Mindre
-        explanation: Vi bruker `<` for å sjekke om det første tallet er mindre enn det andre tallet.
-        example: 'For eksempel: alder < 12'
-        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'"
-    -   name: Større
-        explanation: Vi bruker `>` for å sjekke om det første tallet er større enn det andre.
-        example: 'For eksempel: alder > 12'
-        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder > 13\n    {print} 'Du er eldre enn meg!'"
-    -   name: Er lik
-        explanation: Vi bruker `==` for å sjekke om to ting er like.
-        example: 'For eksempel: svar == 25'
-        demo_code: "svar = {ask} 'Hva er  5 * 5?'\n{if} svar == 25\n    {print} 'Det {is} korrekt!'"
-    -   name: Ikke lik
-        explanation: 'Vi bruker`!=` å sjekke om ting er ''ikke lik''. '
-        example: 'For eksempel: svar != 25'
-        demo_code: "svar = {ask} 'Hva er 5 * 5?'\n{if} svar != 25\n    {print} 'Det er ikke korrekt!'"
-    -   name: Mindre {or} lik
-        explanation: Vi bruker `<=` for å sjekke om det første tallet er mindre enn det andre tallet.
-        example: 'For eksempel: alder <= 12'
-        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder <= 12\n    {print} 'Du er yngre enn meg!'"
-    -   name: Større eller lik
-        explanation: Vi bruker `>=` til å sjekke om det første tallet er større eller lik det andre tallet.
-        example: 'For eksempel: alder >= 14'
-        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder >= 14\n    {print} 'Du er eldre enn meg!'"
 15:
-    commands:
-    -   name: '{while}'
-        explanation: Vi kan bruke `{while}`løkken med ikke-lik
-        example: 'Eksempel: {while} svar != 25'
-        demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Svaret er korrekt!'"
-    -   name: Mindre {while}
-        explanation: 'Vi kan også bruke `{while}` løkken med `<` og `>`. '
-        example: 'For eksempel: {while} antall < 3'
-        demo_code: "telling = 1\n{while} telling < 3\n    {print} 'Vi gjør dette ' 3 - telling ' flere ganger'\n    telling = telling + 1\n{print} 'Vi er ferdig å telle'"
     start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Det svaret var riktig'"
     intro_text: "## Flere løkker!\nVi skal lære en ny løkke, `{while}` løkken! Denne løkken fortsetter å kjøre så lenge påstanden er sann.\nDet er derfor veldig viktig å endre verdien i løkken.\n\nI eksempelkoden lar vi løkken kjøre til vi får det riktige svaret.\nHvis ikke vi aldri får det riktige svaret, så fortsetter løkken for alltid!\n"
     example_code: "## Eksempelkode\n```\nsvar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'A korrekt svar ble gitt'\n```\n"
 16:
     start_code: "frukt = ['eple', 'banan', 'kirsebær']\n{print} frukt"
     intro_text: "## Mer og mer likt virkelig kode\nVi skal nå lage lister på Python måten, med firkantparanteser rundt listene! Vi beholder fnuttene rundt tekstene i listen slik som vi lærte på et tidligere nivå.\nDu kan bruke firkanparantesene til å peke på en plass i listen.\n"
-    example_code: "## Eksempelkode\n```\nvenner = ['Ahmed', 'Benjamin', 'Marthe']\nlykketall = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'Lykketallet til ' venner[i]\n    {print} 'er ' lykketall[i]\n```\n"
-    commands:
-    -   name: firkantparantes
-        explanation: Liste med firkantparanteser
-        example: "For eksempel: frukt = ['eple', 'banan', 'kirsebær']"
-        demo_code: "frukt = ['eple', 'banan', 'kirsebær']\n{print} frukt"
-    -   name: Hent en ting fra en liste
-        explanation: For å hente en ting fra en liste bruker vi `[tall]`. Så frukt[1] betyr, hent første frukten i listen!
-        example: 'For eksempel: førstefrukt = frukt[1]'
-        demo_code: "frukt = ['banan', 'eple', 'vannmelon']\nførstefrukt = frukt[1]\n{print} førstefrukt"
-    -   name: Hent en tilfeldig ting fra en liste
-        explanation: For å få en tilfeldig til fra listen bruker vi [{random}]. Så `frukt[{random}]` betyr; hent en tilfeldig frukt fra listen!
-        example: 'For eksempel: tilfeldig_frukt = frukt[{random}]'
-        demo_code: "frukt = ['banan', 'eple', 'vannmelon']\ntilfeldig_frukt = frukt[{random}]\n{print} tilfeldig_frukt"
 17:
     start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller ei, her kommer jeg!'"
     intro_text: "Nå gjør vi en liten endring i koden når vi bruker innrykk. Hver gang vi trenger innrykk, må vi nå skrive `:` på linjen før innrykket.\n\nPå dette nivået kan du også bruke en ny kommando `{elif}`. `{elif}` er en forkortelse for {else} {if} og du trenger det når du har lyst til å lage kode med 3 (eller fler!) alternativer.\nSjekk hvordan det blir!\n```\npremier = ['1 million kroner', 'en eplekake', 'ingenting']\ndin_premie = premier[{random}]\n{print} 'Du vinner ' din_premie \n{if} din_premie == '1 million kroner':\n    {print} 'Hurra! Du er rik!'\n{elif} din_premie == 'en eplekake':\n    {print} 'Digg, eplekake!'\n{else}:\n    {print} 'Bedre lykke neste gang..'\n```\n"
-    commands:
-    -   name: '{elif}'
-        explanation: '`{elif}`.'
-        example: '{elif} a == 5:'
-        demo_code: "a = 2\n{if} a == 1:\n    {print} 'a er 1'\n{elif} a == 2:\n    {print} 'a er 2'\n{else}:\n    {print} 'a er ikke 1 eller 2'"
-    -   name: '{print}'
-        explanation: Når vi bruker en `{for}` løkke, må vi legge til `:` på slutten av `{for}` linjen!
-        example: 'for i {in} {range} 1 {to} 10:'
-        demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Klar eller ei, her kommer jeg!'"
-    -   name: '{if}'
-        explanation: Vi må gjøre det samme med alle `{if}`-sjekkene våre
-        example: "{if} farge == 'grønn':"
-        demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{if} farge == 'grønn':\n    {print} 'Din favorittfarge er grønn'\n{else}:\n    {print} 'Din favorittfarge er ikke grønn'"
 18:
     start_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
     intro_text: "## Level 18\nVi har ankommet nivået hvor vi skriver virkelig pythonkode! Python er riktignok ikke på norsk, men du kan bruke knappen oppe i høyre hjørne av kodefeltet hvis du vil se hvordan koden ser ut på engelsk.\nNå når vi har nådd ekte pythonkode må vi bruke paranteser når vi bruker {print} og {range}.\nDette ser slik ut:\n```\n{print}('Mitt navn er Hedy!')\n```\nFor å skrive ut mer enn en ting må du bruke et komma mellom tingene.\n```\nnavn = 'Hedy'\n{print}('Mitt navn er ', navn)\n```"
-    commands:
-    -   name: '{print}'
-        explanation: Med`{print}` må du bruke paranteser
-        example: '{print}'
-        demo_code: "{print}('hei!')"
-    -   name: '{print} med var'
-        explanation: Med `{print}` må vi bruke parantes og komma for å skrive ut flere ting
-        example: '{print}'
-        demo_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"

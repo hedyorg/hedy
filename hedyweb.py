@@ -1,5 +1,4 @@
 import collections
-import json
 
 from flask_babel import gettext
 
@@ -7,7 +6,6 @@ from website.yaml_file import YamlFile
 import attr
 import glob
 from os import path
-from flask import g
 from flask_helpers import render_template
 from website.auth import current_user, is_teacher
 import utils
@@ -46,7 +44,7 @@ class PageTranslations:
     return d
 
 
-def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
+def render_code_editor_with_tabs(level_defaults, commands, max_level, level_number, version, loaded_program, adventures, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
   user = current_user()
 
   if not level_defaults:
@@ -78,7 +76,7 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   # Merge level defaults into adventures so it is rendered as the first tab
   arguments_dict.update(**attr.asdict(level_defaults))
 
-  return render_template("code-page.html", **arguments_dict)
+  return render_template("code-page.html", **arguments_dict, commands=commands)
 
 def render_specific_adventure(level_defaults, level_number, adventure, prev_level, next_level):
     arguments_dict = {}
