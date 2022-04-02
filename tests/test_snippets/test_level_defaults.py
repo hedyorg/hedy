@@ -31,13 +31,6 @@ def collect_snippets(path):
                 # start_code
                 Hedy_snippets.append(Snippet(filename=file, level=level, field_name='start_code', code=yaml[level]['start_code']))
 
-                # commands.k.demo_code
-                for k, command in enumerate(yaml[level]['commands']):
-                    # todo: at one point all commands should have names again!
-
-                    command_text_short = command['name'] if 'name' in command.keys() else command['explanation'][0:10]
-                    Hedy_snippets.append(
-                        Snippet(filename=file, level=level, field_name='command ' + command_text_short + ' demo_code', code=command['demo_code']))
 
                 # code snippets inside intro_text
                 code_snippet_counter = 0

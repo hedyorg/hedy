@@ -43,6 +43,10 @@ from website.log_fetcher import log_fetcher
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
+COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
+for lang in ALL_LANGUAGES.keys():
+    COMMANDS[lang] = hedy_content.Commands(lang)
+
 LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
 for lang in ALL_LANGUAGES.keys():
     LEVEL_DEFAULTS[lang] = hedy_content.LevelDefaults(lang)
@@ -877,6 +881,9 @@ def index(level, program_id):
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
     level_defaults_for_lang.set_keyword_language(g.keyword_lang)
 
+    level_commands_for_lang = COMMANDS[g.lang]
+    level_commands_for_lang.set_keyword_language(g.keyword_lang)
+
     if 'levels' in customizations:
         available_levels = customizations['levels']
         now = timems()
@@ -892,6 +899,10 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
+    try:
+        commands = level_commands_for_lang.get_commands_for_level(level)
+    except:
+        commands = None # No separate commands file for this language
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
@@ -909,6 +920,7 @@ def index(level, program_id):
 
     return hedyweb.render_code_editor_with_tabs(
         level_defaults=defaults,
+        commands=commands,
         max_level=max_level,
         level_number=level,
         version=version(),

@@ -1,0 +1,387 @@
+1:
+    -   name: "print"
+        explanation: "Gib etwas mit `print` aus."
+        example: "Beispiel: print Hallo willkommen bei Hedy!"
+        demo_code: "print Hallo willkommen bei Hedy!"
+    -   name: "ask"
+        explanation: "Frage etwas mit `ask`."
+        example: "Beispiel: ask Was ist deine Lieblingsfarbe?"
+        demo_code: "ask Was ist deine Lieblingsfarbe?"
+    -   name: "echo"
+        explanation: "Wiederhole etwas mit `echo`."
+        example: "Beispiel: echo Also deine Lieblingsfarbe ist "
+        demo_code: |-
+            ask Was ist deine Lieblingsfarbe?
+            echo Also deine Lieblingsfarbe ist
+    -   name: forward
+        explanation: Gebe ein emoji mit `{print}`aus
+        example: 'Beispiel: forward 100'
+        demo_code: forward 100
+    -   name: turn
+        explanation: Zeichne eine Linie mit `forward`.
+        example: turn
+        demo_code: |-
+            {forward} 100
+    -   demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+        explanation: Drehe die Schildkröte mit `{turn}`
+        example: 'Beispiel: {turn}'
+        name: '{turn}'
+2:
+    -   name: "is"
+        explanation: "Gib einem Wort einen Namen mit `is`, den du in deinem Programm wiederverwenden kannst."
+        example: "Beispiel: name is Hedy."
+        demo_code: |-
+            name is Hedy
+            print Willkommen name
+    -   name: "ask"
+        explanation: "Frage etwas mit `ask`. Aber pass auf! Du musst der Antwort einen Namen mit `is` geben."
+        example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
+        demo_code: |-
+            Farbe is ask Was ist deine Lieblingsfarbe?
+            print Du magst am liebsten Farbe !
+    -   name: sleep
+        explanation: Lass Hedy für ein paar Sekunden pausieren.
+        example: 'Beispiel: sleep 2 '
+        demo_code: |-
+            print Lass mich einen Moment nachdenken...
+            sleep
+            print Hmm.. Ich brauche noch 3 Sekunden mehr...
+            sleep 3
+            print Eureka! Jetzt hab ich's!
+    -   explanation: Vergib einen Namen an eine Zahl mit `is`. Du kannst den Namen selbst wählen.
+        example: 'Beispiel: winkel is 90'
+        demo_code: |-
+            winkel is 90
+            turn winkel
+            forward 100
+        name: is - Schildkröte
+3:
+    -   name: "wähle_zufällig"
+        explanation: "Wähle mit `at` und `random` zufällig ein Wort aus einer Gruppe aus"
+        example: "Beispiel: tiere is Hund, Katze, Känguru."
+        demo_code: |-
+            tiere is Hund, Katze, Känguru
+            print tiere at random
+    -   name: Add
+        explanation: Füge ein Ding zu einer Liste hinzu.
+        example: 'Beispiel: add Hund to tiere'
+        demo_code: |-
+            tiere is Kuh, Katze
+            add Hund to tiere
+    -   name: Remove
+        explanation: Entferne ein Ding aus einer Liste
+        example: 'Beispiel: remove Hund from tiere'
+        demo_code: |-
+            tiere is Katze, Hund, Kuh
+            remove Hund from tiere
+4:
+    -   name: "print"
+        explanation: "Benutze Anführungszeichen, um einen Text genau so auszugeben."
+        example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
+        demo_code: "print 'Hallo. Willkommen bei Hedy.'"
+    -   name: "is"
+        explanation: "Gib einem Text einen Namen und gib ihn ohne Anführungszeichen aus."
+        example: "Beispiel: name is Hedy."
+        demo_code: |-
+            name is Hedy
+            print 'Ich heisse ' name
+    -   name: "ask"
+        explanation: "Frage etwas mit `ask`."
+        example: "Beispiel: farbe is ask 'Was ist deine Lieblingsfarbe?'"
+        demo_code: |-
+            farbe is ask 'Was ist deine Lieblingsfarbe?'
+            print 'Du magst am liebsten ' farbe
+5:
+    -   name: "print"
+        explanation: "Benutze Anführungszeichen, um einen Text genau so auszugeben."
+        example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
+        demo_code: "print 'Hallo. Willkommen bei Hedy.'"
+    -   name: "ask"
+        explanation: "Frage etwas mit `ask`."
+        example: "Beispiel: farbe is ask 'Was ist deine Lieblingsfarbe?'"
+        demo_code: |-
+            farbe is ask 'Was ist deine Lieblingsfarbe?'
+            print 'Du magst am liebsten ' farbe
+    -   name: "if"
+        explanation: "Treffe eine Auswahl mit `if` und `else`"
+        example: "Beispiel: if farbe is grün print 'Hübsch!' else print 'Bäh'"
+        demo_code: |-
+            farbe is ask 'Was ist deine Lieblingsfarbe?'
+            if farbe is grün print 'Hübsch!' else print 'Bäh'
+    -   name: if with turtle
+        explanation: Triff eine Entscheidung mit `if`
+        example: 'Beispiel: if Antwort is weit forward 100 else forward 5'
+        demo_code: |-
+            Antwort is ask 'Wie weit soll ich laufen?'
+            if Antwort is weit forward 100 else forward 5
+    -   name: in
+        explanation: Prüfe ob ein Ding in einer Liste enthalten ist
+        example: "Beispiel: if farbe in schöne_farben print 'Schön!' else print 'meh'"
+        demo_code: |-
+            schöne_farben is Grün, Gelb
+            farbe is ask 'Was ist deine Lieblingsfarbe?'
+            if farbe in schöne_farben print 'Schön!' else print 'meh'
+6:
+    -   name: "print"
+        explanation: "Benutze Anführungszeichen, um einen Text genau so auszugeben."
+        example: "Beispiel: print '5 mal 5 ist ' 5 * 5"
+        demo_code: "print '5 mal 5 ist ' 5 * 5"
+    -   name: "`ask` und `if` mit Berechnungen"
+        explanation: "Frage nach einer Rechenaufgabe."
+        example: "Beispiel: antwort = ask 'Was ist 10 plus 10?'"
+        demo_code: |-
+            antwort = ask 'Was ist 10 plus 10?'
+            if antwort is 20 print 'Ja!' else print 'Ups'
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles = ask 'How many angles?'"
+        demo_code: |-
+            angles = ask 'How many angles?'
+            angle = 360 / angles
+            forward 50
+7:
+    -   name: "print"
+        explanation: "Benutze Anführungszeichen, um einen Text genau so auszugeben."
+        example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
+        demo_code: "print 'Hallo. Willkommen bei Hedy.'"
+    -   name: "ask"
+        explanation: "Frage etwas mit `ask`."
+        example: "Beispiel: farbe = ask 'Was ist deine Lieblingsfarbe?'"
+        demo_code: |-
+            farbe = ask 'Was ist deine Lieblingsfarbe?'
+            print 'Du magst am liebsten ' farbe
+    -   name: "if"
+        explanation: "Treffe eine Auswahl mit `if` und `else`"
+        example: "Beispiel: if farbe is grün print 'Hübsch!' else print 'Bäh'"
+        demo_code: |-
+            farbe = ask 'Was ist deine Lieblingsfarbe?'
+            if farbe is grün print 'Hübsch!' else print 'Bäh'
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
+        demo_code: |-
+            repeat 3 times forward 10
+8:
+    -   name: "print"
+        explanation: "Gib etwas aus. Denke daran, Anführungszeichen für eine wörtliche Ausgabe zu verwenden."
+        example: "Beispiel: print '5 mal 5 ist ' 5 * 5"
+        demo_code: "print '5 mal 5 ist ' 5 * 5"
+    -   name: "`if` mit mehreren Zeilen"
+        explanation: "Frage nach einer Summe und prüfe, ob die Antwort richtig ist. Wir können jetzt zwei Zeilen ausgeben."
+        example: "Beispiel: antwort = ask 'Was ist 5 plus 5?'"
+        demo_code: |-
+            antwort = ask 'Was ist 5 plus 5?'
+            if antwort is 10
+                print 'Gut gemacht!'
+                print 'Die Antwort ist wirklich ' antwort
+            else
+                print 'Ups!'
+                print 'Die Antwort is 10'
+    -   name: '`repeat` with turtle'
+        explanation: Wiederhole mehrere Befehlszeilen
+        example: 'Beispiel: Zeichne ein Quadrat'
+        demo_code: |-
+            repeat 4 times
+                turn 90
+                forward 50
+9:
+  - name: "`{if}` with multiple lines"
+    explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
+    example: "Example: answer = {ask} 'What is 20 plus 20?'"
+    demo_code: |-
+      answer = {ask} 'What is 20 plus 20?'
+      {if} answer {is} 20
+          {print} 'Well done!!'
+          {print} 'The answer is indeed' answer
+      else
+          {print} 'Wrong'
+          {print} 'The answer is 20'
+  - name: "`{repeat}` and turtle"
+    explanation: "{repeat} multiple lines"
+    example: "Example: create a square"
+    demo_code: |-
+      {repeat} 4 {times}
+          {turn} 90
+          {forward} 50
+10:
+  - name: "{print}"
+    explanation: "print something. Remember to use a quotation mark for literal printing."
+    example: "Example: {print} '5 times 5 is ' 5 * 5"
+    demo_code: "{print} '5 times 5 is ' 5 * 5"
+  - name: "{for} with a list"
+    explanation: "print all things in a list "
+    example: "Example: {for} animal {in} animals"
+    demo_code: |-
+      animals {is} dog, cat, blobfish
+      {for} animal {in} animals
+        {print} 'I love ' animal
+11:
+    -   name: '{for}-Schleife'
+        explanation: "wir ersetzen `repeat` mit `for`"
+        example: "for i in range 1 to 10"
+        demo_code: |-
+            for Zähler in range 1 to 5
+              print Zähler
+
+    -   name: '{ask}'
+        explanation: Frag nach der Antwort zu einer Summe und überprüfe ob sie stimmt. Wir können jetzt zwei Zeilen ausgeben.
+        example: "Beispiel: Antwort = {ask} 'Was ist 5 plus 5?'"
+        demo_code: "Antwort = {ask} 'Was ist 5 plus 5?'\n{if} Antwort {is} 10\n    {print} 'Gut gemacht!'\n    {print} 'Nicht ganz, die Antwort wäre ' Antwort\nelse\n    {print} 'Ups!'\n    {print} 'Die Antwort war 10'"
+12:
+    -   name: "float direkt"
+        explanation: "Calculation with decimals"
+        example: "print 2.5 + 2.5"
+        demo_code: |
+            print 'Calculate away!'
+            print 'Two and a half plus two and a half is...'
+            print 2.5 + 2.5
+    -   name: "float in var"
+        explanation: "Storing a calculation with decimals"
+        example: "antwoord = 2.5 + 2.5"
+        demo_code: |
+            Name = 'Hedy der Roboter'
+            {print} 'Hallo ' Name
+    -   name: Anführungszeichen nach einem {if} Vergleich
+        example: Name = 'Hedy'
+        explanation: Text in Anführungszeichen nach {if}
+        demo_code: "Name = {ask} 'Wer bist du?'\n{if} Name = 'Hedy'\n    {print} 'Hallo!'\n"
+    -   name: Anführungszeichen in Listen
+        explanation: Eine Liste mit Anführungszeichen
+        demo_code: "Superhelden = 'Iron Man', 'Batman', 'Superman'\n{print} Superhelden {at} {random}\n"
+        example: Name = 'Hedy', 'Felienne'
+13:
+    -   name: "`and`"
+        explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+            antwort1 = ask 'Was ergibt 3+2?'
+            antwort2 = ask 'Was ergibt 2+2?'
+            if antwort1 is 5 and antwort2 is 4
+                print 'Beide Antworten sind richtig!'
+            else
+                print 'Mindestens eine Antwort ist falsch.'
+    -   name: "`or`"
+        explanation: |-
+            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein. Wenn beide richtig sind, ist es auch in Ordnung.
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+            antwort1 = ask 'Was ergibt 3+2?'
+            antwort2 = ask 'Was ergibt 2+2?'
+            if antwort1 is 5 or antwort2 is 4
+                print 'Mindestens eine Antwort ist richtig!'
+            else
+                print 'Beide Antworten sind falsch.'
+14:
+    -   name: "Kleiner"
+        explanation: |-
+            Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist. Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
+        example: "alter < 13"
+        demo_code: |-
+            alter = ask 'Wie alt bist du?'
+            if alter < 13
+                print 'Du bist jünger als ich!'
+    -   name: "Größer"
+        explanation: |-
+            Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist. Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
+        example: "alter > 13"
+        demo_code: |-
+            alter = ask 'Wie alt bist du?'
+            if alter > 13
+                print 'Du bist älter als ich!'
+    -   name: Gleich
+        explanation: Wir verwenden `==` um zu überprüfen ob zwei Dinge gleich sind.
+        example: 'Zum Beispiel: Antwort == 25'
+        demo_code: "Antwort = {ask} 'Was macht 5 * 5?'\n{if} Antwort == 25\n    {print} 'Das stimmt!'"
+    -   name: Ungleich
+        explanation: 'Wir verwenden das `!=` um zu überprüfen ob zwei Dinge ungleich, also nicht gleich sind. '
+        example: 'Zum Beispiel: Antwort != 25'
+        demo_code: "Antwort = {ask} 'Was macht 5 * 5?'\n{if} Antwort != 25\n    {print} 'Das stimmt nicht!'"
+    -   example: 'Zum Beispiel: Alter <= 12'
+        explanation: Wir verwenden `<=` um zu überprüfen ob die erste Zahl kleiner oder gleich der zweiten Zahl ist.
+        name: Kleiner gleich
+        demo_code: "Alter = {ask} 'Wie alt bist du?'\n{if} Alter <= 12\n    {print} 'Du bist jünger als ich!'"
+    -   example: 'Zum Beispiel: Alter >= 14'
+        name: Größer gleich
+        explanation: Wir verwenden `>=` um zu überprüfen ob die erste Zahl größer oder gleich der zweiten Zahl ist.
+        demo_code: "Alter = {ask} 'Wie alt bist du?'\n{if} Alter >= 14\n    {print} 'Du bist älter als ich!'"
+15:
+    -   name: "while"
+        explanation: "Wir können die `while`-Schleife verwenden."
+        example: "while richtige_antwort is False"
+        demo_code: |-
+            antwort = 0
+            while antwort != 25
+                antwort = ask 'Wieviel ist 5 mal 5?'
+                print 'Das ist die richtge Antwort!'
+    -   name: "while mit Ungleichungen"
+        explanation: |-
+            Wir können die "while"-Schleife auch mit "<" und ">" verwenden. Beachte, dass du die Zahl ändern musst, damit die Schleife endet. Wir machen das hier mit `zähler = zähler + 1`.
+        example: "while zähler < 3"
+        demo_code: |-
+            zähler = 1
+            while zähler < 3
+                print 'Wir machen dies noch ' 3 - zähler ' mal.'
+                zähler = zähler + 1
+            print 'Wir sind fertig!'
+16:
+    -   explanation: |-
+            Wir werden eckige Klammern um Listen setzen! Wir müssen auch `'` um Elemente in Listen setzen.
+        example: "früchte = ['Apfel', 'Banane', 'Kirsche']"
+        demo_code: |-
+            früchte = ['Apfel', 'Banane', 'Kirsche']
+            print früchte
+        name: Eckige Klammern
+    -   name: "Nimm ein Element aus einer Liste"
+        explanation: |-
+            Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`. Mit `früchte[1]` erhalten wir also die erste Frucht aus der Liste!
+        example: "erste_frucht = früchte[1]"
+        demo_code: |-
+            früchte = ['Apfel', 'Banane', 'Kirsche']
+            erste_frucht = früchte[1]
+            print erste_frucht
+    -   name: "Nimm ein zufälliges Element aus einer Liste"
+        explanation: |-
+            Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`. Mit früchte[random] erhalten wir also eine zufällige Frucht aus der Liste!
+        example: "zufällige_frucht = früchte[random]"
+        demo_code: |-
+            früchte = ['Apfel', 'Banane', 'Kirsche']
+            zufällige_frucht = früchte[random]
+            print zufällige_frucht
+17:
+    -   explanation: "`{elif}`."
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            a = 2
+            {if} a == 1:
+                {print} 'a ist gleich 1'
+            {elif} a == 2:
+                {print} 'a ist gleich 2'
+            {else}:
+                {print} 'a ist nicht gleich 1 oder 2'
+        name: '{elif}'
+    -   explanation: "Wenn wir ein `{for}` verwenden, müssen wir ein `:` hinter die `{for}` Anweisung schreiben!"
+        example: "for i {in} {range} 1 {to} 10:"
+        demo_code: |-
+            {for} i {in} {range} 1 {to} 12:
+                {print} i
+            {print} 'Ob ihr bereit seid oder nicht, ich komme!'
+        name: '{print}'
+    -   explanation: |-
+            Wir müssen dasselbe mit allen unseren `if`-Anweisungen tun.
+        example: "{if} Farbe {is} grün:'"
+        demo_code: |-
+            Farbe = {ask} 'Was ist deine Lieblingsfarbe?'
+            {if} Farbe == 'grün':
+                {print} 'Deine Lieblingsfarbe ist grün'
+            {else}:
+                {print} 'Deine Lieblingsfarbe ist nicht grün'
+        name: '{if}'
+18:
+    -   name: '{print}'
+        explanation: Mit `{print}` musst du runde Klammern verwenden
+        example: '{print}'
+        demo_code: "{print}('Hi!')"
+    -   name: '{print} mit einer Variable'
+        explanation: Mit `{print}`musst du runde Klammern verwenden, und Kommas falls du mehrere Elemente ausgeben möchtest
+        example: '{print}'
+        demo_code: "Name = 'Hedy'\n{print}('Ich heiße ', Name)"
