@@ -1,0 +1,340 @@
+1:
+    intro_text: |-
+        Vítej v Hedy! V první úrovni můžeš používat příkazy `print`, `ask` a `echo`.
+
+        V levém panelu vidíš všechny příkazy 1. úrovně.
+
+        Stiskni modré tlačítko a kód se napíše sám za tebe!
+
+        Kód si vždy vyzkoušej pomocí zeleného tlačítka `Spustit kód` pod levým programovým polem.
+
+        Nevíš, co dál tvořit? Na dalších záložkách najdeš několik nápadů, kde si můžeš vše lépe procvičit.
+    start_code: print Ahoj světe!
+    example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+    example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
+    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    intro_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+2:
+    intro_text: |-
+        Ve 2. úrovni se naučíme něco nového. Odteď můžeš pojmenovat slovo za pomoci `is`.
+
+        Pokud použiješ příkaz `jmeno is Hedy`, můžeš pak kdekoli v kódu použít jmeno a bude nahrazeno slovem Hedy. Všimni si, že jmeno neobsahuje čárku nad e, Hedy totiž neumí pracovat s názvy s českou diakritikou.
+
+        Poznámka: `ask` se změnilo, odpověď ukládej taky pod jméno, například takto:
+
+        ```
+        odpoved is ask Jak se jmenuješ?
+        ```
+
+        `print` stále funguje jako v úrovni 1 a už nepotřebuješ `echo`.
+    start_code: print Ahoj světe!
+    example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+    intro_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+    example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
+    intro_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
+    example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
+3:
+    intro_text: |-
+        V úrovni 3 můžeš také vytvořit seznam. Počítač umí z tohoto seznamu vybrat náhodného člena, konkrétně pomocí příkazu `at random`.
+        ```
+        zvirata is pes, kočka, klokan
+        print zvirata at random
+        ```
+
+        Všechny kódy úrovně 3 najdeš v levém panelu. Opět tady jsou i záložky s dalšími zadáními.
+    start_code: print Ahoj světe!
+    example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
+    intro_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+    example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+4:
+    start_code: print 'Ahoj světe!'
+    intro_text: |4
+
+        V úrovni 4 se mění `ask` a `print`.
+
+        Text, který chceš vytisknout, teď musíš dát do uvozovek.
+
+        Je to užitečné, protože tak můžeš vytisknout všechna slova, která chceš. A to dokonce včetně slov, pod která jsi něco uložil*a pomocí `is`.
+
+        Většina programovacích jazyků také používá při vypisování uvozovky, takže se dostáváme zase o krok blíže ke skutečnému programování!
+
+        ## Úkoly jsou čím dál, tím obtížnější
+        Příkazy najdeš opět vlevo a úkoly v záložkách.
+        Obtížnost zadání se stupňuje, proto je nejlepší začít s příběhem vlevo a pokračovat doprava, abys měl*a postupně větší výzvy.
+    example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
+    intro_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+5:
+    start_code: |-
+        jmeno is ask 'Jak se jmenuješ?'
+        if jmeno is Hedy print 'Super!' else print 'Ok, tebe neznám.'
+    intro_text: |-
+        `ask` a` print` fungují stále jako na úrovni 4.
+
+         V úrovni 5 máme něco nového, je to `if`! Pomocí `if` si můžeš vybrat ze dvou různých možností.
+
+         ## Příklad kódu v Hedy
+         ```
+         jmeno is ask 'Jak se jmenuješ?'
+         if jmeno is Hedy print 'Ahoj!' else print 'Ráda tě poznávám!'
+         ```
+
+         Tento kód vypíše Ahoj!, pokud jako jméno zadáš Hedy, a Ráda tě poznávám!, pokud odpovíš něco jiného.
+
+         ## Úkoly jsou čím dál, tím těžší
+
+         Také ve 4. úrovni jsou zadání v záložkách postupně obtížnější. Proto na nich pracuj zleva doprava.
+    example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+    example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
+    intro_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+    intro_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
+    example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+6:
+    start_code: print '5 krát 5 je ' 5 * 5
+    intro_text: |-
+        `ask`,` print` a `if` stále fungují jako na úrovních 5.
+         V úrovni 6 je ale něco nového, nyní můžeš také počítat!
+
+         Plus je jednoduché, můžeš ho zapsat jako u matematiky, například `5 + 5`. Mínus funguje stejně, je to `5 - 5`.
+
+         S krát je to trochu jiné, protože na klávesnici pro něj není žádný symbol. Zkus ho najít, opravdu tam není!
+         Písmenko x by se nám pletlo se slovy, proto násobíme hvězdičkou: `5 * 5`. Přečti si to jako "5 krát 5", pak si to zapamatujete nejsnáze.
+         ## Příklad kódu v Hedy
+         ```
+         print '5 plus 5 je ' 5 + 5
+         print '5 mínus 5 je ' 5 - 5
+         print '5 krát 5 je ' 5 * 5
+         ```
+    example_code: "## Example Hedy code\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
+    intro_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+7:
+    start_code: repeat 3 times print 'Hedy je zábavná!'
+    intro_text: |-
+        `ask`, `print` a `if` fungují stejně jako na úrovni 5 a 6.
+        Úroveň 7 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
+        ## Příklad kódu v Hedy
+        ```
+        repeat 3 times print 'Hedy je zábavná!'
+        ```
+    example_code: "## Example Hedy code\n```\n{repeat} 3 {times} {print} 'Hedy {is} fun!'\n```\n"
+8:
+    start_code: |-
+        repeat 5 times
+            print 'Ahojte, kamarádi'
+            print 'Toto se vypíše 5krát'
+    intro_text: |
+        `ask` a `print` stále fungují tak, jak je znáš. Ale `if` a `repeat` se změnily!
+        Od teď můžeš spouštět víc řádků kódu společně, ale musíš je odsadit.
+        To znamená, že na začátek řádku dáš čtyři mezery. To platí i v případě, že chceš vytvořit blok z pouze jednoho řádku.
+
+        ## Příklad kódu v Hedy
+        ```
+        repeat 5 times
+            print 'Ahoj všichni'
+            print 'Tohle všechno se 5krát zopakuje'
+        ```
+    example_code: "## Example Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
+9:
+    start_code: |-
+        repeat 3 times
+            food = ask 'What do you want?'
+            if food is 'pizza'
+                print 'nice!'
+            else
+                print 'pizza is better'
+    intro_text: |
+        In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
+        In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
+        Give it a try!
+
+        ## Example Hedy code
+        ```
+        repeat 3 times
+            food = ask 'What do you want?'
+            if food is 'pizza'
+                print 'nice!'
+            else
+                print 'pizza is better'
+        ```
+    example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
+10:
+    start_code: |-
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+    intro_text: |
+        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
+        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+
+        ## Example Hedy code
+        ```
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+        ```
+    example_code: "## Example Hedy code\n```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
+11:
+    start_code: |-
+        for pocitadlo in range 1 to 5
+            print pocitadlo
+    intro_text: '`print` funguje stejně, ale místo`repeat` odteď budeme používat `for`! Teď můžeš napsat `for pocitadlo in range 1 to 5` a použít `pocitadlo` ve svém programu. Vyzkoušej si to a uvidíš, co se stane! Nezapomeň používat odsazení za příkazy `for` a `if` (To znamená začínat řádek čtyřmi mezerami).'
+    example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
+12:
+    start_code: |-
+        print 'decimal numbers now need to use a dot'
+        print 2.5 + 2.5
+    intro_text: |
+        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
+
+        For this level on you will also have to use quotation marks when storing a text with `is`:
+
+        ```
+        name = 'Hedy'
+        print 'Hello ' name
+        ```
+
+        For numbers, you do not use quotation marks in the `is`:
+        ```
+        score = 25
+        print 'You got ' score
+        ```
+    example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+    intro_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
+    example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
+    intro_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+    example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+    intro_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
+    example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
+    intro_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
+    example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
+    intro_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
+    example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+13:
+    start_code: |-
+        name = ask 'what is your name?'
+        age = ask 'what is your age?'
+        if name is 'Hedy' and age is 2
+            print 'You are the real Hedy!'
+    intro_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
+#16:
+#    start_code: |-
+#        # Tento program se tě zeptá na pár matematických otázek
+#        for i in range(1, 10):
+#            # Budeme se ptát na násobky pěti
+#            odpoved is input('Kolik je ' i ' * 5?')
+#            # Zjistíme jestli je odpověď stejná jako náš výsledek
+#            spravna_odpoved is i * 5
+#            if odpoved is spravna_odpoved:
+#                print(odpoved ' je správně!')
+#            else:
+#                print('Špatně, správná odpověď je: ' i*5)
+#    intro_text: 'Když budeš psát větší programy, budeš potřebovat nějaký způsob, jak si zapamatovat, co dělají jednotlivé části kódu. Na toto používáme komentáře, která vypadají takto: `# Toto je komentář`. Cokoli za `#` je pro počítač, který spouští tvůj kód, neviditelné.'
+#    commands:
+#    -   name: Komentář
+#        explanation: Komentáře můžeme dávat kamkoli se nám líbí.
+#        example: '# Toto je komentář'
+#        demo_code: |-
+#            # Tento program vytiskne Ahoj!
+#            # Je napsaný v Hedy
+#            # Nedělá nic jiného kromě výpisu Ahoj!
+#            print('Ahoj!')
+#20:
+#    start_code: |-
+#        ovoce = ['jablko', 'banán', 'třešeň']
+#        for i in range(1, 3):
+#            print(ovoce[i])
+#    intro_text: Pomocí cyklu se taky můžeme podívat, co všechno v seznamu máme. Protože jsou v našem seznamu 3 věci, poběží náš cyklus od 1 do 3. Teď vše v cyklu vypíšeme.
+#    commands:
+#    -   name: Délka seznamu
+#        explanation: Pomocí `length` (česky délka) můžeme zjistit délku seznamu. V příkladu je délka seznamu 3, protože obsahuje 3 položky.
+#        example: 'Příklad: length(list)'
+#        demo_code: |-
+#            ovoce = ['jablko', 'banán', 'třešeň']
+#            print('Délka seznamu je ' length(ovoce))
+#            for i in range(1, length(ovoce)):
+#                print(ovoce[i])
+#21:
+#    start_code: |-
+#        print('Kolik je 5+3?')
+#        odpoved = 5+3
+#        print('odpoved je:')
+#        print(odpoved)
+#        if odpoved == 8:
+#            print('Správně!')
+#        else:
+#            print('Ale ne, špatně!')
+#    intro_text: |-
+#        Teď změníme `is` na `=` a `==`.
+#        `=` používáme, když chceme do proměnné přiřadit nějakou hodnotu. Pokud chceme přiřadit do proměnné `odpoved` číslo `8`, použijeme  `odpoved = 8`.
+#        `==` použijeme, když budeme chtít zjistit, jestli jsou dvě věci stejné.
+#    commands:
+#    -   name: Porovnání
+#        explanation: Když chceme porovnávat, použijeme `==`. `5+3 == 8` ověřuje, zda se 5+3 rovná 8.
+#        example: 'Příklad: 5+3 == 8'
+#        demo_code: |-
+#            if 5+3 == 8:
+#                print('5 + 3 opravdu je 8')
+#            else:
+#                print('Toto se určitě nevypíše, protože 5 + 3 je 8!')
+#    -   name: Přiřazení hodnoty
+#        explanation: Pokud chceme říct, že proměnná `odpoved` je 8, napíšeme `odpoved = 8`
+#        example: 'Příklad: odpoved = 8'
+#        demo_code: |-
+#            print('Kolik je 5 + 3?')
+#            odpoved = 5 + 3
+#            print('V proměnné odpoved teď je:')
+#            print(odpoved)
+#    -   name: Porovnej a přiřaď hodnoty
+#        explanation: Pokud chceme porovnat dvě hodnoty, použijeme `==`. Pokud chceme přiřadit hodnotu do proměnné, použijeme `=`.
+#        example: 'Příklad: 5 + 3 == 8, odpoved = 8'
+#        demo_code: |-
+#            print('Kolik je 5+3?')
+#            odpoved = 5+3
+#            print('odpoved je:')
+#            print(odpoved)
+#            if odpoved == 8:
+#                print('Správně!')
+#            else:
+#                print('Ale ne, špatně!')
+#
+
+    example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+14:
+    start_code: |-
+        vek = ask 'Kolik je ti let?'
+        if vek < 13
+            print 'Jsi mladší než já!'
+        else
+            print 'Jsi starší než já!'
+    intro_text: |-
+        Pojďme se naučit pár nových věcí! Možná už je znáš z matematiky, jde o `<` a `>`.
+        `<`zjišťuje, zda je první číslo menší než to druhé, např. `4 < 5`.
+        `>` naopak zjišťuje, jestli je první číslo větší, jako v `6 > 5`.
+    example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+    intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
+    example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
+    intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+    example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+15:
+    start_code: |-
+        odpoved = 0
+        while odpoved != 25
+            odpoved = ask 'Kolik je 5 * 5?'
+        print 'Dostala jsem správnou odpověď!'
+
+    intro_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
+    example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+16:
+    start_code: |-
+        ovoce = ['jablko', 'banán', 'třešně']
+        print ovoce
+    intro_text: Už i naše seznamy mají vlastní závorky! Budeme je psát do hranatých závorek a jejich  jednotlivé položky do jednoduchých uvozovek ('), které už známe.
+    example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Už jdu!'
+    intro_text: Teď trochu změníme odsazení. Pokaždé, když ho budeme potřebovat, musí předchozí řádek končit `:`.
+18:
+    start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
+    intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"

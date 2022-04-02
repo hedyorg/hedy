@@ -36,12 +36,16 @@ from flask_babel import gettext
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from hedy import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
+from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
+
+COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
+for lang in ALL_LANGUAGES.keys():
+    COMMANDS[lang] = hedy_content.Commands(lang)
 
 LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
 for lang in ALL_LANGUAGES.keys():
@@ -877,6 +881,9 @@ def index(level, program_id):
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
     level_defaults_for_lang.set_keyword_language(g.keyword_lang)
 
+    level_commands_for_lang = COMMANDS[g.lang]
+    level_commands_for_lang.set_keyword_language(g.keyword_lang)
+
     if 'levels' in customizations:
         available_levels = customizations['levels']
         now = timems()
@@ -892,6 +899,10 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
+    try:
+        commands = level_commands_for_lang.get_commands_for_level(level)
+    except:
+        commands = None # No separate commands file for this language
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
@@ -909,6 +920,7 @@ def index(level, program_id):
 
     return hedyweb.render_code_editor_with_tabs(
         level_defaults=defaults,
+        commands=commands,
         max_level=max_level,
         level_number=level,
         version=version(),
@@ -1181,7 +1193,6 @@ def change_language():
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
-    print(body)
     try:
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get('start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
         if translated_code:
@@ -1196,8 +1207,8 @@ def translate_keywords():
 def client_messages():
     # Not really nice, but we don't call this often as it is cached
     d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(YamlFile.for_file('coursedata/client-messages/en.yaml').to_dict())
-    d.update(YamlFile.for_file(f'coursedata/client-messages/{g.lang}.yaml').to_dict())
+    d.update(YamlFile.for_file('content/client-messages/en.yaml').to_dict())
+    d.update(YamlFile.for_file(f'content/client-messages/{g.lang}.yaml').to_dict())
 
     response = make_response(render_template("client_messages.js", error_messages=json.dumps(d)))
 
@@ -1220,10 +1231,6 @@ def other_keyword_language():
     # If the current keyword language isn't English: we are sure the other option is English
     if g.keyword_lang != "en":
         return make_keyword_lang_obj("en")
-    else:
-        # If the current language is in supported keyword languages and not equal to our current keyword language
-        if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang != g.keyword_lang:
-            return make_keyword_lang_obj(g.lang)
     return None
 
 

@@ -1,0 +1,99 @@
+1:
+    intro_text: "## Velkommen til Hedy\nPå Nivå 1 kan du bruke kommandoene `{print}`, `{ask}` og `{echo}`.\nSkriv koden i programmeringsfeltet, eller trykk på den grønne boksen i eksempelkodeblokken og koden vil bli skrevet for deg!\nPrøv koden selv med den grønne 'Kjør kode' knappen under programmeringsfeltet.\n\nDu kan skrive tekst til skjermen ved å bruke `{print}` kommandoen.\n"
+    example_code: "## Eksempelkode\n```\n{print} Hallo!\n{print} Velkomen til Hedy!\n```\n"
+    intro_text_2: "Du kan også spørre etter inndata med `{ask}` og gjenta det tilbake med en `{echo}`kommando.\n"
+    intro_text_3: "La oss begynne! Er du ikke sikker på hva du vil lage? I de andre fanene finner du ideer til programmer å bygge.\n"
+    example_code_2: "## Eksempelkode\n```\n{ask} Hva er navnet ditt?\n{echo} hallo\n```\n"
+    start_code: '{print} hallo verden!'
+2:
+    intro_text: "## Variabler\nPå nivå 2 lærer vi to nye kommandoer: `{is}` og `{sleep}`.\nDu kan navngi et ord med `{is}`. Dette kalles en variabel. I dette eksempelet har vi laget en variabel kalt 'navn' og en variabel kalt 'alder'. Du kan bruke ordet 'navn' hvor som helst i koden og det vil bli erstattet av Hedy, som dette:\n\nPå denne måten trenger du ikke lenger `{echo}`kommandoen!\n"
+    example_code: "## Eksempelkode\n```\nnavn {is} Hedy\nalder {is} 15\n{print} navn is alder år gammel\n```\n"
+    intro_text_2: "`{print}` fungerer fortsatt som før, men `{ask}` kommandoen har endret seg. Fra nå må du bruke en variabel når du bruker `{ask}` kommandoen. Det ser slik ut:\n"
+    example_code_2: "```\nsvar {is} {ask} Hva heter du?\n{print} Hallo svar\n```\n"
+    intro_text_3: "Enda en ny kommando på dette nivået er `{sleep}`. Denne kommandoen setter programmet ditt på pause i et sekund. Hvis du skriver et tall bak {sleep} kommandoen, vil programmet settes på pause i så mange sekunder.\n"
+    example_code_3: "```\n{print} Min favorittfarge er...\n{sleep} 2\n{print} grønn!\n```\n"
+    start_code: '{print} hallo verden!'
+3:
+    intro_text: "## Lag en liste!\nPå nivå 3 kan du lage lister. Du kan la datamaskinen velge noe tilfeldig fra listen, du gjør det med `{at} {random}`.\n"
+    example_code: "## Eksempelkode\n\n```\ndyr {is} hund, katt, hest\n{print} dyr {at} {random}\n```\n"
+    intro_text_2: Du kan også legge til ting i listen med `{add}` og fjerne ting fra listen med `{remove}`.
+    example_code_2: "## Eksempelkode\n\n```\ndyr {is} hund, katt, hest\n{add} pingvin {to_list} dyr\n{remove} katt {from} dyr\n{print} dyr {at} {random}\n```\n"
+    start_code: '{print} hallo verden!'
+4:
+    start_code: "{print} 'Hallo verden'"
+    intro_text: "## 'Quotation marks'\nPå nivå 4 har `{ask}` og`{print}` blitt endret.\n\nDu må fra nå av legge tekst du vil skrive ut mellom fnutter.\n\nDette er nyttig, fordi nå kan du skrive ut alle ordene du vil. Også de ordene du har brukt til å lagre noe med `{is}`.\n\nDe fleste programmeringsspråk bruker også fnutter når de skriver ut ting, så vi går altså enda et steg nærmere ekte programmering!\n"
+    example_code: "## Eksempelkode\n```\n{print} 'Du må bruke fnutter fra nå av!'\nsvar {is} {ask} 'Hva må vi bruke fra nå av?'\n{print} 'Vi må bruke' svar\n```\n"
+    intro_text_2: "## Eventyrene blir mer og mer vanskelig\nEventyrene blir mer og mer vanskelig nå i de rosa fanene.\nSå det er lurest å starte til venstre med Fortellingen, og jobbe seg mot høyre. På denne måten får du mer og mer utfordring for hvert eventyr.\n"
+5:
+    start_code: "navn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'kult!' {else} {print} 'meh'"
+    intro_text: "## Hvis... ellers...\nPå nivå 5 er det noe nytt å lære seg, `{if}`! Med `{if}` kommandoen kan du velge mellom to forskjellige valg.\nDenne koden skriver ut 'nice' hvis du skriver inn Hedy som navn, og 'buu!' hvis du skriver noe annet.\n`{ask}` and `{print}` vil fungere på samme måte som de gjorde i nivå 4.\n"
+    example_code: "## Eksempelkode\n```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'wow!' {else} {print} 'fysj!'\n```\n"
+    intro_text_3: "## Lister\nHvis vi skal sjekke om noe er i en liste så kan vi nå bruke `{in}` kommandoen.\nDenne koden skriver ut 'Vakkert!' hvis du velger grønn eller gul, og 'meh' hvis du skriver noe annet.\n"
+    example_code_3: "```\nvakre_farger {is} grønn, gul\nfarge{is} {ask} 'Hva er din favorittfarge?'\n{if} farge {in} vakre_farger {print} 'Vakert!'\n{else} {print} 'meh'\n```\n"
+    intro_text_2: "Noen ganger kan kode som bruker `{if}` bli veldig lang. <br>Du kan splitte koden over to linjer og begynne neste linje med `{else}` slik som dette:\n"
+    example_code_2: "```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+6:
+    start_code: "{print} '5 ganger 5 er ' 5 * 5"
+    intro_text: "## 1 + 1\nPå dette nivået skal du få lære noe nytt! Du kan nå bruke Hedy til å gjøre matte.\n\nÅ plusse sammen to tall er enkelt, du bare gjør som du ville gjort i mattetimen, for eksempel: `5 + 5`. Minus funker også: `5 - 5`.\n\nÅ gange er litt anederledes, fordi det ikke er et gangesymbol på tastaturet ditt. Bare se hvis du vil, der er virkelig ikke et gangeteng.\nDerfor bruker vi vanligvis en stjerne `*` når vi ganger. `5 * 5`kan leses som \"5 ganger 5\". Det kan være du må holde inne SHIFT knappen for å kunne skrive *-tegnet.\n"
+    example_code: "## Eksempelkode\n```\n{print} '5 pluss 5 er ' 5 + 5\n{print} '5 minus 5 er ' 5 - 5\n{print} '5 ganger 5 er ' 5 * 5\n```\n"
+    intro_text_2: "Vi skal også gjøre en liten endring i hvordan vi lagrer et ord i en variabel! Du kan nå bruke `=` istedenfor `{is}` når du lagrer en tekst eller et tall i en variabel, slik:\n"
+    example_code_2: "```\nnavn = Hedy\nsvar = 4 + 20\n```\n"
+7:
+    start_code: "{repeat} 3 {times} {print} 'Hedy er morro!'"
+    intro_text: "## Nivå 7! Nivå 7!\nNivå 7 legger til `{repeat}` kommandoen. {repeat} kan brukes til å kjøre en kodelinje flere ganger.\n"
+    example_code: "## Eksempelkode\n```\n{repeat} 3 {times} {print} 'Hedy {is} morro!'\n```\n"
+8:
+    start_code: "{repeat} 5 {times}\n    {print} 'Hallo folkens'\n    {print} 'Dette vil bli skrevet ut 5 ganger'"
+    intro_text: "## Innrykk\n`{ask}` {and} `{print}` fungerer fortsatt slik du er vandt til, men `{if}` {and} `{repeat}` har endret seg litt!\nDu kan nå kjøre små blokker med kode sammen, men du må gi koden korrekt *innrykk*.\nDet betyr at du må legge til fire mellomrom på starten av kodelinjen. Du må også ha nytt innrykk når du skal lage en blokk på en linje.\n"
+    example_code: "## Eksempel Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hallo alle sammen'\n    {print} 'Dette blir gjentatt 5 ganger'\n```\n"
+9:
+    start_code: "{repeat} 3 {times}\n    matrett = {ask} 'Hva vil du ha?'\n    {if} matrett {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza er bedre'"
+    intro_text: "## Alt på en gang nå!\nPå dette nivået kan du bruke både `{if}` med kodeblokker {and} `{repeat}` sammen!\nI eksempelet kan du se en `{if}` kommando inni en `{repeat}` kommando. Det er også mulig å gjøre det motsatte (`{repeat}` inni en `{if}`).\nDu kan også legge en `{if}` inni en annen `{if}` og en `{repeat}` inni en `{repeat}`.\nPrøv å se om du får det til!\n"
+    example_code: "## Eksempelkode\n```\n{repeat} 3 {times}\n    matrett = {ask} 'Hva vil du ha?'\n    {if} matrett {is} pizza\n        {print} 'bra!'\n    else\n        {print} 'pizza er bedre'\n```\n"
+10:
+    start_code: "dyrene {is} hunder, katter, flyndre\n{for} dyr {in} dyrene\n    {print} 'Jeg elsker ' dyr"
+    intro_text: "## For hver ting i listen min\nPå dette nivået skal vi lære et nytt nøkkelord `{for}`. Med `{for}` kan du lage en liste og bruke alle elementene i listen.\n`{for}` lager en kodeblokk, på samme måte som `{repeat}` og `{if}`, så alle linjene i kodeblokken må starte med 4 mellomrom (innrykk).\n"
+    example_code: "## Eksempelkode\n```\ndyrene {is} hunder, katter, flyndre\n{for} dyr {in} dyrene\n    {print} 'Jeg elsker ' dyr\n```\n"
+11:
+    start_code: "{for} teller {in} {range} 1 {to} 5\n    {print} teller"
+    intro_text: "## Løkker!\n`{print}` fungerer på samme måten som før, men vi legger til en ny versjon av `{for}`. Nå kan du skrive`{for} teller {in} {range} 1 {to} 5` and og bruke `teller` i programmet ditt. En {range} er bare noen tall som kommer etter hverandre på tall-linjen.\nPrøv det ut og se hva som skjer! Husk å ha innrykk på linjen etter `{for}` og `{if}` uttrykkene (det betyr at du må starte setningen med fire mellomrom)\n"
+    example_code: "## Eksempelkode\n```\n{for} teller {in} {range} 1 {to} 5\n    {print} teller\n```\n"
+12:
+    start_code: "{print} 'desimaltall må bruke et punktum nå'\n{print} 2.5 + 2.5"
+    intro_text: "## Tall og tekst\n**Desimaltall**\nFør dette nivået har det ikke vært mulig å bruke desimaltall som 1.5 i Hedy, men fra nå av kan du det! Legg merke til at datamaskiner bruker punktum `.` som skilletegn i desimaltall.\n"
+    example_code: "## Eksempelkode\n```\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n```\n"
+    intro_text_2: "**All tekst må være inni fnutter**\nFra dette nivået må du nå ha fnutter rundt tekst som du lagrer ved hjelp av `=`:\n"
+    example_code_2: "```\nnavn = 'Roboten Hedy'\n{print} 'Hallo ' navn\n```\n"
+    intro_text_3: "**All tekst i lister krever nå fnutter også**\nTekst i lister er også tekst, de må også ha fnutter rundt seg. Med dette mener vi at hver element i listen krever fnutter.\nDette lar deg lagre to ord som et element i listen, for eksempel 'Iron Man'.\n"
+    example_code_3: "```\nsuperhelter = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+    intro_text_4: "**All tekst etter `{if}` sammenligninger krever også fnutter nå**\n"
+    example_code_4: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn= 'Roboten Hedy'\n    {print} 'Hei hei!'\n```\n"
+    intro_text_5: "**Tall trenger ikke fnutter**\nNår du lagrer tall med `=` trenger du ikke å bruke fnutter:\n"
+    example_code_5: "```\npoeng = 25\n{print} 'Du fikk ' poeng\n```\n"
+    intro_text_6: "**Matte med ord** Fra dette nivået kan du også bruke `+` tegnet til å legge sammen tekster. For eksempel:\n"
+    example_code_6: "```\na = 'Hallo '\nb = 'verden!'\nprint a + b\n```\n"
+13:
+    start_code: "navn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy!'"
+    intro_text: "## Og... Eller?\nNå skal vi lære om `{and}` og`{or}`! Hvis du har lyst til å sjekke to påstander trenger du ikke å bruke to `{if}`, du kan bruke `{and}` og `{or}`. Hvis du bruker `{and}` må begge påstandene være sann. Vi kan også bruke `{eller}`, da trenger kun en av påstandene å være sann.\n"
+    example_code: "```\nnavn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy'\n```\n"
+14:
+    start_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'\n{else}\n    {print} 'Du er eldre enn meg!'"
+    intro_text: "## Stor, Større, Størst!\nVi skal lære enda flere nye ting. Det kan være du allerede kjenner til disse fra mattetimen, `<`og `>`.\n`<` kaller vi 'mindre enn'-tegnet. Dette bruker vi for å sjekke om det første tallet er *mindre enn* det andre, f.eks: `alder < 12`kan leses som `alder er mindre enn 12`.\nHvis du vil sjekke om det første tallet er mindre eller like stort som det andre, kan du bruke `<=`, f.eks: `alder <= 11`.\n`>` kaller vi `større enn`-tegnet. Dette bruker vi for å sjekke om det første tallet er *større enn* det andre, f.eks: `poeng > 10` kan leses som `poeng er større enn 10`.\nHvis du vil sjekke om det første tallet er større eller like stort som det andre, kan du bruke `>=`, f.eks: `poeng >= 11`.\nDu kan bruke disse sammenligningene i en `{hvis}`, for eksempel slik:\n"
+    example_code: "## Eksempelkode\n```\nalder = {ask} 'Hvor gammel er du?'\n{if} alder > 12\n    {print} 'Du er eldre enn meg!'\n```\n"
+    intro_text_2: "Fra dette nivået, hvis du vil sjekke om to ting er like, kan du nå bruke to er-lik tegn. Dette er måten å sjekke om ting er lik i de fleste programmeringsspråk:\n"
+    example_code_2: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn == 'Hedy'\n    {print} 'Du er kul!'\n```\n"
+    intro_text_3: "Du kan også sjekke om ting *ikke* er lik noe annet ved å bruke `!=`, for eksempel slik:\n"
+    example_code_3: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn != 'Hedy'\n    {print} 'Du er ikke Hedy!'\n```\n"
+15:
+    start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Det svaret var riktig'"
+    intro_text: "## Flere løkker!\nVi skal lære en ny løkke, `{while}` løkken! Denne løkken fortsetter å kjøre så lenge påstanden er sann.\nDet er derfor veldig viktig å endre verdien i løkken.\n\nI eksempelkoden lar vi løkken kjøre til vi får det riktige svaret.\nHvis ikke vi aldri får det riktige svaret, så fortsetter løkken for alltid!\n"
+    example_code: "## Eksempelkode\n```\nsvar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'A korrekt svar ble gitt'\n```\n"
+16:
+    start_code: "frukt = ['eple', 'banan', 'kirsebær']\n{print} frukt"
+    intro_text: "## Mer og mer likt virkelig kode\nVi skal nå lage lister på Python måten, med firkantparanteser rundt listene! Vi beholder fnuttene rundt tekstene i listen slik som vi lærte på et tidligere nivå.\nDu kan bruke firkanparantesene til å peke på en plass i listen.\n"
+17:
+    start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Klar eller ei, her kommer jeg!'"
+    intro_text: "Nå gjør vi en liten endring i koden når vi bruker innrykk. Hver gang vi trenger innrykk, må vi nå skrive `:` på linjen før innrykket.\n\nPå dette nivået kan du også bruke en ny kommando `{elif}`. `{elif}` er en forkortelse for {else} {if} og du trenger det når du har lyst til å lage kode med 3 (eller fler!) alternativer.\nSjekk hvordan det blir!\n```\npremier = ['1 million kroner', 'en eplekake', 'ingenting']\ndin_premie = premier[{random}]\n{print} 'Du vinner ' din_premie \n{if} din_premie == '1 million kroner':\n    {print} 'Hurra! Du er rik!'\n{elif} din_premie == 'en eplekake':\n    {print} 'Digg, eplekake!'\n{else}:\n    {print} 'Bedre lykke neste gang..'\n```\n"
+18:
+    start_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
+    intro_text: "## Level 18\nVi har ankommet nivået hvor vi skriver virkelig pythonkode! Python er riktignok ikke på norsk, men du kan bruke knappen oppe i høyre hjørne av kodefeltet hvis du vil se hvordan koden ser ut på engelsk.\nNå når vi har nådd ekte pythonkode må vi bruke paranteser når vi bruker {print} og {range}.\nDette ser slik ut:\n```\n{print}('Mitt navn er Hedy!')\n```\nFor å skrive ut mer enn en ting må du bruke et komma mellom tingene.\n```\nnavn = 'Hedy'\n{print}('Mitt navn er ', navn)\n```"

@@ -3,7 +3,7 @@ module.exports = {
   content: [
       '../../../templates/**/*.html',
       '../../../main/**/*.md',
-      '../../../coursedata/**/*.md',
+      '../../../content/**/*.md',
       '../../../static/js/**/*.js',
   ],
   safelist: [

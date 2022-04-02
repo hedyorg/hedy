@@ -33,50 +33,6 @@ TRANSPILER_LOOKUP = {}
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
-# Define and load all available language data
-ALL_LANGUAGES = {
-    'id': 'Bahasa Indonesia',
-    'de': 'Deutsch',
-    'en': 'English',
-    'es': 'Español',
-    'fr': 'Français',
-    'pl': 'Polski',
-    'pt_PT': 'Português (pt)',
-    'pt_BR': 'Português (br)',
-    'fy': 'Frysk',
-    'it': 'Italiano',
-    'hu': 'Magyar',
-    'el': 'Ελληνικά',
-    'zh_Hans': "简体中文",
-    'nl': 'Nederlands',
-    'nb_NO': 'Norsk',
-    'sw': 'Swahili',
-    'tr': 'Türk',
-    'cs': 'Čeština',
-    'bg': 'Български',
-    'ar': 'عربى',
-    'hi': 'हिंदी',
-    'bn': 'বাংলা',
-}
-
-# Define fall back languages for adventures
-FALL_BACK_ADVENTURE = {
-    'fy': 'nl',
-    'pt_BR': 'pt_PT'
-}
-
-ALL_KEYWORD_LANGUAGES = {
-    'en': 'EN',
-    'es': 'ES',
-    'fr': 'FR',
-    'nl': 'NL',
-    'nb_NO': 'NB',
-    'tr': 'TR',
-    'ar': 'AR',
-    'hi': 'HI'
-}
-
-
 class Command:
     print = 'print'
     ask = 'ask'
@@ -229,7 +185,7 @@ def get_list_keywords(commands, to_lang):
 
     translation_commands = []
     dir = path.abspath(path.dirname(__file__))
-    path_keywords = dir + "/coursedata/keywords"
+    path_keywords = dir + "/content/keywords"
 
     to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
     en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')

@@ -2,7 +2,7 @@ import collections
 import os
 from flask_babel import gettext
 import utils
-from hedy import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
+from hedy_content import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -323,7 +323,9 @@ def routes(app, database):
         else:
             DATABASE.record_login(user['username'])
 
-        if user.get('is_teacher'):
+        if is_admin(user):
+            resp = make_response({'admin': True})
+        elif user.get('is_teacher'):
             resp = make_response({'teacher': True})
         else:
             resp = make_response({'teacher': False})
@@ -336,7 +338,6 @@ def routes(app, database):
         # Remember the current user on the session. This is "new style" logins, which should ultimately
         # replace "old style" logins (with the cookie above), as it requires fewer database calls.
         remember_current_user(user)
-
         return resp
 
     @app.route('/auth/signup', methods=['POST'])
@@ -808,8 +809,8 @@ def send_email(recipient, subject, body_plain, body_html):
 def send_email_template(template, email, link='', lang="en", username=''):
     # Not really nice, but we don't call this often as it is cached
     texts = collections.defaultdict(lambda: 'Unknown Exception')
-    texts.update(YamlFile.for_file('coursedata/emails/en.yaml').to_dict())
-    texts.update(YamlFile.for_file(f'coursedata/emails/{lang}.yaml').to_dict())
+    texts.update(YamlFile.for_file('content/emails/en.yaml').to_dict())
+    texts.update(YamlFile.for_file(f'content/emails/{lang}.yaml').to_dict())
 
     subject = texts[template + '_subject']
     body = texts['hello'].format(username=username) + "\n\n"

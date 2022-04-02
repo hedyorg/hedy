@@ -1,0 +1,454 @@
+1:
+    intro_text: |
+        ## Welkom bij Hedy!
+        In Level 1 kun je de commando's `{print}`, `{ask}` en `{echo}` gebruiken.
+        Je kunt bijvoorbeeld tekst laten verschijnen in het beeld met het commando `{print}`. Zoals in het voorbeeld hiernaast.
+        Je kunt het voorbeeld uittesten door op de groene knop in de hoek te klikken.
+
+        Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het linker programmeerveld.
+
+    start_code: "{print} hallo wereld!"
+    example_code: |
+        ## Voorbeeldcode
+        ```
+        {print} Hallo!
+        {print} Welkom bij Hedy!
+        ```
+    intro_text_2: |
+        Je kunt ook een vraag stellen met `{ask}` en het antwoord laten herhalen met `{echo}`.
+        Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.
+    example_code_2: |
+        ## Voorbeeldcode
+        ```
+        {ask} Hoe heet je?
+        {echo} hallo
+        ```
+    intro_text_3: |
+        Laten we beginnen! Weet je niet wat je wilt maken? In de volgende tabjes vind je ideeën voor programma's die je kunt maken.
+2:
+    intro_text: |
+        ## Variabelen
+        In level 2 leer je 2 nieuwe commando's: `{is}` en `{sleep}`.
+        Je kunt een woord een naam geven met `{is}`. Dit noem je een variabele.In dit voorbeeld hebben we een variabele gemaakt die naam heet en een variabele die leeftijd heet. Je kunt deze woorden (variabelen) overal in je code neerzetten en Hedy zal ze vervangen met de gegeven antwoorden. Kijk maar:
+
+        Hierdoor heb je het `{echo}` commando niet meer nodig!
+
+    example_code: |
+        ## Voorbeeld code
+        ```
+        naam {is} Hedy
+        leeftijd {is} 15
+        {print} naam is leeftijd jaar oud
+        ```
+    intro_text_2: |
+        `{print}` werkt nog hetzelfde, maar`{ask}` is veranderd. Je hebt een variabele nodig om het antwoord in op te slaan. Dat ziet er zo uit:
+    example_code_2: |
+        ```
+        antwoord {is} {ask} Hoe heet jij?
+        {print} Hoi antwoord
+        ```
+    intro_text_3: |
+        Nog een nieuw commando in dit level is `{sleep}`, waarmee je het programma een tijdje kunt pauzeren.Als je een getal achter {sleep} zet, wacht het programma zoveel seconden.
+    example_code_3: |
+        ```
+        {print} Mijn favoriete kleur is...
+        {sleep} 2
+        {print} groen!
+        ```
+    start_code: "{print} hallo wereld!"
+3:
+    intro_text: |
+        ## Maak een lijstje!
+        In level 3 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `{at} {random}` (je zegt: et ren-dom).
+
+    example_code: |
+        ## Voorbeeld Hedy Code
+
+        ```
+        dieren {is} hond, kat, kangoeroe
+        {print} dieren {at} {random}
+        ```
+
+    intro_text_2: |
+        Je kunt in dit level ook dingen aan een lijstje toevoegen met het commando `{add}`.
+        Daarnaast kun je dingen van het lijstje verwijderen. Dat doe je met `{remove}`.
+
+    example_code_2: |4
+
+        ## Voorbeeld Hedy Code
+        ```
+        taarten {is} aardbei, chocolade
+        {add} appel {to_list} taarten
+        {remove} chocolade {from} taarten
+        {print} taarten {at} {random}
+        ```
+    start_code: "{print} hallo wereld!"
+4:
+    start_code: "{print} 'hallo wereld'"
+    intro_text: |
+        ## 'Aanhalingstekens'
+        In level 4 zijn `{ask}` en `{print}` anders.
+
+        Je moet tekst die je letterlijk wilt printen tussen aanhalingstekens zetten.
+
+        Dat is handig, want nu kan je alle woorden printen die je maar wilt. Ook de woorden die je hebt gebruikt om iets in op te slaan met `{is}`.
+
+        De meeste programmeertalen gebruiken ook aanhalingstekens bij het printen, dus we komen zo al een stapje dichterbij echt programmeren!
+    intro_text_2: |
+        ## Opdrachten worden steeds moeilijker
+        Je vindt de commando's weer links, en opdrachten in de volgende tabjes. De opdrachten worden in de opeenvolgende tabjes nu steeds iets moeilijker.
+        Begin dus links met het verhaal, en werk zo door om steeds meer uitgedaagd te worden.
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        {print} 'Vanaf nu gebruiken we aanhalingstekens!'
+        antwoord {is} {ask} 'Wat gebruiken we vanaf nu?
+        {print} 'We gebruiken ' antwoord
+        ```
+
+5:
+    start_code: |-
+        naam {is} {ask} 'hoe heet jij?'
+        {if} naam {is} Hedy {print} 'leuk' {else} {print} 'minder leuk!'
+    intro_text: |
+        ## Als... Anders...
+        `{ask}` en `{print}` werken nog zoals in level 4.
+
+        In level 5 is er iets nieuws, de `{if}`! {if} is Engels voor als. Met de `{if}` kun je een keuze maken tussen twee verschillende opties.
+        Deze code print leuk als je Hedy als naam invoert, en minder leuk als je iets anders invoert.
+    example_code: |
+        ## Voorbeeld Hedy Code
+        ```
+        naam {is} {ask} 'hoe heet jij?'
+        {if} naam {is} Hedy {print} 'leuk' {else} {print} 'minder leuk!'
+        ```
+    intro_text_2: |
+        Soms wordt code met een `{if}` erg lang en past het niet meer goed in het tekstvlak. Je mag dan een enter gebruiken en de code over twee regels verdelen. Begin dan de tweede regel met een `{else}`:
+    example_code_2: |
+        ```
+        naam {is} {ask} 'hoe heet jij?'
+        {if} naam {is} Hedy {print} 'leuk'
+        {else} {print} 'minder leuk!'
+        ```
+    intro_text_3: |
+        ## Lijstjes
+        Je mag `{if}` ook combineren met `{in}`, om te kijken of iets in een lijst zit.
+         Deze code print mooi als je geel of rood antwoordt, en anders meh!
+    example_code_3: |
+        ## Voorbeeld Hedy Code
+        ```
+        mooie_kleuren {is} geel, rood
+        kleur {is} {ask} 'Wat is jouw lievelingskleur?'
+        {if} kleur {in} mooie_kleuren {print} 'mooi' {else} {print} 'meh!'
+        ```
+6:
+    start_code: "{print} '5 keer 5 is ' 5 * 5"
+    intro_text: |
+        ## 1 + 1
+        In level 6 is er iets nieuws: je kunt nu ook rekenen.
+
+        De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
+
+        De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
+        Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als "5 keer 5", dan onthoud je het het makkelijkst.
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        {print} '5 plus 5 is ' 5 + 5
+        {print} '5 min 5 is ' 5 - 5
+        {print} '5 keer 5 is ' 5 * 5
+        ```
+    intro_text_2: |
+        Vanaf dit level mag je ook opslaan met een `=` in plaats van met het woord `{is}`. Bij woorden en bij sommen. Dus zo:
+    example_code_2: |
+        ```
+        naam = Hedy
+        antwoord = 5 + 12
+        ```
+7:
+    start_code: "{repeat} 3 {times} {print} 'Hedy is leuk!'"
+    intro_text: |
+        ## Level 7! Level 7!
+        In level 7 kun je gebruik maken van het `{repeat}` commando.
+        Met `{repeat}` kun je codes een aantal keer herhalen.
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        {repeat} 3 {times} {print} 'Hedy is leuk!'
+        ```
+8:
+    start_code: |-
+        {repeat} 5 {times}
+            {print} 'Hallo allemaal'
+            {print} 'Dit wordt allemaal 5 keer herhaald'
+    intro_text: |
+        ## Inspringen
+        Je kunt vanaf dit level meerdere regels samen herhalen met het `{repeat}` commando. Dan moet je de regels die herhaald worden wel *inspringen*,
+        dat betekent dat ze moeten beginnen met vier spaties.
+        Ook als je maar één regel wilt herhalen moet je inspringen!
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        {repeat} 5 {times}
+            {print} 'Hallo allemaal'
+            {print} 'Dit wordt allemaal 5 keer herhaald'
+        ```
+9:
+    start_code: |-
+        {repeat} 3 {times}
+            eten = {ask} 'Wat wil je bestellen?'
+            {if} eten {is} pizza
+                {print} 'lekker'
+            {else}
+                {print} 'pizza is lekkerder'
+    intro_text: |
+        ## En nu alles tegelijk!
+        In dit level kun je niet alleen meerdere regels gebruiken bij `{if}` en `{repeat}`, maar je kunt ze ook nog eens in elkaar zetten!
+        In het voorbeeldje zie je een `{if}` commando in een `{repeat}` commando staan. Andersom mag het ook en een {if} mag ook in een `{if}` en een `{repeat}` in een `{repeat}`.
+        Probeer het maar eens!
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        {repeat} 3 {times}
+            eten = {ask} 'Wat wil je bestellen?'
+            {if} eten {is} pizza
+                {print} 'lekker'
+            {else}
+                {print} 'pizza is lekkerder'
+        ```
+10:
+    start_code: |-
+        dieren {is} hond, kat, papegaai
+        {for} dier {in} dieren
+          {print} dier ' is een leuk dier!'
+    intro_text: |
+        ## Voor elk item op mijn lijstje
+        In dit level leren we een nieuwe code, de code `for`. Met `for` kun je alle dingen in een lijstje gebruiken.
+        `{for}` mag meerdere regels gebruiken, net zoals de `{repeat}` {and} `{if}`, dus alle regels eronder moeten met spaties beginnen.
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        dieren {is} hond, kat, papegaai
+        {for} dier {in} dieren
+          {print} dier ' is een leuk dier!'
+        ```
+11:
+    start_code: |-
+        {for} i {in} {range} 1 {to} 10
+            {print} i
+        {print} 'Wie niet weg is is gezien'
+    intro_text: |
+        ## Lussen!
+        We gaan nu een extra vorm van de `{for}` toevoegen! Je mag ook `{for} i {in} {range} 1 {to} 5` typen in plaats van `{repeat} 5 {times}`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken! Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        for teller in range 1 to 5
+            print teller
+        ```
+12:
+    start_code: |-
+        {print} 'kommagetallen gaan met een punt!'
+        {print} 2.5 + 2.5
+    intro_text: |
+        ## Getallen en teksten
+        **Kommagetallen**
+        Tot nu toe mocht je nog geen kommagetallen gebruiken zoals bijv anderhalf, maar nu wel!
+        Let wel heel goed op... kommagetallen gaan op de computer met een punt en niet met een komma.
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        {print} 'Kommagetallen gaan met een punt!'
+        {print} 2.5 + 2.5
+        ```
+    intro_text_2: |
+        **Tekst moet altijd met aanhalingstekens**
+        Nu we verder zijn met programmeren moet je ook weten dat tekst altijd tussen aanhalingstekens hoort. Ook in de `=`.
+        Hierdoor kun je meerdere woorden opslaan in je variabele.
+        De variabele zelf hoeft uiteraard geen aanhalingstekens. We bedoelen immers niet het woordje 'naam'.
+    example_code_2: |
+        ```
+        naam = 'Hedy de Robot'
+        {print} 'Hallo ' naam
+        ```
+    intro_text_3: |
+        **Tekst moet ook in lijstjes met aanhalingstekens**
+        Ook bij lijstjes gebruik je nu aanhalingstekens. Let op: elk item op je lijstje moet los tussen aanhalingstekens staan!
+        Hierdoor kun je nu ook twee woorden opslaan als 1 item op je lijstje, bijvoorbeeld 'Iron Man'.
+    example_code_3: |
+        ```
+        superhelden = 'Spiderman', 'Batman', 'Iron Man'
+        {print} superhelden {at} {random}
+        ```
+    intro_text_4: |
+        **Tekst moet ook aanhalingstekens na een `{if}` commando**
+    example_code_4: |
+        ```
+        naam = {ask} 'Wie ben jij?'
+        {if} naam = 'Hedy de Robot'
+            {print} 'Hoi!'
+        ```
+    intro_text_5: |
+        **Getallen hoeven geen aanhalingstekens**
+        Alleen bij tekst gebruik je aanhalingstekens, bij getallen dus niet:
+    example_code_5: |
+        ```
+        score = 25
+        {print} 'Jij hebt ' score ' gehaald!'
+        ```
+    intro_text_6: |
+        **Rekenen met woorden**
+        In dit level kun je het + teken ook gebruiken met woorden. Zoals het voorbeeld hier:
+    example_code_6: |
+        ```
+        a = 'Hallo '
+        b = 'wereld!'
+        print a + b
+        ```
+13:
+    start_code: |-
+        naam = {ask} 'hoe heet jij?'
+        leeftijd = {ask} 'hoe oud ben jij?'
+        {if} naam {is} 'Hedy' {and} leeftijd {is} 2
+            {print} 'Jij bent de echte Hedy!'
+    intro_text: |
+        ## En... Of?
+        We gaan nu `{and}` en `{or}` gebruiken! Als je twee dingen wilt checken hoef je niet meer twee {if}jes in elkaar te doen maar kan je nu `{and}` gebruiken. Beide dingen in de `{if}` moeten waar zijn als je een `{and}` gebruikt. We kunnen ook `{or}` gebruiken. Daarbij moet er één van de twee waar zijn.
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        naam = {ask} 'hoe heet jij?'
+        leeftijd = {ask} 'hoe oud ben jij?'
+        {if} naam {is} 'Hedy' {and} leeftijd {is} 2
+            {print} 'Jij bent de echte Hedy!'
+        ```
+14:
+    start_code: |-
+        leeftijd = {ask} 'Hoe oud ben jij?'
+        {if} leeftijd < 13
+            {print} 'Dan ben je jonger dan ik!'
+        {else}
+            {print} 'Dan ben je ouder dan ik!'
+    intro_text: |
+        ## Groot, Groter, Grootst
+        We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`.
+        De `<` kijkt of het eerste getal kleiner is dan de tweede. Bijvoorbeeld met `leeftijd < 12` kun je kijken of `leeftijd` kleiner is dan 12.
+        Als je wil kijken of een getal kleiner of even groot is dan een ander getal, kun je `<=` gebruiken. Bijvoorbeeld `leeftijd <= 11`.
+        De `>` kijkt of iets groter is dan het tweede getal. Bijvoorbeeld met `punten > 10` kun je kijken of `punten` groter is dan 10.
+        Als je wil kijken of een getal groter of even groot is als een ander getal, kun je `>=` gebruiken. Bijvoorbeeld `punten >= 11`.
+        Je gebruikt de vergelijkingen in de `{if}`, zo:
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        leeftijd = {ask} 'Hoe oud ben jij?'
+        {if} leeftijd < 12
+                {print} 'Dan ben je jonger dan ik!'
+        ```
+    intro_text_2: |
+        Als je iets precies wilt vergelijken, mag je dat nu doen met twee {is}jes. Zo doen de meeste programmeertalen dat:
+    example_code_2: |
+        ```
+        name = {ask} 'Hoe heet jij?'
+        {if} name == 'Hedy'
+            {print} 'Jij bent cool!'
+        ```
+    intro_text_3: |
+        Je kan ook vergelijken of iets *niet* hetzelfde is met `!=`. Zo:
+    example_code_3: |
+        ```
+        name = {ask} 'Hoe heet jij?'
+        {if} name != 'Hedy'
+            {print} 'Jij bent Hedy niet'
+        ```
+15:
+    start_code: |-
+        antwoord = 0
+        {while} antwoord != 25
+            antwoord = {ask} 'Wat is 5 keer 5?'
+        {print} 'Goed gedaan!'
+    intro_text: |
+        ## Meer lussen!
+        Nu gaan we een nieuwe loop leren: De `{while}` loop!
+        We gaan door zo lang het statement dat we hebben waar is.
+        Vergeet dus niet in de loop de waarde te veranderen.
+
+        Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven.
+        Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!
+16:
+    start_code: |-
+        fruit = ['appel', 'banaan', 'kers']
+        {print} fruit
+    intro_text: |-
+        ## Steeds meer als echte code
+        We zijn aangekomen bij de laatste paar Hedy levels. We komen dus steeds dichter bij echte Pythoncodes.
+        In dit level gaan we leren hoe je lijsten maakt op de Pythonmanier. Dat werkt met vierkante haakjes zetten om lijstjes, dat zijn deze: `[` en `]`.
+        Als we woorden in de lijst willen zetten, moeten we om de woorden ook enkele aanhalingstekens zetten. Bij getallen hoeft dat niet.
+        We kunnen in dit level ook met een getal plekken in lijstjes aanwijzen.
+    example_code: |
+        ## Voorbeeld Hedy code
+        ```
+        vrienden = ['Ahmed', 'Ben', 'Cayden']
+        geluksgetallen = [15, 18, 6]
+        {for} i {in} {range} 1 {to} 3
+           {print} 'het geluksgetal van ' vrienden[i]
+           {print} 'is ' geluksgetallen[i]
+        ```
+17:
+    start_code: |-
+        {for} i {in} {range} 1 {to} 10:
+            {print} i
+        {print} 'Wie niet weg is is gezien'
+    intro_text: |-
+        ## Elif
+        Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een `:` bij de regel ervoor zetten.
+
+        Daarnaast kun je in dit level een nieuw commando gebruiken `{elif}`. `{elif}` is de afkorting van {else} en {if} en zorgt ervoor dat je 3 (of meer!) opties kunt maken.
+        Kijk maar...
+18:
+    start_code: |-
+        naam = 'Hedy'
+        {print}('ik heet ', naam)
+    intro_text: |-
+        ## Het laatste level!
+        We zijn aangekomen bij echte Pythoncode! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
+        Zo gaat dat:
+#21:
+#    start_code: |-
+#        {print}('Hoeveel is 5+3?')
+#        antwoord = 5+3
+#        {print}('antwoord {is} nu:')
+#        {print}(antwoord)
+#        {if} antwoord == 8:
+#            {print}('Dat {is} goed!')
+#        {else}:
+#            {print}('Helaas dat {is} fout!')
+#    intro_text: "Nu veranderen we {is} in `=` en `==`. Je gebruikt `=` als je iets een getal wilt maken. Als je bijvoorbeeld antwoord 8 wilt maken zeg je antwoord = 8. `==` gebruik je om te kijken of twee dingen hetzelfde zijn."
+#    commands:
+#    -   name: "Vergelijken"
+#        explanation: "Als we gaan vergelijken gebruiken we dus ==. 5+3 == 8 kijkt dus of 5+3 gelijk {is} aan 8"
+#        example: "Bijvoorbeeld: 5+3 == 8"
+#        demo_code: |-
+#            {if} 5+3 == 8:
+#                {print}('5+3 {is} inderdaad 8')
+#            {else}:
+#                {print}('Dit wordt niet ge{print} want 5+3 {is} 8!')
+#    -   name: "Waarde geven"
+#        explanation: "Als we willen zeggen dat een variabele genaamd antwoord 8 is, dan doen we antwoord = 8."
+#        example: "Bijvoorbeeld: antwoord = 8"
+#        demo_code: |-
+#            {print}('Hoeveel is 5+3?')
+#            antwoord = 5+3
+#            {print}('antwoord {is} nu:')
+#            {print}(antwoord)
+#    -   name: "Vergelijken en waarde geven"
+#        explanation: "Als we gaan vergelijken gebruiken we dus `==`. Als we een waarde geven dan gebruiken we `=`. "
+#        example: "Bijvoorbeeld: antwoord == 8, antwoord = 8"
+#        demo_code: |-
+#            {print}('Hoeveel is 5+3?')
+#            antwoord = 5+3
+#            {print}('antwoord {is} nu:')
+#            {print}(antwoord)
+#            {if} antwoord == 8:
+#                {print}('Dat {is} goed!')
+#            {else}:
+#                {print}('Helaas dat {is} fout!')

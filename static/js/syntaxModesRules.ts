@@ -5,6 +5,7 @@ import {LANG_ar} from './syntaxLang-ar';
 import {LANG_fr} from './syntaxLang-fr';
 import {LANG_hi} from './syntaxLang-hi';
 import {LANG_tr} from './syntaxLang-tr';
+import {LANG_id} from './syntaxLang-id';
 import {LANG_nb_NO} from './syntaxLang-nb_NO';
 
 
@@ -68,7 +69,7 @@ var currentLang: {
   _LENGTH: string;
 };
 
-switch(window.State.lang){
+switch(window.State.keyword_language){
   case 'nl':
     currentLang = LANG_nl;
     break;
@@ -86,6 +87,9 @@ switch(window.State.lang){
     break;
   case 'hi':
     currentLang = LANG_hi;
+    break;
+  case 'id':
+    currentLang = LANG_id;
     break;
   case 'nb_NO':
     currentLang = LANG_nb_NO;
