@@ -1025,19 +1025,18 @@ class ConvertToPython(Transformer):
         return hash_var(name) in all_names
 
     def process_variable(self, arg):
-        #processes a variable by hashing and escaping when needed
+        # processes a variable by hashing and escaping when needed
         if self.is_variable(arg):
             return hash_var(arg)
-        elif ConvertToPython.is_quoted(arg): #sometimes kids accidentally quote strings, then we do not want them quoted again
-            return f"{arg}"
-        else:
-            return f"'{arg}'"
+        if ConvertToPython.is_quoted(arg):
+            arg = arg[1:-1]
+        return f"'{process_characters_needing_escape(arg)}'"
 
     def process_variable_for_fstring(self, name):
         if self.is_variable(name):
             return "{" + hash_var(name) + "}"
         else:
-            return name
+            return process_characters_needing_escape(name)
 
     def process_variable_for_fstring_padded(self, name):
         # used to transform variables in comparisons
@@ -1091,7 +1090,7 @@ class ConvertToPython(Transformer):
     # static methods
     @staticmethod
     def is_quoted(s):
-        return (s[0] == "'" and s[-1] == "'") or (s[0] == '"' and s[-1] == '"')
+        return len(s) > 1 and ((s[0] == "'" and s[-1] == "'") or (s[0] == '"' and s[-1] == '"'))
 
     @staticmethod
     def is_int(n):
@@ -1239,9 +1238,6 @@ class ConvertToPython_2(ConvertToPython_1):
         i = 0
 
         for argument in args:
-            # escape quotes if kids accidentally use them at level 2
-            argument = process_characters_needing_escape(argument)
-
             # final argument and punctuation arguments do not have to be separated with a space, other do
             if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
                 space = ''
@@ -1297,8 +1293,8 @@ class ConvertToPython_2(ConvertToPython_1):
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, args):
         parameter = args[0]
-        values = ["'" + a.replace("'", "\\'") + "'" for a in args[1:]]
-        return parameter + " = [" + ", ".join(values) + "]"
+        values = [f"'{process_characters_needing_escape(a)}'" for a in args[1:]]
+        return f"{parameter} = [{', '.join(values)}]"
 
     def list_access(self, args):
         args = [hash_var(a) for a in args]
@@ -1313,15 +1309,16 @@ class ConvertToPython_3(ConvertToPython_2):
             return args[0] + '[' + args[1] + '-1]'
 
     def add(self, args):
-        var = self.process_variable(args[0])
-        list = args[1]
-        return f"{list}.append({var})"
+        value = self.process_variable(args[0])
+        list_var = args[1]
+        return f"{list_var}.append({value})"
+
     def remove(self, args):
-        var = self.process_variable(args[0])
-        list = args[1]
+        value = self.process_variable(args[0])
+        list_var = args[1]
         return textwrap.dedent(f"""\
         try:
-            {list}.remove({var})
+            {list_var}.remove({value})
         except:
            pass""")
 
@@ -1329,6 +1326,14 @@ class ConvertToPython_3(ConvertToPython_2):
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=4)
 class ConvertToPython_4(ConvertToPython_3):
+
+    def process_variable_for_fstring(self, name):
+        if self.is_variable(name):
+            return "{" + hash_var(name) + "}"
+        else:
+            if self.is_quoted(name):
+                name = name[1:-1]
+            return name.replace("'", "\\'")  # at level 4 backslashes are escaped in preprocessing, so we escape only '
 
     def var_access(self, args):
         name = args[0]
@@ -1339,7 +1344,6 @@ class ConvertToPython_4(ConvertToPython_3):
         result = ''
         for argument in args:
             argument = self.process_variable_for_fstring(argument)
-            argument = argument.replace("'", '').replace('"', '')  # no quotes needed in fstring
             result += argument
         return result
 
@@ -1385,8 +1389,7 @@ else:
 
     def equality_check(self, args):
         arg0 = self.process_variable(args[0])
-        remaining_text = ' '.join(args[1:])
-        arg1 = self.process_variable(remaining_text)
+        arg1 = ' '.join([self.process_variable(a) for a in args[1:]])
         return f"{arg0} == {arg1}"
         #TODO, FH 2021: zelfde change moet ik ook nog ff maken voor equal. check in hogere levels
 
@@ -1408,7 +1411,6 @@ class ConvertToPython_6(ConvertToPython_5):
             if isinstance(a, Tree):
                 args_new.append("{" + a.children[0] + "}")
             else:
-                a = a.replace("'", "").replace('"', '')  # no quotes needed in fstring
                 args_new.append(self.process_variable_for_fstring(a))
 
         return ''.join(args_new)
@@ -1554,8 +1556,8 @@ class ConvertToPython_12(ConvertToPython_11):
     def text_in_quotes(self, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan'
         # Even though the quotes could be single or double, we could always use the same ones here
-        text = args[0]
-        return "'" + text + "'"
+        text = args[0].replace("'", "\\'")
+        return f"'{text}'"
 
     def process_token_or_tree(self, argument):
         if isinstance(argument, Tree):
@@ -2015,7 +2017,7 @@ def process_input_string(input_string, level):
     if contains_blanks(result):
         raise exceptions.CodePlaceholdersPresentException()
 
-    if level >= 3:
+    if level >= 4:
         result = result.replace("\\", "\\\\")
 
     # In level 8 we add indent-dedent blocks to the code before parsing
