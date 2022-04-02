@@ -107,28 +107,30 @@ class TestsLevel3(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-  def test_print_single_quotes(self):
-    code = "print 'Welcome to OceanView!'"
-    expected = """print(f'\\'Welcome to OceanView! \\'')"""
-
-    output = "'Welcome to OceanView! '"
-
-    self.single_level_tester(code=code, expected=expected, output=output)
-
-  def test_print_double_quotes(self):
-    code = 'print "Welcome to OceanView!"'
-    expected = """print(f'"Welcome to OceanView! "')"""
-
-    output = '"Welcome to OceanView! "'
-
-    self.single_level_tester(code=code, expected=expected, output=output)
-
   def test_print_slashes(self):
     code = "print Welcome to O/ceanView"
     expected = textwrap.dedent("""\
     print(f'Welcome to O/ceanView')""")
 
     output = "Welcome to O/ceanView"
+
+    self.single_level_tester(code=code, expected=expected, output=output)
+
+  def test_print_backslashes(self):
+    code = "print Welcome to O\\ceanView"
+    expected = textwrap.dedent("""\
+    print(f'Welcome to O\\\\ceanView')""")
+
+    output = "Welcome to O\\ceanView"
+
+    self.single_level_tester(code=code, expected=expected, output=output)
+
+  def test_print_slash_end(self):
+    code = "print Welcome to \\"
+    expected = textwrap.dedent("""\
+    print(f'Welcome to \\\\')""")
+
+    output = "Welcome to \\"
 
     self.single_level_tester(code=code, expected=expected, output=output)
 
@@ -181,13 +183,14 @@ class TestsLevel3(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
   def test_assign_list(self):
+    code = """dieren is Hond, Kat, Kangoeroe"""
+    expected = """dieren = ['Hond', 'Kat', 'Kangoeroe']"""
 
-    code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe""")
+    self.single_level_tester(code=code, expected=expected)
 
-    
-    expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']""")
+  def test_assign_list_value_with_quotes(self):
+    code = """dieren is Hond's, Kat"s, 'Kangoeroe', "Muis\""""
+    expected = """dieren = ['Hond\\\'s', 'Kat"s', '\\\'Kangoeroe\\\'', '"Muis"']"""
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -221,7 +224,6 @@ class TestsLevel3(HedyTester):
       expected=expected,
       extra_check_function=self.result_in(list),
       max_level=11)
-
 
   def test_assign_var_to_var(self):
     code = textwrap.dedent("""\
@@ -522,11 +524,49 @@ class TestsLevel3(HedyTester):
     dieren.append('muis')
     print(f'{random.choice(dieren)}')""")
 
-    self.single_level_tester(
+    self.multi_level_tester(
       code=code,
       expected=expected,
+      max_level=11,
       extra_check_function = self.result_in(['koe', 'kiep', 'muis']),
     )
+
+  def test_add_text_to_list_with_single_quote(self):
+    code = textwrap.dedent("""\
+      dieren is koe, kiep
+      add mui's to dieren
+      print dieren at random""")
+
+    expected = textwrap.dedent("""\
+      dieren = ['koe', 'kiep']
+      dieren.append('mui\\\'s')
+      print(f'{random.choice(dieren)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11,
+      extra_check_function=self.result_in(['koe', 'kiep', 'mui\'s']),
+    )
+
+  def test_add_text_to_list_with_double_quote(self):
+    code = textwrap.dedent("""\
+      dieren is koe, kiep
+      add mui"s to dieren
+      print dieren at random""")
+
+    expected = textwrap.dedent("""\
+      dieren = ['koe', 'kiep']
+      dieren.append('mui"s')
+      print(f'{random.choice(dieren)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11,
+      extra_check_function=self.result_in(['koe', 'kiep', 'mui\"s']),
+    )
+
   def test_remove_text_from_list(self):
     code = textwrap.dedent("""\
     dieren is koe, kiep
@@ -541,10 +581,53 @@ class TestsLevel3(HedyTester):
        pass
     print(f'{random.choice(dieren)}')""")
 
-    self.single_level_tester(
+    self.multi_level_tester(
       code=code,
       expected=expected,
+      max_level=11,
       extra_check_function=self.result_in(['koe']),
+    )
+
+  def test_remove_text_to_list_with_single_quote(self):
+    code = textwrap.dedent("""\
+      dieren is koe, kiep's
+      remove kiep's from dieren
+      print dieren at random""")
+
+    expected = textwrap.dedent("""\
+      dieren = ['koe', 'kiep\\\'s']
+      try:
+          dieren.remove('kiep\\\'s')
+      except:
+         pass
+      print(f'{random.choice(dieren)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11,
+      extra_check_function=self.result_in(['koe', 'kiep', 'mui\'s']),
+    )
+
+  def test_remove_text_to_list_with_double_quote(self):
+    code = textwrap.dedent("""\
+       dieren is koe, kiep"s
+       remove kiep"s from dieren
+       print dieren at random""")
+
+    expected = textwrap.dedent("""\
+       dieren = ['koe', 'kiep"s']
+       try:
+           dieren.remove('kiep"s')
+       except:
+          pass
+       print(f'{random.choice(dieren)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=11,
+      extra_check_function=self.result_in(['koe', 'kiep', 'mui\'s']),
     )
 
   def test_add_text_with_spaces_to_list(self):
