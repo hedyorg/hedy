@@ -24,7 +24,7 @@ echo "------> Validating YAML"
 pajv=$scriptdir/../../node_modules/.bin/pajv
 
 echo "------> Validating adventures"
-cd ../../coursedata/adventures/
+cd ../../content/adventures/
 $pajv validate \
     --errors=text \
     -s "adventures.schema.json" \
