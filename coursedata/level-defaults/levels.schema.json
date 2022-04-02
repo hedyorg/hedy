@@ -21,23 +21,10 @@
         "intro_text_5": { "type": "string" },
         "example_code_5": { "type": "string" },
         "intro_text_6": { "type": "string" },
-        "example_code_6": { "type": "string" },
-        "commands": {
-          "type": "array",
-          "additionalProperties": { "$ref": "#/definitions/Command" }
-        }
+        "example_code_6": { "type": "string" }
       },
-      "required": ["intro_text", "start_code", "commands"],
+      "required": ["intro_text", "start_code"],
       "additionalProperties": false
-    },
-    "Command": {
-      "type": "object",
-      "properties": {
-        "explanation": { "type": "string" },
-        "example": { "type": "string" },
-        "demo_code": { "type": "string" }
-      },
-      "required": ["explanation", "example", "demo_code"]
     }
   }
 }
