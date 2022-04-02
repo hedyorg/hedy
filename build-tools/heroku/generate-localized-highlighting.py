@@ -8,7 +8,7 @@ os.chdir(os.path.join(os.path.dirname(__file__), '../..'))
 
 language = 'id'
 
-keywords_path = 'coursedata/keywords/'
+keywords_path = 'content/keywords/'
 typescript_path = 'static/js/'
 
 keywords_file_path = os.path.join(keywords_path, f'{language}.yaml')

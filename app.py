@@ -1207,8 +1207,8 @@ def translate_keywords():
 def client_messages():
     # Not really nice, but we don't call this often as it is cached
     d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(YamlFile.for_file('coursedata/client-messages/en.yaml').to_dict())
-    d.update(YamlFile.for_file(f'coursedata/client-messages/{g.lang}.yaml').to_dict())
+    d.update(YamlFile.for_file('content/client-messages/en.yaml').to_dict())
+    d.update(YamlFile.for_file(f'content/client-messages/{g.lang}.yaml').to_dict())
 
     response = make_response(render_template("client_messages.js", error_messages=json.dumps(d)))
 
