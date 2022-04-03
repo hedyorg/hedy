@@ -455,19 +455,6 @@ class TestsLevel5(HedyTester):
     result = hedy.transpile_inner(code, self.level)
     self.assertEqual(False, result.has_turtle)
 
-  #Commenting this I don't know if this should be allowed, right now is parsed normally :$
-
-  # def test_no_space_after_keyword_gives_missing(self):
-  #   # todo (7-dec-21) this of course should be handled better giving an error about
-  #   # spaces missing (maybe with repair or in the grammar?)
-  #   code = textwrap.dedent("print'test'")
-
-  #   self.multi_level_tester(
-  #     max_level=10,
-  #     code=code,
-  #     exception=hedy.exceptions.MissingCommandException
-  #   )
-
     #we don't have a function now for testing more exceptoion logic
     # self.assertEqual('print', str(context.exception.arguments['guessed_command']))
   def test_pront_should_suggest_print(self):
