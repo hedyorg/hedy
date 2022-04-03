@@ -21,20 +21,20 @@ def collect_snippets(path):
         yaml = YamlFile.for_file(file)
 
         for level in yaml:
-            try:
-                level_number = int(level)
-            except:
-                continue #level nummer geen int -> dan is het oude content, bijv 10-old en is ok
+            level_number = int(level)
             if level_number > hedy.HEDY_MAX_LEVEL:
                 print('content above max level!')
             else:
-                # commands.k.demo_code
-                for k, command in enumerate(yaml[level]):
+                try:
+                    # commands.k.demo_code
+                    for k, command in enumerate(yaml[level]):
 
-                    command_text_short = command['name'] if 'name' in command.keys() else command['explanation'][0:10]
-                    Hedy_snippets.append(
-                        Snippet(filename=file, level=level, field_name='command ' + command_text_short + ' demo_code',
-                                code=command['demo_code']))
+                        command_text_short = command['name'] if 'name' in command.keys() else command['explanation'][0:10]
+                        Hedy_snippets.append(
+                            Snippet(filename=file, level=level, field_name='command ' + command_text_short + ' demo_code',
+                                    code=command['demo_code']))
+                except:
+                    print(f'Problem reading commands yaml for {lang} level {level}')
 
 
     return Hedy_snippets

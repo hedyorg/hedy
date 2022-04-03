@@ -21,10 +21,7 @@ def collect_snippets(path):
         yaml = YamlFile.for_file(file)
 
         for level in yaml:
-            try:
-                level_number = int(level)
-            except:
-                continue #level nummer geen int -> dan is het oude content, bijv 10-old en is ok
+            level_number = int(level)
             if level_number > hedy.HEDY_MAX_LEVEL:
                 print('content above max level!')
             else:
@@ -43,7 +40,7 @@ def collect_snippets(path):
                         Hedy_snippets.append(Snippet(filename=file, level=level, field_name='intro_text snippet #' + str(code_snippet_counter),
                                                  code=code))
                     except:
-                        print(f'Intro snippet for level {level} has an error')
+                        print(f'Intro snippet for {lang} in level {level} has an error')
     return Hedy_snippets
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/level-defaults')]
