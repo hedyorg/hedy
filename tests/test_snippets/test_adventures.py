@@ -18,6 +18,7 @@ def collect_snippets(path):
   Hedy_snippets = []
   files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
   for f in files:
+      lang = f.split(".")[0]
       f = os.path.join(path, f)
       yaml = YamlFile.for_file(f)
 
@@ -46,7 +47,7 @@ def collect_snippets(path):
                         Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
 
                     except KeyError:
-                        #TODO: create startcode not found error
+                        print(f'Problem reading startcode for {lang} level {level}')
                         pass
 
   return Hedy_snippets

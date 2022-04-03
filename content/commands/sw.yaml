@@ -1,345 +1,345 @@
 1:
-    -   explanation: "Chapisha kitu wenye skrini kwakutumia neno `print`."
-        example: "Mfano: print Salamu, karibu Hedy!"
-        demo_code: "print Salamu, karibu Hedy!"
-        name: '{print}'
-    -   explanation: "Kuliza mtumiaji achapishe kitu, tumia neno `ask`."
-        example: "Mfano: ask Unaitwa nani?"
-        demo_code: "ask Unaitwa nani?"
-        name: '{ask}'
-    -   explanation: "Rudia kuchapisha kitu kwa kutumia neno `echo`."
-        example: "Mfano: echo Sawa Kumbe unaitwa "
-        demo_code: "ask Unaitwa nani?\necho Sawa, Kumbe unaitwa "
-        name: '{echo}'
-    -   name: '{print} emojis'
-        explanation: print an emoji with `{print}`
-        example: 'Example: {print} 🙋‍ 🌍 ❗'
-        demo_code: '{print} 🙋 🌍 ❗'
-    -   name: '{forward}'
-        explanation: Draw a line with `{forward}`.
-        example: 'Example: {forward} 100'
-        demo_code: '{forward} 100'
-    -   name: '{turn}'
-        explanation: turn the drawing turtle with `{turn}`
-        example: 'Example: {turn}'
-        demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+-   explanation: "Chapisha kitu wenye skrini kwakutumia neno `print`."
+    example: "Mfano: print Salamu, karibu Hedy!"
+    demo_code: "print Salamu, karibu Hedy!"
+    name: '{print}'
+-   explanation: "Kuliza mtumiaji achapishe kitu, tumia neno `ask`."
+    example: "Mfano: ask Unaitwa nani?"
+    demo_code: "ask Unaitwa nani?"
+    name: '{ask}'
+-   explanation: "Rudia kuchapisha kitu kwa kutumia neno `echo`."
+    example: "Mfano: echo Sawa Kumbe unaitwa "
+    demo_code: "ask Unaitwa nani?\necho Sawa, Kumbe unaitwa "
+    name: '{echo}'
+-   name: '{print} emojis'
+    explanation: print an emoji with `{print}`
+    example: 'Example: {print} 🙋‍ 🌍 ❗'
+    demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{forward}'
+    explanation: Draw a line with `{forward}`.
+    example: 'Example: {forward} 100'
+    demo_code: '{forward} 100'
+-   name: '{turn}'
+    explanation: turn the drawing turtle with `{turn}`
+    example: 'Example: {turn}'
+    demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
 2:
-    -   explanation: "Tumia neno `is` kuvipa vitu majina yao"
-        example: "Mfano: nchi is Tanzani."
-        demo_code: "nchi is Tanzania\nprint karibu nchi"
-        name: '{is}'
-    -   explanation: "Uliza maswali kwa kutumia neno `ask`. kuonya! Utatakiwa kuvipa jina majibu kwa kutumia neno `is`."
-        example: "Mfano: jina is ask Unaitwaje?"
-        demo_code: "jina is ask Unaitwaje?\nprint Ujambo jina!"
-        name: '{ask}'
-    -   name: '{sleep}'
-        explanation: Let Hedy pause for a (couple of) second(s).
-        example: 'Example: {sleep} 2 '
-        demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
-    -   name: is - turtle
-        explanation: Give a number a name using `{is}`. You can choose the name yourself.
-        example: 'Example: angle {is} 90'
-        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+-   explanation: "Tumia neno `is` kuvipa vitu majina yao"
+    example: "Mfano: nchi is Tanzani."
+    demo_code: "nchi is Tanzania\nprint karibu nchi"
+    name: '{is}'
+-   explanation: "Uliza maswali kwa kutumia neno `ask`. kuonya! Utatakiwa kuvipa jina majibu kwa kutumia neno `is`."
+    example: "Mfano: jina is ask Unaitwaje?"
+    demo_code: "jina is ask Unaitwaje?\nprint Ujambo jina!"
+    name: '{ask}'
+-   name: '{sleep}'
+    explanation: Let Hedy pause for a (couple of) second(s).
+    example: 'Example: {sleep} 2 '
+    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+-   name: is - turtle
+    explanation: Give a number a name using `{is}`. You can choose the name yourself.
+    example: 'Example: angle {is} 90'
+    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
-    -   explanation: "Chagua neno nasibu(random) kutoka kikundi kwa kutumia maneno `at` na `random`"
-        example: "Mfano: majina is Ayubu, Nasra, Novatus."
-        demo_code: "majina is Ayubu, Nasra, Novatus\nprint majina at random"
-        name: choose_random
-    -   explanation: add an item to a list
-        example: 'Example: {add} dog {to_list} animals'
-        name: '{add}'
-        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
-    -   demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
-        name: '{remove}'
-        explanation: remove an item from a list
-        example: 'Example: {remove} dog {from} animals'
+-   explanation: "Chagua neno nasibu(random) kutoka kikundi kwa kutumia maneno `at` na `random`"
+    example: "Mfano: majina is Ayubu, Nasra, Novatus."
+    demo_code: "majina is Ayubu, Nasra, Novatus\nprint majina at random"
+    name: choose_random
+-   explanation: add an item to a list
+    example: 'Example: {add} dog {to_list} animals'
+    name: '{add}'
+    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+-   demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    name: '{remove}'
+    explanation: remove an item from a list
+    example: 'Example: {remove} dog {from} animals'
 4:
-    -   explanation: "Tumia fungua semi na funga semi ya aina '' ukitumia `print`"
-        example: "Mfano: print 'Salamu dumia'"
-        demo_code: "print 'Jambo!!, karibu Hedy.'"
-        name: '{print}'
-    -   explanation: "Vipa jina sentensi au neno na zichapishe bila kutumia fungua semi na funga semi."
-        example: "Mfano: jina is Juma."
-        demo_code: "jina is Juma\nprint 'Naitwa ' jina"
-        name: '{is}'
-    -   explanation: "Uliza maswali kwa kutumia neno `ask`."
-        example: "Mfano: mji is ask 'Unaishi wapi?'"
-        demo_code: "mji is ask 'Unaishi wapi?'\nprint mji ', ndo ninapoishi pia.'"
-        name: '{ask}'
+-   explanation: "Tumia fungua semi na funga semi ya aina '' ukitumia `print`"
+    example: "Mfano: print 'Salamu dumia'"
+    demo_code: "print 'Jambo!!, karibu Hedy.'"
+    name: '{print}'
+-   explanation: "Vipa jina sentensi au neno na zichapishe bila kutumia fungua semi na funga semi."
+    example: "Mfano: jina is Juma."
+    demo_code: "jina is Juma\nprint 'Naitwa ' jina"
+    name: '{is}'
+-   explanation: "Uliza maswali kwa kutumia neno `ask`."
+    example: "Mfano: mji is ask 'Unaishi wapi?'"
+    demo_code: "mji is ask 'Unaishi wapi?'\nprint mji ', ndo ninapoishi pia.'"
+    name: '{ask}'
 5:
-    -   explanation: "Tumia fungua semi na funga semi ya aina '' ukitumia `print`"
-        example: "Mfano: print 'Jambo!! Karibu Hedy.'"
-        demo_code: "print 'Jambo!! Karibu Hedy.'"
-        name: '{print}'
-    -   explanation: "Uliza maswali kwa kutumia neno `ask`."
-        example: "Mfano: mji is ask 'Unaishi wapi?'"
-        demo_code: "mji is ask 'Unaishi wapi?'\nprint mji ', ndo ninapoishi pia.'"
-        name: '{ask}'
-    -   explanation: "Fanya uamuzi kwa kutumia neno `if`"
-        example: "Mfano: if gari is Nissan print 'Ni gari' else print 'sio gari'"
-        demo_code: "jibu is ask 'Unapenda nchi yako?'\nif jibu is ndio print 'vizuri sana!' else print 'Uzalendo ni muhimu'"
-        name: '{if}'
-    -   name: '{if} with turtle'
-        explanation: Make a choice with `{if}`
-        example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
-        demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
-    -   demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-        name: '{in}'
-        explanation: Check elements with `{in}`
-        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+-   explanation: "Tumia fungua semi na funga semi ya aina '' ukitumia `print`"
+    example: "Mfano: print 'Jambo!! Karibu Hedy.'"
+    demo_code: "print 'Jambo!! Karibu Hedy.'"
+    name: '{print}'
+-   explanation: "Uliza maswali kwa kutumia neno `ask`."
+    example: "Mfano: mji is ask 'Unaishi wapi?'"
+    demo_code: "mji is ask 'Unaishi wapi?'\nprint mji ', ndo ninapoishi pia.'"
+    name: '{ask}'
+-   explanation: "Fanya uamuzi kwa kutumia neno `if`"
+    example: "Mfano: if gari is Nissan print 'Ni gari' else print 'sio gari'"
+    demo_code: "jibu is ask 'Unapenda nchi yako?'\nif jibu is ndio print 'vizuri sana!' else print 'Uzalendo ni muhimu'"
+    name: '{if}'
+-   name: '{if} with turtle'
+    explanation: Make a choice with `{if}`
+    example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
+    demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+-   demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+    name: '{in}'
+    explanation: Check elements with `{in}`
+    example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
-    -   explanation: "Tumia fungua semi na funga semi ya aina ''"
-        example: "Mfano: print '5 mara 5 ni sawa sawa na ' 5 * 5"
-        demo_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
-        name: '{print}'
-    -   explanation: "Uliza maswali ya hesabu na hakikisha majibu yako sahihi."
-        example: "Mfano: answer = ask '10 jumlisha 10 ni sawa sawa na?'"
-        demo_code: "jibu = ask '10 jumlisha 10 ni sawa sawa na?'\nif jibu is 20 print 'Sahihi!' else print 'Sio Sahihi'"
-        name: '{ask}'
-    -   name: "`ask` and `if` turtle"
-        explanation: "Ask the user how many angles they want"
-        example: "Example: angles = ask 'How many angles?'"
-        demo_code: |-
-            angles = ask 'How many angles?'
-            angle = 360 / angles
-            forward 50
+-   explanation: "Tumia fungua semi na funga semi ya aina ''"
+    example: "Mfano: print '5 mara 5 ni sawa sawa na ' 5 * 5"
+    demo_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
+    name: '{print}'
+-   explanation: "Uliza maswali ya hesabu na hakikisha majibu yako sahihi."
+    example: "Mfano: answer = ask '10 jumlisha 10 ni sawa sawa na?'"
+    demo_code: "jibu = ask '10 jumlisha 10 ni sawa sawa na?'\nif jibu is 20 print 'Sahihi!' else print 'Sio Sahihi'"
+    name: '{ask}'
+-   name: "`ask` and `if` turtle"
+    explanation: "Ask the user how many angles they want"
+    example: "Example: angles = ask 'How many angles?'"
+    demo_code: |-
+        angles = ask 'How many angles?'
+        angle = 360 / angles
+        forward 50
 7:
-    -   explanation: "Tumia fungua semi na funga semi ya aina '' ukitumia `print`"
-        example: "Mfano: print 'Jambo! karibu Hedy.'"
-        demo_code: "print 'Jambo! karibu Hedy.'"
-        name: '{print}'
-    -   explanation: "Uliza maswali kwa kutumia neno `ask`."
-        example: "Mfano: mji = ask 'Unaishi wapi?'"
-        demo_code: "mji = ask 'Unaishi wapi?'\nprint mji ', ndo ninapoishi pia.'"
-        name: '{ask}'
-    -   explanation: "Fanya uamuzi kwa kutumia neno `if`"
-        example: "Mfano: if gari is Nissan print 'Ni gari' else print 'sio gari'"
-        demo_code: "jibu = ask 'Unapenda nchi yako?'\nif jibu is ndio print 'vizuri sana!' else print 'Uzalendo ni muhimu'"
-        name: '{if}'
-    -   name: "repeat - turtle"
-        explanation: "Repeat a line of code with `repeat`."
-        example: "Example: repeat 3 times forward 10"
-        demo_code: |-
-            repeat 3 times forward 10
+-   explanation: "Tumia fungua semi na funga semi ya aina '' ukitumia `print`"
+    example: "Mfano: print 'Jambo! karibu Hedy.'"
+    demo_code: "print 'Jambo! karibu Hedy.'"
+    name: '{print}'
+-   explanation: "Uliza maswali kwa kutumia neno `ask`."
+    example: "Mfano: mji = ask 'Unaishi wapi?'"
+    demo_code: "mji = ask 'Unaishi wapi?'\nprint mji ', ndo ninapoishi pia.'"
+    name: '{ask}'
+-   explanation: "Fanya uamuzi kwa kutumia neno `if`"
+    example: "Mfano: if gari is Nissan print 'Ni gari' else print 'sio gari'"
+    demo_code: "jibu = ask 'Unapenda nchi yako?'\nif jibu is ndio print 'vizuri sana!' else print 'Uzalendo ni muhimu'"
+    name: '{if}'
+-   name: "repeat - turtle"
+    explanation: "Repeat a line of code with `repeat`."
+    example: "Example: repeat 3 times forward 10"
+    demo_code: |-
+        repeat 3 times forward 10
 8:
-    -   explanation: "Kuchapisha kitu. Kumbuka kutumia fungua semi na funga semi cha aina ya ''."
-        example: "Mfano: print '5 mara 5 ni sawa sawa na ' 5 * 5"
-        demo_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
-        name: '{print}'
-    -   explanation: "Uliza jibu ya kujumlisha numberi na kuhakikisha jibu iko sahihi. Sasa tunaweza kuchapisha(print) mstari mbili kwa pamoja."
-        example: "Mfano: jibu = ask '5 jumlisha 5 ni sawa sawa na?'"
-        demo_code: "jibu = ask '5 jumlisha 5 ni sawa sawa na?'\nif jibu is 10\n    print 'Vizuri sana!'\n    print 'Kwakweli, jibu ilikuwa ' jibu\nelse\n    print 'Sio sahihi!'\n    print 'Jibu ilikuwa 10'"
-        name: '{ask}'
-    -   example: 'Example: draw a square'
-        name: '`{repeat}` with turtle'
-        explanation: '{repeat} multiple lines'
-        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   explanation: "Kuchapisha kitu. Kumbuka kutumia fungua semi na funga semi cha aina ya ''."
+    example: "Mfano: print '5 mara 5 ni sawa sawa na ' 5 * 5"
+    demo_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
+    name: '{print}'
+-   explanation: "Uliza jibu ya kujumlisha numberi na kuhakikisha jibu iko sahihi. Sasa tunaweza kuchapisha(print) mstari mbili kwa pamoja."
+    example: "Mfano: jibu = ask '5 jumlisha 5 ni sawa sawa na?'"
+    demo_code: "jibu = ask '5 jumlisha 5 ni sawa sawa na?'\nif jibu is 10\n    print 'Vizuri sana!'\n    print 'Kwakweli, jibu ilikuwa ' jibu\nelse\n    print 'Sio sahihi!'\n    print 'Jibu ilikuwa 10'"
+    name: '{ask}'
+-   example: 'Example: draw a square'
+    name: '`{repeat}` with turtle'
+    explanation: '{repeat} multiple lines'
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
-  - name: "`{if}` with multiple lines"
+-   name: "`{if}` with multiple lines"
     explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
     example: "Example: answer = {ask} 'What is 20 plus 20?'"
     demo_code: |-
-      answer = {ask} 'What is 20 plus 20?'
-      {if} answer {is} 20
-          {print} 'Well done!!'
-          {print} 'The answer is indeed' answer
-      else
-          {print} 'Wrong'
-          {print} 'The answer is 20'
-  - name: "`{repeat}` and turtle"
+        answer = {ask} 'What is 20 plus 20?'
+        {if} answer {is} 20
+            {print} 'Well done!!'
+            {print} 'The answer is indeed' answer
+        else
+            {print} 'Wrong'
+            {print} 'The answer is 20'
+-   name: "`{repeat}` and turtle"
     explanation: "{repeat} multiple lines"
     example: "Example: create a square"
     demo_code: |-
-      {repeat} 4 {times}
-          {turn} 90
-          {forward} 50
+        {repeat} 4 {times}
+            {turn} 90
+            {forward} 50
 10:
-  - name: "{print}"
+-   name: "{print}"
     explanation: "print something. Remember to use a quotation mark for literal printing."
     example: "Example: {print} '5 times 5 is ' 5 * 5"
     demo_code: "{print} '5 times 5 is ' 5 * 5"
-  - name: "{for} with a list"
+-   name: "{for} with a list"
     explanation: "print all things in a list "
     example: "Example: {for} animal {in} animals"
     demo_code: |-
-      animals {is} dog, cat, blobfish
-      {for} animal {in} animals
-        {print} 'I love ' animal
+        animals {is} dog, cat, blobfish
+        {for} animal {in} animals
+          {print} 'I love ' animal
 11:
-    -   explanation: "Tumatumia `for` badala ya `repeat`"
-        example: "for i in range 1 to 10"
-        demo_code: |
-            for i in range 1 to 10
-              print i
-            print 'Tayari au la, nakuja!'
-        name: '{for} loop'
-    -   demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
-        name: '{ask}'
-        explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-        example: "Example: answer = {ask} 'What is 5 plus 5?'"
+-   explanation: "Tumatumia `for` badala ya `repeat`"
+    example: "for i in range 1 to 10"
+    demo_code: |
+        for i in range 1 to 10
+          print i
+        print 'Tayari au la, nakuja!'
+    name: '{for} loop'
+-   demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+    name: '{ask}'
+    explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    example: "Example: answer = {ask} 'What is 5 plus 5?'"
 12:
-  - name: "float directly"
+-   name: "float directly"
     explanation: "Decimal numbers"
     example: "{print} 2.5 + 2.5"
     demo_code: |
-      {print} 'Calculate away!'
-      {print} 'Two and a half plus two and a half is...'
-      {print} 2.5 + 2.5
-  - name: "assign text"
+        {print} 'Calculate away!'
+        {print} 'Two and a half plus two and a half is...'
+        {print} 2.5 + 2.5
+-   name: "assign text"
     explanation: "Text with quotation marks after ="
     example: "name = 'Hedy'"
     demo_code: |
-      name = 'Hedy the Robot'
-      {print} 'Hello ' name
-  - name: "quotes after {if} comparison"
+        name = 'Hedy the Robot'
+        {print} 'Hello ' name
+-   name: "quotes after {if} comparison"
     explanation: "Text with quotation marks after {if}"
     example: "name = 'Hedy'"
     demo_code: |
-      name = {ask} 'Who are you?'
-      {if} name = 'Hedy'
-          {print} 'Hi there!'
-  - name: "quotes in list"
+        name = {ask} 'Who are you?'
+        {if} name = 'Hedy'
+            {print} 'Hi there!'
+-   name: "quotes in list"
     explanation: "A list with quotation marks"
     example: "name = 'Hedy', 'Felienne'"
     demo_code: |
-      superheroes = 'Iron Man', 'Batman', 'Superman'
-      {print} superheroes {at} {random}
+        superheroes = 'Iron Man', 'Batman', 'Superman'
+        {print} superheroes {at} {random}
 13:
-  - name: "{and}"
+-   name: "{and}"
     explanation: "Two parts both need to be correct"
     example: "if 3+2 {is} 5 {and} 2+2 {is} 4"
     demo_code: |-
-      answer1 = {ask} 'What is 3+2?'
-      answer2 = {ask} 'What is 2+2?'
-      {if} answer1 {is} 5 {and} answer2 {is} 4
-          {print} 'Both answers are correct!'
-      else
-          {print} 'At least one answer is wrong!'
-  - name: "{or}"
+        answer1 = {ask} 'What is 3+2?'
+        answer2 = {ask} 'What is 2+2?'
+        {if} answer1 {is} 5 {and} answer2 {is} 4
+            {print} 'Both answers are correct!'
+        else
+            {print} 'At least one answer is wrong!'
+-   name: "{or}"
     explanation: "At least 1 of the two parts need to be correct. If both are correct, it is also fine."
     example: "if 3+2 {is} 5 {or} 2+2 {is} 4"
     demo_code: |-
-      answer1 = {ask} 'What is 3+2?'
-      answer2 = {ask} 'What is 2+2?'
-      {if} answer1 {is} 5 {or} answer2 {is} 4
-          {print} 'At least one answer is correct!'
-      else
-          {print} 'Both answers are wrong!'
+        answer1 = {ask} 'What is 3+2?'
+        answer2 = {ask} 'What is 2+2?'
+        {if} answer1 {is} 5 {or} answer2 {is} 4
+            {print} 'At least one answer is correct!'
+        else
+            {print} 'Both answers are wrong!'
 14:
-  - name: "Smaller"
+-   name: "Smaller"
     explanation: "We use the `<` to check if the first number is smaller than the second number."
     example: "For example: age < 12"
     demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age < 13
-          {print} 'You are younger than me!'
-  - name: "Bigger"
+        age = {ask} 'How old are you?'
+        {if} age < 13
+            {print} 'You are younger than me!'
+-   name: "Bigger"
     explanation: "We use the `>` to check if the first number is bigger than the second number."
     example: "For example: age > 12"
     demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age > 13
-          {print} 'You are older than me!'
-  - name: "Equal"
+        age = {ask} 'How old are you?'
+        {if} age > 13
+            {print} 'You are older than me!'
+-   name: "Equal"
     explanation: "We use the `==` to check if two things are the same."
     example: "For example: answer == 25"
     demo_code: |-
-      answer = {ask} 'What is 5 * 5?'
-      {if} answer == 25
-          {print} 'That {is} correct!'
-  - name: "Not equal"
+        answer = {ask} 'What is 5 * 5?'
+        {if} answer == 25
+            {print} 'That {is} correct!'
+-   name: "Not equal"
     explanation: "We use the `!=` to check if two things are not the same. "
     example: "For example: answer != 25"
     demo_code: |-
-      answer = {ask} 'What is 5 * 5?'
-      {if} answer != 25
-          {print} 'That is not correct!'
+        answer = {ask} 'What is 5 * 5?'
+        {if} answer != 25
+            {print} 'That is not correct!'
 
-  - name: "Smaller {or} equal"
+-   name: "Smaller {or} equal"
     explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
     example: "For example: age <= 12"
     demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age <= 12
-          {print} 'You are younger than me!'
+        age = {ask} 'How old are you?'
+        {if} age <= 12
+            {print} 'You are younger than me!'
 
-  - name: "Bigger or equal"
+-   name: "Bigger or equal"
     explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
     example: "For example: age >= 14"
     demo_code: |-
-      age = {ask} 'How old are you?'
-      {if} age >= 14
-          {print} 'You are older than me!'
+        age = {ask} 'How old are you?'
+        {if} age >= 14
+            {print} 'You are older than me!'
 15:
-  - name: "{while}"
+-   name: "{while}"
     explanation: "We can use the `{while}` loop with not equal"
     example: "Example: {while} correct_answer != 25"
     demo_code: |-
-      answer = 0
-      {while} answer != 25
-          answer = {ask} 'What is 5 times 5?'
-      {print} 'A correct answer has been given'
-  - name: "Smaller {while}"
+        answer = 0
+        {while} answer != 25
+            answer = {ask} 'What is 5 times 5?'
+        {print} 'A correct answer has been given'
+-   name: "Smaller {while}"
     explanation: "We can also use the `{while}` loop with `<` and `>`. "
     example: "For example: {while} count < 3"
     demo_code: |-
-      count = 1
-      {while} count < 3
-          {print} 'We do this ' 3 - count ' more times'
-          count = count + 1
-      {print} 'We are done'
+        count = 1
+        {while} count < 3
+            {print} 'We do this ' 3 - count ' more times'
+            count = count + 1
+        {print} 'We are done'
 16:
-    -   explanation: "Tutatumia mabano ya aina [ ] na pia tutatumia fungua semi na funga semi tukiandika majina vilivyo kwenye orodha."
-        example: "Mfano: matunda = ['embe', 'machungwa', 'ndizi']"
-        demo_code: |-
-            matunda = ['embe', 'machungwa', 'ndizi']
-            print matunda
-        name: square brackets
-    -   name: "Chagua kitu kutoka kwenye orodha."
-        explanation: "Kuchagua kitu kutoka kwenye orodha yetu, tutatumia mfumo ifuatoyo: [nambari] kwa mfano matunda[1] ikamaanisha, utachagua kitu cha kwanza iliyopo katika orodha."
-        example: "Mfano: matundayaywanya = matunda[1]"
-        demo_code: "matunda = ['embe', 'machungwa', 'ndizi']\nmatundayaywanya = matunda[1]\nprint matundayaywanya "
-    -   name: "Kuchagua matunda nasibu kutoka kwa orodha"
-        explanation: "Kuchagua matunda nasibu kutoka kwa orodha, tumia mfumo ufuatavyo, [random], mfano matunda[random] kupata matunda nasibu kutoka kwenye orodha."
-        example: "Mfano matundanasibu = matunda[random]"
-        demo_code: |-
-            matunda = ['embe', 'machungwa', 'ndizi']
-            matunda_nasibu = matunda[random]
-            print matunda_nasibu
+-   explanation: "Tutatumia mabano ya aina [ ] na pia tutatumia fungua semi na funga semi tukiandika majina vilivyo kwenye orodha."
+    example: "Mfano: matunda = ['embe', 'machungwa', 'ndizi']"
+    demo_code: |-
+        matunda = ['embe', 'machungwa', 'ndizi']
+        print matunda
+    name: square brackets
+-   name: "Chagua kitu kutoka kwenye orodha."
+    explanation: "Kuchagua kitu kutoka kwenye orodha yetu, tutatumia mfumo ifuatoyo: [nambari] kwa mfano matunda[1] ikamaanisha, utachagua kitu cha kwanza iliyopo katika orodha."
+    example: "Mfano: matundayaywanya = matunda[1]"
+    demo_code: "matunda = ['embe', 'machungwa', 'ndizi']\nmatundayaywanya = matunda[1]\nprint matundayaywanya "
+-   name: "Kuchagua matunda nasibu kutoka kwa orodha"
+    explanation: "Kuchagua matunda nasibu kutoka kwa orodha, tumia mfumo ufuatavyo, [random], mfano matunda[random] kupata matunda nasibu kutoka kwenye orodha."
+    example: "Mfano matundanasibu = matunda[random]"
+    demo_code: |-
+        matunda = ['embe', 'machungwa', 'ndizi']
+        matunda_nasibu = matunda[random]
+        print matunda_nasibu
 17:
-    -   explanation: "Tukitumia `for`, tunatakiwa kutumia pia `:` baada ya kauli ya `for`!"
-        example: "for i in range 1 to 10:"
-        demo_code: "for i in range 1 to 12:\n    print i\nprint 'Tayari au la, nakuja!'"
-        name: '{elif}'
-    -   explanation: "Tunatakiwa kufuata hii mfumo pia tukitumia kauli ya `if`"
-        example: "if rangi is kijani:'"
-        demo_code: |-
-            rangi = 'kijani'
-            if rangi is 'kijani':
-                print 'Rangi ni ya Kijani'
-            else:
-                print 'Rangi sio ya Kijani'
-        name: '{print}'
-    -   explanation: "Tutawa fundisha mfumo mpya ambacho utafuata ikitaka kutumia: `elif`. `elif` ikimaanisha \"else if\". Tuananza kucheki kama `if` ni sahihi, kama sio kweli, tutacheki `elif` na kama sio kweli pia tutacheki `else`."
-        example: "elif a is 5:"
-        demo_code: |-
-            a = 2
-            if a is 1:
-                print 'a ni 1'
-            elif a is 2:
-                print 'a ni 2'
-            else:
-                print 'a sio 1 wala 2'
-        name: '{if}'
+-   explanation: "Tukitumia `for`, tunatakiwa kutumia pia `:` baada ya kauli ya `for`!"
+    example: "for i in range 1 to 10:"
+    demo_code: "for i in range 1 to 12:\n    print i\nprint 'Tayari au la, nakuja!'"
+    name: '{elif}'
+-   explanation: "Tunatakiwa kufuata hii mfumo pia tukitumia kauli ya `if`"
+    example: "if rangi is kijani:'"
+    demo_code: |-
+        rangi = 'kijani'
+        if rangi is 'kijani':
+            print 'Rangi ni ya Kijani'
+        else:
+            print 'Rangi sio ya Kijani'
+    name: '{print}'
+-   explanation: "Tutawa fundisha mfumo mpya ambacho utafuata ikitaka kutumia: `elif`. `elif` ikimaanisha \"else if\". Tuananza kucheki kama `if` ni sahihi, kama sio kweli, tutacheki `elif` na kama sio kweli pia tutacheki `else`."
+    example: "elif a is 5:"
+    demo_code: |-
+        a = 2
+        if a is 1:
+            print 'a ni 1'
+        elif a is 2:
+            print 'a ni 2'
+        else:
+            print 'a sio 1 wala 2'
+    name: '{if}'
 18:
-  - name: "{print}"
+-   name: "{print}"
     explanation: "With `{print}` you need to use parentheses"
     example: "{print}"
     demo_code: |-
-      {print}('hi!')
-  - name: "{print} with var"
+        {print}('hi!')
+-   name: "{print} with var"
     explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
     example: "{print}"
     demo_code: |-
-      name = 'Hedy'
-      {print}('my name is ', name)
+        name = 'Hedy'
+        {print}('my name is ', name)
