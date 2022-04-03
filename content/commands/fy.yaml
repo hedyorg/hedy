@@ -1,378 +1,382 @@
 1:
-    -   name: "printe"
-        explanation: "Eat printe mei `{print}`."
-        example: "Foarbyld: {print} Hoi wolkom by Hedy!"
-        demo_code: "{print} Hoi wolkom by Hedy!"
-    -   name: "freegje"
-        explanation: "Eat freegje mei `{ask}`."
-        example: "Foarbyld: {ask} Wat is dyn favorite kleur?"
-        demo_code: "{ask} Wat is dyn favorite kleur?"
-    -   name: "echo"
-        explanation: "Eat werhelje mei `{echo}`."
-        example: "Foarbyld: echo Dus dyn favorite kleur is"
-        demo_code: |-
-            {ask} Wat is dyn favorite kleur?
-            {echo} Dus dyn favorite kleur is...
-    -   name: "foarút"
-        explanation: "Een line tekenje mei `{forward}`."
-        example: "Foarbyld: {forward} 100"
-        demo_code: "{forward} 100"
-    -   name: "draaie"
-        explanation: "De teken-skyldpod draaie mei `{turn}`"
-        example: "Foarbyld: {turn}"
-        demo_code: |-
-            {forward} 25
-            {turn} {left}
-            {forward} 25
-            {turn} {right}
-    -   example: 'Example: {turn}'
-        demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
-        name: '{turn}'
-        explanation: turn the drawing turtle with `{turn}`
+-   name: "printe"
+    explanation: "Eat printe mei `{print}`."
+    example: "Foarbyld: {print} Hoi wolkom by Hedy!"
+    demo_code: "{print} Hoi wolkom by Hedy!"
+-   name: "freegje"
+    explanation: "Eat freegje mei `{ask}`."
+    example: "Foarbyld: {ask} Wat is dyn favorite kleur?"
+    demo_code: "{ask} Wat is dyn favorite kleur?"
+-   name: "echo"
+    explanation: "Eat werhelje mei `{echo}`."
+    example: "Foarbyld: echo Dus dyn favorite kleur is"
+    demo_code: |-
+        {ask} Wat is dyn favorite kleur?
+        {echo} Dus dyn favorite kleur is...
+-   name: "foarút"
+    explanation: "Een line tekenje mei `{forward}`."
+    example: "Foarbyld: {forward} 100"
+    demo_code: "{forward} 100"
+-   name: "draaie"
+    explanation: "De teken-skyldpod draaie mei `{turn}`"
+    example: "Foarbyld: {turn}"
+    demo_code: |-
+        {forward} 25
+        {turn} {left}
+        {forward} 25
+        {turn} {right}
+-   example: 'Example: {turn}'
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+    name: '{turn}'
+    explanation: turn the drawing turtle with `{turn}`
 2:
-    -   name: "is"
-        explanation: "In wurd in namme jaan mei `is`. Meist de namme sels kieze."
-        example: "Foarbyld: foarnamme is Hedy."
-        demo_code: |-
-            foarnamme is Hedy
-            print ik bin foarnamme
-    -   name: "is - teken-skyldpod"
-        explanation: "In getal in namme jaan mei `is`. Meist de namme sels kieze."
-        example: "Foarbyld: hoek is 90."
-        demo_code: |-
-            hoeke is 90
-            turn hoeke
-            forward 100
-    -   name: "ask"
-        explanation: "Eat freegje mei `ask`. Mar tink derom! Moatst dyn antwurd in namme jaan mei `is`."
-        example: "Foarbyld: kleur is ask Wat is dyn favorite kleur?"
-        demo_code: |-
-            kleur is ask Wat is dyn favorite kleur?
-            print Dyn favorite is dus kleur
-    -   explanation: Give a number a name using `{is}`. You can choose the name yourself.
-        example: 'Example: angle {is} 90'
-        demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
-        name: is - turtle
+-   name: "is"
+    explanation: "In wurd in namme jaan mei `is`. Meist de namme sels kieze."
+    example: "Foarbyld: foarnamme is Hedy."
+    demo_code: |-
+        foarnamme is Hedy
+        print ik bin foarnamme
+-   name: "is - teken-skyldpod"
+    explanation: "In getal in namme jaan mei `is`. Meist de namme sels kieze."
+    example: "Foarbyld: hoek is 90."
+    demo_code: |-
+        hoeke is 90
+        turn hoeke
+        forward 100
+-   name: "ask"
+    explanation: "Eat freegje mei `ask`. Mar tink derom! Moatst dyn antwurd in namme jaan mei `is`."
+    example: "Foarbyld: kleur is ask Wat is dyn favorite kleur?"
+    demo_code: |-
+        kleur is ask Wat is dyn favorite kleur?
+        print Dyn favorite is dus kleur
+-   explanation: Give a number a name using `{is}`. You can choose the name yourself.
+    example: 'Example: angle {is} 90'
+    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    name: is - turtle
 3:
-    -   name: "kies_random"
-        explanation: "Eat willekeurichs út in groepke wurden kieze mei `at` en `random`."
-        example: "Foarbyld: bisten is hûn, kat, kangeroe."
-        demo_code: |-
-            bisten is hûn, kat, kangeroe
-            print bisten at random
-    -   name: '{add}'
-        explanation: add an item to a list
-        example: 'Example: {add} dog {to_list} animals'
-        demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
-    -   name: '{remove}'
-        example: 'Example: {remove} dog {from} animals'
-        demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
-        explanation: remove an item from a list
+-   name: "kies_random"
+    explanation: "Eat willekeurichs út in groepke wurden kieze mei `at` en `random`."
+    example: "Foarbyld: bisten is hûn, kat, kangeroe."
+    demo_code: |-
+        bisten is hûn, kat, kangeroe
+        print bisten at random
+-   name: '{add}'
+    explanation: add an item to a list
+    example: 'Example: {add} dog {to_list} animals'
+    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+-   name: '{remove}'
+    example: 'Example: {remove} dog {from} animals'
+    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: remove an item from a list
 4:
-    -   name: "print"
-        explanation: "Eat letterlik printe mei `print`."
-        example: "Foarbyld: print 'Hoi wolkom by Hedy.'"
-        demo_code: "print 'Hoi wolkom by Hedy'"
-    -   name: "is"
-        explanation: "In stikje tekst in namme jaan mei `is` en printe sûnder oanhellingstekens"
-        example: "Foarbyld: namme is Hedy."
-        demo_code: |-
-            namme is Hedy
-            print 'ik bin ' namme
-    -   name: "ask"
-        explanation: "Eat freegje mei `ask`"
-        example: "Foarbyld: kleur is ask Wat is dyn favorite kleur?"
-        demo_code: |-
-            kleur is ask 'Wat is dyn favorite kleur?'
-            print 'Dyn favorite is dus ' kleur
+-   name: "print"
+    explanation: "Eat letterlik printe mei `print`."
+    example: "Foarbyld: print 'Hoi wolkom by Hedy.'"
+    demo_code: "print 'Hoi wolkom by Hedy'"
+-   name: "is"
+    explanation: "In stikje tekst in namme jaan mei `is` en printe sûnder oanhellingstekens"
+    example: "Foarbyld: namme is Hedy."
+    demo_code: |-
+        namme is Hedy
+        print 'ik bin ' namme
+-   name: "ask"
+    explanation: "Eat freegje mei `ask`"
+    example: "Foarbyld: kleur is ask Wat is dyn favorite kleur?"
+    demo_code: |-
+        kleur is ask 'Wat is dyn favorite kleur?'
+        print 'Dyn favorite is dus ' kleur
 5:
-    -   name: "print"
-        explanation: "Eat letterlik printe mei `print`."
-        example: "Foarbyld: print 'Hoi wolkom by Hedy.'"
-        demo_code: "print 'Hoi wolkom by Hedy.'"
-    -   name: "ask"
-        explanation: "Eat freegje mei `ask`."
-        example: "Foarbyld: kleur is ask 'Wat is dyn favorite kleur?'"
-        demo_code: |-
-            kleur is ask 'Wat is dyn favorite kleur?'
-            print 'Dyn favorite is dus ' kleur
-    -   name: "if"
-        explanation: "In kar meitsje mei `if`"
-        example: "Foarbyld: if kleur is grien print 'kreas!' else print 'minder kreas'"
-        demo_code: |-
-            kleur is ask 'Wat is dyn favorite kleur?'
-            if kleur is grien print 'kreas!' else print 'minder kreas'
-    -   name: "if mei teken-skyldpod"
-        explanation: "In kar meitsje mei `if`"
-        example: "Foarbyld: if antwurd is fier forward 100 else forward 5"
-        demo_code: |-
-            antwurd is ask 'Hoe fier moat ik rinne?'
-            if antwurd is fier forward 100 else forward 5
-    -   name: '{in}'
-        explanation: Check elements with `{in}`
-        example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-        demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+-   name: "print"
+    explanation: "Eat letterlik printe mei `print`."
+    example: "Foarbyld: print 'Hoi wolkom by Hedy.'"
+    demo_code: "print 'Hoi wolkom by Hedy.'"
+-   name: "ask"
+    explanation: "Eat freegje mei `ask`."
+    example: "Foarbyld: kleur is ask 'Wat is dyn favorite kleur?'"
+    demo_code: |-
+        kleur is ask 'Wat is dyn favorite kleur?'
+        print 'Dyn favorite is dus ' kleur
+-   name: "if"
+    explanation: "In kar meitsje mei `if`"
+    example: "Foarbyld: if kleur is grien print 'kreas!' else print 'minder kreas'"
+    demo_code: |-
+        kleur is ask 'Wat is dyn favorite kleur?'
+        if kleur is grien print 'kreas!' else print 'minder kreas'
+-   name: "if mei teken-skyldpod"
+    explanation: "In kar meitsje mei `if`"
+    example: "Foarbyld: if antwurd is fier forward 100 else forward 5"
+    demo_code: |-
+        antwurd is ask 'Hoe fier moat ik rinne?'
+        if antwurd is fier forward 100 else forward 5
+-   name: '{in}'
+    explanation: Check elements with `{in}`
+    example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+    demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 
 6:
-    -   name: "print"
-        explanation: "Eat letterlik printe mei `print`."
-        example: "Foarbyld: print '5 keer 5 is ' 5 * 5"
-        demo_code: "print '5 keer 5 is ' 5 * 5"
-    -   name: "`ask` en `if` - rekkenje"
-        explanation: "It antwurd fan in som freegje mei `ask` en sjen of't it goed is."
-        example: "Foarbyld: antwurd = ask 'Hoefolle is 10 plus 10?'"
-        demo_code: |-
-            antwurd = ask 'Hoefolle is 10 plus 10?'
-            if antwurd is 20 print 'Bêst genôch!' else print 'Flaterke'
-    -   name: "`ask` en `if` turtle"
-        explanation: "De brûker freegje hoefolle hoeken hy wol"
-        example: "Foarbyld: hoeken = ask 'hoefolle hoeken kriget dit figuur?'"
-        demo_code: |-
-            hoeken = ask 'Hoefolle hoeken kriget dit figuur?'
-            hoek = 360 / hoeken
-            forward 50
+-   name: "print"
+    explanation: "Eat letterlik printe mei `print`."
+    example: "Foarbyld: print '5 keer 5 is ' 5 * 5"
+    demo_code: "print '5 keer 5 is ' 5 * 5"
+-   name: "`ask` en `if` - rekkenje"
+    explanation: "It antwurd fan in som freegje mei `ask` en sjen of't it goed is."
+    example: "Foarbyld: antwurd = ask 'Hoefolle is 10 plus 10?'"
+    demo_code: |-
+        antwurd = ask 'Hoefolle is 10 plus 10?'
+        if antwurd is 20 print 'Bêst genôch!' else print 'Flaterke'
+-   name: "`ask` en `if` turtle"
+    explanation: "De brûker freegje hoefolle hoeken hy wol"
+    example: "Foarbyld: hoeken = ask 'hoefolle hoeken kriget dit figuur?'"
+    demo_code: |-
+        hoeken = ask 'Hoefolle hoeken kriget dit figuur?'
+        hoek = 360 / hoeken
+        forward 50
 7:
-    -   name: "print"
-        explanation: "Eat letterlik printe mei `print`."
-        example: "Foarbyld: print 'Hoi wolkom by Hedy.'"
-        demo_code: "print 'Hoi wolkom by Hedy'"
-    -   name: "ask"
-        explanation: "Eat freegje mei `ask`."
-        example: "Foarbyld: kleur = ask 'Wat is dyn favorite kleur?'"
-        demo_code: |-
-            kleur = ask 'Wat is dyn favorite kleur?'
-            print 'Dyn favorite is dus ' kleur
-    -   name: "if"
-        explanation: "In kar meitsje mei `if`"
-        example: "Foarbyld: if kleur is grien print 'kreas!' else print 'minder kreas'"
-        demo_code: |-
-            kleur = ask 'Wat is dyn favorite kleur?'
-            if kleur is grien print 'kreas!' else print 'minder kreas'
-    -   name: "repeat"
-        explanation: "Eat herhelje met `repeat`."
-        example: "Foarbyld: repeat 3 times print 'Hedy is leuk!'"
-        demo_code: |-
-            repeat 3 times print 'Hedy is leuk!'
+-   name: "print"
+    explanation: "Eat letterlik printe mei `print`."
+    example: "Foarbyld: print 'Hoi wolkom by Hedy.'"
+    demo_code: "print 'Hoi wolkom by Hedy'"
+-   name: "ask"
+    explanation: "Eat freegje mei `ask`."
+    example: "Foarbyld: kleur = ask 'Wat is dyn favorite kleur?'"
+    demo_code: |-
+        kleur = ask 'Wat is dyn favorite kleur?'
+        print 'Dyn favorite is dus ' kleur
+-   name: "if"
+    explanation: "In kar meitsje mei `if`"
+    example: "Foarbyld: if kleur is grien print 'kreas!' else print 'minder kreas'"
+    demo_code: |-
+        kleur = ask 'Wat is dyn favorite kleur?'
+        if kleur is grien print 'kreas!' else print 'minder kreas'
+-   name: "repeat"
+    explanation: "Eat herhelje met `repeat`."
+    example: "Foarbyld: repeat 3 times print 'Hedy is leuk!'"
+    demo_code: |-
+        repeat 3 times print 'Hedy is leuk!'
 8:
-    -   name: "print"
-        explanation: "Eat letterlik printe mei `print`."
-        example: "Foarbyld: print '5 keer 5 is ' 5 * 5"
-        demo_code: "print '5 keer 5 is ' 5 * 5"
-    -   name: "`if` mei mear rigels"
-        explanation: "It antwurd fan in som freegje mei `ask` en sjen oft it goed is. No printe wy twa rigels!"
-        example: "Foarbyld: antwurd = ask 'Hoefolle is 10 plus 10?'"
-        demo_code: |-
-            antwurd = ask 'Hoefolle is 10 plus 10?'
-            if antwurd is 20
-                print 'Kreas!'
-                print 'It antwurd wie yndie ' antwurd
-            else
-                print 'Flaterke'
-                print 'It antwurd moast 20 wêze'
-    -   name: "`repeat` mei de teken-skyldpod"
-        explanation: "Mear rigels tegearre werhelje"
-        example: "Foarbyld: in fjouwerkant meitsje"
-        demo_code: |-
-            repeat 4 times
-                turn 90
-                forward 50
+-   name: "print"
+    explanation: "Eat letterlik printe mei `print`."
+    example: "Foarbyld: print '5 keer 5 is ' 5 * 5"
+    demo_code: "print '5 keer 5 is ' 5 * 5"
+-   name: "`if` mei mear rigels"
+    explanation: "It antwurd fan in som freegje mei `ask` en sjen oft it goed is. No printe wy twa rigels!"
+    example: "Foarbyld: antwurd = ask 'Hoefolle is 10 plus 10?'"
+    demo_code: |-
+        antwurd = ask 'Hoefolle is 10 plus 10?'
+        if antwurd is 20
+            print 'Kreas!'
+            print 'It antwurd wie yndie ' antwurd
+        else
+            print 'Flaterke'
+            print 'It antwurd moast 20 wêze'
+-   name: "`repeat` mei de teken-skyldpod"
+    explanation: "Mear rigels tegearre werhelje"
+    example: "Foarbyld: in fjouwerkant meitsje"
+    demo_code: |-
+        repeat 4 times
+            turn 90
+            forward 50
 9:
-  - name: "`{if}` met meerdere regels"
+-   name: "`{if}` met meerdere regels"
     explanation: "Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu printen we twee regels uit."
     example: "Bijvoorbeeld: antwoord = {ask} 'Hoeveel is 10 plus 10?'"
     demo_code: |-
-      antwoord = {ask} 'Hoeveel is 10 plus 10?'
-      {if} antwoord {is} 20
-          {print} 'Goedzo!'
-          {print} 'Het antwoord was inderdaad ' antwoord
-      {else}
-          {print} 'Foutje'
-          {print} 'Het antwoord moest zijn 20'
-  - name: "`{repeat}` met de turtle"
+        antwoord = {ask} 'Hoeveel is 10 plus 10?'
+        {if} antwoord {is} 20
+            {print} 'Goedzo!'
+            {print} 'Het antwoord was inderdaad ' antwoord
+        {else}
+            {print} 'Foutje'
+            {print} 'Het antwoord moest zijn 20'
+-   name: "`{repeat}` met de turtle"
     explanation: "Meerdere regels samen herhalen"
     example: "Bijvoorbeeld: een vierkant maken"
     demo_code: |-
-      {repeat} 4 {times}
-          {turn} 90
-          {forward} 50
+        {repeat} 4 {times}
+            {turn} 90
+            {forward} 50
 10:
-  - name: "{for} met een lijst"
+-   name: "{for} met een lijst"
     explanation: "Alle dingen in een lijstje printen "
     example: "Bijvoorbeeld: {for} dier {in} dieren"
     demo_code: |-
-      dieren {is} hond, kat, papegaai
-      {for} dier {in} dieren
-        {print} dier
+        dieren {is} hond, kat, papegaai
+        {for} dier {in} dieren
+          {print} dier
+-   name: '{for} with a list'
+    explanation: 'print all things in a list '
+    example: 'Example: {for} animal {in} animals'
+    demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
 11:
-    -   name: "repeat ferfange troch for"
-        explanation: "`repeat` ferfange"
-        example: "for i in range 1 to 10"
-        demo_code: |
-            for i in range 1 to 10
-                print i
-            print 'Wie niet weg is is gezien'
-    -   name: '{ask}'
-        explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-        example: "Example: answer = {ask} 'What is 5 plus 5?'"
-        demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+-   name: "repeat ferfange troch for"
+    explanation: "`repeat` ferfange"
+    example: "for i in range 1 to 10"
+    demo_code: |
+        for i in range 1 to 10
+            print i
+        print 'Wie niet weg is is gezien'
+-   name: '{ask}'
+    explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    example: "Example: answer = {ask} 'What is 5 plus 5?'"
+    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
 12:
-  - name: "assign text"
+-   name: "assign text"
     explanation: "Tekst met aanhalingstekens na ="
     example: "naam = 'Hedy'"
     demo_code: |
-      naam = 'Hedy de Robot'
-      {print} 'Hallo ' naam
-  - name: "quotes {in} list"
+        naam = 'Hedy de Robot'
+        {print} 'Hallo ' naam
+-   name: "quotes {in} list"
     explanation: "Een lijstje maken met aanhalingstekens"
     example: "name = 'Hedy', 'Felienne'"
     demo_code: |
-      superhelden = 'Iron Man', 'Batman', 'Superman'
-      {print} superhelden {at} {random}
-  - name: "quotes after {if} comparison"
+        superhelden = 'Iron Man', 'Batman', 'Superman'
+        {print} superhelden {at} {random}
+-   name: "quotes after {if} comparison"
     explanation: "Tekst met aanhalingstekens na {if}"
     example: "naam = 'Hedy'"
     demo_code: |
-      naam = {ask} 'Wie ben jij?'
-      {if} naam = 'Hedy'
-          {print} 'Hoi!'
-  - name: "float directly"
+        naam = {ask} 'Wie ben jij?'
+        {if} naam = 'Hedy'
+            {print} 'Hoi!'
+-   name: "float directly"
     explanation: "Kommagetallen"
     example: "{print} 2.5 + 2.5"
     demo_code: |
-      {print} 'Rekenen maar!'
-      {print} 'Tweeënhalf plus tweeënhalf is...'
-      {print} 2.5 + 2.5
+        {print} 'Rekenen maar!'
+        {print} 'Tweeënhalf plus tweeënhalf is...'
+        {print} 2.5 + 2.5
 13:
-    -   name: "And"
-        explanation: "`And` is dus en. Beide dingen links en rechts fan de `and` moeten waar zijn."
-        example: "if 3+2 is 5 and 2+2 is 4"
-        demo_code: |-
-            antwurd1 = ask 'Hoefolle is 3+2?'
-            antwurd2 = ask 'Hoefolle is 2+2?'
-            if antwurd1 is 5 and antwurd2 is 4
-                print 'Beide antwurden binne goed!'
-            else
-                print 'Minimaal 1 antwurd is fout!'
-    -   name: "Or"
-        explanation: "`Or` is dus of. Minimaal 1 fan de 2 tusken de `or` moat goed wêze. beide goed mei ek."
-        example: "if 3+2 is 5 or 2+2 is 4"
-        demo_code: |-
-            antwurd1 = ask 'Hoefolle is 3+2?'
-            antwurd2 = ask 'Hoefolle is 2+2?'
-            if antwurd1 is 5 or antwurd2 is 4
-                print 'Je hebt minimaal 1 antwurd goed!'
-            else
-                print 'Beide antwurden binne fout!'
+-   name: "And"
+    explanation: "`And` is dus en. Beide dingen links en rechts fan de `and` moeten waar zijn."
+    example: "if 3+2 is 5 and 2+2 is 4"
+    demo_code: |-
+        antwurd1 = ask 'Hoefolle is 3+2?'
+        antwurd2 = ask 'Hoefolle is 2+2?'
+        if antwurd1 is 5 and antwurd2 is 4
+            print 'Beide antwurden binne goed!'
+        else
+            print 'Minimaal 1 antwurd is fout!'
+-   name: "Or"
+    explanation: "`Or` is dus of. Minimaal 1 fan de 2 tusken de `or` moat goed wêze. beide goed mei ek."
+    example: "if 3+2 is 5 or 2+2 is 4"
+    demo_code: |-
+        antwurd1 = ask 'Hoefolle is 3+2?'
+        antwurd2 = ask 'Hoefolle is 2+2?'
+        if antwurd1 is 5 or antwurd2 is 4
+            print 'Je hebt minimaal 1 antwurd goed!'
+        else
+            print 'Beide antwurden binne fout!'
 14:
-    -   name: "Lytser"
-        explanation: "De `<` sjocht dus oft it earste getal lytser is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
-        example: "Foarbyld: leeftyd < 12"
-        demo_code: |-
-            leeftyd = ask 'Hoe âld bisto?'
-            if leeftyd < 13
-                print 'Dan bist jonger as ik!'
-    -   name: "Grutter"
-        explanation: "De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
-        example: "Foarbyld: leeftyd > 12"
-        demo_code: |-
-            leeftyd = ask 'Hoe âld bisto?'
-            if leeftyd < 13
-                print 'Dan bist âlder as ik!'
-    -   name: Equal
-        explanation: We use the `==` to check if two things are the same.
-        example: 'For example: answer == 25'
-        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
-    -   name: Not equal
-        explanation: 'We use the `!=` to check if two things are not the same. '
-        example: 'For example: answer != 25'
-        demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
-    -   explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-        example: 'For example: age <= 12'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
-        name: Smaller {or} equal
-    -   name: Bigger or equal
-        explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-        example: 'For example: age >= 14'
-        demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+-   name: "Lytser"
+    explanation: "De `<` sjocht dus oft it earste getal lytser is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
+    example: "Foarbyld: leeftyd < 12"
+    demo_code: |-
+        leeftyd = ask 'Hoe âld bisto?'
+        if leeftyd < 13
+            print 'Dan bist jonger as ik!'
+-   name: "Grutter"
+    explanation: "De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
+    example: "Foarbyld: leeftyd > 12"
+    demo_code: |-
+        leeftyd = ask 'Hoe âld bisto?'
+        if leeftyd < 13
+            print 'Dan bist âlder as ik!'
+-   name: Equal
+    explanation: We use the `==` to check if two things are the same.
+    example: 'For example: answer == 25'
+    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+-   name: Not equal
+    explanation: 'We use the `!=` to check if two things are not the same. '
+    example: 'For example: answer != 25'
+    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+-   explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+    example: 'For example: age <= 12'
+    demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+    name: Smaller {or} equal
+-   name: Bigger or equal
+    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+    example: 'For example: age >= 14'
+    demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
 15:
-    -   name: "while"
-        explanation: "We kinne dus in `while`-lus brûke mei de `True` en `False`"
-        example: "Foarbyld: while goed_antwurd is False"
-        demo_code: |-
-            antwoord = 0
-            while antwoord != 25
-                antwurd = ask 'Wat is 5 kear 5?'
-            print 'Dat wie it goede antwurd!'
-    -   name: "Smaller while"
-        explanation: "We kinne in `while`-lus ek brûke mei `<` en `>`. Tink der om datst it getal wol grutter makkest. Oars komst de lus net út."
-        example: "Foarbyld: while tel < 3"
-        demo_code: |-
-            tel = 1
-            while tel < 3
-                print 'Dit is de ' tel 'e kear'
-                tel = tel + 1
-            print 'We zijn klaar'
+-   name: "while"
+    explanation: "We kinne dus in `while`-lus brûke mei de `True` en `False`"
+    example: "Foarbyld: while goed_antwurd is False"
+    demo_code: |-
+        antwoord = 0
+        while antwoord != 25
+            antwurd = ask 'Wat is 5 kear 5?'
+        print 'Dat wie it goede antwurd!'
+-   name: "Smaller while"
+    explanation: "We kinne in `while`-lus ek brûke mei `<` en `>`. Tink der om datst it getal wol grutter makkest. Oars komst de lus net út."
+    example: "Foarbyld: while tel < 3"
+    demo_code: |-
+        tel = 1
+        while tel < 3
+            print 'Dit is de ' tel 'e kear'
+            tel = tel + 1
+        print 'We zijn klaar'
 16:
-    -   name: "Heakjes om listen"
-        explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
-        example: "Foarbyld: fruit = ['apel', 'banaan', 'kjers']"
-        demo_code: |-
-            fruit = ['apel', 'banaan', 'kjers']
-            print fruit
-    -   name: "Pak eat út in list"
-        explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
-        example: "Foarbyld: earstefruit = fruit[1]"
-        demo_code: |-
-            fruit = ['apel', 'banaan', 'kjers']
-            earstefruit = fruit[1]
-            print earstefruit
-    -   name: "Nim in willekeurich ding út 'e list"
-        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in willekeurich fruit út 'e list!"
-        example: "Foarbyld: random_fruit is fruit[random]"
-        demo_code: |-
-            fruit = ['apel', 'banaan', 'kjers']
-            random_fruit = fruit[random]
-            print random_fruit
+-   name: "Heakjes om listen"
+    explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
+    example: "Foarbyld: fruit = ['apel', 'banaan', 'kjers']"
+    demo_code: |-
+        fruit = ['apel', 'banaan', 'kjers']
+        print fruit
+-   name: "Pak eat út in list"
+    explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
+    example: "Foarbyld: earstefruit = fruit[1]"
+    demo_code: |-
+        fruit = ['apel', 'banaan', 'kjers']
+        earstefruit = fruit[1]
+        print earstefruit
+-   name: "Nim in willekeurich ding út 'e list"
+    explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in willekeurich fruit út 'e list!"
+    example: "Foarbyld: random_fruit is fruit[random]"
+    demo_code: |-
+        fruit = ['apel', 'banaan', 'kjers']
+        random_fruit = fruit[random]
+        print random_fruit
 17:
-    -   name: "for met :"
-        explanation: "By `for` moatst no in `:` efteroan sette!"
-        example: "for i in range 1 to 10:"
-        demo_code: |-
-            for i in range 1 to 10:
-                print i
-            print 'Wie niet weg is is gezien'
-    -   name: "if met :"
-        explanation: "We moatte itselde dwaan mei al ús `if`"
-        example: "if kleur is grien:"
-        demo_code: |-
-            kleur = ask 'Wat is dyn favorite kleur?'
-            if kleur is 'grien':
-                print 'De kleur is grien'
-            else:
-                print 'De kleur is net grien'
-    -   name: "(Optioneel) elif"
-        explanation: |-
-            Meist ek in nij kommando brûke: `elif`.
-            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
-            en als dy net wier is dan giest nei de `else`.
-        example: "elif a is 5:"
-        demo_code: |-
-            a = 2
-            if a is 1:
-                print 'a is 1'
-            elif a is 2:
-                print 'a is 2'
-            else:
-                print 'a is net 1 of 2'
+-   name: "for met :"
+    explanation: "By `for` moatst no in `:` efteroan sette!"
+    example: "for i in range 1 to 10:"
+    demo_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Wie niet weg is is gezien'
+-   name: "if met :"
+    explanation: "We moatte itselde dwaan mei al ús `if`"
+    example: "if kleur is grien:"
+    demo_code: |-
+        kleur = ask 'Wat is dyn favorite kleur?'
+        if kleur is 'grien':
+            print 'De kleur is grien'
+        else:
+            print 'De kleur is net grien'
+-   name: "(Optioneel) elif"
+    explanation: |-
+        Meist ek in nij kommando brûke: `elif`.
+        `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
+        en als dy net wier is dan giest nei de `else`.
+    example: "elif a is 5:"
+    demo_code: |-
+        a = 2
+        if a is 1:
+            print 'a is 1'
+        elif a is 2:
+            print 'a is 2'
+        else:
+            print 'a is net 1 of 2'
 18:
-  - name: "{print}"
+-   name: "{print}"
     explanation: "Bij `{print}` moet je haakjes gebruiken"
     example: "{print}"
     demo_code: |-
-      {print}('hallo!')
-  - name: "{print} met var"
+        {print}('hallo!')
+-   name: "{print} met var"
     explanation: "Bij `{print}` moet je haakjes gebruiken en komma's als je meerdere dingen {print}"
     example: "{print}"
     demo_code: |-
-      naam = 'Hedy'
-      {print}('ik heet', naam)
+        naam = 'Hedy'
+        {print}('ik heet', naam)

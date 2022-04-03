@@ -1,19 +1,19 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-03-29 10:01+0200\n"
-"PO-Revision-Date: 2022-04-02 19:09+0000\n"
-"Last-Translator: Mark Giesen <markgiesen@outlook.com>\n"
-"Language-Team: Swahili <https://hosted.weblate.org/projects/hedy/web-texts/"
-"sw/>\n"
-"Language: sw\n"
+"PO-Revision-Date: 2022-04-02 17:37+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.12-dev\n"
-"Generated-By: Babel 2.9.1\n"
+
+#: content/error-messages.txt:41
+#, fuzzy
+msgid "float"
+msgstr "a number"
 
 #: app.py:571
 #, fuzzy
@@ -49,16 +49,19 @@ msgid "unauthorized"
 msgstr "You don't have access rights for this page"
 
 #: app.py:823
+#, fuzzy
 msgid "minutes"
-msgstr "dakika"
+msgstr "minutes"
 
 #: app.py:826
+#, fuzzy
 msgid "hours"
-msgstr "Saa"
+msgstr "hours"
 
 #: app.py:829
+#, fuzzy
 msgid "days"
-msgstr "siku"
+msgstr "days"
 
 #: app.py:832
 #, fuzzy
@@ -169,8 +172,9 @@ msgstr ""
 #: website/teacher.py:90 website/teacher.py:125 website/teacher.py:197
 #: website/teacher.py:255 website/teacher.py:302 website/teacher.py:343
 #: website/teacher.py:379 website/teacher.py:459 website/teacher.py:517
+#, fuzzy
 msgid "ajax_error"
-msgstr "Kulikuwa na hitilafu, tafadhali jaribu tena."
+msgstr "There was an error, please try again."
 
 #: app.py:1304
 #, fuzzy
@@ -226,28 +230,32 @@ msgstr ""
 "You created an empty program. Type Hedy code in the left field and try again"
 
 #: content/error-messages.txt:2
+#, fuzzy
 msgid "Wrong Level"
 msgstr ""
-"Ni sahihi, lakini sio jibu la kiwango hiki. Umeandika jibu la kiwango  "
-"{working_level} kwenye kiwango cha {original_level}."
+"That was correct Hedy code, but not at the right level. You wrote "
+"{offending_keyword} for level {working_level}. Tip: {tip}"
 
 #: content/error-messages.txt:3
+#, fuzzy
 msgid "Incomplete"
 msgstr ""
-"Oops! Umesahau kitu! Kwenye mstari wa {line_number}, unatakiwa kuandika "
-"nyuma ya {incomplete_command}."
+"Oops! You forgot a bit of code! On line {line_number}, you need to enter "
+"text behind {incomplete_command}."
 
 #: content/error-messages.txt:4
+#, fuzzy
 msgid "Invalid"
 msgstr ""
-"{invalid_command} hii sio sahihi kwa kiwango cha {level}. Ulimaanisha  "
+"{invalid_command} is not a Hedy level {level} command. Did you mean "
 "{guessed_command}?"
 
 #: content/error-messages.txt:5
+#, fuzzy
 msgid "Invalid Space"
 msgstr ""
-"Oops! Ulianza mstari na nafasi(ujazo) katika mstari wa {line_number}. Nafasi "
-"huchanganya kompyuta, unaweza kuiondoa?"
+"Oops! You started a line with a space on line {line_number}. Spaces confuse "
+"computers, can you remove it?"
 
 #: content/error-messages.txt:6
 #, fuzzy
@@ -281,10 +289,11 @@ msgstr ""
 "that is not allowed."
 
 #: content/error-messages.txt:10
+#, fuzzy
 msgid "Unquoted Text"
 msgstr ""
-"Kuwa makini. Ikiwa unachapisha kitu maandishi yanapaswa kuanza na kumaliza "
-"na alama ya nukuu. Umesahau alamu ya nukuu(funga semi na fungua semi) mahali."
+"Be careful. If you ask or print something the text should start and finish "
+"with a quotation mark. You forgot one somewhere."
 
 #: content/error-messages.txt:11
 #, fuzzy
@@ -301,8 +310,12 @@ msgstr ""
 "should be surrounded by quotation marks!"
 
 #: content/error-messages.txt:13
+#, fuzzy
 msgid "Var Undefined"
-msgstr "Umejaribu kuchapisha {name}, lakini hukuiimarisha."
+msgstr ""
+"You tried to use the variable {name}, but you did not set it. It is also "
+"possible that you were trying to use the word {name} but forgot quotation "
+"marks."
 
 #: content/error-messages.txt:14
 #, fuzzy
@@ -380,23 +393,27 @@ msgstr ""
 msgid "echo_out"
 msgstr ""
 "Starting in level 2 echo is no longer needed. You can repeat an answer with "
-"ask and print now. Example: name is ask What are you called? print hello name"
+"ask and print now. Example: name is ask What are you called? printhello name"
 
 #: content/error-messages.txt:25
+#, fuzzy
 msgid "space"
-msgstr "nafasi"
+msgstr "a space"
 
 #: content/error-messages.txt:26
+#, fuzzy
 msgid "comma"
-msgstr "koma"
+msgstr "a comma"
 
 #: content/error-messages.txt:27
+#, fuzzy
 msgid "question mark"
-msgstr "alama ya swali"
+msgstr "a question mark"
 
 #: content/error-messages.txt:28
+#, fuzzy
 msgid "newline"
-msgstr "mstari mpya"
+msgstr "a new line"
 
 #: content/error-messages.txt:29
 #, fuzzy
@@ -404,28 +421,34 @@ msgid "period"
 msgstr "a period"
 
 #: content/error-messages.txt:30
+#, fuzzy
 msgid "exclamation mark"
-msgstr "alama ya mshangao"
+msgstr "an exclamation mark"
 
 #: content/error-messages.txt:31
+#, fuzzy
 msgid "dash"
-msgstr "dashi"
+msgstr "a dash"
 
 #: content/error-messages.txt:32
+#, fuzzy
 msgid "star"
-msgstr "alama ya nyuta"
+msgstr "a star"
 
 #: content/error-messages.txt:33
+#, fuzzy
 msgid "single quotes"
-msgstr "nukuu moja"
+msgstr "a single quote"
 
 #: content/error-messages.txt:34
+#, fuzzy
 msgid "double quotes"
-msgstr "nukuu mbili"
+msgstr "double quotes"
 
 #: content/error-messages.txt:35
+#, fuzzy
 msgid "slash"
-msgstr "alama ya kufyeka"
+msgstr "a slash"
 
 #: content/error-messages.txt:36
 #, fuzzy
@@ -452,11 +475,6 @@ msgstr "a number"
 msgid "integer"
 msgstr "a number"
 
-#: content/error-messages.txt:41
-#, fuzzy
-msgid "float"
-msgstr "a number"
-
 #: content/error-messages.txt:42
 #, fuzzy
 msgid "list"
@@ -476,8 +494,9 @@ msgstr "Visible columns"
 #: templates/class-overview.html:108 templates/create-accounts.html:16
 #: templates/login.html:12 templates/profile.html:93 templates/recover.html:8
 #: templates/signup.html:10
+#, fuzzy
 msgid "username"
-msgstr "Jina la mtumiaji"
+msgstr "Username"
 
 #: templates/class-overview.html:25 templates/class-overview.html:65
 #, fuzzy
@@ -508,8 +527,9 @@ msgstr "Latest shared program"
 #: templates/class-overview.html:49 templates/class-overview.html:70
 #: templates/class-overview.html:83 templates/profile.html:148
 #: templates/profile.html:150 templates/profile.html:163
+#, fuzzy
 msgid "change_password"
-msgstr "Badilisha nenosiri"
+msgstr "Change password"
 
 #: templates/class-overview.html:53 templates/class-overview.html:71
 #, fuzzy
@@ -576,7 +596,7 @@ msgstr "Invite student"
 #: templates/class-overview.html:95
 #, fuzzy
 msgid "class_stats"
-msgstr "Show class statistics"
+msgstr "Class statistics"
 
 #: templates/class-overview.html:98 templates/customize-adventure.html:59
 #, fuzzy
@@ -655,8 +675,9 @@ msgstr "Go back to class"
 #: templates/incl-adventure-tabs.html:5 templates/level-page.html:6
 #: templates/level-page.html:11 templates/quiz/startquiz.html:10
 #: templates/view-program-page.html:12 templates/view-program-page.html:28
+#, fuzzy
 msgid "level_title"
-msgstr "Kiwango"
+msgstr "Level"
 
 #: templates/create-accounts.html:5
 #, fuzzy
@@ -682,13 +703,15 @@ msgstr "Are you sure you want to create these accounts?"
 
 #: templates/create-accounts.html:17 templates/learn-more.html:10
 #: templates/profile.html:96 templates/recover.html:8 templates/signup.html:13
+#, fuzzy
 msgid "email"
-msgstr "Barua pepe"
+msgstr "Email"
 
 #: templates/create-accounts.html:18 templates/login.html:15
 #: templates/reset.html:8 templates/signup.html:19
+#, fuzzy
 msgid "password"
-msgstr "Nenosiri"
+msgstr "Password"
 
 #: templates/create-accounts.html:20
 #, fuzzy
@@ -730,17 +753,18 @@ msgstr "Name"
 #: templates/explore.html:20 templates/explore.html:48
 #: templates/for-teachers.html:31 templates/programs.html:12
 #: templates/programs.html:41 templates/programs.html:52
+#, fuzzy
 msgid "level"
-msgstr "Kiwango"
+msgstr "Level"
 
 #: templates/customize-adventure.html:25
 #, fuzzy
 msgid "adventure_exp_1"
 msgstr ""
 "Type your adventure of choice on the right-hand side. After creating your "
-"adventure you can include it in one of your classes under \"customizations"
-"\". If you want to include a command in your adventure please use code "
-"anchors like this:"
+"adventure you can include it in one of your classes under \"customizations\""
+". If you want to include a command in your adventure please use code anchors "
+"like this:"
 
 #: templates/customize-adventure.html:31
 #, fuzzy
@@ -802,52 +826,63 @@ msgstr "Are you sure you want to remove this adventure?"
 #: templates/customize-class.html:7
 #, fuzzy
 msgid "customize_class_exp_1"
-msgstr "Customize class"
+msgstr ""
+"Hi! On this page you can customize your class. By selecting levels and "
+"adventures you can choose what you student can see. You can also add you own "
+"created adventures to levels. All levels and default adventures will be "
+"selected by default. <b>Notice:</b> Not every adventure is available for "
+"every level! Settings up your customizations goes as follows:"
 
 #: templates/customize-class.html:10
 #, fuzzy
 msgid "customize_class_step_1"
-msgstr "Customize class"
+msgstr "Select levels for your class by pressing the \"level buttons\""
 
 #: templates/customize-class.html:11
 #, fuzzy
 msgid "customize_class_step_2"
-msgstr "Customize class"
+msgstr ""
+"\"Checkboxes\" will appear for the adventures available for the chosen levels"
 
 #: templates/customize-class.html:12
 #, fuzzy
 msgid "customize_class_step_3"
-msgstr "Customize class"
+msgstr "Select the adventures you want to make available"
 
 #: templates/customize-class.html:13
 #, fuzzy
 msgid "customize_class_step_4"
-msgstr "Customize class"
+msgstr "Click the name of an adventure to (de)select for all levels"
 
 #: templates/customize-class.html:14
 #, fuzzy
 msgid "customize_class_step_5"
-msgstr "Customize class"
+msgstr "Add personal adventures"
 
 #: templates/customize-class.html:15
 #, fuzzy
 msgid "customize_class_step_6"
-msgstr "Customize class"
+msgstr "Selecting an opening date for each level (you can also leave it empty)"
 
 #: templates/customize-class.html:16
 #, fuzzy
 msgid "customize_class_step_7"
-msgstr "Customize class"
+msgstr "Selection other settings"
 
 #: templates/customize-class.html:17
 #, fuzzy
 msgid "customize_class_step_8"
-msgstr "Customize class"
+msgstr "Choose \"Save\" -> You're done!"
 
 #: templates/customize-class.html:20
 #, fuzzy
 msgid "customize_class_exp_2"
-msgstr "Customize class"
+msgstr ""
+"You can always change these settings later on. For example, you can make "
+"specific adventures or levels available while teaching a class. This way "
+"it's easy for you to determine which level and adventures your students will "
+"be working on. If you want to make everything available for your class it is "
+"easiest to remove the customization all together."
 
 #: templates/customize-class.html:23
 #, fuzzy
@@ -878,8 +913,9 @@ msgstr "Select own adventures"
 #: templates/profile.html:47 templates/profile.html:128
 #: templates/profile.html:137 templates/signup.html:26 templates/signup.html:45
 #: templates/signup.html:53
+#, fuzzy
 msgid "select"
-msgstr "Chagua"
+msgstr "Select"
 
 #: templates/customize-class.html:115
 #, fuzzy
@@ -900,10 +936,6 @@ msgstr "Mandatory developer's mode"
 #, fuzzy
 msgid "hide_cheatsheet"
 msgstr "Hide cheatsheet"
-
-#: templates/customize-class.html:138
-msgid "hide_keyword_switcher"
-msgstr ""
 
 #: templates/customize-class.html:149
 #, fuzzy
@@ -950,7 +982,7 @@ msgstr ""
 #: templates/explore.html:35 templates/programs.html:27
 #, fuzzy
 msgid "search_button"
-msgstr "Save & share code"
+msgstr "Search"
 
 #: templates/explore.html:51
 #, fuzzy
@@ -1027,13 +1059,10 @@ msgstr ""
 msgid "go_to_quiz"
 msgstr "Go to quiz"
 
-#: templates/incl-editor-and-output.html:95
-msgid "variables"
-msgstr ""
-
 #: templates/incl-editor-and-output.html:111
+#, fuzzy
 msgid "enter_text"
-msgstr "Ingiza jibu lako hapa..."
+msgstr "Enter your answer here..."
 
 #: templates/incl-editor-and-output.html:112
 #, fuzzy
@@ -1041,8 +1070,9 @@ msgid "enter"
 msgstr "Enter"
 
 #: templates/incl-editor-and-output.html:121
+#, fuzzy
 msgid "run_code_button"
-msgstr "Endesha programu"
+msgstr "Run code"
 
 #: templates/incl-editor-and-output.html:123
 #, fuzzy
@@ -1050,18 +1080,21 @@ msgid "edit_code_button"
 msgstr "Edit code"
 
 #: templates/incl-editor-and-output.html:129
+#, fuzzy
 msgid "read_code_label"
-msgstr "Soma kwa sauti"
+msgstr "Read aloud"
 
 #: templates/incl-editor-and-output.html:139
 #: templates/incl-editor-and-output.html:148
+#, fuzzy
 msgid "regress_button"
-msgstr "Rudi kiwango cha {level}"
+msgstr "Go back to level {level}"
 
 #: templates/incl-editor-and-output.html:142
 #: templates/incl-editor-and-output.html:151
+#, fuzzy
 msgid "advance_button"
-msgstr "Enda kiwango cha {level}"
+msgstr "Go to level {level}"
 
 #: templates/incl-editor-and-output.html:165
 #, fuzzy
@@ -1069,24 +1102,29 @@ msgid "developers_mode"
 msgstr "Programmer's mode"
 
 #: templates/incl-menubar.html:8
+#, fuzzy
 msgid "nav_start"
-msgstr "Anza"
+msgstr "Home"
 
 #: templates/incl-menubar.html:9
+#, fuzzy
 msgid "nav_hedy"
 msgstr "Hedy"
 
 #: templates/incl-menubar.html:10
+#, fuzzy
 msgid "nav_explore"
 msgstr "Explore"
 
 #: templates/incl-menubar.html:11
+#, fuzzy
 msgid "nav_learn_more"
-msgstr "Jifunze zaidi"
+msgstr "Learn more"
 
 #: templates/incl-menubar.html:13 templates/public-page.html:56
+#, fuzzy
 msgid "program_header"
-msgstr "Programu zangu"
+msgstr "My programs"
 
 #: templates/incl-menubar.html:20
 #, fuzzy
@@ -1094,8 +1132,9 @@ msgid "my_achievements"
 msgstr "My achievements"
 
 #: templates/incl-menubar.html:23
+#, fuzzy
 msgid "my_account"
-msgstr "Wasifu wangu"
+msgstr "My account"
 
 #: templates/incl-menubar.html:27
 #, fuzzy
@@ -1109,8 +1148,9 @@ msgstr "Log out"
 
 #: templates/incl-menubar.html:36 templates/login.html:19
 #: templates/signup.html:106
+#, fuzzy
 msgid "login"
-msgstr "Login"
+msgstr "Log in"
 
 #: templates/incl-menubar.html:45
 #, fuzzy
@@ -1145,8 +1185,7 @@ msgstr "Start programming"
 #: templates/landing-page.html:21
 #, fuzzy
 msgid "create_class_text"
-msgstr ""
-"Group your students into classes and change the content for each class."
+msgstr "Group your students into classes and change the content for each class."
 
 #: templates/landing-page.html:28
 #, fuzzy
@@ -1211,27 +1250,28 @@ msgstr "You've earned an achievement!"
 #: templates/learn-more.html:7
 #, fuzzy
 msgid "mailing_title"
-msgstr "Hedy"
+msgstr "Subscribe to the Hedy newsletter"
 
 #: templates/learn-more.html:14
 #, fuzzy
 msgid "surname"
-msgstr "Jina la mtumiaji"
+msgstr "First Name"
 
 #: templates/learn-more.html:18
 #, fuzzy
 msgid "lastname"
-msgstr "Name"
+msgstr "Last Name"
 
 #: templates/learn-more.html:22 templates/profile.html:135
 #: templates/signup.html:52
+#, fuzzy
 msgid "country"
-msgstr "Nchi"
+msgstr "Country"
 
 #: templates/learn-more.html:31
 #, fuzzy
 msgid "subscribe"
-msgstr "Jisajili kwa jarida"
+msgstr "Subscribe"
 
 #: templates/learn-more.html:32
 #, fuzzy
@@ -1244,12 +1284,14 @@ msgid "previous_campaigns"
 msgstr "View previous campaigns"
 
 #: templates/level-page.html:8
+#, fuzzy
 msgid "step_title"
-msgstr "Kazi Ya ziada"
+msgstr "Assignment"
 
 #: templates/level-page.html:12
+#, fuzzy
 msgid "save_code_button"
-msgstr "Hifadhi programu"
+msgstr "Save code"
 
 #: templates/level-page.html:13
 #, fuzzy
@@ -1257,26 +1299,32 @@ msgid "share_code_button"
 msgstr "Save & share code"
 
 #: templates/level-page.html:31
+#, fuzzy
 msgid "try_button"
-msgstr "Jaribu"
+msgstr "Try"
 
 #: templates/login.html:10
+#, fuzzy
 msgid "login_long"
-msgstr "Ingia kwenye akaunti yako"
+msgstr "Log in to your account"
 
 #: templates/login.html:26 website/auth.py:312
+#, fuzzy
 msgid "no_account"
-msgstr "Hakuna akaunti bado?"
+msgstr "No account?"
 
 #: templates/login.html:28 templates/signup.html:6 templates/signup.html:102
+#, fuzzy
 msgid "create_account"
-msgstr "Fungua Akaunti"
+msgstr "Create account"
 
 #: templates/login.html:33
+#, fuzzy
 msgid "forgot_password"
-msgstr "Umesahau nenosiri yako?"
+msgstr "Forgot your password?"
 
 #: templates/main-page.html:9
+#, fuzzy
 msgid "main_title"
 msgstr "Hedy"
 
@@ -1284,10 +1332,6 @@ msgstr "Hedy"
 #, fuzzy
 msgid "main_subtitle"
 msgstr "A gradual programming language"
-
-#: templates/main-page.html:13
-msgid "try_it"
-msgstr "Jaribu"
 
 #: templates/profile.html:4
 #, fuzzy
@@ -1363,8 +1407,9 @@ msgid "update_public"
 msgstr "Update public profile"
 
 #: templates/profile.html:61 templates/profile.html:145
+#, fuzzy
 msgid "are_you_sure"
-msgstr "Una uhakika? Huwezi kurudisha kitendo hiki."
+msgstr "Are you sure? You cannot revert this action."
 
 #: templates/profile.html:61
 #, fuzzy
@@ -1392,8 +1437,9 @@ msgid "settings"
 msgstr "My personal settings"
 
 #: templates/profile.html:99 templates/signup.html:41
+#, fuzzy
 msgid "birth_year"
-msgstr "Mwaka wa kuzaliwa"
+msgstr "Birth year"
 
 #: templates/profile.html:102 templates/signup.html:25
 #, fuzzy
@@ -1406,44 +1452,54 @@ msgid "preferred_keyword_language"
 msgstr "Preferred keyword language"
 
 #: templates/profile.html:126 templates/signup.html:44
+#, fuzzy
 msgid "gender"
-msgstr "Jinsia"
+msgstr "Gender"
 
 #: templates/profile.html:129 templates/signup.html:46
+#, fuzzy
 msgid "female"
-msgstr "Mwanamke"
+msgstr "Female"
 
 #: templates/profile.html:130 templates/signup.html:47
+#, fuzzy
 msgid "male"
-msgstr "Mwanaume"
+msgstr "Male"
 
 #: templates/profile.html:131 templates/signup.html:48
+#, fuzzy
 msgid "other"
-msgstr "Nyingine"
+msgstr "Other"
 
 #: templates/profile.html:141
+#, fuzzy
 msgid "update_profile"
-msgstr "Sasisha wasifu"
+msgstr "Update profile"
 
 #: templates/profile.html:145
+#, fuzzy
 msgid "destroy_profile"
-msgstr "Futa akaunti kabisa"
+msgstr "Delete profile"
 
 #: templates/profile.html:152
+#, fuzzy
 msgid "current_password"
-msgstr "Nenosiri la sasa"
+msgstr "Current password"
 
 #: templates/profile.html:156
+#, fuzzy
 msgid "new_password"
-msgstr "Nenosiri mpya"
+msgstr "New password"
 
 #: templates/profile.html:160
+#, fuzzy
 msgid "repeat_new_password"
-msgstr "Rudia nenosiri mpya"
+msgstr "Repeat new password"
 
 #: templates/programs.html:7
+#, fuzzy
 msgid "recent"
-msgstr "Programu zangu za hivi karibuni"
+msgstr "My recent programs"
 
 #: templates/programs.html:35 templates/view-program-page.html:7
 #, fuzzy
@@ -1466,8 +1522,24 @@ msgid "favourite_confirm"
 msgstr "Are you sure you want to set this program as your favourite?"
 
 #: templates/programs.html:67 templates/programs.html:72
+#, fuzzy
 msgid "open"
-msgstr "Fungua"
+msgstr "Open"
+
+#: templates/public-page.html:40 templates/public-page.html:42
+#, fuzzy
+msgid "amount_submitted"
+msgstr "programs submitted"
+
+#: templates/public-page.html:50
+#, fuzzy
+msgid "last_achievement"
+msgstr "Last earned achievement"
+
+#: templates/public-page.html:85
+#, fuzzy
+msgid "no_shared_programs"
+msgstr "has no shared programs..."
 
 #: templates/programs.html:68
 #, fuzzy
@@ -1475,12 +1547,14 @@ msgid "copy_clipboard"
 msgstr "Successfully copied to clipboard"
 
 #: templates/programs.html:69 templates/programs.html:73
+#, fuzzy
 msgid "delete_confirm"
-msgstr "Je! Una uhakika unataka kufuta programu?"
+msgstr "Are you sure you want to delete the program?"
 
 #: templates/programs.html:69 templates/programs.html:73
+#, fuzzy
 msgid "delete"
-msgstr "Futa"
+msgstr "Delete"
 
 #: templates/programs.html:75
 #, fuzzy
@@ -1513,12 +1587,14 @@ msgid "share"
 msgstr "Share"
 
 #: templates/programs.html:86
+#, fuzzy
 msgid "no_programs"
-msgstr "Bado hauna programu"
+msgstr "You have no programs yet."
 
 #: templates/programs.html:88
+#, fuzzy
 msgid "write_first_program"
-msgstr "Andika programu yako ya kwanza."
+msgstr "Write your first program!"
 
 #: templates/public-page.html:16
 #, fuzzy
@@ -1535,44 +1611,35 @@ msgstr "programs created"
 msgid "amount_saved"
 msgstr "programs saved"
 
-#: templates/public-page.html:40 templates/public-page.html:42
-#, fuzzy
-msgid "amount_submitted"
-msgstr "programs submitted"
-
-#: templates/public-page.html:50
-#, fuzzy
-msgid "last_achievement"
-msgstr "Last earned achievement"
-
-#: templates/public-page.html:85
-#, fuzzy
-msgid "no_shared_programs"
-msgstr "has no shared programs..."
-
 #: templates/recover.html:6
+#, fuzzy
 msgid "recover_password"
-msgstr "Omba kuweka upya nenosiri"
+msgstr "Request a password reset"
 
 #: templates/recover.html:11
+#, fuzzy
 msgid "send_password_recovery"
-msgstr "Nitumie kiungo cha kurejesha nenosiri"
+msgstr "Send me a password recovery link"
 
 #: templates/reset.html:6 templates/reset.html:19
+#, fuzzy
 msgid "reset_password"
-msgstr "Badilisha nenosiri"
+msgstr "Reset password"
 
 #: templates/reset.html:12 templates/signup.html:22
+#, fuzzy
 msgid "password_repeat"
-msgstr "Rudia nenosiri"
+msgstr "Repeat password"
 
 #: templates/signup.html:7
+#, fuzzy
 msgid "create_account_explanation"
-msgstr "Kuwa na akaunti yako mwenyewe hukuruhusu kuhifadhi programu zako."
+msgstr "Having your own account allows you to save your programs."
 
 #: templates/signup.html:16
+#, fuzzy
 msgid "email_repeat"
-msgstr "Rudia barua pepe"
+msgstr "Repeat email"
 
 #: templates/signup.html:57
 #, fuzzy
@@ -1600,8 +1667,9 @@ msgid "request_teacher"
 msgstr "Would you like to apply for a teacher's account?"
 
 #: templates/signup.html:91
+#, fuzzy
 msgid "subscribe_newsletter"
-msgstr "Jisajili kwa jarida"
+msgstr "Subscribe to the newsletter"
 
 #: templates/signup.html:96
 #, fuzzy
@@ -1621,8 +1689,9 @@ msgstr ""
 "opportunities (optional)"
 
 #: templates/signup.html:106
+#, fuzzy
 msgid "already_account"
-msgstr "Tayari una akaunti?"
+msgstr "Already have an account?"
 
 #: templates/teacher-invitation.html:5
 #, fuzzy
@@ -1689,11 +1758,7 @@ msgstr "Quiz results"
 #: templates/quiz/quiz-result-overview.html:45
 #, fuzzy
 msgid "correct"
-msgstr "Programu zangu za hivi karibuni"
-
-#: templates/quiz/quiz-result-overview.html:62
-msgid "incorrect"
-msgstr ""
+msgstr "Correct"
 
 #: templates/quiz/quiz-result-overview.html:91
 #: templates/quiz/quiz-result-overview.html:95
@@ -1743,17 +1808,20 @@ msgid "username_invalid"
 msgstr "Your username is invalid."
 
 #: website/auth.py:243
+#, fuzzy
 msgid "username_special"
-msgstr "Jina la mtumiaji haiwezi kuwa na herufi hizi: `:` or `@`."
+msgstr "Username cannot contain `:` or `@`."
 
 #: website/auth.py:245
+#, fuzzy
 msgid "username_three"
-msgstr "Jina la mtumiaji lazima liwe na herufi angalau tatu."
+msgstr "Username must contain at least three characters."
 
 #: website/auth.py:247 website/auth.py:541 website/auth.py:748
 #: website/auth.py:753
+#, fuzzy
 msgid "email_invalid"
-msgstr "Tafadhali ingiza barua pepe halali."
+msgstr "Please enter a valid email."
 
 #: website/auth.py:249 website/auth.py:303 website/auth.py:487
 #: website/auth.py:511 website/auth.py:523 website/auth.py:683
@@ -1767,21 +1835,25 @@ msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
 #: website/auth.py:312
+#, fuzzy
 msgid "invalid_username_password"
-msgstr "Jina la mtumiaji/nenosiri ni batili."
+msgstr "Invalid username/password."
 
 #: website/auth.py:356 website/auth.py:358
+#, fuzzy
 msgid "repeat_match_email"
-msgstr "Barua pepe inayorudiwa hailingani."
+msgstr "The repeated email does not match."
 
 #: website/auth.py:360 website/auth.py:513 website/auth.py:517
 #: website/auth.py:687
+#, fuzzy
 msgid "repeat_match_password"
-msgstr "Nenosiri inayorudiwa hailingani."
+msgstr "The repeated password does not match."
 
 #: website/auth.py:362 website/auth.py:543
+#, fuzzy
 msgid "language_invalid"
-msgstr "Tafadhali ingiza mwaka lakita 1900 na "
+msgstr "Please select a valid language."
 
 #: website/auth.py:364
 #, fuzzy
@@ -1821,16 +1893,19 @@ msgid "programming_invalid"
 msgstr "Please select a valid programming language."
 
 #: website/auth.py:388
+#, fuzzy
 msgid "exists_username"
-msgstr "Jina hilo la mtumiaji tayari linatumika."
+msgstr "That username is already in use."
 
 #: website/auth.py:390 website/auth.py:573
+#, fuzzy
 msgid "exists_email"
-msgstr "Barua pepe hiyo tayari inatumika."
+msgstr "That email is already in use."
 
 #: website/auth.py:489 website/auth.py:515 website/auth.py:685
+#, fuzzy
 msgid "password_six"
-msgstr "Nenosiri lazima kiwe na angalau herufi sita."
+msgstr "Your password must contain at least six characters."
 
 #: website/auth.py:492 website/auth.py:495
 #, fuzzy
@@ -1843,12 +1918,14 @@ msgid "password_change_success"
 msgstr "Password of your student is successfully changed."
 
 #: website/auth.py:532
+#, fuzzy
 msgid "password_updated"
-msgstr "Nenosiri umesasishwa."
+msgstr "Password updated."
 
 #: website/auth.py:613
+#, fuzzy
 msgid "profile_updated"
-msgstr "Wasifu umesasishwa."
+msgstr "Profile updated."
 
 #: website/auth.py:616
 #, fuzzy
@@ -1856,8 +1933,11 @@ msgid "profile_updated_reload"
 msgstr "Profile updated, page will be re-loaded."
 
 #: website/auth.py:670
+#, fuzzy
 msgid "sent_password_recovery"
-msgstr "Utapokea barua pepe chenye maelezo ya kurejesha nenosiri."
+msgstr ""
+"You should soon receive an email with instructions on how to reset your "
+"password."
 
 #: website/auth.py:681 website/auth.py:691
 #, fuzzy
@@ -1865,8 +1945,11 @@ msgid "token_invalid"
 msgstr "Your token is invalid."
 
 #: website/auth.py:703
+#, fuzzy
 msgid "password_resetted"
-msgstr "Nenosiri lako limewekwa upya kwa mafanikio. Tafadhali login."
+msgstr ""
+"Your password has been successfully reset. You are being redirected to the "
+"login page."
 
 #: website/auth.py:721
 #, fuzzy
@@ -1879,9 +1962,11 @@ msgid "delete_success"
 msgstr "Program deleted successfully."
 
 #: website/programs.py:55
+#, fuzzy
 msgid "save_prompt"
 msgstr ""
-"Unahitaji kuwa na akaunti kuokoa programu yako. Je! Ungependa login sasa?"
+"You need to have an account to save your program. Would you like to login "
+"now?"
 
 #: website/programs.py:60
 #, fuzzy
@@ -1896,8 +1981,9 @@ msgid "save_parse_warning"
 msgstr "This program contains an error, are you sure you want to save it?"
 
 #: website/programs.py:131 website/programs.py:132
+#, fuzzy
 msgid "save_success_detail"
-msgstr "Programu imehifadhiwa kwa mafanikio"
+msgstr "Program saved successfully."
 
 #: website/programs.py:160
 #, fuzzy
@@ -1927,11 +2013,6 @@ msgstr "Only teachers can retrieve classes"
 #, fuzzy
 msgid "no_such_class"
 msgstr "No such Hedy class"
-
-#: website/statistics.py:45
-#, fuzzy
-msgid "title_class statistics"
-msgstr "My statistics"
 
 #: website/teacher.py:76
 #, fuzzy
