@@ -130,7 +130,7 @@ def load_adventures_per_level(lang, level):
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure.get('default_save_name', adventure['name']),
-            'text': adventure['levels'][level].get('story_text', 'No Story Text').format(**keywords),
+            'text': adventure['levels'][level].get('story_text').format(**keywords) if adventure['levels'][level].get('story_text') else '',
             'example_code': adventure['levels'][level].get('example_code').format(**keywords) if adventure['levels'][level].get('example_code') else '',
             'start_code': adventure['levels'][level].get('start_code').format(**keywords) if adventure['levels'][level].get('start_code') else '',
             'loaded_program': '' if not loaded_programs.get(short_name) else {
@@ -151,14 +151,6 @@ def load_adventures_per_level(lang, level):
                 break
         current_adventure['extra_stories'] = extra_stories
         all_adventures.append(current_adventure)
-    # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
-    all_adventures.append({
-        'short_name': 'level',
-        'loaded_program': '' if not loaded_programs.get('level') else {
-            'name': loaded_programs.get('level')['name'],
-            'code': loaded_programs.get('level')['code']
-        }
-    })
     return all_adventures
 
 

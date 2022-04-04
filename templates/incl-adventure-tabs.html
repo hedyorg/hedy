@@ -1,16 +1,16 @@
       {# TABS #}
       <div id="adventures">
         <div class="flex flex-row overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2">
-            {% for assignment in adventures %}
-              {% if assignment.short_name != 'level' and ('adventures' not in customizations or customizations['adventures'][assignment.short_name] and level|int in customizations['adventures'][assignment.short_name]) %}
-                <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{assignment.short_name}}">
-                    {{ assignment.name }}
+            {% for adventure in adventures %}
+              {% if 'adventures' not in customizations or (customizations['adventures'][adventure.short_name] and level|int in customizations['adventures'][adventure.short_name]) %}
+                <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.short_name}}">
+                    {{ adventure.name }}
                 </div>
               {% endif %}
             {% endfor %}
             {% for adventure in teacher_adventures %}
                 <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.name}}">
-                        {{ adventure.name }}
+                    {{ adventure.name }}
                 </div>
             {% endfor %}
             {% if specific_adventure %}
@@ -19,24 +19,24 @@
         </div>
       {# PANES #}
       <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace" style="max-height: 20em;">
-        {% for assignment in adventures %}
-          {% if assignment.short_name != 'level' and ('adventures' not in customizations or customizations['adventures'][assignment.short_name] and level|int in customizations['adventures'][assignment.short_name])  %}
-            <div data-tabtarget="{{assignment.short_name}}" {% if loop.index != 1 %}class="hidden"{% endif %}>
+        {% for adventure in adventures %}
+          {% if 'adventures' not in customizations or customizations['adventures'][adventure.short_name] and level|int in customizations['adventures'][adventure.short_name]  %}
+            <div data-tabtarget="{{adventure.short_name}}" {% if loop.index != 1 %}class="hidden"{% endif %}>
               <div class="flex flex-row">
-                  <div class="{% if assignment.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
-                      {{ assignment.text|commonmark }}
-                      {% if assignment.short_name == 'end' %}
+                  <div class="{% if adventure.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                      {{ adventure.text|commonmark }}
+                      {% if adventure.short_name == 'end' %}
                         <input type="submit" class="green-btn h-3/5 mt-4" value="{{ _('go_to_quiz') }}" onclick="hedyApp.load_quiz ({{level_nr}})">
                       {% endif %}
                   </div>
-                  {% if assignment.example_code %}
+                  {% if adventure.example_code %}
                       <div class="border"></div>
                       <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
-                          {{ assignment.example_code|commonmark }}
+                          {{ adventure.example_code|commonmark }}
                       </div>
                   {% endif %}
               </div>
-            {% for story in assignment.extra_stories %}
+            {% for story in adventure.extra_stories %}
                 <div class="flex flex-row border-t-2">
                     <div class="{% if story.example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
                       {{ story.text|commonmark }}
