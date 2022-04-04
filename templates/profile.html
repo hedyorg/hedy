@@ -135,6 +135,9 @@
             <label for="country" class="inline-block w-72">{{_('country')}}</label>
             <select id="country" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg">
                 <option value="">{{_('select')}}</option>
+                {% for alpha, name in all_countries().items() %}
+                    <option value="{{ alpha }}">{{ name }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="mb-4">
