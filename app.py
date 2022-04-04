@@ -1011,11 +1011,18 @@ def get_specific_adventure(name, level):
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
 @app.route('/cheatsheet/<level>', methods=['GET'])
 def get_cheatsheet_page(level):
-    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
-    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
-    defaults = level_defaults_for_lang.get_defaults_for_level(int(level))
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+    except:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    return render_template("cheatsheet.html", defaults=defaults, level=level)
+    level_commands_for_lang = COMMANDS[g.lang]
+    level_commands_for_lang.set_keyword_language(g.keyword_lang)
+    commands = level_commands_for_lang.get_commands_for_level(level)
+
+    return render_template("cheatsheet.html", commands=commands, level=level)
 
 @app.errorhandler(404)
 def not_found(exception):
