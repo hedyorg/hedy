@@ -1,52 +1,54 @@
 //symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
 
-_PRINT : "print"
-_ASK : "ask"
-_ECHO : "echo"
-_FORWARD : "forward"
-_TURN: "turn"
-left: "left"
-right: "right"
+_PRINT : "print" _SPACE?
+_ASK : "ask" _SPACE?
+_ECHO : "echo" _SPACE?
+_FORWARD : "forward" _SPACE?
+_TURN: "turn" _SPACE?
+left: "left" _SPACE?
+right: "right" _SPACE?
 
 //level 2
-_IS: "is"
-_SLEEP: "sleep"
+_IS: _SPACE "is" _SPACE
+_SLEEP: "sleep" _SPACE?
 
 //level 3
-_ADD_LIST: "add"
-_TO_LIST: "to" //different word from for x in range 1 to 5, because in other langs (like Dutch) these are different words)
-_REMOVE: "remove"
-_FROM: "from"
-_AT: "at"
-random : "random" //random needs to appear in the tree for further processing so does not start with _ or is uppercase
+_ADD_LIST: "add" _SPACE
+_TO_LIST: _SPACE "to" _SPACE //different word from for x in range 1 to 5, because in other langs (like Dutch) these are different words)
+_REMOVE: "remove" _SPACE
+_FROM: _SPACE "from" _SPACE
+_AT: _SPACE "at" _SPACE
+random : "random" _SPACE?//random needs to appear in the tree for further processing so does not start with _ or is uppercase
 
 //level 4
-_IN: "in"
-_IF: "if"
+_IN: _SPACE "in" _SPACE
+_IF: "if" _SPACE
 _ELSE: "else"
-_AND: "and"
+_AND: _SPACE "and" _SPACE
 
 //level 5
-_REPEAT: "repeat"
-_TIMES: "times"
+_REPEAT: "repeat" _SPACE
+_TIMES: _SPACE "times" // not incluing spaces after times, because the requirement of spaces after times changes after blocks are introduced
 
-//level 8
-_FOR: "for"
-_RANGE: "range"
-_TO: "to"
-_STEP: "step"
-
-//level 9
-_ELIF: "elif"
+//level 10
+_FOR: "for" _SPACE
 
 //level 11
-_INPUT: "input"
+_RANGE: "range" _SPACE?
+_TO: _SPACE "to" _SPACE
+_STEP: _SPACE "step" _SPACE
+
+//level 9
+_ELIF:_SPACE?  "elif" _SPACE
+
+//level 11
+_INPUT: "input" // not incluiding space after input because it's followed by ( which already has spaces included
 
 //level 14
-_OR: "or"
+_OR: _SPACE "or" _SPACE
 
 //level 17
-_WHILE: "while"
+_WHILE: "while" _SPACE
 
 //level 19
-_LENGTH: "length"
+_LENGTH: _SPACE "length" _SPACE
