@@ -1,10 +1,10 @@
 import copy
 import attr
 from website.yaml_file import YamlFile
-from iso3166 import countries_by_alpha2
+import iso3166
 
 # Define and load all countries
-COUNTRIES = {k: v.name for k, v in countries_by_alpha2.items()}
+COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 
 # Define and load all available language data
 ALL_LANGUAGES = {
