@@ -45,29 +45,30 @@ class PageTranslations:
 
 
 def render_code_editor_with_tabs(commands, max_level, level_number, version, loaded_program, adventures, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
-  arguments_dict = {}
+    arguments_dict = {}
 
-  # Meta stuff
-  arguments_dict['level_nr'] = str(level_number)
-  arguments_dict['level'] = level_number
-  arguments_dict['current_page'] = 'hedy'
-  arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
-  arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
-  arguments_dict['customizations'] = customizations
-  arguments_dict['hide_cheatsheet'] = hide_cheatsheet
-  arguments_dict['enforce_developers_mode'] = enforce_developers_mode
-  arguments_dict['teacher_adventures'] = teacher_adventures
-  arguments_dict['menu'] = True
-  arguments_dict['latest'] = version
-  arguments_dict['selected_page'] = 'code'
-  arguments_dict['page_title'] = f'Level {level_number} – Hedy'
-  arguments_dict['loaded_program'] = loaded_program
-  arguments_dict['adventures'] = adventures
-  arguments_dict['adventure_name'] = adventure_name
+    # Meta stuff
+    arguments_dict['level_nr'] = str(level_number)
+    arguments_dict['level'] = level_number
+    arguments_dict['current_page'] = 'hedy'
+    arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
+    arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
+    arguments_dict['customizations'] = customizations
+    arguments_dict['hide_cheatsheet'] = hide_cheatsheet
+    arguments_dict['enforce_developers_mode'] = enforce_developers_mode
+    arguments_dict['teacher_adventures'] = teacher_adventures
+    arguments_dict['menu'] = True
+    arguments_dict['latest'] = version
+    arguments_dict['selected_page'] = 'code'
+    arguments_dict['page_title'] = f'Level {level_number} – Hedy'
+    arguments_dict['loaded_program'] = loaded_program
+    arguments_dict['adventures'] = adventures
+    arguments_dict['adventure_name'] = adventure_name
 
-  return render_template("code-page.html", **arguments_dict, commands=commands)
+    return render_template("code-page.html", **arguments_dict, commands=commands)
 
-def render_specific_adventure(level_defaults, level_number, adventure, prev_level, next_level):
+
+def render_specific_adventure(level_number, adventure, prev_level, next_level):
     arguments_dict = {}
 
     # Meta stuff
@@ -89,8 +90,5 @@ def render_specific_adventure(level_defaults, level_number, adventure, prev_leve
     arguments_dict['loaded_program'] = None
     arguments_dict['adventures'] = adventure
     arguments_dict['adventure_name'] = None
-
-    # Merge level defaults into adventures so it is rendered as the first tab
-    arguments_dict.update(**attr.asdict(level_defaults))
 
     return render_template("code-page.html", **arguments_dict)
