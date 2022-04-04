@@ -91,12 +91,15 @@ function resetWindow() {
     }
     else {
       if (tab.hasClass('teacher_tab')) {
-        // Todo: TB -> We should re-write the adventures structure so Teacher adventures are included in "adventures"
         $ ('#program_name').val (tabName);
         window.State.adventure_name = tabName;
         theGlobalEditor?.setValue ("");
       } else {
-        $('#program_name').val(adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
+        if (adventures[tabName].default_save_name == 'intro') {
+          $('#program_name').val(window.State.level_title + ' ' + window.State.level);
+        } else {
+          $('#program_name').val(adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
+        }
         theGlobalEditor?.setValue(adventures [tabName].start_code);
       }
     }

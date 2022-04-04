@@ -3,32 +3,35 @@ adventures:
         name: "Level {level}"
         description: "Level uitleg"
         image: ""
-        default_save_name: "level"
+        default_save_name: "intro"
         levels:
             1:
                 story_text: |
-                    ## Maak een verhaal
-                    In level 1 kun je een verhaal maken met steeds een andere hoofdpersoon die je zelf invoert.
+                    ## Welkom bij Hedy!
+                    In Level 1 kun je de commando's `{print}`, `{ask}` en `{echo}` gebruiken.
+                    Je kunt bijvoorbeeld tekst laten verschijnen in het beeld met het commando `{print}`. Zoals in het voorbeeld hiernaast.
+                    Je kunt het voorbeeld uittesten door op de groene knop in de hoek te klikken.
+            
+                    Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het linker programmeerveld.
 
-                    Gebruik als eerste regel deze code:
-
-                    ```
-                    {ask} wie is de hoofdpersoon van jouw verhaal
-                    ```
-
-                    Na die eerste regel begin je met `{print}` als de zin moet worden geprint.
-                    Je gebruikt `{echo}` als je wilt dat jouw hoofdpersoon op het einde van de zin komt.
+                start_code: "{print} hallo wereld!"
                 example_code: |
-                    ## Voorbeeld Hedy code
+                    ## Voorbeeldcode
                     ```
-                    {ask} De hoofdpersoon van dit verhaal is
-                    {print} De hoofdpersoon gaat nu in het bos lopen
-                    {echo} Hij is wel een beetje bang, die
-                    {print} Overal hoort hij gekke geluiden
-                    {print} Hij is bang dat dit een spookbos is
+                    {print} Hallo!
+                    {print} Welkom bij Hedy!
                     ```
-                start_code: "{print} Hier begint jouw verhaal"
-
+                story_text_2: |
+                    Je kunt ook een vraag stellen met `{ask}` en het antwoord laten herhalen met `{echo}`.
+                    Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.
+                example_code_2: |
+                    ## Voorbeeldcode
+                    ```
+                    {ask} Hoe heet je?
+                    {echo} hallo
+                    ```
+                story_text_3: |
+                    Laten we beginnen! Weet je niet wat je wilt maken? In de volgende tabjes vind je ideeën voor programma's die je kunt maken.
     story:
         name: "Verhaal"
         description: "Maak een interactief verhaal"
