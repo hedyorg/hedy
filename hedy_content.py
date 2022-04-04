@@ -121,7 +121,7 @@ class Commands:
 
     def get_commands_for_level(self, level):
         # Commands are stored as a list of dicts, so iterate like a list, then get the dict values
-        level_commands = copy.deepcopy(self.levels.get(level, []))
+        level_commands = copy.deepcopy(self.levels.get(int(level), []))
         for command in level_commands:
             for k, v in command.items():
                 command[k] = v.format(**self.keywords)
