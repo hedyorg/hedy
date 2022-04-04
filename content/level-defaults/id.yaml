@@ -1,5 +1,5 @@
 1:
-    intro_text: |-
+    story_text: |-
         Selamat datang di Hedy! Pada level 1 kamu dapat menggunakan perintah `print`, `ask` dan `echo`.
 
         Pada bagian kiri kamu dapat melihat semua perintah untuk level 1.
@@ -11,11 +11,11 @@
         Tidak tahu apa yang mau dibuat? Pada tab-tab berikutnya kamu akan menemukan beberapa ide tentang apa yang bisa dibuat.
     start_code: print halo dunia!
     example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
     example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
-    intro_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
 2:
-    intro_text: |-
+    story_text: |-
         Pada level 2, kita belajar hal baru. Kamu dapat menamai sebuah kata dengan `is`.
 
         Jika kamu menggunakan kode `nama is Hedy`, kamu dapat menggunakan 'nama' tersebut dimanapun pada kodemu dan semuanya akan digantikan dengan 'Hedy'.
@@ -29,12 +29,12 @@
 
     start_code: print halo dunia!
     example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-    intro_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+    story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
     example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-    intro_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
+    story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
     example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
 3:
-    intro_text: |-
+    story_text: |-
         Pada level 3 kamu juga dapat membuat list. Kamu dapat meminta komputer memilih sesuatu secara acak dari list tersebut. Kamu dapat melakukan itu dengan `at random`.
 
         ```
@@ -45,11 +45,11 @@
         Kamu bisa menemukan semua kode contoh level 3 pada bagian kiri. Ada juga diberikan latihan pada tab-tab diatas.
     start_code: print halo dunia!
     example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-    intro_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+    story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
     example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
 4:
     start_code: print 'Halo dunia'
-    intro_text: |-
+    story_text: |-
         Pada level 4 perintah `ask` dan `print` sudah diupdate.
 
         Kamu harus memasukkan teks yang mau kamu tampilkan diantara tanda kutip satu.
@@ -62,12 +62,12 @@
         Kamu akan menemukan semua perintah di bagian kiri lagi dan tugas-tugas di tab-tab yang disediakan. Tugas-tugas tersebut sekarang akan menjadi lebih kompleks semakin ke kanan tabnya.
         Jadi adalah baik untuk memulai dari tab tugas paling kiri, dan mengerjakannya satu per satu ke kanan, supaya tantangan yang diberikan setara dengan kemampuan kamu.
     example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-    intro_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+    story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
 5:
     start_code: |-
         nama is ask 'siapa nama kamu?'
         if nama is Hedy print 'keren' else print 'boo'
-    intro_text: |-
+    story_text: |-
         Perintah `ask` dan `print` tetap sama seperti pada level 4.
 
         Pada level 5, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.
@@ -94,12 +94,12 @@
         Pada level 5, tugas-tugas yang ada pada tab-tab terlampir akan menjadi makin kompleks semakin posisi tabnya ke kanan. Jadi, pastikan untuk mengerjakan mulai dari kiri ke kanan.
     example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
     example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-    intro_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+    story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
     example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-    intro_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
+    story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
 6:
     start_code: print '5 kali 5 adalah ' 5 * 5
-    intro_text: |-
+    story_text: |-
         `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 4 dan level 5.
         Tapi di level 6 ada sesuatu yang baru, kamu sekarang bisa melakukan perhitungan matematika.
 
@@ -117,11 +117,11 @@
         print '5 kali 5 adalah ' 5 * 5
         ```
     example_code: "## Example Hedy code\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
-    intro_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+    story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
     example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
 7:
     start_code: repeat 3 times print 'Hedy itu menyenangkan!'
-    intro_text: |-
+    story_text: |-
         `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 6.
         Tapi level 7 menambahkan perintah `repeat`. Perintah repeat dapat digunakan untuk menjalankan satu baris kode beberapa kali
 
@@ -135,7 +135,7 @@
         repeat 5 times
             print 'Halo semua'
             print 'Ini akan ditampilkan lima kali'
-    intro_text: |-
+    story_text: |-
         `ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `if` dan `repeat` berubah. 
         Kamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.
         Indentasi berarti memberikan empat spasi diawal baris. Ini juga berlaku ketika kamu hanya mau mengeksekusi satu baris kode saja.
@@ -155,7 +155,7 @@
                 print 'bagus!'
             else
                 print 'pizza lebih enak'
-    intro_text: |-
+    story_text: |-
         Pada level ini kamu tidak hanya bisa menggunakan beberapa baris baru untuk  `if` and `repeat`, namun juga dapat menggabungkan mereka!
         Pada contoh kamu lihat sebuah perintah `if` didalam perintah `repeat`. Kamu juga dimungkinkan untuk melakukan sebaliknya, dan `if` juga boleh didalam `if` dan `repeat` didalam `repeat`.
         Cobalah!
@@ -175,7 +175,7 @@
         hewanhewan is anjing, kucing, ikan
         for hewan in hewanhewan
           print 'Aku suka ' hewan
-    intro_text: |
+    story_text: |
         Pada level ini kita akan belajar perintah `for`. Dengan `for` kamu dapat membuat sebuah daftar dan mengakses semua isinya.
         `for` membentuk sebuah blok seperti `repeat` dan `if` jadi semua baris untuk aksi harus diawali dengan beberapa spasi.
 
@@ -190,13 +190,13 @@
     start_code: |-
         for pembilang in range 1 to 5
             print pembilang
-    intro_text: "`print` berfungsi sama namun `repeat` kali ini diganti dengan `for`! Kamu sekarang dapat menulis `for pembilang in range 1 to 5` dan menggunakan `pembilang` pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `for` dan `if` (Ini artinya mengawali baris dengan empat spasi)."
+    story_text: "`print` berfungsi sama namun `repeat` kali ini diganti dengan `for`! Kamu sekarang dapat menulis `for pembilang in range 1 to 5` dan menggunakan `pembilang` pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `for` dan `if` (Ini artinya mengawali baris dengan empat spasi)."
     example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
 12:
     start_code: |-
         print 'angka-angka desimal kini harus menggunakan titik'
         print 2.5 + 2.5
-    intro_text: |-
+    story_text: |-
         Sejauh ini, Hedy tidak mengijinkan penggunaan angka desimal seperti 1.5, tapi sekarang bisa.
         Perlu diingat bahwa komputer menggunakan titik (.) untuk menandai angka desimal.
 
@@ -213,15 +213,15 @@
         print 'Kamu mendapatkan ' skor
         ```
     example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-    intro_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
+    story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
     example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-    intro_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
+    story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
     example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-    intro_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+    story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
     example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-    intro_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
+    story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
     example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-    intro_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
+    story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
     example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
 13:
     start_code: |-
@@ -229,7 +229,7 @@
         age = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
-    intro_text: "Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
+    story_text: "Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
 #16:
 #    start_code: |-
 #        # Ini adalah sebuah program yang akan menanyakan beberapa pertanyaan matematika
@@ -242,7 +242,7 @@
 #                print(jawaban ' benar')
 #            else:
 #                print('Itu salah, seharusnya dijawab: ' i*5)
-#    intro_text: 'Ketika kita membuat program yang lebih besar, kita perlu sebuah cara untuk mengingat apa yang dilakukan oleh setiap bagian program. Kita dapat menggunakan komentar untuk ini. Sebuah komentar terlihat sebagai berikut: ` # Ini sebuah komentar`. Apapun yang ada setelah simbol # tidak akan diperhitungkan oleh program.'
+#    story_text: 'Ketika kita membuat program yang lebih besar, kita perlu sebuah cara untuk mengingat apa yang dilakukan oleh setiap bagian program. Kita dapat menggunakan komentar untuk ini. Sebuah komentar terlihat sebagai berikut: ` # Ini sebuah komentar`. Apapun yang ada setelah simbol # tidak akan diperhitungkan oleh program.'
 #    commands:
 #    -   name: Komentar
 #        explanation: Kita dapat menggunakan komentar kapanpun kita mau
@@ -257,7 +257,7 @@
 #        buah = ['apel', 'pisang', 'ceri']
 #        for i in range(1, 3):
 #            print(buah[i])
-#    intro_text: Kita juga bisa melihat semua nilai didalam list dengan pengulangan. Karena ada tiga nilai dalam list, kita melakukan pengulangan dari 1 ke 3. Sekarang kita bisa menampilkan semua nilai didalam sebuah pengulangan.
+#    story_text: Kita juga bisa melihat semua nilai didalam list dengan pengulangan. Karena ada tiga nilai dalam list, kita melakukan pengulangan dari 1 ke 3. Sekarang kita bisa menampilkan semua nilai didalam sebuah pengulangan.
 #    commands:
 #    -   name: Ukuran dari list
 #        explanation: Dengan `length` kita dapat mengetahui ukuran dari sebuah list. List pada contoh berukuran 3 karena ada tiga nilai didalamnya.
@@ -277,7 +277,7 @@
 #            print('Itu benar!')
 #        else:
 #            print('Oh tidak, jawaban itu salah!')
-#    intro_text: Sekarang kita akan mengubah perintah `is` ke `=` dan `==`. Kita menggunakan `=` jika kita ingin mengisi sebuah nilai ke variabel. Jika kamu ingin mengisi 8 ke sebuah variabel bernama `jawaban`, kamu harus menuliskan `jawaban = 8`. Simbol `==` digunakan jika kita ingin mengecek apakah dua nilai sama.
+#    story_text: Sekarang kita akan mengubah perintah `is` ke `=` dan `==`. Kita menggunakan `=` jika kita ingin mengisi sebuah nilai ke variabel. Jika kamu ingin mengisi 8 ke sebuah variabel bernama `jawaban`, kamu harus menuliskan `jawaban = 8`. Simbol `==` digunakan jika kita ingin mengecek apakah dua nilai sama.
 #    commands:
 #    -   name: Perbandingan
 #        explanation: Jika kita ingin membandingkan, kita menggunakan `==`. Misal `5+3 == 8` mengecek apakah 5+3 sama dengan 8.
@@ -316,11 +316,11 @@
             print 'Kamu lebih muda daripada aku!'
         else
             print 'Kamu lebih tua daripada aku!'
-    intro_text: "Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar daripada angka kedua, seperti `6 > 5`."
+    story_text: "Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar daripada angka kedua, seperti `6 > 5`."
     example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-    intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
+    story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
     example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
-    intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+    story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
     example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
 15:
     start_code: |-
@@ -328,20 +328,20 @@
         while jawaban != 25
             jawaban = ask 'Apa hasil 5 kali 5?'
         print 'Sebuah jawaban benar telah diberikan'
-    intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
+    story_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
     example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
 16:
     start_code: |-
         buah = ['apel', 'pisang', 'ceri']
         print buah 
-    intro_text: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
+    story_text: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
     example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
 17:
     start_code: |-
         for i in range 1 to 10:
             print i
         print 'Siap atau tidak, aku datang!'
-    intro_text: Kali ini kita akan mengganti proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
+    story_text: Kali ini kita akan mengganti proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
 18:
     start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-    intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+    story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"

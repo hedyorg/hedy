@@ -1,5 +1,5 @@
 1:
-    intro_text: |+
+    story_text: |+
         Üdvözlünk a Hedynél! Az első szinten a `print`, `ask` és `echo` parancsokat használhatod.
 
         A baloldali sávban az 1. szint összes parancsát láthatod.
@@ -13,11 +13,11 @@
 
     start_code: "print Helló világ!"
     example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-    intro_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
     example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
-    intro_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+    story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
 2:
-    intro_text: |
+    story_text: |
         A 2. szinten valami újat tanulunk. El tudsz nevezni egy szót az 'is' utasítással.
 
         Ha azt a kódot írod, hogy 'nev is Hedy' akkor a nev (nem használunk ékezetet) szót
@@ -32,12 +32,12 @@
         szükséged.
     start_code: "print Helló világ!"
     example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-    intro_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+    story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
     example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-    intro_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
+    story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
     example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
 3:
-    intro_text: |
+    story_text: |
         A 3. szinten készíthetsz listát is. Kérheted a számítógépet, hogy véletlenszerűen
         válasszon valamit a listából. Ezt az `at random` utasítással teheted meg.
 
@@ -49,12 +49,12 @@
         A baloldali sávban a 3. szint összes parancsát láthatod. A következő füleken különböző
         feladatokat találsz.
     start_code: "print Helló világ!"
-    intro_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+    story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
     example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
     example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
 4:
     start_code: "print 'Helló világ'"
-    intro_text: |-
+    story_text: |-
         `ask` ugyanolyan, a 4. szinten, mint eddig, de `print` most más lesz.
 
         Amit ki akarsz íratni, idézőjelbe kell tenned.
@@ -68,12 +68,12 @@
         ## A feladatok egyre nehezebbek lesznek. 
         Most is megtalálod a parancsokat a baloldalon, a feladatokat pedig a füleken. A feladatok egyre nehezebbé válnak az egymást követő füleken. A legjobb, ha a baloldalon kezded a feladatokat a történettel és így haladsz jobbra a nagyobb kihívást jelentő feladatok felé.
     example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-    intro_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+    story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
 5:
     start_code: |-
         nev is ask 'Hogy hívnak?'
         if nev is Hedy print 'klassz!' else print 'ajaj'
-    intro_text: |-
+    story_text: |-
         `ask` és `print` ugyanúgy működnek, mint a 4. szinten. A 5. szinten hozzájön az `if`
         parancs! Az 'if' paranccsal két különböző lehetőség között választhatsz.
 
@@ -90,14 +90,14 @@
 
         A feladatok a 5. szinten a füleken egyre nehezebbek lesznek. Csináld őket balról jobbra
         haladva.
-    intro_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
+    story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
     example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
     example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-    intro_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+    story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
     example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
 6:
     start_code: "print '5-ször 5 az ' 5 * 5"
-    intro_text: |-
+    story_text: |-
         `ask`, `print` és `if` még mindig ugyanolyanok, mint a 5. szinten.
         De a 6. szinten jön valami új, tudsz majd számolni.
 
@@ -114,11 +114,11 @@
         print '5 ször 5 egyenlő ' 5 * 5
         ```
     example_code: "## Example Hedy code\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
-    intro_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+    story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
     example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
 7:
     start_code: "repeat 3 times print 'A Hedy szórakoztató!'"
-    intro_text: |
+    story_text: |
         	
         `ask`, `print` és `if` ugyanúgy működik mint a 5. és az 6. szinten szinten.
         De az 7. szinten megjelenik a `repeat` parancs. A ‘repeat’ utasítást parancsok
@@ -134,7 +134,7 @@
         repeat 5 times
             print 'Sziasztok'
             print 'Ez 5-szor lett kiírva'
-    intro_text: |-
+    story_text: |-
         `ask` és `print` még mindig úgy működik, ahogyan ismered. De az `if` és a `repeat` utasítások megváltoztak!
         Most különböző utasítások egy csoportját futtathatod egyszerre, de behúzással
         tagolnod kell a kódot.
@@ -156,7 +156,7 @@
                 print 'nice!'
             else
                 print 'pizza is better'
-    intro_text: |
+    story_text: |
         In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
         In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
         Give it a try!
@@ -176,7 +176,7 @@
         animals is dog, cat, blobfish
         for animal in animals
           print 'I love ' animal
-    intro_text: |
+    story_text: |
         In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
         `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
 
@@ -192,13 +192,13 @@
         for i in range 1 to 10
             print i
         print 'Aki bújt, aki nem, megyek!'
-    intro_text: "`print` ugyanúgy működik, mint eddig, de a `repeat` utasítást `for` helyettesíti! `for i in range 1 to 5` utasításokat fogod használni, `repeat 5 times` helyett. Használhatsz `i` -t is a programban! Ne felejts el behúzásokat használni a `for` és `if` utasítások után (ez azt jelenti, hogy egy sort négy szóközzel kell kezdned) "
+    story_text: "`print` ugyanúgy működik, mint eddig, de a `repeat` utasítást `for` helyettesíti! `for i in range 1 to 5` utasításokat fogod használni, `repeat 5 times` helyett. Használhatsz `i` -t is a programban! Ne felejts el behúzásokat használni a `for` és `if` utasítások után (ez azt jelenti, hogy egy sort négy szóközzel kell kezdned) "
     example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
 12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
-    intro_text: |
+    story_text: |
         So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
 
         For this level on you will also have to use quotation marks when storing a text with `is`:
@@ -214,15 +214,15 @@
         print 'You got ' score
         ```
     example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-    intro_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
+    story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
     example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-    intro_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
+    story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
     example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
     example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-    intro_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-    intro_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+    story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
+    story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
     example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-    intro_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
+    story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
     example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
 13:
     start_code: |
@@ -230,7 +230,7 @@
         age = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
-    intro_text: |
+    story_text: |
         Most megtanuljuk `and` és ` or` kifejezések használatát! Ha két állítást szeretnél
         ellenőrizni, akkor nem kell kettő `if` utasítást használnod, használhatod az `and` és
         az  `or` parancsokat. Ha az `and` parancsot használod, akkor az `and` bal és jobb
@@ -248,7 +248,7 @@
 #                print(valasz ' helyes')
 #            else:
 #                print ('Ez hibás, feltételezem ennyi: ' i*5)
-#    intro_text: |-
+#    story_text: |-
 #        Ha nagyobb programokat készítesz, meg kell találnod a módját, hogy emlékezz
 #        arra, melyik kódrészlet mit csinál. Ehhez megjegyzéseket használunk. Egy
 #        megjegyzés a következőképpen néz ki:
@@ -269,7 +269,7 @@
 #        gyumolcs = ['alma', 'banán', 'cseresznye']
 #        for i in range(1, 3):
 #            print(gyumolcs[i])
-#    intro_text: A for ciklussal egy listában is mindent láthatunk. Mivel a listában három dolog van, a ciklust 1-től 3-ig vesszük. Most mindent kiíratunk a ciklusban.
+#    story_text: A for ciklussal egy listában is mindent láthatunk. Mivel a listában három dolog van, a ciklust 1-től 3-ig vesszük. Most mindent kiíratunk a ciklusban.
 #    commands:
 #    -   name: Lista hossza
 #        explanation: A `length` utasítással láthatjuk a lista méretét. A példában szereplő lista hossza 3, mert három dolog van a listában
@@ -289,7 +289,7 @@
 #            print('Ez helyes')
 #        else:
 #            print('Ó nem, ez hibás!')
-#    intro_text: 'Most megváltoztatjuk a következőt: "=" és "==". A "=" kifejezést akkor használjuk, ha értéket szeretnénk hozzárendelni egy változóhoz. Ha 8 -at szeretnél rendelni az valasz nevű változóhoz, akkor valasz = 8. `==` jelet akkor használjuk, ha azt akarjuk látni, hogy két dolog ugyanaz-e.'
+#    story_text: 'Most megváltoztatjuk a következőt: "=" és "==". A "=" kifejezést akkor használjuk, ha értéket szeretnénk hozzárendelni egy változóhoz. Ha 8 -at szeretnél rendelni az valasz nevű változóhoz, akkor valasz = 8. `==` jelet akkor használjuk, ha azt akarjuk látni, hogy két dolog ugyanaz-e.'
 #    commands:
 #    -   name: Összehasonlítás
 #        explanation: Ha összehasonlítani akarunk, akkor a == jelet használjuk. 5+3 == 8 ellenőrzi, hogy az 5+3 egyenlő -e 8 -cal
@@ -328,15 +328,15 @@
          print 'Fiatalabb vagy nálam!'
         else
          print 'Idősebb vagy nálam!'
-    intro_text: |
+    story_text: |
         További új elemeket fogunk megtanulni! Lehet, hogy már a matematikából ismered
         ezeket a jeleket, a `<` és a `>`. A `<` ellenőrzi, hogy az első szám kisebb-e, mint a
         második, például `4 < 5`. A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a
         második, például `6 > 5`.
-    intro_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
+    story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
     example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
     example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-    intro_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+    story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
     example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
 15:
     start_code: |-
@@ -344,7 +344,7 @@
         while valasz != 25
           valasz = ask 'Mennyi 5-ször 5?'
         print 'A helyes válasz megadásra került'
-    intro_text: |
+    story_text: |
         Tanulni fogunk egy új ciklust, a `while` ciklust! Addig folytatjuk a ciklust, amíg az állítás
         igaz / érvényes! Tehát a példakódnál addig folytatjuk, amíg meg nem adják a helyes
         választ. Ha soha nem adják meg a helyes választ, akkor a ciklus soha nem ér véget!
@@ -353,14 +353,14 @@
     start_code: |-
         gyumolcs = ['alma', 'banán', 'cseresznye']
         print gyumolcs 
-    intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
+    story_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
     example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
 17:
     start_code: |-
         for i in range 1 to 10:
             print i
         print 'Aki bújt, aki nem, megyek!'
-    intro_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
+    story_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
 18:
     start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-    intro_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+    story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
