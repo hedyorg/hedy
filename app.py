@@ -117,9 +117,8 @@ def load_adventures_per_level(lang, level):
     adventure_object = load_adventure_for_language(lang)
     keywords = adventure_object.keywords
     adventures = adventure_object.adventures_file['adventures']
-    print(adventures)
 
-    # First order the adventures dict by ADVENTURE_ORDER to ensure this is always the same (independent of YAML)
+    # Order the adventures dict by ADVENTURE_ORDER to ensure this is always the same (independent of YAML structure)
     sorted_adventures = {}
     for adventure_index in ADVENTURE_ORDER:
         if adventures.get(adventure_index, None):
