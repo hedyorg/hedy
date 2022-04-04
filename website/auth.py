@@ -10,7 +10,7 @@ import urllib
 from flask import request, session, make_response, jsonify, redirect
 from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku
 import datetime
-from iso3166 import countries
+from iso3166 import countries_by_alpha2
 from functools import wraps
 from config import config
 import boto3
@@ -69,8 +69,8 @@ def make_salt():
 def hash(password, salt):
     return bcrypt.hashpw(bytes(password, 'utf-8'), bytes(salt, 'utf-8')).decode('utf-8')
 
-countries = {}
 
+countries = {k: v.name for k, v in countries_by_alpha2.items()}
 # The current user is a slice of the user information from the database and placed on the Flask session.
 # The main purpose of the current user is to provide a convenient container for
 # * username
