@@ -1,4 +1,3 @@
-title: Hedy adventures!
 adventures:
     story:
         levels:
@@ -631,34 +630,3 @@ adventures:
                 start_code: '## place your code here'
                 story_text: "## Superspy\nThe code you made in the previous level can be made a lot easier in this one with the `{and}` command.\n"
                 example_code: "## Example Hedy code\n```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
-    money:
-        levels:
-            1:
-                start_code: '{print} Mo money Mo problems'
-                story_text: "## Sing a song about money\nUse the `{print}` command to print line in the output screen.\n\nDo you want to hear Hedy sing it? Use the read-aloud function beneath the 'run code' button.\n\nPlay the song and listen to 'Mo money, mo problems' by the notorious B.I.G.\n\n## Challenge\nDo you know any other songs about money that you can let Hedy sing?\n\nThis adventure was co-created with Aflatoun.\n"
-                example_code: "## Example Hedy code\n```\n{print} I don't know what they want from me\n{print} It's like the more money we come across\n{print} The more problems we see\n{print} I don't know what they want from me\n{print} It's like the more money we come across\n{print} The more problems we see\n```\n"
-            3:
-                start_code: '{print} Make smart choices!'
-                story_text: "## Make smart choices\nIn this level you are faced with some financial dilemmas. You can make a list of products and a list of prices.\nHedy will randomly pick a product and a price and ask you if you think that's a smart choice to buy!\n\n## Challenge\nMake your own list of products and prices and play the game with your friends. Would they buy the same products as you?\nWho is the smartest spender?\n"
-                example_code: "## Example Hedy code\n```\nprice {is} 1 euro, 10 euros, 100 euros, 1 million euros\nproduct {is} skateboard, banana, race car, dog\n\nprint Would you buy...\n{print} a product {at} {random} for price {at} {random}\nanswer {is} {ask} Would you buy it?\n```\n"
-            5:
-                start_code: "{print} 'Welcome to The Price is right!'"
-                story_text: "## The price is right\nIn this level you can create your own virtual version of the televisionshow 'The price is right'.\nIn this show the contestants have to guess the price of a product correctly to win it.\n\n## Challenge\nThe example code only gives away one price. Can you add more prices to win?\n"
-                example_code: "## Example Hedy code\n```\n{print} 'Welcome to The Price Is Right!'\n{print} 'Im your host, Hedy.'\n{print} 'Our first price tonight is a skateboard!'\nprice {is} 30\n{print} 'Your options are 5 euros, 15 euros or 30 euros'\nguess {is} {ask} 'How much do you guess it costs?'\n{if} guess {is} price {print} 'Great job! You won the skateboard!'\n{else} {print} 'No! You lose! The actual price was... ' price\n```\n"
-            6:
-                start_code: "{print} 'The digital piggy bank'"
-                story_text: "## Piggybank\nIn this level you can create your own digital Piggy Bank.\nYou can see how much money you've saved and vcalculate how long it will take you to save up for anything you'd like to buy.\nTry it out!\n\n## Challenge\nCan you think of extra features you could add to your digital piggy bank?\n"
-                example_code: "## Example Hedy code\n```\n{print} 'The digital piggy bank'\nwish = {ask} 'What would you like to buy?'\nprice = {ask} 'How much does that cost?'\nsaved = {ask} 'How much money have you saved already?'\nallowance = {ask} 'How much pocket money do you get per week?'\nto_save = price - saved\nweeks = to_save / allowance\n{print} 'You can buy a ' wish ' in ' weeks ' weeks.'\n\n```\n"
-            2:
-                story_text: "## Make your own virtual shop\nIn this adventure you can create your own virtual shop. The example codes gives an easy example, but we bet that you could make your shop more interesting.\n\n## Challenge\nTurn the example code into your own virtual shop. What kind of shop would you like to own?\nHow much money will you charge your costumers? What can you do to make your shop more appealing?\n"
-                example_code: "## Example Hedy code\n```\nprice {is} 3\n{print} Welcome to my shop\nproduct {is} {ask} What would you like to buy?\n{print} You would like to buy a product\n{print} That will be price euro please\n{print} Thank you! Bye!\n```\n"
-                start_code: '{print} Welcome to my shop'
-            4:
-                story_text: "## Make your own virtual restaurant\nAfter opening your own shop in level 2, it's time to open a restaurant! Check out the example.\nPlease note that from this level on the print and ask command require quotation marks.\n\n## Challenge\nMake the restaurant your own. Maybe you'd pefer to have a sandwich shop, or a fastfood drive-through or a icecream parlor?\nYou can make anything you want with our example as inspiration!\n"
-                example_code: "## Example Hedy code\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\nprice {is} 20 euros\n{print} 'That will be ' price\npayment {is} {ask} 'Would you like to pay cash or card?'\n{print} 'No problem!'\n{print} 'Your ' food ' and ' drinks ' are on their way!'\n```\n"
-                start_code: "{print} 'Welcome to Hedys restaurant!'"
-        name: Money Week
-        description: Aflatoun
-        image: piggybank.png
-        default_save_name: money
-subtitle: You can learn Hedy by creating a story, a game or something to make your life easier

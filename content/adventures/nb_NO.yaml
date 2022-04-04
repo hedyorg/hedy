@@ -1,4 +1,3 @@
-title: Hedy eventyr!
 adventures:
     story:
         name: Fortelling
@@ -631,34 +630,3 @@ adventures:
             11:
                 story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
                 start_code: '# place your code here'
-    money:
-        name: Pengeuke
-        description: Aflatoun
-        image: piggybank.png
-        default_save_name: Penger
-        levels:
-            1:
-                example_code: "## Eksempel Hedykode\n```\n{print} I don't know what they want from me\n{print} It's like the more money we come across\n{print} The more problems we see\n{print} I don't know what they want from me\n{print} It's like the more money we come across\n{print} The more problems we see\n```\n"
-                story_text: "## Syng en sang om penger\nBruk `{print}` kommandoen til å skrive ut linjer på skjermen.\n\nVil du høre Hedy synge sangen? Bruk \"les høyt\"-funksjonen under \"kjør kode\"-knappen.\n\nSpill sangen og hør på 'Mo money, mo problems' av The Notorious B.I.G.\n\n## Utfordring\nKjenner du til noen andre sanger om penger som du kan få Hedy til å synge?\n\nDette eventyret er laget i samarbeid med Aflatoun.\n"
-                start_code: '{print} Mo money Mo problems'
-            6:
-                start_code: "{print} 'Den digitale sparegris'"
-                story_text: "## Sparegrisen\nPå dette nivået kan du lage din egne digitale sparegris.\nDu kan se hvor mye penger du har spart og regne ut hvor lang tid det vil ta å spare opp for noe du har lyst å kjøpe.\nPrøv!\n\n## Utfordring\nKan du tenke deg en ekstra funksjon du har lyst å legge til din digitale sparegris?\n"
-                example_code: "## Eksempel Hedykode\n```\n{print} 'Den digitale sparegris'\nønske = {ask} 'Hva har du lyst å kjøpe?'\npris = {ask} 'Hvor mye koster det?'\nspart = {ask} 'Hvor mye penger har du spart allerede?'\nukelønn = {ask} 'Hvor mye får du i ukelønn?'\nigjen_å_spare = pris - spart\nuker = igjen_å_spare / ukelønn\n{print} 'Du kan kjøpe ' wish ' om ' weeks ' uker.'\n\n```\n"
-            2:
-                story_text: "## Lag din egen virtuelle butikk\nI dette eventyret kan du lage din egen virtuelle butikk. Eksempelkoden gir et enkelt eksempel men vi vedder på at du kan gjøre butikke enda mer interessant.\n\n## Utfordring\nSkriv denne eksempelkoden om til din egen virtuelle butikk. Hva slags type butikk ville du hatt?\nHvor mye penger ville du bedt av kundene dine? Hva kan du gjøre for å gjøre butikken din mer tiltalende?\n"
-                example_code: "## Eksempel Hedykode\n```\npris {is} 3\n{print} Velkommen til butikken min\nprodukt {is} {ask} Hva har du lyst å kjøpe?\n{print} Vil du kjøpe et produkt\n{print} Det blir pris kroner\n{print} Takk! På gjensyn!\n```\n"
-                start_code: '{print} Velkommen til min butikk'
-            3:
-                story_text: "## Ta smarte valg\nPå dette nivået blir du møtt med et penge-dilemma. Du kan lage en liste med produkter og en liste med priser.\nHedy vil tilfeldig velge et produkt og en pris og spørre deg om det er lurt kjøp.\n\n## Utfordring\nLag din egen liste med produkter og priser og spill spillet med dine venner. Ville de kjøpt de samme tingene som deg?\nHvem har den klokeste pengebruken?\n"
-                example_code: "## Eksempel Hedykode\n```\npris {is} 10 kroner, 100 kroner, 1000 kroner, 1 million kroner\nprodukt {is} sykkel, banan, racerbil, hund\n\nprint Ville du kjøpt...\n{print} en produkt {at} {random} til pris {at} {random}\nsvar {is} {ask} Ville du kjøpt det?\n```\n"
-                start_code: '{print} Gjør smarte valg!'
-            4:
-                story_text: "## Lag din egne virtuelle restaurant\nEtter åpningen av din egen butikk på nivå 2 er det på tide å åpne en restaurant! Sjekk ut eksempelet.\nVært oppmersom på at fra dette nivået av vil `{print}`-kommandoen kreve fnutter.\n\n## Utfordring\nGjør restauranten til din egen. Kanskje vil du ha en kafé, en hurtigmat-restaurant eller en iskrembod?\nDu kan lage hva du vil med vårt eksempel som inspirasjon!\n"
-                example_code: "## Eksempel Hedykode\n```\n{print} 'Velkommen til Hedys restaurant!'\n{print} 'I dag har vi pizza og lasagne på menyen.'\nmat {is} {ask} 'Hva har du lyst til å spise?'\n{print} 'Godt valg! ' mat ' er min favoritt!'\ndrikke {is} {ask} 'Hva har du lyst til å drikke til maten?'\n{print} 'Takk for bestillingen.'\npris {is} 200 kroner\n{print} 'Det blir ' pris\nbetaling {is} {ask} 'Vil du betale med kort eller kontant?'\n{print} 'Ikke noe problem!'\n{print} 'Din ' food ' og ' drinks ' er på vei!'\n```\n"
-                start_code: "{print} 'Velkommen til Hedys restaurant!'"
-            5:
-                story_text: "## The price is right\nPå dette nivået kan du lage din egne virtuelle versjon av tv-programmet 'Prisen er rett'.\nI dette programmet må deltagerene gjette prisen på et produkt for å vinne det.\n\n## Utfordring\nEksempelkoden har bare en genvinst. Kan du legge til flere gevinster man kan vinne?\n"
-                example_code: "## Eksempel Hedykode\n```\n{print} 'Velkommen til Prisen er rett!'\n{print} 'Jeg er din programleder, Hedy.'\n{print} 'Vår første gevinst i kveld er et rullebrett!'\npris {is} 30\n{print} 'Dine valg er 50 kroner, 150 kroner eller 300 kroner'\ngjetting {is} {ask} 'Hvor mye gjetter du det koster?'\n{if} gjetting {is} pris {print} 'Godt jobbet! Du vant et rullebrett!'\n{else} {print} 'Nei! Du tapte! Den egentlige prisen er... ' pris\n```\n"
-                start_code: "{print} 'Velkommen til Prisen er rett!'"
-subtitle: Du kan lære Hedy ved å lage en fortelling, et spill eller noe som gjør livet ditt enklere
