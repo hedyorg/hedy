@@ -1008,9 +1008,6 @@ def get_specific_adventure(name, level):
 def get_cheatsheet_page(level):
     level_commands_for_lang = COMMANDS[g.lang]
     level_commands_for_lang.set_keyword_language(g.keyword_lang)
-
-    print(level_commands_for_lang)
-
     commands = level_commands_for_lang.get_commands_for_level(level)
 
     return render_template("cheatsheet.html", commands=commands, level=level)
