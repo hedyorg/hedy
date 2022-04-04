@@ -887,8 +887,6 @@ def index(level, program_id):
                 except:
                     print("Error: there is an openings date without a level")
 
-    if level not in level_defaults_for_lang.levels and level <= hedy.HEDY_MAX_LEVEL:
-        return utils.error_page(error=404, ui_message=gettext('level_not_translated'))
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
@@ -983,14 +981,11 @@ def get_specific_adventure(name, level):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     adventure = [x for x in load_adventures_per_level(g.lang, level) if x.get('short_name') == name]
-    prev_level = level-1 if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name] else False
-    next_level = level+1 if [x for x in load_adventures_per_level(g.lang, level+1) if x.get('short_name') == name] else False
-
-    print(prev_level)
-    print(next_level)
-
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
+
+    prev_level = level-1 if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name] else False
+    next_level = level+1 if [x for x in load_adventures_per_level(g.lang, level+1) if x.get('short_name') == name] else False
 
     return hedyweb.render_specific_adventure(level_number=level, adventure=adventure,
                                              prev_level=prev_level, next_level=next_level)
