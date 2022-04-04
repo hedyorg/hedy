@@ -36,6 +36,22 @@ class TestsLevel1(HedyTester):
 
     self.assertEqual(['Hallo welkom bij Hedy!'], hedy.all_print_arguments(code, self.level))
 
+  def test_print_no_space(self):
+    code = "printHallo welkom bij Hedy!"
+    expected = "print('Hallo welkom bij Hedy!')"
+    expected_commands = ['print']
+
+    self.single_level_tester(
+      code=code,
+      expected=expected,
+      output='Hallo welkom bij Hedy!',
+      expected_commands=expected_commands
+    )
+
+    self.assertEqual(['Hallo welkom bij Hedy!'], hedy.all_print_arguments(code, self.level))
+
+
+
   def test_print_has_no_turtle(self):
     code = "print koekoek"
     result = hedy.transpile_inner(code, self.level)
