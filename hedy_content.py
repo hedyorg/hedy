@@ -34,10 +34,6 @@ def fill_all_languages(babel):
               locale = Locale.parse(folder)
               ALL_LANGUAGES[folder] = locale.display_name
 
-  # If not other translations are found, add the default locale.
-  if not ALL_LANGUAGES:
-      locale = Locale.parse(babel._default_locale)
-      ALL_LANGUAGES[babel._default_locale] = locale.display_name
 
 class LevelDefaults:
   def __init__(self, language):
