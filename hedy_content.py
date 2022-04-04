@@ -45,6 +45,27 @@ ALL_KEYWORD_LANGUAGES = {
     'hi': 'HI'
 }
 
+ADVENTURE_ORDER = [
+    'default',
+    'story',
+    'parrot',
+    'songs',
+    'turtle',
+    'dishes',
+    'dice',
+    'rock',
+    'calculator',
+    'fortune',
+    'restaurant',
+    'haunted',
+    'piggybank',
+    'quizmaster',
+    'language',
+    'secret',
+    'next',
+    'end'
+]
+
 class Commands:
     def __init__(self, language):
         self.language = language
