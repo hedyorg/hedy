@@ -37,8 +37,10 @@ def collect_snippets(path):
                         if tag.name != 'pre' or not tag.contents[0]:
                             continue
                         code_snippet_counter += 1
-                        code = tag.contents[0].contents[0]
-
+                        try:
+                            code = tag.contents[0].contents[0]
+                        except:
+                            print("Code container is empty...")
                         Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
 
                     # start_code
