@@ -52,8 +52,12 @@ def collect_snippets(path):
 
   return Hedy_snippets
 
-
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
+Hedy_snippets = []
+for s in collect_snippets(path='../../content/adventures'):
+    print(s.name)
+    print(s)
+    Hedy_snippets.append((s.name, s))
+#Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
 # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
 keywords = YamlFile.for_file('../../content/keywords/en.yaml').to_dict()
 for snippet in Hedy_snippets:
