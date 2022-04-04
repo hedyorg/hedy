@@ -36,7 +36,7 @@ from flask_babel import gettext
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
+from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
@@ -117,6 +117,14 @@ def load_adventures_per_level(lang, level):
     adventure_object = load_adventure_for_language(lang)
     keywords = adventure_object.keywords
     adventures = adventure_object.adventures_file['adventures']
+    print(adventures)
+
+    # First order the adventures dict by ADVENTURE_ORDER to ensure this is always the same (independent of YAML)
+    sorted_adventures = {}
+    for adventure_index in ADVENTURE_ORDER:
+        if adventures.get(adventure_index, None):
+            sorted_adventures[adventure_index] = (adventures.get(adventure_index))
+    adventures = sorted_adventures
 
     for short_name, adventure in adventures.items():
         if not level in adventure['levels']:
