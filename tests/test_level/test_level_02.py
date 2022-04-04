@@ -27,6 +27,12 @@ class TestsLevel2(HedyTester):
     print(f'Hallo welkom bij Hedy!')""")
     self.single_level_tester(code=code, expected=expected)
 
+  def test_print_no_space(self):
+    code = "printHallo welkom bij Hedy!"
+    expected = textwrap.dedent("""\
+    print(f'Hallo welkom bij Hedy!')""")
+    self.single_level_tester(code=code, expected=expected)
+
   def test_print_comma(self):
     code = "print welkom bij steen, schaar, papier"
     expected = textwrap.dedent("""\
