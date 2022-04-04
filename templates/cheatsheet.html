@@ -11,13 +11,13 @@
     <body dir="{{ g.dir }}">
         <div class="container min-w-min mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
             <div id="cheatsheet_header" class="bg-blue-500 h-32 flex flex-row items-center">
-                <h1 class="text-white text-5xl font-light font-serif mx-16">{{ auth.cheatsheet }}</h1>
+                <h1 class="text-white text-5xl font-light font-serif mx-16">{{_('cheatsheet_title')}}</h1>
                 <img src="{{static('/images/Hedy-logo.png')}}" class="z-10 w-40 ltr:ml-auto rtl:mr-auto ltr:mr-24 rtl:ml-24 mt-28"/>
             </div>
             <div id="cheatsheet_body" class="bg-blue-200 min-h-screen px-16 py-8">
                 <h2 class="text-black text-4xl font-sans font-light mb-8">Level {{ level }}</h2>
                 <div class="bg-white w-full h-auto shadow-md px-12 py-4 text-lg">
-                    {% for command in defaults.commands %}
+                    {% for command in commands %}
                         <div class="flex flex-col my-4">
                             <div class="turn-pre-into-ace" id="test">
                                 <pre class="cheatsheet no-copy-button" level="{{ level }}">{{ command.demo_code }}</pre>
