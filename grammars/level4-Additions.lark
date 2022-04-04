@@ -1,10 +1,10 @@
 // redefining it entirely since it has many order-depending rules (e.g ask_no_quotes should be after ask and before assign)
 command:print | ask | turtle | assign_list | add | remove | sleep | error_ask_no_quotes| assign | error_print_no_quotes | error_invalid
 
-print: _PRINT (_SPACE _print_argument)? -> print
-error_print_no_quotes: _PRINT _SPACE text -> error_print_nq
-ask: var _SPACE _IS _SPACE _ASK (_SPACE _print_argument)?
-error_ask_no_quotes: var _SPACE _IS _SPACE _ASK _SPACE text  -> error_print_nq
+print: _PRINT (_print_argument)? -> print
+error_print_no_quotes: _PRINT text -> error_print_nq
+ask: var _IS _ASK (_print_argument)?
+error_ask_no_quotes: var _IS _ASK text  -> error_print_nq
 
 _print_argument: (_SPACE | list_access | quoted_text | var_access)*
 
