@@ -41,6 +41,7 @@ def collect_snippets(path):
                             code = tag.contents[0].contents[0]
                         except:
                             print("Code container is empty...")
+                            continue
                         Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
 
                     # start_code
