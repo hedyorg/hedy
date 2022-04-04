@@ -629,19 +629,19 @@ so we use particular functions
 
 function rule_level1() {
   return [{
-    regex: START_LINE + "(" + currentLang._ASK + ")(" + END_WORD + ")(.*)$",
-    token: ['text','keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._ASK + ")(.*)$",
+    token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._PRINT + ")(" + END_WORD + ")(.*)$",
-    token: ['text','keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._PRINT + ")(.*)$",
+    token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._ECHO + ")(" + END_WORD + ")(.*)$",
-    token: ['text','keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._ECHO + ")(.*)$",
+    token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._FORWARD + ")(" + SPACE + ")([0-9]*)( *)$",
+    regex: START_LINE + "(" + currentLang._FORWARD + ")( *)([0-9]*)( *)$",
     token: ['text','keyword','text','text','text'],
     next: 'start',
   },{
@@ -649,7 +649,7 @@ function rule_level1() {
     token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")(" + SPACE + ")(" + WORD + ")( *)$",
+    regex: START_LINE + "(" + currentLang._TURN + ")( *)(" + WORD + ")( *)$",
     token: ['text','keyword','text','keyword','text'],
     next: 'start',
   },{
@@ -661,71 +661,71 @@ function rule_level1() {
 
 function rule_level2() {
   return [{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")(" + SPACE + ")(" + currentLang._ASK + ")(" + SPACE + ")(.*)$",
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")( *)(.*)$",
     token: ["text",'text','text','keyword','text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")(" + SPACE + ")(.*)$",
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(.*)$",
     token: ["text",'text','text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._PRINT + ")(" + END_WORD + ")(.*)$",
-    token: ["text",'keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._PRINT + ")(.*)$",
+    token: ["text",'keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._SLEEP + ")(" + END_WORD + ")(.*)$",
-    token: ["text",'keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._SLEEP + ")(.*)$",
+    token: ["text",'keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")(" + END_WORD + ")(.*)$",
-    token: ["text",'keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._TURN + ")(.*)$",
+    token: ["text",'keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._FORWARD + ")(" + END_WORD + ")(.*)$",
-    token: ["text",'keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._FORWARD + ")(.*)$",
+    token: ["text",'keyword','text'],
     next: 'start',
   }];
 }
 
 function rule_level3() {
   return [{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")(" + SPACE + ")(" + currentLang._ASK + ")(" + SPACE + ")(.*)$",
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")( *)(.*)$",
     token: ["text",'text','text','keyword','text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")(" + SPACE + ")(.*)$",
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(.*)$",
     token: ["text",'text','text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._REMOVE + ")(" + SPACE + ")(.*)(" + SPACE + ")(" + currentLang._FROM + ")(" + SPACE + ")("+ WORD +")$",
+    regex: START_LINE + "(" + currentLang._REMOVE + ")( *)(.*)(" + SPACE + ")(" + currentLang._FROM + ")( *)("+ WORD +")$",
     token: ["text",'keyword','text','text','text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._ADD_LIST + ")(" + SPACE + ")(.*)(" + SPACE + ")(" + currentLang._TO_LIST + ")(" + SPACE + ")("+ WORD +")$",
+    regex: START_LINE + "(" + currentLang._ADD_LIST + ")( *)(.*)(" + SPACE + ")(" + currentLang._TO_LIST + ")( *)("+ WORD +")$",
     token: ["text",'keyword','text','text','text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + currentLang._PRINT + END_WORD,
+    regex: START_LINE + currentLang._PRINT ,
     token: ['keyword'],
     next: 'start',
   },{
-    regex: START_LINE + currentLang._TURN + END_WORD,
+    regex: START_LINE + currentLang._TURN ,
     token: ['keyword'],
     next: 'start',
   },{
-    regex: START_LINE + currentLang._SLEEP + END_WORD,
+    regex: START_LINE + currentLang._SLEEP ,
     token: ['keyword'],
     next: 'start',
   },{
-    regex: START_LINE + currentLang._FORWARD + END_WORD,
+    regex: START_LINE + currentLang._FORWARD ,
     token: ['keyword'],
     next: 'start',
   },{
-    regex: START_WORD + currentLang._AT + SPACE + currentLang._RANDOM + END_WORD,
+    regex: START_WORD + currentLang._AT + SPACE + currentLang._RANDOM ,
     token: ['keyword','text','keyword'],
     next: 'start',
   },{
-    regex: START_WORD + currentLang._AT + END_WORD,
+    regex: START_WORD + currentLang._AT ,
     token: ['keyword'],
     next: 'start',
   },{
@@ -750,7 +750,7 @@ function rule_keywords(level : number) {
   var rules = [];
   for (const command in COMMANDS[level]) {
     rules.push({
-      regex: START_WORD + COMMANDS[level][command] + END_WORD,
+      regex: START_WORD + COMMANDS[level][command],
       token: "keyword",
       next: "start", 
     })
