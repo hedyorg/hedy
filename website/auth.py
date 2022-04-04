@@ -428,14 +428,14 @@ def routes(app, database):
         username = request.args.get('username', None)
         token = request.args.get('token', None)
         if not token:
-            return 'no token', 400
+            return gettext('token_invalid'), 400
         if not username:
-            return 'no username', 400
+            return gettext('username_invalid'), 400
 
         # Verify that user actually exists
         user = DATABASE.user_by_username(username)
         if not user:
-            return 'invalid username/token', 403
+            return gettext('username_invalid'), 403
 
         # If user is already verified -> re-direct to landing-page anyway
         if not 'verification_pending' in user:
@@ -443,7 +443,7 @@ def routes(app, database):
 
         # Verify the token
         if token != user['verification_pending']:
-            return 'invalid username/token', 403
+            return gettext('token_invalid'), 403
 
         # Remove the token from the user
         DATABASE.update_user(username, {'verification_pending': None})
@@ -460,7 +460,7 @@ def routes(app, database):
         forget_current_user()
         if request.cookies.get(TOKEN_COOKIE_NAME):
             DATABASE.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
-        return '', 200
+        return {}, 200
 
     @app.route('/auth/destroy', methods=['POST'])
     @requires_login
@@ -468,13 +468,13 @@ def routes(app, database):
         forget_current_user()
         DATABASE.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         DATABASE.forget_user(user['username'])
-        return '', 200
+        return {}, 200
 
     @app.route('/auth/destroy_public', methods=['POST'])
     @requires_login
     def destroy_public(user):
         DATABASE.forget_public_profile(user['username'])
-        return '', 200
+        return {}, 200
 
     @app.route('/auth/change_student_password', methods=['POST'])
     @requires_login
@@ -495,7 +495,6 @@ def routes(app, database):
         if body['username'] not in students:
             return gettext("password_change_not_allowed"), 400
 
-        user = DATABASE.user_by_username(body['username'])
         hashed = hash(body['password'], make_salt())
         DATABASE.update_user(body['username'], {'password': hashed})
 
@@ -768,7 +767,7 @@ def routes(app, database):
                                     user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token),
                                 lang=user['language'], username=user['username'])
 
-        return '', 200
+        return {}, 200
 
 
 # Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
