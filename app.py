@@ -981,7 +981,7 @@ def get_specific_adventure(name, level):
     prev_level = level-1 if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name] else False
     next_level = level+1 if [x for x in load_adventures_per_level(g.lang, level+1) if x.get('short_name') == name] else False
 
-    return hedyweb.render_specific_adventure(level_number=level, adventure=adventure,
+    return hedyweb.render_specific_adventure(level_number=level, adventure=adventure, version=version(),
                                              prev_level=prev_level, next_level=next_level)
 
 

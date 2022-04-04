@@ -60,11 +60,12 @@ def render_code_editor_with_tabs(commands, max_level, level_number, version, loa
     arguments_dict['loaded_program'] = loaded_program
     arguments_dict['adventures'] = adventures
     arguments_dict['adventure_name'] = adventure_name
+    arguments_dict['latest'] = version
 
     return render_template("code-page.html", **arguments_dict, commands=commands)
 
 
-def render_specific_adventure(level_number, adventure, prev_level, next_level):
+def render_specific_adventure(level_number, adventure, version, prev_level, next_level):
     arguments_dict = {}
 
     # Meta stuff
@@ -78,5 +79,6 @@ def render_specific_adventure(level_number, adventure, prev_level, next_level):
     arguments_dict['enforce_developers_mode'] = None
     arguments_dict['teacher_adventures'] = []
     arguments_dict['adventures'] = adventure
+    arguments_dict['latest'] = version
 
     return render_template("code-page.html", **arguments_dict)
