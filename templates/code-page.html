@@ -29,7 +29,7 @@
     window.State.adventure_name_onload = window.State.adventure_name;
     // We load the adventures into the js to have access to their saved programs (if any).
     window.State.adventures = {{ adventures|tojson }};
-    window.State.loaded_program = {{ loaded_program|tojson }};
+    window.State.loaded_program = {% if loaded_program %}{{ loaded_program|tojson }}{% endif %};
     window.State.default_program_name = {{ (_('level_title') + ' ' + level_nr)|tojson }};
   </script>
   <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>

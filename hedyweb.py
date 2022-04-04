@@ -57,10 +57,6 @@ def render_code_editor_with_tabs(commands, max_level, level_number, version, loa
     arguments_dict['hide_cheatsheet'] = hide_cheatsheet
     arguments_dict['enforce_developers_mode'] = enforce_developers_mode
     arguments_dict['teacher_adventures'] = teacher_adventures
-    arguments_dict['menu'] = True
-    arguments_dict['latest'] = version
-    arguments_dict['selected_page'] = 'code'
-    arguments_dict['page_title'] = f'Level {level_number} – Hedy'
     arguments_dict['loaded_program'] = loaded_program
     arguments_dict['adventures'] = adventures
     arguments_dict['adventure_name'] = adventure_name
@@ -81,14 +77,6 @@ def render_specific_adventure(level_number, adventure, prev_level, next_level):
     arguments_dict['hide_cheatsheet'] = None
     arguments_dict['enforce_developers_mode'] = None
     arguments_dict['teacher_adventures'] = []
-    arguments_dict['menu'] = True
-    arguments_dict['latest'] = None
-    arguments_dict['selected_page'] = 'code'
-    arguments_dict['page_title'] = f'Level {level_number} – Hedy'
-    arguments_dict['username'] = None
-    arguments_dict['is_teacher'] = None
-    arguments_dict['loaded_program'] = None
     arguments_dict['adventures'] = adventure
-    arguments_dict['adventure_name'] = None
 
     return render_template("code-page.html", **arguments_dict)
