@@ -2,7 +2,7 @@ import collections
 import os
 from flask_babel import gettext
 import utils
-from hedy_content import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
@@ -10,7 +10,6 @@ import urllib
 from flask import request, session, make_response, jsonify, redirect
 from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku
 import datetime
-from iso3166 import countries_by_alpha2
 from functools import wraps
 from config import config
 import boto3
@@ -70,7 +69,6 @@ def hash(password, salt):
     return bcrypt.hashpw(bytes(password, 'utf-8'), bytes(salt, 'utf-8')).decode('utf-8')
 
 
-countries = {k: v.name for k, v in countries_by_alpha2.items()}
 # The current user is a slice of the user information from the database and placed on the Flask session.
 # The main purpose of the current user is to provide a convenient container for
 # * username
@@ -318,7 +316,7 @@ def routes(app, database):
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return gettext('gender_invalid'), 400
         if 'country' in body:
-            if not body['country'] in countries:
+            if not body['country'] in COUNTRIES:
                 return gettext('country_invalid'), 400
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
             return gettext('experience_invalid'), 400
@@ -497,7 +495,7 @@ def routes(app, database):
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return gettext('gender_invalid'), 400
         if 'country' in body:
-            if not body['country'] in countries:
+            if not body['country'] in COUNTRIES:
                 return gettext('country_invalid'), 400
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
             return gettext('experience_invalid'), 400
