@@ -29,6 +29,15 @@ class TestsLevel4(HedyTester):
       max_level=17,
       expected=expected)
 
+  def test_print_no_sapce(self):
+    code = "print'hallo wereld!'"
+    expected = "print(f'hallo wereld!')"
+
+    self.multi_level_tester(
+      code=code,
+      max_level=17,
+      expected=expected)
+
   def test_print_single_quoted_string_with_inner_double_quote(self):
     code = """print 'quote is "'"""
     expected = """print(f'quote is "')"""
