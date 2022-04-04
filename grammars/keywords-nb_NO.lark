@@ -1,30 +1,30 @@
-_PRINT: "skriv" | "print"
-_ASK: "spør" | "ask"
-_ECHO: "ekko" | "echo"
-_FORWARD: "frem" | "forward"
-_TURN: "snu" | "turn"
-right: "høyre" | "right"
-left: "venstre" | "left"
-_IS: "er" | "is"
-_SLEEP: "sov" | "sleep"
-_ADD_LIST: "legg" | "add"
-_TO_LIST: "til" | "to"
-_REMOVE: "fjern" | "remove"
-_FROM: "fra" | "from"
-_AT: "på" | "at"
-random: "tilfeldig" | "random"
-_IN: "i" | "in"
-_IF: "hvis" | "if"
+_PRINT:( "skriv" | "print") _SPACE?
+_ASK: ("spør" | "ask") _SPACE?
+_ECHO: ("ekko" | "echo") _SPACE?
+_FORWARD: ("frem" | "forward") _SPACE?
+_TURN: ("snu" | "turn") _SPACE?
+right: ("høyre" | "right") _SPACE?
+left: ("venstre" | "left") _SPACE?
+_IS: _SPACE ("er" | "is") _SPACE
+_SLEEP: ("sov" | "sleep") _SPACE?
+_ADD_LIST: ("legg" | "add") _SPACE
+_TO_LIST: _SPACE ("til" | "to") _SPACE
+_REMOVE: ("fjern" | "remove") _SPACE
+_FROM: _SPACE ("fra" | "from") _SPACE
+_AT: _SPACE ("på" | "at") _SPACE
+random: ("tilfeldig" | "random") _SPACE?
+_IN: _SPACE ("i" | "in") _SPACE
+_IF: ("hvis" | "if") _SPACE
 _ELSE: "ellers" | "else"
-_AND: "og" | "and"
-_REPEAT: "gjenta" | "repeat"
-_TIMES: "ganger" | "times"
-_FOR: "for"
-_RANGE: "sekvens" | "range"
-_TO: "til" | "to"
+_AND: _SPACE ("og" | "and") _SPACE
+_REPEAT: ("gjenta" | "repeat") _SPACE
+_TIMES: _SPACE ("ganger" | "times")
+_FOR: ("for") _SPACE
+_RANGE: ("sekvens" | "range") _SPACE?
+_TO: _SPACE ("til" | "to") _SPACE
 _STEP: "steg" | "step"
-_ELIF: "elhvis" | "elif"
+_ELIF: _SPACE? ("elhvis" | "elif") _SPACE
 _INPUT: "inndata" | "input"
-_OR: "eller" | "or"
-_WHILE: "mens" | "while"
+_OR: _SPACE ("eller" | "or") _SPACE
+_WHILE: ("mens" | "while") _SPACE
 _LENGTH: "lengde" | "length"
