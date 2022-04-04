@@ -47,10 +47,6 @@ COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
 for lang in ALL_LANGUAGES.keys():
     COMMANDS[lang] = hedy_content.Commands(lang)
 
-LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
-for lang in ALL_LANGUAGES.keys():
-    LEVEL_DEFAULTS[lang] = hedy_content.LevelDefaults(lang)
-
 ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
@@ -878,9 +874,6 @@ def index(level, program_id):
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
 
-    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
-    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
-
     level_commands_for_lang = COMMANDS[g.lang]
     level_commands_for_lang.set_keyword_language(g.keyword_lang)
 
@@ -903,8 +896,6 @@ def index(level, program_id):
         commands = level_commands_for_lang.get_commands_for_level(level)
     except:
         commands = None # No separate commands file for this language
-    defaults = level_defaults_for_lang.get_defaults_for_level(level)
-    max_level = level_defaults_for_lang.max_level()
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
@@ -919,9 +910,8 @@ def index(level, program_id):
         hide_cheatsheet = True
 
     return hedyweb.render_code_editor_with_tabs(
-        level_defaults=defaults,
         commands=commands,
-        max_level=max_level,
+        max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
         version=version(),
         adventures=adventures,
@@ -997,10 +987,8 @@ def get_specific_adventure(name, level):
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
-    defaults = level_defaults_for_lang.get_defaults_for_level(level)
-    return hedyweb.render_specific_adventure(
-        level_defaults=defaults, level_number=level, adventure=adventure, prev_level=prev_level, next_level=next_level)
+    return hedyweb.render_specific_adventure(level_number=level, adventure=adventure,
+                                             prev_level=prev_level, next_level=next_level)
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
@@ -1010,7 +998,7 @@ def get_cheatsheet_page(level):
     level_defaults_for_lang.set_keyword_language(g.keyword_lang)
     defaults = level_defaults_for_lang.get_defaults_for_level(int(level))
 
-    return render_template("cheatsheet.html", defaults=defaults, level=level)
+    return render_template("cheatsheet.html", level=level)
 
 @app.errorhandler(404)
 def not_found(exception):

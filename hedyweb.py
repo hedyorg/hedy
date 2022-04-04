@@ -44,13 +44,7 @@ class PageTranslations:
     return d
 
 
-def render_code_editor_with_tabs(level_defaults, commands, max_level, level_number, version, loaded_program, adventures, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
-  user = current_user()
-
-  if not level_defaults:
-    return utils.error_page(error=404,  ui_message=gettext('no_such_level'))
-
-
+def render_code_editor_with_tabs(commands, max_level, level_number, version, loaded_program, adventures, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
   arguments_dict = {}
 
   # Meta stuff
@@ -67,14 +61,9 @@ def render_code_editor_with_tabs(level_defaults, commands, max_level, level_numb
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
-  arguments_dict['username'] = user['username']
-  arguments_dict['is_teacher'] = is_teacher(user)
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventures'] = adventures
   arguments_dict['adventure_name'] = adventure_name
-
-  # Merge level defaults into adventures so it is rendered as the first tab
-  arguments_dict.update(**attr.asdict(level_defaults))
 
   return render_template("code-page.html", **arguments_dict, commands=commands)
 
