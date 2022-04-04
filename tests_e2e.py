@@ -269,6 +269,17 @@ class TestPages(AuthHelper):
         # (Note: this only happens in a dev environment)
         self.get_data('/admin')
 
+    def test_get_cheatsheet(self):
+        # WHEN attempting to get the cheatsheet page
+        # THEN receive an OK response code from the server
+        self.get_data('/cheatsheet')
+
+    def test_invalid_get_cheatsheet(self):
+        # WHEN attempting to get the cheatsheet page with an invalid value
+        # THEN receive an 404 response code from the server
+        self.get_data('/cheatsheet/123', expect_http_code=404)
+        self.get_data('/cheatsheet/panda', expect_http_code=404)
+
 class TestSessionVariables(AuthHelper):
     def test_get_session_variables(self):
         # WHEN getting session variables from the main environment
