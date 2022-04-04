@@ -402,7 +402,7 @@ def routes(app, database):
         forget_current_user()
         if request.cookies.get(TOKEN_COOKIE_NAME):
             DATABASE.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
-        return {}, 200
+        return '', 200
 
     @app.route('/auth/destroy', methods=['POST'])
     @requires_login
@@ -410,13 +410,13 @@ def routes(app, database):
         forget_current_user()
         DATABASE.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         DATABASE.forget_user(user['username'])
-        return {}, 200
+        return '', 200
 
     @app.route('/auth/destroy_public', methods=['POST'])
     @requires_login
     def destroy_public(user):
         DATABASE.forget_public_profile(user['username'])
-        return {}, 200
+        return '', 200
 
     @app.route('/auth/change_student_password', methods=['POST'])
     @requires_login
