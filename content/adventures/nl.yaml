@@ -1,4 +1,34 @@
 adventures:
+    default:
+        name: "Level {level}"
+        description: "Level uitleg"
+        image: ""
+        default_save_name: "level"
+        levels:
+            1:
+                story_text: |
+                    ## Maak een verhaal
+                    In level 1 kun je een verhaal maken met steeds een andere hoofdpersoon die je zelf invoert.
+
+                    Gebruik als eerste regel deze code:
+
+                    ```
+                    {ask} wie is de hoofdpersoon van jouw verhaal
+                    ```
+
+                    Na die eerste regel begin je met `{print}` als de zin moet worden geprint.
+                    Je gebruikt `{echo}` als je wilt dat jouw hoofdpersoon op het einde van de zin komt.
+                example_code: |
+                    ## Voorbeeld Hedy code
+                    ```
+                    {ask} De hoofdpersoon van dit verhaal is
+                    {print} De hoofdpersoon gaat nu in het bos lopen
+                    {echo} Hij is wel een beetje bang, die
+                    {print} Overal hoort hij gekke geluiden
+                    {print} Hij is bang dat dit een spookbos is
+                    ```
+                start_code: "{print} Hier begint jouw verhaal"
+
     story:
         name: "Verhaal"
         description: "Maak een interactief verhaal"
