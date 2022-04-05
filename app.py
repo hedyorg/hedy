@@ -36,7 +36,7 @@ from flask_babel import gettext
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER
+from hedy_content import ALL_LANGUAGES, COUNTRIES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
@@ -1254,6 +1254,10 @@ def hedy_link(level_nr, assignment_nr, subpage=None):
         parts.append('/' + subpage)
     return ''.join(parts)
 
+
+@app.template_global()
+def all_countries():
+    return COUNTRIES
 
 @app.template_global()
 def other_languages():
