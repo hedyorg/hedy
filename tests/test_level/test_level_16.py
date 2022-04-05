@@ -46,6 +46,20 @@ class TestsLevel16(HedyTester):
             expected=expected,
             extra_check_function=check_in_list
         )
+    
+    def test_list_access_space(self):
+        code = textwrap.dedent("""\
+            szamok1 = [ '1' , '2' , '3' , '4' , '5' ]
+            print szamok1 [random]""")
+        
+        expected = textwrap.dedent("""\
+            szamok1 = ['1', '2', '3', '4', '5']
+            print(f'{random.choice(szamok1)}')""")
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected
+        )
 
     def test_print_list_access(self):
         code = textwrap.dedent("""\

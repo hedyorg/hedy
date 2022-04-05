@@ -21,23 +21,13 @@ def collect_snippets(path):
         yaml = YamlFile.for_file(file)
 
         for level in yaml:
-            try:
-                level_number = int(level)
-            except:
-                continue #level nummer geen int -> dan is het oude content, bijv 10-old en is ok
+            level_number = int(level)
             if level_number > hedy.HEDY_MAX_LEVEL:
                 print('content above max level!')
             else:
                 # start_code
                 Hedy_snippets.append(Snippet(filename=file, level=level, field_name='start_code', code=yaml[level]['start_code']))
 
-                # commands.k.demo_code
-                for k, command in enumerate(yaml[level]['commands']):
-                    # todo: at one point all commands should have names again!
-
-                    command_text_short = command['name'] if 'name' in command.keys() else command['explanation'][0:10]
-                    Hedy_snippets.append(
-                        Snippet(filename=file, level=level, field_name='command ' + command_text_short + ' demo_code', code=command['demo_code']))
 
                 # code snippets inside intro_text
                 code_snippet_counter = 0
@@ -50,17 +40,17 @@ def collect_snippets(path):
                         Hedy_snippets.append(Snippet(filename=file, level=level, field_name='intro_text snippet #' + str(code_snippet_counter),
                                                  code=code))
                     except:
-                        print(f'Intro snippet for level {level} has an error')
+                        print(f'Intro snippet for {lang} in level {level} has an error')
     return Hedy_snippets
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../coursedata/level-defaults')]
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/level-defaults')]
 
 lang = None #useful if you want to test just 1 language
 if lang:
     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language == lang]
 
 # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
-keywords = YamlFile.for_file('../../coursedata/keywords/en.yaml').to_dict()
+keywords = YamlFile.for_file('../../content/keywords/en.yaml').to_dict()
 for snippet in Hedy_snippets:
     snippet[1].code = snippet[1].code.format(**keywords)
 

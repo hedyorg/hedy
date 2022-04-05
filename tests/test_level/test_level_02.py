@@ -27,6 +27,12 @@ class TestsLevel2(HedyTester):
     print(f'Hallo welkom bij Hedy!')""")
     self.single_level_tester(code=code, expected=expected)
 
+  def test_print_no_space(self):
+    code = "printHallo welkom bij Hedy!"
+    expected = textwrap.dedent("""\
+    print(f'Hallo welkom bij Hedy!')""")
+    self.single_level_tester(code=code, expected=expected)
+
   def test_print_comma(self):
     code = "print welkom bij steen, schaar, papier"
     expected = textwrap.dedent("""\
@@ -60,11 +66,24 @@ class TestsLevel2(HedyTester):
     print(f'*Jouw* favoriet is dus kleur')""")
 
     self.single_level_tester(code=code, expected=expected)
-  def test_print_quotes(self):
-    code = "print 'Welcome to OceanView!'"
-    expected = textwrap.dedent("""\
-    print(f'\\'Welcome to OceanView! \\'')""")
-    self.single_level_tester(code=code, expected=expected)
+
+  def test_print_inner_single_quote(self):
+    code = "print Welcome to Hedy's!"
+    expected = """print(f'Welcome to Hedy\\'s!')"""
+
+    self.multi_level_tester(code=code, expected=expected, max_level=3)
+
+  def test_print_single_quotes(self):
+    code = "print 'Welcome to Hedy's!'"
+    expected = """print(f'\\'Welcome to Hedy\\'s! \\'')"""
+
+    self.multi_level_tester(code=code, expected=expected, max_level=3)
+
+  def test_print_double_quotes(self):
+    code = 'print "Welcome to Hedy"s!"'
+    expected = """print(f'"Welcome to Hedy"s! "')"""
+
+    self.multi_level_tester(code=code, expected=expected, max_level=3)
 
   def test_print_slashes(self):
     code = "print Welcome to O/ceanView"
@@ -104,6 +123,18 @@ class TestsLevel2(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_assign_with_single_quotes(self):
+    code = "naam is 'Felienne's'"
+    expected = "naam = '\\'Felienne\\'s\\''"
+
+    self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+  def test_assign_with_double_quotes(self):
+    code = 'naam is "Feli"ennes"'
+    expected = """naam = '"Feli"ennes"'"""
+
+    self.multi_level_tester(code=code, expected=expected, max_level=11)
+
   #ask tests
   def test_ask(self):
     code = "kleur is ask wat is je lievelingskleur?"
@@ -112,12 +143,13 @@ class TestsLevel2(HedyTester):
     kleur = input('wat is je lievelingskleur'+'?')""")
 
     self.single_level_tester(code=code, expected=expected)
-  def test_ask_quotes(self):
-    code = "name is ask 'What restaurant'"
-    expected = textwrap.dedent("""\
-    name = input('\\'What restaurant\\'')""")
+
+  def test_ask_single_quotes(self):
+    code = "name is ask 'Who's that'"
+    expected = """name = input('\\'Who\\'s that\\'')"""
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_ask_Spanish_text(self):
     code = "color is ask ask Cuál es tu color favorito?"
     expected = textwrap.dedent("""\

@@ -1,12 +1,12 @@
 command:+= assign_list | add | remove > error_invalid   
 _print_argument: (_SPACE | list_access | textwithoutspaces | punctuation)*
-ask: var _SPACE _IS _SPACE _ASK (_SPACE + (_SPACE | text_ask | punctuation)*)?
+ask: var _IS _ASK ((_SPACE | text_ask | punctuation)*)?
 
-assign: var _SPACE _IS _SPACE (list_access | text) -> assign
-assign_list: var _SPACE _IS _SPACE text_list (_COMMA text_list)+
+assign: var _IS (list_access | text) -> assign
+assign_list: var _IS text_list (_COMMA text_list)+
 
-list_access: var_access _SPACE _AT _SPACE (INT | random) -> list_access //todo: could be merged with list_access_var?
-turtle: _FORWARD (_SPACE (NEGATIVE_NUMBER | NUMBER | list_access | textwithoutspaces))? -> forward | _TURN (_SPACE (NEGATIVE_NUMBER | NUMBER | list_access | textwithoutspaces))? -> turn
+list_access: var_access _AT (INT | random) -> list_access //todo: could be merged with list_access_var?
+turtle: _FORWARD ((NEGATIVE_NUMBER | NUMBER | list_access | textwithoutspaces))? -> forward | _TURN ((NEGATIVE_NUMBER | NUMBER | list_access | textwithoutspaces))? -> turn
 
 // lists are introduced and list separators (comma and arabic comma) have to excluded from text.
 text: /([^\n!?.،,]+)/ -> text
@@ -17,5 +17,5 @@ text_list: /([^\n,،]+)/ -> text // list elements are another exception since th
 // leaving this for now
 some_spaces : /([^\r\n!?. ]+)/ (_SPACE /([^\r\n!?. ]+)/)* -> text
 
-add: _ADD_LIST _SPACE some_spaces _SPACE _TO_LIST _SPACE var_access
-remove: _REMOVE _SPACE some_spaces _SPACE _FROM _SPACE var_access
+add: _ADD_LIST some_spaces _TO_LIST var_access
+remove: _REMOVE some_spaces _FROM var_access

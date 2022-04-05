@@ -825,7 +825,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#turtlecanvas').empty();
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
-    $("#variable_button").trigger("click")
     $('#turtlecanvas').show();
   }
 
