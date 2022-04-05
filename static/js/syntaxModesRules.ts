@@ -111,8 +111,12 @@ There are several categories of keywords:
   In particular, even if they are between 2 words, the syntax highlighting will select them
 
 - SP_K
-  Yhis category of keywords allows you to have keywords that are not preceded
+  This category of keywords allows you to have keywords that are not preceded
   by another word, but that can be followed immediately by another word. (see the PR #2413)
+
+- K_SP
+  This category of keywords allows you to have keywords that can be preceded immediately
+  by another word, but that are not followed by another word.
 
 */
 
@@ -135,6 +139,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._TURN,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   5 :{
     "SP_K_SP" : [
@@ -157,6 +162,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._TURN,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   6 :{
     "SP_K_SP" : [
@@ -179,6 +185,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._TURN,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   7 :{
     "SP_K_SP" : [
@@ -203,6 +210,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._TURN,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   8 :{
     "SP_K_SP" : [
@@ -227,6 +235,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._TURN,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   9 :{
     "SP_K_SP" : [
@@ -251,6 +260,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._TURN,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   10 :{
     "SP_K_SP" : [
@@ -276,6 +286,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._TURN,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   11 :{
     "SP_K_SP" : [
@@ -299,6 +310,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._SLEEP,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   12 :{
     "SP_K_SP" : [
@@ -322,6 +334,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._SLEEP,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   13 :{
     "SP_K_SP" : [
@@ -347,6 +360,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._SLEEP,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   14 :{
     "SP_K_SP" : [
@@ -372,6 +386,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._SLEEP,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   15 :{
     "SP_K_SP" : [
@@ -398,6 +413,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._SLEEP,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   16 :{
     "SP_K_SP" : [
@@ -424,6 +440,7 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._SLEEP,
       currentLang._RANDOM,
     ],
+    "K_SP" : [],
   },
   17 :{
     "SP_K_SP" : [
@@ -442,7 +459,6 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._AND,
       currentLang._OR,
       currentLang._WHILE,
-      currentLang._ELIF,
     ],
     "K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":"],
     "SP_K" : [
@@ -450,6 +466,9 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._ASK,
       currentLang._SLEEP,
       currentLang._RANDOM,
+    ],
+    "K_SP" : [
+      currentLang._ELIF,
     ],
   },
   18 :{
@@ -469,7 +488,6 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._AND,
       currentLang._OR,
       currentLang._WHILE,
-      currentLang._ELIF,
       currentLang._INPUT,
     ],
     "K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":","\\(","\\)"],
@@ -477,6 +495,9 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._PRINT,
       currentLang._SLEEP,
       currentLang._RANDOM,
+    ],
+    "K_SP" : [
+      currentLang._ELIF,
     ],
   },
 }
@@ -752,6 +773,17 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
     });
   }
 
+  /* Rules for commands of K_SP */
+  /*  This category of keywords allows you to have keywords that can be preceded immediately
+  by another word, but that are not followed by another word.*/
+  for (const command in KEYWORDS[level]["K_SP"]) {
+    list_rules.push({
+      regex: KEYWORDS[level]["K_SP"][command] + END_WORD,
+      token: "keyword",
+      next: "start", 
+    });
+  }
+
   /*console.log(list_rules);*/
   return list_rules;
 }
@@ -759,6 +791,7 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
 
 
 
+  
 
 
 
