@@ -106,11 +106,11 @@ There are several categories of keywords:
 - SP_K_SP
   These are the keywords that must be "alone" so neither preceded nor followed directly by a word 
 
-- SP_K
+- K
   These are the keywords that are independent of the context (formerly the symbols).
   In particular, even if they are between 2 words, the syntax highlighting will select them
 
-- K
+- SP_K
   Yhis category of keywords allows you to have keywords that are not preceded
   by another word, but that can be followed immediately by another word. (see the PR #2413)
 
@@ -132,8 +132,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._REMOVE,
       currentLang._FROM,
     ],
-    "SP_K" : [","],
-    "K" : [],
+    "K" : [","],
+    "SP_K" : [],
   },
   5 :{
     "SP_K_SP" : [
@@ -153,8 +153,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._IF,
       currentLang._ELSE,
     ],
-    "SP_K" : [","],
-    "K" : [],
+    "K" : [","],
+    "SP_K" : [],
   },
   6 :{
     "SP_K_SP" : [
@@ -174,8 +174,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._IF,
       currentLang._ELSE,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [],
   },
   7 :{
     "SP_K_SP" : [
@@ -197,8 +197,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._REPEAT,
       currentLang._TIMES,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [],
   },
   8 :{
     "SP_K_SP" : [
@@ -220,8 +220,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._REPEAT,
       currentLang._TIMES,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [],
   },
   9 :{
     "SP_K_SP" : [
@@ -243,8 +243,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._REPEAT,
       currentLang._TIMES,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [],
   },
   10 :{
     "SP_K_SP" : [
@@ -267,8 +267,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._TIMES,
       currentLang._FOR,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [],
   },
   11 :{
     "SP_K_SP" : [
@@ -289,8 +289,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._RANGE,
       currentLang._TO,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [],
   },
   12 :{
     "SP_K_SP" : [
@@ -311,8 +311,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._RANGE,
       currentLang._TO,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [],
   },
   13 :{
     "SP_K_SP" : [
@@ -335,8 +335,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._AND,
       currentLang._OR,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [],
   },
   14 :{
     "SP_K_SP" : [
@@ -359,8 +359,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._AND,
       currentLang._OR,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+","<",">","!"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+","<",">","!"],
+    "SP_K" : [],
   },
   15 :{
     "SP_K_SP" : [
@@ -384,8 +384,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._OR,
       currentLang._WHILE,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+","<",">","!"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+","<",">","!"],
+    "SP_K" : [],
   },
   16 :{
     "SP_K_SP" : [
@@ -409,8 +409,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._OR,
       currentLang._WHILE,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]"],
+    "SP_K" : [],
   },
   17 :{
     "SP_K_SP" : [
@@ -435,8 +435,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._WHILE,
       currentLang._ELIF,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":"],
+    "SP_K" : [],
   },
   18 :{
     "SP_K_SP" : [
@@ -461,8 +461,8 @@ const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._ELIF,
       currentLang._INPUT,
     ],
-    "SP_K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":","\\(","\\)"],
-    "K" : [],
+    "K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":","\\(","\\)"],
+    "SP_K" : [],
   },
 }
 
@@ -715,23 +715,23 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
     });
   }
 
-  /* Rules for commands of SP_K */
+  /* Rules for commands of K */
   /*  These are the keywords that are independent of the context (formerly the symbols).
   In particular, even if they are between 2 words, the syntax highlighting will select them*/
-  for (const command in KEYWORDS[level]["SP_K"]) {
+  for (const command in KEYWORDS[level]["K"]) {
     list_rules.push({
-      regex: KEYWORDS[level]["SP_K"][command],
+      regex: KEYWORDS[level]["K"][command],
       token: "keyword",
       next: "start", 
     });
   }
 
-  /* Rules for commands of K */
+  /* Rules for commands of SP_K */
   /*  This category of keywords allows you to have keywords that are not preceded
   by another word, but that can be followed immediately by another word. (see the PR #2413)*/
-  for (const command in KEYWORDS[level]["K"]) {
+  for (const command in KEYWORDS[level]["SP_K"]) {
     list_rules.push({
-      regex: START_WORD + KEYWORDS[level]["K"][command],
+      regex: START_WORD + KEYWORDS[level]["SP_K"][command],
       token: "keyword",
       next: "start", 
     });
