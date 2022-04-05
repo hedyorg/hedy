@@ -732,12 +732,48 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
           token: 'variable', // it would be better to use `constant.numeric` but the color is the same as the text
           next: 'start',
         });
+
+        /* Special case of an order directly followed by a number */
+        for (const command in KEYWORDS[level]["SP_K"]) { 
+          list_rules.push({
+            regex: START_WORD + "("+ KEYWORDS[level]["SP_K"][command] + ')([0-9]*\\.?[0-9]+)' + END_WORD,
+            token: ['text','keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
+            next: 'start',
+          });
+        }
+        for (const command in KEYWORDS[level]["K"]) { 
+          list_rules.push({
+            regex: "(" + KEYWORDS[level]["K"][command] + ')([0-9]*\\.?[0-9]+)' + END_WORD,
+            token: ['keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
+            next: 'start',
+          });
+        }
+        
+
       } else {
         list_rules.push({
           regex: START_WORD + '[0-9]+' + END_WORD,
           token: 'variable', // it would be better to use `constant.numeric` but the color is the same as the text
           next: 'start',
         });
+
+        /* Special case of an order directly followed by a number */
+        for (const command in KEYWORDS[level]["SP_K"]) { 
+          list_rules.push({
+            regex: START_WORD + "("+ KEYWORDS[level]["SP_K"][command] + ')([0-9]+)' + END_WORD,
+            token: ['text','keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
+            next: 'start',
+          });
+        }
+        for (const command in KEYWORDS[level]["K"]) { 
+          list_rules.push({
+            regex: "(" + KEYWORDS[level]["K"][command] + ')([0-9]+)' + END_WORD,
+            token: ['keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
+            next: 'start',
+          });
+        }
+
+
       }
   }
 
@@ -784,7 +820,7 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
     });
   }
 
-  /*console.log(list_rules);*/
+  console.log(list_rules);
   return list_rules;
 }
 
