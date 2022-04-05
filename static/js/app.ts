@@ -1185,7 +1185,22 @@ export function get_trimmed_code() {
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
   // Remove whitespace at the end of every line
-  return theGlobalEditor?.getValue().replace(/ +$/mg, '');
+
+  // ignore the lines with a breakpoint in it.
+  let breakpoints = editor.session.getBreakpoints();
+  let code = theGlobalEditor.getValue();
+  if (code) {
+    let lines = code.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      if (breakpoints[i] == 'ace_breakpoint') {
+        lines[i] = '';
+      }
+      code = lines.join('\n');
+    }
+  }
+  // regex for any number of whitespace \s*
+  // g: global (replace all matches, not just the first one)
+  return code.replace(/\s*$/gm, '');
 }
 
 export function confetti_cannon(){
@@ -1478,9 +1493,9 @@ export function filter_admin() {
   }
 }
 
-var editor = ace.edit( "editor" );
+var editor = ace.edit("editor");
 
-editor.on("guttermousedown", function (e) {
+editor.on("guttermousedown", function (e: any) {
   var target = e.domEvent.target;
   if (target.className.indexOf("ace_gutter-cell") == -1)
     return;
@@ -1489,37 +1504,39 @@ editor.on("guttermousedown", function (e) {
     return;
 
   var breakpoints = e.editor.session.getBreakpoints(row, 0);
-  console.log(breakpoints);
   var row = e.getDocumentPosition().row;
-  if (typeof breakpoints[row] === typeof undefined)
+  if (typeof breakpoints[row] === typeof undefined) {
     e.editor.session.setBreakpoint(row);
+  }
 
-  else
+  else {
     e.editor.session.clearBreakpoint(row);
-  e.stop();
+    e.stop();
+  }
 });
 
-editor.renderer.on("afterRender", function () {
+editor.renderer.on("afterRender", function(){
   var breakpoints = editor.session.getBreakpoints();
-  adjustLines(breakpoints);
+	adjustLines(breakpoints);
 });
 
 function adjustLines(disabledRow: []) {
-  var editorContainer = document.getElementById("editor");
-  var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
-  var lines = textContainer?.getElementsByClassName("ace_line");
+    // We have to specify the correct editor here
+    var editorContainer = document.getElementById("editor");
+    var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+    var lines = textContainer?.getElementsByClassName("ace_line");
 
-  if (lines) {
-    for (var i = 0; i < lines.length; i++) {
-      if (disabledRow[i] == 'ace_breakpoint') {
-        var pitem = lines[i];
-        addDisabledClass(pitem);
-      } else {
-        var pitem = lines[i];
-        removeDisabledClass(pitem);
-      }
+    if (lines) {
+        for (var i = 0; i < lines.length; i++) {
+            if (disabledRow[i] == 'ace_breakpoint') {
+                var currentLine = lines[i];
+                addDisabledClass(currentLine);
+            } else {
+                var currentLine = lines[i];
+                removeDisabledClass(currentLine);
+            }
+        }
     }
-  }
 }
 
 function addDisabledClass(str: Element) {
