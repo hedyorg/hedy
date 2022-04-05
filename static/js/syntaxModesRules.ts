@@ -98,9 +98,27 @@ switch(window.State.keyword_language){
     break;
 }
 
-const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
+
+/* 
+This variable lists all the keywords in each level, i.e. everything that should be displayed in red (of type `keyword`)
+
+There are several categories of keywords: 
+- SP_K_SP
+  These are the keywords that must be "alone" so neither preceded nor followed directly by a word 
+
+- SP_K
+  These are the keywords that are independent of the context (formerly the symbols).
+  In particular, even if they are between 2 words, the syntax highlighting will select them
+
+- K
+  Yhis category of keywords allows you to have keywords that are not preceded
+  by another word, but that can be followed immediately by another word. (see the PR #2413)
+
+*/
+
+const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
   4 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -114,11 +132,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._REMOVE,
       currentLang._FROM,
     ],
-    "cat2" : [","],
-    "cat3" : [],
+    "SP_K" : [","],
+    "K" : [],
   },
   5 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -135,11 +153,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._IF,
       currentLang._ELSE,
     ],
-    "cat2" : [","],
-    "cat3" : [],
+    "SP_K" : [","],
+    "K" : [],
   },
   6 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -156,11 +174,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._IF,
       currentLang._ELSE,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+"],
+    "K" : [],
   },
   7 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -179,11 +197,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._REPEAT,
       currentLang._TIMES,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+"],
+    "K" : [],
   },
   8 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -202,11 +220,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._REPEAT,
       currentLang._TIMES,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+"],
+    "K" : [],
   },
   9 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -225,11 +243,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._REPEAT,
       currentLang._TIMES,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+"],
+    "K" : [],
   },
   10 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -249,11 +267,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._TIMES,
       currentLang._FOR,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+"],
+    "K" : [],
   },
   11 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -271,11 +289,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._RANGE,
       currentLang._TO,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+"],
+    "K" : [],
   },
   12 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -293,11 +311,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._RANGE,
       currentLang._TO,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+"],
+    "K" : [],
   },
   13 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -317,11 +335,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._AND,
       currentLang._OR,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+"],
+    "K" : [],
   },
   14 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -341,11 +359,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._AND,
       currentLang._OR,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+","<",">","!"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+","<",">","!"],
+    "K" : [],
   },
   15 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -366,11 +384,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._OR,
       currentLang._WHILE,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+","<",">","!"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+","<",">","!"],
+    "K" : [],
   },
   16 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -391,11 +409,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._OR,
       currentLang._WHILE,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]"],
+    "K" : [],
   },
   17 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._ASK,
       currentLang._IS,
       currentLang._PRINT,
@@ -417,11 +435,11 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._WHILE,
       currentLang._ELIF,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":"],
+    "K" : [],
   },
   18 :{
-    "cat1" : [
+    "SP_K_SP" : [
       currentLang._IS,
       currentLang._PRINT,
       currentLang._SLEEP,
@@ -443,8 +461,8 @@ const COMMANDS: {[key:number]: {[key:string]: string[] }  } = {
       currentLang._ELIF,
       currentLang._INPUT,
     ],
-    "cat2" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":","\\(","\\)"],
-    "cat3" : [],
+    "SP_K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":","\\(","\\)"],
+    "K" : [],
   },
 }
 
@@ -469,7 +487,6 @@ const LEVELS = [
   { name: 'level16', rules: {"start" : [ ruleALL(16, true, true) ] },},
   { name: 'level17', rules: {"start" : [ ruleALL(17, true, true) ] },},
   { name: 'level18', rules: {"start" : [ ruleALL(18, true, true) ] },},
-
 ];
 
 
@@ -688,19 +705,33 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
       }
   }
 
-  /* Rules for commands of cat1 */
-  for (const command in COMMANDS[level]["cat1"]) {
+  /* Rules for commands of SP_K_SP */
+  /* These are the keywords that must be "alone" so neither preceded nor followed directly by a word */
+  for (const command in KEYWORDS[level]["SP_K_SP"]) {
     list_rules.push({
-      regex: START_WORD + COMMANDS[level]["cat1"][command] + END_WORD,
+      regex: START_WORD + KEYWORDS[level]["SP_K_SP"][command] + END_WORD,
       token: "keyword",
       next: "start", 
     });
   }
 
-  /* Rules for commands of cat2 */
-  for (const command in COMMANDS[level]["cat2"]) {
+  /* Rules for commands of SP_K */
+  /*  These are the keywords that are independent of the context (formerly the symbols).
+  In particular, even if they are between 2 words, the syntax highlighting will select them*/
+  for (const command in KEYWORDS[level]["SP_K"]) {
     list_rules.push({
-      regex: COMMANDS[level]["cat2"][command],
+      regex: KEYWORDS[level]["SP_K"][command],
+      token: "keyword",
+      next: "start", 
+    });
+  }
+
+  /* Rules for commands of K */
+  /*  This category of keywords allows you to have keywords that are not preceded
+  by another word, but that can be followed immediately by another word. (see the PR #2413)*/
+  for (const command in KEYWORDS[level]["K"]) {
+    list_rules.push({
+      regex: START_WORD + KEYWORDS[level]["K"][command],
       token: "keyword",
       next: "start", 
     });
