@@ -19,6 +19,8 @@ import program_repair
 import yaml
 
 # Some useful constants
+from app import process
+
 HEDY_MAX_LEVEL = 18
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
@@ -1868,6 +1870,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
+    print(f'Memory usage before transpiling: {process.memory_info().rss / 1024 / 1000} mb')
     transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
 
