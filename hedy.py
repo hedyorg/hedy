@@ -10,7 +10,6 @@ from lark import Tree, Transformer, visitors, v_args
 from os import path
 
 import warnings
-import hedy
 import hedy_translation
 import utils
 from collections import namedtuple
@@ -473,9 +472,9 @@ class TypeValidator(Transformer):
         try:
             type_ = self.get_type(tree.children[1])
             self.save_type_to_lookup(tree.children[0].children[0], type_)
-        except hedy.exceptions.UndefinedVarException as ex:
+        except exceptions.UndefinedVarException as ex:
             if self.level >= 12:
-                raise hedy.exceptions.UnquotedAssignTextException(text=ex.arguments['name'])
+                raise exceptions.UnquotedAssignTextException(text=ex.arguments['name'])
             else:
                 raise
 
@@ -633,7 +632,7 @@ class TypeValidator(Transformer):
         if prom_left_type != prom_right_type:
             left_arg = tree.children[0].children[0]
             right_arg = tree.children[1].children[0]
-            raise hedy.exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
+            raise exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
         return prom_left_type, prom_right_type
 
     def validate_args_type_allowed(self, command, children, meta):
@@ -666,7 +665,7 @@ class TypeValidator(Transformer):
             if in_lookup:
                 return type_in_lookup
             else:
-                raise hedy.exceptions.UndefinedVarException(name=var_name)
+                raise exceptions.UndefinedVarException(name=var_name)
 
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
@@ -1052,7 +1051,7 @@ class ConvertToPython(Transformer):
         elif ConvertToPython.is_quoted(name):
             return f"{name}.zfill(100)"
         else:
-            raise hedy.exceptions.UndefinedVarException(name)
+            raise exceptions.UndefinedVarException(name)
 
     def make_f_string(self, args):
         argument_string = ''
@@ -1214,11 +1213,11 @@ class ConvertToPython_2(ConvertToPython_1):
     def error_ask_dep_2(self, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
-        raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var")
+        raise exceptions.WrongLevelException(1, 'ask', "ask_needs_var")
     def error_echo_dep_2(self, args):
         # echo is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
-        raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
+        raise exceptions.WrongLevelException(1,  'echo', "echo_out")
 
     def turn(self, args):
         if len(args) == 0:
@@ -1967,20 +1966,20 @@ def preprocess_blocks(code, level):
                 # there is inconsistent indentation, not sure if that is too much or too little!
                 if leading_spaces < current_number_of_indents * indent_size:
                     fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                    raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                    raise exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                                  indent_size=indent_size, fixed_code=fixed_code)
                 else:
                     fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                    raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                    raise exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                                  indent_size=indent_size, fixed_code=fixed_code)
 
             current_number_of_indents = leading_spaces // indent_size
-            if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
-                raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
+            if current_number_of_indents > 1 and level == LEVEL_STARTING_INDENTATION:
+                raise exceptions.LockedLanguageFeatureException(concept="nested blocks")
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+            raise exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                          indent_size=indent_size, fixed_code=fixed_code)
 
         if needs_indentation(line):
@@ -1990,7 +1989,7 @@ def preprocess_blocks(code, level):
 
         if current_number_of_indents - previous_number_of_indents > 1:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+            raise exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                             indent_size=indent_size, fixed_code=fixed_code)
 
 
@@ -2037,7 +2036,7 @@ def process_input_string(input_string, level):
         result = result.replace("\\", "\\\\")
 
     # In level 8 we add indent-dedent blocks to the code before parsing
-    if level >= hedy.LEVEL_STARTING_INDENTATION:
+    if level >= LEVEL_STARTING_INDENTATION:
         result = preprocess_blocks(result, level)
 
     return result
@@ -2112,7 +2111,7 @@ def is_program_valid(program_root, input_string, level, lang):
             if closest == 'keyword':  # we couldn't find a suggestion
                 if invalid_command == Command.turn:
                     arg = ''.join(invalid_info.arguments).strip()
-                    raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
+                    raise exceptions.InvalidArgumentException(command=invalid_info.command,
                                                                    allowed_types=get_allowed_types(Command.turn, level),
                                                                    invalid_argument=arg)
                 # clearly the error message here should be better or it should be a different one!

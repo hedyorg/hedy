@@ -266,6 +266,8 @@ def before_request_begin_logging():
 @app.after_request
 def after_request_log_status(response):
     print(f'The memory after this request: {process.memory_info().rss / 1024 / 1000} mb')
+    print(gc.isenabled())
+    gc.enable()
     gc.collect(generation=0)
     print(gc.get_stats())
     print(f'After cleaning the memory: {process.memory_info().rss / 1024 / 1000} mb')
