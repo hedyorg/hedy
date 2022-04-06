@@ -965,8 +965,23 @@ def profile_page(user):
     programs = DATABASE.public_programs_for_user(user['username'])
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
+    classes = []
+    if profile.get('classes'):
+        for class_id in profile.get('classes'):
+            classes.append(DATABASE.get_class(class_id))
+
+    invite = DATABASE.get_username_invite(user['username'])
+    if invite:
+        # If there is an invite: retrieve the class information
+        class_info = DATABASE.get_class(invite.get('class_id', None))
+        if class_info:
+            invite['teacher'] = class_info.get('teacher')
+            invite['class_name'] = class_info.get('name')
+            invite['join_link'] = class_info.get('link')
+
     return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
-                           user_data=profile, public_settings=public_profile_settings, current_page='my-profile')
+                           user_data=profile, invite_data=invite, public_settings=public_profile_settings,
+                           user_classes=classes, current_page='my-profile')
 
 
 @app.route('/<page>')
