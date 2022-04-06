@@ -1281,7 +1281,7 @@ def public_user_page(username):
     user_public_info = DATABASE.get_public_profile_settings(username)
     if user_public_info:
         user_programs = DATABASE.public_programs_for_user(username)
-        user_achievements = DATABASE.progress_by_username(username)
+        user_achievements = DATABASE.progress_by_username(username) or {}
 
         favourite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
@@ -1290,7 +1290,7 @@ def public_user_page(username):
             user_programs = user_programs[:5]
 
         last_achieved = None
-        if 'achieved' in user_achievements:
+        if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
 
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
