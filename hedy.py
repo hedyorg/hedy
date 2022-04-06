@@ -924,11 +924,6 @@ class IsValid(Filter):
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    # def program(self, meta, args):
-    #     if len(args) == 0:
-    #         return False, InvalidInfo("empty program")
-    #     return super().program(meta, args)
-
     def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
@@ -2094,8 +2089,6 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)
-        elif invalid_info.error_type == 'empty program':
-            raise exceptions.EmptyProgramException()
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:

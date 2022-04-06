@@ -154,10 +154,6 @@ class UnquotedAssignTextException(HedyException):
     def __init__(self, text):
         super().__init__('Unquoted Assignment', text=text)
 
-class EmptyProgramException(HedyException):
-    def __init__(self):
-        super().__init__('Empty Program')
-
 class LonelyEchoException(HedyException):
     def __init__(self):
         super().__init__('Lonely Echo')
