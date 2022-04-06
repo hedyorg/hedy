@@ -105,6 +105,7 @@ switch(window.State.keyword_language){
 const COMMANDS: {[key:number]: string[]} = {
   4 :[
     currentLang._ASK,
+    currentLang._COLOR,
     currentLang._IS,
     currentLang._PRINT,
     currentLang._FORWARD,

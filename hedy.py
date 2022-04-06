@@ -1177,7 +1177,6 @@ class ConvertToPython_1(ConvertToPython):
         return self.make_forward(int(args[0]))
 
     def color(self, args):
-        if arg == 'red':
             return "t.pencolor('red')"
 
     def turn(self, args):
