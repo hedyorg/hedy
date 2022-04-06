@@ -1,4 +1,5 @@
 # coding=utf-8
+import gc
 import sys
 import tracemalloc
 
@@ -185,7 +186,6 @@ s = None
 
 @app.route('/research_memory', methods=['GET'])
 def get_memory_leaks():
-    print("Let's check some memory...")
     start_memory = process.memory_info().rss / 1024 / 1000
     # Start some API Calls
     for _ in range(50):
@@ -194,12 +194,43 @@ def get_memory_leaks():
 
     print("-----------------------------------------------------")
     print("Let's start by calling the main page a few times...")
-    print(f'Memory before API call: {start_memory}')
-    print(f'Memory after main API call: {after_main_memory}')
+    print(f'Memory before main calls: {start_memory}')
+    print(f'Memory after main calls: {after_main_memory}')
     print(f'Total memory increase is: {round(after_main_memory - start_memory, 2)} mb')
     print("-----------------------------------------------------")
 
-    return "This page is only used for back-end debugging:"
+    gc.collect()
+
+    start_memory = process.memory_info().rss / 1024 / 1000
+    # Start some API Calls
+    for _ in range(50):
+        requests.get('http://0.0.0.0:8080/hedy')
+    after_main_memory = process.memory_info().rss / 1024 / 1000
+
+    print("-----------------------------------------------------")
+    print("Let's start by calling the Hedy page a few times...")
+    print(f'Memory before Hedy calls: {start_memory}')
+    print(f'Memory after Hedy calls: {after_main_memory}')
+    print(f'Total memory increase is: {round(after_main_memory - start_memory, 2)} mb')
+    print("-----------------------------------------------------")
+
+    gc.collect()
+
+    start_memory = process.memory_info().rss / 1024 / 1000
+    # Start some API Calls
+    for _ in range(50):
+        requests.get('http://0.0.0.0:8080/programs')
+    after_main_memory = process.memory_info().rss / 1024 / 1000
+
+    print("-----------------------------------------------------")
+    print("Let's start by calling the programs page a few times...")
+    print(f'Memory before Program calls: {start_memory}')
+    print(f'Memory after Program calls: {after_main_memory}')
+    print(f'Total memory increase is: {round(after_main_memory - start_memory, 2)} mb')
+    print("-----------------------------------------------------")
+
+
+    return "This page is only used for back-end debugging..."
 
 babel = Babel(app)
 
