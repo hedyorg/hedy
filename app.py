@@ -36,7 +36,7 @@ from flask_babel import gettext
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
+from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES, ParsonsProblem
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
@@ -50,6 +50,10 @@ for lang in ALL_LANGUAGES.keys():
 ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
+
+PARSONS = collections.defaultdict(hedy_content.NoSuchParsons)
+for lang in ALL_LANGUAGES.keys():
+    PARSONS[lang] = hedy_content.ParsonsProblem(lang)
 
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
@@ -876,6 +880,9 @@ def index(level, program_id):
 
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
     level_defaults_for_lang.set_keyword_language(g.keyword_lang)
+    parsons_problem_for_lang = PARSONS[g.lang]
+    parsons_problem_for_lang.set_keyword_language(g.keyword_lang)
+
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -894,6 +901,7 @@ def index(level, program_id):
 
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
+    parsons = parsons_problem_for_lang.get_defaults(level)
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
@@ -913,6 +921,7 @@ def index(level, program_id):
         level_number=level,
         version=version(),
         adventures=adventures,
+        parsons=parsons,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,

@@ -18,6 +18,11 @@
                 </div>
               {% endif %}
             {% endfor %}
+            {% for key, parson in parsons.items() %}
+                <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{parson.tab_name}}">
+                    {{parson.tab_name}}
+                </div>
+            {% endfor %}
             {% if specific_adventure %}
                 <h2 class="z-10 my-0 ml-auto pt-8 text-red-500 text-base">{{ _('specific_adventure_mode')|replace("{adventure}", adventures[0].name) }}</h2>
             {% endif %}
@@ -90,6 +95,14 @@
             {% endfor %}
           </div>
           {% endif %}
+        {% endfor %}
+        {% for key, parson in parsons.items() %}
+            <div data-tabtarget="{{parson.tab_name}}" class="hidden">
+                <div>
+                    {{ parson.text|commonmark }}
+                </div>
+                <div class="ltr:clear-right rtl:clear-left"></div>
+            </div>
         {% endfor %}
       </div>
     </div>

@@ -46,7 +46,7 @@ class PageTranslations:
     return d
 
 
-def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
+def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, parsons, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
   user = current_user()
 
   if not level_defaults:
@@ -73,6 +73,7 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, versio
   arguments_dict['is_teacher'] = is_teacher(user)
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventures'] = adventures
+  arguments_dict['parsons'] = parsons
   arguments_dict['adventure_name'] = adventure_name
 
   # Merge level defaults into adventures so it is rendered as the first tab

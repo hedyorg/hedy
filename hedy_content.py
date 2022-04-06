@@ -148,7 +148,28 @@ class Adventures:
   def has_adventures(self):
     return self.adventures_file.exists() and self.adventures_file.get('adventures')
 
+class ParsonsProblem:
+  def __init__(self, language):
+    self.language = language
+    self.keyword_lang = "en"
+    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
+    self.adventures_file = YamlFile.for_file(f'coursedata/parsons/{self.language}.yaml').to_dict()
+
+  def set_keyword_language(self, language):
+    if language != self.keyword_lang:
+        self.keyword_lang = language
+        self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
+
+  def get_defaults(self, level):
+    """Return the level defaults for a given level number."""
+  
+    return copy.deepcopy(self.adventures_file.get(int(level), {}))
+
 class NoSuchAdventure:
+  def get_defaults(self, level):
+    return {}
+
+class NoSuchParsons:
   def get_defaults(self, level):
     return {}
 
