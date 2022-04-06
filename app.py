@@ -1,5 +1,9 @@
 # coding=utf-8
 import sys
+import tracemalloc
+
+import psutil as psutil
+import requests
 
 import hedy_translation
 from website.yaml_file import YamlFile
@@ -173,6 +177,29 @@ logging.basicConfig(
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
+
+# TB -> This is temporary and only relevant for finding memory leaks
+process = psutil.Process(os.getpid())
+tracemalloc.start()
+s = None
+
+@app.route('/research_memory', methods=['GET'])
+def get_memory_leaks():
+    print("Let's check some memory...")
+    start_memory = process.memory_info().rss / 1024 / 1000
+    # Start some API Calls
+    for _ in range(50):
+        requests.get('http://0.0.0.0:8080/')
+    after_main_memory = process.memory_info().rss / 1024 / 1000
+
+    print("-----------------------------------------------------")
+    print("Let's start by calling the main page a few times...")
+    print(f'Memory before API call: {start_memory}')
+    print(f'Memory after main API call: {after_main_memory}')
+    print(f'Total memory increase is: {round(after_main_memory - start_memory, 2)} mb')
+    print("-----------------------------------------------------")
+
+    return "This page is only used for back-end debugging:"
 
 babel = Babel(app)
 
