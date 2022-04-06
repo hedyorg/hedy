@@ -191,7 +191,7 @@ def get_memory_leaks():
 
     start_parsing_memory = process.memory_info().rss / 1024 / 1000
     for _ in range(50):
-        data = {'level': 2, 'code': "forward 10000"}
+        data = {'level': random.randint(2, 10), 'code': "forward 10000"}
         requests.post('http://0.0.0.0:8080/parse', json=data)
     after_parsing_memory = process.memory_info().rss / 1024 / 1000
 
@@ -253,7 +253,6 @@ cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
 @app.before_request
 def before_request_begin_logging():
-    print(f'The memory before this request: {process.memory_info().rss / 1024 / 1000} mb')
     """Initialize the query logging.
 
     This needs to happen as one of the first things, as the database calls
@@ -265,12 +264,6 @@ def before_request_begin_logging():
 
 @app.after_request
 def after_request_log_status(response):
-    print(f'The memory after this request: {process.memory_info().rss / 1024 / 1000} mb')
-    print(gc.isenabled())
-    gc.enable()
-    gc.collect(generation=0)
-    print(gc.get_stats())
-    print(f'After cleaning the memory: {process.memory_info().rss / 1024 / 1000} mb')
     querylog.log_value(http_code=response.status_code)
     return response
 

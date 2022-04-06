@@ -1,9 +1,6 @@
-import os
 import textwrap
-import tracemalloc
 
 import lark
-import psutil
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
@@ -19,9 +16,6 @@ from dataclasses import dataclass, field
 import exceptions
 import program_repair
 import yaml
-
-process = psutil.Process(os.getpid())
-tracemalloc.start()
 
 # Some useful constants
 HEDY_MAX_LEVEL = 18
@@ -1873,9 +1867,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
-    print(f'Memory usage before transpiling: {process.memory_info().rss / 1024 / 1000} mb')
     transpile_result = transpile_inner(input_string, level, lang)
-    print(f'Memory usage after transpiling: {process.memory_info().rss / 1024 / 1000} mb')
     return transpile_result
 
 def translate_characters(s):
