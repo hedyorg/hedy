@@ -6,6 +6,7 @@ export const LANG_en = {
 '_FORWARD':'forward',
 '_TURN':'turn',
 '_LEFT':'left',
+'_COLOR':'(?:color|color)',
 '_RIGHT':'right',
 '_IS':'is',
 '_SLEEP':'sleep',

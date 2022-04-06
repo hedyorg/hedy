@@ -457,6 +457,11 @@ class TypeValidator(Transformer):
             self.validate_args_type_allowed(Command.forward, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
+    def color(self, tree):
+        if tree.children:
+            self.validate_args_type_allowed(Command.color, tree.children, tree.meta)
+        return self.to_typed_tree(tree)
+
     def turn(self, tree):
         if tree.children:
             name = tree.children[0].data
@@ -785,6 +790,9 @@ class UsesTurtle(Transformer):
 
 
     def forward(self, args):
+        return True
+
+    def color(self, args):
         return True
 
     def turn(self, args):
@@ -1168,6 +1176,10 @@ class ConvertToPython_1(ConvertToPython):
             return sleep_after('t.forward(50)', False)
         return self.make_forward(int(args[0]))
 
+    def color(self, args):
+        if arg == 'red':
+            return "t.pencolor('red')"
+
     def turn(self, args):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
@@ -1214,6 +1226,10 @@ class ConvertToPython_2(ConvertToPython_1):
         # echo is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
+
+    def color(self, args):
+        if len(args) == 0:
+            return "t.pencolor('red')"
 
     def turn(self, args):
         if len(args) == 0:

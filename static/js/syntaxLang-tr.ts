@@ -5,6 +5,7 @@ export const LANG_tr = {
 '_ECHO':'(?:eko|echo)',
 '_FORWARD':'(?:ileri|forward)',
 '_TURN':'(?:döndür|turn)',
+'_COLOR':'(?:color|color)',
 '_LEFT':'(?:sol|left)',
 '_RIGHT':'(?:sağ|right)',
 '_IS':'(?:eşit|is)',

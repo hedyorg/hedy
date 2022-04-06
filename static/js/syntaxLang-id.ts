@@ -5,6 +5,7 @@ export const LANG_id = {
 '_ECHO':'(?:gaungkan|echo)',
 '_FORWARD':'(?:maju|forward)',
 '_TURN':'(?:belok|turn)',
+'_COLOR':'(?:color|color)',
 '_LEFT':'(?:kiri|left)',
 '_RIGHT':'(?:kanan|right)',
 '_IS':'(?:adalah|is)',

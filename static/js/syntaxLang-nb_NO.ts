@@ -5,6 +5,7 @@ export const LANG_nb_NO = {
 '_ECHO':'(?:ekko|echo)',
 '_FORWARD':'(?:frem|forward)',
 '_TURN':'(?:snu|turn)',
+'_COLOR':'(?:color|color)',
 '_LEFT':'(?:venstre|left)',
 '_RIGHT':'(?:høyre|right)',
 '_IS':'(?:er|is)',
