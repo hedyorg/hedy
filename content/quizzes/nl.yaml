@@ -1454,17 +1454,17 @@ levels:
             question_text: "In welke regel gaat het fout in deze code?"
             code: |-
                 print 'Robin loopt door de stad'
-				locatie = ask 'Gaat Robin een winkel in of gaat ze naar huis?'
-				if locatie is winkel
-					print 'Ze stapt de winkel binnen'
-					print 'Robin ziet een interessant boek.'
-					boek = ask 'Koopt Robin het boek?'
-					if boek is ja
-						print 'Robin koopt het boek en gaat naar huis'
-					else
-						print 'Robin verlaat de winkel en gaat naar huis'
-				else
-					print 'Robin gaat naar huis'
+		locatie = ask 'Gaat Robin een winkel in of gaat ze naar huis?'
+		if locatie is winkel
+		    print 'Ze stapt de winkel binnen'
+		    print 'Robin ziet een interessant boek.'
+		    boek = ask 'Koopt Robin het boek?'
+		    if boek is ja
+		        print 'Robin koopt het boek en gaat naar huis'
+		    else
+		        print 'Robin verlaat de winkel en gaat naar huis'
+		else
+		    print 'Robin gaat naar huis'
             mp_choice_options:
             -   "option_text": "regel 2"
                 "feedback": "Helaas, er gaat niks mis in regel 2."
@@ -1477,15 +1477,15 @@ levels:
             correct_answer: "D"
             hint: "Lees de code regel voor regel en bedenk wat deze doet."
             question_score: '10'	
-		2:
+	2:
             question_text: "Wat krijg je als pizza antwoord op de vraag?"
             code: |-
-				eten = ask 'Wat wil je bestellen?'
+		eten = ask 'Wat wil je bestellen?'
                 repeat 3 times
-					if eten is pizza
-						print 'lekker pizza'
-					else
-						print 'pizza is lekkerder'
+		if eten is pizza
+		    print 'lekker pizza'
+		else
+		    print 'pizza is lekkerder'
 						
             mp_choice_options:
             -   "option_text": "lekker pizza"
