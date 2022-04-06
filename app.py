@@ -964,6 +964,7 @@ def view_program(id):
     arguments_dict['page_title'] = f'{result["name"]} – Hedy'
     arguments_dict['level'] = result['level']  # Necessary for running
     arguments_dict['loaded_program'] = result
+    arguments_dict['program_lang'] = result.get("lang", "en")
     arguments_dict['editor_readonly'] = True
 
     if "submitted" in result and result['submitted']:
@@ -977,9 +978,6 @@ def view_program(id):
 
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
-    arguments_dict['menu'] = True
-    arguments_dict['username'] = user.get('username', None)
-    arguments_dict['is_teacher'] = is_teacher(user)
 
     return render_template("view-program-page.html", **arguments_dict)
 
