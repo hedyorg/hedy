@@ -1,3 +1,4 @@
+import gc
 import textwrap
 
 import lark
@@ -1869,6 +1870,9 @@ def get_parser(level, lang="en", keep_all_tokens=False):
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
+    # Make sure we collect all garbage before transpiling
+    gc.collect()
+
     transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
 
