@@ -960,11 +960,13 @@ def reset_page():
 @app.route('/my-profile', methods=['GET'])
 @requires_login
 def profile_page(user):
+
+    profile = DATABASE.user_by_username(user['username'])
     programs = DATABASE.public_programs_for_user(user['username'])
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
     return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
-                           public_settings=public_profile_settings, current_page='my-profile')
+                           user_data=profile, public_settings=public_profile_settings, current_page='my-profile')
 
 
 @app.route('/<page>')

@@ -67,13 +67,6 @@
      </div>
      </form>
    </div>
-   <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#statistics').toggle()">{{_('statistics')}}</h1>
-   <div id="statistics" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
-     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('statistics')}}</h2>
-     <ul>
-         <li>{{_('number_programs')}}: <b>{{ user_data['program_count']}}</b></li>
-     </ul>
-   </div>
    {% if user_classes %}
        <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#classes').toggle()">{{_('my_classes')}}</h1>
        <div id="classes" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
