@@ -597,11 +597,13 @@ def achievements_page():
         url = request.url.replace('/my-achievements', '/login')
         return redirect(url, code=302)
 
+    user_achievements = DATABASE.achievements_by_username(user.get('username'))
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
     achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
 
-    return render_template('achievements.html', page_title=gettext('title_achievements'),
-                           achievements=achievements, template_achievements=achievement_translations, current_page='my-profile')
+    return render_template('achievements.html', page_title=gettext('title_achievements'), achievements=achievements,
+                            user_achievements=user_achievements, template_achievements=achievement_translations,
+                            current_page='my-profile')
 
 
 @app.route('/programs', methods=['GET'])
