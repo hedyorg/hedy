@@ -172,7 +172,6 @@ app.url_map.strict_slashes = False
 # TB -> This is temporary and only relevant for finding memory leaks
 process = psutil.Process(os.getpid())
 tracemalloc.start()
-s = None
 
 @app.route('/research_memory', methods=['GET'])
 def get_memory_leaks():
