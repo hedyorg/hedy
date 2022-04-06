@@ -192,41 +192,40 @@ def get_memory_leaks():
         requests.get('http://0.0.0.0:8080/')
     after_main_memory = process.memory_info().rss / 1024 / 1000
 
-    print("-----------------------------------------------------")
-    print("Let's start by calling the main page a few times...")
-    print(f'Memory before main calls: {start_memory}')
-    print(f'Memory after main calls: {after_main_memory}')
-    print(f'Total memory increase is: {round(after_main_memory - start_memory, 2)} mb')
-    print("-----------------------------------------------------")
+    gc.collect()
+
+    start_hedy_memory = process.memory_info().rss / 1024 / 1000
+    for _ in range(50):
+        requests.get('http://0.0.0.0:8080/hedy')
+    after_hedy_memory = process.memory_info().rss / 1024 / 1000
 
     gc.collect()
 
-    start_memory = process.memory_info().rss / 1024 / 1000
-    # Start some API Calls
+    start_parsing_memory = process.memory_info().rss / 1024 / 1000
     for _ in range(50):
-        requests.get('http://0.0.0.0:8080/hedy')
-    after_main_memory = process.memory_info().rss / 1024 / 1000
+        data = {'level': 2, 'code': "forward 10000"}
+        requests.post('http://0.0.0.0:8080/parse', json=data)
+    after_parsing_memory = process.memory_info().rss / 1024 / 1000
+
+    print("-----------------------------------------------------")
+    print("Let's start by calling the main page a few times...")
+    print(f'Memory before main calls: {start_hedy_memory}')
+    print(f'Memory after main calls: {after_main_memory}')
+    print(f'Total memory increase is: {round(after_main_memory - start_hedy_memory, 2)} mb')
+    print("-----------------------------------------------------")
 
     print("-----------------------------------------------------")
     print("Let's start by calling the Hedy page a few times...")
-    print(f'Memory before Hedy calls: {start_memory}')
-    print(f'Memory after Hedy calls: {after_main_memory}')
-    print(f'Total memory increase is: {round(after_main_memory - start_memory, 2)} mb')
+    print(f'Memory before Hedy calls: {after_main_memory}')
+    print(f'Memory after Hedy calls: {after_hedy_memory}')
+    print(f'Total memory increase is: {round(after_hedy_memory - after_main_memory, 2)} mb')
     print("-----------------------------------------------------")
 
-    gc.collect()
-
-    start_memory = process.memory_info().rss / 1024 / 1000
-    # Start some API Calls
-    for _ in range(50):
-        requests.get('http://0.0.0.0:8080/programs')
-    after_main_memory = process.memory_info().rss / 1024 / 1000
-
     print("-----------------------------------------------------")
-    print("Let's start by calling the programs page a few times...")
-    print(f'Memory before Program calls: {start_memory}')
-    print(f'Memory after Program calls: {after_main_memory}')
-    print(f'Total memory increase is: {round(after_main_memory - start_memory, 2)} mb')
+    print("Let's start by calling the parser a few times...")
+    print(f'Memory before Program calls: {start_parsing_memory}')
+    print(f'Memory after Program calls: {after_parsing_memory}')
+    print(f'Total memory increase is: {round(after_parsing_memory - start_parsing_memory, 2)} mb')
     print("-----------------------------------------------------")
 
 
