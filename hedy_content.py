@@ -1,3 +1,4 @@
+import collections
 import copy
 import attr
 from website.yaml_file import YamlFile
@@ -179,3 +180,14 @@ class DefaultValues:
   extra_examples = attr.ib(default=None)
   start_code = attr.ib(default=None)
 
+COMMANDS = collections.defaultdict(NoSuchCommand)
+for lang in ALL_LANGUAGES.keys():
+    COMMANDS[lang] = Commands(lang)
+
+LEVEL_DEFAULTS = collections.defaultdict(NoSuchDefaults)
+for lang in ALL_LANGUAGES.keys():
+    LEVEL_DEFAULTS[lang] = LevelDefaults(lang)
+
+ADVENTURES = collections.defaultdict(NoSuchAdventure)
+for lang in ALL_LANGUAGES.keys():
+    ADVENTURES[lang] = Adventures(lang)

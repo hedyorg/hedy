@@ -2,6 +2,7 @@
 import gc
 import sys
 import tracemalloc
+import random
 
 import psutil as psutil
 import requests
@@ -35,30 +36,19 @@ import textwrap
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
 from flask_helpers import render_template
 from flask_compress import Compress
-from flask_babel import Babel, refresh
+from flask_babel import Babel
 from flask_babel import gettext
 
 # Hedy-specific modules
 import hedy_content
 import hedyweb
 from hedy_content import COUNTRIES, ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
+from hedy_content import COMMANDS, LEVEL_DEFAULTS, ADVENTURES
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
-
-COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
-for lang in ALL_LANGUAGES.keys():
-    COMMANDS[lang] = hedy_content.Commands(lang)
-
-LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
-for lang in ALL_LANGUAGES.keys():
-    LEVEL_DEFAULTS[lang] = hedy_content.LevelDefaults(lang)
-
-ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
-for lang in ALL_LANGUAGES.keys():
-    ADVENTURES[lang] = hedy_content.Adventures(lang)
 
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
@@ -196,6 +186,7 @@ def get_memory_leaks():
 
     start_hedy_memory = process.memory_info().rss / 1024 / 1000
     for _ in range(50):
+        g.lang = session['lang'] = random.choice(list(ALL_LANGUAGES))
         requests.get('http://0.0.0.0:8080/hedy')
     after_hedy_memory = process.memory_info().rss / 1024 / 1000
 
