@@ -7,6 +7,9 @@ from lark import Tree, Transformer, visitors, v_args
 from os import path
 
 import warnings
+
+from py import process
+
 import hedy
 import hedy_translation
 import utils
@@ -19,8 +22,6 @@ import program_repair
 import yaml
 
 # Some useful constants
-from app import process
-
 HEDY_MAX_LEVEL = 18
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
