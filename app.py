@@ -1165,6 +1165,11 @@ def explore():
                 program['error'] = True
             DATABASE.store_program(program)
         public_profile = DATABASE.get_public_profile_settings(program['username'])
+        # If the language doesn't match the user -> parse the keywords
+        if program.get("lang", "en") not in [g.lang, "en"] and g.lang in ALL_KEYWORD_LANGUAGES:
+            program['code'] = hedy_translation.translate_keywords(program.get('code'), program.get('lang', 'en'), g.lang,
+                                                                 level=int(program.get('level', 1)))
+
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
