@@ -641,19 +641,19 @@ function rule_level1() {
     token: ['text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._FORWARD + ")(" + SPACE + ")([0-9]*)( *)$",
-    token: ['text','keyword','text','text','text'],
-    next: 'start',
-  },{
-    regex: START_LINE + "(" + currentLang._FORWARD + ")( *)$",
+    regex: START_LINE + "(" + currentLang._FORWARD + ")(.*)$",
     token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")(" + SPACE + ")(" + WORD + ")( *)$",
+    regex: START_LINE + "(" + currentLang._TURN + ")(" + SPACE + ")(" + currentLang._LEFT + ")( *)$",
     token: ['text','keyword','text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")( *)$",
+    regex: START_LINE + "(" + currentLang._TURN + ")(" + SPACE + ")(" + currentLang._RIGHT + ")( *)$",
+    token: ['text','keyword','text','keyword','text'],
+    next: 'start',
+  },{
+    regex: START_LINE + "(" + currentLang._TURN + ")(.*)$",
     token: ['text','keyword','text'],
     next: 'start',
   }];
