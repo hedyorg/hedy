@@ -1,11 +1,10 @@
-import gc
 import textwrap
 
 import lark
 from lark import Lark
-from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
+from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
-from os import path, environ
+from os import path
 
 import warnings
 import hedy
@@ -18,7 +17,6 @@ from dataclasses import dataclass, field
 import exceptions
 import program_repair
 import yaml
-import sys
 
 # Some useful constants
 HEDY_MAX_LEVEL = 18
@@ -1870,9 +1868,6 @@ def get_parser(level, lang="en", keep_all_tokens=False):
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
-    # Make sure we collect all garbage before transpiling
-    gc.collect()
-
     transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
 
