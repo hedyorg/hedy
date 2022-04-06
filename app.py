@@ -176,21 +176,19 @@ s = None
 
 @app.route('/research_memory', methods=['GET'])
 def get_memory_leaks():
+    gc.collect()
+
     start_memory = process.memory_info().rss / 1024 / 1000
     # Start some API Calls
     for _ in range(50):
         requests.get('http://0.0.0.0:8080/')
     after_main_memory = process.memory_info().rss / 1024 / 1000
 
-    gc.collect()
-
     start_hedy_memory = process.memory_info().rss / 1024 / 1000
     for _ in range(50):
         g.lang = session['lang'] = random.choice(list(ALL_LANGUAGES))
         requests.get('http://0.0.0.0:8080/hedy')
     after_hedy_memory = process.memory_info().rss / 1024 / 1000
-
-    gc.collect()
 
     start_parsing_memory = process.memory_info().rss / 1024 / 1000
     for _ in range(50):
@@ -200,16 +198,16 @@ def get_memory_leaks():
 
     print("-----------------------------------------------------")
     print("Let's start by calling the main page a few times...")
-    print(f'Memory before main calls: {start_hedy_memory}')
+    print(f'Memory before main calls: {start_memory}')
     print(f'Memory after main calls: {after_main_memory}')
     print(f'Total memory increase is: {round(after_main_memory - start_hedy_memory, 2)} mb')
     print("-----------------------------------------------------")
 
     print("-----------------------------------------------------")
     print("Let's start by calling the Hedy page a few times...")
-    print(f'Memory before Hedy calls: {after_main_memory}')
+    print(f'Memory before Hedy calls: {start_hedy_memory}')
     print(f'Memory after Hedy calls: {after_hedy_memory}')
-    print(f'Total memory increase is: {round(after_hedy_memory - after_main_memory, 2)} mb')
+    print(f'Total memory increase is: {round(after_hedy_memory - start_hedy_memory, 2)} mb')
     print("-----------------------------------------------------")
 
     print("-----------------------------------------------------")
@@ -256,6 +254,7 @@ cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
 @app.before_request
 def before_request_begin_logging():
+    print(f'The memory before this request: {process.memory_info().rss / 1024 / 1000} mb')
     """Initialize the query logging.
 
     This needs to happen as one of the first things, as the database calls
@@ -267,6 +266,7 @@ def before_request_begin_logging():
 
 @app.after_request
 def after_request_log_status(response):
+    print(f'The memory after this request: {process.memory_info().rss / 1024 / 1000} mb')
     querylog.log_value(http_code=response.status_code)
     return response
 
