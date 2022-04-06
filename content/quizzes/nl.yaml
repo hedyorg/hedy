@@ -1449,6 +1449,57 @@ levels:
             hint: "Als je niet schoenmaat 38 hebt, krijg je 'Helaas, ik zoek weer verder' ongeacht je naam."
             question_score: '10'
 
+    9:
+        1:
+            question_text: "In welke regel gaat het fout in deze code?"
+            code: |-
+                print 'Robin loopt door de stad'
+				locatie = ask 'Gaat Robin een winkel in of gaat ze naar huis?'
+				if locatie is winkel
+					print 'Ze stapt de winkel binnen'
+					print 'Robin ziet een interessant boek.'
+					boek = ask 'Koopt Robin het boek?'
+					if boek is ja
+						print 'Robin koopt het boek en gaat naar huis'
+					else
+						print 'Robin verlaat de winkel en gaat naar huis'
+				else
+					print 'Robin gaat naar huis'
+            mp_choice_options:
+            -   "option_text": "regel 2"
+                "feedback": "Helaas, er gaat niks mis in regel 2."
+            -   "option_text": "regel 3"
+                "feedback": "Helaas, er gaat niks mis in regel 3."
+            -   "option_text": "regel 6"
+                "feedback": "Helaas, er gaat niks mis in regel 6"
+            -   "option_text": "nergens, de code is goed"
+                "feedback": "Goedzo!"
+            correct_answer: "D"
+            hint: "Lees de code regel voor regel en bedenk wat deze doet."
+            question_score: '10'	
+		2:
+            question_text: "Wat krijg je als pizza antwoord op de vraag?"
+            code: |-
+				eten = ask 'Wat wil je bestellen?'
+                repeat 3 times
+					if eten is pizza
+						print 'lekker pizza'
+					else
+						print 'pizza is lekkerder'
+						
+            mp_choice_options:
+            -   "option_text": "lekker pizza"
+                "feedback": "Helaas. Let op het repeat commando !"
+            -   "option_text": "lekker pizza \npizza is lekkerder \npizza is lekkerder"
+                "feedback": "Helaas. Kan de variabele 'eten' veranderen?"
+            -   "option_text": "lekker pizza \nlekker pizza \nlekker pizza"
+                "feedback": "Correct"
+            -   "option_text": "pizza is lekkerder \npizza is lekkerder \npizza is lekkerder"
+                "feedback": "Helaas. Let op welk antwoord je geeft op de vraag."
+            correct_answer: "C"
+            hint: "de vraag wordt maar één keer gesteld"
+            question_score: '10'
+
     10:
         1:
             question_text: "Wat wordt de uitvoer van deze code ?"
