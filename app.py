@@ -307,34 +307,8 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
 def enrich_context_with_user_info():
-    session['set_keyword_lang'] = False
     user = current_user()
-    data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
-    if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
-        user_data = DATABASE.user_by_username(user.get('username'))
-        data['user_messages'] = 0
-        if user_data.get('language', '') in ALL_LANGUAGES.keys():
-            g.lang = session['lang'] = user_data['language']
-        if user_data.get('keyword_language', '') in ALL_LANGUAGES.keys():
-            g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
-            session['set_keyword_lang'] = True
-
-        data['user_data'] = user_data
-        if 'classes' in user_data:
-            data['user_classes'] = DATABASE.get_student_classes(user.get('username'))
-        user_achievements = DATABASE.achievements_by_username(user.get('username'))
-        if user_achievements:
-            data['user_achievements'] = user_achievements
-        user_invites = DATABASE.get_username_invite(user.get('username'))
-        if user_invites:
-            Class = DATABASE.get_class(user_invites['class_id'])
-            if Class:
-                invite_data = user_invites.copy()
-                invite_data['class_name'] = Class.get('name')
-                invite_data['teacher'] = Class.get('teacher')
-                invite_data['join_link'] = Class.get('link')
-                data['invite_data'] = invite_data
-                data['user_messages'] += 1
+    data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user)}
     return data
 
 
