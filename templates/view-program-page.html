@@ -25,7 +25,7 @@
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script>
     window.State = {};
-    window.State.keyword_language = "{{ program_lang }}";
+    window.State.keyword_language = "{{ g.lang }}";
     window.State.lang = "{{ g.lang }}";
     window.State.level = "{{ level }}";
     window.State.level_title = "{{ _('level_title') }}";

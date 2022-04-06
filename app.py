@@ -951,20 +951,15 @@ def view_program(id):
     # The program is valid, verify if the creator also have a public profile
     result['public_profile'] = True if DATABASE.get_public_profile_settings(result['username']) else None
 
-
-    # If we asked for a specific language, use that, otherwise use the language
-    # of the program's author.
-    # Default to the language of the program's author(but still respect)
-    # the switch if given.
-    # Todo TB -> This seems like ancient code as we always request a language, can be removed? (04-04-22)
-    g.lang = request.args.get('lang', result['lang'])
+    # If the language doesn't match the user -> parse the keywords
+    if result.get("lang", "en") not in [g.lang, "en"] and g.lang in ALL_KEYWORD_LANGUAGES:
+        result['code'] = hedy_translation.translate_keywords(result.get('code'), result.get('lang', 'en'), g.lang, level=int(result.get('level', 1)))
 
     arguments_dict = {}
     arguments_dict['program_id'] = id
     arguments_dict['page_title'] = f'{result["name"]} – Hedy'
     arguments_dict['level'] = result['level']  # Necessary for running
     arguments_dict['loaded_program'] = result
-    arguments_dict['program_lang'] = result.get("lang", "en")
     arguments_dict['editor_readonly'] = True
 
     if "submitted" in result and result['submitted']:
