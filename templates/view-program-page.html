@@ -10,7 +10,9 @@
   {% endif %}
   <h1>{{loaded_program.name}}</h1>
   <h2 class="mt-0">{{_('level_title')}} {{level}}</h2>
-  <div>{{_('by')}} <a class="no-underline cursor-pointer" onclick="window.open('/user/{{loaded_program.username}}', '_self')">{{loaded_program.username}}</a></div>
+  <div>{{_('by')}}
+      <a {% if loaded_program.public_profile %}onclick="window.open('/user/{{loaded_program.username}}', '_self')"{% endif %} class="{% if loaded_program.public_profile %}cursor-pointer{% else %}text-black{% endif %} no-underline">{{ loaded_program.username }}</a>
+  </div>
   {% include "incl-editor-and-output.html" %}
 </div>
 {% endblock %}

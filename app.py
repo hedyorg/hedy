@@ -37,7 +37,7 @@ babel = Babel(app)
 import hedy_content
 hedy_content.fill_all_languages(babel)
 import hedyweb
-from hedy_content import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
@@ -47,6 +47,10 @@ from website.log_fetcher import log_fetcher
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
+
+COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
+for lang in ALL_LANGUAGES.keys():
+    COMMANDS[lang] = hedy_content.Commands(lang)
 
 LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
 for lang in ALL_LANGUAGES.keys():
@@ -868,6 +872,9 @@ def index(level, program_id):
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
     level_defaults_for_lang.set_keyword_language(g.keyword_lang)
 
+    level_commands_for_lang = COMMANDS[g.lang]
+    level_commands_for_lang.set_keyword_language(g.keyword_lang)
+
     if 'levels' in customizations:
         available_levels = customizations['levels']
         now = timems()
@@ -883,6 +890,10 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
+    try:
+        commands = level_commands_for_lang.get_commands_for_level(level)
+    except:
+        commands = None # No separate commands file for this language
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
@@ -900,6 +911,7 @@ def index(level, program_id):
 
     return hedyweb.render_code_editor_with_tabs(
         level_defaults=defaults,
+        commands=commands,
         max_level=max_level,
         level_number=level,
         version=version(),
@@ -927,10 +939,15 @@ def view_program(id):
         if (not is_teacher(user)) or (is_teacher(user) and result['username'] not in DATABASE.get_teacher_students(user['username'])):
             return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
 
+    # The program is valid, verify if the creator also have a public profile
+    result['public_profile'] = True if DATABASE.get_public_profile_settings(result['username']) else None
+
+
     # If we asked for a specific language, use that, otherwise use the language
     # of the program's author.
     # Default to the language of the program's author(but still respect)
     # the switch if given.
+    # Todo TB -> This seems like ancient code as we always request a language, can be removed? (04-04-22)
     g.lang = request.args.get('lang', result['lang'])
 
     arguments_dict = {}
@@ -985,11 +1002,18 @@ def get_specific_adventure(name, level):
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
 @app.route('/cheatsheet/<level>', methods=['GET'])
 def get_cheatsheet_page(level):
-    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
-    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
-    defaults = level_defaults_for_lang.get_defaults_for_level(int(level))
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+    except:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    return render_template("cheatsheet.html", defaults=defaults, level=level)
+    level_commands_for_lang = COMMANDS[g.lang]
+    level_commands_for_lang.set_keyword_language(g.keyword_lang)
+    commands = level_commands_for_lang.get_commands_for_level(level)
+
+    return render_template("cheatsheet.html", commands=commands, level=level)
 
 @app.errorhandler(404)
 def not_found(exception):
@@ -1186,8 +1210,8 @@ def translate_keywords():
 def client_messages():
     # Not really nice, but we don't call this often as it is cached
     d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(YamlFile.for_file('coursedata/client-messages/en.yaml').to_dict())
-    d.update(YamlFile.for_file(f'coursedata/client-messages/{g.lang}.yaml').to_dict())
+    d.update(YamlFile.for_file('content/client-messages/en.yaml').to_dict())
+    d.update(YamlFile.for_file(f'content/client-messages/{g.lang}.yaml').to_dict())
 
     response = make_response(render_template("client_messages.js", error_messages=json.dumps(d)))
 
@@ -1237,6 +1261,10 @@ def hedy_link(level_nr, assignment_nr, subpage=None):
         parts.append('/' + subpage)
     return ''.join(parts)
 
+
+@app.template_global()
+def all_countries():
+    return COUNTRIES
 
 @app.template_global()
 def other_languages():

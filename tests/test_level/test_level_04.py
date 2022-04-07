@@ -29,9 +29,36 @@ class TestsLevel4(HedyTester):
       max_level=17,
       expected=expected)
 
+  def test_print_no_sapce(self):
+    code = "print'hallo wereld!'"
+    expected = "print(f'hallo wereld!')"
+
+    self.multi_level_tester(
+      code=code,
+      max_level=17,
+      expected=expected)
+
+  def test_print_single_quoted_string_with_inner_double_quote(self):
+    code = """print 'quote is "'"""
+    expected = """print(f'quote is "')"""
+
+    self.multi_level_tester(
+      code=code,
+      max_level=17,
+      expected=expected)
+
   def test_print_double_quoted_string(self):
     code = 'print "hallo wereld!"'
     expected = "print(f'hallo wereld!')"
+
+    self.multi_level_tester(
+      code=code,
+      max_level=17,
+      expected=expected)
+
+  def test_print_double_quoted_string_with_inner_single_quote(self):
+    code = """print "It's me\""""
+    expected = """print(f'It\\'s me')"""
 
     self.multi_level_tester(
       code=code,
@@ -61,9 +88,7 @@ class TestsLevel4(HedyTester):
 
   def test_print_with_slashes(self):
     code = "print 'Welcome to \\'"
-    expected = textwrap.dedent("""\
-    print(f'Welcome to \\\\')""")
-    output = "Welcome to \\"
+    expected = "print(f'Welcome to \\\\')"
     self.multi_level_tester(
       code=code,
       max_level=17,
@@ -72,15 +97,29 @@ class TestsLevel4(HedyTester):
     )
 
   # ask
-  @parameterized.expand(HedyTester.quotes)
-  def test_ask_quoted_string(self, q):
-    code = f"details is ask {q}tell me more{q}"
+  def test_ask_single_quoted_string(self):
+    code = f"details is ask 'tell me more'"
     expected = "details = input(f'tell me more')"
 
-    self.multi_level_tester(
-      code=code,
-      max_level=11,
-      expected=expected)
+    self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+  def test_ask_single_quoted_string_with_inner_double_quote(self):
+    code = f"""details is ask 'say "no"'"""
+    expected = """details = input(f'say "no"')"""
+
+    self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+  def test_ask_double_quoted_string(self):
+    code = f'details is ask "tell me more"'
+    expected = "details = input(f'tell me more')"
+
+    self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+  def test_ask_double_quoted_string_with_inner_single_quote(self):
+    code = f'''details is ask "say 'no'"'''
+    expected = '''details = input(f'say \\'no\\'')'''
+
+    self.multi_level_tester(code=code, expected=expected, max_level=11)
 
   @parameterized.expand(HedyTester.quotes)
   def test_ask_Spanish(self, q):
