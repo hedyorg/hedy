@@ -840,7 +840,7 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
     });
   }
 
-  console.log(list_rules);
+  /*console.log(list_rules);*/
   return list_rules;
 }
 
