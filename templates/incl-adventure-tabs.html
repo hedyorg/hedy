@@ -18,11 +18,9 @@
                 </div>
               {% endif %}
             {% endfor %}
-            {% for key, parson in parsons.items() %}
-                <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{parson.tab_name}}">
-                    {{parson.tab_name}}
+                <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{parsons['tab_name']}}">
+                    {{parsons['tab_name']}}
                 </div>
-            {% endfor %}
             {% if specific_adventure %}
                 <h2 class="z-10 my-0 ml-auto pt-8 text-red-500 text-base">{{ _('specific_adventure_mode')|replace("{adventure}", adventures[0].name) }}</h2>
             {% endif %}
@@ -96,13 +94,50 @@
           </div>
           {% endif %}
         {% endfor %}
-        {% for key, parson in parsons.items() %}
-            <div data-tabtarget="{{parson.tab_name}}" class="hidden">
-                <div>
-                    {{ parson.text|commonmark }}
-                </div>
-                <div class="ltr:clear-right rtl:clear-left"></div>
+        
+        <style>
+            #div1 {
+                width: 350px;
+                height: 40px;
+                padding: 10px;
+                border: 1px solid #aaaaaa;
+                color: white;
+                background-color: black;
+            }
+        </style>
+
+        <script>
+            function allowDrop(ev) {
+            ev.preventDefault();
+            }
+            
+            function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+            }
+            
+            function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+            }
+        </script>
+
+        <div data-tabtarget="{{parsons['tab_name']}}" class="hidden">
+            <div>
+                {{ parsons['text']|commonmark }}
+
+
+                {% for key, line in parsons.code_lines.items() %}
+                    <div id="div1">
+                        <div id="{{line}}" draggable="true" ondragstart="drag(event)">
+                            {{ line }}
+                        </div>
+                    </div>
+                {% endfor %}
+
             </div>
-        {% endfor %}
+            <div class="ltr:clear-right rtl:clear-left"></div>
+        </div>
+       
       </div>
     </div>

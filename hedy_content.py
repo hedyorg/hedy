@@ -115,7 +115,7 @@ class LevelDefaults:
     default_type.update(**default_values)
 
     return DefaultValues(**default_type)
-
+  
   def get_defaults(self, level):
     """Return the level defaults for a given level number."""
 
@@ -153,7 +153,7 @@ class ParsonsProblem:
     self.language = language
     self.keyword_lang = "en"
     self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
-    self.adventures_file = YamlFile.for_file(f'coursedata/parsons/{self.language}.yaml').to_dict()
+    self.parsons_file = YamlFile.for_file(f'coursedata/parsons/{self.language}.yaml').to_dict()
 
   def set_keyword_language(self, language):
     if language != self.keyword_lang:
@@ -162,8 +162,8 @@ class ParsonsProblem:
 
   def get_defaults(self, level):
     """Return the level defaults for a given level number."""
-  
-    return copy.deepcopy(self.adventures_file.get(int(level), {}))
+    print(self.parsons_file)
+    return copy.deepcopy(self.parsons_file.get(int(level), {}))
 
 class NoSuchAdventure:
   def get_defaults(self, level):
