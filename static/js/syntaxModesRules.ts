@@ -547,15 +547,15 @@ function rule_level1() {
     token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._FORWARD + ")( *)([0-9]*)( *)$",
-    token: ['text','keyword','text','text','text'],
+    regex: START_LINE + "(" + currentLang._FORWARD + ")(.*)$",
+    token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")(" + SPACE + ")(" + currentLang._LEFT + ")( *)$",
+    regex: START_LINE + "(" + currentLang._TURN + ")( *)(" + currentLang._LEFT + ")( *)$",
     token: ['text','keyword','text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")( *)(" + WORD + ")( *)$",
+    regex: START_LINE + "(" + currentLang._TURN + ")( *)(" + currentLang._RIGHT + ")( *)$",
     token: ['text','keyword','text','keyword','text'],
     next: 'start',
   },{
@@ -579,8 +579,8 @@ function rule_level1() {
 
 function rule_level2() {
   return [{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")( *)(.*)$",
-    token: ["text",'text','text','keyword','text','keyword','text','text'],
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")(.*)$",
+    token: ["text",'text','text','keyword','text','keyword','text'],
     next: 'start',
   },{
     regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(.*)$",
@@ -619,8 +619,8 @@ function rule_level2() {
 
 function rule_level3() {
   return [{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")( *)(.*)$",
-    token: ["text",'text','text','keyword','text','keyword','text','text'],
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")(.*)$",
+    token: ["text",'text','text','keyword','text','keyword','text'],
     next: 'start',
   },{
     regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(.*)$",
