@@ -15,7 +15,7 @@ class TestsLevel15(HedyTester):
     expected = textwrap.dedent("""\
     antwoord = 0
     while str(antwoord).zfill(100)!=str(25).zfill(100):
-      antwoord = input(f'Wat is 5 keer 5?')
+      antwoord = input(f'''Wat is 5 keer 5?''')
       try:
         antwoord = int(antwoord)
       except ValueError:
@@ -24,7 +24,7 @@ class TestsLevel15(HedyTester):
         except ValueError:
           pass
       time.sleep(0.1)
-    print(f'Goed gedaan!')""")
+    print(f'''Goed gedaan!''')""")
 
     self.multi_level_tester(
       code=code,
@@ -42,7 +42,7 @@ class TestsLevel15(HedyTester):
     expected = textwrap.dedent("""\
     antwoord = 0
     while str(antwoord).zfill(100)!=str(25).zfill(100):
-      antwoord = input(f'Wat is 5 keer 5?')
+      antwoord = input(f'''Wat is 5 keer 5?''')
       try:
         antwoord = int(antwoord)
       except ValueError:
@@ -51,7 +51,7 @@ class TestsLevel15(HedyTester):
         except ValueError:
           pass
       time.sleep(0.1)
-    print(f'Goed gedaan!')""")
+    print(f'''Goed gedaan!''')""")
 
     self.multi_level_tester(
       code=code,
@@ -81,7 +81,7 @@ class TestsLevel15(HedyTester):
     expected = textwrap.dedent("""\
     getal = 0
     while str(getal).zfill(100)<str(100000).zfill(100):
-      getal = input(f'HOGER!!!!!')
+      getal = input(f'''HOGER!!!!!''')
       try:
         getal = int(getal)
       except ValueError:
@@ -90,7 +90,7 @@ class TestsLevel15(HedyTester):
         except ValueError:
           pass
       time.sleep(0.1)
-    print(f'Hoog he?')""")
+    print(f'''Hoog he?''')""")
 
     self.multi_level_tester(
       code=code,
