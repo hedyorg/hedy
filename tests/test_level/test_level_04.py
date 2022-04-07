@@ -26,7 +26,7 @@ class TestsLevel4(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=17,
+      max_level=11,
       expected=expected)
 
   def test_print_no_sapce(self):
@@ -35,7 +35,7 @@ class TestsLevel4(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=17,
+      max_level=11,
       expected=expected)
 
   def test_print_single_quoted_string_with_inner_double_quote(self):
@@ -44,7 +44,7 @@ class TestsLevel4(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=17,
+      max_level=11,
       expected=expected)
 
   def test_print_double_quoted_string(self):
@@ -53,7 +53,7 @@ class TestsLevel4(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=17,
+      max_level=11,
       expected=expected)
 
   def test_print_double_quoted_string_with_inner_single_quote(self):
@@ -62,7 +62,7 @@ class TestsLevel4(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=17,
+      max_level=11,
       expected=expected)
 
   def test_print_comma(self):
@@ -70,7 +70,7 @@ class TestsLevel4(HedyTester):
     expected = "print(f'ik heet ,')"
     self.multi_level_tester(
       code=code,
-      max_level=17,
+      max_level=11,
       expected=expected
     )
 
@@ -82,7 +82,7 @@ class TestsLevel4(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=17,
+      max_level=11,
       expected=expected
     )
 
@@ -91,7 +91,7 @@ class TestsLevel4(HedyTester):
     expected = "print(f'Welcome to \\\\')"
     self.multi_level_tester(
       code=code,
-      max_level=17,
+      max_level=11,
       expected=expected,
       translate=False  # \\ is not preserved in tests properly at the moment
     )
