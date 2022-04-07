@@ -20,7 +20,7 @@
               <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span> {{_('my_achievements')}}</li>
           </a>
           <a class="no-underline" href="/my-profile">
-              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span> {{_('my_account')}}{% if user_messages > 0 %} ({{ user_messages }}){% endif %}</li>
+              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span> {{_('my_account')}}</li>
           </a>
           {% if is_teacher %}
               <a class="no-underline" href="/for-teachers">
@@ -35,7 +35,7 @@
     {% else %}
       <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{_('login')}}</a>
     {% endif %}
-    {% if not username or not 'language' in user_data %}
+    {% if not username %}
       <div class="dropdown inline-block relative {% if not username %}ltr:ml-auto rtl:mr-auto{% endif %} py-2 z-40">
           <button class="bg-blue-400 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
             <span class="ltr:mr-1 rtl:ml-1">{{ current_language().sym }}</span>
