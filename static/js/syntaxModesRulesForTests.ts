@@ -1,20 +1,5 @@
+#!/usr/bin/env ts-node
 import {LANG_en} from './syntaxLang-en';
-// #/#/@/#/#
-import {LANG_es} from './syntaxLang-es';
-import {LANG_nl} from './syntaxLang-nl';
-import {LANG_ar} from './syntaxLang-ar';
-import {LANG_fr} from './syntaxLang-fr';
-import {LANG_hi} from './syntaxLang-hi';
-import {LANG_tr} from './syntaxLang-tr';
-import {LANG_id} from './syntaxLang-id';
-import {LANG_nb_NO} from './syntaxLang-nb_NO';
-
-// A bunch of code expects a global "State" object. Set it here if not
-// set yet.
-if (!window.State) {
-window.State = {};
-}
-// #/#/@/#/#
 
 
 // extension of \w
@@ -69,39 +54,8 @@ var currentLang: {
   _LENGTH: string;
 };
 
-// #/#/1/#/#
+currentLang = LANG_en;
 
-// #/#/@/#/#
-switch(window.State.keyword_language){
-  case 'nl':
-    currentLang = LANG_nl;
-    break;
-  case 'ar':
-    currentLang = LANG_ar;
-    break;
-  case 'es':
-    currentLang = LANG_es;
-    break;
-  case 'fr':
-    currentLang = LANG_fr;
-    break;
-  case 'tr':
-    currentLang = LANG_tr;
-    break;
-  case 'hi':
-    currentLang = LANG_hi;
-    break;
-  case 'id':
-    currentLang = LANG_id;
-    break;
-  case 'nb_NO':
-    currentLang = LANG_nb_NO;
-    break;
-  default:
-    currentLang = LANG_en;
-    break;
-}
-// #/#/@/#/#
 
 
 /* 
@@ -833,39 +787,6 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
 
 
   
-// #/#/2/#/#
 
-// #/#/@/#/#
+console.log(LEVELS);
 
-// Only do this work if the 'define' function is actually available at runtime.
-// If not, this script got included on a page that didn't include the Ace
-// editor. No point in continuing if that is the case.
-if ((window as any).define) {
-
-  // Define the modes based on the level definitions above
-  for (const level of LEVELS) {
-
-    // This is a local definition of the file 'ace/mode/level1.js', etc.
-    define('ace/mode/' + level.name, [], function(require, exports, _module) {
-      var oop = require('ace/lib/oop');
-      var TextMode = require('ace/mode/text').Mode;
-      var TextHighlightRules = require('ace/mode/text_highlight_rules').TextHighlightRules;
-
-      function ThisLevelHighlightRules(this: any) {
-        this.$rules = level.rules;
-        //console.log(this.$rules);
-        this.normalizeRules();
-      };
-      oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
-
-      function Mode(this: any) {
-        this.HighlightRules = ThisLevelHighlightRules;
-      };
-      oop.inherits(Mode, TextMode);
-
-      exports.Mode = Mode;
-    });
-  }
-}
-
-// #/#/@/#/#
