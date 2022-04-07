@@ -1,5 +1,4 @@
 import {LANG_en} from './syntaxLang-en';
-// #/#/@/#/#
 import {LANG_es} from './syntaxLang-es';
 import {LANG_nl} from './syntaxLang-nl';
 import {LANG_ar} from './syntaxLang-ar';
@@ -9,6 +8,7 @@ import {LANG_tr} from './syntaxLang-tr';
 import {LANG_id} from './syntaxLang-id';
 import {LANG_nb_NO} from './syntaxLang-nb_NO';
 
+// #/#/@/#/#
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
 if (!window.State) {
@@ -69,10 +69,11 @@ var currentLang: {
   _LENGTH: string;
 };
 
-// #/#/1/#/#
 
+// #/#/1/#/#
 // #/#/@/#/#
 switch(window.State.keyword_language){
+// #/#/@/#/#
   case 'nl':
     currentLang = LANG_nl;
     break;
@@ -101,7 +102,6 @@ switch(window.State.keyword_language){
     currentLang = LANG_en;
     break;
 }
-// #/#/@/#/#
 
 
 /* 

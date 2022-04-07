@@ -1,5 +1,14 @@
 #!/usr/bin/env ts-node
 import {LANG_en} from './syntaxLang-en';
+import {LANG_es} from './syntaxLang-es';
+import {LANG_nl} from './syntaxLang-nl';
+import {LANG_ar} from './syntaxLang-ar';
+import {LANG_fr} from './syntaxLang-fr';
+import {LANG_hi} from './syntaxLang-hi';
+import {LANG_tr} from './syntaxLang-tr';
+import {LANG_id} from './syntaxLang-id';
+import {LANG_nb_NO} from './syntaxLang-nb_NO';
+
 
 
 // extension of \w
@@ -54,8 +63,39 @@ var currentLang: {
   _LENGTH: string;
 };
 
-currentLang = LANG_en;
 
+
+var choice = 'en';
+
+switch(choice){
+  case 'nl':
+    currentLang = LANG_nl;
+    break;
+  case 'ar':
+    currentLang = LANG_ar;
+    break;
+  case 'es':
+    currentLang = LANG_es;
+    break;
+  case 'fr':
+    currentLang = LANG_fr;
+    break;
+  case 'tr':
+    currentLang = LANG_tr;
+    break;
+  case 'hi':
+    currentLang = LANG_hi;
+    break;
+  case 'id':
+    currentLang = LANG_id;
+    break;
+  case 'nb_NO':
+    currentLang = LANG_nb_NO;
+    break;
+  default:
+    currentLang = LANG_en;
+    break;
+}
 
 
 /* 
@@ -779,7 +819,7 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
     });
   }
 
-  console.log(list_rules);
+  /*console.log(list_rules);*/
   return list_rules;
 }
 
@@ -788,5 +828,11 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
 
   
 
-console.log(LEVELS);
+const fs = require("fs");
+
+fs.writeFileSync("../../tests/test_highlighting/data.json", JSON.stringify(LEVELS), function(err = false) {
+if(err){
+  return console.log("error");
+}
+})
 
