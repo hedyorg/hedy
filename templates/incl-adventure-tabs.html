@@ -123,19 +123,27 @@
         </script>
 
         <div data-tabtarget="{{parsons['tab_name']}}" class="hidden">
-            <div>
-                {{ parsons['text']|commonmark }}
-
-
-                {% for key, line in parsons.code_lines.items() %}
-                    <div id="div1">
+    
+            <div class="flex flex-row">
+                <div class="{% if example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                    {{ parsons['text']|commonmark }}
+                    {% for key, line in parsons.code_lines.items() %}
+                    <div id="div1" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
                         <div id="{{line}}" draggable="true" ondragstart="drag(event)">
-                            {{ line }}
+                             {{ line }} 
                         </div>
                     </div>
                 {% endfor %}
+                </div>
+                {% if example_code %}
+                    <div class="border"></div>
+                    <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                        {{ parsons['example']|commonmark }}
+                    </div>
+                {% endif %}
+              </div>
 
-            </div>
+          
             <div class="ltr:clear-right rtl:clear-left"></div>
         </div>
        

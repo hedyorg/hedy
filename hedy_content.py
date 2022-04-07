@@ -162,7 +162,7 @@ class ParsonsProblem:
 
   def get_defaults(self, level):
     """Return the level defaults for a given level number."""
-    print(self.parsons_file)
+    #print(self.parsons_file)
     return copy.deepcopy(self.parsons_file.get(int(level), {}))
 
 class NoSuchAdventure:
