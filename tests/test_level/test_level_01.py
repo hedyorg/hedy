@@ -277,6 +277,47 @@ class TestsLevel1(HedyTester):
 
     self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
 
+  # color tests
+  def test_color_no_args(self):
+    code = "color"
+    expected = "t.pencolor('black')"
+    self.multi_level_tester(
+      max_level=self.max_turtle_level,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle()
+    )
+
+  def test_one_color_red(self):
+    code = "color red"
+    expected = "t.pencolor('red')"
+
+    self.single_level_tester(code=code, expected=expected,
+                             extra_check_function=self.is_turtle())
+
+  def test_one_color_purple(self):
+    code = "color purple"
+    expected = "t.pencolor('purple')"
+
+    self.single_level_tester(code=code, expected=expected,
+                             extra_check_function=self.is_turtle())
+
+  def test_one_color_purple_nl(self):
+    code = "color paars"
+    expected = "t.pencolor('purple')"
+
+    self.single_level_tester(code=code, expected=expected,
+                             extra_check_function=self.is_turtle(), lang='nl')
+
+
+  def test_one_color_with_text_gives_error(self):
+    code = "color koekoek"
+    self.single_level_tester(
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentException
+    )
+
+
   # turn tests
   def test_turn_no_args(self):
     code = "turn"
