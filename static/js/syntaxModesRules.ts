@@ -111,12 +111,12 @@ switch(window.State.keyword_language){
 }
 
 
-/*
+/* 
 This variable lists all the keywords in each level, i.e. everything that should be displayed in red (of type `keyword`)
 
-There are several categories of keywords:
+There are several categories of keywords: 
 - SP_K_SP
-  These are the keywords that must be "alone" so neither preceded nor followed directly by a word
+  These are the keywords that must be "alone" so neither preceded nor followed directly by a word 
 
 - K
   These are the keywords that are independent of the context (formerly the symbols).
@@ -567,19 +567,19 @@ function rule_level1() {
     token: ['text','keyword','text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._FORWARD + ")( *)([0-9]*)( *)$",
-    token: ['text','keyword','text','text','text'],
-    next: 'start',
-  },{
-    regex: START_LINE + "(" + currentLang._FORWARD + ")( *)$",
+    regex: START_LINE + "(" + currentLang._FORWARD + ")(.*)$",
     token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")( *)(" + WORD + ")( *)$",
+    regex: START_LINE + "(" + currentLang._TURN + ")( *)(" + currentLang._LEFT + ")( *)$",
     token: ['text','keyword','text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")( *)$",
+    regex: START_LINE + "(" + currentLang._TURN + ")( *)(" + currentLang._RIGHT + ")( *)$",
+    token: ['text','keyword','text','keyword','text'],
+    next: 'start',
+  },{
+    regex: START_LINE + "(" + currentLang._TURN + ")(.*)$",
     token: ['text','keyword','text'],
     next: 'start',
   },{
@@ -599,8 +599,8 @@ function rule_level1() {
 
 function rule_level2() {
   return [{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")( *)(.*)$",
-    token: ["text",'text','text','keyword','text','keyword','text','text'],
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")(.*)$",
+    token: ["text",'text','text','keyword','text','keyword','text'],
     next: 'start',
   },{
     regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(.*)$",
@@ -639,8 +639,8 @@ function rule_level2() {
 
 function rule_level3() {
   return [{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")( *)(.*)$",
-    token: ["text",'text','text','keyword','text','keyword','text','text'],
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")(.*)$",
+    token: ["text",'text','text','keyword','text','keyword','text'],
     next: 'start',
   },{
     regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(.*)$",
@@ -754,21 +754,21 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
         });
 
         /* Special case of an order directly followed by a number */
-        for (const command in KEYWORDS[level]["SP_K"]) {
+        for (const command in KEYWORDS[level]["SP_K"]) { 
           list_rules.push({
             regex: START_WORD + "("+ KEYWORDS[level]["SP_K"][command] + ')([0-9]*\\.?[0-9]+)' + END_WORD,
             token: ['text','keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
             next: 'start',
           });
         }
-        for (const command in KEYWORDS[level]["K"]) {
+        for (const command in KEYWORDS[level]["K"]) { 
           list_rules.push({
             regex: "(" + KEYWORDS[level]["K"][command] + ')([0-9]*\\.?[0-9]+)' + END_WORD,
             token: ['keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
             next: 'start',
           });
         }
-
+        
 
       } else {
         list_rules.push({
@@ -778,14 +778,14 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
         });
 
         /* Special case of an order directly followed by a number */
-        for (const command in KEYWORDS[level]["SP_K"]) {
+        for (const command in KEYWORDS[level]["SP_K"]) { 
           list_rules.push({
             regex: START_WORD + "("+ KEYWORDS[level]["SP_K"][command] + ')([0-9]+)' + END_WORD,
             token: ['text','keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
             next: 'start',
           });
         }
-        for (const command in KEYWORDS[level]["K"]) {
+        for (const command in KEYWORDS[level]["K"]) { 
           list_rules.push({
             regex: "(" + KEYWORDS[level]["K"][command] + ')([0-9]+)' + END_WORD,
             token: ['keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
@@ -803,7 +803,7 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
     list_rules.push({
       regex: START_WORD + KEYWORDS[level]["SP_K_SP"][command] + END_WORD,
       token: "keyword",
-      next: "start",
+      next: "start", 
     });
   }
 
@@ -814,7 +814,7 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
     list_rules.push({
       regex: KEYWORDS[level]["K"][command],
       token: "keyword",
-      next: "start",
+      next: "start", 
     });
   }
 
@@ -825,7 +825,7 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
     list_rules.push({
       regex: START_WORD + KEYWORDS[level]["SP_K"][command],
       token: "keyword",
-      next: "start",
+      next: "start", 
     });
   }
 
@@ -836,18 +836,18 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
     list_rules.push({
       regex: KEYWORDS[level]["K_SP"][command] + END_WORD,
       token: "keyword",
-      next: "start",
+      next: "start", 
     });
   }
 
-  console.log(list_rules);
+  /*console.log(list_rules);*/
   return list_rules;
 }
 
 
 
 
-
+  
 
 
 
