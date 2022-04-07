@@ -15,7 +15,7 @@ class TestsLevel17(HedyTester):
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
-      print(f'koekoek')""")
+      print(f'''koekoek''')""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -28,7 +28,7 @@ class TestsLevel17(HedyTester):
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
-      print(f'koekoek')""")
+      print(f'''koekoek''')""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -43,7 +43,7 @@ class TestsLevel17(HedyTester):
         print 'Het antwoord moest zijn ' antwoord""")
 
     expected = textwrap.dedent("""\
-    antwoord = input(f'Hoeveel is 10 plus 10?')
+    antwoord = input(f'''Hoeveel is 10 plus 10?''')
     try:
       antwoord = int(antwoord)
     except ValueError:
@@ -52,11 +52,11 @@ class TestsLevel17(HedyTester):
       except ValueError:
         pass
     if str(antwoord) == str('20'):
-      print(f'Goedzo!')
-      print(f'Het antwoord was inderdaad {antwoord}')
+      print(f'''Goedzo!''')
+      print(f'''Het antwoord was inderdaad {antwoord}''')
     else:
-      print(f'Foutje')
-      print(f'Het antwoord moest zijn {antwoord}')""")
+      print(f'''Foutje''')
+      print(f'''Het antwoord moest zijn {antwoord}''')""")
 
 
 
@@ -75,11 +75,11 @@ class TestsLevel17(HedyTester):
     expected = textwrap.dedent("""\
     computerc = 'PC'
     userc = 'Hedy'
-    print(f'Pilihan komputer: {computerc}')
+    print(f'''Pilihan komputer: {computerc}''')
     if str(userc) == str(computerc) and str(userc) == str('Hedy'):
-      print(f'SERI')
+      print(f'''SERI''')
     else:
-      print(f'Komputer')""")
+      print(f'''Komputer''')""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -98,13 +98,13 @@ class TestsLevel17(HedyTester):
     expected = textwrap.dedent("""\
     computerc = 'PC'
     userc = 'Hedy'
-    print(f'Pilihan komputer: {computerc}')
+    print(f'''Pilihan komputer: {computerc}''')
     if str(userc) == str(computerc) and str(userc) == str('Hedy'):
-      print(f'SERI')
+      print(f'''SERI''')
     elif str(userc) == str('PC') and str(userc) == str('Hedy'):
-      print(f'HARI')
+      print(f'''HARI''')
     else:
-      print(f'Komputer')""")
+      print(f'''Komputer''')""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -151,9 +151,9 @@ class TestsLevel17(HedyTester):
     expected = textwrap.dedent("""\
     step = 1 if int(1) < int(10) else -1
     for i in range(int(1), int(10) + step, step):
-      print(f'{i}')
+      print(f'''{i}''')
       time.sleep(0.1)
-    print(f'wie niet weg is is gezien')""")
+    print(f'''wie niet weg is is gezien''')""")
 
 
 
@@ -170,9 +170,9 @@ class TestsLevel17(HedyTester):
     expected = textwrap.dedent("""\
     a = 1
     if str(a) == str('1'):
-      print(f'{a}')
+      print(f'''{a}''')
     else:
-      print(f'nee')""")
+      print(f'''nee''')""")
 
     self.multi_level_tester(
       max_level=17,
@@ -203,9 +203,9 @@ class TestsLevel17(HedyTester):
     expected = textwrap.dedent("""\
     a = 1
     if str(a) == str('1'):
-      print(f'{a}')
+      print(f'''{a}''')
     else:
-      print(f'nee')""")
+      print(f'''nee''')""")
 
     self.multi_level_tester(
       code=code,
@@ -228,7 +228,7 @@ class TestsLevel17(HedyTester):
     expected = textwrap.dedent("""\
     step = 1 if int(0) < int(10) else -1
     for i in range(int(0), int(10) + step, step):
-      antwoord = input(f'Wat is 5*5')
+      antwoord = input(f'''Wat is 5*5''')
       try:
         antwoord = int(antwoord)
       except ValueError:
@@ -237,9 +237,9 @@ class TestsLevel17(HedyTester):
         except ValueError:
           pass
       if str(antwoord) == str('24'):
-        print(f'Dat is fout!')
+        print(f'''Dat is fout!''')
       else:
-        print(f'Dat is goed!')
+        print(f'''Dat is goed!''')
       if str(antwoord) == str('25'):
         i = 10
       time.sleep(0.1)""")
@@ -348,7 +348,7 @@ class TestsLevel17(HedyTester):
       if leeftijd {comparison} 12:
           print 'Dan ben je jonger dan ik!'""")
     expected = textwrap.dedent(f"""\
-      leeftijd = input(f'Hoe oud ben jij?')
+      leeftijd = input(f'''Hoe oud ben jij?''')
       try:
         leeftijd = int(leeftijd)
       except ValueError:
@@ -357,7 +357,7 @@ class TestsLevel17(HedyTester):
         except ValueError:
           pass
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
-        print(f'Dan ben je jonger dan ik!')""")
+        print(f'''Dan ben je jonger dan ik!''')""")
 
     self.single_level_tester(code=code, expected=expected)
 

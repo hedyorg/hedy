@@ -393,79 +393,6 @@ def echo_session_vars_main():
     return jsonify({'session': dict(session), 'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
 
 
-@app.route('/fix-code', methods=['POST'])
-def fix_code():
-    body = request.json
-    if not body:
-        return "body must be an object", 400
-    if 'code' not in body:
-        return "body.code must be a string", 400
-    if 'level' not in body:
-        return "body.level must be a string", 400
-    if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
-        return "if present, body.adventure_name must be a string", 400
-
-    code = body['code']
-    level = int(body['level'])
-
-    # Language should come principally from the request body,
-    # but we'll fall back to browser default if it's missing for whatever
-    # reason.
-    lang = body.get('lang', g.lang)
-
-    # true if kid enabled the read aloud option
-    read_aloud = body.get('read_aloud', False)
-
-    response = {}
-    username = current_user()['username'] or None
-    exception = None
-
-    querylog.log_value(level=level, lang=lang, session_id=utils.session_id(), username=username)
-
-    try:
-        with querylog.log_time('transpile'):
-
-            try:
-                transpile_result = hedy.transpile(code, level)
-                response = "OK"
-            except hedy.exceptions.FtfyException as ex:
-                # The code was fixed with a warning
-                response['Error'] = translate_error(ex.error_code, ex.arguments)
-                response['FixedCode'] = ex.fixed_code
-                response['Location'] = ex.error_location
-                transpile_result = ex.fixed_result
-                exception = ex
-
-    except hedy.exceptions.HedyException as ex:
-        traceback.print_exc()
-        response = hedy_error_to_response(ex)
-        exception = ex
-
-    except Exception as E:
-        traceback.print_exc()
-        print(f"error transpiling {code}")
-        response["Error"] = str(E)
-        exception = ex
-
-    querylog.log_value(server_error=response.get('Error'))
-    parse_logger.log({
-        'session': utils.session_id(),
-        'date': str(datetime.datetime.now()),
-        'level': level,
-        'lang': lang,
-        'code': code,
-        'server_error': response.get('Error'),
-        'exception': get_class_name(exception),
-        'version': version(),
-        'username': username,
-        'read_aloud': read_aloud,
-        'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
-        'adventure_name': body.get('adventure_name', None)
-    })
-
-    return jsonify(response)
-
-
 @app.route('/parse', methods=['POST'])
 def parse():
     body = request.json
@@ -507,19 +434,14 @@ def parse():
                 if username:
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
-            except hedy.exceptions.InvalidSpaceException as ex:
-                response['Warning'] = translate_error(ex.error_code, ex.arguments)
-                response['Location'] = ex.error_location
-                transpile_result = ex.fixed_result
-                exception = ex
-            except hedy.exceptions.InvalidCommandException as ex:
-                response['Error'] = translate_error(ex.error_code, ex.arguments)
-                response['Location'] = ex.error_location
-                transpile_result = ex.fixed_result
-                exception = ex
             except hedy.exceptions.FtfyException as ex:
-                response['Error'] = translate_error(ex.error_code, ex.arguments)
+                translated_error = translate_error(ex.error_code, ex.arguments)
+                if type(ex) is hedy.exceptions.InvalidSpaceException:
+                    response['Warning'] = translated_error
+                else:
+                    response['Error'] = translated_error
                 response['Location'] = ex.error_location
+                response['FixedCode'] = ex.fixed_code
                 transpile_result = ex.fixed_result
                 exception = ex
             except hedy.exceptions.UnquotedEqualityCheck as ex:
@@ -625,7 +547,7 @@ def translate_error(code, arguments):
     arguments_that_require_translation = ['allowed_types', 'invalid_type', 'invalid_type_2', 'character_found',
                                           'concept', 'tip']
     arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2',
-                                           'variable']
+                                           'variable', 'invalid_value']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
     error_template = gettext('' + str(code))
