@@ -126,6 +126,7 @@ commands_per_level = {
 }
 
 command_turn_literals = ['right', 'left']
+command_make_color = ['red', 'blue']
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
@@ -141,6 +142,7 @@ commands_and_types_per_level = {
     },
     Command.turn: {1: command_turn_literals,
                    2: [HedyType.integer, HedyType.input]},
+    Command.color: {1: [command_make_color]},
     Command.forward: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
