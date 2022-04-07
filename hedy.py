@@ -39,6 +39,7 @@ class Command:
     echo = 'echo'
     turn = 'turn'
     forward = 'forward'
+    color = 'color'
     add_to_list = 'add to list'
     remove_from_list = 'remove from list'
     list_access = 'at random'
@@ -62,6 +63,7 @@ translatable_commands = {Command.print: ['print'],
                          Command.ask: ['ask'],
                          Command.echo: ['echo'],
                          Command.turn: ['turn'],
+                         Command.color: ['color'],
                          Command.forward: ['forward'],
                          Command.add_to_list: ['add', 'to_list'],
                          Command.remove_from_list: ['remove', 'from'],
@@ -103,7 +105,7 @@ def promote_types(types, rules):
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {
-    1 :['print', 'ask', 'echo', 'turn', 'forward'],
+    1 :['print', 'ask', 'echo', 'turn', 'forward', 'color'],
     2 :['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
     3 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
     4 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
@@ -788,7 +790,6 @@ class UsesTurtle(Transformer):
             else:
                 return False # some nodes like text and punctuation have text children (their letters) these are not turtles
 
-
     def forward(self, args):
         return True
 
@@ -1177,7 +1178,18 @@ class ConvertToPython_1(ConvertToPython):
         return self.make_forward(int(args[0]))
 
     def color(self, args):
+        if len(args) == 0:
+            return "t.pencolor('orange')"  # no arguments defaults to orange ink
+
+        arg = args[0].data
+        if arg == 'red':
             return "t.pencolor('red')"
+        elif arg == 'blue':
+            return "t.pencolor('blue')"
+        else:
+            # the TypeValidator should protect against reaching this line:
+            raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
+                                                          allowed_types=get_allowed_types(Command.color, self.level))
 
     def turn(self, args):
         if len(args) == 0:
@@ -1198,6 +1210,9 @@ class ConvertToPython_1(ConvertToPython):
 
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True)
+
+    def make_color(self, parameter):
+        return self.make_turtle_command(parameter, Command.color, 'color', False)
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
         variable = self.get_fresh_var('trtl')
@@ -1228,7 +1243,10 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def color(self, args):
         if len(args) == 0:
-            return "t.pencolor('red')"
+            return "t.pencolor('orange')"
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_color(hash_var(arg))
 
     def turn(self, args):
         if len(args) == 0:

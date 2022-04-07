@@ -6,6 +6,8 @@ export const LANG_id = {
 '_FORWARD':'(?:maju|forward)',
 '_TURN':'(?:belok|turn)',
 '_COLOR':'(?:color|color)',
+'_RED':'(?:red|red)',
+'_BLUE':'(?:blue|blue)',
 '_LEFT':'(?:kiri|left)',
 '_RIGHT':'(?:kanan|right)',
 '_IS':'(?:adalah|is)',

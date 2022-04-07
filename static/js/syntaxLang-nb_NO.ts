@@ -6,6 +6,8 @@ export const LANG_nb_NO = {
 '_FORWARD':'(?:frem|forward)',
 '_TURN':'(?:snu|turn)',
 '_COLOR':'(?:color|color)',
+'_RED':'(?:red|red)',
+'_BLUE':'(?:blue|blue)',
 '_LEFT':'(?:venstre|left)',
 '_RIGHT':'(?:høyre|right)',
 '_IS':'(?:er|is)',

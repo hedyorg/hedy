@@ -5,6 +5,8 @@ export const LANG_es = {
 '_ECHO':'(?:eco|echo)',
 '_FORWARD':'(?:adelante|forward)',
 '_COLOR':'(?:color|color)',
+'_RED':'(?:red|red)',
+'_BLUE':'(?:blue|blue)',
 '_TURN':'(?:girar|turn)',
 '_LEFT':'(?:izquierda|left)',
 '_RIGHT':'(?:derecha|right)',

@@ -6,6 +6,8 @@ export const LANG_hi = {
 '_FORWARD':'(?:forward|आगे)',
 '_TURN':'(?:|मोड़)',
 '_COLOR':'(?:color|color)',
+'_RED':'red',
+'_BLUE':'blue',
 '_LEFT':'left',
 '_RIGHT':'right',
 '_IS':'(?:is|है)',

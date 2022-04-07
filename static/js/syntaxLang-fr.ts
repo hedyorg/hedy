@@ -6,6 +6,8 @@ export const LANG_fr = {
 '_FORWARD':'(?:avance|forward)',
 '_TURN':'(?:tourne|turn)',
 '_COLOR':'(?:color|color)',
+'_RED':'(?:red|red)',
+'_BLUE':'(?:blue|blue)',
 '_LEFT':'(?:gauche|left)',
 '_RIGHT':'(?:droite|right)',
 '_IS':'(?:est|is)',

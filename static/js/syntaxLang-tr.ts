@@ -6,6 +6,8 @@ export const LANG_tr = {
 '_FORWARD':'(?:ileri|forward)',
 '_TURN':'(?:döndür|turn)',
 '_COLOR':'(?:color|color)',
+'_RED':'(?:red|red)',
+'_BLUE':'(?:blue|blue)',
 '_LEFT':'(?:sol|left)',
 '_RIGHT':'(?:sağ|right)',
 '_IS':'(?:eşit|is)',

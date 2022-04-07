@@ -42,6 +42,8 @@ var currentLang: {
   _ASK: string;
   _ECHO: string;
   _COLOR: string;
+  _RED: string;
+  _BLUE: string;
   _FORWARD: string;
   _TURN: string;
   _LEFT: string;
@@ -645,6 +647,10 @@ function rule_level1() {
   },{
     regex: START_LINE + "(" + currentLang._COLOR + ")(" + END_WORD + ")(.*)$",
     token: ['text','keyword','text','text'],
+    next: 'start',
+  }, {
+    regex: START_LINE + "(" + currentLang._COLOR + ")(" + SPACE + ")(" + WORD + ")( *)$",
+    token: ['text','keyword','text','keyword','text'],
     next: 'start',
   },{
     regex: START_LINE + "(" + currentLang._FORWARD + ")(" + SPACE + ")([0-9]*)( *)$",

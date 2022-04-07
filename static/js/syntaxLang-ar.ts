@@ -6,6 +6,8 @@ export const LANG_ar = {
 '_FORWARD':'(?:forward|تقدم)',
 '_TURN':'(?:turn|انعطف)',
 '_COLOR':'(?:color|color)',
+'_RED':'red',
+'_BLUE':'blue',
 '_LEFT':'left',
 '_RIGHT':'right',
 '_IS':'(?:is|هو)',

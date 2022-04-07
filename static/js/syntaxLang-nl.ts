@@ -6,6 +6,8 @@ export const LANG_nl = {
 '_FORWARD':'(?:vooruit|forward)',
 '_TURN':'(?:draai|turn)',
 '_COLOR':'(?:color|color)',
+'_RED':'(?:red|red)',
+'_BLUE':'(?:blue|blue)',
 '_LEFT':'(?:links|left)',
 '_RIGHT':'(?:rechts|right)',
 '_IS':'(?:is|is)',
