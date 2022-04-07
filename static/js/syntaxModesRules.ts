@@ -42,8 +42,17 @@ var currentLang: {
   _ASK: string;
   _ECHO: string;
   _COLOR: string;
-  _RED: string;
+  _BLACK: string;
   _BLUE: string;
+  _BROWN: string;
+  _GRAY: string;
+  _GREEN: string;
+  _ORANGE: string;
+  _PINK: string;
+  _PURPLE: string;
+  _RED: string;
+  _WHITE: string;
+  _YELLOW: string;
   _FORWARD: string;
   _TURN: string;
   _LEFT: string;

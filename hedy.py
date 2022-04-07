@@ -126,7 +126,7 @@ commands_per_level = {
 }
 
 command_turn_literals = ['right', 'left']
-command_make_color = ['red', 'blue']
+command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
@@ -1181,13 +1181,31 @@ class ConvertToPython_1(ConvertToPython):
 
     def color(self, args):
         if len(args) == 0:
-            return "t.pencolor('orange')"  # no arguments defaults to orange ink
+            return "t.pencolor('black')"  # no arguments defaults to black ink
 
         arg = args[0].data
-        if arg == 'red':
-            return "t.pencolor('red')"
+        if arg == 'black':
+            return "t.pencolor('black')"
         elif arg == 'blue':
             return "t.pencolor('blue')"
+        elif arg == 'brown':
+            return "t.pencolor('brown')"
+        elif arg == 'gray':
+            return "t.pencolor('gray')"
+        elif arg == 'green':
+            return "t.pencolor('green')"
+        elif arg == 'orange':
+            return "t.pencolor('orange')"
+        elif arg == 'pink':
+            return "t.pencolor('pink')"
+        elif arg == 'purple':
+            return "t.pencolor('purple')"
+        elif arg == 'red':
+            return "t.pencolor('red')"
+        elif arg == 'white':
+            return "t.pencolor('white')"
+        elif arg == 'yellow':
+            return "t.pencolor('yellow')"
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
@@ -1245,7 +1263,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def color(self, args):
         if len(args) == 0:
-            return "t.pencolor('orange')"
+            return "t.pencolor('black')"
         arg = args[0]
         if self.is_variable(arg):
             return self.make_color(hash_var(arg))
