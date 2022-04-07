@@ -281,12 +281,8 @@ class TestsLevel1(HedyTester):
   def test_color_no_args(self):
     code = "color"
     expected = "t.pencolor('black')"
-    self.multi_level_tester(
-      max_level=self.max_turtle_level,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_turtle()
-    )
+    self.single_level_tester(code=code, expected=expected,
+                             extra_check_function=self.is_turtle())
 
   def test_one_color_red(self):
     code = "color red"
