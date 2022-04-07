@@ -182,26 +182,6 @@ babel = Babel(app)
 def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
-"""
-    Some important notes relates to Flask-Babel usage:
-    -   We can always get a translation using gettext('english string')
-        NOTE: We can shorten this notation by simply using _('english string')
-    -   We can insert some variable like this: gettext('some string %(value)s', value=42)
-    -   More interesting for us might be the 'lazy string' the can be defined outside requests, like this:
-    -       lazy_gettext('Account successfully saved')
-    -   This will be really useful when wanting to return translated error messages
-    
-    - We have to mark ALL translatable string (in english!) with gettext() -> then create a .pot file
-    - We create the file as follows: 
-        pybabel extract -F babel.cfg -o messages.pot .
-    - To add a translation (for dutch): 
-        pybabel init -i messages.pot -d translations -l nl
-    - To update your files (when adding new strings):
-        FIRST create new file:  pybabel extract -F babel.cfg -o messages.pot . 
-        THEN:                   pybabel update -i messages.pot -d translations
-    LASTLY compile the files:   pybabel compile -d translations
-"""
-
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
@@ -327,34 +307,8 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
 def enrich_context_with_user_info():
-    session['set_keyword_lang'] = False
     user = current_user()
-    data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
-    if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
-        user_data = DATABASE.user_by_username(user.get('username'))
-        data['user_messages'] = 0
-        if user_data.get('language', '') in ALL_LANGUAGES.keys():
-            g.lang = session['lang'] = user_data['language']
-        if user_data.get('keyword_language', '') in ALL_LANGUAGES.keys():
-            g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
-            session['set_keyword_lang'] = True
-
-        data['user_data'] = user_data
-        if 'classes' in user_data:
-            data['user_classes'] = DATABASE.get_student_classes(user.get('username'))
-        user_achievements = DATABASE.achievements_by_username(user.get('username'))
-        if user_achievements:
-            data['user_achievements'] = user_achievements
-        user_invites = DATABASE.get_username_invite(user.get('username'))
-        if user_invites:
-            Class = DATABASE.get_class(user_invites['class_id'])
-            if Class:
-                invite_data = user_invites.copy()
-                invite_data['class_name'] = Class.get('name')
-                invite_data['teacher'] = Class.get('teacher')
-                invite_data['join_link'] = Class.get('link')
-                data['invite_data'] = invite_data
-                data['user_messages'] += 1
+    data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user)}
     return data
 
 
@@ -643,11 +597,14 @@ def achievements_page():
         url = request.url.replace('/my-achievements', '/login')
         return redirect(url, code=302)
 
+    user_achievements = DATABASE.achievements_by_username(user.get('username')) or []
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
     achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
 
-    return render_template('achievements.html', page_title=gettext('title_achievements'),
-                           achievements=achievements, template_achievements=achievement_translations, current_page='my-profile')
+
+    return render_template('achievements.html', page_title=gettext('title_achievements'), achievements=achievements,
+                            user_achievements=user_achievements, template_achievements=achievement_translations,
+                            current_page='my-profile')
 
 
 @app.route('/programs', methods=['GET'])
@@ -1004,11 +961,28 @@ def reset_page():
 @app.route('/my-profile', methods=['GET'])
 @requires_login
 def profile_page(user):
+
+    profile = DATABASE.user_by_username(user['username'])
     programs = DATABASE.public_programs_for_user(user['username'])
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
+    classes = []
+    if profile.get('classes'):
+        for class_id in profile.get('classes'):
+            classes.append(DATABASE.get_class(class_id))
+
+    invite = DATABASE.get_username_invite(user['username'])
+    if invite:
+        # If there is an invite: retrieve the class information
+        class_info = DATABASE.get_class(invite.get('class_id', None))
+        if class_info:
+            invite['teacher'] = class_info.get('teacher')
+            invite['class_name'] = class_info.get('name')
+            invite['join_link'] = class_info.get('link')
+
     return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
-                           public_settings=public_profile_settings, current_page='my-profile')
+                           user_data=profile, invite_data=invite, public_settings=public_profile_settings,
+                           user_classes=classes, current_page='my-profile')
 
 
 @app.route('/<page>')
@@ -1307,7 +1281,7 @@ def public_user_page(username):
     user_public_info = DATABASE.get_public_profile_settings(username)
     if user_public_info:
         user_programs = DATABASE.public_programs_for_user(username)
-        user_achievements = DATABASE.progress_by_username(username)
+        user_achievements = DATABASE.progress_by_username(username) or {}
 
         favourite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
@@ -1316,7 +1290,7 @@ def public_user_page(username):
             user_programs = user_programs[:5]
 
         last_achieved = None
-        if 'achieved' in user_achievements:
+        if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
 
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
