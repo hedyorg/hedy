@@ -1509,7 +1509,7 @@ editor.on("guttermousedown", function (e: any) {
 
     var breakpoints = e.editor.session.getBreakpoints(row, 0);
     var row = e.getDocumentPosition().row;
-    if (typeof breakpoints[row] === typeof undefined && row != e.editor.getLastVisibleRow()){
+    if (typeof breakpoints[row] === typeof undefined && row != e.editor.getLastVisibleRow() + 1) {
       e.editor.session.setBreakpoint(row);
       row = getCorrectVisibleRow(row, e.editor);
       lines[row].innerHTML = addDisabledClass(lines[row]);
@@ -1558,7 +1558,7 @@ function adjustLines(disabledRow: []) {
 }
 
 function addDisabledClass(str: Element) {
-  if (!str.children[0].innerHTML.includes("ace-disabled")) {
+  if (!str.children[0]?.innerHTML?.includes("ace-disabled")) {
     return '<div class="ace-disabled">' + str.innerHTML + '</div>';
   }
   return str.innerHTML;
