@@ -15,7 +15,7 @@ class TestsLevel14(HedyTester):
       if leeftijd {comparison} 12
           print 'Dan ben je jonger dan ik!'""")
     expected = textwrap.dedent(f"""\
-      leeftijd = input(f'Hoe oud ben jij?')
+      leeftijd = input(f'''Hoe oud ben jij?''')
       try:
         leeftijd = int(leeftijd)
       except ValueError:
@@ -24,7 +24,7 @@ class TestsLevel14(HedyTester):
         except ValueError:
           pass
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
-        print(f'Dan ben je jonger dan ik!')""")
+        print(f'''Dan ben je jonger dan ik!''')""")
 
     self.multi_level_tester(
       code=code,
@@ -38,7 +38,7 @@ class TestsLevel14(HedyTester):
       if name != 'Hedy'
           print 'meh'""")
     expected = textwrap.dedent(f"""\
-      name = input(f'What is your name?')
+      name = input(f'''What is your name?''')
       try:
         name = int(name)
       except ValueError:
@@ -47,7 +47,7 @@ class TestsLevel14(HedyTester):
         except ValueError:
           pass
       if str(name).zfill(100)!='Hedy'.zfill(100):
-        print(f'meh')""")
+        print(f'''meh''')""")
 
     self.multi_level_tester(
       code=code,
@@ -63,7 +63,7 @@ class TestsLevel14(HedyTester):
     else
         print 'आप मुझसे बड़े हैं!'""")
     expected = textwrap.dedent(f"""\
-      v6cdeb9dc4e33aa47ac927755899137f2 = input(f'आप कितने साल के हैं?')
+      v6cdeb9dc4e33aa47ac927755899137f2 = input(f'''आप कितने साल के हैं?''')
       try:
         v6cdeb9dc4e33aa47ac927755899137f2 = int(v6cdeb9dc4e33aa47ac927755899137f2)
       except ValueError:
@@ -72,9 +72,9 @@ class TestsLevel14(HedyTester):
         except ValueError:
           pass
       if str(v6cdeb9dc4e33aa47ac927755899137f2).zfill(100)>str(12).zfill(100):
-        print(f'आप मुझसे छोटे हैं!')
+        print(f'''आप मुझसे छोटे हैं!''')
       else:
-        print(f'आप मुझसे बड़े हैं!')""")
+        print(f'''आप मुझसे बड़े हैं!''')""")
 
     self.multi_level_tester(
       code=code,
@@ -91,7 +91,7 @@ class TestsLevel14(HedyTester):
       if name {comparison} 'Hedy'
           print 'meh'""")
     expected = textwrap.dedent(f"""\
-      name = input(f'What is your name?')
+      name = input(f'''What is your name?''')
       try:
         name = int(name)
       except ValueError:
@@ -100,7 +100,7 @@ class TestsLevel14(HedyTester):
         except ValueError:
           pass
       if str(name) == str('Hedy'):
-        print(f'meh')""")
+        print(f'''meh''')""")
 
     self.multi_level_tester(
       code=code,
@@ -117,7 +117,7 @@ class TestsLevel14(HedyTester):
       else
           print 'Dan ben je ouder dan ik!'""")
     expected = textwrap.dedent(f"""\
-      leeftijd = input(f'Hoe oud ben jij?')
+      leeftijd = input(f'''Hoe oud ben jij?''')
       try:
         leeftijd = int(leeftijd)
       except ValueError:
@@ -126,9 +126,9 @@ class TestsLevel14(HedyTester):
         except ValueError:
           pass
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
-        print(f'Dan ben je jonger dan ik!')
+        print(f'''Dan ben je jonger dan ik!''')
       else:
-        print(f'Dan ben je ouder dan ik!')""")
+        print(f'''Dan ben je ouder dan ik!''')""")
 
     self.multi_level_tester(
       code=code,
@@ -143,7 +143,7 @@ class TestsLevel14(HedyTester):
     if leeftijd {comparison} 12
         print 'Dan ben je jonger dan ik!'""")
     expected = textwrap.dedent(f"""\
-    leeftijd = input(f'Hoe oud ben jij?')
+    leeftijd = input(f'''Hoe oud ben jij?''')
     try:
       leeftijd = int(leeftijd)
     except ValueError:
@@ -152,7 +152,7 @@ class TestsLevel14(HedyTester):
       except ValueError:
         pass
     if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
-      print(f'Dan ben je jonger dan ik!')""")
+      print(f'''Dan ben je jonger dan ik!''')""")
 
     self.multi_level_tester(
       code=code,
@@ -240,7 +240,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
-      print(f'koekoek')""")
+      print(f'''koekoek''')""")
 
     self.multi_level_tester(
       code=code,
@@ -294,7 +294,7 @@ class TestsLevel14(HedyTester):
           print 'Some other string!'""")
       
     expected = textwrap.dedent(f"""\
-      leeftijd = input(f'Hoe oud ben jij?')
+      leeftijd = input(f'''Hoe oud ben jij?''')
       try:
         leeftijd = int(leeftijd)
       except ValueError:
@@ -303,9 +303,9 @@ class TestsLevel14(HedyTester):
         except ValueError:
           pass
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100) or str(leeftijd).zfill(100){comparison}str(15).zfill(100):
-        print(f'Dan ben je jonger dan ik!')
+        print(f'''Dan ben je jonger dan ik!''')
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100) and str(leeftijd).zfill(100){comparison}str(15).zfill(100):
-        print(f'Some other string!')""")
+        print(f'''Some other string!''')""")
 
     self.multi_level_tester(
       code=code,

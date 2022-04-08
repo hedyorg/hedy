@@ -924,11 +924,6 @@ class IsValid(Filter):
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    # def program(self, meta, args):
-    #     if len(args) == 0:
-    #         return False, InvalidInfo("empty program")
-    #     return super().program(meta, args)
-
     def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
@@ -1554,23 +1549,32 @@ class ConvertToPython_12(ConvertToPython_11):
         return ''.join(args)
 
     def text_in_quotes(self, args):
-        # We need to re-add the quotes, so that the Python code becomes name = 'Jan'
-        # Even though the quotes could be single or double, we could always use the same ones here
-        text = args[0].replace("'", "\\'")
+        # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
+        text = args[0]
+        if "'" in text:
+            return f'"{text}"'
         return f"'{text}'"
 
     def process_token_or_tree(self, argument):
         if isinstance(argument, Tree):
             return f'{str(argument.children[0])}'
         else:
-            # If the string is quoted, we have to use " instead of ' to avoid f-str illegal syntax
-            if "'" in argument:  # Check only for single quotes because text_in_quotes re-adds single quotes only
-                return '"' + argument.replace("'", '').replace('"', '') + '"'
-            return f'{argument}'
+            return argument
+
+    def print_ask_args(self, args):
+        result = super().print_ask_args(args)
+        if "'''" in result:
+            raise exceptions.UnsupportedStringValue(invalid_value="'''")
+        return result
+
+    def print(self, args):
+        argument_string = self.print_ask_args(args)
+        return f"print(f'''{argument_string}''')"
 
     def ask(self, args):
         var = args[0]
-        assign = super().ask(args)
+        argument_string = self.print_ask_args(args[1:])
+        assign = f"{var} = input(f'''{argument_string}''')"
 
         return textwrap.dedent(f"""\
         {assign}
@@ -2085,8 +2089,6 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)
-        elif invalid_info.error_type == 'empty program':
-            raise exceptions.EmptyProgramException()
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
