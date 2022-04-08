@@ -820,13 +820,9 @@ def view_program(id):
     # The program is valid, verify if the creator also have a public profile
     result['public_profile'] = True if DATABASE.get_public_profile_settings(result['username']) else None
 
-
-    # If we asked for a specific language, use that, otherwise use the language
-    # of the program's author.
-    # Default to the language of the program's author(but still respect)
-    # the switch if given.
-    # Todo TB -> This seems like ancient code as we always request a language, can be removed? (04-04-22)
-    g.lang = request.args.get('lang', result['lang'])
+    # If the language doesn't match the user -> parse the keywords
+    if result.get("lang", "en") not in [g.lang, "en"] and g.lang in ALL_KEYWORD_LANGUAGES:
+        result['code'] = hedy_translation.translate_keywords(result.get('code'), result.get('lang', 'en'), g.lang, level=int(result.get('level', 1)))
 
     arguments_dict = {}
     arguments_dict['program_id'] = id
@@ -846,9 +842,6 @@ def view_program(id):
 
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
-    arguments_dict['menu'] = True
-    arguments_dict['username'] = user.get('username', None)
-    arguments_dict['is_teacher'] = is_teacher(user)
 
     return render_template("view-program-page.html", **arguments_dict)
 
@@ -1058,6 +1051,12 @@ def explore():
                 program['error'] = True
             DATABASE.store_program(program)
         public_profile = DATABASE.get_public_profile_settings(program['username'])
+        # If the language doesn't match the user -> parse the keywords
+        if program.get("lang", "en") != g.keyword_lang and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
+            code = hedy_translation.translate_keywords(program.get('code'), from_lang=program.get('lang'),
+                                                       to_lang=g.keyword_lang, level=int(program.get('level', 1)))
+        else:
+            code = program['code']
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
@@ -1065,7 +1064,7 @@ def explore():
             'id': program['id'],
             'error': program['error'],
             'public_user': True if public_profile else None,
-            'code': "\n".join(program['code'].split("\n")[:4])
+            'code': "\n".join(code.split("\n")[:4])
         })
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
