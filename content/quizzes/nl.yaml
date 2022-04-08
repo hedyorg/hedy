@@ -1091,13 +1091,13 @@ levels:
             code: "{repeat} 100 {times} 'Hoi !'"
             mp_choice_options:
             -   "option_text": "Goed"
-                "feedback": Nope, er mist een woord
+                "feedback": "Nope, er mist een woord"
             -   "option_text": "Fout, er moeten aanhalingstekens bij 100"
-                "feedback": 100 moet juist zonder aanhalingstekens
-            -   "option_text": Fout, het commando {times} mist
-                "feedback": {times} staat er wel, er mist een ander woord.
-            -   "option_text": Fout, het commando {print} mist
-                "feedback": Correct
+                "feedback": "100 moet juist zonder aanhalingstekens"
+            -   "option_text": "Fout, het commando {times} mist"
+                "feedback": "{times} staat er wel, er mist een ander woord."
+            -   "option_text": "Fout, het commando {print} mist"
+                "feedback": "Correct"
             correct_answer: "D"
             hint: "Het antwoord is: repeat 100 times print 'Hoi'"
             question_score: '10'
@@ -1108,13 +1108,13 @@ levels:
                 {repeat} 7 {times} {print} 'da ba dee, da ba dee'
             mp_choice_options:
             -   "code": "I'm"
-                "feedback": Goedzo !
+                "feedback": "Goedzo !"
             -   "code": "{print}"
-                "feedback": {print} is goed gespeld
+                "feedback": "{print} is goed gespeld"
             -   "code": "{repeat}"
-                "feedback": {repeat} is goed gespeld
+                "feedback": "{repeat} is goed gespeld"
             -   "code": "{times}"
-                "feedback": {times} is goed gespeld
+                "feedback": "{times} is goed gespeld"
             correct_answer: "A"
             hint: "I'm is fout, je mag geen aanhalingstekens gebruiken voor tekst"
             question_score: '10'
