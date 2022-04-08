@@ -7,7 +7,6 @@ from website.auth import current_user
 import utils
 from flask import request, g, session, redirect, url_for
 from flask_helpers import render_template
-from website.yaml_file import YamlFile
 
 MAX_ATTEMPTS = 3
 
@@ -154,7 +153,7 @@ def routes(app, database, achievements, quizzes):
                 achievement = json.dumps(achievement)
 
         # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level)
+        questions = QUIZZES[g.lang].get_quiz_data_for_level(level)
         if not questions:
             return no_quiz_data_error()
 
