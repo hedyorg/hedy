@@ -135,7 +135,7 @@ def update_is_teacher(user, is_teacher_value=1):
     DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
 
     if user_becomes_teacher and not is_testing_request(request):
-        send_email_template('welcome_teacher', user['email'], '')
+        send_email_template(template='welcome_teacher', email=user['email'], username=user['username'])
 
 
 # Thanks to https://stackoverflow.com/a/34499643
@@ -220,13 +220,16 @@ def store_new_account(account, email):
         resp = make_response({'username': username, 'token': hashed_token})
     # Otherwise, we send an email with a verification link and we return an empty body
     else:
-        send_email_template('welcome_verify', email,
-                            email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                username) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'],
-                            username=user['username'])
+        send_email_template(template='welcome_verify', email=email,
+                            link=create_verify_link(username, hashed_token), username=user['username'])
         resp = make_response({})
     return user, resp
 
+
+def create_verify_link(username, token):
+    email = email_base_url() + '/auth/verify?username='
+    email += urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(token)
+    return email
 
 # Note: translations are used only for texts that will be seen by a GUI user.
 def routes(app, database):
@@ -469,7 +472,7 @@ def routes(app, database):
         DATABASE.update_user(user['username'], {'password': hashed})
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
         if not is_testing_request(request):
-            send_email_template('change_password', user['email'], '', lang=user['language'], username=user['username'])
+            send_email_template(template='change_password', email=user['email'], username=user['username'])
 
         return gettext('password_updated'), 200
 
@@ -520,10 +523,9 @@ def routes(app, database):
                 if is_testing_request(request):
                     resp = {'username': user['username'], 'token': hashed_token}
                 else:
-                    send_email_template('welcome_verify', email,
-                                        email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                            user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token),
-                                        lang=body['language'], username=user['username'])
+                    send_email_template(template='welcome_verify', email=email,
+                                        link=create_verify_link(user['username'], hashed_token),
+                                        username=user['username'])
 
                 # We check whether the user is in the Mailchimp list.
                 if not is_testing_request(request) and MAILCHIMP_API_URL:
@@ -599,16 +601,15 @@ def routes(app, database):
 
         # Create a token -> use the reset_length value as we don't want the token to live as long as a login one
         token = make_salt()
+        # Todo TB -> Don't we want to use a hashed token here as well?
         DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + reset_length})
 
         if is_testing_request(request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
-            send_email_template('recover_password', user['email'],
-                                email_base_url() + '/reset?username=' + urllib.parse.quote_plus(
-                                    user['username']) + '&token=' + urllib.parse.quote_plus(token),
-                                lang=user['language'], username=user['username'])
+            send_email_template(template='recover_password', email=user['email'],
+                                link=create_verify_link(user['username'], token), username=user['username'])
             return jsonify({'message':gettext('sent_password_recovery')}), 200
 
     @app.route('/auth/reset', methods=['POST'])
@@ -640,7 +641,7 @@ def routes(app, database):
         DATABASE.delete_all_tokens(body['username'])
 
         if not is_testing_request(request):
-            send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
+            send_email_template(template='reset_password', email=user['email'], username=user['username'])
 
         return jsonify({'message':gettext('password_resetted')}), 200
 
@@ -704,10 +705,9 @@ def routes(app, database):
         if is_testing_request(request):
             resp = {'username': user['username'], 'token': hashed_token}
         else:
-            send_email_template('welcome_verify', body['email'],
-                                email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                    user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token),
-                                lang=user['language'], username=user['username'])
+            send_email_template(template='welcome_verify', email=body['email'],
+                                link=create_verify_link(user['username'], hashed_token),
+                                username=user['username'])
 
         return {}, 200
 
@@ -747,16 +747,11 @@ def send_email(recipient, subject, body_plain, body_html):
         print('Email sent to ' + recipient)
 
 
-def send_email_template(template, email, link='', lang="en", username=''):
-    # Not really nice, but we don't call this often as it is cached
-    texts = collections.defaultdict(lambda: 'Unknown Exception')
-    texts.update(YamlFile.for_file('content/emails/en.yaml').to_dict())
-    texts.update(YamlFile.for_file(f'content/emails/{lang}.yaml').to_dict())
-
-    subject = texts[template + '_subject']
-    body = texts['hello'].format(username=username) + "\n\n"
-    body += texts[template + '_body'] + "\n\n"
-    body += texts['goodbye']
+def send_email_template(template, email, link=None, username=gettext('user')):
+    subject = gettext('mail_' + template + '_subject')
+    body = gettext('mail_hello').format(username=username) + "\n\n"
+    body += gettext('mail_' + template + '_body') + "\n\n"
+    body += gettext('mail_goodbye')
 
     with open('templates/base_email.html', 'r', encoding='utf-8') as f:
         body_html = f.read()
@@ -764,8 +759,8 @@ def send_email_template(template, email, link='', lang="en", username=''):
     body_html = body_html.format(content=body)
     body_plain = body
     if link:
-        body_plain = body_plain.format(link='Please copy and paste this link into a new tab: ' + link)
-        body_html = body_html.format(link='<a href="' + link + '">Link</a>')
+        body_plain = body_plain.format(link=gettext('copy_mail_link') + " " + link)
+        body_html = body_html.format(link='<a href="' + link + '">{link}</a>').format(link=gettext('link'))
 
     send_email(email, subject, body_plain, body_html)
 
