@@ -715,12 +715,11 @@ def get_user_formatted_age(now, date):
 @app.route('/hedy/<level>', methods=['GET'], defaults={'program_id': None})
 @app.route('/hedy/<level>/<program_id>', methods=['GET'])
 def index(level, program_id):
-    if re.match('\\d', level):
-        try:
-            g.level = level = int(level)
-        except:
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
             return utils.error_page(error=404, ui_message=gettext('no_such_level'))
-    else:
+    except:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = ''
