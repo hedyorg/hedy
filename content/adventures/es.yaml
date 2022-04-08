@@ -128,11 +128,11 @@ adventures:
                     ```
                 start_code: "{print} Aquí viene tu historia!"
                 example_code: |
-                    ## Example Hedy Code
+                    ## Programa Hedy de ejemplo
 
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    animales {is} 🦔, 🐿, 🦉, 🦇
+                    {print} Él ahora escucha el ruido de un animales {at} {random}
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
@@ -147,43 +147,43 @@ adventures:
                     {print} it was a animals {at} {random}
                     ```
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
+                    Este es un ejemplo del comando `{remove}`en tu historia
                 example_code_3: |
-                    ## Example Hedy code
+                    ## Programa Hedy de ejemplo
 
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} Su mochila se hizo muy pesada.
+                    {print} Dentro de ella había una botella de agua, una linterna y un ladrillo
+                    bolso {is} agua, linterna, ladrillo
+                    botar {is} {ask} ¿Que artículo debería botar él?
+                    {remove} botar {from} bolso
                     ```
             9:
-                story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
-                story_text_2: "The example above is pretty straightforward, but with nesting you can really elaborate your code and turn your story into a real game. Check out this example!\n"
-                example_code: "## Example Hedy Code\n```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
-                example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Historia\nEn este nivel puedes usar anidamiento para poner comandos {if}, {repeat} o {for} dentro de otros comandos {if}, {repeat} o {for}. Esto te permite muchas opciones y te ayuda a hacer tu historia más interactiva.\n"
+                story_text_2: "El ejemplo de arriba es bastante sencillo, pero con la anidación puedes realmente elaborar tu código y convertir la historia en un juego real. ¡Mira este ejemplo!\n"
+                example_code: "## Programa Hedy de ejemplo \n```\n{print} 'Robin está caminando hacia el centro de la ciudad'\nlugar = {ask} '¿Robin va a ir a una tienda, o va a ir a casa?'\n{if} lugar {is} tienda\n    {print} 'Ella entra en la tienda.'\n    {print} 'Robin ve un libro que luce interesante'\n    libro = {ask} '¿Compra el libro Robin?'\n    {if} libro {is} si\n        {print} 'Robin compra el libro y se va a casa'\n    {else}\n        {print} 'Robin deja la tienda y se va a casa'\n{else}\n    {print} 'Robin se va a casa'\n```\n"
+                example_code_2: "## Elabora el código\n```\nespada = perdida\njuego = en marcha\n{print} 'Nuestra heroína está caminando en el bosque'\n{print} 'El camino se divide en dos'\n{repeat} 2 {times}\n    {if} juego {is} en marcha\n        camino = {ask} '¿Cuál camino debería escoger ella?'\n        {if} camino {is} izquierda\n            {if} espada {is} encontrada\n                {print} '¡Nuestra heroína se encuentra a un dragón!'\n                {print} '¡Por suerte nuestra heroína tiene una espada para vencer a la bestia!'\n                juego = finalizado\n            {else}\n                {print} '¡Nuestra heroína se encuentra a un dragón, pero no tiene ningún arma!'\n                {print} 'Nuestra heroína es vencida por el dragón...'\n                {print} 'Intenta de nuevo'\n                juego = finalizado\n        {if} camino {is} derecha\n            {if} espada {is} perdida\n                {print} 'Nuestra heroína se encuentra una espada'\n                {print} 'Esto podría ser muy útil'\n                espada = encontrada\n            {else}\n                {print} 'Ya encontraste la espada. No queda nada aquí.'\n                {print} 'Ella se devuelve'\n```\n"
+                start_code: '# coloca tú código aquí'
             12:
-                story_text: "## Story\nIn this level you can use the quotation marks to save multiple words in a variable.\n"
-                example_code: "## Example Hedy code\n\n\n```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Historia\nEn este nivel puedes usar las comillas para almacenar múltiples en una variable.\n"
+                example_code: "## Programa Hedy de ejemplo\n\n\n```\nnombre = 'La Reina de Inglaterra'\n{print} nombre ' estaba comiendo un pedazo de pastel, cuando de pronto...'\n```\n"
+                start_code: '# coloca tu código aquí'
             8:
-                story_text: "## Story\nIn this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n"
-                example_code: "## Example Hedy code\n\n```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '\U0001F4A5ZAP!\U0001F4A5'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!\U0001F996'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Historia\nEn este nivel puedes usar múltiples líneas en tu comandos {if}, ¡de esta manera puedes mejorar tu final triste o feliz!\n"
+                example_code: "## Código de Hedy de ejemplo\n\n```\n{print} '¡OH NO! ¡El T-rex se está acercando!'\nfinal = {ask} '¿Quieres un final triste o feliz?'\n{if} final {is} feliz\n    {print} 'Justo a tiempo Richard salta de vuelta en la máquina del tiempo!'\n    {print} 'Michael escribe el código y...'\n    {print} '\U0001F4A5¡ZAP!\U0001F4A5'\n    {print} 'Están de vuelta en su garage'\n{else}\n    {print} 'Michael grita ¡VAMOS RICHARD! ¡CORRE MÁS RÁPIDO!'\n    {print} 'Pero Richard es muy lento...'\n    {print} '¡El T-rex se acerca y se lo come en un una gran mordida!\U0001F996'\n```\n"
+                start_code: '# coloca tu código aquí'
             15:
-                story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
+                story_text: "## Historia\nUsando el bucle `{while}` puedes hacer que tus historias sean más interesantes. Por ejemplo, puedes usar `{while} juego {is} 'en marcha'` de forma que puedas jugar hasta que el juego se ha acabado.\nO puedes usar `{while} espada {is} 'perdida'` de forma que el jugador no pueda continuar el juego hasta que haya encontrado algo.\n"
                 example_code: "## Example Hedy code\n\n```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n"
-                start_code: '# place your code here'
+                start_code: '# coloca tú código aquí'
             13:
-                example_code: "## Example Hedy code\n\n```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
-                story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
-                start_code: '# place your code here'
+                example_code: "## Programa Hedy de ejemplo\n\n```\nespada = 'perdida'\njuego = 'en marcha'\n{print} 'Nuestra heroína está caminando en el bosque'\n{print} 'El camino se divide en dos'\n{for} i {in} {range} 0 {to} 2\n    {if} juego {is} 'en marcha'\n        camino = {ask} '¿Que camino debería escoger ella?'\n        {if} path {is} 'izquierda' {and} espada {is} 'encontrada'\n            {print} '¡Nuestra heroína se encuentra a un dragón!'\n            {print} '¡Por suerte nuestra heroína tiene una espada para vencer a la bestia!'\n            juego = 'acabado'\n        {if} camino {is} 'izquierda' {and} espada {is} 'perdida'\n            {print} '¡Nuestra heroína, encuentra un dragón, pero no tiene ningún arma!'\n            {print} 'Nuestra heroína es vencida por el dragón...'\n            {print} 'Intenta de nuevo'\n            game = 'acabado'\n        {if} camino {is} 'derecha' {and} espada {is} 'encontrada'\n            {print} 'Ya encontraste la espada. No queda nada aquí.'\n            {print} 'Ella camina de vuelta'\n        {if} camino {is} 'derecha' {and} espada {is} 'perdida'\n            {print} 'Nuestra heroína encuentra una espada'\n            {print} 'Esto podría resultar muy útil'\n            espada = 'encontrada'\n```\n"
+                story_text: "## Story\nUsando los comandos `{and}` y `{or}`puedes acortar tus historias. Por ejemplo, mira la historia del dragón.\n"
+                start_code: '# coloca tu código aquí'
             10:
-                story_text: "## Story\nIn this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.\n"
-                example_code: "## Example Hedy code\n\n```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Historia\nEn este nivel puedes usar el comando {for} en tu historia. De esta manera puedes programar fácimelmente el libro para niños 'oso pardo, oso pardo, ¿qué ves?'\n"
+                example_code: "## Programa Hedy de ejemplo\n\n```\nanimales = pájaro rojo, oveja negra, rana verde, pato amarillo, niño pequeño\n{print} 'oso pardo'\n{print} 'oso pardo'\n{print} '¿Qué ves?'\n{for} animal {in} animales\n    {print} 'Veo a un ' animal ' viéndome'\n    {print} animal\n    {print} animal\n    {print} '¿Qué ves?'\n{print} '¡Veo a todos los animales viéndome!'\n```\n"
+                start_code: '# coloca tu código aquí'
     songs:
         name: "Canción"
         description: "Imprime una canción"
