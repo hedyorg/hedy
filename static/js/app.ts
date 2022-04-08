@@ -1509,7 +1509,7 @@ editor.on("guttermousedown", function (e: any) {
 
     var breakpoints = e.editor.session.getBreakpoints(row, 0);
     var row = e.getDocumentPosition().row;
-    if (typeof breakpoints[row] === typeof undefined) {
+    if (typeof breakpoints[row] === typeof undefined && row != e.editor.getLastVisibleRow()){
       e.editor.session.setBreakpoint(row);
       row = getCorrectVisibleRow(row, e.editor);
       lines[row].innerHTML = addDisabledClass(lines[row]);
