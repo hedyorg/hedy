@@ -4,6 +4,10 @@ import {LANG_nl} from './syntaxLang-nl';
 import {LANG_ar} from './syntaxLang-ar';
 import {LANG_fr} from './syntaxLang-fr';
 import {LANG_hi} from './syntaxLang-hi';
+import {LANG_tr} from './syntaxLang-tr';
+import {LANG_id} from './syntaxLang-id';
+import {LANG_nb_NO} from './syntaxLang-nb_NO';
+
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
@@ -26,7 +30,6 @@ const SPACE     = " +";
 /*const END_WORD = '(?<=[' + CHARACTER + '])(?![' + CHARACTER + '])';*/
 
 const START_LINE = '(^ *)';
-
 
 const START_WORD = '(^| )';
 const END_WORD = '(?![' + CHARACTER + '])';
@@ -65,7 +68,7 @@ var currentLang: {
   _LENGTH: string;
 };
 
-switch(window.State.lang){
+switch(window.State.keyword_language){
   case 'nl':
     currentLang = LANG_nl;
     break;
@@ -78,8 +81,17 @@ switch(window.State.lang){
   case 'fr':
     currentLang = LANG_fr;
     break;
+  case 'tr':
+    currentLang = LANG_tr;
+    break;
   case 'hi':
     currentLang = LANG_hi;
+    break;
+  case 'id':
+    currentLang = LANG_id;
+    break;
+  case 'nb_NO':
+    currentLang = LANG_nb_NO;
     break;
   default:
     currentLang = LANG_en;
@@ -87,474 +99,430 @@ switch(window.State.lang){
 }
 
 
-// Lists of keywords by level
-const COMMANDS: {[key:number]: string[]} = {
-  4 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._FORWARD,
-    currentLang._TURN,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-  ],
-  5 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._FORWARD,
-    currentLang._TURN,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-  ],
-  6 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._FORWARD,
-    currentLang._TURN,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-  ],
-  7 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._FORWARD,
-    currentLang._TURN,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._REPEAT,
-    currentLang._TIMES,
-  ],
-  8 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._FORWARD,
-    currentLang._TURN,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._REPEAT,
-    currentLang._TIMES,
-  ],
-  9 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._FORWARD,
-    currentLang._TURN,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._REPEAT,
-    currentLang._TIMES,
-  ],
-  10 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._FORWARD,
-    currentLang._TURN,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._REPEAT,
-    currentLang._TIMES,
-    currentLang._FOR,
-  ],
-  11 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._FOR,
-    currentLang._RANGE,
-    currentLang._TO,
-  ],
-  12 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._FOR,
-    currentLang._RANGE,
-    currentLang._TO,
-  ],
-  13 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._FOR,
-    currentLang._RANGE,
-    currentLang._TO,
-    currentLang._AND,
-    currentLang._OR,
-  ],
-  14 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._FOR,
-    currentLang._RANGE,
-    currentLang._TO,
-    currentLang._AND,
-    currentLang._OR,
-  ],
-  15 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._FOR,
-    currentLang._RANGE,
-    currentLang._TO,
-    currentLang._AND,
-    currentLang._OR,
-    currentLang._WHILE,
-  ],
-  16 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._FOR,
-    currentLang._RANGE,
-    currentLang._TO,
-    currentLang._AND,
-    currentLang._OR,
-    currentLang._WHILE,
-  ],
-  17 :[
-    currentLang._ASK,
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._FOR,
-    currentLang._RANGE,
-    currentLang._TO,
-    currentLang._AND,
-    currentLang._OR,
-    currentLang._WHILE,
-    currentLang._ELIF,
-  ],
-  18 :[
-    currentLang._IS,
-    currentLang._PRINT,
-    currentLang._SLEEP,
-    currentLang._AT,
-    currentLang._RANDOM,
-    currentLang._ADD_LIST,
-    currentLang._TO_LIST,
-    currentLang._REMOVE,
-    currentLang._FROM,
-    currentLang._IN,
-    currentLang._IF,
-    currentLang._ELSE,
-    currentLang._FOR,
-    currentLang._RANGE,
-    currentLang._TO,
-    currentLang._AND,
-    currentLang._OR,
-    currentLang._WHILE,
-    currentLang._ELIF,
-    currentLang._INPUT,
-  ],
+/* 
+This variable lists all the keywords in each level, i.e. everything that should be displayed in red (of type `keyword`)
+
+There are several categories of keywords: 
+- SP_K_SP
+  These are the keywords that must be "alone" so neither preceded nor followed directly by a word 
+
+- K
+  These are the keywords that are independent of the context (formerly the symbols).
+  In particular, even if they are between 2 words, the syntax highlighting will select them
+
+- SP_K
+  This category of keywords allows you to have keywords that are not preceded
+  by another word, but that can be followed immediately by another word. (see the PR #2413)
+
+- K_SP
+  This category of keywords allows you to have keywords that can be preceded immediately
+  by another word, but that are not followed by another word.
+
+*/
+
+const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
+  4 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+    ],
+    "K" : [","],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._FORWARD,
+      currentLang._TURN,
+      currentLang._RANDOM,
+    ],
+    "K_SP" : [],
+  },
+  5 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._ELSE,
+    ],
+    "K" : [","],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._FORWARD,
+      currentLang._TURN,
+      currentLang._RANDOM,
+    ],
+    "K_SP" : [],
+  },
+  6 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._ELSE,
+    ],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._FORWARD,
+      currentLang._TURN,
+      currentLang._RANDOM,
+    ],
+    "K_SP" : [],
+  },
+  7 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._ELSE,
+      currentLang._REPEAT,
+      currentLang._TIMES,
+    ],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._FORWARD,
+      currentLang._TURN,
+      currentLang._RANDOM,
+    ],
+    "K_SP" : [],
+  },
+  8 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._REPEAT,
+    ],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._FORWARD,
+      currentLang._TURN,
+      currentLang._RANDOM,
+      currentLang._ELSE,
+      currentLang._TIMES,
+    ],
+    "K_SP" : [],
+  },
+  9 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._REPEAT,
+    ],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._FORWARD,
+      currentLang._TURN,
+      currentLang._RANDOM,
+      currentLang._ELSE,
+      currentLang._TIMES,
+    ],
+    "K_SP" : [],
+  },
+  10 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._REPEAT,
+      currentLang._FOR,
+    ],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._FORWARD,
+      currentLang._TURN,
+      currentLang._RANDOM,
+      currentLang._ELSE,
+      currentLang._TIMES,
+    ],
+    "K_SP" : [],
+  },
+  11 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._FOR,
+      currentLang._RANGE,
+      currentLang._TO,
+    ],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._RANDOM,
+      currentLang._ELSE,
+    ],
+    "K_SP" : [],
+  },
+  12 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._FOR,
+      currentLang._RANGE,
+      currentLang._TO,
+    ],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._RANDOM,
+      currentLang._ELSE,
+    ],
+    "K_SP" : [],
+  },
+  13 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._FOR,
+      currentLang._RANGE,
+      currentLang._TO,
+      currentLang._AND,
+      currentLang._OR,
+    ],
+    "K" : [",","-","=","/","\\*","\\+"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._RANDOM,
+      currentLang._ELSE,
+    ],
+    "K_SP" : [],
+  },
+  14 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._FOR,
+      currentLang._RANGE,
+      currentLang._TO,
+      currentLang._AND,
+      currentLang._OR,
+      currentLang._ELSE,
+    ],
+    "K" : [",","-","=","/","\\*","\\+","<",">","!"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._RANDOM,
+    ],
+    "K_SP" : [],
+  },
+  15 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._FOR,
+      currentLang._RANGE,
+      currentLang._TO,
+      currentLang._AND,
+      currentLang._OR,
+      currentLang._WHILE,
+    ],
+    "K" : [",","-","=","/","\\*","\\+","<",">","!"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._RANDOM,
+      currentLang._ELSE,
+    ],
+    "K_SP" : [],
+  },
+  16 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._ELSE,
+      currentLang._FOR,
+      currentLang._RANGE,
+      currentLang._TO,
+      currentLang._AND,
+      currentLang._OR,
+      currentLang._WHILE,
+    ],
+    "K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._RANDOM,
+    ],
+    "K_SP" : [],
+  },
+  17 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._ELSE,
+      currentLang._FOR,
+      currentLang._RANGE,
+      currentLang._TO,
+      currentLang._AND,
+      currentLang._OR,
+      currentLang._WHILE,
+    ],
+    "K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._ASK,
+      currentLang._SLEEP,
+      currentLang._RANDOM,
+    ],
+    "K_SP" : [
+      currentLang._ELIF,
+    ],
+  },
+  18 :{
+    "SP_K_SP" : [
+      currentLang._IS,
+      currentLang._AT,
+      currentLang._ADD_LIST,
+      currentLang._TO_LIST,
+      currentLang._REMOVE,
+      currentLang._FROM,
+      currentLang._IN,
+      currentLang._IF,
+      currentLang._ELSE,
+      currentLang._FOR,
+      currentLang._RANGE,
+      currentLang._TO,
+      currentLang._AND,
+      currentLang._OR,
+      currentLang._WHILE,
+      currentLang._INPUT,
+    ],
+    "K" : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":","\\(","\\)"],
+    "SP_K" : [
+      currentLang._PRINT,
+      currentLang._SLEEP,
+      currentLang._RANDOM,
+    ],
+    "K_SP" : [
+      currentLang._ELIF,
+    ],
+  },
 }
 
 
 // List of rules by level
 const LEVELS = [
-  {
-    name: 'level1',
-    rules: {
-        "start" : [
-          rule_level1(),
-        ]
-    },
-  },
-  {
-    name: 'level2',
-    rules: {
-        "start" : [
-          rule_level2(),
-        ]
-    },
-  },
-  {
-    name: 'level3',
-    rules: {
-        "start" : [
-          rule_level3(),
-        ]
-    },
-  },
-  {
-    name: 'level4',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(4),
-          rule_symbols('\,'),
-        ]
-    },
-  },
-  {
-    name: 'level5',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(5),
-          rule_symbols('\,'),
-        ]
-    },
-  },
-  {
-    name: 'level6',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(6),
-          rule_symbols('\-\+\=\/\*\,'),
-        ]
-    },
-  },
-  {
-    name: 'level7',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(7),
-          rule_symbols('\-\+\=\/\*\,'),
-        ]
-    },
-  },
-  {
-    name: 'level8',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(8),
-          rule_symbols('\-\+\=\/\*\,'),
-        ]
-    },
-  },
-  {
-    name: 'level9',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(9),
-          rule_symbols('\-\+\=\/\*\,'),
-        ]
-    },
-  },
-  {
-    name: 'level10',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(10),
-          rule_symbols('\-\+\=\/\*\,'),
-        ]
-    },
-  },
-  {
-    name: 'level11',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(11),
-          rule_symbols('\-\+\=\/\*\,'),
-        ]
-    },
-  },
-  {
-    name: 'level12',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(12),
-          rule_symbols('\-\+\=\/\*\,'),
-        ]
-    },
-  },
-  {
-    name: 'level13',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(13),
-          rule_symbols('\-\+\=\/\*\,'),
-        ]
-    },
-  },
-  {
-    name: 'level14',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(14),
-          rule_symbols('\-\+\=\/\*\,\<\>\!'),
-        ]
-    },
-  },
-  {
-    name: 'level15',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(15),
-          rule_symbols('\-\+\=\/\*\,\<\>\!'),
-        ]
-    },
-  },
-  {
-    name: 'level16',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(16),
-          rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]'),
-        ]
-    },
-  },
-  {
-    name: 'level17',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(17),
-          rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]\:'),
-        ]
-    },
-  },
-  {
-    name: 'level18',
-    rules: {
-        "start" : [
-          rule_string(),
-          rule_keywords(18),
-          rule_symbols('\-\+\=\/\*\,\<\>\!\\[\\]\\(\\)'),
-        ]
-    },
-  },
+  { name: 'level1' , rules: {"start" : [ rule_level1() ] },},
+  { name: 'level2' , rules: {"start" : [ rule_level2() ] },},
+  { name: 'level3' , rules: {"start" : [ rule_level3() ] },},
+  { name: 'level4' , rules: {"start" : [ ruleALL(4) ] },},
+  { name: 'level5' , rules: {"start" : [ ruleALL(5) ] },},
+  { name: 'level6' , rules: {"start" : [ ruleALL(6, true) ] },},
+  { name: 'level7' , rules: {"start" : [ ruleALL(7, true) ] },},
+  { name: 'level8' , rules: {"start" : [ ruleALL(8, true) ] },},
+  { name: 'level9' , rules: {"start" : [ ruleALL(9, true) ] },},
+  { name: 'level10', rules: {"start" : [ ruleALL(10, true) ] },},
+  { name: 'level11', rules: {"start" : [ ruleALL(11, true) ] },},
+  { name: 'level12', rules: {"start" : [ ruleALL(12, true, true) ] },},
+  { name: 'level13', rules: {"start" : [ ruleALL(13, true, true) ] },},
+  { name: 'level14', rules: {"start" : [ ruleALL(14, true, true) ] },},
+  { name: 'level15', rules: {"start" : [ ruleALL(15, true, true) ] },},
+  { name: 'level16', rules: {"start" : [ ruleALL(16, true, true) ] },},
+  { name: 'level17', rules: {"start" : [ ruleALL(17, true, true) ] },},
+  { name: 'level18', rules: {"start" : [ ruleALL(18, true, true) ] },},
 ];
 
 
@@ -567,110 +535,146 @@ so we use particular functions
 
 function rule_level1() {
   return [{
-    regex: START_LINE + "(" + currentLang._ASK + ")(" + END_WORD + ")(.*)$",
-    token: ['text','keyword','text','text'],
-    next: 'start',
-  },{
-    regex: START_LINE + "(" + currentLang._PRINT + ")(" + END_WORD + ")(.*)$",
-    token: ['text','keyword','text','text'],
-    next: 'start',
-  },{
-    regex: START_LINE + "(" + currentLang._ECHO + ")(" + END_WORD + ")(.*)$",
-    token: ['text','keyword','text','text'],
-    next: 'start',
-  },{
-    regex: START_LINE + "(" + currentLang._FORWARD + ")(" + SPACE + ")([0-9]*)( *)$",
-    token: ['text','keyword','text','text','text'],
-    next: 'start',
-  },{
-    regex: START_LINE + "(" + currentLang._FORWARD + ")( *)$",
+    regex: START_LINE + "(" + currentLang._ASK + ")(.*)$",
     token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")(" + SPACE + ")(" + WORD + ")( *)$",
+    regex: START_LINE + "(" + currentLang._PRINT + ")(.*)$",
+    token: ['text','keyword','text'],
+    next: 'start',
+  },{
+    regex: START_LINE + "(" + currentLang._ECHO + ")(.*)$",
+    token: ['text','keyword','text'],
+    next: 'start',
+  },{
+    regex: START_LINE + "(" + currentLang._FORWARD + ")(.*)$",
+    token: ['text','keyword','text'],
+    next: 'start',
+  },{
+    regex: START_LINE + "(" + currentLang._TURN + ")( *)(" + currentLang._LEFT + ")( *)$",
     token: ['text','keyword','text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")( *)$",
+    regex: START_LINE + "(" + currentLang._TURN + ")( *)(" + currentLang._RIGHT + ")( *)$",
+    token: ['text','keyword','text','keyword','text'],
+    next: 'start',
+  },{
+    regex: START_LINE + "(" + currentLang._TURN + ")(.*)$",
     token: ['text','keyword','text'],
     next: 'start',
-  }];
+  },{
+    regex: /#.*$/,
+    token: 'comment',
+    next: 'start',
+  },{
+    regex: /\_\?\_/,
+    token: 'invalid',
+    next: 'start',
+  },{
+    regex: '(^| )(_)(?=( |$))',
+    token: ['text','invalid','text'],
+    next: 'start',
+  } ];
 }
 
 function rule_level2() {
   return [{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")(" + SPACE + ")(" + currentLang._ASK + ")(" + SPACE + ")(.*)$",
-    token: ["text",'text','text','keyword','text','keyword','text','text'],
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")(.*)$",
+    token: ["text",'text','text','keyword','text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")(" + SPACE + ")(.*)$",
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(.*)$",
     token: ["text",'text','text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._PRINT + ")(" + END_WORD + ")(.*)$",
-    token: ["text",'keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._PRINT + ")(.*)$",
+    token: ["text",'keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._SLEEP + ")(" + END_WORD + ")(.*)$",
-    token: ["text",'keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._SLEEP + ")(.*)$",
+    token: ["text",'keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._TURN + ")(" + END_WORD + ")(.*)$",
-    token: ["text",'keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._TURN + ")(.*)$",
+    token: ["text",'keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._FORWARD + ")(" + END_WORD + ")(.*)$",
-    token: ["text",'keyword','text','text'],
+    regex: START_LINE + "(" + currentLang._FORWARD + ")(.*)$",
+    token: ["text",'keyword','text'],
     next: 'start',
-  }];
+  },{
+    regex: /#.*$/,
+    token: 'comment',
+    next: 'start',
+  },{
+    regex: /\_\?\_/,
+    token: 'invalid',
+    next: 'start',
+  },{
+    regex: '(^| )(_)(?=( |$))',
+    token: ['text','invalid','text'],
+    next: 'start',
+  } ];
 }
 
 function rule_level3() {
   return [{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")(" + SPACE + ")(" + currentLang._ASK + ")(" + SPACE + ")(.*)$",
-    token: ["text",'text','text','keyword','text','keyword','text','text'],
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(" + currentLang._ASK + ")(.*)$",
+    token: ["text",'text','text','keyword','text','keyword','text'],
     next: 'start',
   },{
-    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")(" + SPACE + ")(.*)$",
+    regex: START_LINE + "("+WORD+ ")(" + SPACE + ")(" + currentLang._IS + ")( *)(.*)$",
     token: ["text",'text','text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._REMOVE + ")(" + SPACE + ")(.*)(" + SPACE + ")(" + currentLang._FROM + ")(" + SPACE + ")("+ WORD +")$",
+    regex: START_LINE + "(" + currentLang._REMOVE + ")( *)(.*)(" + SPACE + ")(" + currentLang._FROM + ")( *)("+ WORD +")$",
     token: ["text",'keyword','text','text','text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + "(" + currentLang._ADD_LIST + ")(" + SPACE + ")(.*)(" + SPACE + ")(" + currentLang._TO_LIST + ")(" + SPACE + ")("+ WORD +")$",
+    regex: START_LINE + "(" + currentLang._ADD_LIST + ")( *)(.*)(" + SPACE + ")(" + currentLang._TO_LIST + ")( *)("+ WORD +")$",
     token: ["text",'keyword','text','text','text','keyword','text','text'],
     next: 'start',
   },{
-    regex: START_LINE + currentLang._PRINT + END_WORD,
+    regex: START_LINE + currentLang._PRINT ,
     token: ['keyword'],
     next: 'start',
   },{
-    regex: START_LINE + currentLang._TURN + END_WORD,
+    regex: START_LINE + currentLang._TURN ,
     token: ['keyword'],
     next: 'start',
   },{
-    regex: START_LINE + currentLang._SLEEP + END_WORD,
+    regex: START_LINE + currentLang._SLEEP ,
     token: ['keyword'],
     next: 'start',
   },{
-    regex: START_LINE + currentLang._FORWARD + END_WORD,
+    regex: START_LINE + currentLang._FORWARD ,
     token: ['keyword'],
     next: 'start',
   },{
-    regex: START_WORD + currentLang._AT + SPACE + currentLang._RANDOM + END_WORD,
+    regex: START_WORD + currentLang._AT + SPACE + currentLang._RANDOM ,
     token: ['keyword','text','keyword'],
     next: 'start',
   },{
-    regex: START_WORD + currentLang._AT + END_WORD,
+    regex: START_WORD + currentLang._AT ,
     token: ['keyword'],
     next: 'start',
   },{
     regex: '\,',
     token: ['keyword'],
     next: 'start',
-  }];
+  },{
+    regex: /#.*$/,
+    token: 'comment',
+    next: 'start',
+  },{
+    regex: /\_\?\_/,
+    token: 'invalid',
+    next: 'start',
+  },{
+    regex: '(^| )(_)(?=( |$))',
+    token: ['text','invalid','text'],
+    next: 'start',
+  } ];
 }
 
 
@@ -682,37 +686,148 @@ and any keyword in the code can be colored independently
 of what is around it, so we use a general function
 */
 
-/* A symbol is different from a keyword, because a keyword must be surrounded by a beginning and an end.
-While a symbol will be recognized independently of its surrounding */
-function rule_keywords(level : number) {
-  var rules = [];
-  for (const command in COMMANDS[level]) {
-    rules.push({
-      regex: START_WORD + COMMANDS[level][command] + END_WORD,
-      token: "keyword",
-      next: "start", 
-    })
-  }
-  return rules;
-}
 
-function rule_symbols(symbols : string) {
-  return {
-    regex: "[" + symbols + "]",
-    token: "keyword", 
-    next: "start",
-  };
-}
 
-function rule_string() {
-  return {
+function ruleALL(level:number, number = false, with_decimal = false ) {
+  var list_rules = [];
+
+  /* Rule for comments : */
+  list_rules.push( {
+    regex: /#.*$/,
+    token: 'comment',
+    next: 'start',
+  } );
+
+  /* Rule for quoted string : */
+  list_rules.push( {
+    regex: /\"[^\"]*\"/,
+    token: 'constant.character',
+    next: 'start',
+  } );
+  list_rules.push( {
     regex: /\'[^\']*\'/,
     token: 'constant.character',
     next: 'start',
-  };
+  } );
+
+  /* Rule for blanks marks : */
+  list_rules.push( {
+    regex: /\_\?\_/,
+    token: 'invalid',
+    next: 'start',
+  });
+  list_rules.push( {
+    regex: '(^| )(_)(?=( |$))',
+    token: ['text','invalid','text'],
+    next: 'start',
+  } );
+
+
+
+  /* Rules for numbers */
+  if (number) {
+    if (with_decimal) {
+        list_rules.push({
+          regex: START_WORD + '[0-9]*\\.?[0-9]+' + END_WORD,
+          token: 'variable', // it would be better to use `constant.numeric` but the color is the same as the text
+          next: 'start',
+        });
+
+        /* Special case of an order directly followed by a number */
+        for (const command in KEYWORDS[level]["SP_K"]) { 
+          list_rules.push({
+            regex: START_WORD + "("+ KEYWORDS[level]["SP_K"][command] + ')([0-9]*\\.?[0-9]+)' + END_WORD,
+            token: ['text','keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
+            next: 'start',
+          });
+        }
+        for (const command in KEYWORDS[level]["K"]) { 
+          list_rules.push({
+            regex: "(" + KEYWORDS[level]["K"][command] + ')([0-9]*\\.?[0-9]+)' + END_WORD,
+            token: ['keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
+            next: 'start',
+          });
+        }
+        
+
+      } else {
+        list_rules.push({
+          regex: START_WORD + '[0-9]+' + END_WORD,
+          token: 'variable', // it would be better to use `constant.numeric` but the color is the same as the text
+          next: 'start',
+        });
+
+        /* Special case of an order directly followed by a number */
+        for (const command in KEYWORDS[level]["SP_K"]) { 
+          list_rules.push({
+            regex: START_WORD + "("+ KEYWORDS[level]["SP_K"][command] + ')([0-9]+)' + END_WORD,
+            token: ['text','keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
+            next: 'start',
+          });
+        }
+        for (const command in KEYWORDS[level]["K"]) { 
+          list_rules.push({
+            regex: "(" + KEYWORDS[level]["K"][command] + ')([0-9]+)' + END_WORD,
+            token: ['keyword','variable'], // it would be better to use `constant.numeric` but the color is the same as the text
+            next: 'start',
+          });
+        }
+
+
+      }
+  }
+
+  /* Rules for commands of SP_K_SP */
+  /* These are the keywords that must be "alone" so neither preceded nor followed directly by a word */
+  for (const command in KEYWORDS[level]["SP_K_SP"]) {
+    list_rules.push({
+      regex: START_WORD + KEYWORDS[level]["SP_K_SP"][command] + END_WORD,
+      token: "keyword",
+      next: "start", 
+    });
+  }
+
+  /* Rules for commands of K */
+  /*  These are the keywords that are independent of the context (formerly the symbols).
+  In particular, even if they are between 2 words, the syntax highlighting will select them*/
+  for (const command in KEYWORDS[level]["K"]) {
+    list_rules.push({
+      regex: KEYWORDS[level]["K"][command],
+      token: "keyword",
+      next: "start", 
+    });
+  }
+
+  /* Rules for commands of SP_K */
+  /*  This category of keywords allows you to have keywords that are not preceded
+  by another word, but that can be followed immediately by another word. (see the PR #2413)*/
+  for (const command in KEYWORDS[level]["SP_K"]) {
+    list_rules.push({
+      regex: START_WORD + KEYWORDS[level]["SP_K"][command],
+      token: "keyword",
+      next: "start", 
+    });
+  }
+
+  /* Rules for commands of K_SP */
+  /*  This category of keywords allows you to have keywords that can be preceded immediately
+  by another word, but that are not followed by another word.*/
+  for (const command in KEYWORDS[level]["K_SP"]) {
+    list_rules.push({
+      regex: KEYWORDS[level]["K_SP"][command] + END_WORD,
+      token: "keyword",
+      next: "start", 
+    });
+  }
+
+  /*console.log(list_rules);*/
+  return list_rules;
 }
 
 
+
+
+  
 
 
 

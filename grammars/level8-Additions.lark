@@ -1,15 +1,15 @@
 command:+= ifs elses? -= ifelse| ifs
 //placing assign at the end means print is will print 'is' and print is Felienne will print 'is Felienne'
 
-repeat: _REPEAT _SPACE (INT | var) _SPACE _TIMES _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+repeat: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
 // FH jan 2022 (#1817) we can allow unquoted rhs's again cause there now is a line break after
 // not sure of we want it, but we could
 condition: equality_check | in_list_check
-equality_check: textwithoutspaces (_SPACE _IS _SPACE | _EQUALS) textwithoutspaces (_SPACE textwithoutspaces)*
+equality_check: textwithoutspaces (_IS | _EQUALS) textwithoutspaces (_SPACE textwithoutspaces)*
 
 
 // from level 8 on if is implemented slightly differently
 elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-ifs: _IF _SPACE condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK

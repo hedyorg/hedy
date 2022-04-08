@@ -50,11 +50,10 @@ If you want to run the website version locally, run:
 To run the unit tests:
 
 ```bash
-(.env)$ python -m pytest tests/*.py
+(.env)$ python -m pytest
 ```
 
-## Working on the web frontent in TypeScript/JavaScript
-
+## Working on the web front-end in TypeScript/JavaScript
 Part of the code base of Hedy is written in Python, which runs on the server.
 The parts that run in the browser are written in TypeScript, and are compiled to
 JavaScript.
@@ -72,7 +71,63 @@ $ npm ci
 $ build-tools/heroku/generate-typescript --watch
 ```
 
-Before reloading your browser.
+The ```--watch``` command will keep looking for changes and automatically update the files. 
+To just keep it running while you are working on the front-end code. 
+If you just want to run the code once, simply remove this parameter.
+Make sure to re-load your browser (and work in incognito mode) to see the changes. 
+These files are also automatically generated on deploy, so don't worry if you forget to generate them.
+
+## Working on the web front-end in Tailwind
+All the styling in our front-end HTML templates is done using the Tailwind library. 
+This library has generated classes for styling which we can call on HTML elements.
+To make sure you have access to all possible styling classes, generate the development css file:
+```
+$ ./build-tools/heroku/tailwind/generate-development-css
+```
+When merging we want to keep the CSS file as small as possible for performance reasons. 
+Tailwind has a built-in ```purge``` option to only generate CSS for classes that are actually being used.
+Please run the following command so Tailwind only generated actual used classes:
+```
+$ ./build-tools/heroku/tailwind/generate-css
+```
+For all possible styling classes and more, take a look at their [website](https://tailwindcss.com).
+If you want to combine different Tailwind classes into one class or one element, we can do this in the ```/build-tool/heroku/tailwind/styles.css``` file.
+By using the ```@apply``` attribute we can assign classes to other styling. For example, we styled the ```<h1>``` element with multiple Tailwind classes like this:
+```
+h1 {
+  @apply font-extralight text-4xl;
+}
+```
+If you want to use styling that is not available in the Tailwind library this can be added to the ```static/css/additional.css``` file.
+But please, try to use the Tailwind classes as much as possible as these are optimized and keep our code base consistent and readable.
+Also, please refrain from using inline CSS styling, as this makes the templates hard to read, maintain and alter.
+
+## Working with translations
+For our multilingual web structure we use a combination of YAML files and Babel to deliver language-dependent content.
+The adventures, level-defaults, mail-templates, achievements and quizzes are all stored using YAML files.
+All our front-end UI strings, error messages and other "small" translations are stored using Babel.
+To help translating any of these, please follow the explanation in TRANSLATING.md.
+
+However, when adding new content or implementing a feature that requires new translations you need to manually add these translation keys.
+When adding YAML related translations please add these to the corresponding YAML file in the ```/coursedata``` folder.
+Make sure that you comform to the already existing YAML structure.  As English is the fallback language, the translation should always be available in the english YAML file.
+Feel free to manually add the translation to as many languages as you know, but don't worry: otherwise these will be translated by other contributors through Weblate.
+
+When adding new Babel related translation the implementation is a bit more complex, but don't worry! It should al work fine with the following steps:
+1. First we add the translation "placeholder" to either the front-end or back-end
+    * When on the front-end (in a .html template) we do this like this: ```{{ _('test') }}```
+    * Notice that the ```{{ }}``` characters are Jinja2 template placeholders for variables
+    * When on the back-end we do this like this: ```gettext('test')```
+2. Next we run the following command to let Babel search for keys:
+    * ```pybabel extract -F babel.cfg -o messages.pot .```
+3. We now have to add the found keys to all translation files, with the following command:
+    * ```pybabel update -i messages.pot -d translations```
+4. All keys will be automatically stored in the /translations folder
+5. Search for the .po files for the languages you know and find the empty msgstr for your added key(s)
+6. Add your translations there, the other translation will hopefully be quickly picked up by other translators
+7. If you want to test it locally, run:
+    * ```pybabel compile -d translations```
+8. This action will also always be run on deployment to make sure the translations are up-to-date
 
 ## Using Docker
 
@@ -128,7 +183,7 @@ on which IDE you are using. Here are the IDEs we know about:
 {
   // ...
   "yaml.schemas": {
-    "coursedata/adventures/adventures.schema.json": "adventures/*.yaml"
+    "content/adventures/adventures.schema.json": "adventures/*.yaml"
   }
 }
 ```
@@ -138,6 +193,6 @@ on which IDE you are using. Here are the IDEs we know about:
 * Open **Preferences**
 * Navigate to **Languages & Frameworks → Schemas and DTDs → JSON Schema Mappings**.
 * Click the **+** to add a new schema.
-  * Behind **Schema file or URL**, click the browse button and navigate to the `<your Hedy checkout>/coursedata/adventures/adventures.schema.json` file.
-  * Click the **+** at the bottom, select **Directory**. In the new line that appears, paste `coursedata/adventures`.
+  * Behind **Schema file or URL**, click the browse button and navigate to the `<your Hedy checkout>/content/adventures/adventures.schema.json` file.
+  * Click the **+** at the bottom, select **Directory**. In the new line that appears, paste `content/adventures`.
 * Click **OK** to close the window.

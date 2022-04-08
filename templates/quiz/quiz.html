@@ -13,7 +13,7 @@
               <div class="arrow-steps clearfix">
                   {% for i in range(questions|length)%}
                        {% if i + 1 == question_nr %}
-                        <div class="step current"><span><a class="step-text" href="#">{{ ui.question }} {{ i + 1 }}<br>{{ ui.attempt }} {{ attempt }}</a></span></div>
+                        <div class="step current"><span><a class="step-text" href="#">{{_('question')}} {{ i + 1 }}<br>{{_('attempt')}} {{ attempt }}</a></span></div>
                        {% elif not quiz_answers[i + 1] %}
                            <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
                        {% elif quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
@@ -26,7 +26,7 @@
         </div>
         <div id="achievement_pop-up" class="inset-0 absolute z-10 fixed w-1/2 hidden" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
             <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
-                <h3 class="text-white">{{auth.achievement_earned}}</h3>
+                <h3 class="text-white">{{_('achievement_earned')}}</h3>
                 <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">
                 <h4 class="text-white italic" id="achievement_reached_title"></h4>
                 <p id="achievement_reached_text"></p>
@@ -46,13 +46,13 @@
         <script type=text/javascript>
             function changeHint() {
                 const btn = document.getElementById("hint-button");
-                if (btn.innerText === "{{ ui.hint }}") {
+                if (btn.innerText === "{{ _('hint') }}") {
                     btn.innerText = document.getElementById('hidden-hint').textContent;
                     btn.innerHTML = "<i>" + document.getElementById('hidden-hint').textContent + "</i>";
                     $('#hint-button').css('background-color', 'rgba(198,246,213,0.51)');
                     $('#hint-button').css('border', '2.5px solid #2d9068');
                 } else {
-                    btn.innerText = "{{ ui.hint }}";
+                    btn.innerText = "{{ _('hint') }}";
                     $('#hint-button').css('background-color', '#bee3f8');
                     $('#hint-button').css('border', '2.5px solid #3182ce');
                     $('#hint-button').css('outline', '#3182ce');

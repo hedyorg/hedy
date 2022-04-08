@@ -1,5 +1,4 @@
 import { modal } from './modal';
-import { auth } from './auth';
 import { theGlobalEditor } from './app';
 
 /**
@@ -21,12 +20,17 @@ import { theGlobalEditor } from './app';
  * TARGET by the *absence* of the '.hidden' class.
  */
 $(function() {
-  function resetWindow() {
+function resetWindow() {
     $ ('#warningbox').hide ();
     $ ('#errorbox').hide ();
     $ ('#okbox').hide ();
-    $ ('#output').empty ();
+    const output = $('#output');
+    const variable_button = $(output).find('#variable_button');
+    const variables = $(output).find('#variables');
+    output.empty();
     $ ('#turtlecanvas').empty ();
+    output.append(variable_button);
+    output.append(variables);
     window.State.unsaved_changes = false;
   }
 
@@ -54,17 +58,6 @@ $(function() {
     // @ts-ignore
     document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
-
-    if (tab.hasClass('teacher_tab')) {
-      // Fixme: This should do for now, but it would be nice if we:
-      //  - Store the teacher_adventure code in the state -> similar to "normal" adventures
-      //  - We load on the correct tab
-      $ ('#program_name').val (tabName);
-      window.State.adventure_name = tabName;
-      window.State.unsaved_changes = false;
-      theGlobalEditor?.setValue ("");
-      return;
-    }
 
     if (tabName === 'end') {
       $ ('#adventures-tab').css('height', '');
@@ -97,8 +90,15 @@ $(function() {
       theGlobalEditor?.setValue(window.State.default_program);
     }
     else {
-      $ ('#program_name').val (adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
-      theGlobalEditor?.setValue (adventures [tabName].start_code);
+      if (tab.hasClass('teacher_tab')) {
+        // Todo: TB -> We should re-write the adventures structure so Teacher adventures are included in "adventures"
+        $ ('#program_name').val (tabName);
+        window.State.adventure_name = tabName;
+        theGlobalEditor?.setValue ("");
+      } else {
+        $('#program_name').val(adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
+        theGlobalEditor?.setValue(adventures [tabName].start_code);
+      }
     }
 
     window.State.adventure_name = tabName === 'level' ? undefined : tabName;
@@ -115,7 +115,7 @@ $(function() {
     e.preventDefault ();
 
     // If there are unsaved changes, we warn the user before changing tabs.
-    if (window.State.unsaved_changes) modal.confirm(auth.texts['unsaved_changes'], () => switchToTab(tabName));
+    if (window.State.unsaved_changes) modal.confirm(ErrorMessages['Unsaved_Changes'], () => switchToTab(tabName));
     else switchToTab(tabName);
 
     // Do a 'replaceState' to add a '#anchor' to the URL

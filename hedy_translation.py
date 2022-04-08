@@ -4,9 +4,9 @@ import hedy
 import operator
 import yaml
 from os import path
+import hedy_content
 
-
-KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr', 'ar']
+KEYWORD_LANGUAGES = list(hedy_content.ALL_KEYWORD_LANGUAGES.keys())
 
 # Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
@@ -16,7 +16,7 @@ def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
 
-    keywords_path = 'coursedata/keywords/'
+    keywords_path = 'content/keywords/'
     yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r', encoding='UTF-8') as stream:
@@ -207,7 +207,7 @@ class Translator(Visitor):
         self.add_rule('_REPEAT', 'repeat', tree)
         self.add_rule('_TIMES', 'times', tree)
 
-    def repeat_list(self, tree):
+    def for_list(self, tree):
         self.add_rule('_FOR', 'for', tree)
         self.add_rule('_IN', 'in', tree)
 
