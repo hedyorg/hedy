@@ -73,7 +73,7 @@
             <button class="red-btn mx-2" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
             <div id="public_button_container_{{ loop.index }}" class="flex flex-row w-full {% if not program.public %} hidden {% endif %}">
                 <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{_('unshare_confirm')}}', function () {hedyApp.share_program ('{{program.id}}', {{ loop.index }}, false)})">{{_('unshare')}}</button>
-                <button class="blue-btn mx-2" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'))">{{_('copy_link_to_share')}}</button>
+                <button class="blue-btn mx-2" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
                 <button class="green-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
             </div>
             <div id="non_public_button_container_{{ loop.index }}" class="flex flex-row {% if program.public %} hidden {% endif %}">
