@@ -133,10 +133,10 @@ class Quizzes:
     def __init__(self, language):
         self.language = language
         self.keyword_lang = "en"
-        self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
-        self.quizzes = YamlFile.for_file(f'coursedata/quizzes/{self.language}.yaml').to_dict()
+        self.keywords = YamlFile.for_file(f'content/keywords/{self.keyword_lang}.yaml').to_dict()
+        self.quizzes = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').to_dict()
         if not self.quizzes:
-            self.quizzes = YamlFile.for_file(f'coursedata/quizzes/en.yaml').to_dict()
+            self.quizzes = YamlFile.for_file(f'content/quizzes/en.yaml').to_dict()
 
     def set_keyword_language(self, language):
         # Todo TB -> We keep the language at "en" for now to make sure nothing changes for the end user
