@@ -34,7 +34,7 @@ def simulateRulesWithoutToken(Rules,Code):
         if c == "\n": Output += "\n"
         else: Output += " "
     regRule = Rules["start"][0]
-    for reg in regRule:
+    for reg in regRule[::-1]:
         
         if type(reg['token']) == str : # case without groups
             reg['token'] = [reg['token']]
