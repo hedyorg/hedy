@@ -375,8 +375,7 @@ levels:
                 -   "code": "{at} {random} {print} options"
                     "feedback": "You're almost there. The order of the words isn't right yet."
                 -   "code": "{print} rock {at} {random}"
-                    "feedback": "you don't always want the Hedy to print rock, sometimes you want\
-              \ scissors or paper."
+                    "feedback": "you don't always want the Hedy to print rock, sometimes you want scissors or paper."
                 -   "code": "{print} options {at} {random}"
                     "feedback": "Very good!"
                 -   "option_text": "Nothing, the code is correct!"
@@ -391,8 +390,7 @@ levels:
                 {print} price {at} {random}
             mp_choice_options:
                 -   "code": "{print} price"
-                    "feedback": "You don't want to {print} the word price, but you want to {print} one\
-              \ price out of your list {at} {random}"
+                    "feedback": "You don't want to {print} the word price, but you want to {print} one price out of your list {at} {random}"
                 -   "code": "{print} prices {at} {random}"
                     "feedback": "Great! You've really paid attention."
                 -   "code": "{print} {at} {random} price"
@@ -464,7 +462,7 @@ levels:
                     crisps {is} sea salt, paprika, sour cream
                     {remove} sea salt {from} crisps
                     {remove} paprika {from} crisps
-                {print} crisps {at} {random}
+                    {print} crisps {at} {random}
             mp_choice_options:
             -   "option_text": "You can't tell, because Hedy will {print} one of the 3 flavors {at} {random}"
                 "feedback": "Take a look at the {remove} commands"
@@ -483,7 +481,7 @@ levels:
                     colors {is} blue, purple, green
                     chosen_color {is} {ask} Which haircolor wouldn't your like to have?
                     {remove} chosen_color {from} colors
-                {print} I will dye my hair color {at} {random}
+                    {print} I will dye my hair color {at} {random}
             mp_choice_options:
             -   "option_text": "Line 3 should say: remove blue from colors"
                 "feedback": "Maybe you want blue hair though!"
@@ -555,15 +553,13 @@ levels:
                 -   "code": "{print} Hi Im Hedy"
                     "feedback": "Add quotation marks please!"
                 -   "code": "{print} 'Hi Im Hedy"
-                    "feedback": "Both before and after the words you want to print should be a quotation\
-              \ mark."
+                    "feedback": "Both before and after the words you want to print should be a quotation mark."
                 -   "code": "'{print} Hi Im Hedy'"
                     "feedback": "The first quotation mark should be behind the word {print}"
                 -   "code": "{print} 'Hi Im Hedy'"
                     "feedback": "Perfect!"
             correct_answer: "D"
-            hint: "Both before and after the words you want to print should be a quotation\
-            \ mark."
+            hint: "Both before and after the words you want to print should be a quotation mark."
             question_score: '10'
         4:
             question_text: "Which statement is true?"
@@ -589,15 +585,13 @@ levels:
                 -   "code": "'{print} options {at} {random}'"
                     "feedback": "Never put the quotation mark in front of the {print} command."
                 -   "code": "{print} 'options' {at} {random}"
-                    "feedback": "Options is a variable. You don't literally want to print 'options\
-              \ {at} {random}'."
+                    "feedback": "Options is a variable. You don't literally want to print 'options {at} {random}'."
                 -   "code": "{print} options {at} {random}"
                     "feedback": "That's right"
                 -   "option_text": "Nothing, the game already works!"
                     "feedback": "Look carefully. There is an error."
             correct_answer: "C"
-            hint: "You don't want Hedy to literally print 'options {at} {random}', you want it\
-            \ to print 'rock' or 'paper' or 'scissors'."
+            hint: "You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'."
             question_score: '10'
         6:
             question_text: "What would be a good next line in this code?"
@@ -613,8 +607,7 @@ levels:
                 -   "code": "{print} 'You win... prices {at} {random}'"
                     "feedback": "Hedy will literally print 'prices {at} {random}''"
             correct_answer: "A"
-            hint: "Think carefully: what is a variable and should be outside of the quotation\
-            \ marks? And what are normal words that should be inside?."
+            hint: "Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?."
             question_score: '10'
         7:
             question_text: "What's wrong with this code?"
@@ -628,8 +621,7 @@ levels:
                 -   "option_text": "Quotation marks are missing in line 2"
                     "feedback": "A variable doesn't need quotes"
                 -   "option_text": "Quotation marks are missing in line 3"
-                    "feedback": "You don't want Hedy to literally print 'answers {at} {random}' so\
-              \ no quotation marks needed here!"
+                    "feedback": "You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!"
                 -   "option_text": "Nothing, this code is good as is!"
                     "feedback": "Look carefully. You missed a mistake!"
             correct_answer: "A"
@@ -651,8 +643,7 @@ levels:
                 -   "option_text": "{print} 'So you pick door door'"
                     "feedback": "Hedy will literally print 'So you pick door door"
             correct_answer: "C"
-            hint: "The second word door should be replaced with the number, the first should\
-            \ still be the word door..."
+            hint: "The second word door should be replaced with the number, the first should still be the word door..."
             question_score: '10'
         9:
             question_text: "What will never appear in your output screen?"
@@ -752,8 +743,7 @@ levels:
                 {else} {print} 'ALARM! INTRUDER!'
             mp_choice_options:
                 -   "option_text": "Correct"
-                    "feedback": "That's printed {if} the correct answer is given, not the wrong\
-            \ one..."
+                    "feedback": "That's printed {if} the correct answer is given, not the wrong one..."
                 -   "option_text": "SECRET"
                     "feedback": "That's not the right answer"
                 -   "option_text": "Wrong!"
@@ -782,8 +772,7 @@ levels:
             hint: "The spelling of the word has to be exactly the same."
             question_score: '10'
         6:
-            question_text: "Which word should be on the place of the question mark in the\
-            \ last line?"
+            question_text: "Which word should be on the place of the question mark in the last line?"
             code: |-
                 {print} 'Im Hedy the football fortune teller!'
                 {print} 'I will predict what place your team will end up!'
@@ -948,8 +937,7 @@ levels:
             hint: "Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30."
             question_score: '10'
         5:
-            question_text: "If 5 people eat at this restaurant, how much do they have to pay\
-            \ in total?"
+            question_text: "If 5 people eat at this restaurant, how much do they have to pay in total?"
             code: |-
                 {print} 'Welcome to Hedys!'
                 people = {ask} 'How many people are eating with us tonight?'
@@ -988,8 +976,7 @@ levels:
             hint: "Mind the fourth line."
             question_score: '10'
         7:
-            question_text: "Why does line 7 say 'price is price + 3' instead of 'price is\
-            \ 3'?"
+            question_text: "Why does line 7 say 'price is price + 3' instead of 'price is 3'?"
             code: |-
                 {print} 'Welcome at Hedys diner'
                 food = {ask} 'What would you like to eat?'
@@ -1005,8 +992,7 @@ levels:
                     "feedback": "No, that's not true. Hedy needs to add 3 dollars to the total."
                 -   "option_text": "Because Hedy doesn't understand 'price = 3'."
                     "feedback": "Hedy would understand, but it wouldn't be right."
-                -   "option_text": "Because Hedy would otherwise forget about the previous order.\
-              \ The price would be 3 dollars in total."
+                -   "option_text": "Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total."
                     "feedback": "That's right!"
                 -   "option_text": "Because the price is 0 dollars to begin with."
                     "feedback": "That's true, but not the reason"
@@ -1023,21 +1009,17 @@ levels:
             mp_choice_options:
                 -   "option_text": "There shouldn't be quotation marks in line 2"
                     "feedback": "No, there should be!"
-                -   "option_text": "The variable is called correct answer, but a variable's name\
-              \ can only be 1 word. So it should be correct_answer"
+                -   "option_text": "The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer"
                     "feedback": "Correct!"
                 -   "option_text": "The {if} and {else} commands should be in the same line."
                     "feedback": "No, that's not true."
-                -   "option_text": "The variable in line 2 can't be called answer, because it is\
-              \ too similar to the variable correct answer."
+                -   "option_text": "The variable in line 2 can't be called answer, because it is too similar to the variable correct answer."
                     "feedback": "Variable names can be similar, but they can't be 2 words..."
             correct_answer: "B"
             hint: "Inspect what the variables are called."
             question_score: '10'
         9:
-            question_text: "Imagine you love football a 10, you've eaten 2 bananas and have\
-            \ washed your hands 3 times today. How smart does the silly fortune teller think\
-            \ you are?"
+            question_text: "Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?"
             code: |-
                 {print} 'Im Hedy the silly fortune teller'
                 {print} 'I will predict how smart you are!'
@@ -1079,8 +1061,7 @@ levels:
 
     7:
         1:
-            question_text: "How many lines can you repeat at once with the repeat command\
-            \ at this level?"
+            question_text: "How many lines can you repeat at once with the repeat command at this level?"
             code: "..."
             mp_choice_options:
                 -   "option_text": "0"
@@ -1161,14 +1142,11 @@ levels:
             mp_choice_options:
                 -   "code": "the wheels on the bus go\nround and round"
                     "feedback": "Only the second line is repeated 3 times"
-                -   "code": "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the\
-              \ bus go\nround and round"
+                -   "code": "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
                     "feedback": "Only the second line is repeated 3 times"
-                -   "code": "the wheels on the bus go\nround and round\nthe wheels on the bus go\n\
-              round and round\nthe wheels on the bus go\nround and round"
+                -   "code": "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
                     "feedback": "Only the second line is repeated 3 times"
-                -   "code": "the wheels on the bus go\nround and round\nround and round\nround and\
-              \ round"
+                -   "code": "the wheels on the bus go\nround and round\nround and round\nround and round"
                     "feedback": "All though the town! Perfect!"
             correct_answer: "D"
             hint: "Only 'round and round' is repeated 3 times."
@@ -1199,21 +1177,16 @@ levels:
                 And I say
                 Its alright
             mp_choice_options:
-                -   "code": "{print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'Here comes\
-              \ the sun'\n{print} 'And I say'\n{print} 'Its alright'"
+                -   "code": "{print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'"
                     "feedback": "Perfect, you can't use the repeat command here."
-                -   "code": "{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'And I say'\n{print}\
-              \ 'Its alright'"
+                -   "code": "{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'"
                     "feedback": "Where did the 'Do do do do' go?"
-                -   "code": "{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'Do do do do'\n{print}\
-              \ 'And I say'\n{print} 'Its alright'"
+                -   "code": "{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'And I say'\n{print} 'Its alright'"
                     "feedback": "This is not in the right order"
-                -   "code": "{repeat} 2 {times} {print} 'Here comes the sun'\n{repeat} 2 {times} {print} 'Do\
-              \ do'\n{print} 'And I say'\n{print} 'Its alright'"
+                -   "code": "{repeat} 2 {times} {print} 'Here comes the sun'\n{repeat} 2 {times} {print} 'Do do'\n{print} 'And I say'\n{print} 'Its alright'"
                     "feedback": "This is not in the right order"
             correct_answer: "A"
-            hint: "{repeat} can only be used if you want the exact same line 2 (or more) times\
-            \ in a row."
+            hint: "{repeat} can only be used if you want the exact same line 2 (or more) times in a row."
             question_score: '10'
         9:
             question_text: "What Hedy code belongs to this output?"
@@ -1225,20 +1198,13 @@ levels:
                 Help!
                 Please help me!
             mp_choice_options:
-                -   "code": "{print} 'Batman was flying though Gotham. '\n{print} 'When suddenly he\
-              \ heard someone screaming...'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please\
-              \ help me!'"
+                -   "code": "{print} 'Batman was flying though Gotham. '\n{print} 'When suddenly he heard someone screaming...'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please help me!'"
                     "feedback": "You repeated the wrong line"
-                -   "code": "{print} 'Batman was flying though Gotham.' \n{print} 'When suddenly he\
-              \ heard someone screaming...'\n{repeat} 3 {times} 'Help!'\n{print} 'Please help\
-              \ me!'\n"
+                -   "code": "{print} 'Batman was flying though Gotham.' \n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} 'Help!'\n{print} 'Please help me!'\n"
                     "feedback": \"You missed the word {print} in line 3\"
-                -   "code": "{print} Batman was flying though Gotham.\n{print} When suddenly he heard\
-              \ someone screaming...\n{repeat} 3 {times} {print} Help!\n{print} Please help me!"
+                -   "code": "{print} Batman was flying though Gotham.\n{print} When suddenly he heard someone screaming...\n{repeat} 3 {times} {print} Help!\n{print} Please help me!"
                     "feedback": "You forgot about the quotation marks"
-                -   "code": "{print} 'Batman was flying though Gotham.' \n{print} 'When suddenly he\
-              \ heard someone screaming...'\n{repeat} 3 {times} {print} 'Help!'\n{print} 'Please\
-              \ help me!'"
+                -   "code": "{print} 'Batman was flying though Gotham.' \n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} {print} 'Help!'\n{print} 'Please help me!'"
                     "feedback": "Perfect"
             correct_answer: "D"
             hint: "'Help!' is repeated 3 times."
@@ -1251,19 +1217,13 @@ levels:
                 if youre happy and you know it and you really want to show it
                 if youre happy and you know it clap your hands
             mp_choice_options:
-                -   "code": "{repeat} 2 {times} 'if youre happy and you know it clap your hands'\n{print}\
-              \ 'if youre happy and you know it and you really want to show it'\n{print} 'if\
-              \ youre happy and you know it clap your hands'"
+                -   "code": "{repeat} 2 {times} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'"
                     "feedback": "Almost! the first line needs an extra word"
-                -   "code": "{repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'\n\
-              {print} 'if youre happy and you know it and you really want to show it'\n{print}\
-              \ 'if youre happy and you know it clap your hands'"
+                -   "code": "{repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'"
                     "feedback": "Great!"
-                -   "code": "{repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'\n\
-              {print} 'if youre happy and you know it and you really want to show it'"
+                -   "code": "{repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'"
                     "feedback": "This is not in the right order."
-                -   "code": "{repeat} 4 {times} 'if youre happy and you know it'\n{repeat} 2 times 'clap\
-              \ your hands'\n{print} 'and you really want to show it'\n{print} 'clap your hands'"
+                -   "code": "{repeat} 4 {times} 'if youre happy and you know it'\n{repeat} 2 times 'clap your hands'\n{print} 'and you really want to show it'\n{print} 'clap your hands'"
                     "feedback": "This is not in the right order."
             correct_answer: "B"
             hint: "Mind the order of the sentences."
@@ -1301,10 +1261,8 @@ levels:
                     "feedback": "Perfect"
                 -   "code": "{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Once I caught a fish alive!'"
                     "feedback": "This code won't work. You need an indent after {for}."
-                -   "code": "{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Once I caught a fish\
-              \ alive!'"
-                    "feedback": "Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught\
-              \ a fish alive! etc."
+                -   "code": "{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Once I caught a fish alive!'"
+                    "feedback": "Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc."
                 -   "code": "{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Once I caught a fish alive!'"
                     "feedback": "i is a variable and shouldn't have quotation marks"
             correct_answer: "A"
@@ -1371,8 +1329,7 @@ levels:
             hint: "What did you learn in this level?"
             question_score: '10'
         6:
-            question_text: "How many times does the word Hello appear on your screen when\
-            \ you run the code?"
+            question_text: "How many times does the word Hello appear on your screen when you run the code?"
             code: |-
                 {for} i {in} {range} 0 {to} 2
                     {print} 'Hello'
@@ -1451,17 +1408,13 @@ levels:
                 Baby shark tututudutudu
                 Baby shark
             mp_choice_options:
-                -   "code": "{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print}\
-              \ Baby shark"
+                -   "code": "{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark"
                     "feedback": "Mind the indention"
-                -   "code": "{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby\
-              \ shark"
+                -   "code": "{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark"
                     "feedback": "That's right!"
-                -   "code": "{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n    {print}\
-              \ Baby shark"
+                -   "code": "{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark"
                     "feedback": "{range} 0 to 3 is 4 times."
-                -   "code": "{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby\
-              \ shark"
+                -   "code": "{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark"
                     "feedback": "{range} 0 {to} 3 is 4 times."
             correct_answer: "B"
             hint: "Mind the indention"
