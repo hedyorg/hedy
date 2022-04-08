@@ -1558,7 +1558,10 @@ function adjustLines(disabledRow: []) {
 }
 
 function addDisabledClass(str: Element) {
-  return '<div class="ace-disabled">' + str.innerHTML + '</div>';
+  if (!str.children[0].innerHTML.includes("ace-disabled")) {
+    return '<div class="ace-disabled">' + str.innerHTML + '</div>';
+  }
+  return str.innerHTML;
 }
 
 function removeDisabledClass(str: Element) {
