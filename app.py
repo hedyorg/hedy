@@ -1062,10 +1062,11 @@ def explore():
             DATABASE.store_program(program)
         public_profile = DATABASE.get_public_profile_settings(program['username'])
         # If the language doesn't match the user -> parse the keywords
-        if program.get("lang", "en") not in [g.lang, "en"] and g.lang in ALL_KEYWORD_LANGUAGES:
-            program['code'] = hedy_translation.translate_keywords(program.get('code'), program.get('lang', 'en'), g.lang,
-                                                                 level=int(program.get('level', 1)))
-
+        if program.get("lang", "en") != g.keyword_lang:
+            code = hedy_translation.translate_keywords(program.get('code'), from_lang=program.get('lang'),
+                                                       to_lang=g.keyword_lang, level=int(program.get('level', 1)))
+        else:
+            code = program['code']
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
@@ -1073,7 +1074,7 @@ def explore():
             'id': program['id'],
             'error': program['error'],
             'public_user': True if public_profile else None,
-            'code': "\n".join(program['code'].split("\n")[:4])
+            'code': "\n".join(code.split("\n")[:4])
         })
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
