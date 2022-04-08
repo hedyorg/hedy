@@ -3,7 +3,7 @@
     <!-- Row 1: editor, output pane -->
     <div class="flex flex-col order-1 relative" id="code_editor" style="height: 22rem;">
       <!-- language selector overlay -->
-      {% if other_keyword_language() and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
+      {% if other_keyword_language() and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) and not editor_readonly %}
           <div id="main_editor_keyword_selector">
               <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white" lang="{{ current_keyword_language().lang }}">
                   <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button">
@@ -31,7 +31,7 @@
         <div id="editor" style="background: #272822; font-family: monospace; color: white" lang="en"
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
-          data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or start_code}}
+          data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].start_code}}
         </div>
         <!-- errorbox -->
         <div id="errorbox"

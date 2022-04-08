@@ -1,0 +1,21 @@
+{
+  "title": "JSON Schema for Hedy Commands",
+  "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "^[0-9]{1,2}-?[0-9]{0,2}$": { "$ref": "#/definitions/Commands" }
+  },
+  "definitions": {
+    "Commands": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "explanation": { "type": "string" },
+        "example": { "type": "string" },
+        "demo_code": { "type": "string" }
+      },
+      "required": ["name", "explanation", "example", "demo_code"],
+      "additionalProperties": false
+    }
+  }
+}

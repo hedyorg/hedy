@@ -11,7 +11,7 @@ class TestsLevel18(HedyTester):
       print('Hallo!')""")
 
       expected = textwrap.dedent("""\
-      print(f'Hallo!')""")
+      print(f'''Hallo!''')""")
 
       self.multi_level_tester(
         code=code,
@@ -27,7 +27,7 @@ class TestsLevel18(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        print(f'ik heet{naam}')""")
+        print(f'''ik heet{naam}''')""")
 
         self.multi_level_tester(
           code=code,
@@ -37,7 +37,7 @@ class TestsLevel18(HedyTester):
 
     def test_print_comma(self):
         code = "print('ik heet ,')"
-        expected = "print(f'ik heet ,')"
+        expected = "print(f'''ik heet ,''')"
         self.multi_level_tester(
             code=code,
             expected=expected,
@@ -49,7 +49,7 @@ class TestsLevel18(HedyTester):
         leeftijd {assigment} input('Hoe oud ben jij?')
         print(leeftijd)""")
         expected = textwrap.dedent("""\
-        leeftijd = input(f'Hoe oud ben jij?')
+        leeftijd = input(f'''Hoe oud ben jij?''')
         try:
           leeftijd = int(leeftijd)
         except ValueError:
@@ -57,7 +57,7 @@ class TestsLevel18(HedyTester):
             leeftijd = float(leeftijd)
           except ValueError:
             pass
-        print(f'{leeftijd}')""")
+        print(f'''{leeftijd}''')""")
 
         self.multi_level_tester(
           max_level=20,
@@ -75,7 +75,7 @@ class TestsLevel18(HedyTester):
       expected = textwrap.dedent("""\
       naam = 'Hedy'
       if str(naam) == str('Hedy'):
-        print(f'koekoek')""")
+        print(f'''koekoek''')""")
 
       self.single_level_tester(code=code, expected=expected)
 
@@ -129,7 +129,7 @@ class TestsLevel18(HedyTester):
           print('Het antwoord moest zijn', antwoord)""")
 
       expected = textwrap.dedent("""\
-      antwoord = input(f'Hoeveel is 10 plus 10?')
+      antwoord = input(f'''Hoeveel is 10 plus 10?''')
       try:
         antwoord = int(antwoord)
       except ValueError:
@@ -138,11 +138,11 @@ class TestsLevel18(HedyTester):
         except ValueError:
           pass
       if str(antwoord) == str('20'):
-        print(f'Goedzo!')
-        print(f'Het antwoord was inderdaad{antwoord}')
+        print(f'''Goedzo!''')
+        print(f'''Het antwoord was inderdaad{antwoord}''')
       else:
-        print(f'Foutje')
-        print(f'Het antwoord moest zijn{antwoord}')""")
+        print(f'''Foutje''')
+        print(f'''Het antwoord moest zijn{antwoord}''')""")
 
       self.multi_level_tester(
         code=code,
@@ -183,7 +183,7 @@ class TestsLevel18(HedyTester):
       for i in range(int(1), int(3) + step, step):
         step = 1 if int(1) < int(4) else -1
         for j in range(int(1), int(4) + step, step):
-          print(f'rondje: {i} tel: {j}')
+          print(f'''rondje: {i} tel: {j}''')
           time.sleep(0.1)""")
 
       self.multi_level_tester(
@@ -200,7 +200,7 @@ class TestsLevel18(HedyTester):
 
       expected = textwrap.dedent("""\
       color = ['green', 'blue']
-      choice = input(f'Is your favorite color one of: {color}')
+      choice = input(f'''Is your favorite color one of: {color}''')
       try:
         choice = int(choice)
       except ValueError:
@@ -218,7 +218,7 @@ class TestsLevel18(HedyTester):
     def test_input_without_text_inside(self):
       code = "x = input()"
       expected = textwrap.dedent("""\
-      x = input(f'')
+      x = input(f'''''')
       try:
         x = int(x)
       except ValueError:
@@ -235,7 +235,7 @@ class TestsLevel18(HedyTester):
     def test_print_without_text_inside(self):
       self.multi_level_tester(
         code="print()",
-        expected="print(f'')",
+        expected="print(f'''''')",
         extra_check_function=self.is_not_turtle()
       )
 
