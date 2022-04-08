@@ -1,5 +1,5 @@
 import json
-from highlighter import simulateRulesWithoutToken
+from automaton import simulateRulesWithoutToken
 
 # open data for regex
 file = open('data.json') 
