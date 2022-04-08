@@ -8,7 +8,7 @@ switch(choice){"""
 printer = """
 const fs = require("fs");
 
-fs.writeFileSync("../../tests/test_highlighting/data.json", JSON.stringify(LEVELS), function(err = false) {
+fs.writeFileSync("data.json", JSON.stringify(LEVELS), function(err = false) {
 if(err){
   return console.log("error");
 }
@@ -39,7 +39,7 @@ for line in old_code:
 new_code = "\n".join(new_code)
 
 
-new_file = open("../../static/js/syntaxModesRulesForTests.ts","w")
+new_file = open("syntaxModesRulesForTests.ts","w")
 new_file.write(new_code)
 new_file.close()
 

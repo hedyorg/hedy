@@ -1,0 +1,18 @@
+#!/usr/bin/sh
+
+
+# copy and modify syntaxModesRules
+python3 generate_syntaxModesRules.py
+
+# copy dependances
+cp ../../static/js/syntaxLang-*.ts .
+
+# Allow right for execution
+chmod u+x syntaxModesRulesForTests.ts
+
+# generate data.json
+./syntaxModesRulesForTests.ts
+
+# clean the directory
+rm syntaxLang-*.ts
+rm syntaxModesRulesForTests.ts
