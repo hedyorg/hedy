@@ -139,9 +139,12 @@ class Quizzes:
             self.quizzes = YamlFile.for_file(f'coursedata/quizzes/en.yaml').to_dict()
 
     def set_keyword_language(self, language):
-        if language != self.keyword_lang:
-            self.keyword_lang = language
-            self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
+        # Todo TB -> We keep the language at "en" for now to make sure nothing changes for the end user
+        # We have to change the questions in the quizzes to make sure everything makes sense with dynamic keywords
+        return None
+        #if language != self.keyword_lang:
+        #    self.keyword_lang = language
+        #    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
 
     def get_highest_question_level(self, level):
         return len(self.quizzes['levels'].get(level))
