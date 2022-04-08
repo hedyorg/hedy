@@ -1234,15 +1234,15 @@ levels:
             question_text: "Which output will be produced by this code?"
             code: |-
                 {repeat} 2 {times}
-                {print} 'Hello'
-                {print} 'Im Hedy!'
+                    {print} 'Hello'
+                    {print} 'Im Hedy!'
             mp_choice_options:
                 - "code": "Hello \n Im Hedy!"
                   "feedback": "Everything is printed twice."
                 - "codet": "Hello \n Hello \n Im Hedy"
                   "feedback": "The second line is repeated twice as well."
                 - "code": "Hello \n Im Hedy! \n Hello \n Im Hedy!"
-                  "feedback": "Super!\""
+                  "feedback": "Super!"
                 - "code": "Hello \n Hello \n Im Hedy! \n Im Hedy!"
                   "feedback": "Helaas. Beide zinnen worden 2x herhaald"
             correct_answer: "C"
@@ -1257,7 +1257,7 @@ levels:
                 - "option_text": "This should be only one line, not 2."
                   "feedback": "No it should be 2 lines."
                 - "option_text": "This {print} command has to go"
-                  "feedback": "Np, you need it."
+                  "feedback": "No, you need it."
                 - "option_text": "There is a spelling mistake in the {repeat} command."
                   "feedback": "Nee, repeat is de goede spelling"
                 - "option_text": "The second line need to start with 4 spaces as indentation."
