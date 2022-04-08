@@ -1494,55 +1494,73 @@ export function filter_admin() {
 }
 
 var editor = ace.edit("editor");
-
 editor.on("guttermousedown", function (e: any) {
+  var editorContainer = document.getElementById("editor");
+  var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+  var lines = textContainer?.getElementsByClassName("ace_line");
   var target = e.domEvent.target;
-  if (target.className.indexOf("ace_gutter-cell") == -1)
-    return;
 
-  if (e.clientX > 25 + target.getBoundingClientRect().left)
-    return;
+  if (lines) {
+    if (target.className.indexOf("ace_gutter-cell") == -1)
+      return;
 
-  var breakpoints = e.editor.session.getBreakpoints(row, 0);
-  var row = e.getDocumentPosition().row;
-  if (typeof breakpoints[row] === typeof undefined) {
-    e.editor.session.setBreakpoint(row);
-  }
+    if (e.clientX > 25 + target.getBoundingClientRect().left)
+      return;
 
-  else {
-    e.editor.session.clearBreakpoint(row);
-    e.stop();
+    var breakpoints = e.editor.session.getBreakpoints(row, 0);
+    var row = e.getDocumentPosition().row;
+    if (typeof breakpoints[row] === typeof undefined) {
+      e.editor.session.setBreakpoint(row);
+      row = getCorrectVisibleRow(row, e.editor);
+      lines[row].innerHTML = addDisabledClass(lines[row]);
+      e.stop();
+    } else {
+      e.editor.session.clearBreakpoint(row);
+      // calculating the correct line to edit
+      row = getCorrectVisibleRow(row, e.editor);
+      lines[row].innerHTML = removeDisabledClass(lines[row]);
+      e.stop();
+    }
   }
 });
 
-editor.renderer.on("afterRender", function(){
+function getCorrectVisibleRow(row: number, editor: any) {
+  var firstVisibleRow = editor.getFirstVisibleRow();
+  return row - firstVisibleRow;
+}
+
+editor.renderer.on("afterRender", function () {
   var breakpoints = editor.session.getBreakpoints();
-	adjustLines(breakpoints);
+  adjustLines(breakpoints);
 });
 
 function adjustLines(disabledRow: []) {
-    // We have to specify the correct editor here
-    var editorContainer = document.getElementById("editor");
-    var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
-    var lines = textContainer?.getElementsByClassName("ace_line");
+  // We have to specify the correct editor here
+  var editorContainer = document.getElementById("editor");
+  var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+  var lines = textContainer?.getElementsByClassName("ace_line");
+  var firstVisibleRow = editor.getFirstVisibleRow();
+  var lastVisibleRow = editor.getLastVisibleRow();
 
-    if (lines) {
-        for (var i = 0; i < lines.length; i++) {
-            if (disabledRow[i] == 'ace_breakpoint') {
-                var currentLine = lines[i];
-                addDisabledClass(currentLine);
-            } else {
-                var currentLine = lines[i];
-                removeDisabledClass(currentLine);
-            }
-        }
+  if (lines) {
+    var arr = disabledRow.slice(firstVisibleRow, lastVisibleRow + 1);
+
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] == 'ace_breakpoint') {
+        var currentLine = lines[i];
+        currentLine.innerHTML = addDisabledClass(currentLine);
+      } else {
+        var currentLine = lines[i];
+        currentLine.innerHTML = removeDisabledClass(currentLine);
+      }
     }
+  }
 }
 
 function addDisabledClass(str: Element) {
-  str.classList.add("ace-disabled");
+  return '<div class="ace-disabled">' + str.innerHTML + '</div>';
 }
 
 function removeDisabledClass(str: Element) {
-  str.classList.remove("ace-disabled");
+  return str.innerHTML.replace('<div class="ace-disabled">', '').replace('</div>', '');
 }
