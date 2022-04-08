@@ -1,14 +1,14 @@
 //assigning a string now must be done with quotes
-assign: var (_SPACE _IS _SPACE | _EQUALS) sum | var (_SPACE _IS _SPACE | _EQUALS) text_in_quotes
-assign_list: var (_SPACE _IS _SPACE | _EQUALS) (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|NUMBER))+
+assign: var (_IS| _EQUALS) (atom | expression)
+assign_list: var (_IS| _EQUALS) (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|NUMBER))+
 
-?atom: NUMBER | var //unsupported numbers are gone, we can now allow floats with NUMBER
+?atom: NUMBER | var_access | text_in_quotes //unsupported numbers are gone, we can now allow floats with NUMBER
 
-equality_check: (var | text_in_quotes | NUMBER) (_SPACE _IS _SPACE | _EQUALS) (var | text_in_quotes | NUMBER)
+equality_check: (var_access | text_in_quotes | NUMBER) (_IS| _EQUALS) (var_access | text_in_quotes | NUMBER)
 
-in_list_check: (var | text_in_quotes | NUMBER) _SPACE _IN _SPACE var
-error_invalid: "Supercalifragilisticexpialidocious" //invalid node should be deleted but this probably never matches anything :D
+in_list_check: (var_access | text_in_quotes | NUMBER) _IN var_access
 
 // all literal strings have to be quoted now, so arithmetic operators don't need to be excluded anymore
-textwithspaces: /(?:[^\n،,' ]| (?!else))+/ -> text
-text_in_quotes: _SINGLE_QUOTE textwithspaces _SINGLE_QUOTE
+text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!else))+/ -> text
+text_with_spaces_without_double_quotes: /(?:[^\n،," ]| (?!else))+/ -> text
+text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes _SINGLE_QUOTE | _DOUBLE_QUOTE text_with_spaces_without_double_quotes _DOUBLE_QUOTE

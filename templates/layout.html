@@ -17,8 +17,8 @@
        <div id="modal-confirm" class="hidden">
           <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
           <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
-            <button id="modal-yes-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.yes}}</button>
-            <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{auth.no}}</button>
+            <button id="modal-yes-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
+            <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
           </div>
        </div>
        <div id="modal-prompt" class="hidden">
@@ -26,8 +26,8 @@
           <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto">
             <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <div class="mt-4 flex flex-row justify-center">
-                <button id="modal-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.ok}}</button>
-                <button id="modal-cancel-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{auth.cancel}}</button>
+                <button id="modal-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
+                <button id="modal-cancel-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
             </div>
           </div>
        </div>
@@ -40,7 +40,7 @@
           <div id="modal-copy-title" class="text-white mb-8 text-xl hidden"></div>
           <div id="modal-copy-text" class="text-white mb-8 text-xl"></div>
           <div id="modal-copy-buttons" class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
-            <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.copy_link_to_share}}</button>
+            <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('copy_link_to_share')}}</button>
           </div>
        </div>
        <div id="modal-repair" class="hidden">
@@ -74,16 +74,13 @@
       {% filter indent(width=6) %}{% include "incl-menubar.html" %}{% endfilter %}
       {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
-      {% if username and not 'language' in user_data %}
-          <h3 class="text-black text-center bg-yellow-300 mt-1 mb-1 border-red-500 py-4">{{auth.set_preferred_lang}}</h3>
-      {% endif %}
       {% block body %}{% endblock %}
 
       <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
     </div>
     <div id="achievement_pop-up" class="z-10 fixed hidden" style="width: 500px; top: 40%; left: 50%; transform: translate(-50%, -50%);">
         <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
-            <h3 class="text-white">{{auth.achievement_earned}}</h3>
+            <h3 class="text-white">{{_('achievement_earned')}}</h3>
             <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">
             <h4 class="text-white italic" id="achievement_reached_title"></h4>
             <p id="achievement_reached_text"></p>

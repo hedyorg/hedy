@@ -3,7 +3,7 @@
 {% block main %}
 <div class="px-8">
     <div class="w-3/4 mx-auto">
-        <h2 class="px-4">{{ auth.adventure }}: {{adventure.name}}</h2>
+        <h2 class="px-4">{{_('adventure')}}: {{adventure.name}}</h2>
         <div class="mt-4 border-gray-400 border-2 rounded-lg p-4 turn-pre-into-ace" style="white-space: pre-wrap;">{{ adventure.content|commonmark }}</div>
     </div>
 </div>

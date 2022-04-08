@@ -256,13 +256,16 @@ body[dir='rtl'] .right-hand-shadow {
 }
 
 .tab {
-  @apply py-2 px-1 mt-2 bg-gray-100 rounded-t-lg border-t-8 border-gray-300 text-sm;
+  @apply py-2 px-1 mt-2 bg-gray-100 rounded-t-lg border-t-8 border-gray-300 text-sm cursor-pointer;
   box-shadow:
     /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1);
 }
 
 .teacher_tab {
   @apply border-green-300;
+}
+.money_tab {
+  @apply border-green-600 bg-green-400 text-white font-semibold;
 }
 
 @screen lg {
@@ -283,7 +286,7 @@ body[dir='rtl'] .right-hand-shadow {
 }
 
 .tab-selected {
-  @apply mt-0 pt-2 bg-white rounded-t-lg border-t-8 border-r border-l border-pink-500;
+  @apply mt-0 pt-2 bg-white text-black font-normal rounded-t-lg border-t-8 border-r border-l border-pink-500;
   box-shadow: none !important;
 }
 

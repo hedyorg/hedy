@@ -17,12 +17,12 @@
   <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="/client_messages.js" type="text/javascript" crossorigin="anonymous"></script>
   <script>
     window.State = {};
     window.State.lang = "{{ g.lang }}";
     window.State.level = "{{ level }}";
-    window.State.level_title = "{{ ui.level_title }}";
+    window.State.level_title = "{{ _('level_title') }}";
     window.State.keyword_language = "{{ g.keyword_lang }}";
     window.State.adventure_name = "{{ adventure_name }}";
     // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
@@ -31,7 +31,7 @@
     window.State.adventures = {{ adventures|tojson }};
     window.State.default_program = {{start_code|tojson }};
     window.State.loaded_program = {{ loaded_program|tojson }};
-    window.State.default_program_name = {{ (ui.level_title + ' ' + level_nr)|tojson }};
+    window.State.default_program_name = {{ (_('level_title') + ' ' + level_nr)|tojson }};
   </script>
   <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>

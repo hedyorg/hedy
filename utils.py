@@ -8,6 +8,7 @@ import string
 import random
 import uuid
 
+from flask_babel import gettext
 from ruamel import yaml
 from website import querylog
 import commonmark
@@ -160,26 +161,26 @@ def atomic_write_file(filename, mode='wb'):
             f.write('hello')
 
     THIS WON'T WORK ON WINDOWS -- atomic file renames don't overwrite
-    on Windows. We could potentially do something else to make it work
-   (just swallow the exception, someone else already wrote the file?)
-    but for now we just don't support it.
+    on Windows. We now just swallow the exception, someone else already wrote the file?)
     """
-    if IS_WINDOWS:
-        raise RuntimeError('Cannot use atomic_write_file() on Windows!')
 
     tmp_file = f'{filename}.{os.getpid()}'
     with open(tmp_file, mode) as f:
         yield f
 
-    os.rename(tmp_file, filename)
-
+    try:
+        os.rename(tmp_file, filename)
+    except IOError:
+        pass
+        
 # This function takes a date in milliseconds from the Unix epoch and transforms it into a printable date
 # It operates by converting the date to a string, removing its last 3 digits, converting it back to an int
 # and then invoking the `isoformat` date function on it
 def mstoisostring(date):
-    unix_ts = date / 1000
-    dt = datetime.datetime.fromtimestamp(unix_ts)
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
+
+def stoisostring(date):
+    return datetime.datetime.fromtimestamp(date)
 
 def datetotimeordate(date):
     return date.replace("T", " ")
@@ -199,10 +200,13 @@ def markdown_to_html_tags(markdown):
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None):
     if error not in [403, 404, 500]:
         error = 404
-    # Todo TB -> Instead of giving the key in the function an finding it here: Give the correct string as argument
+    default = gettext('default_404')
+    if error == 403:
+        default = gettext('default_403')
+    elif error == 500:
+        default = gettext('default_500')
     return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
-                           page_error=page_error or g.ui_texts.get(ui_message) or '',
-                           default=g.ui_texts.get("default_" + str(error))), error
+                           page_error=page_error or ui_message or '', default=default), error
 
 
 def session_id():

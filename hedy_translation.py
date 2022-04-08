@@ -4,9 +4,9 @@ import hedy
 import operator
 import yaml
 from os import path
+import hedy_content
 
-
-KEYWORD_LANGUAGES = ['en', 'nl', 'es', 'fr']
+KEYWORD_LANGUAGES = list(hedy_content.ALL_KEYWORD_LANGUAGES.keys())
 
 # Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
@@ -16,10 +16,10 @@ def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
 
-    keywords_path = 'coursedata/keywords/'
+    keywords_path = 'content/keywords/'
     yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
 
-    with open(yaml_filesname_with_path, 'r') as stream:
+    with open(yaml_filesname_with_path, 'r', encoding='UTF-8') as stream:
         command_combinations = yaml.safe_load(stream)
 
     return command_combinations
@@ -31,7 +31,9 @@ def all_keywords_to_dict():
     for lang in KEYWORD_LANGUAGES:
         commands = keywords_to_dict(lang)
         keyword_list.append(commands)
-    all_translations = {k: [d[k] for d in keyword_list] for k in keyword_list[0]}
+
+    #gets the translation but defaults to the key k (in En) when it is not present
+    all_translations = {k: [d.get(k, k) for d in keyword_list] for k in keyword_list[0]}
     return all_translations
 
 
@@ -54,10 +56,11 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
 
     result = processed_input
     for rule in ordered_rules:
-        lines = result.splitlines()
-        line = lines[rule.line-1]
-        replaced_line = replace_token_in_line(line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
-        result = replace_line(lines, rule.line-1, replaced_line)
+        if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
+            lines = result.splitlines()
+            line = lines[rule.line-1]
+            replaced_line = replace_token_in_line(line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
+            result = replace_line(lines, rule.line-1, replaced_line)
 
     # For now the needed post processing is only removing the 'end-block's added during pre-processing
     result = '\n'.join([line for line in result.splitlines() if not line.startswith('end-block')])
@@ -82,6 +85,24 @@ def replace_token_in_line(line, rule, original, target):
     # Note that we need to replace the target value in the original value because some
     # grammar rules have ambiguous length and value, e.g. _COMMA: _SPACES* (latin_comma | arabic_comma) _SPACES*
     return before + rule.value.replace(original, target) + after
+
+
+def find_command_keywords(input_string, lang, level, keywords, start_line, end_line, start_column, end_column):
+    parser = hedy.get_parser(level, lang, True)
+    program_root = parser.parse(input_string).children[0]
+
+    translator = Translator(input_string)
+    translator.visit(program_root)
+
+    return {k: find_keyword_in_rules(translator.rules, k, start_line, end_line, start_column, end_column) for k in keywords}
+
+
+def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, end_column):
+    for rule in rules:
+        if rule.keyword == keyword and rule.line == start_line and rule.start >= start_column:
+            if rule.line < end_line or (rule.line == end_line and rule.end <= end_column):
+                return rule.value
+    return None
 
 
 class Translator(Visitor):
@@ -111,6 +132,16 @@ class Translator(Visitor):
 
     def turn(self, tree):
         self.add_rule('_TURN', 'turn', tree)
+
+    def left(self, tree):
+        token = tree.children[0]
+        rule = Rule('left', token.line, token.column - 1, token.end_column - 2, token.value)
+        self.rules.append(rule)
+
+    def right(self, tree):
+        token = tree.children[0]
+        rule = Rule('right', token.line, token.column - 1, token.end_column - 2, token.value)
+        self.rules.append(rule)
 
     def assign_list(self, tree):
         self.add_rule('_IS', 'is', tree)
@@ -159,6 +190,8 @@ class Translator(Visitor):
 
     def equality_check(self, tree):
         self.add_rule('_IS', 'is', tree)
+        self.add_rule('_EQUALS', '=', tree)
+        self.add_rule('_DOUBLE_EQUALS', '==', tree)
 
     def in_list_check(self, tree):
         self.add_rule('_IN', 'in', tree)
@@ -174,7 +207,7 @@ class Translator(Visitor):
         self.add_rule('_REPEAT', 'repeat', tree)
         self.add_rule('_TIMES', 'times', tree)
 
-    def repeat_list(self, tree):
+    def for_list(self, tree):
         self.add_rule('_FOR', 'for', tree)
         self.add_rule('_IN', 'in', tree)
 
@@ -193,18 +226,12 @@ class Translator(Visitor):
     def orcondition(self, tree):
         self.add_rule('_OR', 'or', tree)
 
-    def input_is(self, tree):
+    def input(self, tree):
         self.add_rule('_IS', 'is', tree)
         self.add_rule('_INPUT', 'input', tree)
 
-    def input_equals(self, tree):
-        self.add_rule('_INPUT', 'input', tree)
-
-    def input_is_empty_brackets(self, tree):
+    def input_empty_brackets(self, tree):
         self.add_rule('_IS', 'is', tree)
-        self.add_rule('_INPUT', 'input', tree)
-
-    def input_equals_empty_brackets(self, tree):
         self.add_rule('_INPUT', 'input', tree)
 
     def add_rule(self, token_name, token_keyword, tree):

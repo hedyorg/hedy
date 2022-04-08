@@ -3,7 +3,7 @@ import app
 import hedy, hedy_translation
 import re
 import sys
-import io
+import io, os
 from contextlib import contextmanager
 import inspect
 import unittest
@@ -14,7 +14,7 @@ class Snippet:
     self.level = level
     self.field_name = field_name
     self.code = code
-    filename_shorter = filename.split("/")[3]
+    filename_shorter = os.path.basename(filename)
     self.language = filename_shorter.split(".")[0]
     self.adventure_name = adventure_name
     self.name = f'{self.language}-{self.level}-{self.field_name}'
@@ -26,6 +26,8 @@ class HedyTester(unittest.TestCase):
   equality_comparison_commands = ['==', '=']
   number_comparison_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparison_commands + ['!=']
+  arithmetic_operations = ['+', '-', '*', '/']
+  quotes = ["'", '"']
 
   @staticmethod
   @contextmanager
@@ -63,6 +65,9 @@ class HedyTester(unittest.TestCase):
   def result_in(self, list):
     return (lambda result: HedyTester.run_code(result) in list)
 
+  def exception_command(self, command):
+    return lambda c: c.exception.arguments['command'] == command
+
   @staticmethod
   def as_list_of_tuples(*args):
     # used to conver a variable number of paralel list
@@ -74,7 +79,7 @@ class HedyTester(unittest.TestCase):
       res.append(t)
     return res
 
-  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None, lang='en', translate=True):
+  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None, lang='en', translate=True, output=None):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
 
@@ -93,7 +98,7 @@ class HedyTester(unittest.TestCase):
     # Or use expect to check for an expected Python program
     # In the second case, you can also pass an extra function to check
     for level in range(self.level, max_level + 1):
-      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands, lang=lang, translate=translate)
+      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands, lang=lang, translate=translate, output=output)
       print(f'Passed for level {level}')
 
   def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en', translate=True):

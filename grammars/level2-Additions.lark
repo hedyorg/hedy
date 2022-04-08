@@ -1,21 +1,21 @@
 //add the rules after += remove those after -= and the ones after > should be at the end
 command:+= assign | error_ask_dep_2 | error_echo_dep_2 | sleep -= echo > error_invalid
-print: _PRINT (_SPACE _print_argument)?
+print: _PRINT (_print_argument)?
 _print_argument: (_SPACE | textwithoutspaces | punctuation)*
-ask: var _SPACE _IS _SPACE _ASK (_SPACE + (_SPACE | text | punctuation)*)?
+ask: var _IS _ASK ((_SPACE | text | punctuation)*)?
 
 //level 1 deprecated commands, for now manually added for better errors
-error_ask_dep_2: _ASK (_SPACE error_text_dep_2)?
-error_echo_dep_2: _ECHO (_SPACE error_text_dep_2)?
+error_ask_dep_2: _ASK (error_text_dep_2)?
+error_echo_dep_2: _ECHO (error_text_dep_2)?
 //text is also changed and these commands of course need the old text
 error_text_dep_2: /([^\n]+)/ -> text //anything can be parsed except for a newline
 
 //sleep
-sleep: _SLEEP (_SPACE INT)?
+sleep: _SLEEP (INT)?
 
 //in level 2, forward may also depend on a variable
-turtle: _FORWARD (_SPACE (NEGATIVE_NUMBER | NUMBER | textwithoutspaces))? -> forward | _TURN (_SPACE (NEGATIVE_NUMBER | NUMBER | textwithoutspaces))? -> turn
-assign: var _SPACE _IS _SPACE text -> assign
+turtle: _FORWARD ((NEGATIVE_NUMBER | NUMBER | textwithoutspaces))? -> forward | _TURN ((NEGATIVE_NUMBER | NUMBER | textwithoutspaces))? -> turn
+assign: var _IS text -> assign
 
 // punctuation (?!.) has to be treated differently since it can be used to separate arguments, e.g.
 // by excluding punctuation symbols from the rules below, we ensure a ? can be printed after a variable
@@ -25,5 +25,5 @@ text: /([^\n!?.]+)/ -> text
 punctuation : PUNCTUATION -> punctuation
 PUNCTUATION: _EXCLAMATION_MARK | _QUESTION_MARK | _PERIOD //uppercase places tokens in tree
 
-var: NAME -> var
-
+var: NAME // used for variable definitions, e.g. a = 1
+var_access: NAME // used for variable references, e.g. print a. It parses the same as var, but does not result in a lookup table entry

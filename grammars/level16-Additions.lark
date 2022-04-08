@@ -1,9 +1,9 @@
 // adds list access with numbers and brackets
 
 // TODO for tomorrow: this stills needs tests in level 16 for > and !=
-?comparison_arg: var | text_in_quotes | NUMBER | list_access
+?comparison_arg: var_access | text_in_quotes | NUMBER | list_access
 
-?atom: NUMBER | var | list_access | error_unsupported_number
-list_access: var _LEFT_SQUARE_BRACKET (INT | random | var) _RIGHT_SQUARE_BRACKET
-change_list_item: var _LEFT_SQUARE_BRACKET (INT | var) _RIGHT_SQUARE_BRACKET _EQUALS (var | textwithoutspaces)
-assign_list: var (_SPACE _IS _SPACE | _EQUALS) _LEFT_SQUARE_BRACKET (quoted_text | INT) (_COMMA (quoted_text | INT))+ _RIGHT_SQUARE_BRACKET
+?atom: NUMBER | var_access | list_access | text_in_quotes
+list_access: var_access _LEFT_SQUARE_BRACKET (INT | random | var_access) _RIGHT_SQUARE_BRACKET
+change_list_item: var_access _LEFT_SQUARE_BRACKET (INT | var_access) _RIGHT_SQUARE_BRACKET _EQUALS (var_access | textwithoutspaces)
+assign_list: var (_IS | _EQUALS) _LEFT_SQUARE_BRACKET (quoted_text | INT) (_COMMA (quoted_text | INT))+ _RIGHT_SQUARE_BRACKET

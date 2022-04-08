@@ -1,28 +1,30 @@
-_PRINT: "imprimir" | "print"
-_ASK: "preguntar" | "ask"
-_ECHO: "eco" | "echo"
-_FORWARD: "adelante" | "forward"
-_TURN: "girar" | "turn"
-_IS: "es" | "is"
-_SLEEP: "dormir" | "sleep"
-_ADD_LIST: "añadir" | "add"
-_TO_LIST: "a" | "to"
-_REMOVE: "borrar" | "remove"
-_FROM: "de" | "from"
-_AT: "en" | "at"
-random: "aleatorio" | "random"
-_IN: "en" | "in"
-_IF: "si" | "if"
+_PRINT: ("imprimir" | "print") _SPACE?
+_ASK: ("preguntar" | "ask") _SPACE?
+_ECHO: ("eco" | "echo") _SPACE?
+_FORWARD: ("adelante" | "forward") _SPACE?
+_TURN: ("girar" | "turn") _SPACE?
+left: "left" _SPACE?
+right: "right" _SPACE?
+_IS: _SPACE ("es" | "is") _SPACE
+_SLEEP: ("dormir" | "sleep") _SPACE?
+_ADD_LIST: ("añadir" | "add") _SPACE
+_TO_LIST: _SPACE ("a" | "to") _SPACE
+_REMOVE: ("borrar" | "remove") _SPACE
+_FROM: _SPACE ("de" | "from") _SPACE
+_AT: _SPACE ("en" | "at") _SPACE
+random: ("aleatorio" | "random") _SPACE?
+_IN: _SPACE ("en" | "in") _SPACE
+_IF: ("si" | "if") _SPACE
 _ELSE: "sino" | "else"
-_AND: "y" | "and"
-_REPEAT: "repetir" | "repeat"
-_TIMES: "veces" | "times"
-_FOR: "para" | "for"
-_RANGE: "rango" | "range"
-_TO: "a" | "to"
+_AND: _SPACE ("y" | "and") _SPACE
+_REPEAT: ("repetir" | "repeat") _SPACE
+_TIMES: _SPACE ("veces" | "times")
+_FOR: ("para" | "for") _SPACE
+_RANGE: ("rango" | "range") _SPACE?
+_TO:  _SPACE ("a" | "to") _SPACE
 _STEP: "paso" | "step"
-_ELIF: "sinosi" | "elif"
+_ELIF: _SPACE? ("sinosi" | "elif") _SPACE
 _INPUT: "entrada" | "input"
-_OR: "o" | "or"
-_WHILE: "mientras" | "while"
+_OR: _SPACE ("o" | "or") _SPACE
+_WHILE: ("mientras" | "while") _SPACE
 _LENGTH: "longitud" | "length"

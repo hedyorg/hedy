@@ -5,7 +5,9 @@ export const LANG_en = {
 '_ECHO':'echo',
 '_FORWARD':'forward',
 '_TURN':'turn',
-'_IS':'is|=', //would be nicer to do this in the rules based on the level but this works
+'_LEFT':'left',
+'_RIGHT':'right',
+'_IS':'is',
 '_SLEEP':'sleep',
 '_ADD_LIST':'add',
 '_TO_LIST':'to',

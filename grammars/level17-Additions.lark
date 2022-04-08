@@ -8,11 +8,11 @@ _COLON: _SPACE* ":" _SPACE*
 
 elses: _EOL _SPACE* _ELSE _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 //TODO: after condition a space (or more) could also be ok? Python allows that
-ifs: _IF _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK//'if' cannot be used in Python, hence the name of the rule is 'ifs'
+ifs: _IF (condition|andcondition|orcondition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK//'if' cannot be used in Python, hence the name of the rule is 'ifs'
 // TODO: FH, jan 2022 (condition|andcondition|orcondition) could be made into a rule (also in use in level 13)
-elifs: _EOL _SPACE* _ELIF _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+elifs: _EOL _ELIF (condition|andcondition|orcondition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
-for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _SPACE (INT | var) _SPACE _TO _SPACE (INT | var) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
-while_loop: _WHILE _SPACE (condition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
-repeat_list: _FOR _SPACE var _SPACE _IN _SPACE var _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+for_list: _FOR var _IN var_access _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+for_loop: _FOR (NAME | var) _IN _RANGE (INT | var_access) _TO (INT | var_access) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+while_loop: _WHILE (condition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 

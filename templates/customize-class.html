@@ -2,30 +2,32 @@
 
 {% block main %}
 <div class="px-8">
-    <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
+    <h2>{{_('customize_class')}}: {{class_info.name}}</h2>
     <div class="w-full ltr:pr-4 rtl:pl-4">
-            {{ page_translations.explanation_1|commonmark }}
+            {{ _('customize_class_exp_1')|commonmark }}
         <div class="border border-gray-400 w-3/4 rounded-lg px-2 py-1 my-2">
             <ol>
-                {% for step in page_translations.steps %}
-                    <li>{{ step }}</li>
-                {% endfor %}
+                <li>{{_('customize_class_step_1')}}</li>
+                <li>{{_('customize_class_step_2')}}</li>
+                <li>{{_('customize_class_step_3')}}</li>
+                <li>{{_('customize_class_step_4')}}</li>
+                <li>{{_('customize_class_step_5')}}</li>
+                <li>{{_('customize_class_step_6')}}</li>
+                <li>{{_('customize_class_step_7')}}</li>
+                <li>{{_('customize_class_step_8')}}</li>
             </ol>
         </div>
-            {{ page_translations.explanation_2|commonmark }}
-    </div>
-    <div class="w-full text-center text-red-500 text-xl mt-4 font-bold {% if customizations %}hidden{% endif %}" id="customizations_alert">
-        {{ auth.no_customizations }}
+            {{ _('customize_class_exp_2')|commonmark }}
     </div>
     <div class="flex flex-col">
-        <h3 class="px-4">{{ auth.select_adventures }}</h3>
+        <h3 class="px-4">{{_('select_adventures')}}</h3>
         <div class="border border-gray-400 py-2 px-4 rounded-lg">
             <table class="table-auto w-full text-center customize_adventure_overview">
                 <thead>
                     <tr>
-                        <th class="w-40 text-left border-r border-gray-400">{{ ui.adventure }} / {{ ui.level_title }}</th>
+                        <th class="w-40 text-left border-r border-gray-400">{{ _('adventure') }} / {{ _('level_title') }}</th>
                         {% for i in range(1, max_level + 1) %}
-                            <th class="w-12"><button class="level-select-button {% if i in customizations.levels %}green-btn{% else %}blue-btn{% endif %} w-12" id="level_button_{{ i }}" onclick="hedyApp.select_all_level_adventures('{{ i }}');" value="{{ i }}">{{ i }}</button></th>
+                            <th class="w-12"><button class="level-select-button {% if i in customizations.levels or not customizations %}green-btn{% else %}blue-btn{% endif %} w-12" id="level_button_{{ i }}" onclick="hedyApp.select_all_level_adventures('{{ i }}');" value="{{ i }}">{{ i }}</button></th>
                         {% endfor %}
                     </tr>
                 </thead>
@@ -37,9 +39,9 @@
                             {% for i in range(1, max_level + 1) %}
                                 <td class="border-t border-gray-400">
                                     {% if i in levels %}<input class="adventure_level_{{ loop.index }} adventure_level_input
-                                        {% if not customizations or i not in customizations['levels'] %} hidden{% endif %}"
+                                        {% if customizations and i not in customizations['levels'] %} hidden{% endif %}"
                                         adventure="{{ key }}" level="{{ i }}"
-                                        {% if customizations and customizations['adventures'][key] and i in customizations['adventures'][key] %}
+                                        {% if (customizations and customizations['adventures'][key] and i in customizations['adventures'][key]) or (not customizations) %}
                                             checked
                                         {% endif %} type="checkbox">
                                     {% endif %}
@@ -54,25 +56,25 @@
     </div>
     <div class="flex flex-row">
         <div class="flex flex-col ltr:mr-4 rtl:ml-4">
-            <h3 class="px-4">{{ auth.opening_dates }}</h3>
+            <h3 class="px-4">{{_('opening_dates')}}</h3>
             <div class="border border-gray-400 w-3/4 py-2 px-4 rounded-lg">
                 <table class="table-auto text-center opening_dates_overview">
                     <thead>
                         <tr>
-                            <th class="w-40 border-r border-gray-400 text-left px-4">{{ ui.level_title }}</th>
-                            <th class="w-64">{{ auth.opening_date }}</th>
+                            <th class="w-40 border-r border-gray-400 text-left px-4">{{ _('level_title') }}</th>
+                            <th class="w-64">{{_('opening_date')}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for i in range(1, max_level + 1) %}
-                            <tr class="{% if i not in customizations['levels'] %}hidden{% endif %} opening_date_container" id="opening_date_level_{{ i }}">
-                                <td class="border-r border-t border-gray-400">{{ ui.level_title }} {{ i }}</td>
+                            <tr class="{% if customizations and i not in customizations['levels'] %}hidden{% endif %} opening_date_container" id="opening_date_level_{{ i }}">
+                                <td class="border-r border-t border-gray-400">{{ _('level_title') }} {{ i }}</td>
                                 <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
                                     <input level="{{ i }}"
                                        {% if customizations and 'opening_dates' in customizations and i|string in customizations['opening_dates'] %}
                                         type="date" value="{{ customizations['opening_dates'][i|string] }}"
                                        {% else %}
-                                        type="text" onfocus="(this.type='date')" placeholder="{{ auth.directly_available }}"
+                                        type="text" onfocus="(this.type='date')" placeholder="{{_('directly_available')}}"
                                        {% endif %}
                                        class="inline-block text-center appearance-none bg-gray-200 border border-gray-200 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
                                 </td>
@@ -83,14 +85,14 @@
             </div>
         </div>
         <div class="flex flex-col ltr:ml-4 rtl:mr-4">
-            <h3 class="px-4">{{ auth.select_own_adventures }}</h3>
+            <h3 class="px-4">{{_('select_own_adventures')}}</h3>
             <div class="border border-gray-400 py-2 px-4 rounded-lg">
                 <table class="table-auto text-center w-full customize_own_adventure_overview">
                     <thead>
                         <tr>
-                            <th class="w-64 text-left border-r border-gray-400">{{ ui.adventure }}</th>
-                            <th class="w-64 border-r border-gray-400">{{ ui.level_title }}</th>
-                            <th class="w-64">{{ auth.select }}?</th>
+                            <th class="w-64 text-left border-r border-gray-400">{{ _('adventure') }}</th>
+                            <th class="w-64 border-r border-gray-400">{{ _('level_title') }}</th>
+                            <th class="w-64">{{_('select')}}?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,26 +112,32 @@
     </div>
     <div class="flex flex-row mt-4 items-center">
         <div class="flex flex-col ltr:ml-4 rtl:mr-4">
-            <h3 class="px-4">{{ auth.other_settings}}</h3>
+            <h3 class="px-4">{{_('other_settings')}}</h3>
             <div class="border border-gray-400 py-2 px-4 rounded-lg">
                 <table class="table-auto text-center w-full customize_other_settings">
                     <thead>
                         <tr>
-                            <th class="w-64 text-left border-r border-gray-400">{{ auth.option }}</th>
-                            <th class="w-40">{{ auth.select }}?</th>
+                            <th class="w-64 text-left border-r border-gray-400">{{_('option')}}</th>
+                            <th class="w-40">{{_('select')}}?</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-left border-t border-r border-gray-400">{{ auth.mandatory_mode }}</td>
+                            <td class="text-left border-t border-r border-gray-400">{{_('mandatory_mode')}}</td>
                             <td class="border-t border-gray-400">
                                 <input class="other_settings_checkbox" id="developers_mode" type="checkbox" {% if "developers_mode" in customizations['other_settings'] %}checked{% endif %}>
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-left border-t border-r border-gray-400">{{ auth.hide_cheatsheet }}</td>
+                            <td class="text-left border-t border-r border-gray-400">{{_('hide_cheatsheet')}}</td>
                             <td class="border-t border-gray-400">
                                 <input class="other_settings_checkbox" id="hide_cheatsheet" type="checkbox" {% if "hide_cheatsheet" in customizations['other_settings'] %}checked{% endif %}>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left border-t border-r border-gray-400">{{_('hide_keyword_switcher')}}</td>
+                            <td class="border-t border-gray-400">
+                                <input class="other_settings_checkbox" id="hide_keyword_switcher" type="checkbox" {% if "hide_keyword_switcher" in customizations['other_settings'] %}checked{% endif %}>
                             </td>
                         </tr>
                     </tbody>
@@ -138,13 +146,13 @@
         </div>
         <div class="flex flex-col">
             <div class="flex flex-row ml-auto">
-                <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{ auth.reset_adventure_prompt }}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{ auth.reset_adventures }}</button>
-                <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{ auth.save }}</button>
+                <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{_('reset_adventure_prompt')}}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{_('reset_adventures')}}</button>
+                <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
             </div>
             <div class="flex flex-row mt-2 ml-auto">
-                <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}')">
-                {{ auth.remove_customization }}</button>
-                <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{auth.back_to_class}}</button>
+                <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}', '{{_('remove_customizations_prompt')}}')">
+                {{_('remove_customization')}}</button>
+                <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{_('back_to_class')}}</button>
             </div>
         </div>
     </div>

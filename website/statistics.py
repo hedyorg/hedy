@@ -1,6 +1,7 @@
 from collections import namedtuple
 from enum import Enum
-from flask import request, jsonify
+from flask import request, jsonify, g
+from flask_babel import gettext
 
 import hedyweb
 from flask_helpers import render_template
@@ -33,15 +34,15 @@ def routes(app, db):
     @requires_login
     def render_class_stats(user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message='retrieve_class')
+            return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or (class_['teacher'] != user['username'] and not is_admin(user)):
-            return utils.error_page(error=404, ui_message='no_such_class')
+            return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         students = sorted(class_.get('students', []))
         return render_template('class-stats.html', class_info={'id': class_id, 'students': students},
-                               current_page='my-profile', page_title=hedyweb.get_page_title('class statistics'))
+                               current_page='my-profile', page_title=gettext('title_class statistics'))
 
     @app.route('/class-stats/<class_id>', methods=['GET'])
     @requires_login
@@ -82,7 +83,7 @@ def routes(app, db):
         end_date = request.args.get('end', default=None, type=str)
 
         if not is_admin(user):
-            return utils.error_page(error=403, ui_message='unauthorized')
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
         ids = [e.value for e in UserType]
         program_runs_data = DATABASE.get_program_stats(ids, start_date, end_date)
@@ -132,6 +133,7 @@ def _data_to_response_per_level(data):
     _add_value_to_result(res, 'anonymous_runs', data['anonymous_runs'], is_counter=True)
     _add_value_to_result(res, 'logged_runs', data['logged_runs'], is_counter=True)
     _add_value_to_result(res, 'student_runs', data['student_runs'], is_counter=True)
+    _add_value_to_result(res, 'user_type_unknown_runs', data['user_type_unknown_runs'], is_counter=True)
 
     _add_value_to_result(res, 'abandoned_quizzes', data['total_attempts'] - data['completed_attempts'], is_counter=True)
     _add_value_to_result(res, 'completed_quizzes', data['completed_attempts'], is_counter=True)
@@ -167,6 +169,7 @@ def _to_response(data, values_field, series_selector, values_map=None):
         _add_value_to_result(res[values], 'anonymous_runs', d['anonymous_runs'], is_counter=True)
         _add_value_to_result(res[values], 'logged_runs', d['logged_runs'], is_counter=True)
         _add_value_to_result(res[values], 'student_runs', d['student_runs'], is_counter=True)
+        _add_value_to_result(res[values], 'user_type_unknown_runs', d['user_type_unknown_runs'], is_counter=True)
 
         min_, max_, avg_ = _score_metrics(d['scores'])
         _add_dict_to_result(res[values], 'quiz_score_min', series, min_)
@@ -184,8 +187,9 @@ def _to_response(data, values_field, series_selector, values_map=None):
 def _add_value_to_result(target, key, source, is_counter=False):
     if source is not None and (source > 0 if is_counter else True):
         if not target.get(key):
-            target[key] = {}
-        target[key] = source
+            target[key] = source
+        else:
+            target[key] += source
 
 
 def _add_dict_to_result(target, key, series, source, is_counter=False):
@@ -234,6 +238,7 @@ def _initialize():
             'anonymous_runs': 0,
             'logged_runs': 0,
             'student_runs': 0,
+            'user_type_unknown_runs': 0,
             'total_attempts': 0,
             'completed_attempts': 0,
             'scores': []
@@ -279,6 +284,8 @@ def _add_user_type_runs(data, id_, value):
         data['logged_runs'] += value
     if id_ == UserType.STUDENT.value:
         data['student_runs'] += value
+    if id_ == UserType.ALL.value:
+        data['user_type_unknown_runs'] += value
 
 
 def _split_keys_data(k, v, keys):

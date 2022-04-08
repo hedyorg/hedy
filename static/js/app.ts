@@ -22,7 +22,6 @@ var StopExecution = false;
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
 
-
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
@@ -42,6 +41,8 @@ var StopExecution = false;
     exampleEditor.setOptions({ maxLines: Infinity });
     if ($(preview).hasClass('common-mistakes')) {
       exampleEditor.setOptions({ minLines: 10 });
+    } else if ($(preview).hasClass('cheatsheet')) {
+      exampleEditor.setOptions({ minLines: 1 });
     } else {
       exampleEditor.setOptions({ minLines: 2 });
     }
@@ -58,7 +59,7 @@ var StopExecution = false;
       if (dir === "rtl") {
         symbol = "⇤";
       }
-      $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
+      $('<button>').css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
         update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
       });
@@ -119,7 +120,7 @@ var StopExecution = false;
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
       if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return auth.texts['unsaved_changes'];
+        return ErrorMessages['Unsaved_Changes'];
       } else {
         return undefined;
       }
@@ -140,7 +141,7 @@ var StopExecution = false;
         if (!window.State.level || !window.State.lang) {
           throw new Error('Oh no');
         }
-        runit (window.State.level, window.State.lang, function () {
+        runit (window.State.level, window.State.lang, "", function () {
           $ ('#output').focus ();
         });
       }
@@ -206,13 +207,7 @@ var StopExecution = false;
 })();
 
 export function getHighlighter(level: string) {
-  const modeExceptions: Record<string, string> = {
-        '8': 'ace/mode/level8and9',
-        '9': 'ace/mode/level8and9',
-        '11': 'ace/mode/level11and12',
-        '12': 'ace/mode/level11and12',
-      };
-  return modeExceptions[level] || `ace/mode/level` + level;
+  return `ace/mode/level` + level;
 }
 
 function reloadOnExpiredSession () {
@@ -230,17 +225,31 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
-export function runit(level: string, lang: string, cb: () => void) {
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000, true);
+export function runit(level: string, lang: string, answer_question: string, cb: () => void) {
+  if (window.State.disable_run) {
+    return modal.alert (answer_question, 3000, true);
+  }
   if (reloadOnExpiredSession ()) return;
   StopExecution = true;
 
+
   const outputDiv = $('#output');
+  //Saving the variable button because sk will overwrite the output div
+  const variableButton = $(outputDiv).find('#variable_button');
+  const variables = $(outputDiv).find('#variables');
   outputDiv.empty();
   $('#turtlecanvas').empty();
 
+  outputDiv.addClass("overflow-auto");
+  outputDiv.append(variableButton);
+  outputDiv.append(variables);
   error.hide();
   success.hide();
+
+  var runItBtn = $('#runit');
+  runItBtn.prop('disabled', true);
+  setTimeout(function() {runItBtn.prop('disabled', false)}, 500);
+
   try {
     level = level.toString();
     var editor = theGlobalEditor;
@@ -264,8 +273,7 @@ export function runit(level: string, lang: string, cb: () => void) {
     }).done(function(response: any) {
       console.log('Response', response);
       if (response.Warning) {
-        fix_code(level, lang);
-        showBulb(level);
+        storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
       if (response.achievements) {
@@ -274,9 +282,9 @@ export function runit(level: string, lang: string, cb: () => void) {
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
+          storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
           // @ts-ignore
-          fix_code(level, lang);
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
         return;
@@ -291,7 +299,7 @@ export function runit(level: string, lang: string, cb: () => void) {
       });
     }).fail(function(xhr) {
       console.error(xhr);
-      // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+       https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
       if (xhr.readyState < 4) {
         error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
       } else {
@@ -300,10 +308,17 @@ export function runit(level: string, lang: string, cb: () => void) {
     });
 
   } catch (e: any) {
-    console.error(e);
-    error.show(ErrorMessages['Other_error'], e.message);
+    modal.alert(e.responseText, 3000, true);
   }
 }
+
+function storeFixedCode(response: any, level: string) {
+  if (response.FixedCode) {
+    sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
+    showBulb(level);
+  }
+}
+
 function showBulb(level: string){
   const parsedlevel = parseInt(level)
   if(parsedlevel <= 2){
@@ -372,46 +387,6 @@ function removeBulb(){
     repair_button.hide();
 }
 
-export function fix_code(level: string, lang: string){
-  if (window.State.disable_run) return modal.alert (auth.texts['answer_question'], 3000, true);
-  if (reloadOnExpiredSession ()) return;
-
-  try {
-    level = level.toString();
-    var code = get_trimmed_code();
-    $.ajax({
-      type: 'POST',
-      url: '/fix-code',
-      data: JSON.stringify({
-        level: level,
-        code: code,
-        lang: lang,
-        read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: window.State.adventure_name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response: any) {
-      if (response.FixedCode){
-        sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
-        showBulb(level);
-      }
-    }).fail(function(xhr) {
-      console.error(xhr);
-      // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
-      if (xhr.readyState < 4) {
-        error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
-      } else {
-        error.show(ErrorMessages['Other_error'], ErrorMessages['ServerError']);
-      }
-    });
-
-  } catch (e: any) {
-    console.error(e);
-    error.show(ErrorMessages['Other_error'], e.message);
-  }
-}
-
 /**
  * Mark an error location in the ace editor
  *
@@ -472,73 +447,72 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
-function storeProgram(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
   window.State.unsaved_changes = false;
+  var adventure_name = window.State.adventure_name;
+  // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
+  if (Array.isArray(level)) {
+     adventure_name = level [1];
+     level = level [0];
+  }
 
-    var adventure_name = window.State.adventure_name;
-    // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
-    if (Array.isArray(level)) {
-       adventure_name = level [1];
-       level = level [0];
-    }
-
-    $.ajax({
-      type: 'POST',
-      url: '/programs',
-      data: JSON.stringify({
-        level: level,
-        lang:  lang,
-        name:  name,
-        code:  code,
-        adventure_name: adventure_name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      // The auth functions use this callback function.
-      if (cb) return response.Error ? cb (response) : cb (null, response);
-
-      modal.alert (auth.texts['save_success_detail'], 3000, false);
-      if (response.achievements) {
-        showAchievements(response.achievements, false, "");
-      }
-      // If we succeed, we need to update the default program name & program for the currently selected tab.
-      // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
-      // The name of the program might have been changed by the server, so we use the name stated by the server.
-      $ ('#program_name').val (response.name);
-      window.State.adventures?.map (function (adventure) {
-        if (adventure.short_name === (adventure_name || 'level')) {
-          adventure.loaded_program = {name: response.name, code: code};
-        }
+  $.ajax({
+    type: 'POST',
+    url: '/programs',
+    data: JSON.stringify({
+      level: level,
+      lang:  lang,
+      name:  name,
+      code:  code,
+      shared: shared,
+      force_save: force_save,
+      adventure_name: adventure_name
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response) {
+    // If the program contains an error -> verify that the user really wants to save it and POST again
+    // If we already answered this question with yes the "force_save" is true, so we skip this part
+    if (response.parse_error && !force_save) {
+      modal.confirm(response.message, function() {
+        return storeProgram(level, lang, name, code, shared, true, cb);
       });
-    }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
-      if (err.status === 403) {
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
-         localStorage.setItem ('hedy-save-redirect', 'hedy');
-         window.location.pathname = '/login';
+      return;
+    }
+    // The auth functions use this callback function.
+    if (cb) return response.Error ? cb (response) : cb (null, response);
+    if (shared) {
+      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "')");
+      modal.copy_alert (response.message, 5000);
+    } else {
+      modal.alert(response.message, 3000, false);
+    }
+    if (response.achievements) {
+      showAchievements(response.achievements, false, "");
+    }
+    // If we succeed, we need to update the default program name & program for the currently selected tab.
+    // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
+    // The name of the program might have been changed by the server, so we use the name stated by the server.
+    $ ('#program_name').val (response.name);
+    window.State.adventures?.map (function (adventure) {
+      if (adventure.short_name === (adventure_name || 'level')) {
+        adventure.loaded_program = {name: response.name, code: code};
       }
     });
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    if (err.status === 403) {
+       localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
+       localStorage.setItem ('hedy-save-redirect', 'hedy');
+       window.location.pathname = '/login';
+    }
+  });
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
-  error.hide();
-  success.hide();
-
+export function saveit(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, cb?: (err: any, resp?: any) => void) {
   if (reloadOnExpiredSession ()) return;
-
   try {
-    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
-    if (! auth.profile) {
-       return modal.confirm (auth.texts['save_prompt'], function () {
-         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-         window.location.pathname = '/login';
-       });
-    }
-
     $.ajax({
       type: 'POST',
       url: '/programs/duplicate-check',
@@ -549,26 +523,37 @@ export function saveit(level: number | [number, string], lang: string, name: str
       dataType: 'json'
     }).done(function(response) {
       if (response['duplicate']) {
-        modal.confirm (auth.texts['overwrite_warning'], function () {
-          storeProgram(level, lang, name, code, cb);
+        modal.confirm (response.message, function () {
+          storeProgram(level, lang, name, code, shared, false, cb);
           pushAchievement("double_check");
         });
       } else {
-         storeProgram(level, lang, name, code, cb);
+         storeProgram(level, lang, name, code, shared, false, cb);
+      }
+    }).fail(function(err) {
+      if (err.status == 403) { // The user is not allowed -> so not logged in
+        return modal.confirm (err.responseText, function () {
+           // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+           if (window.State && window.State.adventure_name && !Array.isArray(level)) {
+             level = [level, window.State.adventure_name];
+           }
+           localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code, shared]));
+           window.location.pathname = '/login';
+         });
       }
     });
   } catch (e: any) {
     console.error(e);
-    error.show(ErrorMessages['Other_error'], e.message);
+    modal.alert(e.message, 3000, true);
   }
 }
 
 /**
  * The 'saveit' function, as an async function
  */
-export function saveitP(level: number | [number, string], lang: string, name: string, code: string) {
+export function saveitP(level: number | [number, string], lang: string, name: string, code: string, shared: boolean) {
   return new Promise<any>((ok, ko) => {
-    saveit(level, lang, name, code, (err, response) => {
+    saveit(level, lang, name, code, shared,(err, response) => {
       if (err) {
         ko(err);
       } else {
@@ -605,14 +590,13 @@ function change_shared (shared: boolean, index: number) {
   }
 }
 
-function share_function(id: string, index: number, Public: boolean, parse_error: boolean) {
+export function share_program(id: string, index: number, Public: boolean) {
   $.ajax({
       type: 'POST',
       url: '/programs/share',
       data: JSON.stringify({
         id: id,
-        public: Public,
-        error: parse_error
+        public: Public
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -622,95 +606,19 @@ function share_function(id: string, index: number, Public: boolean, parse_error:
       }
       if (Public) {
         $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
-        modal.copy_alert (Public ? auth.texts['share_success_detail'] : auth.texts['unshare_success_detail'], 5000);
+        modal.copy_alert (response.message, 5000);
         change_shared(true, index);
       } else {
-        modal.alert (auth.texts['unshare_success_detail'], 3000, false);
+        modal.alert (response.message, 3000, false);
         change_shared(false, index);
       }
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
 }
 
-function verify_call_index(level:number, lang: string, id: string | true, index: number, Public: boolean, parse_error: boolean) {
-  // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
-  if (id !== true) return share_function(id, index, Public, parse_error);
-  // Otherwise, we save the program and then share it.
-  // Saving the program makes things way simpler for many reasons: it covers the cases where:
-  // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
-  const name = `${$('#program_name').val()}`;
-  const code = get_trimmed_code();
-  return saveit(level, lang, name, code, (err: any, resp: any) => {
-      if (err && err.Warning)
-        return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
-      if (err && err.Error)
-        return error.show(ErrorMessages['Transpile_error'], err.Error);
-      share_function(resp.id, index, Public, parse_error);
-    });
-}
-
-function get_parse_code_by_id(level: number, lang:string, id:string | true,  index: number, Public: boolean) {
-  $.ajax({
-      type: 'POST',
-      url: '/parse-by-id',
-      data: JSON.stringify({
-        id: id
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function (response) {
-      if (response.error) {
-        modal.confirm("This program contains an error, are you sure you want to share it?", function() {
-          return verify_call_index(level, lang, id, index, Public, true);
-        });
-        return;
-      } else {
-        return verify_call_index(level, lang, id, index, Public, false);
-      }
-    }).fail(function (err) {
-      console.log(err);
-    });
-}
-
-export function share_program (level: number, lang: string, id: string | true, index: number, Public: boolean) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
-  if (Public) {
-    // The request comes from the programs page -> we have to retrieve the program first (let's parse directly)
-    if (id !== true) {
-      return get_parse_code_by_id(level, lang, id,  index, Public);
-    } else {
-      const code = get_trimmed_code();
-      $.ajax({
-        type: 'POST',
-        url: '/parse',
-        data: JSON.stringify({
-          level: level,
-          lang: lang,
-          code: code
-        }),
-        contentType: 'application/json',
-        dataType: 'json'
-      }).done(function (response) {
-        if (response.Error) {
-          modal.confirm("This program contains an error, are you sure you want to share it?", function () {
-            verify_call_index(level, lang, id, index, Public, true);
-          });
-        } else {
-            verify_call_index(level, lang, id, index, Public, false);
-        }
-      }).fail(function (err) {
-        console.log(err);
-      });
-    }
-  } else {
-    verify_call_index(level, lang, id, index, Public, false);
-  }
-}
-
-export function delete_program(id: string, index: number) {
-  modal.confirm (auth.texts['delete_confirm'], function () {
+export function delete_program(id: string, index: number, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'POST',
       url: '/programs/delete',
@@ -725,10 +633,9 @@ export function delete_program(id: string, index: number) {
       } else {
           $('#program_' + index).remove();
       }
-      modal.alert (auth.texts['delete_success'], 3000, false);
+      modal.alert(response.message, 3000, false);
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
   });
 }
@@ -741,8 +648,8 @@ function set_favourite(index: number) {
     $('#favourite_program_container_' + index).addClass('text-yellow-400');
 }
 
-export function set_favourite_program(id: string, index: number) {
-  modal.confirm (auth.texts['favourite_confirm'], function () {
+export function set_favourite_program(id: string, index: number, prompt: string) {
+  modal.confirm (prompt, function () {
     $.ajax({
       type: 'POST',
       url: '/programs/set_favourite',
@@ -751,12 +658,11 @@ export function set_favourite_program(id: string, index: number) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function() {
+    }).done(function(response) {
       set_favourite(index)
-      modal.alert (auth.texts['favourite_success'], 3000);
+      modal.alert (response.message, 3000, false);
     }).fail(function(err) {
-      console.error(err);
-      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+      modal.alert(err.responseText, 3000, true);
     });
   });
 }
@@ -772,7 +678,6 @@ function change_to_submitted (index: number) {
 }
 
 export function submit_program (id: string, index: number) {
-  if (! auth.profile) return modal.alert (auth.texts['must_be_logged'], 3000, true);
   $.ajax({
     type: 'POST',
     url: '/programs/submit',
@@ -786,10 +691,12 @@ export function submit_program (id: string, index: number) {
       showAchievements(response.achievements, false, "");
     }
     change_to_submitted(index);
+  }).fail(function(err) {
+      return modal.alert(err.responseText, 3000, true);
   });
 }
 
-export function copy_to_clipboard (string: string, noAlert: boolean) {
+export function copy_to_clipboard (string: string, prompt: string) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
   el.value = string;
@@ -808,10 +715,8 @@ export function copy_to_clipboard (string: string, noAlert: boolean) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  if (! noAlert) {
-    modal.hide();
-    modal.alert (auth.texts['copy_clipboard'], 3000, false);
-  }
+  modal.hide_alert();
+  modal.alert (prompt, 3000, false);
 }
 
 /**
@@ -857,7 +762,12 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   window.State.programsInExecution = 1;
 
   const outputDiv = $('#output');
+  //Saving the variable button because sk will overwrite the output div
+  const variableButton = $(outputDiv).find('#variable_button');
+  const variables = $(outputDiv).find('#variables');
   outputDiv.empty();
+  outputDiv.append(variableButton);
+  outputDiv.append(variables);
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
@@ -918,6 +828,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       pushAchievement("error_or_empty");
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+      return;
     }
     window.State.programsInExecution--;
     if(!hasWarnings) {
@@ -954,6 +865,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   function outf(text: string) {
     // If there's more than one program being executed at a time, we ignore it.
     // This happens when a program requiring user input is suspended when the user changes the code.
+    //@ts-ignore
+    const pythonVariables = Sk.globals;
+    load_variables(pythonVariables);
     if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
@@ -1073,12 +987,92 @@ function speak(text: string) {
 export function prompt_unsaved(cb: () => void) {
   // This variable avoids showing the generic native `onbeforeunload` prompt
   window.State.no_unload_prompt = true;
-  if (! window.State.unsaved_changes || ! auth.profile) return cb ();
-  modal.confirm(auth.texts['unsaved_changes'], cb);
+  if (! window.State.unsaved_changes) return cb ();
+  modal.confirm(ErrorMessages['Unsaved_Changes'], cb);
 }
 
 export function load_quiz(level: string) {
   $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+}
+
+export function showVariableView() {
+// When blue label button is clicked, the view will appear or hide
+  const variables = $('#variables');
+  if (variables.is(":hidden")) {
+    variables.show();
+    $("#variables").trigger("click")
+  }
+  else {
+    variables.hide();
+  }
+}
+
+//Feature flag for variable and values view
+var variable_view = false;
+
+//Hides the HTML DIV for variables if feature flag is false
+if (!variable_view) {
+  $('#variables').hide();
+  $('#variable_button').hide();
+}
+
+export function show_variables() {
+  if (variable_view === true) {
+    const variableList = $('#variable-list');
+    if (variableList.hasClass('hidden')) {
+      variableList.removeClass('hidden');
+    }
+  }
+}
+
+export function load_variables(variables: any){
+    if (variable_view === true) {
+      //@ts-ignore
+      variables = clean_variables(variables);
+      const variableList = $('#variable-list');
+      variableList.empty();
+      for (const i in variables) {
+        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
+      }
+    }
+}
+
+// Color-coding string, numbers, booleans and lists
+// This will be cool to use in the future!
+// Just change the colors to use it
+function special_style_for_variable(variable: any){
+  let result = '';
+  let parsedVariable = parseInt(variable.v);
+  if (typeof parsedVariable == 'number' && !isNaN(parsedVariable)){
+     result =  "#ffffff";
+   }
+   if(typeof variable.v == 'string' && isNaN(parsedVariable)){
+     result = "#ffffff";
+   }
+   if(typeof variable.v == 'boolean'){
+     result = "#ffffff";
+   }
+   if (variable.tp$name == 'list'){
+    result =  "#ffffff";
+   }
+   return result;
+}
+
+//hiding certain variables from the list unwanted for users
+// @ts-ignore
+function clean_variables(variables: any) {
+  if (variable_view === true) {
+    const new_variables = [];
+    const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
+    for (const variable in variables) {
+      if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
+      let extraStyle = special_style_for_variable(variables[variable]);
+      let newTuple = [variable, variables[variable].v, extraStyle];
+      new_variables.push(newTuple);
+      }
+    }
+    return new_variables;
+  }
 }
 
 export function get_trimmed_code() {
@@ -1223,7 +1217,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
       if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return auth.texts['unsaved_changes'];
+        return ErrorMessages['Unsaved_Changes'];
       } else {
         return undefined;
       }
@@ -1244,7 +1238,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
         if (!window.State.level || !window.State.lang) {
           throw new Error('Oh no');
         }
-        runit (window.State.level, window.State.lang, function () {
+        runit (window.State.level, window.State.lang, "", function () {
           $ ('#output').focus ();
         });
       }
@@ -1372,6 +1366,12 @@ export function filter_admin() {
   if (filter == "email") {
     const substring = $('#email_filter_input').val();
     window.open('?filter=' + filter + "&substring=" + substring, "_self");
+  } else if (filter == "language") {
+    const lang = $('#language_filter_input').val();
+    window.open('?filter=' + filter + "&language=" + lang, "_self");
+  } else if (filter == "keyword_language") {
+    const keyword_lang = $('#keyword_language_filter_input').val();
+    window.open('?filter=' + filter + "&keyword_language=" + keyword_lang, "_self");
   } else {
     const start_date = $('#admin_start_date').val();
     const end_date = $('#admin_end_date').val();

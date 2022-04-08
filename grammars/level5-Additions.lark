@@ -1,34 +1,37 @@
-program: _EOL* (command | error_invalid) (_SPACE)* (_EOL+ (command | error_invalid) (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
-//placing assing at the end
-command:+= ifelse | ifs  |  list_access_var -= error_invalid | error_ask_no_quotes > assign
+program: _empty_program | _non_empty_program
+_empty_program: (_EOL | _SPACE)*
+_non_empty_program: _EOL* (command | error_invalid) _SPACE* (_EOL+ command _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
+
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
+command:+= ifelse | ifs | list_access_var -= error_invalid | error_ask_no_quotes > assign
+
+// error_invalid is moved from to command to program, so that command rules have priority over error_invalid
+error_invalid: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
 
 //todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
-list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
-assign_list: var _SPACE _IS _SPACE textwithspaces (_COMMA textwithspaces)+
-assign: var _SPACE _IS _SPACE textwithspaces
-// Why are we redefining this rule if it's not used in further levels? JP Dec-2021
-error_invalid: textwithoutspaces (_SPACE quoted_text | _SPACE textwithspaces)?
+list_access_var: var _IS var _AT (INT | random)
+assign_list: var _IS textwithspaces (_COMMA textwithspaces)+
+assign: var _IS textwithspaces
 
-error_print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))*  -> error_print_nq
+error_print_no_quotes: _PRINT (textwithoutspaces | list_access | var_access) (_SPACE (textwithoutspaces | list_access | var_access))*  -> error_print_nq
 
 // new commands for level 5
-ifelse: _IF _SPACE (condition (_SPACE|_EOL*) | condition_spaces _EOL*) command (_SPACE|_EOL*) _ELSE (_SPACE|_EOL*) command
-ifs: _IF _SPACE (condition (_SPACE|_EOL*)) command //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+ifelse: _IF (condition (_SPACE|_EOL*) | condition_spaces _EOL*) command (_SPACE|_EOL*) _ELSE (_SPACE|_EOL*) command
+ifs: _IF (condition (_SPACE|_EOL*)) command //'if' cannot be used in Python, hence the name of the rule is 'ifs'
 
-condition_spaces: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces (_SPACE textwithspaces)+
+condition_spaces: textwithoutspaces _IS textwithoutspaces (_SPACE textwithspaces)+
 condition: equality_check | in_list_check
-equality_check: textwithoutspaces _SPACE _IS _SPACE (quoted_text | textwithoutspaces) //TODO FH nov 2021: not super pretty that this is textwithoutquotes for both a var and also a textual constant, level 12 handles this nicer now, could be done here too
+equality_check: textwithoutspaces _IS (quoted_text | textwithoutspaces) //TODO FH nov 2021: not super pretty that this is textwithoutquotes for both a var and also a textual constant, level 12 handles this nicer now, could be done here too
 
 
-in_list_check: textwithoutspaces _SPACE _IN _SPACE var
+in_list_check: textwithoutspaces _IN var_access
 
 nospace: /[^\n, ]/
 
-textwithspaces: /(?:[^\n،, ]| (?!else|anders))+/ -> text //anything can be parsed except for a newline and a comma for list separators
+textwithspaces: /(?:[^#\n،, ]| (?!else|anders|sinon|sino|وإلا))+/ -> text //anything can be parsed except for a newline and a comma for list separators
 //a space is allowed, but it may not be followed by an else. The part " (?!else))" means space not followed by (negative look ahead) else
 //That is because allowing else in strings leads to issue #303
-textwithoutspaces: /(?:[^\n،, eia]|e(?!lse)|i(?!f)|a(?!nders)|a(?!ls))+/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+textwithoutspaces: /(?:[^#\n،, eias]|e(?!lse)|i(?!f)|s(?!i|inon|ino)|a(?!nders|ls))+/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 //the part e(?!lse)|i(?!f)) means e not followed by lse, and i not followed by f
 // this is because allowing else and if in invalid leads to ambiguity in the grammar                                            
 

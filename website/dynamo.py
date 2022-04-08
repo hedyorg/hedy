@@ -417,7 +417,7 @@ class MemoryStorage(TableStorage):
 
         if filename:
             try:
-                with open(filename, 'r') as f:
+                with open(filename, 'r', encoding='utf-8') as f:
                     self.tables = json.load(f, object_hook=CustomEncoder.decode_object)
             except IOError:
                 pass
@@ -579,7 +579,7 @@ class MemoryStorage(TableStorage):
     def _flush(self):
         if self.filename:
             try:
-                with open(self.filename, 'w') as f:
+                with open(self.filename, 'w', encoding='utf-8') as f:
                     json.dump(self.tables, f, indent=2, cls=CustomEncoder)
             except IOError:
                 pass

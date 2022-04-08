@@ -1,5 +1,5 @@
 command:+= for_loop -= repeat | turtle
 
 //new : for loop
-for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _SPACE (INT | var) _SPACE _TO _SPACE (INT | var) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+for_loop: _FOR (NAME | var) _IN _RANGE (INT | var_access) _TO (INT | var_access) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
