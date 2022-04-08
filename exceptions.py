@@ -154,10 +154,6 @@ class UnquotedAssignTextException(HedyException):
     def __init__(self, text):
         super().__init__('Unquoted Assignment', text=text)
 
-class EmptyProgramException(HedyException):
-    def __init__(self):
-        super().__init__('Empty Program')
-
 class LonelyEchoException(HedyException):
     def __init__(self):
         super().__init__('Lonely Echo')
@@ -189,3 +185,7 @@ class UnsupportedFloatException(HedyException):
 class LockedLanguageFeatureException(HedyException):
     def __init__(self, concept):
         super().__init__('Locked Language Feature', concept=concept)
+
+class UnsupportedStringValue(HedyException):
+    def __init__(self, invalid_value):
+        super().__init__('Unsupported String Value', invalid_value=invalid_value)

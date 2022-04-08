@@ -19,33 +19,38 @@ from os import path
 import re
 import traceback
 from flask_commonmark import Commonmark
+from babel import Locale
 from werkzeug.urls import url_encode
 from config import config
-from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
-from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
-import utils
-import textwrap
-
-# app.py
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
 from flask_helpers import render_template
 from flask_compress import Compress
 from flask_babel import Babel, refresh
 from flask_babel import gettext
 
+# Setting up Flask and babel (web and translations)
+app = Flask(__name__, static_url_path='')
+app.url_map.strict_slashes = False # Ignore trailing slashes in URLs
+babel = Babel(app)
+
 # Hedy-specific modules
 import hedy_content
+hedy_content.fill_all_languages(babel)
 import hedyweb
-from hedy_content import ALL_LANGUAGES, FALL_BACK_ADVENTURE, ALL_KEYWORD_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER
+from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
+from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
+import utils
+import textwrap
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 from website.log_fetcher import log_fetcher
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
-LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
+COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
 for lang in ALL_LANGUAGES.keys():
-    LEVEL_DEFAULTS[lang] = hedy_content.LevelDefaults(lang)
+    COMMANDS[lang] = hedy_content.Commands(lang)
 
 ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
@@ -88,14 +93,8 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
 
 def load_adventure_for_language(lang):
     ADVENTURES[lang].set_keyword_language(g.keyword_lang)
-    adventures_for_lang = ADVENTURES[lang]
 
-    if not adventures_for_lang.has_adventures():
-        # The default fall back language is English
-        fall_back = FALL_BACK_ADVENTURE.get(lang, "en")
-        adventures_for_lang = ADVENTURES[fall_back]
-
-    return adventures_for_lang
+    return ADVENTURES[lang]
 
 
 def load_adventures_per_level(lang, level):
@@ -118,6 +117,13 @@ def load_adventures_per_level(lang, level):
     keywords = adventure_object.keywords
     adventures = adventure_object.adventures_file['adventures']
 
+    # Order the adventures dict by ADVENTURE_ORDER to ensure this is always the same (independent of YAML structure)
+    sorted_adventures = {}
+    for adventure_index in ADVENTURE_ORDER:
+        if adventures.get(adventure_index, None):
+            sorted_adventures[adventure_index] = (adventures.get(adventure_index))
+    adventures = sorted_adventures
+
     for short_name, adventure in adventures.items():
         if not level in adventure['levels']:
             continue
@@ -130,7 +136,7 @@ def load_adventures_per_level(lang, level):
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure.get('default_save_name', adventure['name']),
-            'text': adventure['levels'][level].get('story_text', 'No Story Text').format(**keywords),
+            'text': adventure['levels'][level].get('story_text').format(**keywords) if adventure['levels'][level].get('story_text') else '',
             'example_code': adventure['levels'][level].get('example_code').format(**keywords) if adventure['levels'][level].get('example_code') else '',
             'start_code': adventure['levels'][level].get('start_code').format(**keywords) if adventure['levels'][level].get('start_code') else '',
             'loaded_program': '' if not loaded_programs.get(short_name) else {
@@ -151,14 +157,6 @@ def load_adventures_per_level(lang, level):
                 break
         current_adventure['extra_stories'] = extra_stories
         all_adventures.append(current_adventure)
-    # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
-    all_adventures.append({
-        'short_name': 'level',
-        'loaded_program': '' if not loaded_programs.get('level') else {
-            'name': loaded_programs.get('level')['name'],
-            'code': loaded_programs.get('level')['code']
-        }
-    })
     return all_adventures
 
 
@@ -166,37 +164,10 @@ logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
 
-app = Flask(__name__, static_url_path='')
-# Ignore trailing slashes in URLs
-app.url_map.strict_slashes = False
-
-babel = Babel(app)
-
-
 # Return the session language, if not: return best match
 @babel.localeselector
 def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
-
-"""
-    Some important notes relates to Flask-Babel usage:
-    -   We can always get a translation using gettext('english string')
-        NOTE: We can shorten this notation by simply using _('english string')
-    -   We can insert some variable like this: gettext('some string %(value)s', value=42)
-    -   More interesting for us might be the 'lazy string' the can be defined outside requests, like this:
-    -       lazy_gettext('Account successfully saved')
-    -   This will be really useful when wanting to return translated error messages
-    
-    - We have to mark ALL translatable string (in english!) with gettext() -> then create a .pot file
-    - We create the file as follows: 
-        pybabel extract -F babel.cfg -o messages.pot .
-    - To add a translation (for dutch): 
-        pybabel init -i messages.pot -d translations -l nl
-    - To update your files (when adding new strings):
-        FIRST create new file:  pybabel extract -F babel.cfg -o messages.pot . 
-        THEN:                   pybabel update -i messages.pot -d translations
-    LASTLY compile the files:   pybabel compile -d translations
-"""
 
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
@@ -303,12 +274,11 @@ def setup_language():
     g.keyword_lang = session['keyword_lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
-    # Switch to "right-to-left" if one of the language in the list is selected
+    # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings. 
     # This is the only place to expand / shrink the list of RTL languages -> front-end is fixed based on this value
     g.dir = "ltr"
-    if g.lang in ['ar', 'he', 'ur']:
-        g.dir = "rtl"
-
+    if Locale(g.lang).text_direction in ["ltr", "rtl"]: 
+        g.dir = Locale(g.lang).text_direction
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
@@ -323,34 +293,8 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
 def enrich_context_with_user_info():
-    session['set_keyword_lang'] = False
     user = current_user()
-    data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
-    if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
-        user_data = DATABASE.user_by_username(user.get('username'))
-        data['user_messages'] = 0
-        if user_data.get('language', '') in ALL_LANGUAGES.keys():
-            g.lang = session['lang'] = user_data['language']
-        if user_data.get('keyword_language', '') in ALL_LANGUAGES.keys():
-            g.keyword_lang = session['keyword_lang'] = user_data['keyword_language']
-            session['set_keyword_lang'] = True
-
-        data['user_data'] = user_data
-        if 'classes' in user_data:
-            data['user_classes'] = DATABASE.get_student_classes(user.get('username'))
-        user_achievements = DATABASE.achievements_by_username(user.get('username'))
-        if user_achievements:
-            data['user_achievements'] = user_achievements
-        user_invites = DATABASE.get_username_invite(user.get('username'))
-        if user_invites:
-            Class = DATABASE.get_class(user_invites['class_id'])
-            if Class:
-                invite_data = user_invites.copy()
-                invite_data['class_name'] = Class.get('name')
-                invite_data['teacher'] = Class.get('teacher')
-                invite_data['join_link'] = Class.get('link')
-                data['invite_data'] = invite_data
-                data['user_messages'] += 1
+    data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user)}
     return data
 
 
@@ -387,79 +331,6 @@ def echo_session_vars_main():
     if not utils.is_testing_request(request):
         return 'This endpoint is only meant for E2E tests', 400
     return jsonify({'session': dict(session), 'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
-
-
-@app.route('/fix-code', methods=['POST'])
-def fix_code():
-    body = request.json
-    if not body:
-        return "body must be an object", 400
-    if 'code' not in body:
-        return "body.code must be a string", 400
-    if 'level' not in body:
-        return "body.level must be a string", 400
-    if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
-        return "if present, body.adventure_name must be a string", 400
-
-    code = body['code']
-    level = int(body['level'])
-
-    # Language should come principally from the request body,
-    # but we'll fall back to browser default if it's missing for whatever
-    # reason.
-    lang = body.get('lang', g.lang)
-
-    # true if kid enabled the read aloud option
-    read_aloud = body.get('read_aloud', False)
-
-    response = {}
-    username = current_user()['username'] or None
-    exception = None
-
-    querylog.log_value(level=level, lang=lang, session_id=utils.session_id(), username=username)
-
-    try:
-        with querylog.log_time('transpile'):
-
-            try:
-                transpile_result = hedy.transpile(code, level)
-                response = "OK"
-            except hedy.exceptions.FtfyException as ex:
-                # The code was fixed with a warning
-                response['Error'] = translate_error(ex.error_code, ex.arguments)
-                response['FixedCode'] = ex.fixed_code
-                response['Location'] = ex.error_location
-                transpile_result = ex.fixed_result
-                exception = ex
-
-    except hedy.exceptions.HedyException as ex:
-        traceback.print_exc()
-        response = hedy_error_to_response(ex)
-        exception = ex
-
-    except Exception as E:
-        traceback.print_exc()
-        print(f"error transpiling {code}")
-        response["Error"] = str(E)
-        exception = ex
-
-    querylog.log_value(server_error=response.get('Error'))
-    parse_logger.log({
-        'session': utils.session_id(),
-        'date': str(datetime.datetime.now()),
-        'level': level,
-        'lang': lang,
-        'code': code,
-        'server_error': response.get('Error'),
-        'exception': get_class_name(exception),
-        'version': version(),
-        'username': username,
-        'read_aloud': read_aloud,
-        'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
-        'adventure_name': body.get('adventure_name', None)
-    })
-
-    return jsonify(response)
 
 
 @app.route('/parse', methods=['POST'])
@@ -503,19 +374,14 @@ def parse():
                 if username:
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
-            except hedy.exceptions.InvalidSpaceException as ex:
-                response['Warning'] = translate_error(ex.error_code, ex.arguments)
-                response['Location'] = ex.error_location
-                transpile_result = ex.fixed_result
-                exception = ex
-            except hedy.exceptions.InvalidCommandException as ex:
-                response['Error'] = translate_error(ex.error_code, ex.arguments)
-                response['Location'] = ex.error_location
-                transpile_result = ex.fixed_result
-                exception = ex
             except hedy.exceptions.FtfyException as ex:
-                response['Error'] = translate_error(ex.error_code, ex.arguments)
+                translated_error = translate_error(ex.error_code, ex.arguments)
+                if type(ex) is hedy.exceptions.InvalidSpaceException:
+                    response['Warning'] = translated_error
+                else:
+                    response['Error'] = translated_error
                 response['Location'] = ex.error_location
+                response['FixedCode'] = ex.fixed_code
                 transpile_result = ex.fixed_result
                 exception = ex
             except hedy.exceptions.UnquotedEqualityCheck as ex:
@@ -621,7 +487,7 @@ def translate_error(code, arguments):
     arguments_that_require_translation = ['allowed_types', 'invalid_type', 'invalid_type_2', 'character_found',
                                           'concept', 'tip']
     arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2',
-                                           'variable']
+                                           'variable', 'invalid_value']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
     error_template = gettext('' + str(code))
@@ -717,11 +583,14 @@ def achievements_page():
         url = request.url.replace('/my-achievements', '/login')
         return redirect(url, code=302)
 
+    user_achievements = DATABASE.achievements_by_username(user.get('username')) or []
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
     achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
 
-    return render_template('achievements.html', page_title=gettext('title_achievements'),
-                           achievements=achievements, template_achievements=achievement_translations, current_page='my-profile')
+
+    return render_template('achievements.html', page_title=gettext('title_achievements'), achievements=achievements,
+                            user_achievements=user_achievements, template_achievements=achievement_translations,
+                            current_page='my-profile')
 
 
 @app.route('/programs', methods=['GET'])
@@ -841,12 +710,11 @@ def get_user_formatted_age(now, date):
 @app.route('/hedy/<level>', methods=['GET'], defaults={'program_id': None})
 @app.route('/hedy/<level>/<program_id>', methods=['GET'])
 def index(level, program_id):
-    if re.match('\\d', level):
-        try:
-            g.level = level = int(level)
-        except:
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
             return utils.error_page(error=404, ui_message=gettext('no_such_level'))
-    else:
+    except:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = ''
@@ -874,8 +742,8 @@ def index(level, program_id):
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
 
-    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
-    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
+    level_commands_for_lang = COMMANDS[g.lang]
+    level_commands_for_lang.set_keyword_language(g.keyword_lang)
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -887,17 +755,19 @@ def index(level, program_id):
                 except:
                     print("Error: there is an openings date without a level")
 
-    if level not in level_defaults_for_lang.levels and level <= hedy.HEDY_MAX_LEVEL:
-        return utils.error_page(error=404, ui_message=gettext('level_not_translated'))
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    defaults = level_defaults_for_lang.get_defaults_for_level(level)
-    max_level = level_defaults_for_lang.max_level()
+    try:
+        commands = level_commands_for_lang.get_commands_for_level(level)
+    except:
+        commands = None # No separate commands file for this language
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
-        teacher_adventures.append(DATABASE.get_adventure(adventure))
+        current_adventure = DATABASE.get_adventure(adventure)
+        if current_adventure.get('level') == str(level):
+            teacher_adventures.append(current_adventure)
 
     enforce_developers_mode = False
     if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
@@ -908,8 +778,8 @@ def index(level, program_id):
         hide_cheatsheet = True
 
     return hedyweb.render_code_editor_with_tabs(
-        level_defaults=defaults,
-        max_level=max_level,
+        commands=commands,
+        max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
         version=version(),
         adventures=adventures,
@@ -936,11 +806,12 @@ def view_program(id):
         if (not is_teacher(user)) or (is_teacher(user) and result['username'] not in DATABASE.get_teacher_students(user['username'])):
             return utils.error_page(error=404, ui_message=gettext(u'no_such_program'))
 
-    # If we asked for a specific language, use that, otherwise use the language
-    # of the program's author.
-    # Default to the language of the program's author(but still respect)
-    # the switch if given.
-    g.lang = request.args.get('lang', result['lang'])
+    # The program is valid, verify if the creator also have a public profile
+    result['public_profile'] = True if DATABASE.get_public_profile_settings(result['username']) else None
+
+    # If the language doesn't match the user -> parse the keywords
+    if result.get("lang", "en") not in [g.lang, "en"] and g.lang in ALL_KEYWORD_LANGUAGES:
+        result['code'] = hedy_translation.translate_keywords(result.get('code'), result.get('lang', 'en'), g.lang, level=int(result.get('level', 1)))
 
     arguments_dict = {}
     arguments_dict['program_id'] = id
@@ -960,9 +831,6 @@ def view_program(id):
 
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
-    arguments_dict['menu'] = True
-    arguments_dict['username'] = user.get('username', None)
-    arguments_dict['is_teacher'] = is_teacher(user)
 
     return render_template("view-program-page.html", **arguments_dict)
 
@@ -976,29 +844,31 @@ def get_specific_adventure(name, level):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     adventure = [x for x in load_adventures_per_level(g.lang, level) if x.get('short_name') == name]
-    prev_level = level-1 if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name] else False
-    next_level = level+1 if [x for x in load_adventures_per_level(g.lang, level+1) if x.get('short_name') == name] else False
-
-    print(prev_level)
-    print(next_level)
-
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
-    defaults = level_defaults_for_lang.get_defaults_for_level(level)
-    return hedyweb.render_specific_adventure(
-        level_defaults=defaults, level_number=level, adventure=adventure, prev_level=prev_level, next_level=next_level)
+    prev_level = level-1 if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name] else False
+    next_level = level+1 if [x for x in load_adventures_per_level(g.lang, level+1) if x.get('short_name') == name] else False
+
+    return hedyweb.render_specific_adventure(level_number=level, adventure=adventure, version=version(),
+                                             prev_level=prev_level, next_level=next_level)
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
 @app.route('/cheatsheet/<level>', methods=['GET'])
 def get_cheatsheet_page(level):
-    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
-    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
-    defaults = level_defaults_for_lang.get_defaults_for_level(int(level))
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+    except:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    return render_template("cheatsheet.html", defaults=defaults, level=level)
+    level_commands_for_lang = COMMANDS[g.lang]
+    level_commands_for_lang.set_keyword_language(g.keyword_lang)
+    commands = level_commands_for_lang.get_commands_for_level(level)
+
+    return render_template("cheatsheet.html", commands=commands, level=level)
 
 @app.errorhandler(404)
 def not_found(exception):
@@ -1058,11 +928,28 @@ def reset_page():
 @app.route('/my-profile', methods=['GET'])
 @requires_login
 def profile_page(user):
+
+    profile = DATABASE.user_by_username(user['username'])
     programs = DATABASE.public_programs_for_user(user['username'])
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
+    classes = []
+    if profile.get('classes'):
+        for class_id in profile.get('classes'):
+            classes.append(DATABASE.get_class(class_id))
+
+    invite = DATABASE.get_username_invite(user['username'])
+    if invite:
+        # If there is an invite: retrieve the class information
+        class_info = DATABASE.get_class(invite.get('class_id', None))
+        if class_info:
+            invite['teacher'] = class_info.get('teacher')
+            invite['class_name'] = class_info.get('name')
+            invite['join_link'] = class_info.get('link')
+
     return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
-                           public_settings=public_profile_settings, current_page='my-profile')
+                           user_data=profile, invite_data=invite, public_settings=public_profile_settings,
+                           user_classes=classes, current_page='my-profile')
 
 
 @app.route('/<page>')
@@ -1148,6 +1035,12 @@ def explore():
                 program['error'] = True
             DATABASE.store_program(program)
         public_profile = DATABASE.get_public_profile_settings(program['username'])
+        # If the language doesn't match the user -> parse the keywords
+        if program.get("lang", "en") != g.keyword_lang and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
+            code = hedy_translation.translate_keywords(program.get('code'), from_lang=program.get('lang'),
+                                                       to_lang=g.keyword_lang, level=int(program.get('level', 1)))
+        else:
+            code = program['code']
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
@@ -1155,7 +1048,7 @@ def explore():
             'id': program['id'],
             'error': program['error'],
             'public_user': True if public_profile else None,
-            'code': "\n".join(program['code'].split("\n")[:4])
+            'code': "\n".join(code.split("\n")[:4])
         })
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
@@ -1195,8 +1088,8 @@ def translate_keywords():
 def client_messages():
     # Not really nice, but we don't call this often as it is cached
     d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(YamlFile.for_file('coursedata/client-messages/en.yaml').to_dict())
-    d.update(YamlFile.for_file(f'coursedata/client-messages/{g.lang}.yaml').to_dict())
+    d.update(YamlFile.for_file('content/client-messages/en.yaml').to_dict())
+    d.update(YamlFile.for_file(f'content/client-messages/{g.lang}.yaml').to_dict())
 
     response = make_response(render_template("client_messages.js", error_messages=json.dumps(d)))
 
@@ -1246,6 +1139,10 @@ def hedy_link(level_nr, assignment_nr, subpage=None):
         parts.append('/' + subpage)
     return ''.join(parts)
 
+
+@app.template_global()
+def all_countries():
+    return COUNTRIES
 
 @app.template_global()
 def other_languages():
@@ -1357,7 +1254,7 @@ def public_user_page(username):
     user_public_info = DATABASE.get_public_profile_settings(username)
     if user_public_info:
         user_programs = DATABASE.public_programs_for_user(username)
-        user_achievements = DATABASE.progress_by_username(username)
+        user_achievements = DATABASE.progress_by_username(username) or {}
 
         favourite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
@@ -1366,7 +1263,7 @@ def public_user_page(username):
             user_programs = user_programs[:5]
 
         last_achieved = None
-        if 'achieved' in user_achievements:
+        if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
 
         # Todo: TB -> In the near future: add achievement for user visiting their own profile

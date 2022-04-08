@@ -329,7 +329,7 @@ def no_quiz_data_error():
 
 
 def quiz_data_file_for(lang, level):
-    quiz_file = YamlFile.for_file(f'coursedata/quizzes/{lang}.yaml')
+    quiz_file = YamlFile.for_file(f'content/quizzes/{lang}.yaml')
     if not quiz_file.exists():
         return None
     if level not in quiz_file['levels'].keys():

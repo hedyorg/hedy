@@ -15,7 +15,7 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
             dieren = ['Hond', 'Kat', 'Kangoeroe']
-            print(f'{dieren[1-1]}')""")
+            print(f'''{dieren[1-1]}''')""")
 
         check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
 
@@ -35,7 +35,7 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
             szamok1 = ['1', '2', '3', '4', '5']
             szamok2 = ['6', '7', '8', '9']
-            print(f'{random.choice(szamok1)}')""")
+            print(f'''{random.choice(szamok1)}''')""")
 
         szamok1 = ['1', '2', '3', '4', '5']
         check_in_list = (lambda x: HedyTester.run_code(x) in szamok1)
@@ -46,6 +46,20 @@ class TestsLevel16(HedyTester):
             expected=expected,
             extra_check_function=check_in_list
         )
+    
+    def test_list_access_space(self):
+        code = textwrap.dedent("""\
+            szamok1 = [ '1' , '2' , '3' , '4' , '5' ]
+            print szamok1 [random]""")
+        
+        expected = textwrap.dedent("""\
+            szamok1 = ['1', '2', '3', '4', '5']
+            print(f'''{random.choice(szamok1)}''')""")
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected
+        )
 
     def test_print_list_access(self):
         code = textwrap.dedent("""\
@@ -53,7 +67,7 @@ class TestsLevel16(HedyTester):
             print fruit[1]""")
         expected = textwrap.dedent("""\
             fruit = ['banaan', 'appel', 'kers']
-            print(f'{fruit[1-1]}')""")
+            print(f'''{fruit[1-1]}''')""")
 
         self.multi_level_tester(
             code=code,
@@ -74,8 +88,8 @@ class TestsLevel16(HedyTester):
         geluksgetallen = [15, 18, 6]
         step = 1 if int(1) < int(3) else -1
         for v7dd7ec2093c0f55999a450adc7e4fe49 in range(int(1), int(3) + step, step):
-          print(f'het geluksgetal van {vrienden[v7dd7ec2093c0f55999a450adc7e4fe49-1]}')
-          print(f'is {geluksgetallen[v7dd7ec2093c0f55999a450adc7e4fe49-1]}')
+          print(f'''het geluksgetal van {vrienden[v7dd7ec2093c0f55999a450adc7e4fe49-1]}''')
+          print(f'''is {geluksgetallen[v7dd7ec2093c0f55999a450adc7e4fe49-1]}''')
           time.sleep(0.1)""")
 
         self.single_level_tester(
@@ -93,7 +107,7 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
             fruit = ['banaan', 'appel', 'kers']
             eerstefruit = fruit[1-1]
-            print(f'{eerstefruit}')""")
+            print(f'''{eerstefruit}''')""")
 
         self.multi_level_tester(
             code=code,
@@ -112,7 +126,7 @@ class TestsLevel16(HedyTester):
             lijst = [1, 2, 3]
             optellen = lijst[1-1] + lijst[2-1]
             optellen = optellen + lijst[3-1]
-            print(f'{optellen}')""")
+            print(f'''{optellen}''')""")
 
         self.multi_level_tester(
             code=code,
@@ -129,7 +143,7 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
             fruit = ['banaan', 'appel', 'kers']
             randomfruit = random.choice(fruit)
-            print(f'{randomfruit}')""")
+            print(f'''{randomfruit}''')""")
 
         self.multi_level_tester(
             code=code,
@@ -149,7 +163,7 @@ class TestsLevel16(HedyTester):
             luiaard = 'luiaard'
             dieren = ['aap', 'goat', 'fish']
             if str(luiaard) == str(dieren[1-1]):
-              print(f'ja')""")
+              print(f'''ja''')""")
 
         self.single_level_tester(
             code=code,
@@ -169,7 +183,7 @@ class TestsLevel16(HedyTester):
             balletje = 0
             bingo_getallen = [11, 17, 21]
             if str(balletje).zfill(100){comparison}str(bingo_getallen[1-1]).zfill(100):
-              print(f'ja')""")
+              print(f'''ja''')""")
 
         self.single_level_tester(
             code=code,
@@ -185,7 +199,7 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['orange', 'blue', 'green']
-        favorite = input(f'Is your fav color{colors[1-1]}')
+        favorite = input(f'''Is your fav color{colors[1-1]}''')
         try:
           favorite = int(favorite)
         except ValueError:
@@ -208,7 +222,7 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['orange', 'blue', 'green']
-        favorite = input(f'Is your fav color{colors}')
+        favorite = input(f'''Is your fav color{colors}''')
         try:
           favorite = int(favorite)
         except ValueError:
@@ -232,7 +246,7 @@ class TestsLevel16(HedyTester):
         print colors[random]""")
 
         expected = textwrap.dedent("""\
-        color = input(f'what is your favorite color? ')
+        color = input(f'''what is your favorite color? ''')
         try:
           color = int(color)
         except ValueError:
@@ -242,7 +256,7 @@ class TestsLevel16(HedyTester):
             pass
         colors = ['green', 'red', 'blue']
         colors.append(color)
-        print(f'{random.choice(colors)}')""")
+        print(f'''{random.choice(colors)}''')""")
 
         self.multi_level_tester(
           code=code,
@@ -259,7 +273,7 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['green', 'red', 'blue']
-        color = input(f'what color to remove?')
+        color = input(f'''what color to remove?''')
         try:
           color = int(color)
         except ValueError:
@@ -271,7 +285,7 @@ class TestsLevel16(HedyTester):
             colors.remove(color)
         except:
            pass
-        print(f'{random.choice(colors)}')""")
+        print(f'''{random.choice(colors)}''')""")
 
         self.multi_level_tester(
           code=code,
@@ -290,7 +304,7 @@ class TestsLevel16(HedyTester):
         m = [1, 2]
         n = [1, 2]
         if str(m) == str(n):
-          print(f'success!')""")
+          print(f'''success!''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
