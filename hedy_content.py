@@ -22,6 +22,26 @@ ALL_KEYWORD_LANGUAGES = {
     'hi': 'HI'
 }
 
+ADVENTURE_ORDER = [
+    'default',
+    'story',
+    'parrot',
+    'songs',
+    'turtle',
+    'dishes',
+    'dice',
+    'rock',
+    'calculator',
+    'fortune',
+    'restaurant',
+    'haunted',
+    'piggybank',
+    'quizmaster',
+    'language',
+    'secret',
+    'next',
+    'end'
+]
 
 def fill_all_languages(babel):
     # load all available languages in dict
@@ -42,74 +62,6 @@ def fill_all_languages(babel):
 
     for l in sorted(languages):
         ALL_LANGUAGES[l] = languages[l]
-
-
-class LevelDefaults:
-    def __init__(self, language):
-        self.language = language
-        self.keyword_lang = "en"
-        self.keywords = YamlFile.for_file(
-            f'content/keywords/{self.keyword_lang}.yaml').to_dict()
-        self.levels = YamlFile.for_file(
-            f'content/level-defaults/{self.language}.yaml')
-
-    def set_keyword_language(self, language):
-        if language != self.keyword_lang:
-            self.keyword_lang = language
-            self.keywords = YamlFile.for_file(
-                f'content/keywords/{self.keyword_lang}.yaml')
-
-    def max_level(self):
-        # We should sort this to make sure the max_level returned is correct
-        all_levels = sorted(self.levels.keys())
-        max_consecutive_level = 1
-        previous_level = 0
-        for level in all_levels:
-            if level == previous_level + 1:
-                previous_level = level
-                max_consecutive_level = level
-            else:
-                return previous_level
-        return max_consecutive_level
-
-    def get_defaults_for_level(self, level):
-        # grabs level defaults from yaml and converts to DefaultValues type
-        default_values = copy.deepcopy(self.levels[level])
-
-        # Sometimes we have multiple text and example_code -> iterate these and add as well!
-        extra_examples = []
-        for i in range(2, 10):
-            extra_example = {}
-            if default_values.get('intro_text_' + str(i)):
-                extra_example['intro_text'] = default_values.get(
-                    'intro_text_' + str(i)).format(**self.keywords)
-                default_values.pop('intro_text_' + str(i))
-                if default_values.get('example_code_' + str(i)):
-                    extra_example['example_code'] = default_values.get(
-                        'example_code_' + str(i)).format(**self.keywords)
-                    default_values.pop('example_code_' + str(i))
-                extra_examples.append(extra_example)
-            else:
-                break
-        default_values['extra_examples'] = extra_examples
-        for k, v in default_values.items():
-            if isinstance(v, str):
-                default_values[k] = v.format(**self.keywords)
-        default_type = {
-            "level": str(level),
-        }
-        default_type.update(**default_values)
-        return DefaultValues(**default_type)
-
-    def get_defaults(self, level):
-        """Return the level defaults for a given level number."""
-
-        return copy.deepcopy(self.levels.get(int(level), {}))
-
-
-class NoSuchDefaults:
-    def get_defaults(self):
-        return {}
 
 
 class Commands:
@@ -175,14 +127,3 @@ class Adventures:
 class NoSuchAdventure:
     def get_adventure(self):
         return {}
-
-
-@ attr.s(slots=True)
-class DefaultValues:
-    """Default texts for a level"""
-
-    level = attr.ib()
-    intro_text = attr.ib(default=None)
-    example_code = attr.ib(default=None)
-    extra_examples = attr.ib(default=None)
-    start_code = attr.ib(default=None)
