@@ -1062,7 +1062,7 @@ def explore():
             DATABASE.store_program(program)
         public_profile = DATABASE.get_public_profile_settings(program['username'])
         # If the language doesn't match the user -> parse the keywords
-        if program.get("lang", "en") != g.keyword_lang:
+        if program.get("lang", "en") != g.keyword_lang and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
             code = hedy_translation.translate_keywords(program.get('code'), from_lang=program.get('lang'),
                                                        to_lang=g.keyword_lang, level=int(program.get('level', 1)))
         else:
