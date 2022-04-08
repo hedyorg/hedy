@@ -1,4 +1,366 @@
 adventures:
+    default:
+        name: "Introduction"
+        description: "Level explanation"
+        image: ""
+        default_save_name: "intro"
+        levels:
+            1:
+                story_text: |
+                    Wolkom by Hedy! Kinst de kommando's `print`, `ask` en `echo` brûke.
+
+                    Yn de linker balke sjochst alle kommando's dytst brûke kinst yn level 1.
+
+                    Atst op de blauwe knop drukst, wurdt de koade alfêst foar dy ynfolle!
+
+                    Besykje de koade sels te draaien mei de griene 'Koade draaie'-knop ûnder it linker programmearfjild.
+
+                    Witst net watst meitsje silst? Yn de oare tabs stean wat ideeën.
+                start_code: "print oant moarn!"
+                story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+                example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
+                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+            2:
+                story_text: |
+                    Yn level 2 leare wy wat nijs. Kinst in wurd in namme jaan mei `is`. Dernei kinst oeral yn dyn koade dy namme brûke. Hedy ferfangt dat dan. Dat giet sa:
+                    ```
+                    namme is Hedy
+                    print hoi namme
+                    ```
+
+                    It kommando `ask` is yn level 2 ek feroare. It antwurd ûnthaldst ek mei in namme:
+
+                    ```
+                    antwurd is ask Wat is dyn namme?
+                    ```
+
+                    `print` wurket noch lykas yn level 1, en `echo` hast net mear nedich.
+                start_code: "print oant moarn!"
+                example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
+                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
+                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
+            3:
+                story_text: |
+                    Yn level 3 kinst ek in list meitsje. Ut de list kinst dan eat willekeurichs kieze. Dat dochst mei `at random` (sprek út: et ren-dum).
+
+                    ```
+                    bisten is hûn, kat, kangeroe
+                    print bisten at random
+                    ```
+
+                    Alle koade fan level 3 stiet wer in de linkerbalke. Yn de tabkes stean wer opjeften.
+                start_code: "print oant moarn!"
+                example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
+                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+                example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+            4:
+                start_code: "print 'oant moarn'"
+                story_text: |
+                    Yn level 4 binne `ask` en `print` feroare.
+
+                    Tekst dytst letterlik printe wolst, moatst no tusken oanhellingstekens sette.
+
+                    Dat is wol sa handich, want no kinst alle wurden printe dytst mar wolst. Ek de wurden dytst brûkt hast om eat mei te ûnthalden mei `is`.
+
+                    De measte programmeartalen brûke ek oanhellingstekens by it printen, dat sa komme we al in stap tichterby echt programmearje!
+
+                    ## Opjeften wurde dreger
+                    De kommando's stean wer links, en de opjeften in de oare tabkes. De opjeften wurde stadichoan dreger. Begjin dus links mei it ferhaal, en wurkje sa troch om mear en mear útdage te wurden.
+                example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
+                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+            5:
+                start_code: |-
+                    namme is ask 'Wat is dyn namme?'
+                    if namme is Hedy print 'leuk' else print 'minder leuk!'
+                story_text: |
+                    `ask` en `print` wurkje noch lykas yn level 4.
+
+                    Yn level 5 is der wat nijs, de `if`! If is Ingelsk foar 'as'. Mei de `if` kinst in kar (keus) meitsje tusken twa ferskillende opsjes.
+
+                    ## Foarbyld Hedy koade
+                    ```
+                    namme is ask 'Wat is dyn namme?'
+                    if namme is Hedy print 'leuk' else print 'minder leuk!'
+                    ```
+
+                    Dizze koade print 'leuk' ast Hedy als namme ynfolst, en 'minder leuk' ast wat oars ynfolst.
+
+                    ## Tip
+                    Koade mei in `if` kin tige lang wurde en dan past it net mear goed yn it tekstfakje. Brûk yn dat gefal in 'enter' om de koade oer twa rigels te ferdielen. Begjin dan de twadde rigel mei in `else`:
+                    ```
+                    namme is ask 'Wat is dyn namme?'
+                    if namme is Hedy print 'leuk'
+                    else print 'minder leuk!'
+                    ```
+
+                    ## Opjeften wurde dreger
+
+                    Ek yn level 5 wurde de opjeften yn de tabkes stadichoan wat dreger. Doch se dus fan links nei rjochts.
+                example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
+                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
+                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+            6:
+                start_code: "print '5 kear 5 is ' 5 * 5"
+                story_text: |
+                    `ask`, `print` en `if` wurkje noch lykas yn level 5.
+                    Mar yn Level 5 is der wat nijs, kinst no ek rekkenje.
+
+                    De plus is maklik, dy skriuwst as by rekkenjen: `5 + 5` bygelyks. De min giet krekt sa, dat is `5 - 5`.
+
+                    De kear is wat anders, want dy sit net op dyn toetseboerd. Sykje mar ris, dy is der echt net!
+                    Dêrom dogge we de kear mei it stjêrke boppe de 8: `5 * 5`. Lês dat mar as "5 kear 5", dan ûnthâldst it it maklikst.
+                    ## Foarbyld Hedy koade
+                    ```
+                    print '5 plus 5 is ' 5 + 5
+                    print '5 min 5 is ' 5 - 5
+                    print '5 kear 5 is ' 5 * 5
+                example_code: "## Example Hedy code\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
+                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+            7:
+                start_code: "repeat 3 times print 'Hedy is leuk!'"
+                story_text: |
+                    `ask`, `print` en `if` wurkje noch lykas yn level 5 en 6.
+                    Mar yn Level 7 is er eat nijs: de `repeat`.
+                    Met `repeat` kinst koade in tal kear werhelje.
+
+                    ## Foarbyld Hedy koade
+                    ```
+                    repeat 3 times print 'Hedy is leuk!'
+                    ```
+                example_code: "## Example Hedy code\n```\n{repeat} 3 {times} {print} 'Hedy {is} fun!'\n```\n"
+            8:
+                start_code: |-
+                    repeat 5 times
+                        print 'Goeie allegearre'
+                        print 'Dit wurdt allegearre 5 kear werhelle'
+                story_text: |
+                    `ask` en `print` wurkje noch as east, mar `if` en `repeat` binne no oars!
+                    Kinst no meardere rigels tegearre werhelje. Dan moatst de rigel dytst werhelje wolst wol ynspringe,
+                    dat wol sizze dat se mei fjouwer spaasjes begjinne moatte.
+                    Ek atst mar ien rigel werhelje wolst, moatst ynspringe!
+
+                    ## Foarbyld Hedy koade
+                    ```
+                    repeat 5 times
+                        print 'Goeie allegearre'
+                        print 'Dit wurdt allegearre 5 keer werhelle'
+                    ```
+                example_code: "## Example Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
+            9:
+                start_code: |-
+                    repeat 3 times
+                        food = ask 'What do you want?'
+                        if food is 'pizza'
+                            print 'nice!'
+                        else
+                            print 'pizza is better'
+                story_text: |
+                    In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
+                    In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
+                    Give it a try!
+
+                    ## Example Hedy code
+                    ```
+                    repeat 3 times
+                        food = ask 'What do you want?'
+                        if food is 'pizza'
+                            print 'nice!'
+                        else
+                            print 'pizza is better'
+                    ```
+                example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
+            10:
+                start_code: |-
+                    dieren is hond, kat, papegaai
+                    for dier in dieren
+                      print dier ' is een leuk dier!'
+                story_text: |
+                    In dit level leren we een nieuwe code, de code `for`. Met `for` kun je alle dingen in een lijstje gebruiken.
+                    `for` mag meerdere regels gebruiken, net zoals de `repeat` and `if`, dus alle regels eronder moeten met spaties beginnen.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    dieren is hond, kat, papegaai
+                    for dier in dieren
+                      print dier ' is een leuk dier!'
+                    ```
+                example_code: "## Example Hedy code\n```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
+            11:
+                start_code: |-
+                    for i in range 1 to 10
+                        print i
+                    print 'Wie niet weg is is gezien'
+                story_text: |-
+                    Wy feroarje no `repeat` yn `for`! No typst `for i in range 1 to 5`, ynstee fan `repeat 5 times`. 
+                    It leuke is datst dy fariabele `i` ek yn dyn programma brûke kinst!
+                    Tink derom datst noch hieltiid alle rigels dy't werhelle wurde moatte, ynspringst mei 4 spaasjes.
+                example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
+            12:
+                start_code: |-
+                    print 'decimal numbers now need to use a dot'
+                    print 2.5 + 2.5
+                story_text: |
+                    So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
+
+                    For this level on you will also have to use quotation marks when storing a text with `is`:
+
+                    ```
+                    name = 'Hedy'
+                    print 'Hello ' name
+                    ```
+
+                    For numbers, you do not use quotation marks in the `is`:
+                    ```
+                    score = 25
+                    print 'You got ' score
+                    ```
+                story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
+                example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
+                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
+                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
+                example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
+                example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
+                story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
+                example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+            13:
+                start_code: |-
+                    name = ask 'what is your name?'
+                    age = ask 'what is your age?'
+                    if name is 'Hedy' and age is 2
+                        print 'You are the real Hedy!'
+                story_text: "We sille no `and` en `or` brûke. Ast 2 dingen kontroleare wolst, hoechst net mear 2 `if`-kes yninoar te dwaan, mar kinst no `and` brûke. Beide dingen yn 'e if moeten waar zijn als je een `and` gebruikt. We kunnen ek `or` brûke. Daarbij moet er 1 fan de twa waar zijn."
+                #16:
+                #    start_code: |-
+                #        # Dit is een programma dat in tal sommen freegjen giet
+                #
+                #        for i in range(1, 10):
+                #            # We sille de tafel fan 5 freegje
+                #            antwurd is input('Hoefolle is ' i ' kear 5?')
+                #            # We sjogge oft de som lyk is oan it antwurd
+                #            goed_antwurd is i * 5
+                #            if antwurd is goed_antwurd:
+                #                print(antwurd ' is goed')
+                #            else:
+                #                print('Dat is fout, it moat: ' i*5 ' wêze')
+                #    story_text: |-
+                #        Ast gruttere programma's makkest, silst byhâlde moatte wat elts stikje koade docht. Hjir brûke wy 'comments' foar.
+                #        In comment sjocht der sa út:
+                #        `# dit is in comment`.
+                #        Alles wat op de rigel nei de # skreaun wurdt, brûkt Hedy net yn it programma.
+                #    commands:
+                #    -   name: "Comment"
+                #        explanation: "We kinne oeral wêr't wy wolle comments delsette."
+                #        example: "# Dit is in comment"
+                #        demo_code: |-
+                #            # Dit programma print goeie
+                #            # It is gemaakt in Hedy
+                #            # It docht eins neat fierder!
+                #            print('goeie')
+                #20:
+                #    start_code: |-
+                #        fruit = ['apel', 'banaan', 'kjers']
+                #        for i in range(1, 3):
+                #            print(fruit[i])
+                #    story_text: "We kinne ek alles fan de list sjen litte. Omt er trije dingen yn sitte, pakke we de `for`-lus fan 1 oant 3. No printe we alles út wat yn de list sit."
+                #    commands:
+                #    -   name: "Lingte fan in list"
+                #        explanation: "Mei `length` kinst sjen hoe grut in list is. Hjir is `length` bygelyks 3 want we ha 3 dingen yn de list"
+                #        example: "length(fruit)"
+                #        demo_code: |-
+                #            fruit = ['apel', 'banaan', 'kjers']
+                #            print('lingte fan de list is ' length(fruit))
+                #            for i in range(1, length(fruit)):
+                #                print(fruit[i])
+                #21:
+                #    start_code: |-
+                #        print('Hoefolle is 5+3?')
+                #        antwurd = 5+3
+                #        print('antwurd is nu:')
+                #        print(antwurd)
+                #        if antwurd == 8:
+                #            print('Dat is goed!')
+                #        else:
+                #            print('Spitich, dat is fout!')
+                #    story_text: "No feroarje wy is yn `=` en `==`. Brûkst `=` ast eat in getal meitsje wolst. Ast bygelyks antwurd 8 meitsje wolst, seist `antwurd = 8`. `==` brûkst om te sjen of twa dingen itselde binne."
+                #    commands:
+                #    -   name: "Fergelykje"
+                #        explanation: "As we fergelykje wolle, brûke we dus `==`. `5+3 == 8` sjoch of 5+3 gelyk is oan 8"
+                #        example: "Foarbyld: 5+3 == 8"
+                #        demo_code: |-
+                #            if 5+3 == 8:
+                #                print('5+3 is yndie 8')
+                #            else:
+                #                print('Dit wurdt net printe, want 5+3 is 8!')
+                #    -   name: "Wearde jaan"
+                #        explanation: "As wy sizze wolle dat in fariabele mei de namme `antwurd` 8 is, dan dogge wy `antwurd = 8`."
+                #        example: "Foarbyld: antwurd = 8"
+                #        demo_code: |-
+                #            print('Hoefolle is 5+3?')
+                #            antwurd = 5+3
+                #            print('antwurd is no:')
+                #            print(antwurd)
+                #    -   name: "Fergelykje en wearde jaan"
+                #        explanation: "As we fergelykje wolle, brûke we dus `==`. As we in wearde jouwe dan brûke we `=`."
+                #        example: "Foarbyld: antwurd == 8, antwurd = 8"
+                #        demo_code: |-
+                #            print('Hoefolle is 5+3?')
+                #            antwurd = 5+3
+                #            print('antwurd is no:')
+                #            print(antwurd)
+                #            if antwurd == 8:
+                #                print('Dat is goed!')
+                #            else:
+                #                print('Spitich leave, dat is fout!')
+                example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+            14:
+                start_code: |-
+                    leeftyd = ask 'Hoe âld bisto?'
+                    if leeftyd < 13
+                        print 'Dan bist jonger as ik!'
+                    else
+                        print 'Dan bist âlder as ik!'
+                story_text: |-
+                    We sille nije tekens leare, do kinst se miskien al fan rekkenjen as wiskunde: `<` en `>`. De `<` sjocht oft it earste getal
+                    lytser is as it twadde lykas `4 < 5`. De `>` sjocht oft eat grutter is as it twadde getal, lykas `6 > 5`.
+                example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
+                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
+                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+            15:
+                start_code: |-
+                    antwoord = 0
+                    while antwoord != 25
+                        antwurd = ask 'Wat is 5 kear 5?'
+                    print 'Dat wie it goede antwurd!'
+                story_text: "No sille wy in nije lus leare: De `while`-lus. We gean troch sa lang de koade dy't yn'e lus stiet `True` is. Dus bij de foarbyldkoade gean wy troch oant der in goed antwurd jûn is. As der nea in goed antwurd jûn wurdt, dan stoppet de lus nea!"
+                example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+            16:
+                start_code: |-
+                    fruit = ['apel', 'banaan', 'kjers']
+                    print fruit
+                story_text: "No sette wy fjouwerkante heakjes om listen. We moatte no ek inkele oanhellingstekens (') om dingen in listen sette."
+                example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+            17:
+                start_code: |-
+                    for i in range 1 to 10:
+                        print i
+                    print 'Wie niet weg is is gezien'
+                story_text: |-
+                    No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
+                    Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
+            18:
+                start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
+                story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
     story:
         levels:
             1:
@@ -564,45 +926,6 @@ adventures:
                 story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
         description: What's Next?
         image: ' '
-    end:
-        levels:
-            4:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            5:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            6:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            1:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            2:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            3:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            7:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            8:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            9:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            10:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            11:
-                start_code: '# place your code here'
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-        name: End
-        description: Test your Hedy knowledge
-        image: ' '
-        default_save_name: ' '
     rock:
         name: Rock, paper, scissors
         description: Make your own rock, paper, scissors game
@@ -659,35 +982,42 @@ adventures:
                 start_code: '## place your code here'
         name: SuperSpy
         description: Make your own spy code
-    money:
-        name: Money Week
-        description: Aflatoun
-        image: piggybank.png
+    end:
         levels:
-            2:
-                start_code: '{print} Welcome to my shop'
-                story_text: "## Make your own virtual shop\nIn this adventure you can create your own virtual shop. The example codes gives an easy example, but we bet that you could make your shop more interesting.\n\n## Challenge\nTurn the example code into your own virtual shop. What kind of shop would you like to own?\nHow much money will you charge your costumers? What can you do to make your shop more appealing?\n"
-                example_code: "## Example Hedy code\n```\nprice {is} 3\n{print} Welcome to my shop\nproduct {is} {ask} What would you like to buy?\n{print} You would like to buy a product\n{print} That will be price euro please\n{print} Thank you! Bye!\n```\n"
-            3:
-                start_code: '{print} Make smart choices!'
-                story_text: "## Make smart choices\nIn this level you are faced with some financial dilemmas. You can make a list of products and a list of prices.\nHedy will randomly pick a product and a price and ask you if you think that's a smart choice to buy!\n\n## Challenge\nMake your own list of products and prices and play the game with your friends. Would they buy the same products as you?\nWho is the smartest spender?\n"
-                example_code: "## Example Hedy code\n```\nprice {is} 1 euro, 10 euros, 100 euros, 1 million euros\nproduct {is} skateboard, banana, race car, dog\n\nprint Would you buy...\n{print} a product {at} {random} for price {at} {random}\nanswer {is} {ask} Would you buy it?\n```\n"
             4:
-                start_code: "{print} 'Welcome to Hedys restaurant!'"
-                story_text: "## Make your own virtual restaurant\nAfter opening your own shop in level 2, it's time to open a restaurant! Check out the example.\nPlease note that from this level on the print and ask command require quotation marks.\n\n## Challenge\nMake the restaurant your own. Maybe you'd pefer to have a sandwich shop, or a fastfood drive-through or a icecream parlor?\nYou can make anything you want with our example as inspiration!\n"
-                example_code: "## Example Hedy code\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\nprice {is} 20 euros\n{print} 'That will be ' price\npayment {is} {ask} 'Would you like to pay cash or card?'\n{print} 'No problem!'\n{print} 'Your ' food ' and ' drinks ' are on their way!'\n```\n"
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
             5:
-                start_code: "{print} 'Welcome to The Price is right!'"
-                story_text: "## The price is right\nIn this level you can create your own virtual version of the televisionshow 'The price is right'.\nIn this show the contestants have to guess the price of a product correctly to win it.\n\n## Challenge\nThe example code only gives away one price. Can you add more prices to win?\n"
-                example_code: "## Example Hedy code\n```\n{print} 'Welcome to The Price Is Right!'\n{print} 'Im your host, Hedy.'\n{print} 'Our first price tonight is a skateboard!'\nprice {is} 30\n{print} 'Your options are 5 euros, 15 euros or 30 euros'\nguess {is} {ask} 'How much do you guess it costs?'\n{if} guess {is} price {print} 'Great job! You won the skateboard!'\n{else} {print} 'No! You lose! The actual price was... ' price\n```\n"
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
             6:
-                start_code: "{print} 'The digital piggy bank'"
-                story_text: "## Piggybank\nIn this level you can create your own digital Piggy Bank.\nYou can see how much money you've saved and vcalculate how long it will take you to save up for anything you'd like to buy.\nTry it out!\n\n## Challenge\nCan you think of extra features you could add to your digital piggy bank?\n"
-                example_code: "## Example Hedy code\n```\n{print} 'The digital piggy bank'\nwish = {ask} 'What would you like to buy?'\nprice = {ask} 'How much does that cost?'\nsaved = {ask} 'How much money have you saved already?'\nallowance = {ask} 'How much pocket money do you get per week?'\nto_save = price - saved\nweeks = to_save / allowance\n{print} 'You can buy a ' wish ' in ' weeks ' weeks.'\n\n```\n"
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
             1:
-                story_text: "## Sing a song about money\nUse the `{print}` command to print line in the output screen.\n\nDo you want to hear Hedy sing it? Use the read-aloud function beneath the 'run code' button.\n\nPlay the song and listen to 'Mo money, mo problems' by the notorious B.I.G.\n\n## Challenge\nDo you know any other songs about money that you can let Hedy sing?\n\nThis adventure was co-created with Aflatoun.\n"
-                example_code: "## Example Hedy code\n```\n{print} I don't know what they want from me\n{print} It's like the more money we come across\n{print} The more problems we see\n{print} I don't know what they want from me\n{print} It's like the more money we come across\n{print} The more problems we see\n```\n"
-                start_code: '{print} Mo money Mo problems'
-        default_save_name: money
-title: Hedy adventures!
-subtitle: You can learn Hedy by creating a story, a game or something to make your life easier
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
+            2:
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
+            3:
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
+            7:
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
+            8:
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
+            9:
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
+            10:
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
+            11:
+                start_code: '# place your code here'
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+        name: End
+        description: Test your Hedy knowledge
+        image: ' '
+        default_save_name: ' '
