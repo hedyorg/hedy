@@ -35,6 +35,11 @@ def simulateRulesWithoutToken(Rules,Code):
         else: Output += " "
     regRule = Rules["start"][0]
     for reg in regRule:
+        
+        if type(reg['token']) == str : # case without groups
+            reg['token'] = [reg['token']]
+            reg["regex"] = "(" + reg["regex"] + ")"
+
         regComp = re.compile(reg["regex"], re.MULTILINE)
         for match in regComp.finditer(Code):
             pos = match.start()
@@ -84,13 +89,16 @@ def run(test):
         print("We have      :",Result.replace("\n","\\n"))
         exit()
     else:
-        print("WORK :")
-        print("In this Code :",Code.replace("\n","\\n"))
-        print("We want      :",Expected.replace("\n","\\n"))
-        print("We have      :",Result.replace("\n","\\n"))
-        print("")
+        pass
+        # print("WORK :")
+        # print("In this Code :",Code.replace("\n","\\n"))
+        # print("We want      :",Expected.replace("\n","\\n"))
+        # print("We have      :",Result.replace("\n","\\n"))
+        # print("")
 
 
 
 for test in dataTests:
     run(test)
+
+print("Done !")
