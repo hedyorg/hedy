@@ -747,10 +747,41 @@ def send_email(recipient, subject, body_plain, body_html):
         print('Email sent to ' + recipient)
 
 
+def get_template_translation(template):
+    if template == 'welcome_verify':
+        return gettext('mail_welcome_verify_body')
+    elif template == 'change_password':
+        return gettext('mail_change_password_body')
+    elif template == 'recover_password':
+        return gettext('mail_recover_password_body')
+    elif template == 'reset_password':
+        return gettext('mail_reset_password_body')
+    elif template == 'welcome_teacher':
+        return gettext('mail_welcome_teacher_body')
+    return None
+
+
+def get_subject_translation(template):
+    if template == 'welcome_verify':
+        return gettext('mail_welcome_verify_subject')
+    elif template == 'change_password':
+        return gettext('mail_change_password_subject')
+    elif template == 'recover_password':
+        return gettext('mail_recover_password_subject')
+    elif template == 'reset_password':
+        return gettext('mail_reset_password_subject')
+    elif template == 'welcome_teacher':
+        return gettext('mail_welcome_teacher_subject')
+    return None
+
+
 def send_email_template(template, email, link=None, username=gettext('user')):
-    subject = gettext('mail_' + template + '_subject')
+    subject = get_subject_translation(template)
+    if not subject:
+        print("Something went wrong, mail template could not be found...")
+        return
     body = gettext('mail_hello').format(username=username) + "\n\n"
-    body += gettext('mail_' + template + '_body') + "\n\n"
+    body += get_template_translation(template) + "\n\n"
     body += gettext('mail_goodbye')
 
     with open('templates/base_email.html', 'r', encoding='utf-8') as f:
