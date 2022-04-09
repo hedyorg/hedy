@@ -127,6 +127,9 @@ class Translator(Visitor):
     def echo(self, tree):
         self.add_rule('_ECHO', 'echo', tree)
 
+    def color(self, tree):
+        self.add_rule('_COLOR', 'color', tree)
+
     def forward(self, tree):
         self.add_rule('_FORWARD', 'forward', tree)
 
