@@ -342,7 +342,7 @@ class TestsLevel1(HedyTester):
                                extra_check_function=self.is_turtle())
 
     def test_one_color_purple_nl(self):
-      code = "color paars"
+      code = "kleur paars"
       expected = "t.pencolor('purple')"
 
       self.single_level_tester(code=code, expected=expected,
