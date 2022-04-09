@@ -33,7 +33,7 @@ command: print | ask | echo | turtle | error_invalid_space | error_invalid
 print: _PRINT (text)?
 ask: _ASK (text)?
 echo: _ECHO (text)?
-turtle: _FORWARD ((NEGATIVE_NUMBER | NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow))? -> color
+turtle: _FORWARD ((NEGATIVE_NUMBER | NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | text))? -> color
 error_invalid_space: _SPACE text?
 error_invalid: textwithoutspaces text?
 
