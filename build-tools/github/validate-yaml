@@ -31,14 +31,6 @@ $pajv validate \
     -d "*.yaml"
 echo "------> Adventure yaml files are valid"
 
-echo "------> Validating level defaults"
-cd ../level-defaults/
-$pajv validate \
-    --errors=text \
-    -s "levels.schema.json" \
-    -d "*.yaml"
-echo "------> Level default yaml files are valid"
-
 #echo "------> Validating level commands"
 #cd ../commands/
 #$pajv validate \
