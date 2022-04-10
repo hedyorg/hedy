@@ -33,27 +33,27 @@ ADVENTURE_ORDER = [
     'end'
 ]
 
-def fill_all_languages(babel):
-    # load all available languages in dict
-    # list_translations of babel does about the same, but without territories.
-    languages = {}
-    for dirname in babel.translation_directories:
-        if not os.path.isdir(dirname):
-            continue
+# load all available languages in dict
+# list_translations of babel does about the same, but without territories.
+languages = {}
+if not os.path.isdir('translations'):
+    # should not be possible, but if it's moved someday, EN would still be working.
+    ALL_LANGUAGES['en'] = 'English'
+    ALL_KEYWORD_LANGUAGES['en'] = 'EN'
 
-        for folder in os.listdir(dirname):
-            locale_dir = os.path.join(dirname, folder, 'LC_MESSAGES')
-            if not os.path.isdir(locale_dir):
-                continue
+for folder in os.listdir('translations'):
+    locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
+    if not os.path.isdir(locale_dir):
+        continue
 
-            if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
-                locale = Locale.parse(folder)
-                languages[folder] = locale.display_name.title()
+    if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
+        locale = Locale.parse(folder)
+        languages[folder] = locale.display_name.title()
 
-    for l in sorted(languages):
-        ALL_LANGUAGES[l] = languages[l]
-        if os.path.exists('./grammars/keywords-' + l + '.lark'):
-            ALL_KEYWORD_LANGUAGES[l] = l[0:2] # first two characters
+for l in sorted(languages):
+    ALL_LANGUAGES[l] = languages[l]
+    if os.path.exists('./grammars/keywords-' + l + '.lark'):
+        ALL_KEYWORD_LANGUAGES[l] = l[0:2].upper()  # first two characters
 
 
 class Commands:

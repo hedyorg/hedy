@@ -6,8 +6,6 @@ import yaml
 from os import path
 import hedy_content
 
-KEYWORD_LANGUAGES = list(hedy_content.ALL_KEYWORD_LANGUAGES.keys())
-
 # Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
 
@@ -17,7 +15,8 @@ def keywords_to_dict(to_lang="nl"):
     base = path.abspath(path.dirname(__file__))
 
     keywords_path = 'content/keywords/'
-    yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
+    yaml_filesname_with_path = path.join(
+        base, keywords_path, to_lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r', encoding='UTF-8') as stream:
         command_combinations = yaml.safe_load(stream)
@@ -26,14 +25,15 @@ def keywords_to_dict(to_lang="nl"):
 
 
 def all_keywords_to_dict():
-    """Return a dictionary where each key is a list of the translations of that keyword. Used for testing"""    
+    """Return a dictionary where each key is a list of the translations of that keyword. Used for testing"""
     keyword_list = []
-    for lang in KEYWORD_LANGUAGES:
+    for lang in hedy_content.ALL_KEYWORD_LANGUAGES:
         commands = keywords_to_dict(lang)
         keyword_list.append(commands)
 
-    #gets the translation but defaults to the key k (in En) when it is not present
-    all_translations = {k: [d.get(k, k) for d in keyword_list] for k in keyword_list[0]}
+    # gets the translation but defaults to the key k (in En) when it is not present
+    all_translations = {k: [d.get(k, k) for d in keyword_list]
+                        for k in keyword_list[0]}
     return all_translations
 
 
@@ -50,7 +50,8 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
 
     translator = Translator(processed_input)
     translator.visit(program_root)
-    ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
+    ordered_rules = reversed(
+        sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
     # FH Feb 2022 TODO trees containing invalid nodes are happily translated, should be stopped here!
 
@@ -59,11 +60,13 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
         if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
             lines = result.splitlines()
             line = lines[rule.line-1]
-            replaced_line = replace_token_in_line(line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
+            replaced_line = replace_token_in_line(
+                line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
             result = replace_line(lines, rule.line-1, replaced_line)
 
     # For now the needed post processing is only removing the 'end-block's added during pre-processing
-    result = '\n'.join([line for line in result.splitlines() if not line.startswith('end-block')])
+    result = '\n'.join([line for line in result.splitlines()
+                       if not line.startswith('end-block')])
 
     return result
 
@@ -138,19 +141,22 @@ class Translator(Visitor):
 
     def left(self, tree):
         token = tree.children[0]
-        rule = Rule('left', token.line, token.column - 1, token.end_column - 2, token.value)
+        rule = Rule('left', token.line, token.column -
+                    1, token.end_column - 2, token.value)
         self.rules.append(rule)
 
     def right(self, tree):
         token = tree.children[0]
-        rule = Rule('right', token.line, token.column - 1, token.end_column - 2, token.value)
+        rule = Rule('right', token.line, token.column -
+                    1, token.end_column - 2, token.value)
         self.rules.append(rule)
 
     def assign_list(self, tree):
         self.add_rule('_IS', 'is', tree)
         commas = self.get_keyword_tokens('_COMMA', tree)
         for comma in commas:
-            rule = Rule('comma', comma.line, comma.column - 1, comma.end_column - 2, comma.value)
+            rule = Rule('comma', comma.line, comma.column -
+                        1, comma.end_column - 2, comma.value)
             self.rules.append(rule)
 
     def assign(self, tree):
@@ -169,7 +175,8 @@ class Translator(Visitor):
 
     def random(self, tree):
         token = tree.children[0]
-        rule = Rule('random', token.line, token.column - 1, token.end_column - 2, token.value)
+        rule = Rule('random', token.line, token.column -
+                    1, token.end_column - 2, token.value)
         self.rules.append(rule)
 
     def ifs(self, tree):
@@ -240,7 +247,8 @@ class Translator(Visitor):
     def add_rule(self, token_name, token_keyword, tree):
         token = self.get_keyword_token(token_name, tree)
         if token:
-            rule = Rule(token_keyword, token.line, token.column - 1, token.end_column - 2, token.value)
+            rule = Rule(token_keyword, token.line, token.column -
+                        1, token.end_column - 2, token.value)
             self.rules.append(rule)
 
     def get_keyword_token(self, token_type, node):
