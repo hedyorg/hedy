@@ -1843,10 +1843,10 @@ def get_remaining_rules(orig_def, sub_def):
     result_cmd_list   = ' | '.join(result_cmd_list) # turn the result list into a string
     return result_cmd_list
 
-def create_grammar(level, lang):
+def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
-    keys = get_keywords_for_language("en")
+    keys = get_keywords_for_language(lang)
     result = merge_grammars(result, keys, 1)
     # then keep merging new grammars in
     for i in range(2, level+1):
@@ -1855,7 +1855,7 @@ def create_grammar(level, lang):
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
-    save_total_grammar_file(level, result, "en")
+    save_total_grammar_file(level, result, lang)
     global lang_commands
     global en_commands
     lang_commands = get_list_keywords(commands_per_level[level], lang)
@@ -1971,29 +1971,23 @@ def find_indent_length(line):
     return number_of_spaces
 
 def needs_indentation(code):
-    #keywords_requiring_indentation = ['if', 'als', 'si', 'for', 'repeat', 'repete', 'herhaal']
     en_keywords_requiring_indentation = ['if', 'for', 'repeat']
     keywords_requiring_indentation = []
     global en_commands
     global lang_commands
-    #print("LOOK HERE EN ", en_commands)
-    #print("LOOK HERE LANG ", lang_commands)
     for keyword in en_keywords_requiring_indentation:
         if keyword in en_commands:
             index = en_commands.index(keyword)
             keywords_requiring_indentation.append(en_commands[index])
             keywords_requiring_indentation.append(lang_commands[index])
-    #print("LOOK HERE KEYS ", keywords_requiring_indentation)
     # this is done a bit half-assed, clearly *parsing* the one line would be superior
     # because now a line like
     # repeat is 5 would also require indentation!
     all_words = code.split()
     if len(all_words) == 0:
-        print("LOOK HERE FALSE")
         return False
 
     first_keyword = all_words[0]
-    print("LOOK HERE FIRST ", first_keyword, "returns ", first_keyword in keywords_requiring_indentation)
     return first_keyword in keywords_requiring_indentation
 
 
