@@ -8,19 +8,9 @@ import iso3166
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 
-# Define dictionairy for available languages. Fill dynamicly later.
+# Define dictionairies for available languages and keywords. Fill dynamicly later.
 ALL_LANGUAGES = {}
-
-ALL_KEYWORD_LANGUAGES = {
-    'en': 'EN',
-    'es': 'ES',
-    'fr': 'FR',
-    'nl': 'NL',
-    'nb_NO': 'NB',
-    'tr': 'TR',
-    'ar': 'AR',
-    'hi': 'HI'
-}
+ALL_KEYWORD_LANGUAGES = {}
 
 ADVENTURE_ORDER = [
     'default',
@@ -62,6 +52,8 @@ def fill_all_languages(babel):
 
     for l in sorted(languages):
         ALL_LANGUAGES[l] = languages[l]
+        if os.path.exists('./grammars/keywords-' + l + '.lark'):
+            ALL_KEYWORD_LANGUAGES[l] = l[0:2] # first two characters
 
 
 class Commands:
