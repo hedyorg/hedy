@@ -4,27 +4,51 @@
     ## Sleep de code in de juiste volgorde
   example: |
     ## Voorbeeld Hedy code
-    
     Welkom bij bakkerij Hedy!
+
     Wat voor taart wilt u bestellen?
+
     Dus jij wilt ... 
+
     De bestelling wordt klaargezet!
-      
   code_lines:
-    A: "echo Dus jij wilt"
-    B: "print Welkom bij bakkerij Hedy!"
-    C: "ask Wat voor taart wilt u bestellen?"
-    D: "print De bestelling wordt klaargezet!"
+    A: | 
+      echo Dus jij wilt
+    B: |
+      print Welkom bij bakkerij Hedy!
+    C: |
+      ask Wat voor taart wilt u bestellen?
+    D: |
+      print De bestelling wordt klaargezet!
   correct_answer: [B, C, A, D]  
 2:
   tab_name: "Slepen"
-  text: "Sleep de code in de juiste volgorde."
+  text: |
+    Sleep de code in de juiste volgorde.
+  example: |
+    ## Voorbeeld Hedy code
+    Het is tijd voor een avondje Netflix
+
+    We gaan kijken naar ...
+
+    Wie wil je allemaal uitnodigen?
+
+    De mensen die je wilt uitnodigen zijn ...
+
+    Heel veel plezier!
   code_lines:
-    A: "film is Sonic the Hedgehog 2"
-    B: "print Het is tijd voor een avondje Netflix"
-    C: "ask Wie wil je allemaal uitnodigen?"
-    D: "print We gaan kijken naar film"
-    E: "echo De mensen die je wilt uitnodigen zijn "
-    F: "Heel veel plezier!"
+    A: |
+      film is Sonic the Hedgehog 2
+    B: | 
+      print Het is tijd voor een avondje Netflix
+    C: |
+      antwoord is ask Wie wil je allemaal uitnodigen?
+    D: |
+      print We gaan kijken naar film
+    E: |
+      print De mensen die je wilt uitnodigen zijn antwoord
+    F: |
+      Heel veel plezier!
   correct_answer: [B, A, D, C, E, F]
   correct_answer2: [A, B, D, C, E, F]
+3:
