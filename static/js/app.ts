@@ -1534,14 +1534,14 @@ export function resetDebug(){
   if(debugLine == null){
     storage.setItem("debugLine", "0");
     clearDebugVariables();
-    setDebugLine();
+    setDebugLine(true);
     debugRun();
     return;
   }
   else{
     storage.setItem("debugLine", "0");
     clearDebugVariables();
-    setDebugLine();
+    setDebugLine(true);
     debugRun();
   }
 }
