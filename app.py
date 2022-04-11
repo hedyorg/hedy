@@ -120,9 +120,9 @@ def load_adventures_per_level(level):
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure.get('default_save_name', adventure['name']),
-            'text': adventure['levels'][level].get('story_text') if adventure['levels'][level].get('story_text') else '',
-            'example_code': adventure['levels'][level].get('example_code') if adventure['levels'][level].get('example_code') else '',
-            'start_code': adventure['levels'][level].get('start_code') if adventure['levels'][level].get('start_code') else '',
+            'text': adventure['levels'][level].get('story_text', ""),
+            'example_code': adventure['levels'][level].get('example_code', ""),
+            'start_code': adventure['levels'][level].get('start_code', ""),
             'loaded_program': '' if not loaded_programs.get(short_name) else {
                 'name': loaded_programs.get(short_name)['name'],
                 'code': loaded_programs.get(short_name)['code']
