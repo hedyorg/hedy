@@ -489,7 +489,7 @@ adventures:
         default_save_name: Sang
         levels:
             12:
-                story_text: "## Syng en sang!\nI denne sangen kan vi gjøre det enda enklere å programmere  'Hvis du er lyklig og du vet det, klappe klapp'. Fordi vi kan putte alle handlingene i en variabel, sjekk ut dette\n"
+                story_text: "## Syng en sang!\nI denne sangen kan vi gjøre det enda enklere å programmere  'Hvis du er lyklig og du vet det, klappe klapp'. Fordi vi kan putte alle handlingene i en variabel, sjekk ut dette:\n"
                 example_code: "## Eksempel Hedykode\n\n```\nhandlinger = 'klappe klapp', 'trampe tramp', 'rop hurra!'\n{for} handling {in} handlinger\n    {for} i {in} {range} 1 {to} 2\n        {print} 'Hvis du er lykkelig og du vet det'\n        {print} handling\n    {print} 'Hvis du er lykkelig og vet det må du la alle andre se det'\n    {print} 'Hvis du er lykkelig og du vet det'\n    {print} handling\n```\n"
                 start_code: '# skriv koden din her'
             11:
@@ -505,7 +505,7 @@ adventures:
                 example_code: "## Eksempel Hedykode\n\n```\nvers = 99\n{repeat} 99 {times}\n    {print} vers ' bottles of beer on the wall'\n    {print} vers ' bottles of beer'\n    {print} 'Take one down, pass it around'\n    verse = vers - 1\n    {print} vers ' bottles of beer on the wall'\n```\n"
                 start_code: '# skriv koden din her'
             7:
-                story_text: "## Sanger\nSanger inneholder ofte en del repetisjon. For eksempel... Baby Shark! Om du synger den så kan du fortsette å synge det samme:\n\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\nDu kan lage denne sangen mye kortere med en `{repeat`! Kan du fullføre koden?\n"
+                story_text: "## Sanger\nSanger inneholder ofte en del repetisjon. For eksempel... Baby Shark! Om du synger den så kan du fortsette å synge det samme:\n\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\nDu kan lage denne sangen mye kortere med en `{repeat}`! Kan du fullføre koden?\n"
                 example_code: "## Eksempel Hedykode\n\n```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nEtter Baby Shark kan du selvfølgelig programmere andre sanger. Det er mange sanger med repetisjon.\n"
                 start_code: "{print} 'Baby Shark'"
             6:
