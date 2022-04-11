@@ -143,7 +143,7 @@ class Adventures:
         return self.data.get("en")
 
     def has_adventures(self):
-        return True if self.adventures.get("en") else False
+        return True if self.data.get("en") else False
 
 
 class NoSuchAdventure:
