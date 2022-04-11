@@ -1598,6 +1598,7 @@ function setDebugLine(reset : Boolean = false){
           lines[i].innerHTML = removeDebugClass(lines[i]);
           }
           if(debugLineNumber == lengthOfEntireEditor - 1){
+            stopDebug();
             var continueButton = $("#debug_continue");
             continueButton.hide();
           }
