@@ -1040,6 +1040,14 @@ export function showVariableView() {
   }
 }
 
+//Feature flag for step by step debugger
+var step_debugger = true;
+
+//Hides the debug button if feature flag is false
+if (!step_debugger) {
+  $('#debug_button').hide();
+}
+
 //Feature flag for variable and values view
 var variable_view = true;
 
@@ -1509,7 +1517,8 @@ function debugRun(){
 }
 
 export function startDebug(){
-  var debugButton = $("#debug");
+  if (step_debugger === true) {
+  var debugButton = $("#debug_button");
   debugButton.hide();
   var continueButton = $("#debug_continue");
   var stopButton = $("#debug_stop");
@@ -1524,53 +1533,56 @@ export function startDebug(){
   incrementDebugLine();
   debugRun();
 }
+}
 
 export function resetDebug(){
-  var storage = window.localStorage;
-  var debugLine = storage.getItem("debugLine");
-  var continueButton = $("#debug_continue");
-  continueButton.show();
+  if (step_debugger === true) {
+    var storage = window.localStorage;
+    var debugLine = storage.getItem("debugLine");
+    var continueButton = $("#debug_continue");
+    continueButton.show();
 
-  if(debugLine == null){
-    storage.setItem("debugLine", "0");
-    clearDebugVariables();
-    setDebugLine(true);
-    debugRun();
-    return;
-  }
-  else{
-    storage.setItem("debugLine", "0");
-    clearDebugVariables();
-    setDebugLine(true);
-    debugRun();
+    if (debugLine == null) {
+      storage.setItem("debugLine", "0");
+      clearDebugVariables();
+      setDebugLine(true);
+      debugRun();
+      return;
+    } else {
+      storage.setItem("debugLine", "0");
+      clearDebugVariables();
+      setDebugLine(true);
+      debugRun();
+    }
   }
 }
 
-export function stopDebug(){
-  var debugButton = $("#debug");
-  debugButton.show();
-  var continueButton = $("#debug_continue");
-  var stopButton = $("#debug_stop");
-  var resetButton = $("#debug_restart");
-  var runitButton = $("#runit");
+export function stopDebug() {
+  if (step_debugger === true) {
+    var debugButton = $("#debug_button");
+    debugButton.show();
+    var continueButton = $("#debug_continue");
+    var stopButton = $("#debug_stop");
+    var resetButton = $("#debug_restart");
+    var runitButton = $("#runit");
 
-  runitButton.show();
-  continueButton.hide();
-  stopButton.hide();
-  resetButton.hide();
+    runitButton.show();
+    continueButton.hide();
+    stopButton.hide();
+    resetButton.hide();
 
-  var storage = window.localStorage;
-  var debugLine = storage.getItem("debugLine");
+    var storage = window.localStorage;
+    var debugLine = storage.getItem("debugLine");
 
-  clearDebugVariables();
+    clearDebugVariables();
 
-  if(debugLine == null){
-    setDebugLine(true);
-    return;
-  }
-  else{
-    storage.removeItem("debugLine");
-    setDebugLine(true);
+    if (debugLine == null) {
+      setDebugLine(true);
+      return;
+    } else {
+      storage.removeItem("debugLine");
+      setDebugLine(true);
+    }
   }
 }
 function clearDebugVariables(){
@@ -1610,32 +1622,32 @@ export function incrementDebugLine(){
   }
 }
 
-function setDebugLine(reset : Boolean = false){
-  var storage = window.localStorage;
+function setDebugLine(reset : Boolean = false) {
+  if (step_debugger === true) {
+    var storage = window.localStorage;
 
     var editorContainer = document.getElementById("editor");
     var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
     var lines = textContainer?.getElementsByClassName("ace_line");
     var firstVisibleRow = editor.getFirstVisibleRow();
     var lastVisibleRow = editor.getLastVisibleRow();
-    var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e=>e).length;
+    var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
     var indexArray = []
-    for(var x = firstVisibleRow; x <= lastVisibleRow; x++){
+    for (var x = firstVisibleRow; x <= lastVisibleRow; x++) {
       indexArray.push(x);
     }
 
     if (lines) {
       var debugLine = storage.getItem("debugLine");
-      if(debugLine != null){
+      if (debugLine != null) {
         var debugLineNumber = parseInt(debugLine);
-        for(var i = 0 ; i < indexArray.length; i++){
-          if(indexArray[i] == debugLineNumber){
-          lines[i].innerHTML = addDebugClass(lines[i]);
+        for (var i = 0; i < indexArray.length; i++) {
+          if (indexArray[i] == debugLineNumber) {
+            lines[i].innerHTML = addDebugClass(lines[i]);
+          } else {
+            lines[i].innerHTML = removeDebugClass(lines[i]);
           }
-          else{
-          lines[i].innerHTML = removeDebugClass(lines[i]);
-          }
-          if(debugLineNumber == lengthOfEntireEditor){
+          if (debugLineNumber == lengthOfEntireEditor) {
             stopDebug();
             var continueButton = $("#debug_continue");
             continueButton.hide();
@@ -1643,14 +1655,15 @@ function setDebugLine(reset : Boolean = false){
           }
         }
       }
-      if(reset){
-        for(var i = 0; i < indexArray.length; i++){
+      if (reset) {
+        for (var i = 0; i < indexArray.length; i++) {
           lines[i].innerHTML = removeDebugClass(lines[i]);
         }
         //force resetting the rendering of the ace editor to remove the highlighted line
         editor.resize(true);
       }
     }
+  }
 }
 
 function addDisabledClass(str: Element) {
