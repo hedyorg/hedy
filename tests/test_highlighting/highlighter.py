@@ -35,18 +35,26 @@ def simulateRulesWithoutToken(Rules,Code):
         else: Output += " "
     regRule = Rules["start"][0]
     for reg in regRule[::-1]:
-        
-        if type(reg['token']) == str : # case without groups
-            reg['token'] = [reg['token']]
-            reg["regex"] = "(" + reg["regex"] + ")"
 
-        regComp = re.compile(reg["regex"], re.MULTILINE)
-        for match in regComp.finditer(Code):
-            pos = match.start()
-            for i,submatch in enumerate(match.groups()):
-                tok = reg['token'][i%len(reg['token'])]
-                Output = Output[:pos] + TokenCode[tok] * len(submatch) + Output[pos + len(submatch):]
-                pos += len(submatch)
+        if type(reg['token']) == str or len(reg['token']) == 1: # case without groups
+
+            if  type(reg['token']) == str : TokCode = TokenCode[reg['token']]
+            else: TokCode = TokenCode[reg['token'][0]]
+
+            regComp = re.compile(reg["regex"], re.MULTILINE)
+            for match in regComp.finditer(Code):
+                start = match.start()
+                length = match.end() -start
+                Output = Output[:start] + TokCode * length + Output[start + length:]
+
+        else: # case with groups
+            regComp = re.compile(reg["regex"], re.MULTILINE)
+            for match in regComp.finditer(Code):
+                pos = match.start()
+                for i,submatch in enumerate(match.groups()):
+                    tok = reg['token'][i%len(reg['token'])]
+                    Output = Output[:pos] + TokenCode[tok] * len(submatch) + Output[pos + len(submatch):]
+                    pos += len(submatch)
 
     return Output
 
@@ -90,11 +98,11 @@ def run(test):
         exit()
     else:
         pass
-        # print("WORK :")
-        # print("In this Code :",Code.replace("\n","\\n"))
-        # print("We want      :",Expected.replace("\n","\\n"))
-        # print("We have      :",Result.replace("\n","\\n"))
-        # print("")
+        print("WORK :")
+        print("In this Code :",Code.replace("\n","\\n"))
+        print("We want      :",Expected.replace("\n","\\n"))
+        print("We have      :",Result.replace("\n","\\n"))
+        print("")
 
 
 
