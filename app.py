@@ -128,9 +128,9 @@ def load_adventures_per_level(lang, level):
             continue
         # end adventure is the quiz
         # if quizzes are not enabled, do not load it
+        # Todo TB -> Is this still relevant? Teachers can simply "disable" adventures in customizations!
         if short_name == 'end' and not config['quiz-enabled']:
             continue
-        print(short_name)
         current_adventure = {
             'short_name': short_name,
             'name': adventure['name'],
