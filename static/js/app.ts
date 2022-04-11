@@ -1533,12 +1533,14 @@ export function resetDebug(){
 
   if(debugLine == null){
     storage.setItem("debugLine", "0");
+    clearDebugVariables();
     setDebugLine();
     debugRun();
     return;
   }
   else{
     storage.setItem("debugLine", "0");
+    clearDebugVariables();
     setDebugLine();
     debugRun();
   }
@@ -1560,14 +1562,7 @@ export function stopDebug(){
   var storage = window.localStorage;
   var debugLine = storage.getItem("debugLine");
 
-  var storage = window.localStorage;
-  var keysToRemove =  { ...localStorage };
-
-  for (var key in keysToRemove) {
-    if (key.includes("prompt-")) {
-      storage.removeItem(key);
-    }
-  }
+  clearDebugVariables();
 
   if(debugLine == null){
     setDebugLine(true);
@@ -1577,6 +1572,17 @@ export function stopDebug(){
     storage.removeItem("debugLine");
     setDebugLine(true);
   }
+}
+function clearDebugVariables(){
+  var storage = window.localStorage;
+  var keysToRemove =  { ...localStorage };
+
+  for (var key in keysToRemove) {
+    if (key.includes("prompt-")) {
+      storage.removeItem(key);
+    }
+  }
+
 }
 
 export function incrementDebugLine(){
