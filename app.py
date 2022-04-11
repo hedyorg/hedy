@@ -16,7 +16,6 @@ import json
 import logging
 import os
 from os import path
-import re
 import traceback
 from flask_commonmark import Commonmark
 from babel import Locale
