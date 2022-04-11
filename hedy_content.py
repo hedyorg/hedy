@@ -27,10 +27,7 @@ ALL_KEYWORD_LANGUAGES = {
 KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
     # If this, for some reason, fails -> fill with English values
-    try:
-        KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml').to_dict()
-    except:
-        KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/en.yaml').to_dict()
+    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml')
 
 ADVENTURE_ORDER = [
     'default',
@@ -79,24 +76,26 @@ class Commands:
     def __init__(self, language):
         self.language = language
         self.file = YamlFile.for_file(f'content/commands/{self.language}.yaml')
-        self.data = {}
         # We always create one with english keywords
-        self.cache_keyword_parsing("en")
+        self.data = {"en": self.cache_keyword_parsing("en")}
         if language in ALL_KEYWORD_LANGUAGES.keys():
-            self.cache_keyword_parsing(language)
+            self.data[language] = self.cache_keyword_parsing(language)
 
     def cache_keyword_parsing(self, language):
         keyword_data = {}
-        for level in self.file:
+        for level in copy.deepcopy(self.file):  # Take a copy -> otherwise we overwrite the parsing
             commands = self.file.get(level)
             for command in commands:
                 for k, v in command.items():
                     command[k] = v.format(**KEYWORDS.get(language))
             keyword_data[level] = commands
-        self.data[language] = keyword_data
+        return keyword_data
 
     def get_commands_for_level(self, level, keyword_lang="en"):
-        return self.data.get(keyword_lang).get(int(level), None)
+        if self.data.get(keyword_lang):
+            return self.data.get(keyword_lang).get(int(level), None)
+        else:
+            return self.data.get("en").get(int(level), None)
 
 
 class NoSuchCommand:
