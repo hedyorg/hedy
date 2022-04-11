@@ -95,6 +95,7 @@ def load_adventures_per_level(level):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode(no adventure) and for each of the adventures.
     if current_user()['username']:
+        # Todo TB -> This is (extremely) inefficient! We should index the level and only retrieve the current level
         user_programs = DATABASE.programs_for_user(current_user()['username'])
         for program in user_programs:
             if program['level'] != level:
@@ -106,9 +107,7 @@ def load_adventures_per_level(level):
                 loaded_programs[program_key] = program
 
     all_adventures = []
-
-    adventure_object = ADVENTURES[g.lang]
-    adventures = adventure_object.get_adventures_per_level(level)
+    adventures = ADVENTURES[g.lang].get_adventures()
 
     # Order the adventures dict by ADVENTURE_ORDER to ensure this is always the same (independent of YAML structure)
     sorted_adventures = {}
@@ -142,9 +141,9 @@ def load_adventures_per_level(level):
         for i in range(2, 10):
             extra_story = {}
             if adventure['levels'][level].get('story_text_' + str(i)):
-                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i)).format(**keywords)
+                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i)).format(KEYWORDS.get(g.lang, KEYWORDS.get("en")))
                 if adventure['levels'][level].get('example_code_' + str(i)):
-                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i)).format(**keywords)
+                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i)).format(KEYWORDS.get(g.lang, KEYWORDS.get("en")))
                 extra_stories.append(extra_story)
             else:
                 break
@@ -730,13 +729,12 @@ def index(level, program_id):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures = load_adventures_per_level(g.lang, level)
+    adventures = load_adventures_per_level(level)
     customizations = {}
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
 
     level_commands_for_lang = COMMANDS[g.lang]
-    level_commands_for_lang.set_keyword_language(g.keyword_lang)
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -836,12 +834,12 @@ def get_specific_adventure(name, level):
     except:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    adventure = [x for x in load_adventures_per_level(g.lang, level) if x.get('short_name') == name]
+    adventure = [x for x in load_adventures_per_level(level) if x.get('short_name') == name]
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    prev_level = level-1 if [x for x in load_adventures_per_level(g.lang, level-1) if x.get('short_name') == name] else False
-    next_level = level+1 if [x for x in load_adventures_per_level(g.lang, level+1) if x.get('short_name') == name] else False
+    prev_level = level-1 if [x for x in load_adventures_per_level(level-1) if x.get('short_name') == name] else False
+    next_level = level+1 if [x for x in load_adventures_per_level(level+1) if x.get('short_name') == name] else False
 
     return hedyweb.render_specific_adventure(level_number=level, adventure=adventure, version=version(),
                                              prev_level=prev_level, next_level=next_level)
@@ -858,7 +856,6 @@ def get_cheatsheet_page(level):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     level_commands_for_lang = COMMANDS[g.lang]
-    level_commands_for_lang.set_keyword_language(g.keyword_lang)
     commands = level_commands_for_lang.get_commands_for_level(level)
 
     return render_template("cheatsheet.html", commands=commands, level=level)
