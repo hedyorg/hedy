@@ -36,7 +36,7 @@ babel = Babel(app)
 import hedy_content
 hedy_content.fill_all_languages(babel)
 import hedyweb
-from hedy_content import COUNTRIES, KEYWORDS, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER
+from hedy_content import COUNTRIES, KEYWORDS, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
@@ -107,13 +107,6 @@ def load_adventures_per_level(level):
 
     all_adventures = []
     adventures = ADVENTURES[g.lang].get_adventures(g.keyword_lang)
-
-    # Order the adventures dict by ADVENTURE_ORDER to ensure this is always the same (independent of YAML structure)
-    sorted_adventures = {}
-    for adventure_index in ADVENTURE_ORDER:
-        if adventures.get(adventure_index, None):
-            sorted_adventures[adventure_index] = (adventures.get(adventure_index))
-    adventures = sorted_adventures
 
     for short_name, adventure in adventures.items():
         if not level in adventure['levels']:

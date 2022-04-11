@@ -106,20 +106,46 @@ class NoSuchCommand:
 class Adventures:
     def __init__(self, language):
         self.language = language
-        self.adventures = YamlFile.for_file(f'content/adventures/{self.language}.yaml').get('adventures', None)
+        self.file = YamlFile.for_file(f'content/adventures/{self.language}.yaml').get('adventures')
+        # Sort the adventure to a fixed structure to make sure they are structured the same for each language
+        sorted_adventures = {}
+        for adventure_index in ADVENTURE_ORDER:
+            if self.file.get(adventure_index, None):
+                sorted_adventures[adventure_index] = (self.file.get(adventure_index))
+        self.file = sorted_adventures
+
+        # We always create one with english keywords
+        self.data = {"en": self.cache_adventure_keywords("en")}
+        if language in ALL_KEYWORD_LANGUAGES.keys():
+            self.data[language] = self.cache_adventure_keywords(language)
+
+    def cache_adventure_keywords(self, language):
+        keyword_data = {}
+        data = copy.deepcopy(self.file)
+        for short_name, adventure in data.items():
+            parsed_adventure = copy.deepcopy(adventure)
+            for level in adventure.get('levels'):
+                print(adventure)
+                for k, v in adventure.get('levels').get(level).items():
+                    parsed_adventure['levels'][k] = v.format(**KEYWORDS.get(language))
+            keyword_data[short_name] = adventure
+        return keyword_data
+
 
     # When customizing classes we only want to retrieve the name, (id) and level of each adventure
     def get_adventure_keyname_name_levels(self):
         adventures_dict = {}
-        for adventure in self.adventures.items():
+        for adventure in self.data["en"].items():
             adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
         return adventures_dict
 
-    def get_adventures(self):
-        return self.adventures if self.adventures else None
+    def get_adventures(self, keyword_lang="en"):
+        if self.data.get(keyword_lang):
+            return self.data.get(keyword_lang)
+        return self.data.get("en")
 
     def has_adventures(self):
-        return True if self.adventures else False
+        return True if self.adventures.get("en") else False
 
 
 class NoSuchAdventure:
