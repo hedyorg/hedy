@@ -842,7 +842,11 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }
     window.State.programsInExecution--;
     if(!hasWarnings) {
-      showSuccesMessage();
+      var storage = window.localStorage;
+      var debug = storage.getItem("debugLine")
+      if(debug == null){
+        showSuccesMessage();
+      }
     }
     if (cb) cb ();
   }).catch(function(err) {
