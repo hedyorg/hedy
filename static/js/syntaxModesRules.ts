@@ -855,6 +855,7 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
 
 
 
+
 // #/#/2/#/# Here we will add a block of code to generate a JSON file for automatic tests
 
 // #/#/@/#/# We don't want to keep this block of code for automatic test execution
