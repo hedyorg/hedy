@@ -900,45 +900,60 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt: string) {
     // We give the user time to give input.
-    Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
-    $('#turtlecanvas').hide();
-    return new Promise(function(ok) {
-      window.State.disable_run = true;
-      $ ('#runit').css('background-color', 'gray');
 
-      const input = $('#inline-modal input[type="text"]');
-      $('#inline-modal .caption').text(prompt);
-      input.val('');
-      input.attr('placeholder', prompt);
-      speak(prompt)
+    var storage = window.localStorage;
+    var debug = storage.getItem("debugLine")
+    if (storage.getItem("prompt-" + prompt) == null) {
+      Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
+      $('#turtlecanvas').hide();
+      return new Promise(function (ok) {
+        window.State.disable_run = true;
+        $('#runit').css('background-color', 'gray');
 
-      setTimeout(function() {
-        input.focus();
-      }, 0);
-      $('#inline-modal form').one('submit', function(event) {
+        const input = $('#inline-modal input[type="text"]');
+        console.log("Prompt: ", prompt);
+        $('#inline-modal .caption').text(prompt);
+        input.val('');
+        input.attr('placeholder', prompt);
+        speak(prompt)
 
-        window.State.disable_run = false;
-        $ ('#runit').css('background-color', '');
-
-        event.preventDefault();
-        $('#inline-modal').hide();
-        if (hasTurtle) {
-          $('#turtlecanvas').show();
-        }
-        // We reset the timer to the present moment.
-        Sk.execStart = new Date ();
-        // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
-        // Since processing the program might take some time, this timeout increases the responsiveness of the UI after
-        // replying to a query.
-        setTimeout (function () {
-           ok(input.val());
-           $ ('#output').focus ();
+        setTimeout(function () {
+          input.focus();
         }, 0);
+        $('#inline-modal form').one('submit', function (event) {
 
-        return false;
+          window.State.disable_run = false;
+          $('#runit').css('background-color', '');
+
+          event.preventDefault();
+          $('#inline-modal').hide();
+          if (hasTurtle) {
+            $('#turtlecanvas').show();
+          }
+          // We reset the timer to the present moment.
+          Sk.execStart = new Date();
+          // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
+          // Since processing the program might take some time, this timeout increases the responsiveness of the UI after
+          // replying to a query.
+          setTimeout(function () {
+            ok(input.val());
+            if (debug != null) {
+              storage.setItem("prompt-" + prompt, input.val()!.toString());
+            }
+            $('#output').focus();
+          }, 0);
+
+          return false;
+        });
+        $('#inline-modal').show();
       });
-      $('#inline-modal').show();
-    });
+    } else {
+      return new Promise(function (ok) {
+        ok(storage.getItem("prompt-" + prompt));
+
+      });
+    }
+
   }
 }
 
@@ -1544,6 +1559,15 @@ export function stopDebug(){
 
   var storage = window.localStorage;
   var debugLine = storage.getItem("debugLine");
+
+  var storage = window.localStorage;
+  var keysToRemove =  { ...localStorage };
+
+  for (var key in keysToRemove) {
+    if (key.includes("prompt-")) {
+      storage.removeItem(key);
+    }
+  }
 
   if(debugLine == null){
     setDebugLine(true);
