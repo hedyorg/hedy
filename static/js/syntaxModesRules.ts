@@ -41,6 +41,18 @@ var currentLang: {
   _IS: string;
   _ASK: string;
   _ECHO: string;
+  _COLOR: string;
+  _BLACK: string;
+  _BLUE: string;
+  _BROWN: string;
+  _GRAY: string;
+  _GREEN: string;
+  _ORANGE: string;
+  _PINK: string;
+  _PURPLE: string;
+  _RED: string;
+  _WHITE: string;
+  _YELLOW: string;
   _FORWARD: string;
   _TURN: string;
   _LEFT: string;
@@ -550,6 +562,14 @@ function rule_level1() {
   },{
     regex: START_LINE + "(" + currentLang._ECHO + ")(.*)$",
     token: ['text','keyword','text'],
+    next: 'start',
+  },{
+    regex: START_LINE + "(" + currentLang._COLOR + ")(" + END_WORD + ")(.*)$",
+    token: ['text','keyword','text','text'],
+    next: 'start',
+  }, {
+    regex: START_LINE + "(" + currentLang._COLOR + ")(" + SPACE + ")(" + WORD + ")( *)$",
+    token: ['text','keyword','text','keyword','text'],
     next: 'start',
   },{
     regex: START_LINE + "(" + currentLang._FORWARD + ")(.*)$",
