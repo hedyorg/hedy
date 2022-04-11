@@ -9,9 +9,10 @@ import iso3166
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 
-# Define dictionairy for available languages. Fill dynamicly later.
+# Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
 
+# Languages that have a keyword grammar file
 ALL_KEYWORD_LANGUAGES = {
     'en': 'EN',
     'es': 'ES',
@@ -20,7 +21,8 @@ ALL_KEYWORD_LANGUAGES = {
     'nb_NO': 'NB',
     'tr': 'TR',
     'ar': 'AR',
-    'hi': 'HI'
+    'hi': 'HI',
+    'id': 'ID'
 }
 
 # Load and cache all keyword yamls
