@@ -25,7 +25,6 @@ var StopExecution = false;
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
-
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   let counter = 0
@@ -69,8 +68,6 @@ var StopExecution = false;
       let level = String($(preview).attr('level'));
       exampleEditor.session.setMode(getHighlighter(level));
     }
-
-
   }
 
   /**
@@ -83,7 +80,6 @@ var StopExecution = false;
     var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
     theGlobalEditor = editor;
     error.setEditor(editor);
-
 
     window.Range = ace.require('ace/range').Range // get reference to ace/range
 
@@ -829,10 +825,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }
    ).then(function(_mod) {
     console.log('Program executed');
-
-        //@ts-ignore
-        const pythonVariables = Sk.globals;
-        load_variables(pythonVariables);
+    //@ts-ignore
+    const pythonVariables = Sk.globals;
+    load_variables(pythonVariables);
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
@@ -841,10 +836,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       return;
     }
     window.State.programsInExecution--;
-    if(!hasWarnings) {
+    if (!hasWarnings) {
       var storage = window.localStorage;
       var debug = storage.getItem("debugLine")
-      if(debug == null){
+      if (debug == null) {
         showSuccesMessage();
       }
     }
@@ -853,12 +848,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     // Extract error message from error
     console.log(err);
     const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
-        // //@ts-ignore
-        // const pythonVariables = Sk.globals;
-        // load_variables(pythonVariables);
     throw new Error(errorMessage);
   });
-
 
   /**
    * Get the error messages from a Skulpt error
@@ -883,9 +874,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   function outf(text: string) {
     // If there's more than one program being executed at a time, we ignore it.
     // This happens when a program requiring user input is suspended when the user changes the code.
-    // //@ts-ignore
-    // const pythonVariables = Sk.globals;
-    // load_variables(pythonVariables);
     if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
@@ -900,13 +888,12 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt: string) {
     // We give the user time to give input.
-
     var storage = window.localStorage;
     var debug = storage.getItem("debugLine")
     if (storage.getItem("prompt-" + prompt) == null) {
-      Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
-      $('#turtlecanvas').hide();
-      return new Promise(function (ok) {
+    Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
+    $('#turtlecanvas').hide();
+    return new Promise(function (ok) {
         window.State.disable_run = true;
         $('#runit').css('background-color', 'gray');
 
@@ -953,7 +940,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
 
       });
     }
-
   }
 }
 
@@ -1041,7 +1027,7 @@ export function showVariableView() {
 }
 
 //Feature flag for step by step debugger
-var step_debugger = true;
+var step_debugger = false;
 
 //Hides the debug button if feature flag is false
 if (!step_debugger) {
@@ -1049,7 +1035,7 @@ if (!step_debugger) {
 }
 
 //Feature flag for variable and values view
-var variable_view = true;
+var variable_view = false;
 
 //Hides the HTML DIV for variables if feature flag is false
 if (!variable_view) {
@@ -1145,7 +1131,6 @@ export function get_trimmed_code() {
       code = lines.join('\n');
     }
   }
-
 
   // regex for any number of whitespace \s*
   // g: global (replace all matches, not just the first one)
@@ -1484,7 +1469,6 @@ editor.renderer.on("afterRender", function () {
   setDebugLine()
 });
 
-
 function adjustLines(disabledRow: []) {
   // We have to specify the correct editor here
   var editorContainer = document.getElementById("editor");
@@ -1508,34 +1492,34 @@ function adjustLines(disabledRow: []) {
   }
 }
 
-function debugRun(){
-  if(window.State.level != null && window.State.lang != null){
+function debugRun() {
+  if (window.State.level != null && window.State.lang != null) {
     runit(window.State.level, window.State.lang, "", function () {
-      $ ('#output').focus ();
+      $('#output').focus();
     });
   }
 }
 
-export function startDebug(){
+export function startDebug() {
   if (step_debugger === true) {
-  var debugButton = $("#debug_button");
-  debugButton.hide();
-  var continueButton = $("#debug_continue");
-  var stopButton = $("#debug_stop");
-  var resetButton = $("#debug_restart");
-  var runButton = $("#runit");
+    var debugButton = $("#debug_button");
+    debugButton.hide();
+    var continueButton = $("#debug_continue");
+    var stopButton = $("#debug_stop");
+    var resetButton = $("#debug_restart");
+    var runButton = $("#runit");
 
-  runButton.hide();
-  continueButton.show();
-  stopButton.show();
-  resetButton.show();
+    runButton.hide();
+    continueButton.show();
+    stopButton.show();
+    resetButton.show();
 
-  incrementDebugLine();
-  debugRun();
+    incrementDebugLine();
+    debugRun();
+  }
 }
-}
 
-export function resetDebug(){
+export function resetDebug() {
   if (step_debugger === true) {
     var storage = window.localStorage;
     var debugLine = storage.getItem("debugLine");
@@ -1585,44 +1569,43 @@ export function stopDebug() {
     }
   }
 }
-function clearDebugVariables(){
+
+function clearDebugVariables() {
   var storage = window.localStorage;
-  var keysToRemove =  { ...localStorage };
+  var keysToRemove = {...localStorage};
 
   for (var key in keysToRemove) {
     if (key.includes("prompt-")) {
       storage.removeItem(key);
     }
   }
-
 }
 
-export function incrementDebugLine(){
+export function incrementDebugLine() {
   var storage = window.localStorage;
   var debugLine = storage.getItem("debugLine");
-  if(debugLine == null){
+  if (debugLine == null) {
     storage.setItem("debugLine", "0");
     setDebugLine();
     return;
-  }
-  else{
+  } else {
     var debugLineInt = parseInt(debugLine);
     debugLineInt++;
     storage.setItem("debugLine", debugLineInt.toString());
   }
   setDebugLine();
 
-  var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e=>e).length;
+  var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
   var debugLine = storage.getItem("debugLine");
-  if(debugLine != null){
+  if (debugLine != null) {
     var currentLine = parseInt(debugLine);
-    if(currentLine <= lengthOfEntireEditor){
+    if (currentLine <= lengthOfEntireEditor) {
       debugRun();
     }
   }
 }
 
-function setDebugLine(reset : Boolean = false) {
+function setDebugLine(reset: Boolean = false) {
   if (step_debugger === true) {
     var storage = window.localStorage;
 
