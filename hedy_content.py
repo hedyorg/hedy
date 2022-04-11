@@ -1,5 +1,4 @@
 import copy
-import attr
 import os
 from babel import Locale
 from website.yaml_file import YamlFile
@@ -21,6 +20,15 @@ ALL_KEYWORD_LANGUAGES = {
     'ar': 'AR',
     'hi': 'HI'
 }
+
+# Load and cache all keyword yamls
+KEYWORDS = {}
+for lang in ALL_KEYWORD_LANGUAGES.keys():
+    # If this, for some reason, fails -> fill with English values
+    try:
+        YamlFile.for_file(f'content/keywords/{lang}.yaml').to_dict()
+    except:
+        YamlFile.for_file(f'content/keywords/en.yaml').to_dict()
 
 ADVENTURE_ORDER = [
     'default',
@@ -67,24 +75,14 @@ def fill_all_languages(babel):
 class Commands:
     def __init__(self, language):
         self.language = language
-        self.keyword_lang = "en"
-        self.keywords = YamlFile.for_file(
-            f'content/keywords/{self.keyword_lang}.yaml').to_dict()
-        self.levels = YamlFile.for_file(
-            f'content/commands/{self.language}.yaml')
-
-    def set_keyword_language(self, language):
-        if language != self.keyword_lang:
-            self.keyword_lang = language
-            self.keywords = YamlFile.for_file(
-                f'content/keywords/{self.keyword_lang}.yaml')
+        self.levels = YamlFile.for_file(f'content/commands/{self.language}.yaml')
 
     def get_commands_for_level(self, level):
         # Commands are stored as a list of dicts, so iterate like a list, then get the dict values
         level_commands = copy.deepcopy(self.levels.get(int(level), []))
         for command in level_commands:
             for k, v in command.items():
-                command[k] = v.format(**self.keywords)
+                command[k] = v.format(KEYWORDS.get(self.language, KEYWORDS.get("en")))
         return level_commands
 
     def get_defaults(self, level):
@@ -99,19 +97,9 @@ class NoSuchCommand:
 class Adventures:
     def __init__(self, language):
         self.language = language
-        self.keyword_lang = "en"
-        self.keywords = YamlFile.for_file(
-            f'content/keywords/{self.keyword_lang}.yaml').to_dict()
-        self.adventures_file = YamlFile.for_file(
-            f'content/adventures/{self.language}.yaml')
+        self.adventures_file = YamlFile.for_file(f'content/adventures/{self.language}.yaml')
 
-    def set_keyword_language(self, language):
-        if language != self.keyword_lang:
-            self.keyword_lang = language
-            self.keywords = YamlFile.for_file(
-                f'content/keywords/{self.keyword_lang}.yaml')
-
-        # When customizing classes we only want to retrieve the name, (id) and level of each adventure
+    # When customizing classes we only want to retrieve the name, (id) and level of each adventure
     def get_adventure_keyname_name_levels(self):
         adventures = self.adventures_file['adventures']
         adventures_dict = {}
