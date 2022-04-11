@@ -101,11 +101,10 @@ def load_adventures_per_level(lang, level):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode(no adventure) and for each of the adventures.
     if current_user()['username']:
-        user_programs = DATABASE.programs_for_user(current_user()['username'])
+        user_programs = DATABASE.level_programs_for_user(current_user()['username'], level)
+        print(user_programs)
         for program in user_programs:
-            if program['level'] != level:
-                continue
-            program_key = 'level' if not program.get('adventure_name') else program['adventure_name']
+            program_key = 'default' if not program.get('adventure_name') else program['adventure_name']
             if not program_key in loaded_programs:
                 loaded_programs[program_key] = program
             elif loaded_programs[program_key]['date'] < program['date']:
@@ -131,6 +130,7 @@ def load_adventures_per_level(lang, level):
         # if quizzes are not enabled, do not load it
         if short_name == 'end' and not config['quiz-enabled']:
             continue
+        print(short_name)
         current_adventure = {
             'short_name': short_name,
             'name': adventure['name'],
