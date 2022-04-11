@@ -1,6 +1,8 @@
 import copy
 import os
 from babel import Locale
+from flask import g
+
 from website.yaml_file import YamlFile
 import iso3166
 
@@ -82,7 +84,7 @@ class Commands:
         level_commands = copy.deepcopy(self.levels.get(int(level), []))
         for command in level_commands:
             for k, v in command.items():
-                command[k] = v.format(**KEYWORDS.get(self.language, KEYWORDS.get("en")))
+                command[k] = v.format(**KEYWORDS.get(g.keyword_lang, KEYWORDS.get("en")))
         return level_commands
 
     def get_defaults(self, level):
