@@ -19,4 +19,4 @@ assign: var (_IS | _EQUALS) expression | var ( _IS  | _EQUALS) textwithoutspaces
 ?atom: INT | var_access | error_unsupported_number | textwithoutspaces
 error_unsupported_number: /([-+]?(\d+[\.,]\d+))/ -> error_unsupported_number
 
-textwithoutspaces: /(?:[^\n،, *+\-\/ei]|e(?!lse)|i(?!f))+/ -> text //new cause in level 6 calculation elements need to be escaped too
+textwithoutspaces: /(?:[^#\n،, *+\-\/eias]|e(?!lse)|i(?!f)|s(?!i|inon|ino)|a(?!nders|ls))+/ -> text
