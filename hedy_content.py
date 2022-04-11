@@ -8,7 +8,7 @@ import iso3166
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 
-# Define dictionairies for available languages and keywords. Fill dynamicly later.
+# Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
