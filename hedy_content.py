@@ -83,8 +83,8 @@ class Commands:
 
     def cache_keyword_parsing(self, language):
         keyword_data = {}
-        for level in copy.deepcopy(self.file):  # Take a copy -> otherwise we overwrite the parsing
-            commands = self.file.get(level)
+        for level in copy.deepcopy(self.file):
+            commands = copy.deepcopy(self.file.get(level)) # Take a copy -> otherwise we overwrite the parsing
             for command in commands:
                 for k, v in command.items():
                     command[k] = v.format(**KEYWORDS.get(language))
