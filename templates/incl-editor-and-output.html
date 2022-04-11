@@ -31,7 +31,7 @@
         <div id="editor" style="background: #272822; font-family: monospace; color: white" lang="en"
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
-          data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or (adventures[0].start_code if adventures else "")}}
+          data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code}}
         </div>
         <!-- errorbox -->
         <div id="errorbox"

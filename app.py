@@ -94,12 +94,9 @@ def load_adventures_per_level(level):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode(no adventure) and for each of the adventures.
     if current_user()['username']:
-        # Todo TB -> This is (extremely) inefficient! We should index the level and only retrieve the current level
-        user_programs = DATABASE.programs_for_user(current_user()['username'])
+        user_programs = DATABASE.level_programs_for_user(current_user()['username'], level)
         for program in user_programs:
-            if program['level'] != level:
-                continue
-            program_key = 'level' if not program.get('adventure_name') else program['adventure_name']
+            program_key = 'default' if not program.get('adventure_name') else program['adventure_name']
             if not program_key in loaded_programs:
                 loaded_programs[program_key] = program
             elif loaded_programs[program_key]['date'] < program['date']:
@@ -113,6 +110,7 @@ def load_adventures_per_level(level):
             continue
         # end adventure is the quiz
         # if quizzes are not enabled, do not load it
+        # Todo TB -> Is this still relevant? Teachers can simply "disable" adventures in customizations!
         if short_name == 'end' and not config['quiz-enabled']:
             continue
         current_adventure = {
