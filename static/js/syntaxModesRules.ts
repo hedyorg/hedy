@@ -627,7 +627,7 @@ function rule_level2() {
     token: 'comment',
     next: 'start',
   },{
-    regex: /\_\?\_/,
+    regex: /\_\\?\_/,
     token: 'invalid',
     next: 'start',
   },{
@@ -672,7 +672,7 @@ function rule_level3() {
     next: 'start',
   },{
     regex: START_WORD + currentLang._AT + SPACE + currentLang._RANDOM ,
-    token: ['keyword','text','keyword'],
+    token: ['keyword'],
     next: 'start',
   },{
     regex: START_WORD + currentLang._AT ,
@@ -687,7 +687,7 @@ function rule_level3() {
     token: 'comment',
     next: 'start',
   },{
-    regex: /\_\?\_/,
+    regex: /\_\\?\_/,
     token: 'invalid',
     next: 'start',
   },{
@@ -732,7 +732,7 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
 
   /* Rule for blanks marks : */
   list_rules.push( {
-    regex: /\_\?\_/,
+    regex: /\_\\?\_/,
     token: 'invalid',
     next: 'start',
   });
