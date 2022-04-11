@@ -125,8 +125,8 @@ class Adventures:
             parsed_adventure = copy.deepcopy(adventure)
             for level in adventure.get('levels'):
                 for k, v in adventure.get('levels').get(level).items():
-                    parsed_adventure['levels'][k] = v.format(**KEYWORDS.get(language))
-            keyword_data[short_name] = adventure
+                    parsed_adventure.get('levels').get(level)[k] = v.format(**KEYWORDS.get(language))
+            keyword_data[short_name] = parsed_adventure
         return keyword_data
 
 
