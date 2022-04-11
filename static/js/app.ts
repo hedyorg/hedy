@@ -25,6 +25,7 @@ var StopExecution = false;
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
+
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   let counter = 0
@@ -68,6 +69,8 @@ var StopExecution = false;
       let level = String($(preview).attr('level'));
       exampleEditor.session.setMode(getHighlighter(level));
     }
+
+
   }
 
   /**
@@ -80,6 +83,7 @@ var StopExecution = false;
     var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
     theGlobalEditor = editor;
     error.setEditor(editor);
+
 
     window.Range = ace.require('ace/range').Range // get reference to ace/range
 
@@ -112,6 +116,8 @@ var StopExecution = false;
         window.State.unsaved_changes = true;
 
         clearErrors(editor);
+        //removing the debugging state when loading in the editor
+      stopDebug();
       });
     }
 
@@ -824,6 +830,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
    ).then(function(_mod) {
     console.log('Program executed');
 
+        //@ts-ignore
+        const pythonVariables = Sk.globals;
+        load_variables(pythonVariables);
+
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       pushAchievement("error_or_empty");
@@ -839,8 +849,12 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     // Extract error message from error
     console.log(err);
     const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
+        // //@ts-ignore
+        // const pythonVariables = Sk.globals;
+        // load_variables(pythonVariables);
     throw new Error(errorMessage);
   });
+
 
   /**
    * Get the error messages from a Skulpt error
@@ -865,9 +879,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   function outf(text: string) {
     // If there's more than one program being executed at a time, we ignore it.
     // This happens when a program requiring user input is suspended when the user changes the code.
-    //@ts-ignore
-    const pythonVariables = Sk.globals;
-    load_variables(pythonVariables);
+    // //@ts-ignore
+    // const pythonVariables = Sk.globals;
+    // load_variables(pythonVariables);
     if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
@@ -1008,7 +1022,7 @@ export function showVariableView() {
 }
 
 //Feature flag for variable and values view
-var variable_view = false;
+var variable_view = true;
 
 //Hides the HTML DIV for variables if feature flag is false
 if (!variable_view) {
@@ -1090,8 +1104,13 @@ export function get_trimmed_code() {
   // ignore the lines with a breakpoint in it.
   let breakpoints = editor.session.getBreakpoints();
   let code = theGlobalEditor.getValue();
+  var storage = window.localStorage;
+  var debugLines = storage.getItem('debugLine');
   if (code) {
     let lines = code.split('\n');
+    if(debugLines != null){
+      lines = lines.slice(0, parseInt(debugLines) + 1);
+    }
     for (let i = 0; i < lines.length; i++) {
       if (breakpoints[i] == 'ace_breakpoint') {
         lines[i] = '';
@@ -1099,6 +1118,8 @@ export function get_trimmed_code() {
       code = lines.join('\n');
     }
   }
+
+
   // regex for any number of whitespace \s*
   // g: global (replace all matches, not just the first one)
   return code.replace(/\s*$/gm, '');
@@ -1433,7 +1454,9 @@ function getCorrectVisibleRow(row: number, editor: any) {
 editor.renderer.on("afterRender", function () {
   var breakpoints = editor.session.getBreakpoints();
   adjustLines(breakpoints);
+  setDebugLine()
 });
+
 
 function adjustLines(disabledRow: []) {
   // We have to specify the correct editor here
@@ -1458,6 +1481,123 @@ function adjustLines(disabledRow: []) {
   }
 }
 
+function debugRun(){
+  if(window.State.level != null && window.State.lang != null){
+    runit(window.State.level, window.State.lang, "", function () {
+      $ ('#output').focus ();
+    });
+  }
+}
+
+export function startDebug(){
+  var debugButton = $("#debug");
+  debugButton.hide();
+  var continueButton = $("#debug_continue");
+  var stopButton = $("#debug_stop");
+  var resetButton = $("#debug_restart");
+
+  continueButton.show();
+  stopButton.show();
+  resetButton.show();
+
+  incrementDebugLine();
+  debugRun();
+}
+
+export function resetDebug(){
+  var storage = window.localStorage;
+  var debugLine = storage.getItem("debugLine");
+
+  if(debugLine == null){
+    storage.setItem("debugLine", "0");
+    setDebugLine();
+    debugRun();
+    return;
+  }
+  else{
+    storage.setItem("debugLine", "0");
+    setDebugLine();
+    debugRun();
+  }
+}
+
+export function stopDebug(){
+  var debugButton = $("#debug");
+  debugButton.show();
+  var continueButton = $("#debug_continue");
+  var stopButton = $("#debug_stop");
+  var resetButton = $("#debug_restart");
+
+  continueButton.hide();
+  stopButton.hide();
+  resetButton.hide();
+
+  var storage = window.localStorage;
+  var debugLine = storage.getItem("debugLine");
+
+  if(debugLine == null){
+    setDebugLine(true);
+    return;
+  }
+  else{
+    storage.removeItem("debugLine");
+    setDebugLine(true);
+  }
+}
+
+export function incrementDebugLine(){
+  var storage = window.localStorage;
+  var debugLine = storage.getItem("debugLine");
+  if(debugLine == null){
+    storage.setItem("debugLine", "0");
+    setDebugLine();
+    return;
+  }
+  else{
+    var debugLineInt = parseInt(debugLine);
+    debugLineInt++;
+    storage.setItem("debugLine", debugLineInt.toString());
+  }
+  setDebugLine();
+  debugRun();
+}
+
+function setDebugLine(reset : Boolean = false){
+  var storage = window.localStorage;
+
+    var editorContainer = document.getElementById("editor");
+    var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+    var lines = textContainer?.getElementsByClassName("ace_line");
+    var firstVisibleRow = editor.getFirstVisibleRow();
+    var lastVisibleRow = editor.getLastVisibleRow();
+    var indexArray = []
+    for(var x = firstVisibleRow; x <= lastVisibleRow; x++){
+      indexArray.push(x);
+    }
+
+    if (lines) {
+      var debugLine = storage.getItem("debugLine");
+      if(debugLine != null){
+        var debugLineNumber = parseInt(debugLine);
+        for(var i = 0 ; i < indexArray.length; i++){
+          if(indexArray[i] == debugLineNumber){
+          lines[i].innerHTML = addDebugClass(lines[i]);
+          }
+          else{
+          lines[i].innerHTML = removeDebugClass(lines[i]);
+          }
+        }
+      }
+      if(reset){
+        for(var i = 0; i < indexArray.length; i++){
+          lines[i].innerHTML = removeDebugClass(lines[i]);
+        }
+        //force resetting the rendering of the ace editor to remove the highlighted line
+        editor.resize(true);
+      }
+    }
+}
+
 function addDisabledClass(str: Element) {
   if (!str.children[0]?.innerHTML?.includes("ace-disabled")) {
     return '<div class="ace-disabled">' + str.innerHTML + '</div>';
@@ -1468,3 +1608,16 @@ function addDisabledClass(str: Element) {
 function removeDisabledClass(str: Element) {
   return str.innerHTML.replace('<div class="ace-disabled">', '').replace('</div>', '');
 }
+
+function addDebugClass(str: Element) {
+  if (!str.children[0]?.innerHTML?.includes("debugLine")) {
+    return '<div class="debugLine">' + str.innerHTML + '</div>';
+  }
+  return str.innerHTML;
+}
+
+function removeDebugClass(str: Element) {
+  return str.innerHTML.replace('<div class="debugLine">', '').replace('</div>', '');
+}
+
+
