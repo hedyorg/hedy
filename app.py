@@ -108,6 +108,7 @@ def load_adventures_per_level(level):
 
     all_adventures = []
     adventures = ADVENTURES[g.lang].get_adventures()
+    print(KEYWORDS.get(g.lang))
 
     # Order the adventures dict by ADVENTURE_ORDER to ensure this is always the same (independent of YAML structure)
     sorted_adventures = {}
@@ -128,9 +129,9 @@ def load_adventures_per_level(level):
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure.get('default_save_name', adventure['name']),
-            'text': adventure['levels'][level].get('story_text').format(KEYWORDS.get(g.lang, KEYWORDS.get("en"))) if adventure['levels'][level].get('story_text') else '',
-            'example_code': adventure['levels'][level].get('example_code').format(KEYWORDS.get(g.lang, KEYWORDS.get("en"))) if adventure['levels'][level].get('example_code') else '',
-            'start_code': adventure['levels'][level].get('start_code').format(KEYWORDS.get(g.lang, KEYWORDS.get("en"))) if adventure['levels'][level].get('start_code') else '',
+            'text': adventure['levels'][level].get('story_text').format(**KEYWORDS.get(g.lang, KEYWORDS.get("en"))) if adventure['levels'][level].get('story_text') else '',
+            'example_code': adventure['levels'][level].get('example_code').format(**KEYWORDS.get(g.lang, KEYWORDS.get("en"))) if adventure['levels'][level].get('example_code') else '',
+            'start_code': adventure['levels'][level].get('start_code').format(**KEYWORDS.get(g.lang, KEYWORDS.get("en"))) if adventure['levels'][level].get('start_code') else '',
             'loaded_program': '' if not loaded_programs.get(short_name) else {
                 'name': loaded_programs.get(short_name)['name'],
                 'code': loaded_programs.get(short_name)['code']
@@ -141,9 +142,9 @@ def load_adventures_per_level(level):
         for i in range(2, 10):
             extra_story = {}
             if adventure['levels'][level].get('story_text_' + str(i)):
-                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i)).format(KEYWORDS.get(g.lang, KEYWORDS.get("en")))
+                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i)).format(**KEYWORDS.get(g.lang, KEYWORDS.get("en")))
                 if adventure['levels'][level].get('example_code_' + str(i)):
-                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i)).format(KEYWORDS.get(g.lang, KEYWORDS.get("en")))
+                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i)).format(**KEYWORDS.get(g.lang, KEYWORDS.get("en")))
                 extra_stories.append(extra_story)
             else:
                 break

@@ -26,9 +26,9 @@ KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
     # If this, for some reason, fails -> fill with English values
     try:
-        YamlFile.for_file(f'content/keywords/{lang}.yaml').to_dict()
+        KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml').to_dict()
     except:
-        YamlFile.for_file(f'content/keywords/en.yaml').to_dict()
+        KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/en.yaml').to_dict()
 
 ADVENTURE_ORDER = [
     'default',
@@ -82,7 +82,7 @@ class Commands:
         level_commands = copy.deepcopy(self.levels.get(int(level), []))
         for command in level_commands:
             for k, v in command.items():
-                command[k] = v.format(KEYWORDS.get(self.language, KEYWORDS.get("en")))
+                command[k] = v.format(**KEYWORDS.get(self.language, KEYWORDS.get("en")))
         return level_commands
 
     def get_defaults(self, level):
@@ -108,7 +108,7 @@ class Adventures:
         return adventures_dict
 
     def get_adventures(self):
-        return self.adventures if self.adventures else None
+        return self.adventures.get('adventures') if self.adventures else None
 
     def has_adventures(self):
         return self.adventures.exists() and self.adventures.get('adventures')
