@@ -1026,7 +1026,7 @@ export function showVariableView() {
 }
 
 //Feature flag for step by step debugger
-var step_debugger = false;
+var step_debugger = true;
 
 //Hides the debug button if feature flag is false
 if (!step_debugger) {
@@ -1034,7 +1034,7 @@ if (!step_debugger) {
 }
 
 //Feature flag for variable and values view
-var variable_view = false;
+var variable_view = true;
 
 //Hides the HTML DIV for variables if feature flag is false
 if (!variable_view) {
