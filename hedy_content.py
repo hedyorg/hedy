@@ -75,24 +75,32 @@ def fill_all_languages(babel):
 
 
 class Commands:
+    # Want to parse the keywords only once so they can be cached -> perform this action on server start
     def __init__(self, language):
         self.language = language
-        self.levels = YamlFile.for_file(f'content/commands/{self.language}.yaml')
+        self.file = YamlFile.for_file(f'content/commands/{self.language}.yaml')
+        self.data = {}
+        # We always create one with english keywords
+        self.cache_keyword_parsing("en")
+        if language in ALL_KEYWORD_LANGUAGES.keys():
+            self.cache_keyword_parsing(language)
 
-    def get_commands_for_level(self, level):
-        # Commands are stored as a list of dicts, so iterate like a list, then get the dict values
-        level_commands = copy.deepcopy(self.levels.get(int(level), []))
-        for command in level_commands:
-            for k, v in command.items():
-                command[k] = v.format(**KEYWORDS.get(g.keyword_lang, KEYWORDS.get("en")))
-        return level_commands
+    def cache_keyword_parsing(self, language):
+        keyword_data = {}
+        for level in self.file:
+            commands = self.file.get(level)
+            for command in commands:
+                for k, v in command.items():
+                    command[k] = v.format(**KEYWORDS.get(language))
+            keyword_data[level] = commands
+        self.data[language] = keyword_data
 
-    def get_defaults(self, level):
-        return copy.deepcopy(self.levels.get(int(level), {}))
+    def get_commands_for_level(self, level, keyword_lang="en"):
+        return self.data.get(keyword_lang).get(int(level), None)
 
 
 class NoSuchCommand:
-    def get_commands(self):
+    def get_commands_for_level(self, level):
         return {}
 
 

@@ -733,8 +733,6 @@ def index(level, program_id):
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
 
-    level_commands_for_lang = COMMANDS[g.lang]
-
     if 'levels' in customizations:
         available_levels = customizations['levels']
         now = timems()
@@ -748,10 +746,7 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    try:
-        commands = level_commands_for_lang.get_commands_for_level(level)
-    except:
-        commands = None # No separate commands file for this language
+    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
@@ -854,8 +849,7 @@ def get_cheatsheet_page(level):
     except:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    level_commands_for_lang = COMMANDS[g.lang]
-    commands = level_commands_for_lang.get_commands_for_level(level)
+    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     return render_template("cheatsheet.html", commands=commands, level=level)
 
