@@ -432,7 +432,7 @@ def routes(app, database, achievements):
             return utils.error_page(error=403, ui_message=gettext('retrieve_adventure_error'))
 
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
-        adventure['content'] = adventure['content'].replace("<pre>", "<pre level='" + str(adventure['level']) + "'>")
+        adventure['content'] = adventure['content'].replace("<pre>", "<pre class='no-copy-button' level='" + str(adventure['level']) + "'>")
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=gettext('title_view-adventure'), current_page='my-profile')
 
