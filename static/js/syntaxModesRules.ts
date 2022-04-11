@@ -583,11 +583,11 @@ function rule_level1() {
     token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: /#.*$/,
+    regex: '#.*$',
     token: 'comment',
     next: 'start',
   },{
-    regex: /\_\?\_/,
+    regex: '\_\?\_',
     token: 'invalid',
     next: 'start',
   },{
