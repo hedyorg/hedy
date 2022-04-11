@@ -587,7 +587,7 @@ function rule_level1() {
     token: 'comment',
     next: 'start',
   },{
-    regex: '\_\?\_',
+    regex: '\_\\?\_',
     token: 'invalid',
     next: 'start',
   },{
