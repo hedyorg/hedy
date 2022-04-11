@@ -107,7 +107,6 @@ def load_adventures_per_level(level):
 
     all_adventures = []
     adventures = ADVENTURES[g.lang].get_adventures()
-    print(KEYWORDS.get(g.lang))
 
     # Order the adventures dict by ADVENTURE_ORDER to ensure this is always the same (independent of YAML structure)
     sorted_adventures = {}
