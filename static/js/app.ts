@@ -1599,7 +1599,15 @@ export function incrementDebugLine(){
     storage.setItem("debugLine", debugLineInt.toString());
   }
   setDebugLine();
-  debugRun();
+
+  var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e=>e).length;
+  var debugLine = storage.getItem("debugLine");
+  if(debugLine != null){
+    var currentLine = parseInt(debugLine);
+    if(currentLine <= lengthOfEntireEditor){
+      debugRun();
+    }
+  }
 }
 
 function setDebugLine(reset : Boolean = false){
@@ -1610,7 +1618,7 @@ function setDebugLine(reset : Boolean = false){
     var lines = textContainer?.getElementsByClassName("ace_line");
     var firstVisibleRow = editor.getFirstVisibleRow();
     var lastVisibleRow = editor.getLastVisibleRow();
-    var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").length;
+    var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e=>e).length;
     var indexArray = []
     for(var x = firstVisibleRow; x <= lastVisibleRow; x++){
       indexArray.push(x);
@@ -1627,10 +1635,11 @@ function setDebugLine(reset : Boolean = false){
           else{
           lines[i].innerHTML = removeDebugClass(lines[i]);
           }
-          if(debugLineNumber == lengthOfEntireEditor - 1){
+          if(debugLineNumber == lengthOfEntireEditor){
             stopDebug();
             var continueButton = $("#debug_continue");
             continueButton.hide();
+            return;
           }
         }
       }
