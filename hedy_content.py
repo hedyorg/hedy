@@ -99,21 +99,20 @@ class NoSuchCommand:
 class Adventures:
     def __init__(self, language):
         self.language = language
-        self.adventures = YamlFile.for_file(f'content/adventures/{self.language}.yaml')
+        self.adventures = YamlFile.for_file(f'content/adventures/{self.language}.yaml').get('adventures', None)
 
     # When customizing classes we only want to retrieve the name, (id) and level of each adventure
     def get_adventure_keyname_name_levels(self):
-        adventures = self.adventures['adventures']
         adventures_dict = {}
-        for adventure in adventures.items():
+        for adventure in self.adventures.items():
             adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
         return adventures_dict
 
     def get_adventures(self):
-        return self.adventures.get('adventures') if self.adventures else None
+        return self.adventures if self.adventures else None
 
     def has_adventures(self):
-        return self.adventures.exists() and self.adventures.get('adventures')
+        return True if self.adventures else False
 
 
 class NoSuchAdventure:
