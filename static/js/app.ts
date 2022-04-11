@@ -898,7 +898,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         $('#runit').css('background-color', 'gray');
 
         const input = $('#inline-modal input[type="text"]');
-        console.log("Prompt: ", prompt);
         $('#inline-modal .caption').text(prompt);
         input.val('');
         input.attr('placeholder', prompt);
