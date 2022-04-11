@@ -37,7 +37,7 @@ babel = Babel(app)
 import hedy_content
 hedy_content.fill_all_languages(babel)
 import hedyweb
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER
+from hedy_content import COUNTRIES, KEYWORDS, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER
 from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
@@ -91,13 +91,7 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
 """)
 
 
-def load_adventure_for_language(lang):
-    ADVENTURES[lang].set_keyword_language(g.keyword_lang)
-
-    return ADVENTURES[lang]
-
-
-def load_adventures_per_level(lang, level):
+def load_adventures_per_level(level):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode(no adventure) and for each of the adventures.
     if current_user()['username']:
@@ -113,9 +107,8 @@ def load_adventures_per_level(lang, level):
 
     all_adventures = []
 
-    adventure_object = load_adventure_for_language(lang)
-    keywords = adventure_object.keywords
-    adventures = adventure_object.adventures_file['adventures']
+    adventure_object = ADVENTURES[g.lang]
+    adventures = adventure_object.get_adventures_per_level(level)
 
     # Order the adventures dict by ADVENTURE_ORDER to ensure this is always the same (independent of YAML structure)
     sorted_adventures = {}
@@ -136,9 +129,9 @@ def load_adventures_per_level(lang, level):
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure.get('default_save_name', adventure['name']),
-            'text': adventure['levels'][level].get('story_text').format(**keywords) if adventure['levels'][level].get('story_text') else '',
-            'example_code': adventure['levels'][level].get('example_code').format(**keywords) if adventure['levels'][level].get('example_code') else '',
-            'start_code': adventure['levels'][level].get('start_code').format(**keywords) if adventure['levels'][level].get('start_code') else '',
+            'text': adventure['levels'][level].get('story_text').format(KEYWORDS.get(g.lang, KEYWORDS.get("en"))) if adventure['levels'][level].get('story_text') else '',
+            'example_code': adventure['levels'][level].get('example_code').format(KEYWORDS.get(g.lang, KEYWORDS.get("en"))) if adventure['levels'][level].get('example_code') else '',
+            'start_code': adventure['levels'][level].get('start_code').format(KEYWORDS.get(g.lang, KEYWORDS.get("en"))) if adventure['levels'][level].get('start_code') else '',
             'loaded_program': '' if not loaded_programs.get(short_name) else {
                 'name': loaded_programs.get(short_name)['name'],
                 'code': loaded_programs.get(short_name)['code']
@@ -611,7 +604,7 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-    adventures = load_adventure_for_language(g.lang).adventures_file['adventures']
+    adventures = ADVENTURES[g.lang].adventures_file['adventures']
     if hedy_content.Adventures(session['lang']).has_adventures():
         adventures_names = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
     else:
