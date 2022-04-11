@@ -1,4 +1,389 @@
 adventures:
+    default:
+        name: "Introduction"
+        description: "Level explanation"
+        image: ""
+        default_save_name: "intro"
+        levels:
+            1:
+                story_text: |-
+                    हेडी मे आपका स्वागत है! स्तर १ में आप `{print}`, `{ask}` और `{echo}` जैसे आदेशों  का उपयोग कर सकते है।
+                    उदाहरण के लिए, आप `{print}` का उपयोग करके स्क्रीन पर टेक्स्ट प्रिंट कर सकते हैं। आप एक उदाहरण देख सकते हैं
+                    बाईं ओर कोड स्निपेट।
+
+                    कोड ब्लॉक में हरा बटन दबाएं, और कोड आपके लिए टाइप हो जाएगा!
+                    प्रोग्रामिंग फील्ड के नीचे हरे 'रन कोड' बटन के साथ कोड को स्वयं आज़माएं।
+                start_code: "{print} हेलो दुनिया!"
+                example_code: |-
+                    ##उदाहरण कोड
+                    ```
+                    {print} हेलो!
+                    {print} हेडी में आपका स्वागत है!
+                    ```
+                story_text_2: |-
+                    आप इनपुट के लिए भी पूछ सकते हैं और इसे `{echo}` कमांड के साथ दोहरा सकते हैं।
+                    कोड को अपनी बाईं ओर फिर से आज़माएं।
+
+                    पता नहीं क्या बनाना है? अगले टैब में आपको प्रोग्राम बनाने के लिए विचार मिलेंगे।
+                example_code_2: |-
+                    ##उदाहरण कोड
+                    ```
+                    {ask} आपका नाम क्या है?
+                    {echo} हेलो
+                    ```
+                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+            2:
+                story_text: |-
+                    स्तर २ में हम कुछ नया सीखते हैं। आप `{is}` वाले शब्द को नाम दे सकते हैं। आप अपने कोड में कहीं भी नाम का उपयोग कर सकते हैं और इसे हेडी से बदल दिया जाएगा, जैसे:
+
+                    ```name {is} हेडी
+                    {print} हैलो name
+                    ```
+
+                    नोट: `{ask}` बदल गया है, आप उत्तर को एक नाम से भी इस तरह सेव करें:
+
+                    ```
+                    answer {is} {ask} तुम्हारा नाम क्या है?
+                    ```
+                    प्रिंट अभी भी स्तर १ की तरह काम करता है, और अब आपको `{echo}` की आवश्यकता नहीं है।
+
+                    इस स्तर में एक और नया आदेश `स्लीप` है, जो आपके कार्यक्रम को एक सेकंड के लिए रोक देता है। यदि आप {sleep} कमांड के पीछे एक नंबर टाइप करते हैं, तो प्रोग्राम इतने सेकंड के लिए रुक जाता है।
+                    ```
+                    {print} 'मेरा पसंदीदा रंग है...'
+                    {sleep} २
+                    {print} 'हरा!'
+                    ```
+                start_code: "{print} हेलो दुनिया  !"
+                example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
+                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
+                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
+            3:
+                story_text: |-
+                    स्तर 3 में आप एक सूची भी बना सकते हैं। आप कंप्यूटर को सूची से कुछ यादृच्छिक चुनने दे सकते हैं। आप इसे `at random` के साथ करते हैं।
+                    ```
+                    animals {is} कुत्ता, बिल्ली, कंगारू
+                    {print} animals at random
+                    ```
+                    आप सूची में वस्तु को `add` के साथ जोड़ सकते हैं और `remove` के साथ वस्तु हटा सकते हैं।
+                    ```
+                    animals {is} कुत्ता, बिल्ली, कंगारू
+                    add पेंगुइन to animals
+                    remove बिल्ली from animals
+                    {print} animals at random
+                    ```
+                start_code: "{print} हेलो दुनिया  !"
+                example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
+                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+                example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+            4:
+                start_code: "{print} 'हेलो  दुनिया'"
+                story_text: |-
+                    स्तर ४ में `{ask}` और `{print}` बदल गए हैं।
+
+                    आपको वह टेक्स्ट डालना होगा जिसे आप उद्धरण चिह्नों के बीच प्रिंट करना चाहते हैं।
+
+                    यह उपयोगी है, क्योंकि अब आप अपने इच्छित सभी शब्दों को प्रिंट कर सकते हैं। साथ ही जिन शब्दों को आप `{is}` के साथ स्टोर करते थे।
+
+                    अधिकांश प्रोग्रामिंग भाषाएं प्रिंट करते समय उद्धरण चिह्नों का भी उपयोग करती हैं, इसलिए हम वास्तविक प्रोग्रामिंग के करीब भी एक कदम आगे बढ़ रहे हैं!
+
+                    ## कार्यभार अधिक कठिन होते जा रहे हैं
+                    आपको फिर से बाईं ओर कमांड और निम्नलिखित टैब में कार्यभार मिलेंगे। लगातार टैब में कार्यभार अब और अधिक कठिन होते जा रहे हैं।
+                    इसलिए कहानी के साथ बाईं ओर शुरू करना और दाईं ओर काम करना सबसे अच्छा है, ताकि अधिक से अधिक चुनौती दी जा सके।
+                example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
+                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+            5:
+                start_code: |-
+                    नाम {is} {ask} आपका नाम क्या है?
+                    {if} नाम {is} हेडी {print} 'कूल!' {else} {print} 'मेह'
+                story_text: |-
+                    `{ask}` {and} `{print}` अभी भी वैसे ही काम करते हैं जैसे उन्होंने स्तर 4 में किया था।
+
+                     स्तर 5 में कुछ नया है, `{if}`! `{if}` से आप दो अलग-अलग विकल्पों में से चुन सकते हैं।
+
+                    ## उदाहरण हेडी कोड
+                     ```
+                     नाम {is} {ask} 'आपका नाम क्या है?'
+                     {if} नाम {is} हेडी {print} 'अच्छा' {else} प्रिंट 'बू!'
+                     ```
+
+                     यह कोड अच्छा प्रिंट करता है यदि आप हेडी को एक नाम के रूप में दर्ज करते हैं, और बू! अगर आप कुछ और दर्ज करते हैं।
+
+                     जब हम यह जांचना चाहते हैं कि सूची में कुछ है या नहीं, तो अब हम वस्तु और सूची के बीच 'in' का उपयोग कर सकते हैं।
+
+                    ## उदाहरण हेडी कोड
+                     ```
+                     सुंदर_रंग {is} हरा, पीला
+                     रंग {is} {ask} 'आपका पसंदीदा रंग कौन सा है?'
+                     {if} रंग {in} सुंदर_रंग {print} 'सुंदर!' {else} प्रिंट 'मेह'
+                    ```
+                    यह कोड सुंदर प्रिंट करता है! यदि आप हरा या पीला चुनते हैं, और मेह अन्यथा।
+
+                    ## टिप
+                     कभी-कभी `{if}` वाला कोड वास्तव में लंबा हो जाता है और लाइन पर ठीक से फिट नहीं होता है। <br> आप कोड को दो पंक्तियों में विभाजित भी कर सकते हैं, दूसरी पंक्ति को `{else}` से इस प्रकार शुरू करते हुए:
+                     ```
+                     name {is} {ask} 'आपका नाम क्या है?'
+                     {if} नाम {is} हेडी {print} 'अच्छा'
+                     {else} {print} 'बू!'
+                     ```
+
+                    ## असाइनमेंट अधिक {and} अधिक कठिन होते जा रहे हैं
+
+                     स्तर 5 में भी, टैब में असाइनमेंट अधिक से अधिक कठिन होते जा रहे हैं। तो, उन्हें बाएं से दाएं करें।
+                example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
+                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
+                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+            6:
+                start_code: "{print} '५ गुणा ५ है ' 5 * 5"
+                story_text: |-
+                    `{ask}`, `{print}` और `{if}` अभी भी स्तर 5 की तरह काम करते हैं।
+                     लेकिन स्तर 6 में आप कुछ नया सीखते हैं: अब आप गणना भी कर सकते हैं।
+
+                    जोड़ आसान है, आप इसे गणित के जैसे लिखते हैं: उदाहरण के लिए `5 + 5`। घटाव भी ठीक काम करता है, यह `5 - 5` है।
+
+                    {times} थोड़ा अलग है, क्योंकि आपके कीबोर्ड पर कोई {times} चिन्ह नहीं है। बस खोजें, वास्तव में ऐसा नहीं है!
+                     इसलिए हम 8 के ऊपर के तारक से गुणा करते हैं: `5 * 5` । इसे "5 गुना 5" के रूप में पढ़ें जो आपको इसे सबसे अच्छी तरह याद रखने में मदद करता है।
+
+                    ## उदाहरण हेडी कोड
+                     ```
+                     {print} '5 जमा 5' 5 + 5
+                     {print} '5 माइनस 5 है' 5 - 5
+                     {print} '5 times 5 है' 5 * 5
+                     ```
+
+                     हम भंडारण में भी बदलाव करते हैं! जब हम कोई नाम या नंबर इस तरह से स्टोर करते हैं, तो अब आप `{is}` के बदले `=` का उपयोग कर सकते हैं:
+
+                     ```
+                     नाम = हेडी
+                     उत्तर = 20 + 4
+                     ```
+                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                example_code: "## Example Hedy code\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
+                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+            7:
+                start_code: "{repeat} 3 {times} {print} 'हेडी मजेदार है!'"
+                story_text: |-
+                    `{ask}`, `{print}` {and} `{if}` ठीक उसी तरह काम करते हैं जैसे उन्होंने स्तर 5 और 6 में किया था।
+                    लेकिन स्तर 7 `{repeat}` कमांड जोड़ता है। {repeat} कोड की एक पंक्ति को कई बार निष्पादित करने के लिए उपयोग किया जा सकता है।
+                    ## उदाहरण हेडी कोड
+                    ```
+                    {repeat} 3 {times} {print} 'हेडी {is} मजेदार!'
+                    ```
+                example_code: "## Example Hedy code\n```\n{repeat} 3 {times} {print} 'Hedy {is} fun!'\n```\n"
+            8:
+                start_code: |
+                    {repeat} 5 {times}
+                      {print} 'हेलो दोस्तों'
+                      {print} 'ये सब ५ बार प्रिंट होंगे'
+                story_text: |-
+                    `{ask}` {and} `{print}` दोनों वैसा ही काम करेंगे जैसे हमें पता है| लेकिन  `{if}` {and} `{repeat}` बदल चुके है!
+                    अब आप एक साथ कोड के समूहों को चला सकते हैं, लेकिन आपको कोड को *इंडेंट* करना होगा|
+                    इसका मतलब है कि लाइन की शुरुआत में चार रिक्त स्थान डालने होंगे |
+                    यह तब भी लागू होगा जब आप केवल एक पंक्ति का एक ब्लॉक बनाना चाहते हैं| जब आप केवल एक पंक्ति का ब्लॉक बनाना चाहते हैं तो आपको इंडेंट भी करना होगा।
+
+                    ## उदाहरण हेडी कोड
+                    ```
+                    {repeat} 5 {times}
+                        {print} 'सभी को नमस्कार'
+                        {print} 'यह सब 5 बार दोहराया जाता है'
+                    ```
+                example_code: "## Example Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
+            9:
+                start_code: |-
+                    {repeat} 3 {times}
+                        खाना = {ask} 'तुम क्या चाहते हो?'
+                        {if} खाना {is} 'पिज़्ज़ा'
+                            {print} 'अच्छा!'
+                        else
+                            {print} 'पिज़्ज़ा बेहतर है'
+                story_text: |-
+                    इस स्तर पर आप न केवल `{if}` {and} `{repeat}` के साथ कई पंक्तियों का उपयोग कर सकते हैं, बल्कि आप उन्हें एक साथ भी रख सकते हैं!
+                    उदाहरण में आप एक `{if}` कमांड को `{repeat}` कमांड में देखते हैं। इसे दूसरे तरीके से भी अनुमति दी जाती है, और एक `{if}` में एक `{if}` और `{repeat}` में `{repeat}` की भी अनुमति है।
+                    इसे आज़माइए!
+
+                    ## उदाहरण हेडी कोड
+                    ```
+                    {repeat} 3 {times}
+                        खाना = {ask} 'तुम क्या चाहते हो?'
+                        {if} खाना {is} 'पिज़्ज़ा'
+                            {print} 'अच्छा!'
+                        else
+                            {print} 'पिज़्ज़ा बेहतर है'
+                    ```
+                example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
+            10:
+                start_code: |-
+                    जानवरों {is} कुत्ता, बिल्ली, ब्लॉबफिश
+                    {for} जानवर {in} जानवरों
+                        {print} 'मुझे पसंद है ' जानवर
+                story_text: |-
+                    इस स्तर में हम एक नया कोड सीखेंगे जो `{for}` कहलाता है| `{for}` के साथ आप एक सूची बना सकते हैं और सारे तत्वों का प्रयोग कर सकते हैं|
+                    `{for}` एक ब्लॉक बनाता है, `{repeat}` और '{if}' की तरह, तो ब्लॉक की सभी पंक्तियों को रिक्त स्थानों से शुरू होने की आवश्यकता है|
+
+                    ##उदाहरण हेडी कोड
+                    ```
+                    जानवरों {is} कुत्ता, बिल्ली, ब्लॉबफिश
+                    {for} जानवर {in} जानवरों
+                        {print} 'मुझे पसंद है ' जानवर
+                    ```
+                example_code: "## Example Hedy code\n```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
+            11:
+                start_code: |-
+                    {for} काउंटर {in} {range} 1 {to} 5
+                        {print} काउंटर
+                story_text: |-
+                    `{print}` वैसा ही काम करेगा लेकिन हम `{for}` का एक नया रूप जोड़ते हैं|
+                    अब आप '{for} काउंटर  {in} {range} 1 {to} 5' लिख सकते हैं और आपके प्रोग्राम में 'काउंटर' का उपयोग कर सकते हैं| कोशिश करके देखो क्या होता है! `{for}` और '{if}' पंक्तियों के बाद इंडेंटेशन का उपयोग करना ध्यान में रखें (जिसका मतलब है कि सेंटेंस लिखने से पहले 4 रिक्त स्थान डाल दें|)
+                example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
+            12:
+                start_code: |-
+                    {print} 'दशमलव संख्याओं को अब एक बिंदु का उपयोग करने की आवश्यकता है'
+                    {print} 2.5 + 2.5
+                story_text: |
+                    ## दशमलव संख्याएं
+                    अब तक, हेडी ने 1.5 जैसी दशमलव संख्याओं की अनुमति नहीं दी थी, लेकिन अब हम इसकी अनुमति देते हैं। ध्यान दें कि कंप्यूटर दशमलव संख्याओं के लिए `.` का उपयोग करते हैं।
+                    ```
+                    {print} 'ढाई जमा ढाई है...'
+                    {print} 2.5 + 2.5
+                    ```
+                    ## सभी पाठ उद्धरण चिह्नों में होने चाहिए
+                    इस स्तर के लिए आपको `=` के साथ पाठ संग्रहीत करते समय उद्धरण चिह्नों का भी उपयोग करना होगा:
+
+                    ```
+                    नाम = 'हेडी द रोबोट'
+                    {print} 'हैलो' नाम
+                    ```
+                    ## सूचियों में सभी वस्तुओं को उद्धरण चिह्नों की भी आवश्यकता है
+                    सूचियाँ टेक्स्ट हैं, इसलिए उन्हें उद्धरण चिह्नों की भी आवश्यकता है। ध्यान रखें कि सूची के प्रत्येक वस्तु में उद्धरण चिह्न हैं।
+                    यह आपको सूची में दो शब्दों को 1 वस्तु के रूप में सहेजने की अनुमति देता है, उदाहरण के लिए 'लोह पुरुष'।
+
+                    ```
+                    सुपरहीरो = 'स्पाइडरमैन', 'बैटमैन', 'आयरन मैन'
+                    {print} सुपरहीरो {at} {random}
+                    ```
+                    ## `{if}` के बाद के सभी पाठों की तुलना के लिए उद्धरण चिह्नों की भी आवश्यकता होती है
+                    ```
+                    नाम = {ask} 'आपका नाम क्या है?'
+                    {if} नाम = 'हेडी द रोबोट'
+                        {print} 'नमस्कार!'
+                    ```
+                    ## संख्याओं को उद्धरण चिह्नों की आवश्यकता नहीं है
+                    {for} संख्याओं, आप `=` में उद्धरण चिह्नों का उपयोग नहीं करते हैं:
+                    ```
+                    स्कोर = 25
+                    {print} 'आपको मिला' स्कोर
+                    ```
+                example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
+                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
+                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
+                example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
+                story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
+                example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
+                story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
+                example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+            13:
+                start_code: |-
+                    नाम = {ask} 'आपका नाम क्या है?'
+                    उम्र = {ask} 'तुम्हारी उम्र क्या है?'
+                    {if} नाम {is} 'Hedy' {and} उम्र {is} 2
+                        {print} 'आप असली हैडी हैं!'
+                story_text: "अब हम `{and}` और `{or}` सीखने जा रहे हैं! यदि आप दो कथनों की जाँच करना चाहते हैं, तो आपको दो if's का उपयोग करने की आवश्यकता नहीं है, लेकिन `{and}` और `{or}` का उपयोग कर सकते हैं। यदि आप `{and}` का उपयोग करते हैं, तो `{and}` के बाएं और दाएं दोनों कथन सत्य होने चाहिए। हम `{या}` का भी उपयोग कर सकते हैं। तब केवल एक कथन सही होना चाहिए।"
+                example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+            14:
+                start_code: |-
+                    उम्र = {ask} 'आप कितने साल के हैं?'
+                    {if} उम्र <13
+                        {print} 'तुम मुझसे छोटे हो!'
+                    else
+                        {print} 'तुम मुझसे बड़े हो!'
+                story_text: |-
+                    हम और नई चीजें सीखेंगे। आप उन्हें गणित, `<` और `>` से पहले से ही जान सकते हैं।
+                    `<` यह जांचता है कि पहली संख्या दूसरी से छोटी है या नहीं, उदाहरण के लिए `आयु <12` यह जांचती है कि `आयु` {is} 12 से छोटी या नहीं।
+                    यदि आप यह जांचना चाहते हैं कि पहली संख्या छोटी है या दूसरी के बराबर है, तो आप `<=` का उपयोग कर सकते हैं, उदाहरण के लिए `आयु <= 11`।
+                    `>` जांचता है कि पहली संख्या दूसरी से बड़ी है या नहीं, उदाहरण के लिए `अंक > 10` जांचता है कि `अंक` 10 से बड़ा है या नहीं।
+                    यदि आप यह जांचना चाहते हैं कि पहली संख्या दूसरी से बड़ी है या बराबर है, तो आप `>=` का उपयोग कर सकते हैं, उदाहरण के लिए `अंक >= 11`।
+                    आप इन तुलनाओं का उपयोग `{if}` में करते हैं, जैसे:
+                    ```
+                    उम्र = {ask} 'आप कितने साल के हैं?'
+                    {if} उम्र> 12
+                        {print} 'आप मुझसे बड़े हैं!'
+                    ```
+                    इस स्तर से, यदि आप ठीक-ठीक तुलना करना चाहते हैं, तो आप दो समान चिह्नों का उपयोग कर सकते हैं। अधिकांश प्रोग्रामिंग भाषाएं यही करती हैं:
+                    ```
+                    नाम = {ask} 'आपका नाम क्या है?'
+                    {if} नाम == 'हेडी'
+                        {print} 'आप कू हैं!'
+                    ```
+                    आप इस तरह `!=` का उपयोग करके तुलना कर सकते हैं कि क्या कुछ *नहीं* के बराबर है:
+                    ```
+                    नाम = {ask} 'आपका नाम क्या है?'
+                    {if} नाम != 'हेडी'
+                        {print} 'आप हेडी नहीं हैं'
+                    ```
+                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+                example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
+                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
+                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+            15:
+                start_code: |-
+                    उत्तर = 0
+                    {while} उत्तर!= 25
+                        उत्तर = {ask} '5 गुना 5 क्या है?'
+                    {print} 'एक सही उत्तर दिया गया है'
+                story_text: |-
+                    हम एक नया लूप सीखने जा रहे हैं, `{while}` लूप! जब तक कथन सत्य है, हम लूप जारी रखते हैं।
+                    तो लूप में मान बदलना न भूलें।
+
+                    उदाहरण कोड में, हम सही उत्तर दिए जाने तक जारी रखते हैं।
+                    यदि सही उत्तर कभी नहीं दिया जाता है, तो लूप कभी समाप्त नहीं होता है!
+                example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+            16:
+                start_code: |
+                    फल = ['सेब', 'केला', 'चेरी']
+                    {print} फल
+                story_text: |-
+                    हम सूचियों के चारों ओर वर्ग कोष्ठक के साथ, पायथन तरीके से सूचियाँ बनाने जा रहे हैं! हम प्रत्येक आइटम के आसपास उद्धरण चिह्न भी रखते हैं जैसे हमने पिछले स्तरों में सीखा है।
+                    सूचियों में किसी स्थान की तरफ इशारा करने के लिए आप वर्गाकार कोष्ठकों का भी उपयोग कर सकते हैं।
+
+                    ```
+                    दोस्त = ['अहमद', 'बेन', 'केडेन']
+                    शुभ_संख्याएं = [15, 18, 6]
+                    {for} म {in} {range} 1 {to} 3
+                        {print} दोस्त[म] ' की शुभ संख्या'
+                        {print} 'है' शुभ_संख्याएं[म]
+                    ```
+                example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+            17:
+                start_code: |-
+                    {for} इ {in} {range} 1 {to} 10:
+                        {print} इ
+                    {print} 'तैयार या नहीं, यहाँ मैं आया!'
+                story_text: |-
+                    अब हम इंडेंटेशन के साथ थोड़ा बदलने जा रहे हैं। हर बार जब हमें इंडेंटेशन की आवश्यकता होती है, तो हमें इंडेंटेशन से पहले लाइन पर `:` की आवश्यकता होती है।
+
+                    इस स्तर में आप एक नई कमांड का भी उपयोग कर सकते हैं: `{elif}`। {elif}` {else} {if} के लिए आशुलिपि है और जब आप 3 (या अधिक!) विकल्प बनाना चाहते हैं तो आपको इसकी आवश्यकता होती है।
+                    इसकी जांच - पड़ताल करें!
+                    ```
+                    कीमतें = ['1 मिलियन डॉलर', 'एक सेब पाई', 'कुछ नहीं']
+                    आपकी_कीमत = कीमतें[random]
+                    {print} 'आप जीत गए' आपकी_कीमत
+                    {if} आपकी_कीमत == '1 मिलियन डॉलर' :
+                        {print} 'हाँ! तुम धनवान हो!'
+                    {elif} आपकी_कीमत == 'एक सेब पाई' :
+                        {print} 'सुंदर, एक सेब पाई!'
+                    {else}:
+                        {print} 'अगली बार बेहतर किस्मत..'
+                    ```
+            18:
+                start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
+                story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
     story:
         levels:
             4:
@@ -2073,63 +2458,6 @@ adventures:
         description: What's Next?
         default_save_name: next
         image: ' '
-    end:
-        levels:
-            5:
-                story_text: |
-                    ## End
-                    This is the end of the level! Take the quiz now to test your knowledge.
-                start_code: '# place your code here'
-            6:
-                story_text: |
-                    ## End
-                    This is the end of the level! Take the quiz now to test your knowledge.
-                start_code: '# place your code here'
-            7:
-                story_text: |
-                    ## End
-                    This is the end of the level! Take the quiz now to test your knowledge.
-                start_code: '# place your code here'
-            8:
-                story_text: |
-                    ## End
-                    This is the end of the level! Take the quiz now to test your knowledge.
-                start_code: '# place your code here'
-            9:
-                story_text: |
-                    ## End
-                    This is the end of the level! Take the quiz now to test your knowledge.
-                start_code: '# place your code here'
-            1:
-                story_text: |
-                    ## End
-                    This is the end of the level! Take the quiz now to test your knowledge.
-                start_code: '# place your code here'
-            2:
-                story_text: |
-                    ## End
-                    This is the end of the level! Take the quiz now to test your knowledge.
-                start_code: '# place your code here'
-            3:
-                story_text: |
-                    ## End
-                    This is the end of the level! Take the quiz now to test your knowledge.
-                start_code: '# place your code here'
-            4:
-                story_text: |
-                    ## End
-                    This is the end of the level! Take the quiz now to test your knowledge.
-                start_code: '# place your code here'
-            10:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            11:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-        name: End
-        description: Test your Hedy knowledge
-        image: ' '
-        default_save_name: ' '
     parrot:
         name: तोता
         description: अपना खुद का ऑनलाइन पालतू तोता बनाएं जो आपकी नकल करेगा!
@@ -2636,35 +2964,60 @@ adventures:
                 example_code: "## Example Hedy code\n```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
                 start_code: '## place your code here'
         name: SuperSpy
-    money:
-        default_save_name: money
+    end:
         levels:
             5:
-                start_code: "{print} 'Welcome to The Price is right!'"
-                story_text: "## The price is right\nIn this level you can create your own virtual version of the televisionshow 'The price is right'.\nIn this show the contestants have to guess the price of a product correctly to win it.\n\n## Challenge\nThe example code only gives away one price. Can you add more prices to win?\n"
-                example_code: "## Example Hedy code\n```\n{print} 'Welcome to The Price Is Right!'\n{print} 'Im your host, Hedy.'\n{print} 'Our first price tonight is a skateboard!'\nprice {is} 30\n{print} 'Your options are 5 euros, 15 euros or 30 euros'\nguess {is} {ask} 'How much do you guess it costs?'\n{if} guess {is} price {print} 'Great job! You won the skateboard!'\n{else} {print} 'No! You lose! The actual price was... ' price\n```\n"
+                story_text: |
+                    ## End
+                    This is the end of the level! Take the quiz now to test your knowledge.
+                start_code: '# place your code here'
             6:
-                start_code: "{print} 'The digital piggy bank'"
-                story_text: "## Piggybank\nIn this level you can create your own digital Piggy Bank.\nYou can see how much money you've saved and vcalculate how long it will take you to save up for anything you'd like to buy.\nTry it out!\n\n## Challenge\nCan you think of extra features you could add to your digital piggy bank?\n"
-                example_code: "## Example Hedy code\n```\n{print} 'The digital piggy bank'\nwish = {ask} 'What would you like to buy?'\nprice = {ask} 'How much does that cost?'\nsaved = {ask} 'How much money have you saved already?'\nallowance = {ask} 'How much pocket money do you get per week?'\nto_save = price - saved\nweeks = to_save / allowance\n{print} 'You can buy a ' wish ' in ' weeks ' weeks.'\n\n```\n"
+                story_text: |
+                    ## End
+                    This is the end of the level! Take the quiz now to test your knowledge.
+                start_code: '# place your code here'
+            7:
+                story_text: |
+                    ## End
+                    This is the end of the level! Take the quiz now to test your knowledge.
+                start_code: '# place your code here'
+            8:
+                story_text: |
+                    ## End
+                    This is the end of the level! Take the quiz now to test your knowledge.
+                start_code: '# place your code here'
+            9:
+                story_text: |
+                    ## End
+                    This is the end of the level! Take the quiz now to test your knowledge.
+                start_code: '# place your code here'
             1:
-                story_text: "## Sing a song about money\nUse the `{print}` command to print line in the output screen.\n\nDo you want to hear Hedy sing it? Use the read-aloud function beneath the 'run code' button.\n\nPlay the song and listen to 'Mo money, mo problems' by the notorious B.I.G.\n\n## Challenge\nDo you know any other songs about money that you can let Hedy sing?\n\nThis adventure was co-created with Aflatoun.\n"
-                example_code: "## Example Hedy code\n```\n{print} I don't know what they want from me\n{print} It's like the more money we come across\n{print} The more problems we see\n{print} I don't know what they want from me\n{print} It's like the more money we come across\n{print} The more problems we see\n```\n"
-                start_code: '{print} Mo money Mo problems'
+                story_text: |
+                    ## End
+                    This is the end of the level! Take the quiz now to test your knowledge.
+                start_code: '# place your code here'
             2:
-                story_text: "## Make your own virtual shop\nIn this adventure you can create your own virtual shop. The example codes gives an easy example, but we bet that you could make your shop more interesting.\n\n## Challenge\nTurn the example code into your own virtual shop. What kind of shop would you like to own?\nHow much money will you charge your costumers? What can you do to make your shop more appealing?\n"
-                example_code: "## Example Hedy code\n```\nprice {is} 3\n{print} Welcome to my shop\nproduct {is} {ask} What would you like to buy?\n{print} You would like to buy a product\n{print} That will be price euro please\n{print} Thank you! Bye!\n```\n"
-                start_code: '{print} Welcome to my shop'
+                story_text: |
+                    ## End
+                    This is the end of the level! Take the quiz now to test your knowledge.
+                start_code: '# place your code here'
             3:
-                story_text: "## Make smart choices\nIn this level you are faced with some financial dilemmas. You can make a list of products and a list of prices.\nHedy will randomly pick a product and a price and ask you if you think that's a smart choice to buy!\n\n## Challenge\nMake your own list of products and prices and play the game with your friends. Would they buy the same products as you?\nWho is the smartest spender?\n"
-                example_code: "## Example Hedy code\n```\nprice {is} 1 euro, 10 euros, 100 euros, 1 million euros\nproduct {is} skateboard, banana, race car, dog\n\nprint Would you buy...\n{print} a product {at} {random} for price {at} {random}\nanswer {is} {ask} Would you buy it?\n```\n"
-                start_code: '{print} Make smart choices!'
+                story_text: |
+                    ## End
+                    This is the end of the level! Take the quiz now to test your knowledge.
+                start_code: '# place your code here'
             4:
-                story_text: "## Make your own virtual restaurant\nAfter opening your own shop in level 2, it's time to open a restaurant! Check out the example.\nPlease note that from this level on the print and ask command require quotation marks.\n\n## Challenge\nMake the restaurant your own. Maybe you'd pefer to have a sandwich shop, or a fastfood drive-through or a icecream parlor?\nYou can make anything you want with our example as inspiration!\n"
-                example_code: "## Example Hedy code\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\nprice {is} 20 euros\n{print} 'That will be ' price\npayment {is} {ask} 'Would you like to pay cash or card?'\n{print} 'No problem!'\n{print} 'Your ' food ' and ' drinks ' are on their way!'\n```\n"
-                start_code: "{print} 'Welcome to Hedys restaurant!'"
-        name: Money Week
-        description: Aflatoun
-        image: piggybank.png
-title: हैडी एडवेंचर्स!
-subtitle: आप अपने जीवन को आसान बनाने के लिए कहानी, खेल या कुछ बनाकर हैडी सीख सकते हैं
+                story_text: |
+                    ## End
+                    This is the end of the level! Take the quiz now to test your knowledge.
+                start_code: '# place your code here'
+            10:
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
+            11:
+                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
+                start_code: '# place your code here'
+        name: End
+        description: Test your Hedy knowledge
+        image: ' '
+        default_save_name: ' '
