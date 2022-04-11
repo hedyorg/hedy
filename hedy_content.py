@@ -137,6 +137,13 @@ class Adventures:
             adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
         return adventures_dict
 
+    # When filtering on the /explore or /programs page we only want the actual names
+    def get_adventure_names(self):
+        adventures_dict = {}
+        for adventure in self.data["en"].items():
+            adventures_dict[adventure[0]] = adventure[1]['name']
+        return adventures_dict
+
     def get_adventures(self, keyword_lang="en"):
         if self.data.get(keyword_lang):
             return self.data.get(keyword_lang)

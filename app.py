@@ -595,11 +595,7 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-    adventures = ADVENTURES[g.lang].adventures_file['adventures']
-    if hedy_content.Adventures(session['lang']).has_adventures():
-        adventures_names = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
-    else:
-        adventures_names = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     # We request our own page -> also get the public_profile settings
     public_profile = None
@@ -626,8 +622,8 @@ def programs_page(user):
              'public': item.get('public')})
 
     return render_template('programs.html', programs=programs, page_title=gettext('title_programs'),
-                           current_page='programs', from_user=from_user, adventures=adventures,
-                           filtered_level=level, filtered_adventure=adventure, adventure_names=adventures_names,
+                           current_page='programs', from_user=from_user, filtered_level=level,
+                           filtered_adventure=adventure, adventure_names=adventures_names,
                            public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
 
 
