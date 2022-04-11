@@ -130,8 +130,7 @@ file.close()
 
 
 
-
-def run(test):
+for test in dataTests:
 
     # get rules for the level
     Rules = [item for item in dataRegex if item['name']==test['level']]
@@ -154,9 +153,5 @@ def run(test):
         print("At           :"," "* indError + "^")
         exit()
 
-
-
-for test in dataTests:
-    run(test)
 
 print("Done !")
