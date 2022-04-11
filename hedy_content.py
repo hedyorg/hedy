@@ -129,7 +129,7 @@ class Adventures:
             keyword_data[short_name] = parsed_adventure
         return keyword_data
 
-
+    # Todo TB -> We can also cache this; why not?
     # When customizing classes we only want to retrieve the name, (id) and level of each adventure
     def get_adventure_keyname_name_levels(self):
         adventures_dict = {}
@@ -137,6 +137,7 @@ class Adventures:
             adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
         return adventures_dict
 
+    # Todo TB -> We can also cache this; why not?
     # When filtering on the /explore or /programs page we only want the actual names
     def get_adventure_names(self):
         adventures_dict = {}

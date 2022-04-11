@@ -1022,17 +1022,15 @@ def explore():
             'public_user': True if public_profile else None,
             'code': "\n".join(code.split("\n")[:4])
         })
-    if hedy_content.Adventures(session['lang']).has_adventures():
-        adventures = hedy_content.Adventures(session['lang']).get_adventure_keyname_name_levels()
-    else:
-        adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     return render_template('explore.html', programs=filtered_programs,
                            filtered_level=level,
                            achievement=achievement,
                            filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
-                           adventures=adventures,
+                           adventures_names=adventures_names,
                            page_title=gettext('title_explore'),
                            current_page='explore')
 
