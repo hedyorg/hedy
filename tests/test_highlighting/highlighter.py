@@ -42,6 +42,7 @@ def simulateRulesWithoutToken(Rules,Code):
             else: TokCode = TokenCode[reg['token'][0]]
 
             regComp = re.compile(reg["regex"], re.MULTILINE)
+            # print(regComp)
             for match in regComp.finditer(Code):
                 start = match.start()
                 length = match.end() -start
@@ -49,13 +50,13 @@ def simulateRulesWithoutToken(Rules,Code):
 
         else: # case with groups
             regComp = re.compile(reg["regex"], re.MULTILINE)
+
             for match in regComp.finditer(Code):
                 pos = match.start()
                 for i,submatch in enumerate(match.groups()):
                     tok = reg['token'][i%len(reg['token'])]
                     Output = Output[:pos] + TokenCode[tok] * len(submatch) + Output[pos + len(submatch):]
                     pos += len(submatch)
-
     return Output
 
 
@@ -98,11 +99,11 @@ def run(test):
         exit()
     else:
         pass
-        print("WORK :")
-        print("In this Code :",Code.replace("\n","\\n"))
-        print("We want      :",Expected.replace("\n","\\n"))
-        print("We have      :",Result.replace("\n","\\n"))
-        print("")
+        # print("WORK :")
+        # print("In this Code :",Code.replace("\n","\\n"))
+        # print("We want      :",Expected.replace("\n","\\n"))
+        # print("We have      :",Result.replace("\n","\\n"))
+        # print("")
 
 
 
