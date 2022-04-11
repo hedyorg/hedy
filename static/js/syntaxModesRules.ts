@@ -623,11 +623,11 @@ function rule_level2() {
     token: ["text",'keyword','text'],
     next: 'start',
   },{
-    regex: /#.*$/,
+    regex: '#.*$',
     token: 'comment',
     next: 'start',
   },{
-    regex: /\_\\?\_/,
+    regex: '\_\\?\_',
     token: 'invalid',
     next: 'start',
   },{
@@ -679,15 +679,11 @@ function rule_level3() {
     token: ['keyword'],
     next: 'start',
   },{
-    regex: '\,',
-    token: ['keyword'],
-    next: 'start',
-  },{
-    regex: /#.*$/,
+    regex: '#.*$',
     token: 'comment',
     next: 'start',
   },{
-    regex: /\_\\?\_/,
+    regex: '\_\\?\_',
     token: 'invalid',
     next: 'start',
   },{
@@ -713,26 +709,26 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
 
   /* Rule for comments : */
   list_rules.push( {
-    regex: /#.*$/,
+    regex: '#.*$',
     token: 'comment',
     next: 'start',
   } );
 
   /* Rule for quoted string : */
   list_rules.push( {
-    regex: /\"[^\"]*\"/,
+    regex: '\"[^\"]*\"',
     token: 'constant.character',
     next: 'start',
   } );
   list_rules.push( {
-    regex: /\'[^\']*\'/,
+    regex: "\'[^\']*\'",
     token: 'constant.character',
     next: 'start',
   } );
 
   /* Rule for blanks marks : */
   list_rules.push( {
-    regex: /\_\\?\_/,
+    regex: '\_\\?\_',
     token: 'invalid',
     next: 'start',
   });
