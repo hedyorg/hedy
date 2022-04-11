@@ -121,13 +121,10 @@ class Adventures:
 
     def cache_adventure_keywords(self, language):
         keyword_data = {}
-        data = copy.deepcopy(self.file)
-        for short_name, adventure in data.items():
+        for short_name, adventure in self.file.items():
             parsed_adventure = copy.deepcopy(adventure)
             for level in adventure.get('levels'):
                 for k, v in adventure.get('levels').get(level).items():
-                    print(k)
-                    print(v)
                     parsed_adventure['levels'][k] = v.format(**KEYWORDS.get(language))
             keyword_data[short_name] = adventure
         return keyword_data
