@@ -637,7 +637,7 @@ def programs_page(user):
     for item in result:
         date = get_user_formatted_age(now, item['date'])
         programs.append(
-            {'id': item['id'], 'code': item['code'], 'date': date, 'level': item['level'], 'name': item['name'],
+            {'id': item['id'], 'code': "\n".join(item['code'].split("\n")[:4]), 'date': date, 'level': item['level'], 'name': item['name'],
              'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'),
              'public': item.get('public')})
 
