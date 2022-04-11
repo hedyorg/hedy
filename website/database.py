@@ -9,7 +9,7 @@ storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_databa
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['id', 'username']])
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public']])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'level', 'public']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey('creator')])
 INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
@@ -87,6 +87,13 @@ class Database:
             answers = quizAnswers.get("q" + str(question_number))
             array_quiz_answers.append(answers)
         return array_quiz_answers
+
+    def level_programs_for_user(self, username, level):
+        """List level programs for the given user, newest first.
+
+        Returns: [{ code, name, program, level, adventure_name, date }]
+        """
+        return PROGRAMS.get_many({'username': username, 'level': level}, reverse=True)
 
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
