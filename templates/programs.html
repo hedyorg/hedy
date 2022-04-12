@@ -58,8 +58,8 @@
                 </div>
             {% endif %}
         </div>
-        <div class="w-3/4 border-solid border-2 rounded w-1/2 p-2 mb-4">
-          <pre>{{program.code | truncate (50) }}</pre>
+        <div class="w-3/4 turn-pre-into-ace mb-4">
+          <pre level="{{ program.level }}" class="no-copy-button">{{program.code }}</pre>
         </div>
         <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row {% if not program.submitted %} hidden {% endif %}">
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
@@ -91,6 +91,15 @@
 </div>
 {% endblock %}
 {% block scripts %}
+  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="/client_messages.js" type="text/javascript" crossorigin="anonymous"></script>
+  <script>
+      window.State = {};
+      window.State.lang = "{{ g.lang }}";
+      window.State.level = "{{ level }}";
+      window.State.keyword_language = "{{ g.keyword_lang }}";
+  </script>
   <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script>window.State = {lang: "{{ g.lang }}", level: "{{ level }}"}</script>
 {% endblock %}
