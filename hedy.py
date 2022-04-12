@@ -953,7 +953,9 @@ class IsValid(Filter):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
-
+    def illegal_condition(self, meta, args):
+        error = InvalidInfo('invalid condition', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
 
     #other rules are inherited from Filter
 
@@ -2089,7 +2091,7 @@ def parse_input(input_string, level, lang):
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
-    except lark.UnexpectedEOF:
+    except lark.UnexpectedEOF as e:
         lines = input_string.split('\n')
         last_line = len(lines)
         raise exceptions.UnquotedEqualityCheck(line_number=last_line)
@@ -2139,6 +2141,8 @@ def is_program_valid(program_root, input_string, level, lang):
                     # The fixed code contains another error. Only report the original error for now.
                     pass
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
+        elif invalid_info.error_type == 'invalid condition':
+            raise exceptions.UnquotedEqualityCheck(line_number=line)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)

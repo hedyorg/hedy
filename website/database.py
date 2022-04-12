@@ -88,6 +88,14 @@ class Database:
             array_quiz_answers.append(answers)
         return array_quiz_answers
 
+    def level_programs_for_user(self, username, level):
+        """List level programs for the given user, newest first.
+
+        Returns: [{ code, name, program, level, adventure_name, date }]
+        """
+        programs = PROGRAMS.get_many({'username': username}, reverse=True)
+        return [x for x in programs if x.get('level') == int(level)]
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 
