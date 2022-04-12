@@ -2,7 +2,7 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: ""
+        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -146,7 +146,7 @@ adventures:
                 example_code_4: "```\nName = {ask} 'Wie heißt du?'\n{if} Name = 'Hedy der Roboter'\n    {print} 'Hallo!'\n```\n"
                 story_text_5: "**Zahlen brauchen keine Anführungszeichen**\nFür Zahlen verwendest du keine Anführungszeichen mit dem `=`:\n"
                 example_code_5: "```\nPunkte = 25\n{print} 'Du hast ' score\n```\n"
-                story_text_6: "**Mathe in Worten** In diesem Level ist es auch erlaubt das + Zeichen mit Texten zu benutzen. Zum Beispiel:\n"
+                story_text_6: "**Mathe in Worten** \nIn diesem Level ist es auch erlaubt das + Zeichen mit Texten zu benutzen. Zum Beispiel:\n"
                 example_code_6: "```\na = 'Hallo '\nb = 'Welt!'\nprint a + b\n```\n"
             13:
                 start_code: |-
@@ -233,6 +233,7 @@ adventures:
                         print i
                     print 'Bereit oder nicht, hier komme ich!'
                 story_text: |
+                    ## Elif
                     Jetzt werden wir ein wenig an der Einrückung ändern. Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
 
                     In diesem Level kannst du außerdem einen neuen Befehl benutzen: `{elif}`. `{elif}` ist eine Abkürzung für {else} {if} und du brauchst ihn wenn du drei (oder Mehr!) Optionen machen willst.
