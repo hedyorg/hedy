@@ -1,4 +1,4 @@
-_Provide a one line summary of your changes in the **Title of the PR**
+First, provide a one line summary of your changes in the **Title of the PR**
 
 **Now fill out the remainder of this template by replacing all _italic_ content**
 
