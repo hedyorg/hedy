@@ -771,6 +771,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   outputDiv.append(variableButton);
   outputDiv.append(variables);
 
+  var storage = window.localStorage;
+  var debug = storage.getItem("debugLine")
+
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
@@ -831,14 +834,14 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
-      pushAchievement("error_or_empty");
-      error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+      if(debug == null){
+        pushAchievement("error_or_empty");
+        error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+      }
       return;
     }
     window.State.programsInExecution--;
     if (!hasWarnings) {
-      var storage = window.localStorage;
-      var debug = storage.getItem("debugLine")
       if (debug == null) {
         showSuccesMessage();
       }
