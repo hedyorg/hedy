@@ -118,13 +118,7 @@ class NoSuchCommand:
 class Adventures:
     def __init__(self, language):
         self.language = language
-        self.file = YamlFile.for_file(f'content/adventures/{self.language}.yaml').get('adventures')
-        # Sort the adventure to a fixed structure to make sure they are structured the same for each language
-        sorted_adventures = {}
-        for adventure_index in ADVENTURE_ORDER:
-            if self.file.get(adventure_index, None):
-                sorted_adventures[adventure_index] = (self.file.get(adventure_index))
-        self.file = sorted_adventures
+        self.file = {}
         self.data = {}
 
         # For some reason the is_debug_mode() function is not (yet) ready when we call this code
@@ -133,12 +127,19 @@ class Adventures:
         self.debug_mode = not os.getenv('NO_DEBUG_MODE')
 
         if not self.debug_mode:
+            self.file = YamlFile.for_file(f'content/adventures/{self.language}.yaml').get('adventures')
             # We always create one with english keywords
             self.data["en"] = self.cache_adventure_keywords("en")
             if language in ALL_KEYWORD_LANGUAGES.keys():
                 self.data[language] = self.cache_adventure_keywords(language)
 
     def cache_adventure_keywords(self, language):
+        # Sort the adventure to a fixed structure to make sure they are structured the same for each language
+        sorted_adventures = {}
+        for adventure_index in ADVENTURE_ORDER:
+            if self.file.get(adventure_index, None):
+                sorted_adventures[adventure_index] = (self.file.get(adventure_index))
+        self.file = sorted_adventures
         keyword_data = {}
         for short_name, adventure in self.file.items():
             parsed_adventure = copy.deepcopy(adventure)
@@ -152,6 +153,8 @@ class Adventures:
     # When customizing classes we only want to retrieve the name, (id) and level of each adventure
     def get_adventure_keyname_name_levels(self):
         if self.debug_mode and not self.data.get("en", None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/adventures/{self.language}.yaml').get('adventures')
             self.data["en"] = self.cache_adventure_keywords("en")
         adventures_dict = {}
         for adventure in self.data["en"].items():
@@ -162,6 +165,8 @@ class Adventures:
     # When filtering on the /explore or /programs page we only want the actual names
     def get_adventure_names(self):
         if self.debug_mode and not self.data.get("en", None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/adventures/{self.language}.yaml').get('adventures')
             self.data["en"] = self.cache_adventure_keywords("en")
         adventures_dict = {}
         for adventure in self.data["en"].items():
@@ -170,11 +175,15 @@ class Adventures:
 
     def get_adventures(self, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/adventures/{self.language}.yaml').get('adventures')
             self.data[keyword_lang] = self.cache_adventure_keywords(keyword_lang)
         return self.data.get(keyword_lang)
 
     def has_adventures(self):
         if self.debug_mode and not self.data.get("en", None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/adventures/{self.language}.yaml').get('adventures')
             self.data["en"] = self.cache_adventure_keywords("en")
         return True if self.data.get("en") else False
 
