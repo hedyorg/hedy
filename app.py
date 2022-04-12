@@ -636,7 +636,6 @@ def programs_page(user):
     now = timems()
     for item in result:
         date = get_user_formatted_age(now, item['date'])
-        # We split the code on the newlines, take the last 4 and merge these with newlines again
         # This way we only keep the first 4 lines to show as preview to the user
         code = "\n".join(item['code'].split("\n")[:4])
         programs.append(
