@@ -1,8 +1,8 @@
 adventures:
     default:
         name: "Introductie"
-        description: "Level uitleg"
-        image: ""
+        description: "Leveluitleg"
+        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -76,12 +76,10 @@ adventures:
                     {print} dieren {at} {random}
                     ```
 
-                story_text_2: |
-                    Je kunt in dit level ook dingen aan een lijstje toevoegen met het commando `{add}`.
-                    Daarnaast kun je dingen van het lijstje verwijderen. Dat doe je met `{remove}`.
+                story_text_2: |-
+                    Je kunt in dit level ook dingen aan een lijstje toevoegen met het commando `{add}`. Daarnaast kun je dingen van het lijstje verwijderen. Dat doe je met `{remove}`.
 
-                example_code_2: |4
-
+                example_code_2: |
                     ## Voorbeeld Hedy Code
                     ```
                     taarten {is} aardbei, chocolade
@@ -119,10 +117,9 @@ adventures:
                     {if} naam {is} Hedy {print} 'leuk' {else} {print} 'minder leuk!'
                 story_text: |
                     ## Als... Anders...
-                    `{ask}` en `{print}` werken nog zoals in level 4.
-
                     In level 5 is er iets nieuws, de `{if}`! {if} is Engels voor als. Met de `{if}` kun je een keuze maken tussen twee verschillende opties.
                     Deze code print leuk als je Hedy als naam invoert, en minder leuk als je iets anders invoert.
+                    `{ask}` en `{print}` werken nog zoals in level 4.
                 example_code: |
                     ## Voorbeeld Hedy Code
                     ```
@@ -157,7 +154,7 @@ adventures:
                     De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
 
                     De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
-                    Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als "5 keer 5", dan onthoud je het het makkelijkst.
+                    Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als "5 keer 5", dan onthoud je dat het makkelijkst.
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -176,8 +173,7 @@ adventures:
                 start_code: "{repeat} 3 {times} {print} 'Hedy is leuk!'"
                 story_text: |
                     ## Level 7! Level 7!
-                    In level 7 kun je gebruik maken van het `{repeat}` commando.
-                    Met `{repeat}` kun je codes een aantal keer herhalen.
+                    In level 7 kun je gebruik maken van het `{repeat}` commando. Met `{repeat}` kun je codes een aantal keer herhalen.
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -243,10 +239,11 @@ adventures:
                 start_code: |-
                     {for} i {in} {range} 1 {to} 10
                         {print} i
-                    {print} 'Wie niet weg is is gezien'
+                    {print} 'Wie niet weg is, is gezien'
                 story_text: |
                     ## Lussen!
-                    We gaan nu een extra vorm van de `{for}` toevoegen! Je mag ook `{for} i {in} {range} 1 {to} 5` typen in plaats van `{repeat} 5 {times}`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken! Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)
+                    We gaan nu een extra vorm van de `{for}` toevoegen! Je mag ook `{for} i {in} {range} 1 {to} 5` typen in plaats van `{repeat} 5 {times}`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken! 
+                    Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -260,8 +257,7 @@ adventures:
                 story_text: |
                     ## Getallen en teksten
                     **Kommagetallen**
-                    Tot nu toe mocht je nog geen kommagetallen gebruiken zoals bijv anderhalf, maar nu wel!
-                    Let wel heel goed op... kommagetallen gaan op de computer met een punt en niet met een komma.
+                    Tot nu toe mocht je nog geen kommagetallen gebruiken zoals bijv anderhalf, maar nu wel! Let wel heel goed op... kommagetallen gaan op de computer met een punt en niet met een komma.
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -271,8 +267,6 @@ adventures:
                 story_text_2: |
                     **Tekst moet altijd met aanhalingstekens**
                     Nu we verder zijn met programmeren moet je ook weten dat tekst altijd tussen aanhalingstekens hoort. Ook in de `=`.
-                    Hierdoor kun je meerdere woorden opslaan in je variabele.
-                    De variabele zelf hoeft uiteraard geen aanhalingstekens. We bedoelen immers niet het woordje 'naam'.
                 example_code_2: |
                     ```
                     naam = 'Hedy de Robot'
