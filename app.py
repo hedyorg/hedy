@@ -636,10 +636,19 @@ def programs_page(user):
     now = timems()
     for item in result:
         date = get_user_formatted_age(now, item['date'])
+        # This way we only keep the first 4 lines to show as preview to the user
+        code = "\n".join(item['code'].split("\n")[:4])
         programs.append(
-            {'id': item['id'], 'code': item['code'], 'date': date, 'level': item['level'], 'name': item['name'],
-             'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'),
-             'public': item.get('public')})
+            {'id': item['id'],
+             'code': code,
+             'date': date,
+             'level': item['level'],
+             'name': item['name'],
+             'adventure_name': item.get('adventure_name'),
+             'submitted': item.get('submitted'),
+             'public': item.get('public')
+             }
+        )
 
     return render_template('programs.html', programs=programs, page_title=gettext('title_programs'),
                            current_page='programs', from_user=from_user, adventures=adventures,
