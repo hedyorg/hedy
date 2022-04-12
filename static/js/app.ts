@@ -240,7 +240,6 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
   const variableButton = $(outputDiv).find('#variable_button');
   const variables = $(outputDiv).find('#variables');
   outputDiv.empty();
-  $('#turtlecanvas').empty();
 
   outputDiv.addClass("overflow-auto");
   outputDiv.append(variableButton);
