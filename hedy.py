@@ -1433,9 +1433,9 @@ else:
         return ' and '.join(args)
 
     def condition_spaces(self, args):
-        result = args[0] + " == '" + ' '.join(args[1:]) + "'"
-        return result
-
+        arg0 = self.process_variable(args[0])
+        arg1 = self.process_variable(' '.join(args[1:]))
+        return f"{arg0} == {arg1}"
 
     def equality_check(self, args):
         arg0 = self.process_variable(args[0])

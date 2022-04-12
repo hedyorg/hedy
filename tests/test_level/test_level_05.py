@@ -438,6 +438,36 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_if_equality_text_with_spaces_and_single_quotes_linebreak_print_else_print(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James 'Bond'
+    print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James \\'Bond\\'':
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_equality_text_with_spaces_and_double_quotes_linebreak_print_else_print(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James "Bond"
+    print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James "Bond"':
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
   def test_if_equality_print_else_print_bengali(self):
     code = textwrap.dedent("""\
     নাম is ask 'আপনার নাম কি?'
