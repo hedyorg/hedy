@@ -995,9 +995,13 @@ def main_page(page):
             teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(current_user()['username'], True)
             adventures = []
             for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
-                adventures.append({'id': adventure.get('id'), 'name': adventure.get('name'),
-                                   'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
-                                   'level': adventure.get('level')})
+                adventures.append(
+                    {'id': adventure.get('id'),
+                     'name': adventure.get('name'),
+                     'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+                     'level': adventure.get('level')
+                     }
+                )
 
             return render_template('for-teachers.html', current_page='my-profile',
                                    page_title=gettext('title_for-teacher'),
