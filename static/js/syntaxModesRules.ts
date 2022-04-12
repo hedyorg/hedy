@@ -591,8 +591,8 @@ function rule_level1() {
     token: 'invalid',
     next: 'start',
   },{
-    regex: '(^| )(_)(?=( |$))',
-    token: ['text','invalid','text'],
+    regex: '(^| )(_)(?= |$)',
+    token: ['text','invalid'],
     next: 'start',
   } ];
 }
@@ -631,8 +631,8 @@ function rule_level2() {
     token: 'invalid',
     next: 'start',
   },{
-    regex: '(^| )(_)(?=( |$))',
-    token: ['text','invalid','text'],
+    regex: '(^| )(_)(?= |$)',
+    token: ['text','invalid'],
     next: 'start',
   } ];
 }
@@ -687,8 +687,8 @@ function rule_level3() {
     token: 'invalid',
     next: 'start',
   },{
-    regex: '(^| )(_)(?=( |$))',
-    token: ['text','invalid','text'],
+    regex: '(^| )(_)(?= |$)',
+    token: ['text','invalid'],
     next: 'start',
   } ];
 }
@@ -733,8 +733,8 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
     next: 'start',
   });
   list_rules.push( {
-    regex: '(^| )(_)(?=( |$))',
-    token: ['text','invalid','text'],
+    regex: '(^| )(_)(?= |$)',
+    token: ['text','invalid'],
     next: 'start',
   } );
 
