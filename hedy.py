@@ -953,7 +953,7 @@ class IsValid(Filter):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
-    def illegal_condition(self, meta, args):
+    def error_condition(self, meta, args):
         error = InvalidInfo('invalid condition', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
