@@ -75,9 +75,10 @@ def fill_all_languages(babel):
 
 
 class Commands:
-    # Want to parse the keywords only once so they can be cached -> perform this action on server start
+    # Want to parse the keywords only once, they can be cached -> perform this action on server start
     def __init__(self, language):
         self.language = language
+        # We can keep these cached, even in debug_mode: files are small and don't influence start-up time much
         self.file = YamlFile.for_file(f'content/commands/{self.language}.yaml')
         self.data = {}
 
