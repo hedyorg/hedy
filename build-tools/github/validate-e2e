@@ -20,7 +20,7 @@ endpoint=http://localhost:$PORT
 # We need to wait a bit for the server to come up. curl for a max time
 echo "Waiting for server to start..." >&2
 up=false
-for i in $(seq 0 3000); do
+for i in $(seq 0 1000); do
     if curl -sSf "$endpoint" > /dev/null 2>&1; then
         up=true
 		break
