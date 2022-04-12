@@ -3,6 +3,7 @@ import os
 from babel import Locale
 from flask import g
 
+from utils import is_debug_mode
 from website.yaml_file import YamlFile
 import iso3166
 
@@ -78,10 +79,18 @@ class Commands:
     def __init__(self, language):
         self.language = language
         self.file = YamlFile.for_file(f'content/commands/{self.language}.yaml')
-        # We always create one with english keywords
-        self.data = {"en": self.cache_keyword_parsing("en")}
-        if language in ALL_KEYWORD_LANGUAGES.keys():
-            self.data[language] = self.cache_keyword_parsing(language)
+        self.data = {}
+
+        # For some reason the is_debug_mode() function is not (yet) ready when we call this code
+        # So we call the NO_DEBUG_MODE directly from the environment
+        # Todo TB -> Fix that the is_debug_mode() function is ready before server start
+        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+
+        if not self.debug_mode:
+            # We always create one with english keywords
+            self.data["en"] = self.cache_keyword_parsing("en")
+            if language in ALL_KEYWORD_LANGUAGES.keys():
+                self.data[language] = self.cache_keyword_parsing(language)
 
     def cache_keyword_parsing(self, language):
         keyword_data = {}
@@ -93,18 +102,19 @@ class Commands:
             keyword_data[level] = commands
         return keyword_data
 
+
     def get_commands_for_level(self, level, keyword_lang="en"):
-        if self.data.get(keyword_lang):
-            return self.data.get(keyword_lang).get(int(level), None)
-        else:
-            return self.data.get("en").get(int(level), None)
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            self.data[keyword_lang] = self.cache_keyword_parsing(keyword_lang)
+        return self.data.get(keyword_lang, {}).get(int(level), None)
 
 
 class NoSuchCommand:
     def get_commands_for_level(self, level):
         return {}
 
-
+# Parsing all these adventures on server start takes quite some time
+# Don't do this when on debug mode!
 class Adventures:
     def __init__(self, language):
         self.language = language
@@ -115,11 +125,18 @@ class Adventures:
             if self.file.get(adventure_index, None):
                 sorted_adventures[adventure_index] = (self.file.get(adventure_index))
         self.file = sorted_adventures
+        self.data = {}
 
-        # We always create one with english keywords
-        self.data = {"en": self.cache_adventure_keywords("en")}
-        if language in ALL_KEYWORD_LANGUAGES.keys():
-            self.data[language] = self.cache_adventure_keywords(language)
+        # For some reason the is_debug_mode() function is not (yet) ready when we call this code
+        # So we call the NO_DEBUG_MODE directly from the environment
+        # Todo TB -> Fix that the is_debug_mode() function is ready before server start
+        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+
+        if not self.debug_mode:
+            # We always create one with english keywords
+            self.data["en"] = self.cache_adventure_keywords("en")
+            if language in ALL_KEYWORD_LANGUAGES.keys():
+                self.data[language] = self.cache_adventure_keywords(language)
 
     def cache_adventure_keywords(self, language):
         keyword_data = {}
@@ -134,6 +151,8 @@ class Adventures:
     # Todo TB -> We can also cache this; why not?
     # When customizing classes we only want to retrieve the name, (id) and level of each adventure
     def get_adventure_keyname_name_levels(self):
+        if self.debug_mode and not self.data.get("en", None):
+            self.data["en"] = self.cache_adventure_keywords("en")
         adventures_dict = {}
         for adventure in self.data["en"].items():
             adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
@@ -142,18 +161,23 @@ class Adventures:
     # Todo TB -> We can also cache this; why not?
     # When filtering on the /explore or /programs page we only want the actual names
     def get_adventure_names(self):
+        if self.debug_mode and not self.data.get("en", None):
+            self.data["en"] = self.cache_adventure_keywords("en")
         adventures_dict = {}
         for adventure in self.data["en"].items():
             adventures_dict[adventure[0]] = adventure[1]['name']
         return adventures_dict
 
     def get_adventures(self, keyword_lang="en"):
-        if self.data.get(keyword_lang):
-            return self.data.get(keyword_lang)
-        return self.data.get("en")
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            self.data[keyword_lang] = self.cache_adventure_keywords(keyword_lang)
+        return self.data.get(keyword_lang)
 
     def has_adventures(self):
+        if self.debug_mode and not self.data.get("en", None):
+            self.data["en"] = self.cache_adventure_keywords("en")
         return True if self.data.get("en") else False
+
 
 
 class NoSuchAdventure:
