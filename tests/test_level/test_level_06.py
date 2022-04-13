@@ -687,6 +687,24 @@ class TestsLevel6(HedyTester):
 
     self.multi_level_tester(max_level=7, code=code, expected=expected)
 
+  def test_consecutive_if_and_if_else_statements(self):
+    code = textwrap.dedent("""\
+    naam is ask 'hoe heet jij?'
+    if naam is Hedy print 'leuk'
+    if naam is Python print 'ook leuk'
+    else print 'minder leuk!'""")
+
+    expected = textwrap.dedent("""\
+    naam = input(f'hoe heet jij?')
+    if str(naam) == str('Hedy'):
+      print(f'leuk')
+    if str(naam) == str('Python'):
+      print(f'ook leuk')
+    else:
+      print(f'minder leuk!')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
   def test_consecutive_if_else_statements(self):
     code = textwrap.dedent("""\
     names is Hedy, Lamar
