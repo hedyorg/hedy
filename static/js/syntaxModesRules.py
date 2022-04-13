@@ -60,8 +60,8 @@ def rule_level1(keywordLang):
         'token': 'invalid',
         'next': 'start',
     },{
-        'regex': '(^| )(_)(?=( |$))',
-        'token': ['text','invalid','text'],
+        'regex': '(^| )(_)(?= |$)',
+        'token': ['text','invalid'],
         'next': 'start',
     } ]
 
@@ -99,8 +99,8 @@ def rule_level2(keywordLang) :
         'token': 'invalid',
         'next': 'start',
     },{
-        'regex': '(^| )(_)(?=( |$))',
-        'token': ['text','invalid','text'],
+        'regex': '(^| )(_)(?= |$)',
+        'token': ['text','invalid'],
         'next': 'start',
     } ]
 
@@ -154,8 +154,8 @@ def rule_level3(keywordLang):
         'token': 'invalid',
         'next': 'start',
     },{
-        'regex': '(^| )(_)(?=( |$))',
-        'token': ['text','invalid','text'],
+        'regex': '(^| )(_)(?= |$)',
+        'token': ['text','invalid'],
         'next': 'start',
     } ]
 
@@ -201,7 +201,7 @@ def ruleALL(keywordLang, keywordsLevel, number = False, with_decimal = False ):
 
     # Rule for blanks marks :
     list_rules.append( { 'regex': '_\\?_', 'token': 'invalid', 'next': 'start' })
-    list_rules.append( { 'regex': '(^| )(_)(?=( |$))', 'token': ['text','invalid','text'], 'next': 'start' } )
+    list_rules.append( { 'regex': '(^| )(_)(?= |$)', 'token': ['text','invalid'], 'next': 'start' } )
 
 
     # Rules for numbers
