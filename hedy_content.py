@@ -14,12 +14,6 @@ COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
-# Load and cache all keyword yamls
-KEYWORDS = {}
-for lang in ALL_KEYWORD_LANGUAGES.keys():
-    # If this, for some reason, fails -> fill with English values
-    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml')
-
 ADVENTURE_ORDER = [
     'default',
     'story',
@@ -63,6 +57,11 @@ for l in sorted(languages):
     if os.path.exists('./grammars/keywords-' + l + '.lark'):
         ALL_KEYWORD_LANGUAGES[l] = l[0:2].upper()  # first two characters
 
+# Load and cache all keyword yamls
+KEYWORDS = {}
+for lang in ALL_KEYWORD_LANGUAGES.keys():
+    # If this, for some reason, fails -> fill with English values
+    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml')
 
 class Commands:
     # Want to parse the keywords only once, they can be cached -> perform this action on server start
@@ -92,7 +91,6 @@ class Commands:
                     command[k] = v.format(**KEYWORDS.get(language))
             keyword_data[level] = commands
         return keyword_data
-
 
     def get_commands_for_level(self, level, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
