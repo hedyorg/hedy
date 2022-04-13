@@ -26,14 +26,12 @@ def keywords_to_dict(to_lang="nl"):
 
 def all_keywords_to_dict():
     """Return a dictionary where each key is a list of the translations of that keyword. Used for testing"""
-    keyword_list = []
+    keyword_dict = {}
     for lang in hedy_content.ALL_KEYWORD_LANGUAGES:
         commands = keywords_to_dict(lang)
-        keyword_list.append(commands)
+        keyword_dict[lang] = commands
 
-    # gets the translation but defaults to the key k (in En) when it is not present
-    all_translations = {k: [d.get(k, k) for d in keyword_list]
-                        for k in keyword_list[0]}
+    all_translations = {k: [v.get(k) for v in keyword_dict.values()] for k in keyword_dict['en']}
     return all_translations
 
 
