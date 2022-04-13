@@ -16,10 +16,8 @@
             </select>
             <select id="user_program_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                 <option disabled selected value="">{{ _('adventure') }}</option>
-                {% for adventure_key, adventure in adventure_names.items() %}
-                    {% for name, levels in adventure.items() %}
-                        <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
-                    {% endfor %}
+                {% for adventure_key, name in adventure_names.items() %}
+                    <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
                 {% endfor %}
             </select>
             <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
@@ -45,7 +43,7 @@
             <tbody>
                 <tr>
                   {% if program.adventure_name %}
-                    <td>{{_('adventure')}}: {{adventures.get (program.adventure_name, {}).name or program.adventure_name}} - {{program.name}}</td>
+                    <td>{{_('adventure')}}: {{adventure_names.get(program.adventure_name)}} - {{program.name}}</td>
                   {% else %}
                     <td>{{program.name}}</td>
                   {% endif %}
