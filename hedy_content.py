@@ -82,7 +82,7 @@ class Commands:
     def get_defaults(self, level):
         return copy.deepcopy(self.levels.get(int(level), {}))
 
-
+# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchCommand:
     def get_commands(self):
         return {}
@@ -116,6 +116,7 @@ class Adventures:
         return self.adventures_file.exists() and self.adventures_file.get('adventures')
 
 
+# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchAdventure:
   def get_adventure(self):
     return {}
@@ -160,7 +161,7 @@ class Quizzes:
                 self.quizzes['levels'].get(level).get(question)[k] = options
         return self.quizzes['levels'].get(level).get(question)
 
-
+# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchQuiz:
-    def get_defaults(self, level):
+    def get_quiz_data_for_level(self, level):
         return {}
