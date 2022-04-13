@@ -25,7 +25,7 @@ def keywords_to_dict(to_lang="nl"):
 
 
 def all_keywords_to_dict():
-    """Return a dictionary where each key is a list of the translations of that keyword. Used for testing"""
+    """Return a dictionary where each value is a list of the translations of that keyword (key). Used for testing"""
     keyword_dict = {}
     for lang in hedy_content.ALL_KEYWORD_LANGUAGES:
         commands = keywords_to_dict(lang)
