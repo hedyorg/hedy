@@ -31,7 +31,7 @@ def all_keywords_to_dict():
         commands = keywords_to_dict(lang)
         keyword_dict[lang] = commands
 
-    all_translations = {k: [v.get(k) for v in keyword_dict.values()] for k in keyword_dict['en']}
+    all_translations = {k: [v.get(k,k) for v in keyword_dict.values()] for k in keyword_dict['en']}
     return all_translations
 
 
