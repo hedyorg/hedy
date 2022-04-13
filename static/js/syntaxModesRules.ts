@@ -1,15 +1,13 @@
-import * as LEVELS_en from './syntax/highlighting-en.json';
+import * as LEVELS_en from './syntax/highlighting_en.json';
+import * as LEVELS_nl from './syntax/highlighting_nl.json';
+import * as LEVELS_es from './syntax/highlighting_es.json';
+import * as LEVELS_ar from './syntax/highlighting_ar.json';
+import * as LEVELS_fr from './syntax/highlighting_fr.json';
+import * as LEVELS_hi from './syntax/highlighting_hi.json';
+import * as LEVELS_tr from './syntax/highlighting_tr.json';
+import * as LEVELS_id from './syntax/highlighting_id.json';
+import * as LEVELS_nb_NO from './syntax/highlighting_nb_NO.json';
 
-/*
-import * as LEVELS_nl from './syntax/highlighting-nl.json';
-import * as LEVELS_es from './syntax/highlighting-es.json';
-import * as LEVELS_ar from './syntax/highlighting-ar.json';
-import * as LEVELS_fr from './syntax/highlighting-fr.json';
-import * as LEVELS_hi from './syntax/highlighting-hi.json';
-import * as LEVELS_tr from './syntax/highlighting-tr.json';
-import * as LEVELS_id from './syntax/highlighting-id.json';
-import * as LEVELS_nb_NO from './syntax/highlighting-nb_NO.json';
-*/
 
 
 // A bunch of code expects a global "State" object. Set it here if not
@@ -20,8 +18,6 @@ window.State = {};
 
 
 var CHOICE;
-CHOICE = LEVELS_en;
-/*
 switch(window.State.keyword_language){
   case 'nl':
     CHOICE = LEVELS_nl;
@@ -51,7 +47,7 @@ switch(window.State.keyword_language){
     CHOICE = LEVELS_en;
     break;
 }
-*/
+
 
 
 // Convert to the right format
