@@ -222,6 +222,10 @@ class Database:
         if level:
             programs = [x for x in programs if x.get('level') == int(level)]
         if adventure:
+            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
+            if adventure == "default":
+                programs = [x for x in programs if x.get('adventure_name') == ""]
+                return programs[-48:]
             programs = [x for x in programs if x.get('adventure_name') == adventure]
         return programs[-48:]
 
