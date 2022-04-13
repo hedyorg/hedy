@@ -7,7 +7,6 @@ from website.auth import current_user
 import utils
 from flask import request, g, session, redirect, url_for
 from flask_helpers import render_template
-from website.yaml_file import YamlFile
 
 MAX_ATTEMPTS = 3
 
@@ -23,11 +22,14 @@ icons = {
 }
 
 
-def routes(app, database, achievements):
+def routes(app, database, achievements, quizzes):
     global DATABASE
     global ACHIEVEMENTS
+    global QUIZZES
+
     DATABASE = database
     ACHIEVEMENTS = achievements
+    QUIZZES = quizzes
 
     @app.route('/quiz/start/<int:level>', methods=['GET'])
     def get_quiz_start(level):
@@ -58,17 +60,20 @@ def routes(app, database, achievements):
         if not session.get('quiz-attempt-id'):
             return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
-            # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level_source)
+        quiz_for_lang = QUIZZES[g.lang]
+        quiz_for_lang.set_keyword_language(g.keyword_lang)
+
+        if question_nr > quiz_for_lang.get_highest_question_level(level_source):
+            return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
+
+        questions = quiz_for_lang.get_quiz_data_for_level(level_source)
+        question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
+
         if not questions:
             return no_quiz_data_error()
 
         question_status = 'start' if attempt == 1 else 'false'
 
-        if question_nr > highest_question(questions):
-            return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
-
-        question = get_question(questions, question_nr)
         question_obj = question_options_for(question)
 
         # Read from session. Don't remove yet: If the user refreshes the
@@ -92,6 +97,8 @@ def routes(app, database, achievements):
                                         answer=None)
 
         quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
+
+        # Todo TB -> We have to do some magic here to format() the keywords into the quiz
 
         return render_template('quiz/quiz_question.html',
                                level_source=level_source,
@@ -122,8 +129,11 @@ def routes(app, database, achievements):
         if not is_quiz_enabled():
             return quiz_disabled_error()
 
-        # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level)
+        quiz_for_lang = QUIZZES[g.lang]
+        quiz_for_lang.set_keyword_language(g.keyword_lang)
+
+        questions = quiz_for_lang.get_quiz_data_for_level(level)
+
         if not questions:
             return no_quiz_data_error()
 
@@ -143,7 +153,7 @@ def routes(app, database, achievements):
                 achievement = json.dumps(achievement)
 
         # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level)
+        questions = QUIZZES[g.lang].get_quiz_data_for_level(level)
         if not questions:
             return no_quiz_data_error()
 
@@ -192,16 +202,14 @@ def routes(app, database, achievements):
             # The value is a character and not a text
             chosen_option = request.form.get("submit-button")
 
-            # Reading the yaml file
-            questions = quiz_data_file_for(g.lang, level_source)
+            quiz_for_lang = QUIZZES[g.lang]
+            quiz_for_lang.set_keyword_language(g.keyword_lang)
+
+            questions = quiz_for_lang.get_quiz_data_for_level(level_source)
+            question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
+
             if not questions:
                 return no_quiz_data_error()
-
-            # Convert question_nr to an integer
-            q_nr = int(question_nr)
-
-            # Convert the corresponding chosen option to the index of an option
-            question = get_question(questions, q_nr)
 
             is_correct = is_correct_answer(question, chosen_option)
 
@@ -252,12 +260,14 @@ def routes(app, database, achievements):
         if not session.get('quiz-attempt-id'):
             return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
-        # Reading the yaml file
-        questions = quiz_data_file_for(g.lang, level_source)
+        quiz_for_lang = QUIZZES[g.lang]
+        quiz_for_lang.set_keyword_language(g.keyword_lang)
+
+        questions = quiz_for_lang.get_quiz_data_for_level(level_source)
+        question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
+
         if not questions:
             return no_quiz_data_error()
-
-        question = get_question(questions, question_nr)
 
         # Read from session and remove the variables from it (this is the
         # feedback page, the previous answers will never apply anymore).
@@ -327,25 +337,6 @@ def no_quiz_data_error():
     # Todo TB -> Somewhere in the near future we should localize these messages
     return utils.error_page(error=404, page_error='No quiz data found for this level', menu=False, iframe=True)
 
-
-def quiz_data_file_for(lang, level):
-    # Todo TB -> Somewhere in the near future we should these files!
-    quiz_file = YamlFile.for_file(f'content/quizzes/{lang}.yaml')
-    if not quiz_file.exists():
-        return None
-    if level not in quiz_file['levels'].keys():
-        return None
-    return quiz_file['levels'][level]
-
-
-def get_question(quiz_data, question_number):
-    """Return the question from the data based on a 1-based question_number.
-
-    Return None if no such question.
-    """
-    return quiz_data.get(question_number)
-
-
 def is_correct_answer(question, letter):
     return question['correct_answer'] == letter
 
@@ -359,11 +350,6 @@ def get_correct_answer(question):
 def get_hint(question, letter):
     i = index_from_letter(letter)
     return question['mp_choice_options'][i].get('feedback')
-
-
-def highest_question(quiz_data):
-    """Return the highest possible question for the given level."""
-    return len(quiz_data)
 
 
 def correct_answer_score(question):

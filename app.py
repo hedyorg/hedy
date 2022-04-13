@@ -57,6 +57,10 @@ ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
 
+QUIZZES = collections.defaultdict(hedy_content.NoSuchQuiz)
+for lang in ALL_LANGUAGES.keys():
+    QUIZZES[lang] = hedy_content.Quizzes(lang)
+
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
@@ -1335,7 +1339,7 @@ ACHIEVEMENTS.routes(app, DATABASE)
 # *** QUIZ BACKEND ***
 
 from website import quiz
-quiz.routes(app, DATABASE, ACHIEVEMENTS)
+quiz.routes(app, DATABASE, ACHIEVEMENTS, QUIZZES)
 
 # *** STATISTICS ***
 
