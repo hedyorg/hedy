@@ -127,5 +127,50 @@ class Adventures:
 
 
 class NoSuchAdventure:
-    def get_adventure(self):
+  def get_adventure(self):
+    return {}
+
+
+class Quizzes:
+    def __init__(self, language):
+        self.language = language
+        self.keyword_lang = "en"
+        self.keywords = YamlFile.for_file(f'content/keywords/{self.keyword_lang}.yaml').to_dict()
+        self.quizzes = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').to_dict()
+        if not self.quizzes:
+            self.quizzes = YamlFile.for_file(f'content/quizzes/en.yaml').to_dict()
+
+    def set_keyword_language(self, language):
+        # Todo TB -> We keep the language at "en" for now to make sure nothing changes for the end user
+        # We have to change the questions in the quizzes to make sure everything makes sense with dynamic keywords
+        return None
+        #if language != self.keyword_lang:
+        #    self.keyword_lang = language
+        #    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
+
+    def get_highest_question_level(self, level):
+        return len(self.quizzes['levels'].get(level))
+
+    def get_quiz_data_for_level(self, level):
+        return self.quizzes['levels'].get(level)
+
+    def get_quiz_data_for_level_question(self, level, question):
+        # We have to parse the keywords before returning
+        for k, v in self.quizzes['levels'].get(level).get(question).items():
+            if isinstance(self.quizzes['levels'].get(level).get(question)[k], str):
+                self.quizzes['levels'].get(level).get(question)[k] = self.quizzes['levels'].get(level).get(question)[k].format(**self.keywords)
+            elif isinstance(self.quizzes['levels'].get(level).get(question)[k], list):
+                options = []
+                for option in self.quizzes['levels'].get(level).get(question)[k]:
+                    temp = {}
+                    for key, value in option.items():
+                        temp[key] = value.format(**self.keywords)
+                        temp[key] = value.format(**self.keywords)
+                    options.append(temp)
+                self.quizzes['levels'].get(level).get(question)[k] = options
+        return self.quizzes['levels'].get(level).get(question)
+
+
+class NoSuchQuiz:
+    def get_defaults(self, level):
         return {}

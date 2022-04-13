@@ -1,4 +1,5 @@
 command:+= repeat -= error_print_no_quotes
+_if_less_command:+= repeat -= error_print_no_quotes
 
 //new in level 6
 repeat: _REPEAT (INT | var_access) _TIMES _SPACE command
