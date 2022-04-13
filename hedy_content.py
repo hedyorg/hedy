@@ -172,5 +172,5 @@ class Quizzes:
 
 
 class NoSuchQuiz:
-    def get_defaults(self, level):
+    def get_quiz_data_for_level(self, level):
         return {}

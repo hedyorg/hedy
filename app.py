@@ -2,7 +2,6 @@
 import sys
 
 import hedy_translation
-from website.quiz import quiz_data_file_for
 from website.yaml_file import YamlFile
 
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -17,7 +16,6 @@ import json
 import logging
 import os
 from os import path
-import re
 import traceback
 from flask_commonmark import Commonmark
 from babel import Locale
@@ -784,7 +782,7 @@ def index(level, program_id):
             teacher_adventures.append(current_adventure)
 
     # Get the quiz (if it exists)
-    quiz = True if quiz_data_file_for(g.lang, level) else False
+    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
 
 
     enforce_developers_mode = False
