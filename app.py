@@ -58,6 +58,10 @@ ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
 
+QUIZZES = collections.defaultdict(hedy_content.NoSuchQuiz)
+for lang in ALL_LANGUAGES.keys():
+    QUIZZES[lang] = hedy_content.Quizzes(lang)
+
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
@@ -661,10 +665,19 @@ def programs_page(user):
     now = timems()
     for item in result:
         date = get_user_formatted_age(now, item['date'])
+        # This way we only keep the first 4 lines to show as preview to the user
+        code = "\n".join(item['code'].split("\n")[:4])
         programs.append(
-            {'id': item['id'], 'code': item['code'], 'date': date, 'level': item['level'], 'name': item['name'],
-             'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'),
-             'public': item.get('public')})
+            {'id': item['id'],
+             'code': code,
+             'date': date,
+             'level': item['level'],
+             'name': item['name'],
+             'adventure_name': item.get('adventure_name'),
+             'submitted': item.get('submitted'),
+             'public': item.get('public')
+             }
+        )
 
     return render_template('programs.html', programs=programs, page_title=gettext('title_programs'),
                            current_page='programs', from_user=from_user, adventures=adventures,
@@ -1379,7 +1392,8 @@ ACHIEVEMENTS.routes(app, DATABASE)
 
 # *** QUIZ BACKEND ***
 
-quiz.routes(app, DATABASE, ACHIEVEMENTS)
+quiz.routes(app, DATABASE, ACHIEVEMENTS, QUIZZES)
+
 
 # *** STATISTICS ***
 
