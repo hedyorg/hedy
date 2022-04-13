@@ -40,6 +40,18 @@ var currentLang: {
   _IS: string;
   _ASK: string;
   _ECHO: string;
+  _COLOR: string;
+  _BLACK: string;
+  _BLUE: string;
+  _BROWN: string;
+  _GRAY: string;
+  _GREEN: string;
+  _ORANGE: string;
+  _PINK: string;
+  _PURPLE: string;
+  _RED: string;
+  _WHITE: string;
+  _YELLOW: string;
   _FORWARD: string;
   _TURN: string;
   _LEFT: string;
@@ -547,6 +559,14 @@ function rule_level1() {
     token: ['text','keyword','text'],
     next: 'start',
   },{
+    regex: START_LINE + "(" + currentLang._COLOR + ")(" + END_WORD + ")(.*)$",
+    token: ['text','keyword','text','text'],
+    next: 'start',
+  }, {
+    regex: START_LINE + "(" + currentLang._COLOR + ")(" + SPACE + ")(" + WORD + ")( *)$",
+    token: ['text','keyword','text','keyword','text'],
+    next: 'start',
+  },{
     regex: START_LINE + "(" + currentLang._FORWARD + ")(.*)$",
     token: ['text','keyword','text'],
     next: 'start',
@@ -563,11 +583,11 @@ function rule_level1() {
     token: ['text','keyword','text'],
     next: 'start',
   },{
-    regex: /#.*$/,
+    regex: '#.*$',
     token: 'comment',
     next: 'start',
   },{
-    regex: /\_\?\_/,
+    regex: '\_\\?\_',
     token: 'invalid',
     next: 'start',
   },{
@@ -603,11 +623,11 @@ function rule_level2() {
     token: ["text",'keyword','text'],
     next: 'start',
   },{
-    regex: /#.*$/,
+    regex: '#.*$',
     token: 'comment',
     next: 'start',
   },{
-    regex: /\_\?\_/,
+    regex: '\_\\?\_',
     token: 'invalid',
     next: 'start',
   },{
@@ -652,22 +672,18 @@ function rule_level3() {
     next: 'start',
   },{
     regex: START_WORD + currentLang._AT + SPACE + currentLang._RANDOM ,
-    token: ['keyword','text','keyword'],
+    token: ['keyword'],
     next: 'start',
   },{
     regex: START_WORD + currentLang._AT ,
     token: ['keyword'],
     next: 'start',
   },{
-    regex: '\,',
-    token: ['keyword'],
-    next: 'start',
-  },{
-    regex: /#.*$/,
+    regex: '#.*$',
     token: 'comment',
     next: 'start',
   },{
-    regex: /\_\?\_/,
+    regex: '\_\\?\_',
     token: 'invalid',
     next: 'start',
   },{
@@ -693,26 +709,26 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
 
   /* Rule for comments : */
   list_rules.push( {
-    regex: /#.*$/,
+    regex: '#.*$',
     token: 'comment',
     next: 'start',
   } );
 
   /* Rule for quoted string : */
   list_rules.push( {
-    regex: /\"[^\"]*\"/,
+    regex: '\"[^\"]*\"',
     token: 'constant.character',
     next: 'start',
   } );
   list_rules.push( {
-    regex: /\'[^\']*\'/,
+    regex: "\'[^\']*\'",
     token: 'constant.character',
     next: 'start',
   } );
 
   /* Rule for blanks marks : */
   list_rules.push( {
-    regex: /\_\?\_/,
+    regex: '\_\\?\_',
     token: 'invalid',
     next: 'start',
   });

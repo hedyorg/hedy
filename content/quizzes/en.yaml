@@ -61,7 +61,7 @@ levels:
                 - "option_text": "Nothing! This is a perfect code!"
                   "feedback": "Wrong, look carefully!"
             correct_answer: "A"
-            hint: "Line 1 doens't seem right"
+            hint: "Line 1 doesn't seem right"
             question_score: '10'
         5:
             question_text: "Which command is missing in line 2?"
@@ -302,7 +302,7 @@ levels:
                 dogs {is} animal
                 {print} I love animal
             mp_choice_options:
-                -   "option_text": "Line 1 should say: `dogs is animals`"
+                -   "option_text": "Line 1 should say: `dogs {is} animals`"
                     "feedback": "The variable name is animal"
                 -   "option_text": "Line 1 should say: animal is dogs"
                     "feedback": "Great!"
@@ -311,12 +311,12 @@ levels:
                 -   "option_text": "Line 2 should say: `{sleep} I love animals`"
                     "feedback": "Sleep is not used to {print} text"
             correct_answer: "B"
-            hint: "You want to print 'I love dogs'"
+            hint: "You want to {print} 'I love dogs'"
             question_score: '10'
         10:
             question_text: "What command should be used on the line 1?"
             code: |-
-                flavor is _?_
+                flavor {is} _?_
                 {print} Your favorite icecream is...
                 {sleep}
                 {print} flavor
@@ -330,7 +330,7 @@ levels:
                 -   "option_text": "{ask} What flavor icecream do you like?"
                     "feedback": "That's right!"
             correct_answer: "D"
-            hint: "You want to ask a question"
+            hint: "You want to {ask} a question"
             question_score: '10'
 
     3:
@@ -483,10 +483,10 @@ levels:
                     {remove} chosen_color {from} colors
                     {print} I will dye my hair color {at} {random}
             mp_choice_options:
-            -   "option_text": "Line 3 should say: remove blue from colors"
+            -   "option_text": "Line 3 should say: {remove} blue {from} colors"
                 "feedback": "Maybe you want blue hair though!"
-            -   "option_text": "Line 3 should have an add command instead of a remove command"
-                "feedback": "You want to remove the chosen color so remove is right."
+            -   "option_text": "Line 3 should have an {add} command instead of a {remove} command"
+                "feedback": "You want to remove the chosen color so {remove} is right."
             -   "option_text": "In line 4 the variable should be called colors instead of color"
                 "feedback": "Great job!"
             -   "option_text": "Nothing, this is a correct code!"
@@ -585,7 +585,7 @@ levels:
                 -   "code": "'{print} options {at} {random}'"
                     "feedback": "Never put the quotation mark in front of the {print} command."
                 -   "code": "{print} 'options' {at} {random}"
-                    "feedback": "Options is a variable. You don't literally want to print 'options {at} {random}'."
+                    "feedback": "options is a variable. You don't literally want to print 'options {at} {random}'."
                 -   "code": "{print} options {at} {random}"
                     "feedback": "That's right"
                 -   "option_text": "Nothing, the game already works!"
@@ -756,9 +756,9 @@ levels:
         5:
             question_text: "Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?"
             code: |-
-                password is {ask} 'What is the password?'
-                {if} password is SECRET {print} 'Correct!'
-                else {print} 'ALARM! INTRUDER!'
+                password {is} {ask} 'What is the password?'
+                {if} password {is} SECRET {print} 'Correct!'
+                {else} {print} 'ALARM! INTRUDER!'
             mp_choice_options:
                 -   "option_text": "Because it needs to be in capitals, so SECRET"
                     "feedback": "Indeed!"
@@ -777,7 +777,7 @@ levels:
                 {print} 'Im Hedy the football fortune teller!'
                 {print} 'I will predict what place your team will end up!'
                 club is {ask} 'Which club is your favorite?'
-                {if} club is ajax {print} 'Ajax is going to win of course!'
+                {if} club {is} ajax {print} 'Ajax is going to win of course!'
                 _?_ {print} 'Sorry, your club is gonna be in last place...'
             mp_choice_options:
                 -   "code": "{if}"
@@ -797,7 +797,7 @@ levels:
                 {print} 'I can predict if you will be a millionair or not!'
                 name {is} {ask} 'Whats your name?'
                 {if} name {is} Hedy {print} 'You will be a millionair!'
-                else _?_ 'Unfortunately... No big money for you.'
+                {else} _?_ 'Unfortunately... No big money for you.'
             mp_choice_options:
                 -   "code": "{if}"
                     "feedback": "{if} is in the line above."
@@ -911,9 +911,9 @@ levels:
                 -   "option_text": "13"
                     "feedback": "Try again.."
                 -   "option_text": "3*10"
-                    "feedback": "Correct! There are quotation marks, so Hedy will {print} it literally."
+                    "feedback": "Correct! There are quotation marks, so Hedy will print it literally."
                 -   "option_text": "Nothing, Hedy will give an error message."
-                    "feedback": "No, Hedy will print it literally."
+                    "feedback": "No, Hedy will {print} it literally."
             correct_answer: "C"
             hint: "Mind the quotation marks!!"
             question_score: '10'
@@ -1056,7 +1056,7 @@ levels:
             -   "option_text": "You can only use the = sign when working with numbers, not with words."
                 "feedback": "You can also use = with words."
             correct_answer: "B"
-            hint: "is and = are both allowed"
+            hint: "{is} and = are both allowed"
             question_score: '10'
 
     7:
@@ -1149,7 +1149,7 @@ levels:
                 -   "code": "the wheels on the bus go\nround and round\nround and round\nround and round"
                     "feedback": "All though the town! Perfect!"
             correct_answer: "D"
-            hint: "Only 'round and round' is repeated 3 times."
+            hint: "Only 'round and round' is repeated 3 {times}."
             question_score: '10'
         7:
             question_text: "What will be the output from this code?"
@@ -1166,7 +1166,7 @@ levels:
                 -   "code": "We will\nROCK YOU!"
                     "feedback": "Mind the repeat command"
             correct_answer: "B"
-            hint: "Mind the repeat command."
+            hint: "Mind the {repeat} command."
             question_score: '10'
         8:
             question_text: "What Hedy code belongs to this output?"
@@ -1697,7 +1697,7 @@ levels:
         1:
             question_text: "What will be the output from this code?"
             code: |-
-                {for} i {in} {{range}} 1 {to} 3
+                {for} i {in} {range} 1 {to} 3
                     {print} i
             mp_choice_options:
                 -   "code": "1\n2\n3"
@@ -1982,7 +1982,7 @@ levels:
                 - "code": "dice"
                   "feedback": "Look at the names of the variables."
             correct_answer: "B"
-            hint: "Hedy needs to pick a number at random"
+            hint: "Hedy needs to pick a number {at} {random}"
             question_score: '10'
         6:
             question_text: "Which of the answers below is a possible outcome when you run the code?"
@@ -2017,16 +2017,16 @@ levels:
                 _?_
                     {print} name ' has to eat ' food {at} {random} ' for dinner'
             mp_choice_options:
-                - "code": "{for} name in names"
+                - "code": "{for} name {in} names"
                   "feedback": "You are on fire!"
-                - "code": "{for} names in name"
-                  "feedback": "No it should be {for} each name in the list nameS, so the other way around"
-                - "code": "{for} food in food"
-                  "feedback": "Each name should be told what they will have {for} dinner."
-                - "code": "{for} name in food"
-                  "feedback": "Each name should be told what they will have {for} dinner."
+                - "code": "{for} names {in} name"
+                  "feedback": "No it should be for each name in the list nameS, so the other way around"
+                - "code": "{for} food {in} food"
+                  "feedback": "Each name should be told what they will have for dinner."
+                - "code": "{for} name {in} food"
+                  "feedback": "Each name should be told what they will have for dinner."
             correct_answer: "A"
-            hint: "Each name should be told what they will have {for} dinner."
+            hint: "Each name should be told what they will have for dinner."
             question_score: '10'
         8:
             question_text: "What should be on the _?_ in this code that decides which color shirt you get?"
