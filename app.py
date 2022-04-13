@@ -42,8 +42,7 @@ if (sys.version_info.major < 3 or sys.version_info.minor < 7):
 # Set the current directory to the root Hedy folder
 import os
 from os import path
-os.chdir(os.path.join(os.getcwd(), __file__.replace(
-    os.path.basename(__file__), '')))
+os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
 # Setting up Flask and babel (web and translations)
 app = Flask(__name__, static_url_path='')
@@ -97,18 +96,11 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
 """)
 
 
-def load_adventure_for_language(lang):
-    ADVENTURES[lang].set_keyword_language(g.keyword_lang)
-
-    return ADVENTURES[lang]
-
-
-def load_adventures_per_level(lang, level):
+def load_adventures_per_level(level):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode(no adventure) and for each of the adventures.
     if current_user()['username']:
         user_programs = DATABASE.level_programs_for_user(current_user()['username'], level)
-        print(user_programs)
         for program in user_programs:
             program_key = 'default' if not program.get('adventure_name') else program['adventure_name']
             if not program_key in loaded_programs:
@@ -117,18 +109,7 @@ def load_adventures_per_level(lang, level):
                 loaded_programs[program_key] = program
 
     all_adventures = []
-
-    adventure_object = load_adventure_for_language(lang)
-    keywords = adventure_object.keywords
-    adventures = adventure_object.adventures_file['adventures']
-
-    # Order the adventures dict by ADVENTURE_ORDER to ensure this is always the same (independent of YAML structure)
-    sorted_adventures = {}
-    for adventure_index in ADVENTURE_ORDER:
-        if adventures.get(adventure_index, None):
-            sorted_adventures[adventure_index] = (
-                adventures.get(adventure_index))
-    adventures = sorted_adventures
+    adventures = ADVENTURES[g.lang].get_adventures(g.keyword_lang)
 
     for short_name, adventure in adventures.items():
         if not level in adventure['levels']:
@@ -143,9 +124,9 @@ def load_adventures_per_level(lang, level):
             'name': adventure['name'],
             'image': adventure.get('image', None),
             'default_save_name': adventure.get('default_save_name', adventure['name']),
-            'text': adventure['levels'][level].get('story_text').format(**keywords) if adventure['levels'][level].get('story_text') else '',
-            'example_code': adventure['levels'][level].get('example_code').format(**keywords) if adventure['levels'][level].get('example_code') else '',
-            'start_code': adventure['levels'][level].get('start_code').format(**keywords) if adventure['levels'][level].get('start_code') else '',
+            'text': adventure['levels'][level].get('story_text', ""),
+            'example_code': adventure['levels'][level].get('example_code', ""),
+            'start_code': adventure['levels'][level].get('start_code', ""),
             'loaded_program': '' if not loaded_programs.get(short_name) else {
                 'name': loaded_programs.get(short_name)['name'],
                 'code': loaded_programs.get(short_name)['code']
@@ -156,11 +137,9 @@ def load_adventures_per_level(lang, level):
         for i in range(2, 10):
             extra_story = {}
             if adventure['levels'][level].get('story_text_' + str(i)):
-                extra_story['text'] = adventure['levels'][level].get(
-                    'story_text_' + str(i)).format(**keywords)
+                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i))
                 if adventure['levels'][level].get('example_code_' + str(i)):
-                    extra_story['example_code'] = adventure['levels'][level].get(
-                        'example_code_' + str(i)).format(**keywords)
+                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i))
                 extra_stories.append(extra_story)
             else:
                 break
@@ -636,14 +615,7 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-    adventures = load_adventure_for_language(
-        g.lang).adventures_file['adventures']
-    if hedy_content.Adventures(session['lang']).has_adventures():
-        adventures_names = hedy_content.Adventures(
-            session['lang']).get_adventure_keyname_name_levels()
-    else:
-        adventures_names = hedy_content.Adventures(
-            "en").get_adventure_keyname_name_levels()
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     # We request our own page -> also get the public_profile settings
     public_profile = None
@@ -680,8 +652,8 @@ def programs_page(user):
         )
 
     return render_template('programs.html', programs=programs, page_title=gettext('title_programs'),
-                           current_page='programs', from_user=from_user, adventures=adventures,
-                           filtered_level=level, filtered_adventure=adventure, adventure_names=adventures_names,
+                           current_page='programs', from_user=from_user, filtered_level=level,
+                           filtered_adventure=adventure, adventure_names=adventures_names,
                            public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
 
 
@@ -777,14 +749,11 @@ def index(level, program_id):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures = load_adventures_per_level(g.lang, level)
+    adventures = load_adventures_per_level(level)
     customizations = {}
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()[
                                                                    'username'])
-
-    level_commands_for_lang = COMMANDS[g.lang]
-    level_commands_for_lang.set_keyword_language(g.keyword_lang)
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -799,10 +768,7 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    try:
-        commands = level_commands_for_lang.get_commands_for_level(level)
-    except:
-        commands = None  # No separate commands file for this language
+    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
@@ -887,15 +853,12 @@ def get_specific_adventure(name, level):
     except:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    adventure = [x for x in load_adventures_per_level(
-        g.lang, level) if x.get('short_name') == name]
+    adventure = [x for x in load_adventures_per_level(level) if x.get('short_name') == name]
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    prev_level = level-1 if [x for x in load_adventures_per_level(
-        g.lang, level-1) if x.get('short_name') == name] else False
-    next_level = level+1 if [x for x in load_adventures_per_level(
-        g.lang, level+1) if x.get('short_name') == name] else False
+    prev_level = level-1 if [x for x in load_adventures_per_level(level-1) if x.get('short_name') == name] else False
+    next_level = level+1 if [x for x in load_adventures_per_level(level+1) if x.get('short_name') == name] else False
 
     return hedyweb.render_specific_adventure(level_number=level, adventure=adventure, version=version(),
                                              prev_level=prev_level, next_level=next_level)
@@ -911,9 +874,7 @@ def get_cheatsheet_page(level):
     except:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    level_commands_for_lang = COMMANDS[g.lang]
-    level_commands_for_lang.set_keyword_language(g.keyword_lang)
-    commands = level_commands_for_lang.get_commands_for_level(level)
+    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     return render_template("cheatsheet.html", commands=commands, level=level)
 
@@ -1106,19 +1067,15 @@ def explore():
             'public_user': True if public_profile else None,
             'code': "\n".join(code.split("\n")[:4])
         })
-    if hedy_content.Adventures(session['lang']).has_adventures():
-        adventures = hedy_content.Adventures(
-            session['lang']).get_adventure_keyname_name_levels()
-    else:
-        adventures = hedy_content.Adventures(
-            "en").get_adventure_keyname_name_levels()
+
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     return render_template('explore.html', programs=filtered_programs,
                            filtered_level=level,
                            achievement=achievement,
                            filtered_adventure=adventure,
                            max_level=hedy.HEDY_MAX_LEVEL,
-                           adventures=adventures,
+                           adventures_names=adventures_names,
                            page_title=gettext('title_explore'),
                            current_page='explore')
 
