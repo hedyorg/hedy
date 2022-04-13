@@ -2,6 +2,7 @@ _print_argument: (_SPACE | quoted_text | list_access | print_expression)*
 ?print_expression: INT | var_access | error_unsupported_number | expression
 
 command:+= ask | list_access_var | assign -= ask | list_access | list_access_var | assign
+_if_less_command:+= ask | list_access_var | assign -= ask | list_access | list_access_var | assign
 
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 ask: var (_IS | _EQUALS) _ASK (_print_argument)?
