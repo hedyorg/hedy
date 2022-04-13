@@ -76,6 +76,32 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_if_equality_unquoted_rhs_with_space_linebreak_print(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James Bond
+    print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James Bond':
+      print(f'shaken')""")
+
+    self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+  def test_if_equality_unquoted_rhs_with_space_and_trailing_space_linebreak_print(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is trailing space  
+    print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'trailing space':
+      print(f'shaken')""")
+
+    self.multi_level_tester(code=code, expected=expected, max_level=7)
+
   def test_if_2_vars_equality_print(self):
     code = textwrap.dedent("""\
     jouwkeuze is schaar
@@ -438,6 +464,36 @@ class TestsLevel5(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_if_equality_text_with_spaces_and_single_quotes_linebreak_print_else_print(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James 'Bond'
+    print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James \\'Bond\\'':
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_equality_text_with_spaces_and_double_quotes_linebreak_print_else_print(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is James "Bond"
+    print 'shaken' else print 'biertje!'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if naam == 'James "Bond"':
+      print(f'shaken')
+    else:
+      print(f'biertje!')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
   def test_if_equality_print_else_print_bengali(self):
     code = textwrap.dedent("""\
     নাম is ask 'আপনার নাম কি?'
@@ -491,6 +547,24 @@ class TestsLevel5(HedyTester):
       print(f'nice!')
     if name in names:
       print(f'nice!')""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_consecutive_if_and_if_else_statements(self):
+    code = textwrap.dedent("""\
+    naam is ask 'hoe heet jij?'
+    if naam is Hedy print 'leuk'
+    if naam is Python print 'ook leuk'
+    else print 'minder leuk!'""")
+
+    expected = textwrap.dedent("""\
+    naam = input(f'hoe heet jij?')
+    if naam == 'Hedy':
+      print(f'leuk')
+    if naam == 'Python':
+      print(f'ook leuk')
+    else:
+      print(f'minder leuk!')""")
 
     self.single_level_tester(code=code, expected=expected)
 
