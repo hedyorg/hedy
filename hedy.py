@@ -39,6 +39,7 @@ class Command:
     echo = 'echo'
     turn = 'turn'
     forward = 'forward'
+    color = 'color'
     add_to_list = 'add to list'
     remove_from_list = 'remove from list'
     list_access = 'at random'
@@ -62,6 +63,7 @@ translatable_commands = {Command.print: ['print'],
                          Command.ask: ['ask'],
                          Command.echo: ['echo'],
                          Command.turn: ['turn'],
+                         Command.color: ['color'],
                          Command.forward: ['forward'],
                          Command.add_to_list: ['add', 'to_list'],
                          Command.remove_from_list: ['remove', 'from'],
@@ -103,7 +105,7 @@ def promote_types(types, rules):
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {
-    1 :['print', 'ask', 'echo', 'turn', 'forward'],
+    1 :['print', 'ask', 'echo', 'turn', 'forward', 'color'],
     2 :['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
     3 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
     4 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
@@ -124,6 +126,7 @@ commands_per_level = {
 }
 
 command_turn_literals = ['right', 'left']
+command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
@@ -139,6 +142,7 @@ commands_and_types_per_level = {
     },
     Command.turn: {1: command_turn_literals,
                    2: [HedyType.integer, HedyType.input]},
+    Command.color: {1: command_make_color},
     Command.forward: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
@@ -455,6 +459,11 @@ class TypeValidator(Transformer):
     def forward(self, tree):
         if tree.children:
             self.validate_args_type_allowed(Command.forward, tree.children, tree.meta)
+        return self.to_typed_tree(tree)
+
+    def color(self, tree):
+        if tree.children:
+            self.validate_args_type_allowed(Command.color, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def turn(self, tree):
@@ -783,8 +792,10 @@ class UsesTurtle(Transformer):
             else:
                 return False # some nodes like text and punctuation have text children (their letters) these are not turtles
 
-
     def forward(self, args):
+        return True
+
+    def color(self, args):
         return True
 
     def turn(self, args):
@@ -942,7 +953,9 @@ class IsValid(Filter):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
-
+    def illegal_condition(self, meta, args):
+        error = InvalidInfo('invalid condition', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
 
     #other rules are inherited from Filter
 
@@ -1163,6 +1176,38 @@ class ConvertToPython_1(ConvertToPython):
             return sleep_after('t.forward(50)', False)
         return self.make_forward(int(args[0]))
 
+    def color(self, args):
+        if len(args) == 0:
+            return "t.pencolor('black')"  # no arguments defaults to black ink
+
+        arg = args[0].data
+        if arg == 'black':
+            return "t.pencolor('black')"
+        elif arg == 'blue':
+            return "t.pencolor('blue')"
+        elif arg == 'brown':
+            return "t.pencolor('brown')"
+        elif arg == 'gray':
+            return "t.pencolor('gray')"
+        elif arg == 'green':
+            return "t.pencolor('green')"
+        elif arg == 'orange':
+            return "t.pencolor('orange')"
+        elif arg == 'pink':
+            return "t.pencolor('pink')"
+        elif arg == 'purple':
+            return "t.pencolor('purple')"
+        elif arg == 'red':
+            return "t.pencolor('red')"
+        elif arg == 'white':
+            return "t.pencolor('white')"
+        elif arg == 'yellow':
+            return "t.pencolor('yellow')"
+        else:
+            # the TypeValidator should protect against reaching this line:
+            raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
+                                                          allowed_types=get_allowed_types(Command.color, self.level))
+
     def turn(self, args):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
@@ -1182,6 +1227,9 @@ class ConvertToPython_1(ConvertToPython):
 
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True)
+
+    def make_color(self, parameter):
+        return self.make_turtle_command(parameter, Command.color, 'color', False)
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
         variable = self.get_fresh_var('trtl')
@@ -1209,6 +1257,13 @@ class ConvertToPython_2(ConvertToPython_1):
         # echo is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
+
+    def color(self, args):
+        if len(args) == 0:
+            return "t.pencolor('black')"
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_color(hash_var(arg))
 
     def turn(self, args):
         if len(args) == 0:
@@ -2036,7 +2091,7 @@ def parse_input(input_string, level, lang):
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
-    except lark.UnexpectedEOF:
+    except lark.UnexpectedEOF as e:
         lines = input_string.split('\n')
         last_line = len(lines)
         raise exceptions.UnquotedEqualityCheck(line_number=last_line)
@@ -2086,6 +2141,8 @@ def is_program_valid(program_root, input_string, level, lang):
                     # The fixed code contains another error. Only report the original error for now.
                     pass
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
+        elif invalid_info.error_type == 'invalid condition':
+            raise exceptions.UnquotedEqualityCheck(line_number=line)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)

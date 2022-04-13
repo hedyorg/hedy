@@ -686,7 +686,6 @@ levels:
             correct_answer: "B"
             hint: "Er missen aanhalingstekens bij een {print} commando."
             question_score: '10'
-
     5:
         1:
             question_text: "Wat is waar ?"
@@ -694,12 +693,16 @@ levels:
             mp_choice_options:
             -   "option_text": "In level 5 werkt {print} anders dan in level 4"
                 "feedback": "{print} werkt nog hetzelfde"
+                "code": '{print}'
             -   "option_text": "In level 5 werkt {ask} anders dan in level 4"
                 "feedback": "{ask} werkt nog hetzelfde"
+                "code": '{if}'
             -   "option_text": "In level 5 werken {print} en {ask} anders dan in level 4"
                 "feedback": "Nee hoor, ze werken hetzelfde !"
+                "code": '{sleep}'
             -   "option_text": "In level 5 werken {print} en {ask} nog hetzelfde als in level 4"
                 "feedback": "Klopt !."
+                "code": '{else}'
             correct_answer: "D"
             hint: "Er is alleen een commando bijgekomen."
             question_score: '10'
@@ -1054,7 +1057,6 @@ levels:
             hint: "is en = mogen allebei"
             question_score: '10'
 
-
     7:
         1:
             question_text: "Wat is de juiste spelling van het commando herhalen ?"
@@ -1139,16 +1141,12 @@ levels:
             mp_choice_options:
             -   "option_text": "Er missen aanhalingstekens in regel 1"
                 "feedback": "{ask} heeft geen aanhalingstekens nodig"
-                "code": "the wheels on the bus go\nround and round"
             -   "option_text": "Er missen aanhalingstekens in regel 2"
                 "feedback": "een variabele heeft geen aanhalingstekens nodig"
-                "code": "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
             -   "option_text": "Er missen aanhalingstekens in regel 3"
                 "feedback": "Je wil niet dat er letterlijk 'antwoorden {at random}' wordt geprint, dus geen aanhalingstekens hier !"
-                "code": "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
             -   "option_text": "Niets ! Deze code is goed !"
                 "feedback": "Juist ! Alles is goed !"
-                "code": "the wheels on the bus go\nround and round\nround and round\nround and round"
             correct_answer: "D"
             hint: "Bekijk regel voor regel of er aanhalingstekens nodig zijn."
             question_score: '10'
@@ -1168,15 +1166,12 @@ levels:
             -   "option_text": "couplet is 0"
                 "feedback": "Goed gezien ! Als deze blijft staan, zul je nooit verder kunnen tellen dan twee, want je zet de variabele couplet elke keer weer op 1."
                 "code": "We will We will\nROCK YOU !"
-            -   "option_text": "{repeat} 4 times print 'potje'"
+            -   "option_text": "{repeat} 4 {times} {print} 'potje'"
                 "feedback": "Nee, dit is prima."
-                "code": "We will\nWe will\nROCK YOU !"
             -   "option_text": "couplet is couplet + 1"
                 "feedback": "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."
-                "code": "We will\nROCK YOU !\nWe will\nROCK YOU !"
             -   "option_text": "{print} 'Door naar het ' couplet 'e couplet'"
                 "feedback": "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."
-                "code": "We will\nROCK YOU !"
             correct_answer: "A"
             hint: "De variabele couplet moet blijven doortellen, dat lukt niet als hij steeds op 1 wordt gezet."
             question_score: '10'
