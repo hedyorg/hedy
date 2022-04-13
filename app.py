@@ -2,6 +2,7 @@
 import sys
 
 import hedy_translation
+from website.quiz import quiz_data_file_for
 from website.yaml_file import YamlFile
 
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -778,6 +779,10 @@ def index(level, program_id):
         if current_adventure.get('level') == str(level):
             teacher_adventures.append(current_adventure)
 
+    # Get the quiz (if it exists)
+    quiz = True if quiz_data_file_for(g.lang, level) else False
+
+
     enforce_developers_mode = False
     if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
         enforce_developers_mode = True
@@ -791,6 +796,7 @@ def index(level, program_id):
         max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
         version=version(),
+        quiz=quiz,
         adventures=adventures,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
