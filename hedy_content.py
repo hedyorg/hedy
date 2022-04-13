@@ -12,19 +12,7 @@ COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
-
-# Languages that have a keyword grammar file
-ALL_KEYWORD_LANGUAGES = {
-    'en': 'EN',
-    'es': 'ES',
-    'fr': 'FR',
-    'nl': 'NL',
-    'nb_NO': 'NB',
-    'tr': 'TR',
-    'ar': 'AR',
-    'hi': 'HI',
-    'id': 'ID'
-}
+ALL_KEYWORD_LANGUAGES = {}
 
 # Load and cache all keyword yamls
 KEYWORDS = {}
@@ -53,25 +41,27 @@ ADVENTURE_ORDER = [
     'end'
 ]
 
-def fill_all_languages(babel):
-    # load all available languages in dict
-    # list_translations of babel does about the same, but without territories.
-    languages = {}
-    for dirname in babel.translation_directories:
-        if not os.path.isdir(dirname):
-            continue
+# load all available languages in dict
+# list_translations of babel does about the same, but without territories.
+languages = {}
+if not os.path.isdir('translations'):
+    # should not be possible, but if it's moved someday, EN would still be working.
+    ALL_LANGUAGES['en'] = 'English'
+    ALL_KEYWORD_LANGUAGES['en'] = 'EN'
 
-        for folder in os.listdir(dirname):
-            locale_dir = os.path.join(dirname, folder, 'LC_MESSAGES')
-            if not os.path.isdir(locale_dir):
-                continue
+for folder in os.listdir('translations'):
+    locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
+    if not os.path.isdir(locale_dir):
+        continue
 
-            if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
-                locale = Locale.parse(folder)
-                languages[folder] = locale.display_name.title()
+    if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
+        locale = Locale.parse(folder)
+        languages[folder] = locale.display_name.title()
 
-    for l in sorted(languages):
-        ALL_LANGUAGES[l] = languages[l]
+for l in sorted(languages):
+    ALL_LANGUAGES[l] = languages[l]
+    if os.path.exists('./grammars/keywords-' + l + '.lark'):
+        ALL_KEYWORD_LANGUAGES[l] = l[0:2].upper()  # first two characters
 
 
 class Commands:
@@ -109,7 +99,7 @@ class Commands:
             self.data[keyword_lang] = self.cache_keyword_parsing(keyword_lang)
         return self.data.get(keyword_lang, {}).get(int(level), None)
 
-
+# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchCommand:
     def get_commands_for_level(self, level):
         return {}
@@ -190,6 +180,7 @@ class Adventures:
 
 
 
+# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchAdventure:
   def get_adventure(self):
     return {}
@@ -234,7 +225,7 @@ class Quizzes:
                 self.quizzes['levels'].get(level).get(question)[k] = options
         return self.quizzes['levels'].get(level).get(question)
 
-
+# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchQuiz:
-    def get_defaults(self, level):
+    def get_quiz_data_for_level(self, level):
         return {}
