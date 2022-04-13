@@ -781,10 +781,6 @@ def index(level, program_id):
         if current_adventure.get('level') == str(level):
             teacher_adventures.append(current_adventure)
 
-    # Get the quiz (if it exists)
-    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
-
-
     enforce_developers_mode = False
     if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
         enforce_developers_mode = True
@@ -798,7 +794,6 @@ def index(level, program_id):
         max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
         version=version(),
-        quiz=quiz,
         adventures=adventures,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,

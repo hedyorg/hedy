@@ -13,12 +13,10 @@
                     {{ adventure.name }}
                 </div>
             {% endfor %}
-            <!-- Add the tab for the quiz manually -->
-            {% if quiz %}
-                <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="quiz">
-                        {{_('quiz_tab')}}
-                </div>
-            {% endif %}
+            <!-- Add the tab for the quiz -->
+            <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="quiz">
+                    {{_('quiz_tab')}}
+            </div>
             {% if specific_adventure %}
                 <h2 class="z-10 my-0 ml-auto pt-8 text-red-500 text-base">{{ _('specific_adventure_mode')|replace("{adventure}", adventures[0].name) }}</h2>
             {% endif %}
@@ -63,12 +61,11 @@
                 <div class="ltr:clear-right rtl:clear-left"></div>
             </div>
         {% endfor %}
-        {% if quiz %}
-            <div data-tabtarget="quiz" class="hidden">
-                <h2>{{_('end')}}</h2>
-                <div>{{_('quiz_description')}}</div>
-                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ _('go_to_quiz') }}" onclick="hedyApp.load_quiz ({{level_nr}})">
-            </div>
-        {% endif %}
+        <!-- Add the tabtarget for the quiz -->
+        <div data-tabtarget="quiz" class="hidden">
+            <h2>{{_('end')}}</h2>
+            <div>{{_('quiz_description')}}</div>
+            <input type="submit" class="green-btn h-3/5 mt-4" value="{{ _('go_to_quiz') }}" onclick="hedyApp.load_quiz ({{level_nr}})">
+        </div>
       </div>
     </div>
