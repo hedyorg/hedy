@@ -34,9 +34,9 @@
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code}}
         </div>
         {% if parsons %}
-            <div id="parsons_container" class="w-full flex-1 hidden mt-4">
+            <div id="parsons_container" class="w-full flex-1 mt-4" style="display: none;">
                 {% for key, line in parsons.code_lines.items() %}
-                   <div id="{{line}}" draggable="true" class="box mb-4 text-xl px-4 py-2 bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg">
+                   <div id="{{line}}" draggable="true" class="box mb-2 text-lg px-4 py-2 bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg">
                      &nbsp; <!-- This is a HTML space to ensure styling of the element -->
                     </div>
                 {% endfor %}
