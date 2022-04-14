@@ -212,10 +212,14 @@ class Quizzes:
     def get_highest_question_level(self, level):
         return len(self.quizzes['levels'].get(level))
 
-    def get_quiz_data_for_level(self, level):
-        return self.quizzes['levels'].get(level)
+    def get_quiz_data_for_level(self, level, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').get('levels')
+            self.data[keyword_lang] = self.cache_quiz_keywords(keyword_lang)
+        return self.data.get(keyword_lang, {}).get(level, None)
 
-    def get_quiz_data_for_level_question(self, level, question):
+    def get_quiz_data_for_level_question(self, level, question, keyword_lang="en"):
         # We have to parse the keywords before returning
         for k, v in self.quizzes['levels'].get(level).get(question).items():
             if isinstance(self.quizzes['levels'].get(level).get(question)[k], str):
