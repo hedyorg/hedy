@@ -62,7 +62,7 @@
         {% if parsons %}
             <div data-tabtarget="{{parsons['tab_name']}}" class="hidden">
                 <div class="flex flex-row">
-                    <div class="w-full p-2 ltr:mr-2 rtl:ml-2">
+                    <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
                         {{ parsons['text']|commonmark }}
                         <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
                             {% for key, line in parsons.code_lines.items() %}
@@ -71,6 +71,9 @@
                                 </div>
                             {% endfor %}
                         </div>
+                    </div>
+                    <div class="w-1/2 ltr:ml-2 rtl:mr-2">
+                        {{ parsons['example']|commonmark }}
                     </div>
                 </div>
                 <div class="ltr:clear-right rtl:clear-left"></div>
