@@ -414,12 +414,16 @@ def generateRules(currentLang,KEYWORDS):
 
 
 
+
+
+
 import os
 
 
-di = os.path.dirname(__file__)
-if di == "" : di = "."
-listLanguageFile = os.listdir(di + "/keywordTranslation")
+os.chdir(os.path.dirname(__file__) +"/../..")
+root = os.getcwd()
+
+listLanguageFile = os.listdir(root + "/static/js/keywordTranslation")
 if "syntaxLang-template.json" in listLanguageFile:
     del listLanguageFile[listLanguageFile.index("syntaxLang-template.json")]
 
@@ -429,16 +433,16 @@ import json
 for languageFile in listLanguageFile:
 
     langageCode = re.search("syntaxLang-(\w+).json",languageFile).group(1)
-    print("Generations of syntax coloring rules for {:.<8}".format(langageCode), end="")
+    print("Generations of syntax highlighting rules for {:.<8}".format(langageCode), end="")
 
-    fileLang = open(di + "/keywordTranslation/" + languageFile,"r")
+    fileLang = open(root + "/static/js/keywordTranslation/" + languageFile,"r")
     currentLang = json.load(fileLang)
     fileLang.close()
 
     # List of rules by level
     LEVELS = generateRules(currentLang,KEYWORDS)
 
-    namefileLangSyntax = di + "/syntax/highlighting-{}.json".format(langageCode)
+    namefileLangSyntax = root + "/static/js/syntax/highlighting-{}.json".format(langageCode)
 
     fileLangSyntax = open(namefileLangSyntax,"w")
     fileLangSyntax.write(json.dumps(LEVELS,indent=4))
