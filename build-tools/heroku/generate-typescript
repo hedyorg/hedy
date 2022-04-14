@@ -31,6 +31,8 @@ root=$(cd $(dirname $0)/../.. && pwd)
 
 cd $root
 
+python3 static/js/syntaxModesRules.py
+
 if [[ ! -f node_modules/.bin/tsc ]]; then
     echo "👉 You need to run the following command ONCE before running 'generate-typescript':" >&2
     echo "" >&2
