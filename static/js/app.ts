@@ -1091,7 +1091,7 @@ export function get_trimmed_code() {
        let text = $(this).text()
        // Otherwise it is the space placeholder -> don't add to prevent weird error messages
        if (text.length > 1) {
-         code += $(this).text();
+         code += text;
        }
      });
      return code.replace(/ +$/mg, '');
