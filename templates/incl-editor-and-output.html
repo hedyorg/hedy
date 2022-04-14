@@ -33,14 +33,12 @@
           {% if editor_readonly %}data-readonly="true"{% endif %}
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code}}
         </div>
-        <!-- Voeg de parsons DIV hier toe -->
-        <div class="container">
+        <div id="parsons_container" class="hidden">
             {% for key, line in parsons.code_lines.items() %}
-               <div id="{{line}}" draggable="true" class="box">
+               <div id="{{line}}" draggable="true" class="box mb-4">
                   {{line}}
                 </div>
             {% endfor %}
-           <br>
         </div>
         <!-- errorbox -->
         <div id="errorbox"
