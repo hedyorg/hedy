@@ -1121,19 +1121,6 @@ adventures:
                     print 'Bagus! Skor kamu ... ' skor ' dari 10!'
                     ```
                 start_code: print 'Selamat datang di kalkulator ini!'
-            7:
-                example_code_2: |
-                    ## Contoh kode Hedy
-                    ```
-                    daftar_satu is 4, 5, 6, 8
-                    daftar_dua is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    angka_satu is daftar_satu at random
-                    angka_dua is daftar_dua at random
-                    jawaban_benar is angka_satu * angka_dua
-                    jawaban is ask 'berapa hasil dari ' angka_satu ' dikali ' angka_dua '?'
-                    if jawaban is jawaban_benar print 'oke'
-                    else print 'salah! jawaban seharusnya adalah ' jawaban_benar
-                    ```
             10:
                 story_text: "## Calculator\nThis calculator game helps you practise your tables of multiplication!\nIf you add more numbers to the list, you can practise all the multiplications.\n"
                 example_code: "## Example Hedy code\n\n```\nnumbers = 1, 2, 3\n{for} number1 {in} numbers\n    {for} number2 {in} numbers\n        answer = {ask} 'How much is ' number2 ' times ' number1 '?'\n        correct = number1 * number2\n        {if} answer {is} correct\n            {print} 'Great job!'\n        {else}\n            {print} 'Thats wrong. The right answer is ' correct\n```\n"
