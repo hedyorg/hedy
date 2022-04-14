@@ -1,33 +1,5 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <div id="editor-area" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
-
-    <div class="flex flex-col order-1 relative hidden" id="parson_style" style="height: 22rem;">
-
-      {% for key, line in parsons.code_lines.items() %}
-                   
-      <!--- <div id="{{line}}" draggable="true" ondragstart="drag(event)">
-            <div id="div1" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
-                {{ line }}  
-           </div>
-       </div> --->
-
-      <!--- <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-           <div id= "{{line}}" draggable="true" ondragstart="drag(event)" width="88" height="31"> 
-           {{line}}
-           </div>
-           <br>
-       </div>--->
-
-       <div class="container">
-           <div id="{{line}}" draggable="true" class="box">
-              {{line}} 
-            </div>
-           <br>
-       </div>
-
-   {% endfor %}
-
-    </div> 
     <!-- Row 1: editor, output pane -->
     <div class="flex flex-col order-1 relative" id="code_editor" style="height: 22rem;">
       <!-- language selector overlay -->
@@ -60,6 +32,15 @@
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or start_code}}
+        </div>
+        <!-- Voeg de parsons DIV hier toe -->
+        <div class="container">
+            {% for key, line in parsons.code_lines.items() %}
+               <div id="{{line}}" draggable="true" class="box">
+                  {{line}}
+                </div>
+            {% endfor %}
+           <br>
         </div>
         <!-- errorbox -->
         <div id="errorbox"

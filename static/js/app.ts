@@ -1121,12 +1121,13 @@ export function get_trimmed_code() {
   }
   
   let code = "";
-  if($('#code_editor').is(":hidden")){
-     $('#container').children().each(function() {
-          code += $(this).val() + '\n';
+  if($('#editor').is(":hidden")){
+     $('.container').children().each(function() {
+          code += $(this).text();
+          console.log(code);
       });
+     return code.replace(/ +$/mg, '');
   }
-  console.log(code);
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
   // Remove whitespace at the end of every line

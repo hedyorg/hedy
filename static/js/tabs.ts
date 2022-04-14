@@ -60,8 +60,8 @@ function resetWindow() {
     resetWindow();
 
     if (tabName === 'Slepen'){
-      $ ('#code_editor').hide();
-      $ ('#parson_style').show();
+      $ ('#editor').hide();
+      $ ('#container').show();
       return;
     }
 
@@ -75,8 +75,8 @@ function resetWindow() {
       return;
     }
 
-    $ ('#code_editor').show();
-    $ ('#parson_style').hide();
+    $ ('#editor').show();
+    $ ('#container').hide();
     $ ('#adventures-tab').css('max-height', '20em')
     $('#developers_toggle_container').show ();
     $ ('#level-header input').show ();
