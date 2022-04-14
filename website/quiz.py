@@ -66,8 +66,8 @@ def routes(app, database, achievements, quizzes):
         if question_nr > quiz_for_lang.get_highest_question_level(level_source):
             return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
 
-        questions = quiz_for_lang.get_quiz_data_for_level(level_source)
-        question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
+        questions = quiz_for_lang.get_quiz_data_for_level(level_source, g.keyword_lang)
+        question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr, g.keyword_lang)
 
         if not questions:
             return no_quiz_data_error()
@@ -132,7 +132,7 @@ def routes(app, database, achievements, quizzes):
         quiz_for_lang = QUIZZES[g.lang]
         quiz_for_lang.set_keyword_language(g.keyword_lang)
 
-        questions = quiz_for_lang.get_quiz_data_for_level(level)
+        questions = quiz_for_lang.get_quiz_data_for_level(level, g.keyword_lang)
 
         if not questions:
             return no_quiz_data_error()
@@ -153,7 +153,7 @@ def routes(app, database, achievements, quizzes):
                 achievement = json.dumps(achievement)
 
         # Reading the yaml file
-        questions = QUIZZES[g.lang].get_quiz_data_for_level(level)
+        questions = QUIZZES[g.lang].get_quiz_data_for_level(level, g.keyword_lang)
         if not questions:
             return no_quiz_data_error()
 
@@ -205,8 +205,8 @@ def routes(app, database, achievements, quizzes):
             quiz_for_lang = QUIZZES[g.lang]
             quiz_for_lang.set_keyword_language(g.keyword_lang)
 
-            questions = quiz_for_lang.get_quiz_data_for_level(level_source)
-            question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
+            questions = quiz_for_lang.get_quiz_data_for_level(level_source, g.keyword_lang)
+            question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr, g.keyword_lang)
 
             if not questions:
                 return no_quiz_data_error()
@@ -263,8 +263,8 @@ def routes(app, database, achievements, quizzes):
         quiz_for_lang = QUIZZES[g.lang]
         quiz_for_lang.set_keyword_language(g.keyword_lang)
 
-        questions = quiz_for_lang.get_quiz_data_for_level(level_source)
-        question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
+        questions = quiz_for_lang.get_quiz_data_for_level(level_source, g.keyword_lang)
+        question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr, g.keyword_lang)
 
         if not questions:
             return no_quiz_data_error()
