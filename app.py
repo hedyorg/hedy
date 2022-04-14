@@ -758,8 +758,6 @@ def index(level, program_id):
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
 
-    level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
-    level_defaults_for_lang.set_keyword_language(g.keyword_lang)
     parsons_problem_for_lang = PARSONS[g.lang]
     parsons_problem_for_lang.set_keyword_language(g.keyword_lang)
 
