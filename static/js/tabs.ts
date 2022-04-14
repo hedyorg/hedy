@@ -59,6 +59,12 @@ function resetWindow() {
     document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
 
+    if (tabName === 'Slepen'){
+      $ ('#code_editor').hide();
+      $ ('#parson_style').show();
+      return;
+    }
+
     if (tabName === 'end') {
       $ ('#adventures-tab').css('height', '');
       $ ('#adventures-tab').css('min-height', '14em');
@@ -68,6 +74,9 @@ function resetWindow() {
       $('#developers_toggle_container').hide ();
       return;
     }
+
+    $ ('#code_editor').show();
+    $ ('#parson_style').hide();
     $ ('#adventures-tab').css('max-height', '20em')
     $('#developers_toggle_container').show ();
     $ ('#level-header input').show ();

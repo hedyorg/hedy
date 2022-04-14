@@ -95,7 +95,7 @@
           {% endif %}
         {% endfor %}
         
-        <style>
+        <!--- <style>
             #div1 {
                 width: 350px;
                 height: 40px;
@@ -120,6 +120,81 @@
             var data = ev.dataTransfer.getData("text");
             ev.target.appendChild(document.getElementById(data));
             }
+        </script> --->
+
+        <style>
+            .container {
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                gap: 10px;
+            }
+
+            .box {
+                border: 3px solid #666;
+                background-color: #ddd;
+                border-radius: .5em;
+                padding: 10px;
+                cursor: move;
+            }
+
+            .box.over {
+                border: 3px dotted #666;
+            }           
+        </style>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            function handleDragStart(e){
+                this.style.opacity = 0.4;
+
+                dragSrcEl = this;
+
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', this.innerHTML);
+            }
+
+            function handleDragEnd(e) {
+                this.style.opacity = '1';
+
+                items.forEach(function (item) {
+                    item.classList.remove('over');
+                });
+            }
+            
+            function handleDragOver(e) {
+                e.preventDefault();
+            return false;
+            }
+
+            function handleDragEnter(e) {
+                this.classList.add('over');
+            }
+
+            function handleDragLeave(e) {
+                this.classList.remove('over');
+            }
+
+            function handleDrop(e) {
+                e.stopPropagation(); // stops the browser from redirecting.
+
+                if (dragSrcEl !== this) {
+                    dragSrcEl.innerHTML = this.innerHTML;
+                    this.innerHTML = e.dataTransfer.getData('text/html');
+                }
+                return false;
+            }
+
+            let items = document.querySelectorAll('.container .box');
+            items.forEach(function (item) {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('dragenter', handleDragEnter);
+                item.addEventListener('dragleave', handleDragLeave);
+                item.addEventListener('dragend', handleDragEnd);
+                item.addEventListener('drop', handleDrop);
+            });
+        });
+
         </script>
 
         <div data-tabtarget="{{parsons['tab_name']}}" class="hidden">
@@ -127,15 +202,27 @@
             <div class="flex flex-row">
                 <div class="{% if example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
                     {{ parsons['text']|commonmark }}
-                    {% for key, line in parsons.code_lines.items() %}
+                   <!---  {% for key, line in parsons.code_lines.items() %}
                    
                         <div id="{{line}}" draggable="true" ondragstart="drag(event)">
-                             <div  class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
-                                 {{ line }} 
+                             <div id="div1" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
+                                 {{ line }}  
                             </div>
+                        </div> 
+
+                       <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div id= "{{line}}" draggable="true" ondragstart="drag(event)" width="88" height="31"> 
+                            {{line}}
+                            </div>
+                            <br>
+                        </div>
+                        <div class="container">
+                            <div id="{{line}}" draggable="true" class="box">{{line}}</div>
+                            <br>
                         </div>
    
-                    {% endfor %}
+                    {% endfor %}--->
+
                 </div>
                 {% if example_code %}
                     <div class="border"></div>
