@@ -8,9 +8,12 @@
                 </div>
               {% endif %}
             {% endfor %}
-              <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{parsons['tab_name']}}">
-                  {{parsons['tab_name']}}
-              </div>
+            <!-- Add the tab for the parsons problem (if it exists -->
+            {% if parsons %}
+                <div class="tab parsons_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{parsons['tab_name']}}">
+                    {{parsons['tab_name']}}
+                </div>
+            {% endif %}
             {% for adventure in teacher_adventures %}
                 <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.name}}">
                     {{ adventure.name }}

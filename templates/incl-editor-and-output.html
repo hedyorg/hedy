@@ -1,7 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <div id="editor-area" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
     <!-- Row 1: editor, output pane -->
-    <div class="flex flex-col order-1 relative" id="code_editor" style="height: 22rem;">
+    <div class="flex flex-col order-1 relative" id="code_editor" style="min-height: 22rem;">
       <!-- language selector overlay -->
       {% if other_keyword_language() and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) and not editor_readonly %}
           <div id="main_editor_keyword_selector">
@@ -33,13 +33,15 @@
           {% if editor_readonly %}data-readonly="true"{% endif %}
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code}}
         </div>
-        <div id="parsons_container" class="hidden mt-4">
-            {% for key, line in parsons.code_lines.items() %}
-               <div id="{{line}}" draggable="true" class="box mb-4 text-xl px-4 py-2 bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg">
-                 &nbsp; <!-- This is a HTML space to ensure styling of the element -->
-                </div>
-            {% endfor %}
-        </div>
+        {% if parsons %}
+            <div id="parsons_container" class="w-full flex-1 hidden mt-4">
+                {% for key, line in parsons.code_lines.items() %}
+                   <div id="{{line}}" draggable="true" class="box mb-4 text-xl px-4 py-2 bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg">
+                     &nbsp; <!-- This is a HTML space to ensure styling of the element -->
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <!-- errorbox -->
         <div id="errorbox"
           class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
