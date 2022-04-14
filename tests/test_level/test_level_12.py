@@ -821,9 +821,9 @@ class TestsLevel12(HedyTester):
       except ValueError:
         pass
     try:
-        colors.remove(color)
+      colors.remove(color)
     except:
-       pass
+      pass
     print(f'''{random.choice(colors)}''')""")
 
 
