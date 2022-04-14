@@ -274,9 +274,9 @@ class TestsLevel4(HedyTester):
     expected = textwrap.dedent("""\
     dieren = ['koe', 'kiep']
     try:
-        dieren.remove('kiep')
+      dieren.remove('kiep')
     except:
-       pass
+      pass
     print(f'{random.choice(dieren)}')""")
 
     self.multi_level_tester(
@@ -316,9 +316,9 @@ class TestsLevel4(HedyTester):
     colors = ['green', 'red', 'blue']
     color = input(f'what color to remove?')
     try:
-        colors.remove(color)
+      colors.remove(color)
     except:
-       pass
+      pass
     print(f'{random.choice(colors)}')""")
 
 

@@ -81,11 +81,11 @@ adventures:
                 example_code_6: "```\na = 'Hallo '\nb = 'verden!'\nprint a + b\n```\n"
             13:
                 start_code: "navn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy!'"
-                story_text: "## Og... Eller?\nNå skal vi lære om `{and}` og`{or}`! Hvis du har lyst til å sjekke to påstander trenger du ikke å bruke to `{if}`, du kan bruke `{and}` og `{or}`. Hvis du bruker `{and}` må begge påstandene være sann. Vi kan også bruke `{eller}`, da trenger kun en av påstandene å være sann.\n"
+                story_text: "## Og... Eller?\nNå skal vi lære om `{and}` og`{or}`! Hvis du har lyst til å sjekke to påstander trenger du ikke å bruke to `{if}`, du kan bruke `{and}` og `{or}`. Hvis du bruker `{and}` må begge påstandene være sann. Vi kan også bruke `eller`, da trenger kun en av påstandene å være sann.\n"
                 example_code: "```\nnavn = {ask} 'Hva heter du?'\nalder = {ask} 'Hvor gammel er du?'\n{if} navn {is} 'Hedy' {and} alder {is} 2\n    {print} 'Du er den ekte Hedy'\n```\n"
             14:
                 start_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'\n{else}\n    {print} 'Du er eldre enn meg!'"
-                story_text: "## Stor, Større, Størst!\nVi skal lære enda flere nye ting. Det kan være du allerede kjenner til disse fra mattetimen, `<`og `>`.\n`<` kaller vi 'mindre enn'-tegnet. Dette bruker vi for å sjekke om det første tallet er *mindre enn* det andre, f.eks: `alder < 12`kan leses som `alder er mindre enn 12`.\nHvis du vil sjekke om det første tallet er mindre eller like stort som det andre, kan du bruke `<=`, f.eks: `alder <= 11`.\n`>` kaller vi `større enn`-tegnet. Dette bruker vi for å sjekke om det første tallet er *større enn* det andre, f.eks: `poeng > 10` kan leses som `poeng er større enn 10`.\nHvis du vil sjekke om det første tallet er større eller like stort som det andre, kan du bruke `>=`, f.eks: `poeng >= 11`.\nDu kan bruke disse sammenligningene i en `{hvis}`, for eksempel slik:\n"
+                story_text: "## Stor, Større, Størst!\nVi skal lære enda flere nye ting. Det kan være du allerede kjenner til disse fra mattetimen, `<`og `>`.\n`<` kaller vi 'mindre enn'-tegnet. Dette bruker vi for å sjekke om det første tallet er *mindre enn* det andre, f.eks: `alder < 12`kan leses som `alder er mindre enn 12`.\nHvis du vil sjekke om det første tallet er mindre eller like stort som det andre, kan du bruke `<=`, f.eks: `alder <= 11`.\n`>` kaller vi `større enn`-tegnet. Dette bruker vi for å sjekke om det første tallet er *større enn* det andre, f.eks: `poeng > 10` kan leses som `poeng er større enn 10`.\nHvis du vil sjekke om det første tallet er større eller like stort som det andre, kan du bruke `>=`, f.eks: `poeng >= 11`.\nDu kan bruke disse sammenligningene i en `hvis`, for eksempel slik:\n"
                 example_code: "## Eksempelkode\n```\nalder = {ask} 'Hvor gammel er du?'\n{if} alder > 12\n    {print} 'Du er eldre enn meg!'\n```\n"
                 story_text_2: "Fra dette nivået, hvis du vil sjekke om to ting er like, kan du nå bruke to er-lik tegn. Dette er måten å sjekke om ting er lik i de fleste programmeringsspråk:\n"
                 example_code_2: "```\nnavn = {ask} 'Hva heter du?'\n{if} navn == 'Hedy'\n    {print} 'Du er kul!'\n```\n"
@@ -505,7 +505,7 @@ adventures:
                 example_code: "## Eksempel Hedykode\n\n```\nvers = 99\n{repeat} 99 {times}\n    {print} vers ' bottles of beer on the wall'\n    {print} vers ' bottles of beer'\n    {print} 'Take one down, pass it around'\n    verse = vers - 1\n    {print} vers ' bottles of beer on the wall'\n```\n"
                 start_code: '# skriv koden din her'
             7:
-                story_text: "## Sanger\nSanger inneholder ofte en del repetisjon. For eksempel... Baby Shark! Om du synger den så kan du fortsette å synge det samme:\n\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\nDu kan lage denne sangen mye kortere med en `{repeat`! Kan du fullføre koden?\n"
+                story_text: "## Sanger\nSanger inneholder ofte en del repetisjon. For eksempel... Baby Shark! Om du synger den så kan du fortsette å synge det samme:\n\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\nDu kan lage denne sangen mye kortere med en `{repeat}`! Kan du fullføre koden?\n"
                 example_code: "## Eksempel Hedykode\n\n```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nEtter Baby Shark kan du selvfølgelig programmere andre sanger. Det er mange sanger med repetisjon.\n"
                 start_code: "{print} 'Baby Shark'"
             6:
@@ -697,42 +697,3 @@ adventures:
         description: Hva er neste?
         image: hedy-logo.png
         default_save_name: neste
-    end:
-        name: Slutt
-        description: Test din Hedykunnskap
-        image: hedy-logo.png
-        default_save_name: ingen
-        levels:
-            1:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# skriv koden din her'
-            2:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# skriv koden din her'
-            3:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# skriv koden din her'
-            4:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# skriv koden din her'
-            5:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# skriv koden din her'
-            6:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# skriv koden din her'
-            7:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# skriv koden din her'
-            8:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# skriv koden din her'
-            9:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# skriv koden din her'
-            10:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
-            11:
-                story_text: "## End\nThis is the end of the level! Take the quiz now to test your knowledge.\n"
-                start_code: '# place your code here'
