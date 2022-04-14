@@ -56,125 +56,19 @@
           </div>
           {% endif %}
         {% endfor %}
-        <!--- <style>
-            #div1 {
-                width: 350px;
-                height: 40px;
-                padding: 10px;
-                border: 1px solid #aaaaaa;
-                color: white;
-                background-color: black;
-            }
-        </style>
-
-        <script>
-            function allowDrop(ev) {
-            ev.preventDefault();
-            }
-            
-            function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-            }
-            
-            function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
-            }
-        </script> --->
-
-        <!-- Todo Charlotte: Het is het mooiste dit te verplaatsen naar app.ts of tabs.ts -->
-        <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            function handleDragStart(e){
-                this.style.opacity = 0.4;
-
-                dragSrcEl = this;
-
-                e.dataTransfer.effectAllowed = 'move';
-                e.dataTransfer.setData('text/html', this.innerHTML);
-            }
-
-            function handleDragEnd(e) {
-                this.style.opacity = '1';
-
-                items.forEach(function (item) {
-                    item.classList.remove('over');
-                });
-            }
-            
-            function handleDragOver(e) {
-                e.preventDefault();
-            return false;
-            }
-
-            function handleDragEnter(e) {
-                this.classList.add('over');
-            }
-
-            function handleDragLeave(e) {
-                this.classList.remove('over');
-            }
-
-            function handleDrop(e) {
-                e.stopPropagation(); // stops the browser from redirecting.
-
-                if (dragSrcEl !== this) {
-                    dragSrcEl.innerHTML = this.innerHTML;
-                    this.innerHTML = e.dataTransfer.getData('text/html');
-                }
-                return false;
-            }
-
-            let items = document.querySelectorAll('#parsons_container .box');
-            items.forEach(function (item) {
-                item.addEventListener('dragstart', handleDragStart);
-                item.addEventListener('dragover', handleDragOver);
-                item.addEventListener('dragenter', handleDragEnter);
-                item.addEventListener('dragleave', handleDragLeave);
-                item.addEventListener('dragend', handleDragEnd);
-                item.addEventListener('drop', handleDrop);
-            });
-        });
-
-        </script>
-
         <div data-tabtarget="{{parsons['tab_name']}}" class="hidden">
-    
             <div class="flex flex-row">
-                <div class="{% if example_code %}w-1/2{% else %}w-full{% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                <div class="w-full p-2 ltr:mr-2 rtl:ml-2">
                     {{ parsons['text']|commonmark }}
-                   <!---  {% for key, line in parsons.code_lines.items() %}
-                   
-                        <div id="{{line}}" draggable="true" ondragstart="drag(event)">
-                             <div id="div1" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
-                                 {{ line }}  
+                    <div class="flex flex-col mx-auto items-center start_parsons_options">
+                        {% for key, line in parsons.code_lines.items() %}
+                            <div id="{{line}}" draggable="true" class="box w-3/4 mb-2 text-lg px-4 py-2 bg-gray-200 border-2 border-gray-600 rounded-lg">
+                              {{line}}
                             </div>
-                        </div> 
-
-                       <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                            <div id= "{{line}}" draggable="true" ondragstart="drag(event)" width="88" height="31"> 
-                            {{line}}
-                            </div>
-                            <br>
-                        </div>
-                        <div class="container">
-                            <div id="{{line}}" draggable="true" class="box">{{line}}</div>
-                            <br>
-                        </div>
-   
-                    {% endfor %}--->
-
-                </div>
-                {% if example_code %}
-                    <div class="border"></div>
-                    <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
-                        {{ parsons['example']|commonmark }}
+                        {% endfor %}
                     </div>
-                {% endif %}
+                </div>
             </div>
-
-          
             <div class="ltr:clear-right rtl:clear-left"></div>
         </div>
         {% for adventure in teacher_adventures %}
@@ -193,3 +87,57 @@
         </div>
       </div>
     </div>
+        <!-- Todo Charlotte: Het is het mooiste dit te verplaatsen naar app.ts of tabs.ts -->
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    function handleDragStart(e){
+        this.style.opacity = 0.4;
+
+        dragSrcEl = this;
+
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', this.innerHTML);
+    }
+
+    function handleDragEnd(e) {
+        this.style.opacity = '1';
+
+        items.forEach(function (item) {
+            item.classList.remove('over');
+        });
+    }
+
+    function handleDragOver(e) {
+        e.preventDefault();
+    return false;
+    }
+
+    function handleDragEnter(e) {
+        this.classList.add('over');
+    }
+
+    function handleDragLeave(e) {
+        this.classList.remove('over');
+    }
+
+    function handleDrop(e) {
+        e.stopPropagation(); // stops the browser from redirecting.
+
+        if (dragSrcEl !== this) {
+            dragSrcEl.innerHTML = this.innerHTML;
+            this.innerHTML = e.dataTransfer.getData('text/html');
+        }
+        return false;
+    }
+
+    let items = document.querySelectorAll('#parsons_container .box');
+    items.forEach(function (item) {
+        item.addEventListener('dragstart', handleDragStart);
+        item.addEventListener('dragover', handleDragOver);
+        item.addEventListener('dragenter', handleDragEnter);
+        item.addEventListener('dragleave', handleDragLeave);
+        item.addEventListener('dragend', handleDragEnd);
+        item.addEventListener('drop', handleDrop);
+    });
+});
+</script>
