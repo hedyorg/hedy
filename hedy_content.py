@@ -207,21 +207,8 @@ class Quizzes:
                 for k, v in command.items():
                     command[k] = v.format(**KEYWORDS.get(language))
             keyword_data[level] = commands
-        return keyword_data
-
-    def get_highest_question_level(self, level):
-        return len(self.quizzes['levels'].get(level))
-
-    def get_quiz_data_for_level(self, level, keyword_lang="en"):
-        if self.debug_mode and not self.data.get(keyword_lang, None):
-            if not self.file:
-                self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').get('levels')
-            self.data[keyword_lang] = self.cache_quiz_keywords(keyword_lang)
-        return self.data.get(keyword_lang, {}).get(level, None)
-
-    def get_quiz_data_for_level_question(self, level, question, keyword_lang="en"):
-        # We have to parse the keywords before returning
-        for k, v in self.quizzes['levels'].get(level).get(question).items():
+            """
+                    for k, v in self.quizzes['levels'].get(level).get(question).items():
             if isinstance(self.quizzes['levels'].get(level).get(question)[k], str):
                 self.quizzes['levels'].get(level).get(question)[k] = self.quizzes['levels'].get(level).get(question)[k].format(**self.keywords)
             elif isinstance(self.quizzes['levels'].get(level).get(question)[k], list):
@@ -233,10 +220,31 @@ class Quizzes:
                         temp[key] = value.format(**self.keywords)
                     options.append(temp)
                 self.quizzes['levels'].get(level).get(question)[k] = options
-        return self.quizzes['levels'].get(level).get(question)
+            """
+        return keyword_data
+
+    def get_highest_question_level(self, level):
+        if self.debug_mode and not self.data.get("en", None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').get('levels')
+            self.data["en"] = self.cache_quiz_keywords("en")
+        return len(self.data["en"].get(level, {}))
+
+    def get_quiz_data_for_level(self, level, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').get('levels')
+            self.data[keyword_lang] = self.cache_quiz_keywords(keyword_lang)
+        return self.data.get(keyword_lang, {}).get(level, None)
+
+    def get_quiz_data_for_level_question(self, level, question, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').get('levels')
+            self.data[keyword_lang] = self.cache_quiz_keywords(keyword_lang)
+        return self.data.get(keyword_lang, {}).get(level, {}).get(question, None)
 
 
-# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchQuiz:
-    def get_quiz_data_for_level(self, level):
+    def get_quiz_data_for_level(self, level, keyword_lang):
         return {}
