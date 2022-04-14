@@ -206,9 +206,7 @@ class Quizzes:
             for number, question in questions.items():
                 for k, v in question.items():
                     # We have to parse another way for the mp_choice_options
-                    if k != "mp_choice_options":
-                        questions[number][k] = v.format(**KEYWORDS.get(language))
-                    else:
+                    if k == "mp_choice_options":
                         options = []
                         for option in copy.deepcopy(v):
                             temp = {}
@@ -216,9 +214,9 @@ class Quizzes:
                                 temp[key] = value.format(**KEYWORDS.get(language))
                             options.append(temp)
                         questions[number][k] = options
+                    else:
+                        questions[number][k] = v.format(**KEYWORDS.get(language))
             keyword_data[level] = questions
-            print("Dit is level...." + str(level))
-            print(keyword_data[level])
         return keyword_data
 
     def get_highest_question_level(self, level):
