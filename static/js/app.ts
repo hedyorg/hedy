@@ -1084,11 +1084,11 @@ export function get_trimmed_code() {
     console.error(e);
   }
 
-  if($('#editor').is(":hidden")){
+  // If the main editor is hidden: we are solving a parsons problem
+  if ($('#editor').is(":hidden")){
      let code = "";
      $('#parsons_container').children().each(function() {
           code += $(this).text();
-          console.log(code);
       });
      return code.replace(/ +$/mg, '');
   }
