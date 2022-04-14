@@ -35,7 +35,7 @@
         </div>
         <div id="parsons_container" class="hidden">
             {% for key, line in parsons.code_lines.items() %}
-               <div id="{{line}}" draggable="true" class="box mb-4">
+               <div id="{{line}}" draggable="true" class="box mb-4 text-xl px-4 py-2 bg-gray-200 border-2 border-gray-600 rounded-lg">
                   {{line}}
                 </div>
             {% endfor %}
