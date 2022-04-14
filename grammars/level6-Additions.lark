@@ -2,21 +2,22 @@ _print_argument: (_SPACE | quoted_text | list_access | print_expression)*
 ?print_expression: INT | var_access | error_unsupported_number | expression
 
 command:+= ask | list_access_var | assign -= ask | list_access | list_access_var | assign
+_if_less_command:+= ask | list_access_var | assign -= ask | list_access | list_access_var | assign
 
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
-ask: var (_SPACE _IS _SPACE | _EQUALS) _ASK (_SPACE _print_argument)?
+ask: var (_IS | _EQUALS) _ASK (_print_argument)?
 
-equality_check: textwithoutspaces (_SPACE _IS _SPACE | _EQUALS) (textwithoutspaces | quoted_text)
+equality_check: textwithoutspaces (_IS | _EQUALS) (textwithoutspaces | quoted_text)
 
 condition:+= equality_check -= equality_check
 
-list_access_var: var (_SPACE _IS _SPACE | _EQUALS) var _SPACE _AT _SPACE (INT | random)
-assign_list: var (_SPACE _IS _SPACE | _EQUALS) textwithspaces (_COMMA textwithspaces)+
-assign: var (_SPACE _IS _SPACE | _EQUALS) expression | var (_SPACE _IS _SPACE | _EQUALS) textwithoutspaces | var (_SPACE _IS _SPACE | _EQUALS) textwithspaces
+list_access_var: var (_IS | _EQUALS) var _AT (INT | random)
+assign_list: var (_IS | _EQUALS) textwithspaces (_COMMA textwithspaces)+
+assign: var (_IS | _EQUALS) expression | var ( _IS  | _EQUALS) textwithoutspaces | var (_IS | _EQUALS) textwithspaces
 
 ?expression: simple_expression | expression _MULTIPLY atom -> multiplication | expression _DIVIDE atom -> division | expression _PLUS atom -> addition | expression _MINUS atom -> subtraction
 ?simple_expression: atom _MULTIPLY atom -> multiplication | atom _DIVIDE atom -> division | atom _PLUS atom -> addition | atom _MINUS atom -> subtraction
 ?atom: INT | var_access | error_unsupported_number | textwithoutspaces
 error_unsupported_number: /([-+]?(\d+[\.,]\d+))/ -> error_unsupported_number
 
-textwithoutspaces: /(?:[^\n،, *+\-\/ei]|e(?!lse)|i(?!f))+/ -> text //new cause in level 6 calculation elements need to be escaped too
+textwithoutspaces: /(?:[^#\n،, *+\-\/eias]|e(?!lse)|i(?!f)|s(?!i|inon|ino)|a(?!nders|ls))+/ -> text

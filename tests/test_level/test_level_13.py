@@ -13,7 +13,7 @@ class TestsLevel13(HedyTester):
       if naam is 'Felienne' and leeftijd is 37
           print 'hallo jij!'""")
     expected = textwrap.dedent("""\
-      naam = input(f'hoe heet jij?')
+      naam = input(f'''hoe heet jij?''')
       try:
         naam = int(naam)
       except ValueError:
@@ -21,7 +21,7 @@ class TestsLevel13(HedyTester):
           naam = float(naam)
         except ValueError:
           pass
-      leeftijd = input(f'hoe oud ben jij?')
+      leeftijd = input(f'''hoe oud ben jij?''')
       try:
         leeftijd = int(leeftijd)
       except ValueError:
@@ -30,7 +30,7 @@ class TestsLevel13(HedyTester):
         except ValueError:
           pass
       if str(naam) == str('Felienne') and str(leeftijd) == str('37'):
-        print(f'hallo jij!')""")
+        print(f'''hallo jij!''')""")
 
     self.multi_level_tester(
       max_level=16,
@@ -46,7 +46,7 @@ class TestsLevel13(HedyTester):
         print 'You are the real Hedy!'""")
 
     expected = textwrap.dedent("""\
-      name = input(f'what is your name?')
+      name = input(f'''what is your name?''')
       try:
         name = int(name)
       except ValueError:
@@ -54,7 +54,7 @@ class TestsLevel13(HedyTester):
           name = float(name)
         except ValueError:
           pass
-      age = input(f'what is your age?')
+      age = input(f'''what is your age?''')
       try:
         age = int(age)
       except ValueError:
@@ -63,7 +63,7 @@ class TestsLevel13(HedyTester):
         except ValueError:
           pass
       if str(name) == str('Hedy') and str(age) == str('2'):
-        print(f'You are the real Hedy!')""")
+        print(f'''You are the real Hedy!''')""")
 
     self.multi_level_tester(
       code=code,
@@ -79,7 +79,7 @@ class TestsLevel13(HedyTester):
           print 'hallo'""")
     expected = textwrap.dedent("""\
       if str('5') == str('5') or str('4') == str('4'):
-        print(f'hallo')""")
+        print(f'''hallo''')""")
 
     self.multi_level_tester(
       code=code,

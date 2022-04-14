@@ -2,15 +2,13 @@ import collections
 import os
 from flask_babel import gettext
 import utils
-from hedy_content import ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
 from website.yaml_file import YamlFile
 import bcrypt
 import re
 import urllib
-from flask import request, session, make_response, jsonify, redirect, g
-from flask_helpers import render_template
-from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, \
-    mstoisostring
+from flask import request, session, make_response, jsonify, redirect
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku
 import datetime
 from functools import wraps
 from config import config
@@ -69,62 +67,6 @@ def make_salt():
 @querylog.timed
 def hash(password, salt):
     return bcrypt.hashpw(bytes(password, 'utf-8'), bytes(salt, 'utf-8')).decode('utf-8')
-
-
-countries = {'AF': 'Afghanistan', 'AX': 'Åland Islands', 'AL': 'Albania', 'DZ': 'Algeria', 'AS': 'American Samoa',
-             'AD': 'Andorra', 'AO': 'Angola', 'AI': 'Anguilla', 'AQ': 'Antarctica', 'AG': 'Antigua and Barbuda',
-             'AR': 'Argentina', 'AM': 'Armenia', 'AW': 'Aruba', 'AU': 'Australia', 'AT': 'Austria', 'AZ': 'Azerbaijan',
-             'BS': 'Bahamas', 'BH': 'Bahrain', 'BD': 'Bangladesh', 'BB': 'Barbados', 'BY': 'Belarus', 'BE': 'Belgium',
-             'BZ': 'Belize', 'BJ': 'Benin', 'BM': 'Bermuda', 'BT': 'Bhutan', 'BO': 'Bolivia, Plurinational State of',
-             'BQ': 'Bonaire, Sint Eustatius and Saba', 'BA': 'Bosnia and Herzegovina', 'BW': 'Botswana',
-             'BV': 'Bouvet Island', 'BR': 'Brazil', 'IO': 'British Indian Ocean Territory', 'BN': 'Brunei Darussalam',
-             'BG': 'Bulgaria', 'BF': 'Burkina Faso', 'BI': 'Burundi', 'KH': 'Cambodia', 'CM': 'Cameroon',
-             'CA': 'Canada', 'CV': 'Cape Verde', 'KY': 'Cayman Islands', 'CF': 'Central African Republic', 'TD': 'Chad',
-             'CL': 'Chile', 'CN': 'China', 'CX': 'Christmas Island', 'CC': 'Cocos(Keeling) Islands', 'CO': 'Colombia',
-             'KM': 'Comoros', 'CG': 'Congo', 'CD': 'Congo, the Democratic Republic of the', 'CK': 'Cook Islands',
-             'CR': 'Costa Rica', 'CI': 'Côte d\'Ivoire', 'HR': 'Croatia', 'CU': 'Cuba', 'CW': 'Curaçao', 'CY': 'Cyprus',
-             'CZ': 'Czech Republic', 'DK': 'Denmark', 'DJ': 'Djibouti', 'DM': 'Dominica', 'DO': 'Dominican Republic',
-             'EC': 'Ecuador', 'EG': 'Egypt', 'SV': 'El Salvador', 'GQ': 'Equatorial Guinea', 'ER': 'Eritrea',
-             'EE': 'Estonia', 'ET': 'Ethiopia', 'FK': 'Falkland Islands(Malvinas)', 'FO': 'Faroe Islands', 'FJ': 'Fiji',
-             'FI': 'Finland', 'FR': 'France', 'GF': 'French Guiana', 'PF': 'French Polynesia',
-             'TF': 'French Southern Territories', 'GA': 'Gabon', 'GM': 'Gambia', 'GE': 'Georgia', 'DE': 'Germany',
-             'GH': 'Ghana', 'GI': 'Gibraltar', 'GR': 'Greece', 'GL': 'Greenland', 'GD': 'Grenada', 'GP': 'Guadeloupe',
-             'GU': 'Guam', 'GT': 'Guatemala', 'GG': 'Guernsey', 'GN': 'Guinea', 'GW': 'Guinea-Bissau', 'GY': 'Guyana',
-             'HT': 'Haiti', 'HM': 'Heard Island and McDonald Islands', 'VA': 'Holy See(Vatican City State)',
-             'HN': 'Honduras', 'HK': 'Hong Kong', 'HU': 'Hungary', 'IS': 'Iceland', 'IN': 'India', 'ID': 'Indonesia',
-             'IR': 'Iran, Islamic Republic of', 'IQ': 'Iraq', 'IE': 'Ireland', 'IM': 'Isle of Man', 'IL': 'Israel',
-             'IT': 'Italy', 'JM': 'Jamaica', 'JP': 'Japan', 'JE': 'Jersey', 'JO': 'Jordan', 'KZ': 'Kazakhstan',
-             'KE': 'Kenya', 'KI': 'Kiribati', 'KP': 'Korea, Democratic People\'s Republic of',
-             'KR': 'Korea, Republic of', 'KW': 'Kuwait', 'KG': 'Kyrgyzstan', 'LA': 'Lao People\'s Democratic Republic',
-             'LV': 'Latvia', 'LB': 'Lebanon', 'LS': 'Lesotho', 'LR': 'Liberia', 'LY': 'Libya', 'LI': 'Liechtenstein',
-             'LT': 'Lithuania', 'LU': 'Luxembourg', 'MO': 'Macao', 'MK': 'Macedonia, the Former Yugoslav Republic of',
-             'MG': 'Madagascar', 'MW': 'Malawi', 'MY': 'Malaysia', 'MV': 'Maldives', 'ML': 'Mali', 'MT': 'Malta',
-             'MH': 'Marshall Islands', 'MQ': 'Martinique', 'MR': 'Mauritania', 'MU': 'Mauritius', 'YT': 'Mayotte',
-             'MX': 'Mexico', 'FM': 'Micronesia, Federated States of', 'MD': 'Moldova, Republic of', 'MC': 'Monaco',
-             'MN': 'Mongolia', 'ME': 'Montenegro', 'MS': 'Montserrat', 'MA': 'Morocco', 'MZ': 'Mozambique',
-             'MM': 'Myanmar', 'NA': 'Namibia', 'NR': 'Nauru', 'NP': 'Nepal', 'NL': 'Netherlands', 'NC': 'New Caledonia',
-             'NZ': 'New Zealand', 'NI': 'Nicaragua', 'NE': 'Niger', 'NG': 'Nigeria', 'NU': 'Niue',
-             'NF': 'Norfolk Island', 'MP': 'Northern Mariana Islands', 'NO': 'Norway', 'OM': 'Oman', 'PK': 'Pakistan',
-             'PW': 'Palau', 'PS': 'Palestine, State of', 'PA': 'Panama', 'PG': 'Papua New Guinea', 'PY': 'Paraguay',
-             'PE': 'Peru', 'PH': 'Philippines', 'PN': 'Pitcairn', 'PL': 'Poland', 'PT': 'Portugal', 'PR': 'Puerto Rico',
-             'QA': 'Qatar', 'RE': 'Réunion', 'RO': 'Romania', 'RU': 'Russian Federation', 'RW': 'Rwanda',
-             'BL': 'Saint Barthélemy', 'SH': 'Saint Helena, Ascension and Tristan da Cunha',
-             'KN': 'Saint Kitts and Nevis', 'LC': 'Saint Lucia', 'MF': 'Saint Martin(French part)',
-             'PM': 'Saint Pierre and Miquelon', 'VC': 'Saint Vincent and the Grenadines', 'WS': 'Samoa',
-             'SM': 'San Marino', 'ST': 'Sao Tome and Principe', 'SA': 'Saudi Arabia', 'SN': 'Senegal', 'RS': 'Serbia',
-             'SC': 'Seychelles', 'SL': 'Sierra Leone', 'SG': 'Singapore', 'SX': 'Sint Maarten(Dutch part)',
-             'SK': 'Slovakia', 'SI': 'Slovenia', 'SB': 'Solomon Islands', 'SO': 'Somalia', 'ZA': 'South Africa',
-             'GS': 'South Georgia and the South Sandwich Islands', 'SS': 'South Sudan', 'ES': 'Spain',
-             'LK': 'Sri Lanka', 'SD': 'Sudan', 'SR': 'Suriname', 'SJ': 'Svalbard and Jan Mayen', 'SZ': 'Swaziland',
-             'SE': 'Sweden', 'CH': 'Switzerland', 'SY': 'Syrian Arab Republic', 'TW': 'Taiwan, Province of China',
-             'TJ': 'Tajikistan', 'TZ': 'Tanzania, United Republic of', 'TH': 'Thailand', 'TL': 'Timor-Leste',
-             'TG': 'Togo', 'TK': 'Tokelau', 'TO': 'Tonga', 'TT': 'Trinidad and Tobago', 'TN': 'Tunisia', 'TR': 'Turkey',
-             'TM': 'Turkmenistan', 'TC': 'Turks and Caicos Islands', 'TV': 'Tuvalu', 'UG': 'Uganda', 'UA': 'Ukraine',
-             'AE': 'United Arab Emirates', 'GB': 'United Kingdom', 'US': 'United States',
-             'UM': 'United States Minor Outlying Islands', 'UY': 'Uruguay', 'UZ': 'Uzbekistan', 'VU': 'Vanuatu',
-             'VE': 'Venezuela, Bolivarian Republic of', 'VN': 'Viet Nam', 'VG': 'Virgin Islands, British',
-             'VI': 'Virgin Islands, U.S.', 'WF': 'Wallis and Futuna', 'EH': 'Western Sahara', 'YE': 'Yemen',
-             'ZM': 'Zambia', 'ZW': 'Zimbabwe'};
 
 
 # The current user is a slice of the user information from the database and placed on the Flask session.
@@ -193,7 +135,7 @@ def update_is_teacher(user, is_teacher_value=1):
     DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
 
     if user_becomes_teacher and not is_testing_request(request):
-        send_email_template('welcome_teacher', user['email'], '')
+        send_email_template(template='welcome_teacher', email=user['email'], username=user['username'])
 
 
 # Thanks to https://stackoverflow.com/a/34499643
@@ -278,13 +220,16 @@ def store_new_account(account, email):
         resp = make_response({'username': username, 'token': hashed_token})
     # Otherwise, we send an email with a verification link and we return an empty body
     else:
-        send_email_template('welcome_verify', email,
-                            email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                username) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'],
-                            username=user['username'])
+        send_email_template(template='welcome_verify', email=email,
+                            link=create_verify_link(username, hashed_token), username=user['username'])
         resp = make_response({})
     return user, resp
 
+
+def create_verify_link(username, token):
+    email = email_base_url() + '/auth/verify?username='
+    email += urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(token)
+    return email
 
 # Note: translations are used only for texts that will be seen by a GUI user.
 def routes(app, database):
@@ -374,7 +319,7 @@ def routes(app, database):
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return gettext('gender_invalid'), 400
         if 'country' in body:
-            if not body['country'] in countries:
+            if not body['country'] in COUNTRIES:
                 return gettext('country_invalid'), 400
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
             return gettext('experience_invalid'), 400
@@ -428,14 +373,14 @@ def routes(app, database):
         username = request.args.get('username', None)
         token = request.args.get('token', None)
         if not token:
-            return 'no token', 400
+            return gettext('token_invalid'), 400
         if not username:
-            return 'no username', 400
+            return gettext('username_invalid'), 400
 
         # Verify that user actually exists
         user = DATABASE.user_by_username(username)
         if not user:
-            return 'invalid username/token', 403
+            return gettext('username_invalid'), 403
 
         # If user is already verified -> re-direct to landing-page anyway
         if not 'verification_pending' in user:
@@ -443,7 +388,7 @@ def routes(app, database):
 
         # Verify the token
         if token != user['verification_pending']:
-            return 'invalid username/token', 403
+            return gettext('token_invalid'), 403
 
         # Remove the token from the user
         DATABASE.update_user(username, {'verification_pending': None})
@@ -495,7 +440,6 @@ def routes(app, database):
         if body['username'] not in students:
             return gettext("password_change_not_allowed"), 400
 
-        user = DATABASE.user_by_username(body['username'])
         hashed = hash(body['password'], make_salt())
         DATABASE.update_user(body['username'], {'password': hashed})
 
@@ -528,7 +472,7 @@ def routes(app, database):
         DATABASE.update_user(user['username'], {'password': hashed})
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
         if not is_testing_request(request):
-            send_email_template('change_password', user['email'], '', lang=user['language'], username=user['username'])
+            send_email_template(template='change_password', email=user['email'], username=user['username'])
 
         return gettext('password_updated'), 200
 
@@ -554,7 +498,7 @@ def routes(app, database):
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return gettext('gender_invalid'), 400
         if 'country' in body:
-            if not body['country'] in countries:
+            if not body['country'] in COUNTRIES:
                 return gettext('country_invalid'), 400
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
             return gettext('experience_invalid'), 400
@@ -579,10 +523,9 @@ def routes(app, database):
                 if is_testing_request(request):
                     resp = {'username': user['username'], 'token': hashed_token}
                 else:
-                    send_email_template('welcome_verify', email,
-                                        email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                            user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token),
-                                        lang=body['language'], username=user['username'])
+                    send_email_template(template='welcome_verify', email=email,
+                                        link=create_verify_link(user['username'], hashed_token),
+                                        username=user['username'])
 
                 # We check whether the user is in the Mailchimp list.
                 if not is_testing_request(request) and MAILCHIMP_API_URL:
@@ -658,16 +601,15 @@ def routes(app, database):
 
         # Create a token -> use the reset_length value as we don't want the token to live as long as a login one
         token = make_salt()
+        # Todo TB -> Don't we want to use a hashed token here as well?
         DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + reset_length})
 
         if is_testing_request(request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
-            send_email_template('recover_password', user['email'],
-                                email_base_url() + '/reset?username=' + urllib.parse.quote_plus(
-                                    user['username']) + '&token=' + urllib.parse.quote_plus(token),
-                                lang=user['language'], username=user['username'])
+            send_email_template(template='recover_password', email=user['email'],
+                                link=create_verify_link(user['username'], token), username=user['username'])
             return jsonify({'message':gettext('sent_password_recovery')}), 200
 
     @app.route('/auth/reset', methods=['POST'])
@@ -699,7 +641,7 @@ def routes(app, database):
         DATABASE.delete_all_tokens(body['username'])
 
         if not is_testing_request(request):
-            send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
+            send_email_template(template='reset_password', email=user['email'], username=user['username'])
 
         return jsonify({'message':gettext('password_resetted')}), 200
 
@@ -763,12 +705,11 @@ def routes(app, database):
         if is_testing_request(request):
             resp = {'username': user['username'], 'token': hashed_token}
         else:
-            send_email_template('welcome_verify', body['email'],
-                                email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                    user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token),
-                                lang=user['language'], username=user['username'])
+            send_email_template(template='welcome_verify', email=body['email'],
+                                link=create_verify_link(user['username'], hashed_token),
+                                username=user['username'])
 
-        return '', 200
+        return {}, 200
 
 
 # Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
@@ -806,16 +747,42 @@ def send_email(recipient, subject, body_plain, body_html):
         print('Email sent to ' + recipient)
 
 
-def send_email_template(template, email, link='', lang="en", username=''):
-    # Not really nice, but we don't call this often as it is cached
-    texts = collections.defaultdict(lambda: 'Unknown Exception')
-    texts.update(YamlFile.for_file('coursedata/emails/en.yaml').to_dict())
-    texts.update(YamlFile.for_file(f'coursedata/emails/{lang}.yaml').to_dict())
+def get_template_translation(template):
+    if template == 'welcome_verify':
+        return gettext('mail_welcome_verify_body')
+    elif template == 'change_password':
+        return gettext('mail_change_password_body')
+    elif template == 'recover_password':
+        return gettext('mail_recover_password_body')
+    elif template == 'reset_password':
+        return gettext('mail_reset_password_body')
+    elif template == 'welcome_teacher':
+        return gettext('mail_welcome_teacher_body')
+    return None
 
-    subject = texts[template + '_subject']
-    body = texts['hello'].format(username=username) + "\n\n"
-    body += texts[template + '_body'] + "\n\n"
-    body += texts['goodbye']
+
+def get_subject_translation(template):
+    if template == 'welcome_verify':
+        return gettext('mail_welcome_verify_subject')
+    elif template == 'change_password':
+        return gettext('mail_change_password_subject')
+    elif template == 'recover_password':
+        return gettext('mail_recover_password_subject')
+    elif template == 'reset_password':
+        return gettext('mail_reset_password_subject')
+    elif template == 'welcome_teacher':
+        return gettext('mail_welcome_teacher_subject')
+    return None
+
+
+def send_email_template(template, email, link=None, username=gettext('user')):
+    subject = get_subject_translation(template)
+    if not subject:
+        print("Something went wrong, mail template could not be found...")
+        return
+    body = gettext('mail_hello').format(username=username) + "\n\n"
+    body += get_template_translation(template) + "\n\n"
+    body += gettext('mail_goodbye')
 
     with open('templates/base_email.html', 'r', encoding='utf-8') as f:
         body_html = f.read()
@@ -823,8 +790,8 @@ def send_email_template(template, email, link='', lang="en", username=''):
     body_html = body_html.format(content=body)
     body_plain = body
     if link:
-        body_plain = body_plain.format(link='Please copy and paste this link into a new tab: ' + link)
-        body_html = body_html.format(link='<a href="' + link + '">Link</a>')
+        body_plain = body_plain.format(link=gettext('copy_mail_link') + " " + link)
+        body_html = body_html.format(link='<a href="' + link + '">{link}</a>').format(link=gettext('link'))
 
     send_email(email, subject, body_plain, body_html)
 

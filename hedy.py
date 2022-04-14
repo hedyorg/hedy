@@ -39,6 +39,7 @@ class Command:
     echo = 'echo'
     turn = 'turn'
     forward = 'forward'
+    color = 'color'
     add_to_list = 'add to list'
     remove_from_list = 'remove from list'
     list_access = 'at random'
@@ -62,6 +63,7 @@ translatable_commands = {Command.print: ['print'],
                          Command.ask: ['ask'],
                          Command.echo: ['echo'],
                          Command.turn: ['turn'],
+                         Command.color: ['color'],
                          Command.forward: ['forward'],
                          Command.add_to_list: ['add', 'to_list'],
                          Command.remove_from_list: ['remove', 'from'],
@@ -103,7 +105,7 @@ def promote_types(types, rules):
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {
-    1 :['print', 'ask', 'echo', 'turn', 'forward'],
+    1 :['print', 'ask', 'echo', 'turn', 'forward', 'color'],
     2 :['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
     3 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
     4 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
@@ -124,6 +126,7 @@ commands_per_level = {
 }
 
 command_turn_literals = ['right', 'left']
+command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
@@ -139,6 +142,7 @@ commands_and_types_per_level = {
     },
     Command.turn: {1: command_turn_literals,
                    2: [HedyType.integer, HedyType.input]},
+    Command.color: {1: command_make_color},
     Command.forward: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
@@ -185,7 +189,7 @@ def get_list_keywords(commands, to_lang):
 
     translation_commands = []
     dir = path.abspath(path.dirname(__file__))
-    path_keywords = dir + "/coursedata/keywords"
+    path_keywords = dir + "/content/keywords"
 
     to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
     en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
@@ -455,6 +459,11 @@ class TypeValidator(Transformer):
     def forward(self, tree):
         if tree.children:
             self.validate_args_type_allowed(Command.forward, tree.children, tree.meta)
+        return self.to_typed_tree(tree)
+
+    def color(self, tree):
+        if tree.children:
+            self.validate_args_type_allowed(Command.color, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def turn(self, tree):
@@ -783,8 +792,10 @@ class UsesTurtle(Transformer):
             else:
                 return False # some nodes like text and punctuation have text children (their letters) these are not turtles
 
-
     def forward(self, args):
+        return True
+
+    def color(self, args):
         return True
 
     def turn(self, args):
@@ -924,11 +935,6 @@ class IsValid(Filter):
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    # def program(self, meta, args):
-    #     if len(args) == 0:
-    #         return False, InvalidInfo("empty program")
-    #     return super().program(meta, args)
-
     def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
@@ -947,7 +953,9 @@ class IsValid(Filter):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
-
+    def error_condition(self, meta, args):
+        error = InvalidInfo('invalid condition', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
 
     #other rules are inherited from Filter
 
@@ -1025,19 +1033,18 @@ class ConvertToPython(Transformer):
         return hash_var(name) in all_names
 
     def process_variable(self, arg):
-        #processes a variable by hashing and escaping when needed
+        # processes a variable by hashing and escaping when needed
         if self.is_variable(arg):
             return hash_var(arg)
-        elif ConvertToPython.is_quoted(arg): #sometimes kids accidentally quote strings, then we do not want them quoted again
-            return f"{arg}"
-        else:
-            return f"'{arg}'"
+        if ConvertToPython.is_quoted(arg):
+            arg = arg[1:-1]
+        return f"'{process_characters_needing_escape(arg)}'"
 
     def process_variable_for_fstring(self, name):
         if self.is_variable(name):
             return "{" + hash_var(name) + "}"
         else:
-            return name
+            return process_characters_needing_escape(name)
 
     def process_variable_for_fstring_padded(self, name):
         # used to transform variables in comparisons
@@ -1091,7 +1098,7 @@ class ConvertToPython(Transformer):
     # static methods
     @staticmethod
     def is_quoted(s):
-        return (s[0] == "'" and s[-1] == "'") or (s[0] == '"' and s[-1] == '"')
+        return len(s) > 1 and ((s[0] == "'" and s[-1] == "'") or (s[0] == '"' and s[-1] == '"'))
 
     @staticmethod
     def is_int(n):
@@ -1169,6 +1176,38 @@ class ConvertToPython_1(ConvertToPython):
             return sleep_after('t.forward(50)', False)
         return self.make_forward(int(args[0]))
 
+    def color(self, args):
+        if len(args) == 0:
+            return "t.pencolor('black')"  # no arguments defaults to black ink
+
+        arg = args[0].data
+        if arg == 'black':
+            return "t.pencolor('black')"
+        elif arg == 'blue':
+            return "t.pencolor('blue')"
+        elif arg == 'brown':
+            return "t.pencolor('brown')"
+        elif arg == 'gray':
+            return "t.pencolor('gray')"
+        elif arg == 'green':
+            return "t.pencolor('green')"
+        elif arg == 'orange':
+            return "t.pencolor('orange')"
+        elif arg == 'pink':
+            return "t.pencolor('pink')"
+        elif arg == 'purple':
+            return "t.pencolor('purple')"
+        elif arg == 'red':
+            return "t.pencolor('red')"
+        elif arg == 'white':
+            return "t.pencolor('white')"
+        elif arg == 'yellow':
+            return "t.pencolor('yellow')"
+        else:
+            # the TypeValidator should protect against reaching this line:
+            raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
+                                                          allowed_types=get_allowed_types(Command.color, self.level))
+
     def turn(self, args):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
@@ -1188,6 +1227,9 @@ class ConvertToPython_1(ConvertToPython):
 
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True)
+
+    def make_color(self, parameter):
+        return self.make_turtle_command(parameter, Command.color, 'color', False)
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
         variable = self.get_fresh_var('trtl')
@@ -1216,6 +1258,13 @@ class ConvertToPython_2(ConvertToPython_1):
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
         raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
 
+    def color(self, args):
+        if len(args) == 0:
+            return "t.pencolor('black')"
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_color(hash_var(arg))
+
     def turn(self, args):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
@@ -1239,9 +1288,6 @@ class ConvertToPython_2(ConvertToPython_1):
         i = 0
 
         for argument in args:
-            # escape quotes if kids accidentally use them at level 2
-            argument = process_characters_needing_escape(argument)
-
             # final argument and punctuation arguments do not have to be separated with a space, other do
             if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
                 space = ''
@@ -1297,8 +1343,8 @@ class ConvertToPython_2(ConvertToPython_1):
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, args):
         parameter = args[0]
-        values = ["'" + a.replace("'", "\\'") + "'" for a in args[1:]]
-        return parameter + " = [" + ", ".join(values) + "]"
+        values = [f"'{process_characters_needing_escape(a)}'" for a in args[1:]]
+        return f"{parameter} = [{', '.join(values)}]"
 
     def list_access(self, args):
         args = [hash_var(a) for a in args]
@@ -1313,22 +1359,31 @@ class ConvertToPython_3(ConvertToPython_2):
             return args[0] + '[' + args[1] + '-1]'
 
     def add(self, args):
-        var = self.process_variable(args[0])
-        list = args[1]
-        return f"{list}.append({var})"
+        value = self.process_variable(args[0])
+        list_var = args[1]
+        return f"{list_var}.append({value})"
+
     def remove(self, args):
-        var = self.process_variable(args[0])
-        list = args[1]
+        value = self.process_variable(args[0])
+        list_var = args[1]
         return textwrap.dedent(f"""\
         try:
-            {list}.remove({var})
+          {list_var}.remove({value})
         except:
-           pass""")
+          pass""")
 
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=4)
 class ConvertToPython_4(ConvertToPython_3):
+
+    def process_variable_for_fstring(self, name):
+        if self.is_variable(name):
+            return "{" + hash_var(name) + "}"
+        else:
+            if self.is_quoted(name):
+                name = name[1:-1]
+            return name.replace("'", "\\'")  # at level 4 backslashes are escaped in preprocessing, so we escape only '
 
     def var_access(self, args):
         name = args[0]
@@ -1339,7 +1394,6 @@ class ConvertToPython_4(ConvertToPython_3):
         result = ''
         for argument in args:
             argument = self.process_variable_for_fstring(argument)
-            argument = argument.replace("'", '').replace('"', '')  # no quotes needed in fstring
             result += argument
         return result
 
@@ -1379,14 +1433,13 @@ else:
         return ' and '.join(args)
 
     def condition_spaces(self, args):
-        result = args[0] + " == '" + ' '.join(args[1:]) + "'"
-        return result
-
+        arg0 = self.process_variable(args[0])
+        arg1 = self.process_variable(' '.join(args[1:]))
+        return f"{arg0} == {arg1}"
 
     def equality_check(self, args):
         arg0 = self.process_variable(args[0])
-        remaining_text = ' '.join(args[1:])
-        arg1 = self.process_variable(remaining_text)
+        arg1 = ' '.join([self.process_variable(a) for a in args[1:]])
         return f"{arg0} == {arg1}"
         #TODO, FH 2021: zelfde change moet ik ook nog ff maken voor equal. check in hogere levels
 
@@ -1408,7 +1461,6 @@ class ConvertToPython_6(ConvertToPython_5):
             if isinstance(a, Tree):
                 args_new.append("{" + a.children[0] + "}")
             else:
-                a = a.replace("'", "").replace('"', '')  # no quotes needed in fstring
                 args_new.append(self.process_variable_for_fstring(a))
 
         return ''.join(args_new)
@@ -1552,23 +1604,32 @@ class ConvertToPython_12(ConvertToPython_11):
         return ''.join(args)
 
     def text_in_quotes(self, args):
-        # We need to re-add the quotes, so that the Python code becomes name = 'Jan'
-        # Even though the quotes could be single or double, we could always use the same ones here
+        # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
         text = args[0]
-        return "'" + text + "'"
+        if "'" in text:
+            return f'"{text}"'
+        return f"'{text}'"
 
     def process_token_or_tree(self, argument):
         if isinstance(argument, Tree):
             return f'{str(argument.children[0])}'
         else:
-            # If the string is quoted, we have to use " instead of ' to avoid f-str illegal syntax
-            if "'" in argument:  # Check only for single quotes because text_in_quotes re-adds single quotes only
-                return '"' + argument.replace("'", '').replace('"', '') + '"'
-            return f'{argument}'
+            return argument
+
+    def print_ask_args(self, args):
+        result = super().print_ask_args(args)
+        if "'''" in result:
+            raise exceptions.UnsupportedStringValue(invalid_value="'''")
+        return result
+
+    def print(self, args):
+        argument_string = self.print_ask_args(args)
+        return f"print(f'''{argument_string}''')"
 
     def ask(self, args):
         var = args[0]
-        assign = super().ask(args)
+        argument_string = self.print_ask_args(args[1:])
+        assign = f"{var} = input(f'''{argument_string}''')"
 
         return textwrap.dedent(f"""\
         {assign}
@@ -2015,7 +2076,7 @@ def process_input_string(input_string, level):
     if contains_blanks(result):
         raise exceptions.CodePlaceholdersPresentException()
 
-    if level >= 3:
+    if level >= 4:
         result = result.replace("\\", "\\\\")
 
     # In level 8 we add indent-dedent blocks to the code before parsing
@@ -2030,7 +2091,7 @@ def parse_input(input_string, level, lang):
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
-    except lark.UnexpectedEOF:
+    except lark.UnexpectedEOF as e:
         lines = input_string.split('\n')
         last_line = len(lines)
         raise exceptions.UnquotedEqualityCheck(line_number=last_line)
@@ -2080,11 +2141,11 @@ def is_program_valid(program_root, input_string, level, lang):
                     # The fixed code contains another error. Only report the original error for now.
                     pass
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
+        elif invalid_info.error_type == 'invalid condition':
+            raise exceptions.UnquotedEqualityCheck(line_number=line)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)
-        elif invalid_info.error_type == 'empty program':
-            raise exceptions.EmptyProgramException()
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
