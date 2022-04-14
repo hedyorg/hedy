@@ -202,25 +202,23 @@ class Quizzes:
     def cache_quiz_keywords(self, language):
         keyword_data = {}
         for level in copy.deepcopy(self.file):
-            commands = copy.deepcopy(self.file.get(level))  # Take a copy -> otherwise we overwrite the parsing
-            for command in commands:
-                for k, v in command.items():
-                    command[k] = v.format(**KEYWORDS.get(language))
-            keyword_data[level] = commands
-            """
-                    for k, v in self.quizzes['levels'].get(level).get(question).items():
-            if isinstance(self.quizzes['levels'].get(level).get(question)[k], str):
-                self.quizzes['levels'].get(level).get(question)[k] = self.quizzes['levels'].get(level).get(question)[k].format(**self.keywords)
-            elif isinstance(self.quizzes['levels'].get(level).get(question)[k], list):
-                options = []
-                for option in self.quizzes['levels'].get(level).get(question)[k]:
-                    temp = {}
-                    for key, value in option.items():
-                        temp[key] = value.format(**self.keywords)
-                        temp[key] = value.format(**self.keywords)
-                    options.append(temp)
-                self.quizzes['levels'].get(level).get(question)[k] = options
-            """
+            questions = copy.deepcopy(self.file.get(level))
+            for number, question in questions.items():
+                for k, v in question.items():
+                    # We have to parse another way for the mp_choice_options
+                    if k != "mp_choice_options":
+                        questions[number][k] = v.format(**KEYWORDS.get(language))
+                    else:
+                        options = []
+                        for option in copy.deepcopy(v):
+                            temp = {}
+                            for key, value in option.items():
+                                temp[key] = value.format(**KEYWORDS.get(language))
+                            options.append(temp)
+                        questions[number][k] = options
+            keyword_data[level] = questions
+            print("Dit is level...." + str(level))
+            print(keyword_data[level])
         return keyword_data
 
     def get_highest_question_level(self, level):
