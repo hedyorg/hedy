@@ -2790,6 +2790,77 @@ adventures:
                         print 'Go to the trainstation at 10.00'
                      ```
                 start_code: "## place your code here"
+    tic:
+        name: "Tic Tac Toe"
+        description: "PLay a game of Tic Tac Toe!"
+        image: "story.png"
+        default_save_name: "Tic"
+        levels:
+            13:
+                story_text: |
+                    ## Title
+                    text
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    sign is 'x'
+                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    game is 'on'
+                    spot_1 = '.'
+                    spot_2 = '.'
+                    spot_3 = '.'
+                    spot_4 = '.'
+                    spot_5 = '.'
+                    spot_6 = '.'
+                    spot_7 = '.'
+                    spot_8 = '.'
+                    spot_9 = '.'
+                    print 'TIC TAC TOE!'
+                    print spot_1 spot_2 spot_3
+                    print spot_4 spot_5 spot_6
+                    print spot_7 spot_8 spot_9
+                    print ' '
+                    for i in range 1 to 9
+                        if game is 'on'
+                            choice is ask 'Player ' sign ', which spot?'
+                            if choice in open_spots
+                                remove choice from open_spots
+                                if choice is 1
+                                    spot_1 is sign
+                                if choice is 2
+                                    spot_2 is sign
+                                if choice is 3
+                                    spot_3 is sign
+                                if choice is 4
+                                    spot_4 is sign
+                                if choice is 5
+                                    spot_5 is sign
+                                if choice is 6
+                                    spot_6 is sign
+                                if choice is 7
+                                    spot_7 is sign
+                                if choice is 8
+                                    spot_8 is sign
+                                if choice is 9
+                                    spot_9 is sign
+                            else
+                                print 'That spot was already taken'
+                            print spot_1 spot_2 spot_3
+                            print spot_4 spot_5 spot_6
+                            print spot_7 spot_8 spot_9
+                            print ' '
+                            winner is ask 'Did you win?'
+                            if winner is 'yes'
+                                print 'Good job, player ' sign '!'
+                                game is 'over'
+                            else
+                                if sign is 'x'
+                                    sign is 'o'
+                                else
+                                    sign is 'x'
+                    ```
+                start_code: "## place your code here"
+
     next:
         name: "What's next?"
         description: "What's Next?"
