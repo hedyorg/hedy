@@ -56,21 +56,23 @@
           </div>
           {% endif %}
         {% endfor %}
-        <div data-tabtarget="{{parsons['tab_name']}}" class="hidden">
-            <div class="flex flex-row">
-                <div class="w-full p-2 ltr:mr-2 rtl:ml-2">
-                    {{ parsons['text']|commonmark }}
-                    <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
-                        {% for key, line in parsons.code_lines.items() %}
-                            <div id="{{line}}" draggable="true" class="box w-3/4 mb-2 text-lg px-4 py-2 bg-gray-200 border-2 border-gray-600 rounded-lg">
-                              {{line}}
-                            </div>
-                        {% endfor %}
+        {% if parsons %}
+            <div data-tabtarget="{{parsons['tab_name']}}" class="hidden">
+                <div class="flex flex-row">
+                    <div class="w-full p-2 ltr:mr-2 rtl:ml-2">
+                        {{ parsons['text']|commonmark }}
+                        <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
+                            {% for key, line in parsons.code_lines.items() %}
+                                <div id="{{line}}" draggable="true" class="box w-3/4 mb-2 text-lg px-4 py-2 bg-gray-200 border-2 border-gray-600 rounded-lg">
+                                  {{line}}
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
+                <div class="ltr:clear-right rtl:clear-left"></div>
             </div>
-            <div class="ltr:clear-right rtl:clear-left"></div>
-        </div>
+        {% endif %}
         {% for adventure in teacher_adventures %}
             <div data-tabtarget="{{adventure.name}}" class="hidden">
                 <div>

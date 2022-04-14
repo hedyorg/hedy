@@ -26,7 +26,6 @@ from werkzeug.urls import url_encode
 from babel import Locale
 from flask_commonmark import Commonmark
 import traceback
-import re
 import logging
 import json
 import hedy
@@ -758,9 +757,6 @@ def index(level, program_id):
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
 
-    parsons_problem_for_lang = PARSONS[g.lang]
-    parsons_problem_for_lang.set_keyword_language(g.keyword_lang)
-
     if 'levels' in customizations:
         available_levels = customizations['levels']
         now = timems()
@@ -774,7 +770,7 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    parsons = parsons_problem_for_lang.get_defaults(level)
+    parsons = PARSONS[g.lang].get_defaults(level)
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []

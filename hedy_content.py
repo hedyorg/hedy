@@ -186,14 +186,10 @@ class NoSuchAdventure:
 class ParsonsProblem:
   def __init__(self, language):
     self.language = language
-    self.keyword_lang = "en"
-    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
-    self.parsons_file = YamlFile.for_file(f'coursedata/parsons/{self.language}.yaml').to_dict()
-
-  def set_keyword_language(self, language):
-    if language != self.keyword_lang:
-        self.keyword_lang = language
-        self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
+    try:
+        self.parsons_file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').to_dict()
+    except:
+        self.parsons_file = {}
 
   def get_defaults(self, level):
     """Return the level defaults for a given level number."""
