@@ -1084,12 +1084,16 @@ export function get_trimmed_code() {
     console.error(e);
   }
 
-  // If the main editor is hidden: we are solving a parsons problem
+  // If the main editor is hidden -> we are solving a parsons problem
   if ($('#editor').is(":hidden")){
      let code = "";
      $('#parsons_container').children().each(function() {
-          code += $(this).text();
-      });
+       let text = $(this).text()
+       // Otherwise it is the space placeholder -> don't add to prevent weird error messages
+       if (text.length > 1) {
+         code += $(this).text();
+       }
+     });
      return code.replace(/ +$/mg, '');
   }
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
