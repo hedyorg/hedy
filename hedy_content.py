@@ -60,7 +60,6 @@ for l in sorted(languages):
 # Load and cache all keyword yamls
 KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
-    # If this, for some reason, fails -> fill with English values
     KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml')
 
 class Commands:
@@ -97,13 +96,13 @@ class Commands:
             self.data[keyword_lang] = self.cache_keyword_parsing(keyword_lang)
         return self.data.get(keyword_lang, {}).get(int(level), None)
 
+
 # Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchCommand:
-    def get_commands_for_level(self, level):
+    def get_commands_for_level(self, level, keyword_lang):
         return {}
 
-# Parsing all these adventures on server start takes quite some time
-# Don't do this when on debug mode!
+
 class Adventures:
     def __init__(self, language):
         self.language = language
@@ -177,29 +176,38 @@ class Adventures:
         return True if self.data.get("en") else False
 
 
-
-# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
+# Todo TB -> We can remove this in the future (when we guarantee files for each language)
 class NoSuchAdventure:
-  def get_adventure(self):
+  def get_adventurs(self, keyword_lang):
     return {}
 
 
 class Quizzes:
     def __init__(self, language):
         self.language = language
-        self.keyword_lang = "en"
-        self.keywords = YamlFile.for_file(f'content/keywords/{self.keyword_lang}.yaml').to_dict()
-        self.quizzes = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').to_dict()
-        if not self.quizzes:
-            self.quizzes = YamlFile.for_file(f'content/quizzes/en.yaml').to_dict()
+        self.file = {}
+        self.data = {}
 
-    def set_keyword_language(self, language):
-        # Todo TB -> We keep the language at "en" for now to make sure nothing changes for the end user
-        # We have to change the questions in the quizzes to make sure everything makes sense with dynamic keywords
-        return None
-        #if language != self.keyword_lang:
-        #    self.keyword_lang = language
-        #    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
+        # For some reason the is_debug_mode() function is not (yet) ready when we call this code
+        # So we call the NO_DEBUG_MODE directly from the environment
+        # Todo TB -> Fix that the is_debug_mode() function is ready before server start
+        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+
+        if not self.debug_mode:
+            self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').to_dict()
+            self.data["en"] = self.cache_quiz_keywords("en")
+            if language in ALL_KEYWORD_LANGUAGES.keys():
+                self.data[language] = self.cache_quiz_keywords(language)
+
+    def cache_quiz_keywords(self, language):
+        keyword_data = {}
+        for level in copy.deepcopy(self.file):
+            commands = copy.deepcopy(self.file.get(level))  # Take a copy -> otherwise we overwrite the parsing
+            for command in commands:
+                for k, v in command.items():
+                    command[k] = v.format(**KEYWORDS.get(language))
+            keyword_data[level] = commands
+        return keyword_data
 
     def get_highest_question_level(self, level):
         return len(self.quizzes['levels'].get(level))
@@ -222,6 +230,7 @@ class Quizzes:
                     options.append(temp)
                 self.quizzes['levels'].get(level).get(question)[k] = options
         return self.quizzes['levels'].get(level).get(question)
+
 
 # Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchQuiz:
