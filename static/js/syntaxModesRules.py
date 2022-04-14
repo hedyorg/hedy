@@ -429,6 +429,7 @@ import json
 for languageFile in listLanguageFile:
 
     langageCode = re.search("syntaxLang-(\w+).json",languageFile).group(1)
+    print("Generations of syntax coloring rules for {:.<8}".format(langageCode), end="")
 
     fileLang = open(di + "/keywordTranslation/" + languageFile,"r")
     currentLang = json.load(fileLang)
@@ -437,10 +438,11 @@ for languageFile in listLanguageFile:
     # List of rules by level
     LEVELS = generateRules(currentLang,KEYWORDS)
 
-    namefileLangSyntax = di + "/syntax/highlighting_{}.json".format(langageCode)
+    namefileLangSyntax = di + "/syntax/highlighting-{}.json".format(langageCode)
 
     fileLangSyntax = open(namefileLangSyntax,"w")
     fileLangSyntax.write(json.dumps(LEVELS,indent=4))
     fileLangSyntax.close()
 
-    print(langageCode)
+    print("Done !")
+
