@@ -1368,9 +1368,9 @@ class ConvertToPython_3(ConvertToPython_2):
         list_var = args[1]
         return textwrap.dedent(f"""\
         try:
-            {list_var}.remove({value})
+          {list_var}.remove({value})
         except:
-           pass""")
+          pass""")
 
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed

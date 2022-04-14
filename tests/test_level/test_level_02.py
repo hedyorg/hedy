@@ -128,7 +128,7 @@ class TestsLevel2(HedyTester):
         code = "kleur is ask wat is je lievelingskleur?"
         expected = "kleur = input('wat is je lievelingskleur'+'?')"
 
-        self.single_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     def test_ask_single_quoted_text(self):
         code = "name is ask 'Who's that'"
@@ -179,17 +179,6 @@ class TestsLevel2(HedyTester):
         expected = textwrap.dedent("""\
         ve1760b6272d4c9f816e62af4882d874f = input('আপনার প্রিয় রং কি'+'?')
         print(f'{ve1760b6272d4c9f816e62af4882d874f} is আপনার প্রিয')""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=3)
-
-    def test_ask_hungarian_var(self):
-        code = textwrap.dedent("""\
-        állatok is kutya
-        print állatok""")
-
-        expected = textwrap.dedent("""\
-        v79de0191e90551f058d466c5e8c267ff = 'kutya'
-        print(f'{v79de0191e90551f058d466c5e8c267ff}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
@@ -385,6 +374,17 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_assign_text_to_hungarian_var(self):
+        code = textwrap.dedent("""\
+        állatok is kutya
+        print állatok""")
+
+        expected = textwrap.dedent("""\
+        v79de0191e90551f058d466c5e8c267ff = 'kutya'
+        print(f'{v79de0191e90551f058d466c5e8c267ff}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
     #
     # markup tests
     #
@@ -393,7 +393,7 @@ class TestsLevel2(HedyTester):
         expected = textwrap.dedent("""\
         print(f'hallo wereld')""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     #
     # combined tests
@@ -420,11 +420,11 @@ class TestsLevel2(HedyTester):
 
     def test_forward_ask(self):
         code = textwrap.dedent("""\
-        afstand is ask hoe ver dan?
-        forward afstand""")
+            afstand is ask hoe ver dan?
+            forward afstand""")
         expected = HedyTester.dedent(
-        "afstand = input('hoe ver dan'+'?')",
-        HedyTester.forward_transpiled('afstand'))
+            "afstand = input('hoe ver dan'+'?')",
+            HedyTester.forward_transpiled('afstand'))
 
         self.multi_level_tester(
             code=code,
