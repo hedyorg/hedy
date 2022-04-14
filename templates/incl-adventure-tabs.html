@@ -60,7 +60,7 @@
             <div class="flex flex-row">
                 <div class="w-full p-2 ltr:mr-2 rtl:ml-2">
                     {{ parsons['text']|commonmark }}
-                    <div class="flex flex-col mx-auto items-center start_parsons_options">
+                    <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
                         {% for key, line in parsons.code_lines.items() %}
                             <div id="{{line}}" draggable="true" class="box w-3/4 mb-2 text-lg px-4 py-2 bg-gray-200 border-2 border-gray-600 rounded-lg">
                               {{line}}
@@ -132,6 +132,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     let items = document.querySelectorAll('#parsons_container .box');
     items.forEach(function (item) {
+        item.addEventListener('dragstart', handleDragStart);
+        item.addEventListener('dragover', handleDragOver);
+        item.addEventListener('dragenter', handleDragEnter);
+        item.addEventListener('dragleave', handleDragLeave);
+        item.addEventListener('dragend', handleDragEnd);
+        item.addEventListener('drop', handleDrop);
+    });
+
+    let start_items = document.querySelectorAll('#start_parsons_options .box');
+    start_items.forEach(function (item) {
         item.addEventListener('dragstart', handleDragStart);
         item.addEventListener('dragover', handleDragOver);
         item.addEventListener('dragenter', handleDragEnter);

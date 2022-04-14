@@ -1083,10 +1083,10 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
-  
-  let code = "";
+
   if($('#editor').is(":hidden")){
-     $('.container').children().each(function() {
+     let code = "";
+     $('#parsons_container').children().each(function() {
           code += $(this).text();
           console.log(code);
       });
