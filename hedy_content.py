@@ -31,6 +31,7 @@ ADVENTURE_ORDER = [
     'quizmaster',
     'language',
     'secret',
+    'tic',
     'next',
     'end'
 ]
