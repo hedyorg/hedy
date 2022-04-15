@@ -33,7 +33,7 @@ adventures:
                     {echo} hello
                     ```
 
-                start_code: "{print} hello world!"
+                start_code: "```\n{print} hello world!\n```"
             2:
                 story_text: |
                     ## Variables
@@ -64,7 +64,7 @@ adventures:
                     {sleep} 2
                     {print} green!
                     ```
-                start_code: "{print} hello world!"
+                start_code: "```\n{print} hello world!\n```"
             3:
                 story_text: |
                     ## Make a list!
@@ -90,9 +90,9 @@ adventures:
                     {print} animals {at} {random}
                     ```
 
-                start_code: "{print} hello world!"
+                start_code: "```\n{print} hello world!\n```"
             4:
-                start_code: "{print} 'Hello world'"
+                start_code: "```\n{print} 'Hello world'\n```"
                 story_text: |
                     ## 'Quotation marks'
                     In level 4 `{ask}` and `{print}` have changed.
@@ -105,9 +105,9 @@ adventures:
                 example_code: |
                     ## Example Hedy code
                     ```
-                    print 'You need to use quotation marks from now on!'
-                    answer is ask 'What do we need to use from now on?'
-                    print 'We need to use ' answer
+                    {print} 'You need to use quotation marks from now on!'
+                    answer {is} {ask} 'What do we need to use from now on?'
+                    {print} 'We need to use ' answer
                     ```
                 story_text_2: |
                     ## Adventures are getting more and more difficult
@@ -121,7 +121,7 @@ adventures:
                     ## If... else....
                     In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
                     This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
-                    `{ask}` {and} `{print}` still work like they did in level 4.
+                    `{ask}` and `{print}` still work like they did in level 4.
                 example_code: |
                     ## Example Hedy Code
                     ```
@@ -148,21 +148,21 @@ adventures:
                     {else} {print} 'boo!'
                     ```
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
+                start_code: "```\n{print} '5 times 5 is ' 5 * 5\n```"
                 story_text: |
                     ## 1 + 1
                      In this level you learn something new: you can now also calculate.
 
                      The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                     The {times} is a bit different, because there is no {times} symbol on your keyboard. Just search, there really isn't!
+                     The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
                      That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ## Example Hedy code
                     ```
                     {print} '5 plus 5 is ' 5 + 5
                     {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 {times} 5 is ' 5 * 5
+                    {print} '5 times 5 is ' 5 * 5
                     ```
                 story_text_2: |
                     We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
@@ -172,23 +172,25 @@ adventures:
                     answer = 20 + 4
                     ```
             7:
-                start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
+                start_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```"
                 story_text: |
                     ## Level 7! Level 7!
-                    Level 7 adds the `{repeat}` command. {repeat} can be used to execute one line of code multiple times.
+                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.
                 example_code: |
                     ## Example Hedy code
                     ```
-                    {repeat} 3 {times} {print} 'Hedy {is} fun!'
+                    {repeat} 3 {times} {print} 'Hedy is fun!'
                     ```
             8:
                 start_code: |-
+                    ```
                     {repeat} 5 {times}
                         {print} 'Hello folks'
                         {print} 'This will be printed 5 times'
+                    ```
                 story_text: |
                     ## Indentation
-                    `{ask}` {and} `{print}` still work as you know them. But `{if}` {and} `{repeat}` have changed!
+                    `{ask}` and `{print}` still work as you know them. But `{if}` and `{repeat}` have changed!
                     You can now execute groups of code together, but you will have to *indent* the code.
                     That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
                 example_code: |
@@ -200,15 +202,17 @@ adventures:
                     ```
             9:
                 start_code: |-
+                    ```
                     {repeat} 3 {times}
                         food = {ask} 'What do you want?'
                         {if} food {is} pizza
                             {print} 'nice!'
                         else
                             {print} 'pizza is better'
+                    ```
                 story_text: |
                     ## All together now!
-                    In this level you can not only use multiple lines with `{if}` {and} `{repeat}`, but you can also put them together!
+                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
                     In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
                     Give it a try!
                 example_code: |
@@ -223,10 +227,12 @@ adventures:
                     ```
             10:
                 start_code: |-
+                    ```
                     animals {is} dog, cat, blobfish
                     {for} animal {in} animals
                       {print} 'I love ' animal
-                story_text: |
+                    ```
+                story_text: |-
                     ## For each item in my list...
                     In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
                     `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces.
@@ -239,23 +245,27 @@ adventures:
                     ```
             11:
                 start_code: |-
+                    ```
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
-                story_text: |
+                    ```
+                story_text: |-
                     ## Loops!
                     `{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.
                     Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)
                 example_code: |
                     ## Example Hedy code
                     ```
-                    for counter in range 1 to 5
-                        print counter
+                    {for} counter {in} {range} 1 {to} 5
+                        {print} counter
                     ```
             12:
                 start_code: |-
+                    ```
                     {print} 'decimal numbers now need to use a dot'
                     {print} 2.5 + 2.5
-                story_text: |
+                    ```
+                story_text: |-
                     ## Numbers and texts
                     **Decimal numbers**
                     So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
@@ -298,14 +308,14 @@ adventures:
                     score = 25
                     {print} 'You got ' score
                     ```
-                story_text_6: |
+                story_text_6: |-
                     **Maths with words** 
                     In this level it is also allowed to use the + sign with texts. For example:
                 example_code_6: |
                     ```
                     a = 'Hello '
                     b = 'world!'
-                    print a + b
+                    {print} a + b
                     ```
             13:
                 start_code: |-
@@ -313,15 +323,15 @@ adventures:
                     age = {ask} 'what is your age?'
                     {if} name {is} 'Hedy' {and} age {is} 2
                         {print} 'You are the real Hedy!'
-                story_text: |
+                story_text: |-
                     ## And... Or..?
                     We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
-                    name = ask 'what is your name?'
-                    age = ask 'what is your age?'
-                    if name is 'Hedy' and age is 2
-                        print 'You are the real Hedy!'
+                    name = {ask} 'what is your name?'
+                    age = {ask} 'what is your age?'
+                    {if} name {is} 'Hedy' {and} age {is} 2
+                        {print} 'You are the real Hedy!'
                     ```
             14:
                 start_code: |-
@@ -351,7 +361,7 @@ adventures:
                     ```
                     name = {ask} 'What is your name?'
                     {if} name == 'Hedy'
-                        {print} 'You are coo!'
+                        {print} 'You are cool!'
                     ```
                 story_text_3: |
                     You can also compare if something is *not* equal to something else using `!=` like this:
@@ -363,11 +373,13 @@ adventures:
                     ```
             15:
                 start_code: |-
+                    ```
                     answer = 0
                     {while} answer != 25
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
-                story_text: |
+                    ```
+                story_text: |-
                     ## More loops!
                     We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
                     So don't forget to change the value in the loop.
@@ -378,15 +390,17 @@ adventures:
                     ## Example Hedy code
                     ```
                     answer = 0
-                    while answer != 25
-                        answer = ask 'What is 5 times 5?'
-                    print 'A correct answer has been given'
+                    {while} answer != 25
+                        answer = {ask} 'What is 5 times 5?'
+                    {print} 'A correct answer has been given'
                     ```
             16:
                 start_code: |-
+                    ```
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit
-                story_text: |
+                    ```
+                story_text: |-
                     ## More and more like real code!
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
                     You can use the square brackets as well to point out a place in the lists.
@@ -401,9 +415,11 @@ adventures:
                     ```
             17:
                 start_code: |-
+                    ```
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Ready or not, here I come!'
+                    ```
                 story_text: |
                     ## Elif
                     Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.
@@ -412,7 +428,7 @@ adventures:
                     Check it out!
                     ```
                     prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[random]
+                    your_price = prices[{random}]
                     {print} 'You win ' your_price
                     {if} your_price == '1 million dollars' :
                         {print} 'Yeah! You are rich!'
@@ -455,8 +471,8 @@ adventures:
                     {ask} who is the star in your story?
                     ```
 
-                    After that first line, start with `{print}` {if} the sentence needs to be printed.
-                    You use `{echo}` {if} you want your main character to be at the end of the sentence.
+                    After that first line, start with `{print}` if the sentence needs to be printed.
+                    You use `{echo}` if you want your main character to be at the end of the sentence.
                 example_code: |
                     ## Example Hedy code
 
@@ -468,7 +484,7 @@ adventures:
                     {print} He hears crazy noises everywhere
                     {print} He's afraid this is a haunted forest
                     ```
-                start_code: "{print} Your story starts here"
+                start_code: "```\n{print} Your story starts here\n```"
             2:
                 story_text: |
                     ## Story
@@ -480,7 +496,6 @@ adventures:
                 example_code: |
                     ## Example Hedy code
 
-
                     ```
                     name {is} {ask} What is the name of the main character?
                     {print} name is now going to run in the woods
@@ -489,7 +504,7 @@ adventures:
                     {sleep}
                     {print} name is afraid this is a haunted forest
                     ```
-                start_code: "{print} Your story"
+                start_code: "```\n{print} Your story\n```"
             3:
                 story_text: |
                     ## Story
@@ -526,7 +541,7 @@ adventures:
                     dump {is} {ask} Which item should he dump?
                     {remove} dump {from} bag
                     ```
-                start_code: "{print} Your story"
+                start_code: "```\n{print} Your story\n```"
             4:
                 story_text: |
                     ## Story
@@ -544,7 +559,7 @@ adventures:
                     {print} 'He hears the sound of an' animals {at} {random}
                     {print} name 'is afraid this is a haunted forest'
                     ```
-                start_code: "{print} 'Your story will be printed here!'"
+                start_code: "```\n{print} 'Your story will be printed here!'\n```"
             5:
                 story_text: |
                     ## Story
@@ -570,7 +585,7 @@ adventures:
                     {if} end {is} good {print} name 'takes the sword and the monster quickly runs away'
                     {else} {print} 'The monster eats' name
                     ```
-                start_code: "{print} 'Here your story will start!'"
+                start_code: "```\n{print} 'Here your story will start!'\n```"
             7:
                 story_text: |
                     ## Story
@@ -586,7 +601,7 @@ adventures:
                     {print} 'Why is nobody helping me?'
                     ```
 
-                start_code: "{repeat} 5 {times} {print} 'Help!'"
+                start_code: "```\n{repeat} 5 {times} {print} 'Help!'\n```"
             8:
                 story_text: |
                     ## Story
@@ -629,7 +644,7 @@ adventures:
                     {else}
                         {print} 'Robin goes home'
                     ```
-                story_text_2: |
+                story_text_2: |-
                     The example above is pretty straightforward, but with nesting you can really elaborate your code and turn your story into a real game. Check out this example!
                 example_code_2: |
                     ## Elaborate code
@@ -683,12 +698,11 @@ adventures:
                     ```
                 start_code: "# place your code here"
             12:
-                story_text: |
+                story_text: |-
                     ## Story
                     In this level you can use the quotation marks to save multiple words in a variable.
                 example_code: |
                     ## Example Hedy code
-
 
                     ```
                     name = 'The Queen of England'
