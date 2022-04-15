@@ -8,15 +8,12 @@ import {LANG_tr} from './syntaxLang-tr';
 import {LANG_id} from './syntaxLang-id';
 import {LANG_nb_NO} from './syntaxLang-nb_NO';
 
-// #/#/@/#/# We don't want to keep this block of code for automatic test execution
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
 if (!window.State) {
 window.State = {};
 }
-
-// #/#/@/#/# END
 
 
 // extension of \w
@@ -83,11 +80,7 @@ var currentLang: {
   _LENGTH: string;
 };
 
-
-// #/#/1/#/# Here we will modify the switch to force the English
-// #/#/@/#/#
 switch(window.State.keyword_language){
-// #/#/@/#/#
   case 'nl':
     currentLang = LANG_nl;
     break;
@@ -853,11 +846,6 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
 
 
 
-
-// #/#/2/#/# Here we will add a block of code to generate a JSON file for automatic tests
-
-// #/#/@/#/# We don't want to keep this block of code for automatic test execution
-
 // Only do this work if the 'define' function is actually available at runtime.
 // If not, this script got included on a page that didn't include the Ace
 // editor. No point in continuing if that is the case.
@@ -888,5 +876,3 @@ if ((window as any).define) {
     });
   }
 }
-
-// #/#/@/#/# END
