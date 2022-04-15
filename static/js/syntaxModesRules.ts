@@ -846,6 +846,7 @@ function ruleALL(level:number, number = false, with_decimal = false ) {
 
 
 
+
 // Only do this work if the 'define' function is actually available at runtime.
 // If not, this script got included on a page that didn't include the Ace
 // editor. No point in continuing if that is the case.
