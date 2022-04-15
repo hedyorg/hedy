@@ -1,0 +1,4491 @@
+[
+    {
+        "name": "level1",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "(^ *)(ask)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(print)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(echo)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(color)((?![0-9_A-Za-zÀ-ÿء-ي]))(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(color)( +)([0-9_A-Za-zÀ-ÿء-ي]+)( *)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(forward)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(turn)( *)(left)( *)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(turn)( *)(right)( *)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(turn)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level2",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "(^ *)([0-9_A-Za-zÀ-ÿء-ي]+)( +)(is)( *)(ask)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "text",
+                            "text",
+                            "keyword",
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)([0-9_A-Za-zÀ-ÿء-ي]+)( +)(is)( *)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "text",
+                            "text",
+                            "keyword",
+                            "text",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(print)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(sleep)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(turn)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(forward)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level3",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "(^ *)([0-9_A-Za-zÀ-ÿء-ي]+)( +)(is)( *)(ask)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "text",
+                            "text",
+                            "keyword",
+                            "text",
+                            "keyword",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)([0-9_A-Za-zÀ-ÿء-ي]+)( +)(is)( *)(.*)$",
+                        "token":
+                        [
+                            "text",
+                            "text",
+                            "text",
+                            "keyword",
+                            "text",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(remove)( *)(.*)( +)(from)( *)([0-9_A-Za-zÀ-ÿء-ي]+)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text",
+                            "text",
+                            "text",
+                            "keyword",
+                            "text",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)(add)( *)(.*)( +)(to)( *)([0-9_A-Za-zÀ-ÿء-ي]+)$",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "text",
+                            "text",
+                            "text",
+                            "keyword",
+                            "text",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)print",
+                        "token":
+                        [
+                            "keyword"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)turn",
+                        "token":
+                        [
+                            "keyword"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)sleep",
+                        "token":
+                        [
+                            "keyword"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^ *)forward",
+                        "token":
+                        [
+                            "keyword"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at +random",
+                        "token":
+                        [
+                            "keyword"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at",
+                        "token":
+                        [
+                            "keyword"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_\\?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level4",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?= |$)",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )forward",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )turn",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level5",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )forward",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )turn",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level6",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(forward)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(turn)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )forward",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )turn",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level7",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(forward)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(turn)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )repeat(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )times(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )forward",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )turn",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level8",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(forward)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(turn)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(else)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(times)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )repeat(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )forward",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )turn",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )times",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level9",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(forward)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(turn)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(else)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(times)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )repeat(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )forward",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )turn",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )times",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level10",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(forward)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(turn)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(else)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(times)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )repeat(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )for(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )forward",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )turn",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )times",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level11",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(else)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )for(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )range(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level12",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]*\\.?[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(else)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )for(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )range(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level13",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]*\\.?[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(else)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )for(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )range(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )and(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )or(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level14",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]*\\.?[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(<)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(>)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(!)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )for(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )range(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )and(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )or(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "<",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ">",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "!",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level15",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]*\\.?[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(else)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(<)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(>)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(!)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )for(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )range(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )and(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )or(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )while(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "<",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ">",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "!",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level16",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]*\\.?[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(<)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(>)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(!)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\[)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\])([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )for(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )range(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )and(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )or(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )while(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "<",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ">",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "!",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\[",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\]",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level17",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]*\\.?[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(ask)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(<)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(>)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(!)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\[)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\])([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(:)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )for(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )range(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )and(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )or(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )while(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "<",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ">",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "!",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\[",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\]",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ":",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )ask",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "elif(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    },
+    {
+        "name": "level18",
+        "rules":
+        {
+            "start":
+            
+                [
+                    {
+                        "regex": "#.*$",
+                        "token": "comment",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\"[^\"]*\"",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "'[^']*'",
+                        "token": "constant.character",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "_?_",
+                        "token": "invalid",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(_)(?=( |$))",
+                        "token":
+                        [
+                            "text",
+                            "invalid",
+                            "text"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )[0-9]*\\.?[0-9]+(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "variable",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(print)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(sleep)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )(random)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "text",
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(<)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(>)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(!)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\[)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\])([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(:)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\()([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(\\))([0-9]*\\.?[0-9]+)(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token":
+                        [
+                            "keyword",
+                            "variable"
+                        ],
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )is(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )at(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )add(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )remove(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )from(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )in(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )if(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )else(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )for(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )range(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )to(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )and(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )or(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )while(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )input(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ",",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "-",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "=",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "/",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\*",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\+",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "<",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ">",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "!",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\[",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\]",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": ":",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\(",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "\\)",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )print",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )sleep",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "(^| )random",
+                        "token": "keyword",
+                        "next": "start"
+                    },
+                    {
+                        "regex": "elif(?![0-9_A-Za-zÀ-ÿء-ي])",
+                        "token": "keyword",
+                        "next": "start"
+                    }
+                ]
+            
+        }
+    }
+]
