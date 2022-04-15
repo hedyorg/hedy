@@ -1,12 +1,12 @@
-import * as LEVELS_en from './syntax/highlighting-en.json';
-import * as LEVELS_nl from './syntax/highlighting-nl.json';
-import * as LEVELS_es from './syntax/highlighting-es.json';
-import * as LEVELS_ar from './syntax/highlighting-ar.json';
-import * as LEVELS_fr from './syntax/highlighting-fr.json';
-import * as LEVELS_hi from './syntax/highlighting-hi.json';
-import * as LEVELS_tr from './syntax/highlighting-tr.json';
-import * as LEVELS_id from './syntax/highlighting-id.json';
-import * as LEVELS_nb_NO from './syntax/highlighting-nb_NO.json';
+import * as LEVELS_en from './highlightingRules/highlighting-en.json';
+import * as LEVELS_nl from './highlightingRules/highlighting-nl.json';
+import * as LEVELS_es from './highlightingRules/highlighting-es.json';
+import * as LEVELS_ar from './highlightingRules/highlighting-ar.json';
+import * as LEVELS_fr from './highlightingRules/highlighting-fr.json';
+import * as LEVELS_hi from './highlightingRules/highlighting-hi.json';
+import * as LEVELS_tr from './highlightingRules/highlighting-tr.json';
+import * as LEVELS_id from './highlightingRules/highlighting-id.json';
+import * as LEVELS_nb_NO from './highlightingRules/highlighting-nb_NO.json';
 
 
 

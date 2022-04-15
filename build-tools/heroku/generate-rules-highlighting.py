@@ -442,7 +442,7 @@ for languageFile in listLanguageFile:
     # List of rules by level
     LEVELS = generateRules(currentLang,KEYWORDS)
 
-    namefileLangSyntax = root + "/static/js/syntax/highlighting-{}.json".format(langageCode)
+    namefileLangSyntax = root + "/static/js/highlightingRules/highlighting-{}.json".format(langageCode)
 
     fileLangSyntax = open(namefileLangSyntax,"w")
     fileLangSyntax.write(json.dumps(LEVELS,indent=4))
