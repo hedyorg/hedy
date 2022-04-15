@@ -111,7 +111,7 @@ class HighlightTester(unittest.TestCase):
 
                 for match in regComp.finditer(code):
                     # For each match, we see if this sequence has already been used
-                    if notYetUsed(Output[match.start():match.end()]):
+                    if self._notYetUsed(Output[match.start():match.end()]):
 
                         start  = match.start()
                         length = match.end() - start

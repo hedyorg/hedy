@@ -2,33 +2,237 @@ from tests.Highlighter import HighlightTester
 
 class HighlighterTestLeveL1(HighlightTester):
 
-  def test_a(self):
-    self.assertHighlighted(
-      'print hello world',
-      'KKKKT TTTTTTTTTTT',
-    level="level1", lang='en')
+
+    def test_1(self):
+        self.assertHighlightedMultiLine(
+            "print Hedy !",
+            "KKKKK TTTTTT",
+            "ask what do you want",
+            "KKK TTTTTTTTTTTTTTTT",
+            "echo",
+            "KKKK",
+            "print Done !",
+            "KKKKK TTTTTT",
+            level="level1",lang='en')
 
 
-  def test_b(self):
-    self.assertHighlightedMultiLine(
-      'print hello world',
-      'KKKKT TTTTTTTTTTT',
-      'print hello world',
-      'KKKKT TTTTTTTTTTT',
-    level="level1", lang='en')
+    def test_2(self):
+        self.assertHighlightedMultiLine(
+            "print Hedy !",
+            "KKKKK TTTTTT",
+            "azk what do you want",
+            "TTT TTTTTTTTTTTTTTTT",
+            "echo",
+            "KKKK",
+            "print Done !",
+            "KKKKK TTTTTT",
+            level="level1",lang='en')
 
 
-  def test_c(self):
-    self.assertHighlighted(
-      'print hello world',
-      'KKKKK TTTTTTTTTTT',
-    level="level1", lang='en')
+    def test_3(self):
+        self.assertHighlighted(
+            "print hello world!",
+            "KKKKK TTTTTTTTTTTT",
+            level="level1",lang='en')
 
 
-  def test_d(self):
-    self.assertHighlightedMultiLine(
-      'print hello world',
-      'KKKKK TTTTTTTTTTT',
-      'print hello world',
-      'KKKKK TTTTTTTTTTT',
-    level="level1", lang='en')
+    def test_4(self):
+        self.assertHighlightedMultiLine(
+            "print Hello!",
+            "KKKKK TTTTTT",
+            "print Welcome to Hedy!",
+            "KKKKK TTTTTTTTTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_5(self):
+        self.assertHighlightedMultiLine(
+            "ask What is your name?",
+            "KKK TTTTTTTTTTTTTTTTTT",
+            "echo hello",
+            "KKKK TTTTT",
+            level="level1",lang='en')
+
+
+    def test_6(self):
+        self.assertHighlighted(
+            "print Your story starts here",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_7(self):
+        self.assertHighlighted(
+            "ask who is the star in your story?",
+            "KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_8(self):
+        self.assertHighlightedMultiLine(
+            "ask The main character of this story is",
+            "KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print The main character is now going to walk in the forest",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "echo He's a bit scared,",
+            "KKKK TTTTTTTTTTTTTTTTTT",
+            "print He hears crazy noises everywhere",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print He's afraid this is a haunted forest",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_9(self):
+        self.assertHighlighted(
+            "print Im Hedy the parrot",
+            "KKKKK TTTTTTTTTTTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_10(self):
+        self.assertHighlightedMultiLine(
+            "print Im Hedy the parrot",
+            "KKKKK TTTTTTTTTTTTTTTTTT",
+            "ask whats your name?",
+            "KKK TTTTTTTTTTTTTTTT",
+            "echo",
+            "KKKK",
+            "echo",
+            "KKKK",
+            level="level1",lang='en')
+
+
+    def test_11(self):
+        self.assertHighlightedMultiLine(
+            "forward 50",
+            "KKKKKKK TT",
+            "turn left",
+            "KKKK KKKK",
+            level="level1",lang='en')
+
+
+    def test_12(self):
+        self.assertHighlightedMultiLine(
+            "turn right",
+            "KKKK KKKKK",
+            "forward 50",
+            "KKKKKKK TT",
+            "turn left",
+            "KKKK KKKK",
+            "forward 50",
+            "KKKKKKK TT",
+            level="level1",lang='en')
+
+
+    def test_13(self):
+        self.assertHighlighted(
+            "print Welcome to your own rock scissors paper!",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_14(self):
+        self.assertHighlightedMultiLine(
+            "print what do you choose?",
+            "KKKKK TTTTTTTTTTTTTTTTTTT",
+            "ask choose from rock, paper or scissors",
+            "KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "echo so your choice was:",
+            "KKKK TTTTTTTTTTTTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_15(self):
+        self.assertHighlighted(
+            "# place your code here",
+            "CCCCCCCCCCCCCCCCCCCCCC",
+            level="level1",lang='en')
+
+
+    def test_16(self):
+        self.assertHighlightedMultiLine(
+            "print Hello, I'm Hedy the fortune teller!",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "ask Who are you?",
+            "KKK TTTTTTTTTTTT",
+            "print Let me take a look in my crystal ball",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print I see... I see...",
+            "KKKKK TTTTTTTTTTTTTTTTT",
+            "echo Your name is",
+            "KKKK TTTTTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_17(self):
+        self.assertHighlightedMultiLine(
+            "print Welcome to Hedy's restaurant 🍟",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "ask What would you like to order?",
+            "KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "echo So you would like to order",
+            "KKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print Thanks you for your order!",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print It's on its way!",
+            "KKKKK TTTTTTTTTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_18(self):
+        self.assertHighlighted(
+            "print How did I get here?",
+            "KKKKK TTTTTTTTTTTTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_19(self):
+        self.assertHighlightedMultiLine(
+            "print How did I get here?",
+            "KKKKK TTTTTTTTTTTTTTTTTTT",
+            "print I remember my friend telling me to go into the old mansion...",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print and suddenly everything went black.",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print But how did I end up on the floor...?",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print My head hurts like Ive been hit by a baseball bat!",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print What's that sound?",
+            "KKKKK TTTTTTTTTTTTTTTTTT",
+            "print Oh no! I feel like Im not alone in this house!",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print I need to get out of here!",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "print There are 3 doors in front of me..",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "ask Which door should i pick?",
+            "KKK TTTTTTTTTTTTTTTTTTTTTTTTT",
+            "echo I choose door",
+            "KKKK TTTTTTTTTTTTT",
+            "print ...?",
+            "KKKKK TTTT",
+            level="level1",lang='en')
+
+
+    def test_20(self):
+        self.assertHighlighted(
+            "print Let's go!",
+            "KKKKK TTTTTTTTT",
+            level="level1",lang='en')
+
+
+    def test_21(self):
+        self.assertHighlightedMultiLine(
+            "print Welcome at Hedy's",
+            "KKKKK TTTTTTTTTTTTTTTTT",
+            "ask What would you like to eat?",
+            "KKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "echo So you want ",
+            "KKKK TTTTTTTTTTTT",
+            "ask what would you like to drink?",
+            "KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "echo So you want ",
+            "KKKK TTTTTTTTTTTT",
+            level="level1",lang='en')
