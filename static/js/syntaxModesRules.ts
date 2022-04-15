@@ -113,18 +113,23 @@ switch(window.State.keyword_language){
 
 /* 
 This variable lists all the keywords in each level, i.e. everything that should be displayed in red (of type `keyword`)
+
 There are several categories of keywords: 
 - SP_K_SP
   These are the keywords that must be "alone" so neither preceded nor followed directly by a word 
+
 - K
   These are the keywords that are independent of the context (formerly the symbols).
   In particular, even if they are between 2 words, the syntax highlighting will select them
+
 - SP_K
   This category of keywords allows you to have keywords that are not preceded
   by another word, but that can be followed immediately by another word. (see the PR #2413)
+
 - K_SP
   This category of keywords allows you to have keywords that can be preceded immediately
   by another word, but that are not followed by another word.
+
 */
 
 const KEYWORDS: {[key:number]: {[key:string]: string[] }  } = {
