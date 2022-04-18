@@ -147,7 +147,7 @@ class HighlightTester(unittest.TestCase):
     def check(self,result,expected):
         if len(result) != len(expected):
             raise ValueError("The desired highlight and the obtained highlight do not have the same length !")
-
+        cpt = 0
         for i in range(len(expected)):
             chWanted,chresult = expected[i],result[i]
 
@@ -159,7 +159,10 @@ class HighlightTester(unittest.TestCase):
                 pass # If we wanted text, but we don't get syntactic coloring, then we tolerate
             else:
                 # in all other cases, an error is returned indicating the number of the problematic character
-                return False,i
+                return False,cpt
+
+            cpt += 1
+            if result[i] == "\n" : cpt += 1
 
         return True,-1
 
