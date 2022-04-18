@@ -38,7 +38,7 @@ def all_keywords_to_dict():
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
 
-    processed_input = hedy.process_input_string(input_string_, level)
+    processed_input = hedy.process_input_string(input_string_, level, escape_backslashes=False)
 
     parser = hedy.get_parser(level, from_lang, True)
     keyword_dict_from = keywords_to_dict(from_lang)
