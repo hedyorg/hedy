@@ -3044,7 +3044,7 @@ adventures:
                                 spot_8 = sign
                             {if} choice == 9:
                                 spot_9 = sign
-                        {else}
+                        {else}:
                             {print} 'That spot was already taken'
                         {print} spot_1 spot_2 spot_3
                         {print} spot_4 spot_5 spot_6
@@ -3075,9 +3075,9 @@ adventures:
                             {print} 'Player ' sign ' wins!'
                             game = 'over'
                         {else}:
-                            {if} sign == 'x'
+                            {if} sign == 'x':
                                 sign = 'o'
-                            {else}
+                            {else}:
                                 sign = 'x'
                     ```
 
