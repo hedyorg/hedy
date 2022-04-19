@@ -25,9 +25,9 @@ def main():
             if args[1] == "--level" or args[1] == "-l":
                 try:
                     level = int(args[2])
-                    if level > 8:
-                        print("Level has been set to 8, because the value specified was to high")
-                        level = 8
+                    if level > hedy.HEDY_MAX_LEVEL or level < 1:
+                        print(f"Level has been set to {hedy.HEDY_MAX_LEVEL}, because the value specified was invalid")
+                        level = hedy.HEDY_MAX_LEVEL
                 except ValueError:
                     print("Level argument is not an integer, skipping argument.")
 
