@@ -16,7 +16,7 @@ class TestsLevel3(HedyTester):
      * single keyword positive tests are just keyword or keyword_special_case
      * multi keyword positive tests are keyword1_keywords_2
      * negative tests should be situation_gives_exception
-      '''
+    '''
 
     #
     # print tests
@@ -84,11 +84,25 @@ class TestsLevel3(HedyTester):
         check_in_list = (lambda x: HedyTester.run_code(x) in ['chien', 'chat', 'kangourou'])
 
         self.multi_level_tester(
-            max_level=10,
+            max_level=11,
             code=code,
             expected=expected,
             extra_check_function=check_in_list,
             lang='fr'
+        )
+
+    #
+    # ask tests
+    #
+    def test_ask_list_gives_type_error(self):
+        code = textwrap.dedent("""\
+        plaatsen is een stad, een  dorp, een strand
+        var is ask plaatsen""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
     #
