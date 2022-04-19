@@ -2042,10 +2042,7 @@ def preprocess_blocks(code, level):
             # we springen 'terug' dus er moeten end-blocken in
             # bij meerdere terugsprongen sluiten we ook meerdere blokken
 
-            else_line = 'else' in line # check whether the next line is else
-            else_minus = 1 if else_line else 0
-
-            difference_in_indents = (previous_number_of_indents - current_number_of_indents) - else_minus
+            difference_in_indents = (previous_number_of_indents - current_number_of_indents)
             for i in range(difference_in_indents):
                 processed_code.append('end-block')
 
