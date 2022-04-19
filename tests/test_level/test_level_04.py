@@ -1,10 +1,12 @@
 import hedy
 import textwrap
-from tests.Tester import HedyTester
+from tests.Tester import HedyTester, hedy_test
 from parameterized import parameterized
+from tests.test_level.test_level_03 import TestsLevel3
 
 
-class TestsLevel4(HedyTester):
+@hedy_test()
+class TestsLevel4(TestsLevel3):
     level = 4
     '''
     Tests should be ordered as follows:

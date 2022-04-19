@@ -20,6 +20,13 @@ class Snippet:
     self.name = f'{self.language}-{self.level}-{self.field_name}'
 
 
+def hedy_test():
+    def decorator(c):
+        c.remove_inherited_test_methods()
+        return c
+    return decorator
+
+
 class HedyTester(unittest.TestCase):
   level = None
   max_turtle_level = 10
@@ -210,3 +217,23 @@ class HedyTester(unittest.TestCase):
   def dedent(*args):
     return '\n'.join([textwrap.indent(textwrap.dedent(a[0]), a[1]) if type(a) is tuple else textwrap.dedent(a)
                       for a in args])
+
+  @classmethod
+  def remove_inherited_test_methods(cls):
+    """
+    Removes test methods defined in parent classes.
+    """
+    get_test_methods = lambda c: set([name for name in list(vars(c))
+                                      if name.startswith("test_") and callable(getattr(c, name))])
+
+    # holds all test methods which are not defined in the current class, i.e. should not be executed. Note that even
+    # tests that are overloaded in the current class have to be removed from the base class to avoid double execution.
+    base_class_tests = {base: get_test_methods(base) for base in cls.__bases__}
+
+    for base, tests in base_class_tests.items():
+      for test in tests:
+        delattr(base, test)
+      # it is necessary to call recursively to ensure that transitive test methods from upper base classes are
+      # removed too. If A(), B(A) and C(B), then this guarantees no test methods from A will be executed in C
+      if hasattr(base, "remove_inherited_test_methods"):
+        base.remove_inherited_test_methods()

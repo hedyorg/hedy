@@ -1,9 +1,11 @@
 import hedy
 import textwrap
-from tests.Tester import HedyTester
+from tests.Tester import HedyTester, hedy_test
+from tests.test_level.test_level_02 import TestsLevel2
 
 
-class TestsLevel3(HedyTester):
+@hedy_test()
+class TestsLevel3(TestsLevel2):
     level = 3
     '''
     Tests should be ordered as follows:

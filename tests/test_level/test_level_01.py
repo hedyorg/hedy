@@ -1,9 +1,10 @@
 import hedy
 import textwrap
 from hedy import Command
-from tests.Tester import HedyTester
+from tests.Tester import HedyTester, hedy_test
 
 
+@hedy_test()
 class TestsLevel1(HedyTester):
     level = 1
     '''
