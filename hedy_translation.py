@@ -37,36 +37,38 @@ def all_keywords_to_dict():
 
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
+    try:
+        processed_input = hedy.process_input_string(input_string_, level, escape_backslashes=False)
 
-    processed_input = hedy.process_input_string(input_string_, level, escape_backslashes=False)
+        parser = hedy.get_parser(level, from_lang, True)
+        keyword_dict_from = keywords_to_dict(from_lang)
+        keyword_dict_to = keywords_to_dict(to_lang)
 
-    parser = hedy.get_parser(level, from_lang, True)
-    keyword_dict_from = keywords_to_dict(from_lang)
-    keyword_dict_to = keywords_to_dict(to_lang)
+        program_root = parser.parse(processed_input + '\n').children[0]
 
-    program_root = parser.parse(processed_input + '\n').children[0]
+        translator = Translator(processed_input)
+        translator.visit(program_root)
+        ordered_rules = reversed(
+            sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
-    translator = Translator(processed_input)
-    translator.visit(program_root)
-    ordered_rules = reversed(
-        sorted(translator.rules, key=operator.attrgetter("line", "start")))
+        # FH Feb 2022 TODO trees containing invalid nodes are happily translated, should be stopped here!
 
-    # FH Feb 2022 TODO trees containing invalid nodes are happily translated, should be stopped here!
+        result = processed_input
+        for rule in ordered_rules:
+            if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
+                lines = result.splitlines()
+                line = lines[rule.line-1]
+                replaced_line = replace_token_in_line(
+                    line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
+                result = replace_line(lines, rule.line-1, replaced_line)
 
-    result = processed_input
-    for rule in ordered_rules:
-        if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
-            lines = result.splitlines()
-            line = lines[rule.line-1]
-            replaced_line = replace_token_in_line(
-                line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
-            result = replace_line(lines, rule.line-1, replaced_line)
+        # For now the needed post processing is only removing the 'end-block's added during pre-processing
+        result = '\n'.join([line for line in result.splitlines()
+                           if not line.startswith('end-block')])
 
-    # For now the needed post processing is only removing the 'end-block's added during pre-processing
-    result = '\n'.join([line for line in result.splitlines()
-                       if not line.startswith('end-block')])
-
-    return result
+        return result
+    except:
+        return input_string_
 
 
 def replace_line(lines, index, line):
