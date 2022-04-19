@@ -94,6 +94,21 @@ class TestsLevel6(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_ask_comma(self):
+    code = textwrap.dedent("""\
+    name = Hedy
+    mood = ask 'Hey, ' name '! How are you, ' name '?'""")
+
+    expected = textwrap.dedent("""\
+    name = 'Hedy'
+    mood = input(f'Hey, {name}! How are you, {name}?')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected
+    )
+
   #
   # if tests
   #

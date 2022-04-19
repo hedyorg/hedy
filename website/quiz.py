@@ -337,7 +337,6 @@ def no_quiz_data_error():
     # Todo TB -> Somewhere in the near future we should localize these messages
     return utils.error_page(error=404, page_error='No quiz data found for this level', menu=False, iframe=True)
 
-
 def is_correct_answer(question, letter):
     return question['correct_answer'] == letter
 
