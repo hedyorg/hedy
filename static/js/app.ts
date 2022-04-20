@@ -803,11 +803,18 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       pushAchievement("hedy_hacking");
       return ErrorMessages ['Program_too_long']
     },
-    // Give up after three seconds of execution, there might be an infinite loop.
-    // This function can be customized later to yield different timeouts for different levels.
+    // We want to make the timeout function a bit more sophisticated that simply setting a value
+    // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
+    // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
-      // const level = window.State.level;
-      return ((hasTurtle || hasSleep) ? 20000 : 3000);
+      const level = Number(window.State.level) || 0;
+      console.log(level)
+      if (level < 7) {
+        // Set a non-realistic time-out of 5 minutes
+        return (3000000);
+      }
+      // Set a time-out of either 20 seconds (when turtle / sleep) or 5 seconds when not
+      return ((hasTurtle || hasSleep) ? 20000 : 5000);
     }) ()
   });
 
