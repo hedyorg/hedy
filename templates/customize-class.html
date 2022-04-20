@@ -139,6 +139,12 @@
                                     <input class="other_settings_checkbox" id="hide_keyword_switcher" type="checkbox" {% if "hide_keyword_switcher" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="text-left border-t border-r border-gray-400">{{_('hide_quiz')}}</td>
+                                <td class="border-t border-gray-400">
+                                    <input class="other_settings_checkbox" id="hide_quiz" type="checkbox" {% if "hide_quiz" in customizations['other_settings'] %}checked{% endif %}>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
