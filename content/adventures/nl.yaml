@@ -14,7 +14,7 @@ adventures:
 
                     Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het linker programmeerveld.
 
-                start_code: "{print} hallo wereld!"
+                start_code: "```\n{print} hallo wereld!\n```"
                 example_code: |
                     ## Voorbeeldcode
                     ```
@@ -198,16 +198,18 @@ adventures:
                     ```
             9:
                 start_code: |-
+                    ```
                     {repeat} 3 {times}
                         eten = {ask} 'Wat wil je bestellen?'
                         {if} eten {is} pizza
                             {print} 'lekker'
                         {else}
                             {print} 'pizza is lekkerder'
+                    ```
                 story_text: |
                     ## En nu alles tegelijk!
                     In dit level kun je niet alleen meerdere regels gebruiken bij `{if}` en `{repeat}`, maar je kunt ze ook nog eens in elkaar zetten!
-                    In het voorbeeldje zie je een `{if}` commando in een `{repeat}` commando staan. Andersom mag het ook en een {if} mag ook in een `{if}` en een `{repeat}` in een `{repeat}`.
+                    In het voorbeeldje zie je een `{if}` commando in een `{repeat}` commando staan. Andersom mag het ook en een `{if}` mag ook in een `{if}` en een `{repeat}` in een `{repeat}`.
                     Probeer het maar eens!
                 example_code: |
                     ## Voorbeeld Hedy code
@@ -224,10 +226,10 @@ adventures:
                     dieren {is} hond, kat, papegaai
                     {for} dier {in} dieren
                       {print} dier ' is een leuk dier!'
-                story_text: |
+                story_text: |-
                     ## Voor elk item op mijn lijstje
-                    In dit level leren we een nieuwe code, de code `for`. Met `for` kun je alle dingen in een lijstje gebruiken.
-                    `{for}` mag meerdere regels gebruiken, net zoals de `{repeat}` {and} `{if}`, dus alle regels eronder moeten met spaties beginnen.
+                    In dit level leren we een nieuwe code, de code `{for}`. Met `{for}` kun je alle dingen in een lijstje gebruiken.
+                    `{for}` mag meerdere regels gebruiken, net zoals de `{repeat}` en `{if}`, dus alle regels eronder moeten met spaties beginnen.
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -240,24 +242,24 @@ adventures:
                     {for} i {in} {range} 1 {to} 10
                         {print} i
                     {print} 'Wie niet weg is, is gezien'
-                story_text: |
+                story_text: |-
                     ## Lussen!
                     We gaan nu een extra vorm van de `{for}` toevoegen! Je mag ook `{for} i {in} {range} 1 {to} 5` typen in plaats van `{repeat} 5 {times}`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken! 
                     Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
-                    for teller in range 1 to 5
-                        print teller
+                    {for} teller {in} {range} 1 {to} 5
+                        {print} teller
                     ```
             12:
                 start_code: |-
                     {print} 'kommagetallen gaan met een punt!'
                     {print} 2.5 + 2.5
-                story_text: |
+                story_text: |-
                     ## Getallen en teksten
                     **Kommagetallen**
-                    Tot nu toe mocht je nog geen kommagetallen gebruiken zoals bijv anderhalf, maar nu wel! Let wel heel goed op... kommagetallen gaan op de computer met een punt en niet met een komma.
+                    Tot nu toe mocht je nog geen kommagetallen gebruiken zoals bijv anderhalf, maar nu wel! Let wel heel goed op... kommagetallen gaan op de computer met een `.` en niet met een komma.
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -304,7 +306,7 @@ adventures:
                     ```
                     a = 'Hallo '
                     b = 'wereld!'
-                    print a + b
+                    {print} a + b
                     ```
             13:
                 start_code: |-
@@ -312,9 +314,9 @@ adventures:
                     leeftijd = {ask} 'hoe oud ben jij?'
                     {if} naam {is} 'Hedy' {and} leeftijd {is} 2
                         {print} 'Jij bent de echte Hedy!'
-                story_text: |
+                story_text: |-
                     ## En... Of?
-                    We gaan nu `{and}` en `{or}` gebruiken! Als je twee dingen wilt checken hoef je niet meer twee {if}jes in elkaar te doen maar kan je nu `{and}` gebruiken. Beide dingen in de `{if}` moeten waar zijn als je een `{and}` gebruikt. We kunnen ook `{or}` gebruiken. Daarbij moet er één van de twee waar zijn.
+                    We gaan nu `{and}` en `{or}` gebruiken! Als je twee dingen wilt checken hoef je niet meer twee {if}jes in elkaar te doen maar kan je nu `{and}` en `{or}` gebruiken. Beide dingen moeten waar zijn als je een `{and}` gebruikt. We kunnen ook `{or}` gebruiken. Daarbij moet er één van de twee waar zijn.
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
