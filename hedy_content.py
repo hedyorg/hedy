@@ -1,166 +1,248 @@
 import copy
-import attr
+import os
+from babel import Locale
+from flask import g
+
+from utils import is_debug_mode
 from website.yaml_file import YamlFile
+import iso3166
 
-# Define and load all available language data
-ALL_LANGUAGES = {
-    'id': 'Bahasa Indonesia',
-    'de': 'Deutsch',
-    'en': 'English',
-    'es': 'Español',
-    'fr': 'Français',
-    'pl': 'Polski',
-    'pt_PT': 'Português (pt)',
-    'pt_BR': 'Português (br)',
-    'fy': 'Frysk',
-    'it': 'Italiano',
-    'hu': 'Magyar',
-    'el': 'Ελληνικά',
-    'zh_Hans': "简体中文",
-    'nl': 'Nederlands',
-    'nb_NO': 'Norsk',
-    'sw': 'Swahili',
-    'tr': 'Türk',
-    'cs': 'Čeština',
-    'bg': 'Български',
-    'ar': 'عربى',
-    'hi': 'हिंदी',
-    'bn': 'বাংলা',
-}
+# Define and load all countries
+COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 
-# Define fall back languages for adventures
-FALL_BACK_ADVENTURE = {
-    'fy': 'nl',
-    'pt_BR': 'pt_PT'
-}
+# Define dictionary for available languages. Fill dynamically later.
+ALL_LANGUAGES = {}
+ALL_KEYWORD_LANGUAGES = {}
 
-ALL_KEYWORD_LANGUAGES = {
-    'en': 'EN',
-    'es': 'ES',
-    'fr': 'FR',
-    'nl': 'NL',
-    'nb_NO': 'NB',
-    'tr': 'TR',
-    'ar': 'AR',
-    'hi': 'HI'
-}
+ADVENTURE_ORDER = [
+    'default',
+    'story',
+    'parrot',
+    'songs',
+    'turtle',
+    'dishes',
+    'dice',
+    'rock',
+    'calculator',
+    'fortune',
+    'restaurant',
+    'haunted',
+    'piggybank',
+    'quizmaster',
+    'language',
+    'secret',
+    'next',
+    'end'
+]
 
-class LevelDefaults:
-  def __init__(self, language):
-    self.language = language
-    self.keyword_lang = "en"
-    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
-    self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.language}.yaml')
+# load all available languages in dict
+# list_translations of babel does about the same, but without territories.
+languages = {}
+if not os.path.isdir('translations'):
+    # should not be possible, but if it's moved someday, EN would still be working.
+    ALL_LANGUAGES['en'] = 'English'
+    ALL_KEYWORD_LANGUAGES['en'] = 'EN'
 
-  def set_keyword_language(self, language):
-      if language != self.keyword_lang:
-          self.keyword_lang = language
-          self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
+for folder in os.listdir('translations'):
+    locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
+    if not os.path.isdir(locale_dir):
+        continue
 
-  def max_level(self):
-    all_levels = sorted(self.levels.keys()) # We should sort this to make sure the max_level returned is correct
-    max_consecutive_level = 1
-    previous_level = 0
-    for level in all_levels:
-      if level == previous_level + 1:
-        previous_level = level
-        max_consecutive_level = level
-      else:
-        return previous_level
+    if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
+        locale = Locale.parse(folder)
+        languages[folder] = locale.display_name.title()
+
+for l in sorted(languages):
+    ALL_LANGUAGES[l] = languages[l]
+    if os.path.exists('./grammars/keywords-' + l + '.lark'):
+        ALL_KEYWORD_LANGUAGES[l] = l[0:2].upper()  # first two characters
+
+# Load and cache all keyword yamls
+KEYWORDS = {}
+for lang in ALL_KEYWORD_LANGUAGES.keys():
+    # If this, for some reason, fails -> fill with English values
+    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml')
 
 
-    return max_consecutive_level
+class Commands:
+    # Want to parse the keywords only once, they can be cached -> perform this action on server start
+    def __init__(self, language):
+        self.language = language
+        # We can keep these cached, even in debug_mode: files are small and don't influence start-up time much
+        self.file = YamlFile.for_file(f'content/commands/{self.language}.yaml')
+        self.data = {}
 
-  def get_defaults_for_level(self, level):
-    #grabs level defaults from yaml and converts to DefaultValues type
-    default_values = copy.deepcopy(self.levels[level])
+        # For some reason the is_debug_mode() function is not (yet) ready when we call this code
+        # So we call the NO_DEBUG_MODE directly from the environment
+        # Todo TB -> Fix that the is_debug_mode() function is ready before server start
+        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
 
-    # Sometimes we have multiple text and example_code -> iterate these and add as well!
-    extra_examples = []
-    for i in range(2, 10):
-        extra_example = {}
-        if default_values.get('intro_text_' + str(i)):
-            extra_example['intro_text'] = default_values.get('intro_text_' + str(i)).format(**self.keywords)
-            default_values.pop('intro_text_' + str(i))
-            if default_values.get('example_code_' + str(i)):
-                extra_example['example_code'] = default_values.get('example_code_' + str(i)).format(**self.keywords)
-                default_values.pop('example_code_' + str(i))
-            extra_examples.append(extra_example)
-        else:
-            break
-    default_values['extra_examples'] = extra_examples
+        if not self.debug_mode:
+            # We always create one with english keywords
+            self.data["en"] = self.cache_keyword_parsing("en")
+            if language in ALL_KEYWORD_LANGUAGES.keys():
+                self.data[language] = self.cache_keyword_parsing(language)
 
-    # Todo TB -> We have to improve this coding (a lot!)
-    # We use the following section to replace the placeholders with the actual keywords, but this is complex
-    # One solution might be: Separate the commands from the level_defaults -> load them separately
-    # This way can use a more simplistic structure less keen to mistakes and easier to understand
+    def cache_keyword_parsing(self, language):
+        keyword_data = {}
+        for level in copy.deepcopy(self.file):
+            # Take a copy -> otherwise we overwrite the parsing
+            commands = copy.deepcopy(self.file.get(level))
+            for command in commands:
+                for k, v in command.items():
+                    command[k] = v.format(**KEYWORDS.get(language))
+            keyword_data[level] = commands
+        return keyword_data
 
-    # We have to verify if it's a string as the extra examples are stored within a list
-    for k,v in default_values.items():
-        if isinstance(v, str):
-            default_values[k] = v.format(**self.keywords)
-        # The commands value is a list of dicts -> we have to parse this separately
-        if k == "commands":
-            parsed_commands = []
-            for command in v:
-                temp = {}
-                for command_key, command_value in command.items():
-                    temp[command_key] = command_value.format(**self.keywords)
-                parsed_commands.append(temp)
-            default_values[k] = parsed_commands
+    def get_commands_for_level(self, level, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            self.data[keyword_lang] = self.cache_keyword_parsing(keyword_lang)
+        return self.data.get(keyword_lang, {}).get(int(level), None)
 
-    default_type = {
-      "level": str(level),
-    }
-    default_type.update(**default_values)
+# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 
-    return DefaultValues(**default_type)
 
-  def get_defaults(self, level):
-    """Return the level defaults for a given level number."""
+class NoSuchCommand:
+    def get_commands_for_level(self, level):
+        return {}
 
-    return copy.deepcopy(self.levels.get(int(level), {}))
+# Parsing all these adventures on server start takes quite some time
+# Don't do this when on debug mode!
 
-class NoSuchDefaults:
-  def get_defaults(self, level):
-    return {}
 
 class Adventures:
-  def __init__(self, language):
-    self.language = language
-    self.keyword_lang = "en"
-    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml').to_dict()
-    self.adventures_file = YamlFile.for_file(f'coursedata/adventures/{self.language}.yaml')
+    def __init__(self, language):
+        self.language = language
+        self.file = {}
+        self.data = {}
 
-  def set_keyword_language(self, language):
-    if language != self.keyword_lang:
-        self.keyword_lang = language
-        self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
+        # For some reason the is_debug_mode() function is not (yet) ready when we call this code
+        # So we call the NO_DEBUG_MODE directly from the environment
+        # Todo TB -> Fix that the is_debug_mode() function is ready before server start
+        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
 
+        if not self.debug_mode:
+            self.file = YamlFile.for_file(
+                f'content/adventures/{self.language}.yaml').get('adventures')
+            # We always create one with english keywords
+            self.data["en"] = self.cache_adventure_keywords("en")
+            if language in ALL_KEYWORD_LANGUAGES.keys():
+                self.data[language] = self.cache_adventure_keywords(language)
+
+    def cache_adventure_keywords(self, language):
+        # Sort the adventure to a fixed structure to make sure they are structured the same for each language
+        sorted_adventures = {}
+        for adventure_index in ADVENTURE_ORDER:
+            if self.file.get(adventure_index, None):
+                sorted_adventures[adventure_index] = (
+                    self.file.get(adventure_index))
+        self.file = sorted_adventures
+        keyword_data = {}
+        for short_name, adventure in self.file.items():
+            parsed_adventure = copy.deepcopy(adventure)
+            for level in adventure.get('levels'):
+                for k, v in adventure.get('levels').get(level).items():
+                    parsed_adventure.get('levels').get(
+                        level)[k] = v.format(**KEYWORDS.get(language))
+            keyword_data[short_name] = parsed_adventure
+        return keyword_data
+
+    # Todo TB -> We can also cache this; why not?
     # When customizing classes we only want to retrieve the name, (id) and level of each adventure
-  def get_adventure_keyname_name_levels(self):
-    adventures = self.adventures_file['adventures']
-    adventures_dict = {}
-    for adventure in adventures.items():
-      adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
-    return adventures_dict
+    def get_adventure_keyname_name_levels(self):
+        if self.debug_mode and not self.data.get("en", None):
+            if not self.file:
+                self.file = YamlFile.for_file(
+                    f'content/adventures/{self.language}.yaml').get('adventures')
+            self.data["en"] = self.cache_adventure_keywords("en")
+        adventures_dict = {}
+        for adventure in self.data["en"].items():
+            adventures_dict[adventure[0]] = {
+                adventure[1]['name']: list(adventure[1]['levels'].keys())}
+        return adventures_dict
 
-  def has_adventures(self):
-    return self.adventures_file.exists() and self.adventures_file.get('adventures')
+    # Todo TB -> We can also cache this; why not?
+    # When filtering on the /explore or /programs page we only want the actual names
+    def get_adventure_names(self):
+        if self.debug_mode and not self.data.get("en", None):
+            if not self.file:
+                self.file = YamlFile.for_file(
+                    f'content/adventures/{self.language}.yaml').get('adventures')
+            self.data["en"] = self.cache_adventure_keywords("en")
+        adventures_dict = {}
+        for adventure in self.data["en"].items():
+            adventures_dict[adventure[0]] = adventure[1]['name']
+        return adventures_dict
 
+    def get_adventures(self, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            if not self.file:
+                self.file = YamlFile.for_file(
+                    f'content/adventures/{self.language}.yaml').get('adventures')
+            self.data[keyword_lang] = self.cache_adventure_keywords(
+                keyword_lang)
+        return self.data.get(keyword_lang)
+
+    def has_adventures(self):
+        if self.debug_mode and not self.data.get("en", None):
+            if not self.file:
+                self.file = YamlFile.for_file(
+                    f'content/adventures/{self.language}.yaml').get('adventures')
+            self.data["en"] = self.cache_adventure_keywords("en")
+        return True if self.data.get("en") else False
+
+
+# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchAdventure:
-  def get_defaults(self, level):
-    return {}
+    def get_adventure(self):
+        return {}
 
 
-@attr.s(slots=True)
-class DefaultValues:
-  """Default texts for a level"""
+class Quizzes:
+    def __init__(self, language):
+        self.language = language
+        self.keyword_lang = "en"
+        self.keywords = YamlFile.for_file(
+            f'content/keywords/{self.keyword_lang}.yaml').to_dict()
+        self.quizzes = YamlFile.for_file(
+            f'content/quizzes/{self.language}.yaml').to_dict()
+        if not self.quizzes:
+            self.quizzes = YamlFile.for_file(
+                f'content/quizzes/en.yaml').to_dict()
 
-  level = attr.ib()
-  intro_text = attr.ib(default=None)
-  example_code = attr.ib(default=None)
-  extra_examples = attr.ib(default=None)
-  start_code = attr.ib(default=None)
-  commands = attr.ib(default=None)
+    def set_keyword_language(self, language):
+        # Todo TB -> We keep the language at "en" for now to make sure nothing changes for the end user
+        # We have to change the questions in the quizzes to make sure everything makes sense with dynamic keywords
+        return None
+        # if language != self.keyword_lang:
+        #    self.keyword_lang = language
+        #    self.keywords = YamlFile.for_file(f'coursedata/keywords/{self.keyword_lang}.yaml')
 
+    def get_highest_question_level(self, level):
+        return len(self.quizzes['levels'].get(level))
+
+    def get_quiz_data_for_level(self, level):
+        return self.quizzes['levels'].get(level)
+
+    def get_quiz_data_for_level_question(self, level, question):
+        # We have to parse the keywords before returning
+        for k, v in self.quizzes['levels'].get(level).get(question).items():
+            if isinstance(self.quizzes['levels'].get(level).get(question)[k], str):
+                self.quizzes['levels'].get(level).get(question)[k] = self.quizzes['levels'].get(
+                    level).get(question)[k].format(**self.keywords)
+            elif isinstance(self.quizzes['levels'].get(level).get(question)[k], list):
+                options = []
+                for option in self.quizzes['levels'].get(level).get(question)[k]:
+                    temp = {}
+                    for key, value in option.items():
+                        temp[key] = value.format(**self.keywords)
+                    options.append(temp)
+                self.quizzes['levels'].get(level).get(question)[k] = options
+        return self.quizzes['levels'].get(level).get(question)
+
+# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
+
+
+class NoSuchQuiz:
+    def get_quiz_data_for_level(self, level):
+        return {}

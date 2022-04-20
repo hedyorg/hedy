@@ -94,18 +94,269 @@ class TestsLevel6(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-  #if tests
-  def test_print_if_else_with_line_break(self):
-    # line breaks should be allowed in if-elses until level 7 when we start with indentation
+  def test_ask_comma(self):
+    code = textwrap.dedent("""\
+    name = Hedy
+    mood = ask 'Hey, ' name '! How are you, ' name '?'""")
+
+    expected = textwrap.dedent("""\
+    name = 'Hedy'
+    mood = input(f'Hey, {name}! How are you, {name}?')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected
+    )
+
+  #
+  # if tests
+  #
+  def test_if_equality_linebreak_print(self):
+    # line breaks after if-condition are allowed
     code = textwrap.dedent("""\
     naam is Hedy
-    print 'ik heet' naam
+    if naam is Hedy
+    print 'leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'leuk')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_equality_trailing_space_linebreak_print(self):
+    code = textwrap.dedent("""\
+    naam is James
+    if naam is trailing_space 
+    print 'shaken'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'James'
+    if str(naam) == str('trailing_space'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_2_vars_equality_print(self):
+    code = textwrap.dedent("""\
+    jouwkeuze is schaar
+    computerkeuze is schaar
+    if computerkeuze is jouwkeuze print 'gelijkspel!'""")
+
+    expected = textwrap.dedent("""\
+    jouwkeuze = 'schaar'
+    computerkeuze = 'schaar'
+    if str(computerkeuze) == str(jouwkeuze):
+      print(f'gelijkspel!')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected, output='gelijkspel!')
+
+  @parameterized.expand(HedyTester.quotes)
+  def test_if_equality_quoted_rhs_with_space(self, q):
+    code = textwrap.dedent(f"""\
+    naam is James
+    if naam is {q}James Bond{q} print {q}shaken{q}""")
+
+    expected = textwrap.dedent(f"""\
+    naam = 'James'
+    if str(naam) == str('James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  @parameterized.expand(HedyTester.quotes)
+  def test_if_equality_quoted_rhs_with_spaces(self, q):
+    code = textwrap.dedent(f"""\
+    naam is James
+    if naam is {q}Bond James Bond{q} print 'shaken'""")
+
+    expected = textwrap.dedent(f"""\
+    naam = 'James'
+    if str(naam) == str('Bond James Bond'):
+      print(f'shaken')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_equality_single_quoted_rhs_with_inner_double_quote(self):
+    code = textwrap.dedent(f"""\
+    answer is no
+    if answer is 'He said "no"' print 'no'""")
+
+    expected = textwrap.dedent(f"""\
+    answer = 'no'
+    if str(answer) == str('He said "no"'):
+      print(f'no')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_equality_double_quoted_rhs_with_inner_single_quote(self):
+    code = textwrap.dedent(f"""\
+    answer is no
+    if answer is "He said 'no'" print 'no'""")
+
+    expected = textwrap.dedent(f"""\
+    answer = 'no'
+    if str(answer) == str('He said \\'no\\''):
+      print(f'no')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_equality_promotes_int_to_string(self):
+    code = textwrap.dedent("""\
+    a is test
+    b is 15
+    if a is b c is 1""")
+
+    expected = textwrap.dedent("""\
+    a = 'test'
+    b = '15'
+    if str(a) == str(b):
+      c = '1'""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_equality_assign_calc(self):
+    code = textwrap.dedent("""\
+    cmp is 1
+    test is 2
+    acu is 0
+    if test is cmp acu is acu + 1""")
+
+    expected = textwrap.dedent("""\
+    cmp = '1'
+    test = '2'
+    acu = '0'
+    if str(test) == str(cmp):
+      acu = int(acu) + int(1)""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_equality_with_ise(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    if naam is Hedy print 'leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'leuk')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7)
+
+  def test_if_equality_with_equals_sign(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    if naam = Hedy print 'leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'leuk')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      max_level=7
+    )
+
+  #
+  # if else tests
+  #
+  def test_if_equality_print_else_print(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    if naam is Hedy print 'leuk' else print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_ask_equality_print_else_print(self):
+    code = textwrap.dedent("""\
+    kleur is ask 'Wat is je lievelingskleur?'
+    if kleur is groen print 'mooi!' else print 'niet zo mooi'""")
+
+    expected = textwrap.dedent("""\
+    kleur = input(f'Wat is je lievelingskleur?')
+    if str(kleur) == str('groen'):
+      print(f'mooi!')
+    else:
+      print(f'niet zo mooi')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_else_followed_by_print(self):
+    code = textwrap.dedent("""\
+    kleur is geel
+    if kleur is groen antwoord is ok else antwoord is stom
+    print antwoord""")
+
+    expected = textwrap.dedent("""\
+    kleur = 'geel'
+    if str(kleur) == str('groen'):
+      antwoord = 'ok'
+    else:
+      antwoord = 'stom'
+    print(f'{antwoord}')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_equality_assign_else_assign(self):
+    code = textwrap.dedent("""\
+    cmp is 1
+    test is 2
+    acu is 0
+    if test is cmp
+    acu is acu + 1
+    else
+    acu is acu + 5""")
+
+    expected = textwrap.dedent("""\
+    cmp = '1'
+    test = '2'
+    acu = '0'
+    if str(test) == str(cmp):
+      acu = int(acu) + int(1)
+    else:
+      acu = int(acu) + int(5)""")
+
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      expected=expected
+    )
+
+  # Legal syntax:
+  #
+  # if name is Hedy print 'hello'
+  # if name is 'Hedy' print 'hello'
+  # if name is 'Hedy is het beste' print 'hello'
+  # if name is Hedy c is 5
+
+  # Illegal syntax:
+  #
+  # if name is Hedy is het beste print 'hello'
+  # if name is Hedy is het beste x is 5
+
+  def test_if_equality_print_linebreak_else_print(self):
+    # line break before else is allowed
+    code = textwrap.dedent("""\
+    naam is Hedy
     if naam is Hedy print 'leuk'
     else print 'minder leuk'""")
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print(f'ik heet{naam}')
     if str(naam) == str('Hedy'):
       print(f'leuk')
     else:
@@ -115,86 +366,107 @@ class TestsLevel6(HedyTester):
       max_level=7,
       code=code,
       expected=expected,
-      expected_commands=['is', 'print', 'else', 'print', 'print']
+      expected_commands=['is', 'else', 'print', 'print']
     )
-  def test_print_if_else_with_line_break_and_space(self):
-    # line breaks should be allowed in if-elses until level 7 when we start with indentation
 
+  def test_if_equality_linebreak_print_else_print(self):
+    # line break after if-condition is allowed
     code = textwrap.dedent("""\
     naam is Hedy
-    print 'ik heet' naam
-    if naam is Hedy print 'leuk'
+    if naam is Hedy
+    print 'leuk' else print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_equality_print_else_linebreak_print(self):
+    # line break after else is allowed
+    code = textwrap.dedent("""\
+    naam is Hedy
+    if naam is Hedy print 'leuk' else
+    print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_if_equality_linebreak_print_linebreak_else_print(self):
+    # line breaks after if-condition and before else are allowed
+    code = textwrap.dedent("""\
+    naam is Hedy
+    if naam is Hedy
+    print 'leuk'
     else print 'minder leuk'""")
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print(f'ik heet{naam}')
     if str(naam) == str('Hedy'):
       print(f'leuk')
     else:
       print(f'minder leuk')""")
 
-    self.multi_level_tester(
-      max_level=6,
-      code=code,
-      expected=expected
-    )
-  def test_if_else_with_space(self):
-    code = textwrap.dedent("""\
-    a is 2
-    if a is 1 print a
-    else print 'nee'""")
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
 
-    expected = textwrap.dedent("""\
-    a = '2'
-    if str(a) == str('1'):
-      print(f'{a}')
-    else:
-      print(f'nee')""")
-
-    self.multi_level_tester(
-      max_level=6,
-      code=code,
-      expected=expected
-    )
-  def test_print_if_else_with_is(self):
+  def test_if_equality_linebreak_print_linebreak_else_linebreak_print(self):
+    # line breaks after if-condition, before else and after else are allowed
     code = textwrap.dedent("""\
     naam is Hedy
-    print 'ik heet' naam
-    if naam is Hedy print 'leuk' else print 'minder leuk'""")
+    if naam is Hedy
+    print 'leuk'
+    else
+    print 'minder leuk'""")
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print(f'ik heet{naam}')
     if str(naam) == str('Hedy'):
       print(f'leuk')
     else:
       print(f'minder leuk')""")
 
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      max_level=7)
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
 
-  def test_print_if_else_with_equals_sign(self):
+  def test_if_equality_linebreak_print_else_linebreak_print(self):
+    # line breaks after if-condition and after else are allowed
     code = textwrap.dedent("""\
     naam is Hedy
-    print 'ik heet' naam
-    if naam = Hedy print 'leuk' else print 'minder leuk'""")
+    if naam is Hedy
+    print 'leuk' else
+    print 'minder leuk'""")
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print(f'ik heet{naam}')
     if str(naam) == str('Hedy'):
       print(f'leuk')
     else:
       print(f'minder leuk')""")
 
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      max_level=7
-    )
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  @parameterized.expand(HedyTester.quotes)
+  def test_if_equality_quoted_rhs_with_space_else(self, q):
+    code = textwrap.dedent(f"""\
+      naam is James
+      if naam is {q}James Bond{q} print {q}shaken{q} else print {q}biertje!{q}""")
+
+    expected = textwrap.dedent(f"""\
+      naam = 'James'
+      if str(naam) == str('James Bond'):
+        print(f'shaken')
+      else:
+        print(f'biertje!')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
 
   # calculation tests
   # todo should all be tested for higher levels too!
@@ -413,199 +685,61 @@ class TestsLevel6(HedyTester):
 
       self.single_level_tester(code=code, expected=expected)
 
-  def test_ifelse_should_go_before_assign(self):
+  def test_consecutive_if_statements(self):
     code = textwrap.dedent("""\
-    kleur is geel
-    if kleur is groen antwoord is ok else antwoord is stom
-    print antwoord""")
+    names is Hedy, Lamar
+    name is ask 'What is a name you like?'
+    if name is Hedy print 'nice!'
+    if name in names print 'nice!'""")
+
     expected = textwrap.dedent("""\
-    kleur = 'geel'
-    if str(kleur) == str('groen'):
-      antwoord = 'ok'
+    names = ['Hedy', 'Lamar']
+    name = input(f'What is a name you like?')
+    if str(name) == str('Hedy'):
+      print(f'nice!')
+    if name in names:
+      print(f'nice!')""")
+
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_consecutive_if_and_if_else_statements(self):
+    code = textwrap.dedent("""\
+    naam is ask 'hoe heet jij?'
+    if naam is Hedy print 'leuk'
+    if naam is Python print 'ook leuk'
+    else print 'minder leuk!'""")
+
+    expected = textwrap.dedent("""\
+    naam = input(f'hoe heet jij?')
+    if str(naam) == str('Hedy'):
+      print(f'leuk')
+    if str(naam) == str('Python'):
+      print(f'ook leuk')
     else:
-      antwoord = 'stom'
-    print(f'{antwoord}')""")
+      print(f'minder leuk!')""")
 
-    self.multi_level_tester(
-      max_level=6,
-      code=code,
-      expected=expected
-    )
-  def test_ifelse_calc_vars(self):
+    self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+  def test_consecutive_if_else_statements(self):
     code = textwrap.dedent("""\
-    cmp is 1
-    test is 2
-    acu is 0
-    if test is cmp
-    acu is acu + 1
-    else acu is acu + 5""")
-    # @TODO: Felienne, if the above line starts with "else\nacu", then the test fails intermittently due to ambiguity
+    names is Hedy, Lamar
+    name is ask 'What is a name you like?'
+    if name is Hedy print 'nice!' else print 'meh'
+    if name in names print 'nice!' else print 'meh'""")
+
     expected = textwrap.dedent("""\
-    cmp = '1'
-    test = '2'
-    acu = '0'
-    if str(test) == str(cmp):
-      acu = int(acu) + int(1)
+    names = ['Hedy', 'Lamar']
+    name = input(f'What is a name you like?')
+    if str(name) == str('Hedy'):
+      print(f'nice!')
     else:
-      acu = int(acu) + int(5)""")
-    self.multi_level_tester(
-      max_level=6,
-      code=code,
-      expected=expected
-    )
-
-  def test_if_calc_vars(self):
-    code =  textwrap.dedent("""\
-    cmp is 1
-    test is 2
-    acu is 0
-    if test is cmp acu is acu + 1""")
-    expected = textwrap.dedent("""\
-    cmp = '1'
-    test = '2'
-    acu = '0'
-    if str(test) == str(cmp):
-      acu = int(acu) + int(1)""")
-    self.single_level_tester(
-      code=code,
-      expected=expected
-    )
-
-  # So legal are:
-  #
-  # if name is Hedy print 'hello'
-  # if name is 'Hedy' print 'hello'
-  # if name is 'Hedy is het beste' print 'hello'
-  # if name is Hedy c is 5
-
-  # Illegal is:
-  #
-  # if name is Hedy is het beste print 'hello'
-  # if name is Hedy is het beste x is 5
-
-  def test_equality_promotes_int_to_string(self):
-    code = textwrap.dedent("""\
-    a is test
-    b is 15
-    if a is b c is 1""")
-    expected = textwrap.dedent("""\
-    a = 'test'
-    b = '15'
-    if str(a) == str(b):
-      c = '1'""")
-    self.multi_level_tester(
-      max_level=7,
-      code=code,
-      expected=expected
-    )
-
-  def test_one_space_in_rhs_if(self):
-    code = textwrap.dedent("""\
-    naam is James
-    if naam is 'James Bond' print 'shaken'""")
-
-    expected = textwrap.dedent("""\
-    naam = 'James'
-    if str(naam) == str('James Bond'):
-      print(f'shaken')""")
-
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      max_level=7)
-
-  def test_no_space_nor_quotes_in_rhs(self):
-    code = textwrap.dedent("""\
-    warna = ask 'Apa warna favorit kamu?'
-    if warna is hijau print 'cantik!' else print 'meh!'""")
-
-    expected = textwrap.dedent("""\
-    warna = input(f'Apa warna favorit kamu?')
-    if str(warna) == str('hijau'):
-      print(f'cantik!')
+      print(f'meh')
+    if name in names:
+      print(f'nice!')
     else:
-      print(f'meh!')""")
+      print(f'meh')""")
 
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      max_level=7)
-
-  def test_one_space_in_rhs_if_else(self):
-    code = textwrap.dedent("""\
-    naam is James
-    if naam is 'James Bond' print 'shaken' else print 'biertje!'""")
-
-    expected = textwrap.dedent("""\
-    naam = 'James'
-    if str(naam) == str('James Bond'):
-      print(f'shaken')
-    else:
-      print(f'biertje!')""")
-
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      max_level=7)
-
-  @parameterized.expand(HedyTester.quotes)
-  def test_quoted_space_rhs(self, q):
-    code = textwrap.dedent(f"""\
-    naam is James
-    if naam is {q}James Bond{q} print {q}shaken{q} else print {q}biertje!{q}""")
-
-    expected = textwrap.dedent(f"""\
-    naam = 'James'
-    if str(naam) == str({q}James Bond{q}):
-      print(f'shaken')
-    else:
-      print(f'biertje!')""")
-    self.single_level_tester(
-      code=code,
-      expected=expected)
-
-
-  def test_space_enter_rhs_ifelse(self):
-    code = textwrap.dedent("""\
-    naam is James
-    if naam is James Bond
-    print 'shaken' else print 'biertje!'""")
-
-    expected = textwrap.dedent("""\
-    naam = 'James'
-    if naam == 'James Bond':
-      print(f'shaken')
-    else:
-      print(f'biertje!')""")
-
-    self.single_level_tester(
-      code=code,
-      expected=expected)
-
-  def test_space_enter_rhs_if(self):
-    code = textwrap.dedent("""\
-    naam is James
-    if naam is James Bond print 'shaken'""")
-
-    self.single_level_tester(
-      code=code,
-      exception=hedy.exceptions.UnquotedEqualityCheck)
-
-
-  def test_multiple_spaces_in_rhs_if(self):
-    code = textwrap.dedent("""\
-    naam is James
-    if naam is 'Bond James Bond' print 'shaken'""")
-
-    expected = textwrap.dedent("""\
-    naam = 'James'
-    if str(naam) == str('Bond James Bond'):
-      print(f'shaken')""")
-
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      max_level=7)
+    self.multi_level_tester(max_level=6, code=code, expected=expected)
 
   def test_calc_chained_vars(self):
     code = textwrap.dedent("""\

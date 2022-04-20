@@ -2,7 +2,7 @@
 
 {% block main %}
    <h2 class="px-8 mb-4">{{_('account_overview')}}</h2>
-   {% if user_messages and user_messages > 0 %}
+   {% if invite_data %}
        <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
        <div id="messages" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
          <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('my_messages')}}</h2>
@@ -12,7 +12,7 @@
                  {{_('sent_by')}} <b>{{ invite_data['teacher'] }}</b>. {{_('prompt_join_class')}}
                  <div class="flex flex-row mt-4">
                         <button type="reset" class="green-btn" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{_('join_class')}}</button>
-                        <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{invite_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
+                        <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{user_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
                 </div>
              </div>
          {% endif %}
@@ -66,13 +66,6 @@
         <div id="success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
      </div>
      </form>
-   </div>
-   <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#statistics').toggle()">{{_('statistics')}}</h1>
-   <div id="statistics" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
-     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('statistics')}}</h2>
-     <ul>
-         <li>{{_('number_programs')}}: <b>{{ user_data['program_count']}}</b></li>
-     </ul>
    </div>
    {% if user_classes %}
        <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#classes').toggle()">{{_('my_classes')}}</h1>
@@ -135,6 +128,9 @@
             <label for="country" class="inline-block w-72">{{_('country')}}</label>
             <select id="country" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg">
                 <option value="">{{_('select')}}</option>
+                {% for alpha, name in all_countries().items() %}
+                    <option value="{{ alpha }}">{{ name }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="mb-4">

@@ -273,8 +273,7 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
     }).done(function(response: any) {
       console.log('Response', response);
       if (response.Warning) {
-        fix_code(level, lang);
-        showBulb(level);
+        storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
       if (response.achievements) {
@@ -283,9 +282,9 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
+          storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
           // @ts-ignore
-          fix_code(level, lang);
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
         return;
@@ -312,6 +311,14 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
     modal.alert(e.responseText, 3000, true);
   }
 }
+
+function storeFixedCode(response: any, level: string) {
+  if (response.FixedCode) {
+    sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
+    showBulb(level);
+  }
+}
+
 function showBulb(level: string){
   const parsedlevel = parseInt(level)
   if(parsedlevel <= 2){
@@ -378,48 +385,6 @@ function showAchievement(achievement: any[]){
 function removeBulb(){
     const repair_button = $('#repair_button');
     repair_button.hide();
-}
-
-export function fix_code(level: string, lang: string){
-  if (window.State.disable_run) {
-    return modal.alert ("Running a program is disabled", 3000, true);
-  }
-  if (reloadOnExpiredSession ()) return;
-
-  try {
-    level = level.toString();
-    var code = get_trimmed_code();
-    $.ajax({
-      type: 'POST',
-      url: '/fix-code',
-      data: JSON.stringify({
-        level: level,
-        code: code,
-        lang: lang,
-        read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: window.State.adventure_name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response: any) {
-      if (response.FixedCode){
-        sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
-        showBulb(level);
-      }
-    }).fail(function(xhr) {
-      console.error(xhr);
-      // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
-      if (xhr.readyState < 4) {
-        error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
-      } else {
-        error.show(ErrorMessages['Other_error'], ErrorMessages['ServerError']);
-      }
-    });
-
-  } catch (e: any) {
-    console.error(e);
-    error.show(ErrorMessages['Other_error'], e.message);
-  }
 }
 
 /**
@@ -825,7 +790,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#turtlecanvas').empty();
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
-    $("#variable_button").trigger("click")
     $('#turtlecanvas').show();
   }
 
@@ -1028,7 +992,7 @@ export function prompt_unsaved(cb: () => void) {
 }
 
 export function load_quiz(level: string) {
-  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+  $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
 
 export function showVariableView() {

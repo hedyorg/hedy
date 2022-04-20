@@ -59,7 +59,7 @@ function resetWindow() {
     document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
 
-    if (tabName === 'end') {
+      if (tabName === 'quiz') {
       $ ('#adventures-tab').css('height', '');
       $ ('#adventures-tab').css('min-height', '14em');
       $ ('#adventures-tab').css('max-height', '100%');
@@ -75,7 +75,7 @@ function resetWindow() {
 
 
     // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
-    if (window.State.loaded_program && (window.State.adventure_name_onload || 'level') === tabName) {
+    if (window.State.loaded_program && (window.State.adventure_name_onload) === tabName) {
       $ ('#program_name').val (window.State.loaded_program.name);
       theGlobalEditor?.setValue (window.State.loaded_program.code);
     }
@@ -85,23 +85,26 @@ function resetWindow() {
       theGlobalEditor?.setValue (adventures[tabName].loaded_program!.code);
     }
     // If there's no loaded program (either requested by id or associated to the adventure/level), load defaults.
-    else if (tabName === 'level' && window.State.default_program_name && window.State.default_program) {
+    else if (window.State.default_program_name && window.State.default_program) {
       $ ('#program_name').val(window.State.default_program_name);
       theGlobalEditor?.setValue(window.State.default_program);
     }
     else {
       if (tab.hasClass('teacher_tab')) {
-        // Todo: TB -> We should re-write the adventures structure so Teacher adventures are included in "adventures"
         $ ('#program_name').val (tabName);
         window.State.adventure_name = tabName;
         theGlobalEditor?.setValue ("");
       } else {
-        $('#program_name').val(adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
+        if (adventures[tabName].default_save_name == 'intro') {
+          $('#program_name').val(window.State.level_title + ' ' + window.State.level);
+        } else {
+          $('#program_name').val(adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
+        }
         theGlobalEditor?.setValue(adventures [tabName].start_code);
       }
     }
 
-    window.State.adventure_name = tabName === 'level' ? undefined : tabName;
+    window.State.adventure_name = tabName === 'intro' ? undefined : tabName;
     theGlobalEditor?.clearSelection();
     // If user wants to override the unsaved program, reset unsaved_changes
     window.State.unsaved_changes = false;

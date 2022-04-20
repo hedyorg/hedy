@@ -18,6 +18,7 @@ def collect_snippets(path):
   Hedy_snippets = []
   files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
   for f in files:
+      lang = f.split(".")[0]
       f = os.path.join(path, f)
       yaml = YamlFile.for_file(f)
 
@@ -36,8 +37,11 @@ def collect_snippets(path):
                         if tag.name != 'pre' or not tag.contents[0]:
                             continue
                         code_snippet_counter += 1
-                        code = tag.contents[0].contents[0]
-
+                        try:
+                            code = tag.contents[0].contents[0]
+                        except:
+                            print("Code container is empty...")
+                            continue
                         Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
 
                     # start_code
@@ -46,15 +50,15 @@ def collect_snippets(path):
                         Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
 
                     except KeyError:
-                        #TODO: create startcode not found error
+                        print(f'Problem reading startcode for {lang} level {level}')
                         pass
 
   return Hedy_snippets
 
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../coursedata/adventures')]
 # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
-keywords = YamlFile.for_file('../../coursedata/keywords/en.yaml').to_dict()
+keywords = YamlFile.for_file('../../content/keywords/en.yaml').to_dict()
 for snippet in Hedy_snippets:
     snippet[1].code = snippet[1].code.format(**keywords)
 

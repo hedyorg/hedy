@@ -15,7 +15,7 @@ class TestYamlFile(unittest.TestCase):
 
     # Pick a file with unicode in it so we're sure it gets handled properly
     file = YamlFile(
-      os.path.join(os.path.dirname(__file__), '..', 'coursedata/adventures/hu.yaml'), 
+      os.path.join(os.path.dirname(__file__), '..', 'content/adventures/hu.yaml'), 
       try_pickle=True)
 
     # Remove pickled version of this file if it exists, it may

@@ -121,7 +121,7 @@ When adding new Babel related translation the implementation is a bit more compl
 2. Next we run the following command to let Babel search for keys:
     * ```pybabel extract -F babel.cfg -o messages.pot .```
 3. We now have to add the found keys to all translation files, with the following command:
-    * ```pybabel update --omit-header -i messages.pot -d translations```
+    * ```pybabel update -i messages.pot -d translations```
 4. All keys will be automatically stored in the /translations folder
 5. Search for the .po files for the languages you know and find the empty msgstr for your added key(s)
 6. Add your translations there, the other translation will hopefully be quickly picked up by other translators
@@ -183,7 +183,7 @@ on which IDE you are using. Here are the IDEs we know about:
 {
   // ...
   "yaml.schemas": {
-    "coursedata/adventures/adventures.schema.json": "adventures/*.yaml"
+    "content/adventures/adventures.schema.json": "adventures/*.yaml"
   }
 }
 ```
@@ -193,6 +193,6 @@ on which IDE you are using. Here are the IDEs we know about:
 * Open **Preferences**
 * Navigate to **Languages & Frameworks → Schemas and DTDs → JSON Schema Mappings**.
 * Click the **+** to add a new schema.
-  * Behind **Schema file or URL**, click the browse button and navigate to the `<your Hedy checkout>/coursedata/adventures/adventures.schema.json` file.
-  * Click the **+** at the bottom, select **Directory**. In the new line that appears, paste `coursedata/adventures`.
+  * Behind **Schema file or URL**, click the browse button and navigate to the `<your Hedy checkout>/content/adventures/adventures.schema.json` file.
+  * Click the **+** at the bottom, select **Directory**. In the new line that appears, paste `content/adventures`.
 * Click **OK** to close the window.

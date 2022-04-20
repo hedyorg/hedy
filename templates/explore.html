@@ -24,10 +24,8 @@
                 </select>
                 <select id="explore_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                     <option disabled selected value="">{{ _('adventure') }}</option>
-                    {% for adventure_key, adventure in adventures.items() %}
-                        {% for name, levels in adventure.items() %}
-                            <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
-                        {% endfor %}
+                    {% for adventure_key, name in adventures_names.items() %}
+                        <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 </select>
                 <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
@@ -61,4 +59,17 @@
     {% endfor %}
     </div>
 </div>
+{% endblock %}
+{% block scripts %}
+  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script>
+    window.State = {};
+    window.State.keyword_language = "{{ g.lang }}";
+  </script>
+  <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 {% endblock %}
