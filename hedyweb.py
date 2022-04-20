@@ -21,7 +21,7 @@ class AchievementTranslations:
 
   def get_translations(self, language):
     d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(**self.data.get('en', {}))
+    d.update(**self.data.get('en ', {}))
     d.update(**self.data.get(language, {}))
     return d
 
