@@ -107,8 +107,6 @@ var StopExecution = false;
       // If prompt is shown and user enters text in the editor, hide the prompt.
       editor.on('change', function () {
         if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
-        window.State.disable_run = false;
-        $ ('#runit').css('background-color', '');
         window.State.unsaved_changes = true;
 
         clearErrors(editor);
@@ -141,7 +139,7 @@ var StopExecution = false;
         if (!window.State.level || !window.State.lang) {
           throw new Error('Oh no');
         }
-        runit (window.State.level, window.State.lang, "", function () {
+        runit (window.State.level, window.State.lang,  function () {
           $ ('#output').focus ();
         });
       }
@@ -225,10 +223,7 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
-export function runit(level: string, lang: string, answer_question: string, cb: () => void) {
-  if (window.State.disable_run) {
-    return modal.alert (answer_question, 3000, true);
-  }
+export function runit(level: string, lang: string, cb: () => void) {
   if (reloadOnExpiredSession ()) return;
   StopExecution = true;
 
@@ -885,9 +880,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
     return new Promise(function(ok) {
-      window.State.disable_run = true;
-      $ ('#runit').css('background-color', 'gray');
-
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
       input.val('');
@@ -898,10 +890,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         input.focus();
       }, 0);
       $('#inline-modal form').one('submit', function(event) {
-
-        window.State.disable_run = false;
-        $ ('#runit').css('background-color', '');
-
         event.preventDefault();
         $('#inline-modal').hide();
         if (hasTurtle) {
@@ -1238,7 +1226,7 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
         if (!window.State.level || !window.State.lang) {
           throw new Error('Oh no');
         }
-        runit (window.State.level, window.State.lang, "", function () {
+        runit (window.State.level, window.State.lang,  function () {
           $ ('#output').focus ();
         });
       }
