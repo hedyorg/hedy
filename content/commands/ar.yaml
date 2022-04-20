@@ -1,148 +1,148 @@
 1:
--   name: قول
-    explanation: اطبع شيئا على الشاشة باستخدام `قول`
-    example: 'مثال: قول أهلا ومرحبا بكم في هيدي!'
-    demo_code: قول أهلا ومرحبا بكم في هيدي!
--   name: اسأل
-    explanation: اسأل عن شيء ما باستخدام `اسأل`
-    example: 'مثال: اسأل ما لونك المفضل؟'
-    demo_code: اسأل ما لونك المفضل؟
--   name: ردد
-    explanation: اعد ترديد اجابة شخص ما على السؤال
-    example: 'مثال: ردد اذن لونك المفضل هو '
+-   name: '{print}'
+    explanation: اطبع شيئا على الشاشة باستخدام `{print}`.
+    example: 'مثال: {print} أهلا ومرحبا بكم في هيدي!'
+    demo_code: '{print} أهلا ومرحبا بكم في هيدي!'
+-   name: '{ask}'
+    explanation: اسأل عن شيء ما باستخدام `{ask}`.
+    example: 'مثال: {ask} ما لونك المفضل؟'
+    demo_code: '{ask} ما لونك المفضل؟'
+-   name: '{echo}'
+    explanation: اعد ترديد اجابة شخص ما على السؤال باستخدام `{echo}`.
+    example: 'مثال: {echo} اها لونك المفضل هو '
     demo_code: |-
-        اسأل ما لونك المفضل؟
-        ردد اذن لونك المفضل هو
--   name: تقدم
-    explanation: ارسم خطا مستقيما باستخدام `تقدم`
-    example: 'مثال: تقدم 100'
-    demo_code: تقدم 100
--   name: انعطف
-    explanation: قم بتحويل اتجاه الرسم باستخدام `انعطف`
-    example: 'مثال: انعطف'
+        {ask} ما لونك المفضل؟
+        {echo} اها لونك المفضل هو
+-   name: '{print} رمزاً تعبيرياً (ايموجي)'
+    explanation: قول رمزاً تعبيرياً (ايموجي) باستخدام `{print}`
+    example: 'مثال: {print} 🙋‍  🌍  ❗'
+    demo_code: 'مثال: {print} 🙋‍  🌍  ❗'
+-   name: '{forward}'
+    explanation: ارسم خطاً مستقيماً باستخدام `{forward}`.
+    example: 'مثال: {forward} 100'
     demo_code: |-
-        تقدم 25
-        انعطف left
-        تقدم 25
-        انعطف right
--   example: 'Example: {turn}'
-    demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
-    explanation: turn the drawing turtle with `{turn}`
+        {forward} 100
+-   example: 'مثال: {turn}'
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+    explanation: قم بالاستدارة و تحويل اتجاه الرسم باستخدام `{turn}`
     name: '{turn}'
 2:
--   name: هو
-    explanation: اعط اسما لاي كلمة تريد استخدامها في البرنامج من خلال الأمر `هو`. بامكانك اختيار الاسم بنفسك.
-    example: 'مثال: اسمي هو هيدي'
+-   name: '{is}'
+    explanation: اعط اسماً لأي كلمة تريد استخدامها في الكود من خلال الأمر `{is}`. بامكانك اختيار الاسم بنفسك.
+    example: 'مثال: اسمي {is} هيدي.'
     demo_code: |-
-        اسمي هو هيدي
-        قول مرحبا اسمي
--   name: اسأل
-    explanation: اسأل عن شيء ما باستخدام `اسأل`. انتبه! يجب عليك أن تعطي الاجابة اسما باستخدام `هو`
-    example: 'مثال: لون هو اسأل ما لونك المفضل؟'
+        اسمي {is} هيدي
+        {print} مرحبا اسمي
+-   name: '{ask}'
+    explanation: اسأل عن شيء ما باستخدام `{ask}`. انتبه! يجب عليك أن تعطي الاجابة اسماً باستخدام `{is}`.
+    example: 'مثال: لوني {is} {ask} ما لونك المفضل؟'
     demo_code: |-
-        لون هو اسأل ما لونك المفضل؟ 
-        قول لون هو المفضل لديك
--   explanation: اعط اسما لرقم من خلال الأمر `هو`. بامكانك اختيار الاسم بنفسك.
-    example: 'مثال: زاوية هو 90'
+        لوني {is} {ask} ما لونك المفضل؟ 
+        {print} لوني هو المفضل لديك!
+-   explanation: يعلق عمل هيدي (تنتظر) عدد معين من الثواني.
+    example: 'مثال: {sleep} 2 '
     demo_code: |-
-        انحناء هو 90 
-        انعطف انحناء
-        تقدم 100
-    name: هو
+        {print} دعني أفكر للحظة...
+        {sleep}
+        {print} ممم.. أنا أحتاج الى 3 ثواني أخرى
+        {sleep} 3
+        {print} لقد وجدتها!
+    name: '{sleep}'
 -   name: is - turtle
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    example: 'Example: angle {is} 90'
-    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    explanation: اعط اسما لاي رقم من خلال الأمر `{is}`. بامكانك اختيار الاسم بنفسك.
+    example: 'مثال: الزاوية {هو} 90'
+    demo_code: "الزاوية {هو} 90\n{turn} الزاوية\n{forward} 100"
 3:
 -   name: بشكل عشوائي
-    explanation: 'يختار كلمة من مجموعة او قائمة بشكل عشوائي '
-    example: 'مثال: حيوانات هو كلب، قطة، جمل'
+    explanation: 'اختر كلمة من مجموعة او قائمة بشكل عشوائي باستخدام `{at}` و `{random}`'
+    example: 'مثال: حيوانات {is} كلب، قطة، جمل.'
     demo_code: |-
-        صديقي هو احمد، خالد، حسن
+        حيوانات {is} كلب، قطة، جمل
+        {print} حيوانات {at} {random}
 -   name: '{add}'
-    explanation: add an item to a list
-    example: 'Example: {add} dog {to_list} animals'
-    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
--   example: 'Example: {remove} dog {from} animals'
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: يضيف عنصراً الى قائمة
+    example: 'مثال: {add} أفعى {to_list} حيوانات'
+    demo_code: "حيوانات {is} بقرة، قطة\n{add} أفعى {to_list} حيوانات"
+-   example: 'مثال: {remove} أفعى {from} حيوانات'
+    demo_code: "حيوانات {is} بقرة، أفعى، قطة\n{remove} أفعى {from} حيوانات"
     name: '{remove}'
-    explanation: remove an item from a list
+    explanation: يزيل عنصراً من قائمة
 4:
--   name: قول
-    explanation: يطبع محتوى ما بين علامات الاقتباس
-    example: "مثال: قول 'اهلا بكم ومرحبا في هيدي'"
-    demo_code: قول 'اهلا بكم ومرحبا في هيدي'
--   name: هو
-    explanation: اعط اسما لكلمة أو رقم معين. اطبع محتوى هذا الاسم بدون حاجة الى علامات اقتباس
-    example: 'مثال: اسمي هو هيدي '
-    demo_code: |
-        اسمي هو هيدي
-        قول 'انا اسمي ' اسمي
--   name: اسأل
-    explanation: اسأل عن شيء ما من خلال الأمر `اسأل`
-    example: "مثال: لوني هو اسأل 'ما هو لونك المفضل؟'"
+-   name: '{print}'
+    explanation: يطبع محتوى ما بين علامات الاقتباس حرفياً
+    example: "مثال: {print} \"أهلاً بكم ومرحباً في هيدي\""
+    demo_code: '{print} "أهلاً بكم ومرحباً في هيدي"'
+-   name: '{is}'
+    explanation: اعط اسما لكلمة أو رقم معين و `{print}`محتوى هذا الاسم بدون الحاجة الى علامات الاقتباس
+    example: 'مثال: اسمي {is} هيدي.'
     demo_code: |-
-        لوني هو اسأل 'ما هو لونك المفضل؟'
-        قول لوني 'هو لوني المفضل'
+        اسمي {is} هيدي
+        {print} "أنا اسمي " اسمي
+-   name: '{ask}'
+    explanation: اسأل عن شيء ما من خلال الأمر `{ask}`. ضع السؤال ما بين علامات الاقتباس.
+    example: "مثال: لونك {is} {ask} \"ما هو لونك المفضل؟\""
+    demo_code: |-
+        لونك {is} {ask} "ما هو لونك المفضل؟"
+        {print} لونك "هو لونك لمفضل!"
 5:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: "يطبع محتوى ما بين علامات الاقتباس حرفياً"
+    example: "مثال: {print} \"أهلاً بكم ومرحباً في هيدي\""
+    demo_code: "{print} \"أهلاً بكم ومرحباً في هيدي\""
 -   name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color {is} {ask} 'What is your favorite color?'"
+    explanation: "اسأل عن شيء ما من خلال الأمر `{ask}`. ضع السؤال ما بين علامات الاقتباس."
+    example: "مثال: لونك {is} {ask} \"ما هو لونك المفضل؟\""
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' {is} your favorite!'
+        لونك {is} {ask} "ما هو لونك المفضل؟"
+        {print} لونك "هو لونك لمفضل!"
 -   name: "{if}"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+    explanation: "باستخدام الأمر `{if}` يمكنك أن تفحص شيئا ما وتقوم بالاختيار بناء على نتيجة ذلك الفحص"
+    example: "مثال: {if} اللون {is} اخضر {print} \"هذا رائع!\" {else} {print} \"يا خسارة!\""
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
+        اللون {is} {ask} "ما لونك المفضل؟"
+        {if} اللون {is} اخضر {print} "هذا رائع!" {else} {print} "يا خسارة!"
 -   name: "{if} with turtle"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} answer {is} far {forward} 100 {else} {forward} 5"
+    explanation: "باستخدام الأمر `{if}` يمكنك أن تفحص شيئا ما وتقوم بالاختيار بناء على نتيجة ذلك الفحص"
+    example: "مثال: {if} الجواب {is} كثيرا {forward} 100 {forward} {else} 5"
     demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
+        الجواب {is} {ask} "كم يجب علي أن امشي؟"
+        {if} الجواب {is} كثيرا {forward} 100 {else} {تقدم} 5
 -   name: "{in}"
-    explanation: "Check elements with `{in}`"
-    example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+    explanation: "تفحص العناصر الموجودة في قائمة معينة من خلال `{in}`"
+    example: "{if} لوني_المفضل {in} الالوان_الجميلة {print} \"هذا جميل!\" {else} {print} \"يا خسارة!\""
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+        الالوان_الجميلة {is} اخضر، اصفر
+        لوني_المفضل {is} {ask} "ما لونك المفضل؟"
+        {if} لوني_المفضل {in} الالوان_الجميلة {print} "هذا جميل!" {else} {print} "يا خسارة!"
 6:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: "اطبع محتوى ما بين علامات الاقتباس حرفياً باستخدام `{print}`"
+    example: "مثال: {print} \"5 ضرب 5 تساوي \" 5*5"
+    demo_code: "{print} \"5 ضرب 5 تساوي \" 5*5"
 -   name: "{ask}"
-    explanation: "{ask} for a calculation and check whether it is correct."
-    example: "Example: answer {is} {ask} 'What is 10 plus 10?'"
+    explanation: "`{ask}` عن ناتج عملية حسابية وافحص ما اذا كان الجواب صحيحاً."
+    example: "مثال: الجواب =  {ask} \"ما حاصل 10 زائد 10؟\""
     demo_code: |-
-        answer = {ask} 'What is 10 plus 10?'
-        {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
--   name: "`{ask}` {and} `{if}` turtle"
-    explanation: "{ask} the user how many angles they want"
-    example: "Example: angles {is} {ask} 'How many angles?'"
+        الجواب = {ask} "ما حاصل 10 زائد 10؟"
+        {if} الجواب {is} 20 {print} "نعم صحيح!" {else} {print} "للأسف! اجابة خاطئة.."
+-   name: "`{ask}` و `{if}` turtle"
+    explanation: "`{ask}` المستخدم كم زاوية يريد أن يستعمل للحركة"
+    example: "مثال: عدد_الزوايا = {ask} \"كم عدد الزوايا؟\""
     demo_code: |-
-        angles = {ask} 'How many angles?'
-        angle = 360 / angles
+        عدد_الزوايا = {ask} "كم عدد الزوايا؟"
+        زاوية_الحركة = 360/عدد_الزوايا
         {forward} 50
 7:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    example: "Example: {print} 'Hello welcome to Hedy.'"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: "`{print}` يطبع محتوى ما بين علامات الاقتباس حرفياً"
+    example: "مثال: {print} \"مرحباً وأهلاً بكم في هيدي!\""
+    demo_code: "{print} \"مرحباً وأهلاً بكم في هيدي!\""
 -   name: "{ask}"
-    explanation: "ask something with `{ask}`."
-    example: "Example: color = {ask} 'What is your favorite color?'"
+    explanation: "اسأل عن شيء ما باستخدام `{ask}`."
+    example: "مثال: لونك = {ask} \"ما لونك المفضل؟\""
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        لونك = {ask} "ما لونك المفضل؟"
+        {print} لونك "هو لونك المفضل!!"
 -   name: "{if}"
     explanation: "Make a choice with `{if}`"
     example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
