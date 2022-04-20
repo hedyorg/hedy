@@ -3,13 +3,12 @@
   text: | 
     ## Sleep de code in de juiste volgorde
   example: |
-    ## Voorbeeld Hedy code
-    ```
-    Welkom bij bakkerij Hedy!
-    Wat voor taart wilt u bestellen?
-    Dus jij wilt ... 
-    De bestelling wordt klaargezet!
-    ```
+    ## Wat moet mijn code doen?
+  story: |
+    Je bent een klant bij bakkerij Hedy. 
+    Je loopt de bakkerij binnen en wordt verwelkomd door de bakker.
+    Hij vraagt wat voor taart je wil bestellen.
+    Daarna wordt je bestelling klaargezet.
   code_lines:
     A: | 
       echo Dus jij wilt
@@ -26,6 +25,7 @@
     ## Sleep de code in de juiste volgorde
   example: |
     ## Voorbeeld Hedy code
+  story: |
     ```
     Het is tijd voor een avondje Netflix
     We gaan kijken naar ...
@@ -45,7 +45,7 @@
     E: |
       print De mensen die je wilt uitnodigen zijn antwoord
     F: |
-      Heel veel plezier!
+      print Heel veel plezier!
   correct_answer: [B, A, D, C, E, F]
   correct_answer2: [A, B, D, C, E, F]
 3:
@@ -54,14 +54,14 @@
     ## Sleep de code in de juiste volgorde
   example: |
     ## Voorbeeld Hedy code
+  story: |
     ```
     Het nieuwe schooljaar op Zweinstein gaat van start!
     De sorteerhoed is er klaar voor om jou in te delen..
     Waar wil jij het liefst ingedeeld worden?
     Dus jij denkt dat je hoort bij ...
     Maar wat zal het worden..
-    (even wachten ...)
-    ...
+    Het wordt ... ! 
     ```
   code_lines:
     A: |
@@ -77,15 +77,14 @@
     F: |
       afdeling is ask Waar wil jij het liefst ingedeeld worden
     G: |
-      print afdelingen at random
-    H: |
-      sleep
+      print het wordt afdelingen at random
 4:
   tab_name: "Slepen"
   text: | 
     ## Sleep de code in de juiste volgorde
   example: |
     ## Voorbeeld Hedy code
+  story: |
     ```
     
     ```
@@ -102,6 +101,7 @@
     ## Sleep de code in de juiste volgore
   example: |
     ## Voorbeeld Hedy code
+  story: |  
     ```
     ```
   code_lines:
@@ -121,6 +121,7 @@
     ## Sleep de code in de juiste volgore
   example: |
     ## Voorbeeld Hedy code
+  story: | 
     ```
     ```
   code_lines:
