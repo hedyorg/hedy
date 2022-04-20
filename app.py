@@ -772,6 +772,8 @@ def index(level, program_id):
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    # Todo TB -> We should first merge #2538 as from there on we have a "quiz" boolean
+    # We can than set this to false if the quiz is disabled by teacher settings or doesn't exist
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
@@ -786,6 +788,8 @@ def index(level, program_id):
     hide_cheatsheet = False
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
+
+
 
     return hedyweb.render_code_editor_with_tabs(
         commands=commands,
