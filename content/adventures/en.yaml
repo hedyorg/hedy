@@ -207,7 +207,7 @@ adventures:
                         food = {ask} 'What do you want?'
                         {if} food {is} pizza
                             {print} 'nice!'
-                        else
+                        {else}
                             {print} 'pizza is better'
                     ```
                 story_text: |
@@ -222,7 +222,7 @@ adventures:
                         food = {ask} 'What do you want?'
                         {if} food {is} pizza
                             {print} 'nice!'
-                        else
+                        {else}
                             {print} 'pizza is better'
                     ```
             10:
@@ -1480,7 +1480,7 @@ adventures:
 
                     ```
                     {print} what do you choose?
-                    {ask} choose {from} rock, paper or scissors
+                    {ask} choose from rock, paper or scissors
                     {echo} so your choice was:
                     ```
                     Instead of using words, you could also use emojis of course: ✊✋✌
