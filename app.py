@@ -42,7 +42,8 @@ if (sys.version_info.major < 3 or sys.version_info.minor < 7):
 # Set the current directory to the root Hedy folder
 import os
 from os import path
-os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
+os.chdir(os.path.join(os.getcwd(), __file__.replace(
+    os.path.basename(__file__), '')))
 
 # Setting up Flask and babel (web and translations)
 app = Flask(__name__, static_url_path='')
@@ -100,19 +101,19 @@ def load_adventures_per_level(level):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode(no adventure) and for each of the adventures.
     if current_user()['username']:
-        user_programs = DATABASE.level_programs_for_user(current_user()['username'], level)
+        user_programs = DATABASE.level_programs_for_user(
+            current_user()['username'], level)
         for program in user_programs:
-            program_key = 'default' if not program.get('adventure_name') else program['adventure_name']
-            if not program_key in loaded_programs:
-                loaded_programs[program_key] = program
-            elif loaded_programs[program_key]['date'] < program['date']:
+            program_key = 'default' if not program.get(
+                'adventure_name') else program['adventure_name']
+            if program_key not in loaded_programs or loaded_programs[program_key]['date'] < program['date']:
                 loaded_programs[program_key] = program
 
     all_adventures = []
     adventures = ADVENTURES[g.lang].get_adventures(g.keyword_lang)
 
     for short_name, adventure in adventures.items():
-        if not level in adventure['levels']:
+        if level not in adventure['levels']:
             continue
         # end adventure is the quiz
         # if quizzes are not enabled, do not load it
@@ -137,9 +138,11 @@ def load_adventures_per_level(level):
         for i in range(2, 10):
             extra_story = {}
             if adventure['levels'][level].get('story_text_' + str(i)):
-                extra_story['text'] = adventure['levels'][level].get('story_text_' + str(i))
+                extra_story['text'] = adventure['levels'][level].get(
+                    'story_text_' + str(i))
                 if adventure['levels'][level].get('example_code_' + str(i)):
-                    extra_story['example_code'] = adventure['levels'][level].get('example_code_' + str(i))
+                    extra_story['example_code'] = adventure['levels'][level].get(
+                        'example_code_' + str(i))
                 extra_stories.append(extra_story)
             else:
                 break
@@ -205,9 +208,8 @@ if os.getenv('IS_PRODUCTION'):
 
 @app.before_request
 def before_request_proxy_testing():
-    if utils.is_testing_request(request):
-        if os.getenv('IS_TEST_ENV'):
-            session['test_session'] = 'test'
+    if utils.is_testing_request(request) and os.getenv('IS_TEST_ENV'):
+        session['test_session'] = 'test'
 
 
 # HTTP -> HTTPS redirect
@@ -615,7 +617,8 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
+    adventures_names = hedy_content.Adventures(
+        session['lang']).get_adventure_names()
 
     # We request our own page -> also get the public_profile settings
     public_profile = None
@@ -855,12 +858,15 @@ def get_specific_adventure(name, level):
     except:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    adventure = [x for x in load_adventures_per_level(level) if x.get('short_name') == name]
+    adventure = [x for x in load_adventures_per_level(
+        level) if x.get('short_name') == name]
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    prev_level = level-1 if [x for x in load_adventures_per_level(level-1) if x.get('short_name') == name] else False
-    next_level = level+1 if [x for x in load_adventures_per_level(level+1) if x.get('short_name') == name] else False
+    prev_level = level-1 if [x for x in load_adventures_per_level(
+        level-1) if x.get('short_name') == name] else False
+    next_level = level+1 if [x for x in load_adventures_per_level(
+        level+1) if x.get('short_name') == name] else False
 
     return hedyweb.render_specific_adventure(level_number=level, adventure=adventure, version=version(),
                                              prev_level=prev_level, next_level=next_level)
@@ -1074,7 +1080,8 @@ def explore():
             'code': "\n".join(code.split("\n")[:4])
         })
 
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
+    adventures_names = hedy_content.Adventures(
+        session['lang']).get_adventure_names()
 
     return render_template('explore.html', programs=filtered_programs,
                            filtered_level=level,
@@ -1319,7 +1326,6 @@ def public_user_page(username):
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):
     user = current_user()
-    lang = g.lang
 
     if os.getenv('TEACHER_INVITE_CODE') != code:
         return utils.error_page(error=404, ui_message=gettext('invalid_teacher_invitation_code'))
