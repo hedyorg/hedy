@@ -261,7 +261,6 @@ def closest_command(invalid_command, known_commands, threshold=2):
     # returns 'keyword' if the invalid command is exactly a command (so shoudl not be suggested)
 
     min_command = closest_command_with_min_distance(invalid_command, known_commands, threshold)
-    print("YO", min_command)
 
     # Check if we are not returning the found command
     # In that case we have no suggestion
@@ -285,7 +284,6 @@ def closest_command_with_min_distance(invalid_command, commands, threshold):
         if minimum_distance_for_command < minimum_distance and minimum_distance_for_command <= threshold:
             minimum_distance = minimum_distance_for_command
             closest_command = command
-    print("ec", closest_command)
     return closest_command
 
 def calculate_minimum_distance(s1, s2):
@@ -669,7 +667,6 @@ class TypeValidator(Transformer):
         # So, if it cannot be found in the lookup table, then it is an undefined variable for sure.
         if tree.data == 'var_access':
             var_name = tree.children[0]
-            print("heh", var_name)
             in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
             if in_lookup:
                 return type_in_lookup
@@ -954,7 +951,6 @@ class IsValid(Filter):
         return False, error, meta
 
     def error_unsupported_number(self, meta, args):
-        print("isithere")
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
@@ -1282,13 +1278,10 @@ class ConvertToPython_2(ConvertToPython_1):
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
     def var(self, args):
-        print("huuu")
         name = args[0]
-        print(name)
         self.check_var_usage(args)
         return hash_var(name)
     def var_access(self, args):
-        print("yeee")
         name = args[0]
         return hash_var(name)
     def print(self, args):
@@ -1309,7 +1302,6 @@ class ConvertToPython_2(ConvertToPython_1):
         return f"print(f'{argument_string}')"
 
     def ask(self, args):
-        print("jjjj")
         var = args[0]
         all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
         return f'{var} = input(' + '+'.join(all_parameters) + ")"
@@ -1319,11 +1311,9 @@ class ConvertToPython_2(ConvertToPython_1):
             return sleep_after('t.forward(50)', False)
 
         if ConvertToPython.is_int(args[0]):
-            print("kkkkk")
             parameter = int(args[0])
         else:
             # if not an int, then it is a variable
-            print("llll")
             parameter = args[0]
 
         return self.make_forward(parameter)
@@ -1331,11 +1321,9 @@ class ConvertToPython_2(ConvertToPython_1):
     def assign(self, args):
         parameter = args[0]
         value = args[1]
-        print("klkl")
         if self.is_random(value):
             return parameter + " = " + value
         else:
-            print("hjhjh")
             if self.is_variable(value):
                 value = self.process_variable(value)
                 return parameter + " = " + value
@@ -1348,8 +1336,6 @@ class ConvertToPython_2(ConvertToPython_1):
     def sleep(self, args):
         # for i in range(len(args)):
         #     print(args[i])
-        if len(args) == 3:
-            print("ENTER") 
         if args == []:
             return "time.sleep(1)"
         # elif args[2] == 'at' and args[3] == 'random':
@@ -1373,15 +1359,11 @@ class ConvertToPython_2(ConvertToPython_1):
 @hedy_transpiler(level=3)
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, args):
-        print("HERE1")
         parameter = args[0]
-        print(parameter)
         values = [f"'{process_characters_needing_escape(a)}'" for a in args[1:]]
-        print(values)
         return f"{parameter} = [{', '.join(values)}]"
 
     def list_access(self, args):
-        print("HERE2")
         args = [hash_var(a) for a in args]
 
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
@@ -2155,7 +2137,6 @@ def is_program_valid(program_root, input_string, level, lang):
         #is_valid = instance.transform(program_root)
 
     if not is_valid[0]:
-        print("HERE ", is_valid)
         _, invalid_info = is_valid
 
         # Apparently, sometimes 'args' is a string, sometimes it's a list of
