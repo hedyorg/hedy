@@ -225,6 +225,10 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
+export function stopit() {
+  StopExecution = true;
+}
+
 export function runit(level: string, lang: string, answer_question: string, cb: () => void) {
   if (window.State.disable_run) {
     return modal.alert (answer_question, 3000, true);
@@ -760,6 +764,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
   window.State.programsInExecution = 1;
+  console.log("lets hide this button....");
+  $('#runit').hide();
+  $('#stopit').show();
 
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
@@ -823,6 +830,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }
    ).then(function(_mod) {
     console.log('Program executed');
+
+    //Return run button to original state
+    $('#stopit').hide();
+    $('#runit').show();
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
