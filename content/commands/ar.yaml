@@ -160,16 +160,16 @@
     example: "مثال: {print} \"5 ضرب 5 تساوي \" 5*5"
     demo_code: "{print} \"5 ضرب 5 تساوي \" 5*"
 -   name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-    example: "Example: answer {is} {ask} 'What is 5 plus 5?'"
+    explanation: "`{ask}` عن ناتج عملية حسابية وافحص ما اذا كان الجواب صحيحاً. بامكاننا الان أن نطبع على سطرين اثنين."
+    example: "مثال: الجواب {is} {ask} \"ما ناتج 5 زائد 5؟\""
     demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
-            {print} 'Oops!'
-            {print} 'The answer is 10'
+        الجواب = {ask} "ما ناتج 5 زائد 5؟"
+        {if} الجواب {is} 10
+        	{print} "أحسنت!"
+        	{print} "بالفعل، الاجابة هي " الجواب
+        {else}
+        	{print} "لا للأسف!"
+        	{print} "الاجابة الصحيحة هي 10."
 -   name: "`{repeat}` with turtle"
     explanation: "{repeat} multiple lines"
     example: "Example: draw a square"
