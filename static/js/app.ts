@@ -884,7 +884,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     // We give the user time to give input.
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
-    return new Promise(function(ok, cancel) {
+    return new Promise(function(ok) {
       window.State.disable_run = true;
       $ ('#runit').css('background-color', 'gray');
 
@@ -914,10 +914,11 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         // replying to a query.
         setTimeout (function () {
            if ($(('#inline-modal')).is(":hidden")) {
-             cancel();
+             StopExecution = true;
+           } else {
+             ok(input.val());
+             $('#output').focus();
            }
-           ok(input.val());
-           $ ('#output').focus ();
         }, 0);
 
         return false;
