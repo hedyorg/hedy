@@ -144,21 +144,21 @@
         لونك = {ask} "ما لونك المفضل؟"
         {print} لونك "هو لونك المفضل!!"
 -   name: "{if}"
-    explanation: "Make a choice with `{if}`"
-    example: "Example: {if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+    explanation: "باستخدام الأمر `{if}` يمكنك أن تفحص شيئا ما وتقوم بالاختيار بناء على نتيجة ذلك الفحص"
+    example: "مثال: {if} اللون {is} اخضر {print} \"هذا رائع!\" {else} {print} \"يا خسارة!\""
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
+        اللون = {ask} "ما لونك المفضل؟"
+        {if} اللون {is} اخضر {print} "هذا رائع!" {else} {print} "يا خسارة!"
 -   name: "{repeat} - turtle"
-    explanation: "repeat a line of code with `{repeat}`."
-    example: "Example: {repeat} 3 {times} {forward} 10"
+    explanation: "أعد تنفيذ جزء من الكود باستخدام الأمر `{repeat}`."
+    example: "مثال: {repeat} 3 {times} {forward} 10"
     demo_code: |-
         {repeat} 3 {times} {forward} 10
 8:
 -   name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: "اطبع شيئا على الشاشة باستخدام الأمر `{print}`. لا تنس أن تستخدم علامات الاقتباس \"\" لكي تطبع ما تريد حرفيا."
+    example: "مثال: {print} \"5 ضرب 5 تساوي \" 5*5"
+    demo_code: "{print} \"5 ضرب 5 تساوي \" 5*"
 -   name: "{ask}"
     explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
     example: "Example: answer {is} {ask} 'What is 5 plus 5?'"
