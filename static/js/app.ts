@@ -226,7 +226,7 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function stopit() {
-  StopExecution = true;
+  window.State.stop_execution = true;
 }
 
 export function runit(level: string, lang: string, answer_question: string, cb: () => void) {
@@ -822,7 +822,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   return Sk.misceval.asyncToPromise( () =>
     Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
-        if (StopExecution) {
+        if (window.State.stop_execution) {
+          console.log("We stop the program!");
           window.State.programsInExecution = 0;
           throw "program_interrupt";
         }
