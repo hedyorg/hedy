@@ -297,7 +297,14 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
         }
         return;
       }
-        runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb);
+        runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err: { message: string; }) {
+         // If it is an error we throw due to program execution while another is running -> don't show and log it
+         if (!(err.message == "\"program_interrupt\"")) {
+           console.log(err);
+           error.show(ErrorMessages['Execute_error'], err.message);
+           reportClientError(level, code, err.message);
+         }
+       });
     }).fail(function(xhr) {
       console.error(xhr);
        https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
@@ -723,7 +730,6 @@ export function copy_to_clipboard (string: string, prompt: string) {
 /**
  * Do a POST with the error to the server so we can log it
  */
-/*
 function reportClientError(level: string, code: string, client_error: string) {
   $.ajax({
     type: 'POST',
@@ -737,7 +743,7 @@ function reportClientError(level: string, code: string, client_error: string) {
     contentType: 'application/json',
     dataType: 'json'
   });
-}*/
+}
 
 window.onerror = function reportClientException(message, source, line_number, column_number, error) {
 
@@ -815,12 +821,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }) ()
   });
 
-  Sk.misceval.asyncToPromise( () =>
-    Sk.importMainWithBody("<stdin>", false, code, true), {
-      "*": () => {
-      }
-    }
-   ).then(function(_mod) {
+  return Sk.importMainWithBody("<stdin>", false, code, true).then(function() {
     console.log('Program executed');
 
     //Return run button to original state
@@ -837,7 +838,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       showSuccesMessage();
     }
     if (cb) cb ();
-  }).catch(err => {
+  }).catch((err: any) => {
     console.log("Error is gegooid!");
     // Extract error message from error
     console.log(err);
