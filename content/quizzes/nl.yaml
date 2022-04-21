@@ -537,7 +537,7 @@ levels:
             -   answer_option: "In regel 2 moet er {ask} staan in plaats van {print}"
                 code: false
                 feedback: "Zit er wel een fout in ?"
-            -   answer_option: "In regel 3 moet er staan antwoorden {at} {random} {is} ja, nee, misschien"
+            -   answer_option: "In regel 3 moet er staan antwoorden `{at}` `{random}` `{is}` ja, nee, misschien"
                 code: false
                 feedback: "Zit er wel een fout in ?"
             -   answer_option: "Niets, alles is goed !"
@@ -554,13 +554,13 @@ levels:
                 {add} jouw_boek {to_list} boeken
                 {print} boeken {at} {random}
             mp_choice_options:
-            -   answer_option: "Het {add} commando haalt een {random} boek uit het lijstje boeken weg"
+            -   answer_option: "Het `{add}` commando haalt een `{random}` boek uit het lijstje boeken weg"
                 feedback: "Add is Engels voor toevoegen"
-            -   answer_option: "Het {add} commando voegt een {random} boek aan het lijstje boeken toe"
-                feedback: "Het voegt inderdaad een boek toe aan het lijstje, maar niet zomaar een {random} boek!"
-            -   answer_option: "Het {add} commando voegt jouw favoriete boek aan het lijstje toe"
+            -   answer_option: "Het `{add}` commando voegt een `{random}` boek aan het lijstje boeken toe"
+                feedback: "Het voegt inderdaad een boek toe aan het lijstje, maar niet zomaar een `{random}` boek!"
+            -   answer_option: "Het `{add}` commando voegt jouw favoriete boek aan het lijstje toe"
                 feedback: "Juist!"
-            -   answer_option: "Het {add} commando verwijdert jouw favoriete boek uit het lijstje."
+            -   answer_option: "Het `{add}` commando verwijdert jouw favoriete boek uit het lijstje."
                 feedback: "Add is Engels voor toevoegen"
             correct_answer: "C"
             hint: "Add is Engels voor toevoegen!"
