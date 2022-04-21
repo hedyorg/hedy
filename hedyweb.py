@@ -28,7 +28,10 @@ class AchievementTranslations:
 class PageTranslations:
   def __init__(self, page):
     self.data = {}
-    translations = glob.glob('content/pages/' + page + '/*.yaml')
+    if page in 'start, learn-more, for-teachers':
+      translations = glob.glob('content/pages/*.yaml')
+    else:
+      translations = glob.glob('content/pages/' + page + '/*.yaml')
     for file in translations:
       lang = path.splitext(path.basename(file))[0]
       self.data[lang] = YamlFile.for_file(file)
