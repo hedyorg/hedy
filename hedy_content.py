@@ -235,6 +235,7 @@ class Quizzes:
                 for option in self.quizzes['levels'].get(level).get(question)[k]:
                     temp = {}
                     for key, value in option.items():
+                        # We can't use .format on Booleans -> skip these
                         if not isinstance(value, bool):
                             temp[key] = value.format(**self.keywords)
                         else:
