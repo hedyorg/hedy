@@ -4,17 +4,17 @@ levels:
             question_text: "Wat is de naam van de programmeertaal die je hier leert ?"
             code: "..."
             mp_choice_options:
-            -   option_text: "Hedy"
+            -   answer_option: "Hedy"
                 feedback: "Goed zo !"
-            -   option_text: "Heddy"
+            -   answer_option: "Heddy"
                 feedback: "Deze is het niet !"
-            -   option_text: "Haydie"
+            -   answer_option: "Haydie"
                 feedback: "Deze is het niet !"
-            -   option_text: "Henk"
+            -   answer_option: "Henk"
                 feedback: "Deze is het niet !"
-            -   option_text: "Haydie2"
+            -   answer_option: "Haydie2"
                 feedback: "Deze is het niet !"
-            -   option_text: "Henk2"
+            -   answer_option: "Henk2"
                 feedback: "Deze is het niet !"
             correct_answer: "A"
             hint: "We beginnen met een simpele vraag."
@@ -56,13 +56,13 @@ levels:
                 {ask} Wie ben jij ?
                 {echo} Hoi...
             mp_choice_options:
-                -   option_text: "{print} in regel 1 mist."
+                -   answer_option: "{print} in regel 1 mist."
                     feedback: "Goedzo !"
-                -   option_text: "{ask} in regel 2 is fout gespeld, het moet aks zijn."
+                -   answer_option: "{ask} in regel 2 is fout gespeld, het moet aks zijn."
                     feedback: "{ask} is goed gespeld."
-                -   option_text: "{echo} is geen commando in level 1,"
+                -   answer_option: "{echo} is geen commando in level 1,"
                     feedback: "{echo} is goed, er is een ander foutje"
-                -   option_text: "Niets ! De code is goed !"
+                -   answer_option: "Niets ! De code is goed !"
                     feedback: "Er zit een foutje in, kijk goed !"
             correct_answer: "A"
             hint: "Er mist een commando in het begin van de code"
@@ -92,13 +92,13 @@ levels:
                 {echo} Jij bent voor...
                 {print} Cool ! Ik ook !
             mp_choice_options:
-                -   option_text: "In regel 1 moet het {print} commando worden vervangen door {ask}."
+                -   answer_option: "In regel 1 moet het {print} commando worden vervangen door {ask}."
                     feedback: "Print in regel 1 is goed, let op de spelling van de commando's"
-                -   option_text: "In regel 2 is {ask} fout gespeld."
+                -   answer_option: "In regel 2 is {ask} fout gespeld."
                     feedback: "Goed opgelet !"
-                -   option_text: "Regel 3 moet beginnen met {print} in plaats van {echo}."
+                -   answer_option: "Regel 3 moet beginnen met {print} in plaats van {echo}."
                     feedback: "Echo is goed ! Kijk naar de spelling van de commando's."
-                -   option_text: "In regel 4 is {print} verkeerd gespeld."
+                -   answer_option: "In regel 4 is {print} verkeerd gespeld."
                     feedback: "Er zit ergens anders een spelfout"
             correct_answer: "B"
             hint: "Kijk goed naar de spelling van de commando's"
@@ -111,13 +111,13 @@ levels:
                 {echo} Dus u wilt graag ...
                 {print} Komt er aan ! Eet smakelijk !"
             mp_choice_options:
-                -   option_text: "In regel 1 moest {ask} staan in plaats van {print}"
+                -   answer_option: "In regel 1 moest {ask} staan in plaats van {print}"
                     feedback: "Weet je zeker dat er iets mis is ?"
-                -   option_text: "In regel 1 moet {echo} staan in plaats van {print}"
+                -   answer_option: "In regel 1 moet {echo} staan in plaats van {print}"
                     feedback: "Weet je zeker dat er iets mis is ?"
-                -   option_text: "In regel 3 moet {print} staan in plaats van {echo}"
+                -   answer_option: "In regel 3 moet {print} staan in plaats van {echo}"
                     feedback: "Weet je zeker dat er iets mis is ?"
-                -   option_text: "Niets ! Deze code is goed !"
+                -   answer_option: "Niets ! Deze code is goed !"
                     feedback: "Correct !"
             correct_answer: "D"
             hint: "Controleer de code regel voor regel."
@@ -126,13 +126,13 @@ levels:
             question_text: "Wat doet het commando {echo} ?"
             code: "..."
             mp_choice_options:
-                -   option_text: "Met {echo} stel je een vraag"
+                -   answer_option: "Met {echo} stel je een vraag"
                     feedback: "Dat doe je met {ask}"
-                -   option_text: "Met {echo} laat je tekst verschijnen"
+                -   answer_option: "Met {echo} laat je tekst verschijnen"
                     feedback: "Dat doe je met {print}"
-                -   option_text: "Met {echo} herhaal je een gegeven antwoord"
+                -   answer_option: "Met {echo} herhaal je een gegeven antwoord"
                     feedback: "Goed zo !"
-                -   option_text: "Met {echo} laat je tekst verdwijnen"
+                -   answer_option: "Met {echo} laat je tekst verdwijnen"
                     feedback: "Dat klopt niet"
             correct_answer: "C"
             hint: "{echo} gebruik je nadat iemand een antwoord gegeven heeft bij {ask}."
@@ -144,13 +144,13 @@ levels:
                 {print} Hoe gaat het met jou ?
                 {echo} Dus het gaat...
             mp_choice_options:
-                -   option_text: "{print} in regel 1 moet {ask} zijn"
+                -   answer_option: "{print} in regel 1 moet {ask} zijn"
                     feedback: "Nee, {print} is goed. Waar wordt de vraag gesteld ?"
-                -   option_text: "{print} in regel 2 moet {ask} zijn"
+                -   answer_option: "{print} in regel 2 moet {ask} zijn"
                     feedback: "Super !"
-                -   option_text: "{echo} in regel 3 moet {ask} zijn"
+                -   answer_option: "{echo} in regel 3 moet {ask} zijn"
                     feedback: "Nee, {echo} is goed. Waar wordt de vraag gesteld ?"
-                -   option_text: "Niets, alles is goed !"
+                -   answer_option: "Niets, alles is goed !"
                     feedback: "Er zit wel een foutje in..."
             correct_answer: "B"
             hint: "met '{ask}' kun je iets vragen"
@@ -159,9 +159,9 @@ levels:
             question_text: "Heb je zin om naar level 2 te gaan ?"
             code: "..."
             mp_choice_options:
-            -   option_text: "Ja !"
+            -   answer_option: "Ja !"
                 feedback: "Mooizo ! Op naar level 2!"
-            -   option_text: "Nee"
+            -   answer_option: "Nee"
                 feedback: "Jammer..."
             correct_answer: "A"
             hint: "Op naar level 2!"
@@ -172,14 +172,14 @@ levels:
             question_text: "Wat is waar ?"
             code: "..."
             mp_choice_options:
-                -   "option_text": "In level 2 bestaat het commando {print} niet meer"
-                    "feedback": "{print} werkt nog steeds hetzelfde"
-                -   "option_text": "In level 2 bestaat het commando {ask} niet meer"
-                    "feedback": "{ask} werkt anders, maar het bestaat nog wel !"
-                -   "option_text": "In level 2 bestaat het commando {echo} niet meer"
-                    "feedback": "Goedzo !"
-                -   "option_text": "In level 2 bestaan alle commando's van level 1 nog"
-                    "feedback": "Nee, een commando is weg."
+                -   answer_option: "In level 2 bestaat het commando {print} niet meer"
+                    feedback: "{print} werkt nog steeds hetzelfde"
+                -   answer_option: "In level 2 bestaat het commando {ask} niet meer"
+                    feedback: "{ask} werkt anders, maar het bestaat nog wel !"
+                -   answer_option: "In level 2 bestaat het commando {echo} niet meer"
+                    feedback: "Goedzo !"
+                -   answer_option: "In level 2 bestaan alle commando's van level 1 nog"
+                    feedback: "Nee, een commando is weg."
             correct_answer: "C"
             hint: "{print} en {ask} bestaan nog."
             question_score: '10'
@@ -188,13 +188,13 @@ levels:
             code: "..."
             mp_choice_options:
                 -   "code": "naam {is} {ask} Hoe heet jij ?"
-                    "feedback": "Super !"
+                    feedback: "Super !"
                 -   "code": "{ask} {is} naam Hoe heet jij ?"
-                    "feedback": "De woorden zijn goed, maar de volgorde niet !"
+                    feedback: "De woorden zijn goed, maar de volgorde niet !"
                 -   "code": "{ask} Hoe heet jij ?"
-                    "feedback": "Zo werkte het in level 1, nu niet meer."
+                    feedback: "Zo werkte het in level 1, nu niet meer."
                 -   "code": "{ask} Hoe heet jij ? {is} naam"
-                    "feedback": "De woorden zijn goed, maar de volgorde niet !"
+                    feedback: "De woorden zijn goed, maar de volgorde niet !"
             correct_answer: "A"
             hint: "{ask} werkt niet meer zoals in level 1"
             question_score: '10'
@@ -204,14 +204,14 @@ levels:
                 naam {is} Marleen
                 {print} naam gaat naar de supermarkt en ze koopt een appel.
             mp_choice_options:
-            -   "option_text": "naam gaat naar de supermarkt en ze koopt een appel."
-                "feedback": "Het woord naam wordt vervangen door Marleen"
-            -   "option_text": "Marleen gaat naar de supermarkt."
-                "feedback": "het tweede deel van de zin wordt ook geprint !"
-            -   "option_text": "Marleen gaat naar de supermarkt en ze koopt een appel."
-                "feedback": "Juist !"
-            -   "option_text": "Marleen gaat naar de supermarkt en Marleen koopt een appel."
-                "feedback": "Het woord 'ze' wordt niet vervangen"
+            -   answer_option: "naam gaat naar de supermarkt en ze koopt een appel."
+                feedback: "Het woord naam wordt vervangen door Marleen"
+            -   answer_option: "Marleen gaat naar de supermarkt."
+                feedback: "het tweede deel van de zin wordt ook geprint !"
+            -   answer_option: "Marleen gaat naar de supermarkt en ze koopt een appel."
+                feedback: "Juist !"
+            -   answer_option: "Marleen gaat naar de supermarkt en Marleen koopt een appel."
+                feedback: "Het woord 'ze' wordt niet vervangen"
             correct_answer: "C"
             hint: "Het woord naam wordt vervangen door Marleen"
             question_score: '10'
@@ -221,14 +221,14 @@ levels:
                 naam {is} Hedy
                 {print} Hoi mijn naam is naam !
             mp_choice_options:
-            -   "option_text": "Hoi mijn naam is naam"
-                "feedback": "Het woord naam wordt vervangen door Hedy"
-            -   "option_text": "Hoi mijn naam is Hedy"
-                "feedback": "Het woord naam wordt vervangen door Hedy"
-            -   "option_text": "Hoi mijn Hedy is naam"
-                "feedback": "Het woord naam wordt vervangen door Hedy"
-            -   "option_text": "Hoi mijn Hedy is Hedy"
-                "feedback": "Juist ! Dit probleem wordt opgelost in level 3!"
+            -   answer_option: "Hoi mijn naam is naam"
+                feedback: "Het woord naam wordt vervangen door Hedy"
+            -   answer_option: "Hoi mijn naam is Hedy"
+                feedback: "Het woord naam wordt vervangen door Hedy"
+            -   answer_option: "Hoi mijn Hedy is naam"
+                feedback: "Het woord naam wordt vervangen door Hedy"
+            -   answer_option: "Hoi mijn Hedy is Hedy"
+                feedback: "Juist ! Dit probleem wordt opgelost in level 3!"
             correct_answer: "D"
             hint: "'naam' wordt beide keren vervangen door 'Hedy'"
             question_score: '10'
@@ -236,14 +236,14 @@ levels:
             question_text: "Wat doet het commando `{sleep}`?"
             code: "{sleep}"
             mp_choice_options:
-                -   "option_text": "Het is het einde van het programma"
-                    "feedback": "Nee hoor, je kunt na een {sleep} nog verder"
-                -   "option_text": "Het bevriest je scherm, zodat je niet verder kunt"
-                    "feedback": "Gelukkig niet !"
-                -   "option_text": "Het zorgt ervoor dat je code even pauzeert en dan weer verder gaat"
-                    "feedback": "Super"
-                -   "option_text": "Het maakt je programma langzamer"
-                    "feedback": "Gelukkig niet !"
+                -   answer_option: "Het is het einde van het programma"
+                    feedback: "Nee hoor, je kunt na een {sleep} nog verder"
+                -   answer_option: "Het bevriest je scherm, zodat je niet verder kunt"
+                    feedback: "Gelukkig niet !"
+                -   answer_option: "Het zorgt ervoor dat je code even pauzeert en dan weer verder gaat"
+                    feedback: "Super"
+                -   answer_option: "Het maakt je programma langzamer"
+                    feedback: "Gelukkig niet !"
             correct_answer: "C"
             hint: "Als je {sleep} gebruikt, wacht de computer een (paar) seconden"
             question_score: '10'
@@ -254,14 +254,14 @@ levels:
                 _?_
                 {print} Hedy !
             mp_choice_options:
-                -   "option_text": "{sleep}"
-                    "feedback": "Topper !"
-                -   "option_text": "{echo}"
-                    "feedback": "Er valt niets te herhalen hier..."
-                -   "option_text": "{print}"
-                    "feedback": "Er staat niets om te printen"
-                -   "option_text": "{ask}"
-                    "feedback": "Er staat geen vraag om te stellen"
+                -   answer_option: "{sleep}"
+                    feedback: "Topper !"
+                -   answer_option: "{echo}"
+                    feedback: "Er valt niets te herhalen hier..."
+                -   answer_option: "{print}"
+                    feedback: "Er staat niets om te printen"
+                -   answer_option: "{ask}"
+                    feedback: "Er staat geen vraag om te stellen"
             correct_answer: "A"
             hint: "Er valt even een stilte voor een dramatisch effect"
             question_score: '10'
@@ -273,13 +273,13 @@ levels:
                 {print} BOEM !
             mp_choice_options:
                 -   "code": "{print} 3"
-                    "feedback": "Je hoeft niets te printen."
+                    feedback: "Je hoeft niets te printen."
                 -   "code": "{sleep} 3"
-                    "feedback": "Perfect !"
+                    feedback: "Perfect !"
                 -   "code": "{sleep}"
-                    "feedback": "Dan ontplof je al over 1 seconde."
+                    feedback: "Dan ontplof je al over 1 seconde."
                 -   "code": "{sleep} {sleep} {sleep}"
-                    "feedback": "Je kunt het makkelijker maken door er gewoon een 3 achter te zetten !"
+                    feedback: "Je kunt het makkelijker maken door er gewoon een 3 achter te zetten !"
             correct_answer: "B"
             hint: "Je wilt dat de code 3 seconden wacht !"
             question_score: '10'
@@ -289,14 +289,14 @@ levels:
                 {ask} {is} Hoe oud ben je ?
                 {print} leeftijd
             mp_choice_options:
-                -   "option_text": "{ask} {is} leeftijd Hoe oud ben je ?"
-                    "feedback": "Verkeerde volgorde"
-                -   "option_text": "leeftijd {is} Hoe oud ben je ?"
-                    "feedback": "Waar is de {ask} gebleven ?"
-                -   "option_text": "leeftijd {is} {ask} Hoe oud ben je ?"
-                    "feedback": "Top !"
-                -   "option_text": "leeftijd {is} aks Hoe oud ben je ?"
-                    "feedback": "Let op de spelling van {ask}"
+                -   answer_option: "{ask} {is} leeftijd Hoe oud ben je ?"
+                    feedback: "Verkeerde volgorde"
+                -   answer_option: "leeftijd {is} Hoe oud ben je ?"
+                    feedback: "Waar is de {ask} gebleven ?"
+                -   answer_option: "leeftijd {is} {ask} Hoe oud ben je ?"
+                    feedback: "Top !"
+                -   answer_option: "leeftijd {is} aks Hoe oud ben je ?"
+                    feedback: "Let op de spelling van {ask}"
             correct_answer: "C"
             hint: "Leeftijd is...?"
             question_score: '10'
@@ -306,14 +306,14 @@ levels:
                 honden {is} lievelingsdier
                 {print} Ik hou van lievelingsdier
             mp_choice_options:
-                -   "option_text": "regel 1 moet zijn: honden {is} lievelingsdieren"
-                    "feedback": "Nee, de variabele heet lievelingsdier"
-                -   "option_text": "regel 1 moet zijn: lievelingsdier {is} honden"
-                    "feedback": "Correct"
-                -   "option_text": "regel 2 moet zijn: Ik hou van {sleep} honden"
-                    "feedback": "Nee, {sleep} staat niet zo midden in een zin."
-                -   "option_text": "regel 2 moet zijn: Ik hou van lievelingsdieren"
-                    "feedback": "Nee, de variabele heet lievelingsdier"
+                -   answer_option: "regel 1 moet zijn: honden {is} lievelingsdieren"
+                    feedback: "Nee, de variabele heet lievelingsdier"
+                -   answer_option: "regel 1 moet zijn: lievelingsdier {is} honden"
+                    feedback: "Correct"
+                -   answer_option: "regel 2 moet zijn: Ik hou van {sleep} honden"
+                    feedback: "Nee, {sleep} staat niet zo midden in een zin."
+                -   answer_option: "regel 2 moet zijn: Ik hou van lievelingsdieren"
+                    feedback: "Nee, de variabele heet lievelingsdier"
             correct_answer: "B"
             hint: "Je wil printen 'Ik hou van honden'"
             question_score: '10'
@@ -325,14 +325,14 @@ levels:
                 {sleep} 2
                 {print} smaak
             mp_choice_options:
-                -   "option_text": "aardbeien, chocolade, vanille"
-                    "feedback": "Zo maak je een lijstje. Dat is niet de bedoeling hier"
-                -   "option_text": "{print} aardbeien"
-                    "feedback": "{print} hoort niet midden in de zin !"
-                -   "option_text": "{sleep} 5"
-                    "feedback": "Helaas, probeer het nog eens."
-                -   "option_text": "{ask} Wat is jouw favoriete smaak ijs ?"
-                    "feedback": "Super !"
+                -   answer_option: "aardbeien, chocolade, vanille"
+                    feedback: "Zo maak je een lijstje. Dat is niet de bedoeling hier"
+                -   answer_option: "{print} aardbeien"
+                    feedback: "{print} hoort niet midden in de zin !"
+                -   answer_option: "{sleep} 5"
+                    feedback: "Helaas, probeer het nog eens."
+                -   answer_option: "{ask} Wat is jouw favoriete smaak ijs ?"
+                    feedback: "Super !"
             correct_answer: "D"
             hint: "Je wil een vraag stellen."
             question_score: '10'
@@ -343,13 +343,13 @@ levels:
             code: "..."
             mp_choice_options:
             -   "code": "{print}"
-                "feedback": "Met {print} laat je tekst verschijnen"
+                feedback: "Met {print} laat je tekst verschijnen"
             -   "code": "{ask}"
-                "feedback": "{ask} is om een vraag te stellen"
+                feedback: "{ask} is om een vraag te stellen"
             -   "code": "is"
-                "feedback": "is gebruik je om het rijtje te maken"
+                feedback: "is gebruik je om het rijtje te maken"
             -   "code": "{at} {random}"
-                "feedback": "Juist !"
+                feedback: "Juist !"
             correct_answer: "D"
             hint: "Willekeurig betekent 'zomaar eentje' er wordt telkens een ander woord gekozen."
             question_score: '10'
@@ -359,14 +359,14 @@ levels:
                 dieren {is} hond koe aap
                 {print} dieren {at} {random}
             mp_choice_options:
-            -   "option_text": "Er moeten komma's tussen: hond, koe, aap."
-                "feedback": "Goedzo !"
-            -   "option_text": "In regel 1 moet {print} staan."
-                "feedback": "Nee, je hebt geen {print} nodig."
-            -   "option_text": "In regel 2 moet 'dier' staan in plaats van 'dieren',"
-                "feedback": "Dieren is goed."
-            -   "option_text": "'At {random}' is fout gespeld, het moet 'et rendom' zijn"
-                "feedback": "At {random} is de goede spelling"
+            -   answer_option: "Er moeten komma's tussen: hond, koe, aap."
+                feedback: "Goedzo !"
+            -   answer_option: "In regel 1 moet {print} staan."
+                feedback: "Nee, je hebt geen {print} nodig."
+            -   answer_option: "In regel 2 moet 'dier' staan in plaats van 'dieren',"
+                feedback: "Dieren is goed."
+            -   answer_option: "'At {random}' is fout gespeld, het moet 'et rendom' zijn"
+                feedback: "At {random} is de goede spelling"
             correct_answer: "A"
             hint: "De fout zit in regel 1"
             question_score: '10'
@@ -377,13 +377,13 @@ levels:
                 {print} steen, papier, schaar {at} {random}
             mp_choice_options:
             -   "code": "{at} {random} {print} opties"
-                "feedback": "Je bent er bijna, opties is goed, maar deze volgorde niet."
+                feedback: "Je bent er bijna, opties is goed, maar deze volgorde niet."
             -   "code": "{print} steen {at} {random}"
-                "feedback": "Je wilt niet altijd steen printen, maar willekeurig een van de opties."
+                feedback: "Je wilt niet altijd steen printen, maar willekeurig een van de opties."
             -   "code": "{print} opties {at} {random}"
-                "feedback": "Heel goed !"
-            -   "option_text": "Niets, de code is goed !"
-                "feedback": "Kijk goed ! Er zit wel een fout in !"
+                feedback: "Heel goed !"
+            -   answer_option: "Niets, de code is goed !"
+                feedback: "Kijk goed ! Er zit wel een fout in !"
             correct_answer: "C"
             hint: "De naam van de variabele (het lijstje) is opties."
             question_score: '10'
@@ -394,14 +394,14 @@ levels:
                 {print} prijs {at} {random}
             mp_choice_options:
             -   "code": "{print} prijs"
-                "feedback": "Je wilt niet het woord prijs printen, maar een {random} prijs uit\
+                feedback: "Je wilt niet het woord prijs printen, maar een {random} prijs uit\
                \ het lijstje prijzen"
             -   "code": "{print} prijzen {at} {random}"
-                "feedback": "Goed opgelet !"
+                feedback: "Goed opgelet !"
             -   "code": "{print} {at} {random} prijs"
-                "feedback": "At {random} moet achter de variabele."
-            -   "option_text": "Niets de code is goed !"
-                "feedback": "Kijk goed ! Er zit wel een fout in !"
+                feedback: "At {random} moet achter de variabele."
+            -   answer_option: "Niets de code is goed !"
+                feedback: "Kijk goed ! Er zit wel een fout in !"
             correct_answer: "B"
             hint: "Kijk goed de naam van de variabele 'prijzen'"
             question_score: '10'
@@ -412,14 +412,14 @@ levels:
                 antwoorden zijn ja, nee, misschien
                 {print} antwoorden {at} {random}
             mp_choice_options:
-            -   "option_text": "In regel 1 moet vragen staan in plaats van vraag"
-                "feedback": "vraag is goed"
-            -   "option_text": "In regel 2 moet is staan in plaats van zijn"
-                "feedback": "Correct"
-            -   "option_text": "In regel 3 moet antwoord staan in plaats van antwoorden"
-                "feedback": "Nee, in regel 2 heet de variabele namelijk ook antwoorden"
-            -   "option_text": "Niets ! Deze code is goed !"
-                "feedback": "In regel 2 zit een foutje.."
+            -   answer_option: "In regel 1 moet vragen staan in plaats van vraag"
+                feedback: "vraag is goed"
+            -   answer_option: "In regel 2 moet is staan in plaats van zijn"
+                feedback: "Correct"
+            -   answer_option: "In regel 3 moet antwoord staan in plaats van antwoorden"
+                feedback: "Nee, in regel 2 heet de variabele namelijk ook antwoorden"
+            -   answer_option: "Niets ! Deze code is goed !"
+                feedback: "In regel 2 zit een foutje.."
             correct_answer: "B"
             hint: "Zijn is geen commando."
             question_score: '10'
@@ -431,14 +431,14 @@ levels:
                 antwoorden {is} ja, nee, misschien
                 {print} antwoorden {at} {random}
             mp_choice_options:
-            -   "option_text": "In regel 1 moet er {print} staan in plaats van {ask}"
-                "feedback": "Zit er wel een fout in ?"
-            -   "option_text": "In regel 2 moet er {ask} staan in plaats van {print}"
-                "feedback": "Zit er wel een fout in ?"
-            -   "option_text": "In regel 3 moet er staan antwoorden {at} {random} {is} ja, nee, misschien"
-                "feedback": "Zit er wel een fout in ?"
-            -   "option_text": "Niets, alles is goed !"
-                "feedback": "Klopt !"
+            -   answer_option: "In regel 1 moet er {print} staan in plaats van {ask}"
+                feedback: "Zit er wel een fout in ?"
+            -   answer_option: "In regel 2 moet er {ask} staan in plaats van {print}"
+                feedback: "Zit er wel een fout in ?"
+            -   answer_option: "In regel 3 moet er staan antwoorden {at} {random} {is} ja, nee, misschien"
+                feedback: "Zit er wel een fout in ?"
+            -   answer_option: "Niets, alles is goed !"
+                feedback: "Klopt !"
             correct_answer: "D"
             hint: "Deze code was goed !"
             question_score: '10'
@@ -450,14 +450,14 @@ levels:
                 {add} jouw_boek {to_list} boeken
                 {print} boeken {at} {random}
             mp_choice_options:
-            -   "option_text": "Het {add} commando haalt een {random} boek uit het lijstje boeken weg"
-                "feedback": "Add is Engels voor toevoegen"
-            -   "option_text": "Het {add} commando voegt een {random} boek aan het lijstje boeken toe"
-                "feedback": "Het voegt inderdaad een boek toe aan het lijstje, maar niet zomaar een {random} boek!"
-            -   "option_text": "Het {add} commando voegt jouw favoriete boek aan het lijstje toe"
-                "feedback": "Juist!"
-            -   "option_text": "Het {add} commando verwijdert jouw favoriete boek uit het lijstje."
-                "feedback": "Add is Engels voor toevoegen"
+            -   answer_option: "Het {add} commando haalt een {random} boek uit het lijstje boeken weg"
+                feedback: "Add is Engels voor toevoegen"
+            -   answer_option: "Het {add} commando voegt een {random} boek aan het lijstje boeken toe"
+                feedback: "Het voegt inderdaad een boek toe aan het lijstje, maar niet zomaar een {random} boek!"
+            -   answer_option: "Het {add} commando voegt jouw favoriete boek aan het lijstje toe"
+                feedback: "Juist!"
+            -   answer_option: "Het {add} commando verwijdert jouw favoriete boek uit het lijstje."
+                feedback: "Add is Engels voor toevoegen"
             correct_answer: "C"
             hint: "Add is Engels voor toevoegen!"
             question_score: '10'
@@ -469,14 +469,14 @@ levels:
                 {remove} paprika {from} chips
                 {print} chips {at} {random}
             mp_choice_options:
-            -   "option_text": "Dat weet je nog niet, want Hedy kiest een van de 3 smaken {at} {random}"
-                "feedback": "Kijk goed naar de {remove} commando's"
-            -   "option_text": "naturel"
-                "feedback": "Naturel wordt uit het rijtje verwijderd"
-            -   "option_text": "paprika"
-                "feedback": "Paprika wordt uit het rijtje verwijderd"
-            -   "option_text": "cheese onion"
-                "feedback": "Klopt!"
+            -   answer_option: "Dat weet je nog niet, want Hedy kiest een van de 3 smaken {at} {random}"
+                feedback: "Kijk goed naar de {remove} commando's"
+            -   answer_option: "naturel"
+                feedback: "Naturel wordt uit het rijtje verwijderd"
+            -   answer_option: "paprika"
+                feedback: "Paprika wordt uit het rijtje verwijderd"
+            -   answer_option: "cheese onion"
+                feedback: "Klopt!"
             correct_answer: "D"
             hint: "Er staan 3 chipssmaken in het rijtje, maar er worden er twee verwijderd. Welke blijft over?"
             question_score: '10'
@@ -488,14 +488,14 @@ levels:
                     {remove} gekozen_kleur {from} kleuren
                     {print} Ik verf mijn haar kleur {at} {random}
             mp_choice_options:
-            -   "option_text": "In regel 3 moet staan {remove} blauw {from} kleuren"
-                "feedback": "Misschien wil je wel graag blauwe haren!"
-            -   "option_text": "In regel 3 moet een {add} commando staan in plaats van een {remove} commando"
-                "feedback": "Je wil de gekozen kleur verwijderen, dus {remove} klopt"
-            -   "option_text": " In regel 4 moet de variabele kleuren heten in plaats van kleur"
-                "feedback": "Juist!"
-            -   "option_text": "Niets, alles is goed!"
-                "feedback": "Er zit toch echt een foutje in!"
+            -   answer_option: "In regel 3 moet staan {remove} blauw {from} kleuren"
+                feedback: "Misschien wil je wel graag blauwe haren!"
+            -   answer_option: "In regel 3 moet een {add} commando staan in plaats van een {remove} commando"
+                feedback: "Je wil de gekozen kleur verwijderen, dus {remove} klopt"
+            -   answer_option: " In regel 4 moet de variabele kleuren heten in plaats van kleur"
+                feedback: "Juist!"
+            -   answer_option: "Niets, alles is goed!"
+                feedback: "Er zit toch echt een foutje in!"
             correct_answer: "C"
             hint: "Kijk goed naar regel 3!"
             question_score: '10'
@@ -508,14 +508,14 @@ levels:
                 _?_
                 {print} uitlaters {at} {random} is vandaag aan de beurt om de honden uit te laten!
             mp_choice_options:
-            -   "option_text": "{remove} uitlater_gisteren {from} uitlaters"
-                "feedback": "Super!"
-            -   "option_text": "{remove} uitlater_gisteren to uitlaters"
-                "feedback": "{remove} hoort bij {from} en {add} bij {to_list}"
-            -   "option_text": "{remove} uitlaters {from} gisteren"
-                "feedback": "gisteren is geen variabele"
-            -   "option_text": "{add} uitlater_gisteren {to_list} uitlaters"
-                "feedback": "Hierdoor verhoog je de kans dat degene die gisteren de hond heeft uitgelaten het vandaag weer moet doen. Dat is oneerlijk!"
+            -   answer_option: "{remove} uitlater_gisteren {from} uitlaters"
+                feedback: "Super!"
+            -   answer_option: "{remove} uitlater_gisteren to uitlaters"
+                feedback: "{remove} hoort bij {from} en {add} bij {to_list}"
+            -   answer_option: "{remove} uitlaters {from} gisteren"
+                feedback: "gisteren is geen variabele"
+            -   answer_option: "{add} uitlater_gisteren {to_list} uitlaters"
+                feedback: "Hierdoor verhoog je de kans dat degene die gisteren de hond heeft uitgelaten het vandaag weer moet doen. Dat is oneerlijk!"
             correct_answer: "A"
             hint: "De uitlater van gisteren moet verwijderd worden uit het rijtje"
             question_score: '10'
@@ -525,14 +525,14 @@ levels:
             question_text: "Wat is waar ?"
             code: "..."
             mp_choice_options:
-            -   "option_text": "In level 4 werkt {print} anders"
-                "feedback": "Correct, je hebt aanhalingstekens nodig"
-            -   "option_text": "In level 4 werkt {ask} anders dan in level 2"
-                "feedback": "Ask werkt nog hetzelfde"
-            -   "option_text": "In level 4 werkt {at} {random} anders dan in level 2"
-                "feedback": "At {random} werkt nog hetzelfde"
-            -   "option_text": "In level 4 werkt alles nog hetzelfde als in level 2"
-                "feedback": "Nee, een commando is anders."
+            -   answer_option: "In level 4 werkt {print} anders"
+                feedback: "Correct, je hebt aanhalingstekens nodig"
+            -   answer_option: "In level 4 werkt {ask} anders dan in level 2"
+                feedback: "Ask werkt nog hetzelfde"
+            -   answer_option: "In level 4 werkt {at} {random} anders dan in level 2"
+                feedback: "At {random} werkt nog hetzelfde"
+            -   answer_option: "In level 4 werkt alles nog hetzelfde als in level 2"
+                feedback: "Nee, een commando is anders."
             correct_answer: "A"
             hint: "Je hebt vanaf level 4 aanhalingstekens nodig bij een commando."
             question_score: '10'
@@ -541,13 +541,13 @@ levels:
             code: "..."
             mp_choice_options:
             -   "code": "`"
-                "feedback": "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
+                feedback: "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
             -   "code": "'"
-                "feedback": "Juist !"
+                feedback: "Juist !"
             -   "code": "\""
-                "feedback": "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
+                feedback: "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
             -   "code": ","
-                "feedback": "Dit is een komma, je hebt een aanhalingsteken nodig."
+                feedback: "Dit is een komma, je hebt een aanhalingsteken nodig."
             correct_answer: "B"
             hint: "Kies het goede aanhalingsteken."
             question_score: '10'
@@ -556,13 +556,13 @@ levels:
             code: "..."
             mp_choice_options:
             -   "code": "{print} Hoi ik ben Hedy"
-                "feedback": "Vanaf level 4 heb je aanhalingstekens nodig"
+                feedback: "Vanaf level 4 heb je aanhalingstekens nodig"
             -   "code": "{print} 'Hoi ik ben Hedy"
-                "feedback": "Er moet ook een aanhalingsteken achter"
+                feedback: "Er moet ook een aanhalingsteken achter"
             -   "code": "'{print} Hoi ik ben Hedy'"
-                "feedback": "Het eerste aanhalingsteken moet na het commando {print}"
+                feedback: "Het eerste aanhalingsteken moet na het commando {print}"
             -   "code": "{print} 'Hoi ik ben Hedy'"
-                "feedback": "Perfect !"
+                feedback: "Perfect !"
             correct_answer: "D"
             hint: "Er moet een aanhalingsteken voor en een achter de tekst die je wil printen."
             question_score: '10'
@@ -570,14 +570,14 @@ levels:
             question_text: "Welke stelling is waar ?"
             code: "..."
             mp_choice_options:
-            -   "option_text": "Als je een tekst wil printen moeten er dubbele aanhalingstekens voor en na de tekst staan."
-                "feedback": "Enkele aanhalingstekens zijn genoeg"
-            -   "option_text": "Als je een tekst wil printen moeten er enkele aanhalingstekens voor en na de tekst staan."
-                "feedback": "Super !"
-            -   "option_text": "Als je een vraag wil stellen heb je geen aanhalingstekens nodig"
-                "feedback": "Zowel bij {ask} als {print} heb je enkele aanhalingstekens nodig voor en na de tekst"
-            -   "option_text": "Je mag zelf kiezen of je aanhalingstekens gebruikt of niet."
-                "feedback": "Helaas is Hedy strenger dan dat."
+            -   answer_option: "Als je een tekst wil printen moeten er dubbele aanhalingstekens voor en na de tekst staan."
+                feedback: "Enkele aanhalingstekens zijn genoeg"
+            -   answer_option: "Als je een tekst wil printen moeten er enkele aanhalingstekens voor en na de tekst staan."
+                feedback: "Super !"
+            -   answer_option: "Als je een vraag wil stellen heb je geen aanhalingstekens nodig"
+                feedback: "Zowel bij {ask} als {print} heb je enkele aanhalingstekens nodig voor en na de tekst"
+            -   answer_option: "Je mag zelf kiezen of je aanhalingstekens gebruikt of niet."
+                feedback: "Helaas is Hedy strenger dan dat."
             correct_answer: "B"
             hint: "Je hebt vanaf level 4 aanhalingstekens nodig als je een tekst wil printen."
             question_score: '10'
@@ -588,14 +588,14 @@ levels:
                 {print} 'opties {at} {random}'
             mp_choice_options:
             -   "code": "'{print} opties {at} {random}'"
-                "feedback": "Een aanhalingsteken moet nooit voor het {print} commando."
+                feedback: "Een aanhalingsteken moet nooit voor het {print} commando."
             -   "code": "{print} 'opties' {at} {random}"
-                "feedback": "Opties is een variabele. Je wil niet letterlijk het woord opties\
+                feedback: "Opties is een variabele. Je wil niet letterlijk het woord opties\
                 \ printen."
             -   "code": "{print} opties {at} {random}"
-                "feedback": "Heel goed"
-            -   "option_text": "Niets, de code is goed !"
-                "feedback": "Kijk goed ! Er zit wel een fout in !"
+                feedback: "Heel goed"
+            -   answer_option: "Niets, de code is goed !"
+                feedback: "Kijk goed ! Er zit wel een fout in !"
             correct_answer: "C"
             hint: "Je wil niet dat er letterlijk 'opties {at} {random}' geprint wordt, je wil dat Hedy 'steen' 'papier' of 'schaar' {print}."
             question_score: '10'
@@ -605,13 +605,13 @@ levels:
                 prijzen {is} 1 euro, 100 euro, 1 miljoen euro
             mp_choice_options:
             -   "code": "{print} 'Jij wint...' prijzen {at} {random}"
-                "feedback": "Super ! Jij begrijpt het !"
+                feedback: "Super ! Jij begrijpt het !"
             -   "code": "{print} Jij wint... 'prijzen {at} {random}'"
-                "feedback": "Nu {print} Hedy letterlijk 'prijzen {at} {random}'"
+                feedback: "Nu {print} Hedy letterlijk 'prijzen {at} {random}'"
             -   "code": "{print} Jij wint... prijzen {at} {random}"
-                "feedback": "Je hebt wel aanhalingstekens nodig !"
+                feedback: "Je hebt wel aanhalingstekens nodig !"
             -   "code": "{print} 'Jij wint... prijzen {at} {random}'"
-                "feedback": "Nu {print} Hedy letterlijk 'prijzen {at} {random}'"
+                feedback: "Nu {print} Hedy letterlijk 'prijzen {at} {random}'"
             correct_answer: "A"
             hint: "Bedenk goed wat je wil dat Hedy letterlijk {print}, en wat een variabele is."
             question_score: '10'
@@ -622,14 +622,14 @@ levels:
                 antwoorden {is} ja, nee, misschien
                 {print} antwoorden {at} {random}
             mp_choice_options:
-            -   "option_text": "Er missen aanhalingstekens in regel 1"
-                "feedback": "Juist, bij {ask} heb je aanhalingstekens nodig"
-            -   "option_text": "Er missen aanhalingstekens in regel 2"
-                "feedback": "een variabele heeft geen aanhalingstekens nodig"
-            -   "option_text": "Er missen aanhalingstekens in regel 3"
-                "feedback": "Je wil niet dat er letterlijk 'antwoorden {at} {random}' worst geprint, dus geen aanhalingstekens hier !"
-            -   "option_text": "Niets ! Deze code is goed !"
-                "feedback": "Kijk goed ! Er zit wel een fout in !"
+            -   answer_option: "Er missen aanhalingstekens in regel 1"
+                feedback: "Juist, bij {ask} heb je aanhalingstekens nodig"
+            -   answer_option: "Er missen aanhalingstekens in regel 2"
+                feedback: "een variabele heeft geen aanhalingstekens nodig"
+            -   answer_option: "Er missen aanhalingstekens in regel 3"
+                feedback: "Je wil niet dat er letterlijk 'antwoorden {at} {random}' worst geprint, dus geen aanhalingstekens hier !"
+            -   answer_option: "Niets ! Deze code is goed !"
+                feedback: "Kijk goed ! Er zit wel een fout in !"
             correct_answer: "A"
             hint: "Bekijk regel voor regel of er aanhalingstekens nodig zijn."
             question_score: '10'
@@ -640,14 +640,14 @@ levels:
                 {print} 'Voor je staan 3 deuren'
                 deur {is} {ask} 'Welke deur kies je ?'
             mp_choice_options:
-            -   "option_text": "{print} Dus jij kiest deur deur"
-                "feedback": "Er zijn aanhalingstekens nodig in deze zin"
-            -   "option_text": "{print} 'Dus jij kiest ' deur deur"
-                "feedback": "Als de speler nu deur 3 kiest, {print} Hedy: Dus jij kiest 3 3"
-            -   "option_text": "{print} 'Dus jij kiest deur ' deur"
-                "feedback": "Super !"
-            -   "option_text": "{print} 'Dus jij kiest deur deur'"
-                "feedback": "Hedy {print} nu letterlijk: Dus jij kiest deur deur"
+            -   answer_option: "{print} Dus jij kiest deur deur"
+                feedback: "Er zijn aanhalingstekens nodig in deze zin"
+            -   answer_option: "{print} 'Dus jij kiest ' deur deur"
+                feedback: "Als de speler nu deur 3 kiest, {print} Hedy: Dus jij kiest 3 3"
+            -   answer_option: "{print} 'Dus jij kiest deur ' deur"
+                feedback: "Super !"
+            -   answer_option: "{print} 'Dus jij kiest deur deur'"
+                feedback: "Hedy {print} nu letterlijk: Dus jij kiest deur deur"
             correct_answer: "C"
             hint: "Je wil dat het tweede woord deur vervangen wordt door het nummertje dat de speler kiest. Dus het tweede woord deur moet buiten de aanhalingstekens"
             question_score: '10'
@@ -657,14 +657,14 @@ levels:
                 voetbalclubs {is} Ajax, FC Utrecht, PSV, Feyenoord, FC Twente, sc Heerenveen
                 {print} 'De beste club is..' voetbalclubs {at} {random}
             mp_choice_options:
-            -   "option_text": "De beste club is... Ajax"
-                "feedback": "Dit zou wel kunnen"
-            -   "option_text": "De beste club is... PSV"
-                "feedback": "Dit zou wel kunnen"
-            -   "option_text": "De beste club is... Feyenoord"
-                "feedback": "Dit zou wel kunnen"
-            -   "option_text": "De beste club is... AZ"
-                "feedback": "Klopt ! Die staat niet in het rijtje !"
+            -   answer_option: "De beste club is... Ajax"
+                feedback: "Dit zou wel kunnen"
+            -   answer_option: "De beste club is... PSV"
+                feedback: "Dit zou wel kunnen"
+            -   answer_option: "De beste club is... Feyenoord"
+                feedback: "Dit zou wel kunnen"
+            -   answer_option: "De beste club is... AZ"
+                feedback: "Klopt ! Die staat niet in het rijtje !"
             correct_answer: "D"
             hint: "Kijk goed waar Hedy uit kan kiezen"
             question_score: '10'
@@ -675,14 +675,14 @@ levels:
                 {print} De afwas wordt gedaan door...
                 {print} mensen {at} {random}
             mp_choice_options:
-            -   "option_text": "Er missen aanhalingstekens in regel 1"
-                "feedback": "Dit rijtje heeft geen aanhalingstekens nodig"
-            -   "option_text": "Er missen aanhalingstekens in regel 2"
-                "feedback": "Correct !"
-            -   "option_text": "Er missen aanhalingstekens in regel 3"
-                "feedback": "Deze regel hoeft niet letterlijk geprint en dus geen aanhalingstekens"
-            -   "option_text": "Niets deze code is goed !"
-                "feedback": "Helaas er missen toch ergens"
+            -   answer_option: "Er missen aanhalingstekens in regel 1"
+                feedback: "Dit rijtje heeft geen aanhalingstekens nodig"
+            -   answer_option: "Er missen aanhalingstekens in regel 2"
+                feedback: "Correct !"
+            -   answer_option: "Er missen aanhalingstekens in regel 3"
+                feedback: "Deze regel hoeft niet letterlijk geprint en dus geen aanhalingstekens"
+            -   answer_option: "Niets deze code is goed !"
+                feedback: "Helaas er missen toch ergens"
             correct_answer: "B"
             hint: "Er missen aanhalingstekens bij een {print} commando."
             question_score: '10'
@@ -691,17 +691,17 @@ levels:
             question_text: "Wat is waar ?"
             code: "..."
             mp_choice_options:
-            -   "option_text": "In level 5 werkt {print} anders dan in level 4"
-                "feedback": "{print} werkt nog hetzelfde"
+            -   answer_option: "In level 5 werkt {print} anders dan in level 4"
+                feedback: "{print} werkt nog hetzelfde"
                 "code": '{print}'
-            -   "option_text": "In level 5 werkt {ask} anders dan in level 4"
-                "feedback": "{ask} werkt nog hetzelfde"
+            -   answer_option: "In level 5 werkt {ask} anders dan in level 4"
+                feedback: "{ask} werkt nog hetzelfde"
                 "code": '{if}'
-            -   "option_text": "In level 5 werken {print} en {ask} anders dan in level 4"
-                "feedback": "Nee hoor, ze werken hetzelfde !"
+            -   answer_option: "In level 5 werken {print} en {ask} anders dan in level 4"
+                feedback: "Nee hoor, ze werken hetzelfde !"
                 "code": '{sleep}'
-            -   "option_text": "In level 5 werken {print} en {ask} nog hetzelfde als in level 4"
-                "feedback": "Klopt !."
+            -   answer_option: "In level 5 werken {print} en {ask} nog hetzelfde als in level 4"
+                feedback: "Klopt !."
                 "code": '{else}'
             correct_answer: "D"
             hint: "Er is alleen een commando bijgekomen."
@@ -712,14 +712,14 @@ levels:
                 naam {is} {ask} 'Hoe heet je ?'
                 {if} naam {is} Hedy {print} 'leuk' {else} {print} 'minder leuk'
             mp_choice_options:
-            -   "option_text": "leuk"
-                "feedback": "Klopt !"
-            -   "option_text": "minder leuk"
-                "feedback": "Als de naam Hedy is, zegt Hedy juist 'leuk'"
-            -   "option_text": "Hedy"
-                "feedback": "Nee, er staat niet {print} naam"
-            -   "option_text": "Error"
-                "feedback": "Gelukkig niet !"
+            -   answer_option: "leuk"
+                feedback: "Klopt !"
+            -   answer_option: "minder leuk"
+                feedback: "Als de naam Hedy is, zegt Hedy juist 'leuk'"
+            -   answer_option: "Hedy"
+                feedback: "Nee, er staat niet {print} naam"
+            -   answer_option: "Error"
+                feedback: "Gelukkig niet !"
             correct_answer: "A"
             hint: "Als je naam Hedy is, wat wordt er dan geprint..?"
             question_score: '10'
@@ -729,14 +729,14 @@ levels:
                 wachtwoord {is} {ask} 'Wat is het wachtwoord ?'
                 {if} wachtwoord {is} GEHEIM {print} 'Goed !' {else} {print} 'ALARM ! INDRINGER !'
             mp_choice_options:
-            -   "option_text": "Goed"
-                "feedback": "Goed wordt geprint als je het juiste wachtwoord invult, maar het is niet het wachtwoord"
-            -   "option_text": "GEHEIM"
-                "feedback": "Klopt !'"
-            -   "option_text": "wachtwoord"
-                "feedback": "het wachtwoord is niet wachtwoord"
-            -   "option_text": "ALARM INDRINGER"
-                "feedback": "Dat wordt er geprint als je het foute antwoord intypt !"
+            -   answer_option: "Goed"
+                feedback: "Goed wordt geprint als je het juiste wachtwoord invult, maar het is niet het wachtwoord"
+            -   answer_option: "GEHEIM"
+                feedback: "Klopt !'"
+            -   answer_option: "wachtwoord"
+                feedback: "het wachtwoord is niet wachtwoord"
+            -   answer_option: "ALARM INDRINGER"
+                feedback: "Dat wordt er geprint als je het foute antwoord intypt !"
             correct_answer: "B"
             hint: "{if} wachtwoord is ... {print} 'Goed !'"
             question_score: '10'
@@ -746,14 +746,14 @@ levels:
                 wachtwoord {is} {ask} 'Wat is het wachtwoord ?'
                 {if} wachtwoord {is} GEHEIM {print} 'Goed !' {else} {print} 'ALARM ! INDRINGER !'
             mp_choice_options:
-            -   "option_text": "Goed"
-                "feedback": "Dat wordt geprint bij een goed antwoord, niet bij een foute.."
-            -   "option_text": "GEHEIM"
-                "feedback": "Dat is het juiste wachtwoord."
-            -   "option_text": "fout"
-                "feedback": "Nee, Hedy {print} wat anders..."
-            -   "option_text": "ALARM ! INDRINGER !"
-                "feedback": "Juist !"
+            -   answer_option: "Goed"
+                feedback: "Dat wordt geprint bij een goed antwoord, niet bij een foute.."
+            -   answer_option: "GEHEIM"
+                feedback: "Dat is het juiste wachtwoord."
+            -   answer_option: "fout"
+                feedback: "Nee, Hedy {print} wat anders..."
+            -   answer_option: "ALARM ! INDRINGER !"
+                feedback: "Juist !"
             correct_answer: "D"
             hint: "Als je een fout wachtwoord intypt slaat je computer alarm !"
             question_score: '10'
@@ -763,14 +763,14 @@ levels:
                 wachtwoord {is} {ask} 'Wat is het wachtwoord ?'
                 {if} wachtwoord {is} GEHEIM {print} 'Goed !' {else} {print} 'ALARM ! INDRINGER !'
             mp_choice_options:
-            -   "option_text": "Omdat je het in hoofdletters moet typen, dus GEHEIM"
-                "feedback": "Klopt !"
-            -   "option_text": "Omdat het wachtwoord 'alarm' is"
-                "feedback": "Nee, dat is niet het wachtwoord."
-            -   "option_text": "Omdat het gehijm is, met lange ij."
-                "feedback": "Nee, zo spel je dat woord niet"
-            -   "option_text": "Omdat Hedy een fout maakt"
-                "feedback": "Nee hoor, dat is geen fout !"
+            -   answer_option: "Omdat je het in hoofdletters moet typen, dus GEHEIM"
+                feedback: "Klopt !"
+            -   answer_option: "Omdat het wachtwoord 'alarm' is"
+                feedback: "Nee, dat is niet het wachtwoord."
+            -   answer_option: "Omdat het gehijm is, met lange ij."
+                feedback: "Nee, zo spel je dat woord niet"
+            -   answer_option: "Omdat Hedy een fout maakt"
+                feedback: "Nee hoor, dat is geen fout !"
             correct_answer: "A"
             hint: "De spelling moet precies hetzelfde zijn."
             question_score: '10'
@@ -783,13 +783,13 @@ levels:
                 {if} club {is} ajax {print} 'Ajax wordt eerste natuurlijk !' _?_ {print} 'Helaas jouw club wordt laatste...'
             mp_choice_options:
             -   "code": "{if}"
-                "feedback": "Nee, {if} staat vooraan de zin."
+                feedback: "Nee, {if} staat vooraan de zin."
             -   "code": "{at} {random}"
-                "feedback": "Nee, je hebt hier {else} nodig."
+                feedback: "Nee, je hebt hier {else} nodig."
             -   "code": "{else}"
-                "feedback": "Goed !"
+                feedback: "Goed !"
             -   "code": "{print}"
-                "feedback": "Er staat al {print} !"
+                feedback: "Er staat al {print} !"
             correct_answer: "C"
             hint: "In level 5 leer je 2 nieuwe commando's {if} en ...?"
             question_score: '10'
@@ -801,13 +801,13 @@ levels:
                 {if} naam {is} Hedy {print} 'Jij wordt miljonair !' {else} _?_ 'Helaas, geen miljoen voor jou.'
             mp_choice_options:
             -   "code": "{if}"
-                "feedback": "Nee, {if} staat vooraan de zin."
+                feedback: "Nee, {if} staat vooraan de zin."
             -   "code": "{at} {random}"
-                "feedback": "Nee, die heb je hier niet nodig."
+                feedback: "Nee, die heb je hier niet nodig."
             -   "code": "{else}"
-                "feedback": "Er staat al {else}"
+                feedback: "Er staat al {else}"
             -   "code": "{print}"
-                "feedback": "Top !"
+                feedback: "Top !"
             correct_answer: "D"
             hint: "Na {else} volgt nog een {print}"
             question_score: '10'
@@ -818,13 +818,13 @@ levels:
                 {if} _?_ {is} pinguin {print} 'Dat is ook mijn lievelingsdier !' {else} {print} 'Ik houd meer van pinguins.'
             mp_choice_options:
             -   "code": "lievelingsdier"
-                "feedback": "Dat is niet de naam van de variabele."
+                feedback: "Dat is niet de naam van de variabele."
             -   "code": "dier"
-                "feedback": "Knap hoor !"
+                feedback: "Knap hoor !"
             -   "code": "{if}"
-                "feedback": "Er staat al {if}"
+                feedback: "Er staat al {if}"
             -   "code": "{print}"
-                "feedback": "Nee, dat is hem niet.."
+                feedback: "Nee, dat is hem niet.."
             correct_answer: "B"
             hint: "Wat is de naam van de variabele ?"
             question_score: '10'
@@ -837,14 +837,14 @@ levels:
                 monsters {is} vampier, weerwolf, reuzespin
                 {if} deur {is} 2 {print} 'Joepie ! Je ontsnapt !' {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
             mp_choice_options:
-            -   "option_text": "1"
-                "feedback": "Helaas... Jij wordt opgepeuzeld..."
-            -   "option_text": "2"
-                "feedback": "Super ! Ontsnapt !"
-            -   "option_text": "3"
-                "feedback": "Helaas... Jij wordt opgepeuzeld..."
-            -   "option_text": "Het is een valstrik, je wordt altijd opgegeten !"
-                "feedback": "Gelukkig niet !"
+            -   answer_option: "1"
+                feedback: "Helaas... Jij wordt opgepeuzeld..."
+            -   answer_option: "2"
+                feedback: "Super ! Ontsnapt !"
+            -   answer_option: "3"
+                feedback: "Helaas... Jij wordt opgepeuzeld..."
+            -   answer_option: "Het is een valstrik, je wordt altijd opgegeten !"
+                feedback: "Gelukkig niet !"
             correct_answer: "B"
             hint: "Bij een van de deuren kom je geen monsters tegen..."
             question_score: '10'
@@ -857,14 +857,14 @@ levels:
                 monsters {is} vampier, weerwolf, reuzespin
                 {if} deur {is} 2 {print} 'Joepie ! je ontsnapt !' {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
             mp_choice_options:
-            -   "option_text": "Hedy kiest steeds een {random} monster dat je opeet."
-                "feedback": "Geweldig !"
-            -   "option_text": "vampier"
-                "feedback": "Niet altijd..."
-            -   "option_text": "weerwolf"
-                "feedback": "Niet altijd..."
-            -   "option_text": "reuzespin"
-                "feedback": "Niet altijd..."
+            -   answer_option: "Hedy kiest steeds een {random} monster dat je opeet."
+                feedback: "Geweldig !"
+            -   answer_option: "vampier"
+                feedback: "Niet altijd..."
+            -   answer_option: "weerwolf"
+                feedback: "Niet altijd..."
+            -   answer_option: "reuzespin"
+                feedback: "Niet altijd..."
             correct_answer: "A"
             hint: "kijk goed naar de laatste drie woorden: monsters at random"
             question_score: '10'
@@ -874,14 +874,14 @@ levels:
             question_text: "Wat {print} Hedy bij deze code ?"
             code: "{print} 2*10"
             mp_choice_options:
-            -   "option_text": "20"
-                "feedback": "Correct !"
-            -   "option_text": "12"
-                "feedback": "Helaas, plus doe je met +"
-            -   "option_text": "2*10"
-                "feedback": "Helaas, Hedy rekent de som uit..."
-            -   "option_text": "210"
-                "feedback": "Let op ! Het is een som."
+            -   answer_option: "20"
+                feedback: "Correct !"
+            -   answer_option: "12"
+                feedback: "Helaas, plus doe je met +"
+            -   answer_option: "2*10"
+                feedback: "Helaas, Hedy rekent de som uit..."
+            -   answer_option: "210"
+                feedback: "Let op ! Het is een som."
             correct_answer: "A"
             hint: "Het * gebruik je als keerteken"
             question_score: '5'
@@ -889,14 +889,14 @@ levels:
             question_text: "Welk teken gebruik je voor plussommen ?"
             code: "..."
             mp_choice_options:
-            -   "option_text": "-"
-                "feedback": "Helaas"
-            -   "option_text": "plus"
-                "feedback": "Helaas"
-            -   "option_text": "*"
-                "feedback": "Helaas"
-            -   "option_text": "+"
-                "feedback": "Juist !"
+            -   answer_option: "-"
+                feedback: "Helaas"
+            -   answer_option: "plus"
+                feedback: "Helaas"
+            -   answer_option: "*"
+                feedback: "Helaas"
+            -   answer_option: "+"
+                feedback: "Juist !"
             correct_answer: "D"
             hint: "Het is het teken dat je gewoonlijk ook voor plus gebruikt"
             question_score: '10'
@@ -904,14 +904,14 @@ levels:
             question_text: "Wat {print} Hedy bij deze code ?"
             code: "{print} '3*10'"
             mp_choice_options:
-            -   "option_text": "30"
-                "feedback": "Helaas, dit antwoord zou goed zijn als er geen aanhalingstekens stonden.."
-            -   "option_text": "13"
-                "feedback": "Helaas, probeer het nog eens..."
-            -   "option_text": "3*10"
-                "feedback": "Correct ! Er staan aanhalingstekens omheen, dus Hedy {print} letterlijk wat er staat"
-            -   "option_text": "Niks, Hedy geeft een error."
-                "feedback": "Nee hoor, Hedy {print} gewoon letterlijk wat er staat."
+            -   answer_option: "30"
+                feedback: "Helaas, dit antwoord zou goed zijn als er geen aanhalingstekens stonden.."
+            -   answer_option: "13"
+                feedback: "Helaas, probeer het nog eens..."
+            -   answer_option: "3*10"
+                feedback: "Correct ! Er staan aanhalingstekens omheen, dus Hedy {print} letterlijk wat er staat"
+            -   answer_option: "Niks, Hedy geeft een error."
+                feedback: "Nee hoor, Hedy {print} gewoon letterlijk wat er staat."
             correct_answer: "C"
             hint: "Let op de aanhalingstekens"
             question_score: '5'
@@ -923,14 +923,14 @@ levels:
                 geluksgetal {is} naam * leeftijd
                 {print} 'Jouw geluksgetal is...' geluksgetal
             mp_choice_options:
-            -   "option_text": "30"
-                "feedback": "Let op, Hedy {print} ook 'Jouw geluksgetal is...'"
-            -   "option_text": "10"
-                "feedback": "Helaas ! Kijk nog eens goed."
-            -   "option_text": "Jouw geluksgetal is... 30"
-                "feedback": "Juist !"
-            -   "option_text": "Jouw geluksgetal is... 10"
-                "feedback": "Helaas ! Geluksgetal is naam * leeftijd, dus 3 * 10..."
+            -   answer_option: "30"
+                feedback: "Let op, Hedy {print} ook 'Jouw geluksgetal is...'"
+            -   answer_option: "10"
+                feedback: "Helaas ! Kijk nog eens goed."
+            -   answer_option: "Jouw geluksgetal is... 30"
+                feedback: "Juist !"
+            -   answer_option: "Jouw geluksgetal is... 10"
+                feedback: "Helaas ! Geluksgetal is naam * leeftijd, dus 3 * 10..."
             correct_answer: "C"
             hint: "Kim heeft 3 letters en is 10 jaar oud, dus haar geluksgetal = 3*10 = 30."
             question_score: '10'
@@ -942,14 +942,14 @@ levels:
                 prijs {is} mensen * 10
                 {print} 'Dat wordt dan ' prijs 'euro alstublieft'
             mp_choice_options:
-            -   "option_text": "5"
-                "feedback": "Helaas, 5 mensen betalen wel meer."
-            -   "option_text": "10"
-                "feedback": "Helaas. Het is 10 euro per persoon."
-            -   "option_text": "15"
-                "feedback": "Helaas. Het sterretje betekent keer."
-            -   "option_text": "50"
-                "feedback": "Goedzo !"
+            -   answer_option: "5"
+                feedback: "Helaas, 5 mensen betalen wel meer."
+            -   answer_option: "10"
+                feedback: "Helaas. Het is 10 euro per persoon."
+            -   answer_option: "15"
+                feedback: "Helaas. Het sterretje betekent keer."
+            -   answer_option: "50"
+                feedback: "Goedzo !"
             correct_answer: "D"
             hint: "prijs is mensen keer 10"
             question_score: '10'
@@ -962,14 +962,14 @@ levels:
                 {if} eten {is} hamburger prijs {is} 15
                 {if} eten {is} friet prijs {is} 6
             mp_choice_options:
-            -   "option_text": "15 euro"
-                "feedback": "Super !"
-            -   "option_text": "6 euro"
-                "feedback": "De friet is 6 euro."
-            -   "option_text": "0 euro"
-                "feedback": "De hamburger is niet gratis !"
-            -   "option_text": "21 euro"
-                "feedback": "De hamburger is goedkoper !"
+            -   answer_option: "15 euro"
+                feedback: "Super !"
+            -   answer_option: "6 euro"
+                feedback: "De friet is 6 euro."
+            -   answer_option: "0 euro"
+                feedback: "De hamburger is niet gratis !"
+            -   answer_option: "21 euro"
+                feedback: "De hamburger is goedkoper !"
             correct_answer: "A"
             hint: "Kijk goed op regel 4."
             question_score: '10'
@@ -986,14 +986,14 @@ levels:
                 {if} drinken {is} water prijs {is} prijs + 1
                 {print} prijs ' euro alstublieft'
             mp_choice_options:
-            -   "option_text": "Er had net zo goed 'prijs {is} 3' kunnen staan."
-                "feedback": "Nee, dat is niet waar ! Het is belangrijk dat de prijs 3 meer wordt."
-            -   "option_text": "Omdat Hedy 'prijs {is} 3' niet begrijpt."
-                "feedback": "Hedy begrijpt het wel, maar het betekent wat anders."
-            -   "option_text": "Omdat Hedy anders de prijs van het eten anders vergeet. De totaalprijs zou dan dus maar 3 euro worden."
-                "feedback": "Klopt !"
-            -   "option_text": "Omdat de prijs in het begin 0 is."
-                "feedback": "De prijs is inderdaad 0 in het begin, maar dat is niet de reden."
+            -   answer_option: "Er had net zo goed 'prijs {is} 3' kunnen staan."
+                feedback: "Nee, dat is niet waar ! Het is belangrijk dat de prijs 3 meer wordt."
+            -   answer_option: "Omdat Hedy 'prijs {is} 3' niet begrijpt."
+                feedback: "Hedy begrijpt het wel, maar het betekent wat anders."
+            -   answer_option: "Omdat Hedy anders de prijs van het eten anders vergeet. De totaalprijs zou dan dus maar 3 euro worden."
+                feedback: "Klopt !"
+            -   answer_option: "Omdat de prijs in het begin 0 is."
+                feedback: "De prijs is inderdaad 0 in het begin, maar dat is niet de reden."
             correct_answer: "C"
             hint: "De prijs moet niet 3 zijn, maar 3 meer dan het al was..."
             question_score: '10'
@@ -1005,14 +1005,14 @@ levels:
                 {if} antwoord {is} goede antwoord {print} 'Goedzo !'
                 {else} {print} 'Helaas... Het was ' goede antwoord
             mp_choice_options:
-            -   "option_text": "Er moeten geen aanhalingstekens staan op regel 2"
-                "feedback": "Helaas, die moeten er wel staan !"
-            -   "option_text": "De variabele heet goede antwoord, maar een variabelenaam mag maar 1 woord zijn. Dus het moet goedeantwoord zijn."
-                "feedback": "Correct !"
-            -   "option_text": "De {if} en {else} moeten per se op dezelfde regel staan"
-                "feedback": "Nee, dat is niet waar."
-            -   "option_text": "De variabele antwoord mag geen antwoord heten, want de andere variabele heet al goede antwoord en dat lijkt te veel op elkaar."
-                "feedback": "Helaas. Variabelenamen mogen op elkaar lijken, zolang ze maar niet precies hetzelfde zijn."
+            -   answer_option: "Er moeten geen aanhalingstekens staan op regel 2"
+                feedback: "Helaas, die moeten er wel staan !"
+            -   answer_option: "De variabele heet goede antwoord, maar een variabelenaam mag maar 1 woord zijn. Dus het moet goedeantwoord zijn."
+                feedback: "Correct !"
+            -   answer_option: "De {if} en {else} moeten per se op dezelfde regel staan"
+                feedback: "Nee, dat is niet waar."
+            -   answer_option: "De variabele antwoord mag geen antwoord heten, want de andere variabele heet al goede antwoord en dat lijkt te veel op elkaar."
+                feedback: "Helaas. Variabelenamen mogen op elkaar lijken, zolang ze maar niet precies hetzelfde zijn."
             correct_answer: "B"
             hint: "Kijk goed naar de namen van de variabelen."
             question_score: '10'
@@ -1028,14 +1028,14 @@ levels:
                 resultaat {is} resultaat * ajax
                 {print} 'Jij bent ' resultaat 'procent slim.'
             mp_choice_options:
-            -   "option_text": "10%"
-                "feedback": "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
-            -   "option_text": "32%"
-                "feedback": "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
-            -   "option_text": "50%"
-                "feedback": "Super !"
-            -   "option_text": "100%"
-                "feedback": "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
+            -   answer_option: "10%"
+                feedback: "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
+            -   answer_option: "32%"
+                feedback: "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
+            -   answer_option: "50%"
+                feedback: "Super !"
+            -   answer_option: "100%"
+                feedback: "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
             correct_answer: "C"
             hint: "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
             question_score: '10'
@@ -1045,14 +1045,14 @@ levels:
                 naam _?_ Hedy
                 print naam 'loopt door het bos'
             mp_choice_options:
-            -   "option_text": "Op de _?_ mag je alleen is invullen"
-                "feedback": "Vanaf dit level mag je ook een = gebruiken"
-            -   "option_text": "Op de _?_ mag je = invullen, maar is werkt ook"
-                "feedback": "Prima!"
-            -   "option_text": "Op de _?_ moet je =is= invullen."
-                "feedback": "Nee, een = teken is genoeg"
-            -   "option_text": "Je mag alleen een = gebruiken bij getallen, niet bij woorden."
-                "feedback": "= kun je ook gebruiken bij woorden"
+            -   answer_option: "Op de _?_ mag je alleen is invullen"
+                feedback: "Vanaf dit level mag je ook een = gebruiken"
+            -   answer_option: "Op de _?_ mag je = invullen, maar is werkt ook"
+                feedback: "Prima!"
+            -   answer_option: "Op de _?_ moet je =is= invullen."
+                feedback: "Nee, een = teken is genoeg"
+            -   answer_option: "Je mag alleen een = gebruiken bij getallen, niet bij woorden."
+                feedback: "= kun je ook gebruiken bij woorden"
             correct_answer: "B"
             hint: "is en = mogen allebei"
             question_score: '10'
@@ -1062,14 +1062,14 @@ levels:
             question_text: "Wat is de juiste spelling van het commando herhalen ?"
             code: "..."
             mp_choice_options:
-            -   "option_text": "repaet"
-                "feedback": "fout gespeld"
-            -   "option_text": "repete"
-                "feedback": "fout gespeld"
-            -   "option_text": "repite"
-                "feedback": "fout gespeld"
-            -   "option_text": "{repeat}"
-                "feedback": "Juist"
+            -   answer_option: "repaet"
+                feedback: "fout gespeld"
+            -   answer_option: "repete"
+                feedback: "fout gespeld"
+            -   answer_option: "repite"
+                feedback: "fout gespeld"
+            -   answer_option: "{repeat}"
+                feedback: "Juist"
             correct_answer: "D"
             hint: "Je spelt: {repeat}"
             question_score: '10'
@@ -1078,13 +1078,13 @@ levels:
             code: "..."
             mp_choice_options:
             -   "code": "`"
-                "feedback": "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
+                feedback: "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
             -   "code": "'"
-                "feedback": "Juist !"
+                feedback: "Juist !"
             -   "code": "\""
-                "feedback": "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
+                feedback: "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
             -   "code": ","
-                "feedback": "Dit is een komma, je hebt een aanhalingsteken nodig."
+                feedback: "Dit is een komma, je hebt een aanhalingsteken nodig."
             correct_answer: "B"
             hint: "Je spelt: {repeat}"
             question_score: '10'
@@ -1092,14 +1092,14 @@ levels:
             question_text: "Is deze code goed of fout"
             code: "{repeat} 100 {times} 'Hoi !'"
             mp_choice_options:
-            -   "option_text": "Goed"
-                "feedback": "Nope, er mist een woord"
-            -   "option_text": "Fout, er moeten aanhalingstekens bij 100"
-                "feedback": "100 moet juist zonder aanhalingstekens"
-            -   "option_text": "Fout, het commando {times} mist"
-                "feedback": "{times} staat er wel, er mist een ander woord."
-            -   "option_text": "Fout, het commando {print} mist"
-                "feedback": "Correct"
+            -   answer_option: "Goed"
+                feedback: "Nope, er mist een woord"
+            -   answer_option: "Fout, er moeten aanhalingstekens bij 100"
+                feedback: "100 moet juist zonder aanhalingstekens"
+            -   answer_option: "Fout, het commando {times} mist"
+                feedback: "{times} staat er wel, er mist een ander woord."
+            -   answer_option: "Fout, het commando {print} mist"
+                feedback: "Correct"
             correct_answer: "D"
             hint: "Het antwoord is: repeat 100 times print 'Hoi'"
             question_score: '10'
@@ -1110,13 +1110,13 @@ levels:
                 {repeat} 7 {times} {print} 'da ba dee, da ba dee'
             mp_choice_options:
             -   "code": "I'm"
-                "feedback": "Goedzo !"
+                feedback: "Goedzo !"
             -   "code": "{print}"
-                "feedback": "{print} is goed gespeld"
+                feedback: "{print} is goed gespeld"
             -   "code": "{repeat}"
-                "feedback": "{repeat} is goed gespeld"
+                feedback: "{repeat} is goed gespeld"
             -   "code": "{times}"
-                "feedback": "{times} is goed gespeld"
+                feedback: "{times} is goed gespeld"
             correct_answer: "A"
             hint: "I'm is fout, je mag geen aanhalingstekens gebruiken voor tekst"
             question_score: '10'
@@ -1125,10 +1125,10 @@ levels:
             code: |-
                 {repeat} 100 {print} 'Hedy is gaaf !'
             mp_choice_options:
-            -   "option_text": "Goed"
-                "feedback": Nope, er mist een commando
-            -   "option_text": "Fout"
-                "feedback": Correct!
+            -   answer_option: "Goed"
+                feedback: Nope, er mist een commando
+            -   answer_option: "Fout"
+                feedback: Correct!
             correct_answer: "B"
             hint: "Bij {repeat} hoort nog een ander commando"
             question_score: '10'
@@ -1139,17 +1139,17 @@ levels:
                 {repeat} 3 {times} {print} 'Ha'
                 {print} 'Ik stond er bij en ik keek er naar'
             mp_choice_options:
-            -   "option_text": "Er missen aanhalingstekens in regel 1"
-                "feedback": "{ask} heeft geen aanhalingstekens nodig"
+            -   answer_option: "Er missen aanhalingstekens in regel 1"
+                feedback: "{ask} heeft geen aanhalingstekens nodig"
                 "code": "the wheels on the bus go\nround and round"
-            -   "option_text": "Er missen aanhalingstekens in regel 2"
-                "feedback": "een variabele heeft geen aanhalingstekens nodig"
+            -   answer_option: "Er missen aanhalingstekens in regel 2"
+                feedback: "een variabele heeft geen aanhalingstekens nodig"
                 "code": "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
-            -   "option_text": "Er missen aanhalingstekens in regel 3"
-                "feedback": "Je wil niet dat er letterlijk 'antwoorden {at} {random}' wordt geprint, dus geen aanhalingstekens hier !"
+            -   answer_option: "Er missen aanhalingstekens in regel 3"
+                feedback: "Je wil niet dat er letterlijk 'antwoorden {at} {random}' wordt geprint, dus geen aanhalingstekens hier !"
                 "code": "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
-            -   "option_text": "Niets ! Deze code is goed !"
-                "feedback": "Juist ! Alles is goed !"
+            -   answer_option: "Niets ! Deze code is goed !"
+                feedback: "Juist ! Alles is goed !"
                 "code": "the wheels on the bus go\nround and round\nround and round\nround and round"
             correct_answer: "D"
             hint: "Bekijk regel voor regel of er aanhalingstekens nodig zijn."
@@ -1167,17 +1167,17 @@ levels:
                 couplet is couplet + 1
                 print 'Dit was het ' couplet 'e couplet'
             mp_choice_options:
-            -   "option_text": "couplet is 0"
-                "feedback": "Goed gezien ! Als deze blijft staan, zul je nooit verder kunnen tellen dan twee, want je zet de variabele couplet elke keer weer op 1."
+            -   answer_option: "couplet is 0"
+                feedback: "Goed gezien ! Als deze blijft staan, zul je nooit verder kunnen tellen dan twee, want je zet de variabele couplet elke keer weer op 1."
                 "code": "We will We will\nROCK YOU!"
-            -   "option_text": "{repeat} 4 {times} print 'potje'"
-                "feedback": "Nee, dit is prima."
+            -   answer_option: "{repeat} 4 {times} print 'potje'"
+                feedback: "Nee, dit is prima."
                 "code": "We will\nWe will\nROCK YOU!"
-            -   "option_text": "couplet is couplet + 1"
-                "feedback": "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."
+            -   answer_option: "couplet is couplet + 1"
+                feedback: "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."
                 "code": "We will\nROCK YOU!\nWe will\nROCK YOU!"
-            -   "option_text": "{print} 'Door naar het ' couplet 'e couplet'"
-                "feedback": "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."
+            -   answer_option: "{print} 'Door naar het ' couplet 'e couplet'"
+                feedback: "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."
                 "code": "We will\nROCK YOU!"
             correct_answer: "A"
             hint: "De variabele couplet moet blijven doortellen, dat lukt niet als hij steeds op 1 wordt gezet."
@@ -1188,13 +1188,13 @@ levels:
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
             mp_choice_options:
             -   "code": "print 'Here comes the sun'\nprint 'Do do do do'\nprint 'Here comes the sun'\nprint 'And I say'\nprint 'Its alright'"
-                "feedback": "Perfect, je kan het repeat commando hiet niet gebruiken."
+                feedback: "Perfect, je kan het repeat commando hiet niet gebruiken."
             -   "code": "repeat 2 times print 'Here comes the sun'\nprint 'And I say'\nprint 'Its alright'"
-                "feedback": "Waar is de 'Do do do do' gebleven?"
+                feedback: "Waar is de 'Do do do do' gebleven?"
             -   "code": "repeat 2 times print 'Here comes the sun'\nprint 'Do do do do'\nprint 'And I say'\nprint 'Its alright'"
-                "feedback": "Dit is niet de juiste volgorde.."
+                feedback: "Dit is niet de juiste volgorde.."
             -   "code": "repeat 2 times print 'Here comes the sun'\nrepeat 2 times print 'Do do'\nprint 'And I say'\nprint 'Its alright'"
-                "feedback": "Dit is niet de juiste volgorde.."
+                feedback: "Dit is niet de juiste volgorde.."
             hint: "Repeat kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren."
             correct_answer: "A"
             question_score: '10'
@@ -1203,13 +1203,13 @@ levels:
             code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp !\nHelp !\nHelp !\nPlease help me !"
             mp_choice_options:
             -   "code": "print 'Batman was flying through Gotham. '\nprint 'When suddenly he heard someone screaming...'\nprint 'Help !'\nrepeat 3 times print 'Please help me !'"
-                "feedback": "You repeated the wrong line"
+                feedback: "You repeated the wrong line"
             -   "code": "print 'Batman was flying through Gotham.' \nprint 'When suddenly he heard someone screaming...'\nrepeat 3 times 'Help !'\nprint 'Please help me !'\n"
-                "feedback": "You missed the word print in line 3"
+                feedback: "You missed the word print in line 3"
             -   "code": "print Batman was flying through Gotham.\nprint When suddenly he heard someone screaming...\nrepeat 3 times print Help !\nprint Please help me !"
-                "feedback": "You forgot about the quotation marks"
+                feedback: "You forgot about the quotation marks"
             -   "code": "print 'Batman was flying through Gotham.' \nprint 'When suddenly he heard someone screaming...'\nrepeat 3 times print 'Help !'\nprint 'Please help me !'"
-                "feedback": "Perfect"
+                feedback: "Perfect"
             question_score: '10'
             hint: "'Help !' wordt 3x herhaald."
             correct_answer: "D"
@@ -1218,13 +1218,13 @@ levels:
             code: "hoi is 'hallo allemaal ik ben Hedy' \nrepeat 3 times print hoi"
             mp_choice_options:
             -   "code": "hoi \nhoi \nhoi"
-                "feedback": "'hoi' is een variabele"
+                feedback: "'hoi' is een variabele"
             -   "code": "hallo allemaal ik ben Hedy"
-                "feedback": "de code wordt herhaald"
+                feedback: "de code wordt herhaald"
             -   "code": "hallo allemaal ik ben Hedy \nhallo allemaal ik ben Hedy \nhallo allemaal ik ben Hedy"
-                "feedback": "Correct!"
+                feedback: "Correct!"
             -   "code": "hoi allemaal ik ben Hedy \nhoi allemaal ik ben Hedy \nhoi allemaal ik ben Hedy"
-                "feedback": "hoi wordt niet geprint."
+                feedback: "hoi wordt niet geprint."
             correct_answer: C
             question_score: '10'
             hint: Let op wat er wordt herhaald.
@@ -1236,14 +1236,14 @@ levels:
                     {print} 'Hallo'
                     {print} 'Ik ben Hedy !'
             mp_choice_options:
-            -   "option_text": "Hallo \n Ik ben Hedy"
-                "feedback": "Helaas. Alles wordt 2x herhaald."
-            -   "option_text": "Hallo \n Hallo \n Ik ben Hedy"
-                "feedback": "Helaas. Ook de tweede zin wordt 2x herhaald."
-            -   "option_text": "Hallo \n ik ben Hedy \n Hallo \n Ik ben Hedy"
-                "feedback": "Super !\""
-            -   "option_text": "Hallo \n Ik ben Hedy \n Ik ben Hedy"
-                "feedback": "Helaas. Beide zinnen worden 2x herhaald"
+            -   answer_option: "Hallo \n Ik ben Hedy"
+                feedback: "Helaas. Alles wordt 2x herhaald."
+            -   answer_option: "Hallo \n Hallo \n Ik ben Hedy"
+                feedback: "Helaas. Ook de tweede zin wordt 2x herhaald."
+            -   answer_option: "Hallo \n ik ben Hedy \n Hallo \n Ik ben Hedy"
+                feedback: "Super !\""
+            -   answer_option: "Hallo \n Ik ben Hedy \n Ik ben Hedy"
+                feedback: "Helaas. Beide zinnen worden 2x herhaald"
             correct_answer: "C"
             hint: "Beide zinnen onder het {repeat} commando worden 2x herhaald."
             question_score: '10'
@@ -1253,14 +1253,14 @@ levels:
                 {repeat} 5 {times}
                 {print} 'Hedy is gaaf !'
             mp_choice_options:
-            -   "option_text": "De twee regels moeten samen op dezelfde regel staan"
-                "feedback": "Helaas. In level 8 moet het wel op twee regels."
-            -   "option_text": "Het woord {print} moet weg, dat is niet nodig"
-                "feedback": "Helaas. Het {print} commando is wel nodig."
-            -   "option_text": "{repeat} is fout gespeld, het moet repeet zijn."
-                "feedback": "Nee, {repeat} is de goede spelling"
-            -   "option_text": "De tweede regel moet inspringen met 4 spaties."
-                "feedback": "Juist !"
+            -   answer_option: "De twee regels moeten samen op dezelfde regel staan"
+                feedback: "Helaas. In level 8 moet het wel op twee regels."
+            -   answer_option: "Het woord {print} moet weg, dat is niet nodig"
+                feedback: "Helaas. Het {print} commando is wel nodig."
+            -   answer_option: "{repeat} is fout gespeld, het moet repeet zijn."
+                feedback: "Nee, {repeat} is de goede spelling"
+            -   answer_option: "De tweede regel moet inspringen met 4 spaties."
+                feedback: "Juist !"
             correct_answer: "D"
             hint: "Kijk goed naar het begin van zin 2, wat mist er ?"
             question_score: '10'
@@ -1271,14 +1271,14 @@ levels:
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
-            -   "option_text": "Baby shark tututudutudu \n Baby shark"
-                "feedback": "Helaas. Let op het {repeat} commando !"
-            -   "option_text": "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
-                "feedback": "Helaas. het zinnetje 'Baby shark' sprint niet in, en wordt dus niet herhaald."
-            -   "option_text": "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
-                "feedback": "Juist !"
-            -   "option_text": "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
-                "feedback": "Helaas, kijk goed naar wat er wel en niet herhaald wordt."
+            -   answer_option: "Baby shark tututudutudu \n Baby shark"
+                feedback: "Helaas. Let op het {repeat} commando !"
+            -   answer_option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+                feedback: "Helaas. het zinnetje 'Baby shark' sprint niet in, en wordt dus niet herhaald."
+            -   answer_option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+                feedback: "Juist !"
+            -   answer_option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+                feedback: "Helaas, kijk goed naar wat er wel en niet herhaald wordt."
             correct_answer: "C"
             hint: "Regel 2 springt in en wordt dus drie keer herhaald. Daarna komt regel 3 pas, die niet inspringt en dus ook niet herhaald wordt."
             question_score: '10'
@@ -1290,14 +1290,14 @@ levels:
                     {print} 'Hoera !'
                     {print} 'We gaan op vakantie !'
             mp_choice_options:
-            -   "option_text": "De kinderen riepen: \n Hoera ! \n We gaan op vakantie !"
-                "feedback": "Helaas. Let op het {repeat} commando !"
-            -   "option_text": "De kinderen riepen: \n Hoera ! \n We gaan op vakantie ! \n Hoera ! \n We gaan op vakantie !"
-                "feedback": "Correct !"
-            -   "option_text": "De kinderen riepen: \n Hoera ! \n Hoera ! \n We gaan op vakantie ! \n We gaan op vakantie"
-                "feedback": "Helaas. Deze volgorde klopt niet."
-            -   "option_text": "De kinderen riepen: \n Hoera ! \n Hoera ! \n We gaan op vakantie !"
-                "feedback": "Helaas. Ook de laatste zin wordt 2x herhaald."
+            -   answer_option: "De kinderen riepen: \n Hoera ! \n We gaan op vakantie !"
+                feedback: "Helaas. Let op het {repeat} commando !"
+            -   answer_option: "De kinderen riepen: \n Hoera ! \n We gaan op vakantie ! \n Hoera ! \n We gaan op vakantie !"
+                feedback: "Correct !"
+            -   answer_option: "De kinderen riepen: \n Hoera ! \n Hoera ! \n We gaan op vakantie ! \n We gaan op vakantie"
+                feedback: "Helaas. Deze volgorde klopt niet."
+            -   answer_option: "De kinderen riepen: \n Hoera ! \n Hoera ! \n We gaan op vakantie !"
+                feedback: "Helaas. Ook de laatste zin wordt 2x herhaald."
             correct_answer: "B"
             hint: "Het blokje onder het {repeat} commando wordt 2x herhaald."
             question_score: '10'
@@ -1308,14 +1308,14 @@ levels:
                 {if} einde {is} goed {print} 'en ze leefden nog lang en gelukkig'
                 {if} einde {is} slecht {print} 'En toen ontplofte de wereld. Einde'
             mp_choice_options:
-            -   "option_text": "De {print} commando's van de laatste twee regels moeten op een nieuwe regel beginnen en inspringen met 4 spaties."
-                "feedback": "Dat klopt !"
-            -   "option_text": "Je mag niet 2x een {if} hebben na een vraag !"
-                "feedback": "Dat mag wel !"
-            -   "option_text": "De laatste twee regels moeten beginnen met 4 spaties, omdat ze met {if} beginnen."
-                "feedback": "Helaas. Er is inderdaad wat mis met het inspringen, maar niet daar..."
-            -   "option_text": "{ask} is geen commando meer in level 8"
-                "feedback": "helaas, {ask} blijft een commando in level 8."
+            -   answer_option: "De {print} commando's van de laatste twee regels moeten op een nieuwe regel beginnen en inspringen met 4 spaties."
+                feedback: "Dat klopt !"
+            -   answer_option: "Je mag niet 2x een {if} hebben na een vraag !"
+                feedback: "Dat mag wel !"
+            -   answer_option: "De laatste twee regels moeten beginnen met 4 spaties, omdat ze met {if} beginnen."
+                feedback: "Helaas. Er is inderdaad wat mis met het inspringen, maar niet daar..."
+            -   answer_option: "{ask} is geen commando meer in level 8"
+                feedback: "helaas, {ask} blijft een commando in level 8."
             correct_answer: "A"
             hint: "Er is iets mis met het inspringen..."
             question_score: '10'
@@ -1330,25 +1330,25 @@ levels:
                     {print} 'Welkom bij restaurant Hedy'
                     eten {is} {ask} 'Wat wilt u bestellen ?'
                     {print} eten
-                "feedback": "Hier zit geen herhaling in, er zijn twee bestellingen."
+                feedback: "Hier zit geen herhaling in, er zijn twee bestellingen."
             -   "code": |-
                     {repeat} 2 {times}
                         {print} 'Welkom bij restaurant Hedy'
                         eten {is} {ask} 'Wat wilt u bestellen ?'
                         {print} eten
-                "feedback": "Bijna, maar nu herhaalt Hedy ook 'Welkom bij restaurant Hedy' 2x"
+                feedback: "Bijna, maar nu herhaalt Hedy ook 'Welkom bij restaurant Hedy' 2x"
             -   "code": |-
                     {print} 'Welkom bij restaurant Hedy'
                     {repeat} 2 {times}
                         eten {is} {ask} 'Wat wilt u bestellen ?'
                     {print} eten
-                "feedback": "De code is bijna goed, maar het eten moet ook 2x geprint worden."
+                feedback: "De code is bijna goed, maar het eten moet ook 2x geprint worden."
             -   "code": |-
                     {print} 'Welkom bij restaurant Hedy'
                     {repeat} 2 {times}
                         eten {is} {ask} 'Wat wilt u bestellen ?'
                         {print} eten
-                "feedback": "Goed gezien !"
+                feedback: "Goed gezien !"
             correct_answer: "D"
             hint: "Let goed op, de welkomstzin wordt niet herhaald, maar de bestelling wel."
             question_score: '10'
@@ -1365,14 +1365,14 @@ levels:
                        print 'Een pizza met ' topping
                 print 'Bedankt voor uw bestelling'
             mp_choice_options:
-            -   "option_text": "Niks ! De code klopt !"
-                "feedback": "Correct ! Dit is een goede code."
-            -   "option_text": "Je kunt geen {if} commando gebruiken, als je al een repeat hebt gebruikt."
-                "feedback": "Dat mag wel."
-            -   "option_text": "Onder het {if} commando hoef je niet meer in te springen als je dat al hebt gedaan voor het {repeat} commando."
-                "feedback": "Je moet altijd inspringen na een {if} commando."
-            -   "option_text": "Als je patat bestelt, vraagt Hedy nog steeds wat je op je pizza wilt, omdat er niet goed is ingesprongen."
-                "feedback": "Het inspringen is wel goed gedaan."
+            -   answer_option: "Niks ! De code klopt !"
+                feedback: "Correct ! Dit is een goede code."
+            -   answer_option: "Je kunt geen {if} commando gebruiken, als je al een repeat hebt gebruikt."
+                feedback: "Dat mag wel."
+            -   answer_option: "Onder het {if} commando hoef je niet meer in te springen als je dat al hebt gedaan voor het {repeat} commando."
+                feedback: "Je moet altijd inspringen na een {if} commando."
+            -   answer_option: "Als je patat bestelt, vraagt Hedy nog steeds wat je op je pizza wilt, omdat er niet goed is ingesprongen."
+                feedback: "Het inspringen is wel goed gedaan."
             correct_answer: "A"
             hint: "Het inspringen klopt overal."
             question_score: '10'
@@ -1388,14 +1388,14 @@ levels:
                 {else}
                     {print} 'De computer ontploft in 5... 4... 3... 2... 1...'
             mp_choice_options:
-            -   "option_text": "Goed gedaan ! \n Goed gedaan !"
-                "feedback": "Niets !"
-            -   "option_text": "De computer ontploft in 5... 4... 3... 2... 1..."
-                "feedback": "Niets !"
-            -   "option_text": "Goed gedaan ! \n Goed gedaan ! \n Je mag computeren"
-                "feedback": "Niets !"
-            -   "option_text": "Goed gedaan ! \n Je mag computeren ! \n Goed gedaan ! \n Je mag computeren"
-                "feedback": "Correct !"
+            -   answer_option: "Goed gedaan ! \n Goed gedaan !"
+                feedback: "Niets !"
+            -   answer_option: "De computer ontploft in 5... 4... 3... 2... 1..."
+                feedback: "Niets !"
+            -   answer_option: "Goed gedaan ! \n Goed gedaan ! \n Je mag computeren"
+                feedback: "Niets !"
+            -   answer_option: "Goed gedaan ! \n Je mag computeren ! \n Goed gedaan ! \n Je mag computeren"
+                feedback: "Correct !"
             correct_answer: "D"
             hint: "Alles onder de {repeat} wordt 2 keer herhaald"
             question_score: '10'
@@ -1417,14 +1417,14 @@ levels:
                          {if} actie {is} openen
                              {print} 'Je maakt de koffer open en wint een miljoen !'
             mp_choice_options:
-            -   "option_text": "koffer 1, verkopen"
-                "feedback": "Helaas, geen miljoen voor jou..."
-            -   "option_text": "koffer 1, openen"
-                "feedback": "Helaas, geen miljoen voor jou..."
-            -   "option_text": "koffer 2, verkopen"
-                "feedback": "Helaas, geen miljoen voor jou..."
-            -   "option_text": "koffer 2, openen"
-                "feedback": "Geweldig ! Je wint het miljoen !"
+            -   answer_option: "koffer 1, verkopen"
+                feedback: "Helaas, geen miljoen voor jou..."
+            -   answer_option: "koffer 1, openen"
+                feedback: "Helaas, geen miljoen voor jou..."
+            -   answer_option: "koffer 2, verkopen"
+                feedback: "Helaas, geen miljoen voor jou..."
+            -   answer_option: "koffer 2, openen"
+                feedback: "Geweldig ! Je wint het miljoen !"
             correct_answer: "D"
             hint: ""
             question_score: '10'
@@ -1441,14 +1441,14 @@ levels:
                 {else}
                     {print} 'Helaas, ik zoek weer verder'
             mp_choice_options:
-            -   "option_text": "Doornroosje met schoenmaat 38 krijgt de uitvoer: 'Helaas, ik zoek weer verder.'"
-                "feedback": "Nee, ze krijgt 'Naar jou zoek ik niet'"
-            -   "option_text": "Assepoester met schoenmaat 40 krijgt de uitvoer: 'Naar jou was ik op zoek !'"
-                "feedback": "Nee, ze krijgt 'Helaas, ik zoek weer verder'"
-            -   "option_text": "Doornroosje met schoenmaat 40 krijgt de uitvoer: 'Helaas, ik zoek weer verder'"
-                "feedback": "Dat klopt !"
-            -   "option_text": "Assepoester met schoenmaat 40 krijgt de uitvoer: 'Naar jou was ik op zoek !'"
-                "feedback": "Nee, ze krijgt 'Helaas, ik zoek weer verder'"
+            -   answer_option: "Doornroosje met schoenmaat 38 krijgt de uitvoer: 'Helaas, ik zoek weer verder.'"
+                feedback: "Nee, ze krijgt 'Naar jou zoek ik niet'"
+            -   answer_option: "Assepoester met schoenmaat 40 krijgt de uitvoer: 'Naar jou was ik op zoek !'"
+                feedback: "Nee, ze krijgt 'Helaas, ik zoek weer verder'"
+            -   answer_option: "Doornroosje met schoenmaat 40 krijgt de uitvoer: 'Helaas, ik zoek weer verder'"
+                feedback: "Dat klopt !"
+            -   answer_option: "Assepoester met schoenmaat 40 krijgt de uitvoer: 'Naar jou was ik op zoek !'"
+                feedback: "Nee, ze krijgt 'Helaas, ik zoek weer verder'"
             correct_answer: "C"
             hint: "Als je niet schoenmaat 38 hebt, krijg je 'Helaas, ik zoek weer verder' ongeacht je naam."
             question_score: '10'
@@ -1461,13 +1461,13 @@ levels:
                     {print} i
             mp_choice_options:
             -   "code": "1\n2\n3"
-                "feedback": "Inderdaad"
+                feedback: "Inderdaad"
             -   "code": "1 2 3"
-                "feedback": "Helaas"
+                feedback: "Helaas"
             -   "code": "1, 2, 3"
-                "feedback": "Helaas"
+                feedback: "Helaas"
             -   "code": "123"
-                "feedback": "Helaas"
+                feedback: "Helaas"
             correct_answer: "A"
             hint: "Hoe komen de nummers in beeld ?"
             question_score: '10'
@@ -1481,13 +1481,13 @@ levels:
                 Hoedje van papier
             mp_choice_options:
             -   "code": "{for} i {in} {range} 1 {to} 4\n    {print} i\n{print} 'Hoedje van papier'"
-                "feedback": "Perfect !"
+                feedback: "Perfect !"
             -   "code": "{for} i {in} {range} 1 {to} 4\n{print} i\n{print} 'Hoedje van papier'"
-                "feedback": "Deze code werkt niet. Je moet inspringen na een {for}."
+                feedback: "Deze code werkt niet. Je moet inspringen na een {for}."
             -   "code": "{for} i {in} {range} 1 {to} 4\n    {print} i\n    {print} 'Hoedje van papier'"
-                "feedback": "Nu telt Hedy '1 Hoedje van papier, 2 Hoedje van papier etc."
+                feedback: "Nu telt Hedy '1 Hoedje van papier, 2 Hoedje van papier etc."
             -   "code": "{for} i {in} {range} 1 {to} 4\n    {print} 'i'\n{print} 'Hoedje van papier'"
-                "feedback": "i is een variabele en moet geen aanhalingstekens."
+                feedback: "i is een variabele en moet geen aanhalingstekens."
             correct_answer: "A"
             hint: "Eerst komen alle cijfers en dan pas het zinnetje"
             question_score: '10'
@@ -1507,13 +1507,13 @@ levels:
                 0
             mp_choice_options:
             -   "code": "{for} i {in} {range} 0 {to} 10\n    {print} i"
-                "feedback": "Nu {print} Hedy de getallen van 0 tot 10 en niet van 10 naar 0"
+                feedback: "Nu {print} Hedy de getallen van 0 tot 10 en niet van 10 naar 0"
             -   "code": "{for} i {in} {range} 0 {to} 10\n    {print} - i"
-                "feedback": "Dit klopt niet, dan zou Hedy mingetallen printen."
+                feedback: "Dit klopt niet, dan zou Hedy mingetallen printen."
             -   "code": "{for} i {in} {range} 10 {to} 0\n    {print} i"
-                "feedback": "Dit kan helaas niet."
+                feedback: "Dit kan helaas niet."
             -   "code": "{for} i {in} {range} 0 {to} 10\n    {print} 10 - i"
-                "feedback": "Juist !"
+                feedback: "Juist !"
             correct_answer: "D"
             hint: "Het wordt een sommetje..."
             question_score: '10'
@@ -1523,14 +1523,14 @@ levels:
                 {for} i {in} {range} 1 {to} 5
                 {print} i
             mp_choice_options:
-            -   "option_text": "De i op regel 2 moet binnen aanhalingstekens"
-                "feedback": "De variabele hoeft niet binnen aanhalingstekens."
-            -   "option_text": "Je mag alleen '{for} i {in} {range} 1 {to} 10' gebruiken, niet 1 to 5"
-                "feedback": "1 to 5 mag ook !"
-            -   "option_text": "De eerste regel moet beginnen met een inspringing"
-                "feedback": "Niet de eerste regel.."
-            -   "option_text": "De tweede regel moet beginnen met een inspringing"
-                "feedback": "Klopt !"
+            -   answer_option: "De i op regel 2 moet binnen aanhalingstekens"
+                feedback: "De variabele hoeft niet binnen aanhalingstekens."
+            -   answer_option: "Je mag alleen '{for} i {in} {range} 1 {to} 10' gebruiken, niet 1 to 5"
+                feedback: "1 to 5 mag ook !"
+            -   answer_option: "De eerste regel moet beginnen met een inspringing"
+                feedback: "Niet de eerste regel.."
+            -   answer_option: "De tweede regel moet beginnen met een inspringing"
+                feedback: "Klopt !"
             correct_answer: "D"
             hint: "Er is iets mis met het inspringen"
             question_score: '10'
@@ -1541,13 +1541,13 @@ levels:
                     {print} i
             mp_choice_options:
             -   "code": "rang"
-                "feedback": "Nee, helaas"
+                feedback: "Nee, helaas"
             -   "code": "{range}"
-                "feedback": "Correct"
+                feedback: "Correct"
             -   "code": "ragne"
-                "feedback": "Nee, helaas"
+                feedback: "Nee, helaas"
             -   "code": "ranch"
-                "feedback": "Nee, helaas"
+                feedback: "Nee, helaas"
             correct_answer: "B"
             hint: "Wat is de juiste spelling ?"
             question_score: '10'
@@ -1557,14 +1557,14 @@ levels:
                 {for} i {in} {range} 0 {to} 2
                     {print} 'Hallo'
             mp_choice_options:
-            -   "option_text": "1 keer"
-                "feedback": "Helaas"
-            -   "option_text": "2 keer"
-                "feedback": "Helaas"
-            -   "option_text": "3 keer"
-                "feedback": "Juist !"
-            -   "option_text": "Nooit"
-                "feedback": "Helaas"
+            -   answer_option: "1 keer"
+                feedback: "Helaas"
+            -   answer_option: "2 keer"
+                feedback: "Helaas"
+            -   answer_option: "3 keer"
+                feedback: "Juist !"
+            -   answer_option: "Nooit"
+                feedback: "Helaas"
             correct_answer: "C"
             hint: "0 telt ook mee als getal. Dus 0,1,2 dat is dus 3x"
             question_score: '10'
@@ -1578,13 +1578,13 @@ levels:
                     {print} eten
             mp_choice_options:
             -   "code": "{for} i {in} {range} 0 {to} 3"
-                "feedback": "Er zijn niet altijd 3 mensen"
+                feedback: "Er zijn niet altijd 3 mensen"
             -   "code": "{for} i {in} {range} 1 tot mensen"
-                "feedback": "Bijna... Niet tot maar {to} !"
+                feedback: "Bijna... Niet tot maar {to} !"
             -   "code": "{for} i {in} {range} 1 {to} mensen"
-                "feedback": "Goed zo !"
+                feedback: "Goed zo !"
             -   "code": "{for} i {in} {range} 0 {to} mensen"
-                "feedback": "Dat is een bestelling te veel"
+                feedback: "Dat is een bestelling te veel"
             correct_answer: "C"
             hint: "Gebruik de variabele 'mensen'"
             question_score: '10'
@@ -1595,13 +1595,13 @@ levels:
                     {print} 'Hoi'
             mp_choice_options:
             -   "code": "23\n24\n25"
-                "feedback": "De nummers verschijnen niet. Er staat nergens {print} i."
+                feedback: "De nummers verschijnen niet. Er staat nergens {print} i."
             -   "code": "23 hoi 24 hoi 25 hoi"
-                "feedback": "De nummers verschijnen niet. Er staat nergens {print} i."
+                feedback: "De nummers verschijnen niet. Er staat nergens {print} i."
             -   "code": "hoi\nhoi\nhoi"
-                "feedback": "Dit klopt !"
-            -   "option_text": "Er verschijnt 25x het woord 'Hoi' onder elkaar."
-                "feedback": "Nee maar 3x"
+                feedback: "Dit klopt !"
+            -   answer_option: "Er verschijnt 25x het woord 'Hoi' onder elkaar."
+                feedback: "Nee maar 3x"
             correct_answer: "C"
             hint: "Er staat nergen print i"
             question_score: '10'
@@ -1612,14 +1612,14 @@ levels:
                 {for} i {in} {range} 1 {to} leeftijd
                     {print} 'Hieperdepiep Hoera !'
             mp_choice_options:
-            -   "option_text": "1 keer"
-                "feedback": "Probeer het opnieuw"
-            -   "option_text": "2 keer"
-                "feedback": "Probeer het opnieuw"
-            -   "option_text": "Nooit"
-                "feedback": "Probeer het opnieuw"
-            -   "option_text": "Dat ligt eraan hoe oud je bent"
-                "feedback": "Dat is waar !"
+            -   answer_option: "1 keer"
+                feedback: "Probeer het opnieuw"
+            -   answer_option: "2 keer"
+                feedback: "Probeer het opnieuw"
+            -   answer_option: "Nooit"
+                feedback: "Probeer het opnieuw"
+            -   answer_option: "Dat ligt eraan hoe oud je bent"
+                feedback: "Dat is waar !"
             correct_answer: "D"
             hint: "{for} i {in} {range} 1 {to} leeftijd"
             question_score: '10'
@@ -1632,13 +1632,13 @@ levels:
                 Baby shark
             mp_choice_options:
             -   "code": "{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    print Baby shark"
-                "feedback": "Let op inspringen."
+                feedback: "Let op inspringen."
             -   "code": "{for} i {in} {range 1 {to} 3\n    {print} Baby shark tututudutudu\nprint Baby shark"
-                "feedback": "Dat klopt !"
+                feedback: "Dat klopt !"
             -   "code": "{for} i {in} {range 0 {to} 3\n    {print} Baby shark tututudutudu\n    print Baby shark"
-                "feedback": "range 0 to 3 is 4 keer."
+                feedback: "range 0 to 3 is 4 keer."
             -   "code": "{for} i {in} {range 0 {to} 3\n    {print} Baby shark tututudutudu\nprint Baby shark"
-                "feedback": "{range} 0 {to} 3 is 4 keer."
+                feedback: "{range} 0 {to} 3 is 4 keer."
             correct_answer: "B"
             hint: "Pas op het inspringen"
             question_score: '10'
@@ -1652,13 +1652,13 @@ levels:
                     {print} compliment
             mp_choice_options:
             -   "code": "{for} each compliment"
-                "feedback": "Helaas"
+                feedback: "Helaas"
             -   "code": "{for} compliment {in} complimentjes"
-                "feedback": "Jij verdient al deze complimentjes"
+                feedback: "Jij verdient al deze complimentjes"
             -   "code": "{if} compliment {in} complimentjes"
-                "feedback": "Helaas"
+                feedback: "Helaas"
             -   "code": "{for} complimentjes {in} compliment"
-                "feedback": "Helaas !"
+                feedback: "Helaas !"
             correct_answer: "B"
             hint: "voor elk compliment in de lijst complimentjes"
             question_score: '10'
@@ -1670,16 +1670,16 @@ levels:
                     {print} 'Ik hou van ' maaltijd
             mp_choice_options:
             -   "code": "Ik hou van pizza"
-                "feedback": "Regel 2 zegt {for} maaltijd {in} maaltijden. Dus elke maaltijd in de lijst wordt geprint."
+                feedback: "Regel 2 zegt {for} maaltijd {in} maaltijden. Dus elke maaltijd in de lijst wordt geprint."
             -   "code": "Ik hou van pasta"
-                "feedback": "Regel 2 zegt {for} maaltijd {in} maaltijden. Dus elke maaltijd in de lijst wordt geprint."
+                feedback: "Regel 2 zegt {for} maaltijd {in} maaltijden. Dus elke maaltijd in de lijst wordt geprint."
             -   "code": "I hou van pannenkoek"
-                "feedback": "Regel 2 zegt {for} maaltijd {in} maaltijden. Dus elke maaltijd in de lijst wordt geprint.."
+                feedback: "Regel 2 zegt {for} maaltijd {in} maaltijden. Dus elke maaltijd in de lijst wordt geprint.."
             -   "code": |-
                       Ik hou van pizza
                       Ik hou van pasta
                       Ik hou van pannenkoek
-                "feedback": "Super !"
+                feedback: "Super !"
             correct_answer: "D"
             hint: "Regel 2 zegt {for} maaltijd {in} maaltijden. Dus elke maaltijd in de lijst wordt geprint."
             question_score: '10'
@@ -1691,17 +1691,17 @@ levels:
                     {print} dier ' zijn superleuke huisdieren'
             mp_choice_options:
             -   "code": "honden zijn superleuke huisdieren"
-                "feedback": "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
+                feedback: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
             -   "code": "honden, katten, hamsters, kippen zijn superleuke huisdieren"
-                "feedback": "Elk dier krijgt zijn eigen regeltje."
+                feedback: "Elk dier krijgt zijn eigen regeltje."
             -   "code": |-
                     honden zijn superleuke huisdieren
                     katten zijn superleuke huisdieren
                     hamsters zijn superleuke huisdieren
                     kippen zijn superleuke huisdieren
-                "feedback": "Goedzo !"
-            -   "option_text": "Dat weet je nog niet. Hedy kiest een dier at random."
-                "feedback": "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
+                feedback: "Goedzo !"
+            -   answer_option: "Dat weet je nog niet. Hedy kiest een dier at random."
+                feedback: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
             correct_answer: "C"
             hint: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
             question_score: '10'
@@ -1712,14 +1712,14 @@ levels:
                 {for} boodschap {in} boodschappen
                     {print} 'We moeten ' boodschappen ' kopen'
             mp_choice_options:
-            -   "option_text": "Regel 2 moet beginnen met 4 spaties om in te springen"
-                "feedback": "Nee hoor. Alleen regel 3 moet inspringen dus dat klopt."
-            -   "option_text": "Regel 3 moet niet beginnen met 4 spaties om in te springen"
-                "feedback": "Regel 3 moet wel inspringen, want na het {for} commando in regel 2 moet je inspringen ."
-            -   "option_text": "in regel 3 moet 'boodschap' staan in plaats van 'boodschappen'"
-                "feedback": "Toppie !"
-            -   "option_text": "In regel 1 moet boodschap staan in plaats van boodschappen."
-                "feedback": "Nee, dat hoeft niet."
+            -   answer_option: "Regel 2 moet beginnen met 4 spaties om in te springen"
+                feedback: "Nee hoor. Alleen regel 3 moet inspringen dus dat klopt."
+            -   answer_option: "Regel 3 moet niet beginnen met 4 spaties om in te springen"
+                feedback: "Regel 3 moet wel inspringen, want na het {for} commando in regel 2 moet je inspringen ."
+            -   answer_option: "in regel 3 moet 'boodschap' staan in plaats van 'boodschappen'"
+                feedback: "Toppie !"
+            -   answer_option: "In regel 1 moet boodschap staan in plaats van boodschappen."
+                feedback: "Nee, dat hoeft niet."
             correct_answer: "C"
             hint: "Kijk goed naar regel 2"
             question_score: '10'
@@ -1733,13 +1733,13 @@ levels:
                     {print} speler ' gooit ' _?_ {at} {random}
             mp_choice_options:
             -   "code": "speler"
-                "feedback": "Dan komt er te staan 'Anne gooit Ilona'. Dat is niet de bedoeling !"
+                feedback: "Dan komt er te staan 'Anne gooit Ilona'. Dat is niet de bedoeling !"
             -   "code": "keuzes"
-                "feedback": "Yes ! Dat klopt !"
+                feedback: "Yes ! Dat klopt !"
             -   "code": "keuze"
-                "feedback": "je bent er bijna.. Maar Hedy kiest uit het lijstje 'keuzes' niet 'keuze'"
+                feedback: "je bent er bijna.. Maar Hedy kiest uit het lijstje 'keuzes' niet 'keuze'"
             -   "code": "dobbelsteen"
-                "feedback": "Kijk goed naar de namen van de variabelen."
+                feedback: "Kijk goed naar de namen van de variabelen."
             correct_answer: "B"
             hint: "Hedy moet een {random} nummer kiezen"
             question_score: '10'
@@ -1753,18 +1753,18 @@ levels:
             mp_choice_options:
             -   "code": |-
                     Kelly kiest steen
-                "feedback": "Meredith wil ook meedoen !"
+                feedback: "Meredith wil ook meedoen !"
             -   "code": |-
                     Meredith kiest schaar
                     Kelly kiest steen
-                "feedback": "Je bent er bijna ! Maar Kelly staat eerst in je lijstje dus zij wordt ook eerst geprint."
+                feedback: "Je bent er bijna ! Maar Kelly staat eerst in je lijstje dus zij wordt ook eerst geprint."
             -   "code": |-
                     Meredith kiest papier
-                "feedback": "Kelly wil ook meedoen !"
+                feedback: "Kelly wil ook meedoen !"
             -   "code": |-
                     Kelly kiest papier
                     Meredith kiest schaar
-                "feedback": "Geweldig !"
+                feedback: "Geweldig !"
             correct_answer: "D"
             hint: "Elke speler kiest een optie. De speler die als eerste op het lijstje staat, wordt als eerst geprint."
             question_score: '10'
@@ -1777,13 +1777,13 @@ levels:
                     {print} naam ' eet vanavond ' food {at} {random}
             mp_choice_options:
             -   "code": "{for} naam {in} namen"
-                "feedback": "Lekker bezig !"
+                feedback: "Lekker bezig !"
             -   "code": "{for} namen {in} naam"
-                "feedback": "Het moet andersom. Dus {for} naam {in} namen."
+                feedback: "Het moet andersom. Dus {for} naam {in} namen."
             -   "code": "{for} eten {in} eten"
-                "feedback": "Elke naam moet weten wat hij/zij vanavond eet."
+                feedback: "Elke naam moet weten wat hij/zij vanavond eet."
             -   "code": "{for} naam {in} eten"
-                "feedback": "Elke naam moet weten wat hij/zij vanavond eet."
+                feedback: "Elke naam moet weten wat hij/zij vanavond eet."
             correct_answer: "A"
             hint: "Elke naam moet weten wat hij/zij vanavond eet."
             question_score: '10'
@@ -1796,13 +1796,13 @@ levels:
                     {print} _?_
             mp_choice_options:
             -   "code": "'naam krijgt een kleur shirt'"
-                "feedback": "Dat is hem niet !"
+                feedback: "Dat is hem niet !"
             -   "code": "naam 'krijgt een ' kleuren {at} {random} ' shirt'"
-                "feedback": "Goed gedaan ! Dit was een lastige"
+                feedback: "Goed gedaan ! Dit was een lastige"
             -   "code": "namen 'krijgt een ' kleuren {at} {random} ' shirt'"
-                "feedback": "Je wil dat elke naam geprint wordt, dus het eerste woord is niet 'namen' maar..."
+                feedback: "Je wil dat elke naam geprint wordt, dus het eerste woord is niet 'namen' maar..."
             -   "code": "'mensen krijgt een kleuren shirt'"
-                "feedback": "Er is geen variabele die 'mensen' heet"
+                feedback: "Er is geen variabele die 'mensen' heet"
             correct_answer: "B"
             hint: "Let op de aanhalingstekens !"
             question_score: '10'
@@ -1816,14 +1816,14 @@ levels:
                         eten = {ask} naam ', wat wil je graag als ' gang '?'
                         {print} naam ' bestelt ' eten ' als ' gang
             mp_choice_options:
-            -   "option_text": "Timon, wat wil je graag als voorgerecht ?"
-                "feedback": "Perfect !"
-            -   "option_text": "Onno, wat wil je graag als voorgerecht ?"
-                "feedback": "Timon staat eerst op het lijstje !"
-            -   "option_text": "Timon, wat wil je graag als nagerecht ?"
-                "feedback": "Voorgerechten staan eerst op het lijstje"
-            -   "option_text": "Dat weet je nog niet. Hedy kiest iets {at} {random}"
-                "feedback": "Er is geen '{at} {random}' commando in deze code."
+            -   answer_option: "Timon, wat wil je graag als voorgerecht ?"
+                feedback: "Perfect !"
+            -   answer_option: "Onno, wat wil je graag als voorgerecht ?"
+                feedback: "Timon staat eerst op het lijstje !"
+            -   answer_option: "Timon, wat wil je graag als nagerecht ?"
+                feedback: "Voorgerechten staan eerst op het lijstje"
+            -   answer_option: "Dat weet je nog niet. Hedy kiest iets {at} {random}"
+                feedback: "Er is geen '{at} {random}' commando in deze code."
             correct_answer: "A"
             hint: "Van beide lijstjes wordt de eerste optie eerst gevraagd."
             question_score: '10'
@@ -1835,14 +1835,14 @@ levels:
                 {for} prijs {in} prijzen
                     {print} 'De ' prijs 'is gewonnen door ' namen {at} {random}
             mp_choice_options:
-            -   "option_text": "Iedereen wint minstens één prijs."
-                "feedback": "Dat is niet waar. Je kunt ook zonder prijs eindigen."
-            -   "option_text": "Alle prijzen gaan altijd naar één persoon."
-                "feedback": "Dat is niet waar. Er wordt {random} gekozen wie er wint"
-            -   "option_text": "Larry wint nooit een prijs"
-                "feedback": "Dat is niet waar. Larry heeft evenveel kans als de anderen"
-            -   "option_text": "Misschien wint iemand 2 prijzen."
-                "feedback": "Jij snapt 'em !"
+            -   answer_option: "Iedereen wint minstens één prijs."
+                feedback: "Dat is niet waar. Je kunt ook zonder prijs eindigen."
+            -   answer_option: "Alle prijzen gaan altijd naar één persoon."
+                feedback: "Dat is niet waar. Er wordt {random} gekozen wie er wint"
+            -   answer_option: "Larry wint nooit een prijs"
+                feedback: "Dat is niet waar. Larry heeft evenveel kans als de anderen"
+            -   answer_option: "Misschien wint iemand 2 prijzen."
+                feedback: "Jij snapt 'em !"
             correct_answer: "D"
             hint: "Probeer mogelijke uitvoer te bedenken van de code."
             question_score: '10'
