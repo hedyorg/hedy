@@ -5,16 +5,22 @@ levels:
             code: "..."
             mp_choice_options:
             -   answer_option: "Hedy"
+                code: false
                 feedback: "Goed zo !"
             -   answer_option: "Heddy"
+                code: false
                 feedback: "Deze is het niet !"
             -   answer_option: "Haydie"
+                code: false
                 feedback: "Deze is het niet !"
             -   answer_option: "Henk"
+                code: false
                 feedback: "Deze is het niet !"
             -   answer_option: "Haydie2"
+                code: false
                 feedback: "Deze is het niet !"
             -   answer_option: "Henk2"
+                code: false
                 feedback: "Deze is het niet !"
             correct_answer: "A"
             hint: "We beginnen met een simpele vraag."
@@ -23,13 +29,17 @@ levels:
             question_text: "Welk commando moet je invullen op de streepjes om Hallo ! te laten verschijnen in je uitvoerscherm ?"
             code: "_?_ Hallo !"
             mp_choice_options:
-                -   code: "{echo}"
+                -   answer_option: "{echo}"
+                    code: true
                     feedback: "Met {echo} herhaal je een antwoord..."
-                -   code: "{print}"
+                -   answer_option: "{print}"
+                    code: true
                     feedback: "Goed ! Met {print} kun je tekst printen !"
-                -   code: "hello"
+                -   answer_option: "hello"
+                    code: true
                     feedback: "Hello is geen commando, probeer het nog eens..."
-                -   code: "{ask}"
+                -   answer_option: "{ask}"
+                    code: true
                     feedback: "Met {ask} kun je een vraag stellen..."
             correct_answer: "B"
             hint: "_?_ Hallo wereld !"
@@ -38,13 +48,17 @@ levels:
             question_text: "Hoe vraag je: Wat is je lievelingskleur ?"
             code: "..."
             mp_choice_options:
-                -   code: "{print} Wat is je lievelingskleur ?"
+                -   answer_option: "{print} Wat is je lievelingskleur ?"
+                    code: true
                     feedback: "Met {print} print je iets"
-                -   code: "{ask} {print} Wat is je lievelingskleur ?"
+                -   answer_option: "{ask} {print} Wat is je lievelingskleur ?"
+                    code: true
                     feedback: "{ask} en {print} is dubbelop, je hebt maar één commando nodig."
-                -   code: "{ask} Wat is je lievelingskleur ?"
+                -   answer_option: "{ask} Wat is je lievelingskleur ?"
+                    code: true
                     feedback: "Goed zo !"
-                -   code: "{echo} Wat is je lievelingskleur ?"
+                -   answer_option: "{echo} Wat is je lievelingskleur ?"
+                    code: true
                     feedback: "{echo} herhaalt het antwoord."
             correct_answer: "C"
             hint: "Het Engelse woord voor vragen is {ask}"
@@ -57,12 +71,16 @@ levels:
                 {echo} Hoi...
             mp_choice_options:
                 -   answer_option: "{print} in regel 1 mist."
+                    code: false
                     feedback: "Goedzo !"
                 -   answer_option: "{ask} in regel 2 is fout gespeld, het moet aks zijn."
+                    code: false
                     feedback: "{ask} is goed gespeld."
                 -   answer_option: "{echo} is geen commando in level 1,"
+                    code: false
                     feedback: "{echo} is goed, er is een ander foutje"
                 -   answer_option: "Niets ! De code is goed !"
+                    code: false
                     feedback: "Er zit een foutje in, kijk goed !"
             correct_answer: "A"
             hint: "Er mist een commando in het begin van de code"
@@ -73,13 +91,17 @@ levels:
                 {ask} Wat is jouw lievelingsdier ?
                 _?_ Dus jouw lievelingsdier is...
             mp_choice_options:
-                -   code: "{print}"
+                -   answer_option: "{print}"
+                    code: true
                     feedback: "Je wilt dat in regel 2 het antwoord herhaald wordt..."
-                -   code: "ego"
+                -   answer_option: "ego"
+                    code: true
                     feedback: "ego is geen commando, probeer het nog eens..."
-                -   code: "{ask}"
+                -   answer_option: "{ask}"
+                    code: true
                     feedback: "Met {ask} kun je een vraag stellen..."
-                -   code: "{echo}"
+                -   answer_option: "{echo}"
+                    code: true
                     feedback: "Goedzo !"
             correct_answer: "D"
             hint: "Met '{ask}' kun je iets vragen"
@@ -93,12 +115,16 @@ levels:
                 {print} Cool ! Ik ook !
             mp_choice_options:
                 -   answer_option: "In regel 1 moet het {print} commando worden vervangen door {ask}."
+                    code: false
                     feedback: "Print in regel 1 is goed, let op de spelling van de commando's"
                 -   answer_option: "In regel 2 is {ask} fout gespeld."
+                    code: false
                     feedback: "Goed opgelet !"
                 -   answer_option: "Regel 3 moet beginnen met {print} in plaats van {echo}."
+                    code: false
                     feedback: "Echo is goed ! Kijk naar de spelling van de commando's."
                 -   answer_option: "In regel 4 is {print} verkeerd gespeld."
+                    code: false
                     feedback: "Er zit ergens anders een spelfout"
             correct_answer: "B"
             hint: "Kijk goed naar de spelling van de commando's"
@@ -112,12 +138,16 @@ levels:
                 {print} Komt er aan ! Eet smakelijk !"
             mp_choice_options:
                 -   answer_option: "In regel 1 moest {ask} staan in plaats van {print}"
+                    code: false
                     feedback: "Weet je zeker dat er iets mis is ?"
                 -   answer_option: "In regel 1 moet {echo} staan in plaats van {print}"
+                    code: false
                     feedback: "Weet je zeker dat er iets mis is ?"
                 -   answer_option: "In regel 3 moet {print} staan in plaats van {echo}"
+                    code: false
                     feedback: "Weet je zeker dat er iets mis is ?"
                 -   answer_option: "Niets ! Deze code is goed !"
+                    code: false
                     feedback: "Correct !"
             correct_answer: "D"
             hint: "Controleer de code regel voor regel."
@@ -127,12 +157,16 @@ levels:
             code: "..."
             mp_choice_options:
                 -   answer_option: "Met {echo} stel je een vraag"
+                    code: false
                     feedback: "Dat doe je met {ask}"
                 -   answer_option: "Met {echo} laat je tekst verschijnen"
+                    code: false
                     feedback: "Dat doe je met {print}"
                 -   answer_option: "Met {echo} herhaal je een gegeven antwoord"
+                    code: false
                     feedback: "Goed zo !"
                 -   answer_option: "Met {echo} laat je tekst verdwijnen"
+                    code: false
                     feedback: "Dat klopt niet"
             correct_answer: "C"
             hint: "{echo} gebruik je nadat iemand een antwoord gegeven heeft bij {ask}."
@@ -145,12 +179,16 @@ levels:
                 {echo} Dus het gaat...
             mp_choice_options:
                 -   answer_option: "{print} in regel 1 moet {ask} zijn"
+                    code: false
                     feedback: "Nee, {print} is goed. Waar wordt de vraag gesteld ?"
                 -   answer_option: "{print} in regel 2 moet {ask} zijn"
+                    code: false
                     feedback: "Super !"
                 -   answer_option: "{echo} in regel 3 moet {ask} zijn"
+                    code: false
                     feedback: "Nee, {echo} is goed. Waar wordt de vraag gesteld ?"
                 -   answer_option: "Niets, alles is goed !"
+                    code: false
                     feedback: "Er zit wel een foutje in..."
             correct_answer: "B"
             hint: "met '{ask}' kun je iets vragen"
@@ -160,8 +198,10 @@ levels:
             code: "..."
             mp_choice_options:
             -   answer_option: "Ja !"
+                code: false
                 feedback: "Mooizo ! Op naar level 2!"
             -   answer_option: "Nee"
+                code: false
                 feedback: "Jammer..."
             correct_answer: "A"
             hint: "Op naar level 2!"
