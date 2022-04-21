@@ -36,13 +36,7 @@
                     {{_('correct_answer')}}
                 </p>
                 <div class="italic text-2xl mx-auto">
-                    {% if correct_option.code %}
-                        <div class="turn-pre-into-ace w-3/4 mx-auto -mt-16 mb-2">
-                                <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ correct_option.answer_option }}</pre>
-                        </div>
-                    {% else %}
-                        {<p class="option-text font-bold align-top"> {{ correct_option.answer_option | nl2br }}</p>
-                    {% endif %}
+                    {{ correct_option.answer_option | nl2br }}
                 </div>
             </div>
         </div>
