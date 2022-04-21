@@ -81,7 +81,7 @@
             <td class="overview_cell"><a href="/programs?user={{student.username}}">{{student.username}}'s {{_('page')}}</a></td>
             <td class="last_shared_cell">{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
             <td class="change_password_cell hidden"><a href="#" onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|tojson}}, {{_('password_change_prompt')|tojson}})'>{{_('change_password')}}</a></td>
-            <td class="remove_student_cell hidden"><a href="#" onclick='hedyApp.remove_student("{{class_info.id}}", "{{student.username}}", {{_('remove_student_prompt')|tojson}})'>{{_('remove')}}{{student.username}}</a></td>
+            <td class="remove_student_cell hidden"><a href="#" onclick='hedyApp.remove_student("{{class_info.id}}", "{{student.username}}", {{_('remove_student_prompt')|tojson}})'>{{_('remove')}} {{student.username}}</a></td>
           </tr>
         {% endfor %}
       </tbody>
