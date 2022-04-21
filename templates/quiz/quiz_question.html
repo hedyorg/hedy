@@ -1,7 +1,7 @@
 {% extends "quiz/quiz.html" %}
 {% block question %}
     <p class="italic text-3xl font-bold text-blue-900 text-center font-slab">{{ question.question_text }}</p>
-    {% if question.code and question.code!= "..." %}
+    {% if question.code and question.code != "..." %}
         <div class="turn-pre-into-ace w-3/4 mx-auto my-4">
             <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ question.code }}</pre>
         </div>
@@ -41,12 +41,12 @@
                         {% elif counter.value == 5 %}
                             {{ triangle_6|safe }}
                         {% endif %}
-                        {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
+                        {% if question_options[counter.value].code %}
                             <div class="turn-pre-into-ace w-3/4 mx-auto -mt-16 mb-2">
-                                <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ question_options[counter.value].code }}</pre>
+                                <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ question_options[counter.value].answer_option }}</pre>
                             </div>
-                        {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None' %}
-                            <p class="option-text font-bold align-top"> {{ question_options[counter.value].option_text | nl2br }}</p>
+                        {% else %}
+                            <p class="option-text font-bold align-top"> {{ question_options[counter.value].answer_option | nl2br }}</p>
                         {% endif %}
                         <button class="submit-button" type="submit" name="submit-button" value="{{ question_options[counter.value].char_index }}">
                         {% if is_last_attempt %}
