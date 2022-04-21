@@ -235,9 +235,9 @@ class Quizzes:
                 for option in self.quizzes['levels'].get(level).get(question)[k]:
                     temp = {}
                     for key, value in option.items():
-                        try:
+                        if not isinstance(value, bool):
                             temp[key] = value.format(**self.keywords)
-                        except:
+                        else:
                             temp[key] = value
                     options.append(temp)
                 self.quizzes['levels'].get(level).get(question)[k] = options
