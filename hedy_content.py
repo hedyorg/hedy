@@ -235,7 +235,10 @@ class Quizzes:
                 for option in self.quizzes['levels'].get(level).get(question)[k]:
                     temp = {}
                     for key, value in option.items():
-                        temp[key] = value.format(**self.keywords)
+                        try:
+                            temp[key] = value.format(**self.keywords)
+                        except:
+                            temp[key] = value
                     options.append(temp)
                 self.quizzes['levels'].get(level).get(question)[k] = options
         return self.quizzes['levels'].get(level).get(question)
