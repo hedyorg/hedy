@@ -10,7 +10,7 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
-var StopExecution = false;
+var stopExecution = false;
 
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
@@ -226,7 +226,7 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function stopit() {
-  window.State.stop_execution = true;
+  stopExecution = true;
 }
 
 export function runit(level: string, lang: string, answer_question: string, cb: () => void) {
@@ -234,7 +234,7 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
     return modal.alert (answer_question, 3000, true);
   }
   if (reloadOnExpiredSession ()) return;
-  StopExecution = true;
+  stopExecution = false;
 
 
   const outputDiv = $('#output');
@@ -763,9 +763,8 @@ window.onerror = function reportClientException(message, source, line_number, co
 function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
-  window.State.programsInExecution = 1;
   console.log("lets hide this button....");
-  $('#runit').hide();
+  //$('#runit').hide();
   $('#stopit').show();
 
   const outputDiv = $('#output');
@@ -818,14 +817,13 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }) ()
   });
 
-  StopExecution = false;
   return Sk.misceval.asyncToPromise( () =>
     Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
-        if (window.State.stop_execution) {
-          console.log("We stop the program!");
-          window.State.programsInExecution = 0;
+        console.log("Test...");
+        if (stopExecution) {
           throw "program_interrupt";
+          console.log("We stop the program!");
         }
       }
     }
@@ -837,12 +835,11 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#runit').show();
 
     // Check if the program was correct but the output window is empty: Return a warning
-    if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       pushAchievement("error_or_empty");
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
       return;
     }
-    window.State.programsInExecution--;
     if(!hasWarnings) {
       showSuccesMessage();
     }
@@ -908,7 +905,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
 
       setTimeout(function() {
         input.focus();
-      }, 0);
+      }, 250);
       $('#inline-modal form').one('submit', function(event) {
 
         window.State.disable_run = false;

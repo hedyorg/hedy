@@ -8,7 +8,6 @@ declare const ErrorMessages: Record<string, string>;
  * This is in desperate need of cleaning up!!
  */
 interface State {
-    stop_execution: boolean;
   /**
    * Current language
    */
