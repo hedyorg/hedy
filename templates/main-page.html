@@ -1,8 +1,7 @@
 {% extends "auth.html" %} {% block body %}
 <div class="px-8 py-12 relative text-xl">
     <a
-        class="github-fork-ribbon left-top z-10" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a
-    >
+        class="github-fork-ribbon left-top z-10" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
     <div class="px-8">
         <div
             class="-mx-16 -my-12 px-16 py-8 mb-8 bg-cover flex items-center"
@@ -16,7 +15,10 @@
             </div>
         </div>
         <div id="main_page_content">
-            {% for section in content['start-sections'] %}<h2>{{ section['title'] }}</h2><p>{{ section['text'] | commonmark }}</p>{% endfor %}
+            {% for section in content['start-sections'] %}
+                <h2>{{ section['title'] }}</h2>
+                <p>{{ section['text'] | commonmark }}</p>
+            {% endfor %}
         </div>
     </div>
 </div>
