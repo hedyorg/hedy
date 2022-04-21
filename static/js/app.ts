@@ -227,6 +227,7 @@ export function stopit() {
   // The program will stop automatically -> only 1ms timeout
   Sk.execLimit = 1;
 
+  // Completely reset the view
   $('#output').empty();
   $('#turtlecanvas').empty();
   $('#inline-modal').hide();
