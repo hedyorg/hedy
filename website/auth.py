@@ -226,6 +226,12 @@ def store_new_account(account, email):
     return user, resp
 
 
+def create_recover_link(username, token):
+    email = email_base_url() + '/reset?username='
+    email += urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(token)
+    return email
+
+
 def create_verify_link(username, token):
     email = email_base_url() + '/auth/verify?username='
     email += urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(token)
@@ -609,7 +615,7 @@ def routes(app, database):
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
             send_email_template(template='recover_password', email=user['email'],
-                                link=create_verify_link(user['username'], token), username=user['username'])
+                                link=create_recover_link(user['username'], token), username=user['username'])
             return jsonify({'message':gettext('sent_password_recovery')}), 200
 
     @app.route('/auth/reset', methods=['POST'])
