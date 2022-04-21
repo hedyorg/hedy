@@ -10,8 +10,6 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
-var stopExecution = false;
-
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -226,7 +224,17 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function stopit() {
-  stopExecution = true;
+  // The program will stop automatically -> only 1ms timeout
+  Sk.execLimit = 1;
+
+  $('#output').empty();
+  $('#turtlecanvas').empty();
+  $('#inline-modal').hide();
+  error.hide();
+  success.hide();
+
+  $('#stopit').hide();
+  $('#runit').show();
 }
 
 export function runit(level: string, lang: string, answer_question: string, cb: () => void) {
@@ -234,7 +242,6 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
     return modal.alert (answer_question, 3000, true);
   }
   if (reloadOnExpiredSession ()) return;
-  stopExecution = false;
 
 
   const outputDiv = $('#output');
@@ -757,7 +764,7 @@ window.onerror = function reportClientException(message, source, line_number, co
 function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
-  //$('#runit').hide();
+  $('#runit').hide();
   $('#stopit').show();
 
   const outputDiv = $('#output');
@@ -814,12 +821,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   Sk.misceval.asyncToPromise( () =>
     Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
-        console.log("WAAROM KOMEN WE HIER MAAR 1x?!");
-        console.log("Test...");
-        if (stopExecution) {
-          throw "program_interrupt";
-          console.log("We stop the program!");
-        }
       }
     }
    ).then(function(_mod) {
@@ -901,7 +902,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
 
       setTimeout(function() {
         input.focus();
-      }, 250);
+      }, 0);
       $('#inline-modal form').one('submit', function(event) {
 
         window.State.disable_run = false;
@@ -920,7 +921,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         setTimeout (function () {
            ok(input.val());
            $ ('#output').focus ();
-        }, 250);
+        }, 0);
 
         return false;
       });
