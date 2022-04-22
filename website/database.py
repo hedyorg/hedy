@@ -217,10 +217,10 @@ class Database:
         return USERS.scan(limit=500)
 
     def get_all_explore_programs(self):
-        return PROGRAMS.get_many({'public': 1}, limit=48, reverse=True)
+        return PROGRAMS.get_many({'public': 1}, sort_key='date', limit=48, reverse=True)
 
     def get_filtered_explore_programs(self, level=None, adventure=None):
-        programs = PROGRAMS.get_many({'public': 1}, reverse=True)
+        programs = PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
         if level:
             programs = [x for x in programs if x.get('level') == int(level)]
         if adventure:
