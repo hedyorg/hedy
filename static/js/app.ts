@@ -223,6 +223,13 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
+export function stopit() {
+  // We bucket-fix stop the current program by setting the run limit to 1ms
+  Sk.execLimit = 1;
+  $('#stopit').hide();
+  $('#runit').show();
+}
+
 export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
   if (window.State.disable_run) {
     // If there is no message -> don't show a prompt
@@ -234,6 +241,8 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
 
   // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
   Sk.execLimit = 1;
+  $('#runit').hide();
+  $('#stopit').show();
 
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
@@ -822,6 +831,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }
    ).then(function(_mod) {
     console.log('Program executed');
+    $('#stopit').hide();
+    $('#runit').show();
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
