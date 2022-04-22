@@ -276,6 +276,10 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
         storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
+      if (response.Warning && $('#editor').is(":visible")) {
+        storeFixedCode(response, level);
+        error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
+      }
       if (response.achievements) {
         showAchievements(response.achievements, false, "");
       }
@@ -1092,6 +1096,7 @@ export function get_trimmed_code() {
        // Otherwise it is the space placeholder -> don't add to prevent weird error messages
        if (text.length > 1) {
          code += text;
+         console.log(code);
        }
      });
      return code.replace(/ +$/mg, '');
