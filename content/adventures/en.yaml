@@ -363,12 +363,10 @@ adventures:
                     ```
             15:
                 start_code: |-
-                    ```
                     answer = 0
                     {while} answer != 25
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
-                    ```
                 story_text: |-
                     ## More loops!
                     We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
@@ -386,10 +384,8 @@ adventures:
                     ```
             16:
                 start_code: |-
-                    ```
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit
-                    ```
                 story_text: |-
                     ## More and more like real code!
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
@@ -405,11 +401,9 @@ adventures:
                     ```
             17:
                 start_code: |-
-                    ```
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Ready or not, here I come!'
-                    ```
                 story_text: |
                     ## Elif
                     Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.
@@ -474,7 +468,7 @@ adventures:
                     {print} He hears crazy noises everywhere
                     {print} He's afraid this is a haunted forest
                     ```
-                start_code: "```\n{print} Your story starts here\n```"
+                start_code: "{print} Your story starts here"
             2:
                 story_text: |
                     ## Story
@@ -494,7 +488,7 @@ adventures:
                     {sleep}
                     {print} name is afraid this is a haunted forest
                     ```
-                start_code: "```\n{print} Your story\n```"
+                start_code: "{print} Your story"
             3:
                 story_text: |
                     ## Story
@@ -531,7 +525,7 @@ adventures:
                     dump {is} {ask} Which item should he dump?
                     {remove} dump {from} bag
                     ```
-                start_code: "```\n{print} Your story\n```"
+                start_code: "{print} Your story"
             4:
                 story_text: |
                     ## Story
@@ -549,7 +543,7 @@ adventures:
                     {print} 'He hears the sound of an' animals {at} {random}
                     {print} name 'is afraid this is a haunted forest'
                     ```
-                start_code: "```\n{print} 'Your story will be printed here!'\n```"
+                start_code: "{print} 'Your story will be printed here!'"
             5:
                 story_text: |
                     ## Story
@@ -575,7 +569,7 @@ adventures:
                     {if} end {is} good {print} name 'takes the sword and the monster quickly runs away'
                     {else} {print} 'The monster eats' name
                     ```
-                start_code: "```\n{print} 'Here your story will start!'\n```"
+                start_code: "{print} 'Here your story will start!'"
             7:
                 story_text: |
                     ## Story
@@ -591,7 +585,7 @@ adventures:
                     {print} 'Why is nobody helping me?'
                     ```
 
-                start_code: "```\n{repeat} 5 {times} {print} 'Help!'\n```"
+                start_code: "{repeat} 5 {times} {print} 'Help!'"
             8:
                 story_text: |
                     ## Story
@@ -1052,7 +1046,7 @@ adventures:
                     {turn} angle
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     {print} Turtle race!
                     hoek {is} 90
                     {turn} hoek
@@ -1071,7 +1065,7 @@ adventures:
                     {turn} angles {at} {random}
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     angles {is} 10, 50, 90, 150, 250
                     {turn} angles {at} {random}
                     {forward} 25
@@ -1090,7 +1084,7 @@ adventures:
                     {turn} angle
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Drawing figures'
                     angle {is} 90
                     {turn} angle
@@ -1117,7 +1111,7 @@ adventures:
                     {turn} angle
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Drawing Figures'
                     figure {is} {ask} 'Do you want a square or a triangle?'
                     {if} figure {is} triangle angle {is} 120 {else} angle {is} 90
@@ -1150,7 +1144,7 @@ adventures:
                     {forward} 50
                     {turn} angle
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Drawing figures'
             7:
                 story_text: |
@@ -1164,7 +1158,7 @@ adventures:
                     {print} 'Draw figures'
                     {repeat} 3 {times} {forward} 10
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Draw figures'
                     {repeat} 3 {times} {forward} 10
             8:
@@ -1197,8 +1191,8 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-                start_code: |
-                    hoeken = {ask} 'How many angles should I draw?'
+                start_code: |-
+                    angles = {ask} 'How many angles should I draw?'
     dishes:
         name: "Dishes?"
         description: "Use the computer to see who does the dishes (Start at level 2)"
