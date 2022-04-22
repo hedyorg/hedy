@@ -775,6 +775,7 @@ def index(level, program_id):
 
     parsons = PARSONS[g.lang].get_defaults(level)
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
@@ -795,6 +796,7 @@ def index(level, program_id):
         max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
         version=version(),
+        quiz=quiz,
         adventures=adventures,
         parsons=parsons,
         customizations=customizations,
@@ -1335,6 +1337,8 @@ def teacher_invitation(code):
         return render_template('teacher-invitation.html')
 
     update_is_teacher(user)
+    # When visiting this link we update the current user to a teacher -> also update user in session
+    session.get('user')['is_teacher'] = True
 
     session['welcome-teacher'] = True
     url = request.url.replace(f'/invite/{code}', '/for-teachers')
