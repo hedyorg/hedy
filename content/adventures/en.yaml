@@ -33,7 +33,7 @@ adventures:
                     {echo} hello
                     ```
 
-                start_code: "```\n{print} hello world!\n```"
+                start_code: "{print} hello world!"
             2:
                 story_text: |
                     ## Variables
@@ -64,7 +64,7 @@ adventures:
                     {sleep} 2
                     {print} green!
                     ```
-                start_code: "```\n{print} hello world!\n```"
+                start_code: "{print} hello world!"
             3:
                 story_text: |
                     ## Make a list!
@@ -90,9 +90,9 @@ adventures:
                     {print} animals {at} {random}
                     ```
 
-                start_code: "```\n{print} hello world!\n```"
+                start_code: "{print} hello world!"
             4:
-                start_code: "```\n{print} 'Hello world'\n```"
+                start_code: "{print} 'Hello world'"
                 story_text: |
                     ## 'Quotation marks'
                     In level 4 `{ask}` and `{print}` have changed.
@@ -148,7 +148,7 @@ adventures:
                     {else} {print} 'boo!'
                     ```
             6:
-                start_code: "```\n{print} '5 times 5 is ' 5 * 5\n```"
+                start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: |
                     ## 1 + 1
                      In this level you learn something new: you can now also calculate.
@@ -172,7 +172,7 @@ adventures:
                     answer = 20 + 4
                     ```
             7:
-                start_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```"
+                start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
                 story_text: |
                     ## Level 7! Level 7!
                     Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.
@@ -183,11 +183,9 @@ adventures:
                     ```
             8:
                 start_code: |-
-                    ```
                     {repeat} 5 {times}
                         {print} 'Hello folks'
                         {print} 'This will be printed 5 times'
-                    ```
                 story_text: |
                     ## Indentation
                     `{ask}` and `{print}` still work as you know them. But `{if}` and `{repeat}` have changed!
@@ -202,14 +200,12 @@ adventures:
                     ```
             9:
                 start_code: |-
-                    ```
                     {repeat} 3 {times}
                         food = {ask} 'What do you want?'
                         {if} food {is} pizza
                             {print} 'nice!'
                         {else}
                             {print} 'pizza is better'
-                    ```
                 story_text: |
                     ## All together now!
                     In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
@@ -227,11 +223,9 @@ adventures:
                     ```
             10:
                 start_code: |-
-                    ```
                     animals {is} dog, cat, blobfish
                     {for} animal {in} animals
                       {print} 'I love ' animal
-                    ```
                 story_text: |-
                     ## For each item in my list...
                     In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
@@ -245,10 +239,8 @@ adventures:
                     ```
             11:
                 start_code: |-
-                    ```
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
-                    ```
                 story_text: |-
                     ## Loops!
                     `{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.
@@ -261,10 +253,8 @@ adventures:
                     ```
             12:
                 start_code: |-
-                    ```
                     {print} 'decimal numbers now need to use a dot'
                     {print} 2.5 + 2.5
-                    ```
                 story_text: |-
                     ## Numbers and texts
                     **Decimal numbers**
