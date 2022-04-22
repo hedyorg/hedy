@@ -953,7 +953,7 @@ class IsValid(Filter):
         error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
-    def illegal_condition(self, meta, args):
+    def error_condition(self, meta, args):
         error = InvalidInfo('invalid condition', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
@@ -1368,9 +1368,9 @@ class ConvertToPython_3(ConvertToPython_2):
         list_var = args[1]
         return textwrap.dedent(f"""\
         try:
-            {list_var}.remove({value})
+          {list_var}.remove({value})
         except:
-           pass""")
+          pass""")
 
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
@@ -1433,9 +1433,9 @@ else:
         return ' and '.join(args)
 
     def condition_spaces(self, args):
-        result = args[0] + " == '" + ' '.join(args[1:]) + "'"
-        return result
-
+        arg0 = self.process_variable(args[0])
+        arg1 = self.process_variable(' '.join(args[1:]))
+        return f"{arg0} == {arg1}"
 
     def equality_check(self, args):
         arg0 = self.process_variable(args[0])
@@ -2070,13 +2070,13 @@ def check_program_size_is_valid(input_string):
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
 
-def process_input_string(input_string, level):
+def process_input_string(input_string, level, escape_backslashes=True):
     result = input_string.replace('\r\n', '\n')
 
     if contains_blanks(result):
         raise exceptions.CodePlaceholdersPresentException()
 
-    if level >= 4:
+    if escape_backslashes and level >= 4:
         result = result.replace("\\", "\\\\")
 
     # In level 8 we add indent-dedent blocks to the code before parsing
