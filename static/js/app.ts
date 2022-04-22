@@ -227,9 +227,12 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
-export function runit(level: string, lang: string, answer_question: string, cb: () => void) {
+export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
   if (window.State.disable_run) {
-    return modal.alert (answer_question, 3000, true);
+    // If there is no message -> don't show a prompt
+    if (disabled_prompt) {
+      return modal.alert(disabled_prompt, 3000, true);
+    } return;
   }
   if (reloadOnExpiredSession ()) return;
   StopExecution = true;
@@ -1012,7 +1015,7 @@ export function prompt_unsaved(cb: () => void) {
 }
 
 export function load_quiz(level: string) {
-  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+  $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
 
 export function showVariableView() {

@@ -318,35 +318,36 @@ class TestsLevel1(HedyTester):
             max_level=self.max_turtle_level,
             extra_check_function=self.is_turtle()
         )
+
     #
     # color tests
     #
     def test_color_no_args(self):
-      code = "color"
-      expected = "t.pencolor('black')"
-      self.single_level_tester(code=code, expected=expected,
-                               extra_check_function=self.is_turtle())
+        code = "color"
+        expected = "t.pencolor('black')"
+        self.single_level_tester(code=code, expected=expected,
+                                 extra_check_function=self.is_turtle())
 
     def test_one_color_red(self):
-      code = "color red"
-      expected = "t.pencolor('red')"
+        code = "color red"
+        expected = "t.pencolor('red')"
 
-      self.single_level_tester(code=code, expected=expected,
-                               extra_check_function=self.is_turtle())
+        self.single_level_tester(code=code, expected=expected,
+                                 extra_check_function=self.is_turtle())
 
     def test_one_color_purple(self):
-      code = "color purple"
-      expected = "t.pencolor('purple')"
+        code = "color purple"
+        expected = "t.pencolor('purple')"
 
-      self.single_level_tester(code=code, expected=expected,
-                               extra_check_function=self.is_turtle())
+        self.single_level_tester(code=code, expected=expected,
+                                 extra_check_function=self.is_turtle())
 
     def test_one_color_purple_nl(self):
-      code = "kleur paars"
-      expected = "t.pencolor('purple')"
+        code = "kleur paars"
+        expected = "t.pencolor('purple')"
 
-      self.single_level_tester(code=code, expected=expected,
-                               extra_check_function=self.is_turtle(), lang='nl')
+        self.single_level_tester(code=code, expected=expected,
+                                 extra_check_function=self.is_turtle(), lang='nl')
 
     #
     # turn tests

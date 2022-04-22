@@ -59,7 +59,7 @@ function resetWindow() {
     document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
 
-    if (tabName === 'end') {
+      if (tabName === 'quiz') {
       $ ('#adventures-tab').css('height', '');
       $ ('#adventures-tab').css('min-height', '14em');
       $ ('#adventures-tab').css('max-height', '100%');

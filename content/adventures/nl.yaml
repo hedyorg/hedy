@@ -1186,7 +1186,7 @@ adventures:
             5:
                 story_text: |
                     ## Afwasprogramma
-                    Met de `{if}` kun je nu leuker maken met een `{if}`. Je kan je programma laten reageren op de keuze.
+                    Met de `{if}` kun je jouw programma nu nog leuker maken. Je kan je programma laten reageren op de keuze.
 
                     Maak jij de code af zodat het 'chips' {print} als jij aan de beurt bent, en anders 'yes!'?
                     Vergeet de aanhalingstekens niet!
@@ -1346,7 +1346,7 @@ adventures:
             10:
                 story_text: |
                     ## Dobbelsteen
-                    Treuzelen je medespelers altijd bij het gooien van de dobbelstenen en duurt je spel te lang? In level 8 kun je Hedy in een keer laten gooien voor alle spelers!'
+                    Treuzelen je medespelers altijd bij het gooien van de dobbelstenen en duurt je spel te lang? In dit level kun je Hedy in een keer laten gooien voor alle spelers!'
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -1785,22 +1785,6 @@ adventures:
                     {sleep} 2
                     {print} kinderen ' kinderen!'
                     ```
-                story_text_2: |
-                    ## Uitdaging
-                    In de voorbeelden worden simpele vragen gebruikt zoals 'Hoe oud ben je?' en Hoe lang ben je? , maar je kunt natuurlijk van alles gebruiken om voorspellingen te maken!
-                    Kun jij zelf leuke of grappige vragen bedenken die Hedy kan gebruiken in haar voorspellingen?
-                example_code_2: |
-                    ## Voorbeeld gekke voorspelling
-                    ```
-                    {print} 'Ik ben Hedy de malle waarzegger!'
-                    {print} 'Ik ga voorspellen hoe slim jij bent!'
-                    ajax = {ask} 'Op een schaal van 0 tot 10 hoeveel houd jij van Ajax?'
-                    bananen = {ask} 'Hoeveel bananen heb jij deze week gegeten?'
-                    hygiene = {ask} 'Hoevaak heb jij je handen al gewassen vandaag?'
-                    resultaat = bananen + hygiene
-                    resultaat = resultaat * ajax
-                    {print} 'Jij bent ' resultaat 'procent slim.'
-                    ```
                 start_code: "# Schrijf jouw code hier"
             7:
                 story_text: |
@@ -1986,14 +1970,6 @@ adventures:
                 story_text_2: |
                     ## Prijslijst toevoegen
                     Je kunt het `{if}` commando ook goed gebruiken om een prijslijst te maken.
-                example_code_2: |
-                    ## Voorbeeld Hedy code
-                    {print} 'Welkom bij McHedy'
-                    prijs {is} 0
-                    eten {is} {ask} 'Wilt u friet of pizza?'
-                    {if} eten {is} friet prijs {is} 3
-                    {if} eten {is} pizza prijs {is} 4
-                    {print} 'Dat wordt dan ' prijs ' euro, alstublieft.'
                 start_code: "# Schrijf jouw code hier"
             6:
                 story_text: |
@@ -2092,33 +2068,6 @@ adventures:
                     Je kunt natuurlijk ook zorgen dat er vervolgvragen komen.
                     Als men bijvoorbeeld een patatje bestelt, kun je vragen welke saus ze daarbij willen. Of je kunt vragen of ze cola light willen of normale cola.
                     En zo kun je vast zelf nog veel meer vragen bedenken!
-                example_code_2: |
-                    ```
-                    {print} 'Welkom bij McHedy!'
-                    {print} 'U kunt hier uw bestelling doorgeven'
-                    eten = {ask} 'Wat wilt u eten?'
-                    {print} eten
-                    {if} eten {is} patat
-                        saus = {ask} 'Wat voor saus wil je?'
-                        {print} saus
-                    drinken = {ask} 'Wat wilt u drinken?'
-                    {if} drinken {is} cola
-                        light = {ask} 'Normaal of light?'
-                        {print} drinken light
-                    {print} 'Bedankt voor uw bestelling!'
-                    ```
-                story_text_3: |
-                    De prijs is nu altijd 4 euro per persoon, kun jij nog een andere manier bedenken om de prijs te berekenen?
-                    Bijvoorbeeld:
-                example_code_3: |
-                    ## Uitdaging prijzen
-                    ```
-                    prijs = 0
-                    {if} eten {is} patat
-                        prijs = prijs + 3
-                    {if} drinken {is} cola
-                        prijs = prijs + 1
-                    ```
                 start_code: "{print} 'Welkom bij McHedy!' "
             9:
                 story_text: |
@@ -2196,9 +2145,6 @@ adventures:
                     prijs = 4 * mensen
                     {print} 'Dat wordt dan ' prijs ' euro!'
                     ```
-                story_text_2: |
-                    ## Uitdaging
-                    Alle uitdagingen die in level 7 worden genoemd zoals de extra `{if}` statements of de verbeterde prijzen, kun je natuurlijk in dit level nog steeds gebruiken!
                 start_code: "{print} 'Welkom bij McHedy!' "
             12:
                 story_text: |
@@ -2382,7 +2328,7 @@ adventures:
                     Dat maakt het spel een stuk lastiger om te winnen, kijk maar...
 
                     ## Uitdaging
-                    Je spel in nu wel heel lastig te winnen... Kun jij je spel zo ombouwen dat er maar 1 foute deur is om te kiezen, in plaast van 2?
+                    Je spel is nu wel heel lastig te winnen... Kun jij je spel zo ombouwen dat er maar 1 foute deur is om te kiezen, in plaast van 2?
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -2951,69 +2897,3 @@ adventures:
                     ## Vooruitblik
                     Gefeliciteerd! Je hebt het laatste level van Hedy behaald! Maar niet getreurd, we zijn druk bezig om nog meer levels en avonturen te bouwen. Dus kom vooral later nog eens een kijkje nemen of er al nieuwe levels zijn!
                 start_code: "{print} ('Goed gedaan!')"
-    end:
-        name: "Eind quiz"
-        description: "Test jouw Hedy kennis"
-        image: " "
-        default_save_name: " "
-        levels:
-            1:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
-                start_code: "# Schrijf jouw code hier"
-            2:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
-                start_code: "# Schrijf jouw code hier"
-            3:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
-                start_code: "# Schrijf jouw code hier"
-            4:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
-                start_code: "# Schrijf jouw code hier"
-            5:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
-                start_code: "# Schrijf jouw code hier"
-            6:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
-                start_code: "# Schrijf jouw code hier"
-            7:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
-                start_code: "# Schrijf jouw code hier"
-            8:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
-                start_code: "# Schrijf jouw code hier"
-            10:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
-                start_code: "# Schrijf jouw code hier"
-            11:
-                story_text: |
-                    ## Eind
-                    Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
-                ## start_code is only added because it is required by the schema of Adventures
-                start_code: "# Schrijf jouw code hier"
