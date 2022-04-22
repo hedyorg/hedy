@@ -14,7 +14,7 @@ adventures:
 
                     Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het linker programmeerveld.
 
-                start_code: "```\n{print} hallo wereld!\n```"
+                start_code: "{print} hallo wereld!"
                 example_code: |
                     ## Voorbeeldcode
                     ```
@@ -198,14 +198,12 @@ adventures:
                     ```
             9:
                 start_code: |-
-                    ```
                     {repeat} 3 {times}
                         eten = {ask} 'Wat wil je bestellen?'
                         {if} eten {is} pizza
                             {print} 'lekker'
                         {else}
                             {print} 'pizza is lekkerder'
-                    ```
                 story_text: |
                     ## En nu alles tegelijk!
                     In dit level kun je niet alleen meerdere regels gebruiken bij `{if}` en `{repeat}`, maar je kunt ze ook nog eens in elkaar zetten!
@@ -1003,7 +1001,7 @@ adventures:
                     {turn} hoek
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     {print} Schildpaddenrace!
                     hoek {is} 90
                     {turn} hoek
@@ -1021,7 +1019,7 @@ adventures:
                     {turn} hoeken {at} {random}
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     {print} Schildpaddenrace!
                     hoek {is} 90
                     {turn} hoek
@@ -1041,7 +1039,7 @@ adventures:
                     {forward} 25
                     ```
 
-                start_code: |
+                start_code: |-
                     {print} 'Figuren tekenen'
                     hoek {is} 90
                     {turn} hoek
@@ -1066,7 +1064,7 @@ adventures:
                     {turn} hoek
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Figuren tekenen'
                     hoek {is} 90
                     {turn} hoek
@@ -1096,7 +1094,7 @@ adventures:
                     {forward} 50
                     {turn} hoek
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Figuren tekenen'
             7:
                 story_text: |
@@ -1108,7 +1106,7 @@ adventures:
                     {print} 'Figuren tekenen'
                     {repeat} 3 {times} {forward} 10
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Figuren tekenen'
                     {repeat} 3 {times} {forward} 10
             8:
@@ -1137,7 +1135,7 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-                start_code: |
+                start_code: |-
                     hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
     dishes:
         name: "Afwas?"
