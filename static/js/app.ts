@@ -797,7 +797,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         pushAchievement("hedy_hacking");
         return ErrorMessages ['Program_too_long']
       }
-      return;
+      return null
     },
     // We want to make the timeout function a bit more sophisticated that simply setting a value
     // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
