@@ -298,9 +298,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       }
       runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
         // If it is an error we throw due to program execution while another is running -> don't show and log it
+        if (!(err.message == "\"program_interrupt\"")) {
           console.log(err);
           error.show(ErrorMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
+        }
       });
     }).fail(function(xhr) {
       console.error(xhr);
@@ -805,8 +807,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       if (Sk.execLimit != 1) {
         pushAchievement("hedy_hacking");
         return ErrorMessages ['Program_too_long'];
+      } else {
+        throw "program_interrupt";
       }
-      return;
     },
     // We want to make the timeout function a bit more sophisticated that simply setting a value
     // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
