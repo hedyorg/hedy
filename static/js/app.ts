@@ -232,6 +232,9 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   }
   if (reloadOnExpiredSession ()) return;
 
+  // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
+  Sk.execLimit = 1;
+
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
