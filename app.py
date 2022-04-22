@@ -772,6 +772,7 @@ def index(level, program_id):
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
@@ -792,6 +793,7 @@ def index(level, program_id):
         max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
         version=version(),
+        quiz=quiz,
         adventures=adventures,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
