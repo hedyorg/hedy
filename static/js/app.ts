@@ -297,14 +297,9 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         return;
       }
       runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
-
-        console.log("We komen hier toch!");
-        // If it is an error we throw due to program execution while another is running -> don't show and log it
-        if (!(err.message == "\"program_interrupt\"")) {
-          console.log(err);
-          error.show(ErrorMessages['Execute_error'], err.message);
-          reportClientError(level, code, err.message);
-        }
+        console.log(err);
+        error.show(ErrorMessages['Execute_error'], err.message);
+        reportClientError(level, code, err.message);
       });
     }).fail(function(xhr) {
       console.error(xhr);
@@ -810,7 +805,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         pushAchievement("hedy_hacking");
         return ErrorMessages ['Program_too_long'];
       } else {
-        throw "program_interrupt";
+        return null;
+        // Todo TB -> We should find a way to stop the errormessage flow at this spot
+        // The current flow is that we always throw an error with timeoutMsg
+        // We should prevent this in the case of a "voluntary" timeout -> the stop button
       }
     },
     // We want to make the timeout function a bit more sophisticated that simply setting a value
@@ -852,10 +850,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
-    if (err.nativeError == "program_interrupt") {
-      throw err.nativeError;
-    }
-    console.log(err);
     const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
     throw new Error(errorMessage);
   });
