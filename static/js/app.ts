@@ -792,8 +792,12 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
     timeoutMsg: function () {
-      pushAchievement("hedy_hacking");
-      return ErrorMessages ['Program_too_long']
+      // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+      if (Sk.execLimit != 1) {
+        pushAchievement("hedy_hacking");
+        return ErrorMessages ['Program_too_long']
+      }
+      return;
     },
     // We want to make the timeout function a bit more sophisticated that simply setting a value
     // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
