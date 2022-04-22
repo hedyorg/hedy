@@ -297,6 +297,8 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         return;
       }
       runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
+
+        console.log("We komen hier toch!");
         // If it is an error we throw due to program execution while another is running -> don't show and log it
         if (!(err.message == "\"program_interrupt\"")) {
           console.log(err);
@@ -850,6 +852,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
+    if (err.nativeError == "program_interrupt") {
+      throw err.nativeError;
+    }
     console.log(err);
     const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
     throw new Error(errorMessage);
