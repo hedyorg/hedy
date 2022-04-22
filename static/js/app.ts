@@ -10,8 +10,6 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
-var StopExecution = false;
-
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -233,8 +231,6 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     } return;
   }
   if (reloadOnExpiredSession ()) return;
-  StopExecution = true;
-
 
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
@@ -248,10 +244,6 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   outputDiv.append(variables);
   error.hide();
   success.hide();
-
-  var runItBtn = $('#runit');
-  runItBtn.prop('disabled', true);
-  setTimeout(function() {runItBtn.prop('disabled', false)}, 500);
 
   try {
     level = level.toString();
@@ -292,13 +284,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         }
         return;
       }
-        runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
+      runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
         // If it is an error we throw due to program execution while another is running -> don't show and log it
-        if (!(err.message == "\"program_interrupt\"")) {
           console.log(err);
           error.show(ErrorMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
-        }
       });
     }).fail(function(xhr) {
       console.error(xhr);
@@ -760,10 +750,6 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
-  // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
-  // Please see note at the top of the `outf` function.
-  window.State.programsInExecution = 1;
-
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
@@ -821,14 +807,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }) ()
   });
 
-  StopExecution = false;
   return Sk.misceval.asyncToPromise( () =>
     Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
-        if (StopExecution) {
-          window.State.programsInExecution = 0;
-          throw "program_interrupt";
-        }
+        // We don't do anything here...
       }
     }
    ).then(function(_mod) {
