@@ -261,8 +261,7 @@ def setup_language():
     # If not in the request parameters, use the browser's accept-languages
     # header to do language negotiation.
     if 'lang' not in session:
-        session['lang'] = request.accept_languages.best_match(
-            ALL_LANGUAGES.keys(), 'en')
+        session['lang'] = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
     if 'keyword_lang' not in session:
         session['keyword_lang'] = "en"
 

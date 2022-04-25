@@ -12,8 +12,11 @@ import unittest
 import requests
 
 # *** HEDY RESOURCES ***
+from flask import session, g
+
 import utils
 from config import config as CONFIG
+from hedy_content import ALL_LANGUAGES
 
 # *** GLOBAL VARIABLES ***
 
@@ -206,7 +209,9 @@ class TestPages(AuthHelper):
     def test_get_main_page(self):
         # WHEN attempting to get the main page
         # THEN receive an OK response code from the server
-        self.get_data('/')
+        for language in ALL_LANGUAGES.keys():
+            session['lang'] = language
+            self.get_data('/')
 
     def test_get_code_page(self):
         # WHEN attempting to get the code page
