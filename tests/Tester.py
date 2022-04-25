@@ -79,6 +79,15 @@ class HedyTester(unittest.TestCase):
       res.append(t)
     return res
 
+  def codeToInvalidInfo(self, code):
+    instance = hedy.IsValid()
+    instance.level = self.level
+    program_root = hedy.parse_input(code, self.level, 'en')
+    is_valid = instance.transform(program_root)
+    _, invalid_info = is_valid
+
+    return invalid_info[0].line, invalid_info[0].column
+
   def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None, lang='en', translate=True, output=None):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception

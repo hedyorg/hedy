@@ -1,0 +1,304 @@
+sections:
+-   title: Introduction
+    key: intro
+    subsections:
+    -   title: What's Hedy?
+        text: "Hedy is a textual programming language, specifically developed for (pre-)teens (10 to 15 years old).\nIn contrast to programming languages for kids, like Scratch, Hedy doesn't use code blocks but textual code.\nSo with Hedy you'll learn how to type code like the real programmers do, but in small steps with playful exercises.\nThis way Hedy can function as a stepping stone to real programming languages like Python in an accessible and mostly fun way!\nHere you can watch a [video](https://www.youtube.com/watch?v=EdqT313rM40&amp;t=2s) about the development of Hedy as a programming language.\n"
+    -   title: Target audience
+        text: "Hedy's developed with middle school and junior high school students in mind (ages 10 - 15).\nIt's important for the students to be able to read well. We recommend not to start with Hedy before the students have achieved at least a 3rd grade reading level.\nStudents (and teachers!) don't need any programming experience before starting with Hedy.\n"
+    -   title: How does Hedy work?
+        text: "<Todo>\n"
+    -   title: Teaching with Hedy
+        text: "Hedy is divided into levels, in which new commands are taught.Each level contains a variety of exercises to practice to newly learned commands.\nThe exercises can be done by the students individually, or you can use them in classical instructions. The lesson plans for each level are included in this teacher manual.\nThe lesson plans and exercises are explained step by step, to make sure the less digitally informed teachers should be able to use Hedy too!\nOf course Hedy also caters to the creative teachers that love to make their own lessonplans and exercises!\n"
+    -   title: Devices
+        text: "Hedy is webbased, which means it works on any device with a browser (Google Chrome, Firefox, Edge etc), so laptops, chromebooks, tablets and even smartphones are suitable to use Hedy.\nThere's no need to download anything before working with Hedy, just go to the website and you're all set!\n"
+-   title: Preparations
+    key: preparations
+    subsections:
+    -   title: Setting preferred language
+        text: "When students create profile they are supposed to choose a 'preferred language'. Hedy will always be loaded in this selected language.\nChanging this language can always be done later on by navigation to 'My profile' and 'My profile' again.\nFrom December 2021 on setting a preferred language is obligatory for each Hedy account.\nWhen your account or the accounts of your students have being created earlier than this date you will receive a message that a preferred language is missing.\nDon't worry! Navigate to 'My profile' and set a language in your profile settings.\nUntil you set a language Hedy will be shown in your browser language and, when this language is not supported, in English.\n"
+    -   title: Storing programs
+        text: "Because you are now logged in, you'll see the blue banner with My profile and My programs.\nThese tabs exist for you students too. In My programs you can find all the codes that have been saved.\n\nYou can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.\n\nLet the programming fun begin!\n"
+-   key: teaching
+    subsections:
+    -   text: "Hedy contains a lot of different levels that each teach a different new skill. We recommend to teach one level per lesson.\nThis gives your students the time to fully grasp a new command or concept and practice with it, before moving on to the next level.\nWe use this structure in our lessons:\n"
+        title: ' '
+    -   title: Introduction
+        text: "You can start your lessons by activating your students' prior knowledge: What do they already know about the subject, what did they learn in the previous lesson and which mistakes did they make that they've now learned from?\nThis way all the previously learned commands and frequently made mistakes are fresh in your students' memories, when you strat introducing the new lesson.\n"
+    -   title: Introduction of new concepts and commands
+        text: "The new concepts and commands can be very hard for some students to fully understand.\nThat's why it's of importance to model the proper use of the new commands to your students.\nEspecially in the lower levels, where some students have no experience whith programming at all, it can be hard for them to understand the new abstract concepts.\nShowing a lot of examples makes an abstract concept (for instance: 'What is a variable?') more recognizable and easier to understand ('Look, the variable pet changed into dog').\n"
+    -   title: Let's get to work
+        text: "Each level contains different adventures that you can find in the pink tabs. The first pink tab explains the new commands in this level.\nThe following tabs are adventures that the students can try out and make their own.\nThe adventures are arranged from easiest to hardest, so we recommend to start on the left and your your way to the right.\nThe last tab 'what's next' gives a little teaser of what you'll learn in the next level. Of course, you can select the adventures you want your students to do for each level.\nThey don't always have to make every adventure. Every adventure contains an example code, that the students can try out with the green button.\nThe example code gets copied to the workfield, where the students can try out the code and adjust it to make it their own.\nStimulate your students to turn the example codes into their own projects by adding their own ideas and making their own variation of the adventure.\n"
+    -   title: Quiz
+        text: "To test whether your students have picked up all the new info in the level, you can let them make the quiz.\nThe quiz contains 10 multiple choice questions about the new concepts and command to that level.\nNot every level has a quiz yet, as we are still building the quizzes.\n"
+    -   title: Evaluation
+        text: "Round up your lesson by having a brief evaluation. What did the students learn? Which hardships did they come across?\nHow did they learn from their mistakes? And of course: What did they create?\nStudents are often very proud of their own creations, so it's nice to save a little time and gove your students the opportunity to show their work to their classmates.\n"
+    title: Teaching with Hedy
+-   levels:
+    -   sections:
+        -   title: Students forget to type commandos
+            example:
+                error_text: "For example they type a sentence without using print.\n"
+                error_code: "Hedy can't print this\n"
+                solution_text: "Teach your students to always start a line of code with a command.\n"
+                solution_code: "print Hedy can print this!\n"
+        -   title: Students use capitals when typing commands
+            example:
+                error_text: "Commands won't work if they are in capitals.\n"
+                error_code: "Ask Why does my code fail?\nPrint Because I'm using capitals.\n"
+                solution_text: "Remove the capitals.\n"
+                solution_code: "ask Why does my code work now?\nprint Because I removed the capitals!\n"
+        -   title: Students use echo without ask
+            example:
+                error_text: "Echo is made to repeat an answer after an ask command. Without ask echo won't do anything.\n"
+                error_code: "echo Your name is\n"
+                solution_text: "Add an ask command to make it work.\n"
+                solution_code: "ask What's your name?\necho Your name is\n"
+        -   title: Students want their echo word (variable) to be in the middle of a sentence
+            example:
+                error_text: "And they are right! That's why they will learn to use proper variables in the next level.\n"
+                error_code: "ask Which programming language is the most fun?\necho is the best!\n"
+                solution_text: "In level 1 we have to keep it at this:\n"
+                solution_code: "ask Which programming language is the most fun?\necho The best is...\n"
+        -   example:
+                error_text: "Often students love to try out big numbers when using the turtle, which causes the arrow to walk off the screen.\n"
+                error_code: "forward 300\nturn 90\n"
+                solution_text: "In the example. students tend to think that the turn command doesn't work. Eventhough is does work, but you can't see it happening off screen. Use smaller numbers to prevent this from happening.\n"
+                solution_code: "forward 100\nturn 90\n"
+            title: 'Turtle: Students let the turtle walk off of the screen'
+        -   example:
+                solution_text: "To make the turtle go backwards, you use the forward command and a negative number. For example:\n"
+                solution_code: "forward -100\n"
+                error_text: "Backward is not a command.\n"
+                error_code: "backward 100\n"
+            title: "Turtle: Students use the command backward, but that doens't exist"
+        level: '1'
+    -   sections:
+        -   example:
+                error_text: "Hedy can't recognize a command with a typo.\n"
+                error_code: "prinnt Don't make typos!\n"
+                solution_text: "Teach your students to read the error messages. This way they can find out themselves what went wrong.\n"
+                solution_code: "print Don't make typos!\n"
+            title: Students make typos in their commands
+        -   title: Students forget that the ask command has changed
+            example:
+                error_text: "In this level students learn about variables. The ask command requires a variable as well, but students forget this.\n"
+                error_code: "ask what would you like to eat?\n"
+                solution_text: "In this level you have to tell Hedy where to save your answer, so it can be used later on. This is called a variable.\n"
+                solution_code: "order is What would you like to eat?\n"
+        -   example:
+                error_code: "answer is ask Why doesn't echo work anymore?!\necho\n"
+                error_text: "For some students it might be frustrating to learn that the echo command doesn't work anymore. That's why it's very important to explain the advantages of using variables. For example you can use multiple variables in a code, and you can put them anywhere you like in a sentence!\n"
+                solution_text: "Use a varible instead.\n"
+                solution_code: "answer is ask Why doens't echo work anymore?!\nprint answer\n"
+            title: 'Students try to use the echo command. '
+        -   title: Students use a variable name or as a normal word
+            example:
+                error_text: "In the example below the word 'name' is used a a variable, but also as a normal text. The output of this code will be 'Hi my Hedy is Hedy'.\n"
+                error_code: "name is Hedy\nprint Hi my name is name\n"
+                solution_text: "So don't use a word you want to use in the text as a variable name. In level 4 this is solved with quotation marks.\n"
+                solution_code: "name is Hedy\nprint Hi I'm name\n"
+        -   example:
+                error_code: "chosen door is ask Which door do you pick?\n"
+                solution_text: "Add an underscore.\n"
+                solution_code: "chosen_door is ask which door do you pick?\n"
+                error_text: "A variable should be named with one word. You could use an underscore to connect two words. That counts as one.\n"
+            title: Students use long variable names containing two words.
+        -   title: Students might use two different names for the same variable
+            example:
+                error_text: "In this example the student has used 'horse' and 'name' for the same variables.\n"
+                error_code: "horse is ask What is your horse called?\nprint Your horse is called name\n"
+                solution_text: "Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.\n"
+                solution_code: "name is ask What is your horse called?\nprint Your horse is called name\n"
+        level: '2'
+    -   sections:
+        -   title: Students try to print whole lists
+            example:
+                error_text: "A list can't be printed. You can only print one item from the list with at random.\n"
+                error_code: "groceries is apples, milk, chocolate\nprint groceries\n"
+                solution_text: "To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.\n"
+                solution_code: "print apples, milk, chocolate\n\nor\n\ngroceries is apples, milk, chocolate\nprint groceries at random\n"
+        -   example:
+                error_text: "This problem probably occured in level 2 as well. Now it can happen with lists too.\n"
+                error_code: "name is Hedy\nprint Hi my name is name\n\nor\n\nanimal is rhino, bee, swan\nprint The best animal is... animal at random\n"
+                solution_text: "Don;t use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.\n"
+                solution_code: "name is Hedy\nprint Hi I'm name\n\nor\n\nanimals is rhino, bee, swan\nprint The best animal is... animals at random\n"
+            title: Students use the name of a variable or list as regular text.
+        -   example:
+                error_code: "birds is sparrow, seagull, robin\nprint birds random\n"
+                solution_text: "This problem is solved by adding the word at.\n"
+                solution_code: "birds is sparrow, seagull, robin\nprint birds at random\n"
+                error_text: "Like in the example\n"
+            title: Students forget at in at random
+        -   title: Students forget to use the print command when also using the at random command.
+            example:
+                error_text: "Or they will sometimes put at random at the beginning of the line.\n"
+                error_code: "fruit is apple, cherry, banana\nfruit at random\n"
+                solution_text: "Emphasize to your students that you always need a print to print text.\n"
+                solution_code: "fruit is apple, cherry, banana\nprint fruit at random\n"
+        -   title: Students forget to use commas in their lists
+            example:
+                error_text: "In a list items are seperated with a comma.\n"
+                error_code: "pizzas is funghi tonno quattro stagioni\nprint pizzas at random\n"
+                solution_text: "After each item on your list, there should be a comma\n"
+                solution_code: "pizzas is funghi, tonno, quattro stagioni\nprint pizzas at random\n"
+        -   title: Students try to use at random without a list.
+            example:
+                error_text: "For example\n"
+                error_code: "clubs is Manchester United\nprint clubs at random\n"
+                solution_text: "Hedy can't print anything at random, because there is no list to choose from.\n"
+                solution_code: "clubs is Manchester United, Bayrn Munchen, FC Barcelona\nprint clubs at random\n"
+        -   title: 'Students try to use add/remove without a list '
+            example:
+                error_text: "In the example below 'names' is not a list, but a variable. You cannot add anything to it.\n"
+                error_code: "names is Jake\nyour_name is ask Who are you?\nadd your_name to names\nprint names at random\n"
+                solution_text: "There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.\n"
+                solution_code: "names is Jake, Amy\nyour_name is ask Who are you?\nadd your_name to names\nprint names at random\n"
+        -   title: Students forget to use to/from in add/remove.
+            example:
+                error_text: "Without to/from the add/remove command won't work.\n"
+                error_code: "adventures is story, parrot, dice\nchoice is Which adventure do you like best?\nadd choice\nremove dice\nprint I love adventures at random\n"
+                solution_text: "Hedy has to know which list the item should be added to/removed from.\n"
+                solution_code: "adventures is story, parrot, dice\nchoice is Which adventure do you like best?\nadd choice to adventures\nremove dice from adventures\nprint I love adventures at random\n"
+        level: '3'
+    -   level: '4'
+        sections:
+        -   title: Students forget to use quotation marks on both sides of the text
+            example:
+                error_text: "In this level print and ask need a set of quotation marks. One before of the text and one after.\n"
+                error_code: "print Hello\nmood is ask 'How are you?\n"
+                solution_text: "Add the correct quotation marks.\n"
+                solution_code: "print 'Hello'\nmood is ask 'How are you?'\n"
+        -   example:
+                error_code: "print `Welcome to the restaurant`\nfood is ask \"What would you like to order?\"\n"
+                error_text: "It is important to start your lesson by checking if the students know how to type a quotation mark properly. ELse they might use the \"double quotes\" or the `skewed one`.\n"
+                solution_text: "These are the correct quotation marks:\n"
+                solution_code: "print 'Welcome to the restaurant'\nfood is ask 'What would you like to order?'\n"
+            title: Students use the wrong quotation marks
+        -   title: Students use an apostrophe in their text
+            example:
+                error_text: "From this level on apostrophes are not allowed. They are often used in English when thyping contractions like you're, don't or what's.\n"
+                error_code: "print 'You're not allowed to type this'\n"
+                solution_text: "You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.\n"
+                solution_code: "print 'Youre allowed to type this'\nprint 'And you`re able to do this'\n"
+    -   sections:
+        -   title: Students forget to use print in an if command
+            example:
+                error_text: "After students use if or else they forget to use a second command like print or ask.\n"
+                error_code: "if name is Hedy 'Great!'\nelse 'Hedy is better!'\n"
+                solution_text: "Add the print command to fix it.\n"
+                solution_code: "if name is Hedy print 'Great!'\nelse print 'Hedy is better!'\n"
+        -   example:
+                solution_code: "horse is ask 'What is your horse called'\nif horse is Bonfire print 'cool!'\nelse print 'less cool!'\n"
+                error_text: "In this example the student has used 'horse' and 'name' for the same variables.\n"
+                error_code: "horse is ask 'What is your horse called?'\nif name is Bonfire print 'cool'\nelse print 'less cool!'\n"
+                solution_text: "Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.\n"
+            title: Students might use two different names for the same variable
+        -   title: Students still forget the quotes on both sides.
+            example:
+                error_text: "If commandos can get very long and students tend to forget to use quotes.\n"
+                error_code: "if name is Hedy print fun\nelse print 'meh!\n"
+                solution_text: "Always use 2 quotes in a print command.\n"
+                solution_code: "if name is Hedy print 'fun'\nelse print 'meh!'\n"
+        -   title: Students use quotes around variable names.
+            example:
+                error_text: "In this level there are no quotes around variable names.\n"
+                error_code: "if 'name' is 'Hedy' print 'fun'\nelse print 'meh!'\n"
+                solution_text: "Remove the quotes to get the code to work.\n"
+                solution_code: "if name is Hedy print 'fun'\nelse print 'meh!\n"
+        -   title: Students use long variable names containing two words.
+            example:
+                error_text: "A variable should be named with one word. You could use an underscore to connect two words. That counts as one.\n"
+                error_code: "chosen door is ask 'Which door do you pick?'\n"
+                solution_text: "Add an underscore.\n"
+                solution_code: "chosen_door is ask 'which door do you pick?'\n"
+        -   example:
+                error_code: "if name is Jesse, David, Souf print 'You are funny' else print 'You are not funny'\n"
+                solution_text: "You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.\nAnother solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.\n"
+                error_text: "For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.\n"
+                solution_code: "friends is Jesse, David, Souf\nname is ask 'Who are you?'\nif name in friends print 'You are funny'\nelse print 'You are not funny'\n\nor\n\nname is ask 'Who are you?'\nif naam is Jesse print 'You are funny'\nif naam is David print 'You are funny'\nif naam is Souf print 'You are funny'\n"
+            title: Students want multiple answers to be correct
+        -   title: The students make the variable name the same as the value in the if statement
+            example:
+                error_text: "In the example below the password is 'password'. This will result in it always being correct.\n"
+                error_code: "password is ask 'What is the password?'\nif password is password print 'Access granted'\nelse print 'Acces denied!'\n"
+                solution_text: "Pick a different name for your variable.\n"
+                solution_code: "secret_password is ask 'What is the password'\nif secret_password is password print 'Access granted!'\nelse print 'Access denied!'"
+        level: '5'
+    title: Frequently made mistakes
+    key: common_mistakes
+    intro: "You can learn from your mistakes, especially in coding!\nMaking mistakes is unavoidable, and a great opportunity to learn, but for teachers it can be a challenge to find the correct fix for a mistake!\nEspecially as the codes get longer and longer as the levels progress. That's why we've made a list with frequently made mistakes in each level, and their solutions.\n"
+title: Hedy documentation
+learn-more-sections:
+-   title: "Do you like Hedy?"
+    text: |
+        We love to hear from you!
+
+        [Click here to send us a message](mailto:hedy@felienne.com "About Hedy")
+-   title: "Found a bug?"
+    text: |
+        [Let us know on GitHub](https://github.com/Felienne/hedy/issues/new/choose)
+-   title: "Want to help?"
+    text: |
+        The easiest way is to help with [translating Hedy](/translating)
+
+        Below the current status, help us complete a language, or add a new one.
+        <a href="https://hosted.weblate.org/engage/hedy/">
+        <img src="https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg" alt="Translation status" /></a>
+-   title: "Code week talk"
+    text: |
+        Want to know more about Hedy? Check out this talk Felienne gave at the European Code Week 2020:
+
+        <iframe width="560" height="315" class="mx-auto mt-4" src="https://www.youtube.com/embed/R2U9MEowYag?wmode=opaque" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+-   title: "Hedy Paper"
+    text: |
+        Want to know even more? Read the [research paper](https://www.felienne.com/wp-content/uploads/2020/07/Hedy_paper_website_draft.pdf) about Hedy's design.
+-   title: "Hedy in the news"
+    text: |
+        Some websites and newspapers have written about Hedy since our release in early 2020. We keep a list here:
+        * [Vives, CodeWeek Special October 2021](images/Vives-174-Codeweek.pdf)
+        * [CodeWeek.eu - Haunted House Challenge, September 2021](https://codeweek.eu/2021/challenges/haunted-house)
+        * [Opensource.com, April 2021](https://opensource.com/article/21/4/hedy-teach-code)
+        * [IO Magazine, April 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
+        * [Ingeniería De Software (Spanish), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
+        * [Hello World Magazine, February 2021](images/Hello_World_15_Hedy.pdf)
+        * [Discoro, January 2021](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)
+        * [Felienne wins the Dutch award for ICT research for Hedy, January 2021](https://www.nwo.nl/en/news/felienne-hermans-receives-dutch-prize-ict-research-2021)
+        * [SlashDot, August 2020](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)
+        * [GenBeta (Spanish), August 2020](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)
+        * [Developpez (French), August 2020](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)
+        * [Vives (Dutch), October 2020](images/artikel_vives.pdf) "Met Hedy stap voor stap leren programmeren"
+        * [Leiden University, April 2020](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)
+        * [Mare (Dutch), April 2020](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)
+        * [AG Connect (Dutch), April 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)
+start-sections:
+-   title: "What is a gradual programming language?"
+    text: |
+        Learning to program can be hard. Not that programming itself *is* hard! But there are a lot of rules you need to memorize, just like when you started to learn English.
+        Similarly, you will need a lot of practice to learn programming.
+
+        You can read these sentences with ease. But do you remember when you were learning to read? You took some time then for each letter!
+        That is true for programming too, it might be hard in the beginning, but it will get easier!
+
+        The nice thing about Hedy is that Hedy is *gradual*. That means that you do not have to learn all rules at once.
+        The first few levels do not have that many rules, so you can get used to programming comfortably.
+        In every level we add new rules, increasing the number of commands that you know. Commands are instructions for a computer.
+-   title: "Why is Hedy gradual?"
+    text: |
+        In this video Felienne, the creator of Hedy, explains why Hedy is gradual.
+
+        <iframe width="560" height="315" class="mx-auto mt-4" src="https://www.youtube.com/embed/EdqT313rM40" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+-   title: "Who is Hedy for?"
+    text: |
+        Hedy is meant for all kids that want to learn programming! You do need to be able to read English with ease.
+-   title: "Do I need programming experience?"
+    text: |
+        No, that is not needed. However, if you have programmed with Scratch or Python, some commands will look familiar to you.
+-   title: "Is Hedy free?"
+    text: |
+        Yes! Leiden University allows us to share it for free. Hedy is also 'Open source', which means that everyone who can program can help us make Hedy better.
+        You can find the code on [GitHub](https://github.com/Felienne/hedy).
+        If you like Hedy and want to contribute, we do accept (and are very grateful for) [donations](https://www.steunleiden.nl/project/hedy)!
+-   title: "Do I need to install anything?"
+    text: |-
+        No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or Firefox. Hedy also works on your phone or tablet.

@@ -108,8 +108,10 @@ class Database:
         if level:
             programs = [x for x in programs if x.get('level') == int(level)]
         if adventure:
-            programs = [x for x in programs if x.get('adventure_name') == adventure]
-        return programs
+            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
+            if adventure == "default":
+                return [x for x in programs if x.get('adventure_name') == ""]
+            return [x for x in programs if x.get('adventure_name') == adventure]
 
     def public_programs_for_user(self, username):
         programs = PROGRAMS.get_many({'username': username}, reverse=True)
@@ -215,13 +217,17 @@ class Database:
         return USERS.scan(limit=500)
 
     def get_all_explore_programs(self):
-        return PROGRAMS.get_many({'public': 1}, limit=48)
+        return PROGRAMS.get_many({'public': 1}, sort_key='date', limit=48, reverse=True)
 
     def get_filtered_explore_programs(self, level=None, adventure=None):
-        programs = PROGRAMS.get_many({'public': 1})
+        programs = PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
         if level:
             programs = [x for x in programs if x.get('level') == int(level)]
         if adventure:
+            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
+            if adventure == "default":
+                programs = [x for x in programs if x.get('adventure_name') == ""]
+                return programs[-48:]
             programs = [x for x in programs if x.get('adventure_name') == adventure]
         return programs[-48:]
 
