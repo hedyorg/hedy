@@ -633,6 +633,13 @@ def routes(app, database):
         if not user:
             return gettext('username_invalid'), 403
 
+        # In this case -> account has a related teacher (and is a student)
+        # We still store the token, but sent the mail to the teacher instead
+        if user.get('teacher') and not user.get('email'):
+            email = DATABASE.user_by_username(user.get('teacher')).get('email')
+        else:
+            email = user['email']
+
         # Create a token -> use the reset_length value as we don't want the token to live as long as a login one
         token = make_salt()
         # Todo TB -> Don't we want to use a hashed token here as well?
@@ -642,7 +649,7 @@ def routes(app, database):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
-            send_email_template(template='recover_password', email=user['email'],
+            send_email_template(template='recover_password', email=email,
                                 link=create_recover_link(user['username'], token), username=user['username'])
             return jsonify({'message':gettext('sent_password_recovery')}), 200
 
@@ -674,8 +681,15 @@ def routes(app, database):
         # Delete all tokens of the user -> automatically logout all long-lived sessions
         DATABASE.delete_all_tokens(body['username'])
 
+        # In this case -> account has a related teacher (and is a student)
+        # We mail the teacher instead
+        if user.get('teacher') and not user.get('email'):
+            email = DATABASE.user_by_username(user.get('teacher')).get('email')
+        else:
+            email = user['email']
+
         if not is_testing_request(request):
-            send_email_template(template='reset_password', email=user['email'], username=user['username'])
+            send_email_template(template='reset_password', email=email, username=user['username'])
 
         return jsonify({'message':gettext('password_resetted')}), 200
 
