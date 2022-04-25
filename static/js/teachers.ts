@@ -386,6 +386,7 @@ export function remove_customizations(class_id: string, prompt: string) {
             $('.level-select-button').addClass('green-btn');
             $('.opening_date_container').removeClass('hidden');
             $('.opening_date_input').removeAttr('value');
+            $('.opening_date_input').blur();
             modal.alert(response.success, 3000, false);
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
