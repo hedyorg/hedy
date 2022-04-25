@@ -228,6 +228,8 @@ export function stopit() {
   Sk.execLimit = 1;
   $('#stopit').hide();
   $('#runit').show();
+  $('#inline-modal').hide();
+  window.State.disable_run = false;
 }
 
 export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
@@ -899,7 +901,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#turtlecanvas').hide();
     return new Promise(function(ok) {
       window.State.disable_run = true;
-      $ ('#runit').css('background-color', 'gray');
 
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
