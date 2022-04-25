@@ -86,7 +86,7 @@
             <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-4 py-1"></strong>
         </div>
         <div class="flex flex-row items-center mb-2">
-            <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" type="email" class="inline-block w-1/2 px-4 py-1 rounded-lg" required>
+            <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" type="email" class="inline-block w-1/2 px-4 py-1 rounded-lg" {% if user_data['email'] %}required{% endif %}>
         </div>
         <div class="flex flex-row items-center mb-2">
             <label for="birth_year" class="inline-block w-72">{{_('birth_year')}}</label><input id="birth_year" class="inline-block w-1/2 px-4 py-1 rounded-lg" type="number">
