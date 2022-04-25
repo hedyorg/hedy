@@ -228,6 +228,12 @@ export function stopit() {
   Sk.execLimit = 1;
   $('#stopit').hide();
   $('#runit').show();
+
+  // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
+  // This way the Promise is no longer "waiting" and can no longer mess with our next program
+  if ($('#inline-modal').is(":visible")) {
+    $('#inline-modal form').submit();
+  }
   $('#inline-modal').hide();
   window.State.disable_run = false;
 }
@@ -817,7 +823,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
       const level = Number(window.State.level) || 0;
-      console.log(level)
       if (level < 7) {
         // Set a non-realistic time-out of 5 minutes
         return (3000000);
@@ -912,10 +917,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         input.focus();
       }, 0);
       $('#inline-modal form').one('submit', function(event) {
-
         window.State.disable_run = false;
-        $ ('#runit').css('background-color', '');
-
         event.preventDefault();
         $('#inline-modal').hide();
         if (hasTurtle) {
