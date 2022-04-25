@@ -130,7 +130,7 @@ export const auth = {
 
     if (op === 'profile') {
       const payload: User = {
-        email: values.email,
+        email: values.email ? values.email : undefined,
         language: values.language,
         keyword_language: values.keyword_language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
