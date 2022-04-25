@@ -36,8 +36,9 @@
         {% if parsons %}
             <div id="parsons_container" class="w-full flex-1 mt-4" style="display: none;">
                 {% for key, line in parsons.code_lines.items() %}
-                   <div id="{{line}}" index="{{0}}" draggable="true" class="box mb-2 text-lg px-4 py-2 bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg">
-                       &nbsp; <!-- This is an empty HTML space to ensure the layout is as if there is already a text -->
+                   <div id="{{line}}" index="{{0}}" draggable="true" class="box mb-2 text-lg px-4 py-2 bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg turn-pre-into-ace">
+                       <div draggable="true" class="absolute z-10 w-full h-12 m-0 p-0"></div>
+                       <pre class="no-copy-button cheatsheet mx-4" style="pointer-events: none;" level="{{ level }}"></pre>
                    </div>
                 {% endfor %}
             </div>

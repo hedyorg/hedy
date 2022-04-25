@@ -67,13 +67,11 @@
                     <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
                         {{ parsons['text']|commonmark }}
                         <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
-                            
                             {% for key, line in parsons.code_lines.items()|reverse %}
-                                {% if key == 'indent' %}
-                                <div id="{{line}}" draggable="true" class="box w-3/4 mb-2 text-lg px-4 py-2 bg-gray-200 border-2 border-gray-600 rounded-lg">&nbsp;&nbsp;&nbsp;&nbsp;{{line}}</div>
-                                {% else %}
-                                <div id="{{line}}" draggable="true" class="box w-3/4 mb-2 text-lg px-4 py-2 bg-gray-200 border-2 border-gray-600 rounded-lg" index="{{key}}">{{line}}</div>
-                                {% endif %}
+                                <div id="{{line}}" draggable="true" class="box w-full h-12 mb-2 text-lg bg-gray-200 border-2 border-gray-600 rounded-lg turn-pre-into-ace" index="{{key}}">
+                                    <div draggable="true" class="absolute z-10 w-full h-12 m-0 p-0"></div>
+                                    <pre class="relative no-copy-button cheatsheet mx-4" style="pointer-events: none;" level="{{ level }}">{{line}}</pre>
+                                </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -108,8 +106,6 @@
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
     function handleDragStart(e){
-        this.style.opacity = 0.4;
-
         dragSrcEl = this;
 
         e.dataTransfer.effectAllowed = 'move';
