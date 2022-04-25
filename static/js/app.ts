@@ -275,10 +275,6 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       dataType: 'json'
     }).done(function(response: any) {
       console.log('Response', response);
-      if (response.Warning) {
-        storeFixedCode(response, level);
-        error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
-      }
       if (response.Warning && $('#editor').is(":visible")) {
         storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
@@ -1103,6 +1099,8 @@ export function get_trimmed_code() {
      let code = "";
      $('#parsons_container').children().each(function() {
        let text = $(this).text()
+       $(this).attr('index')
+       //check volgorde en kleur
        // Otherwise it is the space placeholder -> don't add to prevent weird error messages
        if (text.length > 1) {
          code += text;

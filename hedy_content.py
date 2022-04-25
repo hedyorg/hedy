@@ -7,6 +7,8 @@ from utils import is_debug_mode
 from website.yaml_file import YamlFile
 import iso3166
 
+import random
+
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 
@@ -203,9 +205,20 @@ class ParsonsProblem:
 
   def get_defaults(self, level):
     """Return the level defaults for a given level number."""
-    #print(self.parsons_file)
-    return copy.deepcopy(self.parsons_file.get(int(level), {}))
+    
+    items = list(self.parsons_file.get(int(level),{}).get("code_lines", {}).items())
+    items_orig = copy.deepcopy(items)
+    
+    if (items == items_orig):
+        random.shuffle(items)
+    #self.parsons_file = dict(items)
+    #print(items)
+    #for key, value in items:
+    #    print(key,":", value)
 
+    retVal = copy.deepcopy(self.parsons_file.get(int(level), {}))
+    retVal["code_lines"] = dict(items)
+    return retVal
   
 class NoSuchParsons:
   def get_defaults(self, level):
