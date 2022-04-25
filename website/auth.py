@@ -550,7 +550,7 @@ def routes(app, database):
         resp = {}
         if 'email' in body:
             email = body['email'].strip().lower()
-            if email != user['email']:
+            if email != user.get('email'):
                 exists = DATABASE.user_by_email(email)
                 if exists:
                     return gettext('exists_email'), 403
