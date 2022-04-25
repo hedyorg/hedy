@@ -522,9 +522,9 @@ def routes(app, database):
                 'language')] or body.get('keyword_language') not in ALL_KEYWORD_LANGUAGES.keys():
             return gettext('keyword_language_invalid'), 400
 
-        # Mail is a unique field, only mandatory if the user doesn't have a related teacher (and no mail adress)
+        # Mail is a unique field, only mandatory if the user doesn't have a related teacher (and no mail address)
         user = DATABASE.user_by_username(user['username'])
-        if user.get('email') and not user.get('teacher'):
+        if not user.get('teacher') or 'email' in body:
             if not isinstance(body.get('email'), str) or not valid_email(body['email']):
                 return gettext('email_invalid'), 400
 
