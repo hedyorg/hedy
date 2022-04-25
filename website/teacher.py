@@ -396,11 +396,12 @@ def routes(app, database, achievements):
         for account in body.get('accounts', []):
             if account.get('class') and account['class'] not in [i.get('name') for i in classes]:
                 return "not your class", 404
-            user = DATABASE.user_by_username(account.get('username').strip().lower())
-            if user:
+            if DATABASE.user_by_username(account.get('username').strip().lower()):
                 return {'error': gettext('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
 
         # Now -> actually store the users in the db
+        print(body.get('accounts'))
+        print(user['username'])
         for account in body.get('accounts', []):
             # Set the current teacher language and keyword language as new account language
             account['language'] = g.lang
