@@ -97,7 +97,7 @@ adventures:
                 example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
             6:
-                start_code: "print '5乘以5 is ' 5 * 5"
+                start_code: "{print} '5乘以5等于 ' 5 * 5"
                 story_text: |
                     ask提问, print打印, if-else条件语句和r循环语句在这一级目标中的使用方法与在第4级和第5级目标里面一样.
                     但是第6级学习内容里面增加了一些新的内容, 现在你可以计算啦.
@@ -258,8 +258,8 @@ adventures:
                 example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
             16:
                 start_code: |-
-                    fruit = ['苹果', '香蕉', '樱桃']
-                    print fruit
+                    水果 = ['苹果', '香蕉', '樱桃']
+                    {print } 水果
                 story_text: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
                 example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
             17:
