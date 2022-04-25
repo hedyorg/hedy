@@ -233,8 +233,9 @@ export function stopit() {
   // This way the Promise is no longer "waiting" and can no longer mess with our next program
   if ($('#inline-modal').is(":visible")) {
     $('#inline-modal form').submit();
+    $('#inline-modal').hide();
   }
-  $('#inline-modal').hide();
+
   window.State.disable_run = false;
 }
 
@@ -302,6 +303,8 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
           // @ts-ignore
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
+        $('#stopit').hide();
+        $('#runit').show();
         return;
       }
       runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
