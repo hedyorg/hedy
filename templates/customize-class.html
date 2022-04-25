@@ -72,7 +72,7 @@
                                 <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
                                     <input level="{{ i }}"
                                        {% if customizations and 'opening_dates' in customizations and i|string in customizations['opening_dates'] %}
-                                        type="date" value="{{ customizations['opening_dates'][i|string] }}"
+                                        type="date" value="{{ customizations['opening_dates'][i|string] }}" placeholder="{{_('directly_available')}}"
                                        {% else %}
                                         type="text" onfocus="(this.type='date')" placeholder="{{_('directly_available')}}"
                                        {% endif %}
