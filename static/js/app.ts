@@ -297,9 +297,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         return;
       }
       runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
-        console.log(err);
-        error.show(ErrorMessages['Execute_error'], err.message);
-        reportClientError(level, code, err.message);
+        // The err is null if we don't understand it -> don't show anything
+        if (err != null) {
+          error.show(ErrorMessages['Execute_error'], err.message);
+          reportClientError(level, code, err.message);
+        }
       });
     }).fail(function(xhr) {
       console.error(xhr);
@@ -806,9 +808,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         return ErrorMessages ['Program_too_long'];
       } else {
         return null;
-        // Todo TB -> We should find a way to stop the errormessage flow at this spot
-        // The current flow is that we always throw an error with timeoutMsg
-        // We should prevent this in the case of a "voluntary" timeout -> the stop button
       }
     },
     // We want to make the timeout function a bit more sophisticated that simply setting a value
@@ -849,8 +848,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }
     if (cb) cb ();
   }).catch(function(err) {
-    // Extract error message from error
-    const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
+    const errorMessage = errorMessageFromSkulptError(err) || null;
+    if (!errorMessage) {
+      throw null;
+    }
     throw new Error(errorMessage);
   });
 
