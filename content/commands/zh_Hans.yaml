@@ -13,160 +13,159 @@
         ask 你最喜欢的颜色是什么?
         echo 你最喜欢的颜色是什么
     name: '{echo}'
--   name: '{print} emojis'
-    explanation: print an emoji with `{print}`
-    example: 'Example: {print} 🙋‍ 🌍 ❗'
+-   name: '{print} 表情符号'
+    explanation: 用 `{print}`打印一个表情符号
+    example: '例如: {print} 🙋‍ 🌍 ❗'
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
-    example: 'Example: {forward} 100'
+    explanation: 用 `{forward}`画一条线.
+    example: '例如: {forward} 100'
     demo_code: '{forward} 100'
--   example: 'Example: {turn}'
+-   example: '例如: {turn}'
     demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
     name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
+    explanation: 用`{turn}`旋转绘图海龟
 2:
--   explanation: "`is`的意思是\"是\", 用来给一个词命名以便在程序中使用"
+-   explanation: "用`{is}`来给一个词命名。你可以自己 这个名字。"
     example: "Example: name is 海迪."
     demo_code: |-
         name is 海迪
         print 欢迎 name
     name: '{is}'
--   explanation: "Ask的意思是提问, 用`ask`可以提出一些问题. 注意! 现在你需要用 `is`给问题的答案命名."
-    example: "例如: color is ask 你最喜欢的颜色是什么?"
+-   explanation: "Ask的意思是提问, 用`{ask}`可以提出一些问题。 注意! 现在你需要用 `{is}`给问题的答案命名。"
+    example: "例如: color {is} {ask} 你最喜欢的颜色是什么?"
     demo_code: |-
-        color is ask 你最喜欢的颜色是什么?
-        print color 是我最喜欢的颜色!
+        颜色 {is} {ask} 你最喜欢的颜色是什么?
+        {print} 颜色是我最喜欢的颜色!
     name: '{ask}'
 -   name: '{sleep}'
-    explanation: Let Hedy pause for a (couple of) second(s).
-    example: 'Example: {sleep} 2 '
-    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
--   demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
-    name: is - turtle
-    example: 'Example: angle {is} 90'
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
+    explanation: 让海迪（Hedy）暂停几秒钟。
+    example: '例如: {sleep} 2 '
+    demo_code: "{print} 让我考虑一秒钟......\n{sleep}\n{print} 嗯，我还需要3秒钟.....\n{sleep} 3\n{print} 找到了！我找到了！"
+-   demo_code: "角度 {is} 90\n{turn} 角度\n{forward} 100"
+    name: 是 - 海龟
+    example: '例如：角度 {is} 90'
+    explanation: 用 `{is}`给一个数字命名。 你可以自己选择这个名字。
 3:
 -   explanation: "用`at` and `random`可以从一组词汇中随机选择一个词"
-    example: "例如: animals is 狗, 猫, 袋鼠."
+    example: "例如: animals {is} 狗，猫，袋鼠。"
     demo_code: |-
-        animals is 狗, 猫, 袋鼠
-        print animals at random
-    name: choose_random
+        animals {is} 狗，猫，袋鼠
+        {print} 动物 {at} {random}
+    name: 选择_随机
 -   name: '{add}'
-    explanation: add an item to a list
-    example: 'Example: {add} dog {to_list} animals'
-    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
--   example: 'Example: {remove} dog {from} animals'
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: 将一个项目添加到一个列表中
+    example: '例如: {add} 狗 {to_list} 动物'
+    demo_code: "动物 {is} 奶牛，猫\n{add} 狗 {to_list} 动物"
+-   example: '例如: {remove} 狗 {from} 动物'
+    demo_code: "动物 {is} 猫，狗，奶牛\n{remove} 狗 {from} 动物"
     name: '{remove}'
-    explanation: remove an item from a list
+    explanation: 从一个列表中移除一个项目
 4:
--   explanation: "Print的意思是打印, 可以用来打印单引号里面的内容"
-    example: "例如: print 你好欢迎来到海迪.'"
-    demo_code: "print '你好欢迎来到海迪.'"
+-   explanation: "打印的时候要准确的使用单引号"
+    example: "例如: {print} ‘你好欢迎来到海迪。’"
+    demo_code: "{print} ‘你好欢迎来到海迪。’"
     name: '{print}'
--   explanation: "给一段文本命名并不带单引号打印`print` 出这段文本"
-    example: "例如: name is 海迪."
+-   explanation: "给一段文本命名并不带单引号`{print}`出这段文本"
+    example: "例如: 名字 {is} 海迪。"
     demo_code: |-
-        name is 海迪
-        print '我的名字是 ' name
+        名字 {is} 海迪
+        {print} ‘我的名字是 ’ 名字
     name: '{is}'
--   explanation: "Ask的意思是提问, 用 `ask`提出问题."
-    example: "例如: color is ask '你最喜欢的颜色是什么?'"
+-   explanation: "用 `{ask}`提出问题。"
+    example: "例如: 颜色 {is} {ask} ‘你最喜欢的颜色是什么？’"
     demo_code: |-
-        color is ask '你最喜欢的颜色是什么?'
-        print color ' 是你最喜欢的颜色!'
+        颜色 {is} {ask} ‘你最喜欢的颜色是什么?’
+        {print} 颜色 ‘是你最喜欢的颜色！’
     name: '{ask}'
 5:
--   explanation: "Print的意思是打印, 用print打印的内容前后两边都要用单引号标注清楚"
-    example: "例如: print '你好欢迎来到海迪.'"
-    demo_code: "print '你好欢迎来到海迪.'"
+-   explanation: "打印的时候要准确的使用单引号"
+    example: "例如: {print} ‘你好欢迎来到海迪。’"
+    demo_code: "{print} ‘你好欢迎来到海迪。’"
     name: '{print}'
--   explanation: "Ask的意思是提问，用`ask`可以提出问题."
-    example: "例如: color is ask '你最喜欢的颜色是什么?'"
+-   explanation: "用`{ask}`可以提出问题."
+    example: "例如：颜色 {is} {ask} ‘你最喜欢的颜色是什么？’"
     demo_code: |-
-        color is ask '你最喜欢的颜色是什么?'
-        print color ' 是你最喜欢的颜色!'
+        颜色 {is} {ask} ‘你最喜欢的颜色是什么？’
+        {print} 颜色‘是你最喜欢的颜色！’
     name: '{ask}'
--   explanation: "用`if-else`条件语句进行选择"
-    example: "例如: if color is 绿色 print '漂亮!' else print '呵呵'"
+-   explanation: "用 `{if}`条件语句进行选择"
+    example: "例如: {if} 颜色{is} 绿色 {print} ‘漂亮！’ {else} {print} ‘呵呵’"
     demo_code: |-
-        color is ask '你最喜欢的颜色是什么?'
-        if color is 绿色 print '漂亮!' else print '呵呵'
+        颜色 {is} {ask} ‘你最喜欢的颜色是什么？’
+        {if} 颜色{is}绿色 {print} ‘漂亮！’ {else} {print} ‘呵呵’
     name: '{if}'
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`
-    example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
-    demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+-   name: '{if}条件语句与海龟绘图'
+    explanation: 用`{if}`条件语句进行选择
+    example: '例如： {if} 答案 {is} 距离远至 {forward} 100 {else} {forward} 5'
+    demo_code: "答案 {is} {ask} ‘我应该走多远？’\n{if} 答案 {is} 距离远至 {forward} 100 {else} {forward} 5"
 -   name: '{in}'
-    explanation: Check elements with `{in}`
-    example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+    explanation: 用 `{in}`检查元素
+    example: "例如: {if} 颜色 {in} 漂亮_颜色 {print} '漂亮!' {else} {print} '呵呵'"
+    demo_code: "漂亮_颜色 {is} 绿色，黄色\n颜色 {is} {ask} ‘什么 {is} 你最喜欢的颜色？’\n{if} 颜色 {in} 漂亮_颜色 {print} ‘漂亮！' {else} {print} ‘呵呵’"
 6:
--   explanation: "Print的意思是打印，现在打印内容的前后两边都需要用单引号标注清楚."
-    example: "例如: print '5乘以5等于 ' 5 * 5"
-    demo_code: "print '5乘以5等于 ' 5 * 5"
+-   explanation: "打印的时候要用单引号标注清楚"
+    example: "例如: {print} '5乘以5等于 ' 5 * 5"
+    demo_code: "{print} '5乘以5等于 ' 5 * 5"
     name: '{print}'
--   explanation: "用ask提问计算题的答案然后用if-else条件语句检查答案是否正确。."
-    example: "例如: answer = ask 10加10等于几?"
+-   explanation: "用{ask} 提问计算题的答案然后检查答案是否正确。"
+    example: "例如：答案 {is} {ask} ‘10加10等于几?’"
     demo_code: |-
-        answer = ask '10加10等于几?'
-        if answer is 20 print '做得好!' else print '糟糕,算错啦'
+        答案 = {ask} '10加10等于几?'
+        {if} 答案 {is} 20 {print} '做得好!' {else} {print} '糟糕,算错啦'
     name: '{ask}'
--   name: "`ask` and `if` turtle"
-    explanation: "Ask the user how many angles they want"
-    example: "Example: angles = ask 'How many angles?'"
+-   name: "`{ask}` {and} `{if}` 海龟绘图"
+    explanation: "{ask} 使用者想要多少度"
+    example: "例如: 角度 {is} {ask} '多少度？'"
     demo_code: |-
-        angles = ask 'How many angles?'
-        angle = 360 / angles
-        forward 50
+        角度 = {ask} '多少度？'
+        角度 = 360 / 度
+        {forward} 50
 7:
--   explanation: "Print的意思是打印，可以用print打印的内容前后两边都要用单引号标注清楚."
-    example: "例如: print '你好欢迎来到海迪.'"
-    demo_code: "print '你好欢迎来到海迪.'"
+-   explanation: "打印的内容要用单引号标注清楚."
+    example: "例如:{print} ‘你好欢迎来到海迪。’"
+    demo_code: "{print}'你好欢迎来到海迪。'"
     name: '{print}'
--   explanation: "Ask的意思是提问，用`ask`提出问题."
-    example: "例如: color = ask 你最喜欢的颜色是什么?"
+-   explanation: "用`{ask}`提出问题。"
+    example: "例如: 颜色 = {ask} 你最喜欢的颜色是什么?'"
     demo_code: |-
         color = ask '你最喜欢的颜色是什么?'
         print color ' is your favorite!'
     name: '{ask}'
--   explanation: "Make a choice with `if`"
-    example: "Example: if color is green print 'pretty!' else print 'meh'"
+-   explanation: "用`if`条件语句进行选择"
+    example: "例如: {if}颜色 {is} 绿色 {print} '漂亮!' {else} {print} '呵呵'"
     demo_code: |-
-        color = ask '你最喜欢的颜色是什么?'
-        if color is green print 'pretty!' else print 'meh'
+        颜色 = {ask} '你最喜欢的颜色是什么?'
+        {if} 颜色 {is} 绿色 {print} '漂亮!' {else} {print} '呵呵'
     name: '{if}'
--   explanation: "`repeat` and `if` combined"
-    example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+-   explanation: "`repeat` 和 `if` 组合。"
+    example: "例如: {repeat} 3 {times} {forward} 10"
     demo_code: |-
-        color = ask '你最喜欢的颜色是什么?'
-        if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'
-    name: '{repeat} - turtle'
+        {repeat} 3 {times} {forward} 10
+    name: '{repeat} - 海龟绘图'
 8:
--   explanation: "用print打印一些内容. 记得在打印内容的前后两边都用单引号标注清楚."
-    example: "Example: print '5乘以5等于 ' 5 * 5"
-    demo_code: "print '5乘以5等于 ' 5 * 5"
+-   explanation: "用print打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
+    example: "例如: {print} '5乘以5等于 ' 5 * 5"
+    demo_code: "{print} '5 乘以 5 等于 ' 5 * 5"
     name: '{print}'
--   explanation: "使用ask提问加法运算的答案然后检查答案是否正确. 我们现在可以打印两行代码了."
-    example: "例如: answer = ask 5加5等于几?"
+-   explanation: "使用ask提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。"
+    example: "例如: 答案 {is} {ask} '5加5等于几?'"
     demo_code: |-
-        answer = ask '5加5等于几?'
-        if answer is 10
-            print '做得好!'
-            print '的确, 答案就是 ' answer
-        else
-            print '糟糕!'
-            print '答案就是 10'
+        答案 = {ask} '5加5等于几?'
+        {if} 答案 {is} 10
+            {print} '做得好!'
+            {print} '的确, 答案就是 ' answer
+        否则
+            {print} '糟糕!'
+            {print} '答案就是 10'
     name: '{ask}'
--   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
-    example: 'Example: draw a square'
+-   name: '`{repeat}` 和海龟绘图'
+    explanation: '{repeat} 多行'
+    example: '例如: 画一个正方形'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
--   name: "`if` with multiple lines"
-    explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
+-   name: "`if`条件语句和多行"
+    explanation: "使用'{ask}'提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。"
     example: "Example: answer = ask 'What is 20 plus 20?'"
     demo_code: |-
         answer = ask 'What is 20 plus 20?'
@@ -185,24 +184,23 @@
             forward 50
 10:
 -   name: "print"
-    explanation: "Print something. Remember to use a quotation mark for literal printing."
-    example: "Example: print '5 times 5 is ' 5 * 5"
-    demo_code: "print '5 times 5 is ' 5 * 5"
--   name: "for with a list"
-    explanation: "print all things in a list "
-    example: "Example: for dier in dieren"
+    explanation: "用print打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
+    example: "例如: {print} '5乘以5等于 ' 5 * 5"
+    demo_code: "{print} '5乘以5等于 ' 5 * 5"
+-   name: "{for} 循环语句和一个列表"
+    explanation: "打印一个列表中的所有内容 "
+    example: "例如: {for} 动物 {in} 动物"
     demo_code: |-
-        animals is dog, cat, blobfish
-        for animal in animals
-          print 'I love ' animal
+        动物 {is} 狗，猫，泡泡鱼
+        {for} 动物 {in} 动物
+          {print} '我爱 ' 动物
 11:
--   explanation: "我们用`for`循环语句代替`repeat`循环语句"
-    example: "for i in range 1 to 10"
-    demo_code: |
-        for i in range 1 to 10
-          print i
-        print '无论你是否准备好了，我都会来的!'
-    name: '{for} loop'
+-   explanation: "我们用 `{for}` 和一个 {range}"
+    example: "给计数器变量赋值 {in} {range} 1 {to} 5"
+    demo_code: |-
+        {for} 计数器变量赋值 {in} {range} 1 {to} 5
+            {print} 计数器变量的值
+    name: '{for} 循环'
 -   example: "Example: answer = {ask} 'What is 5 plus 5?'"
     demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
     name: '{ask}'

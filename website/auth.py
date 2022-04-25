@@ -115,7 +115,7 @@ def is_user_logged_in():
 def forget_current_user():
     session.pop('user', None)  # We are not interested in the value of the use key.
     session.pop('achieved', None)  # Delete session achievements if existing
-    session.pop('keyword_lang', None)  # Delete session achievements if existing
+    session.pop('keyword_lang', None)  # Delete session keyword language if existing
 
 
 def is_admin(user):
@@ -224,6 +224,12 @@ def store_new_account(account, email):
                             link=create_verify_link(username, hashed_token), username=user['username'])
         resp = make_response({})
     return user, resp
+
+
+def create_recover_link(username, token):
+    email = email_base_url() + '/reset?username='
+    email += urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(token)
+    return email
 
 
 def create_verify_link(username, token):
@@ -609,7 +615,7 @@ def routes(app, database):
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
             send_email_template(template='recover_password', email=user['email'],
-                                link=create_verify_link(user['username'], token), username=user['username'])
+                                link=create_recover_link(user['username'], token), username=user['username'])
             return jsonify({'message':gettext('sent_password_recovery')}), 200
 
     @app.route('/auth/reset', methods=['POST'])

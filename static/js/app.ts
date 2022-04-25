@@ -10,8 +10,6 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
-var StopExecution = false;
-
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -225,13 +223,35 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
-export function runit(level: string, lang: string, answer_question: string, cb: () => void) {
+export function stopit() {
+  // We bucket-fix stop the current program by setting the run limit to 1ms
+  Sk.execLimit = 1;
+  $('#stopit').hide();
+  $('#runit').show();
+
+  // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
+  // This way the Promise is no longer "waiting" and can no longer mess with our next program
+  if ($('#inline-modal').is(":visible")) {
+    $('#inline-modal form').submit();
+    $('#inline-modal').hide();
+  }
+
+  window.State.disable_run = false;
+}
+
+export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
   if (window.State.disable_run) {
-    return modal.alert (answer_question, 3000, true);
+    // If there is no message -> don't show a prompt
+    if (disabled_prompt) {
+      return modal.alert(disabled_prompt, 3000, true);
+    } return;
   }
   if (reloadOnExpiredSession ()) return;
-  StopExecution = true;
 
+  // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
+  Sk.execLimit = 1;
+  $('#runit').hide();
+  $('#stopit').show();
 
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
@@ -245,10 +265,6 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
   outputDiv.append(variables);
   error.hide();
   success.hide();
-
-  var runItBtn = $('#runit');
-  runItBtn.prop('disabled', true);
-  setTimeout(function() {runItBtn.prop('disabled', false)}, 500);
 
   try {
     level = level.toString();
@@ -287,12 +303,13 @@ export function runit(level: string, lang: string, answer_question: string, cb: 
           // @ts-ignore
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
+        $('#stopit').hide();
+        $('#runit').show();
         return;
       }
-        runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
-        // If it is an error we throw due to program execution while another is running -> don't show and log it
-        if (!(err.message == "\"program_interrupt\"")) {
-          console.log(err);
+      runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
+        // The err is null if we don't understand it -> don't show anything
+        if (err != null) {
           error.show(ErrorMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
         }
@@ -757,10 +774,6 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
-  // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
-  // Please see note at the top of the `outf` function.
-  window.State.programsInExecution = 1;
-
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
@@ -800,29 +813,38 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
     timeoutMsg: function () {
-      pushAchievement("hedy_hacking");
-      return ErrorMessages ['Program_too_long']
+      // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+      if (Sk.execLimit != 1) {
+        pushAchievement("hedy_hacking");
+        return ErrorMessages ['Program_too_long'];
+      } else {
+        return null;
+      }
     },
-    // Give up after three seconds of execution, there might be an infinite loop.
-    // This function can be customized later to yield different timeouts for different levels.
+    // We want to make the timeout function a bit more sophisticated that simply setting a value
+    // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
+    // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
-      // const level = window.State.level;
-      return ((hasTurtle || hasSleep) ? 20000 : 3000);
+      const level = Number(window.State.level) || 0;
+      if (level < 7) {
+        // Set a non-realistic time-out of 5 minutes
+        return (3000000);
+      }
+      // Set a time-out of either 20 seconds (when turtle / sleep) or 5 seconds when not
+      return ((hasTurtle || hasSleep) ? 20000 : 5000);
     }) ()
   });
 
-  StopExecution = false;
   return Sk.misceval.asyncToPromise( () =>
     Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
-        if (StopExecution) {
-          window.State.programsInExecution = 0;
-          throw "program_interrupt";
-        }
+        // We don't do anything here...
       }
     }
    ).then(function(_mod) {
     console.log('Program executed');
+    $('#stopit').hide();
+    $('#runit').show();
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
@@ -836,9 +858,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }
     if (cb) cb ();
   }).catch(function(err) {
-    // Extract error message from error
-    console.log(err);
-    const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
+    const errorMessage = errorMessageFromSkulptError(err) || null;
+    if (!errorMessage) {
+      throw null;
+    }
     throw new Error(errorMessage);
   });
 
@@ -886,7 +909,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#turtlecanvas').hide();
     return new Promise(function(ok) {
       window.State.disable_run = true;
-      $ ('#runit').css('background-color', 'gray');
 
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
@@ -898,10 +920,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         input.focus();
       }, 0);
       $('#inline-modal form').one('submit', function(event) {
-
         window.State.disable_run = false;
-        $ ('#runit').css('background-color', '');
-
         event.preventDefault();
         $('#inline-modal').hide();
         if (hasTurtle) {

@@ -118,7 +118,10 @@
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-4">
       <div class="flex justify-between items-start h-12 overflow-visible">
-        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{_('run_code_button')}} </button>
+        <div>
+            <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}', '{{_('already_program_running')}}')">{{_('run_code_button')}}</button>
+            <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+        </div>
         {% if show_edit_button %}
             <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn">{{_('edit_code_button')}}</button>
         {% else %}

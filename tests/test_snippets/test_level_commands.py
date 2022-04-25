@@ -41,7 +41,7 @@ def collect_snippets(path):
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/commands')]
 
-lang = None #useful if you want to test just 1 language
+lang = 'ar' #useful if you want to test just 1 language
 if lang:
     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language == lang]
 
