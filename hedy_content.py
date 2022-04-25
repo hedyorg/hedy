@@ -89,7 +89,14 @@ class Commands:
             commands = copy.deepcopy(self.file.get(level))
             for command in commands:
                 for k, v in command.items():
-                    command[k] = v.format(**KEYWORDS.get(language))
+                    try:
+                        command[k] = v.format(**KEYWORDS.get(language))
+                    except IndexError:
+                        print("There is an issue due to an empty placeholder in the following line:")
+                        print(v)
+                    except KeyError:
+                        print("There is an issue due to a non-existing key in the following line:")
+                        print(v)
             keyword_data[level] = commands
         return keyword_data
 

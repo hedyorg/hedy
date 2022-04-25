@@ -263,6 +263,8 @@ def setup_language():
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
+
+    g.lang = session['lang']
     if 'keyword_lang' not in session:
         if g.lang in ALL_KEYWORD_LANGUAGES.keys():
             g.keyword_lang = g.lang
@@ -270,8 +272,6 @@ def setup_language():
             g.keyword_lang = "en"
     else:
         g.keyword_lang = session['keyword_lang']
-
-    g.lang = session['lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
