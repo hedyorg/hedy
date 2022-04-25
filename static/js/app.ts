@@ -1,7 +1,4 @@
 // It's important that this file gets loaded first
-/*import './syntaxLang-en';*/
-/*import './syntaxLang-es';*/
-/*import './syntaxLang-nl';*/
 import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
