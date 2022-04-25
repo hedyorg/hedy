@@ -177,6 +177,18 @@ def prepare_user_db(username, password):
 
     return username, hashed, hashed_token
 
+def validate_student_signup_data(account):
+    if not isinstance(account.get('username'), str):
+        return gettext('username_invalid')
+    if '@' in account.get('username') or ':' in account.get('username'):
+        return gettext('username_special')
+    if len(account.get('username').strip()) < 3:
+        return gettext('username_three')
+    if not isinstance(account.get('password'), str):
+        return gettext('password_invalid')
+    if len(account.get('password')) < 6:
+        return gettext('passwords_six')
+    return None
 
 def validate_signup_data(account):
     if not isinstance(account.get('username'), str):
@@ -192,6 +204,22 @@ def validate_signup_data(account):
     if len(account.get('password')) < 6:
         return gettext('passwords_six')
     return None
+
+
+def store_new_student_account(account, teacher_username):
+    username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])
+    user = {
+        'username': username,
+        'password': hashed,
+        'language': account['language'],
+        'keyword_language': account['keyword_language'],
+        'created': timems(),
+        'teacher': teacher_username,
+        'verification_pending': hashed_token,
+        'last_login': timems()
+    }
+    DATABASE.store_user(user)
+    return user
 
 
 def store_new_account(account, email):
