@@ -377,7 +377,6 @@ export function remove_customizations(class_id: string, prompt: string) {
             contentType: 'application/json',
             dataType: 'json'
         }).done(function (response) {
-            modal.alert(response.success, 3000, false);
             $('#remove_customizations_button').addClass('hidden');
             $('.adventure_level_input').show();
             $('.adventure_level_input').prop('checked', true);
@@ -386,6 +385,8 @@ export function remove_customizations(class_id: string, prompt: string) {
             $('.level-select-button').removeClass('blue-btn');
             $('.level-select-button').addClass('green-btn');
             $('.opening_date_container').removeClass('hidden');
+            $('.opening_date_input').removeAttr('value');
+            modal.alert(response.success, 3000, false);
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
         });
