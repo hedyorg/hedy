@@ -264,10 +264,14 @@ def setup_language():
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
     if 'keyword_lang' not in session:
-        session['keyword_lang'] = "en"
+        if g.lang in ALL_KEYWORD_LANGUAGES.keys():
+            g.keyword_lang = g.lang
+        else:
+            g.keyword_lang = "en"
+    else:
+        g.keyword_lang = session['keyword_lang']
 
     g.lang = session['lang']
-    g.keyword_lang = session['keyword_lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
@@ -1144,7 +1148,8 @@ def current_keyword_language():
 @app.template_global()
 def other_keyword_language():
     # If the current keyword language isn't English: we are sure the other option is English
-    if g.keyword_lang != "en":
+    # But, only if the user has an existing keyword language -> on the session
+    if session.get('keyword_lang') and session['keyword_lang'] != "en":
         return make_keyword_lang_obj("en")
     return None
 
