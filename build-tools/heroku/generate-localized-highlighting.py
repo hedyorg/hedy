@@ -9,7 +9,7 @@ os.chdir(os.path.join(os.path.dirname(__file__), '../..'))
 language = 'id'
 
 keywords_path = 'content/keywords/'
-typescript_path = 'static/js/keywordTranslation'
+typescript_path = 'highlighting/keywordTranslation'
 
 keywords_file_path = os.path.join(keywords_path, f'{language}.yaml')
 typescript_loc_file_path = os.path.join(typescript_path, f'syntaxLang-{language}.json')

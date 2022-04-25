@@ -1,12 +1,12 @@
-import * as LEVELS_en from './highlightingRules/highlighting-en.json';
-import * as LEVELS_nl from './highlightingRules/highlighting-nl.json';
-import * as LEVELS_es from './highlightingRules/highlighting-es.json';
-import * as LEVELS_ar from './highlightingRules/highlighting-ar.json';
-import * as LEVELS_fr from './highlightingRules/highlighting-fr.json';
-import * as LEVELS_hi from './highlightingRules/highlighting-hi.json';
-import * as LEVELS_tr from './highlightingRules/highlighting-tr.json';
-import * as LEVELS_id from './highlightingRules/highlighting-id.json';
-import * as LEVELS_nb_NO from './highlightingRules/highlighting-nb_NO.json';
+import * as LEVELS_en from '../../highlighting/highlightingRules/highlighting-en.json';
+import * as LEVELS_nl from '../../highlighting/highlightingRules/highlighting-nl.json';
+import * as LEVELS_es from '../../highlighting/highlightingRules/highlighting-es.json';
+import * as LEVELS_ar from '../../highlighting/highlightingRules/highlighting-ar.json';
+import * as LEVELS_fr from '../../highlighting/highlightingRules/highlighting-fr.json';
+import * as LEVELS_hi from '../../highlighting/highlightingRules/highlighting-hi.json';
+import * as LEVELS_tr from '../../highlighting/highlightingRules/highlighting-tr.json';
+import * as LEVELS_id from '../../highlighting/highlightingRules/highlighting-id.json';
+import * as LEVELS_nb_NO from '../../highlighting/highlightingRules/highlighting-nb_NO.json';
 
 
 
