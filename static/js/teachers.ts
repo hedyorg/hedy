@@ -389,7 +389,7 @@ export function remove_customizations(class_id: string, prompt: string) {
             // Remove the value from all input fields -> reset to text to show placeholder
             $('.opening_date_input').prop("type", "text");
             $('.opening_date_input').blur();
-            $('.opening_date_input').removeAttr('value');
+            $('.opening_date_input').val('');
             modal.alert(response.success, 3000, false);
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
