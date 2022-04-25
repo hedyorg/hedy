@@ -8,12 +8,11 @@ import urllib.parse
 from http.cookies import SimpleCookie
 
 # *** LIBRARIES ***
+from flask import session
 import unittest
 import requests
 
 # *** HEDY RESOURCES ***
-from flask import session, g
-
 import utils
 from config import config as CONFIG
 from hedy_content import ALL_LANGUAGES
