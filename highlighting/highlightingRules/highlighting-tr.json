@@ -4,7 +4,7 @@
         "rules": {
             "start": [
                 {
-                    "regex": "(^ *)((?:sor|ask))(.*)$",
+                    "regex": "(^ *)((sor|ask))(.*)$",
                     "token": [
                         "text",
                         "keyword",
@@ -13,7 +13,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:yazd\u0131r|print))(.*)$",
+                    "regex": "(^ *)((yazd\u0131r|print))(.*)$",
                     "token": [
                         "text",
                         "keyword",
@@ -22,7 +22,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:eko|echo))(.*)$",
+                    "regex": "(^ *)((eko|echo))(.*)$",
                     "token": [
                         "text",
                         "keyword",
@@ -31,7 +31,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:color|color))((?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]))(.*)$",
+                    "regex": "(^ *)((color|color))((?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]))(.*)$",
                     "token": [
                         "text",
                         "keyword",
@@ -41,27 +41,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:color|color))( +)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( *)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)((?:ileri|forward))(.*)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)((?:d\u00f6nd\u00fcr|turn))( *)((?:sol|left))( *)$",
+                    "regex": "(^ *)((color|color))( +)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( *)$",
                     "token": [
                         "text",
                         "keyword",
@@ -72,7 +52,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:d\u00f6nd\u00fcr|turn))( *)((?:sa\u011f|right))( *)$",
+                    "regex": "(^ *)((ileri|forward))(.*)$",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^ *)((d\u00f6nd\u00fcr|turn))( *)((sol|left))( *)$",
                     "token": [
                         "text",
                         "keyword",
@@ -83,7 +72,18 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:d\u00f6nd\u00fcr|turn))(.*)$",
+                    "regex": "(^ *)((d\u00f6nd\u00fcr|turn))( *)((sa\u011f|right))( *)$",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^ *)((d\u00f6nd\u00fcr|turn))(.*)$",
                     "token": [
                         "text",
                         "keyword",
@@ -117,7 +117,7 @@
         "rules": {
             "start": [
                 {
-                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)((?:e\u015fit|is))( *)((?:sor|ask))(.*)$",
+                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)((e\u015fit|is))( *)((sor|ask))(.*)$",
                     "token": [
                         "text",
                         "text",
@@ -130,7 +130,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)((?:e\u015fit|is))( *)(.*)$",
+                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)((e\u015fit|is))( *)(.*)$",
                     "token": [
                         "text",
                         "text",
@@ -142,7 +142,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:yazd\u0131r|print))(.*)$",
+                    "regex": "(^ *)((yazd\u0131r|print))(.*)$",
                     "token": [
                         "text",
                         "keyword",
@@ -151,7 +151,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:bekle|sleep))(.*)$",
+                    "regex": "(^ *)((bekle|sleep))(.*)$",
                     "token": [
                         "text",
                         "keyword",
@@ -160,7 +160,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:d\u00f6nd\u00fcr|turn))(.*)$",
+                    "regex": "(^ *)((d\u00f6nd\u00fcr|turn))(.*)$",
                     "token": [
                         "text",
                         "keyword",
@@ -169,7 +169,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:ileri|forward))(.*)$",
+                    "regex": "(^ *)((ileri|forward))(.*)$",
                     "token": [
                         "text",
                         "keyword",
@@ -203,7 +203,7 @@
         "rules": {
             "start": [
                 {
-                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)((?:e\u015fit|is))( *)((?:sor|ask))(.*)$",
+                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)((e\u015fit|is))( *)((sor|ask))(.*)$",
                     "token": [
                         "text",
                         "text",
@@ -216,7 +216,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)((?:e\u015fit|is))( *)(.*)$",
+                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)((e\u015fit|is))( *)(.*)$",
                     "token": [
                         "text",
                         "text",
@@ -228,21 +228,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)((?:sil|remove))( *)(.*)( +)((?:\u015furadan|from))( *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text",
-                        "text",
-                        "text",
-                        "keyword",
-                        "text",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)((?:ekle|add))( *)(.*)( +)((?:to|to))( *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)$",
+                    "regex": "(^ *)((sil|remove))( *)(.*)( +)((\u015furadan|from))( *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)$",
                     "token": [
                         "text",
                         "keyword",
@@ -256,32 +242,46 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)(?:yazd\u0131r|print)",
+                    "regex": "(^ *)((ekle|add))( *)(.*)( +)((to|to))( *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)$",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "text",
+                        "text",
+                        "keyword",
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^ *)(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)(?:d\u00f6nd\u00fcr|turn)",
+                    "regex": "(^ *)(d\u00f6nd\u00fcr|turn)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)(?:bekle|sleep)",
+                    "regex": "(^ *)(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)(?:ileri|forward)",
+                    "regex": "(^ *)(ileri|forward)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at) +(?:rastgele|random)",
+                    "regex": "(^| )(\u015furada|at) +(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)",
+                    "regex": "(^| )(\u015furada|at)",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -339,32 +339,32 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -374,32 +374,32 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ileri|forward)",
+                    "regex": "(^| )(ileri|forward)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:d\u00f6nd\u00fcr|turn)",
+                    "regex": "(^| )(d\u00f6nd\u00fcr|turn)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -439,47 +439,47 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -489,32 +489,32 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ileri|forward)",
+                    "regex": "(^| )(ileri|forward)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:d\u00f6nd\u00fcr|turn)",
+                    "regex": "(^| )(d\u00f6nd\u00fcr|turn)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -559,7 +559,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -568,7 +568,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -577,7 +577,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -586,7 +586,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ileri|forward))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ileri|forward))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -595,7 +595,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:d\u00f6nd\u00fcr|turn))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((d\u00f6nd\u00fcr|turn))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -604,7 +604,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -661,47 +661,47 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -736,32 +736,32 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ileri|forward)",
+                    "regex": "(^| )(ileri|forward)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:d\u00f6nd\u00fcr|turn)",
+                    "regex": "(^| )(d\u00f6nd\u00fcr|turn)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -806,7 +806,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -815,7 +815,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -824,7 +824,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -833,7 +833,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ileri|forward))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ileri|forward))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -842,7 +842,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:d\u00f6nd\u00fcr|turn))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((d\u00f6nd\u00fcr|turn))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -851,7 +851,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -908,57 +908,57 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:tekrar|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(tekrar|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:kere|times)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(kere|times)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -993,32 +993,32 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ileri|forward)",
+                    "regex": "(^| )(ileri|forward)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:d\u00f6nd\u00fcr|turn)",
+                    "regex": "(^| )(d\u00f6nd\u00fcr|turn)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -1063,7 +1063,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1072,7 +1072,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1081,7 +1081,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1090,7 +1090,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ileri|forward))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ileri|forward))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1099,7 +1099,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:d\u00f6nd\u00fcr|turn))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((d\u00f6nd\u00fcr|turn))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1108,7 +1108,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1117,7 +1117,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1126,7 +1126,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:kere|times))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((kere|times))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1183,47 +1183,47 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:tekrar|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(tekrar|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -1258,42 +1258,42 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ileri|forward)",
+                    "regex": "(^| )(ileri|forward)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:d\u00f6nd\u00fcr|turn)",
+                    "regex": "(^| )(d\u00f6nd\u00fcr|turn)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)",
+                    "regex": "(^| )(ba\u015fka|else)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:kere|times)",
+                    "regex": "(^| )(kere|times)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -1338,7 +1338,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1347,7 +1347,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1356,7 +1356,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1365,7 +1365,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ileri|forward))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ileri|forward))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1374,7 +1374,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:d\u00f6nd\u00fcr|turn))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((d\u00f6nd\u00fcr|turn))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1383,7 +1383,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1392,7 +1392,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1401,7 +1401,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:kere|times))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((kere|times))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1458,47 +1458,47 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:tekrar|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(tekrar|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -1533,42 +1533,42 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ileri|forward)",
+                    "regex": "(^| )(ileri|forward)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:d\u00f6nd\u00fcr|turn)",
+                    "regex": "(^| )(d\u00f6nd\u00fcr|turn)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)",
+                    "regex": "(^| )(ba\u015fka|else)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:kere|times)",
+                    "regex": "(^| )(kere|times)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -1613,7 +1613,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1622,7 +1622,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1631,7 +1631,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1640,7 +1640,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ileri|forward))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ileri|forward))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1649,7 +1649,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:d\u00f6nd\u00fcr|turn))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((d\u00f6nd\u00fcr|turn))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1658,7 +1658,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1667,7 +1667,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1676,7 +1676,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:kere|times))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((kere|times))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1733,52 +1733,52 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:tekrar|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(tekrar|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -1813,42 +1813,42 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ileri|forward)",
+                    "regex": "(^| )(ileri|forward)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:d\u00f6nd\u00fcr|turn)",
+                    "regex": "(^| )(d\u00f6nd\u00fcr|turn)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)",
+                    "regex": "(^| )(ba\u015fka|else)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:kere|times)",
+                    "regex": "(^| )(kere|times)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -1893,7 +1893,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1902,7 +1902,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1911,7 +1911,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1920,7 +1920,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1929,7 +1929,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1986,57 +1986,57 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -2071,27 +2071,27 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)",
+                    "regex": "(^| )(ba\u015fka|else)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -2136,7 +2136,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2145,7 +2145,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2154,7 +2154,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2163,7 +2163,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2172,7 +2172,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2229,57 +2229,57 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -2314,27 +2314,27 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)",
+                    "regex": "(^| )(ba\u015fka|else)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -2379,7 +2379,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2388,7 +2388,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2397,7 +2397,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2406,7 +2406,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2415,7 +2415,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2472,67 +2472,67 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -2567,27 +2567,27 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)",
+                    "regex": "(^| )(ba\u015fka|else)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -2632,7 +2632,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2641,7 +2641,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2650,7 +2650,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2659,7 +2659,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2740,72 +2740,72 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -2855,22 +2855,22 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -2915,7 +2915,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2924,7 +2924,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2933,7 +2933,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2942,7 +2942,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2951,7 +2951,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((ba\u015fka|else))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3032,72 +3032,72 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:iken|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(iken|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -3147,27 +3147,27 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)",
+                    "regex": "(^| )(ba\u015fka|else)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -3212,7 +3212,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3221,7 +3221,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3230,7 +3230,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3239,7 +3239,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3336,77 +3336,77 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:iken|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(iken|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -3466,22 +3466,22 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -3526,7 +3526,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3535,7 +3535,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((sor|ask))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3544,7 +3544,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3553,7 +3553,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3658,77 +3658,77 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:iken|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(iken|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -3793,27 +3793,27 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sor|ask)",
+                    "regex": "(^| )(sor|ask)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(?:elif|elif)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(elif|elif)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 }
@@ -3858,7 +3858,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((yazd\u0131r|print))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3867,7 +3867,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((bekle|sleep))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3876,7 +3876,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )((?:rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )((rastgele|random))([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3997,82 +3997,82 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u015fit|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furada|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ekle|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(to|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(sil|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furadan|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(i\u00e7inde|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(e\u011fer|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ba\u015fka|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015funun i\u00e7in|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(dizi|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(\u015furaya|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(ve|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(veya|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:iken|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(iken|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:girdi|input)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(girdi|input)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 },
@@ -4147,22 +4147,22 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:yazd\u0131r|print)",
+                    "regex": "(^| )(yazd\u0131r|print)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:bekle|sleep)",
+                    "regex": "(^| )(bekle|sleep)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(?:rastgele|random)",
+                    "regex": "(^| )(rastgele|random)",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
-                    "regex": "(?:elif|elif)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(elif|elif)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": "keyword",
                     "next": "start"
                 }
