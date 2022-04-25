@@ -400,8 +400,6 @@ def routes(app, database, achievements):
                 return {'error': gettext('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
 
         # Now -> actually store the users in the db
-        print(body.get('accounts'))
-        print(user['username'])
         for account in body.get('accounts', []):
             # Set the current teacher language and keyword language as new account language
             account['language'] = g.lang
