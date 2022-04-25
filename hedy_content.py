@@ -137,16 +137,21 @@ class Adventures:
         sorted_adventures = {}
         for adventure_index in ADVENTURE_ORDER:
             if self.file.get(adventure_index, None):
-                sorted_adventures[adventure_index] = (
-                    self.file.get(adventure_index))
+                sorted_adventures[adventure_index] = (self.file.get(adventure_index))
         self.file = sorted_adventures
         keyword_data = {}
         for short_name, adventure in self.file.items():
             parsed_adventure = copy.deepcopy(adventure)
             for level in adventure.get('levels'):
                 for k, v in adventure.get('levels').get(level).items():
-                    parsed_adventure.get('levels').get(
-                        level)[k] = v.format(**KEYWORDS.get(language))
+                    try:
+                        parsed_adventure.get('levels').get(level)[k] = v.format(**KEYWORDS.get(language))
+                    except IndexError:
+                        print("There is an issue due to an empty placeholder in the following line:")
+                        print(v)
+                    except KeyError:
+                        print("There is an issue due to a non-existing key in the following line:")
+                        print(v)
             keyword_data[short_name] = parsed_adventure
         return keyword_data
 
@@ -160,8 +165,7 @@ class Adventures:
             self.data["en"] = self.cache_adventure_keywords("en")
         adventures_dict = {}
         for adventure in self.data["en"].items():
-            adventures_dict[adventure[0]] = {
-                adventure[1]['name']: list(adventure[1]['levels'].keys())}
+            adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
         return adventures_dict
 
     # Todo TB -> We can also cache this; why not?
