@@ -385,8 +385,11 @@ export function remove_customizations(class_id: string, prompt: string) {
             $('.level-select-button').removeClass('blue-btn');
             $('.level-select-button').addClass('green-btn');
             $('.opening_date_container').removeClass('hidden');
-            $('.opening_date_input').removeAttr('value');
+
+            // Remove the value from all input fields -> reset to text to show placeholder
+            $('.opening_date_input').prop("type", "text");
             $('.opening_date_input').blur();
+            $('.opening_date_input').removeAttr('value');
             modal.alert(response.success, 3000, false);
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
