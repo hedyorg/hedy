@@ -115,7 +115,7 @@ def is_user_logged_in():
 def forget_current_user():
     session.pop('user', None)  # We are not interested in the value of the use key.
     session.pop('achieved', None)  # Delete session achievements if existing
-    session.pop('keyword_lang', None)  # Delete session achievements if existing
+    session.pop('keyword_lang', None)  # Delete session keyword language if existing
 
 
 def is_admin(user):

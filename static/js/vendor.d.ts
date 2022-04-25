@@ -11,6 +11,7 @@ declare const Sk: {
     worldHeight?: number;
   };
   execStart: date;
+  execLimit: number;
 
   builtinFiles?: {
     files: Record<string, string>;
