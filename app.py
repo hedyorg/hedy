@@ -776,8 +776,6 @@ def index(level, program_id):
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
-    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
-    # Todo TB -> Base quiz boolean on customizations as well
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
@@ -793,6 +791,9 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
 
+    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
+    if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
+        quiz = False
 
 
     return hedyweb.render_code_editor_with_tabs(
