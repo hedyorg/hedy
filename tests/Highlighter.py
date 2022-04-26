@@ -16,21 +16,82 @@ Tokencode = {
 }
 
 
-os.chdir(os.path.dirname(__file__) +"/..")
-root = os.getcwd()
+Abbreviation = {
+    "text"                : "T",
+    "uncolor"             : "T",
+    "txt"                 : "T",
+    "white"               : "T",
+    "T"                   : "T",
 
-print(root)
+    "keyword"             : "K",
+    "kw"                  : "K",
+    "red"                 : "K",
+    "K"                   : "K",
+
+    "comment"             : "C",
+    "cmt"                 : "C",
+    "grey"                : "C",
+    "C"                   : "C",
+
+    "variable"            : "N",
+    "number"              : "N",
+    "green"               : "N",
+    "N"                   : "N",
+
+    "constant.character"  : "S",
+    "string"              : "S",
+    "str"                 : "S",
+    "blue"                : "S",
+    "S"                   : "S",
+
+    "invalid"             : "I",
+    "inv"                 : "I",
+    "pink"                : "I",
+    "I"                   : "I",
+}
+
+def transforme(codeCol):
+    Code = ""
+    Colo = ""
+
+    flag = False
+    flag2 = False
+
+    for ch in codeCol:
+        if ch == "{" :
+            flag = True
+            flag2 = False
+            tmpCode = ""
+            tmpColo = ""
+        elif ch == "}":
+            flag = False
+            flag2 = False
+
+            Code += tmpCode
+            Colo += Abbreviation[tmpColo] * len(tmpCode)
+
+        elif flag:
+            if ch == "|":
+                flag2 = True
+            elif not flag2:
+                tmpCode += ch
+            elif flag2:
+                tmpColo += ch
+
+        elif not flag:
+            Colo += " "
+            Code += ch
+
+    return Code,Colo
+
+
+
+os.chdir(os.path.dirname(__file__) +"/..")
+
 # open data for regex
-file = open(root + '/tests/data.json') 
+file = open('tests/data.json') 
 dataRegex = json.load(file)
 file.close()
-
-
-
-
-
-
-
 
 
 class HighlightTester(unittest.TestCase):
@@ -63,6 +124,33 @@ class HighlightTester(unittest.TestCase):
 
         code = "\n".join(code)
         expected = "\n".join(expected)
+
+        self.assertHighlighted(code,expected,level,lang)
+
+
+
+    def assertHighlighted2(self,codeCol,level,lang="en"):
+        
+        codes,expected = transforme(codeCol)
+
+        rules  = self.getRules(level,lang)
+
+        result = self.simulateRulesWithoutToken(rules,code)
+
+        valid, indError = self.check(result,expected)
+        if not valid:
+            print("ERROR in level {} in {}:".format(level, lang))
+            print("In this code :",code.replace("\n","\\n"))
+            print("We want      :",expected.replace("\n","\\n"))
+            print("We have      :",result.replace("\n","\\n"))
+            print("At           :"," "* indError + "^")
+        self.assertTrue(valid)
+
+
+    def assertHighlightedMultiLine2(self,*args,level,lang="en"):
+        codeCol = "\n".join(args)
+
+        code,expected = transforme(codeCol)
 
         self.assertHighlighted(code,expected,level,lang)
 
