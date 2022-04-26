@@ -34,9 +34,9 @@ levels:
                 feedback: "Goed ! Met {print} kun je tekst printen !"
             -   option: |
                     ```
-                    hello
+                    hallo
                     ```
-                feedback: "Hello is geen commando, probeer het nog eens..."
+                feedback: "Hallo is geen commando, probeer het nog eens..."
             -   option: |
                     ```
                     {ask}
@@ -501,13 +501,22 @@ levels:
                 prijzen {is} 1 euro, 100 euro, 1 miljoen euro
                 {print} prijs {at} {random}
             mp_choice_options:
-            -   option: "{print} prijs"
-                feedback: "Je wilt niet het woord prijs printen, maar een {random} prijs uit het lijstje prijzen"
-            -   option: "{print} prijzen {at} {random}"
+            -   option: |
+                    ```
+                    {print} prijs
+                    ```
+                feedback: "Je wilt niet het woord prijs printen, maar een random prijs uit het lijstje prijzen"
+            -   option: |
+                    ```
+                    {print} prijzen {at} {random}
+                    ```
                 feedback: "Goed opgelet !"
-            -   option: "{print} {at} {random} prijs"
-                feedback: "At {random} moet achter de variabele."
-            -   option: "Niets de code is goed !"
+            -   option: |
+                    ```
+                    {print} {at} {random} prijs
+                    ```
+                feedback: "{at} {random} moet achter de variabele."
+            -   option: "Niets, de code is goed !"
                 feedback: "Kijk goed ! Er zit wel een fout in !"
             correct_answer: "B"
             hint: "Kijk goed de naam van de variabele 'prijzen'"
@@ -521,14 +530,14 @@ levels:
             mp_choice_options:
             -   option: "In regel 1 moet vragen staan in plaats van vraag"
                 feedback: "vraag is goed"
-            -   option: "In regel 2 moet is staan in plaats van zijn"
+            -   option: "In regel 2 moet `{is}` staan in plaats van `zijn`"
                 feedback: "Correct"
             -   option: "In regel 3 moet antwoord staan in plaats van antwoorden"
                 feedback: "Nee, in regel 2 heet de variabele namelijk ook antwoorden"
             -   option: "Niets ! Deze code is goed !"
                 feedback: "In regel 2 zit een foutje.."
             correct_answer: "B"
-            hint: "Zijn is geen commando."
+            hint: "`zijn` is geen commando."
             question_score: '10'
         6:
             question_text: "Wat is het foutje in deze code ?"
@@ -538,11 +547,11 @@ levels:
                 antwoorden {is} ja, nee, misschien
                 {print} antwoorden {at} {random}
             mp_choice_options:
-            -   option: "In regel 1 moet er {print} staan in plaats van {ask}"
+            -   option: "In regel 1 moet er `{print}` staan in plaats van `{ask}`"
                 feedback: "Zit er wel een fout in ?"
-            -   option: "In regel 2 moet er {ask} staan in plaats van {print}"
+            -   option: "In regel 2 moet er `{ask}` staan in plaats van `{print}`"
                 feedback: "Zit er wel een fout in ?"
-            -   option: "In regel 3 moet er staan antwoorden {at} {random} {is} ja, nee, misschien"
+            -   option: "In regel 3 moet er staan antwoorden `{at} {random}` `{is}` ja, nee, misschien"
                 feedback: "Zit er wel een fout in ?"
             -   option: "Niets, alles is goed !"
                 feedback: "Klopt !"
@@ -550,23 +559,23 @@ levels:
             hint: "Deze code was goed !"
             question_score: '10'
         7:
-            question_text: "Wat doet het {add} commando?"
+            question_text: "Wat doet het `{add}` commando?"
             code: |-
                 boeken {is} Harry Potter, de Hobbit, Pluk van de Petteflet
                 jouw_boek {is} {ask} Wat is jouw favoriete boek?
                 {add} jouw_boek {to_list} boeken
                 {print} boeken {at} {random}
             mp_choice_options:
-            -   option: "Het {add} commando haalt een {random} boek uit het lijstje boeken weg"
-                feedback: "Add is Engels voor toevoegen"
-            -   option: "Het {add} commando voegt een {random} boek aan het lijstje boeken toe"
-                feedback: "Het voegt inderdaad een boek toe aan het lijstje, maar niet zomaar een {random} boek!"
-            -   option: "Het {add} commando voegt jouw favoriete boek aan het lijstje toe"
+            -   option: "Het `{add}` commando haalt een random boek uit het lijstje boeken weg"
+                feedback: "`{add}` is Engels voor toevoegen"
+            -   option: "Het `{add}` commando voegt een random boek aan het lijstje boeken toe"
+                feedback: "Het voegt inderdaad een boek toe aan het lijstje, maar niet zomaar een random boek!"
+            -   option: "Het `{add}` commando voegt jouw favoriete boek aan het lijstje toe"
                 feedback: "Juist!"
-            -   option: "Het {add} commando verwijdert jouw favoriete boek uit het lijstje."
-                feedback: "Add is Engels voor toevoegen"
+            -   option: "Het `{add}` commando verwijdert jouw favoriete boek uit het lijstje."
+                feedback: "`{add}` is Engels voor toevoegen"
             correct_answer: "C"
-            hint: "Add is Engels voor toevoegen!"
+            hint: "`{add}` is Engels voor toevoegen!"
             question_score: '10'
         8:
             question_text: "Wat is de uitvoer van deze code?"
@@ -577,7 +586,7 @@ levels:
                 {print} chips {at} {random}
             mp_choice_options:
             -   option: "Dat weet je nog niet, want Hedy kiest een van de 3 smaken {at} {random}"
-                feedback: "Kijk goed naar de {remove} commando's"
+                feedback: "Kijk goed naar de `{remove}` commando's"
             -   option: "naturel"
                 feedback: "Naturel wordt uit het rijtje verwijderd"
             -   option: "paprika"
@@ -595,10 +604,10 @@ levels:
                 {remove} gekozen_kleur {from} kleuren
                 {print} Ik verf mijn haar kleur {at} {random}
             mp_choice_options:
-            -   option: "In regel 3 moet staan {remove} blauw {from} kleuren"
+            -   option: "In regel 3 moet staan `{remove}` blauw `{from}` kleuren"
                 feedback: "Misschien wil je wel graag blauwe haren!"
-            -   option: "In regel 3 moet een {add} commando staan in plaats van een {remove} commando"
-                feedback: "Je wil de gekozen kleur verwijderen, dus {remove} klopt"
+            -   option: "In regel 3 moet een `{add}` commando staan in plaats van een `{remove}` commando"
+                feedback: "Je wil de gekozen kleur verwijderen, dus `{remove}` klopt"
             -   option: " In regel 4 moet de variabele kleuren heten in plaats van kleur"
                 feedback: "Juist!"
             -   option: "Niets, alles is goed!"
@@ -615,13 +624,25 @@ levels:
                 _?_
                 {print} uitlaters {at} {random} is vandaag aan de beurt om de honden uit te laten!
             mp_choice_options:
-            -   option: "{remove} uitlater_gisteren {from} uitlaters"
+            -   option: |
+                    ```
+                    {remove} uitlater_gisteren {from} uitlaters"
+                    ```
                 feedback: "Super!"
-            -   option: "{remove} uitlater_gisteren to uitlaters"
-                feedback: "{remove} hoort bij {from} en {add} bij {to_list}"
-            -   option: "{remove} uitlaters {from} gisteren"
+            -   option: |
+                    ```
+                    {remove} uitlater_gisteren {to} uitlaters
+                    ```
+                feedback: "`{remove}` hoort bij `{from}` en `{add}` bij `{to_list}`"
+            -   option: |
+                    ```
+                    {remove} uitlaters {from} gisteren
+                    ```
                 feedback: "gisteren is geen variabele"
-            -   option: "{add} uitlater_gisteren {to_list} uitlaters"
+            -   option: |
+                    ```
+                    {add} uitlater_gisteren {to_list} uitlaters
+                    ```
                 feedback: "Hierdoor verhoog je de kans dat degene die gisteren de hond heeft uitgelaten het vandaag weer moet doen. Dat is oneerlijk!"
             correct_answer: "A"
             hint: "De uitlater van gisteren moet verwijderd worden uit het rijtje"
