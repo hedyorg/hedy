@@ -33,7 +33,7 @@
                             <p class="flex text-white place-content-center text-center font-slab font-semibold text-2xl italic question-text text-2xl"> {{ i + 1 }}) {{ result_items[i].question_text | nl2br }}</p>
                         {% endif %}
                         {% if "question_code" in result_items[i] %}
-                            {% if result_items[i]["question_code"] != "..." %}
+                            {% if result_items[i]["question_code"] %}
                                 <div class="turn-pre-into-ace w-3/4 mx-auto my-4">
                                     <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ result_items[i].question_code }}</pre>
                                 </div>
@@ -77,13 +77,13 @@
                     {% endif %}
                 </div>
                 <div class="grid-item grid grid-cols-2 gap-x-4">
-                    <div class="table-el bg-blue-200 shadow-lg flex flex-col-75 place-content-center rounded-b-md">
-                        {% if "option_text" in result_items[i] %}
-                            <p class="flex pl-6  text-center font-slab text-2xl question-text text-2xl"> {{ result_items[i].option_text | nl2br }}</p>
-                        {% elif "code" in result_items[i] %}
-                            <div class="turn-pre-into-ace w-3/4 mx-auto my-4">
-                                <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ result_items[i].code }}</pre>
+                    <div class="table-el bg-blue-200 shadow-lg flex flex-col-75 place-content-center rounded-b-md turn-pre-into-ace">
+                        {% if (result_items[i].option|commonmark)[0:5] == "<pre>" %}
+                            <div class="mx-4 mb-2">
+                                <pre class="no-copy-button" level="{{ level_source }}">{{result_items[i].option|commonmark}}</pre>
                             </div>
+                        {% else %}
+                            <div class="pt-8 px-2 mx-2 mb-2 text-lg">{{result_items[i].option|commonmark }}</div>
                         {% endif %}
                     </div>
                     {% if result_items[i].is_correct and result_items[i].attempts ==  1 %}
