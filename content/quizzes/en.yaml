@@ -197,30 +197,42 @@ levels:
         1:
             question_text: "Which statement is true?"
             mp_choice_options:
-                -   option: "In level 2 the {print} command doesn't exist anymore"
-                    feedback: "{print} still works"
-                -   option: "In level 2 the {ask} command doesn't exist anymore"
-                    feedback: "{ask} still works!"
-                -   option: "In level 2 the {echo} command doesn't exist anymore"
-                    feedback: "Good"
-                -   option: "In level 2 all the level 1 commands still work"
-                    feedback: "No one command doesn't work anymore."
+            -   option: "In level 2 the `{print}` command doesn't exist anymore"
+                feedback: "`{print}` still works"
+            -   option: "In level 2 the `{ask}` command doesn't exist anymore"
+                feedback: "`{ask}` still works!"
+            -   option: "In level 2 the `{echo}` command doesn't exist anymore"
+                feedback: "Good"
+            -   option: "In level 2 all the level 1 commands still work"
+                feedback: "No one command doesn't work anymore."
             correct_answer: "C"
-            hint: "{print} and {ask} still exist."
+            hint: "`{print}` and `{ask}` still exist."
             question_score: '10'
         2:
             question_text: "Which code is correct?"
             mp_choice_options:
-                -   option: "name {is} {ask} What is your name?"
-                    feedback: "Super!"
-                -   option: "{ask} {is} name What is your name"
-                    feedback: "The words are right, the order is not!"
-                -   option: "{ask} What is your name?"
-                    feedback: "This worked in level 1, but in level 2 and up it works differently."
-                -   option: "{ask} What is your name? {is} name"
-                    feedback: "The words are right, the order isn't!"
+            -   option: |
+                    ```
+                    name {is} {ask} What is your name?
+                    ```
+                feedback: "Super!"
+            -   option: |
+                    ```
+                    {ask} {is} name What is your name
+                    ```
+                feedback: "The words are right, the order is not!"
+            -   option: |
+                    ```
+                    {ask} What is your name?
+                    ```
+                feedback: "This worked in level 1, but in level 2 and up it works differently."
+            -   option: |
+                    ```
+                    {ask} What is your name? {is} name
+                    ```
+                feedback: "The words are right, the order isn't!"
             correct_answer: "A"
-            hint: "{ask} doesn't work like in level 1"
+            hint: "`{ask}` doesn't work like in level 1"
             question_score: '10'
         3:
             question_text: "What appears on your output screen when you run this code?"
@@ -228,14 +240,14 @@ levels:
                 name {is} Marleen
                 {print} name goes to the market and she buys an apple.
             mp_choice_options:
-                -   option: "name goes to the market and she buys an apple."
-                    feedback: "The word name is replaced with Marleen"
-                -   option: "Marleen goes to the market."
-                    feedback: "The second part of the sentence isn't left out!"
-                -   option: "Marleen goes to the market and she buys an apple."
-                    feedback: "Right on!"
-                -   option: "Marleen goes to the market and Marleen buys an apple."
-                    feedback: "She is not replaced with the name"
+            -   option: "name goes to the market and she buys an apple."
+                feedback: "The word name is replaced with Marleen"
+            -   option: "Marleen goes to the market."
+                feedback: "The second part of the sentence isn't left out!"
+            -   option: "Marleen goes to the market and she buys an apple."
+                feedback: "Right on!"
+            -   option: "Marleen goes to the market and Marleen buys an apple."
+                feedback: "She is not replaced with the name"
             correct_answer: "C"
             hint: "The word name is replaced with Marleen"
             question_score: '10'
@@ -245,31 +257,31 @@ levels:
                 name {is} Hedy
                 {print} Hi my name is name!
             mp_choice_options:
-                -   option: "Hi my name is name"
-                    feedback: "The variable name is replaced with Hedy"
-                -   option: "Hi my name is Hedy"
-                    feedback: "The variable name is replaced with Hedy"
-                -   option: "Hi my Hedy is name"
-                    feedback: "The variable name is replaced with Hedy"
-                -   option: "Hi my Hedy is Hedy"
-                    feedback: "Correct, this mistake will be fixed in level 3!"
+            -   option: "Hi my name is name"
+                feedback: "The variable name is replaced with Hedy"
+            -   option: "Hi my name is Hedy"
+                feedback: "The variable name is replaced with Hedy"
+            -   option: "Hi my Hedy is name"
+                feedback: "The variable name is replaced with Hedy"
+            -   option: "Hi my Hedy is Hedy"
+                feedback: "Correct, this mistake will be fixed in level 3!"
             correct_answer: "D"
             hint: "'name' is being replaced with 'Hedy' in both places"
             question_score: '10'
         5:
             question_text: "What happens when you use the `{sleep}` command?"
-            code: "sleep"
+            code: "{sleep}"
             mp_choice_options:
-                -   option: "It slows down your computer"
-                    feedback: "fortunately not!"
-                -   option: "It closes down Hedy"
-                    feedback: "fortunately not!"
-                -   option: "Your program pauses for a second and then continues"
-                    feedback: "That's right!"
-                -   option: "You put it at the end so Hedy knows your program is finished"
-                    feedback: "No it would be useless at the end of your code"
+            -   option: "It slows down your computer"
+                feedback: "fortunately not!"
+            -   option: "It closes down Hedy"
+                feedback: "fortunately not!"
+            -   option: "Your program pauses for a second and then continues"
+                feedback: "That's right!"
+            -   option: "You put it at the end so Hedy knows your program is finished"
+                feedback: "No it would be useless at the end of your code"
             correct_answer: "C"
-            hint: "The computer waits {for} a second at the sleep command"
+            hint: "The computer waits for a second at the `{sleep}` command"
             question_score: '10'
         6:
             question_text: "What should be on the lines?"
@@ -278,16 +290,28 @@ levels:
                 _?_
                 {print} Hedy!
             mp_choice_options:
-                -   option: "{sleep}"
-                    feedback: "Perfect!"
-                -   option: "{echo}"
-                    feedback: "There is nothing to repeat back here"
-                -   option: "{print}"
-                    feedback: "There is no text there to {print} there"
-                -   option: "{ask}"
-                    feedback: "There is no question there to be {ask}ed"
+            -   option: |
+                    ```
+                    {sleep}
+                    ```
+                feedback: "Perfect!"
+            -   option: |
+                    ```
+                    {echo}
+                    ```
+                feedback: "There is nothing to repeat back here"
+            -   option: |
+                    ```
+                    {print}
+                    ```
+                feedback: "There is no text there to `{print}` there"
+            -   option: |
+                    ```
+                    {ask}
+                    ```
+                feedback: "There is no question there to be asked"
             correct_answer: "A"
-            hint: "Pause {for} dramatic effect..."
+            hint: "Pause for dramatic effect..."
             question_score: '10'
         7:
             question_text: "What command should be used on line 2?"
@@ -296,14 +320,26 @@ levels:
                 _?_
                 {print} BOOM!
             mp_choice_options:
-                -   option: "{print} 3"
-                    feedback: "You don't need to {print}"
-                -   option: "{sleep} 3"
-                    feedback: "Perfect!"
-                -   option: "{sleep}"
-                    feedback: "This way the bomb will explode in 1 second"
-                -   option: "{sleep} {sleep} {sleep}"
-                    feedback: "Make it easier on yourself by using the number 3"
+            -   option: |
+                    ```
+                    {print} 3
+                    ```
+                feedback: "You don't need to `{print}`"
+            -   option: |
+                    ```
+                    {sleep} 3
+                    ```
+                feedback: "Perfect!"
+            -   option: |
+                    ```
+                    {sleep}
+                    ```
+                feedback: "This way the bomb will explode in 1 second"
+            -   option: |
+                    ```
+                    {sleep} {sleep} {sleep}
+                    ```
+                feedback: "Make it easier on yourself by using the number 3"
             correct_answer: "B"
             hint: "You want the computer to wait for 3 seconds"
             question_score: '10'
@@ -313,14 +349,26 @@ levels:
                 {ask} {is} How old are you?
                 {print} age
             mp_choice_options:
-                -   option: "age {ask} {is} How old are you?"
-                    feedback: "That is the wrong order"
-                -   option: "{ask} {is} age How old are you?"
-                    feedback: "That is the wrong order"
-                -   option: "age {is} {ask} How old are you?"
-                    feedback: "You get it!"
-                -   option: "age {is} How old are you?"
-                    feedback: "Where is the {ask} command"
+            -   option: |
+                    ```
+                    age {ask} {is} How old are you?
+                    ```
+                feedback: "That is the wrong order"
+            -   option: |
+                    ```
+                    {ask} {is} age How old are you?
+                    ```
+                feedback: "That is the wrong order"
+            -   option: |
+                    ```
+                    age {is} {ask} How old are you?
+                    ```
+                feedback: "You get it!"
+            -   option: |
+                    ```
+                    age {is} How old are you?
+                    ```
+                feedback: "Where is the `{ask}` command?"
             correct_answer: "C"
             hint: "The variable name should come first"
             question_score: '10'
@@ -330,16 +378,16 @@ levels:
                 dogs {is} animal
                 {print} I love animal
             mp_choice_options:
-                -   option: "Line 1 should say: `dogs {is} animals`"
-                    feedback: "The variable name is animal"
-                -   option: "Line 1 should say: animal is dogs"
-                    feedback: "Great!"
-                -   option: "Line 2 should say: {print} I love animals"
-                    feedback: "The variable name is animal"
-                -   option: "Line 2 should say: `{sleep} I love animals`"
-                    feedback: "Sleep is not used to {print} text"
+            -   option: "Line 1 should say: dogs `{is}` animals"
+                feedback: "The variable name is animal"
+            -   option: "Line 1 should say: animal `{is}` dogs"
+                feedback: "Great!"
+            -   option: "Line 2 should say: `{print}` I love animals"
+                feedback: "The variable name is animal"
+            -   option: "Line 2 should say: `{sleep}` I love animals"
+                feedback: "Sleep is not used to `{print}` text"
             correct_answer: "B"
-            hint: "You want to {print} 'I love dogs'"
+            hint: "You want to `{print}` 'I love dogs'"
             question_score: '10'
         10:
             question_text: "What command should be used on the line 1?"
@@ -349,18 +397,29 @@ levels:
                 {sleep}
                 {print} flavor
             mp_choice_options:
-                -   option: "{sleep} 3"
-                    feedback: "You want to know the favorite flavor!"
-                -   option: "{print} strawberries"
-                    feedback: "You do not want a {print} command at the middle of the line..."
-                -   option: "strawberries, chocolate, vanilla"
-                    feedback: "This way you are making a list. You don't want that now."
-                -   option: "{ask} What flavor icecream do you like?"
-                    feedback: "That's right!"
+            -   option: |
+                    ```
+                    {sleep} 3
+                    ```
+                feedback: "You want to know the favorite flavor!"
+            -   option: |
+                    ```
+                    {print} strawberries
+                    ```
+                feedback: "You do not want a `{print}` command at the middle of the line..."
+            -   option: |
+                    ```
+                    strawberries, chocolate, vanilla
+                    ```
+                feedback: "This way you are making a list. You don't want that now."
+            -   option: |
+                    ```
+                    {ask} What flavor icecream do you like?
+                    ```
+                feedback: "That's right!"
             correct_answer: "D"
-            hint: "You want to {ask} a question"
+            hint: "You want to `{ask}` a question"
             question_score: '10'
-
     3:
         1:
             question_text: "What command do you use to let Hedy pick something arbitrarily?"
