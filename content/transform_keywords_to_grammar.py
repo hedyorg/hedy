@@ -1,12 +1,6 @@
 from pathlib import Path
 import os
-import copy
-import utils
 import yaml
-
-def nop(s):
-  return s
-
 
 def extract_Lark_grammar_from_yaml(only_new_lang=True):
   """Creates a lark file in ../grammars/ for  all yaml files located in ../content/keywords/.
@@ -65,6 +59,5 @@ def extract_Lark_grammar_from_yaml(only_new_lang=True):
           f.write(f'{command}: "{translation}" | "{en_translation}"\n')
         else:
           f.write(f'{command}: "{translation}"\n')
-
 
 extract_Lark_grammar_from_yaml(True)
