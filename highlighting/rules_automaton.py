@@ -6,39 +6,39 @@ from definition import *
 
 def rule_level1(keywordLang):
     return {"start" : [{
-        'regex': START_LINE + "(" + keywordLang["ask"] + ")(.*)$",
+        'regex': START_LINE + keywordLang["ask"] + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["print"] + ")(.*)$",
+        'regex': START_LINE + keywordLang["print"] + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["echo"] + ")(.*)$",
+        'regex': START_LINE + keywordLang["echo"] + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["color"] + ")(" + END_WORD + ")(.*)$",
+        'regex': START_LINE + keywordLang["color"] + END_WORD + "(.*)$",
         'token': ['text','keyword','text','text'],
         'next': 'start',
     }, {
-        'regex': START_LINE + "(" + keywordLang["color"] + ")(" + SPACE + ")(" + WORD + ")( *)$",
+        'regex': START_LINE + keywordLang["color"] + SPACE + WORD + "( *)$",
         'token': ['text','keyword','text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["forward"] + ")(.*)$",
+        'regex': START_LINE + keywordLang["forward"] + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["turn"] + ")( *)(" + keywordLang["left"] + ")( *)$",
+        'regex': START_LINE + keywordLang["turn"] + "( *)" + keywordLang["left"] + "( *)$",
         'token': ['text','keyword','text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["turn"] + ")( *)(" + keywordLang["right"] + ")( *)$",
+        'regex': START_LINE + keywordLang["turn"] + "( *)" + keywordLang["right"] + "( *)$",
         'token': ['text','keyword','text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["turn"] + ")(.*)$",
+        'regex': START_LINE + keywordLang["turn"] + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     },{
@@ -57,27 +57,27 @@ def rule_level1(keywordLang):
 
 def rule_level2(keywordLang) :
     return {"start" : [{
-        'regex': START_LINE + "("+WORD+ ")(" + SPACE + ")(" + keywordLang["is"] + ")( *)(" + keywordLang["ask"] + ")(.*)$",
+        'regex': START_LINE + WORD + SPACE + keywordLang["is"] + "( *)" + keywordLang["ask"] + "(.*)$",
         'token': ["text",'text','text','keyword','text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "("+WORD+ ")(" + SPACE + ")(" + keywordLang["is"] + ")( *)(.*)$",
+        'regex': START_LINE + WORD + SPACE + keywordLang["is"] + "( *)(.*)$",
         'token': ["text",'text','text','keyword','text','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["print"] + ")(.*)$",
+        'regex': START_LINE + keywordLang["print"] + "(.*)$",
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["sleep"] + ")(.*)$",
+        'regex': START_LINE + keywordLang["sleep"] + "(.*)$",
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["turn"] + ")(.*)$",
+        'regex': START_LINE + keywordLang["turn"] + "(.*)$",
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["forward"] + ")(.*)$",
+        'regex': START_LINE + keywordLang["forward"] + "(.*)$",
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
@@ -96,19 +96,19 @@ def rule_level2(keywordLang) :
 
 def rule_level3(keywordLang):
     return {"start" : [{
-        'regex': START_LINE + "("+WORD+ ")(" + SPACE + ")(" + keywordLang["is"] + ")( *)(" + keywordLang["ask"] + ")(.*)$",
+        'regex': START_LINE + WORD + SPACE + keywordLang["is"] + "( *)" + keywordLang["ask"] + "(.*)$",
         'token': ["text",'text','text','keyword','text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "("+WORD+ ")(" + SPACE + ")(" + keywordLang["is"] + ")( *)(.*)$",
+        'regex': START_LINE + WORD + SPACE + keywordLang["is"] + "( *)(.*)$",
         'token': ["text",'text','text','keyword','text','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["remove"] + ")( *)(.*)(" + SPACE + ")(" + keywordLang["from"] + ")( *)("+ WORD +")$",
+        'regex': START_LINE + keywordLang["remove"] + "( *)(.*)" + SPACE + keywordLang["from"] + "( *)"+ WORD +"$",
         'token': ["text",'keyword','text','text','text','keyword','text','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + "(" + keywordLang["add"] + ")( *)(.*)(" + SPACE + ")(" + keywordLang["to_list"] + ")( *)("+ WORD +")$",
+        'regex': START_LINE + keywordLang["add"] + "( *)(.*)" + SPACE + keywordLang["to_list"] + "( *)"+ WORD +"$",
         'token': ["text",'keyword','text','text','text','keyword','text','text'],
         'next': 'start',
     },{

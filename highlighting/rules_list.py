@@ -54,23 +54,23 @@ def ruleALL(keywordLang, level):
     # Rules for numbers
     if (NUMBERS[level]["number"]) :
         if (NUMBERS[level]["number_with_decimal"]) :
-            numberRegex = START_WORD + '[0-9]*\\.?[0-9]+' + END_WORD
+            numberRegex = START_WORD + '([0-9]*\\.?[0-9]+)' + END_WORD
         else:
-            numberRegex = START_WORD + '[0-9]+' + END_WORD
+            numberRegex = START_WORD + '([0-9]+)' + END_WORD
 
         list_rules.append({'regex':numberRegex, 'token': 'variable', 'next':'start'} )
 
         # Special case of an number directly followed by a number 
         for command in keywordLangByLevel["SP_K"]: 
             list_rules.append({
-                'regex': START_WORD + "("+ command + ')([0-9]+)' + END_WORD,
+                'regex': START_WORD + command + numberRegex + END_WORD,
                 'token': ['text','keyword','variable'],
                 'next': 'start',
             })
 
         for command in keywordLangByLevel["K"]:
             list_rules.append({
-                'regex': "(" + command + ')([0-9]+)' + END_WORD,
+                'regex': command + numberRegex + END_WORD,
                 'token': ['keyword','variable'],
                 'next': 'start',
             })
