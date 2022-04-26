@@ -424,14 +424,26 @@ levels:
         1:
             question_text: "What command do you use to let Hedy pick something arbitrarily?"
             mp_choice_options:
-                -   option: "{print}"
-                    feedback: "{print} is used to print text"
-                -   option: "{ask}"
-                    feedback: "{ask} is used to ask a question"
-                -   option: "{is}"
-                    feedback: "{is} is used to make a list"
-                -   option: "{at} {random}"
-                    feedback: "Correct!"
+            -   option: |
+                    ```
+                    {print}
+                    ```
+                feedback: "`{print}` is used to print text"
+            -   option: |
+                    ```
+                    {ask}
+                    ```
+                feedback: "`{ask}` is used to ask a question"
+            -   option: |
+                    ```
+                    {is}
+                    ```
+                feedback: "`{is}` is used to make a list"
+            -   option: |
+                    ```
+                    {at} {random}
+                    ```
+                feedback: "Correct!"
             correct_answer: "D"
             hint: "Arbitrarily means without a plan or randomly."
             question_score: '10'
@@ -441,14 +453,14 @@ levels:
                 animals {is} dog cat cow
                 {print} animals {at} {random}
             mp_choice_options:
-                -   option: "You need commas in line 1: dog, cat, cow."
-                    feedback: "Good job!"
-                -   option: "Line 1 needs to start with {print}."
-                    feedback: "No, you don't need {print}"
-                -   option: "Line 2 needs to say 'animal' instead of 'animals'',"
-                    feedback: "animals is correct."
-                -   option: "'{at} {random} is spelled incorrectly"
-                    feedback: "{at} {random} is the correct spelling"
+            -   option: "You need commas in line 1: dog, cat, cow."
+                feedback: "Good job!"
+            -   option: "Line 1 needs to start with `{print}`."
+                feedback: "No, you don't need `{print}`"
+            -   option: "Line 2 needs to say 'animal' instead of 'animals'',"
+                feedback: "animals is correct."
+            -   option: "`{at} {random}` is spelled incorrectly"
+                feedback: "`{at} {random}` is the correct spelling"
             correct_answer: "A"
             hint: "There's something wrong in line 1"
             question_score: '10'
@@ -458,14 +470,23 @@ levels:
                 options {is} rock, paper, scissors
                 {print} rock, paper, scissors {at} {random}
             mp_choice_options:
-                -   option: "{at} {random} {print} options"
-                    feedback: "You're almost there. The order of the words isn't right yet."
-                -   option: "{print} rock {at} {random}"
-                    feedback: "you don't always want the Hedy to {print} rock, sometimes you want scissors or paper."
-                -   option: "{print} options {at} {random}"
-                    feedback: "Very good!"
-                -   option: "Nothing, the code is correct!"
-                    feedback: "Look carefully for the mistake"
+            -   option: |
+                    ```
+                    {at} {random} {print} options
+                    ```
+                feedback: "You're almost there. The order of the words isn't right yet."
+            -   option: |
+                    ```
+                    {print} rock {at} {random}
+                    ```
+                feedback: "you don't always want the Hedy to {print} rock, sometimes you want scissors or paper."
+            -   option: |
+                    ```
+                    {print} options {at} {random}
+                    ```
+                feedback: "Very good!"
+            -   option: "Nothing, the code is correct!"
+                feedback: "Look carefully for the mistake"
             correct_answer: "C"
             hint: "The variable (the list) is called options."
             question_score: '10'
@@ -475,14 +496,23 @@ levels:
                 prices {is} 1 dollar, 100 dollar, 1 million dollar
                 {print} price {at} {random}
             mp_choice_options:
-                -   option: "{print} price"
-                    feedback: "You don't want to {print} the word price, but you want to {print} one price out of your list {at} {random}"
-                -   option: "{print} prices {at} {random}"
-                    feedback: "Great! You've really paid attention."
-                -   option: "{print} {at} {random} price"
-                    feedback: "{at} {random} is placed behind the variable."
-                -   option: "Nothing, this code is alright."
-                    feedback: "Look carefully for the mistake you missed!"
+            -   option: |
+                    ```
+                    {print} price
+                    ```
+                feedback: "You don't want to `{print}` the word price, but you want to `{print}` one price out of your list `{at} {random}`"
+            -   option: |
+                    ```
+                    {print} prices {at} {random}
+                    ```
+                feedback: "Great! You've really paid attention."
+            -   option: |
+                    ```
+                    {print} {at} {random} price
+                    ```
+                feedback: "`{at} {random}` is placed behind the variable."
+            -   option: "Nothing, this code is alright."
+                feedback: "Look carefully for the mistake you missed!"
             correct_answer: "B"
             hint: "The variable name is prices"
             question_score: '10'
@@ -494,11 +524,11 @@ levels:
                 answers {is} yes, no, maybe
                 {print} answers {at} {random}
             mp_choice_options:
-                -   option: "Line 1 needs to say {print} instead of {ask}"
+                -   option: "Line 1 needs to say `{print}` instead of `{ask}`"
                     feedback: "No, that's not wrong."
-                -   option: "Line 2 needs to say {ask} instead of {print}"
+                -   option: "Line 2 needs to say `{ask}` instead of `{print}`"
                     feedback: "No that's not wrong."
-                -   option: "Line 2 needs to say answers {at} {random} is yes, no, maybe"
+                -   option: "Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe"
                     feedback: "No, that's not wrong."
                 -   option: "Nothing, this code is perfect"
                     feedback: "That's right!"
@@ -514,7 +544,7 @@ levels:
             mp_choice_options:
                 -   option: "Line 2 needs to say question instead of answers"
                     feedback: "No that's not right"
-                -   option: "Line 2 needs the {is} command"
+                -   option: "Line 2 needs the `{is}` command"
                     feedback: "Correct"
                 -   option: "Line 3 needs to say answer instead of answers"
                     feedback: "No the variable's called answers"
@@ -524,23 +554,23 @@ levels:
             hint: "There is something wrong with line 2."
             question_score: '10'
         7:
-            question_text: "What does the {add} command do?"
+            question_text: "What does the `{add}` command do?"
             code: |-
                     books {is} Harry Potter, de Hobbit, Green eggs and Ham
                     your_book {is} {ask} What is your favorite book?
                     {add} your_book {to} books
                     {print} books {at} {random}
             mp_choice_options:
-            -   option: "The {add} command removes a random book from the list"
+            -   option: "The `{add}` command removes a random book from the list"
                 feedback: "The remove command removes, the add command adds"
-            -   option: "The {add} command adds a random book to a list"
+            -   option: "The `{add}` command adds a random book to a list"
                 feedback: "It doesn't. It adds your answer to the list!"
-            -   option: "The {add} command adds your favorite book to the list"
+            -   option: "The `{add}` command adds your favorite book to the list"
                 feedback: "Correct!"
-            -   option: "The {add} command prints your favorite book."
+            -   option: "The `{add}` command prints your favorite book."
                 feedback: "No, it adds your favorite book to the list"
             correct_answer: "C"
-            hint: "The {add} command adds a book, but which one?"
+            hint: "The `{add}` command adds a book, but which one?"
             question_score: '10'
         8:
             question_text: "What is the output of this code?"
@@ -550,8 +580,8 @@ levels:
                     {remove} paprika {from} crisps
                     {print} crisps {at} {random}
             mp_choice_options:
-            -   option: "You can't tell, because Hedy will {print} one of the 3 flavors {at} {random}"
-                feedback: "Take a look at the {remove} commands"
+            -   option: "You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`"
+                feedback: "Take a look at the `{remove}` commands"
             -   option: "sea salt"
                 feedback: "sea salt is removed from the list"
             -   option: "paprika"
@@ -569,10 +599,10 @@ levels:
                     {remove} chosen_color {from} colors
                     {print} I will dye my hair color {at} {random}
             mp_choice_options:
-            -   option: "Line 3 should say: {remove} blue {from} colors"
+            -   option: "Line 3 should say: `{remove}` blue `{from}` colors"
                 feedback: "Maybe you want blue hair though!"
-            -   option: "Line 3 should have an {add} command instead of a {remove} command"
-                feedback: "You want to remove the chosen color so {remove} is right."
+            -   option: "Line 3 should have an `{add}` command instead of a `{remove}` command"
+                feedback: "You want to remove the chosen color so `{remove}` is right."
             -   option: "In line 4 the variable should be called colors instead of color"
                 feedback: "Great job!"
             -   option: "Nothing, this is a correct code!"
@@ -589,13 +619,25 @@ levels:
                     _?_
                     {print} walkers {at} {random} , it's your turn to walk the dogs!
             mp_choice_options:
-            -   option: "{remove} walked_yesterday {from} walkers"
+            -   option: |
+                    ```
+                    {remove} walked_yesterday {from} walkers
+                    ```
                 feedback: "Super!"
-            -   option: "{remove} walked yesterday {to} walkers"
-                feedback: "{remove} {from} or {add} {to}, not {remove} {to}"
-            -   option: "{remove} walkers {from} yesterday"
+            -   option: |
+                    ```
+                    {remove} walked yesterday {to} walkers
+                    ```
+                feedback: "`{remove} {from}` or `{add} {to}`, not `{remove} {to}`"
+            -   option: |
+                    ```
+                    {remove} walkers {from} yesterday
+                    ```
                 feedback: "yesterday is not a variable"
-            -   option: "{add} walked_yesterday {to} walkers"
+            -   option: |
+                    ```
+                    {add} walked_yesterday {to} walkers
+                    ```
                 feedback: "This increased the change that the person who walked yesterday now has to do it again. That's mean."
             correct_answer: "A"
             hint: "The person who walked the dog yesterday should be removed from the list."
@@ -605,56 +647,80 @@ levels:
         1:
             question_text: "Which of these is true?"
             mp_choice_options:
-                -   option: "{print} and {ask} now need quotation marks"
-                    feedback: "That's right"
-                -   option: "Only {print} needs quotation marks"
-                    feedback: "{ask} needs quotation marks too!"
-                -   option: "{at} {random} doesn't work anymore in level 4"
-                    feedback: "{at} {random} still works"
-                -   option: "{at} {random} now needs quotation marks"
-                    feedback: "No, but 2 other commands do."
+            -   option: "`{print}` and `{ask}` now need quotation marks"
+                feedback: "That's right"
+            -   option: "Only `{print}` needs quotation marks"
+                feedback: "`{ask}` needs quotation marks too!"
+            -   option: "`{at} {random}` doesn't work anymore in level 4"
+                feedback: "`{at} {random}` still works"
+            -   option: "`{at} {random}` now needs quotation marks"
+                feedback: "No, but 2 other commands do."
             correct_answer: "A"
             hint: "In level 4 you need quotation marks for 2 commands."
             question_score: '10'
         2:
             question_text: "Which code uses the proper quotation marks?"
             mp_choice_options:
-                -   option: "{print} `hello`"
-                    feedback: "This quotation mark is skewed, you need a straight one."
-                -   option: "{print} 'hello'"
-                    feedback: "Correct"
-                -   option: "{print} hello"
-                    feedback: "There are no quotation marks here!."
-                -   option: "{print} ,hello,"
-                    feedback: "This is a comma, you need quotation marks."
+            -   option: |
+                    ```
+                    {print} `hello`
+                    ```
+                feedback: "This quotation mark is skewed, you need a straight one."
+            -   option: |
+                ```
+                {print} 'hello'
+                ```
+                feedback: "Correct"
+            -   option: |
+                    ```
+                    {print} hello
+                    ```
+                feedback: "There are no quotation marks here!."
+            -   option: |
+                    ```
+                    {print} ,hello,
+                    ```
+                feedback: "This is a comma, you need quotation marks."
             correct_answer: "B"
             hint: "Pick the right quotation marks."
             question_score: '10'
         3:
             question_text: "Where are the quotation marks used correctly?"
             mp_choice_options:
-                -   option: "{print} Hi Im Hedy"
-                    feedback: "Add quotation marks please!"
-                -   option: "{print} 'Hi Im Hedy"
-                    feedback: "Both before and after the words you want to print should be a quotation mark."
-                -   option: "'{print} Hi Im Hedy'"
-                    feedback: "The first quotation mark should be behind the word {print}"
-                -   option: "{print} 'Hi Im Hedy'"
-                    feedback: "Perfect!"
+            -   option: |
+                    ```
+                    {print} Hi Im Hedy
+                    ```
+                feedback: "Add quotation marks please!"
+            -   option: |
+                    ```
+                    {print} 'Hi Im Hedy
+                    ```
+                feedback: "Both before and after the words you want to print should be a quotation mark."
+            -   option: |
+                    ```
+                    '{print} Hi Im Hedy'
+                    ```
+                feedback: "The first quotation mark should be behind the word {print}"
+            -   option: |
+                    ```
+                    {print} 'Hi Im Hedy'
+                    ```
+                feedback: "Perfect!"
             correct_answer: "D"
             hint: "Both before and after the words you want to print should be a quotation mark."
             question_score: '10'
         4:
             question_text: "Which statement is true?"
             mp_choice_options:
-                -   option: "You need quotation marks around the word {print}, like this: '{print}'."
-                    feedback: "The quotation marks shouldn't be around the command itself."
-                -   option: "You need quotation marks around the words you want to print."
-                    feedback: "Super!"
-                -   option: "You do not need quotation marks when using the {ask} command"
-                    feedback: "Both {print} and {ask} require quotation marks"
-                -   option: "You can choose yourself whether to use quotation marks or not."
-                    feedback: "Unfortunately, Hedy is stricter than that."
+            -   option: "You need quotation marks around the word `{print}`, like this: `'{print}'`."
+                feedback: "The quotation marks shouldn't be around the command itself."
+            -   option: "You need quotation marks around the words you want to print."
+                feedback: "Super!"
+            -   option: "You do not need quotation marks when using the `{ask}` command"
+                feedback: "Both `{print}` and `{ask}` require quotation marks"
+            -   option: "You can choose yourself whether to use quotation marks or not."
+                feedback: "Unfortunately, Hedy is stricter than that."
             correct_answer: "B"
             hint: "From level 4 on you need to use quotation marks."
             question_score: '10'
@@ -664,14 +730,23 @@ levels:
                 options {is} rock, paper, scissors
                 {print} 'options {at} {random}'
             mp_choice_options:
-                -   option: "'{print} options {at} {random}'"
-                    feedback: "Never put the quotation mark in front of the {print} command."
-                -   option: "{print} 'options' {at} {random}"
-                    feedback: "options is a variable. You don't literally want to print 'options {at} {random}'."
-                -   option: "{print} options {at} {random}"
-                    feedback: "That's right"
-                -   option: "Nothing, the game already works!"
-                    feedback: "Look carefully. There is an error."
+            -   option: |
+                    ```
+                    '{print} options {at} {random}'
+                    ```
+                feedback: "Never put the quotation mark in front of the {print} command."
+            -   option: |
+                    ```
+                    {print} 'options' {at} {random}
+                    ```
+                feedback: "options is a variable. You don't literally want to print 'options {at} {random}'."
+            -   option: |
+                    ```
+                    {print} options {at} {random}
+                    ```
+                feedback: "That's right"
+            -   option: "Nothing, the game already works!"
+                feedback: "Look carefully. There is an error."
             correct_answer: "C"
             hint: "You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'."
             question_score: '10'
@@ -680,14 +755,26 @@ levels:
             code: |-
                 prices {is} 1 dollar, 100 dollars, 1 million dollars
             mp_choice_options:
-                -   option: "{print} 'You win...' prices {at} {random}"
-                    feedback: "Great! You get it!"
-                -   option: "{print} You win... 'prices {at} {random}'"
-                    feedback: "Hedy will literally print 'prices {at} {random}'"
-                -   option: "{print} You win... prices {at} {random}"
-                    feedback: "You need some quotation marks!"
-                -   option: "{print} 'You win... prices {at} {random}'"
-                    feedback: "Hedy will literally print 'prices {at} {random}''"
+            -   option: |
+                    ```
+                    {print} 'You win...' prices {at} {random}
+                    ```
+                feedback: "Great! You get it!"
+            -   option: |
+                    ```
+                    {print} You win... 'prices {at} {random}'
+                    ```
+                feedback: "Hedy will literally print 'prices {at} {random}'"
+            -   option: |
+                    ```
+                    {print} You win... prices {at} {random}
+                    ```
+                feedback: "You need some quotation marks!"
+            -   option: |
+                    ```
+                    {print} 'You win... prices {at} {random}'
+                    ```
+                feedback: "Hedy will literally print 'prices {at} {random}''"
             correct_answer: "A"
             hint: "Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?."
             question_score: '10'
@@ -698,14 +785,14 @@ levels:
                 answers {is} yes, no, maybe
                 {print} answers {at} {random}
             mp_choice_options:
-                -   option: "Quotation marks are missing in line 1"
-                    feedback: "Correct!"
-                -   option: "Quotation marks are missing in line 2"
-                    feedback: "A variable doesn't need quotes"
-                -   option: "Quotation marks are missing in line 3"
-                    feedback: "You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!"
-                -   option: "Nothing, this code is good as is!"
-                    feedback: "Look carefully. You missed a mistake!"
+            -   option: "Quotation marks are missing in line 1"
+                feedback: "Correct!"
+            -   option: "Quotation marks are missing in line 2"
+                feedback: "A variable doesn't need quotes"
+            -   option: "Quotation marks are missing in line 3"
+                feedback: "You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!"
+            -   option: "Nothing, this code is good as is!"
+                feedback: "Look carefully. You missed a mistake!"
             correct_answer: "A"
             hint: "Check each line on whether they'd need quotation marks or not."
             question_score: '10'
@@ -716,14 +803,26 @@ levels:
                 {print} 'In front of you are 3 doors'
                 door {is} {ask} 'Which door do you choose?'
             mp_choice_options:
-                -   option: "{print} So you pick door door"
-                    feedback: "We need quotation marks"
-                -   option: "{print} 'So you pick ' door door"
-                    feedback: "If the player chooses door 3, Hedy will say 'So you pick 3 3"
-                -   option: "{print} 'So you pick door ' door"
-                    feedback: "Super!"
-                -   option: "{print} 'So you pick door door'"
-                    feedback: "Hedy will literally print 'So you pick door door"
+            -   option: |
+                    ```
+                    {print} So you pick door door
+                    ```
+                feedback: "We need quotation marks"
+            -   option: |
+                    ```
+                    {print} 'So you pick ' door door
+                    ```
+                feedback: "If the player chooses door 3, Hedy will say 'So you pick 3 3"
+            -   option: |
+                    ```
+                    {print} 'So you pick door ' door
+                    ```
+                feedback: "Super!"
+            -   option: |
+                    ```
+                    {print} 'So you pick door door'
+                    ```
+                feedback: "Hedy will literally print 'So you pick door door"
             correct_answer: "C"
             hint: "The second word door should be replaced with the number, the first should still be the word door..."
             question_score: '10'
@@ -734,11 +833,11 @@ levels:
                 {print} clubs {at} {random} ' is going the win the champions league'
             mp_choice_options:
                 -   option: "Ajax is going to win the champions league"
-                    feedback: "Hedy could {print} that"
+                    feedback: "Hedy could `{print}` that"
                 -   option: "Real Madrid is going to win the champions league"
-                    feedback: "Hedy could {print} that"
+                    feedback: "Hedy could `{print}` that"
                 -   option: "Bayer Munchen is going to win the champions league"
-                    feedback: "Hedy could {print} that"
+                    feedback: "Hedy could `{print}` that"
                 -   option: "FC Barcelona is going to win the champions league"
                     feedback: "That's right. It's not in the list"
             correct_answer: "D"
@@ -762,7 +861,6 @@ levels:
             correct_answer: "B"
             hint: "One line needs quotation marks, because you want it to be printed literally."
             question_score: '10'
-
     5:
         1:
             question_text: "Which command should be filled in on the _?_?"
