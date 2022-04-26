@@ -202,30 +202,42 @@ levels:
         1:
             question_text: "Wat is waar ?"
             mp_choice_options:
-            -   option: "In level 2 bestaat het commando {print} niet meer"
-                feedback: "{print} werkt nog steeds hetzelfde"
-            -   option: "In level 2 bestaat het commando {ask} niet meer"
-                feedback: "{ask} werkt anders, maar het bestaat nog wel !"
-            -   option: "In level 2 bestaat het commando {echo} niet meer"
+            -   option: "In level 2 bestaat het commando `{print}` niet meer"
+                feedback: "`{print}` werkt nog steeds hetzelfde"
+            -   option: "In level 2 bestaat het commando `{ask}` niet meer"
+                feedback: "`{ask}` werkt anders, maar het bestaat nog wel !"
+            -   option: "In level 2 bestaat het commando `{echo}` niet meer"
                 feedback: "Goedzo !"
             -   option: "In level 2 bestaan alle commando's van level 1 nog"
                 feedback: "Nee, een commando is weg."
             correct_answer: "C"
-            hint: "{print} en {ask} bestaan nog."
+            hint: "`{print}` en `{ask}` bestaan nog."
             question_score: '10'
         2:
             question_text: "Welke code is goed ?"
             mp_choice_options:
-            -   option: "naam {is} {ask} Hoe heet jij ?"
+            -   option:|
+                    ```
+                    naam {is} {ask} Hoe heet jij ?
+                    ```
                 feedback: "Super !"
-            -   option: "{ask} {is} naam Hoe heet jij ?"
+            -   option: |
+                    ```
+                    {ask} {is} naam Hoe heet jij ?
+                    ```
                 feedback: "De woorden zijn goed, maar de volgorde niet !"
-            -   option: "{ask} Hoe heet jij ?"
+            -   option: |
+                    ```
+                    {ask} Hoe heet jij ?
+                    ```
                 feedback: "Zo werkte het in level 1, nu niet meer."
-            -   option: "{ask} Hoe heet jij ? {is} naam"
+            -   option: |
+                    ```
+                    {ask} Hoe heet jij ? {is} naam
+                    ```
                 feedback: "De woorden zijn goed, maar de volgorde niet !"
             correct_answer: "A"
-            hint: "{ask} werkt niet meer zoals in level 1"
+            hint: "`{ask}` werkt niet meer zoals in level 1"
             question_score: '10'
         3:
             question_text: "Wat verschijnt er op het uitvoerscherm als je de code uitvoert ?"
@@ -274,7 +286,7 @@ levels:
             -   option: "Het maakt je programma langzamer"
                 feedback: "Gelukkig niet !"
             correct_answer: "C"
-            hint: "Als je {sleep} gebruikt, wacht de computer een (paar) seconden"
+            hint: "Als je `{sleep}` gebruikt, wacht de computer een (paar) seconden"
             question_score: '10'
         6:
             question_text: "Welk commando moet op de streepjes ?"
@@ -283,13 +295,25 @@ levels:
                 _?_
                 {print} Hedy !
             mp_choice_options:
-            -   option: "{sleep}"
+            -   option: |
+                    ```
+                    {sleep}
+                    ```
                 feedback: "Topper !"
-            -   option: "{echo}"
+            -   option: |
+                    ```
+                    {echo}
+                    ```
                 feedback: "Er valt niets te herhalen hier..."
-            -   option: "{print}"
+            -   option: |
+                    ```
+                    {print}
+                    ```
                 feedback: "Er staat niets om te printen"
-            -   option: "{ask}"
+            -   option: |
+                    ```
+                    {ask}
+                    ```
                 feedback: "Er staat geen vraag om te stellen"
             correct_answer: "A"
             hint: "Er valt even een stilte voor een dramatisch effect"
@@ -301,13 +325,25 @@ levels:
                 _?_
                 {print} BOEM !
             mp_choice_options:
-            -   option: "{print} 3"
+            -   option: |
+                    ```
+                    {print} 3
+                    ```
                 feedback: "Je hoeft niets te printen."
-            -   option: "{sleep} 3"
+            -   option: |
+                    ```
+                    {sleep} 3
+                    ```
                 feedback: "Perfect !"
-            -   option: "{sleep}"
+            -   option:
+                    ```
+                    {sleep}
+                    ```
                 feedback: "Dan ontplof je al over 1 seconde."
-            -   option: "{sleep} {sleep} {sleep}"
+            -   option: |
+                    ```
+                    {sleep} {sleep} {sleep}
+                    ```
                 feedback: "Je kunt het makkelijker maken door er gewoon een 3 achter te zetten !"
             correct_answer: "B"
             hint: "Je wilt dat de code 3 seconden wacht !"
@@ -318,13 +354,25 @@ levels:
                 {ask} {is} Hoe oud ben je ?
                 {print} leeftijd
             mp_choice_options:
-            -   option: "{ask} {is} leeftijd Hoe oud ben je ?"
+            -   option: |
+                    ```
+                    {ask} {is} leeftijd Hoe oud ben je ?
+                    ```
                 feedback: "Verkeerde volgorde"
-            -   option: "leeftijd {is} Hoe oud ben je ?"
+            -   option: |
+                    ```
+                    leeftijd {is} Hoe oud ben je ?
+                    ```
                 feedback: "Waar is de {ask} gebleven ?"
-            -   option: "leeftijd {is} {ask} Hoe oud ben je ?"
+            -   option: |
+                    ```
+                    leeftijd {is} {ask} Hoe oud ben je ?
+                    ```
                 feedback: "Top !"
-            -   option: "leeftijd {is} aks Hoe oud ben je ?"
+            -   option: |
+                    ```
+                    leeftijd {is} aks Hoe oud ben je ?
+                    ```
                 feedback: "Let op de spelling van {ask}"
             correct_answer: "C"
             hint: "Leeftijd is...?"
@@ -335,12 +383,12 @@ levels:
                 honden {is} lievelingsdier
                 {print} Ik hou van lievelingsdier
             mp_choice_options:
-            -   option: "regel 1 moet zijn: honden {is} lievelingsdieren"
+            -   option: "regel 1 moet zijn: honden `{is}` lievelingsdieren"
                 feedback: "Nee, de variabele heet lievelingsdier"
-            -   option: "regel 1 moet zijn: lievelingsdier {is} honden"
+            -   option: "regel 1 moet zijn: lievelingsdier `{is}` honden"
                 feedback: "Correct"
-            -   option: "regel 2 moet zijn: Ik hou van {sleep} honden"
-                feedback: "Nee, {sleep} staat niet zo midden in een zin."
+            -   option: "regel 2 moet zijn: Ik hou van `{sleep}` honden"
+                feedback: "Nee, `{sleep}` staat niet zo midden in een zin."
             -   option: "regel 2 moet zijn: Ik hou van lievelingsdieren"
                 feedback: "Nee, de variabele heet lievelingsdier"
             correct_answer: "B"
@@ -354,18 +402,29 @@ levels:
                 {sleep} 2
                 {print} smaak
             mp_choice_options:
-            -   option: "aardbeien, chocolade, vanille"
+            -   option: |
+                    ```
+                    aardbeien, chocolade, vanille
+                    ```
                 feedback: "Zo maak je een lijstje. Dat is niet de bedoeling hier"
-            -   option: "{print} aardbeien"
-                feedback: "{print} hoort niet midden in de zin !"
-            -   option: "{sleep} 5"
+            -   option: |
+                    ```
+                    {print} aardbeien
+                    ```
+                feedback: "`{print}` hoort niet midden in de zin !"
+            -   option: |
+                    ```
+                    {sleep} 5
+                    ```
                 feedback: "Helaas, probeer het nog eens."
-            -   option: "{ask} Wat is jouw favoriete smaak ijs ?"
+            -   option: |
+                    ```
+                    {ask} Wat is jouw favoriete smaak ijs ?
+                    ```
                 feedback: "Super !"
             correct_answer: "D"
             hint: "Je wil een vraag stellen."
             question_score: '10'
-
     3:
         1:
             question_text: "Wat is het commando om Hedy een willekeurig woord uit een rijtje te laten kiezen ?"

@@ -7,7 +7,7 @@
         </div>
     {% endif %}
     {% if wrong_answer_hint %}
-        <p class="text-red-900 text-2xl text-center font-slab font-semibold">{{ wrong_answer_hint }}</p>
+        <p class="text-red-900 text-2xl text-center font-slab font-semibold">{{ wrong_answer_hint|commonmark }}</p>
     {% endif %}
     <div class="flex flex-row justify-center">
         <button type="button" onclick="changeHint()"
@@ -64,5 +64,5 @@
             {% endfor %}
         </div>
     </form>
-    <div class="invisible" id="hidden-hint"> {{ question.hint }}</div>
+    <div class="invisible" id="hidden-hint"> {{ question.hint|commonmark }}</div>
 {% endblock %}
