@@ -42,6 +42,11 @@
                             <div class="absolute z-10 mx-4">{{ triangle_6|safe }}</div>
                         {% endif %}
                         <div class="w-full turn-pre-into-ace">
+                        <!-- If the first 5 characters of the |commonmark of the option match a <pre> element
+                        we know it's a code snippet (as it is stored with ``` triple backticks in the YAML).
+                        Then, create a <pre> element with the no-copy-button class and the current level.
+                        This is needed for a nice UI and the correct syntax highlighting.
+                        -->
                             {% if (question_options[counter.value].option|commonmark)[0:5] == "<pre>" %}
                                 <div class="mx-4 mb-2">
                                     <pre class="no-copy-button" level="{{ level_source }}">{{question_options[counter.value].option|commonmark}}</pre>
