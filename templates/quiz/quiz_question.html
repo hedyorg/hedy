@@ -1,7 +1,8 @@
 {% extends "quiz/quiz.html" %}
 {% block question %}
     <p class="italic text-3xl font-bold text-blue-900 text-center font-slab">{{ question.question_text }}</p>
-    {% if question.code and question.code!= "..." %}
+    {{ question }}
+    {% if question.code %}
         <div class="turn-pre-into-ace w-3/4 mx-auto my-4">
             <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ question.code }}</pre>
         </div>
@@ -29,25 +30,21 @@
                         {% endif %}
                     ">
                         {% if counter.value == 0 %}
-                            {{ triangle|safe }}
+                            <div class="absolute z-10 mx-4">{{ triangle|safe }}</div>
                         {% elif counter.value == 1 %}
-                            {{ diamond|safe }}
+                            <div class="absolute z-10 mx-4">{{ diamond|safe }}</div>
                         {% elif counter.value == 2 %}
-                            {{ square|safe }}
+                            <div class="absolute z-10 mx-4">{{ square|safe }}</div>
                         {% elif counter.value == 3 %}
-                            {{ circle|safe }}
+                            <div class="absolute z-10 mx-4">{{ circle|safe }}</div>
                         {% elif counter.value == 4 %}
-                            {{ pentagram |safe }}
+                            <div class="absolute z-10 mx-4">{{ pentagram |safe }}</div>
                         {% elif counter.value == 5 %}
-                            {{ triangle_6|safe }}
+                            <div class="absolute z-10 mx-4">{{ triangle_6|safe }}</div>
                         {% endif %}
-                        {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                            <div class="turn-pre-into-ace w-3/4 mx-auto -mt-16 mb-2">
-                                <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ question_options[counter.value].code }}</pre>
-                            </div>
-                        {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None' %}
-                            <p class="option-text font-bold align-top"> {{ question_options[counter.value].option_text | nl2br }}</p>
-                        {% endif %}
+                        <div class="w-full turn-pre-into-ace">
+                            <pre class="mx-2 no-copy-button mb-2" level="{{ level_source }}">{{ question_options[counter.value].option }}</pre>
+                        </div>
                         <button class="submit-button" type="submit" name="submit-button" value="{{ question_options[counter.value].char_index }}">
                         {% if is_last_attempt %}
                             {{_('go_to_answer')}}
