@@ -1456,6 +1456,20 @@ class TestMultipleAccounts(AuthHelper):
         for invalid_body in invalid_bodies:
             self.post_data('for-teachers/create-accounts', invalid_body, expect_http_code=400)
 
+    def test_create_accounts(self):
+        # GIVEN a new teacher
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to create a valid adventure
+        # THEN receive an OK response with the server
+        body = {
+            'accounts': [
+                {'username': 'panda', 'password': 'test123'},
+                {'username': 'panda2', 'password': 'test321'}
+            ]
+        }
+        self.post_data('for-teachers/create-accounts', body, expect_http_code=200)
+
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
 
 def tearDownModule ():
