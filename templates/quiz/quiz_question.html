@@ -7,7 +7,9 @@
         </div>
     {% endif %}
     {% if wrong_answer_hint %}
-        <p class="text-red-900 text-2xl text-center font-slab font-semibold">{{ wrong_answer_hint|commonmark }}</p>
+        <div class="text-red-900 text-xl my-2 text-center font-slab font-semibold">
+            {{ wrong_answer_hint|commonmark }}
+        </div>
     {% endif %}
     <div class="flex flex-row justify-center">
         <button type="button" onclick="changeHint()"
@@ -52,7 +54,7 @@
                                     <pre class="no-copy-button" level="{{ level_source }}">{{question_options[counter.value].option|commonmark}}</pre>
                                 </div>
                             {% else %}
-                                <div class="pt-8 px-2 mx-2 mb-2 text-lg0">{{ question_options[counter.value].option|commonmark }}</div>
+                                <div class="pt-8 px-2 mx-2 mb-2 text-lg">{{ question_options[counter.value].option|commonmark }}</div>
                             {% endif %}
                         </div>
                         <button class="submit-button" type="submit" name="submit-button" value="{{ question_options[counter.value].char_index }}">

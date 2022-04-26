@@ -35,13 +35,13 @@
                 <p class="text-black text-center font-extrabold text-4xl font-slab">
                     {{_('correct_answer')}}
                 </p>
-                <div class="w-full turn-pre-into-ace">
-                    {% if (question_options[counter.value].option|commonmark)[0:5] == "<pre>" %}
-                        <div class="mx-4 mb-2">
-                            <pre class="no-copy-button" level="{{ level_source }}">{{question_options[counter.value].option|commonmark}}</pre>
+                <div class="w-full text-center turn-pre-into-ace">
+                    {% if (correct_option.option|commonmark)[0:5] == "<pre>" %}
+                        <div class="w-1/2 mx-auto my-2">
+                            <pre class="no-copy-button" level="{{ level_source }}">{{correct_option.option|commonmark}}</pre>
                         </div>
                     {% else %}
-                        <div class="pt-8 px-2 mx-2 mb-2 text-lg0">{{ question_options[counter.value].option|commonmark }}</div>
+                        <div class="pt-8 px-2 mx-auto mb-2 text-lg">{{ correct_option.option|commonmark }}</div>
                     {% endif %}
                 </div>
             </div>
