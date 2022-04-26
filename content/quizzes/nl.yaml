@@ -652,19 +652,19 @@ levels:
         1:
             question_text: "Wat is waar ?"
             mp_choice_options:
-            -   option: "In level 4 werkt {print} anders"
+            -   option: "In level 4 werkt `{print}` anders"
                 feedback: "Correct, je hebt aanhalingstekens nodig"
-            -   option: "In level 4 werkt {ask} anders dan in level 2"
+            -   option: "In level 4 werkt `{ask}` anders dan in level 2"
                 feedback: "Ask werkt nog hetzelfde"
-            -   option: "In level 4 werkt {at} {random} anders dan in level 2"
-                feedback: "At {random} werkt nog hetzelfde"
+            -   option: "In level 4 werkt `{at} {random}` anders dan in level 2"
+                feedback: "`{at} {random}` werkt nog hetzelfde"
             -   option: "In level 4 werkt alles nog hetzelfde als in level 2"
                 feedback: "Nee, een commando is anders."
             correct_answer: "A"
             hint: "Je hebt vanaf level 4 aanhalingstekens nodig bij een commando."
             question_score: '10'
         2:
-            question_text: "Welk aanhalingsteken gebruik je bij het {print} commando ?"
+            question_text: "Welk aanhalingsteken gebruik je bij het `{print}` commando ?"
             mp_choice_options:
             -   option: "`"
                 feedback: "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
@@ -680,13 +680,25 @@ levels:
         3:
             question_text: "Waar zijn de aanhalingstekens goed gebruikt ?"
             mp_choice_options:
-            -   option: "{print} Hoi ik ben Hedy"
+            -   option: |
+                    ```
+                    {print} Hoi ik ben Hedy
+                    ```
                 feedback: "Vanaf level 4 heb je aanhalingstekens nodig"
-            -   option: "{print} 'Hoi ik ben Hedy"
+            -   option: |
+                    ```
+                    {print} 'Hoi ik ben Hedy
+                    ```
                 feedback: "Er moet ook een aanhalingsteken achter"
-            -   option: "'{print} Hoi ik ben Hedy'"
-                feedback: "Het eerste aanhalingsteken moet na het commando {print}"
-            -   option: "{print} 'Hoi ik ben Hedy'"
+            -   option: |
+                    ```
+                    '{print} Hoi ik ben Hedy'
+                    ```
+                feedback: "Het eerste aanhalingsteken moet na het commando `{print}`"
+            -   option: |
+                    ```
+                    {print} 'Hoi ik ben Hedy'
+                    ```
                 feedback: "Perfect !"
             correct_answer: "D"
             hint: "Er moet een aanhalingsteken voor en een achter de tekst die je wil printen."
@@ -699,7 +711,7 @@ levels:
             -   option: "Als je een tekst wil printen moeten er enkele aanhalingstekens voor en na de tekst staan."
                 feedback: "Super !"
             -   option: "Als je een vraag wil stellen heb je geen aanhalingstekens nodig"
-                feedback: "Zowel bij {ask} als {print} heb je enkele aanhalingstekens nodig voor en na de tekst"
+                feedback: "Zowel bij `{ask}` als `{print}` heb je enkele aanhalingstekens nodig voor en na de tekst"
             -   option: "Je mag zelf kiezen of je aanhalingstekens gebruikt of niet."
                 feedback: "Helaas is Hedy strenger dan dat."
             correct_answer: "B"
@@ -711,11 +723,20 @@ levels:
                 opties {is} steen, papier, schaar
                 {print} 'opties {at} {random}'
             mp_choice_options:
-            -   option: "'{print} opties {at} {random}'"
-                feedback: "Een aanhalingsteken moet nooit voor het {print} commando."
-            -   option: "{print} 'opties' {at} {random}"
+            -   option: |
+                    ```
+                    '{print} opties {at} {random}'
+                    ```
+                feedback: "Een aanhalingsteken moet nooit voor het `{print}` commando."
+            -   option: |
+                    ```
+                    {print} 'opties' {at} {random}
+                    ```
                 feedback: "Opties is een variabele. Je wil niet letterlijk het woord opties printen."
-            -   option: "{print} opties {at} {random}"
+            -   option: |
+                    ```
+                    {print} opties {at} {random}
+                    ```
                 feedback: "Heel goed"
             -   option: "Niets, de code is goed !"
                 feedback: "Kijk goed ! Er zit wel een fout in !"
@@ -727,16 +748,28 @@ levels:
             code: |-
                 prijzen {is} 1 euro, 100 euro, 1 miljoen euro
             mp_choice_options:
-            -   option: "{print} 'Jij wint...' prijzen {at} {random}"
+            -   option: |
+                    ```
+                    {print} 'Jij wint...' prijzen {at} {random}
+                    ```
                 feedback: "Super ! Jij begrijpt het !"
-            -   option: "{print} Jij wint... 'prijzen {at} {random}'"
-                feedback: "Nu {print} Hedy letterlijk 'prijzen {at} {random}'"
-            -   option: "{print} Jij wint... prijzen {at} {random}"
+            -   option: |
+                    ```
+                    {print} Jij wint... 'prijzen {at} {random}'
+                    ```
+                feedback: "Nu `{print}` Hedy letterlijk 'prijzen {at} {random}'"
+            -   option: |
+                    ```
+                    {print} Jij wint... prijzen {at} {random}
+                    ```
                 feedback: "Je hebt wel aanhalingstekens nodig !"
-            -   option: "{print} 'Jij wint... prijzen {at} {random}'"
-                feedback: "Nu {print} Hedy letterlijk 'prijzen {at} {random}'"
+            -   option: |
+                    ```
+                    {print} 'Jij wint... prijzen {at} {random}'
+                    ```
+                feedback: "Nu `{print}` Hedy letterlijk 'prijzen {at} {random}'"
             correct_answer: "A"
-            hint: "Bedenk goed wat je wil dat Hedy letterlijk {print}, en wat een variabele is."
+            hint: "Bedenk goed wat je wil dat Hedy letterlijk `{print}`, en wat een variabele is."
             question_score: '10'
         7:
             question_text: "Wat is er mis met deze code ?"
@@ -746,7 +779,7 @@ levels:
                 {print} antwoorden {at} {random}
             mp_choice_options:
             -   option: "Er missen aanhalingstekens in regel 1"
-                feedback: "Juist, bij {ask} heb je aanhalingstekens nodig"
+                feedback: "Juist, bij `{ask}` heb je aanhalingstekens nodig"
             -   option: "Er missen aanhalingstekens in regel 2"
                 feedback: "een variabele heeft geen aanhalingstekens nodig"
             -   option: "Er missen aanhalingstekens in regel 3"
@@ -763,14 +796,26 @@ levels:
                 {print} 'Voor je staan 3 deuren'
                 deur {is} {ask} 'Welke deur kies je ?'
             mp_choice_options:
-            -   option: "{print} Dus jij kiest deur deur"
+            -   option: |
+                    ```
+                    {print} Dus jij kiest deur deur
+                    ```
                 feedback: "Er zijn aanhalingstekens nodig in deze zin"
-            -   option: "{print} 'Dus jij kiest ' deur deur"
+            -   option: |
+                    ```
+                    {print} 'Dus jij kiest ' deur deur
+                    ```
                 feedback: "Als de speler nu deur 3 kiest, {print} Hedy: Dus jij kiest 3 3"
-            -   option: "{print} 'Dus jij kiest deur ' deur"
+            -   option: |
+                    ```
+                    {print} 'Dus jij kiest deur ' deur
+                    ```
                 feedback: "Super !"
-            -   option: "{print} 'Dus jij kiest deur deur'"
-                feedback: "Hedy {print} nu letterlijk: Dus jij kiest deur deur"
+            -   option: |
+                    ```
+                    {print} 'Dus jij kiest deur deur'
+                    ```
+                feedback: "Hedy `{print}` nu letterlijk: Dus jij kiest deur deur"
             correct_answer: "C"
             hint: "Je wil dat het tweede woord deur vervangen wordt door het nummertje dat de speler kiest. Dus het tweede woord deur moet buiten de aanhalingstekens"
             question_score: '10'
@@ -807,7 +852,7 @@ levels:
             -   option: "Niets deze code is goed !"
                 feedback: "Helaas er missen toch ergens"
             correct_answer: "B"
-            hint: "Er missen aanhalingstekens bij een {print} commando."
+            hint: "Er missen aanhalingstekens bij een `{print}` commando."
             question_score: '10'
     5:
         1:
