@@ -832,14 +832,14 @@ levels:
                 clubs {is} Real Madrid, Bayern Munchen, Manchester United, Ajax
                 {print} clubs {at} {random} ' is going the win the champions league'
             mp_choice_options:
-                -   option: "Ajax is going to win the champions league"
-                    feedback: "Hedy could `{print}` that"
-                -   option: "Real Madrid is going to win the champions league"
-                    feedback: "Hedy could `{print}` that"
-                -   option: "Bayer Munchen is going to win the champions league"
-                    feedback: "Hedy could `{print}` that"
-                -   option: "FC Barcelona is going to win the champions league"
-                    feedback: "That's right. It's not in the list"
+            -   option: "Ajax is going to win the champions league"
+                feedback: "Hedy could `{print}` that"
+            -   option: "Real Madrid is going to win the champions league"
+                feedback: "Hedy could `{print}` that"
+            -   option: "Bayer Munchen is going to win the champions league"
+                feedback: "Hedy could `{print}` that"
+            -   option: "FC Barcelona is going to win the champions league"
+                feedback: "That's right. It's not in the list"
             correct_answer: "D"
             hint: "What are Hedy's options to randomly pick from?"
             question_score: '10'
@@ -850,14 +850,14 @@ levels:
                 {print} The dishes are done by...
                 {print} people {at} {random}
             mp_choice_options:
-                -   option: "Quotation marks are missing in line 1"
-                    feedback: "A list doesn't need quotation marks"
-                -   option: "Quotation marks are missing in line 2"
-                    feedback: "Correct"
-                -   option: "Quotation marks are missing in both line 2 and 3"
-                    feedback: "Line 3 doesn't need quotation marks because it's not printed literally"
-                -   option: "Nothing, this code has no mistakes"
-                    feedback: "You missed one!"
+            -   option: "Quotation marks are missing in line 1"
+                feedback: "A list doesn't need quotation marks"
+            -   option: "Quotation marks are missing in line 2"
+                feedback: "Correct"
+            -   option: "Quotation marks are missing in both line 2 and 3"
+                feedback: "Line 3 doesn't need quotation marks because it's not printed literally"
+            -   option: "Nothing, this code has no mistakes"
+                feedback: "You missed one!"
             correct_answer: "B"
             hint: "One line needs quotation marks, because you want it to be printed literally."
             question_score: '10'
@@ -869,16 +869,28 @@ levels:
                 {if} number {is} 5 {print} Mine too!
                 _?_ {print} My lucky number is 5!
             mp_choice_options:
-                -   option: "{print}"
-                    feedback: "There already is a {print} command."
-                -   option: "{if}"
-                    feedback: "The {if} command is used in the line above."
-                -   option: "{sleep}"
-                    feedback: "That's not it!"
-                -   option: "{else}"
-                    feedback: "That's right!"
+            -   option: |
+                    ```
+                    {print}
+                    ```
+                feedback: "There already is a `{print}` command."
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "The `{if}` command is used in the line above."
+            -   option: |
+                    ```
+                    {sleep}
+                    ```
+                feedback: "That's not it!"
+            -   option: |
+                    ```
+                    {else}
+                    ```
+                feedback: "That's right!"
             correct_answer: "D"
-            hint: "Which one goes together with the {if} command?"
+            hint: "Which one goes together with the `{if}` command?"
             question_score: '10'
         2:
             question_text: "What appears in your output screen when you type in the name Hedy?"
@@ -886,16 +898,16 @@ levels:
                 name {is} {ask} 'What is your name?'
                 {if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'
             mp_choice_options:
-                -   option: "fun"
-                    feedback: "That's right!"
-                -   option: "less fun"
-                    feedback: "If the name is Hedy, it will say 'fun''"
-                -   option: "Hedy"
-                    feedback: "No, it doesn't print the name"
-                -   option: "Error"
-                    feedback: "Fortunately not!"
+            -   option: "fun"
+                feedback: "That's right!"
+            -   option: "less fun"
+                feedback: "If the name is Hedy, it will say 'fun''"
+            -   option: "Hedy"
+                feedback: "No, it doesn't print the name"
+            -   option: "Error"
+                feedback: "Fortunately not!"
             correct_answer: "A"
-            hint: "{if} name {is} Hedy {print} ...?"
+            hint: "`{if}` name `{is}` Hedy `{print}` ...?"
             question_score: '10'
         3:
             question_text: "What is the right password?"
@@ -904,16 +916,16 @@ levels:
                 {if} password {is} SECRET {print} 'Correct!'
                 {else} {print} 'ALARM! INTRUDER!'
             mp_choice_options:
-                -   option: "Correct!"
-                    feedback: "This is printed when you type in the correct password"
-                -   option: "SECRET"
-                    feedback: "That's right!'"
-                -   option: "password"
-                    feedback: "The password isn't password..."
-                -   option: "ALARM INTRUDER"
-                    feedback: "This is printed when you type in the incorrect password!"
+            -   option: "Correct!"
+                feedback: "This is printed when you type in the correct password"
+            -   option: "SECRET"
+                feedback: "That's right!'"
+            -   option: "password"
+                feedback: "The password isn't password..."
+            -   option: "ALARM INTRUDER"
+                feedback: "This is printed when you type in the incorrect password!"
             correct_answer: "B"
-            hint: "{if} password {is} ... {print} 'Correct!'!'"
+            hint: "`{if}` password `{is}` ... `{print}` 'Correct!'!'"
             question_score: '10'
         4:
             question_text: "What does Hedy print when you type in the wrong password?"
@@ -922,14 +934,14 @@ levels:
                 {if} password {is} SECRET {print} 'Correct!'
                 {else} {print} 'ALARM! INTRUDER!'
             mp_choice_options:
-                -   option: "Correct"
-                    feedback: "That's printed {if} the correct answer is given, not the wrong one..."
-                -   option: "SECRET"
-                    feedback: "That's not the right answer"
-                -   option: "Wrong!"
-                    feedback: "No, this is not what Hedy will print"
-                -   option: "ALARM! INTRUDER!"
-                    feedback: "Great job!"
+            -   option: "Correct"
+                feedback: "That's printed if the correct answer is given, not the wrong one..."
+            -   option: "SECRET"
+                feedback: "That's not the right answer"
+            -   option: "Wrong!"
+                feedback: "No, this is not what Hedy will print"
+            -   option: "ALARM! INTRUDER!"
+                feedback: "Great job!"
             correct_answer: "D"
             hint: "Your computer will sound the alarm for intruders!"
             question_score: '10'
@@ -940,14 +952,14 @@ levels:
                 {if} password {is} SECRET {print} 'Correct!'
                 {else} {print} 'ALARM! INTRUDER!'
             mp_choice_options:
-                -   option: "Because it needs to be in capitals, so SECRET"
-                    feedback: "Indeed!"
-                -   option: "Because the password is alarm"
-                    feedback: "No, this is not the password."
-                -   option: "Because it's spelled wrong."
-                    feedback: "That's not how you spell secret"
-                -   option: "Because Hedy makes a mistake"
-                    feedback: "No, Hedy is right"
+            -   option: "Because it needs to be in capitals, so SECRET"
+                feedback: "Indeed!"
+            -   option: "Because the password is alarm"
+                feedback: "No, this is not the password."
+            -   option: "Because it's spelled wrong."
+                feedback: "That's not how you spell secret"
+            -   option: "Because Hedy makes a mistake"
+                feedback: "No, Hedy is right"
             correct_answer: "A"
             hint: "The spelling of the word has to be exactly the same."
             question_score: '10'
@@ -960,16 +972,28 @@ levels:
                 {if} club {is} ajax {print} 'Ajax is going to win of course!'
                 _?_ {print} 'Sorry, your club is gonna be in last place...'
             mp_choice_options:
-                -   option: "{if}"
-                    feedback: "{if} is already in the line above"
-                -   option: "{at} {random}"
-                    feedback: "No, you need {else}."
-                -   option: "{else}"
-                    feedback: "Great!"
-                -   option: "{print}"
-                    feedback: "{print} is already there, we need a word before it!"
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "`{if}` is already in the line above"
+            -   option: |
+                    ```
+                    {at} {random}
+                    ```
+                feedback: "No, you need `{else}`."
+            -   option: |
+                    ```
+                    {else}
+                    ```
+                feedback: "Great!"
+            -   option: |
+                    ```
+                    {print}
+                    ```
+                feedback: "`{print}` is already there, we need a word before it!"
             correct_answer: "C"
-            hint: "{if} goes together with...?"
+            hint: "`{if}` goes together with...?"
             question_score: '10'
         7:
             question_text: "Which word should be in the place of the question mark?"
@@ -979,16 +1003,28 @@ levels:
                 {if} name {is} Hedy {print} 'You will be a millionair!'
                 {else} _?_ 'Unfortunately... No big money for you.'
             mp_choice_options:
-                -   option: "{if}"
-                    feedback: "{if} is in the line above."
-                -   option: "{at} {random}"
-                    feedback: "No, you don't need {at} {random}."
-                -   option: "{else}"
-                    feedback: "There already is an {else} command"
-                -   option: "{print}"
-                    feedback: "Awesome!"
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "`{if}` is in the line above."
+            -   option: |
+                    ```
+                    {at} {random}
+                    ```
+                feedback: "No, you don't need `{at} {random}`."
+            -   option: |
+                    ```
+                    {else}
+                    ```
+                feedback: "There already is an `{else}` command"
+            -   option: |
+                    ```
+                    {print}
+                    ```
+                feedback: "Awesome!"
             correct_answer: "D"
-            hint: "After {else} a {print} command follows"
+            hint: "After `{else}` a `{print}` command follows"
             question_score: '10'
         8:
             question_text: "Which word should be on the place of the question mark?"
@@ -997,14 +1033,26 @@ levels:
                 {if} _?_ {is} penguin {print} 'Thats my favorite animal too!'
                 {else} {print} 'Cool! I like penguins.'
             mp_choice_options:
-                -   option: "favorite animal"
-                    feedback: "That's not the variable name."
-                -   option: "animal"
-                    feedback: "Great job!"
-                -   option: "{if}"
-                    feedback: "{if} is already there"
-                -   option: "{print}"
-                    feedback: "No, that's not it."
+            -   option: |
+                    ```
+                    favorite animal
+                    ```
+                feedback: "That's not the variable name."
+            -   option: |
+                    ```
+                    animal
+                    ```
+                feedback: "Great job!"
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "`{if}` is already there"
+            -   option: |
+                    ```
+                    {print}
+                    ```
+                feedback: "No, that's not it."
             correct_answer: "B"
             hint: "What the variable name?"
             question_score: '10'
@@ -1018,14 +1066,14 @@ levels:
                 {if} door {is} 2 {print} 'Yay, you can escape!'
                 {else} {print} 'You are being devoured by a... ' monsters {at} {random}
             mp_choice_options:
-                -   option: "1"
-                    feedback: "Bad choice! You're being eaten"
-                -   option: "2"
-                    feedback: "Super! You escaped!"
-                -   option: "3"
-                    feedback: "Bad choice! You're being eaten."
-                -   option: "It's a trap, you will always be eaten!"
-                    feedback: "Luckily not!"
+            -   option: "1"
+                feedback: "Bad choice! You're being eaten"
+            -   option: "2"
+                feedback: "Super! You escaped!"
+            -   option: "3"
+                feedback: "Bad choice! You're being eaten."
+            -   option: "It's a trap, you will always be eaten!"
+                feedback: "Luckily not!"
             correct_answer: "B"
             hint: "One of the doors will keep you safe.."
             question_score: '10'
@@ -1039,18 +1087,17 @@ levels:
                 {if} door {is} 2 {print} 'Yay, you can escape!'
                 {else} {print} 'You are being devoured by a... ' monsters {at} {random}
             mp_choice_options:
-                -   option: "Hedy picks a random monster each time."
-                    feedback: "Awesome!"
-                -   option: "vampire"
-                    feedback: "Not always..."
-                -   option: "werewolf"
-                    feedback: "Not always..."
-                -   option: "giant spider"
-                    feedback: "Not always..."
+            -   option: "Hedy picks a random monster each time."
+                feedback: "Awesome!"
+            -   option: "vampire"
+                feedback: "Not always..."
+            -   option: "werewolf"
+                feedback: "Not always..."
+            -   option: "giant spider"
+                feedback: "Not always..."
             correct_answer: "A"
-            hint: "Mind the last 3 words... monsters {at} {random}..."
+            hint: "Mind the last 3 words... monsters `{at} {random}`..."
             question_score: '10'
-
     6:
         1:
             question_text: "What's Hedy's output when you run this code?"
