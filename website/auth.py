@@ -307,7 +307,7 @@ def routes(app, database):
         elif user.get('is_teacher'):
             resp = make_response({'teacher': True})
 
-        # If the user is a student (and has a related teacher) and the verification is still pending -> first time
+        # If the user is a student (and has a related teacher) and the verification is still pending -> first login
         if user.get('teacher') and user.get('verification_pending'):
             DATABASE.update_user(user['username'], {'verification_pending': None})
             resp = make_response({'first_time': True})
