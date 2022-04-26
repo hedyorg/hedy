@@ -63,6 +63,40 @@ class TestsLevel11(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_repeat_with_indent(self):
+    code = textwrap.dedent("""\
+    repeat 5 times
+        print 'koekoek'""")
+
+
+    expected = textwrap.dedent("""\
+    for i in range(int(5)):
+      print(f'koekoek')
+      time.sleep(0.1)""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_repeat_with_variable_print(self):
+    code = textwrap.dedent("""\
+    n is 5
+    repeat n times
+        print 'me wants a cookie!'""")
+
+    expected = textwrap.dedent("""\
+    n = '5'
+    for i in range(int(n)):
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
+
+    output = textwrap.dedent("""\
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!""")
+
+    self.single_level_tester(code=code, expected=expected, output=output)
+
   def test_for_loop_with_print(self):
     code = textwrap.dedent("""\
     for i in range 1 to 10

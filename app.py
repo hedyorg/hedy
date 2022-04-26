@@ -263,11 +263,15 @@ def setup_language():
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
-    if 'keyword_lang' not in session:
-        session['keyword_lang'] = "en"
 
     g.lang = session['lang']
-    g.keyword_lang = session['keyword_lang']
+    if 'keyword_lang' not in session:
+        if g.lang in ALL_KEYWORD_LANGUAGES.keys():
+            g.keyword_lang = g.lang
+        else:
+            g.keyword_lang = "en"
+    else:
+        g.keyword_lang = session['keyword_lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
@@ -772,6 +776,7 @@ def index(level, program_id):
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
 
     teacher_adventures = []
     for adventure in customizations.get('teacher_adventures', []):
@@ -792,6 +797,7 @@ def index(level, program_id):
         max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
         version=version(),
+        quiz=quiz,
         adventures=adventures,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
@@ -1142,7 +1148,8 @@ def current_keyword_language():
 @app.template_global()
 def other_keyword_language():
     # If the current keyword language isn't English: we are sure the other option is English
-    if g.keyword_lang != "en":
+    # But, only if the user has an existing keyword language -> on the session
+    if session.get('keyword_lang') and session['keyword_lang'] != "en":
         return make_keyword_lang_obj("en")
     return None
 
@@ -1331,6 +1338,8 @@ def teacher_invitation(code):
         return render_template('teacher-invitation.html')
 
     update_is_teacher(user)
+    # When visiting this link we update the current user to a teacher -> also update user in session
+    session.get('user')['is_teacher'] = True
 
     session['welcome-teacher'] = True
     url = request.url.replace(f'/invite/{code}', '/for-teachers')
