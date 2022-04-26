@@ -22,9 +22,15 @@ levels:
             question_text: "Welk commando moet je invullen op de streepjes om Hallo ! te laten verschijnen in je uitvoerscherm ?"
             code: "_?_ Hallo !"
             mp_choice_options:
-            -   option: "{echo}"
+            -   option: |
+                    ```
+                    {echo}
+                    ```
                 feedback: "Met {echo} herhaal je een antwoord..."
-            -   option: "{print}"
+            -   option: |
+                    ```
+                    {print}
+                    ```
                 feedback: "Goed ! Met {print} kun je tekst printen !"
             -   option: "hello"
                 feedback: "Hello is geen commando, probeer het nog eens..."

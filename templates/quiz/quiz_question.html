@@ -1,7 +1,6 @@
 {% extends "quiz/quiz.html" %}
 {% block question %}
     <p class="italic text-3xl font-bold text-blue-900 text-center font-slab">{{ question.question_text }}</p>
-    {{ question }}
     {% if question.code %}
         <div class="turn-pre-into-ace w-3/4 mx-auto my-4">
             <pre class="quiz-question no-copy-button" level="{{ level_source }}">{{ question.code }}</pre>
@@ -43,7 +42,13 @@
                             <div class="absolute z-10 mx-4">{{ triangle_6|safe }}</div>
                         {% endif %}
                         <div class="w-full turn-pre-into-ace">
-                            <pre class="mx-2 no-copy-button mb-2" level="{{ level_source }}">{{ question_options[counter.value].option }}</pre>
+                            {% if (question_options[counter.value].option|commonmark)[0:5] == "<pre>" %}
+                                <div class="mx-4">
+                                    <pre class="no-copy-button" level="{{ level_source }}">{{question_options[counter.value].option|commonmark}}</pre>
+                                </div>
+                            {% else %}
+                                <div class="pt-8 px-2 mx-2 mb-2">{{ question_options[counter.value].option|commonmark }}</div>
+                            {% endif %}
                         </div>
                         <button class="submit-button" type="submit" name="submit-button" value="{{ question_options[counter.value].char_index }}">
                         {% if is_last_attempt %}
