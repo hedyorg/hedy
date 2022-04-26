@@ -122,7 +122,11 @@ export const auth = {
       }).done (function (response) {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin({"admin": response['admin'], "teacher": response['teacher']});
+        // This happens when a student account (without an mail address logs in for the first time
+        if (response['first_time']) {
+          return afterLogin({"first_time": true});
+        }
+        return afterLogin({"admin": response['admin'] || false, "teacher": response['teacher']} || false);
       }).fail (function (response) {
         modal.alert(response.responseText, 3000, true);
       });

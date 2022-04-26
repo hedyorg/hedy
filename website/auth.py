@@ -306,8 +306,12 @@ def routes(app, database):
             resp = make_response({'admin': True})
         elif user.get('is_teacher'):
             resp = make_response({'teacher': True})
-        else:
-            resp = make_response({'teacher': False})
+
+        # If the user is a student (and has a related teacher) and the verification is still pending -> first time
+        if user.get('teacher') and user.get('verification_pending'):
+            DATABASE.update_user(user['username'], {'verification_pending': None})
+            resp = make_response({'first_time': True})
+
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
