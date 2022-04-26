@@ -1110,7 +1110,7 @@ levels:
                 {print} 'Jouw geluksgetal is...' geluksgetal
             mp_choice_options:
             -   option: "30"
-                feedback: "Let op, Hedy {print} ook 'Jouw geluksgetal is...'"
+                feedback: "Let op, Hedy `{print}` ook 'Jouw geluksgetal is...'"
             -   option: "10"
                 feedback: "Helaas ! Kijk nog eens goed."
             -   option: "Jouw geluksgetal is... 30"
@@ -1172,9 +1172,9 @@ levels:
                 {if} drinken {is} water prijs {is} prijs + 1
                 {print} prijs ' euro alstublieft'
             mp_choice_options:
-            -   option: "Er had net zo goed 'prijs {is} 3' kunnen staan."
+            -   option: "Er had net zo goed 'prijs `{is}` 3' kunnen staan."
                 feedback: "Nee, dat is niet waar ! Het is belangrijk dat de prijs 3 meer wordt."
-            -   option: "Omdat Hedy 'prijs {is} 3' niet begrijpt."
+            -   option: "Omdat Hedy 'prijs `{is}` 3' niet begrijpt."
                 feedback: "Hedy begrijpt het wel, maar het betekent wat anders."
             -   option: "Omdat Hedy anders de prijs van het eten anders vergeet. De totaalprijs zou dan dus maar 3 euro worden."
                 feedback: "Klopt !"
@@ -1195,7 +1195,7 @@ levels:
                 feedback: "Helaas, die moeten er wel staan !"
             -   option: "De variabele heet goede antwoord, maar een variabelenaam mag maar 1 woord zijn. Dus het moet goedeantwoord zijn."
                 feedback: "Correct !"
-            -   option: "De {if} en {else} moeten per se op dezelfde regel staan"
+            -   option: "De `{if}` en `{else}` moeten per se op dezelfde regel staan"
                 feedback: "Nee, dat is niet waar."
             -   option: "De variabele antwoord mag geen antwoord heten, want de andere variabele heet al goede antwoord en dat lijkt te veel op elkaar."
                 feedback: "Helaas. Variabelenamen mogen op elkaar lijken, zolang ze maar niet precies hetzelfde zijn."
@@ -1247,19 +1247,31 @@ levels:
         1:
             question_text: "Wat is de juiste spelling van het commando herhalen ?"
             mp_choice_options:
-            -   option: "repaet"
+            -   option: |
+                    ```
+                    repaet
+                    ```
                 feedback: "fout gespeld"
-            -   option: "repete"
+            -   option: |
+                    ```
+                    repete
+                    ```
                 feedback: "fout gespeld"
-            -   option: "repite"
+            -   option: |
+                    ```
+                    repite
+                    ```
                 feedback: "fout gespeld"
-            -   option: "{repeat}"
+            -   option: |
+                    ``` 
+                    {repeat}
+                    ```
                 feedback: "Juist"
             correct_answer: "D"
-            hint: "Je spelt: {repeat}"
+            hint: "Je spelt: `{repeat}`"
             question_score: '10'
         2:
-            question_text: "Welk aanhalingsteken gebruik je bij het {print} commando ?"
+            question_text: "Welk aanhalingsteken gebruik je bij het `{print}` commando ?"
             mp_choice_options:
             -   option: "`"
                 feedback: "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
@@ -1270,7 +1282,7 @@ levels:
             -   option: ","
                 feedback: "Dit is een komma, je hebt een aanhalingsteken nodig."
             correct_answer: "B"
-            hint: "Je spelt: {repeat}"
+            hint: "Je spelt: `{repeat}`"
             question_score: '10'
         3:
             question_text: "Is deze code goed of fout"
@@ -1280,12 +1292,12 @@ levels:
                 feedback: "Nope, er mist een woord"
             -   option: "Fout, er moeten aanhalingstekens bij 100"
                 feedback: "100 moet juist zonder aanhalingstekens"
-            -   option: "Fout, het commando {times} mist"
-                feedback: "{times} staat er wel, er mist een ander woord."
-            -   option: "Fout, het commando {print} mist"
+            -   option: "Fout, het commando `{times}` mist"
+                feedback: "`{times}` staat er wel, er mist een ander woord."
+            -   option: "Fout, het commando `{print}` mist"
                 feedback: "Correct"
             correct_answer: "D"
-            hint: "Het antwoord is: repeat 100 times print 'Hoi'"
+            hint: "Het antwoord is: `{repeat}` 100 `{times}` `{print}` 'Hoi'"
             question_score: '10'
         4:
             question_text: "Welk woord in de code is fout"
@@ -1293,14 +1305,26 @@ levels:
                 {print} 'I'm blue'
                 {repeat} 7 {times} {print} 'da ba dee, da ba dee'
             mp_choice_options:
-            -   option: "I'm"
+            -   option: |
+                    ```
+                    I'm
+                    ```
                 feedback: "Goedzo !"
-            -   option: "{print}"
-                feedback: "{print} is goed gespeld"
-            -   option: "{repeat}"
-                feedback: "{repeat} is goed gespeld"
-            -   option: "{times}"
-                feedback: "{times} is goed gespeld"
+            -   option: |
+                    ```
+                    {print}
+                    ```
+                feedback: "`{print}` is goed gespeld"
+            -   option: |
+                    ```
+                    {repeat}
+                    ```
+                feedback: "`{repeat}` is goed gespeld"
+            -   option: |
+                    ```
+                    {times}
+                    ```
+                feedback: "`{times}` is goed gespeld"
             correct_answer: "A"
             hint: "I'm is fout, je mag geen aanhalingstekens gebruiken voor tekst"
             question_score: '10'
@@ -1314,7 +1338,7 @@ levels:
             -   option: "Fout"
                 feedback: Correct!
             correct_answer: "B"
-            hint: "Bij {repeat} hoort nog een ander commando"
+            hint: "Bij `{repeat}` hoort nog een ander commando"
             question_score: '10'
         6:
             question_text: "Wat is er mis met deze code ?"
@@ -1324,7 +1348,7 @@ levels:
                 {print} 'Ik stond er bij en ik keek er naar'
             mp_choice_options:
             -   option: "Er missen aanhalingstekens in regel 1"
-                feedback: "{ask} heeft geen aanhalingstekens nodig"
+                feedback: "`{ask}` heeft geen aanhalingstekens nodig"
             -   option: "Er missen aanhalingstekens in regel 2"
                 feedback: "een variabele heeft geen aanhalingstekens nodig"
             -   option: "Er missen aanhalingstekens in regel 3"
@@ -1337,23 +1361,35 @@ levels:
         7:
             question_text: "Hieronder code voor het liedje 'potje met vet'. Stel je wil de code een paar keer herhalen door deze te kopiëren, welke zin moet je dan weglaten in de kopieën zodat de teller (1e couplet, 2e couplet etc) werkt ?"
             code: |-
-                couplet is 0
-                print 'Ik heb het potje met vet'
-                print 'al op de tafel gezet'
-                print 'Ik heb het'
-                repeat 4 times print 'potje'
-                print 'veeeeeet'
-                print 'al op de tafel gezet'
-                couplet is couplet + 1
-                print 'Dit was het ' couplet 'e couplet'
+                couplet {is} 0
+                {print} 'Ik heb het potje met vet'
+                {print} 'al op de tafel gezet'
+                {print} 'Ik heb het'
+                {repeat} 4 {times} {print} 'potje'
+                {print} 'veeeeeet'
+                {print} 'al op de tafel gezet'
+                couplet {is} couplet + 1
+                {print} 'Dit was het ' couplet 'e couplet'
             mp_choice_options:
-            -   option: "couplet is 0"
+            -   option: |
+                    ```
+                    couplet {is} 0
+                    ```
                 feedback: "Goed gezien ! Als deze blijft staan, zul je nooit verder kunnen tellen dan twee, want je zet de variabele couplet elke keer weer op 1."
-            -   option: "{repeat} 4 {times} print 'potje'"
+            -   option: |
+                    ```
+                    {repeat} 4 {times} {print} 'potje'
+                    ```
                 feedback: "Nee, dit is prima."
-            -   option: "couplet is couplet + 1"
+            -   option: |
+                    ```
+                    couplet {is} couplet + 1
+                    ```
                 feedback: "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."
-            -   option: "{print} 'Door naar het ' couplet 'e couplet'"
+            -   option: |
+                    ```
+                    {print} 'Door naar het ' couplet 'e couplet'
+                    ```
                 feedback: "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."
             correct_answer: "A"
             hint: "De variabele couplet moet blijven doortellen, dat lukt niet als hij steeds op 1 wordt gezet."
@@ -1363,35 +1399,82 @@ levels:
             question_text: "Welke Hedy code hoort bij dit resultaat"
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
             mp_choice_options:
-            -   option: "print 'Here comes the sun'\nprint 'Do do do do'\nprint 'Here comes the sun'\nprint 'And I say'\nprint 'Its alright'"
-                feedback: "Perfect, je kan het repeat commando hiet niet gebruiken."
-            -   option: "repeat 2 times print 'Here comes the sun'\nprint 'And I say'\nprint 'Its alright'"
+            -   option: |
+                    ```
+                    {print} 'Here comes the sun'
+                    {print} 'Do do do do'
+                    {print} 'Here comes the sun'
+                    {print} 'And I say'
+                    {print} 'Its alright'
+                    ```
+                feedback: "Perfect, je kan het `{repeat}` commando hier niet gebruiken."
+            -   option: |
+                    ```
+                    {repeat} 2 {times} {print} 'Here comes the sun'
+                    {print} 'And I say'
+                    {print} 'Its alright'"
                 feedback: "Waar is de 'Do do do do' gebleven?"
-            -   option: "repeat 2 times print 'Here comes the sun'\nprint 'Do do do do'\nprint 'And I say'\nprint 'Its alright'"
+            -   option: |
+                    ```
+                    {repeat} 2 {times} {print} 'Here comes the sun'
+                    {print} 'Do do do do'
+                    {print} 'And I say'
+                    {print} 'Its alright'
+                    ```
                 feedback: "Dit is niet de juiste volgorde.."
-            -   option: "repeat 2 times print 'Here comes the sun'\nrepeat 2 times print 'Do do'\nprint 'And I say'\nprint 'Its alright'"
+            -   option: |
+                    ```
+                    {repeat} 2 {times} {print} 'Here comes the sun'
+                    {repeat} 2 {times} {print} 'Do do'
+                    {print} 'And I say'
+                    {print} 'Its alright'"
+                    ```
                 feedback: "Dit is niet de juiste volgorde.."
-            hint: "Repeat kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren."
+            hint: "`{repeat}` kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren."
             correct_answer: "A"
             question_score: '10'
         9:
             question_text: Welke Hedy code hoort bij dit resultaat ?
-            code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp !\nHelp !\nHelp !\nPlease help me !"
+            code: |-
+                Batman was flying through Gotham.
+                When suddenly he heard someone screaming...
+                Help !
+                Help !
+                Help !
+                Please help me !"
             mp_choice_options:
-            -   option: "print 'Batman was flying through Gotham. '\nprint 'When suddenly he heard someone screaming...'\nprint 'Help !'\nrepeat 3 times print 'Please help me !'"
-                feedback: "You repeated the wrong line"
-            -   option: "print 'Batman was flying through Gotham.' \nprint 'When suddenly he heard someone screaming...'\nrepeat 3 times 'Help !'\nprint 'Please help me !'\n"
-                feedback: "You missed the word print in line 3"
-            -   option: "print Batman was flying through Gotham.\nprint When suddenly he heard someone screaming...\nrepeat 3 times print Help !\nprint Please help me !"
-                feedback: "You forgot about the quotation marks"
-            -   option: "print 'Batman was flying through Gotham.' \nprint 'When suddenly he heard someone screaming...'\nrepeat 3 times print 'Help !'\nprint 'Please help me !'"
+            -   option: |
+                    {print} 'Batman was flying through Gotham. '
+                    {print} 'When suddenly he heard someone screaming...'
+                    {print} 'Help !'
+                    {repeat} 3 {times} {print} 'Please help me !'
+                feedback: "Je herhaalt de verkeerde regel"
+            -   option: |
+                    {print} 'Batman was flying through Gotham.'
+                    {print} 'When suddenly he heard someone screaming...'
+                    {repeat} 3 {times} 'Help !'
+                    {print} 'Please help me !'
+                feedback: "Het commando `{print}` mist op regel 3"
+            -   option: |
+                    {print} Batman was flying through Gotham.
+                    {print} When suddenly he heard someone screaming...
+                    {repeat} 3 {times} {print} Help !
+                    {print} Please help me !
+                feedback: "Je vergeet de aanhalingstekens"
+            -   option: |
+                    {print} 'Batman was flying through Gotham.'
+                    {print} 'When suddenly he heard someone screaming...'
+                    {repeat} 3 {times} {print} 'Help !'
+                    {print} 'Please help me !'"
                 feedback: "Perfect"
             question_score: '10'
             hint: "'Help !' wordt 3x herhaald."
             correct_answer: "D"
         10:
             question_text: Welke resultaat hoort bij deze Hedy code?
-            code: "hoi is 'hallo allemaal ik ben Hedy' \nrepeat 3 times print hoi"
+            code: |-
+                hoi {is} 'hallo allemaal ik ben Hedy'
+                {repeat} 3 {times} {print} hoi"
             mp_choice_options:
             -   option: "hoi \nhoi \nhoi"
                 feedback: "'hoi' is een variabele"
