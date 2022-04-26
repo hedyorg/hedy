@@ -1,54 +1,44 @@
-_PRINT: "napisz" | "print"
-_ASK: "zapytaj" | "ask"
-_ECHO: "echo"
-_FORWARD: "forward"
-_TURN: "turn"
-right: "prawo" | "right"
-left: "lewo" | "left"
-_IS: "jest" | "is"
-_SLEEP: "śpij" | "sleep"
-_ADD: "dodaj" | "add"
-_TO_LIST: "do" | "to"
-_REMOVE: "usuń" | "remove"
-_FROM: "od" | "from"
-_AT: "at"
-random: "losowe" | "random"
-_IN: "w" | "in"
-_IF: "jeśli" | "if"
-_ELSE: "else"
-_AND: "i" | "and"
-_REPEAT: "powtórz" | "repeat"
-_TIMES: "razy" | "times"
-_FOR: "dla" | "for"
-_RANGE: "zakres" | "range"
-_TO: "do" | "to"
-_STEP: "krok" | "step"
-_ELIF: "elif"
-_INPUT: "wprowadź" | "input"
-_OR: "lub" | "or"
-_WHILE: "dopóki" | "while"
-_LENGTH: "długość" | "length"
-1: "1" | "1"
-2: "2" | "2"
-3: "3" | "3"
-4: "4" | "4"
-5: "5" | "5"
-6: "6" | "6"
-7: "7" | "7"
-8: "8" | "8"
-9: "9" | "9"
-0: "0" | "0"
-_COMMA: ","
-_QUOTE: "'"
-_COLOR: "color"
-_BLACK: "black"
-_BLUE: "blue"
-_BROWN: "brown"
-_GRAY: "gray"
-_GREEN: "green"
-_ORANGE: "orange"
-_PINK: "pink"
-_PURPLE: "purple"
-_RED: "red"
-_WHITE: "white"
-_YELLOW: "yellow"
+_PRINT: ("napisz" | "print") _SPACE?
+_ASK: ("zapytaj" | "ask") _SPACE?
+_ECHO: "echo" _SPACE?
+_FORWARD: "forward" _SPACE?
+_TURN: "turn" _SPACE?
+right: ("prawo" | "right") _SPACE?
+left: ("lewo" | "left") _SPACE?
+_IS: ("jest" | "is") _SPACE?
+_SLEEP: ("śpij" | "sleep") _SPACE?
+_ADD: ("dodaj" | "add") _SPACE?
+_TO_LIST: ("do" | "to") _SPACE?
+_REMOVE: ("usuń" | "remove") _SPACE?
+_FROM: ("od" | "from") _SPACE?
+_AT: "at" _SPACE?
+random: ("losowe" | "random") _SPACE?
+_IN: ("w" | "in") _SPACE?
+_IF: ("jeśli" | "if") _SPACE?
+_ELSE: "else" _SPACE?
+_AND: ("i" | "and") _SPACE?
+_REPEAT: ("powtórz" | "repeat") _SPACE?
+_TIMES: ("razy" | "times") _SPACE?
+_FOR: ("dla" | "for") _SPACE?
+_RANGE: ("zakres" | "range") _SPACE?
+_TO: ("do" | "to") _SPACE?
+_STEP: ("krok" | "step") _SPACE?
+_ELIF: "elif" _SPACE?
+_INPUT: ("wprowadź" | "input") _SPACE?
+_OR: ("lub" | "or") _SPACE?
+_WHILE: ("dopóki" | "while") _SPACE?
+_LENGTH: ("długość" | "length") _SPACE?
+_COMMA: "," _SPACE?
+_QUOTE: "'" _SPACE?
+_COLOR: "color" _SPACE?
+black: "black" _SPACE?
+blue: "blue" _SPACE?
+brown: "brown" _SPACE?
+gray: "gray" _SPACE?
+green: "green" _SPACE?
+orange: "orange" _SPACE?
+pink: "pink" _SPACE?
+purple: "purple" _SPACE?
+red: "red" _SPACE?
+white: "white" _SPACE?
+yellow: "yellow" _SPACE?

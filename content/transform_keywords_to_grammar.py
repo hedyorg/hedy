@@ -20,10 +20,9 @@ def extract_Lark_grammar_from_yaml(only_new_lang=True):
   lark_languages = [f.replace('keywords-', '').replace('.lark', '') for f in os.listdir(current_grammar_path) if
                     os.path.isfile(os.path.join(current_grammar_path, f)) and f.startswith('keywords')]
 
-  for yaml_lang in yaml_languages:
-    if yaml_lang in lark_languages:
-      if only_new_lang:
-        continue
+  new_languages = [l for l in yaml_languages if not l in lark_languages]
+
+  for yaml_lang in new_languages:
     yaml_filesname_with_path = os.path.join(input_path, yaml_lang + '.yaml')
     default_yaml_with_path = os.path.join(input_path, 'en' + '.yaml')
 
@@ -50,14 +49,21 @@ def extract_Lark_grammar_from_yaml(only_new_lang=True):
           else:
             list_of_translations.append(translation)
 
-        # random, left and right are tokens and need to be printed lowercase without _
-        if command != 'random' and  command != 'left' and  command != 'right' and type(command) != int:
-          command_upper = command.upper()
-          command = '_' + command_upper
+        if type(command) != int:
+          # numbers should be skipped (fh apr. 22 TODO: TBH I am not sure why they are even in the yaml?)
 
-        if translation != en_translation:
-          f.write(f'{command}: "{translation}" | "{en_translation}"\n')
-        else:
-          f.write(f'{command}: "{translation}"\n')
+          lowercase_commands = ['random', 'left', 'right', 'black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
+          # random, left and right and colors are tokens and need to be printed as they are
+          # other rules need to be UPPERCASE and start with _
+          if command not in lowercase_commands:
+              command_upper = command.upper()
+              command = '_' + command_upper
+
+          # something to add to all lines to modify rules
+          ending = "_SPACE?"
+          if translation != en_translation:
+              f.write(f'{command}: ("{translation}" | "{en_translation}") {ending}\n')
+          else:
+              f.write(f'{command}: "{translation}" {ending}\n')
 
 extract_Lark_grammar_from_yaml(True)
