@@ -79,6 +79,7 @@
                 <div class="grid-item grid grid-cols-2 gap-x-4">
                     <div class="table-el bg-blue-200 shadow-lg flex flex-col-75 place-content-center rounded-b-md">
                         {% if (result_items[i].option|commonmark)[0:5] == "<pre>" %}
+                            <!-- Todo TB -> Ace editor not working in this place (yet)... -->
                             <div class="mx-4 mb-2 turn-pre-into-ace">
                                 <pre class="no-copy-button" level="{{ level_source }}">{{result_items[i].option|commonmark}}</pre>
                             </div>
