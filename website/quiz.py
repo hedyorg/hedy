@@ -301,7 +301,7 @@ def get_result_items(quiz_answers, questions):
         item["index_chosen"] = index_from_letter(quiz_answers[i + 1][-1])
         item["index_correct"] = index_from_letter(questions[i + 1]["correct_answer"])
         item["attempts"] = len(quiz_answers[i + 1])
-        item["option"] = question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["code"]
+        item["option"] = question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["option"]
         result_items.append(item)
     return result_items
 
