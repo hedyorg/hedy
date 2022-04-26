@@ -47,7 +47,7 @@
                 <div class="flex flex-row">
                     {% for lang in other_languages() %}
                         {% if loop.index % 2 == 1 %}</div><div class="flex flex-row">{% endif %}
-                        <div class="hover:bg-blue-600 cursor-pointer w-52 font-medium text-white py-2 px-4 rounded-lg language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
+                        <div class="hover:bg-blue-600 cursor-pointer w-52 font-medium {% if lang.lang in all_keyword_languages() %}text-white{% else %}text-gray-700{% endif %} py-2 px-4 rounded-lg language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
                     {% endfor %}
                 </div>
               </div>
