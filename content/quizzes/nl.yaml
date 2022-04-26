@@ -1144,16 +1144,12 @@ levels:
             mp_choice_options:
             -   option: "couplet is 0"
                 feedback: "Goed gezien ! Als deze blijft staan, zul je nooit verder kunnen tellen dan twee, want je zet de variabele couplet elke keer weer op 1."
-                option: "We will We will\nROCK YOU!"
             -   option: "{repeat} 4 {times} print 'potje'"
                 feedback: "Nee, dit is prima."
-                option: "We will\nWe will\nROCK YOU!"
             -   option: "couplet is couplet + 1"
                 feedback: "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."
-                option: "We will\nROCK YOU!\nWe will\nROCK YOU!"
             -   option: "{print} 'Door naar het ' couplet 'e couplet'"
                 feedback: "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."
-                option: "We will\nROCK YOU!"
             correct_answer: "A"
             hint: "De variabele couplet moet blijven doortellen, dat lukt niet als hij steeds op 1 wordt gezet."
             question_score: '10'
@@ -1365,16 +1361,12 @@ levels:
             mp_choice_options:
             -   option: "Goed gedaan ! \n Goed gedaan !"
                 feedback: "Niets !"
-                option: "{if} answer is right\n   {print} You are...\n      sleep\n          {print} right!\n      {else}\n          {print} You are wrong!"
             -   option: "De computer ontploft in 5... 4... 3... 2... 1..."
                 feedback: "Niets !"
-                option: "{if} answer is right\n{print} You are...\nsleep\n{print} right!\n{else}\n{print} You are wrong!"
             -   option: "Goed gedaan ! \n Goed gedaan ! \n Je mag computeren"
                 feedback: "Niets !"
-                option: "{if} answer is right\n    {print} You are...\n    sleep\n    {print} right!\n{else}\n    {print} You are wrong!"
             -   option: "Goed gedaan ! \n Je mag computeren ! \n Goed gedaan ! \n Je mag computeren"
                 feedback: "Correct !"
-                option: "{if} answer is right\n    {print} You are...\n    sleep\n{print} right!\n{else}\n    {print} You are wrong!"
             correct_answer: "D"
             hint: "Alles onder de {repeat} wordt 2 keer herhaald"
             question_score: '10'
