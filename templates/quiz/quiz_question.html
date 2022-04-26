@@ -43,11 +43,11 @@
                         {% endif %}
                         <div class="w-full turn-pre-into-ace">
                             {% if (question_options[counter.value].option|commonmark)[0:5] == "<pre>" %}
-                                <div class="mx-4">
+                                <div class="mx-4 mb-2">
                                     <pre class="no-copy-button" level="{{ level_source }}">{{question_options[counter.value].option|commonmark}}</pre>
                                 </div>
                             {% else %}
-                                <div class="pt-8 px-2 mx-2 mb-2 text-lg">{{ question_options[counter.value].option|commonmark }}</div>
+                                <div class="pt-8 px-2 mx-2 mb-2 text-lg0">{{ question_options[counter.value].option|commonmark }}</div>
                             {% endif %}
                         </div>
                         <button class="submit-button" type="submit" name="submit-button" value="{{ question_options[counter.value].char_index }}">

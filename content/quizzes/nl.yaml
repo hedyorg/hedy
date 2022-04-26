@@ -32,9 +32,15 @@ levels:
                     {print}
                     ```
                 feedback: "Goed ! Met {print} kun je tekst printen !"
-            -   option: "hello"
+            -   option: |
+                    ```
+                    hello
+                    ```
                 feedback: "Hello is geen commando, probeer het nog eens..."
-            -   option: "{ask}"
+            -   option: |
+                    ```
+                    {ask}
+                    ```
                 feedback: "Met {ask} kun je een vraag stellen..."
             correct_answer: "B"
             hint: "_?_ Hallo wereld !"
@@ -42,13 +48,25 @@ levels:
         3:
             question_text: "Hoe vraag je: Wat is je lievelingskleur ?"
             mp_choice_options:
-            -   option: "{print} Wat is je lievelingskleur ?"
+            -   option: |
+                    ```
+                    {print} Wat is je lievelingskleur ?
+                    ```
                 feedback: "Met {print} print je iets"
-            -   option: "{ask} {print} Wat is je lievelingskleur ?"
+            -   option: |
+                    ```
+                    {ask} {print} Wat is je lievelingskleur ?
+                    ```
                 feedback: "{ask} en {print} is dubbelop, je hebt maar één commando nodig."
-            -   option: "{ask} Wat is je lievelingskleur ?"
+            -   option: |
+                    ```
+                    {ask} Wat is je lievelingskleur ?
+                    ```
                 feedback: "Goed zo !"
-            -   option: "{echo} Wat is je lievelingskleur ?"
+            -   option: |
+                    ```
+                    {echo} Wat is je lievelingskleur ?
+                    ```
                 feedback: "{echo} herhaalt het antwoord."
             correct_answer: "C"
             hint: "Het Engelse woord voor vragen is {ask}"
@@ -60,11 +78,11 @@ levels:
                 {ask} Wie ben jij ?
                 {echo} Hoi...
             mp_choice_options:
-            -   option: "{print} in regel 1 mist."
+            -   option: "`{print}` in regel 1 mist."
                 feedback: "Goedzo !"
-            -   option: "{ask} in regel 2 is fout gespeld, het moet aks zijn."
+            -   option: "`{ask}` in regel 2 is fout gespeld, het moet aks zijn."
                 feedback: "{ask} is goed gespeld."
-            -   option: "{echo} is geen commando in level 1,"
+            -   option: "`{echo}` is geen commando in level 1,"
                 feedback: "{echo} is goed, er is een ander foutje"
             -   option: "Niets ! De code is goed !"
                 feedback: "Er zit een foutje in, kijk goed !"
