@@ -429,16 +429,28 @@ levels:
         1:
             question_text: "Wat is het commando om Hedy een willekeurig woord uit een rijtje te laten kiezen ?"
             mp_choice_options:
-            -   option: "{print}"
-                feedback: "Met {print} laat je tekst verschijnen"
-            -   option: "{ask}"
-                feedback: "{ask} is om een vraag te stellen"
-            -   option: "is"
-                feedback: "is gebruik je om het rijtje te maken"
-            -   option: "{at} {random}"
+            -   option: |
+                    ```
+                    {print}
+                    ```
+                feedback: "Met `{print}` laat je tekst verschijnen"
+            -   option: |
+                    ```
+                    {ask}
+                    ```
+                feedback: "`{ask}` is om een vraag te stellen"
+            -   option: |
+                    ```
+                    {is}
+                    ```
+                feedback: "{is} gebruik je om het rijtje te maken"
+            -   option: |
+                    ```
+                    {at} {random}
+                    ```
                 feedback: "Juist !"
             correct_answer: "D"
-            hint: "Willekeurig betekent 'zomaar eentje' er wordt telkens een ander woord gekozen."
+            hint: "`{random}` betekent 'zomaar eentje' er wordt telkens een ander woord gekozen."
             question_score: '10'
         2:
             question_text: "Wat is er mis met deze code ?"
@@ -448,12 +460,12 @@ levels:
             mp_choice_options:
             -   option: "Er moeten komma's tussen: hond, koe, aap."
                 feedback: "Goedzo !"
-            -   option: "In regel 1 moet {print} staan."
-                feedback: "Nee, je hebt geen {print} nodig."
+            -   option: "In regel 1 moet `{print}` staan."
+                feedback: "Nee, je hebt geen `{print}` nodig."
             -   option: "In regel 2 moet 'dier' staan in plaats van 'dieren',"
                 feedback: "Dieren is goed."
-            -   option: "'At {random}' is fout gespeld, het moet 'et rendom' zijn"
-                feedback: "At {random} is de goede spelling"
+            -   option: "`{at} {random}` is fout gespeld, het moet `et rendom` zijn"
+                feedback: "`{at} {random}` is de goede spelling"
             correct_answer: "A"
             hint: "De fout zit in regel 1"
             question_score: '10'
@@ -463,11 +475,20 @@ levels:
                 opties {is} steen, papier, schaar
                 {print} steen, papier, schaar {at} {random}
             mp_choice_options:
-            -   option: "{at} {random} {print} opties"
+            -   option: |
+                    ```
+                    {at} {random} {print} opties
+                    ```
                 feedback: "Je bent er bijna, opties is goed, maar deze volgorde niet."
-            -   option: "{print} steen {at} {random}"
+            -   option: |
+                    ```
+                    {print} steen {at} {random}
+                    ```
                 feedback: "Je wilt niet altijd steen printen, maar willekeurig een van de opties."
-            -   option: "{print} opties {at} {random}"
+            -   option: |
+                    ```
+                    {print} opties {at} {random}
+                    ```
                 feedback: "Heel goed !"
             -   option: "Niets, de code is goed !"
                 feedback: "Kijk goed ! Er zit wel een fout in !"
