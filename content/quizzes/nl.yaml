@@ -80,7 +80,7 @@ levels:
             mp_choice_options:
             -   option: "`{print}` in regel 1 mist."
                 feedback: "Goedzo !"
-            -   option: "`{ask}` in regel 2 is fout gespeld, het moet aks zijn."
+            -   option: "`{ask}` in regel 2 is fout gespeld, het moet `aks` zijn."
                 feedback: "{ask} is goed gespeld."
             -   option: "`{echo}` is geen commando in level 1,"
                 feedback: "{echo} is goed, er is een ander foutje"
@@ -95,13 +95,25 @@ levels:
                 {ask} Wat is jouw lievelingsdier ?
                 _?_ Dus jouw lievelingsdier is...
             mp_choice_options:
-            -   option: "{print}"
+            -   option: |
+                    ```
+                    {print}
+                    ```
                 feedback: "Je wilt dat in regel 2 het antwoord herhaald wordt..."
-            -   option: "ego"
+            -   option: |
+                    ```
+                    ego
+                    ```
                 feedback: "ego is geen commando, probeer het nog eens..."
-            -   option: "{ask}"
+            -   option: |
+                    ```
+                    ask
+                    ```
                 feedback: "Met {ask} kun je een vraag stellen..."
-            -   option: "{echo}"
+            -   option: |
+                    ```
+                    {echo}
+                    ```
                 feedback: "Goedzo !"
             correct_answer: "D"
             hint: "Met '{ask}' kun je iets vragen"
@@ -114,13 +126,13 @@ levels:
                 {echo} Jij bent voor...
                 {print} Cool ! Ik ook !
             mp_choice_options:
-            -   option: "In regel 1 moet het {print} commando worden vervangen door {ask}."
-                feedback: "Print in regel 1 is goed, let op de spelling van de commando's"
-            -   option: "In regel 2 is {ask} fout gespeld."
+            -   option: "In regel 1 moet het `{print}` commando worden vervangen door `{ask}`."
+                feedback: "`{print}` in regel 1 is goed, let op de spelling van de commando's"
+            -   option: "In regel 2 is `{ask}` fout gespeld."
                 feedback: "Goed opgelet !"
-            -   option: "Regel 3 moet beginnen met {print} in plaats van {echo}."
-                feedback: "Echo is goed ! Kijk naar de spelling van de commando's."
-            -   option: "In regel 4 is {print} verkeerd gespeld."
+            -   option: "Regel 3 moet beginnen met `{print}` in plaats van `{echo}`."
+                feedback: "`{echo}` is goed ! Kijk naar de spelling van de commando's."
+            -   option: "In regel 4 is `{print}` verkeerd gespeld."
                 feedback: "Er zit ergens anders een spelfout"
             correct_answer: "B"
             hint: "Kijk goed naar de spelling van de commando's"
@@ -133,11 +145,11 @@ levels:
                 {echo} Dus u wilt graag ...
                 {print} Komt er aan ! Eet smakelijk !"
             mp_choice_options:
-            -   option: "In regel 1 moest {ask} staan in plaats van {print}"
+            -   option: "In regel 1 moest `{ask}` staan in plaats van `{print}`"
                 feedback: "Weet je zeker dat er iets mis is ?"
-            -   option: "In regel 1 moet {echo} staan in plaats van {print}"
+            -   option: "In regel 1 moet `{echo}` staan in plaats van `{print}`"
                 feedback: "Weet je zeker dat er iets mis is ?"
-            -   option: "In regel 3 moet {print} staan in plaats van {echo}"
+            -   option: "In regel 3 moet `{print}` staan in plaats van `{echo}`"
                 feedback: "Weet je zeker dat er iets mis is ?"
             -   option: "Niets ! Deze code is goed !"
                 feedback: "Correct !"
@@ -147,16 +159,16 @@ levels:
         8:
             question_text: "Wat doet het commando {echo} ?"
             mp_choice_options:
-            -   option: "Met {echo} stel je een vraag"
-                feedback: "Dat doe je met {ask}"
-            -   option: "Met {echo} laat je tekst verschijnen"
-                feedback: "Dat doe je met {print}"
-            -   option: "Met {echo} herhaal je een gegeven antwoord"
+            -   option: "Met `{echo}` stel je een vraag"
+                feedback: "Dat doe je met `{ask}`"
+            -   option: "Met `{echo}` laat je tekst verschijnen"
+                feedback: "Dat doe je met `{print}`"
+            -   option: "Met `{echo}` herhaal je een gegeven antwoord"
                 feedback: "Goed zo !"
-            -   option: "Met {echo} laat je tekst verdwijnen"
+            -   option: "Met `{echo}` laat je tekst verdwijnen"
                 feedback: "Dat klopt niet"
             correct_answer: "C"
-            hint: "{echo} gebruik je nadat iemand een antwoord gegeven heeft bij {ask}."
+            hint: "`{echo}` gebruik je nadat iemand een antwoord gegeven heeft bij `{ask}`."
             question_score: '10'
         9:
             question_text: "Wat is er mis met deze code ?"
@@ -165,16 +177,16 @@ levels:
                 {print} Hoe gaat het met jou ?
                 {echo} Dus het gaat...
             mp_choice_options:
-            -   option: "{print} in regel 1 moet {ask} zijn"
-                feedback: "Nee, {print} is goed. Waar wordt de vraag gesteld ?"
-            -   option: "{print} in regel 2 moet {ask} zijn"
+            -   option: "`{print}` in regel 1 moet `{ask}` zijn"
+                feedback: "Nee, `{print}` is goed. Waar wordt de vraag gesteld ?"
+            -   option: "`{print}` in regel 2 moet `{ask}` zijn"
                 feedback: "Super !"
-            -   option: "{echo} in regel 3 moet {ask} zijn"
-                feedback: "Nee, {echo} is goed. Waar wordt de vraag gesteld ?"
+            -   option: "`{echo}` in regel 3 moet `{ask}` zijn"
+                feedback: "Nee, `{echo}` is goed. Waar wordt de vraag gesteld ?"
             -   option: "Niets, alles is goed !"
                 feedback: "Er zit wel een foutje in..."
             correct_answer: "B"
-            hint: "met '{ask}' kun je iets vragen"
+            hint: "met `{ask}` kun je iets vragen"
             question_score: '10'
         10:
             question_text: "Heb je zin om naar level 2 te gaan ?"
@@ -186,7 +198,6 @@ levels:
             correct_answer: "A"
             hint: "Op naar level 2!"
             question_score: '10'
-
     2:
         1:
             question_text: "Wat is waar ?"
