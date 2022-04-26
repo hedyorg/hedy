@@ -858,13 +858,13 @@ levels:
         1:
             question_text: "Wat is waar ?"
             mp_choice_options:
-            -   option: "In level 5 werkt {print} anders dan in level 4"
-                feedback: "{print} werkt nog hetzelfde"
-            -   option: "In level 5 werkt {ask} anders dan in level 4"
-                feedback: "{ask} werkt nog hetzelfde"
-            -   option: "In level 5 werken {print} en {ask} anders dan in level 4"
+            -   option: "In level 5 werkt `{print}` anders dan in level 4"
+                feedback: "`{print}` werkt nog hetzelfde"
+            -   option: "In level 5 werkt `{ask}` anders dan in level 4"
+                feedback: "`{ask}` werkt nog hetzelfde"
+            -   option: "In level 5 werken `{print}` en `{ask}` anders dan in level 4"
                 feedback: "Nee hoor, ze werken hetzelfde !"
-            -   option: "In level 5 werken {print} en {ask} nog hetzelfde als in level 4"
+            -   option: "In level 5 werken `{print}` en `{ask}` nog hetzelfde als in level 4"
                 feedback: "Klopt !"
             correct_answer: "D"
             hint: "Er is alleen een commando bijgekomen."
@@ -880,7 +880,7 @@ levels:
             -   option: "minder leuk"
                 feedback: "Als de naam Hedy is, zegt Hedy juist 'leuk'"
             -   option: "Hedy"
-                feedback: "Nee, er staat niet {print} naam"
+                feedback: "Nee, er staat niet `{print}` naam"
             -   option: "Error"
                 feedback: "Gelukkig niet !"
             correct_answer: "A"
@@ -901,10 +901,10 @@ levels:
             -   option: "ALARM INDRINGER"
                 feedback: "Dat wordt er geprint als je het foute antwoord intypt !"
             correct_answer: "B"
-            hint: "{if} wachtwoord is ... {print} 'Goed !'"
+            hint: "`{if}` wachtwoord is ... `{print}` 'Goed !'"
             question_score: '10'
         4:
-            question_text: "Wat {print} Hedy als je een fout wachtwoord intypt ?"
+            question_text: "Wat `{print}` Hedy als je een fout wachtwoord intypt ?"
             code: |-
                 wachtwoord {is} {ask} 'Wat is het wachtwoord ?'
                 {if} wachtwoord {is} GEHEIM {print} 'Goed !' {else} {print} 'ALARM ! INDRINGER !'
@@ -914,7 +914,7 @@ levels:
             -   option: "GEHEIM"
                 feedback: "Dat is het juiste wachtwoord."
             -   option: "fout"
-                feedback: "Nee, Hedy {print} wat anders..."
+                feedback: "Nee, Hedy `{print}` wat anders..."
             -   option: "ALARM ! INDRINGER !"
                 feedback: "Juist !"
             correct_answer: "D"
@@ -945,16 +945,28 @@ levels:
                 club {is} {ask} 'Voor welke club ben je ?'
                 {if} club {is} ajax {print} 'Ajax wordt eerste natuurlijk !' _?_ {print} 'Helaas jouw club wordt laatste...'
             mp_choice_options:
-            -   option: "{if}"
-                feedback: "Nee, {if} staat vooraan de zin."
-            -   option: "{at} {random}"
-                feedback: "Nee, je hebt hier {else} nodig."
-            -   option: "{else}"
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "Nee, `{if}` staat vooraan de zin."
+            -   option: |
+                    ```
+                    {at} {random}
+                    ```
+                feedback: "Nee, je hebt hier `{else}` nodig."
+            -   option: |
+                    ```
+                    {else}
+                    ```
                 feedback: "Goed !"
-            -   option: "{print}"
-                feedback: "Er staat al {print} !"
+            -   option: |
+                    ```
+                    {print}
+                    ```
+                feedback: "Er staat al `{print}`!"
             correct_answer: "C"
-            hint: "In level 5 leer je 2 nieuwe commando's {if} en ...?"
+            hint: "In level 5 leer je 2 nieuwe commando's `{if}` en ...?"
             question_score: '10'
         7:
             question_text: "Welk woord mist op de plek van het vraagteken ?"
@@ -963,16 +975,28 @@ levels:
                 naam {is} {ask} 'Hoe heet jij ?'
                 {if} naam {is} Hedy {print} 'Jij wordt miljonair !' {else} _?_ 'Helaas, geen miljoen voor jou.'
             mp_choice_options:
-            -   option: "{if}"
-                feedback: "Nee, {if} staat vooraan de zin."
-            -   option: "{at} {random}"
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "Nee, `{if}` staat vooraan de zin."
+            -   option: |
+                    ```
+                    {at} {random}
+                    ```
                 feedback: "Nee, die heb je hier niet nodig."
-            -   option: "{else}"
-                feedback: "Er staat al {else}"
-            -   option: "{print}"
+            -   option: |
+                    ```
+                    {else}
+                    ```
+                feedback: "Er staat al `{else}`"
+            -   option: |
+                    ```
+                    {print}
+                    ```
                 feedback: "Top !"
             correct_answer: "D"
-            hint: "Na {else} volgt nog een {print}"
+            hint: "Na `{else}` volgt nog een `{print}`"
             question_score: '10'
         8:
             question_text: "Welk woord mist op de plek van het vraagteken ?"
@@ -984,9 +1008,9 @@ levels:
                 feedback: "Dat is niet de naam van de variabele."
             -   option: "dier"
                 feedback: "Knap hoor !"
-            -   option: "{if}"
-                feedback: "Er staat al {if}"
-            -   option: "{print}"
+            -   option: "`{if}`"
+                feedback: "Er staat al `{if}`"
+            -   option: "`{print}`"
                 feedback: "Nee, dat is hem niet.."
             correct_answer: "B"
             hint: "Wat is de naam van de variabele ?"
@@ -1020,7 +1044,7 @@ levels:
                 monsters {is} vampier, weerwolf, reuzespin
                 {if} deur {is} 2 {print} 'Joepie ! je ontsnapt !' {else} {print} 'Je wordt opgegeten door een... ' monsters {at} {random}
             mp_choice_options:
-            -   option: "Hedy kiest steeds een {random} monster dat je opeet."
+            -   option: "Hedy kiest steeds een willekeurig monster dat je opeet."
                 feedback: "Geweldig !"
             -   option: "vampier"
                 feedback: "Niet altijd..."
@@ -1029,12 +1053,12 @@ levels:
             -   option: "reuzespin"
                 feedback: "Niet altijd..."
             correct_answer: "A"
-            hint: "kijk goed naar de laatste drie woorden: monsters at random"
+            hint: "kijk goed naar de laatste drie woorden: monsters `{at} {random}`"
             question_score: '10'
 
     6:
         1:
-            question_text: "Wat {print} Hedy bij deze code ?"
+            question_text: "Wat `{print}` Hedy bij deze code ?"
             code: "{print} 2*10"
             mp_choice_options:
             -   option: "20"
@@ -1063,7 +1087,7 @@ levels:
             hint: "Het is het teken dat je gewoonlijk ook voor plus gebruikt"
             question_score: '10'
         3:
-            question_text: "Wat {print} Hedy bij deze code ?"
+            question_text: "Wat `{print}` Hedy bij deze code ?"
             code: "{print} '3*10'"
             mp_choice_options:
             -   option: "30"
@@ -1071,14 +1095,14 @@ levels:
             -   option: "13"
                 feedback: "Helaas, probeer het nog eens..."
             -   option: "3*10"
-                feedback: "Correct ! Er staan aanhalingstekens omheen, dus Hedy {print} letterlijk wat er staat"
+                feedback: "Correct ! Er staan aanhalingstekens omheen, dus Hedy `{print}` letterlijk wat er staat"
             -   option: "Niks, Hedy geeft een error."
-                feedback: "Nee hoor, Hedy {print} gewoon letterlijk wat er staat."
+                feedback: "Nee hoor, Hedy `{print}` gewoon letterlijk wat er staat."
             correct_answer: "C"
             hint: "Let op de aanhalingstekens"
             question_score: '5'
         4:
-            question_text: "Kim is 10. Wat {print} Hedy voor haar ?"
+            question_text: "Kim is 10. Wat `{print}` Hedy voor haar ?"
             code: |-
                 naam {is} {ask} 'Hoeveel letters zitten er in je naam ?'
                 leeftijd {is} {ask} 'Hoe oud ben je ?'
