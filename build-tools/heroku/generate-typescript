@@ -58,7 +58,7 @@ else
     # Use tsc to generate .js
     npx tsc --outDir __tmp__
 
-    npx esbuild __tmp__/static/js/index.js \
+    npx esbuild __tmp__/index.js \
         --bundle \
         --sourcemap \
         --minify \
