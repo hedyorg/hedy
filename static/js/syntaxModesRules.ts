@@ -9,7 +9,6 @@ window.State = {};
 // loading the default coloring
 var CHOICE = JSON.parse('../../highlighting/highlightingRules/highlighting-' + window.State.keyword_language + '.json');
 
-
 // Convert to the right format
 var LEVELS = [];
 for (let key in CHOICE) {
