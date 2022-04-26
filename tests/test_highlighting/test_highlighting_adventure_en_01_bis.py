@@ -1,6 +1,6 @@
 from tests.Highlighter import HighlightTester
 
-class HighlighterTestLeveL1(HighlightTester):
+class HighlighterTestLeveLbis(HighlightTester):
 
 
     def test_1(self):

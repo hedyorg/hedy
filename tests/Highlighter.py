@@ -50,42 +50,6 @@ Abbreviation = {
     "I"                   : "I",
 }
 
-def transforme(codeCol):
-    Code = ""
-    Colo = ""
-
-    flag = False
-    flag2 = False
-
-    for ch in codeCol:
-        if ch == "{" :
-            flag = True
-            flag2 = False
-            tmpCode = ""
-            tmpColo = ""
-        elif ch == "}":
-            flag = False
-            flag2 = False
-
-            Code += tmpCode
-            Colo += Abbreviation[tmpColo] * len(tmpCode)
-
-        elif flag:
-            if ch == "|":
-                flag2 = True
-            elif not flag2:
-                tmpCode += ch
-            elif flag2:
-                tmpColo += ch
-
-        elif not flag:
-            Colo += " "
-            Code += ch
-
-    return Code,Colo
-
-
-
 os.chdir(os.path.dirname(__file__) +"/..")
 
 # open data for regex
@@ -129,9 +93,10 @@ class HighlightTester(unittest.TestCase):
 
 
 
+
     def assertHighlighted2(self,codeCol,level,lang="en"):
         
-        codes,expected = transforme(codeCol)
+        code,expected = self._transforme(codeCol)
 
         rules  = self.getRules(level,lang)
 
@@ -150,7 +115,7 @@ class HighlightTester(unittest.TestCase):
     def assertHighlightedMultiLine2(self,*args,level,lang="en"):
         codeCol = "\n".join(args)
 
-        code,expected = transforme(codeCol)
+        code,expected = self._transforme(codeCol)
 
         self.assertHighlighted(code,expected,level,lang)
 
@@ -253,6 +218,46 @@ class HighlightTester(unittest.TestCase):
             if result[i] == "\n" : cpt += 1
 
         return True,-1
+
+
+
+    def _transforme(self,codeCol):
+        Code = ""
+        Colo = ""
+
+        flag = False
+        flag2 = False
+
+        for ch in codeCol:
+            if ch == "{" :
+                flag = True
+                flag2 = False
+                tmpCode = ""
+                tmpColo = ""
+            elif ch == "}":
+                flag = False
+                flag2 = False
+
+                Code += tmpCode
+                Colo += Abbreviation[tmpColo] * len(tmpCode)
+
+            elif flag:
+                if ch == "|":
+                    flag2 = True
+                elif not flag2:
+                    tmpCode += ch
+                elif flag2:
+                    tmpColo += ch
+
+            elif not flag:
+                if ch == "\n":
+                    Colo += "\n"
+                    Code += "\n"
+                else:
+                    Colo += " "
+                    Code += ch
+
+        return Code,Colo
 
 
 
