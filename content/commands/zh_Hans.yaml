@@ -73,10 +73,10 @@
         {print} ‘我的名字是 ’ 名字
     name: '{is}'
 -   explanation: "用 `{ask}`提出问题。"
-    example: "例如: 颜色 {is} {ask} ‘你最喜欢的颜色是什么？’"
+    example: "例如：颜色 {is} {ask} ‘你最喜欢的颜色是什么？’"
     demo_code: |-
-        颜色 {is} {ask} ‘你最喜欢的颜色是什么?’
-        {print} 颜色 ‘是你最喜欢的颜色！’
+        颜色 {is} {ask} ‘你最喜欢的颜色是什么？’
+        {print} 颜色‘是你最喜欢的颜色！’
     name: '{ask}'
 5:
 -   explanation: "打印的内容要用单引号标注清楚"
@@ -106,7 +106,7 @@
 6:
 -   explanation: "打印的内容要用单引号标注清楚"
     example: "例如: {print} '5乘以5等于 ' 5 * 5"
-    demo_code: "{print} '5乘以5等于 ' 5 * 5"
+    demo_code: "{print}‘5乘以5等于 5 * 5’"
     name: '{print}'
 -   explanation: "用{ask} 提问计算题的答案然后检查答案是否正确。"
     example: "例如：答案 {is} {ask} ‘10加10等于几?’"
@@ -144,9 +144,9 @@
         {repeat} 3 {times} {forward} 10
     name: '{repeat} - 海龟绘图'
 8:
--   explanation: "用print打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
+-   explanation: "打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
     example: "例如: {print} '5乘以5等于 ' 5 * 5"
-    demo_code: "{print} '5 乘以5等于 ' 5 * 5"
+    demo_code: "{print}‘5乘以5等于 5 * 5’"
     name: '{print}'
 -   explanation: "使用ask提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。"
     example: "例如: 答案 {is} {ask} '5加5等于几?'"
@@ -183,10 +183,10 @@
             turn 90
             forward 50
 10:
--   name: "print"
-    explanation: "用print打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
-    example: "例如: {print} '5乘以5等于 ' 5 * 5"
-    demo_code: "{print} '5乘以5等于' 5 * 5"
+-   name: "{print}"
+    explanation: "打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
+    example: "例如：{print}‘5乘以5等于 5 * 5’"
+    demo_code: "{print}‘5乘以5等于 5 * 5’"
 -   name: "{for} 循环语句和一个列表"
     explanation: "打印一个列表中的所有内容 "
     example: "例如: {for} 动物 {in} 动物"
@@ -234,7 +234,7 @@
         {print} superheroes {at} {random}
 13:
 -   name: "And(且)"
-    explanation: "左边和右边的两个语句都必须是正确的."
+    explanation: "左边和右边的两个语句都必须是正确的"
     example: "if 3+2 is 5 and 2+2 is 4"
     demo_code: |-
         answer1 = ask '3+2等于几?'
@@ -342,16 +342,14 @@
             {print} i
         {print} '无论是否准备好，我都会来的!'
     name: '{print}'
--   explanation: "我们将向你展示一个允许你使用的新命令: `elif`. `elif` 的意思是否则如果 \"else if\". 我们首先判断 `if`条件是否正确, 如果这个条件不正确, 那我们就判断 `elif` 条件是否正确，如果这个条件也不正确, 那我们就执行 `else`语句."
-    example: "elif a is 5:"
+-   explanation: "我们需要对所有的‘{if}’条件语句做同样的处理"
+    example: "如果颜色{is}绿色：‘"
     demo_code: |-
-        a = 2
-        if a is 1:
-            print 'a 是 1'
-        elif a is 2:
-            print 'a 是 2'
-        else:
-            print 'a 既不是1也不是2'
+        颜色 = {ask} ‘你最喜欢的颜色是什么？’
+        {if} 颜色 == ‘绿色’：
+            {print} ‘你最喜欢的颜色是绿色’
+        {else}:
+            {print} ‘你最喜欢的颜色不是绿色’
     name: '{if}'
 18:
 -   name: "{print}"
