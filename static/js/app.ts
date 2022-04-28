@@ -28,7 +28,6 @@ export let theModalEditor: AceAjax.Editor;
   let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
     counter += 1;
-    $(preview).css({fontFamily: 'monospace'});
     $(preview).addClass('text-lg rounded');
     $(preview).attr('id', "code_block_" + counter);
     // We set the language of the editor to the current keyword_language -> needed when copying to main editor
