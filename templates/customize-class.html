@@ -155,7 +155,7 @@
                     <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
                 </div>
                 <div class="flex flex-row mt-2 ml-auto">
-                    <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}', '{{_('remove_customizations_prompt')}}')">
+                    <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
                     {{_('remove_customization')}}</button>
                     <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{_('back_to_class')}}</button>
                 </div>
