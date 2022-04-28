@@ -302,6 +302,9 @@ def routes(app, database):
         else:
             DATABASE.record_login(user['username'])
 
+        # Make an empty response to make sure we have one
+        resp = make_response()
+
         if is_admin(user):
             resp = make_response({'admin': True})
         elif user.get('is_teacher'):
@@ -311,10 +314,6 @@ def routes(app, database):
         if user.get('teacher') and user.get('verification_pending'):
             DATABASE.update_user(user['username'], {'verification_pending': None})
             resp = make_response({'first_time': True})
-
-        # Make an empty response if there isn't one yet
-        if not resp:
-            resp = make_response()
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
