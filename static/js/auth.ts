@@ -6,7 +6,7 @@ export interface Profile {
   session_expires_at: number;
 }
 
-export interface Dict<T> {
+interface Dict<T> {
     [key: string]: T;
 }
 
