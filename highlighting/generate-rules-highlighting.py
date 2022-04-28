@@ -55,7 +55,7 @@ def get_Traduction(KEYWORDS_PATH, KEYWORDS_PATTERN):
     for languageCode in tmp:
         Result[languageCode] = {}
         for keyword in tmp[languageCode] :
-            Result[languageCode][keyword] = "{}|{}".format(tmp[languageCode][keyword], tmp['en'][keyword])
+            Result[languageCode][keyword] = "({}|{})".format(tmp[languageCode][keyword], tmp['en'][keyword])
 
     return Result
 

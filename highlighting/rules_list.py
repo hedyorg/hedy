@@ -6,9 +6,16 @@ from definition import *
 def translate(keywordLang, keywordsLevel):
     if type(keywordsLevel) == str:
         if keywordsLevel in keywordLang:
-            return keywordLang[keywordsLevel]
+            if "(" != keywordLang[keywordsLevel][0] and ")" != keywordLang[keywordsLevel][-1]:
+                return "(" + keywordLang[keywordsLevel] + ")"
+            else:
+                return keywordLang[keywordsLevel]
         else:
-            return keywordsLevel
+            if "(" != keywordsLevel[0] and ")" != keywordsLevel[-1]:
+                return "(" + keywordsLevel + ")"
+            else:
+                return keywordsLevel
+
     elif type(keywordsLevel) == list :
         L = []
         for sub in keywordsLevel:
@@ -54,11 +61,11 @@ def ruleALL(keywordLang, level):
     # Rules for numbers
     if (NUMBERS[level]["number"]) :
         if (NUMBERS[level]["number_with_decimal"]) :
-            numberRegex = START_WORD + '([0-9]*\\.?[0-9]+)' + END_WORD
+            numberRegex = '([0-9]*\\.?[0-9]+)'
         else:
-            numberRegex = START_WORD + '([0-9]+)' + END_WORD
+            numberRegex = '([0-9]+)'
 
-        list_rules.append({'regex':numberRegex, 'token': 'variable', 'next':'start'} )
+        list_rules.append({'regex': START_WORD + numberRegex + END_WORD, 'token': 'variable', 'next':'start'} )
 
         # Special case of an number directly followed by a number 
         for command in keywordLangByLevel["SP_K"]: 
