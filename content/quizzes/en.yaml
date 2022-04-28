@@ -1790,14 +1790,14 @@ levels:
                        {print} 'One pizza with ' topping
                 {print} 'That you for your order'
             mp_choice_options:
-                - option: "Nothing this code is correct!"
-                  feedback: "That's right!."
-                - option: "You're not allowed to use an {if} command after an {ask} command."
-                  feedback: "You are!."
-                - option: "You don't have to use indentation twice."
-                  feedback: "You always have to use indentation."
-                - option: "The indentation is wrong in the last {if} command."
-                  feedback: "It not, though."
+            -   option: "Nothing this code is correct!"
+                feedback: "That's right!."
+            -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
+                feedback: "You are!."
+            -   option: "You don't have to use indentation twice."
+                feedback: "You always have to use indentation."
+            -   option: "The indentation is wrong in the last `{if}` command."
+                feedback: "It not, though."
             correct_answer: "A"
             hint: "all the indentation is done correctly."
             question_score: '10'
@@ -1813,16 +1813,16 @@ levels:
                 {else}
                     {print} 'The computer will explode in 5... 4... 3... 2... 1...'
             mp_choice_options:
-                - option: "Good job! \n Good job!"
-                  feedback: "That's not it!"
-                - option: "The computer will explode in 5... 4... 3... 2... 1..."
-                  feedback: "That's not it!"
-                - option: "Good job ! \n Good job! \n You can use the computer!"
-                  feedback: "That's not it!"
-                - option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
-                  feedback: "Correct!"
+            -   option: "Good job! \n Good job!"
+                feedback: "That's not it!"
+            -   option: "The computer will explode in 5... 4... 3... 2... 1..."
+                feedback: "That's not it!"
+            -   option: "Good job ! \n Good job! \n You can use the computer!"
+                feedback: "That's not it!"
+            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+                feedback: "Correct!"
             correct_answer: "D"
-            hint: "Everything under the {repeat} command is repeated twice."
+            hint: "Everything under the `{repeat}` command is repeated twice."
             question_score: '10'
         3:
             question_text: "Which case should you choose to win a million dollars?"
@@ -1842,14 +1842,14 @@ levels:
                          {if} action {is} open
                              {print} 'You open the case and win a million dollars!'
             mp_choice_options:
-                - option: "case 1, sell"
-                  feedback: "You don't win a million!"
-                - option: "case 1, open"
-                  feedback: "You don't win a million"
-                - option: "case 2, sell"
-                  feedback: "You don't win a million"
-                - option: "case 2, open"
-                  feedback: "Great job! You win!"
+            -   option: "case 1, sell"
+                feedback: "You don't win a million!"
+            -   option: "case 1, open"
+                feedback: "You don't win a million"
+            -   option: "case 2, sell"
+                feedback: "You don't win a million"
+            -   option: "case 2, open"
+                feedback: "Great job! You win!"
             correct_answer: "D"
             hint: "Follow the right path"
             question_score: '10'
@@ -1866,155 +1866,170 @@ levels:
                 {else}
                     {print} 'Ill keep looking'
             mp_choice_options:
-                - option: "Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'"
-                  feedback: "No, she gets 'You are not the one!'"
-                - option: "Cinderella with shoe size 40 gets the output: 'I was looking for you!'"
-                  feedback: "No, she gets 'Ill keep looking'"
-                - option: "Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'"
-                  feedback: "That's right!"
-                - option: "Cinderella with shoe size 40 gets the output 'I was looking for you!'"
-                  feedback: "No she gets 'Ill keep looking'"
+            -   option: "Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'"
+                feedback: "No, she gets 'You are not the one!'"
+            -   option: "Cinderella with shoe size 40 gets the output: 'I was looking for you!'"
+                feedback: "No, she gets 'Ill keep looking'"
+            -   option: "Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'"
+                feedback: "That's right!"
+            -   option: "Cinderella with shoe size 40 gets the output 'I was looking for you!'"
+                feedback: "No she gets 'Ill keep looking'"
             correct_answer: "C"
             hint: "No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'."
             question_score: '10'
         5:
             question_text: "Which code produced this output?"
             code: |-
-                    Icecream is the best!
-                    Icecream is the best!
-                    Icecream is the best!
+                Icecream is the best!
+                Icecream is the best!
+                Icecream is the best!
             mp_choice_options:
-                    - option: |-
-                          desert = {ask} 'What is your favorite type of desert?'
-                          {if} desert {is} icecream
-                              {repeat} 3 {times}
-                              {print} 'Icecream is the best!'
-                      feedback: "Don't forget the indentation after {repeat} commands."
-                    - option: |-
-                          desert = {ask} 'What is your favorite type of desert?'
-                          {if} desert {is} icecream
-                          {repeat} 3 {times}
-                              {print} 'Icecream is the best!'
-                      feedback: "Use indentation after an {if} command"
-                    - option: |-
-                          desert = {ask} 'What is your favorite type of desert?'
-                          {if} desert {is} icecream
-                              {repeat} 3 {times}
-                                  {print} 'Icecream is the best!'
-                      feedback: "Perfect"
-                    - option: |-
-                          {repeat} 3 {times}
-                              desert = {ask} 'What is your favorite type of desert?'
-                              {if} desert {is} icecream
-                                  {repeat} 3 {times}
-                                  {print} 'Icecream is the best!'
-                      feedback: "There are 2 {repeat} commands in this code."
+            -   option: |
+                    ```
+                    desert = {ask} 'What is your favorite type of desert?'
+                    {if} desert {is} icecream
+                        {repeat} 3 {times}
+                        {print} 'Icecream is the best!'
+                    ```
+                feedback: "Don't forget the indentation after `{repeat}` commands."
+            -   option: |
+                    ```
+                    desert = {ask} 'What is your favorite type of desert?'
+                    {if} desert {is} icecream
+                    {repeat} 3 {times}
+                        {print} 'Icecream is the best!'
+                    ```
+                feedback: "Use indentation after an `{if}` command"
+            -   option: |
+                    ```
+                    desert = {ask} 'What is your favorite type of desert?'
+                    {if} desert {is} icecream
+                        {repeat} 3 {times}
+                            {print} 'Icecream is the best!'
+                    ```
+                feedback: "Perfect"
+            -   option: |
+                    ```
+                    {repeat} 3 {times}
+                        desert = {ask} 'What is your favorite type of desert?'
+                        {if} desert {is} icecream
+                            {repeat} 3 {times}
+                            {print} 'Icecream is the best!'
+                    ```
+                feedback: "There are 2 `{repeat}` commands in this code."
             correct_answer: "C"
-            hint: "Whatch the indentation"
+            hint: "Watch the indentation"
             question_score: '10'
         6:
             question_text: "After which command(s) should you use indentation (starting the next line with 4 spaces)?"
             mp_choice_options:
-                    - option: "{if}"
-                      feedback: "Don't forget the others"
-                    - option: "{if} {repeat}"
-                      feedback: "Don't forget {else}!"
-                    - option: "{if} {else} {repeat}"
-                      feedback: "Keep it up!"
-                    - option: "{if} {else} {repeat} {print}"
-                      feedback: "Not with print"
+            -   option: "`{if}`"
+                feedback: "Don't forget the others"
+            -   option: "`{if}` `{repeat}`"
+                feedback: "Don't forget `{else}`!"
+            -   option: "`{if}` `{else}` `{repeat}`"
+                feedback: "Keep it up!"
+            -   option: "`{if}` `{else}` `{repeat}` `{print}`"
+                feedback: "Not with print"
             correct_answer: "C"
             hint: "Indentation happens on the line below some commands"
             question_score: '10'
         7:
             question_text: "In this code from a pizza restaurant. \nYoull get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
             code: |-
+                {if} food {is} pizza
+                {if} size {is} medium
+                {if} drink {is} coke
+                price = price - 2
+            mp_choice_options:
+            -   option: |
+                    ```
+                    {if} food {is} pizza
+                        {if} size {is} medium
+                            {if} drink {is} coke
+                                price = price - 2
+                    ```
+                feedback: "Amazing!"
+            -   option: |
+                    ```
+                    {if} food {is} pizza
+                        {if} size {is} medium
+                    {if} drink {is} coke
+                        price = price - 2
+                    ```
+                feedback: "Try again!"
+            -   option: |
+                    ```
                     {if} food {is} pizza
                     {if} size {is} medium
                     {if} drink {is} coke
-                    price = price - 2
-            mp_choice_options:
-                    - option: |-
-                          {if} food {is} pizza
-                              {if} size {is} medium
-                                  {if} drink {is} coke
-                                      price = price - 2
-                      feedback: "Amazing!"
-                    - option: |-
-                          {if} food {is} pizza
-                              {if} size {is} medium
-                          {if} drink {is} coke
-                              price = price - 2
-                      feedback: "Try again!"
-                    - option: |-
-                          {if} food {is} pizza
-                          {if} size {is} medium
-                          {if} drink {is} coke
-                                  price = price - 2
-                      feedback: "Try again"
-                    - option: |-
-                          {if} food {is} pizza
-                              {if} size {is} medium
-                                  {if} drink {is} coke
-                                  price = price - 2
-                      feedback: "Try again"
+                            price = price - 2
+                    ```
+                feedback: "Try again"
+            -   option: |
+                    ```
+                    {if} food {is} pizza
+                        {if} size {is} medium
+                            {if} drink {is} coke
+                            price = price - 2
+                    ```
+                feedback: "Try again"
             correct_answer: "A"
-            hint: "After each {if} command, the line below should indent"
+            hint: "After each `{if}` command, the line below should indent"
             question_score: '10'
         8:
             question_text: "What is wrong is this code?"
             code: |-
-                    age = {ask} 'Happy Birthday! How old are you?'
-                    singing = {ask} 'Would you like us to sing?'
-                        if singing {is} yes
-                            {repeat} years {times}
-                            {print} 'Hip Hip Hooray'
+                age = {ask} 'Happy Birthday! How old are you?'
+                singing = {ask} 'Would you like us to sing?'
+                    if singing {is} yes
+                        {repeat} years {times}
+                        {print} 'Hip Hip Hooray'
             mp_choice_options:
-                    - option: "You can't put two questions in a row"
-                      feedback: "Yes you can."
-                    - option: "The variable called 'age' is lateron used as 'years'"
-                      feedback: "Keen eye! Good job!"
-                    - option: "You're not allowed to start with 8 spaces, like line 4 and 5 do"
-                      feedback: "You actually must start like that."
-                    - option: "A code must always start with a {print} command in the first line"
-                      feedback: "That's not true."
+            -   option: "You can't put two questions in a row"
+                feedback: "Yes you can."
+            -   option: "The variable called 'age' is later on used as 'years'"
+                feedback: "Keen eye! Good job!"
+            -   option: "You're not allowed to start with 8 spaces, like line 4 and 5 do"
+                feedback: "You actually must start like that."
+            -   option: "A code must always start with a `{print}` command in the first line"
+                feedback: "That's not true."
             correct_answer: "B"
             hint: "The indentation is done right this time"
             question_score: '10'
         9:
-            question_text: "How many {if} commands can be placed inside another {if} command?"
+            question_text: "How many `{if}` commands can be placed inside another `{if}` command?"
             code: |-
             mp_choice_options:
-                    - option: "None, that is not allowed"
-                      feedback: "You are allowed to"
-                    - option: "Only 1"
-                      feedback: "You could use more if you like"
-                    - option: "3"
-                      feedback: "You could use more if you like"
-                    - option: "Infinite, as long as you keep using indentation correctly"
-                      feedback: "That is true"
+            -   option: "None, that is not allowed"
+                feedback: "You are allowed to"
+            -   option: "Only 1"
+                feedback: "You could use more if you like"
+            -   option: "3"
+                feedback: "You could use more if you like"
+            -   option: "Infinite, as long as you keep using indentation correctly"
+                feedback: "That is true"
             correct_answer: "D"
-            hint: "You can put an {if} command inside an {if} command."
+            hint: "You can put an `{if}` command inside an `{if}` command."
             question_score: '10'
         10:
             question_text: "Which statement is true?"
             code: |-
-                    1 {repeat} 2 {times}
-                    2 {if} level {is} 9
-                    3 {print} Great job!
+                1 {repeat} 2 {times}
+                2 {if} level {is} 9
+                3 {print} Great job!
             mp_choice_options:
-                    - option: "All lines should start with 4 spaces"
-                      feedback: "Only line 2 and 3 start with spaces"
-                    - option: "Line 2 and 3 should start with 4 spaces"
-                      feedback: "Line 3 should start with 8"
-                    - option: "Line 2 and 3 should start with 8 spaces"
-                      feedback: "Line 2 should start with 4"
-                    - option: "line 2 should atart with 4 spaces and line 3 with 8"
-                      feedback: "You are correct!"
+            -   option: "All lines should start with 4 spaces"
+                feedback: "Only line 2 and 3 start with spaces"
+            -   option: "Line 2 and 3 should start with 4 spaces"
+                feedback: "Line 3 should start with 8"
+            -   option: "Line 2 and 3 should start with 8 spaces"
+                feedback: "Line 2 should start with 4"
+            -   option: "line 2 should atart with 4 spaces and line 3 with 8"
+                feedback: "You are correct!"
             correct_answer: "D"
             hint: "The first line doens't start with any spaces"
             question_score: '10'
-
     10:
         1:
             question_text: "What will be the output from this code?"
@@ -2022,14 +2037,14 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} i
             mp_choice_options:
-                -   option: "1\n2\n3"
-                    feedback: "Correct!"
-                -   option: "1 2 3"
-                    feedback: "That's not it"
-                -   option: "1, 2, 3"
-                    feedback: "That's not it"
-                -   option: "123"
-                    feedback: "That's not it"
+            -   option: "1\n2\n3"
+                feedback: "Correct!"
+            -   option: "1 2 3"
+                feedback: "That's not it"
+            -   option: "1, 2, 3"
+                feedback: "That's not it"
+            -   option: "123"
+                feedback: "That's not it"
             correct_answer: "A"
             hint: "How do the numbers appear in the screen?"
             question_score: '10'
@@ -2043,14 +2058,34 @@ levels:
                 5
                 Once I caught a fish alive!
             mp_choice_options:
-                -   option: "{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Once I caught a fish alive!'"
-                    feedback: "Perfect"
-                -   option: "{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Once I caught a fish alive!'"
-                    feedback: "This code won't work. You need an indent after {for}."
-                -   option: "{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Once I caught a fish alive!'"
-                    feedback: "Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc."
-                -   option: "{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Once I caught a fish alive!'"
-                    feedback: "i is a variable and shouldn't have quotation marks"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} i
+                    {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "Perfect"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                    {print} i
+                    {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "This code won't work. You need an indent after {for}."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} i
+                        {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} 'i'
+                    {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "i is a variable and shouldn't have quotation marks"
             correct_answer: "A"
             hint: "First all the numbers, then the sentence"
             question_score: '10'
@@ -2069,14 +2104,30 @@ levels:
                 1
                 0
             mp_choice_options:
-                -   option: "{for} i {in} {range} 0 {to} 10\n    {print} i"
-                    feedback: "Now Hedy prints the numbers from 0 to 10 instead of 10 to 0."
-                -   option: "{for} i {in} {range} 0 to 10\n    {print} - i"
-                    feedback: "Hedy would print negative numbers in this case."
-                -   option: "{for} i {in} {range} 10 to 0\n    {print} i"
-                    feedback: "Unfortunately this does not exist."
-                -   option: "{for} i {in} {range} 0 {to} 10\n    {print} 10 - i"
-                    feedback: "That's right!"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 10
+                        {print} i
+                    ```
+                feedback: "Now Hedy prints the numbers from 0 to 10 instead of 10 to 0."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 to 10
+                        {print} - i
+                    ```
+                feedback: "Hedy would print negative numbers in this case."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 10 to 0
+                        {print} i
+                    ```
+                feedback: "Unfortunately this does not exist."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 10
+                        {print} 10 - i
+                    ```
+                feedback: "That's right!"
             correct_answer: "D"
             hint: "It has to be a calculation..."
             question_score: '10'
@@ -2086,14 +2137,14 @@ levels:
                 {for} i {in} {range} 1 {to} 10
                 {print} i
             mp_choice_options:
-                -   option: "The i in the last line need quotation marks"
-                    feedback: "No it doesn't."
-                -   option: "You can't use '{range} 1 {to} 5' only '{range} 1 {to} 10'"
-                    feedback: "You could use 1 to 5 just as well!"
-                -   option: "Line 1 needs to start with an indention."
-                    feedback: "Not line 1..."
-                -   option: "Line 2 needs to start with an indention"
-                    feedback: "Perfect!"
+            -   option: "The i in the last line need quotation marks"
+                feedback: "No it doesn't."
+            -   option: "You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10"
+                feedback: "You could use 1 to 5 just as well!"
+            -   option: "Line 1 needs to start with an indention."
+                feedback: "Not line 1..."
+            -   option: "Line 2 needs to start with an indention"
+                feedback: "Perfect!"
             correct_answer: "D"
             hint: "There is something wrong with the indention"
             question_score: '10'
@@ -2103,14 +2154,26 @@ levels:
                 {for} i {in} _?_ 1 {to} 10
                     {print} i
             mp_choice_options:
-                -   option: "counter"
-                    feedback: "No"
-                -   option: "{range}"
-                    feedback: "Correct"
-                -   option: "{if}"
-                    feedback: "No"
-                -   option: "{for}"
-                    feedback: "No"
+            -   option: |
+                    ```
+                    counter
+                    ```
+                feedback: "No"
+            -   option: |
+                    ```
+                    {range}
+                    ```
+                feedback: "Correct"
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "No"
+            -   option: |
+                    ```
+                    {for}
+                    ```
+                feedback: "No"
             correct_answer: "B"
             hint: "What did you learn in this level?"
             question_score: '10'
@@ -2120,14 +2183,14 @@ levels:
                 {for} i {in} {range} 0 {to} 2
                     {print} 'Hello'
             mp_choice_options:
-                -   option: "1 time"
-                    feedback: "No"
-                -   option: "2 times"
-                    feedback: "No"
-                -   option: "3 times"
-                    feedback: "That's right!"
-                -   option: "Never"
-                    feedback: "No"
+            -   option: "1 time"
+                feedback: "No"
+            -   option: "2 times"
+                feedback: "No"
+            -   option: "3 times"
+                feedback: "That's right!"
+            -   option: "Never"
+                feedback: "No"
             correct_answer: "C"
             hint: "0 also counts. So 0,1,2 that's 3 times."
             question_score: '10'
@@ -2140,14 +2203,26 @@ levels:
                     food is {ask} 'What would you like to order?'
                     {print} food
             mp_choice_options:
-                -   option: "{for} i {in} {range} 0 {to} 3"
-                    feedback: "There's not always 3 people"
-                -   option: "{for} i {in} {range} 1 {to} guests"
-                    feedback: "The variable is not named guests"
-                -   option: "{for} i {in} {range} 1 {to} people"
-                    feedback: "Great!"
-                -   option: "{for} i {in} {range} 0 {to} people"
-                    feedback: "That's one order too many!"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 3
+                    ```
+                feedback: "There's not always 3 people"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} guests
+                    ```
+                feedback: "The variable is not named guests"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} people
+                    ```
+                feedback: "Great!"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} people
+                    ```
+                feedback: "That's one order too many!"
             correct_answer: "C"
             hint: "Use the variable 'people'"
             question_score: '10'
@@ -2157,16 +2232,16 @@ levels:
                 {for} i {in} {range} 23 {to} 25
                     {print} 'hi'
             mp_choice_options:
-                -   option: "23\n24\n25"
-                    feedback: "The numbers don't appear. It doesn't say {print} i."
-                -   option: "23 hi 24 hi 25 hi"
-                    feedback: "The numbers don't appear. It doesn't say {print} i"
-                -   option: "hi\nhi\nhi"
-                    feedback: "Correct"
-                -   option: "The word 'hi' will appear 25 times in a row."
-                    feedback: "No it will only appear 3 times."
+            -   option: "23\n24\n25"
+                feedback: "The numbers don't appear. It doesn't say `{print}` i."
+            -   option: "23 hi 24 hi 25 hi"
+                feedback: "The numbers don't appear. It doesn't say `{print}` i"
+            -   option: "hi\nhi\nhi"
+                feedback: "Correct"
+            -   option: "The word 'hi' will appear 25 times in a row."
+                feedback: "No it will only appear 3 times."
             correct_answer: "C"
-            hint: "It doesn't say {print} i"
+            hint: "It doesn't say `{print}` i"
             question_score: '10'
         9:
             question_text: "How many times does Hedy chant Hip Hip Hooray?"
@@ -2175,16 +2250,16 @@ levels:
                 {for} i {in} {range} 1 {to} age
                     {print} 'Hip Hip Hoorray!'
             mp_choice_options:
-                -   option: "1 time"
-                    feedback: "Try again"
-                -   option: "2 times"
-                    feedback: "Try again"
-                -   option: "Never"
-                    feedback: "Try again"
-                -   option: "That depends on how old you are"
-                    feedback: "That's right!"
+            -   option: "1 time"
+                feedback: "Try again"
+            -   option: "2 times"
+                feedback: "Try again"
+            -   option: "Never"
+                feedback: "Try again"
+            -   option: "That depends on how old you are"
+                feedback: "That's right!"
             correct_answer: "D"
-            hint: "{for} i {in} {range} 1 {to} age"
+            hint: "`{for}` i `{in}` `{range}` 1 `{to}` age"
             question_score: '10'
         10:
             question_text: "Which code belongs to this output?"
@@ -2194,21 +2269,40 @@ levels:
                 Baby shark tututudutudu
                 Baby shark
             mp_choice_options:
-                -   option: "{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark"
-                    feedback: "Mind the indention"
-                -   option: "{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark"
-                    feedback: "That's right!"
-                -   option: "{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark"
-                    feedback: "{range} 0 to 3 is 4 times."
-                -   option: "{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark"
-                    feedback: "{range} 0 {to} 3 is 4 times."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 3
+                        {print} Baby shark tututudutudu
+                        {print} Baby shark
+                    ```
+                feedback: "Mind the indention"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 3
+                        {print} Baby shark tututudutudu
+                    {print} Baby shark
+                    ```
+                feedback: "That's right!"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 3
+                        {print} Baby shark tututudutudu
+                    {print} Baby shark
+                    ```
+                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 3
+                        {print} Baby shark tututudutudu
+                        {print} Baby shark
+                    ```
+                feedback: "`{range}` 0 `{to}` 3 is 4 times."
             correct_answer: "B"
             hint: "Mind the indention"
             question_score: '10'
-
     11:
         1:
-            question_text: "What do we need to fill in on the _?_ if we want to print each compliment?"
+            question_text: "What do we need to fill in on the `_?_` if we want to print each compliment?"
             code: |-
                 compliments = perfect, great job, amazing
                 _?_
