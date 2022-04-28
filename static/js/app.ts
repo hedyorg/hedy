@@ -1096,11 +1096,16 @@ export function get_trimmed_code() {
 
   // If the main editor is hidden -> we are solving a parsons problem
   if ($('#editor').is(":hidden")){
-     let code = "";
+     var code = "";
      $('#parsons_container').children().each(function() {
-       let text = $(this).text()
-       $(this).attr('index')
-       //check volgorde en kleur
+       //let text = $(this).text()
+       let id = $(this).find("pre").attr('id');
+       var editor = ace.edit(id);
+       console.log(id);
+       
+       
+       console.log(editor);
+       var text = editor.getValue();
        // Otherwise it is the space placeholder -> don't add to prevent weird error messages
        if (text.length > 1) {
          code += text;
