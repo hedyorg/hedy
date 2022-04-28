@@ -2308,16 +2308,28 @@ levels:
                 _?_
                     {print} compliment
             mp_choice_options:
-                - option: "{for} each compliment"
-                  feedback: "That's not it"
-                - option: "{for} compliment {in} compliments"
-                  feedback: "You deserve all those compliments!"
-                - option: "{if} compliment {in} compliments"
-                  feedback: "That's not it"
-                - option: "{for} compliments {in} compliment"
-                  feedback: "Almost there!"
+            -   option: |
+                    ```
+                    {for} each compliment
+                    ```
+                feedback: "That's not it"
+            -   option: |
+                    ```
+                    {for} compliment {in} compliments
+                    ```
+                feedback: "You deserve all those compliments!"
+            -   option: |
+                    ```
+                    {if} compliment {in} compliments
+                    ```
+                feedback: "That's not it"
+            -   option: |
+                    ```
+                    {for} compliments {in} compliment
+                    ```
+                feedback: "Almost there!"
             correct_answer: "B"
-            hint: "{for} each compliment in the lists of compliments..."
+            hint: "`{for}` each compliment in the lists of compliments..."
             question_score: '10'
         2:
             question_text: "Which output is correct?"
@@ -2326,17 +2338,17 @@ levels:
                 {for} meal {in} meals
                     {print} 'I love ' meal
             mp_choice_options:
-                - option: "I love pizza"
-                  feedback: "Line 2 says {for} each meal in the list of meals. So each meal is {print}ed."
-                - option: "I love pasta"
-                  feedback: "Line 2 says {for} each meal in the list of meals. So each meal is {print}ed."
-                - option: "I love pancakes"
-                  feedback: "Line 2 says {for} each meal in the list of meals. So each meal is {print}ed."
-                - option: |-
-                      I love pizza
-                      I love pasta
-                      I love pancakes
-                  feedback: "Great!"
+            -   option: "I love pizza"
+                feedback: "Line 2 says `{for}` each meal in the list of meals. So each meal is printed."
+            -   option: "I love pasta"
+                feedback: "Line 2 says `{for}` each meal in the list of meals. So each meal is printed."
+            -   option: "I love pancakes"
+                feedback: "Line 2 says `{for}` each meal in the list of meals. So each meal is printed."
+            -   option: |-
+                  I love pizza
+                  I love pasta
+                  I love pancakes
+              feedback: "Great!"
             correct_answer: "D"
             hint: "Line 2 says for each meal in the list of meals. So each meal is printed."
             question_score: '10'
@@ -2347,18 +2359,18 @@ levels:
                 {for} animal {in} animals
                     {print} animal ' are lovely pets'
             mp_choice_options:
-                - option: "dogs are lovely pets"
-                  feedback: "Line 2 says {for} each animal in the list of animals. So each animal is {print}ed."
-                - option: "dogs, cats, hamsters, chickens are lovely pets"
-                  feedback: "Each animal gets their own line in the output."
-                - option: |-
-                      dogs are lovely pets
-                      cats are lovely pets
-                      hamsters are lovely pets
-                      chickens are lovely pets
-                  feedback: "Great!"
-                - option: "You don't know yet. Because it chooses one of the animals {at} {random}."
-                  feedback: "Line 2 says {for} each animal in the list of animals. So each animal is {print}ed."
+            -   option: "dogs are lovely pets"
+                feedback: "Line 2 says {for} each animal in the list of animals. So each animal is {print}ed."
+            -   option: "dogs, cats, hamsters, chickens are lovely pets"
+                feedback: "Each animal gets their own line in the output."
+            -   option: |-
+                  dogs are lovely pets
+                  cats are lovely pets
+                  hamsters are lovely pets
+                  chickens are lovely pets
+                feedback: "Great!"
+            -   option: "You don't know yet. Because it chooses one of the animals {at} {random}."
+                feedback: "Line 2 says {for} each animal in the list of animals. So each animal is {print}ed."
             correct_answer: "C"
             hint: "Line 2 says {for} each animal in the list of animals. So each animal is printed"
             question_score: '10'
@@ -2369,16 +2381,16 @@ levels:
                 {for} item {in} groceries
                     {print} 'We need ' groceries
             mp_choice_options:
-                - option: "Line 2 needs to start with 4 spaces as indentation"
-                  feedback: "No it doesn't. Only line 3 needs indentation, which it has."
-                - option: "Line 3 does not need to start with 4 spaces as indentation"
-                  feedback: "Line 2 is a `{for}`command so line 3 does need to start with an indent."
-                - option: "Line 3 should say item instead of groceries"
-                  feedback: "Good job!"
-                - option: "Line 2 should say groceries instead of item"
-                  feedback: "No it does not."
+            -   option: "Line 2 needs to start with 4 spaces as indentation"
+                feedback: "No it doesn't. Only line 3 needs indentation, which it has."
+            -   option: "Line 3 does not need to start with 4 spaces as indentation"
+                feedback: "Line 2 is a `{for}`command so line 3 does need to start with an indent."
+            -   option: "Line 3 should say item instead of groceries"
+                feedback: "Good job!"
+            -   option: "Line 2 should say groceries instead of item"
+                feedback: "No it does not."
             correct_answer: "C"
-            hint: "Line 2 says {for} each `item` in the list of groceries"
+            hint: "Line 2 says `{for}` each item in the list of groceries"
             question_score: '10'
         5:
             question_text: "What word should be on the _?_ with these digital dice?"
@@ -2389,16 +2401,16 @@ levels:
                 {for} player {in} players
                     {print} player ' throws ' _?_ {at} {random}
             mp_choice_options:
-                - option: "players"
-                  feedback: "It would say 'Ann throws Jesse', instead of 'Ann throws 6'."
-                - option: "choices"
-                  feedback: "That's right!"
-                - option: "choice"
-                  feedback: "You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'..."
-                - option: "dice"
-                  feedback: "Look at the names of the variables."
+            -   option: "players"
+                feedback: "It would say 'Ann throws Jesse', instead of 'Ann throws 6'."
+            -   option: "choices"
+                feedback: "That's right!"
+            -   option: "choice"
+                feedback: "You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'..."
+            -   option: "dice"
+                feedback: "Look at the names of the variables."
             correct_answer: "B"
-            hint: "Hedy needs to pick a number {at} {random}"
+            hint: "Hedy needs to pick a number `{at} {random}`"
             question_score: '10'
         6:
             question_text: "Which of the answers below is a possible outcome when you run the code?"
@@ -2408,20 +2420,20 @@ levels:
                 {for} player {in} players
                     {print} player ' chooses ' choices {at} {random}
             mp_choice_options:
-                - option: |-
-                      Kelly chooses rock
-                  feedback: "Meredith wants to play too!"
-                - option: |-
-                      Meredith chooses scissors
-                      Kelly chooses rock
-                  feedback: "So close! But Kelly is first in the list, so she goes first"
-                - option: |-
-                      Meredith chooses paper
-                  feedback: "Kelly wants to play too!"
-                - option: |-
-                      Kelly chooses paper
-                      Meredith chooses scissors
-                  feedback: "Amazing!"
+            -   option: |-
+                  Kelly chooses rock
+                feedback: "Meredith wants to play too!"
+            -   option: |-
+                  Meredith chooses scissors
+                  Kelly chooses rock
+                feedback: "So close! But Kelly is first in the list, so she goes first"
+            -   option: |-
+                  Meredith chooses paper
+                feedback: "Kelly wants to play too!"
+            -   option: |-
+                  Kelly chooses paper
+                  Meredith chooses scissors
+                feedback: "Amazing!"
             correct_answer: "D"
             hint: "Each player will pick an option. The player that's first on the list will go first."
             question_score: '10'
@@ -2433,14 +2445,26 @@ levels:
                 _?_
                     {print} name ' has to eat ' food {at} {random} ' for dinner'
             mp_choice_options:
-                - option: "{for} name {in} names"
-                  feedback: "You are on fire!"
-                - option: "{for} names {in} name"
-                  feedback: "No it should be for each name in the list nameS, so the other way around"
-                - option: "{for} food {in} food"
-                  feedback: "Each name should be told what they will have for dinner."
-                - option: "{for} name {in} food"
-                  feedback: "Each name should be told what they will have for dinner."
+            - option: |
+                  ```
+                  {for} name {in} names
+                  ```
+              feedback: "You are on fire!"
+            - option: |
+                  ```
+                  {for} names {in} name
+                  ```
+              feedback: "No it should be for each name in the list nameS, so the other way around"
+            - option: |
+                  ```
+                  {for} food {in} food
+                  ```
+              feedback: "Each name should be told what they will have for dinner."
+            - option: |
+                  ```
+                  {for} name {in} food
+                  ```
+              feedback: "Each name should be told what they will have for dinner."
             correct_answer: "A"
             hint: "Each name should be told what they will have for dinner."
             question_score: '10'
@@ -2452,19 +2476,31 @@ levels:
                 {for} name {in} names
                     {print} _?_
             mp_choice_options:
-                - option: "'name gets a color shirt'"
-                  feedback: "That's not it!"
-                - option: "name 'gets a ' colors {at} {random} ' shirt'"
-                  feedback: "Great job! This was a hard one!"
-                - option: "names 'gets a ' color {at} {random} ' shirt'"
-                  feedback: "You want each name printed. So the first word should not be names but..."
-                - option: "'people gets a colors shirt'"
-                  feedback: "There is no variable named people.."
+            -   option: |
+                    ```
+                    'name gets a color shirt'
+                    ```
+                feedback: "That's not it!"
+            -   option: |
+                    ```
+                    name 'gets a ' colors {at} {random} ' shirt'
+                    ```
+                feedback: "Great job! This was a hard one!"
+            -   option: |
+                    ```
+                    names 'gets a ' color {at} {random} ' shirt'
+                    ```
+                feedback: "You want each name printed. So the first word should not be names but..."
+            -   option: |
+                    ```
+                    'people gets a colors shirt'
+                    ```
+                feedback: "There is no variable named people.."
             correct_answer: "B"
             hint: "Mind the quotation marks and the names of the variables"
             question_score: '10'
         9:
-            question_text: "What is the first question Hedy will {ask} you when you run the program?"
+            question_text: "What is the first question Hedy will `{ask}` you when you run the program?"
             code: |-
                 courses = appetizer, main course, dessert
                 names = Timon, Onno
@@ -2473,14 +2509,14 @@ levels:
                         food = {ask} name ', what would you like to eat as your ' course '?'
                         {print} name ' orders ' food ' as their ' course
             mp_choice_options:
-                - option: "Timon, what would you like to eat as your appetizer?"
-                  feedback: "Perfect!"
-                - option: "Onno, what would you like to eat as your appetizer?"
-                  feedback: "Timon is first on the list!"
-                - option: "Timon, what would you like to eat as your dessert?"
-                  feedback: "Appetizers are first in the list"
-                - option: "You don't know that. Hedy will choose {at} {random}."
-                  feedback: "There is no `{at} {random}` in this code..."
+            -   option: "Timon, what would you like to eat as your appetizer?"
+                feedback: "Perfect!"
+            -   option: "Onno, what would you like to eat as your appetizer?"
+                feedback: "Timon is first on the list!"
+            -   option: "Timon, what would you like to eat as your dessert?"
+                feedback: "Appetizers are first in the list"
+            -   option: "You don't know that. Hedy will choose `{at} {random}`."
+                feedback: "There is no `{at} {random}` in this code..."
             correct_answer: "A"
             hint: "The first options from both lists are chosen."
             question_score: '10'
@@ -2492,14 +2528,14 @@ levels:
                 {for} price {in} prices
                     {print} 'The ' price 'is won by ' names {at} {random}
             mp_choice_options:
-                - option: "Everybody will always win a price."
-                  feedback: "That is not true, you could end up without a price."
-                - option: "All the prices always go to one single person."
-                  feedback: "That is not true. All the prices are given away, but to {random} people"
-                - option: "Larry will never win a price"
-                  feedback: "That is not true. Larry has the same odds as the others"
-                - option: "Someone might win with two prices"
-                  feedback: "You get it!"
+            -   option: "Everybody will always win a price."
+                feedback: "That is not true, you could end up without a price."
+            -   option: "All the prices always go to one single person."
+                feedback: "That is not true. All the prices are given away, but to random people"
+            -   option: "Larry will never win a price"
+                feedback: "That is not true. Larry has the same odds as the others"
+            -   option: "Someone might win with two prices"
+                feedback: "You get it!"
             correct_answer: "D"
             hint: "Try to imagine the output of this code."
             question_score: '10'
