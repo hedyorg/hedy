@@ -312,6 +312,9 @@ def routes(app, database):
             DATABASE.update_user(user['username'], {'verification_pending': None})
             resp = make_response({'first_time': True})
 
+        # Make an empty response if there isn't one yet
+        if not resp:
+            resp = make_response()
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
