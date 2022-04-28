@@ -67,7 +67,8 @@
      </div>
      </form>
    </div>
-   {% if user_classes %}
+    <!-- If a user doesn't have an email it's a student created by a teacher -> not allowed to leave a class -->
+   {% if user_classes and user_data['email'] %}
        <h1 class="bg-blue-200 px-8 py-2 mb-4 rounded-lg text-3xl cursor-pointer" onclick="$ ('#classes').toggle()">{{_('my_classes')}}</h1>
        <div id="classes" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
            <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{_('my_classes')}}</h2>
@@ -86,7 +87,7 @@
             <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-4 py-1"></strong>
         </div>
         <div class="flex flex-row items-center mb-2">
-            <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" type="email" class="inline-block w-1/2 px-4 py-1 rounded-lg" required>
+            <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" type="email" class="inline-block w-1/2 px-4 py-1 rounded-lg" {% if user_data['email'] %}required{% endif %}>
         </div>
         <div class="flex flex-row items-center mb-2">
             <label for="birth_year" class="inline-block w-72">{{_('birth_year')}}</label><input id="birth_year" class="inline-block w-1/2 px-4 py-1 rounded-lg" type="number">
