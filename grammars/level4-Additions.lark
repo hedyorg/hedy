@@ -10,9 +10,9 @@ _print_argument: (_SPACE | list_access | quoted_text | var_access)*
 
 // literal strings must be single-quoted in ask and print commands so punctuation should not be treated differently anymore
 // anything can be parsed except for a newline, a space and a list separator
-textwithoutspaces: /([^\n،, ]+)/ -> text
-text: /([^\n،,]+)/ -> text
+textwithoutspaces: /([^\n،,， ]+)/ -> text
+text: /([^\n،,，]+)/ -> text
 
-quoted_text: (/'((?:[^\\']|\\.)*)'/ | /"((?:[^\\"]|\\.)*)"/) -> text //text can be between single or double quotes, but quotes may be escaped with \
+quoted_text: (/'((?:[^\\']|\\.)*)'/ | /"((?:[^\\"]|\\.)*)"/ | /‘((?:[^\\"]|\\.)*)’/) -> text //text can be between single or double quotes, but quotes may be escaped with \
 
 
