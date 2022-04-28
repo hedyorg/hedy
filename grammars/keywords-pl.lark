@@ -14,7 +14,7 @@ _FROM: _SPACE ("od" | "from") _SPACE
 _AT: _SPACE "at" _SPACE
 random:  ("losowe" | "random") _SPACE?
 _IN: _SPACE ("w" | "in") _SPACE
-_IF:  ("jeśli" | "if") _SPACE?
+_IF:  ("jeśli" | "if") _SPACE
 _ELSE:  "else"
 _AND: _SPACE ("i" | "and") _SPACE
 _REPEAT:  ("powtórz" | "repeat") _SPACE
@@ -22,12 +22,12 @@ _TIMES: _SPACE ("razy" | "times")
 _FOR:  ("dla" | "for") _SPACE
 _RANGE:  ("zakres" | "range") _SPACE?
 _TO: _SPACE ("do" | "to") _SPACE
-_STEP:  ("krok" | "step") _SPACE?
-_ELIF:  "elif" _SPACE?
-_INPUT:  ("wprowadź" | "input") _SPACE?
+_STEP:  ("krok" | "step")
+_ELIF: _SPACE? "elif" _SPACE?
+_INPUT:  ("wprowadź" | "input")
 _OR: _SPACE ("lub" | "or") _SPACE
-_WHILE:  ("dopóki" | "while") _SPACE?
-_LENGTH:  ("długość" | "length") _SPACE?
+_WHILE:  ("dopóki" | "while") _SPACE
+_LENGTH:  ("długość" | "length")
 _COMMA:  "," _SPACE?
 _QUOTE:  "'" _SPACE?
 _COLOR:  "color" _SPACE?
