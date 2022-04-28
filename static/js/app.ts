@@ -1518,11 +1518,9 @@ export function startDebug() {
     var continueButton = $("#debug_continue");
     var stopButton = $("#debug_stop");
     var resetButton = $("#debug_restart");
-    var runButton = $("#runit");
-    var stopitButton = $("#stopit");
+    var runButtonContainer = $("#runButtonContainer");
 
-    runButton.hide();
-    stopitButton.hide();
+    runButtonContainer.hide();
     continueButton.show();
     stopButton.show();
     resetButton.show();
@@ -1561,11 +1559,9 @@ export function stopDebug() {
     var continueButton = $("#debug_continue");
     var stopButton = $("#debug_stop");
     var resetButton = $("#debug_restart");
-    var runitButton = $("#runit");;
-    var stopitButton = $("#stopit");
+    var runButtonContainer = $("#runButtonContainer");
 
-    stopitButton.hide();
-    runitButton.show();
+    runButtonContainer.show();
     continueButton.hide();
     stopButton.hide();
     resetButton.hide();
