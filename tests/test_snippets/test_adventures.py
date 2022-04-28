@@ -6,12 +6,8 @@ import hedy
 from tests.Tester import HedyTester, Snippet
 from parameterized import parameterized
 
-# file is called tests_z_ so they are executed last
-# because programs are more of a priority than adventures, which change less and take longer to run
-
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
-
 
 
 def collect_snippets(path):
