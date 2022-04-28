@@ -1030,41 +1030,34 @@ export function showVariableView() {
   }
 }
 
-//Feature flag for step by step debugger
+//Feature flag for step by step debugger. Becomes true automatically for level 7 and below.
 var step_debugger = false;
+if(window.State.level != null){
+  let level = Number(window.State.level);
+  step_debugger = level <= 7;
+}
 
 //Hides the debug button if feature flag is false
 if (!step_debugger) {
   $('#debug_button').hide();
 }
 
-//Feature flag for variable and values view
-var variable_view = false;
 
-//Hides the HTML DIV for variables if feature flag is false
-if (!variable_view) {
-  $('#variables').hide();
-  $('#variable_button').hide();
-}
 
 export function show_variables() {
-  if (variable_view === true) {
-    const variableList = $('#variable-list');
-    if (variableList.hasClass('hidden')) {
-      variableList.removeClass('hidden');
-    }
+  const variableList = $('#variable-list');
+  if (variableList.hasClass('hidden')) {
+    variableList.removeClass('hidden');
   }
 }
 
 export function load_variables(variables: any){
-    if (variable_view === true) {
-      //@ts-ignore
-      variables = clean_variables(variables);
-      const variableList = $('#variable-list');
-      variableList.empty();
-      for (const i in variables) {
-        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
-      }
+    //@ts-ignore
+    variables = clean_variables(variables);
+    const variableList = $('#variable-list');
+    variableList.empty();
+    for (const i in variables) {
+      variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
     }
 }
 
@@ -1092,18 +1085,16 @@ function special_style_for_variable(variable: any){
 //hiding certain variables from the list unwanted for users
 // @ts-ignore
 function clean_variables(variables: any) {
-  if (variable_view === true) {
-    const new_variables = [];
-    const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
-    for (const variable in variables) {
-      if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-      let extraStyle = special_style_for_variable(variables[variable]);
-      let newTuple = [variable, variables[variable].v, extraStyle];
-      new_variables.push(newTuple);
-      }
+  const new_variables = [];
+  const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
+  for (const variable in variables) {
+    if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
+    let extraStyle = special_style_for_variable(variables[variable]);
+    let newTuple = [variable, variables[variable].v, extraStyle];
+    new_variables.push(newTuple);
     }
-    return new_variables;
   }
+  return new_variables;
 }
 
 export function get_trimmed_code() {
