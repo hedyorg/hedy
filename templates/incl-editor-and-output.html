@@ -28,7 +28,7 @@
           </div>
       {% endif %}
       <div class="w-full flex-1 flex flex-col">
-        <div id="editor" style="background: #272822; font-size:1em; color: white" lang="en"
+        <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en"
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code}}
