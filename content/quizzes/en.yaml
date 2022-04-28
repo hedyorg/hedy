@@ -1112,7 +1112,7 @@ levels:
                 -   option: "210"
                     feedback: "Mind it's a calculation."
             correct_answer: "A"
-            hint: "The * is used as a multiplication sign"
+            hint: "The `*` is used as a multiplication sign"
             question_score: '10'
         2:
             question_text: "Which sign do you use for an addition?"
@@ -1139,7 +1139,7 @@ levels:
                 -   option: "3*10"
                     feedback: "Correct! There are quotation marks, so Hedy will print it literally."
                 -   option: "Nothing, Hedy will give an error message."
-                    feedback: "No, Hedy will {print} it literally."
+                    feedback: "No, Hedy will print it literally."
             correct_answer: "C"
             hint: "Mind the quotation marks!!"
             question_score: '10'
@@ -1152,7 +1152,7 @@ levels:
                 {print} 'Your lucky number is...' luckynumber
             mp_choice_options:
                 -   option: "30"
-                    feedback: "Mind, Hedy also {print}s 'Your lucky number is...'"
+                    feedback: "Mind, Hedy also prints 'Your lucky number is...'"
                 -   option: "10"
                     feedback: "Please try again."
                 -   option: "Your lucky number is... 30"
@@ -1179,7 +1179,7 @@ levels:
                 -   option: "50 dollars"
                     feedback: "Great!"
             correct_answer: "D"
-            hint: "price is people times 10"
+            hint: "`price` `is` `people` `times` 10"
             question_score: '10'
         6:
             question_text: "How much does a hamburger cost is this virtual restaurant?"
@@ -1214,9 +1214,9 @@ levels:
                 {if} drinks {is} water price = price + 1
                 {print} price ' dollars please'
             mp_choice_options:
-                -   option: "It could have been 'price = 3' just as well."
+                -   option: "It could have been `price = 3` just as well."
                     feedback: "No, that's not true. Hedy needs to add 3 dollars to the total."
-                -   option: "Because Hedy doesn't understand 'price = 3'."
+                -   option: "Because Hedy doesn't understand `price = 3`."
                     feedback: "Hedy would understand, but it wouldn't be right."
                 -   option: "Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total."
                     feedback: "That's right!"
@@ -1237,7 +1237,7 @@ levels:
                     feedback: "No, there should be!"
                 -   option: "The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer"
                     feedback: "Correct!"
-                -   option: "The {if} and {else} commands should be in the same line."
+                -   option: "The `{if}` and `{else}` commands should be in the same line."
                     feedback: "No, that's not true."
                 -   option: "The variable in line 2 can't be called answer, because it is too similar to the variable correct answer."
                     feedback: "Variable names can be similar, but they can't be 2 words..."
@@ -1273,18 +1273,17 @@ levels:
                 name _?_ Hedy
                 {print} name 'is walking trough the forrest'
             mp_choice_options:
-            -   option: "You can only fill in the word is on the _?_"
-                feedback: "You are allowed to use the = sign as well"
-            -   option: "You can fill in either the word is or the = sign on the _?_"
+            -   option: "You can only fill in the word is on the `_?_`"
+                feedback: "You are allowed to use the `=` sign as well"
+            -   option: "You can fill in either the word is or the `=` sign on the `_?_`"
                 feedback: "Amazing!"
-            -   option: "You have to fill in =is= on the _?_."
-                feedback: "No, one = sign is enough"
-            -   option: "You can only use the = sign when working with numbers, not with words."
-                feedback: "You can also use = with words."
+            -   option: "You have to fill in =is= on the `_?_`"
+                feedback: "No, one `=` sign is enough"
+            -   option: "You can only use the `=` sign when working with numbers, not with words."
+                feedback: "You can also use `=` with words."
             correct_answer: "B"
-            hint: "{is} and = are both allowed"
+            hint: "`{is}` and `=` are both allowed"
             question_score: '10'
-
     7:
         1:
             question_text: "How many lines can you repeat at once with the repeat command at this level?"
