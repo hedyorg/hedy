@@ -1438,47 +1438,49 @@ export function filter_admin() {
   }
 }
 
-var editor = ace.edit("editor");
-editor.on("guttermousedown", function (e: any) {
-  var editorContainer = document.getElementById("editor");
-  var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
-  var lines = textContainer?.getElementsByClassName("ace_line");
-  var target = e.domEvent.target;
+if ($("#editor").length) {
+  var editor = ace.edit("editor");
+  editor.on("guttermousedown", function (e: any) {
+    var editorContainer = document.getElementById("editor");
+    var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+    var lines = textContainer?.getElementsByClassName("ace_line");
+    var target = e.domEvent.target;
 
-  if (lines) {
-    if (target.className.indexOf("ace_gutter-cell") == -1)
-      return;
+    if (lines) {
+      if (target.className.indexOf("ace_gutter-cell") == -1)
+        return;
 
-    if (e.clientX > 25 + target.getBoundingClientRect().left)
-      return;
+      if (e.clientX > 25 + target.getBoundingClientRect().left)
+        return;
 
-    var breakpoints = e.editor.session.getBreakpoints(row, 0);
-    var row = e.getDocumentPosition().row;
-    if (typeof breakpoints[row] === typeof undefined && row != e.editor.getLastVisibleRow() + 1) {
-      e.editor.session.setBreakpoint(row);
-      row = getCorrectVisibleRow(row, e.editor);
-      lines[row].innerHTML = addDisabledClass(lines[row]);
-      e.stop();
-    } else {
-      e.editor.session.clearBreakpoint(row);
-      // calculating the correct line to edit
-      row = getCorrectVisibleRow(row, e.editor);
-      lines[row].innerHTML = removeDisabledClass(lines[row]);
-      e.stop();
+      var breakpoints = e.editor.session.getBreakpoints(row, 0);
+      var row = e.getDocumentPosition().row;
+      if (typeof breakpoints[row] === typeof undefined && row != e.editor.getLastVisibleRow() + 1) {
+        e.editor.session.setBreakpoint(row);
+        row = getCorrectVisibleRow(row, e.editor);
+        lines[row].innerHTML = addDisabledClass(lines[row]);
+        e.stop();
+      } else {
+        e.editor.session.clearBreakpoint(row);
+        // calculating the correct line to edit
+        row = getCorrectVisibleRow(row, e.editor);
+        lines[row].innerHTML = removeDisabledClass(lines[row]);
+        e.stop();
+      }
     }
-  }
-});
+  });
+
+  editor.renderer.on("afterRender", function () {
+    var breakpoints = editor.session.getBreakpoints();
+    adjustLines(breakpoints);
+    setDebugLine()
+  });
+}
 
 function getCorrectVisibleRow(row: number, editor: any) {
   var firstVisibleRow = editor.getFirstVisibleRow();
   return row - firstVisibleRow;
 }
-
-editor.renderer.on("afterRender", function () {
-  var breakpoints = editor.session.getBreakpoints();
-  adjustLines(breakpoints);
-  setDebugLine()
-});
 
 function adjustLines(disabledRow: []) {
   // We have to specify the correct editor here
