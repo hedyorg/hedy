@@ -6,6 +6,10 @@ export interface Profile {
   session_expires_at: number;
 }
 
+export interface Dict<T> {
+    [key: string]: T;
+}
+
 interface User {
   username?: string;
   email?: string;
@@ -307,7 +311,7 @@ $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
  * - Check if we were supposed to be joining a class. If so, join it.
  * - Otherwise redirect to "my programs".
  */
-async function afterLogin(loginData: any) {
+async function afterLogin(loginData: Dict<boolean>) {
   const savedProgramString = localStorage.getItem('hedy-first-save');
   const savedProgram = savedProgramString ? JSON.parse(savedProgramString) : undefined;
 
