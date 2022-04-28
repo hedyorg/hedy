@@ -1434,7 +1434,7 @@ levels:
             correct_answer: "A"
             question_score: '10'
         9:
-            question_text: Welke Hedy code hoort bij dit resultaat ?
+            question_text: "Welke Hedy code hoort bij dit resultaat ?"
             code: |-
                 Batman was flying through Gotham.
                 When suddenly he heard someone screaming...
@@ -1444,28 +1444,36 @@ levels:
                 Please help me !"
             mp_choice_options:
             -   option: |
+                    ```
                     {print} 'Batman was flying through Gotham. '
                     {print} 'When suddenly he heard someone screaming...'
                     {print} 'Help !'
                     {repeat} 3 {times} {print} 'Please help me !'
+                    ```
                 feedback: "Je herhaalt de verkeerde regel"
             -   option: |
+                    ```
                     {print} 'Batman was flying through Gotham.'
                     {print} 'When suddenly he heard someone screaming...'
                     {repeat} 3 {times} 'Help !'
                     {print} 'Please help me !'
+                    ```
                 feedback: "Het commando `{print}` mist op regel 3"
             -   option: |
+                    ```
                     {print} Batman was flying through Gotham.
                     {print} When suddenly he heard someone screaming...
                     {repeat} 3 {times} {print} Help !
                     {print} Please help me !
+                    ```
                 feedback: "Je vergeet de aanhalingstekens"
             -   option: |
+                    ```
                     {print} 'Batman was flying through Gotham.'
                     {print} 'When suddenly he heard someone screaming...'
                     {repeat} 3 {times} {print} 'Help !'
-                    {print} 'Please help me !'"
+                    {print} 'Please help me !'
+                    ```
                 feedback: "Perfect"
             question_score: '10'
             hint: "'Help !' wordt 3x herhaald."

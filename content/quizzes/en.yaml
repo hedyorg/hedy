@@ -1103,28 +1103,28 @@ levels:
             question_text: "What's Hedy's output when you run this code?"
             code: "{print} 2*10"
             mp_choice_options:
-                -   option: "20"
-                    feedback: "Correct!"
-                -   option: "12"
-                    feedback: "No, the plus sign is used in addition"
-                -   option: "2*10"
-                    feedback: "No, Hedy will calculate the answer"
-                -   option: "210"
-                    feedback: "Mind it's a calculation."
+            -   option: "20"
+                feedback: "Correct!"
+            -   option: "12"
+                feedback: "No, the plus sign is used in addition"
+            -   option: "2*10"
+                feedback: "No, Hedy will calculate the answer"
+            -   option: "210"
+                feedback: "Mind it's a calculation."
             correct_answer: "A"
             hint: "The `*` is used as a multiplication sign"
             question_score: '10'
         2:
             question_text: "Which sign do you use for an addition?"
             mp_choice_options:
-                -   option: "-"
-                    feedback: "That's not it"
-                -   option: "plus"
-                    feedback: "That's not it"
-                -   option: "*"
-                    feedback: "That's not it"
-                -   option: "+"
-                    feedback: "Correct!"
+            -   option: "-"
+                feedback: "That's not it"
+            -   option: "plus"
+                feedback: "That's not it"
+            -   option: "*"
+                feedback: "That's not it"
+            -   option: "+"
+                feedback: "Correct!"
             correct_answer: "D"
             hint: "It's the plus sign."
             question_score: '10'
@@ -1132,14 +1132,14 @@ levels:
             question_text: "What's Hedy's output when you run this code?"
             code: "{print} '3*10'"
             mp_choice_options:
-                -   option: "30"
-                    feedback: "This would be the right answer if there were no quotation marks."
-                -   option: "13"
-                    feedback: "Try again.."
-                -   option: "3*10"
-                    feedback: "Correct! There are quotation marks, so Hedy will print it literally."
-                -   option: "Nothing, Hedy will give an error message."
-                    feedback: "No, Hedy will print it literally."
+            -   option: "30"
+                feedback: "This would be the right answer if there were no quotation marks."
+            -   option: "13"
+                feedback: "Try again.."
+            -   option: "3*10"
+                feedback: "Correct! There are quotation marks, so Hedy will print it literally."
+            -   option: "Nothing, Hedy will give an error message."
+                feedback: "No, Hedy will print it literally."
             correct_answer: "C"
             hint: "Mind the quotation marks!!"
             question_score: '10'
@@ -1151,14 +1151,14 @@ levels:
                 luckynumber = name*age
                 {print} 'Your lucky number is...' luckynumber
             mp_choice_options:
-                -   option: "30"
-                    feedback: "Mind, Hedy also prints 'Your lucky number is...'"
-                -   option: "10"
-                    feedback: "Please try again."
-                -   option: "Your lucky number is... 30"
-                    feedback: "That's right!"
-                -   option: "Your lucky number is... 10"
-                    feedback: "Her lucky number is name times age..."
+            -   option: "30"
+                feedback: "Mind, Hedy also prints 'Your lucky number is...'"
+            -   option: "10"
+                feedback: "Please try again."
+            -   option: "Your lucky number is... 30"
+                feedback: "That's right!"
+            -   option: "Your lucky number is... 10"
+                feedback: "Her lucky number is name times age..."
             correct_answer: "C"
             hint: "Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30."
             question_score: '10'
@@ -1170,14 +1170,14 @@ levels:
                 price = people * 10
                 {print} 'That will be ' price 'dollar please'
             mp_choice_options:
-                -   option: "5 dollars"
-                    feedback: "Unfortunately, it's not that cheap."
-                -   option: "10 dollars"
-                    feedback: "No, it's 10 dollars each."
-                -   option: "15 dollars"
-                    feedback: "The * means multiplication."
-                -   option: "50 dollars"
-                    feedback: "Great!"
+            -   option: "5 dollars"
+                feedback: "Unfortunately, it's not that cheap."
+            -   option: "10 dollars"
+                feedback: "No, it's 10 dollars each."
+            -   option: "15 dollars"
+                feedback: "The * means multiplication."
+            -   option: "50 dollars"
+                feedback: "Great!"
             correct_answer: "D"
             hint: "`price` `is` `people` `times` 10"
             question_score: '10'
@@ -1190,14 +1190,14 @@ levels:
                 {if} food {is} hamburger price = 15
                 {if} food {is} fries price = 6
             mp_choice_options:
-                -   option: "15 dollars"
-                    feedback: "Super!"
-                -   option: "6 dollars"
-                    feedback: "The fries are 6 dollars"
-                -   option: "0 dollars"
-                    feedback: "The hamburger isn't free!"
-                -   option: "21 dollars"
-                    feedback: "That's the price for a hamburger and fries!"
+            -   option: "15 dollars"
+                feedback: "Super!"
+            -   option: "6 dollars"
+                feedback: "The fries are 6 dollars"
+            -   option: "0 dollars"
+                feedback: "The hamburger isn't free!"
+            -   option: "21 dollars"
+                feedback: "That's the price for a hamburger and fries!"
             correct_answer: "A"
             hint: "Mind the fourth line."
             question_score: '10'
@@ -1214,14 +1214,14 @@ levels:
                 {if} drinks {is} water price = price + 1
                 {print} price ' dollars please'
             mp_choice_options:
-                -   option: "It could have been `price = 3` just as well."
-                    feedback: "No, that's not true. Hedy needs to add 3 dollars to the total."
-                -   option: "Because Hedy doesn't understand `price = 3`."
-                    feedback: "Hedy would understand, but it wouldn't be right."
-                -   option: "Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total."
-                    feedback: "That's right!"
-                -   option: "Because the price is 0 dollars to begin with."
-                    feedback: "That's true, but not the reason"
+            -   option: "It could have been `price = 3` just as well."
+                feedback: "No, that's not true. Hedy needs to add 3 dollars to the total."
+            -   option: "Because Hedy doesn't understand `price = 3`."
+                feedback: "Hedy would understand, but it wouldn't be right."
+            -   option: "Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total."
+                feedback: "That's right!"
+            -   option: "Because the price is 0 dollars to begin with."
+                feedback: "That's true, but not the reason"
             correct_answer: "C"
             hint: "The price shouldn't be 3, but 3 dollars more than it already was"
             question_score: '10'
@@ -1233,14 +1233,14 @@ levels:
                 {if} answer {is} correct answer {print} 'Good job!'
                 {else} {print} 'No... It was ' correct answer
             mp_choice_options:
-                -   option: "There shouldn't be quotation marks in line 2"
-                    feedback: "No, there should be!"
-                -   option: "The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer"
-                    feedback: "Correct!"
-                -   option: "The `{if}` and `{else}` commands should be in the same line."
-                    feedback: "No, that's not true."
-                -   option: "The variable in line 2 can't be called answer, because it is too similar to the variable correct answer."
-                    feedback: "Variable names can be similar, but they can't be 2 words..."
+            -   option: "There shouldn't be quotation marks in line 2"
+                feedback: "No, there should be!"
+            -   option: "The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer"
+                feedback: "Correct!"
+            -   option: "The `{if}` and `{else}` commands should be in the same line."
+                feedback: "No, that's not true."
+            -   option: "The variable in line 2 can't be called answer, because it is too similar to the variable correct answer."
+                feedback: "Variable names can be similar, but they can't be 2 words..."
             correct_answer: "B"
             hint: "Inspect what the variables are called."
             question_score: '10'
@@ -1256,14 +1256,14 @@ levels:
                 result = result * football
                 {print} 'You are ' result 'percent smart.'
             mp_choice_options:
-                -   option: "10%"
-                    feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
-                -   option: "32%"
-                    feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
-                -   option: "50%"
-                    feedback: "Super! You are 100 percent smart!"
-                -   option: "100%"
-                    feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
+            -   option: "10%"
+                feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
+            -   option: "32%"
+                feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
+            -   option: "50%"
+                feedback: "Super! You are 100 percent smart!"
+            -   option: "100%"
+                feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
             correct_answer: "C"
             hint: "(2 bananas + 3 hygiene) * 10 football = 5*10 =?"
             question_score: '10'
@@ -1288,45 +1288,57 @@ levels:
         1:
             question_text: "How many lines can you repeat at once with the repeat command at this level?"
             mp_choice_options:
-                -   option: "0"
-                    feedback: "No you can repeat a line."
-                -   option: "1"
-                    feedback: "Correct, one line at a time"
-                -   option: "2"
-                    feedback: "In this level only one line at a time"
-                -   option: "infinite"
-                    feedback: "In this level you can only repeat one line at a time"
+            -   option: "0"
+                feedback: "No you can repeat a line."
+            -   option: "1"
+                feedback: "Correct, one line at a time"
+            -   option: "2"
+                feedback: "In this level only one line at a time"
+            -   option: "infinite"
+                feedback: "In this level you can only repeat one line at a time"
             correct_answer: "B"
             hint: "You can only repeat 1 line at a time"
             question_score: '10'
         2:
             question_text: "Which code is right?"
             mp_choice_options:
-                -   option: "{print} 100 {times} 'hello'"
-                    feedback: "{repeat} 100 {times} {print} 'hello'"
-                -   option: "{print} {repeat} 100 {times} 'hello'"
-                    feedback: "{repeat} 100 {times} {print} 'hello'"
-                -   option: "{repeat} 'hello' 100 {times}"
-                    feedback: "{repeat} 100 {times} {print} 'hello'"
-                -   option: "{repeat} 100 {times} {print} 'hello'"
-                    feedback: "That's right!"
+            -   option: |
+                    ```
+                    {print} 100 {times} 'hello'
+                    ```
+                feedback: "`{repeat}` 100 `{times}` `{print}` 'hello'"
+            -   option: |
+                    ```
+                    {print} {repeat} 100 {times} 'hello'
+                    ```
+                feedback: "{repeat} 100 {times} {print} 'hello'"
+            -   option: |
+                    ```
+                    {repeat} 'hello' 100 {times}
+                    ```
+                feedback: "{repeat} 100 {times} {print} 'hello'"
+            -   option: |
+                    ```
+                    {repeat} 100 {times} {print} 'hello'
+                    ```
+                feedback: "That's right!"
             correct_answer: "D"
-            hint: "First the repeat command, then the {print} command"
+            hint: "First the repeat command, then the `{print}` command"
             question_score: '10'
         3:
             question_text: "Is this code right or wrong?"
             code: "{repeat} 100 {times} 'Hello!'"
             mp_choice_options:
-                -   option: "Right"
-                    feedback: "No, a word is missing"
-                -   option: "Wrong, the word {repeat} is missing"
-                    feedback: "The word {repeat} is there, another word is missing"
-                -   option: "Wrong, the word {times} is missing"
-                    feedback: "The word {times} is there, another word is missing."
-                -   option: "Wrong, the word {print} is missing"
-                    feedback: "Correct"
+            -   option: "Right"
+                feedback: "No, a word is missing"
+            -   option: "Wrong, the word `{repeat}` is missing"
+                feedback: "The word `{repeat}` is there, another word is missing"
+            -   option: "Wrong, the word `{times}` is missing"
+                feedback: "The word `{times}` is there, another word is missing."
+            -   option: "Wrong, the word `{print}` is missing"
+                feedback: "Correct"
             correct_answer: "D"
-            hint: "It should be: {repeat} 100 {times} {print} 'Hello'"
+            hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
             question_score: '10'
         4:
             question_text: "Which word is wrong in the code?"
@@ -1334,14 +1346,26 @@ levels:
                 {print} 'I'm blue'
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
-                -   option: "I'm"
-                    feedback: "That's right!"
-                -   option: "{print}"
-                    feedback: "{print} is spelled correctly"
-                -   option: "{repeat}"
-                    feedback: "repeat is spelled correctly"
-                -   option: "{times}"
-                    feedback: "times is spelled correctly"
+              -   option: |
+                      ```
+                      I'm
+                      ```
+                  feedback: "That's right!"
+              -   option: |
+                      ```
+                      {print}
+                      ```
+                  feedback: "`{print}` is spelled correctly"
+              -   option: |
+                      ```
+                      {repeat}
+                      ```
+                  feedback: "`{repeat}` is spelled correctly"
+              -   option: |
+                      ```
+                      {times}
+                      ```
+                  feedback: "`{times}` is spelled correctly"
             correct_answer: "A"
             hint: "I'm is wrong, you can't use apostrophes"
             question_score: '10'
@@ -1363,16 +1387,16 @@ levels:
                 {print} 'The wheels on the bus go'
                 {repeat} 3 {times} {print} ' round and round'
             mp_choice_options:
-                -   option: "the wheels on the bus go\nround and round"
-                    feedback: "Only the second line is repeated 3 times"
-                -   option: "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
-                    feedback: "Only the second line is repeated 3 times"
-                -   option: "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
-                    feedback: "Only the second line is repeated 3 times"
-                -   option: "the wheels on the bus go\nround and round\nround and round\nround and round"
-                    feedback: "All though the town! Perfect!"
+            -   option: "the wheels on the bus go\nround and round"
+                feedback: "Only the second line is repeated 3 times"
+            -   option: "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
+                feedback: "Only the second line is repeated 3 times"
+            -   option: "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
+                feedback: "Only the second line is repeated 3 times"
+            -   option: "the wheels on the bus go\nround and round\nround and round\nround and round"
+                feedback: "All though the town! Perfect!"
             correct_answer: "D"
-            hint: "Only 'round and round' is repeated 3 {times}."
+            hint: "Only 'round and round' is repeated 3 times."
             question_score: '10'
         7:
             question_text: "What will be the output from this code?"
@@ -1380,58 +1404,100 @@ levels:
                 {repeat} 2 {times} {print} 'We will'
                 {print} 'ROCK YOU!'
             mp_choice_options:
-                -   option: "We will We will\nROCK YOU!"
-                    feedback: "'We will' won't appear twice in the same line"
-                -   option: "We will\nWe will\nROCK YOU!"
-                    feedback: "Great!"
-                -   option: "We will\nROCK YOU!\nWe will\nROCK YOU!"
-                    feedback: "ROCK YOU! won't be repeated"
-                -   option: "We will\nROCK YOU!"
-                    feedback: "Mind the repeat command"
+            -   option: "We will We will\nROCK YOU!"
+                feedback: "'We will' won't appear twice in the same line"
+            -   option: "We will\nWe will\nROCK YOU!"
+                feedback: "Great!"
+            -   option: "We will\nROCK YOU!\nWe will\nROCK YOU!"
+                feedback: "ROCK YOU! won't be repeated"
+            -   option: "We will\nROCK YOU!"
+                feedback: "Mind the repeat command"
             correct_answer: "B"
-            hint: "Mind the {repeat} command."
+            hint: "Mind the `{repeat}` command."
             question_score: '10'
         8:
-            question_text: "What Hedy code belongs to this output?"
-            code: |-
-                Here comes the sun
-                Do do do do
-                Here comes the sun
-                And I say
-                Its alright
+            question_text: "Welke Hedy code hoort bij dit resultaat"
+            code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
             mp_choice_options:
-                -   option: "{print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'"
-                    feedback: "Perfect, you can't use the repeat command here."
-                -   option: "{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'"
-                    feedback: "Where did the 'Do do do do' go?"
-                -   option: "{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'And I say'\n{print} 'Its alright'"
-                    feedback: "This is not in the right order"
-                -   option: "{repeat} 2 {times} {print} 'Here comes the sun'\n{repeat} 2 {times} {print} 'Do do'\n{print} 'And I say'\n{print} 'Its alright'"
-                    feedback: "This is not in the right order"
+            -   option: |
+                    ```
+                    {print} 'Here comes the sun'
+                    {print} 'Do do do do'
+                    {print} 'Here comes the sun'
+                    {print} 'And I say'
+                    {print} 'Its alright'
+                    ```
+                feedback: "Perfect, je kan het `{repeat}` commando hier niet gebruiken."
+            -   option: |
+                    ```
+                    {repeat} 2 {times} {print} 'Here comes the sun'
+                    {print} 'And I say'
+                    {print} 'Its alright'"
+                feedback: "Waar is de 'Do do do do' gebleven?"
+            -   option: |
+                    ```
+                    {repeat} 2 {times} {print} 'Here comes the sun'
+                    {print} 'Do do do do'
+                    {print} 'And I say'
+                    {print} 'Its alright'
+                    ```
+                feedback: "Dit is niet de juiste volgorde.."
+            -   option: |
+                    ```
+                    {repeat} 2 {times} {print} 'Here comes the sun'
+                    {repeat} 2 {times} {print} 'Do do'
+                    {print} 'And I say'
+                    {print} 'Its alright'"
+                    ```
+                feedback: "Dit is niet de juiste volgorde.."
+            hint: "`{repeat}` kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren."
             correct_answer: "A"
-            hint: "{repeat} can only be used if you want the exact same line 2 (or more) times in a row."
             question_score: '10'
         9:
-            question_text: "What Hedy code belongs to this output?"
+            question_text: "Welke Hedy code hoort bij dit resultaat ?"
             code: |-
-                Batman was flying though Gotham.
-                When suddenly he heard someone screaming...
-                Help!
-                Help!
-                Help!
-                Please help me!
+              Batman was flying through Gotham.
+              When suddenly he heard someone screaming...
+              Help !
+              Help !
+              Help !
+              Please help me !"
             mp_choice_options:
-                -   option: "{print} 'Batman was flying though Gotham. '\n{print} 'When suddenly he heard someone screaming...'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please help me!'"
-                    feedback: "You repeated the wrong line"
-                -   option: "{print} 'Batman was flying though Gotham.' \n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} 'Help!'\n{print} 'Please help me!'\n"
-                    feedback: \"You missed the word {print} in line 3\"
-                -   option: "{print} Batman was flying though Gotham.\n{print} When suddenly he heard someone screaming...\n{repeat} 3 {times} {print} Help!\n{print} Please help me!"
-                    feedback: "You forgot about the quotation marks"
-                -   option: "{print} 'Batman was flying though Gotham.' \n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} {print} 'Help!'\n{print} 'Please help me!'"
-                    feedback: "Perfect"
-            correct_answer: "D"
-            hint: "'Help!' is repeated 3 times."
+            -   option: |
+                    ```
+                    {print} 'Batman was flying through Gotham. '
+                    {print} 'When suddenly he heard someone screaming...'
+                    {print} 'Help !'
+                    {repeat} 3 {times} {print} 'Please help me !'
+                    ```
+                feedback: "Je herhaalt de verkeerde regel"
+            -   option: |
+                    ```
+                    {print} 'Batman was flying through Gotham.'
+                    {print} 'When suddenly he heard someone screaming...'
+                    {repeat} 3 {times} 'Help !'
+                    {print} 'Please help me !'
+                    ```
+                feedback: "Het commando `{print}` mist op regel 3"
+            -   option: |
+                    ```
+                    {print} Batman was flying through Gotham.
+                    {print} When suddenly he heard someone screaming...
+                    {repeat} 3 {times} {print} Help !
+                    {print} Please help me !
+                    ```
+                feedback: "Je vergeet de aanhalingstekens"
+            -   option: |
+                    ```
+                    {print} 'Batman was flying through Gotham.'
+                    {print} 'When suddenly he heard someone screaming...'
+                    {repeat} 3 {times} {print} 'Help !'
+                    {print} 'Please help me !'
+                    ```
+                feedback: "Perfect"
             question_score: '10'
+            hint: "'Help !' wordt 3x herhaald."
+            correct_answer: "D"
         10:
             question_text: "What Hedy code belongs to this output?"
             code: |-
@@ -1440,14 +1506,34 @@ levels:
                 if youre happy and you know it and you really want to show it
                 if youre happy and you know it clap your hands
             mp_choice_options:
-                -   option: "{repeat} 2 {times} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'"
-                    feedback: "Almost! the first line needs an extra word"
-                -   option: "{repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'"
-                    feedback: "Great!"
-                -   option: "{repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'"
-                    feedback: "This is not in the right order."
-                -   option: "{repeat} 4 {times} 'if youre happy and you know it'\n{repeat} 2 times 'clap your hands'\n{print} 'and you really want to show it'\n{print} 'clap your hands'"
-                    feedback: "This is not in the right order."
+            -   option: |
+                    ```
+                    {repeat} 2 {times} 'if youre happy and you know it clap your hands'
+                    {print} 'if youre happy and you know it and you really want to show it'
+                    {print} 'if youre happy and you know it clap your hands'
+                    ```
+                feedback: "Almost! the first line needs an extra word"
+            -   option: |
+                    ```
+                    {repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'
+                    {print} 'if youre happy and you know it and you really want to show it'
+                    {print} 'if youre happy and you know it clap your hands'
+                    ```
+                feedback: "Great!"
+            -   option: |
+                    ```
+                    {repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'
+                    {print} 'if youre happy and you know it and you really want to show it'
+                    ```
+                feedback: "This is not in the right order."
+            -   option: |
+                    ```
+                    {repeat} 4 {times} 'if youre happy and you know it'
+                    {repeat} 2 times 'clap your hands'
+                    {print} 'and you really want to show it'
+                    {print} 'clap your hands'
+                    ```
+                feedback: "This is not in the right order."
             correct_answer: "B"
             hint: "Mind the order of the sentences."
             question_score: '10'
@@ -1459,14 +1545,14 @@ levels:
                     {print} 'Hello'
                     {print} 'Im Hedy!'
             mp_choice_options:
-                - option: "Hello \n Im Hedy!"
-                  feedback: "Everything is printed twice."
-                - option: "Hello \n Hello \n Im Hedy"
-                  feedback: "The second line is repeated twice as well."
-                - option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
-                  feedback: "Super!"
-                - option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
-                  feedback: "Helaas. Beide zinnen worden 2x herhaald"
+            -   option: "Hello \n Im Hedy!"
+                feedback: "Everything is printed twice."
+            -   option: "Hello \n Hello \n Im Hedy"
+                feedback: "The second line is repeated twice as well."
+            -   option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
+                feedback: "Super!"
+            -   option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
+                feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
             question_score: '10'
@@ -1476,14 +1562,14 @@ levels:
                 {repeat} 5 {times}
                 {print} 'Hedy is cool!'
             mp_choice_options:
-                - option: "This should be only one line, not 2."
-                  feedback: "No it should be 2 lines."
-                - option: "This {print} command has to go"
-                  feedback: "No, you need it."
-                - option: "There is a spelling mistake in the {repeat} command."
-                  feedback: "Nee, repeat is de goede spelling"
-                - option: "The second line need to start with 4 spaces as indentation."
-                  feedback: "Correct!"
+            -   option: "This should be only one line, not 2."
+                feedback: "No it should be 2 lines."
+            -   option: "This `{print}` command has to go"
+                feedback: "No, you need it."
+            -   option: "There is a spelling mistake in the `{repeat}` command."
+                feedback: "Nee, repeat is de goede spelling"
+            -   option: "The second line need to start with 4 spaces as indentation."
+                feedback: "Correct!"
             correct_answer: "D"
             hint: "Something is missing in the second line?"
             question_score: '10'
@@ -1494,14 +1580,14 @@ levels:
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
-                - option: "Baby shark tututudutudu \n Baby shark"
-                  feedback: "Mind the {repeat} command!"
-                - option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
-                  feedback: "The last line has no indentation, so it's not repeated."
-                - option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
-                  feedback: "Right!"
-                - option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
-                  feedback: "What is being repeated and what isn't."
+            -   option: "Baby shark tututudutudu \n Baby shark"
+                feedback: "Mind the `{repeat}` command!"
+            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+                feedback: "The last line has no indentation, so it's not repeated."
+            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+                feedback: "Right!"
+            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+                feedback: "What is being repeated and what isn't."
             correct_answer: "C"
             hint: "What is being repeated and what is not?."
             question_score: '10'
@@ -1513,16 +1599,16 @@ levels:
                     {print} 'Yay!'
                     {print} 'Were going on holiday!'
             mp_choice_options:
-                - option: "The children went: \n Yay! \n Were going on holiday!"
-                  feedback: "Mind teh {repeat} command !"
-                - option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
-                  feedback: "Correct!"
-                - option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
-                  feedback: "This order is incorrect."
-                - option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
-                  feedback: "The last line is repeated too."
+            -   option: "The children went: \n Yay! \n Were going on holiday!"
+                feedback: "Mind the `{repeat}` command !"
+            -   option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
+                feedback: "Correct!"
+            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
+                feedback: "This order is incorrect."
+            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
+                feedback: "The last line is repeated too."
             correct_answer: "B"
-            hint: "The block unde the {repeat} command is repeated twice."
+            hint: "The block under the `{repeat}` command is repeated twice."
             question_score: '10'
         5:
             question_text: "What is wrong with this code?"
@@ -1531,14 +1617,14 @@ levels:
                 {if} end {is} happy {print} 'They lived happily ever after'
                 {else} {print} 'The world exploded. The end.'
             mp_choice_options:
-                - option: "The {print} commands on the last two lines should start on new lines en start with 4 spaces."
-                  feedback: "That's right!"
-                - option: "{else} is not a command!"
-                  feedback: "It is!"
-                - option: "Lines that start with {if} should start with 4 spaces"
-                  feedback: "That's not true"
-                - option: "{ask} is no longer a command"
-                  feedback: "That's not true"
+            -   option: "The `{print}` commands on the last two lines should start on new lines en start with 4 spaces."
+                feedback: "That's right!"
+            -   option: "`{else}` is not a command!"
+                feedback: "It is!"
+            -   option: "Lines that start with `{if}` should start with 4 spaces"
+                feedback: "That's not true"
+            -   option: "`{ask}` is no longer a command"
+                feedback: "That's not true"
             correct_answer: "A"
             hint: "Something is wrong with indentation"
             question_score: '10'
@@ -1549,29 +1635,37 @@ levels:
                 Pizza
                 Hamburger
             mp_choice_options:
-                - option: |-
+            - option: |
+                  ```
+                  {print} 'Welcome to restaurant Hedy'
+                  food = {ask} 'What whould you like to eat?'
+                  {print} food
+                  ```
+              feedback: "You need to take 2 orders."
+            - option: |
+                  ```
+                  {repeat} 2 {times}
                       {print} 'Welcome to restaurant Hedy'
                       food = {ask} 'What whould you like to eat?'
                       {print} food
-                  feedback: "You need to take 2 orders."
-                - option: |-
-                      {repeat} 2 {times}
-                          {print} 'Welcome to restaurant Hedy'
-                          food = {ask} 'What whould you like to eat?'
-                          {print} food
-                  feedback: "The welcome line would be printed twice in this code too"
-                - option: |-
-                      {print} 'Welcome to restaurant Hedy'
-                      {repeat} 2 {times}
-                          food = {ask} 'What would you like to eat?'
+                  ```
+              feedback: "The welcome line would be printed twice in this code too"
+            - option: |
+                  ```
+                  {print} 'Welcome to restaurant Hedy'
+                  {repeat} 2 {times}
+                      food = {ask} 'What would you like to eat?'
+                  {print} food
+                  ```
+              feedback: "Now only the last order is printed."
+            - option: |
+                  ```
+                  {print} 'Welcome to restaurant Hedy'
+                  {repeat} 2 {times}
+                      food = {ask} 'What would you like to eat?'
                       {print} food
-                  feedback: "Now only the last order is printed."
-                - option: |-
-                      {print} 'Welcome to restaurant Hedy'
-                      {repeat} 2 {times}
-                          food = {ask} 'What would you like to eat?'
-                          {print} food
-                  feedback: "Awesome!"
+                  ```
+              feedback: "Awesome!"
             correct_answer: "D"
             hint: "Pay attention to what sould be repeated and what should only be printed once."
             question_score: '10'
@@ -1587,75 +1681,82 @@ levels:
                     {print} 'One pizza with ' topping
                 {print} 'That you for your order'
             mp_choice_options:
-                - option: "Nothing this code is correct!"
-                  feedback: "Something is wrong!."
-                - option: "You're not allowed to use an {if} command after an {ask} command."
-                  feedback: "You are!."
-                - option: "You don't have to use indentation twice. Only in the first {if} command."
-                  feedback: "You always have to use indentation."
-                - option: "The indentation is wrong in the first {if} command."
-                  feedback: "That's right."
+            -   option: "Nothing this code is correct!"
+                feedback: "Something is wrong!."
+            -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
+                feedback: "You are!."
+            -   option: "You don't have to use indentation twice. Only in the first `{if}` command."
+                feedback: "You always have to use indentation."
+            -   option: "The indentation is wrong in the first `{if}` command."
+                feedback: "That's right."
             correct_answer: "D"
-            hint: "Take a carefull look at the indentation."
+            hint: "Take a careful look at the indentation."
             question_score: '10'
         8:
             question_text: "In which of the codes is the indentation done right?"
-            code: ""
             mp_choice_options:
-                - option: |-
+            -   option: |
+                    ```
                     {if} answer is right
                        {print} You are...
                           sleep
                               {print} right!
                           {else}
                               {print} You are wrong!
-                  feedback: "You are wrong!"
-                - option: |-
+                    ```
+                feedback: "You are wrong!"
+            -   option: |
+                    ```
                     {if} answer is right
                     {print} You are...
                     sleep
                     {print} right!
                     {else}
                     {print} You are wrong!
-                  feedback: "You are wrong!"
-                - option: |-
+                    ```
+                feedback: "You are wrong!"
+            -   option: |
+                    ```
                     {if} answer is right
                         {print} You are...
                         sleep
                         {print} right!
                     {else}
                         {print} You are wrong!
-                  feedback: "You are... right!"
-                - option: |-
+                    ```
+                feedback: "You are... right!"
+            -   option: |
+                    ```
                     {if} answer is right
                         {print} You are...
                         sleep
                     {print} right!
                     {else}
                         {print} You are wrong!
-                  feedback: "You are wrong!"
+                    ```
+                feedback: "You are wrong!"
             correct_answer: "C"
             hint: "What should happen if the person is right? And what else?"
             question_score: '10'
         9:
             question_text: "What line(s) in this code should start with 4 spaces?"
             code: |-
-                    1 music = {ask} 'What is your favorite music genre?'
-                    2 {if} music is rock
-                    3 {print} '🤘'
-                    4 {else}
-                    5 {print} '👎'
+                1 music = {ask} 'What is your favorite music genre?'
+                2 {if} music is rock
+                3 {print} '🤘'
+                4 {else}
+                5 {print} '👎'
             mp_choice_options:
-                    - option: "Line 2 and 4"
-                      feedback: "The lines after the {if} and {else} command should start with 4 spaces"
-                    - option: "Only line 3"
-                      feedback: "Not only 3..."
-                    - option: "Line 3, 4 and 5"
-                      feedback: "Line 4 shouldn't"
-                    - option: "Line 3 and 5"
-                      feedback: "Great job!"
+            -   option: "Line 2 and 4"
+                feedback: "The lines after the `{if}` and `{else}` command should start with 4 spaces"
+            -   option: "Only line 3"
+                feedback: "Not only 3..."
+            -   option: "Line 3, 4 and 5"
+                feedback: "Line 4 shouldn't"
+            -   option: "Line 3 and 5"
+                feedback: "Great job!"
             correct_answer: "D"
-            hint: "The lines after an {if} or {else} command should start with 4 spaces."
+            hint: "The lines after an `{if}` or `{else}` command should start with 4 spaces."
             question_score: '10'
         10:
             question_text: "Which statement is true?"
@@ -1664,18 +1765,17 @@ levels:
                 2 {if} level {is} 8
                 3 {print} Great job!
             mp_choice_options:
-                - option: "All lines should start with 4 spaces"
-                  feedback: "That's not true"
-                - option: "Line 2 and 3 should start with 4 spaces"
-                  feedback: "That's not true"
-                - option: "Line 2 should start with 4 spaces"
-                  feedback: "That's not true"
-                - option: "Line 3 should start with 4 spaces"
-                  feedback: "You are correct!"
+            -   option: "All lines should start with 4 spaces"
+                feedback: "That's not true"
+            -   option: "Line 2 and 3 should start with 4 spaces"
+                feedback: "That's not true"
+            -   option: "Line 2 should start with 4 spaces"
+                feedback: "That's not true"
+            -   option: "Line 3 should start with 4 spaces"
+                feedback: "You are correct!"
             correct_answer: "D"
             hint: "Only one line starts with 4 spaces, but which one...?"
             question_score: '10'
-
     9:
         1:
             question_text: "What is wrong with this code?"
@@ -1814,7 +1914,6 @@ levels:
             question_score: '10'
         6:
             question_text: "After which command(s) should you use indentation (starting the next line with 4 spaces)?"
-            code: ""
             mp_choice_options:
                     - option: "{if}"
                       feedback: "Don't forget the others"
