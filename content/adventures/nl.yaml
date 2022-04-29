@@ -298,7 +298,7 @@ adventures:
                     score = 25
                     {print} 'Jij hebt ' score ' gehaald!'
                     ```
-                story_text_6: |
+                story_text_6: |-
                     **Rekenen met woorden**
                     In dit level kun je het + teken ook gebruiken met woorden. Zoals het voorbeeld hier:
                 example_code_6: |
@@ -368,7 +368,7 @@ adventures:
                     {while} antwoord != 25
                         antwoord = {ask} 'Wat is 5 keer 5?'
                     {print} 'Goed gedaan!'
-                story_text: |
+                story_text: |-
                     ## Meer lussen!
                     Nu gaan we een nieuwe loop leren: De `{while}` loop!
                     We gaan door zo lang het statement dat we hebben waar is.
@@ -376,7 +376,7 @@ adventures:
 
                     Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven.
                     Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!
-                example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+                example_code: "## Example Hedy code\n```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
             16:
                 start_code: |-
                     fruit = ['appel', 'banaan', 'kers']
@@ -401,12 +401,23 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Wie niet weg is, is gezien'
-                story_text: |-
+                story_text: |
                     ## Elif
                     Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een `:` bij de regel ervoor zetten.
 
                     Daarnaast kun je in dit level een nieuw commando gebruiken `{elif}`. `{elif}` is de afkorting van {else} en {if} en zorgt ervoor dat je 3 (of meer!) opties kunt maken.
                     Kijk maar...
+                    ```
+                    prices = ['1 million dollars', 'an apple pie', 'nothing']
+                    your_price = prices[{random}]
+                    {print} 'You win ' your_price
+                    {if} your_price == '1 million dollars' :
+                        {print} 'Yeah! You are rich!'
+                    {elif} your_price == 'an apple pie' :
+                        {print} 'Lovely, an apple pie!'
+                    {else}:
+                        {print} 'Better luck next time..'
+                    ```
             18:
                 start_code: |-
                     naam = 'Hedy'
@@ -415,6 +426,14 @@ adventures:
                     ## Het laatste level!
                     We zijn aangekomen bij echte Pythoncode! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
                     Zo gaat dat:
+                    ```
+                    {print}('mijn naam is Hedy!')
+                    ```
+                    Als je meer dan twee items wilt printen, moet je de items scheiden door commas.
+                    ```
+                    name = 'Hedy'
+                    {print}('mijn naam is ', name)
+                    ```
     story:
         name: "Verhaal"
         description: "Maak een interactief verhaal"
@@ -452,7 +471,7 @@ adventures:
                     Je moet daar wel een klein beetje extra voor programmeren. Je moet je hoofdpersoon nu eerst een naam geven.
 
                     Die naam kun je dan overal in een zin neerzetten.
-                example_code: |
+                example_code: |-
                     ## Voorbeeld Hedy code
                     ```
                     naam {is} {ask} Hoe heet de hoofdpersoon?
@@ -468,7 +487,7 @@ adventures:
                     ## Verhaal
                     In dit level kun je iets willekeurigs aan je verhaal toevoegen. Een willekeurig monster, dier of ander obstakel. Dat gaat zo:
                 start_code: "{print} Hier komt straks jouw verhaal!"
-                example_code: |-
+                example_code: |
                     ## Voorbeeld Hedy code
                     ```
                     dieren {is} 🦇, 🐿, 🦉, 🦔
@@ -488,8 +507,7 @@ adventures:
                     {print} het was een dieren {at} {random}
                     ```
                 story_text_3: "Hiernaast zie je een voorbeeld van het `{remove}` commando in een verhaal\n"
-                example_code_3: |4-
-
+                example_code_3: |
                     ## Voorbeeld Hedy code
                     ```
                     {print} Zijn rugzak is veel te zwaar...
@@ -596,7 +614,7 @@ adventures:
                     {else}
                         {print} 'Robin gaat naar huis'
                     ```
-                story_text_2: Het voorbeeld hierboven is nog een simpel verhaaltje. Maar door {if} commando's in elkaar te zetten, kun je ook een super uitgebreid verhaal maken, dat al echt op een game lijkt! Kijk maar...
+                story_text_2: Het voorbeeld hierboven is nog een simpel verhaaltje. Maar door {if} commando's in elkaar te zetten, kun je ook een super uitgebreid verhaal maken, dat al echt op een game lijkt!
                 example_code_2: |
                     ## Uitgebreide code
                     ```
@@ -647,7 +665,7 @@ adventures:
                     ```
                 start_code: "# Schrijf jouw code hier"
             12:
-                story_text: |
+                story_text: |-
                     ## Verhaal
                     In dit level kun je meerdere woorden opslaan in een variabele. Hierdoor kun je je hoofdpersoon bijvoorbeeld een voor- en achternaam geven.
                 example_code: |
@@ -780,7 +798,7 @@ adventures:
                 start_code: "# Schrijf jouw code hier"
     songs:
         name: "Zing een liedje!"
-        description: "Print een liedje "
+        description: "Print een liedje"
         image: "songs.png"
         default_save_name: "Liedje"
         levels:
@@ -1849,8 +1867,8 @@ adventures:
                         {print} naam ' krijgt een ' huisdieren {at} {random} ' als huisdier'
                         {sleep} 2
                     ```
-                story_text_2: |
-                    We kunnen ook een waarzegger maken in een ander thema, bijvoorbeeld Harry Potter!
+                story_text_2: |-
+                    We kunnen ook een waarzegger maken in een ander thema, bijvoorbeeld Harry Potter.
                 example_code_2: |
                     ## Voorbeeld Hedy code - Harry Potter
                     ```
@@ -1921,7 +1939,8 @@ adventures:
                     ## Random restaurant
                     In level 3 kun je ook het commando `{at} {random}` gebruiken om Hedy voor jou te laten kiezen. Hierdoor kun je ook een grappig {random} restaurant bouwen, waarbij je Hedy laat kiezen wat jij te eten krijgt!
                 start_code: "# Schrijf jouw code hier"
-                example_code: |-
+                example_code: |
+                    ## Voorbeeld Hedy code
                     ```
                     gerechten {is} patat, pizza, spruitjes
                     toetjes {is} een ijsje, appeltaart, franse stinkkaas
@@ -1937,7 +1956,8 @@ adventures:
                 story_text_2: |
                     ## Allergieën
                     Vindt je klant iets niet lekker of is je klant allergisch? Haal dan een item van je menu met het `{remove}` commando.
-                example_code_2: |-
+                example_code_2: |
+                    ## Voorbeeld Hedy code
                     ```
                     {print} Mysterie Milkshake
                     smaken {is} aardbei, banaan, chocolade
@@ -2069,7 +2089,7 @@ adventures:
                     Je kunt natuurlijk ook zorgen dat er vervolgvragen komen.
                     Als men bijvoorbeeld een patatje bestelt, kun je vragen welke saus ze daarbij willen. Of je kunt vragen of ze cola light willen of normale cola.
                     En zo kun je vast zelf nog veel meer vragen bedenken!
-                start_code: "{print} 'Welkom bij McHedy!' "
+                start_code: "{print} 'Welkom bij McHedy!'"
             9:
                 story_text: |
                     ## Restaurant
@@ -2146,7 +2166,7 @@ adventures:
                     prijs = 4 * mensen
                     {print} 'Dat wordt dan ' prijs ' euro!'
                     ```
-                start_code: "{print} 'Welkom bij McHedy!' "
+                start_code: "{print} 'Welkom bij McHedy!'"
             12:
                 story_text: |
                     ## Restaurant
@@ -2329,7 +2349,7 @@ adventures:
                     Dat maakt het spel een stuk lastiger om te winnen, kijk maar...
 
                     ## Uitdaging
-                    Je spel is nu wel heel lastig te winnen... Kun jij je spel zo ombouwen dat er maar 1 foute deur is om te kiezen, in plaast van 2?
+                    Je spel is nu wel heel lastig te winnen... Kun jij je spel zo ombouwen dat er maar 1 foute deur is om te kiezen, in plaats van 2?
                 example_code: |
                     ## Voorbeeld Hedy code
                     ```
@@ -2426,7 +2446,7 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     getallen = [1, 2, 3]
-                    i {is} getallen[{random}]
+                    i = getallen[{random}]
                     hint = ['gegrom', 'kakelende lach', 'vleermuis gefladder']
                     monsters = ['zombie', 'heks', 'vampier']
                     noodlot = ['Je brein wordt opgepeuzeld', 'Je wordt vervloekt', 'Je wordt gebeten']
@@ -2653,8 +2673,7 @@ adventures:
                     In het volgende level wordt dit probleem opgelost door aanhalingstekens te gebruiken, kijk maar eens!
                 start_code: "{print} Op naar het volgende level!"
             4:
-                story_text: |4
-
+                story_text: |
                     ## Vooruitblik
                     In de voorgaande levels heb al codes leren maken met `{at} {random}` waardoor je programma's elke keer anders waren als je ze afspeelde.
                     Toch waren de codes niet echt interactief, je hebt er als speler namelijk geen invloed op.
@@ -2885,7 +2904,7 @@ adventures:
                     {else}
                         {print} 'Bah...'
                     ```
-                story_text_2: In deze code zou het fijn zijn als je 2x een `{else}` kon toevoegen, want misschien vindt je broccoli wel oké en alleen spruitjes 'bah'. In het volgende level kun je meerdere opties toevoegen mey het nieuwe commando {elif}.
+                story_text_2: In deze code zou het fijn zijn als je 2x een `{else}` kon toevoegen, want misschien vindt je broccoli wel oké en alleen spruitjes 'bah'. In het volgende level kun je meerdere opties toevoegen met het nieuwe commando {elif}!
                 start_code: "{print} 'Lets go to the next level!'"
             17:
                 story_text: |
