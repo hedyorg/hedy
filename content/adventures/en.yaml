@@ -2788,6 +2788,108 @@ adventures:
                         print 'Go to the trainstation at 10.00'
                      ```
                 start_code: "## place your code here"
+    blackjack:
+        name: "Backjack"
+        description: "Try to get as close to 21 as you can"
+        image: "story.png"
+        defailt_save_name: "Backjack"
+        levels:
+            17:
+                story_text: |
+                    ## Create a game of Blackjack
+                    Blackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.
+                    The Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.
+                    If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
+                    But be carefull not to get more than 21 points, because if you do, you lose!
+                    The player who gets closest to 21, without going over it, wins!
+
+                    Have fun!
+                example_code: |
+                    ```
+                    print 'BLACKJACK'
+                    cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']
+                    points = 0
+                    dealer_points = 0
+                    card_1 = cards[random]
+                    card_2 = cards[random]
+                    card_3 = cards [random]
+                    dealer_card_1 = cards[random]
+                    dealer_card_2 = cards[random]
+                    dealer_card_3 = cards[random]
+                    # Points for card 1
+                    if card_1 == 'Jack' or card_1 == 'Queen' or card_1 == 'King':
+                        points = points + 10
+                    elif card_1 == 'Ace':
+                        points = points + 11
+                    else:
+                        points = points + card_1
+                    # Points for card 2
+                    if card_2 == 'Jack' or card_2 == 'Queen' or card_2 == 'King':
+                        points = points + 10
+                    elif card_2 == 'Ace':
+                        points = points + 11
+                    else:
+                        points = points + card_2
+                    # Points for dealer card 1
+                    if dealer_card_1 == 'Jack' or dealer_card_1 == 'Queen' or dealer_card_1 == 'King':
+                        dealer_points = dealer_points + 10
+                    elif dealer_card_1 == 'Ace':
+                        dealer_points = dealer_points + 11
+                    else:
+                        dealer_points = dealer_points + dealer_card_1
+                    # Points for dealer card 2
+                    if dealer_card_2 == 'Jack' or dealer_card_2 == 'Queen' or dealer_card_2 == 'King':
+                        dealer_points = dealer_points + 10
+                    elif dealer_card_2 == 'Ace':
+                        dealer_points = dealer_points + 11
+                    else:
+                        dealer_points = dealer_points + dealer_card_2
+                    # Two Aces
+                    if card_1 == 'Ace' and card_2 == 'Ace':
+                        points = 12
+                    if dealer_card_1 == 'Ace' and dealer_card_2 == 'Ace':
+                        dealer_points = 12
+                    # Scoreboard
+                    print 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'
+                    print 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'
+                    # Extra card for the player
+                    hit = ask 'Do you want an extra card?'
+                    if hit == 'yes':
+                        if card_3 == 'Jack' or card_3 == 'Queen' or card_3 == 'King':
+                            points = points + 10
+                        elif card_3 == 'Ace':
+                            if points > 11:
+                                points = points + 11
+                            else:
+                                points = points + 1
+                        else:
+                            points = points + card_3
+                        print 'You get an extra ' card_3 ' (' points ' points)'
+                    else:
+                        print 'No extra cards'
+                    # Winner
+                    if points > 21 or dealer_points > points or dealer_points == 21:
+                        print 'You lose'
+                    elif dealer_points < 17:
+                        print 'The dealer takes an extra card. It is a... ' dealer_card_3
+                        if dealer_card_3 == 'Jack' or dealer_card_3 == 'Queen' or dealer_card_3 == 'King':
+                            dealer_points = dealer_points + 10
+                        elif dealer_card_3 == 'Ace':
+                            if dealer_points < 11:
+                                dealer_points = dealer_points + 11
+                            else:
+                                dealer_points = dealer_points + 1
+                        else:
+                            dealer_points = dealer_points + dealer_card_3
+                        print 'The dealer has ' dealer_points ' points now'
+                        if dealer_points < 21 and dealer_points > points:
+                            print 'You lose'
+                        else:
+                            print 'You win'
+                    elif points > dealer_points and points < 21:
+                        print 'You win!'
+                    ```
+                start_code: "# place your code here"
     next:
         name: "What's next?"
         description: "What's Next?"
