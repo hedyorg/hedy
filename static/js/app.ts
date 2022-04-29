@@ -783,7 +783,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
   // If the adventures are not shown -> increase height of turtleConfig
-  if ($('#adventures').is(":hidden")) {
+  if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
   } else {
@@ -1277,13 +1277,13 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
   }
 export function toggle_developers_mode(enforced: boolean) {
   if ($('#developers_toggle').is(":checked") || enforced) {
-      $('#adventures').hide();
+      $('#adventures-tab').hide();
       pushAchievement("lets_focus");
   } else {
-      $('#adventures').show();
+      $('#adventures-tab').show();
   }
 
-  if ($('#adventures').is(":hidden")) {
+  if ($('#adventures-tab').is(":hidden")) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
