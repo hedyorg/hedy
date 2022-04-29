@@ -60,8 +60,12 @@ function resetWindow() {
     resetWindow();
 
       if (tabName === 'quiz') {
+        // If the developers mode is still on -> reverse and THEN show the quiz tab
         if ($('#developers_toggle').is(":checked")) {
           $('#developers_toggle').prop('checked', false);
+          $('#editor-area').addClass('mt-5');
+          $('#code_editor').height('22rem');
+          $('#code_output').height('22rem');
           $('#adventures-tab').show();
         }
       $ ('#adventures-tab').css('height', '');
