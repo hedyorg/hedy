@@ -16,6 +16,7 @@ import utils
 from config import config as CONFIG
 
 # *** GLOBAL VARIABLES ***
+from hedy_content import ALL_LANGUAGES
 
 HOST = os.getenv('ENDPOINT', 'http://localhost:' + str(CONFIG['port']) + '/')
 if not HOST.endswith('/'): HOST += '/'
@@ -279,6 +280,21 @@ class TestPages(AuthHelper):
         # THEN receive an 404 response code from the server
         self.get_data('/cheatsheet/123', expect_http_code=404)
         self.get_data('/cheatsheet/panda', expect_http_code=404)
+
+    def test_all_languages(self):
+        # WHEN trying all languages to reach all pages
+        # THEN receive an OK response from the server
+        self.given_fresh_user_is_logged_in()
+
+        body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
+        pages = ['/', '/hedy', '/explore', '/learn-more', '/programs', '/my-achievements', '/my-profile']
+
+        for language in ALL_LANGUAGES.keys():
+            body['language'] = language
+            self.post_data('profile', body)
+
+            for page in pages:
+                self.get_data(page)
 
 class TestSessionVariables(AuthHelper):
     def test_get_session_variables(self):
