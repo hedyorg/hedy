@@ -208,6 +208,8 @@ class HighlightTester(unittest.TestCase):
 
                 # Application of coloring on the code
                 currentRule,currentMatch = NEXT["rule"],NEXT["match"]
+
+                print(currentRule)
         
                 if type(currentRule['token']) == str :
                     currentRule['token'] = [currentRule['token']]
