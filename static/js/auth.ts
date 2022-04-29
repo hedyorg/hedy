@@ -6,6 +6,10 @@ export interface Profile {
   session_expires_at: number;
 }
 
+interface Dict<T> {
+    [key: string]: T;
+}
+
 interface User {
   username?: string;
   email?: string;
@@ -122,7 +126,11 @@ export const auth = {
       }).done (function (response) {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
-        afterLogin({"admin": response['admin'], "teacher": response['teacher']});
+        // This happens when a student account (without an mail address logs in for the first time
+        if (response['first_time']) {
+          return afterLogin({"first_time": true});
+        }
+        return afterLogin({"admin": response['admin'] || false, "teacher": response['teacher']} || false);
       }).fail (function (response) {
         modal.alert(response.responseText, 3000, true);
       });
@@ -130,7 +138,7 @@ export const auth = {
 
     if (op === 'profile') {
       const payload: User = {
-        email: values.email,
+        email: values.email ? values.email : undefined,
         language: values.language,
         keyword_language: values.keyword_language,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
@@ -303,7 +311,7 @@ $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
  * - Check if we were supposed to be joining a class. If so, join it.
  * - Otherwise redirect to "my programs".
  */
-async function afterLogin(loginData: any) {
+async function afterLogin(loginData: Dict<boolean>) {
   const savedProgramString = localStorage.getItem('hedy-first-save');
   const savedProgram = savedProgramString ? JSON.parse(savedProgramString) : undefined;
 

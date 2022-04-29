@@ -45,7 +45,11 @@ Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/comma
 # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
 keywords = YamlFile.for_file('../../content/keywords/en.yaml').to_dict()
 for snippet in Hedy_snippets:
-    snippet[1].code = snippet[1].code.format(**keywords)
+    try:
+        snippet[1].code = snippet[1].code.format(**keywords)
+    except KeyError:
+        print("This following snippet contains an invalid placeholder ...")
+        print(snippet)
 
 
 class TestsCommandPrograms(unittest.TestCase):
