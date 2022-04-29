@@ -60,6 +60,10 @@ function resetWindow() {
     resetWindow();
 
       if (tabName === 'quiz') {
+        if ($('#developers_toggle').is(":checked")) {
+          $('#developers_toggle').prop('checked', false);
+          $('#adventures-tab').show();
+        }
       $ ('#adventures-tab').css('height', '');
       $ ('#adventures-tab').css('min-height', '14em');
       $ ('#adventures-tab').css('max-height', '100%');
