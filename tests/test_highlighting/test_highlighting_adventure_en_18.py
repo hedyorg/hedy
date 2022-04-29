@@ -3,7 +3,7 @@ from tests.Highlighter import HighlightTester
 class HighlighterTestLeveL18(HighlightTester):
 
     def test_1(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "naam = 'Hedy'",
             "TTTT K SSSSSS",
             "print('My name is ', naam)",
@@ -12,7 +12,7 @@ class HighlighterTestLeveL18(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print('my name is Hedy!')",
             "KKKKKKSSSSSSSSSSSSSSSSSSK",
             "name = 'Hedy'",
@@ -23,7 +23,7 @@ class HighlighterTestLeveL18(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print ('Great job!!!')",
             "KKKKK KSSSSSSSSSSSSSSK",
             level="level18",lang='en')

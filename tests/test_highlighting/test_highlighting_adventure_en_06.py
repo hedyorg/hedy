@@ -4,14 +4,14 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_1(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print '5 times 5 is ' 5 * 5",
             "KKKKK SSSSSSSSSSSSSSS N K N",
             level="level6",lang='en')
 
 
     def test_2(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print '5 plus 5 is ' 5 + 5",
             "KKKKK SSSSSSSSSSSSSS N K N",
             "print '5 minus 5 is ' 5 - 5",
@@ -22,7 +22,7 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "name = Hedy",
             "TTTT K TTTT",
             "answer = 20 + 4",
@@ -31,7 +31,7 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_4(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "verse = 99",
             "TTTTT K NN",
             "print verse ' bottles of beer on the wall'",
@@ -48,14 +48,14 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_5(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Baby shark'",
             "KKKKK SSSSSSSSSSSS",
             level="level6",lang='en')
 
 
     def test_6(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "angles = ask 'How many angles do you want?'",
             "TTTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "angle = 360 / angles",
@@ -88,14 +88,14 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_7(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Drawing figures'",
             "KKKKK SSSSSSSSSSSSSSSSS",
             level="level6",lang='en')
 
 
     def test_8(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "people = mom, dad, Emma, Sophie",
             "TTTTTT K TTTK TTTK TTTTK TTTTTT",
             "emma_washes = 0",
@@ -112,7 +112,7 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_9(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "people = mom, dad, Emma, Sophie",
             "TTTTTT K TTTK TTTK TTTTK TTTTTT",
             "dishwasher = people at random",
@@ -133,14 +133,14 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_10(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Who does the dishes?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
             level="level6",lang='en')
 
 
     def test_11(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "choices = 1, 2, 3, 4, 5, earthworm",
             "TTTTTTT K NK NK NK NK NK TTTTTTTTT",
             "points = 0",
@@ -157,14 +157,14 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_12(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'What will the die indicate this time?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level6",lang='en')
 
 
     def test_13(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "correct_answer = 11 * 27",
             "TTTTTTTTTTTTTT K NN K NN",
             "answer = ask 'How much is 11 times 27?'",
@@ -177,7 +177,7 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_14(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "tables = 4, 5, 6, 8",
             "TTTTTT K NK NK NK N",
             "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
@@ -198,14 +198,14 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_15(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Welcome to this calculator!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level6",lang='en')
 
 
     def test_16(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print 'Welcome to Hedys restaurant'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Here is our menu:'",
@@ -232,7 +232,7 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_17(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print 'Welcome to Hedys restaurant'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Here is our menu:'",
@@ -275,14 +275,14 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_18(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
             level="level6",lang='en')
 
 
     def test_19(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print 'I am Hedy the fortune teller!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'I can predict how many kids youll get when you grow up!'",
@@ -323,7 +323,7 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_20(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print 'happy birthday to you'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
             "print 'happy birthday to you'",
@@ -336,7 +336,7 @@ class HighlighterTestLeveL6(HighlightTester):
 
 
     def test_21(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'On to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
             level="level6",lang='en')

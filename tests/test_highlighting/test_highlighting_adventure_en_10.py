@@ -4,7 +4,7 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_1(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "animals is dog, cat, blobfish",
             "TTTTTTT KK TTTK TTTK TTTTTTTT",
             "for animal in animals",
@@ -15,7 +15,7 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "animals = red bird, black sheep, green frog, yellow duck, little child",
             "TTTTTTT K TTTTTTTTK TTTTTTTTTTTK TTTTTTTTTTK TTTTTTTTTTTK TTTTTTTTTTTT",
             "print 'brown bear'",
@@ -40,14 +40,14 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
             level="level10",lang='en')
 
 
     def test_4(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "monkeys = 5, 4, 3, 2",
             "TTTTTTT K NK NK NK N",
             "for monkey in monkeys",
@@ -110,7 +110,7 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_5(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",
             "TTTT K TTTTTTK TTTTTTTK TTTTTTTTTK TTTTTTTTK TTTTTTK TTTTTTTTK TTTTTT",
             "names = mom, dad, Emma, Sophie",
@@ -123,7 +123,7 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_6(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "players = Ann, John, Jesse",
             "TTTTTTT K TTTK TTTTK TTTTT",
             "choices = 1, 2, 3, 4, 5, 6",
@@ -138,7 +138,7 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_7(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "choices = rock, paper, scissors",
             "TTTTTTT K TTTTK TTTTTK TTTTTTTT",
             "players = Marleen, Michael",
@@ -151,7 +151,7 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_8(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "numbers = 1, 2, 3",
             "TTTTTTT K NK NK N",
             "for number1 in numbers",
@@ -174,7 +174,7 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_9(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "courses = appetizer, main course, dessert",
             "TTTTTTT K TTTTTTTTTK TTTTTTTTTTTK TTTTTTT",
             "for course in courses",
@@ -187,7 +187,7 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_10(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "courses = appetizer, main course, dessert",
             "TTTTTTT K TTTTTTTTTK TTTTTTTTTTTK TTTTTTT",
             "names = Timon, Onno",
@@ -204,14 +204,14 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_11(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "courses = appetizer, main course, dessert",
             "TTTTTTT K TTTTTTTTTK TTTTTTTTTTTK TTTTTTT",
             level="level10",lang='en')
 
 
     def test_12(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "houses = mansion, apartment, shack, house",
             "TTTTTT K TTTTTTTK TTTTTTTTTK TTTTTK TTTTT",
             "loves = nobody, a royal, their neighbour, their true love",
@@ -234,7 +234,7 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_13(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw",
             "TTTTTT K TTTTTTTTTTK TTTTTTTTTK TTTTTTTTTTK TTTTTTTTT",
             "subjects = potions, defence against the dark arts, charms, transfiguration",
@@ -255,7 +255,7 @@ class HighlighterTestLeveL10(HighlightTester):
 
 
     def test_14(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level10",lang='en')

@@ -57,7 +57,7 @@ os.chdir(os.path.dirname(__file__) +"/..")
 
 class HighlightTester(unittest.TestCase):
 
-    def assertHighlighted(self,code,expected,level,lang="en"):
+    def assertHighlightedChr(self,code,expected,level,lang="en"):
         
         rules  = self.getRules(level,lang)
 
@@ -73,7 +73,7 @@ class HighlightTester(unittest.TestCase):
         self.assertTrue(valid)
 
 
-    def assertHighlightedMultiLine(self,*args,level,lang="en"):
+    def assertHighlightedChrMultiLine(self,*args,level,lang="en"):
         if len(args)%2 != 0:
             raise("*args must be even (alternating lines of code and lines of highlighting)")
 
@@ -86,35 +86,22 @@ class HighlightTester(unittest.TestCase):
         code = "\n".join(code)
         expected = "\n".join(expected)
 
-        self.assertHighlighted(code,expected,level,lang)
+        self.assertHighlightedChr(code,expected,level,lang)
 
 
-
-
-    def assertHighlighted2(self,codeCol,level,lang="en"):
+    def assertHighlighted(self,codeCol,level,lang="en"):
         
         code,expected = self._transforme(codeCol)
 
-        rules  = self.getRules(level,lang)
-
-        result = self.simulateRulesWithoutToken(rules,code)
-
-        valid, indError = self.check(result,expected)
-        if not valid:
-            print("ERROR in level {} in {}:".format(level, lang))
-            print("In this code :",code.replace("\n","\\n"))
-            print("We want      :",expected.replace("\n","\\n"))
-            print("We have      :",result.replace("\n","\\n"))
-            print("At           :"," "* indError + "^")
-        self.assertTrue(valid)
+        self.assertHighlightedChr(code,expected,level,lang)
 
 
-    def assertHighlightedMultiLine2(self,*args,level,lang="en"):
+    def assertHighlightedMultiLine(self,*args,level,lang="en"):
         codeCol = "\n".join(args)
 
         code,expected = self._transforme(codeCol)
 
-        self.assertHighlighted(code,expected,level,lang)
+        self.assertHighlightedChr(code,expected,level,lang)
 
 
     def getRules(self,level,lang="en"):
@@ -130,6 +117,44 @@ class HighlightTester(unittest.TestCase):
         else : Rules = Rules[0]['rules']
         return Rules
 
+
+    def _transforme(self,codeCol):
+        Code = ""
+        Colo = ""
+
+        flag = False
+        flag2 = False
+
+        for ch in codeCol:
+            if ch == "{" :
+                flag = True
+                flag2 = False
+                tmpCode = ""
+                tmpColo = ""
+            elif ch == "}":
+                flag = False
+                flag2 = False
+
+                Code += tmpCode
+                Colo += Abbreviation[tmpColo] * len(tmpCode)
+
+            elif flag:
+                if ch == "|":
+                    flag2 = True
+                elif not flag2:
+                    tmpCode += ch
+                elif flag2:
+                    tmpColo += ch
+
+            elif not flag:
+                if ch == "\n":
+                    Colo += "\n"
+                    Code += "\n"
+                else:
+                    Colo += " "
+                    Code += ch
+
+        return Code,Colo
 
 
     #######################################################################################
@@ -221,45 +246,6 @@ class HighlightTester(unittest.TestCase):
 
         return True,-1
 
-
-
-    def _transforme(self,codeCol):
-        Code = ""
-        Colo = ""
-
-        flag = False
-        flag2 = False
-
-        for ch in codeCol:
-            if ch == "{" :
-                flag = True
-                flag2 = False
-                tmpCode = ""
-                tmpColo = ""
-            elif ch == "}":
-                flag = False
-                flag2 = False
-
-                Code += tmpCode
-                Colo += Abbreviation[tmpColo] * len(tmpCode)
-
-            elif flag:
-                if ch == "|":
-                    flag2 = True
-                elif not flag2:
-                    tmpCode += ch
-                elif flag2:
-                    tmpColo += ch
-
-            elif not flag:
-                if ch == "\n":
-                    Colo += "\n"
-                    Code += "\n"
-                else:
-                    Colo += " "
-                    Code += ch
-
-        return Code,Colo
 
 
 

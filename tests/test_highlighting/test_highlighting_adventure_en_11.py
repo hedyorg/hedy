@@ -4,7 +4,7 @@ class HighlighterTestLeveL11(HighlightTester):
 
     
     def test_1(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "for counter in range 1 to 5",
             "KKK TTTTTTT KK KKKKK N KK N",
             "print counter",
@@ -13,7 +13,7 @@ class HighlighterTestLeveL11(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "for i in range 5 to 1",
             "KKK T KK KKKKK N KK N",
             "print i ' little monkeys jumping on the bed'",
@@ -34,14 +34,14 @@ class HighlighterTestLeveL11(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
             level="level11",lang='en')
 
 
     def test_4(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print 'Welcome to Restaurant Hedy!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "people = ask 'For how many people would you like to order?'",
@@ -72,7 +72,7 @@ class HighlighterTestLeveL11(HighlightTester):
 
 
     def test_5(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print 'Escape from the Haunted House!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "player is alive",
@@ -115,14 +115,14 @@ class HighlighterTestLeveL11(HighlightTester):
 
 
     def test_6(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Escape from the haunted house!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level11",lang='en')
 
 
     def test_7(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "name = ask 'Who is your favorite cartoon character?'",
             "TTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'I love watching ' name",
@@ -135,7 +135,7 @@ class HighlighterTestLeveL11(HighlightTester):
 
 
     def test_8(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level11",lang='en')

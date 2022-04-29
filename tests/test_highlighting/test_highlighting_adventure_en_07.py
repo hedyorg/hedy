@@ -4,14 +4,14 @@ class HighlighterTestLeveL7(HighlightTester):
 
 
     def test_1(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "repeat 3 times print 'Hedy is fun!'",
             "KKKKKK N KKKKK KKKKK SSSSSSSSSSSSSS",
             level="level7",lang='en')
 
 
     def test_2(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print 'The prince kept calling for help'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "repeat 5 times print 'Help!'",
@@ -22,14 +22,14 @@ class HighlighterTestLeveL7(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "repeat 5 times print 'Help!'",
             "KKKKKK N KKKKKKKKKKK SSSSSSS",
             level="level7",lang='en')
 
 
     def test_4(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "repeat _ _ print 'Baby Shark tututudutudu'",
             "KKKKKK I I KKKKK SSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Baby Shark'",
@@ -38,14 +38,14 @@ class HighlighterTestLeveL7(HighlightTester):
 
 
     def test_5(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Baby Shark'",
             "KKKKK SSSSSSSSSSSS",
             level="level7",lang='en')
 
 
     def test_6(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print 'Draw figures'",
             "KKKKK SSSSSSSSSSSSSS",
             "repeat 3 times forward 10",
@@ -54,7 +54,7 @@ class HighlighterTestLeveL7(HighlightTester):
 
 
     def test_7(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "people = mom, dad, Emma, Sophie",
             "TTTTTT K TTTK TTTK TTTTK TTTTTT",
             "repeat _ _ print 'the dishwasher is' _",
@@ -63,14 +63,14 @@ class HighlighterTestLeveL7(HighlightTester):
 
 
     def test_8(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Who does the dishes?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
             level="level7",lang='en')
 
 
     def test_9(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "choices = 1, 2, 3, 4, 5, earthworm",
             "TTTTTTT K NK NK NK NK NK TTTTTTTTT",
             "repeat _ _ print _ _ _",
@@ -79,14 +79,14 @@ class HighlighterTestLeveL7(HighlightTester):
 
 
     def test_10(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'What will the die indicate this time?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level7",lang='en')
 
 
     def test_11(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print 'Welcome to Hedys restaurant!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "people = ask 'How many people are joining us today?'",
@@ -99,14 +99,14 @@ class HighlighterTestLeveL7(HighlightTester):
 
 
     def test_12(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
             level="level7",lang='en')
 
 
     def test_13(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "print 'Im Hedy the fortune teller!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'You can ask 3 questions!'",
@@ -121,14 +121,14 @@ class HighlighterTestLeveL7(HighlightTester):
 
 
     def test_14(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "repeat 5 times print 'In the next level you can repeat multiple lines of code at once!'",
             "KKKKKK N KKKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level7",lang='en')
 
 
     def test_15(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level7",lang='en')

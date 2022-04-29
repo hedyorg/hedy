@@ -4,7 +4,7 @@ class HighlighterTestLeveL13(HighlightTester):
 
 
     def test_1(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "name = ask 'what is your name?'",
             "TTTT K KKK SSSSSSSSSSSSSSSSSSSS",
             "age = ask 'what is your age?'",
@@ -17,7 +17,7 @@ class HighlighterTestLeveL13(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "sword = 'lost'",
             "TTTTT K SSSSSS",
             "game = 'on'",
@@ -68,14 +68,14 @@ class HighlighterTestLeveL13(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
             level="level13",lang='en')
 
 
     def test_4(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "options = 'rock', 'paper', 'scissors'",
             "TTTTTTT K SSSSSSK SSSSSSSK SSSSSSSSSS",
             "your_choice = ask 'What do you choose?'",
@@ -102,7 +102,7 @@ class HighlighterTestLeveL13(HighlightTester):
 
 
     def test_5(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "price = 10",
             "TTTTT K NN",
             "food = ask 'What would you like to eat?'",
@@ -121,7 +121,7 @@ class HighlighterTestLeveL13(HighlightTester):
 
 
     def test_6(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "drinks = ask 'What would you like to drink?'",
             "TTTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "if drinks is 'water' or drinks is 'juice'",
@@ -132,7 +132,7 @@ class HighlighterTestLeveL13(HighlightTester):
 
 
     def test_7(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "name is ask 'What is your name?'",
             "TTTT KK KKK SSSSSSSSSSSSSSSSSSSS",
             "password is ask 'What is your password?'",
@@ -149,14 +149,14 @@ class HighlighterTestLeveL13(HighlightTester):
 
 
     def test_8(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "## place your code here",
             "CCCCCCCCCCCCCCCCCCCCCCC",
             level="level13",lang='en')
 
 
     def test_9(self):
-        self.assertHighlightedMultiLine(
+        self.assertHighlightedChrMultiLine(
             "first_grade = ask 'What score did you get on your first test?'",
             "TTTTTTTTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "second_grade = ask 'What score did you get on your second test?'",
@@ -177,7 +177,7 @@ class HighlighterTestLeveL13(HighlightTester):
 
 
     def test_10(self):
-        self.assertHighlighted(
+        self.assertHighlightedChr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level13",lang='en')
