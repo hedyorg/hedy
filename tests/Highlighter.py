@@ -52,10 +52,7 @@ Abbreviation = {
 
 os.chdir(os.path.dirname(__file__) +"/..")
 
-# open data for regex
-file = open('tests/data.json') 
-dataRegex = json.load(file)
-file.close()
+
 
 
 class HighlightTester(unittest.TestCase):
@@ -121,6 +118,11 @@ class HighlightTester(unittest.TestCase):
 
 
     def getRules(self,level,lang="en"):
+
+        # open data for regex
+        file = open('highlighting/highlightingRules/highlighting-'+lang+'.json') 
+        dataRegex = json.load(file)
+        file.close()
 
         # get rules for the level
         Rules = [item for item in dataRegex if item['name']==level]
