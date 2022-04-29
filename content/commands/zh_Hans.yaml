@@ -1,42 +1,42 @@
 1:
--   explanation: "{Print}的意思是打印,用`{print}`可以打印一些东西."
-    example: "例如: {print} 你好欢迎来到Hedy!"
-    demo_code: "{print} 你好欢迎来到 Hedy!"
+-   explanation: "用`{print}`可以打印一些东西。"
+    example: "例如: {print} 你好欢迎来到海迪!"
+    demo_code: "{print} 你好欢迎来到海迪!"
     name: '{print}'
 -   explanation: "用`{ask}`提出问题。"
-    example: "例如: ask 你最喜欢的颜色是什么?"
-    demo_code: "ask 你最喜欢的颜色是什么?"
+    example: "例如: {ask}你最喜欢的颜色是什么?"
+    demo_code: "{ask} 你最喜欢的颜色是什么？"
     name: '{ask}'
--   explanation: "echo的意思是回声, 用echo可以重复执行某一任务."
-    example: "例如: echo 你最喜欢的颜色是什么 "
+-   explanation: "用`{echo}`可以重复执行某一任务。"
+    example: "例如: {echo} 所以你最喜欢的颜色是 "
     demo_code: |-
-        ask 你最喜欢的颜色是什么?
-        echo 你最喜欢的颜色是什么
+        {ask} 你最喜欢的颜色是什么？
+        {echo} 所以你最喜欢的颜色是
     name: '{echo}'
 -   name: '{print} 表情符号'
     explanation: 用 `{print}`打印一个表情符号
     example: '例如: {print} 🙋‍ 🌍 ❗'
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
-    explanation: 用 `{forward}`画一条线.
+    explanation: 用 `{forward}`画一条线。
     example: '例如: {forward} 100'
     demo_code: '{forward} 100'
 -   example: '例如: {turn}'
-    demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
     name: '{turn}'
     explanation: 用`{turn}`旋转海龟绘图
 2:
--   explanation: "用`{is}`来给一个词命名。你可以自己选择这个名字。"
+-   explanation: "用`{is}`来给一个词命名以便在程序中使用这个词。你可以自己选择这个名字。"
     example: "例如: 名字 {is} 海迪。"
     demo_code: |-
-        名字{is}海迪
-        {print}欢迎名字
+        名字 {is} 海迪
+        {print} 欢迎名字
     name: '{is}'
--   explanation: "用`{ask}`可以提出一些问题。 注意! 现在你需要用 `{is}`给问题的答案命名。"
-    example: "例如: 颜色 {is} {ask} 你最喜欢的颜色是什么?"
+-   explanation: "用`{ask}` 提出问题。 注意! 现在你需要用 '{is}' 给问题的答案命名。"
+    example: "例如: 颜色 {is} {ask} 你最喜欢的颜色是什么？"
     demo_code: |-
-        颜色 {is} {ask} 你最喜欢的颜色是什么?
-        {print} 颜色是我最喜欢的颜色!
+        颜色 {is} {ask} 你最喜欢的颜色是什么？
+        {print} 颜色是我最喜欢的颜色！
     name: '{ask}'
 -   name: '{sleep}'
     explanation: 让海迪（Hedy）暂停几秒钟。
@@ -97,8 +97,8 @@
     name: '{if}'
 -   name: '{if} 条件语句与海龟绘图'
     explanation: 用`{if}`条件语句进行选择
-    example: '例如： {if} 答案 {is} 距离远至 {forward} 100 {else} {forward} 5'
-    demo_code: "答案 {is} {ask} ‘我应该走多远？’\n{if} 答案 {is} 距离远至 {forward} 100 {else} {forward} 5"
+    example: '例如：{if} 答案 {is} 距离远至 {forward} 100 {else} {forward} 5'
+    demo_code: "答案 {is} {ask} '我应该走多远？'\n{if} 答案 {is} 距离远至 {forward} 100 {else} {forward} 5"
 -   name: '{in}'
     explanation: 用 `{in}`检查元素
     example: "例如: {if} 颜色 {in} 漂亮_颜色 {print} '漂亮!' {else} {print} '呵呵'"
