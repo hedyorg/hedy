@@ -60,12 +60,8 @@ function resetWindow() {
     resetWindow();
 
       if (tabName === 'quiz') {
-        // If the developers mode is still on -> reverse and THEN show the quiz tab
+        // If the developers mode is still on -> make sure we do show the tab
         if ($('#developers_toggle').is(":checked")) {
-          $('#developers_toggle').prop('checked', false);
-          $('#editor-area').addClass('mt-5');
-          $('#code_editor').height('22rem');
-          $('#code_output').height('22rem');
           $('#adventures-tab').show();
         }
       $ ('#adventures-tab').css('height', '');
@@ -75,6 +71,11 @@ function resetWindow() {
       $ ('#editor-area').hide ();
       $('#developers_toggle_container').hide ();
       return;
+    }
+
+    // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
+    if ($('#developers_toggle').is(":checked")) {
+      $('#adventures-tab').hide();
     }
     $ ('#adventures-tab').css('max-height', '20em')
     $('#developers_toggle_container').show ();
