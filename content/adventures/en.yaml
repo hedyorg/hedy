@@ -3050,28 +3050,28 @@ adventures:
                         {print} spot_4 spot_5 spot_6
                         {print} spot_7 spot_8 spot_9
                         {print} ' '
-                        {if} spot_1 == spot_2 {and} spot_2 == spot_3:
+                        {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':
                             {print} 'Player ' sign ' wins!'
                             game = 'over'
-                        {elif} spot_4 == spot_5 {and} spot_5 == spot_6:
+                        {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':
                             {print} 'Player ' sign ' wins!'
                             game = 'over'
-                        {elif} spot_7 == spot_8 {and} spot_8 == spot_9:
+                        {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':
                             {print} 'Player ' sign ' wins!'
                             game = 'over'
-                        {elif} spot_1 == spot_4 {and} spot_4 == spot_7:
+                        {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':
                             {print} 'Player ' sign ' wins!'
                             game = 'over'
-                        {elif} spot_2 == spot_5 {and} spot_5 == spot_8:
+                        {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':
                             {print} 'Player ' sign ' wins!'
                             game = 'over'
-                        {elif} spot_3 == spot_6 {and} spot_6 == spot_9:
+                        {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':
                             {print} 'Player ' sign ' wins!'
                             game = 'over'
-                        {elif} spot_1 == spot_5 {and} spot_5 == spot_9:
+                        {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':
                             {print} 'Player ' sign ' wins!'
                             game = 'over'
-                        {elif} spot_3 == spot_5 {and} spot_5 == spot_7:
+                        {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':
                             {print} 'Player ' sign ' wins!'
                             game = 'over'
                         {else}:
