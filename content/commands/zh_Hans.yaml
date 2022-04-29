@@ -63,8 +63,8 @@
     explanation: 从一个列表中移除一个项目
 4:
 -   explanation: "打印的内容要用单引号标注清楚"
-    example: "例如: {print} ‘你好欢迎来到海迪。’"
-    demo_code: "{print} ‘你好欢迎来到海迪。’"
+    example: "例如: {print} '你好欢迎来到海迪。'"
+    demo_code: "{print} '你好欢迎来到海迪。'"
     name: '{print}'
 -   explanation: "给一段文本命名并不带单引号`{print}`出这段文本"
     example: "例如: 名字 {is} 海迪。"
@@ -73,27 +73,27 @@
         {print} ‘我的名字是 ’ 名字
     name: '{is}'
 -   explanation: "用 `{ask}`提出问题。"
-    example: "例如：颜色 {is} {ask} ‘你最喜欢的颜色是什么？’"
+    example: "例如：颜色 {is} {ask} '你最喜欢的颜色是什么？'"
     demo_code: |-
-        颜色 {is} {ask} ‘你最喜欢的颜色是什么？’
-        {print} 颜色‘是你最喜欢的颜色！’
+        颜色 {is} {ask} '你最喜欢的颜色是什么？'
+        {print} 颜色'是你最喜欢的颜色！'
     name: '{ask}'
 5:
 -   explanation: "打印的内容要用单引号标注清楚"
-    example: "例如: {print} ‘你好欢迎来到海迪。’"
-    demo_code: "{print} ‘你好欢迎来到海迪。’"
+    example: "例如: {print} '你好欢迎来到海迪。'"
+    demo_code: "{print} '你好欢迎来到海迪。'"
     name: '{print}'
 -   explanation: "用`{ask}`提出问题。"
-    example: "例如：颜色 {is} {ask} ‘你最喜欢的颜色是什么？’"
+    example: "例如：颜色 {is} {ask} '你最喜欢的颜色是什么？'"
     demo_code: |-
-        颜色 {is} {ask} ‘你最喜欢的颜色是什么？’
-        {print} 颜色‘是你最喜欢的颜色！’
+        颜色 {is} {ask} '你最喜欢的颜色是什么？'
+        {print} 颜色'是你最喜欢的颜色！'
     name: '{ask}'
 -   explanation: "用`{if}`条件语句进行选择"
     example: "例如: {if} 颜色 {is} 绿色 {print} '漂亮!' {else} {print} '呵呵'"
     demo_code: |-
-        颜色 {is} {ask} ‘你最喜欢的颜色是什么？’
-        {if} 颜色{is}绿色 {print} ‘漂亮！’ {else} {print} ‘呵呵’
+        颜色 {is} {ask} '你最喜欢的颜色是什么？'
+        {if} 颜色{is}绿色 {print} '漂亮！' {else} {print} '呵呵'
     name: '{if}'
 -   name: '{if} 条件语句与海龟绘图'
     explanation: 用`{if}`条件语句进行选择
@@ -102,11 +102,11 @@
 -   name: '{in}'
     explanation: 用 `{in}`检查元素
     example: "例如: {if} 颜色 {in} 漂亮_颜色 {print} '漂亮!' {else} {print} '呵呵'"
-    demo_code: "漂亮_颜色 {is} 绿色，黄色\n颜色 {is} {ask} ‘什么 {is} 你最喜欢的颜色？’\n{if} 颜色 {in} 漂亮_颜色 {print} ‘漂亮！' {else} {print} ‘呵呵’"
+    demo_code: "漂亮_颜色 {is} 绿色，黄色\n颜色 {is} {ask} '什么 {is} 你最喜欢的颜色？'\n{if} 颜色 {in} 漂亮_颜色 {print} '漂亮！' {else} {print} '呵呵'"
 6:
 -   explanation: "打印的内容要用单引号标注清楚"
     example: "例如: {print} '5乘以5等于 ' 5 * 5"
-    demo_code: "{print}‘5乘以5等于 5 * 5’"
+    demo_code: "{print}'5乘以5等于 5 * 5'"
     name: '{print}'
 -   explanation: "用{ask} 提问计算题的答案然后检查答案是否正确。"
     example: "例如：答案 {is} {ask} ‘10加10等于几?’"
@@ -123,13 +123,13 @@
         {forward} 50
 7:
 -   explanation: "打印的内容要用单引号标注清楚"
-    example: "例如: {print} ‘你好欢迎来到海迪。’"
-    demo_code: "{print} ‘你好欢迎来到海迪。’"
+    example: "例如: {print} '你好欢迎来到海迪。'"
+    demo_code: "{print} '你好欢迎来到海迪。'"
     name: '{print}'
 -   explanation: "用`{ask}`提出问题。"
-    example: "例如: 颜色 = {ask} ‘你最喜欢的颜色是什么？’"
+    example: "例如: 颜色 = {ask} '你最喜欢的颜色是什么？'"
     demo_code: |-
-        颜色 = {ask } '你最喜欢的颜色是什么?'
+        颜色 = {ask} '你最喜欢的颜色是什么?'
         {print} 颜色 '是我最喜欢的颜色！'
     name: '{ask}'
 -   explanation: "用`{if}`条件语句进行选择"
@@ -146,7 +146,7 @@
 8:
 -   explanation: "打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
     example: "例如: {print} '5乘以5等于 ' 5 * 5"
-    demo_code: "{print}‘5乘以5等于 5 * 5’"
+    demo_code: "{print} '5乘以5等于 5 * 5'"
     name: '{print}'
 -   explanation: "使用ask提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。"
     example: "例如: 答案 {is} {ask} '5加5等于几?'"
@@ -185,8 +185,8 @@
 10:
 -   name: "{print}"
     explanation: "打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
-    example: "例如：{print}‘5乘以5等于 5 * 5’"
-    demo_code: "{print}‘5乘以5等于 5 * 5’"
+    example: "例如：{print} '5乘以5等于 5 * 5'"
+    demo_code: "{print} '5乘以5等于 5 * 5'"
 -   name: "{for} 循环语句和一个列表"
     explanation: "打印一个列表中的所有内容 "
     example: "例如: {for} 动物 {in} 动物"
@@ -343,13 +343,13 @@
         {print} '无论是否准备好，我都会来的!'
     name: '{print}'
 -   explanation: "我们需要对所有的‘{if}’条件语句做同样的处理"
-    example: "如果颜色{is}绿色：‘"
+    example: "如果颜色{is}绿色："
     demo_code: |-
-        颜色 = {ask} ‘你最喜欢的颜色是什么？’
-        {if} 颜色 == ‘绿色’：
-            {print} ‘你最喜欢的颜色是绿色’
+        颜色 = {ask} '你最喜欢的颜色是什么？'
+        {if} 颜色 == '绿色':
+            {print} '你最喜欢的颜色是绿色'
         {else}:
-            {print} ‘你最喜欢的颜色不是绿色’
+            {print} '你最喜欢的颜色不是绿色'
     name: '{if}'
 18:
 -   name: "{print}"
