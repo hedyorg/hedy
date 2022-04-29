@@ -7,35 +7,26 @@ adventures:
         levels:
             1:
                 story_text: |
-                    欢迎来到海迪!你可以使用在第1级学习内容中的命令print, ask 和 echo.
+                    ## 欢迎来到海迪！
+                    在第1级学习内容中你可以使用命令`{print}`, `{ask}` 和 `{echo}`。
+                    在编程栏里面输入你的代码。或者按下代码范例框里面的绿色按钮, 代码就会为你打出来!
+                    使用左边编程栏下的绿色 “运行代码” 按钮, 你可以尝试运行你的代码。
 
-                    在左边的命令栏里，你可以看到第1级学习内容中的所有的命令.
+                    你可以使用`{print}`命令将文本打印到屏幕上。
 
-                    按下蓝色的按钮, 代码就会为你打出来!
-
-                    使用左边编程栏下的绿色 “运行代码” 按钮, 你可以尝试运行这段代码.
-
-                    不知道自己想要创建些什么？你也许能在下面的内容里面找到灵感. 
-
-                start_code: "print 你好世界!"
+                start_code: "{print} 你好世界!"
                 example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-                story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_2: "您还可以使用 `{ask}` 请求输入问题，然后使用 `{echo}` 命令重复问题。\n"
                 example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
             2:
                 story_text: |
-                    在第2级学习内容中,我们会学习新的内容. 你可以用`is`来命名一个词.
+                    ## 变量
+                    在第2级中，我们学习了两个新的命令：`{is}`和`{sleep}`。
+                    你可以用`{is}`命名一个词。这被称为一个变量。在这个例子中，我们定义了一个变量“名字”和另外一个变量“年龄”。你可以在代码中的任何地方使用“名字”这个词，它将被“海迪”替换，就像这样：
 
-                    如果你使用代码 `name is 海迪`, 你可以在程序的任何地方使用name这个词,并且name这个词会被'海迪'这个词所取代.
-
-                    注意: ask已被改变, 你可以命名这个问题的答案并保存, 就像这样:
-
-                    ```
-                    answer is ask 你的名字是什么?
-                    ```
-
-                    `print` 的使用方法仍旧如同在第1级中一样, 不过你不再需要`echo`了.
-                start_code: "print 你好世界!"
+                    这样，你就不再需要`{echo}`命令了!
+                start_code: "{print} 你好世界!"
                 example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
@@ -43,20 +34,14 @@ adventures:
                 example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
             3:
                 story_text: |
-                    在第3级你也可以创建一个列表. 你可以让计算机从列表中随机选择一些东西. 你可以用`at random`来完成这个任务.
-
-                    ```
-                    animals is 狗, 猫, 袋鼠
-                    print animals at random
-                    ```
-
-                    你可以在左边的命令栏里面找到第2级学习内容的所有命令. 还有作业题目栏.
-                start_code: "print 你好世界!"
+                    ## 创建一个列表！
+                    在第3级你也可以创建一个列表。你可以让计算机从列表中随机选择一些项目。您可以使用 `{at} {random}` 执行此操作。
+                start_code: "{print} 你好世界!"
                 example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
                 story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
                 example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
-                start_code: "print '你好世界'"
+                start_code: "{print} '你好世界'"
                 story_text: |
                     在第3级目标中`ask`的使用方法仍旧如同在第2级中一样, 但是现在 `print` 的使用方法有所不同了.
 
