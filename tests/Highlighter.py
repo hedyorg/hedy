@@ -57,7 +57,7 @@ class HighlightTester(unittest.TestCase):
         
         rules  = self._getRules(level,lang)
 
-        result = self._simulateRulesWithToken(rules,code)
+        result = self.simulateRulesWithToken(rules,code)
 
         valid, indError = self.check(result,expected)
         if not valid:
@@ -172,7 +172,7 @@ class HighlightTester(unittest.TestCase):
     # This function simulates the operation of Ace on a
     # string provided as input, and "colors" it using the variable Tokencode.
 
-    def _simulateRulesWithToken(self,Rules,code):
+    def simulateRulesWithToken(self,Rules,code):
         # Initialisation Output
         Output = ""
         for c in code:
