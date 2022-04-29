@@ -177,7 +177,7 @@
             print 'The answer is 20'
 -   name: "`repeat` and turtle"
     explanation: "Repeat multiple lines"
-    example: "Example: create a square"
+    example: "例如：创建一个正方形"
     demo_code: |-
         repeat 4 times
             turn 90
@@ -196,15 +196,15 @@
           {print} '我爱 ' 动物
 11:
 -   explanation: "我们用 `{for}` 和一个 {range}"
-    example: "给计数器变量赋值 {in} {range} 1 {to} 5"
+    example: "设置计数器变量循环范围 {in} {range} 1 {to} 5"
     demo_code: |-
-        {for} 计数器变量赋值 {in} {range} 1 {to} 5
+        {for} 计数器变量循环范围 {in} {range} 1 {to} 5
             {print} 计数器变量的值
     name: '{for} 循环'
--   example: "Example: answer = {ask} 'What is 5 plus 5?'"
-    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+-   example: "例如：答案 = {ask} '5加5等于几？'"
+    demo_code: "答案 = {ask} '5加5等于几?'\n{if} 答案 {is} 10\n    {print} '做得好!'\n    {print} '的确, 答案就是 ' answer\n否则\n    {print} '糟糕!'\n    {print} '答案就是 10'"
     name: '{ask}'
-    explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    explanation: 使用ask提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。
 12:
 -   name: "float directly"
     explanation: "Decimal numbers"
