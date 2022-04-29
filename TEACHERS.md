@@ -3,6 +3,7 @@ Teacher functionalities
 
 Hedy supports a lot of exciting features specially aimed at teachers to help them teaching Hedy.
 As the amount of features keeps growing this document is used as a guideline and overview of all available Teacher features.
+This document is updated when new functionality is added and should contain an up-to-date version of all possibilities.
 
 Introduction
 ================
@@ -20,7 +21,8 @@ Teachers have additional functionalities over _normal_ users. All functionality 
     - Enable multiple mail-less account creation
     - Automatic class enrollment
 
-### Class management
+Class management
+================
 Teachers are able to create and manage personal classes. On the `/for-teachers` page there is a section called _My classes_.
 A new class with a custom name can be created using the "_Create a class_" button. After class creation you are re-directed to the _Class overview_.
 This page has all relevant information for the current class. Divided in students overview tabls and several buttons. Currently the following functionalities are supported:
@@ -39,7 +41,28 @@ When inviting a student the corresponding username should be entered. Accounts a
 When sent the students can find their invite under the _messages_ section, found on the `/my-profile` page.
 Invitations have an expiration date of **7 days**.
 
-### Adventure creation
+### Customize class
+Teachers are able to customize classes to limit functionalities for the students. 
+They can visit the _class customizations_ by clicking the "_Customize class_" button on the class overview page.
+All levels can be hidden/show as well as all adventures. Enabling teacher to enforce students to work on specific programs and don't get distracted easily.
+Levels can be given a specific _opening date_, enabling teachers to set the customizations once and, for example, open a new level each week.
+Lastly several relevant teaching customizations are supported, which are currently:
 
-### Multiple account creation
+- Enforced developer's mode
+- Hiding/showing cheatsheet
+- Hiding/showing keyword language switcher
+- Hiding/showing quiz adventure
+
+### Class statistics
+Teachers are able to view class statistics by pressing the "_Class statistics_" button on the class overview page.
+The statistics page contains an overview of several relevant statistics such as _runs per level_ and _error rate_.
+There are also statistics per week and divided by different errors, giving teachers more insight in their students struggles.
+Lastly, teachers are able to filter the _logs_ on date, level or specific student to get even more insights!
+
+Adventure creation
+================
+
+
+Multiple account creation
+================
 
