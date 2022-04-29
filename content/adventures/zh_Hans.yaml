@@ -111,7 +111,7 @@ adventures:
                 example_code: "## Example Hedy code\n```\n{repeat} 3 {times} {print} 'Hedy {is} fun!'\n```\n"
             8:
                 start_code: |-
-                    {repeat}5 {times}
+                    {repeat} 5 {times}
                         {print} '大家好'
                         {print} '这句话将被打印5次'
                 story_text: |
@@ -152,8 +152,8 @@ adventures:
             10:
                 start_code: |-
                     动物 {is} 狗，猫，泡泡鱼
-                    {for} 动物 {in} 动物
-                      {print} '我爱 ' 动物
+                    {for} animal {in} 动物
+                      {print} '我爱 ' animal
                 story_text: |
                     In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
                     `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
