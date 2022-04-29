@@ -59,9 +59,9 @@ class HighlightTester(unittest.TestCase):
 
     def assertHighlightedChr(self,code,expected,level,lang="en"):
         
-        rules  = self.getRules(level,lang)
+        rules  = self._getRules(level,lang)
 
-        result = self.simulateRulesWithoutToken(rules,code)
+        result = self._simulateRulesWithToken(rules,code)
 
         valid, indError = self.check(result,expected)
         if not valid:
@@ -69,7 +69,7 @@ class HighlightTester(unittest.TestCase):
             print("In this code :",code.replace("\n","\\n"))
             print("We want      :",expected.replace("\n","\\n"))
             print("We have      :",result.replace("\n","\\n"))
-            print("At           :"," "* indError + "^")
+            print("At           :"," " * indError + "^")
         self.assertTrue(valid)
 
 
@@ -104,7 +104,7 @@ class HighlightTester(unittest.TestCase):
         self.assertHighlightedChr(code,expected,level,lang)
 
 
-    def getRules(self,level,lang="en"):
+    def _getRules(self,level,lang="en"):
 
         # open data for regex
         file = open('highlighting/highlightingRules/highlighting-'+lang+'.json') 
@@ -164,57 +164,67 @@ class HighlightTester(unittest.TestCase):
     # This function simulates the operation of Ace on a
     # string provided as input, and "colors" it using the variable Tokencode.
 
-    # Be careful, this function only works when the coloring
-    # uses only one state in its automaton (`start`)
-
-    def simulateRulesWithoutToken(self,rules,code):
-        # we initialize the result variable
+    def _simulateRulesWithToken(self,Rules,code):
+        # Initialisation Output
         Output = ""
         for c in code:
             if c == "\n": Output += "\n"
             else: Output += " "
 
-        # We go through all the rules 
-        regRule = rules["start"]
-        for reg in regRule:
+        # Initialisation variables
+        currentState = "start"
+        currentPosition = 0
 
-            # for each rule, we create the regex
-            regComp = re.compile(reg["regex"], re.MULTILINE)
+        flag = False
+        while not flag:
 
-            # In case the rule does not use several groups
-            if type(reg['token']) == str or len(reg['token']) == 1:
+            # search for the transition that we will use
+            currentMatch = None
+            NEXT = {"rule":None,"match":None}
+            FIND = False
+            nextPos = len(code) + 42
+            for rule in Rules[currentState]:
 
-                # we get the type of the syntactic coloring
-                if  type(reg['token']) == str : Tokcode = Tokencode[reg['token']]
-                else: Tokcode = Tokencode[reg['token'][0]]
+                regexCompile = re.compile(rule['regex'], re.MULTILINE)
+                match = regexCompile.search(code,currentPosition)
+
+                if match:
+                    if match.start() < nextPos :
+                        nextPos = match.start()
+                        NEXT["rule"] = rule
+                        NEXT["match"] = match
+                        FIND = True
 
 
-                for match in regComp.finditer(code):
-                    # For each match, we see if this sequence has already been used
-                    if self._notYetUsed(Output[match.start():match.end()]):
+            if FIND :
 
-                        start  = match.start()
-                        length = match.end() - start
+                # Application of coloring on the code
+                currentRule,currentMatch = NEXT["rule"],NEXT["match"]
+        
+                if type(currentRule['token']) == str :
+                    currentRule['token'] = [currentRule['token']]
+        
+                if re.compile(currentRule['regex'], re.MULTILINE).groups == 0:
+                    tok = currentRule['token'][0]
+                    start = currentMatch.start()
+                    length = currentMatch.end() - currentMatch.start()
+                    Output = Output[:start] + Tokencode[tok] * length + Output[start + length:]
 
-                        # we replace in the output spaces by the token
-                        Output = Output[:start] + Tokcode * length + Output[start + length:]
+                else:
+                    pos = currentMatch.start()
+                    for i,submatch in enumerate(currentMatch.groups()):    
+                        tok = currentRule['token'][i%len(currentRule['token'])]        
+                        Output = Output[:pos] + Tokencode[tok] * len(submatch) + Output[pos + len(submatch):]
+                        pos += len(submatch)
 
+                currentPosition = currentMatch.end()
+                currentState = currentRule['next']
 
-            else: # In case the rule uses several groups
-
-                for match in regComp.finditer(code):
-                    # For each match, we see if this sequence has already been used
-                    if self._notYetUsed(Output[match.start():match.end()]):
-
-                        pos = match.start()
-                        for i,submatch in enumerate(match.groups()):
-                            # For each of the subgroups of the match
-                            # we replace the spaces by the coloring code
-                            tok = reg['token'][i%len(reg['token'])]
-                            Output = Output[:pos] + Tokencode[tok] * len(submatch) + Output[pos + len(submatch):]
-                            pos += len(submatch)
+            else:
+                flag = True
 
         return Output
+
 
 
     # This function allows to check 2 syntactic colorations one desired
@@ -247,14 +257,6 @@ class HighlightTester(unittest.TestCase):
         return True,-1
 
 
-
-
-    # Returns whether a portion of the string has already been " highlighted ".
-    def _notYetUsed(self,string):
-        for c in string:
-            if c not in [" ","\n"]:
-                return False
-        return True
 
     #######################################################################################
     #######################################################################################
