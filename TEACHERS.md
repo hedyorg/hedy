@@ -44,7 +44,7 @@ Invitations have an expiration date of **7 days**.
 ### Customize class
 Teachers are able to customize classes to limit functionalities for the students. 
 They can visit the _class customizations_ by clicking the "_Customize class_" button on the class overview page.
-All levels can be hidden/show as well as all adventures. Enabling teacher to enforce students to work on specific programs and don't get distracted easily.
+All levels can be hidden/show as well as all adventures, custom adventures can be added on this page as well. Enabling teacher to enforce students to work on specific programs and don't get distracted easily.
 Levels can be given a specific _opening date_, enabling teachers to set the customizations once and, for example, open a new level each week.
 Lastly several relevant teaching customizations are supported, which are currently:
 
@@ -61,8 +61,13 @@ Lastly, teachers are able to filter the _logs_ on date, level or specific studen
 
 Adventure creation
 ================
-
+In addition to class customizations teachers are also able to create their own adventures.
 
 Multiple account creation
 ================
+When using Hedy in the classroom it can be cumbersome that all students manually have to create an account and join your class.
+Therefore, we support "_Multiple account creation_" which can be found in the "_Make student accounts_" section on the class overview page.
+Teachers are able to easily create multiple accounts by only providing a username and password, also giving the option to automatically add these students to a class.
+Student accounts don't need a mail address as they are connected to the teacher account and mails such as _password reset_ are sent to the teacher.
+
 
