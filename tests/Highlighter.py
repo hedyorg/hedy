@@ -188,7 +188,7 @@ class HighlightTester(unittest.TestCase):
 
             # search for the transition that we will use
             currentMatch = None
-            NEXT = {"rule":None,"match":None}
+            NEXT = {"rule":{},"match":None}
             FIND = False
             nextPos = len(code) + 42
             for rule in Rules[currentState]:
