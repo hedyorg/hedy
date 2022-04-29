@@ -6,9 +6,6 @@ import unittest
 from tests.Tester import HedyTester, Snippet
 from parameterized import parameterized
 
-# file is called tests_z_ so they are executed last
-# because programs are more of a priority than level defaults, which change less and take longer to run
-
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
@@ -41,14 +38,18 @@ def collect_snippets(path):
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/commands')]
 
-lang = None #useful if you want to test just 1 language
-if lang:
-    Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language == lang]
+# lang = 'de' #useful if you want to test just 1 language
+# if lang:
+#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
 
 # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
 keywords = YamlFile.for_file('../../content/keywords/en.yaml').to_dict()
 for snippet in Hedy_snippets:
-    snippet[1].code = snippet[1].code.format(**keywords)
+    try:
+        snippet[1].code = snippet[1].code.format(**keywords)
+    except KeyError:
+        print("This following snippet contains an invalid placeholder ...")
+        print(snippet)
 
 
 class TestsCommandPrograms(unittest.TestCase):
