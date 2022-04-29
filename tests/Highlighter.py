@@ -50,10 +50,6 @@ Abbreviation = {
     "I"                   : "I",
 }
 
-os.chdir(os.path.dirname(__file__) +"/..")
-
-
-
 
 class HighlightTester(unittest.TestCase):
 
@@ -118,6 +114,7 @@ class HighlightTester(unittest.TestCase):
     def _getRules(self,level,lang="en"):
 
         # open data for regex
+        os.chdir(os.path.dirname(__file__) +"/..")
         file = open('highlighting/highlightingRules/highlighting-'+lang+'.json') 
         dataRegex = json.load(file)
         file.close()
