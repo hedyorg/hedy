@@ -1,7 +1,4 @@
 // It's important that this file gets loaded first
-import './syntaxLang-en';
-import './syntaxLang-es';
-import './syntaxLang-nl';
 import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
@@ -814,6 +811,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     __future__: Sk.python3,
     timeoutMsg: function () {
       // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+      $('#stopit').hide();
+      $('#runit').show();
       if (Sk.execLimit != 1) {
         pushAchievement("hedy_hacking");
         return ErrorMessages ['Program_too_long'];
