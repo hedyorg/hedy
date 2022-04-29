@@ -377,14 +377,20 @@ export function remove_customizations(class_id: string, prompt: string) {
             contentType: 'application/json',
             dataType: 'json'
         }).done(function (response) {
-            modal.alert(response.success, 3000, false);
             $('#remove_customizations_button').addClass('hidden');
-            $('.adventure_level_input').prop('checked', false);
+            $('.adventure_level_input').show();
+            $('.adventure_level_input').prop('checked', true);
             $('.teacher_adventures_checkbox').prop('checked', false);
             $('.other_settings_checkbox').prop('checked', false);
-            $('.level-select-button').removeClass('green-btn');
-            $('.level-select-button').addClass('blue-btn');
-            $('.opening_date_container').addClass('hidden');
+            $('.level-select-button').removeClass('blue-btn');
+            $('.level-select-button').addClass('green-btn');
+            $('.opening_date_container').removeClass('hidden');
+
+            // Remove the value from all input fields -> reset to text to show placeholder
+            $('.opening_date_input').prop("type", "text");
+            $('.opening_date_input').blur();
+            $('.opening_date_input').val('');
+            modal.alert(response.success, 3000, false);
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
         });
