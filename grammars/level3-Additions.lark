@@ -9,9 +9,9 @@ list_access: var_access _AT (INT | random) -> list_access //todo: could be merge
 turtle: _FORWARD ((NEGATIVE_NUMBER | NUMBER | list_access | textwithoutspaces))? -> forward | _TURN ((NEGATIVE_NUMBER | NUMBER | list_access | textwithoutspaces))? -> turn
 
 // lists are introduced and list separators (comma and arabic comma) have to excluded from text.
-text: /([^\n!?.،,]+)/ -> text
+text: /([^\n!?.،,，]+)/ -> text
 text_ask: /([^\n!?.]+)/ -> text // the ask command is an exception since it needs to include commas in its value
-text_list: /([^\n,،]+)/ -> text // list elements are another exception since they can contain punctuation but not list separators
+text_list: /([^\n,،，]+)/ -> text // list elements are another exception since they can contain punctuation but not list separators
 
 // FH, jan 22: not exactly sure why this works, while textwithoutspaces parses the whole line in add/remove
 // leaving this for now
