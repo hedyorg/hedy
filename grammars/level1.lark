@@ -1,7 +1,7 @@
 //symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
 
 _SPACE: " "+
-_COMMA: _SPACE? (","|"،") _SPACE? //support latin and arabic comma;s and always allow these to be surrounded by spaces
+_COMMA: _SPACE? (","|"،"|"，") _SPACE? //support latin and arabic and Chinese commas and always allow these to be surrounded by spaces
 _COLON: ":"
 _LEFT_BRACKET : _SPACE? "(" _SPACE?
 _RIGHT_BRACKET : _SPACE? ")" _SPACE?
@@ -18,7 +18,7 @@ _LARGER_EQUALS: _SPACE? ">=" _SPACE?
 _EXCLAMATION_MARK: "!"
 _QUESTION_MARK: "?"
 _PERIOD: "."
-_SINGLE_QUOTE: "'"
+_SINGLE_QUOTE: "'" | "‘" | "’"
 _DOUBLE_QUOTE: "\""
 _QUOTE: _SINGLE_QUOTE | _DOUBLE_QUOTE
 _PLUS: _SPACE? "+" _SPACE?
