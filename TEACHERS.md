@@ -25,7 +25,7 @@ We separate the features into three majors parts:
 ## Class management
 Teachers are able to create and manage personal classes. On the `/for-teachers` page there is a section called _My classes_.
 A new class with a custom name can be created using the "_Create a class_" button. After class creation you are re-directed to the _Class overview_.
-This page has all relevant information for the current class. Divided in students overview tabls and several buttons. Currently the following functionalities are supported:
+This page has all relevant information for the current class. Divided in students overview table and several buttons. Currently, the following functionalities are supported:
 
 - Customize class
 - Rename class
@@ -36,6 +36,7 @@ This page has all relevant information for the current class. Divided in student
 Within the students overview table general information on all students can be found. Such as _last login_, _highest level_ and _amount of programs_.
 This table view is customizable with the corresponding header checkboxes at the top of the table. 
 Teachers are also able to change the password of one of their students or remove them from the class all together.
+Lastly, teachers are able to view all the student programs shared or not.
 
 When inviting a student the corresponding username should be entered. Accounts are only able to have one pending invite at a time.
 When sent the students can find their invite under the _messages_ section, found on the `/my-profile` page.
