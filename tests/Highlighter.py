@@ -65,11 +65,22 @@ class HighlightTester(unittest.TestCase):
 
         valid, indError = self.check(result,expected)
         if not valid:
+
+            st = 0
+            ind = indError
+            if indError >= 40 :
+                st = indError - 40
+                ind = 40
+            end = len(code)
+            if len(code) >= indError + 40:
+                end = indError + 40
+
+
             print("ERROR in level {} in {}:".format(level, lang))
-            print("In this code :",code.replace("\n","\\n"))
-            print("We want      :",expected.replace("\n","\\n"))
-            print("We have      :",result.replace("\n","\\n"))
-            print("At           :"," " * indError + "^")
+            print("In this code :",code.replace("\n","\\n")[st:end])
+            print("We want      :",expected.replace("\n","\\n")[st:end])
+            print("We have      :",result.replace("\n","\\n")[st:end])
+            print("At           :"," " * ind + "^")
         self.assertTrue(valid)
 
 
