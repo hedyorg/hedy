@@ -1,0 +1,366 @@
+1:
+-   explanation: "Print的意思是打印,用print可以打印一些东西."
+    example: "例如: print 你好欢迎来到Hedy!"
+    demo_code: "print 你好欢迎来到 Hedy!"
+    name: '{print}'
+-   explanation: "Ask的意思是提问, 用ask可以提出一些问题."
+    example: "例如: ask 你最喜欢的颜色是什么?"
+    demo_code: "ask 你最喜欢的颜色是什么?"
+    name: '{ask}'
+-   explanation: "echo的意思是回声, 用echo可以重复执行某一任务."
+    example: "例如: echo 你最喜欢的颜色是什么 "
+    demo_code: |-
+        ask 你最喜欢的颜色是什么?
+        echo 你最喜欢的颜色是什么
+    name: '{echo}'
+-   name: '{print} 表情符号'
+    explanation: 用 `{print}`打印一个表情符号
+    example: '例如: {print} 🙋‍ 🌍 ❗'
+    demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{forward}'
+    explanation: 用 `{forward}`画一条线.
+    example: '例如: {forward} 100'
+    demo_code: '{forward} 100'
+-   example: '例如: {turn}'
+    demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    name: '{turn}'
+    explanation: 用`{turn}`旋转绘图海龟
+2:
+-   explanation: "用`{is}`来给一个词命名。你可以自己 这个名字。"
+    example: "Example: name is 海迪."
+    demo_code: |-
+        name is 海迪
+        print 欢迎 name
+    name: '{is}'
+-   explanation: "Ask的意思是提问, 用`{ask}`可以提出一些问题。 注意! 现在你需要用 `{is}`给问题的答案命名。"
+    example: "例如: color {is} {ask} 你最喜欢的颜色是什么?"
+    demo_code: |-
+        颜色 {is} {ask} 你最喜欢的颜色是什么?
+        {print} 颜色是我最喜欢的颜色!
+    name: '{ask}'
+-   name: '{sleep}'
+    explanation: 让海迪（Hedy）暂停几秒钟。
+    example: '例如: {sleep} 2 '
+    demo_code: "{print} 让我考虑一秒钟......\n{sleep}\n{print} 嗯，我还需要3秒钟.....\n{sleep} 3\n{print} 找到了！我找到了！"
+-   demo_code: "角度 {is} 90\n{turn} 角度\n{forward} 100"
+    name: 是 - 海龟
+    example: '例如：角度 {is} 90'
+    explanation: 用 `{is}`给一个数字命名。 你可以自己选择这个名字。
+3:
+-   explanation: "用`at` and `random`可以从一组词汇中随机选择一个词"
+    example: "例如: animals {is} 狗，猫，袋鼠。"
+    demo_code: |-
+        动物 {is} 狗，猫，袋鼠
+        {print} 动物 {at} {random}
+    name: 选择_随机
+-   name: '{add}'
+    explanation: 将一个项目添加到一个列表中
+    example: '例如: {add} 狗 {to_list} 动物'
+    demo_code: "动物 {is} 奶牛，猫\n{add} 狗 {to_list} 动物"
+-   example: '例如: {remove} 狗 {from} 动物'
+    demo_code: "动物 {is} 猫，狗，奶牛\n{remove} 狗 {from} 动物"
+    name: '{remove}'
+    explanation: 从一个列表中移除一个项目
+4:
+-   explanation: "打印的时候要准确的使用单引号"
+    example: "例如: {print} '你好欢迎来到海迪。'"
+    demo_code: "{print} '你好欢迎来到海迪。'"
+    name: '{print}'
+-   explanation: "给一段文本命名并不带单引号`{print}`出这段文本"
+    example: "例如: 名字 {is} 海迪。"
+    demo_code: |-
+        名字 {is} 海迪
+        {print} '我的名字是 ' 名字
+    name: '{is}'
+-   explanation: "用 `{ask}`提出问题。"
+    example: "例如: 颜色 {is} {ask} '你最喜欢的颜色是什么？'"
+    demo_code: |-
+        颜色 {is} {ask} '你最喜欢的颜色是什么?'
+        {print} 颜色 '是你最喜欢的颜色！'
+    name: '{ask}'
+5:
+-   explanation: "打印的时候要准确的使用单引号"
+    example: "例如: {print} '你好欢迎来到海迪。'"
+    demo_code: "{print} '你好欢迎来到海迪。'"
+    name: '{print}'
+-   explanation: "用`{ask}`可以提出问题."
+    example: "例如：颜色 {is} {ask} '你最喜欢的颜色是什么？'"
+    demo_code: |-
+        颜色 {is} {ask} '你最喜欢的颜色是什么？'
+        {print} 颜色'是你最喜欢的颜色！'
+    name: '{ask}'
+-   explanation: "用 `{if}`条件语句进行选择"
+    example: "例如: {if} 颜色{is} 绿色 {print} '漂亮！' {else} {print} '呵呵'"
+    demo_code: |-
+        颜色 {is} {ask} '你最喜欢的颜色是什么？'
+        {if} 颜色 {is} 绿色 {print} '漂亮！' {else} {print} '呵呵'
+    name: '{if}'
+-   name: '{if}条件语句与海龟绘图'
+    explanation: 用`{if}`条件语句进行选择
+    example: '例如： {if} 答案 {is} 距离远至 {forward} 100 {else} {forward} 5'
+    demo_code: "答案 {is} {ask} '我应该走多远？'\n{if} 答案 {is} 距离远至 {forward} 100 {else} {forward} 5"
+-   name: '{in}'
+    explanation: 用 `{in}`检查元素
+    example: "例如: {if} 颜色 {in} 漂亮_颜色 {print} '漂亮!' {else} {print} '呵呵'"
+    demo_code: "漂亮_颜色 {is} 绿色，黄色\n颜色 {is} {ask} '什么 {is} 你最喜欢的颜色？'\n{if} 颜色 {in} 漂亮_颜色 {print} '漂亮！' {else} {print} '呵呵'"
+6:
+-   explanation: "打印的时候要用单引号标注清楚"
+    example: "例如: {print} '5乘以5等于 ' 5 * 5"
+    demo_code: "{print} '5乘以5等于 ' 5 * 5"
+    name: '{print}'
+-   explanation: "用{ask} 提问计算题的答案然后检查答案是否正确。"
+    example: "例如：答案 {is} {ask} '10加10等于几?'"
+    demo_code: |-
+        答案 = {ask} '10加10等于几?'
+        {if} 答案 {is} 20 {print} '做得好!' {else} {print} '糟糕,算错啦'
+    name: '{ask}'
+-   name: "`{ask}` {and} `{if}` 海龟绘图"
+    explanation: "{ask} 使用者想要多少度"
+    example: "例如: 角度 {is} {ask} '多少度？'"
+    demo_code: |-
+        角度 = {ask} '多少度？'
+        度 = 360 / 角度
+        {forward} 50
+        {turn} 度
+7:
+-   explanation: "打印的内容要用单引号标注清楚."
+    example: "例如:{print} '你好欢迎来到海迪。'"
+    demo_code: "{print}'你好欢迎来到海迪。'"
+    name: '{print}'
+-   explanation: "用`{ask}`提出问题。"
+    example: "例如: 颜色 = {ask} 你最喜欢的颜色是什么?'"
+    demo_code: |-
+        color = ask '你最喜欢的颜色是什么?'
+        print color ' is your favorite!'
+    name: '{ask}'
+-   explanation: "用`if`条件语句进行选择"
+    example: "例如: {if}颜色 {is} 绿色 {print} '漂亮!' {else} {print} '呵呵'"
+    demo_code: |-
+        颜色 = {ask} '你最喜欢的颜色是什么?'
+        {if} 颜色 {is} 绿色 {print} '漂亮!' {else} {print} '呵呵'
+    name: '{if}'
+-   explanation: "`repeat` 和 `if` 组合。"
+    example: "例如: {repeat} 3 {times} {forward} 10"
+    demo_code: |-
+        {repeat} 3 {times} {forward} 10
+    name: '{repeat} - 海龟绘图'
+8:
+-   explanation: "用print打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
+    example: "例如: {print} '5乘以5等于 ' 5 * 5"
+    demo_code: "{print} '5 乘以 5 等于 ' 5 * 5"
+    name: '{print}'
+-   explanation: "使用ask提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。"
+    example: "例如: 答案 {is} {ask} '5加5等于几?'"
+    demo_code: |-
+        答案 = {ask} '5加5等于几?'
+        {if} 答案 {is} 10
+            {print} '做得好!'
+            {print} '的确, 答案就是 ' 答案
+        {else}
+            {print} '糟糕!'
+            {print} '答案就是 10'
+    name: '{ask}'
+-   name: '`{repeat}` 和海龟绘图'
+    explanation: '{repeat} 多行'
+    example: '例如: 画一个正方形'
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+9:
+-   name: "`if`条件语句和多行"
+    explanation: "使用'{ask}'提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。"
+    example: "Example: answer = ask 'What is 20 plus 20?'"
+    demo_code: |-
+        answer = ask 'What is 20 plus 20?'
+        if answer is 20
+            print 'Well done!!'
+            print 'The answer is indeed' answer
+        else
+            print 'Wrong'
+            print 'The answer is 20'
+-   name: "`repeat` and turtle"
+    explanation: "Repeat multiple lines"
+    example: "Example: create a square"
+    demo_code: |-
+        repeat 4 times
+            turn 90
+            forward 50
+10:
+-   name: "print"
+    explanation: "用print打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
+    example: "例如: {print} '5乘以5等于 ' 5 * 5"
+    demo_code: "{print} '5乘以5等于 ' 5 * 5"
+-   name: "{for} 循环语句和一个列表"
+    explanation: "打印一个列表中的所有内容 "
+    example: "例如: {for} 动物 {in} 动物"
+    demo_code: |-
+        动物 {is} 狗，猫，泡泡鱼
+        {for} 动 {in} 动物
+          {print} '我爱 ' 动
+11:
+-   explanation: "我们用 `{for}` 和一个 {range}"
+    example: "给计数器变量赋值 {in} {range} 1 {to} 5"
+    demo_code: |-
+        {for} 计数器变量的值 {in} {range} 1 {to} 5
+            {print} 计数器变量的值
+    name: '{for} 循环'
+-   example: "Example: answer = {ask} 'What is 5 plus 5?'"
+    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+    name: '{ask}'
+    explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+12:
+-   name: "float directly"
+    explanation: "Decimal numbers"
+    example: "{print} 2.5 + 2.5"
+    demo_code: |
+        {print} 'Calculate away!'
+        {print} 'Two and a half plus two and a half is...'
+        {print} 2.5 + 2.5
+-   name: "assign text"
+    explanation: "Text with quotation marks after ="
+    example: "name = 'Hedy'"
+    demo_code: |
+        name = 'Hedy the Robot'
+        {print} 'Hello ' name
+-   name: "quotes after {if} comparison"
+    explanation: "Text with quotation marks after {if}"
+    example: "name = 'Hedy'"
+    demo_code: |
+        name = {ask} 'Who are you?'
+        {if} name = 'Hedy'
+            {print} 'Hi there!'
+-   name: "quotes in list"
+    explanation: "A list with quotation marks"
+    example: "name = 'Hedy', 'Felienne'"
+    demo_code: |
+        superheroes = 'Iron Man', 'Batman', 'Superman'
+        {print} superheroes {at} {random}
+13:
+-   name: "And(且)"
+    explanation: "'and`的左边和右边的两个语句都必须是正确的."
+    example: "if 3+2 is 5 and 2+2 is 4"
+    demo_code: |-
+        answer1 = ask '3+2等于几?'
+        answer2 = ask '2+2等于几?'
+        if answer1 is 5 and answer2 is 4
+            print '这两个答案都正确!'
+        else
+            print '至少有一个答案是错的!'
+-   name: "Or(或)"
+    explanation: " 在`or`(或)的左右两边两个语句中, 至少有一个是正确的，如果两个都是正确的，也是可以的."
+    example: "if 3+2 is 5 or 2+2 is 4"
+    demo_code: |-
+        answer1 = ask '3+2等于几?'
+        answer2 = ask '2+2等于几?'
+        if answer1 is 5 or answer2 is 4
+            print '至少有一个答案是正确的!'
+        else
+            print '这两个答案都是错的!'
+14:
+-   name: "Smaller 小于"
+    explanation: "我们用小于号 `<` 用来判断第一个数字是否小于第二个数字. 例如，如果我们想要知道变量(variable)是否小于15，那么我们就可以用 `variable < 15`"
+    example: "例如: age < 13"
+    demo_code: |-
+        age = ask '你今年几岁了?'
+        if age < 13
+            print '你比我年纪小!'
+-   name: "Bigger 大于"
+    explanation: "我们用大于号`>` 用来判断第一个数字是否大于第二个数字. 例如如果我们想要知道变量(variable)是否大于15, 那么我就可以用 `variable > 15`"
+    example: "例如: age > 13"
+    demo_code: |-
+        age = ask '你今年几岁了?'
+        if age > 13
+            print '你比我年纪大!'
+-   name: Equal
+    explanation: We use the `==` to check if two things are the same.
+    example: 'For example: answer == 25'
+    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
+-   example: 'For example: answer != 25'
+    name: Not equal
+    explanation: 'We use the `!=` to check if two things are not the same. '
+    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+-   example: 'For example: age <= 12'
+    demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+    name: Smaller {or} equal
+-   name: Bigger or equal
+    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+    demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+    example: 'For example: age >= 14'
+15:
+-   name: "布尔 while循环语句"
+    explanation: "我们可以将`while` 循环语句和`True` 和 `False`一起使用"
+    example: "例如: while correct_answer is False"
+    demo_code: |-
+        answer = 0
+        while answer != 25
+            answer = ask '5乘以5等于几?'
+        print '已经给出了一个很好的答案'
+-   name: "Smaller while (直到小于)"
+    explanation: "我们也可以将`while` 循环语句和小于号 `<` 和大于号 `>`一起使用. 注意, 你需要改变数字以便循环结束. 我们现在是用count = count + 1 来达到这个目的."
+    example: "例如: while count < 3"
+    demo_code: |-
+        count = 1
+        while count < 3
+            print '我们计算 ' 3 - count ' 的次数更多了'
+            count = count + 1
+        print '我们完成啦'
+16:
+-   explanation: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
+    example: "例如: fruit = ['苹果', '香蕉', '樱桃']"
+    demo_code: |-
+        fruit = ['苹果', '香蕉', '樱桃']
+        print fruit
+    name: square brackets
+-   name: "从一个列表中检索元素"
+    explanation: "我们用[数字]从一个列表中检索元素，因此 fruit[1] 的意思就是从列表fruit中检索第一个元素t!"
+    example: "例如: firstfruit = fruit[1]"
+    demo_code: |-
+        fruit = ['香蕉', '苹果', '樱桃']
+        firstfruit = fruit[1]
+        print firstfruit
+-   name: "从一个列表中随机选择元素"
+    explanation: "我们用[random] 从一个列表中随机选择元素，因此fruit[random]的意思是从列表fruit中随机选择一个水果!"
+    example: "例如: random_fruit = fruit[random]"
+    demo_code: |-
+        fruit = ['香蕉', '苹果', '樱桃']
+        random_fruit = fruit[random]
+        print random_fruit
+17:
+-   explanation: "当我们使用`for`循环语句的时候， 我们需要在 `for`循环语句后面加一个冒号`:` !"
+    example: "for i in range 1 to 10:"
+    demo_code: |-
+        for i in range 1 to 12:
+            print i
+        print '无论你是否准备好了，我都会来的!'
+    name: '{elif}'
+-   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
+    example: "if colour is 绿色:'"
+    demo_code: |-
+        colour = '绿色'
+        if colour is '绿色':
+            print 'The colour 是绿色'
+        else:
+            print 'The colour 不是绿色'
+    name: '{print}'
+-   explanation: "我们将向你展示一个允许你使用的新命令: `elif`. `elif` 的意思是否则如果 \"else if\". 我们首先判断 `if`条件是否正确, 如果这个条件不正确, 那我们就判断 `elif` 条件是否正确，如果这个条件也不正确, 那我们就执行 `else`语句."
+    example: "elif a is 5:"
+    demo_code: |-
+        a = 2
+        if a is 1:
+            print 'a 是 1'
+        elif a is 2:
+            print 'a 是 2'
+        else:
+            print 'a 既不是1也不是2'
+    name: '{if}'
+18:
+-   name: "{print}"
+    explanation: "With `{print}` you need to use parentheses"
+    example: "{print}"
+    demo_code: |-
+        {print}('hi!')
+-   name: "{print} with var"
+    explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
+    example: "{print}"
+    demo_code: |-
+        name = 'Hedy'
+        {print}('my name is ', name)
