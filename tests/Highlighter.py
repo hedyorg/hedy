@@ -203,11 +203,17 @@ class HighlightTester(unittest.TestCase):
                         NEXT["match"] = match
                         FIND = True
 
+            print(currentPosition)
+            print(NEXT)
+            print("#"*50)
 
             if FIND :
 
                 # Application of coloring on the code
                 currentRule,currentMatch = NEXT["rule"],NEXT["match"]
+
+                if "token" not in currentRule:
+                    raise ValueError("We need a token in all rules !")
         
                 if type(currentRule['token']) == str :
                     currentRule['token'] = [currentRule['token']]
@@ -226,10 +232,16 @@ class HighlightTester(unittest.TestCase):
                         pos += len(submatch)
 
                 currentPosition = currentMatch.end()
-                currentState = currentRule['next']
+
+                if 'next' in currentRule:
+                    currentState = currentRule['next']
 
             else:
                 flag = True
+
+        for i,ch in enumerate(code):
+            if ch == "\n":
+                Output = Output[:i] + "\n" + Output[i+1:]
 
         return Output
 
