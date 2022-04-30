@@ -2043,7 +2043,6 @@ def preprocess_blocks(code, level):
             # bij meerdere terugsprongen sluiten we ook meerdere blokken
 
             difference_in_indents = (previous_number_of_indents - current_number_of_indents)
-
             for i in range(difference_in_indents):
                 processed_code.append('end-block')
 
