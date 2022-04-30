@@ -93,7 +93,7 @@
     example: "例如: {if} 颜色 {is} 绿色 {print} '漂亮!' {else} {print} '呵呵'"
     demo_code: |-
         颜色 {is} {ask} '你最喜欢的颜色是什么？'
-        {if} 颜色{is}绿色 {print} '漂亮！' {else} {print} '呵呵'
+        {if} 颜色 {is} 绿色 {print} '漂亮！' {else} {print} '呵呵'
     name: '{if}'
 -   name: '{if} 条件语句与海龟绘图'
     explanation: 用`{if}`条件语句进行选择
@@ -106,7 +106,7 @@
 6:
 -   explanation: "打印的内容要用单引号标注清楚"
     example: "例如: {print} '5乘以5等于 ' 5 * 5"
-    demo_code: "{print}'5乘以5等于 5 * 5'"
+    demo_code: "{print} '5乘以5等于 5 * 5'"
     name: '{print}'
 -   explanation: "用{ask} 提问计算题的答案然后检查答案是否正确。"
     example: "例如：答案 {is} {ask} ‘10加10等于几?’"
@@ -154,8 +154,8 @@
         答案 = {ask} '5加5等于几?'
         {if} 答案 {is} 10
             {print} '做得好!'
-            {print} '的确, 答案就是 ' answer
-        否则
+            {print} '的确, 答案就是 ' 答案
+        {else}
             {print} '糟糕!'
             {print} '答案就是 10'
     name: '{ask}'
@@ -342,7 +342,7 @@
             {print} i
         {print} '无论是否准备好，我都会来的!'
     name: '{print}'
--   explanation: "我们需要对所有的‘{if}’条件语句做同样的处理"
+-   explanation: "我们需要对所有的'{if}'条件语句做同样的处理"
     example: "如果颜色{is}绿色："
     demo_code: |-
         颜色 = {ask} '你最喜欢的颜色是什么？'
