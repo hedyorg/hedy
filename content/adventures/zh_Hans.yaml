@@ -7,35 +7,26 @@ adventures:
         levels:
             1:
                 story_text: |
-                    欢迎来到海迪!你可以使用在第1级学习内容中的命令print, ask 和 echo.
+                    ## 欢迎来到海迪！
+                    在第1级学习内容中你可以使用命令`{print}`, `{ask}` 和 `{echo}`。
+                    在编程栏里面输入你的代码。或者按下代码范例框里面的绿色按钮, 代码就会为你打出来!
+                    使用左边编程栏下的绿色 “运行代码” 按钮, 你可以尝试运行你的代码。
 
-                    在左边的命令栏里，你可以看到第1级学习内容中的所有的命令.
+                    你可以使用`{print}`命令将文本打印到屏幕上。
 
-                    按下蓝色的按钮, 代码就会为你打出来!
-
-                    使用左边编程栏下的绿色 “运行代码” 按钮, 你可以尝试运行这段代码.
-
-                    不知道自己想要创建些什么？你也许能在下面的内容里面找到灵感. 
-
-                start_code: "print 你好世界!"
+                start_code: "{print} 你好世界!"
                 example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-                story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_2: "您还可以使用 `{ask}` 请求输入问题，然后使用 `{echo}` 命令重复问题。\n"
                 example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
             2:
                 story_text: |
-                    在第2级学习内容中,我们会学习新的内容. 你可以用`is`来命名一个词.
+                    ## 变量
+                    在第2级中，我们学习了两个新的命令：`{is}`和`{sleep}`。
+                    你可以用`{is}`命名一个词。这被称为一个变量。在这个例子中，我们定义了一个变量“名字”和另外一个变量“年龄”。你可以在代码中的任何地方使用“名字”这个词，它将被“海迪”替换，就像这样：
 
-                    如果你使用代码 `name is 海迪`, 你可以在程序的任何地方使用name这个词,并且name这个词会被'海迪'这个词所取代.
-
-                    注意: ask已被改变, 你可以命名这个问题的答案并保存, 就像这样:
-
-                    ```
-                    answer is ask 你的名字是什么?
-                    ```
-
-                    `print` 的使用方法仍旧如同在第1级中一样, 不过你不再需要`echo`了.
-                start_code: "print 你好世界!"
+                    这样，你就不再需要`{echo}`命令了!
+                start_code: "{print} 你好世界!"
                 example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
@@ -43,38 +34,29 @@ adventures:
                 example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
             3:
                 story_text: |
-                    在第3级你也可以创建一个列表. 你可以让计算机从列表中随机选择一些东西. 你可以用`at random`来完成这个任务.
-
-                    ```
-                    animals is 狗, 猫, 袋鼠
-                    print animals at random
-                    ```
-
-                    你可以在左边的命令栏里面找到第2级学习内容的所有命令. 还有作业题目栏.
-                start_code: "print 你好世界!"
+                    ## 创建一个列表！
+                    在第3级你也可以创建一个列表。你可以让计算机从列表中随机选择一些项目。您可以使用 `{at} {random}` 执行此操作。
+                start_code: "{print} 你好世界!"
                 example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
                 story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
                 example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
-                start_code: "print '你好世界'"
+                start_code: "{print} '你好世界'"
                 story_text: |
-                    在第3级目标中`ask`的使用方法仍旧如同在第2级中一样, 但是现在 `print` 的使用方法有所不同了.
+                    ## “引号”
+                    在第4级目标中 `{ask}` 和 `{print}` 已更改。
 
-                     你需要在你想要打印的内容前后两边加上单引号.
+                    你必须将要打印的文本放在单引号之间。
 
-                     这很有用,因为现在你可以打印所有你想要打印的词汇了. 你也可以打印那些用 `is`命名并保存的词汇.
+                    这很有用,因为现在你可以打印所有你想要打印的词汇了. 你也可以打印那些用 `{is}`命名并保存的词汇.
 
                      大多数编程语言在打印时也使用引号，所以我们也距离真正的编程更近了一步!
-
-                     ## 作业题会越来越难
-                     你会发现左边的命令栏又出现了, 而作业则标题栏下方. 现在的作业题会逐渐变得越来越难.
-                     所以最好从左边的"故事"开始, 然后按照左往右的顺序做题, 逐渐接受越来越大的挑战.
                 example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
             5:
                 start_code: |-
-                    name is ask 你的名字是什么?
-                    if name is 海迪 print '酷!' else print '呵呵'
+                    name {is} {ask} '你的名字是什么?'
+                    {if} name {is} 海迪 {print} '酷!' {else} {print} '呵呵'
                 story_text: |
                     `ask` 和` print` 的使用方法和在第3级目标里面一样.
 
@@ -118,7 +100,7 @@ adventures:
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
                 example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
             7:
-                start_code: "repeat 3 times print '海迪很好玩!'"
+                start_code: "{repeat} 3 {times} {print} '海迪很好玩！'"
                 story_text: |
                     `ask`, `print` 和 `if-else条件语句` 的使用方法和在第4级里面一样.
                     但是在第5级的学习内容里面增加了repeat循环命令. Repeat循环语句可以用来多次执行一段代码.
@@ -129,9 +111,9 @@ adventures:
                 example_code: "## Example Hedy code\n```\n{repeat} 3 {times} {print} 'Hedy {is} fun!'\n```\n"
             8:
                 start_code: |-
-                    repeat 5 times
-                        print '大家好'
-                        print '这段话将被打印5次'
+                    {repeat} 5 {times}
+                        {print} '大家好'
+                        {print} '这句话将被打印5次'
                 story_text: |
                     `ask` 和 `print` 的使用方法依旧保持不变. 但是 `if-else`条件语句 和 `repeat`循环语句已经改变了!
                     你现在可以执行一组代码, 但你必须使用缩进.
@@ -169,9 +151,9 @@ adventures:
                 example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
             10:
                 start_code: |-
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
+                    动物 {is} 狗，猫，泡泡鱼
+                    {for} animal {in} 动物
+                      {print} '我爱 ' animal
                 story_text: |
                     In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
                     `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
@@ -185,9 +167,8 @@ adventures:
                 example_code: "## Example Hedy code\n```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
             11:
                 start_code: |-
-                    for i in range 1 to 10
-                        print i
-                    print 'Ready or not, here I come!'
+                    {for} 计数器 {in} {range} 1 {to} 5
+                        {print} 计数器
                 story_text: "`print` (打印)的使用方法照旧不变但是`repeat` (重复或循环)现在被`for`(循环)所代替! 你要用 `for i in range 1 to 5`, 代替`repeat 5 times`. 你也可以在你的程序中使用 `i`! 记住在`for`和 `if` 语句后使用缩进(这意味着以四个空格开始一个句子)"
                 example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
             12:
@@ -206,10 +187,10 @@ adventures:
                 example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
             13:
                 start_code: |-
-                    name = ask 'what is your name?'
-                    age = ask 'what is your age?'
-                    if name is 'Hedy' and age is 2
-                        print 'You are the real Hedy!'
+                    名字 = {ask} '你叫什么名字?'
+                    年龄 = {ask} '你的年龄是多少？ '
+                    {if} 名字 {is} '海迪' {and} 年龄 {is} 2
+                        {print} '你才是真正的海迪！'
                 story_text: "我们将要学习 `and` (且)和 `or`(或)! 如果你想判断两个语句，你不需要使用两个if，但可以使用`and`(且)和`or`(或). 如果你要用`and`那么'and`的左边和右边的两个语句都需要为真. 我们也可以使用`or'那么'or`的左边和右边的两个语句中只需要有一个语句是正确的."
                 #16:
                 #    start_code: |-
