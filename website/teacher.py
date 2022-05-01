@@ -1,13 +1,12 @@
 import json
 from flask_babel import gettext
 import hedy
-from website.auth import validate_signup_data, store_new_account, requires_login, is_teacher, is_admin, current_user
+from website.auth import requires_login, is_teacher, is_admin, current_user, validate_student_signup_data, store_new_student_account
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
 from flask_helpers import render_template
 import os
-import hedyweb
 import hedy_content
 from config import config
 
@@ -382,39 +381,30 @@ def routes(app, database, achievements):
             return gettext('no_accounts'), 400
 
         usernames = []
-        mails = []
 
         # Validation for correct types and duplicates
         for account in body.get('accounts', []):
-            validation = validate_signup_data(account)
+            validation = validate_student_signup_data(account)
             if validation:
                 return validation, 400
             if account.get('username').strip().lower() in usernames:
                 return {'error': gettext('unique_usernames'), 'value': account.get('username')}, 200
             usernames.append(account.get('username').strip().lower())
-            if account.get('email').strip().lower() in mails:
-                return {'error': gettext('unique_emails'), 'value': account.get('email')}, 200
-            mails.append(account.get('email').strip().lower())
 
         # Validation for duplicates in the db
         classes = DATABASE.get_teacher_classes(user['username'], False)
-        print(classes)
         for account in body.get('accounts', []):
             if account.get('class') and account['class'] not in [i.get('name') for i in classes]:
                 return "not your class", 404
-            user = DATABASE.user_by_username(account.get('username').strip().lower())
-            if user:
+            if DATABASE.user_by_username(account.get('username').strip().lower()):
                 return {'error': gettext('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
-            email = DATABASE.user_by_email(account.get('email').strip().lower())
-            if email:
-                return {'error': gettext('emails_exist'), 'value': account.get('email').strip().lower()}, 200
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):
             # Set the current teacher language and keyword language as new account language
             account['language'] = g.lang
             account['keyword_language'] = g.keyword_lang
-            store_new_account(account, account.get('email').strip().lower())
+            store_new_student_account(account, user['username'])
             if account.get('class'):
                 class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]
                 DATABASE.add_student_to_class(class_id, account.get('username').strip().lower())
