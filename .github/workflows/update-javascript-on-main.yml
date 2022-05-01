@@ -30,7 +30,6 @@ jobs:
       with:
         commit_message: Automatically update JavaScript bundle 🤖 beep boop
         branch: main
-        file_pattern: static/js/*.js*
       env:
         # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
         GITHUB_TOKEN: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
