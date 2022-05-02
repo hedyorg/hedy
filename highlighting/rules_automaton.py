@@ -19,7 +19,7 @@ def rule_level1(keywordLang):
         'next': 'start',
     },{
         'regex': START_LINE + keywordLang["color"] + END_WORD + "(.*)$",
-        'token': ['text','keyword','text','text'],
+        'token': ['text','keyword','text'],
         'next': 'start',
     }, {
         'regex': START_LINE + keywordLang["color"] + SPACE + WORD + "( *)$",
@@ -81,7 +81,7 @@ def rule_level2(keywordLang) :
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
-        'regex': '#.*$',
+        'regex': '#(.*)$',
         'token': 'comment',
         'next': 'start',
     },{
@@ -136,7 +136,7 @@ def rule_level3(keywordLang):
         'token': 'keyword',
         'next': 'start',
     },{
-        'regex': '#.*$',
+        'regex': '#(.*)$',
         'token': 'comment',
         'next': 'start',
     },{

@@ -46,7 +46,7 @@ def get_Traduction(KEYWORDS_PATH, KEYWORDS_PATTERN):
 
     for languageFile in listLanguageFile:
         languageCode = re.search(KEYWORDS_PATTERN,languageFile).group(1)
-        
+
         keywords_file = open(os.path.join(KEYWORDS_PATH, languageFile), newline="", encoding='utf-8')
 
         tmp[languageCode] = yaml.safe_load(keywords_file)
@@ -59,6 +59,23 @@ def get_Traduction(KEYWORDS_PATH, KEYWORDS_PATTERN):
 
     return Result
 
+def validate_ruleset(LEVELS):
+  """Confirm that the generated syntax highlighting rules are valid, throw an error if not."""
+  errors = 0
+  for level in LEVELS:
+    for rulename, rules in level['rules'].items():
+      for rule in rules:
+        r = re.compile(rule['regex'])
+
+        group_count = r.groups if r.groups > 0 else 1
+        token_count = len(rule['token']) if isinstance(rule['token'], list) else 1
+
+        if group_count != token_count:
+          print(f'ERROR: In {level["name"]}, rule \'{rulename}\': regex \'{rule["regex"]}\' has {group_count} capturing subgroups, but \'token\' has {token_count} elements: {repr(rule["token"])}')
+          errors += 1
+
+  if errors > 0:
+    raise RuntimeError(f'{errors} rules are invalid')
 
 
 os.chdir(os.path.dirname(__file__) +"/..")
@@ -71,6 +88,7 @@ for languageCode in LanguageKeywords:
 
     # List of rules by level
     LEVELS = generateRules(LanguageKeywords[languageCode])
+    validate_ruleset(LEVELS)
 
     # Saving the rules in the corresponding file
     fileLangSyntax = open(OUTPUT_PATH.format(languageCode),"w")
