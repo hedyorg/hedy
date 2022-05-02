@@ -72,11 +72,11 @@
                                 <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
                                     <input level="{{ i }}"
                                        {% if customizations and 'opening_dates' in customizations and i|string in customizations['opening_dates'] %}
-                                        type="date" value="{{ customizations['opening_dates'][i|string] }}"
+                                        type="date" value="{{ customizations['opening_dates'][i|string] }}" placeholder="{{_('directly_available')}}"
                                        {% else %}
                                         type="text" onfocus="(this.type='date')" placeholder="{{_('directly_available')}}"
                                        {% endif %}
-                                       class="inline-block text-center appearance-none bg-gray-200 border border-gray-200 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
+                                       class="opening_date_input inline-block text-center appearance-none bg-gray-200 border border-gray-200 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
                                 </td>
                             </tr>
                         {% endfor %}
@@ -155,7 +155,7 @@
                     <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
                 </div>
                 <div class="flex flex-row mt-2 ml-auto">
-                    <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}', '{{_('remove_customizations_prompt')}}')">
+                    <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
                     {{_('remove_customization')}}</button>
                     <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{_('back_to_class')}}</button>
                 </div>
