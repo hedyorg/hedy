@@ -178,3 +178,6 @@ class TestsLevel7(HedyTester):
       code=code,
       expected=expected)
 
+  def test_repeat_without_command_gives_error(self):
+    code = "repeat 2 times"
+    self.multi_level_tester(code=code, exception=hedy.exceptions.MissingInnerCommandException)
