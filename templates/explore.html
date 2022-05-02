@@ -46,7 +46,7 @@
                       {{_('level')}}: <b>{{ program.level }}</b>
                   </div>
                   <div class="px-4 mb-1 z-10">
-                      {{_('creator')}}: <a {% if program.public_user %}onclick="window.open('/user/{{program.username}}', '_self')"{% endif %} class="{% if program.public_user %}cursor-pointer{% else %}text-black{% endif %} no-underline {% if program.username|length > 20 %}text-xs{% elif program.username|length > 15 %}text-sm{% endif %}">{{ program.username | truncate(25) }}</a>
+                      {{_('creator')}}: <a {% if program.public_user %}onclick="window.open('/user/{{program.username}}', '_self')"{% endif %} class="{% if program.public_user %}cursor-pointer{% else %}text-black{% endif %} no-underline {% if program.username|length > 15 %}text-sm{% endif %}">{{ program.username | truncate(20) }}</a>
                   </div>
                  <div class="relative px-4">
                      <pre class="no-copy-button" level="{{ program.level }}">{{ program.code }}</pre>
