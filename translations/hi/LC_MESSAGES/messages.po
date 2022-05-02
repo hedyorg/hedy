@@ -21,7 +21,7 @@ msgstr "ऐसा लगता है कि आप इस कक्षा म�
 msgid "title_programs"
 msgstr "Hedy - My programs"
 
-#: app.py:671 app.py:681 app.py:685 app.py:700 app.py:949 app.py:1302
+#: app.py:671 app.py:681 app.py:685 app.py:700 app.py:949 app.py:1308
 #: website/admin.py:17 website/admin.py:25 website/admin.py:95
 #: website/admin.py:112 website/admin.py:130 website/auth.py:712
 #: website/auth.py:739 website/statistics.py:86
@@ -135,7 +135,7 @@ msgstr ""
 "Something went wrong while translating the code. Try running the code to "
 "see if it has an error. Code with errors can not be translated."
 
-#: app.py:1241 website/auth.py:278 website/auth.py:333 website/auth.py:469
+#: app.py:1247 website/auth.py:278 website/auth.py:333 website/auth.py:469
 #: website/auth.py:494 website/auth.py:524 website/auth.py:633
 #: website/auth.py:671 website/auth.py:718 website/auth.py:745
 #: website/teacher.py:89 website/teacher.py:124 website/teacher.py:196
@@ -144,27 +144,27 @@ msgstr ""
 msgid "ajax_error"
 msgstr "एक त्रुटि थी, कृपया पुनः प्रयास करें।"
 
-#: app.py:1244
+#: app.py:1250
 msgid "image_invalid"
 msgstr "आपकी फोटो अमान्य है"
 
-#: app.py:1246
+#: app.py:1252
 msgid "personal_text_invalid"
 msgstr "आपका व्यक्तिगत पाठ अमान्य है"
 
-#: app.py:1248 app.py:1254
+#: app.py:1254 app.py:1260
 msgid "favourite_program_invalid"
 msgstr "आपका पसंदीदा प्रोग्राम अमान्य है"
 
-#: app.py:1268 app.py:1269
+#: app.py:1274 app.py:1275
 msgid "public_profile_updated"
 msgstr "सार्वजनिक प्रोफ़ाइल अद्यतन की गई।"
 
-#: app.py:1306 app.py:1332
+#: app.py:1312 app.py:1338
 msgid "user_not_private"
 msgstr "यह उपयोगकर्ता मौजूद नहीं है या उसकी कोई सार्वजनिक प्रोफ़ाइल नहीं है"
 
-#: app.py:1340
+#: app.py:1346
 msgid "invalid_teacher_invitation_code"
 msgstr ""
 "िक्षक आमंत्रण कोड अमान्य है| शिक्षक बनने के लिए, hedy@felienne.com पर "
@@ -640,7 +640,7 @@ msgstr "नाम"
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:20 templates/explore.html:46
 #: templates/for-teachers.html:31 templates/programs.html:12
-#: templates/programs.html:39 templates/programs.html:50
+#: templates/programs.html:39 templates/programs.html:47
 msgid "level"
 msgstr "स्तर"
 
@@ -667,7 +667,7 @@ msgstr ""
 
 #: templates/customize-adventure.html:43 templates/customize-class.html:28
 #: templates/customize-class.html:94 templates/explore.html:26
-#: templates/programs.html:18 templates/programs.html:46
+#: templates/programs.html:18 templates/programs.html:40
 #: templates/view-adventure.html:6
 msgid "adventure"
 msgstr "साहसिक कार्य "
@@ -960,25 +960,25 @@ msgstr "कोड को चलाएं"
 msgid "stop_code_button"
 msgstr "कोड को सहेजें"
 
-#: templates/incl-editor-and-output.html:126
+#: templates/incl-editor-and-output.html:130
 msgid "edit_code_button"
 msgstr "कोड को संपादित करें"
 
-#: templates/incl-editor-and-output.html:132
+#: templates/incl-editor-and-output.html:136
 msgid "read_code_label"
 msgstr "ज़ोर से पढ़ें"
 
-#: templates/incl-editor-and-output.html:142
-#: templates/incl-editor-and-output.html:151
+#: templates/incl-editor-and-output.html:146
+#: templates/incl-editor-and-output.html:155
 msgid "regress_button"
 msgstr "्तर {level} पर वापस जाएँ"
 
-#: templates/incl-editor-and-output.html:145
-#: templates/incl-editor-and-output.html:154
+#: templates/incl-editor-and-output.html:149
+#: templates/incl-editor-and-output.html:158
 msgid "advance_button"
 msgstr "स्तर {level} पर जाएँ"
 
-#: templates/incl-editor-and-output.html:168
+#: templates/incl-editor-and-output.html:172
 msgid "developers_mode"
 msgstr "प्रोग्रामर की तरह"
 
@@ -1030,6 +1030,14 @@ msgstr "लॉगिन"
 #: templates/incl-menubar.html:45
 msgid "search"
 msgstr "ढूंढें..."
+
+#: templates/incl-menubar.html:50
+msgid "keyword_support"
+msgstr ""
+
+#: templates/incl-menubar.html:58
+msgid "non_keyword_support"
+msgstr ""
 
 #: templates/landing-page.html:6
 msgid "welcome"
@@ -1093,8 +1101,8 @@ msgstr "ठीक है"
 msgid "cancel"
 msgstr "रद्द करें"
 
-#: templates/layout.html:43 templates/programs.html:66
-#: templates/programs.html:74
+#: templates/layout.html:43 templates/programs.html:68
+#: templates/programs.html:76
 msgid "copy_link_to_share"
 msgstr "शेयर करने के लिए लिंक कॉपी करें"
 
@@ -1330,59 +1338,59 @@ msgstr "यह एक प्रस्तुत किया गया प्र�
 msgid "title"
 msgstr "शीर्षक"
 
-#: templates/programs.html:40 templates/view-program-page.html:8
+#: templates/programs.html:41 templates/view-program-page.html:8
 msgid "last_edited"
 msgstr "पिछला संपादित"
 
-#: templates/programs.html:57
+#: templates/programs.html:59
 msgid "favourite_confirm"
 msgstr "क्या आप वाकई इस प्रोग्राम को अपने पसंदीदा के रूप में सेट करना चाहते हैं?"
 
-#: templates/programs.html:65 templates/programs.html:70
+#: templates/programs.html:67 templates/programs.html:72
 msgid "open"
 msgstr "खुला"
 
-#: templates/programs.html:66 templates/programs.html:74
+#: templates/programs.html:68 templates/programs.html:76
 msgid "copy_clipboard"
 msgstr "क्लिपबोर्ड पर सफलतापूर्वक कॉपी किया गया"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete_confirm"
 msgstr "क्या आप वाकई प्रोग्राम को हटाना चाहते हैं?"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete"
 msgstr "हटाएँ"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 msgid "unshare_confirm"
 msgstr "क्या आप वाकई प्रोग्राम को निजी बनाना चाहते हैं?"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 msgid "unshare"
 msgstr "साझेदारी से हटाएँ"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 msgid "submit_warning"
 msgstr "क्या आप वाकई इस प्रोग्राम को प्रस्तुत करना चाहते हैं?"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 msgid "submit_program"
 msgstr "प्रस्तुत"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share_confirm"
 msgstr "क्या आप वाकई प्रोग्राम को सार्वजनिक करना चाहते हैं?"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share"
 msgstr "साझा करें"
 
-#: templates/programs.html:84
+#: templates/programs.html:86
 msgid "no_programs"
 msgstr "आपका अभी तक कोई प्रोग्राम नहीं है।"
 
-#: templates/programs.html:86
+#: templates/programs.html:88
 msgid "write_first_program"
 msgstr "अपना पहला प्रोग्राम लिखें!"
 
@@ -1499,7 +1507,7 @@ msgstr "प्रश्नोत्तरी अंत"
 msgid "score"
 msgstr "गणना"
 
-#: templates/quiz/endquiz.html:37 templates/quiz/quiz-result-overview.html:108
+#: templates/quiz/endquiz.html:37 templates/quiz/quiz-result-overview.html:109
 msgid "go_to_level"
 msgstr "स्तर पर जाएं"
 
@@ -1519,11 +1527,11 @@ msgstr "गलत!"
 msgid "correct_answer"
 msgstr "सही उत्तर है:"
 
-#: templates/quiz/feedback.html:52
+#: templates/quiz/feedback.html:54
 msgid "go_to_question"
 msgstr "्रश्न पर जाएं"
 
-#: templates/quiz/feedback.html:56
+#: templates/quiz/feedback.html:58
 msgid "go_to_quiz_result"
 msgstr "प्रश्नोत्तरी परिणाम पर जाएं"
 
@@ -1542,22 +1550,22 @@ msgstr "गणना"
 msgid "incorrect"
 msgstr "सही उत्तर है:"
 
-#: templates/quiz/quiz-result-overview.html:91
-#: templates/quiz/quiz-result-overview.html:95
-#: templates/quiz/quiz-result-overview.html:99 templates/quiz/quiz.html:16
+#: templates/quiz/quiz-result-overview.html:92
+#: templates/quiz/quiz-result-overview.html:96
+#: templates/quiz/quiz-result-overview.html:100 templates/quiz/quiz.html:16
 msgid "attempt"
 msgstr "प्रयास"
 
 #: templates/quiz/quiz.html:49 templates/quiz/quiz.html:55
-#: templates/quiz/quiz_question.html:15
+#: templates/quiz/quiz_question.html:17
 msgid "hint"
 msgstr "संकेत?"
 
-#: templates/quiz/quiz_question.html:53
+#: templates/quiz/quiz_question.html:62
 msgid "go_to_answer"
 msgstr "उत्तर पर जाएं"
 
-#: templates/quiz/quiz_question.html:55
+#: templates/quiz/quiz_question.html:64
 msgid "submit_answer"
 msgstr "प्रश्न का उत्तर दें"
 

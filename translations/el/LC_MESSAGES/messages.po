@@ -21,7 +21,7 @@ msgstr "Φαίνεται πως δεν είστε σ' αυτήν την τάξη
 msgid "title_programs"
 msgstr "Hedy - My programs"
 
-#: app.py:671 app.py:681 app.py:685 app.py:700 app.py:949 app.py:1302
+#: app.py:671 app.py:681 app.py:685 app.py:700 app.py:949 app.py:1308
 #: website/admin.py:17 website/admin.py:25 website/admin.py:95
 #: website/admin.py:112 website/admin.py:130 website/auth.py:712
 #: website/auth.py:739 website/statistics.py:86
@@ -133,7 +133,7 @@ msgstr ""
 " κώδικα για να δεις αν έχει κάποιο σφάλμα. Ο κώδικας με σφάλματα δεν "
 "μπορεί να μεταφραστεί."
 
-#: app.py:1241 website/auth.py:278 website/auth.py:333 website/auth.py:469
+#: app.py:1247 website/auth.py:278 website/auth.py:333 website/auth.py:469
 #: website/auth.py:494 website/auth.py:524 website/auth.py:633
 #: website/auth.py:671 website/auth.py:718 website/auth.py:745
 #: website/teacher.py:89 website/teacher.py:124 website/teacher.py:196
@@ -142,27 +142,27 @@ msgstr ""
 msgid "ajax_error"
 msgstr "Παρουσιάστηκε κάποιο σφάλμα, παρακαλώ ξαναπροσπάθησε."
 
-#: app.py:1244
+#: app.py:1250
 msgid "image_invalid"
 msgstr "Η εικόνα σου δεν είναι έγκυρη"
 
-#: app.py:1246
+#: app.py:1252
 msgid "personal_text_invalid"
 msgstr "Το προσωπικό σου κείμενο δεν είναι έγκυρο"
 
-#: app.py:1248 app.py:1254
+#: app.py:1254 app.py:1260
 msgid "favourite_program_invalid"
 msgstr "Το αγαπημένο σου πρόγραμμα δεν είναι έγκυρο"
 
-#: app.py:1268 app.py:1269
+#: app.py:1274 app.py:1275
 msgid "public_profile_updated"
 msgstr "Το δημόσιο προφίλ έχει ενημερωθεί."
 
-#: app.py:1306 app.py:1332
+#: app.py:1312 app.py:1338
 msgid "user_not_private"
 msgstr "Αυτός ο χρήστης δεν υπάρχει ή δεν έχει δημόσιο προφίλ"
 
-#: app.py:1340
+#: app.py:1346
 msgid "invalid_teacher_invitation_code"
 msgstr ""
 "Ο κωδικός πρόσκλησης καθηγητή δεν είναι έγκυρος. Για να γίνετε καθηγητής,"
@@ -642,7 +642,7 @@ msgstr "Όνομα"
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:20 templates/explore.html:46
 #: templates/for-teachers.html:31 templates/programs.html:12
-#: templates/programs.html:39 templates/programs.html:50
+#: templates/programs.html:39 templates/programs.html:47
 msgid "level"
 msgstr "Επίπεδο"
 
@@ -670,7 +670,7 @@ msgstr ""
 
 #: templates/customize-adventure.html:43 templates/customize-class.html:28
 #: templates/customize-class.html:94 templates/explore.html:26
-#: templates/programs.html:18 templates/programs.html:46
+#: templates/programs.html:18 templates/programs.html:40
 #: templates/view-adventure.html:6
 msgid "adventure"
 msgstr "Περιπέτεια"
@@ -968,25 +968,25 @@ msgstr "Εκτέλεσε κώδικα"
 msgid "stop_code_button"
 msgstr "Αποθήκευσε κώδικα"
 
-#: templates/incl-editor-and-output.html:126
+#: templates/incl-editor-and-output.html:130
 msgid "edit_code_button"
 msgstr "Επεξεργασία κώδικα"
 
-#: templates/incl-editor-and-output.html:132
+#: templates/incl-editor-and-output.html:136
 msgid "read_code_label"
 msgstr "Εκφωνούν"
 
-#: templates/incl-editor-and-output.html:142
-#: templates/incl-editor-and-output.html:151
+#: templates/incl-editor-and-output.html:146
+#: templates/incl-editor-and-output.html:155
 msgid "regress_button"
 msgstr "Επιστροφή στο επίπεδο {level}"
 
-#: templates/incl-editor-and-output.html:145
-#: templates/incl-editor-and-output.html:154
+#: templates/incl-editor-and-output.html:149
+#: templates/incl-editor-and-output.html:158
 msgid "advance_button"
 msgstr "Πήγαινε στο επίπεδο {level}"
 
-#: templates/incl-editor-and-output.html:168
+#: templates/incl-editor-and-output.html:172
 msgid "developers_mode"
 msgstr "Λειτουργία προγραμματιστή"
 
@@ -1034,6 +1034,14 @@ msgstr "Σύνδεση"
 #: templates/incl-menubar.html:45
 msgid "search"
 msgstr "Αναζήτηση..."
+
+#: templates/incl-menubar.html:50
+msgid "keyword_support"
+msgstr ""
+
+#: templates/incl-menubar.html:58
+msgid "non_keyword_support"
+msgstr ""
 
 #: templates/landing-page.html:6
 msgid "welcome"
@@ -1098,8 +1106,8 @@ msgstr "OK"
 msgid "cancel"
 msgstr "Ακύρωση"
 
-#: templates/layout.html:43 templates/programs.html:66
-#: templates/programs.html:74
+#: templates/layout.html:43 templates/programs.html:68
+#: templates/programs.html:76
 msgid "copy_link_to_share"
 msgstr "Αντίγραψε τον σύνδεσμο για κοινή χρήση"
 
@@ -1326,61 +1334,61 @@ msgstr "Αυτό είναι ένα υποβληθέν πρόγραμμα και 
 msgid "title"
 msgstr "Τίτλος"
 
-#: templates/programs.html:40 templates/view-program-page.html:8
+#: templates/programs.html:41 templates/view-program-page.html:8
 msgid "last_edited"
 msgstr "Τελευταία επεξεργασία"
 
-#: templates/programs.html:57
+#: templates/programs.html:59
 msgid "favourite_confirm"
 msgstr ""
 "Είσαι βέβαιος/α ότι θέλεις να ορίσεις αυτό το πρόγραμμα ως το αγαπημένο "
 "σου;"
 
-#: templates/programs.html:65 templates/programs.html:70
+#: templates/programs.html:67 templates/programs.html:72
 msgid "open"
 msgstr "Άνοιγμα"
 
-#: templates/programs.html:66 templates/programs.html:74
+#: templates/programs.html:68 templates/programs.html:76
 msgid "copy_clipboard"
 msgstr "Αντιγράφηκε με επιτυχία στο πρόχειρο"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete_confirm"
 msgstr "Είσαι βέβαιος/α ότι θέλεις να διαγράψεις το πρόγραμμα;"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete"
 msgstr "Διαγραφή"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 msgid "unshare_confirm"
 msgstr "Είσαι σίγουρος ότι θέλεις να κάνεις το πρόγραμμα ιδιωτικό;"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 msgid "unshare"
 msgstr "Κατάργηση κοινής χρήσης"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 msgid "submit_warning"
 msgstr "Είσαι σίγουρος ότι θέλεις να υποβάλεις αυτό το πρόγραμμα;"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 msgid "submit_program"
 msgstr "Υποβολή"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share_confirm"
 msgstr "Είσαι σίγουρος ότι θέλεις να δημοσιοποιήσεις το πρόγραμμα;"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share"
 msgstr "Μοίρασμα"
 
-#: templates/programs.html:84
+#: templates/programs.html:86
 msgid "no_programs"
 msgstr "Δεν έχεις προγράμματα ακόμα."
 
-#: templates/programs.html:86
+#: templates/programs.html:88
 msgid "write_first_program"
 msgstr "Γράψε το πρώτο σου πρόγραμμα!"
 
@@ -1497,7 +1505,7 @@ msgstr "Τέλος του κουίζ"
 msgid "score"
 msgstr "Σκορ"
 
-#: templates/quiz/endquiz.html:37 templates/quiz/quiz-result-overview.html:108
+#: templates/quiz/endquiz.html:37 templates/quiz/quiz-result-overview.html:109
 msgid "go_to_level"
 msgstr "Πήγαινε στο επίπεδο"
 
@@ -1517,11 +1525,11 @@ msgstr "Λάθος!"
 msgid "correct_answer"
 msgstr "Σωστό"
 
-#: templates/quiz/feedback.html:52
+#: templates/quiz/feedback.html:54
 msgid "go_to_question"
 msgstr "Πήγαινε στην ερώτηση"
 
-#: templates/quiz/feedback.html:56
+#: templates/quiz/feedback.html:58
 msgid "go_to_quiz_result"
 msgstr "Πήγαινε στο αποτέλεσμα του κουίζ"
 
@@ -1540,22 +1548,22 @@ msgstr "Σκορ"
 msgid "incorrect"
 msgstr "Σωστό"
 
-#: templates/quiz/quiz-result-overview.html:91
-#: templates/quiz/quiz-result-overview.html:95
-#: templates/quiz/quiz-result-overview.html:99 templates/quiz/quiz.html:16
+#: templates/quiz/quiz-result-overview.html:92
+#: templates/quiz/quiz-result-overview.html:96
+#: templates/quiz/quiz-result-overview.html:100 templates/quiz/quiz.html:16
 msgid "attempt"
 msgstr "Προσπάθεια"
 
 #: templates/quiz/quiz.html:49 templates/quiz/quiz.html:55
-#: templates/quiz/quiz_question.html:15
+#: templates/quiz/quiz_question.html:17
 msgid "hint"
 msgstr "Υπόδειξη?"
 
-#: templates/quiz/quiz_question.html:53
+#: templates/quiz/quiz_question.html:62
 msgid "go_to_answer"
 msgstr "Πήγαινε στην απάντηση"
 
-#: templates/quiz/quiz_question.html:55
+#: templates/quiz/quiz_question.html:64
 msgid "submit_answer"
 msgstr "Απάντησε στην ερώτηση"
 

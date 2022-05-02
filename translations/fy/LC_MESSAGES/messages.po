@@ -23,7 +23,7 @@ msgstr "Looks like you are not in this class!"
 msgid "title_programs"
 msgstr "Hedy - My programs"
 
-#: app.py:671 app.py:681 app.py:685 app.py:700 app.py:949 app.py:1302
+#: app.py:671 app.py:681 app.py:685 app.py:700 app.py:949 app.py:1308
 #: website/admin.py:17 website/admin.py:25 website/admin.py:95
 #: website/admin.py:112 website/admin.py:130 website/auth.py:712
 #: website/auth.py:739 website/statistics.py:86
@@ -141,7 +141,7 @@ msgstr ""
 "Something went wrong while translating the code. Try running the code to "
 "see if it has an error. Code with errors can not be translated."
 
-#: app.py:1241 website/auth.py:278 website/auth.py:333 website/auth.py:469
+#: app.py:1247 website/auth.py:278 website/auth.py:333 website/auth.py:469
 #: website/auth.py:494 website/auth.py:524 website/auth.py:633
 #: website/auth.py:671 website/auth.py:718 website/auth.py:745
 #: website/teacher.py:89 website/teacher.py:124 website/teacher.py:196
@@ -150,32 +150,32 @@ msgstr ""
 msgid "ajax_error"
 msgstr "Der gong wat mis, besykje it nochris."
 
-#: app.py:1244
+#: app.py:1250
 #, fuzzy
 msgid "image_invalid"
 msgstr "Your chosen image is invalid."
 
-#: app.py:1246
+#: app.py:1252
 #, fuzzy
 msgid "personal_text_invalid"
 msgstr "Your personal text is invalid."
 
-#: app.py:1248 app.py:1254
+#: app.py:1254 app.py:1260
 #, fuzzy
 msgid "favourite_program_invalid"
 msgstr "Your chosen favourite program is invalid."
 
-#: app.py:1268 app.py:1269
+#: app.py:1274 app.py:1275
 #, fuzzy
 msgid "public_profile_updated"
 msgstr "Public profile updated."
 
-#: app.py:1306 app.py:1332
+#: app.py:1312 app.py:1338
 #, fuzzy
 msgid "user_not_private"
 msgstr "This user doesn't exist or doesn't have a public profile"
 
-#: app.py:1340
+#: app.py:1346
 #, fuzzy
 msgid "invalid_teacher_invitation_code"
 msgstr ""
@@ -341,7 +341,9 @@ msgstr "It looks like you forgot to use a command on line {line_number}."
 #: content/error-messages.txt:22
 #, fuzzy
 msgid "Missing Inner Command"
-msgstr "It looks like you forgot to use a command with the {command} statement you used on line {line_number}."
+msgstr ""
+"It looks like you forgot to use a command with the {command} statement "
+"you used on line {line_number}."
 
 #: content/error-messages.txt:23
 #, fuzzy
@@ -694,7 +696,7 @@ msgstr "Namme"
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:20 templates/explore.html:46
 #: templates/for-teachers.html:31 templates/programs.html:12
-#: templates/programs.html:39 templates/programs.html:50
+#: templates/programs.html:39 templates/programs.html:47
 msgid "level"
 msgstr "Level"
 
@@ -724,7 +726,7 @@ msgstr ""
 
 #: templates/customize-adventure.html:43 templates/customize-class.html:28
 #: templates/customize-class.html:94 templates/explore.html:26
-#: templates/programs.html:18 templates/programs.html:46
+#: templates/programs.html:18 templates/programs.html:40
 #: templates/view-adventure.html:6
 msgid "adventure"
 msgstr "Aventoer"
@@ -1036,25 +1038,25 @@ msgstr "Koade draaie"
 msgid "stop_code_button"
 msgstr "Koade bewarje"
 
-#: templates/incl-editor-and-output.html:126
+#: templates/incl-editor-and-output.html:130
 msgid "edit_code_button"
 msgstr "Koade oanpasse"
 
-#: templates/incl-editor-and-output.html:132
+#: templates/incl-editor-and-output.html:136
 msgid "read_code_label"
 msgstr "Lês foar"
 
-#: templates/incl-editor-and-output.html:142
-#: templates/incl-editor-and-output.html:151
+#: templates/incl-editor-and-output.html:146
+#: templates/incl-editor-and-output.html:155
 msgid "regress_button"
 msgstr "Werom nei level {level}"
 
-#: templates/incl-editor-and-output.html:145
-#: templates/incl-editor-and-output.html:154
+#: templates/incl-editor-and-output.html:149
+#: templates/incl-editor-and-output.html:158
 msgid "advance_button"
 msgstr "Nei level {level}"
 
-#: templates/incl-editor-and-output.html:168
+#: templates/incl-editor-and-output.html:172
 #, fuzzy
 msgid "developers_mode"
 msgstr "Programmer's mode"
@@ -1106,6 +1108,14 @@ msgstr "Log yn"
 #, fuzzy
 msgid "search"
 msgstr "Search..."
+
+#: templates/incl-menubar.html:50
+msgid "keyword_support"
+msgstr ""
+
+#: templates/incl-menubar.html:58
+msgid "non_keyword_support"
+msgstr ""
 
 #: templates/landing-page.html:6
 #, fuzzy
@@ -1175,8 +1185,8 @@ msgstr "OK"
 msgid "cancel"
 msgstr "Ofbrekke"
 
-#: templates/layout.html:43 templates/programs.html:66
-#: templates/programs.html:74
+#: templates/layout.html:43 templates/programs.html:68
+#: templates/programs.html:76
 msgid "copy_link_to_share"
 msgstr "Diellink kopiëare"
 
@@ -1434,63 +1444,63 @@ msgstr "This is a submitted program and can't be altered."
 msgid "title"
 msgstr "Title"
 
-#: templates/programs.html:40 templates/view-program-page.html:8
+#: templates/programs.html:41 templates/view-program-page.html:8
 #, fuzzy
 msgid "last_edited"
 msgstr "Last edited"
 
-#: templates/programs.html:57
+#: templates/programs.html:59
 #, fuzzy
 msgid "favourite_confirm"
 msgstr "Are you sure you want to set this program as your favourite?"
 
-#: templates/programs.html:65 templates/programs.html:70
+#: templates/programs.html:67 templates/programs.html:72
 msgid "open"
 msgstr "Iepenje"
 
-#: templates/programs.html:66 templates/programs.html:74
+#: templates/programs.html:68 templates/programs.html:76
 msgid "copy_clipboard"
 msgstr "Nei it klemboerd kopiëerd"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete_confirm"
 msgstr "Witst seker datst it programme fuortsmite wolst?"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete"
 msgstr "Fuortsmite"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 msgid "unshare_confirm"
 msgstr "Witst seker datst it programma wer privee meitsje wolst?"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 msgid "unshare"
 msgstr "Dieljen stoppe"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 #, fuzzy
 msgid "submit_warning"
 msgstr "Are you sure you want to submit this program?"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 #, fuzzy
 msgid "submit_program"
 msgstr "Submit"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share_confirm"
 msgstr "Witst seker datst it programma foar elkenien sichtber meitsje wolst?"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share"
 msgstr "Diele"
 
-#: templates/programs.html:84
+#: templates/programs.html:86
 msgid "no_programs"
 msgstr "Noch gjin programma's."
 
-#: templates/programs.html:86
+#: templates/programs.html:88
 msgid "write_first_program"
 msgstr "Skreau dyn earste programma!"
 
@@ -1615,7 +1625,7 @@ msgstr "Quiz end"
 msgid "score"
 msgstr "Score"
 
-#: templates/quiz/endquiz.html:37 templates/quiz/quiz-result-overview.html:108
+#: templates/quiz/endquiz.html:37 templates/quiz/quiz-result-overview.html:109
 #, fuzzy
 msgid "go_to_level"
 msgstr "Go to level"
@@ -1640,12 +1650,12 @@ msgstr "Wrong!"
 msgid "correct_answer"
 msgstr "The correct answer is"
 
-#: templates/quiz/feedback.html:52
+#: templates/quiz/feedback.html:54
 #, fuzzy
 msgid "go_to_question"
 msgstr "Go to question"
 
-#: templates/quiz/feedback.html:56
+#: templates/quiz/feedback.html:58
 #, fuzzy
 msgid "go_to_quiz_result"
 msgstr "Go to quiz result"
@@ -1665,25 +1675,25 @@ msgstr "Myn programma's"
 msgid "incorrect"
 msgstr "Incorrect!"
 
-#: templates/quiz/quiz-result-overview.html:91
-#: templates/quiz/quiz-result-overview.html:95
-#: templates/quiz/quiz-result-overview.html:99 templates/quiz/quiz.html:16
+#: templates/quiz/quiz-result-overview.html:92
+#: templates/quiz/quiz-result-overview.html:96
+#: templates/quiz/quiz-result-overview.html:100 templates/quiz/quiz.html:16
 #, fuzzy
 msgid "attempt"
 msgstr "Attempt"
 
 #: templates/quiz/quiz.html:49 templates/quiz/quiz.html:55
-#: templates/quiz/quiz_question.html:15
+#: templates/quiz/quiz_question.html:17
 #, fuzzy
 msgid "hint"
 msgstr "Hint?"
 
-#: templates/quiz/quiz_question.html:53
+#: templates/quiz/quiz_question.html:62
 #, fuzzy
 msgid "go_to_answer"
 msgstr "Go to answer"
 
-#: templates/quiz/quiz_question.html:55
+#: templates/quiz/quiz_question.html:64
 #, fuzzy
 msgid "submit_answer"
 msgstr "Answer question"
