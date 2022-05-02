@@ -72,6 +72,7 @@ Note that your adventure will only be shown in the level for which it was create
 When using Hedy in the classroom it can be cumbersome that all students manually have to create an account and join your class.
 Therefore, we support "_Multiple account creation_" which can be found in the "_Make student accounts_" section on the class overview page.
 Teachers are able to easily create multiple accounts by only providing a username and password, also giving the option to automatically add these students to a class.
+This username does however need to be unique for all Hedy users. One easy solution is to use the students numbers or something like `schoolname_studentname.`
 Student accounts don't need a mail address as they are connected to the teacher account and mails such as _password reset_ are sent to the teacher.
 
 
