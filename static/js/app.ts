@@ -879,7 +879,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   }
 
   function addToOutput(text: string, color: string) {
+    console.log("Hier komen we !");
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
+    ScrollOutputToBottom();
   }
 
   // output functions are configurable.  This one just appends some text
@@ -890,7 +892,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     //@ts-ignore
     const pythonVariables = Sk.globals;
     load_variables(pythonVariables);
-    if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
   }
