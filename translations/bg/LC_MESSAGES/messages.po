@@ -8,7 +8,7 @@ msgstr "This program contains an error, are you sure you want to share it?"
 msgid "title_achievements"
 msgstr "Hedy - My achievements"
 
-#: app.py:619 app.py:1032 website/teacher.py:363 website/teacher.py:372
+#: app.py:619 app.py:1032 website/teacher.py:362 website/teacher.py:371
 #, fuzzy
 msgid "not_teacher"
 msgstr "Looks like you are not a teacher!"
@@ -23,10 +23,10 @@ msgstr "Looks like you are not in this class!"
 msgid "title_programs"
 msgstr "Hedy - My programs"
 
-#: app.py:671 app.py:681 app.py:685 app.py:700 app.py:949 app.py:1302
+#: app.py:671 app.py:681 app.py:685 app.py:700 app.py:949 app.py:1308
 #: website/admin.py:17 website/admin.py:25 website/admin.py:95
-#: website/admin.py:112 website/admin.py:130 website/auth.py:660
-#: website/auth.py:687 website/statistics.py:86
+#: website/admin.py:112 website/admin.py:130 website/auth.py:712
+#: website/auth.py:739 website/statistics.py:86
 #, fuzzy
 msgid "unauthorized"
 msgstr "You don't have access rights for this page"
@@ -63,8 +63,8 @@ msgstr "No such Hedy program!"
 msgid "level_not_class"
 msgstr "You're in a class where this level has not been made available yet"
 
-#: app.py:872 website/teacher.py:430 website/teacher.py:446
-#: website/teacher.py:475 website/teacher.py:501
+#: app.py:872 website/teacher.py:420 website/teacher.py:436
+#: website/teacher.py:465 website/teacher.py:491
 #, fuzzy
 msgid "no_such_adventure"
 msgstr "This adventure doesn't exist!"
@@ -141,42 +141,42 @@ msgstr ""
 "Something went wrong while translating the code. Try running the code to "
 "see if it has an error. Code with errors can not be translated."
 
-#: app.py:1241 website/auth.py:250 website/auth.py:299 website/auth.py:435
-#: website/auth.py:460 website/auth.py:490 website/auth.py:595
-#: website/auth.py:626 website/auth.py:666 website/auth.py:693
-#: website/teacher.py:90 website/teacher.py:125 website/teacher.py:197
-#: website/teacher.py:253 website/teacher.py:300 website/teacher.py:341
-#: website/teacher.py:377 website/teacher.py:457 website/teacher.py:515
+#: app.py:1247 website/auth.py:278 website/auth.py:333 website/auth.py:469
+#: website/auth.py:494 website/auth.py:524 website/auth.py:633
+#: website/auth.py:671 website/auth.py:718 website/auth.py:745
+#: website/teacher.py:89 website/teacher.py:124 website/teacher.py:196
+#: website/teacher.py:252 website/teacher.py:299 website/teacher.py:340
+#: website/teacher.py:376 website/teacher.py:447 website/teacher.py:505
 #, fuzzy
 msgid "ajax_error"
 msgstr "There was an error, please try again."
 
-#: app.py:1244
+#: app.py:1250
 #, fuzzy
 msgid "image_invalid"
 msgstr "Your chosen image is invalid."
 
-#: app.py:1246
+#: app.py:1252
 #, fuzzy
 msgid "personal_text_invalid"
 msgstr "Your personal text is invalid."
 
-#: app.py:1248 app.py:1254
+#: app.py:1254 app.py:1260
 #, fuzzy
 msgid "favourite_program_invalid"
 msgstr "Your chosen favourite program is invalid."
 
-#: app.py:1268 app.py:1269
+#: app.py:1274 app.py:1275
 #, fuzzy
 msgid "public_profile_updated"
 msgstr "Public profile updated."
 
-#: app.py:1306 app.py:1332
+#: app.py:1312 app.py:1338
 #, fuzzy
 msgid "user_not_private"
 msgstr "This user doesn't exist or doesn't have a public profile"
 
-#: app.py:1340
+#: app.py:1346
 msgid "invalid_teacher_invitation_code"
 msgstr "Този код не е валиден."
 
@@ -338,17 +338,24 @@ msgstr "It looks like you forgot to use a command on line {line_number}."
 
 #: content/error-messages.txt:22
 #, fuzzy
+msgid "Missing Inner Command"
+msgstr ""
+"It looks like you forgot to use a command with the {command} statement "
+"you used on line {line_number}."
+
+#: content/error-messages.txt:23
+#, fuzzy
 msgid "Unsupported String Value"
 msgstr "Text values cannot contain {invalid_value}."
 
-#: content/error-messages.txt:23
+#: content/error-messages.txt:24
 #, fuzzy
 msgid "ask_needs_var"
 msgstr ""
 "Starting in level 2, ask needs to be used with a variable. Example: name "
 "is ask What are you called?"
 
-#: content/error-messages.txt:24
+#: content/error-messages.txt:25
 #, fuzzy
 msgid "echo_out"
 msgstr ""
@@ -356,86 +363,86 @@ msgstr ""
 "with ask and print now. Example: name is ask What are you called? print "
 "hello name"
 
-#: content/error-messages.txt:25
+#: content/error-messages.txt:26
 msgid "space"
 msgstr "шпация"
 
-#: content/error-messages.txt:26
+#: content/error-messages.txt:27
 msgid "comma"
 msgstr "запетая"
 
-#: content/error-messages.txt:27
+#: content/error-messages.txt:28
 msgid "question mark"
 msgstr "въпросителен знак"
 
-#: content/error-messages.txt:28
+#: content/error-messages.txt:29
 msgid "newline"
 msgstr "нов ред"
 
-#: content/error-messages.txt:29
+#: content/error-messages.txt:30
 msgid "period"
 msgstr "точка"
 
-#: content/error-messages.txt:30
+#: content/error-messages.txt:31
 msgid "exclamation mark"
 msgstr "удивителен знак"
 
-#: content/error-messages.txt:31
+#: content/error-messages.txt:32
 msgid "dash"
 msgstr "тире"
 
-#: content/error-messages.txt:32
+#: content/error-messages.txt:33
 msgid "star"
 msgstr "звезда"
 
-#: content/error-messages.txt:33
+#: content/error-messages.txt:34
 msgid "single quotes"
 msgstr "апострофи"
 
-#: content/error-messages.txt:34
+#: content/error-messages.txt:35
 msgid "double quotes"
 msgstr "кавички"
 
-#: content/error-messages.txt:35
+#: content/error-messages.txt:36
 msgid "slash"
 msgstr "наклонена черта"
 
-#: content/error-messages.txt:36
+#: content/error-messages.txt:37
 #, fuzzy
 msgid "string"
 msgstr "text"
 
-#: content/error-messages.txt:37
+#: content/error-messages.txt:38
 #, fuzzy
 msgid "nested blocks"
 msgstr "a block in a block"
 
-#: content/error-messages.txt:38
+#: content/error-messages.txt:39
 #, fuzzy
 msgid "or"
 msgstr "or"
 
-#: content/error-messages.txt:39
+#: content/error-messages.txt:40
 #, fuzzy
 msgid "number"
 msgstr "a number"
 
-#: content/error-messages.txt:40
+#: content/error-messages.txt:41
 #, fuzzy
 msgid "integer"
 msgstr "a number"
 
-#: content/error-messages.txt:41
+#: content/error-messages.txt:42
 #, fuzzy
 msgid "float"
 msgstr "a number"
 
-#: content/error-messages.txt:42
+#: content/error-messages.txt:43
 #, fuzzy
 msgid "list"
 msgstr "a list"
 
-#: content/error-messages.txt:43
+#: content/error-messages.txt:44
 #, fuzzy
 msgid "input"
 msgstr "input from ask"
@@ -452,7 +459,7 @@ msgstr "Visible columns"
 
 #: templates/class-overview.html:21 templates/class-overview.html:64
 #: templates/class-overview.html:108 templates/create-accounts.html:16
-#: templates/login.html:12 templates/profile.html:86 templates/recover.html:8
+#: templates/login.html:12 templates/profile.html:87 templates/recover.html:8
 #: templates/signup.html:10
 msgid "username"
 msgstr "Потребителско име"
@@ -483,8 +490,8 @@ msgid "latest_shared_program"
 msgstr "Latest shared program"
 
 #: templates/class-overview.html:49 templates/class-overview.html:70
-#: templates/class-overview.html:83 templates/profile.html:144
-#: templates/profile.html:146 templates/profile.html:159
+#: templates/class-overview.html:83 templates/profile.html:145
+#: templates/profile.html:147 templates/profile.html:160
 msgid "change_password"
 msgstr "Смяна на паролата"
 
@@ -610,7 +617,7 @@ msgstr "Go to my profile"
 msgid "prompt_join_class"
 msgstr "Do you want to join this class?"
 
-#: templates/class-prejoin.html:17 website/teacher.py:183
+#: templates/class-prejoin.html:17 website/teacher.py:182
 #, fuzzy
 msgid "join_prompt"
 msgstr "You need to have an account to join a class. Would you like to login now?"
@@ -656,27 +663,22 @@ msgstr ""
 msgid "create_accounts_prompt"
 msgstr "Are you sure you want to create these accounts?"
 
-#: templates/create-accounts.html:17 templates/learn-more.html:10
-#: templates/profile.html:89 templates/recover.html:8 templates/signup.html:13
-msgid "email"
-msgstr "Имейл адрес"
-
-#: templates/create-accounts.html:18 templates/login.html:15
+#: templates/create-accounts.html:17 templates/login.html:15
 #: templates/reset.html:8 templates/signup.html:19
 msgid "password"
 msgstr "Парола"
 
-#: templates/create-accounts.html:20
+#: templates/create-accounts.html:19
 #, fuzzy
 msgid "select_class"
 msgstr "Select class"
 
-#: templates/create-accounts.html:36 templates/programs.html:24
+#: templates/create-accounts.html:35 templates/programs.html:24
 #, fuzzy
 msgid "reset_view"
 msgstr "Reset"
 
-#: templates/create-accounts.html:37 templates/for-teachers.html:55
+#: templates/create-accounts.html:36 templates/for-teachers.html:55
 #, fuzzy
 msgid "create_accounts"
 msgstr "Create multiple accounts"
@@ -705,7 +707,7 @@ msgstr "Name"
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:20 templates/explore.html:46
 #: templates/for-teachers.html:31 templates/programs.html:12
-#: templates/programs.html:39 templates/programs.html:50
+#: templates/programs.html:39 templates/programs.html:47
 msgid "level"
 msgstr "Ниво"
 
@@ -735,7 +737,7 @@ msgstr ""
 
 #: templates/customize-adventure.html:43 templates/customize-class.html:28
 #: templates/customize-class.html:94 templates/explore.html:26
-#: templates/programs.html:18 templates/programs.html:46
+#: templates/programs.html:18 templates/programs.html:40
 #: templates/view-adventure.html:6
 msgid "adventure"
 msgstr "Авантюра"
@@ -839,7 +841,7 @@ msgstr "Opening dates"
 msgid "opening_date"
 msgstr "Opening date"
 
-#: templates/customize-class.html:77
+#: templates/customize-class.html:75 templates/customize-class.html:77
 #, fuzzy
 msgid "directly_available"
 msgstr "Directly open"
@@ -850,8 +852,8 @@ msgid "select_own_adventures"
 msgstr "Select own adventures"
 
 #: templates/customize-class.html:96 templates/customize-class.html:120
-#: templates/profile.html:47 templates/profile.html:121
-#: templates/profile.html:130 templates/signup.html:26 templates/signup.html:45
+#: templates/profile.html:47 templates/profile.html:122
+#: templates/profile.html:131 templates/signup.html:26 templates/signup.html:45
 #: templates/signup.html:53
 msgid "select"
 msgstr "Избери"
@@ -943,8 +945,8 @@ msgstr "Creator"
 msgid "view_program"
 msgstr "View program"
 
-#: templates/for-teachers.html:5 templates/profile.html:71
-#: templates/profile.html:73
+#: templates/for-teachers.html:5 templates/profile.html:72
+#: templates/profile.html:74
 #, fuzzy
 msgid "my_classes"
 msgstr "My classes"
@@ -979,7 +981,7 @@ msgstr "View"
 msgid "adventure_prompt"
 msgstr "Please enter the name of the adventure"
 
-#: templates/for-teachers.html:50 website/teacher.py:510
+#: templates/for-teachers.html:50 website/teacher.py:500
 #, fuzzy
 msgid "create_adventure"
 msgstr "Create adventure"
@@ -1050,25 +1052,25 @@ msgstr "Тествай кода"
 msgid "stop_code_button"
 msgstr "Save code"
 
-#: templates/incl-editor-and-output.html:126
+#: templates/incl-editor-and-output.html:130
 msgid "edit_code_button"
 msgstr "Промени кода"
 
-#: templates/incl-editor-and-output.html:132
+#: templates/incl-editor-and-output.html:136
 msgid "read_code_label"
 msgstr "Прочети на глас"
 
-#: templates/incl-editor-and-output.html:142
-#: templates/incl-editor-and-output.html:151
+#: templates/incl-editor-and-output.html:146
+#: templates/incl-editor-and-output.html:155
 msgid "regress_button"
 msgstr "Върни се назад {level}"
 
-#: templates/incl-editor-and-output.html:145
-#: templates/incl-editor-and-output.html:154
+#: templates/incl-editor-and-output.html:149
+#: templates/incl-editor-and-output.html:158
 msgid "advance_button"
 msgstr "Продължи към ниво {level}"
 
-#: templates/incl-editor-and-output.html:168
+#: templates/incl-editor-and-output.html:172
 #, fuzzy
 msgid "developers_mode"
 msgstr "Programmer's mode"
@@ -1123,6 +1125,14 @@ msgstr "Вход"
 #, fuzzy
 msgid "search"
 msgstr "Search..."
+
+#: templates/incl-menubar.html:50
+msgid "keyword_support"
+msgstr ""
+
+#: templates/incl-menubar.html:58
+msgid "non_keyword_support"
+msgstr ""
 
 #: templates/landing-page.html:6
 #, fuzzy
@@ -1194,8 +1204,8 @@ msgstr "OK"
 msgid "cancel"
 msgstr "Cancel"
 
-#: templates/layout.html:43 templates/programs.html:66
-#: templates/programs.html:74
+#: templates/layout.html:43 templates/programs.html:68
+#: templates/programs.html:76
 #, fuzzy
 msgid "copy_link_to_share"
 msgstr "Copy link to share"
@@ -1211,6 +1221,11 @@ msgstr "You've earned an achievement!"
 msgid "mailing_title"
 msgstr "Hedy"
 
+#: templates/learn-more.html:10 templates/profile.html:90
+#: templates/recover.html:8 templates/signup.html:13
+msgid "email"
+msgstr "Имейл адрес"
+
 #: templates/learn-more.html:14
 #, fuzzy
 msgid "surname"
@@ -1221,7 +1236,7 @@ msgstr "Потребителско име"
 msgid "lastname"
 msgstr "Name"
 
-#: templates/learn-more.html:22 templates/profile.html:128
+#: templates/learn-more.html:22 templates/profile.html:129
 #: templates/signup.html:52
 msgid "country"
 msgstr "Държава"
@@ -1263,7 +1278,7 @@ msgstr "Пробвай"
 msgid "login_long"
 msgstr "Влез с твоя акаунт"
 
-#: templates/login.html:26 website/auth.py:263
+#: templates/login.html:26 website/auth.py:291
 msgid "no_account"
 msgstr "Нямаш акаунт?"
 
@@ -1361,7 +1376,7 @@ msgstr ""
 msgid "update_public"
 msgstr "Update public profile"
 
-#: templates/profile.html:61 templates/profile.html:141
+#: templates/profile.html:61 templates/profile.html:142
 msgid "are_you_sure"
 msgstr "Внимание! Това действие е необратимо."
 
@@ -1370,68 +1385,68 @@ msgstr "Внимание! Това действие е необратимо."
 msgid "delete_public"
 msgstr "Delete public profile"
 
-#: templates/profile.html:76
+#: templates/profile.html:77
 #, fuzzy
 msgid "self_removal_prompt"
 msgstr "Are you sure you want to leave this class?"
 
-#: templates/profile.html:76
+#: templates/profile.html:77
 #, fuzzy
 msgid "leave_class"
 msgstr "Leave class"
 
-#: templates/profile.html:81 templates/profile.html:84
+#: templates/profile.html:82 templates/profile.html:85
 #, fuzzy
 msgid "settings"
 msgstr "My personal settings"
 
-#: templates/profile.html:92 templates/signup.html:41
+#: templates/profile.html:93 templates/signup.html:41
 msgid "birth_year"
 msgstr "Година на раждане"
 
-#: templates/profile.html:95 templates/signup.html:25
+#: templates/profile.html:96 templates/signup.html:25
 #, fuzzy
 msgid "preferred_language"
 msgstr "Preferred language"
 
-#: templates/profile.html:105 templates/signup.html:34
+#: templates/profile.html:106 templates/signup.html:34
 #, fuzzy
 msgid "preferred_keyword_language"
 msgstr "Preferred keyword language"
 
-#: templates/profile.html:119 templates/signup.html:44
+#: templates/profile.html:120 templates/signup.html:44
 msgid "gender"
 msgstr "Пол"
 
-#: templates/profile.html:122 templates/signup.html:46
+#: templates/profile.html:123 templates/signup.html:46
 msgid "female"
 msgstr "Женски"
 
-#: templates/profile.html:123 templates/signup.html:47
+#: templates/profile.html:124 templates/signup.html:47
 msgid "male"
 msgstr "Мъжки"
 
-#: templates/profile.html:124 templates/signup.html:48
+#: templates/profile.html:125 templates/signup.html:48
 msgid "other"
 msgstr "Друг"
 
-#: templates/profile.html:137
+#: templates/profile.html:138
 msgid "update_profile"
 msgstr "Обновяване на профила"
 
-#: templates/profile.html:141
+#: templates/profile.html:142
 msgid "destroy_profile"
 msgstr "Изтриване на акаунта"
 
-#: templates/profile.html:148
+#: templates/profile.html:149
 msgid "current_password"
 msgstr "Настояща парола"
 
-#: templates/profile.html:152
+#: templates/profile.html:153
 msgid "new_password"
 msgstr "Нова парола"
 
-#: templates/profile.html:156
+#: templates/profile.html:157
 msgid "repeat_new_password"
 msgstr "Повтаряне на паролата"
 
@@ -1449,68 +1464,68 @@ msgstr "This is a submitted program and can't be altered."
 msgid "title"
 msgstr "Title"
 
-#: templates/programs.html:40 templates/view-program-page.html:8
+#: templates/programs.html:41 templates/view-program-page.html:8
 #, fuzzy
 msgid "last_edited"
 msgstr "Last edited"
 
-#: templates/programs.html:57
+#: templates/programs.html:59
 #, fuzzy
 msgid "favourite_confirm"
 msgstr "Are you sure you want to set this program as your favourite?"
 
-#: templates/programs.html:65 templates/programs.html:70
+#: templates/programs.html:67 templates/programs.html:72
 msgid "open"
 msgstr "Отвори"
 
-#: templates/programs.html:66 templates/programs.html:74
+#: templates/programs.html:68 templates/programs.html:76
 #, fuzzy
 msgid "copy_clipboard"
 msgstr "Successfully copied to clipboard"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 #, fuzzy
 msgid "delete_confirm"
 msgstr "Are you sure you want to delete the program?"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete"
 msgstr "Изтрий"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 #, fuzzy
 msgid "unshare_confirm"
 msgstr "Are you sure you want to make the program private?"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 #, fuzzy
 msgid "unshare"
 msgstr "Unshare"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 #, fuzzy
 msgid "submit_warning"
 msgstr "Are you sure you want to submit this program?"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 #, fuzzy
 msgid "submit_program"
 msgstr "Submit"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 #, fuzzy
 msgid "share_confirm"
 msgstr "Are you sure you want to make the program public?"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share"
 msgstr "сподели"
 
-#: templates/programs.html:84
+#: templates/programs.html:86
 msgid "no_programs"
 msgstr "Нямаш програми."
 
-#: templates/programs.html:86
+#: templates/programs.html:88
 msgid "write_first_program"
 msgstr "Напиши първата си програма!"
 
@@ -1642,7 +1657,7 @@ msgstr "Quiz end"
 msgid "score"
 msgstr "Score"
 
-#: templates/quiz/endquiz.html:37 templates/quiz/quiz-result-overview.html:108
+#: templates/quiz/endquiz.html:37 templates/quiz/quiz-result-overview.html:109
 #, fuzzy
 msgid "go_to_level"
 msgstr "Go to level"
@@ -1667,12 +1682,12 @@ msgstr "Wrong!"
 msgid "correct_answer"
 msgstr "The correct answer is"
 
-#: templates/quiz/feedback.html:52
+#: templates/quiz/feedback.html:54
 #, fuzzy
 msgid "go_to_question"
 msgstr "Go to question"
 
-#: templates/quiz/feedback.html:56
+#: templates/quiz/feedback.html:58
 #, fuzzy
 msgid "go_to_quiz_result"
 msgstr "Go to quiz result"
@@ -1692,25 +1707,25 @@ msgstr "Correct"
 msgid "incorrect"
 msgstr "Incorrect!"
 
-#: templates/quiz/quiz-result-overview.html:91
-#: templates/quiz/quiz-result-overview.html:95
-#: templates/quiz/quiz-result-overview.html:99 templates/quiz/quiz.html:16
+#: templates/quiz/quiz-result-overview.html:92
+#: templates/quiz/quiz-result-overview.html:96
+#: templates/quiz/quiz-result-overview.html:100 templates/quiz/quiz.html:16
 #, fuzzy
 msgid "attempt"
 msgstr "Attempt"
 
 #: templates/quiz/quiz.html:49 templates/quiz/quiz.html:55
-#: templates/quiz/quiz_question.html:15
+#: templates/quiz/quiz_question.html:17
 #, fuzzy
 msgid "hint"
 msgstr "Hint?"
 
-#: templates/quiz/quiz_question.html:53
+#: templates/quiz/quiz_question.html:62
 #, fuzzy
 msgid "go_to_answer"
 msgstr "Go to answer"
 
-#: templates/quiz/quiz_question.html:55
+#: templates/quiz/quiz_question.html:64
 #, fuzzy
 msgid "submit_answer"
 msgstr "Answer question"
@@ -1730,183 +1745,184 @@ msgstr "Go to question 1"
 msgid "title_admin"
 msgstr "Hedy - Administrator page"
 
-#: website/auth.py:183 website/auth.py:252 website/auth.py:384
-#: website/auth.py:389 website/auth.py:437 website/auth.py:597
-#: website/auth.py:606 website/auth.py:628 website/auth.py:668
-#: website/auth.py:675 website/auth.py:695 website/teacher.py:302
-#: website/teacher.py:343
+#: website/auth.py:182 website/auth.py:195 website/auth.py:280
+#: website/auth.py:418 website/auth.py:423 website/auth.py:471
+#: website/auth.py:635 website/auth.py:644 website/auth.py:673
+#: website/auth.py:720 website/auth.py:727 website/auth.py:747
+#: website/teacher.py:301 website/teacher.py:342
 #, fuzzy
 msgid "username_invalid"
 msgstr "Your username is invalid."
 
-#: website/auth.py:185
+#: website/auth.py:184 website/auth.py:197
 msgid "username_special"
 msgstr "Символите `:` or `@` не са позволени."
 
-#: website/auth.py:187
+#: website/auth.py:186 website/auth.py:199
 msgid "username_three"
 msgstr "Потребителското име трябва да съдържа поне три символа."
 
-#: website/auth.py:189 website/auth.py:492 website/auth.py:697
-#: website/auth.py:702
-msgid "email_invalid"
-msgstr "Валиден имейл."
-
-#: website/auth.py:191 website/auth.py:254 website/auth.py:439
-#: website/auth.py:462 website/auth.py:474 website/auth.py:632
+#: website/auth.py:188 website/auth.py:203 website/auth.py:282
+#: website/auth.py:473 website/auth.py:496 website/auth.py:508
+#: website/auth.py:677
 #, fuzzy
 msgid "password_invalid"
 msgstr "Your password is invalid."
 
-#: website/auth.py:193
+#: website/auth.py:190 website/auth.py:205
 msgid "passwords_six"
 msgstr "Паролата трябва да съдържа поне 6 символа."
 
-#: website/auth.py:263
+#: website/auth.py:201 website/auth.py:535 website/auth.py:749
+#: website/auth.py:754
+msgid "email_invalid"
+msgstr "Валиден имейл."
+
+#: website/auth.py:291
 #, fuzzy
 msgid "invalid_username_password"
 msgstr "Invalid username/password."
 
-#: website/auth.py:308 website/auth.py:310
+#: website/auth.py:342 website/auth.py:344
 msgid "repeat_match_email"
 msgstr "Повтореният имейл не съвпада с първия."
 
-#: website/auth.py:312 website/auth.py:464 website/auth.py:468
-#: website/auth.py:636
+#: website/auth.py:346 website/auth.py:498 website/auth.py:502
+#: website/auth.py:681
 msgid "repeat_match_password"
 msgstr "Повторената парола не съвпада с първата."
 
-#: website/auth.py:314 website/auth.py:494
+#: website/auth.py:348 website/auth.py:526
 #, fuzzy
 msgid "language_invalid"
 msgstr "Please select a valid language."
 
-#: website/auth.py:316
+#: website/auth.py:350
 #, fuzzy
 msgid "agree_invalid"
 msgstr "You have to agree with the privacy terms."
 
-#: website/auth.py:318 website/auth.py:497
+#: website/auth.py:352 website/auth.py:529
 #, fuzzy
 msgid "keyword_language_invalid"
 msgstr ""
 "Please select a valid keyword language (select English or your own "
 "language)."
 
-#: website/auth.py:323 website/auth.py:502
+#: website/auth.py:357 website/auth.py:540
 #, fuzzy
 msgid "year_invalid"
 msgstr "Please enter a year between 1900 and {year}."
 
-#: website/auth.py:326 website/auth.py:505
+#: website/auth.py:360 website/auth.py:543
 #, fuzzy
 msgid "gender_invalid"
 msgstr "Please select a valid gender, choose (Female, Male, Other)."
 
-#: website/auth.py:329 website/auth.py:508
+#: website/auth.py:363 website/auth.py:546
 #, fuzzy
 msgid "country_invalid"
 msgstr "Please select a valid country."
 
-#: website/auth.py:331 website/auth.py:334 website/auth.py:510
-#: website/auth.py:513
+#: website/auth.py:365 website/auth.py:368 website/auth.py:548
+#: website/auth.py:551
 #, fuzzy
 msgid "experience_invalid"
 msgstr "Please select a valid experience, choose (Yes, No)."
 
-#: website/auth.py:337 website/auth.py:516
+#: website/auth.py:371 website/auth.py:554
 #, fuzzy
 msgid "programming_invalid"
 msgstr "Please select a valid programming language."
 
-#: website/auth.py:340
+#: website/auth.py:374
 #, fuzzy
 msgid "exists_username"
 msgstr "That username is already in use."
 
-#: website/auth.py:342 website/auth.py:524
+#: website/auth.py:376 website/auth.py:562
 #, fuzzy
 msgid "exists_email"
 msgstr "That email is already in use."
 
-#: website/auth.py:382 website/auth.py:397 website/auth.py:630
-#: website/auth.py:640
+#: website/auth.py:416 website/auth.py:431 website/auth.py:675
+#: website/auth.py:685
 #, fuzzy
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
-#: website/auth.py:441 website/auth.py:466 website/auth.py:634
+#: website/auth.py:475 website/auth.py:500 website/auth.py:679
 #, fuzzy
 msgid "password_six"
 msgstr "Your password must contain at least six characters."
 
-#: website/auth.py:444 website/auth.py:447
+#: website/auth.py:478 website/auth.py:481
 #, fuzzy
 msgid "password_change_not_allowed"
 msgstr "You're not allowed to change the password of this user."
 
-#: website/auth.py:452
+#: website/auth.py:486
 #, fuzzy
 msgid "password_change_success"
 msgstr "Password of your student is successfully changed."
 
-#: website/auth.py:483
+#: website/auth.py:517
 #, fuzzy
 msgid "password_updated"
 msgstr "Password updated."
 
-#: website/auth.py:563
+#: website/auth.py:601
 #, fuzzy
 msgid "profile_updated"
 msgstr "Profile updated."
 
-#: website/auth.py:566
+#: website/auth.py:604
 #, fuzzy
 msgid "profile_updated_reload"
 msgstr "Profile updated, page will be re-loaded."
 
-#: website/auth.py:619
+#: website/auth.py:664
 #, fuzzy
 msgid "sent_password_recovery"
 msgstr ""
 "You should soon receive an email with instructions on how to reset your "
 "password."
 
-#: website/auth.py:652
+#: website/auth.py:704
 #, fuzzy
 msgid "password_resetted"
 msgstr ""
 "Your password has been successfully reset. You are being redirected to "
 "the login page."
 
-#: website/auth.py:670
+#: website/auth.py:722
 #, fuzzy
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
-#: website/auth.py:758
+#: website/auth.py:810
 #, fuzzy
 msgid "mail_welcome_verify_body"
 msgstr ""
 "Your Hedy account has been created successfully. Welcome!\n"
 "Please click on this link to verify your email address: {link}"
 
-#: website/auth.py:760
+#: website/auth.py:812
 #, fuzzy
 msgid "mail_change_password_body"
 msgstr "Смяна на паролата"
 
-#: website/auth.py:762
+#: website/auth.py:814
 #, fuzzy
 msgid "mail_recover_password_body"
 msgstr "Request a password reset"
 
-#: website/auth.py:764
+#: website/auth.py:816
 #, fuzzy
 msgid "mail_reset_password_body"
 msgstr "Reset password"
 
-#: website/auth.py:766
+#: website/auth.py:818
 #, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
@@ -1930,54 +1946,54 @@ msgstr ""
 "email</a>.\n"
 "Keep programming!"
 
-#: website/auth.py:772
+#: website/auth.py:824
 #, fuzzy
 msgid "mail_welcome_verify_subject"
 msgstr "Welcome to Hedy"
 
-#: website/auth.py:774
+#: website/auth.py:826
 #, fuzzy
 msgid "mail_change_password_subject"
 msgstr "Смяна на паролата"
 
-#: website/auth.py:776
+#: website/auth.py:828
 #, fuzzy
 msgid "mail_recover_password_subject"
 msgstr "Request a password reset"
 
-#: website/auth.py:778
+#: website/auth.py:830
 #, fuzzy
 msgid "mail_reset_password_subject"
 msgstr "Reset password"
 
-#: website/auth.py:780
+#: website/auth.py:832
 #, fuzzy
 msgid "mail_welcome_teacher_subject"
 msgstr "Your Hedy teacher account is ready"
 
-#: website/auth.py:784
+#: website/auth.py:836
 #, fuzzy
 msgid "user"
 msgstr "Потребителско име"
 
-#: website/auth.py:789
+#: website/auth.py:841
 #, fuzzy
 msgid "mail_hello"
 msgstr "Hi {username}!"
 
-#: website/auth.py:791
+#: website/auth.py:843
 #, fuzzy
 msgid "mail_goodbye"
 msgstr ""
 "Thank you!\n"
 "The Hedy team"
 
-#: website/auth.py:799
+#: website/auth.py:851
 #, fuzzy
 msgid "copy_mail_link"
 msgstr "Please copy and paste this link into a new tab:"
 
-#: website/auth.py:800
+#: website/auth.py:852
 #, fuzzy
 msgid "link"
 msgstr "Вход"
@@ -2026,16 +2042,16 @@ msgstr "Program unshared successfully."
 msgid "favourite_success"
 msgstr "Your program is set as favourite."
 
-#: website/statistics.py:37 website/teacher.py:28 website/teacher.py:36
-#: website/teacher.py:211 website/teacher.py:233 website/teacher.py:245
-#: website/teacher.py:312 website/teacher.py:351
+#: website/statistics.py:37 website/teacher.py:27 website/teacher.py:35
+#: website/teacher.py:210 website/teacher.py:232 website/teacher.py:244
+#: website/teacher.py:311 website/teacher.py:350
 #, fuzzy
 msgid "retrieve_class_error"
 msgstr "Only teachers can retrieve classes"
 
-#: website/statistics.py:41 website/teacher.py:39 website/teacher.py:133
-#: website/teacher.py:152 website/teacher.py:214 website/teacher.py:236
-#: website/teacher.py:248 website/teacher.py:315 website/teacher.py:354
+#: website/statistics.py:41 website/teacher.py:38 website/teacher.py:132
+#: website/teacher.py:151 website/teacher.py:213 website/teacher.py:235
+#: website/teacher.py:247 website/teacher.py:314 website/teacher.py:353
 #, fuzzy
 msgid "no_such_class"
 msgstr "No such Hedy class"
@@ -2045,164 +2061,160 @@ msgstr "No such Hedy class"
 msgid "title_class statistics"
 msgstr "My statistics"
 
-#: website/teacher.py:76
+#: website/teacher.py:75
 #, fuzzy
 msgid "title_class-overview"
 msgstr "Hedy - Class overview"
 
-#: website/teacher.py:85
+#: website/teacher.py:84
 #, fuzzy
 msgid "only_teacher_create_class"
 msgstr "Only teachers are allowed to create classes!"
 
-#: website/teacher.py:92 website/teacher.py:127
+#: website/teacher.py:91 website/teacher.py:126
 #, fuzzy
 msgid "class_name_invalid"
 msgstr "This class name is invalid."
 
-#: website/teacher.py:94 website/teacher.py:129
+#: website/teacher.py:93 website/teacher.py:128
 #, fuzzy
 msgid "class_name_empty"
 msgstr "You didn't enter a class name!"
 
-#: website/teacher.py:100
+#: website/teacher.py:99
 #, fuzzy
 msgid "class_name_duplicate"
 msgstr "You already have a class with this name."
 
-#: website/teacher.py:164 website/teacher.py:180 website/teacher.py:542
+#: website/teacher.py:163 website/teacher.py:179 website/teacher.py:532
 #, fuzzy
 msgid "invalid_class_link"
 msgstr "Invalid link for joining the class."
 
-#: website/teacher.py:168 website/teacher.py:170
+#: website/teacher.py:167 website/teacher.py:169
 #, fuzzy
 msgid "title_join-class"
 msgstr "Hedy - Join class"
 
-#: website/teacher.py:224
+#: website/teacher.py:223
 #, fuzzy
 msgid "title_customize-class"
 msgstr "Hedy - Customize class"
 
-#: website/teacher.py:239
+#: website/teacher.py:238
 #, fuzzy
 msgid "customization_deleted"
 msgstr "Customizations successfully deleted."
 
-#: website/teacher.py:292
+#: website/teacher.py:291
 #, fuzzy
 msgid "class_customize_success"
 msgstr "Class successfully customized."
 
-#: website/teacher.py:306
+#: website/teacher.py:305
 #, fuzzy
 msgid "username_empty"
 msgstr "You didn't enter an username!"
 
-#: website/teacher.py:319
+#: website/teacher.py:318
 #, fuzzy
 msgid "student_not_existing"
 msgstr "This username doesn't exist."
 
-#: website/teacher.py:321
+#: website/teacher.py:320
 #, fuzzy
 msgid "student_already_in_class"
 msgstr "This student is already in your class."
 
-#: website/teacher.py:323
+#: website/teacher.py:322
 #, fuzzy
 msgid "student_already_invite"
 msgstr "This student already has a pending invitation."
 
-#: website/teacher.py:382
+#: website/teacher.py:381
 #, fuzzy
 msgid "no_accounts"
 msgstr "There are no accounts to create."
 
-#: website/teacher.py:393
+#: website/teacher.py:391
 #, fuzzy
 msgid "unique_usernames"
 msgstr "All usernames need to be unique."
 
-#: website/teacher.py:396
-#, fuzzy
-msgid "unique_emails"
-msgstr "All mail addresses need to be unique."
-
-#: website/teacher.py:407
+#: website/teacher.py:400
 #, fuzzy
 msgid "usernames_exist"
 msgstr "One or more usernames is already in use."
 
-#: website/teacher.py:410
-#, fuzzy
-msgid "emails_exist"
-msgstr "One or more mail addresses is already in use."
-
-#: website/teacher.py:421
+#: website/teacher.py:411
 #, fuzzy
 msgid "accounts_created"
 msgstr "Accounts where successfully created."
 
-#: website/teacher.py:427 website/teacher.py:432 website/teacher.py:443
-#: website/teacher.py:472 website/teacher.py:498
+#: website/teacher.py:417 website/teacher.py:422 website/teacher.py:433
+#: website/teacher.py:462 website/teacher.py:488
 #, fuzzy
 msgid "retrieve_adventure_error"
 msgstr "You're not allowed to view this adventure!"
 
-#: website/teacher.py:437
+#: website/teacher.py:427
 #, fuzzy
 msgid "title_view-adventure"
 msgstr "Hedy - View adventure"
 
-#: website/teacher.py:448
+#: website/teacher.py:438
 #, fuzzy
 msgid "title_customize-adventure"
 msgstr "Hedy - Customize adventure"
 
-#: website/teacher.py:459
+#: website/teacher.py:449
 #, fuzzy
 msgid "adventure_id_invalid"
 msgstr "This adventure id is invalid."
 
-#: website/teacher.py:461 website/teacher.py:517
+#: website/teacher.py:451 website/teacher.py:507
 #, fuzzy
 msgid "adventure_name_invalid"
 msgstr "This adventure name is invalid."
 
-#: website/teacher.py:463
+#: website/teacher.py:453
 #, fuzzy
 msgid "level_invalid"
 msgstr "This Hedy level in invalid."
 
-#: website/teacher.py:465
+#: website/teacher.py:455
 #, fuzzy
 msgid "content_invalid"
 msgstr "This adventure is invalid."
 
-#: website/teacher.py:467
+#: website/teacher.py:457
 #, fuzzy
 msgid "adventure_length"
 msgstr "Your adventure has to be at least 20 characters."
 
-#: website/teacher.py:469
+#: website/teacher.py:459
 #, fuzzy
 msgid "public_invalid"
 msgstr "This agreement selection is invalid"
 
-#: website/teacher.py:480 website/teacher.py:524
+#: website/teacher.py:470 website/teacher.py:514
 #, fuzzy
 msgid "adventure_duplicate"
 msgstr "You already have an adventure with this name."
 
-#: website/teacher.py:492
+#: website/teacher.py:482
 #, fuzzy
 msgid "adventure_updated"
 msgstr "The adventure has been updated!"
 
-#: website/teacher.py:519
+#: website/teacher.py:509
 #, fuzzy
 msgid "adventure_empty"
 msgstr "You didn't enter an adventure name!"
+
+#~ msgid "unique_emails"
+#~ msgstr "All mail addresses need to be unique."
+
+#~ msgid "emails_exist"
+#~ msgstr "One or more mail addresses is already in use."
 

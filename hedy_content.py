@@ -32,6 +32,7 @@ ADVENTURE_ORDER = [
     'language',
     'secret',
     'tic',
+    'blackjack',
     'next',
     'end'
 ]

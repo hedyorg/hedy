@@ -28,7 +28,7 @@
           </div>
       {% endif %}
       <div class="w-full flex-1 flex flex-col">
-        <div id="editor" style="background: #272822; font-family: monospace; color: white" lang="en"
+        <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en"
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code}}
@@ -118,10 +118,14 @@
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-4">
       <div class="flex justify-between items-start h-12 overflow-visible">
-        <div>
-            <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}', '{{_('already_program_running')}}')">{{_('run_code_button')}}</button>
-            <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+        <div id="runButtonContainer">
+        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}', '{{_('already_program_running')}}')">{{_('run_code_button')}} </button>
+        <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
+        <button id="debug_button" class="green-btn" onclick="hedyApp.startDebug()">🐞</button>
+        <button id="debug_continue" class="green-btn hidden" onclick="hedyApp.incrementDebugLine()">⏩</button>
+        <button id="debug_restart" class="green-btn hidden" onclick="hedyApp.resetDebug()">🔄</button>
+        <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
         {% if show_edit_button %}
             <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn">{{_('edit_code_button')}}</button>
         {% else %}

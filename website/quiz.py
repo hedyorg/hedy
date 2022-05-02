@@ -296,18 +296,12 @@ def get_result_items(quiz_answers, questions):
     for i in range(len(questions)):
         item = {}
         item["question_text"] = questions[i + 1]["question_text"]
-        item["question_code"] = questions[i + 1]["code"]
+        item["question_code"] = questions[i + 1].get("code", None)
         item["is_correct"] = quiz_answers[i + 1][-1] == questions[i + 1]["correct_answer"]
         item["index_chosen"] = index_from_letter(quiz_answers[i + 1][-1])
         item["index_correct"] = index_from_letter(questions[i + 1]["correct_answer"])
         item["attempts"] = len(quiz_answers[i + 1])
-        if "option_text" in question_options_for(questions[i + 1])[
-            index_from_letter(questions[i + 1]["correct_answer"])]:
-            item["option_text"] = \
-            question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["option_text"]
-        elif "code" in question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]:
-            item["code"] = \
-            question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["code"]
+        item["option"] = question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["option"]
         result_items.append(item)
     return result_items
 
