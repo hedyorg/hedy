@@ -87,8 +87,8 @@ levels:
         5:
             question_text: "Which command is missing in line 2?"
             code: |-
-                {ask} What is your favorite pet?
-                _?_ So your favorite pet is...
+                {ask} 你最喜欢的宠物是什么？
+                _?_ 所以你最喜欢的宠物是...
             mp_choice_options:
             -   option: |
                     ```
@@ -128,17 +128,17 @@ levels:
             -   option: "Line 3 has to begin with `{print}` instead of `{echo}`."
                 feedback: "`{echo}` is correct."
             -   option: "In line 4, `{print}` is spelled wrong."
-                feedback: "No, there is a mistake somewhere else"
+                feedback: "不，其他地方有错误"
             correct_answer: "B"
             hint: "Check the `{print}` commands."
             question_score: '10'
         7:
             question_text: "What's wrong with this code?"
             code: |-
-                {print} Welcome at Hedys restaurant!
-                {ask} What would you like to eat?
-                {echo} So you want to order ...
-                {print} Coming right up! Enjoy!
+                {print} 欢迎来到海迪餐厅！
+                {ask} 你想吃什么？
+                {echo} 所以你想点...
+                {print} 马上就来！好好享受！
             mp_choice_options:
             -   option: "In line 1 `{print}` needs to be replaced with `{ask}`"
                 feedback: "Are you sure something is wrong?"
@@ -168,9 +168,9 @@ levels:
         9:
             question_text: "What's wrong with this code?"
             code: |-
-                {print} Hello!
-                {print} How are you doing?
-                {echo} So you are doing...
+                {print} 你好！
+                {print} 你好吗？
+                {echo} 所以你正在做...
             mp_choice_options:
             -   option: "`{print}` in line 1 should be `{ask}`"
                 feedback: "No, `{print}` is right. Where is the question being asked?"
@@ -269,7 +269,7 @@ levels:
             hint: "'name' is being replaced with 'Hedy' in both places"
             question_score: '10'
         5:
-            question_text: "What happens when you use the `{sleep}` command?"
+            question_text: "当你使用 `{sleep}` 命令时会发生什么？"
             code: "{sleep}"
             mp_choice_options:
             -   option: "It slows down your computer"
@@ -438,7 +438,7 @@ levels:
                     ```
                     {is}
                     ```
-                feedback: "`{is}` is used to make a list"
+                feedback: "`{is}` 用于制作列表"
             -   option: |
                     ```
                     {at} {random}
@@ -491,7 +491,7 @@ levels:
             hint: "The variable (the list) is called options."
             question_score: '10'
         4:
-            question_text: "What should change in line 2 to print a random price?"
+            question_text: "为了打印一个随机价格，第2行应该怎么改？"
             code: |-
                 prices {is} 1 dollar, 100 dollar, 1 million dollar
                 {print} price {at} {random}
@@ -525,11 +525,11 @@ levels:
                 {print} answers {at} {random}
             mp_choice_options:
                 -   option: "Line 1 needs to say `{print}` instead of `{ask}`"
-                    feedback: "No, that's not wrong."
+                    feedback: "不，这并没有错。"
                 -   option: "Line 2 needs to say `{ask}` instead of `{print}`"
-                    feedback: "No that's not wrong."
+                    feedback: "不，这并没有错。"
                 -   option: "Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe"
-                    feedback: "No, that's not wrong."
+                    feedback: "不，这并没有错。"
                 -   option: "Nothing, this code is perfect"
                     feedback: "That's right!"
             correct_answer: "D"
@@ -865,20 +865,20 @@ levels:
         1:
             question_text: "Which command should be filled in on the _?_?"
             code: |-
-                number {is} {ask} 'What is your lucky number?'
-                {if} number {is} 5 {print} Mine too!
-                _?_ {print} My lucky number is 5!
+                数字 {is} {ask} '你的幸运数字是多少？'
+                {if} 数字 {is} 5 {print} 我也是！
+                _?_ {print} 我的幸运数字是 5！
             mp_choice_options:
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "There already is a `{print}` command."
+                feedback: "已经有一个 `{print}` 命令。"
             -   option: |
                     ```
                     {if}
                     ```
-                feedback: "The `{if}` command is used in the line above."
+                feedback: "在上面一行里使用了 `{if}` 命令。"
             -   option: |
                     ```
                     {sleep}
@@ -888,9 +888,9 @@ levels:
                     ```
                     {else}
                     ```
-                feedback: "That's right!"
+                feedback: "这就对了!"
             correct_answer: "D"
-            hint: "Which one goes together with the `{if}` command?"
+            hint: "哪一个与 {if} 命令一起使用？"
             question_score: '10'
         2:
             question_text: "What appears in your output screen when you type in the name Hedy?"
@@ -910,7 +910,7 @@ levels:
             hint: "`{if}` name `{is}` Hedy `{print}` ...?"
             question_score: '10'
         3:
-            question_text: "What is the right password?"
+            question_text: "正确的密码是什么？"
             code: |-
                 password {is} {ask} 'What is the password?'
                 {if} password {is} SECRET {print} 'Correct!'
