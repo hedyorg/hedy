@@ -54,9 +54,9 @@ if [[ "${1:-}" == "--watch" ]]; then
         --outfile=static/js/appbundle.js
 else
     # Use tsc to generate .js
-    #npx tsc --outDir __tmp__
+    npx tsc --outDir __tmp__
 
-    npx esbuild __tmp__/index.js \
+    npx esbuild static/js/index.js \
         --bundle \
         --sourcemap \
         --minify \
