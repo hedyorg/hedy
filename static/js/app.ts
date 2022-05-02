@@ -879,7 +879,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   }
 
   function addToOutput(text: string, color: string) {
-    console.log("Hier komen we !");
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
     ScrollOutputToBottom();
   }
