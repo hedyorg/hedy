@@ -1,6 +1,6 @@
 ## Languages
 Hedy currently supports a total of 23 languages, for which some are partly translated. 
-Alle translations are handled by Weblate, enabling contributors to contribute within an nice UI instead of a code editor. 
+All translations are handled by Weblate, enabling contributors to contribute within an nice UI instead of a code editor. 
 Non-translated strings are automatically shown in English. Adding new languages is completely automated in the translation pipeline.
 You can add a new language in Weblate and start translating. After merging the language can automatically be found on the Hedy website.
 
@@ -10,7 +10,7 @@ So when the user language is set to Norsk the user can use both English and Nors
 When a language does not have translated keywords English is the valid keyword language. The user set keyword language can only be English or the selected user language.
 So for example, when the profile language is set to Dutch only Dutch and English are valid keyword languages.
 
-All examples, adventures, quizzes and code snippets are shown with the selected keyword language by dynamically parsing on runtime.
+All examples, adventures, quizzes and code snippets are shown with the selected keyword language by dynamically parsing at runtime.
 All these translations are stored with _placeholders_ like this `{print}`. 
 When requesting a specific keyword language the placeholder is replaced by the corresponding translated keyword.
 This only counts for the examples as in all cases the set language and English are both valid keyword languages.
