@@ -1139,10 +1139,6 @@ def client_messages():
 def current_language():
     return make_lang_obj(g.lang)
 
-@app.template_global()
-def all_keyword_languages():
-    return list(ALL_KEYWORD_LANGUAGES.keys())
-
 
 @app.template_global()
 def current_keyword_language():
