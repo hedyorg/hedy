@@ -296,7 +296,7 @@ class TestPages(AuthHelper):
 
             for page in pages:
                 if page == "/hedy":
-                    for i in range(1, HEDY_MAX_LEVEL+1):
+                    for i in range(2, HEDY_MAX_LEVEL+1):
                         self.get_data(page + "/" + str(i))
                 self.get_data(page)
 
