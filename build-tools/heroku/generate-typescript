@@ -64,6 +64,7 @@ else
         --minify \
         --target=es2017 \
         --global-name=hedyApp \
+        --analyze \
         --outfile=static/js/appbundle.js "$@"
 
     rm -rf __tmp__
