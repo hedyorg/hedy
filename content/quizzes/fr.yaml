@@ -663,6 +663,7 @@ levels:
             correct_answer: "D"
             hint: "Il n'y a pas eu de changement dans les commandes existantes."
             question_score: '10'
+            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} Mine too!\n_?_ {print} My lucky number is 5!"
         2:
             question_text: "Qu'est-ce qui s'affichera lorsque tu tapes le nom Hedy ?"
             code: |-
@@ -1579,4 +1580,303 @@ levels:
                 feedback: "Tu as compris !"
             correct_answer: "D"
             hint: "Essayez d'imaginer la sortie de ce code."
+            question_score: '10'
+    8:
+        5:
+            mp_choice_options:
+            -   option: The `{print}` commands on the last two lines should start on new lines en start with 4 spaces.
+                feedback: That's right!
+            -   option: '`{else}` is not a command!'
+                feedback: It is!
+            -   option: Lines that start with `{if}` should start with 4 spaces
+                feedback: That's not true
+            -   option: '`{ask}` is no longer a command'
+                feedback: That's not true
+            question_text: What is wrong with this code?
+            code: "end = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy {print} 'They lived happily ever after'\n{else} {print} 'The world exploded. The end.'"
+            correct_answer: A
+            hint: Something is wrong with indentation
+            question_score: '10'
+        6:
+            mp_choice_options:
+            -   option: "```\n{print} 'Welcome to restaurant Hedy'\nfood = {ask} 'What whould you like to eat?'\n{print} food\n```\n"
+                feedback: You need to take 2 orders.
+            -   option: "```\n{repeat} 2 {times}\n    {print} 'Welcome to restaurant Hedy'\n    food = {ask} 'What whould you like to eat?'\n    {print} food\n```\n"
+                feedback: The welcome line would be printed twice in this code too
+            -   option: "```\n{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food = {ask} 'What would you like to eat?'\n{print} food\n```\n"
+                feedback: Now only the last order is printed.
+            -   option: "```\n{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food = {ask} 'What would you like to eat?'\n    {print} food\n```\n"
+                feedback: Awesome!
+            question_score: '10'
+            question_text: Which code was used to create this output?
+            code: "Welcome to restaurant Hedy\nPizza\nHamburger"
+            correct_answer: D
+            hint: Pay attention to what sould be repeated and what should only be printed once.
+        9:
+            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music is rock\n3 {print} '\U0001F918'\n4 {else}\n5 {print} '\U0001F44E'"
+            mp_choice_options:
+            -   option: Line 2 and 4
+                feedback: The lines after the `{if}` and `{else}` command should start with 4 spaces
+            -   option: Only line 3
+                feedback: Not only 3...
+            -   option: Line 3, 4 and 5
+                feedback: Line 4 shouldn't
+            -   option: Line 3 and 5
+                feedback: Great job!
+            question_score: '10'
+            hint: The lines after an `{if}` or `{else}` command should start with 4 spaces.
+            correct_answer: D
+            question_text: What line(s) in this code should start with 4 spaces?
+        2:
+            mp_choice_options:
+            -   option: This should be only one line, not 2.
+                feedback: No it should be 2 lines.
+            -   option: This `{print}` command has to go
+                feedback: No, you need it.
+            -   option: There is a spelling mistake in the `{repeat}` command.
+                feedback: Nee, repeat is de goede spelling
+            -   option: The second line need to start with 4 spaces as indentation.
+                feedback: Correct!
+            question_text: What is wrong with this code?
+            code: "{repeat} 5 {times}\n{print} 'Hedy is cool!'"
+            correct_answer: D
+            hint: Something is missing in the second line?
+            question_score: '10'
+        3:
+            mp_choice_options:
+            -   option: "Baby shark tututudutudu \n Baby shark"
+                feedback: Mind the `{repeat}` command!
+            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+                feedback: The last line has no indentation, so it's not repeated.
+            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+                feedback: Right!
+            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+                feedback: What is being repeated and what isn't.
+            question_text: What output will be produced when you run this program?
+            code: "{repeat} 3 {times}\n    {print} 'Baby shark tututudutudu'\n{print} 'Baby shark'"
+            correct_answer: C
+            hint: What is being repeated and what is not?.
+            question_score: '10'
+        1:
+            mp_choice_options:
+            -   option: "Hello \n Im Hedy!"
+                feedback: Everything is printed twice.
+            -   option: "Hello \n Hello \n Im Hedy"
+                feedback: The second line is repeated twice as well.
+            -   option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
+                feedback: Super!
+            -   option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
+                feedback: Everything is printed twice
+            question_text: Which output will be produced by this code?
+            code: "{repeat} 2 {times}\n    {print} 'Hello'\n    {print} 'Im Hedy!'"
+            correct_answer: C
+            hint: Both lines are repeated twice.
+            question_score: '10'
+        4:
+            mp_choice_options:
+            -   option: "The children went: \n Yay! \n Were going on holiday!"
+                feedback: Mind the `{repeat}` command !
+            -   option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
+                feedback: Correct!
+            -   feedback: This order is incorrect.
+                option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
+            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
+                feedback: The last line is repeated too.
+            question_text: Which output is correct?
+            code: "{print} 'The children went:'\n{repeat} 2 {times}\n    {print} 'Yay!'\n    {print} 'Were going on holiday!'"
+            correct_answer: B
+            hint: The block under the `{repeat}` command is repeated twice.
+            question_score: '10'
+        7:
+            mp_choice_options:
+            -   option: Nothing this code is correct!
+                feedback: Something is wrong!.
+            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
+                feedback: You are!.
+            -   option: You don't have to use indentation twice. Only in the first `{if}` command.
+                feedback: You always have to use indentation.
+            -   option: The indentation is wrong in the first `{if}` command.
+                feedback: That's right.
+            question_text: What is wrong with this code?
+            code: "eten = {ask} 'What would you like to eat?'\n{if} food {is} fries\nsauce = {ask} 'What sauce would you like?'\n    {print} 'One fries with ' sauce\n{if} food {is} pizza\n    topping = {ask} 'What topping would you like?'\n    {print} 'One pizza with ' topping\n{print} 'That you for your order'"
+            correct_answer: D
+            hint: Take a careful look at the indentation.
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   option: "```\n{if} answer is right\n   {print} You are...\n      sleep\n          {print} right!\n      {else}\n          {print} You are wrong!\n```\n"
+                feedback: You are wrong!
+            -   option: "```\n{if} answer is right\n{print} You are...\nsleep\n{print} right!\n{else}\n{print} You are wrong!\n```\n"
+                feedback: You are wrong!
+            -   option: "```\n{if} answer is right\n    {print} You are...\n    sleep\n    {print} right!\n{else}\n    {print} You are wrong!\n```\n"
+                feedback: You are... right!
+            -   option: "```\n{if} answer is right\n    {print} You are...\n    sleep\n{print} right!\n{else}\n    {print} You are wrong!\n```\n"
+                feedback: You are wrong!
+            hint: What should happen if the person is right? And what else?
+            question_text: In which of the codes is the indentation done right?
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_text: Which statement is true?
+            code: "1 level = {ask} 'What level are you on?\"\n2 {if} level {is} 8\n3 {print} Great job!"
+            mp_choice_options:
+            -   option: All lines should start with 4 spaces
+                feedback: That's not true
+            -   option: Line 2 and 3 should start with 4 spaces
+                feedback: That's not true
+            -   option: Line 2 should start with 4 spaces
+                feedback: That's not true
+            -   option: Line 3 should start with 4 spaces
+                feedback: You are correct!
+            correct_answer: D
+            hint: Only one line starts with 4 spaces, but which one...?
+            question_score: '10'
+    9:
+        1:
+            mp_choice_options:
+            -   option: Nothing this code is correct!
+                feedback: That's right!.
+            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
+                feedback: You are!.
+            -   option: You don't have to use indentation twice.
+                feedback: You always have to use indentation.
+            -   option: The indentation is wrong in the last `{if}` command.
+                feedback: It not, though.
+            question_text: What is wrong with this code?
+            code: "{repeat} 3 {times}\n   eten = {ask} 'What would you like to eat?'\n   {if} food {is} fries\n       sauce = {ask} 'What sauce would you like?'\n       {print} 'One fries with ' sauce\n   {if} food {is} pizza\n       topping = {ask} 'What topping would you like?'\n       {print} 'One pizza with ' topping\n{print} 'That you for your order'"
+            correct_answer: A
+            hint: all the indentation is done correctly.
+            question_score: '10'
+        4:
+            mp_choice_options:
+            -   option: Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'
+                feedback: No, she gets 'You are not the one!'
+            -   option: "Cinderella with shoe size 40 gets the output: 'I was looking for you!'"
+                feedback: No, she gets 'Ill keep looking'
+            -   option: Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'
+                feedback: That's right!
+            -   option: Cinderella with shoe size 40 gets the output 'I was looking for you!'
+                feedback: No she gets 'Ill keep looking'
+            code: "name = {ask} 'What is your name?'\nsize = {ask} 'What is your shoe size?'\n{if} size {is} 38\n    {if} name {is} Cinderella\n        {print} 'I was looking for you!'\n    {else}\n        {print} 'You are not the one!'\n{else}\n    {print} 'Ill keep looking'"
+            correct_answer: C
+            hint: No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'.
+            question_score: '10'
+            question_text: Which statement is true?
+        8:
+            mp_choice_options:
+            -   option: You can't put two questions in a row
+                feedback: Yes you can.
+            -   option: The variable called 'age' is later on used as 'years'
+                feedback: Keen eye! Good job!
+            -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
+                feedback: You actually must start like that.
+            -   option: A code must always start with a `{print}` command in the first line
+                feedback: That's not true.
+            code: "age = {ask} 'Happy Birthday! How old are you?'\nsinging = {ask} 'Would you like us to sing?'\n    if singing {is} yes\n        {repeat} years {times}\n        {print} 'Hip Hip Hooray'"
+            correct_answer: B
+            question_text: What is wrong is this code?
+            hint: The indentation is done right this time
+            question_score: '10'
+        9:
+            mp_choice_options:
+            -   option: None, that is not allowed
+                feedback: You are allowed to
+            -   option: Only 1
+                feedback: You could use more if you like
+            -   option: '3'
+                feedback: You could use more if you like
+            -   option: Infinite, as long as you keep using indentation correctly
+                feedback: That is true
+            correct_answer: D
+            hint: You can put an `{if}` command inside an `{if}` command.
+            question_text: How many `{if}` commands can be placed inside another `{if}` command?
+            question_score: '10'
+        10:
+            mp_choice_options:
+            -   option: All lines should start with 4 spaces
+                feedback: Only line 2 and 3 start with spaces
+            -   option: Line 2 and 3 should start with 4 spaces
+                feedback: Line 3 should start with 8
+            -   option: Line 2 and 3 should start with 8 spaces
+                feedback: Line 2 should start with 4
+            -   option: line 2 should atart with 4 spaces and line 3 with 8
+                feedback: You are correct!
+            hint: The first line doens't start with any spaces
+            question_score: '10'
+            question_text: Which statement is true?
+            code: "1 {repeat} 2 {times}\n2 {if} level {is} 9\n3 {print} Great job!"
+            correct_answer: D
+        2:
+            mp_choice_options:
+            -   option: "Good job! \n Good job!"
+                feedback: That's not it!
+            -   option: The computer will explode in 5... 4... 3... 2... 1...
+                feedback: That's not it!
+            -   option: "Good job ! \n Good job! \n You can use the computer!"
+                feedback: That's not it!
+            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+                feedback: Correct!
+            question_text: What will be printed after entering the correct password?
+            code: "password = {ask} 'What is the password?'\ncorrect_password = Hedy\n{if} password {is} correct_password\n    {repeat} 2 {times}\n        {print} 'Good job!'\n        {print} 'You can use the computer!'\n{else}\n    {print} 'The computer will explode in 5... 4... 3... 2... 1...'"
+            correct_answer: D
+            hint: Everything under the `{repeat}` command is repeated twice.
+            question_score: '10'
+        3:
+            mp_choice_options:
+            -   option: case 1, sell
+                feedback: You don't win a million!
+            -   option: case 1, open
+                feedback: You don't win a million
+            -   option: case 2, sell
+                feedback: You don't win a million
+            -   option: case 2, open
+                feedback: Great job! You win!
+            code: "{print} 'Choose the right case and win!'\ncase = {ask} 'Which case will you pick? 1 or 2?'\n{if} case {is} 1\n     action = {ask} 'Open it or sell it?'\n         {if} action {is} sell\n             {print} 'You sell your case for 10 dollars'\n         {if} action {is} open\n             {print} 'You open the case and win an apple pie'\n{if} case {is} 2\n     action = {ask} 'Open it or sell it?'\n         {if} action {is} sell\n             {print} 'You sell the case for 500 dollars'\n         {if} action {is} open\n             {print} 'You open the case and win a million dollars!'"
+            question_text: Which case should you choose to win a million dollars?
+            correct_answer: D
+            hint: Follow the right path
+            question_score: '10'
+        5:
+            mp_choice_options:
+            -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
+                feedback: Don't forget the indentation after `{repeat}` commands.
+            -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n{repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
+                feedback: Use indentation after an `{if}` command
+            -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
+                feedback: Perfect
+            -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
+                feedback: There are 2 `{repeat}` commands in this code.
+            question_text: Which code produced this output?
+            code: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
+            correct_answer: C
+            hint: Watch the indentation
+            question_score: '10'
+        6:
+            question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
+            mp_choice_options:
+            -   option: '`{if}`'
+                feedback: Don't forget the others
+            -   option: '`{if}` `{repeat}`'
+                feedback: Don't forget `{else}`!
+            -   option: '`{if}` `{else}` `{repeat}`'
+                feedback: Keep it up!
+            -   option: '`{if}` `{else}` `{repeat}` `{print}`'
+                feedback: Not with print
+            correct_answer: C
+            hint: Indentation happens on the line below some commands
+            question_score: '10'
+        7:
+            mp_choice_options:
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n            price = price - 2\n```\n"
+                feedback: Amazing!
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n{if} drink {is} coke\n    price = price - 2\n```\n"
+                feedback: Try again!
+            -   option: "```\n{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\n        price = price - 2\n```\n"
+                feedback: Try again
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n        price = price - 2\n```\n"
+                feedback: Try again
+            question_text: "In this code from a pizza restaurant. \nYoull get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            code: "{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\nprice = price - 2"
+            correct_answer: A
+            hint: After each `{if}` command, the line below should indent
             question_score: '10'
