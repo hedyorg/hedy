@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/html', this.innerHTML);
         e.dataTransfer.setData('text/plain', this.getAttribute('index'));
+        $('.box').css('background-color', '');
     }
 
     function handleDragEnd(e) {
