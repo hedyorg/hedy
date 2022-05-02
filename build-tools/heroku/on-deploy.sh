@@ -28,7 +28,7 @@ echo '-----> Compiling TypeScript'
 ./generate-typescript
 
 echo '-----> Creating Syntax Highlighting files'
-python3 highlighting/generate-rules-highlighting.py
+python3 ../../highlighting/generate-rules-highlighting.py
 
 echo '-----> Compiling Babel translations'
 cd ..
