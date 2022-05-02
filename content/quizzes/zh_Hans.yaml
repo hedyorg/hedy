@@ -24,7 +24,7 @@ levels:
             -   "feedback": Echo is correct; check the spelling of the commands.
                 "option_text": Line 3 has to begin with print instead of echo.
             -   "option_text": In line 4, print is spelled wrong.
-                "feedback": There is a spelling error somewhere else...
+                "feedback": 不，其他地方有错误
             correct_answer: B
             question_text: What's wrong with this code ?
             code: "print Hi im Hedy !\naks Which football team do you support ?\necho You support...\nprint Cool ! Me too !"
@@ -103,7 +103,7 @@ levels:
             question_score: '10'
         5:
             question_text: Which command is missing in line 2?
-            code: "ask What is your favorite pet ?\n_?_ So your favorite pet is...\""
+            code: "{ask} 你最喜欢的宠物是什么？\n_?_ 所以你最喜欢的宠物是..."
             mp_choice_options:
             -   "code": print
                 "feedback": No, you would like the answer to be repeated back to you.
@@ -118,7 +118,7 @@ levels:
             question_score: '10'
         7:
             question_text: What's wrong with this code ?
-            code: "print Welcome at Hedys restaurant !\nask What would you like to eat ?\necho So you want to order ...\nprint Coming right up ! Enjoy !\""
+            code: "{print} 欢迎来到海迪餐厅！\n{ask} 你想吃什么？\n{echo} 所以你想点..\n{print} 马上就来！好好享受！"
             mp_choice_options:
             -   "option_text": In line 1 print needs to be replaced with ask
                 "feedback": Are you sure something is wrong ?
@@ -133,7 +133,7 @@ levels:
             question_score: '10'
         9:
             question_text: What's wrong with this code ?
-            code: "print Hello !\nprint How are you doing ?\necho So you are doing...\""
+            code: "{print} 你好！\n{print} 你好吗？\n{echo} 所以你正在做..."
             mp_choice_options:
             -   "option_text": print in line 1 should be ask
                 "feedback": No, print is right. Where is the question being asked ?
@@ -188,7 +188,7 @@ levels:
             -   "option_text": You put it at the end so Hedy knows your program is finished
                 "feedback": No it would be useless at the end of your code
             correct_answer: C
-            question_text: What happens when you use the `sleep` command
+            question_text: 当你使用 `{sleep}` 命令时会发生什么？
             hint: The computer waits for a second at the sleep command
             question_score: '10'
             code: sleep
@@ -330,7 +330,7 @@ levels:
             question_score: '10'
         4:
             correct_answer: B
-            question_text: What should change in line to to print a random price ?
+            question_text: 为了打印一个随机价格，第2行应该怎么改？
             mp_choice_options:
             -   "code": print price
                 "feedback": You don't want to print the word price, but you want to print one price out of your list at random
@@ -397,7 +397,7 @@ levels:
             -   "feedback": ask is used to ask a question
                 "code": ask
             -   "code": is
-                "feedback": is is used to make a list
+                "feedback": '{is} 用于制作列表'
             -   "code": at random
                 "feedback": Correct !
             correct_answer: D
@@ -408,7 +408,7 @@ levels:
             code: "question is ask What do you want to know ?\nprint question\nanswers is yes, no, maybe\nprint answers at random"
             mp_choice_options:
             -   "option_text": Line 1 needs ot say print instead of ask
-                "feedback": No, that's not wrong.?
+                "feedback": 不，这并没有错。
             -   "option_text": Line 2 needs to say ask instead of print
                 "feedback": No that's not wrong.
             -   "option_text": Line 2 needs to say answers at random is yes, no, maybe
@@ -617,22 +617,26 @@ levels:
             question_score: '10'
         1:
             question_text: Which statement is true ?
-            code: '...'
+            code: '数字 {is} {ask} ''你的幸运数字是多少？''
+
+                {if} 数字 {is} 5 {print} 我也是！
+
+                _?_ {print} 我的幸运数字是 5！'
             mp_choice_options:
             -   "option_text": In level 5 print works differently than in level 4
-                "feedback": No, there have been no changes !
+                "feedback": 已经有一个 {print} 命令。
                 "code": '{print}'
             -   "option_text": In level 5 ask works differently than in level 4
-                "feedback": No, there have been no changes !
+                "feedback": 在上面一行里使用了{if}命令。
                 "code": '{if}'
             -   "option_text": In level 5 both print and ask work differently than in level 3
                 "feedback": No, there have been no changes !
                 "code": '{sleep}'
             -   "option_text": In level 5 neither print nor ask works differently than in level 3
-                "feedback": That's right !.
+                "feedback": 这就对了!
                 "code": '{else}'
             correct_answer: D
-            hint: There are no changes in the existing commands.
+            hint: 哪一个与 {if} 命令一起使用？
             question_score: '10'
         2:
             question_text: What appears in your output screen when you type in the name Hedy ?
@@ -650,7 +654,7 @@ levels:
             hint: if name is Hedy print ...?
             question_score: '10'
         3:
-            question_text: What is the right password
+            question_text: 正确的密码是什么？
             code: "password is ask 'What is the password ?'\nif password is SECRET print 'Correct !'\nelse print 'ALARM ! INTRUDER !'"
             mp_choice_options:
             -   "option_text": Correct !
@@ -1052,7 +1056,7 @@ levels:
             correct_answer: A
             hint: Repeat can only be used if you want the exact same line 2 (or more) times in a row.
             question_score: '10'
-    10:
+    11:
         2:
             question_text: Which code was used to get this output ?
             code: "1\n2\n3\n4\n5\nOnce I caught a fish alive !"
@@ -1203,7 +1207,7 @@ levels:
             correct_answer: D
             hint: for i in range 1 to age
             question_score: '10'
-    11:
+    10:
         1:
             mp_choice_options:
             -   "code": for each compliment

@@ -14,7 +14,6 @@
                 {% for i in range(5) %}
                     <div class="flex flex-row w-full items-center mb-4 account_row {% if i == 0 %}hidden{% endif %}" {% if i == 0 %}id="account_row_unique"{% endif %}>
                         <input id="username" name="username" {% if i != 0 %}required{% endif %} type=text placeholder="{{_('username')}}" class="w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                        <input id="email" name="email" {% if i != 0 %}required{% endif %} type=email placeholder="{{_('email')}}" class="w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                         <input id="password" name="password" {% if i != 0 %}required{% endif %} minlength="6" type=password placeholder="{{_('password')}}" class="w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                         <select id="classes" name="class" class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                             <option value="" selected disabled>{{_('select_class')}}</option>
