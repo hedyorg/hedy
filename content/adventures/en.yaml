@@ -477,7 +477,7 @@ adventures:
                     You do have to program a little bit extra for that. You must now name your main character first.
 
                     You can then put that name anywhere in a sentence.
-                example_code: |
+                example_code: |-
                     ## Example Hedy code
 
                     ```
@@ -496,7 +496,6 @@ adventures:
 
                 example_code: |
                     ## Example Hedy Code
-
                     ```
                     animals {is} 🦔, 🐿, 🦉, 🦇
                     {print} He now hears the sound of an animals {at} {random}
@@ -629,7 +628,7 @@ adventures:
                         {print} 'Robin goes home'
                     ```
                 story_text_2: |-
-                    The example above is pretty straightforward, but with nesting you can really elaborate your code and turn your story into a real game. Check out this example!
+                    The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
                 example_code_2: |
                     ## Elaborate code
                     ```
@@ -687,7 +686,6 @@ adventures:
                     In this level you can use the quotation marks to save multiple words in a variable.
                 example_code: |
                     ## Example Hedy code
-
                     ```
                     name = 'The Queen of England'
                     {print} name ' was eating a piece of cake, when suddenly...'
@@ -2802,6 +2800,7 @@ adventures:
                     If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
                     But be carefull not to get more than 21 points, because if you do, you lose!
                     The player who gets closest to 21, without going over it, wins!
+                    
                     Have fun!
                 example_code: |
                     ## Example Hedy code
@@ -2890,6 +2889,297 @@ adventures:
                         print 'You win!'
                     ```
                 start_code: "# place your code here"
+    tic:
+        name: "Tic Tac Toe"
+        description: "Play a game of Tic Tac Toe!"
+        image: "story.png"
+        default_save_name: "Tic"
+        levels:
+            13:
+                story_text: |
+                    ## Tic Tac Toe
+                    In this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.
+                    The first player that gets 3 in a row (horizontally, vertically or diagonally) wins!
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    sign = 'x'
+                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    game = 'on'
+                    spot_1 = '.'
+                    spot_2 = '.'
+                    spot_3 = '.'
+                    spot_4 = '.'
+                    spot_5 = '.'
+                    spot_6 = '.'
+                    spot_7 = '.'
+                    spot_8 = '.'
+                    spot_9 = '.'
+                    {print} 'TIC TAC TOE!'
+                    {print} spot_1 spot_2 spot_3
+                    {print} spot_4 spot_5 spot_6
+                    {print} spot_7 spot_8 spot_9
+                    {print} ' '
+                    {for} i {in} {range} 1 {to} 9
+                        {if} game {is} 'on'
+                            choice = {ask} 'Player ' sign ', which spot?'
+                            {if} choice {in} open_spots
+                                {remove} choice {from} open_spots
+                                {if} choice {is} 1
+                                    spot_1 = sign
+                                {if} choice {is} 2
+                                    spot_2 = sign
+                                {if} choice {is} 3
+                                    spot_3 = sign
+                                {if} choice {is} 4
+                                    spot_4 = sign
+                                {if} choice {is} 5
+                                    spot_5 = sign
+                                {if} choice {is} 6
+                                    spot_6 = sign
+                                {if} choice {is} 7
+                                    spot_7 = sign
+                                {if} choice {is} 8
+                                    spot_8 = sign
+                                {if} choice {is} 9
+                                    spot_9 = sign
+                            {else}
+                                {print} 'That spot was already taken'
+                            {print} spot_1 spot_2 spot_3
+                            {print} spot_4 spot_5 spot_6
+                            {print} spot_7 spot_8 spot_9
+                            {print} ' '
+                            winner = {ask} 'Did you win?'
+                            {if} winner {is} 'yes'
+                                {print} 'Good job, player ' sign '!'
+                                game = 'over'
+                            {else}
+                                {if} sign {is} 'x'
+                                    sign = 'o'
+                                {else}
+                                    sign = 'x'
+                    ```
+                start_code: "## place your code here"
+            14:
+                story_text: |
+                    ## Tic Tac Toe
+                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
+                    You can use this knowledge in your new Taic Tac Toe game, like this:
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    sign = 'x'
+                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    game = 'on'
+                    spot_1 = '.'
+                    spot_2 = '.'
+                    spot_3 = '.'
+                    spot_4 = '.'
+                    spot_5 = '.'
+                    spot_6 = '.'
+                    spot_7 = '.'
+                    spot_8 = '.'
+                    spot_9 = '.'
+                    {print} 'TIC TAC TOE!'
+                    {print} spot_1 spot_2 spot_3
+                    {print} spot_4 spot_5 spot_6
+                    {print} spot_7 spot_8 spot_9
+                    {print} ' '
+                    {for} i {in} {range} 1 {to} 9
+                        {if} game != 'over'
+                            choice = {ask} 'Player ' sign ', which spot?'
+                            {if} choice {in} open_spots
+                                {remove} choice {from} open_spots
+                                {if} choice == 1
+                                    spot_1 = sign
+                                {if} choice == 2
+                                    spot_2 = sign
+                                {if} choice == 3
+                                    spot_3 = sign
+                                {if} choice == 4
+                                    spot_4 = sign
+                                {if} choice == 5
+                                    spot_5 = sign
+                                {if} choice == 6
+                                    spot_6 = sign
+                                {if} choice == 7
+                                    spot_7 = sign
+                                {if} choice == 8
+                                    spot_8 = sign
+                                {if} choice == 9
+                                    spot_9 = sign
+                            {else}
+                                {print} 'That spot was already taken'
+                            {print} spot_1 spot_2 spot_3
+                            {print} spot_4 spot_5 spot_6
+                            {print} spot_7 spot_8 spot_9
+                            {print} ' '
+                            winner = {ask} 'Did you win?'
+                            {if} winner == 'yes'
+                                {print} 'Good job, player ' sign '!'
+                                game = 'over'
+                            {else}
+                                {if} sign == 'x'
+                                    sign = 'o'
+                                {else}
+                                    sign = 'x'
+                    ```
+                start_code: "## place your code here"
+            15:
+                story_text: |
+                    ## Tic Tac Toe
+                    In this level you can improve your Tic Tac Toe game with the {while} loop/ With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
+                    Check it out:
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    sign = 'x'
+                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    game = 'on'
+                    spot_1 = '.'
+                    spot_2 = '.'
+                    spot_3 = '.'
+                    spot_4 = '.'
+                    spot_5 = '.'
+                    spot_6 = '.'
+                    spot_7 = '.'
+                    spot_8 = '.'
+                    spot_9 = '.'
+                    {print} 'TIC TAC TOE!'
+                    {print} spot_1 spot_2 spot_3
+                    {print} spot_4 spot_5 spot_6
+                    {print} spot_7 spot_8 spot_9
+                    {print} ' '
+                    {while} game != 'over'
+                        choice = {ask} 'Player ' sign ', which spot?'
+                        {if} choice {in} open_spots
+                            {remove} choice {from} open_spots
+                            {if} choice == 1
+                                spot_1 = sign
+                            {if} choice == 2
+                                spot_2 = sign
+                            {if} choice == 3
+                                spot_3 = sign
+                            {if} choice == 4
+                                spot_4 = sign
+                            {if} choice == 5
+                                spot_5 = sign
+                            {if} choice == 6
+                                spot_6 = sign
+                            {if} choice == 7
+                                spot_7 = sign
+                            {if} choice == 8
+                                spot_8 = sign
+                            {if} choice == 9
+                                spot_9 = sign
+                        {else}
+                            {print} 'That spot was already taken'
+                        {print} spot_1 spot_2 spot_3
+                        {print} spot_4 spot_5 spot_6
+                        {print} spot_7 spot_8 spot_9
+                        {print} ' '
+                        winner = {ask} 'Did you win?'
+                        {if} winner == 'yes'
+                            {print} 'Good job, player ' sign '!'
+                            game = 'over'
+                        {else}
+                            {if} sign == 'x'
+                                sign = 'o'
+                            {else}
+                                sign = 'x'
+                    ```
+                start_code: "## place your code here"
+            17:
+                story_text: |
+                    ## Tic Tac Toe
+                    In the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.
+                    This made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.
+                    To use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.
+
+                    In the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).
+                    You can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.
+                    This means that the {while} loop will be stopped and the game ends.
+
+                example_code: |
+                    ## Example code
+                    ```
+                    sign = 'x'
+                    open_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    game = 'on'
+                    spot_1 = '.'
+                    spot_2 = '.'
+                    spot_3 = '.'
+                    spot_4 = '.'
+                    spot_5 = '.'
+                    spot_6 = '.'
+                    spot_7 = '.'
+                    spot_8 = '.'
+                    spot_9 = '.'
+                    {print} 'TIC TAC TOE!'
+                    {print} spot_1 spot_2 spot_3
+                    {print} spot_4 spot_5 spot_6
+                    {print} spot_7 spot_8 spot_9
+                    {print} ' '
+                    {while} game != 'over':
+                        choice = {ask} 'Player ' sign ', which spot?'
+                        {if} choice {in} open_spots:
+                            {remove} choice {from} open_spots
+                            {if} choice == 1:
+                                spot_1 = sign
+                            {if} choice == 2:
+                                spot_2 = sign
+                            {if} choice == 3:
+                                spot_3 = sign
+                            {if} choice == 4:
+                                spot_4 = sign
+                            {if} choice == 5:
+                                spot_5 = sign
+                            {if} choice == 6:
+                                spot_6 = sign
+                            {if} choice == 7:
+                                spot_7 = sign
+                            {if} choice == 8:
+                                spot_8 = sign
+                            {if} choice == 9:
+                                spot_9 = sign
+                        {else}:
+                            {print} 'That spot was already taken'
+                        {print} spot_1 spot_2 spot_3
+                        {print} spot_4 spot_5 spot_6
+                        {print} spot_7 spot_8 spot_9
+                        {print} ' '
+                        {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {else}:
+                            {if} sign == 'x':
+                                sign = 'o'
+                            {else}:
+                                sign = 'x'
+                    ```
+
+                start_code: "## place your code here"
     next:
         name: "What's next?"
         description: "What's Next?"
