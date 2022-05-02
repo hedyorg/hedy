@@ -60,7 +60,7 @@ function resetWindow() {
     resetWindow();
 
       if (tabName === 'quiz') {
-        // If the developers mode is still on -> make sure we do show the tab
+        // If the developer's mode is still on -> make sure we do show the tab
         if ($('#developers_toggle').is(":checked")) {
           $('#adventures-tab').show();
         }
