@@ -1096,19 +1096,54 @@ export function get_trimmed_code() {
 
   // If the main editor is hidden -> we are solving a parsons problem
   if ($('#editor').is(":hidden")){
-     let code = "";
+    let code = "";
+    let key = "";
+    let count = 0;
      $('#parsons_container').children().each(function() {
-       let text = $(this).text()
-       $(this).attr('index')
+       let text = $(this).text();
+       console.log("text ", text);
+       //let line = $(this).attr('id');
+       //console.log(line);
+       console.log("TS");
+      
+       //console.log(key);
        //check volgorde en kleur
        // Otherwise it is the space placeholder -> don't add to prevent weird error messages
        if (text.length > 1) {
          code += text;
-         console.log(code);
+         key += $(this).attr('index');
+         console.log("code ", code);
+         console.log("key ", key);
+
+         let comp_1 = "";
+         let comp_2 = "";
+         if(count > 0){
+          for ( var i = 0; i < key.length; i++ )
+          {
+           console.log("last",key.charAt(key.length-1));
+           console.log("second-last",key.charAt(key.length-2));
+           comp_1 += key.charAt(key.length-1);
+           comp_2 += key.charAt(key.length-2);
+          }
+         }
+         if (comp_1.valueOf() >comp_2.valueOf()){
+          $('#color_me').css('background-color', 'green');
+         }
+         else {
+           console.log("kom ik dan hier");
+          $('#color_me').css('background-color', 'orange');
+         }
+
+         count += 1;
+         console.log("count ", count);
        }
+       //console.log(key);
      });
+
+     //console.log(code);
      return code.replace(/ +$/mg, '');
   }
+  //console.log('Hello world');
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
   // Remove whitespace at the end of every line

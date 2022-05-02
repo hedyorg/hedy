@@ -68,7 +68,7 @@
                         {{ parsons['text']|commonmark }}
                         <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
                             
-                            {% for key, line in parsons.code_lines.items()|reverse %}
+                            {% for key, line in parsons.code_lines.items() %}
                                 {% if key == 'indent' %}
                                 <div id="{{line}}" draggable="true" class="box w-3/4 mb-2 text-lg px-4 py-2 bg-gray-200 border-2 border-gray-600 rounded-lg">&nbsp;&nbsp;&nbsp;&nbsp;{{line}}</div>
                                 {% else %}
@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/html', this.innerHTML);
+        e.dataTransfer.setData('text/plain', this.getAttribute('index'));
     }
 
     function handleDragEnd(e) {
@@ -142,7 +143,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         if (dragSrcEl !== this) {
             dragSrcEl.innerHTML = this.innerHTML;
+            dragSrcEl.setAttribute('index', this.getAttribute('index'));
             this.innerHTML = e.dataTransfer.getData('text/html');
+            this.setAttribute('index', e.dataTransfer.getData('text/plain'));
         }
         return false;
     }
