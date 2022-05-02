@@ -53,14 +53,11 @@ if [[ "${1:-}" == "--watch" ]]; then
         --global-name=hedyApp \
         --outfile=static/js/appbundle.js
 else
-    # Use tsc to generate .js
-    npx tsc --outDir __tmp__
-
-    npx esbuild static/js/index.js \
+    npx esbuild static/js/index.ts \
         --bundle \
         --sourcemap \
         --minify \
         --target=es2017 \
         --global-name=hedyApp \
-        --outfile=static/js/appbundle.js "$@"
+        --outfile=static/js/appbundle.js
 fi
