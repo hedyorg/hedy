@@ -16,6 +16,7 @@ import utils
 from config import config as CONFIG
 
 # *** GLOBAL VARIABLES ***
+from hedy import HEDY_MAX_LEVEL
 from hedy_content import ALL_LANGUAGES
 
 HOST = os.getenv('ENDPOINT', 'http://localhost:' + str(CONFIG['port']) + '/')
@@ -294,6 +295,9 @@ class TestPages(AuthHelper):
             self.post_data('profile', body)
 
             for page in pages:
+                if page == "/hedy":
+                    for i in range(1, HEDY_MAX_LEVEL+1):
+                        self.get_data(page + "/" + str(i))
                 self.get_data(page)
 
 class TestSessionVariables(AuthHelper):
