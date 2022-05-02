@@ -957,6 +957,10 @@ class IsValid(Filter):
         error = InvalidInfo('invalid condition', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_repeat_no_command(self, meta, args):
+        error = InvalidInfo('invalid repeat', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
     #other rules are inherited from Filter
 
 def valid_echo(ast):
@@ -2142,6 +2146,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'invalid condition':
             raise exceptions.UnquotedEqualityCheck(line_number=line)
+        elif invalid_info.error_type == 'invalid repeat':
+            raise exceptions.MissingInnerCommandException(command='repeat', level=level, line_number=line)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)

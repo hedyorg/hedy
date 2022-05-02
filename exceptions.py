@@ -134,6 +134,12 @@ class MissingCommandException(HedyException):
             level=level,
             line_number=line_number)
 
+class MissingInnerCommandException(HedyException):
+    def __init__(self, command, level, line_number):
+        super().__init__('Missing Inner Command',
+            command=command,
+            level=level,
+            line_number=line_number)
 
 class IncompleteCommandException(HedyException):
     def __init__(self, incomplete_command, level, line_number):
