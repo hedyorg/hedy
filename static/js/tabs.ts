@@ -115,6 +115,7 @@ function resetWindow() {
 
     window.State.adventure_name = tabName === 'intro' ? undefined : tabName;
     theGlobalEditor?.clearSelection();
+    theGlobalEditor?.session.clearBreakpoints();
     // If user wants to override the unsaved program, reset unsaved_changes
     window.State.unsaved_changes = false;
   }
