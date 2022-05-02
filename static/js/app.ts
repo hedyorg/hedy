@@ -1110,11 +1110,12 @@ export function get_trimmed_code() {
         //check correct order and give box a color 
         // @ts-ignore
         if ( $(this).attr('index').charCodeAt(0) == count){
-          $(this).css('background-color', 'green');
+          $(this).css('border-color', '#90EE90');
+          $(this).css('border-style', 'solid');
         }
         else {
-          console.log("kom ik dan hier");
-          $(this).css('background-color', 'orange');
+          $(this).css('border-color', '#FF0000');
+          $(this).css('border-style', 'solid');
         }
       count += 1;
       }   

@@ -17,8 +17,7 @@
     C: |
       echo Dus u wilt
     D: |
-      print De bestelling wordt klaargezet!
-  correct_answer: [A, B, C, D]  
+      print De bestelling wordt klaargezet! 
 2:
   tab_name: "Slepen"
   text: |
@@ -30,14 +29,13 @@
     Laat zien welke film jullie gaan kijken en wens de kijkers veel plezier!
   code_lines:
     A: |
-      film is Sonic the Hedgehog 2
-    B: | 
       print Het is tijd voor een avondje Netflix
+    B: | 
+      film is Sonic the Hedgehog 2
     C: |
       print We gaan kijken naar film
     D: |
       print Heel veel plezier!
-  correct_answer: [B, A, C, D]
 3:
   tab_name: "Slepen"
   text: |
@@ -53,13 +51,13 @@
     A: |
       print Het nieuwe schooljaar op Zweinstein gaat van start!
     B: |
-      afdelingen is Griffoendor, Huffelpuf, Zwadderich, Ravenklauw
-    C: |
       print De sorteerhoed is er klaar voor om jou in te delen
+    C: |
+      afdelingen is Griffoendor, Huffelpuf, Zwadderich, Ravenklauw
     D: |
-      print het wordt afdelingen at random
-    E: |
       sleep 2
+    E: |
+      print het wordt afdelingen at random
 4:
   tab_name: "Slepen"
   text: | 
@@ -72,11 +70,11 @@
     Laat het programma weer even wachten voordat hij jouw eerste pokémon onthult.
   code_lines:
     A: |
-      sleep
-    B: | 
       pokemons is Pikachu, Charmander, Bulbasaur, Squirtle
-    C: |
+    B: | 
       print 'Dit wordt jouw eerste Pokémon!'
+    C: |
+      sleep
     D: |
       print pokemons at random
 5:
@@ -90,13 +88,13 @@
    Zo ja dan print je dat je een goede smaak hebt, zo nee dan voegen we hem graag toe aan de lijst. 
   code_lines:
     A:  |
-      if film in favoriete_film print 'Jij hebt een goede smaak!'
-    B:  |
       favoriete_film is Batman, Spiderman, The Avengers, Jurassic Park
-    C:  |
-      else print 'Wat jammer dat jouw favoriete film niet in het lijstje staat, we voegen hem toe aan de lijst!'
-    D:  |
+    B:  |
       film is ask 'Wat is jouw lievelingsfilm?'
+    C:  |
+      if film in favoriete_film print 'Jij hebt een goede smaak!'
+    D:  |
+      else print 'Wat jammer dat jouw favoriete film niet in het lijstje staat, we voegen hem toe aan de lijst!'
     E:  |
       add film to favoriete_film
 6:
@@ -108,16 +106,17 @@
   story: | 
     Maak een programma die voor jou berekent hoe oud jij bent in hondenjaren en in kattenjaren.
     Vraag eerst de leeftijd van de gebruiker en rekenen maar. 
-    Laat de gebruiker de nieuwe leeftijd zien!
+    Bereken eerst de hondenjaren en dan de kattenjaren.
+    Laat de gebruiker de nieuwe leeftijden zien!
   code_lines:
     A:  |
-      hond_leeftijd = leeftijd * 7
-    B:  |
       leeftijd = ask 'Hoe oud ben je?'
+    B:  |
+      hond_leeftijd = leeftijd * 7
     C:  |
-      print 'In hondenjaren ben jij ' hond_leeftijd ' jaar oud.'
-    D:  |
       kat_leeftijd = leeftijd * 5
+    D:  |
+      print 'In hondenjaren ben jij ' hond_leeftijd ' jaar oud.'
     E:  |
       print 'In kattenjaren ben jij ' kat_leeftijd ' jaar oud.'
 7:
@@ -131,15 +130,16 @@
     Print eerst de twee spelers die tegen elkaar spelen en print vervolgens de tegen wie de winnaar mag spelen. 
   code_lines: 
     A: |
+      spelers = Freek, Bart, Emma
       print speler1 ' speelt eerst tegen ' speler2
     B: |
       speler1 = spelers at random
     C: |
-      spelers = Freek, Bart, Emma
-    D: |
-      remove speler1 from spelers
-    E: |
       speler2 = spelers at random
+    D: |
+      print speler1 ' speelt eerst tegen ' speler2
+    E: |
+      remove speler1 from spelers
     F: |
       remove speler2 from spelers
     G: |
@@ -157,17 +157,16 @@
     A: |
       kleuren = rood, blauw, geel
     B: |
-      print 'Jij komt bij team '
-    C: |
       print 'Rood of blauw?'
+    C: |
+      print 'Jij komt bij team '
     D: |
-      print kleuren at random '!'
-    indent: | 
+      repeat 5 times
+    Endent: | 
       print kleuren at random
     F: |
-      repeat 5 times
-    G: |
       sleep 2
-
+    G: |
+      print kleuren at random '!'
 
       
