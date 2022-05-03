@@ -174,17 +174,73 @@ class HighlightTester(unittest.TestCase):
 
 
 
-
-
-
     def simulateRulesWithToken(self,Rules,code):
-        T = Tokenizer(Rules)
-        Outputs = []
-        token = "start"
-        for line in code.split("\n"):
-            output,token = T.getLineHighlight(Rules,line,token)
-            Outputs.append(output)
-        return "\n".join(Outputs)
+        # Initialisation Output
+        Output = ""
+        for c in code:
+            if c == "\n": Output += "\n"
+            else: Output += " "
+
+        # Initialisation variables
+        currentState = "start"
+        currentPosition = 0
+
+        flag = False
+        while not flag:
+
+            # search for the transition that we will use
+            currentMatch = None
+            NEXT = {"rule":{},"match":None}
+            FIND = False
+            nextPos = len(code) + 42
+            for rule in Rules[currentState]:
+
+                regexCompile = re.compile(rule['regex'], re.MULTILINE)
+                match = regexCompile.search(code,currentPosition)
+
+                if match:
+                    if match.start() < nextPos :
+                        nextPos = match.start()
+                        NEXT["rule"] = rule
+                        NEXT["match"] = match
+                        FIND = True
+
+
+            if FIND :
+
+                # Application of coloring on the code
+                currentRule,currentMatch = NEXT["rule"],NEXT["match"]
+
+                if "token" not in currentRule:
+                    raise ValueError("We need a token in all rules !")
+        
+                if type(currentRule['token']) == str :
+                    currentRule['token'] = [currentRule['token']]
+        
+                if re.compile(currentRule['regex'], re.MULTILINE).groups == 0:
+                    tok = currentRule['token'][0]
+                    start = currentMatch.start()
+                    length = currentMatch.end() - currentMatch.start()
+                    Output = Output[:start] + Tokencode[tok] * length + Output[start + length:]
+
+                else:
+                    pos = currentMatch.start()
+                    for i,submatch in enumerate(currentMatch.groups()):    
+                        tok = currentRule['token'][i%len(currentRule['token'])]        
+                        Output = Output[:pos] + Tokencode[tok] * len(submatch) + Output[pos + len(submatch):]
+                        pos += len(submatch)
+
+                currentPosition = currentMatch.end()
+
+                if 'next' in currentRule:
+                    currentState = currentRule['next']
+
+            else:
+                flag = True
+
+
+
+        return Output
 
 
 
@@ -222,86 +278,3 @@ class HighlightTester(unittest.TestCase):
     #######################################################################################
     #######################################################################################
     #######################################################################################
-
-
-class Tokenizer:
-    """docstring for Tokenizer"""
-    def __init__(self, rules):
-        self.states = rules
-        self.regExps = {}
-        self.matchMappings = {}
-
-        for key in self.states:
-
-            state = self.states[key]
-            ruleRegExps = []
-            matchTotal = 0
-            mapping = {"defaultToken": "text"}
-            self.matchMappings[key] = {"defaultToken": "text"}
-            
-            flag = "g"
-
-            splitterRurles = []
-            for i in range(len(state)):
-                rule = state[i]
-                if rule.get('defaultToken',False) :
-                    mapping['defaultToken'] = rule['defaultToken']
-                if rule.get('caseInsensitive',False) and "i" not in flag:
-                    flag += "i"
-                if rule.get('unicode',False) and "u" not in flag:
-                    flag += "u"
-                # if (rule.regex == null)
-                #     continue
-
-
-                # Count number of matching groups. 2 extra groups from the full match
-                # And the catch-all on the end (used to force a match)
-                adjustedregex = rule["regex"]
-                matchcount = re.compile(adjustedregex).groups
-                if type(rule['token']) == list:
-                    if len(rule['token']) == 1 or matchcount == 1:
-                        rule['token'] = rule['token'][0]
-                    elif 
-
-                if (matchcount > 1) {
-                    if (/\\\d/.test(rule.regex)) {
-                        # Replace any backreferences and offset appropriately.
-                        adjustedregex = rule.regex.replace(/\\([0-9]+)/g, function(match, digit) {
-                            return "\\" + (parseInt(digit, 10) + matchTotal + 1)
-                        })
-                    } else {
-                        matchcount = 1
-                        adjustedregex = self.removeCapturingGroups(rule.regex)
-                    }
-                    if (!rule.splitRegex && typeof rule.token != "string")
-                        splitterRurles.push(rule); # flag will be known only at the very end
-                }
-
-                mapping[matchTotal] = i
-                matchTotal += matchcount
-
-                ruleRegExps.push(adjustedregex)
-
-                # makes property access faster
-                if (!rule.onMatch)
-                    rule.onMatch = null
-            
-
-            if (!ruleRegExps.length) {
-                mapping[0] = 0
-                ruleRegExps.push("$")
-            }
-
-            splitterRurles.forEach(function(rule) {
-                rule.splitRegex = self.createSplitterRegexp(rule.regex, flag)
-            }, this)
-            console.log('Create Nex Regex')
-            self.regExps[key] = new RegExp("(" + ruleRegExps.join(")|(") + ")|($)", flag)
-        
-
-
-    def getLineTokens(self,line,startState="start"):
-        pass
-
-    def getLineHighlight(self,line,startState="start"):
-        pass

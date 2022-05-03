@@ -142,7 +142,7 @@ class HighlighterTestLeveL8(HighlightTester):
             "answers = yes, no, maybe",
             "TTTTTTT K TTTK TTK TTTTT",
             "repeat 3 times",
-            "KKKKKKNNKKKKKK",
+            "KKKKKK N KKKKK",
             "question = ask 'What do you want to know?'",
             "TTTTTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print question",

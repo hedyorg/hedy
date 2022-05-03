@@ -24,7 +24,7 @@ class HighlighterTestLeveL7(HighlightTester):
     def test_3(self):
         self.assertHighlightedChr(
             "repeat 5 times print 'Help!'",
-            "KKKKKK N KKKKKKKKKKK SSSSSSS",
+            "KKKKKK N KKKKK KKKKK SSSSSSS",
             level="level7",lang='en')
 
 

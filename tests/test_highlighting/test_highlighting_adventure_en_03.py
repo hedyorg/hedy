@@ -44,7 +44,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "animals is 🦔, 🐿, 🦉, 🦇",
             "TTTTTTT KK T  T  T  T",
             "print He now hears the sound of an animals at random",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKKK",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKK",
             level="level3",lang='en')
 
 
@@ -225,15 +225,15 @@ class HighlighterTestLeveL3(HighlightTester):
             "prices is 1 dollar, 10 dollars, 100 dollars",
             "TTTTTTTKKTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print You will start with: starters at random",
-            "KKKKK                              KKKKKKKKKK",
+            "KKKKK                               KK KKKKKK",
             "print Then we'll serve: mains at random",
-            "KKKKK                        KKKKKKKKKK",
+            "KKKKK                         KK KKKKKK",
             "print And as dessert: desserts at random",
-            "KKKKK                         KKKKKKKKKK",
+            "KKKKK                          KK KKKKKK",
             "print You will get a drinks at random to drink",
-            "KKKKK                      KKKKKKKKKK         ",
+            "KKKKK                       KK KKKKKK         ",
             "print That will be: prices at random",
-            "KKKKK                     KKKKKKKKKK",
+            "KKKKK                      KK KKKKKK",
             "print Thank you and enjoy your meal!",
             "KKKKK                               ",
             level="level3",lang='en')

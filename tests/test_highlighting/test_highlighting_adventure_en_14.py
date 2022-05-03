@@ -207,7 +207,7 @@ class HighlighterTestLeveL14(HighlightTester):
             "game is 'on'",
             "TTTT KK SSSS",
             "for i in range 1 to 100",
-            "KKK T KKKKKKKK N KK NNN",
+            "KKK T KK KKKKK N KK NNN",
             "if game is 'on'",
             "KK TTTT KK SSSS",
             "answer = ask 'Do you want to continue?'",

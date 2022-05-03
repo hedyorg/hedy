@@ -91,7 +91,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "print 🧒: Zeg nieuw_woord , Hedy!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print 🦜: woorden op willekeurig",
-            "KKKKK TTTTTTTTT KK KKKKKKKKKKKK",
+            "KKKKK TTTTTTTTTT KK KKKKKKKKKKK",
             level="level3",lang='nl')
 
 
