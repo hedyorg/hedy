@@ -592,15 +592,11 @@ def achievements_page():
         url = request.url.replace('/my-achievements', '/login')
         return redirect(url, code=302)
 
-    user_achievements = DATABASE.achievements_by_username(
-        user.get('username')) or []
-    achievement_translations = hedyweb.PageTranslations(
-        'achievements').get_page_translations(g.lang)
-    achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang)
+    user_achievements = DATABASE.achievements_by_username(user.get('username')) or []
+    achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang).get('achievements')
 
-    return render_template('achievements.html', page_title=gettext('title_achievements'), achievements=achievements,
-                           user_achievements=user_achievements, template_achievements=achievement_translations,
-                           current_page='my-profile')
+    return render_template('achievements.html', page_title=gettext('title_achievements'), translations=achievements,
+                           user_achievements=user_achievements, current_page='my-profile')
 
 
 @app.route('/programs', methods=['GET'])
@@ -1329,8 +1325,7 @@ def public_user_page(username):
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
 
         return render_template('public-page.html', user_info=user_public_info,
-                               achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(
-                                   g.lang),
+                               achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang).get('achievements'),
                                favourite_program=favourite_program,
                                programs=user_programs,
                                last_achieved=last_achieved,
