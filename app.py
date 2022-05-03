@@ -1325,8 +1325,7 @@ def public_user_page(username):
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
 
         return render_template('public-page.html', user_info=user_public_info,
-                               achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(
-                                   g.lang),
+                               achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang),
                                favourite_program=favourite_program,
                                programs=user_programs,
                                last_achieved=last_achieved,
