@@ -1188,8 +1188,9 @@ function getConfettiForAdventure(adventure: string){
 }
 
 export function ScrollOutputToBottom(){
-$("#output").animate({ scrollTop: $(document).height() }, "slow");
-  return false;
+  $("#output").animate({
+    scrollTop: $(document).height()
+  }, "slow");
 }
 
 export function modalStepOne(level: number){
