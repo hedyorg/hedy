@@ -3,14 +3,14 @@ levels:
         1:
             question_text: Hva heter dette programmeringsspråket?
             mp_choice_options:
-                - option: Hedy
-                  feedback: Bra jobbet!
-                - option: Heddy
-                  feedback: Ikke denne !
-                - option: Haydie
-                  feedback: Ikke denne !
-                - option: Heidi
-                  feedback: Ikke denne !
+            -   option: Hedy
+                feedback: Bra jobbet!
+            -   option: Heddy
+                feedback: Ikke denne !
+            -   option: Haydie
+                feedback: Ikke denne !
+            -   option: Heidi
+                feedback: Ikke denne !
             correct_answer: A
             hint: Det er oppkalt etter Hedy Lamarr.
             question_score: '10'
@@ -31,14 +31,14 @@ levels:
         3:
             question_text: Hvordan spør du hva noen sin favorittfarge er ?
             mp_choice_options:
-                - option: skriv Hva er din favorittfarge?
-                  feedback: skriv skriver ut tekst, men den stiller ikke spørsmål.
-                - option: spør skriv Hva er din favorittfarge?
-                  feedback: Du trenger bare en kommando, ikke to.
-                - option: spør Hva er din favorittfarge?
-                  feedback: Bra!
-                - option: ekko Hva er din favorittfarge?
-                  feedback: ekko gjentar svaret ditt.
+            -   option: skriv Hva er din favorittfarge?
+                feedback: skriv skriver ut tekst, men den stiller ikke spørsmål.
+            -   option: spør skriv Hva er din favorittfarge?
+                feedback: Du trenger bare en kommando, ikke to.
+            -   option: spør Hva er din favorittfarge?
+                feedback: Bra!
+            -   option: ekko Hva er din favorittfarge?
+                feedback: ekko gjentar svaret ditt.
             correct_answer: C
             hint: Du kan stille spørsmål med spør-kommandoen
             question_score: '10'
@@ -74,14 +74,14 @@ levels:
             question_score: '10'
         6:
             mp_choice_options:
-                - option: På linje 1 må skriv byttes med spør.
-                  feedback: skriv på linje 1 er korrekt; tenk på hvordan man staver ordene.
-                - option: På linje 2 er spør feilstavet.
-                  feedback: Kjempebra! Du er oppmerksom!
-                - option: Linje 3 må begynne med skriv istedenfor ekko.
-                  feedback: ekko er korrekt; tenk på hvordan man staver ordene.
-                - option: skriv på linje 4 er feilstavet.
-                  feedback: Det er en stavefeil en annen plass...
+            -   option: På linje 1 må skriv byttes med spør.
+                feedback: skriv på linje 1 er korrekt; tenk på hvordan man staver ordene.
+            -   option: På linje 2 er spør feilstavet.
+                feedback: Kjempebra! Du er oppmerksom!
+            -   option: Linje 3 må begynne med skriv istedenfor ekko.
+                feedback: ekko er korrekt; tenk på hvordan man staver ordene.
+            -   option: skriv på linje 4 er feilstavet.
+                feedback: Det er en stavefeil en annen plass...
             question_text: Hva er feil med denne koden?
             code: "skriv Hei jeg er Hedy!\nsøpr Hvilket fotballlag heier du på?\nekko Du heier på...\nskriv Kult! Jeg også!"
             correct_answer: B
@@ -145,14 +145,14 @@ levels:
         1:
             question_text: Hvilken kommando bruker du for å la Hedy velge noe vilkårlig?
             mp_choice_options:
-                - option: skriv
-                  feedback: skriv brukes for å skrive ut tekst
-                - option: spør
-                  feedback: spør brukes for å stille et spørsmål
-                - option: er
-                  feedback: er brukes til å lage en variabel eller liste
-                - option: på tilfeldig
-                  feedback: Korrekt!
+            -   option: skriv
+                feedback: skriv brukes for å skrive ut tekst
+            -   option: spør
+                feedback: spør brukes for å stille et spørsmål
+            -   option: er
+                feedback: er brukes til å lage en variabel eller liste
+            -   option: på tilfeldig
+                feedback: Korrekt!
             correct_answer: D
             hint: Vilkårlig betyr uten en plan eller tilfeldig.
             question_score: '10'
@@ -160,14 +160,14 @@ levels:
             question_text: Hva er feil med denne koden?
             code: "dyr er hund katt ku\nskriv dyr på tilfeldig"
             mp_choice_options:
-                - option: 'Du trenger komma-tegn på linje 1: hund, katt, ku.'
-                  feedback: Riktig, bra jobbet!
-                - option: Linje 1 må begynne med skriv.
-                  feedback: Nei, du trenger ikke skriv-kommandoen her
-                - option: Linje 2 burde være 'dyrene' istedenfor 'dyr'
-                  feedback: dyr er det riktige å bruke, prøv igjen.
-                - option: "'på tilfeldig' er feilstavet, det burde vært 'på tifleldig'"
-                  feedback: "'på tilfeldig' er riktig stavemåte"
+            -   option: 'Du trenger komma-tegn på linje 1: hund, katt, ku.'
+                feedback: Riktig, bra jobbet!
+            -   option: Linje 1 må begynne med skriv.
+                feedback: Nei, du trenger ikke skriv-kommandoen her
+            -   option: Linje 2 burde være 'dyrene' istedenfor 'dyr'
+                feedback: dyr er det riktige å bruke, prøv igjen.
+            -   option: "'på tilfeldig' er feilstavet, det burde vært 'på tifleldig'"
+                feedback: "'på tilfeldig' er riktig stavemåte"
             correct_answer: A
             hint: Det er noe feil med linje 1
             question_score: '10'
@@ -205,14 +205,14 @@ levels:
             question_text: Hva er feil i denne koden?
             code: "spørsmål er spør Hva vil du vite?\nskriv spørsmål\nsvar er ja, nei, kanskje\nskriv svar på tilfeldig"
             mp_choice_options:
-                - option: Linje 1 burde være skriv istedenfor spør
-                  feedback: Nei, det er riktig slik det er.
-                - option: Linje to burde være spør istedenfor skriv
-                  feedback: Nei, det er riktig slik det er.
-                - option: Linje 2 burde være svar på tilfeldig er ja, nei, kanskje
-                  feedback: Nei, det er feil.
-                - option: Ingenting, koden er perfekt
-                  feedback: Riktig!
+            -   option: Linje 1 burde være skriv istedenfor spør
+                feedback: Nei, det er riktig slik det er.
+            -   option: Linje to burde være spør istedenfor skriv
+                feedback: Nei, det er riktig slik det er.
+            -   option: Linje 2 burde være svar på tilfeldig er ja, nei, kanskje
+                feedback: Nei, det er feil.
+            -   option: Ingenting, koden er perfekt
+                feedback: Riktig!
             correct_answer: D
             hint: Har denne koden i det hele tatt feil?
             question_score: '10'
@@ -220,14 +220,14 @@ levels:
             question_text: Hva er feil med denne koden?
             code: "spørsmål er spør Hva vil du vite?\nsvar kan være ja, nei, kanskje\nskriv svar på tilfeldig"
             mp_choice_options:
-                - option: Linje 2 burde vært 'spørsmål' istedenfor 'svar'
-                  feedback: Nei, det er ikke riktig
-                - option: Linje 2 burde vært 'er' istedenfor 'kan være'
-                  feedback: Korrekt
-                - option: Linje 3 burde være 'svaret' istedenfor 'svar'
-                  feedback: Det fins ingen variabel kalt svaret
-                - option: Ingenting! Dette er flott kode!
-                  feedback: Linje 2 har faktisk en feil.
+            -   option: Linje 2 burde vært 'spørsmål' istedenfor 'svar'
+                feedback: Nei, det er ikke riktig
+            -   option: Linje 2 burde vært 'er' istedenfor 'kan være'
+                feedback: Korrekt
+            -   option: Linje 3 burde være 'svaret' istedenfor 'svar'
+                feedback: Det fins ingen variabel kalt svaret
+            -   option: Ingenting! Dette er flott kode!
+                feedback: Linje 2 har faktisk en feil.
             correct_answer: B
             hint: "'kan være' er ikke en kommando."
             question_score: '10'
@@ -618,6 +618,7 @@ levels:
             correct_answer: D
             hint: There are no changes in the existing commands.
             question_score: '10'
+            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} Mine too!\n_?_ {print} My lucky number is 5!"
         2:
             question_text: What appears in your output screen when you type in the name Hedy ?
             code: "name is ask 'Hva heter du? ?'\nif name is Hedy print 'fun' else print 'less fun'"
