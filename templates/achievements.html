@@ -3,7 +3,9 @@
 <!-- We fix the achievements structure add this spot -> reduce the need for a structural YAML file -->
 {% set achievements =
     {'general': {
-        '': ['adventure_is_worthwhile', 'programming_protagonist', 'did_you_say_please', 'error_or_empty', 'trying_is_key', 'ninja_turtle', 'sharing_is_caring', 'do_you_have_copy', 'epic_education', 'lets_focus', 'make_some_noise', 'next_question', 'quiz_master', 'double_check', 'go_live', 'fresh_look', 'indiana_jones'],
+        '': ['adventure_is_worthwhile', 'programming_protagonist', 'did_you_say_please', 'error_or_empty',
+        'trying_is_key', 'ninja_turtle', 'sharing_is_caring', 'do_you_have_copy', 'epic_education', 'lets_focus',
+        'make_some_noise', 'next_question', 'quiz_master', 'double_check', 'go_live', 'fresh_look', 'indiana_jones'],
         'programs_created': ['getting_started_I', 'getting_started_II', 'getting_started_III', 'getting_started_IV', 'getting_started_V'],
         'programs_saved': ['one_to_remember_I', 'one_to_remember_II', 'one_to_remember_III', 'one_to_remember_IV', 'one_to_remember_V'],
         'programs_submitted': ['deadline_daredevil_I', 'deadline_daredevil_II', 'deadline_daredevil_III']
@@ -19,14 +21,14 @@
 
 {% block main %}
     <h2 class="px-8 mb-4">{{_('hedy_achievements')}}</h2>
-    {% for category in categories %}
-        {% if category != "teacher" or is_teacher %}
-            <h1 class="bg-blue-200 ltr:pl-8 ltr:pr-8 py-2 mb-4 rounded-lg text-3xl w-full cursor-pointer" onclick="$('#{{category}}').toggle()">{{category}}</h1>
-            <div class="hidden ltr:pl-4 rtl:pr-4 mt-4 mb-4" id="{{category}}">
-            {% for subcategory in category['subcategory'] %}
-                <h3 class="px-16">{% if subcategory.sub_key in achievements %}{{ achievements[subcategory.sub_key] }}{% endif %}</h3>
+    {% for title, subcategory in achievements.items() %}
+        {% if title != "teacher" or is_teacher %}
+            <h1 class="bg-blue-200 ltr:pl-8 ltr:pr-8 py-2 mb-4 rounded-lg text-3xl w-full cursor-pointer" onclick="$('#{{title}}').toggle()">{{title}}</h1>
+            <div class="hidden ltr:pl-4 rtl:pr-4 mt-4 mb-4" id="{{title}}">
+            {% for subtitle, achievement_keys in subcategory.items() %}
+                <h3 class="px-16">{{ subtitle }}</h3>
                 <div class="flex flex-wrap w-full px-16">
-                {% for achievement in subcategory.achievements %}
+                {% for achievement in achievement_keys %}
                     {% if achievement in user_achievements %}
                         <div class="w-40 rounded-lg ltr:mr-4 rtl:ml-4 mt-4 relative bg-blue-200">
                             <div class="relative h-40">
@@ -36,10 +38,10 @@
                                 </div>
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                                <p class="font-semibold">{{ achievements[achievement].text }}</p>
+                                <p class="font-semibold">{{ achievement_text }}</p>
                             </div>
                             <div class="text-center flex items-center justify-center h-16">
-                                <p>{{ achievements[achievement].title }}</p>
+                                <p>{{ achievement }}</p>
                             </div>
                         </div>
                     {% else %}
@@ -48,10 +50,10 @@
                                 <img src="{{static('/images/achievement.png')}}" class="px-2">
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                                <p class="font-semibold">{% if category.key == "hidden" %}???{% else %}{{ achievements[achievement].text }}{% endif %}</p>
+                                <p class="font-semibold">{% if title == "hidden" %}???{% else %}{{ achievement_text }}{% endif %}</p>
                             </div>
                             <div class="text-center flex items-center justify-center h-16">
-                                <p>{{ achievements[achievement].title }}</p>
+                                <p>{{ achievement }}</p>
                             </div>
                         </div>
                     {% endif %}
