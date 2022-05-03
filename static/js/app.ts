@@ -1681,4 +1681,11 @@ function removeDebugClass(str: Element) {
   return str.innerHTML.replace('<div class="debugLine">', '').replace('</div>', '');
 }
 
+export function startTutorial() {
+  console.log("Let's go!");
+  modal.alert("Welkom, bij de wondere wereld van Hedy!", 3000, false);
+  // Here start the magic:
+  // Create an interactive journey, explaining a new feature at each step
+}
+
 
