@@ -133,7 +133,7 @@ class Achievements:
 
     def get_earned_achievements(self):
         self.initialize_user_data_if_necessary()
-        translations = self.TRANSLATIONS.get_translations(session['lang'])
+        translations = self.TRANSLATIONS.get_translations(session['lang']).get('achievements')
         translated_achievements = []
         for achievement in session['new_achieved']:
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text']])
