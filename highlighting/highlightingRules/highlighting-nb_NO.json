@@ -127,7 +127,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "#.*$",
+                    "regex": "#(.*)$",
                     "token": "comment",
                     "next": "start"
                 },
@@ -206,32 +206,52 @@
                 },
                 {
                     "regex": "(^ *)(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^ *)(snu|turn)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^ *)(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^ *)(frem|forward)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)( +)(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "keyword",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -289,32 +309,50 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -324,32 +362,50 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(frem|forward)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(snu|turn)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -389,47 +445,74 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -439,32 +522,50 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(frem|forward)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(snu|turn)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -504,7 +605,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -611,47 +715,74 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -686,32 +817,50 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(frem|forward)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(snu|turn)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -751,7 +900,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -858,57 +1010,90 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -943,32 +1128,50 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(frem|forward)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(snu|turn)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -1008,7 +1211,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -1133,47 +1339,74 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -1208,42 +1441,66 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(frem|forward)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(snu|turn)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -1283,7 +1540,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -1408,47 +1668,74 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -1483,42 +1770,66 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(frem|forward)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(snu|turn)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -1558,7 +1869,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -1683,52 +1997,82 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(for|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -1763,42 +2107,66 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(frem|forward)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(snu|turn)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -1838,7 +2206,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -1945,62 +2316,98 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(for|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sekvens|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -2035,32 +2442,50 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -2100,7 +2525,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -2207,62 +2635,98 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(for|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sekvens|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -2297,32 +2761,50 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -2362,7 +2844,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -2469,72 +2954,114 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(for|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sekvens|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(og|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(eller|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -2569,32 +3096,50 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -2634,7 +3179,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -2756,77 +3304,122 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(for|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sekvens|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(og|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(eller|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -2876,27 +3469,42 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -2936,7 +3544,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -3067,77 +3678,122 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(for|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sekvens|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(og|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(eller|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(mens|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -3187,32 +3843,50 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -3252,7 +3926,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -3390,82 +4067,130 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(for|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sekvens|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(og|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(eller|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(mens|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -3525,27 +4250,42 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 }
             ]
@@ -3585,7 +4325,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -3731,82 +4474,130 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(for|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sekvens|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(og|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(eller|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(mens|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -3871,27 +4662,42 @@
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sp\u00f8r|ask)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -3936,7 +4742,10 @@
                 },
                 {
                     "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "variable",
+                    "token": [
+                        "text",
+                        "variable"
+                    ],
                     "next": "start"
                 },
                 {
@@ -4080,7 +4889,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "\\)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\))([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4089,87 +4898,138 @@
                 },
                 {
                     "regex": "(^| )(er|is)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(p\u00e5|at)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(legg|add)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fjern|remove)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(fra|from)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(i|in)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(hvis|if)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ellers|else)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(for|for)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sekvens|range)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(til|to)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(og|and)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(eller|or)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(mens|while)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(inndata|input)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(gjenta|repeat)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
@@ -4238,28 +5098,40 @@
                     "next": "start"
                 },
                 {
-                    "regex": "\\)",
+                    "regex": "(\\))",
                     "token": "keyword",
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(skriv|print)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(sov|sleep)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(tilfeldig|random)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {
                     "regex": "(^| )(ganger|times)",
-                    "token": "keyword",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
                     "next": "start"
                 },
                 {

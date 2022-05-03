@@ -1,20 +1,19 @@
 from list_keywords import KEYWORDS, NUMBERS
 from definition import *
-
+import re
 
 # transform "IF" in current language "if", "si", etc...
 def translate(keywordLang, keywordsLevel):
     if type(keywordsLevel) == str:
         if keywordsLevel in keywordLang:
-            if "(" != keywordLang[keywordsLevel][0] and ")" != keywordLang[keywordsLevel][-1]:
-                return "(" + keywordLang[keywordsLevel] + ")"
-            else:
-                return keywordLang[keywordsLevel]
+            trad = keywordLang[keywordsLevel]
         else:
-            if "(" != keywordsLevel[0] and ")" != keywordsLevel[-1]:
-                return "(" + keywordsLevel + ")"
-            else:
-                return keywordsLevel
+            trad = keywordsLevel
+
+        tradCompile = re.compile(trad)
+        if tradCompile.groups != 1 :
+            trad = "(" + trad + ")"
+        return trad
 
     elif type(keywordsLevel) == list :
         L = []
@@ -65,7 +64,7 @@ def ruleALL(keywordLang, level):
         else:
             numberRegex = '([0-9]+)'
 
-        list_rules.append({'regex': START_WORD + numberRegex + END_WORD, 'token': 'variable', 'next':'start'} )
+        list_rules.append({'regex': START_WORD + numberRegex + END_WORD, 'token': ['text','variable'], 'next':'start'} )
 
         # Special case of an number directly followed by a number 
         for command in keywordLangByLevel["SP_K"]: 
@@ -88,7 +87,7 @@ def ruleALL(keywordLang, level):
     for command in keywordLangByLevel["SP_K_SP"]:
         list_rules.append({
             'regex': START_WORD + command + END_WORD,
-            'token': "keyword",
+            'token': ["text","keyword"],
             'next': "start", 
         })
     
@@ -109,7 +108,7 @@ def ruleALL(keywordLang, level):
     for command in keywordLangByLevel["SP_K"]:
         list_rules.append({
             'regex': START_WORD + command,
-            'token': "keyword",
+            'token': ["text","keyword"],
             'next': "start", 
         })
 

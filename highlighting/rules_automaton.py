@@ -79,7 +79,7 @@ def rule_level2(keywordLang) :
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
-        'regex': '#.*$',
+        'regex': '#(.*)$',
         'token': 'comment',
         'next': 'start',
     },{
@@ -111,27 +111,27 @@ def rule_level3(keywordLang):
         'next': 'start',
     },{
         'regex': START_LINE + keywordLang["print"] ,
-        'token': 'keyword',
+        'token': ['text','keyword'],
         'next': 'start',
     },{
         'regex': START_LINE + keywordLang["turn"] ,
-        'token': 'keyword',
+        'token': ['text','keyword'],
         'next': 'start',
     },{
         'regex': START_LINE + keywordLang["sleep"] ,
-        'token': 'keyword',
+        'token': ['text','keyword'],
         'next': 'start',
     },{
         'regex': START_LINE + keywordLang["forward"] ,
-        'token': 'keyword',
+        'token': ['text','keyword'],
         'next': 'start',
     },{
         'regex': START_WORD + keywordLang["at"] + SPACE + keywordLang["random"] ,
-        'token': 'keyword',
+        'token': ['text','keyword','keyword','keyword'],
         'next': 'start',
     },{
         'regex': START_WORD + keywordLang["at"] ,
-        'token': 'keyword',
+        'token': ['text','keyword'],
         'next': 'start',
     },{
         'regex': '#.*$',
