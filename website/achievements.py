@@ -136,7 +136,7 @@ class Achievements:
         translations = self.TRANSLATIONS.get_translations(session['lang'])
         translated_achievements = []
         for achievement in session['new_achieved']:
-            translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], translations[achievement]['image']])
+            translated_achievements.append([translations[achievement]['title'], translations[achievement]['text']])
         session['new_achieved'] = [] #Once we get earned achievements -> empty the array with "waiting" ones
         session['new_commands'] = []
         return translated_achievements
