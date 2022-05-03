@@ -38,10 +38,10 @@
                                 </div>
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                                <p class="font-semibold">{{ achievement_text }}</p>
+                                <p class="font-semibold">{{ translations[achievement].text }}</p>
                             </div>
                             <div class="text-center flex items-center justify-center h-16">
-                                <p>{{ achievement }}</p>
+                                <p>{{ translations[achievement].title }}</p>
                             </div>
                         </div>
                     {% else %}
@@ -50,10 +50,10 @@
                                 <img src="{{static('/images/achievement.png')}}" class="px-2">
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                                <p class="font-semibold">{% if title == "hidden" %}???{% else %}{{ achievement_text }}{% endif %}</p>
+                                <p class="font-semibold">{% if title == "hidden" %}???{% else %}{{ translations[achievement].text }}{% endif %}</p>
                             </div>
                             <div class="text-center flex items-center justify-center h-16">
-                                <p>{{ achievement }}</p>
+                                <p>{{ translations[achievement].title }}</p>
                             </div>
                         </div>
                     {% endif %}
