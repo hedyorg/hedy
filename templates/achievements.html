@@ -1,11 +1,11 @@
 {% extends "auth.html" %}
-
+{% set categories = ['general', 'teacher', 'hidden'] %}
 {% block main %}
-    <h2 class="px-8 mb-4">{{achievements[template_achievements.title_key]}}</h2>
-    {% for category in template_achievements.categories %}
-        {% if category.key != "teacher" or is_teacher %}
-            <h1 class="bg-blue-200 ltr:pl-8 ltr:pr-8 py-2 mb-4 rounded-lg text-3xl w-full cursor-pointer" onclick="$ ('#{{category.key}}').toggle()">{{achievements[category.key]}}</h1>
-            <div class="hidden ltr:pl-4 rtl:pr-4 mt-4 mb-4" id="{{ category.key }}">
+    <h2 class="px-8 mb-4">{{_('hedy_achievements')}}</h2>
+    {% for category in categories %}
+        {% if category != "teacher" or is_teacher %}
+            <h1 class="bg-blue-200 ltr:pl-8 ltr:pr-8 py-2 mb-4 rounded-lg text-3xl w-full cursor-pointer" onclick="$('#{{category}}').toggle()">{{achievements[category]}}</h1>
+            <div class="hidden ltr:pl-4 rtl:pr-4 mt-4 mb-4" id="{{category}}">
             {% for subcategory in category['subcategory'] %}
                 <h3 class="px-16">{% if subcategory.sub_key in achievements %}{{ achievements[subcategory.sub_key] }}{% endif %}</h3>
                 <div class="flex flex-wrap w-full px-16">
