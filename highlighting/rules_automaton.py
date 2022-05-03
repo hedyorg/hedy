@@ -83,7 +83,7 @@ def rule_level2(keywordLang) :
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
-        'regex': '#.*$',
+        'regex': '#(.*)$',
         'token': 'comment',
         'next': 'start',
     },{
