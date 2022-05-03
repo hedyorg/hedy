@@ -4,110 +4,59 @@
         "rules": {
             "start": [
                 {
-                    "regex": "(^ *)(frage|ask)(.*)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
+                    "regex": "[ac]",
+                    "token": "keyword",
+                    "next": "StateB"
                 },
                 {
-                    "regex": "(^ *)(drucke|print)(.*)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
+                    "regex": "[bc]",
+                    "token": "constant.character",
+                    "next": "StateA"
                 },
                 {
-                    "regex": "(^ *)(echo|echo)(.*)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)(color|color)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])(.*)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)(color|color)( +)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( *)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)(vorw\u00e4rts|forward)(.*)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)(drehe|turn)( *)(links|left)( *)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)(drehe|turn)( *)(rechts|right)( *)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)(drehe|turn)(.*)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "#.*$",
+                    "regex": "[^abcd]",
                     "token": "comment",
                     "next": "start"
-                },
+                }
+            ],
+            "StateA": [
                 {
-                    "regex": "_\\?_",
+                    "regex": "[^cg]",
                     "token": "invalid",
+                    "next": "StateA"
+                },
+                {
+                    "regex": "c",
+                    "token": "keyword",
+                    "next": "StateA"
+                },
+                {
+                    "regex": "$",
+                    "token": "invalid",
+                    "next": "StateE"
+                }
+            ],
+            "StateB": [
+                {
+                    "regex": "[^c]",
+                    "token": "variable",
+                    "next": "StateB"
+                },
+                {
+                    "regex": "$",
+                    "token": "invalid",
+                    "next": "StateE"
+                }
+            ],
+            "StateE": [
+                {
+                    "regex": "e",
+                    "token": "variable",
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(_)(?= |$)",
-                    "token": [
-                        "text",
-                        "invalid"
-                    ],
-                    "next": "start"
+                    "regex": "Test",
+                    "token": "comment"
                 }
             ]
         }

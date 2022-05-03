@@ -172,15 +172,13 @@ class HighlightTester(unittest.TestCase):
     # This function simulates the operation of Ace on a
     # string provided as input, and "colors" it using the variable Tokencode.
 
-    def simulateRulesWithToken(self,Rules,code):
-        # Initialisation Output
-        Output = ""
-        for c in code:
-            if c == "\n": Output += "\n"
-            else: Output += " "
 
+
+    def simulateRulesWithTokenLine(self,Rules,line,token="start"):
+        # Initialisation Output
+        Output = " " * len(line)
         # Initialisation variables
-        currentState = "start"
+        currentState = token
         currentPosition = 0
 
         flag = False
@@ -190,11 +188,12 @@ class HighlightTester(unittest.TestCase):
             currentMatch = None
             NEXT = {"rule":{},"match":None}
             FIND = False
-            nextPos = len(code) + 42
+            nextPos = len(line) + 42
             for rule in Rules[currentState]:
 
-                regexCompile = re.compile(rule['regex'], re.MULTILINE)
-                match = regexCompile.search(code,currentPosition)
+                regexCompile = re.compile(rule['regex'])
+                match = regexCompile.search(line,currentPosition)
+
 
                 if match:
                     if match.start() < nextPos :
@@ -203,13 +202,9 @@ class HighlightTester(unittest.TestCase):
                         NEXT["match"] = match
                         FIND = True
 
-            print(currentPosition)
-            print(NEXT)
-            print("#"*50)
-
             if FIND :
 
-                # Application of coloring on the code
+                # Application of coloring on the line
                 currentRule,currentMatch = NEXT["rule"],NEXT["match"]
 
                 if "token" not in currentRule:
@@ -218,7 +213,7 @@ class HighlightTester(unittest.TestCase):
                 if type(currentRule['token']) == str :
                     currentRule['token'] = [currentRule['token']]
         
-                if re.compile(currentRule['regex'], re.MULTILINE).groups == 0:
+                if re.compile(currentRule['regex']).groups == 0:
                     tok = currentRule['token'][0]
                     start = currentMatch.start()
                     length = currentMatch.end() - currentMatch.start()
@@ -239,11 +234,18 @@ class HighlightTester(unittest.TestCase):
             else:
                 flag = True
 
-        for i,ch in enumerate(code):
-            if ch == "\n":
-                Output = Output[:i] + "\n" + Output[i+1:]
+        return Output,currentState
 
-        return Output
+
+
+
+    def simulateRulesWithToken(self,Rules,code):
+        Outputs = []
+        token = "start"
+        for line in code.split("\n"):
+            output,token = self.simulateRulesWithTokenLine(Rules,line,token)
+            Outputs.append(output)
+        return "\n".join(Outputs)
 
 
 
