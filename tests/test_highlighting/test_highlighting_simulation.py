@@ -14,7 +14,7 @@ class HighlighterTestLeveLSimulation(HighlightTester):
 
         rules = RULES[ruleName]
         
-        result = self.simulateRulesWithToken(rules,code)
+        result = self.applyRules(rules,code)
 
         valid, indError = self.check(result,expected)
         if not valid:
@@ -71,11 +71,11 @@ class HighlighterTestLeveLSimulation(HighlightTester):
 
 
 
-    # def test_7(self):
-    #     self.assertHighlightedChr(
-    #         "qmczqdqaqmcqbadq\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\n\ngrbnorbTestananaeqwswsmsbzqdqaqmcqbadqcc\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\n\ngrbnorbTestananaeqwswsmsbzqdqaqmcqbadqcc",
-    #         "CCKNNNNNNN NNNNN\n       CCCC     NCCCCCCCKNNNNNNN NNNNN  \n       CCCC     NCCCCCCCKNNNNNNN NNNNN  \n\n       CCCC     NCCCCCCCSIIIIIIIKIIIIIKK\nIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIKIIIIIKK\n\n       CCCC     NCCCCCCCSIIIIIIIKIIIIIKK",
-    #         ruleName="rules4")
+    def test_7(self):
+        self.assertHighlightedChr(
+            "qmczqdqaqmcqbadq\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\n\ngrbnorbTestananaeqwswsmsbzqdqaqmcqbadqcc\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\n\ngrbnorbTestananaeqwswsmsbzqdqaqmcqbadqcc",
+            "CCKNNNNNNN NNNNN\nNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN NNNNN  \n       CCCC     NCCCCCCCKNNNNNNN NNNNN  \n\n       CCCC     NCCCCCCCSIIIIIIIKIIIIIKK\nIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIKIIIIIKK\n\n       CCCC     NCCCCCCCSIIIIIIIKIIIIIKK",
+            ruleName="rules4")
 
 
 

@@ -57,7 +57,7 @@ class HighlightTester(unittest.TestCase):
         
         rules  = self._getRules(level,lang)
 
-        result = self.simulateRulesWithToken(rules,code)
+        result = self.applyRules(rules,code)
 
         valid, indError = self.check(result,expected)
         if not valid:
@@ -172,18 +172,14 @@ class HighlightTester(unittest.TestCase):
     # This function simulates the operation of Ace on a
     # string provided as input, and "colors" it using the variable Tokencode.
 
-
-
-    def simulateRulesWithToken(self,Rules,code):
+    def applyRulesLine(self,Rules,code,startToken="start"):
         # Initialisation Output
-        Output = ""
-        for c in code:
-            if c == "\n": Output += "\n"
-            else: Output += " "
+        Output = " " * len(code)
 
         # Initialisation variables
-        currentState = "start"
+        currentState = startToken
         currentPosition = 0
+
 
         flag = False
         while not flag:
@@ -196,7 +192,7 @@ class HighlightTester(unittest.TestCase):
             for rule in Rules[currentState]:
 
                 regexCompile = re.compile(rule['regex'], re.MULTILINE)
-                match = regexCompile.search(code,currentPosition)
+                match = regexCompile.search(code, currentPosition)
 
                 if match:
                     if match.start() < nextPos :
@@ -235,12 +231,25 @@ class HighlightTester(unittest.TestCase):
                 if 'next' in currentRule:
                     currentState = currentRule['next']
 
+                if currentPosition ==len(code):
+                    flag = True
+
+
             else:
                 flag = True
 
+        Output = Output.replace(" ","T")
+        return Output,currentState
 
 
-        return Output
+    def applyRules(self,Rules,code):
+        Outputs = []
+        token = "start"
+        for line in code.split("\n"):
+            output,token = self.applyRulesLine(Rules,line,token)
+            print("next",token)
+            Outputs.append(output)
+        return "\n".join(Outputs)
 
 
 
@@ -262,8 +271,6 @@ class HighlightTester(unittest.TestCase):
                 pass # if they are the same, no problem 
             elif chWanted == " " and chresult in ['T','K','C','N','S']:
                 pass # if it was not fixed at the beginning, everything is tolerated except the pink highlighting
-            elif chWanted == "T" and chresult == " ":
-                pass # If we wanted text, but we don't get syntactic coloring, then we tolerate
             else:
                 # in all other cases, an error is returned indicating the number of the problematic character
                 return False,cpt
