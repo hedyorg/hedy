@@ -89,15 +89,15 @@
                     </div>
                     {% if result_items[i].is_correct and result_items[i].attempts ==  1 %}
                         <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
-                            In {{ result_items[i].attempts - 1 }} {{_('attempt')|lower }}
+                            In {{ result_items[i].attempts }} {{_('attempt')|lower }}
                         </p>
                     {% elif result_items[i].is_correct and result_items[i].attempts > 1 %}
                         <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
-                            In {{ result_items[i].attempts - 1 }} {{_('attempt')}}
+                            In {{ result_items[i].attempts }} {{_('attempt')}}
                         </p>
                     {% else %}
                         <p class="place-content-center table-el text-center bg-red-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
-                            In {{ result_items[i].attempts - 1 }} {{_('attempt')}}
+                            In {{ result_items[i].attempts }} {{_('attempt')}}
                         </p>
                     {% endif %}
                 </div>
