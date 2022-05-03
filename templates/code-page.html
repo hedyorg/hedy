@@ -6,9 +6,11 @@
 
     {% include "incl-editor-and-output.html" %}
 
-    <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">
-    Latest update: {{latest}}
-    </div>
+    {% if latest %}
+      <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">
+      Latest update: {{latest}}
+      </div>
+    {% endif %}
 </div>
 
 {% endblock %}
@@ -38,4 +40,13 @@
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <!-- If we are in tutorial mode -> hide most features, slowly release them -->
+  {% if tutorial %}
+    <script>
+      $('#level-header').hide();
+      $('#adventures').hide();
+      $('#editor-area').hide();
+      $('#developers_toggle_container').hide();
+    </script>
+  {% endif %}
 {% endblock %}

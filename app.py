@@ -715,6 +715,19 @@ def get_user_formatted_age(now, date):
     age = {'time': str(date) + " " + measure}
     return gettext('ago').format(**age)
 
+@app.route('/tutorial', methods=['GET'])
+@requires_login
+def tutorial_index(user):
+    level = 1
+    # Current idea: Render the code page, slowly show more features
+    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    adventures = load_adventures_per_level(level)
+
+    return hedyweb.render_tutorial_mode(
+      level=level,
+      commands=commands,
+      adventures=adventures
+    )
 
 # routing to index.html
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
@@ -790,7 +803,6 @@ def index(level, program_id):
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
-
 
     return hedyweb.render_code_editor_with_tabs(
         commands=commands,
