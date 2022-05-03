@@ -4,7 +4,6 @@ from definition import *
 # so we have to color them with respect to what is around,
 # so we use particular functions
 
-
 def rule_level1(keywordLang):
     return {"start" : [{
         'regex': START_LINE + keywordLang["ask"] + "(.*)$",
@@ -55,7 +54,6 @@ def rule_level1(keywordLang):
         'token': ['text','invalid'],
         'next': 'start',
     } ]}
-
 
 def rule_level2(keywordLang) :
     return {"start" : [{
