@@ -84,7 +84,7 @@ LanguageKeywords = get_Traduction(KEYWORDS_PATH,KEYWORDS_PATTERN)
 
 for languageCode in LanguageKeywords:
 
-    print("Generations of syntax highlighting rules for {:.<10}".format(languageCode), end="")
+    print("Generation of syntax highlighting rules for {:.<10}".format(languageCode), end="")
 
     # List of rules by level
     LEVELS = generateRules(LanguageKeywords[languageCode])
