@@ -77,14 +77,6 @@ function levelDefaultStep() {
     }
   });
 
-  $('#adventures').children().each(function() {
-    $(this).addClass("z-40");
-  });
-  $('#adventures-tab').children().each(function() {
-    console.log($(this).attr('data-tabtarget'));
-    $(this).addClass("z-40");
-  });
-
   relocatePopup("bottom");
   tutorialPopup("Level uitleg", "In het eerste tabje vind je altijd de level uitleg. Hier worden in elk level de nieuwe commando's uitgelegd.");
 }
@@ -124,6 +116,23 @@ function quizTabStep() {
   tutorialPopup("Quiz", "Aan het einde van elk level kun je een quiz maken, zo kun je goed testen of je alles snapt!");
 }
 
+function saveShareStep() {
+  $('#adventures-buttons').children().each(function() {
+    $(this).removeClass("z-40");
+  });
+
+  $('#level-header').addClass("z-40");
+  $('#level-header').show();
+  $('#cheatsheet_container').hide();
+
+  relocatePopup("middle");
+  tutorialPopup("Opslaan en delen", "Je kunt al jouw gemaakt programma's opslaan en delen met andere Hedy gebruikers.");
+}
+
+function cheatsheetStep() {
+  return 0;
+}
+
 function endTutorial() {
   return 0;
 }
@@ -145,9 +154,9 @@ function callNextStep() {
   } else if (current_step == 7) {
     quizTabStep();
   } else if (current_step == 8) {
-    // Show saving / sharing
+    saveShareStep();
   } else if (current_step == 9) {
-    // Show cheatsheet
+    cheatsheetStep();
   } else {
     endTutorial();
   }
@@ -159,11 +168,13 @@ function relocatePopup(direction: string) {
 
   $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
   if (direction == "left") {
-      $('#tutorial-pop-up').css({'left': '35%'});
+    $('#tutorial-pop-up').css({'left': '35%'});
   } else if (direction === "right") {
-      $('#tutorial-pop-up').css({'left': '65%'});
+    $('#tutorial-pop-up').css({'left': '65%'});
   } else if (direction == "bottom") {
-      $('#tutorial-pop-up').css({'top': '60%'});
+    $('#tutorial-pop-up').css({'top': '70%'});
+  } else if (direction == "middle") {
+    $('#tutorial-pop-up').css({'top': '50%'});
   } else {
     $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
   }
