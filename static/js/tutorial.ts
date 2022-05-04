@@ -47,6 +47,9 @@ function runButtonStep() {
   $('#speak_container').hide();
 
   $('#runButtonContainer').addClass("z-40");
+  // Disable the button as we only want to show where it is -> not use it yet
+  $('#runit').prop("disabled",true);
+
   relocatePopup("middle");
   tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
 }
@@ -57,6 +60,7 @@ function tryRunButtonStep() {
 
   theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
   theGlobalEditor?.setOptions({readOnly: true});
+  $('#runit').prop("disabled",false);
 
   relocatePopup("bottom");
   tutorialPopup("Probeer het uit!", "Voer het programma uit, klik op 'volgende stap' als je klaar bent.");
