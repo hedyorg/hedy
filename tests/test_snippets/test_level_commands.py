@@ -46,11 +46,17 @@ Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/comma
 # fill keyword dict for all keyword languages
 keyword_dict = {}
 for lang in ALL_KEYWORD_LANGUAGES:
-    keyword_dict[lang] = keywords = YamlFile.for_file(f'../../content/keywords/{lang}.yaml').to_dict()
+    keyword_dict[lang] = YamlFile.for_file(f'../../content/keywords/{lang}.yaml').to_dict()
 
+english_keywords = YamlFile.for_file(f'../../content/keywords/en.yaml').to_dict()
+
+# We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
 for snippet in Hedy_snippets:
     try:
-        snippet[1].code = snippet[1].code.format(**keyword_dict[snippet[1].language])
+        if snippet[1].language in ALL_KEYWORD_LANGUAGES.keys():
+            snippet[1].code = snippet[1].code.format(**keyword_dict[snippet[1].language])
+        else:
+            snippet[1].code = snippet[1].code.format(**english_keywords)
     except KeyError:
         print("This following snippet contains an invalid placeholder ...")
         print(snippet)
