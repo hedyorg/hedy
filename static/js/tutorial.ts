@@ -59,11 +59,11 @@ function callNextStep() {
     $('#editor').addClass("z-40");
     $('#code_output').addClass("z-40");
     $('#tutorial-mask').show();
-    theGlobalEditor?.setValue("print hallo wereld!");
+    theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
     theGlobalEditor?.setOptions({readOnly: true});
 
     relocatePopup("bottom");
-    tutorialPopup("Probeer het uit!", "Probeer het uit, klik op 'volgende stap' als je klaar bent");
+    tutorialPopup("Probeer het uit!", "Voer het programma uit, klik op 'volgende stap' als je klaar bent");
   }
 
   // Step 4: Show the adventures
