@@ -85,7 +85,18 @@ function callNextStep() {
     tutorialPopup("Level uitleg", "In het eerste tabje vind je altijd de level uitleg. Hier worden in elk level de nieuwe commando's uitgelegd.");
 
   } else if (current_step == 6) {
-    // Show other adventures
+    $('#tutorial-mask').show();
+
+    // Show all tabs except the quiz one
+    $('#adventures-buttons').children().each(function() {
+      if ($(this).attr('data-tab') != "quiz") {
+        $(this).show();
+      }
+    });
+
+    relocatePopup("middle");
+    tutorialPopup("Avonturen", "De andere tabjes bevatten avonturen, deze kun je per level maken. Ze gaan van makkelijk naar moeilijk!");
+
   } else if (current_step == 7) {
     // Show the quiz tab
   } else if (current_step == 8) {
