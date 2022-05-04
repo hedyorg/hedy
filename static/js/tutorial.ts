@@ -32,7 +32,7 @@ function codeOutputStep() {
 
   $('#code_output').addClass("z-40");
   $('#code_output').show();
-  $('#variables').hide();
+  $('#variables_container').hide();
 
   relocatePopup("left");
   tutorialPopup("Het output venster", "De code die je uitvoert wordt hier weergegeven.");
