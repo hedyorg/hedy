@@ -67,13 +67,7 @@ function levelDefaultStep() {
   $('#editor').removeClass("z-40");
   $('#code_output').removeClass("z-40");
 
-  $('#adventures').addClass("z-40");
-  $('#adventures-tab').addClass("z-40");
-  $('#adventures-tab').children().each(function() {
-    $(this).addClass("z-40");
-  });
   $('#adventures').show();
-
   // Hide all tabs except the default level one
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') != "default") {
@@ -82,6 +76,12 @@ function levelDefaultStep() {
       $(this).addClass("z-40");
     }
   });
+
+  $('#adventures-tab').children().each(function() {
+    console.log($(this).attr('data-target') != "default");
+    $(this).addClass("z-40");
+  });
+
 
   relocatePopup("bottom");
   tutorialPopup("Level uitleg", "In het eerste tabje vind je altijd de level uitleg. Hier worden in elk level de nieuwe commando's uitgelegd.");
@@ -108,18 +108,15 @@ function adventureTabsStep() {
 }
 
 function quizTabStep() {
-  // Show all tabs (including the quiz one)
+  // Show all tabs (including the quiz one) -> only highlight the quiz tab
   $('.tab').show();
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') == "quiz") {
       $(this).addClass("z-40");
-      window.State.unsaved_changes = false;
-      $(this).click();
     } else {
       $(this).removeClass("z-40");
     }
   });
-  $('#start_quiz_button').click();
 
   relocatePopup("top");
   tutorialPopup("Quiz", "Aan het einde van elk level kun je een quiz maken, zo kun je goed testen of je alles snapt!");
