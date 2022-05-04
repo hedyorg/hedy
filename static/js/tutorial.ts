@@ -26,7 +26,7 @@ function callNextStep() {
   if (current_step == 1) {
     $('#tutorial-mask').show();
 
-    $('#editor').addClass("z-50");
+    $('#editor').addClass("z-40");
     $('#editor-area').show();
     $('#code_output').hide();
     $('#code_related_buttons').hide();
@@ -34,17 +34,17 @@ function callNextStep() {
     tutorialPopup("De code editor", "In dit venster schrijf je alle code, probeer maar wat in te vullen!");
   } else if (current_step == 2) {
     // Reset highlight from previous step
-    $('#editor').removeClass("z-50");
+    $('#editor').removeClass("z-40");
     $('#tutorial-mask').show();
 
-    $('#code_output').addClass("z-50");
+    $('#code_output').addClass("z-40");
     $('#code_output').show();
 
     relocatePopup("left");
     tutorialPopup("Het output venster", "De code die je uitvoert wordt hier weergegeven.");
   } else if (current_step == 3) {
     // Reset highlight from previous step
-    $('#code_output').removeClass("z-50");
+    $('#code_output').removeClass("z-40");
     $('#tutorial-mask').show();
 
     $('#code_related_buttons').show();
@@ -67,11 +67,11 @@ function callNextStep() {
 function relocatePopup(direction: string) {
   $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
   if (direction == "left") {
-      $('#tutorial-pop-up').css({'left': '30%'});
+      $('#tutorial-pop-up').css({'left': '35%'});
   } else if (direction === "right") {
-      $('#tutorial-pop-up').css({'left': '70%'});
+      $('#tutorial-pop-up').css({'left': '65%'});
   } else if (direction == "buttom") {
-      $('#tutorial-pop-up').css({'top': '70%'});
+      $('#tutorial-pop-up').css({'top': '60%'});
   } else {
     // Do nothing and keep in the middle
   }
