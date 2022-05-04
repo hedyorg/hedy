@@ -77,8 +77,11 @@ function levelDefaultStep() {
     }
   });
 
+  $('#adventures').children().each(function() {
+    $(this).addClass("z-40");
+  });
   $('#adventures-tab').children().each(function() {
-    console.log($(this).attr('data-target') != "default");
+    console.log($(this).attr('data-tabtarget'));
     $(this).addClass("z-40");
   });
 
