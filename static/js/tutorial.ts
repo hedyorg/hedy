@@ -64,9 +64,26 @@ function callNextStep() {
     theGlobalEditor?.setOptions({readOnly: true});
 
     relocatePopup("bottom");
-    tutorialPopup("Probeer het uit!", "Voer het programma uit, klik op 'volgende stap' als je klaar bent");
+    tutorialPopup("Probeer het uit!", "Voer het programma uit, klik op 'volgende stap' als je klaar bent.");
   } else if (current_step == 5) {
-    // Show the default adventure
+    $('#code_output').removeClass("z-40");
+    $('#editor').removeClass("z-40");
+    $('#code_output').removeClass("z-40");
+
+    $('#adventures').addClass("z-50");
+    $('#adventures').show();
+    $('#tutorial-mask').show();
+
+    // Hide all tabs except the default level one
+    $('#adventures-buttons').children().each(function() {
+      if ($(this).attr('data-tab') != "default") {
+        $(this).hide();
+      }
+    });
+
+    relocatePopup("bottom");
+    tutorialPopup("Level uitleg", "In het eerste tabje vind je altijd de level uitleg. Hier worden in elk level de nieuwe commando's uitgelegd.");
+
   } else if (current_step == 6) {
     // Show other adventures
   } else if (current_step == 7) {
@@ -96,7 +113,8 @@ function relocatePopup(direction: string) {
 function tutorialPopup(title: string, message: string) {
   $('#tutorial_title').text(title);
   $('#tutorial_text').text(message);
-  $('#tutorial-pop-up').fadeIn(1500);
+  //$('#tutorial-pop-up').fadeIn(1500);
+  $('#tutorial-pop-up').show(); //Use show() for debugging purposes
 }
 
 export function startTutorial() {
