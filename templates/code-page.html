@@ -1,5 +1,14 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
+{% if tutorial %}
+<div id="tutorial-pop-up" class="z-10 fixed hidden" style="width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);">
+      <div class="bg-blue-500 border border-black rounded-lg px-16 py-4 text-center">
+          <h2 id="tutorial_title" class="text-white"></h2>
+          <p id="tutorial_text"></p>
+          <button class="green-btn mt-4">{{_('next_step_tutorial')}}</button>
+      </div>
+  </div>
+{% endif %}
 <div tabindex="0" class="flex-grow p-4 overflow-y-scroll">
     {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
     {% include "incl-adventure-tabs.html" %}
@@ -12,7 +21,6 @@
       </div>
     {% endif %}
 </div>
-
 {% endblock %}
 
 {% block scripts %}

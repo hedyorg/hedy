@@ -715,9 +715,11 @@ def get_user_formatted_age(now, date):
     age = {'time': str(date) + " " + measure}
     return gettext('ago').format(**age)
 
+
 @app.route('/tutorial', methods=['GET'])
 @requires_login
 def tutorial_index(user):
+    print("HAllo")
     level = 1
     # Current idea: Render the code page, slowly show more features
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
@@ -728,6 +730,7 @@ def tutorial_index(user):
       commands=commands,
       adventures=adventures
     )
+
 
 # routing to index.html
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
