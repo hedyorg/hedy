@@ -130,7 +130,12 @@ function saveShareStep() {
 }
 
 function cheatsheetStep() {
-  return 0;
+  $('#level-header').removeClass("z-40");
+  $('#cheatsheet_container').addClass("z-40");
+  $('#cheatsheet_container').show();
+
+  relocatePopup("middle");
+  tutorialPopup("Spiekbriefje", "Als je iets bent vergeten kun je het spiekbriefje gebruiken om te kijken welke commando's je mag gebruiken.");
 }
 
 function endTutorial() {
