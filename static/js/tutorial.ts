@@ -2,7 +2,7 @@ import {theGlobalEditor} from "./app";
 
 let current_step = 0;
 
-// We call this function on load -> fix relevant stuff
+// We call this function on load -> customize click event of the tutorial button
 (function() {
   $('#tutorial_next_button').off('click').on('click', () => {
     $('#tutorial-pop-up').hide();
@@ -15,11 +15,9 @@ function hideFunctionality() {
   $('#adventures').hide();
   $('#editor-area').hide();
   $('#developers_toggle_container').hide();
-  $('#tutorial-mask').show();
 }
 
 function codeEditorStep() {
-  $('#tutorial-mask').show();
   $('#editor').addClass("z-40");
   $('#editor-area').show();
   $('#code_output').hide();
@@ -31,7 +29,6 @@ function codeEditorStep() {
 function codeOutputStep() {
   // Reset highlight from previous step
   $('#editor').removeClass("z-40");
-  $('#tutorial-mask').show();
 
   $('#code_output').addClass("z-40");
   $('#code_output').show();
@@ -44,7 +41,6 @@ function codeOutputStep() {
 function runButtonStep() {
   // Reset highlight from previous step
   $('#code_output').removeClass("z-40");
-  $('#tutorial-mask').show();
 
   $('#code_related_buttons').show();
   $('#debug_container').hide();
@@ -58,7 +54,7 @@ function runButtonStep() {
 function tryRunButtonStep() {
   $('#editor').addClass("z-40");
   $('#code_output').addClass("z-40");
-  $('#tutorial-mask').show();
+
   theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
   theGlobalEditor?.setOptions({readOnly: true});
 
@@ -77,7 +73,6 @@ function levelDefaultStep() {
     $(this).addClass("z-40");
   });
   $('#adventures').show();
-  $('#tutorial-mask').show();
 
   // Hide all tabs except the default level one
   $('#adventures-buttons').children().each(function() {
@@ -93,8 +88,6 @@ function levelDefaultStep() {
 }
 
 function adventureTabsStep() {
-  $('#tutorial-mask').show();
-
   // Show all tabs except the quiz one
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') != "quiz") {
@@ -110,14 +103,11 @@ function adventureTabsStep() {
       $(this).removeClass("z-40");
     }
   });
-  //window.Loc('#story');
 
   tutorialPopup("Avonturen", "De andere tabjes bevatten avonturen, deze kun je per level maken. Ze gaan van makkelijk naar moeilijk!");
 }
 
 function quizTabStep() {
-  $('#tutorial-mask').show();
-
   // Show all tabs (including the quiz one)
   $('.tab').show();
   $('#adventures-buttons').children().each(function() {
@@ -135,13 +125,12 @@ function quizTabStep() {
   tutorialPopup("Quiz", "Aan het einde van elk level kun je een quiz maken, zo kun je goed testen of je alles snapt!");
 }
 
+function endTutorial() {
+  return 0;
+}
 
 function callNextStep() {
   current_step += 1;
-  console.log(current_step);
-  $('#tutorial-mask').hide();
-
-  // Step 1: Show the code editor
   if (current_step == 1) {
     codeEditorStep();
   } else if (current_step == 2) {
@@ -157,11 +146,11 @@ function callNextStep() {
   } else if (current_step == 7) {
     quizTabStep();
   } else if (current_step == 8) {
-    // Show the cheatsheet
+    // Show saving / sharing
   } else if (current_step == 9) {
-    // Show the speak aloud option
-  } else if (current_step == 10) {
-    // Show the saving / sharing bar
+    // Show cheatsheet
+  } else {
+    endTutorial();
   }
 }
 
