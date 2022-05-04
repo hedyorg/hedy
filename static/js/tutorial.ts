@@ -72,6 +72,10 @@ function levelDefaultStep() {
   $('#code_output').removeClass("z-40");
 
   $('#adventures').addClass("z-40");
+  $('#adventures-tab').addClass("z-40");
+  $('#adventures-tab').children().each(function() {
+    $(this).addClass("z-40");
+  });
   $('#adventures').show();
   $('#tutorial-mask').show();
 
@@ -96,21 +100,31 @@ function adventureTabsStep() {
     if ($(this).attr('data-tab') != "quiz") {
       $(this).addClass("z-40");
       $(this).show();
+      if ($(this).attr('data-tab') == "story") {
+        // Set to false, prevent "are you sure you want to switch without saving" pop-up
+        window.State.unsaved_changes = false;
+        $(this).click();
+      }
     }
     if ($(this).attr('data-tab') == "default") {
       $(this).removeClass("z-40");
     }
   });
+  //window.Loc('#story');
 
   tutorialPopup("Avonturen", "De andere tabjes bevatten avonturen, deze kun je per level maken. Ze gaan van makkelijk naar moeilijk!");
 }
 
 function quizTabStep() {
-  // Show all tabs (including the quiz one
+  $('#tutorial-mask').show();
+
+  // Show all tabs (including the quiz one)
   $('.tab').show();
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') == "quiz") {
       $(this).addClass("z-40");
+      window.State.unsaved_changes = false;
+      $(this).click();
     } else {
       $(this).removeClass("z-40");
     }
