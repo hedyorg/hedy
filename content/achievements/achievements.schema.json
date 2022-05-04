@@ -1,0 +1,31 @@
+{
+  "title": "JSON Schema for Hedy Achievements",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "achievements": {
+      "type": "object",
+      "description": "Achievements with title and text",
+      "additionalProperties": {
+        "$ref": "#/Achievement"
+      }
+    }
+  },
+  "required": [
+    "achievements"
+  ],
+  "Achievement": {
+    "type": "object",
+    "additionalProperties": false,
+   "properties": {
+     "title": {
+       "type": "string",
+       "description": "Achievement title"
+     },
+     "text": {
+       "type": "string",
+       "description": "Achievement text"
+     }
+   }
+  }
+}
