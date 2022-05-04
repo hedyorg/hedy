@@ -1,8 +1,19 @@
+
+// We call this function on load -> fix relevant stuff
+(function() {
+
+  $('#tutorial_next_button').off('click').on('click', () => {
+    $('#tutorial-pop-up').hide();
+    callNextStep();
+  });
+})();
+
 function hideFunctionality() {
   $('#level-header').hide();
   $('#adventures').hide();
   $('#editor-area').hide();
   $('#developers_toggle_container').hide();
+  $('#tutorial-mask').show();
 }
 
 function callNextStep() {
@@ -14,10 +25,8 @@ function tutorialPopup(title: string, message: string) {
   $('#tutorial_title').text(title);
   $('#tutorial_text').text(message);
   $('#tutorial-pop-up').fadeIn(1500);
-  $('#tutorial_next_button').off('click').on('click', () => {
-    $('#tutorial-pop-up').hide();
-    callNextStep();
-  });
+
+
 }
 
 export function startTutorial() {

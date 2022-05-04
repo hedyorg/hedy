@@ -717,8 +717,7 @@ def get_user_formatted_age(now, date):
 
 
 @app.route('/tutorial', methods=['GET'])
-@requires_login
-def tutorial_index(user):
+def tutorial_index():
     print("HAllo")
     level = 1
     # Current idea: Render the code page, slowly show more features
