@@ -56,7 +56,7 @@ function callNextStep() {
     tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
   } else if (current_step == 4) {
     // Now it gets complex: Enter a default program into the code editor
-    // Only continue when it is executed
+    // Only continue when it is executed -> we can also fake this of course...
   }
 
   // Step 4: Show the adventures
