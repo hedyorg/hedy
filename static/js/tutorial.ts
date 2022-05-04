@@ -139,7 +139,9 @@ function cheatsheetStep() {
 }
 
 function endTutorial() {
-  return 0;
+  $('#cheatsheet_container').removeClass("z-40");
+  relocatePopup("middle");
+  tutorialPopup("Einde!", "Klik op 'Volgende stap' om te echt aan de slag te gaan met Hedy!");
 }
 
 function callNextStep() {
@@ -162,8 +164,10 @@ function callNextStep() {
     saveShareStep();
   } else if (current_step == 9) {
     cheatsheetStep();
-  } else {
+  } else if (current_step == 10) {
     endTutorial();
+  } else {
+    location.replace("/hedy");
   }
 }
 
