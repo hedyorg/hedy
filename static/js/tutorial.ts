@@ -40,6 +40,7 @@ function callNextStep() {
 
     $('#code_output').addClass("z-40");
     $('#code_output').show();
+    $('#variables').hide();
 
     relocatePopup("left");
     tutorialPopup("Het output venster", "De code die je uitvoert wordt hier weergegeven.");
@@ -64,11 +65,19 @@ function callNextStep() {
 
     relocatePopup("bottom");
     tutorialPopup("Probeer het uit!", "Voer het programma uit, klik op 'volgende stap' als je klaar bent");
+  } else if (current_step == 5) {
+    // Show the default adventure
+  } else if (current_step == 6) {
+    // Show other adventures
+  } else if (current_step == 7) {
+    // Show the quiz tab
+  } else if (current_step == 8) {
+    // Show the cheatsheet
+  } else if (current_step == 9) {
+    // Show the speak aloud option
+  } else if (current_step == 10) {
+    // Show the saving / sharing bar
   }
-
-  // Step 4: Show the adventures
-
-  // Step 5: Show the cheatsheet
 }
 
 function relocatePopup(direction: string) {
