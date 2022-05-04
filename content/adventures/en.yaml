@@ -410,6 +410,8 @@ adventures:
 
                     In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.
                     Check it out!
+                example_code: |
+                    ## Example Hedy Code
                     ```
                     prices = ['1 million dollars', 'an apple pie', 'nothing']
                     your_price = prices[{random}]
@@ -427,15 +429,32 @@ adventures:
                     {print}('My name is ', naam)
                 story_text: |-
                     ## The last level!
-                    We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.
-                    That looks like this:
+                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+
+                example_code: |
+                    ## Example Hedy Code
                     ```
                     {print}('my name is Hedy!')
                     ```
-                    If you want to print more than one items, you need to separate them by commas.
+
+                story_text_2: |-
+                    If you want to print more than one item, you need to separate them by commas.
+
+                example_code_2: |
                     ```
-                    name = 'Hedy'
-                    {print}('my name is ', name)
+                    temperature = 25
+                    {print}('Is is ', temperature, 'degrees outside')
+                    ```
+
+                story_text_3: |-
+                    ##  Input
+                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+
+                example_code_3: |
+                    ```
+                    {print}('My name is Hedy!')
+                    name = {input}('What is your name?')
+                    {print}('So your name is ', name)
                     ```
 
     story:
