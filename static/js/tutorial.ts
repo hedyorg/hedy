@@ -71,7 +71,7 @@ function levelDefaultStep() {
   $('#editor').removeClass("z-40");
   $('#code_output').removeClass("z-40");
 
-  $('#adventures').addClass("z-50");
+  $('#adventures').addClass("z-40");
   $('#adventures').show();
   $('#tutorial-mask').show();
 
@@ -79,6 +79,8 @@ function levelDefaultStep() {
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') != "default") {
       $(this).hide();
+    } else {
+      $(this).addClass("z-40");
     }
   });
 
@@ -92,12 +94,29 @@ function adventureTabsStep() {
   // Show all tabs except the quiz one
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') != "quiz") {
+      $(this).addClass("z-40");
       $(this).show();
+    }
+    if ($(this).attr('data-tab') == "default") {
+      $(this).removeClass("z-40");
     }
   });
 
-  relocatePopup("middle");
   tutorialPopup("Avonturen", "De andere tabjes bevatten avonturen, deze kun je per level maken. Ze gaan van makkelijk naar moeilijk!");
+}
+
+function quizTabStep() {
+  // Show all tabs (including the quiz one
+  $('.tab').show();
+  $('#adventures-buttons').children().each(function() {
+    if ($(this).attr('data-tab') == "quiz") {
+      $(this).addClass("z-40");
+    } else {
+      $(this).removeClass("z-40");
+    }
+  });
+
+  tutorialPopup("Quiz", "Aan het einde van elk level kun je een quiz maken, zo kun je goed testen of je alles snapt!");
 }
 
 
@@ -120,7 +139,7 @@ function callNextStep() {
   } else if (current_step == 6) {
     adventureTabsStep();
   } else if (current_step == 7) {
-    // Show the quiz tab
+    quizTabStep();
   } else if (current_step == 8) {
     // Show the cheatsheet
   } else if (current_step == 9) {
@@ -131,6 +150,9 @@ function callNextStep() {
 }
 
 function relocatePopup(direction: string) {
+  // Todo TB -> Might be nice to re-write this to an x/y coordinate function
+  // So we can call it like relocatePopup(30, 70) to better align with what we want
+
   $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
   if (direction == "left") {
       $('#tutorial-pop-up').css({'left': '35%'});
