@@ -25,17 +25,39 @@ function callNextStep() {
   // Step 1: Show the code editor
   if (current_step == 1) {
     $('#tutorial-mask').show();
-    $('#editor-area').addClass("z-50");
 
+    $('#editor').addClass("z-50");
     $('#editor-area').show();
     $('#code_output').hide();
     $('#code_related_buttons').hide();
     relocatePopup("right");
     tutorialPopup("De code editor", "In dit venster schrijf je alle code, probeer maar wat in te vullen!");
-  }
-  // Step 2: Show the output window
+  } else if (current_step == 2) {
+    // Reset highlight from previous step
+    $('#editor').removeClass("z-50");
+    $('#tutorial-mask').show();
 
-  // Step 3: Show the run button
+    $('#code_output').addClass("z-50");
+    $('#code_output').show();
+
+    relocatePopup("left");
+    tutorialPopup("Het output venster", "De code die je uitvoert wordt hier weergegeven.");
+  } else if (current_step == 3) {
+    // Reset highlight from previous step
+    $('#code_output').removeClass("z-50");
+    $('#tutorial-mask').show();
+
+    $('#code_related_buttons').show();
+    $('#debug_container').hide();
+    $('#speak_container').hide();
+
+    $('#runButtonContainer').addClass("z-50");
+    relocatePopup("right");
+    tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
+  } else if (current_step == 4) {
+    // Now it gets complex: Enter a default program into the code editor
+    // Only continue when it is executed
+  }
 
   // Step 4: Show the adventures
 
@@ -43,18 +65,15 @@ function callNextStep() {
 }
 
 function relocatePopup(direction: string) {
-  // Todo: This doesn't work yet -> leave for now
-  // Reset popup to original location
-  $('tutorial-pop-up').css({'top': '20%', 'left': '50%'});
+  $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
   if (direction == "left") {
-      $('tutorial-pop-up').css({'left': '20%'});
+      $('#tutorial-pop-up').css({'left': '30%'});
   } else if (direction === "right") {
-      $('tutorial-pop-up').css({'left': '80%'});
+      $('#tutorial-pop-up').css({'left': '70%'});
   } else if (direction == "buttom") {
-      $('tutorial-pop-up').css({'top': '80%'});
+      $('#tutorial-pop-up').css({'top': '70%'});
   } else {
     // Do nothing and keep in the middle
-    console.log("Popup stays in the middle!");
   }
 }
 
