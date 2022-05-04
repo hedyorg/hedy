@@ -1,3 +1,4 @@
+import {theGlobalEditor} from "./app";
 
 let current_step = 0;
 
@@ -55,8 +56,11 @@ function callNextStep() {
     relocatePopup("middle");
     tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
   } else if (current_step == 4) {
-    // Now it gets complex: Enter a default program into the code editor
-    // Only continue when it is executed -> we can also fake this of course...
+    $('#runButtonContainer').removeClass("z-50");
+    theGlobalEditor?.setValue("print hallo wereld!");
+
+    relocatePopup("bottom");
+    tutorialPopup("Probeer het uit!", "Probeer het uit, klik op volgende stap als je klaar bent");
   }
 
   // Step 4: Show the adventures
