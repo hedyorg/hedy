@@ -1681,9 +1681,21 @@ function removeDebugClass(str: Element) {
   return str.innerHTML.replace('<div class="debugLine">', '').replace('</div>', '');
 }
 
+function hideFunctionality() {
+  $('#level-header').hide();
+  $('#adventures').hide();
+  $('#editor-area').hide();
+  $('#developers_toggle_container').hide();
+}
+
+function tutorialPopup(message: string) {
+  console.log(message)
+}
+
 export function startTutorial() {
+  hideFunctionality();
   console.log("Let's go!");
-  modal.alert("Welkom, bij de wondere wereld van Hedy!", 3000, false);
+  tutorialPopup("Welkom, bij de wondere wereld van Hedy!");
   // Here start the magic:
   // Create an interactive journey, explaining a new feature at each step
 }

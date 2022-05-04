@@ -43,10 +43,6 @@
   <!-- If we are in tutorial mode -> hide most features, slowly release them -->
   {% if tutorial %}
     <script>
-      $('#level-header').hide();
-      $('#adventures').hide();
-      $('#editor-area').hide();
-      $('#developers_toggle_container').hide();
       $(document).ready(function() {
         hedyApp.startTutorial();
       });
