@@ -52,7 +52,7 @@ function callNextStep() {
     $('#speak_container').hide();
 
     $('#runButtonContainer').addClass("z-50");
-    relocatePopup("right");
+    relocatePopup("middle");
     tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
   } else if (current_step == 4) {
     // Now it gets complex: Enter a default program into the code editor
@@ -73,7 +73,7 @@ function relocatePopup(direction: string) {
   } else if (direction == "buttom") {
       $('#tutorial-pop-up').css({'top': '60%'});
   } else {
-    // Do nothing and keep in the middle
+    $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
   }
 }
 
