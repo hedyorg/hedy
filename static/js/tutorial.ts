@@ -65,7 +65,7 @@ function tryRunButtonStep() {
 function levelDefaultStep() {
   $('#code_output').removeClass("z-40");
   $('#editor').removeClass("z-40");
-  $('#code_output').removeClass("z-40");
+  $('#runButtonContainer').removeClass("z-40");
 
   $('#adventures').show();
   // Hide all tabs except the default level one
@@ -81,7 +81,6 @@ function levelDefaultStep() {
     console.log($(this).attr('data-target') != "default");
     $(this).addClass("z-40");
   });
-
 
   relocatePopup("bottom");
   tutorialPopup("Level uitleg", "In het eerste tabje vind je altijd de level uitleg. Hier worden in elk level de nieuwe commando's uitgelegd.");
