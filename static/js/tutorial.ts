@@ -129,7 +129,9 @@ function quizTabStep() {
       $(this).removeClass("z-40");
     }
   });
+  $('#start_quiz_button').click();
 
+  relocatePopup("top");
   tutorialPopup("Quiz", "Aan het einde van elk level kun je een quiz maken, zo kun je goed testen of je alles snapt!");
 }
 
