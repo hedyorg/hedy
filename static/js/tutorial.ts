@@ -29,6 +29,7 @@ function callNextStep() {
     $('#code_related_buttons').hide();
     relocatePopup("right");
     tutorialPopup("De code editor", "In dit venster schrijf je alle code, probeer maar wat in te vullen!");
+    console.log("Pop-up is er al!");
   }
   // Step 2: Show the output window
 
@@ -40,15 +41,14 @@ function callNextStep() {
 }
 
 function relocatePopup(direction: string) {
-  $('tutorial-pop-up').removeAttr('style');
+  // Reset popup to original location
+  $('tutorial-pop-up').css({'top': '20%', 'left': '50%'});
   if (direction == "left") {
-      $('tutorial-pop-up').attr('style', 'width: 500px; top: 20%; left: 20%; transform: translate(-50%, -50%);');
-  } else if (direction == "right") {
-      $('tutorial-pop-up').attr('style', 'width: 500px; top: 20%; left: 80%; transform: translate(-50%, -50%);');
-  } else if (direction == "button") {
-      $('tutorial-pop-up').attr('style', 'width: 500px; top: 80%; left: 50%; transform: translate(-50%, -50%);');
-  } else {
-      $('tutorial-pop-up').attr('style', 'width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);');
+      $('tutorial-pop-up').css({'left': '20%'});
+  } else if (direction === "right") {
+      $('tutorial-pop-up').css({'left': '80%'});
+  } else if (direction == "buttom") {
+      $('tutorial-pop-up').css({'top': '80%'});
   }
 }
 
