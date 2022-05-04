@@ -52,11 +52,13 @@ function callNextStep() {
     $('#debug_container').hide();
     $('#speak_container').hide();
 
-    $('#runButtonContainer').addClass("z-50");
+    $('#runButtonContainer').addClass("z-40");
     relocatePopup("middle");
     tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
   } else if (current_step == 4) {
-    $('#runButtonContainer').removeClass("z-50");
+    $('#editor').addClass("z-40");
+    $('#code_output').addClass("z-40");
+    $('#tutorial-mask').show();
     theGlobalEditor?.setValue("print hallo wereld!");
 
     relocatePopup("bottom");
@@ -74,7 +76,7 @@ function relocatePopup(direction: string) {
       $('#tutorial-pop-up').css({'left': '35%'});
   } else if (direction === "right") {
       $('#tutorial-pop-up').css({'left': '65%'});
-  } else if (direction == "buttom") {
+  } else if (direction == "bottom") {
       $('#tutorial-pop-up').css({'top': '60%'});
   } else {
     $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
