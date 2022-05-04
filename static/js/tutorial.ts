@@ -18,6 +18,89 @@ function hideFunctionality() {
   $('#tutorial-mask').show();
 }
 
+function codeEditorStep() {
+  $('#tutorial-mask').show();
+  $('#editor').addClass("z-40");
+  $('#editor-area').show();
+  $('#code_output').hide();
+  $('#code_related_buttons').hide();
+  relocatePopup("right");
+  tutorialPopup("De code editor", "In dit venster schrijf je alle code, probeer maar wat in te vullen!");
+}
+
+function codeOutputStep() {
+  // Reset highlight from previous step
+  $('#editor').removeClass("z-40");
+  $('#tutorial-mask').show();
+
+  $('#code_output').addClass("z-40");
+  $('#code_output').show();
+  $('#variables').hide();
+
+  relocatePopup("left");
+  tutorialPopup("Het output venster", "De code die je uitvoert wordt hier weergegeven.");
+}
+
+function runButtonStep() {
+  // Reset highlight from previous step
+  $('#code_output').removeClass("z-40");
+  $('#tutorial-mask').show();
+
+  $('#code_related_buttons').show();
+  $('#debug_container').hide();
+  $('#speak_container').hide();
+
+  $('#runButtonContainer').addClass("z-40");
+  relocatePopup("middle");
+  tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
+}
+
+function tryRunButtonStep() {
+  $('#editor').addClass("z-40");
+  $('#code_output').addClass("z-40");
+  $('#tutorial-mask').show();
+  theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
+  theGlobalEditor?.setOptions({readOnly: true});
+
+  relocatePopup("bottom");
+  tutorialPopup("Probeer het uit!", "Voer het programma uit, klik op 'volgende stap' als je klaar bent.");
+}
+
+function levelDefaultStep() {
+  $('#code_output').removeClass("z-40");
+  $('#editor').removeClass("z-40");
+  $('#code_output').removeClass("z-40");
+
+  $('#adventures').addClass("z-50");
+  $('#adventures').show();
+  $('#tutorial-mask').show();
+
+  // Hide all tabs except the default level one
+  $('#adventures-buttons').children().each(function() {
+    if ($(this).attr('data-tab') != "default") {
+      $(this).hide();
+    }
+  });
+
+  relocatePopup("bottom");
+  tutorialPopup("Level uitleg", "In het eerste tabje vind je altijd de level uitleg. Hier worden in elk level de nieuwe commando's uitgelegd.");
+}
+
+function adventureTabsStep() {
+  $('#tutorial-mask').show();
+
+  // Show all tabs except the quiz one
+  $('#adventures-buttons').children().each(function() {
+    if ($(this).attr('data-tab') != "quiz") {
+      $(this).show();
+    }
+  });
+
+  relocatePopup("middle");
+  tutorialPopup("Avonturen", "De andere tabjes bevatten avonturen, deze kun je per level maken. Ze gaan van makkelijk naar moeilijk!");
+}
+
+
 function callNextStep() {
   current_step += 1;
   console.log(current_step);
@@ -25,78 +108,17 @@ function callNextStep() {
 
   // Step 1: Show the code editor
   if (current_step == 1) {
-    $('#tutorial-mask').show();
-
-    $('#editor').addClass("z-40");
-    $('#editor-area').show();
-    $('#code_output').hide();
-    $('#code_related_buttons').hide();
-    relocatePopup("right");
-    tutorialPopup("De code editor", "In dit venster schrijf je alle code, probeer maar wat in te vullen!");
+    codeEditorStep();
   } else if (current_step == 2) {
-    // Reset highlight from previous step
-    $('#editor').removeClass("z-40");
-    $('#tutorial-mask').show();
-
-    $('#code_output').addClass("z-40");
-    $('#code_output').show();
-    $('#variables').hide();
-
-    relocatePopup("left");
-    tutorialPopup("Het output venster", "De code die je uitvoert wordt hier weergegeven.");
+    codeOutputStep();
   } else if (current_step == 3) {
-    // Reset highlight from previous step
-    $('#code_output').removeClass("z-40");
-    $('#tutorial-mask').show();
-
-    $('#code_related_buttons').show();
-    $('#debug_container').hide();
-    $('#speak_container').hide();
-
-    $('#runButtonContainer').addClass("z-40");
-    relocatePopup("middle");
-    tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
+    runButtonStep();
   } else if (current_step == 4) {
-    $('#editor').addClass("z-40");
-    $('#code_output').addClass("z-40");
-    $('#tutorial-mask').show();
-    theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
-    theGlobalEditor?.setOptions({readOnly: true});
-
-    relocatePopup("bottom");
-    tutorialPopup("Probeer het uit!", "Voer het programma uit, klik op 'volgende stap' als je klaar bent.");
+    tryRunButtonStep();
   } else if (current_step == 5) {
-    $('#code_output').removeClass("z-40");
-    $('#editor').removeClass("z-40");
-    $('#code_output').removeClass("z-40");
-
-    $('#adventures').addClass("z-50");
-    $('#adventures').show();
-    $('#tutorial-mask').show();
-
-    // Hide all tabs except the default level one
-    $('#adventures-buttons').children().each(function() {
-      if ($(this).attr('data-tab') != "default") {
-        $(this).hide();
-      }
-    });
-
-    relocatePopup("bottom");
-    tutorialPopup("Level uitleg", "In het eerste tabje vind je altijd de level uitleg. Hier worden in elk level de nieuwe commando's uitgelegd.");
-
+    levelDefaultStep();
   } else if (current_step == 6) {
-    $('#tutorial-mask').show();
-
-    // Show all tabs except the quiz one
-    $('#adventures-buttons').children().each(function() {
-      if ($(this).attr('data-tab') != "quiz") {
-        $(this).show();
-      }
-    });
-
-    relocatePopup("middle");
-    tutorialPopup("Avonturen", "De andere tabjes bevatten avonturen, deze kun je per level maken. Ze gaan van makkelijk naar moeilijk!");
-
+    adventureTabsStep();
   } else if (current_step == 7) {
     // Show the quiz tab
   } else if (current_step == 8) {
