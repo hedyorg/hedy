@@ -4,41 +4,41 @@ from definition import *
 # so we have to color them with respect to what is around,
 # so we use particular functions
 
-def rule_level1(keywordLang):
+def rule_level1():
     return {"start" : [{
-        'regex': START_LINE + keywordLang["ask"] + "(.*)$",
+        'regex': START_LINE + K("ask") + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["print"] + "(.*)$",
+        'regex': START_LINE + K("print") + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["echo"] + "(.*)$",
+        'regex': START_LINE + K("echo") + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["color"] + END_WORD + "(.*)$",
+        'regex': START_LINE + K("color") + END_WORD + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     }, {
-        'regex': START_LINE + keywordLang["color"] + SPACE + WORD + "( *)$",
+        'regex': START_LINE + K("color") + SPACE + WORD + "( *)$",
         'token': ['text','keyword','text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["forward"] + "(.*)$",
+        'regex': START_LINE + K("forward") + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["turn"] + "( *)" + keywordLang["left"] + "( *)$",
+        'regex': START_LINE + K("turn") + "( *)" + K("left") + "( *)$",
         'token': ['text','keyword','text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["turn"] + "( *)" + keywordLang["right"] + "( *)$",
+        'regex': START_LINE + K("turn") + "( *)" + K("right") + "( *)$",
         'token': ['text','keyword','text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["turn"] + "(.*)$",
+        'regex': START_LINE + K("turn") + "(.*)$",
         'token': ['text','keyword','text'],
         'next': 'start',
     },{
@@ -55,29 +55,29 @@ def rule_level1(keywordLang):
         'next': 'start',
     } ]}
 
-def rule_level2(keywordLang) :
+def rule_level2() :
     return {"start" : [{
-        'regex': START_LINE + WORD + SPACE + keywordLang["is"] + "( *)" + keywordLang["ask"] + "(.*)$",
+        'regex': START_LINE + WORD + SPACE + K("is") + "( *)" + K("ask") + "(.*)$",
         'token': ["text",'text','text','keyword','text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + WORD + SPACE + keywordLang["is"] + "( *)(.*)$",
+        'regex': START_LINE + WORD + SPACE + K("is") + "( *)(.*)$",
         'token': ["text",'text','text','keyword','text','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["print"] + "(.*)$",
+        'regex': START_LINE + K("print") + "(.*)$",
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["sleep"] + "(.*)$",
+        'regex': START_LINE + K("sleep") + "(.*)$",
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["turn"] + "(.*)$",
+        'regex': START_LINE + K("turn") + "(.*)$",
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["forward"] + "(.*)$",
+        'regex': START_LINE + K("forward") + "(.*)$",
         'token': ["text",'keyword','text'],
         'next': 'start',
     },{
@@ -94,45 +94,45 @@ def rule_level2(keywordLang) :
         'next': 'start',
     } ]}
 
-def rule_level3(keywordLang):
+def rule_level3():
     return {"start" : [{
-        'regex': START_LINE + WORD + SPACE + keywordLang["is"] + "( *)" + keywordLang["ask"] + "(.*)$",
+        'regex': START_LINE + WORD + SPACE + K("is") + "( *)" + K("ask") + "(.*)$",
         'token': ["text",'text','text','keyword','text','keyword','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + WORD + SPACE + keywordLang["is"] + "( *)(.*)$",
+        'regex': START_LINE + WORD + SPACE + K("is") + "( *)(.*)$",
         'token': ["text",'text','text','keyword','text','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["remove"] + "( *)(.*)" + SPACE + keywordLang["from"] + "( *)"+ WORD +"$",
+        'regex': START_LINE + K("remove") + "( *)(.*)" + SPACE + K("from") + "( *)"+ WORD +"$",
         'token': ["text",'keyword','text','text','text','keyword','text','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["add"] + "( *)(.*)" + SPACE + keywordLang["to_list"] + "( *)"+ WORD +"$",
+        'regex': START_LINE + K("add") + "( *)(.*)" + SPACE + K("to_list") + "( *)"+ WORD +"$",
         'token': ["text",'keyword','text','text','text','keyword','text','text'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["print"] ,
+        'regex': START_LINE + K("print") ,
         'token': ['text','keyword'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["turn"] ,
+        'regex': START_LINE + K("turn") ,
         'token': ['text','keyword'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["sleep"] ,
+        'regex': START_LINE + K("sleep") ,
         'token': ['text','keyword'],
         'next': 'start',
     },{
-        'regex': START_LINE + keywordLang["forward"] ,
+        'regex': START_LINE + K("forward") ,
         'token': ['text','keyword'],
         'next': 'start',
     },{
-        'regex': START_WORD + keywordLang["at"] + SPACE + keywordLang["random"] ,
+        'regex': START_WORD + K("at") + SPACE + K("random") ,
         'token': ['text','keyword','keyword','keyword'],
         'next': 'start',
     },{
-        'regex': START_WORD + keywordLang["at"] ,
+        'regex': START_WORD + K("at") ,
         'token': ['text','keyword'],
         'next': 'start',
     },{
