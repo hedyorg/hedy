@@ -36,7 +36,7 @@
       <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{_('login')}}</a>
     {% endif %}
     {% if not username %}
-      <div class="dropdown inline-block relative {% if not username %}ltr:ml-auto rtl:mr-auto{% endif %} py-2 z-30">
+      <div class="dropdown inline-block relative {% if not username %}ltr:ml-auto rtl:mr-auto{% endif %} py-2 z-20">
           <button class="bg-blue-400 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
             <span class="ltr:mr-1 rtl:ml-1">{{ current_language().sym }}</span>
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
