@@ -1,7 +1,8 @@
 
+let current_step = 0;
+
 // We call this function on load -> fix relevant stuff
 (function() {
-
   $('#tutorial_next_button').off('click').on('click', () => {
     $('#tutorial-pop-up').hide();
     callNextStep();
@@ -17,8 +18,14 @@ function hideFunctionality() {
 }
 
 function callNextStep() {
-  return 0;
-  // We have to implement this
+  current_step += 1;
+  console.log(current_step);
+  $('#tutorial-mask').hide();
+  // Step 1: show the code editor
+  if (current_step == 1) {
+    console.log("We komen in stap 1!");
+    $('#editor-area').show();
+  }
 }
 
 function tutorialPopup(title: string, message: string) {

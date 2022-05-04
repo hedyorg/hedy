@@ -718,7 +718,6 @@ def get_user_formatted_age(now, date):
 
 @app.route('/tutorial', methods=['GET'])
 def tutorial_index():
-    print("HAllo")
     level = 1
     # Current idea: Render the code page, slowly show more features
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
