@@ -400,24 +400,13 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Wie niet weg is, is gezien'
-                story_text: |
+                story_text: |-
                     ## Elif
                     Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een `:` bij de regel ervoor zetten.
 
                     Daarnaast kun je in dit level een nieuw commando gebruiken `{elif}`. `{elif}` is de afkorting van {else} en {if} en zorgt ervoor dat je 3 (of meer!) opties kunt maken.
                     Kijk maar...
-                    ```
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
-                    ```
-                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                example_code: "## Example Hedy Code\n```\nprices = ['1 miljoen euro', 'een appeltaart', 'niets']\njouw_prijs = prices[{random}]\n{print} 'Je wint ' jouw_prijs\n{if} jouw_prijs == '1 miljoen euro' :\n    {print} 'Joepie, je bent rijk!'\n{elif} jouw_prijs == 'een appeltaart' :\n    {print} 'Lekker, een appeltaart!'\n{else}:\n    {print} 'Veel geluk bij de volgende keer..'\n```\n"
             18:
                 start_code: |-
                     naam = 'Hedy'
@@ -425,20 +414,11 @@ adventures:
                 story_text: |-
                     ## Het laatste level!
                     We zijn aangekomen bij echte Pythoncode! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
-                    Zo gaat dat:
-                    ```
-                    {print}('mijn naam is Hedy!')
-                    ```
-                    Als je meer dan twee items wilt printen, moet je de items scheiden door commas.
-                    ```
-                    name = 'Hedy'
-                    {print}('mijn naam is ', name)
-                    ```
-                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                example_code: "## Example Hedy Code\n```\n{print}('mijn naam is Hedy!')\n```\n"
+                story_text_2: Als je meer dan één tekst wilt printen, moet je die scheiden met komma's.
+                example_code_2: "```\ntemperatuur = 25\n{print}('Het is ', temperatuur, 'graden buiten')\n```\n"
+                story_text_3: "##  Input\nDe laatste aanpassing die we moeten maken om echte Python code te krijgen is het vervangen van `{ask}` door `{input}`."
+                example_code_3: "```\n{print}('Mijn naam is Hedy!')\nnaam = {input}('Hoe heet jij?')\n{print}('Jij heet dus ', naam)\n```\n"
     story:
         name: "Verhaal"
         description: "Maak een interactief verhaal"
@@ -2929,7 +2909,7 @@ adventures:
         default_save_name: Tic
     blackjack:
         name: Blackjack
-        description: Try to get as close to 21 as you can
+        description: Probeer zo dicht mogelijk bij 21 te komen
         default_save_name: Blackjack
         levels:
             17:
