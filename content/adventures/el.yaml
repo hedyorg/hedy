@@ -322,9 +322,15 @@ adventures:
                         print i
                     print 'Έτοιμοι ή όχι, έρχομαι!'
                 story_text: "Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.\n\nΣ' αυτό το επίπεδο μπορείς επίσηςνα χρησιμοποιήσει ςμια νέα εντολή: `{elif}`. 'Η`{elif}` είναι σύντμηση των {else} {if}  και θα το χρειαστείς όταν θέλεις να έχεις 2 (ή περισσότερες!) επιλογές. \nΔοκίμασέ το!\n\nprices = ['1 εκατομμύριο ευρώ', 'μια μηλόπιτα', 'τίποτα']\nyour_price = prices[random]\n{print} 'Κέρδισες ' your_price\n{if} your_price == '1 εκατομμύριο ευρώ' :\n    {print} 'Είσαι πλούσιος!'\n{elif} your_price == 'μια μηλόπιτα' :\n    {print} 'Ωραιότατα, μια μηλόπιτα!'\n{else}:\n    {print} 'Θα έχεις περισσότερη φορά την επόμενη φορά..'\n```\n"
+                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
                 story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
+                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
+                story_text_2: If you want to print more than one item, you need to separate them by commas.
+                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
+                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
     story:
         name: "Μια ιστορία"
         description: "Δημιούργησε μια διαδραστική ιστορία"
