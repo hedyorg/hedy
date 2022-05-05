@@ -27,7 +27,7 @@
          <h3 class="px-8 font-semibold">{{_('profile_picture')}}</h3>
          <input name="profile_picture" id="profile_picture" type=number class="hidden" required {% if public_settings.image %} value="{{ public_settings.image }}" {% else %} value="1"{% endif %}>
          <div class="flex flex-wrap w-3/4 border border-gray-400 rounded-lg p-4">
-            {% for i in range(1, 12) %}
+            {% for i in range(1, 13) %}
                 <div class="w-32 h-32 rounded-lg mr-4 relative profile_image {% if (public_settings.image and public_settings.image == i|string()) or (not public_settings.image and i == 1) %}border-2 border-blue-600{% endif %}" id="profile_image_{{ i }}" onclick="hedyApp.select_profile_image({{ i }});">
                     <div class="relative h-full">
                         <img src="{{static('/images/profile_images/' + i|string() + '.png')}}" class="absolute p-1">

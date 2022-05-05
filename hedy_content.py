@@ -14,6 +14,9 @@ COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
+# Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
+NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'ru', 'zh_Hans']
+
 ADVENTURE_ORDER = [
     'default',
     'story',
@@ -270,7 +273,7 @@ class Quizzes:
             self.data[keyword_lang] = self.cache_quiz_keywords(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, {}).get(question, None)
 
-      
+
 class NoSuchQuiz:
     def get_quiz_data_for_level(self, level, keyword_lang):
         return {}

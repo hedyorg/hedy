@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -404,12 +403,14 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Ready or not, here I come!'
-                story_text: |
+                story_text: |-
                     ## Elif
                     Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.
 
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.
+                    In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
                     Check it out!
+                example_code: |
+                    ## Example Hedy Code
                     ```
                     prices = ['1 million dollars', 'an apple pie', 'nothing']
                     your_price = prices[{random}]
@@ -427,21 +428,37 @@ adventures:
                     {print}('My name is ', naam)
                 story_text: |-
                     ## The last level!
-                    We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.
-                    That looks like this:
+                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+
+                example_code: |
+                    ## Example Hedy Code
                     ```
                     {print}('my name is Hedy!')
                     ```
-                    If you want to print more than one items, you need to separate them by commas.
+
+                story_text_2: |-
+                    If you want to print more than one item, you need to separate them by commas.
+
+                example_code_2: |
                     ```
-                    name = 'Hedy'
-                    {print}('my name is ', name)
+                    temperature = 25
+                    {print}('It is ', temperature, 'degrees outside')
+                    ```
+
+                story_text_3: |-
+                    ##  Input
+                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+
+                example_code_3: |
+                    ```
+                    {print}('My name is Hedy!')
+                    name = {input}('What is your name?')
+                    {print}('So your name is ', name)
                     ```
 
     story:
         name: "Story"
         description: "Story"
-        image: "story.png"
         default_save_name: "Story"
         levels:
             1:
@@ -750,7 +767,6 @@ adventures:
     parrot:
         name: "Parrot"
         description: "Create your own online pet parrot that will copy you!"
-        image: "story.png"
         default_save_name: "Parrot"
         levels:
             1:
@@ -822,7 +838,6 @@ adventures:
     songs:
         name: "Sing a song!"
         description: "Print a song"
-        image: "songs.png"
         default_save_name: "Song"
         levels:
             6:
@@ -1003,7 +1018,6 @@ adventures:
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
-        image: "turtle.gif"
         default_save_name: "Turtle"
         levels:
             1:
@@ -1194,7 +1208,6 @@ adventures:
     dishes:
         name: "Dishes?"
         description: "Use the computer to see who does the dishes (Start at level 2)"
-        image: "dishes.png"
         default_save_name: "Dishes"
         levels:
             3:
@@ -1321,7 +1334,6 @@ adventures:
     dice:
         name: "Dice"
         description: "Make your own dice"
-        image: "dice.png"
         default_save_name: "Dice"
         levels:
             3:
@@ -1447,7 +1459,6 @@ adventures:
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
-        image: "rock.png"
         default_save_name: "Rock"
         levels:
             1:
@@ -1622,7 +1633,6 @@ adventures:
     calculator:
         name: "Calculator"
         description: "Create a calculator"
-        image: "calculator.png"
         default_save_name: "Calculator"
         levels:
             6:
@@ -1764,7 +1774,6 @@ adventures:
     restaurant:
         name: "Restaurant"
         description: "Create your own virtual restaurant"
-        image: "restaurant.png"
         default_save_name: "Restaurant"
         levels:
             1:
@@ -2133,7 +2142,6 @@ adventures:
     fortune:
         name: "Fortune teller"
         description: "Let Hedy predict the future"
-        image: "fortuneteller.png"
         default_save_name: "Fortune Teller"
         levels:
             1:
@@ -2376,7 +2384,6 @@ adventures:
     haunted:
         name: "Haunted House"
         description: "Escape from the haunted house"
-        image: "hauntedhouse.gif"
         default_save_name: "Haunted House"
         levels:
             1:
@@ -2623,7 +2630,6 @@ adventures:
     piggybank:
         name: "Piggy Bank"
         description: "Count your pocketmoney!"
-        image: "piggy.png"
         default_save_name: "Piggy Bank"
         levels:
             12:
@@ -2668,7 +2674,6 @@ adventures:
     quizmaster:
         name: "Quizmaster"
         description: "Make your own quiz!"
-        image: "quizmaster.png"
         default_save_name: "Quizmaster"
         levels:
             14:
@@ -2702,7 +2707,6 @@ adventures:
     language:
         name: "Language"
         description: "Practice words in a foreign language"
-        image: "languages.png"
         default_save_name: "Language"
         levels:
             5:
@@ -2747,7 +2751,6 @@ adventures:
     secret:
         name: "SuperSpy"
         description: "Make your own spy code"
-        image: "story.png"
         default_save_name: "SuperSpy"
         levels:
             12:
@@ -2789,7 +2792,6 @@ adventures:
     blackjack:
         name: "Blackjack"
         description: "Try to get as close to 21 as you can"
-        image: "story.png"
         default_save_name: "Blackjack"
         levels:
             17:
@@ -2800,7 +2802,7 @@ adventures:
                     If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
                     But be careful not to get more than 21 points, because if you do, you lose!
                     The player who gets closest to 21, without going over it, wins!
-                    
+
                     Have fun!
                 example_code: |
                     ## Example Hedy code
@@ -2892,7 +2894,6 @@ adventures:
     tic:
         name: "Tic Tac Toe"
         description: "Play a game of Tic Tac Toe!"
-        image: "story.png"
         default_save_name: "Tic"
         levels:
             13:
@@ -3183,7 +3184,6 @@ adventures:
     next:
         name: "What's next?"
         description: "What's Next?"
-        image: "hedy-logo.png"
         default_save_name: "Next"
         levels:
             1:

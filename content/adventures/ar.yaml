@@ -1,58 +1,54 @@
 adventures:
     default:
-        name: "Introduction"
-        description: "Level explanation"
-        image: "hedy-logo.png"
+        name: "المقدمة"
+        description: "وصف المستوى"
         default_save_name: "intro"
         levels:
             1:
-                story_text: |-
-                    مرحبا بكم في هيدي! في المستوى الأول يمكنكم استخدام الأوامر `قول` و `اسأل` و  ردد`
-                    في الشريط على الجانب الأيمن يمكنك رؤية كل الأوامر المتاحة في المستوى الأول. يمكنك الضغط على الزر الأزرق هناك وسيتم كتابة الكود عنك في الشاشة المخصصة!
-                    قم بتجربة الكود بنفسك من خلال ال ضغط على الزر الأخضر "تشغيل الكود" الموجود تحت مساحة البرمجة اليمنى. 
-                    لا تعرف بعد ما الذي تريد برمجته؟ في علامات التبويب التالية يمكنك أن تجد بعض الأفكار لما يمكنك عمله.
-                start_code: قول مرحبا أيها العالم!
-                story_text_2: "يمكنك أن تسأل عن معلومة معينة وتعيد ترديدها من خلال الأمر `ردد`.\nجرب الكود الموجود على اليسار. \n\nلا تعرف بعد ما الذي تريد برمجته؟ في علامات التبويب التالية يمكنك أن تجد بعض الأفكار لما يمكنك صنعه.\n"
-                example_code_2: "##مثال توضيحي\n```\nاسأل ما اسمك؟\nردد مرحبا\n```\n"
-                example_code: "## مثال توضيحي\n```\nقول  مرحبا!\nقول أهلاً بكم في هيدي!\n```\n"
+                story_text: |
+                    ##مرحبا بكم في هيدي!
+                    في المستوى الأول يمكنكم استخدام الأوامر `{print}` و `{ask}` و`{echo}`.
+                    قم بكتابة الكود في مساحة البرمجة المخصصة، أو اضغط على على الزر الأخضر الموجود في المثال التوضيحي وسيتم كتابة الكود عنك في الشاشة المخصصة!
+                    جرب الكود بنفسك من خلال الضغط على الزر الأخضر "تشغيل البرنامج" الموجود تحت المساحة البرمجية.
+
+                    بامكانك اظهار/طباعةالكلام على الشاشة من خلال استعمال الأمر `{print}` .
+                start_code: '{print} مرحبا أيها العالم!'
+                story_text_2: "يمكنك أن تسأل عن معلومة معينة من خلال الأمر `{ask}` وتعيد ترديدها من خلال الأمر `{echo}`.\n"
+                example_code_2: "##مثال توضيحي\n```\n{ask} ما اسمك؟\n{echo} مرحبا\n```\n"
+                example_code: "## مثال توضيحي\n```\n{print} مرحبا!\n{print} أهلاً بكم في هيدي!\n```\n"
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
             2:
-                story_text: |-
-                    في المستوى الثاني نتعلم شيئا جديدا. يمكنك أن تعطي اسما لشيء ما باستخدام `هو`. بامكانك بعدها أن تستخدم هذا الاسم في أي مكان في الكود و ستقوم هيدي بوضع محتوى الاسم بدلا عنه . كما يوضح المثال التالي
-
-                    ``` اسمي هو هيدي
-                    قول مرحبا اسمي
-                    ```
-                    ملاحظة: لقد تغير الأمر `اسأل`، بامكانك الان ان تحتفظ بالاجابة على السؤال من خلال اعطائها اسما معينا، كما التالي 
-                    ```
-                    اجابتي هو اسأل ما اسمك؟
-                    ```
-                    الأمر `قول` لا يزال يعمل كما في المستوى الأول، ولم تعد الان بحاجة للأمر `ردد`
-                start_code: قول مرحبا أيها العالم
-                example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
-            3:
-                story_text: |-
-                    في المستوى الثالث يمكنك أيضا ان تنشأ قائمة. يمكنك بعدها أن تجعل الكمبيوتر يختار لك شيئا من القائمة بشكل عشوائي - يمكنك القيام بذك من خلال الأمر `بشكل عشوائي`.
-                    ```
-                    صديقي هو احمد، خالد، حسن
-                    قول صديقي بشكل عشوائي
-                    ```
-                    يمكنك أن تجد كل أوامر المستوى الثالث في الشريط على الجانب الأيمن. هناك ايضا علامات تبويب مع مهمات يمكنك عملها
-                start_code: قول مرحبا أيها العالم
-                example_code: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
-                example_code_2: "## Example Hedy Code\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
-            4:
-                start_code: قول 'مرحبا أيها العالم'
                 story_text: |
-                    هناك تغيير على `قول` و `اسأل` في المستوى الرابع. 
-                     يجب عليك أن تضع الكلام المكتوب الذي تريد الكمبيوتر ان يطبعه على الشاشة في داخل علامات اقتباس. 
-                    هذا مفيد لإنه يمكنك من طباعة كل الكلمات التي نريدها حتى الكلمات التي قمت بتخزينها باستخدام الأمر `هو`.
-                    معظم لغات البرمجة تستخدم علامات الاقتباس عند طباعة الكلام على الشاشة باستخدام الكود، لذلك نحن نتقدم خطوة أخرى باتجاه البرمجة الحقيقية.
+                    ##المتغيرات
+                    في المستوى الثاني نتعلم الأوامر الجديدة `{is}` و `{sleep}`.
+                    يمكنك أن تعطي اسما لشيء ما باستخدام `{is}`. هذا ما يسمى ب "متغير". في المثال الموجود قمنا باشناء متغير يسمى الاسم ونتغير اخر يسمى العمر. يمكنك أن تستخدم كلمة الاسم في أي مكان في البرنامج الخاص بك وسيتم استبدالها ب هيدي، كما في المثال التوضيحي: 
+
+                    بهذا الشكل لم تعد الان بحاجة للأمر `{echo}`.
+                start_code: '{print} مرحبا أيها العالم!'
+                example_code: "##مثال توضيحي\n```\nالاسم {is} هيدي\nالعمر {is} 15\n{print} الاسم وعمرها الان العمر سنة\n```\n"
+                story_text_2: "الأمر `{print}` لا زال يعمل بنفس الطريقة، ولكن الأمر `{ask}` قد تغير ،عليك الان ان تحتفظ بالاجابة على `{ask}` في متغير من خلال اعطاء الاجابة اسما معينا كما في المثال التوضيحي:\n"
+                example_code_2: "```\nالجواب {is} {ask} ما اسمك؟\n{print} مرحبا بك الجواب\n```\n"
+                story_text_3: "لدينا أمر جديد اخر وهو `{sleep}` الذي يعلق عمل البرنامج لمدة ثانية واحدة. اذا كتبت رقما معينا بعد الأمر `{sleep}` فسيتم تعليق عمل البرنامج لعدد معين من الثواني مساوياً للرقم الذي تم تحديده.\n"
+                example_code_3: "```\n{print} لوني المفضل هو ...\n{sleep} 2\n{print} الأخضر!!\n```\n"
+            3:
+                story_text: |
+                    ##انشاء قائمة!
+                    في المستوى الثالث يمكنك أن تنشأ قائمة. يمكنك بعدها أن تجعل الحاسوب يختار لك شيئا من القائمة بشكل عشوائي - يمكنك القيام بذك من خلال الأمر `{at} {random}`.
+                start_code: '{print} مرحبا أيها العالم'
+                example_code: "##مثال توضيحي\n\n```\nالحيوانات {is} كلب، قطة، جمل\n{print} الحيوانات {at} {random}\n```\n"
+                story_text_2: بامكانك أن تضيف عنصرا الى القائمة من خلال الأمر `{add}` وأن تزيل عنصرا من خلال الأمر `{remove}`.
+                example_code_2: "##مثال توضيحي\n\n```\nحيواناتي {is} كلب، جمل، قط\n{add} حصان {to_list} حيواناتي\n{remove} قط {from} حيواناتي\n{print} حيواناتي {at} {random}\n```\n"
+            4:
+                start_code: '{print} "مرحبا أيها العالم"'
+                story_text: |
+                    ##علامات الاقتباس
+                    هناك تغيير على `{print}` و `{ask}` في المستوى الرابع.
+
+                    يجب عليك أن تضع الكلام الذي تريد الكمبيوتر ان يظهره على الشاشة بين علامات اقتباس.
+
+                    هذا مفيد لإنه يمكنك من طباعة كل الكلمات التي تريدها حتى الكلمات التي قمت بتخزينها باستخدام الأمر `{is}`.
+
+                    معظم لغات البرمجة تستخدم علامات الاقتباس عند طباعة الكلام على الشاشة باستخدام الكود، لذلك نحن نتقدم خطوة أخرى باتجاه البرمجة الحقيقية!
                 #5:
                 #    start_code: |-
                 #        اسمي هو اسأل 'ما اسمك؟'
@@ -118,15 +114,15 @@ adventures:
                 #            الالوان_الجميلة هو أخضر ، أصفر
                 #            لوني_المفضل هو اسأل 'ما لونك المفضل؟'
                 #             اذا لوني_المفضل في الالوان_الجميلة قول 'هذا جميل!' وإلا قول 'يا خسارة!!'
-                example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                example_code: "## مثال توضيحي\n```\n{print} \"يجب عليك استعمال علامات الاقتباس من الان وصاعداً!\"\nالجواب {is} {ask} \"ما الذي يجب علينا استعماله من الان وصاعداً؟\"\n{print} \"يجب علينا استعمال \" الجواب \"\n```\n"
+                story_text_2: "##المغامرات تزداد صعوبة مع الانتقال بين علامات التبويب\nالمغامرات تزداد صعوبة في علامات التبويب المتتالية.\nلذلك من الأفضل البدأ من اليمين مع القصة ومن ثم الانتقال الى اليسار واحدة تلو الأخرى حتى تتجاوز المزيد والمزيد من التحديات.\n"
             5:
-                start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
-                story_text: "`{ask}` {and} `{print}` still work like they did in level 4.\n\n In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\n\n ## Example Hedy Code\n ```\n name {is} {ask} 'what is your name?'\n {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n ```\n\n This code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n\n When we want to check if something is in a list, we can now use `in` between the thing and the list.\n\n ## Example Hedy Code\n ```\n pretty_colors {is} green, yellow\n color {is} {ask} 'What is your favorite color?'\n {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'\n ```\n\n This code prints pretty! if you choose green or yellow, and meh otherwise.\n\n ## Tip\n Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n ```\n name {is} {ask} 'what is your name?'\n {if} name {is} Hedy {print} 'nice'\n {else} {print} 'boo!'\n ```\n\n ## Assignments are getting more {and} more difficult\n\n In level 5 too, the assignments in the tabs become more and more difficult. So, do them from left to right.\n"
+                start_code: "اسمك {is} {ask} \"ما اسمك؟\"\n{if} اسمك {is} هيدي {print} \"واو هذا رائع!\" {else} {print} \"اه.. حسنا\""
+                story_text: "## اذا .. وإلا\nفي المستوى الخامس لدينا شيء جديد: الأمر `{if}`! باستخدام الأمر `{if}` يمكنك أن تفحص شيئا ما وتقوم بالاختيار بين شيئين مختلفين بناء على نتيجة ذلك الفحص.\nهذا الكود يطبع واو هذا رائع! اذا ادخلت هيدي كإجابة على سؤال الاسم، بينما يطبع اه.. حسنا اذا ادخلت أي شيء اخر.\n`{ask}` و `{print}` لا يزالان يعملان كما في المستوى الرابع.\n"
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-                example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+                example_code: "## مثال توضيحي\n```\nاسمك {is} {ask} \"ما اسمك؟\"\n{if} اسمك {is} هيدي {print} \"واو هذا رائع!\" {else} {print} \"اه.. حسنا\"\n```\n"
+                story_text_3: "## القوائم\nعندما نريد أن نفحص وجود عنصر معين في قائمة، يمكننا استخدام الأمر `{in}` مع الأمر `{if}`.\nهذا البرنامج يطبع جميل \nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
                 example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
@@ -191,12 +187,17 @@ adventures:
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[random]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
                 story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
+                story_text_2: If you want to print more than one item, you need to separate them by commas.
+                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
+                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
+                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
     story:
         description: Story
-        image: story.png
         levels:
             1:
                 start_code: '{print} Your story starts here'
@@ -286,7 +287,6 @@ adventures:
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!
-        image: story.png
         default_save_name: Parrot
         levels:
             1:
@@ -337,12 +337,10 @@ adventures:
                 story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# place your code here'
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-        image: songs.png
         default_save_name: Song
     turtle:
         name: Turtle
         description: Make your own drawing
-        image: turtle.gif
         default_save_name: turtle
         levels:
             1:
@@ -411,11 +409,9 @@ adventures:
                 start_code: "{print} 'Who does the dishes?'"
         name: Dishes?
         description: Use the computer to see who does the dishes (Start at level 2)
-        image: dishes.png
         default_save_name: Dishes
     dice:
         name: Dice
-        image: dice.png
         levels:
             7:
                 example_code: "## Example Hedy code\n\n```\nchoices = 1, 2, 3, 4, 5, earthworm\n{repeat} _ _ {print} _ _ _\n```\n"
@@ -488,7 +484,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\noptions = 'rock', 'paper', 'scissors'\nyour_choice = {ask} 'What do you choose?'\ncomputer_choice = options {at} {random}\n{print} 'You choose ' your_choice\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'\n    {print} 'You win!'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'\n    {print} 'The computer wins!'\n```\n"
                 start_code: '# place your code here'
         name: Rock, paper, scissors
-        image: rock.png
         default_save_name: Rock
     calculator:
         levels:
@@ -520,12 +515,10 @@ adventures:
                 start_code: '# place your code here'
         name: Calculator
         description: Create a calculator
-        image: calculator.png
         default_save_name: Calculator
     restaurant:
         name: Restaurant
         description: Create your own virtual restaurant
-        image: restaurant.png
         default_save_name: Restaurant
         levels:
             1:
@@ -643,11 +636,9 @@ adventures:
                 start_code: '# place your code here'
                 story_text_2: "## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
         description: Let Hedy predict the future
-        image: fortuneteller.png
         default_save_name: Fortune Teller
     haunted:
         description: escape from the haunted house
-        image: hauntedhouse.gif
         default_save_name: Haunted House
         levels:
             1:
@@ -692,7 +683,6 @@ adventures:
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         default_save_name: Piggy Bank
         levels:
             14:
@@ -706,7 +696,6 @@ adventures:
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
-        image: quizmaster.png
         default_save_name: Quizmaster
         levels:
             14:
@@ -725,7 +714,6 @@ adventures:
                 example_code: "## Example Hedy code\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         default_save_name: language
     next:
         name: What's next?
@@ -800,7 +788,6 @@ adventures:
                 story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
         description: What's Next?
         default_save_name: next
-        image: ' '
     secret:
         levels:
             12:
@@ -813,12 +800,10 @@ adventures:
                 start_code: '## place your code here'
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
         default_save_name: language
     tic:
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
-        image: story.png
         default_save_name: Tic
         levels:
             14:
@@ -840,7 +825,6 @@ adventures:
     blackjack:
         name: Blackjack
         description: Try to get as close to 21 as you can
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:
