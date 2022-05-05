@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -106,7 +105,6 @@ adventures:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
                 story_text: "## Level 18\nWe arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
     songs:
-        image: songs.png
         name: Sing a song!
         description: Print a song
         default_save_name: Song
@@ -171,7 +169,6 @@ adventures:
                 start_code: '{print} Who does the dishes?'
         name: Dishes?
         description: Use the computer to see who does the dishes (Start at level 2)
-        image: dishes.png
         default_save_name: Dishes
     dice:
         levels:
@@ -206,10 +203,8 @@ adventures:
                 start_code: '# place your code here'
         name: Dice
         description: Make your own dice
-        image: dice.png
         default_save_name: Dice
     rock:
-        image: rock.png
         default_save_name: Rock
         levels:
             1:
@@ -280,7 +275,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
                 start_code: '# place your code here'
         description: Create a calculator
-        image: calculator.png
         default_save_name: Calculator
     restaurant:
         levels:
@@ -353,7 +347,6 @@ adventures:
                 start_code: '# place your code here'
         name: Restaurant
         description: Create your own virtual restaurant
-        image: restaurant.png
         default_save_name: Restaurant
     fortune:
         levels:
@@ -403,7 +396,6 @@ adventures:
                 start_code: '# place your code here'
         name: Fortune teller
         description: Let Hedy predict the future
-        image: fortuneteller.png
         default_save_name: Fortune Teller
     haunted:
         levels:
@@ -447,7 +439,6 @@ adventures:
                 start_code: '# place your code here'
         name: Haunted House
         description: escape from the haunted house
-        image: hauntedhouse.gif
         default_save_name: Haunted House
     story:
         levels:
@@ -507,12 +498,10 @@ adventures:
                 start_code: '# place your code here'
         name: Story
         description: Story
-        image: story.png
         default_save_name: Story
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!
-        image: story.png
         default_save_name: Parrot
         levels:
             1:
@@ -534,7 +523,6 @@ adventures:
     turtle:
         name: Turtle
         description: Make your own drawing
-        image: turtle.gif
         default_save_name: turtle
         levels:
             1:
@@ -574,7 +562,6 @@ adventures:
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         default_save_name: Piggy Bank
         levels:
             14:
@@ -588,7 +575,6 @@ adventures:
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
-        image: quizmaster.png
         default_save_name: Quizmaster
         levels:
             14:
@@ -598,7 +584,6 @@ adventures:
     language:
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         default_save_name: language
         levels:
             5:
@@ -612,7 +597,6 @@ adventures:
     secret:
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
         default_save_name: language
         levels:
             12:
@@ -626,7 +610,6 @@ adventures:
     next:
         name: What's next?
         description: What's Next?
-        image: hedy-logo.png
         default_save_name: next
         levels:
             1:
@@ -717,12 +700,10 @@ adventures:
                 start_code: '## place your code here'
                 story_text: "## Tic Tac Toe\nIn the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.\nThis made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.\nTo use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.\n\nIn the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).\nYou can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.\nThis means that the {while} loop will be stopped and the game ends.\n"
                 example_code: "## Example code\n```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
-        image: story.png
         default_save_name: Tic
     blackjack:
         name: Blackjack
         description: Try to get as close to 21 as you can
-        image: story.png
         levels:
             17:
                 start_code: '# place your code here'

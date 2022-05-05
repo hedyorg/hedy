@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -349,7 +348,6 @@ adventures:
     story:
         name: Story
         description: Story
-        image: story.png
         default_save_name: Story
         levels:
             8:
@@ -438,7 +436,6 @@ adventures:
                 start_code: '# place your code here'
     parrot:
         name: Parrot
-        image: story.png
         levels:
             2:
                 start_code: '{print} Im Hedy the parrot!'
@@ -490,12 +487,10 @@ adventures:
                 start_code: '# place your code here'
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
         description: Print a song
-        image: songs.png
         default_save_name: Song
     turtle:
         name: Turtle
         description: Make your own drawing
-        image: turtle.gif
         default_save_name: turtle
         levels:
             5:
@@ -564,7 +559,6 @@ adventures:
                 example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
         name: Dishes?
         description: Use the computer to see who does the dishes (Start at level 2)
-        image: dishes.png
         default_save_name: Dishes
     dice:
         default_save_name: Dice
@@ -600,9 +594,7 @@ adventures:
                 start_code: '# place your code here'
         name: Dice
         description: Make your own dice
-        image: dice.png
     rock:
-        image: rock.png
         default_save_name: Rock
         levels:
             5:
@@ -673,12 +665,10 @@ adventures:
                 story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
                 start_code: '# place your code here'
         name: Calculator
-        image: calculator.png
         default_save_name: Calculator
     restaurant:
         name: Restaurant
         description: Create your own virtual restaurant
-        image: restaurant.png
         default_save_name: Restaurant
         levels:
             1:
@@ -796,12 +786,10 @@ adventures:
                 story_text: "## Fortune Teller\nIn the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.\nIn this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:\n"
                 start_code: '# place your code here'
                 story_text_2: "## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
-        image: fortuneteller.png
         default_save_name: Fortune Teller
     haunted:
         name: Haunted House
         description: escape from the haunted house
-        image: hauntedhouse.gif
         default_save_name: Haunted House
         levels:
             11:
@@ -845,7 +833,6 @@ adventures:
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         default_save_name: Piggy Bank
         levels:
             12:
@@ -859,7 +846,6 @@ adventures:
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
-        image: quizmaster.png
         default_save_name: Quizmaster
         levels:
             14:
@@ -869,7 +855,6 @@ adventures:
     language:
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         default_save_name: language
         levels:
             5:
@@ -953,7 +938,6 @@ adventures:
                 start_code: "{print} 'Lets go to the next level!'"
         name: What's next?
         description: What's Next?
-        image: ' '
     secret:
         levels:
             13:
@@ -966,7 +950,6 @@ adventures:
                 start_code: '## place your code here'
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
         default_save_name: language
     tic:
         levels:
@@ -986,7 +969,6 @@ adventures:
                 story_text: "## Tic Tac Toe\nIn this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.\nThe first player that gets 3 in a row (horizontally, vertically or diagonally) wins!\nHave fun!\n"
                 example_code: "## Example Hedy code\n```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game {is} 'on'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice {is} 1\n                spot_1 = sign\n            {if} choice {is} 2\n                spot_2 = sign\n            {if} choice {is} 3\n                spot_3 = sign\n            {if} choice {is} 4\n                spot_4 = sign\n            {if} choice {is} 5\n                spot_5 = sign\n            {if} choice {is} 6\n                spot_6 = sign\n            {if} choice {is} 7\n                spot_7 = sign\n            {if} choice {is} 8\n                spot_8 = sign\n            {if} choice {is} 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner {is} 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign {is} 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
                 start_code: '## place your code here'
-        image: story.png
         default_save_name: Tic
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
@@ -998,5 +980,4 @@ adventures:
                 story_text: "## Create a game of Blackjack\nBlackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.\nThe Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.\nIf you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.\nBut be careful not to get more than 21 points, because if you do, you lose!\nThe player who gets closest to 21, without going over it, wins!\n\nHave fun!\n"
                 example_code: "## Example Hedy code\n```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    print 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    print 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
         description: Try to get as close to 21 as you can
-        image: story.png
         default_save_name: Blackjack

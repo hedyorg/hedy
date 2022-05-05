@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -355,7 +354,6 @@ adventures:
     story:
         name: Cerita
         description: Cerita
-        image: story.png
         default_save_name: Cerita
         levels:
             1:
@@ -531,7 +529,6 @@ adventures:
     songs:
         name: Nyanyikan sebuah lagu!
         description: Tampilkan sebuah lagu
-        image: songs.png
         default_save_name: Lagu
         levels:
             8:
@@ -616,7 +613,6 @@ adventures:
     turtle:
         name: Kura-kura
         description: Buat gambar milikmu sendiri
-        image: turtle.gif
         default_save_name: kurakura
         levels:
             1:
@@ -795,7 +791,6 @@ adventures:
     dishes:
         name: Cuci piring?
         description: Gunakan komputer untuk mengetahui siapa yang akan mencuci piring (dimulai di level 2)
-        image: dishes.png
         default_save_name: Piring
         levels:
             7:
@@ -889,7 +884,6 @@ adventures:
     dice:
         name: Dadu
         description: Membuat dadu kamu sendiri
-        image: dice.png
         default_save_name: dadu
         levels:
             7:
@@ -995,7 +989,6 @@ adventures:
     rock:
         name: Batu, gunting, kertas
         description: Buat permainan batu gunting kertas sendiri
-        image: rock.png
         default_save_name: Batu
         levels:
             1:
@@ -1096,7 +1089,6 @@ adventures:
     calculator:
         name: Kalkulator
         description: Membuat sebuah kalkulator
-        image: calculator.png
         default_save_name: kalkulator
         levels:
             9:
@@ -1146,7 +1138,6 @@ adventures:
     restaurant:
         name: Rumah makan
         description: Buat restoran virtual kamu sendiri!
-        image: restaurant.png
         default_save_name: rumahmakan
         levels:
             1:
@@ -1422,7 +1413,6 @@ adventures:
     fortune:
         name: Peramal
         description: Minta Hedy untuk meramal masa depan
-        image: fortuneteller.png
         default_save_name: peramal
         levels:
             1:
@@ -1620,7 +1610,6 @@ adventures:
     haunted:
         name: Rumah berhantu
         description: Keluar dari rumah berhantu
-        image: "hauntedhouse.gif"
         default_save_name: rumahhantu
         levels:
             1:
@@ -1950,7 +1939,6 @@ adventures:
             17:
                 story_text: "## What's next?\nIn the next level you will learn a real Python way to use `{print}`.\n"
                 start_code: "{print} 'Lets go to the next level!'"
-        image: ' '
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!
@@ -1971,12 +1959,10 @@ adventures:
                 story_text: "## Parrot\nTeach your parrot a new word with `{add}`.\n"
                 example_code: "## Example Hedy code\n\n```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
                 start_code: '# place your code here'
-        image: story.png
         default_save_name: Parrot
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
-        image: quizmaster.png
         default_save_name: Quizmaster
         levels:
             14:
@@ -1986,7 +1972,6 @@ adventures:
     language:
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         default_save_name: language
         levels:
             5:
@@ -2000,7 +1985,6 @@ adventures:
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         default_save_name: Piggy Bank
         levels:
             14:
@@ -2023,7 +2007,6 @@ adventures:
                 start_code: '## place your code here'
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
         default_save_name: language
     tic:
         name: Tic Tac Toe
@@ -2045,11 +2028,9 @@ adventures:
                 story_text: "## Tic Tac Toe\nIn this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.\nThe first player that gets 3 in a row (horizontally, vertically or diagonally) wins!\nHave fun!\n"
                 example_code: "## Example Hedy code\n```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game {is} 'on'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice {is} 1\n                spot_1 = sign\n            {if} choice {is} 2\n                spot_2 = sign\n            {if} choice {is} 3\n                spot_3 = sign\n            {if} choice {is} 4\n                spot_4 = sign\n            {if} choice {is} 5\n                spot_5 = sign\n            {if} choice {is} 6\n                spot_6 = sign\n            {if} choice {is} 7\n                spot_7 = sign\n            {if} choice {is} 8\n                spot_8 = sign\n            {if} choice {is} 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner {is} 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign {is} 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
                 start_code: '## place your code here'
-        image: story.png
         default_save_name: Tic
     blackjack:
         name: Blackjack
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:

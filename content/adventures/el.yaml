@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -329,7 +328,6 @@ adventures:
     story:
         name: "Μια ιστορία"
         description: "Δημιούργησε μια διαδραστική ιστορία"
-        image: "story.png"
         default_save_name: "Μια ιστορία"
         levels:
             1:
@@ -519,7 +517,6 @@ adventures:
                 start_code: '# place your code here'
     songs:
         name: "Τραγούδα ένα τραγούδι!"
-        image: "songs.png"
         description: "Εμφάνισε ένα τραγούδι"
         default_save_name: "τραγούδι"
         levels:
@@ -593,7 +590,6 @@ adventures:
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
     dishes:
         name: "Ποιός πρέπει να πλύνει τα πιάτα;"
-        image: "dishes.png"
         default_save_name: "πιάτα"
         description: "Χρησιμοποίησε τον υπολογιστή για να δεις ποιός πρέπει να πλύνει τα πιάτα (Ξεκίνα από το επίπεδο 2)"
         levels:
@@ -705,7 +701,6 @@ adventures:
     dice:
         name: "Φτιάξε τα δικά σου ζάρια"
         description: "Φτιάξε τα δικά σου ζάρια"
-        image: "dice.png"
         default_save_name: "ζάρια"
         levels:
             7:
@@ -820,7 +815,6 @@ adventures:
     rock:
         name: "Πέτρα, ψαλίδι, χαρτί"
         description: "Φτιάξε το δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί"
-        image: "rock.png"
         default_save_name: "Πέτρα"
         levels:
             1:
@@ -923,7 +917,6 @@ adventures:
     calculator:
         name: "Αριθμομηχανή"
         description: "Δημιούργησε μια αριθμομηχανή"
-        image: "calculator.png"
         default_save_name: "Αριθμομηχανή"
         levels:
             6:
@@ -982,7 +975,6 @@ adventures:
     restaurant:
         name: "Εστιατόριο"
         description: "Δημιούργησε το δικό σου εικονικό εστιατόριο"
-        image: "restaurant.png"
         default_save_name: "Εστιατόριο"
         levels:
             1:
@@ -1128,7 +1120,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
                 start_code: '# place your code here'
         description: Create your own online pet parrot that will copy you!
-        image: story.png
         default_save_name: Parrot
     turtle:
         levels:
@@ -1167,7 +1158,6 @@ adventures:
                 start_code: "{forward} 50\n{turn} left"
                 story_text: "## Let's draw\nIn level 1 you can also use Hedy to draw. By combining turns and lines, you can make a square or a stair!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} right` turns a quarter turn in clockwise direction, `{turn} left` turns counter clockwise.\n\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
         description: Make your own drawing
-        image: turtle.gif
         default_save_name: turtle
         name: Turtle
     haunted:
@@ -1212,13 +1202,11 @@ adventures:
                 story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
         name: Haunted House
         description: escape from the haunted house
-        image: hauntedhouse.gif
         default_save_name: Haunted House
     piggybank:
         name: Piggy Bank
         default_save_name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         levels:
             12:
                 story_text: "## Piggy Bank\nIn this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!\n"
@@ -1301,11 +1289,9 @@ adventures:
         description: What's Next?
         default_save_name: next
         name: What's next?
-        image: ' '
     fortune:
         name: Fortune teller
         description: Let Hedy predict the future
-        image: fortuneteller.png
         default_save_name: Fortune Teller
         levels:
             12:
@@ -1360,7 +1346,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\n{print} 'Make your own quiz'\npoints_a = 0\npoints_b = 0\n{print} 'Question'\n{print} 'Answer option A'\n{print} 'Answer option B'\nanswer = {ask} 'Which answer?'\n{if} answer == 'A'\n    points_a = points_a + 1\n{if} answer == 'B'\n    points_b = points_b + 1\n{print} 'End of the quiz!'\n{print} 'Lets see the results!'\n{if} points_a > points_b\n    {print} 'You belong to the A club'\n{if} points_b > points_a\n    {print} 'You belong to the B club'\n```\n"
                 story_text: "## Make your own quiz\nIn this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!\nYou can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!\n"
                 start_code: '# place your code here'
-        image: quizmaster.png
         default_save_name: Quizmaster
     language:
         levels:
@@ -1374,7 +1359,6 @@ adventures:
                 example_code: "## Example Hedy code\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         default_save_name: language
     secret:
         levels:
@@ -1388,12 +1372,10 @@ adventures:
                 start_code: '## place your code here'
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
         default_save_name: language
     tic:
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
-        image: story.png
         default_save_name: Tic
         levels:
             13:
@@ -1415,7 +1397,6 @@ adventures:
     blackjack:
         name: Blackjack
         description: Try to get as close to 21 as you can
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:
