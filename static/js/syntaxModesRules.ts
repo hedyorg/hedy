@@ -1,8 +1,4 @@
-
-import * as CHOICE from '../../highlighting/highlighting.json'; 
-
-
-
+import * as REGEX from '../../highlighting/highlighting.json'; 
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
@@ -10,23 +6,62 @@ if (!window.State) {
   window.State = {};
 }
 
+// convert an objet in a map
+function convert(o:(object|undefined)) {
+  if (typeof o === 'object') {
+    let tmp:Map<string, object> = new Map(Object.entries(o));
+    
+    let ret:Map<string, (undefined|object)> = new Map();
+
+    tmp.forEach((value, key) => {
+      ret.set(key, convert(value));
+    });
+
+    return ret;
+  } else {
+    return o;
+  }
+}
+
+// here we need to transfome (__<KEYWORD>__) in a current kayword with translation
+function convertReg(oldReg:string, TRAD:Map<string,string> ) {
+  var newReg = oldReg;
+
+  TRAD.forEach((value,key) => {
+    newReg = newReg.replace("(__" + key + "__)", value); 
+  });
+
+  return newReg;
+}
+
+
+
+
+// import traduction
+import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json'; 
+let TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
+
+var lang = window.State.keyword_language as string;
+if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
+
+// get the traduction
+var TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string> ;
+
+
+// translate regex
+var data = JSON.stringify(REGEX);
+var data_tr = convertReg(data,TRADUCTION);
+var REGEX_tr = JSON.parse(data_tr);
+
 
 
 // Convert to the right format
 var LEVELS = [];
-for (let key in CHOICE) {
+for (let key in REGEX_tr) {
   if (key != "default") {
-    LEVELS.push(CHOICE[key]);
+    LEVELS.push(REGEX_tr[key]);
   }
 }
-
-
-/*
-// here we need to transfome (__<KEYWORD>__) in a current kayword with translation
-import * as TRADUCTION from '../../highlighting/highlighting-trad.json'; 
-var lang = window.State.keyword_language;
-var TRAD = TRADUCTION[lang];
-*/
 
 
 
