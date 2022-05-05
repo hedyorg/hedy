@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -198,7 +197,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
                 start_code: '# place your code here'
         description: Story
-        image: story.png
         default_save_name: Story
         name: Story
     parrot:
@@ -221,11 +219,9 @@ adventures:
                 start_code: '# place your code here'
         name: Parrot
         description: Create your own online pet parrot that will copy you!
-        image: story.png
         default_save_name: Parrot
     songs:
         description: Print a song
-        image: songs.png
         levels:
             11:
                 story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to make songs that use counting.\n"
@@ -260,7 +256,6 @@ adventures:
     turtle:
         name: Turtle
         description: Make your own drawing
-        image: turtle.gif
         default_save_name: turtle
         levels:
             4:
@@ -329,11 +324,9 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\n## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n\n```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
                 story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
                 example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
-        image: dishes.png
         default_save_name: Dishes
     dice:
         name: Dice
-        image: dice.png
         default_save_name: Dice
         levels:
             7:
@@ -404,14 +397,12 @@ adventures:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
                 example_code: "## Example Hedy code\n\n```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n"
                 start_code: '# place your code here'
-        image: rock.png
         name: Rock, paper, scissors
         description: Make your own rock, paper, scissors game
         default_save_name: Rock
     calculator:
         name: Calculator
         description: Create a calculator
-        image: calculator.png
         levels:
             9:
                 start_code: "{print} 'Welcome to this calculator!'"
@@ -511,10 +502,8 @@ adventures:
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
                 example_code: "## Example Hedy code\n\n```\n{print} 'Welcome at McHedy'\nmore = 'yes'\n{while} more == 'yes'\n    order = {ask} 'What would you like to order?'\n    {print} order\n    more = {ask} 'Would you like to order anything {else}?'\n{print} 'Thank you!'\n"
                 start_code: '# place your code here'
-        image: restaurant.png
         default_save_name: Restaurant
     fortune:
-        image: fortuneteller.png
         default_save_name: Fortune Teller
         levels:
             12:
@@ -605,12 +594,10 @@ adventures:
                 story_text: "## Haunted House Game\nThis haunted house game uses the connection between the lists you can use in this level.\nFor example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.\nCheck out the code!\n"
                 example_code: "## Example Hedy code\n\n```\nnumbers = [1, 2, 3]\ni = numbers[random]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mension'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
                 start_code: '# place your code here'
-        image: hauntedhouse.gif
         default_save_name: Haunted House
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         default_save_name: Piggy Bank
         levels:
             14:
@@ -623,7 +610,6 @@ adventures:
                 start_code: '# place your code here'
     language:
         name: Language
-        image: languages.png
         description: Practice words in a foreign language
         default_save_name: language
         levels:
@@ -708,11 +694,9 @@ adventures:
             18:
                 story_text: "## What's next?\nCongratulations! You have reached the last level of Hedy! But no worries, we are working very hard to create more levels and new adventures. So please come back later to check out the newest levels!\n"
                 start_code: "{print} ('Great job!!!')"
-        image: ' '
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
-        image: quizmaster.png
         default_save_name: Quizmaster
         levels:
             14:
@@ -731,10 +715,8 @@ adventures:
                 start_code: '## place your code here'
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
         default_save_name: language
     tic:
-        image: story.png
         default_save_name: Tic
         levels:
             13:
@@ -758,7 +740,6 @@ adventures:
     blackjack:
         name: Blackjack
         description: Try to get as close to 21 as you can
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:

@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -163,7 +162,6 @@ adventures:
                 example_code: "## Eksempel Hedykode\n\n```\nsverd = 'tapt'\nspill = 'i gang'\n{print} 'Helten vår går gjennom skogen'\n{print} 'Veien deler seg i to'\n{for} i {in} {range} 0 {to} 2\n    {if} spill {is} 'i gang'\n        vei = {ask} 'Hvilken vei skal hun velge?'\n        {if} vei {is} 'venstre' {and} sverd {is} 'funnet'\n            {print} 'Helten vår støter på en drage!'\n            {print} 'Heldigvis har helten et sverd til å beseire beistet'\n            spill = 'ferdig'\n        {if} vei {is} 'venstre' {and} sverd {is} 'tapt'\n            {print} 'Helten vår støter på en drage, men hun har ingen våpen!'\n            {print} 'Helten vår blir tatt av monsteret...'\n            {print} 'Prøv igjen'\n            spill = 'ferdig'\n        {if} vei {is} 'høyre' {and} sverd {is} 'funnet'\n            {print} 'Du har allerede funnet sverdet, det er ikke noe mer her'\n            {print} 'Hun går tilbake'\n        {if} vei {is} 'høyre' {and} sverd {is} 'tapt'\n            {print} 'Helten vår finner et sverdy'\n            {print} 'Dette kan være veldig hendig'\n            sverd = 'funnet'\n```\n"
                 start_code: '# skriv koden din her'
         description: Fortelling
-        image: story.png
         default_save_name: Fortelling
     turtle:
         levels:
@@ -203,7 +201,6 @@ adventures:
                 start_code: "{print} 'Tegner figurer'\n"
         name: Skilpadde
         description: Lag din egen tegning
-        image: turtle.gif
         default_save_name: Skilpadde
     rock:
         levels:
@@ -245,7 +242,6 @@ adventures:
                 start_code: '# skriv koden din her'
         name: Stein, saks, papir
         description: Lag ditt eget stein, saks,papir-spill
-        image: rock.png
         default_save_name: Stein
     calculator:
         levels:
@@ -277,7 +273,6 @@ adventures:
                 start_code: '# skriv koden din her'
         name: Kalkulator
         description: Lag en kalkulator
-        image: calculator.png
         default_save_name: Kalkulator
     restaurant:
         levels:
@@ -350,7 +345,6 @@ adventures:
                 start_code: '# skriv koden din her'
         name: Restaurant
         description: Lag din egen virtuelle restaurant
-        image: restaurant.png
         default_save_name: Restaurant
     fortune:
         levels:
@@ -400,7 +394,6 @@ adventures:
                 start_code: '# skriv koden din her'
         name: Spåkone
         description: La Hedy forutsi fremtiden
-        image: fortuneteller.png
         default_save_name: Spåkone
     haunted:
         levels:
@@ -444,12 +437,10 @@ adventures:
                 start_code: '# skriv koden din her'
         name: Spøkelseshus
         description: flykt fra det forheksede huset
-        image: hauntedhouse.gif
         default_save_name: Spøkelseshus
     piggybank:
         name: Sparebøsse
         description: Tell sparepengene dine!
-        image: piggy.png
         default_save_name: Sparebøsse
         levels:
             14:
@@ -463,7 +454,6 @@ adventures:
     parrot:
         name: Papegøye
         description: Lag din egen online papegøye som hermer etter det du sier!
-        image: story.png
         default_save_name: Papegøye
         levels:
             1:
@@ -485,7 +475,6 @@ adventures:
     songs:
         name: Syng en sang!
         description: Skriv ut en sang
-        image: songs.png
         default_save_name: Sang
         levels:
             12:
@@ -519,7 +508,6 @@ adventures:
     dishes:
         name: Retter?
         description: Bruk datamaskinen til å se hvem som skal ta oppvasken (Start på nivå 2)
-        image: dishes.png
         default_save_name: Retter
         levels:
             10:
@@ -553,7 +541,6 @@ adventures:
     dice:
         name: Terninger
         description: Lag din egen terning
-        image: dice.png
         default_save_name: Terninger
         levels:
             10:
@@ -588,7 +575,6 @@ adventures:
     quizmaster:
         name: Quizmester
         description: Lag din egen quiz!
-        image: quizmaster.png
         default_save_name: Quizmester
         levels:
             14:
@@ -598,7 +584,6 @@ adventures:
     language:
         name: Språk
         description: Øv på ord fra andre språk
-        image: languages.png
         default_save_name: språk
         levels:
             16:
@@ -612,7 +597,6 @@ adventures:
     secret:
         name: SuperSpion
         description: Lag din egen spionkode
-        image: story.png
         default_save_name: språk
         levels:
             12:
@@ -695,12 +679,10 @@ adventures:
                 start_code: "{print} ('Godt jobbet!!!')"
         name: Hva er neste?
         description: Hva er neste?
-        image: hedy-logo.png
         default_save_name: neste
     tic:
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
-        image: story.png
         default_save_name: Tic
         levels:
             13:
@@ -722,7 +704,6 @@ adventures:
     blackjack:
         name: Blackjack
         description: Try to get as close to 21 as you can
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:
