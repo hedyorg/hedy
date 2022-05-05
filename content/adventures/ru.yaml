@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             6:
@@ -163,7 +162,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
                 start_code: '# place your code here'
         description: Story
-        image: story.png
         default_save_name: Story
     parrot:
         levels:
@@ -185,12 +183,10 @@ adventures:
                 start_code: '# place your code here'
         name: Parrot
         description: Create your own online pet parrot that will copy you!
-        image: story.png
         default_save_name: Parrot
     dishes:
         name: Dishes?
         description: Use the computer to see who does the dishes (Start at level 2)
-        image: dishes.png
         default_save_name: Dishes
         levels:
             3:
@@ -254,7 +250,6 @@ adventures:
                 start_code: '# place your code here'
         name: Dice
         description: Make your own dice
-        image: dice.png
         default_save_name: Dice
     rock:
         levels:
@@ -296,7 +291,6 @@ adventures:
                 start_code: '# place your code here'
         name: Rock, paper, scissors
         description: Make your own rock, paper, scissors game
-        image: rock.png
         default_save_name: Rock
     calculator:
         levels:
@@ -328,7 +322,6 @@ adventures:
                 start_code: '# place your code here'
         name: Calculator
         description: Create a calculator
-        image: calculator.png
         default_save_name: Calculator
     restaurant:
         levels:
@@ -401,7 +394,6 @@ adventures:
                 start_code: '# place your code here'
         name: Restaurant
         description: Create your own virtual restaurant
-        image: restaurant.png
         default_save_name: Restaurant
     secret:
         levels:
@@ -415,12 +407,10 @@ adventures:
                 example_code: "## Example Hedy code\n```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
         default_save_name: SuperSpy
     songs:
         name: Sing a song!
         description: Print a song
-        image: songs.png
         default_save_name: Song
         levels:
             6:
@@ -454,7 +444,6 @@ adventures:
     turtle:
         name: Turtle
         description: Make your own drawing
-        image: turtle.gif
         default_save_name: Turtle
         levels:
             1:
@@ -494,7 +483,6 @@ adventures:
     fortune:
         name: Fortune teller
         description: Let Hedy predict the future
-        image: fortuneteller.png
         default_save_name: Fortune Teller
         levels:
             1:
@@ -544,7 +532,6 @@ adventures:
     haunted:
         name: Haunted House
         description: Escape from the haunted house
-        image: hauntedhouse.gif
         default_save_name: Haunted House
         levels:
             1:
@@ -588,7 +575,6 @@ adventures:
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         default_save_name: Piggy Bank
         levels:
             12:
@@ -602,7 +588,6 @@ adventures:
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
-        image: quizmaster.png
         default_save_name: Quizmaster
         levels:
             14:
@@ -612,7 +597,6 @@ adventures:
     language:
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         default_save_name: Language
         levels:
             5:
@@ -626,7 +610,6 @@ adventures:
     next:
         name: What's next?
         description: What's Next?
-        image: hedy-logo.png
         default_save_name: Next
         levels:
             1:
@@ -700,7 +683,6 @@ adventures:
     tic:
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
-        image: story.png
         default_save_name: Tic
         levels:
             13:
@@ -722,7 +704,6 @@ adventures:
     blackjack:
         name: Blackjack
         description: Try to get as close to 21 as you can
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:
