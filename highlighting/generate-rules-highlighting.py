@@ -18,45 +18,44 @@ KEYWORDS_PATTERN = '(\w+).yaml'
 
 # Functions that collect all the rules, for all levels, of a given language
 def generateRules():
-    return [
-        { 'name': 'level1' , 'rules': rule_level1() },
-        { 'name': 'level2' , 'rules': rule_level2() },
-        { 'name': 'level3' , 'rules': rule_level3() },
-        { 'name': 'level4' , 'rules': ruleALL(4) },
-        { 'name': 'level5' , 'rules': ruleALL(5) },
-        { 'name': 'level6' , 'rules': ruleALL(6) },
-        { 'name': 'level7' , 'rules': ruleALL(7) },
-        { 'name': 'level8' , 'rules': ruleALL(8) },
-        { 'name': 'level9' , 'rules': ruleALL(9) },
-        { 'name': 'level10', 'rules': ruleALL(10) },
-        { 'name': 'level11', 'rules': ruleALL(11) },
-        { 'name': 'level12', 'rules': ruleALL(12) },
-        { 'name': 'level13', 'rules': ruleALL(13) },
-        { 'name': 'level14', 'rules': ruleALL(14) },
-        { 'name': 'level15', 'rules': ruleALL(15) },
-        { 'name': 'level16', 'rules': ruleALL(16) },
-        { 'name': 'level17', 'rules': ruleALL(17) },
-        { 'name': 'level18', 'rules': ruleALL(18) },
-    ]
+    return {
+        'level1' : rule_level1(),
+        'level2' : rule_level2(),
+        'level3' : rule_level3(),
+        'level4' : ruleALL(4),
+        'level5' : ruleALL(5),
+        'level6' : ruleALL(6),
+        'level7' : ruleALL(7),
+        'level8' : ruleALL(8),
+        'level9' : ruleALL(9),
+        'level10': ruleALL(10),
+        'level11': ruleALL(11),
+        'level12': ruleALL(12),
+        'level13': ruleALL(13),
+        'level14': ruleALL(14),
+        'level15': ruleALL(15),
+        'level16': ruleALL(16),
+        'level17': ruleALL(17),
+        'level18': ruleALL(18),
+    }
 
 
 def validate_ruleset(LEVELS):
-  """Confirm that the generated syntax highlighting rules are valid, throw an error if not."""
-  errors = 0
-  for level in LEVELS:
-    for rulename, rules in level['rules'].items():
-      for rule in rules:
-        r = re.compile(rule['regex'])
+    """Confirm that the generated syntax highlighting rules are valid, throw an error if not."""
+    errors = 0
+    for rulesByLevel in LEVELS.values():
+        for rulesByState in rulesByLevel.values():
+            for rule in rulesByState:
+                r = re.compile(rule['regex'])
+                group_count = r.groups if r.groups > 0 else 1
+                token_count = len(rule['token']) if isinstance(rule['token'], list) else 1
 
-        group_count = r.groups if r.groups > 0 else 1
-        token_count = len(rule['token']) if isinstance(rule['token'], list) else 1
-
-        if group_count != token_count:
-          print(f'ERROR: In {level["name"]}, rule \'{rulename}\': regex \'{rule["regex"]}\' has {group_count} capturing subgroups, but \'token\' has {token_count} elements: {repr(rule["token"])}')
-          errors += 1
-
-  if errors > 0:
-    raise RuntimeError(f'{errors} rules are invalid')
+                if group_count != token_count:
+                    print(f'ERROR: In {level["name"]}, rule \'{rulename}\': regex \'{rule["regex"]}\' has {group_count} capturing subgroups, but \'token\' has {token_count} elements: {repr(rule["token"])}')
+                    errors += 1
+  
+    if errors > 0:
+        raise RuntimeError(f'{errors} rules are invalid')
 
 
 
