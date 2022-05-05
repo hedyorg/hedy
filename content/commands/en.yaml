@@ -398,13 +398,26 @@
             {print} 'Your favorite colour is not green'
 18:
 -   name: "{print}"
-    explanation: "With `{print}` you need to use parentheses"
+    explanation: "After `{print}` you need to use parentheses"
     example: "{print}"
     demo_code: |-
         {print}('hi!')
+-   name: "{range}"
+    explanation: "After `{range}` you need to use parentheses"
+    example: "{range}"
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Hello, times ', i)
 -   name: "{print} with var"
     explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
     example: "{print}"
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
+
+-   name: "ask something with {input}"
+    explanation: "Use `{input}` instead of `{ask}` to ask something"
+    example: "{input}"
+    demo_code: |-
+        name = {input}('What is your name?')
+        {print}('So your name is ', name)
