@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -375,7 +374,6 @@ adventures:
         name: A történet
         default_save_name: Történet
         description: Készíts egy interaktív történetet
-        image: story.png
         levels:
             1:
                 story_text: |-
@@ -551,7 +549,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
                 start_code: '# place your code here'
     songs:
-        image: songs.png
         name: Énekelj egy dalt!
         default_save_name: Dal
         description: Dal kiíratása
@@ -635,7 +632,6 @@ adventures:
                 start_code: '# place your code here'
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
     dishes:
-        image: dishes.png
         name: Ki mosogat?
         default_save_name: mosogat
         description: Használd a számítógépet, hogy lásd, ki mosogat (Kezdd a 2. szinten)
@@ -746,7 +742,6 @@ adventures:
         description: Készítsd el a saját kockádat
         name: Készítsd el a saját kockádat
         default_save_name: Kocka
-        image: dice.png
         levels:
             7:
                 story_text: |-
@@ -855,7 +850,6 @@ adventures:
         description: Készíts saját kő, papír, olló játékot
         default_save_name: Kő
         name: Kő, papír, olló
-        image: rock.png
         levels:
             1:
                 start_code: print Üdvözlünk saját kő, papír olló játékodon!
@@ -961,7 +955,6 @@ adventures:
         name: Számológép
         description: Készíts számológépet
         default_save_name: Számológép
-        image: calculator.png
         levels:
             9:
                 story_text: |-
@@ -1035,7 +1028,6 @@ adventures:
     restaurant:
         name: Étterem
         default_save_name: Étterem
-        image: "restaurant.png"
         description: Készíts virtuális éttermet
         levels:
             1:
@@ -1308,7 +1300,6 @@ adventures:
     turtle:
         name: Teknős
         description: Készíts saját rajzot
-        image: turtle.gif
         default_save_name: teknős
         levels:
             1:
@@ -1492,7 +1483,6 @@ adventures:
     fortune:
         name: Jósnő
         description: Hadd jósolja meg Hedy a jövőt
-        image: fortuneteller.png
         default_save_name: Jósnő
         levels:
             1:
@@ -1699,7 +1689,6 @@ adventures:
     haunted:
         name: Kísértetház
         description: menekülés a kísértetjárta házból
-        image: "hauntedhouse.gif"
         default_save_name: Kísértetház
         levels:
             1:
@@ -1993,7 +1982,6 @@ adventures:
             17:
                 story_text: "## What's next?\nIn the next level you will learn a real Python way to use `{print}`.\n"
                 start_code: "{print} 'Lets go to the next level!'"
-        image: ' '
     parrot:
         name: Parrot
         levels:
@@ -2013,13 +2001,11 @@ adventures:
                 story_text: "## Parrot\nReward your parrot {if} it says the correct word!\n"
                 example_code: "## Example Hedy code\n\n```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
                 start_code: '# place your code here'
-        image: story.png
         description: Create your own online pet parrot that will copy you!
         default_save_name: Parrot
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         levels:
             14:
                 story_text: "## Piggybank\nIn this level you can let Hedy tell you {if} you have saved up enough money!\n"
@@ -2031,7 +2017,6 @@ adventures:
                 start_code: '# place your code here'
         default_save_name: Piggy Bank
     quizmaster:
-        image: quizmaster.png
         description: Make your own quiz!
         default_save_name: Quizmaster
         name: Quizmaster
@@ -2043,7 +2028,6 @@ adventures:
     language:
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         default_save_name: language
         levels:
             16:
@@ -2067,7 +2051,6 @@ adventures:
                 start_code: '## place your code here'
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
     tic:
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
@@ -2088,12 +2071,10 @@ adventures:
                 example_code: "## Example code\n```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
                 start_code: '## place your code here'
                 story_text: "## Tic Tac Toe\nIn the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.\nThis made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.\nTo use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.\n\nIn the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).\nYou can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.\nThis means that the {while} loop will be stopped and the game ends.\n"
-        image: story.png
         default_save_name: Tic
     blackjack:
         name: Blackjack
         description: Try to get as close to 21 as you can
-        image: story.png
         levels:
             17:
                 start_code: '# place your code here'

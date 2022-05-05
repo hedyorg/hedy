@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -202,7 +201,6 @@ adventures:
     story:
         name: "История"
         description: "Съчини си интерактивна история!"
-        image: "story.png"
         default_save_name: "История"
         levels:
             1:
@@ -383,7 +381,6 @@ adventures:
     songs:
         name: "Изпей песен!"
         description: "Print a song"
-        image: "songs.png"
         default_save_name: "Song"
         levels:
             8:
@@ -464,7 +461,6 @@ adventures:
     turtle:
         name: "Костенурка"
         description: "Рисунка"
-        image: "turtle.gif"
         default_save_name: "turtle"
         levels:
             1:
@@ -669,7 +665,6 @@ adventures:
     dishes:
         name: "Кой мие чиниите?"
         description: "Използвай компютъра, за да разбереш кой мие чиниите (от второ до шесто ниво)."
-        image: "dishes.png"
         default_save_name: "Dishes"
         levels:
             7:
@@ -792,14 +787,12 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
                 story_text: "## Parrot\nTeach your parrot a new word with `{add}`.\n"
                 start_code: '# place your code here'
-        image: story.png
         name: Parrot
         description: Create your own online pet parrot that will copy you!
         default_save_name: Parrot
     dice:
         name: Dice
         description: Make your own dice
-        image: dice.png
         levels:
             10:
                 example_code: "## Example Hedy code\n\n```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
@@ -834,7 +827,6 @@ adventures:
     rock:
         name: Rock, paper, scissors
         description: Make your own rock, paper, scissors game
-        image: rock.png
         levels:
             10:
                 story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
@@ -904,11 +896,9 @@ adventures:
                 story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
                 start_code: '# place your code here'
         description: Create a calculator
-        image: calculator.png
     restaurant:
         name: Restaurant
         description: Create your own virtual restaurant
-        image: restaurant.png
         levels:
             1:
                 example_code: "## Example Hedy code\n\n  ```\n {print} Welcome to Hedy's restaurant \U0001F35F\n {ask} What would you like to order?\n {echo} So you would like to order\n {print} Thanks you for your order!\n {print} It's on its way!\n ```\n\n## Challenge\nCan you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?\n"
@@ -981,7 +971,6 @@ adventures:
     fortune:
         name: Fortune teller
         description: Let Hedy predict the future
-        image: fortuneteller.png
         default_save_name: Fortune Teller
         levels:
             6:
@@ -1070,7 +1059,6 @@ adventures:
                 start_code: monster1 {is} _
                 example_code: "## Example Hedy Code\n```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
         description: escape from the haunted house
-        image: hauntedhouse.gif
         default_save_name: Haunted House
     next:
         levels:
@@ -1145,9 +1133,7 @@ adventures:
         default_save_name: next
         name: What's next?
         description: What's Next?
-        image: ' '
     piggybank:
-        image: piggy.png
         default_save_name: Piggy Bank
         levels:
             14:
@@ -1163,7 +1149,6 @@ adventures:
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
-        image: quizmaster.png
         default_save_name: Quizmaster
         levels:
             14:
@@ -1183,11 +1168,9 @@ adventures:
                 story_text: "## Learn a new language\nMake your own program to practice your vocabulary in a new language.\n\n## Example Hedy code\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
                 start_code: '# place your code here'
                 example_code: "## Example Hedy code\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
-        image: languages.png
     secret:
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
         default_save_name: language
         levels:
             12:
@@ -1219,9 +1202,7 @@ adventures:
                 start_code: '## place your code here'
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
-        image: story.png
     blackjack:
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:
