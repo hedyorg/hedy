@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -358,9 +357,15 @@ adventures:
                 story_text: |-
                     No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
                     Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
+                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
                 story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
+                story_text_2: If you want to print more than one item, you need to separate them by commas.
+                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
+                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
+                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
     story:
         levels:
             1:
@@ -448,12 +453,10 @@ adventures:
                 start_code: '# place your code here'
         name: Story
         description: Story
-        image: story.png
         default_save_name: Story
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!
-        image: story.png
         levels:
             1:
                 start_code: '{print} Im Hedy the parrot'
@@ -505,7 +508,6 @@ adventures:
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
         name: Sing a song!
         description: Print a song
-        image: songs.png
     turtle:
         levels:
             1:
@@ -544,7 +546,6 @@ adventures:
                 story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
         name: Turtle
         description: Make your own drawing
-        image: turtle.gif
         default_save_name: turtle
     dishes:
         levels:
@@ -578,7 +579,6 @@ adventures:
                 example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
         name: Dishes?
         description: Use the computer to see who does the dishes (Start at level 2)
-        image: dishes.png
         default_save_name: Dishes
     dice:
         name: Dice
@@ -613,7 +613,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
                 start_code: '# place your code here'
         description: Make your own dice
-        image: dice.png
         default_save_name: Dice
     calculator:
         name: Calculator
@@ -645,7 +644,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
                 start_code: '# place your code here'
         description: Create a calculator
-        image: calculator.png
         default_save_name: Calculator
     restaurant:
         levels:
@@ -718,7 +716,6 @@ adventures:
                 start_code: '# place your code here'
         name: Restaurant
         description: Create your own virtual restaurant
-        image: restaurant.png
         default_save_name: Restaurant
     fortune:
         name: Fortune teller
@@ -768,7 +765,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\n{print} 'Im Hedy the fortune teller!'\nquestion {is} {ask} 'What do you want to know?'\n{print} 'This is your question: ' question\nanswers {is} yes, no, maybe\n{print} 'My crystal ball says...'\n{sleep} 2\n{print} answers {at} {random}\n```\n"
                 start_code: '# place your code here'
         description: Let Hedy predict the future
-        image: fortuneteller.png
         default_save_name: Fortune Teller
     haunted:
         name: Haunted House
@@ -812,7 +808,6 @@ adventures:
                 start_code: '# place your code here'
                 story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
         description: escape from the haunted house
-        image: hauntedhouse.gif
         default_save_name: Haunted House
     piggybank:
         name: Piggy Bank
@@ -826,11 +821,9 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\n{print} 'The digital piggy bank'\nwish = {ask} 'What would you like to buy?'\nprice = {ask} 'How much does that cost?'\nsaved = {ask} 'How much money have you saved already?'\nallowance = {ask} 'How much pocket money do you get per week?'\nto_save = price - saved\nweeks = to_save / allowance\n{print} 'You can buy a ' wish ' in ' weeks ' weeks.'\n"
                 start_code: '# place your code here'
         description: Count your pocketmoney!
-        image: piggy.png
         default_save_name: Piggy Bank
     quizmaster:
         name: Quizmaster
-        image: quizmaster.png
         default_save_name: Quizmaster
         description: Make your own quiz!
         levels:
@@ -841,7 +834,6 @@ adventures:
     language:
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         default_save_name: language
         levels:
             16:
@@ -925,11 +917,9 @@ adventures:
                 example_code: "## Example Hedy code\n```\n{print} 'What is for dinner tonight?'\noptions = ['pizza', 'broccoli', 'green beans']\nchosen = options {at} {random}\n{if} chosen = 'pizza'\n    {print} 'Yummy! Pizza!'\n{else}\n    {print} 'Yikes...'\n```\n"
                 story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
         description: What's Next?
-        image: ' '
     rock:
         name: Rock, paper, scissors
         description: Make your own rock, paper, scissors game
-        image: rock.png
         levels:
             1:
                 example_code: "## Example Hedy code\n\n\n```\n{print} what do you choose?\n{ask} choose {from} rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
@@ -969,7 +959,6 @@ adventures:
                 start_code: '# place your code here'
         default_save_name: Rock
     secret:
-        image: story.png
         default_save_name: language
         levels:
             12:
@@ -1002,12 +991,10 @@ adventures:
                 start_code: '## place your code here'
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
-        image: story.png
         default_save_name: Tic
     blackjack:
         name: Blackjack
         description: Try to get as close to 21 as you can
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:
