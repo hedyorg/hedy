@@ -50,28 +50,17 @@ adventures:
                     这很有用,因为现在你可以打印所有你想要打印的词汇了. 你也可以打印那些用 `{is}`命名并保存的词汇.
 
                      大多数编程语言在打印时也使用引号，所以我们也距离真正的编程更近了一步!
-                example_code: "## Example Hedy code\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
+                example_code: "## 海迪代码范例\n```\n{print} '从现在开始你们需要使用引号！'\n答案 {is} {ask} '从现在开始我们需要使用什么？'\n{print} '我们需要使用 ' 答案\n```\n"
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
             5:
                 start_code: |-
                     name {is} {ask} '你的名字是什么?'
                     {if} name {is} 海迪 {print} '酷!' {else} {print} '呵呵'
                 story_text: |
-                    `ask` 和` print` 的使用方法和在第3级目标里面一样.
-
-                     在第4级目标里面增加了新的内容,  `if`条件语句! 用`if` 你可以在两个不同的选项中进行选择.
-
-                     ## 海迪代码范例
-                     ```
-                     name is ask 你的名字是什么?
-                     if name is 海迪 print '赞' else print '嘁!'
-                     ```
-
-                     如果你输入的名字是'海迪'那么这段代码运行的结果就是打印出'赞'这个字. 如果你输入的名字不是海迪而是其他词汇,那么这段代码运行的结果就是打印出'嘁'这个字.
-
-                     ## 作业题越来越难了
-
-                     第4级学习内容中作业题的难度也是逐渐增加的,所以最好按照左往右的顺序做题.
+                    ＃＃ 如果（那么）......否则.....
+                    在第 5 级有新的东西，`{if}`！使用 `{if}`，你可以在两个不同的选项之间进行选择。
+                    如果您输入海迪作为名字那么此代码运行后会打印出“很好”这个词！如果您输入其他内容那么此代码运行后会打印出“嘘”这个词。
+                    `{ask}` 和 `{print}` 的使用方法和在第 4 级中一样。
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
                 example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
@@ -80,99 +69,66 @@ adventures:
             6:
                 start_code: "{print}'5乘以5等于 5 * 5'"
                 story_text: |
-                    ask提问, print打印, if-else条件语句和r循环语句在这一级目标中的使用方法与在第4级和第5级目标里面一样.
-                    但是第6级学习内容里面增加了一些新的内容, 现在你可以计算啦.
+                    ## 1 + 1
+                     这一级学习内容里面增加了一些新的内容：现在你可以计算啦。
 
-                    在第6级的学习内容里面增加了新的代码,你现在可以用代码进行计算了.
+                     加法运算很简单，和你在数学课上学的加法运算的知识很类似，例如''5加5记做 `5 + 5`。减法运算也很简单，例如'5减5'记做 `5 - 5`。
 
-                    加法运算很简单, 和你在数学课上学的加法运算的知识很类似, 例如''5加5记做 `5 + 5`. 减法运算也很简单, 例如'5减5'记做 `5 - 5`.
-
-                    乘法运算有点不同, 因为键盘上面没有乘法符号. 你可以找一下, 确实没有!
-                    这就是为什么我们要把数字8上面的星号当做乘法符号: `5 * 5`. 读作5乘以5,你会很容易记住它.
-                    ## 海迪代码范例
-                    ```
-                    print '5加5等于 ' 5 + 5
-                    print '5减5等于 ' 5 - 5
-                    print '5乘以5等于 ' 5 * 5
-                    ```
-                example_code: "## Example Hedy code\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
+                     乘法运算有点不同，因为键盘上面没有乘法符号。你可以找一下, 确实没有！
+                     这就是为什么我们要把数字8上面的星号当做乘法符号： `5 * 5`。读作5乘以5，你会很容易记住它。
+                example_code: "## 海迪代码范例\n```\n{print} '5加5是 ' 5 + 5\n{print} '5减去5是' 5 - 5\n{print} '5乘以5是' 5 * 5\n```\n"
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
                 example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
             7:
                 start_code: "{repeat} 3 {times} {print} '海迪很好玩！'"
                 story_text: |
-                    `ask`, `print` 和 `if-else条件语句` 的使用方法和在第4级里面一样.
-                    但是在第5级的学习内容里面增加了repeat循环命令. Repeat循环语句可以用来多次执行一段代码.
-                    ## Voorbeeld 海迪 代码
-                    ```
-                    repeat 3 times print '海迪很好玩!'
-                    ```
-                example_code: "## Example Hedy code\n```\n{repeat} 3 {times} {print} 'Hedy {is} fun!'\n```\n"
+                    ## 第7级！第7级！
+                    在第7级的学习内容里面增加了`{repeat}` 循环命令。 `{repeat}` 循环语句可以用来多次执行一段代码。
+                example_code: "## 海迪代码范例\n```\n{repeat} 3 {times} {print} '海迪很好玩！'\n```\n"
             8:
                 start_code: |-
                     {repeat} 5 {times}
                         {print} '大家好'
                         {print} '这句话将被打印5次'
                 story_text: |
-                    `ask` 和 `print` 的使用方法依旧保持不变. 但是 `if-else`条件语句 和 `repeat`循环语句已经改变了!
-                    你现在可以执行一组代码, 但你必须使用缩进.
-                    这意味着必须首行缩进四个空格. 当你想要创建只有一行的代码块的时候这一点也适用.
-
-                    ## 海迪代码范例
-                    ```
-                    repeat 5 times
-                        print '大家好'
-                        print '这一切都要重复5次'
-                    ```
+                    ## 缩进
+                    `{ask}` 和 `{print}`  的使用方法依旧保持不变。但是 `{if}` 条件语句和 `{repeat}` 循环语句已经改变了！
+                    你现在可以执行一组代码，但你必须使用*缩进*。
+                    这意味着必须首行缩进四个空格。当你想要创建只有一行的代码块的时候这一点也适用。
                 example_code: "## Example Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
             9:
                 start_code: |-
-                    repeat 3 times
-                        food = ask 'What do you want?'
-                        if food is 'pizza'
-                            print 'nice!'
-                        else
-                            print 'pizza is better'
+                    {repeat} 3 {times}
+                        食物 = {ask} '你想吃什么？'
+                        {if} 食物 {is} 披萨
+                            {print} '好啊！'
+                        {else}  
+                            {print} '披萨更好吃'
                 story_text: |
-                    In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
-                    In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
-                    Give it a try!
-
-                    ## Example Hedy code
-                    ```
-                    repeat 3 times
-                        food = ask 'What do you want?'
-                        if food is 'pizza'
-                            print 'nice!'
-                        else
-                            print 'pizza is better'
-                    ```
-                example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
+                    ## 现在可以一起用啦！
+                    在这个级别中，你不仅可以一起使用`{if}`条件语句和`{repeat}`循环语句编写多行代码，还可以将它们嵌套在一起使用！
+                    在范例中，你可以在 `{repeat}` 命令中嵌入一个 `{if}` 命令。反之亦然，你可以在 `{if}`命令中嵌入一个 `{repeat}` 命令。当然，你也可以在一个 `{if}`条件语句中嵌入一个`{if}`条件语句，在一个`{repeat}`循环语句中嵌入一个`{repeat}`循环语句。
+                    试试吧！
+                example_code: "## 海迪代码范例\n```\n{repeat} 3 {times}\n    食物 = {ask} '你想吃什么？'\n    {if} 食物 {is} 披萨\n        {print} '好啊！'\n    else\n        {print} '披萨更好吃'\n```\n"
             10:
                 start_code: |-
                     动物 {is} 狗，猫，泡泡鱼
                     {for} animal {in} 动物
                       {print} '我爱 ' animal
-                story_text: |
-                    In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
-                    `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
-
-                    ## Example Hedy code
-                    ```
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
-                    ```
+                story_text: |-
+                    ## 设置我的列表中的每个项目...
+                    在这个级别中，我们学习了一个名为`{for}`的新代码。使用 `{for}`，您可以创建一个列表并使用所有元素。
+                    `{for}` 创建一个块，如 `{repeat}` 和 `{if}`，因此块中的所有行都需要以空格开头。
                 example_code: "## Example Hedy code\n```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
             11:
                 start_code: |-
                     {for} 计数器 {in} {range} 1 {to} 5
                         {print} 计数器
-                story_text: "`print` (打印)的使用方法照旧不变但是`repeat` (重复或循环)现在被`for`(循环)所代替! 你要用 `for i in range 1 to 5`, 代替`repeat 5 times`. 你也可以在你的程序中使用 `i`! 记住在`for`和 `if` 语句后使用缩进(这意味着以四个空格开始一个句子)"
-                example_code: "## Example Hedy code\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
+                story_text: "## 循环！\n`{print}` 的使用方法照旧不变但是我们增加了`{for}`的新形式。 你现在可以在你的程序中编写`{for} counter {in} {range} 1 {to} 5` 和使用 `counter`了。\n试试吧，看看会发生什么！ 记住在`{for}` and `{if}` 语句后使用缩进(这意味着以四个空格开始一个句子)。"
+                example_code: "## 海迪代码范例\n```\n{for} 计数器 {in} {range} 1 {to} 5\n    {print} 计数器\n```\n"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
-                story_text: "## Decimal numbers\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n## All texts need to be in quotation marks\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n\n```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n## All items in lists need quotation marks too\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n\n```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n## All text after `{if}` comparisons need quotation marks too\n```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n## Numbers don't need quotation marks\n{for} numbers, you do not use quotation marks in the `=`:\n```\nscore = 25\n{print} 'You got ' score\n```\n"
+                story_text: "## 数字和文本\n**十进制数**\n到目前为止，海迪不允许出现1.5这样的小数，但现在我们允许了。请注意，计算机使用`.`来表示小数点。"
                 example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
                 example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
@@ -182,15 +138,15 @@ adventures:
                 story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
                 example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
                 story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
-                story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
-                example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+                story_text_6: "**数学与文本**\n在此级别中，还允许将 + 号与文本一起使用。例如："
+                example_code_6: "```\na = '你好 '\nb = '世界！'\n{print} a + b\n```\n"
             13:
                 start_code: |-
                     名字 = {ask} '你叫什么名字?'
                     年龄 = {ask} '你的年龄是多少？ '
                     {if} 名字 {is} '海迪' {and} 年龄 {is} 2
                         {print} '你才是真正的海迪！'
-                story_text: "我们将要学习 `and` (且)和 `or`(或)! 如果你想判断两个语句，你不需要使用两个if，但可以使用`and`(且)和`or`(或). 如果你要用`and`那么'and`的左边和右边的两个语句都需要为真. 我们也可以使用`or'那么'or`的左边和右边的两个语句中只需要有一个语句是正确的."
+                story_text: "## 并且...或...？\n我们将要学习 `{and}` 和 `{or}` ！如果你想判断两个语句，你不需要使用两个如果语句，但可以使用`{and}`和`{or}`。如果你要用`{and}`那么`{and}`的左边和右边的两个语句都需要为真。我们也可以使用`{or}`那么`{or}`的左边和右边的两个语句中只需要有一个语句是正确的。"
                 #16:
                 #    start_code: |-
                 #        # 这是一个要问几个数学问题的程序
@@ -214,15 +170,15 @@ adventures:
                 #            # 除了打印 "你好"，它什么也没做
                 #            print('你好!')
                 #
-                example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+                example_code: "```\n名字 = {ask} '你叫什么名字?'\n年龄 = {ask} '你的年龄是多少？ '\n{if} 名字 {is} '海迪 {and} 年龄 {is} 2\n    {print} '你才是真正的海迪！'。\n```\n"
             14:
                 start_code: |-
-                    age = ask '你今年几岁了?'
-                    if age < 13
-                        print '你比我年纪小!'
+                    年龄 = {ask} '你今年几岁了?'
+                    {if} 年龄 < 13
+                        {print} '你比我年纪小!'
                     else
-                        print '你比我年纪大!'
-                story_text: "我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`. 小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 `4 < 5`. 大于号`>` 用来判断c第一个数字是否大于第二个数字, 比如 `6 > 5`."
+                        {print} '你比我年纪大!'
+                story_text: "## 大，比较大，最大！\n我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`。\n小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 `age < 12`判断是否`age`{is}小于12。\n如果你想判断第一个数字是否小于或等于第二个数字，你可以使用`<=`，比如`age <= 11`。\n大于号`>` 用来判断第一个数字是否大于第二个数字, 比如 `points > 10`判断是否`points`大于10。\n你可以在一个`{if}`条件语句中使用这些比较运算符号，如下所示：\n"
                 example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
                 story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
@@ -230,28 +186,28 @@ adventures:
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
             15:
                 start_code: |-
-                    answer = 0
-                    while answer != 25
-                        answer = ask '5乘以5等于几?'
-                    print '已经给出了一个很好的答案'
-                story_text: "我们将要学习一个新的循环, 就是`while` 循环! 只要语句为真/有效，我们就不停的执行循环语句! 因此在范例代码中, 我们一直不停的执行循环语句直到一个正确的答案被给出. 如果正确答案一直没有被给出, 这个循环语句就不会结束!"
-                example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+                    答案 = 0
+                    {while} 答案 != 25
+                        答案 = {ask} '5乘以5等于几?'
+                    {print} '已经给出了一个正确的答案'
+                story_text: "## 更多的循环！\n我们将要学习一个新的循环, 就是`{while}` 循环！只要语句为真/有效，我们就不停的执行循环语句！\n所以别忘了改变循环语句中的变量值。\n\n因此在范例代码中，我们一直不停的执行循环语句直到一个正确的答案被给出。 \n如果正确答案一直没有被给出, 这个循环语句就不会结束!"
+                example_code: "## 海迪代码范例\n```\n答案 = 0\n{while} 答案 != 25\n    答案 = {ask} '5乘以5等于几？'\n{print} '已经给出了一个正确答案'\n```\n"
             16:
                 start_code: |-
                     水果 = ['苹果', '香蕉', '樱桃']
                     {print} 水果
-                story_text: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
+                story_text: "## 越来越像真正的代码了！\n我们将用Python的方式来制作列表，把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号标示清楚，就像我们在前几级学到的那样。\n你也可以使用中括号来指出列表中的某个位置。"
                 example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
             17:
                 start_code: |-
-                    for i in range 1 to 10:
-                        print i
-                    print '无论你是否准备好了，我都会来的!'
-                story_text: "现在我们将对缩进进行一些改变. 每当我们需要用缩进时, 我们都需要在缩进前的那一行使用冒号`:` ."
+                    {for} i {in} {range} 1 {to}10:
+                        {print} i
+                    {print} '无论你是否准备好了，我都会来的!'
+                story_text: "## 否则如果\n现在我们将对缩进进行一些改变. 每当我们需要用缩进时, 我们都需要在缩进前的那一行使用冒号`:` .\n\n在此级别中，你还可以使用新命令：`{elif}`。 `{elif}` 是 {else} {if} 的缩写，当您想要在3 个（或更多！）选项中做出选择的时候需要用到它。\n看看吧！"
                 example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-                story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+                story_text: "##最后一级！\n我们到达了真正的 Python 代码！这意味着从现在开始我们需要在 {print} 和 {range} 后使用括号。"
                 example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
                 story_text_2: If you want to print more than one item, you need to separate them by commas.
                 example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
@@ -262,7 +218,7 @@ adventures:
             2:
                 start_code: '{print} Your story'
                 story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
-                example_code: "## Example Hedy code\n\n\n```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```\n"
+                example_code: "## Hedy代码范例\n\n\n```\n名字 {is} {ask} 主角的名字是什么？\n{print} 名字现在要去森林里散步了\n{print} 名字有点害怕\n{print} 突然，他听到到处都有疯狂的声音...\n{sleep}\n{print} 名字害怕这个森林里面闹鬼\n```"
             7:
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
                 story_text: "## Story\nIn a story, someone says words several times. For example, when someone calls for help or sings a song.\nYou can put such repetitions in your story, in this level with `{repeat}`.\n"
@@ -277,23 +233,23 @@ adventures:
                     In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
 
                 example_code: |
-                    ## Example Hedy Code
-
+                    ## Hedy代码范例
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    动物们 {is} 🦔, 🐿, 🦉, 🦇
+                    {print} 他现在听到了一个动物们的声音 {at} {random}
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
 
                 example_code_2: |
-                    ## Example Hedy Code
+                    ## 海迪代码范例
 
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
+                    ```
+                    {print} 他听到一个声音
+                    动物们 {is} 🐿，🦔，🦇，🦉
+                    动物 {is} {ask} 你觉得它是什么？
+                    {add} 动物 {to_list} 动物们
+                    {print} 那是动物们 {at} {random}
                     ```
                 story_text_3: |
                     This is an example of the `{remove}` command in your story
@@ -313,7 +269,7 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
                 start_code: '# place your code here'
             1:
-                story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nAs the first line, use this code:\n\n```\n{ask} who is the star in your story?\n```\n\nAfter that first line, start with `{print}` {if} the sentence needs to be printed.\nYou use `{echo}` {if} you want your main character to be at the end of the sentence.\n"
+                story_text: "## 创作故事动画\n在第1级中你可以自己添加角色创作一个有不同主角的故事动画。\n\n在第一行使用这段代码：\n\n```\n{ask} 谁是你故事的主角？\n```\n\n在第一行之后如果句子需要打印就用`{print}`开始这个句子。\n如果你想让你的主角出现在句子的末尾, 你可以用`{echo}` 。\n"
                 example_code: "## Example Hedy code\n\n\n```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
                 start_code: '{print} Your story starts here'
             10:
@@ -321,13 +277,13 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
                 start_code: '# place your code here'
             12:
-                story_text: "## Story\nIn this level you can use the quotation marks to save multiple words in a variable.\n"
-                example_code: "## Example Hedy code\n\n\n```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
+                story_text: "## 故事\n在此级别中，您可以使用引号将多个单词保存在一个变量中。"
+                example_code: "## 海迪代码范例\n```\n名字 = '英国女王'\n{print} 名字'正在吃一块蛋糕，突然......'\n```\n"
                 start_code: '# place your code here'
             9:
                 story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
                 example_code: "## Example Hedy Code\n```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
-                story_text_2: "The example above is pretty straightforward, but with nesting you can really elaborate your code and turn your story into a real game. Check out this example!\n"
+                story_text_2: "上面的示例非常简单，但是通过嵌套 {if}，您可以真正完善您的代码并将您的故事变成一个真正的游戏。看看这个例子！"
                 example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
                 start_code: '# place your code here'
             8:
@@ -340,7 +296,7 @@ adventures:
                 start_code: "{print} 'Your story will be printed here!'"
             15:
                 story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
-                example_code: "## Example Hedy code\n\n```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n"
+                example_code: "## Hedy代码范例\n\n```\n钥匙 = '丢失'\n{print} '你站在你的花园里，你的钥匙丢了。'\n{print} '你想去哪里找它们？'\n{print} '你可以选择：树、花坛、石头、邮筒'\n{while} 钥匙 == '丢失'\n    位置 = {ask} '你想去哪里找？'\n    {if} 位置 == '花坛'\n        {print} '它们在这里！'\n        钥匙 = '找到'\n    {else}\n        {print} '没有，他们不在'位置\n{print} '现在你可以进入房子了！'\n```\n"
                 start_code: '# place your code here'
         name: Story
         description: Story
