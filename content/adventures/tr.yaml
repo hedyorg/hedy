@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -102,9 +101,15 @@ adventures:
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[random]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
                 story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
+                story_text_2: If you want to print more than one item, you need to separate them by commas.
+                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
+                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
+                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
     story:
         levels:
             12:
@@ -163,13 +168,11 @@ adventures:
                 start_code: '# place your code here'
         name: Story
         description: Story
-        image: story.png
         default_save_name: Story
     parrot:
         default_save_name: Parrot
         name: Parrot
         description: Create your own online pet parrot that will copy you!
-        image: story.png
         levels:
             1:
                 story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
@@ -219,7 +222,6 @@ adventures:
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
         name: Sing a song!
         description: Print a song
-        image: songs.png
         default_save_name: Song
     turtle:
         levels:
@@ -259,11 +261,9 @@ adventures:
                 start_code: "{print} 'Drawing figures'\n"
         name: Turtle
         description: Make your own drawing
-        image: turtle.gif
         default_save_name: turtle
     dishes:
         description: Use the computer to see who does the dishes (Start at level 2)
-        image: dishes.png
         default_save_name: Dishes
         levels:
             7:
@@ -298,7 +298,6 @@ adventures:
     dice:
         name: Dice
         description: Make your own dice
-        image: dice.png
         default_save_name: Dice
         levels:
             10:
@@ -370,7 +369,6 @@ adventures:
                 start_code: '# place your code here'
         name: Rock, paper, scissors
         description: Make your own rock, paper, scissors game
-        image: rock.png
         default_save_name: Rock
     calculator:
         default_save_name: Calculator
@@ -403,7 +401,6 @@ adventures:
                 start_code: '# place your code here'
         name: Calculator
         description: Create a calculator
-        image: calculator.png
     restaurant:
         levels:
             2:
@@ -475,7 +472,6 @@ adventures:
                 start_code: '# place your code here'
         name: Restaurant
         description: Create your own virtual restaurant
-        image: restaurant.png
         default_save_name: Restaurant
     fortune:
         description: Let Hedy predict the future
@@ -525,7 +521,6 @@ adventures:
                 start_code: '# place your code here'
                 story_text_2: "## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
         name: Fortune teller
-        image: fortuneteller.png
         default_save_name: Fortune Teller
     haunted:
         name: Haunted House
@@ -569,12 +564,10 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nnumbers = [1, 2, 3]\ni = numbers[random]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mension'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
                 start_code: '# place your code here'
         description: escape from the haunted house
-        image: hauntedhouse.gif
         default_save_name: Haunted House
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         default_save_name: Piggy Bank
         levels:
             14:
@@ -588,7 +581,6 @@ adventures:
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
-        image: quizmaster.png
         default_save_name: Quizmaster
         levels:
             14:
@@ -607,12 +599,10 @@ adventures:
                 example_code: "## Example Hedy code\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         default_save_name: language
     next:
         name: What's next?
         description: What's Next?
-        image: hedy-logo.png
         levels:
             1:
                 start_code: "{print} Let's go!"
@@ -686,7 +676,6 @@ adventures:
     secret:
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
         default_save_name: language
         levels:
             12:
@@ -718,11 +707,9 @@ adventures:
                 start_code: '## place your code here'
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
-        image: story.png
     blackjack:
         name: Blackjack
         description: Try to get as close to 21 as you can
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:

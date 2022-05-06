@@ -16,3 +16,53 @@ END_LINE = '( *$)'
 START_WORD = '(^| )'
 END_WORD   = '(?![' + CHARACTER + '])'
 
+TRANSLATE_WORD = [
+	"print",
+	"ask",
+	"echo",
+	"forward",
+	"turn",
+	"color",
+	"black",
+	"blue",
+	"brown",
+	"gray",
+	"green",
+	"orange",
+	"pink",
+	"purple",
+	"red",
+	"white",
+	"yellow",
+	"right",
+	"left",
+	"is",
+	"sleep",
+	"add",
+	"to_list",
+	"remove",
+	"from",
+	"at",
+	"random",
+	"in",
+	"if",
+	"else",
+	"and",
+	"repeat",
+	"times",
+	"for",
+	"range",
+	"to",
+	"step",
+	"elif",
+	"input",
+	"or",
+	"while",
+	"length"
+]
+
+def K(word):
+	if word in TRANSLATE_WORD:
+		return "(__"+word+"__)"
+	else:
+		return "(" + word + ")"

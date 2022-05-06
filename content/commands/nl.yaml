@@ -386,9 +386,21 @@
     example: "{print}"
     demo_code: |-
         {print}('hallo!')
+-   name: "{range}"
+    explanation: "Bij `{range}` moet je haakjes gebruiken "
+    example: "{range}"
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Hallo nummero ', i)
 -   name: "{print} met var"
     explanation: "Bij `{print}` moet je haakjes gebruiken en komma's als je meerdere dingen {print}"
     example: "{print}"
     demo_code: |-
         naam = 'Hedy'
         {print}('ik heet', naam)
+-   name: "iets vragen met {input}"
+    explanation: "Gebruik `{input}` in plaats van `{ask}` om iets te vragen"
+    example: "{input}"
+    demo_code: |-
+        naam = {input}('Hoe heet jij?')
+        {print}('Dus jij heet ', naam)

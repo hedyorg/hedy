@@ -1,254 +1,262 @@
 1:
-    -   name: '{print}'
-        explanation: '{print} noe med `{print}`.'
-        example: 'Eksempel: {print} Hallo, velkommen til Hedy!'
-        demo_code: '{print} Hallo velkommen til Hedy!'
-    -   name: '{ask}'
-        explanation: Still et spørsmål med `{ask}`.
-        example: 'Eksempel: {ask} Hva er favorittfargen din?'
-        demo_code: '{ask} Hva er favorittfargen din?'
-    -   name: '{echo}'
-        explanation: gjenta noe med å bruke `{echo}`.
-        example: 'Eksempel: {echo} så favorittfargen din er '
-        demo_code: "{ask} Hva er favorittfargen din?\n{echo} så favorittfargen din er"
-    -   name: '{print} emojier'
-        explanation: print en emoji med `{print}`
-        example: 'Eksempel: {print} 🙋‍ 🌍 ❗'
-        demo_code: '{print} 🙋 🌍 ❗'
-    -   name: '{forward}'
-        explanation: Tegn en linje med `{forward}`.
-        example: 'Eksempel: {forward} 100'
-        demo_code: '{forward} 100'
-    -   name: '{turn}'
-        explanation: snu tegneskilpadden med `{turn}`
-        example: 'Eksempel: {turn}'
-        demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+-   name: '{print}'
+    explanation: '{print} noe med `{print}`.'
+    example: 'Eksempel: {print} Hallo, velkommen til Hedy!'
+    demo_code: '{print} Hallo velkommen til Hedy!'
+-   name: '{ask}'
+    explanation: Still et spørsmål med `{ask}`.
+    example: 'Eksempel: {ask} Hva er favorittfargen din?'
+    demo_code: '{ask} Hva er favorittfargen din?'
+-   name: '{echo}'
+    explanation: gjenta noe med å bruke `{echo}`.
+    example: 'Eksempel: {echo} så favorittfargen din er '
+    demo_code: "{ask} Hva er favorittfargen din?\n{echo} så favorittfargen din er"
+-   name: '{print} emojier'
+    explanation: print en emoji med `{print}`
+    example: 'Eksempel: {print} 🙋‍ 🌍 ❗'
+    demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{forward}'
+    explanation: Tegn en linje med `{forward}`.
+    example: 'Eksempel: {forward} 100'
+    demo_code: '{forward} 100'
+-   name: '{turn}'
+    explanation: snu tegneskilpadden med `{turn}`
+    example: 'Eksempel: {turn}'
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
-    -   name: '{is}'
-        explanation: Gi et ord et navn som kan brukes andre steder i programmet med kommandoen `{is}`. Du kan velge navnet helt selv.
-        example: 'Eksempel: navn {is} Hedy.'
-        demo_code: "navn {is} Hedy\n{print} Velkommen navn"
-    -   name: '{ask}'
-        explanation: still et spørsmål med `{ask}`. Pass på! Du må gi svaret et navn ved hjelp av `{is}`.
-        example: 'Eksempel: farge {is} {ask} Hva er din favorittfarge?'
-        demo_code: "farge {is} {ask} Hva er din favorittfarge?\n{print} farge er din favoritt!"
-    -   name: '{sleep}'
-        explanation: La Hedy få seg en pause i et sekund eller fler.
-        example: 'Eksempel: {sleep} 2 '
-        demo_code: "{print} La meg tenke i et sekund...\n{sleep}\n{print} Hmm.. Jeg trenger tre sekunder til...\n{sleep} 3\n{print} Eureka! Jeg har svaret!"
-    -   explanation: Gi et tall et navn ved å bruke `{is}`. Du kan velge navnet selv.
-        example: 'Eksempel: vinkel {is} 90'
-        demo_code: "vinkel {is} 90\n{turn} vinkel\n{forward} 100"
-        name: er - skilpadde
+-   name: '{is}'
+    explanation: Gi et ord et navn som kan brukes andre steder i programmet med kommandoen `{is}`. Du kan velge navnet helt selv.
+    example: 'Eksempel: navn {is} Hedy.'
+    demo_code: "navn {is} Hedy\n{print} Velkommen navn"
+-   name: '{ask}'
+    explanation: still et spørsmål med `{ask}`. Pass på! Du må gi svaret et navn ved hjelp av `{is}`.
+    example: 'Eksempel: farge {is} {ask} Hva er din favorittfarge?'
+    demo_code: "farge {is} {ask} Hva er din favorittfarge?\n{print} farge er din favoritt!"
+-   name: '{sleep}'
+    explanation: La Hedy få seg en pause i et sekund eller fler.
+    example: 'Eksempel: {sleep} 2 '
+    demo_code: "{print} La meg tenke i et sekund...\n{sleep}\n{print} Hmm.. Jeg trenger tre sekunder til...\n{sleep} 3\n{print} Eureka! Jeg har svaret!"
+-   explanation: Gi et tall et navn ved å bruke `{is}`. Du kan velge navnet selv.
+    example: 'Eksempel: vinkel {is} 90'
+    demo_code: "vinkel {is} 90\n{turn} vinkel\n{forward} 100"
+    name: er - skilpadde
 3:
-    -   name: velg_tilfeldig
-        explanation: Velg et tilfeldig ord fra en liste med `{at}` og `{random}`
-        example: 'Eksempel: dyr {is} hun, katt, hest.'
-        demo_code: "dyr {is} hund, katt, hest\n{print} dyr {at} {random}"
-    -   name: '{add}'
-        explanation: legg til en ting i listen
-        example: 'Eksempel: {add} hund {to_list} dyr'
-        demo_code: "dyr {is} ku, katt\n{add} hund {to_list} dyr"
-    -   name: '{remove}'
-        explanation: fjern en ting fra en liste
-        example: 'Eksempel: {remove} hund {from} dyr'
-        demo_code: "dyr {is} katt, hund, ku\n{remove} hund {from} dyr"
+-   name: velg_tilfeldig
+    explanation: Velg et tilfeldig ord fra en liste med `{at}` og `{random}`
+    example: 'Eksempel: dyr {is} hun, katt, hest.'
+    demo_code: "dyr {is} hund, katt, hest\n{print} dyr {at} {random}"
+-   name: '{add}'
+    explanation: legg til en ting i listen
+    example: 'Eksempel: {add} hund {to_list} dyr'
+    demo_code: "dyr {is} ku, katt\n{add} hund {to_list} dyr"
+-   name: '{remove}'
+    explanation: fjern en ting fra en liste
+    example: 'Eksempel: {remove} hund {from} dyr'
+    demo_code: "dyr {is} katt, hund, ku\n{remove} hund {from} dyr"
 4:
-    -   name: '{print}'
-        explanation: skriv ut nøyaktig det du vil med fnutter
-        example: "Eksempel: {print} 'Hallo velkommen til Hedy.'"
-        demo_code: "{print} 'Hallo, velkommen til Hedy.'"
-    -   name: '{is}'
-        explanation: Gi et navn til noe tekst og `{print}` ut uten fnutter
-        example: 'Eksempel: navn {is} Hedy.'
-        demo_code: "navn {is} Hedy\n{print} 'Mitt navn er ' navn"
-    -   name: '{ask}'
-        explanation: still et spørsmål med `{ask}`.
-        example: "Eksempel: farge {is} {ask} 'Hva er din favorittfarge?'"
-        demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt!'"
+-   name: '{print}'
+    explanation: skriv ut nøyaktig det du vil med fnutter
+    example: "Eksempel: {print} 'Hallo velkommen til Hedy.'"
+    demo_code: "{print} 'Hallo, velkommen til Hedy.'"
+-   name: '{is}'
+    explanation: Gi et navn til noe tekst og `{print}` ut uten fnutter
+    example: 'Eksempel: navn {is} Hedy.'
+    demo_code: "navn {is} Hedy\n{print} 'Mitt navn er ' navn"
+-   name: '{ask}'
+    explanation: still et spørsmål med `{ask}`.
+    example: "Eksempel: farge {is} {ask} 'Hva er din favorittfarge?'"
+    demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt!'"
 5:
-    -   name: '{print}'
-        explanation: skriv ut nøyaktig det du vil med fnutter
-        example: "Eksempel: {print} 'Hallo, velkommen til Hedy.'"
-        demo_code: "{print} 'Hallo, velkommen til Hedy.'"
-    -   name: '{ask}'
-        explanation: still et spørsmål med `{ask}`.
-        example: "Eksempel: farge {is} {ask} 'Hva er din favorittfarge?'"
-        demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt'"
-    -   name: '{if}'
-        explanation: Ta et valg med `{if}`
-        example: "Eksempel: {if} farge {is} grønn {print} 'vakkert!' {else} {print} 'meh'"
-        demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{if} farge {is} grønn {print} 'vakkert!' {else} {print} 'meh'"
-    -   name: '{if} med skilpadden'
-        explanation: Ta et valg med `{if}`
-        example: 'Eksempel: {if} svaret {is} langt {forward} 100 {else} {forward} 5'
-        demo_code: "svaret {is} {ask} 'Hvor langt skal vi bevege skilpadden?'\n{if} svaret {is} langt {forward} 100 {else} {forward} 5"
-    -   name: '{in}'
-        explanation: Sjekk om lister inneholder elementer `{in}`
-        example: "Eksempel: {if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
-        demo_code: "vakre_farger {is} grønn, gul\nfarge {is} {ask} 'Hva er din favoritt farge'\n{if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
+-   name: '{print}'
+    explanation: skriv ut nøyaktig det du vil med fnutter
+    example: "Eksempel: {print} 'Hallo, velkommen til Hedy.'"
+    demo_code: "{print} 'Hallo, velkommen til Hedy.'"
+-   name: '{ask}'
+    explanation: still et spørsmål med `{ask}`.
+    example: "Eksempel: farge {is} {ask} 'Hva er din favorittfarge?'"
+    demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt'"
+-   name: '{if}'
+    explanation: Ta et valg med `{if}`
+    example: "Eksempel: {if} farge {is} grønn {print} 'vakkert!' {else} {print} 'meh'"
+    demo_code: "farge {is} {ask} 'Hva er din favorittfarge?'\n{if} farge {is} grønn {print} 'vakkert!' {else} {print} 'meh'"
+-   name: '{if} med skilpadden'
+    explanation: Ta et valg med `{if}`
+    example: 'Eksempel: {if} svaret {is} langt {forward} 100 {else} {forward} 5'
+    demo_code: "svaret {is} {ask} 'Hvor langt skal vi bevege skilpadden?'\n{if} svaret {is} langt {forward} 100 {else} {forward} 5"
+-   name: '{in}'
+    explanation: Sjekk om lister inneholder elementer `{in}`
+    example: "Eksempel: {if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
+    demo_code: "vakre_farger {is} grønn, gul\nfarge {is} {ask} 'Hva er din favoritt farge'\n{if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
 6:
-    -   name: '{print}'
-        explanation: skriv ut nøyaktig det du vil med fnutter
-        example: "Eksempel: {print} '5 {times} 5 er ' 5 * 5"
-        demo_code: "{print} '5 ganget 5 er ' 5 * 5"
-    -   name: '{ask}'
-        explanation: '{ask} om et regnestykke og sjekk om det er korrekt.'
-        example: "Eksempel: svar {is} {ask} 'Hva er 10 pluss 10?'"
-        demo_code: "svar = {ask} 'Hva er 10 pluss 10?'\n{if} svar {is} 20 {print} 'Korrekt!' {else} {print} 'Feil'"
-    -   name: '`{ask}` {and} `{if}` skilpadde'
-        explanation: '{ask} brukeren hvor mange grader de vil ha'
-        example: "Eksempel: grader{is} {ask} 'Hvor mange grader?'"
-        demo_code: "grader= {ask} 'Hvor mange grader?'\nvinkel = 360 / grader\n{forward} 50"
+-   name: '{print}'
+    explanation: skriv ut nøyaktig det du vil med fnutter
+    example: "Eksempel: {print} '5 {times} 5 er ' 5 * 5"
+    demo_code: "{print} '5 ganget 5 er ' 5 * 5"
+-   name: '{ask}'
+    explanation: '{ask} om et regnestykke og sjekk om det er korrekt.'
+    example: "Eksempel: svar {is} {ask} 'Hva er 10 pluss 10?'"
+    demo_code: "svar = {ask} 'Hva er 10 pluss 10?'\n{if} svar {is} 20 {print} 'Korrekt!' {else} {print} 'Feil'"
+-   name: '`{ask}` {and} `{if}` skilpadde'
+    explanation: '{ask} brukeren hvor mange grader de vil ha'
+    example: "Eksempel: grader{is} {ask} 'Hvor mange grader?'"
+    demo_code: "grader= {ask} 'Hvor mange grader?'\nvinkel = 360 / grader\n{forward} 50"
 7:
-    -   name: '{print}'
-        explanation: skriv nøyaktiv med bruk av fnutter
-        example: "Eksempel: {print} 'Hallo, velkommen til Hedy.'"
-        demo_code: "{print} 'Hallo, velkommen til Hedy.'"
-    -   name: '{ask}'
-        explanation: still et spørsmål med `{ask}`.
-        example: "Eksempel: farge = {ask} 'Hva er din favorittfarge?'"
-        demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt!'"
-    -   name: '{if}'
-        explanation: Ta et valg med `{if}`
-        example: "Eksempel: {if} farge{is} grønn {print} 'Vakkert!' {else} {print} 'meh'"
-        demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{if} farge {is} grønn {print} 'Vakkert!' {else} {print} 'meh'"
-    -   name: '{repeat} - skillpadde'
-        explanation: gjenta en kodelinje med `{repeat}`.
-        example: 'Eksempel: {repeat} 3 {times} {forward} 10'
-        demo_code: '{repeat} 3 {times} {forward} 10'
+-   name: '{print}'
+    explanation: skriv nøyaktiv med bruk av fnutter
+    example: "Eksempel: {print} 'Hallo, velkommen til Hedy.'"
+    demo_code: "{print} 'Hallo, velkommen til Hedy.'"
+-   name: '{ask}'
+    explanation: still et spørsmål med `{ask}`.
+    example: "Eksempel: farge = {ask} 'Hva er din favorittfarge?'"
+    demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{print} farge ' er din favoritt!'"
+-   name: '{if}'
+    explanation: Ta et valg med `{if}`
+    example: "Eksempel: {if} farge{is} grønn {print} 'Vakkert!' {else} {print} 'meh'"
+    demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{if} farge {is} grønn {print} 'Vakkert!' {else} {print} 'meh'"
+-   name: '{repeat} - skillpadde'
+    explanation: gjenta en kodelinje med `{repeat}`.
+    example: 'Eksempel: {repeat} 3 {times} {forward} 10'
+    demo_code: '{repeat} 3 {times} {forward} 10'
 8:
-    -   name: '{print}'
-        explanation: skriv noe. Husk å bruke fnutter når du skal skrive ut tekst.
-        example: "Eksempel: {print} '5 {times} 5 {is} ' 5 * 5"
-        demo_code: "{print} '5 {times} 5 {is} ' 5 * 5"
-    -   name: '{ask}'
-        explanation: spør om svaret på et regnestykke og sjekk om det er rett. Vi kan printe to linjer nå.
-        example: "Eksempel: svaret {is} {ask} 'Hva er 5 pluss 5?'"
-        demo_code: "svaret = {ask} 'Hva er 5 plus 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Du har helt rett, svaret er ' svaret\n{else}\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
-    -   name: '`{repeat}` med skilpadden'
-        explanation: '{repeat} flere linjer'
-        example: 'Eksempel: tegn en firkant'
-        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{print}'
+    explanation: skriv noe. Husk å bruke fnutter når du skal skrive ut tekst.
+    example: "Eksempel: {print} '5 {times} 5 {is} ' 5 * 5"
+    demo_code: "{print} '5 {times} 5 {is} ' 5 * 5"
+-   name: '{ask}'
+    explanation: spør om svaret på et regnestykke og sjekk om det er rett. Vi kan printe to linjer nå.
+    example: "Eksempel: svaret {is} {ask} 'Hva er 5 pluss 5?'"
+    demo_code: "svaret = {ask} 'Hva er 5 plus 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Du har helt rett, svaret er ' svaret\n{else}\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
+-   name: '`{repeat}` med skilpadden'
+    explanation: '{repeat} flere linjer'
+    example: 'Eksempel: tegn en firkant'
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
-    -   name: '`{if}` med flere linjer'
-        explanation: "'{ask}' om svaret på et regnestykke og se om det er korrekt. Nå skriver vi ut to linjer."
-        example: "Eksempel: svaret = {ask} 'Hva er 20 pluss 20?'"
-        demo_code: "svaret = {ask} 'Hva er 20 pluss 20?'\n{if} svaret {is} 40\n    {print} 'Bra jobbet!'\n    {print} 'Svaret er ' svaret\nelse\n    {print} 'Feil'\n    {print} 'Svaret er 40'"
-    -   name: '`{repeat}` og skilpadden'
-        explanation: '{repeat} flere linjer'
-        example: 'Eksempel : tegn en firkant'
-        demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '`{if}` med flere linjer'
+    explanation: "'{ask}' om svaret på et regnestykke og se om det er korrekt. Nå skriver vi ut to linjer."
+    example: "Eksempel: svaret = {ask} 'Hva er 20 pluss 20?'"
+    demo_code: "svaret = {ask} 'Hva er 20 pluss 20?'\n{if} svaret {is} 40\n    {print} 'Bra jobbet!'\n    {print} 'Svaret er ' svaret\nelse\n    {print} 'Feil'\n    {print} 'Svaret er 40'"
+-   name: '`{repeat}` og skilpadden'
+    explanation: '{repeat} flere linjer'
+    example: 'Eksempel : tegn en firkant'
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
-    -   name: '{print}'
-        explanation: skriv ut noe. Husk å bruke fnutter når du skal skrive tekst.
-        example: "Eksempel: {print} '5 {times} 5 {is} ' 5 * 5"
-        demo_code: "{print} '5 {times} 5 {is} ' 5 * 5"
-    -   name: '{for} med en liste'
-        explanation: 'skriv ut alle tingene i en liste '
-        example: 'Eksempel: {for} dyr {in} dyrene'
-        demo_code: "dyrene {is} hunder, katter, flyndre\n{for} dyr {in} dyrene\n    {print} 'Jeg elsker ' dyr"
+-   name: '{print}'
+    explanation: skriv ut noe. Husk å bruke fnutter når du skal skrive tekst.
+    example: "Eksempel: {print} '5 {times} 5 {is} ' 5 * 5"
+    demo_code: "{print} '5 {times} 5 {is} ' 5 * 5"
+-   name: '{for} med en liste'
+    explanation: 'skriv ut alle tingene i en liste '
+    example: 'Eksempel: {for} dyr {in} dyrene'
+    demo_code: "dyrene {is} hunder, katter, flyndre\n{for} dyr {in} dyrene\n    {print} 'Jeg elsker ' dyr"
 11:
-    -   name: '{for} løkke'
-        explanation: Vi kan bruke `{for}` med en {range}
-        example: '{for} teller {in} {range} 1 {to} 5'
-        demo_code: "{for} teller {in} {range} 1 {to} 5\n    {print} teller"
-    -   name: '{ask}'
-        explanation: '{ask} etter svaret på et regnestykke og sjekk om det er korrekt. Vi kan skrive ut to linjer nå.'
-        example: "Eksempel: svaret = {ask} 'Hva er 5 pluss 5?'"
-        demo_code: "svaret = {ask} 'Hva er 5 pluss 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Det var rett og svaret var ' svaret\nelse\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
+-   name: '{for} løkke'
+    explanation: Vi kan bruke `{for}` med en {range}
+    example: '{for} teller {in} {range} 1 {to} 5'
+    demo_code: "{for} teller {in} {range} 1 {to} 5\n    {print} teller"
+-   name: '{ask}'
+    explanation: '{ask} etter svaret på et regnestykke og sjekk om det er korrekt. Vi kan skrive ut to linjer nå.'
+    example: "Eksempel: svaret = {ask} 'Hva er 5 pluss 5?'"
+    demo_code: "svaret = {ask} 'Hva er 5 pluss 5?'\n{if} svaret {is} 10\n    {print} 'Bra jobbet!'\n    {print} 'Det var rett og svaret var ' svaret\nelse\n    {print} 'Oops!'\n    {print} 'Svaret er 10'"
 12:
-    -   name: flyt direkte
-        explanation: Desimaltall
-        example: '{print} 2.5 + 2.5'
-        demo_code: "{print} 'Kjør på med kalkulasjoner!'\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n"
-    -   name: tildel tekst
-        explanation: Tekst med fnutter etter `=`
-        example: navn = 'Hedy'
-        demo_code: "navn = 'Roboten Hedy'\n{print} 'Hello ' navn\n"
-    -   name: apostrof etter {if}sammenligning
-        explanation: Tekst med fnutter etter {if}
-        example: navn = 'Hedy'
-        demo_code: "navn = {ask} 'Hvem er du?'\n{if} navn = 'Hedy'\n    {print} 'Hei hei!'\n"
-    -   name: hermetegn i liste
-        explanation: En liste med fnutter
-        example: navn = 'Hedy', 'Felienne'
-        demo_code: "superhelter = 'Iron Man', 'Batman', 'Superman'\n{print} superhelter {at} {random}\n"
+-   name: flyt direkte
+    explanation: Desimaltall
+    example: '{print} 2.5 + 2.5'
+    demo_code: "{print} 'Kjør på med kalkulasjoner!'\n{print} 'To og en halv pluss to og en halv er lik...'\n{print} 2.5 + 2.5\n"
+-   name: tildel tekst
+    explanation: Tekst med fnutter etter `=`
+    example: navn = 'Hedy'
+    demo_code: "navn = 'Roboten Hedy'\n{print} 'Hello ' navn\n"
+-   name: apostrof etter {if}sammenligning
+    explanation: Tekst med fnutter etter {if}
+    example: navn = 'Hedy'
+    demo_code: "navn = {ask} 'Hvem er du?'\n{if} navn = 'Hedy'\n    {print} 'Hei hei!'\n"
+-   name: hermetegn i liste
+    explanation: En liste med fnutter
+    example: navn = 'Hedy', 'Felienne'
+    demo_code: "superhelter = 'Iron Man', 'Batman', 'Superman'\n{print} superhelter {at} {random}\n"
 13:
-    -   name: '{and}'
-        explanation: Begge deler må være korrekt
-        example: '{if} 3 + 2 {is} 5 {and} 2 + 2 {is} 4'
-        demo_code: "svar1 = {ask} 'Hva er 3 + 2?'\nsvar2 = {ask} 'Hva er 2 + 2?'\n{if} svar1 {is} 5 {and} svar2 {is} 4\n    {print} 'Begge svarene må være rett!'\n{else}\n    {print} 'Minst et svar et feil!'"
-    -   name: '{or}'
-        explanation: Minst et av svarene må være rett. Det vil også fungere hvis begge er rett.
-        example: '{if} 3 + 2 {is} 5 {or} 2 + 2 {is} 4'
-        demo_code: "svar1 = {ask} 'Hva er 3 + 2?'\nsvar2 = {ask} 'Hva er 2 + 2?'\n{if} svar1 {is} 5 {or} svar2 {is} 4\n    {print} 'Ihvertfall ett svar er riktig!'\n{else}\n    {print} 'Begge svarene er feil!'"
+-   name: '{and}'
+    explanation: Begge deler må være korrekt
+    example: '{if} 3 + 2 {is} 5 {and} 2 + 2 {is} 4'
+    demo_code: "svar1 = {ask} 'Hva er 3 + 2?'\nsvar2 = {ask} 'Hva er 2 + 2?'\n{if} svar1 {is} 5 {and} svar2 {is} 4\n    {print} 'Begge svarene må være rett!'\n{else}\n    {print} 'Minst et svar et feil!'"
+-   name: '{or}'
+    explanation: Minst et av svarene må være rett. Det vil også fungere hvis begge er rett.
+    example: '{if} 3 + 2 {is} 5 {or} 2 + 2 {is} 4'
+    demo_code: "svar1 = {ask} 'Hva er 3 + 2?'\nsvar2 = {ask} 'Hva er 2 + 2?'\n{if} svar1 {is} 5 {or} svar2 {is} 4\n    {print} 'Ihvertfall ett svar er riktig!'\n{else}\n    {print} 'Begge svarene er feil!'"
 14:
-    -   name: Mindre
-        explanation: Vi bruker `<` for å sjekke om det første tallet er mindre enn det andre tallet.
-        example: 'For eksempel: alder < 12'
-        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'"
-    -   name: Større
-        explanation: Vi bruker `>` for å sjekke om det første tallet er større enn det andre.
-        example: 'For eksempel: alder > 12'
-        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder > 13\n    {print} 'Du er eldre enn meg!'"
-    -   name: Er lik
-        explanation: Vi bruker `==` for å sjekke om to ting er like.
-        example: 'For eksempel: svar == 25'
-        demo_code: "svar = {ask} 'Hva er  5 * 5?'\n{if} svar == 25\n    {print} 'Det {is} korrekt!'"
-    -   name: Ikke lik
-        explanation: 'Vi bruker`!=` å sjekke om ting er ''ikke lik''. '
-        example: 'For eksempel: svar != 25'
-        demo_code: "svar = {ask} 'Hva er 5 * 5?'\n{if} svar != 25\n    {print} 'Det er ikke korrekt!'"
-    -   name: Mindre {or} lik
-        explanation: Vi bruker `<=` for å sjekke om det første tallet er mindre enn det andre tallet.
-        example: 'For eksempel: alder <= 12'
-        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder <= 12\n    {print} 'Du er yngre enn meg!'"
-    -   name: Større eller lik
-        explanation: Vi bruker `>=` til å sjekke om det første tallet er større eller lik det andre tallet.
-        example: 'For eksempel: alder >= 14'
-        demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder >= 14\n    {print} 'Du er eldre enn meg!'"
+-   name: Mindre
+    explanation: Vi bruker `<` for å sjekke om det første tallet er mindre enn det andre tallet.
+    example: 'For eksempel: alder < 12'
+    demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder < 13\n    {print} 'Du er yngre enn meg!'"
+-   name: Større
+    explanation: Vi bruker `>` for å sjekke om det første tallet er større enn det andre.
+    example: 'For eksempel: alder > 12'
+    demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder > 13\n    {print} 'Du er eldre enn meg!'"
+-   name: Er lik
+    explanation: Vi bruker `==` for å sjekke om to ting er like.
+    example: 'For eksempel: svar == 25'
+    demo_code: "svar = {ask} 'Hva er  5 * 5?'\n{if} svar == 25\n    {print} 'Det {is} korrekt!'"
+-   name: Ikke lik
+    explanation: 'Vi bruker`!=` å sjekke om ting er ''ikke lik''. '
+    example: 'For eksempel: svar != 25'
+    demo_code: "svar = {ask} 'Hva er 5 * 5?'\n{if} svar != 25\n    {print} 'Det er ikke korrekt!'"
+-   name: Mindre {or} lik
+    explanation: Vi bruker `<=` for å sjekke om det første tallet er mindre enn det andre tallet.
+    example: 'For eksempel: alder <= 12'
+    demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder <= 12\n    {print} 'Du er yngre enn meg!'"
+-   name: Større eller lik
+    explanation: Vi bruker `>=` til å sjekke om det første tallet er større eller lik det andre tallet.
+    example: 'For eksempel: alder >= 14'
+    demo_code: "alder = {ask} 'Hvor gammel er du?'\n{if} alder >= 14\n    {print} 'Du er eldre enn meg!'"
 15:
-    -   name: '{while}'
-        explanation: Vi kan bruke `{while}`løkken med ikke-lik
-        example: 'Eksempel: {while} svar != 25'
-        demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Svaret er korrekt!'"
-    -   name: Mindre {while}
-        explanation: 'Vi kan også bruke `{while}` løkken med `<` og `>`. '
-        example: 'For eksempel: {while} antall < 3'
-        demo_code: "telling = 1\n{while} telling < 3\n    {print} 'Vi gjør dette ' 3 - telling ' flere ganger'\n    telling = telling + 1\n{print} 'Vi er ferdig å telle'"
+-   name: '{while}'
+    explanation: Vi kan bruke `{while}`løkken med ikke-lik
+    example: 'Eksempel: {while} svar != 25'
+    demo_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Hva er 5 ganger 5?'\n{print} 'Svaret er korrekt!'"
+-   name: Mindre {while}
+    explanation: 'Vi kan også bruke `{while}` løkken med `<` og `>`. '
+    example: 'For eksempel: {while} antall < 3'
+    demo_code: "telling = 1\n{while} telling < 3\n    {print} 'Vi gjør dette ' 3 - telling ' flere ganger'\n    telling = telling + 1\n{print} 'Vi er ferdig å telle'"
 16:
-    -   name: firkantparantes
-        explanation: Liste med firkantparanteser
-        example: "For eksempel: frukt = ['eple', 'banan', 'kirsebær']"
-        demo_code: "frukt = ['eple', 'banan', 'kirsebær']\n{print} frukt"
-    -   name: Hent en ting fra en liste
-        explanation: For å hente en ting fra en liste bruker vi `[tall]`. Så frukt[1] betyr, hent første frukten i listen!
-        example: 'For eksempel: førstefrukt = frukt[1]'
-        demo_code: "frukt = ['banan', 'eple', 'vannmelon']\nførstefrukt = frukt[1]\n{print} førstefrukt"
-    -   name: Hent en tilfeldig ting fra en liste
-        explanation: For å få en tilfeldig til fra listen bruker vi [{random}]. Så `frukt[{random}]` betyr; hent en tilfeldig frukt fra listen!
-        example: 'For eksempel: tilfeldig_frukt = frukt[{random}]'
-        demo_code: "frukt = ['banan', 'eple', 'vannmelon']\ntilfeldig_frukt = frukt[{random}]\n{print} tilfeldig_frukt"
+-   name: firkantparantes
+    explanation: Liste med firkantparanteser
+    example: "For eksempel: frukt = ['eple', 'banan', 'kirsebær']"
+    demo_code: "frukt = ['eple', 'banan', 'kirsebær']\n{print} frukt"
+-   name: Hent en ting fra en liste
+    explanation: For å hente en ting fra en liste bruker vi `[tall]`. Så frukt[1] betyr, hent første frukten i listen!
+    example: 'For eksempel: førstefrukt = frukt[1]'
+    demo_code: "frukt = ['banan', 'eple', 'vannmelon']\nførstefrukt = frukt[1]\n{print} førstefrukt"
+-   name: Hent en tilfeldig ting fra en liste
+    explanation: For å få en tilfeldig til fra listen bruker vi [{random}]. Så `frukt[{random}]` betyr; hent en tilfeldig frukt fra listen!
+    example: 'For eksempel: tilfeldig_frukt = frukt[{random}]'
+    demo_code: "frukt = ['banan', 'eple', 'vannmelon']\ntilfeldig_frukt = frukt[{random}]\n{print} tilfeldig_frukt"
 17:
-    -   name: '{elif}'
-        explanation: '`{elif}`.'
-        example: '{elif} a == 5:'
-        demo_code: "a = 2\n{if} a == 1:\n    {print} 'a er 1'\n{elif} a == 2:\n    {print} 'a er 2'\n{else}:\n    {print} 'a er ikke 1 eller 2'"
-    -   name: '{print}'
-        explanation: Når vi bruker en `{for}` løkke, må vi legge til `:` på slutten av `{for}` linjen!
-        example: 'for i {in} {range} 1 {to} 10:'
-        demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Klar eller ei, her kommer jeg!'"
-    -   name: '{if}'
-        explanation: Vi må gjøre det samme med alle `{if}`-sjekkene våre
-        example: "{if} farge == 'grønn':"
-        demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{if} farge == 'grønn':\n    {print} 'Din favorittfarge er grønn'\n{else}:\n    {print} 'Din favorittfarge er ikke grønn'"
+-   name: '{elif}'
+    explanation: '`{elif}`.'
+    example: '{elif} a == 5:'
+    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a er 1'\n{elif} a == 2:\n    {print} 'a er 2'\n{else}:\n    {print} 'a er ikke 1 eller 2'"
+-   name: '{print}'
+    explanation: Når vi bruker en `{for}` løkke, må vi legge til `:` på slutten av `{for}` linjen!
+    example: 'for i {in} {range} 1 {to} 10:'
+    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Klar eller ei, her kommer jeg!'"
+-   name: '{if}'
+    explanation: Vi må gjøre det samme med alle `{if}`-sjekkene våre
+    example: "{if} farge == 'grønn':"
+    demo_code: "farge = {ask} 'Hva er din favorittfarge?'\n{if} farge == 'grønn':\n    {print} 'Din favorittfarge er grønn'\n{else}:\n    {print} 'Din favorittfarge er ikke grønn'"
 18:
-    -   name: '{print}'
-        explanation: Med`{print}` må du bruke paranteser
-        example: '{print}'
-        demo_code: "{print}('hei!')"
-    -   name: '{print} med var'
-        explanation: Med `{print}` må vi bruke parantes og komma for å skrive ut flere ting
-        example: '{print}'
-        demo_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
+-   name: '{print}'
+    explanation: Med`{print}` må du bruke paranteser
+    example: '{print}'
+    demo_code: "{print}('hei!')"
+-   name: '{print} med var'
+    explanation: Med `{print}` må vi bruke parantes og komma for å skrive ut flere ting
+    example: '{print}'
+    demo_code: "navn = 'Hedy'\n{print}('Mitt navn er ', navn)"
+-   name: '{print} with var'
+    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+    example: '{print}'
+    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
+-   name: ask something with {input}
+    explanation: Use `{input}` instead of `{ask}` to ask something
+    example: '{input}'
+    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
