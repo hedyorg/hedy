@@ -248,9 +248,15 @@ adventures:
                     {else}:
                         {print} 'Viel Glück beim nächsten Mal...'
                     ```
+                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "Name = 'Hedy'\n{print}('Ich heiße ', Name)"
                 story_text: "## Level 18\nWir sind bei richtigem Python Code angekommen! Das bedeutet dass wir ab jetzt rund Klammern mit den Befehlen {print} und {range} benutzen müssen.\nDas sieht so aus:\n```\n{print}('Ich heiße Hedy!')\n```\nWenn du mehr als ein Element ausgeben möchtest, musst du sie mit Kommas trennen.\n```\nName = 'Hedy'\n{print}('Ich heiße ', Name)\n```"
+                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
+                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
+                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                story_text_2: If you want to print more than one item, you need to separate them by commas.
+                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
     story:
         name: "Geschichte"
         description: "Schreibe eine Geschichte"
