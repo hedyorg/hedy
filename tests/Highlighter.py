@@ -112,12 +112,28 @@ class HighlightTester(unittest.TestCase):
 
 
     def _getRules(self,level,lang="en"):
+        os.chdir(os.path.dirname(__file__) +"/..")
+
+        fileRegexTrad = open('highlighting/highlighting-trad.json')
+        dataRegexTrad = json.load(fileRegexTrad)
+        fileRegexTrad.close()
+
+        if lang not in dataRegexTrad.keys():
+            lang = 'en'
+
+        regexTrad = dataRegexTrad[lang]
+
 
         # open data for regex
-        os.chdir(os.path.dirname(__file__) +"/..")
-        file = open('highlighting/highlightingRules/highlighting-'+lang+'.json') 
-        dataRegex = json.load(file)
-        file.close()
+        fileRegex = open('highlighting/highlighting.json')
+        dataRegex = json.load(fileRegex)
+        fileRegex.close()
+
+        for lvlRules in dataRegex:
+            for state in lvlRules["rules"]:
+                for rule in lvlRules["rules"][state]:
+                    for key in regexTrad:
+                        rule['regex'] = rule['regex'].replace("(__"+key+"__)", regexTrad[key])
 
         # get rules for the level
         Rules = [item for item in dataRegex if item['name']==level]
