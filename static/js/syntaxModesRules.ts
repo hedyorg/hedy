@@ -83,7 +83,6 @@ if ((window as any).define) {
 
       function ThisLevelHighlightRules(this: any) {
         this.$rules = level.rules;
-        console.log(level.rules);
         this.normalizeRules();
       };
       oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
