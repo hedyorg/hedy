@@ -28,12 +28,13 @@ function convertReg(oldReg:string, TRAD:Map<string,string> ) {
   var newReg = oldReg;
 
   TRAD.forEach((value,key) => {
-    newReg = newReg.replace("(__" + key + "__)", value); 
+    key = key;
+    var reg = new RegExp('\\(__' + key + '__\\)','g');
+    newReg = newReg.replace(reg, value); 
   });
 
   return newReg;
 }
-
 
 
 
@@ -42,6 +43,7 @@ import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json';
 let TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
 
 var lang = window.State.keyword_language as string;
+
 if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
 
 // get the traduction
@@ -65,6 +67,7 @@ for (let key in REGEX_tr) {
 
 
 
+
 // Only do this work if the 'define' function is actually available at runtime.
 // If not, this script got included on a page that didn't include the Ace
 // editor. No point in continuing if that is the case.
@@ -80,6 +83,7 @@ if ((window as any).define) {
 
       function ThisLevelHighlightRules(this: any) {
         this.$rules = level.rules;
+        console.log(level.rules);
         this.normalizeRules();
       };
       oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
