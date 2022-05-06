@@ -228,7 +228,7 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
-    def test_if_equality_with_ise(self):
+    def test_if_equality_with_is(self):
         code = textwrap.dedent("""\
         naam is Hedy
         if naam is Hedy print 'leuk'""")
@@ -748,4 +748,4 @@ class TestsLevel6(HedyTester):
         else:
           print(f'meh')""")
 
-        self.multi_level_tester(max_level=6, code=code, expected=expected)
+        self.multi_level_tester(max_level=7, code=code, expected=expected)

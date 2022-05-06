@@ -26,7 +26,7 @@ class TestsLevel9(HedyTester):
 
 
     expected = textwrap.dedent("""\
-    for i in range(int(5)):
+    for i in range(int('5')):
       print(f'koekoek')
       time.sleep(0.1)""")
 
@@ -67,7 +67,7 @@ class TestsLevel9(HedyTester):
     expected = textwrap.dedent("""\
     print(f'kassabon')
     prijs = '0'
-    for i in range(int(7)):
+    for i in range(int('7')):
       ingredient = input(f'wat wil je kopen?')
       if str(ingredient) == str('appel'):
         prijs = int(prijs) + int(1)
@@ -86,7 +86,7 @@ class TestsLevel9(HedyTester):
     expected = textwrap.dedent("""\
     kleur = 'groen'
     if str(kleur) == str('groen'):
-      for i in range(int(3)):
+      for i in range(int('3')):
         print(f'mooi')
         time.sleep(0.1)""")
 
@@ -94,7 +94,7 @@ class TestsLevel9(HedyTester):
       code=code,
       expected=expected,
       expected_commands=['is', 'if', 'repeat', 'print'])
-  
+
   def test_repeat_comment_nested_if(self):
     code = textwrap.dedent("""\
     print 'kassabon'
@@ -108,7 +108,7 @@ class TestsLevel9(HedyTester):
     expected = textwrap.dedent("""\
     print(f'kassabon')
     prijs = '0'
-    for i in range(int(7)):
+    for i in range(int('7')):
       ingredient = input(f'wat wil je kopen?')
       if str(ingredient) == str('appel'):
         prijs = int(prijs) + int(1)
@@ -126,7 +126,7 @@ class TestsLevel9(HedyTester):
 
 
     expected = textwrap.dedent("""\
-    for i in range(int(5)):
+    for i in range(int('5')):
       if str('antwoord2') == str('10'):
         print(f'Goedzo')
       else:
@@ -147,7 +147,7 @@ class TestsLevel9(HedyTester):
 
 
     expected = textwrap.dedent("""\
-    for i in range(int(3)):
+    for i in range(int('3')):
       food = input(f'What do you want?')
       if str(food) == str('pizza'):
         print(f'nice!')

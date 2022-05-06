@@ -1546,11 +1546,14 @@ class ConvertToPython_8_9(ConvertToPython_7):
         return "".join(args)
 
     def repeat(self, args):
+        var_name = self.get_fresh_var('i')
+        times = self.process_variable(args[0])
+
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
-        return "for i in range(int(" + str(args[0]) + ")):\n" + body
+        return f"for {var_name} in range(int({times})):\n{body}"
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
