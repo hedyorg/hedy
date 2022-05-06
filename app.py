@@ -13,7 +13,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER, NON_LATIN_LANGUAGES
 import hedyweb
 import hedy_content
 from flask_babel import gettext
@@ -266,7 +266,7 @@ def setup_language():
 
     g.lang = session['lang']
     if 'keyword_lang' not in session:
-        if g.lang in ALL_KEYWORD_LANGUAGES.keys():
+        if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang in NON_LATIN_LANGUAGES:
             g.keyword_lang = g.lang
         else:
             g.keyword_lang = "en"

@@ -1,117 +1,117 @@
 levels:
     1:
         1:
-            question_text: "What's this programming language called?"
+            question_text: "Como é chamada esta linguagem de programação ?"
             mp_choice_options:
             -   option: "Hedy"
-                feedback: "Good job!"
+                feedback: "Bom trabalho!"
             -   option: "Heddy"
-                feedback: "Not this one!"
+                feedback: "Não é bem essa !"
             -   option: "Haydie"
-                feedback: "Not this one!"
+                feedback: "Não é esta !"
             -   option: "Heidi"
-                feedback: "Not this one!"
+                feedback: "Não é esta !"
             correct_answer: "A"
-            hint: "It's named after Hedy Lamarr."
+            hint: "Ela é nomeada em homenagem a Hedy Lamarr."
             question_score: '10'
         2:
-            question_text: "Which command makes text appear?"
+            question_text: "Qual comando faz o texto ser mostrado ?"
             mp_choice_options:
             -   option: |
                     ```
                     {echo}
                     ```
-                feedback: "`{echo}` repeats a given answer."
+                feedback: "`{echo}` repete uma resposta."
             -   option: |
                     ```
                     {print}
                      ```
-                feedback: "Correct!"
+                feedback: "Correto !"
             -   option: |
                     ```
                     hello
                     ```
-                feedback: "Hello isn't a command."
+                feedback: "Alô não é um comando."
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}`, you can ask a question."
+                feedback: "Com `{ask}`, você pode perguntar."
             correct_answer: "B"
             hint: "_?_ Hello world!"
             question_score: '10'
         3:
-            question_text: "How do you ask what someone's favorite color is?"
+            question_text: "Como você pergunta qual a cor favorita de uma pessoa ?"
             mp_choice_options:
             -   option: |
                     ```
                     {print} What is your favorite color?
                     ```
-                feedback: "`{print}` prints text, but it doesn't ask questions."
+                feedback: "`{print}` mostra texto, mas não faz perguntas."
             -   option: |
                     ```
                     {ask} {print} What is your favorite color?
                     ```
-                feedback: "You only need one command, not two."
+                feedback: "Você precisa apenas de um comando, não dois."
             -   option: |
                     ```
                     {ask} What is your favorite color?
                     ```
-                feedback: "Great!"
+                feedback: "Legal !"
             -   option: |
                     ```
                     {echo} What is your favorite color?
                     ```
-                feedback: "`{echo}` repeats your answer back to you."
+                feedback: "`{echo}` repete sua resposta para você."
             correct_answer: "C"
-            hint: "You can {ask} something with the {ask} command"
+            hint: "Você pode perguntar algo com o comando `{ask}`"
             question_score: '10'
         4:
-            question_text: "What is wrong with this code?"
+            question_text: "O que está errado neste código ?"
             code: |-
-                Hi Im Hedy!
-                {ask} Who are you?
-                {echo} Hi...
+                Oi, eu sou Hedy !
+                {ask} Quem é você ?
+                {echo} Oi...
             mp_choice_options:
             -   option: "`{print}` in line 1 is missing."
-                feedback: "Correct!"
+                feedback: "Correto !"
             -   option: "Im in line 1 is spelled wrong."
-                feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
+                feedback: "Im está escrito incorretamente de propósito; Hedy ainda não sabe usar apóstrofos."
             -   option: "`{echo}` isn't a command."
-                feedback: "`{echo}` is a command, there's another mistake."
+                feedback: "`{echo}` é um comando, há um outro erro."
             -   option: "Nothing! This is a perfect code!"
-                feedback: "Wrong, look carefully!"
+                feedback: "Errado, olhe com atenção !"
             correct_answer: "A"
-            hint: "Line 1 doesn't seem right"
+            hint: "A linha 1 não parece correta"
             question_score: '10'
         5:
-            question_text: "Which command is missing in line 2?"
+            question_text: "Qual comando está faltando na linha 2?"
             code: |-
-                {ask} What is your favorite pet?
-                _?_ So your favorite pet is...
+                {ask} Qual é seu bichinho de estimação favorito ?
+                _?_ Então seu bichinho de estimação favorito é...
             mp_choice_options:
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "No, you would like the answer to be repeated back to you."
+                feedback: "Não, você gostaria que a resposta fosse repetida para você."
             -   option: |
                     ```
                     Hedy
                     ```
-                feedback: "Hedy isn't a command."
+                feedback: "Hedy não é um comando."
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}` you can ask a question."
+                feedback: "Com `{ask}` você pode fazer uma pergunta."
             -   option: |
                     ```
                     {echo}
                     ```
-                feedback: "Right on!"
+                feedback: "Isso !"
             correct_answer: "D"
-            hint: "You want to see the answer at the end of line 2..."
+            hint: "Você quer ver a resposta no final da linha 2..."
             question_score: '10'
         6:
             question_text: "What's wrong with this code?"
@@ -524,14 +524,14 @@ levels:
                 answers {is} yes, no, maybe
                 {print} answers {at} {random}
             mp_choice_options:
-                -   option: "Line 1 needs to say `{print}` instead of `{ask}`"
-                    feedback: "No, that's not wrong."
-                -   option: "Line 2 needs to say `{ask}` instead of `{print}`"
-                    feedback: "No that's not wrong."
-                -   option: "Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe"
-                    feedback: "No, that's not wrong."
-                -   option: "Nothing, this code is perfect"
-                    feedback: "That's right!"
+            -   option: "Line 1 needs to say `{print}` instead of `{ask}`"
+                feedback: "No, that's not wrong."
+            -   option: "Line 2 needs to say `{ask}` instead of `{print}`"
+                feedback: "No that's not wrong."
+            -   option: "Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe"
+                feedback: "No, that's not wrong."
+            -   option: "Nothing, this code is perfect"
+                feedback: "That's right!"
             correct_answer: "D"
             hint: "Does this code even have a mistake?"
             question_score: '10'
@@ -542,24 +542,24 @@ levels:
                 answers yes, no, maybe
                 {print} answers {at} {random}
             mp_choice_options:
-                -   option: "Line 2 needs to say question instead of answers"
-                    feedback: "No that's not right"
-                -   option: "Line 2 needs the `{is}` command"
-                    feedback: "Correct"
-                -   option: "Line 3 needs to say answer instead of answers"
-                    feedback: "No the variable's called answers"
-                -   option: "Nothing! This code is great!"
-                    feedback: "Actually, line 2 has a mistake."
+            -   option: "Line 2 needs to say question instead of answers"
+                feedback: "No that's not right"
+            -   option: "Line 2 needs the `{is}` command"
+                feedback: "Correct"
+            -   option: "Line 3 needs to say answer instead of answers"
+                feedback: "No the variable's called answers"
+            -   option: "Nothing! This code is great!"
+                feedback: "Actually, line 2 has a mistake."
             correct_answer: "B"
             hint: "There is something wrong with line 2."
             question_score: '10'
         7:
             question_text: "What does the `{add}` command do?"
             code: |-
-                    books {is} Harry Potter, de Hobbit, Green eggs and Ham
-                    your_book {is} {ask} What is your favorite book?
-                    {add} your_book {to} books
-                    {print} books {at} {random}
+                books {is} Harry Potter, de Hobbit, Green eggs and Ham
+                your_book {is} {ask} What is your favorite book?
+                {add} your_book {to} books
+                {print} books {at} {random}
             mp_choice_options:
             -   option: "The `{add}` command removes a random book from the list"
                 feedback: "The remove command removes, the add command adds"
@@ -575,10 +575,10 @@ levels:
         8:
             question_text: "What is the output of this code?"
             code: |-
-                    crisps {is} sea salt, paprika, sour cream
-                    {remove} sea salt {from} crisps
-                    {remove} paprika {from} crisps
-                    {print} crisps {at} {random}
+                crisps {is} sea salt, paprika, sour cream
+                {remove} sea salt {from} crisps
+                {remove} paprika {from} crisps
+                {print} crisps {at} {random}
             mp_choice_options:
             -   option: "You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`"
                 feedback: "Take a look at the `{remove}` commands"
@@ -594,10 +594,10 @@ levels:
         9:
             question_text: "What's wrong with this code?"
             code: |-
-                    colors {is} blue, purple, green
-                    chosen_color {is} {ask} Which haircolor wouldn't your like to have?
-                    {remove} chosen_color {from} colors
-                    {print} I will dye my hair color {at} {random}
+                colors {is} blue, purple, green
+                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
+                {remove} chosen_color {from} colors
+                {print} I will dye my hair color {at} {random}
             mp_choice_options:
             -   option: "Line 3 should say: `{remove}` blue `{from}` colors"
                 feedback: "Maybe you want blue hair though!"
@@ -613,11 +613,11 @@ levels:
         10:
             question_text: "What should be on the _?_?"
             code: |-
-                    walkers {is} dad, mom, Sam, Petra
-                    walked_yesterday {is} {ask} Who walked the dogs yesterday?
-                    {print} walked_yesterday shouldn't have to walk the dogs again today
-                    _?_
-                    {print} walkers {at} {random} , it's your turn to walk the dogs!
+                walkers {is} dad, mom, Sam, Petra
+                walked_yesterday {is} {ask} Who walked the dogs yesterday?
+                {print} walked_yesterday shouldn't have to walk the dogs again today
+                _?_
+                {print} walkers {at} {random} , it's your turn to walk the dogs!
             mp_choice_options:
             -   option: |
                     ```
@@ -1346,26 +1346,26 @@ levels:
                 {print} 'I'm blue'
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
-              -   option: |
-                      ```
-                      I'm
-                      ```
-                  feedback: "That's right!"
-              -   option: |
-                      ```
-                      {print}
-                      ```
-                  feedback: "`{print}` is spelled correctly"
-              -   option: |
-                      ```
-                      {repeat}
-                      ```
-                  feedback: "`{repeat}` is spelled correctly"
-              -   option: |
-                      ```
-                      {times}
-                      ```
-                  feedback: "`{times}` is spelled correctly"
+            -   option: |
+                    ```
+                    I'm
+                    ```
+                feedback: "That's right!"
+            -   option: |
+                    ```
+                    {print}
+                    ```
+                feedback: "`{print}` is spelled correctly"
+            -   option: |
+                    ```
+                    {repeat}
+                    ```
+                feedback: "`{repeat}` is spelled correctly"
+            -   option: |
+                    ```
+                    {times}
+                    ```
+                feedback: "`{times}` is spelled correctly"
             correct_answer: "A"
             hint: "I'm is wrong, you can't use apostrophes"
             question_score: '10'
@@ -1374,10 +1374,10 @@ levels:
             code: |-
                 {repeat} 100 {times} {print} 'Hedy is awesome!'
             mp_choice_options:
-                -   option: "Correct"
-                    feedback: "That's right!"
-                -   option: "Wrong"
-                    feedback: "That's not it"
+            -   option: "Correct"
+                feedback: "That's right!"
+            -   option: "Wrong"
+                feedback: "That's not it"
             correct_answer: "A"
             hint: "The code is correct!"
             question_score: '10'
@@ -1456,12 +1456,12 @@ levels:
         9:
             question_text: "Welke Hedy code hoort bij dit resultaat ?"
             code: |-
-              Batman was flying through Gotham.
-              When suddenly he heard someone screaming...
-              Help !
-              Help !
-              Help !
-              Please help me !"
+                Batman was flying through Gotham.
+                When suddenly he heard someone screaming...
+                Help !
+                Help !
+                Help !
+                Please help me !"
             mp_choice_options:
             -   option: |
                     ```
@@ -1635,37 +1635,37 @@ levels:
                 Pizza
                 Hamburger
             mp_choice_options:
-            - option: |
-                  ```
-                  {print} 'Welcome to restaurant Hedy'
-                  food = {ask} 'What whould you like to eat?'
-                  {print} food
-                  ```
-              feedback: "You need to take 2 orders."
-            - option: |
-                  ```
-                  {repeat} 2 {times}
-                      {print} 'Welcome to restaurant Hedy'
-                      food = {ask} 'What whould you like to eat?'
-                      {print} food
-                  ```
-              feedback: "The welcome line would be printed twice in this code too"
-            - option: |
-                  ```
-                  {print} 'Welcome to restaurant Hedy'
-                  {repeat} 2 {times}
-                      food = {ask} 'What would you like to eat?'
-                  {print} food
-                  ```
-              feedback: "Now only the last order is printed."
-            - option: |
-                  ```
-                  {print} 'Welcome to restaurant Hedy'
-                  {repeat} 2 {times}
-                      food = {ask} 'What would you like to eat?'
-                      {print} food
-                  ```
-              feedback: "Awesome!"
+            -   option: |
+                    ```
+                    {print} 'Welcome to restaurant Hedy'
+                    food = {ask} 'What whould you like to eat?'
+                    {print} food
+                    ```
+                feedback: "You need to take 2 orders."
+            -   option: |
+                    ```
+                    {repeat} 2 {times}
+                        {print} 'Welcome to restaurant Hedy'
+                        food = {ask} 'What whould you like to eat?'
+                        {print} food
+                    ```
+                feedback: "The welcome line would be printed twice in this code too"
+            -   option: |
+                    ```
+                    {print} 'Welcome to restaurant Hedy'
+                    {repeat} 2 {times}
+                        food = {ask} 'What would you like to eat?'
+                    {print} food
+                    ```
+                feedback: "Now only the last order is printed."
+            -   option: |
+                    ```
+                    {print} 'Welcome to restaurant Hedy'
+                    {repeat} 2 {times}
+                        food = {ask} 'What would you like to eat?'
+                        {print} food
+                    ```
+                feedback: "Awesome!"
             correct_answer: "D"
             hint: "Pay attention to what sould be repeated and what should only be printed once."
             question_score: '10'
@@ -1999,7 +1999,7 @@ levels:
             question_score: '10'
         9:
             question_text: "How many `{if}` commands can be placed inside another `{if}` command?"
-            code: |-
+            code: |
             mp_choice_options:
             -   option: "None, that is not allowed"
                 feedback: "You are allowed to"
@@ -2345,9 +2345,9 @@ levels:
             -   option: "I love pancakes"
                 feedback: "Line 2 says `{for}` each meal in the list of meals. So each meal is printed."
             -   option: |-
-                  I love pizza
-                  I love pasta
-                  I love pancakes
+                    I love pizza
+                    I love pasta
+                    I love pancakes
                 feedback: "Great!"
             correct_answer: "D"
             hint: "Line 2 says for each meal in the list of meals. So each meal is printed."
@@ -2364,10 +2364,10 @@ levels:
             -   option: "dogs, cats, hamsters, chickens are lovely pets"
                 feedback: "Each animal gets their own line in the output."
             -   option: |-
-                  dogs are lovely pets
-                  cats are lovely pets
-                  hamsters are lovely pets
-                  chickens are lovely pets
+                    dogs are lovely pets
+                    cats are lovely pets
+                    hamsters are lovely pets
+                    chickens are lovely pets
                 feedback: "Great!"
             -   option: "You don't know yet. Because it chooses one of the animals {at} {random}."
                 feedback: "Line 2 says {for} each animal in the list of animals. So each animal is {print}ed."
@@ -2421,18 +2421,18 @@ levels:
                     {print} player ' chooses ' choices {at} {random}
             mp_choice_options:
             -   option: |-
-                  Kelly chooses rock
+                    Kelly chooses rock
                 feedback: "Meredith wants to play too!"
             -   option: |-
-                  Meredith chooses scissors
-                  Kelly chooses rock
+                    Meredith chooses scissors
+                    Kelly chooses rock
                 feedback: "So close! But Kelly is first in the list, so she goes first"
             -   option: |-
-                  Meredith chooses paper
+                    Meredith chooses paper
                 feedback: "Kelly wants to play too!"
             -   option: |-
-                  Kelly chooses paper
-                  Meredith chooses scissors
+                    Kelly chooses paper
+                    Meredith chooses scissors
                 feedback: "Amazing!"
             correct_answer: "D"
             hint: "Each player will pick an option. The player that's first on the list will go first."
@@ -2445,26 +2445,26 @@ levels:
                 _?_
                     {print} name ' has to eat ' food {at} {random} ' for dinner'
             mp_choice_options:
-            - option: |
-                  ```
-                  {for} name {in} names
-                  ```
-              feedback: "You are on fire!"
-            - option: |
-                  ```
-                  {for} names {in} name
-                  ```
-              feedback: "No it should be for each name in the list nameS, so the other way around"
-            - option: |
-                  ```
-                  {for} food {in} food
-                  ```
-              feedback: "Each name should be told what they will have for dinner."
-            - option: |
-                  ```
-                  {for} name {in} food
-                  ```
-              feedback: "Each name should be told what they will have for dinner."
+            -   option: |
+                    ```
+                    {for} name {in} names
+                    ```
+                feedback: "You are on fire!"
+            -   option: |
+                    ```
+                    {for} names {in} name
+                    ```
+                feedback: "No it should be for each name in the list nameS, so the other way around"
+            -   option: |
+                    ```
+                    {for} food {in} food
+                    ```
+                feedback: "Each name should be told what they will have for dinner."
+            -   option: |
+                    ```
+                    {for} name {in} food
+                    ```
+                feedback: "Each name should be told what they will have for dinner."
             correct_answer: "A"
             hint: "Each name should be told what they will have for dinner."
             question_score: '10'
