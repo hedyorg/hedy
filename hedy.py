@@ -1847,21 +1847,11 @@ def get_remaining_rules(orig_def, sub_def):
     result_cmd_list   = ' | '.join(result_cmd_list) # turn the result list into a string
     return result_cmd_list
 
-def relax_keywords(keywords, lang):
-    return keywords
-    # def ar_relax_function(k):
-    #     result = "*ـ"
-    #     for letter in k:
-
-
 
 def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
     keywords = get_keywords_for_language(lang)
-
-    # relax keyword rules according to language:
-    keywords = relax_keywords(keywords, lang)
 
     result = merge_grammars(result, keywords, 1)
     # then keep merging new grammars in

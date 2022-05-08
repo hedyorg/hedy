@@ -141,7 +141,7 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(code=code, expected=expected, output=output, lang='ar')
 
     def test_print_ar_tatweel(self):
-        code = "ـــقولـــ أ"
+        code = "ـــقــوـلـــ أ"
         expected = "print('أ')"
         output = 'أ'
 
