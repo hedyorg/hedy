@@ -17,41 +17,41 @@ levels:
         2:
             question_text: Hvilken kommando brukes til å vise tekst ?
             mp_choice_options:
-            -   option: ekko
-                feedback: ekko sier hva som ble svart.
-            -   option: skriv
+            -   option: "```\n{echo}\n```\n"
+                feedback: '`{echo}` sier hva som ble svart.'
+            -   option: "```\n{print}\n```"
                 feedback: Riktig !
-            -   option: hallo
+            -   option: "```\nhallo\n```\n"
                 feedback: hello er ikke en kommando.
-            -   option: spør
-                feedback: Med spør, kan du spørre et spørsmål.
+            -   option: "```\n{ask}\n```\n"
+                feedback: Med `{ask}`, kan du spørre et spørsmål.
             correct_answer: B
             hint: _?_ Hallo verden !
             question_score: '10'
         3:
             question_text: Hvordan spør du hva noen sin favorittfarge er ?
             mp_choice_options:
-            -   option: skriv Hva er din favorittfarge?
-                feedback: skriv skriver ut tekst, men den stiller ikke spørsmål.
-            -   option: spør skriv Hva er din favorittfarge?
+            -   option: "```\n{print} Hva er din favorittfarge?\n```\n"
+                feedback: '`{print}` skriver ut tekst, men den stiller ikke spørsmål.'
+            -   option: "```\n{ask} {print} Hva er din favorittfarge?\n```\n"
                 feedback: Du trenger bare en kommando, ikke to.
-            -   option: spør Hva er din favorittfarge?
+            -   option: "```\n{ask} Hva er din favorittfarge?\n```\n"
                 feedback: Bra!
-            -   option: ekko Hva er din favorittfarge?
-                feedback: ekko gjentar svaret ditt.
+            -   option: "```\n{echo} Hva er din favorittfarge?\n```\n"
+                feedback: '`{echo}` gjentar svaret ditt.'
             correct_answer: C
-            hint: Du kan stille spørsmål med spør-kommandoen
+            hint: Du kan stille spørsmål med `{ask}` kommandoen
             question_score: '10'
         4:
             question_text: Hva er feil i denne koden?
-            code: "Hei eg er Hedy!\nspør Hvem er du?\nekko Hei..."
+            code: "Hei eg er Hedy!\n{ask} Hvem er du?\n{echo} Hei..."
             mp_choice_options:
-            -   option: Linje 1 mangler skriv-kommandoen.
+            -   option: Linje 1 mangler `{print}` kommandoen.
                 feedback: Korrekt!
             -   option: På linje 1 er 'jeg' feilstavet.
                 feedback: "'Jeg' er feilstavet med vilje fordi Hedy kun forstår nynorsk."
-            -   option: ekko er ikke en kommando.
-                feedback: ekko er en kommando, det er en annen ting som er feil.
+            -   option: '`{echo}` er ikke en kommando.'
+                feedback: '`{echo}` er en kommando, det er en annen ting som er feil.'
             -   option: Ingenting! Dette er perfekt kode!
                 feedback: Det er feil, se nøye gjennom koden!
             correct_answer: A
@@ -59,41 +59,41 @@ levels:
             question_score: '10'
         5:
             question_text: Hvilken kommando mangler på linje 2?
-            code: "spør Hva er ditt favorittdyr?\n_?_ Så ditt favorittdyr er..."
+            code: "{ask} Hva er ditt favorittdyr?\n_?_ Så ditt favorittdyr er..."
             mp_choice_options:
-            -   option: skriv
+            -   option: "```\n{print}\n```\n"
                 feedback: Nei ikke helt riktig, du ønsker at svaret skal bli sagt tilbake til deg.
-            -   option: eko
+            -   option: "```\nHedy\n```\n"
                 feedback: eko er ikke en kommando.
-            -   option: spør
-                feedback: Med spør kan du stille et spørsmål.
-            -   option: ekko
+            -   option: "```\n{ask}\n```\n"
+                feedback: Med `{ask}` kan du stille et spørsmål.
+            -   option: "```\n{echo}\n```\n"
                 feedback: Hurra! Riktig!
             correct_answer: D
             hint: Du har lyst til å se svaret på slutten av linje 2...
             question_score: '10'
         6:
             mp_choice_options:
-            -   option: På linje 1 må skriv byttes med spør.
-                feedback: skriv på linje 1 er korrekt; tenk på hvordan man staver ordene.
-            -   option: På linje 2 er spør feilstavet.
+            -   option: På linje 1 må `{print}` byttes med `{ask}`.
+                feedback: '`{print}` på linje 1 er korrekt; tenk på hvordan man staver ordene.'
+            -   option: I linje 2 skal `{print}` erstattes med `{ask}`.
                 feedback: Kjempebra! Du er oppmerksom!
-            -   option: Linje 3 må begynne med skriv istedenfor ekko.
-                feedback: ekko er korrekt; tenk på hvordan man staver ordene.
-            -   option: skriv på linje 4 er feilstavet.
-                feedback: Det er en stavefeil en annen plass...
+            -   option: Linje 3 må begynne med `{print}` istedenfor `{echo}`.
+                feedback: '`{echo}` er korrekt; tenk på hvordan man staver ordene.'
+            -   option: '`{print}` på linje 4 er feilstavet.'
+                feedback: Det er en feil en annen plass...
             question_text: Hva er feil med denne koden?
-            code: "skriv Hei jeg er Hedy!\nsøpr Hvilket fotballlag heier du på?\nekko Du heier på...\nskriv Kult! Jeg også!"
+            code: "{print} Hei jeg er Hedy!\n{print} Hvilket fotballlag heier du på?\n{echo} Du heier på...\n{print} Kult! Jeg også!"
             correct_answer: B
-            hint: Sjekk hvordan kommandoene er stavet.
+            hint: Sjekk hvordan `{print}` kommandoene er stavet.
             question_score: '10'
         7:
             question_text: Hva er feil med denne koden?
-            code: "skriv Velkommen til Hedys restaurant!\nspør Hva vil du ha å spise?\nekko Så du vil bestille...\nskriv Det skal bli! Nyt maten!"
+            code: "{print} Velkommen til Hedys restaurant!\n{ask} Hva vil du ha å spise?\n{echo} Så du vil bestille...\n{print} Det skal bli! Nyt maten!"
             mp_choice_options:
-            -   option: På linje 1 må skriv byttes ut med spør
+            -   option: På linje 1 må `{print}` byttes ut med `{ask}`
                 feedback: Er du sikker på at det er noe som er feil?
-            -   option: På linje 1 må skriv byttes ut med ekko
+            -   option: På linje 1 må `{print}` byttes ut med `{echo}`
                 feedback: Er du sikker på at det er noe som er feil?
             -   option: På linje 3 må ekko byttes ut med skriv
                 feedback: Er du sikker på at det er noe som er feil?
@@ -673,7 +673,7 @@ levels:
             -   option: tilfeldig
                 feedback: Nei, du trenger ellers.
             -   option: ellers
-                feedback: Flott !
+                feedback: Flott!
             -   option: skriv
                 feedback: Print is already there, we need a word before it !
             correct_answer: C
@@ -690,7 +690,7 @@ levels:
             -   option: ellers
                 feedback: There already is an else command
             -   option: skriv
-                feedback: Rått !
+                feedback: Rått!
             correct_answer: D
             hint: After else a print command follows
             question_score: '10'
