@@ -39,6 +39,16 @@ function tryRunButtonStep() {
   $('#editor').addClass("z-30");
   $('#code_output').addClass("z-30");
 
+  $.ajax({
+      type: 'GET',
+      url: '/get_tutorial_step/code_snippet/',
+      dataType: 'json'
+    }).done(function(response: any) {
+       theGlobalEditor?.setValue(response.code);
+    }).fail(function() {
+       theGlobalEditor?.setValue("print Hello world!\nprint I'm learning Hedy with the tutorial!");
+    });
+
   theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
   theGlobalEditor?.setOptions({readOnly: true});
 

@@ -1161,6 +1161,9 @@ def tutorial_steps(step):
 
 @app.route('/get_tutorial_step/<step>', methods=['GET'])
 def get_tutorial_translation(step):
+    # We also retrieve the example code snippet this way to reduce the need of a new function
+    if step == "code_snippet":
+      return jsonify({'code': gettext('tutorial_code_snippet')}), 200
     try:
         step = int(step)
     except:
