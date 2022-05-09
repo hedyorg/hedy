@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             5:
@@ -44,6 +43,11 @@ adventures:
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
                 story_text: "## Level 18\nWe arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
+                story_text_2: If you want to print more than one item, you need to separate them by commas.
+                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
+                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
+                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
             1:
                 story_text: "## به هِدی خوش آمدی!\nدر مرحله‌ی اول می‌تونی از دستورهای `{print}`، `{ask}` و `{echo}` استفاده کنی.\nکدت رو توی بخش «برنامه‌نویسی» وارد کن. یا دکمه‌ی سبز توی بخش «نمونه کد» رو فشار بده که کد اتوماتیک برات تایپ بشه!\nخودت، کدت رو با فشردن دکمه «اجرای کد»، زیر بخش «برنامه‌نویسی» اجرا کن.\n\nمی‌تونی با دستور `{print}` یک متن رو روی صفحه چاپ کنی.\n"
                 example_code: "## نمونه کد\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
@@ -105,6 +109,7 @@ adventures:
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[random]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
     story:
         levels:
             2:
@@ -163,12 +168,10 @@ adventures:
                 start_code: '# place your code here'
         name: Story
         description: Story
-        image: story.png
         default_save_name: Story
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!
-        image: story.png
         default_save_name: Parrot
         levels:
             1:
@@ -219,7 +222,6 @@ adventures:
                 start_code: '# place your code here'
         name: Sing a song!
         description: Print a song
-        image: songs.png
         default_save_name: Song
     turtle:
         levels:
@@ -259,7 +261,6 @@ adventures:
                 start_code: "hoeken = {ask} 'How many angles should I draw?'\n"
         name: Turtle
         description: Make your own drawing
-        image: turtle.gif
         default_save_name: turtle
     dishes:
         name: Dishes?
@@ -293,7 +294,6 @@ adventures:
                 story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
                 example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
                 start_code: '{print} Who does the dishes?'
-        image: dishes.png
         default_save_name: Dishes
     dice:
         levels:
@@ -328,7 +328,6 @@ adventures:
                 start_code: '# place your code here'
         name: Dice
         description: Make your own dice
-        image: dice.png
         default_save_name: Dice
     calculator:
         levels:
@@ -360,7 +359,6 @@ adventures:
                 start_code: '# place your code here'
         name: Calculator
         description: Create a calculator
-        image: calculator.png
         default_save_name: Calculator
     restaurant:
         levels:
@@ -433,7 +431,6 @@ adventures:
                 start_code: '# place your code here'
         name: Restaurant
         description: Create your own virtual restaurant
-        image: restaurant.png
         default_save_name: Restaurant
     fortune:
         name: Fortune teller
@@ -483,7 +480,6 @@ adventures:
                 story_text_2: "## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
                 start_code: '# place your code here'
         description: Let Hedy predict the future
-        image: fortuneteller.png
         default_save_name: Fortune Teller
     haunted:
         name: Haunted House
@@ -527,7 +523,6 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nnumbers = [1, 2, 3]\ni = numbers[{random}]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mension'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
                 start_code: '# place your code here'
         description: escape from the haunted house
-        image: hauntedhouse.gif
         default_save_name: Haunted House
     quizmaster:
         levels:
@@ -537,7 +532,6 @@ adventures:
                 start_code: '# place your code here'
         name: Quizmaster
         description: Make your own quiz!
-        image: quizmaster.png
         default_save_name: Quizmaster
     next:
         name: What's next?
@@ -611,12 +605,10 @@ adventures:
                 story_text: "## What's next?\nIn the next level you will learn a real Python way to use `{print}`.\n"
                 start_code: "{print} 'Lets go to the next level!'"
         description: What's Next?
-        image: hedy-logo.png
         default_save_name: next
     rock:
         name: Rock, paper, scissors
         description: Make your own rock, paper, scissors game
-        image: rock.png
         default_save_name: Rock
         levels:
             1:
@@ -658,7 +650,6 @@ adventures:
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         default_save_name: Piggy Bank
         levels:
             12:
@@ -672,7 +663,6 @@ adventures:
     language:
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         default_save_name: language
         levels:
             5:
@@ -686,7 +676,6 @@ adventures:
     secret:
         name: SuperSpy
         description: Make your own spy code
-        image: story.png
         default_save_name: language
         levels:
             12:
@@ -717,11 +706,9 @@ adventures:
                 example_code: "## Example code\n```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
-        image: story.png
         default_save_name: Tic
     blackjack:
         description: Try to get as close to 21 as you can
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:

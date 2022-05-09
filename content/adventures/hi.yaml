@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -381,9 +380,15 @@ adventures:
                     {else}:
                         {print} 'अगली बार बेहतर किस्मत..'
                     ```
+                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
                 story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
+                story_text_2: If you want to print more than one item, you need to separate them by commas.
+                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
+                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
     story:
         levels:
             4:
@@ -691,7 +696,6 @@ adventures:
                 start_code: '#अपना कोड यहां डालें'
         name: कहानी
         description: कहानी
-        image: कहानी.png
         default_save_name: कहानी
     turtle:
         levels:
@@ -878,7 +882,6 @@ adventures:
                     Now that we can do math with Hedy, we can draw all the figures we want!
         name: Turtle
         description: Make your own drawing
-        image: turtle.gif
         default_save_name: turtle
     dishes:
         name: Dishes?
@@ -1005,7 +1008,6 @@ adventures:
                 start_code: '{print} Who does the dishes?'
                 story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
                 example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
-        image: dishes.png
         default_save_name: Dishes
         description: Use the computer to see who does the dishes (Start at level 2)
     dice:
@@ -1132,7 +1134,6 @@ adventures:
                 start_code: '# place your code here'
         name: Dice
         description: Make your own dice
-        image: dice.png
         default_save_name: Dice
     rock:
         default_save_name: Rock
@@ -1300,7 +1301,6 @@ adventures:
                 start_code: '# place your code here'
         name: Rock, paper, scissors
         description: Make your own rock, paper, scissors game
-        image: rock.png
     calculator:
         levels:
             9:
@@ -1438,7 +1438,6 @@ adventures:
                 start_code: '# place your code here'
         name: Calculator
         description: Create a calculator
-        image: calculator.png
         default_save_name: Calculator
     restaurant:
         levels:
@@ -1802,7 +1801,6 @@ adventures:
                 start_code: '# place your code here'
         name: Restaurant
         description: Create your own virtual restaurant
-        image: restaurant.png
         default_save_name: Restaurant
     fortune:
         levels:
@@ -2047,7 +2045,6 @@ adventures:
                 story_text_2: "## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
         name: Fortune teller
         description: Let Hedy predict the future
-        image: fortuneteller.png
         default_save_name: Fortune Teller
     piggybank:
         levels:
@@ -2091,12 +2088,10 @@ adventures:
                 start_code: '# place your code here'
         name: Piggy Bank
         description: Count your pocketmoney!
-        image: piggy.png
         default_save_name: Piggy Bank
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
-        image: quizmaster.png
         default_save_name: Quizmaster
         levels:
             14:
@@ -2131,7 +2126,6 @@ adventures:
         default_save_name: language
         name: Language
         description: Practice words in a foreign language
-        image: languages.png
         levels:
             5:
                 story_text: |
@@ -2457,11 +2451,9 @@ adventures:
         name: What's next?
         description: What's Next?
         default_save_name: next
-        image: ' '
     parrot:
         name: तोता
         description: अपना खुद का ऑनलाइन पालतू तोता बनाएं जो आपकी नकल करेगा!
-        image: कहानी.png
         default_save_name: तोता
         levels:
             1:
@@ -2710,12 +2702,10 @@ adventures:
                     ```
                 start_code: '# place your code here'
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-        image: songs.png
         default_save_name: Song
     haunted:
         name: Haunted House
         description: escape from the haunted house
-        image: hauntedhouse.gif
         default_save_name: Haunted House
         levels:
             1:
@@ -2952,7 +2942,6 @@ adventures:
                 start_code: '# place your code here'
     secret:
         description: Make your own spy code
-        image: story.png
         default_save_name: language
         levels:
             12:
@@ -2966,7 +2955,6 @@ adventures:
         name: SuperSpy
     tic:
         name: Tic Tac Toe
-        image: story.png
         levels:
             13:
                 story_text: "## Tic Tac Toe\nIn this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.\nThe first player that gets 3 in a row (horizontally, vertically or diagonally) wins!\nHave fun!\n"
@@ -2989,7 +2977,6 @@ adventures:
     blackjack:
         name: Blackjack
         description: Try to get as close to 21 as you can
-        image: story.png
         default_save_name: Blackjack
         levels:
             17:
