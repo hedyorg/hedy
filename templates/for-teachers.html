@@ -1,6 +1,15 @@
 {% extends "auth.html" %}
 
 {% block main %}
+{% if tutorial %}
+<div id="tutorial-pop-up" class="z-50 fixed hidden" style="width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);">
+      <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
+          <h2 id="tutorial_title" class="text-white"></h2>
+          <p id="tutorial_text"></p>
+          <button id="tutorial_next_button" class="green-btn mt-4">{{_('next_step_tutorial')}}</button>
+      </div>
+  </div>
+{% endif %}
 <div id="teacher_classes" class="flex flex-col items-center pb-4 border-b-2">
     <h2>{{_('my_classes')}}</h2>
     {% if teacher_classes %}

@@ -1176,6 +1176,8 @@ def tutorial_steps(step):
         translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
     return translation
 
+def teacher_tutorial_steps(step):
+    return ["Welkom leraar!", "Dit is een test bericht..."]
 
 @app.route('/get_tutorial_step/<step>', methods=['GET'])
 def get_tutorial_translation(step):
@@ -1190,6 +1192,15 @@ def get_tutorial_translation(step):
     translation = tutorial_steps(step)
     return jsonify({'translation': translation}), 200
 
+@app.route('/get_teacher_tutorial_step/<step>', methods=['GET'])
+def get_teacher_tutorial_translation(step):
+    try:
+        step = int(step)
+    except ValueError:
+        return gettext('invalid_tutorial_step'), 400
+
+    translation = teacher_tutorial_steps(step)
+    return jsonify({'translation': translation}), 200
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():

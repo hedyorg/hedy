@@ -2,12 +2,17 @@ import {modal} from "./modal";
 import {pushAchievement, theGlobalEditor} from "./app";
 
 let current_step = 0;
+let student = true;
 
 // We call this function on load -> customize click event of the tutorial button
 (function() {
   $('#tutorial_next_button').off('click').on('click', () => {
     $('#tutorial-pop-up').hide();
-    callNextStep();
+    if (student) {
+      callNextStep();
+    } else {
+      callTeacherNextStep();
+    }
   });
 })();
 
@@ -16,7 +21,7 @@ function codeEditorStep() {
   addHighlightBorder("editor");
 
   relocatePopup(65, 30);
-  tutorialPopup(1);
+  tutorialPopup(current_step);
 }
 
 function codeOutputStep() {
@@ -25,7 +30,7 @@ function codeOutputStep() {
   addHighlightBorder("code_output");
 
   relocatePopup(35, 30);
-  tutorialPopup(2);
+  tutorialPopup(current_step);
 }
 
 function runButtonStep() {
@@ -35,7 +40,7 @@ function runButtonStep() {
   addHighlightBorder("runButtonContainer");
 
   relocatePopup(50, 30);
-  tutorialPopup(3);
+  tutorialPopup(current_step);
 }
 
 function tryRunButtonStep() {
@@ -57,7 +62,7 @@ function tryRunButtonStep() {
   $('#achievement_pop-up').addClass('z-50');
 
   relocatePopup(50, 70);
-  tutorialPopup(4);
+  tutorialPopup(current_step);
 }
 
 function levelDefaultStep() {
@@ -72,7 +77,7 @@ function levelDefaultStep() {
 
   addHighlightBorder("adventures");
   relocatePopup(50, 40);
-  tutorialPopup(5);
+  tutorialPopup(current_step);
 }
 
 function adventureTabsStep() {
@@ -84,11 +89,11 @@ function adventureTabsStep() {
     }
   });
 
-  tutorialPopup(6);
+  tutorialPopup(current_step);
 }
 
 function quizTabStep() {
-  tutorialPopup(7);
+  tutorialPopup(current_step);
 }
 
 function saveShareStep() {
@@ -109,7 +114,7 @@ function cheatsheetStep() {
   $('#cheatsheet_dropdown').addClass('z-40');
   $('#cheatsheet_dropdown').show();
 
-  tutorialPopup(9);
+  tutorialPopup(current_step);
 }
 
 function endTutorial() {
@@ -119,7 +124,7 @@ function endTutorial() {
   $('#cheatsheet_dropdown').hide();
 
   relocatePopup(50, 15);
-  tutorialPopup(10);
+  tutorialPopup(current_step);
 }
 
 function callNextStep() {
@@ -165,6 +170,10 @@ function callNextStep() {
   }
 }
 
+function callTeacherNextStep() {
+  modal.alert("Dit gaat goed!", 3000, true);
+}
+
 function addHighlightBorder(element_id: string) {
   $('#' + element_id).addClass('border-2 rounded-lg border-red-500');
 }
@@ -197,14 +206,33 @@ function tutorialPopup(step: number) {
     });
 }
 
+function teacherTutorialPopup(step: number) {
+    $.ajax({
+      type: 'GET',
+      url: '/get_teacher_tutorial_step/' + step.toString(),
+      dataType: 'json'
+    }).done(function(response: any) {
+        $('#tutorial_title').text(response.translation[0]);
+        $('#tutorial_text').text(response.translation[1]);
+        $('#tutorial-pop-up').fadeIn(800);
+    }).fail(function(response) {
+      modal.alert(response.responseText, 3000, true);
+    });
+}
+
 export function startTutorial() {
   $('#tutorial-mask').show();
   $('#adventures').hide();
   $('#variables_container').hide();
-  tutorialPopup(0);
+  current_step = 0;
+  student = true;
+  tutorialPopup(current_step);
 }
 
 export function startTeacherTutorial() {
-  modal.alert("Let's get started!", 3000, false);
+  $('#tutorial-mask').show();
+  current_step = 0;
+  student = false;
+  teacherTutorialPopup(current_step);
 }
 
