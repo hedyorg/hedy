@@ -28,6 +28,18 @@ class TestsTranslationLevel8(HedyTester):
 
         self.assertEqual(expected, result)
 
+    def test_repeat_indent_english_french(self):
+        code = textwrap.dedent("""\
+        repeat 3 times
+            print 'Hedy is fun!'""")
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="fr", level=self.level)
+        expected = textwrap.dedent("""\
+        repete 3 fois
+            affiche 'Hedy is fun!'""")
+
+        self.assertEqual(expected, result)
+
     def test_repeat_multiple_indent_english_dutch(self):
         code = textwrap.dedent("""\
         repeat 3 times
