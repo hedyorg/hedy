@@ -12,7 +12,7 @@ let current_step = 0;
 })();
 
 function codeEditorStep() {
-  $('#editor').addClass("z-30");
+  $('#editor').addClass("z-40");
   addHighlightBorder("editor");
 
   relocatePopup(65, 30);
@@ -21,7 +21,7 @@ function codeEditorStep() {
 
 function codeOutputStep() {
   removeBorder("editor");
-  $('#code_output').addClass("z-30");
+  $('#code_output').addClass("z-40");
   addHighlightBorder("code_output");
 
   relocatePopup(35, 30);
@@ -31,7 +31,7 @@ function codeOutputStep() {
 function runButtonStep() {
   removeBorder("code_output");
   $('#code_related_buttons').show();
-  $('#runButtonContainer').addClass("z-30");
+  $('#runButtonContainer').addClass("z-40");
   addHighlightBorder("runButtonContainer");
 
   relocatePopup(50, 30);
@@ -39,8 +39,8 @@ function runButtonStep() {
 }
 
 function tryRunButtonStep() {
-  $('#editor').addClass("z-30");
-  $('#code_output').addClass("z-30");
+  $('#editor').addClass("z-40");
+  $('#code_output').addClass("z-40");
 
   $.ajax({
       type: 'GET',
@@ -68,7 +68,7 @@ function levelDefaultStep() {
     if ($(this).attr('data-tab') != "default") {
       $(this).hide();
     } else {
-      $(this).addClass("z-30");
+      $(this).addClass("z-40");
     }
   });
 
@@ -80,16 +80,13 @@ function adventureTabsStep() {
   // Show all tabs except the quiz one
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') != "quiz") {
-      $(this).addClass("z-30");
+      $(this).addClass("z-40");
       $(this).show();
       if ($(this).attr('data-tab') == "story") {
         // Set to false, prevent "are you sure you want to switch without saving" pop-up
         window.State.unsaved_changes = false;
         $(this).click();
       }
-    }
-    if ($(this).attr('data-tab') == "default") {
-      $(this).removeClass("z-30");
     }
   });
 
@@ -100,11 +97,7 @@ function quizTabStep() {
   // Show all tabs (including the quiz one) -> only highlight the quiz tab
   $('.tab').show();
   $('#adventures-buttons').children().each(function() {
-    if ($(this).attr('data-tab') == "quiz") {
-      $(this).addClass("z-30");
-    } else {
-      $(this).removeClass("z-30");
-    }
+    $(this).addClass("z-40");
   });
 
   tutorialPopup(7);
@@ -112,7 +105,7 @@ function quizTabStep() {
 
 function saveShareStep() {
   removeBorder("adventures");
-  $('#level-header').addClass("z-30");
+  $('#level-header').addClass("z-40");
   $('#cheatsheet_container').hide();
   addHighlightBorder("level-header");
 
@@ -121,8 +114,7 @@ function saveShareStep() {
 }
 
 function cheatsheetStep() {
-  $('#code_output').removeClass("z-30");
-  $('#cheatsheet_container').addClass("z-30");
+  $('#cheatsheet_container').addClass("z-40");
   $('#cheatsheet_container').show();
   $('#cheatsheet_dropdown').addClass("z-50");
   $('#cheatsheet_dropdown').show();
