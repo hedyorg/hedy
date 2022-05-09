@@ -13,16 +13,11 @@ let current_step = 0;
 function codeEditorStep() {
   $('#editor').addClass("z-40");
   $('#editor-area').show();
-  $('#code_output').hide();
-  $('#code_related_buttons').hide();
   relocatePopup("right");
   tutorialPopup("De code editor", "In dit venster schrijf je alle code, probeer maar wat in te vullen!");
 }
 
 function codeOutputStep() {
-  // Reset highlight from previous step
-  $('#editor').removeClass("z-40");
-
   $('#code_output').addClass("z-40");
   $('#code_output').show();
   $('#variables_container').hide();
@@ -32,13 +27,7 @@ function codeOutputStep() {
 }
 
 function runButtonStep() {
-  // Reset highlight from previous step
-  $('#code_output').removeClass("z-40");
-
   $('#code_related_buttons').show();
-  $('#debug_container').hide();
-  $('#speak_container').hide();
-
   $('#runButtonContainer').addClass("z-40");
 
   relocatePopup("middle");
@@ -57,10 +46,6 @@ function tryRunButtonStep() {
 }
 
 function levelDefaultStep() {
-  $('#code_output').removeClass("z-40");
-  $('#editor').removeClass("z-40");
-  $('#runButtonContainer').removeClass("z-40");
-
   $('#adventures').show();
   // Hide all tabs except the default level one
   $('#adventures-buttons').children().each(function() {
@@ -192,6 +177,7 @@ function tutorialPopup(title: string, message: string) {
 
 export function startTutorial() {
   $('#tutorial-mask').show();
+  $('#adventures').hide();
   tutorialPopup("Welkom bij Hedy!", "In deze uitleg leggen we stap voor stap uit wat je allemaal kunt doen");
 }
 
