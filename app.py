@@ -1130,6 +1130,7 @@ def translate_keywords():
     except:
         return gettext('translate_error'), 400
 
+
 @app.route('/get_tutorial_step/<step>', methods=['GET'])
 def get_tutorial_translation(step):
     try:
