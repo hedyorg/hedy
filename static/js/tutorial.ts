@@ -64,28 +64,18 @@ function levelDefaultStep() {
   $('#code_content_container').addClass('z-40');
   $('#adventures').addClass('z-40 bg-gray-100');
   $('#adventures').show();
-  addHighlightBorder("adventures");
-  // Hide all tabs except the default level one
-  $('#adventures-buttons').children().each(function() {
-    if ($(this).attr('data-tab') != "default") {
-      $(this).hide();
-    }
-  });
 
+  addHighlightBorder("adventures");
   relocatePopup(50, 40);
   tutorialPopup(5);
 }
 
 function adventureTabsStep() {
-  // Show all tabs except the quiz one
   $('#adventures-buttons').children().each(function() {
-    if ($(this).attr('data-tab') != "quiz") {
-      $(this).show();
-      if ($(this).attr('data-tab') == "story") {
-        // Set to false, prevent "are you sure you want to switch without saving" pop-up
-        window.State.unsaved_changes = false;
-        $(this).click();
-      }
+    if ($(this).attr('data-tab') == "story") {
+      // Set to false, prevent "are you sure you want to switch without saving" pop-up
+      window.State.unsaved_changes = false;
+      $(this).click();
     }
   });
 
@@ -93,8 +83,6 @@ function adventureTabsStep() {
 }
 
 function quizTabStep() {
-  // Show all tabs (including the quiz one) -> only highlight the quiz tab
-  $('.tab').show();
   tutorialPopup(7);
 }
 
