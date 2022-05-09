@@ -13,7 +13,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER, NON_LATIN_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, TUTORIAL, NON_LATIN_LANGUAGES
 import hedyweb
 import hedy_content
 from flask_babel import gettext
@@ -1130,6 +1130,13 @@ def translate_keywords():
     except:
         return gettext('translate_error'), 400
 
+@app.route('/get_tutorial_step/<step>', methods=['GET'])
+def get_tutorial_translation(step):
+    try:
+        translation = TUTORIAL[int(step)]
+    except:
+        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
+    return translation, 200
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():

@@ -2,6 +2,7 @@ import copy
 import os
 from babel import Locale
 from flask import g
+from flask_babel import gettext
 
 from utils import is_debug_mode
 from website.yaml_file import YamlFile
@@ -39,6 +40,20 @@ ADVENTURE_ORDER = [
     'next',
     'end'
 ]
+
+TUTORIAL = {
+  0: [gettext('tutorial_start_title'), gettext('tutorial_start_message')],
+  1: [gettext('tutorial_editor_title'), gettext('tutorial_editor_message')],
+  2: [gettext('tutorial_output_title'), gettext('tutorial_output_message')],
+  3: [gettext('tutorial_run_title'), gettext('tutorial_run_message')],
+  4: [gettext('tutorial_tryit_title'), gettext('tutorial_tryit_message')],
+  5: [gettext('tutorial_leveldefault_title'), gettext('tutorial_leveldefault_message')],
+  6: [gettext('tutorial_adventures_title'), gettext('tutorial_adventures_message')],
+  7: [gettext('tutorial_quiz_title'), gettext('tutorial_quiz_message')],
+  8: [gettext('tutorial_saveshare_title'), gettext('tutorial_saveshare_message')],
+  9: [gettext('tutorial_cheatsheet_title'), gettext('tutorial_cheatsheet_message')],
+  10: [gettext('tutorial_end_title'), gettext('tutorial_end_message')],
+}
 
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.
