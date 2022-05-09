@@ -114,7 +114,7 @@ function endTutorial() {
   $('#cheatsheet_dropdown').removeClass('z-40');
   $('#cheatsheet_dropdown').hide();
 
-  relocatePopup(50, 20);
+  relocatePopup(50, 15);
   tutorialPopup(10);
 }
 
