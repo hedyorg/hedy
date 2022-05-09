@@ -61,7 +61,8 @@ function tryRunButtonStep() {
 
 function levelDefaultStep() {
   removeBorder("runButtonContainer");
-  $('#tutorial-mask').hide();
+  $('#code_content_container').addClass('z-40');
+  $('#adventures').addClass('z-40 bg-gray-100');
   $('#adventures').show();
   addHighlightBorder("adventures");
   // Hide all tabs except the default level one
@@ -99,6 +100,7 @@ function quizTabStep() {
 
 function saveShareStep() {
   removeBorder("adventures");
+  $('#adventures').addClass('rounded-lg');
   $('#level-header').addClass("z-40");
   $('#cheatsheet_container').hide();
   addHighlightBorder("level-header");
@@ -110,6 +112,7 @@ function saveShareStep() {
 function cheatsheetStep() {
   $('#cheatsheet_container').show();
   $('#code_output').removeClass("z-40");
+  $('#cheatsheet_dropdown').addClass('z-40');
   $('#cheatsheet_dropdown').show();
 
   tutorialPopup(9);
