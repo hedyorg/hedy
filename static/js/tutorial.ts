@@ -96,12 +96,7 @@ function quizTabStep() {
 }
 
 function saveShareStep() {
-  $('#adventures-buttons').children().each(function() {
-    $(this).removeClass("z-40");
-  });
-
   $('#level-header').addClass("z-40");
-  $('#level-header').show();
   $('#cheatsheet_container').hide();
 
   relocatePopup("middle");
@@ -109,16 +104,19 @@ function saveShareStep() {
 }
 
 function cheatsheetStep() {
-  $('#level-header').removeClass("z-40");
   $('#cheatsheet_container').addClass("z-40");
   $('#cheatsheet_container').show();
+  $('#cheatsheet_dropdown').addClass("z-50");
+  $('#cheatsheet_dropdown').show();
 
   relocatePopup("middle");
   tutorialPopup("Spiekbriefje", "Als je iets bent vergeten kun je het spiekbriefje gebruiken om te kijken welke commando's je mag gebruiken.");
 }
 
 function endTutorial() {
-  $('#cheatsheet_container').removeClass("z-40");
+  $('#cheatsheet_dropdown').removeClass("z-50");
+  $('#cheatsheet_dropdown').hide();
+
   relocatePopup("middle");
   tutorialPopup("Einde!", "Klik op 'Volgende stap' om te echt aan de slag te gaan met Hedy!");
 }
