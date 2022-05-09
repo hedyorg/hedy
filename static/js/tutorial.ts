@@ -52,7 +52,11 @@ function tryRunButtonStep() {
   theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
   theGlobalEditor?.setOptions({readOnly: true});
 
-  relocatePopup(50, 60);
+  // If this is the first program of the user -> They will receive an achievement, make sure it is shown
+  $('#achievement_pop-up').removeClass('z-10');
+  $('#achievement_pop-up').addClass('z-50');
+
+  relocatePopup(50, 70);
   tutorialPopup(4);
 }
 
@@ -140,7 +144,22 @@ function callNextStep() {
     cheatsheetStep();
   } else if (current_step == 10) {
     pushAchievement("well_begun_is_half_done");
-    endTutorial();
+    $('#achievement_pop-up').removeClass('z-10');
+    $('#achievement_pop-up').addClass('z-50');
+    // If the achievement pop-up is visible -> wait with the next function call
+    setTimeout(function(){
+      if ($('#achievement_pop-up').is(':visible')) {
+        setTimeout(function() {
+          endTutorial();
+          $('#achievement_pop-up').removeClass('z-50');
+          $('#achievement_pop-up').addClass('z-10');
+        }, 5000);
+      } else {
+        endTutorial();
+        $('#achievement_pop-up').removeClass('z-50');
+        $('#achievement_pop-up').addClass('z-10');
+      }
+    }, 500);
   } else {
     location.replace("/hedy");
   }
