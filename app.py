@@ -719,15 +719,10 @@ def get_user_formatted_age(now, date):
 @app.route('/tutorial', methods=['GET'])
 def tutorial_index():
     level = 1
-    # Current idea: Render the code page, slowly show more features
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
     adventures = load_adventures_per_level(level)
 
-    return hedyweb.render_tutorial_mode(
-      level=level,
-      commands=commands,
-      adventures=adventures
-    )
+    return hedyweb.render_tutorial_mode(level=level, commands=commands, adventures=adventures)
 
 
 # routing to index.html
@@ -1161,12 +1156,12 @@ def tutorial_steps(step):
 
 @app.route('/get_tutorial_step/<step>', methods=['GET'])
 def get_tutorial_translation(step):
-    # We also retrieve the example code snippet this way to reduce the need of a new function
+    # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
     if step == "code_snippet":
-      return jsonify({'code': gettext('tutorial_code_snippet')}), 200
+        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
     try:
         step = int(step)
-    except:
+    except ValueError:
         return gettext('invalid_tutorial_step'), 400
 
     translation = tutorial_steps(step)
