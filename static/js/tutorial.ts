@@ -13,7 +13,7 @@ let current_step = 0;
 function codeEditorStep() {
   $('#editor').addClass("z-30");
   $('#editor-area').show();
-  relocatePopup("right");
+  relocatePopup(70, 20);
   tutorialPopup("De code editor", "In dit venster schrijf je alle code, probeer maar wat in te vullen!");
 }
 
@@ -22,7 +22,7 @@ function codeOutputStep() {
   $('#code_output').show();
   $('#variables_container').hide();
 
-  relocatePopup("left");
+  relocatePopup(30, 20);
   tutorialPopup("Het output venster", "De code die je uitvoert wordt hier weergegeven.");
 }
 
@@ -30,7 +30,7 @@ function runButtonStep() {
   $('#code_related_buttons').show();
   $('#runButtonContainer').addClass("z-30");
 
-  relocatePopup("middle");
+  relocatePopup(50, 20);
   tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
 }
 
@@ -41,7 +41,7 @@ function tryRunButtonStep() {
   theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
   theGlobalEditor?.setOptions({readOnly: true});
 
-  relocatePopup("bottom");
+  relocatePopup(50, 60);
   tutorialPopup("Probeer het uit!", "Voer het programma uit, klik op 'volgende stap' als je klaar bent.");
 }
 
@@ -56,7 +56,7 @@ function levelDefaultStep() {
     }
   });
 
-  relocatePopup("bottom");
+  relocatePopup(50, 60);
   tutorialPopup("Level uitleg", "In het eerste tabje vind je altijd de level uitleg. Hier worden in elk level de nieuwe commando's uitgelegd.");
 }
 
@@ -91,7 +91,7 @@ function quizTabStep() {
     }
   });
 
-  relocatePopup("top");
+  relocatePopup(50, 10);
   tutorialPopup("Quiz", "Aan het einde van elk level kun je een quiz maken, zo kun je goed testen of je alles snapt!");
 }
 
@@ -99,7 +99,7 @@ function saveShareStep() {
   $('#level-header').addClass("z-30");
   $('#cheatsheet_container').hide();
 
-  relocatePopup("middle");
+  relocatePopup(50, 20);
   tutorialPopup("Opslaan en delen", "Je kunt al jouw gemaakt programma's opslaan en delen met andere Hedy gebruikers.");
 }
 
@@ -109,7 +109,7 @@ function cheatsheetStep() {
   $('#cheatsheet_dropdown').addClass("z-50");
   $('#cheatsheet_dropdown').show();
 
-  relocatePopup("middle");
+  relocatePopup(50, 20);
   tutorialPopup("Spiekbriefje", "Als je iets bent vergeten kun je het spiekbriefje gebruiken om te kijken welke commando's je mag gebruiken.");
 }
 
@@ -117,7 +117,7 @@ function endTutorial() {
   $('#cheatsheet_dropdown').removeClass("z-50");
   $('#cheatsheet_dropdown').hide();
 
-  relocatePopup("middle");
+  relocatePopup(50, 20);
   tutorialPopup("Einde!", "Klik op 'Volgende stap' om te echt aan de slag te gaan met Hedy!");
 }
 
@@ -148,22 +148,14 @@ function callNextStep() {
   }
 }
 
-function relocatePopup(direction: string) {
-  // Todo TB -> Might be nice to re-write this to an x/y coordinate function
-  // So we can call it like relocatePopup(30, 70) to better align with what we want
-
+function relocatePopup(x: number, y: number) {
   $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
-  if (direction == "left") {
-    $('#tutorial-pop-up').css({'left': '35%'});
-  } else if (direction === "right") {
-    $('#tutorial-pop-up').css({'left': '65%'});
-  } else if (direction == "bottom") {
-    $('#tutorial-pop-up').css({'top': '70%'});
-  } else if (direction == "middle") {
-    $('#tutorial-pop-up').css({'top': '50%'});
-  } else {
-    $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
+  if (x && y) {
+    let left = x.toString() + "%"
+    let top = y.toString() + "%"
+    $('#tutorial-pop-up').css({'top': top, 'left': left});
   }
+
 }
 
 function tutorialPopup(title: string, message: string) {
