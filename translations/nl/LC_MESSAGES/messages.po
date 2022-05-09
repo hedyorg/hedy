@@ -18,7 +18,7 @@ msgstr "Jij zit niet in deze klas!"
 msgid "title_programs"
 msgstr "Hedy - Mijn programma's"
 
-#: app.py:667 app.py:677 app.py:681 app.py:696 app.py:958 app.py:1324
+#: app.py:667 app.py:677 app.py:681 app.py:696 app.py:958 app.py:1353
 #: website/admin.py:17 website/admin.py:25 website/admin.py:95
 #: website/admin.py:112 website/admin.py:130 website/auth.py:712
 #: website/auth.py:739 website/statistics.py:86
@@ -117,15 +117,120 @@ msgstr ""
 "runnen om te kijken of er misschien een foutje in zit. Code met foutjes "
 "kan niet vertaald worden."
 
-#: app.py:1138
+#: app.py:1135
+msgid "tutorial_start_title"
+msgstr "Welkom bij Hedy!"
+
+#: app.py:1135
+msgid "tutorial_start_message"
+msgstr "In deze uitleg leggen we stap voor stap uit wat je allemaal kunt doen"
+
+#: app.py:1137
+msgid "tutorial_editor_title"
+msgstr "De code editor"
+
+#: app.py:1137
+msgid "tutorial_editor_message"
+msgstr "In dit venster schrijf je alle code, probeer maar wat in te vullen!"
+
+#: app.py:1139
+msgid "tutorial_output_title"
+msgstr "Het output venster"
+
+#: app.py:1139
+msgid "tutorial_output_message"
+msgstr "De code die je uitvoert wordt hier weergegeven."
+
+#: app.py:1141
+msgid "tutorial_run_title"
+msgstr "De uitvoer knop"
+
+#: app.py:1141
+msgid "tutorial_run_message"
+msgstr "Met deze knop kun je een programma uitvoeren, zullen we het proberen?"
+
+#: app.py:1143
+msgid "tutorial_tryit_title"
+msgstr "Probeer het uit!"
+
+#: app.py:1143
+msgid "tutorial_tryit_message"
+msgstr "Voer het programma uit, klik op 'volgende stap' als je klaar bent."
+
+#: app.py:1145
+msgid "tutorial_leveldefault_title"
+msgstr "Level uitleg"
+
+#: app.py:1145
+msgid "tutorial_leveldefault_message"
+msgstr ""
+"In het eerste tabje vind je altijd de level uitleg. Hier worden in elk "
+"level de nieuwe commando's uitgelegd."
+
+#: app.py:1147
+#, fuzzy
+msgid "tutorial_adventures_title"
+msgstr "Avonturen"
+
+#: app.py:1147
+msgid "tutorial_adventures_message"
+msgstr ""
+"De andere tabjes bevatten avonturen, deze kun je per level maken. Ze gaan"
+" van makkelijk naar moeilijk!"
+
+#: app.py:1149
+msgid "tutorial_quiz_title"
+msgstr "Quiz"
+
+#: app.py:1149
+msgid "tutorial_quiz_message"
+msgstr ""
+"Aan het einde van elk level kun je een quiz maken, zo kun je goed testen "
+"of je alles snapt!"
+
+#: app.py:1151
+msgid "tutorial_saveshare_title"
+msgstr "Opslaan en delen"
+
+#: app.py:1151
+msgid "tutorial_saveshare_message"
+msgstr ""
+"Je kunt al jouw gemaakt programma's opslaan en delen met andere Hedy "
+"gebruikers."
+
+#: app.py:1153
+msgid "tutorial_cheatsheet_title"
+msgstr "Spiekbriefje"
+
+#: app.py:1153
+msgid "tutorial_cheatsheet_message"
+msgstr ""
+"Als je iets bent vergeten kun je het spiekbriefje gebruiken om te kijken "
+"welke commando's je mag gebruiken."
+
+#: app.py:1155
+msgid "tutorial_end_title"
+msgstr "Einde!"
+
+#: app.py:1155
+msgid "tutorial_end_message"
+msgstr "Klik op 'Volgende stap' om te echt aan de slag te gaan met Hedy!"
+
+#: app.py:1157
 msgid "tutorial_title_not_found"
 msgstr "Oeps! Er gaat iets mis..."
 
-#: app.py:1138
+#: app.py:1157
 msgid "tutorial_message_not_found"
-msgstr "Het lijkt erop dat we de volgende stap voor de tutorial niet kunnen ophalen, probeer het later opnieuw."
+msgstr ""
+"Het lijkt erop dat we de volgende stap voor de tutorial niet kunnen "
+"ophalen, probeer het later opnieuw."
 
-#: app.py:1263 website/auth.py:278 website/auth.py:333 website/auth.py:469
+#: app.py:1165
+msgid "invalid_tutorial_step"
+msgstr "Dit is geen geldige tutorial stap, probeer het opnieuw."
+
+#: app.py:1292 website/auth.py:278 website/auth.py:333 website/auth.py:469
 #: website/auth.py:494 website/auth.py:524 website/auth.py:633
 #: website/auth.py:671 website/auth.py:718 website/auth.py:745
 #: website/teacher.py:89 website/teacher.py:124 website/teacher.py:196
@@ -134,130 +239,31 @@ msgstr "Het lijkt erop dat we de volgende stap voor de tutorial niet kunnen opha
 msgid "ajax_error"
 msgstr "Er is een fout opgetreden, probeer het nog eens."
 
-#: app.py:1266
+#: app.py:1295
 msgid "image_invalid"
 msgstr "Jouw gekozen profielfoto is ongeldig."
 
-#: app.py:1268
+#: app.py:1297
 msgid "personal_text_invalid"
 msgstr "Jouw persoonlijke tekst is ongeldig."
 
-#: app.py:1270 app.py:1276
+#: app.py:1299 app.py:1305
 msgid "favourite_program_invalid"
 msgstr "Jouw gekozen favoriete programma is ongeldig."
 
-#: app.py:1290 app.py:1291
+#: app.py:1319 app.py:1320
 msgid "public_profile_updated"
 msgstr "Je openbare profiel is aangepast."
 
-#: app.py:1328 app.py:1353
+#: app.py:1357 app.py:1382
 msgid "user_not_private"
 msgstr "Deze gebruiker bestaat niet of heeft geen openbaar profiel"
 
-#: app.py:1361
+#: app.py:1390
 msgid "invalid_teacher_invitation_code"
 msgstr ""
 "Deze leerkrachtenuitnodigingscode is niet geldig. Als je een nieuwe "
 "uitnodiging nodig hebt, neem dan contact op met hedy@felienne.com."
-
-#: hedy_content.py:45
-msgid "tutorial_start_title"
-msgstr "Welkom bij Hedy!"
-
-#: hedy_content.py:45
-msgid "tutorial_start_message"
-msgstr "In deze uitleg leggen we stap voor stap uit wat je allemaal kunt doen"
-
-#: hedy_content.py:46
-msgid "tutorial_editor_title"
-msgstr "De code editor"
-
-#: hedy_content.py:46
-msgid "tutorial_editor_message"
-msgstr "In dit venster schrijf je alle code, probeer maar wat in te vullen!"
-
-#: hedy_content.py:47
-msgid "tutorial_output_title"
-msgstr "Het output venster"
-
-#: hedy_content.py:47
-msgid "tutorial_output_message"
-msgstr "De code die je uitvoert wordt hier weergegeven."
-
-#: hedy_content.py:48
-msgid "tutorial_run_title"
-msgstr "De uitvoer knop"
-
-#: hedy_content.py:48
-msgid "tutorial_run_message"
-msgstr "Met deze knop kun je een programma uitvoeren, zullen we het proberen?"
-
-#: hedy_content.py:49
-msgid "tutorial_tryit_title"
-msgstr "Probeer het uit!"
-
-#: hedy_content.py:49
-msgid "tutorial_tryit_message"
-msgstr "Voer het programma uit, klik op 'volgende stap' als je klaar bent."
-
-#: hedy_content.py:50
-msgid "tutorial_leveldefault_title"
-msgstr "Level uitleg"
-
-#: hedy_content.py:50
-msgid "tutorial_leveldefault_message"
-msgstr ""
-"In het eerste tabje vind je altijd de level uitleg. Hier worden in elk "
-"level de nieuwe commando's uitgelegd."
-
-#: hedy_content.py:51
-#, fuzzy
-msgid "tutorial_adventures_title"
-msgstr "Avonturen"
-
-#: hedy_content.py:51
-msgid "tutorial_adventures_message"
-msgstr ""
-"De andere tabjes bevatten avonturen, deze kun je per level maken. Ze gaan"
-" van makkelijk naar moeilijk!"
-
-#: hedy_content.py:52
-msgid "tutorial_quiz_title"
-msgstr "Quiz"
-
-#: hedy_content.py:52
-msgid "tutorial_quiz_message"
-msgstr ""
-"Aan het einde van elk level kun je een quiz maken, zo kun je goed testen "
-"of je alles snapt!"
-
-#: hedy_content.py:53
-msgid "tutorial_saveshare_title"
-msgstr "Opslaan en delen"
-
-#: hedy_content.py:53
-msgid "tutorial_saveshare_message"
-msgstr ""
-"Je kunt al jouw gemaakt programma's opslaan en delen met andere Hedy "
-"gebruikers."
-
-#: hedy_content.py:54
-msgid "tutorial_cheatsheet_title"
-msgstr "Spiekbriefje"
-
-#: hedy_content.py:54
-msgid "tutorial_cheatsheet_message"
-msgstr ""
-"Als je iets bent vergeten kun je het spiekbriefje gebruiken om te kijken "
-"welke commando's je mag gebruiken."
-
-#: hedy_content.py:55
-msgid "tutorial_end_title"
-msgstr "Einde!"
-
-#: hedy_content.py:55
-msgid "tutorial_end_message"
-msgstr "Klik op 'Volgende stap' om te echt aan de slag te gaan met Hedy!"
 
 #: utils.py:203
 msgid "default_404"

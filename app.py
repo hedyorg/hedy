@@ -1130,13 +1130,41 @@ def translate_keywords():
     except:
         return gettext('translate_error'), 400
 
+def tutorial_steps(step):
+    if step == 0:
+        translation = [gettext('tutorial_start_title'), gettext('tutorial_start_message')]
+    elif step == 1:
+        translation = [gettext('tutorial_editor_title'), gettext('tutorial_editor_message')]
+    elif step == 2:
+        translation = [gettext('tutorial_output_title'), gettext('tutorial_output_message')]
+    elif step == 3:
+        translation = [gettext('tutorial_run_title'), gettext('tutorial_run_message')]
+    elif step == 4:
+        translation = [gettext('tutorial_tryit_title'), gettext('tutorial_tryit_message')]
+    elif step == 5:
+        translation = [gettext('tutorial_leveldefault_title'), gettext('tutorial_leveldefault_message')]
+    elif step == 6:
+        translation = [gettext('tutorial_adventures_title'), gettext('tutorial_adventures_message')]
+    elif step == 7:
+        translation = [gettext('tutorial_quiz_title'), gettext('tutorial_quiz_message')]
+    elif step == 8:
+        translation = [gettext('tutorial_saveshare_title'), gettext('tutorial_saveshare_message')]
+    elif step == 9:
+        translation = [gettext('tutorial_cheatsheet_title'), gettext('tutorial_cheatsheet_message')]
+    elif step == 10:
+        translation = [gettext('tutorial_end_title'), gettext('tutorial_end_message')]
+    else:
+        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
+    return translation
 
 @app.route('/get_tutorial_step/<step>', methods=['GET'])
 def get_tutorial_translation(step):
     try:
-        translation = TUTORIAL[int(step)]
+        step = int(step)
     except:
-        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
+        return gettext('invalid_tutorial_step'), 400
+
+    translation = tutorial_steps(step)
     return translation, 200
 
 @app.route('/client_messages.js', methods=['GET'])
