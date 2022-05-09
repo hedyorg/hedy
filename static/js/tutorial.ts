@@ -39,9 +39,6 @@ function runButtonStep() {
 }
 
 function tryRunButtonStep() {
-  $('#editor').addClass("z-40");
-  $('#code_output').addClass("z-40");
-
   $.ajax({
       type: 'GET',
       url: '/get_tutorial_step/code_snippet/',
@@ -61,6 +58,10 @@ function tryRunButtonStep() {
 
 function levelDefaultStep() {
   removeBorder("runButtonContainer");
+  $('#editor').removeClass('z-40');
+  $('#code_output').removeClass('z-40');
+  $('#runButtonContainer').removeClass('z-40');
+
   $('#code_content_container').addClass('z-40');
   $('#adventures').addClass('z-40 bg-gray-100');
   $('#adventures').show();
@@ -88,7 +89,7 @@ function quizTabStep() {
 
 function saveShareStep() {
   removeBorder("adventures");
-  $('#adventures').addClass('rounded-lg');
+  $('#code_content_container').removeClass('z-40');
   $('#level-header').addClass("z-40");
   $('#cheatsheet_container').hide();
   addHighlightBorder("level-header");
@@ -109,6 +110,8 @@ function cheatsheetStep() {
 
 function endTutorial() {
   removeBorder("level-header");
+  $('#level-header').removeClass('z-40');
+  $('#cheatsheet_dropdown').removeClass('z-40');
   $('#cheatsheet_dropdown').hide();
 
   relocatePopup(50, 20);
