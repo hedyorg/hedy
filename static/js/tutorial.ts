@@ -204,3 +204,7 @@ export function startTutorial() {
   tutorialPopup(0);
 }
 
+export function startTeacherTutorial() {
+  modal.alert("Let's get started!", 3000, false);
+}
+

@@ -725,6 +725,29 @@ def tutorial_index():
     return hedyweb.render_tutorial_mode(level=level, commands=commands, adventures=adventures)
 
 
+@app.route('/teacher-tutorial', methods=['GET'])
+@requires_login
+def teacher_tutorial(user):
+    if not is_teacher(user):
+        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+
+    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+    adventures = []
+    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+        adventures.append(
+            {'id': adventure.get('id'),
+             'name': adventure.get('name'),
+             'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+             'level': adventure.get('level')
+             }
+        )
+
+    return render_template('for-teachers.html', current_page='my-profile',
+                           page_title=gettext('title_for-teacher'), teacher_classes=teacher_classes,
+                           teacher_adventures=adventures, tutorial=True,
+                           content=hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang))
+
+
 # routing to index.html
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})

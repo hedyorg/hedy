@@ -113,5 +113,10 @@
     hedyApp.modal.alert('{{_('teacher_welcome')}}');
   };
 {% endif %}
+{% if tutorial %}
+    $(document).ready(function() {
+        hedyApp.startTeacherTutorial();
+    });
+{% endif %}
 </script>
 {% endblock %}
