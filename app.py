@@ -986,14 +986,12 @@ def main_page(page):
     return achievements_page()
 
   if page == 'learn-more':
-    learn_more_translations = hedyweb.PageTranslations(
-      page).get_page_translations(g.lang)
+    learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
     return render_template('learn-more.html', page_title=gettext('title_learn-more'),
                            current_page='learn-more', content=learn_more_translations)
 
   if page == 'privacy':
-    privacy_translations = hedyweb.PageTranslations(
-      page).get_page_translations(g.lang)
+    privacy_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
     return render_template('privacy.html', page_title=gettext('title_privacy'),
                            content=privacy_translations)
 
