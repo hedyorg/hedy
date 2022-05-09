@@ -13,17 +13,15 @@ let current_step = 0;
 
 function codeEditorStep() {
   $('#editor').addClass("z-30");
-  $('#editor-area').show();
-  relocatePopup(70, 20);
+
+  relocatePopup(65, 30);
   tutorialPopup(1);
 }
 
 function codeOutputStep() {
   $('#code_output').addClass("z-30");
-  $('#code_output').show();
-  $('#variables_container').hide();
 
-  relocatePopup(30, 20);
+  relocatePopup(35, 30);
   tutorialPopup(2);
 }
 
@@ -31,7 +29,7 @@ function runButtonStep() {
   $('#code_related_buttons').show();
   $('#runButtonContainer').addClass("z-30");
 
-  relocatePopup(50, 20);
+  relocatePopup(50, 30);
   tutorialPopup(3);
 }
 
@@ -67,7 +65,7 @@ function levelDefaultStep() {
     }
   });
 
-  relocatePopup(50, 60);
+  relocatePopup(50, 40);
   tutorialPopup(5);
 }
 
@@ -102,7 +100,6 @@ function quizTabStep() {
     }
   });
 
-  relocatePopup(50, 10);
   tutorialPopup(7);
 }
 
@@ -110,17 +107,17 @@ function saveShareStep() {
   $('#level-header').addClass("z-30");
   $('#cheatsheet_container').hide();
 
-  relocatePopup(50, 20);
+  relocatePopup(50, 30);
   tutorialPopup(8);
 }
 
 function cheatsheetStep() {
+  $('#code_output').removeClass("z-30");
   $('#cheatsheet_container').addClass("z-30");
   $('#cheatsheet_container').show();
   $('#cheatsheet_dropdown').addClass("z-50");
   $('#cheatsheet_dropdown').show();
 
-  relocatePopup(50, 20);
   tutorialPopup(9);
 }
 
@@ -177,7 +174,7 @@ function tutorialPopup(step: number) {
     }).done(function(response: any) {
         $('#tutorial_title').text(response.translation[0]);
         $('#tutorial_text').text(response.translation[1]);
-        $('#tutorial-pop-up').fadeIn(1500);
+        $('#tutorial-pop-up').fadeIn(800);
     }).fail(function(response) {
       modal.alert(response.responseText, 3000, true);
     });
@@ -186,6 +183,7 @@ function tutorialPopup(step: number) {
 export function startTutorial() {
   $('#tutorial-mask').show();
   $('#adventures').hide();
+  $('#variables_container').hide();
   tutorialPopup(0);
 }
 
