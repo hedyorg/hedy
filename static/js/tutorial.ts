@@ -1,3 +1,4 @@
+import {modal} from "./modal";
 import {theGlobalEditor} from "./app";
 
 let current_step = 0;
@@ -14,7 +15,7 @@ function codeEditorStep() {
   $('#editor').addClass("z-30");
   $('#editor-area').show();
   relocatePopup(70, 20);
-  tutorialPopup("De code editor", "In dit venster schrijf je alle code, probeer maar wat in te vullen!");
+  tutorialPopup(1);
 }
 
 function codeOutputStep() {
@@ -23,7 +24,7 @@ function codeOutputStep() {
   $('#variables_container').hide();
 
   relocatePopup(30, 20);
-  tutorialPopup("Het output venster", "De code die je uitvoert wordt hier weergegeven.");
+  tutorialPopup(2);
 }
 
 function runButtonStep() {
@@ -31,7 +32,7 @@ function runButtonStep() {
   $('#runButtonContainer').addClass("z-30");
 
   relocatePopup(50, 20);
-  tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
+  tutorialPopup(3);
 }
 
 function tryRunButtonStep() {
@@ -42,7 +43,7 @@ function tryRunButtonStep() {
   theGlobalEditor?.setOptions({readOnly: true});
 
   relocatePopup(50, 60);
-  tutorialPopup("Probeer het uit!", "Voer het programma uit, klik op 'volgende stap' als je klaar bent.");
+  tutorialPopup(4);
 }
 
 function levelDefaultStep() {
@@ -57,7 +58,7 @@ function levelDefaultStep() {
   });
 
   relocatePopup(50, 60);
-  tutorialPopup("Level uitleg", "In het eerste tabje vind je altijd de level uitleg. Hier worden in elk level de nieuwe commando's uitgelegd.");
+  tutorialPopup(5);
 }
 
 function adventureTabsStep() {
@@ -77,7 +78,7 @@ function adventureTabsStep() {
     }
   });
 
-  tutorialPopup("Avonturen", "De andere tabjes bevatten avonturen, deze kun je per level maken. Ze gaan van makkelijk naar moeilijk!");
+  tutorialPopup(6);
 }
 
 function quizTabStep() {
@@ -92,7 +93,7 @@ function quizTabStep() {
   });
 
   relocatePopup(50, 10);
-  tutorialPopup("Quiz", "Aan het einde van elk level kun je een quiz maken, zo kun je goed testen of je alles snapt!");
+  tutorialPopup(7);
 }
 
 function saveShareStep() {
@@ -100,7 +101,7 @@ function saveShareStep() {
   $('#cheatsheet_container').hide();
 
   relocatePopup(50, 20);
-  tutorialPopup("Opslaan en delen", "Je kunt al jouw gemaakt programma's opslaan en delen met andere Hedy gebruikers.");
+  tutorialPopup(8);
 }
 
 function cheatsheetStep() {
@@ -110,7 +111,7 @@ function cheatsheetStep() {
   $('#cheatsheet_dropdown').show();
 
   relocatePopup(50, 20);
-  tutorialPopup("Spiekbriefje", "Als je iets bent vergeten kun je het spiekbriefje gebruiken om te kijken welke commando's je mag gebruiken.");
+  tutorialPopup(9);
 }
 
 function endTutorial() {
@@ -118,7 +119,7 @@ function endTutorial() {
   $('#cheatsheet_dropdown').hide();
 
   relocatePopup(50, 20);
-  tutorialPopup("Einde!", "Klik op 'Volgende stap' om te echt aan de slag te gaan met Hedy!");
+  tutorialPopup(10);
 }
 
 function callNextStep() {
@@ -158,16 +159,23 @@ function relocatePopup(x: number, y: number) {
 
 }
 
-function tutorialPopup(title: string, message: string) {
-  $('#tutorial_title').text(title);
-  $('#tutorial_text').text(message);
-  //$('#tutorial-pop-up').fadeIn(1500);
-  $('#tutorial-pop-up').show(); //Use show() for debugging purposes
+function tutorialPopup(step: number) {
+    $.ajax({
+      type: 'GET',
+      url: '/get_tutorial_step/' + step.toString(),
+      dataType: 'json'
+    }).done(function(response: any) {
+        $('#tutorial_title').text(response[0]);
+        $('#tutorial_text').text(response[1]);
+        $('#tutorial-pop-up').fadeIn(1500);
+    }).fail(function(response) {
+      modal.alert(response.responseText, 3000, true);
+    });
 }
 
 export function startTutorial() {
   $('#tutorial-mask').show();
   $('#adventures').hide();
-  tutorialPopup("Welkom bij Hedy!", "In deze uitleg leggen we stap voor stap uit wat je allemaal kunt doen");
+  tutorialPopup(0);
 }
 
