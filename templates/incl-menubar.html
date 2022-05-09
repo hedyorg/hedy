@@ -11,7 +11,7 @@
     <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'learn-more' %}border-white{% else %}border-transparent{% endif %}" href="/learn-more">{{_('nav_learn_more')}}</a>
     {% if username %}
       <a class="menubar-btn hover:bg-blue-600 ltr:ml-auto rtl:mr-auto {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{_('program_header')}}</a>
-      <div class="dropdown relative z-40 flex">
+      <div class="dropdown relative z-20 flex">
         <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="/my-profile">
           <span class="fas fa-fw fa-user"></span> {{username}}
         </a>

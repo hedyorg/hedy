@@ -1,5 +1,5 @@
 import {modal} from "./modal";
-import {theGlobalEditor} from "./app";
+import {pushAchievement, theGlobalEditor} from "./app";
 
 let current_step = 0;
 
@@ -139,6 +139,7 @@ function callNextStep() {
   } else if (current_step == 9) {
     cheatsheetStep();
   } else if (current_step == 10) {
+    pushAchievement("well_begun_is_half_done");
     endTutorial();
   } else {
     location.replace("/hedy");
