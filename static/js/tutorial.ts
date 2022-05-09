@@ -94,19 +94,11 @@ function adventureTabsStep() {
 function quizTabStep() {
   // Show all tabs (including the quiz one) -> only highlight the quiz tab
   $('.tab').show();
-  $('#adventures-buttons').children().each(function() {
-    if ($(this).attr('data-tab') == "quiz") {
-      $(this).addClass('border-2 rounded-lg border-red-500');
-    }
-  });
   tutorialPopup(7);
 }
 
 function saveShareStep() {
   removeBorder("adventures");
-  $('#adventures-buttons').children().each(function() {
-    $(this).removeClass('border-2 rounded-lg border-red-500');
-  });
   $('#level-header').addClass("z-40");
   $('#cheatsheet_container').hide();
   addHighlightBorder("level-header");
