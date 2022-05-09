@@ -1130,6 +1130,7 @@ def translate_keywords():
     except:
         return gettext('translate_error'), 400
 
+
 def tutorial_steps(step):
     if step == 0:
         translation = [gettext('tutorial_start_title'), gettext('tutorial_start_message')]
@@ -1157,6 +1158,7 @@ def tutorial_steps(step):
         translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
     return translation
 
+
 @app.route('/get_tutorial_step/<step>', methods=['GET'])
 def get_tutorial_translation(step):
     try:
@@ -1166,6 +1168,7 @@ def get_tutorial_translation(step):
 
     translation = tutorial_steps(step)
     return translation, 200
+
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
