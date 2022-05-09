@@ -109,7 +109,7 @@ adventures:
                     在这个级别中，你不仅可以一起使用`{if}`条件语句和`{repeat}`循环语句编写多行代码，还可以将它们嵌套在一起使用！
                     在范例中，你可以在 `{repeat}` 命令中嵌入一个 `{if}` 命令。反之亦然，你可以在 `{if}`命令中嵌入一个 `{repeat}` 命令。当然，你也可以在一个 `{if}`条件语句中嵌入一个`{if}`条件语句，在一个`{repeat}`循环语句中嵌入一个`{repeat}`循环语句。
                     试试吧！
-                example_code: "## 海迪代码范例\n```\n{repeat} 3 {times}\n    食物 = {ask} '你想吃什么？'\n    {if} 食物 {is} 披萨\n        {print} '好啊！'\n    else\n        {print} '披萨更好吃'\n```\n"
+                example_code: "## 海迪代码范例\n```\n{repeat} 3 {times}\n    食物 = {ask} '你想吃什么？'\n    {if} 食物 {is} 披萨\n        {print} '好啊！'\n   {else}\n        {print} '披萨更好吃'\n```\n"
             10:
                 start_code: |-
                     动物 {is} 狗，猫，泡泡鱼
@@ -124,7 +124,7 @@ adventures:
                 start_code: |-
                     {for} 计数器 {in} {range} 1 {to} 5
                         {print} 计数器
-                story_text: "## 循环！\n`{print}` 的使用方法照旧不变但是我们增加了`{for}`的新形式。 你现在可以在你的程序中编写`{for} counter {in} {range} 1 {to} 5` 和使用 `counter`了。\n试试吧，看看会发生什么！ 记住在`{for}` and `{if}` 语句后使用缩进(这意味着以四个空格开始一个句子)。"
+                story_text: "## 循环！\n`{print}` 的使用方法照旧不变但是我们增加了`{for}`的新形式。 你现在可以在你的程序中编写`{for} counter {in} {range} 1 {to} 5` 和使用 `counter`了。\n试试吧，看看会发生什么！ 记住在`{for}` and `{if}` 语句后使用缩进(这意味着以四个空格开始一个句子)"
                 example_code: "## 海迪代码范例\n```\n{for} 计数器 {in} {range} 1 {to} 5\n    {print} 计数器\n```\n"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
