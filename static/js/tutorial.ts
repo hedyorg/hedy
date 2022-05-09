@@ -171,7 +171,20 @@ function callNextStep() {
 }
 
 function callTeacherNextStep() {
-  modal.alert("Dit gaat goed!", 3000, true);
+  current_step += 1;
+  if (current_step == 1) {
+    // Do nothing (yet...)
+  } else if (current_step == 2) {
+    // Do nothing (yet...)
+  } else if (current_step == 3) {
+    // Do nothing (yet...)
+  } else if (current_step == 4) {
+    // Do nothing (yet...)
+  } else if (current_step == 5) {
+    // Do nothing (yet...)
+  } else {
+    location.replace("/for-teachers");
+  }
 }
 
 function addHighlightBorder(element_id: string) {
