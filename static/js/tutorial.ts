@@ -13,21 +13,26 @@ let current_step = 0;
 
 function codeEditorStep() {
   $('#editor').addClass("z-30");
+  addHighlightBorder("editor");
 
   relocatePopup(65, 30);
   tutorialPopup(1);
 }
 
 function codeOutputStep() {
+  removeBorder("editor");
   $('#code_output').addClass("z-30");
+  addHighlightBorder("code_output");
 
   relocatePopup(35, 30);
   tutorialPopup(2);
 }
 
 function runButtonStep() {
+  removeBorder("code_output");
   $('#code_related_buttons').show();
   $('#runButtonContainer').addClass("z-30");
+  addHighlightBorder("runButtonContainer");
 
   relocatePopup(50, 30);
   tutorialPopup(3);
@@ -55,7 +60,9 @@ function tryRunButtonStep() {
 }
 
 function levelDefaultStep() {
+  removeBorder("runButtonContainer");
   $('#adventures').show();
+  addHighlightBorder("adventures");
   // Hide all tabs except the default level one
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') != "default") {
@@ -104,8 +111,10 @@ function quizTabStep() {
 }
 
 function saveShareStep() {
+  removeBorder("adventures");
   $('#level-header').addClass("z-30");
   $('#cheatsheet_container').hide();
+  addHighlightBorder("level-header");
 
   relocatePopup(50, 30);
   tutorialPopup(8);
@@ -122,6 +131,7 @@ function cheatsheetStep() {
 }
 
 function endTutorial() {
+  removeBorder("level-header");
   $('#cheatsheet_dropdown').removeClass("z-50");
   $('#cheatsheet_dropdown').hide();
 
@@ -154,6 +164,14 @@ function callNextStep() {
   } else {
     location.replace("/hedy");
   }
+}
+
+function addHighlightBorder(element_id: string) {
+  $('#' + element_id).addClass('border-2 rounded-lg border-red-500');
+}
+
+function removeBorder(element_id: string) {
+  $('#' + element_id).removeClass('border-2 rounded-lg border-red-500');
 }
 
 function relocatePopup(x: number, y: number) {
