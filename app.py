@@ -13,7 +13,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, TUTORIAL, NON_LATIN_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
 import hedyweb
 import hedy_content
 from flask_babel import gettext
@@ -1167,7 +1167,7 @@ def get_tutorial_translation(step):
         return gettext('invalid_tutorial_step'), 400
 
     translation = tutorial_steps(step)
-    return translation, 200
+    return jsonify({'translation': translation}), 200
 
 
 @app.route('/client_messages.js', methods=['GET'])

@@ -165,8 +165,8 @@ function tutorialPopup(step: number) {
       url: '/get_tutorial_step/' + step.toString(),
       dataType: 'json'
     }).done(function(response: any) {
-        $('#tutorial_title').text(response[0]);
-        $('#tutorial_text').text(response[1]);
+        $('#tutorial_title').text(response.translation[0]);
+        $('#tutorial_text').text(response.translation[1]);
         $('#tutorial-pop-up').fadeIn(1500);
     }).fail(function(response) {
       modal.alert(response.responseText, 3000, true);
