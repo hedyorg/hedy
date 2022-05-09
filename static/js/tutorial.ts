@@ -11,14 +11,14 @@ let current_step = 0;
 })();
 
 function codeEditorStep() {
-  $('#editor').addClass("z-40");
+  $('#editor').addClass("z-30");
   $('#editor-area').show();
   relocatePopup("right");
   tutorialPopup("De code editor", "In dit venster schrijf je alle code, probeer maar wat in te vullen!");
 }
 
 function codeOutputStep() {
-  $('#code_output').addClass("z-40");
+  $('#code_output').addClass("z-30");
   $('#code_output').show();
   $('#variables_container').hide();
 
@@ -28,15 +28,15 @@ function codeOutputStep() {
 
 function runButtonStep() {
   $('#code_related_buttons').show();
-  $('#runButtonContainer').addClass("z-40");
+  $('#runButtonContainer').addClass("z-30");
 
   relocatePopup("middle");
   tutorialPopup("De uitvoer knop", "Met deze knop kun je een programma uitvoeren, zullen we het proberen?");
 }
 
 function tryRunButtonStep() {
-  $('#editor').addClass("z-40");
-  $('#code_output').addClass("z-40");
+  $('#editor').addClass("z-30");
+  $('#code_output').addClass("z-30");
 
   theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
   theGlobalEditor?.setOptions({readOnly: true});
@@ -52,7 +52,7 @@ function levelDefaultStep() {
     if ($(this).attr('data-tab') != "default") {
       $(this).hide();
     } else {
-      $(this).addClass("z-40");
+      $(this).addClass("z-30");
     }
   });
 
@@ -64,7 +64,7 @@ function adventureTabsStep() {
   // Show all tabs except the quiz one
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') != "quiz") {
-      $(this).addClass("z-40");
+      $(this).addClass("z-30");
       $(this).show();
       if ($(this).attr('data-tab') == "story") {
         // Set to false, prevent "are you sure you want to switch without saving" pop-up
@@ -73,7 +73,7 @@ function adventureTabsStep() {
       }
     }
     if ($(this).attr('data-tab') == "default") {
-      $(this).removeClass("z-40");
+      $(this).removeClass("z-30");
     }
   });
 
@@ -85,9 +85,9 @@ function quizTabStep() {
   $('.tab').show();
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') == "quiz") {
-      $(this).addClass("z-40");
+      $(this).addClass("z-30");
     } else {
-      $(this).removeClass("z-40");
+      $(this).removeClass("z-30");
     }
   });
 
@@ -96,7 +96,7 @@ function quizTabStep() {
 }
 
 function saveShareStep() {
-  $('#level-header').addClass("z-40");
+  $('#level-header').addClass("z-30");
   $('#cheatsheet_container').hide();
 
   relocatePopup("middle");
@@ -104,7 +104,7 @@ function saveShareStep() {
 }
 
 function cheatsheetStep() {
-  $('#cheatsheet_container').addClass("z-40");
+  $('#cheatsheet_container').addClass("z-30");
   $('#cheatsheet_container').show();
   $('#cheatsheet_dropdown').addClass("z-50");
   $('#cheatsheet_dropdown').show();
