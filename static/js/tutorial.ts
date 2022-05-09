@@ -61,14 +61,13 @@ function tryRunButtonStep() {
 
 function levelDefaultStep() {
   removeBorder("runButtonContainer");
+  $('#tutorial-mask').hide();
   $('#adventures').show();
   addHighlightBorder("adventures");
   // Hide all tabs except the default level one
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') != "default") {
       $(this).hide();
-    } else {
-      $(this).addClass("z-40");
     }
   });
 
@@ -80,7 +79,6 @@ function adventureTabsStep() {
   // Show all tabs except the quiz one
   $('#adventures-buttons').children().each(function() {
     if ($(this).attr('data-tab') != "quiz") {
-      $(this).addClass("z-40");
       $(this).show();
       if ($(this).attr('data-tab') == "story") {
         // Set to false, prevent "are you sure you want to switch without saving" pop-up
@@ -97,14 +95,18 @@ function quizTabStep() {
   // Show all tabs (including the quiz one) -> only highlight the quiz tab
   $('.tab').show();
   $('#adventures-buttons').children().each(function() {
-    $(this).addClass("z-40");
+    if ($(this).attr('data-tab') == "quiz") {
+      $(this).addClass('border-2 rounded-lg border-red-500');
+    }
   });
-
   tutorialPopup(7);
 }
 
 function saveShareStep() {
   removeBorder("adventures");
+  $('#adventures-buttons').children().each(function() {
+    $(this).removeClass('border-2 rounded-lg border-red-500');
+  });
   $('#level-header').addClass("z-40");
   $('#cheatsheet_container').hide();
   addHighlightBorder("level-header");
@@ -114,9 +116,8 @@ function saveShareStep() {
 }
 
 function cheatsheetStep() {
-  $('#cheatsheet_container').addClass("z-40");
   $('#cheatsheet_container').show();
-  $('#cheatsheet_dropdown').addClass("z-50");
+  $('#code_output').removeClass("z-40");
   $('#cheatsheet_dropdown').show();
 
   tutorialPopup(9);
@@ -124,7 +125,6 @@ function cheatsheetStep() {
 
 function endTutorial() {
   removeBorder("level-header");
-  $('#cheatsheet_dropdown').removeClass("z-50");
   $('#cheatsheet_dropdown').hide();
 
   relocatePopup(50, 20);
