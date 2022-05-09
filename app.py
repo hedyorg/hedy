@@ -1017,27 +1017,27 @@ def main_page(page):
 @app.route('/for-teachers', methods=['GET'])
 @requires_login
 def for_teachers_page(user):
-  if not is_teacher(user):
-    return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+    if not is_teacher(user):
+        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
 
-  page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
-  welcome_teacher = session.get('welcome-teacher') or False
-  session.pop('welcome-teacher', None)
+    page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
+    welcome_teacher = session.get('welcome-teacher') or False
+    session.pop('welcome-teacher', None)
 
-  teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
-  adventures = []
-  for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
-    adventures.append(
-      {'id': adventure.get('id'),
-       'name': adventure.get('name'),
-       'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
-       'level': adventure.get('level')
-       }
-    )
+    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+    adventures = []
+    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+        adventures.append(
+          {'id': adventure.get('id'),
+           'name': adventure.get('name'),
+           'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+           'level': adventure.get('level')
+           }
+        )
 
-  return render_template('for-teachers.html', current_page='my-profile', page_title=gettext('title_for-teacher'),
-                         content=page_translations, teacher_classes=teacher_classes,
-                         teacher_adventures=adventures, welcome_teacher=welcome_teacher)
+    return render_template('for-teachers.html', current_page='my-profile', page_title=gettext('title_for-teacher'),
+                           content=page_translations, teacher_classes=teacher_classes,
+                           teacher_adventures=adventures, welcome_teacher=welcome_teacher)
 
 
 @app.route('/explore', methods=['GET'])
