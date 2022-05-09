@@ -10,13 +10,6 @@ let current_step = 0;
   });
 })();
 
-function hideFunctionality() {
-  $('#level-header').hide();
-  $('#adventures').hide();
-  $('#editor-area').hide();
-  $('#developers_toggle_container').hide();
-}
-
 function codeEditorStep() {
   $('#editor').addClass("z-40");
   $('#editor-area').show();
@@ -198,7 +191,7 @@ function tutorialPopup(title: string, message: string) {
 }
 
 export function startTutorial() {
-  hideFunctionality();
+  $('#tutorial-mask').show();
   tutorialPopup("Welkom bij Hedy!", "In deze uitleg leggen we stap voor stap uit wat je allemaal kunt doen");
 }
 
