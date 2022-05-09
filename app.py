@@ -1002,31 +1002,6 @@ def main_page(page):
         else:
             return utils.error_page(error=403, ui_message=gettext('not_user'))
 
-    if page == 'for-teachers':
-        for_teacher_translations = hedyweb.PageTranslations(
-            page).get_page_translations(g.lang)
-        if is_teacher(user):
-            welcome_teacher = session.get('welcome-teacher') or False
-            session.pop('welcome-teacher', None)
-            teacher_classes = [] if not current_user(
-            )['username'] else DATABASE.get_teacher_classes(current_user()['username'], True)
-            adventures = []
-            for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
-                adventures.append(
-                    {'id': adventure.get('id'),
-                     'name': adventure.get('name'),
-                     'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
-                     'level': adventure.get('level')
-                     }
-                )
-
-            return render_template('for-teachers.html', current_page='my-profile',
-                                   page_title=gettext('title_for-teacher'),
-                                   content=for_teacher_translations, teacher_classes=teacher_classes,
-                                   teacher_adventures=adventures, welcome_teacher=welcome_teacher)
-        else:
-            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-
     requested_page = hedyweb.PageTranslations(page)
     if not requested_page.exists():
         abort(404)
@@ -1034,6 +1009,32 @@ def main_page(page):
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=gettext('title_start'),
                            current_page='start', content=main_page_translations)
+
+
+@app.route('/for-teachers', methods=['GET'])
+@requires_login
+def for_teachers_page(user):
+    if not is_teacher(user):
+        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+
+    page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
+    welcome_teacher = session.get('welcome-teacher') or False
+    session.pop('welcome-teacher', None)
+
+    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+    adventures = []
+    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+        adventures.append(
+          {'id': adventure.get('id'),
+           'name': adventure.get('name'),
+           'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+           'level': adventure.get('level')
+           }
+        )
+
+    return render_template('for-teachers.html', current_page='my-profile', page_title=gettext('title_for-teacher'),
+                           content=page_translations, teacher_classes=teacher_classes,
+                           teacher_adventures=adventures, welcome_teacher=welcome_teacher)
 
 
 @app.route('/explore', methods=['GET'])
