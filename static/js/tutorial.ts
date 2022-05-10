@@ -227,7 +227,23 @@ function callTeacherNextStep() {
   } else if (current_step == 5) {
     documentationStep();
   } else if (current_step == 6) {
-    teacherEndStep();
+    pushAchievement("ring_the_bell");
+    $('#achievement_pop-up').removeClass('z-10');
+    $('#achievement_pop-up').addClass('z-50');
+    // If the achievement pop-up is visible -> wait with the next function call
+    setTimeout(function(){
+      if ($('#achievement_pop-up').is(':visible')) {
+        setTimeout(function() {
+          teacherEndStep();
+          $('#achievement_pop-up').removeClass('z-50');
+          $('#achievement_pop-up').addClass('z-10');
+        }, 5000);
+      } else {
+        teacherEndStep();
+        $('#achievement_pop-up').removeClass('z-50');
+        $('#achievement_pop-up').addClass('z-10');
+      }
+    }, 500);
   } else {
     location.replace("/for-teachers");
   }
