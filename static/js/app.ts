@@ -712,9 +712,9 @@ export function submit_program (id: string, index: number) {
 }
 
 export function set_explore_favourite(id: string, favourite: number) {
-  let prompt = "Are you sure you want to remove this program as explore favourite?";
+  let prompt = "Are you sure you want to remove this program as a \"Hedy choice\" program?";
   if (favourite) {
-    prompt = "Are you sure you want to set this program as explore favourite?";
+    prompt = "Are you sure you want to set this program as a \"Hedy choice\" program?";
   }
   modal.confirm (prompt, function () {
     $.ajax({

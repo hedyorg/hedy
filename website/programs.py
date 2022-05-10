@@ -223,4 +223,6 @@ def routes(app, database, achievements):
             return 'No such program!', 404
 
         DATABASE.set_program_as_hedy_choice(body['id'], favourite)
-        return jsonify({'message': gettext('set_hedy_choice')}), 200
+        if favourite:
+            return jsonify({'message': 'Program successfully set as a "Hedy choice" program.'}), 200
+        return jsonify({'message': 'Program sucessfully removed as a "Hedy choice" program.'}), 200
