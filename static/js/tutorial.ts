@@ -171,6 +171,9 @@ function callNextStep() {
 }
 
 function classStep() {
+  $('#teacher_classes').addClass('z-40');
+
+  relocatePopup(50, 40);
   tutorialPopup(current_step);
 }
 
@@ -179,14 +182,22 @@ function customizeClassStep() {
 }
 
 function adventureStep() {
+  $('#teacher_adventures').addClass('z-40');
+
+  relocatePopup(50, 70);
   tutorialPopup(current_step);
 }
 
 function multipleAccountsStep() {
+  $('#teacher_accounts').addClass('z-40');
+
+  relocatePopup(50, 20);
   tutorialPopup(current_step);
 }
 
 function documentationStep() {
+  $('#teacher_documentation').addClass('z-40');
+
   tutorialPopup(current_step);
 }
 
