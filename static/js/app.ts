@@ -711,7 +711,7 @@ export function submit_program (id: string, index: number) {
   });
 }
 
-export function set_explore_favourite(id: string, favourite: boolean) {
+export function set_explore_favourite(id: string, favourite: number) {
   let prompt = "Are you sure you want to remove this program as explore favourite?";
   if (favourite) {
     prompt = "Are you sure you want to set this program as explore favourite?";
@@ -728,7 +728,7 @@ export function set_explore_favourite(id: string, favourite: boolean) {
       dataType: 'json'
     }).done(function(response) {
         modal.alert(response.message, 3000, false);
-        if (favourite) {
+        if (favourite == 1) {
           $('#' + id).removeClass('text-white');
           $('#' + id).addClass('text-yellow-500');
         } else {

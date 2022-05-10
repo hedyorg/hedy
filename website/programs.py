@@ -213,12 +213,14 @@ def routes(app, database, achievements):
             return 'body must be an object', 400
         if not isinstance(body.get('id'), str):
             return 'id must be a string', 400
-        if not isinstance(body.get('favourite'), bool):
-            return 'favourite must be a bool', 400
+        if not isinstance(body.get('favourite'), int):
+            return 'favourite must be a integer', 400
+
+        favourite = True if body.get('favourite') == 1 else False
 
         result = DATABASE.program_by_id(body['id'])
         if not result:
             return 'No such program!', 404
 
-        DATABASE.set_program_as_hedy_choice(body['id'], body['favourite'])
+        DATABASE.set_program_as_hedy_choice(body['id'], favourite)
         return jsonify({'message': gettext('set_hedy_choice')}), 200

@@ -1085,7 +1085,7 @@ def explore():
             'code': "\n".join(code.split("\n")[:4])
         })
 
-    favourite_programs = DATABASE.get_favourite_programs()
+    favourite_programs = DATABASE.get_hedy_choices()
     hedy_choices = []
     for program in favourite_programs:
         hedy_choices.append({
