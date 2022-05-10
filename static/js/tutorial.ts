@@ -206,31 +206,21 @@ function relocatePopup(x: number, y: number) {
 }
 
 function tutorialPopup(step: number) {
-    $.ajax({
-      type: 'GET',
-      url: '/get_tutorial_step/' + step.toString(),
-      dataType: 'json'
-    }).done(function(response: any) {
-        $('#tutorial_title').text(response.translation[0]);
-        $('#tutorial_text').text(response.translation[1]);
-        $('#tutorial-pop-up').fadeIn(800);
-    }).fail(function(response) {
-      modal.alert(response.responseText, 3000, true);
-    });
-}
-
-function teacherTutorialPopup(step: number) {
-    $.ajax({
-      type: 'GET',
-      url: '/get_teacher_tutorial_step/' + step.toString(),
-      dataType: 'json'
-    }).done(function(response: any) {
-        $('#tutorial_title').text(response.translation[0]);
-        $('#tutorial_text').text(response.translation[1]);
-        $('#tutorial-pop-up').fadeIn(800);
-    }).fail(function(response) {
-      modal.alert(response.responseText, 3000, true);
-    });
+  let route = "/get_tutorial_step/"
+  if (!student) {
+    route = "/get_teacher_tutorial_step/"
+  }
+  $.ajax({
+    type: 'GET',
+    url: route + step.toString(),
+    dataType: 'json'
+  }).done(function(response: any) {
+      $('#tutorial_title').text(response.translation[0]);
+      $('#tutorial_text').text(response.translation[1]);
+      $('#tutorial-pop-up').fadeIn(800);
+  }).fail(function(response) {
+    modal.alert(response.responseText, 3000, true);
+  });
 }
 
 export function startTutorial() {
@@ -246,6 +236,6 @@ export function startTeacherTutorial() {
   $('#tutorial-mask').show();
   current_step = 0;
   student = false;
-  teacherTutorialPopup(current_step);
+  tutorialPopup(current_step);
 }
 
