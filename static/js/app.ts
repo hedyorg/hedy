@@ -711,6 +711,16 @@ export function submit_program (id: string, index: number) {
   });
 }
 
+export function set_explore_favourite(id: string, favourite: boolean) {
+  let prompt = "Are you sure you want to remove this program as explore favourite?";
+  if (favourite) {
+    prompt = "Are you sure you want to set this program as explore favourite?";
+  }
+  modal.confirm (prompt, function () {
+    // Do some magic...
+  });
+}
+
 export function copy_to_clipboard (string: string, prompt: string) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
