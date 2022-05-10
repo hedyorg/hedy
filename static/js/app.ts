@@ -719,9 +719,10 @@ export function set_explore_favourite(id: string, favourite: boolean) {
   modal.confirm (prompt, function () {
     $.ajax({
       type: 'POST',
-      url: '/programs/submit',
+      url: '/programs/set_explore_favourite',
       data: JSON.stringify({
-        id: id
+        id: id,
+        favourite: favourite
     }),
       contentType: 'application/json',
       dataType: 'json'
