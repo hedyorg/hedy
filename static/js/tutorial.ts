@@ -172,7 +172,8 @@ function callNextStep() {
 
 function classStep() {
   $('#auth_main_container').addClass('z-40');
-  $('#teacher_classes').addClass('z-40');
+  $('#teacher_classes').addClass('z-40 bg-gray-100');
+  addHighlightBorder("teacher_classes");
 
   relocatePopup(50, 40);
   tutorialPopup(current_step);
@@ -183,26 +184,33 @@ function customizeClassStep() {
 }
 
 function adventureStep() {
-  $('#teacher_adventures').addClass('z-40');
+  $('#teacher_adventures').addClass('z-40 bg-gray-100');
+  removeBorder("teacher_classes");
+  addHighlightBorder("teacher_adventures");
 
   relocatePopup(50, 70);
   tutorialPopup(current_step);
 }
 
 function multipleAccountsStep() {
-  $('#teacher_accounts').addClass('z-40');
+  $('#teacher_accounts').addClass('z-40 bg-gray-100');
+  removeBorder("teacher_adventures");
+  addHighlightBorder("teacher_accounts");
 
   relocatePopup(50, 20);
   tutorialPopup(current_step);
 }
 
 function documentationStep() {
-  $('#teacher_documentation').addClass('z-40');
+  $('#teacher_documentation').addClass('z-40 bg-gray-100');
+  removeBorder("teacher_accounts");
+  addHighlightBorder("teacher_documentation")
 
   tutorialPopup(current_step);
 }
 
 function teacherEndStep() {
+  removeBorder("teacher_documentation");
   tutorialPopup(current_step);
 }
 
@@ -230,7 +238,7 @@ function addHighlightBorder(element_id: string) {
 }
 
 function removeBorder(element_id: string) {
-  $('#' + element_id).removeClass('border-2 rounded-lg border-red-500');
+  $('#' + element_id).removeClass('border-2 border-red-500');
 }
 
 function relocatePopup(x: number, y: number) {

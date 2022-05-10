@@ -10,7 +10,7 @@
       </div>
   </div>
 {% endif %}
-<div id="teacher_classes" class="flex flex-col items-center pb-4 border-b-2">
+<div id="teacher_classes" class="flex flex-col items-center py-4 border-b-2">
     <h2>{{_('my_classes')}}</h2>
     {% if teacher_classes %}
       <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4">
@@ -31,7 +31,7 @@
     {% endif %}
   <button class="green-btn mt-4" onclick='hedyApp.create_class ({{_('class_name_prompt')|tojson}})'>{{_('create_class')}}</button>
 </div>
-<div id="teacher_adventures" class="flex flex-col items-center mt-4 mb-4 pb-4 border-b-2">
+<div id="teacher_adventures" class="flex flex-col items-center mt-4 mb-4 py-4 border-b-2">
     <h2>{{_('my_adventures')}}</h2>
     {% if teacher_adventures %}
         <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4">
@@ -58,13 +58,13 @@
     {% endif %}
     <button class="green-btn mt-4" onclick='hedyApp.create_adventure({{_('adventure_prompt')|tojson}})'>{{_('create_adventure')}}</button>
 </div>
-<div id="teacher_accounts" class="flex flex-col items-center mt-4 border-b-2 pb-4">
+<div id="teacher_accounts" class="flex flex-col items-center mt-4 border-b-2 py-4">
     <h2>{{_('create_student_accounts')}}</h2>
     <button class="green-btn mt-4" onclick="window.open('/for-teachers/create-accounts', '_self');">
         {{_('create_accounts')}}
     </button>
 </div>
-<div class="w-full mt-4" id="teacher_documentation">
+<div class="w-full mt-4 py-4" id="teacher_documentation">
     <h2 class="text-center">{{ content['title'] }}</h2>
     <div class="flex flex-row justify-center mb-4 pb-4 border-b-2">
     {% for section in content['sections'] %}
