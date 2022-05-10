@@ -1183,12 +1183,14 @@ def teacher_tutorial_steps(step):
     elif step == 1:
         translation = [gettext('tutorial_class_title'), gettext('tutorial_class_message')]
     elif step == 2:
-        translation = [gettext('tutorial_own_adventures_title'), gettext('tutorial_own_adventures_message')]
+        translation = [gettext('tutorial_customize_class_title'), gettext('tutorial_customize_class_message')]
     elif step == 3:
-        translation = [gettext('tutorial_accounts_title'), gettext('tutorial_accounts_message')]
+        translation = [gettext('tutorial_own_adventures_title'), gettext('tutorial_own_adventures_message')]
     elif step == 4:
-        translation = [gettext('tutorial_documentation_title'), gettext('tutorial_documentation_message')]
+        translation = [gettext('tutorial_accounts_title'), gettext('tutorial_accounts_message')]
     elif step == 5:
+        translation = [gettext('tutorial_documentation_title'), gettext('tutorial_documentation_message')]
+    elif step == 6:
         translation = [gettext('tutorial_end_title'), gettext('teacher_tutorial_end_message')]
     else:
         translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]

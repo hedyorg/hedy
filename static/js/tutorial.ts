@@ -171,23 +171,27 @@ function callNextStep() {
 }
 
 function classStep() {
-  return null;
+  tutorialPopup(current_step);
+}
+
+function customizeClassStep() {
+  tutorialPopup(current_step);
 }
 
 function adventureStep() {
-  return null;
+  tutorialPopup(current_step);
 }
 
 function multipleAccountsStep() {
-  return null;
+  tutorialPopup(current_step);
 }
 
 function documentationStep() {
-  return null;
+  tutorialPopup(current_step);
 }
 
 function teacherEndStep() {
-  return null;
+  tutorialPopup(current_step);
 }
 
 function callTeacherNextStep() {
@@ -195,12 +199,14 @@ function callTeacherNextStep() {
   if (current_step == 1) {
     classStep();
   } else if (current_step == 2) {
-    adventureStep();
+    customizeClassStep();
   } else if (current_step == 3) {
-    multipleAccountsStep();
+    adventureStep();
   } else if (current_step == 4) {
-    documentationStep();
+    multipleAccountsStep();
   } else if (current_step == 5) {
+    documentationStep();
+  } else if (current_step == 6) {
     teacherEndStep();
   } else {
     location.replace("/for-teachers");
