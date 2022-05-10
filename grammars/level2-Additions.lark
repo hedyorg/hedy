@@ -11,7 +11,7 @@ error_echo_dep_2: _ECHO (error_text_dep_2)?
 error_text_dep_2: /([^\n]+)/ -> text //anything can be parsed except for a newline
 
 //sleep
-sleep: _SLEEP (INT)?
+sleep: _SLEEP (INT | var_access)?
 
 //in level 2, forward may also depend on a variable
 turtle: _FORWARD ((NEGATIVE_NUMBER | NUMBER | textwithoutspaces))? -> forward | _TURN ((NEGATIVE_NUMBER | NUMBER | textwithoutspaces))? -> turn

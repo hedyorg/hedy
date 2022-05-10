@@ -42,6 +42,19 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     #
+    # sleep tests
+    #
+    def test_sleep_with_calc(self):
+        code = textwrap.dedent("""\
+            n is 1 * 2 + 3
+            sleep n""")
+        expected = HedyTester.dedent(
+            "n = int(1) * int(2) + int(3)",
+            HedyTester.sleep_command_transpiled("n"))
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    #
     # assign tests
     #
     def test_assign_with_equals(self):

@@ -33,12 +33,14 @@ TRANSPILER_LOOKUP = {}
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
+
 class Command:
     print = 'print'
     ask = 'ask'
     echo = 'echo'
     turn = 'turn'
     forward = 'forward'
+    sleep = 'sleep'
     color = 'color'
     add_to_list = 'add to list'
     remove_from_list = 'remove from list'
@@ -63,6 +65,7 @@ translatable_commands = {Command.print: ['print'],
                          Command.ask: ['ask'],
                          Command.echo: ['echo'],
                          Command.turn: ['turn'],
+                         Command.sleep: ['sleep'],
                          Command.color: ['color'],
                          Command.forward: ['forward'],
                          Command.add_to_list: ['add', 'to_list'],
@@ -144,6 +147,7 @@ commands_and_types_per_level = {
                    2: [HedyType.integer, HedyType.input]},
     Command.color: {1: command_make_color},
     Command.forward: {1: [HedyType.integer, HedyType.input]},
+    Command.sleep: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
@@ -471,6 +475,11 @@ class TypeValidator(Transformer):
             name = tree.children[0].data
             if self.level > 1 or name not in command_turn_literals:
                 self.validate_args_type_allowed(Command.turn, tree.children, tree.meta)
+        return self.to_typed_tree(tree)
+
+    def sleep(self, tree):
+        if tree.children:
+            self.validate_args_type_allowed(Command.sleep, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def assign(self, tree):
@@ -1335,12 +1344,16 @@ class ConvertToPython_2(ConvertToPython_1):
                 value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'"
 
-
     def sleep(self, args):
-        if args == []:
+        if not args:
             return "time.sleep(1)"
         else:
-            return f"time.sleep({args[0]})"
+            value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+            return textwrap.dedent(f"""\
+                try:
+                  time.sleep(int({value}))
+                except ValueError:
+                  raise Exception(f'While running your program the command {style_closest_command(Command.sleep)} received the value {style_closest_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
 
 
 @hedy_transpiler(level=3)
