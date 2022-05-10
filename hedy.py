@@ -1351,7 +1351,7 @@ class ConvertToPython_2(ConvertToPython_1):
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
             return textwrap.dedent(f"""\
                 try:
-                  time.sleep(max(0, min(10, int({value}))))
+                  time.sleep(int({value}))
                 except ValueError:
                   raise Exception(f'While running your program the command {style_closest_command(Command.sleep)} received the value {style_closest_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
 

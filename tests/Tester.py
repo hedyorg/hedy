@@ -217,7 +217,7 @@ class HedyTester(unittest.TestCase):
   def sleep_command_transpiled(val):
     return textwrap.dedent(f"""\
         try:
-          time.sleep(max(0, min(10, int({val}))))
+          time.sleep(int({val}))
         except ValueError:
           raise Exception(f'While running your program the command <span class="command-highlighted">sleep</span> received the value <span class="command-highlighted">{{{val}}}</span> which is not allowed. Try changing the value to a number.')""")
 
