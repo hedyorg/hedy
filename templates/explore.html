@@ -59,6 +59,9 @@
                              </div>
                              <div class="mt-auto mb-2 flex items-center justify-center">
                                 <button class="blue-btn border border-blue-600 py-1 rounded-lg" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('view_program')}}</button>
+                                {% if is_admin %}
+                                    <i class="fa fa-star p-2 bg-blue-300 {% if program.hedy_choice %}text-yellow-500{% else %}text-white{% endif %} rounded-full cursor-pointer hover:bg-blue-600" id="{{program.id}}" onclick="hedyApp.set_explore_favourite('{{ program.id }}', {% if program.hedy_choice %}0{% else %}1{% endif %});" aria-hidden="true"></i>
+                                {% endif %}
                              </div>
                         </div>
                     </div>
