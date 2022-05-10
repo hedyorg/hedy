@@ -1,6 +1,6 @@
 from flask_babel import gettext
 import hedy
-from website.auth import requires_login, current_user
+from website.auth import requires_login, current_user, is_admin
 import utils
 import uuid
 from flask import g, request, jsonify
@@ -202,3 +202,23 @@ def routes(app, database, achievements):
             return jsonify({'message': gettext('favourite_success')})
         else:
             return "You can't set a favourite program without a public profile", 400
+
+    @app.route('/programs/set_hedy_choice', methods=['POST'])
+    @requires_login
+    def set_hedy_choice(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        body = request.json
+        if not isinstance(body, dict):
+            return 'body must be an object', 400
+        if not isinstance(body.get('id'), str):
+            return 'id must be a string', 400
+        if not isinstance(body.get('favourite'), bool):
+            return 'favourite must be a bool', 400
+
+        result = DATABASE.program_by_id(body['id'])
+        if not result:
+            return 'No such program!', 404
+
+        DATABASE.set_program_as_hedy_choice(body['id'], body['favourite'])
+        return jsonify({'message': gettext('set_hedy_choice')}), 200

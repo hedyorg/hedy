@@ -719,7 +719,7 @@ export function set_explore_favourite(id: string, favourite: boolean) {
   modal.confirm (prompt, function () {
     $.ajax({
       type: 'POST',
-      url: '/programs/set_explore_favourite',
+      url: '/programs/set_hedy_choice',
       data: JSON.stringify({
         id: id,
         favourite: favourite
@@ -727,7 +727,7 @@ export function set_explore_favourite(id: string, favourite: boolean) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-        modal.alert(response.success, 3000, false);
+        modal.alert(response.message, 3000, false);
         if (favourite) {
           $('#' + id).removeClass('text-white');
           $('#' + id).addClass('text-yellow-500');
