@@ -236,10 +236,10 @@ class Translator(Visitor):
     def while_loop(self, tree):
         self.add_rule('_WHILE', 'while', tree)
 
-    def andcondition(self, tree):
+    def and_condition(self, tree):
         self.add_rule('_AND', 'and', tree)
 
-    def orcondition(self, tree):
+    def or_condition(self, tree):
         self.add_rule('_OR', 'or', tree)
 
     def input(self, tree):
