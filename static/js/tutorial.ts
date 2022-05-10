@@ -171,6 +171,7 @@ function callNextStep() {
 }
 
 function classStep() {
+  $('#auth_main_container').addClass('z-40');
   $('#teacher_classes').addClass('z-40');
 
   relocatePopup(50, 40);
