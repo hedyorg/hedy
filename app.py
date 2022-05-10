@@ -295,7 +295,7 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def enrich_context_with_user_info():
     user = current_user()
     data = {'username': user.get('username', ''),
-            'is_teacher': is_teacher(user)}
+            'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
     return data
 
 
