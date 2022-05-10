@@ -35,7 +35,7 @@ class TestsTranslationLevel8(HedyTester):
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="fr", level=self.level)
         expected = textwrap.dedent("""\
-        repete 3 fois
+        répète 3 fois
             affiche 'Hedy is fun!'""")
 
         self.assertEqual(expected, result)
