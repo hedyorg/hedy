@@ -1084,10 +1084,21 @@ def explore():
             'code': "\n".join(code.split("\n")[:4])
         })
 
-    adventures_names = hedy_content.Adventures(
-        session['lang']).get_adventure_names()
+    favourite_programs = DATABASE.get_favourite_programs()
+    hedy_choices = []
+    for program in favourite_programs:
+        hedy_choices.append({
+            'username': program['username'],
+            'name': program['name'],
+            'level': program['level'],
+            'id': program['id'],
+            'public_user': True if public_profile else None,
+            'code': "\n".join(code.split("\n")[:4])
+        })
 
-    return render_template('explore.html', programs=filtered_programs, favourite_programs=filtered_programs,
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
+
+    return render_template('explore.html', programs=filtered_programs, favourite_programs=hedy_choices,
                            filtered_level=level,
                            achievement=achievement,
                            filtered_adventure=adventure,

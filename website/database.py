@@ -9,7 +9,7 @@ storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_databa
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['id', 'username']])
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public']])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public', 'hedy_choice']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey('creator')])
 INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
@@ -230,6 +230,12 @@ class Database:
                 return programs[-48:]
             programs = [x for x in programs if x.get('adventure_name') == adventure]
         return programs[-48:]
+
+    def get_all_favourite_programs(self):
+        return PROGRAMS.get_many({'hedy_choice': True}, sort_key='date', reverse=True)
+
+    def get_favourite_programs(self):
+        return PROGRAMS.get_many({'hedy_choice': True}, sort_key='date', limit=4, reverse=True)
 
     def all_programs_count(self):
         """Return the total number of all programs."""
