@@ -9,12 +9,38 @@
     });
     </script>
     {% endif %}
-    <h2 class="px-8 mb-4">{{_('explore_programs')}}</h2>
+    <!-- <h2 class="px-8 mb-4">{{_('explore_programs')}}</h2> -->
     {% if is_admin %}
-        HELLO
+        <!-- We want to add a button to enable the "set as favourite" option -->
     {% endif %}
+    <!--
     <div class="mb-4">
         {{_('explore_explanation')}}
+    </div>
+    -->
+    <div class="border-b border-t border-gray-500 rounded-lg mb-4" id="explore_favourite_programs">
+        <h2 class="text-center py-2">Our favourites</h2>
+        {% for program in favourite_programs %}
+            <div class="explore-program-box overflow-hidden">
+                <div class="flex flex-col h-full">
+                      <div class="explore-program-box-title bg-yellow-500 text-white text-lg text-center ltr:-ml-2 rtl:-mr-2 -mt-8 pt-10 ltr:pl-12 rtl:pr-12 ltr:rotate-6 rtl:-rotate-6 w-72">
+                              {{ program.name | truncate(20) }}
+                      </div>
+                      <div class="px-4">
+                          {{_('level')}}: <b>{{ program.level }}</b>
+                      </div>
+                      <div class="px-4 mb-1 z-10">
+                          {{_('creator')}}: <a {% if program.public_user %}onclick="window.open('/user/{{program.username}}', '_self')"{% endif %} class="{% if program.public_user %}cursor-pointer{% else %}text-black{% endif %} no-underline {% if program.username|length > 12 %} text-sm{% endif %}">{{ program.username|truncate(18) }}</a>
+                      </div>
+                     <div class="relative px-4">
+                         <pre class="no-copy-button" level="{{ program.level }}">{{ program.code }}</pre>
+                     </div>
+                     <div class="mt-auto mb-2 flex items-center justify-center">
+                        <button class="blue-btn border border-blue-600 py-1 rounded-lg" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('view_program')}}</button>
+                     </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
     <div class="w-full mb-8" id="program_filter">
         <form onsubmit="event.preventDefault (); hedyApp.filter_programs();">
