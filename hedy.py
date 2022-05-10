@@ -834,9 +834,9 @@ class AllCommands(Transformer):
             return 'for'
         if keyword == 'for_list':
             return 'for'
-        if keyword == 'orcondition':
+        if keyword == 'or_condition':
             return 'or'
-        if keyword == 'andcondition':
+        if keyword == 'and_condition':
             return 'and'
         if keyword == 'while_loop':
             return 'while'
@@ -1681,9 +1681,9 @@ class ConvertToPython_12(ConvertToPython_11):
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
-    def andcondition(self, args):
+    def and_condition(self, args):
         return ' and '.join(args)
-    def orcondition(self, args):
+    def or_condition(self, args):
         return ' or '.join(args)
 
 @hedy_transpiler(level=14)
