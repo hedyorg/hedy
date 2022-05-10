@@ -1087,7 +1087,7 @@ def explore():
     adventures_names = hedy_content.Adventures(
         session['lang']).get_adventure_names()
 
-    return render_template('explore.html', programs=filtered_programs,
+    return render_template('explore.html', programs=filtered_programs, favourite_programs=filtered_programs,
                            filtered_level=level,
                            achievement=achievement,
                            filtered_adventure=adventure,
