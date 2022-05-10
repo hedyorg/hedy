@@ -717,7 +717,8 @@ def get_user_formatted_age(now, date):
 
 
 @app.route('/tutorial', methods=['GET'])
-def tutorial_index():
+@requires_login
+def tutorial_index(user):
     level = 1
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
     adventures = load_adventures_per_level(level)

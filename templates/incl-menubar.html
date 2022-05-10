@@ -9,7 +9,6 @@
     <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'hedy' %}border-white{% else %}border-transparent{% endif %}" href="/hedy">{{_('nav_hedy')}}</a>
     <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'explore' %}border-white{% else %}border-transparent{% endif %}" href="/explore">{{_('nav_explore')}}</a>
     <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'learn-more' %}border-white{% else %}border-transparent{% endif %}" href="/learn-more">{{_('nav_learn_more')}}</a>
-    <a class="menubar-btn hover:bg-blue-600 border-transparent" href="/teacher-tutorial">Debug</a>
     {% if username %}
       <a class="menubar-btn hover:bg-blue-600 ltr:ml-auto rtl:mr-auto {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{_('program_header')}}</a>
       <div class="dropdown relative z-20 flex">
