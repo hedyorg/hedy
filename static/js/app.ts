@@ -717,7 +717,26 @@ export function set_explore_favourite(id: string, favourite: boolean) {
     prompt = "Are you sure you want to set this program as explore favourite?";
   }
   modal.confirm (prompt, function () {
-    // Do some magic...
+    $.ajax({
+      type: 'POST',
+      url: '/programs/submit',
+      data: JSON.stringify({
+        id: id
+    }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+        modal.alert(response.success, 3000, false);
+        if (favourite) {
+          $('#' + id).removeClass('text-white');
+          $('#' + id).addClass('text-yellow-500');
+        } else {
+          $('#' + id).removeClass('text-yellow-500');
+          $('#' + id).addClass('text-white');
+        }
+    }).fail(function(err) {
+        return modal.alert(err.responseText, 3000, true);
+    });
   });
 }
 
