@@ -57,7 +57,10 @@ def translate_keywords_in_snippets(snippets):
     keyword_dict = {}
     for lang in ALL_KEYWORD_LANGUAGES:
         keyword_dict[lang] = YamlFile.for_file(f'../../content/keywords/{lang}.yaml').to_dict()
-
+        for k, v in keyword_dict[lang].items():
+            if type(v) == str and "|" in v:
+                # when we have several options, pick the first one as default
+                keyword_dict[lang][k] = v.split('|')[0]
     english_keywords = YamlFile.for_file(f'../../content/keywords/en.yaml').to_dict()
 
     # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
