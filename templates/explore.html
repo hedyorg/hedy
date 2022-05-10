@@ -39,7 +39,7 @@
     </div>
     <!-- Only show our selected favourites when not filtering -->
     {% if not filtered_level and not filtered_adventure and favourite_programs %}
-        <div class="border rounded-lg border-yellow-500 mb-4" id="explore_favourite_programs">
+        <div class="border rounded-lg border-yellow-500 mb-4 flex flex-wrap mx-auto justify-center turn-pre-into-ace" id="explore_favourite_programs">
             {% for program in favourite_programs %}
                 <div class="explore-program-box overflow-hidden">
                     <div class="flex flex-col h-full">
