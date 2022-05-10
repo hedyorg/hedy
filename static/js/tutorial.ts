@@ -8,11 +8,11 @@ let student = true;
 (function() {
   $('#tutorial_next_button').off('click').on('click', () => {
     $('#tutorial-pop-up').hide();
+    // If we are a student -> call the next student tutorial step, otherwise call the teacher step
     if (student) {
-      callNextStep();
-    } else {
-      callTeacherNextStep();
+      return callNextStep();
     }
+    return callTeacherNextStep();
   });
 })();
 
