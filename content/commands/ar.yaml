@@ -262,7 +262,7 @@
         answer2 = {ask} 'What is 2+2?'
         {if} answer1 {is} 5 {and} answer2 {is} 4
             {print} 'Both answers are correct!'
-        else
+        {else}
             {print} 'At least one answer is wrong!'
 -   name: "{or}"
     explanation: "At least 1 of the two parts need to be correct. If both are correct, it is also fine."
@@ -272,7 +272,7 @@
         answer2 = {ask} 'What is 2+2?'
         {if} answer1 {is} 5 {or} answer2 {is} 4
             {print} 'At least one answer is correct!'
-        else
+        {else}
             {print} 'Both answers are wrong!'
 14:
 -   name: "Smaller"
