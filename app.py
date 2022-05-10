@@ -1093,11 +1093,12 @@ def explore():
             'name': program['name'],
             'level': program['level'],
             'id': program['id'],
-            'hedy_choice': True if program.get('hedy_choice') else False,
+            'hedy_choice': True,
             'public_user': True if public_profile else None,
-            'code': "\n".join(code.split("\n")[:4])
+            'code': "\n".join(program['code'].split("\n")[:4])
         })
 
+    print(hedy_choices)
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     return render_template('explore.html', programs=filtered_programs, favourite_programs=hedy_choices,
