@@ -1176,8 +1176,24 @@ def tutorial_steps(step):
         translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
     return translation
 
+
 def teacher_tutorial_steps(step):
-    return ["Welkom leraar!", "Dit is een test bericht..."]
+    if step == 0:
+        translation = [gettext('tutorial_start_title'), gettext('teacher_tutorial_start_message')]
+    elif step == 1:
+        translation = [gettext('tutorial_class_title'), gettext('tutorial_class_message')]
+    elif step == 2:
+        translation = [gettext('tutorial_own_adventures_title'), gettext('tutorial_own_adventures_message')]
+    elif step == 3:
+        translation = [gettext('tutorial_accounts_title'), gettext('tutorial_accounts_message')]
+    elif step == 4:
+        translation = [gettext('tutorial_documentation_title'), gettext('tutorial_documentation_message')]
+    elif step == 5:
+        translation = [gettext('tutorial_end_title'), gettext('teacher_tutorial_end_message')]
+    else:
+        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
+    return translation
+
 
 @app.route('/get_tutorial_step/<step>', methods=['GET'])
 def get_tutorial_translation(step):

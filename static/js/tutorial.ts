@@ -170,18 +170,38 @@ function callNextStep() {
   }
 }
 
+function classStep() {
+  return null;
+}
+
+function adventureStep() {
+  return null;
+}
+
+function multipleAccountsStep() {
+  return null;
+}
+
+function documentationStep() {
+  return null;
+}
+
+function teacherEndStep() {
+  return null;
+}
+
 function callTeacherNextStep() {
   current_step += 1;
   if (current_step == 1) {
-    // Do nothing (yet...)
+    classStep();
   } else if (current_step == 2) {
-    // Do nothing (yet...)
+    adventureStep();
   } else if (current_step == 3) {
-    // Do nothing (yet...)
+    multipleAccountsStep();
   } else if (current_step == 4) {
-    // Do nothing (yet...)
+    documentationStep();
   } else if (current_step == 5) {
-    // Do nothing (yet...)
+    teacherEndStep();
   } else {
     location.replace("/for-teachers");
   }
