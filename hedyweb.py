@@ -77,6 +77,7 @@ def render_tutorial_mode(level, commands, adventures):
     arguments_dict = {}
 
     arguments_dict['tutorial'] = True
+    arguments_dict['next_level'] = 2
     arguments_dict['level_nr'] = str(level)
     arguments_dict['level'] = str(level)
     arguments_dict['adventures'] = adventures
