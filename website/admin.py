@@ -99,8 +99,8 @@ def routes(app, database):
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
             "students": len(Class.get('students')) if 'students' in Class else 0,
-            "id": Class.get('id'),
-            "last_used": utils.datetotimeordate(utils.mstoisostring(DATABASE.user_by_username(Class.get('teacher')).get('last_login')))} for Class in DATABASE.all_classes()]
+            "id": Class.get('id')
+        } for Class in DATABASE.all_classes()]
         classes = sorted(classes, key=lambda d: d['last_used'], reverse=True)
 
         return render_template('admin/admin-classes.html', classes=classes, page_title=gettext('title_admin'))

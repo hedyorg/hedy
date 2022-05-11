@@ -15,7 +15,6 @@
           <td id="classname_header">Class name</td>
           <td id="teacher_header">Teacher</td>
           <td id="students_header">Students</td>
-          <td id="last_used_header">Last used</td>
           <td id="statistics_header">Statistics</td>
       </tr>
     </thead>
@@ -25,7 +24,6 @@
             <td class="classname_cell">{{class.name}}</td>
             <td class="teacher_cell">{{class.teacher}}</td>
             <td class="students_cell">{{class.students}}</td>
-            <td class="last_used_cell">{{class.last_used}}</td>
             <td id="statistics_cell"><a href="/stats/class/{{class.id}}" target="_blank">Click here</a></td>
           </tr>
       {% endfor %}
