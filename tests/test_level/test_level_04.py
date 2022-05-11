@@ -320,6 +320,19 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     #
+    # sleep tests
+    #
+    def test_sleep_with_input_variable(self):
+        code = textwrap.dedent("""\
+            n is ask "how long"
+            sleep n""")
+        expected = HedyTester.dedent(
+            "n = input(f'how long')",
+            HedyTester.sleep_command_transpiled("n"))
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    #
     # is tests
     #
     def test_assign_print(self):

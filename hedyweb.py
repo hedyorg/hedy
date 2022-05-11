@@ -73,6 +73,18 @@ def render_code_editor_with_tabs(commands, max_level, level_number, version, qui
     return render_template("code-page.html", **arguments_dict, commands=commands)
 
 
+def render_tutorial_mode(level, commands, adventures):
+    arguments_dict = {}
+
+    arguments_dict['tutorial'] = True
+    arguments_dict['next_level'] = 2
+    arguments_dict['level_nr'] = str(level)
+    arguments_dict['level'] = str(level)
+    arguments_dict['adventures'] = adventures
+    arguments_dict['quiz'] = True
+
+    return render_template("code-page.html", **arguments_dict, commands=commands)
+
 def render_specific_adventure(level_number, adventure, version, prev_level, next_level):
     arguments_dict = {}
 
