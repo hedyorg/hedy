@@ -74,7 +74,7 @@ function nextLevelStep() {
   $('#next_level_button').addClass("z-40");
   addHighlightBorder("next_level_button");
 
-  relocatePopup(50, 20);
+  relocatePopup(50, 30);
   tutorialPopup(current_step);
 }
 
