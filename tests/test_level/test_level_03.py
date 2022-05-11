@@ -106,6 +106,36 @@ class TestsLevel3(HedyTester):
         )
 
     #
+    # sleep tests
+    #
+    def test_sleep_with_list_access(self):
+        code = textwrap.dedent("""\
+            n is 1, 2, 3
+            sleep n at 1""")
+        expected = HedyTester.dedent(
+            "n = ['1', '2', '3']",
+            HedyTester.sleep_command_transpiled("n[1-1]"))
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    def test_sleep_with_list_random(self):
+        code = textwrap.dedent("""\
+            n is 1, 2, 3
+            sleep n at random""")
+        expected = HedyTester.dedent(
+            "n = ['1', '2', '3']",
+            HedyTester.sleep_command_transpiled("random.choice(n)"))
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    def test_sleep_with_list_gives_error(self):
+        code = textwrap.dedent("""\
+            n is 1, 2, 3
+            sleep n""")
+
+        self.multi_level_tester(max_level=11, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+
+    #
     # is tests
     #
     def test_assign_var_to_var(self):

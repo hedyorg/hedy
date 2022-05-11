@@ -3,7 +3,7 @@
 # list of symbols recognized as characters (with non-Latin characters)
 CHARACTER = '0-9_A-Za-zÀ-ÿء-ي'
 
-# defintion of word
+# definition of word
 WORD      = '([' + CHARACTER + "]+)"
 # space
 SPACE     = "( +)"
