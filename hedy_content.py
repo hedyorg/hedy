@@ -1,9 +1,6 @@
 import copy
 import os
 from babel import Locale
-from flask import g
-
-from utils import is_debug_mode
 from website.yaml_file import YamlFile
 import iso3166
 
