@@ -140,8 +140,32 @@ class TestsLevel1(HedyTester):
 
         self.single_level_tester(code=code, expected=expected, output=output, lang='ar')
 
-    def test_print_ar_tatweel(self):
-        code = "ـــقــوـلـــ أ"
+    def test_print_ar_tatweel_all_places(self):
+        code = "ـــقــوـلـ أ"
+        expected = "print('أ')"
+        output = 'أ'
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            translate=False, #translation will remove the tatweels, we will deal with that later
+            lang='ar')
+
+    def test_print_ar_tatweel_begin(self):
+        code = "ـــقول أ"
+        expected = "print('أ')"
+        output = 'أ'
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            translate=False, #translation will remove the tatweels, we will deal with that later
+            lang='ar')
+
+    def test_print_ar_tatweel_multiple_end(self):
+        code = "ـــقــوـلــــ أ"
         expected = "print('أ')"
         output = 'أ'
 
