@@ -60,7 +60,7 @@ class Achievements:
             body = request.json
             if "achievement" in body:
                 self.initialize_user_data_if_necessary()
-                if body['achievement'] not in session['achieved'] and body['achievement'] in self.TRANSLATIONS.get_translations(session['lang']):
+                if body['achievement'] not in session['achieved'] and body['achievement'] in self.TRANSLATIONS.get_translations(session['lang']).get('achievements'):
                     return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
             return jsonify({})
 
