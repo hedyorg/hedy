@@ -2,9 +2,20 @@ from flask_babel import gettext
 
 from website.auth import requires_login, current_user, is_admin, pick
 import utils
-from flask import request, g
+from flask import request
 from flask_helpers import render_template
-import hedyweb
+
+
+def get_class_runs(students):
+    stats = DATABASE.get_program_stats(students, None, None)
+    runs = 0
+    for week_stats in stats:
+        runs += int(week_stats.get('successful_runs', 0))
+    return runs
+
+
+def get_class_error_percentage(class_id):
+    return 0
 
 
 def routes(app, database):
@@ -94,14 +105,16 @@ def routes(app, database):
         if not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
-        # Retrieving the user for each class to find the "last_used" is expensive -> improve when we have 100+ classes
         classes = [{
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
             "students": len(Class.get('students')) if 'students' in Class else 0,
+            "runs": get_class_runs(Class.get('students', [])),
+            "error": 0,
+            "last_used": 0,
             "id": Class.get('id')
         } for Class in DATABASE.all_classes()]
-        classes = sorted(classes, key=lambda d: d['last_used'], reverse=True)
+
 
         return render_template('admin/admin-classes.html', classes=classes, page_title=gettext('title_admin'))
 
