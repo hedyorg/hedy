@@ -71,14 +71,16 @@ function nextLevelStep() {
   $('#code_output').removeClass('z-40');
   $('#runButtonContainer').removeClass('z-40');
 
+  $('#next_level_button').addClass("z-40");
+  addHighlightBorder("next_level_button");
 
+  relocatePopup(50, 20);
+  tutorialPopup(current_step);
 }
 
 function levelDefaultStep() {
-  removeBorder("runButtonContainer");
-  $('#editor').removeClass('z-40');
-  $('#code_output').removeClass('z-40');
-  $('#runButtonContainer').removeClass('z-40');
+  removeBorder("next_level_button");
+  $('#next_level_button').removeClass('z-40');
 
   $('#code_content_container').addClass('z-40');
   $('#adventures').addClass('z-40 bg-gray-100');

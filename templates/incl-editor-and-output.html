@@ -148,7 +148,7 @@
               <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
             {% endif %}
             {% if next_level and (not customizations or customizations['levels']|length == 0 or next_level in customizations['levels']) %}
-                <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
+                <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
             {% endif %}
           </div>
       {% else %}
