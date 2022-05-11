@@ -1,6 +1,6 @@
       {# TABS #}
       <div id="adventures">
-        <div class="flex flex-row overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2">
+        <div class="flex flex-row overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2" id="adventures-buttons">
             {% for adventure in adventures %}
               {% if 'adventures' not in customizations or (customizations['adventures'][adventure.short_name] and level|int in customizations['adventures'][adventure.short_name]) %}
                 <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.short_name}}">
