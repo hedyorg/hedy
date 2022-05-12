@@ -176,6 +176,7 @@ def prep_alias(result, line):
             result[line] = prep_inline (result[line], inline[1:], inline)
     return result
 
+#TODO: bracket stuff can possibly be improved with brackets function
 #recursive function to replace inline
 def prep_inline(line, replace, replacement):
     operators = ['+', '?', '*']
@@ -183,19 +184,20 @@ def prep_inline(line, replace, replacement):
     for group in get_groupings(line, [' ', '+', '?', '*']):
         group = group.strip()
         if len(get_groupings(group,['|'])) > 1:
+            # are we dealing with multiple options?
             temp = ""
             for line_group in get_groupings(group,['|']):
-                if line_group[-1] == "|":
-                    line_group = line_group[0:-1]
+                if line_group[-1] == "|": line_group = line_group[0:-1]
                 line_group = line_group.strip()
-                line_group = prep_inline(line_group, replace, replacement)
+                line_group = prep_inline(line_group, replace, replacement) #let's go deeper
                 if temp == "": temp = line_group
                 else: temp += " | " + line_group
             group = temp
         elif group[-1] in operators:
-            #haken als nodig
+            #haken als nodig <- ?
             group = prep_inline(group[0:-1], replace, replacement) + group[-1]
         elif group == replace:
+            # are brackets needed?
             if len(get_groupings(line, [' ', '+', '?', '*'])) == 1 and replacement[0] == "(": group = replacement[1:-1]
             else: group = replacement
         elif group[0] == "(" or group[0] == "[":
@@ -233,7 +235,6 @@ def prep_grammar(lvl):
     # process inline "?" stuff:
     list = []
     for line in result:
-        #print(line + " : " + result[line])
         if line[0] == '?': list.append(line)
 
     for line in list:
@@ -265,6 +266,7 @@ def process_rule(grammar, rule):
     operators = ['+', '?', '*']
     result = []
 
+    # This needs to be added to handle the indents
     if "_END_BLOCK" in rule:
         if rule.split(" ")[0] == "_EOL":
             temp = "_EOL _START_BLOCK" + ''.join([" " + str(c) for c in rule.split(" ")[1:]])
@@ -273,17 +275,18 @@ def process_rule(grammar, rule):
             rule = "_START_BLOCK " + rule
 
     for group in get_groupings(rule, [' ', '+', '?', '*']):
-
         group = group.strip()
         if (group != "" and (group[0] == "(" or group[0] == "[")):
+            # dealing with a group, process content
             if (group[-1] == ")" or group[-1] == "]"):
                 group = brackets(group[0], process_split(grammar, group[1:-1]))
             else:
                 group = brackets(group[0], process_split(grammar, group[1:-2]))+group[-1]
 
-        if group == "": continue
+        if group == "": continue # needs to be here because of the group part
         if group[-1] not in operators: result.append(group + " ")
         else:
+            #let's handle the operators
             if (not creates_tree(grammar, group)):
                 if group[-1] == "+": result.append(group[0:-1] + " ")
             else: result.append(group + " ")
@@ -345,35 +348,32 @@ def simple_format(Tree, grammar, Templates, rule):
     not_in_tree = ['_', '"']
     do_not_process = ["_START_BLOCK", "_END_BLOCK", "_EOL", "_SPACE"]
 
-    #print("simple_format:" + rule)
     for possibility in Templates:
         template = possibility[0]
         nr_child = possibility[1]
-        if (rule[0] in group):
+        if (rule[0] in group): # this needs to be handled by get_group_format
             result += get_group_format(Tree, grammar, [possibility], rule[1:-1])
         elif (rule[0] in not_in_tree and len(get_groupings(rule, [' ', '+', '?', '*', '|'])) == 1):
             new_rule = grammar.get(rule)
-            #print(rule, new_rule)
             if new_rule == None or rule in do_not_process:
+                # No processing neccesary, add to result
                 result.append((str(template) + " " + str(rule), nr_child))
             else:
+                # New _rule to go through
                 result += get_format(Tree, grammar, Templates, new_rule)
         else:
             if (nr_child >= len(Tree.children)): continue
             elif (len(get_groupings(rule, [' ', '+', '?', '*', '|'])) > 1):
                 result += get_op_format(Tree, grammar, Templates, rule)
             elif (isinstance(Tree.children[nr_child], Token)):
-                #print(rule, Templates)
                 #check if what's in rule is also a token
                 if (not rule in grammar.keys()) or (rule.isupper()):
-                    #print("aaaaaaaaaaaaaa")
                     result.append((str(template) + " " + str(rule), nr_child+1))
-                    #print(result)
             else:
                 #does the child match what's expected in rule?
                 if (Tree.children[nr_child].data == rule):
                     result.append((str(template) + " " + str(rule), nr_child+1))
-    #print(result)
+
     return result
 
 # Grammar format requirements: <- requirements need to be rechecked if still necessary
@@ -396,6 +396,7 @@ def get_options_format(Tree, grammar, Templates, rule):
 def get_group_format(Tree, grammar, Templates, rule):
     result = []
     if rule[0] == "(" or rule[0] == "[":
+        # we are in a group
         if len(get_groupings(rule[1:-1], ['|'])) > 1:
             result += get_options_format(Tree, grammar, Templates, rule[1:-1])
         else:
@@ -404,6 +405,7 @@ def get_group_format(Tree, grammar, Templates, rule):
                 temp_list = get_op_format(Tree, grammar, temp_list, group)
             result += temp_list
     else:
+        # we're not in a group, so let's go to the next step!
         result += get_options_format(Tree, grammar, Templates, rule)
     return result
 
