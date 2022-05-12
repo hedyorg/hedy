@@ -1,4 +1,5 @@
 import collections
+import copy
 import os
 import yaml
 
@@ -36,6 +37,16 @@ def extract_Lark_grammar_from_yaml():
         translations = collections.defaultdict(lambda: 'Unknown Exception')
         translations.update(en_command_combinations)
         translations.update(command_combinations)
+
+        translation_copy = copy.deepcopy(translations)
+        for k, v in translation_copy.items():
+            if "|" in v:
+                valid_translation = ""
+                options = v.split("|")
+                for i in range(0, len(options)-1):
+                    valid_translation += options[i] + "\" | "
+                valid_translation += "\"" + (options[-1])
+                translations[k] = valid_translation
 
         translated_template = template.format(**translations)
 
