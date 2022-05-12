@@ -1,26 +1,25 @@
-_FORWARD: ("ileri" | "forward") _SPACE?
-_TURN: ("döndür" | "turn") _SPACE?
-_PRINT: ("yazdır" | "print") _SPACE?
+_PRINT: ("yazdır" | "print|) _SPACE?
 _ASK: ("sor" | "ask") _SPACE?
 _ECHO: ("eko" | "echo") _SPACE?
-right: ("sağ" | "right") _SPACE?
+_FORWARD: ("ileri" | "forward") _SPACE?
+_TURN: ("döndür" | "turn") _SPACE?
 left: ("sol" | "left") _SPACE?
-_COLOR : "color" _SPACE?
-black: "black" _SPACE?
-blue: "blue" _SPACE?
-brown: "brown" _SPACE?
-gray: "gray" _SPACE?
-green: "green" _SPACE?
-orange: "orange" _SPACE?
-pink: "pink" _SPACE?
-purple: "purple" _SPACE?
-red: "red" _SPACE?
-white: "white" _SPACE?
-yellow: "yellow" _SPACE?
+right: ("sağ" | "right") _SPACE?
+black: ("black" | "black") _SPACE?
+blue: ("blue" | "blue") _SPACE?
+brown: ("brown" | "brown") _SPACE?
+gray: ("gray" | "gray") _SPACE?
+green: ("green" | "green") _SPACE?
+orange: ("orange" | "orange") _SPACE?
+pink: ("pink" | "pink") _SPACE?
+purple: ("purple" | "purple") _SPACE?
+red: ("red" | "red") _SPACE?
+white: ("white" | "white") _SPACE?
+yellow: ("yellow" | "yellow") _SPACE?
 _IS: _SPACE ("eşit" | "is") _SPACE
 _SLEEP: ("bekle" | "sleep") _SPACE?
 _ADD_LIST: ("ekle" | "add") _SPACE
-_TO_LIST: _SPACE ("to") _SPACE
+_TO_LIST: _SPACE ("to" | "to") _SPACE
 _REMOVE: ("sil" | "remove") _SPACE
 _FROM: _SPACE ("şuradan" | "from") _SPACE
 _AT: _SPACE ("şurada" | "at") _SPACE
@@ -35,8 +34,9 @@ _FOR: ("şunun için" | "for") _SPACE
 _RANGE: ("dizi" | "range") _SPACE?
 _TO: _SPACE ("şuraya" | "to") _SPACE
 _STEP: "adım" | "step"
-_ELIF: _SPACE? ("elif") _SPACE
-_INPUT: "girdi" | "input"
+_ELIF: _SPACE? ("elif" | "elif") _SPACE
+_INPUT: ("girdi" | "input")
 _OR: _SPACE ("veya" | "or") _SPACE
 _WHILE: ("iken" | "while") _SPACE
 _LENGTH: "uzunluk" | "length"
+_COLOR : ("color" | "color") _SPACE?

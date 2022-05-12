@@ -1,10 +1,10 @@
-_PRINT: ("قول" | "print") _SPACE?
+_PRINT: ("قول" | "print|) _SPACE?
 _ASK: ("اسأل" | "ask") _SPACE?
 _ECHO: ("ردد" | "echo") _SPACE?
 _FORWARD: ("تقدم" | "forward") _SPACE?
+_TURN: ("استدر" | "turn") _SPACE?
 left: ("يسار" | "left") _SPACE?
 right: ("يمين" | "right") _SPACE?
-_COLOR : ("لون" | "color") _SPACE?
 black: ("اسود" | "black") _SPACE?
 blue: ("ازرق" | "blue") _SPACE?
 brown: ("بني" | "brown") _SPACE?
@@ -16,41 +16,27 @@ purple: ("بنفسجي" | "purple") _SPACE?
 red: ("احمر" | "red") _SPACE?
 white: ("ابيض" | "white") _SPACE?
 yellow: ("اصفر" | "yellow") _SPACE?
-_IS: _SPACE ( "هو" | "هي" | "is") _SPACE
+_IS: _SPACE ("هو|هي" | "is") _SPACE
+_SLEEP: ("sleep" | "sleep") _SPACE?
+_ADD_LIST: ("اضف" | "add") _SPACE
+_TO_LIST: _SPACE ("الى" | "to") _SPACE
+_REMOVE: ("ازل" | "remove") _SPACE
+_FROM: _SPACE ("من" | "from") _SPACE
 _AT: _SPACE ("بشكل" | "at") _SPACE
 random: ("عشوائي" | "random") _SPACE?
 _IN: _SPACE ("في" | "in") _SPACE
 _IF: ("اذا" | "if") _SPACE
 _ELSE: "وإلا" | "else"
-_TURN: ("استدر" | "turn") _SPACE?
-_SLEEP: ("slaap" | "sleep") _SPACE? //placing Dutch words here so it will be easier to copy-paste arabic in
-_ADD_LIST: ("اضف" | "add") _SPACE
-_TO_LIST: _SPACE ("الى" | "to") _SPACE
-_REMOVE: ("ازل" | "remove") _SPACE
-_FROM: _SPACE ("من" | "from") _SPACE
-
-//level 5
+_AND: _SPACE ("و" | "and") _SPACE
 _REPEAT: ("كرر" | "repeat") _SPACE
 _TIMES: _SPACE ("مرة" | "times")
-
-//level 8
 _FOR: ("لكل" | "for") _SPACE
 _RANGE: ("نطاق" | "range") _SPACE?
 _TO: _SPACE ("الى" | "to") _SPACE
-_STEP: ("خطوة" | "step")
-
-//level 9
+_STEP: "خطوة" | "step"
 _ELIF: _SPACE? ("وإلا اذا" | "elif") _SPACE
-
-//level 11
 _INPUT: ("ادخل" | "input")
-
-//level 14
 _OR: _SPACE ("أو" | "or") _SPACE
-_AND: _SPACE ("و" | "and") _SPACE
-
-//level 17
 _WHILE: ("بينما" | "while") _SPACE
-
-//level 19
-_LENGTH: ("طول" | "length")
+_LENGTH: "طول" | "length"
+_COLOR : ("لون" | "color") _SPACE?

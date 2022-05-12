@@ -1,10 +1,10 @@
-_PRINT: ("打印" | "print") _SPACE?
+_PRINT: ("打印" | "print|) _SPACE?
 _ASK: ("提问" | "ask") _SPACE?
 _ECHO: ("回声" | "echo") _SPACE?
 _FORWARD: ("向前" | "forward") _SPACE?
 _TURN: ("旋转" | "turn") _SPACE?
-left: ("右" | "left") _SPACE?
-right: ("左" | "right") _SPACE?
+left: ("左" | "left") _SPACE?
+right: ("右" | "right") _SPACE?
 black: ("黑色" | "black") _SPACE?
 blue: ("蓝色" | "blue") _SPACE?
 brown: ("棕色" | "brown") _SPACE?
@@ -36,7 +36,7 @@ _TO: _SPACE ("到" | "to") _SPACE
 _STEP: "步" | "step"
 _ELIF: _SPACE? ("否则如果" | "elif") _SPACE
 _INPUT: ("输入" | "input")
-_OR: _SPACE ("或者" | "or") _SPACE
+_OR: _SPACE ("或" | "or") _SPACE
 _WHILE: ("当的时候" | "while") _SPACE
 _LENGTH: "长度" | "length"
 _COLOR : ("颜色" | "color") _SPACE?
