@@ -112,11 +112,11 @@ def routes(app, database):
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
             "students": len(Class.get('students')) if 'students' in Class else 0,
-            "stats": get_class_stats_last_week(Class.get('students', [])),
+            "week_stats": get_class_stats_last_week(Class.get('students', [])),
             "id": Class.get('id')
         } for Class in DATABASE.all_classes()]
 
-        classes = sorted(classes, key=lambda d: d.get('stats').get('runs'), reverse=True)
+        classes = sorted(classes, key=lambda d: d.get('week_stats').get('runs'), reverse=True)
 
         return render_template('admin/admin-classes.html', classes=classes, page_title=gettext('title_admin'))
 
