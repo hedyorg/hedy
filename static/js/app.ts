@@ -1106,6 +1106,7 @@ export function get_trimmed_code() {
       // Otherwise it is the space placeholder -> don't add to prevent weird error messages
       if (text.length > 1) {
         code += text;
+        console.log(code);
        
         //check correct order and give box a color 
         // @ts-ignore
@@ -1114,13 +1115,16 @@ export function get_trimmed_code() {
           $(this).css('border-style', 'solid');
         }
         else {
+          // @ts-ignore
+          console.log("index ", $(this).attr('index').charCodeAt(0) )
+          console.log("count ", count);
           $(this).css('border-color', '#FF0000');
           $(this).css('border-style', 'solid');
         }
       count += 1;
       }   
     });
-
+    console.log("CODE", code);
     return code.replace(/ +$/mg, '');
   }
   //console.log('Hello world');
