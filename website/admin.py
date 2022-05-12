@@ -116,7 +116,6 @@ def routes(app, database):
             "id": Class.get('id')
         } for Class in DATABASE.all_classes()]
 
-        print(classes)
         classes = sorted(classes, key=lambda d: d.get('stats').get('runs'), reverse=True)
 
         return render_template('admin/admin-classes.html', classes=classes, page_title=gettext('title_admin'))
