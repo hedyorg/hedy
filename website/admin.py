@@ -76,8 +76,6 @@ def routes(app, database):
                         continue
             userdata.append(data)
 
-        userdata.sort(key=lambda user: user['created'], reverse=True)
-
         return render_template('admin/admin-users.html', users=userdata, page_title=gettext('title_admin'),
                                filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
                                language_filter=language, keyword_language_filter=keyword_language,

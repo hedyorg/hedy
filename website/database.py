@@ -212,9 +212,11 @@ class Database:
     def all_users(self, filtering=False):
         """Return all users."""
         # If we have some filtering -> return all possible users, otherwise return last 500
+        users = list(USERS.scan())
+        users.sort(key=lambda user: user['created'], reverse=True)
         if filtering:
-            return USERS.scan()
-        return USERS.scan(limit=500)
+            return users[500:]
+        return users
 
     def get_all_explore_programs(self):
         return PROGRAMS.get_many({'public': 1}, sort_key='date', limit=48, reverse=True)
