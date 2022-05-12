@@ -21,6 +21,19 @@ def get_class_stats_last_week(students):
     return {'runs': runs, 'fails': fails}
 
 
+def get_class_stats_total(students):
+    week_stats = DATABASE.get_program_stats(students, None, None)
+    runs = 0
+    fails = 0
+    for stats in week_stats:
+        runs += int(stats.get('successful_runs', 0))
+        for k, v in stats.items():
+            if k.lower().endswith('exception'):
+                fails += v
+
+    return {'runs': runs, 'fails': fails}
+
+
 def routes(app, database):
     global DATABASE
     DATABASE = database
@@ -113,6 +126,7 @@ def routes(app, database):
             "teacher": Class.get('teacher'),
             "students": len(Class.get('students')) if 'students' in Class else 0,
             "week_stats": get_class_stats_last_week(Class.get('students', [])),
+            "total_stats": get_class_stats_total(Class.get('students', [])),
             "id": Class.get('id')
         } for Class in DATABASE.all_classes()]
 
