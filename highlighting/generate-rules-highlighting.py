@@ -80,13 +80,13 @@ def get_Traduction(KEYWORDS_PATH, KEYWORDS_PATTERN):
                 tmp[languageCode][k] = str(yamlFile[k])
 
     Result = {}
-    for languageCode in tmp:
+    for languageCode in sorted(tmp.keys()):
         Result[languageCode] = {}
         if languageCode == "en":
-           for keyword in tmp[languageCode] :
+           for keyword in sorted(tmp[languageCode].keys()) :
                Result[languageCode][keyword] = "({})".format(tmp['en'][keyword])
         else:
-           for keyword in tmp[languageCode] :
+           for keyword in sorted(tmp[languageCode].keys()) :
                 if tmp[languageCode][keyword] != tmp['en'][keyword] :
                     Result[languageCode][keyword] = "({}|{})".format(tmp[languageCode][keyword], tmp['en'][keyword])
                 else:
