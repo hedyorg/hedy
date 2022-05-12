@@ -19,6 +19,7 @@ def parser(input_string, sub = 0):
 #   UTILITY functions
 #==============================================================================
 
+# This function will, for a given rule, group it based on the given seperators.
 def get_groupings(rule, seperators):
     group = ['/', '"', '(', '[']
     sets = {"(" : ")", "[" : "]"}
@@ -139,6 +140,7 @@ def first_pass(grammar):
         temp_grammar.append(temp_line)
     return temp_grammar
 
+# This prepare grammar function handles the alias side of things.
 def prep_alias(result, line):
     parts = get_groupings(line, [":"])
     parts[0] = parts[0].split(":",1)[0].strip()
@@ -203,6 +205,9 @@ def prep_inline(line, replace, replacement):
     if temp_group != "": return temp_group
     return line
 
+# calls all relevent prepare grammar functions.
+# creates a dictionary containing all rules.
+# while dealing with aliases and inline rules.
 def prep_grammar(lvl):
     result = {}
     inlines = []
@@ -243,6 +248,7 @@ def prep_grammar(lvl):
 
 #==============================================================================
 
+# simplify grammar utility function
 def brackets(symbol, contents):
     comp = {"(":")","[":"]"}
     if symbol not in comp:
@@ -253,6 +259,8 @@ def brackets(symbol, contents):
     else:
         return symbol + contents.strip() + comp[symbol]
 
+# Processes rules to simplify the grammar
+# This will remove portions of rules if it might not create a tree.
 def process_rule(grammar, rule):
     operators = ['+', '?', '*']
     result = []
@@ -284,6 +292,8 @@ def process_rule(grammar, rule):
 
     return ''.join([str(c) for c in result])
 
+# Processes rule(sections) with multiple options
+# example: turning rule | _rule into rule
 def process_split(grammar, rule):
     options = get_groupings(rule, ['|'])
     if len(options) > 1:
@@ -300,12 +310,18 @@ def process_split(grammar, rule):
     else: value = process_rule(grammar, rule)
     return value
 
+# This function processes all rules in dict to simplify them if possible
 def simp_grammar(grammar):
     for key in grammar:
         value = grammar.get(key)
         grammar[key] = process_split(grammar, value)
     return grammar
 
+# Before we really begin with unparsing we first:
+# - Prepare the grammar, to make it easier to deal with certain functionalities
+#   (like handling the aliases)
+# - Simplify the grammar, to remove any unnecesary portions of the grammar
+#   which would only slow down the programs
 def start_unparsing(Tree, lvl):
     #process grammar
     grammar = prep_grammar(lvl)
@@ -320,10 +336,9 @@ def start_unparsing(Tree, lvl):
 #   UNPARSING functions
 #==============================================================================
 
-# this should only receive one "word" rules
-# just needs to process what to do for template
-# if the template hasn't been changed, the tree doesn't fit
-
+# If we have one "word" we will handle it here,
+# but will otherwise "send" us to the right function
+# if result is empty, it means there is no fit in the given Templates
 def simple_format(Tree, grammar, Templates, rule):
     result = [] # if empty: functions as a False
     group = ["(", "["]
@@ -361,24 +376,24 @@ def simple_format(Tree, grammar, Templates, rule):
     #print(result)
     return result
 
-# Grammar format requirements:
+# Grammar format requirements: <- requirements need to be rechecked if still necessary
 # The options in a rule with | should only include rules or a group
-# current version takes the first not in tree if the tree options don't work
+#
+# This function handles all possible options seperated by "|" in a rule.
+# Current version takes the first not in tree if the tree options don't work <- Happens indirectly in unparsing
 def get_options_format(Tree, grammar, Templates, rule):
-    #print("get_options_format:" + rule, Templates)
     result = []
     #Get the options of this rule
     for option in get_groupings(rule, ['|']):
         if option[-1] == "|":
             option = option[0:-1]
-        #print(option)
         result += simple_format(Tree, grammar, Templates, option.strip())
 
-    #print(result)
     return result
 
+# This function checks if we are dealing with a group,
+# and if so, deals with it appropriately.
 def get_group_format(Tree, grammar, Templates, rule):
-    #print("get_group_format:" + rule)
     result = []
     if rule[0] == "(" or rule[0] == "[":
         if len(get_groupings(rule[1:-1], ['|'])) > 1:
@@ -392,8 +407,8 @@ def get_group_format(Tree, grammar, Templates, rule):
         result += get_options_format(Tree, grammar, Templates, rule)
     return result
 
+# This function deals with the operators in the top level of a rule.
 def get_op_format(Tree, grammar, Templates, rule):
-    #print("get_op_format:" + rule)
     result = []
     prog = []
     groups = get_groupings(rule, [' ', '+', '?', '*', '|'])
@@ -436,13 +451,16 @@ def get_op_format(Tree, grammar, Templates, rule):
 
     return prog
 
+# This function will look at the rule, and "sends" us to the correct function;
+# get_options_format if on the top level, we have multiple options we can choose
+# get_op_format if we have a single option which we need to work through
 def get_format(Tree, grammar, Templates, rule):
     if len(get_groupings(rule, ['|'])) > 1:
-        #print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
         return get_options_format(Tree, grammar, Templates, rule)
     else:
         return get_op_format(Tree, grammar, Templates, rule)
 
+# onderdelen rule stapgeweis afhandelen
 def get_result(Tree, grammar, number_of_indents, rule):
     result = []
     count = 0
@@ -474,7 +492,9 @@ def get_result(Tree, grammar, number_of_indents, rule):
 
     return ''.join([str(c) for c in result])
 
+# This function will start the unparsing.
 def unparsing(Tree, grammar, number_of_indents):
+    # Templates is used to collect possible correct results.
     Templates = [("", 0)]
     #is this a leaf? if so:
     if (isinstance(Tree, Token)): return Tree.value
@@ -483,28 +503,25 @@ def unparsing(Tree, grammar, number_of_indents):
     rule = grammar.get(Tree.data)
     if (rule == None): return "Error: Rule not in Grammar"
 
-    #Werk regels uit om naar de juiste format te werken
+    # Werk regels uit om naar de juiste format te werken
     # kijk hierbij naar de kinderen
     temp = []
     for possibility in get_format(Tree, grammar, Templates, rule):
-    #    print(possibility, Tree.children)
         if (possibility[1] == len(Tree.children)):
             temp.append(possibility)
 
     if temp == []:
         print("\nThere is an error during Unparsing, get_format returned empty \n\n", Tree.data,"\n", grammar.get(Tree.data))
         return ''
-    #print(temp)
+
     rule = temp[0][0]
     #TODO: add check to see if it went ok + error code
 
     #zo ja: rule = opsplitsing
-    #print("format = " + rule)
 
     #onderdelen rule stapgeweis afhandelen
     result = get_result(Tree, grammar, number_of_indents, rule)
 
-    #print("RESULT:" + rule + ":" + result)
     return result
 
 #==============================================================================
@@ -542,6 +559,7 @@ def test_multi():
         del result[line]
     for line in result: print(line, " : ", result[line])
     print("DOOOONNNEEEE")
+
 #used to test just the unparser
 def test_unparser(input_string, _level):
     global level
