@@ -10,7 +10,7 @@ Each programming situation has only two valid keyword languages: the currently s
 When a language does not have translated keywords English is the only valid keyword language.
 
 All examples, adventures, quizzes and code snippets are shown with the selected keyword language by dynamically parsing at runtime.
-All these translations are stored with _placeholders_ like this `{print}`.
+All these translations are stored with _placeholders_ like this: `{print}`.
 When requesting a specific keyword language the placeholder is replaced by the corresponding translated keyword.
 This only counts for the examples as in all cases the set language and English are both valid keyword languages.
 When translating the placeholders should always stay in place with the English keyword between the brackets, otherwise the parser is unable to find the corresponding translation.
