@@ -1,3 +1,5 @@
+from datetime import date
+
 from flask_babel import gettext
 
 from website.auth import requires_login, current_user, is_admin, pick
@@ -6,16 +8,23 @@ from flask import request
 from flask_helpers import render_template
 
 
-def get_class_runs(students):
+def get_class_runs_last_week(students):
+    this_week = DATABASE.to_year_week(DATABASE.parse_date(None, date.today()))
+    stats = DATABASE.get_program_stats(students, this_week, None)
     stats = DATABASE.get_program_stats(students, None, None)
     runs = 0
     for week_stats in stats:
         runs += int(week_stats.get('successful_runs', 0))
+
     return runs
 
+def get_class_errors_last_week(students):
+    this_week = DATABASE.to_year_week(DATABASE.parse_date(None, date.today()))
+    stats = DATABASE.get_program_stats(students, this_week, None)
+    failed_runs = 0
+    #exceptions = {k: v for k, v in stats.items() if k.lower().endswith('exception')}
 
-def get_class_error_percentage(class_id):
-    return 0
+    return failed_runs
 
 
 def routes(app, database):
@@ -109,9 +118,7 @@ def routes(app, database):
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
             "students": len(Class.get('students')) if 'students' in Class else 0,
-            "runs": get_class_runs(Class.get('students', [])),
-            "error": 0,
-            "last_used": 0,
+            "runs": get_class_runs_last_week(Class.get('students', [])),
             "id": Class.get('id')
         } for Class in DATABASE.all_classes()]
 
