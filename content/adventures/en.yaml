@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -404,12 +403,14 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Ready or not, here I come!'
-                story_text: |
+                story_text: |-
                     ## Elif
                     Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.
 
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.
+                    In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
                     Check it out!
+                example_code: |
+                    ## Example Hedy Code
                     ```
                     prices = ['1 million dollars', 'an apple pie', 'nothing']
                     your_price = prices[{random}]
@@ -427,21 +428,37 @@ adventures:
                     {print}('My name is ', naam)
                 story_text: |-
                     ## The last level!
-                    We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.
-                    That looks like this:
+                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+
+                example_code: |
+                    ## Example Hedy Code
                     ```
                     {print}('my name is Hedy!')
                     ```
-                    If you want to print more than one items, you need to separate them by commas.
+
+                story_text_2: |-
+                    If you want to print more than one item, you need to separate them by commas.
+
+                example_code_2: |
                     ```
-                    name = 'Hedy'
-                    {print}('my name is ', name)
+                    temperature = 25
+                    {print}('It is ', temperature, 'degrees outside')
+                    ```
+
+                story_text_3: |-
+                    ##  Input
+                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+
+                example_code_3: |
+                    ```
+                    {print}('My name is Hedy!')
+                    name = {input}('What is your name?')
+                    {print}('So your name is ', name)
                     ```
 
     story:
         name: "Story"
         description: "Story"
-        image: "story.png"
         default_save_name: "Story"
         levels:
             1:
@@ -750,7 +767,6 @@ adventures:
     parrot:
         name: "Parrot"
         description: "Create your own online pet parrot that will copy you!"
-        image: "story.png"
         default_save_name: "Parrot"
         levels:
             1:
@@ -822,7 +838,6 @@ adventures:
     songs:
         name: "Sing a song!"
         description: "Print a song"
-        image: "songs.png"
         default_save_name: "Song"
         levels:
             6:
@@ -1003,7 +1018,6 @@ adventures:
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
-        image: "turtle.gif"
         default_save_name: "Turtle"
         levels:
             1:
@@ -1027,15 +1041,20 @@ adventures:
             2:
                 story_text: |
                     ## Turtle
-                    In level 1 the turtle could only turn left or right. That is a bit boring!
+                    In this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    answer {is} {ask} How many steps should the turtle make?
+                    {forward} answer
+                    ```
+                story_text_2: |
+                    Also, in level 1 the turtle could only turn left or right. That is a bit boring!
                     In level 2 he can point his nose in all directions.
 
                     Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
                     Can you make a figure with this code? Maybe a triangle or a circle?
-                example_code: |
-                    ## Example Hedy code
-
-
+                example_code_2: |
                     ```
                     {print} Drawing figures
                     angle {is} 90
@@ -1194,7 +1213,6 @@ adventures:
     dishes:
         name: "Dishes?"
         description: "Use the computer to see who does the dishes (Start at level 2)"
-        image: "dishes.png"
         default_save_name: "Dishes"
         levels:
             3:
@@ -1321,7 +1339,6 @@ adventures:
     dice:
         name: "Dice"
         description: "Make your own dice"
-        image: "dice.png"
         default_save_name: "Dice"
         levels:
             3:
@@ -1447,7 +1464,6 @@ adventures:
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
-        image: "rock.png"
         default_save_name: "Rock"
         levels:
             1:
@@ -1622,7 +1638,6 @@ adventures:
     calculator:
         name: "Calculator"
         description: "Create a calculator"
-        image: "calculator.png"
         default_save_name: "Calculator"
         levels:
             6:
@@ -1764,7 +1779,6 @@ adventures:
     restaurant:
         name: "Restaurant"
         description: "Create your own virtual restaurant"
-        image: "restaurant.png"
         default_save_name: "Restaurant"
         levels:
             1:
@@ -2133,7 +2147,6 @@ adventures:
     fortune:
         name: "Fortune teller"
         description: "Let Hedy predict the future"
-        image: "fortuneteller.png"
         default_save_name: "Fortune Teller"
         levels:
             1:
@@ -2376,7 +2389,6 @@ adventures:
     haunted:
         name: "Haunted House"
         description: "Escape from the haunted house"
-        image: "hauntedhouse.gif"
         default_save_name: "Haunted House"
         levels:
             1:
@@ -2623,7 +2635,6 @@ adventures:
     piggybank:
         name: "Piggy Bank"
         description: "Count your pocketmoney!"
-        image: "piggy.png"
         default_save_name: "Piggy Bank"
         levels:
             12:
@@ -2668,7 +2679,6 @@ adventures:
     quizmaster:
         name: "Quizmaster"
         description: "Make your own quiz!"
-        image: "quizmaster.png"
         default_save_name: "Quizmaster"
         levels:
             14:
@@ -2702,7 +2712,6 @@ adventures:
     language:
         name: "Language"
         description: "Practice words in a foreign language"
-        image: "languages.png"
         default_save_name: "Language"
         levels:
             5:
@@ -2747,7 +2756,6 @@ adventures:
     secret:
         name: "SuperSpy"
         description: "Make your own spy code"
-        image: "story.png"
         default_save_name: "SuperSpy"
         levels:
             12:
@@ -2786,10 +2794,111 @@ adventures:
                         print 'Go to the trainstation at 10.00'
                      ```
                 start_code: "## place your code here"
+    blackjack:
+        name: "Blackjack"
+        description: "Try to get as close to 21 as you can"
+        default_save_name: "Blackjack"
+        levels:
+            17:
+                story_text: |
+                    ## Create a game of Blackjack
+                    Blackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.
+                    The Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.
+                    If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
+                    But be careful not to get more than 21 points, because if you do, you lose!
+                    The player who gets closest to 21, without going over it, wins!
+
+                    Have fun!
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    {print} 'BLACKJACK'
+                    cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']
+                    points = 0
+                    dealer_points = 0
+                    card_1 = cards[{random}]
+                    card_2 = cards[{random}]
+                    card_3 = cards [{random}]
+                    dealer_card_1 = cards[{random}]
+                    dealer_card_2 = cards[{random}]
+                    dealer_card_3 = cards[{random}]
+                    # Points for card 1
+                    {if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':
+                        points = points + 10
+                    {elif} card_1 == 'Ace':
+                        points = points + 11
+                    {else}:
+                        points = points + card_1
+                    # Points for card 2
+                    {if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':
+                        points = points + 10
+                    {elif} card_2 == 'Ace':
+                        points = points + 11
+                    {else}:
+                        points = points + card_2
+                    # Points for dealer card 1
+                    {if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':
+                        dealer_points = dealer_points + 10
+                    {elif} dealer_card_1 == 'Ace':
+                        dealer_points = dealer_points + 11
+                    {else}:
+                        dealer_points = dealer_points + dealer_card_1
+                    # Points for dealer card 2
+                    {if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':
+                        dealer_points = dealer_points + 10
+                    {elif} dealer_card_2 == 'Ace':
+                        dealer_points = dealer_points + 11
+                    {else}:
+                        dealer_points = dealer_points + dealer_card_2
+                    # Two Aces
+                    {if} card_1 == 'Ace' {and} card_2 == 'Ace':
+                        points = 12
+                    {if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':
+                        dealer_points = 12
+                    # Scoreboard
+                    {print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'
+                    {print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'
+                    # Extra card for the player
+                    hit = {ask} 'Do you want an extra card?'
+                    {if} hit == 'yes':
+                        {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':
+                            points = points + 10
+                        {elif} card_3 == 'Ace':
+                            {if} points > 11:
+                                points = points + 11
+                            {else}:
+                                points = points + 1
+                        {else}:
+                            points = points + card_3
+                        print 'You get an extra ' card_3 ' (' points ' points)'
+                    {else}:
+                        print 'No extra cards'
+                    # Winner
+                    {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
+                        {print} 'You lose'
+                    {elif} dealer_points < 17:
+                        {print} 'The dealer takes an extra card. It is a... ' dealer_card_3
+                        {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':
+                            dealer_points = dealer_points + 10
+                        {elif} dealer_card_3 == 'Ace':
+                            {if} dealer_points < 11:
+                                dealer_points = dealer_points + 11
+                            {else}:
+                                dealer_points = dealer_points + 1
+                        {else}:
+                            dealer_points = dealer_points + dealer_card_3
+                        {print} 'The dealer has ' dealer_points ' points now'
+                        {if} dealer_points < 21 {and} dealer_points > points:
+                            {print} 'You lose'
+                        {else}:
+                            {print} 'You win'
+                    {elif} points > dealer_points {and} points < 21:
+                        {print} 'You win!'
+                    ```
+                start_code: "# place your code here"
     tic:
         name: "Tic Tac Toe"
         description: "Play a game of Tic Tac Toe!"
-        image: "story.png"
         default_save_name: "Tic"
         levels:
             13:
@@ -2797,7 +2906,6 @@ adventures:
                     ## Tic Tac Toe
                     In this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.
                     The first player that gets 3 in a row (horizontally, vertically or diagonally) wins!
-                    Have fun!
                 example_code: |
                     ## Example Hedy code
                     ```
@@ -3081,7 +3189,6 @@ adventures:
     next:
         name: "What's next?"
         description: "What's Next?"
-        image: "hedy-logo.png"
         default_save_name: "Next"
         levels:
             1:

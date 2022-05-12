@@ -121,7 +121,6 @@
         角度 = {ask} '多少度？'
         度 = 360 / 角度
         {forward} 50
-        {turn} 度
 7:
 -   explanation: "打印的内容要用单引号标注清楚"
     example: "例如: {print} '你好欢迎来到海迪。'"
@@ -344,7 +343,7 @@
         {print} '无论是否准备好，我都会来的!'
     name: '{print}'
 -   explanation: "我们需要对所有的'{if}'条件语句做同样的处理"
-    example: "如果颜色{is}绿色："
+    example: "如果颜色{is}绿色：'"
     demo_code: |-
         颜色 = {ask} '你最喜欢的颜色是什么？'
         {if} 颜色 == '绿色':
@@ -364,3 +363,11 @@
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
+-   name: '{print} with var'
+    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+    example: '{print}'
+    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
+-   name: ask something with {input}
+    explanation: Use `{input}` instead of `{ask}` to ask something
+    example: '{input}'
+    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"

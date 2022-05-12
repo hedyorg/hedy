@@ -8,6 +8,8 @@ assign_list: var _IS text_list (_COMMA text_list)+
 list_access: var_access _AT (INT | random) -> list_access //todo: could be merged with list_access_var?
 turtle: _FORWARD ((NEGATIVE_NUMBER | NUMBER | list_access | textwithoutspaces))? -> forward | _TURN ((NEGATIVE_NUMBER | NUMBER | list_access | textwithoutspaces))? -> turn
 
+sleep: _SLEEP (INT | list_access | var_access)?
+
 // lists are introduced and list separators (comma and arabic comma) have to excluded from text.
 text: /([^\n!?.،,，]+)/ -> text
 text_ask: /([^\n!?.]+)/ -> text // the ask command is an exception since it needs to include commas in its value

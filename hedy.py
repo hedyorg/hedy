@@ -33,12 +33,14 @@ TRANSPILER_LOOKUP = {}
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
+
 class Command:
     print = 'print'
     ask = 'ask'
     echo = 'echo'
     turn = 'turn'
     forward = 'forward'
+    sleep = 'sleep'
     color = 'color'
     add_to_list = 'add to list'
     remove_from_list = 'remove from list'
@@ -63,6 +65,7 @@ translatable_commands = {Command.print: ['print'],
                          Command.ask: ['ask'],
                          Command.echo: ['echo'],
                          Command.turn: ['turn'],
+                         Command.sleep: ['sleep'],
                          Command.color: ['color'],
                          Command.forward: ['forward'],
                          Command.add_to_list: ['add', 'to_list'],
@@ -144,6 +147,7 @@ commands_and_types_per_level = {
                    2: [HedyType.integer, HedyType.input]},
     Command.color: {1: command_make_color},
     Command.forward: {1: [HedyType.integer, HedyType.input]},
+    Command.sleep: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
@@ -471,6 +475,11 @@ class TypeValidator(Transformer):
             name = tree.children[0].data
             if self.level > 1 or name not in command_turn_literals:
                 self.validate_args_type_allowed(Command.turn, tree.children, tree.meta)
+        return self.to_typed_tree(tree)
+
+    def sleep(self, tree):
+        if tree.children:
+            self.validate_args_type_allowed(Command.sleep, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def assign(self, tree):
@@ -834,9 +843,9 @@ class AllCommands(Transformer):
             return 'for'
         if keyword == 'for_list':
             return 'for'
-        if keyword == 'orcondition':
+        if keyword == 'or_condition':
             return 'or'
-        if keyword == 'andcondition':
+        if keyword == 'and_condition':
             return 'and'
         if keyword == 'while_loop':
             return 'while'
@@ -955,6 +964,10 @@ class IsValid(Filter):
 
     def error_condition(self, meta, args):
         error = InvalidInfo('invalid condition', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
+    def error_repeat_no_command(self, meta, args):
+        error = InvalidInfo('invalid repeat', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
     #other rules are inherited from Filter
@@ -1331,12 +1344,16 @@ class ConvertToPython_2(ConvertToPython_1):
                 value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'"
 
-
     def sleep(self, args):
-        if args == []:
+        if not args:
             return "time.sleep(1)"
         else:
-            return f"time.sleep({args[0]})"
+            value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+            return textwrap.dedent(f"""\
+                try:
+                  time.sleep(int({value}))
+                except ValueError:
+                  raise Exception(f'While running your program the command {style_closest_command(Command.sleep)} received the value {style_closest_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
 
 
 @hedy_transpiler(level=3)
@@ -1674,9 +1691,9 @@ class ConvertToPython_12(ConvertToPython_11):
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
-    def andcondition(self, args):
+    def and_condition(self, args):
         return ' and '.join(args)
-    def orcondition(self, args):
+    def or_condition(self, args):
         return ' or '.join(args)
 
 @hedy_transpiler(level=14)
@@ -2142,6 +2159,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'invalid condition':
             raise exceptions.UnquotedEqualityCheck(line_number=line)
+        elif invalid_info.error_type == 'invalid repeat':
+            raise exceptions.MissingInnerCommandException(command='repeat', level=level, line_number=line)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)

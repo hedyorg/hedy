@@ -308,32 +308,73 @@ class TestsLevel2(HedyTester):
     #
     # sleep tests
     #
+
     def test_sleep(self):
         code = "sleep"
         expected = "time.sleep(1)"
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, expected=expected)
 
     def test_sleep_with_default_number(self):
         code = "sleep 1"
-        expected = "time.sleep(1)"
+        expected = HedyTester.sleep_command_transpiled('"1"')
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, expected=expected)
 
     def test_sleep_with_number(self):
-        code = "sleep 2"
-        expected = "time.sleep(2)"
+        code = "sleep 20"
+        expected = HedyTester.sleep_command_transpiled('"20"')
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_sleep_with_number_hi(self):
+        code = "sleep २"
+        expected = HedyTester.sleep_command_transpiled('"२"')
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_sleep_with_number_ar(self):
+        code = "sleep ٣"
+        expected = HedyTester.sleep_command_transpiled('"٣"')
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_sleep_with_number_variable(self):
+        code = textwrap.dedent("""\
+            n is 2
+            sleep n""")
+        expected = HedyTester.dedent(
+            "n = '2'",
+            HedyTester.sleep_command_transpiled("n"))
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    def test_sleep_with_number_variable_hi(self):
+        code = textwrap.dedent("""\
+            n is २
+            sleep n""")
+        expected = HedyTester.dedent(
+            "n = '२'",
+            HedyTester.sleep_command_transpiled("n"))
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    def test_sleep_with_input_variable(self):
+        code = textwrap.dedent("""\
+            n is ask how long
+            sleep n""")
+        expected = HedyTester.dedent(
+            "n = input('how long')",
+            HedyTester.sleep_command_transpiled("n"))
+
+        self.multi_level_tester(max_level=3, code=code, expected=expected)
+
+    def test_sleep_with_string_variable_gives_error(self):
+        code = textwrap.dedent("""\
+            n is test
+            sleep n""")
+
+        self.multi_level_tester(max_level=11, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
     # is tests

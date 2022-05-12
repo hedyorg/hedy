@@ -60,7 +60,7 @@ class Achievements:
             body = request.json
             if "achievement" in body:
                 self.initialize_user_data_if_necessary()
-                if body['achievement'] not in session['achieved'] and body['achievement'] in self.TRANSLATIONS.get_translations(session['lang']):
+                if body['achievement'] not in session['achieved'] and body['achievement'] in self.TRANSLATIONS.get_translations(session['lang']).get('achievements'):
                     return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
             return jsonify({})
 
@@ -133,10 +133,10 @@ class Achievements:
 
     def get_earned_achievements(self):
         self.initialize_user_data_if_necessary()
-        translations = self.TRANSLATIONS.get_translations(session['lang'])
+        translations = self.TRANSLATIONS.get_translations(session['lang']).get('achievements')
         translated_achievements = []
         for achievement in session['new_achieved']:
-            translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], translations[achievement]['image']])
+            translated_achievements.append([translations[achievement]['title'], translations[achievement]['text']])
         session['new_achieved'] = [] #Once we get earned achievements -> empty the array with "waiting" ones
         session['new_commands'] = []
         return translated_achievements

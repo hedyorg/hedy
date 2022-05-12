@@ -1,9 +1,6 @@
 import copy
 import os
 from babel import Locale
-from flask import g
-
-from utils import is_debug_mode
 from website.yaml_file import YamlFile
 import iso3166
 
@@ -13,6 +10,9 @@ COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
+
+# Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
+NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'ru', 'zh_Hans']
 
 ADVENTURE_ORDER = [
     'default',
@@ -32,6 +32,7 @@ ADVENTURE_ORDER = [
     'language',
     'secret',
     'tic',
+    'blackjack',
     'next',
     'end'
 ]
@@ -61,7 +62,11 @@ for l in sorted(languages):
 # Load and cache all keyword yamls
 KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml')
+    KEYWORDS[lang] = dict(YamlFile.for_file(f'content/keywords/{lang}.yaml'))
+    for k, v in KEYWORDS[lang].items():
+        if type(v) == str and "|" in v:
+            # when we have several options, pick the first one as default
+            KEYWORDS[lang][k] = v.split('|')[0]
 
 
 class Commands:
@@ -269,7 +274,7 @@ class Quizzes:
             self.data[keyword_lang] = self.cache_quiz_keywords(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, {}).get(question, None)
 
-      
+
 class NoSuchQuiz:
     def get_quiz_data_for_level(self, level, keyword_lang):
         return {}
