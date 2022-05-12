@@ -1041,15 +1041,20 @@ adventures:
             2:
                 story_text: |
                     ## Turtle
-                    In level 1 the turtle could only turn left or right. That is a bit boring!
+                    In this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    answer {is} {ask} How many steps should the turtle make?
+                    {forward} answer
+                    ```
+                story_text_2: |
+                    Also, in level 1 the turtle could only turn left or right. That is a bit boring!
                     In level 2 he can point his nose in all directions.
 
                     Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
                     Can you make a figure with this code? Maybe a triangle or a circle?
-                example_code: |
-                    ## Example Hedy code
-
-
+                example_code_2: |
                     ```
                     {print} Drawing figures
                     angle {is} 90
