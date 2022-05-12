@@ -8,25 +8,17 @@ from flask import request
 from flask_helpers import render_template
 
 
-def get_class_runs_last_week(students):
+def get_class_stats_last_week(students):
     week_stats = DATABASE.get_program_stats(students, str(date.today()), None)
     runs = 0
-    for stats in week_stats:
-        runs += int(stats.get('successful_runs', 0))
-    return runs
-
-
-def get_class_errors_last_week(students):
-    week_stats = DATABASE.get_program_stats(students, str(date.today()), None)
     fails = 0
     for stats in week_stats:
+        runs += int(stats.get('successful_runs', 0))
         for k, v in stats.items():
-            print(k)
             if k.lower().endswith('exception'):
-
                 fails += v
 
-    return fails
+    return {'runs': runs, 'fails': fails}
 
 
 def routes(app, database):
@@ -120,12 +112,12 @@ def routes(app, database):
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
             "students": len(Class.get('students')) if 'students' in Class else 0,
-            "runs": get_class_runs_last_week(Class.get('students', [])),
-            "errors": get_class_errors_last_week(Class.get('students', [])),
+            "stats": get_class_stats_last_week(Class.get('students', [])),
             "id": Class.get('id')
         } for Class in DATABASE.all_classes()]
 
-        classes = sorted(classes, key=lambda d: d['runs'], reverse=True)
+        print(classes)
+        classes = sorted(classes, key=lambda d: d.get('stats').get('runs'), reverse=True)
 
         return render_template('admin/admin-classes.html', classes=classes, page_title=gettext('title_admin'))
 

@@ -27,9 +27,9 @@
             <td class="classname_cell">{{class.name}}</td>
             <td class="teacher_cell">{{class.teacher}}</td>
             <td class="students_cell">{{class.students}}</td>
-            <td class="runs_cell">{{class.runs}}</td>
-            <td class="error_cell">{{class.errors}}</td>
-            <td class="error_percentage_cell">{% if class.runs > 0 %}{{(class.errors / class.runs * 100)|round(2)}}{% else %}0.00{% endif %}%</td>
+            <td class="runs_cell">{{class.stats.runs}}</td>
+            <td class="error_cell">{{class.stats.fails}}</td>
+            <td class="error_percentage_cell">{% if class.stats.runs > 0 %}{{(class.stats.fails / class.stats.runs * 100)|round(2)}}{% else %}0.00{% endif %}%</td>
             <td id="statistics_cell"><a href="/stats/class/{{class.id}}" target="_blank">Click here</a></td>
           </tr>
       {% endfor %}
