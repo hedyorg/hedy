@@ -13,7 +13,6 @@ def get_class_runs_last_week(students):
     runs = 0
     for stats in week_stats:
         runs += int(stats.get('successful_runs', 0))
-
     return runs
 
 
@@ -21,8 +20,11 @@ def get_class_errors_last_week(students):
     week_stats = DATABASE.get_program_stats(students, str(date.today()), None)
     fails = 0
     for stats in week_stats:
-        print(stats)
-        #exceptions = {k: v for k, v in stats.items() if k.lower().endswith('exception')}
+        for k, v in stats.items():
+            print(k)
+            if k.lower().endswith('exception'):
+
+                fails += v
 
     return fails
 
