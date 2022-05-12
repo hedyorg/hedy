@@ -15,7 +15,7 @@
           <td id="classname_header">Class name</td>
           <td id="teacher_header">Teacher</td>
           <td id="students_header">Students</td>
-          <td id="runs_header">Total runs</td>
+          <td id="runs_header">Runs this week</td>
           <td id="error_header">Error percentage</td>
           <td id="last_used_header">Last used</td>
           <td id="statistics_header">Statistics</td>
@@ -28,7 +28,7 @@
             <td class="teacher_cell">{{class.teacher}}</td>
             <td class="students_cell">{{class.students}}</td>
             <td class="runs_cell">{{class.runs}}</td>
-            <td class="error_cell">{{class.error}}</td>
+            <td class="error_cell">{{class.error_percentage}}</td>
             <td class="last_used_cell">{{class.last_used}}</td>
             <td id="statistics_cell"><a href="/stats/class/{{class.id}}" target="_blank">Click here</a></td>
           </tr>

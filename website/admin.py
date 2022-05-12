@@ -9,22 +9,22 @@ from flask_helpers import render_template
 
 
 def get_class_runs_last_week(students):
-    this_week = DATABASE.to_year_week(DATABASE.parse_date(None, date.today()))
-    stats = DATABASE.get_program_stats(students, this_week, None)
-    stats = DATABASE.get_program_stats(students, None, None)
+    week_stats = DATABASE.get_program_stats(students, str(date.today()), None)
     runs = 0
-    for week_stats in stats:
-        runs += int(week_stats.get('successful_runs', 0))
+    for stats in week_stats:
+        runs += int(stats.get('successful_runs', 0))
 
     return runs
 
-def get_class_errors_last_week(students):
-    this_week = DATABASE.to_year_week(DATABASE.parse_date(None, date.today()))
-    stats = DATABASE.get_program_stats(students, this_week, None)
-    failed_runs = 0
-    #exceptions = {k: v for k, v in stats.items() if k.lower().endswith('exception')}
 
-    return failed_runs
+def get_class_errors_last_week(students):
+    week_stats = DATABASE.get_program_stats(students, str(date.today()), None)
+    fails = 0
+    for stats in week_stats:
+        print(stats)
+        #exceptions = {k: v for k, v in stats.items() if k.lower().endswith('exception')}
+
+    return fails
 
 
 def routes(app, database):
@@ -119,6 +119,7 @@ def routes(app, database):
             "teacher": Class.get('teacher'),
             "students": len(Class.get('students')) if 'students' in Class else 0,
             "runs": get_class_runs_last_week(Class.get('students', [])),
+            "errors": get_class_errors_last_week(Class.get('students', [])),
             "id": Class.get('id')
         } for Class in DATABASE.all_classes()]
 

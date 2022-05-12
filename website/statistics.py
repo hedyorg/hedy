@@ -3,7 +3,6 @@ from enum import Enum
 from flask import request, jsonify, g
 from flask_babel import gettext
 
-import hedyweb
 from flask_helpers import render_template
 from website import querylog
 from website.auth import requires_login, is_admin, is_teacher
