@@ -16,10 +16,8 @@
           <td id="teacher_header">Teacher</td>
           <td id="students_header">Students</td>
           <td id="runs_week_header">Runs this week</td>
-          <td id="error_week_header">Errors this week</td>
           <td id="error_percentage_week_header">Error percentage this week</td>
           <td id="runs_header">Total runs</td>
-          <td id="error_header">Total errors</td>
           <td id="error_percentage_header">Error percentage</td>
           <td id="statistics_header">Statistics</td>
       </tr>
@@ -31,10 +29,8 @@
             <td class="teacher_cell">{{class.teacher}}</td>
             <td class="students_cell">{{class.students}}</td>
             <td class="runs_week_cell">{{class.week_stats.runs}}</td>
-            <td class="error_week_cell">{{class.week_stats.fails}}</td>
             <td class="error_percentage_week_cell">{% if class.week_stats.runs > 0 %}{{(class.week_stats.fails / class.week_stats.runs * 100)|round(2)}}{% else %}0.00{% endif %}%</td>
             <td class="runs_cell">{{class.total_stats.runs}}</td>
-            <td class="error_cell">{{class.total_stats.fails}}</td>
             <td class="error_percentage_cell">{% if class.total_stats.runs > 0 %}{{(class.total_stats.fails / class.total_stats.runs * 100)|round(2)}}{% else %}0.00{% endif %}%</td>
             <td id="statistics_cell"><a href="/week_stats/class/{{class.id}}" target="_blank">Click here</a></td>
           </tr>
