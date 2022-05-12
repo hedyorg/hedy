@@ -29,7 +29,7 @@
             <td class="students_cell">{{class.students}}</td>
             <td class="runs_cell">{{class.runs}}</td>
             <td class="error_cell">{{class.errors}}</td>
-            <td class="error_percentage_cell">{{(class.errors / class.runs * 100)|round(2)}}%</td>
+            <td class="error_percentage_cell">{% if class.runs > 0 %}{{(class.errors / class.runs * 100)|round(2)}}{% else %}0.00{% endif %}%</td>
             <td id="statistics_cell"><a href="/stats/class/{{class.id}}" target="_blank">Click here</a></td>
           </tr>
       {% endfor %}
