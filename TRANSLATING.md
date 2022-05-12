@@ -49,7 +49,7 @@ If you choose for Translate for the Failing checks: Placeholders, you might see 
 
 ![](image/TRANSLATING/1652370304289.png)
 
-Again, maybe a little too much information, but a lot is very helpfull. Browse a little through this info. There is info about texts in the neighborhood, or suggestons of computer translations. If you think this is too much info for now, you can choose for the Zen option which looks like this:
+Again, maybe a little too much information, but a lot is very helpful. Browse a little through this info. There is info about texts in the vicinity, or suggestions of computer translations. If you think this is too much info for now, you can choose for the Zen option which looks like this:
 
 ![](image/TRANSLATING/1652370483598.png)
 
