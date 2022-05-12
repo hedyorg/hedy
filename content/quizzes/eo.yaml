@@ -51,3 +51,274 @@ levels:
             -   option: Im in line 1 is spelled wrong.
                 feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
             -   option: "`{echo}` isn't a command."
+                feedback: "`{echo}` is a command, there's another mistake."
+            -   option: Nothing! This is a perfect code!
+                feedback: Wrong, look carefully!
+            correct_answer: A
+            hint: Line 1 doesn't seem right
+            question_score: '10'
+        5:
+            question_text: Which command is missing in line 2?
+            code: "{ask} What is your favorite pet?\n_?_ So your favorite pet is..."
+            mp_choice_options:
+            -   option: "```\n{print}\n```\n"
+                feedback: No, you would like the answer to be repeated back to you.
+            -   option: "```\nHedy\n```\n"
+                feedback: Hedy isn't a command.
+            -   option: "```\n{ask}\n```\n"
+                feedback: With `{ask}` you can ask a question.
+            -   option: "```\n{echo}\n```\n"
+                feedback: Right on!
+            correct_answer: D
+            hint: You want to see the answer at the end of line 2...
+            question_score: '10'
+        6:
+            question_text: What's wrong with this code?
+            code: "{print} Hi im Hedy!\n{print} Which football team do you support?\n{echo} You support...\n{print} Cool! Me too!"
+            mp_choice_options:
+            -   option: In line 1 `{print}` should be replaced with `{ask}`.
+                feedback: '`{print}` in line 1 is correct.'
+            -   option: In line 2, `{print}` should be replaced with `{ask}`.
+                feedback: Great! You paid attention!
+            -   option: Line 3 has to begin with `{print}` instead of `{echo}`.
+                feedback: '`{echo}` is correct.'
+            -   option: In line 4, `{print}` is spelled wrong.
+                feedback: No, there is a mistake somewhere else
+            correct_answer: B
+            hint: Check the `{print}` commands.
+            question_score: '10'
+        7:
+            question_text: What's wrong with this code?
+            code: "{print} Welcome at Hedys restaurant!\n{ask} What would you like to eat?\n{echo} So you want to order ...\n{print} Coming right up! Enjoy!"
+            mp_choice_options:
+            -   option: In line 1 `{print}` needs to be replaced with `{ask}`
+                feedback: Are you sure something is wrong?
+            -   option: In line 1 `{print}` needs to be replaced with `{echo}`
+                feedback: Are you sure something's wrong?
+            -   option: In line 3 `{echo}` needs to be replaced with `{print}`
+                feedback: Are you sure something is wrong?
+            -   option: Nothing! This is a perfect code!
+                feedback: Correct!
+            correct_answer: D
+            hint: Check the code line by line
+            question_score: '10'
+        8:
+            question_text: How do you use the `{echo}` command?
+            mp_choice_options:
+            -   option: You can use it to `{ask}` a question.
+                feedback: That's what `{ask}` is for!
+            -   option: You can use it to `{print}` text.
+                feedback: That's what `{print}` is for!
+            -   option: You can use it to repeat an answer.
+                feedback: Good job!
+            -   option: You can use it to make text disappear.
+                feedback: That's not right...
+            correct_answer: C
+            hint: '`{echo}` is used after an `{ask}` command.'
+            question_score: '10'
+        9:
+            question_text: What's wrong with this code?
+            code: "{print} Hello!\n{print} How are you doing?\n{echo} So you are doing..."
+            mp_choice_options:
+            -   option: '`{print}` in line 1 should be `{ask}`'
+                feedback: No, `{print}` is right. Where is the question being asked?
+            -   option: '`{print}` in line 2 should be `{ask}`'
+                feedback: Super!
+            -   option: '`{echo}` in line 3 should be `{ask}`'
+                feedback: No, `{echo}` is right. Where is the question being asked?
+            -   option: Nothing. This is a perfect code!
+                feedback: Look carefully for the mistake...
+            correct_answer: B
+            hint: '`{ask}` allows you to ask a question'
+            question_score: '10'
+        10:
+            question_text: Are you ready for level 2?
+            mp_choice_options:
+            -   option: Yes!
+                feedback: Great! Let's go to the next level!
+            -   option: No
+                feedback: What a shame... You can practice some more in level 1!
+            correct_answer: A
+            hint: Let's go!
+            question_score: '10'
+    3:
+        2:
+            correct_answer: A
+            question_text: What's wrong with this code?
+            code: "animals {is} dog cat cow\n{print} animals {at} {random}"
+            mp_choice_options:
+            -   option: 'You need commas in line 1: dog, cat, cow.'
+                feedback: Good job!
+            -   option: Line 1 needs to start with `{print}`.
+                feedback: No, you don't need `{print}`
+            -   option: Line 2 needs to say 'animal' instead of 'animals'',
+                feedback: animals is correct.
+            -   option: '`{at} {random}` is spelled incorrectly'
+                feedback: '`{at} {random}` is the correct spelling'
+            hint: There's something wrong in line 1
+            question_score: '10'
+        1:
+            question_text: What command do you use to let Hedy pick something arbitrarily?
+            mp_choice_options:
+            -   option: "```\n{print}\n```\n"
+                feedback: '`{print}` is used to print text'
+            -   option: "```\n{ask}\n```\n"
+                feedback: '`{ask}` is used to ask a question'
+            -   option: "```\n{is}\n```\n"
+                feedback: '`{is}` is used to make a list'
+            -   option: "```\n{at} {random}\n```\n"
+                feedback: Correct!
+            correct_answer: D
+            hint: Arbitrarily means without a plan or randomly.
+            question_score: '10'
+        3:
+            question_text: What's wrong in line 2 of this code?
+    2:
+        1:
+            question_text: Which statement is true?
+            mp_choice_options:
+            -   option: In level 2 the `{print}` command doesn't exist anymore
+                feedback: '`{print}` still works'
+            -   option: In level 2 the `{ask}` command doesn't exist anymore
+                feedback: '`{ask}` still works!'
+            -   option: In level 2 the `{echo}` command doesn't exist anymore
+                feedback: Good
+            -   option: In level 2 all the level 1 commands still work
+                feedback: No one command doesn't work anymore.
+            correct_answer: C
+            hint: '`{print}` and `{ask}` still exist.'
+            question_score: '10'
+        2:
+            question_text: Which code is correct?
+            mp_choice_options:
+            -   option: "```\nname {is} {ask} What is your name?\n```\n"
+                feedback: Super!
+            -   option: "```\n{ask} {is} name What is your name\n```\n"
+                feedback: The words are right, the order is not!
+            -   option: "```\n{ask} What is your name?\n```\n"
+                feedback: This worked in level 1, but in level 2 and up it works differently.
+            -   option: "```\n{ask} What is your name? {is} name\n```\n"
+                feedback: The words are right, the order isn't!
+            correct_answer: A
+            hint: "`{ask}` doesn't work like in level 1"
+            question_score: '10'
+        3:
+            question_text: What appears on your output screen when you run this code?
+            code: "name {is} Marleen\n{print} name goes to the market and she buys an apple."
+            mp_choice_options:
+            -   option: name goes to the market and she buys an apple.
+                feedback: The word name is replaced with Marleen
+            -   option: Marleen goes to the market.
+                feedback: The second part of the sentence isn't left out!
+            -   option: Marleen goes to the market and she buys an apple.
+                feedback: Right on!
+            -   option: Marleen goes to the market and Marleen buys an apple.
+                feedback: She is not replaced with the name
+            correct_answer: C
+            hint: The word name is replaced with Marleen
+            question_score: '10'
+        4:
+            question_text: What will you see on the output screen when you run this code?
+            code: "name {is} Hedy\n{print} Hi my name is name!"
+            mp_choice_options:
+            -   option: Hi my name is name
+                feedback: The variable name is replaced with Hedy
+            -   option: Hi my name is Hedy
+                feedback: The variable name is replaced with Hedy
+            -   option: Hi my Hedy is name
+                feedback: The variable name is replaced with Hedy
+            -   option: Hi my Hedy is Hedy
+                feedback: Correct, this mistake will be fixed in level 3!
+            correct_answer: D
+            hint: "'name' is being replaced with 'Hedy' in both places"
+            question_score: '10'
+        5:
+            question_text: What happens when you use the `{sleep}` command?
+            code: '{sleep}'
+            mp_choice_options:
+            -   option: It slows down your computer
+                feedback: fortunately not!
+            -   option: It closes down Hedy
+                feedback: fortunately not!
+            -   option: Your program pauses for a second and then continues
+                feedback: That's right!
+            -   option: You put it at the end so Hedy knows your program is finished
+                feedback: No it would be useless at the end of your code
+            correct_answer: C
+            hint: The computer waits for a second at the `{sleep}` command
+            question_score: '10'
+        6:
+            question_text: What should be on the lines?
+            code: "{print} And the award for best programming language goes to...\n_?_\n{print} Hedy!"
+            mp_choice_options:
+            -   option: "```\n{sleep}\n```\n"
+                feedback: Perfect!
+            -   option: "```\n{echo}\n```\n"
+                feedback: There is nothing to repeat back here
+            -   option: "```\n{print}\n```\n"
+                feedback: There is no text there to `{print}` there
+            -   option: "```\n{ask}\n```\n"
+                feedback: There is no question there to be asked
+            correct_answer: A
+            hint: Pause for dramatic effect...
+            question_score: '10'
+        7:
+            question_text: What command should be used on line 2?
+            code: "{print} I will explode in 3 seconds!\n_?_\n{print} BOOM!"
+            mp_choice_options:
+            -   option: "```\n{print} 3\n```\n"
+                feedback: You don't need to `{print}`
+            -   option: "```\n{sleep} 3\n```\n"
+                feedback: Perfect!
+            -   option: "```\n{sleep}\n```\n"
+                feedback: This way the bomb will explode in 1 second
+            -   option: "```\n{sleep} {sleep} {sleep}\n```\n"
+                feedback: Make it easier on yourself by using the number 3
+            correct_answer: B
+            hint: You want the computer to wait for 3 seconds
+            question_score: '10'
+        8:
+            question_text: How would you correct the first line of code?
+            code: "{ask} {is} How old are you?\n{print} age"
+            mp_choice_options:
+            -   option: "```\nage {ask} {is} How old are you?\n```\n"
+                feedback: That is the wrong order
+            -   option: "```\n{ask} {is} age How old are you?\n```\n"
+                feedback: That is the wrong order
+            -   option: "```\nage {is} {ask} How old are you?\n```\n"
+                feedback: You get it!
+            -   option: "```\nage {is} How old are you?\n```\n"
+                feedback: Where is the `{ask}` command?
+            correct_answer: C
+            hint: The variable name should come first
+            question_score: '10'
+        9:
+            question_text: What is going wrong in this code?
+            code: "dogs {is} animal\n{print} I love animal"
+            mp_choice_options:
+            -   option: 'Line 1 should say: dogs `{is}` animals'
+                feedback: The variable name is animal
+            -   option: 'Line 1 should say: animal `{is}` dogs'
+                feedback: Great!
+            -   option: 'Line 2 should say: `{print}` I love animals'
+                feedback: The variable name is animal
+            -   option: 'Line 2 should say: `{sleep}` I love animals'
+                feedback: Sleep is not used to `{print}` text
+            correct_answer: B
+            hint: You want to `{print}` 'I love dogs'
+            question_score: '10'
+        10:
+            question_text: What command should be used on the line 1?
+            code: "flavor {is} _?_\n{print} Your favorite icecream is...\n{sleep}\n{print} flavor"
+            mp_choice_options:
+            -   option: "```\n{sleep} 3\n```\n"
+                feedback: You want to know the favorite flavor!
+            -   option: "```\n{print} strawberries\n```\n"
+                feedback: You do not want a `{print}` command at the middle of the line...
+            -   option: "```\nstrawberries, chocolate, vanilla\n```\n"
+                feedback: This way you are making a list. You don't want that now.
+            -   option: "```\n{ask} What flavor icecream do you like?\n```\n"
+                feedback: That's right!
+            correct_answer: D
+            hint: You want to `{ask}` a question
+            question_score: '10'
