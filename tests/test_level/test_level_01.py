@@ -152,6 +152,33 @@ class TestsLevel1(HedyTester):
             translate=False, #translation will remove the tatweels, we will deal with that later
             lang='ar')
 
+    # def test_print_ar_tatweel_itself(self):
+    # FH, May 2022, sadly beginning a string with tatweel does not work
+    # would need complex changes to the grammar (documented further in the grammar of level 1)
+    # so I am leaving this as it is for now
+    #     code = "قول ـ"
+    #     expected = "print('ـ')"
+    #     output = 'ـ'
+    #
+    #     self.single_level_tester(
+    #         code=code,
+    #         expected=expected,
+    #         output=output,
+    #         translate=False, #translation will remove the tatweels, we will deal with that later
+    #         lang='ar')
+
+    def test_print_ar_tatweel_printing(self):
+        code = "قول لــــ"
+        expected = "print('لــــ')"
+        output = 'لــــ'
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            translate=False, #translation will remove the tatweels, we will deal with that later
+            lang='ar')
+
     def test_print_ar_tatweel_begin(self):
         code = "ـــقول أ"
         expected = "print('أ')"
