@@ -43,4 +43,4 @@ If you choose for Translate, you'll see this:
 Again, maybe a little too much information, but a lot is very helpfull. If your registered, you'll see a little more then others, this screen is from a registered user. Browse a little through this info. There is info about texts in the neighborhood, or suggestons of computer translations. If you think this is too much info for now, you can choose for the Zen option which looks like this:
 ![Weblate tour - Zen](https://user-images.githubusercontent.com/28646458/156937825-c5b97c10-3928-40b9-93d1-68a80371d51f.jpg)
 
-That's all for now, any problems, let us know so we can address them here for future translators. You can reach us at [hedy@felienne.com](mailto:hedy@felienne.com).
+That's all for now, any problems, let us know so we can address them here for future translators. You can reach us at [hedy@felienne.com](mailto:hedy@felienne.com). Or you can join our [Slack channel](https://join.slack.com/share/enQtMzUxNzkyNzUxMTAxMy1hYzA1NzRkODU2M2Y1YjliZThjODgyZTQwZGMyMThmYmVlYTcyMjAxNTUyYmYxODdjZjBkOWJkYjQwNGYyMzFl?cdn_fallback=1)
