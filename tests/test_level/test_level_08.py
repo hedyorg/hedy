@@ -310,7 +310,7 @@ class TestsLevel8(HedyTester):
 
     expected = textwrap.dedent("""\
     count = '1'
-    for i in range(int(12)):
+    for i in range(int('12')):
       print(f'{count} times 12 is {int(count) * int('12')}')
       count = int(count) + int(1)
       time.sleep(0.1)""")
