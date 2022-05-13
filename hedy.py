@@ -1506,7 +1506,7 @@ class ConvertToPython_6(ConvertToPython_5):
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
             return f'{str(argument.children[0])}'
-        return f"int({argument})"
+        return f'int("{argument}")'
 
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
