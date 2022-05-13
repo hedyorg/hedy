@@ -6,7 +6,7 @@ import os
 
 
 # Transcription of the used tokens into a symbol (a letter) in order to apply a coloring
-Tokencode = {
+TOKEN_CODE = {
     "text" :               'T', # normal
     "keyword" :            'K', # 
     "comment" :            'C',
@@ -16,7 +16,7 @@ Tokencode = {
 }
 
 
-Abbreviation = {
+ABBREVIATION = {
     "text"                : "T",
     "uncolor"             : "T",
     "txt"                 : "T",
@@ -53,23 +53,23 @@ Abbreviation = {
 
 class HighlightTester(unittest.TestCase):
 
-    def assertHighlightedChr(self,code,expected,level,lang="en"):
+    def assert_highlighted_chr(self,code,expected,level,lang="en"):
         
-        rules  = self._getRules(level,lang)
+        rules  = self._get_rules(level,lang)
 
-        result = self.applyRules(rules,code)
+        result = self.apply_rules(rules,code)
 
-        valid, indError = self.check(result,expected)
+        valid, ind_error = self.check(result,expected)
         if not valid:
 
             st = 0
-            ind = indError
-            if indError >= 40 :
-                st = indError - 40
+            ind = ind_error
+            if ind_error >= 40 :
+                st = ind_error - 40
                 ind = 40
             end = len(code)
-            if len(code) >= indError + 40:
-                end = indError + 40
+            if len(code) >= ind_error + 40:
+                end = ind_error + 40
 
 
             print("ERROR in level {} in {}:".format(level, lang))
@@ -80,7 +80,7 @@ class HighlightTester(unittest.TestCase):
         self.assertTrue(valid)
 
 
-    def assertHighlightedChrMultiLine(self,*args,level,lang="en"):
+    def assert_highlighted_chr_multi_line(self,*args,level,lang="en"):
         if len(args)%2 != 0:
             raise("*args must be even (alternating lines of code and lines of highlighting)")
 
@@ -93,92 +93,92 @@ class HighlightTester(unittest.TestCase):
         code = "\n".join(code)
         expected = "\n".join(expected)
 
-        self.assertHighlightedChr(code,expected,level,lang)
+        self.assert_highlighted_chr(code,expected,level,lang)
 
 
-    def assertHighlighted(self,codeCol,level,lang="en"):
+    def assert_highlighted(self,code_col,level,lang="en"):
         
-        code,expected = self._transforme(codeCol)
+        code,expected = self._transforme(code_col)
 
-        self.assertHighlightedChr(code,expected,level,lang)
-
-
-    def assertHighlightedMultiLine(self,*args,level,lang="en"):
-        codeCol = "\n".join(args)
-
-        code,expected = self._transforme(codeCol)
-
-        self.assertHighlightedChr(code,expected,level,lang)
+        self.assert_highlighted_chr(code,expected,level,lang)
 
 
-    def _getRules(self,level,lang="en"):
+    def assert_highlighted_multi_line(self,*args,level,lang="en"):
+        code_col = "\n".join(args)
+
+        code,expected = self._transforme(code_col)
+
+        self.assert_highlighted_chr(code,expected,level,lang)
+
+
+    def _get_rules(self,level,lang="en"):
         os.chdir(os.path.dirname(__file__) +"/..")
 
-        fileRegexTrad = open('highlighting/highlighting-trad.json')
-        dataRegexTrad = json.load(fileRegexTrad)
-        fileRegexTrad.close()
+        file_regex_trad = open('highlighting/highlighting-trad.json')
+        data_regex_trad = json.load(file_regex_trad)
+        file_regex_trad.close()
 
-        if lang not in dataRegexTrad.keys():
+        if lang not in data_regex_trad.keys():
             lang = 'en'
 
-        regexTrad = dataRegexTrad[lang]
+        regex_trad = data_regex_trad[lang]
 
 
         # open data for regex
-        fileRegex = open('highlighting/highlighting.json')
-        dataRegex = json.load(fileRegex)
-        fileRegex.close()
+        file_regex = open('highlighting/highlighting.json')
+        data_regex = json.load(file_regex)
+        file_regex.close()
 
-        for lvlRules in dataRegex:
-            for state in lvlRules["rules"]:
-                for rule in lvlRules["rules"][state]:
-                    for key in regexTrad:
-                        rule['regex'] = rule['regex'].replace("(__"+key+"__)", regexTrad[key])
+        for lvl_rules in data_regex:
+            for state in lvl_rules["rules"]:
+                for rule in lvl_rules["rules"][state]:
+                    for key in regex_trad:
+                        rule['regex'] = rule['regex'].replace("(__"+key+"__)", regex_trad[key])
 
         # get rules for the level
-        Rules = [item for item in dataRegex if item['name']==level]
-        if len(Rules) != 1 : exit()
-        else : Rules = Rules[0]['rules']
-        return Rules
+        rules = [item for item in data_regex if item['name']==level]
+        if len(rules) != 1 : exit()
+        else : rules = rules[0]['rules']
+        return rules
 
 
-    def _transforme(self,codeCol):
-        Code = ""
-        Colo = ""
+    def _transforme(self,code_col):
+        code = ""
+        colo = ""
 
         flag = False
         flag2 = False
 
-        for ch in codeCol:
+        for ch in code_col:
             if ch == "{" :
                 flag = True
                 flag2 = False
-                tmpCode = ""
-                tmpColo = ""
+                tmp_code = ""
+                tmp_colo = ""
             elif ch == "}":
                 flag = False
                 flag2 = False
 
-                Code += tmpCode
-                Colo += Abbreviation[tmpColo] * len(tmpCode)
+                code += tmp_code
+                colo += ABBREVIATION[tmp_colo] * len(tmp_code)
 
             elif flag:
                 if ch == "|":
                     flag2 = True
                 elif not flag2:
-                    tmpCode += ch
+                    tmp_code += ch
                 elif flag2:
-                    tmpColo += ch
+                    tmp_colo += ch
 
             elif not flag:
                 if ch == "\n":
-                    Colo += "\n"
-                    Code += "\n"
+                    colo += "\n"
+                    code += "\n"
                 else:
-                    Colo += " "
-                    Code += ch
+                    colo += " "
+                    code += ch
 
-        return Code,Colo
+        return code,colo
 
 
     #######################################################################################
@@ -186,33 +186,33 @@ class HighlightTester(unittest.TestCase):
     #######################################################################################
 
     # This function simulates the operation of Ace on a
-    # string provided as input, and "colors" it using the variable Tokencode.
+    # string provided as input, and "colors" it using the variable TOKEN_CODE.
 
-    def applyRulesLine(self,Rules,code,startToken="start"):
-        # Initialisation Output
-        Output = " " * len(code)
+    def apply_rules_line(self,rules,code,start_token="start"):
+        # Initialisation output
+        output = " " * len(code)
 
         # Initialisation variables
-        currentState = startToken
-        currentPosition = 0
+        current_state = start_token
+        current_position = 0
 
 
         flag = False
         while not flag:
 
             # search for the transition that we will use
-            currentMatch = None
+            current_match = None
             NEXT = {"rule":{},"match":None}
             FIND = False
-            nextPos = len(code) + 42
-            for rule in Rules[currentState]:
+            next_pos = len(code) + 42
+            for rule in rules[current_state]:
 
-                regexCompile = re.compile(rule['regex'], re.MULTILINE)
-                match = regexCompile.search(code, currentPosition)
+                regex_compile = re.compile(rule['regex'], re.MULTILINE)
+                match = regex_compile.search(code, current_position)
 
                 if match:
-                    if match.start() < nextPos :
-                        nextPos = match.start()
+                    if match.start() < next_pos :
+                        next_pos = match.start()
                         NEXT["rule"] = rule
                         NEXT["match"] = match
                         FIND = True
@@ -221,51 +221,51 @@ class HighlightTester(unittest.TestCase):
             if FIND :
 
                 # Application of coloring on the code
-                currentRule,currentMatch = NEXT["rule"],NEXT["match"]
+                current_rule,current_match = NEXT["rule"],NEXT["match"]
 
-                if "token" not in currentRule:
+                if "token" not in current_rule:
                     raise ValueError("We need a token in all rules !")
         
-                if type(currentRule['token']) == str :
-                    currentRule['token'] = [currentRule['token']]
+                if type(current_rule['token']) == str :
+                    current_rule['token'] = [current_rule['token']]
         
-                if re.compile(currentRule['regex'], re.MULTILINE).groups == 0:
-                    tok = currentRule['token'][0]
-                    start = currentMatch.start()
-                    length = currentMatch.end() - currentMatch.start()
-                    Output = Output[:start] + Tokencode[tok] * length + Output[start + length:]
+                if re.compile(current_rule['regex'], re.MULTILINE).groups == 0:
+                    tok = current_rule['token'][0]
+                    start = current_match.start()
+                    length = current_match.end() - current_match.start()
+                    output = output[:start] + TOKEN_CODE[tok] * length + output[start + length:]
 
                 else:
-                    pos = currentMatch.start()
-                    for i,submatch in enumerate(currentMatch.groups()):    
-                        tok = currentRule['token'][i%len(currentRule['token'])]        
-                        Output = Output[:pos] + Tokencode[tok] * len(submatch) + Output[pos + len(submatch):]
+                    pos = current_match.start()
+                    for i,submatch in enumerate(current_match.groups()):    
+                        tok = current_rule['token'][i%len(current_rule['token'])]        
+                        output = output[:pos] + TOKEN_CODE[tok] * len(submatch) + output[pos + len(submatch):]
                         pos += len(submatch)
 
-                currentPosition = currentMatch.end()
+                current_position = current_match.end()
 
-                if 'next' in currentRule:
-                    currentState = currentRule['next']
+                if 'next' in current_rule:
+                    current_state = current_rule['next']
 
-                if currentPosition ==len(code):
+                if current_position ==len(code):
                     flag = True
 
 
             else:
                 flag = True
 
-        Output = Output.replace(" ","T")
-        return Output,currentState
+        output = output.replace(" ","T")
+        return output,current_state
 
 
-    def applyRules(self,Rules,code):
-        Outputs = []
+    def apply_rules(self,rules,code):
+        outputs = []
         token = "start"
         for line in code.split("\n"):
-            output,token = self.applyRulesLine(Rules,line,token)
+            output,token = self.apply_rules_line(rules,line,token)
             print("next",token)
-            Outputs.append(output)
-        return "\n".join(Outputs)
+            outputs.append(output)
+        return "\n".join(outputs)
 
 
 
@@ -281,11 +281,11 @@ class HighlightTester(unittest.TestCase):
             raise ValueError("The desired highlight and the obtained highlight do not have the same length !")
         cpt = 0
         for i in range(len(expected)):
-            chWanted,chresult = expected[i],result[i]
+            ch_wanted,ch_result = expected[i],result[i]
 
-            if chWanted == chresult:
+            if ch_wanted == ch_result:
                 pass # if they are the same, no problem 
-            elif chWanted == " " and chresult in ['T','K','C','N','S']:
+            elif ch_wanted == " " and ch_result in ['T','K','C','N','S']:
                 pass # if it was not fixed at the beginning, everything is tolerated except the pink highlighting
             else:
                 # in all other cases, an error is returned indicating the number of the problematic character

@@ -4,7 +4,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_1(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "name is ask 'what is your name?'",
             "TTTT KK KKK SSSSSSSSSSSSSSSSSSSS",
             "if name is Hedy print 'cool!' else print 'meh'",
@@ -13,7 +13,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "name is ask 'what is your name?'",
             "TTTT KK KKK SSSSSSSSSSSSSSSSSSSS",
             "if name is Hedy print 'nice' else print 'boo!'",
@@ -22,7 +22,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "pretty_colors is green, yellow",
             "TTTTTTTTTTTTT KK TTTTTK TTTTTT",
             "color is ask 'What is your favorite color?'",
@@ -35,7 +35,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_4(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "name is ask 'what is your name?'",
             "TTTT KK KKK SSSSSSSSSSSSSSSSSSSS",
             "if name is Hedy print 'nice'",
@@ -46,7 +46,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_5(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "name is ask 'Who is walking in the forest?'",
             "TTTT KK KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print name 'walks through the forest'",
@@ -63,14 +63,14 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_6(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print 'Here your story will start!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level5",lang='en')
 
 
     def test_7(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "words is squawk, Hedy",
             "TTTTT KK TTTTTTK TTTT",
             "print 'Train your parrot!'",
@@ -93,14 +93,14 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_8(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
             level="level5",lang='en')
 
 
     def test_9(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Drawing Figures'",
             "KKKKK SSSSSSSSSSSSSSSSS",
             "figure is ask 'Do you want a square or a triangle?'",
@@ -129,7 +129,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_10(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Drawing Figures'",
             "KKKKK SSSSSSSSSSSSSSSSS",
             "figure is ask 'Do you want a square or a triangle?'",
@@ -144,7 +144,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_11(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "people is mom, dad, Emma, Sophie",
             "TTTTTT KK TTTK TTTK TTTTK TTTTTT",
             "dishwasher is people at random",
@@ -155,14 +155,14 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_12(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print 'Who does the dishes?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
             level="level5",lang='en')
 
 
     def test_13(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "choices is 1, 2, 3, 4, 5, earthworm",
             "TTTTTTT KK TK TK TK TK TK TTTTTTTTT",
             "throw is _",
@@ -175,14 +175,14 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_14(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print 'What will the die indicate this time?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level5",lang='en')
 
 
     def test_15(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "options is rock, paper, scissors",
             "TTTTTTT KK TTTTK TTTTTK TTTTTTTT",
             "computer_choice is _",
@@ -199,14 +199,14 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_16(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print 'Welcome to your own rock scissors paper!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level5",lang='en')
 
 
     def test_17(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Welcome to Hedys restaurant!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "special is ask 'Would you like to hear our specials today?'",
@@ -237,7 +237,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_18(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Im Hedy the fortune teller!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'I can predict if youll win the lottery tomorrow!'",
@@ -250,7 +250,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_19(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Im Hedy the fortune teller!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'I can predict if you will win the lottery tomorrow!'",
@@ -267,7 +267,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_20(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Escape from the haunted house!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'There are 3 doors in front of you...'",
@@ -292,7 +292,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_21(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Learn French!'",
             "KKKKK SSSSSSSSSSSSSSS",
             "cat is ask '🐱'",
@@ -311,7 +311,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_22(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Welcome at McHedy'",
             "KKKKK SSSSSSSSSSSSSSSSSSS",
             "order is ask 'What would you like to eat?'",
@@ -334,7 +334,7 @@ class HighlighterTestLeveL5(HighlightTester):
 
 
     def test_23(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print 'On to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
             level="level5",lang='en')

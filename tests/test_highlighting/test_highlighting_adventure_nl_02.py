@@ -5,7 +5,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "naam is Hedy",
             "TTTT KK TTTT",
             "leeftijd is 15",
@@ -16,7 +16,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "antwoord is vraag Hoe heet jij?",
             "TTTTTTTT KK KKKKK TTTTTTTTTTTTT",
             "print Hoi antwoord",
@@ -25,7 +25,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_4(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Mijn favoriete kleur is...",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "slaap 2",
@@ -36,14 +36,14 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_5(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print hallo wereld!",
             "KKKKK TTTTTTTTTTTTT",
             level="level2",lang='nl')
 
 
     def test_6(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "naam is vraag Hoe heet de hoofdpersoon?",
             "TTTT KK KKKKK TTTTTTTTTTTTTTTTTTTTTTTTT",
             "print naam gaat nu in het bos lopen",
@@ -60,14 +60,14 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_7(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print Hier komt straks jouw verhaal!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             level="level2",lang='nl')
 
 
     def test_8(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Ik ben papegaai Hedy",
             "KKKKK TTTTTTTTTTTTTTTTTTTT",
             "naam is vraag Wie ben jij?",
@@ -86,14 +86,14 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_9(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print Ik ben Hedy de papegaai!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT",
             level="level2",lang='nl')
 
 
     def test_10(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Figuren tekenen",
             "KKKKK TTTTTTTTTTTTTTT",
             "hoek is 90",
@@ -110,7 +110,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_11(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Schildpaddenrace!",
             "KKKKK TTTTTTTTTTTTTTTTT",
             "hoek is 90",
@@ -123,7 +123,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_12(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "keuze is _",
             "TTTTT KK  ",
             "print ik kies keuze",
@@ -132,14 +132,14 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_13(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "# Schrijf jouw code hier",
             "CCCCCCCCCCCCCCCCCCCCCCCC",
             level="level2",lang='nl')
 
 
     def test_14(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Welkom bij McHedy!",
             "KKKKK TTTTTTTTTTTTTTTTTT",
             "eten is vraag Wat wilt u eten?",
@@ -156,7 +156,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_15(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "monster1 is 👻",
             "TTTTTTTT KK T",
             "monster2 is 🤡",
@@ -179,14 +179,14 @@ class HighlighterTestLeveL2nl(HighlightTester):
 
 
     def test_16(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "monster1 is _",
             "TTTTTTTT KK  ",
             level="level2",lang='nl')
 
 
     def test_17(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print Op naar het volgende level!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
             level="level2",lang='nl')

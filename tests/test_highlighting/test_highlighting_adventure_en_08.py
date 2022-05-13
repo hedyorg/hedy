@@ -3,7 +3,7 @@ from tests.Highlighter import HighlightTester
 class HighlighterTestLeveL8(HighlightTester):
 
     def test_1(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "repeat 5 times",
             "KKKKKK N KKKKK",
             "print 'Hello folks'",
@@ -14,7 +14,7 @@ class HighlighterTestLeveL8(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "repeat 5 times",
             "KKKKKK N KKKKK",
             "print 'Hello everyone'",
@@ -25,7 +25,7 @@ class HighlighterTestLeveL8(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'OH NO! The T-rex is closing in!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "end = ask 'Do you want a happy or a sad ending?'",
@@ -52,14 +52,14 @@ class HighlighterTestLeveL8(HighlightTester):
 
 
     def test_4(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
             level="level8",lang='en')
 
 
     def test_5(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "verse = 99",
             "TTTTT K NN",
             "repeat 99 times",
@@ -78,7 +78,7 @@ class HighlighterTestLeveL8(HighlightTester):
 
 
     def test_6(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "angle = 90",
             "TTTTT K NN",
             "repeat 10 times",
@@ -91,7 +91,7 @@ class HighlighterTestLeveL8(HighlightTester):
 
 
     def test_7(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "angles = ask 'How many angles should I draw?'",
             "TTTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "angle = 360 / angles",
@@ -106,14 +106,14 @@ class HighlighterTestLeveL8(HighlightTester):
 
 
     def test_8(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "hoeken = ask 'How many angles should I draw?'",
             "TTTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level8",lang='en')
 
 
     def test_9(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Welcome to Hedys restaurant!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "people = ask 'How many people will be joining us today?'",
@@ -134,7 +134,7 @@ class HighlighterTestLeveL8(HighlightTester):
 
 
     def test_10(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'I am Hedy the fortune teller!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'You can ask me 3 questions.'",
@@ -155,7 +155,7 @@ class HighlighterTestLeveL8(HighlightTester):
 
 
     def test_11(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "answer = ask 'Would you like to go to the next level?'",
             "TTTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "if answer is yes",
@@ -176,7 +176,7 @@ class HighlighterTestLeveL8(HighlightTester):
 
 
     def test_12(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level8",lang='en')

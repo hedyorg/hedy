@@ -4,7 +4,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "dieren is hond, kat, kangoeroe",
             "TTTTTT KK TTTT  TTT  TTTTTTTTT",
             "print dieren op willekeurig",
@@ -13,7 +13,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "taarten is aardbei, chocolade",
             "TTTTTTT KK TTTTTTT  TTTTTTTTT",
             "voeg appel toe aan taarten",
@@ -26,21 +26,21 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_4(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print hallo wereld!",
             "KKKKK TTTTTTTTTTTTT",
             level="level3",lang='nl')
 
 
     def test_5(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print Hier komt straks jouw verhaal!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             level="level3",lang='nl')
 
 
     def test_6(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "dieren is 🦇, 🐿, 🦉, 🦔",
             "TTTTTT KK T  T  T  T",
             "print Hij hoort nu het geluid van een dieren op willekeurig",
@@ -49,7 +49,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_7(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Hij hoort een geluid...",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTT",
             "dieren is 🐿, 🦔, 🦇, 🦉",
@@ -64,7 +64,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_8(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Zijn rugzak is veel te zwaar...",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print In de rugzak zitten een fles water, een zaklamp en een baksteen.",
@@ -79,7 +79,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_9(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "woorden is lorre, Hedy",
             "TTTTTTT KK TTTTT  TTTT",
             "print Train je papegaai!",
@@ -96,14 +96,14 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_10(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "# Schrijf jouw code hier",
             "CCCCCCCCCCCCCCCCCCCCCCCC",
             level="level3",lang='nl')
 
 
     def test_11(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "hoeken is 10, 50, 90, 150, 250",
             "TTTTTT KK TT  TT  TT  TTT  TTT",
             "draai hoeken op willekeurig",
@@ -114,7 +114,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_12(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Schildpaddenrace!",
             "KKKKK TTTTTTTTTTTTTTTTT",
             "hoek is 90",
@@ -127,7 +127,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_13(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "mensen is mama, papa, Emma, Sophie",
             "TTTTTT KK TTTT  TTTT  TTTT  TTTTTT",
             "print mensen op willekeurig",
@@ -136,7 +136,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_14(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "mensen is mama, papa, Emma, Sophie",
             "TTTTTT KK TTTT  TTTT  TTTT  TTTTTT",
             "jouw_naam is vraag Wie ben jij?",
@@ -149,14 +149,14 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_15(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print Wie doet de afwas?",
             "KKKKK TTTTTTTTTTTTTTTTTT",
             level="level3",lang='nl')
 
 
     def test_16(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "keuzes is 1, 2, 3, 4, 5, regenworm",
             "TTTTTT KK T  T  T  T  T  TTTTTTTTT",
             "print keuzes op willekeurig",
@@ -165,14 +165,14 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_17(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print Wat zal de dobbelsteen deze keer aangeven?",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             level="level3",lang='nl')
 
 
     def test_18(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "keuzes is steen, papier, schaar",
             "TTTTTT KK TTTTT  TTTTTT  TTTTTT",
             "print keuzes op willekeurig",
@@ -181,14 +181,14 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_19(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print Welkom bij jouw eigen steen papier schaar!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             level="level3",lang='nl')
 
 
     def test_20(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Hoi Ik ben Hedy de Waarzegger",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "vraag is vraag Wat wil je weten?",
@@ -207,7 +207,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_21(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "gerechten is patat, pizza, spruitjes",
             "TTTTTTTTT KK TTTTT  TTTTT  TTTTTTTTT",
             "toetjes is een ijsje, appeltaart, franse stinkkaas",
@@ -232,7 +232,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_22(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Mysterie Milkshake",
             "KKKKK TTTTTTTTTTTTTTTTTT",
             "smaken is aardbei, banaan, chocolade",
@@ -247,7 +247,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_23(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print Ontsnap uit het spookhuis!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print Voor je staan drie deuren...",
@@ -268,14 +268,14 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_24(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print Ontsnap uit het spookhuis!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             level="level3",lang='nl')
 
 
     def test_25(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "naam is Sophie",
             "TTTT KK TTTTTT",
             "print Mijn naam is naam",
@@ -284,7 +284,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
 
 
     def test_26(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print Op naar het volgende level!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
             level="level3",lang='nl')

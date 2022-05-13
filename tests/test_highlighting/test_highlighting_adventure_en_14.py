@@ -4,7 +4,7 @@ class HighlighterTestLeveL14(HighlightTester):
 
 
     def test_1(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "age = ask 'How old are you?'",
             "TTT K KKK SSSSSSSSSSSSSSSSSS",
             "if age < 13",
@@ -19,7 +19,7 @@ class HighlighterTestLeveL14(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "age = ask 'How old are you?'",
             "TTT K KKK SSSSSSSSSSSSSSSSSS",
             "if age > 12",
@@ -30,7 +30,7 @@ class HighlighterTestLeveL14(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "name = ask 'What is your name?'",
             "TTTT K KKK SSSSSSSSSSSSSSSSSSSS",
             "if name == 'Hedy'",
@@ -41,7 +41,7 @@ class HighlighterTestLeveL14(HighlightTester):
 
 
     def test_4(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "name = ask 'What is your name?'",
             "TTTT K KKK SSSSSSSSSSSSSSSSSSSS",
             "if name != 'Hedy'",
@@ -52,7 +52,7 @@ class HighlighterTestLeveL14(HighlightTester):
 
 
     def test_5(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Guess which number'",
             "KKKKK SSSSSSSSSSSSSSSSSSSS",
             "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
@@ -85,14 +85,14 @@ class HighlighterTestLeveL14(HighlightTester):
 
 
     def test_6(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
             level="level14",lang='en')
 
 
     def test_7(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Escape from the haunted house'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "lives = 3",
@@ -137,7 +137,7 @@ class HighlighterTestLeveL14(HighlightTester):
 
 
     def test_8(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "money = ask 'How much money have you saved?'",
             "TTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "wish = ask 'How much money do you need?'",
@@ -164,7 +164,7 @@ class HighlighterTestLeveL14(HighlightTester):
 
 
     def test_9(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Make your own quiz'",
             "KKKKK SSSSSSSSSSSSSSSSSSSS",
             "points_a = 0",
@@ -203,7 +203,7 @@ class HighlighterTestLeveL14(HighlightTester):
 
 
     def test_10(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "game is 'on'",
             "TTTT KK SSSS",
             "for i in range 1 to 100",
@@ -224,7 +224,7 @@ class HighlighterTestLeveL14(HighlightTester):
 
 
     def test_11(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level14",lang='en')

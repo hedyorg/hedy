@@ -10,61 +10,61 @@ RULES = {
 
 class HighlighterTestLeveLSimulation(HighlightTester):
 
-    def assertHighlightedChr(self,code,expected,ruleName):
+    def assert_highlighted_chr(self,code,expected,rule_name):
 
-        rules = RULES[ruleName]
+        rules = RULES[rule_name]
         
-        result = self.applyRules(rules,code)
+        result = self.apply_rules(rules,code)
 
-        valid, indError = self.check(result,expected)
+        valid, ind_error = self.check(result,expected)
         if not valid:
-            print("ERROR with the set of rule : {}".format(ruleName))
+            print("ERROR with the set of rule : {}".format(rule_name))
             print("In this code :",code.replace("\n","\\n"))
             print("We want      :",expected.replace("\n","\\n"))
             print("We have      :",result.replace("\n","\\n"))
-            print("At           :"," " * indError + "^")
+            print("At           :"," " * ind_error + "^")
         self.assertTrue(valid)
 
 
 
     def test_1(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "qmczqdqaqmcqbadqcc",
             "CCTCCCCSIIKIIIIIKK",
-            ruleName="rules1")
+            rule_name="rules1")
 
     def test_2(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "qmczqdqbqmcqbadqcc",
             "CCTCCCCKNNTNNNNNTT",
-            ruleName="rules1")
+            rule_name="rules1")
 
 
 
 
     def test_3(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "qmaaqgbeveqmcbazqdqaqmcqbadqcc",
             "CCTTCCKNNNNNTNNNNNNNNNTNNNNNTT",
-            ruleName="rules2")
+            rule_name="rules2")
 
     def test_4(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "qmaaqgbaeveqmcbazqdqaqmcqbadqcc",
             "CC  CCKNNNNNN NNNNNNNNN NNNNN  ",
-            ruleName="rules2")
+            rule_name="rules2")
 
     def test_5(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "qmaaqgbeveqmcbazqdqaqmcqbadqcc",
             "CCTTCCKNNNNNTNNNNNNNNNTNNNNNTT",
-            ruleName="rules3")
+            rule_name="rules3")
 
     def test_6(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "qmaaqgbaeveqmcbazqdqaqmcqbadqcc",
             "CCTTCCSSIIIIIKIIIIIIIIIKIIIIIKK",
-            ruleName="rules3")
+            rule_name="rules3")
 
 
 
@@ -72,10 +72,10 @@ class HighlighterTestLeveLSimulation(HighlightTester):
 
 
     def test_7(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "qmczqdqaqmcqbadq\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\n\ngrbnorbTestananaeqwswsmsbzqdqaqmcqbadqcc\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\n\ngrbnorbTestananaeqwswsmsbzqdqaqmcqbadqcc",
             "CCKNNNNNNN NNNNN\nNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN NNNNN  \n       CCCC     NCCCCCCCKNNNNNNN NNNNN  \n\n       CCCC     NCCCCCCCSIIIIIIIKIIIIIKK\nIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIKIIIIIKK\n\n       CCCC     NCCCCCCCSIIIIIIIKIIIIIKK",
-            ruleName="rules4")
+            rule_name="rules4")
 
 
 

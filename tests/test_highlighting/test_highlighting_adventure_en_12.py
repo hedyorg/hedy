@@ -4,7 +4,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
     
     def test_1(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'decimal numbers now need to use a dot'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 2.5 + 2.5",
@@ -13,7 +13,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'Two and a half plus two and a half is...'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 2.5 + 2.5",
@@ -22,7 +22,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "name = 'Hedy the Robot'",
             "TTTT K SSSSSSSSSSSSSSSS",
             "print 'Hello ' name",
@@ -31,7 +31,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_4(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "superheroes = 'Spiderman', 'Batman', 'Iron Man'",
             "TTTTTTTTTTT K SSSSSSSSSSSK SSSSSSSSK SSSSSSSSSS",
             "print superheroes at random",
@@ -40,7 +40,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_5(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "name = ask 'What is your name?'",
             "TTTT K KKK SSSSSSSSSSSSSSSSSSSS",
             "if name = 'Hedy the Robot'",
@@ -51,7 +51,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_6(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "score = 25",
             "TTTTT K NN",
             "print 'You got ' score",
@@ -60,7 +60,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_7(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "a = 'Hello '",
             "T K SSSSSSSS",
             "b = 'world!'",
@@ -71,7 +71,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_8(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "name = 'The Queen of England'",
             "TTTT K SSSSSSSSSSSSSSSSSSSSSS",
             "print name ' was eating a piece of cake, when suddenly...'",
@@ -80,14 +80,14 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_9(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
             level="level12",lang='en')
 
 
     def test_10(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'",
             "TTTTTTT K SSSSSSSSSSSSSSSSSK SSSSSSSSSSSSSSSSSK SSSSSSSSSSSSSSS",
             "for action in actions",
@@ -108,7 +108,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_11(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "number1 = ask 'What is the first number?'",
             "TTTTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "number2 = ask 'What is the second number?'",
@@ -121,7 +121,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_12(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "price = 0",
             "TTTTT K N",
             "food = ask 'What would you like to order?'",
@@ -150,7 +150,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_13(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'",
             "TTTTTTTT K SSSSSSSSSSSSSSSSSSK SSSSSSSSSSSSSSSSSSSSSSSK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'I will take a look in my crystall ball for your future.'",
@@ -165,7 +165,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_14(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'The digital piggy bank'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSS",
             "wish = ask 'What would you like to buy?'",
@@ -186,7 +186,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_15(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "name is ask 'What is your name?'",
             "TTTT KK KKK SSSSSSSSSSSSSSSSSSSS",
             "if name is 'Agent007'",
@@ -213,14 +213,14 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_16(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "## place your code here",
             "CCCCCCCCCCCCCCCCCCCCCCC",
             level="level12",lang='en')
 
 
     def test_17(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "username is ask 'What is your username?'",
             "TTTTTTTT KK KKK SSSSSSSSSSSSSSSSSSSSSSSS",
             "password is ask 'What is your password?'",
@@ -243,7 +243,7 @@ class HighlighterTestLeveL12(HighlightTester):
 
 
     def test_18(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level12",lang='en')

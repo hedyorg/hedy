@@ -4,7 +4,7 @@ class HighlighterTestLeveL16(HighlightTester):
 
 
     def test_1(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "fruit = ['apple', 'banana', 'cherry']",
             "TTTTT K KSSSSSSSK SSSSSSSSK SSSSSSSSK",
             "print fruit",
@@ -13,7 +13,7 @@ class HighlighterTestLeveL16(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "friends = ['Ahmed', 'Ben', 'Cayden']",
             "TTTTTTT K KSSSSSSSK SSSSSK SSSSSSSSK",
             "lucky_numbers = [15, 18, 6]",
@@ -28,7 +28,7 @@ class HighlighterTestLeveL16(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "animals = ['pig', 'dog', 'cow']",
             "TTTTTTT K KSSSSSK SSSSSK SSSSSK",
             "sounds = ['oink', 'woof', 'moo']",
@@ -77,14 +77,14 @@ class HighlighterTestLeveL16(HighlightTester):
 
 
     def test_4(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
             level="level16",lang='en')
 
 
     def test_5(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "numbers = [1, 2, 3]",
             "TTTTTTT K KNK NK NK",
             "i = numbers[random]",
@@ -137,7 +137,7 @@ class HighlighterTestLeveL16(HighlightTester):
 
 
     def test_6(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "french_words = ['bonjour', 'ordinateur', 'pomme de terre']",
             "TTTTTTTTTTTT K KSSSSSSSSSK SSSSSSSSSSSSK SSSSSSSSSSSSSSSSK",
             "translation = ['hello', 'computer', 'potato']",
@@ -166,7 +166,7 @@ class HighlighterTestLeveL16(HighlightTester):
 
 
     def test_7(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "print 'What is for dinner tonight?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "options = ['pizza', 'broccoli', 'green beans']",
@@ -185,7 +185,7 @@ class HighlighterTestLeveL16(HighlightTester):
 
 
     def test_8(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level16",lang='en')

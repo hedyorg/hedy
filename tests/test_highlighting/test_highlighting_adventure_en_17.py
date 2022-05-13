@@ -3,7 +3,7 @@ from tests.Highlighter import HighlightTester
 class HighlighterTestLeveL17(HighlightTester):
 
     def test_1(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "for i in range 1 to 10:",
             "KKK T KK KKKKK N KK NNK",
             "print i",
@@ -14,7 +14,7 @@ class HighlighterTestLeveL17(HighlightTester):
 
 
     def test_2(self):
-        self.assertHighlightedChrMultiLine(
+        self.assert_highlighted_chr_multi_line(
             "prices = ['1 million dollars', 'an apple pie', 'nothing']",
             "TTTTTT K KSSSSSSSSSSSSSSSSSSSK SSSSSSSSSSSSSSK SSSSSSSSSK",
             "your_price = prices[random]",
@@ -37,7 +37,7 @@ class HighlighterTestLeveL17(HighlightTester):
 
 
     def test_3(self):
-        self.assertHighlightedChr(
+        self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level17",lang='en')
