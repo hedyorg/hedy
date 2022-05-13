@@ -598,10 +598,13 @@ class TestsLevel6(HedyTester):
             print "nummers" ٥*٥""")
 
         expected = textwrap.dedent("""\
-            print(f'nummers{int("٥") * int("٥")}')""")
+            print(f'nummers{int(5) * int(5)}')""")
 
-        # todo: make multilevel up to 11
-        self.single_level_tester(code=code, expected=expected, translate=False)
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            translate=False)
 
     @parameterized.expand(HedyTester.arithmetic_operations)
     def test_calc_with_text_var_gives_type_error(self, operation):
