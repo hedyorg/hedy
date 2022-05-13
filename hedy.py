@@ -1506,7 +1506,10 @@ class ConvertToPython_6(ConvertToPython_5):
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
             return f'{str(argument.children[0])}'
-        return f"int({argument})"
+        if argument.isnumeric():
+            latin_numeral = int(argument)
+            return f'int({latin_numeral})'
+        return f'int({argument})'
 
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
@@ -1559,11 +1562,15 @@ class ConvertToPython_8_9(ConvertToPython_7):
         return "".join(args)
 
     def repeat(self, args):
+        # todo fh, may 2022, could be merged with 7 if we make
+        # indent a boolean parameter?
+
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        times = self.process_variable(args[0])
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
-        return "for i in range(int(" + str(args[0]) + ")):\n" + body
+        return "for i in range(int(" + str(times) + ")):\n" + body
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -1590,12 +1597,13 @@ class ConvertToPython_8_9(ConvertToPython_7):
 class ConvertToPython_10(ConvertToPython_8_9):
     def for_list(self, args):
       args = [a for a in args if a != ""]  # filter out in|dedent tokens
+      times = self.process_variable(args[0])
 
       body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
       body = sleep_after(body, True)
 
-      return f"for {args[0]} in {args[1]}:\n{body}"
+      return f"for {times} in {args[1]}:\n{body}"
 
 @hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_10):
@@ -1605,8 +1613,10 @@ class ConvertToPython_11(ConvertToPython_10):
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
-        return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
-for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
+        begin = self.process_token_or_tree(args[1])
+        end = self.process_token_or_tree(args[2])
+        return f"""{stepvar_name} = 1 if {begin} < {end} else -1
+for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 {body}"""
 
 
