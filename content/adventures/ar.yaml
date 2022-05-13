@@ -186,7 +186,9 @@ adventures:
                 start_code: |
                     {for} دورة {in} {range} ١ {to} ٥
                         {print} دورة
-                example_code: "## مثال توضيحي\n```\n{for} دورة {in} {range} ١ {to} ٥\n\t{print} دورة\n```\n"
+                example_code: |
+                    {for} دورة {in} {range} ١ {to} ٥
+                        {print} دورة
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "## Decimal numbers\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n## All texts need to be in quotation marks\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n\n```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n## All items in lists need quotation marks too\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n\n```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n## All text after `{if}` comparisons need quotation marks too\n```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n## Numbers don't need quotation marks\n{for} numbers, you do not use quotation marks in the `=`:\n```\nscore = 25\n{print} 'You got ' score\n```\n"

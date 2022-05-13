@@ -1504,16 +1504,11 @@ class ConvertToPython_6(ConvertToPython_5):
                 return parameter + " = '" + value + "'"
     
     def process_token_or_tree(self, argument):
-        all_numerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯', '०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯', '੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯', '০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯', '೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯', '୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯', '൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯', '௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯', '౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯', '၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉', '༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩', '᠐', '᠑', '᠒', '᠓', '᠔', '᠕', '᠖', '᠗', '᠘', '᠙', '០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩', '๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙', '໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙', '꧐', '꧑', '꧒', '꧓', '꧔', '꧕', '꧖', '꧗', '꧘', '꧙', '٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩', '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
         if type(argument) is Tree:
             return f'{str(argument.children[0])}'
         if argument.isnumeric():
             latin_numeral = int(argument)
             return f'int({latin_numeral})'
-        # if argument in all_numerals:
-        #     # todo: needs to be generalized for numbers with multiple numerals
-        #     latin_numeral = int(argument)
-        #     return f'int({latin_numeral})'
         return f'int({argument})'
 
     def process_calculation(self, args, operator):
@@ -1602,12 +1597,13 @@ class ConvertToPython_8_9(ConvertToPython_7):
 class ConvertToPython_10(ConvertToPython_8_9):
     def for_list(self, args):
       args = [a for a in args if a != ""]  # filter out in|dedent tokens
+      times = self.process_variable(args[0])
 
       body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
       body = sleep_after(body, True)
 
-      return f"for {args[0]} in {args[1]}:\n{body}"
+      return f"for {times} in {args[1]}:\n{body}"
 
 @hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_10):
@@ -1617,8 +1613,10 @@ class ConvertToPython_11(ConvertToPython_10):
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
-        return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
-for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
+        begin = self.process_token_or_tree(args[1])
+        end = self.process_token_or_tree(args[2])
+        return f"""{stepvar_name} = 1 if {begin} < {end} else -1
+for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 {body}"""
 
 

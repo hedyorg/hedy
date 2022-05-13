@@ -118,8 +118,8 @@ class TestsLevel17(HedyTester):
     expected = textwrap.dedent("""\
     a = 2
     b = 3
-    step = 1 if int(2) < int(4) else -1
-    for a in range(int(2), int(4) + step, step):
+    step = 1 if 2 < 4 else -1
+    for a in range(2, 4 + step, step):
       a = a + 2
       b = b + 2
       time.sleep(0.1)""")
@@ -149,8 +149,8 @@ class TestsLevel17(HedyTester):
         print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
-    step = 1 if int(1) < int(10) else -1
-    for i in range(int(1), int(10) + step, step):
+    step = 1 if 1 < 10 else -1
+    for i in range(1, 10 + step, step):
       print(f'''{i}''')
       time.sleep(0.1)
     print(f'''wie niet weg is is gezien''')""")
@@ -226,8 +226,8 @@ class TestsLevel17(HedyTester):
             i is 10""")
 
     expected = textwrap.dedent("""\
-    step = 1 if int(0) < int(10) else -1
-    for i in range(int(0), int(10) + step, step):
+    step = 1 if 0 < 10 else -1
+    for i in range(0, 10 + step, step):
       antwoord = input(f'''Wat is 5*5''')
       try:
         antwoord = int(antwoord)
