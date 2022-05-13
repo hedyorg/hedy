@@ -431,6 +431,18 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
+  def test_float_addition_arabic(self):
+    code = textwrap.dedent("""\
+            print ١.٥ + ١.٥""")
+    expected = textwrap.dedent("""\
+            print(f'''{1.5 + 1.5}''')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=17,
+      expected=expected
+    )
+
   def test_float_addition_directly(self):
     code = textwrap.dedent("""\
             print 2.5 + 2.5""")
