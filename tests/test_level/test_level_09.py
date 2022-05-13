@@ -26,7 +26,7 @@ class TestsLevel9(HedyTester):
 
 
     expected = textwrap.dedent("""\
-    for i in range(int(5)):
+    for i in range(int('5')):
       print(f'koekoek')
       time.sleep(0.1)""")
 
