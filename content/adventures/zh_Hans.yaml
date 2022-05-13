@@ -423,7 +423,7 @@ adventures:
                 example_code: "## Example Hedy code\n\n\n```\n{print} what do you choose?\n{ask} choose {from} rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
                 start_code: '{print} Welcome to your own rock scissors paper!'
             9:
-                example_code: "## 海迪代码范例\n\n```\n选择 {is} 剪刀、石头、布\n你的_选择 {is} {ask} '你选择了什么？'\n{print} '你选择了' 你的_选择\n电脑_选择 {is} 选择 {at} {random}\n{print} '电脑选择了 ' 电脑_选择\n{if} 电脑_选择 {is} 你的_选择\n    {print} '平手'\n{if} 电脑_选择 {is} 石头\n    {if} 你的_选择 {is}布\n        {print} '你赢了！'\n   {if} 你的_选择 {is} 剪刀\n        {print} '你输了！'\n# 完成了这段代码\n```\n"
+                example_code: "## 海迪代码范例\n\n```\n选择 {is} 剪刀、石头、布\n你的_选择 {is} {ask} '你选择了什么？'\n{print} '你选择了' 你的_选择\n计算机_选择 {is} 选择 {at} {random}\n{print} '计算机选择了 ' 计算机_选择\n{if} 计算机_选择 {is} 你的_选择\n    {print} '平手'\n{if} 计算机_选择 {is} 石头\n    {if} 你的_选择 {is}布\n        {print} '你赢了！'\n   {if} 你的_选择 {is} 剪刀\n        {print} '你输了！'\n# 完成了这段代码\n```\n"
                 story_text: "## Rock, paper, scissors\nIn this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?\n"
                 start_code: '# place your code here'
             10:
@@ -440,7 +440,7 @@ adventures:
                 start_code: '# place your code here'
             15:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
-                example_code: "## Example Hedy code\n\n```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n"
+                example_code: "## 海迪代码范例\n\n```\n赢 = '否'\n选项 = '石头', '剪刀', '布'\n{while} 赢 == '否'\n    你的_选择 = {ask} 'What do you choose?你选择了什么？'\n    计算机_选择 = 选项 {at} {random}\n    {print} '你选择了 ' 你的_选择\n    {print} '计算机选择了' 计算机_选择\n    {if} 计算机_选择 == 你的_选择\n        {print} '平手！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '剪刀'\n        {print} '你输了！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '布'\n        {print} '你赢了！'\n        赢 = '是'\n"
                 start_code: '# place your code here'
             13:
                 story_text: "## Rock, paper, scissors\nWith the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.\n"
@@ -458,7 +458,7 @@ adventures:
                 start_code: '# place your code here'
             12:
                 story_text: "## Calculator\nNow you can make a calculator that works for decimal numbers.\n"
-                example_code: "## Example Hedy code\n\n```\nnumber1 = {ask} 'What is the first number?'\nnumber2 = {ask} 'What is the second number?'\nanswer = number1 + number2\n{print} number1 ' plus ' number2 ' is ' answer\n"
+                example_code: "## 海迪代码范例\n\n```\n数字1 = {ask} '第一个数字是几？'\n数字2 = {ask} '第二个数字是几？'\n答案 = 数字1 + 数字2\n{print} 数字1 ' 加 ' 数字2 '等于 ' 答案\n```\n"
                 start_code: '# place your code here'
             10:
                 story_text: "## Calculator\nThis calculator game helps you practise your tables of multiplication!\nIf you add more numbers to the list, you can practise all the multiplications.\n"
