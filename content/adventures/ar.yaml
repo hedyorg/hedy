@@ -135,25 +135,60 @@ adventures:
                 story_text: "## المستوى السابع! المستوى السابع!\nفي المستوى السابع أضفنا الأمر `{repeat}`. باستخدام الأمر `{repeat}` يمكننا أن نكرر تنفيذ سطر واحد من الكود عدة مرات.\n"
                 example_code: "## مثال توضيحي\n```\n{repeat} ٣ {times} {print} \"هيدي ممتعة!\"\n```\n"
             8:
-                start_code: "{repeat} ٥ {times}\n\t{print} \"مرحباً يا أصدقاء!\"\n\t{print} \"سيتم طباعتها ٥ مرات\""
+                start_code: |
+                    {repeat} ٥ {times}
+                        {print} "مرحباً يا أصدقاء!"
+                        {print} "سيتم تكرار كل هذا ٥ مرات"
                 story_text: "## الإزاحة\n`{ask}` و `{print}` لا يزالان يعملان بنفس الطريقة التي تعرفونها. لكنهناك تغيير على الأوامر `{if}` و `{repeat}`.\nيمكننا الان عند استخدام هذه الأوامر تنفيذ مجموعة من الأسطر البرمجية مع بعضهم (وليس سطر واحد فقط)، ولكن علينا *إزاحة* الكود. \nهذا يعني وضع اربع فراغات (باستخدام مفتاح المسافة على لوحة المفاتيح اربع مرات). يجب علينا أن نقوم بالإزاحة حتى لو كان الكود يتكون من سطر واحد فقط.\n"
-                example_code: "## مثال توضيحي\n```\n{repeat} ٥ {times}\n\t{print} \"مرحباً يا أصدقاء!\"\n\t{print} \"سيتم تكرار كل هذا ٥ مرات\"\n```\n"
+                example_code: |
+                    ```
+                    {repeat} ٥ {times}
+                        {print} "مرحباً يا أصدقاء!"
+                        {print} "سيتم تكرار كل هذا ٥ مرات"
+                    ```
             9:
-                start_code: "{repeat} ٣ {times}\n\tالطعام = {ask} \"ماذا تريد أن تأكل؟\"\n\t{if} الطعام {is} بيتزا\n\t\t{print} \"لذيذ!\"\n\t{else} {print} \"البيتزا أفضل\""
+                start_code: |
+                    {repeat} ٣ {times}
+                        الطعام = {ask} "ماذا تريد أن تأكل؟"
+                        {if} الطعام {is} بيتزا
+                            {print} "لذيذ!"
+                        {else}
+                            {print} "البيتزا أفضل"
                 story_text: "## كلّهم مع بعضهم البعض الان!\nفي هذا المستوى ليس بامكاننا فقط أن نستخدم أكثر من سطر كودي واحد مع `{if}`و `{repeat}`، ولكن أيضاً يمكننا أن نستخدمهم مع بعضهم البعض!\nفي المثال التوضيحي يمكننا أن نرى الأمر `{if}` موجود داخل/ضمن الأمر `{repeat}`. من المسموح أيضاً أن نجمعهم مع بعضهم بطريقة عكسية، كذلك  يمكننا استخدام الأمر `{if}` داخل أمر `{if}`، و الأمر `{repeat}` داخل أمر `{repeat}` اخر.\nفلنجربها!\n"
-                example_code: "## مثال توضيحي\n\n```\n{repeat} ٣ {times}\n\tالطعام = {ask} \"ماذا تريد أن تأكل؟\"\n\t{if} الطعام {is} بيتزا\n\t\t{print} \"لذيذ!\"\n\t{else} {print} \"البيتزا أفضل\"\n```\n"
+                example_code: |
+                    ```
+                    {repeat} ٣ {times}
+                        الطعام = {ask} "ماذا تريد أن تأكل؟"
+                        {if} الطعام {is} بيتزا
+                            {print} "لذيذ!"
+                        {else}
+                            {print} "البيتزا أفضل"
+                    ```
             10:
+                start_code: |
+                    حيواناتي_المفضلة {is} الكلب، الزرافة، السلحفاة
+                    {for} حيوان {in} حيواناتي_المفضلة
+                        {print} "أنا أحب " حيوان
                 story_text: "## لكل عنصر في قائمتك...\nفي هذا المستوى نتعلم أمراً جديداً وهو الأمر `{for}`. باستخدام الأمر`{for}`يمكننا المرور على كل العناصر الموجودة في قائمة. `{for}` تقوم بخلق مجموعة من الأوامر تختها كما في الأوامر `{repeat}`و`{if}` لذلك يجب علينا ان نستخدم الإزاحة (نضع الفراغات) للسطور البرمجية التي نريد كتابتها مع الأمر `{for}`."
-                start_code: "حيواناتي_المفضلة {is} الكلب، الزرافة، السلحفاة\n{for} حيوان {in} حيواناتي_المفضلة\n\t{print} \"أنا أحب \" حيوان"
-                example_code: "## مثال توضيحي\n```\nحيواناتي_المفضلة {is} الكلب، الزرافة، السلحفاة\n{for} حيوان {in} حيواناتي_المفضلة\n\t{print} \"أنا أحب \" حيوان\n```\n"
+                example_code: |
+                    ```
+                    حيواناتي_المفضلة {is} الكلب، الزرافة، السلحفاة
+                    {for} حيوان {in} حيواناتي_المفضلة
+                      {print} "أنا أحب " حيوان
+                    ```
             11:
-                story_text: '## دورات التكرار!
+                story_text: |
+                    '## دورات التكرار!
 
                     `{print}` لا زال يعمل بالطريقة نفسها، ولكن أضفنا شكلاً جديداً من الأمر `{for}`. بامكاننا الان أن نكتب `{for} دورة {in} {range} ١ {to} ٥` وأن نستخدم بعدها المتغير `دورة` في البرنامج.
 
                     فلنجرب الان ونرى ما سيحدث! تذكر أن تضع الإزاحة بعد استخدام الأوامر `{for}` و `{if}`(هذا يعني وضع اربع فراغات قبل بداية السطر الذي يكون ضمن هذه الأوامر)'
-                start_code: "{for} دورة {in} {range} ١ {to} ٥\n\t{print} دورة"
-                example_code: "## مثال توضيحي\n```\n{for} دورة {in} {range} ١ {to} ٥\n\t{print} دورة\n```\n"
+                start_code: |
+                    {for} دورة {in} {range} ١ {to} ٥
+                        {print} دورة
+                example_code: |
+                    {for} دورة {in} {range} ١ {to} ٥
+                        {print} دورة
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "## Decimal numbers\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n## All texts need to be in quotation marks\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n\n```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n## All items in lists need quotation marks too\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n\n```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n## All text after `{if}` comparisons need quotation marks too\n```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n## Numbers don't need quotation marks\n{for} numbers, you do not use quotation marks in the `=`:\n```\nscore = 25\n{print} 'You got ' score\n```\n"
