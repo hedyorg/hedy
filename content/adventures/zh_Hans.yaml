@@ -347,7 +347,7 @@ adventures:
                 example_code: "## 海迪代码范例\n\n```\n{turn} {right}\n{forward} 50\n{turn}{left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             3:
-                story_text: "## Searching turtle\nIn this level you can use use `{random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.\nUse `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.\n"
+                story_text: "## 寻找海龟\n在这个级别中，您可以将 `{at} {random}` 与海龟绘图一起使用。使用随机选择使乌龟每次走不同的路径。\n使用 `{at} {random}` 从列表中选择一个值。您可以复制并粘贴第 2 行和第 3 行以创建更长的随机路径。\n"
                 example_code: "## Example Hedy code\n\n\n```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
                 start_code: "angles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n"
             4:
@@ -401,7 +401,7 @@ adventures:
                 start_code: "{print} 'Who does the dishes?'"
             3:
                 story_text: "## Dishwashing\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
-                example_code: "## Example Hedy code\n\n```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\n## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n\n```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
+                example_code: "## 海迪代码范例\n\n```\n人 {is} 妈妈， 爸爸， 艾玛， 苏菲\n{print} 人 {at} {random}\n```\n"
                 start_code: '{print} Who does the dishes?'
                 story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
                 example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
@@ -423,7 +423,7 @@ adventures:
                 example_code: "## Example Hedy code\n\n\n```\n{print} what do you choose?\n{ask} choose {from} rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
                 start_code: '{print} Welcome to your own rock scissors paper!'
             9:
-                example_code: "## Example Hedy code\n\n```\nchoices {is} rock, paper, scisscors\nyour_choice {is} {ask} 'What do you choose?'\n{print} 'You choose ' your_choice\ncomputer_choice {is} choices {at} {random}\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock'\n    {if} your_choice {is} 'paper'\n        {print} 'You win!'\n    {if} your_choice {is} 'scissors'\n        {print} 'You lose!'\n```\n"
+                example_code: "## 海迪代码范例\n\n```\n选择 {is} 剪刀、石头、布\n你的_选择 {is} {ask} '你选择了什么？'\n{print} '你选择了' 你的_选择\n电脑_选择 {is} 选择 {at} {random}\n{print} '电脑选择了 ' 电脑_选择\n{if} 电脑_选择 {is} 你的_选择\n    {print} '平手'\n{if} 电脑_选择 {is} 石头\n    {if} 你的_选择 {is}布\n        {print} '你赢了！'\n   {if} 你的_选择 {is} 剪刀\n        {print} '你输了！'\n# 完成了这段代码\n```\n"
                 story_text: "## Rock, paper, scissors\nIn this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?\n"
                 start_code: '# place your code here'
             10:
