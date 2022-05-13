@@ -7,6 +7,91 @@ from tests.Tester import HedyTester
 class TestsLevel12(HedyTester):
   level = 12
 
+  #
+  # sleep tests
+  #
+  def test_sleep_with_number_variable(self):
+    code = textwrap.dedent("""\
+      n is 2
+      sleep n""")
+    expected = HedyTester.dedent(
+      "n = 2",
+      HedyTester.sleep_command_transpiled("n"))
+
+    self.multi_level_tester(code=code, expected=expected)
+
+  def test_sleep_with_string_variable_gives_error(self):
+    code = textwrap.dedent("""\
+      n is "test"
+      sleep n""")
+
+    self.multi_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+
+  def test_sleep_with_list_access(self):
+    code = textwrap.dedent("""\
+      n is 1, 2, 3
+      sleep n at 1""")
+    expected = HedyTester.dedent(
+      "n = [1, 2, 3]",
+      HedyTester.sleep_command_transpiled("n[1-1]"))
+
+    self.multi_level_tester(max_level=15, code=code, expected=expected)
+
+  def test_sleep_with_list_random(self):
+    code = textwrap.dedent("""\
+      n is 1, 2, 3
+      sleep n at random""")
+    expected = HedyTester.dedent(
+      "n = [1, 2, 3]",
+      HedyTester.sleep_command_transpiled("random.choice(n)"))
+
+    self.multi_level_tester(max_level=15, code=code, expected=expected)
+
+  def test_sleep_with_list_gives_error(self):
+    code = textwrap.dedent("""\
+      n is 1, 2, 3
+      sleep n""")
+
+    self.multi_level_tester(max_level=15, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+
+  def test_sleep_with_input_variable(self):
+    code = textwrap.dedent("""\
+      n is ask "how long"
+      sleep n""")
+    expected = HedyTester.dedent("""\
+      n = input(f'''how long''')
+      try:
+        n = int(n)
+      except ValueError:
+        try:
+          n = float(n)
+        except ValueError:
+          pass""",
+      HedyTester.sleep_command_transpiled("n"))
+
+    self.multi_level_tester(max_level=17, code=code, expected=expected)
+
+  def test_sleep_with_calc(self):
+    code = textwrap.dedent("""\
+      n is 1 * 2 + 3
+      sleep n""")
+    expected = HedyTester.dedent(
+      "n = 1 * 2 + 3",
+      HedyTester.sleep_command_transpiled("n"))
+
+    self.multi_level_tester(code=code, expected=expected)
+
+  def test_sleep_with_float_gives_error(self):
+    code = textwrap.dedent("""\
+      n is 1.5
+      sleep n""")
+
+    self.multi_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+
+
+  #
+  # if tests
+  #
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
     naam = 'Hedy'
@@ -269,14 +354,12 @@ class TestsLevel12(HedyTester):
     voorspellingen = 'je wordt rijk' , 'je wordt verliefd' , 'je glijdt uit over een bananenschil'
     print 'Ik pak mijn glazen bol erbij...'
     print 'Ik zie... Ik zie...'
-    sleep 2
     print voorspellingen at random""")
 
     expected = textwrap.dedent("""\
     voorspellingen = ['je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil']
     print(f'''Ik pak mijn glazen bol erbij...''')
     print(f'''Ik zie... Ik zie...''')
-    time.sleep(2)
     print(f'''{random.choice(voorspellingen)}''')""")
 
     list = ['je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil']

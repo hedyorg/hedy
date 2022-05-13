@@ -178,7 +178,7 @@ adventures:
                         {print} '你比我年纪小!'
                     else
                         {print} '你比我年纪大!'
-                story_text: "## 大，比较大，最大！\n我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`。\n小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 `age < 12`判断是否`age`{is}小于12。\n如果你想判断第一个数字是否小于或等于第二个数字，你可以使用`<=`，比如`age <= 11`。\n大于号`>` 用来判断第一个数字是否大于第二个数字, 比如 `points > 10`判断是否`points`大于10。\n你可以在一个`{if}`条件语句中使用这些比较运算符号，如下所示：\n"
+                story_text: "## 大，比较大，最大！\n我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`。\n小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 `age < 12`判断是否`age`{is}小于12。\n如果你想判断第一个数字是否小于或等于第二个数字，你可以使用`<=`，例如`age <= 11`。\n大于号`>` 用来判断第一个数字是否大于第二个数字, 比如 `points > 10`判断是否`points`大于10。\n如果你想判断第一个数字是否大于或等于第二个数字，你可以使用 `>=`, 例如 `points >= 11`.\n你可以在一个`{if}`条件语句中使用这些比较运算符号，如下所示：\n"
                 example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
                 story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
@@ -218,7 +218,7 @@ adventures:
             2:
                 start_code: '{print} Your story'
                 story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
-                example_code: "## Hedy代码范例\n\n\n```\n名字 {is} {ask} 主角的名字是什么？\n{print} 名字现在要去森林里散步了\n{print} 名字有点害怕\n{print} 突然，他听到到处都有疯狂的声音...\n{sleep}\n{print} 名字害怕这个森林里面闹鬼\n```"
+                example_code: "## Hedy代码范例\n\n```\n名字 {is} {ask} 主角的名字是什么？\n{print} 名字现在要去森林里散步了\n{print} 名字有点害怕\n{print} 突然，他听到到处都有疯狂的声音...\n{sleep}\n{print} 名字害怕这个森林里面闹鬼\n```"
             7:
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
                 story_text: "## Story\nIn a story, someone says words several times. For example, when someone calls for help or sings a song.\nYou can put such repetitions in your story, in this level with `{repeat}`.\n"
@@ -328,7 +328,7 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
                 start_code: "{print} 'Baby Shark'"
             16:
-                story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                story_text: "##唱一首歌!\n在这一级中，你可以更快速地编排一首像《老麦当劳》这样的歌曲。你可以把正确的动物和正确的声音联系起来，只要把它们放在列表的同一位置。\n《醉酒的水手》在这一级别也能很快制作完成。你只需要8行就可以完成整首歌，看看吧!\n"
                 start_code: '# place your code here'
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
         name: Sing a song!
@@ -337,13 +337,13 @@ adventures:
     turtle:
         levels:
             2:
-                story_text: "In level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
+                story_text: "##海龟\n在第1级中，海龟只能向左或向右转。这就有点无聊了!\n在第2级中，它可以把鼻子指向任何方向。\n\n用90来旋转四分之一圈。我们称其为度。旋转一圈是360度。\n你能用这个代码画一个图形吗？也许是一个三角形或一个圆？\n"
                 start_code: "{print} Turtle race!\nhoek {is} 90\n{turn} hoek\n{forward} 25\n"
                 example_code: "## Example Hedy code\n\n\n```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
             1:
-                story_text: "## Let's draw\nIn level 1 you can also use Hedy to draw. By combining turns and lines, you can make a square or a stair!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} right` turns a quarter turn in clockwise direction, `{turn} left` turns counter clockwise.\n\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
-                example_code: "## Example Hedy code\n\n```\n{turn} right\n{forward} 50\n{turn} left\n{forward} 50\n```\n"
-                start_code: "{forward} 50\n{turn} left"
+                story_text: "## ＃＃＃让我们画画\n你也可以用海迪来画画。通过结合旋转和画线，你可以画出一个正方形或楼梯!\n\n使用`{forward}`你可以向前画一条线。它后面的数字决定了海龟会走多远。`{turn} {right}`是顺时针转四分之一圈，`{turn} {left}`是逆时针转。\n\n让我们开始画一个小楼梯。你能使它有5个台阶吗？\n"
+                example_code: "## 海迪代码范例\n\n```\n{turn} {right}\n{forward} 50\n{turn}{left}\n{forward} 50\n```\n"
+                start_code: "{forward} 50\n{turn} {left}"
             3:
                 story_text: "## Searching turtle\nIn this level you can use use `{random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.\nUse `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.\n"
                 example_code: "## Example Hedy code\n\n\n```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
