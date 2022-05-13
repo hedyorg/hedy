@@ -585,12 +585,10 @@ class TestsLevel6(HedyTester):
         code = textwrap.dedent(f"""\
             قول "٥ ضرب ٥ يساوي " ٥*٥""")
 
-        expected = textwrap.dedent(f"""\
-            nummer = '٨'
-            nummertwee = '٢'
-            print(f'{{int(nummer) int(nummertwee)}}')""")
+        expected = textwrap.dedent("""\
+            print(f'٥ ضرب ٥ يساوي {int(5) * int(5)}')""")
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, lang='ar')
 
     def test_print_calc_arabic_directly_in_en(self):
         # TODO: can also be generalized for other ops

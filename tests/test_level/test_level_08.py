@@ -153,6 +153,40 @@ class TestsLevel8(HedyTester):
       time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
+
+  def test_repeat_arabic(self):
+    code = textwrap.dedent("""\
+    repeat ٥ times
+        print 'koekoek'""")
+
+    expected = textwrap.dedent("""\
+    for i in range(int('٥')):
+      print(f'koekoek')
+      time.sleep(0.1)""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_repeat_with_arabic_variable_print(self):
+    code = textwrap.dedent("""\
+    n is ٥
+    repeat ٥ times
+        print 'me wants a cookie!'""")
+
+    expected = textwrap.dedent("""\
+    n = '٥'
+    for i in range(int('٥')):
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
+
+    output = textwrap.dedent("""\
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!""")
+
+    self.single_level_tester(code=code, expected=expected, output=output)
+
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
     n is 5
