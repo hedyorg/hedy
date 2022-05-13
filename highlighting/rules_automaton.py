@@ -4,7 +4,7 @@ from definition import *
 # so we have to color them with respect to what is around,
 # so we use particular functions
 
-def rule_level1():
+def rule_level1_old():
     return {"start" : [{
         'regex': START_LINE + K("ask") + "(.*)$",
         'token': ['text','keyword','text'],
@@ -54,6 +54,42 @@ def rule_level1():
         'token': ['text','invalid'],
         'next': 'start',
     } ]}
+
+def rule_level1():
+    return {"start" : [{
+        'regex': " ",
+        'token': 'text',
+        'next': 'start',
+    },{
+        'regex': "#.*$",
+        'token': "comment",
+        'next': 'start',
+    },{
+        'regex': K("print"),
+        'token': 'keyword',
+        'next': 'string',
+    },{
+        'regex': K("ask"),
+        'token': 'keyword',
+        'next': 'string',
+    },{
+        'regex': K("echo"),
+        'token': 'keyword',
+        'next': 'string',
+    }],"string" : [{
+        'regex': "$",
+        'token': ["text"],
+        'next': 'start',
+    },{
+        'regex': ".",
+        'token': ["text"],
+        'next': 'start',
+    },{
+        'regex': "#.*$",
+        'token': "comment",
+        'next': 'start',
+    }]}
+
 
 def rule_level2() :
     return {"start" : [{
