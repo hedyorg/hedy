@@ -1791,7 +1791,7 @@ class ConvertToPython_18(ConvertToPython_17):
 def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
-    # rule that are new in the second file are added (remaining_rules_grammar_2)
+    # rules that are new in the second file are added (remaining_rules_grammar_2)
 
     merged_grammar = []
 
@@ -1816,9 +1816,9 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
                     warn_message = f"The rule {name_1} is duplicated on level {level}. Please check!"
                     warnings.warn(warn_message)
                 # Check if the rule is adding or substracting new rules                
-                has_add_op  = definition_2.startswith('+=') 
-                has_sub_op = has_add_op and '-='  in definition_2
-                has_last_op = has_add_op and '>'  in definition_2
+                has_add_op = definition_2.startswith('+=')
+                has_sub_op = has_add_op and '-=' in definition_2
+                has_last_op = has_add_op and '>' in definition_2
                 if has_sub_op:
                     # Get the rules we need to substract
                     part_list = definition_2.split('-=')
@@ -1870,11 +1870,13 @@ def get_remaining_rules(orig_def, sub_def):
     result_cmd_list   = ' | '.join(result_cmd_list) # turn the result list into a string
     return result_cmd_list
 
+
 def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
-    keys = get_keywords_for_language(lang)
-    result = merge_grammars(result, keys, 1)
+    keywords = get_keywords_for_language(lang)
+
+    result = merge_grammars(result, keywords, 1)
     # then keep merging new grammars in
     for i in range(2, level+1):
         grammar_text_i = get_additional_rules_for_level(i)
@@ -1912,6 +1914,8 @@ def get_full_grammar_for_level(level):
         grammar_text = file.read()
     return grammar_text
 
+# TODO FH, May 2022. I feel there are other places in the code where we also do this
+# opportunity to combine?
 def get_keywords_for_language(language):
     script_dir = path.abspath(path.dirname(__file__))
     try:
@@ -1919,12 +1923,12 @@ def get_keywords_for_language(language):
             raise FileNotFoundError("Local keywords are not enabled")
         filename = "keywords-" + str(language) + ".lark"
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-            grammar_text = file.read()
+            keywords = file.read()
     except FileNotFoundError:
         filename = "keywords-en.lark"
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-            grammar_text = file.read()
-    return grammar_text
+            keywords = file.read()
+    return keywords
 
 PARSER_CACHE = {}
 
