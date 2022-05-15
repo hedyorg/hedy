@@ -759,8 +759,8 @@ class TestsLevel12(HedyTester):
     expected = textwrap.dedent("""\
     actions = ['clap your hands', 'stomp your feet', 'shout Hurray']
     for action in actions:
-      step = 1 if int(1) < int(2) else -1
-      for i in range(int(1), int(2) + step, step):
+      step = 1 if 1 < 2 else -1
+      for i in range(1, 2 + step, step):
         print(f'''if youre happy and you know it''')
         print(f'''{action}''')
         time.sleep(0.1)
