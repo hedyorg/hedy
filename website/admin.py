@@ -128,7 +128,7 @@ def routes(app, database):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin-stats.html', page_title=gettext('title_admin'))
 
-    @app.roud('/admin/achievements', methods=['GET'])
+    @app.route('/admin/achievements', methods=['GET'])
     @requires_login
     def get_admin_achievements_page(user):
         if not is_admin(user):
