@@ -1,3 +1,5 @@
+from flask_babel import gettext
+
 from website import database
 from hedyweb import AchievementTranslations
 from website.auth import requires_login, current_user
@@ -89,7 +91,7 @@ class Achievements:
 
     def add_single_achievement(self, username, achievement):
         self.initialize_user_data_if_necessary()
-        if achievement not in session['achieved'] and achievement in self.TRANSLATIONS.get_translations(session['lang']):
+        if achievement not in session['achieved'] and achievement in self.TRANSLATIONS.get_translations(session['lang']).get("achievements"):
             return self.verify_pushed_achievement(username, achievement)
         else:
             return None
@@ -158,7 +160,9 @@ class Achievements:
         translations = self.TRANSLATIONS.get_translations(session['lang']).get('achievements')
         translated_achievements = []
         for achievement in session['new_achieved']:
-            translated_achievements.append([translations[achievement]['title'], translations[achievement]['text']])
+            percentage = round(((self.statistics[achievement] / self.total_users) * 100), 2)
+            stats = gettext('percentage_achieved').format({'percentage': percentage})
+            translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], stats])
         session['new_achieved'] = [] # Once we get earned achievements -> empty the array with "waiting" ones
         session['new_commands'] = []
         return translated_achievements
