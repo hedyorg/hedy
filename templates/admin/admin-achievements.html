@@ -13,6 +13,7 @@
     <thead>
       <tr class="font-bold text-left">
           <td id="name_header">Achievement name</td>
+          <td id="description_header">Description</td>
           <td id="achieved_header">Achieved</td>
           <td id="percentage_header">Percentage</td>
       </tr>
@@ -21,6 +22,7 @@
       {% for key, data in stats.items() %}
           <tr>
             <td class="name_cell">{{data.name}}</td>
+            <td class="description_cell">{{data.description}}</td>
             <td class="achieved_cell">{{data.count}}</td>
             <td class="percentage_cell">{{(data.count / total * 100)|round(2)}}%</td>
           </tr>

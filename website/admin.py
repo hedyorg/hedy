@@ -139,6 +139,7 @@ def routes(app, database):
         for achievement in achievements.keys():
             stats[achievement] = {}
             stats[achievement]["name"] = achievements.get(achievement).get("title")
+            stats[achievement]["description"] = achievements.get(achievement).get("text")
             stats[achievement]["count"] = 0
 
         user_achievements = DATABASE.get_all_achievements()
