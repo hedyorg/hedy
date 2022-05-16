@@ -94,7 +94,7 @@ class TestsLevel9(HedyTester):
       code=code,
       expected=expected,
       expected_commands=['is', 'if', 'repeat', 'print'])
-  
+
   def test_repeat_comment_nested_if(self):
     code = textwrap.dedent("""\
     print 'kassabon'
