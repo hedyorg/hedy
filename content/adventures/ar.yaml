@@ -225,18 +225,18 @@ adventures:
                 example_code: "## مثال توضيحي\n```\nصديقي = [\"أحمد\"، \"علاء\"، \"سامر\"]\nرقم_الحظ = [١٥، ١٨، ٦]\n{for} ن {in}{range} ١ {to} ٣\n    {print} \"رقم الحظ ل\" صديقي[ن]\n    {print} \" هو ... \" رقم_الحظ[ن]\n```\n"
             17:
                 start_code: "{for} ن {in}{range} ١ {to} ١٠:\n    {print} ن\n{print} \"يجب أن تكون مستعداً الان! أنا قـــــادم :)\""
-                story_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[random]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
-                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                story_text: "## وإلا اذا\nالان سنقوم بتغيير جديد يتعلق بالإزاحة. كل مرة نقوم فيها بالإزاحة يجب علينا أن نستخدم `:` في السطر الذي يسبق الإزاحة.\n\nأيضاً بمقدورنا في هذا المستوى أن نستخدم أمراً جديداً: `{elif}`. نحتاج أن نستعمل `{elif}`عندما نريد أن نختار بين ٣ خيارات (أو أكثر). \nفلنجربها الان!"
+                example_code: "## مثال توضيحي\n```\nالجوائز = [\"مليون دولار\"، \"فطيرة التفاح\"، \"لا شيء\"]\nجائزتك = الجوائز[{random}]\n{print} \"لقد فزت بجائزة \" جائزتك\n{if} جائزتك == \"مليون دولار\":\n    {print} \"واو لقد صرت غنياً!\"\n{elif} جائزتك == \"فطيرة التفاح\":\n    {print} \"هذا لذيذ! أنا أحب فطيرة التفاح.\"\n{else}:\n    {print} \"حظاً أفضل المرة القادمة!\"\n```\n"
             18:
-                start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-                story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
-                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                start_code: "اسمي = \"هيدي\"\n{print} (\" أنا اسمي هو \"، اسمي)"
+                story_text: "##المستوى الأخير!\nلقد وصلنا الى كود البايثون python الحقيقي! هذا يعني أناا بحاجة الى استخدام الأقواس مع الأوامر {print} و {range} من الان وصاعداً."
+                example_code: "## مثال توضيحي\n```\n{print}(\" اسمي هو هيدي!\")\n```\n"
+                story_text_2: اذا أردنا أن نطبع عدة أشياء على الشاشة نحتاج عندها أن نضع الفاصلة فيما بينهم.
+                example_code_2: "```\nدرجة_الحرارة = ٢٥\n{print}(\"الحرارة في الخارج الان \"، درجة_الحرارة، \"درجة مئوية\")\n```\n"
+                story_text_3: "## ادخال المعلومات\nالتغيير الأخير الذي نحتاجه للوصول الى كود البايثون python هو استعمال `{input}` بدلاً من `{ask}`."
+                example_code_3: "```\n{print} (\"اسمي هو هيدي!\")\nاسمك = {input} (\"ما اسمك؟\")\n{print} (\"اه حسناً، اسمك هو \"، اسمي)\n```\n"
     story:
-        description: Story
+        description: قصة
         levels:
             1:
                 start_code: '{print} Your story starts here'
@@ -321,8 +321,8 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n"
                 story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
                 start_code: '# place your code here'
-        name: Story
-        default_save_name: Story
+        name: قصة
+        default_save_name: قصة
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!
