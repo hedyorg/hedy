@@ -5,6 +5,11 @@ import {modal} from "./modal";
 })();
 
 
+export function startQuiz(level: number) {
+    $('#start_quiz_container').hide();
+    loadQuestQuestion(level, 1);
+}
+
 export function loadQuestQuestion(level: number, question: number) {
     $.ajax({
       type: 'GET',
@@ -12,7 +17,7 @@ export function loadQuestQuestion(level: number, question: number) {
       dataType: 'json'
     }).done(function(response: any) {
         console.log(response);
-        // We get the question info back -> show question
+        $('#quiz_container').show();
         showQuestion();
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);

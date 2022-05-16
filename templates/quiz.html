@@ -7,13 +7,19 @@
     </div>
 </div>
 <div class="p-10 button-bar border-t-8 border-green-600 ">
-    <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.loadQuestQuestion({{level}}, 1, 1);">
+    <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.startQuiz({{level}});">
         {{_('go_to_first_question')}}
     </button>
 </div>
-<div id="quiz_container">
+<div id="quiz_container" class="hidden">
     <div class="arrow-steps clearfix">
-      <!-- We have to load some quiz stuff on /Hedy page load, similar to adventures -->
+        {% for i in range(10)%}
+           {% if i + 1 == 1 %}
+               <div class="step current"><span><a class="step-text" href="#">{{_('question')}} {{ i + 1 }}<br>{{_('attempt')}} 1</a></span></div>
+           {% else %}
+               <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
+           {% endif %}
+        {% endfor %}
     </div>
     <div id="quiz_question_container">
         <!-- We can get this dynamically using the AJAX calls -->
