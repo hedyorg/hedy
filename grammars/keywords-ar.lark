@@ -1,4 +1,4 @@
-_PRINT: ("قول" | "print") _SPACE?
+_PRINT:  ( "ـ"* "ق" "ـ"* "و" "ـ"* "ل" "ـ"* | "print") _SPACE?
 _ASK: ("اسأل" | "ask") _SPACE?
 _ECHO: ("ردد" | "echo") _SPACE?
 _FORWARD: ("تقدم" | "forward") _SPACE?
@@ -16,7 +16,7 @@ purple: ("بنفسجي" | "purple") _SPACE?
 red: ("احمر" | "red") _SPACE?
 white: ("ابيض" | "white") _SPACE?
 yellow: ("اصفر" | "yellow") _SPACE?
-_IS: _SPACE ( "هو" | "is") _SPACE
+_IS: _SPACE ( "هو" | "هي" | "is") _SPACE
 _AT: _SPACE ("بشكل" | "at") _SPACE
 random: ("عشوائي" | "random") _SPACE?
 _IN: _SPACE ("في" | "in") _SPACE
