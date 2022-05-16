@@ -160,7 +160,10 @@ class Achievements:
         translations = self.TRANSLATIONS.get_translations(session['lang']).get('achievements')
         translated_achievements = []
         for achievement in session['new_achieved']:
-            percentage = round(((self.statistics[achievement] / self.total_users) * 100), 2)
+            try:
+                percentage = round(((self.statistics[achievement] / self.total_users) * 100), 2)
+            except:
+                percentage = 0
             stats = gettext('percentage_achieved').format({'percentage': percentage})
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], stats])
         session['new_achieved'] = [] # Once we get earned achievements -> empty the array with "waiting" ones
