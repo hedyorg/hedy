@@ -390,6 +390,9 @@ class Database:
         else:
             return None
 
+    def get_all_achievements(self):
+        return ACHIEVEMENTS.scan()
+
     def add_achievement_to_username(self, username, achievement):
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
