@@ -5,7 +5,7 @@ import {modal} from "./modal";
 })();
 
 
-export function loadQuestQuestion (level: number, question: number) {
+export function loadQuestQuestion(level: number, question: number) {
     $.ajax({
       type: 'GET',
       url: '/quiz/get-question/' + level + '/' + question,

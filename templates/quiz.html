@@ -7,11 +7,24 @@
     </div>
 </div>
 <div class="p-10 button-bar border-t-8 border-green-600 ">
-    <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.loadQuizQuestion({{level}}, 1, 1);">
+    <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.loadQuestQuestion({{level}}, 1, 1);">
         {{_('go_to_first_question')}}
     </button>
 </div>
 <div id="quiz_container">
+    <div class="arrow-steps clearfix">
+      {% for i in range(questions|length)%}
+           {% if i + 1 == question_nr %}
+            <div class="step current"><span><a class="step-text" href="#">{{_('question')}} {{ i + 1 }}<br>{{_('attempt')}} {{ attempt }}</a></span></div>
+           {% elif not quiz_answers[i + 1] %}
+               <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
+           {% elif quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
+                 <div class="step incorrect flex flex-row justify-items ">{{ cross|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
+           {% elif quiz_answers[i + 1][-1] == questions[i + 1].correct_answer %}
+               <div class="step check flex flex-row justify-items ">{{ check|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
+          {% endif %}
+      {% endfor %}
+    </div>
     <div id="quiz_question_container">
 
     </div>

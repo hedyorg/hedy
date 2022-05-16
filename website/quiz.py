@@ -36,7 +36,7 @@ def routes(app, database, achievements, quizzes):
     @app.route('/quiz/get-question/<int:level>/<int:question>', methods=['GET'])
     def get_quiz_question(level, question):
         if not session.get('quiz-attempt-id'):
-            return gettext('no_session_id'), 400
+            session['quiz-attempt-id'] = uuid.uuid4().hex
         if question > QUIZZES[g.lang].get_highest_question_level(level) or question < 1:
             return gettext('question_doesnt_exist'), 400
 
