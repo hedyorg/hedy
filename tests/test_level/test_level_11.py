@@ -142,7 +142,8 @@ class TestsLevel11(HedyTester):
       print(f'{v637d5dd1f16a4cc1d923588cb55ede49}')
       time.sleep(0.1)""")
 
-    self.single_level_tester(
+    self.multi_level_tester(
+      max_level=12,
       code=code,
       expected=expected,
       expected_commands=['for', 'print'])
