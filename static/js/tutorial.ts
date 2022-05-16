@@ -58,8 +58,8 @@ function tryRunButtonStep() {
        theGlobalEditor?.setValue("print Hello world!\nprint I'm learning Hedy with the tutorial!");
     });
 
-  theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
   theGlobalEditor?.setOptions({readOnly: true});
+  example_output = JSON.stringify(example_output);
 
   $('#runit').attr('onClick', "$('<span>').text(\"" + example_output + "\").css({\"" + "white" + "\"}).appendTo('#output');");
 
