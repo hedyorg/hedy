@@ -1,0 +1,24 @@
+<div id="start_quiz_container" class="flex-container">
+    <div class="center-picture p-10"><img class="rounded-full border-green-600 border-8" src="{{ static('/images/quiz_logo.jpg') }}" alt="quiz_logo"/>
+    </div>
+    <div class="title-block p-8 border-t-8 border-blue-600">
+        <h1 class="start-quiz-title font-slab">{{_('start_quiz')}}</h1>
+        <h2 class="start-quiz-subtitle"><i> {{_('level_title')}} {{ level }} </i></h2>
+    </div>
+</div>
+<div class="p-10 button-bar border-t-8 border-green-600 ">
+    <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="window.location = '/quiz/quiz_questions/{{level}}/1/1'">
+        {{_('go_to_first_question')}}
+    </button>
+</div>
+<div id="quiz_container">
+    <div id="quiz_question_container">
+
+    </div>
+</div>
+<div id="quiz_results_container">
+
+</div>
+<div id="end_quiz_container">
+
+</div>
