@@ -61,7 +61,8 @@ function tryRunButtonStep() {
   theGlobalEditor?.setOptions({readOnly: true});
   example_output = JSON.stringify(example_output);
 
-  $('#runit').attr('onClick', "$('<span>').text(\"" + example_output + "\").css({\"" + "white" + "\"}).appendTo('#output');");
+  // This is not really nice as we "copy" the addToOutput function from app.ts, but it works to prevent achievements
+  $('#runit').attr('onClick', '$("<span>").text(' + example_output + ').css({"white"}).appendTo("#output");');
 
   relocatePopup(50, 70);
   tutorialPopup(current_step);
