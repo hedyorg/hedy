@@ -62,7 +62,8 @@ function tryRunButtonStep() {
   example_output = JSON.stringify(example_output);
 
   // This is not really nice as we "copy" the addToOutput function from app.ts, but it works to prevent achievements
-  $('#runit').attr('onClick', '$("<span>").text(' + example_output + ').css({"white"}).appendTo("#output");');
+  // We simpy generate the output on the response and add it to the output when pressing "runit"
+  $('#runit').attr('onClick', '$("#output").empty();$("<span>").text(' + example_output + ').css({color: "white"}).appendTo("#output");');
 
   relocatePopup(50, 70);
   tutorialPopup(current_step);
