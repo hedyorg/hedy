@@ -1627,10 +1627,18 @@ for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
-        return ''.join(args)
+        # try all ints? return ints
+        try:
+            if all([str(int(x)) == x for x in args]):
+                return ''.join(args)
+        except:
+            # if not? make into all floats
+            numbers = [str(float(x)) for x in args]
+            return ''.join(numbers)
 
     def NEGATIVE_NUMBER(self, args):
-        return ''.join(args)
+        numbers = [str(float(x)) for x in args]
+        return ''.join(numbers)
 
     def text_in_quotes(self, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
