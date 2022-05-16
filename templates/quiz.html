@@ -25,7 +25,16 @@
         {% endfor %}
     </div>
     <div id="quiz_question_container">
-        <!-- We can get this dynamically using the AJAX calls -->
+        <p class="italic text-3xl font-bold text-blue-900 text-center font-slab"></p> <!-- question -->
+        <div class="turn-pre-into-ace w-3/4 mx-auto my-4">
+            <pre class="quiz-question no-copy-button" level="{{ level }}"></pre> <!-- question code -->
+        </div>
+        <div class="text-red-900 text-xl my-2 text-center font-slab font-semibold">
+            <!-- question hint -->
+        </div>
+        <div class="flex flex-row justify-center">
+            <button type="button" class="bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600" name="hint-button" id="hint-button">{{_('hint')}}</button> <!-- question hint -->
+        </div>
     </div>
 </div>
 <div id="quiz_results_container">
