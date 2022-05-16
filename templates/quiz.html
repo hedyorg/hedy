@@ -1,23 +1,26 @@
-<div id="start_quiz_container" class="flex-container">
-    <div class="center-picture p-10"><img class="rounded-full border-green-600 border-8" src="{{ static('/images/quiz_logo.jpg') }}" alt="quiz_logo"/>
+<div id="start_quiz_container">
+    <div class="flex-container">
+        <div class="center-picture p-10"><img class="rounded-full border-green-600 border-8" src="{{ static('/images/quiz_logo.jpg') }}" alt="quiz_logo"/>
+        </div>
+        <div class="title-block p-8 border-t-8 border-blue-600">
+            <h1 class="start-quiz-title font-slab">{{_('start_quiz')}}</h1>
+            <h2 class="start-quiz-subtitle"><i> {{_('level_title')}} {{ level }} </i></h2>
+        </div>
     </div>
-    <div class="title-block p-8 border-t-8 border-blue-600">
-        <h1 class="start-quiz-title font-slab">{{_('start_quiz')}}</h1>
-        <h2 class="start-quiz-subtitle"><i> {{_('level_title')}} {{ level }} </i></h2>
+    <div class="p-10 button-bar border-t-8 border-green-600 ">
+        <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.startQuiz({{level}});">
+            {{_('go_to_first_question')}}
+        </button>
     </div>
 </div>
-<div class="p-10 button-bar border-t-8 border-green-600 ">
-    <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.startQuiz({{level}});">
-        {{_('go_to_first_question')}}
-    </button>
-</div>
-<div id="quiz_container" class="hidden">
+<div id="quiz_container">
+    TEST
     <div class="arrow-steps clearfix">
-        {% for i in range(10)%}
-           {% if i + 1 == 1 %}
-               <div class="step current"><span><a class="step-text" href="#">{{_('question')}} {{ i + 1 }}<br>{{_('attempt')}} 1</a></span></div>
+        {% for i in range(1, 11)%}
+           {% if i == 1 %}
+               <div class="step current"><span><a class="step-text" href="#">{{_('question')}} {{ i }}<br>{{_('attempt')}} 1</a></span></div>
            {% else %}
-               <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
+               <div class="step"><span><a class="step-text" href="#">{{ i }}</a></span></div>
            {% endif %}
         {% endfor %}
     </div>
