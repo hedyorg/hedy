@@ -1157,13 +1157,13 @@ class ConvertToPython_1(ConvertToPython):
         return ''.join([str(c) for c in args])
 
     def integer(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def number(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def NEGATIVE_NUMBER(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def print(self, args):
         # escape needed characters
