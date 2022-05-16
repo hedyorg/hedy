@@ -394,6 +394,7 @@ class Database:
         return ACHIEVEMENTS.scan()
 
     def add_achievement_to_username(self, username, achievement):
+        new_user = False
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
             new_user = True
@@ -408,6 +409,7 @@ class Database:
         return False
 
     def add_achievements_to_username(self, username, achievements):
+        new_user = False
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
             new_user = True
