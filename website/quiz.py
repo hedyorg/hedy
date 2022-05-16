@@ -1,11 +1,13 @@
 import json
 import uuid
 
+from flask_babel import gettext
+
 from config import config
 from website import statistics
 from website.auth import current_user
 import utils
-from flask import request, g, session, redirect, url_for
+from flask import request, g, session, redirect, url_for, jsonify
 from flask_helpers import render_template
 
 MAX_ATTEMPTS = 3
@@ -30,6 +32,16 @@ def routes(app, database, achievements, quizzes):
     DATABASE = database
     ACHIEVEMENTS = achievements
     QUIZZES = quizzes
+
+    @app.route('/quiz/get-question/<int:level>/<int:question>', methods=['GET'])
+    def get_quiz_question(level, question):
+        if not session.get('quiz-attempt-id'):
+            return gettext('no_session_id'), 400
+        if question > QUIZZES[g.lang].get_highest_question_level(level) or question < 1:
+            return gettext('question_doesnt_exist'), 400
+
+        question = QUIZZES[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
+        return jsonify({'question': question}), 200
 
     @app.route('/quiz/start/<int:level>', methods=['GET'])
     def get_quiz_start(level):
