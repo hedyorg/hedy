@@ -112,6 +112,7 @@ class Achievements:
             if self.DATABASE.add_achievements_to_username(username, session['new_achieved']):
                 self.total_users += 1
             for achievement in session['new_achieved']:
+                self.statistics[achievement] += 1
                 session['achieved'].append(achievement)
             return True
         return False
@@ -125,6 +126,7 @@ class Achievements:
             if self.DATABASE.add_achievements_to_username(username, session['new_achieved']):
                 self.total_users += 1
             for achievement in session['new_achieved']:
+                self.statistics[achievement] += 1
                 session['achieved'].append(achievement)
             return True
         return False
@@ -137,6 +139,7 @@ class Achievements:
             if self.DATABASE.add_achievements_to_username(username, session['new_achieved']):
                 self.total_users += 1
             for achievement in session['new_achieved']:
+                self.statistics[achievement] += 1
                 session['achieved'].append(achievement)
             return True
         return False
