@@ -454,6 +454,39 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=11)
 
+    def test_repeat_arabic(self):
+        code = textwrap.dedent("""\
+        repeat ٥ times
+            print 'koekoek'""")
+
+        expected = textwrap.dedent("""\
+        for i in range(int('٥')):
+          print(f'koekoek')
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_repeat_with_arabic_variable_print(self):
+        code = textwrap.dedent("""\
+        n is ٥
+        repeat ٥ times
+            print 'me wants a cookie!'""")
+
+        expected = textwrap.dedent("""\
+        n = '٥'
+        for i in range(int('٥')):
+          print(f'me wants a cookie!')
+          time.sleep(0.1)""")
+
+        output = textwrap.dedent("""\
+        me wants a cookie!
+        me wants a cookie!
+        me wants a cookie!
+        me wants a cookie!
+        me wants a cookie!""")
+
+        self.multi_level_tester(code=code, expected=expected, output=output, max_level=11)
+
     def test_repeat_with_non_latin_variable_print(self):
         code = textwrap.dedent("""\
         állatok is 5

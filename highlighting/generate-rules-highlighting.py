@@ -87,10 +87,18 @@ def get_Traduction(KEYWORDS_PATH, KEYWORDS_PATTERN):
                Result[languageCode][keyword] = "({})".format(tmp['en'][keyword])
         else:
            for keyword in tmp[languageCode] :
-                if tmp[languageCode][keyword] != tmp['en'][keyword] :
-                    Result[languageCode][keyword] = "({}|{})".format(tmp[languageCode][keyword], tmp['en'][keyword])
+                word = tmp[languageCode][keyword]
+                if word != tmp['en'][keyword] :
+
+                    # special case for arabic 'underscore'
+                    if languageCode == "ar":
+                        ch = "\u0640*"
+                        word = ch + ch.join(list(word)) + ch
+
+
+                    Result[languageCode][keyword] = "({}|{})".format(word, tmp['en'][keyword])
                 else:
-                    Result[languageCode][keyword] = "({})".format(tmp[languageCode][keyword])
+                    Result[languageCode][keyword] = "({})".format(tmp['en'][keyword])
 
 
     return Result
