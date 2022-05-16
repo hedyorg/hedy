@@ -21,7 +21,7 @@ adventures:
                     {print} Welkom bij Hedy!
                     ```
                 story_text_2: |
-                    Je kunt ook een vraag stellen met `{ask}` en het antwoord laten herhalen met `{echo}`.
+                    Je kunt ook een vraag stellen met`{ask}` en het antwoord laten herhalen met `{echo}`.
                     Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.
                 example_code_2: |
                     ## Voorbeeldcode
@@ -139,11 +139,11 @@ adventures:
                     Om te kijken of iets in een lijst zit, kun je nu ook gebruik maken van `{in}`.
                      Deze code print mooi als je geel of rood antwoordt, en anders meh!
                 example_code_3: |
-                    ## Voorbeeld Hedy Code
                     ```
                     mooie_kleuren {is} geel, rood
                     kleur {is} {ask} 'Wat is jouw lievelingskleur?'
-                    {if} kleur {in} mooie_kleuren {print} 'mooi' {else} {print} 'meh!'
+                    {if} kleur {in} mooie_kleuren {print} 'mooi' 
+                    {else} {print} 'meh!'
                     ```
             6:
                 start_code: "{print} '5 keer 5 is ' 5 * 5"
