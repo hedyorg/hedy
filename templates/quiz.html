@@ -13,25 +13,16 @@
 </div>
 <div id="quiz_container">
     <div class="arrow-steps clearfix">
-      {% for i in range(questions|length)%}
-           {% if i + 1 == question_nr %}
-            <div class="step current"><span><a class="step-text" href="#">{{_('question')}} {{ i + 1 }}<br>{{_('attempt')}} {{ attempt }}</a></span></div>
-           {% elif not quiz_answers[i + 1] %}
-               <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
-           {% elif quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
-                 <div class="step incorrect flex flex-row justify-items ">{{ cross|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
-           {% elif quiz_answers[i + 1][-1] == questions[i + 1].correct_answer %}
-               <div class="step check flex flex-row justify-items ">{{ check|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
-          {% endif %}
-      {% endfor %}
+      <!-- We have to load some quiz stuff on /Hedy page load, similar to adventures -->
     </div>
     <div id="quiz_question_container">
-
+        <!-- We can get this dynamically using the AJAX calls -->
     </div>
 </div>
 <div id="quiz_results_container">
-
+        <!-- We can get this dynamically using the AJAX calls -->
 </div>
 <div id="end_quiz_container">
-
+        <!-- This is a static page -> already place here and keep hidden -->
+        <!-- We do have to keep in mind to parse the end score of the level -->
 </div>
