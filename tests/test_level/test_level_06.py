@@ -241,7 +241,7 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
-    def test_if_equality_with_ise(self):
+    def test_if_equality_with_is(self):
         code = textwrap.dedent("""\
         naam is Hedy
         if naam is Hedy print 'leuk'""")
@@ -566,6 +566,7 @@ class TestsLevel6(HedyTester):
         ('+', '+', '10'),
         ('-', '-', '6')
     ])
+
     def test_print_calc_with_vars_arabic(self, op, transpiled_op, output):
         code = textwrap.dedent(f"""\
             nummer is ٨
@@ -578,6 +579,30 @@ class TestsLevel6(HedyTester):
             print(f'{{int(nummer) {transpiled_op} int(nummertwee)}}')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
+
+    def test_print_calc_arabic_directly(self):
+        # TODO: can also be generalized for other ops
+        code = textwrap.dedent(f"""\
+            قول "٥ ضرب ٥ يساوي " ٥*٥""")
+
+        expected = textwrap.dedent("""\
+            print(f'٥ ضرب ٥ يساوي {int(5) * int(5)}')""")
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected, lang='ar')
+
+    def test_print_calc_arabic_directly_in_en(self):
+        # TODO: can also be generalized for other ops
+        code = textwrap.dedent(f"""\
+            print "nummers" ٥*٥""")
+
+        expected = textwrap.dedent("""\
+            print(f'nummers{int(5) * int(5)}')""")
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            translate=False)
 
     @parameterized.expand(HedyTester.arithmetic_operations)
     def test_calc_with_text_var_gives_type_error(self, operation):
@@ -761,4 +786,4 @@ class TestsLevel6(HedyTester):
         else:
           print(f'meh')""")
 
-        self.multi_level_tester(max_level=6, code=code, expected=expected)
+        self.multi_level_tester(max_level=7, code=code, expected=expected)
