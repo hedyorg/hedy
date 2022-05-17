@@ -1565,12 +1565,14 @@ class ConvertToPython_8_9(ConvertToPython_7):
         # todo fh, may 2022, could be merged with 7 if we make
         # indent a boolean parameter?
 
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        var_name = self.get_fresh_var('i')
         times = self.process_variable(args[0])
+
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
-        return "for i in range(int(" + str(times) + ")):\n" + body
+        return f"for {var_name} in range(int({times})):\n{body}"
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -1625,10 +1627,24 @@ for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
-        return ''.join(args)
+        # try all ints? return ints
+        try:
+            all_int = [str(int(x)) == x for x in args]
+            if all(all_int):
+                return ''.join(args)
+            else:
+                # int works (=does not throw) but returns a different number? these are non-latin numerals
+                # cast and move on
+                return ''.join(str(int(x)) for x in args)
+
+        except Exception as E:
+            # if not? make into all floats
+            numbers = [str(float(x)) for x in args]
+            return ''.join(numbers)
 
     def NEGATIVE_NUMBER(self, args):
-        return ''.join(args)
+        numbers = [str(float(x)) for x in args]
+        return ''.join(numbers)
 
     def text_in_quotes(self, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"

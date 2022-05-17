@@ -54,14 +54,14 @@ adventures:
                 story_text_2: "با دستور `{ask}` می‌تونی درخواست یک ورودی بکنی و با دستور `{echo}` اون رو روی صفحه تکرار کنی.\n"
                 story_text_3: "بیا شروع کنیم. نمی‌دونی از کجا شروع کنی؟ توی برگه‌های بعدی یه سری ایده برای ساخت برنامه پیدا می‌کنی.\n"
                 example_code_2: "## نمونه کد\n```\n{ask} What is your name?\n{echo} hello\n```\n"
-                start_code: '{print} hello world!'
+                start_code: '{print} دنیا سلام!'
             2:
                 story_text: "## متغیرها\nدر مرحله دوم ما دو تا دستور جدید یاد می‌گیریم: `{is}` و `{sleep}`.\nتو می‌تونی با دستور `{is}` به یک کلمه، یک اسم اختصاص بدی. به این می‌گن «متغیر». توی این مثال ما دو متغیر به نام‌های name و age می‌سازیم. تو می‌تونی از این کلمات در هر جای کد استفاده کنی. مثل:\n\nاینطوری تو دیگه به دستور `{echo}`نیاز نداری!\n"
                 example_code: "## نمونه کد\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "دستور `{print}` همچنان مثل قبل کار می‌کنه، اما دستور `{ask}` تغییر کرده. تو نیاز داری توی دستور `{ask}` از یک متغیر استفاده کنی. مثل این:\n"
                 example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
                 story_text_3: "دستور بعد `{sleep}` است، که برنامه رو برای یک ثانیه متوقف می‌کنه. اگر بعد از دستور {sleep} یک عدد بنویسید، برنامه به اون مقدار ثانیه توقف می‌کنه.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
+                example_code_3: "```\n{print} رنگ مورد علاقه من...\n{sleep} 2\n{print} سبز!\n```\n"
                 start_code: '{print} hello world!'
             3:
                 story_text: "## Make a list!\nIn level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.\n"
