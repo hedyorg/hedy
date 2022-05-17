@@ -10,7 +10,18 @@ import {modal} from "./modal";
 
 export function startQuiz(level: number) {
     $('#start_quiz_container').hide();
-    loadQuestQuestion(level, 1);
+    $.ajax({
+      type: 'POST',
+      url: '/quiz/initialize_user',
+      data: JSON.stringify({
+        level: level
+      }),
+      dataType: 'json'
+    }).done(function() {
+        loadQuestQuestion(level, 1);
+    }).fail(function(err) {
+       modal.alert(err.responseText, 3000, true);
+    });
 }
 
 export function loadQuestQuestion(level: number, question: number) {
@@ -21,12 +32,12 @@ export function loadQuestQuestion(level: number, question: number) {
     }).done(function(response: any) {
         $('#quiz_container').show();
         console.log(response);
-        showQuestion(response.question.question_text);
-        if (response.question.code) {
-            showQuestionCode(response.question.code);
+        showQuestion(response.question_text);
+        if (response.code) {
+            showQuestionCode(response.code);
         }
-        showAnswers(response.question.mp_choice_options);
-        loadHint(response.question.hint);
+        showAnswers(response.mp_choice_options);
+        loadHint(response.hint);
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
     });
