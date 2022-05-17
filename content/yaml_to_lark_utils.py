@@ -66,4 +66,29 @@ def extract_Lark_grammar_from_yaml(only_new_lang=True):
           else:
               f.write(f'{command}: "{translation}" {ending}\n')
 
-extract_Lark_grammar_from_yaml(True)
+# extract_Lark_grammar_from_yaml(True)
+
+def relax_keywords_ar():
+  input_path = '../content/keywords/'
+  current_grammar_path = '../grammars/'
+  output_path = '../grammars-transformed/'
+  Path(output_path).mkdir(parents=True, exist_ok=True)
+
+  ar_yaml_path = os.path.join(input_path, 'ar' + '.yaml')
+  with open(ar_yaml_path, 'r', encoding='utf-8') as stream:
+    ar_yaml = yaml.safe_load(stream)
+    ar_yaml_relaxed = {}
+    for k, v in ar_yaml.items():
+      tatweel_appended = [f'"{l}"' for l in v]
+      ar_yaml_relaxed[k] = ' "ـ"* ' + ' "ـ"* '.join(tatweel_appended) + ' "ـ"* '
+
+  ar_yaml_output_path = os.path.join(output_path, 'ar' + '.yaml')
+
+  with open(ar_yaml_output_path, 'w+', encoding='utf-8') as f:
+    yaml.safe_dump(ar_yaml_relaxed, f, allow_unicode=True)
+
+relax_keywords_ar()
+
+
+
+
