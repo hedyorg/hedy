@@ -105,7 +105,7 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
 
         expected = textwrap.dedent(f"""\
-        for i in range(int('{number}')):
+        for i in range(int('{int(number)}')):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 

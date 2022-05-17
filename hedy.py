@@ -1157,13 +1157,13 @@ class ConvertToPython_1(ConvertToPython):
         return ''.join([str(c) for c in args])
 
     def integer(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def number(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def NEGATIVE_NUMBER(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def print(self, args):
         # escape needed characters
@@ -1629,9 +1629,14 @@ class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
         # try all ints? return ints
         try:
-            if all([str(int(x)) == x for x in args]):
+            all_int = [str(int(x)) == x for x in args]
+            if all(all_int):
                 return ''.join(args)
-        except:
+            else:
+                # int succeeds but does nto return the same? these are non-latin numbers
+                # and need to be casted
+                return ''.join([str(int(x)) for x in args])
+        except Exception as E:
             # if not? make into all floats
             numbers = [str(float(x)) for x in args]
             return ''.join(numbers)
@@ -1706,6 +1711,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, args):
         name = args[0]
+        self.check_var_usage(args)
         self.check_var_usage(args)
         return hash_var(name)
 
