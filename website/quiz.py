@@ -34,7 +34,7 @@ def routes(app, database, achievements, quizzes):
         session['correct_answer'] = 0
         session['correctly_answered_questions_numbers'] = []
 
-        statistics.add(current_user()['username'], lambda id_: DATABASE.add_quiz_started(id_, level))
+        statistics.add(current_user()['username'], lambda id_: DATABASE.add_quiz_started(id_, body.get('level')))
 
         return jsonify({}), 200
 
