@@ -385,6 +385,7 @@ function showAchievement(achievement: any[]){
   return new Promise<void>((resolve)=>{
         $('#achievement_reached_title').text('"' + achievement[0] + '"');
         $('#achievement_reached_text').text(achievement[1]);
+        $('#achievement_reached_statics').text(achievement[2]);
         $('#achievement_pop-up').fadeIn(1000, function () {
           setTimeout(function(){
             $('#achievement_pop-up').fadeOut(1000);

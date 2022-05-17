@@ -1,3 +1,5 @@
+from flask_babel import gettext
+
 from website import database
 from hedyweb import AchievementTranslations
 from website.auth import requires_login, current_user
@@ -11,6 +13,8 @@ class Achievements:
         self.DATABASE = database.Database()
         self.TRANSLATIONS = AchievementTranslations()
         self.all_commands = self.get_all_commands()
+        self.total_users = 0
+        self.statistics = self.get_global_statistics()
 
     def get_all_commands(self):
         commands = []
@@ -18,6 +22,18 @@ class Achievements:
             for command in hedy.commands_per_level.get(i):
                 commands.append(command)
         return set(commands)
+
+    def get_global_statistics(self):
+        all_achievements = self.DATABASE.get_all_achievements()
+        statistics = {}
+        for achievement in self.TRANSLATIONS.get_translations("en").get("achievements").keys():
+            statistics[achievement] = 0
+
+        self.total_users = len(all_achievements)
+        for user in all_achievements:
+            for achieved in user.get("achieved", []):
+                statistics[achieved] += 1
+        return statistics
 
     def initialize_user_data_if_necessary(self):
         if 'achieved' not in session:
@@ -95,8 +111,10 @@ class Achievements:
             self.DATABASE.add_commands_to_username(username, session['commands'])
 
         if len(session['new_achieved']) > 0:
-            self.DATABASE.add_achievements_to_username(username, session['new_achieved'])
+            if self.DATABASE.add_achievements_to_username(username, session['new_achieved']):
+                self.total_users += 1
             for achievement in session['new_achieved']:
+                self.statistics[achievement] += 1
                 session['achieved'].append(achievement)
             return True
         return False
@@ -107,8 +125,10 @@ class Achievements:
         if adventure and 'adventure_is_worthwhile' not in session['achieved']:
             session['new_achieved'].append("adventure_is_worthwhile")
         if len(session['new_achieved']) > 0:
-            self.DATABASE.add_achievements_to_username(username, session['new_achieved'])
+            if self.DATABASE.add_achievements_to_username(username, session['new_achieved']):
+                self.total_users += 1
             for achievement in session['new_achieved']:
+                self.statistics[achievement] += 1
                 session['achieved'].append(achievement)
             return True
         return False
@@ -118,8 +138,10 @@ class Achievements:
         self.check_programs_submitted()
 
         if len(session['new_achieved']) > 0:
-            self.DATABASE.add_achievements_to_username(username, session['new_achieved'])
+            if self.DATABASE.add_achievements_to_username(username, session['new_achieved']):
+                self.total_users += 1
             for achievement in session['new_achieved']:
+                self.statistics[achievement] += 1
                 session['achieved'].append(achievement)
             return True
         return False
@@ -127,8 +149,10 @@ class Achievements:
     def verify_pushed_achievement(self, username, achievement):
         self.initialize_user_data_if_necessary()
         session['new_achieved'] = [achievement]
-        self.DATABASE.add_achievement_to_username(username, achievement)
+        if self.DATABASE.add_achievement_to_username(username, achievement):
+            self.total_users += 1
         session['achieved'].append(achievement)
+        self.statistics[achievement] += 1
         return self.get_earned_achievements()
 
     def get_earned_achievements(self):
@@ -136,8 +160,10 @@ class Achievements:
         translations = self.TRANSLATIONS.get_translations(session['lang']).get('achievements')
         translated_achievements = []
         for achievement in session['new_achieved']:
-            translated_achievements.append([translations[achievement]['title'], translations[achievement]['text']])
-        session['new_achieved'] = [] #Once we get earned achievements -> empty the array with "waiting" ones
+            percentage = round(((self.statistics[achievement] / self.total_users) * 100), 2)
+            stats = gettext('percentage_achieved').format(**{'percentage': percentage})
+            translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], stats])
+        session['new_achieved'] = [] # Once we get earned achievements -> empty the array with "waiting" ones
         session['new_commands'] = []
         return translated_achievements
 
