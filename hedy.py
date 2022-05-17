@@ -1629,13 +1629,14 @@ class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
         # try all ints? return ints
         try:
-            if all([str(int(x)) == x for x in args]):
+            all_int = [str(int(x)) == x for x in args]
+            if all(all_int):
                 return ''.join(args)
             else:
                 # int succeeds but does nto return the same? these are non-latin numbers
                 # and need to be casted
                 return ''.join([str(int(x)) for x in args])
-        except:
+        except Exception as E:
             # if not? make into all floats
             numbers = [str(float(x)) for x in args]
             return ''.join(numbers)

@@ -6,7 +6,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ##مرحبا بكم في هيدي!
+                    ##م رحبا بكم في هيدي!
                     في المستوى الأول يمكنكم استخدام الأوامر `{print}` و `{ask}` و`{echo}`.
                     قم بكتابة الكود في مساحة البرمجة المخصصة، أو اضغط على على الزر الأخضر الموجود في المثال التوضيحي وسيتم كتابة الكود عنك في الشاشة المخصصة!
                     جرب الكود بنفسك من خلال الضغط على الزر الأخضر "تشغيل البرنامج" الموجود تحت المساحة البرمجية.
@@ -14,34 +14,34 @@ adventures:
                     بامكانك اظهار/طباعةالكلام على الشاشة من خلال استعمال الأمر `{print}` .
                 start_code: '{print} مرحبا أيها العالم!'
                 story_text_2: "يمكنك أن تسأل عن معلومة معينة من خلال الأمر `{ask}` وتعيد ترديدها من خلال الأمر `{echo}`.\n"
-                example_code_2: "##مثال توضيحي\n```\n{ask} ما اسمك؟\n{echo} مرحبا\n```\n"
+                example_code_2: "## مثال توضيحي\n```\n{ask} ما اسمك؟\n{echo} مرحبا\n```\n"
                 example_code: "## مثال توضيحي\n```\n{print} مرحبا!\n{print} أهلاً بكم في هيدي!\n```\n"
                 story_text_3: "هيا بنا نبدأ! لا أعرف ماذا تصنع؟ ستجد في علامات التبويب التالية أفكارًا للبرامج التي سيتم إنشاؤها.\n"
             2:
                 story_text: |
-                    ##المتغيرات
+                    ##ا لمتغيرات
                     في المستوى الثاني نتعلم الأوامر الجديدة `{is}` و `{sleep}`.
                     يمكنك أن تعطي اسما لشيء ما باستخدام `{is}`. هذا ما يسمى ب "متغير". في المثال الموجود قمنا باشناء متغير يسمى الاسم ونتغير اخر يسمى العمر. يمكنك أن تستخدم كلمة الاسم في أي مكان في البرنامج الخاص بك وسيتم استبدالها ب هيدي، كما في المثال التوضيحي: 
 
                     بهذا الشكل لم تعد الان بحاجة للأمر `{echo}`.
                 start_code: '{print} مرحبا أيها العالم!'
-                example_code: "##مثال توضيحي\n```\nالاسم {is} هيدي\nالعمر {is} 15\n{print} الاسم وعمرها الان العمر سنة\n```\n"
+                example_code: "## مثال توضيحي\n```\nالاسم {is} هيدي\nالعمر {is} 15\n{print} الاسم وعمرها الان العمر سنة\n```\n"
                 story_text_2: "الأمر `{print}` لا زال يعمل بنفس الطريقة، ولكن الأمر `{ask}` قد تغير ،عليك الان ان تحتفظ بالاجابة على `{ask}` في متغير من خلال اعطاء الاجابة اسما معينا كما في المثال التوضيحي:\n"
                 example_code_2: "```\nالجواب {is} {ask} ما اسمك؟\n{print} مرحبا بك الجواب\n```\n"
                 story_text_3: "لدينا أمر جديد اخر وهو `{sleep}` الذي يعلق عمل البرنامج لمدة ثانية واحدة. اذا كتبت رقما معينا بعد الأمر `{sleep}` فسيتم تعليق عمل البرنامج لعدد معين من الثواني مساوياً للرقم الذي تم تحديده.\n"
                 example_code_3: "```\n{print} لوني المفضل هو ...\n{sleep} 2\n{print} الأخضر!!\n```\n"
             3:
                 story_text: |
-                    ##انشاء قائمة!
+                    ##ا نشاء قائمة!
                     في المستوى الثالث يمكنك أن تنشأ قائمة. يمكنك بعدها أن تجعل الحاسوب يختار لك شيئا من القائمة بشكل عشوائي - يمكنك القيام بذك من خلال الأمر `{at} {random}`.
                 start_code: '{print} مرحبا أيها العالم!'
-                example_code: "##مثال توضيحي\n\n```\nالحيوانات {is} كلب، قطة، جمل\n{print} الحيوانات {at} {random}\n```\n"
+                example_code: "## مثال توضيحي\n\n```\nالحيوانات {is} كلب، قطة، جمل\n{print} الحيوانات {at} {random}\n```\n"
                 story_text_2: بامكانك أن تضيف عنصرا الى القائمة من خلال الأمر `{add}` وأن تزيل عنصرا من خلال الأمر `{remove}`.
-                example_code_2: "##مثال توضيحي\n\n```\nحيواناتي {is} كلب، جمل، قط\n{add} حصان {to_list} حيواناتي\n{remove} قط {from} حيواناتي\n{print} حيواناتي {at} {random}\n```\n"
+                example_code_2: "## مثال توضيحي\n\n```\nحيواناتي {is} كلب، جمل، قط\n{add} حصان {to_list} حيواناتي\n{remove} قط {from} حيواناتي\n{print} حيواناتي {at} {random}\n```\n"
             4:
                 start_code: '{print} "مرحبا أيها العالم"'
                 story_text: |
-                    ##علامات الاقتباس
+                    ##ع لامات الاقتباس
                     هناك تغيير على `{print}` و `{ask}` في المستوى الرابع.
 
                     يجب عليك أن تضع الكلام الذي تريد الكمبيوتر ان يظهره على الشاشة بين علامات اقتباس.
@@ -126,7 +126,7 @@ adventures:
                 example_code_3: "```\nالالوان_الجميلة {is} برتقالي، وردي\nاللون {is} {ask} \"ما لونك المفضل؟\"\n{if} اللون {in} الالوان_الجميلة {print} \"جميل!\"\n{else} {print} \"يا خسارة!\"\n```\n"
             6:
                 start_code: "{print} \"٥ ضرب ٥ يساوي \" ٥*٥"
-                story_text: "##١+١\nفي هذا المستوى يمكنك أن تتعلم شيئاً جديداً: القيام بالعمليات الحسابية.\n\nعملية الجمع تتم بسهولة كما في الحساب: `٥+٥` على سبيل المثال. كذلك اشارة السالب للطرح تعمل جيداً بنفس الطريقة، `٥-٥`.\n\nعملية الضرب مختلفة بعض الشيء، لأنه لا يوجد اشارة الضرب المعروفة لديك في لوحة المفاتيح (يمكنك البحث الان!).\nلذلك نقوم بعملية الضرب من خلال اشارة الإجامة أو النجمة الصغيرة الموجودة في لوحة المفاتيح فوق الرقم ٨ عادة: `٥*٥` ونقرأها هكذا \"٥ ضرب ٥\" لتتذكرها بسهولة.\n"
+                story_text: "## ١+١\nفي هذا المستوى يمكنك أن تتعلم شيئاً جديداً: القيام بالعمليات الحسابية.\n\nعملية الجمع تتم بسهولة كما في الحساب: `٥+٥` على سبيل المثال. كذلك اشارة السالب للطرح تعمل جيداً بنفس الطريقة، `٥-٥`.\n\nعملية الضرب مختلفة بعض الشيء، لأنه لا يوجد اشارة الضرب المعروفة لديك في لوحة المفاتيح (يمكنك البحث الان!).\nلذلك نقوم بعملية الضرب من خلال اشارة الإجامة أو النجمة الصغيرة الموجودة في لوحة المفاتيح فوق الرقم ٨ عادة: `٥*٥` ونقرأها هكذا \"٥ ضرب ٥\" لتتذكرها بسهولة.\n"
                 example_code: "## مثال توضيحي\n```\n{print} \"٥ زائد ٥ تساوي \" ٥+٥\n{print}  \"٥ ناقص ٥ تساوي \" ٥-٥\n{print}  \"٥ ضرب ٥ تساوي \" ٥*٥\n```\n"
                 story_text_2: "هنالك أيضا تغيير في كيفية تخزين/حفظ كلمة في متغير! يمكننا الان أن نستخدم  `=` بدلاً من `{is}`عند حفظ كلمة أو رقم معين كمتغير، كما في المثال:\n"
                 example_code_2: "```\nالاسم = هيدي\nالاجابة = ٢٠ + ٤\n```\n"
@@ -178,7 +178,7 @@ adventures:
                     ```
             11:
                 story_text: |
-                    '## دورات التكرار!
+                    ##  دورات التكرار!
 
                     `{print}` لا زال يعمل بالطريقة نفسها، ولكن أضفنا شكلاً جديداً من الأمر `{for}`. بامكاننا الان أن نكتب `{for} دورة {in} {range} ١ {to} ٥` وأن نستخدم بعدها المتغير `دورة` في البرنامج.
 
@@ -187,56 +187,65 @@ adventures:
                     {for} دورة {in} {range} ١ {to} ٥
                         {print} دورة
                 example_code: |
+                    ```
                     {for} دورة {in} {range} ١ {to} ٥
                         {print} دورة
+                    ```
             12:
-                start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
-                story_text: "## Decimal numbers\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n## All texts need to be in quotation marks\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n\n```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n## All items in lists need quotation marks too\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n\n```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n## All text after `{if}` comparisons need quotation marks too\n```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n## Numbers don't need quotation marks\n{for} numbers, you do not use quotation marks in the `=`:\n```\nscore = 25\n{print} 'You got ' score\n```\n"
-                example_code: "## Example Hedy code\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
-                example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-                story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
-                example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-                story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
-                example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+                start_code: "{print} \"نستطيع الان كتابة الأرقام العشرية باستخدام النقطة كفاصل بين العدد الصحيح والكسور\"\n{print} ٢.٥ + ٢.٥"
+                story_text: "## الأرقام والنصوص\n**الأرقام العشرية**\nالى الان لم تكن هيدي تسمح باستخدام الأرقام العشرية مثل ٢.٥ ولكن الان أصبح استخدامها ممكنا. انتبه الى أن الحاسوب يستعمل النقطة `.` كفاصل بين الأرقام الصحيحة والكسور."
+                example_code: "## مثال توضيحي\n```\n{print} \"اثنان ونصف زائد اثنان ونصف يساوي ...\"\n{print} ٢.٥ + ٢.٥\n```\n"
+                story_text_2: "**كل النصوص يجب أن تكون بين علامات الاقتباس**\nابتداء من هذا المستوى (مستوى ١٢) يجب علينا أيضا أن نستعمل علامات الاقتباس عندما نخزن نصاً (كلمة أو اسم مثلاً) في متغير باستخدام `=`:\n"
+                example_code_2: "```\nالاسم = \"هيدي\"\n{print} \"مرحباً \" الاسم\n```\n"
+                story_text_3: "**كل العناصر النصية في القوائم تحتاج الى علامات الاقتباس أيضاً **\nالقائمة أيضا ممكن أن تحتوي على عناضر نصية (كلمات او اسماء مثلا)، وهي بحاجة الى علامات اقتباس. يجب علينا أن نضع علامات اقتباس لكل عنصر من عناصر القائمة. \nهذا يسمح لنا بحفظ أكثر من كلمة كعنصر واحد في القائمة، \"الرجل الحديدي\" مثلاً.\n"
+                example_code_3: "```\nالابطال_الخارقون = \"سبايدرمان\"، \"باتمان\"، \"الرجل الحديدي\"\n{print} الابطال_الخارقون {at} {random}\n```\n"
+                story_text_4: "**كل النصوص المستعملة في المقارنة مع الأمر `{if}` بحاجة الى علامات اقتباس أيضاً**\n"
+                example_code_4: "```\nاسمك = {ask} \"ما اسمك؟\"\n{if} اسمك = \"هيدي\"\n    {print} \"مرحباً صديقي!\"\n```\n"
+                story_text_5: "**الأرقام ليست بحاجة الى علامات اقتباس**\nلسنا بحاجة الى استعمال علامات الاقتباس عند تخزين الارقام في الكود باستخدام `=`:\n"
+                example_code_5: "```\nالنتيجة = 25\n{print} \" نتيجة الاختبار هو \" النتيجة\n```\n"
+                story_text_6: "**استعمال العلامات الحسابية مع الكلمات**\nمن المسموح استعمال علامة الجمع + مع النصوص في هذا المستوى. على سبيل المثال:"
+                example_code_6: "```\nأ = \"مرحباً \"\nب= \"أيها العالم!\"\n{print} أ + ب\n```\n"
             13:
-                start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
-                example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+                start_code: "اسمك = {ask} \"ما اسمك؟\"\nعمرك = {ask} \"ما عمرك؟\"\n{if} اسمك=\"هيدي\" {and} عمرك=٢\n    {print} \"أنت بالفعل هيدي الحقيقي!\""
+                story_text: "## و ... أو ..؟\nسنتعلم الان عن استعمال الأوامر `{and}` و `{or}`! اذا كنا نريد فحص أمرين في نفس الوقت لسنا بحاجة الى استعمال الأمر \"اذا\" مرتين، بل يمكننا أن نستعمل `{and}` و `{or}`. اذا استعملنا الأمر `{and}` بين الفحصين: يجب أن يكون كلا الفحصين (على اليمين واليسار) صحيحين من أجل تنفيذ الكود المتضمن في الأمر \"اذا\". أما اذا استعملنا الأمر `{or}` بين الفحصين: عندها يكفي أن يكون فحص واحد منهم صحيحاً لتنفيذ الكود المتضمن في الأمر \"اذا\"."
+                example_code: "```\nاسمك = {ask} \"ما اسمك؟\"\nعمرك = {ask} \"ما عمرك؟\"\n{if} اسمك=\"هيدي\" {and} عمرك=٢\n    {print} \"أنت بالفعل هيدي الحقيقي!\"\n```\n"
             14:
-                story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n\nFrom this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n\nYou can also compare if something is *not* equal to something else using `!=` like this:\n```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
-                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\nelse\n    {print} 'You are older than me!'"
-                example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+                story_text: "## كبير، أكبر، الأكبر! \nسنتعلم أشياء جديدة. ربما تكون تعرفهم من قبل من دراستك للحساب: علامتا الأصغر `<` والأكبر `>`.\nعلامة الأصغر `<` تستعمل لفحص ما اذا كان الرقم الأول أصغر من الرقم الثاني، مثلا `عمرك < ١٢` تفحص ما اذا كان المتغير `عمرك` أصغر/أقل من الرقم ١٢.\nعندما نريد فحص ما اذا كان الرقم الأول أصغر من أو مساوياً للرقم الثاني، يمكننا استعمال `<=`، مثلاً `عمرك <= ١١`.\nعلامة الأكبر `<` تستعمل لفحص ما اذا كان الرقم الأول أكبر من الرقم الثاني، مثلا `النقاط > ١٠` تفحص ما اذا كان المتغير `النقاط` أكبر/أكثر من الرقم ١٠.\nعندما نريد فحص ما اذا كان الرقم الأول أكبر من أو مساوياً للرقم الثاني، يمكننا استعمال `>=`، مثلاً `النقاط >= ١١`.\nنستعمل علامات المقارنة هذه عند القايام بفحص شيء معين مع الأمر `{if}`، هكذا:\n"
+                start_code: "عمرك = {ask} \"ما عمرك؟\"\n{if} عمرك < ١٣\n    {print} \"‌أنت أصغر مني!\"\n{else}\n    {print} \"أنت أكبر مني!\""
+                example_code: "## مثال توضيحي\n```\nعمرك = {ask} \"ما عمرك؟\"\n{if} عمرك > ١٢\n    {print} \"أنت أكبر مني!\"\n```\n"
+                story_text_2: "ابتداء من هذا المستوى (مستوى ١٤) يجب أن نستخدم علامتين مساواة متلاحقتين (==) عند فحص المساواة. هذا ما يحدث في أغلب لغات البرمجة الأخرى:\n"
+                example_code_2: "```\nاسمك = {ask} \"ما اسمك؟\"\n{if} اسمك== \"هيدي\" \n    {print} \"أنت رائع!\"\n```\n"
+                story_text_3: "يمكننا أيضاً فحص ما اذا كان شيء ما *لا يساوي* شيء اخر باستعمال العلامة `!=`، هكذا:\n"
+                example_code_3: "```\nاسمك = {ask} \"ما اسمك؟\"\n{if} اسمك!= \"هيدي\" \n    {print} \"أنت لست هيدي!\"\n```\n"
             15:
-                story_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!\n"
-                start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
-                example_code: "## Example Hedy code\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+                story_text: "## المزيد من دورات التكرار\nسنتعلم نوعا جديداً من دورات التكرار، التكرار باستخدام الأمر `{while}`! يستمر تنفيذ الكود طالما لا تزال نتيجة الفحص الذي نقوم به صالحة/صحيحة. \nلذلك يجب علينا ألا ننسى أن نغير قيمة المتغير الذي نفحصه في داخل دورة التكرار. \n\nفي المثال التوضيحي، يستمر الكود في التنفيذ (سؤال نتيجة الضرب) حتى نحصل على اجابة صحيحة.\nاذا لم يتم اعطاء اجابة صحيحة فتستمر دورة التكرار (والبرنامج ككل) في التتنفيذ الى الأبد!"
+                start_code: |
+                    الاجابة = 0
+                    {while} الاجابة != 25
+                        الاجابة = {ask} "ما ناتج ٥ ضرب ٥؟"
+                    {print} "تم الاجابة بشكل صحيح"
+                example_code: "## مثال ثوضيحي\n```\nالاجابة = ٠ \n{while} الاجابة != 25 \n    الاجابة = {ask} \"ما ناتج ٥ ضرب ٥؟\"\n{print} \"تم الاجابة بشكل صحيح\"\n```\n"
             16:
-                start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
-                story_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists.\n\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
-                example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                start_code: "الفاكهة = [\"تفاح\"، \"موز\"، \"كرز\"]\n{print} الفاكهة"
+                story_text: "## المزيد والمزيد من البرمجة الحقيقية\nسنتعلم الان كيفية كتابة القائمة باستخدام طريقة لغة البرمجة بايثون (python) عن طريق احاطة القائمة بالأقواس المربعة (أو المعقوفتان)! نستمر بوضع علامات الاقتباس حول كل عنصر نصي (كلمة اواسم مثلا) كما في المستويات السابقة. \nيمكننا استخدام الأقواس المربعة أيضا للاشارة الى مكان محدد في القائمة."
+                example_code: "## مثال توضيحي\n```\nصديقي = [\"أحمد\"، \"علاء\"، \"سامر\"]\nرقم_الحظ = [١٥، ١٨، ٦]\n{for} ن {in}{range} ١ {to} ٣\n    {print} \"رقم الحظ ل\" صديقي[ن]\n    {print} \" هو ... \" رقم_الحظ[ن]\n```\n"
             17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[random]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
-                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                start_code: |
+                    {for} ف {in} {range} 1 {to} 10:
+                        {print} ف
+                    {print} "يجب أن تكون مستعداً الان! أنا قـــــادم :)"
+                story_text: "## وإلا اذا\nالان سنقوم بتغيير جديد يتعلق بالإزاحة. كل مرة نقوم فيها بالإزاحة يجب علينا أن نستخدم `:` في السطر الذي يسبق الإزاحة.\n\nأيضاً بمقدورنا في هذا المستوى أن نستخدم أمراً جديداً: `{elif}`. نحتاج أن نستعمل `{elif}`عندما نريد أن نختار بين ٣ خيارات (أو أكثر). \nفلنجربها الان!"
+                example_code: "## مثال توضيحي\n```\nالجوائز = [\"مليون دولار\"، \"فطيرة التفاح\"، \"لا شيء\"]\nجائزتك = الجوائز[{random}]\n{print} \"لقد فزت بجائزة \" جائزتك\n{if} جائزتك == \"مليون دولار\":\n    {print} \"واو لقد صرت غنياً!\"\n{elif} جائزتك == \"فطيرة التفاح\":\n    {print} \"هذا لذيذ! أنا أحب فطيرة التفاح.\"\n{else}:\n    {print} \"حظاً أفضل المرة القادمة!\"\n```\n"
             18:
-                start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-                story_text: "We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
-                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                start_code: "اسمي = \"هيدي\"\n{print} (\" أنا اسمي هو \"، اسمي)"
+                story_text: "##المستوى الأخير!\nلقد وصلنا الى كود البايثون python الحقيقي! هذا يعني أناا بحاجة الى استخدام الأقواس مع الأوامر {print} و {range} من الان وصاعداً."
+                example_code: "## مثال توضيحي\n```\n{print}(\" اسمي هو هيدي!\")\n```\n"
+                story_text_2: اذا أردنا أن نطبع عدة أشياء على الشاشة نحتاج عندها أن نضع الفاصلة فيما بينهم.
+                example_code_2: "```\nدرجة_الحرارة = ٢٥\n{print}(\"الحرارة في الخارج الان \"، درجة_الحرارة، \"درجة مئوية\")\n```\n"
+                story_text_3: "## ادخال المعلومات\nالتغيير الأخير الذي نحتاجه للوصول الى كود البايثون python هو استعمال `{input}` بدلاً من `{ask}`."
+                example_code_3: "```\n{print} (\"اسمي هو هيدي!\")\nاسمك = {input} (\"ما اسمك؟\")\n{print} (\"اه حسناً، اسمك هو \"، اسمي)\n```\n"
     story:
-        description: Story
+        description: قصة
         levels:
             1:
                 start_code: '{print} Your story starts here'
@@ -321,8 +330,8 @@ adventures:
                 example_code: "## Example Hedy code\n\n```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n"
                 story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
                 start_code: '# place your code here'
-        name: Story
-        default_save_name: Story
+        name: قصة
+        default_save_name: قصة
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!
