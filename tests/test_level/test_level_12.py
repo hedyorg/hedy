@@ -54,6 +54,23 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(max_level=15, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
 
+  def test_for_loop_arabic(self):
+    code = textwrap.dedent("""\
+    for دورة in range ١ to ٥
+        print دورة""")
+
+    expected = textwrap.dedent("""\
+    step = 1 if 1 < 5 else -1
+    for v637d5dd1f16a4cc1d923588cb55ede49 in range(1, 5 + step, step):
+      print(f'''{v637d5dd1f16a4cc1d923588cb55ede49}''')
+      time.sleep(0.1)""")
+
+    self.multi_level_tester(
+      max_level=16,
+      code=code,
+      expected=expected,
+      expected_commands=['for', 'print'])
+
   def test_sleep_with_input_variable(self):
     code = textwrap.dedent("""\
       n is ask "how long"

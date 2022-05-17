@@ -1631,6 +1631,10 @@ class ConvertToPython_12(ConvertToPython_11):
         try:
             if all([str(int(x)) == x for x in args]):
                 return ''.join(args)
+            else:
+                # int succeeds but does nto return the same? these are non-latin numbers
+                # and need to be casted
+                return ''.join([str(int(x)) for x in args])
         except:
             # if not? make into all floats
             numbers = [str(float(x)) for x in args]
@@ -1706,6 +1710,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, args):
         name = args[0]
+        self.check_var_usage(args)
         self.check_var_usage(args)
         return hash_var(name)
 
