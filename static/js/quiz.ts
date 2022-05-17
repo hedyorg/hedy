@@ -26,6 +26,7 @@ export function loadQuestQuestion(level: number, question: number) {
             showQuestionCode(response.question.code);
         }
         showAnswers(response.question.mp_choice_options);
+        loadHint(response.question.hint);
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
     });
@@ -48,6 +49,11 @@ function showAnswers(options: any) {
         $('#answer_text_' + i).show();
         // Todo -> If we have a code answer, show answer_code_i and remove backticks
     }
+}
+
+function loadHint(hint: string) {
+    $('#quiz_question_hint').text(hint);
+    $('#quiz_question_hint').hide();
 }
 
 export function answerQuestion(answer: number) {
