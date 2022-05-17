@@ -7,13 +7,13 @@
             <h2 class="start-quiz-subtitle"><i> {{_('level_title')}} {{ level }} </i></h2>
         </div>
     </div>
-    <div class="p-10 button-bar border-t-8 border-green-600 ">
+    <div class="flex py-4 px-4 bg-green-300 justify-between border-t-8 border-green-600">
         <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.startQuiz({{level}});">
             {{_('go_to_first_question')}}
         </button>
     </div>
 </div>
-<div id="quiz_container">
+<div id="quiz_container" class="hidden">
     <div class="arrow-steps clearfix">
         {% for i in range(1, quiz_questions + 1)%}
            {% if i == 1 %}
@@ -46,7 +46,7 @@
             </p>
         </div>
     </div>
-    <div class="flex py-4 px-8 bg-green-300 justify-between border-t-8 border-green-600">
+    <div class="flex py-4 px-4 bg-green-300 justify-between border-t-8 border-green-600">
         <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="window.location = '/hedy/{{next_level}}'">{{_('go_to_quiz_result')}}</button>
         {% if next_level %}
             <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="window.location = '/hedy/{{next_level}}'">{{_('advance_button')|replace("{level}", next_level)}}</button>
