@@ -24,11 +24,11 @@
         {% endfor %}
     </div>
     <div id="quiz_question_container">
-        <p class="italic text-3xl font-bold text-blue-900 text-center font-slab"></p> <!-- question -->
-        <div class="turn-pre-into-ace w-3/4 mx-auto my-4">
-            <pre class="quiz-question no-copy-button" level="{{ level }}"></pre> <!-- question code -->
+        <p class="italic text-3xl font-bold text-blue-900 text-center font-slab" id="quiz_question_title"></p> <!-- question -->
+        <div class="turn-pre-into-ace w-3/4 mx-auto my-4 hidden" id="quiz_question_container">
+            <pre class="quiz-question no-copy-button" id="quiz_question_code" level="{{ level }}"></pre> <!-- question code -->
         </div>
-        <div class="text-red-900 text-xl my-2 text-center font-slab font-semibold">
+        <div class="text-red-900 text-xl my-2 text-center font-slab font-semibold" id="quiz_question_hint">
             <!-- question hint -->
         </div>
         <div class="flex flex-row justify-center">
@@ -41,7 +41,7 @@
         <h1 class="p-8 font-bold text-4xl font-slab">{{_('end_quiz')}}</h1>
         <h3 class="p-8 font-semibold text-2xl italic font-slab">{{_('score')}}</h3>
         <div class="p-8 border-4 border-yellow-600 rounded-full h-24 w-24 flex items-center bg-yellow-300 justify-center">
-            <p class="text-yellow-600 font-bold text-4xl text-center font-slab ">
+            <p class="text-yellow-600 font-bold text-4xl text-center font-slab" id="quiz_end_score">
                 <!-- Dynamically load the score here in the end -->
             </p>
         </div>
