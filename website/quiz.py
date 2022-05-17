@@ -12,6 +12,16 @@ from flask_helpers import render_template
 
 MAX_ATTEMPTS = 3
 
+ANSWER_PARSER = {
+    1: 'A',
+    2: 'B',
+    3: 'C',
+    4: 'D',
+    5: 'E',
+    6: 'F'
+}
+
+
 def routes(app, database, achievements, quizzes):
     global DATABASE
     global ACHIEVEMENTS
@@ -46,70 +56,35 @@ def routes(app, database, achievements, quizzes):
         question = QUIZZES[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
         return jsonify(question), 200
 
-    # Quiz mode
-    # Fill in the filename as source
-    @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>', methods=['GET'], defaults={'attempt': 1})
-    @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>/<int:attempt>', methods=['GET'])
-    def get_quiz(level_source, question_nr, attempt):
+    @app.route('/quiz/submit_answer/', methods=["POST"])
+    def submit_answer():
+        body = request.json
+        if not isinstance(body, dict):
+            return gettext('ajax_error'), 400
+        if not isinstance(body.get('level'), int):
+            return gettext('level_invalid'), 400
+        if not isinstance(body.get('question'), int):
+            return gettext('question_invalid'), 400
+        if not isinstance(body.get('answer'), int):
+            return gettext('answer_invalid'), 400
 
-        if not is_quiz_enabled():
-            return quiz_disabled_error()
+        question = QUIZZES[g.lang].get_quiz_data_for_level_question(body.get('level'), body.get('question'), g.keyword_lang)
+        is_correct = True if question['correct_answer'] == ANSWER_PARSER.get(body.get('answer')) else False
 
-            # If we don't have an attempt ID yet, redirect to the start page
-        if not session.get('quiz-attempt-id'):
-            return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
-
-        if question_nr > QUIZZES[g.lang].get_highest_question_level(level_source):
-            return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
-
-        questions = QUIZZES[g.lang].get_quiz_data_for_level(level_source, g.keyword_lang)
-        question = QUIZZES[g.lang].get_quiz_data_for_level_question(level_source, question_nr, g.keyword_lang)
-
-        if not questions:
-            return no_quiz_data_error()
-
-        question_status = 'start' if attempt == 1 else 'false'
-
-        question_obj = question_options_for(question)
-
-        # Read from session. Don't remove yet: If the user refreshes the
-        # page here, we want to keep this same information in place (otherwise
-        # if we removed from the session here it would be gone on page refresh).
-        chosen_option = session.get('chosenOption', None)
-        wrong_answer_hint = session.get('wrong_answer_hint', None)
-
-        # Store the answer in the database. If we don't have a username,
-        # use the session ID as a username.
         username = current_user()['username'] or f'anonymous:{utils.session_id()}'
+        DATABASE.record_quiz_answer(session['quiz-attempt-id'], username=username, level=body.get('level'),
+                                    is_correct=is_correct, question_number=body.get('question'),
+                                    answer=body.get('answer'))
 
-        if attempt == 1:
-            is_correct = is_correct_answer(question, chosen_option)
-            # the answer is not yet answered so is_correct is None
-            DATABASE.record_quiz_answer(session['quiz-attempt-id'],
-                                        username=username,
-                                        level=level_source,
-                                        is_correct=is_correct,
-                                        question_number=question_nr,
-                                        answer=None)
+        if is_correct:
+            score = int(correct_answer_score(question))
+            correct_question_nrs = get_correctly_answered_question_nrs()
+            if body.get('question') not in correct_question_nrs:
+                session['total_score'] = session.get('total_score', 0) + score
+                session['correct_answer'] = session.get('correct_answer', 0) + 1
+                session['correctly_answered_questions_numbers'].append(body.get('question'))
 
-        quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-
-        # Todo TB -> We have to do some magic here to format() the keywords into the quiz
-
-        return render_template('quiz/quiz_question.html',
-                               level_source=level_source,
-                               quiz_answers=quiz_answers,
-                               questionStatus=question_status,
-                               questions=questions,
-                               question_options=question_obj,
-                               chosen_option=chosen_option,
-                               wrong_answer_hint=wrong_answer_hint,
-                               question=question,
-                               question_nr=question_nr,
-                               correct=session.get('correct_answer'),
-                               attempt=attempt,
-                               is_last_attempt=attempt == MAX_ATTEMPTS,
-                               lang=g.lang)
+        return jsonify({}), 200
 
     @app.route('/quiz/finished/<int:level>', methods=['GET'])
     def quiz_finished(level):
@@ -160,73 +135,6 @@ def routes(app, database, achievements, quizzes):
                                level=int(level) + 1,
                                next_assignment=1)
 
-    @app.route('/quiz/submit_answer/<int:level_source>/<int:question_nr>/<int:attempt>', methods=["POST"])
-    def submit_answer(level_source, question_nr, attempt):
-        if not is_quiz_enabled():
-            return quiz_disabled_error()
-
-        # If we don't have an attempt ID yet, redirect to the start page
-        if not session.get('quiz-attempt-id'):
-            return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
-
-        # Get the chosen option from the request form with radio buttons
-        # This looks like '1-B' or '5-C' or what have you.
-        #
-        # The number should always be the same as 'question_nr', or otherwise
-        # be 'question_nr - 1', so is unnecessary. But we'll leave it here for now.
-        if request.method == "POST":
-            # The value is a character and not a text
-            chosen_option = request.form.get("submit-button")
-
-            questions = QUIZZES[g.lang] .get_quiz_data_for_level(level_source, g.keyword_lang)
-            question = QUIZZES[g.lang] .get_quiz_data_for_level_question(level_source, question_nr, g.keyword_lang)
-
-            if not questions:
-                return no_quiz_data_error()
-
-            is_correct = is_correct_answer(question, chosen_option)
-
-            session['chosenOption'] = chosen_option
-            if not is_correct:
-                session['wrong_answer_hint'] = get_hint(question, chosen_option)
-            else:
-                # Correct answer -- make sure there is no hint on the next display page
-                session.pop('wrong_answer_hint', None)
-
-            # Store the answer in the database. If we don't have a username,
-            # use the session ID as a username.
-            username = current_user()['username'] or f'anonymous:{utils.session_id()}'
-
-            DATABASE.record_quiz_answer(session['quiz-attempt-id'],
-                                        username=username,
-                                        level=level_source,
-                                        is_correct=is_correct,
-                                        question_number=question_nr,
-                                        answer=chosen_option)
-
-            if is_correct:
-                score = int(correct_answer_score(question))
-                correct_question_nrs = get_correctly_answered_question_nrs()
-                if question_nr not in correct_question_nrs:
-                    session['total_score'] = session.get('total_score', 0) + score
-                    session['correct_answer'] = session.get('correct_answer', 0) + 1
-                    session['correctly_answered_questions_numbers'].append(question_nr)
-
-                quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-                return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source,
-                                        question_nr=question_nr, lang=g.lang))
-
-            # Not a correct answer. You can try again if you haven't hit your max attempts yet.
-            if attempt >= MAX_ATTEMPTS:
-                quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
-                return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source,
-                                        question_nr=question_nr, lang=g.lang, ))
-
-        # Redirect to the display page to try again
-        return redirect(
-            url_for('get_quiz', chosen_option=chosen_option, level_source=level_source, question_nr=question_nr,
-                    attempt=attempt + 1, lang=g.lang))
-
     @app.route('/quiz/feedback/<int:level_source>/<int:question_nr>', methods=["GET"])
     def quiz_feedback(level_source, question_nr):
         if not is_quiz_enabled():
@@ -247,7 +155,7 @@ def routes(app, database, achievements, quizzes):
         chosen_option = session.pop('chosenOption', None)
         wrong_answer_hint = session.pop('wrong_answer_hint', None)
 
-        answer_was_correct = is_correct_answer(question, chosen_option)
+        answer_was_correct = True if question['correct_answer'] == ANSWER_PARSER.get(chosen_option) else False
 
         index_option = index_from_letter(chosen_option)
         correct_option = get_correct_answer(question)
@@ -298,9 +206,6 @@ def quiz_disabled_error():
 def no_quiz_data_error():
     # Todo TB -> Somewhere in the near future we should localize these messages
     return utils.error_page(error=404, page_error='No quiz data found for this level', menu=False, iframe=True)
-
-def is_correct_answer(question, letter):
-    return question['correct_answer'] == letter
 
 
 def get_correct_answer(question):
