@@ -84,7 +84,7 @@ sections:
             Comment ont-ils appris de leurs erreurs ? Et bien sûr : Qu'ont-ils créé ?
             Les élèves sont souvent très fiers de leurs propres créations, il est donc souhaitable de garder un peu de temps pour donner à vos élèves l'occasion de montrer leur travail à leurs camarades de classe.
     key: enseigner
--   title: "Frequently made mistakes"
+-   title: "Erreurs fréquemment commises"
     key: "common_mistakes"
     intro: |
         Vous pouvez apprendre de vos erreurs, surtout en codage !
@@ -93,28 +93,28 @@ sections:
     levels:
     -   level: '1'
         sections:
-        -   title: "Students forget to type commandos"
+        -   title: "Les élèves oublient de taper les commandes"
             example:
                 error_text: |
-                    For example they type a sentence without using print.
+                    Par exemple, ils tapent une phrase sans `{print}`.
                 error_code: |
-                    Hedy can't print this
+                    Hedy ne peut pas afficher ça.
                 solution_text: |
-                    Teach your students to always start a line of code with a command.
+                    Apprenez à vos élèves à toujours commencer une ligne par une commande.
                 solution_code: |
                     imprimer Hedy peut imprimer ceci !
-        -   title: "Students use capitals when typing commands"
+        -   title: "Les élèves utilisent des majuscules lorsqu'ils tapent des commandes"
             example:
                 error_text: |
-                    Commands won't work if they are in capitals.
+                    Les commandes ne fonctionneront pas si elles sont en majuscules.
                 error_code: |
                     Demander Pourquoi mon code échoue-t-il ?
                     Imprime Parce que j'utilise des majuscules.
                 solution_text: |
-                    Remove the capitals.
+                    Enlevez les majuscules.
                 solution_code: |
-                    ask Why does my code work now?
-                    print Because I removed the capitals!
+                    {ask} Why does my code work now?
+                    {print} Because I removed the capitals!
         -   title: "Students use echo without ask"
             example:
                 error_text: |

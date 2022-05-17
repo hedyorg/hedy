@@ -431,6 +431,18 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
+  def test_float_addition_arabic(self):
+    code = textwrap.dedent("""\
+            print ١.٥ + ١.٥""")
+    expected = textwrap.dedent("""\
+            print(f'''{1.5 + 1.5}''')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=17,
+      expected=expected
+    )
+
   def test_float_addition_directly(self):
     code = textwrap.dedent("""\
             print 2.5 + 2.5""")
@@ -759,8 +771,8 @@ class TestsLevel12(HedyTester):
     expected = textwrap.dedent("""\
     actions = ['clap your hands', 'stomp your feet', 'shout Hurray']
     for action in actions:
-      step = 1 if int(1) < int(2) else -1
-      for i in range(int(1), int(2) + step, step):
+      step = 1 if 1 < 2 else -1
+      for i in range(1, 2 + step, step):
         print(f'''if youre happy and you know it''')
         print(f'''{action}''')
         time.sleep(0.1)

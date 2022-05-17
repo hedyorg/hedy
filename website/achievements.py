@@ -75,7 +75,7 @@ class Achievements:
 
     def add_single_achievement(self, username, achievement):
         self.initialize_user_data_if_necessary()
-        if achievement not in session['achieved'] and achievement in self.TRANSLATIONS.get_translations(session['lang']):
+        if achievement not in session['achieved'] and achievement in self.TRANSLATIONS.get_translations(session['lang']).get("achievements"):
             return self.verify_pushed_achievement(username, achievement)
         else:
             return None
