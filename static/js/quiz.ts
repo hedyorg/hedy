@@ -13,14 +13,13 @@ export function startQuiz(level: number) {
 export function loadQuestQuestion(level: number, question: number) {
     $.ajax({
       type: 'GET',
-      url: '/quiz/get-question/' + level + '/' + 2,
+      url: '/quiz/get-question/' + level + '/' + question,
       dataType: 'json'
     }).done(function(response: any) {
         $('#quiz_container').show();
         console.log(response);
         showQuestion(response.question.question_text);
         if (response.question.code) {
-            console.log("Er is een code!");
             showQuestionCode(response.question.code);
         }
         showAnswers(response.question.mp_choice_options);
@@ -34,7 +33,7 @@ function showQuestion(question: string) {
 }
 
 function showQuestionCode(code: string) {
-    $('#quiz_question_container').show();
+    $('#quiz_question_code_container').show();
     let editor = ace.edit("quiz_question_code");
     editor.setValue(code);
 }

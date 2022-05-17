@@ -22,11 +22,8 @@ export let theModalEditor: AceAjax.Editor;
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
-  let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
-    counter += 1;
     $(preview).addClass('text-lg rounded');
-    $(preview).attr('id', "code_block_" + counter);
     // We set the language of the editor to the current keyword_language -> needed when copying to main editor
     $(preview).attr('lang', <string>window.State.keyword_language);
     $(preview).addClass('overflow-x-hidden');
