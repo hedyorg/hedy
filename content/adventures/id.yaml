@@ -1,7 +1,7 @@
 adventures:
     default:
         name: "Introduction"
-        description: "Level explanation"
+        description: "Penjelasan level"
         default_save_name: "intro"
         levels:
             1:
@@ -16,7 +16,7 @@ adventures:
 
                     Tidak tahu apa yang mau dibuat? Pada tab-tab berikutnya kamu akan menemukan beberapa ide tentang apa yang bisa dibuat.
                 start_code: print halo dunia!
-                example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+                example_code: "## Contoh kode\n```\n{print} Hallo!\n{print} Selamat datang di Hedy!\n```\n"
                 story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
                 example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
@@ -663,6 +663,8 @@ adventures:
                     hoek is 90
                     turn hoek
                     forward 25
+                story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
+                example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
             8:
                 story_text: |-
                     ## Mari menggambar
