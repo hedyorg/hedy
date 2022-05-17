@@ -16,6 +16,7 @@ export function startQuiz(level: number) {
       data: JSON.stringify({
         level: level
       }),
+      contentType: 'application/json',
       dataType: 'json'
     }).done(function() {
         loadQuestQuestion(level, 1);

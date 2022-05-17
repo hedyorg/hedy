@@ -23,16 +23,22 @@ def routes(app, database, achievements, quizzes):
 
     @app.route('/quiz/initialize_user', methods=['POST'])
     def initialize_user():
+        print("Dit gaat goed")
         body = request.json
+        print(body)
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400
         if not isinstance(body.get('level'), int):
             return gettext('level_invalid'), 400
 
+        print("Session vullen")
+
         session['quiz-attempt-id'] = uuid.uuid4().hex
         session['total_score'] = 0
         session['correct_answer'] = 0
         session['correctly_answered_questions_numbers'] = []
+
+        print("Stats toevoegen")
 
         statistics.add(current_user()['username'], lambda id_: DATABASE.add_quiz_started(id_, body.get('level')))
 
