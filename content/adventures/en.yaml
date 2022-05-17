@@ -327,7 +327,7 @@ adventures:
                     age = {ask} 'How old are you?'
                     {if} age < 13
                         {print} 'You are younger than me!'
-                    else
+                    {else}
                         {print} 'You are older than me!'
                 story_text: |
                     ## Great, Greater, Greatest!
@@ -972,10 +972,10 @@ adventures:
                     actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                     {for} action {in} actions
                         {for} i {in} {range} 1 {to} 2
-                            {print} '{if} youre happy and you know it'
+                            {print} 'if youre happy and you know it'
                             {print} action
-                        {print} '{if} youre happy and you know it and you really want to show it'
-                        {print} '{if} youre happy and you know it'
+                        {print} 'if youre happy and you know it and you really want to show it'
+                        {print} 'if youre happy and you know it'
                         {print} action
                     ```
                 start_code: "# place your code here"
@@ -2970,7 +2970,7 @@ adventures:
                 story_text: |
                     ## Tic Tac Toe
                     In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
-                    You can use this knowledge in your new Taic Tac Toe game, like this:
+                    You can use this knowledge in your new Tic Tac Toe game, like this:
                 example_code: |
                     ## Example Hedy code
                     ```
@@ -3034,7 +3034,7 @@ adventures:
             15:
                 story_text: |
                     ## Tic Tac Toe
-                    In this level you can improve your Tic Tac Toe game with the {while} loop/ With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
+                    In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
                     Check it out:
                 example_code: |
                     ## Example Hedy code
