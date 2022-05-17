@@ -1,7 +1,10 @@
 import {modal} from "./modal";
 
 (function() {
-
+    $('.option-block').on("click", function () {
+        $('.option-block').removeClass('active');
+        $(this).addClass('active');
+    });
 })();
 
 
@@ -40,4 +43,8 @@ function showQuestionCode(code: string) {
 
 function showAnswers(options: any) {
     console.log(options);
+}
+
+export function answerQuestion(answer: number) {
+    console.log(answer);
 }
