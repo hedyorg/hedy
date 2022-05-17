@@ -42,7 +42,12 @@ function showQuestionCode(code: string) {
 }
 
 function showAnswers(options: any) {
-    console.log(options);
+    for (let i = 1; i < options.length+1; ++i) {
+        $('#answer_container_' + i).show();
+        $('#answer_text_' + i).text(options[i-1].option);
+        $('#answer_text_' + i).show();
+        // Todo -> If we have a code answer, show answer_code_i and remove backticks
+    }
 }
 
 export function answerQuestion(answer: number) {
