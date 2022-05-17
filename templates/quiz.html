@@ -14,12 +14,12 @@
     </div>
 </div>
 <div id="quiz_container">
-    <div class="arrow-steps clearfix">=
+    <div class="arrow-steps clearfix">
         {% for i in range(1, quiz_questions + 1)%}
            {% if i == 1 %}
-               <div class="step current"><span><a class="step-text" href="#">{{_('question')}} {{ i }}<br>{{_('attempt')}} 1</a></span></div>
+               <div class="step current" id="question_header_{{i}}"><span><a class="step-text">{{_('question')}} {{ i }}<br>{{_('attempt')}} 1</a></span></div>
            {% else %}
-               <div class="step"><span><a class="step-text" href="#">{{ i }}</a></span></div>
+               <div class="step" id="question_header_{{i}}"><span><a class="step-text">{{ i }}</a></span></div>
            {% endif %}
         {% endfor %}
     </div>
