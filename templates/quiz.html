@@ -37,10 +37,22 @@
         </div>
     </div>
 </div>
-<div id="quiz_results_container">
+<div id="quiz_results_container" class="hidden">
         <!-- We can get this dynamically using the AJAX calls -->
 </div>
-<div id="end_quiz_container">
-        <!-- This is a static page -> already place here and keep hidden -->
-        <!-- We do have to keep in mind to parse the end score of the level -->
+<div id="end_quiz_container" class="hidden">
+<div class="flex flex-col justify-center items-center p-8">
+    <h1 class="p-8 font-bold text-4xl font-slab">{{_('end_quiz')}}</h1>
+    <h3 class="p-8 font-semibold text-2xl italic font-slab">{{_('score')}}</h3>
+    <div class="p-8 border-4 border-yellow-600 rounded-full h-24 w-24 flex items-center bg-yellow-300 justify-center">
+        <p class="text-yellow-600 font-bold text-4xl text-center font-slab ">
+            <!-- Dynamically load the score here in the end -->
+        </p>
+    </div>
+    </div>
+    <div class="p-10 button-bar border-t-8 border-green-600">
+        {% if next_level %}
+            <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}">{{_('advance_button')|replace("{level}", next_level)}}</button>
+        {% endif %}
+    </div>
 </div>
