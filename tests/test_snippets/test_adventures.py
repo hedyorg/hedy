@@ -11,6 +11,7 @@ from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
+unique_snippets_table = set()
 
 def collect_snippets(path):
   Hedy_snippets = []
@@ -37,6 +38,13 @@ def collect_snippets(path):
                         code_snippet_counter += 1
                         try:
                             code = tag.contents[0].contents[0]
+                            if hash(code) in unique_snippets_table:
+                                print("Identical code already being tested...")
+                                continue
+                            else:
+                                unique_snippets_table.add(hash(code))
+                                print(unique_snippets_table)
+                                continue
                         except:
                             print("Code container is empty...")
                             continue
