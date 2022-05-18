@@ -392,19 +392,29 @@ class Database:
         else:
             return None
 
+    def get_all_achievements(self):
+        return ACHIEVEMENTS.scan()
+
     def add_achievement_to_username(self, username, achievement):
+        new_user = False
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
+            new_user = True
             user_achievements = {'username': username}
         if 'achieved' not in user_achievements:
             user_achievements['achieved'] = []
         if achievement not in user_achievements['achieved']:
             user_achievements['achieved'].append(achievement)
             ACHIEVEMENTS.put(user_achievements)
+        if new_user:
+            return True
+        return False
 
     def add_achievements_to_username(self, username, achievements):
+        new_user = False
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
+            new_user = True
             user_achievements = {'username': username}
         if 'achieved' not in user_achievements:
             user_achievements['achieved'] = []
@@ -413,6 +423,9 @@ class Database:
                 user_achievements['achieved'].append(achievement)
         user_achievements['achieved'] = list(dict.fromkeys(user_achievements['achieved']))
         ACHIEVEMENTS.put(user_achievements)
+        if new_user:
+            return True
+        return False
 
     def add_commands_to_username(self, username, commands):
         user_achievements = ACHIEVEMENTS.get({'username': username})
