@@ -1219,7 +1219,7 @@ def teacher_tutorial_steps(step):
 def get_tutorial_translation(step):
     # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
     if step == "code_snippet":
-        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
+        return jsonify({'code': gettext('tutorial_code_snippet'), 'output': gettext('tutorial_code_output')}), 200
     try:
         step = int(step)
     except ValueError:
