@@ -286,49 +286,49 @@
     explanation: "نستعمل الاشارة `>` لفحص ما اذا كان الرقم الأول أكبر من الرقم الثاني."
     example: "على سبيل المثال: العمر > ١٢"
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age > 13
-            {print} 'You are older than me!'
--   name: "Equal"
-    explanation: "We use the `==` to check if two things are the same."
-    example: "For example: answer == 25"
+        عمرك = {ask} "ما عمرك؟"
+        {if} عمرك > ١٣
+            {print} "أنت أكبر مني!"
+-   name: "المساواة"
+    explanation: "نستخدم علامتين مساواة متلاحقتين `==` عند فحص اذا ما كان شيئان متساويين."
+    example: "على سبيل المثال: اجابتك == ٢٥"
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
--   name: "Not equal"
-    explanation: "We use the `!=` to check if two things are not the same. "
-    example: "For example: answer != 25"
+        اجابتك = {ask} "ما ناتج ٥ ضرب ٥؟"
+        {if} اجابتك == ٢٥
+            {print} "الجواب صحيح!"
+-   name: "عدم المساواة"
+    explanation: "نستعمل العلامة `!=` لفحص ما اذا كان شيء ما *لا يساوي* شيء اخر. "
+    example: "على سبيل المثال: اجابتك != ٢٥"
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
+        اجابتك = {ask} "ما ناتج ٥ ضرب ٥؟"
+        {if} اجابتك != ٢٥
+            {print} "الجواب غير صحيح!"
 
--   name: "Smaller {or} equal"
-    explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
-    example: "For example: age <= 12"
+-   name: "أصغر أو يساوي"
+    explanation: "نستعمل العلامة `<=` عندما نريد فحص ما اذا كان الرقم الأول أصغر من أو مساوياً للرقم الثاني."
+    example: "على سبيل المثال: `عمرك <= ١٢`."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
+        عمرك = {ask} "ما عمرك؟"
+        {if} عمرك <= ١٢
+            {print} "أنت أصغر مني!"
 
--   name: "Bigger or equal"
-    explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
-    example: "For example: age >= 14"
+-   name: "أكبر أو يساوي"
+    explanation: "نستعمل علامة `>=` عندما نريد فحص ما اذا كان الرقم الأول أكبر من أو مساوياً للرقم الثاني."
+    example: "على سبيل المثال: عمرك >=١٤"
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+        عمرك = {ask} "ما عمرك؟"
+        {if} عمرك >= ١٤
+            {print} "أنت أكبر مني!"
 15:
 -   name: "{while}"
-    explanation: "We can use the `{while}` loop with not equal"
-    example: "Example: {while} correct_answer != 25"
+    explanation: "نستطيع استعمال دورة التكرار `{while}` مع علامة عدم المساواة"
+    example: "مثال: {while} اجابتك != ٢٥"
     demo_code: |-
-        answer = 0
-        {while} answer != 25
-            answer = {ask} 'What is 5 times 5?'
-        {print} 'A correct answer has been given'
--   name: "Smaller {while}"
+        الاجابة = ٠
+        {while} الاجابة != ٢٥
+            الاجابة = {ask} "ما ناتج ٥ ضرب ٥؟"
+        {print} "تم الاجابة بشكل صحيح"
+-   name: "{while} أصغر"
     explanation: "We can also use the `{while}` loop with `<` and `>`. "
     example: "For example: {while} count < 3"
     demo_code: |-
