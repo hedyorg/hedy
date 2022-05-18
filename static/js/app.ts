@@ -40,6 +40,7 @@ export let theModalEditor: AceAjax.Editor;
     } else if ($(preview).hasClass('parsons')) {
       exampleEditor.setOptions({
         minLines: 1,
+        readOnly: false,
         showGutter: false,
         showPrintMargin: false,
         highlightActiveLine: false
