@@ -82,6 +82,9 @@ function speakAloudStep() {
 }
 
 function nextLevelStep() {
+  removeBorder("speak_dropdown");
+  $('#speak_dropdown').removeClass('z-40');
+
   $('#next_level_button').addClass("z-40");
   addHighlightBorder("next_level_button");
 
