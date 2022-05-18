@@ -126,7 +126,7 @@
           <button id="debug_button" class="green-btn" onclick="hedyApp.startDebug()">🐞</button>
           <button id="debug_restart" class="green-btn hidden" onclick="hedyApp.resetDebug()">🔄</button>
           <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
-            <button id="debug_continue" class="green-btn hidden" onclick="hedyApp.incrementDebugLine()"><div class="{% if g.dir == "rtl" %} rotate-180{% endif %}">⏩</div></button>
+            <button id="debug_continue" class="green-btn hidden" onclick="hedyApp.incrementDebugLine()"><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
         </div>
         {% if show_edit_button %}
             <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn">{{_('edit_code_button')}}</button>
