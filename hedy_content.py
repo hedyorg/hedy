@@ -1,9 +1,6 @@
 import copy
 import os
 from babel import Locale
-from flask import g
-
-from utils import is_debug_mode
 from website.yaml_file import YamlFile
 import iso3166
 
@@ -65,7 +62,11 @@ for l in sorted(languages):
 # Load and cache all keyword yamls
 KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml')
+    KEYWORDS[lang] = dict(YamlFile.for_file(f'content/keywords/{lang}.yaml'))
+    for k, v in KEYWORDS[lang].items():
+        if type(v) == str and "|" in v:
+            # when we have several options, pick the first one as default
+            KEYWORDS[lang][k] = v.split('|')[0]
 
 
 class Commands:

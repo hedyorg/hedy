@@ -2,7 +2,7 @@
 
 _SPACE: " "+
 _COMMA: _SPACE? (","|"،"|"，") _SPACE? //support latin and arabic and Chinese commas and always allow these to be surrounded by spaces
-_COLON: ":"
+_COLON: _SPACE? ":" _SPACE?
 _LEFT_BRACKET : _SPACE? "(" _SPACE?
 _RIGHT_BRACKET : _SPACE? ")" _SPACE?
 _LEFT_SQUARE_BRACKET :  _SPACE? "[" _SPACE?
@@ -46,7 +46,9 @@ NEGATIVE_NUMBER: _MINUS /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
 NUMBER: /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
 INT: /[\p{Nl}\p{Nd}\p{No}]+/
 
-text: /([^\n#]+)/ -> text //anything can be parsed except for a newline and a comment hash
+text: /([^\n#ـ])([^\n#]*)/ -> text //anything can be parsed except for a newline and a comment hash
+// to properly deal with tatweels, we also need to prevent text from starting with a tatweel,
+// otherwise we might parse  قولـــ  as the printing of ___ (see #2699)
 textwithoutspaces: /([^\n #]+)/ -> text //anything can be parsed except for a new line, spaces and a comment hash
 
 

@@ -7,6 +7,108 @@ from tests.Tester import HedyTester
 class TestsLevel12(HedyTester):
   level = 12
 
+  #
+  # sleep tests
+  #
+  def test_sleep_with_number_variable(self):
+    code = textwrap.dedent("""\
+      n is 2
+      sleep n""")
+    expected = HedyTester.dedent(
+      "n = 2",
+      HedyTester.sleep_command_transpiled("n"))
+
+    self.multi_level_tester(code=code, expected=expected)
+
+  def test_sleep_with_string_variable_gives_error(self):
+    code = textwrap.dedent("""\
+      n is "test"
+      sleep n""")
+
+    self.multi_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+
+  def test_sleep_with_list_access(self):
+    code = textwrap.dedent("""\
+      n is 1, 2, 3
+      sleep n at 1""")
+    expected = HedyTester.dedent(
+      "n = [1, 2, 3]",
+      HedyTester.sleep_command_transpiled("n[1-1]"))
+
+    self.multi_level_tester(max_level=15, code=code, expected=expected)
+
+  def test_sleep_with_list_random(self):
+    code = textwrap.dedent("""\
+      n is 1, 2, 3
+      sleep n at random""")
+    expected = HedyTester.dedent(
+      "n = [1, 2, 3]",
+      HedyTester.sleep_command_transpiled("random.choice(n)"))
+
+    self.multi_level_tester(max_level=15, code=code, expected=expected)
+
+  def test_sleep_with_list_gives_error(self):
+    code = textwrap.dedent("""\
+      n is 1, 2, 3
+      sleep n""")
+
+    self.multi_level_tester(max_level=15, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+
+  def test_for_loop_arabic(self):
+    code = textwrap.dedent("""\
+    for دورة in range ١ to ٥
+        print دورة""")
+
+    expected = textwrap.dedent("""\
+    step = 1 if 1 < 5 else -1
+    for v637d5dd1f16a4cc1d923588cb55ede49 in range(1, 5 + step, step):
+      print(f'''{v637d5dd1f16a4cc1d923588cb55ede49}''')
+      time.sleep(0.1)""")
+
+    self.multi_level_tester(
+      max_level=16,
+      code=code,
+      expected=expected,
+      expected_commands=['for', 'print'])
+
+  def test_sleep_with_input_variable(self):
+    code = textwrap.dedent("""\
+      n is ask "how long"
+      sleep n""")
+    expected = HedyTester.dedent("""\
+      n = input(f'''how long''')
+      try:
+        n = int(n)
+      except ValueError:
+        try:
+          n = float(n)
+        except ValueError:
+          pass""",
+      HedyTester.sleep_command_transpiled("n"))
+
+    self.multi_level_tester(max_level=17, code=code, expected=expected)
+
+  def test_sleep_with_calc(self):
+    code = textwrap.dedent("""\
+      n is 1 * 2 + 3
+      sleep n""")
+    expected = HedyTester.dedent(
+      "n = 1 * 2 + 3",
+      HedyTester.sleep_command_transpiled("n"))
+
+    self.multi_level_tester(code=code, expected=expected)
+
+  def test_sleep_with_float_gives_error(self):
+    code = textwrap.dedent("""\
+      n is 1.5
+      sleep n""")
+
+    self.multi_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
+
+
+  #
+  # if tests
+  #
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
     naam = 'Hedy'
@@ -269,14 +371,12 @@ class TestsLevel12(HedyTester):
     voorspellingen = 'je wordt rijk' , 'je wordt verliefd' , 'je glijdt uit over een bananenschil'
     print 'Ik pak mijn glazen bol erbij...'
     print 'Ik zie... Ik zie...'
-    sleep 2
     print voorspellingen at random""")
 
     expected = textwrap.dedent("""\
     voorspellingen = ['je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil']
     print(f'''Ik pak mijn glazen bol erbij...''')
     print(f'''Ik zie... Ik zie...''')
-    time.sleep(2)
     print(f'''{random.choice(voorspellingen)}''')""")
 
     list = ['je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil']
@@ -341,6 +441,18 @@ class TestsLevel12(HedyTester):
             print 2 + 2""")
     expected = textwrap.dedent("""\
             print(f'''{2 + 2}''')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=17,
+      expected=expected
+    )
+
+  def test_float_addition_arabic(self):
+    code = textwrap.dedent("""\
+            print ١.٥ + ١.٥""")
+    expected = textwrap.dedent("""\
+            print(f'''{1.5 + 1.5}''')""")
 
     self.multi_level_tester(
       code=code,
@@ -676,8 +788,8 @@ class TestsLevel12(HedyTester):
     expected = textwrap.dedent("""\
     actions = ['clap your hands', 'stomp your feet', 'shout Hurray']
     for action in actions:
-      step = 1 if int(1) < int(2) else -1
-      for i in range(int(1), int(2) + step, step):
+      step = 1 if 1 < 2 else -1
+      for i in range(1, 2 + step, step):
         print(f'''if youre happy and you know it''')
         print(f'''{action}''')
         time.sleep(0.1)

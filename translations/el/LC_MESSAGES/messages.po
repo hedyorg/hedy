@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-02 16:01+0200\n"
-"PO-Revision-Date: 2022-05-02 14:01+0000\n"
+"POT-Creation-Date: 2022-05-17 16:19+0200\n"
+"PO-Revision-Date: 2022-05-17 14:19+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -11,32 +11,33 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12.1\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: app.py:442
 #, fuzzy
 msgid "program_contains_error"
 msgstr "This program contains an error, are you sure you want to share it?"
 
-#: app.py:601
+#: app.py:598
 #, fuzzy
 msgid "title_achievements"
 msgstr "Hedy - My achievements"
 
-#: app.py:619 app.py:1032 website/teacher.py:362 website/teacher.py:371
+#: app.py:615 app.py:733 app.py:1050 website/teacher.py:362
+#: website/teacher.py:371
 msgid "not_teacher"
 msgstr "Φαίνεται πως δεν είσαι καθηγητής!"
 
-#: app.py:622
+#: app.py:618
 msgid "not_enrolled"
 msgstr "Φαίνεται πως δεν είστε σ' αυτήν την τάξη!"
 
-#: app.py:661
+#: app.py:657
 #, fuzzy
 msgid "title_programs"
 msgstr "Hedy - My programs"
 
-#: app.py:671 app.py:681 app.py:685 app.py:700 app.py:949 app.py:1308
+#: app.py:667 app.py:677 app.py:681 app.py:696 app.py:977 app.py:1410
 #: website/admin.py:17 website/admin.py:25 website/admin.py:95
 #: website/admin.py:112 website/admin.py:130 website/auth.py:712
 #: website/auth.py:739 website/statistics.py:86
@@ -44,111 +45,316 @@ msgstr "Hedy - My programs"
 msgid "unauthorized"
 msgstr "You don't have access rights for this page"
 
-#: app.py:711
+#: app.py:707
 msgid "minutes"
 msgstr "λεπτά"
 
-#: app.py:714
+#: app.py:710
 msgid "hours"
 msgstr "ώρες"
 
-#: app.py:717
+#: app.py:713
 msgid "days"
 msgstr "ημέρες"
 
-#: app.py:720
+#: app.py:716
 #, fuzzy
 msgid "ago"
 msgstr "{time} ago"
 
-#: app.py:735 app.py:737 app.py:867 app.py:889 app.py:891
-msgid "no_such_level"
-msgstr "Δεν υπάρχει τέτοιο επίπεδο Hedy!"
-
-#: app.py:745 app.py:752 app.py:821 app.py:827
-msgid "no_such_program"
-msgstr "Δεν υπάρχει τέτοιο πρόγραμμα Hedy!"
-
-#: app.py:776
-msgid "level_not_class"
-msgstr "Είσαι σε μια τάξη στην οποία δεν είναι ακόμα διαθέσιμο αυτό το επίπεδο"
-
-#: app.py:872 website/teacher.py:420 website/teacher.py:436
-#: website/teacher.py:465 website/teacher.py:491
-msgid "no_such_adventure"
-msgstr "Αυτή η περιπέτεια δεν υπάρχει!"
-
-#: app.py:900
-msgid "page_not_found"
-msgstr "Δεν μπορούμε να βρούμε αυτήν τη σελίδα!"
-
-#: app.py:920
-#, fuzzy
-msgid "title_signup"
-msgstr "Hedy - Create an account"
-
-#: app.py:927
-#, fuzzy
-msgid "title_login"
-msgstr "Hedy - Login"
-
-#: app.py:934
-#, fuzzy
-msgid "title_recover"
-msgstr "Hedy - Recover account"
-
-#: app.py:950
-#, fuzzy
-msgid "title_reset"
-msgstr "Hedy - Reset password"
-
-#: app.py:976
-#, fuzzy
-msgid "title_my-profile"
-msgstr "Hedy - My account"
-
-#: app.py:992
-#, fuzzy
-msgid "title_learn-more"
-msgstr "Hedy - Learn more"
-
-#: app.py:998
-#, fuzzy
-msgid "title_privacy"
-msgstr "Hedy - Privacy terms"
-
-#: app.py:1005
-#, fuzzy
-msgid "title_landing-page"
-msgstr "Welcome to Hedy!"
-
-#: app.py:1007
-msgid "not_user"
-msgstr "Φαίνεται ότι δεν είστε συνδεδεμένοι!"
-
-#: app.py:1028
+#: app.py:747 app.py:1067
 #, fuzzy
 msgid "title_for-teacher"
 msgstr "Hedy - For teachers"
 
-#: app.py:1039
+#: app.py:764 app.py:766 app.py:895 app.py:917 app.py:919
+msgid "no_such_level"
+msgstr "Δεν υπάρχει τέτοιο επίπεδο Hedy!"
+
+#: app.py:774 app.py:781 app.py:849 app.py:855
+msgid "no_such_program"
+msgstr "Δεν υπάρχει τέτοιο πρόγραμμα Hedy!"
+
+#: app.py:805
+msgid "level_not_class"
+msgstr "Είσαι σε μια τάξη στην οποία δεν είναι ακόμα διαθέσιμο αυτό το επίπεδο"
+
+#: app.py:900 website/teacher.py:420 website/teacher.py:436
+#: website/teacher.py:465 website/teacher.py:491
+msgid "no_such_adventure"
+msgstr "Αυτή η περιπέτεια δεν υπάρχει!"
+
+#: app.py:928
+msgid "page_not_found"
+msgstr "Δεν μπορούμε να βρούμε αυτήν τη σελίδα!"
+
+#: app.py:948
+#, fuzzy
+msgid "title_signup"
+msgstr "Hedy - Create an account"
+
+#: app.py:955
+#, fuzzy
+msgid "title_login"
+msgstr "Hedy - Login"
+
+#: app.py:962
+#, fuzzy
+msgid "title_recover"
+msgstr "Hedy - Recover account"
+
+#: app.py:978
+#, fuzzy
+msgid "title_reset"
+msgstr "Hedy - Reset password"
+
+#: app.py:1004
+#, fuzzy
+msgid "title_my-profile"
+msgstr "Hedy - My account"
+
+#: app.py:1020
+#, fuzzy
+msgid "title_learn-more"
+msgstr "Hedy - Learn more"
+
+#: app.py:1026
+#, fuzzy
+msgid "title_privacy"
+msgstr "Hedy - Privacy terms"
+
+#: app.py:1033
+#, fuzzy
+msgid "title_landing-page"
+msgstr "Welcome to Hedy!"
+
+#: app.py:1035
+msgid "not_user"
+msgstr "Φαίνεται ότι δεν είστε συνδεδεμένοι!"
+
+#: app.py:1042
 #, fuzzy
 msgid "title_start"
 msgstr "Hedy - A gradual programming language"
 
-#: app.py:1100
+#: app.py:1129
 #, fuzzy
 msgid "title_explore"
 msgstr "Hedy - Explore"
 
-#: app.py:1120 app.py:1122
+#: app.py:1149 app.py:1151
 msgid "translate_error"
 msgstr ""
 "Κάτι πήγε στραβά κατά τη μετάφραση του κώδικα. Δοκίμασε να εκτελέσεις τον"
 " κώδικα για να δεις αν έχει κάποιο σφάλμα. Ο κώδικας με σφάλματα δεν "
 "μπορεί να μεταφραστεί."
 
-#: app.py:1247 website/auth.py:278 website/auth.py:333 website/auth.py:469
+#: app.py:1156 app.py:1186
+#, fuzzy
+msgid "tutorial_start_title"
+msgstr "Welcome to Hedy!"
+
+#: app.py:1156
+#, fuzzy
+msgid "tutorial_start_message"
+msgstr "In this tutorial we will explain all the Hedy features step-by-step."
+
+#: app.py:1158
+#, fuzzy
+msgid "tutorial_editor_title"
+msgstr "The code editor"
+
+#: app.py:1158
+#, fuzzy
+msgid "tutorial_editor_message"
+msgstr "In this window you write all the code, try typing something!"
+
+#: app.py:1160
+#, fuzzy
+msgid "tutorial_output_title"
+msgstr "The output window"
+
+#: app.py:1160
+#, fuzzy
+msgid "tutorial_output_message"
+msgstr "The result of the code you execute will be shown here"
+
+#: app.py:1162
+#, fuzzy
+msgid "tutorial_run_title"
+msgstr "The run button"
+
+#: app.py:1162
+#, fuzzy
+msgid "tutorial_run_message"
+msgstr "With this button you can run your program! Shall we give it a try?"
+
+#: app.py:1164
+#, fuzzy
+msgid "tutorial_tryit_title"
+msgstr "Try it out!"
+
+#: app.py:1164
+#, fuzzy
+msgid "tutorial_tryit_message"
+msgstr "Έλαβες μια πρόσκληση για να συμμετάσχεις στην τάξη"
+
+#: app.py:1166
+#, fuzzy
+msgid "tutorial_nextlevel_title"
+msgstr "Απόκρυψη των σημειώσεων"
+
+#: app.py:1166
+#, fuzzy
+msgid "tutorial_nextlevel_message"
+msgstr "Έλαβες μια πρόσκληση για να συμμετάσχεις στην τάξη"
+
+#: app.py:1168
+#, fuzzy
+msgid "tutorial_leveldefault_title"
+msgstr "Level explanation"
+
+#: app.py:1168
+#, fuzzy
+msgid "tutorial_leveldefault_message"
+msgstr ""
+"The first tab always contains the level explanation. In each level new "
+"commands will be explained here."
+
+#: app.py:1170
+#, fuzzy
+msgid "tutorial_adventures_title"
+msgstr "Προσαρμογή περιπέτειας"
+
+#: app.py:1170
+#, fuzzy
+msgid "tutorial_adventures_message"
+msgstr "Προσαρμογή περιπέτειας"
+
+#: app.py:1172
+#, fuzzy
+msgid "tutorial_quiz_title"
+msgstr "Quiz"
+
+#: app.py:1172
+#, fuzzy
+msgid "tutorial_quiz_message"
+msgstr ""
+"At the end of each level you can make the quiz. This way you can verify "
+"if you understand everything."
+
+#: app.py:1174
+#, fuzzy
+msgid "tutorial_saveshare_title"
+msgstr "Saving & sharing"
+
+#: app.py:1174
+#, fuzzy
+msgid "tutorial_saveshare_message"
+msgstr "You can save and share all your created programs with other Hedy users."
+
+#: app.py:1176
+#, fuzzy
+msgid "tutorial_cheatsheet_title"
+msgstr "Απόκρυψη των σημειώσεων"
+
+#: app.py:1176
+#, fuzzy
+msgid "tutorial_cheatsheet_message"
+msgstr ""
+"If you forgot a command you can always use the cheatsheet. It shows a "
+"list of all commands you can use in the current level."
+
+#: app.py:1178 app.py:1198
+#, fuzzy
+msgid "tutorial_end_title"
+msgstr "The end!"
+
+#: app.py:1178
+#, fuzzy
+msgid "tutorial_end_message"
+msgstr "Click on 'next step' to really start coding with Hedy!"
+
+#: app.py:1180 app.py:1200
+#, fuzzy
+msgid "tutorial_title_not_found"
+msgstr "Δεν μπορούμε να βρούμε αυτήν τη σελίδα!"
+
+#: app.py:1180 app.py:1200
+#, fuzzy
+msgid "tutorial_message_not_found"
+msgstr "Έλαβες μια πρόσκληση για να συμμετάσχεις στην τάξη"
+
+#: app.py:1186
+#, fuzzy
+msgid "teacher_tutorial_start_message"
+msgstr "Έλαβες μια πρόσκληση για να συμμετάσχεις στην τάξη"
+
+#: app.py:1188
+#, fuzzy
+msgid "tutorial_class_title"
+msgstr "Απόκρυψη των σημειώσεων"
+
+#: app.py:1188
+#, fuzzy
+msgid "tutorial_class_message"
+msgstr "Προσαρμογή περιπέτειας"
+
+#: app.py:1190
+#, fuzzy
+msgid "tutorial_customize_class_title"
+msgstr "Απόκρυψη των σημειώσεων"
+
+#: app.py:1190
+#, fuzzy
+msgid "tutorial_customize_class_message"
+msgstr "Προσαρμογή περιπέτειας"
+
+#: app.py:1192
+#, fuzzy
+msgid "tutorial_own_adventures_title"
+msgstr "Προσαρμογή περιπέτειας"
+
+#: app.py:1192
+#, fuzzy
+msgid "tutorial_own_adventures_message"
+msgstr "Προσαρμογή περιπέτειας"
+
+#: app.py:1194
+#, fuzzy
+msgid "tutorial_accounts_title"
+msgstr "Προσαρμογή περιπέτειας"
+
+#: app.py:1194
+#, fuzzy
+msgid "tutorial_accounts_message"
+msgstr "Προσαρμογή περιπέτειας"
+
+#: app.py:1196
+#, fuzzy
+msgid "tutorial_documentation_title"
+msgstr "Απόκρυψη των σημειώσεων"
+
+#: app.py:1196
+#, fuzzy
+msgid "tutorial_documentation_message"
+msgstr "Προσαρμογή περιπέτειας"
+
+#: app.py:1198
+#, fuzzy
+msgid "teacher_tutorial_end_message"
+msgstr "Έλαβες μια πρόσκληση για να συμμετάσχεις στην τάξη"
+
+#: app.py:1208
+#, fuzzy
+msgid "tutorial_code_snippet"
+msgstr "Απόκρυψη των σημειώσεων"
+
+#: app.py:1212 app.py:1222
+msgid "invalid_tutorial_step"
+msgstr ""
+
+#: app.py:1349 website/auth.py:278 website/auth.py:333 website/auth.py:469
 #: website/auth.py:494 website/auth.py:524 website/auth.py:633
 #: website/auth.py:671 website/auth.py:718 website/auth.py:745
 #: website/teacher.py:89 website/teacher.py:124 website/teacher.py:196
@@ -157,27 +363,27 @@ msgstr ""
 msgid "ajax_error"
 msgstr "Παρουσιάστηκε κάποιο σφάλμα, παρακαλώ ξαναπροσπάθησε."
 
-#: app.py:1250
+#: app.py:1352
 msgid "image_invalid"
 msgstr "Η εικόνα σου δεν είναι έγκυρη"
 
-#: app.py:1252
+#: app.py:1354
 msgid "personal_text_invalid"
 msgstr "Το προσωπικό σου κείμενο δεν είναι έγκυρο"
 
-#: app.py:1254 app.py:1260
+#: app.py:1356 app.py:1362
 msgid "favourite_program_invalid"
 msgstr "Το αγαπημένο σου πρόγραμμα δεν είναι έγκυρο"
 
-#: app.py:1274 app.py:1275
+#: app.py:1376 app.py:1377
 msgid "public_profile_updated"
 msgstr "Το δημόσιο προφίλ έχει ενημερωθεί."
 
-#: app.py:1312 app.py:1338
+#: app.py:1414 app.py:1439
 msgid "user_not_private"
 msgstr "Αυτός ο χρήστης δεν υπάρχει ή δεν έχει δημόσιο προφίλ"
 
-#: app.py:1346
+#: app.py:1447
 msgid "invalid_teacher_invitation_code"
 msgstr ""
 "Ο κωδικός πρόσκλησης καθηγητή δεν είναι έγκυρος. Για να γίνετε καθηγητής,"
@@ -410,7 +616,7 @@ msgstr "ένα μπλοκ μέσα σε ένα μπλοκ"
 
 #: content/error-messages.txt:39
 msgid "or"
-msgstr "ή"
+msgstr "or"
 
 #: content/error-messages.txt:40
 msgid "number"
@@ -448,11 +654,11 @@ msgstr "Αποθηκεύσεις Προγραμμάτων"
 msgid "programs_submitted"
 msgstr "Υποβολές προγραμμάτων"
 
-#: templates/achievements.html:13
+#: templates/achievements.html:13 templates/achievements.html:25
 msgid "teacher"
 msgstr "Καθηγητής"
 
-#: templates/achievements.html:16
+#: templates/achievements.html:16 templates/achievements.html:53
 msgid "hidden"
 msgstr "Κρυμμένο"
 
@@ -523,8 +729,8 @@ msgid "remove_student_prompt"
 msgstr "Είσαι βέβαιος/α ότι θέλεις να αφαιρέσεις τον μαθητή από την τάξη;"
 
 #: templates/class-overview.html:84 templates/class-overview.html:120
-#: templates/customize-adventure.html:52 templates/for-teachers.html:34
-#: templates/for-teachers.html:44
+#: templates/customize-adventure.html:52 templates/for-teachers.html:43
+#: templates/for-teachers.html:53
 msgid "remove"
 msgstr "Αφαίρεση"
 
@@ -537,7 +743,7 @@ msgstr "Link to join class"
 msgid "customize_class"
 msgstr "Προσαρμογή της τάξης"
 
-#: templates/class-overview.html:93 templates/for-teachers.html:23
+#: templates/class-overview.html:93 templates/for-teachers.html:32
 msgid "class_name_prompt"
 msgstr "Παρακαλώ δώσε το όνομα της τάξης"
 
@@ -616,7 +822,12 @@ msgstr "Συμμετοχή σε τάξη"
 msgid "back_to_class"
 msgstr "Επιστροφή στην τάξη"
 
-#: templates/code-page.html:25 templates/code-page.html:35
+#: templates/code-page.html:8 templates/for-teachers.html:9
+#, fuzzy
+msgid "next_step_tutorial"
+msgstr "Next step >>>"
+
+#: templates/code-page.html:35 templates/code-page.html:45
 #: templates/customize-class.html:28 templates/customize-class.html:64
 #: templates/customize-class.html:71 templates/customize-class.html:95
 #: templates/level-page.html:6 templates/level-page.html:11
@@ -661,7 +872,7 @@ msgstr "Επίλεξε τάξη"
 msgid "reset_view"
 msgstr "Επαναφορά"
 
-#: templates/create-accounts.html:36 templates/for-teachers.html:55
+#: templates/create-accounts.html:36 templates/for-teachers.html:64
 msgid "create_accounts"
 msgstr "Δημιουργία πολλών λογαριασμών"
 
@@ -677,14 +888,14 @@ msgstr "Είσαι σίγουρος ότι θέλεις να ενημερώσε�
 msgid "general_settings"
 msgstr "Γενικές ρυθμίσεις"
 
-#: templates/customize-adventure.html:12 templates/for-teachers.html:9
-#: templates/for-teachers.html:30
+#: templates/customize-adventure.html:12 templates/for-teachers.html:18
+#: templates/for-teachers.html:39
 msgid "name"
 msgstr "Όνομα"
 
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:20 templates/explore.html:46
-#: templates/for-teachers.html:31 templates/programs.html:12
+#: templates/for-teachers.html:40 templates/programs.html:12
 #: templates/programs.html:39 templates/programs.html:47
 msgid "level"
 msgstr "Επίπεδο"
@@ -703,6 +914,11 @@ msgstr ""
 "Εάν θέλεις να εμφανίσεις πραγματικά αποσπάσματα κώδικα, για παράδειγμα "
 "για να δώσεις στον μαθητή ένα πρότυπο ή παράδειγμα του κώδικα. "
 "Χρησιμοποίησε προηγούμενες άγκυρες όπως αυτή:"
+
+#: templates/customize-adventure.html:36
+#, fuzzy
+msgid "hello_world_snippet"
+msgstr "Απόκρυψη των σημειώσεων"
 
 #: templates/customize-adventure.html:39
 msgid "adventure_exp_3"
@@ -744,7 +960,7 @@ msgstr "Προεπισκόπηση"
 msgid "save"
 msgstr "Αποθήκευση"
 
-#: templates/customize-adventure.html:52 templates/for-teachers.html:44
+#: templates/customize-adventure.html:52 templates/for-teachers.html:53
 msgid "delete_adventure_prompt"
 msgstr "Είσαι σίγουρος ότι θέλεις να διαγράψεις την περιπέτεια;"
 
@@ -883,7 +1099,7 @@ msgstr "Κατάργηση προσαρμογής"
 msgid "go_back_to_main"
 msgstr "Πήγαινε πίσω στην κεντρική σελίδα"
 
-#: templates/explore.html:12
+#: templates/explore.html:12 templates/landing-page.html:45
 msgid "explore_programs"
 msgstr "Εξερεύνηση προγραμμάτων"
 
@@ -914,44 +1130,44 @@ msgstr "Δημιουργός"
 msgid "view_program"
 msgstr "Προβολή προγράμματος"
 
-#: templates/for-teachers.html:5 templates/profile.html:72
+#: templates/for-teachers.html:14 templates/profile.html:72
 #: templates/profile.html:74
 msgid "my_classes"
 msgstr "Οι τάξεις μου"
 
-#: templates/for-teachers.html:10
+#: templates/for-teachers.html:19
 msgid "students"
 msgstr "μαθητών"
 
-#: templates/for-teachers.html:23 templates/landing-page.html:23
+#: templates/for-teachers.html:32
 msgid "create_class"
 msgstr "Δημιουργία νέας τάξης"
 
-#: templates/for-teachers.html:26
+#: templates/for-teachers.html:35
 msgid "my_adventures"
 msgstr "Οι περιπέτειές μου"
 
-#: templates/for-teachers.html:32
+#: templates/for-teachers.html:41
 msgid "last_update"
 msgstr "Τελευταία ενημέρωση"
 
-#: templates/for-teachers.html:33 templates/for-teachers.html:43
+#: templates/for-teachers.html:42 templates/for-teachers.html:52
 msgid "view"
 msgstr "Προβολή"
 
-#: templates/for-teachers.html:50
+#: templates/for-teachers.html:59
 msgid "adventure_prompt"
 msgstr "Παρακαλώ δώσε το όνομα της περιπέτειας"
 
-#: templates/for-teachers.html:50 website/teacher.py:500
+#: templates/for-teachers.html:59 website/teacher.py:500
 msgid "create_adventure"
 msgstr "Δημιουργία περιπέτειας"
 
-#: templates/for-teachers.html:53
+#: templates/for-teachers.html:62
 msgid "create_student_accounts"
 msgstr "Δημιουργία λογαριασμών μαθητών"
 
-#: templates/for-teachers.html:113
+#: templates/for-teachers.html:122
 msgid "teacher_welcome"
 msgstr ""
 "Καλώς ήρθες στη Hedy! Είσαι πλέον περήφανος κάτοχος ενός λογαριασμού "
@@ -1011,25 +1227,25 @@ msgstr "Εκτέλεσε κώδικα"
 msgid "stop_code_button"
 msgstr "Αποθήκευσε κώδικα"
 
-#: templates/incl-editor-and-output.html:130
+#: templates/incl-editor-and-output.html:132
 msgid "edit_code_button"
 msgstr "Επεξεργασία κώδικα"
 
-#: templates/incl-editor-and-output.html:136
+#: templates/incl-editor-and-output.html:138
 msgid "read_code_label"
 msgstr "Εκφωνούν"
 
-#: templates/incl-editor-and-output.html:146
-#: templates/incl-editor-and-output.html:155
+#: templates/incl-editor-and-output.html:148
+#: templates/incl-editor-and-output.html:157
 msgid "regress_button"
 msgstr "Επιστροφή στο επίπεδο {level}"
 
-#: templates/incl-editor-and-output.html:149
-#: templates/incl-editor-and-output.html:158
+#: templates/incl-editor-and-output.html:151
+#: templates/incl-editor-and-output.html:160
 msgid "advance_button"
 msgstr "Πήγαινε στο επίπεδο {level}"
 
-#: templates/incl-editor-and-output.html:172
+#: templates/incl-editor-and-output.html:174
 msgid "developers_mode"
 msgstr "Λειτουργία προγραμματιστή"
 
@@ -1089,74 +1305,67 @@ msgid "non_keyword_support"
 msgstr "Translated content"
 
 #: templates/landing-page.html:6
+#, fuzzy
 msgid "welcome"
-msgstr "Καλώς ήρθες"
-
-#: templates/landing-page.html:7
-msgid "intro_text_landing_page"
 msgstr ""
-"Καλώς ήρθες στον υπέροχο κόσμο της Hedy! Εδώ μπορείς να μάθεις να "
-"προγραμματίζεις με μικρά βήματα, χωρίς περιττά περίπλοκα πράγματα.\n"
-"Ξεκινάμε εύκολα στο επίπεδο 1, και σιγά-σιγά χτίζουμε προς μεγαλύτερα και"
-" πιο πολύπλοκα προγράμματα!\n"
-"\n"
-"Διάλεξε μία από τις παρακάτω επιλογές για να ξεκινήσεις."
+"Καλώς ήρθες στη Hedy! Είσαι πλέον περήφανος κάτοχος ενός λογαριασμού "
+"καθηγητή που σου επιτρέπει να δημιουργείς μαθήματα και να προσκαλείς "
+"μαθητές."
 
-#: templates/landing-page.html:14 templates/landing-page.html:36
-msgid "general_text_landing_page"
-msgstr "Ξεκίνα με τις επεξηγήσεις του επιπέδου 1"
+#: templates/landing-page.html:9
+#, fuzzy
+msgid "landing_page_intro"
+msgstr "Welcome to Hedy!"
 
-#: templates/landing-page.html:16 templates/landing-page.html:38
-#: templates/landing-page.html:45 templates/landing-page.html:52
-msgid "start_programming"
-msgstr "Ξεκίνα τον προγραμματισμό"
-
-#: templates/landing-page.html:21
-msgid "create_class_text"
+#: templates/landing-page.html:13
+#, fuzzy
+msgid "landing_page_teacher"
 msgstr ""
-"Ομαδοποίησε τους μαθητές σου σε τάξεις και άλλαξε το περιεχόμενο για κάθε"
-" τάξη"
+"If you haven't used Hedy before, we advise you to start with the teacher "
+"tutorial."
 
-#: templates/landing-page.html:28
-msgid "read_docs_text"
-msgstr ""
-"Μελέτησε το εγχειρίδιό μας για τον καθηγητή για σχέδια μαθήματος και "
-"συνηθισμένα λάθη των μαθητών"
+#: templates/landing-page.html:15
+#, fuzzy
+msgid "landing_page_student"
+msgstr "Προσκάλεσε μαθητή"
 
-#: templates/landing-page.html:30
-msgid "read_docs"
-msgstr "Μάθε περισσότερα για τη Hedy"
+#: templates/landing-page.html:25
+#, fuzzy
+msgid "start_teacher_tutorial"
+msgstr "Start teacher tutorial"
 
-#: templates/landing-page.html:43
-msgid "story_text"
-msgstr "Φτιάξε τη δική σου ιστορία"
+#: templates/landing-page.html:32
+#, fuzzy
+msgid "start_hedy_tutorial"
+msgstr "Start hedy tutorial"
 
-#: templates/landing-page.html:50
-msgid "turtle_text"
-msgstr "Κάνε ένα σχέδιο με κώδικα"
+#: templates/landing-page.html:39
+#, fuzzy
+msgid "directly_start_programming"
+msgstr "Directly start programming"
 
-#: templates/layout.html:20 templates/signup.html:64
+#: templates/layout.html:23 templates/signup.html:64
 msgid "yes"
 msgstr "Ναι"
 
-#: templates/layout.html:21 templates/signup.html:68
+#: templates/layout.html:24 templates/signup.html:68
 msgid "no"
 msgstr "Όχι"
 
-#: templates/layout.html:29
+#: templates/layout.html:32
 msgid "ok"
 msgstr "OK"
 
-#: templates/layout.html:30
+#: templates/layout.html:33
 msgid "cancel"
 msgstr "Ακύρωση"
 
-#: templates/layout.html:43 templates/programs.html:68
+#: templates/layout.html:46 templates/programs.html:68
 #: templates/programs.html:76
 msgid "copy_link_to_share"
 msgstr "Αντίγραψε τον σύνδεσμο για κοινή χρήση"
 
-#: templates/layout.html:83 templates/quiz/endquiz.html:18
+#: templates/layout.html:92 templates/quiz/endquiz.html:18
 #: templates/quiz/quiz.html:29
 msgid "achievement_earned"
 msgstr "Κέρδισες ένα επίτευγμα!"
@@ -1620,6 +1829,11 @@ msgstr "Άρχισε το κουίζ"
 msgid "go_to_first_question"
 msgstr "Πήγαινε στην ερώτηση 1"
 
+#: website/achievements.py:164
+#, fuzzy
+msgid "percentage_achieved"
+msgstr "Achieved by {percentage}% of the users"
+
 #: website/admin.py:18 website/admin.py:85 website/admin.py:106
 #: website/admin.py:124 website/admin.py:131
 #, fuzzy
@@ -2071,3 +2285,57 @@ msgstr "Δεν έδωσες όνομα περιπέτειας!"
 
 #~ msgid "emails_exist"
 #~ msgstr "Μια ή περισσότερες διευθύνσεις mail ήδη χρησιμοποιούνται."
+
+#~ msgid "intro_text_landing_page"
+#~ msgstr ""
+#~ "Καλώς ήρθες στον υπέροχο κόσμο της "
+#~ "Hedy! Εδώ μπορείς να μάθεις να "
+#~ "προγραμματίζεις με μικρά βήματα, χωρίς "
+#~ "περιττά περίπλοκα πράγματα.\n"
+#~ "Ξεκινάμε εύκολα στο επίπεδο 1, και "
+#~ "σιγά-σιγά χτίζουμε προς μεγαλύτερα και "
+#~ "πιο πολύπλοκα προγράμματα!\n"
+#~ "\n"
+#~ "Διάλεξε μία από τις παρακάτω επιλογές για να ξεκινήσεις."
+
+#~ msgid "general_text_landing_page"
+#~ msgstr "Ξεκίνα με τις επεξηγήσεις του επιπέδου 1"
+
+#~ msgid "start_programming"
+#~ msgstr "Ξεκίνα τον προγραμματισμό"
+
+#~ msgid "create_class_text"
+#~ msgstr ""
+#~ "Ομαδοποίησε τους μαθητές σου σε τάξεις"
+#~ " και άλλαξε το περιεχόμενο για κάθε"
+#~ " τάξη"
+
+#~ msgid "read_docs_text"
+#~ msgstr ""
+#~ "Μελέτησε το εγχειρίδιό μας για τον "
+#~ "καθηγητή για σχέδια μαθήματος και "
+#~ "συνηθισμένα λάθη των μαθητών"
+
+#~ msgid "read_docs"
+#~ msgstr "Μάθε περισσότερα για τη Hedy"
+
+#~ msgid "story_text"
+#~ msgstr "Φτιάξε τη δική σου ιστορία"
+
+#~ msgid "turtle_text"
+#~ msgstr "Κάνε ένα σχέδιο με κώδικα"
+
+#~ msgid "welcome"
+#~ msgstr "Καλώς ήρθες"
+
+#~ msgid "landing_page_intro"
+#~ msgstr "Welcome to Hedy!"
+
+#~ msgid "landing_page_teacher"
+#~ msgstr ""
+
+#~ msgid "landing_page_student"
+#~ msgstr "Προσκάλεσε μαθητή"
+
+#~ msgid "teacher_tutorial_start_title"
+#~ msgstr "Απόκρυψη των σημειώσεων"
