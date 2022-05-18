@@ -1052,6 +1052,16 @@ var variable_view = false;
 if(window.State.level != null){
   let level = Number(window.State.level);
   variable_view = level >= 2;
+  hide_if_no_variables();
+}
+
+function hide_if_no_variables(){
+  if($('#variables #variable-list li').length == 0){
+    $('#variable_button').hide();
+  }
+  else{
+    $('#variable_button').show();
+  }
 }
 
 //Hides the HTML DIV for variables if feature flag is false
@@ -1090,6 +1100,7 @@ export function load_variables(variables: any) {
     for (const i in variables) {
       variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
     }
+    hide_if_no_variables();
   }
 }
 
