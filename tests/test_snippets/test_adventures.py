@@ -53,6 +53,11 @@ def collect_snippets(path):
                     # start_code
                     try:
                         start_code = level['start_code']
+                        if hash(start_code) in unique_snippets_table:
+                            print("Identical code already being tested...")
+                            continue
+                        else:
+                            unique_snippets_table.add(hash(start_code))
                         Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
 
                     except KeyError:
