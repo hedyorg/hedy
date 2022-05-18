@@ -115,7 +115,7 @@ function saveShareStep() {
   addHighlightBorder("level-header");
 
   relocatePopup(50, 30);
-  tutorialPopup(8);
+  tutorialPopup(current_step);
 }
 
 function cheatsheetStep() {

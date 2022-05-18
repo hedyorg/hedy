@@ -60,3 +60,25 @@ One important thing to notice is the **grayed pieces of tekst**. This is compute
 
 
 That's all for now, any problems, let us know so we can address them here for future translators. You can reach us at [hedy@felienne.com](mailto:hedy@felienne.com). Or you can join our [Slack channel](https://join.slack.com/share/enQtMzUxNzkyNzUxMTAxMy1hYzA1NzRkODU2M2Y1YjliZThjODgyZTQwZGMyMThmYmVlYTcyMjAxNTUyYmYxODdjZjBkOWJkYjQwNGYyMzFl?cdn_fallback=1)
+
+Fixing Weblate issues
+================
+
+Sometimes Weblate gets in a conflict state because of changes in our repo as well as in their. This is how to fix that on the command line:
+
+
+1. Gather all commits from weblate by adding an extra remote to my local github like this:
+
+`git remote add weblate https://hosted.weblate.org/git/hedy/adventures/`
+
+This enables us to contact the weblate repo.
+
+2. Using `git fetch weblate` get all commits that exist in Weblate.
+
+3. Switch to a fresh branch with `git checkout -b weblatefixes` <- this name is an example, you may write your own more specific one
+
+4. With `git merge weblate/main` the Weblate commits are merged into our current branch. This can lead to merge conflicts (it will, cause why otherwise would you be going to all this trouble) that you will have to manually fix in your editor.
+
+5. Push the branch `weblatefixes` (or your own name) and make a PR. 
+
+6. Mention me on GitHub or Slack. I am the only one that can merge them correctly (they require a merge commit, not a squash merge!) so ping me to accept the PR.
