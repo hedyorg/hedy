@@ -106,6 +106,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     function handleDragStart(e){
         this.style.opacity = 0.4;
+        this.style.background= "#272822";
 
         dragSrcEl = this;
 
@@ -118,6 +119,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function handleDragEnd(e) {
         this.style.opacity = '1';
+        this.style.background= "";
 
         items.forEach(function (item) {
             item.classList.remove('over');
