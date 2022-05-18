@@ -68,8 +68,9 @@
                         {{ parsons['text']|commonmark }}
                         <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
                             {% for key, line in parsons.code_lines.items() %}
-                                <div id="{{line}}" draggable="true" class="box w-full mb-2 py-2 border-2 border-black rounded-lg" style="background-color: #272822;" index="{{key}}">
-                                    <pre level="{{ level }}" class="no-copy-button parsons">{% if line[0] == '_' %}&nbsp;&nbsp;&nbsp;&nbsp;{{line[1:]}}{% else %}{{line}}{% endif %}</pre>
+                                <div class="relative w-full mb-2 border-2 border-black rounded-lg" style="background-color: #272822;">
+                                    <div index="{{ key }}" draggable="true" class="box w-full absolute inset-0 z-10 rounded-lg"></div>
+                                    <pre level="{{ level }}" id="start_parsons_{{ loop.index }}" class="no-copy-button parsons">{% if line[0] == '_' %}&nbsp;&nbsp;&nbsp;&nbsp;{{line[1:]}}{% else %}{{line}}{% endif %}</pre>
                                 </div>
                             {% endfor %}
                         </div>
@@ -101,75 +102,3 @@
         {% endif %}
       </div>
     </div>
-        <!-- Todo Charlotte: Het is het mooiste dit te verplaatsen naar app.ts of tabs.ts -->
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    function handleDragStart(e){
-        this.style.opacity = 0.4;
-        this.style.background= "#272822";
-
-        dragSrcEl = this;
-
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/html', this.innerHTML);
-        e.dataTransfer.setData('text/plain', this.getAttribute('index'));
-        $('.box').css('border-color', '');
-        $('.box').css('border-style', '');
-    }
-
-    function handleDragEnd(e) {
-        this.style.opacity = '1';
-        this.style.background= "";
-
-        items.forEach(function (item) {
-            item.classList.remove('over');
-        });
-    }
-
-    function handleDragOver(e) {
-        e.preventDefault();
-    return false;
-    }
-
-    function handleDragEnter(e) {
-        this.classList.add('over');
-    }
-
-    function handleDragLeave(e) {
-        this.classList.remove('over');
-    }
-
-    function handleDrop(e) {
-        e.stopPropagation(); // stops the browser from redirecting.
-
-        if (dragSrcEl !== this) {
-            dragSrcEl.innerHTML = this.innerHTML;
-            dragSrcEl.setAttribute('index', this.getAttribute('index'));
-            this.innerHTML = e.dataTransfer.getData('text/html');
-            this.setAttribute('index', e.dataTransfer.getData('text/plain'));
-           
-        }
-        return false;
-    }
-
-    let items = document.querySelectorAll('#parsons_container .box');
-    items.forEach(function (item) {
-        item.addEventListener('dragstart', handleDragStart);
-        item.addEventListener('dragover', handleDragOver);
-        item.addEventListener('dragenter', handleDragEnter);
-        item.addEventListener('dragleave', handleDragLeave);
-        item.addEventListener('dragend', handleDragEnd);
-        item.addEventListener('drop', handleDrop);
-    });
-
-    let start_items = document.querySelectorAll('#start_parsons_options .box');
-    start_items.forEach(function (item) {
-        item.addEventListener('dragstart', handleDragStart);
-        item.addEventListener('dragover', handleDragOver);
-        item.addEventListener('dragenter', handleDragEnter);
-        item.addEventListener('dragleave', handleDragLeave);
-        item.addEventListener('dragend', handleDragEnd);
-        item.addEventListener('drop', handleDrop);
-    });
-});
-</script>
