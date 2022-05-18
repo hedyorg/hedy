@@ -32,7 +32,7 @@
             <td class="error_percentage_week_cell">{% if class.week_stats.runs > 0 %}{{(class.week_stats.fails / class.week_stats.runs * 100)|round(2)}}{% else %}0.00{% endif %}%</td>
             <td class="runs_cell">{{class.total_stats.runs}}</td>
             <td class="error_percentage_cell">{% if class.total_stats.runs > 0 %}{{(class.total_stats.fails / class.total_stats.runs * 100)|round(2)}}{% else %}0.00{% endif %}%</td>
-            <td id="statistics_cell"><a href="/week_stats/class/{{class.id}}" target="_blank">Click here</a></td>
+            <td id="statistics_cell"><a href="/stats/class/{{class.id}}" target="_blank">Click here</a></td>
           </tr>
       {% endfor %}
     </tbody>
