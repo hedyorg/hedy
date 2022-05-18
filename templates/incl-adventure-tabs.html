@@ -69,7 +69,7 @@
                         <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
                             {% for key, line in parsons.code_lines.items() %}
                                 <div class="relative w-full mb-2 border-2 border-black rounded-lg" style="background-color: #272822;">
-                                    <div index="{{ key }}" draggable="true" code="{{ line }}" class="parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                                    <div index="{{ key }}" draggable="true" code="{{ line }}" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
                                     <pre level="{{ level }}" id="start_parsons_{{ loop.index }}" class="no-copy-button parsons">{% if line[0] == '_' %}&nbsp;&nbsp;&nbsp;&nbsp;{{line[1:]}}{% else %}{{line}}{% endif %}</pre>
                                 </div>
                             {% endfor %}
@@ -110,6 +110,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
          dragSrcEl = this;
 
+         $('.parsons_code_container').removeClass('border-green-500 border-red-500');
+         $('.parsons_code_container').addClass('border-black');
+
          e.dataTransfer.effectAllowed = 'move';
          e.dataTransfer.setData('text/html', this.getAttribute('code'));
          e.dataTransfer.setData('text/plain', this.getAttribute('index'));
@@ -122,7 +125,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
          this.style.opacity = '1';
          this.style.background = "";
 
-         items.forEach(function (item) {
+         start_items.forEach(function (item) {
+             item.classList.remove('over');
+         });
+         goal_items.forEach(function (item) {
              item.classList.remove('over');
          });
      }
@@ -151,8 +157,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
          return false;
      }
 
-     let items = document.querySelectorAll('.parsons-box');
-     items.forEach(function (item) {
+     let start_items = document.querySelectorAll('.start-parsons-box');
+     start_items.forEach(function (item) {
+         item.addEventListener('dragstart', handleDragStart);
+         item.addEventListener('dragover', handleDragOver);
+         item.addEventListener('dragend', handleDragEnd);
+         item.addEventListener('drop', handleDrop);
+     });
+     let goal_items = document.querySelectorAll('.compiler-parsons-box');
+     goal_items.forEach(function (item) {
          item.addEventListener('dragstart', handleDragStart);
          item.addEventListener('dragover', handleDragOver);
          item.addEventListener('dragend', handleDragEnd);

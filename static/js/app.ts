@@ -1151,32 +1151,21 @@ export function get_trimmed_code() {
     let code = "";
     let count = 65;
 
-    $('#parsons_container').children().each(function() {
-      let text = $(this).text();
-      console.log("text ", text);
-      
-      // Otherwise it is the space placeholder -> don't add to prevent weird error messages
+    $('.compiler-parsons-box').each(function() {
+      let text = $(this).attr('code') || "";
       if (text.length > 1) {
         code += text;
-        console.log(code);
        
-        //check correct order and give box a color 
+        $(this).removeClass('border-black');
         // @ts-ignore
-        if ( $(this).attr('index').charCodeAt(0) == count){
-          $(this).css('border-color', '#90EE90');
-          $(this).css('border-style', 'solid');
-        }
-        else {
-          // @ts-ignore
-          console.log("index ", $(this).attr('index').charCodeAt(0) )
-          console.log("count ", count);
-          $(this).css('border-color', '#FF0000');
-          $(this).css('border-style', 'solid');
+        if ($(this).attr('index').charCodeAt(0) == count){
+          $(this).addClass('border-green-500');
+        } else {
+          $(this).addClass('border-red-500');
         }
       count += 1;
       }   
     });
-    console.log("CODE", code);
     return code.replace(/ +$/mg, '');
   }
   //console.log('Hello world');
