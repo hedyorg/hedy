@@ -151,7 +151,7 @@
         {if} اللون {is} اخضر {print} "هذا رائع!" {else} {print} "يا خسارة!"
 -   name: "{repeat} - turtle"
     explanation: "أعد تنفيذ جزء من الكود باستخدام الأمر `{repeat}`."
-    example: "مثال: {repeat} 3 {times} {forward} 10"
+    example: "مثال: {repeat} ٣ {times}{forward} ١٠"
     demo_code: |-
         {repeat} 3 {times} {forward} 10
 8:
@@ -171,120 +171,120 @@
             {print} "لا للأسف!"
             {print} "الاجابة الصحيحة هي 10."
 -   name: "`{repeat}` with turtle"
-    explanation: "{repeat} multiple lines"
+    explanation: "{repeat} أكثر من سطر برمجي"
     example: "مثال: ارسم مربعًا"
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 9:
--   name: "`{if}` with multiple lines"
-    explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
-    example: "Example: answer = {ask} 'What is 20 plus 20?'"
+-   name: "`{if}` مع أكثر من سطر برمجي"
+    explanation: "الاجابة على سؤال معين باستخدام الأمر {ask} و فحص ما اذا كانت الاجابة صحيحة. يمكننا الان طباعة اكثر من سطر على الشاشة."
+    example: "مثال: اجابتك= {ask} \"ما ناتج ٢٠ زائد٢٠؟\""
     demo_code: |-
-        answer = {ask} 'What is 20 plus 20?'
-        {if} answer {is} 20
-            {print} 'Well done!!'
-            {print} 'The answer is indeed' answer
-        else
-            {print} 'Wrong'
-            {print} 'The answer is 20'
+        اجابتك= {ask} "ما ناتج ٢٠ زائد٢٠؟"
+        {if} اجابتك {is} ٢٠
+            {print} "أحسنت!"
+            {print} "بالفعل، الاجابة الصحيحة هي " اجابتك
+        {else}
+            {print} "الاجابة خاطئة!"
+            {print} "الاجابة الصحيحة هي ٢٠"
 -   name: "`{repeat}` and turtle"
-    explanation: "{repeat} multiple lines"
-    example: "Example: create a square"
+    explanation: "{repeat} أكثر من سطر برمجي"
+    example: "مثال: انشاء مربع"
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 10:
 -   name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: "يطبع شيئاً ما على الشاشة. تذكر أن تستخدم علامات الاقتباس لتظهر الكتابة حرفيا كما نريد."
+    example: "مثال: {print} \"٥ ضرب ٥ تساوي \" ٥*٥"
+    demo_code: "{print} \"٥ ضرب ٥ تساوي \" ٥*٥"
 -   name: "{for} with a list"
-    explanation: "print all things in a list "
-    example: "Example: {for} animal {in} animals"
+    explanation: "يطبع على الشاشة كل العناصر الموجودة في قائمة. "
+    example: "مثال: {for} حيوان {in} حيواناتي_المفضلة"
     demo_code: |-
-        animals {is} dog, cat, blobfish
-        {for} animal {in} animals
-          {print} 'I love ' animal
+        حيواناتي_المفضلة {is} الكلب، الزرافة، السلحفاة
+        {for} حيوان {in} حيواناتي_المفضلة
+            {print} "أنا أحب " حيوان
 11:
--   name: "{for} loop"
-    explanation: "We can use `{for}` with a {range}"
-    example: "for counter {in} {range} 1 {to} 5"
+-   name: "دورة التكرار باستخدام {for}"
+    explanation: "يمكننا ان نستخدم الأمر `{for}` مع الأمر {range}"
+    example: "{for} دورة {in} {range} ١ {to} ٥"
     demo_code: |-
-        {for} counter {in} {range} 1 {to} 5
-            {print} counter
+        {for} دورة {in} {range} ١ {to} ٥
+            {print} دورة
 -   name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-    example: "Example: answer = {ask} 'What is 5 plus 5?'"
+    explanation: "اسأل عن نتيجة عملية حسابية وافحص ما اذا كانت الاجابة صحيحة. يمكننا أن نطبع أكثر من سطر على الشاشة."
+    example: "مثال: {ask} \"ما ناتج ٥ زائد ٥؟\""
     demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
-            {print} 'Oops!'
-            {print} 'The answer is 10'
+        اجابتك= {ask} "ما ناتج ٥ زائد٥؟"
+        {if} اجابتك {is} ١٠
+            {print} "أحسنت!"
+            {print} "بالفعل، الاجابة الصحيحة هي " اجابتك
+        {else}
+            {print} "الاجابة خاطئة!"
+            {print} "الاجابة الصحيحة هي ١٠"
 12:
--   name: "float directly"
-    explanation: "Decimal numbers"
-    example: "{print} 2.5 + 2.5"
+-   name: "الأرقام العشرية"
+    explanation: "الأرقام العشرية"
+    example: "{print} ٢.٥ + ٢.٥"
     demo_code: |
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
-        {print} 2.5 + 2.5
--   name: "assign text"
-    explanation: "Text with quotation marks after ="
+        {print} "احسب بسرعة!"
+        {print} "اثنان ونصف زائد اثنان ونصف يساوي ..."
+        {print} ٢.٥ + ٢.٥
+-   name: "تخزين النصوص"
+    explanation: "نص بين علامات الاقتباس بعد ="
     example: "name = 'Hedy'"
     demo_code: |
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: "quotes after {if} comparison"
-    explanation: "Text with quotation marks after {if}"
+        اسمي = "الآلية هيدي"
+        {print} "مرحباً " اسمي
+-   name: "اقتباس بعد المقارنة ب {if}"
+    explanation: "نص داخل علامات الاقتباس بعد {if}"
     example: "name = 'Hedy'"
     demo_code: |
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
--   name: "quotes in list"
-    explanation: "A list with quotation marks"
-    example: "name = 'Hedy', 'Felienne'"
+        اسمك = {ask} "من أنت؟"
+        {if} اسمك = "هيدي"
+            {print} "مرحباً بك!"
+-   name: "نصوص مقتبسة داخل قائمة"
+    explanation: "قائمة تحتوي على نصوص داخل علامات اقتباس"
+    example: "الأسماء = \"هيدي\"، \"علاء الدين\""
     demo_code: |
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
+        الابطال_الخارقون = "سبايدرمان"، "باتمان"، "الرجل الحديدي"
+        {print} الابطال_الخارقون {at} {random}
 13:
 -   name: "{and}"
-    explanation: "Two parts both need to be correct"
-    example: "if 3+2 {is} 5 {and} 2+2 {is} 4"
+    explanation: "يجب أن يكون كلا الفحصين صحيحين"
+    example: "{if} ٣+٢ {is} ٥ {and} ٢+٢ {is} ٤"
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
+        اجابتك١ = {ask} "ما ناتج ٣+٢؟"
+        اجابتك٢ ={ask} "ما ناتج ٢+٢؟"
+        {if} اجابتك١ {is} ٥ {and} اجابتك٢ {is} ٤
+            {print} "الإجابتان صحيحتان!"
         {else}
-            {print} 'At least one answer is wrong!'
+            {print} "اجابة واحدة على الأقل خاطئة!"
 -   name: "{or}"
-    explanation: "At least 1 of the two parts need to be correct. If both are correct, it is also fine."
-    example: "if 3+2 {is} 5 {or} 2+2 {is} 4"
+    explanation: "فحص ١ على الأقل من الفحصين يجب أن يكون صحيحاً. اذا كان الفحصان صحيحين هذا أيضا مقبول."
+    example: "{if} ٣+٢ {is} ٥ {or} ٢+٢ {is} ٤"
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {or} answer2 {is} 4
-            {print} 'At least one answer is correct!'
+        اجابتك١ = {ask} "ما ناتج ٣+٢؟"
+        اجابتك٢ ={ask} "ما ناتج ٢+٢؟"
+        {if} اجابتك١ {is} ٥ {or} اجابتك٢ {is} ٤
+            {print} "اجابة واحدة على الأقل صحيحة!!"
         {else}
-            {print} 'Both answers are wrong!'
+            {print} "الإجابتان خاطئتان!"
 14:
--   name: "Smaller"
-    explanation: "We use the `<` to check if the first number is smaller than the second number."
-    example: "For example: age < 12"
+-   name: "أصغر"
+    explanation: "نستعمل الاشارة `<` لفحص ما اذا كان الرقم الأول أصغر من الرقم الثاني."
+    example: "على سبيل المثال: العمر < ١٢"
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age < 13
-            {print} 'You are younger than me!'
--   name: "Bigger"
-    explanation: "We use the `>` to check if the first number is bigger than the second number."
-    example: "For example: age > 12"
+        عمرك = {ask} "ما عمرك؟"
+        {if} عمرك > ١٣
+            {print} "أنت أكبر مني!"
+-   name: "أكبر"
+    explanation: "نستعمل الاشارة `>` لفحص ما اذا كان الرقم الأول أكبر من الرقم الثاني."
+    example: "على سبيل المثال: العمر > ١٢"
     demo_code: |-
         age = {ask} 'How old are you?'
         {if} age > 13
