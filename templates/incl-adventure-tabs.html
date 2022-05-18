@@ -69,7 +69,7 @@
                         <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
                             {% for key, line in parsons.code_lines.items() %}
                                 <div class="relative w-full mb-2 border-2 border-black rounded-lg" style="background-color: #272822;">
-                                    <div index="{{ key }}" draggable="true" class="box w-full absolute inset-0 z-10 rounded-lg"></div>
+                                    <div index="{{ key }}" draggable="true" class="parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
                                     <pre level="{{ level }}" id="start_parsons_{{ loop.index }}" class="no-copy-button parsons">{% if line[0] == '_' %}&nbsp;&nbsp;&nbsp;&nbsp;{{line[1:]}}{% else %}{{line}}{% endif %}</pre>
                                 </div>
                             {% endfor %}
