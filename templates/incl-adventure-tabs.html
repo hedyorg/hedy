@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
          $('.parsons_code_container').addClass('border-black');
 
          e.dataTransfer.effectAllowed = 'move';
-         e.dataTransfer.setData('text/html', this.getAttribute('code'));
+         e.dataTransfer.setData('code', this.getAttribute('code'));
          e.dataTransfer.setData('text/plain', this.getAttribute('index'));
      }
 
@@ -143,13 +143,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
              let goal_ace = ace.edit(this.parentNode.childNodes[3].getAttribute('id'));
 
              start_ace.session.setValue(this.getAttribute('code').replace(/\n+$/, ''), -1);
-             goal_ace.session.setValue(e.dataTransfer.getData('text/html').replace(/\n+$/, ''), -1);
+             goal_ace.session.setValue(e.dataTransfer.getData('code').replace(/\n+$/, ''), -1);
 
              dragSrcEl.setAttribute('index', this.getAttribute('index'));
              dragSrcEl.setAttribute('code', this.getAttribute('code'));
 
              this.setAttribute('index', e.dataTransfer.getData('text/plain'));
-             this.setAttribute('code', e.dataTransfer.getData('text/html'));
+             this.setAttribute('code', e.dataTransfer.getData('code'));
          }
          return false;
      }
