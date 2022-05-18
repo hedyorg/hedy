@@ -712,6 +712,36 @@ export function submit_program (id: string, index: number) {
   });
 }
 
+export function set_explore_favourite(id: string, favourite: number) {
+  let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
+  if (favourite) {
+    prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
+  }
+  modal.confirm (prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/set_hedy_choice',
+      data: JSON.stringify({
+        id: id,
+        favourite: favourite
+    }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+        modal.alert(response.message, 3000, false);
+        if (favourite == 1) {
+          $('#' + id).removeClass('text-white');
+          $('#' + id).addClass('text-yellow-500');
+        } else {
+          $('#' + id).removeClass('text-yellow-500');
+          $('#' + id).addClass('text-white');
+        }
+    }).fail(function(err) {
+        return modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 export function copy_to_clipboard (string: string, prompt: string) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
