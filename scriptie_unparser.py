@@ -245,6 +245,9 @@ def prep_grammar(lvl):
         for line2 in result:
             result[line2] = prep_inline(result[line2], line[1:], replacement)
         del result[line]
+
+    #TODO: Any grammar patterns that can be rewritten should be done here
+
     return result
 
 #==============================================================================
@@ -296,8 +299,10 @@ def process_rule(grammar, rule):
     return ''.join([str(c) for c in result])
 
 # Processes rule(sections) with multiple options
+# should have one option which doesn't create a tree
 # example: turning rule | _rule into rule
 def process_split(grammar, rule):
+    has_alternative = False
     options = get_groupings(rule, ['|'])
     if len(options) > 1:
         value = ""
@@ -305,7 +310,10 @@ def process_split(grammar, rule):
             if option[-1] == "|": option = option[0:-1]
             option = option.strip()
             #process rules
-            option = process_rule(grammar, option)
+            if (creates_tree(grammar, option) or has_alternative):
+                option = process_rule(grammar, option)
+            else:
+                has_alternative = True
             if (option.strip() == ""): continue
             #put them all back together
             if not (value == ""): value += " | "
@@ -329,9 +337,9 @@ def start_unparsing(Tree, lvl):
     #process grammar
     grammar = prep_grammar(lvl)
     grammar = simp_grammar(grammar)
-    #print("\nresult:")
-    #for key in grammar: print (key + " : " + grammar[key])
-    #print("\n")
+    print("\nresult:")
+    for key in grammar: print (key + " : " + grammar[key])
+    print("\n")
     #start unparsing
     return unparsing(Tree, grammar, 0)
 
