@@ -1113,7 +1113,7 @@ def explore():
             'level': program['level'],
             'id': program['id'],
             'error': program['error'],
-            'hedy_choice': True if program.get('hedy_choice') else False,
+            'hedy_choice': True if program.get('hedy_choice') == 1 else False,
             'public_user': True if public_profile else None,
             'code': "\n".join(code.split("\n")[:4])
         })
