@@ -75,6 +75,9 @@ function speakAloudStep() {
   $('#runButtonContainer').removeClass('z-40');
 
   $('#container_container').addClass("z-40");
+  $('#speak_aloud_label').addClass("z-40");
+  $('#speak_dropdown').addClass("z-40");
+
   addHighlightBorder("speak_container");
 
   relocatePopup(50, 30);
