@@ -234,13 +234,13 @@ class Database:
         return programs[-48:]
 
     def get_all_hedy_choices(self):
-        return PROGRAMS.get_many({'hedy_choice': True}, sort_key='date', reverse=True)
+        return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', reverse=True)
 
     def get_hedy_choices(self):
-        return PROGRAMS.get_many({'hedy_choice': True}, sort_key='date', limit=4, reverse=True)
+        return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', limit=4, reverse=True)
 
     def set_program_as_hedy_choice(self, id, favourite):
-        PROGRAMS.update({'id': id}, {'hedy_choice': True if favourite else None})
+        PROGRAMS.update({'id': id}, {'hedy_choice': 1 if favourite else None})
 
     def all_programs_count(self):
         """Return the total number of all programs."""
