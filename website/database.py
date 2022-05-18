@@ -213,7 +213,7 @@ class Database:
         """Return all users."""
         # If we have some filtering -> return all possible users, otherwise return last 200
         users = list(USERS.scan())
-        users.sort(key=lambda user: user['created'], reverse=True)
+        users.sort(key=lambda user: user.get('created', 0), reverse=True)
         if filtering:
             return users
         return users[:200]
