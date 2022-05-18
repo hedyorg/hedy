@@ -66,6 +66,10 @@ function resetWindow() {
     }
 
     if (tabName === 'quiz') {
+        // If the developer's mode is still on -> make sure we do show the tab
+        if ($('#developers_toggle').is(":checked")) {
+          $('#adventures-tab').show();
+        }
       $ ('#adventures-tab').css('height', '');
       $ ('#adventures-tab').css('min-height', '14em');
       $ ('#adventures-tab').css('max-height', '100%');
@@ -77,6 +81,11 @@ function resetWindow() {
 
     $ ('#editor').show();
     $ ('#parsons_container').hide();
+    
+    // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
+    if ($('#developers_toggle').is(":checked")) {
+      $('#adventures-tab').hide();
+    }
     $ ('#adventures-tab').css('max-height', '20em')
     $('#developers_toggle_container').show ();
     $ ('#level-header input').show ();
@@ -115,6 +124,7 @@ function resetWindow() {
 
     window.State.adventure_name = tabName === 'intro' ? undefined : tabName;
     theGlobalEditor?.clearSelection();
+    theGlobalEditor?.session.clearBreakpoints();
     // If user wants to override the unsaved program, reset unsaved_changes
     window.State.unsaved_changes = false;
   }

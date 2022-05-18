@@ -28,7 +28,7 @@
           </div>
       {% endif %}
       <div class="w-full flex-1 flex flex-col">
-        <div id="editor" style="background: #272822; font-family: monospace; color: white" lang="en"
+        <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en"
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code}}
@@ -94,7 +94,7 @@
       </div>
     </div>
     <div class="flex flex-col order-3 relative" id="code_output" style="height: 22rem;">
-        <div class="inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 text-white">
+        <div class="inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 text-white" id="variables_container">
             <button id="variable_button" class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" onclick="hedyApp.showVariableView()">
                 🏷<svg class="float-right w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path>
@@ -125,9 +125,18 @@
       </div>
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
-  <div class="order-2 lg:order-4">
+  <div class="order-2 lg:order-4" id="code_related_buttons">
       <div class="flex justify-between items-start h-12 overflow-visible">
-        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}', '{{_('already_program_running')}}')">{{_('run_code_button')}} </button>
+        <div id="runButtonContainer">
+          <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}', '{{_('already_program_running')}}')">{{_('run_code_button')}} </button>
+          <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+        </div>
+        <div id="debug_container" class="ml-auto">
+          <button id="debug_button" class="green-btn" onclick="hedyApp.startDebug()">🐞</button>
+          <button id="debug_restart" class="green-btn hidden" onclick="hedyApp.resetDebug()">🔄</button>
+          <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
+          <button id="debug_continue" class="green-btn hidden" onclick="hedyApp.incrementDebugLine()">⏩</button>
+        </div>
         {% if show_edit_button %}
             <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn">{{_('edit_code_button')}}</button>
         {% else %}
@@ -144,11 +153,11 @@
     <div class="order-5">
       {% if not specific_adventure %}
           <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
-            {% if prev_level and (customizations['levels']|length == 0 or prev_level in customizations['levels']) %}
+            {% if prev_level and (not customizations or customizations['levels']|length == 0 or prev_level in customizations['levels']) %}
               <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
             {% endif %}
-            {% if next_level and (customizations['levels']|length == 0 or next_level in customizations['levels']) %}
-                <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
+            {% if next_level and (not customizations or customizations['levels']|length == 0 or next_level in customizations['levels']) %}
+                <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
             {% endif %}
           </div>
       {% else %}

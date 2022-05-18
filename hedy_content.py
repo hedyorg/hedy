@@ -1,9 +1,6 @@
 import copy
 import os
 from babel import Locale
-from flask import g
-
-from utils import is_debug_mode
 from website.yaml_file import YamlFile
 import iso3166
 
@@ -15,6 +12,9 @@ COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
+
+# Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
+NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'ru', 'zh_Hans']
 
 ADVENTURE_ORDER = [
     'default',
@@ -33,6 +33,8 @@ ADVENTURE_ORDER = [
     'quizmaster',
     'language',
     'secret',
+    'tic',
+    'blackjack',
     'next',
     'end'
 ]
@@ -62,7 +64,11 @@ for l in sorted(languages):
 # Load and cache all keyword yamls
 KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml')
+    KEYWORDS[lang] = dict(YamlFile.for_file(f'content/keywords/{lang}.yaml'))
+    for k, v in KEYWORDS[lang].items():
+        if type(v) == str and "|" in v:
+            # when we have several options, pick the first one as default
+            KEYWORDS[lang][k] = v.split('|')[0]
 
 
 class Commands:
@@ -91,7 +97,14 @@ class Commands:
             commands = copy.deepcopy(self.file.get(level))
             for command in commands:
                 for k, v in command.items():
-                    command[k] = v.format(**KEYWORDS.get(language))
+                    try:
+                        command[k] = v.format(**KEYWORDS.get(language))
+                    except IndexError:
+                        print("There is an issue due to an empty placeholder in the following line:")
+                        print(v)
+                    except KeyError:
+                        print("There is an issue due to a non-existing key in the following line:")
+                        print(v)
             keyword_data[level] = commands
         return keyword_data
 
@@ -132,16 +145,21 @@ class Adventures:
         sorted_adventures = {}
         for adventure_index in ADVENTURE_ORDER:
             if self.file.get(adventure_index, None):
-                sorted_adventures[adventure_index] = (
-                    self.file.get(adventure_index))
+                sorted_adventures[adventure_index] = (self.file.get(adventure_index))
         self.file = sorted_adventures
         keyword_data = {}
         for short_name, adventure in self.file.items():
             parsed_adventure = copy.deepcopy(adventure)
             for level in adventure.get('levels'):
                 for k, v in adventure.get('levels').get(level).items():
-                    parsed_adventure.get('levels').get(
-                        level)[k] = v.format(**KEYWORDS.get(language))
+                    try:
+                        parsed_adventure.get('levels').get(level)[k] = v.format(**KEYWORDS.get(language))
+                    except IndexError:
+                        print("There is an issue due to an empty placeholder in the following line:")
+                        print(v)
+                    except KeyError:
+                        print("There is an issue due to a non-existing key in the following line:")
+                        print(v)
             keyword_data[short_name] = parsed_adventure
         return keyword_data
 
@@ -155,8 +173,7 @@ class Adventures:
             self.data["en"] = self.cache_adventure_keywords("en")
         adventures_dict = {}
         for adventure in self.data["en"].items():
-            adventures_dict[adventure[0]] = {
-                adventure[1]['name']: list(adventure[1]['levels'].keys())}
+            adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
         return adventures_dict
 
     # Todo TB -> We can also cache this; why not?
@@ -289,7 +306,7 @@ class Quizzes:
             self.data[keyword_lang] = self.cache_quiz_keywords(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, {}).get(question, None)
 
-      
+
 class NoSuchQuiz:
     def get_quiz_data_for_level(self, level, keyword_lang):
         return {}

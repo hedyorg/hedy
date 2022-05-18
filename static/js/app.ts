@@ -1,7 +1,4 @@
 // It's important that this file gets loaded first
-import './syntaxLang-en';
-import './syntaxLang-es';
-import './syntaxLang-nl';
 import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
@@ -9,8 +6,6 @@ import { auth } from './auth';
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
-
-var StopExecution = false;
 
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
@@ -112,6 +107,8 @@ var StopExecution = false;
         window.State.unsaved_changes = true;
 
         clearErrors(editor);
+        //removing the debugging state when loading in the editor
+      stopDebug();
       });
     }
 
@@ -225,6 +222,22 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
+export function stopit() {
+  // We bucket-fix stop the current program by setting the run limit to 1ms
+  Sk.execLimit = 1;
+  $('#stopit').hide();
+  $('#runit').show();
+
+  // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
+  // This way the Promise is no longer "waiting" and can no longer mess with our next program
+  if ($('#inline-modal').is(":visible")) {
+    $('#inline-modal form').submit();
+    $('#inline-modal').hide();
+  }
+
+  window.State.disable_run = false;
+}
+
 export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
   if (window.State.disable_run) {
     // If there is no message -> don't show a prompt
@@ -233,25 +246,23 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     } return;
   }
   if (reloadOnExpiredSession ()) return;
-  StopExecution = true;
 
+  // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
+  Sk.execLimit = 1;
+  $('#runit').hide();
+  $('#stopit').show();
 
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
   const variables = $(outputDiv).find('#variables');
   outputDiv.empty();
-  $('#turtlecanvas').empty();
 
   outputDiv.addClass("overflow-auto");
   outputDiv.append(variableButton);
   outputDiv.append(variables);
   error.hide();
   success.hide();
-
-  var runItBtn = $('#runit');
-  runItBtn.prop('disabled', true);
-  setTimeout(function() {runItBtn.prop('disabled', false)}, 500);
 
   try {
     level = level.toString();
@@ -290,12 +301,13 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
           // @ts-ignore
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
+        $('#stopit').hide();
+        $('#runit').show();
         return;
       }
-        runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
-        // If it is an error we throw due to program execution while another is running -> don't show and log it
-        if (!(err.message == "\"program_interrupt\"")) {
-          console.log(err);
+      runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
+        // The err is null if we don't understand it -> don't show anything
+        if (err != null) {
           error.show(ErrorMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
         }
@@ -373,6 +385,7 @@ function showAchievement(achievement: any[]){
   return new Promise<void>((resolve)=>{
         $('#achievement_reached_title').text('"' + achievement[0] + '"');
         $('#achievement_reached_text').text(achievement[1]);
+        $('#achievement_reached_statics').text(achievement[2]);
         $('#achievement_pop-up').fadeIn(1000, function () {
           setTimeout(function(){
             $('#achievement_pop-up').fadeOut(1000);
@@ -760,10 +773,6 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
-  // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
-  // Please see note at the top of the `outf` function.
-  window.State.programsInExecution = 1;
-
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
@@ -772,11 +781,14 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   outputDiv.append(variableButton);
   outputDiv.append(variables);
 
+  var storage = window.localStorage;
+  var debug = storage.getItem("debugLine")
+
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
   // If the adventures are not shown -> increase height of turtleConfig
-  if ($('#adventures').is(":hidden")) {
+  if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
   } else {
@@ -803,15 +815,21 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
     timeoutMsg: function () {
-      pushAchievement("hedy_hacking");
-      return ErrorMessages ['Program_too_long']
+      // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+      $('#stopit').hide();
+      $('#runit').show();
+      if (Sk.execLimit != 1) {
+        pushAchievement("hedy_hacking");
+        return ErrorMessages ['Program_too_long'];
+      } else {
+        return null;
+      }
     },
     // We want to make the timeout function a bit more sophisticated that simply setting a value
     // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
     // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
       const level = Number(window.State.level) || 0;
-      console.log(level)
       if (level < 7) {
         // Set a non-realistic time-out of 5 minutes
         return (3000000);
@@ -821,34 +839,40 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }) ()
   });
 
-  StopExecution = false;
   return Sk.misceval.asyncToPromise( () =>
     Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
-        if (StopExecution) {
-          window.State.programsInExecution = 0;
-          throw "program_interrupt";
-        }
+        // We don't do anything here...
       }
     }
    ).then(function(_mod) {
     console.log('Program executed');
+    //@ts-ignore
+    const pythonVariables = Sk.globals;
+    load_variables(pythonVariables);
+    $('#stopit').hide();
+    $('#runit').show();
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
-      pushAchievement("error_or_empty");
-      error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+      if(debug == null){
+        pushAchievement("error_or_empty");
+        error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+      }
       return;
     }
     window.State.programsInExecution--;
-    if(!hasWarnings) {
-      showSuccesMessage();
+    if (!hasWarnings) {
+      if (debug == null) {
+        showSuccesMessage();
+      }
     }
     if (cb) cb ();
   }).catch(function(err) {
-    // Extract error message from error
-    console.log(err);
-    const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
+    const errorMessage = errorMessageFromSkulptError(err) || null;
+    if (!errorMessage) {
+      throw null;
+    }
     throw new Error(errorMessage);
   });
 
@@ -875,9 +899,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   function outf(text: string) {
     // If there's more than one program being executed at a time, we ignore it.
     // This happens when a program requiring user input is suspended when the user changes the code.
-    //@ts-ignore
-    const pythonVariables = Sk.globals;
-    load_variables(pythonVariables);
     if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
@@ -892,11 +913,13 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt: string) {
     // We give the user time to give input.
-    Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
+    var storage = window.localStorage;
+    var debug = storage.getItem("debugLine")
+    if (storage.getItem("prompt-" + prompt) == null) {
+    Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
     return new Promise(function(ok) {
       window.State.disable_run = true;
-      $ ('#runit').css('background-color', 'gray');
 
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
@@ -908,10 +931,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         input.focus();
       }, 0);
       $('#inline-modal form').one('submit', function(event) {
-
         window.State.disable_run = false;
-        $ ('#runit').css('background-color', '');
-
         event.preventDefault();
         $('#inline-modal').hide();
         if (hasTurtle) {
@@ -924,13 +944,22 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         // replying to a query.
         setTimeout (function () {
            ok(input.val());
+           if (debug != null) {
+              storage.setItem("prompt-" + prompt, input.val()!.toString());
+           }
            $ ('#output').focus ();
         }, 0);
 
-        return false;
+          return false;
+        });
+        $('#inline-modal').show();
       });
-      $('#inline-modal').show();
-    });
+    } else {
+      return new Promise(function (ok) {
+        ok(storage.getItem("prompt-" + prompt));
+
+      });
+    }
   }
 }
 
@@ -1020,10 +1049,27 @@ export function showVariableView() {
 //Feature flag for variable and values view
 var variable_view = false;
 
+if(window.State.level != null){
+  let level = Number(window.State.level);
+  variable_view = level >= 2;
+}
+
 //Hides the HTML DIV for variables if feature flag is false
 if (!variable_view) {
   $('#variables').hide();
   $('#variable_button').hide();
+}
+
+//Feature flag for step by step debugger. Becomes true automatically for level 7 and below.
+var step_debugger = false;
+if(window.State.level != null){
+  let level = Number(window.State.level);
+  step_debugger = level <= 7;
+}
+
+//Hides the debug button if feature flag is false
+if (!step_debugger) {
+  $('#debug_button').hide();
 }
 
 export function show_variables() {
@@ -1035,16 +1081,16 @@ export function show_variables() {
   }
 }
 
-export function load_variables(variables: any){
-    if (variable_view === true) {
-      //@ts-ignore
-      variables = clean_variables(variables);
-      const variableList = $('#variable-list');
-      variableList.empty();
-      for (const i in variables) {
-        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
-      }
+export function load_variables(variables: any) {
+  if (variable_view === true) {
+    //@ts-ignore
+    variables = clean_variables(variables);
+    const variableList = $('#variable-list');
+    variableList.empty();
+    for (const i in variables) {
+      variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
     }
+  }
 }
 
 // Color-coding string, numbers, booleans and lists
@@ -1073,12 +1119,12 @@ function special_style_for_variable(variable: any){
 function clean_variables(variables: any) {
   if (variable_view === true) {
     const new_variables = [];
-    const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
+    const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
     for (const variable in variables) {
       if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-      let extraStyle = special_style_for_variable(variables[variable]);
-      let newTuple = [variable, variables[variable].v, extraStyle];
-      new_variables.push(newTuple);
+        let extraStyle = special_style_for_variable(variables[variable]);
+        let newTuple = [variable, variables[variable].v, extraStyle];
+        new_variables.push(newTuple);
       }
     }
     return new_variables;
@@ -1131,7 +1177,28 @@ export function get_trimmed_code() {
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
   // Remove whitespace at the end of every line
-  return theGlobalEditor?.getValue().replace(/ +$/mg, '');
+
+  // ignore the lines with a breakpoint in it.
+  let breakpoints = editor.session.getBreakpoints();
+  let code = theGlobalEditor.getValue();
+  var storage = window.localStorage;
+  var debugLines = storage.getItem('debugLine');
+  if (code) {
+    let lines = code.split('\n');
+    if(debugLines != null){
+      lines = lines.slice(0, parseInt(debugLines) + 1);
+    }
+    for (let i = 0; i < lines.length; i++) {
+      if (breakpoints[i] == 'ace_breakpoint') {
+        lines[i] = '';
+      }
+      code = lines.join('\n');
+    }
+  }
+
+  // regex for any number of whitespace \s*
+  // g: global (replace all matches, not just the first one)
+  return code.replace(/\s*$/gm, '');
 }
 
 export function confetti_cannon(){
@@ -1304,13 +1371,13 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
   }
 export function toggle_developers_mode(enforced: boolean) {
   if ($('#developers_toggle').is(":checked") || enforced) {
-      $('#adventures').hide();
+      $('#adventures-tab').hide();
       pushAchievement("lets_focus");
   } else {
-      $('#adventures').show();
+      $('#adventures-tab').show();
   }
 
-  if ($('#adventures').is(":hidden")) {
+  if ($('#adventures-tab').is(":hidden")) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
@@ -1423,3 +1490,251 @@ export function filter_admin() {
     window.open('?filter=' + filter + "&start=" + start_date + "&end=" + end_date, "_self");
   }
 }
+
+if ($("#editor").length) {
+  var editor = ace.edit("editor");
+  editor.on("guttermousedown", function (e: any) {
+    var editorContainer = document.getElementById("editor");
+    var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+    var lines = textContainer?.getElementsByClassName("ace_line");
+    var target = e.domEvent.target;
+
+    if (lines) {
+      if (target.className.indexOf("ace_gutter-cell") == -1)
+        return;
+
+      if (e.clientX > 25 + target.getBoundingClientRect().left)
+        return;
+
+      var breakpoints = e.editor.session.getBreakpoints(row, 0);
+      var row = e.getDocumentPosition().row;
+      if (typeof breakpoints[row] === typeof undefined && row != e.editor.getLastVisibleRow() + 1) {
+        e.editor.session.setBreakpoint(row);
+        row = getCorrectVisibleRow(row, e.editor);
+        lines[row].innerHTML = addDisabledClass(lines[row]);
+        e.stop();
+      } else {
+        e.editor.session.clearBreakpoint(row);
+        // calculating the correct line to edit
+        row = getCorrectVisibleRow(row, e.editor);
+        lines[row].innerHTML = removeDisabledClass(lines[row]);
+        e.stop();
+      }
+    }
+  });
+
+  editor.renderer.on("afterRender", function () {
+    var breakpoints = editor.session.getBreakpoints();
+    adjustLines(breakpoints);
+    setDebugLine()
+  });
+}
+
+function getCorrectVisibleRow(row: number, editor: any) {
+  var firstVisibleRow = editor.getFirstVisibleRow();
+  return row - firstVisibleRow;
+}
+
+function adjustLines(disabledRow: []) {
+  // We have to specify the correct editor here
+  var editorContainer = document.getElementById("editor");
+  var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+  var lines = textContainer?.getElementsByClassName("ace_line");
+  var firstVisibleRow = editor.getFirstVisibleRow();
+  var lastVisibleRow = editor.getLastVisibleRow();
+
+  if (lines) {
+    var arr = disabledRow.slice(firstVisibleRow, lastVisibleRow + 1);
+
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] == 'ace_breakpoint') {
+        var currentLine = lines[i];
+        currentLine.innerHTML = addDisabledClass(currentLine);
+      } else {
+        var currentLine = lines[i];
+        currentLine.innerHTML = removeDisabledClass(currentLine);
+      }
+    }
+  }
+}
+
+function debugRun() {
+  if (window.State.level != null && window.State.lang != null) {
+    runit(window.State.level, window.State.lang, "", function () {
+      $('#output').focus();
+    });
+  }
+}
+
+export function startDebug() {
+  if (step_debugger === true) {
+    var debugButton = $("#debug_button");
+    debugButton.hide();
+    var continueButton = $("#debug_continue");
+    var stopButton = $("#debug_stop");
+    var resetButton = $("#debug_restart");
+    var runButtonContainer = $("#runButtonContainer");
+
+    runButtonContainer.hide();
+    continueButton.show();
+    stopButton.show();
+    resetButton.show();
+
+    incrementDebugLine();
+    debugRun();
+  }
+}
+
+export function resetDebug() {
+  if (step_debugger === true) {
+    var storage = window.localStorage;
+    var debugLine = storage.getItem("debugLine");
+    var continueButton = $("#debug_continue");
+    continueButton.show();
+
+    if (debugLine == null) {
+      storage.setItem("debugLine", "0");
+      clearDebugVariables();
+      setDebugLine(true);
+      debugRun();
+      return;
+    } else {
+      storage.setItem("debugLine", "0");
+      clearDebugVariables();
+      setDebugLine(true);
+      debugRun();
+    }
+  }
+}
+
+export function stopDebug() {
+  if (step_debugger === true) {
+    var debugButton = $("#debug_button");
+    debugButton.show();
+    var continueButton = $("#debug_continue");
+    var stopButton = $("#debug_stop");
+    var resetButton = $("#debug_restart");
+    var runButtonContainer = $("#runButtonContainer");
+
+    runButtonContainer.show();
+    continueButton.hide();
+    stopButton.hide();
+    resetButton.hide();
+
+    var storage = window.localStorage;
+    var debugLine = storage.getItem("debugLine");
+
+    clearDebugVariables();
+
+    if (debugLine == null) {
+      setDebugLine(true);
+      return;
+    } else {
+      storage.removeItem("debugLine");
+      setDebugLine(true);
+    }
+  }
+}
+
+function clearDebugVariables() {
+  var storage = window.localStorage;
+  var keysToRemove = {...localStorage};
+
+  for (var key in keysToRemove) {
+    if (key.includes("prompt-")) {
+      storage.removeItem(key);
+    }
+  }
+}
+
+export function incrementDebugLine() {
+  var storage = window.localStorage;
+  var debugLine = storage.getItem("debugLine");
+  if (debugLine == null) {
+    storage.setItem("debugLine", "0");
+    setDebugLine();
+    return;
+  } else {
+    var debugLineInt = parseInt(debugLine);
+    debugLineInt++;
+    storage.setItem("debugLine", debugLineInt.toString());
+  }
+  setDebugLine();
+
+  var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
+  var debugLine = storage.getItem("debugLine");
+  if (debugLine != null) {
+    var currentLine = parseInt(debugLine);
+    if (currentLine <= lengthOfEntireEditor) {
+      debugRun();
+    }
+  }
+}
+
+function setDebugLine(reset: Boolean = false) {
+  if (step_debugger === true) {
+    var storage = window.localStorage;
+
+    var editorContainer = document.getElementById("editor");
+    var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+    var lines = textContainer?.getElementsByClassName("ace_line");
+    var firstVisibleRow = editor.getFirstVisibleRow();
+    var lastVisibleRow = editor.getLastVisibleRow();
+    var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
+    var indexArray = []
+    for (var x = firstVisibleRow; x <= lastVisibleRow; x++) {
+      indexArray.push(x);
+    }
+
+    if (lines) {
+      var debugLine = storage.getItem("debugLine");
+      if (debugLine != null) {
+        var debugLineNumber = parseInt(debugLine);
+        for (var i = 0; i < indexArray.length; i++) {
+          if (indexArray[i] == debugLineNumber) {
+            lines[i].innerHTML = addDebugClass(lines[i]);
+          } else {
+            lines[i].innerHTML = removeDebugClass(lines[i]);
+          }
+          if (debugLineNumber == lengthOfEntireEditor) {
+            stopDebug();
+            var continueButton = $("#debug_continue");
+            continueButton.hide();
+            return;
+          }
+        }
+      }
+      if (reset) {
+        for (var i = 0; i < indexArray.length; i++) {
+          lines[i].innerHTML = removeDebugClass(lines[i]);
+        }
+        //force resetting the rendering of the ace editor to remove the highlighted line
+        editor.resize(true);
+      }
+    }
+  }
+}
+
+function addDisabledClass(str: Element) {
+  if (!str.children[0]?.innerHTML?.includes("ace-disabled")) {
+    return '<div class="ace-disabled">' + str.innerHTML + '</div>';
+  }
+  return str.innerHTML;
+}
+
+function removeDisabledClass(str: Element) {
+  return str.innerHTML.replace('<div class="ace-disabled">', '').replace('</div>', '');
+}
+
+function addDebugClass(str: Element) {
+  if (!str.children[0]?.innerHTML?.includes("debugLine")) {
+    return '<div class="debugLine">' + str.innerHTML + '</div>';
+  }
+  return str.innerHTML;
+}
+
+function removeDebugClass(str: Element) {
+  return str.innerHTML.replace('<div class="debugLine">', '').replace('</div>', '');
+}
+
+

@@ -5,13 +5,10 @@ import unittest
 import hedy
 from tests.Tester import HedyTester, Snippet
 from parameterized import parameterized
-
-# file is called tests_z_ so they are executed last
-# because programs are more of a priority than adventures, which change less and take longer to run
+from hedy_content import ALL_KEYWORD_LANGUAGES
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
-
 
 
 def collect_snippets(path):
@@ -55,12 +52,41 @@ def collect_snippets(path):
 
   return Hedy_snippets
 
+def translate_keywords_in_snippets(snippets):
+    # fill keyword dict for all keyword languages
+    keyword_dict = {}
+    for lang in ALL_KEYWORD_LANGUAGES:
+        keyword_dict[lang] = YamlFile.for_file(f'../../content/keywords/{lang}.yaml').to_dict()
+        for k, v in keyword_dict[lang].items():
+            if type(v) == str and "|" in v:
+                # when we have several options, pick the first one as default
+                keyword_dict[lang][k] = v.split('|')[0]
+    english_keywords = YamlFile.for_file(f'../../content/keywords/en.yaml').to_dict()
+
+    # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
+    for snippet in snippets:
+        try:
+            if snippet[1].language in ALL_KEYWORD_LANGUAGES.keys():
+                snippet[1].code = snippet[1].code.format(**keyword_dict[snippet[1].language])
+            else:
+                snippet[1].code = snippet[1].code.format(**english_keywords)
+        except KeyError:
+            print("This following snippet contains an invalid placeholder ...")
+            print(snippet)
+
+    return snippets
+
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
 
-# We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
-keywords = YamlFile.for_file('../../content/keywords/en.yaml').to_dict()
-for snippet in Hedy_snippets:
-    snippet[1].code = snippet[1].code.format(**keywords)
+# lang = 'ar' #useful if you want to test just 1 language
+# if lang:
+#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
+#
+# level = 15
+# if level:
+#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
+
+Hedy_snippets = translate_keywords_in_snippets(Hedy_snippets)
 
 class TestsAdventurePrograms(unittest.TestCase):
 
