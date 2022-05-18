@@ -17,7 +17,6 @@ def routes(app, database):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin.html', page_title=gettext('title_admin'))
 
-
     @app.route('/admin/users', methods=['GET'])
     @requires_login
     def get_admin_users_page(user):
@@ -81,7 +80,6 @@ def routes(app, database):
                                language_filter=language, keyword_language_filter=keyword_language,
                                program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
-
     @app.route('/admin/classes', methods=['GET'])
     @requires_login
     def get_admin_classes_page(user):
@@ -123,4 +121,27 @@ def routes(app, database):
         if not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin-stats.html', page_title=gettext('title_admin'))
+
+    @app.route('/admin/achievements', methods=['GET'])
+    @requires_login
+    def get_admin_achievements_page(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        stats = {}
+        achievements = hedyweb.AchievementTranslations().get_translations("en").get("achievements")
+        for achievement in achievements.keys():
+            stats[achievement] = {}
+            stats[achievement]["name"] = achievements.get(achievement).get("title")
+            stats[achievement]["description"] = achievements.get(achievement).get("text")
+            stats[achievement]["count"] = 0
+
+        user_achievements = DATABASE.get_all_achievements()
+        total = len(user_achievements)
+        for user in user_achievements:
+            for achieved in user.get("achieved", []):
+                stats[achieved]["count"] += 1
+
+        return render_template('admin/admin-achievements.html', stats=stats,
+                               total=total, page_title=gettext('title_admin'))
 
