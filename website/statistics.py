@@ -1,4 +1,5 @@
 from collections import namedtuple
+from datetime import date
 from enum import Enum
 from flask import request, jsonify, g
 from flask_babel import gettext
@@ -311,3 +312,24 @@ def _calc_error_rate(fail, success):
     failed = fail or 0
     successful = success or 0
     return (failed * 100) / max(1, failed + successful)
+
+
+def get_general_class_stats(students):
+    current_week = DATABASE.to_year_week(DATABASE.parse_date(str(date.today()), date(2022, 1, 1)))
+    week_stats = DATABASE.get_program_stats(students, None, None)
+    runs = 0
+    fails = 0
+    runs_weekly = 0
+    fails_weekly = 0
+
+    for stats in week_stats:
+        runs += int(stats.get('successful_runs', 0))
+        if stats.get('week') == current_week:
+            runs_weekly += int(stats.get('successful_runs', 0))
+        for k, v in stats.items():
+            if k.lower().endswith('exception'):
+                fails += v
+                if stats.get('week') == current_week:
+                    fails_weekly += v
+
+    return {'week': {'runs': runs_weekly, 'fails': fails_weekly}, 'total': {'runs': runs, 'fails': fails}}

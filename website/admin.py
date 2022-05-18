@@ -2,30 +2,11 @@ from datetime import date
 
 from flask_babel import gettext
 
+from website import statistics
 from website.auth import requires_login, current_user, is_admin, pick
 import utils
 from flask import request
 from flask_helpers import render_template
-
-def get_class_stats(students):
-    current_week = DATABASE.to_year_week(DATABASE.parse_date(str(date.today()), date(2022, 1, 1)))
-    week_stats = DATABASE.get_program_stats(students, None, None)
-    runs = 0
-    fails = 0
-    runs_weekly = 0
-    fails_weekly = 0
-
-    for stats in week_stats:
-        runs += int(stats.get('successful_runs', 0))
-        if stats.get('week') == current_week:
-            runs_weekly += int(stats.get('successful_runs', 0))
-        for k, v in stats.items():
-            if k.lower().endswith('exception'):
-                fails += v
-                if stats.get('week') == current_week:
-                    fails_weekly += v
-
-    return {'week': {'runs': runs_weekly, 'fails': fails_weekly}, 'total': {'runs': runs, 'fails': fails}}
 
 
 def routes(app, database):
@@ -119,7 +100,7 @@ def routes(app, database):
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
             "students": len(Class.get('students')) if 'students' in Class else 0,
-            "stats": get_class_stats(Class.get('students', [])),
+            "stats": statistics.get_general_class_stats(Class.get('students', [])),
             "id": Class.get('id')
         } for Class in DATABASE.all_classes()]
 
