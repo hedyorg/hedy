@@ -13,7 +13,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, ADVENTURE_ORDER, NON_LATIN_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
 import hedyweb
 import hedy_content
 from flask_babel import gettext
@@ -716,6 +716,39 @@ def get_user_formatted_age(now, date):
     return gettext('ago').format(**age)
 
 
+@app.route('/tutorial', methods=['GET'])
+@requires_login
+def tutorial_index(user):
+    level = 1
+    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    adventures = load_adventures_per_level(level)
+
+    return hedyweb.render_tutorial_mode(level=level, commands=commands, adventures=adventures)
+
+
+@app.route('/teacher-tutorial', methods=['GET'])
+@requires_login
+def teacher_tutorial(user):
+    if not is_teacher(user):
+        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+
+    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+    adventures = []
+    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+        adventures.append(
+            {'id': adventure.get('id'),
+             'name': adventure.get('name'),
+             'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+             'level': adventure.get('level')
+             }
+        )
+
+    return render_template('for-teachers.html', current_page='my-profile',
+                           page_title=gettext('title_for-teacher'), teacher_classes=teacher_classes,
+                           teacher_adventures=adventures, tutorial=True,
+                           content=hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang))
+
+
 # routing to index.html
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
@@ -790,7 +823,6 @@ def index(level, program_id):
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
-
 
     return hedyweb.render_code_editor_with_tabs(
         commands=commands,
@@ -1002,31 +1034,6 @@ def main_page(page):
         else:
             return utils.error_page(error=403, ui_message=gettext('not_user'))
 
-    if page == 'for-teachers':
-        for_teacher_translations = hedyweb.PageTranslations(
-            page).get_page_translations(g.lang)
-        if is_teacher(user):
-            welcome_teacher = session.get('welcome-teacher') or False
-            session.pop('welcome-teacher', None)
-            teacher_classes = [] if not current_user(
-            )['username'] else DATABASE.get_teacher_classes(current_user()['username'], True)
-            adventures = []
-            for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
-                adventures.append(
-                    {'id': adventure.get('id'),
-                     'name': adventure.get('name'),
-                     'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
-                     'level': adventure.get('level')
-                     }
-                )
-
-            return render_template('for-teachers.html', current_page='my-profile',
-                                   page_title=gettext('title_for-teacher'),
-                                   content=for_teacher_translations, teacher_classes=teacher_classes,
-                                   teacher_adventures=adventures, welcome_teacher=welcome_teacher)
-        else:
-            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-
     requested_page = hedyweb.PageTranslations(page)
     if not requested_page.exists():
         abort(404)
@@ -1034,6 +1041,32 @@ def main_page(page):
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=gettext('title_start'),
                            current_page='start', content=main_page_translations)
+
+
+@app.route('/for-teachers', methods=['GET'])
+@requires_login
+def for_teachers_page(user):
+    if not is_teacher(user):
+        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+
+    page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
+    welcome_teacher = session.get('welcome-teacher') or False
+    session.pop('welcome-teacher', None)
+
+    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+    adventures = []
+    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+        adventures.append(
+          {'id': adventure.get('id'),
+           'name': adventure.get('name'),
+           'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+           'level': adventure.get('level')
+           }
+        )
+
+    return render_template('for-teachers.html', current_page='my-profile', page_title=gettext('title_for-teacher'),
+                           content=page_translations, teacher_classes=teacher_classes,
+                           teacher_adventures=adventures, welcome_teacher=welcome_teacher)
 
 
 @app.route('/explore', methods=['GET'])
@@ -1131,6 +1164,79 @@ def translate_keywords():
     except:
         return gettext('translate_error'), 400
 
+
+def tutorial_steps(step):
+    if step == 0:
+        translation = [gettext('tutorial_start_title'), gettext('tutorial_start_message')]
+    elif step == 1:
+        translation = [gettext('tutorial_editor_title'), gettext('tutorial_editor_message')]
+    elif step == 2:
+        translation = [gettext('tutorial_output_title'), gettext('tutorial_output_message')]
+    elif step == 3:
+        translation = [gettext('tutorial_run_title'), gettext('tutorial_run_message')]
+    elif step == 4:
+        translation = [gettext('tutorial_tryit_title'), gettext('tutorial_tryit_message')]
+    elif step == 5:
+        translation = [gettext('tutorial_nextlevel_title'), gettext('tutorial_nextlevel_message')]
+    elif step == 6:
+        translation = [gettext('tutorial_leveldefault_title'), gettext('tutorial_leveldefault_message')]
+    elif step == 7:
+        translation = [gettext('tutorial_adventures_title'), gettext('tutorial_adventures_message')]
+    elif step == 8:
+        translation = [gettext('tutorial_quiz_title'), gettext('tutorial_quiz_message')]
+    elif step == 9:
+        translation = [gettext('tutorial_saveshare_title'), gettext('tutorial_saveshare_message')]
+    elif step == 10:
+        translation = [gettext('tutorial_cheatsheet_title'), gettext('tutorial_cheatsheet_message')]
+    elif step == 11:
+        translation = [gettext('tutorial_end_title'), gettext('tutorial_end_message')]
+    else:
+        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
+    return translation
+
+
+def teacher_tutorial_steps(step):
+    if step == 0:
+        translation = [gettext('tutorial_start_title'), gettext('teacher_tutorial_start_message')]
+    elif step == 1:
+        translation = [gettext('tutorial_class_title'), gettext('tutorial_class_message')]
+    elif step == 2:
+        translation = [gettext('tutorial_customize_class_title'), gettext('tutorial_customize_class_message')]
+    elif step == 3:
+        translation = [gettext('tutorial_own_adventures_title'), gettext('tutorial_own_adventures_message')]
+    elif step == 4:
+        translation = [gettext('tutorial_accounts_title'), gettext('tutorial_accounts_message')]
+    elif step == 5:
+        translation = [gettext('tutorial_documentation_title'), gettext('tutorial_documentation_message')]
+    elif step == 6:
+        translation = [gettext('tutorial_end_title'), gettext('teacher_tutorial_end_message')]
+    else:
+        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
+    return translation
+
+
+@app.route('/get_tutorial_step/<step>', methods=['GET'])
+def get_tutorial_translation(step):
+    # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
+    if step == "code_snippet":
+        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
+    try:
+        step = int(step)
+    except ValueError:
+        return gettext('invalid_tutorial_step'), 400
+
+    translation = tutorial_steps(step)
+    return jsonify({'translation': translation}), 200
+
+@app.route('/get_teacher_tutorial_step/<step>', methods=['GET'])
+def get_teacher_tutorial_translation(step):
+    try:
+        step = int(step)
+    except ValueError:
+        return gettext('invalid_tutorial_step'), 400
+
+    translation = teacher_tutorial_steps(step)
+    return jsonify({'translation': translation}), 200
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():

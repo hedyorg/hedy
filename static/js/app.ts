@@ -385,6 +385,7 @@ function showAchievement(achievement: any[]){
   return new Promise<void>((resolve)=>{
         $('#achievement_reached_title').text('"' + achievement[0] + '"');
         $('#achievement_reached_text').text(achievement[1]);
+        $('#achievement_reached_statics').text(achievement[2]);
         $('#achievement_pop-up').fadeIn(1000, function () {
           setTimeout(function(){
             $('#achievement_pop-up').fadeOut(1000);
@@ -1075,6 +1076,20 @@ export function showVariableView() {
   }
 }
 
+//Feature flag for variable and values view
+var variable_view = false;
+
+if(window.State.level != null){
+  let level = Number(window.State.level);
+  variable_view = level >= 2;
+}
+
+//Hides the HTML DIV for variables if feature flag is false
+if (!variable_view) {
+  $('#variables').hide();
+  $('#variable_button').hide();
+}
+
 //Feature flag for step by step debugger. Becomes true automatically for level 7 and below.
 var step_debugger = false;
 if(window.State.level != null){
@@ -1088,13 +1103,16 @@ if (!step_debugger) {
 }
 
 export function show_variables() {
-  const variableList = $('#variable-list');
-  if (variableList.hasClass('hidden')) {
-    variableList.removeClass('hidden');
+  if (variable_view === true) {
+    const variableList = $('#variable-list');
+    if (variableList.hasClass('hidden')) {
+      variableList.removeClass('hidden');
+    }
   }
 }
 
-export function load_variables(variables: any){
+export function load_variables(variables: any) {
+  if (variable_view === true) {
     //@ts-ignore
     variables = clean_variables(variables);
     const variableList = $('#variable-list');
@@ -1102,6 +1120,7 @@ export function load_variables(variables: any){
     for (const i in variables) {
       variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
     }
+  }
 }
 
 // Color-coding string, numbers, booleans and lists
@@ -1128,16 +1147,18 @@ function special_style_for_variable(variable: any){
 //hiding certain variables from the list unwanted for users
 // @ts-ignore
 function clean_variables(variables: any) {
-  const new_variables = [];
-  const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
-  for (const variable in variables) {
-    if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-    let extraStyle = special_style_for_variable(variables[variable]);
-    let newTuple = [variable, variables[variable].v, extraStyle];
-    new_variables.push(newTuple);
+  if (variable_view === true) {
+    const new_variables = [];
+    const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
+    for (const variable in variables) {
+      if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
+        let extraStyle = special_style_for_variable(variables[variable]);
+        let newTuple = [variable, variables[variable].v, extraStyle];
+        new_variables.push(newTuple);
+      }
     }
+    return new_variables;
   }
-  return new_variables;
 }
 
 export function get_trimmed_code() {

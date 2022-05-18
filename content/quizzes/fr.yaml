@@ -19,28 +19,28 @@ levels:
             mp_choice_options:
             -   option: "{echo}"
                 feedback: "{echo} répète une réponse donnée."
-            -   option: "{print}"
+            -   option: "```{print}```"
                 feedback: "Correct !"
             -   option: "Bonjour"
                 feedback: "Bonjour n'est pas une commande."
             -   option: "ask"
                 feedback: "Avec `{ask}`, tu peux poser une question."
             correct_answer: "B"
-            hint: "_?_ Hello world !"
+            hint: "_?_ Bonjour le monde!"
             question_score: '10'
         3:
             question_text: "Comment demander à quelqu'un quelle est sa couleur préférée ?"
             mp_choice_options:
             -   option: "print Quelle est ta couleur préférée ?"
-                feedback: "`print` affiche du texte, mais il ne pose pas de questions."
+                feedback: "`{print}` affiche du texte, mais il ne pose pas de questions."
             -   option: "ask print Quelle est ta couleur préférée ?"
                 feedback: "Tu n'as besoin que d'une commande, pas de deux."
             -   option: "ask Quelle est ta couleur préférée ?"
                 feedback: "Parfait !"
             -   option: "echo Quelle est ta couleur préférée ?"
-                feedback: "`echo` te répète la réponse que tu as donnée."
+                feedback: "`{echo}` te répète la réponse que tu as donnée."
             correct_answer: "C"
-            hint: "Tu peux demander quelque chose avec la commande `ask`."
+            hint: "Tu peux demander quelque chose avec la commande `{ask}`."
             question_score: '10'
         4:
             question_text: "Quel est le problème avec ce code ?"
