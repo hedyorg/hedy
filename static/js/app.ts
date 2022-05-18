@@ -1155,16 +1155,16 @@ export function get_trimmed_code() {
       let text = $(this).attr('code') || "";
       if (text.length > 1) {
         code += text;
-       
-        $(this).removeClass('border-black');
-        // @ts-ignore
-        if ($(this).attr('index').charCodeAt(0) == count){
-          $(this).addClass('border-green-500');
-        } else {
-          $(this).addClass('border-red-500');
-        }
+      }
+      $(this).parents().removeClass('border-black');
+      // @ts-ignore
+      if ($(this).attr('index').charCodeAt(0) == count) {
+        console.log("Deze staat op de juiste plek!");
+        $(this).parents().addClass('border-green-500');
+      } else {
+        $(this).parents().addClass('border-red-500');
+      }
       count += 1;
-      }   
     });
     return code.replace(/ +$/mg, '');
   }
