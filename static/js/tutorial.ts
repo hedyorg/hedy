@@ -68,12 +68,20 @@ function tryRunButtonStep() {
   tutorialPopup(current_step);
 }
 
-function nextLevelStep() {
+function speakAloudStep() {
   removeBorder("runButtonContainer");
   $('#editor').removeClass('z-40');
   $('#code_output').removeClass('z-40');
   $('#runButtonContainer').removeClass('z-40');
 
+  $('#speak_container').addClass("z-40");
+  addHighlightBorder("speak_container");
+
+  relocatePopup(50, 30);
+  tutorialPopup(current_step);
+}
+
+function nextLevelStep() {
   $('#next_level_button').addClass("z-40");
   addHighlightBorder("next_level_button");
 
@@ -152,18 +160,20 @@ function callNextStep() {
   } else if (current_step == 4) {
     tryRunButtonStep();
   } else if (current_step == 5) {
-    nextLevelStep();
+    speakAloudStep();
   } else if (current_step == 6) {
-    levelDefaultStep();
+    nextLevelStep();
   } else if (current_step == 7) {
-    adventureTabsStep();
+    levelDefaultStep();
   } else if (current_step == 8) {
-    quizTabStep();
+    adventureTabsStep();
   } else if (current_step == 9) {
-    saveShareStep();
+    quizTabStep();
   } else if (current_step == 10) {
-    cheatsheetStep();
+    saveShareStep();
   } else if (current_step == 11) {
+    cheatsheetStep();
+  } else if (current_step == 12) {
     pushAchievement("well_begun_is_half_done");
     $('#achievement_pop-up').removeClass('z-10');
     $('#achievement_pop-up').addClass('z-50');
