@@ -161,8 +161,8 @@ class TestsLevel18(HedyTester):
       expected = textwrap.dedent("""\
       a = 2
       b = 3
-      step = 1 if int(2) < int(4) else -1
-      for a in range(int(2), int(4) + step, step):
+      step = 1 if 2 < 4 else -1
+      for a in range(2, 4 + step, step):
         a = a + 2
         b = b + 2
         time.sleep(0.1)""")
@@ -179,10 +179,10 @@ class TestsLevel18(HedyTester):
           for j in range(1, 4):
               print('rondje: ', i, ' tel: ', j)""")
       expected = textwrap.dedent("""\
-      step = 1 if int(1) < int(3) else -1
-      for i in range(int(1), int(3) + step, step):
-        step = 1 if int(1) < int(4) else -1
-        for j in range(int(1), int(4) + step, step):
+      step = 1 if 1 < 3 else -1
+      for i in range(1, 3 + step, step):
+        step = 1 if 1 < 4 else -1
+        for j in range(1, 4 + step, step):
           print(f'''rondje: {i} tel: {j}''')
           time.sleep(0.1)""")
 
@@ -192,6 +192,22 @@ class TestsLevel18(HedyTester):
         expected=expected,
         extra_check_function=self.is_not_turtle()
       )
+
+    def test_for_loop_arabic(self):
+      code = textwrap.dedent("""\
+      for دورة in range(١, ٥):
+          print(دورة)""")
+
+      expected = textwrap.dedent("""\
+      step = 1 if 1 < 5 else -1
+      for v637d5dd1f16a4cc1d923588cb55ede49 in range(1, 5 + step, step):
+        print(f'''{v637d5dd1f16a4cc1d923588cb55ede49}''')
+        time.sleep(0.1)""")
+
+      self.single_level_tester(
+        code=code,
+        expected=expected,
+        expected_commands=['for', 'print'])
 
     def test_input_with_list(self):
       code = textwrap.dedent("""\
