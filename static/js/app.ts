@@ -33,8 +33,15 @@ export let theModalEditor: AceAjax.Editor;
     exampleEditor.setOptions({ maxLines: Infinity });
     if ($(preview).hasClass('common-mistakes')) {
       exampleEditor.setOptions({ minLines: 10 });
-    } else if ($(preview).hasClass('cheatsheet') || $(preview).hasClass('parsons')) {
+    } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
+    } else if ($(preview).hasClass('parsons')) {
+      exampleEditor.setOptions({
+        minLines: 1,
+        showGutter: false,
+        showPrintMargin: false,
+        highlightActiveLine: false
+      });
     } else {
       exampleEditor.setOptions({ minLines: 2 });
     }

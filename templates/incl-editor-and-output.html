@@ -36,8 +36,9 @@
         {% if parsons %}
             <div id="parsons_container" class="w-full flex-1 mt-4" style="display: none;">
                 {% for key, line in parsons.code_lines.items() %}
-                   <div id="color_me" index="0" draggable="true" class="box turn-pre-into-ace w-full mb-2 py-2 border-2 border-black rounded-lg" style="background-color: #272822;">
-                       <pre level="{{ level }}" class="no-copy-button parsons"></pre>
+                   <div id="color_me" index="0" draggable="true" class="box relative turn-pre-into-ace w-full mb-2 border-2 border-black rounded-lg" style="background-color: #272822;">
+                       <div class="w-full absolute inset-0 z-10 text-white border border-white rounded-lg">This is the overlay</div>
+                       <pre level="{{ level }}" class="no-copy-button parsons">This is the code</pre>
                    </div>
                 {% endfor %}
             </div>
