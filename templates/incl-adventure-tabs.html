@@ -67,7 +67,6 @@
                     <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
                         {{ parsons['text']|commonmark }}
                         <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
-                            
                             {% for key, line in parsons.code_lines.items() %}
                                 <div id="{{line}}" draggable="true" class="box w-full mb-2 py-2 border-2 border-black rounded-lg" style="background-color: #272822;" index="{{key}}">
                                     <pre level="{{ level }}" class="no-copy-button parsons">{% if line[0] == '_' %}&nbsp;&nbsp;&nbsp;&nbsp;{{line[1:]}}{% else %}{{line}}{% endif %}</pre>
