@@ -233,9 +233,13 @@ class ParsonsProblem:
     #for key, value in items:
     #    print(key,":", value)
 
-    retVal = copy.deepcopy(self.parsons_file.get(int(level), {}))
-    retVal["code_lines"] = dict(items)
-    return retVal
+    # Only return code_lines if there are actual items to return -> prevents crash on front-end
+    if items:
+        retVal = copy.deepcopy(self.parsons_file.get(int(level), {}))
+        retVal["code_lines"] = dict(items)
+        return retVal
+    return None
+
   
 class NoSuchParsons:
   def get_defaults(self, level):
