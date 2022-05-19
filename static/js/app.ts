@@ -14,6 +14,8 @@ export let theModalEditor: AceAjax.Editor;
     window.State = {};
   }
 
+
+
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
 
@@ -22,11 +24,8 @@ export let theModalEditor: AceAjax.Editor;
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
-  let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
-    counter += 1;
     $(preview).addClass('text-lg rounded');
-    $(preview).attr('id', "code_block_" + counter);
     // We set the language of the editor to the current keyword_language -> needed when copying to main editor
     $(preview).attr('lang', <string>window.State.keyword_language);
     $(preview).addClass('overflow-x-hidden');
@@ -38,6 +37,13 @@ export let theModalEditor: AceAjax.Editor;
       exampleEditor.setOptions({ minLines: 10 });
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
+    } else if ($(preview).hasClass('parsons')) {
+      exampleEditor.setOptions({
+        minLines: 1,
+        showGutter: false,
+        showPrintMargin: false,
+        highlightActiveLine: false
+      });
     } else {
       exampleEditor.setOptions({ minLines: 2 });
     }
@@ -286,7 +292,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       dataType: 'json'
     }).done(function(response: any) {
       console.log('Response', response);
-      if (response.Warning) {
+      if (response.Warning && $('#editor').is(":visible")) {
         storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
@@ -1180,6 +1186,30 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
+
+  // If the main editor is hidden -> we are solving a parsons problem
+  if ($('#editor').is(":hidden")){
+    let code = "";
+    let count = 65;
+
+    $('.compiler-parsons-box').each(function() {
+      let text = $(this).attr('code') || "";
+      if (text.length > 1) {
+        code += text;
+      }
+      $(this).parents().removeClass('border-black');
+      // @ts-ignore
+      if ($(this).attr('index').charCodeAt(0) == count) {
+        console.log("Deze staat op de juiste plek!");
+        $(this).parents().addClass('border-green-500');
+      } else {
+        $(this).parents().addClass('border-red-500');
+      }
+      count += 1;
+    });
+    return code.replace(/ +$/mg, '');
+  }
+  //console.log('Hello world');
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
   // Remove whitespace at the end of every line
