@@ -440,11 +440,7 @@ class Database:
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
             user_achievements = {'username': username}
-        if 'commands' not in user_achievements:
-            user_achievements['commands'] = []
-        for command in commands:
-            if command not in user_achievements['commands']:
-                user_achievements['commands'].append(command)
+        user_achievements['commands'] = commands
         ACHIEVEMENTS.put(user_achievements)
 
     def increase_user_run_count(self, username):

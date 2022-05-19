@@ -50,7 +50,9 @@ class Achievements:
             else:
                 session['achieved'] = []
             if 'commands' in achievements_data:
-                session['commands'] = achievements_data['commands']
+                # We convert the list to a set perform intersection with all commands and convert to set again
+                # This to prevent "faulty" commands being kept from relic code (such as "multiplication")
+                session['commands'] = list(set(achievements_data['commands']).intersection(self.all_commands))
             else:
                 session['commands'] = []
             if 'run_programs' in achievements_data:
