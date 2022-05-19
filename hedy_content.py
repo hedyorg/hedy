@@ -213,32 +213,47 @@ class NoSuchAdventure:
   
 
 class ParsonsProblem:
-  def __init__(self, language):
-    self.language = language
-    try:
-        self.parsons_file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').to_dict()
-    except:
-        self.parsons_file = {}
+    def __init__(self, language):
+        self.language = language
+        self.file = {}
+        self.data = {}
 
-  def get_defaults(self, level):
-    """Return the level defaults for a given level number."""
-    
-    items = list(self.parsons_file.get(int(level),{}).get("code_lines", {}).items())
-    items_orig = copy.deepcopy(items)
-    
-    if (items == items_orig):
-        random.shuffle(items)
-    #self.parsons_file = dict(items)
-    #print(items)
-    #for key, value in items:
-    #    print(key,":", value)
+        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
 
-    # Only return code_lines if there are actual items to return -> prevents crash on front-end
-    if items:
-        retVal = copy.deepcopy(self.parsons_file.get(int(level), {}))
-        retVal["code_lines"] = dict(items)
-        return retVal
-    return None
+        if self.debug_mode:
+            try:
+                self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('parsons')
+            except:
+                return
+            # We always create one with english keywords
+            self.data["en"] = self.cache_parsons_keywords("en")
+            if language in ALL_KEYWORD_LANGUAGES.keys():
+                self.data[language] = self.cache_parsons_keywords(language)
+
+    def cache_parsons_keywords(self, language):
+        keyword_data = {}
+        for short_name, parson in self.file.items():
+            parsed_parson = copy.deepcopy(parson)
+            for line in parson.get('code_lines'):
+                print(line)
+                for k, v in adventure.get('levels').get(level).items():
+                    try:
+                        parsed_adventure.get('levels').get(level)[k] = v.format(**KEYWORDS.get(language))
+                    except IndexError:
+                        print("There is an issue due to an empty placeholder in the following line:")
+                        print(v)
+                    except KeyError:
+                        print("There is an issue due to a non-existing key in the following line:")
+                        print(v)
+            keyword_data[short_name] = parsed_adventure
+        return keyword_data
+
+    def get_parsons(self, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('parsons')
+            self.data[keyword_lang] = self.cache_parsons_keywords(keyword_lang)
+        return self.data.get(keyword_lang)
 
   
 class NoSuchParsons:

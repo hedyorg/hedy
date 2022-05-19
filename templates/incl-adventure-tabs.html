@@ -10,8 +10,8 @@
             {% endfor %}
             <!-- Add the tab for the parsons problem (if it exists -->
             {% if parsons %}
-                <div class="tab parsons_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="dragging">
-                    {{parsons['tab_name']}}
+                <div class="tab parsons_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{parsons['short_name']}}">
+                    {{parsons['name']}}
                 </div>
             {% endif %}
             {% for adventure in teacher_adventures %}
@@ -62,7 +62,7 @@
           {% endif %}
         {% endfor %}
         {% if parsons %}
-            <div data-tabtarget="dragging" class="hidden">
+            <div data-tabtarget="{{parsons['short_name']}}" class="hidden">
                 <div class="flex flex-row">
                     <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
                         {{ parsons['text']|commonmark }}
