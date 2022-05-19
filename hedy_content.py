@@ -237,8 +237,6 @@ class ParsonsProblem:
             for level in parson.get('levels'):
                 for k, v in parson.get('levels').get(level).get('code_lines').items():
                     try:
-                        print(v)
-                        print(v.format(**KEYWORDS.get(language)))
                         parsed_parson.get('levels').get(level).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
                         print("There is an issue due to an empty placeholder in the following line:")
@@ -255,11 +253,6 @@ class ParsonsProblem:
                 self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('parsons')
             self.data[keyword_lang] = self.cache_parsons_keywords(keyword_lang)
         return self.data.get(keyword_lang)
-
-  
-class NoSuchParsons:
-  def get_defaults(self, level):
-    return {}
 
 
 class Quizzes:
