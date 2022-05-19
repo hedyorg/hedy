@@ -167,7 +167,6 @@ class Achievements:
             stats = gettext('percentage_achieved').format(**{'percentage': percentage})
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], stats])
         session['new_achieved'] = [] # Once we get earned achievements -> empty the array with "waiting" ones
-        session['new_commands'] = []
         return translated_achievements
 
     def check_programs_run(self):
@@ -209,9 +208,11 @@ class Achievements:
         self.initialize_user_data_if_necessary()
         commands_in_code = hedy.all_commands(code, level, session['lang'])
         if 'trying_is_key' not in session['achieved']:
-            for command in list(set(commands_in_code)): # To remove duplicates
+            for command in list(set(commands_in_code)):  # To remove duplicates
                 if command not in session['commands'] and command in self.all_commands:
                     session['new_commands'].append(command)
+            print(set(session['commands']).union(set(session['new_commands'])))
+            print(self.all_commands)
             if set(session['commands']).union(set(session['new_commands'])) == self.all_commands:
                 session['new_achieved'].append("trying_is_key")
         if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
