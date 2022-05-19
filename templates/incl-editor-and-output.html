@@ -35,7 +35,7 @@
         </div>
         {% if parsons %}
             {% for parson in parsons %}
-                <div id="parsons_container" class="w-full flex-1 mt-4" style="display: none;">
+                <div id="parsons_container" class="w-full flex-1" style="display: none;">
                     {% for key, line in parson.code_lines.items() %}
                        <div class="parsons_code_container relative turn-pre-into-ace w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;">
                            <div index="0" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
