@@ -1,106 +1,107 @@
 parsons:
     dragging:
-      name: "Slepen"
+      name: "Dragging"
       levels:
         1:
           text: | 
-            ## Sleep de code in de juiste volgorde
+            ## Drag the code in the correct order
           example: |
-            ## Wat moet mijn code doen?
+            ## What is my code supposed to do?
           story: |
-            Je bent een klant bij bakkerij Hedy. 
-            Je loopt de bakkerij binnen en wordt verwelkomd door de bakker.
-            Hij vraagt wat voor taart je wil bestellen.
-            Daarna wordt je bestelling klaargezet.
+            You're a customer at bakery Hedy.
+            You want into the bakery and are welcomed by the baker.
+            He asks what type of pie you want to order.
+            Your order is being prepared.
           code_lines:
             A: | 
-              {print} Welkom bij bakkerij Hedy!
+              {print} Welcome to bakery Hedy!
             B: |
-              {ask} Wat voor taart wilt u bestellen?
+              {ask} What type of pie do you want to order?
             C: |
-              {echo} Dus u wilt
+              {echo} So you want
             D: |
-              {print} De bestelling wordt klaargezet!
+              {print} Your order is being prepared!
         2:
           text: |
-            ## Sleep de code in de juiste volgorde
+            ## Drag the code in the correct order
           example: |
-            ## Wat moet mijn code doen?
+            ## What is my code supposed to do?
           story: |
-            Jij en je vrienden gaan Netflix kijken.
-            Laat zien welke film jullie gaan kijken en wens de kijkers veel plezier!
+            You and your friends are going to watch some Netflix.
+            Show which movie you're about to watch and wish the viewers lot of fun!
           code_lines:
             A: |
-              {print} Het is tijd voor een avondje Netflix
+              {print} It is time for an evening of Netflix
             B: | 
               film {is} Sonic the Hedgehog 2
             C: |
-              {print} We gaan kijken naar film
+              {print} We're going to the movies
             D: |
-              {print} Heel veel plezier!
+              {print} Have lot of fun!
         3:
           text: |
-            ## Sleep de code in de juiste volgorde
+            ## Drag the code in the correct order
           example: |
-            ## Wat moet mijn code doen?
+            ## What is my code supposed to do?
           story: |
-            Het nieuwe schooljaar op Zweinstein gaat van start! Het is de taak van de sorteerhoed
-            om jou in te delen in een van de afdelingen. Bij welke afdeling zou jij komen?
-            Ben jij een Griffoendor, Huffelpuf, Zwadderich of Ravenklauw. 
-            Laat het programma even wachten voordat het onthult bij welke afdeling jij mag.
+            The new school year at Hogwarts is starting! 
+            It is the job of the sorting hat to sort you into one of the houses.
+            Which house will you be sorted into?
+            Are you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.
+            Let the program wait a short period before revealing your house.
           code_lines:
             A: |
-              {print} Het nieuwe schooljaar op Zweinstein gaat van start!
+              {print} The new school year at Hogwarts is starting!
             B: |
-              {print} De sorteerhoed is er klaar voor om jou in te delen
+              {print} The sorting hat is ready to sort you into one of the houses.
             C: |
-              afdelingen {is} Griffoendor, Huffelpuf, Zwadderich, Ravenklauw
+              houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
             D: |
               {sleep} 2
             E: |
-              {print} het wordt afdelingen {at} {random}
+              {print} And it is houses {at} {random}
         4:
           text: | 
-            ## Sleep de code in de juiste volgorde
+            ## Drag the code in the correct order
           example: |
-            ## Wat moet mijn code doen?
+            ## What is my code supposed to do?
           story: |
-            Jij bent de nieuwste Pokémon trainer Pallet Town!
-            Maak een programma die jouw eerste Pokémon uitkiest.
-            Laat het programma weer even wachten voordat hij jouw eerste pokémon onthult.
+            You are the newest Pokémon trainer from Pallet Town!
+            Make a program that selects your first Pokémon.
+            Let the program wait a minute before revealing your first pokémon.
           code_lines:
             A: |
               pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
             B: | 
-              {print} 'Dit wordt jouw eerste Pokémon!'
+              {print} 'This is going to be your first pokémon!'
             C: |
               {sleep}
             D: |
               {print} pokemons {at} {random}
         5:
           text: |
-            ## Sleep de code in de juiste volgorde
+            ## Drag the code in the correct order
           example: |
-            ## Wat moet mijn code doen?
+            ## What is my code supposed to do?
           story: |  
-           Maak een programma die kijkt of jouw lievelingsfilm al in het lijstje van de computer staat opgeslagen.
-           Zo ja dan print je dat je een goede smaak hebt, zo nee dan voegen we hem graag toe aan de lijst.
+            Make a program that checks if your favourite movie is already in the list of the computer.
+            If so, print that you have great taste, otherwise add the movie to the list.
           code_lines:
             A:  |
-              favoriete_film {is} Batman, Spiderman, The Avengers, Jurassic Park
+              favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
             B:  |
-              film {is} {ask} 'Wat is jouw lievelingsfilm?'
+              movie {is} {ask} 'What is your favourite movie?'
             C:  |
-              {if} film {in} favoriete_film {print} 'Jij hebt een goede smaak!'
+              {if} movie {in} favoriete_movies {print} 'You have great taste!'
             D:  |
-              {else} {print} 'Wat jammer dat jouw favoriete film niet in het lijstje staat, we voegen hem toe aan de lijst!'
+              {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
             E:  |
-              {add} film {to_list} favoriete_film
+              {add} movie {to_list} favoriete_movies
         6:
           text: |
-            ## Sleep de code in de juiste volgorde
+            ## Drag the code in the correct order
           example: |
-            ## Wat moet mijn code doen?
+            ## What is my code supposed to do?
           story: | 
             Maak een programma die voor jou berekent hoe oud jij bent in hondenjaren en in kattenjaren.
             Vraag eerst de leeftijd van de gebruiker en rekenen maar. 
@@ -119,9 +120,9 @@ parsons:
               {print} 'In kattenjaren ben jij ' kat_leeftijd ' jaar oud.'
         7:
           text: |
-            ## Sleep de code in de juiste volgorde
+            ## Drag the code in the correct order
           example: |
-            ## Wat moet mijn code doen?
+            ## What is my code supposed to do?
           story: |
             In een schaaktoernooi zijn nog drie spelers over. Maak een programma die beslist welke twee spelers als eerst tegen elkaar mogen schaken.
             Print eerst de twee spelers die tegen elkaar spelen en print vervolgens de tegen wie de winnaar mag spelen.
@@ -142,9 +143,9 @@ parsons:
               {print} 'De winnaar speelt tegen ' spelers {at} {random}
         8:
           text: |
-            ## Wat moet mijn code doen?
+            ## Drag the code in the correct order
           example: |
-            ## Wat moet mijn code doen?
+            ## What is my code supposed to do?
           story: |
             Jij en je vrienden spelen Pokémon Go! Maak een programma die bepaalt in welke kleur team je komt
             rood, geel of blauw!
@@ -164,4 +165,3 @@ parsons:
             G: |
               {print} kleuren {at} random '!'
 
-      
