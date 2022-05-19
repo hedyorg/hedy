@@ -1,4 +1,6 @@
 # coding=utf-8
+import random
+
 from website import auth
 from website import statistics
 from website import quiz
@@ -17,7 +19,7 @@ from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LA
 import hedyweb
 import hedy_content
 from flask_babel import gettext
-from flask_babel import Babel, refresh
+from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
@@ -57,7 +59,7 @@ ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
 
-PARSONS = collections.defaultdict(hedy_content.NoSuchParsons)
+PARSONS = collections.defaultdict()
 for lang in ALL_LANGUAGES.keys():
     PARSONS[lang] = hedy_content.ParsonsProblem(lang)
 
@@ -99,6 +101,25 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
       return(int_saver(s))
 """)
 
+
+def load_parsons_per_level(level):
+    all_parsons = []
+    parsons = PARSONS[g.lang].get_parsons(g.keyword_lang)
+    for short_name, parson in parsons.items():
+        if level not in parson['levels']:
+            continue
+        level_parson = parson['levels'].get(level)
+        current_parson = {
+            'short_name': short_name,
+            'name': parson['name'],
+            'text': level_parson['text'],
+            'example': level_parson['example'],
+            'story': level_parson['story'],
+            # We use this overly complex line to shuffle the dict items in one go
+            'code_lines': {i: level_parson['code_lines'][i] for i in list(set(level_parson['code_lines']))}
+        }
+        all_parsons.append(current_parson)
+    return all_parsons
 
 def load_adventures_per_level(level):
     loaded_programs = {}
@@ -806,7 +827,8 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    parsons = PARSONS[g.lang].get_defaults(level)
+    parsons = load_parsons_per_level(level)
+    print(parsons)
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []

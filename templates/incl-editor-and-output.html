@@ -34,14 +34,16 @@
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code}}
         </div>
         {% if parsons %}
-            <div id="parsons_container" class="w-full flex-1 mt-4" style="display: none;">
-                {% for key, line in parsons.code_lines.items() %}
-                   <div class="parsons_code_container relative turn-pre-into-ace w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;">
-                       <div index="0" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
-                       <pre level="{{ level }}" id="goal_parsons_{{ loop.index }}" class="no-copy-button parsons text-sm"></pre>
-                   </div>
-                {% endfor %}
-            </div>
+            {% for parson in parsons %}
+                <div id="parsons_container" class="w-full flex-1 mt-4" style="display: none;">
+                    {% for key, line in parson.code_lines.items() %}
+                       <div class="parsons_code_container relative turn-pre-into-ace w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;">
+                           <div index="0" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                           <pre level="{{ level }}" id="goal_parsons_{{ loop.index }}" class="no-copy-button parsons text-sm"></pre>
+                       </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
         {% endif %}
         <!-- errorbox -->
         <div id="errorbox"

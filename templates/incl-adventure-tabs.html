@@ -10,9 +10,11 @@
             {% endfor %}
             <!-- Add the tab for the parsons problem (if it exists -->
             {% if parsons %}
-                <div class="tab parsons_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{parsons['short_name']}}">
-                    {{parsons['name']}}
-                </div>
+                {% for parson in parsons %}
+                    <div class="tab parsons_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{parson['short_name']}}">
+                        {{parson['name']}}
+                    </div>
+                {% endfor %}
             {% endif %}
             {% for adventure in teacher_adventures %}
                 <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.name}}">
@@ -62,27 +64,29 @@
           {% endif %}
         {% endfor %}
         {% if parsons %}
-            <div data-tabtarget="{{parsons['short_name']}}" class="hidden">
-                <div class="flex flex-row">
-                    <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
-                        {{ parsons['text']|commonmark }}
-                        <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
-                            {% for key, line in parsons.code_lines.items() %}
-                                <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;">
-                                    <div index="{{ key }}" draggable="true" code="{{ line }}" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
-                                    <pre level="{{ level }}" id="start_parsons_{{ loop.index }}" class="no-copy-button parsons text-sm">{% if line[0] == '_' %}&nbsp;&nbsp;&nbsp;&nbsp;{{line[1:]}}{% else %}{{line}}{% endif %}</pre>
-                                </div>
-                            {% endfor %}
+            {% for parson in parsons %}
+                <div data-tabtarget="{{parson['short_name']}}" class="hidden">
+                    <div class="flex flex-row">
+                        <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
+                            {{ parson['text']|commonmark }}
+                            <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
+                                {% for key, line in parson.code_lines.items() %}
+                                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;">
+                                        <div index="{{ key }}" draggable="true" code="{{ line }}" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                                        <pre level="{{ level }}" id="start_parsons_{{ loop.index }}" class="no-copy-button parsons text-sm">{% if line[0] == '_' %}&nbsp;&nbsp;&nbsp;&nbsp;{{line[1:]}}{% else %}{{line}}{% endif %}</pre>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="w-1/2 ltr:ml-2 rtl:mr-2">
+                            {{ parson['example']|commonmark }}
+                            {{ parson['story']|commonmark }}
                         </div>
                     </div>
-                    
-                    <div class="w-1/2 ltr:ml-2 rtl:mr-2">
-                        {{ parsons['example']|commonmark }}
-                        {{ parsons['story']|commonmark }}
-                    </div>
+                    <div class="ltr:clear-right rtl:clear-left"></div>
                 </div>
-                <div class="ltr:clear-right rtl:clear-left"></div>
-            </div>
+            {% endfor %}
         {% endif %}
         {% for adventure in teacher_adventures %}
             <div data-tabtarget="{{adventure.name}}" class="hidden">
