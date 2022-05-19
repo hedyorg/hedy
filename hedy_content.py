@@ -234,18 +234,19 @@ class ParsonsProblem:
         keyword_data = {}
         for short_name, parson in self.file.items():
             parsed_parson = copy.deepcopy(parson)
-            for line in parson.get('code_lines'):
-                print(line)
-                for k, v in adventure.get('levels').get(level).items():
+            for level in parson.get('levels'):
+                for k, v in parson.get('levels').get(level).get('code_lines').items():
                     try:
-                        parsed_adventure.get('levels').get(level)[k] = v.format(**KEYWORDS.get(language))
+                        print(v)
+                        print(v.format(**KEYWORDS.get(language)))
+                        parsed_parson.get('levels').get(level).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
                         print("There is an issue due to an empty placeholder in the following line:")
                         print(v)
                     except KeyError:
                         print("There is an issue due to a non-existing key in the following line:")
                         print(v)
-            keyword_data[short_name] = parsed_adventure
+            keyword_data[short_name] = parsed_parson
         return keyword_data
 
     def get_parsons(self, keyword_lang="en"):
