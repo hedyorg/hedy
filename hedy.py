@@ -353,11 +353,15 @@ class ExtractAST(Transformer):
         return Tree('punctuation', [''.join([str(c) for c in args])], meta)
 
     def list_access(self, meta, args):
+        # FH, may 2022 I don't fully understand why we remove INT here and just plemp
+        # the number in the tree. should be improved but that requires rewriting the further processing code too (TODO)
         if type(args[1]) == Tree:
             if "random" in args[1].data:
                 return Tree('list_access', [args[0], 'random'], meta)
             else:
-                return Tree('list_access', [args[0], args[1].children[0]], meta)
+                # convert to latin int
+                latin_int_index = str(int(args[1].children[0]))
+                return Tree('list_access', [args[0], latin_int_index], meta)
         else:
             return Tree('list_access', [args[0], args[1]], meta)
 

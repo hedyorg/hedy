@@ -26,6 +26,24 @@ class TestsLevel16(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_print_list_var_arabic_number(self):
+        code = textwrap.dedent("""\
+            dieren is ['Hond', 'Kat', 'Kangoeroe']
+            print dieren[١]""")
+
+        expected = textwrap.dedent("""\
+            dieren = ['Hond', 'Kat', 'Kangoeroe']
+            print(f'''{dieren[1-1]}''')""")
+
+        check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            extra_check_function=check_in_list
+        )
+
     def test_print_list_commas(self):
         code = textwrap.dedent("""\
             szamok1 = ['1' , '2' , '3' , '4' , '5']
