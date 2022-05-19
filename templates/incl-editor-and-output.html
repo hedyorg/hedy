@@ -1,7 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <div id="editor-area" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
     <!-- Row 1: editor, output pane -->
-    <div class="flex flex-col order-1 relative" id="code_editor" style="height: 22rem;">
+    <div class="flex flex-col order-1 relative" id="code_editor" style="min-height: 22rem;">
       <!-- language selector overlay -->
       {% if other_keyword_language() and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) and not editor_readonly %}
           <div id="main_editor_keyword_selector">
@@ -33,6 +33,18 @@
           {% if editor_readonly %}data-readonly="true"{% endif %}
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code}}
         </div>
+        {% if parsons %}
+            {% for parson in parsons %}
+                <div id="parsons_container" class="w-full flex-1" style="display: none;">
+                    {% for key, line in parson.code_lines.items() %}
+                       <div class="parsons_code_container relative turn-pre-into-ace w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;">
+                           <div index="0" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                           <pre level="{{ level }}" id="goal_parsons_{{ loop.index }}" class="no-copy-button parsons text-sm"></pre>
+                       </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endif %}
         <!-- errorbox -->
         <div id="errorbox"
           class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
@@ -122,11 +134,11 @@
           <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}', '{{_('already_program_running')}}')">{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
-        <div id="debug_container" class="ml-auto">
+        <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
           <button id="debug_button" class="green-btn" onclick="hedyApp.startDebug()">🐞</button>
           <button id="debug_restart" class="green-btn hidden" onclick="hedyApp.resetDebug()">🔄</button>
           <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
-          <button id="debug_continue" class="green-btn hidden" onclick="hedyApp.incrementDebugLine()">⏩</button>
+            <button id="debug_continue" class="green-btn hidden" onclick="hedyApp.incrementDebugLine()"><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
         </div>
         {% if show_edit_button %}
             <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn ml-4">{{_('edit_code_button')}}</button>
