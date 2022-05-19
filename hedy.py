@@ -358,6 +358,8 @@ class ExtractAST(Transformer):
         if type(args[1]) == Tree:
             if "random" in args[1].data:
                 return Tree('list_access', [args[0], 'random'], meta)
+            elif args[1].data == "var_access":
+                return Tree('list_access', [args[0], args[1].children[0]], meta)
             else:
                 # convert to latin int
                 latin_int_index = str(int(args[1].children[0]))
