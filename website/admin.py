@@ -1,7 +1,6 @@
-from datetime import date
-
 from flask_babel import gettext
 
+import hedyweb
 from website import statistics
 from website.auth import requires_login, current_user, is_admin, pick
 import utils
