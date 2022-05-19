@@ -718,6 +718,36 @@ export function submit_program (id: string, index: number) {
   });
 }
 
+export function set_explore_favourite(id: string, favourite: number) {
+  let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
+  if (favourite) {
+    prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
+  }
+  modal.confirm (prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/set_hedy_choice',
+      data: JSON.stringify({
+        id: id,
+        favourite: favourite
+    }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+        modal.alert(response.message, 3000, false);
+        if (favourite == 1) {
+          $('#' + id).removeClass('text-white');
+          $('#' + id).addClass('text-yellow-500');
+        } else {
+          $('#' + id).removeClass('text-yellow-500');
+          $('#' + id).addClass('text-white');
+        }
+    }).fail(function(err) {
+        return modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 export function copy_to_clipboard (string: string, prompt: string) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
@@ -1058,6 +1088,16 @@ var variable_view = false;
 if(window.State.level != null){
   let level = Number(window.State.level);
   variable_view = level >= 2;
+  hide_if_no_variables();
+}
+
+function hide_if_no_variables(){
+  if($('#variables #variable-list li').length == 0){
+    $('#variable_button').hide();
+  }
+  else{
+    $('#variable_button').show();
+  }
 }
 
 //Hides the HTML DIV for variables if feature flag is false
@@ -1096,6 +1136,7 @@ export function load_variables(variables: any) {
     for (const i in variables) {
       variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
     }
+    hide_if_no_variables();
   }
 }
 
