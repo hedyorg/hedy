@@ -207,6 +207,7 @@ class Achievements:
     def check_code_achievements(self, code, level):
         self.initialize_user_data_if_necessary()
         commands_in_code = hedy.all_commands(code, level, session['lang'])
+        print(commands_in_code)
         if 'trying_is_key' not in session['achieved']:
             for command in list(set(commands_in_code)):  # To remove duplicates
                 if command not in session['commands'] and command in self.all_commands:
