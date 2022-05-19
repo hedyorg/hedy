@@ -110,6 +110,7 @@ class Achievements:
             for command in session['new_commands']:
                 session['commands'].append(command)
             session['new_commands'] = []
+            # Only update commands to database if we used new onces
             self.DATABASE.add_commands_to_username(username, session['commands'])
 
         if len(session['new_achieved']) > 0:
@@ -208,10 +209,10 @@ class Achievements:
         self.initialize_user_data_if_necessary()
         commands_in_code = hedy.all_commands(code, level, session['lang'])
         if 'trying_is_key' not in session['achieved']:
-            for command in set(commands_in_code):
-                if command not in session['commands'] and command not in session['new_commands']:
+            for command in list(set(commands_in_code)): # To remove duplicates
+                if command not in session['commands'] and command in self.all_commands:
                     session['new_commands'].append(command)
-            if set(session['commands']).union(session['new_commands']) == self.all_commands:
+            if set(session['commands']).union(set(session['new_commands'])) == self.all_commands:
                 session['new_achieved'].append("trying_is_key")
         if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
             session['new_achieved'].append("did_you_say_please")
