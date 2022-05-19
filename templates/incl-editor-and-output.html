@@ -129,7 +129,7 @@
           <button id="debug_continue" class="green-btn hidden" onclick="hedyApp.incrementDebugLine()">⏩</button>
         </div>
         {% if show_edit_button %}
-            <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn">{{_('edit_code_button')}}</button>
+            <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn ml-4">{{_('edit_code_button')}}</button>
         {% else %}
             <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="hidden h-28 -mt-2" id="repair_button">
         {% endif %}
