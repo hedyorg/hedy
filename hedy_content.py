@@ -220,7 +220,7 @@ class ParsonsProblem:
 
         self.debug_mode = not os.getenv('NO_DEBUG_MODE')
 
-        if self.debug_mode:
+        if not self.debug_mode:
             self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('parsons')
             # We always create one with english keywords
             self.data["en"] = self.cache_parsons_keywords("en")
