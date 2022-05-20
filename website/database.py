@@ -477,7 +477,7 @@ class Database:
         PUBLIC_PROFILES.delete({'username': username})
 
     def store_parsons(self, attempt):
-        PARSONS.put(attempt)
+        PARSONS.create(attempt)
 
     def add_quiz_started(self, id, level):
         key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
