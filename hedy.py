@@ -1402,7 +1402,9 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def process_variable_for_fstring(self, name):
         if self.is_variable(name):
-            return "{" + hash_var(name) + "}"
+            numerals_language = 'Arabic'
+            converted = f'convert_numerals("{numerals_language}",{hash_var(name)})'
+            return "{" + converted + "}"
         else:
             if self.is_quoted(name):
                 name = name[1:-1]
