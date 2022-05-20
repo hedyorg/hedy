@@ -74,7 +74,7 @@ function speakAloudStep() {
   $('#code_output').removeClass('z-40');
   $('#runButtonContainer').removeClass('z-40');
 
-  $('#speak_container').addClass('z-40 relative');
+  $('#speak_container').addClass('z-40 bg-white relative');
 
   addHighlightBorder("speak_container");
 
@@ -84,7 +84,7 @@ function speakAloudStep() {
 
 function nextLevelStep() {
   removeBorder("speak_container");
-  $('#speak_dropdown').removeClass('z-40 relative');
+  $('#speak_container').removeClass('z-40 bg-white relative');
 
   $('#next_level_button').addClass("z-40");
   addHighlightBorder("next_level_button");
