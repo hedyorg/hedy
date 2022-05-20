@@ -273,10 +273,17 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   try {
     level = level.toString();
     var editor = theGlobalEditor;
+    var code = "";
     if ($('#parsons_container').is(":visible")) {
-      var code = get_parsons_code();
+      code = get_parsons_code();
+      // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
+      if (!code) {
+        clearErrors(editor);
+        stopit();
+        return;
+      }
     } else {
-      var code = get_trimmed_code();
+      code = get_trimmed_code();
     }
 
     clearErrors(editor);
@@ -1203,6 +1210,7 @@ function get_parsons_code() {
     let code = "";
     let count = 65;
     let order = new Array();
+    let mistake = false;
 
     $('.compiler-parsons-box').each(function() {
       // When the value is 0 there is no code box in the expected spot
@@ -1215,6 +1223,7 @@ function get_parsons_code() {
       if (index.charCodeAt(0) == count) {
         $(this).parents().addClass('border-green-500');
       } else {
+        mistake = true;
         $(this).parents().addClass('border-red-500');
       }
       order.push(index);
@@ -1223,6 +1232,9 @@ function get_parsons_code() {
     // Before returning the code we want to a-sync store the attempt in the database
     // We only have to set the order and level, rest is handled by the back-end
     store_parsons_attempt(order);
+    if (mistake) {
+      return "";
+    }
 
     return code.replace(/ +$/mg, '');
 }
