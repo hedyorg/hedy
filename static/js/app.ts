@@ -273,7 +273,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   try {
     level = level.toString();
     var editor = theGlobalEditor;
-    var code = get_trimmed_code();
+    if ($('#parsons_container').is(":visible")) {
+      var code = get_parsons_code();
+    } else {
+      var code = get_trimmed_code();
+    }
 
     clearErrors(editor);
     removeBulb();
@@ -1178,17 +1182,7 @@ function clean_variables(variables: any) {
   }
 }
 
-export function get_trimmed_code() {
-  try {
-    // This module may or may not exist, so let's be extra careful here.
-    const whitespace = ace.require("ace/ext/whitespace");
-    whitespace.trimTrailingSpace(theGlobalEditor.session, true);
-  } catch (e) {
-    console.error(e);
-  }
-
-  // If the main editor is hidden -> we are solving a parsons problem
-  if ($('#editor').is(":hidden")){
+function get_parsons_code() {
     let code = "";
     let count = 65;
 
@@ -1198,9 +1192,8 @@ export function get_trimmed_code() {
         code += text;
       }
       $(this).parents().removeClass('border-black');
-      // @ts-ignore
-      if ($(this).attr('index').charCodeAt(0) == count) {
-        console.log("Deze staat op de juiste plek!");
+      let index = $(this).attr('index') || "0";
+      if (index.charCodeAt(0) == count) {
         $(this).parents().addClass('border-green-500');
       } else {
         $(this).parents().addClass('border-red-500');
@@ -1208,8 +1201,16 @@ export function get_trimmed_code() {
       count += 1;
     });
     return code.replace(/ +$/mg, '');
+}
+
+export function get_trimmed_code() {
+  try {
+    // This module may or may not exist, so let's be extra careful here.
+    const whitespace = ace.require("ace/ext/whitespace");
+    whitespace.trimTrailingSpace(theGlobalEditor.session, true);
+  } catch (e) {
+    console.error(e);
   }
-  //console.log('Hello world');
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
   // Remove whitespace at the end of every line
