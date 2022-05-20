@@ -74,9 +74,7 @@ function speakAloudStep() {
   $('#code_output').removeClass('z-40');
   $('#runButtonContainer').removeClass('z-40');
 
-  $('#container_container').addClass("z-40");
-  $('#speak_aloud_label').addClass("z-40");
-  $('#speak_dropdown').addClass("z-40");
+  $('#speak_container').addClass('z-40 relative');
 
   addHighlightBorder("speak_container");
 
@@ -85,8 +83,8 @@ function speakAloudStep() {
 }
 
 function nextLevelStep() {
-  removeBorder("speak_dropdown");
-  $('#speak_dropdown').removeClass('z-40');
+  removeBorder("speak_container");
+  $('#speak_dropdown').removeClass('z-40 relative');
 
   $('#next_level_button').addClass("z-40");
   addHighlightBorder("next_level_button");
