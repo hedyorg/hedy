@@ -1193,7 +1193,7 @@ function store_parsons_attempt(order: Array<string>) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function() {
-      console.log("Parsons order is stored successfully");
+      // Let's do nothing: saving is not a user relevant action -> no feedback required
     }).fail(function(xhr) {
       console.error(xhr);
     });
