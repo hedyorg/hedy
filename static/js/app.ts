@@ -1187,12 +1187,13 @@ function get_parsons_code() {
     let count = 65;
 
     $('.compiler-parsons-box').each(function() {
+      // When the value is 0 there is no code box in the expected spot
       let text = $(this).attr('code') || "";
       if (text.length > 1) {
         code += text;
       }
       $(this).parents().removeClass('border-black');
-      let index = $(this).attr('index') || "0";
+      let index = $(this).attr('index') || "-";
       if (index.charCodeAt(0) == count) {
         $(this).parents().addClass('border-green-500');
       } else {
