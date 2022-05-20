@@ -5,11 +5,13 @@ import unittest
 import hedy
 from tests.Tester import HedyTester, Snippet
 from parameterized import parameterized
-from hedy_content import ALL_KEYWORD_LANGUAGES
+from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
+
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
+unique_snippets_table = set()
 
 def collect_snippets(path):
   Hedy_snippets = []
@@ -36,6 +38,13 @@ def collect_snippets(path):
                         code_snippet_counter += 1
                         try:
                             code = tag.contents[0].contents[0]
+                            if hash(code) in unique_snippets_table:
+                                print("Identical code already being tested...")
+                                continue
+                            else:
+                                unique_snippets_table.add(hash(code))
+                                print(unique_snippets_table)
+                                continue
                         except:
                             print("Code container is empty...")
                             continue
@@ -44,6 +53,11 @@ def collect_snippets(path):
                     # start_code
                     try:
                         start_code = level['start_code']
+                        if hash(start_code) in unique_snippets_table:
+                            print("Identical code already being tested...")
+                            continue
+                        else:
+                            unique_snippets_table.add(hash(start_code))
                         Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
 
                     except KeyError:
@@ -56,12 +70,12 @@ def translate_keywords_in_snippets(snippets):
     # fill keyword dict for all keyword languages
     keyword_dict = {}
     for lang in ALL_KEYWORD_LANGUAGES:
-        keyword_dict[lang] = YamlFile.for_file(f'../../content/keywords/{lang}.yaml').to_dict()
+        keyword_dict[lang] = KEYWORDS.get(lang)
         for k, v in keyword_dict[lang].items():
             if type(v) == str and "|" in v:
                 # when we have several options, pick the first one as default
                 keyword_dict[lang][k] = v.split('|')[0]
-    english_keywords = YamlFile.for_file(f'../../content/keywords/en.yaml').to_dict()
+    english_keywords = KEYWORDS.get("en")
 
     # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
     for snippet in snippets:

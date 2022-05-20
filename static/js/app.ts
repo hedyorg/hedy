@@ -14,6 +14,8 @@ export let theModalEditor: AceAjax.Editor;
     window.State = {};
   }
 
+
+
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
 
@@ -22,11 +24,8 @@ export let theModalEditor: AceAjax.Editor;
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
-  let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
-    counter += 1;
     $(preview).addClass('text-lg rounded');
-    $(preview).attr('id', "code_block_" + counter);
     // We set the language of the editor to the current keyword_language -> needed when copying to main editor
     $(preview).attr('lang', <string>window.State.keyword_language);
     $(preview).addClass('overflow-x-hidden');
@@ -38,6 +37,13 @@ export let theModalEditor: AceAjax.Editor;
       exampleEditor.setOptions({ minLines: 10 });
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
+    } else if ($(preview).hasClass('parsons')) {
+      exampleEditor.setOptions({
+        minLines: 1,
+        showGutter: false,
+        showPrintMargin: false,
+        highlightActiveLine: false
+      });
     } else {
       exampleEditor.setOptions({ minLines: 2 });
     }
@@ -286,7 +292,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       dataType: 'json'
     }).done(function(response: any) {
       console.log('Response', response);
-      if (response.Warning) {
+      if (response.Warning && $('#editor').is(":visible")) {
         storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
@@ -712,6 +718,36 @@ export function submit_program (id: string, index: number) {
   });
 }
 
+export function set_explore_favourite(id: string, favourite: number) {
+  let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
+  if (favourite) {
+    prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
+  }
+  modal.confirm (prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/set_hedy_choice',
+      data: JSON.stringify({
+        id: id,
+        favourite: favourite
+    }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+        modal.alert(response.message, 3000, false);
+        if (favourite == 1) {
+          $('#' + id).removeClass('text-white');
+          $('#' + id).addClass('text-yellow-500');
+        } else {
+          $('#' + id).removeClass('text-yellow-500');
+          $('#' + id).addClass('text-white');
+        }
+    }).fail(function(err) {
+        return modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 export function copy_to_clipboard (string: string, prompt: string) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
@@ -1052,6 +1088,16 @@ var variable_view = false;
 if(window.State.level != null){
   let level = Number(window.State.level);
   variable_view = level >= 2;
+  hide_if_no_variables();
+}
+
+function hide_if_no_variables(){
+  if($('#variables #variable-list li').length == 0){
+    $('#variable_button').hide();
+  }
+  else{
+    $('#variable_button').show();
+  }
 }
 
 //Hides the HTML DIV for variables if feature flag is false
@@ -1090,6 +1136,7 @@ export function load_variables(variables: any) {
     for (const i in variables) {
       variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
     }
+    hide_if_no_variables();
   }
 }
 
@@ -1139,6 +1186,30 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
+
+  // If the main editor is hidden -> we are solving a parsons problem
+  if ($('#editor').is(":hidden")){
+    let code = "";
+    let count = 65;
+
+    $('.compiler-parsons-box').each(function() {
+      let text = $(this).attr('code') || "";
+      if (text.length > 1) {
+        code += text;
+      }
+      $(this).parents().removeClass('border-black');
+      // @ts-ignore
+      if ($(this).attr('index').charCodeAt(0) == count) {
+        console.log("Deze staat op de juiste plek!");
+        $(this).parents().addClass('border-green-500');
+      } else {
+        $(this).parents().addClass('border-red-500');
+      }
+      count += 1;
+    });
+    return code.replace(/ +$/mg, '');
+  }
+  //console.log('Hello world');
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
   // Remove whitespace at the end of every line
