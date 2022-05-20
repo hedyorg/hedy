@@ -16,7 +16,7 @@
     example: 'Ekzemple: {repeat} 3 {times} {forward} 10'
     demo_code: '{repeat} 3 {times} {forward} 10'
 9:
--   name: '`{if}` with multiple lines'
+-   name: '`{if}` kun pluraj linioj'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
     example: "Ekzemple: respondo = {ask} 'Kio estas 20 plus 20?'"
     demo_code: "respondo = {ask} 'Kio estas 20 plus 20?'\n{if} respondo {is} 20\n    {print} 'Bonege!'\n    {print} 'La ĝusta respondo estas ja ' respondo\n{else}\n    {print} 'Vi malpravas.'\n    {print} 'La ĝusta respondo estas 20'"
@@ -76,18 +76,18 @@
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: '{is}'
-    explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
+    explanation: Donu per `{is}` al vorto nomon uzeblan en la programo. Vi povas mem elekti la nomon.
     example: 'Ekzemple: nomo {is} Hedy.'
     demo_code: "nomo {is} Hedy\n{print} bonvenon nomo"
 -   name: '{ask}'
-    explanation: ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
+    explanation: 'demandi pri io per `{ask}`. Averto: vi donu nomon al la respondo per `{is}`.'
     example: 'Ekzemple: koloro {is} {ask} Kio estas via plej ŝatata koloro?'
     demo_code: "koloro {is} {ask} Kio estas via plej ŝatata koloro?\n{print} koloro estas via plej ŝatata!"
 -   name: '{sleep}'
-    explanation: Let Hedy pause for a (couple of) second(s).
+    explanation: Paŭzigi Hedy dum kelkaj sekundoj.
     example: 'Ekzemple: {sleep} 2 '
     demo_code: "{print} Lasu min pensi dum unu sekundo...\n{sleep}\n{print} Hm... mi bezonas 3 pliajn sekundojn...\n{sleep} 3\n{print} Bonege! Mi komprenas!"
--   explanation: Give a number a name using `{is}`. You can choose the name yourself.
+-   explanation: Donu al nombro nomon uzante `{is}`. Vi povas mem elekti la nomon.
     example: 'Ekzemple: angulo {is} 90'
     demo_code: "angulo {is} 90\n{turn} angulo\n{forward} 100"
     name: '`{is}` kun testudo'
@@ -110,7 +110,7 @@
     example: "Ekzemple: {print} 'Saluton, bonvenon al Hedy.'"
     demo_code: "{print} 'Saluton, bonvenon al Hedy.'"
 -   name: '{is}'
-    explanation: Give a name to some text and `{print}` without quotation marks
+    explanation: Donu nomon al teksto kaj `{print}` sen citiloj
     example: 'Ekzemple: nomo {is} Hedy.'
     demo_code: "nomo {is} Hedy\n{print} 'mia nomo estas ' name"
 -   name: '{ask}'
@@ -129,11 +129,11 @@
 -   name: '{if}'
     explanation: Fari ion kondiĉe per `{if}`
     example: "Ekzemple: {if} koloro {is} verda {print} 'bela!' {else} {print} 'ba!'"
-    demo_code: "koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{if} koloro {is} green {print} 'pretty!' {else} {print} 'meh'"
+    demo_code: "koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{if} koloro {is} verda {print} 'bela!' {else} {print} 'ba!'"
 -   name: '{if} kun testudo'
     explanation: Fari ion kondiĉe per `{if}`
-    example: 'Ekzemple: {if} respondo {is} far {forward} 100 {else} {forward} 5'
-    demo_code: "respondo {is} {ask} 'How far should I walk?'\n{if} respondo {is} far {forward} 100 {else} {forward} 5"
+    example: 'Ekzemple: {if} respondo {is} malproksimen {forward} 100 {else} {forward} 5'
+    demo_code: "respondo {is} {ask} 'Kiel longe mi iru?'\n{if} respondo {is} malproksimen {forward} 100 {else} {forward} 5"
 -   name: '{in}'
     explanation: Kontrolu elementojn per `{in}`
     example: "Ekzemple: {if} koloro {in} belaj_koloroj {print} 'bela!' {else} {print} 'ba!'"
@@ -148,7 +148,7 @@
     example: "Ekzemple: respondo {is} {ask} 'Kio estas 10 plus 10?'"
     demo_code: "respondo = {ask} 'Kio estas 10 plus 10?'\n{if} respondo {is} 20 {print} 'Jes!' {else} {print} 'Vi malpravas'"
 -   name: '`{ask}` kaj `{if}` kun testudo'
-    explanation: '{ask} the user how many angles they want'
+    explanation: 'Demandu la uzanton pri kiom da anguloj ŝi/li volas'
     example: "Ekzemple: anguloj {is} {ask} 'Kiom da anguloj?'"
     demo_code: "anguloj = {ask} 'Kiom da anguloj?'\nangulo = 360 / anguloj\n{forward} 50"
 8:
@@ -161,7 +161,7 @@
     example: "Ekzemple: respondo {is} {ask} 'Kio estas 5 plus 5?'"
     demo_code: "respondo = {ask} 'Kio estas 5 plus 5?'\n{if} respondo {is} 10\n    {print} 'Bonege!'\n    {print} 'Ja la prava respondo estas ' respondo\nelse\n    {print} 'Ho!'\n    {print} 'La prava respondo estas 10'"
 -   name: '`{repeat}` kun testudo'
-    explanation: '{repeat} multiple lines'
+    explanation: '`{repeat}` kun pluraj linioj'
     example: 'Ekzemple: desegni kvadraton'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
@@ -191,7 +191,7 @@
     explanation: Teksto kun citiloj post `=`
     example: nomo = 'Hedy'
     demo_code: "nomo = 'Hedy la Roboto'\n{print} 'Saluton ' nomo\n"
--   name: quotes after {if} comparison
+-   name: citiloj post komparo en `{if}`
     explanation: Teksto kun citiloj post `{if}`
     example: nomo = 'Hedy'
     demo_code: "nomo = {ask} 'Kiu vi estas?'\n{if} nomo = 'Hedy'\n    {print} 'Saluton!'\n"
@@ -256,7 +256,7 @@
     explanation: With `{print}` you need to use parentheses and commas if you {print} more items
     example: '{print}'
     demo_code: "nomo = 'Hedy'\n{print}('mia nomo estas ', nomo)"
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
+-   name: demandi pri io per `{input}`
+    explanation: Uzi `{input}` anstataŭ `{ask}` por demandi pri io
     example: '{input}'
     demo_code: "nomo = {input}('Kio estas via nomo?')\n{print}('Do via nomo estas ', nomo)"
