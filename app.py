@@ -1270,14 +1270,18 @@ def store_parsons_order():
     if not isinstance(body, dict):
         return 'body must be an object', 400
     if not isinstance(body.get('level'), str):
-        return 'class id must be a string', 400
+        return 'level must be a string', 400
     if not isinstance(body.get('order'), list):
         return 'order must be a list', 400
 
-    level = int(body['level'])
-    order = body['order']
-    
+    attempt = {
+        'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
+        'level': int(body['level']),
+        'order': body['order'],
+        'timestamp': utils.timems()
+    }
 
+    DATABASE.store_parsons(attempt)
     return jsonify({}), 200
 
 @app.route('/client_messages.js', methods=['GET'])
