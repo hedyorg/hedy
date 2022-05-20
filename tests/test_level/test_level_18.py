@@ -193,6 +193,22 @@ class TestsLevel18(HedyTester):
         extra_check_function=self.is_not_turtle()
       )
 
+    def test_for_loop_arabic(self):
+      code = textwrap.dedent("""\
+      for دورة in range(١, ٥):
+          print(دورة)""")
+
+      expected = textwrap.dedent("""\
+      step = 1 if 1 < 5 else -1
+      for v637d5dd1f16a4cc1d923588cb55ede49 in range(1, 5 + step, step):
+        print(f'''{v637d5dd1f16a4cc1d923588cb55ede49}''')
+        time.sleep(0.1)""")
+
+      self.single_level_tester(
+        code=code,
+        expected=expected,
+        expected_commands=['for', 'print'])
+
     def test_input_with_list(self):
       code = textwrap.dedent("""\
       color is ['green', 'blue']

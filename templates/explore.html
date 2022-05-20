@@ -9,11 +9,13 @@
     });
     </script>
     {% endif %}
-    <h2 class="px-8 mb-4">{{_('explore_programs')}}</h2>
+    <!-- <h2 class="px-8 mb-4">{{_('explore_programs')}}</h2> -->
+    <!--
     <div class="mb-4">
         {{_('explore_explanation')}}
     </div>
-    <div class="w-full mb-8" id="program_filter">
+    -->
+    <div class="w-full mb-4" id="program_filter">
         <form onsubmit="event.preventDefault (); hedyApp.filter_programs();">
             <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg">
                 <select id="explore_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
@@ -35,6 +37,38 @@
             </div>
         </form>
     </div>
+    <!-- Only show our selected favourites when not filtering -->
+    {% if not filtered_level and not filtered_adventure and favourite_programs %}
+        <div class="border rounded-lg border-yellow-500 mb-4">
+            <h2 class="text-center z-10 font-bold pt-2 pb-0 mb-0 text-3xl">{{_('hedy_choice_title')}}</h2>
+            <div class="flex flex-wrap mx-auto justify-center turn-pre-into-ace" id="explore_favourite_programs">
+                {% for program in favourite_programs %}
+                    <div class="explore-program-box overflow-hidden">
+                        <div class="flex flex-col h-full">
+                              <div class="explore-program-box-title bg-yellow-500 text-white text-lg text-center ltr:-ml-2 rtl:-mr-2 -mt-8 pt-10 ltr:pl-12 rtl:pr-12 ltr:rotate-6 rtl:-rotate-6 w-72">
+                                      {{ program.name | truncate(20) }}
+                              </div>
+                              <div class="px-4">
+                                  {{_('level')}}: <b>{{ program.level }}</b>
+                              </div>
+                              <div class="px-4 mb-1 z-10">
+                                  {{_('creator')}}: <a {% if program.public_user %}onclick="window.open('/user/{{program.username}}', '_self')"{% endif %} class="{% if program.public_user %}cursor-pointer{% else %}text-black{% endif %} no-underline {% if program.username|length > 12 %} text-sm{% endif %}">{{ program.username|truncate(18) }}</a>
+                              </div>
+                             <div class="relative px-4">
+                                 <pre class="no-copy-button" level="{{ program.level }}">{{ program.code }}</pre>
+                             </div>
+                             <div class="mt-auto mb-2 flex items-center justify-around">
+                                <button class="blue-btn border border-blue-600 py-1 rounded-lg" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('view_program')}}</button>
+                                {% if is_admin %}
+                                    <i class="fa fa-star p-2 bg-blue-300 {% if program.hedy_choice %}text-yellow-500{% else %}text-white{% endif %} rounded-full cursor-pointer hover:bg-blue-600" id="{{program.id}}" onclick="hedyApp.set_explore_favourite('{{ program.id }}', {% if program.hedy_choice %}0{% else %}1{% endif %});" aria-hidden="true"></i>
+                                {% endif %}
+                             </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
     <div class="flex flex-wrap mx-auto justify-center turn-pre-into-ace" id="explore_page_programs">
     {% for program in programs %}
         <div class="explore-program-box overflow-hidden">
@@ -51,8 +85,11 @@
                  <div class="relative px-4">
                      <pre class="no-copy-button" level="{{ program.level }}">{{ program.code }}</pre>
                  </div>
-                 <div class="mt-auto mb-2 flex items-center justify-center">
+                 <div class="mt-auto mb-2 flex items-center justify-around">
                     <button class="blue-btn border border-blue-600 py-1 rounded-lg" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('view_program')}}</button>
+                    {% if is_admin %}
+                        <i class="fa fa-star p-2 bg-blue-300 {% if program.hedy_choice %}text-yellow-500{% else %}text-white{% endif %} rounded-full cursor-pointer hover:bg-blue-600" id="{{program.id}}" onclick="hedyApp.set_explore_favourite('{{ program.id }}', {% if program.hedy_choice %}0{% else %}1{% endif %});" aria-hidden="true"></i>
+                    {% endif %}
                  </div>
             </div>
         </div>
