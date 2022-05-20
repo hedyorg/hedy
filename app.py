@@ -1266,10 +1266,19 @@ def get_teacher_tutorial_translation(step):
 @app.route('/store_parsons_order', methods=['POST'])
 def store_parsons_order():
     body = request.json
-    print(body)
-    # Perform some validation: level is int, order is array
-    # If a user is not logged in -> create anonymous id
-    # Get timestamp and store, return value is irrelevant -> don't give user feedback
+    # Validations
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('level'), str):
+        return 'class id must be a string', 400
+    if not isinstance(body.get('order'), list):
+        return 'order must be a list', 400
+
+    level = int(body['level'])
+    order = body['order']
+    
+
+    return jsonify({}), 200
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():

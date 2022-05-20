@@ -1183,8 +1183,20 @@ function clean_variables(variables: any) {
 }
 
 function store_parsons_attempt(order: Array<string>) {
-  console.log(order);
-  console.log(window.State.level);
+  $.ajax({
+    type: 'POST',
+    url: '/store_parsons_order',
+    data: JSON.stringify({
+      level: window.State.level,
+      order: order
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function() {
+      console.log("Parsons order is stored successfully");
+    }).fail(function(xhr) {
+      console.error(xhr);
+    });
 }
 
 function get_parsons_code() {
