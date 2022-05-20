@@ -1182,9 +1182,15 @@ function clean_variables(variables: any) {
   }
 }
 
+function store_parsons_attempt(order: Array<string>) {
+  console.log(order);
+  console.log(window.State.level);
+}
+
 function get_parsons_code() {
     let code = "";
     let count = 65;
+    let order = new Array();
 
     $('.compiler-parsons-box').each(function() {
       // When the value is 0 there is no code box in the expected spot
@@ -1199,8 +1205,13 @@ function get_parsons_code() {
       } else {
         $(this).parents().addClass('border-red-500');
       }
+      order.push(index);
       count += 1;
     });
+    // Before returning the code we want to a-sync store the attempt in the database
+    // We only have to set the order and level, rest is handled by the back-end
+    store_parsons_attempt(order);
+
     return code.replace(/ +$/mg, '');
 }
 
