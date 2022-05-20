@@ -1475,6 +1475,7 @@ else:
 class ConvertToPython_6(ConvertToPython_5):
 
     def print_ask_args(self, args):
+        numerals_language = 'Arabic'
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage(args)
 
@@ -1482,7 +1483,8 @@ class ConvertToPython_6(ConvertToPython_5):
         args_new = []
         for a in args:
             if isinstance(a, Tree):
-                args_new.append("{" + a.children[0] + "}")
+                converted = f'convert_numerals("{numerals_language}",{a.children[0]})'
+                args_new.append("{" + converted + "}")
             else:
                 args_new.append(self.process_variable_for_fstring(a))
 
