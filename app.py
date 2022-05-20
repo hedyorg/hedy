@@ -1263,6 +1263,14 @@ def get_teacher_tutorial_translation(step):
     translation = teacher_tutorial_steps(step)
     return jsonify({'translation': translation}), 200
 
+@app.route('/store_parsons_order', methods=['POST'])
+def store_parsons_order():
+    body = request.json
+    print(body)
+    # Perform some validation: level is int, order is array
+    # If a user is not logged in -> create anonymous id
+    # Get timestamp and store, return value is irrelevant -> don't give user feedback
+
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
     # Not really nice, but we don't call this often as it is cached
