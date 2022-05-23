@@ -59,7 +59,6 @@ def routes(app, database, achievements, quizzes):
     @app.route('/quiz/submit_answer/', methods=["POST"])
     def submit_answer():
         body = request.json
-        print(body)
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400
         if not isinstance(body.get('level'), str):
@@ -73,7 +72,7 @@ def routes(app, database, achievements, quizzes):
         question_number = int(body['question'])
 
         question = QUIZZES[g.lang].get_quiz_data_for_level_question(level, question_number, g.keyword_lang)
-        is_correct = True if question['correct_answer'] == ANSWER_PARSER.get(question_number) else False
+        is_correct = True if question['correct_answer'] == ANSWER_PARSER.get(body.get('answer')) else False
 
         username = current_user()['username'] or f'anonymous:{utils.session_id()}'
         DATABASE.record_quiz_answer(session['quiz-attempt-id'], username=username, level=level,
@@ -87,11 +86,19 @@ def routes(app, database, achievements, quizzes):
                 session['total_score'] = session.get('total_score', 0) + score
                 session['correct_answer'] = session.get('correct_answer', 0) + 1
                 session['correctly_answered_questions_numbers'].append(body.get('question'))
-        else:
-            print("Nog even niks...")
-            # Todo -> Keep track of attempts on the front / back-end
 
-        return jsonify({'correct': True, 'question': question}), 200
+            # We have to get the relevant data for the correct answer
+            question_text = question.get("question_text")
+            correct_answer_text = question.get("mp_choice_options")[body.get('answer') - 1].get('option')
+            feedback = question.get("mp_choice_options")[body.get('answer') - 1].get('feedback')
+            next_question = True if question_number < QUIZZES[g.lang].get_highest_question_level(level) else False
+
+            return jsonify({'correct': True, 'question_text': question_text, 'level': level,
+                            'correct_answer_text': correct_answer_text, 'feedback': feedback,
+                            'next_question': next_question}), 200
+
+        return jsonify({'correct': False}), 200
+
 
     @app.route('/quiz/finished/<int:level>', methods=['GET'])
     def quiz_finished(level):

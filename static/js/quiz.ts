@@ -26,6 +26,8 @@ export function startQuiz(level: number) {
 }
 
 export function loadQuestQuestion(level: number, question: number) {
+    // If we get the request from the feedback page -> hide just to be sure
+    $('#quiz_feedback_container').hide();
     $.ajax({
       type: 'GET',
       url: '/quiz/get-question/' + level + '/' + question,
@@ -45,6 +47,7 @@ export function loadQuestQuestion(level: number, question: number) {
 
 function showQuestion(question: string) {
     $('#quiz_question_title').text(question);
+    $('#quiz_question_container').show();
 }
 
 function showQuestionCode(code: string) {
@@ -62,6 +65,7 @@ function showAnswers(options: any, level: number, question: number) {
         $('#answer_text_' + i).show();
         // Todo -> If we have a code answer, show answer_code_i and remove backticks
     }
+    $('#quiz_answers_container').show();
 }
 
 function loadHint(hint: string) {
@@ -71,42 +75,50 @@ function loadHint(hint: string) {
 
 export function answerQuestion(answer_number: number) {
     let element = $('#answer_text_' + answer_number);
+    let level = element.attr('level');
+    let question = element.attr('question');
+
     $.ajax({
       type: 'POST',
       url: '/quiz/submit_answer/',
       data: JSON.stringify({
-        level: element.attr('level'),
-        question: element.attr('question'),
+        level: level,
+        question: question,
         answer: answer_number
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response: any) {
         if (response.correct) {
-            updateQuestionBar();
-            showFeedback(response.question);
-        } else if (response.incorrect) {
-            // Show feedback as well -> with "fault" marker
-        }
-        if (response.next_question) {
-            updateFeedbackButtons();
+            showFeedback(response, question || "");
         }
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
     });
 }
 
-function updateQuestionBar() {
-    console.log("Dit moeten we nog fixen...");
-}
+function showFeedback(response: any, question: string) {
+    console.log(response);
+    $('#quiz_question_container').hide();
+    $('#quiz_answers_container').hide();
 
-function showFeedback(question: any) {
-    console.log(question)
-    console.log("Antwoord is goed....");
-}
+    $('#question_number_container').text(question);
+    $('#question_length_container').text(response.max_question);
 
-function updateFeedbackButtons() {
-    console.log("Hier moeten we ook nog van alles doen...");
+    if (response.next_question) {
+        $('#next_question_number_container').text(parseInt(question) + 1);
+        $('#next_question_button').attr('onclick', "hedyApp.loadQuestQuestion(" + response.level + "," + (parseInt(question) + 1) + ");");
+        $('#next_question_button').show();
+    } else {
+        $('#results_button').show();
+    }
+
+    $('#question_feedback_text_container').text(response.question_text);
+    $('#feedback_feedback_text').text(response.feedback);
+    $('#feedback_correct_answer_container').text(response.correct_answer_text);
+
+    $('#feedback_correct_container').show();
+    $('#quiz_feedback_container').show();
 }
 
 export function loadQuizResults() {
