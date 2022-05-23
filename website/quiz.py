@@ -79,7 +79,7 @@ def routes(app, database, achievements, quizzes):
         is_correct = True if question['correct_answer'] == ANSWER_PARSER.get(body.get('answer')) else False
 
         username = current_user()['username'] or f'anonymous:{utils.session_id()}'
-        answer = ANSWER_PARSER(body.get('answer'))
+        answer = ANSWER_PARSER.get((body.get('answer')))
         DATABASE.record_quiz_answer(session['quiz-attempt-id'], username=username, level=level,
                                     is_correct=is_correct, question_number=question_number,
                                     answer=answer)
@@ -110,7 +110,6 @@ def routes(app, database, achievements, quizzes):
     def get_results(level):
         level = int(level)
         questions = QUIZZES[g.lang].get_quiz_data_for_level(level, g.keyword_lang)
-        print(questions)
 
         achievement = None
         total_score = round(session.get('total_score', 0) / max_score(questions) * 100)
@@ -133,7 +132,7 @@ def routes(app, database, achievements, quizzes):
         else:
             username = f'anonymous:{utils.session_id()}'
         response['answers'] = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
-        print(response['answers'])
+        print(response)
         return jsonify(response), 200
 
 
