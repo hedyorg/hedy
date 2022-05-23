@@ -105,7 +105,7 @@ class HighlightTester(unittest.TestCase):
                 ind_error -= len(code_list[line_cpt]) +1
                 line_cpt += 1
 
-            print("ERROR in level {} in {}:".format(level, lang))
+            print("ERROR in this code :")
             print("In this code :", code_list[line_cpt] )
             print("We want      :", expected_list[line_cpt] )
             print("We have      :", result_list[line_cpt] )
