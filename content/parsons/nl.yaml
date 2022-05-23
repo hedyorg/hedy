@@ -1,0 +1,167 @@
+parsons:
+    dragging:
+      name: "Slepen"
+      levels:
+        1:
+          text: | 
+            ## Sleep de code in de juiste volgorde
+          example: |
+            ## Wat moet mijn code doen?
+          story: |
+            Je bent een klant bij bakkerij Hedy. 
+            Je loopt de bakkerij binnen en wordt verwelkomd door de bakker.
+            Hij vraagt wat voor taart je wil bestellen.
+            Daarna wordt je bestelling klaargezet.
+          code_lines:
+            A: | 
+              {print} Welkom bij bakkerij Hedy!
+            B: |
+              {ask} Wat voor taart wilt u bestellen?
+            C: |
+              {echo} Dus u wilt
+            D: |
+              {print} De bestelling wordt klaargezet!
+        2:
+          text: |
+            ## Sleep de code in de juiste volgorde
+          example: |
+            ## Wat moet mijn code doen?
+          story: |
+            Jij en je vrienden gaan Netflix kijken.
+            Laat zien welke film jullie gaan kijken en wens de kijkers veel plezier!
+          code_lines:
+            A: |
+              {print} Het is tijd voor een avondje Netflix
+            B: | 
+              film {is} Sonic the Hedgehog 2
+            C: |
+              {print} We gaan kijken naar film
+            D: |
+              {print} Heel veel plezier!
+        3:
+          text: |
+            ## Sleep de code in de juiste volgorde
+          example: |
+            ## Wat moet mijn code doen?
+          story: |
+            Het nieuwe schooljaar op Zweinstein gaat van start! Het is de taak van de sorteerhoed
+            om jou in te delen in een van de afdelingen. Bij welke afdeling zou jij komen?
+            Ben jij een Griffoendor, Huffelpuf, Zwadderich of Ravenklauw. 
+            Laat het programma even wachten voordat het onthult bij welke afdeling jij mag.
+          code_lines:
+            A: |
+              {print} Het nieuwe schooljaar op Zweinstein gaat van start!
+            B: |
+              {print} De sorteerhoed is er klaar voor om jou in te delen
+            C: |
+              afdelingen {is} Griffoendor, Huffelpuf, Zwadderich, Ravenklauw
+            D: |
+              {sleep} 2
+            E: |
+              {print} het wordt afdelingen {at} {random}
+        4:
+          text: | 
+            ## Sleep de code in de juiste volgorde
+          example: |
+            ## Wat moet mijn code doen?
+          story: |
+            Jij bent de nieuwste Pokémon trainer Pallet Town!
+            Maak een programma die jouw eerste Pokémon uitkiest.
+            Laat het programma weer even wachten voordat hij jouw eerste pokémon onthult.
+          code_lines:
+            A: |
+              pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
+            B: | 
+              {print} 'Dit wordt jouw eerste Pokémon!'
+            C: |
+              {sleep}
+            D: |
+              {print} pokemons {at} {random}
+        5:
+          text: |
+            ## Sleep de code in de juiste volgorde
+          example: |
+            ## Wat moet mijn code doen?
+          story: |  
+           Maak een programma die kijkt of jouw lievelingsfilm al in het lijstje van de computer staat opgeslagen.
+           Zo ja dan print je dat je een goede smaak hebt, zo nee dan voegen we hem graag toe aan de lijst.
+          code_lines:
+            A:  |
+              favoriete_film {is} Batman, Spiderman, The Avengers, Jurassic Park
+            B:  |
+              film {is} {ask} 'Wat is jouw lievelingsfilm?'
+            C:  |
+              {if} film {in} favoriete_film {print} 'Jij hebt een goede smaak!'
+            D:  |
+              {else} {print} 'Wat jammer dat jouw favoriete film niet in het lijstje staat, we voegen hem toe aan de lijst!'
+            E:  |
+              {add} film {to_list} favoriete_film
+        6:
+          text: |
+            ## Sleep de code in de juiste volgorde
+          example: |
+            ## Wat moet mijn code doen?
+          story: | 
+            Maak een programma die voor jou berekent hoe oud jij bent in hondenjaren en in kattenjaren.
+            Vraag eerst de leeftijd van de gebruiker en rekenen maar. 
+            Bereken eerst de hondenjaren en dan de kattenjaren.
+            Laat de gebruiker de nieuwe leeftijden zien!
+          code_lines:
+            A:  |
+              leeftijd = {ask} 'Hoe oud ben je?'
+            B:  |
+              hond_leeftijd = leeftijd * 7
+            C:  |
+              kat_leeftijd = leeftijd * 5
+            D:  |
+              {print} 'In hondenjaren ben jij ' hond_leeftijd ' jaar oud.'
+            E:  |
+              {print} 'In kattenjaren ben jij ' kat_leeftijd ' jaar oud.'
+        7:
+          text: |
+            ## Sleep de code in de juiste volgorde
+          example: |
+            ## Wat moet mijn code doen?
+          story: |
+            In een schaaktoernooi zijn nog drie spelers over. Maak een programma die beslist welke twee spelers als eerst tegen elkaar mogen schaken.
+            Print eerst de twee spelers die tegen elkaar spelen en print vervolgens de tegen wie de winnaar mag spelen.
+          code_lines:
+            A: |
+              spelers = Freek, Bart, Emma
+            B: |
+              speler1 = spelers {at} {random}
+            C: |
+              speler2 = spelers {at} {random}
+            D: |
+              {print} speler1 ' speelt eerst tegen ' speler2
+            E: |
+              {remove} speler1 {from} spelers
+            F: |
+              {remove} speler2 {from} spelers
+            G: |
+              {print} 'De winnaar speelt tegen ' spelers {at} {random}
+        8:
+          text: |
+            ## Wat moet mijn code doen?
+          example: |
+            ## Wat moet mijn code doen?
+          story: |
+            Jij en je vrienden spelen Pokémon Go! Maak een programma die bepaalt in welke kleur team je komt
+            rood, geel of blauw!
+          code_lines:
+            A: |
+              kleuren = rood, blauw, geel
+            B: |
+              {print} 'Rood of blauw?'
+            C: |
+              {print} 'Jij komt bij team '
+            D: |
+              {repeat} 5 {times}
+            E: | 
+              _{print} kleuren {at} {random}
+            F: |
+              sleep 2
+            G: |
+              {print} kleuren {at} random '!'
+
+      

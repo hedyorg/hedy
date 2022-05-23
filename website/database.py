@@ -9,7 +9,7 @@ storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_databa
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['id', 'username']])
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public']])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public', 'hedy_choice']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey('creator')])
 INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
@@ -211,10 +211,12 @@ class Database:
 
     def all_users(self, filtering=False):
         """Return all users."""
-        # If we have some filtering -> return all possible users, otherwise return last 500
+        # If we have some filtering -> return all possible users, otherwise return last 200
+        users = list(USERS.scan())
+        users.sort(key=lambda user: user.get('created', 0), reverse=True)
         if filtering:
-            return USERS.scan()
-        return USERS.scan(limit=500)
+            return users
+        return users[:200]
 
     def get_all_explore_programs(self):
         return PROGRAMS.get_many({'public': 1}, sort_key='date', limit=48, reverse=True)
@@ -230,6 +232,15 @@ class Database:
                 return programs[-48:]
             programs = [x for x in programs if x.get('adventure_name') == adventure]
         return programs[-48:]
+
+    def get_all_hedy_choices(self):
+        return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', reverse=True)
+
+    def get_hedy_choices(self):
+        return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', limit=4, reverse=True)
+
+    def set_program_as_hedy_choice(self, id, favourite):
+        PROGRAMS.update({'id': id}, {'hedy_choice': 1 if favourite else None})
 
     def all_programs_count(self):
         """Return the total number of all programs."""

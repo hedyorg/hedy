@@ -59,7 +59,13 @@ function resetWindow() {
     document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
 
-      if (tabName === 'quiz') {
+    if (tabName === 'dragging'){
+      $ ('#editor').hide();
+      $ ('#parsons_container').show();
+      return;
+    }
+
+    if (tabName === 'quiz') {
         // If the developer's mode is still on -> make sure we do show the tab
         if ($('#developers_toggle').is(":checked")) {
           $('#adventures-tab').show();
@@ -73,6 +79,9 @@ function resetWindow() {
       return;
     }
 
+    $ ('#editor').show();
+    $ ('#parsons_container').hide();
+    
     // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
     if ($('#developers_toggle').is(":checked")) {
       $('#adventures-tab').hide();
