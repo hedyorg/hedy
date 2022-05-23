@@ -1,4 +1,4 @@
-from tests.Highlighter import HighlightTester
+from tests.Highlighter import HighlightTester,SimulatorAce
 
 RULES = {
     "rules1" : {'start': [{'regex': 'b', 'token': 'keyword', 'next': 'StateB'}, {'regex': 'a', 'token': 'constant.character', 'next': 'StateA'}, {'regex': '[^abc]', 'token': 'comment', 'next': 'start'}], 'StateA': [{'regex': '[^c]', 'token': 'invalid', 'next': 'StateA'}, {'regex': 'c', 'token': 'keyword', 'next': 'StateA'}], 'StateB': [{'regex': '[^c]', 'token': 'variable', 'next': 'StateB'}]},
@@ -14,7 +14,8 @@ class HighlighterTestLeveLSimulation(HighlightTester):
 
         rules = RULES[rule_name]
         
-        result = self.apply_rules(rules, code)
+        simulator = SimulatorAce(rules)
+        result = simulator.apply(code)
 
         valid, ind_error = self.check(result, expected)
         if not valid:

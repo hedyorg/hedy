@@ -57,7 +57,8 @@ class HighlightTester(unittest.TestCase):
         
         rules  = self.get_rules(level, lang)
 
-        result = self.apply_rules(rules, code)
+        simulator = SimulatorAce(rules)
+        result = simulator.apply(code)
 
         valid, ind_error = self.check(result, expected)
         if not valid:
@@ -96,23 +97,20 @@ class HighlightTester(unittest.TestCase):
 
 
     def assert_highlighted(self, code_col, level, lang="en"):
-        
         code, expected = self.converts(code_col)
-
         self.assert_highlighted_chr(code, expected, level, lang)
 
 
     def assert_highlighted_multi_line(self, *args, level, lang="en"):
         code_col = "\n".join(args)
-
         code, expected = self.converts(code_col)
-
         self.assert_highlighted_chr(code, expected, level, lang)
 
 
     def get_rules(self, level, lang="en"):
         os.chdir(os.path.dirname(__file__) +"/..")
 
+        # get traduction
         with open('highlighting/highlighting-trad.json') as file_regex_trad:
             data_regex_trad = json.load(file_regex_trad)
     
@@ -121,11 +119,11 @@ class HighlightTester(unittest.TestCase):
 
         regex_trad = data_regex_trad[lang]
 
-
-        # open data for regex
+        # get rules
         with open('highlighting/highlighting.json') as file_regex:
             data_regex = json.load(file_regex)
 
+        # apply translation of keywords
         for lvl_rules in data_regex:
             for state in lvl_rules["rules"]:
                 for rule in lvl_rules["rules"][state]:
@@ -141,6 +139,11 @@ class HighlightTester(unittest.TestCase):
         return rules
 
 
+    # this fonctions convert :
+    #      "{print|kw} {Welcome to Hedy!|txt}"
+    # in :
+    #      "print Welcome to Hedy!",
+    #      "KKKKK TTTTTTTTTTTTTTTT",
     def converts(self, code_col):
         code     = []
         coloring = []
@@ -183,94 +186,6 @@ class HighlightTester(unittest.TestCase):
         return "".join(code), "".join(coloring)
 
 
-    #######################################################################################
-    ##                     This part concerns the simulation by Ace                      ##
-    #######################################################################################
-
-    # This function simulates the operation of Ace on a
-    # string provided as input, and "colors" it using the variable TOKEN_CODE.
-
-    def apply_rules_line(self, rules, code, start_token="start"):
-        # Initialisation output
-        output = " " * len(code)
-
-        # Initialisation variables
-        current_state = start_token
-        current_position = 0
-
-
-        flag = False
-        while not flag:
-
-            # search for the transition that we will use
-            current_match = None
-            NEXT = {"rule":{}, "match":None}
-            FIND = False
-            next_pos = len(code) + 1
-            for rule in rules[current_state]:
-
-                regex_compile = re.compile(rule['regex'], re.MULTILINE)
-                match = regex_compile.search(code, current_position)
-
-                if match:
-                    if match.start() < next_pos :
-                        next_pos = match.start()
-                        NEXT["rule"] = rule
-                        NEXT["match"] = match
-                        FIND = True
-
-
-            if FIND :
-
-                # Application of coloring on the code
-                current_rule, current_match = NEXT["rule"], NEXT["match"]
-
-                if "token" not in current_rule:
-                    raise ValueError("We need a token in all rules !")
-        
-                if type(current_rule['token']) == str :
-                    current_rule['token'] = [current_rule['token']]
-        
-                if re.compile(current_rule['regex'], re.MULTILINE).groups == 0:
-                    tok = current_rule['token'][0]
-                    start = current_match.start()
-                    length = current_match.end() - current_match.start()
-                    output = output[:start] + TOKEN_CODE[tok] * length + output[start + length:]
-
-                else:
-                    pos = current_match.start()
-                    for i, submatch in enumerate(current_match.groups()):    
-                        tok = current_rule['token'][i%len(current_rule['token'])]        
-                        output = output[:pos] + TOKEN_CODE[tok] * len(submatch) + output[pos + len(submatch):]
-                        pos += len(submatch)
-
-                current_position = current_match.end()
-
-                if 'next' in current_rule:
-                    current_state = current_rule['next']
-
-                if current_position ==len(code):
-                    flag = True
-
-
-            else:
-                flag = True
-
-        output = output.replace(" ", "T")
-        return output, current_state
-
-
-    def apply_rules(self, rules, code):
-        outputs = []
-        token = "start"
-        for line in code.split("\n"):
-            output, token = self.apply_rules_line(rules, line, token)
-            print("next", token)
-            outputs.append(output)
-        return "\n".join(outputs)
-
-
-
     # This function allows to check 2 syntactic colorations one desired
     # and the other obtained, and manages some special cases
 
@@ -297,3 +212,127 @@ class HighlightTester(unittest.TestCase):
 
         return True, -1
 
+
+class SimulatorAce:
+    """docstring for SimulatorAce"""
+    def __init__(self, rules):
+        self.rules = rules
+
+        for state in self.rules:
+            for rule in self.rules[state]:
+
+                if "token" not in rule :
+                    raise ValueError("We need a token in all rules !")
+
+                rule["regex_compile"] =  re.compile(rule['regex'], re.MULTILINE)
+                rule["nb_groups"] = rule["regex_compile"].groups
+
+
+                if rule["nb_groups"] == 0:
+                    if type(rule["token"]) != str:
+                        raise ValueError(f"if regex has no groups, token must be a string. In this rule : {rule}!")
+
+                else:
+                    if type(rule["token"]) != list :
+                        raise ValueError(f"if regex has groups, token must be a list. In this rule : {rule}!")
+
+                    else:
+                        if rule["nb_groups"] != len(rule["token"]):
+                            raise ValueError(f"The number of groups in the regex is different from the number of tokens. In this rule : {rule}!")
+
+
+
+
+    def apply(self, code):
+        outputs = []
+        token = "start"
+        for line in code.split("\n"):
+            output, token = self.apply_rules_line(line, token)
+            outputs.append(output)
+        return "\n".join(outputs)
+
+
+    def find_match(self, code, current_state, current_position):
+        # search for the transition that we will use
+
+        current_match = None
+        NEXT = {"rule":{}, "match":None}
+        FIND = False
+
+        next_pos = len(code) + 1
+        for rule in self.rules[current_state]:
+
+            regex_compile = rule["regex_compile"]
+            match = regex_compile.search(code, current_position)
+
+            if match:
+                if match.start() < next_pos :
+                    next_pos = match.start()
+                    NEXT["rule"] = rule
+                    NEXT["match"] = match
+                    FIND = True
+
+        return FIND, NEXT
+
+
+
+    def apply_rules_line(self, code, start_token="start"):
+        # Initialisation output
+        output = []
+
+        # Initialisation variables
+        current_state = start_token
+        current_position = 0
+
+        default_token = "text"
+
+        END_OF_SEARCH = False
+        while not END_OF_SEARCH:
+
+            FIND, NEXT = self.find_match(code, current_state, current_position)
+
+            if FIND :
+                # Application of coloring on the code
+
+                # get match
+                current_rule, current_match = NEXT["rule"], NEXT["match"]
+
+                # we color the characters since the last match with the default coloring
+                for c in range(current_position, current_match.start()):
+                    output.append(TOKEN_CODE[default_token])
+
+                # we recover the next default coloring
+                if "defaultToken" in current_rule:
+                    default_token = current_rule["defaultToken"]
+                else:
+                    default_token = "text"
+
+        
+                # if rule has only one groups
+                if current_rule["nb_groups"] == 0:
+                    tok    = current_rule['token']
+                    start  = current_match.start()
+                    length = current_match.end() - current_match.start()
+                    output.append(TOKEN_CODE[tok] * length)
+
+                # if rule has only multiples groups
+                else:
+                    pos = current_match.start()
+                    for i, submatch in enumerate(current_match.groups()):    
+                        tok = current_rule['token'][i%len(current_rule['token'])]        
+                        output.append(TOKEN_CODE[tok] * len(submatch))
+                        pos += len(submatch)
+
+                current_position = current_match.end()
+
+                if 'next' in current_rule:
+                    current_state = current_rule['next']
+
+                if current_position == len(code):
+                    END_OF_SEARCH = True
+
+
+            else:
+                END_OF_SEARCH = True
+
+        return "".join(output), current_state
