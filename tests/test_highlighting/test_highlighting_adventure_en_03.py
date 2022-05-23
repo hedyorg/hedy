@@ -7,7 +7,7 @@ class HighlighterTestLeveL3(HighlightTester):
         self.assert_highlighted_chr_multi_line(
             "print hello world!",
             "KKKKK TTTTTTTTTTTT",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_2(self):
@@ -16,7 +16,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "TTTTTTT KK TTT  TTT  TTTTTTTT",
             "print animals at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_3(self):
@@ -29,14 +29,14 @@ class HighlighterTestLeveL3(HighlightTester):
             "KKKKKK TTT KKKK TTTTTTT",
             "print animals at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_4(self):
         self.assert_highlighted_chr_multi_line(
             "print Your story",
             "KKKKK TTTTTTTTTT",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_5(self):
@@ -45,7 +45,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "TTTTTTT KK T  T  T  T",
             "print He now hears the sound of an animals at random",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKK",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_6(self):
@@ -60,7 +60,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "KKK TTTTTT KK TTTTTTT",
             "print it was a animals at random",
             "KKKKK TTTTTTTTTTTTTTTT KK KKKKKK",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_7(self):
@@ -75,7 +75,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "TTTT KK KKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "remove dump from bag",
             "KKKKKK TTTT KKKK TTT",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_8(self):
@@ -92,14 +92,14 @@ class HighlighterTestLeveL3(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTTT",
             "print 🦜 words at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_9(self):
         self.assert_highlighted_chr_multi_line(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_10(self):
@@ -110,14 +110,14 @@ class HighlighterTestLeveL3(HighlightTester):
             "KKKK TTTTTT KK KKKKKK",
             "forward 25",
             "KKKKKKK TT",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_11(self):
         self.assert_highlighted_chr_multi_line(
             "print Who does the dishes?",
             "KKKKK TTTTTTTTTTTTTTTTTTTT",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_12(self):
@@ -126,7 +126,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "TTTTTT KK TTT  TTT  TTTT  TTTTTT",
             "print people at random",
             "KKKKK TTTTTT KK KKKKKK",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_13(self):
@@ -139,14 +139,14 @@ class HighlighterTestLeveL3(HighlightTester):
             "KKKKKK TTTTTTTTT KKKK TTTTTT",
             "print people at random does the dishes",
             "KKKKK TTTTTT KK KKKKKK TTTTTTTTTTTTTTT",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_14(self):
         self.assert_highlighted_chr_multi_line(
             "print What will the die indicate this time?",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_15(self):
@@ -155,14 +155,14 @@ class HighlighterTestLeveL3(HighlightTester):
             "TTTTTTT KK T  T  T  T  T  TTTTTTTTT",
             "print choices at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_16(self):
         self.assert_highlighted_chr_multi_line(
             "print Welcome to your own rock scissors paper!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_17(self):
@@ -171,7 +171,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "TTTTTTT KK TTTT  TTTTT  TTTTTTTT",
             "print choices at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_18(self):
@@ -190,7 +190,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "KKKKK T",
             "print answers at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_19(self):
@@ -205,7 +205,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "KKKKKK TTTTTTTTT KKKK TTTTTTT",
             "print You get a flavors at random milkshake",
             "KKKKK TTTTTTTTTTTTTTTTT KK KKKKKK TTTTTTTTT",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_20(self):
@@ -236,7 +236,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "KKKKK                      KK KKKKKK",
             "print Thank you and enjoy your meal!",
             "KKKKK                               ",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_21(self):
@@ -257,7 +257,7 @@ class HighlighterTestLeveL3(HighlightTester):
             "KKKKK",
             "print monsters at random",
             "KKKKK TTTTTTTT KK KKKKKK",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_22(self):
@@ -266,11 +266,11 @@ class HighlighterTestLeveL3(HighlightTester):
             "TTTT KK TTTTTT",
             "print My name is name",
             "KKKKK TTTTTTTTTTTTTTT",
-            level="level3",lang='en')
+            level="level3", lang='en')
 
 
     def test_23(self):
         self.assert_highlighted_chr(
             "print Let's go to the next level!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3",lang='en')
+            level="level3", lang='en')

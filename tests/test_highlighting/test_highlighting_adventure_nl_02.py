@@ -12,7 +12,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
             "TTTTTTTT KK TT",
             "print naam is leeftijd jaar oud",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_3(self):
@@ -21,7 +21,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
             "TTTTTTTT KK KKKKK TTTTTTTTTTTTT",
             "print Hoi antwoord",
             "KKKKK TTTTTTTTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_4(self):
@@ -32,14 +32,14 @@ class HighlighterTestLeveL2nl(HighlightTester):
             "KKKKK T",
             "print groen!",
             "KKKKK TTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_5(self):
         self.assert_highlighted_chr(
             "print hallo wereld!",
             "KKKKK TTTTTTTTTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_6(self):
@@ -56,14 +56,14 @@ class HighlighterTestLeveL2nl(HighlightTester):
             "KKKKK T",
             "print naam is bang dat dit een spookbos is",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_7(self):
         self.assert_highlighted_chr(
             "print Hier komt straks jouw verhaal!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_8(self):
@@ -82,14 +82,14 @@ class HighlighterTestLeveL2nl(HighlightTester):
             "KKKKK",
             "print naam",
             "KKKKK TTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_9(self):
         self.assert_highlighted_chr(
             "print Ik ben Hedy de papegaai!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_10(self):
@@ -106,7 +106,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
             "KKKKK TTTT",
             "vooruit 25",
             "KKKKKKK TT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_11(self):
@@ -119,7 +119,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
             "KKKKK TTTT",
             "vooruit 25",
             "KKKKKKK TT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_12(self):
@@ -128,14 +128,14 @@ class HighlighterTestLeveL2nl(HighlightTester):
             "TTTTT KK  ",
             "print ik kies keuze",
             "KKKKK TTTTTTTTTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_13(self):
         self.assert_highlighted_chr(
             "# Schrijf jouw code hier",
             "CCCCCCCCCCCCCCCCCCCCCCCC",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_14(self):
@@ -152,7 +152,7 @@ class HighlighterTestLeveL2nl(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print Bedankt voor uw bestelling!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_15(self):
@@ -175,18 +175,18 @@ class HighlighterTestLeveL2nl(HighlightTester):
             "KKKKK TTTTT",
             "print Je rent naar de keuken, maar wordt daar aangevallen door een monster3",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_16(self):
         self.assert_highlighted_chr(
             "monster1 is _",
             "TTTTTTTT KK  ",
-            level="level2",lang='nl')
+            level="level2", lang='nl')
 
 
     def test_17(self):
         self.assert_highlighted_chr(
             "print Op naar het volgende level!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='nl')
+            level="level2", lang='nl')

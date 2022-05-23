@@ -8,7 +8,7 @@ class HighlighterTestLeveL18(HighlightTester):
             "TTTT K SSSSSS",
             "print('My name is ', naam)",
             "KKKKKKSSSSSSSSSSSSSK TTTTK",
-            level="level18",lang='en')
+            level="level18", lang='en')
 
 
     def test_2(self):
@@ -19,11 +19,11 @@ class HighlighterTestLeveL18(HighlightTester):
             "TTTT K SSSSSS",
             "print('my name is ', name)",
             "KKKKKKSSSSSSSSSSSSSK TTTTK",
-            level="level18",lang='en')
+            level="level18", lang='en')
 
 
     def test_3(self):
         self.assert_highlighted_chr(
             "print ('Great job!!!')",
             "KKKKK KSSSSSSSSSSSSSSK",
-            level="level18",lang='en')
+            level="level18", lang='en')

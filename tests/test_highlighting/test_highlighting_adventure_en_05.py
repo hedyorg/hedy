@@ -9,7 +9,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "TTTT KK KKK SSSSSSSSSSSSSSSSSSSS",
             "if name is Hedy print 'cool!' else print 'meh'",
             "KK TTTT KK TTTT KKKKK SSSSSSS KKKK KKKKK SSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_2(self):
@@ -18,7 +18,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "TTTT KK KKK SSSSSSSSSSSSSSSSSSSS",
             "if name is Hedy print 'nice' else print 'boo!'",
             "KK TTTT KK TTTT KKKKK SSSSSS KKKK KKKKK SSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_3(self):
@@ -31,7 +31,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "KK TTTTT KK TTTTTTTTTTTTT KKKKK SSSSSSSSS",
             "else print 'meh'",
             "KKKK KKKKK SSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_4(self):
@@ -42,7 +42,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "KK TTTT KK TTTT KKKKK SSSSSS",
             "else print 'boo!'",
             "KKKK KKKKK SSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_5(self):
@@ -59,14 +59,14 @@ class HighlighterTestLeveL5(HighlightTester):
             "KK TTT KK TTTT KKKKK TTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "else print 'The monster eats' name",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSS TTTT",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_6(self):
         self.assert_highlighted_chr(
             "print 'Here your story will start!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_7(self):
@@ -89,14 +89,14 @@ class HighlighterTestLeveL5(HighlightTester):
             "KK TTTTTTTTT KK TTTTTTTT KKKKK SSSSSSSSSSSSSSSSSSSSSS",
             "else print '🧒 No, Hedy! Say ' new_word",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSS TTTTTTTT",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_8(self):
         self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_9(self):
@@ -125,7 +125,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "KKKK TTTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_10(self):
@@ -140,7 +140,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "KKKK TTTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_11(self):
@@ -151,14 +151,14 @@ class HighlighterTestLeveL5(HighlightTester):
             "TTTTTTTTTT KK TTTTTT KK KKKKKK",
             "if dishwasher is Sophie print _ too bad I have to do the dishes _ else print 'luckily no dishes because' _ 'is already washing up'",
             "KK TTTTTTTTTT KK TTTTTT KKKKK I                                 I KKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS I SSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_12(self):
         self.assert_highlighted_chr(
             "print 'Who does the dishes?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_13(self):
@@ -171,14 +171,14 @@ class HighlighterTestLeveL5(HighlightTester):
             "KKKKK SSSSSSSSSS I SSSSSSSS",
             "if _ is earthworm print 'You can stop throwing.' _ print 'You have to hear it again!'",
             "KK I KK TTTTTTTTT KKKKK SSSSSSSSSSSSSSSSSSSSSSSS I KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_14(self):
         self.assert_highlighted_chr(
             "print 'What will the die indicate this time?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_15(self):
@@ -195,14 +195,14 @@ class HighlighterTestLeveL5(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSS I",
             "if _ is _ print 'tie!' else print 'no tie'",
             "KK I KK I KKKKK SSSSSS KKKK KKKKK SSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_16(self):
         self.assert_highlighted_chr(
             "print 'Welcome to your own rock scissors paper!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_17(self):
@@ -233,7 +233,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "KK TTTTTTTT KK TT KKKKK SSSSSSSSSSS KKKK KKKKK SSSSSS TTTTTTTT",
             "print 'Thank you for your order and enjoy your meal!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_18(self):
@@ -246,7 +246,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "TTTTTT KK KKK SSSSSSSSSSSSSS",
             "if person is Hedy print 'You will definitely win!🤩' else print 'Bad luck! Someone else will win!😭'",
             "KK TTTTTT KK TTTT KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS KKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_19(self):
@@ -263,7 +263,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "TTTTTTTTT KK TTTTTTTTTTTTTTTTTTTTK TTTTTTTTTTTTTTTTTTTTTTTK TTTTTTTTT",
             "if person is Hedy print goodanswer at random else print badanswer at random",
             "KK TTTTTT KK TTTT KKKKK TTTTTTTTTT KK KKKKKK KKKK KKKKK TTTTTTTTT KK KKKKKK",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_20(self):
@@ -288,7 +288,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "KK TTTTTTTTTTT KK TTTTTTTTTTTT KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
             "else print 'Oh no! You are being eaten by a...' monsters at random",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTTT KK KKKKKK",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_21(self):
@@ -307,7 +307,7 @@ class HighlighterTestLeveL5(HighlightTester):
             "KK TTTT KK TTTTTTTTTT KKKKK SSSSSSSS",
             "else print 'No, frog is grenouille'",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_22(self):
@@ -330,11 +330,11 @@ class HighlighterTestLeveL5(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSSSS       SSSSSSSSS",
             "print 'The drinks are free in this level because Hedy cant calculate the price yet...'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')
 
 
     def test_23(self):
         self.assert_highlighted_chr(
             "print 'On to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5",lang='en')
+            level="level5", lang='en')

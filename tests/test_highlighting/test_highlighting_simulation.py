@@ -10,19 +10,19 @@ RULES = {
 
 class HighlighterTestLeveLSimulation(HighlightTester):
 
-    def assert_highlighted_chr(self,code,expected,rule_name):
+    def assert_highlighted_chr(self, code, expected, rule_name):
 
         rules = RULES[rule_name]
         
-        result = self.apply_rules(rules,code)
+        result = self.apply_rules(rules, code)
 
-        valid, ind_error = self.check(result,expected)
+        valid, ind_error = self.check(result, expected)
         if not valid:
             print("ERROR with the set of rule : {}".format(rule_name))
-            print("In this code :",code.replace("\n","\\n"))
-            print("We want      :",expected.replace("\n","\\n"))
-            print("We have      :",result.replace("\n","\\n"))
-            print("At           :"," " * ind_error + "^")
+            print("In this code :", code.replace("\n", "\\n"))
+            print("We want      :", expected.replace("\n", "\\n"))
+            print("We have      :", result.replace("\n", "\\n"))
+            print("At           :", " " * ind_error + "^")
         self.assertTrue(valid)
 
 

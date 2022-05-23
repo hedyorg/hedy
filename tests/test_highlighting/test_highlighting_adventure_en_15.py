@@ -13,7 +13,7 @@ class HighlighterTestLeveL15(HighlightTester):
             "TTTTTT K KKK SSSSSSSSSSSSSSSSSSSS",
             "print 'A correct answer has been given'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level15",lang='en')
+            level="level15", lang='en')
 
 
     def test_2(self):
@@ -42,14 +42,14 @@ class HighlighterTestLeveL15(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTTT",
             "print 'Now you can enter the house!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level15",lang='en')
+            level="level15", lang='en')
 
 
     def test_3(self):
         self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level15",lang='en')
+            level="level15", lang='en')
 
 
     def test_4(self):
@@ -72,7 +72,7 @@ class HighlighterTestLeveL15(HighlightTester):
             "TTTTT K TTTTT K N",
             "print 'Yes! You have thrown 6 in ' tries ' tries.'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTT SSSSSSSSS",
-            level="level15",lang='en')
+            level="level15", lang='en')
 
 
     def test_5(self):
@@ -105,7 +105,7 @@ class HighlighterTestLeveL15(HighlightTester):
             "KKKKK SSSSSSSSSS",
             "won = 'yes'",
             "TTT K SSSSS",
-            level="level15",lang='en')
+            level="level15", lang='en')
 
 
     def test_6(self):
@@ -136,7 +136,7 @@ class HighlighterTestLeveL15(HighlightTester):
             "KKKKK SSSSSSSSSSS",
             "print 'You win!'",
             "KKKKK SSSSSSSSSS",
-            level="level15",lang='en')
+            level="level15", lang='en')
 
 
     def test_7(self):
@@ -155,7 +155,7 @@ class HighlighterTestLeveL15(HighlightTester):
             "TTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Thank you!'",
             "KKKKK SSSSSSSSSSSS",
-            level="level15",lang='en')
+            level="level15", lang='en')
 
 
     def test_8(self):
@@ -178,11 +178,11 @@ class HighlighterTestLeveL15(HighlightTester):
             "KKK TTTTT KK TTTTTT",
             "print 'A ' animal ' says ' sound",
             "KKKKK SSSS TTTTTT SSSSSSSS TTTTT",
-            level="level15",lang='en')
+            level="level15", lang='en')
 
 
     def test_9(self):
         self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level15",lang='en')
+            level="level15", lang='en')

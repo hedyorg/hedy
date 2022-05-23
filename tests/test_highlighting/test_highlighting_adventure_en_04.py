@@ -7,7 +7,7 @@ class HighlighterTestLeveL4(HighlightTester):
         self.assert_highlighted_chr_multi_line(
             "print 'Hello world'",
             "KKKKK SSSSSSSSSSSSS",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_2(self):
@@ -18,14 +18,14 @@ class HighlighterTestLeveL4(HighlightTester):
             "TTTTTT KK KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'We need to use ' answer",
             "KKKKK SSSSSSSSSSSSSSSSS TTTTTT",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_3(self):
         self.assert_highlighted_chr_multi_line(
             "print 'Your story will be printed here!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_4(self):
@@ -44,7 +44,7 @@ class HighlighterTestLeveL4(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTT KK KKKKKK",
             "print name 'is afraid this is a haunted forest'",
             "KKKKK TTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_5(self):
@@ -57,7 +57,7 @@ class HighlighterTestLeveL4(HighlightTester):
             "KKKK TTTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_6(self):
@@ -74,14 +74,14 @@ class HighlighterTestLeveL4(HighlightTester):
             "KKKK TTTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_7(self):
         self.assert_highlighted_chr_multi_line(
             "print 'Who does the dishes?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_8(self):
@@ -94,7 +94,7 @@ class HighlighterTestLeveL4(HighlightTester):
             "KKKKK",
             "print people at _",
             "KKKKK TTTTTT KK I",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_9(self):
@@ -107,14 +107,14 @@ class HighlighterTestLeveL4(HighlightTester):
             "KKKKK",
             "print people at random",
             "KKKKK TTTTTT KK KKKKKK",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_10(self):
         self.assert_highlighted_chr_multi_line(
             "print 'What will the die indicate this time?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_11(self):
@@ -125,7 +125,7 @@ class HighlighterTestLeveL4(HighlightTester):
             "KKKKK I TTTTTTTTT I",
             "print _ _ _ # here you have to program the choice",
             "KKKKK I I I CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_12(self):
@@ -136,14 +136,14 @@ class HighlighterTestLeveL4(HighlightTester):
             "KKKKK SSSSSSSSSSSSS",
             "print choices at random # here you have to program the choice",
             "KKKKK TTTTTTT KK KKKKKK CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_13(self):
         self.assert_highlighted_chr_multi_line(
             "print 'Welcome to your own rock scissors paper!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_14(self):
@@ -152,7 +152,7 @@ class HighlighterTestLeveL4(HighlightTester):
             "TTTTTTT KK TTTTK TTTTTK TTTTTTTT",
             "print _ The computer chose: _ _ at _",
             "KKKKK I TTTTTTTTTTTTTTTTTTT I I KK I",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_15(self):
@@ -161,14 +161,14 @@ class HighlighterTestLeveL4(HighlightTester):
             "TTTTTTT KK TTTTK TTTTTK TTTTTTTT",
             "print ' The computer chose: ' choices at random",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSS TTTTTTT KK KKKKKK",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_16(self):
         self.assert_highlighted_chr_multi_line(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_17(self):
@@ -187,7 +187,7 @@ class HighlighterTestLeveL4(HighlightTester):
             "KKKKK T",
             "print answers at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_18(self):
@@ -210,7 +210,7 @@ class HighlighterTestLeveL4(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Your ' food ' and ' drinks ' will be right there!'",
             "KKKKK SSSSSSS TTTT SSSSSSS TTTTTT SSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_19(self):
@@ -231,18 +231,18 @@ class HighlighterTestLeveL4(HighlightTester):
             "KKKKK",
             "print monsters at random",
             "KKKKK TTTTTTTT KK KKKKKK",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_20(self):
         self.assert_highlighted_chr_multi_line(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4",lang='en')
+            level="level4", lang='en')
 
 
     def test_21(self):
         self.assert_highlighted_chr_multi_line(
             "password is ask 'What is the correct password?'",
             "TTTTTTTT KK KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4",lang='en')
+            level="level4", lang='en')

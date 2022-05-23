@@ -7,7 +7,7 @@ class HighlighterTestLeveL6(HighlightTester):
         self.assert_highlighted_chr(
             "print '5 times 5 is ' 5 * 5",
             "KKKKK SSSSSSSSSSSSSSS N K N",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_2(self):
@@ -18,7 +18,7 @@ class HighlighterTestLeveL6(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSS N K N",
             "print '5 times 5 is ' 5 * 5",
             "KKKKK SSSSSSSSSSSSSSS N K N",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_3(self):
@@ -27,7 +27,7 @@ class HighlighterTestLeveL6(HighlightTester):
             "TTTT K TTTT",
             "answer = 20 + 4",
             "TTTTTT K NN K N",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_4(self):
@@ -44,14 +44,14 @@ class HighlighterTestLeveL6(HighlightTester):
             "TTTTT K TTTTT K N",
             "print verse ' bottles of beer on the wall'",
             "KKKKK TTTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_5(self):
         self.assert_highlighted_chr(
             "print 'Baby shark'",
             "KKKKK SSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_6(self):
@@ -84,14 +84,14 @@ class HighlighterTestLeveL6(HighlightTester):
             "KKKKKKK NN",
             "turn angle",
             "KKKK TTTTT",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_7(self):
         self.assert_highlighted_chr(
             "print 'Drawing figures'",
             "KKKKK SSSSSSSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_8(self):
@@ -108,7 +108,7 @@ class HighlighterTestLeveL6(HighlightTester):
             "KK TTTTTTTTTT KK TTTT TTTTTTTTTTT K TTTTTTTTTTT K N",
             "print 'Emma will do the dishes this week' emma_washes 'times'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTTTTTT SSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_9(self):
@@ -129,14 +129,14 @@ class HighlighterTestLeveL6(HighlightTester):
             "KKKKKK TTTTTTTTTT KKKK TTTTTT",
             "dishwasher = people at random",
             "TTTTTTTTTT K TTTTTT KK KKKKKK",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_10(self):
         self.assert_highlighted_chr(
             "print 'Who does the dishes?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_11(self):
@@ -153,14 +153,14 @@ class HighlighterTestLeveL6(HighlightTester):
             "KK TTTTT KK TTTTTTTTT TTTTTT K TTTTTT K N KKKK TTTTTT K TTTTTT K TTTTT",
             "print 'those are' points ' point'",
             "KKKKK SSSSSSSSSSS TTTTTT SSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_12(self):
         self.assert_highlighted_chr(
             "print 'What will the die indicate this time?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_13(self):
@@ -173,7 +173,7 @@ class HighlighterTestLeveL6(HighlightTester):
             "KK TTTTTT KK TTTTTTTTTTTTTT KKKKK SSSSSSSSSSS",
             "else print 'Wrong! It was ' correct_answer",
             "KKKK KKKKK SSSSSSSSSSSSSSSS TTTTTTTTTTTTTT",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_14(self):
@@ -194,14 +194,14 @@ class HighlighterTestLeveL6(HighlightTester):
             "KK TTTTTT KK TTTTTTTTTTTTTT KKKKK SSSSSS",
             "else print 'mistake! it was ' correct_answer",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSS TTTTTTTTTTTTTT",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_15(self):
         self.assert_highlighted_chr(
             "print 'Welcome to this calculator!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_16(self):
@@ -228,7 +228,7 @@ class HighlighterTestLeveL6(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSS",
             "print 'Thank you, enjoy your meal!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_17(self):
@@ -271,14 +271,14 @@ class HighlighterTestLeveL6(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSS",
             "print 'Thank you, enjoy your meal!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_18(self):
         self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_19(self):
@@ -319,7 +319,7 @@ class HighlighterTestLeveL6(HighlightTester):
             "TTTTTT K TTTTTT K TTTTTTTT",
             "print 'You are ' result ' percent smart.'",
             "KKKKK SSSSSSSSSS TTTTTT SSSSSSSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_20(self):
@@ -332,11 +332,11 @@ class HighlighterTestLeveL6(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'happy birthday to you'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')
 
 
     def test_21(self):
         self.assert_highlighted_chr(
             "print 'On to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6",lang='en')
+            level="level6", lang='en')

@@ -15,7 +15,7 @@ class HighlighterTestLeveL14(HighlightTester):
             "KKKK",
             "print 'You are older than me!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level14",lang='en')
+            level="level14", lang='en')
 
 
     def test_2(self):
@@ -26,7 +26,7 @@ class HighlighterTestLeveL14(HighlightTester):
             "KK TTT K NN",
             "print 'You are older than I am!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level14",lang='en')
+            level="level14", lang='en')
 
 
     def test_3(self):
@@ -37,7 +37,7 @@ class HighlighterTestLeveL14(HighlightTester):
             "KK TTTT KK SSSSSS",
             "print 'You are coo!'",
             "KKKKK SSSSSSSSSSSSSS",
-            level="level14",lang='en')
+            level="level14", lang='en')
 
 
     def test_4(self):
@@ -48,7 +48,7 @@ class HighlighterTestLeveL14(HighlightTester):
             "KK TTTT KK SSSSSS",
             "print 'You are not Hedy'",
             "KKKKK SSSSSSSSSSSSSSSSSS",
-            level="level14",lang='en')
+            level="level14", lang='en')
 
 
     def test_5(self):
@@ -81,14 +81,14 @@ class HighlighterTestLeveL14(HighlightTester):
             "KKKKK SSSSSSSSSS",
             "game = 'over'",
             "TTTT K SSSSSS",
-            level="level14",lang='en')
+            level="level14", lang='en')
 
 
     def test_6(self):
         self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level14",lang='en')
+            level="level14", lang='en')
 
 
     def test_7(self):
@@ -133,7 +133,7 @@ class HighlighterTestLeveL14(HighlightTester):
             "KKKK",
             "print 'GAME OVER'",
             "KKKKK SSSSSSSSSSS",
-            level="level14",lang='en')
+            level="level14", lang='en')
 
 
     def test_8(self):
@@ -160,7 +160,7 @@ class HighlighterTestLeveL14(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Lets go shopping!'",
             "KKKKK SSSSSSSSSSSSSSSSSSS",
-            level="level14",lang='en')
+            level="level14", lang='en')
 
 
     def test_9(self):
@@ -199,7 +199,7 @@ class HighlighterTestLeveL14(HighlightTester):
             "KK TTTTTTTT K TTTTTTTT",
             "print 'You belong to the B club'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level14",lang='en')
+            level="level14", lang='en')
 
 
     def test_10(self):
@@ -220,11 +220,11 @@ class HighlighterTestLeveL14(HighlightTester):
             "KK TTTTTT KK SSSSS",
             "print 'Ok we will continue'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSS",
-            level="level14",lang='en')
+            level="level14", lang='en')
 
 
     def test_11(self):
         self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level14",lang='en')
+            level="level14", lang='en')

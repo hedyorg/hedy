@@ -17,7 +17,7 @@ class HighlighterTestLeveL9(HighlightTester):
             "KKKK",
             "print 'pizza is better'",
             "KKKKK SSSSSSSSSSSSSSSSS",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_2(self):
@@ -46,7 +46,7 @@ class HighlighterTestLeveL9(HighlightTester):
             "KKKK",
             "print 'Robin goes home'",
             "KKKKK SSSSSSSSSSSSSSSSS",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_3(self):
@@ -101,14 +101,14 @@ class HighlighterTestLeveL9(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'She walks back'",
             "KKKKK SSSSSSSSSSSSSSSS",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_4(self):
         self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_5(self):
@@ -139,7 +139,7 @@ class HighlighterTestLeveL9(HighlightTester):
             "KKKKK SSSSSSSSSSS",
             "# finish this code",
             "CCCCCCCCCCCCCCCCCC",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_6(self):
@@ -168,14 +168,14 @@ class HighlighterTestLeveL9(HighlightTester):
             "TTTTT K TTTTT K N",
             "print 'Great job! Your score is... ' score ' out of 10!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSS",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_7(self):
         self.assert_highlighted_chr(
             "print 'Welcome to this calculator!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_8(self):
@@ -218,7 +218,7 @@ class HighlighterTestLeveL9(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSS",
             "print 'Enjoy your meal!'",
             "KKKKK SSSSSSSSSSSSSSSSSS",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_9(self):
@@ -259,14 +259,14 @@ class HighlighterTestLeveL9(HighlightTester):
             "KK TTTTTT KK TTTTT",
             "print 'Great! You survived!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_10(self):
         self.assert_highlighted_chr(
             "print 'Escape from the haunted house!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_11(self):
@@ -279,11 +279,11 @@ class HighlighterTestLeveL9(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'if youre happy and you know it clap your hands'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level9",lang='en')
+            level="level9", lang='en')
 
 
     def test_12(self):
         self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level9",lang='en')
+            level="level9", lang='en')

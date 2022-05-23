@@ -7,7 +7,7 @@ class HighlighterTestLeveL2(HighlightTester):
         self.assert_highlighted_chr(
             "print hello world!",
             "KKKKK TTTTTTTTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_2(self):
@@ -18,7 +18,7 @@ class HighlighterTestLeveL2(HighlightTester):
             "TTT KK TT",
             "print name is age years old",
             "KKKKK TTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_3(self):
@@ -27,7 +27,7 @@ class HighlighterTestLeveL2(HighlightTester):
             "TTTTTT KK KKK TTTTTTTTTTTTTTTTTT",
             "print Hello answer",
             "KKKKK TTTTTTTTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_4(self):
@@ -38,14 +38,14 @@ class HighlighterTestLeveL2(HighlightTester):
             "KKKKK T",
             "print green!",
             "KKKKK TTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_5(self):
         self.assert_highlighted_chr(
             "print Your story",
             "KKKKK TTTTTTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_6(self):
@@ -62,14 +62,14 @@ class HighlighterTestLeveL2(HighlightTester):
             "KKKKK",
             "print name is afraid this is a haunted forest",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_7(self):
         self.assert_highlighted_chr(
             "print Im Hedy the parrot!",
             "KKKKK TTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_8(self):
@@ -88,7 +88,7 @@ class HighlighterTestLeveL2(HighlightTester):
             "KKKKK",
             "print name",
             "KKKKK TTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_9(self):
@@ -101,7 +101,7 @@ class HighlighterTestLeveL2(HighlightTester):
             "KKKK TTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_10(self):
@@ -118,14 +118,14 @@ class HighlighterTestLeveL2(HighlightTester):
             "KKKK TTTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_11(self):
         self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_12(self):
@@ -134,7 +134,7 @@ class HighlighterTestLeveL2(HighlightTester):
             "TTTTTT KK T",
             "print I choose choice",
             "KKKKK TTTTTTTTTTTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_13(self):
@@ -157,14 +157,14 @@ class HighlighterTestLeveL2(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTT",
             "print Your food and drinks will be right there!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_14(self):
         self.assert_highlighted_chr(
             "monster1 is _",
             "TTTTTTTT KK T",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_15(self):
@@ -185,11 +185,11 @@ class HighlighterTestLeveL2(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print But as you enter monster_3 attacks you!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')
 
 
     def test_16(self):
         self.assert_highlighted_chr(
             "print Let's go to the next level!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2",lang='en')
+            level="level2", lang='en')

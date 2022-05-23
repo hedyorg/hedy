@@ -10,7 +10,7 @@ class HighlighterTestLeveL17(HighlightTester):
             "KKKKK T",
             "print 'Ready or not, here I come!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level17",lang='en')
+            level="level17", lang='en')
 
 
     def test_2(self):
@@ -33,11 +33,11 @@ class HighlighterTestLeveL17(HighlightTester):
             "KKKKK",
             "print 'Better luck next time..'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level17",lang='en')
+            level="level17", lang='en')
 
 
     def test_3(self):
         self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level17",lang='en')
+            level="level17", lang='en')

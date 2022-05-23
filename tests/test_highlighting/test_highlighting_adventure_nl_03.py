@@ -9,7 +9,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "TTTTTT KK TTTT  TTT  TTTTTTTTT",
             "print dieren op willekeurig",
             "KKKKK TTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_3(self):
@@ -22,21 +22,21 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "KKKKKKKKK TTTTTTTTT KKK TTTTTTT",
             "print taarten op willekeurig",
             "KKKKK TTTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_4(self):
         self.assert_highlighted_chr(
             "print hallo wereld!",
             "KKKKK TTTTTTTTTTTTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_5(self):
         self.assert_highlighted_chr(
             "print Hier komt straks jouw verhaal!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_6(self):
@@ -45,7 +45,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "TTTTTT KK T  T  T  T",
             "print Hij hoort nu het geluid van een dieren op willekeurig",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_7(self):
@@ -60,7 +60,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "KKKK TTTT KKK KKK TTTTTT",
             "print het was een dieren op willekeurig",
             "KKKKK TTTTTTTTTTT TTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_8(self):
@@ -75,7 +75,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "TTTTTTTTT KK KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "verwijder weggooien uit tas",
             "KKKKKKKKK TTTTTTTTT KKK TTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_9(self):
@@ -92,14 +92,14 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print 🦜: woorden op willekeurig",
             "KKKKK TTTTTTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_10(self):
         self.assert_highlighted_chr(
             "# Schrijf jouw code hier",
             "CCCCCCCCCCCCCCCCCCCCCCCC",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_11(self):
@@ -110,7 +110,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "KKKKK TTTTTT KK KKKKKKKKKKK",
             "vooruit 25",
             "KKKKKKK TT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_12(self):
@@ -123,7 +123,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "KKKKK TTTT",
             "vooruit 25",
             "KKKKKKK TT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_13(self):
@@ -132,7 +132,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "TTTTTT KK TTTT  TTTT  TTTT  TTTTTT",
             "print mensen op willekeurig",
             "KKKKK TTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_14(self):
@@ -145,14 +145,14 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "KKKKKKKKK TTTTTTTTT KKK TTTTTT",
             "print mensen op willekeurig doet de afwas vanavond!",
             "KKKKK TTTTTT KK KKKKKKKKKKK TTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_15(self):
         self.assert_highlighted_chr(
             "print Wie doet de afwas?",
             "KKKKK TTTTTTTTTTTTTTTTTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_16(self):
@@ -161,14 +161,14 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "TTTTTT KK T  T  T  T  T  TTTTTTTTT",
             "print keuzes op willekeurig",
             "KKKKK TTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_17(self):
         self.assert_highlighted_chr(
             "print Wat zal de dobbelsteen deze keer aangeven?",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_18(self):
@@ -177,14 +177,14 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "TTTTTT KK TTTTT  TTTTTT  TTTTTT",
             "print keuzes op willekeurig",
             "KKKKK TTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_19(self):
         self.assert_highlighted_chr(
             "print Welkom bij jouw eigen steen papier schaar!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_20(self):
@@ -203,7 +203,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "KKKKK T",
             "print antwoorden op willekeurig",
             "KKKKK TTTTTTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_21(self):
@@ -228,7 +228,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTT KK KKKKKKKKKKK",
             "print Eet smakelijk!",
             "KKKKK TTTTTTTTTTTTTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_22(self):
@@ -243,7 +243,7 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "KKKKKKKKK TTTTTTTT KKK TTTTTT",
             "print Jij krijgt een milkshake  smaken op willekeurig",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_23(self):
@@ -264,14 +264,14 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "KKKKK",
             "print monsters op willekeurig",
             "KKKKK TTTTTTTT KK KKKKKKKKKKK",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_24(self):
         self.assert_highlighted_chr(
             "print Ontsnap uit het spookhuis!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_25(self):
@@ -280,11 +280,11 @@ class HighlighterTestLeveL3nl(HighlightTester):
             "TTTT KK TTTTTT",
             "print Mijn naam is naam",
             "KKKKK TTTTTTTTTTTTTTTTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')
 
 
     def test_26(self):
         self.assert_highlighted_chr(
             "print Op naar het volgende level!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3",lang='nl')
+            level="level3", lang='nl')

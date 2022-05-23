@@ -9,7 +9,7 @@ class HighlighterTestLeveL11(HighlightTester):
             "KKK TTTTTTT KK KKKKK N KK N",
             "print counter",
             "KKKKK TTTTTTT",
-            level="level11",lang='en')
+            level="level11", lang='en')
 
 
     def test_2(self):
@@ -30,14 +30,14 @@ class HighlighterTestLeveL11(HighlightTester):
             "KKKK",
             "print 'NO MORE MONKEYS JUMPING ON THE BED!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level11",lang='en')
+            level="level11", lang='en')
 
 
     def test_3(self):
         self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level11",lang='en')
+            level="level11", lang='en')
 
 
     def test_4(self):
@@ -68,7 +68,7 @@ class HighlighterTestLeveL11(HighlightTester):
             "TTTTT K N K TTTTTT",
             "print 'That will be ' price ' dollars, please!'",
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSSS",
-            level="level11",lang='en')
+            level="level11", lang='en')
 
 
     def test_5(self):
@@ -111,14 +111,14 @@ class HighlighterTestLeveL11(HighlightTester):
             "KK TTTTTT KK TTTTT",
             "print 'Great! You survived!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level11",lang='en')
+            level="level11", lang='en')
 
 
     def test_6(self):
         self.assert_highlighted_chr(
             "print 'Escape from the haunted house!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level11",lang='en')
+            level="level11", lang='en')
 
 
     def test_7(self):
@@ -131,11 +131,11 @@ class HighlighterTestLeveL11(HighlightTester):
             "TTTT K TTTTTTTTTTTTTTTTTTTTT",
             "print show 'is my favorite show!'",
             "KKKKK TTTT SSSSSSSSSSSSSSSSSSSSSS",
-            level="level11",lang='en')
+            level="level11", lang='en')
 
 
     def test_8(self):
         self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level11",lang='en')
+            level="level11", lang='en')

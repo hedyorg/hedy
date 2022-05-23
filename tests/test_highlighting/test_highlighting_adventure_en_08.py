@@ -10,7 +10,7 @@ class HighlighterTestLeveL8(HighlightTester):
             "KKKKK SSSSSSSSSSSSS",
             "print 'This will be printed 5 times'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_2(self):
@@ -21,7 +21,7 @@ class HighlighterTestLeveL8(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSS",
             "print 'This is all repeated 5 times'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_3(self):
@@ -48,14 +48,14 @@ class HighlighterTestLeveL8(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'The T-rex closes in and eats him in one big bite!🦖'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_4(self):
         self.assert_highlighted_chr(
             "# place your code here",
             "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_5(self):
@@ -74,7 +74,7 @@ class HighlighterTestLeveL8(HighlightTester):
             "TTTTT K TTTTT K N",
             "print verse ' bottles of beer on the wall'",
             "KKKKK TTTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_6(self):
@@ -87,7 +87,7 @@ class HighlighterTestLeveL8(HighlightTester):
             "KKKK TTTTT",
             "forward 50",
             "KKKKKKK NN",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_7(self):
@@ -102,14 +102,14 @@ class HighlighterTestLeveL8(HighlightTester):
             "KKKK I",
             "forward _",
             "KKKKKKK I",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_8(self):
         self.assert_highlighted_chr(
             "hoeken = ask 'How many angles should I draw?'",
             "TTTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_9(self):
@@ -130,7 +130,7 @@ class HighlighterTestLeveL8(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Enjoy your meal!'",
             "KKKKK SSSSSSSSSSSSSSSSSS",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_10(self):
@@ -151,7 +151,7 @@ class HighlighterTestLeveL8(HighlightTester):
             "KKKKK",
             "print 'My crystal ball says...' answers at random",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTT KK KKKKKK",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_11(self):
@@ -172,11 +172,11 @@ class HighlighterTestLeveL8(HighlightTester):
             "KKKK",
             "print 'Okay, you can stay here for a little longer!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8",lang='en')
+            level="level8", lang='en')
 
 
     def test_12(self):
         self.assert_highlighted_chr(
             "print 'Lets go to the next level!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8",lang='en')
+            level="level8", lang='en')
