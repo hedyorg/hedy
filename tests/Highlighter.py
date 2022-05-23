@@ -54,30 +54,8 @@ ABBREVIATION = {
 class HighlightTester(unittest.TestCase):
 
     def assert_highlighted_chr(self, code, expected, level, lang="en"):
-        
         rules  = self.get_rules(level, lang)
-
-        simulator = SimulatorAce(rules)
-        result = simulator.apply(code)
-
-        valid, ind_error = self.check(result, expected)
-        if not valid:
-
-            code_list     = code.split('\n')
-            expected_list = expected.split('\n')
-            result_list   = result.split('\n')
-
-            line_cpt = 0
-            while ind_error >= len(code_list[line_cpt]):
-                ind_error -= len(code_list[line_cpt]) +1
-                line_cpt += 1
-
-            print("ERROR in level {} in {}:".format(level, lang))
-            print("In this code :", code_list[line_cpt] )
-            print("We want      :", expected_list[line_cpt] )
-            print("We have      :", result_list[line_cpt] )
-            print("At           :", " " * ind_error + "^")
-        self.assertTrue(valid)
+        self.check(code, expected, rules)
 
 
     def assert_highlighted_chr_multi_line(self, *args, level, lang="en"):
@@ -107,6 +85,65 @@ class HighlightTester(unittest.TestCase):
         self.assert_highlighted_chr(code, expected, level, lang)
 
 
+
+    # apply rules on code and check if the result is valid
+    def check(self, code, expected, rules):
+        
+        simulator = SimulatorAce(rules)
+        result = simulator.apply(code)
+
+        valid, ind_error = self.compare(result, expected)
+
+        if not valid:
+
+            code_list     = code.split('\n')
+            expected_list = expected.split('\n')
+            result_list   = result.split('\n')
+
+            line_cpt = 0
+            while ind_error >= len(code_list[line_cpt]):
+                ind_error -= len(code_list[line_cpt]) +1
+                line_cpt += 1
+
+            print("ERROR in level {} in {}:".format(level, lang))
+            print("In this code :", code_list[line_cpt] )
+            print("We want      :", expected_list[line_cpt] )
+            print("We have      :", result_list[line_cpt] )
+            print("At           :", " " * ind_error + "^")
+
+        self.assertTrue(valid)
+
+
+    # This function allows to compare 2 syntactic colorations one desired
+    # and the other obtained, and manages some special cases
+
+    # Returns a boolean and a value:
+    # - If the 2 highlights are consistent, the boolean will be true and the value unused
+    # - if there is an error in the highlight, the boolean will be false and
+    #   the value will be the number of the 1st character where there is an inconsistency
+    def compare(self, result, expected):
+        if len(result) != len(expected):
+            raise ValueError("The desired highlight and the obtained highlight do not have the same length !")
+
+        cpt = 0
+        for i in range(len(expected)):
+            ch_wanted, ch_result = expected[i], result[i]
+
+            if ch_wanted == ch_result:
+                pass # if they are the same, no problem 
+            elif ch_wanted == " " and ch_result in ['T', 'K', 'C', 'N', 'S']:
+                pass # if it was not fixed at the beginning, everything is tolerated except the pink highlighting
+            else:
+                # in all other cases, an error is returned indicating the number of the problematic character
+                return False, cpt
+
+            cpt += 1
+
+        return True, -1
+
+
+
+    # get rules from json files
     def get_rules(self, level, lang="en"):
         os.chdir(os.path.dirname(__file__) +"/..")
 
@@ -186,35 +223,12 @@ class HighlightTester(unittest.TestCase):
         return "".join(code), "".join(coloring)
 
 
-    # This function allows to check 2 syntactic colorations one desired
-    # and the other obtained, and manages some special cases
 
-    # Returns a boolean and a value:
-    # - If the 2 highlights are consistent, the boolean will be true and the value unused
-    # - if there is an error in the highlight, the boolean will be false and
-    #   the value will be the number of the 1st character where there is an inconsistency
-    def check(self, result, expected):
-        if len(result) != len(expected):
-            raise ValueError("The desired highlight and the obtained highlight do not have the same length !")
-        cpt = 0
-        for i in range(len(expected)):
-            ch_wanted, ch_result = expected[i], result[i]
-
-            if ch_wanted == ch_result:
-                pass # if they are the same, no problem 
-            elif ch_wanted == " " and ch_result in ['T', 'K', 'C', 'N', 'S']:
-                pass # if it was not fixed at the beginning, everything is tolerated except the pink highlighting
-            else:
-                # in all other cases, an error is returned indicating the number of the problematic character
-                return False, cpt
-
-            cpt += 1
-
-        return True, -1
 
 
 class SimulatorAce:
-    """docstring for SimulatorAce"""
+
+    # constructor of SimulatorAce with check on rules
     def __init__(self, rules):
         self.rules = rules
 
@@ -240,9 +254,7 @@ class SimulatorAce:
                         if rule["nb_groups"] != len(rule["token"]):
                             raise ValueError(f"The number of groups in the regex is different from the number of tokens. In this rule : {rule}!")
 
-
-
-
+    # apply rules on code
     def apply(self, code):
         outputs = []
         token = "start"
@@ -251,31 +263,7 @@ class SimulatorAce:
             outputs.append(output)
         return "\n".join(outputs)
 
-
-    def find_match(self, code, current_state, current_position):
-        # search for the transition that we will use
-
-        current_match = None
-        NEXT = {"rule":{}, "match":None}
-        FIND = False
-
-        next_pos = len(code) + 1
-        for rule in self.rules[current_state]:
-
-            regex_compile = rule["regex_compile"]
-            match = regex_compile.search(code, current_position)
-
-            if match:
-                if match.start() < next_pos :
-                    next_pos = match.start()
-                    NEXT["rule"] = rule
-                    NEXT["match"] = match
-                    FIND = True
-
-        return FIND, NEXT
-
-
-
+    # apply rule in one line of code
     def apply_rules_line(self, code, start_token="start"):
         # Initialisation output
         output = []
@@ -340,3 +328,28 @@ class SimulatorAce:
             output.append(TOKEN_CODE[default_token])
 
         return "".join(output), current_state
+
+    # find next match
+    def find_match(self, code, current_state, current_position):
+        # search for the transition that we will use
+
+        current_match = None
+        NEXT = {"rule":{}, "match":None}
+        FIND = False
+
+        next_pos = len(code) + 1
+        for rule in self.rules[current_state]:
+
+            regex_compile = rule["regex_compile"]
+            match = regex_compile.search(code, current_position)
+
+            if match:
+                if match.start() < next_pos :
+                    next_pos = match.start()
+                    NEXT["rule"] = rule
+                    NEXT["match"] = match
+                    FIND = True
+
+        return FIND, NEXT
+
+
