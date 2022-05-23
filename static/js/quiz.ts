@@ -69,7 +69,8 @@ function showAnswers(options: any, level: number, question: number) {
         if (options[i-1].option.includes("```")) {
             $('#answer_text_' + i).hide();
             let editor = ace.edit('answer_code_' + i);
-            editor.setValue(options[i-1].option.replace("`/g", ""));
+            // This does look like magic: It removes all backticks and the resting newlines, tabs and whitespaces
+            editor.setValue(options[i-1].option.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " "));
             $('#answer_code_' + i).show();
         } else {
             // Todo TB -> If we find a single backtick -> it's a command we have to surround it with a code block
