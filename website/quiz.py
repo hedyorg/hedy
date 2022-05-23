@@ -54,12 +54,6 @@ def routes(app, database, achievements, quizzes):
             return gettext('question_doesnt_exist'), 400
 
         question = QUIZZES[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
-        for option in question['mp_choice_options']:
-            option['option'].replace("`", "<code>")
-            option['option'].replace("<code> ", "</code> ")
-            print(option)
-
-
         return jsonify(question), 200
 
     @app.route('/quiz/submit_answer/', methods=["POST"])
@@ -71,6 +65,8 @@ def routes(app, database, achievements, quizzes):
             return gettext('level_invalid'), 400
         if not isinstance(body.get('question'), str):
             return gettext('question_invalid'), 400
+        if body.get('question') > QUIZZES[g.lang].get_highest_question_level(body['level']) or body['question'] < 1:
+            return gettext('question_doesnt_exist'), 400
         if not isinstance(body.get('answer'), int):
             return gettext('answer_invalid'), 400
 
@@ -84,6 +80,34 @@ def routes(app, database, achievements, quizzes):
         DATABASE.record_quiz_answer(session['quiz-attempt-id'], username=username, level=level,
                                     is_correct=is_correct, question_number=question_number,
                                     answer=body.get('answer'))
+
+        if question_number == QUIZZES[g.lang].get_highest_question_level(body['level']):
+            # This is the last question -> the response should be the results page
+            questions = QUIZZES[g.lang].get_quiz_data_for_level(level, g.keyword_lang)
+
+            achievement = None
+            total_score = round(session.get('total_score', 0) / max_score(questions) * 100)
+            response = {
+                'end': True,
+                'score': total_score,
+                'questions': questions
+            }
+
+            username = current_user()['username']
+            if username:
+                statistics.add(username, lambda id_: DATABASE.add_quiz_finished(id_, level, total_score))
+                achievement = ACHIEVEMENTS.add_single_achievement(username, "next_question")
+                if total_score == max_score(questions):
+                    if achievement:
+                        achievement.append(ACHIEVEMENTS.add_single_achievement(username, "quiz_master")[0])
+                    else:
+                        achievement = ACHIEVEMENTS.add_single_achievement(username, "quiz_master")
+                if achievement:
+                    response['achievement'] = json.dumps(achievement)
+            else:
+                username = f'anonymous:{utils.session_id()}'
+            response['answers'] = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
+            return jsonify(response), 200
 
         response = {
             'question_text': question.get("question_text"),
