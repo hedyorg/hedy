@@ -64,6 +64,7 @@ function showQuestionCode(code: string) {
 function showAnswers(options: any, level: number, question: number) {
     // This solution is far from beautiful but seems to best approach to parse YAML code down to the editor
     // If we find three backticks -> the answer is a code snippet: remove the backticks and show as snippet
+    $('.option-block').hide();
     for (let i = 1; i < options.length+1; ++i) {
         if (options[i-1].option.includes("```")) {
             $('#answer_text_' + i).hide();
