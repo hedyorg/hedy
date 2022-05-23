@@ -83,34 +83,6 @@ def routes(app, database, achievements, quizzes):
                                     is_correct=is_correct, question_number=question_number,
                                     answer=body.get('answer'))
 
-        if question_number == QUIZZES[g.lang].get_highest_question_level(body['level']):
-            # This is the last question -> the response should be the results page
-            questions = QUIZZES[g.lang].get_quiz_data_for_level(level, g.keyword_lang)
-
-            achievement = None
-            total_score = round(session.get('total_score', 0) / max_score(questions) * 100)
-            response = {
-                'end': True,
-                'score': total_score,
-                'questions': questions
-            }
-
-            username = current_user()['username']
-            if username:
-                statistics.add(username, lambda id_: DATABASE.add_quiz_finished(id_, level, total_score))
-                achievement = ACHIEVEMENTS.add_single_achievement(username, "next_question")
-                if total_score == max_score(questions):
-                    if achievement:
-                        achievement.append(ACHIEVEMENTS.add_single_achievement(username, "quiz_master")[0])
-                    else:
-                        achievement = ACHIEVEMENTS.add_single_achievement(username, "quiz_master")
-                if achievement:
-                    response['achievement'] = json.dumps(achievement)
-            else:
-                username = f'anonymous:{utils.session_id()}'
-            response['answers'] = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
-            return jsonify(response), 200
-
         response = {
             'question_text': question.get("question_text"),
             'level': level,
@@ -132,6 +104,35 @@ def routes(app, database, achievements, quizzes):
             response['correct'] = False
 
         return jsonify(response), 200
+
+    @app.route('/quiz/get_results/<level>', methods=['GET'])
+    def get_results(level):
+        questions = QUIZZES[g.lang].get_quiz_data_for_level(level, g.keyword_lang)
+
+        achievement = None
+        total_score = round(session.get('total_score', 0) / max_score(questions) * 100)
+        response = {
+            'end': True,
+            'score': total_score,
+            'questions': questions
+        }
+
+        username = current_user()['username']
+        if username:
+            statistics.add(username, lambda id_: DATABASE.add_quiz_finished(id_, level, total_score))
+            achievement = ACHIEVEMENTS.add_single_achievement(username, "next_question")
+            if total_score == max_score(questions):
+                if achievement:
+                    achievement.append(ACHIEVEMENTS.add_single_achievement(username, "quiz_master")[0])
+                else:
+                    achievement = ACHIEVEMENTS.add_single_achievement(username, "quiz_master")
+            if achievement:
+                response['achievement'] = json.dumps(achievement)
+        else:
+            username = f'anonymous:{utils.session_id()}'
+        response['answers'] = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
+
+        return jsonify({}), 200
 
 
 def correct_answer_score(question):

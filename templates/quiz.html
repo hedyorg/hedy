@@ -128,7 +128,7 @@
             <button class="green-btn ltr:ml-1 rtl:mr-1 ltr:text-right-0 rtl:text-left-0" id="next_question_button" style="display: none";>
                 {{ _('go_to_question') }} <span id="next_question_number_container"></span>
             </button>
-            <button class="green-btn ltr:ml-1 rtl:mr-1 ltr:right-0 rtl:left-0" id="results_button" style="display: none"; onclick="hedyApp.loadQuizResults();">
+            <button class="green-btn ltr:ml-1 rtl:mr-1 ltr:right-0 rtl:left-0" id="results_button" style="display: none"; onclick="hedyApp.showQuizResults({{ level }});">
                 {{ _('go_to_quiz_result') }}
             </button>
         </div>

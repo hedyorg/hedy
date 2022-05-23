@@ -118,8 +118,6 @@ export function answerQuestion(answer_number: number) {
         if (response.correct) {
             showFeedback(response, question || "", true);
             updateHeader(question || "", true);
-        } else if (response.end) {
-            // If this is the last question -> perform some magic
         } else {
             showFeedback(response, question || "", false);
             updateHeader(question || "", false);
@@ -175,6 +173,19 @@ function updateHeader(question: string, correct: boolean) {
     }
 }
 
-export function loadQuizResults() {
-    console.log("Laad de resultaten...");
+export function showQuizResults(level: number) {
+    $.ajax({
+      type: 'GET',
+      url: '/quiz/get_results/' + level,
+      dataType: 'json'
+    }).done(function(response: any) {
+        showResults(response);
+    }).fail(function(err) {
+       modal.alert(err.responseText, 3000, true);
+    });
+}
+
+function showResults(response: any) {
+    console.log(response);
+    console.log("Let's show the results...");
 }
