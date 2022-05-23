@@ -109,7 +109,8 @@ export const auth = {
         data: JSON.stringify (payload),
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
-        afterLogin({});
+        // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
+        afterLogin({"first_time": true});
       }).fail (function (response) {
         modal.alert(response.responseText, 3000, true);
       });
@@ -122,6 +123,11 @@ export const auth = {
         data: JSON.stringify ({username: values.username, password: values.password}),
         contentType: 'application/json; charset=utf-8'
       }).done (function (response) {
+        // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
+        // This happens when a student account (without an mail address logs in for the first time
+        if (response['first_time']) {
+          return afterLogin({"first_time": true});
+        }
         return afterLogin({"admin": response['admin'] || false, "teacher": response['teacher']} || false);
       }).fail (function (response) {
         modal.alert(response.responseText, 3000, true);
@@ -325,6 +331,10 @@ async function afterLogin(loginData: Dict<boolean>) {
     return auth.redirect(redirect);
   }
 
+  // If the user logs in for the first time -> redirect to the landing-page after signup
+  if (loginData['first_time']) {
+    return auth.redirect('landing-page/1');
+  }
   // If the user is an admin -> re-direct to admin page after login
   if (loginData['admin']) {
     return auth.redirect('admin');

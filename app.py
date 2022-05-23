@@ -1063,9 +1063,14 @@ def main_page(page):
     return render_template('main-page.html', page_title=gettext('title_start'),
                            current_page='start', content=main_page_translations)
 
-@app.route('/landing-page', methods=['GET'])
+
+@app.route('/landing-page/', methods=['GET'], defaults={'first': False})
+@app.route('/landing-page/<first>', methods=['GET'])
 @requires_login
-def landing_page(user):
+def landing_page(user, first):
+    if first:
+        print("eerste keer!")
+
     return render_template('landing-page.html', page_title=gettext('title_landing-page'), user=user['username'])
 
 

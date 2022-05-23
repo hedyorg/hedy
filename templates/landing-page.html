@@ -5,16 +5,13 @@
     <div id="landing_page_text" class="mt-4 w-3/4 mx-auto text-center">
         <h1>{{_('welcome')}} {{ user }}!</h1>
         <div class="mt-4">
-          <p class="text-lg">
-            {{_('landing_page_intro')}}
-          </p>
-          <p class="text-lg mt-0 pt-0">
-            {% if is_teacher %}
-              {{_('landing_page_teacher')}}
-            {% else %}
-              {{_('landing_page_student')}}
-            {% endif %}
-          </p>
+            <p class="text-lg mt-0 pt-0">
+                {% if first_time %}
+                    {{_('welcome_landing_page')}}
+                {% else %}
+                    {{_('welcome_back_landing_page')}}
+                {% endif %}
+            </p>
         </div>
     </div>
     <div class="mt-8 mx-auto w-full flex flex-row justify-around">
@@ -36,7 +33,7 @@
         <div class="border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/hedy'">
             <img src="/images/Hedy-logo.png" class="h-32 mt-8">
             <div class="mt-4">
-              <p class="text-xl">{{_('directly_start_programming')}}</p>
+              <p class="text-xl">{{_('start_programming')}}</p>
             </div>
         </div>
         <div class="border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/explore'">
@@ -44,6 +41,14 @@
             <div class="mt-4">
               <p class="text-xl">{{_('explore_programs')}}</p>
             </div>
+        </div>
+    </div>
+    <div class="mt-8">
+        <h2>Jouw account</h2>
+        <div>
+            Gooi wat random stats van de gebruiker...
+            Laatste programma
+            Openbaar profiel
         </div>
     </div>
 </div>
