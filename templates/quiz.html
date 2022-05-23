@@ -115,11 +115,12 @@
                 <p class="text-2xl text-center hidden" id="feedback_feedback_container">
                     <i id="feedback_feedback_text"></i>
                 </p>
-                <div class="flex flex-col justify-center">
+                <div class="flex flex-col justify-center turn-pre-into-ace">
                     <p class="text-black text-center font-extrabold text-4xl font-slab">
                         {{_('correct_answer')}}
                     </p>
-                    <div class="w-full text-center pt-8 px-2 mx-auto mb-2 text-lg" id="feedback_correct_answer_container"></div>
+                    <div class="w-full text-center pt-8 px-2 mx-auto mb-2 text-lg" style="display: none;" id="feedback_correct_answer_container"></div>
+                    <pre class="no-copy-button" style="display: none;" level="{{ level }}" id="feedback_answer_code"></pre>
                 </div>
             </div>
         </div>

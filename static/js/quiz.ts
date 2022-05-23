@@ -144,8 +144,16 @@ function showFeedback(response: any, question: string, correct: boolean) {
 
     $('#question_feedback_text_container').text(response.question_text);
     $('#feedback_feedback_text').text(response.feedback);
-    $('#feedback_correct_answer_container').text(response.correct_answer_text);
-
+    if (response.correct_answer_text.includes("```")) {
+        let editor = ace.edit("feedback_answer_code");
+        editor.setValue(response.correct_answer_text.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " "));
+        $('#feedback_correct_answer_container').hide();
+        $('#feedback_answer_code').show();
+    } else {
+        $('#feedback_correct_answer_container').text(response.correct_answer_text);
+        $('#feedback_answer_code').hide();
+        $('#feedback_correct_answer_container').show();
+    }
     if (correct) {
         $('#feedback_incorrect_container').hide();
         $('#feedback_correct_container').show();
