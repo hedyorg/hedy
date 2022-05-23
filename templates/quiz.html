@@ -152,5 +152,11 @@
     </div>
 </div>
 <div id="quiz_results_container" class="hidden">
-    <!-- We can get this dynamically using the AJAX calls -->
+    <div class="flex flex-col justify-center items-center p-8">
+        <h1 class="p-8 font-bold text-4xl font-slab">{{_('end_quiz')}}</h1>
+        <h3 class="p-8 font-semibold text-2xl italic font-slab">{{_('score')}}</h3>
+        <div class="p-8 border-4 border-yellow-600 rounded-full h-24 w-24 flex items-center bg-yellow-300 justify-center">
+            <p class="text-yellow-600 font-bold text-4xl text-center font-slab" id="quiz_total_score"></p>
+        </div>
+    </div>
 </div>

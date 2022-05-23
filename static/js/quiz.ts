@@ -1,4 +1,5 @@
 import {modal} from "./modal";
+import {showAchievements} from "./app";
 
 (function() {
     $('.option-block').on("click", function () {
@@ -180,12 +181,14 @@ export function showQuizResults(level: number) {
       dataType: 'json'
     }).done(function(response: any) {
         showResults(response);
+        if (response.achievement) {
+            showAchievements(response.achievements, false, "");
+        }
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
     });
 }
 
 function showResults(response: any) {
-    console.log(response);
-    console.log("Let's show the results...");
+    $('#quiz_total_score').val(response.score);
 }

@@ -115,7 +115,6 @@ def routes(app, database, achievements, quizzes):
         total_score = round(session.get('total_score', 0) / max_score(questions) * 100)
         response = {
             'score': total_score,
-            'questions': questions
         }
 
         username = current_user()['username']
@@ -132,7 +131,7 @@ def routes(app, database, achievements, quizzes):
         else:
             username = f'anonymous:{utils.session_id()}'
         response['answers'] = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
-        print(response)
+
         return jsonify(response), 200
 
 
