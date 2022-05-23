@@ -101,7 +101,9 @@ export function answerQuestion(answer_number: number) {
     }).done(function(response: any) {
         if (response.correct) {
             showFeedback(response, question || "");
-            updateHeader(question || "");
+            updateHeader(question || "", true);
+        } else {
+            updateHeader(question || "", false);
         }
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
@@ -132,9 +134,12 @@ function showFeedback(response: any, question: string) {
     $('#quiz_feedback_container').show();
 }
 
-function updateHeader(question: string) {
-    $('#question_header_' + question).css("background-color", "");
-    $('#question_header_' + question).addClass('bg-green-500');
+function updateHeader(question: string, correct: boolean) {
+    if (correct) {
+        $('#question_header_' + question).addClass('check');
+    } else {
+        $('#question_header_' + question).addClass('incorrect');
+    }
 }
 
 export function loadQuizResults() {
