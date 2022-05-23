@@ -787,3 +787,12 @@ class TestsLevel6(HedyTester):
           print(f'meh')""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+    def test_print_single_number(self):
+        code = textwrap.dedent("""\
+                print 5""")
+
+        expected = textwrap.dedent("""\
+                print(f'5')""")
+
+        self.multi_level_tester(max_level=6, code=code, expected=expected)
