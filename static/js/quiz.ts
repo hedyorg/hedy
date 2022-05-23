@@ -39,6 +39,8 @@ export function loadQuestQuestion(level: number, question: number) {
         showQuestion(response.question_text);
         if (response.code) {
             showQuestionCode(response.code);
+        } else {
+            $('#quiz_question_code_container').hide();
         }
         showAnswers(response.mp_choice_options, level, question);
         highlightQuestionBar(question);
