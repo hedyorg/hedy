@@ -100,9 +100,10 @@ export function answerQuestion(answer_number: number) {
       dataType: 'json'
     }).done(function(response: any) {
         if (response.correct) {
-            showFeedback(response, question || "");
+            showFeedback(response, question || "", true);
             updateHeader(question || "", true);
         } else {
+            showFeedback(response, question || "", false);
             updateHeader(question || "", false);
         }
     }).fail(function(err) {
@@ -110,7 +111,7 @@ export function answerQuestion(answer_number: number) {
     });
 }
 
-function showFeedback(response: any, question: string) {
+function showFeedback(response: any, question: string, correct: boolean) {
     console.log(response);
     $('#quiz_question_container').hide();
     $('#quiz_answers_container').hide();
@@ -130,7 +131,13 @@ function showFeedback(response: any, question: string) {
     $('#feedback_feedback_text').text(response.feedback);
     $('#feedback_correct_answer_container').text(response.correct_answer_text);
 
-    $('#feedback_correct_container').show();
+    if (correct) {
+        $('#feedback_incorrect_container').hide();
+        $('#feedback_correct_container').show();
+    } else {
+        $('#feedback_correct_container').hide();
+        $('#feedback_incorrect_container').show();
+    }
     $('#quiz_feedback_container').show();
 }
 

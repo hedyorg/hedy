@@ -79,7 +79,17 @@ def routes(app, database, achievements, quizzes):
                                     is_correct=is_correct, question_number=question_number,
                                     answer=body.get('answer'))
 
+        response = {
+            'question_text': question.get("question_text"),
+            'level': level,
+            'correct_answer_text': question.get("mp_choice_options")[body.get('answer') - 1].get('option'),
+            'feedback': question.get("mp_choice_options")[body.get('answer') - 1].get('feedback'),
+            'max_question': question_number < QUIZZES[g.lang].get_highest_question_level(level),
+            'next_question': True if question_number < QUIZZES[g.lang].get_highest_question_level(level) else False
+        }
+
         if is_correct:
+            response['correct'] = True
             score = int(correct_answer_score(question))
             correct_question_nrs = get_correctly_answered_question_nrs()
             if body.get('question') not in correct_question_nrs:
@@ -87,18 +97,10 @@ def routes(app, database, achievements, quizzes):
                 session['correct_answer'] = session.get('correct_answer', 0) + 1
                 session['correctly_answered_questions_numbers'].append(body.get('question'))
 
-            # We have to get the relevant data for the correct answer
-            question_text = question.get("question_text")
-            correct_answer_text = question.get("mp_choice_options")[body.get('answer') - 1].get('option')
-            feedback = question.get("mp_choice_options")[body.get('answer') - 1].get('feedback')
-            next_question = True if question_number < QUIZZES[g.lang].get_highest_question_level(level) else False
+            return jsonify(response), 200
 
-            return jsonify({'correct': True, 'question_text': question_text, 'level': level,
-                            'correct_answer_text': correct_answer_text, 'feedback': feedback,
-                            'max_question': question_number < QUIZZES[g.lang].get_highest_question_level(level),
-                            'next_question': next_question}), 200
-
-        return jsonify({'correct': False}), 200
+        response['correct'] = False
+        return jsonify(response), 200
 
 
     @app.route('/quiz/finished/<int:level>', methods=['GET'])
