@@ -95,6 +95,7 @@ def routes(app, database, achievements, quizzes):
 
             return jsonify({'correct': True, 'question_text': question_text, 'level': level,
                             'correct_answer_text': correct_answer_text, 'feedback': feedback,
+                            'max_question': question_number < QUIZZES[g.lang].get_highest_question_level(level),
                             'next_question': next_question}), 200
 
         return jsonify({'correct': False}), 200
