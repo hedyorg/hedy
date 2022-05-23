@@ -328,11 +328,15 @@ class SimulatorAce:
                 if 'next' in current_rule:
                     current_state = current_rule['next']
 
+
                 if current_position == len(code):
                     END_OF_SEARCH = True
 
-
             else:
                 END_OF_SEARCH = True
+
+        # we color the last characters since the last match with the default coloring
+        for c in range(current_position, len(code)):
+            output.append(TOKEN_CODE[default_token])
 
         return "".join(output), current_state
