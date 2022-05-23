@@ -65,13 +65,15 @@ def routes(app, database, achievements, quizzes):
             return gettext('level_invalid'), 400
         if not isinstance(body.get('question'), str):
             return gettext('question_invalid'), 400
-        if body.get('question') > QUIZZES[g.lang].get_highest_question_level(body['level']) or body['question'] < 1:
-            return gettext('question_doesnt_exist'), 400
         if not isinstance(body.get('answer'), int):
             return gettext('answer_invalid'), 400
 
         level = int(body['level'])
         question_number = int(body['question'])
+
+        if question_number > QUIZZES[g.lang].get_highest_question_level(level) or question_number < 1:
+            return gettext('question_doesnt_exist'), 400
+
 
         question = QUIZZES[g.lang].get_quiz_data_for_level_question(level, question_number, g.keyword_lang)
         is_correct = True if question['correct_answer'] == ANSWER_PARSER.get(body.get('answer')) else False

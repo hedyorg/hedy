@@ -76,6 +76,7 @@ function showAnswers(options: any, level: number, question: number) {
             // Todo TB -> If we find a single backtick -> it's a command we have to surround it with a code block
             // Like this: `print` becomes <code>print</code>, we have to use some regex magic for this...
             $('#answer_text_' + i).text(options[i - 1].option);
+            $('#answer_code_' + i).hide();
             $('#answer_text_' + i).show();
         }
         // Set relevant info on container so we can catch this on answering
@@ -140,6 +141,7 @@ function showFeedback(response: any, question: string, correct: boolean) {
         $('#next_question_button').attr('onclick', "hedyApp.loadQuestQuestion(" + response.level + "," + (parseInt(question) + 1) + ");");
         $('#next_question_button').show();
     } else {
+        $('#next_question_button').hide();
         $('#results_button').show();
     }
 
