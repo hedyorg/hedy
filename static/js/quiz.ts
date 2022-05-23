@@ -62,13 +62,24 @@ function showQuestionCode(code: string) {
 }
 
 function showAnswers(options: any, level: number, question: number) {
+    // This solution is far from beautiful but seems to best approach to parse YAML code down to the editor
+    // If we find three backticks -> the answer is a code snippet: remove the backticks and show as snippet
     for (let i = 1; i < options.length+1; ++i) {
+        if (options[i-1].option.includes("```")) {
+            $('#answer_text_' + i).hide();
+            let editor = ace.edit('answer_code_' + i);
+            editor.setValue(options[i-1].option.replace("`", ""));
+            $('#answer_code_' + i).show();
+        } else {
+            // Todo TB -> If we find a single backtick -> it's a command we have to surround it with a code block
+            // Like this: `print` becomes <code>print</code>, we have to use some regex magic for this...
+            $('#answer_text_' + i).text(options[i - 1].option);
+            $('#answer_text_' + i).show();
+        }
+        // Set relevant info on container so we can catch this on answering
+        $('#answer_container_' + i).attr('level', level);
+        $('#answer_container_' + i).attr('question', question);
         $('#answer_container_' + i).show();
-        $('#answer_text_' + i).text(options[i-1].option);
-        $('#answer_text_' + i).attr('level', level);
-        $('#answer_text_' + i).attr('question', question);
-        $('#answer_text_' + i).show();
-        // Todo -> If we have a code answer, show answer_code_i and remove backticks
     }
     $('#quiz_answers_container').show();
 }
@@ -86,7 +97,7 @@ function loadHint(hint: string) {
 }
 
 export function answerQuestion(answer_number: number) {
-    let element = $('#answer_text_' + answer_number);
+    let element = $('#answer_container_' + answer_number);
     let level = element.attr('level');
     let question = element.attr('question');
 
