@@ -51,14 +51,17 @@ def validate_ruleset(levels):
         if r.groups == 0:
             if type(rule["token"]) != str:
                 raise ValueError(f"In {level['name']}, state \'{state}\': if regex has no groups, token must be a string. In this rule.\n{rule}")
+                errors += 1
 
         else:
             if type(rule["token"]) != list :
                 raise ValueError(f"In {level['name']}, state \'{state}\': if regex has groups, token must be a list. In this rule.\n{rule}")
+                errors += 1
 
             else:
                 if r.groups != len(rule["token"]):
                     raise ValueError(f"In {level['name']}, state \'{state}\': number of groups in the regex is different from the number of tokens. In this rule.\n{rule}")
+                    errors += 1
 
 
   if errors > 0:
