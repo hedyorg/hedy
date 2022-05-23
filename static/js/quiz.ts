@@ -81,17 +81,23 @@ export function answerQuestion(answer_number: number) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function() {
-        // This gets complex, we have three options:
-        // - The answer is correct
-        // - The answer is incorrect (attempts left)
-        // - The answer is incorrect (no attempts left)
-        showFeedback();
+    }).done(function(response: any) {
+        if (response.correct) {
+            updateQuestionBar();
+            showFeedback(response.question);
+        } else if (response.incorrect) {
+            // Show feedback as well -> with "fault" marker
+        }
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
     });
 }
 
-function showFeedback() {
+function updateQuestionBar() {
+    console.log("Dit moeten we nog fixen...");
+}
+
+function showFeedback(question: any) {
+    console.log(question)
     console.log("Antwoord is goed....");
 }
