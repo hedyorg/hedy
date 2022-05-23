@@ -112,7 +112,7 @@
 -   name: '{is}'
     explanation: Donu nomon al teksto kaj `{print}` sen citiloj
     example: 'Ekzemple: nomo {is} Hedy.'
-    demo_code: "nomo {is} Hedy\n{print} 'mia nomo estas ' name"
+    demo_code: "nomo {is} Hedy\n{print} 'mia nomo estas ' nomo"
 -   name: '{ask}'
     explanation: demandu ion per `{ask}`.
     example: "Ekzemple: koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'"
@@ -216,7 +216,7 @@
 -   name: Smaller {while}
     explanation: 'We can also use the `{while}` loop with `<` and `>`. '
     example: 'Ekzemple: {while} nombro < 3'
-    demo_code: "nombro = 1\n{while} nombro < 3\n    {print} 'Ni faros tion ' 3 - count ' fojojn plu'\n    nombro = nombro + 1\n{print} 'Ni finiĝis'"
+    demo_code: "nombro = 1\n{while} nombro < 3\n    {print} 'Ni faros tion ' 3 - nombro ' fojojn plu'\n    nombro = nombro + 1\n{print} 'Ni finiĝis'"
 16:
 -   name: rektaj krampoj
     explanation: Listoj per rektaj krampoj
