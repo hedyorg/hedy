@@ -26,8 +26,10 @@ export function startQuiz(level: number) {
 }
 
 export function loadQuestQuestion(level: number, question: number) {
-    // If we get the request from the feedback page -> hide just to be sure
+    // If we get the request from the feedback page -> hide just to be sure also remove selected answer
     $('#quiz_feedback_container').hide();
+    $('.option-block').removeClass('active');
+
     $.ajax({
       type: 'GET',
       url: '/quiz/get-question/' + level + '/' + question,
