@@ -88,6 +88,9 @@ export function answerQuestion(answer_number: number) {
         } else if (response.incorrect) {
             // Show feedback as well -> with "fault" marker
         }
+        if (response.next_question) {
+            updateFeedbackButtons();
+        }
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
     });
@@ -100,6 +103,10 @@ function updateQuestionBar() {
 function showFeedback(question: any) {
     console.log(question)
     console.log("Antwoord is goed....");
+}
+
+function updateFeedbackButtons() {
+    console.log("Hier moeten we ook nog van alles doen...");
 }
 
 export function loadQuizResults() {
