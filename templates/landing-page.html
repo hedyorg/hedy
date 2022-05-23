@@ -2,7 +2,7 @@
 
 {% block main %}
 <div class="px-8">
-    <div id="landing_page_text" class="mt-4 w-3/4 mx-auto text-center">
+    <div id="landing_page_text" class="mt-4 px-4 text-center">
         <h2 class="text-4xl">{{_('welcome')}} {{ user }}!</h2>
         <div class="mt-4">
             <p class="text-lg mt-0 pt-0">
@@ -14,29 +14,29 @@
             </p>
         </div>
     </div>
-    <div class="mt-8 mx-auto w-full flex flex-row justify-around">
+    <div class="mt-8 mx-auto flex justify-around">
         {% if is_teacher %}
-            <div class="border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/teacher-tutorial'">
+            <div class="w-80 border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/teacher-tutorial'">
               <img src="/images/profile_images/3.png" class="h-32 mt-8">
               <div class="my-4">
                 <p class="text-xl">{{_('start_teacher_tutorial')}}</p>
               </div>
             </div>
         {% else %}
-            <div class="border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/tutorial'">
+            <div class="w-80 border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/tutorial'">
               <img src="/images/profile_images/3.png" class="h-32 mt-8">
               <div class="my-4">
                 <p class="text-xl">{{_('start_hedy_tutorial')}}</p>
               </div>
             </div>
         {% endif %}
-        <div class="border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/hedy'">
+        <div class="w-80 border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/hedy'">
             <img src="/images/Hedy-logo.png" class="h-32 mt-8">
             <div class="mt-4">
               <p class="text-xl">{{_('start_programming')}}</p>
             </div>
         </div>
-        <div class="border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/explore'">
+        <div class="w-80 border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/explore'">
             <img src="/images/profile_images/5.png" class="h-32 mt-8">
             <div class="mt-4">
               <p class="text-xl">{{_('explore_programs')}}</p>
