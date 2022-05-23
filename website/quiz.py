@@ -105,11 +105,6 @@ def routes(app, database, achievements, quizzes):
         else:
             response['correct'] = False
 
-        print("LETS PRINT SOME STATS:")
-        print(session['total_score'])
-        print(session['correct_answer'])
-        print(session['correctly_answered_questions_numbers'])
-
         return jsonify(response), 200
 
 

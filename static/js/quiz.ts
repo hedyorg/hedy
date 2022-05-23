@@ -117,6 +117,8 @@ export function answerQuestion(answer_number: number) {
         if (response.correct) {
             showFeedback(response, question || "", true);
             updateHeader(question || "", true);
+        } else if (response.end) {
+            // If this is the last question -> perform some magic
         } else {
             showFeedback(response, question || "", false);
             updateHeader(question || "", false);
@@ -127,7 +129,6 @@ export function answerQuestion(answer_number: number) {
 }
 
 function showFeedback(response: any, question: string, correct: boolean) {
-    console.log(response);
     $('#quiz_question_container').hide();
     $('#quiz_answers_container').hide();
 
