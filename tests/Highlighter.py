@@ -90,7 +90,7 @@ class HighlightTester(unittest.TestCase):
     def check(self, code, expected, rules):
         
         simulator = SimulatorAce(rules)
-        result = simulator.apply(code)
+        result = simulator.highlight(code)
 
         valid, ind_error = self.compare(result, expected)
 
@@ -231,7 +231,10 @@ class SimulatorAce:
     # constructor of SimulatorAce with check on rules
     def __init__(self, rules):
         self.rules = rules
+        self._precompile_regexes()
 
+    # check and precompile regexes
+    def _precompile_regexes(self):
         for state in self.rules:
             for rule in self.rules[state]:
 
@@ -255,16 +258,16 @@ class SimulatorAce:
                             raise ValueError(f"The number of groups in the regex is different from the number of tokens. In this rule : {rule}!")
 
     # apply rules on code
-    def apply(self, code):
+    def highlight(self, code):
         outputs = []
         token = "start"
         for line in code.split("\n"):
-            output, token = self.apply_rules_line(line, token)
+            output, token = self.highlight_rules_line(line, token)
             outputs.append(output)
         return "\n".join(outputs)
 
     # apply rule in one line of code
-    def apply_rules_line(self, code, start_token="start"):
+    def highlight_rules_line(self, code, start_token="start"):
         # Initialisation output
         output = []
 
@@ -274,16 +277,16 @@ class SimulatorAce:
 
         default_token = "text"
 
-        END_OF_SEARCH = False
-        while not END_OF_SEARCH:
+        end_of_search = False
+        while not end_of_search:
 
-            FIND, NEXT = self.find_match(code, current_state, current_position)
+            find_transition, next_transition = self.find_match(code, current_state, current_position)
 
-            if FIND :
+            if find_transition :
                 # Application of coloring on the code
 
                 # get match
-                current_rule, current_match = NEXT["rule"], NEXT["match"]
+                current_rule, current_match = next_transition["rule"], next_transition["match"]
 
                 # we color the characters since the last match with the default coloring
                 for c in range(current_position, current_match.start()):
@@ -318,10 +321,10 @@ class SimulatorAce:
 
 
                 if current_position == len(code):
-                    END_OF_SEARCH = True
+                    end_of_search = True
 
             else:
-                END_OF_SEARCH = True
+                end_of_search = True
 
         # we color the last characters since the last match with the default coloring
         for c in range(current_position, len(code)):
@@ -334,8 +337,8 @@ class SimulatorAce:
         # search for the transition that we will use
 
         current_match = None
-        NEXT = {"rule":{}, "match":None}
-        FIND = False
+        next_transition = {"rule":{}, "match":None}
+        find_transition = False
 
         next_pos = len(code) + 1
         for rule in self.rules[current_state]:
@@ -346,10 +349,10 @@ class SimulatorAce:
             if match:
                 if match.start() < next_pos :
                     next_pos = match.start()
-                    NEXT["rule"] = rule
-                    NEXT["match"] = match
-                    FIND = True
+                    next_transition["rule"] = rule
+                    next_transition["match"] = match
+                    find_transition = True
 
-        return FIND, NEXT
+        return find_transition, next_transition
 
 
