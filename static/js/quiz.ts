@@ -101,6 +101,7 @@ export function answerQuestion(answer_number: number) {
     }).done(function(response: any) {
         if (response.correct) {
             showFeedback(response, question || "");
+            updateHeader(question || "");
         }
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
@@ -129,6 +130,11 @@ function showFeedback(response: any, question: string) {
 
     $('#feedback_correct_container').show();
     $('#quiz_feedback_container').show();
+}
+
+function updateHeader(question: string) {
+    $('#question_header_' + question).css("background-color", "");
+    $('#question_header_' + question).addClass('bg-green-500');
 }
 
 export function loadQuizResults() {
