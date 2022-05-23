@@ -1068,8 +1068,6 @@ def main_page(page):
 @app.route('/landing-page/<first>', methods=['GET'])
 @requires_login
 def landing_page(user, first):
-    if first:
-        print("eerste keer!")
 
     username = user['username']
 
@@ -1079,7 +1077,7 @@ def landing_page(user, first):
         user_programs = user_programs[:1][0]
     user_achievements = DATABASE.progress_by_username(username)
 
-    return render_template('landing-page.html', page_title=gettext('title_landing-page'),
+    return render_template('landing-page.html', first_time=True if first else False, page_title=gettext('title_landing-page'),
                            user_info=user_info, program=user_programs, achievements=user_achievements,
                            user=user['username'])
 

@@ -43,73 +43,75 @@
             </div>
         </div>
     </div>
-    <div class="mt-8">
-        <h2>{{_('your_account')}}</h2>
-        <div id="general_info" class="flex flex-row items-center h-64 mt-8 mx-2">
-            <div class="w-1/3 mr-4 h-full flex items-center justify-center">
-                {% if user_info.image %}
-                    <img src="{{static('/images/profile_images/' + user_info.image + '.png')}}" class="w-64">
-                {% else %}
-                    <img src="{{static('/images/Hedy-logo.png')}}" class="w-64">
-                {% endif %}
-            </div>
-            <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
-                <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
-                    <div class="text-white tracking-wide text-4xl">{{ user }}</div>
-                    {% if achievements['achieved'] %}
-                        <div class="text-white text-xl ml-auto">{{ achievements['achieved']|length }} {{_('achievements')}}</div>
-                    {% endif %}
-                </div>
-                <div class="my-auto px-16 text-xl italic" rel="noreferrer">
-                    {% if user_info.personal_text %}
-                        {{ user_info.personal_text }}
+    {% if not first_time %}
+        <div class="mt-8">
+            <h2>{{_('your_account')}}</h2>
+            <div id="general_info" class="flex flex-row items-center h-64 mt-8 mx-2">
+                <div class="w-1/3 mr-4 h-full flex items-center justify-center">
+                    {% if user_info.image %}
+                        <img src="{{static('/images/profile_images/' + user_info.image + '.png')}}" class="w-64">
                     {% else %}
-                        {{_('no_public_profile')}}
+                        <img src="{{static('/images/Hedy-logo.png')}}" class="w-64">
                     {% endif %}
                 </div>
-                {% if achievements %}
-                    <div class="mt-auto">
-                        <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-center rounded-b-lg">
-                            {% if achievements.run_programs %}
-                                <div>{{ achievements.run_programs }} {{_('amount_created')}}</div>
-                            {% else %}
-                                <div>0 {{_('amount_created')}}</div>
-                            {% endif %}
-                            <div class="mx-2">|</div>
-                            {% if achievements.saved_programs %}
-                                <div>{{ achievements.saved_programs }} {{_('amount_saved')}}</div>
-                            {% else %}
-                                <div>0 {{_('amount_saved')}}</div>
-                            {% endif %}
-                            <div class="mx-2">|</div>
-                            {% if achievements.submitted_programs %}
-                                <div>{{ achievements.submitted_programs }} {{_('amount_submitted')}}</div>
-                            {% else %}
-                                <div>0 {{_('amount_submitted')}}</div>
-                            {% endif %}
+                <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
+                    <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
+                        <div class="text-white tracking-wide text-4xl">{{ user }}</div>
+                        {% if achievements['achieved'] %}
+                            <div class="text-white text-xl ml-auto">{{ achievements['achieved']|length }} {{_('achievements')}}</div>
+                        {% endif %}
+                    </div>
+                    <div class="my-auto px-16 text-xl italic" rel="noreferrer">
+                        {% if user_info.personal_text %}
+                            {{ user_info.personal_text }}
+                        {% else %}
+                            {{_('no_public_profile')}}
+                        {% endif %}
+                    </div>
+                    {% if achievements %}
+                        <div class="mt-auto">
+                            <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-center rounded-b-lg">
+                                {% if achievements.run_programs %}
+                                    <div>{{ achievements.run_programs }} {{_('amount_created')}}</div>
+                                {% else %}
+                                    <div>0 {{_('amount_created')}}</div>
+                                {% endif %}
+                                <div class="mx-2">|</div>
+                                {% if achievements.saved_programs %}
+                                    <div>{{ achievements.saved_programs }} {{_('amount_saved')}}</div>
+                                {% else %}
+                                    <div>0 {{_('amount_saved')}}</div>
+                                {% endif %}
+                                <div class="mx-2">|</div>
+                                {% if achievements.submitted_programs %}
+                                    <div>{{ achievements.submitted_programs }} {{_('amount_submitted')}}</div>
+                                {% else %}
+                                    <div>0 {{_('amount_submitted')}}</div>
+                                {% endif %}
+                            </div>
                         </div>
+                    {% endif %}
+                </div>
+                {% if last_achieved %}
+                    <div class="text-center rounded-lg bg-yellow-400 w-1/3 ml-4 mr-4 border border-black">
+                        <h3>{{_('last_achievement')}}</h3>
+                        <img class="w-full px-8 mt-2" src="{{static('/images/achievement.png')}}">
+                        <h4>{{ achievements[last_achieved].title }}</h4>
                     </div>
                 {% endif %}
             </div>
-            {% if last_achieved %}
-                <div class="text-center rounded-lg bg-yellow-400 w-1/3 ml-4 mr-4 border border-black">
-                    <h3>{{_('last_achievement')}}</h3>
-                    <img class="w-full px-8 mt-2" src="{{static('/images/achievement.png')}}">
-                    <h4>{{ achievements[last_achieved].title }}</h4>
+            {% if program %}
+                <h2>{{_('your_last_program')}}</h2>
+                <div class="w-full rounded-lg border border-black mt-4 relative bg-blue-200 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+                    <div class="flex items-center justify-center mt-2 mb-2">
+                        <p>{{ program.name }}</p>
+                    </div>
+                    <div class="relative mb-4 px-4 turn-pre-into-ace">
+                        <pre class="no-copy-button" level="{{ program.level }}">{{ program.code | truncate(200) }}</pre>
+                    </div>
                 </div>
             {% endif %}
         </div>
-        {% if program %}
-            <h2>{{_('your_last_program')}}</h2>
-            <div class="w-full rounded-lg border border-black mt-4 relative bg-blue-200 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
-                <div class="flex items-center justify-center mt-2 mb-2">
-                    <p>{{ program.name }}</p>
-                </div>
-                <div class="relative mb-4 px-4 turn-pre-into-ace">
-                    <pre class="no-copy-button" level="{{ program.level }}">{{ program.code | truncate(200) }}</pre>
-                </div>
-            </div>
-        {% endif %}
-    </div>
+    {% endif %}
 </div>
 {% endblock %}
