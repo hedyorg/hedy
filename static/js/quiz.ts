@@ -32,12 +32,11 @@ export function loadQuestQuestion(level: number, question: number) {
       dataType: 'json'
     }).done(function(response: any) {
         $('#quiz_container').show();
-        console.log(response);
         showQuestion(response.question_text);
         if (response.code) {
             showQuestionCode(response.code);
         }
-        showAnswers(response.mp_choice_options);
+        showAnswers(response.mp_choice_options, level, question);
         loadHint(response.hint);
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
@@ -54,10 +53,12 @@ function showQuestionCode(code: string) {
     editor.setValue(code);
 }
 
-function showAnswers(options: any) {
+function showAnswers(options: any, level: number, question: number) {
     for (let i = 1; i < options.length+1; ++i) {
         $('#answer_container_' + i).show();
         $('#answer_text_' + i).text(options[i-1].option);
+        $('#answer_text_' + i).attr('level', level);
+        $('#answer_text_' + i).attr('question', question);
         $('#answer_text_' + i).show();
         // Todo -> If we have a code answer, show answer_code_i and remove backticks
     }
@@ -68,6 +69,29 @@ function loadHint(hint: string) {
     $('#quiz_question_hint').hide();
 }
 
-export function answerQuestion(answer: number) {
-    console.log(answer);
+export function answerQuestion(answer_number: number) {
+    let element = $('#answer_text_' + answer_number);
+    $.ajax({
+      type: 'POST',
+      url: '/quiz/submit_answer/',
+      data: JSON.stringify({
+        level: element.attr('level'),
+        question: element.attr('question'),
+        answer: answer_number
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function() {
+        // This gets complex, we have three options:
+        // - The answer is correct
+        // - The answer is incorrect (attempts left)
+        // - The answer is incorrect (no attempts left)
+        showFeedback();
+    }).fail(function(err) {
+       modal.alert(err.responseText, 3000, true);
+    });
+}
+
+function showFeedback() {
+    console.log("Antwoord is goed....");
 }
