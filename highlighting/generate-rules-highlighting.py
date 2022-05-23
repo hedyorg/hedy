@@ -48,8 +48,6 @@ def validate_ruleset(levels):
       for rule in rules:
         r = re.compile(rule['regex'])
 
-        group_count = r.groups if r.groups > 0 else 1
-
         if r.groups == 0:
             if type(rule["token"]) != str:
                 raise ValueError(f"In {level['name']}, state \'{state}\': if regex has no groups, token must be a string. In this rule.\n{rule}")
@@ -62,10 +60,6 @@ def validate_ruleset(levels):
                 if r.groups != len(rule["token"]):
                     raise ValueError(f"In {level['name']}, state \'{state}\': number of groups in the regex is different from the number of tokens. In this rule.\n{rule}")
 
-
-
-        #print(f'ERROR: In {level["name"]}, rule \'{rulename}\': regex \'{rule["regex"]}\' has {group_count} capturing subgroups, but \'token\' has {token_count} elements: {repr(rule["token"])}')
-        #errors += 1
 
   if errors > 0:
     raise RuntimeError(f'{errors} rules are invalid')
