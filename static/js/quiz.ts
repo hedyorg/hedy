@@ -71,6 +71,8 @@ function showAnswers(options: any, level: number, question: number) {
 
 function highlightQuestionBar(question: number) {
     $('.step').removeClass('current');
+    $('.question_header_text_container').hide();
+    $('#question_header_text_' + question).show();
     $('#question_header_' + question).addClass('current');
 }
 
