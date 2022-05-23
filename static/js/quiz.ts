@@ -76,7 +76,7 @@ function showAnswers(options: any, level: number, question: number) {
         } else {
             // Todo TB -> If we find a single backtick -> it's a command we have to surround it with a code block
             // Like this: `print` becomes <code>print</code>, we have to use some regex magic for this...
-            $('#answer_text_' + i).text(options[i - 1].option);
+            $('#answer_text_' + i).html(options[i - 1].option.replace('`', '<code>').replace('`', '</code>'));
             $('#answer_code_' + i).hide();
             $('#answer_text_' + i).show();
         }
@@ -152,7 +152,8 @@ function showFeedback(response: any, question: string, correct: boolean) {
         $('#feedback_correct_answer_container').hide();
         $('#feedback_answer_code').show();
     } else {
-        $('#feedback_correct_answer_container').text(response.correct_answer_text);
+        // Replace the first backtick by an opening code block, the second one with a closing tag
+        $('#feedback_correct_answer_container').html(response.correct_answer_text.replace('`', '<code>').replace('`', '</code>'));
         $('#feedback_answer_code').hide();
         $('#feedback_correct_answer_container').show();
     }
@@ -190,5 +191,7 @@ export function showQuizResults(level: number) {
 }
 
 function showResults(response: any) {
-    $('#quiz_total_score').val(response.score);
+    $('#quiz_container').hide();
+    $('#quiz_end_score').val(response.score);
+    $('#end_quiz_container').show();
 }
