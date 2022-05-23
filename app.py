@@ -829,7 +829,6 @@ def index(level, program_id):
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     parsons = load_parsons_per_level(level)
-    print(parsons)
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -1162,7 +1161,6 @@ def explore():
             'code': "\n".join(program['code'].split("\n")[:4])
         })
 
-    print(hedy_choices)
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     return render_template('explore.html', programs=filtered_programs, favourite_programs=hedy_choices,
